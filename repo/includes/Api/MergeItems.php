@@ -33,35 +33,11 @@ class MergeItems extends ApiBase {
 
 	use ApiCreateTempUserTrait;
 
-	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
+	private ApiErrorReporter $errorReporter;
+	private ItemMergeInteractor $interactor;
+	private ResultBuilder $resultBuilder;
+	private array $sandboxEntityIds;
 
-	/**
-	 * @var ItemMergeInteractor
-	 */
-	private $interactor;
-
-	/**
-	 * @var ResultBuilder
-	 */
-	private $resultBuilder;
-
-	/**
-	 * @var string[]
-	 */
-	private $sandboxEntityIds;
-
-	/**
-	 * @see ApiBase::__construct
-	 *
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param ItemMergeInteractor $interactor
-	 * @param ApiErrorReporter $errorReporter
-	 * @param callable $resultBuilderInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,

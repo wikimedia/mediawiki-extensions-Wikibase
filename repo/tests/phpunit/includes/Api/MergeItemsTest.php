@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
@@ -57,20 +59,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
-
-	/**
-	 * @var EntityModificationTestHelper|null
-	 */
-	private $entityModificationTestHelper = null;
-
-	/**
-	 * @var ApiModuleTestHelper|null
-	 */
-	private $apiModuleTestHelper = null;
+	private ?MockRepository $mockRepository = null;
+	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
+	private ?ApiModuleTestHelper $apiModuleTestHelper = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -93,10 +84,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionCheckers() {
+	private function getPermissionCheckers(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$callback = function ( User $user, $permission ) {
@@ -114,12 +102,9 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $permissionChecker;
 	}
 
-	/**
-	 * @param EntityRedirect|null $redirect
-	 *
-	 * @return ItemRedirectCreationInteractor
-	 */
-	public function getMockRedirectCreationInteractor( EntityRedirect $redirect = null ) {
+	public function getMockRedirectCreationInteractor(
+		?EntityRedirect $redirect
+	): ItemRedirectCreationInteractor {
 		$mock = $this->createMock( ItemRedirectCreationInteractor::class );
 
 		if ( $redirect ) {
@@ -141,10 +126,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getEntityTitleStoreLookup() {
+	private function getEntityTitleStoreLookup(): EntityTitleStoreLookup {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $entityId ) {
@@ -154,13 +136,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $entityTitleStoreLookup;
 	}
 
-	/**
-	 * @param string[] $params
-	 * @param EntityRedirect|null $expectedRedirect
-	 *
-	 * @return MergeItems
-	 */
-	private function newMergeItemsApiModule( array $params, EntityRedirect $expectedRedirect = null ) {
+	private function newMergeItemsApiModule( array $params, ?EntityRedirect $expectedRedirect ): MergeItems {
 		$services = $this->getServiceContainer();
 		if ( !isset( $params['token'] ) ) {
 			$params['token'] = $this->getTestUser()->getUser()->getToken();
@@ -234,10 +210,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @return EntityConstraintProvider
-	 */
-	private function getConstraintProvider() {
+	private function getConstraintProvider(): EntityConstraintProvider {
 		$constraintProvider = $this->createMock( EntityConstraintProvider::class );
 
 		$constraintProvider->method( 'getUpdateValidators' )
@@ -246,10 +219,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $constraintProvider;
 	}
 
-	/**
-	 * @return SnakValidator
-	 */
-	private function getSnakValidator() {
+	private function getSnakValidator(): SnakValidator {
 		$snakValidator = $this->createMock( SnakValidator::class );
 
 		$snakValidator->method( 'validate' )
@@ -258,10 +228,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $snakValidator;
 	}
 
-	/**
-	 * @return TermValidatorFactory
-	 */
-	private function getTermValidatorFactory() {
+	private function getTermValidatorFactory(): TermValidatorFactory {
 		return new TermValidatorFactory(
 			100,
 			[ 'en', 'de', 'fr' ],
@@ -272,7 +239,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function callApiModule( $params, EntityRedirect $expectedRedirect = null ) {
+	private function callApiModule( array $params, EntityRedirect $expectedRedirect = null ): array {
 		$module = $this->newMergeItemsApiModule( $params, $expectedRedirect );
 
 		$module->execute();
@@ -285,7 +252,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		return $data;
 	}
 
-	public static function provideData() {
+	public static function provideData(): iterable {
 		$testCases = [];
 		$testCases['labelMerge'] = [
 			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
@@ -343,7 +310,14 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $expectRedirect, $ignoreConflicts = null ) {
+	public function testMergeRequest(
+		array $pre1,
+		array $pre2,
+		array $expectedFrom,
+		array $expectedTo,
+		bool $expectRedirect,
+		?string $ignoreConflicts = null
+	): void {
 		// -- set up params ---------------------------------
 		$tag = __METHOD__ . '-tag';
 		ChangeTags::defineTag( $tag );
@@ -383,7 +357,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->assertEditsAreTagged( $result, $tag );
 	}
 
-	private function assertResultCorrect( array $result ) {
+	private function assertResultCorrect( array $result ): void {
 		$this->apiModuleTestHelper->assertResultSuccess( $result );
 
 		$this->apiModuleTestHelper->assertResultHasKeyInPath( [ 'from', 'id' ], $result );
@@ -397,7 +371,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
 	}
 
-	private function assertItemsCorrect( array $result, array $expectedFrom, array $expectedTo ) {
+	private function assertItemsCorrect( array $result, array $expectedFrom, array $expectedTo ): void {
 		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'], true ); //resolve redirects
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedFrom, $actualFrom );
 
@@ -405,7 +379,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedTo, $actualTo );
 	}
 
-	private function assertRedirectCorrect( array $result, EntityRedirect $redirect = null ) {
+	private function assertRedirectCorrect( array $result, EntityRedirect $redirect = null ): void {
 		$this->assertArrayHasKey( 'redirected', $result );
 
 		if ( $redirect ) {
@@ -415,19 +389,19 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function assertEditSummariesCorrect( array $result ) {
+	private function assertEditSummariesCorrect( array $result ): void {
 		$this->entityModificationTestHelper->assertRevisionSummary( [ 'wbmergeitems' ], $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( [ 'wbmergeitems' ], $result['to']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['to']['lastrevid'] );
 	}
 
-	private function assertEditsAreTagged( array $result, string $tag ) {
+	private function assertEditsAreTagged( array $result, string $tag ): void {
 		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $result['from']['lastrevid'] )['tags'] );
 		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $result['to']['lastrevid'] )['tags'] );
 	}
 
-	public static function provideExceptionParamsData() {
+	public static function provideExceptionParamsData(): iterable {
 		return [
 			[ //0 no ids given
 				'p' => [],
@@ -506,7 +480,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideExceptionParamsData
 	 */
-	public function testMergeItemsParamsExceptions( $params, $expected ) {
+	public function testMergeItemsParamsExceptions( array $params, array $expected ): void {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbmergeitems';
 
@@ -518,7 +492,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public static function provideExceptionConflictsData() {
+	public static function provideExceptionConflictsData(): iterable {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
@@ -556,7 +530,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideExceptionConflictsData
 	 */
-	public function testMergeItemsConflictsExceptions( $pre1, $pre2, $extraData ) {
+	public function testMergeItemsConflictsExceptions( array $pre1, array $pre2, array $extraData ): void {
 		$expected = [
 			'exception' => [ 'type' => ApiUsageException::class, 'code' => 'failed-save' ],
 			'extradata' => $extraData,

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use IContextSource;
@@ -40,113 +42,32 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class MediaWikiEditEntity implements EditEntity {
 
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $titleLookup;
-
-	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var EntityDiffer
-	 */
-	private $entityDiffer;
-
-	/**
-	 * @var EntityPatcher
-	 */
-	private $entityPatcher;
-
-	/**
-	 * The ID of the entity to edit. May be null if a new entity is being created.
-	 *
-	 * @var EntityId|null
-	 */
-	private $entityId;
-
-	/**
-	 * @var EntityRevision|null
-	 */
-	private $baseRev = null;
-
-	/**
-	 * @var int|bool
-	 */
+	private EntityRevisionLookup $entityRevisionLookup;
+	private EntityTitleStoreLookup $titleLookup;
+	private EntityStore $entityStore;
+	private EntityPermissionChecker $permissionChecker;
+	private EntityDiffer $entityDiffer;
+	private EntityPatcher $entityPatcher;
+	/** The ID of the entity to edit. May be null if a new entity is being created. */
+	private ?EntityId $entityId;
+	private ?EntityRevision $baseRev = null;
+	/** @var int|bool */
 	private $baseRevId;
-
-	/**
-	 * @var EntityRevision|null
-	 */
-	private $latestRev = null;
-
-	/**
-	 * @var int
-	 */
-	private $latestRevId = 0;
-
-	/**
-	 * @var Status
-	 */
-	private $status;
-
-	/** @var IContextSource */
-	private $context;
-
-	/**
-	 * @var User
-	 */
-	private $user;
-
-	/**
-	 * @var Title|null
-	 */
-	private $title = null;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
-
-	/**
-	 * @var UserOptionsLookup
-	 */
-	private $userOptionsLookup;
-
-	/**
-	 * @var TempUserCreator
-	 */
-	private $tempUserCreator;
-
-	/**
-	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
-	 */
-	private $errorType = 0;
-
-	/**
-	 * @var int
-	 */
-	private $maxSerializedEntitySize;
-
+	private ?EntityRevision $latestRev = null;
+	private int $latestRevId = 0;
+	private Status $status;
+	private IContextSource $context;
+	private User $user;
+	private ?Title $title = null;
+	private EditFilterHookRunner $editFilterHookRunner;
+	private UserOptionsLookup $userOptionsLookup;
+	private TempUserCreator $tempUserCreator;
+	/** @var int Bit field for error types, using the EditEntity::XXX_ERROR constants. */
+	private int $errorType = 0;
+	private int $maxSerializedEntitySize;
 	/** @var string[] */
-	private $localEntityTypes;
-
-	/**
-	 * @var bool Can use a master connection or not
-	 */
-	private $allowMasterConnection;
+	private array $localEntityTypes;
+	private bool $allowMasterConnection;
 
 	/**
 	 * @param EntityTitleStoreLookup $titleLookup
@@ -182,10 +103,10 @@ class MediaWikiEditEntity implements EditEntity {
 		EditFilterHookRunner $editFilterHookRunner,
 		UserOptionsLookup $userOptionsLookup,
 		TempUserCreator $tempUserCreator,
-		$maxSerializedEntitySize,
+		int $maxSerializedEntitySize,
 		array $localEntityTypes,
 		int $baseRevId = 0,
-		$allowMasterConnection = true
+		bool $allowMasterConnection = true
 	) {
 		$this->entityId = $entityId;
 
@@ -214,19 +135,15 @@ class MediaWikiEditEntity implements EditEntity {
 	/**
 	 * Returns the ID of the entity being edited.
 	 * May be null if a new entity is to be created.
-	 *
-	 * @return null|EntityId
 	 */
-	public function getEntityId() {
+	public function getEntityId(): ?EntityId {
 		return $this->entityId;
 	}
 
 	/**
 	 * Returns the Title of the page holding the entity that is being edited.
-	 *
-	 * @return Title|null
 	 */
-	private function getTitle() {
+	private function getTitle(): ?Title {
 		if ( $this->title === null ) {
 			$id = $this->getEntityId();
 
@@ -240,10 +157,8 @@ class MediaWikiEditEntity implements EditEntity {
 
 	/**
 	 * Returns the latest revision of the entity.
-	 *
-	 * @return EntityRevision|null
 	 */
-	public function getLatestRevision() {
+	public function getLatestRevision(): ?EntityRevision {
 		if ( $this->latestRev === null ) {
 			$id = $this->getEntityId();
 
@@ -264,7 +179,7 @@ class MediaWikiEditEntity implements EditEntity {
 	/**
 	 * @return int 0 if the entity doesn't exist
 	 */
-	private function getLatestRevisionId() {
+	private function getLatestRevisionId(): int {
 		// Don't do negative caching: We call this to see whether the entity yet exists
 		// before creating.
 		if ( $this->latestRevId === 0 ) {
@@ -294,10 +209,8 @@ class MediaWikiEditEntity implements EditEntity {
 
 	/**
 	 * Is the entity new?
-	 *
-	 * @return bool
 	 */
-	private function isNew() {
+	private function isNew(): bool {
 		return $this->getEntityId() === null || $this->getLatestRevisionId() === 0;
 	}
 
@@ -305,8 +218,6 @@ class MediaWikiEditEntity implements EditEntity {
 	 * Does this entity belong to a new page?
 	 * (An entity may {@link isNew be new}, and yet not belong to a new page,
 	 * e.g. if it is stored in a non-main slot.)
-	 *
-	 * @return bool
 	 */
 	private function isNewPage(): bool {
 		$title = $this->getTitle();
@@ -320,10 +231,8 @@ class MediaWikiEditEntity implements EditEntity {
 	 * Return the ID of the base revision for the edit. If no base revision ID was supplied to
 	 * the constructor, this returns the ID of the latest revision. If the entity does not exist
 	 * yet, this returns 0.
-	 *
-	 * @return int
 	 */
-	private function getBaseRevisionId() {
+	private function getBaseRevisionId(): int {
 		if ( $this->baseRevId === 0 ) {
 			$this->baseRevId = $this->getLatestRevisionId();
 		}
@@ -340,7 +249,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 */
-	public function getBaseRevision() {
+	public function getBaseRevision(): ?EntityRevision {
 		if ( $this->baseRev === null ) {
 			$baseRevId = $this->getBaseRevisionId();
 
@@ -365,18 +274,15 @@ class MediaWikiEditEntity implements EditEntity {
 		return $this->baseRev;
 	}
 
-	/**
-	 * @return string
-	 */
-	private function getReplicaMode() {
-		if ( $this->allowMasterConnection === true ) {
+	private function getReplicaMode(): string {
+		if ( $this->allowMasterConnection ) {
 			return LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 		} else {
 			return LookupConstants::LATEST_FROM_REPLICA;
 		}
 	}
 
-	public function getStatus() {
+	public function getStatus(): Status {
 		return $this->status;
 	}
 
@@ -385,7 +291,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return bool false if attemptSave() failed, true otherwise
 	 */
-	public function isSuccess() {
+	public function isSuccess(): bool {
 		return $this->errorType === 0 && $this->status->isOK();
 	}
 
@@ -397,7 +303,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return bool true if this EditEntity encountered any of the error types in $errorType, false otherwise.
 	 */
-	public function hasError( $errorType = EditEntity::ANY_ERROR ) {
+	public function hasError( $errorType = EditEntity::ANY_ERROR ): bool {
 		return ( $this->errorType & $errorType ) !== 0;
 	}
 
@@ -410,10 +316,8 @@ class MediaWikiEditEntity implements EditEntity {
 	 * If the base revision is different from the current revision, this will return true even if
 	 * the edit conflict is resolvable. Indeed, it is used to determine whether conflict resolution
 	 * should be attempted.
-	 *
-	 * @return bool
 	 */
-	public function hasEditConflict() {
+	public function hasEditConflict(): bool {
 		return !$this->isNew()
 			&& $this->getBaseRevisionId() !== $this->getLatestRevisionId();
 	}
@@ -426,7 +330,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return null|EntityDocument The patched Entity, or null if patching failed.
 	 */
-	private function fixEditConflict( EntityDocument $newEntity ) {
+	private function fixEditConflict( EntityDocument $newEntity ): ?EntityDocument {
 		$baseRev = $this->getBaseRevision();
 		$latestRev = $this->getLatestRevision();
 
@@ -490,7 +394,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return bool
 	 */
-	private function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ) {
+	private function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ): bool {
 		if ( $user === null || $entityId === null || $lastRevId === false ) {
 			return false;
 		}
@@ -501,10 +405,8 @@ class MediaWikiEditEntity implements EditEntity {
 	/**
 	 * Checks the necessary permissions to perform this edit.
 	 * The 'edit' permission is always checked (currently not configurable).
-	 *
-	 * @param EntityDocument $newEntity
 	 */
-	private function checkEditPermissions( EntityDocument $newEntity ) {
+	private function checkEditPermissions( EntityDocument $newEntity ): void {
 		$permissionStatus = $this->permissionChecker->getPermissionStatusForEntity(
 			$this->user,
 			EntityPermissionChecker::ACTION_EDIT,
@@ -522,7 +424,7 @@ class MediaWikiEditEntity implements EditEntity {
 	/**
 	 * Checks if rate limits have been exceeded.
 	 */
-	private function checkRateLimits() {
+	private function checkRateLimits(): void {
 		if ( $this->user->pingLimiter( 'edit' )
 			|| ( $this->isNew() && $this->user->pingLimiter( 'create' ) )
 		) {
@@ -538,7 +440,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return bool true if the token is valid
 	 */
-	public function isTokenOK( $token ) {
+	public function isTokenOK( $token ): bool {
 		$tokenOk = $this->user->matchEditToken( $token );
 
 		if ( !$tokenOk ) {
@@ -552,12 +454,8 @@ class MediaWikiEditEntity implements EditEntity {
 
 	/**
 	 * Resolve user specific default default for watch state, if $watch is null.
-	 *
-	 * @param bool|null $watch
-	 *
-	 * @return bool
 	 */
-	private function getDesiredWatchState( $watch ) {
+	private function getDesiredWatchState( ?bool $watch ): bool {
 		if ( $watch === null ) {
 			$watch = $this->getWatchDefault();
 		}
@@ -566,11 +464,9 @@ class MediaWikiEditEntity implements EditEntity {
 	}
 
 	/**
-	 * @param EntityId|null $id
-	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function checkEntityId( EntityId $id = null ) {
+	private function checkEntityId( EntityId $id = null ): void {
 		if ( $this->entityId ) {
 			if ( !$this->entityId->equals( $id ) ) {
 				throw new InvalidArgumentException(
@@ -582,11 +478,9 @@ class MediaWikiEditEntity implements EditEntity {
 	}
 
 	/**
-	 * @param EntityDocument $entity
-	 *
 	 * @throws ReadOnlyError
 	 */
-	private function checkReadOnly( EntityDocument $entity ) {
+	private function checkReadOnly( EntityDocument $entity ): void {
 		$services = MediaWikiServices::getInstance();
 		if ( $services->getReadOnlyMode()->isReadOnly() ) {
 			throw new ReadOnlyError();
@@ -599,11 +493,7 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 * @return bool
-	 */
-	private function entityTypeIsReadOnly( EntityDocument $entity ) {
+	private function entityTypeIsReadOnly( EntityDocument $entity ): bool {
 		$readOnlyTypes = WikibaseRepo::getSettings()->getSetting( 'readOnlyEntityTypes' );
 
 		return in_array( $entity->getType(), $readOnlyTypes );
@@ -806,10 +696,8 @@ class MediaWikiEditEntity implements EditEntity {
 	 * and considers whether the entity is already watched by the user.
 	 *
 	 * @note Keep in sync with logic in \MediaWiki\EditPage\EditPage!
-	 *
-	 * @return bool
 	 */
-	private function getWatchDefault() {
+	private function getWatchDefault(): bool {
 		// User wants to watch all edits or all creations.
 		if ( $this->userOptionsLookup->getOption( $this->user, 'watchdefault' )
 			|| ( $this->userOptionsLookup->getOption( $this->user, 'watchcreations' )
@@ -831,7 +719,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
 	 */
-	private function updateWatchlist( $watch ) {
+	private function updateWatchlist( bool $watch ): void {
 		if ( $this->getTitle() === null ) {
 			throw new RuntimeException( 'Title not yet known!' );
 		}

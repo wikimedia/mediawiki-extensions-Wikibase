@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Request\FauxRequest;
@@ -42,7 +44,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
-	private function getEntityTitleLookup() {
+	private function getEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -61,7 +63,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityPermissionChecker
 	 */
-	private function getEntityPermissionChecker( array $permissions = null ) {
+	private function getEntityPermissionChecker( array $permissions = null ): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$checkAction = static function ( $user, $action ) use ( $permissions ) {
@@ -86,7 +88,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	private function getMockEditFitlerHookRunner(
 		Status $status = null,
 		$expects = null
-	) {
+	): EditFilterHookRunner {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -116,9 +118,9 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		User $user,
 		$baseRevId = 0,
 		array $permissions = null,
-		$editFilterHookRunner = null,
-		$localEntityTypes = null
-	) {
+		?EditFilterHookRunner $editFilterHookRunner = null,
+		?array $localEntityTypes = null
+	): MediaWikiEditEntity {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 		$context->setUser( $user );
@@ -331,7 +333,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
+	private function fingerprintToPartialArray( Fingerprint $fingerprint ): array {
 		return [
 			'label' => $fingerprint->getLabels()->toTextArray(),
 			'description' => $fingerprint->getDescriptions()->toTextArray(),
@@ -385,7 +387,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function prepareItemForPermissionCheck( User $user, MockRepository $mockRepository, $create ) {
+	private function prepareItemForPermissionCheck( User $user, MockRepository $mockRepository, bool $create ): Item {
 		$item = new Item();
 
 		if ( $create ) {
@@ -399,7 +401,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideCheckEditPermissions
 	 */
-	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
+	public function testCheckEditPermissions( array $permissions, bool $create, bool $expectedOK ): void {
 		$repo = $this->getMockRepository();
 
 		$user = $this->getTestUser()->getUser();
@@ -416,7 +418,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideCheckEditPermissions
 	 */
-	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
+	public function testAttemptSavePermissions( array $permissions, bool $create, bool $expectedOK ): void {
 		$repo = $this->getMockRepository();
 		$titleLookup = $this->getEntityTitleLookup();
 
@@ -620,7 +622,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideIsTokenOk
 	 */
-	public function testIsTokenOk( $token, $shouldWork ) {
+	public function testIsTokenOk( $token, bool $shouldWork ): void {
 		$repo = $this->getMockRepository();
 		$user = $this->getTestUser()->getUser();
 
@@ -712,7 +714,14 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideAttemptSaveWatch
 	 */
-	public function testAttemptSaveWatch( $watchdefault, $watchcreations, $new, $watched, $watch, $expected ) {
+	public function testAttemptSaveWatch(
+		bool $watchdefault,
+		bool $watchcreations,
+		bool $new,
+		bool $watched,
+		?bool $watch,
+		bool $expected
+	): void {
 		$repo = $this->getMockRepository();
 
 		$user = $this->getTestUser()->getUser();

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Interactors;
 
 use IContextSource;
@@ -54,15 +56,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	/** @var string User name that gets blocked by the edit filter. */
 	private const USER_NAME_WITH_EDIT_FILTER = 'UserWithEditFilter';
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
-
-	/**
-	 * @var EntityModificationTestHelper|null
-	 */
-	private $testHelper = null;
+	private ?MockRepository $mockRepository = null;
+	private ?EntityModificationTestHelper $testHelper = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -84,10 +79,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	public function getMockEditFilterHookRunner() {
+	public function getMockEditFilterHookRunner(): EditFilterHookRunner {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -104,10 +96,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionChecker() {
+	private function getPermissionChecker(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$callback = function ( User $user ) {
@@ -125,10 +114,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $permissionChecker;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getEntityTitleLookup() {
+	private function getEntityTitleLookup(): EntityTitleStoreLookup {
 		$mock = $this->createMock( EntityTitleStoreLookup::class );
 
 		$mock->method( 'getTitleForId' )
@@ -142,7 +128,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	private function getContext( User $user = null ) {
+	private function getContext( User $user = null ): IContextSource {
 		if ( !$user ) {
 			$user = $this->getTestUser()->getUser();
 		}
@@ -153,10 +139,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $context;
 	}
 
-	/**
-	 * @return ItemMergeInteractor
-	 */
-	private function newInteractor() {
+	private function newInteractor(): ItemMergeInteractor {
 		$services = $this->getServiceContainer();
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter( $services );
 
@@ -210,10 +193,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $interactor;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -227,7 +207,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $titleLookup;
 	}
 
-	public static function mergeProvider() {
+	public static function mergeProvider(): iterable {
 		// NOTE: Any empty arrays and any fields called 'id' or 'hash' get stripped
 		//       from the result before comparing it to the expected value.
 
@@ -424,7 +404,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $savedTempUser );
 	}
 
-	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ) {
+	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ): void {
 		if ( empty( $expectedFrom ) ) {
 			try {
 				$this->testHelper->getEntity( $fromId );
@@ -439,7 +419,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public static function mergeFailureProvider() {
+	public static function mergeFailureProvider(): iterable {
 		return [
 			'missing from' => [ new ItemId( 'Q100' ), new ItemId( 'Q2' ), [], 'no-such-entity' ],
 			'missing to' => [ new ItemId( 'Q1' ), new ItemId( 'Q200' ), [], 'no-such-entity' ],
@@ -455,9 +435,9 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	public function testMergeItems_failure(
 		ItemId $fromId,
 		ItemId $toId,
-		$ignoreConflicts,
-		$expectedErrorCode
-	) {
+		array $ignoreConflicts,
+		string $expectedErrorCode
+	): void {
 		try {
 			$interactor = $this->newInteractor();
 			$interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts );
@@ -468,7 +448,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public static function mergeConflictsProvider() {
+	public static function mergeConflictsProvider(): iterable {
 		return [
 			[
 				[ 'descriptions' => [ 'en' => [ 'language' => 'en', 'value' => 'foo' ] ] ],
@@ -486,7 +466,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider mergeConflictsProvider
 	 */
-	public function testMergeItems_conflict( $fromData, $toData, $ignoreConflicts ) {
+	public function testMergeItems_conflict( array $fromData, array $toData, array $ignoreConflicts ): void {
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 

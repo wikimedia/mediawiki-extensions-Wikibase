@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
@@ -41,10 +43,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
+	private ?MockRepository $mockRepository = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -74,10 +73,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$this->mockRepository->putRedirect( $redirect );
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionCheckers() {
+	private function getPermissionCheckers(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
@@ -92,10 +88,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		return $permissionChecker;
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	public function getMockEditFilterHookRunner() {
+	public function getMockEditFilterHookRunner(): EditFilterHookRunner {
 		$mock = $this->createMock( EditFilterHookRunner::class );
 
 		$mock->method( 'run' )
@@ -104,19 +97,11 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @param array $params
-	 * @param User $user
-	 * @param ItemRedirectCreationInteractor|null $interactor RedirectCreationInteractor to use, mock interactor
-	 * will be used if null provided.
-	 *
-	 * @return CreateRedirect
-	 */
 	private function newApiModule(
 		array $params,
 		User $user,
 		ItemRedirectCreationInteractor $interactor = null
-	) {
+	): CreateRedirect {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
@@ -150,10 +135,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -171,7 +153,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		array $params,
 		User $user = null,
 		ItemRedirectCreationInteractor $interactor = null
-	) {
+	): array {
 		if ( !$user ) {
 			$user = $this->getTestUser()->getUser();
 		}
@@ -190,12 +172,12 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	private function assertSuccess( $result ) {
+	private function assertSuccess( array $result ): void {
 		$this->assertArrayHasKey( 'success', $result );
 		$this->assertSame( 1, $result['success'] );
 	}
 
-	public function setRedirectProvider_success() {
+	public function setRedirectProvider_success(): iterable {
 		return [
 			'redirect empty entity' => [ 'Q11', 'Q12' ],
 			'update redirect' => [ 'Q22', 'Q11' ],
@@ -205,14 +187,14 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider setRedirectProvider_success
 	 */
-	public function testSetRedirect_success( $from, $to ) {
+	public function testSetRedirect_success( string $from, string $to ): void {
 		$params = [ 'from' => $from, 'to' => $to ];
 		$result = $this->callApiModule( $params );
 
 		$this->assertSuccess( $result );
 	}
 
-	public function setRedirectProvider_failure() {
+	public function setRedirectProvider_failure(): iterable {
 		return [
 			'bad source id' => [ 'xyz', 'Q12', 'invalid-entity-id' ],
 			'bad target id' => [ 'Q11', 'xyz', 'invalid-entity-id' ],
@@ -230,7 +212,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider setRedirectProvider_failure
 	 */
-	public function testSetRedirect_failure( $from, $to, $expectedCode ) {
+	public function testSetRedirect_failure( string $from, string $to, string $expectedCode ): void {
 		$params = [ 'from' => $from, 'to' => $to ];
 
 		try {

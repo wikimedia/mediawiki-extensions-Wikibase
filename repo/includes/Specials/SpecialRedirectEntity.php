@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Specials;
 
 use Exception;
@@ -24,26 +26,10 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 class SpecialRedirectEntity extends SpecialWikibasePage {
 
 	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
-	 * @var ExceptionLocalizer
-	 */
-	private $exceptionLocalizer;
-
-	/**
-	 * @var ItemRedirectCreationInteractor
-	 */
-	private $interactor;
-
-	/**
-	 * @var TokenCheckInteractor
-	 */
-	private $tokenCheck;
+	private EntityIdParser $idParser;
+	private ExceptionLocalizer $exceptionLocalizer;
+	private ItemRedirectCreationInteractor $interactor;
+	private TokenCheckInteractor $tokenCheck;
 
 	public function __construct(
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
@@ -62,12 +48,9 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * @param string $name
-	 *
-	 * @return EntityId|null
 	 * @throws UserInputException
 	 */
-	private function getEntityIdParam( $name ) {
+	private function getEntityIdParam( string $name ): ?EntityId {
 		$rawId = $this->getTextParam( $name );
 
 		if ( $rawId === '' ) {
@@ -85,7 +68,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		}
 	}
 
-	private function getTextParam( $name ) {
+	private function getTextParam( string $name ): string {
 		$value = $this->getRequest()->getText( $name, '' );
 		return trim( $value );
 	}
@@ -125,7 +108,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		$this->createForm();
 	}
 
-	protected function showExceptionMessage( Exception $ex ) {
+	protected function showExceptionMessage( Exception $ex ): void {
 		$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
 
 		$this->showErrorHTML( $msg->parse() );
@@ -137,7 +120,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		}
 	}
 
-	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
+	private function redirectEntity( EntityId $fromId, EntityId $toId ): void {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
 		/** @var ?User $savedTempUser */
@@ -175,7 +158,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	/**
 	 * Creates the HTML form for redirecting an entity
 	 */
-	protected function createForm() {
+	protected function createForm(): void {
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
 			$pre = Html::rawElement(
@@ -199,7 +182,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	/**
 	 * @return array[]
 	 */
-	protected function getFormElements() {
+	protected function getFormElements(): array {
 		return [
 			'fromid' => [
 				'name' => 'fromid',

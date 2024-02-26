@@ -1,12 +1,13 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
-use MediaWiki\Request\WebRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -45,23 +46,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
-	/**
-	 * @var MockRepository|null
-	 */
-	private $mockRepository = null;
-
-	/**
-	 * @var User|null
-	 */
-	private $user = null;
-
-	/** @var WebRequest */
-	private $request;
-
-	/**
-	 * @var EntityModificationTestHelper|null
-	 */
-	private $entityModificationTestHelper = null;
+	private ?MockRepository $mockRepository = null;
+	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -77,10 +63,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		] );
 	}
 
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	public function getMockEditFilterHookRunner() {
+	public function getMockEditFilterHookRunner(): EditFilterHookRunner {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
 			->disableOriginalConstructor()
@@ -90,10 +73,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getMockEntityTitleLookup() {
+	private function getMockEntityTitleLookup(): EntityTitleStoreLookup {
 		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->method( 'getTitleForId' )
@@ -107,10 +87,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return $titleLookup;
 	}
 
-	/**
-	 * @return SpecialRedirectEntity
-	 */
-	protected function newSpecialPage() {
+	protected function newSpecialPage(): SpecialRedirectEntity {
 		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
 		$exceptionLocalizer->method( 'getExceptionMessage' )
 			->willReturnCallback( function( Exception $ex ) {
@@ -151,7 +128,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		);
 	}
 
-	private function executeSpecialEntityRedirect( array $params, User $user = null ) {
+	private function executeSpecialEntityRedirect( array $params, User $user = null ): string {
 		if ( !$user ) {
 			// TODO Matching the token of a non-anonymous user is complicated.
 			$user = new User;
@@ -191,10 +168,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( '(wikibase-redirectentity-success: Q1, Q2)', $output );
 	}
 
-	/**
-	 * @return EntityPermissionChecker
-	 */
-	private function getPermissionCheckers() {
+	private function getPermissionCheckers(): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
@@ -210,18 +184,11 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return $permissionChecker;
 	}
 
-	/**
-	 * @param string $error
-	 * @param string $html
-	 */
-	private function assertError( $error, $html ) {
+	private function assertError( string $error, string $html ): void {
 		$this->assertStringContainsString( '<p class="error">(@' . $error . '@)</p>', $html );
 	}
 
-	/**
-	 * @param string $html
-	 */
-	private function assertNoError( $html ) {
+	private function assertNoError( string $html ): void {
 		$this->assertStringNotContainsString( 'class="error"', $html );
 	}
 
@@ -254,7 +221,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->entityModificationTestHelper->assertEntityEquals( $targetItemContent, $actualTo );
 	}
 
-	public static function provideExceptionParamsData() {
+	public static function provideExceptionParamsData(): iterable {
 		return [
 			[ //toid bad
 				'p' => [ 'fromid' => 'Q1', 'toid' => 'ABCDE' ],
@@ -277,7 +244,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	/**
 	 * @dataProvider provideExceptionParamsData
 	 */
-	public function testEntityRedirectParamsExceptions( array $params, $expected ) {
+	public function testEntityRedirectParamsExceptions( array $params, string $expected ): void {
 		$html = $this->executeSpecialEntityRedirect( $params );
 		$this->assertError( $expected, $html );
 	}
