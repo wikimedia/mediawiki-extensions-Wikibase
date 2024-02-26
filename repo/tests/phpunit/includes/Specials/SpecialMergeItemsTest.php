@@ -13,6 +13,7 @@ use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use NullStatsdDataFactory;
@@ -56,6 +57,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use TempUserTestTrait;
 
 	private ?MockRepository $mockRepository = null;
 	private ?EntityModificationTestHelper $entityModificationTestHelper = null;
@@ -467,13 +469,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function testTempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValues( [
-			MainConfigNames::AutoCreateTempUser => $autoCreateTempUser,
-			MainConfigNames::LanguageCode => 'en',
-		] );
-		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->enableAutoCreateTempUser();
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'en' );
 
 		$params = [
 			'fromid' => 'Q1',

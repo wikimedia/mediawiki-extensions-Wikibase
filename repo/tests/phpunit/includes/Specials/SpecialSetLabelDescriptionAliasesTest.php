@@ -8,6 +8,7 @@ use MediaWiki\Request\FauxResponse;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Session\Session;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\User\UserIdentity;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
@@ -46,6 +47,7 @@ use WMDE\HamcrestHtml\HtmlMatcher;
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 	use HtmlAssertionHelpers;
+	use TempUserTestTrait;
 
 	private const TAGS = [ 'mw-replace' ];
 
@@ -476,9 +478,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function testTempUserCreatedRedirect(): void {
-		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
+		$this->enableAutoCreateTempUser();
 		$request = new FauxRequest( [ 'language' => 'en', 'label' => 'new label' ], true );
 		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
 			Session $session,

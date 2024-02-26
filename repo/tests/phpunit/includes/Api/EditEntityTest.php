@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiUsageException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use ReadOnlyError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -30,6 +31,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @group medium
  */
 class EditEntityTest extends WikibaseApiTestCase {
+
+	use TempUserTestTrait;
 
 	/**
 	 * @var string[]
@@ -1363,10 +1366,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	public function testTempUserCreated(): void {
-		$autoCreateTempUser = $this->getConfVar( 'AutoCreateTempUser' );
-		$autoCreateTempUser['enabled'] = true;
-		$this->overrideConfigValue( 'AutoCreateTempUser', $autoCreateTempUser );
-		$this->setGroupPermissions( '*', 'createaccount', true );
+		$this->enableAutoCreateTempUser();
 		$actualReturnTo = null;
 		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
 			$session,
