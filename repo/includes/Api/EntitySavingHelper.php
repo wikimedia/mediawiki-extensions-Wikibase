@@ -421,8 +421,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	/**
 	 * Signal errors and warnings from a save operation to the API call's output.
 	 * This is much like handleStatus(), but specialized for Status objects returned by
-	 * EditEntityHandler::attemptSave(). In particular, the 'errorFlags' and 'errorCode' fields
-	 * from the status value are used to determine the error code to return to the caller.
+	 * EditEntityHandler::attemptSave(). In particular, the 'errorFlags' field
+	 * from the status value is used to determine the error code to return to the caller.
 	 *
 	 * @note this function may or may not return normally, depending on whether
 	 *        the status is fatal or not.
@@ -435,14 +435,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$value = $status->getValue();
 		$errorCode = null;
 
-		if ( $this->isArrayLike( $value ) && isset( $value['errorCode'] ) ) {
-			$errorCode = $value['errorCode'];
-		} else {
-			$editError = 0;
-
-			if ( $this->isArrayLike( $value ) && isset( $value['errorFlags'] ) ) {
-				$editError = $value['errorFlags'];
-			}
+		if ( $this->isArrayLike( $value ) && isset( $value['errorFlags'] ) ) {
+			$editError = $value['errorFlags'];
 
 			if ( $editError & EditEntity::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';

@@ -324,13 +324,17 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	}
 
 	public static function errorStatusProvider() {
-		yield 'with errorFlags' => [
+		yield 'errorFlags TOKEN_ERROR' => [
+			[ 'errorFlags' => EditEntity::TOKEN_ERROR ],
+			'badtoken',
+		];
+		yield 'errorFlags EDIT_CONFLICT_ERROR' => [
+			[ 'errorFlags' => EditEntity::EDIT_CONFLICT_ERROR ],
+			'editconflict',
+		];
+		yield 'errorFlags SAVE_ERROR' => [
 			[ 'errorFlags' => EditEntity::SAVE_ERROR ],
 			'failed-save',
-		];
-		yield 'with concrete errorCode' => [
-			[ 'errorCode' => 'sadness' ],
-			'sadness',
 		];
 	}
 
