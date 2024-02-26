@@ -15,6 +15,10 @@ class ReferenceDeserializer {
 		$this->propertyValuePairDeserializer = $propertyValuePairDeserializer;
 	}
 
+	/**
+	 * @throws MissingFieldException
+	 * @throws InvalidFieldException
+	 */
 	public function deserialize( array $serialization ): Reference {
 		if ( !array_key_exists( 'parts', $serialization ) ) {
 			throw new MissingFieldException( 'parts' );

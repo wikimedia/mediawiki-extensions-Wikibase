@@ -22,6 +22,10 @@ class StatementDeserializer {
 		$this->referenceDeserializer = $referenceDeserializer;
 	}
 
+	/**
+	 * @throws InvalidFieldException
+	 * @throws MissingFieldException
+	 */
 	public function deserialize( array $serialization ): Statement {
 		$serialization['id'] ??= null;
 		$serialization['qualifiers'] ??= [];
