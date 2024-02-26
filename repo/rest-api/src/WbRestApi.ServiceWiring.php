@@ -799,24 +799,24 @@ return [
 
 	'WbRestApi.PatchSitelinks' => function( MediaWikiServices $services ): PatchSitelinks {
 		return new PatchSitelinks(
-			WbRestApi::getValidatingRequestDeserializer(),
-			WbRestApi::getAssertItemExists(),
-			WbRestApi::getAssertUserIsAuthorized(),
-			WbRestApi::getItemDataRetriever(),
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertItemExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getItemDataRetriever( $services ),
 			new SitelinksSerializer( new SitelinkSerializer() ),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getItemDataRetriever(),
+			WbRestApi::getItemDataRetriever( $services ),
 			new SitelinksDeserializer(
 				new SitelinkDeserializer(
 					MediaWikiTitleCodec::getTitleInvalidRegex(),
-					array_keys( WikibaseRepo::getSettings()->getSetting( 'badgeItems' ) ),
+					array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
 					new SiteLinkPageNormalizerSitelinkTargetResolver(
 						MediaWikiServices::getInstance()->getSiteLookup(),
-						WikibaseRepo::getSiteLinkPageNormalizer()
+						WikibaseRepo::getSiteLinkPageNormalizer( $services )
 					)
 				)
 			),
-			WbRestApi::getItemUpdater()
+			WbRestApi::getItemUpdater( $services )
 		);
 	},
 
