@@ -66,6 +66,7 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const SITELINK_CONFLICT = 'sitelink-conflict';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
 	public const TITLE_FIELD_EMPTY = 'title-field-empty';
@@ -87,6 +88,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_FIELD = 'field';
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_LANGUAGE = 'language';
+
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
 	public const CONTEXT_OPERATION = 'operation';
@@ -174,6 +176,7 @@ class UseCaseError extends UseCaseException {
 		self::STATEMENT_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::STATEMENT_NOT_FOUND => [],
+		self::SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID ],
 		self::SITELINK_NOT_DEFINED => [],
 		self::SITELINK_DATA_MISSING_TITLE => [],
 		self::TITLE_FIELD_EMPTY => [],

@@ -113,7 +113,6 @@ use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
@@ -145,6 +144,7 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
@@ -158,6 +158,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFa
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -315,7 +316,7 @@ return [
 	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
-				new SitelinkValidator(
+				new SiteLinkConflictLookupSitelinkValidator(
 					new SitelinkDeserializer(
 						MediaWikiTitleCodec::getTitleInvalidRegex(),
 						array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
@@ -323,7 +324,11 @@ return [
 							$services->getSiteLookup(),
 							WikibaseRepo::getSiteLinkPageNormalizer( $services )
 						)
-					)
+					),
+					new SqlSiteLinkConflictLookup(
+						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+						WikibaseRepo::getEntityIdComposer( $services )
+					),
 				),
 			);
 		},
@@ -1012,7 +1017,7 @@ return [
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getItemUpdater( $services )
 		);
 	},
 

@@ -48,7 +48,8 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	public function testGivenInvalidRequest_throws(
 		ValidationError $validationError,
 		string $expectedErrorCode,
-		string $expectedErrorMessage
+		string $expectedErrorMessage,
+		array $expectedErrorContext = []
 	): void {
 		$request = $this->createStub( SitelinkEditRequest::class );
 		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE ] );
@@ -62,6 +63,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
 			$this->assertSame( $expectedErrorMessage, $e->getErrorMessage() );
+			$this->assertSame( $expectedErrorContext, $e->getErrorContext() );
 		}
 	}
 
@@ -105,6 +107,12 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND ),
 			UseCaseError::SITELINK_TITLE_NOT_FOUND,
 			'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site',
+		];
+		yield 'another item has the same sitelink' => [
+			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID => 'Q654' ] ),
+			UseCaseError::SITELINK_CONFLICT,
+			'Sitelink is already being used on Q654',
+			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q654' ],
 		];
 	}
 

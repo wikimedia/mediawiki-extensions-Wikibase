@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Exception;
 use LogicException;
@@ -13,26 +13,32 @@ use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class SitelinkValidatorTest extends TestCase {
+class SiteLinkConflictLookupSitelinkValidatorTest extends TestCase {
 
 	private SitelinkDeserializer $sitelinkDeserializer;
+	private SiteLinkConflictLookup $siteLinkConflictLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
+
 		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
+		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
 	}
 
 	public function testGivenValidSitelink_returnsNull(): void {
 		$this->assertNull(
-			$this->newSitelinkValidator()->validate( 'Q123', [ 'title' => 'test-title', 'badges' => [ 'Q123' ] ] )
+			$this->newSitelinkValidator()->validate( 'Q444', 'enwiki', [ 'title' => 'test-title', 'badges' => [ 'Q123' ] ] )
 		);
 	}
 
@@ -46,7 +52,7 @@ class SitelinkValidatorTest extends TestCase {
 		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
 		$this->sitelinkDeserializer->method( 'deserialize' )->willThrowException( $deserializerException );
 
-		$validationError = $this->newSitelinkValidator()->validate( 'Q123', [] );
+		$validationError = $this->newSitelinkValidator()->validate( 'Q444', 'enwiki', [] );
 		$this->assertSame( $validationErrorCode, $validationError->getCode() );
 	}
 
@@ -74,12 +80,44 @@ class SitelinkValidatorTest extends TestCase {
 		$this->sitelinkDeserializer->method( 'deserialize' )->willReturn( $deserializedSitelink );
 
 		$sitelinkValidator = $this->newSitelinkValidator();
-		$this->assertNull( $sitelinkValidator->validate( 'Q123', [] ) );
+		$this->assertNull( $sitelinkValidator->validate( 'Q444', 'enwiki', [ 'title' => 'test-title' ] ) );
 		$this->assertSame( $deserializedSitelink, $sitelinkValidator->getValidatedSitelink() );
 	}
 
-	private function newSitelinkValidator(): SitelinkValidator {
-		return new SitelinkValidator( $this->sitelinkDeserializer );
+	public function testGivenSitelinkConflict_throws(): void {
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$pageTitle = 'test-title';
+		$conflictItemId = 'Q20';
+
+		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
+		$this->siteLinkConflictLookup->method( 'getConflictsForItem' )->willReturn(
+			[
+				[
+					'siteId' => $siteId,
+					'itemId' => $conflictItemId,
+					'sitePage' => $pageTitle,
+				],
+			]
+		);
+
+		$validationError = $this->newSitelinkValidator()->validate(
+			'Q444',
+			$siteId,
+			[ 'title' => $pageTitle ]
+		);
+
+		$this->assertSame( SitelinkValidator::CODE_SITELINK_CONFLICT, $validationError->getCode() );
+		$this->assertSame(
+			$conflictItemId,
+			$validationError->getContext()[SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID]
+		);
+	}
+
+	private function newSitelinkValidator(): SiteLinkConflictLookupSitelinkValidator {
+		return new SiteLinkConflictLookupSitelinkValidator(
+			$this->sitelinkDeserializer,
+			$this->siteLinkConflictLookup
+		);
 	}
 
 }

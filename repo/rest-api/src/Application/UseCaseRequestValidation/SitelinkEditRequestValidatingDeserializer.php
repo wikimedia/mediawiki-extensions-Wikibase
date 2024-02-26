@@ -22,7 +22,8 @@ class SitelinkEditRequestValidatingDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( SitelinkEditRequest $request ): SiteLink {
-		$validationError = $this->validator->validate( $request->getSiteId(), $request->getSitelink() );
+		$validationError = $this->validator->validate( $request->getItemId(), $request->getSiteId(), $request->getSitelink() );
+
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
 				case SitelinkValidator::CODE_TITLE_MISSING:
@@ -62,6 +63,13 @@ class SitelinkEditRequestValidatingDeserializer {
 					throw new UseCaseError(
 						UseCaseError::SITELINK_TITLE_NOT_FOUND,
 						"Page with title {$request->getSitelink()['title']} does not exist on the given site"
+					);
+				case SitelinkValidator::CODE_SITELINK_CONFLICT:
+					$conflictItemId = $validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+					throw new UseCaseError(
+						UseCaseError::SITELINK_CONFLICT,
+						"Sitelink is already being used on $conflictItemId",
+						[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => $conflictItemId ]
 					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
