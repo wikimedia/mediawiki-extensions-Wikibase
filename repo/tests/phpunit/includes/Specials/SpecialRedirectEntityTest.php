@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use MediaWiki\Language\RawMessage;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebRequest;
+use MediaWiki\Request\WebResponse;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -142,7 +144,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				WikibaseRepo::getSummaryFormatter(),
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository,
-				$this->getMockEntityTitleLookup()
+				$this->getMockEntityTitleLookup(),
+				$this->getServiceContainer()->getTempUserCreator()
 			),
 			WikibaseRepo::getTokenCheckInteractor()
 		);
@@ -175,6 +178,17 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->assertHtmlContainsInputWithName( $output, 'fromid' );
 		$this->assertHtmlContainsInputWithName( $output, 'toid' );
 		$this->assertHtmlContainsSubmitControl( $output );
+	}
+
+	public function testSuccessMessageShown(): void {
+		$output = $this->executeSpecialEntityRedirect( [
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
+			'success' => 1,
+		] );
+
+		$this->assertNoError( $output );
+		$this->assertStringContainsString( '(wikibase-redirectentity-success: Q1, Q2)', $output );
 	}
 
 	/**
@@ -288,6 +302,40 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 		$html = $this->executeSpecialEntityRedirect( $params, $user );
 		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-permissiondenied', $html );
+	}
+
+	public function testTempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValues( [
+			MainConfigNames::AutoCreateTempUser => $autoCreateTempUser,
+			MainConfigNames::LanguageCode => 'en',
+		] );
+		$this->setGroupPermissions( '*', 'createaccount', true );
+
+		$params = [
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
+		];
+		$request = new FauxRequest( $params, true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		) {
+			$this->assertSame( 'Special:RedirectEntity', $returnTo );
+			$this->assertSame( 'fromid=Q1&toid=Q2&success=1', $returnToQuery );
+			$this->assertSame( '', $returnToAnchor );
+			$redirectUrl = 'https://wiki.example/';
+		} );
+
+		/** @var WebResponse $response */
+		[ , $response ] = $this->executeSpecialPage( '', $request );
+
+		$this->assertSame( 'https://wiki.example/', $response->getHeader( 'location' ) );
 	}
 
 }

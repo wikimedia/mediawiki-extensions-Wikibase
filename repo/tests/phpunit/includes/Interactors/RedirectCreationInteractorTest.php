@@ -3,9 +3,12 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use IContextSource;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\TempUser\CreateStatus;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
@@ -110,14 +113,23 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param InvokedRecorder|null $efHookCalls
 	 * @param Status|null $efHookStatus
+	 * @param TempUserCreator|null $tempUserCreator
 	 *
 	 * @return ItemRedirectCreationInteractor
 	 */
 	private function newInteractor(
 		$efHookCalls = null,
-		Status $efHookStatus = null
+		Status $efHookStatus = null,
+		TempUserCreator $tempUserCreator = null
 	) {
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
+
+		if ( $tempUserCreator === null ) {
+			$tempUserCreator = $this->createMock( TempUserCreator::class );
+			$tempUserCreator->method( 'shouldAutoCreate' )
+				->willReturn( false );
+			$tempUserCreator->expects( $this->never() )->method( 'create' );
+		}
 
 		return new ItemRedirectCreationInteractor(
 			$this->mockRepository,
@@ -126,7 +138,8 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$summaryFormatter,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
 			$this->mockRepository,
-			$this->getMockEntityTitleLookup()
+			$this->getMockEntityTitleLookup(),
+			$tempUserCreator
 		);
 	}
 
@@ -169,7 +182,11 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor( $this->once() );
 
-		$interactor->createRedirect( $fromId, $toId, false, [ 'tag' ], $this->getContext() );
+		[
+			'entityRedirect' => $entityRedirect,
+			'context' => $context,
+			'savedTempUser' => $savedTempUser,
+		] = $interactor->createRedirect( $fromId, $toId, false, [ 'tag' ], $this->getContext() );
 
 		try {
 			$this->mockRepository->getEntity( $fromId );
@@ -177,6 +194,13 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 			$this->assertSame( [ 'tag' ], $this->mockRepository->getLatestLogEntryFor( $fromId )['tags'] );
+		}
+		$this->assertInstanceOf( EntityRedirect::class, $entityRedirect );
+		$this->assertSame( $fromId, $entityRedirect->getEntityId() );
+		$this->assertSame( $toId, $entityRedirect->getTargetId() );
+		$this->assertInstanceOf( IContextSource::class, $context );
+		if ( $savedTempUser !== null ) {
+			$this->assertInstanceOf( User::class, $savedTempUser );
 		}
 	}
 
@@ -264,6 +288,34 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 
 		$interactor = $this->newInteractor( null, null );
 		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false, [], $this->getContext( $user ) );
+	}
+
+	public function testCreateRedirect_createTempUser(): void {
+		$anonUser = MediaWikiServices::getInstance()->getUserFactory()->newAnonymous();
+		$originalContext = $this->getContext( $anonUser );
+		$tempUser = $this->createMock( User::class );
+		$tempUserCreator = $this->createMock( TempUserCreator::class );
+		$tempUserCreator->method( 'shouldAutoCreate' )
+			->willReturn( true );
+		$tempUserCreator->method( 'create' )
+			->willReturn( CreateStatus::newGood( $tempUser ) );
+		$interactor = $this->newInteractor( null, null, $tempUserCreator );
+
+		[
+			'context' => $context,
+			'savedTempUser' => $savedTempUser,
+		] = $interactor->createRedirect(
+			new ItemId( 'Q11' ),
+			new ItemId( 'Q12' ),
+			false,
+			[],
+			$originalContext
+		);
+
+		$this->assertNotSame( $originalContext, $context, 'new context created' );
+		$this->assertNotNull( $savedTempUser, 'temp user saved' );
+		$this->assertSame( $savedTempUser, $context->getUser(), 'new context has temp user' );
+		$this->assertSame( $anonUser, $originalContext->getUser(), 'original context not changed' );
 	}
 
 }

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use HTMLForm;
 use MediaWiki\Html\Html;
+use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -109,7 +110,13 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			$toId = $this->getEntityIdParam( 'toid' );
 
 			if ( $fromId && $toId ) {
-				$this->redirectEntity( $fromId, $toId );
+				if ( $this->getRequest()->getBool( 'success' ) ) {
+					// redirected back here after a successful edit + temp user, show success now
+					// (the success may be inaccurate if users created this URL manually, but that’s harmless)
+					$this->showSuccess( $fromId, $toId );
+				} else {
+					$this->redirectEntity( $fromId, $toId );
+				}
 			}
 		} catch ( Exception $ex ) {
 			$this->showExceptionMessage( $ex );
@@ -133,8 +140,31 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
-		$this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
+		/** @var ?User $savedTempUser */
+		[
+			'savedTempUser' => $savedTempUser,
+		] = $this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
 
+		if ( $savedTempUser !== null ) {
+			$redirectUrl = '';
+			$this->getHookRunner()->onTempUserCreatedRedirect(
+				$this->getRequest()->getSession(),
+				$savedTempUser,
+				$this->getPageTitle()->getFullText(),
+				"fromid={$fromId->getSerialization()}&toid={$toId->getSerialization()}&success=1",
+				'',
+				$redirectUrl
+			);
+			if ( $redirectUrl ) {
+				$this->getOutput()->redirect( $redirectUrl );
+				return; // success will be shown when returning here from redirect
+			}
+		}
+
+		$this->showSuccess( $fromId, $toId );
+	}
+
+	private function showSuccess( EntityId $fromId, EntityId $toId ): void {
 		$this->getOutput()->addWikiMsg(
 			'wikibase-redirectentity-success',
 			$fromId->getSerialization(),

@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Interactors;
 
+use DerivativeContext;
 use IContextSource;
+use MediaWiki\User\TempUser\TempUserCreator;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -64,6 +66,8 @@ abstract class EntityRedirectCreationInteractor {
 	 */
 	private $entityRedirectLookup;
 
+	private TempUserCreator $tempUserCreator;
+
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
@@ -71,7 +75,8 @@ abstract class EntityRedirectCreationInteractor {
 		SummaryFormatter $summaryFormatter,
 		EditFilterHookRunner $editFilterHookRunner,
 		EntityRedirectTargetLookup $entityRedirectLookup,
-		EntityTitleStoreLookup $entityTitleLookup
+		EntityTitleStoreLookup $entityTitleLookup,
+		TempUserCreator $tempUserCreator
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
@@ -80,6 +85,7 @@ abstract class EntityRedirectCreationInteractor {
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->tempUserCreator = $tempUserCreator;
 	}
 
 	/**
@@ -93,7 +99,10 @@ abstract class EntityRedirectCreationInteractor {
 	 * @param string[] $tags
 	 * @param IContextSource|null $context The context to pass to the edit filter hook and check permissions
 	 *
-	 * @return EntityRedirect
+	 * @return array with three members:
+	 * - 'entityRedirect' (EntityRedirect): the created redirect
+	 * - 'context' (IContextSource): context that should be used for subsequent edits
+	 * - 'savedTempUser' (?User): temporary user if one was created, else null
 	 * @throws RedirectCreationException If creating the redirect fails. Calling code may use
 	 * RedirectCreationException::getErrorCode() to get further information about the cause of
 	 * the failure.
@@ -105,7 +114,7 @@ abstract class EntityRedirectCreationInteractor {
 		bool $bot,
 		array $tags,
 		IContextSource $context
-	): EntityRedirect {
+	): array {
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId, $context );
 		$this->checkRateLimits( $context );
@@ -118,9 +127,7 @@ abstract class EntityRedirectCreationInteractor {
 		$summary->addAutoCommentArgs( $fromId->getSerialization(), $toId->getSerialization() );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
-		$this->saveRedirect( $redirect, $summary, $context, $bot, $tags );
-
-		return $redirect;
+		return $this->saveRedirect( $redirect, $summary, $context, $bot, $tags );
 	}
 
 	/**
@@ -247,7 +254,7 @@ abstract class EntityRedirectCreationInteractor {
 		IContextSource $context,
 		bool $bot,
 		array $tags
-	): void {
+	): array {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = 0;
 		if ( $bot ) {
@@ -270,11 +277,27 @@ abstract class EntityRedirectCreationInteractor {
 			);
 		}
 
+		$user = $context->getUser();
+		$savedTempUser = null;
+		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
+			$tempUserStatus = $this->tempUserCreator->create( null, $context->getRequest() );
+			if ( !$tempUserStatus->isOK() ) {
+				throw new RedirectCreationException(
+					'Unable to create temporary user',
+					'cant-create-temp-user'
+				);
+			}
+			$user = $tempUserStatus->getUser();
+			$context = new DerivativeContext( $context );
+			$context->setUser( $user );
+			$savedTempUser = $user;
+		}
+
 		try {
 			$this->entityStore->saveRedirect(
 				$redirect,
 				$summary,
-				$context->getUser(),
+				$user,
 				$flags,
 				false,
 				$tags
@@ -282,6 +305,12 @@ abstract class EntityRedirectCreationInteractor {
 		} catch ( StorageException $ex ) {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', [], $ex );
 		}
+
+		return [
+			'entityRedirect' => $redirect,
+			'context' => $context,
+			'savedTempUser' => $savedTempUser,
+		];
 	}
 
 	/**

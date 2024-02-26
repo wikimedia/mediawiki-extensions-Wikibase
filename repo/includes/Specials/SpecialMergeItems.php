@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use HTMLForm;
 use MediaWiki\Html\Html;
+use MediaWiki\User\User;
 use Message;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -147,7 +148,14 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			$summary = $this->getTextParam( 'summary' );
 
 			if ( $fromId && $toId ) {
-				$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+				$success = $this->getStringListParam( 'success' );
+				if ( count( $success ) === 2 && ctype_digit( $success[0] ) && ctype_digit( $success[1] ) ) {
+					// redirected back here after a successful edit + temp user, show success now
+					// (the success may be inaccurate if users created this URL manually, but that’s harmless)
+					$this->showSuccess( $fromId, $toId, (int)$success[0], (int)$success[1] );
+				} else {
+					$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+				}
 			}
 		} catch ( ItemMergeException $ex ) {
 			if ( $ex->getPrevious() instanceof UnresolvedEntityRedirectException ) {
@@ -182,15 +190,42 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
-		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
-		$toTitle = $this->titleLookup->getTitleForId( $toId );
 
 		/** @var EntityRevision $newRevisionFrom */
 		/** @var EntityRevision $newRevisionTo */
-		[ $newRevisionFrom, $newRevisionTo ]
-			= $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
+		/** @var ?User $savedTempUser */
+		[
+			'fromEntityRevision' => $newRevisionFrom,
+			'toEntityRevision' => $newRevisionTo,
+			'savedTempUser' => $savedTempUser,
+		] = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
+		$newRevisionFromId = $newRevisionFrom->getRevisionId();
+		$newRevisionToId = $newRevisionTo->getRevisionId();
+		if ( $savedTempUser !== null ) {
+			$redirectUrl = '';
+			$this->getHookRunner()->onTempUserCreatedRedirect(
+				$this->getRequest()->getSession(),
+				$savedTempUser,
+				$this->getPageTitle()->getFullText(),
+				"fromid={$fromId->getSerialization()}&toid={$toId->getSerialization()}" .
+					"&success=$newRevisionFromId|$newRevisionToId",
+				'',
+				$redirectUrl
+			);
+			if ( $redirectUrl ) {
+				$this->getOutput()->redirect( $redirectUrl );
+				return; // success will be shown when returning here from redirect
+			}
+		}
 
+		$this->showSuccess( $fromId, $toId, $newRevisionFromId, $newRevisionToId );
+	}
+
+	private function showSuccess( ItemId $fromId, ItemId $toId, int $newRevisionFromId, int $newRevisionToId ): void {
 		$linkRenderer = $this->getLinkRenderer();
+		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
+		$toTitle = $this->titleLookup->getTitleForId( $toId );
+
 		$this->getOutput()->addWikiMsg(
 			'wikibase-mergeitems-success',
 			Message::rawParam(
@@ -202,14 +237,14 @@ class SpecialMergeItems extends SpecialWikibasePage {
 					[ 'redirect' => 'no' ]
 				)
 			),
-			$newRevisionFrom->getRevisionId(),
+			$newRevisionFromId,
 			Message::rawParam(
 				$linkRenderer->makeKnownLink(
 					$toTitle,
 					$toId->getSerialization()
 				)
 			),
-			$newRevisionTo->getRevisionId()
+			$newRevisionToId
 		);
 	}
 

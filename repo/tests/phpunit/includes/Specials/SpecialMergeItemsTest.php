@@ -5,9 +5,11 @@ namespace Wikibase\Repo\Tests\Specials;
 use Exception;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebRequest;
+use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -150,6 +152,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$editFilterHookRunner = $this->getMockEditFilterHookRunner();
 		$permissionChecker = $this->getPermissionCheckers();
+		$tempUserCreator = $services->getTempUserCreator();
 		$editEntityFactory = new MediaWikiEditEntityFactory(
 			$titleLookup,
 			$this->mockRepository,
@@ -160,7 +163,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			$editFilterHookRunner,
 			new NullStatsdDataFactory(),
 			$services->getUserOptionsLookup(),
-			$services->getTempUserCreator(),
+			$tempUserCreator,
 			4096,
 			[ 'item' ]
 		);
@@ -176,13 +179,14 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				$permissionChecker,
 				$summaryFormatter,
 				new ItemRedirectCreationInteractor(
-						$this->mockRepository,
-						$this->mockRepository,
-						$permissionChecker,
-						$summaryFormatter,
-						$editFilterHookRunner,
-						$this->mockRepository,
-						$this->getMockEntityTitleLookup()
+					$this->mockRepository,
+					$this->mockRepository,
+					$permissionChecker,
+					$summaryFormatter,
+					$editFilterHookRunner,
+					$this->mockRepository,
+					$this->getMockEntityTitleLookup(),
+					$tempUserCreator
 				),
 				$titleLookup,
 				$services->getPermissionManager()
@@ -243,6 +247,17 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertHtmlContainsInputWithName( $output, 'fromid' );
 		$this->assertHtmlContainsInputWithName( $output, 'toid' );
 		$this->assertHtmlContainsSubmitControl( $output );
+	}
+
+	public function testSuccessMessageShown(): void {
+		$output = $this->executeSpecialMergeItems( [
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
+			'success' => '3|4',
+		] );
+
+		$this->assertNoError( $output );
+		$this->assertStringContainsString( '(wikibase-mergeitems-success: Q1, 3, Q2, 4)', $output );
 	}
 
 	/**
@@ -474,6 +489,40 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$html = $this->executeSpecialMergeItems( $params, $user );
 		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
+	}
+
+	public function testTempUserCreatedRedirect(): void {
+		$autoCreateTempUser = $this->getConfVar( MainConfigNames::AutoCreateTempUser );
+		$autoCreateTempUser['enabled'] = true;
+		$this->overrideConfigValues( [
+			MainConfigNames::AutoCreateTempUser => $autoCreateTempUser,
+			MainConfigNames::LanguageCode => 'en',
+		] );
+		$this->setGroupPermissions( '*', 'createaccount', true );
+
+		$params = [
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
+		];
+		$request = new FauxRequest( $params, true );
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			string $returnTo,
+			string $returnToQuery,
+			string $returnToAnchor,
+			&$redirectUrl
+		) {
+			$this->assertSame( 'Special:MergeItems', $returnTo );
+			$this->assertStringStartsWith( 'fromid=Q1&toid=Q2&success=', $returnToQuery );
+			$this->assertSame( '', $returnToAnchor );
+			$redirectUrl = 'https://wiki.example/';
+		} );
+
+		/** @var WebResponse $response */
+		[ , $response ] = $this->executeSpecialPage( '', $request );
+
+		$this->assertSame( 'https://wiki.example/', $response->getHeader( 'location' ) );
 	}
 
 }
