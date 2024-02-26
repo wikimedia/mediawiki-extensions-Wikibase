@@ -144,15 +144,15 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoItemLabelValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyDescriptionValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -248,7 +248,7 @@ return [
 	VRD::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemLabelEditRequestValidatingDeserializer {
 			return new ItemLabelEditRequestValidatingDeserializer(
-				new WikibaseRepoItemLabelValidator(
+				new LabelTextValidatorItemLabelValidator(
 					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
@@ -259,7 +259,7 @@ return [
 	VRD::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemDescriptionEditRequestValidatingDeserializer {
 			return new ItemDescriptionEditRequestValidatingDeserializer(
-				new WikibaseRepoItemDescriptionValidator(
+				new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
@@ -270,7 +270,7 @@ return [
 	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
 			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new AliasesDeserializer(),
 				new PrefetchingTermLookupAliasesRetriever(
 					WikibaseRepo::getPrefetchingTermLookup( $services ),
@@ -282,7 +282,7 @@ return [
 	VRD::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyLabelEditRequestValidatingDeserializer {
 			return new PropertyLabelEditRequestValidatingDeserializer(
-				new WikibaseRepoPropertyLabelValidator(
+				new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
@@ -293,7 +293,7 @@ return [
 	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
 			return new PropertyDescriptionEditRequestValidatingDeserializer(
-				new WikibaseRepoPropertyDescriptionValidator(
+				new TermValidatorFactoryPropertyDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
 				)
@@ -303,7 +303,7 @@ return [
 	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new AliasesDeserializer(),
 				new PrefetchingTermLookupAliasesRetriever(
 					WikibaseRepo::getPrefetchingTermLookup( $services ),
@@ -657,7 +657,7 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemAliasesValidator(
 				new AliasesDeserializer(),
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),
 			WbRestApi::getItemDataRetriever( $services ),
@@ -676,7 +676,7 @@ return [
 			WbRestApi::getItemDataRetriever( $services ),
 			new PatchedDescriptionsValidator(
 				new DescriptionsDeserializer(),
-				new WikibaseRepoItemDescriptionValidator(
+				new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
@@ -695,7 +695,7 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemLabelsValidator(
 				new LabelsDeserializer(),
-				new WikibaseRepoItemLabelValidator(
+				new LabelTextValidatorItemLabelValidator(
 					new TermValidatorFactoryLabelTextValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services ),
 					WbRestApi::getItemDataRetriever( $services )
@@ -732,7 +732,7 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedPropertyAliasesValidator(
 				new AliasesDeserializer(),
-				new WikibaseRepoAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				new LanguageCodeValidator( $termLanguages->getLanguages() )
 			),
 			WbRestApi::getPropertyDataRetriever( $services ),
@@ -754,7 +754,7 @@ return [
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new PatchedPropertyDescriptionsValidator(
 				new DescriptionsDeserializer(),
-				new WikibaseRepoPropertyDescriptionValidator(
+				new TermValidatorFactoryPropertyDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
 				),
@@ -777,7 +777,7 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedPropertyLabelsValidator(
 				new LabelsDeserializer(),
-				new WikibaseRepoPropertyLabelValidator(
+				new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )

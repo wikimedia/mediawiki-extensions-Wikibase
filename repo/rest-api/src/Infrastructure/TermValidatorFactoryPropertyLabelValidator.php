@@ -13,7 +13,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoPropertyLabelValidator implements PropertyLabelValidator {
+class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 	private TermsCollisionDetector $termsCollisionDetector;

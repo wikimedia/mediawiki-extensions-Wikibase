@@ -9,19 +9,19 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoAliasesInLanguageValidatorTest extends TestCase {
+class TermValidatorFactoryAliasesInLanguageValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
@@ -62,8 +62,8 @@ class WikibaseRepoAliasesInLanguageValidatorTest extends TestCase {
 		];
 	}
 
-	private function newValidator(): WikibaseRepoAliasesInLanguageValidator {
-		return new WikibaseRepoAliasesInLanguageValidator( $this->newTermValidatorFactory() );
+	private function newValidator(): TermValidatorFactoryAliasesInLanguageValidator {
+		return new TermValidatorFactoryAliasesInLanguageValidator( $this->newTermValidatorFactory() );
 	}
 
 	private function newTermValidatorFactory(): TermValidatorFactory {

@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
@@ -149,7 +149,7 @@ class PatchedAliasesValidatorTest extends TestCase {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 		return new PatchedAliasesValidator(
 			new AliasesDeserializer(),
-			new WikibaseRepoAliasesInLanguageValidator(
+			new TermValidatorFactoryAliasesInLanguageValidator(
 				new TermValidatorFactory(
 					self::LIMIT,
 					$validLanguageCodes,

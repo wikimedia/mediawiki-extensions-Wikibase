@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoAliasesInLanguageValidator implements AliasesInLanguageValidator {
+class TermValidatorFactoryAliasesInLanguageValidator implements AliasesInLanguageValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 

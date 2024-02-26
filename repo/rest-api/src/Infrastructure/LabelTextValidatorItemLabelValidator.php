@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
 /**
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoItemLabelValidator implements ItemLabelValidator {
+class LabelTextValidatorItemLabelValidator implements ItemLabelValidator {
 
 	private TermValidatorFactoryLabelTextValidator $labelTextValidator;
 	private TermsCollisionDetector $termsCollisionDetector;

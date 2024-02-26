@@ -14,19 +14,19 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WikibaseRepoPropertyLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoPropertyLabelValidatorTest extends TestCase {
+class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
@@ -168,8 +168,8 @@ class WikibaseRepoPropertyLabelValidatorTest extends TestCase {
 		);
 	}
 
-	private function newValidator(): WikibaseRepoPropertyLabelValidator {
-		return new WikibaseRepoPropertyLabelValidator(
+	private function newValidator(): TermValidatorFactoryPropertyLabelValidator {
+		return new TermValidatorFactoryPropertyLabelValidator(
 			new TermValidatorFactory(
 				self::MAX_LENGTH,
 				WikibaseRepo::getTermsLanguages()->getLanguages(),
