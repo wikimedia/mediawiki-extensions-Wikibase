@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchSitelinks;
 
+use EmptyBagOStuff;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
@@ -27,6 +28,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
+use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -65,11 +68,14 @@ class PatchSitelinksTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->patchedSitelinksValidator = new PatchedSitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
-			new SitelinkDeserializer(
-				'/\?/',
-				self::ALLOWED_BADGES,
-				new SameTitleSitelinkTargetResolver(),
-				new DummyItemRevisionMetaDataRetriever()
+			new SiteLinkConflictLookupSitelinkValidator(
+				new SitelinkDeserializer(
+					'/\?/',
+					self::ALLOWED_BADGES,
+					new SameTitleSitelinkTargetResolver(),
+					new DummyItemRevisionMetaDataRetriever()
+				),
+				new BagOStuffSiteLinkConflictLookup( new EmptyBagOStuff() )
 			)
 		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
@@ -186,7 +192,8 @@ class PatchSitelinksTest extends TestCase {
 	}
 
 	public function testGivenPatchedSitelinksInvalid_throws(): void {
-		$item = NewItem::withId( 'Q123' )->build();
+		$itemId = 'Q123';
+		$item = NewItem::withId( $itemId )->build();
 		$patchResult = [ 'invalid-site-id' => [] ];
 
 		$itemRepo = new InMemoryItemRepository();
@@ -198,7 +205,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->patchedSitelinksValidator = $this->createMock( PatchedSitelinksValidator::class );
 		$this->patchedSitelinksValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
-			->with( $patchResult )
+			->with( $itemId, $patchResult )
 			->willThrowException( $expectedUseCaseError );
 
 		try {

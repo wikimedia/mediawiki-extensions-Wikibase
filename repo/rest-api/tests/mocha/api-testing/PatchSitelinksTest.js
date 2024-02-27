@@ -4,7 +4,7 @@ const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
+const { createLocalSitelink, getLocalSiteId, createEntity } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -396,6 +396,29 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			);
 
 			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'sitelink conflict', async () => {
+			await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
+			).assertValidRequest().makeRequest();
+
+			const newItem = await createEntity( 'item', {} );
+			const response = await newPatchSitelinksRequestBuilder(
+				newItem.entity.id,
+				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'patched-sitelink-conflict',
+				{ 'site-id': siteId, 'matching-item-id': testItemId }
+			);
+
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, testItemId );
 		} );
 
 	} );

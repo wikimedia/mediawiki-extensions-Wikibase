@@ -317,15 +317,7 @@ return [
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
 				new SiteLinkConflictLookupSitelinkValidator(
-					new SitelinkDeserializer(
-						MediaWikiTitleCodec::getTitleInvalidRegex(),
-						array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
-						new SiteLinkPageNormalizerSitelinkTargetResolver(
-							$services->getSiteLookup(),
-							WikibaseRepo::getSiteLinkPageNormalizer( $services )
-						),
-						new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
-					),
+					WbRestApi::getSitelinkDeserializer(),
 					new SqlSiteLinkConflictLookup(
 						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 						WikibaseRepo::getEntityIdComposer( $services )
@@ -816,15 +808,13 @@ return [
 				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 				) ),
-				new SitelinkDeserializer(
-					MediaWikiTitleCodec::getTitleInvalidRegex(),
-					array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
-					new SiteLinkPageNormalizerSitelinkTargetResolver(
-						MediaWikiServices::getInstance()->getSiteLookup(),
-						WikibaseRepo::getSiteLinkPageNormalizer( $services )
+				new SiteLinkConflictLookupSitelinkValidator(
+					WbRestApi::getSitelinkDeserializer(),
+					new SqlSiteLinkConflictLookup(
+						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+						WikibaseRepo::getEntityIdComposer( $services )
 					),
-					new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
-				)
+				),
 			),
 			WbRestApi::getItemUpdater( $services )
 		);
@@ -1023,6 +1013,18 @@ return [
 			WbRestApi::getAssertUserIsAuthorized( $services ),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services )
+		);
+	},
+
+	'WbRestApi.SitelinkDeserializer' => function( MediaWikiServices $services ): SitelinkDeserializer {
+		return new SitelinkDeserializer(
+			MediaWikiTitleCodec::getTitleInvalidRegex(),
+			array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
+			new SiteLinkPageNormalizerSitelinkTargetResolver(
+				$services->getSiteLookup(),
+				WikibaseRepo::getSiteLinkPageNormalizer( $services )
+			),
+			new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
 		);
 	},
 
