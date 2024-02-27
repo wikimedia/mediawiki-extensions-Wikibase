@@ -70,8 +70,8 @@
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
-			assert.true( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
+		).done( function ( valueChangeResult ) {
+			assert.true( valueChangeResult.getSavedValue() instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
@@ -100,8 +100,8 @@
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
-			assert.deepEqual( savedSiteLinkSet.getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
+		).done( function ( valueChangeResult ) {
+			assert.deepEqual( valueChangeResult.getSavedValue().getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
 		} );
 	} );
 
@@ -122,7 +122,7 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( savedSiteLinkSet ) {
+		).done( function ( _valueChangeResult ) {
 			assert.true( false, 'save should have failed' );
 			done();
 		} )
@@ -179,8 +179,8 @@
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( savedSiteLinkSet ) {
-			assert.true( savedSiteLinkSet instanceof datamodel.SiteLinkSet );
+		).done( function ( valueChangeResult ) {
+			assert.true( valueChangeResult.getSavedValue() instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
@@ -208,8 +208,8 @@
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] )
-		).done( function ( savedSiteLinkSet ) {
-			assert.strictEqual( savedSiteLinkSet.getItemByKey( 'siteId' ), null );
+		).done( function ( valueChangeResult ) {
+			assert.strictEqual( valueChangeResult.getSavedValue().getItemByKey( 'siteId' ), null );
 		} );
 	} );
 
@@ -230,7 +230,7 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( savedSiteLinkSet ) {
+		).done( function ( _valueChangeResult ) {
 			assert.true( false, 'save should have failed' );
 			done();
 		} )

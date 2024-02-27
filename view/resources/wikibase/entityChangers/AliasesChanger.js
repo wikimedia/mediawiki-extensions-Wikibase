@@ -39,12 +39,13 @@
 
 		/**
 		 * @param {datamodel.MultiTerm} aliases
+		 * @param {entityChangers.TempUserWatcher} tempUserWatcher
 		 * @return {jQuery.Promise}
 		 *         No resolved parameters.
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setAliases: function ( aliases ) {
+		setAliases: function ( aliases, tempUserWatcher ) {
 			var deferred = $.Deferred(),
 				self = this,
 				language = aliases.getLanguageCode(),
@@ -61,6 +62,9 @@
 				self._revisionStore.setAliasesRevision( response.entity.lastrevid );
 
 				self._entity.getFingerprint().setAliases( language, aliases );
+
+				// Handle TempUser if one is created
+				tempUserWatcher.processApiResult( response );
 
 				var texts = [];
 				if ( response.entity.aliases && response.entity.aliases[ language ] ) {

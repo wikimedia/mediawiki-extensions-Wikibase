@@ -709,6 +709,7 @@
 			"view/tests/qunit/wikibase/entityChangers/LabelsChanger.tests.js",
 			"view/tests/qunit/wikibase/entityChangers/SiteLinksChanger.tests.js",
 			"view/tests/qunit/wikibase/entityChangers/SiteLinkSetsChanger.tests.js",
+			"view/tests/qunit/wikibase/entityChangers/TempUserWatcher.tests.js",
 			"view/tests/qunit/wikibase/utilities/ClaimGuidGenerator.tests.js",
 			"view/tests/qunit/wikibase/view/testViewController.js",
 			"view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",

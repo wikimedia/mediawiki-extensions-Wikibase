@@ -8,6 +8,7 @@
 	QUnit.module( 'wikibase.entityChangers.SiteLinksChanger', QUnit.newMwEnvironment() );
 
 	var SUBJECT = wikibase.entityChangers.SiteLinksChanger,
+		TempUserWatcher = wikibase.entityChangers.TempUserWatcher,
 		datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.test( 'is a function', function ( assert ) {
@@ -34,7 +35,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) );
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ), new TempUserWatcher() );
 
 		assert.true( api.setSitelink.calledOnce );
 	} );
@@ -60,10 +61,42 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ), new TempUserWatcher() )
 		.done( function ( savedSiteLink ) {
 			assert.true( savedSiteLink instanceof datamodel.SiteLink );
 		} );
+	} );
+
+	QUnit.test( 'setSiteLink correctly handles TempUser info in API response', function ( assert ) {
+		const targetUrl = 'https://wiki.example/test';
+		var api = {
+			setSitelink: sinon.spy( function () {
+				return $.Deferred().resolve( {
+					entity: {
+						sitelinks: {
+							siteId: {
+								title: 'pageName'
+							},
+							lastrevid: 'lastrevid'
+						}
+					},
+					tempusercreated: 'name',
+					tempuserredirect: targetUrl
+				} ).promise();
+			} )
+		};
+		var siteLinksChanger = new SUBJECT(
+			api,
+			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			new datamodel.Item( 'Q1' )
+		);
+
+		const tempUserWatcher = new TempUserWatcher();
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ), tempUserWatcher )
+			.done( function ( savedSiteLink ) {
+				assert.true( savedSiteLink instanceof datamodel.SiteLink );
+				assert.strictEqual( targetUrl, tempUserWatcher.getRedirectUrl() );
+			} );
 	} );
 
 	QUnit.test( 'setSiteLink correctly passes badges', function ( assert ) {
@@ -88,8 +121,10 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) )
-		.done( function ( savedSiteLink ) {
+		return siteLinksChanger.setSiteLink(
+			new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ),
+			new TempUserWatcher()
+		).done( function ( savedSiteLink ) {
 			assert.deepEqual( savedSiteLink.getBadges(), [ 'Q2' ] );
 		} );
 	} );
@@ -108,7 +143,7 @@
 
 		var done = assert.async();
 
-		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ), new TempUserWatcher() )
 		.done( function ( savedSiteLink ) {
 			assert.true( false, 'setSiteLink should have failed' );
 		} )
@@ -131,7 +166,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ) );
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ), new TempUserWatcher() );
 
 		assert.true( api.setSitelink.calledOnce );
 	} );
@@ -158,7 +193,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ) )
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ), new TempUserWatcher() )
 		.done( function ( savedSiteLink ) {
 			assert.strictEqual( savedSiteLink, null );
 		} );

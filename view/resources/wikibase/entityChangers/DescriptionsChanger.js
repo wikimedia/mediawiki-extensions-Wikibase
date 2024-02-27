@@ -37,13 +37,14 @@
 
 		/**
 		 * @param {datamodel.Term} description
+		 * @param {entityChangers.TempUserWatcher} tempUserWatcher
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved description
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setDescription: function ( description ) {
+		setDescription: function ( description, tempUserWatcher ) {
 			var self = this,
 				deferred = $.Deferred(),
 				language = description.getLanguageCode();
@@ -60,6 +61,8 @@
 
 				// Update revision store:
 				self._revisionStore.setDescriptionRevision( result.entity.lastrevid );
+				// Handle TempUser if one is created
+				tempUserWatcher.processApiResult( result );
 
 				// FIXME: Maybe check API's return value?
 

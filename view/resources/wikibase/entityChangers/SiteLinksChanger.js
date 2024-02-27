@@ -36,13 +36,14 @@
 
 		/**
 		 * @param {datamodel.SiteLink} siteLink
+		 * @param {datamodel.TempUserWatcher} tempUserWatcher
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved siteLink
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setSiteLink: function ( siteLink ) {
+		setSiteLink: function ( siteLink, tempUserWatcher ) {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -59,6 +60,9 @@
 
 				// Update revision store
 				self._revisionStore.setSitelinksRevision( result.entity.lastrevid, siteId );
+
+				// Handle TempUser if one is created
+				tempUserWatcher.processApiResult( result );
 
 				// FIXME: Maybe check API's return value?
 

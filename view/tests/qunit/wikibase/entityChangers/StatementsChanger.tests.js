@@ -75,6 +75,34 @@
 		} );
 	} );
 
+	QUnit.test( 'remove correctly handles temp user info if present in API response', function ( assert ) {
+		const targetUrl = 'http://wiki.example/target';
+		var api = {
+			removeClaim: sinon.spy( function () {
+				return $.Deferred().resolve( {
+					claims: [],
+					pageinfo: {},
+					tempusercreated: 'someone',
+					tempuserredirect: targetUrl
+				} ).promise();
+			} )
+		};
+		var statementsChanger = new SUBJECT(
+			api,
+			{
+				getClaimRevision: function () { return 0; },
+				setClaimRevision: function () {}
+			},
+			statementsChangerState
+		);
+
+		return statementsChanger.remove( newNoValueSnakStatement() )
+			.done( function ( tempUserWatcher ) {
+				assert.true( true, 'remove succeeded' );
+				assert.strictEqual( targetUrl, tempUserWatcher.getRedirectUrl() );
+			} );
+	} );
+
 	QUnit.test( 'remove correctly handles API failures', function ( assert ) {
 		var api = {
 			removeClaim: sinon.spy( function () {
@@ -222,9 +250,9 @@
 		);
 
 		return statementsChanger.save( newNoValueSnakStatement() )
-		.done( function ( savedStatement ) {
+		.done( function ( valueChangeResult ) {
 			assert.true(
-				savedStatement instanceof datamodel.Statement,
+				valueChangeResult.getSavedValue() instanceof datamodel.Statement,
 				'save did not resolve with a Statement'
 			);
 		} );

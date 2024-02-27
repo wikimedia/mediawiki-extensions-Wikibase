@@ -10,6 +10,7 @@
 	QUnit.module( 'wikibase.entityChangers.AliasesChanger' );
 
 	var SUBJECT = wikibase.entityChangers.AliasesChanger;
+	var TempUserWatcher = wikibase.entityChangers.TempUserWatcher;
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.strictEqual(
@@ -35,7 +36,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) );
+		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() );
 
 		assert.true( api.setAliases.calledOnce );
 	} );
@@ -57,7 +58,7 @@
 			new datamodel.Item( 'Q1' )
 		);
 
-		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
 		.done( function ( savedAliases ) {
 			assert.true( true, 'setAliases succeeded' );
 		} );
@@ -82,7 +83,7 @@
 
 		var done = assert.async();
 
-		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
+		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
 		.done( function ( savedAliases ) {
 			assert.true( false, 'setAliases succeeded' );
 		} )
@@ -123,7 +124,7 @@
 			item
 		);
 
-		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
 		.done( function () {
 			assert.true( true, 'setAliases succeeded' );
 
@@ -142,6 +143,35 @@
 				'language'
 			);
 		} );
+	} );
+
+	QUnit.test( 'sets redirect Url if present', function ( assert ) {
+		const target = 'https://wiki.example/';
+		const tempUserWatcher = new TempUserWatcher();
+
+		var api = {
+			setAliases: sinon.spy( function () {
+				return $.Deferred().resolve( {
+					entity: {},
+					tempusercreated: 'SomeUser',
+					tempuserredirect: target
+				} ).promise();
+			} )
+		};
+		var aliasesChanger = new SUBJECT(
+			api,
+			{
+				getAliasesRevision: function () { return 0; },
+				setAliasesRevision: function () {}
+			},
+			new datamodel.Item( 'Q1' )
+		);
+
+		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), tempUserWatcher )
+			.done( function ( _savedAliases ) {
+				assert.strictEqual( target, tempUserWatcher.getRedirectUrl(), 'it should set the URL' );
+				assert.true( true, 'setAliases succeeded' );
+			} );
 	} );
 
 }( wikibase ) );

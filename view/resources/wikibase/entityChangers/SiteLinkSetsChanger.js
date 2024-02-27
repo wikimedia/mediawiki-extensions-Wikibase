@@ -40,7 +40,7 @@
 		 * @param {datamodel.SiteLinkSet} oldSiteLinkSet
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {string} The saved SiteLinkSet
+		 *         - {datamodel.ValueChangeResult} A ValueChangeResult wrapping a datamodel.SiteLinkSet
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
@@ -78,19 +78,23 @@
 			var diffValue = getDiffValue();
 			var siteLinksChanger = this._siteLinksChanger;
 			var resultValue = diffValue.unchanged;
+			const tempUserWatcher = new MODULE.TempUserWatcher();
 
 			return chain( diffValue.changed.map( function ( siteLink ) {
 				return function () {
-					return siteLinksChanger.setSiteLink( siteLink ).done( function ( savedSiteLink ) {
+					return siteLinksChanger.setSiteLink( siteLink, tempUserWatcher ).done( function ( savedSiteLink ) {
 						if ( savedSiteLink ) { // Is null if a site link was removed
 							resultValue.push( savedSiteLink );
 						}
 					} );
 				};
 			} ) ).then( function () {
-				return new datamodel.SiteLinkSet( resultValue.sort( function ( s1, s2 ) {
-					return s1.getSiteId().localeCompare( s2.getSiteId() );
-				} ) );
+				return new MODULE.ValueChangeResult(
+					new datamodel.SiteLinkSet( resultValue.sort( function ( s1, s2 ) {
+						return s1.getSiteId().localeCompare( s2.getSiteId() );
+					} ) ),
+					tempUserWatcher
+				);
 			} );
 		}
 
