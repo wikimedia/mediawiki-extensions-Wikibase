@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
@@ -157,10 +158,8 @@ class PatchPropertyDescriptionsRouteHandler extends SimpleHandler {
 
 	/**
 	 * Preconditions are checked via {@link PreconditionMiddleware}
-	 *
-	 * @inheritDoc
 	 */
-	public function checkPreconditions() {
+	public function checkPreconditions(): ?ResponseInterface {
 		return null;
 	}
 
