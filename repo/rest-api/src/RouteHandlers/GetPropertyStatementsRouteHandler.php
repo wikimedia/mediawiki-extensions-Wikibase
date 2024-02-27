@@ -119,8 +119,6 @@ class GetPropertyStatementsRouteHandler extends SimpleHandler {
 
 	/**
 	 * Preconditions are checked via {@link PreconditionMiddleware}
-	 *
-	 * @inheritDoc
 	 */
 	public function checkPreconditions(): ?ResponseInterface {
 		return null;
