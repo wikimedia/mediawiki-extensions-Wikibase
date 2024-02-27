@@ -40,8 +40,6 @@ ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text 
 }
 
 ul.tagadata li.tagadata-choice .tagadata-label input {
-	-moz-box-sizing:    border-box;
-	-webkit-box-sizing: border-box;
 	box-sizing:         border-box;
 
 	display: inline;
