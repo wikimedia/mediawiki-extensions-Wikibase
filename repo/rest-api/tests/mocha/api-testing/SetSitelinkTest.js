@@ -331,7 +331,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'badges is not an array', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: allowedBadges[ 1 ] };
+			const sitelink = { title: testTitle1, badges: allowedBadges[ 1 ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -341,7 +341,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'badge is not an item ID', async () => {
 			const invalidBadge = 'P33';
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ invalidBadge ] };
+			const sitelink = { title: testTitle1, badges: [ invalidBadge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
 			expect( response ).to.have.status( 400 );
@@ -351,8 +351,23 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'not an allowed badge', async () => {
 			const badge = testItemId;
-			const sitelink = { title: utils.title( 'test-title-' ), badges: [ badge ] };
+			const sitelink = { title: testTitle1, badges: [ badge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assertValidErrorResponse( response, 'item-not-a-badge' );
+			assert.strictEqual(
+				response.body.message,
+				`Item ID provided as badge is not allowed as a badge: ${badge}`
+			);
+		} );
+
+		it( 'badge item does not exist', async () => {
+			const badge = 'Q99999999';
+			const sitelink = { title: testTitle1, badges: [ badge ] };
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink )
+				.withHeader( 'X-Wikibase-CI-Badges', badge )
+				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
 			assertValidErrorResponse( response, 'item-not-a-badge' );

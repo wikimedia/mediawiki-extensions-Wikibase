@@ -28,6 +28,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
@@ -56,7 +57,8 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 						new SitelinkDeserializer(
 							TestValidatingRequestDeserializer::INVALID_TITLE_REGEX,
 							TestValidatingRequestDeserializer::ALLOWED_BADGES,
-							new SameTitleSitelinkTargetResolver()
+							new SameTitleSitelinkTargetResolver(),
+							new DummyItemRevisionMetaDataRetriever()
 						),
 						new BagOStuffSiteLinkConflictLookup( new EmptyBagOStuff() )
 					)
