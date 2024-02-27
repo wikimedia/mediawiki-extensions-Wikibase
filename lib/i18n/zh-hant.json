@@ -17,7 +17,9 @@
 			"Waihorace",
 			"Wehwei",
 			"Xiplus",
-			"列维劳德"
+			"列维劳德",
+			"H78c67c",
+			"Winston Sung"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -90,10 +92,10 @@
 	"wikibase-snakformatter-property-not-found": "查無屬性 $1，無法辨識要使用的資料型態。",
 	"wikibase-snakformatter-formatting-exception": "格式錯誤：$1。",
 	"wikibase-entity-summary-wbsetitem": "已建立新項目",
-	"wikibase-entity-summary-wbcreate-new": "已建立一個新實體",
+	"wikibase-entity-summary-wbcreate-new": "已建立新實體",
 	"wikibase-entity-summary-wbcreateredirect": "已重新導向至 $4",
-	"wikibase-entity-summary-wbeditentity": "已建立一個新實體",
-	"wikibase-entity-summary-wbeditentity-create": "已建立一個新實體",
+	"wikibase-entity-summary-wbeditentity": "已建立新實體",
+	"wikibase-entity-summary-wbeditentity-create": "已建立新實體",
 	"wikibase-entity-summary-wbeditentity-update": "已變更一個實體",
 	"wikibase-entity-summary-wbeditentity-override": "已清除一個實體",
 	"wikibase-entity-summary-wbeditentity-update-languages": "更改在 $3 個{{PLURAL:$3|語言}}裡的標籤、描述以及/或是別名",

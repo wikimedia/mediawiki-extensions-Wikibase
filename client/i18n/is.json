@@ -38,7 +38,7 @@
 	"wikibase-linkitem-confirmitem-text": "Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að {{PLURAL:$2|síðan|síðurnar}} fyrir neðan {{PLURAL:$2|sé sú|séu þær}} sem þú vilt tengja við þessa síðu.",
 	"wikibase-linkitem-confirmitem-button": "Staðfesta",
 	"wikibase-linkitem-not-loggedin-title": "Þú þarft að vera skráð/ur inn",
-	"wikibase-linkitem-not-loggedin": "Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.",
+	"wikibase-linkitem-not-loggedin": "Þú þarft að vera skráð(ur) inn á þennan wiki og í [$1 miðlægu gagnahirsluna] til að nota þennan eiginleika.",
 	"wikibase-linkitem-success-link": "Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn með tenglunum í [$1 samnýtta þekkingargrunninum].",
 	"limitreport-entityaccesscount": "Fjöldi hlaðinna Wikibase-eininga",
 	"wikibase-property-notfound": "Eginleikinn „$1“ fannst ekki.",
@@ -64,7 +64,7 @@
 	"unconnectedpages-summary": "Þessi síða sýnir síður sem tengjast ekki hlut (í nafnrýmum sem styðja tengingu við hluti). Listanum er raðað eftir auðkenni síðunnar, svo að nýjar síður eru fyrstar í röðinni.",
 	"wikibase-unconnectedpages-submit": "Sýna síður",
 	"pageswithbadges": "Síður með merkjum",
-	"pageswithbadges-summary": "Þessi síða listar síður með merkjum (t.d. gæðagreinar eða úrvalsgreinar). Listinn er raðaður eftir lækkandi síðuauðkennum svo að nýjar síður eru listaðar fyrst.",
+	"pageswithbadges-summary": "Þessi síða listar síður með merkjum (t.d. gæðagreinar eða úrvalsgreinar). Listinn er raðaður eftir lækkandi síðuauðkennum svo nýjar síður eru listaðar fyrst.",
 	"wikibase-pageswithbadges-invalid-id": "$1 er ekki gilt auðkenni hlutar",
 	"wikibase-pageswithbadges-legend": "Listi yfir síður með tilgreint merki",
 	"wikibase-pageswithbadges-badge": "Merki:",
@@ -92,7 +92,7 @@
 	"wikibase-pageinfo-entity-usage-O": "Ýmislegt (þ.e. samnefni, tilurð einingar)",
 	"wikibase-property-render-error": "Mistókst að myndgera eiginleika $1: $2",
 	"wikibase-otherprojects": "Í öðrum verkefnum",
-	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
+	"wikibase-otherprojects-beta-message": "Hliðarstika annarra verkefna",
 	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Tungumál",
 	"wikibase-sitelinks-link-columnheading": "Tengd síða",
@@ -113,5 +113,5 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-repo-body": "<p><strong>Af hverju er þetta gildi verndað?</strong></p>\n<p>Þetta gildi er innifalið í eftirfarandi {{PLURAL:$1|síðu sem er vernduð|síðum sem eru verndaðar}} með „keðjuverkandi“ valmöguleikanum:</p>\n$2",
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>Af hverju er þessi síða vernduð?</strong></p>\n<p>Þessi síða er [[Project:Transclusion|innifalin]] í eftirfarandi {{PLURAL:$1|síðu sem er vernduð|síðum sem eru verndaðar}} „[[Project:Cascade|keðjuverkandi]]“ valmöguleikanum:</p>\n$2",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Þú ert ekki skráð/ur inn",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Viðvörun:</strong> Þú ert ekki skráð/ur inn. IP talan þín verður sýnileg opinberlega ef þú gerir einhverjar breytingar. Ef þú <strong>skráir þig inn</strong> eða <strong>býrð til aðgang</strong>, þá munu breytingarnar þínar vera auðkenndar við notandanafnið þitt, ásamt öðrum kostum."
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Aðvörun:</strong> Þú ert ekki skráð(ur) inn. IP-staðfangið þitt verður sýnilegt almenningi ef þú gerir einhverjar breytingar. Ef þú <strong>skráir þig inn</strong> eða <strong>býrð til aðgang</strong> munu breytingarnar þínar vera eignaðar notandanafninu þínu, ásamt öðrum fríðindum."
 }
