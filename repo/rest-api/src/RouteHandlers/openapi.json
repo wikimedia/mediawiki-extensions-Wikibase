@@ -5154,8 +5154,8 @@
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
               },
-              "sitelink-conflict": {
-                "$ref": "#/components/examples/SitelinkConflictExample"
+              "patched-sitelink-conflict": {
+                "$ref": "#/components/examples/PatchedSitelinkConflictExample"
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
@@ -7068,7 +7068,10 @@
       "SitelinkConflictExample": {
         "value": {
           "code": "sitelink-conflict",
-          "message": "Sitelink is already being used on {other_item_id}"
+          "message": "Sitelink is already being used on {other_item_id}",
+          "context": {
+            "matching-item-id": "{other_item_id}"
+          }
         }
       },
       "StatementNotFoundExample": {
@@ -7215,6 +7218,16 @@
           "context": {
             "site-id": "{site_id}",
             "badge": "{badge}"
+          }
+        }
+      },
+      "PatchedSitelinkConflictExample": {
+        "value": {
+          "code": "patched-sitelink-conflict",
+          "message": "Site {site_id} is already being used on {other_item_id}",
+          "context": {
+            "matching-item-id": "{other_item_id}",
+            "site-id": "{site_id}"
           }
         }
       },
