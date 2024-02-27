@@ -126,6 +126,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -133,7 +134,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @coversNothing
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  */
@@ -155,8 +155,9 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->setMockPreconditionMiddlewareFactory();
-		$this->setMockStatementRedirectMiddlewareFactory();
+		$this->stubPreconditionMiddlewareFactory();
+		$this->stubStatementRedirectMiddlewareFactory();
+		$this->stubSiteLinkGlobalIdentifiersProvider();
 	}
 
 	/**
@@ -1024,8 +1025,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * Overrides the PreconditionMiddlewareFactory service with one that doesn't need the database.
 	 */
-	private function setMockPreconditionMiddlewareFactory(): void {
-		$entityRevLookup = $this->createMock( EntityRevisionLookup::class );
+	private function stubPreconditionMiddlewareFactory(): void {
+		$entityRevLookup = $this->createStub( EntityRevisionLookup::class );
 		$entityRevLookup->method( 'getLatestRevisionId' )->willReturn( LatestRevisionIdResult::nonexistentEntity() );
 		$preconditionMiddlewareFactory = new PreconditionMiddlewareFactory(
 			$entityRevLookup,
@@ -1035,11 +1036,11 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'WbRestApi.PreconditionMiddlewareFactory', $preconditionMiddlewareFactory );
 	}
 
-	private function setMockStatementRedirectMiddlewareFactory(): void {
-		$statementSubject = $this->createMock( StatementListProvidingEntity::class );
+	private function stubStatementRedirectMiddlewareFactory(): void {
+		$statementSubject = $this->createStub( StatementListProvidingEntity::class );
 		$statementSubject->method( 'getStatements' )->willReturn( new StatementList() );
 
-		$entityRevLookup = $this->createMock( EntityRevisionLookup::class );
+		$entityRevLookup = $this->createStub( EntityRevisionLookup::class );
 		$entityRevLookup->method( 'getEntityRevision' )->willReturn( new EntityRevision( $statementSubject ) );
 
 		$middleware = new StatementRedirectMiddleware(
@@ -1052,6 +1053,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->createStub( StatementRedirectMiddlewareFactory::class );
 		$factory->method( 'newStatementRedirectMiddleware' )->willReturn( $middleware );
 		$this->setService( 'WbRestApi.StatementRedirectMiddlewareFactory', $factory );
+	}
+
+	private function stubSiteLinkGlobalIdentifiersProvider(): void {
+		$sitelinkGlobalIdentifiersProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
+		$sitelinkGlobalIdentifiersProvider->method( 'getList' )->willReturn( [] );
+		$this->setService( 'WikibaseRepo.SiteLinkGlobalIdentifiersProvider', $sitelinkGlobalIdentifiersProvider );
 	}
 
 }
