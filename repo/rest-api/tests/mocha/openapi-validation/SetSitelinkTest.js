@@ -8,7 +8,8 @@ const {
 	getLocalSiteId,
 	createRedirectForItem, createWikiPage
 } = require( '../helpers/entityHelper' );
-const { newSetSitelinkRequestBuilder, ALLOWED_BADGES } = require( '../helpers/RequestBuilderFactory' );
+const { newSetSitelinkRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 function makeSitelinkTitle() {
 	return utils.title( 'test-title-' );
@@ -33,7 +34,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		const response = await newSetSitelinkRequestBuilder(
 			testItemId,
 			siteId,
-			{ title: linkedArticle, badges: [ ALLOWED_BADGES[ 0 ] ] }
+			{ title: linkedArticle, badges: [ ( await getAllowedBadges() )[ 0 ] ] }
 		).makeRequest();
 
 		expect( response ).to.have.status( 200 );

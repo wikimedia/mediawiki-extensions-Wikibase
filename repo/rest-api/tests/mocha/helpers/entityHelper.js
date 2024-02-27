@@ -150,7 +150,6 @@ async function getLocalSiteId() {
 async function createLocalSitelink( itemId, title, badges = [] ) {
 	await createWikiPage( title, 'sitelink test' );
 	await newSetSitelinkRequestBuilder( itemId, await getLocalSiteId(), { title, badges } )
-		.withHeader( 'X-Wikibase-CI-Badges', badges.join( ', ' ) )
 		.makeRequest();
 }
 

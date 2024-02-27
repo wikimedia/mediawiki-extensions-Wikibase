@@ -5,12 +5,12 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newSetSitelinkRequestBuilder,
-	newRemoveSitelinkRequestBuilder,
-	ALLOWED_BADGES
+	newRemoveSitelinkRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { createEntity, getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
+const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -19,6 +19,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	const testTitle2 = utils.title( 'Sitelink-test-article2-' );
 	let originalLastModified;
 	let originalRevisionId;
+	let allowedBadges;
 
 	function assertValidSuccessResponse( response, status, title, badges ) {
 		expect( response ).to.have.status( status );
@@ -40,6 +41,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		testItemId = createItemResponse.entity.id;
 
 		siteId = await getLocalSiteId();
+		allowedBadges = await getAllowedBadges();
 
 		await createWikiPage( testTitle1, 'sitelink test' );
 		await createWikiPage( testTitle2, 'sitelink test' );
@@ -60,7 +62,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add a sitelink with badges and edit metadata', async () => {
-			const badges = [ ALLOWED_BADGES[ 0 ], ALLOWED_BADGES[ 1 ] ];
+			const badges = [ allowedBadges[ 0 ], allowedBadges[ 1 ] ];
 			const user = await action.robby(); // robby is a bot
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const comment = 'omg – i created a sitelink!';
@@ -113,7 +115,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can replace a sitelink with badges (edit metadata omitted)', async () => {
-			const badges = [ ALLOWED_BADGES[ 0 ] ];
+			const badges = [ allowedBadges[ 0 ] ];
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle2, badges } )
 				.assertValidRequest()
 				.makeRequest();
@@ -149,7 +151,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add/replace only the badges of a sitelink (edit metadata omitted)', async () => {
-			const badges = [ ALLOWED_BADGES[ 0 ] ];
+			const badges = [ allowedBadges[ 0 ] ];
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1, badges } )
 				.assertValidRequest()
 				.makeRequest();
@@ -168,7 +170,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'idempotency check: can set the same sitelink twice', async () => {
-			const newSitelink = { title: testTitle2, badges: [ ALLOWED_BADGES[ 1 ] ] };
+			const newSitelink = { title: testTitle2, badges: [ allowedBadges[ 1 ] ] };
 			const reqBuilder = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelink )
 				.assertValidRequest();
 
@@ -191,13 +193,12 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			} );
 
 			it( 'does not resolve redirects if the sitelink contains a redirect badge', async () => {
-				const redirectBadge = ( await createEntity( 'item', {} ) ).entity.id;
+				const redirectBadge = allowedBadges[ 1 ];
 				const response = await newSetSitelinkRequestBuilder(
 					testItemId,
 					siteId,
 					{ title: redirectTitle, badges: [ redirectBadge ] }
 				)
-					.withHeader( 'X-Wikibase-CI-Badges', redirectBadge )
 					.withHeader( 'X-Wikibase-CI-Redirect-Badges', redirectBadge )
 					.assertValidRequest()
 					.makeRequest();
@@ -291,7 +292,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'sitelink title field not provided', async () => {
-			const newSitelinkWithTitleFieldMissing = { badges: [ ALLOWED_BADGES[ 1 ] ] };
+			const newSitelinkWithTitleFieldMissing = { badges: [ allowedBadges[ 1 ] ] };
 			const response = await newSetSitelinkRequestBuilder(
 				testItemId,
 				siteId,
@@ -330,7 +331,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'badges is not an array', async () => {
-			const sitelink = { title: utils.title( 'test-title-' ), badges: ALLOWED_BADGES[ 1 ] };
+			const sitelink = { title: utils.title( 'test-title-' ), badges: allowedBadges[ 1 ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
 			expect( response ).to.have.status( 400 );

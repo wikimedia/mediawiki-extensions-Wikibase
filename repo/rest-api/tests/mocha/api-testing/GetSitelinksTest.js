@@ -9,6 +9,7 @@ const {
 	createLocalSitelink
 } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
+const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 describe( newGetSitelinksRequestBuilder().getRouteDescription(), () => {
 
@@ -19,9 +20,8 @@ describe( newGetSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {} );
-		const createBadgeItemResponse = await createEntity( 'item', {} );
 		testItemId = createItemResponse.entity.id;
-		badgeItemId = createBadgeItemResponse.entity.id;
+		badgeItemId = ( await getAllowedBadges() )[ 0 ];
 
 		await createLocalSitelink( testItemId, linkedArticle, [ badgeItemId ] );
 		siteId = await getLocalSiteId();
