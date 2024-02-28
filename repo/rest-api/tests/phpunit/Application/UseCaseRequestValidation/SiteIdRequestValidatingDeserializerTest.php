@@ -23,7 +23,7 @@ class SiteIdRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			'enwiki',
-			$this->newValidatingDeserializerRequest()->validateAndDeserialize( $request )
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}
 
@@ -33,7 +33,7 @@ class SiteIdRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getSiteId' )->willReturn( $invalidSiteId );
 
 		try {
-			$this->newValidatingDeserializerRequest()->validateAndDeserialize( $request );
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
 			$this->assertSame( UseCaseError::INVALID_SITE_ID, $useCaseEx->getErrorCode() );
@@ -41,7 +41,7 @@ class SiteIdRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	private function newValidatingDeserializerRequest(): SiteIdRequestValidatingDeserializer {
+	private function newValidatingDeserializer(): SiteIdRequestValidatingDeserializer {
 		return new SiteIdRequestValidatingDeserializer( new SiteIdValidator( [ 'enwiki' ] ) );
 	}
 
