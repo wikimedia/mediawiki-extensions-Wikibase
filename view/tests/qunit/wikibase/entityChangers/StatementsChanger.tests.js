@@ -97,7 +97,8 @@
 		);
 
 		return statementsChanger.remove( newNoValueSnakStatement() )
-			.done( function ( tempUserWatcher ) {
+			.done( function ( valueChangeResult ) {
+				var tempUserWatcher = valueChangeResult.getTempUserWatcher();
 				assert.true( true, 'remove succeeded' );
 				assert.strictEqual( targetUrl, tempUserWatcher.getRedirectUrl() );
 			} );
