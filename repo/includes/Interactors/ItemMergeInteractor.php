@@ -21,6 +21,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -102,12 +103,10 @@ class ItemMergeInteractor {
 	 * Callers are responsible for permission checks
 	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
-	 * @return array with five members:
-	 * - 'fromEntityRevision' (EntityRevision): modified source item
-	 * - 'toEntityRevision' (EntityRevision): modified target item
-	 * - 'context' (IContextSource): context that should be used for subsequent edits
-	 * - 'savedTempUser' (?User): temporary user if one was created, else null
-	 * - 'redirected' (bool): whether the redirect was successful
+	 * @return ItemMergeStatus Note that the status is only returned
+	 * to wrap the created revisions, context and saved temp user in a strongly typed container.
+	 * Errors are (currently) reported as exceptions, not as a failed status.
+	 * (It would be nice to fix this at some point and use status consistently.)
 	 *
 	 * @throws ItemMergeException
 	 * @throws RedirectCreationException
@@ -121,7 +120,7 @@ class ItemMergeInteractor {
 		?string $summary = null,
 		bool $bot = false,
 		array $tags = []
-	): array {
+	): ItemMergeStatus {
 		$user = $context->getUser();
 		$this->checkPermissions( $fromId, $user );
 		$this->checkPermissions( $toId, $user );
@@ -150,34 +149,27 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		$mergeResult = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $context, $bot, $tags );
-		[
-			'fromEntityRevision' => $fromRev,
-			'toEntityRevision' => $toRev,
-			'context' => $context,
-			'savedTempUser' => $mergeSavedTempUser,
-		] = $mergeResult;
+		$mergeStatus = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $context, $bot, $tags );
+		$context = $mergeStatus->getContext();
 		$this->updateWatchlistEntries( $fromId, $toId );
 
 		$redirected = false;
 		$redirectSavedTempUser = null;
 
 		if ( $this->isEmpty( $fromId ) ) {
-			$redirectResult = $this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $tags, $context );
-			[
-				'context' => $context,
-				'savedTempUser' => $redirectSavedTempUser,
-			] = $redirectResult;
+			$redirectStatus = $this->interactorRedirect->createRedirect( $fromId, $toId, $bot, $tags, $context );
+			$context = $redirectStatus->getContext();
+			$redirectSavedTempUser = $redirectStatus->getSavedTempUser();
 			$redirected = true;
 		}
 
-		return [
-			'fromEntityRevision' => $fromRev,
-			'toEntityRevision' => $toRev,
-			'context' => $context,
-			'savedTempUser' => $mergeSavedTempUser ?? $redirectSavedTempUser,
-			'redirected' => $redirected,
-		];
+		return ItemMergeStatus::newMerge(
+			$mergeStatus->getFromEntityRevision(),
+			$mergeStatus->getToEntityRevision(),
+			$mergeStatus->getSavedTempUser() ?? $redirectSavedTempUser,
+			$context,
+			$redirected
+		);
 	}
 
 	private function isEmpty( ItemId $itemId ): bool {
@@ -252,7 +244,7 @@ class ItemMergeInteractor {
 	 * @param bool $bot
 	 * @param string[] $tags
 	 *
-	 * @return array with four members, as documented at {@link self::mergeItems()}, except with the `redirected` member missing.
+	 * @return ItemMergeStatus but with the 'redirected' member missing (to be added by the caller)
 	 */
 	private function attemptSaveMerge(
 		Item $fromItem,
@@ -261,36 +253,34 @@ class ItemMergeInteractor {
 		IContextSource $context,
 		bool $bot,
 		array $tags
-	): array {
+	): ItemMergeStatus {
 		// Note: the edits and summaries are potentially confusing;
 		// on the “from” item, we use the summary “Merged Item *into*” and mention the “to” item ID;
 		// on the “to” item, we use the summary “Merged item *from*” and mention the “from” item ID.
 
 		$fromSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromResult = $this->saveItem( $fromItem, $fromSummary, $context, $bot, $tags );
-		[
-			'revision' => $fromRev,
-			'context' => $context,
-			'savedTempUser' => $fromSavedTempUser,
-		] = $fromResult;
+		$fromStatus = $this->saveItem( $fromItem, $fromSummary, $context, $bot, $tags );
+		$context = $fromStatus->getContext();
 
 		$toSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toResult = $this->saveItem( $toItem, $toSummary, $context, $bot, $tags );
-		[
-			'revision' => $toRev,
-			'context' => $context,
-			'savedTempUser' => $toSavedTempUser,
-		] = $toResult;
+		$toStatus = $this->saveItem( $toItem, $toSummary, $context, $bot, $tags );
+		$context = $toStatus->getContext();
 
-		return [
-			'fromEntityRevision' => $fromRev,
-			'toEntityRevision' => $toRev,
-			'context' => $context,
-			'savedTempUser' => $fromSavedTempUser ?? $toSavedTempUser,
-		];
+		return ItemMergeStatus::newMerge(
+			$fromStatus->getRevision(),
+			$toStatus->getRevision(),
+			$fromStatus->getSavedTempUser() ?? $toStatus->getSavedTempUser(),
+			$context
+		);
 	}
 
-	private function saveItem( Item $item, FormatableSummary $summary, IContextSource $context, bool $bot, array $tags ): array {
+	private function saveItem(
+		Item $item,
+		FormatableSummary $summary,
+		IContextSource $context,
+		bool $bot,
+		array $tags
+	): EditEntityStatus {
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
@@ -316,7 +306,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $status->getWikiText(), 'failed-save' );
 		}
 
-		return $status->getValue();
+		return $status;
 	}
 
 	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ): void {

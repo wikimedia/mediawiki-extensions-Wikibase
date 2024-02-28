@@ -21,6 +21,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -83,7 +84,7 @@ class EntityUpdaterTest extends TestCase {
 				$editMetadata->getTags()
 			)
 			->willReturn(
-				Status::newGood( [
+				EditEntityStatus::newGood( [
 					'revision' => new EntityRevision( $expectedRevisionEntity, $expectedRevisionId, $expectedRevisionTimestamp ),
 				] )
 			);
@@ -121,7 +122,7 @@ class EntityUpdaterTest extends TestCase {
 	 * @dataProvider provideEntity
 	 */
 	public function testGivenSavingFails_throwsGenericException( EntityDocument $entityToUpdate ): void {
-		$errorStatus = Status::newFatal( 'failed to save. sad times.' );
+		$errorStatus = EditEntityStatus::newFatal( 'failed to save. sad times.' );
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
@@ -136,7 +137,10 @@ class EntityUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityAndErrorStatus
 	 */
-	public function testGivenEditPrevented_throwsCorrespondingException( EntityDocument $entityToUpdate, Status $errorStatus ): void {
+	public function testGivenEditPrevented_throwsCorrespondingException(
+		EntityDocument $entityToUpdate,
+		EditEntityStatus $errorStatus
+	): void {
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
 		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
@@ -169,11 +173,11 @@ class EntityUpdaterTest extends TestCase {
 
 	public function provideEntityAndErrorStatus(): array {
 		$errorStatuses = [
-			"basic 'actionthrottledtext' error" => [ Status::newFatal( 'actionthrottledtext' ) ],
-			"wfMessage 'actionthrottledtext' error" => [ Status::newFatal( wfMessage( 'actionthrottledtext' ) ) ],
-			"'abusefilter-disallowed' error" => [ Status::newFatal( 'abusefilter-disallowed' ) ],
-			"'spam-blacklisted-link' error" => [ Status::newFatal( 'spam-blacklisted-link' ) ],
-			"'spam-blacklisted-email' error" => [ Status::newFatal( 'spam-blacklisted-email' ) ],
+			"basic 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( 'actionthrottledtext' ) ],
+			"wfMessage 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( wfMessage( 'actionthrottledtext' ) ) ],
+			"'abusefilter-disallowed' error" => [ EditEntityStatus::newFatal( 'abusefilter-disallowed' ) ],
+			"'spam-blacklisted-link' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-link' ) ],
+			"'spam-blacklisted-email' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-email' ) ],
 		];
 
 		$dataSet = [];
@@ -187,7 +191,7 @@ class EntityUpdaterTest extends TestCase {
 	}
 
 	public function testGivenSavingSucceedsWithErrors_logsErrors(): void {
-		$saveStatus = Status::newGood( [
+		$saveStatus = EditEntityStatus::newGood( [
 			'revision' => new EntityRevision( new FakeEntityDocument(), 123, '20221111070707' ),
 		] );
 		$saveStatus->merge( Status::newFatal( 'saving succeeded but something else went wrong' ) );

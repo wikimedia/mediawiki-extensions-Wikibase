@@ -68,7 +68,7 @@ class EntityUpdater {
 			$this->logger->warning( (string)$status );
 		}
 
-		return $status->getValue()['revision'];
+		return $status->getRevision();
 	}
 
 	private function isPreventedEdit( Status $status ): bool {

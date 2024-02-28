@@ -8,7 +8,6 @@ use MediaWiki\Debug\DeprecatablePropertyArray;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use RequestContext;
@@ -26,6 +25,7 @@ use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -59,15 +59,15 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		}
 	}
 
-	private function getMockEditEntity( ?int $calls, ?Status $status ): EditEntity {
+	private function getMockEditEntity( ?int $calls, ?EditEntityStatus $status ): EditEntity {
 		$mock = $this->createMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
-			->willReturn( $status ?? Status::newGood() );
+			->willReturn( $status ?? EditEntityStatus::newGood( [] ) );
 		return $mock;
 	}
 
-	private function getMockEditEntityFactory( ?int $calls, ?Status $status ): MediaWikiEditEntityFactory {
+	private function getMockEditEntityFactory( ?int $calls, ?EditEntityStatus $status ): MediaWikiEditEntityFactory {
 		$mock = $this->createMock( MediaWikiEditEntityFactory::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'newEditEntity' )
@@ -310,7 +310,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @dataProvider errorStatusProvider
 	 */
 	public function testGivenErroneousSaveStatus_attemptSaveDiesWithError( array $statusValue, string $expectedErrorCode ) {
-		$status = Status::newFatal( 'sad' );
+		$status = EditEntityStatus::newFatal( 'sad' );
 
 		// intentionally not using a vanilla array as the Status value, because this was the source of a regression -> T260869
 		$status->value = new DeprecatablePropertyArray( $statusValue, [], __METHOD__ . ' status' );

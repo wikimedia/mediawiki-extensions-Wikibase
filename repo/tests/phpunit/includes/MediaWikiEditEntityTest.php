@@ -21,7 +21,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
@@ -320,10 +319,8 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		if ( $expectedData !== null ) {
 			$this->assertTrue( $status->isOK(), '$status->isOK()' );
 
-			$result = $status->getValue();
-			$this->assertArrayHasKey( 'revision', $result, '$status->getValue["revision"]' );
-
-			$newEntity = $result['revision']->getEntity();
+			$revision = $status->getRevision();
+			$newEntity = $revision->getEntity();
 			$data = $this->fingerprintToPartialArray( $newEntity->getFingerprint() );
 
 			foreach ( $expectedData as $key => $expectedValue ) {
@@ -845,8 +842,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertStatusGood( $status );
-		/** @var EntityRevision $entityRevision */
-		$entityRevision = $status->getValue()['revision'];
+		$entityRevision = $status->getRevision();
 		$tags = $repo->getLogEntry( $entityRevision->getRevisionId() )['tags'];
 		$this->assertSame( [ 'mw-replace' ], $tags );
 	}
@@ -872,8 +868,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$user->getEditToken()
 		);
 		$this->assertStatusGood( $status );
-		/** @var EntityRevision $entityRevision */
-		$entityRevision = $status->getValue()['revision'];
+		$entityRevision = $status->getRevision();
 		$editWasMadeByUser = $repo->userWasLastToEdit(
 			$user,
 			$entityRevision->getEntity()->getId(),
@@ -908,16 +903,15 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$anonUser->getEditToken()
 		);
 		$this->assertStatusGood( $status );
-		/** @var EntityRevision $entityRevision */
-		$entityRevision = $status->getValue()['revision'];
+		$entityRevision = $status->getRevision();
 		$entityId = $entityRevision->getEntity()->getId();
 		$revisionId = $entityRevision->getRevisionId();
 		$editWasMadeByAnonUser = $repo->userWasLastToEdit( $anonUser, $entityId, $revisionId );
 		$editWasMadeByTempUser = $repo->userWasLastToEdit( $tempUser, $entityId, $revisionId );
 		$this->assertTrue( $editWasMadeByTempUser, 'edit should have been made by $tempUser' );
 		$this->assertFalse( $editWasMadeByAnonUser, 'edit should not have been made by $anonUser' );
-		$this->assertSame( $tempUser, $status->getValue()['savedTempUser'] );
-		$context = $status->getValue()['context'];
+		$this->assertSame( $tempUser, $status->getSavedTempUser() );
+		$context = $status->getContext();
 		$this->assertNotSame( $originalContext, $context );
 		$this->assertSame( $anonUser, $originalContext->getUser() );
 		$this->assertSame( $tempUser, $context->getUser() );

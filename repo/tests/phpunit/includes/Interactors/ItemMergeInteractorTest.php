@@ -372,19 +372,15 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$tag = __METHOD__ . '-tag';
 
-		[
-			'fromEntityRevision' => $fromEntityRevision,
-			'toEntityRevision' => $toEntityRevision,
-			'savedTempUser' => $savedTempUser,
-		] = $interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary', false, [ $tag ] );
+		$status = $interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, 'CustomSummary', false, [ $tag ] );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
 
 		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId );
 
-		$fromRevId = $fromEntityRevision->getRevisionId();
-		$toRevId = $toEntityRevision->getRevisionId();
+		$fromRevId = $status->getFromEntityRevision()->getRevisionId();
+		$toRevId = $status->getToEntityRevision()->getRevisionId();
 		$this->testHelper->assertRevisionSummary(
 			'@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@',
 			$toRevId,
@@ -401,7 +397,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		$this->assertContains( $tag, $this->mockRepository->getLogEntry( $toRevId )['tags'],
 			'Edit on item merged into is tagged' );
 
-		$this->assertNull( $savedTempUser );
+		$this->assertNull( $status->getSavedTempUser() );
 	}
 
 	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ): void {
@@ -541,12 +537,11 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			'Q2' => [ 'labels' => [ 'de' => [ 'language' => 'de', 'value' => 'de label' ] ] ],
 		] );
 
-		$result = $this->newInteractor()
-			->mergeItems( $fromId, $toId, $originalContext );
+		$status = $this->newInteractor()->mergeItems( $fromId, $toId, $originalContext );
 
 		// assert that proper new context is returned and old context is not modified
-		$this->assertSame( $tempUser, $result['savedTempUser'] );
-		$newContext = $result['context'];
+		$this->assertSame( $tempUser, $status->getSavedTempUser() );
+		$newContext = $status->getContext();
 		$this->assertNotSame( $originalContext, $newContext );
 		$this->assertSame( $tempUser, $newContext->getUser() );
 		$this->assertSame( $anonUser, $originalContext->getUser() );

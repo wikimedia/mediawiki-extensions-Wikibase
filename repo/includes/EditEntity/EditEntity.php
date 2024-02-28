@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use MediaWiki\Status\Status;
 use ReadOnlyError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -89,17 +88,7 @@ interface EditEntity {
 	/**
 	 * Get the status object. Only defined after attemptSave() was called.
 	 *
-	 * After a successful save, the Status object's value field will contain an array,
-	 * just like the status returned by WikiPage::doUserEditContent(). Well known fields
-	 * in the status value are:
-	 *
-	 *  - 'revision' (EntityRevision): the resulting revision
-	 *  - 'errorFlags' (int): bit field indicating errors, see the XXX_ERROR constants
-	 *  - 'savedTempUser' (?User): null, or a temporary user that was automatically created
-	 *  - 'context' (IContextSource): context that should be used for any future edits
-	 *    (if a temporary user was created, it will be set in this context, but not in the original one)
-	 *
-	 * @return Status
+	 * @return EditEntityStatus
 	 */
 	public function getStatus();
 
@@ -165,7 +154,7 @@ interface EditEntity {
 	 * Callers are responsible for checking that the user is permitted to add these tags
 	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
-	 * @return Status See {@link self::getStatus()} for the contents.
+	 * @return EditEntityStatus
 	 *
 	 * @throws ReadOnlyError
 	 *

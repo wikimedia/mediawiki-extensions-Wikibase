@@ -34,6 +34,7 @@ use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
+use Wikibase\Repo\Interactors\EntityRedirectCreationStatus;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -114,11 +115,11 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				->method( 'createRedirect' )
 				->with( $redirect->getEntityId(), $redirect->getTargetId() )
 				->willReturnCallback( function() use ( $redirect ) {
-					return [
+					return EntityRedirectCreationStatus::newGood( [
 						'entityRedirect' => $redirect,
 						'context' => new RequestContext(),
 						'savedTempUser' => null,
-					];
+					] );
 				} );
 		} else {
 			$mock->expects( $this->never() )

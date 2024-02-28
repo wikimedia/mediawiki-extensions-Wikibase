@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Api;
 
 use ApiUsageException;
-use ArrayAccess;
 use IContextSource;
 use InvalidArgumentException;
 use LogicException;
@@ -24,6 +23,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
@@ -429,14 +429,13 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @see handleStatus().
 	 *
-	 * @param Status $status The status to report
+	 * @param EditEntityStatus $status The status to report
 	 */
-	private function handleSaveStatus( Status $status ): void {
-		$value = $status->getValue();
+	private function handleSaveStatus( EditEntityStatus $status ): void {
 		$errorCode = null;
 
-		if ( $this->isArrayLike( $value ) && isset( $value['errorFlags'] ) ) {
-			$editError = $value['errorFlags'];
+		if ( !$status->isOK() ) {
+			$editError = $status->getErrorFlags() ?? 0;
 
 			if ( $editError & EditEntity::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';
@@ -449,13 +448,6 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		//NOTE: will just add warnings or do nothing if there's no error
 		$this->handleStatus( $status, $errorCode );
-	}
-
-	/**
-	 * Checks whether accessing array keys is safe, with e.g. @see DeprecatablePropertyArray
-	 */
-	private function isArrayLike( $value ): bool {
-		return is_array( $value ) || $value instanceof ArrayAccess;
 	}
 
 	/**
