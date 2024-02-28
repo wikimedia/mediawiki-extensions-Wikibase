@@ -73,7 +73,7 @@ class PatchedSitelinksValidator {
 					case 'badges':
 						throw new UseCaseError(
 							UseCaseError::PATCHED_SITELINK_BADGES_FORMAT,
-							"Badges for site '$siteId' is not a list in patched sitelinks",
+							"Badges value for site '$siteId' is not a list in patched sitelinks",
 							[
 								UseCaseError::CONTEXT_SITE_ID => $siteId,
 								UseCaseError::CONTEXT_BADGES => $sitelink[ 'badges' ],
