@@ -41,18 +41,18 @@ interface EditEntity {
 	 * Indicates that the content failed some precondition to saving,
 	 * such as a global uniqueness constraint.
 	 */
-	public const PRECONDITION_FAILED = 16;
+	public const PRECONDITION_FAILED_ERROR = 16;
 
 	/**
 	 * Indicates that the content triggered an edit filter that uses
 	 * the EditFilterMergedContent hook to supervise edits.
 	 */
-	public const FILTERED = 32;
+	public const FILTERED_ERROR = 32;
 
 	/**
 	 * Indicates that the edit exceeded a rate limit.
 	 */
-	public const RATE_LIMIT = 64;
+	public const RATE_LIMIT_ERROR = 64;
 
 	/**
 	 * bit mask for asking for any error.

@@ -590,7 +590,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$edit->attemptSave( $item, "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
-			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
+			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT_ERROR ) );
 		}
 
 		// make sure nobody else has to work with our cache
