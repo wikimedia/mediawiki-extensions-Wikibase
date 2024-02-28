@@ -11,5 +11,7 @@
 	"wikibase-linkitem-linkpage": "linka ndepheji",
 	"wikibase-linkitem-selectlink": "Halula sayithi kakale ndepheji lawunohaka kuti lilinkiwe ndepheji ileli",
 	"wikibase-linkitem-input-site": "Lulimi:",
-	"wikibase-linkitem-input-page": "Pheji:"
+	"wikibase-linkitem-input-page": "Pheji:",
+	"wikibase-rc-hide-wikidata-hide": "Sumbika",
+	"wikibase-rc-hide-wikidata-show": "Lakidza"
 }
