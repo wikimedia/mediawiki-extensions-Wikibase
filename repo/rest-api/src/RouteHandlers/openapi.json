@@ -23,17 +23,17 @@
         "summary": "Retrieve the OpenAPI document",
         "responses": {
           "200": {
-            "description": "OpenAPI doc",
+            "description": "OpenAPI document",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 },
                 "example": {
-                  "openapi_": "3.1.0",
+                  "openapi": "...",
                   "info": {
                     "title": "Wikibase REST API",
-                    "version": "0.1",
+                    "version": "...",
                     "description": "OpenAPI definition of Wikibase REST API"
                   },
                   "paths": "..."
