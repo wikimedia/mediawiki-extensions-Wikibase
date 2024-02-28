@@ -428,7 +428,7 @@ class MediaWikiEditEntity implements EditEntity {
 		if ( $this->user->pingLimiter( 'edit' )
 			|| ( $this->isNew() && $this->user->pingLimiter( 'create' ) )
 		) {
-			$this->errorType |= EditEntity::RATE_LIMIT;
+			$this->errorType |= EditEntity::RATE_LIMIT_ERROR;
 			$this->status->fatal( 'actionthrottledtext' );
 		}
 	}
@@ -502,7 +502,7 @@ class MediaWikiEditEntity implements EditEntity {
 	/** Modifies $this->status and $this->errorType. Does not throw. */
 	private function checkLocal( EntityDocument $entity ): void {
 		if ( !$this->entityTypeIsLocal( $entity ) ) {
-			$this->errorType |= EditEntity::PRECONDITION_FAILED;
+			$this->errorType |= EditEntity::PRECONDITION_FAILED_ERROR;
 			$this->status->fatal(
 				'wikibase-error-entity-not-local',
 				Message::plaintextParam( $entity->getType() )
@@ -559,7 +559,7 @@ class MediaWikiEditEntity implements EditEntity {
 		try {
 			$this->getLatestRevision();
 		} catch ( RevisionedUnresolvedRedirectException $exception ) {
-			$this->errorType |= EditEntity::PRECONDITION_FAILED;
+			$this->errorType |= EditEntity::PRECONDITION_FAILED_ERROR;
 			$this->status->fatal(
 				'wikibase-save-unresolved-redirect',
 				$exception->getEntityId()->getSerialization(),
@@ -588,7 +588,7 @@ class MediaWikiEditEntity implements EditEntity {
 		}
 
 		if ( !$this->status->isOK() ) {
-			$this->errorType |= EditEntity::PRECONDITION_FAILED;
+			$this->errorType |= EditEntity::PRECONDITION_FAILED_ERROR;
 			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
@@ -655,7 +655,7 @@ class MediaWikiEditEntity implements EditEntity {
 			return;
 		}
 		if ( !$hookStatus->isOK() ) {
-			$this->errorType |= EditEntity::FILTERED;
+			$this->errorType |= EditEntity::FILTERED_ERROR;
 		}
 		$this->status->merge( $hookStatus );
 	}
