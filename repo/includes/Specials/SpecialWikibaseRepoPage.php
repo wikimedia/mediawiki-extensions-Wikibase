@@ -211,7 +211,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$this->getHookRunner()->onTempUserCreatedRedirect(
 				$this->getRequest()->getSession(),
 				$savedTempUser,
-				$title->getFullText(),
+				$title->getPrefixedDBkey(),
 				'',
 				'',
 				$redirectUrl
