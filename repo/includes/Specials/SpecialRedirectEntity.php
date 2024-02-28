@@ -130,7 +130,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			$this->getHookRunner()->onTempUserCreatedRedirect(
 				$this->getRequest()->getSession(),
 				$savedTempUser,
-				$this->getPageTitle()->getFullText(),
+				$this->getPageTitle()->getPrefixedDBkey(),
 				"fromid={$fromId->getSerialization()}&toid={$toId->getSerialization()}&success=1",
 				'',
 				$redirectUrl
