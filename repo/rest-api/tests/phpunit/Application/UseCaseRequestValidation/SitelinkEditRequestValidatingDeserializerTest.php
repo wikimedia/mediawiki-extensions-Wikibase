@@ -97,11 +97,13 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'invalid' ] ),
 			UseCaseError::INVALID_INPUT_SITELINK_BADGE,
 			'Badge input is not an item ID: invalid',
+			[ UseCaseError::CONTEXT_BADGE => 'invalid' ],
 		];
 		yield 'badge is not allowed' => [
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
 			UseCaseError::ITEM_NOT_A_BADGE,
 			'Item ID provided as badge is not allowed as a badge: Q654',
+			[ UseCaseError::CONTEXT_BADGE => 'Q654' ],
 		];
 		yield 'title not found' => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND ),

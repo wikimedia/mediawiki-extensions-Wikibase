@@ -201,9 +201,9 @@ class UseCaseError extends UseCaseException {
 		self::SITELINK_DATA_MISSING_TITLE => [],
 		self::TITLE_FIELD_EMPTY => [],
 		self::INVALID_TITLE_FIELD => [],
-		self::INVALID_INPUT_SITELINK_BADGE => [],
+		self::INVALID_INPUT_SITELINK_BADGE => [ self::CONTEXT_BADGE ],
 		self::INVALID_SITELINK_BADGES_FORMAT => [],
-		self::ITEM_NOT_A_BADGE => [],
+		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::UNEXPECTED_ERROR => [],
 	];

@@ -81,13 +81,19 @@
 	"ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
 		"value": {
 			"code": "item-not-a-badge",
-			"message": "Item ID provided as badge is not allowed as a badge: {item_id}"
+			"message": "Item ID provided as badge is not allowed as a badge: {item_id}",
+			"context": {
+				"badge": "{item_id}"
+			}
 		}
 	},
-	"ValueProvidedAsABadgeIsNotAnItemIDExample": {
+	"ValueProvidedAsABadgeIsNotAnItemIdExample": {
 		"value": {
 			"code": "invalid-input-sitelink-badge",
-			"message": "Badge input is not an item ID: {value}"
+			"message": "Badge input is not an item ID: {item_id}",
+			"context": {
+				"badge": "{item_id}"
+			}
 		}
 	},
 	"StatementDataMissingFieldExample": {
