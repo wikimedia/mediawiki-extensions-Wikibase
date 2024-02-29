@@ -195,20 +195,25 @@ module.exports = ( function ( wb ) {
 		if ( this._value ) {
 			promise = this._model.remove( this._value );
 		} else {
-			var emptyTempUserWatcher = new ENTITY_CHANGERS.TempUserWatcher();
-			promise = $.Deferred().resolve( emptyTempUserWatcher ).promise();
+			var emptyValueChangeResult = new ENTITY_CHANGERS.ValueChangeResult(
+				null, new ENTITY_CHANGERS.TempUserWatcher()
+			);
+			promise = $.Deferred().resolve( emptyValueChangeResult ).promise();
 		}
-		return promise.done( function ( tempUserWatcher ) {
+		return promise.done( function ( valueChangeResult ) {
 			// Handle the case where the model is not yet migrated to return a tempUserWatcher
 			// This is currently the case for Senses / Forms - see T358323
-			if ( !tempUserWatcher || !tempUserWatcher.getRedirectUrl ) {
-				tempUserWatcher = new ENTITY_CHANGERS.TempUserWatcher();
+			if ( !valueChangeResult || !valueChangeResult.getTempUserWatcher ) {
+				valueChangeResult = new ENTITY_CHANGERS.ValueChangeResult(
+					null,
+					new ENTITY_CHANGERS.TempUserWatcher()
+				);
 			}
 			self._value = null;
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( true );
-			if ( tempUserWatcher.getRedirectUrl() ) {
-				window.location.href = tempUserWatcher.getRedirectUrl();
+			if ( valueChangeResult.getTempUserWatcher().getRedirectUrl() ) {
+				window.location.href = valueChangeResult.getTempUserWatcher().getRedirectUrl();
 			}
 		} ).fail( function ( error ) {
 			self._view.enable();

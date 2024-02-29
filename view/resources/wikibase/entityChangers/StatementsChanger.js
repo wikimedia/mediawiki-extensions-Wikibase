@@ -70,7 +70,8 @@
 		 * @param {datamodel.Statement} statement
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {datamodel.TempUserWatcher} Containing details of a temp user, if one is created
+		 *         - {datamodel.ValueChangeResult} A ValueChangeResult with a null value (since this is a remove) and
+		 *           details of a temp user, if one is created. Consistent with the `save` resolve semantics
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
@@ -86,8 +87,9 @@
 				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
 				const tempUserWatcher = new MODULE.TempUserWatcher();
+				const valueChangeResult = new MODULE.ValueChangeResult( null, tempUserWatcher );
 				tempUserWatcher.processApiResult( response );
-				deferred.resolve( tempUserWatcher );
+				deferred.resolve( valueChangeResult );
 
 				self._fireHook(
 					'wikibase.statement.removed',
