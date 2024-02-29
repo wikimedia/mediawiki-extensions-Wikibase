@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use MediaWiki\Parser\ParserOutput;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Tests\Mocks\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -30,8 +31,9 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddGetUsage() {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$acc = new ParserOutputUsageAccumulator(
-			$parserOutput,
+			$parserOutputProvider,
 			$this->newEntityUsageFactory(),
 			new UsageDeduplicator( [] )
 		);
@@ -40,6 +42,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$tester->testAddGetUsage();
 
 		$this->assertNotNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
+		$parserOutputProvider->close();
 	}
 
 	public function testDeduplicatorIsCalledOnce() {
@@ -50,14 +53,16 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( [ '<DEDUPLICATED>' ] );
 
 		$id = new ItemId( 'Q1' );
+		$parserOutputProvider = new ScopedParserOutputProvider( new ParserOutput() );
 		$acc = new ParserOutputUsageAccumulator(
-			new ParserOutput(),
+			$parserOutputProvider,
 			$this->newEntityUsageFactory(),
 			$deduplicator
 		);
 		$acc->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE ) );
 		$acc->addUsage( new EntityUsage( $id, EntityUsage::DESCRIPTION_USAGE ) );
 		$this->assertSame( [ '<DEDUPLICATED>' ], $acc->getUsages() );
+		$parserOutputProvider->close();
 	}
 
 }

@@ -4,20 +4,18 @@ declare ( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\Usage;
 
-use ParserOutput;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
-use Wikibase\Client\Usage\ParserUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * @license GPL-2.0-or-later
  */
-class DummyUsageAccumulator extends ParserUsageAccumulator {
+class DummyUsageAccumulator extends UsageAccumulator {
 
 	private HashUsageAccumulator $hashUsageAccumulator;
 
-	public function __construct( ParserOutput $parserOutput ) {
-		parent::__construct( $parserOutput );
+	public function __construct() {
 		$this->hashUsageAccumulator = new HashUsageAccumulator();
 	}
 

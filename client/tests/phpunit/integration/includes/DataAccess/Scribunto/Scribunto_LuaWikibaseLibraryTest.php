@@ -165,6 +165,33 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
+	private static function getParserOutputFromRedirectUsageAccumulator( $redirectUsageAccumulator ) {
+		$innerAccumulator = TestingAccessWrapper::newFromObject( $redirectUsageAccumulator )->innerUsageAccumulator;
+		return TestingAccessWrapper::newFromObject( $innerAccumulator )->getParserOutput();
+	}
+
+	public function testParserOutputChangeResetsUsageAccumulator() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$libraryWithMemberAccess = TestingAccessWrapper::newFromObject( $luaWikibaseLibrary );
+		$parserOutput = $libraryWithMemberAccess->getParser()->getOutput();
+		$usageAccumulator = $libraryWithMemberAccess->getUsageAccumulator();
+		$this->assertSame(
+			$parserOutput,
+			self::getParserOutputFromRedirectUsageAccumulator( $usageAccumulator ),
+			"Current engine parser output should be used by usage accumulator" );
+		$libraryWithMemberAccess->getParser()->resetOutput();
+		$newUsageAccumulator = $luaWikibaseLibrary->getUsageAccumulator();
+		$this->assertSame( $usageAccumulator, $newUsageAccumulator,
+			"Usage accumulator should not be reconstructed after parser output reset" );
+		$newParserOutput = $libraryWithMemberAccess->getParser()->getOutput();
+		$this->assertNotSame( $newParserOutput, $parserOutput,
+			"Engine should have a new parser output after a reset" );
+		$this->assertSame(
+			$newParserOutput,
+			self::getParserOutputFromRedirectUsageAccumulator( $newUsageAccumulator ),
+			"Usage accumulator should be using the new parser output" );
+	}
+
 	public static function entityExistsProvider() {
 		return [
 			[ true, 'Q885588' ],

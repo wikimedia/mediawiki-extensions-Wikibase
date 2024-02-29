@@ -12,6 +12,8 @@ use TestLogger;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
@@ -140,23 +142,25 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testUpdateItemIdProperty(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$titleText = 'Foo sr';
 		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance();
 
-		$instance->updateItemIdProperty( $title, $parserOutput );
+		$instance->updateItemIdProperty( $title, $parserOutputProvider );
 		$property = $parserOutput->getPageProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
 		$this->assertEquals( $itemId->getSerialization(), $property );
 
-		$this->assertUsageTracking( $itemId, EntityUsage::SITELINK_USAGE, $parserOutput );
+		$this->assertUsageTracking( $itemId, EntityUsage::SITELINK_USAGE, $parserOutputProvider );
+		$parserOutputProvider->close();
 	}
 
-	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ): void {
-		$usageAcc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parserOutput );
+	private function assertUsageTracking( ItemId $id, $aspect, ParserOutputProvider $parserOutputProvider ): void {
+		$usageAcc = $this->newUsageAccumulatorFactory()->newFromParserOutputProvider( $parserOutputProvider );
 		$usage = $usageAcc->getUsages();
 		$expected = new EntityUsage( $id, $aspect );
 
@@ -165,16 +169,18 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testUpdateItemIdPropertyForUnconnectedPage(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$titleText = 'Foo xx';
 		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance();
 
-		$instance->updateItemIdProperty( $title, $parserOutput );
-		$property = $parserOutput->getPageProperty( 'wikibase_item' );
+		$instance->updateItemIdProperty( $title, $parserOutputProvider );
+		$property = $parserOutputProvider->getParserOutput()->getPageProperty( 'wikibase_item' );
 
 		$this->assertNull( $property );
+		$parserOutputProvider->close();
 	}
 
 	/**
@@ -182,14 +188,17 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testUpdateOtherProjectsLinksData( array $expected, array $otherProjects, string $titleText ): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
+
 		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance( $otherProjects );
 
-		$instance->updateOtherProjectsLinksData( $title, $parserOutput );
-		$extensionData = $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' );
+		$instance->updateOtherProjectsLinksData( $title, $parserOutputProvider );
+		$extensionData = $parserOutputProvider->getParserOutput()->getExtensionData( 'wikibase-otherprojects-sidebar' );
 
 		$this->assertEquals( $expected, $extensionData );
+		$parserOutputProvider->close();
 	}
 
 	public static function updateOtherProjectsLinksDataProvider(): array {
@@ -219,35 +228,40 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testUpdateBadgesProperty(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$title = $this->getTitle( 'Talk:Foo sr' );
 
 		$instance = $this->newInstance();
 
-		$instance->updateBadgesProperty( $title, $parserOutput );
+		$instance->updateBadgesProperty( $title, $parserOutputProvider );
 		$this->assertTrue(
 			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
 			'property "wikibase-badge-Q17" should be set'
 		);
+		$parserOutputProvider->close();
 	}
 
 	public function testUpdateBadgesProperty_removesPreviousData(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$parserOutput->setPageProperty( 'wikibase-badge-Q17', true );
 
 		$title = $this->getTitle( 'Foo sr' );
 
 		$instance = $this->newInstance();
 
-		$instance->updateBadgesProperty( $title, $parserOutput );
+		$instance->updateBadgesProperty( $title, $parserOutputProvider );
 		$this->assertNull(
 			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
 			'property "wikibase-badge-Q17" should not be set'
 		);
+		$parserOutputProvider->close();
 	}
 
 	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupEmptySiteLinkList(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$title = $this->getTitle( 'Foo sr' );
 
@@ -273,15 +287,17 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$logger
 		);
 
-		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutputProvider );
 		$logs = $logger->getBuffer();
 
 		$this->assertCount( 1, $logs );
 		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
+		$parserOutputProvider->close();
 	}
 
 	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity(): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$title = $this->getTitle( 'Foo sr' );
 
@@ -301,11 +317,12 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$logger
 		);
 
-		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutputProvider );
 		$logs = $logger->getBuffer();
 
 		$this->assertCount( 1, $logs );
 		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
+		$parserOutputProvider->close();
 	}
 
 	public static function updateTrackingCategoriesDataProvider(): array {
@@ -324,11 +341,13 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( $expected ) )
 			->method( 'addCategory' );
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		$title = $this->getTitle( $titleText, $isRedirect );
 
 		$instance = $this->newInstance();
-		$instance->updateTrackingCategories( $title, $parserOutput );
+		$instance->updateTrackingCategories( $title, $parserOutputProvider );
+		$parserOutputProvider->close();
 	}
 
 	public static function updateUnconnectedPagePropertyProvider() {
@@ -367,6 +386,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		bool $isRedirect = false
 	): void {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		foreach ( $priorPageProps as $key => $value ) {
 			$parserOutput->setPageProperty( $key, $value );
 		}
@@ -380,9 +400,10 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance = $this->newInstance( [] );
 
-		$instance->updateUnconnectedPageProperty( $content, $title, $parserOutput );
+		$instance->updateUnconnectedPageProperty( $content, $title, $parserOutputProvider );
 
 		$this->assertSame( $expectedPageProps, $parserOutput->getPageProperties() );
+		$parserOutputProvider->close();
 	}
 
 }

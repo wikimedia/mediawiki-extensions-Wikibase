@@ -143,7 +143,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testTitleUsageTracking( string $wikitextType, string $expectedWikitext, bool $titleUsageExpected ): void {
 		$parser = $this->getParser();
-		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parser->getOutput() );
+		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParser( $parser );
 
 		$this->getStatementGroupRendererFactory()
 			->newRendererFromParser( $parser, $wikitextType )
@@ -169,7 +169,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
 		$renderer = $rendererFactory->newRendererFromParser( $parser, DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT );
 
-		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parser->getOutput() );
+		$usageAccumulator = $this->newUsageAccumulatorFactory()->newFromParser( $parser );
 
 		$renderer->render( new ItemId( 'Q1' ), 'P1' );
 

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 /**
  * @license GPL-2.0-or-later
  */
-class RedirectTrackingUsageAccumulator extends ParserUsageAccumulator {
+class RedirectTrackingUsageAccumulator extends UsageAccumulator {
 
 	/**
 	 * @var UsageAccumulator
@@ -25,10 +25,9 @@ class RedirectTrackingUsageAccumulator extends ParserUsageAccumulator {
 	/**
 	 */
 	public function __construct(
-		ParserUsageAccumulator $innerUsageAccumulator,
+		UsageAccumulator $innerUsageAccumulator,
 		EntityRedirectTargetLookup $entityRedirectTargetLookup
 	) {
-		parent::__construct( $innerUsageAccumulator->getParserOutput() );
 		$this->innerUsageAccumulator = $innerUsageAccumulator;
 		$this->entityRedirectTargetLookup = $entityRedirectTargetLookup;
 	}
@@ -41,7 +40,6 @@ class RedirectTrackingUsageAccumulator extends ParserUsageAccumulator {
 	 * @return void
 	 */
 	public function addUsage( EntityUsage $usage ): void {
-
 		$redirectTarget = $this->entityRedirectTargetLookup->getRedirectForEntityId( $usage->getEntityId() );
 		if ( $redirectTarget !== null ) {
 			$this->addRedirectTargetUsage( $redirectTarget, $usage->getAspect(), $usage->getModifier() );

@@ -99,7 +99,7 @@ class StatementGroupRendererFactory {
 		Parser $parser,
 		string $type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
 	): StatementGroupRenderer {
-		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parser->getOutput() );
+		$usageAccumulator = $this->usageAccumulatorFactory->newFromParser( $parser );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
 			// Use the user's language.

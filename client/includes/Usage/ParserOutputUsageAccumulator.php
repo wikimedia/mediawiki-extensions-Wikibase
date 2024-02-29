@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Usage;
 
 use MediaWiki\Parser\ParserOutput;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
 
 /**
  * This implementation of the UsageAccumulator interface acts as a wrapper around
@@ -14,7 +15,7 @@ use MediaWiki\Parser\ParserOutput;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
+class ParserOutputUsageAccumulator extends UsageAccumulator {
 
 	/**
 	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
@@ -24,13 +25,14 @@ class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 
 	private EntityUsageFactory $entityUsageFactory;
 	private UsageDeduplicator $usageDeduplicator;
+	private ParserOutputProvider $parserOutputProvider;
 
 	public function __construct(
-		ParserOutput $parserOutput,
+		ParserOutputProvider $parserOutputProvider,
 		EntityUsageFactory $entityUsageFactory,
 		UsageDeduplicator $deduplicator
 	) {
-		parent::__construct( $parserOutput );
+		$this->parserOutputProvider = $parserOutputProvider;
 		$this->usageDeduplicator = $deduplicator;
 		$this->entityUsageFactory = $entityUsageFactory;
 	}
@@ -61,5 +63,9 @@ class ParserOutputUsageAccumulator extends ParserUsageAccumulator {
 			return $this->usageDeduplicator->deduplicate( $usages );
 		}
 		return [];
+	}
+
+	private function getParserOutput(): ParserOutput {
+		return $this->parserOutputProvider->getParserOutput();
 	}
 }
