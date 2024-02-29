@@ -69,6 +69,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
 	public const PATCHED_SITELINK_ITEM_NOT_A_BADGE = 'patched-sitelink-item-not-a-badge';
 	public const PATCHED_SITELINK_CONFLICT = 'patched-sitelink-conflict';
+	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
@@ -181,6 +182,7 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_SITELINK_ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCHED_SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID, self::CONTEXT_SITE_ID ],
+		self::PATCHED_SITELINK_URL_NOT_MODIFIABLE => [ self::CONTEXT_SITE_ID ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_OPERATION, self::CONTEXT_ACTUAL_VALUE ],
 		self::PERMISSION_DENIED => [],

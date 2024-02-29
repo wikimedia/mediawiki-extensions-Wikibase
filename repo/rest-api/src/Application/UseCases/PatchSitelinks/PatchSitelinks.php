@@ -61,12 +61,17 @@ class PatchSitelinks {
 		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
-		$patchedSitelinks = $this->patcher->execute(
-			iterator_to_array( $this->sitelinksSerializer->serialize( $this->sitelinksRetriever->getSitelinks( $itemId ) ) ),
-			$deserializedRequest->getPatch()
-		);
+		$originalSitelinksSerialization = iterator_to_array( $this->sitelinksSerializer->serialize(
+			$this->sitelinksRetriever->getSitelinks( $itemId )
+		) );
 
-		$modifiedSitelinks = $this->patchedSitelinksValidator->validateAndDeserialize( "$itemId", $patchedSitelinks );
+		$patchedSitelinks = $this->patcher->execute( $originalSitelinksSerialization, $deserializedRequest->getPatch() );
+
+		$modifiedSitelinks = $this->patchedSitelinksValidator->validateAndDeserialize(
+			"$itemId",
+			$originalSitelinksSerialization,
+			$patchedSitelinks
+		);
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->setSiteLinkList( $modifiedSitelinks );

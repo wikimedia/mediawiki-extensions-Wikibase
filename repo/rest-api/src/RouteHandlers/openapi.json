@@ -7221,7 +7221,10 @@
       "SitelinkUrlNotModifiableExample": {
         "value": {
           "code": "url-not-modifiable",
-          "message": "URL of sitelink cannot be modified"
+          "message": "URL of sitelink cannot be modified",
+          "context": {
+            "site-id": "{site_id}"
+          }
         }
       },
       "PatchedLabelsInvalidLanguageCodeExample": {
