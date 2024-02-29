@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use InvalidArgumentException;
@@ -31,52 +33,24 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 
 	public const INITIALLY_COLLAPSED_SETTING_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
 
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
-
-	/**
-	 * @var UserIdentity
-	 */
-	private $user;
-
-	/**
-	 * @var EntityDocument
-	 */
-	private $entity;
-
-	/**
-	 * @var string[]
-	 */
-	private $termsLanguages;
-
-	/**
-	 * @var LanguageDirectionalityLookup
-	 */
-	private $languageDirectionalityLookup;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
-
-	/**
-	 * @var UserOptionsLookup
-	 */
-	private $userOptionsLookup;
-
-	/**
-	 * @var string[]
-	 */
-	private $termsListItems;
+	private TemplateFactory $templateFactory;
+	private UserIdentity $user;
+	private EntityDocument $entity;
+	private LanguageDirectionalityLookup $languageDirectionalityLookup;
+	private LanguageNameLookup $languageNameLookup;
+	private LocalizedTextProvider $textProvider;
+	private UserOptionsLookup $userOptionsLookup;
 	private LanguageFallbackChainFactory $languageFallbackChainFactory;
 	private bool $mulEnabled;
+
+	/**
+	 * @var string[]
+	 */
+	private array $termsLanguages;
+	/**
+	 * @var string[]
+	 */
+	private array $termsListItems;
 
 	/**
 	 * @param TemplateFactory $templateFactory
@@ -137,12 +111,8 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 *
 	 * @note This encodes knowledge about which placeholders are used by EntityView with what
 	 *       intended meaning.
-	 *
-	 * @param string $name
-	 *
-	 * @return string
 	 */
-	private function expandPlaceholder( $name ) {
+	private function expandPlaceholder( string $name ): string {
 		switch ( $name ) {
 			case 'termbox':
 				return $this->renderTermBox();
@@ -157,7 +127,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	/**
 	 * @return bool If the terms list should be initially collapsed for the current user.
 	 */
-	private function isInitiallyCollapsed() {
+	private function isInitiallyCollapsed(): bool {
 		if ( !$this->user->isRegistered() ) {
 			return false;
 		} else {
@@ -175,7 +145,7 @@ class EntityViewPlaceholderExpander implements PlaceholderExpander {
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	private function renderTermBox() {
+	private function renderTermBox(): string {
 		$termsListView = new TermsListView(
 			$this->templateFactory,
 			$this->languageNameLookup,

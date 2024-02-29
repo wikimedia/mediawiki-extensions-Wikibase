@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use MediaWiki\MediaWikiServices;
@@ -28,13 +30,7 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @param UserIdentity $user
-	 * @param Item $item
-	 *
-	 * @return EntityViewPlaceholderExpander
-	 */
-	private function newExpander( UserIdentity $user, Item $item ) {
+	private function newExpander( UserIdentity $user, Item $item ): EntityViewPlaceholderExpander {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$termsLanguages = [ 'de', 'en', 'ru' ];
@@ -55,7 +51,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function newItem() {
+	private function newItem(): Item {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setLabel( 'en', 'Moskow' );
 		$item->setLabel( 'de', 'Moskau' );
@@ -64,26 +60,21 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	/**
-	 * @param bool $isAnon
-	 *
-	 * @return UserIdentity
-	 */
-	private function newUser( $isAnon = false ) {
+	private function newUser( bool $isAnon = false ): UserIdentity {
 		$user = $this->createMock( UserIdentity::class );
 		$user->method( 'isRegistered' )
 			->willReturn( !$isAnon );
 		return $user;
 	}
 
-	public function testGetHtmlForPlaceholderTermbox_resultIsHtmlString() {
+	public function testGetHtmlForPlaceholderTermbox_resultIsHtmlString(): void {
 		$expander = $this->newExpander( $this->newUser(), $this->newItem() );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 		$this->assertIsString( $html );
 	}
 
-	public function testGetHtmlForPlaceholderTermbox_resultContainsLabelsAndDescriptionsInAllLanguages() {
+	public function testGetHtmlForPlaceholderTermbox_resultContainsLabelsAndDescriptionsInAllLanguages(): void {
 		$expander = $this->newExpander( $this->newUser(), $this->newItem() );
 
 		// According to the mock objects, this should generate a term box for
@@ -100,7 +91,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-ru', $html );
 	}
 
-	public function testGivenNoCookie_placeholderIsInitiallyExpanded() {
+	public function testGivenNoCookie_placeholderIsInitiallyExpanded(): void {
 		$expander = $this->newExpander( $this->newUser( true ), $this->newItem() );
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
