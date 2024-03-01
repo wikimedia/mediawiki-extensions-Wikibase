@@ -4,6 +4,7 @@
 			"Abanima",
 			"Amire80",
 			"BAB ZAA",
+			"Hubaishan",
 			"Maroen1990",
 			"Meno25",
 			"Mervat Salman",
@@ -313,6 +314,6 @@
 	"apihelp-wbformatentities-param-ids": "معرفات الكيانات لتنسيقها.",
 	"apihelp-wbformatentities-example-1": "تنسيق معرف عنصر واحد.",
 	"apihelp-wbformatentities-example-2": "تنسيق معرف عنصر ومعرف خاصية.",
-	"apihelp-wbformatentities-example-3": "تنسيق معرف عنصر ومعرف خاصية ومعرف لكسيم.",
+	"apihelp-wbformatentities-example-3": "تنسيق معرف عنصر ومعرف خاصية ومعرف مفردة.",
 	"apihelp-wbformatentities-example-4": "تنسيق معرفات ثلاثة عناصر بالفرنسية."
 }
