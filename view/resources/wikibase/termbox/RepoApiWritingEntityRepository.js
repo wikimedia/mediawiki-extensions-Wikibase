@@ -32,10 +32,14 @@ class RepoApiWritingEntityRepository {
 			.then( ( editEntityResponse ) => {
 				this._assertContainsValidEntity( editEntityResponse );
 
-				return {
+				const result = {
 					entity: editEntityResponse.entity,
 					revisionId: editEntityResponse.entity.lastrevid
 				};
+				if ( editEntityResponse.tempuserredirect ) {
+					result.redirectUrl = editEntityResponse.tempuserredirect;
+				}
+				return result;
 			} ).catch( ( e ) => {
 				throw new TechnicalProblem( e );
 			} );
