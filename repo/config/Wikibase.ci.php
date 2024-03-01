@@ -67,3 +67,9 @@ $wgWBRepoSettings['redirectBadgeItems'] = static function () use ( $originalRedi
 };
 unset( $originalBadgeItems );
 unset( $originalRedirectBadgeItems );
+
+global $wgAutoCreateTempUser;
+$wgAutoCreateTempUser = array_merge(
+	$wgAutoCreateTempUser,
+	json_decode( getallheaders()[ 'X-Wikibase-Ci-Tempuser-Config' ] ?? '{}', true )
+);
