@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Hook\PageHistoryPager__doBatchLookupsHook;
 use MediaWiki\Pager\HistoryPager;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -42,24 +43,27 @@ class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHoo
 	 * @param PrefetchingTermLookup $prefetchingLookup
 	 * @param LinkTargetEntityIdLookup $linkTargetEntityIdLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
 		bool $federatedPropertiesEnabled,
 		PrefetchingTermLookup $prefetchingLookup,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LoggerInterface $logger
 	) {
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 		$this->linkTargetEntityIdLookup = $linkTargetEntityIdLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		if ( $federatedPropertiesEnabled ) {
-			$this->federatedPropertiesPrefetchHelper = new SummaryParsingPrefetchHelper( $prefetchingLookup );
+			$this->federatedPropertiesPrefetchHelper = new SummaryParsingPrefetchHelper( $prefetchingLookup, $logger );
 		}
 	}
 
 	public static function factory(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
+		LoggerInterface $logger,
 		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings
 	): self {
@@ -67,7 +71,8 @@ class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHoo
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$prefetchingTermLookup,
 			$linkTargetEntityIdLookup,
-			$languageFallbackChainFactory
+			$languageFallbackChainFactory,
+			$logger
 		);
 	}
 

@@ -817,6 +817,7 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings"
 			]
@@ -865,6 +866,7 @@
 				"TitleFactory",
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermBuffer"
@@ -909,6 +911,7 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.PrefetchingTermLookup",
 				"WikibaseRepo.Settings"
 			]

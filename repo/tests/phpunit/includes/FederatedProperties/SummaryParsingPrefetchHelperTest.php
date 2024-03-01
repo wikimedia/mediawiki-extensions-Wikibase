@@ -4,8 +4,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Revision\RevisionRecord;
-use MediaWikiTestCaseTrait;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;
@@ -20,7 +21,6 @@ use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
  * @license GPL-2.0-or-later
  */
 class SummaryParsingPrefetchHelperTest extends TestCase {
-	use MediaWikiTestCaseTrait;
 
 	private $prefetchingLookup;
 
@@ -33,7 +33,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	 * @dataProvider rowDataProvider
 	 */
 	public function testParsesAndPrefetchesComments( array $rows, array $expectedProperties ) {
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
 
 		$expectedPropertyIds = [];
 		foreach ( $expectedProperties as $propertyString ) {
@@ -52,26 +52,26 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	}
 
 	public function testShouldNotFatalOnFailedRequests() {
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$logger = $this->createMock( LoggerInterface::class );
+		$logger->expects( $this->once() )
+			->method( 'warning' )
+			->with( 'Prefetching failed for federated properties: {resultProperties}', self::containsEqual( 'P31' ) );
+
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, $logger );
 		$rows = [ (object)[ 'rev_comment_text' => '[[Property:P31]]' ] ];
 
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->willThrowException( new ApiRequestException( 'oh no!' ) );
 
-		$this->expectPHPError(
-			E_USER_WARNING,
-			static function () use ( $helper, $rows ) {
-				$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
-			}
-		);
+		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
 	}
 
 	/**
 	 * @dataProvider rowDataProvider
 	 */
 	public function testShouldExtractProperties( array $rows, array $expectedProperties ) {
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
 		$actualOutput = $helper->extractSummaryProperties( $rows );
 
 		$this->assertSameSize( $expectedProperties, $actualOutput );
