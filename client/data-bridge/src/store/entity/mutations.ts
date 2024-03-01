@@ -11,6 +11,10 @@ export class EntityMutations extends Mutations<EntityState> {
 		this.state.baseRevision = revision;
 	}
 
+	public updateTempUserRedirectUrl( redirectUrl: URL ): void {
+		this.state.tempUserRedirectUrl = redirectUrl;
+	}
+
 	public reset(): void {
 		// this.state already has all the properties, and Object.assign() invokes setters, so this is reactive
 		Object.assign( this.state, new EntityState() );

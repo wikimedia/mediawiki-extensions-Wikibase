@@ -1,4 +1,5 @@
 import { rootModule } from '@/store';
+import { entityModule } from '@/store/entity';
 import { defineComponent } from 'vue';
 import { Context } from 'vuex-smart-module';
 
@@ -22,6 +23,9 @@ const StateMixin = defineComponent( {
 	computed: {
 		rootModule(): Context<typeof rootModule> {
 			return rootModule.context( this.$store );
+		},
+		entityModule(): Context<typeof entityModule> {
+			return entityModule.context( this.$store );
 		},
 	},
 } );

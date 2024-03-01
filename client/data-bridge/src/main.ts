@@ -34,6 +34,9 @@ export function launch(
 	emitter.on( appEvents.relaunch, () => {
 		store.dispatch( 'relaunchBridge', information );
 	} );
+	emitter.on( appEvents.redirect, ( redirectUrl: URL ) => {
+		window.location.href = redirectUrl.toString();
+	} );
 
 	return emitter;
 }

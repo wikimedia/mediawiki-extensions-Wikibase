@@ -6,6 +6,7 @@ import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import deepEqual from 'deep-equal';
 
@@ -30,7 +31,11 @@ export default class TrimmingWritingRepository implements WritingEntityRepositor
 		this.apiWritingRepository = apiWritingRepository;
 	}
 
-	public async saveEntity( entity: Entity, base?: EntityRevision, assertUser = true ): Promise<EntityRevision> {
+	public async saveEntity(
+		entity: Entity,
+		base?: EntityRevision,
+		assertUser = true,
+	): Promise<EntityRevisionWithRedirect> {
 		if ( base ) {
 			entity = this.trimEntity( entity, base.entity );
 		}

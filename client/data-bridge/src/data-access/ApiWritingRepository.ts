@@ -1,6 +1,7 @@
 import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 import Entity from '@/datamodel/Entity';
 import { WritingApi } from '@/definitions/data-access/Api';
 import ApiErrors from '@/data-access/error/ApiErrors';
@@ -16,6 +17,7 @@ interface ApiResponseEntity {
 interface ResponseSuccess {
 	success: number;
 	entity: ApiResponseEntity;
+	tempuserredirect?: string;
 }
 
 export default class ApiWritingRepository implements WritingEntityRepository {
@@ -27,7 +29,11 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 		this.tags = tags || undefined;
 	}
 
-	public saveEntity( entity: Entity, base?: EntityRevision, assertUser = true ): Promise<EntityRevision> {
+	public saveEntity(
+		entity: Entity,
+		base?: EntityRevision,
+		assertUser = true,
+	): Promise<EntityRevisionWithRedirect> {
 		const params = {
 			action: 'wbeditentity',
 			id: entity.id,
@@ -44,13 +50,18 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 		} else {
 			promise = this.api.postWithEditToken( params );
 		}
-		return promise.then( ( response: unknown ): EntityRevision => {
-			return new EntityRevision(
-				new Entity(
-					( response as ResponseSuccess ).entity.id,
-					( response as ResponseSuccess ).entity.claims,
+		return promise.then( ( response: unknown ): EntityRevisionWithRedirect => {
+			const maybeUrlString = ( response as ResponseSuccess ).tempuserredirect;
+			const maybeUrl = maybeUrlString ? new URL( maybeUrlString ) : undefined;
+			return new EntityRevisionWithRedirect(
+				new EntityRevision(
+					new Entity(
+						( response as ResponseSuccess ).entity.id,
+						( response as ResponseSuccess ).entity.claims,
+					),
+					( response as ResponseSuccess ).entity.lastrevid,
 				),
-				( response as ResponseSuccess ).entity.lastrevid,
+				maybeUrl,
 			);
 		},
 		( error: Error ): never => {

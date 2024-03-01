@@ -102,6 +102,9 @@ export default defineComponent( {
 		showWarningAnonymousEdit(): boolean {
 			return this.rootModule.state.showWarningAnonymousEdit;
 		},
+		tempUserRedirectUrl(): URL|null {
+			return this.entityModule.state.tempUserRedirectUrl;
+		},
 		loginUrl(): string {
 			return this.$clientRouter.getPageUrl(
 				'Special:UserLogin',
@@ -109,6 +112,13 @@ export default defineComponent( {
 					returnto: this.rootModule.state.pageTitle,
 				},
 			);
+		},
+	},
+	watch: {
+		tempUserRedirectUrl( newUrl ) {
+			if ( newUrl !== null ) {
+				this.emitter.emit( Events.redirect, newUrl );
+			}
 		},
 	},
 	methods: {

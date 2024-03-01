@@ -6,12 +6,15 @@ import { EntityActions } from '@/store/entity/actions';
 import { inject } from 'vuex-smart-module';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 import newEntityState from './newEntityState';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 
 describe( 'entity/actions', () => {
 	const revidIncrementingWritingEntityRepository: WritingEntityRepository = {
 		saveEntity: jest.fn( ( entity: Entity, base?: EntityRevision ) => {
 			return Promise.resolve(
-				new EntityRevision( entity, ( base?.revisionId || 0 ) + 1 ),
+				new EntityRevisionWithRedirect(
+					new EntityRevision( entity, ( base?.revisionId || 0 ) + 1 ),
+				),
 			);
 		} ),
 	};
@@ -44,7 +47,7 @@ describe( 'entity/actions', () => {
 				entity: id,
 			} );
 
-			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', entity );
+			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', new EntityRevisionWithRedirect( entity ) );
 		} );
 
 		it( 'propagates error on failed lookup', async () => {
@@ -117,10 +120,11 @@ describe( 'entity/actions', () => {
 				{ entity: oldEntity, revisionId: revision },
 				undefined,
 			);
-			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', {
-				entity: newEntity,
-				revisionId: revision + 1,
-			} );
+			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite',
+				new EntityRevisionWithRedirect( {
+					entity: newEntity,
+					revisionId: revision + 1,
+				} ) );
 		} );
 
 		it( 'propagates error on failed save', async () => {
@@ -181,11 +185,46 @@ describe( 'entity/actions', () => {
 				const statements = {};
 				const entity = newMockableEntityRevision( { id: entityId, revisionId, statements } );
 
-				await expect( actions.entityWrite( entity ) ).resolves.toBe( resolvedValue );
+				await expect( actions.entityWrite( new EntityRevisionWithRedirect( entity ) ) )
+					.resolves.toBe( resolvedValue );
 
 				expect( commit ).toHaveBeenCalledTimes( 2 );
 				expect( commit ).toHaveBeenCalledWith( 'updateEntity', entity.entity );
 				expect( commit ).toHaveBeenCalledWith( 'updateRevision', revisionId );
+				expect( statementsDispatch ).toHaveBeenCalledWith(
+					'initStatements',
+					{ entityId, statements },
+				);
+			},
+		);
+
+		it(
+			'updates redirectUrl if redirect is supplied',
+			async () => {
+				const commit = jest.fn();
+				const resolvedValue = {};
+				const statementsDispatch = jest.fn().mockResolvedValue( resolvedValue );
+				const actions = inject( EntityActions, {
+					commit,
+				} );
+				// @ts-ignore
+				actions.statementsModule = {
+					dispatch: statementsDispatch,
+				};
+
+				const entityId = 'Q42';
+				const revisionId = 4711;
+				const statements = {};
+				const redirectUrl = new URL( 'https://wiki.example' );
+				const entity = newMockableEntityRevision( { id: entityId, revisionId, statements } );
+
+				await expect( actions.entityWrite( new EntityRevisionWithRedirect( entity, redirectUrl ) ) )
+					.resolves.toBe( resolvedValue );
+
+				expect( commit ).toHaveBeenCalledTimes( 3 );
+				expect( commit ).toHaveBeenCalledWith( 'updateEntity', entity.entity );
+				expect( commit ).toHaveBeenCalledWith( 'updateRevision', revisionId );
+				expect( commit ).toHaveBeenCalledWith( 'updateTempUserRedirectUrl', redirectUrl );
 				expect( statementsDispatch ).toHaveBeenCalledWith(
 					'initStatements',
 					{ entityId, statements },
@@ -202,7 +241,8 @@ describe( 'entity/actions', () => {
 				dispatch: statementsDispatch,
 			};
 			const entity = newMockableEntityRevision();
-			return expect( actions.entityWrite( entity ) ).rejects.toBe( rejectedError );
+			return expect( actions.entityWrite( new EntityRevisionWithRedirect( entity ) ) )
+				.rejects.toBe( rejectedError );
 		} );
 	} );
 } );

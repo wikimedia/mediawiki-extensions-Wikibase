@@ -9,6 +9,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Application, { InitializedApplicationState } from '@/store/Application';
 import EditFlow from '@/definitions/EditFlow';
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRevisionWithRedirect from '@/datamodel/EntityRevisionWithRedirect';
 import AppInformation from '@/definitions/AppInformation';
 import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
@@ -111,7 +112,7 @@ describe( 'store/actions', () => {
 				_entity: Entity,
 				_base?: EntityRevision,
 				_assertUser?: boolean,
-			): Promise<EntityRevision> {
+			): Promise<EntityRevisionWithRedirect> {
 				throw new Error( 'These tests should not write any entities' );
 			},
 		} );
@@ -301,26 +302,29 @@ describe( 'store/actions', () => {
 
 		it( 'stores the responded entity, if the request succeeded', async () => {
 			const response = {
-				revisionId: 1,
-				entity: {
-					id: 'Q42',
-					statements: {
-						P31: [ {
-							type: 'statement',
-							id: 'opaque statement ID',
-							rank: 'normal',
-							mainsnak: {
-								snaktype: 'value',
-								property: 'P31',
-								datatype: 'string',
-								datavalue: {
-									type: 'string',
-									value: 'a string value',
+				entityRevision: {
+					revisionId: 1,
+					entity: {
+						id: 'Q42',
+						statements: {
+							P31: [ {
+								type: 'statement',
+								id: 'opaque statement ID',
+								rank: 'normal',
+								mainsnak: {
+									snaktype: 'value',
+									property: 'P31',
+									datatype: 'string',
+									datavalue: {
+										type: 'string',
+										value: 'a string value',
+									},
 								},
-							},
-						} ],
+							} ],
+						},
 					},
 				},
+				redirectUrl: undefined,
 			};
 
 			const saveEntity = jest.fn().mockResolvedValue( response );
@@ -340,9 +344,9 @@ describe( 'store/actions', () => {
 			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, undefined );
 
 			const state = store.state as InitializedApplicationState;
-			expect( state.statements ).toEqual( { Q42: response.entity.statements } );
-			expect( state.entity.id ).toBe( response.entity.id );
-			expect( state.entity.baseRevision ).toBe( response.revisionId );
+			expect( state.statements ).toEqual( { Q42: response.entityRevision.entity.statements } );
+			expect( state.entity.id ).toBe( response.entityRevision.entity.id );
+			expect( state.entity.baseRevision ).toBe( response.entityRevision.revisionId );
 		} );
 	} );
 
@@ -406,26 +410,29 @@ describe( 'store/actions', () => {
 			it( 'with REPLACE, stores the responded entity & purges the page', async () => {
 				const newStringValue = 'new value';
 				const saveResponse = {
-					revisionId: 1,
-					entity: {
-						id: 'Q42',
-						statements: {
-							P31: [ {
-								type: 'statement',
-								id: 'opaque statement ID',
-								rank: 'normal',
-								mainsnak: {
-									snaktype: 'value',
-									property: 'P31',
-									datatype: 'string',
-									datavalue: {
-										type: 'string',
-										value: newStringValue,
+					entityRevision: {
+						revisionId: 1,
+						entity: {
+							id: 'Q42',
+							statements: {
+								P31: [ {
+									type: 'statement',
+									id: 'opaque statement ID',
+									rank: 'normal',
+									mainsnak: {
+										snaktype: 'value',
+										property: 'P31',
+										datatype: 'string',
+										datavalue: {
+											type: 'string',
+											value: newStringValue,
+										},
 									},
-								},
-							} ],
+								} ],
+							},
 						},
 					},
+					redirectUrl: undefined,
 				};
 
 				const saveEntity = jest.fn().mockResolvedValue( saveResponse );
@@ -459,9 +466,9 @@ describe( 'store/actions', () => {
 				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, true );
 
 				const state = ( store.state as InitializedApplicationState );
-				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
-				expect( state.entity.id ).toBe( saveResponse.entity.id );
-				expect( state.entity.baseRevision ).toBe( saveResponse.revisionId );
+				expect( state.statements.Q42 ).toEqual( saveResponse.entityRevision.entity.statements );
+				expect( state.entity.id ).toBe( saveResponse.entityRevision.entity.id );
+				expect( state.entity.baseRevision ).toBe( saveResponse.entityRevision.revisionId );
 
 				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
 
@@ -472,29 +479,32 @@ describe( 'store/actions', () => {
 			it( 'with UPDATE, stores the responded entity & purges the page', async () => {
 				const newStringValue = 'new value';
 				const saveResponse = {
-					revisionId: 1,
-					entity: {
-						id: 'Q42',
-						statements: {
-							P31: [
-								testSet.entity.statements.P31[ 0 ],
-								{
-									type: 'statement',
-									id: 'opaque statement ID 2',
-									rank: 'normal',
-									mainsnak: {
-										snaktype: 'value',
-										property: 'P31',
-										datatype: 'string',
-										datavalue: {
-											type: 'string',
-											value: newStringValue,
+					entityRevision: {
+						revisionId: 1,
+						entity: {
+							id: 'Q42',
+							statements: {
+								P31: [
+									testSet.entity.statements.P31[ 0 ],
+									{
+										type: 'statement',
+										id: 'opaque statement ID 2',
+										rank: 'normal',
+										mainsnak: {
+											snaktype: 'value',
+											property: 'P31',
+											datatype: 'string',
+											datavalue: {
+												type: 'string',
+												value: newStringValue,
+											},
 										},
 									},
-								},
-							],
+								],
+							},
 						},
 					},
+					redirectUrl: undefined,
 				};
 
 				const saveEntity = jest.fn().mockResolvedValue( saveResponse );
@@ -538,9 +548,9 @@ describe( 'store/actions', () => {
 				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, true );
 
 				const state = ( store.state as InitializedApplicationState );
-				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
-				expect( state.entity.id ).toBe( saveResponse.entity.id );
-				expect( state.entity.baseRevision ).toBe( saveResponse.revisionId );
+				expect( state.statements.Q42 ).toEqual( saveResponse.entityRevision.entity.statements );
+				expect( state.entity.id ).toBe( saveResponse.entityRevision.entity.id );
+				expect( state.entity.baseRevision ).toBe( saveResponse.entityRevision.revisionId );
 
 				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
 

@@ -6,6 +6,7 @@ export enum initEvents {
 
 export enum appEvents {
 	relaunch = 'relaunch',
+	redirect = 'redirect',
 }
 
 export default {
