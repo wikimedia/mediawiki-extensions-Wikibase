@@ -121,16 +121,6 @@ module.exports = ( function ( wb ) {
 		btnSave[ enableSave ? 'enable' : 'disable' ]();
 	};
 
-	// Temporary wrapper for portability while we migrate the 'save' API
-	function wrapResultInValueChange( result ) {
-		return {
-			getSavedValue: function () {
-				return result;
-			},
-			getTempUserWatcher: new ENTITY_CHANGERS.TempUserWatcher()
-		};
-	}
-
 	/**
 	 * @param {boolean} [dropValue=false] Whether the current value should be kept and
 	 * persisted or dropped
@@ -159,11 +149,6 @@ module.exports = ( function ( wb ) {
 				: 'wikibase-save-inprogress'
 		) );
 		this._model.save( this._view.value(), this._value ).done( function ( valueChangeResult ) {
-			// Handle the case where the model is not yet migrated to return a valueChangeResult
-			// This is currently the case for Senses / Forms - see T358323
-			if ( !valueChangeResult.getSavedValue ) {
-				valueChangeResult = wrapResultInValueChange( valueChangeResult );
-			}
 			self.setValue( valueChangeResult.getSavedValue() );
 			self._view.value( valueChangeResult.getSavedValue() );
 			self._toolbar.toggleActionMessage();
@@ -201,14 +186,6 @@ module.exports = ( function ( wb ) {
 			promise = $.Deferred().resolve( emptyValueChangeResult ).promise();
 		}
 		return promise.done( function ( valueChangeResult ) {
-			// Handle the case where the model is not yet migrated to return a tempUserWatcher
-			// This is currently the case for Senses / Forms - see T358323
-			if ( !valueChangeResult || !valueChangeResult.getTempUserWatcher ) {
-				valueChangeResult = new ENTITY_CHANGERS.ValueChangeResult(
-					null,
-					new ENTITY_CHANGERS.TempUserWatcher()
-				);
-			}
 			self._value = null;
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( true );
