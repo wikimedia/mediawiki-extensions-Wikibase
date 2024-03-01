@@ -315,7 +315,7 @@
 			"code": "patched-sitelink-invalid-site-id",
 			"message": "Not a valid site ID {site_id} in patched sitelinks",
 			"context": {
-				"site_id": "{site_id}"
+				"site-id": "{site_id}"
 			}
 		}
 	},
@@ -324,7 +324,7 @@
 			"code": "patched-sitelink-missing-title",
 			"message": "No sitelink title provided for site {site_id} in patched sitelinks",
 			"context": {
-				"site_id": "{site_id}"
+				"site-id": "{site_id}"
 			}
 		}
 	},
@@ -333,7 +333,7 @@
 			"code": "patched-sitelink-title-empty",
 			"message": "Sitelink cannot be empty for site {site_id} in patched sitelinks",
 			"context": {
-				"site_id": "{site_id}"
+				"site-id": "{site_id}"
 			}
 		}
 	},
@@ -342,7 +342,7 @@
 			"code": "patched-sitelink-invalid-title",
 			"message": "Invalid sitelink title {title} for site {site_id} in patched sitelinks",
 			"context": {
-				"site_id": "{site_id}",
+				"site-id": "{site_id}",
 				"title": "{title}"
 			}
 		}
@@ -352,7 +352,7 @@
 			"code": "patched-sitelink-title-does-not-exist",
 			"message": "Incorrect patched sitelinks. Page with title {title} does not exist on site {site_id}",
 			"context": {
-				"site_id": "{site_id}",
+				"site-id": "{site_id}",
 				"title": "{title}"
 			}
 		}
@@ -362,7 +362,7 @@
 			"code": "patched-sitelink-invalid-badge",
 			"message": "Incorrect patched sitelinks. Badge value {badge} for site {site_id} is not an item ID",
 			"context": {
-				"site_id": "{site_id}",
+				"site-id": "{site_id}",
 				"badge": "{badge}"
 			}
 		}
@@ -372,7 +372,7 @@
 			"code": "patched-sitelink-item-not-a-badge",
 			"message": "Incorrect patched sitelinks. Item {badge} used for site {site_id} is not allowed as a badge",
 			"context": {
-				"site_id": "{site_id}",
+				"site-id": "{site_id}",
 				"badge": "{badge}"
 			}
 		}
@@ -382,7 +382,7 @@
 			"code": "patched-sitelink-badges-format",
 			"message": "Badges for site {site_id} is not a list in patched sitelinks",
 			"context": {
-				"site_id": "{site_id}",
+				"site-id": "{site_id}",
 				"badge": "{badge}"
 			}
 		}
