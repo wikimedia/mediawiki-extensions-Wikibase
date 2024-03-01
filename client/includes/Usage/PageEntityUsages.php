@@ -58,7 +58,7 @@ class PageEntityUsages {
 	 * @return bool
 	 */
 	public function isEmpty() {
-		return empty( $this->usages );
+		return !$this->usages;
 	}
 
 	/**

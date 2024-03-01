@@ -72,7 +72,7 @@ class UsageUpdater {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
-		if ( empty( $usages ) ) {
+		if ( !$usages ) {
 			return;
 		}
 
@@ -82,7 +82,7 @@ class UsageUpdater {
 		$this->usageTracker->addUsedEntities( $pageId, $usages );
 
 		// Subscribe to anything that was unused before.
-		if ( !empty( $newlyUsedEntities ) ) {
+		if ( $newlyUsedEntities ) {
 			$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
 		}
 	}
@@ -108,14 +108,14 @@ class UsageUpdater {
 		$currentlyUsedEntities = $this->getEntityIds( $usages );
 
 		// Subscribe to anything that was added
-		if ( !empty( $currentlyUsedEntities ) ) {
+		if ( $currentlyUsedEntities ) {
 			$this->subscriptionManager->subscribe( $this->clientId, $currentlyUsedEntities );
 		}
 		// Unsubscribe from anything that was pruned and is otherwise unused.
-		if ( !empty( $prunedUsages ) ) {
+		if ( $prunedUsages ) {
 			$prunedEntityIds = $this->getEntityIds( $prunedUsages );
 			$unusedIds = $this->usageLookup->getUnusedEntities( $prunedEntityIds );
-			if ( !empty( $unusedIds ) ) {
+			if ( $unusedIds ) {
 				$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
 			}
 		}
@@ -141,7 +141,7 @@ class UsageUpdater {
 		$prunedEntityIds = $this->getEntityIds( $prunedUsages );
 		$unusedIds = $this->usageLookup->getUnusedEntities( $prunedEntityIds );
 
-		if ( !empty( $unusedIds ) ) {
+		if ( $unusedIds ) {
 			// Unsubscribe from anything that was pruned and is otherwise unused.
 			$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
 		}

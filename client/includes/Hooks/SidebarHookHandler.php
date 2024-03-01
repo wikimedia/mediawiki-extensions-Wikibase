@@ -58,7 +58,7 @@ class SidebarHookHandler implements
 
 		$noExternalLangLinks = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 
-		if ( !empty( $noExternalLangLinks ) ) {
+		if ( $noExternalLangLinks ) {
 			$outputPage->setProperty( 'noexternallanglinks', $noExternalLangLinks );
 		}
 
@@ -144,7 +144,7 @@ class SidebarHookHandler implements
 
 		$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
 
-		if ( empty( $otherProjectsSidebar ) ) {
+		if ( !$otherProjectsSidebar ) {
 			return null;
 		}
 

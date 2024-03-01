@@ -65,7 +65,7 @@ class SiteLinkCommentCreator {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$siteLinkMessage = $this->getSiteLinkMessage( $action, $siteLinkDiff, $title );
 
-			if ( !empty( $siteLinkMessage ) ) {
+			if ( $siteLinkMessage ) {
 				return $this->generateComment( $siteLinkMessage );
 			}
 		}
@@ -183,7 +183,7 @@ class SiteLinkCommentCreator {
 			$diffOp = ( ( $diff instanceof Diff ) && $diff->offsetExists( 'name' ) ) ? $diff['name'] : $diff;
 			$args = $this->getChangeParamsForDiffOp( $diffOp, $siteId, $messagePrefix );
 
-			if ( empty( $args ) ) {
+			if ( !$args ) {
 				return null;
 			}
 

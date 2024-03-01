@@ -143,7 +143,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		}
 
 		$usages = $this->handleDisabledUsages( $usages );
-		if ( empty( $usages ) ) {
+		if ( !$usages ) {
 			return;
 		}
 
@@ -231,7 +231,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = [] ): Traversable {
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return new ArrayIterator();
 		}
 
@@ -249,7 +249,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityId[]
 	 */
 	public function getUnusedEntities( array $entityIds ): array {
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return [];
 		}
 

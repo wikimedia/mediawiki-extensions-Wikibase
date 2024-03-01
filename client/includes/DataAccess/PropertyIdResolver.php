@@ -80,7 +80,7 @@ class PropertyIdResolver {
 			[ $propertyLabel ]
 		);
 
-		if ( empty( $propertyIds ) ) {
+		if ( !$propertyIds ) {
 			throw new PropertyLabelNotResolvedException( $propertyLabel, $languageCode );
 		}
 

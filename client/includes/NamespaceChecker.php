@@ -87,7 +87,7 @@ class NamespaceChecker {
 	 * @return bool
 	 */
 	private function isEnabled( $namespace ) {
-		return empty( $this->enabledNamespaces )
+		return !$this->enabledNamespaces
 			|| in_array( $namespace, $this->enabledNamespaces );
 	}
 
@@ -113,7 +113,7 @@ class NamespaceChecker {
 	public function getWikibaseNamespaces() {
 		$enabled = $this->enabledNamespaces;
 
-		if ( empty( $enabled ) ) {
+		if ( !$enabled ) {
 			$enabled = $this->namespaceInfo->getValidNamespaces();
 		}
 

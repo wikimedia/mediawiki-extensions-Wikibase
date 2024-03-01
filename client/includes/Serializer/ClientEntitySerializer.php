@@ -62,7 +62,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	public function serialize( $entity ) {
 		$serialization = $this->entitySerializer->serialize( $entity );
 
-		if ( !empty( $this->termFallbackChains ) ) {
+		if ( $this->termFallbackChains ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization );
 		}
 
@@ -127,7 +127,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	 * @return array
 	 */
 	private function filterEntitySerializationUsingLangCodes( array $serialization ) {
-		if ( !empty( $this->filterLangCodes ) ) {
+		if ( $this->filterLangCodes ) {
 			if ( array_key_exists( 'labels', $serialization ) ) {
 				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
 					if ( !in_array( $langCode, $this->filterLangCodes ) ) {

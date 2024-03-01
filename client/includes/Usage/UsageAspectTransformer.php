@@ -139,7 +139,7 @@ class UsageAspectTransformer {
 	 * @return string[] Array of aspect keys, with modifiers applied.
 	 */
 	private function getFilteredAspects( array $aspectKeys, array $relevant ) {
-		if ( empty( $aspectKeys ) || empty( $relevant ) ) {
+		if ( !$aspectKeys || !$relevant ) {
 			return [];
 		}
 

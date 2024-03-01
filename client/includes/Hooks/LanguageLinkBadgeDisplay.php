@@ -41,7 +41,7 @@ class LanguageLinkBadgeDisplay {
 		foreach ( $langLinks as $key => $link ) {
 			$badges = $link->getBadges();
 
-			if ( !empty( $badges ) ) {
+			if ( $badges ) {
 				$badgeInfoForAllLinks[$key] = $this->sidebarLinkBadgeDisplay->getBadgeInfo(
 					$badges
 				);
@@ -66,7 +66,7 @@ class LanguageLinkBadgeDisplay {
 	public function applyBadges( array &$languageLink, Title $languageLinkTitle, OutputPage $outputPage ) {
 		$badges = $outputPage->getProperty( 'wikibase_badges' );
 
-		if ( empty( $badges ) ) {
+		if ( !$badges ) {
 			return;
 		}
 

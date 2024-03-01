@@ -64,7 +64,7 @@ class EntityChangeNotificationJob extends Job {
 	 * @inheritDoc
 	 */
 	public function run(): bool {
-		if ( empty( $this->changes ) ) {
+		if ( !$this->changes ) {
 			$this->logger->error( __METHOD__ . ': Job without changes, which should never have been scheduled.' );
 			return true;
 		}
