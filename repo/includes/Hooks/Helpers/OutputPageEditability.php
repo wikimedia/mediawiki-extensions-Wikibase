@@ -18,7 +18,7 @@ class OutputPageEditability {
 	 * @return bool
 	 */
 	public function validate( OutputPage $out ) {
-		return $out->getUser()->probablyCan( 'edit', $out->getTitle() )
+		return $out->getAuthority()->probablyCan( 'edit', $out->getTitle() )
 			&& $this->isEditView( $out );
 	}
 
