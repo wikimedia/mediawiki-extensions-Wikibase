@@ -55,7 +55,7 @@
 	"datatypes-type-wikibase-property": "Lastnost",
 	"datatypes-type-commonsMedia": "Predstavnostna datoteka v Zbirki",
 	"datatypes-type-geo-shape": "Geografska oblika",
-	"datatypes-type-tabular-data": "Tabularni podatki",
+	"datatypes-type-tabular-data": "Tabelarni podatki",
 	"datatypes-type-external-id": "Zunanji identifikator",
 	"datatypes-type-entity-schema": "Shema entitet",
 	"version-wikibase": "Wikibase",

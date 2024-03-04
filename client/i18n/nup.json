@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Misbahu umar"
+			"Misbahu umar",
+			"Amire80"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} yangagi",
 	"wikibase-editlinks": "ye ekozhi jin",
 	"wikibase-linkitem-addlinks": "la ekozhi be'u",
 	"wikibase-linkitem-title": "la eko be feregi",
+	"wikibase-linkitem-linkpage": "Bo keba be feregi",
 	"wikibase-linkitem-selectlink": "Li eba toh feregi nan wo ga'e wa gan wo'a la be feregi nana nan.",
-	"wikibase-linkitem-input-site": "ezhimi",
-	"wikibase-linkitem-input-page": "feregi"
+	"wikibase-linkitem-input-site": "Ezhimi:",
+	"wikibase-linkitem-input-page": "Feregi:"
 }

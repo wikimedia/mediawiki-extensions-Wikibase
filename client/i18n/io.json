@@ -19,6 +19,7 @@
 	"wikibase-editlinkstitle": "Redaktar la ligili ad altra lingui",
 	"wikibase-addlinkstitle": "Interlinguala ligili inkluzita",
 	"wikibase-linkitem-addlinks": "Ligili inkluzita",
+	"wikibase-linkitem-alreadylinked": "La pagino a quon vu deziras krear linguala ligilo ja ligesis ad [altra pagino $1] che centrala datumaro, qua ligesas a [[$2]] en ca situo. Singla elemento mustas havar unika pagino po situo. Voluntez selektar altra pagino por ligar, o korektez l'existanta ligilo.",
 	"wikibase-linkitem-close": "Klozar dialogo-buxo e riprizentar pagino",
 	"wikibase-linkitem-failure": "Eventis neidentifikita eroro, kande probabis ligilar a la pagino mencionata.",
 	"wikibase-linkitem-title": "Ligili kun pagino",

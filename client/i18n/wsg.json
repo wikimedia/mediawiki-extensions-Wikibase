@@ -4,9 +4,15 @@
 			"Kiran sidam"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} అంశ",
 	"wikibase-editlinks": "లింకున్ సూద్రికింట్",
 	"wikibase-linkitem-addlinks": "లింకున్ మిసడి కింట్",
 	"wikibase-linkitem-title": "ఇద్ పేజీ తున్ లింకు సింమ్ట",
+	"wikibase-linkitem-linkpage": "పేజితగ లింకు మిసడి కిం",
 	"wikibase-linkitem-selectlink": "ఇద్ పేజీతున్ లింకు కియన ఇతెక్ సైట్ తున్, పేజీ తున్ ఏతాట్",
+	"wikibase-linkitem-input-site": "గోష్టి",
+	"wikibase-linkitem-input-page": "పేజి",
+	"wikibase-rc-hide-wikidata-hide": "మాకుసా",
+	"wikibase-rc-hide-wikidata-show": "తొహ",
 	"wikibase-otherprojects": "దుస్రోక్ ప్రాజెక్టు"
 }
