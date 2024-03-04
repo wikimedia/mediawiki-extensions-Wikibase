@@ -238,8 +238,7 @@ class SiteLinksView {
 		}
 
 		// Sort the sitelinks according to their global id
-		$safetyCopy = $siteLinksForTable; // keep a shallow copy
-		$sortOk = usort(
+		usort(
 			$siteLinksForTable,
 			function( array $a, array $b ) {
 				/** @var SiteLink[] $a */
@@ -247,10 +246,6 @@ class SiteLinksView {
 				return strcmp( $a['siteLink']->getSiteId(), $b['siteLink']->getSiteId() );
 			}
 		);
-
-		if ( !$sortOk ) {
-			$siteLinksForTable = $safetyCopy;
-		}
 
 		return $siteLinksForTable;
 	}
