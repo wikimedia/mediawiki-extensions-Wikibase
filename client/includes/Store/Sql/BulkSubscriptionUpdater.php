@@ -121,7 +121,7 @@ class BulkSubscriptionUpdater {
 	private function processUpdateBatch( array &$continuation = null ) {
 		$entityIds = $this->getUpdateBatch( $continuation );
 
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return 0;
 		}
 
@@ -164,7 +164,7 @@ class BulkSubscriptionUpdater {
 			->select( 'eu_entity_id' )
 			->from( EntityUsageTable::DEFAULT_TABLE_NAME );
 
-		if ( !empty( $continuation ) ) {
+		if ( $continuation ) {
 			[ $fromEntityId ] = $continuation;
 			$queryBuilder->where( $dbr->buildComparison( '>', [ 'eu_entity_id' => $fromEntityId ] ) );
 		}
@@ -294,7 +294,7 @@ class BulkSubscriptionUpdater {
 			->from( 'wb_changes_subscription' )
 			->where( [ 'cs_subscriber_id' => $this->subscriberWikiId ] );
 
-		if ( !empty( $continuation ) ) {
+		if ( $continuation ) {
 			[ $fromEntityId ] = $continuation;
 			$queryBuilder->andWhere(
 				$dbr->buildComparison( '>', [ 'cs_entity_id' => $fromEntityId ] ) );
@@ -306,7 +306,7 @@ class BulkSubscriptionUpdater {
 		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 		$subscriptions = $this->getEntityIdsFromRows( $res, 'cs_entity_id', $continuation );
 
-		if ( empty( $subscriptions ) ) {
+		if ( !$subscriptions ) {
 			return false;
 		}
 

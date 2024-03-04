@@ -168,7 +168,7 @@ class EntityUsageTable {
 	 * @return int The number of entries added
 	 */
 	public function addUsages( int $pageId, array $usages ): int {
-		if ( empty( $usages ) ) {
+		if ( !$usages ) {
 			return 0;
 		}
 
@@ -270,7 +270,7 @@ class EntityUsageTable {
 	 * @throws InvalidArgumentException
 	 */
 	public function removeUsages( int $pageId, array $usages ): void {
-		if ( empty( $usages ) ) {
+		if ( !$usages ) {
 			return;
 		}
 
@@ -302,7 +302,7 @@ class EntityUsageTable {
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return new ArrayIterator();
 		}
 
@@ -312,7 +312,7 @@ class EntityUsageTable {
 			->where( [
 				'eu_entity_id' => $this->getEntityIdStrings( $entityIds ),
 			] );
-		if ( !empty( $aspects ) ) {
+		if ( $aspects ) {
 			$queryBuilder->andWhere( [ 'eu_aspect' => $aspects ] );
 		}
 		$res = $queryBuilder
@@ -367,7 +367,7 @@ class EntityUsageTable {
 	 * @return EntityId[]
 	 */
 	public function getUnusedEntities( array $entityIds ): array {
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return [];
 		}
 

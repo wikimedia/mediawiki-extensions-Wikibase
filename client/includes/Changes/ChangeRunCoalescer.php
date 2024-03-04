@@ -285,7 +285,7 @@ class ChangeRunCoalescer {
 				}
 
 				if ( $break ) {
-					if ( !empty( $currentRun ) ) {
+					if ( $currentRun ) {
 						try {
 							$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
 						} catch ( MergeFailedException $ex ) {
@@ -308,7 +308,7 @@ class ChangeRunCoalescer {
 			}
 		}
 
-		if ( !empty( $currentRun ) ) {
+		if ( $currentRun ) {
 			try {
 				$coalesced[] = $this->mergeChanges( $entityId, $currentRun );
 			} catch ( MergeFailedException $ex ) {

@@ -119,7 +119,7 @@ class EntityUsageTableBuilder {
 
 		$entityPerPage = $this->getUsageBatch( $dbw, $fromPageId );
 
-		if ( empty( $entityPerPage ) ) {
+		if ( !$entityPerPage ) {
 			return 0;
 		}
 
