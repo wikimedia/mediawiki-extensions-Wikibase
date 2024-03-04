@@ -1172,7 +1172,7 @@
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
-					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample" },
+					"patched-sitelink-conflict": { "$ref": "./examples.json#/PatchedSitelinkConflictExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" }
 				}
 			}
