@@ -84,7 +84,7 @@ class TermIndexEntry {
 	private function assertConstructFieldsAreCorrect( array $fields ) {
 		Assert::parameter(
 			count( $fields ) === count( self::FIELD_NAMES ) &&
-			empty( array_diff( self::FIELD_NAMES, array_keys( $fields ) ) ),
+			!array_diff( self::FIELD_NAMES, array_keys( $fields ) ),
 			'$fields',
 			'must contain the following keys: ' . implode( ', ', self::FIELD_NAMES )
 		);

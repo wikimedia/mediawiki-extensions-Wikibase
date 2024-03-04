@@ -48,7 +48,7 @@ class TermIndexSearchCriteria {
 	 */
 	public function __construct( array $fields = [] ) {
 		Assert::parameter(
-			empty( array_diff( array_keys( $fields ), self::FIELD_NAMES ) ),
+			!array_diff( array_keys( $fields ), self::FIELD_NAMES ),
 			'$fields',
 			'must only contain the following keys: termType, termLanguage, termText'
 		);

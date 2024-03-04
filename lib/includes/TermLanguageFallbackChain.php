@@ -33,7 +33,7 @@ class TermLanguageFallbackChain {
 				return $termLanguages->hasLanguage( $language->getLanguageCode() );
 			}
 		) );
-		if ( !empty( $chain ) && empty( $this->chain ) ) {
+		if ( $chain && !$this->chain ) {
 			$this->chain = [ LanguageWithConversion::factory( 'en' ) ];
 		}
 	}
@@ -77,7 +77,7 @@ class TermLanguageFallbackChain {
 	 * ), or null when no "acceptable" data can be found.
 	 */
 	public function extractPreferredValue( array $data ): ?array {
-		if ( empty( $data ) ) {
+		if ( !$data ) {
 			return null;
 		}
 

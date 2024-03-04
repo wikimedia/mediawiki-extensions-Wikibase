@@ -386,7 +386,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		sort( $persistedTermIds );
 		$idsToRestore = array_diff( $uniqueTermIds, $persistedTermIds );
 
-		if ( !empty( $idsToRestore ) ) {
+		if ( $idsToRestore ) {
 			$this->mapTermsArrayToTermIds( $termsArray, $idsToRestore, true );
 		}
 	}
