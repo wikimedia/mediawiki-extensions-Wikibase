@@ -27,6 +27,9 @@ function apply_common_before_settings {
   echo 'wfLoadExtension( "cldr" );' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = false;' >> LocalSettings.php
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
+  if [ "$IPMASKING" = "enabled" ]; then
+      echo '$wgAutoCreateTempUser["enabled"] = true;' >> LocalSettings.php
+  fi
 }
 
 function apply_common_after_settings {
