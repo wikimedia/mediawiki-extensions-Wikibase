@@ -13,6 +13,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
@@ -27,6 +29,15 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTarge
 class PatchedSitelinksValidatorTest extends TestCase {
 
 	private const ALLOWED_BADGES = [ 'Q432' ];
+	private const SITELINK_ITEM_ID = 'Q123';
+
+	private SiteLinkConflictLookup $siteLinkConflictLookup;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
+	}
 
 	/**
 	 * @dataProvider validSitelinksProvider
@@ -34,7 +45,10 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	public function testWithValidSitelinks( array $sitelinksSerialization, SiteLinkList $expectedResult ): void {
 		$this->assertEquals(
 			$expectedResult,
-			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize( $sitelinksSerialization )
+			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
+				self::SITELINK_ITEM_ID,
+				$sitelinksSerialization
+			)
 		);
 	}
 
@@ -76,7 +90,10 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	 */
 	public function testWithInvalidSitelinks( array $serialization, UseCaseError $expectedError ): void {
 		try {
-			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize( $serialization );
+			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
+				self::SITELINK_ITEM_ID,
+				$serialization
+			);
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -186,7 +203,45 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 		try {
 			$this->newValidator( $sitelinkTargetTitleResolver )->validateAndDeserialize(
+				self::SITELINK_ITEM_ID,
 				[ $validSiteId => [ 'title' => 'non-existing-title' ] ]
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedUseCaseError, $e );
+		}
+	}
+
+	public function testSitelinkConflict_throws(): void {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$matchingItemId = 'Q987';
+		$pageTitle = 'test-title';
+
+		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
+		$this->siteLinkConflictLookup->method( 'getConflictsForItem' )->willReturn(
+			[
+				[
+					'siteId' => $validSiteId,
+					'itemId' => $matchingItemId,
+					'sitePage' => $pageTitle,
+				],
+			]
+		);
+
+		$expectedUseCaseError = new UseCaseError(
+			UseCaseError::PATCHED_SITELINK_CONFLICT,
+			"Site '$validSiteId' is already being used on '$matchingItemId'",
+			[
+				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+			]
+		);
+
+		try {
+			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
+				self::SITELINK_ITEM_ID,
+				[ $validSiteId => [ 'title' => $pageTitle ] ]
 			);
 
 			$this->fail( 'this should not be reached' );
@@ -198,11 +253,14 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	private function newValidator( SitelinkTargetTitleResolver $sitelinkTargetTitleResolver ): PatchedSitelinksValidator {
 		return new PatchedSitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
-			new SitelinkDeserializer(
-				'/\?/',
-				self::ALLOWED_BADGES,
-				$sitelinkTargetTitleResolver,
-				new DummyItemRevisionMetaDataRetriever()
+			new SiteLinkConflictLookupSitelinkValidator(
+				new SitelinkDeserializer(
+					'/\?/',
+					self::ALLOWED_BADGES,
+					$sitelinkTargetTitleResolver,
+					new DummyItemRevisionMetaDataRetriever()
+				),
+				$this->siteLinkConflictLookup
 			)
 		);
 	}

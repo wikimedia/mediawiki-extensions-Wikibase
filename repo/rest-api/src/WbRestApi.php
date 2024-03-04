@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
@@ -281,6 +282,11 @@ class WbRestApi {
 	public static function getItemDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.ItemDataRetriever' );
+	}
+
+	public static function getSitelinkDeserializer( ContainerInterface $services = null ): SitelinkDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.SitelinkDeserializer' );
 	}
 
 	public static function getStatementRetriever( ContainerInterface $services = null ): EntityRevisionLookupStatementRetriever {

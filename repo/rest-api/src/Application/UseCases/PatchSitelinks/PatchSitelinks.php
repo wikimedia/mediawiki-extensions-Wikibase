@@ -66,7 +66,7 @@ class PatchSitelinks {
 			$deserializedRequest->getPatch()
 		);
 
-		$modifiedSitelinks = $this->patchedSitelinksValidator->validateAndDeserialize( $patchedSitelinks );
+		$modifiedSitelinks = $this->patchedSitelinksValidator->validateAndDeserialize( "$itemId", $patchedSitelinks );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$item->setSiteLinkList( $modifiedSitelinks );
