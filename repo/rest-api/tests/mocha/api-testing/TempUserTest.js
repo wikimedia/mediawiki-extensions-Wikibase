@@ -4,8 +4,8 @@ const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	editRequestsOnItem,
-	editRequestsOnProperty
+	getItemEditRequests,
+	getPropertyEditRequests
 } = require( '../helpers/happyPathRequestBuilders' );
 const entityHelper = require( '../helpers/entityHelper' );
 
@@ -14,17 +14,11 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 		return newRequestBuilder().withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( config ) );
 	}
 
-	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
-		newRequestBuilder: () => newReqBuilder( requestInputs ),
-		requestInputs
-	} );
-
-	const editRequestsWithInputs = [
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+	const editRequests = [
+		...getItemEditRequests( itemRequestInputs ),
+		...getPropertyEditRequests( propertyRequestInputs )
 	];
-
-	describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder, requestInputs ) => {
+	describeEachRouteWithReset( editRequests, ( newRequestBuilder, requestInputs ) => {
 		it( 'makes an edit as an IP user with tempUser disabled', async () => {
 			const response = await withTempUserConfig( newRequestBuilder, { enabled: false } )
 				.makeRequest();

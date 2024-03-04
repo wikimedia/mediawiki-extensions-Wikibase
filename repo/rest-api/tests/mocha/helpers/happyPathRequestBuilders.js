@@ -4,165 +4,164 @@ const rbf = require( './RequestBuilderFactory' );
 const { newStatementWithRandomStringValue } = require( './entityHelper' );
 const { utils } = require( 'api-testing' );
 
-module.exports.getRequestsOnItem = [
-	( { itemId } ) => rbf.newGetItemStatementsRequestBuilder( itemId ),
-	( { itemId, statementId } ) => rbf.newGetItemStatementRequestBuilder( itemId, statementId ),
-	( { itemId } ) => rbf.newGetItemRequestBuilder( itemId ),
-	( { itemId } ) => rbf.newGetItemAliasesInLanguageRequestBuilder( itemId, 'en' ),
-	( { itemId } ) => rbf.newGetItemAliasesRequestBuilder( itemId ),
-	( { itemId } ) => rbf.newGetItemDescriptionRequestBuilder( itemId, 'en' ),
-	( { itemId } ) => rbf.newGetItemDescriptionsRequestBuilder( itemId ),
-	( { itemId } ) => rbf.newGetItemLabelRequestBuilder( itemId, 'en' ),
-	( { itemId } ) => rbf.newGetItemLabelsRequestBuilder( itemId ),
-	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
-	( { itemId } ) => rbf.newGetSitelinksRequestBuilder( itemId ),
-	( { itemId, siteId } ) => rbf.newGetSitelinkRequestBuilder( itemId, siteId )
-];
+module.exports.getItemGetRequests = ( requestInputs ) => ( [
+	() => rbf.newGetItemStatementsRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetItemStatementRequestBuilder( requestInputs.itemId, requestInputs.statementId ),
+	() => rbf.newGetItemRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetItemAliasesInLanguageRequestBuilder( requestInputs.itemId, 'en' ),
+	() => rbf.newGetItemAliasesRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetItemDescriptionRequestBuilder( requestInputs.itemId, 'en' ),
+	() => rbf.newGetItemDescriptionsRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetItemLabelRequestBuilder( requestInputs.itemId, 'en' ),
+	() => rbf.newGetItemLabelsRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetStatementRequestBuilder( requestInputs.statementId ),
+	() => rbf.newGetSitelinksRequestBuilder( requestInputs.itemId ),
+	() => rbf.newGetSitelinkRequestBuilder( requestInputs.itemId, requestInputs.siteId )
+].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
 
-module.exports.getRequestsOnProperty = [
-	( { propertyId } ) => rbf.newGetPropertyRequestBuilder( propertyId ),
-	( { propertyId } ) => rbf.newGetPropertyLabelRequestBuilder( propertyId, 'en' ),
-	( { propertyId } ) => rbf.newGetPropertyLabelsRequestBuilder( propertyId ),
-	( { propertyId } ) => rbf.newGetPropertyDescriptionsRequestBuilder( propertyId ),
-	( { propertyId } ) => rbf.newGetPropertyDescriptionRequestBuilder( propertyId, 'en' ),
-	( { propertyId } ) => rbf.newGetPropertyAliasesRequestBuilder( propertyId ),
-	( { propertyId } ) => rbf.newGetPropertyAliasesInLanguageRequestBuilder( propertyId, 'en' ),
-	( { propertyId } ) => rbf.newGetPropertyStatementsRequestBuilder( propertyId ),
-	( { statementId } ) => rbf.newGetStatementRequestBuilder( statementId ),
-	( { propertyId, statementId } ) => rbf.newGetPropertyStatementRequestBuilder( propertyId, statementId )
-];
+module.exports.getPropertyGetRequests = ( requestInputs ) => ( [
+	() => rbf.newGetPropertyRequestBuilder( requestInputs.propertyId ),
+	() => rbf.newGetPropertyLabelRequestBuilder( requestInputs.propertyId, 'en' ),
+	() => rbf.newGetPropertyLabelsRequestBuilder( requestInputs.propertyId ),
+	() => rbf.newGetPropertyDescriptionsRequestBuilder( requestInputs.propertyId ),
+	() => rbf.newGetPropertyDescriptionRequestBuilder( requestInputs.propertyId, 'en' ),
+	() => rbf.newGetPropertyAliasesRequestBuilder( requestInputs.propertyId ),
+	() => rbf.newGetPropertyAliasesInLanguageRequestBuilder( requestInputs.propertyId, 'en' ),
+	() => rbf.newGetPropertyStatementsRequestBuilder( requestInputs.propertyId ),
+	() => rbf.newGetStatementRequestBuilder( requestInputs.statementId ),
+	() => rbf.newGetPropertyStatementRequestBuilder( requestInputs.propertyId, requestInputs.statementId )
+].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
 
-module.exports.editRequestsOnProperty = [
-	( { propertyId } ) => rbf.newPatchPropertyLabelsRequestBuilder(
-		propertyId,
+module.exports.getPropertyEditRequests = ( requestInputs ) => ( [
+	() => rbf.newPatchPropertyLabelsRequestBuilder(
+		requestInputs.propertyId,
 		[ {
 			op: 'replace',
 			path: '/en',
 			value: 'en-label-' + utils.uniq()
 		} ]
 	),
-	( { propertyId } ) => rbf.newPatchPropertyDescriptionsRequestBuilder(
-		propertyId,
+	() => rbf.newPatchPropertyDescriptionsRequestBuilder(
+		requestInputs.propertyId,
 		[ { op: 'replace', path: '/en', value: 'random-test-description-' + utils.uniq() } ]
 	),
-	( { propertyId } ) => rbf.newPatchPropertyAliasesRequestBuilder(
-		propertyId,
+	() => rbf.newPatchPropertyAliasesRequestBuilder(
+		requestInputs.propertyId,
 		[ {
 			op: 'replace',
 			path: '/en',
 			value: [ 'en-alias-' + utils.uniq() ]
 		} ]
 	),
-	( { propertyId } ) => rbf.newAddPropertyAliasesInLanguageRequestBuilder(
-		propertyId,
+	() => rbf.newAddPropertyAliasesInLanguageRequestBuilder(
+		requestInputs.propertyId,
 		'en',
 		[ 'en-alias-' + utils.uniq() ]
 	),
-	( { propertyId, statementPropertyId } ) => rbf.newAddPropertyStatementRequestBuilder(
-		propertyId,
-		newStatementWithRandomStringValue( statementPropertyId )
+	() => rbf.newAddPropertyStatementRequestBuilder(
+		requestInputs.propertyId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { propertyId, statementId, statementPropertyId } ) => rbf.newReplacePropertyStatementRequestBuilder(
-		propertyId,
-		statementId,
-		newStatementWithRandomStringValue( statementPropertyId )
+	() => rbf.newReplacePropertyStatementRequestBuilder(
+		requestInputs.propertyId,
+		requestInputs.statementId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { statementId, statementPropertyId } ) => rbf.newReplaceStatementRequestBuilder(
-		statementId,
-		newStatementWithRandomStringValue( statementPropertyId )
+	() => rbf.newReplaceStatementRequestBuilder(
+		requestInputs.statementId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { propertyId, statementId } ) => rbf.newPatchPropertyStatementRequestBuilder(
-		propertyId,
-		statementId,
+	() => rbf.newPatchPropertyStatementRequestBuilder(
+		requestInputs.propertyId,
+		requestInputs.statementId,
 		[ {
 			op: 'replace',
 			path: '/value/content',
 			value: 'random-string-value-' + utils.uniq()
 		} ]
 	),
-	( { propertyId, statementId } ) => rbf.newRemovePropertyStatementRequestBuilder( propertyId, statementId ),
-	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId ),
-	( { propertyId } ) => rbf.newSetPropertyLabelRequestBuilder( propertyId, 'en', 'random-label-' + utils.uniq() ),
-	( { propertyId } ) => rbf.newSetPropertyDescriptionRequestBuilder(
-		propertyId,
+	() => rbf.newRemovePropertyStatementRequestBuilder( requestInputs.propertyId, requestInputs.statementId ),
+	() => rbf.newRemoveStatementRequestBuilder( requestInputs.statementId ),
+	() => rbf.newSetPropertyLabelRequestBuilder( requestInputs.propertyId, 'en', 'random-label-' + utils.uniq() ),
+	() => rbf.newSetPropertyDescriptionRequestBuilder(
+		requestInputs.propertyId,
 		'en',
 		'random-description-' + utils.uniq()
 	),
-	( { propertyId } ) => rbf.newRemovePropertyLabelRequestBuilder( propertyId, 'en' ),
-	( { propertyId } ) => rbf.newRemovePropertyDescriptionRequestBuilder( propertyId, 'en' )
+	() => rbf.newRemovePropertyLabelRequestBuilder( requestInputs.propertyId, 'en' ),
+	() => rbf.newRemovePropertyDescriptionRequestBuilder( requestInputs.propertyId, 'en' )
+].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
 
-];
-
-module.exports.editRequestsOnItem = [
-	( { itemId, statementPropertyId } ) => rbf.newAddItemStatementRequestBuilder(
-		itemId,
-		newStatementWithRandomStringValue( statementPropertyId )
+module.exports.getItemEditRequests = ( requestInputs ) => ( [
+	() => rbf.newAddItemStatementRequestBuilder(
+		requestInputs.itemId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { itemId, statementId, statementPropertyId } ) => rbf.newReplaceItemStatementRequestBuilder(
-		itemId,
-		statementId,
-		newStatementWithRandomStringValue( statementPropertyId )
+	() => rbf.newReplaceItemStatementRequestBuilder(
+		requestInputs.itemId,
+		requestInputs.statementId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { statementId, statementPropertyId } ) => rbf.newReplaceStatementRequestBuilder(
-		statementId,
-		newStatementWithRandomStringValue( statementPropertyId )
+	() => rbf.newReplaceStatementRequestBuilder(
+		requestInputs.statementId,
+		newStatementWithRandomStringValue( requestInputs.statementPropertyId )
 	),
-	( { itemId, statementId } ) => rbf.newRemoveItemStatementRequestBuilder( itemId, statementId ),
-	( { statementId } ) => rbf.newRemoveStatementRequestBuilder( statementId ),
-	( { itemId, statementId } ) => rbf.newPatchItemStatementRequestBuilder(
-		itemId,
-		statementId,
+	() => rbf.newRemoveItemStatementRequestBuilder( requestInputs.itemId, requestInputs.statementId ),
+	() => rbf.newRemoveStatementRequestBuilder( requestInputs.statementId ),
+	() => rbf.newPatchItemStatementRequestBuilder(
+		requestInputs.itemId,
+		requestInputs.statementId,
 		[ {
 			op: 'replace',
 			path: '/value/content',
 			value: 'random-string-value-' + utils.uniq()
 		} ]
 	),
-	( { statementId } ) => rbf.newPatchStatementRequestBuilder(
-		statementId,
+	() => rbf.newPatchStatementRequestBuilder(
+		requestInputs.statementId,
 		[ {
 			op: 'replace',
 			path: '/value/content',
 			value: 'random-string-value-' + utils.uniq()
 		} ]
 	),
-	( { itemId } ) => rbf.newSetItemLabelRequestBuilder( itemId, 'en', 'random-test-label-' + utils.uniq() ),
-	( { itemId } ) => rbf.newSetItemDescriptionRequestBuilder(
-		itemId,
+	() => rbf.newSetItemLabelRequestBuilder( requestInputs.itemId, 'en', 'random-test-label-' + utils.uniq() ),
+	() => rbf.newSetItemDescriptionRequestBuilder(
+		requestInputs.itemId,
 		'en',
 		'random-test-description-' + utils.uniq()
 	),
-	( { itemId, siteId, linkedArticle } ) => rbf.newSetSitelinkRequestBuilder(
-		itemId,
-		siteId,
-		{ title: linkedArticle }
+	() => rbf.newSetSitelinkRequestBuilder(
+		requestInputs.itemId,
+		requestInputs.siteId,
+		{ title: requestInputs.linkedArticle }
 	),
-	( { itemId, siteId } ) => rbf.newPatchSitelinksRequestBuilder(
-		itemId,
+	() => rbf.newPatchSitelinksRequestBuilder(
+		requestInputs.itemId,
 		[ {
 			op: 'remove',
-			path: `/${siteId}/badges`
+			path: `/${requestInputs.siteId}/badges`
 		} ]
 
 	),
-	( { itemId } ) => rbf.newPatchItemLabelsRequestBuilder(
-		itemId,
+	() => rbf.newPatchItemLabelsRequestBuilder(
+		requestInputs.itemId,
 		[ {
 			op: 'replace',
 			path: '/en',
 			value: 'random-test-label-' + utils.uniq()
 		} ]
 	),
-	( { itemId } ) => rbf.newPatchItemDescriptionsRequestBuilder(
-		itemId,
+	() => rbf.newPatchItemDescriptionsRequestBuilder(
+		requestInputs.itemId,
 		[ { op: 'replace', path: '/en', value: 'random-test-description-' + utils.uniq() } ]
 	),
-	( { itemId } ) => rbf.newPatchItemAliasesRequestBuilder(
-		itemId,
+	() => rbf.newPatchItemAliasesRequestBuilder(
+		requestInputs.itemId,
 		[ { op: 'replace', path: '/en', value: [ 'en-alias-' + utils.uniq() ] } ]
 	),
-	( { itemId } ) => rbf.newAddItemAliasesInLanguageRequestBuilder( itemId, 'en', [ 'en-alias-' + utils.uniq() ] ),
-	( { itemId } ) => rbf.newRemoveItemLabelRequestBuilder( itemId, 'en' ),
-	( { itemId } ) => rbf.newRemoveItemDescriptionRequestBuilder( itemId, 'en' ),
-	( { itemId, siteId } ) => rbf.newRemoveSitelinkRequestBuilder( itemId, siteId )
-];
+	() => rbf.newAddItemAliasesInLanguageRequestBuilder( requestInputs.itemId, 'en', [ 'en-alias-' + utils.uniq() ] ),
+	() => rbf.newRemoveItemLabelRequestBuilder( requestInputs.itemId, 'en' ),
+	() => rbf.newRemoveItemDescriptionRequestBuilder( requestInputs.itemId, 'en' ),
+	() => rbf.newRemoveSitelinkRequestBuilder( requestInputs.itemId, requestInputs.siteId )
+].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
