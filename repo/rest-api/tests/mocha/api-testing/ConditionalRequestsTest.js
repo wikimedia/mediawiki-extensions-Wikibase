@@ -44,6 +44,13 @@ describeWithTestData( 'Conditional requests', (
 		...getPropertyGetRequests( propertyRequestInputs )
 	];
 	describeEachRouteWithReset( getRequests, ( newRequestBuilder, requestInputs ) => {
+		// eslint-disable-next-line mocha/no-top-level-hooks
+		before( async () => {
+			const latestRevision = await getLatestEditMetadata( requestInputs.mainTestSubject );
+			requestInputs.latestRevId = latestRevision.revid;
+			requestInputs.latestRevTimestamp = latestRevision.timestamp;
+		} );
+
 		describe( 'If-None-Match - 200 response', () => {
 			it( 'if the current revision is newer than the ETag provided', async () => {
 				const response = await newRequestBuilder()
