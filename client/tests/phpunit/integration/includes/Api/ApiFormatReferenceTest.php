@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use ApiTestCase;
 use ApiUsageException;
 use FormatJson;
+use MediaWiki\Message\Message;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\WikibaseSettings;
@@ -99,31 +100,31 @@ class ApiFormatReferenceTest extends ApiTestCase {
 		yield [
 			[ 'action' => 'wbformatreference' ],
 			'paramvalidator-missingparam',
-			[ [ 'plaintext' => 'reference' ] ],
+			[ Message::plaintextParam( 'reference' ) ],
 		];
 		yield [
 			[ 'action' => 'wbformatreference', 'reference' => '{}' ],
 			'paramvalidator-missingparam',
-			[ [ 'plaintext' => 'style' ] ],
+			[ Message::plaintextParam( 'style' ) ],
 		];
 		yield [
 			[ 'action' => 'wbformatreference', 'reference' => '{}', 'style' => 'foo' ],
 			'paramvalidator-badvalue-enumnotmulti',
 			[
-				[ 'plaintext' => 'style' ],
-				[ 'plaintext' => 'foo' ],
-				[ 'list' => [ [ 'plaintext' => 'internal-data-bridge' ] ], 'type' => 'text' ],
-				[ 'num' => 1 ],
+				Message::plaintextParam( 'style' ),
+				Message::plaintextParam( 'foo' ),
+				Message::listParam( [ Message::plaintextParam( 'internal-data-bridge' ) ] ),
+				Message::numParam( 1 ),
 			],
 		];
 		yield [
 			[ 'action' => 'wbformatreference', 'reference' => '{}', 'style' => 'internal-data-bridge', 'outputformat' => 'json' ],
 			'paramvalidator-badvalue-enumnotmulti',
 			[
-				[ 'plaintext' => 'outputformat' ],
-				[ 'plaintext' => 'json' ],
-				[ 'list' => [ [ 'plaintext' => 'html' ] ], 'type' => 'text' ],
-				[ 'num' => 1 ],
+				Message::plaintextParam( 'outputformat' ),
+				Message::plaintextParam( 'json' ),
+				Message::listParam( [ Message::plaintextParam( 'html' ) ] ),
+				Message::numParam( 1 ),
 			],
 		];
 		yield [
