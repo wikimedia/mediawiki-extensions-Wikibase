@@ -54,7 +54,7 @@ class LabelDescriptionNotEqualValidator implements EntityValidator {
 		}
 
 		// Nothing to do if there are no labels OR no descriptions.
-		if ( empty( $labels ) || empty( $descriptions ) ) {
+		if ( !$labels || !$descriptions ) {
 			return Result::newSuccess();
 		}
 

@@ -63,7 +63,7 @@ class InterWikiLinkExistsValidator implements ValueValidator {
 			);
 		}
 
-		return empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
+		return !$errors ? Result::newSuccess() : Result::newError( $errors );
 	}
 
 	/**

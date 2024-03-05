@@ -71,7 +71,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				try {
 					$searchResults = $this->getSearchResults( $label, $languageCode );
 
-					if ( !empty( $searchResults ) ) {
+					if ( $searchResults ) {
 						$this->displaySearchResults( $searchResults, $label );
 					} else {
 						$this->showNothingFound( $languageCode, $label );

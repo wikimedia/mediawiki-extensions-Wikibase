@@ -50,7 +50,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 			}
 		}
 
-		return empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
+		return !$errors ? Result::newSuccess() : Result::newError( $errors );
 	}
 
 	/**

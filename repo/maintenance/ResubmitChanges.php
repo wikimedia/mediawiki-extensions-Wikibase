@@ -45,7 +45,7 @@ class ResubmitChanges extends Maintenance {
 
 		$offset = 0;
 		$changes = $entityChangeLookup->loadChangesBefore( $thisTimeOrOlder, $this->mBatchSize, $offset );
-		while ( !empty( $changes ) ) {
+		while ( $changes ) {
 			$numberOfChanges = count( $changes );
 			$stats->updateCount( 'wikibase.repo.ResubmitChanges.numberOfChanges', $numberOfChanges );
 			$this->log( 'Resubmitting ' . $numberOfChanges . ' changes older than ' . $minimumAge . ' seconds.' );

@@ -60,7 +60,7 @@ class ApiEntityLookup {
 	 * @return array the json_decoded part of the wbgetentities API response for the entity.
 	 */
 	private function getEntities( array $ids ) {
-		if ( empty( $ids ) ) {
+		if ( !$ids ) {
 			return [];
 		}
 		Assert::parameterElementType( FederatedPropertyId::class, $ids, '$entityIds' );

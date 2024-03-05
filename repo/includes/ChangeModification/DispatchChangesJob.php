@@ -136,7 +136,7 @@ class DispatchChangesJob extends Job {
 
 		$changes = $this->changeLookup->loadByEntityIdFromPrimary( $this->entityIdSerialization );
 
-		if ( empty( $changes ) ) {
+		if ( !$changes ) {
 			$this->logger->info( __METHOD__ . ': no changes for {entity} => all have been consumed by previous job?', [
 				'entity' => $this->entityIdSerialization,
 			] );
@@ -149,7 +149,7 @@ class DispatchChangesJob extends Job {
 			$wikisWithSitelinkChanges = [];
 		}
 		$dispatchingClientSites = $this->filterClientWikis( $allClientSites, $subscribedClientSites, $wikisWithSitelinkChanges );
-		if ( empty( $dispatchingClientSites ) ) {
+		if ( !$dispatchingClientSites ) {
 			// without subscribed wikis, this job should never have been scheduled
 			$this->logger->warning( __METHOD__ . ': no wikis subscribed for {entity} => doing nothing', [
 				'entity' => $this->entityIdSerialization,

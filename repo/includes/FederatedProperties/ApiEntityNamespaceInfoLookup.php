@@ -45,7 +45,7 @@ class ApiEntityNamespaceInfoLookup {
 	}
 
 	private function fetchNamespaces() {
-		if ( !empty( $this->namespaces ) ) {
+		if ( $this->namespaces ) {
 			return;
 		}
 

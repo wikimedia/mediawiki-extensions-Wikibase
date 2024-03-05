@@ -148,7 +148,7 @@ class SummaryFormatter {
 	 * @return string[]
 	 */
 	protected function formatArgList( array $args ) {
-		if ( !empty( $args ) && !isset( $args[0] ) ) {
+		if ( $args && !isset( $args[0] ) ) {
 			// turn assoc array into a list
 			$args = $this->formatKeyValuePairs( $args );
 		}
@@ -184,7 +184,7 @@ class SummaryFormatter {
 					return '<' . get_class( $arg ) . '>';
 				}
 			} elseif ( is_array( $arg ) ) {
-				if ( !empty( $arg ) && !isset( $arg[0] ) ) {
+				if ( $arg && !isset( $arg[0] ) ) {
 					// turn assoc array into a list
 					$arg = $this->formatKeyValuePairs( $arg );
 				}

@@ -284,7 +284,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
-		if ( empty( $this->badges ) ) {
+		if ( !$this->badges ) {
 			// @phan-suppress-next-line PhanImpossibleTypeComparison
 			$this->badges = $this->site === null ? [] : $this->getBadges( $entity, $this->site );
 		}
@@ -300,7 +300,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			],
 		];
 
-		if ( !empty( $this->badgeItems ) ) {
+		if ( $this->badgeItems ) {
 			$pageinput['badges'] = $this->getMultiSelectForBadges();
 		}
 
@@ -341,7 +341,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		} else {
 			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
 
-			if ( !empty( $this->badgeItems ) ) {
+			if ( $this->badgeItems ) {
 				$intro .= $this->msg( 'word-separator' )->text() . $this->msg( 'wikibase-setsitelink-intro-badges' )->text();
 			}
 

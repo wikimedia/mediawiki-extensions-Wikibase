@@ -212,7 +212,7 @@ class RemoveClaims extends ApiBase {
 		// Not using array_diff but array_diff_key does have a huge performance impact.
 		$missingGuids = array_diff_key( array_flip( $requiredGuids ), $existingGuids );
 
-		if ( !empty( $missingGuids ) ) {
+		if ( $missingGuids ) {
 			$this->errorReporter->dieError(
 				'Statement(s) with GUID(s) ' . implode( ', ', array_keys( $missingGuids ) ) . ' not found',
 				'invalid-guid'

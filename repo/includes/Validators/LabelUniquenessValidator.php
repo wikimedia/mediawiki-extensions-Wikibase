@@ -63,7 +63,7 @@ class LabelUniquenessValidator implements EntityValidator {
 
 			}
 
-			if ( !empty( $errors ) ) {
+			if ( $errors ) {
 				return Result::newError( $errors );
 			}
 		}

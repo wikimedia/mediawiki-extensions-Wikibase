@@ -47,7 +47,7 @@ class SitelinkEditSummary implements EditSummary {
 	}
 
 	public function hasBadges(): bool {
-		return !empty( $this->sitelink->getBadges() );
+		return (bool)$this->sitelink->getBadges();
 	}
 
 	public function isBadgesOnly(): bool {

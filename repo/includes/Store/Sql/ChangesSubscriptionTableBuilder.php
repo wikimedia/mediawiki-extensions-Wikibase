@@ -137,7 +137,7 @@ class ChangesSubscriptionTableBuilder {
 
 		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $dbw, $continuation );
 
-		if ( empty( $subscriptionsPerItemBatch ) ) {
+		if ( !$subscriptionsPerItemBatch ) {
 			return 0;
 		}
 
@@ -189,7 +189,7 @@ class ChangesSubscriptionTableBuilder {
 			->from( 'wb_items_per_site' );
 
 		$continuationMsg = '';
-		if ( !empty( $continuation ) ) {
+		if ( $continuation ) {
 			[ $fromItemId, $fromRowId ] = $continuation;
 			$continuationCondition = $db->buildComparison( '>', [
 				'ips_item_id' => (int)$fromItemId,

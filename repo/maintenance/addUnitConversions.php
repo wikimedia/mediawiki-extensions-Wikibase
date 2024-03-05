@@ -123,7 +123,7 @@ class AddUnitConversions extends Maintenance {
 		}
 
 		$diffUnits = array_diff( array_keys( $newJson ), array_keys( $oldJson ) );
-		if ( empty( $diffUnits ) ) {
+		if ( !$diffUnits ) {
 			$this->error( "No new units." );
 			return;
 		}

@@ -405,7 +405,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
 
-		if ( empty( $changeOps ) ) {
+		if ( !$changeOps ) {
 			return false;
 		}
 
@@ -424,7 +424,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function assertNoPipeCharacterInAliases( Fingerprint $fingerprint ) {
-		if ( !empty( $this->aliases ) ) {
+		if ( $this->aliases ) {
 			if ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
 				$aliasesInLang = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
 				foreach ( $aliasesInLang as $alias ) {
@@ -498,7 +498,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			);
 		}
 
-		if ( !empty( $this->aliases ) ) {
+		if ( $this->aliases ) {
 			if ( !$fingerprint->hasAliasGroup( $this->languageCode )
 				|| $fingerprint->getAliasGroup( $this->languageCode )->getAliases() !== $this->aliases
 			) {

@@ -31,8 +31,7 @@ class NoCrossReferencingStatements {
 			$this->checkStatementHasLink( $fromStatement, $target->getId() );
 		}
 
-		// @phan-suppress-next-line PhanRedundantCondition False positive
-		return empty( $this->violations );
+		return !$this->violations;
 	}
 
 	/**

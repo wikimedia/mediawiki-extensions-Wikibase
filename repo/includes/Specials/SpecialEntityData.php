@@ -72,7 +72,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$maxAge = $repoSettings->getSetting( 'dataCdnMaxAge' );
 		$formats = $entityDataFormatProvider->getAllowedFormats();
 
-		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
+		$defaultFormat = !$formats ? 'html' : $formats[0];
 
 		$entityDataRequestHandler = new EntityDataRequestHandler(
 			$entityDataUriManager,
