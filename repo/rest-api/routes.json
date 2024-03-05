@@ -243,5 +243,10 @@
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "DELETE",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveSitelinkRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/openapi.json",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetOpenApiDocRouteHandler::factory"
 	}
 ]
