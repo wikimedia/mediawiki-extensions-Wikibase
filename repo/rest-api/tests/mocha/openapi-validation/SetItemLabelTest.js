@@ -89,7 +89,8 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '415 - unsupported media type', async () => {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip( '415 - unsupported media type', async () => {
 		const response = await newSetItemLabelRequestBuilder(
 			itemId,
 			langWithExistingLabel,

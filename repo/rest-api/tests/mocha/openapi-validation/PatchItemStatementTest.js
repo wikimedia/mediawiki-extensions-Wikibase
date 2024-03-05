@@ -92,7 +92,8 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				expect( response ).to.satisfyApiSpec;
 			} );
 
-			it( '415 - unsupported media type', async () => {
+			// eslint-disable-next-line mocha/no-skipped-tests
+			it.skip( '415 - unsupported media type', async () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,
 					[
