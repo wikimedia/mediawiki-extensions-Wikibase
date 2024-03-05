@@ -8,13 +8,15 @@ use InvalidArgumentException;
 use Language;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOutput;
 use Scribunto_LuaLibraryBase;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
 use Wikibase\Client\PropertyLabelNotResolvedException;
-use Wikibase\Client\Usage\ParserUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -24,7 +26,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  * @author Andrew Hall
  */
-class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
+class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLuaEntityBindings|null
@@ -38,11 +40,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	private function getImplementation(): WikibaseLuaEntityBindings {
 		if ( !$this->wbLibrary ) {
-			$this->wbLibrary = $this->newImplementation();
-		}
-		if ( $this->wbLibrary->hasStoredReferenceToDifferentParse( $this->getEngine()->getParser() ) ) {
-			/* ParserOutput in the Engine has been reset - we need to dispose of references
-			 * to the old ParserOutput. */
 			$this->wbLibrary = $this->newImplementation();
 		}
 
@@ -156,9 +153,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
-	public function getUsageAccumulator(): ParserUsageAccumulator {
+	public function getUsageAccumulator(): UsageAccumulator {
 		return WikibaseClient::getUsageAccumulatorFactory()
-			->newFromParserOutput( $this->getParser()->getOutput() );
+			->newFromParserOutputProvider( $this );
 	}
 
 	/**
@@ -309,4 +306,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->getLuaFunctionCallTracker()->incrementKey( $key );
 	}
 
+	public function getParserOutput(): ParserOutput {
+		return $this->getParser()->getOutput();
+	}
 }

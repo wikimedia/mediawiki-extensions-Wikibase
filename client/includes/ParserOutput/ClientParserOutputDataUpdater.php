@@ -7,7 +7,6 @@ namespace Wikibase\Client\ParserOutput;
 use Content;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -87,44 +86,47 @@ class ClientParserOutputDataUpdater {
 	/**
 	 * Add wikibase_item parser output property
 	 */
-	public function updateItemIdProperty( Title $title, ParserOutput $parserOutput ): void {
+	public function updateItemIdProperty( Title $title, ParserOutputProvider $parserOutputProvider ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$parserOutput->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
+			$parserOutputProvider->getParserOutput()->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
 
-			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
 		} else {
-			$parserOutput->unsetPageProperty( 'wikibase_item' );
+			$parserOutputProvider->getParserOutput()->unsetPageProperty( 'wikibase_item' );
 		}
 	}
 
 	/**
 	 * Add tracking category if the page is a redirect and is connected to an item
 	 */
-	public function updateTrackingCategories( Title $title, ParserOutput $parserOutput ): void {
+	public function updateTrackingCategories( Title $title, ParserOutputProvider $parserOutputProvider ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId && $title->isRedirect() ) {
 			$trackingCategories = MediaWikiServices::getInstance()->getTrackingCategories();
 			$trackingCategories->addTrackingCategory(
-				$parserOutput, 'connected-redirect-category', $title
+				$parserOutputProvider->getParserOutput(), 'connected-redirect-category', $title
 			);
 		}
 	}
 
-	public function updateOtherProjectsLinksData( Title $title, ParserOutput $parserOutput ): void {
+	public function updateOtherProjectsLinksData( Title $title, ParserOutputProvider $parserOutputProvider ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
 				->getOtherProjectsSidebarGenerator( $usageAccumulator );
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
-			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
+			$parserOutputProvider->getParserOutput()->setExtensionData(
+				'wikibase-otherprojects-sidebar',
+				$otherProjects
+			);
 		} else {
-			$parserOutput->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
+			$parserOutputProvider->getParserOutput()->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
 		}
 	}
 
@@ -132,7 +134,10 @@ class ClientParserOutputDataUpdater {
 	 * Writes the "unexpectedUnconnectedPage" page property if this page is not linked to an item and
 	 * doesn't have the "__EXPECTED_UNCONNECTED_PAGE__" magic word on it.
 	 */
-	public function updateUnconnectedPageProperty( Content $content, Title $title, ParserOutput $parserOutput ): void {
+	public function updateUnconnectedPageProperty(
+		Content $content,
+		Title $title,
+		ParserOutputProvider $parserOutputProvider ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId || $content->isRedirect() ) {
@@ -140,7 +145,7 @@ class ClientParserOutputDataUpdater {
 			return;
 		}
 
-		$pageProperties = $parserOutput->getPageProperties();
+		$pageProperties = $parserOutputProvider->getParserOutput()->getPageProperties();
 
 		/*
 		 * the page prop value is the *negative* namespace,
@@ -149,26 +154,26 @@ class ClientParserOutputDataUpdater {
 		 */
 		$value = -$title->getNamespace();
 		if ( !isset( $pageProperties['expectedUnconnectedPage'] ) ) {
-			$parserOutput->setPageProperty( 'unexpectedUnconnectedPage', $value );
+			$parserOutputProvider->getParserOutput()->setPageProperty( 'unexpectedUnconnectedPage', $value );
 		}
 	}
 
-	public function updateBadgesProperty( Title $title, ParserOutput $parserOutput ): void {
+	public function updateBadgesProperty( Title $title, ParserOutputProvider $parserOutputProvider ): void {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		// first reset all badges in case one got removed
-		foreach ( $parserOutput->getPageProperties() as $name => $property ) {
+		foreach ( $parserOutputProvider->getParserOutput()->getPageProperties() as $name => $property ) {
 			if ( strpos( $name, 'wikibase-badge-' ) === 0 ) {
-				$parserOutput->unsetPageProperty( $name );
+				$parserOutputProvider->getParserOutput()->unsetPageProperty( $name );
 			}
 		}
 
 		if ( $itemId ) {
-			$this->setBadgesProperty( $itemId, $parserOutput );
+			$this->setBadgesProperty( $itemId, $parserOutputProvider );
 		}
 	}
 
-	private function setBadgesProperty( ItemId $itemId, ParserOutput $parserOutput ): void {
+	private function setBadgesProperty( ItemId $itemId, ParserOutputProvider $parserOutputProvider ): void {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 		'@phan-var Item|null $item';
@@ -190,7 +195,10 @@ class ClientParserOutputDataUpdater {
 		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
 
 		foreach ( $siteLink->getBadges() as $badge ) {
-			$parserOutput->setPageProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
+			$parserOutputProvider->getParserOutput()->setPageProperty(
+				'wikibase-badge-' . $badge->getSerialization(),
+				true
+			);
 		}
 	}
 

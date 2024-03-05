@@ -10,6 +10,7 @@ use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 
 /**
@@ -76,7 +77,8 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 			return;
 		}
 
-		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
+		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler( $usageAccumulator );
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
 
@@ -85,11 +87,12 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 			$langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 		}
 
-		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
-		$this->parserOutputDataUpdater->updateTrackingCategories( $title, $parserOutput );
-		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
-		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $content, $title, $parserOutput );
-		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateTrackingCategories( $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $content, $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutputProvider );
+		$parserOutputProvider->close();
 	}
 
 }

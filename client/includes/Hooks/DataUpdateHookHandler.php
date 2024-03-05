@@ -21,6 +21,7 @@ use ParserOptions;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\UsageUpdater;
@@ -152,12 +153,13 @@ class DataUpdateHookHandler implements
 			return;
 		}
 
-		$parserOutput = $linksUpdate->getParserOutput();
-		$usageAcc = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+		$parserOutputProvider = new ScopedParserOutputProvider( $linksUpdate->getParserOutput() );
+		$usageAcc = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 
 		// Please note that page views that happen between the page save but before this is run will have
 		// their usages removed (as we might add the usages via onParserCacheSaveComplete before this is run).
 		$this->usageUpdater->replaceUsagesForPage( $pageId, $usageAcc->getUsages() );
+		$parserOutputProvider->close();
 	}
 
 	/**
@@ -172,9 +174,11 @@ class DataUpdateHookHandler implements
 	 */
 	public function onParserCacheSaveComplete( $parserCache, $parserOutput, $title, $popts, $revId ): void {
 		DeferredUpdates::addCallableUpdate( function () use ( $parserOutput, $title ) {
-			$usageAcc = $this->usageAccumulatorFactory->newFromParserOutput( $parserOutput );
+			$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
+			$usageAcc = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 
 			$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
+			$parserOutputProvider->close();
 			if ( $usages === [] ) {
 				// no usages or no title, bail out
 				return;

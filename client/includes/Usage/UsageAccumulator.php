@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Usage;
 
-use Parser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 
@@ -85,12 +84,4 @@ abstract class UsageAccumulator {
 	 * @return EntityUsage[]
 	 */
 	abstract public function getUsages(): array;
-
-	/**
-	 * Returns true if the UsageAccumulator has cached a reference to a different
-	 * parser output to that which is currently active in the parser provided.
-	 */
-	public function hasStoredReferenceToDifferentParse( Parser $parser ): bool {
-		return false;
-	}
 }

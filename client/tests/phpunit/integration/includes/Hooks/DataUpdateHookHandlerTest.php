@@ -10,6 +10,8 @@ use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -98,7 +100,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$jobScheduler->expects( $this->never() )
 				->method( 'push' );
 		} else {
-			$expectedUsageArray = array_map( function ( EntityUsage $usage ) {
+			$expectedUsageArray = array_map( static function ( EntityUsage $usage ) {
 				return $usage->asArray();
 			}, $expectedUsages );
 
@@ -176,18 +178,19 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param EntityUsage[]|null $usages
 	 */
-	private function newParserOutput( array $usages = null ): ParserOutput {
+	private function newParserOutputProvider( array $usages = null ): ScopedParserOutputProvider {
 		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 
 		if ( $usages ) {
-			$acc = $this->newUsageAccumulatorFactory()->newFromParserOutput( $parserOutput );
+			$acc = $this->newUsageAccumulatorFactory()->newFromParserOutputProvider( $parserOutputProvider );
 
 			foreach ( $usages as $u ) {
 				$acc->addUsage( $u );
 			}
 		}
 
-		return $parserOutput;
+		return $parserOutputProvider;
 	}
 
 	private function newTitle( int $id, int $ns, string $text ): Title {
@@ -207,11 +210,11 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param Title $title
-	 * @param EntityUsage[]|null $usages
 	 */
-	private function newLinksUpdate( Title $title, array $usages = null ): LinksUpdate {
-		$pout = $this->newParserOutput( $usages );
-
+	private function newLinksUpdate(
+		Title $title,
+		ParserOutputProvider $parserOutputProvider
+	): LinksUpdate {
 		$linksUpdate = $this->createMock( LinksUpdate::class );
 
 		$linksUpdate->method( 'getPageId' )
@@ -221,7 +224,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $title );
 
 		$linksUpdate->method( 'getParserOutput' )
-			->willReturn( $pout );
+			->willReturn( $parserOutputProvider->getParserOutput() );
 
 		return $linksUpdate;
 	}
@@ -248,40 +251,51 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testLinksUpdateComplete( ?array $usages ): void {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
-		$linksUpdate = $this->newLinksUpdate( $title, $usages );
+		$parserOutputProvider = $this->newParserOutputProvider( $usages );
+		$linksUpdate = $this->newLinksUpdate( $title, $parserOutputProvider );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandler( $title, $usages, false, false, true );
 		$handler->doLinksUpdateComplete( $linksUpdate );
+		$parserOutputProvider->close();
 	}
 
 	public function testLinksUpdateComplete_noPageId(): void {
 		$title = $this->newTitle( 0, NS_MAIN, 'Oh no' );
 
-		$linksUpdate = $this->newLinksUpdate( $title, null );
+		$parserOutputProvider = $this->newParserOutputProvider( null );
+		$linksUpdate = $this->newLinksUpdate( $title, $parserOutputProvider );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandler( $title, null, false, true, false );
 		$handler->doLinksUpdateComplete( $linksUpdate );
+		$parserOutputProvider->close();
 	}
 
 	/**
 	 * @dataProvider provideEntityUsages
 	 */
 	public function testDoParserCacheSaveComplete( ?array $usages ): void {
-		$parserOutput = $this->newParserOutput( $usages );
+		$parserOutputProvider = $this->newParserOutputProvider( $usages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandler( $title, $usages, false, true );
-		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
+		$handler->onParserCacheSaveComplete(
+			null,
+			$parserOutputProvider->getParserOutput(),
+			$title,
+			null,
+			null
+		);
+		$parserOutputProvider->close();
 	}
 
 	public function testDoParserCacheSaveCompleteNoChangeEntityUsage(): void {
 		$usages = [
 			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
 		];
-		$parserOutput = $this->newParserOutput( $usages );
+		$parserOutputProvider = $this->newParserOutputProvider( $usages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the JobScheduler mock
@@ -296,7 +310,14 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageLookup,
 			$this->newUsageAccumulatorFactory()
 		);
-		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
+		$handler->onParserCacheSaveComplete(
+			null,
+			$parserOutputProvider->getParserOutput(),
+			$title,
+			null,
+			null
+		);
+		$parserOutputProvider->close();
 	}
 
 	public function testDoParserCacheSaveCompletePartialUpdate(): void {
@@ -313,7 +334,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			'Q2#O' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::OTHER_USAGE ),
 		];
-		$parserOutput = $this->newParserOutput( $newUsages );
+		$parserOutputProvider = $this->newParserOutputProvider( $newUsages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the JobScheduler mock
@@ -328,7 +349,14 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$usageLookup,
 			$this->newUsageAccumulatorFactory()
 		);
-		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
+		$handler->onParserCacheSaveComplete(
+			null,
+			$parserOutputProvider->getParserOutput(),
+			$title,
+			null,
+			null
+		);
+		$parserOutputProvider->close();
 	}
 
 	public function testDoArticleDeleteComplete(): void {

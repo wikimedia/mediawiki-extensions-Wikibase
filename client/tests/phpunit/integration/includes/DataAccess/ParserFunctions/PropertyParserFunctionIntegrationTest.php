@@ -7,6 +7,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -40,6 +41,11 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
+	/**
+	 * @var ScopedParserOutputProvider
+	 */
+	private $parserOutputProvider;
+
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -72,17 +78,21 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	}
 
 	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): UsageAccumulator {
+		$this->parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
 			new UsageDeduplicator( [] ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
-		return $factory->newFromParserOutput( $parserOutput );
+		return $factory->newFromParserOutputProvider( $this->parserOutputProvider );
 	}
 
 	protected function tearDown(): void {
 		parent::tearDown();
 
+		if ( $this->parserOutputProvider ) {
+			$this->parserOutputProvider->close();
+		}
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
 	}
 

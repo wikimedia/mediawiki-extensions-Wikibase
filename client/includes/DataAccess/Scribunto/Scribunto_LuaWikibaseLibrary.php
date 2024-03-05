@@ -9,10 +9,12 @@ use Exception;
 use Language;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOutput;
 use Scribunto_LuaError;
 use Scribunto_LuaLibraryBase;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -34,7 +36,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  *
  * @license GPL-2.0-or-later
  */
-class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
+class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLanguageIndependentLuaBindings|null
@@ -143,9 +145,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getUsageAccumulator(): UsageAccumulator {
 		if ( $this->usageAccumulator === null ) {
 			$usageAccumulatorFactory = WikibaseClient::getUsageAccumulatorFactory();
-			$this->usageAccumulator = $usageAccumulatorFactory->newFromParserOutput( $this->getParser()->getOutput() );
+			$this->usageAccumulator = $usageAccumulatorFactory->newFromParserOutputProvider( $this );
 		}
-
 		return $this->usageAccumulator;
 	}
 
@@ -760,4 +761,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return $this->luaEntityModules;
 	}
 
+	public function getParserOutput(): ParserOutput {
+		return $this->getParser()->getOutput();
+	}
 }

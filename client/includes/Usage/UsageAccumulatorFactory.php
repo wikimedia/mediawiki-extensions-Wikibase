@@ -4,7 +4,11 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Usage;
 
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
+use Wikibase\Client\ParserOutput\ParserOutputProvider;
+use Wikibase\Client\ParserOutput\ParserWrappingParserOutputProvider;
+use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 
 /**
@@ -37,15 +41,34 @@ class UsageAccumulatorFactory {
 		$this->entityRedirectTargetLookup = $entityRedirectTargetLookup;
 	}
 
-	public function newFromParserOutput( ParserOutput $parserOutput ): ParserUsageAccumulator {
+	public function newFromParserOutputProvider( ParserOutputProvider $parserOutputProvider ): UsageAccumulator {
 		return new RedirectTrackingUsageAccumulator(
 			new ParserOutputUsageAccumulator(
-				$parserOutput,
+				$parserOutputProvider,
 				$this->entityUsageFactory,
 				$this->usageDeduplicator
 			),
 			$this->entityRedirectTargetLookup
 		);
+	}
+
+	/**
+	 * Compatibility wrapper while we migrate WikibaseLexeme to use the new ParserOutputProvider
+	 * function.
+	 */
+	public function newFromParserOutput( ParserOutput $parserOutput ): UsageAccumulator {
+		return new RedirectTrackingUsageAccumulator(
+			new ParserOutputUsageAccumulator(
+				new ScopedParserOutputProvider( $parserOutput ),
+				$this->entityUsageFactory,
+				$this->usageDeduplicator
+			),
+			$this->entityRedirectTargetLookup
+		);
+	}
+
+	public function newFromParser( Parser $parser ): UsageAccumulator {
+		return $this->newFromParserOutputProvider( new ParserWrappingParserOutputProvider( $parser ) );
 	}
 
 }

@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Parser;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -146,9 +145,5 @@ class WikibaseLuaEntityBindings {
 	public function addSiteLinksUsage( string $entityId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
 		$this->usageAccumulator->addSiteLinksUsage( $entityId );
-	}
-
-	public function hasStoredReferenceToDifferentParse( Parser $parser ): bool {
-		return $this->usageAccumulator->hasStoredReferenceToDifferentParse( $parser );
 	}
 }
