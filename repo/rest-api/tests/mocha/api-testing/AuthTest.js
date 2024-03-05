@@ -1,15 +1,10 @@
 'use strict';
 
-const { assert, action, utils } = require( 'api-testing' );
+const { describeWithTestData } = require( '../helpers/describeWithTestData' );
+const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue,
-	changeEntityProtectionStatus,
-	createEntity,
-	editEntity,
-	createLocalSitelink,
-	getLocalSiteId
+	changeEntityProtectionStatus
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
@@ -19,46 +14,11 @@ const {
 	getRequestsOnProperty
 } = require( '../helpers/happyPathRequestBuilders' );
 
-describe( 'Auth', () => {
-
-	const itemRequestInputs = {};
-	const propertyRequestInputs = {};
-	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
+describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
 
-	async function resetEntityTestData( id, statementPropertyId ) {
-		if ( id.startsWith( 'Q' ) ) {
-			await createLocalSitelink( id, linkedArticle );
-		}
-
-		return ( await editEntity( id, {
-			labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-			descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-			aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
-			claims: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ]
-		} ) ).entity;
-	}
-
+	// eslint-disable-next-line mocha/no-top-level-hooks
 	before( async () => {
-		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-
-		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
-		const itemData = await resetEntityTestData( itemId, statementPropertyId );
-
-		itemRequestInputs.mainTestSubject = itemId;
-		itemRequestInputs.itemId = itemId;
-		itemRequestInputs.statementId = itemData.claims[ statementPropertyId ][ 0 ].id;
-		itemRequestInputs.statementPropertyId = statementPropertyId;
-		itemRequestInputs.siteId = await getLocalSiteId();
-		itemRequestInputs.linkedArticle = linkedArticle;
-
-		const propertyId = ( await createUniqueStringProperty() ).entity.id;
-		const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
-		propertyRequestInputs.mainTestSubject = propertyId;
-		propertyRequestInputs.propertyId = propertyId;
-		propertyRequestInputs.statementId = propertyData.claims[ statementPropertyId ][ 0 ].id;
-		propertyRequestInputs.statementPropertyId = statementPropertyId;
-
 		user = await action.mindy();
 	} );
 
@@ -72,23 +32,14 @@ describe( 'Auth', () => {
 		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
 	];
 
-	[
+	const allRoutes = [
 		...editRequestsWithInputs,
 		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
 		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
-	].forEach( ( { newRequestBuilder, requestInputs } ) => {
-		describe( `Authentication - ${newRequestBuilder().getRouteDescription()}`, () => {
+	];
 
-			afterEach( async () => {
-				if ( newRequestBuilder().getMethod() === 'DELETE' ) {
-					const entityData = await resetEntityTestData(
-						requestInputs.mainTestSubject,
-						requestInputs.statementPropertyId
-					);
-					requestInputs.statementId = entityData.claims[ requestInputs.statementPropertyId ][ 0 ].id;
-				}
-			} );
-
+	describe( 'Authentication', () => {
+		describeEachRouteWithReset( allRoutes, ( newRequestBuilder ) => {
 			it( 'has an X-Authenticated-User header with the logged in user', async () => {
 				const response = await newRequestBuilder().withUser( user ).makeRequest();
 
@@ -110,7 +61,6 @@ describe( 'Auth', () => {
 			} );
 		} );
 	} );
-
 	describe( 'Authorization', () => {
 		function assertPermissionDenied( response ) {
 			expect( response ).to.have.status( 403 );
@@ -119,16 +69,16 @@ describe( 'Auth', () => {
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
-			it( `Unauthorized bot edit - ${newRequestBuilder().getRouteDescription()}`, async () => {
+		describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder ) => {
+			it( 'Unauthorized bot edit', async () => {
 				assertPermissionDenied(
 					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
 				);
 			} );
 		} );
 
-		editRequestsWithInputs.forEach( ( { newRequestBuilder } ) => {
-			describe( `Blocked user - ${newRequestBuilder().getRouteDescription()}`, () => {
+		describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder ) => {
+			describe( 'Blocked user', () => {
 				before( async () => {
 					await user.action( 'block', {
 						user: user.username,

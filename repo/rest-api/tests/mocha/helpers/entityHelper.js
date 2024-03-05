@@ -15,8 +15,8 @@ async function createEntity( type, entity ) {
 	return makeEditEntityRequest( { new: type }, entity );
 }
 
-async function editEntity( id, entityData ) {
-	return makeEditEntityRequest( { id }, entityData );
+async function editEntity( id, entityData, clear = false ) {
+	return makeEditEntityRequest( { id, clear }, entityData );
 }
 
 async function deleteProperty( propertyId ) {
