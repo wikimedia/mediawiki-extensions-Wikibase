@@ -8,10 +8,10 @@ const {
 } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
-	editRequestsOnItem,
-	editRequestsOnProperty,
-	getRequestsOnItem,
-	getRequestsOnProperty
+	getItemGetRequests,
+	getPropertyGetRequests,
+	getItemEditRequests,
+	getPropertyEditRequests
 } = require( '../helpers/happyPathRequestBuilders' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
@@ -22,20 +22,14 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		user = await action.mindy();
 	} );
 
-	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
-		newRequestBuilder: () => newReqBuilder( requestInputs ),
-		requestInputs
-	} );
-
-	const editRequestsWithInputs = [
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+	const editRequests = [
+		...getItemEditRequests( itemRequestInputs ),
+		...getPropertyEditRequests( propertyRequestInputs )
 	];
-
 	const allRoutes = [
-		...editRequestsWithInputs,
-		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+		...editRequests,
+		...getItemGetRequests( itemRequestInputs ),
+		...getPropertyGetRequests( propertyRequestInputs )
 	];
 
 	describe( 'Authentication', () => {
@@ -69,7 +63,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder ) => {
+		describeEachRouteWithReset( editRequests, ( newRequestBuilder ) => {
 			it( 'Unauthorized bot edit', async () => {
 				assertPermissionDenied(
 					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
@@ -77,7 +71,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 		} );
 
-		describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder ) => {
+		describeEachRouteWithReset( editRequests, ( newRequestBuilder ) => {
 			describe( 'Blocked user', () => {
 				before( async () => {
 					await user.action( 'block', {
@@ -103,7 +97,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		editRequestsWithInputs.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRequests.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( `Protected entity page - ${newRequestBuilder().getRouteDescription()}`, () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect

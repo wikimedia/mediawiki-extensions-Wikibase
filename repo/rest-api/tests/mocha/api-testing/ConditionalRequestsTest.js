@@ -7,10 +7,10 @@ const {
 } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
-	editRequestsOnItem,
-	editRequestsOnProperty,
-	getRequestsOnItem,
-	getRequestsOnProperty
+	getItemGetRequests,
+	getPropertyGetRequests,
+	getItemEditRequests,
+	getPropertyEditRequests
 } = require( '../helpers/happyPathRequestBuilders' );
 const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 
@@ -38,17 +38,12 @@ describeWithTestData( 'Conditional requests', (
 	propertyRequestInputs,
 	describeEachRouteWithReset
 ) => {
-	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
-		newRequestBuilder: () => newReqBuilder( requestInputs ),
-		requestInputs
-	} );
 
-	const getRequestsWithInputs = [
-		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+	const getRequests = [
+		...getItemGetRequests( itemRequestInputs ),
+		...getPropertyGetRequests( propertyRequestInputs )
 	];
-
-	describeEachRouteWithReset( getRequestsWithInputs, ( newRequestBuilder, requestInputs ) => {
+	describeEachRouteWithReset( getRequests, ( newRequestBuilder, requestInputs ) => {
 		describe( 'If-None-Match - 200 response', () => {
 			it( 'if the current revision is newer than the ETag provided', async () => {
 				const response = await newRequestBuilder()
@@ -294,12 +289,12 @@ describeWithTestData( 'Conditional requests', (
 		} );
 	} );
 
-	const editRequestsWithInputs = [
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+	const editRequests = [
+		...getItemEditRequests( itemRequestInputs ),
+		...getPropertyEditRequests( propertyRequestInputs )
 	];
 
-	describeEachRouteWithReset( editRequestsWithInputs, ( newRequestBuilder, requestInputs ) => {
+	describeEachRouteWithReset( editRequests, ( newRequestBuilder, requestInputs ) => {
 		// eslint-disable-next-line mocha/no-top-level-hooks
 		beforeEach( async () => {
 			const latestRevision = await getLatestEditMetadata( requestInputs.mainTestSubject );

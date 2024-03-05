@@ -4,10 +4,10 @@ const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	editRequestsOnItem,
-	editRequestsOnProperty,
-	getRequestsOnItem,
-	getRequestsOnProperty
+	getItemGetRequests,
+	getPropertyGetRequests,
+	getItemEditRequests,
+	getPropertyEditRequests
 } = require( '../helpers/happyPathRequestBuilders' );
 
 function assertValid400Response( response ) {
@@ -21,18 +21,12 @@ describeWithTestData( 'User-Agent requests', (
 	propertyRequestInputs,
 	describeEachRouteWithReset
 ) => {
-	const useRequestInputs = ( requestInputs ) => ( newReqBuilder ) => ( {
-		newRequestBuilder: () => newReqBuilder( requestInputs ),
-		requestInputs
-	} );
-
 	const allRoutes = [
-		...editRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...editRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) ),
-		...getRequestsOnItem.map( useRequestInputs( itemRequestInputs ) ),
-		...getRequestsOnProperty.map( useRequestInputs( propertyRequestInputs ) )
+		...getItemEditRequests( itemRequestInputs ),
+		...getPropertyEditRequests( propertyRequestInputs ),
+		...getItemGetRequests( itemRequestInputs ),
+		...getPropertyGetRequests( propertyRequestInputs )
 	];
-
 	describeEachRouteWithReset( allRoutes, ( newRequestBuilder ) => {
 		it( 'No User-Agent header provided', async () => {
 			const requestBuilder = newRequestBuilder();
