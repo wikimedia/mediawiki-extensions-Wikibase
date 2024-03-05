@@ -230,6 +230,8 @@ return call_user_func( function() {
 				'resources/wikibase/view/ViewController.js',
 				'resources/wikibase/view/ToolbarViewController.js',
 				'resources/wikibase/view/ViewFactory.js',
+				'resources/wikibase/view/termFallbackResolver.js',
+				'resources/wikibase/view/languageFallbackIndicator.js',
 				'resources/jquery/jquery.util.EventSingletonManager.js',
 				'resources/wikibase/wikibase.ValueViewBuilder.js',
 				'resources/jquery/wikibase/jquery.wikibase.pagesuggester.js',

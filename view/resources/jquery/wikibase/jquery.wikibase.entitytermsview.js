@@ -2,11 +2,13 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function () {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' );
+	require( '../../wikibase/view/termFallbackResolver.js' );
+	require( '../../wikibase/view/languageFallbackIndicator.js' );
 
 	const TOGGLER_OPTION_KEY = 'wikibase-entitytermsview-showEntitytermslistview';
 
@@ -110,22 +112,22 @@
 				function ( event, lang ) {
 					var firstLanguage = self.options.userLanguages[ 0 ];
 
-					if ( typeof lang === 'string' && lang !== firstLanguage ) {
-						return;
-					}
-
 					var fingerprint = self.value(),
-						description = fingerprint.getDescriptionFor( firstLanguage ),
+						description = wb.view.termFallbackResolver.getTerm( fingerprint.getDescriptions(), firstLanguage ),
 						aliases = fingerprint.getAliasesFor( firstLanguage ),
 						isDescriptionEmpty = !description || description.getText() === '',
 						isAliasesEmpty = !aliases || aliases.isEmpty();
 
-					self.$headingDescription
-						.toggleClass( 'wb-empty', isDescriptionEmpty )
-						.text( isDescriptionEmpty
-							? mw.msg( 'wikibase-description-empty' )
-							: description.getText()
-						);
+					if ( isDescriptionEmpty ) {
+						self.$headingDescription
+							.toggleClass( 'wb-empty', true )
+							.text( mw.msg( 'wikibase-description-empty' ) );
+					} else {
+						var indicator = wb.view.languageFallbackIndicator.getHtml( description, firstLanguage );
+						self.$headingDescription
+							.toggleClass( 'wb-empty', false )
+							.html( mw.html.escape( description.getText() ) + indicator );
+					}
 
 					var $ul = self.element.find( '.wikibase-entitytermsview-heading-aliases' )
 						.toggleClass( 'wb-empty', isAliasesEmpty )
@@ -480,4 +482,4 @@
 		}
 	} );
 
-}() );
+}( wikibase ) ); // TODO should this really use wikibase?

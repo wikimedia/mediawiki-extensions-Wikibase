@@ -426,24 +426,28 @@
 			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event, lang ) {
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
 
-				if ( typeof lang === 'string' && lang !== userLanguage ) {
-					return;
-				}
-
 				var $entitytermsview = $( event.target ),
 					entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 					fingerprint = entitytermsview.value(),
-					label = fingerprint.getLabelFor( userLanguage ),
+					label = wb.view.termFallbackResolver.getTerm( fingerprint.getLabels(), userLanguage ),
 					isEmpty = !label || label.getText() === '';
 
-				$( 'title' ).text(
-					mw.msg( 'pagetitle', isEmpty ? mw.config.get( 'wgTitle' ) : label.getText() )
-				);
+				if ( isEmpty ) {
+					$( 'h1' ).find( '.wikibase-title' )
+						.toggleClass( 'wb-empty', true )
+						.find( '.wikibase-title-label' )
+						.text( mw.msg( 'wikibase-label-empty' ) );
+				} else {
+					var indicator = wb.view.languageFallbackIndicator.getHtml( label, userLanguage );
+					$( 'h1' ).find( '.wikibase-title' )
+						.toggleClass( 'wb-empty', false )
+						.find( '.wikibase-title-label' )
+						.html( mw.html.escape( label.getText() ) + indicator );
+				}
 
-				$( 'h1' ).find( '.wikibase-title' )
-					.toggleClass( 'wb-empty', isEmpty )
-					.find( '.wikibase-title-label' )
-					.text( isEmpty ? mw.msg( 'wikibase-label-empty' ) : label.getText() );
+				if ( event.type === 'entitytermsviewafterstopediting' ) {
+					$( 'title' ).text( mw.msg( 'pagetitle', isEmpty ? mw.config.get( 'wgTitle' ) : label.getText() ) );
+				}
 			} );
 		}
 	} );
