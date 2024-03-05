@@ -117,7 +117,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 * @return string|null
 	 */
 	private function getEditUrl( $specialPageName, array $specialPageUrlParams ) {
-		if ( empty( $specialPageUrlParams ) ) {
+		if ( !$specialPageUrlParams ) {
 			return null;
 		}
 

@@ -259,7 +259,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	}
 
 	private function doFetch( $mode ) {
-		if ( empty( $this->toFetch ) ) {
+		if ( !$this->toFetch ) {
 			return;
 		}
 

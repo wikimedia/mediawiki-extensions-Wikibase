@@ -61,7 +61,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$entityType = null,
 		array $options = []
 	) {
-		if ( empty( $criteria ) ) {
+		if ( !$criteria ) {
 			return [];
 		}
 

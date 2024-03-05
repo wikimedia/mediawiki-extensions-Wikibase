@@ -123,7 +123,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		}
 
 		// Then fetch from primary
-		if ( !empty( $neededRecords ) ) {
+		if ( $neededRecords ) {
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->fetchExistingRecordsFromPrimary( $neededRecords )
@@ -137,7 +137,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		array $records,
 		?callable $recordsToInsertDecoratorCallback = null
 	): array {
-		if ( empty( $records ) ) {
+		if ( !$records ) {
 			return [];
 		}
 
@@ -148,7 +148,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		}
 
 		$insertedRecords = [];
-		while ( !empty( $records ) ) {
+		while ( $records ) {
 
 			$recordsCount = count( $records );
 
@@ -215,7 +215,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 
 		// If not all needed records exist in replica,
 		// try wait for replication and fetch again from replica
-		if ( !empty( $neededRecords ) ) {
+		if ( $neededRecords ) {
 			$this->repoDb->replication()->waitForAllAffectedClusters( $this->waitForReplicationTimeout );
 
 			$existingRecords = array_merge(

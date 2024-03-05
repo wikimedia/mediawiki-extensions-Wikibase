@@ -112,7 +112,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 			);
 		}
 
-		if ( empty( $where ) ) {
+		if ( !$where ) {
 			// If we skipped all entity IDs, select nothing, not everything.
 			$queryBuilder->where( '0=1' );
 			return;

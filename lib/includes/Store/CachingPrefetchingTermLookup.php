@@ -382,7 +382,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 
 		// languages without prefetched terms
 		$unbufferedLanguages = array_diff( $languages, array_keys( $terms ) );
-		if ( empty( $unbufferedLanguages ) ) {
+		if ( !$unbufferedLanguages ) {
 			return array_filter( $terms );
 		}
 
@@ -394,7 +394,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		$unCachedAndUnbufferedLanguages = array_values(
 			array_diff( $languages, array_keys( $terms ) )
 		);
-		if ( empty( $unCachedAndUnbufferedLanguages ) ) {
+		if ( !$unCachedAndUnbufferedLanguages ) {
 			return array_filter( $terms );
 		}
 

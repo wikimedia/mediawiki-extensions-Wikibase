@@ -112,7 +112,7 @@ class SiteLinksView {
 	public function getHtml( array $siteLinks, ?ItemId $itemId, array $groups ) {
 		$html = '';
 
-		if ( empty( $groups ) ) {
+		if ( !$groups ) {
 			return $html;
 		}
 

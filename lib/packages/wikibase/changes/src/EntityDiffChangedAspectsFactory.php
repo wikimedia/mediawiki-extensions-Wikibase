@@ -49,19 +49,19 @@ class EntityDiffChangedAspectsFactory {
 
 		if ( $entityDiff instanceof EntityDiff ) {
 			$labelsDiff = $entityDiff->getLabelsDiff();
-			if ( !empty( $labelsDiff ) ) {
+			if ( $labelsDiff ) {
 				$remainingDiffOps -= count( $labelsDiff );
 				$labelChanges = $this->getChangedLabels( $labelsDiff );
 			}
 
 			$descriptionsDiff = $entityDiff->getDescriptionsDiff();
-			if ( !empty( $descriptionsDiff ) ) {
+			if ( $descriptionsDiff ) {
 				$remainingDiffOps -= count( $descriptionsDiff );
 				$descriptionChanges = $this->getChangedDescriptions( $descriptionsDiff );
 			}
 
 			$claimsDiff = $entityDiff->getClaimsDiff();
-			if ( !empty( $claimsDiff ) ) {
+			if ( $claimsDiff ) {
 				$remainingDiffOps -= count( $claimsDiff );
 				$statementChanges = $this->getChangedStatements( $claimsDiff );
 			}
