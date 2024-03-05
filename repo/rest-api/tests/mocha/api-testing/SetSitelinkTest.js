@@ -336,7 +336,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			expect( response ).to.have.status( 400 );
 			assertValidErrorResponse( response, 'invalid-sitelink-badges-format' );
-			assert.strictEqual( response.body.message, "Value of 'badges' field is not a list" );
+			assert.strictEqual( response.body.message, 'Value of badges field is not a list' );
 		} );
 
 		it( 'badge is not an item ID', async () => {
