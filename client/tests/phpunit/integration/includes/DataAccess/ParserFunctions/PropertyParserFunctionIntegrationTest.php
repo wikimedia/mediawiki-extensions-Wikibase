@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 
 use MediaWiki\Parser\ParserOutput;
@@ -36,15 +38,8 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
  */
 class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var bool
-	 */
-	private $oldAllowDataAccessInUserLanguage;
-
-	/**
-	 * @var ScopedParserOutputProvider
-	 */
-	private $parserOutputProvider;
+	private bool $oldAllowDataAccessInUserLanguage;
+	private ?ScopedParserOutputProvider $parserOutputProvider = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -194,13 +189,10 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		);
 	}
 
-	/**
-	 * @param string $wikiText
-	 * @param string $title
-	 *
-	 * @return ParserOutput
-	 */
-	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
+	private function parseWikitextToHtml(
+		string $wikiText,
+		string $title = 'WikibaseClientDataAccessTest'
+	): ParserOutput {
 		$popt = new ParserOptions(
 			User::newFromId( 0 ),
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )

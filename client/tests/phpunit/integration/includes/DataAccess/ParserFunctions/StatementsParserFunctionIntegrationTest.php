@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 
 use MediaWiki\Parser\ParserOutput;
@@ -43,25 +45,10 @@ use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
  */
 class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @var bool|null
-	 */
-	private $oldAllowDataAccessInUserLanguage;
-
-	/**
-	 * @var bool|null
-	 */
-	private $oldUseKartographerMaplinkInWikitext;
-
-	/**
-	 * @var MockClientStore
-	 */
-	private $store;
-
-	/**
-	 * @var ScopedParserOutputProvider
-	 */
-	private $parserOutputProvider;
+	private ?bool $oldAllowDataAccessInUserLanguage;
+	private ?bool $oldUseKartographerMaplinkInWikitext;
+	private MockClientStore $store;
+	private ?ScopedParserOutputProvider $parserOutputProvider = null;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -257,13 +244,10 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$this->assertStringNotContainsString( '&lt;maplink', $text );
 	}
 
-	/**
-	 * @param string $wikiText
-	 * @param string $title
-	 *
-	 * @return ParserOutput
-	 */
-	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
+	private function parseWikitextToHtml(
+		string $wikiText,
+		string $title = 'WikibaseClientDataAccessTest'
+	): ParserOutput {
 		$popt = new ParserOptions(
 			User::newFromId( 0 ),
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )

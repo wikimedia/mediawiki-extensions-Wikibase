@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
@@ -36,10 +38,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryTests';
 
-	/**
-	 * @var bool|null
-	 */
-	private $oldAllowDataAccessInUserLanguage;
+	private ?bool $oldAllowDataAccessInUserLanguage;
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
@@ -47,10 +46,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		];
 	}
 
-	/**
-	 * @return int
-	 */
-	protected static function getEntityAccessLimit() {
+	protected static function getEntityAccessLimit(): int {
 		// testGetEntity_entityAccessLimitExceeded needs this to be 2
 		return 2;
 	}
@@ -192,7 +188,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			"Usage accumulator should be using the new parser output" );
 	}
 
-	public static function entityExistsProvider() {
+	public static function entityExistsProvider(): array {
 		return [
 			[ true, 'Q885588' ],
 			[ false, 'Q338380281' ],
@@ -232,7 +228,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertFalse( $cacheSplit );
 	}
 
-	public static function getEntityUrlProvider() {
+	public static function getEntityUrlProvider(): array {
 		return [
 			'Valid ID' => [ [ 'this-is-a-URL' ], 'Q1' ],
 			'Invalid ID' => [ [ null ], 'not-an-id' ],
@@ -252,7 +248,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertFalse( $cacheSplit );
 	}
 
-	private function getRepoLinker() {
+	private function getRepoLinker(): RepoLinker {
 		$repoLinker = $this->createMock( RepoLinker::class );
 
 		$repoLinker->method( 'getEntityUrl' )
@@ -306,7 +302,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertSame( [ [] ], $badges );
 	}
 
-	public static function provideIsValidEntityId() {
+	public static function provideIsValidEntityId(): array {
 		return [
 			[ true, 'Q12' ],
 			[ true, 'P12' ],
@@ -474,7 +470,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		);
 	}
 
-	public static function provideOrderProperties() {
+	public static function provideOrderProperties(): array {
 		return [
 			'all IDs in the provider' => [
 				[ 'P16', 'P5', 'P4', 'P8' ],
@@ -499,7 +495,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		];
 	}
 
-	public static function provideGetPropertyOrder() {
+	public static function provideGetPropertyOrder(): array {
 		return [
 			'all IDs in the provider' => [
 				[ 'P8' => 0, 'P16' => 1, 'P4' => 2, 'P5' => 3 ],
@@ -590,9 +586,8 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	/**
 	 * @param string[] $propertyOrder
-	 * @return PropertyOrderProvider
 	 */
-	private function getPropertyOrderProvider( array $propertyOrder ) {
+	private function getPropertyOrderProvider( array $propertyOrder ): PropertyOrderProvider {
 		$propertyOrderProvider = $this->createMock( PropertyOrderProvider::class );
 
 		$propertyOrderProvider->method( 'getPropertyOrder' )
@@ -604,10 +599,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	/**
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
-	 *
-	 * @return Scribunto_LuaWikibaseLibrary
 	 */
-	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
+	private function newScribuntoLuaWikibaseLibrary(
+		bool &$cacheSplit = false,
+		?Language $userLang = null
+	): Scribunto_LuaWikibaseLibrary {
 		/** @var $engine Scribunto_LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
