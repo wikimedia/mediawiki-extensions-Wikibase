@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\RedirectTrackingUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
@@ -19,7 +20,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 class RedirectTrackingUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddUsage_noRedirect(): void {
-		$innerUsageAccumulator = new DummyUsageAccumulator();
+		$innerUsageAccumulator = new HashUsageAccumulator();
 		$entityRedirectTargetLookup = $this->createStub( EntityRedirectTargetLookup::class );
 		$entityRedirectTargetLookup->method( 'getRedirectForEntityId' )->willReturn( null );
 
@@ -34,7 +35,7 @@ class RedirectTrackingUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddUsage_withRedirect(): void {
-		$innerUsageAccumulator = new DummyUsageAccumulator();
+		$innerUsageAccumulator = new HashUsageAccumulator();
 		$entityRedirectTargetLookup = $this->createStub( EntityRedirectTargetLookup::class );
 		$entityRedirectTargetLookup->method( 'getRedirectForEntityId' )->willReturn( new ItemId( 'Q123' ) );
 
