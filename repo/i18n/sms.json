@@ -41,7 +41,7 @@
 	"wikibase-undo-revision-error": "Kååmtummuš ij oʹnnstam",
 	"wikibase-statementview-references-counter": "{{PLURAL:$1|$1 teâttkäivvad|0=Ni õhtt teâttkäivv|1=1 teâttkäivv|2=2 teâttkääiv|3=3 teâttkääiv|4=4 teâttkääiv|5=5 teâttkääiv|6=6 teâttkääiv}}",
 	"wikibase-snakview-variations-somevalue-label": "toobdteʹmes ärvv",
-	"wikibase-entityselector-notfound": "Ni mâiʹd ij käunnʼjam",
+	"wikibase-entityselector-notfound": "Ij käunnʼjam ni mii",
 	"wikibase-anonymouseditwarning-heading": "Jiõk leäkku ǩeeʹrjtõõttâm sizz",
 	"wikibase-anonymouseditwarning-dismiss-button": "Muuʹtt ǩeeʹrjtõõđǩâni sizz",
 	"wikibase-validator-no-such-entity": "$1 ij käunnʼjam",

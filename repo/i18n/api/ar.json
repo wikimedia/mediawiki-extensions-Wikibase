@@ -11,7 +11,8 @@
 			"SaldırganSincap",
 			"ديفيد",
 			"محمد أحمد عبد الفتاح",
-			"Amire80"
+			"Amire80",
+			"Hubaishan"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "استعلم عن العناصر المتوفرة بشارات.",
@@ -337,6 +338,6 @@
 	"apihelp-wbformatentities-param-ids": "معرفات الكيانات لتنسيقها.",
 	"apihelp-wbformatentities-example-1": "تنسيق معرف عنصر واحد.",
 	"apihelp-wbformatentities-example-2": "تنسيق معرف عنصر ومعرف خاصية.",
-	"apihelp-wbformatentities-example-3": "تنسيق معرف عنصر ومعرف خاصية ومعرف لكسيم.",
+	"apihelp-wbformatentities-example-3": "تنسيق معرف عنصر ومعرف خاصية ومعرف مفردة.",
 	"apihelp-wbformatentities-example-4": "تنسيق معرفات ثلاثة عناصر بالفرنسية."
 }
