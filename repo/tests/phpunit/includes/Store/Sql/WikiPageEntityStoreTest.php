@@ -473,49 +473,48 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		 */
 		[ $store, $lookup ] = $this->createStoreAndLookup();
 
-		$anonUser = User::newFromId( 0 );
-		$anonUser->setName( '127.0.0.1' );
 		$user = $this->getTestUser()->getUser();
+		$sysop = $this->getTestUser( [ 'sysop' ] )->getUser();
 		$item = new Item();
 
-		// check for default values, last revision by anon --------------------
-		$item->setLabel( 'en', "Test Anon default" );
-		$store->saveEntity( $item, 'testing', $anonUser, EDIT_NEW );
+		// check for default values, last revision by normal user --------------------
+		$item->setLabel( 'en', "Test User default" );
+		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
 		$itemId = $item->getId();
 
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		$res = $store->userWasLastToEdit( $user, $itemId, false );
 		$this->assertFalse( $res );
 
 		// check for default values, last revision by sysop --------------------
 		$item->setLabel( 'en', "Test SysOp default" );
-		$store->saveEntity( $item, 'Test SysOp default', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		$store->saveEntity( $item, 'Test SysOp default', $sysop, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $user, $itemId, false );
 		$this->assertFalse( $res );
 
-		// check for default values, last revision by anon --------------------
-		$item->setLabel( 'en', "Test Anon with user" );
-		$store->saveEntity( $item, 'Test Anon with user', $anonUser, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
+		// check for default values, last revision by normal user --------------------
+		$item->setLabel( 'en', "Test User with user" );
+		$store->saveEntity( $item, 'Test User with user', $user, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $user, $itemId, false );
 		$this->assertFalse( $res );
 
 		// check for default values, last revision by sysop --------------------
 		$item->setLabel( 'en', "Test SysOp with user" );
-		$store->saveEntity( $item, 'Test SysOp with user', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $user, $itemId, false );
+		$store->saveEntity( $item, 'Test SysOp with user', $sysop, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $sysop, $itemId, false );
 		$this->assertFalse( $res );
 
-		// create an edit and check if the anon user is last to edit --------------------
+		// create an edit and check if the normal user is last to edit --------------------
 		$lastRevIdResult = $lookup->getLatestRevisionId(
 			$itemId,
 			 LookupConstants::LATEST_FROM_MASTER
 		);
 		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
-		$item->setLabel( 'en', "Test Anon" );
-		$store->saveEntity( $item, 'Test Anon', $anonUser, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
+		$item->setLabel( 'en', "Test User" );
+		$store->saveEntity( $item, 'Test User', $user, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
 		$this->assertTrue( $res );
 		// also check that there is a failure if we use the sysop user
-		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
+		$res = $store->userWasLastToEdit( $sysop, $itemId, $lastRevId );
 		$this->assertFalse( $res );
 
 		// create an edit and check if the sysop user is last to edit --------------------
@@ -525,12 +524,12 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		);
 		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
 		$item->setLabel( 'en', "Test SysOp" );
-		$store->saveEntity( $item, 'Test SysOp', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
+		$store->saveEntity( $item, 'Test SysOp', $sysop, EDIT_UPDATE );
+		$res = $store->userWasLastToEdit( $sysop, $itemId, $lastRevId );
 		$this->assertTrue( $res );
 
-		// also check that there is a failure if we use the anon user
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
+		// also check that there is a failure if we use the normal user
+		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
 		$this->assertFalse( $res );
 	}
 

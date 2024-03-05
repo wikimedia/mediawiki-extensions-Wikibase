@@ -75,6 +75,16 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$this->createItems();
 		$this->addBadgeMatcher();
+
+		// Hack: Make sure the 'user_autocreate_serial' table is not cleared between test runs,
+		// to match the 'user' table (which gets marked as used by createItems()).
+		// See T353961#9595560 and T353961#9595936.
+		$this->db->insert( 'user_autocreate_serial', [
+			'uas_shard' => 0,
+			'uas_year' => 0,
+			'uas_value' => 0,
+		] );
+		$this->db->truncateTable( 'user_autocreate_serial' );
 	}
 
 	protected function newSpecialPage() {
@@ -108,7 +118,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
+		$this->setGroupPermissions( [ '*' => [ 'read' => true, 'edit' => true ] ] );
 		$settings = clone WikibaseRepo::getSettings();
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 		$this->setService( 'WikibaseRepo.Settings', $settings );
