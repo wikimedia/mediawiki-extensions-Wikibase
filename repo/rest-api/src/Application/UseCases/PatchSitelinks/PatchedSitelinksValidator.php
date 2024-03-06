@@ -16,10 +16,7 @@ class PatchedSitelinksValidator {
 	private SiteIdValidator $siteIdValidator;
 	private SitelinkValidator $sitelinkValidator;
 
-	public function __construct(
-		SiteIdValidator $siteIdValidator,
-		SitelinkValidator $sitelinkValidator
-	) {
+	public function __construct( SiteIdValidator $siteIdValidator, SitelinkValidator $sitelinkValidator ) {
 		$this->siteIdValidator = $siteIdValidator;
 		$this->sitelinkValidator = $sitelinkValidator;
 	}
@@ -27,9 +24,11 @@ class PatchedSitelinksValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( string $itemId, array $serialization ): SiteLinkList {
+	public function validateAndDeserialize( string $itemId, array $originalSitelinks, array $serialization ): SiteLinkList {
 		$this->validateSiteIds( array_keys( $serialization ) );
-		return $this->validateSitelink( $itemId, $serialization );
+		$deserializedSitelinks = $this->validateSitelink( $itemId, $serialization );
+		$this->assertUrlsNotModified( $originalSitelinks, $serialization );
+		return $deserializedSitelinks;
 	}
 
 	private function validateSitelink( string $itemId, array $serialization ): SiteLinkList {
@@ -138,6 +137,22 @@ class PatchedSitelinksValidator {
 				throw new UseCaseError(
 					UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID,
 					"Not a valid site ID '$siteId' in patched sitelinks",
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId ]
+				);
+			}
+		}
+	}
+
+	private function assertUrlsNotModified( array $originalSitelinksSerialization, array $patchedSitelinkSerialization ): void {
+		foreach ( $patchedSitelinkSerialization as $siteId => $sitelink ) {
+			if (
+				isset( $sitelink[ 'url' ] ) &&
+				isset( $originalSitelinksSerialization[ $siteId ] ) &&
+				$originalSitelinksSerialization[ $siteId ][ 'url' ] !== $sitelink[ 'url' ]
+			) {
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
+					'URL of sitelink cannot be modified',
 					[ UseCaseError::CONTEXT_SITE_ID => $siteId ]
 				);
 			}

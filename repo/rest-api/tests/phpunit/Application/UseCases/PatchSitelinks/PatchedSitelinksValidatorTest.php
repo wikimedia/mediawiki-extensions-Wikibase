@@ -47,6 +47,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 			$expectedResult,
 			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
+				[],
 				$sitelinksSerialization
 			)
 		);
@@ -92,6 +93,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		try {
 			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
+				[],
 				$serialization
 			);
 
@@ -204,6 +206,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		try {
 			$this->newValidator( $sitelinkTargetTitleResolver )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
+				[],
 				[ $validSiteId => [ 'title' => 'non-existing-title' ] ]
 			);
 
@@ -241,12 +244,36 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		try {
 			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
+				[],
 				[ $validSiteId => [ 'title' => $pageTitle ] ]
 			);
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedUseCaseError, $e );
+		}
+	}
+
+	public function testSitelinkUrlModification_throws(): void {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$title = 'test_title';
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
+			'URL of sitelink cannot be modified',
+			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
+		);
+
+		try {
+			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
+				self::SITELINK_ITEM_ID,
+				[ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/.example' ] ],
+				[ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/Example.com' ] ]
+			);
+
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $error ) {
+			$this->assertEquals( $expectedError, $error );
 		}
 	}
 

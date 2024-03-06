@@ -421,6 +421,28 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, testItemId );
 		} );
 
+		it( 'url is modified', async () => {
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[
+					{
+						op: 'add',
+						path: `/${siteId}`,
+						value: { title: linkedArticle, url: 'https://en.wikipedia.org/wiki/Example.com' }
+					}
+				]
+			).assertValidRequest().makeRequest();
+
+			assertValidErrorResponse(
+				response,
+				422,
+				'url-not-modifiable',
+				{ 'site-id': siteId }
+			);
+
+			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
+		} );
+
 	} );
 
 } );

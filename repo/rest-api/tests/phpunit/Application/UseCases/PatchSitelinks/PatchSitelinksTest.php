@@ -205,7 +205,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->patchedSitelinksValidator = $this->createMock( PatchedSitelinksValidator::class );
 		$this->patchedSitelinksValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
-			->with( $itemId, $patchResult )
+			->with( $itemId, [], $patchResult )
 			->willThrowException( $expectedUseCaseError );
 
 		try {
