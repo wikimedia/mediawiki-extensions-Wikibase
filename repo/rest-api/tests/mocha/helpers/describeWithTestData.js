@@ -2,7 +2,6 @@
 
 const { utils } = require( 'api-testing' );
 const {
-	getLatestEditMetadata,
 	createLocalSitelink,
 	editEntity,
 	newLegacyStatementWithRandomStringValue,
@@ -29,13 +28,8 @@ function describeWithTestData( testName, runAllTests ) {
 		if ( id.startsWith( 'Q' ) ) {
 			await createLocalSitelink( id, originalLinkedArticle, [ ( await getAllowedBadges() )[ 0 ] ] );
 		}
-		const revision = await getLatestEditMetadata( id );
 
-		return {
-			entity: editEntityResponse.entity,
-			latestRevId: revision.revid,
-			latestRevTimestamp: revision.timestamp
-		};
+		return editEntityResponse.entity;
 	}
 
 	function describeEachRouteWithReset( routes, runForEachRoute ) {
@@ -45,14 +39,11 @@ function describeWithTestData( testName, runAllTests ) {
 					if ( newRequestBuilder().getMethod() === 'DELETE' ||
 						( newRequestBuilder().getRouteDescription().includes( 'sitelinks' ) &&
 						newRequestBuilder().getMethod() !== 'GET' ) ) {
-						const entityData = await resetEntityTestData(
+						const entity = await resetEntityTestData(
 							requestInputs.mainTestSubject,
 							requestInputs.statementPropertyId
 						);
-						requestInputs.statementId =
-							entityData.entity.claims[ requestInputs.statementPropertyId ][ 0 ].id;
-						requestInputs.latestRevTimestamp = entityData.latestRevTimestamp;
-						requestInputs.latestRevId = entityData.latestRevId;
+						requestInputs.statementId = entity.claims[ requestInputs.statementPropertyId ][ 0 ].id;
 					}
 				} );
 
@@ -67,25 +58,19 @@ function describeWithTestData( testName, runAllTests ) {
 			const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
 			const itemId = ( await createEntity( 'item', {} ) ).entity.id;
-			const itemData = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
-			itemRequestInputs.latestRevTimestamp = itemData.latestRevTimestamp;
-			itemRequestInputs.latestRevId = itemData.latestRevId;
-
+			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
 			itemRequestInputs.mainTestSubject = itemId;
 			itemRequestInputs.itemId = itemId;
-			itemRequestInputs.statementId = itemData.entity.claims[ statementPropertyId ][ 0 ].id;
+			itemRequestInputs.statementId = item.claims[ statementPropertyId ][ 0 ].id;
 			itemRequestInputs.statementPropertyId = statementPropertyId;
 			itemRequestInputs.siteId = await getLocalSiteId();
 			itemRequestInputs.linkedArticle = newLinkedArticle;
 
 			const propertyId = ( await createUniqueStringProperty() ).entity.id;
-			const propertyData = await resetEntityTestData( propertyId, statementPropertyId );
-			propertyRequestInputs.latestRevTimestamp = propertyData.latestRevTimestamp;
-			propertyRequestInputs.latestRevId = propertyData.latestRevId;
-
+			const property = await resetEntityTestData( propertyId, statementPropertyId );
 			propertyRequestInputs.mainTestSubject = propertyId;
 			propertyRequestInputs.propertyId = propertyId;
-			propertyRequestInputs.statementId = propertyData.entity.claims[ statementPropertyId ][ 0 ].id;
+			propertyRequestInputs.statementId = property.claims[ statementPropertyId ][ 0 ].id;
 			propertyRequestInputs.statementPropertyId = statementPropertyId;
 
 		} );
