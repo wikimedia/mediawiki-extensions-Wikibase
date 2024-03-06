@@ -25,8 +25,7 @@
 	"put": {
 		"operationId": "SetSitelink",
 		"tags": [ "sitelinks" ],
-		"summary": "[WIP] Add / Replace an item's sitelink",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Add / Replace an item's sitelink",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/SiteId" },
