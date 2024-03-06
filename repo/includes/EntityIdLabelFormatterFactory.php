@@ -27,7 +27,7 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getOutputFormat
 	 *
-	 * @return string SnakFormatter::FORMAT_HTML
+	 * @return string SnakFormatter::FORMAT_PLAIN
 	 */
 	public function getOutputFormat() {
 		return SnakFormatter::FORMAT_PLAIN;
