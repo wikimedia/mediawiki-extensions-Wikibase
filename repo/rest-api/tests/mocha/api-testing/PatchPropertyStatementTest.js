@@ -105,8 +105,7 @@ describe( 'PATCH property statement', () => {
 					assert.strictEqual( response.body.value.content, expectedValue );
 				} );
 
-				// eslint-disable-next-line mocha/no-skipped-tests
-				it.skip( 'allows content-type application/json-patch+json', async () => {
+				it( 'allows content-type application/json-patch+json', async () => {
 					const expectedValue = 'i been patched again!!';
 					const response = await newPatchRequestBuilder( testStatementId, [
 						{
