@@ -41,5 +41,6 @@
 	"datatypes-type-geo-shape": "Şekılê coğrafya",
 	"datatypes-type-tabular-data": "Tabloy data",
 	"version-wikibase": "Wikibase",
+	"wikibase-entity-summary-wbcreateredirect": "Şıkıt era $4 ser",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|waşte|waşteyi}} vıraziyaye"
 }
