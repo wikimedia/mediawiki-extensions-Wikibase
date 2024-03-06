@@ -178,7 +178,7 @@ class ParseValue extends ApiBase {
 		// in the ValueParserFactory (see WikibaseRepo.ServiceWiring.php).
 		$name = $params['datatype'] ?: $params['parser'];
 
-		if ( empty( $name ) && isset( $params['property'] ) ) {
+		if ( $name === null && isset( $params['property'] ) ) {
 			try {
 				$propertyId = new NumericPropertyId( $params['property'] );
 			} catch ( InvalidArgumentException $ex ) {
@@ -197,7 +197,7 @@ class ParseValue extends ApiBase {
 			}
 		}
 
-		if ( empty( $name ) ) {
+		if ( $name === null ) {
 			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
 			$this->errorReporter->dieWithError(
 				'wikibase-api-not-recognized-datatype',
@@ -224,12 +224,12 @@ class ParseValue extends ApiBase {
 
 		$name = $params['datatype'];
 
-		if ( empty( $name ) && isset( $params['property'] ) ) {
+		if ( $name === null && isset( $params['property'] ) ) {
 			$propertyId = new NumericPropertyId( $params['property'] );
 			$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		}
 
-		if ( empty( $name ) ) {
+		if ( $name === null ) {
 			// 'datatype' parameter is required for validation.
 			$this->errorReporter->dieWithError(
 				'wikibase-api-not-recognized-datatype',

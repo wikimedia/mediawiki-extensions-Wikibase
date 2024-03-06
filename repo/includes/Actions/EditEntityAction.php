@@ -502,7 +502,7 @@ class EditEntityAction extends ViewEntityAction {
 			'wpEditToken' => $this->getUser()->getEditToken(),
 			'wpBaseRev' => $this->getTitle()->getLatestRevID(),
 		];
-		if ( !empty( $undidRevision ) ) {
+		if ( $undidRevision !== 0 ) {
 			$hidden['wpUndidRevision'] = $undidRevision;
 		}
 		foreach ( $hidden as $name => $value ) {
