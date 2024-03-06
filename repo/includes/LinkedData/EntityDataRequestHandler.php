@@ -187,7 +187,7 @@ class EntityDataRequestHandler {
 	/**
 	 * Main method for handling requests.
 	 *
-	 * @param string $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
+	 * @param null|string $doc Document name, e.g. Q5 or Q5.json or Q5:33.xml
 	 * @param WebRequest $request The request parameters. Known parameters are:
 	 *        - id: the entity ID
 	 *        - format: the format
@@ -205,8 +205,12 @@ class EntityDataRequestHandler {
 		$output->getRequest()->response()->header( 'Access-Control-Allow-Origin: *' );
 
 		$revision = 0;
+		$id = '';
+		$format = '';
 
-		[ $id, $format ] = $this->uriManager->parseDocName( $doc );
+		if ( $doc !== null && $doc !== '' ) {
+			[ $id, $format ] = $this->uriManager->parseDocName( $doc );
+		}
 
 		// get entity id and format from request parameter
 		$format = $request->getText( 'format', $format );
