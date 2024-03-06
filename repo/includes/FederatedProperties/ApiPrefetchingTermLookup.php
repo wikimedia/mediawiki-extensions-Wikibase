@@ -77,7 +77,7 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 
 		$entityIdsToFetch = $this->getEntityIdsToFetch( $entityIds, $termTypes, $languageCodes );
 
-		if ( empty( $entityIdsToFetch ) ) {
+		if ( !$entityIdsToFetch ) {
 			return;
 		}
 

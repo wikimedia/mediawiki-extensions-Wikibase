@@ -87,7 +87,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 			}
 		}
 
-		if ( !empty( $errors ) ) {
+		if ( $errors ) {
 			return Result::newError( $errors );
 		}
 

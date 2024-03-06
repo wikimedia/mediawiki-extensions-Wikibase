@@ -57,7 +57,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	 * @inheritDoc
 	 */
 	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id, $content, $logEntry, $archivedRevisionCount ) {
-		if ( $archivedRevisionCount === 0 || empty( $this->localClientDatabases ) ) {
+		if ( $archivedRevisionCount === 0 || !$this->localClientDatabases ) {
 			return true;
 		}
 

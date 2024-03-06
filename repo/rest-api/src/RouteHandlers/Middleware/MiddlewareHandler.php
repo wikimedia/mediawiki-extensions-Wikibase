@@ -41,7 +41,7 @@ class MiddlewareHandler {
 		$currentMiddleware = array_shift( $remainingMiddlewares );
 
 		// Each middleware runs the next one. The last one runs $runRouteWithArgs.
-		$runNext = empty( $remainingMiddlewares ) ?
+		$runNext = !$remainingMiddlewares ?
 			$runRouteWithArgs :
 			fn() => $this->callMiddlewaresRecursively( $remainingMiddlewares, $routeHandler, $runRouteWithArgs );
 

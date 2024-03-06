@@ -63,7 +63,7 @@ class ApiErrorReporter {
 
 		$warnings = $status->getErrorsByType( 'warning' );
 
-		if ( !empty( $warnings ) ) {
+		if ( $warnings ) {
 			$warnings = $this->convertMessagesToResult( $warnings );
 			$this->setWarning( 'messages', $warnings );
 		}
@@ -488,7 +488,7 @@ class ApiErrorReporter {
 		if ( $name !== null ) {
 			$message = wfMessage( $name );
 
-			if ( !empty( $params ) ) {
+			if ( $params ) {
 				$message->params( $params );
 			}
 

@@ -210,7 +210,7 @@ class EntityParserOutputGeneratorFactory {
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher, $this->repoGroup )
 		);
 
-		if ( !empty( $this->preferredPageImagesProperties )
+		if ( $this->preferredPageImagesProperties
 			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
 		) {
 			$statementUpdater->addUpdater( $this->newPageImagesDataUpdater() );

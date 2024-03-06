@@ -38,7 +38,7 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 	 */
 	public function validateAndDeserialize( PropertyAliasesInLanguageEditRequest $request ): array {
 		$aliases = $request->getAliasesInLanguage();
-		if ( empty( $aliases ) ) {
+		if ( !$aliases ) {
 			throw new UseCaseError( UseCaseError::ALIAS_LIST_EMPTY, 'Alias list must not be empty' );
 		}
 
@@ -99,7 +99,7 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 		}
 
 		$duplicates = array_intersect( $newAliases->getAliases(), $existingAliases->getAliases() );
-		if ( !empty( $duplicates ) ) {
+		if ( $duplicates ) {
 			$this->throwDuplicateAliasError( $duplicates[0] );
 		}
 	}

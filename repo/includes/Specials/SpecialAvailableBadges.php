@@ -69,7 +69,7 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	 * @return string HTML
 	 */
 	private function makeAllBadgesHtml() {
-		if ( empty( $this->badgeItems ) ) {
+		if ( !$this->badgeItems ) {
 			return Html::element(
 				'p',
 				[],

@@ -107,7 +107,7 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 			$aliasesToSet = [];
 			$language = '';
 
-			if ( empty( $serializations ) ) {
+			if ( !$serializations ) {
 				$aliasesChangeOps->add( $this->fingerprintChangeOpFactory->newSetAliasesOp( $langCode, [] ) );
 				continue;
 			}

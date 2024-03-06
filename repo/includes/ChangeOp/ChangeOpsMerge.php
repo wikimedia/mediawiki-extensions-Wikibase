@@ -279,7 +279,7 @@ class ChangeOpsMerge {
 
 		$errors = $this->removeConflictsWithEntity( $errors, $fromId );
 
-		if ( !empty( $errors ) ) {
+		if ( $errors ) {
 			$result = Result::newError( $errors );
 			throw new ChangeOpValidationException( $result );
 		}

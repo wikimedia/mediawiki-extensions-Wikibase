@@ -110,7 +110,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 	 * @inheritDoc
 	 */
 	public function run(): bool {
-		if ( empty( $this->localClientDatabases ) ) {
+		if ( !$this->localClientDatabases ) {
 			return true;
 		}
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $this->getTitle() );

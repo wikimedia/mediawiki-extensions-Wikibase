@@ -402,7 +402,7 @@ class ResultBuilder {
 		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
 		$serialization = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $serialization );
 		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
-		if ( !empty( $termFallbackChains ) ) {
+		if ( $termFallbackChains ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $termFallbackChains );
 		}
 		$serialization = $this->filterEntitySerializationUsingLangCodes(
@@ -462,7 +462,7 @@ class ResultBuilder {
 		array $serialization,
 		array $siteIds = null
 	) {
-		if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $serialization ) ) {
+		if ( $siteIds && array_key_exists( 'sitelinks', $serialization ) ) {
 			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
 				if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
 					unset( $serialization['sitelinks'][$siteId] );
@@ -538,7 +538,7 @@ class ResultBuilder {
 		array $serialization,
 		array $langCodes
 	) {
-		if ( !empty( $langCodes ) ) {
+		if ( $langCodes ) {
 			if ( array_key_exists( 'labels', $serialization ) ) {
 				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
 					if ( !in_array( $langCode, $langCodes ) ) {

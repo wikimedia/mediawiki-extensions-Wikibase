@@ -47,7 +47,7 @@ class SummaryParsingPrefetchHelper {
 	 */
 	public function prefetchFederatedProperties( $rows, array $languageCodes, array $termTypes ): void {
 		$resultProperties = $this->extractSummaryProperties( $rows );
-		if ( empty( $resultProperties ) ) {
+		if ( !$resultProperties ) {
 			return;
 		}
 		try {

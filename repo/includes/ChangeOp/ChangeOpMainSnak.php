@@ -89,7 +89,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 
 		$statements = $entity->getStatements();
 
-		if ( empty( $this->statementGuid ) ) {
+		if ( !$this->statementGuid ) {
 			$this->addStatement( $statements, $entity->getId(), $summary );
 		} else {
 			$this->setStatement( $statements, $summary );

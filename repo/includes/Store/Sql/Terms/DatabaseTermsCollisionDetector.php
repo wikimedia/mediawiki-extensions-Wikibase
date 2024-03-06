@@ -87,7 +87,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 		$entityIdsWithLabel = $this->findEntityIdsWithTermInLang( $lang, $label, $labelTypeId );
 
-		if ( empty( $entityIdsWithLabel ) ) {
+		if ( !$entityIdsWithLabel ) {
 			return null;
 		}
 
@@ -153,7 +153,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		$queryBuilder = $this->newSelectQueryBuilder();
 		$queryBuilder->whereTerm( $termTypeId, $lang, $text );
 
-		if ( !empty( $filterOnEntityIds ) ) {
+		if ( $filterOnEntityIds ) {
 			$queryBuilder->andWhere( [
 				$queryBuilder->getEntityIdColumn() => $filterOnEntityIds,
 			] );
