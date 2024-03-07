@@ -152,6 +152,25 @@
 			}
 		}
 	},
+	"SitelinkConflict": {
+		"description": "There is a Sitelink conflict",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictWithSiteContextExample " }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"StatementNotFound": {
 		"description": "The specified Statement was not found",
 		"content": {
@@ -389,7 +408,7 @@
 			}
 		}
 	},
-	"InvalidItemInput": {
+	"InvalidGetItemInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -397,6 +416,71 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidNewItemInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"item-data-invalid-field": { "$ref": "./examples.json#/ItemDataInvalidFieldExample" },
+					"unexpected-field": { "$ref": "./examples.json#/ItemDataUnexpectedFieldExample" },
+					"missing-labels-and-descriptions": { "$ref": "./examples.json#/ItemDataMissingLabelsAndDescriptionsExample" },
+					"label-description-same-value": {
+						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
+					},
+					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeWithPathContextExample" },
+					"item-label-description-duplicate": {
+						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
+					},
+					"invalid-label": { "$ref": "./examples.json#/InvalidLabelWithLanguageContextExample" },
+					"label-empty": { "$ref": "./examples.json#/LabelEmptyWithLanguageContextExample" },
+					"label-too-long": { "$ref": "./examples.json#/LabelTooLongWithLanguageContextExample" },
+					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionWithLanguageContextExample" },
+					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyWithLanguageContextExample" },
+					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongWithLanguageContextExample" },
+					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasWithLanguageContextExample" },
+					"alias-empty": { "$ref": "./examples.json#/AliasEmptyWithLanguageContextExample" },
+					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyWithLanguageContextExample" },
+					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongWithLanguageContextExample" },
+					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
+					"invalid-site-id": {
+						"$ref": "./examples.json#/InvalidSiteIdWithSiteContextExample"
+					},
+					"invalid-title-field": {
+						"$ref": "./examples.json#/InvalidTitleWithSiteContextExample"
+					},
+					"title-field-empty": {
+						"$ref": "./examples.json#/TitleIsEmptyWithSiteContextExample"
+					},
+					"title-does-not-exist": {
+						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
+					},
+					"sitelink-data-missing-title": {
+						"$ref": "./examples.json#/SitelinkTitleFieldNotProvidedWithSiteContextExample"
+					},
+					"invalid-sitelink-badges-format": {
+						"$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListWithSiteContextExample"
+					},
+					"item-not-a-badge": {
+						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
+					},
+					"invalid-input-sitelink-badge": {
+						"$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample"
+					},
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
 		},

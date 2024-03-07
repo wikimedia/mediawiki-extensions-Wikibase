@@ -1,4 +1,47 @@
 {
+	"Item": {
+		"description": "Payload containing a Wikibase Item and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"item": {
+									"type": "object",
+									"properties": {
+										"labels": {
+											"$ref": "./schemas.json#/Labels"
+										},
+										"descriptions": {
+											"$ref": "./schemas.json#/Descriptions"
+										},
+										"aliases": {
+											"$ref": "./schemas.json#/Aliases"
+										},
+										"sitelinks": {
+											"$ref": "./schema-parts.json#/Sitelinks"
+										},
+										"statements": {
+											"type": "object",
+											"additionalProperties": {
+												"type": "array",
+												"items": { "$ref": "./schemas.json#/Statement" }
+											}
+										}
+									}
+								}
+							},
+							"required": [ "item" ]
+						},
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
+					]
+				}
+			}
+		}
+	},
 	"Label": {
 		"description": "Payload containing a Wikibase label in the specified language and edit metadata",
 		"required": true,
