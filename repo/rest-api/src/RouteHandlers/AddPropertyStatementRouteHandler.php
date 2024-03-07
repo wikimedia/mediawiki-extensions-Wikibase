@@ -26,6 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class AddPropertyStatementRouteHandler extends SimpleHandler {
+	use AssertContentType;
 
 	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	public const STATEMENT_BODY_PARAM = 'statement';
@@ -137,31 +138,32 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return $contentType === 'application/json' ?
-			new TypeValidatingJsonBodyValidator( [
-				self::STATEMENT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'object',
-					ParamValidator::PARAM_REQUIRED => true,
-				],
-				self::TAGS_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'array',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => [],
-				],
-				self::BOT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'boolean',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => false,
-				],
-				self::COMMENT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'string',
-					ParamValidator::PARAM_REQUIRED => false,
-				],
-			] ) : parent::getBodyValidator( $contentType );
+		$this->assertContentType( [ 'application/json' ], $contentType );
+
+		return new TypeValidatingJsonBodyValidator( [
+			self::STATEMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'object',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::TAGS_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => [],
+			],
+			self::BOT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => false,
+			],
+			self::COMMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
+		] );
 	}
 
 	private function setLocationHeader( Response $httpResponse, string $propertyId, string $statementGuid ): void {

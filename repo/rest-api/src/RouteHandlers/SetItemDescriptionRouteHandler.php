@@ -26,6 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SetItemDescriptionRouteHandler extends SimpleHandler {
+	use AssertContentType;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -103,31 +104,32 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return $contentType === 'application/json' ?
-			new TypeValidatingJsonBodyValidator( [
-				self::DESCRIPTION_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'string',
-					ParamValidator::PARAM_REQUIRED => true,
-				],
-				self::TAGS_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'array',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => [],
-				],
-				self::BOT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'boolean',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => false,
-				],
-				self::COMMENT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'string',
-					ParamValidator::PARAM_REQUIRED => false,
-				],
-			] ) : parent::getBodyValidator( $contentType );
+		$this->assertContentType( [ 'application/json' ], $contentType );
+
+		return new TypeValidatingJsonBodyValidator( [
+			self::DESCRIPTION_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::TAGS_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => [],
+			],
+			self::BOT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => false,
+			],
+			self::COMMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
+		] );
 	}
 
 	/**

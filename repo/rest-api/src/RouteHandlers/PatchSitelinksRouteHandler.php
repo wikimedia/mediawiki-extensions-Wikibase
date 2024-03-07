@@ -29,6 +29,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchSitelinksRouteHandler extends SimpleHandler {
+	use AssertContentType;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -124,32 +125,33 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return $contentType === 'application/json' || $contentType === 'application/json-patch+json' ?
-			new TypeValidatingJsonBodyValidator( [
-				self::PATCH_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'array',
-					ParamValidator::PARAM_REQUIRED => true,
-				],
-				self::TAGS_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'array',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => [],
-				],
-				self::BOT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'boolean',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => false,
-				],
-				self::COMMENT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'string',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => null,
-				],
-			] ) : parent::getBodyValidator( $contentType );
+		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
+
+		return new TypeValidatingJsonBodyValidator( [
+			self::PATCH_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::TAGS_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => [],
+			],
+			self::BOT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => false,
+			],
+			self::COMMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => null,
+			],
+		] );
 	}
 
 	private function newSuccessHttpResponse( PatchSitelinksResponse $useCaseResponse ): Response {
