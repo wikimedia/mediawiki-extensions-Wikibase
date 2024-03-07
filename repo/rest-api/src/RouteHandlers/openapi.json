@@ -44,6 +44,33 @@
         }
       }
     },
+    "/property-data-types": {
+      "get": {
+        "operationId": "getPropertyDataTypes",
+        "tags": [
+          "Property data types"
+        ],
+        "summary": "[WIP] Retrieve the map of property data types to value types",
+        "responses": {
+          "200": {
+            "description": "The map of property data types to value types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "data-type": "value-type"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/entities/items": {
       "post": {
         "operationId": "addItem",
