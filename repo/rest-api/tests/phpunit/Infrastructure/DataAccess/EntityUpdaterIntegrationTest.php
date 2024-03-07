@@ -19,6 +19,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -30,6 +31,21 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
+
+	public function testCreateItem(): void {
+		$newRevision = $this->newEntityUpdater()->create(
+			NewItem::withLabel( 'en', 'New Item' )->build(),
+			$this->createStub( EditMetadata::class )
+		);
+
+		$createdItem = $newRevision->getEntity();
+		$this->assertNotEmpty( $createdItem->getId() );
+
+		$this->assertEquals(
+			$newRevision->getEntity(),
+			WbRestApi::getItemDataRetriever()->getItem( $createdItem->getId() ),
+		);
+	}
 
 	/**
 	 * @dataProvider provideStatementIdAndEntityWithStatement

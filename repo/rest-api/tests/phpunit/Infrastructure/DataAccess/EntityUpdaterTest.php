@@ -57,6 +57,53 @@ class EntityUpdaterTest extends TestCase {
 		$this->permissionManager->method( 'userHasRight' )->willReturn( true );
 	}
 
+	public function testCreate(): void {
+		$entityToCreate = NewItem::withLabel( 'en', 'English Label' )
+			->andDescription( 'en', 'English Description' )
+			->build();
+		$editMetadata = new EditMetadata( [], false, $this->createStub( EditSummary::class ) );
+
+		$expectedRevisionId = 234;
+		$expectedRevisionTimestamp = '20221111070707';
+		$expectedRevisionEntity = $entityToCreate->copy();
+		$expectedFormattedSummary = 'FORMATTED SUMMARY';
+
+		$this->summaryFormatter = $this->createMock( EditSummaryFormatter::class );
+		$this->summaryFormatter->expects( $this->once() )
+			->method( 'format' )
+			->with( $editMetadata->getSummary() )
+			->willReturn( $expectedFormattedSummary );
+
+		$editEntity = $this->createMock( EditEntity::class );
+		$editEntity->expects( $this->once() )
+			->method( 'attemptSave' )
+			->with(
+				$entityToCreate,
+				$expectedFormattedSummary,
+				EDIT_NEW,
+				false,
+				false,
+				$editMetadata->getTags()
+			)
+			->willReturn(
+				EditEntityStatus::newGood( [
+					'revision' => new EntityRevision( $expectedRevisionEntity, $expectedRevisionId, $expectedRevisionTimestamp ),
+				] )
+			);
+
+		$this->editEntityFactory = $this->createMock( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->expects( $this->once() )
+			->method( 'newEditEntity' )
+			->with( $this->context, $entityToCreate->getId() )
+			->willReturn( $editEntity );
+
+		$entityRevision = $this->newEntityUpdater()->create( $entityToCreate, $editMetadata );
+
+		$this->assertEquals( $entityToCreate, $entityRevision->getEntity() );
+		$this->assertSame( $expectedRevisionId, $entityRevision->getRevisionId() );
+		$this->assertSame( $expectedRevisionTimestamp, $entityRevision->getTimestamp() );
+	}
+
 	/**
 	 * @dataProvider provideEntityAndEditMetadata
 	 */

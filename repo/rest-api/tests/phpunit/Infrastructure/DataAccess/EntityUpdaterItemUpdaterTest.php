@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Site;
 use SiteLookup;
@@ -51,6 +52,45 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 		$this->entityUpdater = $this->createStub( EntityUpdater::class );
 	}
 
+	public function testCreate(): void {
+		$expectedRevisionId = 234;
+		$expectedRevisionTimestamp = '20221111070707';
+		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
+		$itemToCreate = NewItem::withLabel( 'en', 'English Label' )
+				->andDescription( 'en', 'English Description' )
+				->andAliases( 'en', [ 'English alias', 'alias in English' ] )
+				->andSiteLink( 'enwiki', 'Title', [ 'Q789' ] )
+				->build();
+
+		$expectedResultingItem = new Item(
+			new Labels( new Label( 'en', 'English Label' ) ),
+			new Descriptions( new Description( 'en', 'English Description' ) ),
+			new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
+			new Sitelinks( new Sitelink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
+			new StatementList()
+		);
+
+		$this->entityUpdater = $this->createMock( EntityUpdater::class );
+		$this->entityUpdater->expects( $this->once() )
+			->method( 'create' )
+			->with( $itemToCreate, $editMetaData )
+			->willReturn( new EntityRevision( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) );
+
+		$itemRevision = $this->newItemUpdater()->create( $itemToCreate, $editMetaData );
+
+		$this->assertEquals( $expectedResultingItem, $itemRevision->getItem() );
+		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
+		$this->assertSame( $expectedRevisionTimestamp, $itemRevision->getLastModified() );
+	}
+
+	public function testCreateWithId_throws(): void {
+		$this->expectException( LogicException::class );
+		$this->newItemUpdater()->create(
+			NewItem::withId( 'Q123' )->build(),
+			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
+		);
+	}
+
 	public function testUpdate(): void {
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
@@ -69,6 +109,14 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 		$this->assertEquals( $expectedResultingItem, $itemRevision->getItem() );
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $itemRevision->getLastModified() );
+	}
+
+	public function testUpdateWithoutId_throws(): void {
+		$this->expectException( LogicException::class );
+		$this->newItemUpdater()->update(
+			NewItem::withLabel( 'en', 'udpated Item' )->build(),
+			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
+		);
 	}
 
 	private function newEquivalentWriteAndReadModelItem(): array {
