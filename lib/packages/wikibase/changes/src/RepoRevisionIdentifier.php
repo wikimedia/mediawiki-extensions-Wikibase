@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Changes;
 
-use Exception;
+use InvalidArgumentException;
 use Serializable;
 
 /**
@@ -92,8 +92,6 @@ class RepoRevisionIdentifier implements Serializable {
 	 * @see Serializable::unserialize
 	 *
 	 * @param string $serialized JSON
-	 *
-	 * @throws Exception
 	 */
 	public function unserialize( $serialized ) {
 		$this->__unserialize( json_decode( $serialized, true ) );
@@ -101,7 +99,7 @@ class RepoRevisionIdentifier implements Serializable {
 
 	public function __unserialize( array $data ): void {
 		if ( $data['arrayFormatVersion'] !== self::ARRAYFORMATVERSION ) {
-			throw new Exception( 'Unsupported format version ' . $data['arrayFormatVersion'] );
+			throw new InvalidArgumentException( 'Unsupported format version ' . $data['arrayFormatVersion'] );
 		}
 
 		$this->entityIdSerialization = $data['entityIdSerialization'];

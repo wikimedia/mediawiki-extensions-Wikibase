@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Deserializers\Deserializer;
 use Exception;
+use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
@@ -100,7 +101,7 @@ class ClaimsChangeOpDeserializer implements ChangeOpDeserializer {
 			$statement = $this->statementDeserializer->deserialize( $serialization );
 
 			if ( !( $statement instanceof Statement ) ) {
-				throw new Exception( 'Statement serialization did not contain a Statement.' );
+				throw new LogicException( 'Statement serialization did not contain a Statement.' );
 			}
 
 			return $this->statementChangeOpFactory->newSetStatementOp( $statement );

@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Notifications;
 
-use Exception;
+use LogicException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\CentralId\CentralIdLookup;
@@ -158,7 +158,7 @@ class WikiPageActionEntityChangeFactory {
 		] );
 
 		if ( !$change->hasField( ChangeRow::OBJECT_ID ) ) {
-			throw new Exception(
+			throw new LogicException(
 				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
 			);
 		}

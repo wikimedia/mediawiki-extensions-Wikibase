@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Changes;
 
-use Exception;
 use InvalidArgumentException;
+use LogicException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -137,9 +137,7 @@ class EntityChangeFactory {
 	 * @param string $action The action name
 	 * @param EntityDocument|null $oldEntity
 	 * @param EntityDocument|null $newEntity
-	 *
 	 * @return EntityChange
-	 * @throws Exception
 	 */
 	public function newFromUpdate(
 		$action,
@@ -147,7 +145,7 @@ class EntityChangeFactory {
 		EntityDocument $newEntity = null
 	): EntityChange {
 		if ( $oldEntity === null && $newEntity === null ) {
-			throw new Exception( 'Either $oldEntity or $newEntity must be given' );
+			throw new InvalidArgumentException( 'Either $oldEntity or $newEntity must be given' );
 		}
 
 		if ( $oldEntity === null ) {
@@ -158,7 +156,7 @@ class EntityChangeFactory {
 			$id = $oldEntity->getId();
 			$diff = $this->entityDiffer->getDestructionDiff( $oldEntity );
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
-			throw new Exception( 'Entity type mismatch' );
+			throw new LogicException( 'Entity type mismatch' );
 		} else {
 			$id = $newEntity->getId();
 			$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
