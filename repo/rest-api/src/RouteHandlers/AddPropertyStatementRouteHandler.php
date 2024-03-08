@@ -16,7 +16,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -61,7 +60,6 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
-				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
@@ -86,7 +84,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId ): Response {
 		$body = $this->getValidatedBody();
-		'@phan-var array $body'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
+		'@phan-var array $body'; // guaranteed to be an array per getBodyValidator()
 		try {
 			return $this->newSuccessHttpResponse(
 				$propertyId,

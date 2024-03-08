@@ -92,21 +92,6 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				expect( response ).to.satisfyApiSpec;
 			} );
 
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( '415 - unsupported media type', async () => {
-				const response = await newPatchRequestBuilder(
-					testStatementId,
-					[
-						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
-					]
-				)
-					.withHeader( 'Content-Type', 'text/plain' )
-					.makeRequest();
-
-				expect( response ).to.have.status( 415 );
-				expect( response ).to.satisfyApiSpec;
-			} );
-
 			it( '422 - patch results in an invalid statement', async () => {
 				const response = await newPatchRequestBuilder(
 					testStatementId,

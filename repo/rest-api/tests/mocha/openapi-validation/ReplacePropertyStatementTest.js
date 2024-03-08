@@ -78,19 +78,6 @@ describe( 'validate PUT endpoints for property statements against OpenAPI defini
 				expect( response ).to.satisfyApiSpec;
 			} );
 
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( '415 - unsupported media type', async () => {
-				const response = await newReplaceRequestBuilder(
-					testStatementId,
-					newStatementWithRandomStringValue( statementPropertyId )
-				)
-					.withHeader( 'Content-Type', 'text/plain' )
-					.makeRequest();
-
-				expect( response ).to.have.status( 415 );
-				expect( response ).to.satisfyApiSpec;
-			} );
-
 		} );
 
 	} );
