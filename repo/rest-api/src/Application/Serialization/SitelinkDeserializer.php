@@ -56,7 +56,7 @@ class SitelinkDeserializer {
 		}
 
 		$trimmedTitle = trim( $serialization[ 'title' ] );
-		if ( empty( $trimmedTitle ) ) {
+		if ( $trimmedTitle === '' ) {
 			throw new EmptySitelinkException( 'title', $trimmedTitle );
 		}
 		if ( preg_match( $this->invalidTitleRegex, $trimmedTitle ) === 1 ) {

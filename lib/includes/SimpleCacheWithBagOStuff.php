@@ -30,7 +30,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	public function __construct( BagOStuff $inner, string $prefix, string $secret ) {
 		$this->assertKeyIsValid( $prefix );
 
-		if ( empty( $secret ) ) {
+		if ( $secret === '' ) {
 			throw new \InvalidArgumentException( "Secret is required to be a nonempty string" );
 		}
 
