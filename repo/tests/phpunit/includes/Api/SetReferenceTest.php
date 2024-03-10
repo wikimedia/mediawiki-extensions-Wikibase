@@ -459,7 +459,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'bad guid 1' =>
 				[ 'Berlin', 'xyz', 'good', '', 'invalid-guid' ],
 			'bad guid 2' =>
-				[ 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ],
+				[ 'Berlin', 'x$y$z', 'good', '', 'invalid-guid' ],
 			'bad guid 3' =>
 				[ 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ],
 			'bad snak value' =>

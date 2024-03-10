@@ -139,7 +139,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 					throw new ChangeOpDeserializationException(
 						'A page "' . $serialization['title'] . '" could not be found on "' . $globalSiteId . '"',
 						'no-external-page',
-						[ $globalSiteId,  $serialization['title'] ]
+						[ $globalSiteId, $serialization['title'] ]
 					);
 				}
 

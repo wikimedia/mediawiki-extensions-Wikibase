@@ -16,7 +16,7 @@ use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 
 /**
- * @covers FederatedPropertiesAwareDispatchingEntityIdParser
+ * @covers \Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser
  * @group Wikibase
  * @license GPL-2.0-or-later
  */

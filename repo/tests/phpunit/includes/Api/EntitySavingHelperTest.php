@@ -179,7 +179,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'allowCreation' => true,
 			'params' => $params,
 			'dieErrorCode' => $dieErrorCode,
-			'entityId' => isset( $params['entity'] ) ? new ItemId( $params['entity'] ) : null ,
+			'entityId' => isset( $params['entity'] ) ? new ItemId( $params['entity'] ) : null,
 		] );
 
 		$this->expectException( ApiUsageException::class );

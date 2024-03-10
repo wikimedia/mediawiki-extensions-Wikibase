@@ -149,7 +149,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetclaim',
 			[
-				'claim' => [ [ self::class , 'buildTestClaimJSON' ], 'Oslo' ],
+				'claim' => [ [ self::class, 'buildTestClaimJSON' ], 'Oslo' ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
@@ -199,7 +199,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			'wbsetreference',
 			[
 				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
-				'snaks' => [ [ self::class , 'buildTestReferenceSnakJSON' ] ],
+				'snaks' => [ [ self::class, 'buildTestReferenceSnakJSON' ] ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];

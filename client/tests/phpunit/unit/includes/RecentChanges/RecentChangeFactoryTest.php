@@ -461,7 +461,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			new ItemDiff(),
 			[],
 			[
-				'comment' => '',  // repo sent no comment
+				'comment' => '', // repo sent no comment
 			]
 		);
 

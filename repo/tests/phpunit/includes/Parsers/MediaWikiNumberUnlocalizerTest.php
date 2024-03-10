@@ -57,7 +57,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 	public static function provideLocalizationRoundTrip() {
 		$numbers = [ 12, -4.111, 12345678 ];
 		$languages = [
-			'en', 'es', 'pt', 'fr', 'de', 'sv', 'ru',  // western arabic numerals, but different separators
+			'en', 'es', 'pt', 'fr', 'de', 'sv', 'ru', // western arabic numerals, but different separators
 			'ar', 'fa', 'my', 'pi', 'ne', 'kn', // different numerals
 		];
 

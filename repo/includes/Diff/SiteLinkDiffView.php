@@ -154,7 +154,7 @@ class SiteLinkDiffView implements DiffView {
 		if ( $op instanceof DiffOpAdd ) {
 			$newHtml = $this->getAddedLine( $this->getSiteLinkElement( $siteId, $op->getNewValue() ) );
 		} elseif ( $op instanceof DiffOpRemove ) {
-			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId,  $op->getOldValue() ) );
+			$oldHtml = $this->getDeletedLine( $this->getSiteLinkElement( $siteId, $op->getOldValue() ) );
 		} elseif ( $op instanceof DiffOpChange ) {
 			$wordLevelDiff = new WordLevelDiff(
 				[ $op->getOldValue() ],

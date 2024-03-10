@@ -189,7 +189,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	public function testSerialization( EntityContent $content ) {
 		$handler = $this->getHandler();
 
-		foreach ( [ CONTENT_FORMAT_JSON,  CONTENT_FORMAT_SERIALIZED ] as $format ) {
+		foreach ( [ CONTENT_FORMAT_JSON, CONTENT_FORMAT_SERIALIZED ] as $format ) {
 			$this->assertTrue( $content->equals(
 				$handler->unserializeContent( $handler->serializeContent( $content, $format ), $format )
 			) );

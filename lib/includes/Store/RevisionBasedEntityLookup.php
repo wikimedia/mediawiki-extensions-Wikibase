@@ -43,7 +43,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 */
 	public function getEntity( EntityId $entityId ) {
 		try {
-			$revision = $this->lookup->getEntityRevision( $entityId,  0, $this->lookupMode );
+			$revision = $this->lookup->getEntityRevision( $entityId, 0, $this->lookupMode );
 		} catch ( EntityLookupException $ex ) {
 			throw $ex;
 		} catch ( \Exception $ex ) {

@@ -129,7 +129,7 @@ class RdfBuilderTestData {
 
 			$lines = file( $filename );
 			$lines = array_map( 'trim', $lines );
-			$triples = array_merge( $triples,  $lines );
+			$triples = array_merge( $triples, $lines );
 		}
 
 		$triples = array_unique( $triples );

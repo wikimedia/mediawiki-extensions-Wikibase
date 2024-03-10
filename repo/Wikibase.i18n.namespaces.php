@@ -14,9 +14,9 @@
 // In effect this means that namespace translations apply only if the user defined the corresponding
 // namespace constant.
 $namespaceConstants = [
-	'WB_NS_ITEM',     'WB_NS_ITEM_TALK',
+	'WB_NS_ITEM', 'WB_NS_ITEM_TALK',
 	'WB_NS_PROPERTY', 'WB_NS_PROPERTY_TALK',
-	'WB_NS_QUERY',    'WB_NS_QUERY_TALK',
+	'WB_NS_QUERY', 'WB_NS_QUERY_TALK',
 ];
 
 //@todo: relying on these constants to be defined or not is a pretty horrible hack.

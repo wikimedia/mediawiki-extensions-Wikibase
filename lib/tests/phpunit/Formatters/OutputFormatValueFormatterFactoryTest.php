@@ -139,19 +139,19 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 			'empty' => [
 				new FormatterOptions( [] ),
 				'en', // determined in OutputFormatValueFormatterFactoryTest::newBuilder()
-				'en',  // derived from language code
+				'en', // derived from language code
 			],
 			'language code set' => [
 				new FormatterOptions( [ ValueFormatter::OPT_LANG => 'de' ] ),
 				'de', // as given
-				'de',  // derived from language code
+				'de', // derived from language code
 			],
 			'language fallback set' => [
 				new FormatterOptions( [
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
 				] ),
 				'en', // default code is taken from the constructor, not the fallback chain
-				'fr',  // as given
+				'fr', // as given
 			],
 			'language code and fallback set' => [
 				new FormatterOptions( [
@@ -159,7 +159,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback,
 				] ),
 				'de', // as given
-				'fr',  // as given
+				'fr', // as given
 			],
 		];
 	}

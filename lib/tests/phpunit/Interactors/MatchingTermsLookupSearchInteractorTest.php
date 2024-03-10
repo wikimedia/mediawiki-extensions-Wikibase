@@ -339,17 +339,17 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 					[
 						'entityId' => new NumericPropertyId( 'P11' ),
 						'term' => new Term( 'en', 'Lahmacun' ),
-						'termtype' => 'label' ,
+						'termtype' => 'label',
 					],
 					[
 						'entityId' => new NumericPropertyId( 'P22' ),
 						'term' => new Term( 'en', 'Lama' ),
-						'termtype' => 'label' ,
+						'termtype' => 'label',
 					],
 					[
 						'entityId' => new NumericPropertyId( 'P22' ),
 						'term' => new Term( 'en', 'La-description' ),
-						'termtype' => 'description' ,
+						'termtype' => 'description',
 					],
 				],
 			],
@@ -367,7 +367,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 					[
 						'entityId' => new NumericPropertyId( 'P11' ),
 						'term' => new Term( 'en', 'Lahmacun' ),
-						'termtype' => 'label' ,
+						'termtype' => 'label',
 					],
 				],
 			],

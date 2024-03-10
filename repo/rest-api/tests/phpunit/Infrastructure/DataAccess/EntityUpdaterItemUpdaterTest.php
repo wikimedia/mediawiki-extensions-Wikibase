@@ -98,7 +98,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 	}
 
 	private function newItemUpdater(): EntityUpdaterItemUpdater {
-		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->newSitelinkConverter(),  $this->statementReadModelConverter );
+		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->newSitelinkConverter(), $this->statementReadModelConverter );
 	}
 
 	private function newSitelinkConverter(): SitelinksReadModelConverter {

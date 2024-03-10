@@ -189,7 +189,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			$this->addContinue( $params['continue'] );
 		}
 
-		$orderBy = [ 'eu_page_id' , 'eu_entity_id' ];
+		$orderBy = [ 'eu_page_id', 'eu_entity_id' ];
 		if ( isset( $params['aspect'] ) ) {
 			$this->addWhereFld( 'eu_aspect', $params['aspect'] );
 		} else {

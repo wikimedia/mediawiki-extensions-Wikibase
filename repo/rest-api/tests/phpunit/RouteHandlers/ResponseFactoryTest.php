@@ -52,13 +52,13 @@ class ResponseFactoryTest extends TestCase {
 
 	public static function errorCodeToHttpStatusCodeProvider(): Generator {
 		yield [ UseCaseError::INVALID_FIELD, 400 ];
-		yield [ UseCaseError::INVALID_ITEM_ID,  400 ];
-		yield [ UseCaseError::INVALID_STATEMENT_ID,  400 ];
-		yield [ UseCaseError::INVALID_FIELD,  400 ];
-		yield [ UseCaseError::ITEM_NOT_FOUND,  404 ];
-		yield [ UseCaseError::PROPERTY_NOT_FOUND,  404 ];
-		yield [ UseCaseError::STATEMENT_NOT_FOUND,  404 ];
-		yield [ UseCaseError::UNEXPECTED_ERROR,  500 ];
+		yield [ UseCaseError::INVALID_ITEM_ID, 400 ];
+		yield [ UseCaseError::INVALID_STATEMENT_ID, 400 ];
+		yield [ UseCaseError::INVALID_FIELD, 400 ];
+		yield [ UseCaseError::ITEM_NOT_FOUND, 404 ];
+		yield [ UseCaseError::PROPERTY_NOT_FOUND, 404 ];
+		yield [ UseCaseError::STATEMENT_NOT_FOUND, 404 ];
+		yield [ UseCaseError::UNEXPECTED_ERROR, 500 ];
 	}
 
 	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {

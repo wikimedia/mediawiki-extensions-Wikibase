@@ -54,8 +54,8 @@ class SpecialListFederatedProperties extends SpecialWikibasePage {
 
 		return wfMessage(
 			'wikibase-federated-properties-special-list-of-properties-source-ref',
-			$this->scriptUrl . 'index.php?title=' . $specialPage,   // the href target URL
-			parse_url( $this->scriptUrl, PHP_URL_HOST )           // the source domain name as displayed in the message
+			$this->scriptUrl . 'index.php?title=' . $specialPage, // the href target URL
+			parse_url( $this->scriptUrl, PHP_URL_HOST ) // the source domain name as displayed in the message
 		)->parse();
 	}
 

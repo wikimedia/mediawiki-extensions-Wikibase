@@ -161,7 +161,7 @@ class Runner {
 		return [
 			$rendered,
 			'noparse' => false, // parse wikitext
-			'nowiki' => false,  // formatters take care of escaping as needed
+			'nowiki' => false, // formatters take care of escaping as needed
 		];
 	}
 

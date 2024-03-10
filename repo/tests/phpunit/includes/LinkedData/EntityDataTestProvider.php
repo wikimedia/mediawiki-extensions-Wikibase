@@ -66,31 +66,31 @@ class EntityDataTestProvider {
 		$cases = [];
 
 		$cases['no params, fail'] = [
-			'',      // subpage
+			'', // subpage
 			[], // parameters
 			[], // headers
 			'!!', // output regex //TODO: be more specific
-			400,       // http code
+			400, // http code
 		];
 
 		$cases['valid item ID, subpage as empty string'] = [
-			'',      // subpage
+			'', // subpage
 			[ 'id' => 'Q42', 'format' => 'json' ], // parameters
 			[], // headers
 			'!^\{.*Raarrr!s', // output regex
-			200,       // http code
+			200, // http code
 		];
 
 		$cases['invalid item ID'] = [
-			'',      // subpage
+			'', // subpage
 			[ 'id' => 'Q1231231230', 'format' => 'json' ], // parameters
 			[], // headers
 			'!!', // output regex
-			404,  // http code
+			404, // http code
 		];
 
 		$cases['revision ID'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'revision' => '4242',
@@ -98,11 +98,11 @@ class EntityDataTestProvider {
 			],
 			[], // headers
 			'!^\{.*Raarr!s', // output regex
-			200,       // http code
+			200, // http code
 		];
 
 		$cases['bad revision ID'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'revision' => '1231231230',
@@ -110,70 +110,70 @@ class EntityDataTestProvider {
 			],
 			[], // headers
 			'!!', // output regex
-			500,       // http code
+			500, // http code
 		];
 
 		$cases['no format, cause 303 to default format'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 			],
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!.+!',
 			],
 		];
 
 		$cases['mime type'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'format' => 'application/json',
 			],
 			[], // headers
 			'!^\{.*Raarr!s', // output regex
-			200,       // http code
+			200, // http code
 			[ // headers
 				'Content-Type' => '!^application/json(;|$)!',
 			],
 		];
 
 		$cases['bad format'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'format' => 'sdakljflsd',
 			],
 			[], // headers
 			'!!', // output regex
-			415,  // http code
+			415, // http code
 		];
 
 		$cases['redirected id'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q22',
 				'format' => 'application/json',
 			],
 			[], // headers
 			'!^\{.*Raarr!s', // output regex
-			200,       // http code
+			200, // http code
 			[ // headers
 				'Content-Type' => '!^application/json(;|$)!',
 			],
 		];
 
 		$cases['malformed id'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => '////',
 				'format' => 'json',
 			],
 			[], // headers
 			'!!', // output regex
-			400,  // http code
+			400, // http code
 		];
 
 		// from case #0 to #9, generate #10 to #19
@@ -209,43 +209,43 @@ class EntityDataTestProvider {
 		$cases = array_merge( $cases, $subpageCases );
 
 		$cases['valid item ID, subpage as null'] = [
-			null,      // subpage
+			null, // subpage
 			[ 'id' => 'Q42', 'format' => 'json' ], // parameters
 			[], // headers
 			'!^\{.*Raarrr!s', // output regex
-			200,       // http code
+			200, // http code
 		];
 
 		$cases['format=application/json does not trigger a redirect'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'format' => 'application/json',
 			],
 			[], // headers
 			'!!', // output regex
-			200,  // http code
+			200, // http code
 			[ // headers
 				'Content-Type' => '!^application/json!',
 			],
 		];
 
 		$cases['format=html does trigger a 303'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'format' => 'HTML',
 			],
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!Q42$!',
 			],
 		];
 
 		$cases['format=html&revision=4242 does trigger a 303 to the correct rev'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'revision' => '4242',
@@ -253,146 +253,146 @@ class EntityDataTestProvider {
 			],
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!Q42(\?|&)oldid=4242!',
 			],
 		];
 
 		$cases['id=q42&format=json does not trigger a redirect'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'q42',
 				'format' => 'application/json',
 			],
 			[], // headers
 			'!!', // output regex
-			200,  // http code
+			200, // http code
 			[ // headers
 				'Content-Type' => '!^application/json!',
 			],
 		];
 
 		$cases['/Q5 does trigger a 303'] = [
-			'Q42',      // subpage
+			'Q42', // subpage
 			[], // parameters
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!/Q42\.[-./\w]+$!',
 			],
 		];
 
 		$cases['/Q5.json does not trigger a redirect'] = [
-			'Q42.json',      // subpage
+			'Q42.json', // subpage
 			[],
 			[], // headers
 			'!!', // output regex
-			200,  // http code
+			200, // http code
 			[ // headers
 				'Content-Type' => '!^application/json!',
 			],
 		];
 
 		$cases['/q5.json does trigger a 301'] = [
-			'q42.JSON',      // subpage
+			'q42.JSON', // subpage
 			[], // parameters
 			[], // headers
 			'!!', // output regex
-			301,  // http code
+			301, // http code
 			[ // headers
 				'Location' => '!/Q42\.json$!',
 			],
 		];
 
 		$cases['/q5:1234.json does trigger a 301 to the correct rev'] = [
-			'q42.json',      // subpage
+			'q42.json', // subpage
 			[ 'revision' => '4242' ], // parameters
 			[], // headers
 			'!!', // output regex
-			301,  // http code
+			301, // http code
 			[ // headers
 				'Location' => '!Q42\.json[\?&]oldid=4242!',
 			],
 		];
 
 		$cases['/Q5.application/json does trigger a 301'] = [
-			'Q42.application/json',      // subpage
+			'Q42.application/json', // subpage
 			[], // parameters
 			[], // headers
 			'!!', // output regex
-			301,  // http code
+			301, // http code
 			[ // headers
 				'Location' => '!Q42\.json!',
 			],
 		];
 
 		$cases['/Q5.html does trigger a 303'] = [
-			'Q42.html',      // subpage
+			'Q42.html', // subpage
 			[], // parameters
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!Q42$!',
 			],
 		];
 
 		$cases['/Q5.xyz triggers a 415'] = [
-			'Q42.xyz',      // subpage
+			'Q42.xyz', // subpage
 			[],
 			[], // headers
 			'!!', // output regex
-			415,  // http code
+			415, // http code
 			[], // headers
 		];
 
 		$cases['/Q5 with "Accept: text/foobar" triggers a 406'] = [
-			'Q42',      // subpage
+			'Q42', // subpage
 			[],
 			[ // headers
 				'Accept' => 'text/foobar',
 			],
 			'!!', // output regex
-			406,  // http code
+			406, // http code
 			[], // headers
 		];
 
 		$cases['/Q5 with "Accept: text/html" triggers a 303'] = [
-			'Q42',      // subpage
+			'Q42', // subpage
 			[], // parameters
 			[ // headers
 				'Accept' => 'text/HTML',
 			],
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!Q42$!',
 			],
 		];
 
 		$cases['/Q5 with "Accept: application/json" triggers a 303'] = [
-			'Q42',      // subpage
+			'Q42', // subpage
 			[], // parameters
 			[ // headers
 				'Accept' => 'application/foobar, application/json',
 			],
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!/Q42.json$!',
 			],
 		];
 
 		$cases['/Q5 with "Accept: text/html; q=0.5, application/json" uses weights for 303'] = [
-			'Q42',      // subpage
+			'Q42', // subpage
 			[], // parameters
 			[ // headers
 				'Accept' => 'text/html; q=0.5, application/json',
 			],
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!/Q42.json$!',
 			],
@@ -401,23 +401,23 @@ class EntityDataTestProvider {
 		// If-Modified-Since handling
 
 		$cases['If-Modified-Since from the deep past should return a 200 (revision timestamp is 20131211100908)'] = [
-			'Q42.json',	  // subpage
+			'Q42.json', // subpage
 			[], // parameters
 			[ // headers
 				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' ),
 			],
 			'!!', // output regex
-			200,  // http code
+			200, // http code
 		];
 
 		$cases['new If-Modified-Since should return a 304 (revision timestamp is 20131211100908)'] = [
-			'Q42.json',	  // subpage
+			'Q42.json', // subpage
 			[], // parameters
 			[ // headers
 				'If-Modified-Since' => '20131213141516',
 			],
 			'!!', // output regex
-			304,  // http code
+			304, // http code
 		];
 
 		// #37:
@@ -430,15 +430,15 @@ class EntityDataTestProvider {
 		];
 
 		$cases['requesting a redirect includes the followed redirect in the output'] = [
-			'',      // subpage
+			'', // subpage
 			[ 'id' => 'Q22', 'format' => 'ntriples' ], // parameters
 			[], // headers
 			'!^<http://acme\.test/Q22> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q42> *.$!m', // output regex
-			200,       // http code
+			200, // http code
 		];
 
 		$cases['flavors are passed on, incoming redirects are included'] = [
-			'',      // subpage
+			'', // subpage
 			[ 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ], // parameters
 			[], // headers
 			'!^<http://data\.acme\.test/Q42> *'
@@ -446,23 +446,23 @@ class EntityDataTestProvider {
 				. '<http://acme\.test/Q22> *'
 				. '<http://www\.w3\.org/2002/07/owl#sameAs> *'
 				. '<http://acme\.test/Q42> *.$!sm',
-			200,       // http code
+			200, // http code
 		];
 
 		$cases['dump format includes version, see T130066'] = [
-			'',      // subpage
+			'', // subpage
 			[ 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'dump' ], // parameters
 			[], // headers
 			'!^<http://data\.acme\.test/Q42> +'
 				. "<http://schema.org/softwareVersion> +\"$version\" *\\.\$"
 				. '!sm',
-			200,       // http code
+			200, // http code
 		];
 
 		// redirect=force
 
 		$cases['format=application/json with forced redirect'] = [
-			'',      // subpage
+			'', // subpage
 			[ // parameters
 				'id' => 'Q42',
 				'format' => 'application/json',
@@ -470,33 +470,33 @@ class EntityDataTestProvider {
 			],
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!/Q42\.json$!',
 			],
 		];
 
 		$cases['/Q42.json with forced redirect'] = [
-			'Q42.json',      // subpage
+			'Q42.json', // subpage
 			[ // parameters
 				'redirect' => 'force',
 			],
 			[], // headers
 			'!!', // output regex
-			303,  // http code
+			303, // http code
 			[ // headers
 				'Location' => '!/Q42\.json!',
 			],
 		];
 
 		$cases['/q42.json with forced redirect triggers a 301, not a 303'] = [
-			'q42.JSON',      // subpage
+			'q42.JSON', // subpage
 			[ // parameters
 				'redirect' => 'force',
 			],
 			[], // headers
 			'!!', // output regex
-			301,  // http code
+			301, // http code
 			[ // headers
 				'Location' => '!/Q42\.json$!',
 			],

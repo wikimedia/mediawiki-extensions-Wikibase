@@ -88,7 +88,7 @@ class EditSummaryFormatter {
 					if ( $editSummary->hasBadges() ) {
 						$actionName = $editSummary->isBadgesOnly() ? 'set-badges' : 'set-both';
 					}
-					return $this->newSummaryForSitelinkEdit( $editSummary,  $actionName );
+					return $this->newSummaryForSitelinkEdit( $editSummary, $actionName );
 				case EditSummary::REMOVE_ACTION:
 					$summary = new Summary(
 						'wbsetsitelink',

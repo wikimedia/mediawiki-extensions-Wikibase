@@ -150,7 +150,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
 			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
 			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
-			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS, $q7_no_refs, [] ],
 			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
 			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
 			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],
@@ -199,7 +199,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		yield [ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ];
 		yield [ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ];
 		yield [ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ];
-		yield [ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ];
+		yield [ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS, $q7_no_refs, [] ];
 		yield [ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ];
 		yield [ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ];
 		yield [ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ];

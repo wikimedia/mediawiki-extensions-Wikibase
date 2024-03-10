@@ -270,7 +270,7 @@ class PageTerms extends ApiQueryBase {
 			],
 			'terms' => [
 				ParamValidator::PARAM_TYPE => TermIndexEntry::$validTermTypes,
-				ParamValidator::PARAM_DEFAULT => implode( '|',  TermIndexEntry::$validTermTypes ),
+				ParamValidator::PARAM_DEFAULT => implode( '|', TermIndexEntry::$validTermTypes ),
 				ParamValidator::PARAM_ISMULTI => true,
 				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			],
