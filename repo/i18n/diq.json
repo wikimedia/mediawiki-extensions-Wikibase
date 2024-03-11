@@ -109,6 +109,8 @@
 	"wikibase-modifyterm-language": "Kodê zıwani:",
 	"wikibase-itemmerge-permissiondenied": "Destur red kerd.",
 	"wikibase-listproperties-submit": "Bıvêne",
+	"wikibase-redirectentity-fromid": "Kamiya ke wa bıkırışiyo",
+	"wikibase-redirectentity-toid": "Kamiya ke wa bıkırışiyo",
 	"wikibase-redirectentity-submit": "Serşıkıtış",
 	"wikibase-restoreold": "reset kerê",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]i ([[User talk:$4|werênayış]]) vurnayışê $3i peyser gırewt",
