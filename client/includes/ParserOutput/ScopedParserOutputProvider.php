@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\ParserOutput;
 
+use LogicException;
 use MediaWiki\Parser\ParserOutput;
 
 /**
@@ -19,13 +20,10 @@ class ScopedParserOutputProvider implements ParserOutputProvider {
 		$this->parserOutput = $parserOutput;
 	}
 
-	/**
-	 * @throws \Exception In the case that a call to getParserOutput is made after the
-	 * 	       scope for the ParserOutputProvider has been closed.
-	 */
 	public function getParserOutput(): ParserOutput {
 		if ( $this->scopeClosed ) {
-			throw new \Exception( "Tried to access parser output beyond expected scope" );
+			// the ParserOutputProvider has been closed.
+			throw new LogicException( "Tried to access parser output beyond expected scope" );
 		}
 		return $this->parserOutput;
 	}

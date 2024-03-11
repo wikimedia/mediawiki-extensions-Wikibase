@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Modules;
 
-use Exception;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use RuntimeException;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 
@@ -56,11 +56,8 @@ class DataTypesModule extends RL\Module {
 
 	/**
 	 * @since 0.1
-	 *
 	 * @param array $resourceDefinition
-	 *
 	 * @return string
-	 * @throws Exception If the given resource definition is not sufficient
 	 */
 	public static function extractDataTypesConfigVarNameFromResourceDefinition(
 		array $resourceDefinition
@@ -68,7 +65,7 @@ class DataTypesModule extends RL\Module {
 		$dataTypesConfigVarName = $resourceDefinition['datatypesconfigvarname'] ?? null;
 
 		if ( !is_string( $dataTypesConfigVarName ) || $dataTypesConfigVarName === '' ) {
-			throw new Exception(
+			throw new RuntimeException(
 				'The "datatypesconfigvarname" value of the resource definition' .
 				' has to be a non-empty string value'
 			);
@@ -79,11 +76,8 @@ class DataTypesModule extends RL\Module {
 
 	/**
 	 * @since 0.1
-	 *
 	 * @param array $resourceDefinition
-	 *
 	 * @return DataTypeFactory
-	 * @throws Exception If the given resource definition is not sufficient
 	 */
 	public static function extractDataTypeFactoryFromResourceDefinition(
 		array $resourceDefinition
@@ -95,7 +89,7 @@ class DataTypesModule extends RL\Module {
 		}
 
 		if ( !( $dataTypeFactory instanceof DataTypeFactory ) ) {
-			throw new Exception(
+			throw new RuntimeException(
 				'The "datatypefactory" value of the resource definition has' .
 				' to be an instance of DataTypeFactory or a callback returning one'
 			);

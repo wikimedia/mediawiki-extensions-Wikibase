@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Changes;
 
-use Exception;
+use UnexpectedValueException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -180,7 +180,7 @@ class EntityChange extends DiffChange {
 				$info,
 				function ( $v ) {
 					if ( is_object( $v ) ) {
-						throw new Exception( "Refusing to serialize PHP object of type " .
+						throw new UnexpectedValueException( "Refusing to serialize PHP object of type " .
 							get_class( $v ) );
 					}
 				}

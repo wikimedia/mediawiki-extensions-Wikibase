@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store\Sql\Terms\Util;
 
-use Exception;
+use LogicException;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -188,7 +188,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 						' $records: ' . json_encode( $records )
 					);
 					// Logic error, this should never happen.
-					$exception = new Exception(
+					$exception = new LogicException(
 						'Fail-safe exception. Avoiding infinite loop due to possibly undetectable'
 						. " existing records in primary.\n"
 						. ' It may be due to encoding incompatibility'

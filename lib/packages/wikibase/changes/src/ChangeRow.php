@@ -2,9 +2,10 @@
 
 namespace Wikibase\Lib\Changes;
 
-use Exception;
+use LogicException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RuntimeException;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
@@ -49,7 +50,6 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getAge
 	 *
-	 * @throws Exception if the "time" field is not set
 	 * @return int Seconds
 	 */
 	public function getAge() {
@@ -59,7 +59,6 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getTime
 	 *
-	 * @throws Exception if the "time" field is not set
 	 * @return string TS_MW
 	 */
 	public function getTime() {
@@ -78,7 +77,6 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getObjectId
 	 *
-	 * @throws Exception if the "object_id" field is not set
 	 * @return string
 	 */
 	public function getObjectId() {
@@ -87,17 +85,16 @@ abstract class ChangeRow implements Change {
 
 	/**
 	 * @param string $name
-	 *
-	 * @throws Exception if the requested field is not set
 	 * @return mixed
 	 */
 	public function getField( $name ) {
 		if ( !$this->hasField( $name ) ) {
-			throw new Exception( 'Attempted to get not-set field ' . $name );
+			// the requested field is not set
+			throw new RuntimeException( 'Attempted to get not-set field ' . $name );
 		}
 
 		if ( $name === self::INFO ) {
-			throw new Exception( 'Use getInfo instead' );
+			throw new LogicException( 'Use getInfo instead' );
 		}
 
 		return $this->fields[$name];
@@ -200,7 +197,6 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * @throws Exception if the "id" field is not set
 	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId() {

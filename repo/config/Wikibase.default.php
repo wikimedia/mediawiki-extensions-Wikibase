@@ -347,11 +347,11 @@ return [
 			global $wgServer;
 
 			if ( !defined( 'WB_NS_ITEM' ) ) {
-				throw new Exception( 'Constant WB_NS_ITEM is not defined' );
+				throw new LogicException( 'Constant WB_NS_ITEM is not defined' );
 			}
 
 			if ( !defined( 'WB_NS_PROPERTY' ) ) {
-				throw new Exception( 'Constant WB_NS_PROPERTY is not defined' );
+				throw new LogicException( 'Constant WB_NS_PROPERTY is not defined' );
 			}
 
 			$entityNamespaces = [
@@ -374,7 +374,7 @@ return [
 			];
 		}
 
-		throw new Exception( 'entitySources must be configured manually (or use the example settings)' );
+		throw new RuntimeException( 'entitySources must be configured manually (or use the example settings)' );
 	},
 
 	'localEntitySourceName' => 'local',
