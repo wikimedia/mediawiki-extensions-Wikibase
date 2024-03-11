@@ -113,8 +113,8 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$parserOutput = new ParserOutput();
 		$parserOutput->addModules( [ 'kartographer-rl-module1', 'javascript-stuffs' ] );
 		$parserOutput->setExtensionData( 'kartographer', [ [ 'whatever' ] ] );
-		$parserOutput->setPageProperty( 'kartographer_links', [ [ 34 ] ] );
-		$parserOutput->setPageProperty( 'kartographer_frames', [ [ 'blah' ] ] );
+		$parserOutput->setPageProperty( 'kartographer_links', 34 );
+		$parserOutput->setPageProperty( 'kartographer_frames', 42 );
 		$parserOutput->setJsConfigVar( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
 
 		return $parserOutput;
