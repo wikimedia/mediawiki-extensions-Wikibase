@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Les Meloures",
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "eidel",
@@ -26,6 +27,7 @@
 	"valueview-expert-timeinput-precision-day": "Dag",
 	"valueview-expert-timeinput-precision-hour": "Stonn",
 	"valueview-expert-timeinput-precision-minute": "Minutt",
+	"valueview-expert-timeinput-precision-second": "Sekonn",
 	"valueview-expert-timeinput-calendar": "Kalenner:",
 	"valueview-expertextender-languageselector-label": "Sprooch (obligatoresch)",
 	"valueview-expertextender-unitsuggester-label": "Eenheet (fakultativ)",
