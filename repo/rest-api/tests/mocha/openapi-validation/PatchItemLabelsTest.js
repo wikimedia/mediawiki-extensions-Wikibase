@@ -75,16 +75,6 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	// eslint-disable-next-line mocha/no-skipped-tests
-	it.skip( '415 - unsupported media type', async () => {
-		const response = await newPatchItemLabelsRequestBuilder(
-			itemId,
-			[ makeReplaceExistingLabelOp() ]
-		).withHeader( 'Content-Type', 'text/plain' ).makeRequest();
-		expect( response ).to.have.status( 415 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '422 - empty label', async () => {
 		const response = await newPatchItemLabelsRequestBuilder(
 			itemId,

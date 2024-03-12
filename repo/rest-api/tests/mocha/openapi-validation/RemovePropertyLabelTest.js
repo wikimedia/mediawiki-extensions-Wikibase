@@ -61,13 +61,4 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 412 );
 		expect( response ).to.satisfyApiSpec;
 	} );
-
-	// eslint-disable-next-line mocha/no-skipped-tests
-	it.skip( '415 - unsupported media type', async () => {
-		const response = await newRemovePropertyLabelRequestBuilder( existingPropertyId, 'en' )
-			.withHeader( 'Content-Type', 'text/plain' ).makeRequest();
-
-		expect( response ).to.have.status( 415 );
-		expect( response ).to.satisfyApiSpec;
-	} );
 } );

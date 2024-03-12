@@ -69,17 +69,6 @@ describe( 'validate DELETE endpoints for property statements against OpenAPI def
 				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
-
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( '415 Unsupported Media Type is valid for unknown Content-Type: headers', async () => {
-				const validStatementId = 'P1$a787449b-4e36-a7fd-1842-0f38ee96cdb0';
-				const response = await newRemoveRequestBuilder( validStatementId )
-					.withHeader( 'Content-Type', 'text/plain' )
-					.makeRequest();
-
-				expect( response ).to.have.status( 415 );
-				expect( response ).to.satisfyApiSpec;
-			} );
 		} );
 	} );
 

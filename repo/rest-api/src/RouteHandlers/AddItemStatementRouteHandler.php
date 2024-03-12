@@ -19,7 +19,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\ContentTypeCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
@@ -64,7 +63,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
-				new ContentTypeCheckMiddleware( [ ContentTypeCheckMiddleware::TYPE_APPLICATION_JSON ] ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
@@ -92,7 +90,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 */
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per ContentTypeCheckMiddleware and TypeValidatingJsonBodyValidator
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
 				new AddItemStatementRequest(

@@ -80,17 +80,6 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	// eslint-disable-next-line mocha/no-skipped-tests
-	it.skip( '415 - unsupported media type', async () => {
-		const response = await newPatchItemDescriptionsRequestBuilder(
-			itemId,
-			[ makeReplaceExistingDescriptionOp() ]
-		).withHeader( 'Content-Type', 'text/plain' ).makeRequest();
-
-		expect( response ).to.have.status( 415 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '422 - empty description', async () => {
 		const response = await newPatchItemDescriptionsRequestBuilder(
 			itemId,
