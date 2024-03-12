@@ -26,6 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class RemoveItemStatementRouteHandler extends SimpleHandler {
+	use AssertContentType;
 
 	public const ITEM_ID_PATH_PARAM = 'item_id';
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
@@ -135,27 +136,28 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
-		return $contentType === 'application/json' ?
-			new TypeValidatingJsonBodyValidator( [
-				self::TAGS_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'array',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT,
-				],
-				self::BOT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'boolean',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT,
-				],
-				self::COMMENT_BODY_PARAM => [
-					self::PARAM_SOURCE => 'body',
-					ParamValidator::PARAM_TYPE => 'string',
-					ParamValidator::PARAM_REQUIRED => false,
-					ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
-				],
-			] ) : parent::getBodyValidator( $contentType );
+		$this->assertContentType( [ 'application/json' ], $contentType );
+
+		return new TypeValidatingJsonBodyValidator( [
+			self::TAGS_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'array',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => self::TAGS_PARAM_DEFAULT,
+			],
+			self::BOT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'boolean',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => self::BOT_PARAM_DEFAULT,
+			],
+			self::COMMENT_BODY_PARAM => [
+				self::PARAM_SOURCE => 'body',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
+			],
+		] );
 	}
 
 	private function newSuccessHttpResponse(): Response {
