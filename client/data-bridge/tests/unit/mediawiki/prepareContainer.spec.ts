@@ -42,12 +42,12 @@ function mockOOEnv(): any {
 			PanelLayout: panelLayoutConstructor,
 			WindowManager: jest.fn( () => windowManager ),
 		},
-		inheritClass: jest.fn( ( child: any, parent: any ) => {
-			child.static = {
+		inheritClass: jest.fn( ( target: any, origin: any ) => {
+			target.static = {
 				name: '',
 			};
 
-			child.parent = parent;
+			target.super = origin;
 		} ),
 	};
 

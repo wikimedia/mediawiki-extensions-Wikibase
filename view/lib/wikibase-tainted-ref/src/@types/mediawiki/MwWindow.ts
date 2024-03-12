@@ -105,7 +105,7 @@ export interface MwWindowOO {
 		PanelLayout: PanelLayoutConstructor;
 		WindowManager: WindowManagerConstructor;
 	};
-	inheritClass( child: any, parent: any ): void; // takes "classes" as arguments
+	inheritClass( target: any, origin: any ): void; // takes "classes" as arguments
 }
 
 export interface UlsData {
