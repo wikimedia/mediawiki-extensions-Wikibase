@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nadezhda"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} элемент",
+	"wikibase-editlinks": "Ссылкывлӓм тӧрлӓш",
+	"wikibase-linkitem-addlinks": "Ссылкывлӓм приваяш",
+	"wikibase-linkitem-title": "Страницӓ доно кӹлдӹмӓш",
+	"wikibase-linkitem-linkpage": "Страницӓ доно кӹлдӹмӓш",
+	"wikibase-linkitem-selectlink": "Пожалуйста, сайт дӓ страницӹм айыры, кыды дон ти страницӹм кӹлдӹнет.",
+	"wikibase-linkitem-input-site": "Йӹлмӹ:",
+	"wikibase-linkitem-input-page": "Страницӓ:"
+}
