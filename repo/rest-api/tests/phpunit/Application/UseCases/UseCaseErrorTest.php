@@ -35,6 +35,17 @@ class UseCaseErrorTest extends TestCase {
 			'invalid property id',
 			[ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ],
 		];
+
+		yield 'valid error with path context' => [
+			UseCaseError::LABEL_EMPTY,
+			'label empty',
+			[ UseCaseError::CONTEXT_LANGUAGE => 'en' ],
+		];
+
+		yield 'valid error without path context' => [
+			UseCaseError::LABEL_EMPTY,
+			'label empty',
+		];
 	}
 
 	/**
@@ -57,6 +68,12 @@ class UseCaseErrorTest extends TestCase {
 		yield 'error context is missing expected keys' => [
 			UseCaseError::INVALID_PROPERTY_ID,
 			'error context key is missing',
+		];
+
+		yield 'wrong path context field name' => [
+			UseCaseError::LABEL_EMPTY,
+			'label empty',
+			[ UseCaseError::CONTEXT_PATH => 'en' ],
 		];
 	}
 

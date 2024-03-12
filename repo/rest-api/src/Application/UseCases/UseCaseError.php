@@ -212,6 +212,15 @@ class UseCaseError extends UseCaseException {
 		self::UNEXPECTED_ERROR => [],
 	];
 
+	/**
+	 * Depending on the use case and whether it's operating on a single resource or a list, errors may include path information in the
+	 * context.
+	 */
+	private const ADDITIONAL_PATH_CONTEXT = [
+		self::LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
+		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
+	];
+
 	private string $errorCode;
 	private string $errorMessage;
 	private array $errorContext;
@@ -226,14 +235,17 @@ class UseCaseError extends UseCaseException {
 			throw new LogicException( "Unknown error code: '$code'" );
 		}
 
-		$contextKeys = $context ? array_keys( $context ) : [];
-		$diff = array_values( array_diff( $contextKeys, self::EXPECTED_CONTEXT_KEYS[$code] ) );
-		if ( $diff ) {
-			throw new LogicException( "Error context for '$code' should not contain keys: " . json_encode( $diff ) );
+		$contextKeys = array_keys( $context );
+		$unexpectedContext = array_values( array_diff(
+			$contextKeys,
+			array_merge( self::EXPECTED_CONTEXT_KEYS[$code], self::ADDITIONAL_PATH_CONTEXT[$code] ?? [] )
+		) );
+		if ( $unexpectedContext ) {
+			throw new LogicException( "Error context for '$code' should not contain keys: " . json_encode( $unexpectedContext ) );
 		}
-		$diff = array_values( array_diff( self::EXPECTED_CONTEXT_KEYS[$code], $contextKeys ) );
-		if ( $diff ) {
-			throw new LogicException( "Error context for '$code' should contain keys: " . json_encode( $diff ) );
+		$missingContext = array_values( array_diff( self::EXPECTED_CONTEXT_KEYS[$code], $contextKeys ) );
+		if ( $missingContext ) {
+			throw new LogicException( "Error context for '$code' should contain keys: " . json_encode( $missingContext ) );
 		}
 	}
 
