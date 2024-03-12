@@ -990,7 +990,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					'Content-Type' => 'application/json',
 				],
 				'pathParams' => $validRequest['pathParams'],
-				'bodyContents' => json_encode( $validRequest['bodyContents'] ?? null ),
+				'bodyContents' => isset( $validRequest['bodyContents'] )
+					? json_encode( $validRequest['bodyContents'] ) : null,
 			] ),
 			[ 'path' => $routeData['path'] ]
 		);
