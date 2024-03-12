@@ -155,8 +155,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "[WIP] Change an Item's sitelinks",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Change an Item's sitelinks",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
