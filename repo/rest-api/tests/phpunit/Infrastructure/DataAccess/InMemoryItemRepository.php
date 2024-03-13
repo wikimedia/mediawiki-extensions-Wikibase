@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -33,7 +34,8 @@ class InMemoryItemRepository implements
 	ItemDescriptionsRetriever,
 	ItemAliasesRetriever,
 	SitelinksRetriever,
-	ItemUpdater
+	ItemUpdater,
+	ItemCreator
 {
 	use StatementReadModelHelper;
 
@@ -78,6 +80,12 @@ class InMemoryItemRepository implements
 
 	public function getSitelinks( ItemId $itemId ): Sitelinks {
 		return $this->convertToReadModel( $this->items["$itemId"] )->getSitelinks();
+	}
+
+	public function create( Item $item, EditMetadata $editMetadata ): ItemRevision {
+		$item->setId( new ItemId( 'Q' . rand( 1, 9999 ) ) );
+
+		return $this->update( $item, $editMetadata );
 	}
 
 	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {

@@ -14,6 +14,7 @@ use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
@@ -39,6 +40,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider statementEditSummaryProvider
 	 * @dataProvider sitelinkEditSummaryProvider
 	 * @dataProvider sitelinksEditSummaryProvider
+	 * @dataProvider itemEditSummaryProvider
 	 */
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$editSummaryFormatter = new EditSummaryFormatter(
@@ -202,6 +204,13 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		yield 'patch sitelinks' => [
 			SitelinksEditSummary::newPatchSummary( 'user comment' ),
 			'/* wbeditentity-update:0| */ user comment',
+		];
+	}
+
+	public function itemEditSummaryProvider(): Generator {
+		yield 'create item' => [
+			ItemEditSummary::newCreateSummary( 'user comment' ),
+			'/* wbeditentity-create-item:0| */ user comment',
 		];
 	}
 

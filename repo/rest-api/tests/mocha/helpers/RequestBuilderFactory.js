@@ -10,6 +10,12 @@ module.exports = {
 			.withPathParam( 'item_id', itemId );
 	},
 
+	newCreateItemRequestBuilder( item ) {
+		return new RequestBuilder()
+			.withRoute( 'POST', '/entities/items' )
+			.withJsonBodyParam( 'item', item );
+	},
+
 	newGetPropertyRequestBuilder( propertyId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/properties/{property_id}' )
