@@ -42,10 +42,27 @@
 			"message": "Not a valid language code: {language_code}"
 		}
 	},
+	"InvalidLanguageCodeWithPathContextExample": {
+		"value": {
+			"code": "invalid-language-code",
+			"message": "Not a valid language code: {language_code}",
+			"context": {
+				"path": "{field}",
+				"language": "{language_code}"
+			}
+		}
+	},
 	"InvalidSiteIdExample": {
 		"value": {
 			"code": "invalid-site-id",
 			"message": "Not a valid site ID: {site_id}"
+		}
+	},
+	"InvalidSiteIdWithSiteContextExample": {
+		"value": {
+			"code": "invalid-site-id",
+			"message": "Not a valid site ID: {site_id}",
+			"context": { "site": "{site_id}" }
 		}
 	},
 	"InvalidTitleExample": {
@@ -54,10 +71,24 @@
 			"message": "Not a valid input for title field"
 		}
 	},
+	"InvalidTitleWithSiteContextExample": {
+		"value": {
+			"code": "invalid-title-field",
+			"message": "Not a valid input for title field",
+			"context": { "site": "{site_id}" }
+		}
+	},
 	"TitleIsEmptyExample": {
 		"value": {
 			"code": "title-field-empty",
 			"message": "Title must not be empty"
+		}
+	},
+	"TitleIsEmptyWithSiteContextExample": {
+		"value": {
+			"code": "title-field-empty",
+			"message": "Title must not be empty",
+			"context": { "site": "{site_id}" }
 		}
 	},
 	"TitleDoesNotExistOnGivenSiteExample": {
@@ -66,16 +97,37 @@
 			"message": "Page with title {title} does not exist on the given site"
 		}
 	},
+	"TitleDoesNotExistOnGivenSiteWithSiteContextExample": {
+		"value": {
+			"code": "title-does-not-exist",
+			"message": "Page with title {title} does not exist on the given site",
+			"context": { "site": "{site_id}" }
+		}
+	},
 	"SitelinkTitleFieldNotProvidedExample": {
 		"value": {
 			"code": "sitelink-data-missing-title",
 			"message": "Mandatory sitelink title missing"
 		}
 	},
+	"SitelinkTitleFieldNotProvidedWithSiteContextExample": {
+		"value": {
+			"code": "sitelink-data-missing-title",
+			"message": "Mandatory sitelink title missing",
+			"context": { "site": "{site_id}" }
+		}
+	},
 	"ValueOfBadgesFieldIsNotAListExample": {
 		"value": {
 			"code": "invalid-sitelink-badges-format",
 			"message": "Value of badges field is not a list"
+		}
+	},
+	"ValueOfBadgesFieldIsNotAListWithSiteContextExample": {
+		"value": {
+			"code": "invalid-sitelink-badges-format",
+			"message": "Value of badges field is not a list",
+			"context": { "site": "{site_id}" }
 		}
 	},
 	"ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
@@ -87,12 +139,32 @@
 			}
 		}
 	},
+	"ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample": {
+		"value": {
+			"code": "item-not-a-badge",
+			"message": "Item ID provided as badge is not allowed as a badge: {item_id}",
+			"context": {
+				"badge": "{item_id}",
+				"site": "{site_id}"
+			}
+		}
+	},
 	"ValueProvidedAsABadgeIsNotAnItemIdExample": {
 		"value": {
 			"code": "invalid-input-sitelink-badge",
-			"message": "Badge input is not an item ID: {item_id}",
+			"message": "Badge input is not an item ID: {value}",
 			"context": {
-				"badge": "{item_id}"
+				"badge": "{value}"
+			}
+		}
+	},
+	"ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample": {
+		"value": {
+			"code": "invalid-input-sitelink-badge",
+			"message": "Badge input is not an item ID: {value}",
+			"context": {
+				"badge": "{value}",
+				"site": "{site_id}"
 			}
 		}
 	},
@@ -244,6 +316,16 @@
 			}
 		}
 	},
+	"SitelinkConflictWithSiteContextExample": {
+		"value": {
+			"code": "sitelink-conflict",
+			"message": "Sitelink is already being used on {other_item_id}",
+			"context": {
+				"matching-item-id": "{other_item_id}",
+				"site": "{site_id}"
+			}
+		}
+	},
 	"StatementNotFoundExample": {
 		"value": {
 			"code": "statement-not-found",
@@ -298,10 +380,24 @@
 			"message": "Not a valid label: {label}"
 		}
 	},
+	"InvalidLabelWithLanguageContextExample": {
+		"value": {
+			"code": "invalid-label",
+			"message": "Not a valid label: {label}",
+			"context": { "language": "{language_code}" }
+		}
+	},
 	"LabelEmptyExample": {
 		"value": {
 			"code": "label-empty",
 			"message": "Label must not be empty"
+		}
+	},
+	"LabelEmptyWithLanguageContextExample": {
+		"value": {
+			"code": "label-empty",
+			"message": "Label must not be empty",
+			"context": { "language": "{language_code}" }
 		}
 	},
 	"LabelTooLongExample": {
@@ -311,6 +407,17 @@
 			"context": {
 				"value": "{label}",
 				"character-limit": "{limit}"
+			}
+		}
+	},
+	"LabelTooLongWithLanguageContextExample": {
+		"value": {
+			"code": "label-too-long",
+			"message": "Label must be no more than {limit} characters long",
+			"context": {
+				"value": "{label}",
+				"character-limit": "{limit}",
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -573,10 +680,24 @@
 			"message": "Not a valid description: {description}"
 		}
 	},
+	"InvalidDescriptionWithLanguageContextExample": {
+		"value": {
+			"code": "invalid-description",
+			"message": "Not a valid description: {description}",
+			"context": { "language": "{language_code}" }
+		}
+	},
 	"DescriptionEmptyExample": {
 		"value": {
 			"code": "description-empty",
 			"message": "Description must not be empty"
+		}
+	},
+	"DescriptionEmptyWithLanguageContextExample": {
+		"value": {
+			"code": "description-empty",
+			"message": "Description must not be empty",
+			"context": { "language": "{language_code}" }
 		}
 	},
 	"DescriptionTooLongExample": {
@@ -586,6 +707,17 @@
 			"context": {
 				"value": "{description}",
 				"character-limit": "{limit}"
+			}
+		}
+	},
+	"DescriptionTooLongWithLanguageContextExample": {
+		"value": {
+			"code": "description-too-long",
+			"message": "Description must be no more than {limit} characters long",
+			"context": {
+				"value": "{description}",
+				"character-limit": "{limit}",
+				"language": "{language_code}"
 			}
 		}
 	},
@@ -638,10 +770,24 @@
 			"message": "Alias must not be empty"
 		}
 	},
+	"AliasEmptyWithLanguageContextExample": {
+		"value": {
+			"code": "alias-empty",
+			"message": "Alias must not be empty",
+			"context": { "language": "{language_code}" }
+		}
+	},
 	"AliasListEmptyExample": {
 		"value": {
 			"code": "alias-list-empty",
 			"message": "Alias list must not be empty"
+		}
+	},
+	"AliasListEmptyWithLanguageContextExample": {
+		"value": {
+			"code": "alias-list-empty",
+			"message": "Alias list must not be empty",
+			"context": { "language": "{language_code}" }
 		}
 	},
 	"AliasTooLongExample": {
@@ -654,6 +800,17 @@
 			}
 		}
 	},
+	"AliasTooLongWithLanguageContextExample": {
+		"value": {
+			"code": "alias-too-long",
+			"message": "Alias must be no more than {limit} characters long",
+			"context": {
+				"value": "{alias}",
+				"character-limit": "{limit}",
+				"language": "{language_code}"
+			}
+		}
+	},
 	"InvalidAliasExample": {
 		"value": {
 			"code": "invalid-alias",
@@ -661,11 +818,56 @@
 			"context": { "alias": "{alias}" }
 		}
 	},
+	"InvalidAliasWithLanguageContextExample": {
+		"value": {
+			"code": "invalid-alias",
+			"message": "Not a valid alias: '{alias}'",
+			"context": {
+				"alias": "{alias}",
+				"language": "{language_code}"
+			}
+		}
+	},
 	"DuplicateAliasExample": {
 		"value": {
 			"code": "duplicate-alias",
 			"message": "Alias list contains a duplicate alias: '{alias}'",
 			"context": { "alias": "{alias}" }
+		}
+	},
+	"DuplicateAliasWithLanguageContextExample": {
+		"value": {
+			"code": "duplicate-alias",
+			"message": "Alias list contains a duplicate alias: '{alias}'",
+			"context": {
+				"alias": "{alias}",
+				"language": "{language_code}"
+			}
+		}
+	},
+	"ItemDataInvalidFieldExample": {
+		"value": {
+			"code": "item-data-invalid-field",
+			"message": "Invalid input for '{field}'",
+			"context": {
+				"path": "{field}",
+				"value": "{value}"
+			}
+		}
+	},
+	"ItemDataUnexpectedFieldExample": {
+		"value": {
+			"code": "unexpected-field",
+			"message": "The request body contains an unexpected field",
+			"context": {
+				"field": "{field}"
+			}
+		}
+	},
+	"ItemDataMissingLabelsAndDescriptionsExample": {
+		"value": {
+			"code": "missing-labels-and-descriptions",
+			"message": "Item requires at least a label or a description in a language"
 		}
 	},
 	"ItemStatementIdExample": {

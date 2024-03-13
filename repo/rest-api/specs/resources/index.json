@@ -27,6 +27,9 @@
 			}
 		}
 	},
+	"/entities/items": {
+		"$ref": "./items/list.json"
+	},
 	"/entities/items/{item_id}": {
 		"$ref": "./items/single.json"
 	},
