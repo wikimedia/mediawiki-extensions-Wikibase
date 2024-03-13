@@ -2,11 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
+use Wikibase\DataModel\Entity\ItemId;
+
 /**
  * @license GPL-2.0-or-later
  */
 class Item {
 
+	private ItemId $id;
 	private Labels $labels;
 	private Descriptions $descriptions;
 	private Aliases $aliases;
@@ -14,17 +17,23 @@ class Item {
 	private StatementList $statements;
 
 	public function __construct(
+		ItemId $id,
 		Labels $labels,
 		Descriptions $descriptions,
 		Aliases $aliases,
 		Sitelinks $sitelinks,
 		StatementList $statements
 	) {
+		$this->id = $id;
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
 		$this->sitelinks = $sitelinks;
 		$this->statements = $statements;
+	}
+
+	public function getId(): ItemId {
+		return $this->id;
 	}
 
 	public function getLabels(): Labels {

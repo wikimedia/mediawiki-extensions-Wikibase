@@ -71,6 +71,7 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 
 	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
 		return new Item(
+			$item->getId(),
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),
 			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
