@@ -68,6 +68,10 @@ Monolingual entries removed as they are now natively supported by MediaWiki:
 
 === Breaking changes in 1.42 ===
 
+* (T263427) The RDF URIs will now always use the the unlocalized name Special:EntityData,
+  not a localized name like e.g. Spezial:Objektdaten.
+  This only affects wikis with a $wgLanguageCode other than "en".
+
 * (T12345) ...
 
 === Deprecations in 1.42 ===
