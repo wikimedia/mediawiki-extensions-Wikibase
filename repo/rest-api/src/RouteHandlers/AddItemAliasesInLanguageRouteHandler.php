@@ -76,7 +76,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody';// guaranteed to be an array per ContentTypeCheckMiddleware and getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 
 		try {
 			$useCaseResponse = $this->addItemAliases->execute(
