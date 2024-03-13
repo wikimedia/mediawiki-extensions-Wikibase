@@ -4,14 +4,14 @@
 			"Zolgoyo"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} deñíştírílmesí",
-	"wikibase-editlinks": "Baylanmalardî deñíştír",
-	"wikibase-linkitem-addlinks": "Baylanmalar koş",
-	"wikibase-linkitem-title": "Sayipaga baylanuw",
-	"wikibase-linkitem-linkpage": "Sayipaga baylanuw",
-	"wikibase-linkitem-input-site": "Tíl:",
-	"wikibase-linkitem-input-page": "Sayifa:",
-	"wikibase-rc-hide-wikidata-hide": "gízle",
-	"wikibase-rc-hide-wikidata-show": "kóster",
-	"wikibase-otherprojects": "Başka leyihalarda"
+	"wikibase-dataitem": "{{WBREPONAME}} deñĭştĭrĭlmesĭ",
+	"wikibase-editlinks": "Baylanmalardı deñĭştĭr",
+	"wikibase-linkitem-addlinks": "Baylanmalar qoş",
+	"wikibase-linkitem-title": "Betke baylanuw",
+	"wikibase-linkitem-linkpage": "Betke baylanuw",
+	"wikibase-linkitem-input-site": "Tĭl:",
+	"wikibase-linkitem-input-page": "Bet:",
+	"wikibase-rc-hide-wikidata-hide": "saqlaw",
+	"wikibase-rc-hide-wikidata-show": "körsetüw",
+	"wikibase-otherprojects": "Başqa tasawurlarda"
 }

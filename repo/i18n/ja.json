@@ -148,7 +148,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。",
 	"wikibase-entityselector-more": "続き",
 	"wikibase-entityselector-notfound": "該当するものはありません",
-	"wikibase-anonymouseditwarning": "'''警告:''' ログインしていません。編集を行うと、あなたの[https://ja.wikipedia.org/wiki/IP アドレス IP アドレス] が公開されます。<strong>[[Special:UserLogin|ログイン]]</strong>または<strong>[[Special:CreateAccount|アカウントを作成]]</strong>すれば、あなたの編集に添えられるのはその利用者名になるほか、その他の利点もあります。",
+	"wikibase-anonymouseditwarning": "ご注意：ログインしていません。このまま編集を行うと、あなたの[https://ja.wikipedia.org/wiki/IP_アドレス IP アドレス] は公開されます。<strong>[[Special:UserLogin|ログイン]]</strong>または<strong>[[Special:CreateAccount|アカウントを作成]]</strong>すると、あなたの編集が利用者名で言及されるなど、複数の利点が受けられます。",
 	"wikibase-anonymouseditwarning-heading": "ログインしていません",
 	"wikibase-anonymouseditwarning-message": "編集を行うと、あなたのIPアドレスが公開されます。ログインまたはアカウントを作成すれば、あなたの編集はその利用者名とともに表示されるほか、その他の利点もあります。",
 	"wikibase-anonymouseditwarning-dismiss-persist": "ログインしていないときは必ず警告する",
