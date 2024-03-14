@@ -42,6 +42,8 @@ class EntityUpdaterPropertyUpdater implements PropertyUpdater {
 
 	private function convertDataModelPropertyToReadModel( DataModelProperty $property ): Property {
 		return new Property(
+			$property->getId(),
+			$property->getDataTypeId(),
 			Labels::fromTermList( $property->getLabels() ),
 			Descriptions::fromTermList( $property->getDescriptions() ),
 			Aliases::fromAliasGroupList( $property->getAliasGroups() ),

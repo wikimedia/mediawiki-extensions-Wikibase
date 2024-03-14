@@ -79,6 +79,8 @@ class InMemoryPropertyRepository
 
 	private function convertToReadModel( Property $property ): ReadModelProperty {
 		return new ReadModelProperty(
+			$property->getId(),
+			$property->getDataTypeId(),
 			Labels::fromTermList( $property->getLabels() ),
 			Descriptions::fromTermList( $property->getDescriptions() ),
 			Aliases::fromAliasGroupList( $property->getAliasGroups() ),

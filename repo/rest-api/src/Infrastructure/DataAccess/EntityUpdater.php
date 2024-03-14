@@ -75,7 +75,7 @@ class EntityUpdater {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
-		if ( $newOrUpdateFlag === EDIT_NEW && $entity instanceof StatementListProvidingEntity ) {
+		if ( $entity instanceof StatementListProvidingEntity ) {
 			$this->generateStatementIds( $entity );
 		}
 
@@ -118,9 +118,13 @@ class EntityUpdater {
 	}
 
 	private function generateStatementIds( StatementListProvidingEntity $entity ): void {
-		$this->entityStore->assignFreshId( $entity );
+		if ( $entity->getId() === null ) {
+			$this->entityStore->assignFreshId( $entity );
+		}
 		foreach ( $entity->getStatements() as $statement ) {
-			$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
+			if ( $statement->getGuid() === null ) {
+				$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
+			}
 		}
 	}
 

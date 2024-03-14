@@ -54,6 +54,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
@@ -107,6 +108,7 @@ class ValidatingRequestDeserializer	implements
 	PatchItemDescriptionsValidator,
 	PatchItemAliasesValidator,
 	PatchItemStatementValidator,
+	PatchPropertyValidator,
 	PatchPropertyStatementValidator,
 	PatchStatementValidator,
 	RemoveItemLabelValidator,

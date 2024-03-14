@@ -106,6 +106,13 @@ module.exports = {
 			.withJsonBodyParam( 'patch', patch );
 	},
 
+	newPatchPropertyRequestBuilder( propertyId, patch ) {
+		return new RequestBuilder()
+			.withRoute( 'PATCH', '/entities/properties/{property_id}' )
+			.withPathParam( 'property_id', propertyId )
+			.withJsonBodyParam( 'patch', patch );
+	},
+
 	newPatchPropertyLabelsRequestBuilder( propertyId, patch ) {
 		return new RequestBuilder()
 			.withRoute( 'PATCH', '/entities/properties/{property_id}/labels' )

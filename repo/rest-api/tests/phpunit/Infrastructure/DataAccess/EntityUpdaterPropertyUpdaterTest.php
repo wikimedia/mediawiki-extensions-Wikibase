@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as DataModelProperty;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -72,16 +73,17 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 	}
 
 	private function newEquivalentWriteAndReadModelProperty(): array {
-		$writeModelStatement = NewStatement::someValueFor( 'P123' )
+		$propertyId = new NumericPropertyId( 'P123' );
+		$writeModelStatement = NewStatement::someValueFor( $propertyId )
 			->withGuid( 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
-		$readModelStatement = NewStatementReadModel::someValueFor( 'P123' )
+		$readModelStatement = NewStatementReadModel::someValueFor( $propertyId )
 			->withGuid( 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
 
 		return [
 			new DataModelProperty(
-				null,
+				$propertyId,
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'English Label' ) ] ),
 					new TermList( [ new Term( 'en', 'English Description' ) ] )
@@ -90,6 +92,8 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 				new DataModelStatementList( $writeModelStatement )
 			),
 			new Property(
+				$propertyId,
+				'string',
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases(),

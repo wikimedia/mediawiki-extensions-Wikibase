@@ -108,6 +108,26 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider provideStatementIdAndEntityWithStatement
+	 */
+	public function testUpdate_addStatementToEntity( StatementGuid $statementId, StatementListProvidingEntity $entityToUpdate ): void {
+		$newValue = 'new statement value';
+		$newStatement = NewStatement::forProperty( 'P321' )->withValue( $newValue )->build();
+
+		$this->saveNewEntity( $entityToUpdate );
+
+		$entityToUpdate->getStatements()->addStatement( $newStatement );
+
+		$newRevision = $this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
+
+		$this->assertSame( $entityToUpdate->getId(), $newRevision->getEntity()->getId() );
+		$statements = $newRevision->getEntity()->getStatements()->toArray();
+		$this->assertSame( $statements[0], $newRevision->getEntity()->getStatements()->getFirstStatementWithGuid( "$statementId" ) );
+		$this->assertStringStartsWith( $newRevision->getEntity()->getId()->getSerialization(), $statements[1]->getGuid() );
+		$this->assertSame( $newValue, $statements[1]->getMainSnak()->getDataValue()->getValue() );
+	}
+
 	public function provideStatementIdAndEntityWithStatement(): Generator {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$statement = NewStatement::forProperty( 'P321' )
