@@ -44,15 +44,32 @@ class EntityUpdater {
 	/**
 	 * @throws EntityUpdateFailed
 	 */
-	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
-		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
+	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
+		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
+	}
 
+	/**
+	 * @throws EntityUpdateFailed
+	 */
+	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
+		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
+	}
+
+	/**
+	 * @throws EntityUpdateFailed
+	 */
+	private function createOrUpdate(
+		EntityDocument $entity,
+		EditMetadata $editMetadata,
+		int $newOrUpdateFlag
+	): EntityRevision {
+		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
 		$status = $editEntity->attemptSave(
 			$entity,
 			$this->summaryFormatter->format( $editMetadata->getSummary() ),
-			EDIT_UPDATE | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
+			$newOrUpdateFlag | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,
 			$editMetadata->getTags()
