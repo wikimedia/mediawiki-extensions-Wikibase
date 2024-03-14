@@ -3073,6 +3073,22 @@
                             "items": {
                               "$ref": "#/components/schemas/Statement"
                             }
+                          },
+                          "example": {
+                            "P92": [
+                              {
+                                "rank": "normal",
+                                "property": {
+                                  "id": "P92"
+                                },
+                                "value": {
+                                  "content": "I am a goat",
+                                  "type": "value"
+                                },
+                                "qualifiers": [],
+                                "references": []
+                              }
+                            ]
                           }
                         }
                       }
@@ -6810,6 +6826,24 @@
               "items": {
                 "$ref": "#/components/schemas/Statement"
               }
+            },
+            "example": {
+              "P92": [
+                {
+                  "id": "Q42$97B777F7-238B-465E-909B-64B0AB4B4DFD",
+                  "rank": "normal",
+                  "qualifiers": [],
+                  "references": [],
+                  "property": {
+                    "id": "P92",
+                    "data-type": "string"
+                  },
+                  "value": {
+                    "type": "value",
+                    "content": "I am a goat"
+                  }
+                }
+              ]
             }
           }
         }

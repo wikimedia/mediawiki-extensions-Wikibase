@@ -29,6 +29,22 @@
 											"additionalProperties": {
 												"type": "array",
 												"items": { "$ref": "./schemas.json#/Statement" }
+											},
+											"example": {
+												"P92": [
+													{
+														"rank": "normal",
+														"property": {
+															"id": "P92"
+														},
+														"value": {
+															"content": "I am a goat",
+															"type": "value"
+														},
+														"qualifiers": [],
+														"references": []
+													}
+												]
 											}
 										}
 									}

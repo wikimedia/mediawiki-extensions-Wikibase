@@ -51,6 +51,24 @@
 				"additionalProperties": {
 					"type": "array",
 					"items": { "$ref": "#/Statement" }
+				},
+				"example": {
+					"P92": [
+						{
+							"id": "Q42$97B777F7-238B-465E-909B-64B0AB4B4DFD",
+							"rank": "normal",
+							"qualifiers": [],
+							"references": [],
+							"property": {
+								"id": "P92",
+								"data-type": "string"
+							},
+							"value": {
+								"type": "value",
+								"content": "I am a goat"
+							}
+						}
+					]
 				}
 			}
 		}
