@@ -99,6 +99,7 @@ class InMemoryItemRepository implements
 
 	private function convertToReadModel( Item $item ): ReadModelItem {
 		return new ReadModelItem(
+			$item->getId(),
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),
 			Aliases::fromAliasGroupList( $item->getAliasGroups() ),

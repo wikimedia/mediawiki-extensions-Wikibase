@@ -57,28 +57,33 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 		$expectedRevisionTimestamp = '20221111070707';
 		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
 		$itemToCreate = NewItem::withLabel( 'en', 'English Label' )
-				->andDescription( 'en', 'English Description' )
-				->andAliases( 'en', [ 'English alias', 'alias in English' ] )
-				->andSiteLink( 'enwiki', 'Title', [ 'Q789' ] )
-				->build();
-
-		$expectedResultingItem = new Item(
-			new Labels( new Label( 'en', 'English Label' ) ),
-			new Descriptions( new Description( 'en', 'English Description' ) ),
-			new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
-			new Sitelinks( new Sitelink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
-			new StatementList()
-		);
+			->andDescription( 'en', 'English Description' )
+			->andAliases( 'en', [ 'English alias', 'alias in English' ] )
+			->andSiteLink( 'enwiki', 'Title', [ 'Q789' ] )
+			->build();
 
 		$this->entityUpdater = $this->createMock( EntityUpdater::class );
 		$this->entityUpdater->expects( $this->once() )
 			->method( 'create' )
 			->with( $itemToCreate, $editMetaData )
-			->willReturn( new EntityRevision( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) );
+			->willReturnCallback( function () use ( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) {
+				$itemToCreate->setId( new ItemId( 'Q123' ) );
+				return new EntityRevision( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp );
+			} );
 
 		$itemRevision = $this->newItemUpdater()->create( $itemToCreate, $editMetaData );
 
-		$this->assertEquals( $expectedResultingItem, $itemRevision->getItem() );
+		$this->assertEquals(
+			new Item(
+				$itemRevision->getItem()->getId(),
+				new Labels( new Label( 'en', 'English Label' ) ),
+				new Descriptions( new Description( 'en', 'English Description' ) ),
+				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
+				new Sitelinks( new Sitelink( 'enwiki', 'Title', [ new ItemId( 'Q789' ) ], self::EN_WIKI_URL_PREFIX . 'Title' ) ),
+				new StatementList()
+			),
+			$itemRevision->getItem()
+		);
 		$this->assertSame( $expectedRevisionId, $itemRevision->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $itemRevision->getLastModified() );
 	}
@@ -136,6 +141,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 				->andStatement( $writeModelStatement )
 				->build(),
 			new Item(
+				new ItemId( 'Q123' ),
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
