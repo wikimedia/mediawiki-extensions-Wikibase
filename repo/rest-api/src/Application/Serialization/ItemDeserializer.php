@@ -46,7 +46,10 @@ class ItemDeserializer {
 	}
 
 	private function deserializeStatements( array $statementsSerialization ): StatementList {
-		return new StatementList( ...array_map( [ $this->statementDeserializer, 'deserialize' ], $statementsSerialization ) );
+		return new StatementList(
+			...array_map( [ $this->statementDeserializer, 'deserialize' ],
+			array_merge( ...array_values( $statementsSerialization ) ) )
+		);
 	}
 
 }
