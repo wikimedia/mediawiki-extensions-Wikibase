@@ -17,6 +17,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			expect( response ).to.have.status( 201 );
 			assert.deepEqual( response.body.labels, item.labels );
+			assert.header( response, 'Location', `${response.request.url}/${response.body.id}` );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( response.body.id );
 			assert.header( response, 'etag', makeEtag( editMetadata.revid ) );

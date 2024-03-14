@@ -74,8 +74,14 @@ class CreateItemRouteHandler extends SimpleHandler {
 			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$response->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
-		// TODO location header
 		$item = $useCaseResponse->getItem();
+		$response->setHeader(
+			'Location',
+			$this->getRouter()->getRouteUrl(
+				GetItemRouteHandler::ROUTE,
+				[ GetItemRouteHandler::ITEM_ID_PATH_PARAM => $item->getId() ]
+			)
+		);
 		$response->setBody( new StringStream( json_encode(
 			$this->itemSerializer->serialize( new ItemParts(
 				$item->getId(),

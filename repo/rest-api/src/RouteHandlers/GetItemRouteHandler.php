@@ -25,7 +25,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetItemRouteHandler extends SimpleHandler {
-	private const ITEM_ID_PATH_PARAM = 'item_id';
+	public const ROUTE = '/wikibase/v0/entities/items/{item_id}';
+	public const ITEM_ID_PATH_PARAM = 'item_id';
+
 	private const FIELDS_QUERY_PARAM = '_fields';
 
 	private GetItem $getItem;
