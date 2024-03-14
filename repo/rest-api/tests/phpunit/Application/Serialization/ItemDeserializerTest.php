@@ -45,13 +45,11 @@ class ItemDeserializerTest extends TestCase {
 			'aliases' => [ 'en' => [ 'en-alias-1', 'en-alias-2' ] ],
 			'sitelinks' => [ 'somewiki' => [ 'title' => 'test-title' ] ],
 			'statements' => [
-				[
-					'property' => [ 'id' => 'P123' ],
-					'value' => [ 'type' => 'somevalue' ],
+				'P567' => [
+					[ 'property' => [ 'id' => 'P567' ], 'value' => [ 'type' => 'somevalue' ] ],
 				],
-				[
-					'property' => [ 'id' => 'P321' ],
-					'value' => [ 'type' => 'somevalue' ],
+				'P789' => [
+					[ 'property' => [ 'id' => 'P789' ], 'value' => [ 'type' => 'somevalue' ] ],
 				],
 			],
 		];
@@ -66,8 +64,8 @@ class ItemDeserializerTest extends TestCase {
 				),
 				new SiteLinkList( [ new SiteLink( 'somewiki', 'test-title' ) ] ),
 				new StatementList(
-					NewStatement::someValueFor( 'P123' )->build(),
-					NewStatement::someValueFor( 'P321' )->build()
+					NewStatement::someValueFor( 'P567' )->build(),
+					NewStatement::someValueFor( 'P789' )->build()
 				)
 			),
 			$this->newDeserializer()->deserialize( $itemSerialization )
