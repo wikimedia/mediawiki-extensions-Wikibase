@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
-use LogicException;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Site;
 use SiteLookup;
@@ -89,7 +89,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 	}
 
 	public function testCreateWithId_throws(): void {
-		$this->expectException( LogicException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->newItemUpdater()->create(
 			NewItem::withId( 'Q123' )->build(),
 			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
@@ -117,7 +117,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 	}
 
 	public function testUpdateWithoutId_throws(): void {
-		$this->expectException( LogicException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->newItemUpdater()->update(
 			NewItem::withLabel( 'en', 'udpated Item' )->build(),
 			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
