@@ -12,7 +12,6 @@
 			"200": { "$ref": "../../global/responses.json#/Item" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewItemInput" },
 			"409": { "$ref": "../../global/responses.json#/SitelinkConflict" },
-			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}
