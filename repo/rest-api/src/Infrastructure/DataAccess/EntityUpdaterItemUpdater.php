@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use LogicException;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -37,14 +37,14 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 
 	public function create( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
 		if ( $item->getId() ) {
-			throw new LogicException( 'new item cannot have an ID' );
+			throw new InvalidArgumentException( 'new item cannot have an ID' );
 		}
 		return $this->createOrUpdate( $item, $editMetadata, true );
 	}
 
 	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
 		if ( !$item->getId() ) {
-			throw new LogicException( 'updated item must have an ID' );
+			throw new InvalidArgumentException( 'updated item must have an ID' );
 		}
 		return $this->createOrUpdate( $item, $editMetadata, false );
 	}
