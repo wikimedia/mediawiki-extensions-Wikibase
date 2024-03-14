@@ -1182,6 +1182,29 @@
 			}
 		}
 	},
+	"InvalidPropertyTermPatch": {
+		"description": "The provided JSON Patch request is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
+					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
+					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
+					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
+					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"InvalidPropertyPatchRequest": {
 		"description": "The provided JSON Patch request is invalid",
 		"content": {
@@ -1191,6 +1214,12 @@
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
+					"invalid-operation-change-statement-id": {
+						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
+					},
+					"invalid-operation-change-property-of-statement": {
+						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					},
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
@@ -1258,6 +1287,61 @@
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
 					"patched-sitelink-conflict": { "$ref": "./examples.json#/PatchedSitelinkConflictExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPatchedProperty": {
+		"description": "Applying the provided JSON Patch results in an invalid property",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/ContextError" },
+				"examples": {
+					"patched-property-invalid-operation-change-property-id": {
+						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyIdExample"
+					},
+					"patched-property-invalid-operation-change-property-datatype": {
+						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
+					},
+					"patched-property-missing-field": { "$ref": "./examples.json#/PatchedPropertyMissingFieldExample" },
+					"patched-property-invalid-field": { "$ref": "./examples.json#/PatchedPropertyInvalidFieldExample" },
+					"patched-property-unexpected-field": { "$ref": "./examples.json#/PatchedPropertyInvalidUnexpectedExample" },
+					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
+					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
+					"statement-id-not-modifiable": {
+						"$ref": "./examples.json#/StatementIdNotModifiableExample"
+					},
+					"patched-labels-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
+					},
+					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
+					"patched-label-too-long": { "$ref": "./examples.json#/PatchedLabelTooLongExample" },
+					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
+					"patched-property-label-duplicate": {
+						"$ref": "./examples.json#/PatchedPropertyLabelDuplicateExample"
+					},
+					"patched-descriptions-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
+					},
+					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
+					"patched-description-too-long": { "$ref": "./examples.json#/PatchedDescriptionTooLongExample" },
+					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
+					"patched-property-label-description-same-value": {
+						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
+					},
+					"patched-aliases-invalid-language-code": {
+						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
+					},
+					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
+					"patched-alias-too-long": { "$ref": "./examples.json#/PatchedAliasTooLongExample" },
+					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
+					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" }
 				}
 			}
 		},

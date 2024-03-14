@@ -58,6 +58,21 @@
 			}
 		}
 	},
+	"PropertyPatch": {
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/PropertyPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/PropertyPatchRequest"
+				}
+			}
+		}
+	},
 	"Label": {
 		"description": "Payload containing a Wikibase label in the specified language and edit metadata",
 		"required": true,
