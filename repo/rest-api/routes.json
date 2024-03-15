@@ -258,5 +258,10 @@
 		"path": "/wikibase/v0/openapi.json",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetOpenApiDocRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/property-data-types",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDataTypesHandler::factory"
 	}
 ]
