@@ -125,18 +125,25 @@
 				"type": "object",
 				"additionalProperties": {
 					"type": "array",
-					"items": {
-						"allOf": [
-							{ "$ref": "#/Statement" },
-							{
-								"properties": {
-									"id": {
-										"example": "P31$6403c562-401a-2b26-85cc-8327801145e1"
-									}
-								}
+					"items": { "$ref": "#/Statement" }
+				},
+				"example": {
+					"P92": [
+						{
+							"id": "P31$97B777F7-238B-465E-909B-64B0AB4B4DFD",
+							"rank": "normal",
+							"qualifiers": [ ],
+							"references": [ ],
+							"property": {
+								"id": "P92",
+								"data-type": "string"
+							},
+							"value": {
+								"type": "value",
+								"content": "I am a goat"
 							}
-						]
-					}
+						}
+					]
 				}
 			}
 		}
