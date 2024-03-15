@@ -1159,7 +1159,7 @@
 			}
 		}
 	},
-	"InvalidItemPatchRequest": {
+	"InvalidItemPatch": {
 		"description": "The provided JSON Patch request is invalid",
 		"content": {
 			"application/json": {
@@ -1205,7 +1205,7 @@
 			}
 		}
 	},
-	"InvalidPropertyPatchRequest": {
+	"InvalidPropertyPatch": {
 		"description": "The provided JSON Patch request is invalid",
 		"content": {
 			"application/json": {

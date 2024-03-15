@@ -237,7 +237,7 @@
             "$ref": "#/components/responses/Sitelinks"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatchRequest"
+            "$ref": "#/components/responses/InvalidItemPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -497,7 +497,7 @@
             "$ref": "#/components/responses/Property"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyPatchRequest"
+            "$ref": "#/components/responses/InvalidPropertyPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -597,7 +597,7 @@
             "$ref": "#/components/responses/ItemDescriptions"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatchRequest"
+            "$ref": "#/components/responses/InvalidItemPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1415,7 +1415,7 @@
             "$ref": "#/components/responses/ItemLabels"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatchRequest"
+            "$ref": "#/components/responses/InvalidItemPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1939,7 +1939,7 @@
             "$ref": "#/components/responses/ItemAliases"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatchRequest"
+            "$ref": "#/components/responses/InvalidItemPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -5233,7 +5233,7 @@
           }
         }
       },
-      "InvalidItemPatchRequest": {
+      "InvalidItemPatch": {
         "description": "The provided JSON Patch request is invalid",
         "content": {
           "application/json": {
@@ -5315,7 +5315,7 @@
           }
         }
       },
-      "InvalidPropertyPatchRequest": {
+      "InvalidPropertyPatch": {
         "description": "The provided JSON Patch request is invalid",
         "content": {
           "application/json": {
