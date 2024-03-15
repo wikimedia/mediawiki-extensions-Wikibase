@@ -36,7 +36,7 @@
 		},
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyDescriptions" },
-			"400": { "$ref": "../../global/responses.json#/InvalidPropertyPatchRequest" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPropertyTermPatch" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyPropertyPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

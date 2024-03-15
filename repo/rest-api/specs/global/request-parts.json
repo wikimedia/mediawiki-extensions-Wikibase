@@ -1,4 +1,26 @@
 {
+	"PropertyPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/labels/en"
+								},
+								"value": {
+									"example": "Instance of"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"SitelinksPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },

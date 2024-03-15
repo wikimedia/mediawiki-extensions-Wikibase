@@ -604,6 +604,49 @@
 			}
 		}
 	},
+	"PatchedPropertyInvalidOperationChangePropertyIdExample": {
+		"value": {
+			"code": "patched-property-invalid-operation-change-property-id",
+			"message": "Cannot change the ID of the existing property"
+		}
+	},
+	"PatchedPropertyInvalidOperationChangePropertyDatatypeExample": {
+		"value": {
+			"code": "patched-property-invalid-operation-change-property-datatype",
+			"message": "Cannot change the datatype of the existing property"
+		}
+	},
+	"PatchedPropertyMissingFieldExample": {
+		"value": {
+			"code": "patched-property-missing-field",
+			"message": "Mandatory field missing in the patched property: '{field}'",
+			"context": {
+				"path": "{field}"
+			}
+		}
+	},
+	"PatchedPropertyInvalidFieldExample": {
+		"value": {
+			"code": "patched-property-invalid-field",
+			"message": "Invalid input for '{field}' in the patched property",
+			"context": {
+				"path": "{field}",
+				"value": "{value}"
+			}
+		}
+	},
+	"PatchedPropertyInvalidUnexpectedExample": {
+		"value": {
+			"code": "patched-property-unexpected-field",
+			"message": "The patched property contains an unexpected field: '{field}'"
+		}
+	},
+	"StatementIdNotModifiableExample": {
+		"value": {
+			"code": "statement-id-not-modifiable",
+			"message": "Statement IDs cannot be created or modified"
+		}
+	},
 	"PatchedPropertyLabelDescriptionSameValueExample": {
 		"value": {
 			"code": "patched-property-label-description-same-value",

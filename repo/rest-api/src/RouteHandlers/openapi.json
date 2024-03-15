@@ -479,6 +479,57 @@
             "$ref": "#/components/responses/UnexpectedError"
           }
         }
+      },
+      "patch": {
+        "operationId": "patchProperty",
+        "tags": [
+          "properties"
+        ],
+        "summary": "[WIP] Change a single Wikibase Property by ID",
+        "description": "This endpoint is currently in development and is not recommended for production use",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PropertyId"
+          },
+          {
+            "$ref": "#/components/parameters/IfMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfUnmodifiedSince"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/PropertyPatch"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Property"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidPropertyPatchRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/PropertyNotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/CannotApplyPropertyPatch"
+          },
+          "412": {
+            "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "415": {
+            "$ref": "#/components/responses/InvalidMediaType"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidPatchedProperty"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedError"
+          }
+        }
       }
     },
     "/entities/items/{item_id}/descriptions": {
@@ -661,7 +712,7 @@
             "$ref": "#/components/responses/PropertyDescriptions"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyPatchRequest"
+            "$ref": "#/components/responses/InvalidPropertyTermPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -1508,7 +1559,7 @@
             "$ref": "#/components/responses/PropertyLabels"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyPatchRequest"
+            "$ref": "#/components/responses/InvalidPropertyTermPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2050,7 +2101,7 @@
             "$ref": "#/components/responses/PropertyAliases"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyPatchRequest"
+            "$ref": "#/components/responses/InvalidPropertyTermPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -3097,6 +3148,44 @@
                   "required": [
                     "item"
                   ]
+                },
+                {
+                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "PropertyPatch": {
+        "required": true,
+        "content": {
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/requestBodies/PropertyPatch/content/application~1json/schema"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                },
+                {
+                  "properties": {
+                    "patch": {
+                      "items": {
+                        "properties": {
+                          "path": {
+                            "example": "/labels/en"
+                          },
+                          "value": {
+                            "example": "Instance of"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 {
                   "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
@@ -5281,6 +5370,47 @@
           }
         }
       },
+      "InvalidPropertyTermPatch": {
+        "description": "The provided JSON Patch request is invalid",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+            },
+            "examples": {
+              "invalid-property-id": {
+                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              },
+              "invalid-edit-tag": {
+                "$ref": "#/components/examples/InvalidEditTagExample"
+              },
+              "comment-too-long": {
+                "$ref": "#/components/examples/CommentTooLongExample"
+              },
+              "invalid-patch": {
+                "$ref": "#/components/examples/InvalidPatchExample"
+              },
+              "invalid-patch-operation": {
+                "$ref": "#/components/examples/InvalidPatchOperationExample"
+              },
+              "invalid-patch-field-type": {
+                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
+              },
+              "missing-json-patch-field": {
+                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the language in which error message is provided"
+          }
+        }
+      },
       "InvalidPropertyPatchRequest": {
         "description": "The provided JSON Patch request is invalid",
         "content": {
@@ -5297,6 +5427,12 @@
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
+              },
+              "invalid-operation-change-statement-id": {
+                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
+              },
+              "invalid-operation-change-property-of-statement": {
+                "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
               },
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
@@ -5414,6 +5550,95 @@
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the language in which error message is provided"
+          }
+        }
+      },
+      "InvalidPatchedProperty": {
+        "description": "Applying the provided JSON Patch results in an invalid property",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+            },
+            "examples": {
+              "patched-property-invalid-operation-change-property-id": {
+                "$ref": "#/components/examples/PatchedPropertyInvalidOperationChangePropertyIdExample"
+              },
+              "patched-property-invalid-operation-change-property-datatype": {
+                "$ref": "#/components/examples/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
+              },
+              "patched-property-missing-field": {
+                "$ref": "#/components/examples/PatchedPropertyMissingFieldExample"
+              },
+              "patched-property-invalid-field": {
+                "$ref": "#/components/examples/PatchedPropertyInvalidFieldExample"
+              },
+              "patched-property-unexpected-field": {
+                "$ref": "#/components/examples/PatchedPropertyInvalidUnexpectedExample"
+              },
+              "patched-statement-missing-field": {
+                "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
+              },
+              "patched-statement-invalid-field": {
+                "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
+              },
+              "statement-id-not-modifiable": {
+                "$ref": "#/components/examples/StatementIdNotModifiableExample"
+              },
+              "patched-labels-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
+              },
+              "patched-label-empty": {
+                "$ref": "#/components/examples/PatchedLabelEmptyExample"
+              },
+              "patched-label-too-long": {
+                "$ref": "#/components/examples/PatchedLabelTooLongExample"
+              },
+              "patched-label-invalid": {
+                "$ref": "#/components/examples/PatchedLabelInvalidExample"
+              },
+              "patched-property-label-duplicate": {
+                "$ref": "#/components/examples/PatchedPropertyLabelDuplicateExample"
+              },
+              "patched-descriptions-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
+              },
+              "patched-description-empty": {
+                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
+              },
+              "patched-description-too-long": {
+                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
+              },
+              "patched-description-invalid": {
+                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
+              },
+              "patched-property-label-description-same-value": {
+                "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
+              },
+              "patched-aliases-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
+              },
+              "patched-alias-empty": {
+                "$ref": "#/components/examples/PatchedAliasEmptyExample"
+              },
+              "patched-alias-too-long": {
+                "$ref": "#/components/examples/PatchedAliasTooLongExample"
+              },
+              "patched-aliases-invalid-field": {
+                "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
+              },
+              "patched-duplicate-alias": {
+                "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               }
             }
           }
@@ -7721,6 +7946,49 @@
           "context": {
             "language": "{language_code}"
           }
+        }
+      },
+      "PatchedPropertyInvalidOperationChangePropertyIdExample": {
+        "value": {
+          "code": "patched-property-invalid-operation-change-property-id",
+          "message": "Cannot change the ID of the existing property"
+        }
+      },
+      "PatchedPropertyInvalidOperationChangePropertyDatatypeExample": {
+        "value": {
+          "code": "patched-property-invalid-operation-change-property-datatype",
+          "message": "Cannot change the datatype of the existing property"
+        }
+      },
+      "PatchedPropertyMissingFieldExample": {
+        "value": {
+          "code": "patched-property-missing-field",
+          "message": "Mandatory field missing in the patched property: '{field}'",
+          "context": {
+            "path": "{field}"
+          }
+        }
+      },
+      "PatchedPropertyInvalidFieldExample": {
+        "value": {
+          "code": "patched-property-invalid-field",
+          "message": "Invalid input for '{field}' in the patched property",
+          "context": {
+            "path": "{field}",
+            "value": "{value}"
+          }
+        }
+      },
+      "PatchedPropertyInvalidUnexpectedExample": {
+        "value": {
+          "code": "patched-property-unexpected-field",
+          "message": "The patched property contains an unexpected field: '{field}'"
+        }
+      },
+      "StatementIdNotModifiableExample": {
+        "value": {
+          "code": "statement-id-not-modifiable",
+          "message": "Statement IDs cannot be created or modified"
         }
       },
       "PatchedPropertyLabelDescriptionSameValueExample": {
