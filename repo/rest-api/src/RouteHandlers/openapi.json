@@ -97,9 +97,6 @@
           "409": {
             "$ref": "#/components/responses/SitelinkConflict"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -251,9 +248,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedItemSitelinks"
           },
@@ -370,9 +364,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -425,9 +416,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -519,9 +507,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedProperty"
@@ -623,9 +608,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedItemDescriptions"
           },
@@ -722,9 +704,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedPropertyDescriptions"
@@ -845,9 +824,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -900,9 +876,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1014,9 +987,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1066,9 +1036,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1169,9 +1136,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1270,9 +1234,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1321,9 +1282,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
           },
@@ -1371,9 +1329,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1471,9 +1426,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedItemLabels"
           },
@@ -1569,9 +1521,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedPropertyLabels"
@@ -1692,9 +1641,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1747,9 +1693,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1861,9 +1804,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1913,9 +1853,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2013,9 +1950,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedAliases"
           },
@@ -2111,9 +2045,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedAliases"
@@ -2234,9 +2165,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2347,9 +2275,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2442,9 +2367,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2544,9 +2466,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2595,9 +2514,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
           },
@@ -2645,9 +2561,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2741,9 +2654,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2789,9 +2699,6 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
-          },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
           },
@@ -2836,9 +2743,6 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
-          },
-          "415": {
-            "$ref": "#/components/responses/InvalidMediaType"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -6037,22 +5941,6 @@
       },
       "PreconditionFailedError": {
         "description": "The condition defined by a conditional request header is not fulfilled"
-      },
-      "InvalidMediaType": {
-        "description": "The media type specified by the `Content-Type` header is not allowed on this endpoint",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "example": {
-              "code": "unsupported-content-type",
-              "message": "Unsupported Content-Type: 'application/x-www-form-urlencoded'",
-              "httpCode": 415,
-              "httpReason": "Unsupported Media Type"
-            }
-          }
-        }
       },
       "UnexpectedError": {
         "description": "An unexpected error has occurred",

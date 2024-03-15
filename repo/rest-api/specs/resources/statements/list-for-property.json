@@ -37,7 +37,6 @@
 			"400": { "$ref": "../../global/responses.json#/InvalidNewPropertyStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
-			"415": { "$ref": "../../global/responses.json#/InvalidMediaType" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}
