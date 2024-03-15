@@ -8,10 +8,12 @@ use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
@@ -40,6 +42,29 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$createdItem = $newRevision->getEntity();
 		$this->assertNotEmpty( $createdItem->getId() );
+
+		$this->assertEquals(
+			$newRevision->getEntity(),
+			WbRestApi::getItemDataRetriever()->getItem( $createdItem->getId() ),
+		);
+	}
+
+	public function testCreateItemWithStatement(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+		$newRevision = $this->newEntityUpdater()->create(
+			NewItem::withLabel( 'en', 'New Item' )
+				->andStatement( NewStatement::noValueFor( $propertyId ) )
+				->build(),
+			$this->createStub( EditMetadata::class )
+		);
+
+		/** @var Item $createdItem */
+		$createdItem = $newRevision->getEntity();
+		$this->assertNotNull( $createdItem->getId() );
+
+		$statementId = $createdItem->getStatements()->toArray()[0]->getGuid();
+		$this->assertNotNull( $statementId );
+		$this->assertStringStartsWith( (string)$createdItem->getId(), $statementId );
 
 		$this->assertEquals(
 			$newRevision->getEntity(),
@@ -119,7 +144,9 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getEditEntityFactory(),
 			new NullLogger(),
 			$this->createStub( EditSummaryFormatter::class ),
-			$permissionManager
+			$permissionManager,
+			WikibaseRepo::getEntityStore(),
+			new GuidGenerator()
 		);
 	}
 
