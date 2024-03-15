@@ -3,5 +3,10 @@
 		"path": "/wikibase/v0/property-data-types",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDataTypesHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items",
+		"method": "POST",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\CreateItemRouteHandler::factory"
 	}
 ]

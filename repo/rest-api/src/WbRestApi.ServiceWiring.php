@@ -117,7 +117,6 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
@@ -631,7 +630,7 @@ return [
 		);
 	},
 
-	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): ItemUpdater {
+	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): EntityUpdaterItemUpdater {
 		return new EntityUpdaterItemUpdater(
 			WbRestApi::getEntityUpdater( $services ),
 			new SitelinksReadModelConverter( $services->getSiteLookup() ),

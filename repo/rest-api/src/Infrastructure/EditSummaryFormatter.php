@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
@@ -103,6 +104,10 @@ class EditSummaryFormatter {
 			}
 		} elseif ( $editSummary instanceof SitelinksEditSummary ) {
 			$summary = new Summary( 'wbeditentity', 'update' );
+			$summary->setUserSummary( $editSummary->getUserComment() );
+			return $summary;
+		} elseif ( $editSummary instanceof ItemEditSummary && $editSummary->getEditAction() === EditSummary::ADD_ACTION ) {
+			$summary = new Summary( 'wbeditentity', 'create-item' );
 			$summary->setUserSummary( $editSummary->getUserComment() );
 			return $summary;
 		}
