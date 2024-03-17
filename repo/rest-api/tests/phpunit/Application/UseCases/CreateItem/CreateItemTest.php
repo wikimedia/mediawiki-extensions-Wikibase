@@ -11,8 +11,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
@@ -31,11 +33,13 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTarge
 class CreateItemTest extends TestCase {
 
 	private ItemCreator $itemCreator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->itemCreator = new InMemoryItemRepository();
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testHappyPath(): void {
@@ -70,6 +74,21 @@ class CreateItemTest extends TestCase {
 		);
 	}
 
+	public function testGivenUserUnauthorized_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'checkCreateItemPermissions' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute(
+				new CreateItemRequest( [ 'labels' => [ 'en' => 'new item' ] ], [], false, null, null )
+			);
+			$this->fail( 'expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): CreateItem {
 		return new CreateItem(
 			new ItemDeserializer(
@@ -86,7 +105,8 @@ class CreateItemTest extends TestCase {
 				),
 				$this->createStub( StatementDeserializer::class )
 			),
-			$this->itemCreator
+			$this->itemCreator,
+			$this->assertUserIsAuthorized
 		);
 	}
 
