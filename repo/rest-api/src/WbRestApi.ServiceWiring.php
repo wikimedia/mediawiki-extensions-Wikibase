@@ -412,6 +412,8 @@ return [
 				new TermsEditSummaryToFormattableSummaryConverter()
 			),
 			$services->getPermissionManager(),
+			WikibaseRepo::getEntityStore( $services ),
+			new GuidGenerator()
 		);
 	},
 

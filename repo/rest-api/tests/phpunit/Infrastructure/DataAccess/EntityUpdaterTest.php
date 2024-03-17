@@ -11,15 +11,18 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -44,6 +47,7 @@ class EntityUpdaterTest extends TestCase {
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
+	private EntityStore $entityStore;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -55,18 +59,27 @@ class EntityUpdaterTest extends TestCase {
 		$this->summaryFormatter = $this->createStub( EditSummaryFormatter::class );
 		$this->permissionManager = $this->createStub( PermissionManager::class );
 		$this->permissionManager->method( 'userHasRight' )->willReturn( true );
+		$this->entityStore = $this->createStub( EntityStore::class );
+		$this->entityStore->method( 'assignFreshId' )->willReturnCallback(
+			fn( EntityDocument $entity ) => $entity->setId(
+				$entity->getType() === Item::ENTITY_TYPE
+					? new ItemId( 'Q123' )
+					: new NumericPropertyId( 'P123' )
+			)
+		);
 	}
 
 	public function testCreate(): void {
 		$entityToCreate = NewItem::withLabel( 'en', 'English Label' )
 			->andDescription( 'en', 'English Description' )
+			->andStatement( NewStatement::noValueFor( 'P777' ) )
 			->build();
 		$editMetadata = new EditMetadata( [], false, $this->createStub( EditSummary::class ) );
 
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
-		$expectedRevisionEntity = $entityToCreate->copy();
 		$expectedFormattedSummary = 'FORMATTED SUMMARY';
+		$expectedAssignedId = new ItemId( 'Q64' );
 
 		$this->summaryFormatter = $this->createMock( EditSummaryFormatter::class );
 		$this->summaryFormatter->expects( $this->once() )
@@ -85,17 +98,27 @@ class EntityUpdaterTest extends TestCase {
 				false,
 				$editMetadata->getTags()
 			)
-			->willReturn(
-				EditEntityStatus::newGood( [
-					'revision' => new EntityRevision( $expectedRevisionEntity, $expectedRevisionId, $expectedRevisionTimestamp ),
-				] )
-			);
+			->willReturnCallback( function ( Item $item ) use ( $expectedAssignedId, $expectedRevisionId, $expectedRevisionTimestamp ) {
+				$this->assertEquals( $expectedAssignedId, $item->getId() );
+				$statementId = $item->getStatements()->toArray()[0]->getGuid();
+				$this->assertNotNull( $statementId );
+				$this->assertStringStartsWith( (string)$item->getId(), $statementId );
+
+				return EditEntityStatus::newGood( [
+					'revision' => new EntityRevision( $item->copy(), $expectedRevisionId, $expectedRevisionTimestamp ),
+				] );
+			} );
 
 		$this->editEntityFactory = $this->createMock( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->expects( $this->once() )
 			->method( 'newEditEntity' )
 			->with( $this->context, $entityToCreate->getId() )
 			->willReturn( $editEntity );
+
+		$this->entityStore = $this->createStub( EntityStore::class );
+		$this->entityStore->method( 'assignFreshId' )->willReturnCallback(
+			fn( Item $item ) => $item->setId( $expectedAssignedId )
+		);
 
 		$entityRevision = $this->newEntityUpdater()->create( $entityToCreate, $editMetadata );
 
@@ -285,7 +308,9 @@ class EntityUpdaterTest extends TestCase {
 			$this->editEntityFactory,
 			$this->logger,
 			$this->summaryFormatter,
-			$this->permissionManager
+			$this->permissionManager,
+			$this->entityStore,
+			new GuidGenerator()
 		);
 	}
 

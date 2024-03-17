@@ -9,7 +9,10 @@ use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
@@ -26,19 +29,25 @@ class EntityUpdater {
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
+	private EntityStore $entityStore;
+	private GuidGenerator $statementIdGenerator;
 
 	public function __construct(
 		IContextSource $context,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
-		PermissionManager $permissionManager
+		PermissionManager $permissionManager,
+		EntityStore $entityStore,
+		GuidGenerator $statementIdGenerator
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->permissionManager = $permissionManager;
+		$this->entityStore = $entityStore;
+		$this->statementIdGenerator = $statementIdGenerator;
 	}
 
 	/**
@@ -65,6 +74,10 @@ class EntityUpdater {
 	): EntityRevision {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
+
+		if ( $newOrUpdateFlag === EDIT_NEW && $entity instanceof StatementListProvidingEntity ) {
+			$this->generateStatementIds( $entity );
+		}
 
 		$status = $editEntity->attemptSave(
 			$entity,
@@ -101,6 +114,13 @@ class EntityUpdater {
 		// This is only a low-level safeguard and should be checked and handled properly before using this service.
 		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
 			throw new RuntimeException( 'Attempted bot edit with insufficient rights' );
+		}
+	}
+
+	private function generateStatementIds( StatementListProvidingEntity $entity ): void {
+		$this->entityStore->assignFreshId( $entity );
+		foreach ( $entity->getStatements() as $statement ) {
+			$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
 		}
 	}
 
