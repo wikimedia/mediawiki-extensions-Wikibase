@@ -29,22 +29,33 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const descriptions = { en: 'root vegetable' };
 			const aliases = { en: [ 'spud', 'tater' ] };
 
-			// TODO statements
+			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const statementValue = 'Solanum tuberosum';
+			const statements = {
+				[ statementPropertyId ]: [ {
+					property: { id: statementPropertyId },
+					value: {
+						type: 'value',
+						content: statementValue
+					}
+				} ]
+			};
 
 			const localWikiId = await entityHelper.getLocalSiteId();
 			const linkedArticle = utils.title( 'Potato' );
 			await entityHelper.createWikiPage( linkedArticle );
 			const sitelinks = { [ localWikiId ]: { title: linkedArticle } };
 
-			const response = await newCreateItemRequestBuilder( { labels, descriptions, aliases, sitelinks } )
-				.assertValidRequest()
-				.makeRequest();
+			const response = await newCreateItemRequestBuilder(
+				{ labels, descriptions, aliases, statements, sitelinks }
+			).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 201 );
 			assert.deepEqual( response.body.labels, labels );
 			assert.deepEqual( response.body.descriptions, descriptions );
 			assert.deepEqual( response.body.aliases, aliases );
 			assert.strictEqual( response.body.sitelinks[ localWikiId ].title, linkedArticle );
+			assert.strictEqual( response.body.statements[ statementPropertyId ][ 0 ].value.content, statementValue );
 		} );
 
 		it( 'can create an item with edit metadata provided', async () => {
