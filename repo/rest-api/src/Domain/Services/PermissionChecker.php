@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
  */
 interface PermissionChecker {
 
+	public function canCreateItem( User $user ): bool;
+
 	public function canEdit( User $user, EntityId $id ): bool;
 
 }
