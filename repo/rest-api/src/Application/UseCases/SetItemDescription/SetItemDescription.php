@@ -48,7 +48,7 @@ class SetItemDescription {
 
 		$this->assertItemExists->execute( $itemId );
 
-		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$descriptionExists = $item->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );

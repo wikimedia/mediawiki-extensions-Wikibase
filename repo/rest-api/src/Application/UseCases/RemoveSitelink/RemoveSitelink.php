@@ -47,7 +47,7 @@ class RemoveSitelink {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $editMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 

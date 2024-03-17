@@ -195,7 +195,7 @@ class PatchPropertyAliasesTest extends TestCase {
 
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
-			->method( 'execute' )
+			->method( 'checkEditPermissions' )
 			->with( $propertyId, User::withUsername( $user ) )
 			->willThrowException( $expectedException );
 

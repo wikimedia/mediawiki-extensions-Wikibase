@@ -119,7 +119,7 @@ class AddPropertyStatementTest extends TestCase {
 	public function testGivenUnauthorizedRequest_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->willThrowException( $expectedException );
 
 		try {

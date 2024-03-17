@@ -47,7 +47,7 @@ class RemovePropertyDescription {
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
-		$this->assertUserIsAuthorized->execute( $propertyId, $providedEditMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $providedEditMetadata->getUser() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 

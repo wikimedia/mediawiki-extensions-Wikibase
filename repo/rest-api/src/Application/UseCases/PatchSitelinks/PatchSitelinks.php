@@ -59,7 +59,7 @@ class PatchSitelinks {
 		$itemId = $deserializedRequest->getItemId();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$originalSitelinksSerialization = iterator_to_array( $this->sitelinksSerializer->serialize(
 			$this->sitelinksRetriever->getSitelinks( $itemId )

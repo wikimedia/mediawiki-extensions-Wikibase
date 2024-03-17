@@ -155,7 +155,7 @@ class RemoveStatementTest extends TestCase {
 		);
 
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $subjectId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 

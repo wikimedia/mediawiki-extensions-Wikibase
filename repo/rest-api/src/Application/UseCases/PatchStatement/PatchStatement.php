@@ -68,7 +68,7 @@ class PatchStatement {
 			);
 		}
 
-		$this->assertUserIsAuthorized->execute( $statementId->getEntityId(), $editMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $statementId->getEntityId(), $editMetadata->getUser() );
 
 		$serialization = $this->statementSerializer->serialize( $statementToPatch );
 

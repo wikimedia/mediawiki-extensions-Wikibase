@@ -151,7 +151,7 @@ class SetPropertyDescriptionTest extends TestCase {
 			'You have no permission to edit this item.'
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $propertyId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
