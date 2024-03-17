@@ -145,6 +145,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	private static array $prodRoutesData = [];
 	private const EXCLUDED_ROUTES = [
 		'/wikibase/v0/openapi.json',
+		'/wikibase/v0/property-data-types',
 	];
 
 	public static function setUpBeforeClass(): void {

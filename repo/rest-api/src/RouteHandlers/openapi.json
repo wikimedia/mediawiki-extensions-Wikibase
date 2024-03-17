@@ -50,7 +50,7 @@
         "tags": [
           "Property data types"
         ],
-        "summary": "[WIP] Retrieve the map of property data types to value types",
+        "summary": "Retrieve the map of property data types to value types",
         "responses": {
           "200": {
             "description": "The map of property data types to value types",
