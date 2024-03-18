@@ -11,9 +11,9 @@ const {
 	getItemGetRequests,
 	getPropertyGetRequests,
 	getItemEditRequests,
-	getPropertyEditRequests
+	getPropertyEditRequests,
+	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
-const rbf = require( '../helpers/RequestBuilderFactory' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -30,7 +30,8 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	const allRoutes = [
 		...editRequests,
 		...getItemGetRequests( itemRequestInputs ),
-		...getPropertyGetRequests( propertyRequestInputs )
+		...getPropertyGetRequests( propertyRequestInputs ),
+		getItemCreateRequest( itemRequestInputs )
 	];
 
 	describe( 'Authentication', () => {
@@ -65,45 +66,41 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			assert.strictEqual( response.body.error, 'rest-write-denied' );
 		}
 
-		describeEachRouteWithReset( editRequests, ( newRequestBuilder ) => {
-			it( 'Unauthorized bot edit', async () => {
-				assertPermissionDenied(
-					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
-				);
-			} );
-		} );
-
-		const authTestRequests = [
-			{
-				newRequestBuilder: () => rbf.newCreateItemRequestBuilder( { labels: { en: 'new item' } } ),
-				requestInputs: itemRequestInputs
-			},
-			...editRequests
-		];
-
-		describeEachRouteWithReset( authTestRequests, ( newRequestBuilder ) => {
-			describe( 'Blocked user', () => {
-				before( async () => {
-					await user.action( 'block', {
-						user: user.username,
-						reason: 'testing',
-						token: await user.token()
-					}, 'POST' );
+		describeEachRouteWithReset(
+			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
+				it( 'Unauthorized bot edit', async () => {
+					assertPermissionDenied(
+						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
+					);
 				} );
+			}
+		);
 
-				after( async () => {
-					await user.action( 'unblock', {
-						user: user.username,
-						token: await user.token()
-					}, 'POST' );
-				} );
+		describeEachRouteWithReset(
+			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
+				describe( 'Blocked user', () => {
+					before( async () => {
+						await user.action( 'block', {
+							user: user.username,
+							reason: 'testing',
+							token: await user.token()
+						}, 'POST' );
+					} );
 
-				it( 'cannot create/edit if blocked', async () => {
-					const response = await newRequestBuilder().withUser( user ).makeRequest();
-					expect( response ).to.have.status( 403 );
+					after( async () => {
+						await user.action( 'unblock', {
+							user: user.username,
+							token: await user.token()
+						}, 'POST' );
+					} );
+
+					it( 'cannot create/edit if blocked', async () => {
+						const response = await newRequestBuilder().withUser( user ).makeRequest();
+						expect( response ).to.have.status( 403 );
+					} );
 				} );
-			} );
-		} );
+			}
+		);
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.

@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -88,6 +89,11 @@ class WbRestApi {
 	public static function getGetItem( ContainerInterface $services = null ): GetItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItem' );
+	}
+
+	public static function getCreateItem( ContainerInterface $services = null ): CreateItem {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.CreateItem' );
 	}
 
 	public static function getGetSitelinks( ContainerInterface $services = null ): GetSitelinks {
