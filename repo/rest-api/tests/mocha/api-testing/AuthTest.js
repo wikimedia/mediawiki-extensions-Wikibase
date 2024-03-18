@@ -13,6 +13,7 @@ const {
 	getItemEditRequests,
 	getPropertyEditRequests
 } = require( '../helpers/happyPathRequestBuilders' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -55,6 +56,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 		} );
 	} );
+
 	describe( 'Authorization', () => {
 		function assertPermissionDenied( response ) {
 			expect( response ).to.have.status( 403 );
@@ -71,7 +73,15 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 		} );
 
-		describeEachRouteWithReset( editRequests, ( newRequestBuilder ) => {
+		const authTestRequests = [
+			{
+				newRequestBuilder: () => rbf.newCreateItemRequestBuilder( { labels: { en: 'new item' } } ),
+				requestInputs: itemRequestInputs
+			},
+			...editRequests
+		];
+
+		describeEachRouteWithReset( authTestRequests, ( newRequestBuilder ) => {
 			describe( 'Blocked user', () => {
 				before( async () => {
 					await user.action( 'block', {
@@ -88,7 +98,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 					}, 'POST' );
 				} );
 
-				it( 'cannot edit if blocked', async () => {
+				it( 'cannot create/edit if blocked', async () => {
 					const response = await newRequestBuilder().withUser( user ).makeRequest();
 					expect( response ).to.have.status( 403 );
 				} );

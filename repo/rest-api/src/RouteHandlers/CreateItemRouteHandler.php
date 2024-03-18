@@ -15,6 +15,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -32,10 +34,16 @@ class CreateItemRouteHandler extends SimpleHandler {
 
 	private CreateItem $useCase;
 	private ItemPartsSerializer $itemSerializer;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( CreateItem $useCase, ItemPartsSerializer $serializer ) {
+	public function __construct(
+		CreateItem $useCase,
+		ItemPartsSerializer $serializer,
+		ResponseFactory $responseFactory
+	) {
 		$this->useCase = $useCase;
 		$this->itemSerializer = $serializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -48,9 +56,11 @@ class CreateItemRouteHandler extends SimpleHandler {
 					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer() ),
 					WbRestApi::getStatementDeserializer()
 				),
-				WbRestApi::getItemUpdater()
+				WbRestApi::getItemUpdater(),
+				WbRestApi::getAssertUserIsAuthorized()
 			),
-			WbRestApi::getSerializerFactory()->newItemPartsSerializer()
+			WbRestApi::getSerializerFactory()->newItemPartsSerializer(),
+			new ResponseFactory()
 		);
 	}
 
@@ -58,43 +68,21 @@ class CreateItemRouteHandler extends SimpleHandler {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 
-		$useCaseResponse = $this->useCase->execute( new CreateItemRequest(
-			$jsonBody[self::ITEM_BODY_PARAM],
-			$jsonBody[self::TAGS_BODY_PARAM] ?? [],
-			$jsonBody[self::BOT_BODY_PARAM] ?? false,
-			$jsonBody[self::COMMENT_BODY_PARAM] ?? null,
-			$this->getUsername()
-		) );
-
-		$response = $this->getResponseFactory()->create();
-		$response->setStatus( 201 );
-		$response->setHeader( 'Content-Type', 'application/json' );
-		$response->setHeader(
-			'Last-Modified',
-			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
-		);
-		$response->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
-		$item = $useCaseResponse->getItem();
-		$response->setHeader(
-			'Location',
-			$this->getRouter()->getRouteUrl(
-				GetItemRouteHandler::ROUTE,
-				[ GetItemRouteHandler::ITEM_ID_PATH_PARAM => $item->getId() ]
-			)
-		);
-		$response->setBody( new StringStream( json_encode(
-			$this->itemSerializer->serialize( new ItemParts(
-				$item->getId(),
-				ItemParts::VALID_FIELDS,
-				$item->getLabels(),
-				$item->getDescriptions(),
-				$item->getAliases(),
-				$item->getStatements(),
-				$item->getSitelinks()
-			) )
-		) ) );
-
-		return $response;
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new CreateItemRequest(
+						$jsonBody[self::ITEM_BODY_PARAM],
+						$jsonBody[self::TAGS_BODY_PARAM] ?? [],
+						$jsonBody[self::BOT_BODY_PARAM] ?? false,
+						$jsonBody[self::COMMENT_BODY_PARAM] ?? null,
+						$this->getUsername()
+					)
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	/**
@@ -127,6 +115,38 @@ class CreateItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 		] );
+	}
+
+	private function newSuccessHttpResponse( CreateItemResponse $useCaseResponse ): Response {
+		$response = $this->getResponseFactory()->create();
+		$response->setStatus( 201 );
+		$response->setHeader( 'Content-Type', 'application/json' );
+		$response->setHeader(
+			'Last-Modified',
+			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+		);
+		$response->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
+		$item = $useCaseResponse->getItem();
+		$response->setHeader(
+			'Location',
+			$this->getRouter()->getRouteUrl(
+				GetItemRouteHandler::ROUTE,
+				[ GetItemRouteHandler::ITEM_ID_PATH_PARAM => $item->getId() ]
+			)
+		);
+		$response->setBody( new StringStream( json_encode(
+			$this->itemSerializer->serialize( new ItemParts(
+				$item->getId(),
+				ItemParts::VALID_FIELDS,
+				$item->getLabels(),
+				$item->getDescriptions(),
+				$item->getAliases(),
+				$item->getStatements(),
+				$item->getSitelinks()
+			) )
+		) ) );
+
+		return $response;
 	}
 
 	private function getUsername(): ?string {
