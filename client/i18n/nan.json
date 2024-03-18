@@ -3,6 +3,7 @@
 		"authors": [
 			"Ianbu",
 			"Ripunn",
+			"Winston Sung",
 			"唐吉訶德的侍從"
 		]
 	},
@@ -13,6 +14,7 @@
 	"wikibase-editlinkstitle": "Kái kî-thaⁿ gú-giân ê liân-kiat",
 	"wikibase-addlinkstitle": "Ka-thiam kî-thaⁿ gú-giân ê liân-kiat",
 	"wikibase-linkitem-addlinks": "Ka-thiam liân-kiat",
+	"wikibase-linkitem-input-site": "Gú-giân:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Om khí-lâi",
 	"wikibase-rc-hide-wikidata-show": "hiàn",

@@ -68,7 +68,6 @@
 	"datatypes-type-geo-shape": "Forma geográfica",
 	"datatypes-type-tabular-data": "Datos tabulares",
 	"datatypes-type-external-id": "Identificador externo",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriano",
 	"wikibase-time-calendar-julian": "Juliano",
 	"wikibase-time-precision-Gannum": "$1 mil millones de años EC",

@@ -84,10 +84,8 @@
 	"datatypes-type-geo-shape": "Forme géographique",
 	"datatypes-type-tabular-data": "Données tabulaires",
 	"datatypes-type-external-id": "Identifiant externe",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Grégorien",
 	"wikibase-time-calendar-julian": "Julien",
-	"wikibase-time-with-calendar": "$1 ($2)",
 	"wikibase-time-precision-CE": "$1 EC",
 	"wikibase-time-precision-Gannum": "$1 milliard{{PLURAL:$1||s}} d’années",
 	"wikibase-time-precision-Mannum": "$1 million{{PLURAL:$1||s}} d’années",
@@ -102,7 +100,6 @@
 	"wikibase-time-precision-BCE-millennium": "$1{{PLURAL:$1|er|e}} millénaire av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-century": "$1{{PLURAL:$1|er|e}} siècle av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-10annum": "{{PLURAL:$1|an|années}} $1 av. J.⁠-⁠C.",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "Le type de valeur « $1 » ne correspond pas au type de propriété « $2 ».",
 	"wikibase-snakformatter-property-not-found": "Propriété $1 non trouvée, impossible de déterminer le type de données à utiliser.",
 	"wikibase-snakformatter-formatting-exception": "Erreur de format : $1.",
@@ -177,7 +174,6 @@
 	"wikibase-property-summary-wbeditentity-update": "Propriété modifiée",
 	"wikibase-property-summary-wbeditentity-override": "Propriété effacée",
 	"wikibase-property-summary-special-create-property": "Propriété [$2] créée avec {{PLURAL:$1|une|des}} valeur{{PLURAL:$1||s}}",
-	"wikibase-reference-formatter-snak-separator": ".&#32;",
 	"wikibase-reference-formatter-snak-terminator": ".",
 	"wikibase-reference-formatter-snak-retrieved": "$1 récupéré"
 }

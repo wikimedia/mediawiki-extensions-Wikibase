@@ -66,7 +66,6 @@
 	"datatypes-type-geo-shape": "Γεωγραφικό σχήμα",
 	"datatypes-type-tabular-data": "Πίνακας δεδομένων",
 	"datatypes-type-external-id": "Εξωτερικό αναγνωριστικό",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Γρηγοριανό ημερολόγιο",
 	"wikibase-time-calendar-julian": "Calendario Juliano",
 	"wikibase-time-precision-CE": "$1 ΚΕ",

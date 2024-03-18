@@ -63,7 +63,6 @@
 	"datatypes-type-commonsMedia": "Commonsin mediatiedosto",
 	"datatypes-type-geo-shape": "Maantieteellinen muoto",
 	"datatypes-type-external-id": "Ulkoinen tunniste",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriaaninen",
 	"wikibase-time-calendar-julian": "Juliaaninen",
 	"wikibase-time-precision-Gannum": "$1 miljardia vuotta jaa.",

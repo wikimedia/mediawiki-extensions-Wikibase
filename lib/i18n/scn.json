@@ -48,7 +48,6 @@
 	"datatypes-type-wikibase-item": "Suggettu",
 	"datatypes-type-wikibase-property": "Prupità",
 	"datatypes-type-commonsMedia": "File multimidiali supra a Commons",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-CE": "$1 d.C.",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|miliardu|miliardi}} d'anni d.C.",
 	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|miliuni|miliuna}} d'anni d.C.",
