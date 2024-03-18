@@ -143,7 +143,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 	public function testGivenUserUnauthorized_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )->willThrowException( $expectedException );
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )->willThrowException( $expectedException );
 
 		try {
 			$this->newUseCase()->execute( $this->newRequest( 'Q1', 'en', [ 'a' ] ) );

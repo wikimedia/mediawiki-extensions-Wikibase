@@ -147,7 +147,7 @@ class ReplaceStatementTest extends TestCase {
 		$expectedError = $this->createStub( UseCaseError::class );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
-			->method( 'execute' )
+			->method( 'checkEditPermissions' )
 			->with( $subjectId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 

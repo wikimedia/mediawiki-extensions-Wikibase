@@ -139,7 +139,7 @@ class RemovePropertyLabelTest extends TestCase {
 			'You have no permission to edit this property.'
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $propertyId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 

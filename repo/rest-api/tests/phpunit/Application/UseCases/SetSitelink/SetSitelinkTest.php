@@ -182,7 +182,7 @@ class SetSitelinkTest extends TestCase {
 			'You have no permission to edit this item.'
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $itemId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 

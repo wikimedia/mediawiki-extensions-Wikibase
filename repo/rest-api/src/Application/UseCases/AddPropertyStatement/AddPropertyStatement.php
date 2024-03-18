@@ -45,7 +45,7 @@ class AddPropertyStatement {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertPropertyExists->execute( $propertyId );
-		$this->assertUserIsAuthorized->execute( $propertyId, $editMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $editMetadata->getUser() );
 
 		$property = $this->propertyRetriever->getProperty( $propertyId );
 

@@ -47,7 +47,7 @@ class SetSitelink {
 		$sitelink = $deserializedRequest->getSitelink();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $deserializedRequest->getEditMetadata()->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 		$sitelinkExists = $item->hasLinkToSite( $siteId );

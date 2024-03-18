@@ -162,7 +162,7 @@ class PatchItemAliasesTest extends TestCase {
 
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->expects( $this->once() )
-			->method( 'execute' )
+			->method( 'checkEditPermissions' )
 			->with( $itemId, User::withUsername( $user ) )
 			->willThrowException( $expectedException );
 

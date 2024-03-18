@@ -22,23 +22,48 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChec
  */
 class AssertUserIsAuthorizedTest extends TestCase {
 
+	public function testGivenUserIsAuthorizedToCreateAnItem(): void {
+		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$permissionChecker->expects( $this->once() )
+			->method( 'canCreateItem' )
+			->with( User::newAnonymous() )
+			->willReturn( true );
+
+		$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
+	}
+
+	public function testGivenUserIsUnauthorizedToCreateAnItem_throwsUseCaseError(): void {
+		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$permissionChecker->expects( $this->once() )
+			->method( 'canCreateItem' )
+			->with( User::newAnonymous() )
+			->willReturn( false );
+
+		try {
+			$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
+		}
+	}
+
 	/**
 	 * @dataProvider provideEntityId
 	 */
-	public function testGivenUserIsAuthorized( EntityId $entityId ): void {
+	public function testGivenUserIsAuthorizedToEdit( EntityId $entityId ): void {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
 			->with( User::newAnonymous(), $entityId )
 			->willReturn( true );
 
-		$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, User::newAnonymous() );
+		$this->newAssertUserIsAuthorized( $permissionChecker )->checkEditPermissions( $entityId, User::newAnonymous() );
 	}
 
 	/**
 	 * @dataProvider provideEntityId
 	 */
-	public function testGivenUserIsUnauthorized_throwsUseCaseError( EntityId $entityId ): void {
+	public function testGivenUserIsUnauthorizedToEdit_throwsUseCaseError( EntityId $entityId ): void {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
@@ -46,7 +71,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			->willReturn( false );
 
 		try {
-			$this->newAssertUserIsAuthorized( $permissionChecker )->execute( $entityId, User::newAnonymous() );
+			$this->newAssertUserIsAuthorized( $permissionChecker )->checkEditPermissions( $entityId, User::newAnonymous() );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame(

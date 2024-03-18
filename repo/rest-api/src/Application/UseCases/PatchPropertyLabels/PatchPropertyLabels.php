@@ -59,7 +59,7 @@ class PatchPropertyLabels {
 
 		$this->assertPropertyExists->execute( $propertyId );
 
-		$this->assertUserIsAuthorized->execute(
+		$this->assertUserIsAuthorized->checkEditPermissions(
 			$deserializedRequest->getPropertyId(),
 			$deserializedRequest->getEditMetadata()->getUser()
 		);

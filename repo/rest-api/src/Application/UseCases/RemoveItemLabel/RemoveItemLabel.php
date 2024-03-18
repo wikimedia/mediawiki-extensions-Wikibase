@@ -44,7 +44,7 @@ class RemoveItemLabel {
 		$providedEditMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertItemExists->execute( $itemId );
-		$this->assertUserIsAuthorized->execute( $itemId, $providedEditMetadata->getUser() );
+		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $providedEditMetadata->getUser() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
 

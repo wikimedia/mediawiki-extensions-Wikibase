@@ -45,7 +45,7 @@ class RemoveStatement {
 
 		$this->assertStatementSubjectExists->execute( $deserializedRequest->getStatementId() );
 
-		$this->assertUserIsAuthorized->execute(
+		$this->assertUserIsAuthorized->checkEditPermissions(
 			$deserializedRequest->getStatementId()->getEntityId(),
 			$deserializedRequest->getEditMetadata()->getUser()
 		);

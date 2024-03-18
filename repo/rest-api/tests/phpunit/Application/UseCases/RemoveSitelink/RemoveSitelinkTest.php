@@ -125,7 +125,7 @@ class RemoveSitelinkTest extends TestCase {
 
 		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'You have no permission to edit this item.' );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
-		$this->assertUserIsAuthorized->method( 'execute' )
+		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $itemId, User::newAnonymous() )
 			->willThrowException( $expectedError );
 
