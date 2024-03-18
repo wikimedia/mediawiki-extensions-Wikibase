@@ -6,6 +6,7 @@
 			"Bosogo"
 		]
 	},
+	"wikibase-error-unexpected": "Ката: $1.",
 	"wikibase-timedetails-time": "Убакыт",
 	"wikibase-timedetails-isotime": "Дата/убакыт",
 	"wikibase-sitelinks-wikipedia": "Википедия",
