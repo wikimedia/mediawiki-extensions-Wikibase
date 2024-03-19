@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -39,6 +40,9 @@ class PatchProperty {
 		$this->propertyUpdater = $propertyUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PatchPropertyRequest $request ): PatchPropertyResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$providedMetadata = $deserializedRequest->getEditMetadata();

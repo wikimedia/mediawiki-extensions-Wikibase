@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -106,6 +107,15 @@ class PatchPropertyTest extends TestCase {
 			),
 			$response->getProperty()
 		);
+	}
+
+	public function testGivenInvalidRequest_throws(): void {
+		try {
+			$this->newUseCase()->execute( new PatchPropertyRequest( 'X321', [], [], false, null, null ) );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+		}
 	}
 
 	private function newUseCase(): PatchProperty {
