@@ -430,7 +430,7 @@
 				var $tooltipContent = $( '<div>' ).append(
 					mw.message(
 						'wikibase-entityterms-languagelistview-mul-popup-content',
-						'https://www.wikidata.org/wiki/User:Manuel_Merz_(WMDE)/Help:Default_values_for_labels_and_aliases'
+						'https://www.wikidata.org/wiki/Special:MyLanguage/Help:Default_values_for_labels_and_aliases'
 					).parseDom(),
 					showAgainLayout.$element
 				);
