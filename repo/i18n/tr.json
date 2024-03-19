@@ -481,7 +481,7 @@
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Wikibase varlık kimliği",
 	"wikibase-listdatavaluetypes-generalbody": "Bu veri türü için değer türü <code>$1</code>'dır.",
 	"wikibase-concept-uri": "Kavramın URI'si",
-	"wikibase-concept-uri-tooltip": "Bu Öge tarafından tanımlanan kavramı tanımlayan URI",
+	"wikibase-concept-uri-tooltip": "Bu Öge tarafından açıklanan kavramı tanımlayan URI",
 	"wikibase-pageimage-helptext": "Bu görüntü, bu ögenin ifadelerinden alınmıştır. Dilerseniz ifadeyi değiştirerek görüntüyü ayarlayabilirsiniz.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase ögesi",

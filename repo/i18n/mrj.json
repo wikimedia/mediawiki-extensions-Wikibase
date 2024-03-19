@@ -4,5 +4,9 @@
 			"Nadezhda"
 		]
 	},
-	"wikibase-edit": "Тӧрлӓтӹмӓш"
+	"wikibase-edit": "Тӧрлӓтӹмӓш",
+	"wikibase-add": "уштараш",
+	"wikibase-label-empty": "Пӓлӹ уке",
+	"wikibase-description-empty": "Сирен анжыктымашым циц темӹмӹ агыл",
+	"wikibase-sitelinks-special": "Вес сайтвлӓ"
 }

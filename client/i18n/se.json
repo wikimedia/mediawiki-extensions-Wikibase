@@ -21,6 +21,9 @@
 	"wikibase-linkitem-selectlink": "Vállje báiki ja siidu maid hálidat liŋket dán siiddu.",
 	"wikibase-linkitem-input-site": "Giella:",
 	"wikibase-linkitem-input-page": "Siidu:",
+	"wikibase-linkitem-not-loggedin-title": "Don fertet leat čálihuvvon sisa",
+	"wikibase-property-notfound": "Iešvuohta $1 ii gávdno.",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Čiega",
 	"wikibase-rc-hide-wikidata-show": "Čájet",
 	"wikibase-rc-show-wikidata-pref": "Čájet {{WBREPONAME}} rievadusaid ođđaseamos rievdadusain",
@@ -45,6 +48,7 @@
 	"wikibase-client-data-bridge-references-heading": "Gáldut",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "It leat čálihuvvon sisa",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Várrehus:</strong> It leat čálihuvvon sisa. Du IP-čujuhus báhcá almmolaččat oidnosii dán siiddu rievdadushistorjái. Jus <strong>čálihat sisa</strong> dahje <strong>ráhkadat geavaheaddjidovddaldaga</strong>, de du rievdadeamit merkejuvvojit geavaheaddjinamain ja seammás oaččut eará ovdamuniid.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Rievdat čálitkeahttá sisa",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Čálit sisa dahje ráhkat dovddaldaga",
 	"wikibase-client-data-bridge-license-heading": "Geavahus ja liseansa",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Rievdat árvvu {{GRAMMAR:locative|WBREPONAME}}",
@@ -52,5 +56,9 @@
 	"wikibase-client-data-bridge-unknown-error-heading": "Juogamii manai endorii",
 	"wikibase-client-data-bridge-error-go-back": "Ruovttoluotta",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Rievdat gáldu {{GRAMMAR:locative|WBREPONAME}}",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "It leat čálihuvvon sisa"
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "It leat čálihuvvon sisa",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Almmut čálitkeahttá sisa",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Vurke čálitkeahttá sisa",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Čálit sisa (rahpasa ođđa levgii)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Joatkke rievdadit"
 }

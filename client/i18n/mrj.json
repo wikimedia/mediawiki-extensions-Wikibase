@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "Страницӓ доно кӹлдӹмӓш",
 	"wikibase-linkitem-selectlink": "Пожалуйста, сайт дӓ страницӹм айыры, кыды дон ти страницӹм кӹлдӹнет.",
 	"wikibase-linkitem-input-site": "Йӹлмӹ:",
-	"wikibase-linkitem-input-page": "Страницӓ:"
+	"wikibase-linkitem-input-page": "Страницӓ:",
+	"wikibase-rc-hide-wikidata-hide": "Шӹлтӓш",
+	"wikibase-rc-hide-wikidata-show": "Анжыкташ",
+	"wikibase-otherprojects": "Весӹ проектвлӓштӹ"
 }
