@@ -1,12 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Protostar"
+			"Protostar",
+			"122112ê"
 		]
 	},
 	"tooltip-t-wikibase": "Link go kònnèkto data repòsitòry aitèm",
+	"wikibase-dataitem": "{{WBREPONAME}} aytem",
 	"wikibase-editlinks": "Èdit linkdèm",
 	"wikibase-editlinkstitle": "Èdit intertòk linkdèm",
+	"wikibase-linkitem-addlinks": "Ad link dɛn",
+	"wikibase-linkitem-title": "Link wit pej",
+	"wikibase-linkitem-linkpage": "Link wit pej",
+	"wikibase-linkitem-selectlink": "Duya pik wan sayt ɛn wan pej we yu want fɔ link to dis pej.",
+	"wikibase-linkitem-input-site": "Langwej:",
+	"wikibase-linkitem-input-page": "Pej:",
 	"wikibase-rc-hide-wikidata-hide": "Haid",
 	"wikibase-rc-hide-wikidata-show": "Show"
 }

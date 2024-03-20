@@ -125,6 +125,7 @@
 	"wikibase-itembytitle-lookup-page": "Halaman:",
 	"wikibase-itembytitle-submit": "Cari",
 	"wikibase-itembytitle-create": "Anda juga boleh [$1 mencipta perkara].",
+	"wikibase-itembytitle-summary": "Special:ItemByTitle digunakan untuk mencari Butir yang sepadan untuk laman diberi di tapak yang bersambung.<br />Medan pertama, \"{{int:wikibase-itembytitle-lookup-site}}\", ialah tempat anda masukkan bahasa dan kod tapak.<br />Untuk medan kedua, \"{{int:wikibase-itembytitle-lookup-page}}\", anda mesti masukkan tajuk laman yang tepat seperti yang tertampil di tapak bersambung.",
 	"wikibase-gotolinkedpage-lookup-item": "ID butir:",
 	"wikibase-gotolinkedpage-error-item-not-found": "Butir tidak dijumpai",
 	"special-itemdisambiguation": "Penyahkekaburan perkara",
