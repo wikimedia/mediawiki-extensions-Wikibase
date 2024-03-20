@@ -16,13 +16,15 @@ use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
+use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
@@ -855,7 +857,7 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getSerializerFactory( $services )->newStatementSerializer(),
+			WbRestApi::getStatementSerializer( $services ),
 			WbRestApi::getAssertStatementSubjectExists( $services ),
 			WbRestApi::getStatementRetriever( $services ),
 			WbRestApi::getStatementUpdater( $services ),
@@ -992,10 +994,6 @@ return [
 		);
 	},
 
-	'WbRestApi.SerializerFactory' => function( MediaWikiServices $services ): SerializerFactory {
-		return new SerializerFactory();
-	},
-
 	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
 		return new SetItemDescription(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
@@ -1098,6 +1096,12 @@ return [
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			)
 		);
+	},
+
+	'WbRestApi.StatementSerializer' => function( MediaWikiServices $services ): StatementSerializer {
+		$propertyValuePairSerializer = new PropertyValuePairSerializer();
+		$referenceSerializer = new ReferenceSerializer( $propertyValuePairSerializer );
+		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	},
 
 	'WbRestApi.StatementUpdater' => function( MediaWikiServices $services ): StatementUpdater {

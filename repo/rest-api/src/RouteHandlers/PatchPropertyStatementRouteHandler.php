@@ -70,7 +70,7 @@ class PatchPropertyStatementRouteHandler extends SimpleHandler {
 					self::PROPERTY_ID_PATH_PARAM
 				),
 			] ),
-			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			WbRestApi::getStatementSerializer(),
 			$responseFactory
 		);
 	}

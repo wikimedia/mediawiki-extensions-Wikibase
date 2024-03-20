@@ -49,7 +49,7 @@ class GetStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getGetStatement(),
-			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			WbRestApi::getStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),

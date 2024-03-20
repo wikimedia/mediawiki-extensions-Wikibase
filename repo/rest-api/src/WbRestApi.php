@@ -5,9 +5,9 @@ namespace Wikibase\Repo\RestApi;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
@@ -170,11 +170,6 @@ class WbRestApi {
 			->get( 'WbRestApi.GetStatement' );
 	}
 
-	public static function getSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SerializerFactory' );
-	}
-
 	public static function getAddItemStatement( ContainerInterface $services = null ): AddItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AddItemStatement' );
@@ -299,6 +294,11 @@ class WbRestApi {
 	public static function getStatementRetriever( ContainerInterface $services = null ): EntityRevisionLookupStatementRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.StatementRetriever' );
+	}
+
+	public static function getStatementSerializer( ContainerInterface $services = null ): StatementSerializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.StatementSerializer' );
 	}
 
 	public static function getStatementDeserializer( ContainerInterface $services = null ): StatementDeserializer {

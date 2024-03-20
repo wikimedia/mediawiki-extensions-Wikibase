@@ -71,7 +71,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 					self::ITEM_ID_PATH_PARAM
 				),
 			] ),
-			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			WbRestApi::getStatementSerializer(),
 			$responseFactory
 		);
 	}

@@ -57,7 +57,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getAddItemStatement(),
-			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			WbRestApi::getStatementSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),

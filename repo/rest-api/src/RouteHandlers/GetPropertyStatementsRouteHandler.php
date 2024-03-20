@@ -47,7 +47,7 @@ class GetPropertyStatementsRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		return new self(
 			WbRestApi::getGetPropertyStatements(),
-			WbRestApi::getSerializerFactory()->newStatementListSerializer(),
+			new StatementListSerializer( WbRestApi::getStatementSerializer() ),
 			new ResponseFactory(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),

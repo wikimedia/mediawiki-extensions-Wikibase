@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
@@ -54,7 +55,7 @@ class GetPropertyRouteHandler extends SimpleHandler {
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
-				WbRestApi::getSerializerFactory()->newStatementListSerializer()
+				new StatementListSerializer( WbRestApi::getStatementSerializer() )
 			),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),

@@ -57,7 +57,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 		return new self(
 			WbRestApi::getReplaceItemStatement(),
-			WbRestApi::getSerializerFactory()->newStatementSerializer(),
+			WbRestApi::getStatementSerializer(),
 			new MiddlewareHandler( [
 				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
