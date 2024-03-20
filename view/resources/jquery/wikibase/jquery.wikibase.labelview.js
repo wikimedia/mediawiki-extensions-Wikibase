@@ -125,6 +125,16 @@
 			return null;
 		},
 
+		_getLanguageAwareInputPlaceholder: function ( languageCode ) {
+			if ( languageCode === 'mul' ) {
+				return mw.msg( 'wikibase-label-edit-placeholder-mul' );
+			}
+			return mw.msg(
+				'wikibase-label-edit-placeholder-language-aware',
+				wb.getLanguageNameByCodeForTerms( languageCode )
+			);
+		},
+
 		/**
 		 * @inheritdoc
 		 */
@@ -168,10 +178,7 @@
 			}
 
 			var $input = $( document.createElement( this.options.inputNodeName ) );
-			var inputPlaceholder = mw.msg(
-				'wikibase-label-edit-placeholder-language-aware',
-				wb.getLanguageNameByCodeForTerms( languageCode )
-			);
+			var inputPlaceholder = this._getLanguageAwareInputPlaceholder( languageCode );
 			if ( !labelText && this._getPlaceholderLabel( languageCode ) !== null ) {
 				inputPlaceholder = this._getPlaceholderLabel( languageCode ).getText();
 			}
