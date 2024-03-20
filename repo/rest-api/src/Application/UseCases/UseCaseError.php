@@ -37,11 +37,14 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
+	public const ITEM_DATA_INVALID_FIELD = 'item-data-invalid-field';
+	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const LABEL_TOO_LONG = 'label-too-long';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
+	public const MISSING_LABELS_AND_DESCRIPTIONS = 'missing-labels-and-descriptions';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
@@ -145,11 +148,14 @@ class UseCaseError extends UseCaseException {
 		],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [],
+		self::ITEM_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_EMPTY => [],
 		self::LABEL_NOT_DEFINED => [],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
+		self::MISSING_LABELS_AND_DESCRIPTIONS => [],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
 			self::CONTEXT_LABEL,

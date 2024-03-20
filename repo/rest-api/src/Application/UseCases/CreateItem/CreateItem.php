@@ -2,12 +2,10 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
 
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 
 /**
@@ -15,31 +13,33 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
  */
 class CreateItem {
 
-	private ItemDeserializer $itemDeserializer;
+	private CreateItemValidator $validator;
 	private ItemCreator $itemCreator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		ItemDeserializer $itemDeserializer,
+		CreateItemValidator $validator,
 		ItemCreator $itemCreator,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
-		$this->itemDeserializer = $itemDeserializer;
 		$this->itemCreator = $itemCreator;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
+		$this->validator = $validator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function execute( CreateItemRequest $request ): CreateItemResponse {
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$user = $request->getUsername() !== null ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$item = $deserializedRequest->getItem();
 
-		$this->assertUserIsAuthorized->checkCreateItemPermissions( $user );
+		$editMetadata = $deserializedRequest->getEditMetadata();
+
+		$this->assertUserIsAuthorized->checkCreateItemPermissions( $editMetadata->getUser() );
 
 		$revision = $this->itemCreator->create(
-			$this->itemDeserializer->deserialize( $request->getItem() ),
+			$item,
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),

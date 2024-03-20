@@ -2,10 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class CreateItemRequest {
+class CreateItemRequest implements UseCaseRequest, ItemSerializationRequest, EditMetadataRequest {
 
 	private array $item;
 	private array $editTags;

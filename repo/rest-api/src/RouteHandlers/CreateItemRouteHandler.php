@@ -7,12 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemResponse;
@@ -49,13 +44,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		return new self(
 			new CreateItem(
-				new ItemDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer(),
-					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer() ),
-					WbRestApi::getStatementDeserializer()
-				),
+				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getItemUpdater(),
 				WbRestApi::getAssertUserIsAuthorized()
 			),
