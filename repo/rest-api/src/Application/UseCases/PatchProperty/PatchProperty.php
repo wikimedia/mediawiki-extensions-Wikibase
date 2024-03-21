@@ -3,13 +3,12 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 
 /**
@@ -18,16 +17,16 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class PatchProperty {
 
 	private PatchPropertyValidator $validator;
-	private PropertyPartsRetriever $propertyRetriever;
-	private PropertyPartsSerializer $propertySerializer;
+	private PropertyRetriever $propertyRetriever;
+	private PropertySerializer $propertySerializer;
 	private PatchJson $patchJson;
 	private PropertyDeserializer $propertyDeserializer;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		PatchPropertyValidator $validator,
-		PropertyPartsRetriever $propertyRetriever,
-		PropertyPartsSerializer $propertySerializer,
+		PropertyRetriever $propertyRetriever,
+		PropertySerializer $propertySerializer,
 		PatchJson $patchJson,
 		PropertyDeserializer $propertyDeserializer,
 		PropertyUpdater $propertyUpdater
@@ -48,12 +47,8 @@ class PatchProperty {
 			$this->patchJson->execute(
 				ConvertArrayObjectsToArray::execute(
 					$this->propertySerializer->serialize(
-						// TODO: create a (read model) property retriever instead of using property parts?
 						// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-						$this->propertyRetriever->getPropertyParts(
-							$deserializedRequest->getPropertyId(),
-							PropertyParts::VALID_FIELDS
-						)
+						$this->propertyRetriever->getProperty( $deserializedRequest->getPropertyId() )
 					)
 				),
 				$deserializedRequest->getPatch()

@@ -14,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
@@ -53,7 +52,7 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 			new PatchProperty(
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getPropertyDataRetriever(),
-				new PropertyPartsSerializer(
+				new PropertySerializer(
 					$labelsSerializer,
 					$descriptionsSerializer,
 					$aliasesSerializer,
