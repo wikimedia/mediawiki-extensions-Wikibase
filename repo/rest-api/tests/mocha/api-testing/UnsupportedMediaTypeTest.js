@@ -4,18 +4,20 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	getItemEditRequests,
-	getPropertyEditRequests
+	getPropertyEditRequests,
+	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 
 describeWithTestData(
 	'Unsupported media type requests',
 	( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
-		const editRequests = [
+		const requestsToTest = [
 			...getItemEditRequests( itemRequestInputs ),
-			...getPropertyEditRequests( propertyRequestInputs )
+			...getPropertyEditRequests( propertyRequestInputs ),
+			getItemCreateRequest( itemRequestInputs )
 		];
-		describeEachRouteWithReset( editRequests, ( newRequestBuilder ) => {
+		describeEachRouteWithReset( requestsToTest, ( newRequestBuilder ) => {
 			it( `${newRequestBuilder().getRouteDescription()} responds 415 for an unsupported media type`, async () => {
 				const contentType = 'multipart/form-data';
 				const response = await newRequestBuilder()

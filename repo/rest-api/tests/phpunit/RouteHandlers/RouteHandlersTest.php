@@ -28,6 +28,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddP
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -114,6 +116,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
@@ -948,6 +951,31 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
+		] ];
+		yield 'CreateItem' => [ [
+			'useCase' => CreateItem::class,
+			'useCaseResponse' => new CreateItemResponse(
+				new Item(
+					new ItemId( 'Q123' ),
+					new Labels( new Label( 'en', 'new Item' ) ),
+					new Descriptions(),
+					new Aliases(),
+					new Sitelinks(),
+					new StatementList()
+				),
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [],
+				'bodyContents' => [ 'item' => [ 'labels' => [ 'en' => 'new Item' ] ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS, '' ),
+					$hasErrorCode ( UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS ),
+				],
 			],
 		] ];
 		// phpcs:enable

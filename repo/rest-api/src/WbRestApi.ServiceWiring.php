@@ -53,6 +53,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -409,6 +410,14 @@ return [
 				WikibaseRepo::getEntityPermissionChecker( $services ),
 				$services->getUserFactory()
 			)
+		);
+	},
+
+	'WbRestApi.CreateItem' => function( MediaWikiServices $services ): CreateItem {
+		return new CreateItem(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},
 

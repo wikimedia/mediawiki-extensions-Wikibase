@@ -165,3 +165,8 @@ module.exports.getItemEditRequests = ( requestInputs ) => ( [
 	() => rbf.newRemoveItemDescriptionRequestBuilder( requestInputs.itemId, 'en' ),
 	() => rbf.newRemoveSitelinkRequestBuilder( requestInputs.itemId, requestInputs.siteId )
 ].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
+
+module.exports.getItemCreateRequest = ( requestInput ) => ( {
+	newRequestBuilder: () => rbf.newCreateItemRequestBuilder( { labels: { en: 'new Item' } } ),
+	requestInput
+} );

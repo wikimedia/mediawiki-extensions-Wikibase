@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -13,6 +14,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -30,30 +35,43 @@ class CreateItemRouteHandler extends SimpleHandler {
 	private CreateItem $useCase;
 	private ItemPartsSerializer $itemSerializer;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		CreateItem $useCase,
 		ItemPartsSerializer $serializer,
-		ResponseFactory $responseFactory
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;
 		$this->itemSerializer = $serializer;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		return new self(
-			new CreateItem(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getItemUpdater(),
-				WbRestApi::getAssertUserIsAuthorized()
-			),
+			WbRestApi::getCreateItem(),
 			WbRestApi::getSerializerFactory()->newItemPartsSerializer(),
-			new ResponseFactory()
+			$responseFactory,
+			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
 		);
 	}
 
-	public function run(): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase(): Response {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 
