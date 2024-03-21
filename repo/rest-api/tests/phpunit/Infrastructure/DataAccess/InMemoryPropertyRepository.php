@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use LogicException;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property as ReadModelProperty;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
@@ -17,18 +17,26 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryPropertyRepository
-	implements PropertyRetriever, PropertyLabelsRetriever, PropertyDescriptionsRetriever, PropertyAliasesRetriever, PropertyUpdater {
+class InMemoryPropertyRepository implements
+	PropertyWriteModelRetriever,
+	PropertyRetriever,
+	PropertyLabelsRetriever,
+	PropertyDescriptionsRetriever,
+	PropertyAliasesRetriever,
+	PropertyUpdater
+{
+
 	use StatementReadModelHelper;
 
 	private array $properties = [];
 	private array $latestRevisionData = [];
 
-	public function addProperty( Property $property ): void {
+	public function addProperty( PropertyWriteModel $property ): void {
 		if ( !$property->getId() ) {
 			throw new LogicException( 'Test property must have an ID.' );
 		}
@@ -48,8 +56,12 @@ class InMemoryPropertyRepository
 		return $this->latestRevisionData["$id"]['editMetadata'];
 	}
 
+	public function getPropertyWriteModel( PropertyId $propertyId ): ?PropertyWriteModel {
+		return $this->properties[ $propertyId->getSerialization() ] ?? null;
+	}
+
 	public function getProperty( PropertyId $propertyId ): ?Property {
-		return $this->properties[$propertyId->getSerialization()] ?? null;
+		return $this->convertToReadModel( $this->getPropertyWriteModel( $propertyId ) );
 	}
 
 	public function getLabels( PropertyId $propertyId ): ?Labels {
@@ -64,7 +76,7 @@ class InMemoryPropertyRepository
 		return $this->properties["$propertyId"] ? $this->convertToReadModel( $this->properties["$propertyId"] )->getAliases() : null;
 	}
 
-	public function update( Property $property, EditMetadata $editMetadata ): PropertyRevision {
+	public function update( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
 		$this->properties[$property->getId()->getSerialization()] = $property;
 		$revisionData = [
 			'revId' => rand(),
@@ -77,8 +89,8 @@ class InMemoryPropertyRepository
 		return new PropertyRevision( $this->convertToReadModel( $property ), $revisionData['revTime'], $revisionData['revId'] );
 	}
 
-	private function convertToReadModel( Property $property ): ReadModelProperty {
-		return new ReadModelProperty(
+	private function convertToReadModel( PropertyWriteModel $property ): Property {
+		return new Property(
 			$property->getId(),
 			$property->getDataTypeId(),
 			Labels::fromTermList( $property->getLabels() ),

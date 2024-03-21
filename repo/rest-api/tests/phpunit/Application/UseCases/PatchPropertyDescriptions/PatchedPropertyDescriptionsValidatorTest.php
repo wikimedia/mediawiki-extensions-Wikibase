@@ -16,7 +16,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -127,8 +127,8 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 	private function newValidator(): PatchedPropertyDescriptionsValidator {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
-		$propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$propertyRetriever->method( 'getProperty' )
+		$propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
+		$propertyRetriever->method( 'getPropertyWriteModel' )
 			->willReturn( new Property(
 				null,
 				new Fingerprint( new TermList( [ new Term( 'en', self::EN_LABEL ) ] ) ),

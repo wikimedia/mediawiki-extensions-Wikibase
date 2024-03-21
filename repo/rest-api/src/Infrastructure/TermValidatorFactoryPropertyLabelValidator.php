@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
@@ -17,12 +17,12 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 
 	private TermValidatorFactory $termValidatorFactory;
 	private TermsCollisionDetector $termsCollisionDetector;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 
 	public function __construct(
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
-		PropertyRetriever $propertyRetriever
+		PropertyWriteModelRetriever $propertyRetriever
 	) {
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
@@ -63,7 +63,7 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 	}
 
 	private function validateProperty( PropertyId $propertyId, string $language, string $label ): ?ValidationError {
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 
 		// skip if Property does not exist
 		if ( $property === null ) {

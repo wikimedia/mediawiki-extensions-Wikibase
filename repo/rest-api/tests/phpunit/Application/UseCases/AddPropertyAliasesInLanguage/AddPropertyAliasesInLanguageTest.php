@@ -16,8 +16,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
@@ -32,7 +32,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -40,7 +40,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 

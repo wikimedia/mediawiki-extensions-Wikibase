@@ -2,25 +2,28 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityRevisionLookupPropertyDataRetriever implements PropertyRetriever, PropertyPartsRetriever, PropertyStatementsRetriever {
+class EntityRevisionLookupPropertyDataRetriever
+	implements PropertyRetriever, PropertyPartsRetriever, PropertyWriteModelRetriever, PropertyStatementsRetriever {
 
 	private EntityRevisionLookup $entityRevisionLookup;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -33,26 +36,38 @@ class EntityRevisionLookupPropertyDataRetriever implements PropertyRetriever, Pr
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function getProperty( PropertyId $propertyId ): ?Property {
+	public function getPropertyWriteModel( PropertyId $propertyId ): ?PropertyWriteModel {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $propertyId );
+		// @phan-suppress-next-line PhanTypeMismatchReturn
+		return $entityRevision ? $entityRevision->getEntity() : null;
+	}
 
-		if ( !$entityRevision ) {
+	public function getProperty( PropertyId $propertyId ): ?Property {
+		$property = $this->getPropertyWriteModel( $propertyId );
+
+		if ( $property === null ) {
 			return null;
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchReturn
-		return $entityRevision->getEntity();
+		return new Property(
+			$property->getId(),
+			$property->getDataTypeId(),
+			Labels::fromTermList( $property->getLabels() ),
+			Descriptions::fromTermList( $property->getDescriptions() ),
+			Aliases::fromAliasGroupList( $property->getAliasGroups() ),
+			$this->convertDataModelStatementListToReadModel( $property->getStatements() )
+		);
 	}
 
 	public function getPropertyParts( PropertyId $propertyId, array $fields ): ?PropertyParts {
-		$property = $this->getProperty( $propertyId );
+		$property = $this->getPropertyWriteModel( $propertyId );
 		if ( $property === null ) {
 			return null;
 		}
 		return $this->propertyPartsFromRequestedFields( $fields, $property );
 	}
 
-	private function propertyPartsFromRequestedFields( array $fields, Property $property ): PropertyParts {
+	private function propertyPartsFromRequestedFields( array $fields, PropertyWriteModel $property ): PropertyParts {
 		$propertyParts = ( new PropertyPartsBuilder( $property->getId(), $fields ) );
 
 		if ( in_array( PropertyParts::FIELD_DATA_TYPE, $fields ) ) {
@@ -82,7 +97,7 @@ class EntityRevisionLookupPropertyDataRetriever implements PropertyRetriever, Pr
 	}
 
 	public function getStatements( PropertyId $propertyId, ?PropertyId $filterPropertyId = null ): ?StatementList {
-		$property = $this->getProperty( $propertyId );
+		$property = $this->getPropertyWriteModel( $propertyId );
 		if ( $property === null ) {
 			return null;
 		}

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
@@ -48,7 +49,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		$expectedStatement = NewStatement::someValueFor( 'P321' )
 			->withGuid( 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
-		$property = new Property(
+		$property = new PropertyWriteModel(
 			$propertyId,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'potato' ) ] ),
@@ -88,7 +89,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 	 * @dataProvider propertyPartsWithFieldsProvider
 	 */
 	public function testGivenFields_getPropertyPartsReturnsOnlyRequestFields(
-		Property $property,
+		PropertyWriteModel $property,
 		array $fields,
 		PropertyParts $propertyParts
 	): void {
@@ -105,7 +106,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			->withGuid( 'P666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
 
-		$property = new Property(
+		$property = new PropertyWriteModel(
 			new NumericPropertyId( 'P666' ),
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'potato' ) ] ),
@@ -149,9 +150,9 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		];
 	}
 
-	public function testGetProperty(): void {
+	public function testGetPropertyWriteModel(): void {
 		$id = new NumericPropertyId( 'P123' );
-		$expectedProperty = new Property(
+		$expectedProperty = new PropertyWriteModel(
 			$id,
 			null,
 			'string'
@@ -161,7 +162,34 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			$expectedProperty
 		);
 
-		$this->assertSame( $expectedProperty, $this->newRetriever()->getProperty( $id ) );
+		$this->assertSame( $expectedProperty, $this->newRetriever()->getPropertyWriteModel( $id ) );
+	}
+
+	public function testGivenPropertyNotFound_getPropertyWriteModelReturnsNull(): void {
+		$id = new NumericPropertyId( 'P123' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $id, null );
+
+		$this->assertNull( $this->newRetriever()->getPropertyWriteModel( $id ) );
+	}
+
+	public function testGetProperty(): void {
+		$id = new NumericPropertyId( 'P123' );
+		$propertyWriteModel = new PropertyWriteModel(
+			$id,
+			null,
+			'string'
+		);
+		$expectedProperty = new Property(
+			$id,
+			'string',
+			new Labels(),
+			new Descriptions(),
+			new Aliases(),
+			new StatementList()
+		);
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $id, $propertyWriteModel );
+
+		$this->assertEquals( $expectedProperty, $this->newRetriever()->getProperty( $id ) );
 	}
 
 	public function testGivenPropertyNotFound_getPropertyReturnsNull(): void {
@@ -181,7 +209,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			->withValue( 'banana' )
 			->build();
 
-		$property = new Property(
+		$property = new PropertyWriteModel(
 			new NumericPropertyId( 'P666' ),
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'potato' ) ] ),
@@ -213,7 +241,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			->withValue( 'banana' )
 			->build();
 
-		$property = new Property(
+		$property = new PropertyWriteModel(
 			new NumericPropertyId( 'P666' ),
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'potato' ) ] ),
@@ -246,7 +274,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		);
 	}
 
-	private function newEntityRevisionLookupForIdWithReturnValue( PropertyId $id, ?Property $returnValue ): EntityRevisionLookup {
+	private function newEntityRevisionLookupForIdWithReturnValue( PropertyId $id, ?PropertyWriteModel $returnValue ): EntityRevisionLookup {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )

@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,14 +19,14 @@ class AddPropertyAliasesInLanguage {
 	private AddPropertyAliasesInLanguageValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
 		AddPropertyAliasesInLanguageValidator $validator,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
@@ -50,7 +50,7 @@ class AddPropertyAliasesInLanguage {
 		$this->assertPropertyExists->execute( $propertyId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $editMetadata->getUser() );
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$aliasesExist = $property->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $property->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 

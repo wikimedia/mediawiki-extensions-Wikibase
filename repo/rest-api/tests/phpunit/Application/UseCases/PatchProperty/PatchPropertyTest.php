@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchProperty;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -31,7 +31,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property as ReadModelProperty;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property as PropertyReadModel;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
@@ -64,14 +64,14 @@ class PatchPropertyTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyPartsRetriever = $this->getMockBuilder( EntityRevisionLookupPropertyDataRetriever::class )
-			->onlyMethods( [ 'getProperty' ] )
+			->onlyMethods( [ 'getPropertyWriteModel' ] )
 			->setConstructorArgs( [
 				$this->createStub( EntityRevisionLookup::class ),
 				$this->createStub( StatementReadModelConverter::class ),
 			] )
 			->getMock();
-		$this->propertyPartsRetriever->method( 'getProperty' )->willReturnCallback(
-			fn( $propertyId ) => $this->propertyRepository->getProperty( $propertyId )
+		$this->propertyPartsRetriever->method( 'getPropertyWriteModel' )->willReturnCallback(
+			fn( $propertyId ) => $this->propertyRepository->getPropertyWriteModel( $propertyId )
 		);
 		$this->propertyUpdater = $this->propertyRepository;
 	}
@@ -83,7 +83,7 @@ class PatchPropertyTest extends TestCase {
 		$comment = 'statement replaced by ' . __METHOD__;
 
 		$this->propertyRepository->addProperty(
-			new DataModelProperty(
+			new PropertyWriteModel(
 				$propertyId,
 				new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) ),
 				'string',
@@ -112,7 +112,7 @@ class PatchPropertyTest extends TestCase {
 			$response->getLastModified()
 		);
 		$this->assertEquals(
-			new ReadModelProperty(
+			new PropertyReadModel(
 				$propertyId,
 				'string',
 				new Labels( new Label( 'en', 'Solanum tuberosum' ) ),

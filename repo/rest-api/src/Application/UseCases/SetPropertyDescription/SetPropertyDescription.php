@@ -7,8 +7,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -16,14 +16,14 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class SetPropertyDescription {
 
 	private SetPropertyDescriptionValidator $validator;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		SetPropertyDescriptionValidator $validator,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized
@@ -48,7 +48,7 @@ class SetPropertyDescription {
 
 		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $editMetadata->getUser() );
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$descriptionExists = $property->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );
 		$property->getDescriptions()->setTerm( $description );
 

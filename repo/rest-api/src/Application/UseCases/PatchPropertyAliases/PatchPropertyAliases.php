@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,7 +25,7 @@ class PatchPropertyAliases {
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
 	private PatchedAliasesValidator $patchedAliasesValidator;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	public function __construct(
@@ -36,7 +36,7 @@ class PatchPropertyAliases {
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patchJson,
 		PatchedAliasesValidator $patchedAliasesValidator,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
@@ -68,7 +68,7 @@ class PatchPropertyAliases {
 			$deserializedRequest->getPatch()
 		) );
 
-		$property = $this->propertyRetriever->getProperty( $deserializedRequest->getPropertyId() );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $deserializedRequest->getPropertyId() );
 		$originalAliases = $property->getAliasGroups();
 		$property->getFingerprint()->setAliasGroups( $patchedAliases );
 

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -26,12 +26,12 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 	}
 
 	public function testGivenValidDescription_returnsNull(): void {
@@ -42,7 +42,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 		$property->setLabel( 'en', 'Property Label' );
 		$property->setDescription( 'en', 'Property Description' );
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertNull(
 			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
@@ -56,7 +56,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 		$property->setId( $propertyId );
 		$property->setDescription( 'en', 'Property Description' );
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertNull(
 			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
@@ -66,7 +66,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 	public function testGivenValidDescriptionForNonExistentProperty_returnsNull(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 
-		$this->createPropertyRetrieverMock( $propertyId, null );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, null );
 
 		$this->assertNull(
 			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
@@ -118,7 +118,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 		$property->setLabel( $language, $propertyLabel );
 		$property->setDescription( $language, 'Property Description' );
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertEquals(
 			new ValidationError(
@@ -139,7 +139,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 		$property->setLabel( $language, 'New Label' );
 		$property->setDescription( $language, $description );
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertNull( $this->newValidator()->validate( $propertyId, $language, $description ) );
 	}
@@ -162,11 +162,11 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 		);
 	}
 
-	private function createPropertyRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
+	private function createPropertyWriteModelRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
+		$this->propertyRetriever = $this->createMock( PropertyWriteModelRetriever::class );
 		$this->propertyRetriever
 			->expects( $this->once() )
-			->method( 'getProperty' )
+			->method( 'getPropertyWriteModel' )
 			->with( $propertyId )
 			->willReturn( $property );
 	}

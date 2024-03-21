@@ -15,8 +15,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
@@ -32,7 +32,7 @@ class AddPropertyStatementTest extends TestCase {
 
 	private AssertPropertyExists $assertPropertyExists;
 	private AddPropertyStatementValidator $validator;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private GuidGenerator $guidGenerator;
 	private PropertyUpdater $propertyUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -42,7 +42,7 @@ class AddPropertyStatementTest extends TestCase {
 
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->validator = new TestValidatingRequestDeserializer();
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->guidGenerator = new GuidGenerator();
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -30,12 +30,12 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private TermsCollisionDetector $termsCollisionDetector;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->termsCollisionDetector = $this->createStub( TermsCollisionDetector::class );
 	}
 
@@ -47,7 +47,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 			'string'
 		);
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertNull(
 			$this->newValidator()->validate( $propertyId, 'en', 'valid label' )
@@ -56,7 +56,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 
 	public function testGivenValidLabelForNonExistentProperty_returnsNull(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
-		$this->createPropertyRetrieverMock( $propertyId, null );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, null );
 		$this->assertNull(
 			$this->newValidator()->validate( $propertyId, 'en', 'valid label' )
 		);
@@ -72,7 +72,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 			'string'
 		);
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
@@ -127,7 +127,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 			'string'
 		);
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertEquals(
 			new ValidationError(
@@ -146,7 +146,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 
 		$property = new Property( $propertyId, new Fingerprint(), 'string' );
 
-		$this->createPropertyRetrieverMock( $propertyId, $property );
+		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
@@ -183,11 +183,11 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 		);
 	}
 
-	private function createPropertyRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
-		$this->propertyRetriever = $this->createMock( PropertyRetriever::class );
+	private function createPropertyWriteModelRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
+		$this->propertyRetriever = $this->createMock( PropertyWriteModelRetriever::class );
 		$this->propertyRetriever
 			->expects( $this->once() )
-			->method( 'getProperty' )
+			->method( 'getPropertyWriteModel' )
 			->with( $propertyId )
 			->willReturn( $property );
 	}

@@ -7,8 +7,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,7 +17,7 @@ class AddPropertyStatement {
 
 	private AddPropertyStatementValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private GuidGenerator $guidGenerator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -25,7 +25,7 @@ class AddPropertyStatement {
 	public function __construct(
 		AddPropertyStatementValidator $validator,
 		AssertPropertyExists $assertPropertyExists,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		GuidGenerator $guidGenerator,
 		PropertyUpdater $propertyUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
@@ -47,7 +47,7 @@ class AddPropertyStatement {
 		$this->assertPropertyExists->execute( $propertyId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $editMetadata->getUser() );
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $propertyId );
 		$statement->setGuid( (string)$newStatementGuid );

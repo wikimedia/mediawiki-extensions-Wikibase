@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -14,11 +14,11 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescriptionValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 
 	public function __construct(
 		TermValidatorFactory $termValidatorFactory,
-		PropertyRetriever $propertyRetriever
+		PropertyWriteModelRetriever $propertyRetriever
 	) {
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->propertyRetriever = $propertyRetriever;
@@ -58,7 +58,7 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 	}
 
 	private function validateProperty( PropertyId $propertyId, string $language, string $description ): ?ValidationError {
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 
 		// skip if Property does not exist
 		if ( $property === null ) {

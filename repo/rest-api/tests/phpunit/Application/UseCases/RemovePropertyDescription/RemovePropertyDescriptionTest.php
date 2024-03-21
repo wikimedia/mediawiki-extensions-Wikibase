@@ -18,8 +18,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
@@ -36,7 +36,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 	private RemovePropertyDescriptionValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -45,7 +45,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 
@@ -74,7 +74,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 
 		$this->assertEquals(
 			new TermList( [ $descriptionToKeep ] ),
-			$propertyRepo->getProperty( $propertyId )->getDescriptions()
+			$propertyRepo->getPropertyWriteModel( $propertyId )->getDescriptions()
 		);
 		$this->assertEquals(
 			new EditMetadata(

@@ -26,8 +26,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
@@ -44,7 +44,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $validator;
 	private PatchedLabelsValidator $patchedLabelsValidator;
@@ -58,7 +58,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->labelsRetriever->method( 'getLabels' )->willReturn( new Labels() );
 		$this->labelsSerializer = new LabelsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(

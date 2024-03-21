@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -21,7 +21,7 @@ class PatchPropertyLabels {
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $useCaseValidator;
 	private PatchedLabelsValidator $patchedLabelsValidator;
@@ -32,7 +32,7 @@ class PatchPropertyLabels {
 		PropertyLabelsRetriever $labelsRetriever,
 		LabelsSerializer $labelsSerializer,
 		PatchJson $patcher,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		PatchPropertyLabelsValidator $useCaseValidator,
 		PatchedLabelsValidator $patchedLabelsValidator,
@@ -72,7 +72,7 @@ class PatchPropertyLabels {
 			$deserializedRequest->getPatch()
 		);
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$originalLabels = $property->getLabels();
 
 		$modifiedLabelsAsTermList = $this->patchedLabelsValidator->validateAndDeserialize( $propertyId, $originalLabels, $modifiedLabels );

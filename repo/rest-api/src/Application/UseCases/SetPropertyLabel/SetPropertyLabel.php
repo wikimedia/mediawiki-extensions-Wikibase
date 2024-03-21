@@ -7,15 +7,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class SetPropertyLabel {
 
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private SetPropertyLabelValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -23,7 +23,7 @@ class SetPropertyLabel {
 
 	public function __construct(
 		SetPropertyLabelValidator $validator,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized
@@ -47,7 +47,7 @@ class SetPropertyLabel {
 		$this->assertPropertyExists->execute( $propertyId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $editMetadata->getUser() );
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$labelExists = $property->getLabels()->hasTermForLanguage( $label->getLanguageCode() );
 		$property->getLabels()->setTerm( $label );
 

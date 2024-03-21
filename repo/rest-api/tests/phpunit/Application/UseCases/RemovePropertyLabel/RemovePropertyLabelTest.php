@@ -18,8 +18,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
@@ -36,7 +36,7 @@ class RemovePropertyLabelTest extends TestCase {
 	private RemovePropertyLabelValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -45,7 +45,7 @@ class RemovePropertyLabelTest extends TestCase {
 		$this->requestValidator = new TestValidatingRequestDeserializer();
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 
@@ -72,7 +72,7 @@ class RemovePropertyLabelTest extends TestCase {
 		$this->newUseCase()->execute( $request );
 
 		$this->assertEquals(
-			$propertyRepo->getProperty( $propertyId )->getLabels(),
+			$propertyRepo->getPropertyWriteModel( $propertyId )->getLabels(),
 			new TermList( [ $labelToKeep ] )
 		);
 		$this->assertEquals(
@@ -115,8 +115,8 @@ class RemovePropertyLabelTest extends TestCase {
 		$language = 'en';
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
 
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )->willReturn(
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
+		$this->propertyRetriever->method( 'getPropertyWriteModel' )->willReturn(
 			new Property( $propertyId, new Fingerprint(), 'string' )
 		);
 

@@ -25,8 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
@@ -47,7 +47,7 @@ class PatchPropertyAliasesTest extends TestCase {
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
 	private PatchedAliasesValidator $patchedAliasesValidator;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
 	protected function setUp(): void {
@@ -63,7 +63,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}
 

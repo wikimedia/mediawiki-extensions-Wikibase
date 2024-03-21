@@ -25,8 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
@@ -46,7 +46,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private PatchJson $patcher;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator;
 	private PropertyUpdater $propertyUpdater;
 
@@ -60,8 +60,8 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->descriptionsRetriever->method( 'getDescriptions' )->willReturn( new Descriptions() );
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
-		$this->propertyRetriever->method( 'getProperty' )
+		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
+		$this->propertyRetriever->method( 'getPropertyWriteModel' )
 			->willReturn( new Property( null, null, 'string' ) );
 		$this->patchedDescriptionsValidator = $this->createStub( PatchedPropertyDescriptionsValidator::class );
 		$this->patchedDescriptionsValidator->method( 'validateAndDeserialize' )

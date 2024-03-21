@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,7 +24,7 @@ class PatchPropertyDescriptions {
 	private PropertyDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
-	private PropertyRetriever $propertyRetriever;
+	private PropertyWriteModelRetriever $propertyRetriever;
 	private PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator;
 	private PropertyUpdater $propertyUpdater;
 
@@ -35,7 +35,7 @@ class PatchPropertyDescriptions {
 		PropertyDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
-		PropertyRetriever $propertyRetriever,
+		PropertyWriteModelRetriever $propertyRetriever,
 		PatchedPropertyDescriptionsValidator $patchedDescriptionsValidator,
 		PropertyUpdater $propertyUpdater
 	) {
@@ -69,7 +69,7 @@ class PatchPropertyDescriptions {
 			$deserializedRequest->getPatch()
 		);
 
-		$property = $this->propertyRetriever->getProperty( $propertyId );
+		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$originalDescriptions = $property->getDescriptions();
 
 		$modifiedDescriptionsAsTermList = $this->patchedDescriptionsValidator->validateAndDeserialize(
