@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 
 use LogicException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -14,6 +15,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\Deserial
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\DeserializedAddItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\DeserializedAddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\DeserializedAddPropertyStatementRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\DeserializedCreateItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\DeserializedGetItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\DeserializedGetItemAliasesInLanguageRequest;
@@ -109,7 +111,8 @@ class DeserializedRequestAdapter implements
 	DeserializedAddPropertyAliasesInLanguageRequest,
 	DeserializedRemoveSitelinkRequest,
 	DeserializedSetSitelinkRequest,
-	DeserializedPatchSitelinksRequest
+	DeserializedPatchSitelinksRequest,
+	DeserializedCreateItemRequest
 {
 	private array $deserializedRequest;
 
@@ -187,6 +190,10 @@ class DeserializedRequestAdapter implements
 
 	public function getSitelink(): SiteLink {
 		return $this->getRequestField( SitelinkEditRequest::class );
+	}
+
+	public function getItem(): Item {
+		return $this->getRequestField( ItemSerializationRequest::class );
 	}
 
 	/**

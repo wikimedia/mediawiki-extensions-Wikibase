@@ -4,13 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\CreateItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
@@ -19,9 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem
@@ -91,20 +82,7 @@ class CreateItemTest extends TestCase {
 
 	private function newUseCase(): CreateItem {
 		return new CreateItem(
-			new ItemDeserializer(
-				new LabelsDeserializer(),
-				new DescriptionsDeserializer(),
-				new AliasesDeserializer(),
-				new SitelinksDeserializer(
-					new SitelinkDeserializer(
-						'/\?/',
-						[ 'Q123' ],
-						new SameTitleSitelinkTargetResolver(),
-						new DummyItemRevisionMetaDataRetriever()
-					)
-				),
-				$this->createStub( StatementDeserializer::class )
-			),
+			new TestValidatingRequestDeserializer(),
 			$this->itemCreator,
 			$this->assertUserIsAuthorized
 		);

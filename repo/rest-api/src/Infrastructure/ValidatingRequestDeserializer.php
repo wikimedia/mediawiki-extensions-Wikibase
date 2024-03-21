@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEd
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
@@ -27,6 +28,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemA
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguageValidator;
@@ -130,7 +132,8 @@ class ValidatingRequestDeserializer	implements
 	AddPropertyAliasesInLanguageValidator,
 	RemoveSitelinkValidator,
 	SetSitelinkValidator,
-	PatchSitelinksValidator
+	PatchSitelinksValidator,
+	CreateItemValidator
 {
 	private const PREFIX = 'WbRestApi.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
@@ -156,6 +159,7 @@ class ValidatingRequestDeserializer	implements
 	public const PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =
 		self::PREFIX . 'PropertyAliasesInLanguageEditRequestValidatingDeserializer';
 	public const SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'SitelinkEditRequestValidatingDeserializer';
+	public const ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemSerializationRequestValidatingDeserializer';
 
 	private ContainerInterface $serviceContainer;
 	private array $validRequestResults = [];
@@ -196,6 +200,7 @@ class ValidatingRequestDeserializer	implements
 			PropertyDescriptionEditRequest::class => self::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyAliasesInLanguageEditRequest::class => self::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			SitelinkEditRequest::class => self::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
+			ItemSerializationRequest::class => self::ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		$result = [];
 

@@ -12,12 +12,14 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializerFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -28,6 +30,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEd
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
@@ -110,6 +113,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
@@ -325,6 +329,12 @@ return [
 			);
 		},
 
+	VRD::ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
+		function( MediaWikiServices $services ): ItemSerializationRequestValidatingDeserializer {
+			return new ItemSerializationRequestValidatingDeserializer(
+				new ItemValidator( WbRestApi::getItemDeserializer( $services ) )
+			);
+		},
 	// phpcs:enable
 
 	'WbRestApi.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {
@@ -629,6 +639,16 @@ return [
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			),
 			new SitelinksReadModelConverter( $services->getSiteLookup() )
+		);
+	},
+
+	'WbRestApi.ItemDeserializer' => function ( MediaWikiServices $services ) {
+		return new ItemDeserializer(
+			new LabelsDeserializer(),
+			new DescriptionsDeserializer(),
+			new AliasesDeserializer(),
+			new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer() ),
+			WbRestApi::getStatementDeserializer()
 		);
 	},
 

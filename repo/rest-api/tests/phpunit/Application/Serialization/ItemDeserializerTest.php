@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -18,13 +20,16 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\UnexpectedFieldException;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
@@ -74,6 +79,70 @@ class ItemDeserializerTest extends TestCase {
 
 	public function testDeserializeEmptySerialization(): void {
 		$this->assertEquals( new Item(), $this->newDeserializer()->deserialize( [] ) );
+	}
+
+	/**
+	 * @dataProvider invalidSerializationProvider
+	 */
+	public function testDeserializationErrors( SerializationException $expectedException, array $serialization ): void {
+		try {
+			$this->newDeserializer()->deserialize( $serialization );
+			$this->fail( 'Expected exception was not thrown.' );
+		} catch ( Throwable $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
+	}
+
+	public static function invalidSerializationProvider(): Generator {
+		yield 'invalid labels field type (not an array)' => [
+			new InvalidFieldException( 'labels', 'not an array' ),
+			[ 'labels' => 'not an array' ],
+		];
+
+		yield 'invalid labels field type (not an associative array)' => [
+			new InvalidFieldException( 'labels', [ 'not an associative array' ] ),
+			[ 'labels' => [ 'not an associative array' ] ],
+		];
+
+		yield 'invalid descriptions field type (not an array)' => [
+			new InvalidFieldException( 'descriptions', 'not an array' ),
+			[
+				'labels' => [ 'en' => 'English label' ],
+				'descriptions' => 'not an array',
+			],
+		];
+
+		yield 'invalid aliases field type' => [
+			new InvalidFieldException( 'aliases', 'not an array' ),
+			[
+				'labels' => [ 'en' => 'English label' ],
+				'aliases' => 'not an array',
+			],
+		];
+
+		yield 'invalid sitelinks field type' => [
+			new InvalidFieldException( 'sitelinks', 'not an array' ),
+			[
+				'labels' => [ 'en' => 'English label' ],
+				'sitelinks' => 'not an array',
+			],
+		];
+
+		yield 'invalid statements field type' => [
+			new InvalidFieldException( 'statements', 'not an array' ),
+			[
+				'labels' => [ 'en' => 'English label' ],
+				'statements' => 'not an array',
+			],
+		];
+
+		yield 'unexpected field' => [
+			new UnexpectedFieldException( 'foo' ),
+			[
+				'labels' => [ 'en' => 'English label' ],
+				'foo' => 'bar',
+			],
+		];
 	}
 
 	private function newDeserializer(): ItemDeserializer {
