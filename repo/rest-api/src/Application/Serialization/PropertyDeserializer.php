@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -15,18 +14,18 @@ class PropertyDeserializer {
 	private LabelsDeserializer $labelsDeserializer;
 	private DescriptionsDeserializer $descriptionsDeserializer;
 	private AliasesDeserializer $aliasesDeserializer;
-	private StatementDeserializer $statementDeserializer;
+	private StatementsDeserializer $statementsDeserializer;
 
 	public function __construct(
 		LabelsDeserializer $labelsDeserializer,
 		DescriptionsDeserializer $descriptionsDeserializer,
 		AliasesDeserializer $aliasesDeserializer,
-		StatementDeserializer $statementDeserializer
+		StatementsDeserializer $statementsDeserializer
 	) {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->descriptionsDeserializer = $descriptionsDeserializer;
 		$this->aliasesDeserializer = $aliasesDeserializer;
-		$this->statementDeserializer = $statementDeserializer;
+		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
 	/**
@@ -46,23 +45,8 @@ class PropertyDeserializer {
 				$this->aliasesDeserializer->deserialize( (array)( $serialization[ 'aliases' ] ?? [] ) )
 			),
 			$serialization[ 'data-type' ],
-			$this->deserializeStatements( (array)( $serialization[ 'statements' ] ?? [] ) )
+			$this->statementsDeserializer->deserialize( (array)( $serialization[ 'statements' ] ?? [] ) )
 		);
-	}
-
-	/**
-	 * @throws InvalidFieldException
-	 * @throws MissingFieldException
-	 */
-	private function deserializeStatements( array $statementsSerialization ): StatementList {
-		$statementList = [];
-		foreach ( $statementsSerialization as $statementGroups ) {
-			foreach ( $statementGroups as $statement ) {
-				$statementList[] = $this->statementDeserializer->deserialize( $statement );
-			}
-		}
-
-		return new StatementList( ...$statementList );
 	}
 
 }

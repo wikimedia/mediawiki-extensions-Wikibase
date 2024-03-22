@@ -29,6 +29,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\UnexpectedFieldException;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
@@ -164,7 +165,7 @@ class ItemDeserializerTest extends TestCase {
 					new DummyItemRevisionMetaDataRetriever()
 				)
 			),
-			new StatementDeserializer( $propValPairDeserializer, $referenceDeserializer )
+			new StatementsDeserializer( new StatementDeserializer( $propValPairDeserializer, $referenceDeserializer ) )
 		);
 	}
 

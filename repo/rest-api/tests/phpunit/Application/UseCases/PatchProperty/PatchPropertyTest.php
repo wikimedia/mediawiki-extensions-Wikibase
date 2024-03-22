@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
@@ -134,7 +135,9 @@ class PatchPropertyTest extends TestCase {
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer(),
 			new AliasesDeserializer(),
-			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			new StatementsDeserializer(
+				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			)
 		);
 	}
 

@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer
@@ -83,7 +84,9 @@ class PropertyDeserializerTest extends TestCase {
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer(),
 			new AliasesDeserializer(),
-			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			new StatementsDeserializer(
+				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			)
 		);
 	}
 
