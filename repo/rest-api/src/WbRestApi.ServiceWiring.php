@@ -323,7 +323,7 @@ return [
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
 				new SiteLinkConflictLookupSitelinkValidator(
-					WbRestApi::getSitelinkDeserializer(),
+					WbRestApi::getSitelinkDeserializer( $services ),
 					new SqlSiteLinkConflictLookup(
 						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 						WikibaseRepo::getEntityIdComposer( $services )
@@ -658,8 +658,8 @@ return [
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer(),
 			new AliasesDeserializer(),
-			new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer() ),
-			WbRestApi::getStatementDeserializer()
+			new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) ),
+			WbRestApi::getStatementDeserializer( $services )
 		);
 	},
 
@@ -841,7 +841,7 @@ return [
 					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 				) ),
 				new SiteLinkConflictLookupSitelinkValidator(
-					WbRestApi::getSitelinkDeserializer(),
+					WbRestApi::getSitelinkDeserializer( $services ),
 					new SqlSiteLinkConflictLookup(
 						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 						WikibaseRepo::getEntityIdComposer( $services )
