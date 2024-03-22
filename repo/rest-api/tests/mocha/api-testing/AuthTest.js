@@ -14,6 +14,7 @@ const {
 	getPropertyEditRequests,
 	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
+const rbf = require( '../helpers/RequestBuilderFactory' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -25,7 +26,12 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 
 	const editRequests = [
 		...getItemEditRequests( itemRequestInputs ),
-		...getPropertyEditRequests( propertyRequestInputs )
+		...getPropertyEditRequests( propertyRequestInputs ),
+		{ newRequestBuilder: () => rbf.newPatchPropertyRequestBuilder(
+			propertyRequestInputs.propertyId,
+			[]
+		),
+		requestInputs: propertyRequestInputs }
 	];
 	const allRoutes = [
 		...editRequests,
