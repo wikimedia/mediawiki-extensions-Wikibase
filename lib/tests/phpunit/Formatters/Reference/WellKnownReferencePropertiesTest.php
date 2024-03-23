@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 
 /**
- * @covers \Wikibase\Lib\Formatters\Reference\WellKnownReferencePropertiesTest
+ * @covers \Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties
  *
  * @group Wikibase
  *
