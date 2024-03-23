@@ -362,10 +362,10 @@ class DateFormatParser extends StringValueParser {
 		}
 
 		if ( !isset( $matches['year'] )
-			|| isset( $matches['day'] ) && !isset( $matches['month'] )
-			|| isset( $matches['hour'] ) && !isset( $matches['day'] )
-			|| isset( $matches['minute'] ) && !isset( $matches['hour'] )
-			|| isset( $matches['second'] ) && !isset( $matches['minute'] )
+			|| ( isset( $matches['day'] ) && !isset( $matches['month'] ) )
+			|| ( isset( $matches['hour'] ) && !isset( $matches['day'] ) )
+			|| ( isset( $matches['minute'] ) && !isset( $matches['hour'] ) )
+			|| ( isset( $matches['second'] ) && !isset( $matches['minute'] ) )
 		) {
 			throw new ParseException( 'Non-continuous date format', $input, self::FORMAT_NAME );
 		}

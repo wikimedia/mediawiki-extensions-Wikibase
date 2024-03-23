@@ -199,9 +199,9 @@ class MwTimeIsoFormatter implements ValueFormatter {
 
 		[ , $year, $month, $day ] = $matches;
 
-		if ( $year == 0 && $precision < TimeValue::PRECISION_YEAR
-			|| $month == 0 && $precision >= TimeValue::PRECISION_MONTH
-			|| $day == 0 && $precision >= TimeValue::PRECISION_DAY
+		if ( ( $year == 0 && $precision < TimeValue::PRECISION_YEAR )
+			|| ( $month == 0 && $precision >= TimeValue::PRECISION_MONTH )
+			|| ( $day == 0 && $precision >= TimeValue::PRECISION_DAY )
 		) {
 			throw new InvalidArgumentException( 'Time value insufficient for precision.' );
 		}
