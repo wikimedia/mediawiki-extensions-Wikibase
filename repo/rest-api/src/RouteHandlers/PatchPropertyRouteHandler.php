@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -37,10 +38,12 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 
 	private PatchProperty $useCase;
 	private PropertySerializer $serializer;
+	private ResponseFactory $responseFactory;
 
-	public function __construct( PatchProperty $useCase, PropertySerializer $serializer ) {
+	public function __construct( PatchProperty $useCase, PropertySerializer $serializer, ResponseFactory $responseFactory ) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public static function factory(): Handler {
@@ -72,7 +75,8 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 				$descriptionsSerializer,
 				$aliasesSerializer,
 				$statementsSerializer
-			)
+			),
+			new ResponseFactory()
 		);
 	}
 
@@ -80,18 +84,22 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 
-		return $this->newSuccessHttpResponse(
-			$this->useCase->execute(
-				new PatchPropertyRequest(
-					$propertyId,
-					$jsonBody[ self::PATCH_BODY_PARAM ],
-					$jsonBody[ self::TAGS_BODY_PARAM ],
-					$jsonBody[ self::BOT_BODY_PARAM ],
-					$jsonBody[ self::COMMENT_BODY_PARAM ],
-					null
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new PatchPropertyRequest(
+						$propertyId,
+						$jsonBody[self::PATCH_BODY_PARAM],
+						$jsonBody[self::TAGS_BODY_PARAM],
+						$jsonBody[self::BOT_BODY_PARAM],
+						$jsonBody[self::COMMENT_BODY_PARAM],
+						null
+					)
 				)
-			)
-		);
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	private function newSuccessHttpResponse( PatchPropertyResponse $useCaseResponse ): Response {
