@@ -132,6 +132,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Le previe valor esseva correcte ma es ora obsolete.",
 	"wikibase-client-data-bridge-references-heading": "Referentias",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Tu non ha aperite session",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Tu non ha aperite session. Si tu <strong>aperi session</strong> o <strong>crea un conto</strong>, tu modificationes essera attribuite a tu nomine de usator, inter altere beneficios.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Attention:</strong> Tu non ha aperite session. Tu adresse IP essera publicamente visibile si tu face modificationes. Si tu <strong>aperi session</strong> o <strong>crea un conto</strong>, le modificationes essera attribuite a tu nomine de usator, inter altere avantages.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Modificar sin aperir session",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Aperir session o crear conto",
