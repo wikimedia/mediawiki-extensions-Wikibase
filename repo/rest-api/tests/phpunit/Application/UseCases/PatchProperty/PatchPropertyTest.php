@@ -118,6 +118,27 @@ class PatchPropertyTest extends TestCase {
 		}
 	}
 
+	public function testGivenErrorWhilePatch_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new PropertyWriteModel( $propertyId, new Fingerprint(), 'string', null ) );
+
+		$this->propertyRetriever = $propertyRepo;
+
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchJson = $this->createStub( PatchJson::class );
+		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchPropertyRequest( "$propertyId", [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchProperty {
 		return new PatchProperty(
 			$this->validator,
