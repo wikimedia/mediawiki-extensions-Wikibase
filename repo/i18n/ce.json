@@ -116,7 +116,7 @@
 	"wikibase-wikibaserepopage-invalid-langcode": "Йевзаш йоцу меттан код «$1». Дехар-до, лелайе системехь йевзаш йолчарах цхьаъ меттан код, масала «ce».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 дӀасахьажорг.",
 	"special-itembytitle": "Элементаш коьртамогӀомца",
-	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а, коьртамгӀанца а",
+	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а, коьртаца а",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "АгӀо:",
 	"wikibase-itembytitle-submit": "Лахар",

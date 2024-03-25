@@ -6,13 +6,13 @@
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элемент",
 	"wikibase-editlinks": "Ссылкывлӓм тӧрлӓш",
-	"wikibase-linkitem-addlinks": "Ссылкывлӓм приваяш",
+	"wikibase-linkitem-addlinks": "Ссылкывлӓм уштараш",
 	"wikibase-linkitem-title": "Страницӓ доно кӹлдӹмӓш",
 	"wikibase-linkitem-linkpage": "Страницӓ доно кӹлдӹмӓш",
-	"wikibase-linkitem-selectlink": "Пожалуйста, сайт дӓ страницӹм айыры, кыды дон ти страницӹм кӹлдӹнет.",
+	"wikibase-linkitem-selectlink": "Пожалуйста, сайтым дӓ страницӓм айыры, кыды дон ти страницӓм кӹлдӹнет.",
 	"wikibase-linkitem-input-site": "Йӹлмӹ:",
 	"wikibase-linkitem-input-page": "Страницӓ:",
 	"wikibase-rc-hide-wikidata-hide": "Шӹлтӓш",
 	"wikibase-rc-hide-wikidata-show": "Анжыкташ",
-	"wikibase-otherprojects": "Весӹ проектвлӓштӹ"
+	"wikibase-otherprojects": "Вес проектвлӓштӹ"
 }
