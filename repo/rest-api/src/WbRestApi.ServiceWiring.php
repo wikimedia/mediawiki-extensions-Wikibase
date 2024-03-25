@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
@@ -659,7 +660,7 @@ return [
 			new DescriptionsDeserializer(),
 			new AliasesDeserializer(),
 			new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) ),
-			WbRestApi::getStatementDeserializer( $services )
+			new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
 		);
 	},
 

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 
@@ -17,20 +16,20 @@ class ItemDeserializer {
 	private DescriptionsDeserializer $descriptionsDeserializer;
 	private AliasesDeserializer $aliasesDeserializer;
 	private SitelinksDeserializer $sitelinksDeserializer;
-	private StatementDeserializer $statementDeserializer;
+	private StatementsDeserializer $statementsDeserializer;
 
 	public function __construct(
 		LabelsDeserializer $labelsDeserializer,
 		DescriptionsDeserializer $descriptionsDeserializer,
 		AliasesDeserializer $aliasesDeserializer,
 		SitelinksDeserializer $sitelinksDeserializer,
-		StatementDeserializer $statementDeserializer
+		StatementsDeserializer $statementsDeserializer
 	) {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->descriptionsDeserializer = $descriptionsDeserializer;
 		$this->aliasesDeserializer = $aliasesDeserializer;
 		$this->sitelinksDeserializer = $sitelinksDeserializer;
-		$this->statementDeserializer = $statementDeserializer;
+		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
 	/**
@@ -71,14 +70,7 @@ class ItemDeserializer {
 				$this->aliasesDeserializer->deserialize( $serialization['aliases'] )
 			),
 			$this->sitelinksDeserializer->deserialize( $serialization['sitelinks'] ),
-			$this->deserializeStatements( $serialization['statements'] )
-		);
-	}
-
-	private function deserializeStatements( array $statementsSerialization ): StatementList {
-		return new StatementList(
-			...array_map( [ $this->statementDeserializer, 'deserialize' ],
-			array_merge( ...array_values( $statementsSerialization ) ) )
+			$this->statementsDeserializer->deserialize( $serialization['statements'] )
 		);
 	}
 
