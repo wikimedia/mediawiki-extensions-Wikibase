@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Beginneruser",
+			"Ebraminio",
 			"Ladsgroup",
 			"Reza1615",
 			"Rtemis"
@@ -65,7 +66,7 @@
 	"apihelp-wbgetentities-example-6": "موجودیت‌هایی با شناسۀ <samp>Q42</samp> به همه زبان‌های موجود دریافت کن و همه برچسب‌هایشان را نیز نشان بده",
 	"apihelp-wbgetentities-example-7": "موجودیت‌هایی با شناسۀ <samp>P17</samp> و <samp>P3</samp> دریافت کن که فقط نوع داده دارند",
 	"apihelp-wbgetentities-example-8": "موجودیت‌هایی با شناسۀ <samp>Q42</samp> دریافت کن که نام‌های مستعار آن‌ها به زبان انگلیسی نوشته شده باشد",
-	"apihelp-wbgetentities-example-9": "موجودیت‌هایی با شناسۀ <samp>Q1</samp> و <samp>Q42</samp> دریافت کن که توضیحات شان به زبان های انگلیسی، آلمانی و فرانسوی باشد",
+	"apihelp-wbgetentities-example-9": "موجودیت‌هایی با شناسۀ <samp>Q1</samp> و <samp>Q42</samp> دریافت کن که توضیحات شان به زبان‌های انگلیسی، آلمانی و فرانسوی باشد",
 	"apihelp-wbgetentities-example-10": "آیتم مربوط به صفحه «<var>Berlin</var>» را در «<var>enwiki</var>» دریافت کن که خصوصیت‌هایش به زبان انگلیسی باشد",
 	"apihelp-wbgetentities-example-11": "آیتم مربوط به صفحه «<var>Berlin</var>» را در «<var>enwiki</var>» دریافت کن پس از اینکه عنوان را از «<var>berlin</var>» نرمالسازی کردی",
 	"apihelp-wbgetentities-example-12": "پیوندهای مربوط به آیتم <samp>Q42</samp> را دریافت کن",
