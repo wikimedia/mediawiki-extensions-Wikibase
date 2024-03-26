@@ -148,3 +148,7 @@
 .wikibase-entityterms-languagelistview-mul-popup {
 	font-size: 0.875em;
 }
+
+.wikibase-entityterms-languagelistview-mul-popup .oo-ui-fieldLayout-body {
+	margin-bottom: 3px;
+}
