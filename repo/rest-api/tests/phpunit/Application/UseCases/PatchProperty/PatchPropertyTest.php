@@ -22,11 +22,13 @@ use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -50,6 +52,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyReposi
 class PatchPropertyTest extends TestCase {
 
 	private PatchPropertyValidator $validator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PatchJson $patchJson;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
@@ -58,6 +61,7 @@ class PatchPropertyTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
@@ -140,9 +144,30 @@ class PatchPropertyTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$user = 'bad-user';
+		$propertyId = new NumericPropertyId( 'P123' );
+		$request = new PatchPropertyRequest( "$propertyId", [], [], false, null, $user );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'checkEditPermissions' )
+			->with( $propertyId, User::withUsername( $user ) )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchProperty {
 		return new PatchProperty(
 			$this->validator,
+			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,
 			new PropertySerializer(
 				new LabelsSerializer(),

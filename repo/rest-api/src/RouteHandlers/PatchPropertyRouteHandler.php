@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -23,6 +24,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyReques
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -40,14 +44,22 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 	private PatchProperty $useCase;
 	private PropertySerializer $serializer;
 	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( PatchProperty $useCase, PropertySerializer $serializer, ResponseFactory $responseFactory ) {
+	public function __construct(
+		PatchProperty $useCase,
+		PropertySerializer $serializer,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
+	) {
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
 		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
 		$labelsSerializer = new LabelsSerializer();
 		$descriptionsSerializer = new DescriptionsSerializer();
 		$aliasesSerializer = new AliasesSerializer();
@@ -55,6 +67,7 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 		return new self(
 			new PatchProperty(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getPropertyDataRetriever(),
 				new PropertySerializer(
 					$labelsSerializer,
@@ -77,11 +90,22 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 				$aliasesSerializer,
 				$statementsSerializer
 			),
-			new ResponseFactory()
+			$responseFactory,
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware(),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
 		);
 	}
 
-	public function run( string $propertyId ): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
 
@@ -94,7 +118,7 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 						$jsonBody[self::TAGS_BODY_PARAM],
 						$jsonBody[self::BOT_BODY_PARAM],
 						$jsonBody[self::COMMENT_BODY_PARAM],
-						null
+						$this->getUsername()
 					)
 				)
 			);
@@ -157,4 +181,8 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 		] );
 	}
 
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
 }
