@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
@@ -52,6 +53,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyReposi
 class PatchPropertyTest extends TestCase {
 
 	private PatchPropertyValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PatchJson $patchJson;
 	private PropertyRetriever $propertyRetriever;
@@ -61,6 +63,7 @@ class PatchPropertyTest extends TestCase {
 		parent::setUp();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
@@ -123,21 +126,15 @@ class PatchPropertyTest extends TestCase {
 		}
 	}
 
-	public function testGivenErrorWhilePatch_throws(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-
-		$propertyRepo = new InMemoryPropertyRepository();
-		$propertyRepo->addProperty( new PropertyWriteModel( $propertyId, new Fingerprint(), 'string', null ) );
-
-		$this->propertyRetriever = $propertyRepo;
-
+	public function testGivenPropertyNotFound_throws(): void {
+		$request = new PatchPropertyRequest( 'P999999', [], [], false, null, null );
 		$expectedException = $this->createStub( UseCaseError::class );
 
-		$this->patchJson = $this->createStub( PatchJson::class );
-		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
+		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
+		$this->assertPropertyExists->method( 'execute' )->willThrowException( $expectedException );
 
 		try {
-			$this->newUseCase()->execute( new PatchPropertyRequest( "$propertyId", [], [], false, null, null ) );
+			$this->newUseCase()->execute( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedException, $e );
@@ -164,9 +161,31 @@ class PatchPropertyTest extends TestCase {
 		}
 	}
 
+	public function testGivenErrorWhilePatch_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new PropertyWriteModel( $propertyId, new Fingerprint(), 'string', null ) );
+
+		$this->propertyRetriever = $propertyRepo;
+
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchJson = $this->createStub( PatchJson::class );
+		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchPropertyRequest( "$propertyId", [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchProperty {
 		return new PatchProperty(
 			$this->validator,
+			$this->assertPropertyExists,
 			$this->assertUserIsAuthorized,
 			$this->propertyRetriever,
 			new PropertySerializer(
@@ -196,5 +215,4 @@ class PatchPropertyTest extends TestCase {
 			)
 		);
 	}
-
 }

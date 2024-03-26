@@ -67,6 +67,7 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 		return new self(
 			new PatchProperty(
 				WbRestApi::getValidatingRequestDeserializer(),
+				WbRestApi::getAssertPropertyExists(),
 				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getPropertyDataRetriever(),
 				new PropertySerializer(

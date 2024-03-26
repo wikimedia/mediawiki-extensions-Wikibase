@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 class PatchProperty {
 
 	private PatchPropertyValidator $validator;
+	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PropertyRetriever $propertyRetriever;
 	private PropertySerializer $propertySerializer;
@@ -28,6 +30,7 @@ class PatchProperty {
 
 	public function __construct(
 		PatchPropertyValidator $validator,
+		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		PropertyRetriever $propertyRetriever,
 		PropertySerializer $propertySerializer,
@@ -36,6 +39,7 @@ class PatchProperty {
 		PropertyUpdater $propertyUpdater
 	) {
 		$this->validator = $validator;
+		$this->assertPropertyExists = $assertPropertyExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertySerializer = $propertySerializer;
@@ -49,7 +53,10 @@ class PatchProperty {
 	 */
 	public function execute( PatchPropertyRequest $request ): PatchPropertyResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$propertyId = $deserializedRequest->getPropertyId();
 		$providedMetadata = $deserializedRequest->getEditMetadata();
+
+		$this->assertPropertyExists->execute( $propertyId );
 
 		$this->assertUserIsAuthorized->checkEditPermissions(
 			$deserializedRequest->getPropertyId(),
@@ -61,7 +68,7 @@ class PatchProperty {
 				ConvertArrayObjectsToArray::execute(
 					$this->propertySerializer->serialize(
 						// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-						$this->propertyRetriever->getProperty( $deserializedRequest->getPropertyId() )
+						$this->propertyRetriever->getProperty( $propertyId )
 					)
 				),
 				$deserializedRequest->getPatch()
