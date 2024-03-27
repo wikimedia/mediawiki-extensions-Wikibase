@@ -21,6 +21,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * Simple integration test for the {{#property:…}} parser function.
@@ -45,6 +46,8 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		parent::setUp();
 
 		$this->maskPropertyLabelResolver();
+
+		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
 
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );

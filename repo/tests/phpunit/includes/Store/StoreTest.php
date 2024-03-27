@@ -51,7 +51,8 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 					'sharedCacheKeyGroup' => 'testdb',
 					'sharedCacheType' => CACHE_NONE,
 					'sharedCacheDuration' => 60 * 60,
-				] )
+				] ),
+				WikibaseRepo::getPropertyInfoLookup()
 			),
 		];
 

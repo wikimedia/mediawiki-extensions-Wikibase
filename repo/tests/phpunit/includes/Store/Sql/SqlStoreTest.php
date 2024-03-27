@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -73,7 +72,8 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 				'sharedCacheKeyGroup' => 'testdb',
 				'sharedCacheType' => CACHE_NONE,
 				'sharedCacheDuration' => 60 * 60,
-			] )
+			] ),
+			new MockPropertyInfoLookup()
 		);
 	}
 
@@ -121,11 +121,6 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 		$service = $this->newInstance()->getEntityRevisionLookup( $type );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $service );
-	}
-
-	public function testGetPropertyInfoLookup() {
-		$service = $this->newInstance()->getPropertyInfoLookup();
-		$this->assertInstanceOf( PropertyInfoLookup::class, $service );
 	}
 
 	public function testGetPropertyInfoStore() {

@@ -12,6 +12,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
@@ -54,6 +55,8 @@ class StoreTest extends ServiceWiringTestCase {
 				'sharedCacheType' => CACHE_NONE,
 				'sharedCacheDuration' => 60 * 60,
 			] ) );
+		$this->mockService( 'WikibaseRepo.PropertyInfoLookup',
+			$this->createMock( PropertyInfoLookup::class ) );
 
 		$this->assertInstanceOf(
 			SqlStore::class,

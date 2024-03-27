@@ -20,7 +20,6 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -97,9 +96,9 @@ class SqlStore implements Store {
 	private $entityStoreWatcher = null;
 
 	/**
-	 * @var PropertyInfoLookup|null
+	 * @var PropertyInfoLookup
 	 */
-	private $propertyInfoLookup = null;
+	private PropertyInfoLookup $propertyInfoLookup;
 
 	/**
 	 * @var PropertyInfoStore|null
@@ -193,7 +192,8 @@ class SqlStore implements Store {
 		WikibaseServices $wikibaseServices,
 		HookContainer $hookContainer,
 		DatabaseEntitySource $entitySource,
-		SettingsArray $settings
+		SettingsArray $settings,
+		PropertyInfoLookup $propertyInfoLookup
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -210,6 +210,7 @@ class SqlStore implements Store {
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+		$this->propertyInfoLookup = $propertyInfoLookup;
 	}
 
 	/**
@@ -445,35 +446,12 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::getPropertyInfoLookup
+	 * @deprecated use WikibaseRepo::getPropertyInfoLookup instead
 	 *
 	 * @return PropertyInfoLookup
 	 */
-	public function getPropertyInfoLookup() {
-		if ( !$this->propertyInfoLookup ) {
-			$this->propertyInfoLookup = $this->newPropertyInfoLookup();
-		}
-
+	public function getPropertyInfoLookup(): PropertyInfoLookup {
 		return $this->propertyInfoLookup;
-	}
-
-	/**
-	 * @return PropertyInfoLookup
-	 */
-	private function newPropertyInfoLookup() {
-		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
-			$this->wikibaseServices->getPropertyInfoLookup(),
-			MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			$this->cacheKeyGroup,
-			$this->cacheDuration
-		);
-
-		return new CachingPropertyInfoLookup(
-			$wanCachedPropertyInfoLookup,
-			MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-			$this->cacheKeyGroup,
-			$this->cacheDuration
-		);
 	}
 
 	/**

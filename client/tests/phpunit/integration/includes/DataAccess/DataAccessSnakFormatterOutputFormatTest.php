@@ -54,13 +54,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$this->setService( 'WikibaseClient.TermLookup',
 			new EntityRetrievingTermLookup( $store->getEntityLookup() ) );
 
-		$settings = WikibaseClient::getSettings();
-		$siteId = $settings->getSetting( 'siteGlobalID' );
-
-		$settings->setSetting( 'geoShapeStorageBaseUrl', 'https://media.something/view/' );
-		$settings->setSetting( 'tabularDataStorageBaseUrl', 'https://tabular.data/view/' );
-		$settings->setSetting( 'useKartographerMaplinkInWikitext', false );
-		$this->setUpDummyData( $store, $siteId );
+		$this->setUpDummyData( $store, WikibaseClient::getSettings()->getSetting( 'siteGlobalID' ) );
 	}
 
 	private function setUpDummyData( MockClientStore $store, $siteId ) {
@@ -97,7 +91,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$propertyInfoLookup = new MockPropertyInfoLookup( [
 			$p10->getSerialization() => $propertyInfo,
 		] );
-		$store->setPropertyInfoLookup( $propertyInfoLookup );
+		$this->setService( 'WikibaseClient.PropertyInfoLookup', $propertyInfoLookup );
 
 		$item = new Item( new ItemId( 'Q12' ) );
 		$item->setLabel( 'en', 'label [[with]] wikitext' );
@@ -234,6 +228,10 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	 * @dataProvider richWikitextSnakProvider
 	 */
 	public function testRichWikitextOutput( $expected, $snak ) {
+		$settings = WikibaseClient::getSettings();
+		$settings->setSetting( 'geoShapeStorageBaseUrl', 'https://media.something/view/' );
+		$settings->setSetting( 'tabularDataStorageBaseUrl', 'https://tabular.data/view/' );
+
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(

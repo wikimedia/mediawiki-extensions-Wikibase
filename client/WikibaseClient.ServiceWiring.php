@@ -108,6 +108,7 @@ use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -115,6 +116,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -293,7 +295,7 @@ return [
 	'WikibaseClient.DefaultSnakFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseSnakFormatterBuilders {
 		return new WikibaseSnakFormatterBuilders(
 			WikibaseClient::getDefaultValueFormatterBuilders( $services ),
-			WikibaseClient::getStore( $services )->getPropertyInfoLookup(),
+			WikibaseClient::getPropertyInfoLookup( $services ),
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
 			WikibaseClient::getDataTypeFactory( $services )
 		);
@@ -689,13 +691,33 @@ return [
 	},
 
 	'WikibaseClient.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
-		$infoLookup = WikibaseClient::getStore( $services )->getPropertyInfoLookup();
+		$infoLookup = WikibaseClient::getPropertyInfoLookup( $services );
 		$entityLookup = WikibaseClient::getEntityLookup( $services );
 		$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
 			WikibaseClient::getLogger( $services ),
 			$retrievingLookup
+		);
+	},
+
+	'WikibaseClient.PropertyInfoLookup' => function ( MediaWikiServices $services ): PropertyInfoLookup {
+		$settings = WikibaseClient::getSettings( $services );
+		$cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
+		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
+
+		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
+			WikibaseClient::getWikibaseServices( $services )->getPropertyInfoLookup(),
+			$services->getMainWANObjectCache(),
+			$cacheKeyGroup,
+			$cacheDuration
+		);
+
+		return new CachingPropertyInfoLookup(
+			$wanCachedPropertyInfoLookup,
+			$services->getLocalServerObjectCache(),
+			$cacheKeyGroup,
+			$cacheDuration
 		);
 	},
 

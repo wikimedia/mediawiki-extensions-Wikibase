@@ -72,6 +72,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -332,6 +333,11 @@ class WikibaseRepo {
 	public static function getPropertyDataTypeLookup( ContainerInterface $services = null ): PropertyDataTypeLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.PropertyDataTypeLookup' );
+	}
+
+	public static function getPropertyInfoLookup( ContainerInterface $services = null ): PropertyInfoLookup {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyInfoLookup' );
 	}
 
 	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {

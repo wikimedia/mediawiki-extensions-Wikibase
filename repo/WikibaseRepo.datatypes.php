@@ -359,7 +359,7 @@ return call_user_func( function() {
 				DedupeBag $dedupe
 			) {
 				$uriPatternProvider = new FieldPropertyInfoProvider(
-					WikibaseRepo::getStore()->getPropertyInfoLookup(),
+					WikibaseRepo::getPropertyInfoLookup(),
 					PropertyInfoStore::KEY_CANONICAL_URI
 				);
 				return new ExternalIdentifierRdfBuilder( $vocab, $uriPatternProvider );

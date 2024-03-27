@@ -19,10 +19,8 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -42,13 +40,10 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 
 	protected function newStore() {
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
-
 		$wikibaseServices->method( 'getEntityPrefetcher' )
 			->willReturn( new NullEntityPrefetcher() );
 		$wikibaseServices->method( 'getEntityRevisionLookup' )
 			->willReturn( $this->createMock( EntityRevisionLookup::class ) );
-		$wikibaseServices->method( 'getPropertyInfoLookup' )
-			->willReturn( new MockPropertyInfoLookup() );
 
 		return new DirectSqlStore(
 			new ItemIdParser(),
@@ -81,7 +76,6 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 		return [
 			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
 			[ 'getEntityLookup', EntityLookup::class ],
-			[ 'getPropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'getUsageTracker', UsageTracker::class ],
 			[ 'getUsageLookup', UsageLookup::class ],
 			[ 'getEntityIdLookup', EntityIdLookup::class ],
