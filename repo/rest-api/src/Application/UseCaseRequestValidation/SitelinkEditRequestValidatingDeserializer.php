@@ -55,7 +55,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						[ UseCaseError::CONTEXT_BADGE => $badge ]
 					);
 				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-					$badge = $validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
+					$badge = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
 					throw new UseCaseError(
 						UseCaseError::ITEM_NOT_A_BADGE,
 						"Item ID provided as badge is not allowed as a badge: $badge",
@@ -67,7 +67,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						"Page with title {$request->getSitelink()['title']} does not exist on the given site"
 					);
 				case SitelinkValidator::CODE_SITELINK_CONFLICT:
-					$conflictItemId = $validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+					$conflictItemId = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
 					throw new UseCaseError(
 						UseCaseError::SITELINK_CONFLICT,
 						"Sitelink is already being used on $conflictItemId",
