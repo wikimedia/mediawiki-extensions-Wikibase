@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Умар"
+			"Умар",
+			"Исмаил Садуев"
 		]
 	},
 	"wikibase-client-desc": "Wikibase шорйан клиент",
 	"tooltip-t-wikibase": "Йихкина элементан хьажорг хаамийн репозитори",
-	"wikibase-after-page-move": "Викихаамаш чохь [$1 карлайаккха] хьой цӀе хийцина агӀона хьажорг.",
+	"wikibase-after-page-move": "Ахь хийцина цӏе [$1 {{grammar:genitive|{{WBREPONAME}}}} чуьра элементан меттанийн хьажоргаш тӏехь гуш хила йеза]. Хьажа иза кхочушхиллий.",
 	"wikibase-after-page-delete": "ДӀайаккха йеза [$1 кху {{GRAMMAR:genitive|{{WBREPONAME}}}} чуьра] хьажорг.",
 	"wikibase-after-page-delete-queued": "ХӀокхунца йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} элемент] ша карлайаьккина хила мега.",
 	"wikibase-comment-add": "{{grammar:genitive|{{WBREPONAME}}}} элемент кхоьллина.",
