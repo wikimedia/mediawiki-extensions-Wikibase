@@ -9,17 +9,7 @@ const {
 	newGetItemDescriptionRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
@@ -70,7 +60,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( itemId, 'en' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -79,7 +69,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, invalidLanguageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -88,7 +78,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -117,7 +107,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -138,7 +128,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( itemId, 'en', 'test description' )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -147,7 +137,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, languageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'description-not-defined' );
+			assertValidError( response, 404, 'description-not-defined' );
 			assert.include( response.body.message, testItemId );
 			assert.include( response.body.message, languageCode );
 		} );
@@ -161,7 +151,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( redirectSource, 'en', 'test description' )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
