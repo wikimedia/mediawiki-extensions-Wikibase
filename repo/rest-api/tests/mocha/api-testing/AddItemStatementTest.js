@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -160,9 +161,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 		it( 'comment too long', async () => {
@@ -172,9 +171,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -185,9 +182,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -225,9 +220,8 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
-			assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
+			const context = { path: invalidField, value: invalidValue };
+			assertValidError( response, 400, 'statement-data-invalid-field', context );
 			assert.include( response.body.message, invalidField );
 		} );
 
@@ -240,9 +234,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'statement-data-missing-field' );
-			assert.deepEqual( response.body.context, { path: missingField } );
+			assertValidError( response, 400, 'statement-data-missing-field', { path: missingField } );
 			assert.include( response.body.message, missingField );
 		} );
 	} );
@@ -254,9 +246,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 	} );
@@ -266,15 +256,11 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 			const redirectTarget = testItemId;
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 
-			const response = await newAddItemStatementRequestBuilder(
-				redirectSource,
-				testStatement
-			).makeRequest();
+			const response = await newAddItemStatementRequestBuilder( redirectSource, testStatement ).makeRequest();
 
-			expect( response ).to.have.status( 409 );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 	} );
 } );

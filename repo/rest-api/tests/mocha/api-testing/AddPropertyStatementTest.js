@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -21,17 +22,6 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
-	}
-
-	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-		expect( response ).to.have.status( statusCode );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
-		if ( context === null ) {
-			assert.notProperty( response.body, 'context' );
-		} else {
-			assert.deepStrictEqual( response.body.context, context );
-		}
 	}
 
 	before( async () => {
@@ -171,7 +161,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -182,7 +172,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -193,7 +183,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -208,7 +198,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			const context = { path: invalidField, value: invalidValue };
-			assertValidErrorResponse( response, 400, 'statement-data-invalid-field', context );
+			assertValidError( response, 400, 'statement-data-invalid-field', context );
 			assert.include( response.body.message, invalidField );
 		} );
 
@@ -221,7 +211,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'statement-data-missing-field', { path: missingField } );
+			assertValidError( response, 400, 'statement-data-missing-field', { path: missingField } );
 			assert.include( response.body.message, missingField );
 		} );
 	} );
@@ -233,7 +223,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 	} );

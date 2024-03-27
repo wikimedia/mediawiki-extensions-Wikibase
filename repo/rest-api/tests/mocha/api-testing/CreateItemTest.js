@@ -5,6 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
@@ -87,19 +88,13 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		it( 'invalid toplevel field', async () => {
 			const fieldWithInvalidValue = 'labels';
 			const invalidValue = 'not an object';
+			const invalidItem = { [ fieldWithInvalidValue ]: invalidValue };
 
-			const invalidItem = {};
-			invalidItem[ fieldWithInvalidValue ] = invalidValue;
+			const response = await newCreateItemRequestBuilder( invalidItem ).assertInvalidRequest().makeRequest();
 
-			const response = await newCreateItemRequestBuilder( invalidItem )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-data-invalid-field' );
+			const context = { path: fieldWithInvalidValue, value: invalidValue };
+			assertValidError( response, 400, 'item-data-invalid-field', context );
 			assert.include( response.body.message, fieldWithInvalidValue );
-			assert.deepEqual( response.body.context, { path: fieldWithInvalidValue, value: invalidValue } );
 		} );
 
 		it( 'invalid labels list', async () => {
@@ -108,37 +103,24 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-data-invalid-field' );
+			assertValidError( response, 400, 'item-data-invalid-field', { path: 'labels', value: invalidLabels } );
 			assert.include( response.body.message, 'labels' );
-			assert.deepEqual( response.body.context, { path: 'labels', value: invalidLabels } );
 		} );
 
 		it( 'unexpected field', async () => {
 			const unexpectedField = 'foo';
+			const item = { [ unexpectedField ]: 'bar' };
 
-			const item = {};
-			item[ unexpectedField ] = 'bar';
-			const response = await newCreateItemRequestBuilder( item )
-				.assertValidRequest()
-				.makeRequest();
+			const response = await newCreateItemRequestBuilder( item ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'unexpected-field' );
+			assertValidError( response, 400, 'unexpected-field', { field: unexpectedField } );
 			assert.strictEqual( response.body.message, 'The request body contains an unexpected field' );
-			assert.deepEqual( response.body.context, { field: unexpectedField } );
 		} );
 
 		it( 'labels and descriptions missing', async () => {
-			const response = await newCreateItemRequestBuilder( {} )
-				.assertValidRequest()
-				.makeRequest();
+			const response = await newCreateItemRequestBuilder( {} ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'missing-labels-and-descriptions' );
+			assertValidError( response, 400, 'missing-labels-and-descriptions' );
 			assert.strictEqual(
 				response.body.message,
 				'Item requires at least a label or a description in a language'
