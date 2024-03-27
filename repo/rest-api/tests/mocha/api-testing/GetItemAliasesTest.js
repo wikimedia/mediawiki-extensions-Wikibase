@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 	let itemId;
@@ -12,14 +13,8 @@ describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 		const createItemResponse = await createEntity( 'item', {
 			aliases: {
 				en: [
-					{
-						language: 'en',
-						value: 'Douglas Noël Adams'
-					},
-					{
-						language: 'en',
-						value: 'DNA'
-					}
+					{ language: 'en', value: 'Douglas Noël Adams' },
+					{ language: 'en', value: 'DNA' }
 				]
 			}
 		} );
@@ -46,20 +41,17 @@ describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
 	} );
 
 	it( 'responds 404 in case the item does not exist', async () => {
 		const nonExistentItemId = 'Q99999999';
 		const response = await newGetItemAliasesRequestBuilder( nonExistentItemId )
+			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'item-not-found' );
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItemId );
 	} );
 
@@ -72,7 +64,6 @@ describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 308 );
-
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/aliases` )

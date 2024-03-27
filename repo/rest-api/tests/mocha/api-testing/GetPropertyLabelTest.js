@@ -4,6 +4,7 @@ const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
@@ -34,9 +35,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
@@ -46,9 +45,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'label-not-defined' );
+		assertValidError( response, 404, 'label-not-defined' );
 		assert.include( response.body.message, propertyId );
 		assert.include( response.body.message, languageCodeWithNoDefinedLabel );
 	} );
@@ -59,9 +56,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 		assert.include( response.body.message, invalidPropertyId );
 	} );
 
@@ -71,9 +66,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assertValidError( response, 400, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
 	} );
 

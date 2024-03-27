@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
@@ -41,9 +42,7 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 		assert.include( response.body.message, invalidPropertyId );
 	} );
 
@@ -53,9 +52,7 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assertValidError( response, 400, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
 	} );
 
@@ -65,9 +62,7 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
@@ -77,9 +72,7 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'aliases-not-defined' );
+		assertValidError( response, 404, 'aliases-not-defined' );
 		assert.include( response.body.message, languageCode );
 	} );
 } );

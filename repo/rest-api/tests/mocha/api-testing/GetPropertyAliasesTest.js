@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
@@ -25,8 +26,7 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	it( 'can get the aliases of a property', async () => {
 		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
 
-		const response = await newGetPropertyAliasesRequestBuilder( propertyId ).assertValidRequest()
-			.makeRequest();
+		const response = await newGetPropertyAliasesRequestBuilder( propertyId ).assertValidRequest().makeRequest();
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, { en: [ 'en-alias1', 'en-alias2' ] } );
@@ -40,9 +40,7 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
@@ -52,9 +50,7 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 		assert.include( response.body.message, invalidPropertyId );
 	} );
 

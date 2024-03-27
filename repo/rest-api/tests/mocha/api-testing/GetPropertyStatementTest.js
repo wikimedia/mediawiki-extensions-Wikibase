@@ -8,6 +8,7 @@ const {
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( 'GET statement', () => {
 	let testPropertyId;
@@ -23,17 +24,6 @@ describe( 'GET statement', () => {
 		assert.equal( response.body.id, statement.id );
 		assert.equal( response.header[ 'last-modified' ], testLastModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-	}
-
-	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-		expect( response ).to.have.status( statusCode );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
-		if ( context === null ) {
-			assert.notProperty( response.body, 'context' );
-		} else {
-			assert.deepStrictEqual( response.body.context, context );
-		}
 	}
 
 	before( async () => {
@@ -85,7 +75,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -95,7 +85,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -107,7 +97,7 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 404, 'statement-not-found' );
+					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -122,7 +112,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -133,7 +123,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': subjectId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': subjectId } );
 			assert.include( response.body.message, subjectId );
 		} );
 
@@ -143,7 +133,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -155,7 +145,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -166,7 +156,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -177,7 +167,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -188,18 +178,17 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 
 		it( 'responds statement-not-found if property and statement exist, but do not match', async () => {
 			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-			const response = await newGetPropertyStatementRequestBuilder(
-				requestedPropertyId,
-				testStatement.id
-			).assertValidRequest().makeRequest();
+			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, testStatement.id )
+				.assertValidRequest()
+				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, testStatement.id );
 		} );
 
@@ -210,7 +199,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );
@@ -222,7 +211,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );

@@ -12,6 +12,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
@@ -87,9 +88,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, itemId );
 	} );
 
@@ -100,9 +99,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 		assert.include( response.body.message, propertyId );
 	} );
 
@@ -112,9 +109,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'item-not-found' );
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, itemId );
 	} );
 
@@ -127,7 +122,6 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 308 );
-
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/statements` )

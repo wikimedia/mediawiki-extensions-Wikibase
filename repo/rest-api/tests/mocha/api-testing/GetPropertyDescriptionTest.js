@@ -5,6 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { utils } = require( 'api-testing' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
@@ -39,9 +40,7 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
@@ -50,9 +49,8 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		const response = await newGetPropertyDescriptionRequestBuilder( propertyId, languageCode )
 			.assertValidRequest()
 			.makeRequest();
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'description-not-defined' );
+
+		assertValidError( response, 404, 'description-not-defined' );
 		assert.include( response.body.message, languageCode );
 	} );
 
@@ -62,9 +60,7 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 		assert.include( response.body.message, invalidPropertyId );
 	} );
 
@@ -74,9 +70,7 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assertValidError( response, 400, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
 	} );
 } );
