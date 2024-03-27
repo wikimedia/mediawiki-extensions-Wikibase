@@ -7,17 +7,7 @@ const { newPatchPropertyDescriptionsRequestBuilder } = require( '../helpers/Requ
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -108,7 +98,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( propertyId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -119,7 +109,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -148,7 +138,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -168,18 +158,10 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const propertyId = 'P99999';
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				propertyId,
-				[
-					{
-						op: 'replace',
-						path: '/en',
-						value: utils.uniq()
-					}
-				]
+				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
 			).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 	} );
@@ -191,12 +173,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{ field: 'path', operation: operation }
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
 		} );
 
@@ -206,12 +183,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{ field: 'from', operation: operation }
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
 		} );
 
@@ -220,12 +192,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-test-failed',
-				{ operation: operation, 'actual-value': testEnDescription }
-			);
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnDescription } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testEnDescription );
@@ -240,20 +207,16 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 
 		it( 'invalid description', async () => {
+			const language = 'en';
 			const invalidDescription = 'tab characters \t not allowed';
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-invalid',
-				{ language: 'en', value: invalidDescription }
-			);
+			assertValidError( response, 422, 'patched-description-invalid', { language, value: invalidDescription } );
 			assert.include( response.body.message, invalidDescription );
-			assert.include( response.body.message, "'en'" );
+			assert.include( response.body.message, `'${language}'` );
 		} );
 
 		it( 'invalid description type', async () => {
@@ -263,7 +226,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
+			assertValidError(
 				response,
 				422,
 				'patched-description-invalid',
@@ -279,12 +242,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-empty',
-				{ language: 'en' }
-			);
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
 		} );
 
 		it( 'empty description after trimming whitespace in the input', async () => {
@@ -293,12 +251,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-empty',
-				{ language: 'en' }
-			);
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
 		} );
 
 		it( 'description too long', async () => {
@@ -311,7 +264,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
+			assertValidError(
 				response,
 				422,
 				'patched-description-too-long',
@@ -324,19 +277,14 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguage = 'invalid-language-code';
+			const language = 'invalid-language-code';
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
+				[ { op: 'add', path: `/${language}`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-descriptions-invalid-language-code',
-				{ language: invalidLanguage }
-			);
-			assert.include( response.body.message, invalidLanguage );
+			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
 		} );
 
 		it( 'patched-property-label-description-same-value', async () => {
@@ -345,12 +293,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( testEnLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-property-label-description-same-value',
-				{ language: 'en' }
-			);
+			assertValidError( response, 422, 'patched-property-label-description-same-value', { language: 'en' } );
 			assert.strictEqual(
 				response.body.message,
 				'Label and description for language code en can not have the same value.'

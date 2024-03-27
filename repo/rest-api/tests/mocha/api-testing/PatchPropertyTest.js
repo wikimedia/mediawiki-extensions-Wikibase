@@ -6,17 +6,7 @@ const { newPatchPropertyRequestBuilder } = require( '../helpers/RequestBuilderFa
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
@@ -93,7 +83,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( propertyId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -104,7 +94,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -113,7 +103,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -155,9 +145,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( propertyId, [] )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -171,7 +159,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'path', operation } );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
 		} );
 
@@ -181,7 +169,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'from', operation } );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
 		} );
 
@@ -190,16 +178,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-test-failed',
-				{
-					operation: operation,
-					'actual-value': testEnglishLabel
-				}
-			);
-
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnglishLabel } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testEnglishLabel );

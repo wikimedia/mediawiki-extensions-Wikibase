@@ -7,17 +7,7 @@ const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -111,7 +101,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			const response = await newPatchItemDescriptionsRequestBuilder( itemId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -122,7 +112,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			const response = await newPatchItemDescriptionsRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -151,7 +141,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			const response = await newPatchItemDescriptionsRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -191,7 +181,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -203,15 +193,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{
-					field: 'path',
-					operation: operation
-				}
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
 		} );
 
@@ -222,15 +204,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{
-					field: 'from',
-					operation: operation
-				}
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
 		} );
 
@@ -240,15 +214,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-test-failed',
-				{
-					operation: operation,
-					'actual-value': testDescription
-				}
-			);
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testDescription } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testDescription );
@@ -269,12 +235,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-invalid',
-				{ language: testLanguage, value: invalidDescription }
-			);
+			const context = { language: testLanguage, value: invalidDescription };
+			assertValidError( response, 422, 'patched-description-invalid', context );
 			assert.include( response.body.message, invalidDescription );
 			assert.include( response.body.message, `'${testLanguage}'` );
 		} );
@@ -286,12 +248,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-invalid',
-				{ language: testLanguage, value: JSON.stringify( invalidDescription ) }
-			);
+			const context = { language: testLanguage, value: JSON.stringify( invalidDescription ) };
+			assertValidError( response, 422, 'patched-description-invalid', context );
 			assert.include( response.body.message, JSON.stringify( invalidDescription ) );
 			assert.include( response.body.message, `'${testLanguage}'` );
 		} );
@@ -302,12 +260,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-empty',
-				{ language: testLanguage }
-			);
+			assertValidError( response, 422, 'patched-description-empty', { language: testLanguage } );
 		} );
 
 		it( 'empty description after trimming whitespace in the input', async () => {
@@ -316,12 +269,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-empty',
-				{ language: testLanguage }
-			);
+			assertValidError( response, 422, 'patched-description-empty', { language: testLanguage } );
 		} );
 
 		it( 'description too long', async () => {
@@ -334,12 +282,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-description-too-long',
-				{ value: tooLongDescription, 'character-limit': maxLength, language: testLanguage }
-			);
+			const context = { value: tooLongDescription, 'character-limit': maxLength, language: testLanguage };
+			assertValidError( response, 422, 'patched-description-too-long', context );
 			assert.strictEqual(
 				response.body.message,
 				`Changed description for '${testLanguage}' must not be more than ${maxLength} characters long`
@@ -347,19 +291,14 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguage = 'invalid-language-code';
+			const language = 'invalid-language-code';
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
+				[ { op: 'add', path: `/${language}`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-descriptions-invalid-language-code',
-				{ language: invalidLanguage }
-			);
-			assert.include( response.body.message, invalidLanguage );
+			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
 		} );
 
 		it( 'patched label and description already exists in a different item', async () => {
@@ -379,12 +318,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: `/${testLanguage}`, value: description } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-item-label-description-duplicate',
-				{ language: testLanguage, label: label, description: description, 'matching-item-id': existingItemId }
-			);
+			const context = { language: testLanguage, label, description, 'matching-item-id': existingItemId };
+			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
 			assert.include( response.body.message, existingItemId );
 			assert.include( response.body.message, description );
 			assert.include( response.body.message, testLanguage );
@@ -396,12 +331,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( testLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-item-label-description-same-value',
-				{ language: testLanguage }
-			);
+			assertValidError( response, 422, 'patched-item-label-description-same-value', { language: testLanguage } );
 			assert.strictEqual(
 				response.body.message,
 				`Label and description for language code ${testLanguage} can not have the same value.`
