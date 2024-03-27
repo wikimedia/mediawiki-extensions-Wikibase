@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newSetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -27,11 +28,6 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	function assertValid201Response( response, labelText ) {
 		expect( response ).to.have.status( 201 );
 		assertValidResponse( response, labelText );
-	}
-
-	function assertValidErrorResponse( response, responseBodyErrorCode ) {
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
 	}
 
 	before( async () => {
@@ -191,8 +187,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'invalid-property-id' );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -202,8 +197,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -213,8 +207,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'invalid-label' );
+			assertValidError( response, 400, 'invalid-label' );
 			assert.include( response.body.message, invalidLabel );
 		} );
 
@@ -226,33 +219,23 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'label-empty' );
+			assertValidError( response, 400, 'label-empty' );
 			assert.strictEqual( response.body.message, 'Label must not be empty' );
 		} );
 
 		it( 'label too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
-			const maxLabelLength = 250;
-			const labelTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const limit = 250;
+			const labelTooLong = 'x'.repeat( limit + 1 );
 			const comment = 'Label too long';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, 'en', labelTooLong )
 				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'label-too-long' );
-			assert.strictEqual(
-				response.body.message,
-				`Label must be no more than ${maxLabelLength} characters long`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{ value: labelTooLong, 'character-limit': maxLabelLength }
-			);
-
+			assertValidError( response, 400, 'label-too-long', { value: labelTooLong, 'character-limit': limit } );
+			assert.strictEqual( response.body.message, `Label must be no more than ${limit} characters long` );
 		} );
 
 		it( 'label equals description', async () => {
@@ -266,21 +249,16 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			testPropertyId = createEntityResponse.entity.id;
 
 			const comment = 'Label equals description';
-			const response = await newSetPropertyLabelRequestBuilder(
-				testPropertyId,
-				language,
-				description
-			).withJsonBodyParam( 'comment', comment )
+			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, language, description )
+				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'label-description-same-value' );
+			assertValidError( response, 400, 'label-description-same-value', { language } );
 			assert.strictEqual(
 				response.body.message,
 				`Label and description for language code '${language}' can not have the same value.`
 			);
-			assert.deepEqual( response.body.context, { language: language } );
 		} );
 
 		it( 'property with same label already exists', async () => {
@@ -299,20 +277,13 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
 				.assertValidRequest().makeRequest();
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'property-label-duplicate' );
+
+			const context = { language: languageCode, label: label, 'matching-property-id': existingPropertyId };
+			assertValidError( response, 400, 'property-label-duplicate', context );
 			assert.strictEqual(
 				response.body.message,
 				`Property ${existingPropertyId} already has label '${label}' associated with ` +
 				`language code '${languageCode}'`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{
-					language: languageCode,
-					label: label,
-					'matching-property-id': existingPropertyId
-				}
 			);
 		} );
 
@@ -323,8 +294,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -335,8 +305,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assertValidErrorResponse( response, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -360,8 +329,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assertValidErrorResponse( response, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 	} );

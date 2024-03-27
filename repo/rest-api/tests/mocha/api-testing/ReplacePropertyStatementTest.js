@@ -10,18 +10,7 @@ const {
 	newGetPropertyStatementsRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-
-function assertValid400Response( response, responseBodyErrorCode ) {
-	expect( response ).to.have.status( 400 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
-
-function assertValid404Response( response, responseBodyErrorCode ) {
-	expect( response ).to.have.status( 404 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( 'PUT statement tests', () => {
 	let testPropertyId;
@@ -202,7 +191,7 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -217,7 +206,7 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -233,7 +222,7 @@ describe( 'PUT statement tests', () => {
 					).withJsonBodyParam( 'comment', comment )
 						.assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'comment-too-long' );
+					assertValidError( response, 400, 'comment-too-long' );
 					assert.include( response.body.message, '500' );
 				} );
 
@@ -248,7 +237,7 @@ describe( 'PUT statement tests', () => {
 						newStatementData
 					).assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-operation-change-statement-id' );
+					assertValidError( response, 400, 'invalid-operation-change-statement-id' );
 				} );
 
 				it( 'invalid operation - new statement has a different Property ID', async () => {
@@ -262,7 +251,7 @@ describe( 'PUT statement tests', () => {
 						entityHelper.newStatementWithRandomStringValue( differentPropertyId )
 					).assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-operation-change-property-of-statement' );
+					assertValidError( response, 400, 'invalid-operation-change-property-of-statement' );
 				} );
 
 				it( 'invalid edit tag', async () => {
@@ -277,7 +266,7 @@ describe( 'PUT statement tests', () => {
 					).withJsonBodyParam( 'tags', [ invalidEditTag ] )
 						.assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-edit-tag' );
+					assertValidError( response, 400, 'invalid-edit-tag' );
 					assert.include( response.body.message, invalidEditTag );
 				} );
 
@@ -417,7 +406,7 @@ describe( 'PUT statement tests', () => {
 				statementSerialization
 			).assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-property-id' );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -430,7 +419,7 @@ describe( 'PUT statement tests', () => {
 				) )
 				.assertValidRequest().makeRequest();
 
-			assertValid404Response( response, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -445,7 +434,7 @@ describe( 'PUT statement tests', () => {
 			const response = await newReplaceStatementRequestBuilder( statementId, statementSerialization )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-statement-id' );
+			assertValidError( response, 400, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -457,7 +446,7 @@ describe( 'PUT statement tests', () => {
 				) )
 				.assertValidRequest().makeRequest();
 
-			assertValid404Response( response, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );
