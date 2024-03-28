@@ -12,7 +12,7 @@
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "پشتیبانی از مقادیر «$1» فعلاً امکان‌پذیر نیست.",
-	"valueview-expert-unsupportedvalue-unsupporteddatatype": "پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده‌است.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "پشتیبانی از مقدار نوع دادهٔ «$1» هنوز پشتیبانی نشده است.",
 	"valueview-expert-emptyvalue-empty": "خالی",
 	"valueview-expert-globecoordinateinput-precision": "دقت:",
 	"valueview-expert-globecoordinateinput-nullprecision": "مشخص‌نشده",

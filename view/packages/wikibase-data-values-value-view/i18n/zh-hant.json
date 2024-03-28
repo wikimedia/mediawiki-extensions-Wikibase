@@ -7,6 +7,7 @@
 			"Simon Shek",
 			"Stevenliuyi",
 			"Wehwei",
+			"Winston Sung",
 			"Xiplus"
 		]
 	},
@@ -43,7 +44,7 @@
 	"valueview-expert-timeinput-calendar": "日曆：",
 	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）",
 	"valueview-expertextender-languageselector-label": "語言（必填）：",
-	"valueview-expertextender-unitsuggester-label": "單位（可選）",
+	"valueview-expertextender-unitsuggester-label": "單位（非必填）：",
 	"valueview-preview-label": "將顯示為：",
 	"valueview-preview-novalue": "無法識別",
 	"valueview-listrotator-manually": "手動設定"
