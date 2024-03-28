@@ -23,7 +23,9 @@ class EntitySourceDocumentUrlProviderTest extends MediaWikiUnitTestCase {
 		$interwiki = '';
 		$sources = $this->makeEntitySourceDefinitions( $interwiki );
 
-		$titleFactory = $this->makeTitleFactory( NS_SPECIAL, 'EntityData', $interwiki );
+		// NOTE: Require the unlocalized title 'Special:EntityData' even for
+		//       local pages (T263427).
+		$titleFactory = $this->makeTitleFactory( NS_MAIN, 'Special:EntityData', $interwiki );
 		$urlProvider = new EntitySourceDocumentUrlProvider( $titleFactory );
 
 		$this->assertEquals(
