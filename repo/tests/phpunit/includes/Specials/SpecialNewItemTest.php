@@ -356,7 +356,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			'anon' => [ 1, 60 ],
 			'user' => [ 1, 60 ],
 		] ] );
-		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
 
 		$formData = [
 			SpecialNewItem::FIELD_LANG => 'en',
