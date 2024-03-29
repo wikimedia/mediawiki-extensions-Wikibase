@@ -147,6 +147,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookup
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\ItemDeserializerItemValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
@@ -437,7 +438,8 @@ return [
 			WikibaseRepo::getLogger( $services ),
 			new EditSummaryFormatter(
 				WikibaseRepo::getSummaryFormatter( $services ),
-				new TermsEditSummaryToFormattableSummaryConverter()
+				new TermsEditSummaryToFormattableSummaryConverter(),
+				new FullEntityEditSummaryToFormattableSummaryConverter()
 			),
 			$services->getPermissionManager(),
 			WikibaseRepo::getEntityStore( $services ),

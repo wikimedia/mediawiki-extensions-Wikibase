@@ -17,10 +17,12 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -45,7 +47,8 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	public function testFormat( EditSummary $editSummary, string $formattedSummary ): void {
 		$editSummaryFormatter = new EditSummaryFormatter(
 			WikibaseRepo::getSummaryFormatter(),
-			new TermsEditSummaryToFormattableSummaryConverter()
+			new TermsEditSummaryToFormattableSummaryConverter(),
+			new FullEntityEditSummaryToFormattableSummaryConverter()
 		);
 		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
@@ -216,12 +219,13 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function testGivenLabelsEditSummary_usesEditSummaryConverter(): void {
 		$labelsEditSummary = $this->createStub( LabelsEditSummary::class );
+		$editSummaryConvertor = $this->createStub( FullEntityEditSummaryToFormattableSummaryConverter::class );
 		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
 		$converter->expects( $this->once() )
 			->method( 'convertLabelsEditSummary' )
 			->with( $labelsEditSummary )
 			->willReturn( new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] ) );
-		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter );
+		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter, $editSummaryConvertor );
 		$this->assertSame(
 			'/* wbeditentity-update-languages-short:0||de, en */',
 			$editSummaryFormatter->format( $labelsEditSummary )
@@ -230,15 +234,31 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function testGivenDescriptionsEditSummary_usesEditSummaryConverter(): void {
 		$descriptionsEditSummary = $this->createStub( DescriptionsEditSummary::class );
+		$editSummaryConvertor = $this->createStub( FullEntityEditSummaryToFormattableSummaryConverter::class );
 		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
 		$converter->expects( $this->once() )
 			->method( 'convertDescriptionsEditSummary' )
 			->with( $descriptionsEditSummary )
 			->willReturn( new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] ) );
-		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter );
+		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter, $editSummaryConvertor );
 		$this->assertSame(
 			'/* wbeditentity-update-languages-short:0||de, en */',
 			$editSummaryFormatter->format( $descriptionsEditSummary )
+		);
+	}
+
+	public function testPropertyEditSummary_usesEditSummaryConverter(): void {
+		$propertyEditSummary = $this->createStub( PropertyEditSummary::class );
+		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConvertor = $this->createMock( FullEntityEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConvertor->expects( $this->once() )
+			->method( 'newSummaryForPropertyEdit' )
+			->with( $propertyEditSummary )
+			->willReturn( new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] ) );
+		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter, $editSummaryConvertor );
+		$this->assertSame(
+			'/* wbeditentity-update-languages-short:0||de, en */',
+			$editSummaryFormatter->format( $propertyEditSummary )
 		);
 	}
 

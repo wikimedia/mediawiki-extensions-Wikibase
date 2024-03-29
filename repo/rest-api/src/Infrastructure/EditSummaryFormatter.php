@@ -26,14 +26,17 @@ use Wikibase\Repo\SummaryFormatter;
 class EditSummaryFormatter {
 
 	private SummaryFormatter $summaryFormatter;
-	private TermsEditSummaryToFormattableSummaryConverter $summaryConverter;
+	private TermsEditSummaryToFormattableSummaryConverter $termsEditSummaryConverter;
+	private FullEntityEditSummaryToFormattableSummaryConverter $fullEntityEditSummaryConverter;
 
 	public function __construct(
 		SummaryFormatter $summaryFormatter,
-		TermsEditSummaryToFormattableSummaryConverter $summaryConverter
+		TermsEditSummaryToFormattableSummaryConverter $termsEditSummaryConverter,
+		FullEntityEditSummaryToFormattableSummaryConverter $fullEntityEditSummaryConverter
 	) {
 		$this->summaryFormatter = $summaryFormatter;
-		$this->summaryConverter = $summaryConverter;
+		$this->termsEditSummaryConverter = $termsEditSummaryConverter;
+		$this->fullEntityEditSummaryConverter = $fullEntityEditSummaryConverter;
 	}
 
 	public function format( EditSummary $summary ): string {
@@ -45,9 +48,9 @@ class EditSummaryFormatter {
 	// phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof PropertyEditSummary ) {
-			return new Summary();
+			return $this->fullEntityEditSummaryConverter->newSummaryForPropertyEdit( $editSummary );
 		} elseif ( $editSummary instanceof LabelsEditSummary ) {
-			return $this->summaryConverter->convertLabelsEditSummary( $editSummary );
+			return $this->termsEditSummaryConverter->convertLabelsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof LabelEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -58,7 +61,7 @@ class EditSummaryFormatter {
 					return $this->newSummaryForLabelEdit( $editSummary, 'remove' );
 			}
 		} elseif ( $editSummary instanceof DescriptionsEditSummary ) {
-			return $this->summaryConverter->convertDescriptionsEditSummary( $editSummary );
+			return $this->termsEditSummaryConverter->convertDescriptionsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof DescriptionEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
@@ -69,7 +72,7 @@ class EditSummaryFormatter {
 					return $this->newSummaryForDescriptionEdit( $editSummary, 'remove' );
 			}
 		} elseif ( $editSummary instanceof AliasesEditSummary ) {
-			return $this->summaryConverter->convertAliasesEditSummary( $editSummary );
+			return $this->termsEditSummaryConverter->convertAliasesEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof AliasesInLanguageEditSummary ) {
 			return $this->newSummaryForAliasesInLanguageEdit( $editSummary );
 		} elseif ( $editSummary instanceof StatementEditSummary ) {
