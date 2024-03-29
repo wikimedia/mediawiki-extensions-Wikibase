@@ -7,12 +7,12 @@
 		]
 	},
 	"wikibase-client-desc": "ვიკიბაზაშ გოძინაშ კლიენტი",
-	"tooltip-t-wikibase": "მუნაჩემეფიშ ოჩუაშეშა მერსხილი ელემენტიშ რსხი",
+	"tooltip-t-wikibase": "მუნაჩემეფიშ ოჩუაშეშა მერსხილი ელემენტიშ რცხი",
 	"wikibase-comment-linked": "ვიკიმუნაჩემეფიშ ელემენტიქ ქემიარსხჷ ათე ხასჷლას.",
 	"wikibase-comment-update": "{{WBREPONAME}} ელემენტი თირელი რე",
 	"wikibase-comment-sitelink-add": "ნინაშ რსხი გეძინელი რე: $1",
 	"wikibase-comment-sitelink-change": "ნინაშ რსხი თირელი რე $1-შე $2-შა",
-	"wikibase-comment-sitelink-remove": "ნინაშ რსხი ლასირი რე: $1",
+	"wikibase-comment-sitelink-remove": "ნინაშ რცხი ლასირი რე: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|თირუა}}",
 	"wikibase-dataitem": "{{WBREPONAME}}-შ ელემენტი",
 	"wikibase-editlinks": "რსხილეფიშ რედაქტირაფა",
@@ -38,6 +38,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} რედაქტირაფა",
 	"wikibase-unconnectedpages-submit": "ხასჷლეფიშ ძირაფა",
 	"wikibase-pageswithbadges-submit": "ხასჷლეფიშ ძირაფა",
+	"wikibase-entityusage-submit": "ხასჷლეფიშ ძირაფა",
 	"wikibase-pageinfo-entity-id-none": "მუთუნ ვარი",
 	"wikibase-pageinfo-description-local": "ლოკალური ეჭარუა",
 	"wikibase-pageinfo-description-central": "ცენტრალური ეჭარუა",
@@ -49,6 +50,12 @@
 	"wikibase-sitelinks-sitename-columnheading": "ნინა",
 	"wikibase-sitelinks-link-columnheading": "მერსხილი ხასჷლა",
 	"echo-pref-tooltip-wikibase-action": "ქუგმოგებაფეთ, მუჟანსჷთ {{GENDER:|ჩქიმ გჷნაჭყა}} ხასჷლას მითინ {{WBREPONAME}}შ ელემენტის ქემურსხუანსჷნ.",
+	"wikibase-client-data-bridge-references-heading": "სქოლიო",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "თქვა ვარეთ მიშულირი",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "მიშულა ვარ-და რეგისტრირაფა",
+	"wikibase-client-data-bridge-license-heading": "გჷმორინაფა დო ლიცენზია",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "მეგორაფილი რე კონფლიქტურ რედაქტირაფაშა",
+	"wikibase-client-data-bridge-unknown-error-heading": "უი. მუდგაინ ჩილათაქ ქჷმოხვადუ!",
 	"wikibase-client-data-bridge-error-reload-bridge": "ხეახალშო ინოხარგუა",
 	"wikibase-client-data-bridge-error-reload-page": "ხასჷლაშ ხეახალშო ინოხარგუა",
 	"wikibase-client-data-bridge-error-go-back": "უკახალე დორთინა",
@@ -57,5 +64,5 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "გჷმობჟინაფა მიშულაშ უმუშო",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "ჩუალა მიშულაშ უმუშო",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "მიშულა (გინწყუმუ ახალი დიალოგური ოსინთე)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "გაგჷნძორით რედაქტირაფა"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "რედაქტირაფაშ გაგჷნძორება"
 }
