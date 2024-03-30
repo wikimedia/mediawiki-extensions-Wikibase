@@ -11,7 +11,6 @@ use MediaWiki\User\TempUser\CreateStatus;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use ObjectCache;
 use ReflectionMethod;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityId;
@@ -559,11 +558,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 				'*' => [ 'edit' => true ],
 				'sysop' => [ 'noratelimit' => true ],
 			],
-			// make sure we have a working cache
-			'wgMainCacheType' => 'hash',
 		] );
-		// make sure we have a fresh cache
-		ObjectCache::clear();
 
 		$user = $this->getTestUser( $groups )->getUser();
 
@@ -592,9 +587,6 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT_ERROR ) );
 		}
-
-		// make sure nobody else has to work with our cache
-		ObjectCache::clear();
 	}
 
 	public static function provideIsTokenOk(): iterable {

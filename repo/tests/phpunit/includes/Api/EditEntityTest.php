@@ -1329,7 +1329,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'anon' => [ 1, 60 ],
 			'user' => [ 1, 60 ],
 		] ] );
-		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
 
 		$params = [
 			'action' => 'wbeditentity',
