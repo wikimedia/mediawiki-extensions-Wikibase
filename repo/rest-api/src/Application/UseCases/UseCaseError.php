@@ -153,7 +153,7 @@ class UseCaseError extends UseCaseException {
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_EMPTY => [],
 		self::LABEL_NOT_DEFINED => [],
-		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
+		self::LABEL_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::MISSING_LABELS_AND_DESCRIPTIONS => [],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
@@ -225,6 +225,8 @@ class UseCaseError extends UseCaseException {
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
+		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
+		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 	];
 
 	private string $errorCode;

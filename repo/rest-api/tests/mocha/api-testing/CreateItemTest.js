@@ -11,7 +11,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 	describe( '201 success response ', () => {
 		it( 'can create a minimal item', async () => {
-			const item = { labels: { en: 'hello world' } };
+			const item = { labels: { en: `hello world ${utils.uniq()}` } };
 			const response = await newCreateItemRequestBuilder( item )
 				.assertValidRequest()
 				.makeRequest();
@@ -26,8 +26,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can create an item with all fields', async () => {
-			const labels = { en: 'potato' };
-			const descriptions = { en: 'root vegetable' };
+			const labels = { en: `potato ${utils.uniq()}` };
+			const descriptions = { en: `root vegetable ${utils.uniq()}` };
 			const aliases = { en: [ 'spud', 'tater' ] };
 
 			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
@@ -64,7 +64,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
 			const editSummary = 'omg look i made an edit';
 
-			const response = await newCreateItemRequestBuilder( { labels: { en: 'test' } } )
+			const response = await newCreateItemRequestBuilder( { labels: { en: `test ${utils.uniq()}` } } )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
@@ -117,6 +117,66 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'The request body contains an unexpected field' );
 		} );
 
+		it( 'invalid label language code', async () => {
+			const response = await newCreateItemRequestBuilder( { labels: { xyz: 'label' } } )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'invalid-language-code',
+				{ path: 'label', language: 'xyz' }
+			);
+			assert.include( response.body.message, 'xyz' );
+		} );
+
+		it( 'invalid label', async () => {
+			const invalidLabel = 'tab characters \t not allowed';
+			const response = await newCreateItemRequestBuilder( { labels: { en: invalidLabel } } )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-label', { language: 'en' } );
+			assert.include( response.body.message, invalidLabel );
+		} );
+
+		it( 'empty label', async () => {
+			const comment = 'Empty label';
+			const emptyLabel = '';
+			const response = await newCreateItemRequestBuilder( { labels: { en: emptyLabel } } )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'label-empty', { language: 'en' } );
+			assert.strictEqual( response.body.message, 'Label must not be empty' );
+		} );
+
+		it( 'label too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLabelLength = 250;
+			const labelTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const comment = 'Label too long';
+			const response = await newCreateItemRequestBuilder( { labels: { en: labelTooLong } } )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'label-too-long',
+				{ 'character-limit': maxLabelLength, language: 'en' }
+			);
+
+			assert.strictEqual(
+				response.body.message,
+				`Label must be no more than ${maxLabelLength} characters long`
+			);
+		} );
+
 		it( 'labels and descriptions missing', async () => {
 			const response = await newCreateItemRequestBuilder( {} ).assertValidRequest().makeRequest();
 
@@ -127,5 +187,70 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'label and description with the same value', async () => {
+			const languageCode = 'en';
+			const sameValueForLabelAndDescription = 'a random value';
+
+			const itemToCreate = {};
+			itemToCreate.labels = {};
+			itemToCreate.descriptions = {};
+			itemToCreate.labels[ languageCode ] = sameValueForLabelAndDescription;
+			itemToCreate.descriptions[ languageCode ] = sameValueForLabelAndDescription;
+
+			const response = await newCreateItemRequestBuilder( itemToCreate )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'label-description-same-value',
+				{ language: languageCode }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Label and description for language '${languageCode}' can not have the same value`
+			);
+		} );
+
+		it( 'item with same label and description already exists', async () => {
+			const languageCode = 'en';
+			const label = `test-label-${utils.uniq()}`;
+			const description = `test-description-${utils.uniq()}`;
+
+			const existingEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageCode, value: label } ],
+				descriptions: [ { language: languageCode, value: description } ]
+			} );
+			const existingItemId = existingEntityResponse.entity.id;
+
+			const itemToCreate = {};
+			itemToCreate.labels = {};
+			itemToCreate.descriptions = {};
+			itemToCreate.labels[ languageCode ] = label;
+			itemToCreate.descriptions[ languageCode ] = description;
+
+			const response = await newCreateItemRequestBuilder( itemToCreate )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-label-description-duplicate',
+				{
+					language: languageCode,
+					label: label,
+					description: description,
+					'matching-item-id': existingItemId
+				}
+			);
+
+			assert.strictEqual(
+				response.body.message,
+				`Item '${existingItemId}' already has label '${label}' associated with ` +
+				`language code '${languageCode}', using the same description text`
+			);
+		} );
 	} );
 } );

@@ -34,6 +34,7 @@ class ItemDeserializer {
 
 	/**
 	 * @throws InvalidFieldException
+	 * @throws InvalidLabelException
 	 * @throws UnexpectedFieldException
 	 * @throws EmptyLabelException
 	 * @throws EmptyDescriptionException

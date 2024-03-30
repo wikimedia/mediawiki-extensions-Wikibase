@@ -28,7 +28,7 @@ class LabelTextValidatorItemLabelValidator implements ItemLabelValidator {
 	}
 
 	public function validate( ItemId $itemId, string $language, string $label ): ?ValidationError {
-		return $this->labelTextValidator->validate( $label )
+		return $this->labelTextValidator->validate( $label, $language )
 			   ?? $this->validateItem( $itemId, $language, $label );
 	}
 
