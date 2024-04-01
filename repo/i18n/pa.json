@@ -26,6 +26,8 @@
 	"wikibase-save-inprogress": "ਸਾਂਭਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
 	"wikibase-publish-inprogress": "ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
 	"wikibase-remove-inprogress": "ਹਟਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
+	"wikibase-statementgrouplistview-add": "ਬਿਆਨ ਸ਼ਾਮਲ ਕਰੋ",
+	"wikibase-statementgrouplistview-add-tooltip": "ਇੱਕ ਨਵਾਂ ਬਿਆਨ ਸ਼ਾਮਲ ਕਰੋ",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ਹੋਰ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "ਕੌਂਫਿਗਰ",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "ਪੇਜ ਲੋਡ ਉੱਤੇ ਮੇਰੀਆਂ ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਲੇਬਲ, ਉਪਨਾਮ ਅਤੇ ਵੇਰਵਾ ਵੇਖੋ",
@@ -130,5 +132,6 @@
 	"special-mergeitems": "ਦੋ ਮੱਦਾਂ ਰਲ਼ਾਓ",
 	"wikibase-itemmerge-no-such-entity": "ਆਈਟਮ ਨਹੀਂ ਮਿਲੀ।",
 	"wikibase-redirectentity-submit": "ਰੀਡਾਇਰੈਕਟ",
+	"wikibase-api-no-external-page": "ਬਾਹਰੀ ਕਲਾਇੰਟ ਸਾਈਟ \"$1\" ਨੇ ਸਫ਼ਾ \"$2\" ਲਈ ਸਫ਼ੇ ਦੀ ਜਾਣਕਾਰੀ ਪ੍ਰਦਾਨ ਨਹੀਂ ਕੀਤੀ।",
 	"wikibase-listdatatypes-time-head": "ਸਮਾਂ"
 }
