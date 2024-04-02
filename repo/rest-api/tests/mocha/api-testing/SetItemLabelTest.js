@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -137,9 +138,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -149,9 +148,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -161,9 +158,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-label' );
+			assertValidError( response, 400, 'invalid-label' );
 			assert.include( response.body.message, invalidLabel );
 		} );
 
@@ -175,35 +170,23 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-empty' );
+			assertValidError( response, 400, 'label-empty' );
 			assert.strictEqual( response.body.message, 'Label must not be empty' );
 		} );
 
 		it( 'label too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
-			const maxLabelLength = 250;
-			const labelTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const limit = 250;
+			const labelTooLong = 'x'.repeat( limit + 1 );
 			const comment = 'Label too long';
 			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', labelTooLong )
 				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-too-long' );
-			assert.strictEqual(
-				response.body.message,
-				`Label must be no more than ${maxLabelLength} characters long`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{ value: labelTooLong, 'character-limit': maxLabelLength }
-			);
-
+			assertValidError( response, 400, 'label-too-long', { value: labelTooLong, 'character-limit': limit } );
+			assert.strictEqual( response.body.message, `Label must be no more than ${limit} characters long` );
 		} );
 
 		it( 'label equals description', async () => {
@@ -216,57 +199,42 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			testItemId = createEntityResponse.entity.id;
 
 			const comment = 'Label equals description';
-			const response = await newSetItemLabelRequestBuilder(
-				testItemId,
-				language,
-				description
-			).withJsonBodyParam( 'comment', comment )
+			const response = await newSetItemLabelRequestBuilder( testItemId, language, description )
+				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'label-description-same-value' );
+			assertValidError( response, 400, 'label-description-same-value', { language } );
 			assert.strictEqual(
 				response.body.message,
 				`Label and description for language code '${language}' can not have the same value.`
 			);
-			assert.deepEqual( response.body.context, { language: language } );
 		} );
 
 		it( 'item with same label and description already exists', async () => {
-			const languageCode = 'en';
+			const language = 'en';
 			const label = `test-label-${utils.uniq()}`;
 			const description = `test-description-${utils.uniq()}`;
 			const existingEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: languageCode, value: label } ],
-				descriptions: [ { language: languageCode, value: description } ]
+				labels: [ { language: language, value: label } ],
+				descriptions: [ { language: language, value: description } ]
 			} );
 			const existingItemId = existingEntityResponse.entity.id;
 			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: languageCode, value: `label-to-be-replaced-${utils.uniq()}` } ],
-				descriptions: [ { language: languageCode, value: description } ]
+				labels: [ { language: language, value: `label-to-be-replaced-${utils.uniq()}` } ],
+				descriptions: [ { language: language, value: description } ]
 			} );
 			testItemId = createEntityResponse.entity.id;
 
-			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, label )
+			const response = await newSetItemLabelRequestBuilder( testItemId, language, label )
 				.assertValidRequest().makeRequest();
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-label-description-duplicate' );
+
+			const context = { language, label, description, 'matching-item-id': existingItemId };
+			assertValidError( response, 400, 'item-label-description-duplicate', context );
 			assert.strictEqual(
 				response.body.message,
 				`Item ${existingItemId} already has label '${label}' associated with ` +
-				`language code '${languageCode}', using the same description text.`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{
-					language: languageCode,
-					label: label,
-					description: description,
-					'matching-item-id': existingItemId
-				}
+				`language code '${language}', using the same description text.`
 			);
 		} );
 
@@ -277,9 +245,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -290,9 +256,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -316,9 +280,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 	} );
@@ -332,10 +294,9 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 
 		it( 'item is a redirect and label equals description', async () => {
@@ -346,10 +307,9 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 	} );
 } );

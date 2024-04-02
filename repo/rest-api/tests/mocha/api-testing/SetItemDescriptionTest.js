@@ -6,16 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
-
-function assertValidErrorResponse( response, responseBodyErrorCode ) {
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
-
-function assertValid400Response( response, responseBodyErrorCode ) {
-	expect( response ).to.have.status( 400 );
-	assertValidErrorResponse( response, responseBodyErrorCode );
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -171,19 +162,16 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				invalidItemId, 'en', 'item description' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, invalidItemId );
 		} );
 
 		it( 'invalid language code', async () => {
 			const invalidLanguage = 'xyz';
-			const response = await newSetItemDescriptionRequestBuilder(
-				testItemId,
-				invalidLanguage,
-				'item description'
-			).assertValidRequest().makeRequest();
+			const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
+				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguage );
 		} );
 
@@ -192,7 +180,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', invalidDescription )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-description' );
+			assertValidError( response, 400, 'invalid-description' );
 			assert.include( response.body.message, invalidDescription );
 		} );
 
@@ -200,58 +188,46 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', '' )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'description-empty' );
+			assertValidError( response, 400, 'description-empty' );
 		} );
 
 		it( 'description too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const limit = 250;
-			const tooLongDescription = 'a'.repeat( limit + 1 );
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', tooLongDescription )
+			const description = 'a'.repeat( limit + 1 );
+			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', description )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'description-too-long' );
+			assertValidError( response, 400, 'description-too-long', { value: description, 'character-limit': limit } );
 			assert.include( response.body.message, limit );
-			assert.deepEqual(
-				response.body.context,
-				{ value: tooLongDescription, 'character-limit': limit }
-			);
 		} );
 
 		it( 'description is the same as the label', async () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', testEnLabel )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'label-description-same-value' );
+			assertValidError( response, 400, 'label-description-same-value', { language: 'en' } );
 			assert.include( response.body.message, 'en' );
-			assert.deepEqual( response.body.context, { language: 'en' } );
 		} );
 
 		it( 'item with same label and description already exists', async () => {
+			const language = 'en';
 			const description = `some-description-${utils.uniq()}`;
 			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: 'en', value: testEnLabel } ],
-				descriptions: [ { language: 'en', value: description } ]
+				labels: [ { language, value: testEnLabel } ],
+				descriptions: [ { language, value: description } ]
 			} );
 			const matchingItemId = createEntityResponse.entity.id;
 
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', description )
+			const response = await newSetItemDescriptionRequestBuilder( testItemId, language, description )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'item-label-description-duplicate' );
+			const context = { language, label: testEnLabel, description, 'matching-item-id': matchingItemId };
+			assertValidError( response, 400, 'item-label-description-duplicate', context );
 			assert.include( response.body.message, matchingItemId );
 			assert.include( response.body.message, testEnLabel );
-			assert.include( response.body.message, 'en' );
-			assert.deepEqual(
-				response.body.context,
-				{
-					language: 'en',
-					label: testEnLabel,
-					description: description,
-					'matching-item-id': matchingItemId
-				}
-			);
+			assert.include( response.body.message, language );
 		} );
 
 		it( 'invalid edit tag', async () => {
@@ -261,7 +237,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid400Response( response, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -272,7 +248,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid400Response( response, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -281,15 +257,10 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	describe( '404 error response', () => {
 		it( 'item not found', async () => {
 			const itemId = 'Q999999';
-			const response = await newSetItemDescriptionRequestBuilder(
-				itemId,
-				'en',
-				'test description'
-			).assertValidRequest().makeRequest();
+			const response = await newSetItemDescriptionRequestBuilder( itemId, 'en', 'test description' )
+				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 	} );
@@ -299,16 +270,12 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const redirectTarget = testItemId;
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 
-			const response = await newSetItemDescriptionRequestBuilder(
-				redirectSource,
-				'en',
-				'test description'
-			).assertValidRequest().makeRequest();
+			const response = await newSetItemDescriptionRequestBuilder( redirectSource, 'en', 'test description' )
+				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 409 );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 
 		it( 'item is a redirect and item label+description collision', async () => {
@@ -320,14 +287,10 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				descriptions: [ { language: 'en', value: description } ]
 			} );
 
-			const response = await newSetItemDescriptionRequestBuilder(
-				redirectSource,
-				'en',
-				description
-			).assertValidRequest().makeRequest();
+			const response = await newSetItemDescriptionRequestBuilder( redirectSource, 'en', description )
+				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 409 );
-			assertValidErrorResponse( response, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );

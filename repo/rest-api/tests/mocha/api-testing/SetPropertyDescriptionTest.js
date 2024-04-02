@@ -6,16 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newSetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
-
-function assertValidErrorResponse( response, responseBodyErrorCode ) {
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
-
-function assertValid400Response( response, responseBodyErrorCode ) {
-	expect( response ).to.have.status( 400 );
-	assertValidErrorResponse( response, responseBodyErrorCode );
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -168,24 +159,20 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 		it( 'invalid property ID', async () => {
 			const invalidPropertyId = 'X11';
-			const response = await newSetPropertyDescriptionRequestBuilder(
-				invalidPropertyId, 'en', 'description' )
+			const response = await newSetPropertyDescriptionRequestBuilder( invalidPropertyId, 'en', 'description' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-property-id' );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 			assert.include( response.body.message, invalidPropertyId );
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguage = 'xyz';
-			const response = await newSetPropertyDescriptionRequestBuilder(
-				testPropertyId,
-				invalidLanguage,
-				'property description'
-			).assertValidRequest().makeRequest();
+			const language = 'xyz';
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, language, 'description' )
+				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-language-code' );
-			assert.include( response.body.message, invalidLanguage );
+			assertValidError( response, 400, 'invalid-language-code' );
+			assert.include( response.body.message, language );
 		} );
 
 		it( 'invalid description', async () => {
@@ -193,7 +180,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', invalidDescription )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-description' );
+			assertValidError( response, 400, 'invalid-description' );
 			assert.include( response.body.message, invalidDescription );
 		} );
 
@@ -201,32 +188,27 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', '' )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'description-empty' );
+			assertValidError( response, 400, 'description-empty' );
 		} );
 
 		it( 'description too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const limit = 250;
-			const tooLongDescription = 'a'.repeat( limit + 1 );
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', tooLongDescription )
+			const description = 'a'.repeat( limit + 1 );
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', description )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'description-too-long' );
+			assertValidError( response, 400, 'description-too-long', { value: description, 'character-limit': limit } );
 			assert.include( response.body.message, limit );
-			assert.deepEqual(
-				response.body.context,
-				{ value: tooLongDescription, 'character-limit': limit }
-			);
 		} );
 
 		it( 'description is the same as the label', async () => {
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', testEnLabel )
 				.assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'label-description-same-value' );
+			assertValidError( response, 400, 'label-description-same-value', { language: 'en' } );
 			assert.include( response.body.message, 'en' );
-			assert.deepEqual( response.body.context, { language: 'en' } );
 		} );
 
 		it( 'invalid edit tag', async () => {
@@ -236,7 +218,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid400Response( response, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -247,7 +229,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid400Response( response, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -256,15 +238,10 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	describe( '404 error response', () => {
 		it( 'property not found', async () => {
 			const propertyId = 'P99999';
-			const response = await newSetPropertyDescriptionRequestBuilder(
-				propertyId,
-				'en',
-				'test description'
-			).assertValidRequest().makeRequest();
+			const response = await newSetPropertyDescriptionRequestBuilder( propertyId, 'en', 'test description' )
+				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 	} );

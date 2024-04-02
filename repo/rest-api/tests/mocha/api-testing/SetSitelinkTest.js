@@ -11,6 +11,7 @@ const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' 
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { createEntity, getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -29,17 +30,6 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		assert.strictEqual( response.body.title, title );
 		assert.deepEqual( response.body.badges, badges );
 		assert.include( response.body.url, title );
-	}
-
-	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-		expect( response ).to.have.status( statusCode );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
-		if ( context === null ) {
-			assert.notProperty( response.body, 'context' );
-		} else {
-			assert.deepStrictEqual( response.body.context, context );
-		}
 	}
 
 	before( async () => {
@@ -221,7 +211,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, invalidItemId );
 		} );
 
@@ -231,7 +221,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-site-id' );
+			assertValidError( response, 400, 'invalid-site-id' );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 
@@ -240,7 +230,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -269,7 +259,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -285,49 +275,37 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'title is empty', async () => {
 			const newSitelinkWithEmptyTitle = { title: '' };
-			const response = await newSetSitelinkRequestBuilder(
-				testItemId,
-				siteId,
-				newSitelinkWithEmptyTitle
-			).makeRequest();
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithEmptyTitle )
+				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'title-field-empty' );
+			assertValidError( response, 400, 'title-field-empty' );
 			assert.strictEqual( response.body.message, 'Title must not be empty' );
 		} );
 
 		it( 'sitelink title field not provided', async () => {
 			const newSitelinkWithTitleFieldMissing = { badges: [ allowedBadges[ 1 ] ] };
-			const response = await newSetSitelinkRequestBuilder(
-				testItemId,
-				siteId,
-				newSitelinkWithTitleFieldMissing
-			).makeRequest();
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithTitleFieldMissing )
+				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'sitelink-data-missing-title' );
+			assertValidError( response, 400, 'sitelink-data-missing-title' );
 			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
 		} );
 
 		it( 'invalid title', async () => {
 			const newSitelinkWithInvalidTitle = { title: 'invalid title%00' };
-			const response = await newSetSitelinkRequestBuilder(
-				testItemId,
-				siteId,
-				newSitelinkWithInvalidTitle
-			).makeRequest();
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithInvalidTitle )
+				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-title-field' );
+			assertValidError( response, 400, 'invalid-title-field' );
 			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
 		} );
 
 		it( 'title is not a string', async () => {
 			const newSitelinkWithInvalidTitle = { title: [ 'array', 'not', 'allowed' ] };
-			const response = await newSetSitelinkRequestBuilder(
-				testItemId,
-				siteId,
-				newSitelinkWithInvalidTitle
-			).makeRequest();
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithInvalidTitle )
+				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-title-field' );
+			assertValidError( response, 400, 'invalid-title-field' );
 			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
 		} );
 
@@ -335,7 +313,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: allowedBadges[ 1 ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-sitelink-badges-format' );
+			assertValidError( response, 400, 'invalid-sitelink-badges-format' );
 			assert.strictEqual( response.body.message, 'Value of badges field is not a list' );
 		} );
 
@@ -344,7 +322,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: [ invalidBadge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-input-sitelink-badge', { badge: 'P33' } );
+			assertValidError( response, 400, 'invalid-input-sitelink-badge', { badge: 'P33' } );
 			assert.strictEqual( response.body.message, `Badge input is not an item ID: ${invalidBadge}` );
 		} );
 
@@ -353,7 +331,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: [ badge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidErrorResponse( response, 400, 'item-not-a-badge', { badge: badge } );
+			assertValidError( response, 400, 'item-not-a-badge', { badge: badge } );
 			assert.strictEqual(
 				response.body.message,
 				`Item ID provided as badge is not allowed as a badge: ${badge}`
@@ -367,7 +345,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.withHeader( 'X-Wikibase-CI-Badges', badge )
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'item-not-a-badge', { badge: badge } );
+			assertValidError( response, 400, 'item-not-a-badge', { badge: badge } );
 			assert.strictEqual(
 				response.body.message,
 				`Item ID provided as badge is not allowed as a badge: ${badge}`
@@ -378,7 +356,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: utils.title( 'does-not-exist-' ) };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidErrorResponse( response, 400, 'title-does-not-exist' );
+			assertValidError( response, 400, 'title-does-not-exist' );
 			assert.strictEqual(
 				response.body.message,
 				`Page with title ${sitelink.title} does not exist on the given site`
@@ -393,8 +371,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 	} );
@@ -408,7 +385,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -423,7 +400,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 409, 'sitelink-conflict', { 'matching-item-id': testItemId } );
+			assertValidError( response, 409, 'sitelink-conflict', { 'matching-item-id': testItemId } );
 			assert.include( response.body.message, testItemId );
 		} );
 	} );
