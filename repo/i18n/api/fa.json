@@ -5,7 +5,8 @@
 			"Ladsgroup",
 			"Reza1615",
 			"Rtemis",
-			"Amire80"
+			"Amire80",
+			"Ebraminio"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "کوئری‌های در دسترس برای آیتم‌های ستاره‌دار.",
@@ -49,7 +50,7 @@
 	"apihelp-wbeditentity-example-7": "توضیحاتی برای nb قرار می‌دهد و در صورتی که قبلا یکی وجود داشته باشد دوباره روی آن می‌نویسد",
 	"apihelp-wbeditentity-example-8": "یک اظهارنظر جدید برای آیتمی ایجاد می‌کند که ویژگی P56 و مقدار «مثال رشته‌ای» دارد.",
 	"apihelp-wbeditentity-example-9": "حذف ادعا از آیتم توسط GUID Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F و Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
-	"apihelp-wbeditentity-example-10": "اظهار نظری را که دارای شناسه GU (جی یو آی دی) است به مقدار اظهار نظر بر می گرداند",
+	"apihelp-wbeditentity-example-10": "اظهار نظری را که دارای شناسه GU (جی یو آی دی) است به مقدار اظهار نظر بر می‌گرداند",
 	"apihelp-wbeditentity-example-11": "یک برچسب می‌افزاید بدون اینکه روی برچسب‌های قبلی تغییری ایجاد کند.",
 	"apihelp-wbeditentity-example-12": "یک برچسب را حذف می‌کند",
 	"apihelp-wbformatvalue-description": "ساختار مقدارهای داده",
@@ -72,7 +73,7 @@
 	"apihelp-wbgetentities-example-6": "موجودیت‌هایی با شناسۀ <samp>Q42</samp> به همه زبان‌های موجود دریافت کن و همه برچسب‌هایشان را نیز نشان بده",
 	"apihelp-wbgetentities-example-7": "موجودیت‌هایی با شناسۀ <samp>P17</samp> و <samp>P3</samp> دریافت کن که فقط نوع داده دارند",
 	"apihelp-wbgetentities-example-8": "موجودیت‌هایی با شناسۀ <samp>Q42</samp> دریافت کن که نام‌های مستعار آن‌ها به زبان انگلیسی نوشته شده باشد",
-	"apihelp-wbgetentities-example-9": "موجودیت‌هایی با شناسۀ <samp>Q1</samp> و <samp>Q42</samp> دریافت کن که توضیحات شان به زبان های انگلیسی، آلمانی و فرانسوی باشد",
+	"apihelp-wbgetentities-example-9": "موجودیت‌هایی با شناسۀ <samp>Q1</samp> و <samp>Q42</samp> دریافت کن که توضیحات شان به زبان‌های انگلیسی، آلمانی و فرانسوی باشد",
 	"apihelp-wbgetentities-example-10": "آیتم مربوط به صفحه «<var>Berlin</var>» را در «<var>enwiki</var>» دریافت کن که خصوصیت‌هایش به زبان انگلیسی باشد",
 	"apihelp-wbgetentities-example-11": "آیتم مربوط به صفحه «<var>Berlin</var>» را در «<var>enwiki</var>» دریافت کن پس از اینکه عنوان را از «<var>berlin</var>» نرمالسازی کردی",
 	"apihelp-wbgetentities-example-12": "پیوندهای مربوط به آیتم <samp>Q42</samp> را دریافت کن",
