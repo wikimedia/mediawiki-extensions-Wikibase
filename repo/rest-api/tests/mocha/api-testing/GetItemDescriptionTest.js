@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let itemId;
@@ -40,9 +41,7 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
 	} );
 
@@ -52,9 +51,7 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assertValidError( response, 400, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
 	} );
 
@@ -63,9 +60,8 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetItemDescriptionRequestBuilder( nonExistentItem, 'en' )
 			.assertValidRequest()
 			.makeRequest();
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'item-not-found' );
+
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItem );
 	} );
 
@@ -74,9 +70,8 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetItemDescriptionRequestBuilder( itemId, languageCode )
 			.assertValidRequest()
 			.makeRequest();
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'description-not-defined' );
+
+		assertValidError( response, 404, 'description-not-defined' );
 		assert.include( response.body.message, languageCode );
 	} );
 
@@ -86,6 +81,7 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetItemDescriptionRequestBuilder( redirectSource, 'en' )
 			.assertValidRequest()
 			.makeRequest();
+
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname

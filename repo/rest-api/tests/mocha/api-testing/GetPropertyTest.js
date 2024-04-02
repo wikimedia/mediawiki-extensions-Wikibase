@@ -10,6 +10,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	const germanLabel = 'a-German-label-' + utils.uniq();
@@ -113,21 +114,17 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 
 	it( '400 error - invalid property id', async () => {
 		const propertyId = 'X123';
-		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();
+		const response = await newGetPropertyRequestBuilder( propertyId ).assertInvalidRequest().makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 		assert.include( response.body.message, propertyId );
 	} );
 
 	it( '404 error - property not found', async () => {
 		const propertyId = 'P999999';
-		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();
+		const response = await newGetPropertyRequestBuilder( propertyId ).assertValidRequest().makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, propertyId );
 	} );
 

@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 	let itemId;
@@ -36,22 +37,19 @@ describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
 	it( '400 error - bad request, invalid item ID', async () => {
 		const invalidItemId = 'X123';
-		const response = await newGetItemDescriptionsRequestBuilder( invalidItemId ).assertInvalidRequest()
-			.makeRequest();
+		const response = await newGetItemDescriptionsRequestBuilder( invalidItemId )
+			.assertInvalidRequest().makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
 	} );
 
 	it( 'responds 404 in case the item does not exist', async () => {
 		const nonExistentItemId = 'Q99999999';
-		const response = await newGetItemDescriptionsRequestBuilder( nonExistentItemId ).makeRequest();
+		const response = await newGetItemDescriptionsRequestBuilder( nonExistentItemId )
+			.assertValidRequest().makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'item-not-found' );
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItemId );
 	} );
 
@@ -64,7 +62,6 @@ describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 308 );
-
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/descriptions` )

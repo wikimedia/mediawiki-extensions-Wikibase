@@ -13,6 +13,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
@@ -119,12 +120,9 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 
 	it( '400 error - bad request, invalid item ID', async () => {
 		const itemId = 'X123';
-		const response = await newGetItemRequestBuilder( itemId )
-			.makeRequest();
+		const response = await newGetItemRequestBuilder( itemId ).assertInvalidRequest().makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, itemId );
 	} );
 
@@ -135,9 +133,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-field' );
+		assertValidError( response, 400, 'invalid-field' );
 		assert.include( response.body.message, 'unknown_field' );
 	} );
 
@@ -145,9 +141,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 		const itemId = 'Q999999';
 		const response = await newGetItemRequestBuilder( itemId ).makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'item-not-found' );
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, itemId );
 	} );
 
@@ -177,10 +171,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 			expect( response ).to.have.status( 308 );
 
 			const redirectLocation = new URL( response.headers.location );
-			assert.equal(
-				redirectLocation.searchParams.get( '_fields' ),
-				fields
-			);
+			assert.equal( redirectLocation.searchParams.get( '_fields' ), fields );
 		} );
 
 	} );

@@ -8,6 +8,7 @@ const {
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( 'GET statement', () => {
 	let testItemId;
@@ -23,17 +24,6 @@ describe( 'GET statement', () => {
 		assert.equal( response.body.id, statement.id );
 		assert.equal( response.header[ 'last-modified' ], testLastModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
-	}
-
-	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-		expect( response ).to.have.status( statusCode );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
-		if ( context === null ) {
-			assert.notProperty( response.body, 'context' );
-		} else {
-			assert.deepStrictEqual( response.body.context, context );
-		}
 	}
 
 	before( async () => {
@@ -85,7 +75,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -95,7 +85,7 @@ describe( 'GET statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 400, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -107,7 +97,7 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 404, 'statement-not-found' );
+					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -118,7 +108,7 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidErrorResponse( response, 404, 'statement-not-found' );
+					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -133,7 +123,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -144,7 +134,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, subjectId );
 		} );
 
@@ -154,7 +144,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -165,7 +155,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -176,7 +166,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -187,7 +177,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -198,7 +188,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -209,7 +199,7 @@ describe( 'GET statement', () => {
 				testStatement.id
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, testStatement.id );
 		} );
 
@@ -220,7 +210,7 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );
@@ -232,7 +222,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse( response, 404, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );

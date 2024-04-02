@@ -4,10 +4,13 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue, createEntity, getLatestEditMetadata
+	newLegacyStatementWithRandomStringValue,
+	createEntity,
+	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => {
 
@@ -93,21 +96,18 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, 'P999999' );
 	} );
 
 	it( '400 error - bad request, invalid subject property ID', async () => {
-		const response = await newGetPropertyStatementsRequestBuilder( 'X123' )
+		const invalidPropertyId = 'X123';
+		const response = await newGetPropertyStatementsRequestBuilder( invalidPropertyId )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-property-id' );
-		assert.include( response.body.message, 'X123' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
+		assert.include( response.body.message, invalidPropertyId );
 	} );
 
 	it( '400 error - bad request, invalid filter property ID', async () => {
@@ -117,9 +117,7 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.equal( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': filterPropertyId } );
 		assert.include( response.body.message, filterPropertyId );
 	} );
 

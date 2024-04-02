@@ -10,6 +10,7 @@ const {
 } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 
@@ -45,9 +46,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, invalidItemId );
 		} );
 
@@ -57,9 +56,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-site-id' );
+			assertValidError( response, 400, 'invalid-site-id' );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 	} );
@@ -71,9 +68,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, nonExistentItem );
 		} );
 
@@ -83,9 +78,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'sitelink-not-defined' );
+			assertValidError( response, 404, 'sitelink-not-defined' );
 			assert.include( response.body.message, siteId );
 		} );
 	} );
@@ -99,7 +92,6 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 308 );
-
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/sitelinks/${siteId}` )

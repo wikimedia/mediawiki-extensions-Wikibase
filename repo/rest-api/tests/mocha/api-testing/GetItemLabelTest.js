@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 	let itemId;
@@ -37,9 +38,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'item-not-found' );
+		assertValidError( response, 404, 'item-not-found' );
 		assert.include( response.body.message, nonExistentItem );
 	} );
 
@@ -49,9 +48,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'label-not-defined' );
+		assertValidError( response, 404, 'label-not-defined' );
 		assert.include( response.body.message, languageCode );
 	} );
 
@@ -64,7 +61,6 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 308 );
-
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/labels/en` )
@@ -77,9 +73,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-item-id' );
+		assertValidError( response, 400, 'invalid-item-id' );
 		assert.include( response.body.message, invalidItemId );
 	} );
 
@@ -89,9 +83,7 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-language-code' );
+		assertValidError( response, 400, 'invalid-language-code' );
 		assert.include( response.body.message, invalidLanguageCode );
 	} );
 } );

@@ -4,6 +4,7 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { createUniqueStringProperty, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
@@ -32,9 +33,7 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			.assertInvalidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 400 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'invalid-property-id' );
+		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
 		assert.include( response.body.message, invalidPropertyId );
 	} );
 
@@ -44,9 +43,7 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, nonExistentProperty );
 	} );
 
