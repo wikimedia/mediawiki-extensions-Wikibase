@@ -5,6 +5,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newAddPropertyAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newRequest().getRouteDescription(), () => {
 	let testPropertyId;
@@ -106,9 +107,7 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-property-id' );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -118,9 +117,7 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -129,9 +126,7 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'alias-empty' );
+			assertValidError( response, 400, 'alias-empty' );
 			assert.strictEqual( response.body.message, 'Alias must not be empty' );
 		} );
 
@@ -140,32 +135,21 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'alias-list-empty' );
+			assertValidError( response, 400, 'alias-list-empty' );
 			assert.strictEqual( response.body.message, 'Alias list must not be empty' );
 		} );
 
 		it( 'alias too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
-			const maxLabelLength = 250;
-			const aliasTooLong = 'x'.repeat( maxLabelLength + 1 );
-			const response = await newRequest( testPropertyId, 'en', [ aliasTooLong ] )
+			const maxLength = 250;
+			const alias = 'x'.repeat( maxLength + 1 );
+			const response = await newRequest( testPropertyId, 'en', [ alias ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'alias-too-long' );
-			assert.strictEqual(
-				response.body.message,
-				`Alias must be no more than ${maxLabelLength} characters long`
-			);
-			assert.deepEqual(
-				response.body.context,
-				{ value: aliasTooLong, 'character-limit': maxLabelLength }
-			);
+			assertValidError( response, 400, 'alias-too-long', { value: alias, 'character-limit': maxLength } );
+			assert.strictEqual( response.body.message, `Alias must be no more than ${maxLength} characters long` );
 
 		} );
 
@@ -175,36 +159,26 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-alias' );
+			assertValidError( response, 400, 'invalid-alias', { alias: invalidAlias } );
 			assert.include( response.body.message, invalidAlias );
 		} );
 
 		it( 'duplicate input aliases', async () => {
 			const duplicateAlias = 'foo';
-			const response = await newRequest(
-				testPropertyId,
-				'en',
-				[ duplicateAlias, 'foo', duplicateAlias ]
-			).assertValidRequest().makeRequest();
+			const response = await newRequest( testPropertyId, 'en', [ duplicateAlias, 'foo', duplicateAlias ] )
+				.assertValidRequest()
+				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'duplicate-alias' );
+			assertValidError( response, 400, 'duplicate-alias', { alias: duplicateAlias } );
 			assert.include( response.body.message, duplicateAlias );
 		} );
 
 		it( 'input alias already exist', async () => {
-			const response = await newRequest(
-				testPropertyId,
-				'en',
-				[ existingEnglishAlias ]
-			).assertValidRequest().makeRequest();
+			const response = await newRequest( testPropertyId, 'en', [ existingEnglishAlias ] )
+				.assertValidRequest()
+				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'duplicate-alias' );
+			assertValidError( response, 400, 'duplicate-alias', { alias: existingEnglishAlias } );
 			assert.include( response.body.message, existingEnglishAlias );
 		} );
 	} );
@@ -215,9 +189,7 @@ describe( newRequest().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.strictEqual( response.header[ 'content-language' ], 'en' );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, propertyId );
 	} );
 } );
