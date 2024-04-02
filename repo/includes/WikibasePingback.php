@@ -152,13 +152,14 @@ class WikibasePingback {
 
 		$timestamp = MWTimestamp::time();
 
-		$dbw->upsert(
-			'updatelog',
-			[ 'ul_key' => $this->key, 'ul_value' => $timestamp ],
-			'ul_key',
-			[ 'ul_value' => $timestamp ],
-			__METHOD__
-		);
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'updatelog' )
+			->row( [ 'ul_key' => $this->key, 'ul_value' => $timestamp ] )
+			->onDuplicateKeyUpdate()
+			->uniqueIndexFields( 'ul_key' )
+			->set( [ 'ul_value' => $timestamp ] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	/**
