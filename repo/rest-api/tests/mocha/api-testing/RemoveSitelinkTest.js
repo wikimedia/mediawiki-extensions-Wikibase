@@ -8,6 +8,7 @@ const { action, utils, assert } = require( 'api-testing' );
 const { createEntity, getLocalSiteId, createLocalSitelink } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
@@ -73,8 +74,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.body.code, 'sitelink-not-defined' );
+			assertValidError( response, 404, 'sitelink-not-defined' );
 			assert.include( response.body.message, itemWithNoSitelink );
 			assert.include( response.body.message, siteId );
 		} );
@@ -84,8 +84,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.strictEqual( response.body.code, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemDoesNotExist );
 		} );
 	} );
@@ -96,8 +95,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 409 );
-		assert.strictEqual( response.body.code, 'redirected-item' );
+		assertValidError( response, 409, 'redirected-item' );
 		assert.include( response.body.message, redirectSource );
 
 	} );
@@ -109,9 +107,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, invalidItemId );
 		} );
 
@@ -121,9 +117,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-site-id' );
+			assertValidError( response, 400, 'invalid-site-id' );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 
@@ -132,8 +126,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemoveSitelinkRequestBuilder( testItemId, siteId )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -162,8 +155,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemoveSitelinkRequestBuilder( testItemId, siteId )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 

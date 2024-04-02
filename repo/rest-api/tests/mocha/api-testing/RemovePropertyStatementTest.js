@@ -10,6 +10,7 @@ const {
 	newRemoveStatementRequestBuilder,
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( 'DELETE statement', () => {
 
@@ -112,9 +113,7 @@ describe( 'DELETE statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 400 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -124,9 +123,7 @@ describe( 'DELETE statement', () => {
 						.assertInvalidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 400 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -138,9 +135,7 @@ describe( 'DELETE statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 404 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'statement-not-found' );
+					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -155,9 +150,7 @@ describe( 'DELETE statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'invalid-property-id' );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -168,9 +161,7 @@ describe( 'DELETE statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -181,9 +172,7 @@ describe( 'DELETE statement', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );
@@ -195,9 +184,7 @@ describe( 'DELETE statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'invalid-statement-id' );
+			assertValidError( response, 400, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -207,9 +194,7 @@ describe( 'DELETE statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 404 );
-			assert.header( response, 'Content-Language', 'en' );
-			assert.equal( response.body.code, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );

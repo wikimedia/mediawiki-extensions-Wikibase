@@ -9,17 +9,7 @@ const {
 	newGetPropertyLabelRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 
@@ -87,7 +77,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( propertyId, 'en' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -96,7 +86,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, invalidLanguageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-language-code' );
+			assertValidError( response, 400, 'invalid-language-code' );
 			assert.include( response.body.message, invalidLanguageCode );
 		} );
 
@@ -105,7 +95,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, 'en' )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -134,7 +124,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, 'en' )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -155,7 +145,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( propertyId, 'en' )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -164,7 +154,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, languageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'label-not-defined' );
+			assertValidError( response, 404, 'label-not-defined' );
 			assert.include( response.body.message, testPropertyId );
 			assert.include( response.body.message, languageCode );
 		} );
