@@ -7,17 +7,7 @@ const { newPatchPropertyAliasesRequestBuilder } = require( '../helpers/RequestBu
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
-
-function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( 400 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -98,7 +88,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyAliasesRequestBuilder( propertyId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -109,7 +99,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -118,7 +108,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -160,10 +150,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-empty' );
+			assertValidError( response, 422, 'patched-alias-empty', { language } );
 			assert.include( response.body.message, language );
-			assert.deepEqual( response.body.context, { language } );
 		} );
 
 		it( 'alias too long', async () => {
@@ -176,13 +164,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ tooLongAlias ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-alias-too-long' );
+			const context = { language, value: tooLongAlias, 'character-limit': maxLength };
+			assertValidError( response, 422, 'patched-alias-too-long', context );
 			assert.include( response.body.message, language );
-			assert.deepEqual(
-				response.body.context,
-				{ language, value: tooLongAlias, 'character-limit': maxLength }
-			);
 		} );
 
 		it( 'duplicate alias', async () => {
@@ -192,11 +176,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ duplicate, duplicate ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-duplicate-alias' );
+			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
 			assert.include( response.body.message, language );
 			assert.include( response.body.message, duplicate );
-			assert.deepEqual( response.body.context, { language, value: duplicate } );
 		} );
 
 		it( 'alias contains invalid characters', async () => {
@@ -206,10 +188,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-aliases-invalid-field' );
+			assertValidError( response, 422, 'patched-aliases-invalid-field', { path: language, value: invalidAlias } );
 			assert.include( response.body.message, language );
-			assert.deepEqual( response.body.context, { path: language, value: invalidAlias } );
 		} );
 
 		it( 'invalid language code', async () => {
@@ -218,10 +198,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-aliases-invalid-language-code' );
+			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
 			assert.include( response.body.message, language );
-			assert.deepEqual( response.body.context, { language } );
 		} );
 	} );
 
@@ -231,36 +209,29 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			.assertValidRequest()
 			.makeRequest();
 
-		expect( response ).to.have.status( 404 );
-		assert.strictEqual( response.body.code, 'property-not-found' );
+		assertValidError( response, 404, 'property-not-found' );
 		assert.include( response.body.message, propertyId );
 	} );
 
 	describe( '409', () => {
 		it( '"path" field target does not exist', async () => {
 			const operation = { op: 'remove', path: '/path/does/not/exist' };
-
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
-			assert.strictEqual( response.body.code, 'patch-target-not-found' );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
-			assert.deepEqual( response.body.context, { field: 'path', operation } );
 		} );
 
 		it( '"from" field target does not exist', async () => {
 			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/en' };
-
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
-			assert.strictEqual( response.body.code, 'patch-target-not-found' );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
-			assert.deepEqual( response.body.context, { field: 'from', operation } );
 		} );
 
 		it( 'patch test condition failed', async () => {
@@ -269,9 +240,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
-			assert.strictEqual( response.body.code, 'patch-test-failed' );
-			assert.deepEqual( response.body.context, { 'actual-value': existingEnAlias, operation } );
+			assertValidError( response, 409, 'patch-test-failed', { 'actual-value': existingEnAlias, operation } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, existingEnAlias );

@@ -11,23 +11,7 @@ const {
 	newReplaceStatementRequestBuilder,
 	newAddPropertyStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-
-function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( 400 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
-
-function assertValid404Response( response, responseBodyErrorCode ) {
-	expect( response ).to.have.status( 404 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( 'PATCH property statement', () => {
 	let testPropertyId;
@@ -166,7 +150,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( statementId, [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -175,7 +159,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( statementId, [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-statement-id' );
+					assertValidError( response, 400, 'invalid-statement-id' );
 					assert.include( response.body.message, statementId );
 				} );
 
@@ -186,7 +170,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [] )
 						.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'comment-too-long' );
+					assertValidError( response, 400, 'comment-too-long' );
 					assert.include( response.body.message, '500' );
 				} );
 
@@ -195,7 +179,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( testStatementId, [] )
 						.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-edit-tag' );
+					assertValidError( response, 400, 'invalid-edit-tag' );
 					assert.include( response.body.message, invalidEditTag );
 				} );
 
@@ -242,7 +226,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-operation-change-property-of-statement' );
+					assertValidError( response, 400, 'invalid-operation-change-property-of-statement' );
 				} );
 
 				it( 'rejects Statement ID change', async () => {
@@ -254,7 +238,7 @@ describe( 'PATCH property statement', () => {
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
 
-					assertValid400Response( response, 'invalid-operation-change-statement-id' );
+					assertValidError( response, 400, 'invalid-operation-change-statement-id' );
 				} );
 
 			} );
@@ -266,7 +250,7 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValid404Response( response, 'statement-not-found' );
+					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
 			} );
@@ -281,11 +265,8 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 409 );
-					assert.strictEqual( response.body.code, 'patch-target-not-found' );
+					assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 					assert.include( response.body.message, operation.path );
-					assert.strictEqual( response.body.context.field, 'path' );
-					assert.deepEqual( response.body.context.operation, operation );
 				} );
 
 				it( '"from" field target does not exist', async () => {
@@ -298,31 +279,24 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 409 );
-					assert.strictEqual( response.body.code, 'patch-target-not-found' );
-					assert.include( response.body.message, operation.from );
-					assert.strictEqual( response.body.context.field, 'from' );
-					assert.deepEqual( response.body.context.operation, operation );
+					assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 				} );
 
 				it( 'patch test condition failed', async () => {
-					const patchOperation = {
+					const operation = {
 						op: 'test',
 						path: '/value/content',
 						value: { vegetable: 'potato' }
 					};
-					const response = await newPatchRequestBuilder( testStatementId, [ patchOperation ] )
+					const response = await newPatchRequestBuilder( testStatementId, [ operation ] )
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 409 );
-
-					assert.strictEqual( response.body.code, 'patch-test-failed' );
-					assert.deepEqual( response.body.context.operation, patchOperation );
-					assert.deepEqual( response.body.context[ 'actual-value' ], testStatement.value.content );
+					const context = { 'actual-value': testStatement.value.content, operation };
+					assertValidError( response, 409, 'patch-test-failed', context );
 					assert.include( response.body.message, 'Test operation in the provided patch failed.' );
-					assert.include( response.body.message, patchOperation.path );
-					assert.include( response.body.message, JSON.stringify( patchOperation.value ) );
+					assert.include( response.body.message, operation.path );
+					assert.include( response.body.message, JSON.stringify( operation.value ) );
 					assert.include( response.body.message, testStatement.value.content );
 				} );
 			} );
@@ -337,9 +311,7 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 422 );
-					assert.strictEqual( response.body.code, 'patched-statement-missing-field' );
-					assert.strictEqual( response.body.context.path, 'value' );
+					assertValidError( response, 422, 'patched-statement-missing-field', { path: 'value' } );
 				} );
 
 				it( 'incorrect value type', async () => {
@@ -360,10 +332,7 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					expect( response ).to.have.status( 422 );
-					const body = response.body;
-					assert.strictEqual( body.code, 'patched-statement-invalid-field' );
-					assert.deepEqual( body.context, { path: 'content', value } );
+					assertValidError( response, 422, 'patched-statement-invalid-field', { path: 'content', value } );
 				} );
 			} );
 
@@ -379,7 +348,7 @@ describe( 'PATCH property statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValid400Response( response, 'invalid-property-id', { 'property-id': propertyId } );
+			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -389,7 +358,7 @@ describe( 'PATCH property statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid404Response( response, 'property-not-found' );
+			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
 		} );
 
@@ -401,7 +370,7 @@ describe( 'PATCH property statement', () => {
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-statement-id' );
+			assertValidError( response, 400, 'invalid-statement-id' );
 			assert.include( response.body.message, statementId );
 		} );
 
@@ -411,7 +380,7 @@ describe( 'PATCH property statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid404Response( response, 'statement-not-found' );
+			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 	} );

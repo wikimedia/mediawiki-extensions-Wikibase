@@ -9,6 +9,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
@@ -27,17 +28,6 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		assert.strictEqual( response.body[ siteId ].title, title );
 		assert.deepEqual( response.body[ siteId ].badges, badges );
 		assert.include( response.body[ siteId ].url, title );
-	}
-
-	function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-		expect( response ).to.have.status( statusCode );
-		assert.header( response, 'Content-Language', 'en' );
-		assert.strictEqual( response.body.code, responseBodyErrorCode );
-		if ( context === null ) {
-			assert.notProperty( response.body, 'context' );
-		} else {
-			assert.deepStrictEqual( response.body.context, context );
-		}
 	}
 
 	before( async function () {
@@ -98,7 +88,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchSitelinksRequestBuilder( itemId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -109,7 +99,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -138,7 +128,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -193,12 +183,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{ field: 'path', operation: operation }
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
 		} );
 
@@ -209,12 +194,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-target-not-found',
-				{ field: 'from', operation: operation }
-			);
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
 		} );
 
@@ -224,12 +204,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				409,
-				'patch-test-failed',
-				{ operation: operation, 'actual-value': linkedArticle }
-			);
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': linkedArticle } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, linkedArticle );
@@ -253,13 +228,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: `/${invalidSiteId}`, value: sitelink } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-invalid-site-id',
-				{ 'site-id': invalidSiteId }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-invalid-site-id', { 'site-id': invalidSiteId } );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 
@@ -271,13 +240,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-missing-title',
-				{ 'site-id': siteId }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-missing-title', { 'site-id': siteId } );
 			assert.include( response.body.message, siteId );
 		} );
 
@@ -289,74 +252,50 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-title-empty',
-				{ 'site-id': siteId }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-title-empty', { 'site-id': siteId } );
 			assert.include( response.body.message, siteId );
 		} );
 
 		it( 'invalid title', async () => {
-			const invalidTitle = 'invalid??%00';
-			const sitelink = { title: invalidTitle, badges: [ allowedBadges[ 0 ] ] };
+			const title = 'invalid??%00';
+			const sitelink = { title, badges: [ allowedBadges[ 0 ] ] };
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-invalid-title',
-				{ 'site-id': siteId, title: invalidTitle }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-invalid-title', { 'site-id': siteId, title } );
 			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, invalidTitle );
+			assert.include( response.body.message, title );
 		} );
 
 		it( 'title does not exist', async () => {
-			const nonExistingTitle = 'this_title_does_not_exist';
-			const sitelink = { title: nonExistingTitle, badges: [ allowedBadges[ 0 ] ] };
+			const title = 'this_title_does_not_exist';
+			const sitelink = { title, badges: [ allowedBadges[ 0 ] ] };
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-title-does-not-exist',
-				{ 'site-id': siteId, title: nonExistingTitle }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-title-does-not-exist', { 'site-id': siteId, title } );
 			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, nonExistingTitle );
+			assert.include( response.body.message, title );
 		} );
 
 		it( 'invalid badge', async () => {
-			const invalidBadge = 'not-an-item-id';
-			const sitelink = { title: linkedArticle, badges: [ invalidBadge ] };
+			const badge = 'not-an-item-id';
+			const sitelink = { title: linkedArticle, badges: [ badge ] };
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-invalid-badge',
-				{ 'site-id': siteId, badge: invalidBadge }
-			);
-
+			assertValidError( response, 422, 'patched-sitelink-invalid-badge', { 'site-id': siteId, badge } );
 			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, invalidBadge );
+			assert.include( response.body.message, badge );
 		} );
 
 		it( 'item not a badge', async () => {
@@ -368,13 +307,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-item-not-a-badge',
-				{ 'site-id': siteId, badge: notBadgeItemId }
-			);
-
+			const context = { 'site-id': siteId, badge: notBadgeItemId };
+			assertValidError( response, 422, 'patched-sitelink-item-not-a-badge', context );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, notBadgeItemId );
 		} );
@@ -388,13 +322,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-badges-format',
-				{ 'site-id': siteId, badges: badgesWithInvalidFormat }
-			);
-
+			const context = { 'site-id': siteId, badges: badgesWithInvalidFormat };
+			assertValidError( response, 422, 'patched-sitelink-badges-format', context );
 			assert.include( response.body.message, siteId );
 		} );
 
@@ -410,13 +339,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-sitelink-conflict',
-				{ 'site-id': siteId, 'matching-item-id': testItemId }
-			);
-
+			const context = { 'site-id': siteId, 'matching-item-id': testItemId };
+			assertValidError( response, 422, 'patched-sitelink-conflict', context );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, testItemId );
 		} );
@@ -433,13 +357,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'url-not-modifiable',
-				{ 'site-id': siteId }
-			);
-
+			assertValidError( response, 422, 'url-not-modifiable', { 'site-id': siteId } );
 			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
 		} );
 

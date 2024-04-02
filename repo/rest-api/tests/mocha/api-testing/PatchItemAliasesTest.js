@@ -7,17 +7,7 @@ const { newPatchItemAliasesRequestBuilder } = require( '../helpers/RequestBuilde
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
-
-function assertValidErrorResponse( response, statusCode, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 
@@ -109,7 +99,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( itemId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-item-id' );
+			assertValidError( response, 400, 'invalid-item-id' );
 			assert.include( response.body.message, itemId );
 		} );
 
@@ -120,7 +110,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'comment-too-long' );
+			assertValidError( response, 400, 'comment-too-long' );
 			assert.include( response.body.message, '500' );
 		} );
 
@@ -129,7 +119,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [] )
 				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 400, 'invalid-edit-tag' );
+			assertValidError( response, 400, 'invalid-edit-tag' );
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
@@ -170,7 +160,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( itemId, [] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 404, 'item-not-found' );
+			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
 		} );
 	} );
@@ -183,7 +173,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( redirectSource, [] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item' );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -194,7 +184,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'path', operation } );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
 			assert.include( response.body.message, operation.path );
 		} );
 
@@ -204,7 +194,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-target-not-found', { field: 'from', operation } );
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
 			assert.include( response.body.message, operation.from );
 		} );
 
@@ -213,7 +203,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 409, 'patch-test-failed', { 'actual-value': testAlias, operation } );
+			assertValidError( response, 409, 'patch-test-failed', { 'actual-value': testAlias, operation } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
 			assert.include( response.body.message, testAlias );
@@ -227,7 +217,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse( response, 422, 'patched-alias-empty', { language } );
+			assertValidError( response, 422, 'patched-alias-empty', { language } );
 		} );
 
 		it( 'alias too long', async () => {
@@ -240,12 +230,8 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ tooLongAlias ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidErrorResponse(
-				response,
-				422,
-				'patched-alias-too-long',
-				{ language, value: tooLongAlias, 'character-limit': maxLength }
-			);
+			const context = { language, value: tooLongAlias, 'character-limit': maxLength };
+			assertValidError( response, 422, 'patched-alias-too-long', context );
 		} );
 
 		it( 'duplicate alias', async () => {
@@ -255,23 +241,19 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ duplicate, duplicate ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-duplicate-alias' );
+			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
 			assert.include( response.body.message, language );
 			assert.include( response.body.message, duplicate );
-			assert.deepEqual( response.body.context, { language, value: duplicate } );
 		} );
 
 		it( 'alias contains invalid characters', async () => {
-			const invalidAlias = 'tab\t tab\t tab';
+			const alias = 'tab\t tab\t tab';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${testLanguage}`, value: [ invalidAlias ] }
+				{ op: 'add', path: `/${testLanguage}`, value: [ alias ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-aliases-invalid-field' );
+			assertValidError( response, 422, 'patched-aliases-invalid-field', { path: testLanguage, value: alias } );
 			assert.include( response.body.message, testLanguage );
-			assert.deepEqual( response.body.context, { path: testLanguage, value: invalidAlias } );
 		} );
 
 		it( 'aliases in language is not a list', async () => {
@@ -281,7 +263,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			const context = { path: testLanguage, value: invalidAliasesInLanguage };
-			assertValidErrorResponse( response, 422, 'patched-aliases-invalid-field', context );
+			assertValidError( response, 422, 'patched-aliases-invalid-field', context );
 			assert.include( response.body.message, testLanguage );
 		} );
 
@@ -292,7 +274,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			const context = { path: '', value: invalidAliases };
-			assertValidErrorResponse( response, 422, 'patched-aliases-invalid-field', context );
+			assertValidError( response, 422, 'patched-aliases-invalid-field', context );
 			assert.strictEqual( response.body.message, "Patched value for '' is invalid" );
 		} );
 
@@ -302,10 +284,8 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-aliases-invalid-language-code' );
+			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
 			assert.include( response.body.message, language );
-			assert.deepEqual( response.body.context, { language } );
 		} );
 	} );
 
