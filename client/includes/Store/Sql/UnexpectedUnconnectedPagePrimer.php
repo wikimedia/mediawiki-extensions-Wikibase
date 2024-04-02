@@ -144,12 +144,12 @@ class UnexpectedUnconnectedPagePrimer {
 		$dbw = $this->localConnectionManager->getWriteConnection();
 		$dbw->startAtomic( __METHOD__ );
 
-		$dbw->replace(
-			'page_props',
-			[ [ 'pp_page', 'pp_propname' ] ],
-			$rows,
-			__METHOD__
-		);
+		$dbw->newReplaceQueryBuilder()
+			->replaceInto( 'page_props' )
+			->uniqueIndexFields( [ 'pp_page', 'pp_propname' ] )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 
 		$dbw->endAtomic( __METHOD__ );
 

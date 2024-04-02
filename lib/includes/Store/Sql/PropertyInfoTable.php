@@ -203,16 +203,16 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 
 		$dbw = $this->getWriteConnection();
 
-		$dbw->replace(
-			self::TABLE_NAME,
-			'pi_property_id',
-			[
+		$dbw->newReplaceQueryBuilder()
+			->replaceInto( self::TABLE_NAME )
+			->uniqueIndexFields( 'pi_property_id' )
+			->row( [
 				'pi_property_id' => $propertyId->getNumericId(),
 				'pi_info' => $json,
 				'pi_type' => $type,
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	/**
