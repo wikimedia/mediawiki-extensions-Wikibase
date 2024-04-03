@@ -36,7 +36,6 @@ class RepoNoBadUsageTest extends NoBadUsageTestBase {
 				'tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php' => true, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
-			'wfGetDB' => [],
 		];
 	}
 

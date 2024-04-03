@@ -59,7 +59,6 @@ class LibNoBadUsageTest extends NoBadUsageTestBase {
 				'tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php' => true,
 				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php' => true,
 			],
-			'wfGetDB' => [],
 		];
 	}
 
