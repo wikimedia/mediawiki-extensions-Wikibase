@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Protostar"
+			"Protostar",
+			"122112ê"
 		]
 	},
 	"wikibase-edit": "èdit",
-	"wikibase-add": "add"
+	"wikibase-add": "add",
+	"wikibase-label-empty": "No lɛbl nɔ de we dɛn dɔn difayn",
+	"wikibase-description-empty": "No diskripshɔn nɔ de we dɛn dɔn difayn",
+	"wikibase-sitelinks-special": "Ɔda sayt dɛn"
 }
