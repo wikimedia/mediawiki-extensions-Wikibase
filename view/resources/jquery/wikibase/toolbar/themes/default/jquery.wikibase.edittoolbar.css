@@ -13,11 +13,11 @@
 	background-image: url( images/icons/ooui/helpNotice.svg );
 	background-position: 0 0;
 	background-repeat: no-repeat;
-	background-size: 14px 14px;
+	background-size: 0.875rem 0.875rem;
 	display: inline-block;
-	width: 16px;
-	height: 16px;
-	margin-left: 6px;
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.375rem;
 	vertical-align: middle;
 	opacity: 0.87; /* Equals `#222` on `background-color: #fff` */
 	cursor: pointer;
