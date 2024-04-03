@@ -9,7 +9,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Item" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Item" },
+			"201": { "$ref": "../../global/responses.json#/Item" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewItemInput" },
 			"409": { "$ref": "../../global/responses.json#/SitelinkConflict" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
