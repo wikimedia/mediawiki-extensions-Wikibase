@@ -32,17 +32,20 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 	private EntityIdParser $propertyIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private array $valueParserCallbacks;
+	private array $dataTypeToValueTypeMap;
 
 	public function __construct(
 		EntityIdParser $propertyIdParser,
 		Deserializer $dataValueDeserializer,
 		PropertyDataTypeLookup $dataTypeLookup,
-		array $valueParserCallbacks
+		array $valueParserCallbacks,
+		array $dataTypeToValueTypeMap
 	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->propertyIdParser = $propertyIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->valueParserCallbacks = $valueParserCallbacks;
+		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
 	}
 
 	/**
@@ -119,8 +122,7 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 	}
 
 	private function deserializeDataValue( PropertyId $propertyId, array $serialization ): DataValue {
-		$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-		$dataTypeSpecificParserCallback = $this->valueParserCallbacks["PT:$dataType"] ?? null;
+		$dataTypeSpecificParserCallback = $this->getDataTypeSpecificParserCallback( $propertyId, $serialization['type'] );
 
 		try {
 			return $dataTypeSpecificParserCallback
@@ -133,6 +135,20 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 
 			return new UnDeserializableValue( $value, $type, $error );
 		}
+	}
+
+	private function getDataTypeSpecificParserCallback( PropertyId $propertyId, string $valueType ): ?callable {
+		$possibleDataTypeKeys = array_map(
+			fn( string $dataType ) => "PT:$dataType",
+			array_keys( $this->dataTypeToValueTypeMap, $valueType, true )
+		);
+		if ( empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->valueParserCallbacks ) ) ) ) {
+			return null; // no data types corresponding to the given value type register a value parser
+		}
+
+		$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+
+		return $this->valueParserCallbacks["PT:$dataType"] ?? null;
 	}
 
 	/**

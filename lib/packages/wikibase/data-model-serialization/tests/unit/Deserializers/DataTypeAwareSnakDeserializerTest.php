@@ -29,6 +29,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private array $valueParserCallbacks;
+	private array $dataTypeToValueTypeMap;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -36,6 +37,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 		$this->dataTypeLookup = new InMemoryDataTypeLookup();
 		$this->dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY_ID ), 'string' );
 		$this->valueParserCallbacks = [];
+		$this->dataTypeToValueTypeMap = [ 'string' => 'string' ];
 	}
 
 	protected function buildDeserializer(): DataTypeAwareSnakDeserializer {
@@ -45,7 +47,8 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 				'string' => StringValue::class,
 			] ),
 			$this->dataTypeLookup,
-			$this->valueParserCallbacks
+			$this->valueParserCallbacks,
+			$this->dataTypeToValueTypeMap
 		);
 	}
 
@@ -222,6 +225,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 		$propertyId = new NumericPropertyId( 'P777' );
 
 		$this->valueParserCallbacks = [ "PT:$dataTypeWithValueParser" => fn() => $valueParser ];
+		$this->dataTypeToValueTypeMap = [ $dataTypeWithValueParser => 'string' ];
 		$this->dataTypeLookup = new InMemoryDataTypeLookup();
 		$this->dataTypeLookup->setDataTypeForProperty( $propertyId, $dataTypeWithValueParser );
 
@@ -236,6 +240,24 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 
 		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
 		$this->assertSame( $expectedValue, $snak->getDataValue() );
+	}
+
+	public function testGivenValueParserUnambiguous_doesNoDataTypeLookup(): void {
+		$this->dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
+		$this->dataTypeLookup->expects( $this->never() )->method( $this->anything() );
+		$expectedValue = 'potato';
+
+		$snak = $this->buildDeserializer()->deserialize( [
+			'snaktype' => 'value',
+			'property' => self::STRING_PROPERTY_ID,
+			'datavalue' => [
+				'type' => 'string',
+				'value' => $expectedValue,
+			],
+		] );
+
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
+		$this->assertEquals( new StringValue( $expectedValue ), $snak->getDataValue() );
 	}
 
 	private function assertSnakHasUnDeserializableValue( PropertyValueSnak $snak ): void {
