@@ -83,7 +83,7 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 			'en'
 		);
 		$name = $languageNameLookup->getNameForTerms( 'mul' );
-		$this->assertSame( 'default values (mul)', $name );
+		$this->assertSame( 'default values for all languages', $name );
 	}
 
 }
