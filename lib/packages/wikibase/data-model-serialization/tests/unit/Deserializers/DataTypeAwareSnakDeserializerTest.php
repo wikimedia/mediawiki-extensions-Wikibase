@@ -7,10 +7,13 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
+use ValueParsers\ValueParser;
 use Wikibase\DataModel\Deserializers\DataTypeAwareSnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -22,12 +25,27 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  */
 class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase {
 
+	private const STRING_PROPERTY_ID = 'P42';
+
+	private PropertyDataTypeLookup $dataTypeLookup;
+	private array $valueParserCallbacks;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->dataTypeLookup = new InMemoryDataTypeLookup();
+		$this->dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY_ID ), 'string' );
+		$this->valueParserCallbacks = [];
+	}
+
 	protected function buildDeserializer(): DataTypeAwareSnakDeserializer {
 		return new DataTypeAwareSnakDeserializer(
 			new BasicEntityIdParser(),
 			new DataValueDeserializer( [
 				'string' => StringValue::class,
-			] )
+			] ),
+			$this->dataTypeLookup,
+			$this->valueParserCallbacks
 		);
 	}
 
@@ -36,19 +54,19 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 			[
 				[
 					'snaktype' => 'novalue',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 				],
 			],
 			[
 				[
 					'snaktype' => 'somevalue',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 				],
 			],
 			[
 				[
 					'snaktype' => 'value',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 					'datavalue' => [
 						'type' => 'string',
 						'value' => 'hax',
@@ -85,7 +103,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 				new PropertyNoValueSnak( 42 ),
 				[
 					'snaktype' => 'novalue',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 					'hash' => '5c33520fbfb522444868b4168a35d4b919370018',
 				],
 			],
@@ -93,14 +111,14 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 				new PropertySomeValueSnak( 42 ),
 				[
 					'snaktype' => 'somevalue',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 				],
 			],
 			[
 				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
 				[
 					'snaktype' => 'value',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 					'datavalue' => [
 						'type' => 'string',
 						'value' => 'hax',
@@ -111,7 +129,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 				new PropertyNoValueSnak( 42 ),
 				[
 					'snaktype' => 'novalue',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 					'hash' => 'not a valid hash',
 				],
 			],
@@ -136,7 +154,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 			[
 				[
 					'snaktype' => 'value',
-					'property' => 'P42',
+					'property' => self::STRING_PROPERTY_ID,
 				],
 			],
 		];
@@ -165,7 +183,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 	public function testGivenInvalidDataValue_unDeserializableValueIsConstructed(): void {
 		$serialization = [
 			'snaktype' => 'value',
-			'property' => 'P42',
+			'property' => self::STRING_PROPERTY_ID,
 			'datavalue' => [
 				'type' => 'string',
 				'value' => 1337,
@@ -181,7 +199,7 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 	public function testGivenInvalidDataValue_unDeserializableValueWithErrorText(): void {
 		$serialization = [
 			'snaktype' => 'value',
-			'property' => 'P42',
+			'property' => self::STRING_PROPERTY_ID,
 			'datavalue' => [
 				'type' => 'string',
 				'value' => 1337,
@@ -196,8 +214,32 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 		$this->assertTrue( $snak->getDataValue()->equals( $expectedValue ) );
 	}
 
+	public function testDataTypeSpecificValueParser(): void {
+		$expectedValue = new StringValue( 'value produced by custom parser' );
+		$valueParser = $this->createStub( ValueParser::class );
+		$valueParser->method( 'parse' )->willReturn( $expectedValue );
+		$dataTypeWithValueParser = 'some-special-data-type';
+		$propertyId = new NumericPropertyId( 'P777' );
+
+		$this->valueParserCallbacks = [ "PT:$dataTypeWithValueParser" => fn() => $valueParser ];
+		$this->dataTypeLookup = new InMemoryDataTypeLookup();
+		$this->dataTypeLookup->setDataTypeForProperty( $propertyId, $dataTypeWithValueParser );
+
+		$snak = $this->buildDeserializer()->deserialize( [
+			'snaktype' => 'value',
+			'property' => "$propertyId",
+			'datavalue' => [
+				'type' => 'string',
+				'value' => 'potato',
+			],
+		] );
+
+		$this->assertInstanceOf( PropertyValueSnak::class, $snak );
+		$this->assertSame( $expectedValue, $snak->getDataValue() );
+	}
+
 	private function assertSnakHasUnDeserializableValue( PropertyValueSnak $snak ): void {
-		$this->assertEquals( new NumericPropertyId( 'P42' ), $snak->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( self::STRING_PROPERTY_ID ), $snak->getPropertyId() );
 
 		$dataValue = $snak->getDataValue();
 

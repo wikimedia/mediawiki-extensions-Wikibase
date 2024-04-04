@@ -15,6 +15,7 @@ use Deserializers\Exceptions\UnsupportedTypeException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -29,13 +30,19 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 
 	private Deserializer $dataValueDeserializer;
 	private EntityIdParser $propertyIdParser;
+	private PropertyDataTypeLookup $dataTypeLookup;
+	private array $valueParserCallbacks;
 
 	public function __construct(
 		EntityIdParser $propertyIdParser,
-		Deserializer $dataValueDeserializer
+		Deserializer $dataValueDeserializer,
+		PropertyDataTypeLookup $dataTypeLookup,
+		array $valueParserCallbacks
 	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->propertyIdParser = $propertyIdParser;
+		$this->dataTypeLookup = $dataTypeLookup;
+		$this->valueParserCallbacks = $valueParserCallbacks;
 	}
 
 	/**
@@ -103,16 +110,22 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 
 	private function newValueSnak( array $serialization ): PropertyValueSnak {
 		$this->requireAttribute( $serialization, 'datavalue' );
+		$propertyId = $this->deserializePropertyId( $serialization['property'] );
 
 		return new PropertyValueSnak(
-			$this->deserializePropertyId( $serialization['property'] ),
-			$this->deserializeDataValue( $serialization['datavalue'] )
+			$propertyId,
+			$this->deserializeDataValue( $propertyId, $serialization['datavalue'] )
 		);
 	}
 
-	private function deserializeDataValue( array $serialization ): DataValue {
+	private function deserializeDataValue( PropertyId $propertyId, array $serialization ): DataValue {
+		$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		$dataTypeSpecificParserCallback = $this->valueParserCallbacks["PT:$dataType"] ?? null;
+
 		try {
-			return $this->dataValueDeserializer->deserialize( $serialization );
+			return $dataTypeSpecificParserCallback
+				? $dataTypeSpecificParserCallback()->parse( $serialization['value'] )
+				: $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
 			$value = $serialization[DataValueDeserializer::VALUE_KEY] ?? null;
 			$type = $serialization[DataValueDeserializer::TYPE_KEY] ?? null;
