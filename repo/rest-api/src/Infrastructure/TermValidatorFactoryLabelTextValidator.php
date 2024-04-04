@@ -18,7 +18,7 @@ class TermValidatorFactoryLabelTextValidator {
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
-	public function validate( string $labelText ): ?ValidationError {
+	public function validate( string $labelText, string $language ): ?ValidationError {
 		$result = $this->termValidatorFactory
 			->getLabelValidator( Item::ENTITY_TYPE )
 			->validate( $labelText );
@@ -26,19 +26,23 @@ class TermValidatorFactoryLabelTextValidator {
 			$error = $result->getErrors()[0];
 			switch ( $error->getCode() ) {
 				case 'label-too-short':
-					return new ValidationError( ItemLabelValidator::CODE_EMPTY );
+					return new ValidationError(
+						ItemLabelValidator::CODE_EMPTY,
+						[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+					);
 				case 'label-too-long':
 					return new ValidationError(
 						ItemLabelValidator::CODE_TOO_LONG,
 						[
 							ItemLabelValidator::CONTEXT_LABEL => $labelText,
+							ItemLabelValidator::CONTEXT_LANGUAGE => $language,
 							ItemLabelValidator::CONTEXT_LIMIT => $error->getParameters()[0],
 						]
 					);
 				default:
 					return new ValidationError(
 						ItemLabelValidator::CODE_INVALID,
-						[ ItemLabelValidator::CONTEXT_LABEL => $labelText ]
+						[ ItemLabelValidator::CONTEXT_LABEL => $labelText, ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
 					);
 			}
 		}

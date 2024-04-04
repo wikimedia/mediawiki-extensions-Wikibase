@@ -117,7 +117,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
@@ -148,6 +147,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookup
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\RestApi\Infrastructure\ItemDeserializerItemValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator;
@@ -335,8 +335,14 @@ return [
 
 	VRD::ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
 		function( MediaWikiServices $services ): ItemSerializationRequestValidatingDeserializer {
+			$termValidatorFactory = WikibaseRepo::getTermValidatorFactory( $services );
 			return new ItemSerializationRequestValidatingDeserializer(
-				new ItemValidator( WbRestApi::getItemDeserializer( $services ) )
+				new ItemDeserializerItemValidator(
+					WbRestApi::getItemDeserializer( $services ),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+					new TermValidatorFactoryLabelTextValidator( $termValidatorFactory ),
+					WikibaseRepo::getItemTermsCollisionDetector( $services )
+				)
 			);
 		},
 	// phpcs:enable

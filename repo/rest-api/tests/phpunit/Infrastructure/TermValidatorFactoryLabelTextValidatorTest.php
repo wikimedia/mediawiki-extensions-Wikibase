@@ -22,13 +22,13 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 	private const MAX_LENGTH = 50;
 
 	public function testGivenValidLabel_returnsNull(): void {
-		$this->assertNull( $this->newValidator()->validate( 'potato' ) );
+		$this->assertNull( $this->newValidator()->validate( 'potato', 'en' ) );
 	}
 
 	public function testEmptyLabel_returnsValidationError(): void {
 		$this->assertEquals(
-			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
-			$this->newValidator()->validate( '' )
+			new ValidationError( ItemLabelValidator::CODE_EMPTY, [ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ] ),
+			$this->newValidator()->validate( '', 'en' )
 		);
 	}
 
@@ -39,10 +39,11 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 				ItemLabelValidator::CODE_TOO_LONG,
 				[
 					ItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
+					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
-			$this->newValidator()->validate( $tooLongLabel )
+			$this->newValidator()->validate( $tooLongLabel, 'en' )
 		);
 	}
 
@@ -51,9 +52,9 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$this->assertEquals(
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_LABEL => $invalidLabel ]
+				[ ItemLabelValidator::CONTEXT_LABEL => $invalidLabel, ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			$this->newValidator()->validate( $invalidLabel )
+			$this->newValidator()->validate( $invalidLabel, 'en' )
 		);
 	}
 
