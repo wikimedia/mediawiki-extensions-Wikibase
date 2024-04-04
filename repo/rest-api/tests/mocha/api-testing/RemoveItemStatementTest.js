@@ -138,17 +138,6 @@ describe( 'DELETE statement', () => {
 					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
-
-				it( 'statement subject is a redirect', async () => {
-					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
-					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRemoveRequestBuilder( statementId )
-						.assertValidRequest()
-						.makeRequest();
-
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
-				} );
 			} );
 		} );
 	} );
@@ -165,6 +154,17 @@ describe( 'DELETE statement', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
+		it( 'responds 400 if item and statement do not match', async () => {
+			const statementId = 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response =
+				await newRemoveItemStatementRequestBuilder( testItemId, statementId )
+					.assertValidRequest()
+					.makeRequest();
+
+			const context = { 'item-id': testItemId, 'statement-id': statementId };
+			assertValidError( response, 400, 'item-statement-id-mismatch', context );
+		} );
+
 		it( 'responds 404 item-not-found for nonexistent item', async () => {
 			const itemId = 'Q999999';
 			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
@@ -176,12 +176,12 @@ describe( 'DELETE statement', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'responds 404 statement-not-found for item ID mismatch', async () => {
-			const statementId = 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response =
-				await newRemoveItemStatementRequestBuilder( testItemId, statementId )
-					.assertValidRequest()
-					.makeRequest();
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newRemoveItemStatementRequestBuilder( redirectSource, statementId )
+				.assertValidRequest()
+				.makeRequest();
 
 			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
@@ -201,6 +201,17 @@ describe( 'DELETE statement', () => {
 
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {
 			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newRemoveStatementRequestBuilder( statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newRemoveStatementRequestBuilder( statementId )
 				.assertValidRequest()
 				.makeRequest();

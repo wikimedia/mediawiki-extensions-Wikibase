@@ -305,17 +305,6 @@ describe( 'PUT statement tests', () => {
 					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
-
-				it( 'statement subject is a redirect', async () => {
-					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
-					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-					const response = await newReplaceRequestBuilder( testItemId, statementId, statement )
-						.assertValidRequest().makeRequest();
-
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
-				} );
 			} );
 		} );
 
@@ -356,20 +345,19 @@ describe( 'PUT statement tests', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'responds statement-not-found if item exists but statement prefix does not', async () => {
-			const itemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-			const response = await newReplaceItemStatementRequestBuilder( itemId, statementId )
+			const response = await newReplaceItemStatementRequestBuilder( redirectSource, statementId )
 				.withJsonBodyParam( 'statement', statement )
-				.assertValidRequest()
-				.makeRequest();
+				.assertValidRequest().makeRequest();
 
 			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
 
-		it( 'responds statement-not-found if item and statement exist, but do not match', async () => {
+		it( 'responds 400 if item and statement do not match', async () => {
 			const itemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 			const response = await newReplaceItemStatementRequestBuilder( itemId, testStatementId )
@@ -377,8 +365,8 @@ describe( 'PUT statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, testStatementId );
+			const context = { 'item-id': itemId, 'statement-id': testStatementId };
+			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 
 	} );
@@ -401,6 +389,18 @@ describe( 'PUT statement tests', () => {
 				.withJsonBodyParam( 'statement', statement )
 				.assertValidRequest()
 				.makeRequest();
+
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
+			const response = await newReplaceStatementRequestBuilder( statementId )
+				.withJsonBodyParam( 'statement', statement )
+				.assertValidRequest().makeRequest();
 
 			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );

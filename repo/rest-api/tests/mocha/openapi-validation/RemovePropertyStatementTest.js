@@ -61,7 +61,7 @@ describe( 'validate DELETE endpoints for property statements against OpenAPI def
 			} );
 
 			it( '404 Not Found response is valid for a non-existing statement', async () => {
-				const nonexistentStatementId = 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+				const nonexistentStatementId = `${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 
 				const response = await newRemoveRequestBuilder( nonexistentStatementId )
 					.makeRequest();

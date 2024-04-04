@@ -84,19 +84,6 @@ class GetItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenStatementIdDoesNotMatchItemId_throws(): void {
-		$statementId = 'Q111111111$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		try {
-			$this->newUseCase()->execute(
-				new GetItemStatementRequest( 'Q1', $statementId )
-			);
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
-		}
-	}
-
 	private function newUseCase(): GetItemStatement {
 		return new GetItemStatement(
 			$this->validator,

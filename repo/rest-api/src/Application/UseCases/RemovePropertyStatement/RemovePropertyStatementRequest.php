@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemovePropertyStatementRequest extends RemoveStatementRequest implements PropertyIdRequest {
+class RemovePropertyStatementRequest extends RemoveStatementRequest implements PropertyStatementIdRequest {
 
 	private string $propertyId;
 

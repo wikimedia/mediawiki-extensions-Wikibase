@@ -34,6 +34,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
@@ -44,6 +45,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
@@ -339,6 +341,14 @@ return [
 				new ItemValidator( WbRestApi::getItemDeserializer( $services ) )
 			);
 		},
+
+	VRD::ITEM_STATEMENT_ID_REQUEST_VALIDATOR => function (): ItemStatementIdRequestValidator {
+		return new ItemStatementIdRequestValidator();
+	},
+
+	VRD::PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR => function (): PropertyStatementIdRequestValidator {
+		return new PropertyStatementIdRequestValidator();
+	},
 	// phpcs:enable
 
 	'WbRestApi.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {

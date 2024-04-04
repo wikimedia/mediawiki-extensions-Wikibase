@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemStatementRequest extends RemoveStatementRequest implements ItemIdRequest {
+class RemoveItemStatementRequest extends RemoveStatementRequest implements ItemStatementIdRequest {
 
 	private string $itemId;
 

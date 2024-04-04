@@ -602,7 +602,8 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
-					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" }
 				}
 			}
 		},
@@ -620,7 +621,8 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
-					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" }
+					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" }
 				}
 			}
 		},
@@ -708,6 +710,7 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
@@ -736,6 +739,7 @@
 				"examples": {
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
@@ -783,6 +787,7 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
@@ -803,6 +808,7 @@
 				"examples": {
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
@@ -1521,6 +1527,7 @@
 				"examples": {
 					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
@@ -1551,6 +1558,7 @@
 				"examples": {
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
+					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {

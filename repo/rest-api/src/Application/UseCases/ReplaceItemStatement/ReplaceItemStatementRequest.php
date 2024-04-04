@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ReplaceItemStatementRequest extends ReplaceStatementRequest implements ItemIdRequest {
+class ReplaceItemStatementRequest extends ReplaceStatementRequest implements ItemStatementIdRequest {
 
 	private string $itemId;
 

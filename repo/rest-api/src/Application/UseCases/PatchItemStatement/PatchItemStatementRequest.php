@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PatchItemStatementRequest extends PatchStatementRequest implements ItemIdRequest {
+class PatchItemStatementRequest extends PatchStatementRequest implements ItemStatementIdRequest {
 
 	private string $itemId;
 

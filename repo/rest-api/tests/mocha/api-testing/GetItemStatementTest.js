@@ -100,17 +100,6 @@ describe( 'GET statement', () => {
 					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
-
-				it( 'statement subject is a redirect', async () => {
-					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
-					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
-						.assertValidRequest()
-						.makeRequest();
-
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
-				} );
 			} );
 		} );
 	} );
@@ -138,25 +127,26 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, subjectId );
 		} );
 
-		it( 'responds item-not-found if item does not exist', async () => {
-			const itemId = 'Q999999';
-			const response = await newGetItemStatementRequestBuilder( itemId, testStatement.id )
-				.assertValidRequest()
-				.makeRequest();
+		it( 'responds 400 if item and statement do not match', async () => {
+			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const response = await newGetItemStatementRequestBuilder(
+				requestedItemId,
+				testStatement.id
+			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'item-not-found' );
-			assert.include( response.body.message, itemId );
+			const context = { 'item-id': requestedItemId, 'statement-id': testStatement.id };
+			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 
-		it( 'responds item-not-found if item and statement do not exist but statement prefix does', async () => {
-			const itemId = 'Q999999';
-			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
-			const response = await newGetItemStatementRequestBuilder( itemId, statementId )
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newGetItemStatementRequestBuilder( redirectSource, statementId )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'item-not-found' );
-			assert.include( response.body.message, itemId );
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
 		} );
 
 		it( 'responds item-not-found if item, statement, or statement prefix do not exist', async () => {
@@ -170,17 +160,6 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
-		it( 'responds statement-not-found if item exists but statement prefix does not', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
-		} );
-
 		it( 'responds statement-not-found if item and subject prefix exist but statement does not', async () => {
 			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
 			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
@@ -191,33 +170,22 @@ describe( 'GET statement', () => {
 			assertValidError( response, 404, 'statement-not-found' );
 			assert.include( response.body.message, statementId );
 		} );
-
-		it( 'responds statement-not-found if item and statement exist, but do not match', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const response = await newGetItemStatementRequestBuilder(
-				requestedItemId,
-				testStatement.id
-			).assertValidRequest().makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, testStatement.id );
-		} );
-
-		it( 'responds statement-not-found if statement id prefix is incorrect type', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
-		} );
 	} );
 
 	describe( 'short route specific errors', () => {
 		it( 'responds statement-not-found if item not found', async () => {
 			const statementId = 'Q999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newGetStatementRequestBuilder( statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds statement-not-found if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newGetStatementRequestBuilder( statementId )
 				.assertValidRequest()
 				.makeRequest();

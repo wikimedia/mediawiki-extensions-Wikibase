@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsReq
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
@@ -162,6 +164,8 @@ class ValidatingRequestDeserializer	implements
 		self::PREFIX . 'PropertyAliasesInLanguageEditRequestValidatingDeserializer';
 	public const SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'SitelinkEditRequestValidatingDeserializer';
 	public const ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemSerializationRequestValidatingDeserializer';
+	public const ITEM_STATEMENT_ID_REQUEST_VALIDATOR = self::PREFIX . 'ItemStatementIdRequestValidator';
+	public const PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR = self::PREFIX . 'PropertyStatementIdRequestValidator';
 
 	private ContainerInterface $serviceContainer;
 	private array $validRequestResults = [];
@@ -203,6 +207,8 @@ class ValidatingRequestDeserializer	implements
 			PropertyAliasesInLanguageEditRequest::class => self::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			SitelinkEditRequest::class => self::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 			ItemSerializationRequest::class => self::ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER,
+			ItemStatementIdRequest::class => self::ITEM_STATEMENT_ID_REQUEST_VALIDATOR,
+			PropertyStatementIdRequest::class => self::PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR,
 		];
 		$result = [];
 

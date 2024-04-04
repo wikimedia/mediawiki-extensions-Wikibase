@@ -154,6 +154,17 @@ describe( 'DELETE statement', () => {
 			assert.include( response.body.message, propertyId );
 		} );
 
+		it( 'responds 400 if property and statement do not match', async () => {
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const statementId = testStatementPropertyId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newRemovePropertyStatementRequestBuilder( requestedPropertyId, statementId )
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { 'property-id': requestedPropertyId, 'statement-id': statementId };
+			assertValidError( response, 400, 'property-statement-id-mismatch', context );
+		} );
+
 		it( 'responds 404 property-not-found for nonexistent property', async () => {
 			const propertyId = 'P999999';
 			const statementId = `${propertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
@@ -163,17 +174,6 @@ describe( 'DELETE statement', () => {
 
 			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
-		} );
-
-		it( 'responds 404 statement-not-found for property ID mismatch', async () => {
-			const statementId = 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response =
-				await newRemovePropertyStatementRequestBuilder( testPropertyId, statementId )
-					.assertValidRequest()
-					.makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
 		} );
 	} );
 

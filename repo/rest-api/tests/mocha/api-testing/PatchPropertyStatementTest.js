@@ -352,9 +352,20 @@ describe( 'PATCH property statement', () => {
 			assert.include( response.body.message, propertyId );
 		} );
 
+		it( 'responds 400 if property and statement do not match', async () => {
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const response = await newPatchPropertyStatementRequestBuilder( requestedPropertyId, testStatementId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatementId };
+			assertValidError( response, 400, 'property-statement-id-mismatch', context );
+		} );
+
 		it( 'responds 404 property-not-found for nonexistent property', async () => {
 			const propertyId = 'P999999999';
-			const response = await newPatchPropertyStatementRequestBuilder( propertyId, testStatementId, [] )
+			const statementId = 'P999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newPatchPropertyStatementRequestBuilder( propertyId, statementId, [] )
 				.assertValidRequest()
 				.makeRequest();
 

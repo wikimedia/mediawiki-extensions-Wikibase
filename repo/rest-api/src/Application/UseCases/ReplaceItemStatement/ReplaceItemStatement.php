@@ -36,13 +36,6 @@ class ReplaceItemStatement {
 
 		$this->assertItemExists->execute( $deserializedRequest->getItemId() );
 
-		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getItemId() ) ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
-			);
-		}
-
 		return $this->replaceStatement->execute( $request );
 	}
 }

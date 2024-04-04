@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\ReplacePropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class ReplacePropertyStatementRequest extends ReplaceStatementRequest implements PropertyIdRequest {
+class ReplacePropertyStatementRequest extends ReplaceStatementRequest implements PropertyStatementIdRequest {
 
 	private string $propertyId;
 
