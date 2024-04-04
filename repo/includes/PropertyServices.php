@@ -61,7 +61,7 @@ class PropertyServices {
 					return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
 				},
 				DatabaseEntitySource::TYPE => function () {
-					$infoLookup = WikibaseRepo::getStore()->getPropertyInfoLookup();
+					$infoLookup = WikibaseRepo::getPropertyInfoLookup();
 					$entityLookup = WikibaseRepo::getEntityLookup();
 					$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 

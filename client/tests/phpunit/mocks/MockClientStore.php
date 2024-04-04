@@ -12,7 +12,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * (Incomplete) ClientStore mock
@@ -137,23 +136,6 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getSiteLinkLookup() {
 		return $this->getMockRepository();
-	}
-
-	/**
-	 * @see ClientStore::getPropertyInfoLookup
-	 *
-	 * @return MockPropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup() {
-		if ( self::$propertyInfoLookup === null ) {
-			self::$propertyInfoLookup = new MockPropertyInfoLookup();
-		}
-
-		return self::$propertyInfoLookup;
-	}
-
-	public function setPropertyInfoLookup( PropertyInfoLookup $propertyInfoLookup ) {
-		self::$propertyInfoLookup = $propertyInfoLookup;
 	}
 
 	/**

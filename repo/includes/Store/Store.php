@@ -88,6 +88,7 @@ interface Store {
 	public function getEntityStoreWatcher();
 
 	/**
+	 * @deprecated use WikibaseRepo::getPropertyInfoLookup instead
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();

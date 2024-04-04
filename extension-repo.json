@@ -556,8 +556,8 @@
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.FallbackLabelDescriptionLookupFactory",
-				"WikibaseRepo.Settings",
-				"WikibaseRepo.Store"
+				"WikibaseRepo.PropertyInfoLookup",
+				"WikibaseRepo.Settings"
 			]
 		}
 	},

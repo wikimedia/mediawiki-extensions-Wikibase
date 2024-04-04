@@ -10,7 +10,6 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -62,11 +61,6 @@ interface ClientStore {
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup();
-
-	/**
-	 * @return PropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup();
 
 	/**
 	 * Returns an EntityPrefetcher which can be used to prefetch a list of entity

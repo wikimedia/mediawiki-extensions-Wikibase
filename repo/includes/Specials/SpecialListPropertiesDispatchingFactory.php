@@ -7,8 +7,8 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
-use Wikibase\Repo\Store\Store;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -29,8 +29,8 @@ class SpecialListPropertiesDispatchingFactory {
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityTitleLookup $entityTitleLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		SettingsArray $repoSettings,
-		Store $store
+		PropertyInfoLookup $propertyInfoLookup,
+		SettingsArray $repoSettings
 	) {
 		if ( $repoSettings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			return new SpecialListFederatedProperties(
@@ -40,8 +40,7 @@ class SpecialListPropertiesDispatchingFactory {
 
 		return new SpecialListProperties(
 			$dataTypeFactory,
-			// TODO move PropertyInfoLookup to service container and inject it directly
-			$store->getPropertyInfoLookup(),
+			$propertyInfoLookup,
 			$labelDescriptionLookupFactory,
 			$entityIdFormatterFactory,
 			$entityTitleLookup

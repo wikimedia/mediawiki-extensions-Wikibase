@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	/**
@@ -73,6 +74,8 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
 	private function doMock() {
+		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
+
 		$store = new MockClientStore( 'de' );
 		$entityLookup = static::getEntityLookup();
 		$store->setEntityLookup( $entityLookup );

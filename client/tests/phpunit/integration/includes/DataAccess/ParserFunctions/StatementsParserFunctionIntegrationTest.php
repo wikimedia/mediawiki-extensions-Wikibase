@@ -28,6 +28,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * Simple integration test for the {{#statements:…}} parser function.
@@ -54,6 +55,8 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		parent::setUp();
 
 		$this->maskPropertyLabelResolver();
+
+		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
 
 		$store = new MockClientStore( 'de' );
 		$this->setService( 'WikibaseClient.Store', $store );

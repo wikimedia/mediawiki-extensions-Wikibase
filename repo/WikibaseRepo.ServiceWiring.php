@@ -99,6 +99,7 @@ use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\SourceDispatchingPropertyDataTypeLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -536,7 +537,7 @@ return [
 	'WikibaseRepo.DefaultSnakFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseSnakFormatterBuilders {
 		return new WikibaseSnakFormatterBuilders(
 			WikibaseRepo::getDefaultValueFormatterBuilders( $services ),
-			WikibaseRepo::getStore( $services )->getPropertyInfoLookup(),
+			WikibaseRepo::getPropertyInfoLookup(),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services )
 		);
@@ -1634,6 +1635,26 @@ return [
 		return new PropertyInfoBuilder( $propertyIdMap );
 	},
 
+	'WikibaseRepo.PropertyInfoLookup' => function ( MediaWikiServices $services ): PropertyInfoLookup {
+		$repoSettings = WikibaseRepo::getSettings( $services );
+		$cacheKeyGroup = $repoSettings->getSetting( 'sharedCacheKeyGroup' );
+		$cacheDuration = $repoSettings->getSetting( 'sharedCacheDuration' );
+
+		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
+			WikibaseRepo::getWikibaseServices( $services )->getPropertyInfoLookup(),
+			$services->getMainWANObjectCache(),
+			$cacheKeyGroup,
+			$cacheDuration
+		);
+
+		return new CachingPropertyInfoLookup(
+			$wanCachedPropertyInfoLookup,
+			$services->getLocalServerObjectCache(),
+			$cacheKeyGroup,
+			$cacheDuration
+		);
+	},
+
 	'WikibaseRepo.PropertyTermsCollisionDetector' => function ( MediaWikiServices $services ): TermsCollisionDetector {
 		return WikibaseRepo::getTermsCollisionDetectorFactory( $services )
 			->getTermsCollisionDetector( Property::ENTITY_TYPE );
@@ -1830,7 +1851,8 @@ return [
 			WikibaseRepo::getWikibaseServices( $services ),
 			$services->getHookContainer(),
 			WikibaseRepo::getLocalEntitySource( $services ),
-			WikibaseRepo::getSettings( $services )
+			WikibaseRepo::getSettings( $services ),
+			WikibaseRepo::getPropertyInfoLookup( $services )
 		);
 	},
 

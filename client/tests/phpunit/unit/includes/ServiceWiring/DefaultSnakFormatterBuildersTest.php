@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
@@ -27,8 +26,8 @@ class DefaultSnakFormatterBuildersTest extends ServiceWiringTestCase {
 		);
 
 		$this->mockService(
-			'WikibaseClient.Store',
-			$this->getMockStore()
+			'WikibaseClient.PropertyInfoLookup',
+			$this->createMock( PropertyInfoLookup::class )
 		);
 
 		$this->mockService(
@@ -45,17 +44,6 @@ class DefaultSnakFormatterBuildersTest extends ServiceWiringTestCase {
 			WikibaseSnakFormatterBuilders::class,
 			$this->getService( 'WikibaseClient.DefaultSnakFormatterBuilders' )
 		);
-	}
-
-	private function getMockStore(): ClientStore {
-		$store = $this->createMock( ClientStore::class );
-		$propertyInfoLookup = $this->createMock( PropertyInfoLookup::class );
-
-		$store->expects( $this->once() )
-			->method( 'getPropertyInfoLookup' )
-			->willReturn( $propertyInfoLookup );
-
-		return $store;
 	}
 
 }

@@ -10,6 +10,7 @@ use MediaWikiIntegrationTestCase;
 use ParserOptions;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserHookHandler
@@ -27,8 +28,8 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$store = new MockClientStore( 'de' );
-		$this->setService( 'WikibaseClient.Store', $store );
+		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
+		$this->setService( 'WikibaseClient.Store', new MockClientStore( 'de' ) );
 	}
 
 	public function testStateCleared() {
