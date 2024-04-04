@@ -49,7 +49,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 
 		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
 
-		$store = new MockClientStore( 'de' );
+		$store = new MockClientStore();
 		$this->setService( 'WikibaseClient.Store', $store );
 
 		$this->setContentLang( 'de' );

@@ -58,7 +58,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
 
-		$store = new MockClientStore( 'de' );
+		$store = new MockClientStore();
 		$this->setService( 'WikibaseClient.Store', $store );
 
 		$this->store = $store;

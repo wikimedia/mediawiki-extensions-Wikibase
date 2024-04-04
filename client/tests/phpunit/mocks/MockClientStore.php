@@ -22,18 +22,6 @@ use Wikibase\Lib\Tests\MockRepository;
 class MockClientStore implements ClientStore {
 
 	/**
-	 * @var string|null
-	 */
-	private $languageCode;
-
-	/**
-	 * @param string|null $languageCode
-	 */
-	public function __construct( $languageCode = null ) {
-		$this->languageCode = $languageCode;
-	}
-
-	/**
 	 * @var MockRepository|null
 	 */
 	private static $mockRepository = null;
@@ -157,10 +145,6 @@ class MockClientStore implements ClientStore {
 			$this->getUsageLookup(),
 			$this->getSubscriptionManager()
 		);
-	}
-
-	public function getEntityChangeLookup() {
-		// FIXME: Incomplete
 	}
 
 }

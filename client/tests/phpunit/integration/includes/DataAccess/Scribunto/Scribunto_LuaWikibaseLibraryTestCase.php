@@ -76,7 +76,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	private function doMock() {
 		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
 
-		$store = new MockClientStore( 'de' );
+		$store = new MockClientStore();
 		$entityLookup = static::getEntityLookup();
 		$store->setEntityLookup( $entityLookup );
 		$this->setService( 'WikibaseClient.Store', $store );

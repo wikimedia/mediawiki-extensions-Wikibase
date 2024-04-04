@@ -29,7 +29,7 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 
 		$this->setService( 'WikibaseClient.PropertyInfoLookup', new MockPropertyInfoLookup() );
-		$this->setService( 'WikibaseClient.Store', new MockClientStore( 'de' ) );
+		$this->setService( 'WikibaseClient.Store', new MockClientStore() );
 	}
 
 	public function testStateCleared() {

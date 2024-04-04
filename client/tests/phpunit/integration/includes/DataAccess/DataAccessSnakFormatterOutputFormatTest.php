@@ -47,7 +47,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	protected function setUp(): void {
 		parent::setUp();
 
-		$store = new MockClientStore( 'de' );
+		$store = new MockClientStore();
 		$this->setService( 'WikibaseClient.Store', $store );
 
 		// Create a term lookup from the overwritten EntityLookup or the MockClientStore one
