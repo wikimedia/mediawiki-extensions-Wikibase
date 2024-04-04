@@ -976,11 +976,13 @@ final class RepoHooks {
 				'messages' => [
 					'wikibase-label-edit-placeholder',
 					'wikibase-label-edit-placeholder-language-aware',
+					'wikibase-label-edit-placeholder-mul',
 					'wikibase-description-edit-placeholder',
 					'wikibase-description-edit-placeholder-language-aware',
 					'wikibase-description-edit-not-supported',
 					'wikibase-aliases-edit-placeholder',
 					'wikibase-aliases-edit-placeholder-language-aware',
+					'wikibase-aliases-edit-placeholder-mul',
 				],
 			],
 		];

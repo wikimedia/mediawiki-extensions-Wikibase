@@ -710,6 +710,7 @@
 			"view/tests/qunit/wikibase/entityChangers/SiteLinksChanger.tests.js",
 			"view/tests/qunit/wikibase/entityChangers/SiteLinkSetsChanger.tests.js",
 			"view/tests/qunit/wikibase/entityChangers/TempUserWatcher.tests.js",
+			"view/tests/qunit/wikibase/special/wikibase.special.languageLabelDescriptionAliases.tests.js",
 			"view/tests/qunit/wikibase/utilities/ClaimGuidGenerator.tests.js",
 			"view/tests/qunit/wikibase/view/testViewController.js",
 			"view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
@@ -781,6 +782,7 @@
 			"jquery.wikibase.wbtooltip",
 			"util.inherit",
 			"util.Notifier",
+			"mediawiki.htmlform.ooui",
 			"wikibase",
 			"wikibase.api.RepoApi",
 			"wikibase.datamodel",
@@ -796,6 +798,7 @@
 			"wikibase.view.__namespace",
 			"wikibase.view.ControllerViewFactory",
 			"wikibase.view.ReadModeViewFactory",
+			"wikibase.special.languageLabelDescriptionAliases",
 			"wikibase.WikibaseContentLanguages",
 			"wikibase.getUserLanguages"
 		]

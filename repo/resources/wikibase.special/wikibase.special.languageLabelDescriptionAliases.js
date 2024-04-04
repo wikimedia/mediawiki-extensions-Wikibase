@@ -3,10 +3,10 @@
  *
  * @license GPL-2.0-or-later
  */
-( function ( userLang, getLanguageNameByCodeForTerms ) {
+( function ( userLang, getLanguageNameByCodeForTerms, wb ) {
 	'use strict';
 
-	$( function () {
+	var hydrateLanguageLabelInputForm = function () {
 		var $lang, fields, fieldCount, langWidget;
 
 		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );
@@ -17,7 +17,8 @@
 		fields = [
 			{
 				name: 'label',
-				msgAware: 'wikibase-label-edit-placeholder-language-aware'
+				msgAware: 'wikibase-label-edit-placeholder-language-aware',
+				msgMul: 'wikibase-label-edit-placeholder-mul'
 			},
 			{
 				name: 'description',
@@ -25,7 +26,8 @@
 			},
 			{
 				name: 'aliases',
-				msgAware: 'wikibase-aliases-edit-placeholder-language-aware'
+				msgAware: 'wikibase-aliases-edit-placeholder-language-aware',
+				msgMul: 'wikibase-aliases-edit-placeholder-mul'
 			}
 		];
 
@@ -52,11 +54,24 @@
 
 			fields.forEach( function ( field ) {
 				var $input = field.widget.$input;
-				// The following messages can be used here:
-				// * wikibase-label-edit-placeholder-language-aware
-				// * wikibase-description-edit-placeholder-language-aware
-				// * wikibase-aliases-edit-placeholder-language-aware
-				$input.prop( 'placeholder', mw.msg( field.msgAware, languageName ) );
+				var placeholderText;
+				if ( languageCode === 'mul' ) {
+					if ( 'msgMul' in field ) {
+						// The following messages can be used here:
+						// * wikibase-label-edit-placeholder-mul
+						// * wikibase-aliases-edit-placeholder-mul
+						placeholderText = mw.msg( field.msgMul );
+					} else {
+						placeholderText = '';
+					}
+				} else {
+					// The following messages can be used here:
+					// * wikibase-label-edit-placeholder-language-aware
+					// * wikibase-description-edit-placeholder-language-aware
+					// * wikibase-aliases-edit-placeholder-language-aware
+					placeholderText = mw.msg( field.msgAware, languageName );
+				}
+				$input.prop( 'placeholder', placeholderText );
 
 				if ( langDir ) {
 					$input.prop( 'dir', langDir );
@@ -87,6 +102,10 @@
 		indicateDescriptionSupport( langWidget.getValue() );
 		langWidget.on( 'change', updatePlaceholders );
 		langWidget.on( 'change', indicateDescriptionSupport );
-	} );
+	};
 
-}( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCodeForTerms ) );
+	$( hydrateLanguageLabelInputForm );
+
+	wb.hydrateLanguageLabelInputForm = hydrateLanguageLabelInputForm;
+
+}( mw.config.values.wgUserLanguage, wikibase.getLanguageNameByCodeForTerms, wikibase ) );

@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function () {
+( function ( wb ) {
 	'use strict';
 
 	var datamodel = require( 'wikibase.datamodel' );
@@ -103,6 +103,72 @@
 		labelview.stopEditing();
 	} );
 
+	var TestItem = function ( key ) {
+		this._key = key;
+	};
+	$.extend( TestItem.prototype, {
+		equals: function ( other ) {
+			return other === this;
+		},
+		getKey: function () {
+			return this._key;
+		}
+	} );
+
+	var createLanguageSet = function ( languages ) {
+		var items = [];
+		for ( var i = 0; i < languages.length; i++ ) {
+			items.append( new TestItem( languages[ i ] ) );
+		}
+		return new datamodel.Set( TestItem, 'getKey', items );
+	};
+
+	QUnit.test( 'empty label message is set when no label is supplied', function ( assert ) {
+
+		var $labelview = createLabelview( {
+			value: new datamodel.Term( 'en', '' ),
+			allLanguages: createLanguageSet( wb.WikibaseContentLanguages.getTermLanguages() )
+		} );
+
+		assert.strictEqual(
+			$labelview.data( 'labelview' ).$text.text(),
+			'(wikibase-label-empty)',
+			'Expected placeholder to be set'
+		);
+	} );
+
+	QUnit.test( 'placeholder message is set when no label is supplied and item is in edit mode', function ( assert ) {
+
+		var $labelview = createLabelview( {
+			value: new datamodel.Term( 'en', '' ),
+			allLanguages: createLanguageSet( wb.WikibaseContentLanguages.getTermLanguages() )
+		} );
+		var labelview = $labelview.data( 'labelview' );
+		labelview.startEditing();
+
+		assert.strictEqual(
+			$labelview.find( 'textarea' ).attr( 'placeholder' ),
+			'(wikibase-label-edit-placeholder-language-aware: English)',
+			'Expected placeholder to be set'
+		);
+	} );
+
+	QUnit.test( 'special placeholder message is used for edits with language code mul', function ( assert ) {
+
+		var $labelview = createLabelview( {
+			value: new datamodel.Term( 'mul', '' ),
+			allLanguages: createLanguageSet( wb.WikibaseContentLanguages.getTermLanguages() )
+		} );
+		var labelview = $labelview.data( 'labelview' );
+		labelview.startEditing();
+
+		assert.strictEqual(
+			$labelview.find( 'textarea' ).attr( 'placeholder' ),
+			'(wikibase-label-edit-placeholder-mul)',
+			'Expected placeholder to be set'
+		);
+	} );
+
 	QUnit.test( 'setError()', function ( assert ) {
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
@@ -151,4 +217,4 @@
 		);
 	} );
 
-}() );
+}( wikibase ) );

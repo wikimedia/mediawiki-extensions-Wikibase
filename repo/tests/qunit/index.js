@@ -76,6 +76,7 @@
 	require( './dataTypes/DataTypeStore.tests.js' );
 	require( './wikibase.PropertyDataTypeStore.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/view/ViewFactoryFactory.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/special/wikibase.special.languageLabelDescriptionAliases.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/store/store.CachingEntityStore.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/store/store.CombiningEntityStore.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.tests.js' );
