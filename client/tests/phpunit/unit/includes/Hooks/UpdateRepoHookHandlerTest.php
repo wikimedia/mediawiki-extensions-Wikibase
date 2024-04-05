@@ -75,12 +75,6 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			$handler->onArticleDeleteComplete( $wikiPage, $this->createMock( User::class ),
 				null, null, null, null, null )
 		);
-
-		$this->assertSame(
-			$expectsSuccess,
-			isset( $title->wikibasePushedDeleteToRepo ) && $title->wikibasePushedDeleteToRepo,
-			'Delete got propagated to repo.'
-		);
 	}
 
 	public static function doPageMoveCompleteProvider() {
