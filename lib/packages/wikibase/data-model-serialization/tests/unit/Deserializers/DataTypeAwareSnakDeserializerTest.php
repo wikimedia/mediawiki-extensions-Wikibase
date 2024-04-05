@@ -10,6 +10,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Deserializers\DataTypeAwareSnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
+use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -41,14 +42,16 @@ class DataTypeAwareSnakDeserializerTest extends DispatchableDeserializerTestCase
 	}
 
 	protected function buildDeserializer(): DataTypeAwareSnakDeserializer {
+		$dataValueDeserializer = new DataValueDeserializer( [
+			'string' => StringValue::class,
+		] );
 		return new DataTypeAwareSnakDeserializer(
 			new BasicEntityIdParser(),
-			new DataValueDeserializer( [
-				'string' => StringValue::class,
-			] ),
+			$dataValueDeserializer,
 			$this->dataTypeLookup,
 			$this->valueParserCallbacks,
-			$this->dataTypeToValueTypeMap
+			$this->dataTypeToValueTypeMap,
+			new SnakValueParser( $dataValueDeserializer, $this->valueParserCallbacks )
 		);
 	}
 

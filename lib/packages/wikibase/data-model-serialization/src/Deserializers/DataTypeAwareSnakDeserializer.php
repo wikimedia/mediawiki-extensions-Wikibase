@@ -33,19 +33,22 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private array $valueParserCallbacks;
 	private array $dataTypeToValueTypeMap;
+	private SnakValueParser $snakValueParser;
 
 	public function __construct(
 		EntityIdParser $propertyIdParser,
 		Deserializer $dataValueDeserializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $valueParserCallbacks,
-		array $dataTypeToValueTypeMap
+		array $dataTypeToValueTypeMap,
+		SnakValueParser $snakValueParser
 	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->propertyIdParser = $propertyIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->valueParserCallbacks = $valueParserCallbacks;
 		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
+		$this->snakValueParser = $snakValueParser;
 	}
 
 	/**
@@ -122,11 +125,9 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 	}
 
 	private function deserializeDataValue( PropertyId $propertyId, array $serialization ): DataValue {
-		$dataTypeSpecificParserCallback = $this->getDataTypeSpecificParserCallback( $propertyId, $serialization['type'] );
-
 		try {
-			return $dataTypeSpecificParserCallback
-				? $dataTypeSpecificParserCallback()->parse( $serialization['value'] )
+			return $this->needsDataTypeLookup( $serialization[DataValueDeserializer::TYPE_KEY] )
+				? $this->snakValueParser->parse( $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ), $serialization )
 				: $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
 			$value = $serialization[DataValueDeserializer::VALUE_KEY] ?? null;
@@ -137,18 +138,16 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 		}
 	}
 
-	private function getDataTypeSpecificParserCallback( PropertyId $propertyId, string $valueType ): ?callable {
+	/**
+	 * We only need to look up the data type if the value type needs a data type specific parser.
+	 */
+	private function needsDataTypeLookup( string $valueType ): bool {
 		$possibleDataTypeKeys = array_map(
 			fn( string $dataType ) => "PT:$dataType",
 			array_keys( $this->dataTypeToValueTypeMap, $valueType, true )
 		);
-		if ( empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->valueParserCallbacks ) ) ) ) {
-			return null; // no data types corresponding to the given value type register a value parser
-		}
 
-		$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-
-		return $this->valueParserCallbacks["PT:$dataType"] ?? null;
+		return !empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->valueParserCallbacks ) ) );
 	}
 
 	/**
