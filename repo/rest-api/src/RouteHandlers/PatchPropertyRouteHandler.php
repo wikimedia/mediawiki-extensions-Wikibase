@@ -83,7 +83,8 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 					new AliasesDeserializer(),
 					new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
 				),
-				WbRestApi::getPropertyUpdater()
+				WbRestApi::getPropertyUpdater(),
+				WbRestApi::getPropertyDataRetriever()
 			),
 			new PropertySerializer(
 				$labelsSerializer,

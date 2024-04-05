@@ -13,6 +13,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,6 +28,7 @@ class PatchProperty {
 	private PatchJson $patchJson;
 	private PropertyDeserializer $propertyDeserializer;
 	private PropertyUpdater $propertyUpdater;
+	private PropertyWriteModelRetriever $propertyRetrieverWriteModel;
 
 	public function __construct(
 		PatchPropertyValidator $validator,
@@ -36,7 +38,8 @@ class PatchProperty {
 		PropertySerializer $propertySerializer,
 		PatchJson $patchJson,
 		PropertyDeserializer $propertyDeserializer,
-		PropertyUpdater $propertyUpdater
+		PropertyUpdater $propertyUpdater,
+		PropertyWriteModelRetriever $propertyRetrieverWriteModel
 	) {
 		$this->validator = $validator;
 		$this->assertPropertyExists = $assertPropertyExists;
@@ -46,6 +49,7 @@ class PatchProperty {
 		$this->patchJson = $patchJson;
 		$this->propertyDeserializer = $propertyDeserializer;
 		$this->propertyUpdater = $propertyUpdater;
+		$this->propertyRetrieverWriteModel = $propertyRetrieverWriteModel;
 	}
 
 	/**
@@ -74,13 +78,15 @@ class PatchProperty {
 				$deserializedRequest->getPatch()
 			),
 		);
+		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
 
 		$propertyRevision = $this->propertyUpdater->update(
 			$patchedProperty,
 			new EditMetadata(
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
-				PropertyEditSummary::newPatchSummary( $providedMetadata->getComment() )
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				PropertyEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalProperty, $patchedProperty )
 			)
 		);
 

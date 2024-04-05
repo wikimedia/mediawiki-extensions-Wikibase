@@ -35,5 +35,10 @@ module.exports = {
 
 	formatSitelinksEditSummary( userComment ) {
 		return `/* wbeditentity-update:0| */ ${userComment}`;
+	},
+
+	formatPropertyEditSummary( action, autoCommentArgs, userComment ) {
+		return `/* wbeditentity-${action}:0||${autoCommentArgs} */ ${userComment}`;
 	}
+
 };

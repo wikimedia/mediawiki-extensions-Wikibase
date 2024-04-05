@@ -7,6 +7,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { formatPropertyEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
@@ -42,6 +43,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const newLabel = `neues deutsches label ${utils.uniq()}`;
 			const updatedDescription = `changed description ${utils.uniq()}`;
 			const newStatementValue = 'new statement';
+			const editSummary = 'I made a patch';
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[
@@ -57,7 +59,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 						} ]
 					}
 				]
-			).makeRequest();
+			).withJsonBodyParam( 'comment', editSummary ).makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.id, testPropertyId );
@@ -72,6 +74,12 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+
+			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
+			assert.strictEqual(
+				editMetadata.comment,
+				formatPropertyEditSummary( 'update-languages-and-other-short', 'de, en, fr', editSummary )
+			);
 		} );
 
 	} );

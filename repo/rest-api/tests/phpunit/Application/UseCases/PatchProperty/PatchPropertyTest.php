@@ -29,6 +29,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -39,6 +41,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Property as PropertyReadModel;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
@@ -58,6 +61,7 @@ class PatchPropertyTest extends TestCase {
 	private PatchJson $patchJson;
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
+	private PropertyWriteModelRetriever $propertyWriteModelRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -68,6 +72,7 @@ class PatchPropertyTest extends TestCase {
 		$this->propertyRetriever = $this->createStub( PropertyRetriever::class );
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
+		$this->propertyWriteModelRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 	}
 
 	public function testHappyPath(): void {
@@ -77,15 +82,14 @@ class PatchPropertyTest extends TestCase {
 		$comment = 'statement replaced by ' . __METHOD__;
 
 		$propertyRepo = new InMemoryPropertyRepository();
-		$propertyRepo->addProperty(
-			new PropertyWriteModel(
-				$propertyId,
-				new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) ),
-				'string',
-				null
-			)
+		$originalProperty = new PropertyWriteModel(
+			$propertyId,
+			new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) ),
+			'string',
+			null
 		);
-		$this->propertyRetriever = $this->propertyUpdater = $propertyRepo;
+		$propertyRepo->addProperty( $originalProperty->copy() );
+		$this->propertyRetriever = $this->propertyUpdater = $this->propertyWriteModelRetriever = $propertyRepo;
 
 		$response = $this->newUseCase()->execute(
 			new PatchPropertyRequest(
@@ -114,6 +118,18 @@ class PatchPropertyTest extends TestCase {
 				new StatementList()
 			),
 			$response->getProperty()
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				PropertyEditSummary::newPatchSummary(
+					$comment,
+					$originalProperty,
+					$propertyRepo->getPropertyWriteModel( $propertyId )
+				),
+			),
+			$propertyRepo->getLatestRevisionEditMetadata( $propertyId )
 		);
 	}
 
@@ -196,7 +212,8 @@ class PatchPropertyTest extends TestCase {
 			),
 			$this->patchJson,
 			$this->newPropertyDeserializer(),
-			$this->propertyUpdater
+			$this->propertyUpdater,
+			$this->propertyWriteModelRetriever
 		);
 	}
 
