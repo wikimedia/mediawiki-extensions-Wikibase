@@ -107,6 +107,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 * @var RepoDomainDb
 	 */
 	private $repoDb;
+	private DeserializerFactory $deserializerFactory;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -118,6 +119,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
 		RepoDomainDb $repoDb,
+		DeserializerFactory $deserializerFactory,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
 		array $prefetchingTermLookupCallbacks,
@@ -139,6 +141,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->storageEntitySerializer = $storageEntitySerializer;
 		$this->repoDb = $repoDb;
+		$this->deserializerFactory = $deserializerFactory;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
@@ -217,19 +220,15 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	private function getEntityDeserializer(): Deserializer {
-		$deserializerFactory = new DeserializerFactory(
-			$this->dataValueDeserializer,
-			$this->entityIdParser
-		);
-
 		$deserializers = [];
 		foreach ( $this->deserializerFactoryCallbacks as $callback ) {
-			$deserializers[] = call_user_func( $callback, $deserializerFactory );
+			$deserializers[] = call_user_func( $callback, $this->deserializerFactory );
 		}
 
 		$internalDeserializerFactory = new InternalDeserializerFactory(
 			$this->dataValueDeserializer,
 			$this->entityIdParser,
+			$this->deserializerFactory,
 			new DispatchingDeserializer( $deserializers )
 		);
 

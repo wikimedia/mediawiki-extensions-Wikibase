@@ -9,6 +9,7 @@ use MediaWiki\Storage\NameTableStore;
 use Serializers\DispatchingSerializer;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -71,6 +72,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
+			$this->createStub( DeserializerFactory::class ),
 			[ 'strval' ],
 			[],
 			[],
@@ -93,6 +95,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
+			$this->createStub( DeserializerFactory::class ),
 			[ null ],
 			[],
 			[],
@@ -112,6 +115,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
+			$this->createStub( DeserializerFactory::class ),
 			[],
 			[ null ],
 			[],
@@ -131,6 +135,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
+			$this->createStub( DeserializerFactory::class ),
 			[],
 			[],
 			[ null ],
@@ -157,6 +162,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
+			$this->createStub( DeserializerFactory::class ),
 			[],
 			[],
 			[],

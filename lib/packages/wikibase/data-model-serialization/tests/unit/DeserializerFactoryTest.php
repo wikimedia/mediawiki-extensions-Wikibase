@@ -7,6 +7,7 @@ use Deserializers\Deserializer;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 
 /**
  * @covers Wikibase\DataModel\DeserializerFactory
@@ -18,7 +19,13 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 class DeserializerFactoryTest extends TestCase {
 
 	private function buildDeserializerFactory() {
-		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );
+		return new DeserializerFactory(
+			new DataValueDeserializer(),
+			new BasicEntityIdParser(),
+			new InMemoryDataTypeLookup(),
+			[],
+			[]
+		);
 	}
 
 	private function assertDeserializesWithoutException(

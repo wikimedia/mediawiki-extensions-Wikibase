@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -34,7 +35,10 @@ class SnakSerializationRoundtripTest extends TestCase {
 	private function getSnakDeserializer( array $dataValueClasses = [] ) {
 		$factory = new DeserializerFactory(
 			new DataValueDeserializer( $dataValueClasses ),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			new InMemoryDataTypeLookup(),
+			[],
+			[]
 		);
 		return $factory->newSnakDeserializer();
 	}

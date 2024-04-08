@@ -9,6 +9,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -68,6 +69,9 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 			new EntityTypeDefinitions( [] ) );
 		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
 			$this->createMock( RepoDomainDbFactory::class ) );
+
+		$this->mockService( 'WikibaseRepo.BaseDataModelDeserializerFactory',
+			$this->createMock( DeserializerFactory::class ) );
 
 		$this->assertInstanceOf(
 			MultipleEntitySourceServices::class,

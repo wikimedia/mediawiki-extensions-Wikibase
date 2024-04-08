@@ -93,6 +93,7 @@ use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
+use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -326,9 +327,17 @@ return [
 	},
 
 	'WikibaseRepo.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {
+		$dataTypeDefs = WikibaseRepo::getDataTypeDefinitions( $services );
+
 		return new DeserializerFactory(
 			WikibaseRepo::getDataValueDeserializer( $services ),
-			WikibaseRepo::getEntityIdParser( $services )
+			WikibaseRepo::getEntityIdParser( $services ),
+			new PropertyInfoDataTypeLookup(
+				WikibaseRepo::getPropertyInfoLookup( $services ),
+				WikibaseRepo::getLogger( $services )
+			),
+			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			$dataTypeDefs->getValueTypes()
 		);
 	},
 
@@ -1264,6 +1273,7 @@ return [
 		return new InternalDeserializerFactory(
 			WikibaseRepo::getDataValueDeserializer( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
+			WikibaseRepo::getBaseDataModelDeserializerFactory( $services ),
 			WikibaseRepo::getAllTypesEntityDeserializer( $services )
 		);
 	},
@@ -2179,7 +2189,8 @@ return [
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getStorageEntitySerializer( $services ),
 			WikibaseRepo::getEntityTypeDefinitions( $services ),
-			WikibaseRepo::getRepoDomainDbFactory( $services )
+			WikibaseRepo::getRepoDomainDbFactory( $services ),
+			WikibaseRepo::getBaseDataModelDeserializerFactory( $services )
 		);
 
 		$singleSourceServices = [];
