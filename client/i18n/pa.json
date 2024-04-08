@@ -42,6 +42,8 @@
 	"wikibase-rc-wikibase-edit-letter": "ਡੀ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ਸੋਧ",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} ਸੋਧਾਂ",
+	"unconnectedpages": "ਆਈਟਮਾਂ ਨਾਲ ਨਹੀਂ ਜੁੜੇ ਸਫ਼ੇ",
+	"unconnectedpages-summary": "ਇਹ ਪੰਨਾ ਉਹਨਾਂ ਪੰਨਿਆਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਕੋਈ ਕਨੈਕਟ ਕੀਤੀ ਡਾਟਾ ਆਈਟਮ ਨਹੀਂ ਹੈ (ਨੇਮਸਪੇਸਾਂ ਵਿੱਚ ਜੋ ਕਨੈਕਟਡ ਆਈਟਮਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦੇ ਹਨ)।",
 	"wikibase-unconnectedpages-submit": "ਪੰਨੇ ਦਿਖਾਓ",
 	"wikibase-pageswithbadges-invalid-id": "$1 ਇੱਕ ਵੈਧ ਆਈਟਮ ਆਈਡੀ ਨਹੀਂ ਹੈ",
 	"wikibase-pageswithbadges-submit": "ਪੰਨੇ ਦਿਖਾਓ",

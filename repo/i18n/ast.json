@@ -73,7 +73,7 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entraes}}",
 	"wikibase-sitelinks-empty": "Inda nun hai nenguna páxina enllazada con esti elementu.",
 	"wikibase-sitelinks-special": "Otros sitios",
-	"wikibase-badgeselector-badge-placeholder-title": "Fai clic p'asinar una insinia.",
+	"wikibase-badgeselector-badge-placeholder-title": "Calca pa poner una insinia.",
 	"wikibase-remove": "desaniciar",
 	"wikibase-undo-title": "Desfaciendo una edición en «$1»",
 	"wikibase-restore-title": "Restaurando la revisión antigua de «$1»",
