@@ -315,10 +315,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	}
 
 	private function serialize( $value ) {
-		$dataToStore = utf8_encode( serialize( $value ) );
+		$dataToStore = serialize( $value );
 
 		$signature = hash_hmac( 'sha256', $dataToStore, $this->secret );
-		return json_encode( [ $signature, $dataToStore ] );
+		return json_encode( [ 2, $signature, $dataToStore ] );
 	}
 
 	/**

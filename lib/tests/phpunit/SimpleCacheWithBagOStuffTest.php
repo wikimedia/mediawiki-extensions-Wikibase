@@ -19,6 +19,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 	/** @var string[] */
 	protected $skippedTests = [
 		'testClear' => 'Not possible to implement for BagOStuff',
+		'testBinaryData' => 'This cache does not support binary data',
 	];
 
 	/**
@@ -121,7 +122,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$key = $inner->makeKey( 'prefix', 'key' );
 		$value = $inner->get( $key );
 		[ $signature, $data ] = json_decode( $value );
-		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
+		$inner->set( $key, json_encode( [ 2, 'wrong signature', $data ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
 	}
@@ -135,7 +136,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'secret' );
 		$cache->set( 'key', 'some_string' );
 		$key = $inner->makeKey( 'prefix', 'key' );
-		$inner->set( $key, json_encode( [ $correctSignature, $brokenData ] ) );
+		$inner->set( $key, json_encode( [ 2, $correctSignature, $brokenData ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
 		$this->assertEquals( 'some default value', $got );
@@ -151,7 +152,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 	protected function spoilTheSignature( HashBagOStuff $inner, string $key ): void {
 		$value = $inner->get( $key );
 		[ $signature, $data ] = json_decode( $value );
-		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
+		$inner->set( $key, json_encode( [ 2, 'wrong signature', $data ] ) );
 	}
 
 	public function testSetTtl() {
@@ -196,19 +197,32 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$this->assertTrue( $cache->set( '⧼Lang⧽', 'some value' ) );
 	}
 
-	public function testSerializeUsesOldFormat(): void {
+	public function testBinaryDataNotSupported(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'somePrefix';
+		$secret = 'some secret';
+		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, $secret );
+
+		$invalidUtf8 = chr( 128 ); // unexpected continuation byte
+		$simpleCache->set( 'test', $invalidUtf8 );
+
+		$this->assertSame( 'default', $simpleCache->get( 'test', 'default' ) );
+	}
+
+	public function testSerializeUsesNewFormat(): void {
 		$inner = new HashBagOStuff();
 		$prefix = 'somePrefix';
 		$secret = 'some secret';
 		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, $secret );
 		$value = 'Iñtërnâtiônàlizætiøn';
-		$serializedValue = mb_convert_encoding( serialize( $value ), 'UTF-8', 'ISO-8859-1' );
+		$serializedValue = serialize( $value );
 
 		$simpleCache->set( 'test', $value );
 		$key = $inner->makeKey( $prefix, 'test' );
 		$serialized = $inner->get( $key );
 
 		$expected = json_encode( [
+			2,
 			hash_hmac( 'sha256', $serializedValue, $secret ),
 			$serializedValue,
 		] );
