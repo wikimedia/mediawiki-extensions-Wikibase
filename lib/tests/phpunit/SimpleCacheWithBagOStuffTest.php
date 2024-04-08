@@ -196,4 +196,60 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$this->assertTrue( $cache->set( '⧼Lang⧽', 'some value' ) );
 	}
 
+	public function testSerializeUsesOldFormat(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'somePrefix';
+		$secret = 'some secret';
+		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, $secret );
+		$value = 'Iñtërnâtiônàlizætiøn';
+		$serializedValue = mb_convert_encoding( serialize( $value ), 'UTF-8', 'ISO-8859-1' );
+
+		$simpleCache->set( 'test', $value );
+		$key = $inner->makeKey( $prefix, 'test' );
+		$serialized = $inner->get( $key );
+
+		$expected = json_encode( [
+			hash_hmac( 'sha256', $serializedValue, $secret ),
+			$serializedValue,
+		] );
+		$this->assertSame( $expected, $serialized );
+	}
+
+	public function testUnserializeSupportsOldFormat(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'somePrefix';
+		$secret = 'some secret';
+		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, $secret );
+		$value = 'Iñtërnâtiônàlizætiøn';
+		$serializedValue = mb_convert_encoding( serialize( $value ), 'UTF-8', 'ISO-8859-1' );
+
+		$key = $inner->makeKey( $prefix, 'test' );
+		$inner->set( $key, json_encode( [
+			hash_hmac( 'sha256', $serializedValue, $secret ),
+			$serializedValue,
+		] ) );
+		$unserialized = $simpleCache->get( 'test' );
+
+		$this->assertSame( $value, $unserialized );
+	}
+
+	public function testUnserializeSupportsNewFormat(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'somePrefix';
+		$secret = 'some secret';
+		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, $secret );
+		$value = 'Iñtërnâtiônàlizætiøn';
+		$serializedValue = serialize( $value );
+
+		$key = $inner->makeKey( $prefix, 'test' );
+		$inner->set( $key, json_encode( [
+			2,
+			hash_hmac( 'sha256', $serializedValue, $secret ),
+			$serializedValue,
+		] ) );
+		$unserialized = $simpleCache->get( 'test' );
+
+		$this->assertSame( $value, $unserialized );
+	}
+
 }
