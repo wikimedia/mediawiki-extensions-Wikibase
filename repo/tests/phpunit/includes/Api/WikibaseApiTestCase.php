@@ -177,10 +177,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 				},
 			];
 		} );
-		// note: when removing tmpNormalizeDataValues, call $this->resetServices() instead
-		$settings = clone WikibaseRepo::getSettings( $this->getServiceContainer() );
-		$settings->setSetting( 'tmpNormalizeDataValues', true );
-		$this->setService( 'WikibaseRepo.Settings', $settings );
+		$this->resetServices();
 
 		return $this->getEntityStore()
 			->saveEntity( Property::newFromType( 'string-uppercase' ), '', $this->user, EDIT_NEW )

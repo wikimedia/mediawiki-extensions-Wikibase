@@ -49,8 +49,7 @@ class MergeFactoryTest extends \PHPUnit\Framework\TestCase {
 			$mockProvider->getMockSnakNormalizer(),
 			$mockProvider->getMockReferenceNormalizer(),
 			$mockProvider->getMockStatementNormalizer(),
-			[],
-			true
+			[]
 		);
 
 		return new MergeFactory(

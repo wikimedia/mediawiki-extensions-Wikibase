@@ -39,7 +39,6 @@ class ChangeOpFactoryProviderTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'badgeItems' => [],
-				'tmpNormalizeDataValues' => true,
 			] ) );
 		$this->mockService( 'WikibaseRepo.EntityConstraintProvider',
 			$this->createMock( EntityConstraintProvider::class ) );

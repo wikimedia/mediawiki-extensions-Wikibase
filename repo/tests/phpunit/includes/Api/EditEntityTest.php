@@ -77,11 +77,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
+		$settings = clone WikibaseRepo::getSettings();
+		$settings->setSetting( 'badgeItems', [
 			self::$idMap['%Q42%'] => '',
 			self::$idMap['%Q149%'] => '',
 			'Q99999' => '', // Just in case we have a wrong config
 		] );
+		$this->setService( 'WikibaseRepo.Settings', $settings );
 	}
 
 	/**
