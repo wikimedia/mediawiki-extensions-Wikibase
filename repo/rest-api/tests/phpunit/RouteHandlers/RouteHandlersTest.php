@@ -78,6 +78,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
@@ -120,6 +122,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
@@ -977,6 +980,29 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					$hasErrorCode ( UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS ),
 				],
 			],
+		] ];
+		yield 'PatchProperty' => [ [
+			'useCase' => PatchProperty::class,
+			'useCaseResponse' => new PatchPropertyResponse(
+				new Property(
+					new NumericPropertyId( 'P1' ),
+					'string',
+					new Labels( new Label( 'en', 'new Property' ) ),
+					new Descriptions(),
+					new Aliases(),
+					new StatementList()
+				),
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [ 'property_id' => 'P1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'add', 'path' => '/labels/en', 'value' => 'new Property' ] ] ],
+			],
+			'expectedExceptions' => [ [
+				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
+				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+			] ],
 		] ];
 		// phpcs:enable
 	}

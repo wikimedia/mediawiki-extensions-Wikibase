@@ -45,6 +45,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
@@ -331,6 +332,11 @@ class WbRestApi {
 	public static function getPatchItemAliases( ContainerInterface $services = null ): PatchItemAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PatchItemAliases' );
+	}
+
+	public static function getPatchProperty( ContainerInterface $services = null ): PatchProperty {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchProperty' );
 	}
 
 	public static function getPatchPropertyAliases( ContainerInterface $services = null ): PatchPropertyAliases {

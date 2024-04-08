@@ -89,7 +89,15 @@ module.exports.getPropertyEditRequests = ( requestInputs ) => ( [
 		'random-description-' + utils.uniq()
 	),
 	() => rbf.newRemovePropertyLabelRequestBuilder( requestInputs.propertyId, 'en' ),
-	() => rbf.newRemovePropertyDescriptionRequestBuilder( requestInputs.propertyId, 'en' )
+	() => rbf.newRemovePropertyDescriptionRequestBuilder( requestInputs.propertyId, 'en' ),
+	() => rbf.newPatchPropertyRequestBuilder(
+		requestInputs.propertyId,
+		[ {
+			op: 'replace',
+			path: '/labels/en',
+			value: 'en-label' + utils.uniq()
+		} ]
+	)
 ].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
 
 module.exports.getItemEditRequests = ( requestInputs ) => ( [

@@ -4,29 +4,25 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -34,6 +30,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchPropertyRouteHandler extends SimpleHandler {
+	use AssertContentType;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -41,62 +38,43 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 	public const BOT_BODY_PARAM = 'bot';
 	public const COMMENT_BODY_PARAM = 'comment';
 
+	private MiddlewareHandler $middlewareHandler;
 	private PatchProperty $useCase;
 	private PropertySerializer $serializer;
 	private ResponseFactory $responseFactory;
-	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
+		MiddlewareHandler $middlewareHandler,
 		PatchProperty $useCase,
 		PropertySerializer $serializer,
-		ResponseFactory $responseFactory,
-		MiddlewareHandler $middlewareHandler
+		ResponseFactory $responseFactory
 	) {
+		$this->middlewareHandler = $middlewareHandler;
 		$this->useCase = $useCase;
 		$this->serializer = $serializer;
 		$this->responseFactory = $responseFactory;
-		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
-		$labelsSerializer = new LabelsSerializer();
-		$descriptionsSerializer = new DescriptionsSerializer();
-		$aliasesSerializer = new AliasesSerializer();
-		$statementsSerializer = new StatementListSerializer( WbRestApi::getStatementSerializer() );
 		return new self(
-			new PatchProperty(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertPropertyExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getPropertyDataRetriever(),
-				new PropertySerializer(
-					$labelsSerializer,
-					$descriptionsSerializer,
-					$aliasesSerializer,
-					$statementsSerializer
-				),
-				new PatchJson( new JsonDiffJsonPatcher() ),
-				new PropertyDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer(),
-					new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
-				),
-				WbRestApi::getPropertyUpdater(),
-				WbRestApi::getPropertyDataRetriever()
-			),
-			new PropertySerializer(
-				$labelsSerializer,
-				$descriptionsSerializer,
-				$aliasesSerializer,
-				$statementsSerializer
-			),
-			$responseFactory,
 			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
-			] )
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
+				),
+			] ),
+			WbRestApi::getPatchProperty(),
+			new PropertySerializer(
+				new LabelsSerializer(),
+				new DescriptionsSerializer(),
+				new AliasesSerializer(),
+				new StatementListSerializer( WbRestApi::getStatementSerializer() )
+			),
+			$responseFactory,
 		);
 	}
 
@@ -156,6 +134,8 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
+		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
+
 		return new TypeValidatingJsonBodyValidator( [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
@@ -186,5 +166,12 @@ class PatchPropertyRouteHandler extends SimpleHandler {
 	private function getUsername(): ?string {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 }
