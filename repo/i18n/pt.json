@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Athena in Wonderland",
+			"B3rnas",
 			"Emma Franzen",
 			"Fúlvio",
 			"Hamilton Abreu",
@@ -58,7 +59,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Língua",
 	"wikibase-entitytermsforlanguagelistview-more": "Todas as línguas introduzidas",
 	"wikibase-entitytermsforlanguagelistview-less": "Menos línguas",
-	"wikibase-entityterms-languagelistview-mul-popup-title": "Nova! Adicionar etiquetas e nomes alternativos por omissão, para várias línguas (mul)",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nova! Adicionar etiquetas e nomes alternativos pré-definidos, para todas as línguas",
 	"wikibase-entityterms-languagelistview-mul-popup-content": "Os valores por omissão serão usados para todas as línguas com as etiquetas e os nomes alternativos vazios, de forma a minimizar repetições. [$1 Mais informações]",
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Não mostrar isto novamente",
 	"wikibase-label-empty": "Rótulo não definido",
@@ -68,9 +69,9 @@
 	"wikibase-description-edit-placeholder": "introduza uma descrição",
 	"wikibase-description-edit-placeholder-language-aware": "introduza uma descrição em $1",
 	"wikibase-description-edit-placeholder-not-applicable": "não aplicável",
-	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Uma descrição não se aplica a mais do que uma língua",
+	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Não é possível definir uma descrição pré-definida para todas as línguas",
 	"wikibase-description-edit-not-supported": "As descrições não são suportadas para esta língua. Forneça uma descrição noutra língua após o elemento ter sido criado, por favor.",
-	"wikibase-description-not-applicable-title": "Uma descrição não se aplica a mais do que uma língua.",
+	"wikibase-description-not-applicable-title": "Não é possível definir uma descrição pré-definida para todas as línguas",
 	"wikibase-aliases-edit-placeholder": "introduza alguns nomes alternativos",
 	"wikibase-aliases-edit-placeholder-language-aware": "introduza alguns nomes alternativos em $1",
 	"wikibase-aliases-edit-label": "Nomes alternativos, separados por barras verticais (|):",
