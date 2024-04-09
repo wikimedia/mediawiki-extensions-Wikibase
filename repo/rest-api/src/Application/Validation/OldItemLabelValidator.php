@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemLabelValidator {
+interface OldItemLabelValidator {
 
 	public const CODE_LABEL_DESCRIPTION_EQUAL = 'label-description-same-value';
 	public const CODE_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';

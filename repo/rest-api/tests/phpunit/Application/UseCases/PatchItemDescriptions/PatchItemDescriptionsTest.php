@@ -19,8 +19,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -64,7 +64,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->patchedDescriptionsValidator = new PatchedDescriptionsValidator(
 			new DescriptionsDeserializer(),
-			$this->createStub( ItemDescriptionValidator::class ),
+			$this->createStub( OldItemDescriptionValidator::class ),
 			$this->createStub( LanguageCodeValidator::class )
 		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );

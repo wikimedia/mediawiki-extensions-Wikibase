@@ -5,8 +5,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -90,25 +90,25 @@ class ItemSerializationRequestValidatingDeserializer {
 	private function handleLabelsValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemLabelValidator::CODE_EMPTY:
+			case OldItemLabelValidator::CODE_EMPTY:
 				throw new UseCaseError(
 					UseCaseError::LABEL_EMPTY,
 					'Label must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[OldItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
-			case ItemLabelValidator::CODE_INVALID:
+			case OldItemLabelValidator::CODE_INVALID:
 				throw new UseCaseError(
 					UseCaseError::INVALID_LABEL,
-					"Not a valid label: {$context[ItemLabelValidator::CONTEXT_LABEL]}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					"Not a valid label: {$context[OldItemLabelValidator::CONTEXT_LABEL]}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[OldItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
-			case ItemLabelValidator::CODE_TOO_LONG:
+			case OldItemLabelValidator::CODE_TOO_LONG:
 				throw new UseCaseError(
 					UseCaseError::LABEL_TOO_LONG,
-					"Label must be no more than {$context[ItemLabelValidator::CONTEXT_LIMIT]} characters long",
+					"Label must be no more than {$context[OldItemLabelValidator::CONTEXT_LIMIT]} characters long",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
+						UseCaseError::CONTEXT_LANGUAGE => $context[OldItemLabelValidator::CONTEXT_LANGUAGE],
+						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[OldItemLabelValidator::CONTEXT_LIMIT],
 					]
 				);
 		}

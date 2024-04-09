@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -27,7 +27,7 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 
 	public function testEmptyLabel_returnsValidationError(): void {
 		$this->assertEquals(
-			new ValidationError( ItemLabelValidator::CODE_EMPTY, [ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ] ),
+			new ValidationError( OldItemLabelValidator::CODE_EMPTY, [ OldItemLabelValidator::CONTEXT_LANGUAGE => 'en' ] ),
 			$this->newValidator()->validate( '', 'en' )
 		);
 	}
@@ -36,11 +36,11 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$tooLongLabel = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_TOO_LONG,
+				OldItemLabelValidator::CODE_TOO_LONG,
 				[
-					ItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
-					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
-					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+					OldItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
+					OldItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					OldItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			$this->newValidator()->validate( $tooLongLabel, 'en' )
@@ -51,8 +51,8 @@ class TermValidatorFactoryLabelTextValidatorTest extends TestCase {
 		$invalidLabel = "item with tab character \t not allowed";
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_LABEL => $invalidLabel, ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+				OldItemLabelValidator::CODE_INVALID,
+				[ OldItemLabelValidator::CONTEXT_LABEL => $invalidLabel, OldItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			$this->newValidator()->validate( $invalidLabel, 'en' )
 		);

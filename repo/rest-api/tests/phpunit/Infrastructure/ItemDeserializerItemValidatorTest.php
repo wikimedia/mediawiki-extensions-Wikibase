@@ -14,9 +14,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\InvalidLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\UnexpectedFieldException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\ItemDeserializerItemValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
@@ -143,7 +143,7 @@ class ItemDeserializerItemValidatorTest extends TestCase {
 		$this->labelTextValidator->expects( $this->once() )
 			->method( 'validate' )
 			->with( $invalidLabel, $language )
-			->willReturn( new ValidationError( ItemLabelValidator::CODE_INVALID ) );
+			->willReturn( new ValidationError( OldItemLabelValidator::CODE_INVALID ) );
 
 		$error = $this->newValidator()->validate( [ 'labels' => [ $language => $invalidLabel ] ] );
 
@@ -161,8 +161,8 @@ class ItemDeserializerItemValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ OldItemLabelValidator::CONTEXT_LANGUAGE => $language ]
 			),
 			$this->newValidator()->validate( [ 'labels' => [ $language => $itemLabel ], 'descriptions' => [ $language => $itemLabel ] ] )
 		);
@@ -188,12 +188,12 @@ class ItemDeserializerItemValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
-					ItemLabelValidator::CONTEXT_LABEL => $label,
-					ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					OldItemLabelValidator::CONTEXT_LANGUAGE => $language,
+					OldItemLabelValidator::CONTEXT_LABEL => $label,
+					OldItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 				]
 			),
 			$this->newValidator()->validate( [ 'labels' => [ $language => $label ], 'descriptions' => [ $language => $description ] ] )

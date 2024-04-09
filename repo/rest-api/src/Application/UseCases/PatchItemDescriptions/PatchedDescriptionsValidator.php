@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptyDescriptionException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,12 +19,12 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 class PatchedDescriptionsValidator {
 
 	private DescriptionsDeserializer $descriptionsDeserializer;
-	private ItemDescriptionValidator $descriptionValidator;
+	private OldItemDescriptionValidator $descriptionValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 
 	public function __construct(
 		DescriptionsDeserializer $descriptionsDeserializer,
-		ItemDescriptionValidator $descriptionValidator,
+		OldItemDescriptionValidator $descriptionValidator,
 		LanguageCodeValidator $languageCodeValidator
 	) {
 		$this->descriptionsDeserializer = $descriptionsDeserializer;
@@ -95,8 +95,8 @@ class PatchedDescriptionsValidator {
 
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemDescriptionValidator::CODE_INVALID:
-				$descriptionText = $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ];
+			case OldItemDescriptionValidator::CODE_INVALID:
+				$descriptionText = $context[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID,
 					"Changed description for '{$description->getLanguageCode()}' is invalid: $descriptionText",
@@ -105,39 +105,39 @@ class PatchedDescriptionsValidator {
 						UseCaseError::CONTEXT_VALUE => $descriptionText,
 					]
 				);
-			case ItemDescriptionValidator::CODE_TOO_LONG:
+			case OldItemDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $description->getLanguageCode();
-				$maxDescriptionLength = $context[ ItemDescriptionValidator::CONTEXT_LIMIT ];
+				$maxDescriptionLength = $context[ OldItemDescriptionValidator::CONTEXT_LIMIT ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
 					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_VALUE => $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ ItemDescriptionValidator::CONTEXT_LIMIT ],
+						UseCaseError::CONTEXT_VALUE => $context[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION ],
+						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ OldItemDescriptionValidator::CONTEXT_LIMIT ],
 					]
 				);
-			case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				$languageCode = $context[ ItemDescriptionValidator::CONTEXT_LANGUAGE ];
-				$description = $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ];
-				$duplicateItemId = $context[ ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID ];
+			case OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
+				$languageCode = $context[ OldItemDescriptionValidator::CONTEXT_LANGUAGE ];
+				$description = $context[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION ];
+				$duplicateItemId = $context[ OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					"Item $duplicateItemId already has description '$description' associated with " .
 					"language code $languageCode, using the same label.",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ ItemDescriptionValidator::CONTEXT_LANGUAGE ],
-						UseCaseError::CONTEXT_LABEL => $context[ ItemDescriptionValidator::CONTEXT_LABEL ],
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID ],
+						UseCaseError::CONTEXT_LANGUAGE => $context[ OldItemDescriptionValidator::CONTEXT_LANGUAGE ],
+						UseCaseError::CONTEXT_LABEL => $context[ OldItemDescriptionValidator::CONTEXT_LABEL ],
+						UseCaseError::CONTEXT_DESCRIPTION => $context[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION ],
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID ],
 					]
 				);
-			case ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
-				$language = $context[ ItemDescriptionValidator::CONTEXT_LANGUAGE ];
+			case OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
+				$language = $context[ OldItemDescriptionValidator::CONTEXT_LANGUAGE ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
 					"Label and description for language code {$language} can not have the same value.",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ ItemDescriptionValidator::CONTEXT_LANGUAGE ] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[ OldItemDescriptionValidator::CONTEXT_LANGUAGE ] ]
 				);
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );

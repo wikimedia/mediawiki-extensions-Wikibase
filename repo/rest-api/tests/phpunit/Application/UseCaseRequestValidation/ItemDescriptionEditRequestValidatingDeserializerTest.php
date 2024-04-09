@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -28,7 +28,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			new Term( 'en', 'root vegetable' ),
-			( new ItemDescriptionEditRequestValidatingDeserializer( $this->createStub( ItemDescriptionValidator::class ) ) )
+			( new ItemDescriptionEditRequestValidatingDeserializer( $this->createStub( OldItemDescriptionValidator::class ) ) )
 				->validateAndDeserialize( $request )
 		);
 	}
@@ -47,7 +47,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getDescription' )->willReturn( 'my description' );
 
-		$itemDescriptionValidator = $this->createStub( ItemDescriptionValidator::class );
+		$itemDescriptionValidator = $this->createStub( OldItemDescriptionValidator::class );
 		$itemDescriptionValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
@@ -63,7 +63,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
 	public static function invalidDescriptionProvider(): Generator {
 		yield 'description empty' => [
-			new ValidationError( ItemDescriptionValidator::CODE_EMPTY ),
+			new ValidationError( OldItemDescriptionValidator::CODE_EMPTY ),
 			UseCaseError::DESCRIPTION_EMPTY,
 			'Description must not be empty',
 		];
@@ -72,10 +72,10 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$limit = 40;
 		yield 'description too long' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_TOO_LONG,
+				OldItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-					ItemDescriptionValidator::CONTEXT_LIMIT => $limit,
+					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemDescriptionValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
 			UseCaseError::DESCRIPTION_TOO_LONG,
@@ -89,8 +89,8 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$description = "tab characters \t not allowed";
 		yield 'invalid description' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_INVALID,
-				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+				OldItemDescriptionValidator::CODE_INVALID,
+				[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
 			UseCaseError::INVALID_DESCRIPTION,
 			"Not a valid description: $description",
@@ -99,8 +99,8 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$language = 'en';
 		yield 'label and description are equal' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value",
@@ -113,12 +113,12 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$matchingItemId = 'Q213';
 		yield 'label and description duplicate' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-					ItemDescriptionValidator::CONTEXT_LABEL => $label,
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					OldItemDescriptionValidator::CONTEXT_LABEL => $label,
+					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 
 				],
 			),
