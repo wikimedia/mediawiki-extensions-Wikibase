@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"SupaplexTW",
 			"Winston Sung"
 		]
 	},
@@ -8,5 +9,6 @@
 	"wikibase-editlinks": "改連結",
 	"wikibase-linkitem-input-site": "語言：",
 	"wikibase-rc-hide-wikidata-hide": "掩",
-	"wikibase-rc-hide-wikidata-show": "顯示"
+	"wikibase-rc-hide-wikidata-show": "顯示",
+	"wikibase-otherprojects": "其他專案"
 }

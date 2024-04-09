@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"SupaplexTW",
 			"Winston Sung"
 		]
 	},
-	"wikibase-add": "加添"
+	"wikibase-add": "加添",
+	"wikibase-sitelinks-special": "其他的網站"
 }
