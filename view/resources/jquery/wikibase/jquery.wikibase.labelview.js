@@ -112,7 +112,7 @@
 
 			if ( chain[ chain.length - 1 ] === 'en' ) {
 				// Remove implicit fallback to English. This only works if `mul` is enabled and in the chain.
-				chain.pop();
+				chain = chain.slice( 0, -1 );
 			}
 
 			// TODO: should be a for-of loop as soon as we can use #ES6
