@@ -15,6 +15,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -24,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
@@ -89,6 +92,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator as PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
@@ -753,6 +757,30 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getAssertItemExists( $services ),
 			WbRestApi::getPatchStatement( $services )
+		);
+	},
+
+	'WbRestApi.PatchProperty' => function( MediaWikiServices $services ): PatchProperty {
+		return new PatchProperty(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertPropertyExists( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getPropertyDataRetriever( $services ),
+			new PropertySerializer(
+				new LabelsSerializer(),
+				new DescriptionsSerializer(),
+				new AliasesSerializer(),
+				new StatementListSerializer( WbRestApi::getStatementSerializer( $services ) )
+			),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			new PropertyDeserializer(
+				new LabelsDeserializer(),
+				new DescriptionsDeserializer(),
+				new AliasesDeserializer(),
+				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
+			),
+			WbRestApi::getPropertyUpdater( $services ),
+			WbRestApi::getPropertyDataRetriever( $services )
 		);
 	},
 
