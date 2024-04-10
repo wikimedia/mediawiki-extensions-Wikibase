@@ -144,6 +144,54 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testAddUsagesWithCollectiveStatementRemovesSpecificStatements() {
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+
+		$usages = [
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P12' ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
+		];
+
+		$this->sqlUsageTracker->addUsedEntities( 23, $usages );
+		$genericUsage = [
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE ),
+		];
+		$this->sqlUsageTracker->addUsedEntities( 23, $genericUsage );
+
+		// Specific usage (Q3#C.P12) should be replaced by generic (Q3#C)
+		$this->assertArrayEquals(
+			[ 'Q3#C', 'Q3#S', 'Q4#L.de' ],
+			array_keys( $this->getUsages( 23 ) ),
+			false,
+		);
+	}
+
+	public function testAddUsagesWithSpecificStatementsDoesNothingIfCollectiveStatementPresent() {
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+
+		$usages = [
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
+		];
+
+		$this->sqlUsageTracker->addUsedEntities( 23, $usages );
+		$genericUsage = [
+			new EntityUsage( $q3, EntityUsage::STATEMENT_USAGE, 'P12' ),
+		];
+		$this->sqlUsageTracker->addUsedEntities( 23, $genericUsage );
+
+		// Specific usage ('Q3#C.P12') should not appear since generic ('Q3#C') present
+		$this->assertArrayEquals(
+			[ 'Q3#C', 'Q3#S', 'Q4#L.de' ],
+			array_keys( $this->getUsages( 23 ) ),
+			false,
+		);
+	}
+
 	public function testPruneUsages() {
 		$this->trackerTester->testPruneUsages();
 	}
