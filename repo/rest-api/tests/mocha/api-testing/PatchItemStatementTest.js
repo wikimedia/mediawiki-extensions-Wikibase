@@ -256,17 +256,6 @@ describe( 'PATCH statement tests', () => {
 					assertValidError( response, 404, 'statement-not-found' );
 					assert.include( response.body.message, statementId );
 				} );
-
-				it( 'statement subject is a redirect', async () => {
-					const redirectSource = await entityHelper.createRedirectForItem( testItemId );
-					const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newPatchRequestBuilder( statementId, [] )
-						.assertValidRequest()
-						.makeRequest();
-
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
-				} );
 			} );
 
 			describe( '409 conflict', () => {
@@ -367,14 +356,36 @@ describe( 'PATCH statement tests', () => {
 			assert.include( response.body.message, itemId );
 		} );
 
+		it( 'responds 400 if item and statement do not match', async () => {
+			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const response = await newPatchItemStatementRequestBuilder( requestedItemId, testStatement.id, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { 'item-id': requestedItemId, 'statement-id': testStatement.id };
+			assertValidError( response, 400, 'item-statement-id-mismatch', context );
+		} );
+
 		it( 'responds 404 item-not-found for nonexistent item', async () => {
 			const itemId = 'Q999999999';
-			const response = await newPatchItemStatementRequestBuilder( itemId, testStatementId, [] )
+			const statementId = itemId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newPatchItemStatementRequestBuilder( itemId, statementId, [] )
 				.assertValidRequest()
 				.makeRequest();
 
 			assertValidError( response, 404, 'item-not-found' );
 			assert.include( response.body.message, itemId );
+		} );
+
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newPatchItemStatementRequestBuilder( redirectSource, statementId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
 		} );
 
 	} );
@@ -391,6 +402,17 @@ describe( 'PATCH statement tests', () => {
 
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {
 			const statementId = 'Q999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const response = await newPatchStatementRequestBuilder( statementId, [] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 404, 'statement-not-found' );
+			assert.include( response.body.message, statementId );
+		} );
+
+		it( 'responds 404 if statement subject is a redirect', async () => {
+			const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+			const statementId = redirectSource + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
 				.assertValidRequest()
 				.makeRequest();

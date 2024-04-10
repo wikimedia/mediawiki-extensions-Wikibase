@@ -60,16 +60,7 @@ describe( 'validate GET property statement responses', () => {
 				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
-
-			it( '404 Not Found response is valid for a non-existing property', async () => {
-				const nonexistentProperty = 'P99999';
-				const response = await newRequestBuilder(
-					`${nonexistentProperty}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE` )
-					.makeRequest();
-
-				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
-			} );
 		} );
 	} );
+
 } );

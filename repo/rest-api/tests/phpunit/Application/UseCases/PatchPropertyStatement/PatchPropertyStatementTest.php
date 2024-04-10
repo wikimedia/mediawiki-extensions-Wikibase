@@ -130,21 +130,6 @@ class PatchPropertyStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenStatementIdDoesNotMatchPropertyId_throws(): void {
-		$statementId = 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$request = $this->createStub( PatchPropertyStatementRequest::class );
-		$request->method( 'getPropertyId' )->willReturn( 'P2' );
-		$request->method( 'getStatementId' )->willReturn( $statementId );
-
-		try {
-			$this->newUseCase()->execute( $request );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $statementId, $e->getErrorMessage() );
-		}
-	}
-
 	private function newUseCase(): PatchPropertyStatement {
 		return new PatchPropertyStatement(
 			$this->validator,

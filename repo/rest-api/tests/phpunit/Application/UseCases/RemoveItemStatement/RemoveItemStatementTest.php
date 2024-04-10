@@ -79,21 +79,6 @@ class RemoveItemStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenStatementIdDoesNotMatchItemId_throws(): void {
-		$statementId = 'Q456$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$request = $this->createStub( RemoveItemStatementRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'Q123' );
-		$request->method( 'getStatementId' )->willReturn( $statementId );
-
-		try {
-			$this->newUseCase()->execute( $request );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $statementId, $e->getErrorMessage() );
-		}
-	}
-
 	public function testGivenItemNotFoundOrRedirect_throws(): void {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );

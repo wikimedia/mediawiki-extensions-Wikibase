@@ -31,14 +31,8 @@ class PatchPropertyStatement {
 	 */
 	public function execute( PatchPropertyStatementRequest $request ): PatchStatementResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
-		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
-		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
-			);
-		}
+		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
 		return $this->patchStatement->execute( $request );
 	}

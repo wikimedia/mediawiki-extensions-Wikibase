@@ -127,28 +127,6 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, subjectId );
 		} );
 
-		it( 'responds property-not-found if property does not exist', async () => {
-			const propertyId = 'P999999';
-			const response = await newGetPropertyStatementRequestBuilder( propertyId, testStatement.id )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'property-not-found' );
-			assert.include( response.body.message, propertyId );
-		} );
-
-		it( 'responds property-not-found if property and statement do not exist' +
-			'but statement prefix does', async () => {
-			const propertyId = 'P999999';
-			const statementId = `${propertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
-			const response = await newGetPropertyStatementRequestBuilder( propertyId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'property-not-found' );
-			assert.include( response.body.message, propertyId );
-		} );
-
 		it( 'responds property-not-found if property, statement, or statement prefix do not exist', async () => {
 			const propertyId = 'P999999';
 			const statementId = 'P999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
@@ -158,17 +136,6 @@ describe( 'GET statement', () => {
 
 			assertValidError( response, 404, 'property-not-found' );
 			assert.include( response.body.message, propertyId );
-		} );
-
-		it( 'responds statement-not-found if property exists but statement prefix does not', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-			const statementId = 'P999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, statementId )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
 		} );
 
 		it( 'responds statement-not-found if property and subject prefix exist but statement does not', async () => {
@@ -182,25 +149,14 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, statementId );
 		} );
 
-		it( 'responds statement-not-found if property and statement exist, but do not match', async () => {
+		it( 'responds property-statement-id-mismatch if property and statement do not match', async () => {
 			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, testStatement.id )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, testStatement.id );
-		} );
-
-		it( 'responds statement-not-found if statement id prefix is incorrect type', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-			const statementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, statementId )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatement.id };
+			assertValidError( response, 400, 'property-statement-id-mismatch', context );
 		} );
 	} );
 

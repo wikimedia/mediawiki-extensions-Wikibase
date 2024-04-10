@@ -33,13 +33,6 @@ class RemovePropertyStatement {
 
 		$this->assertPropertyExists->execute( $deserializedRequest->getPropertyId() );
 
-		if ( !$deserializedRequest->getStatementId()->getEntityId()->equals( $deserializedRequest->getPropertyId() ) ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
-			);
-		}
-
 		$this->removeStatement->execute( $request );
 	}
 

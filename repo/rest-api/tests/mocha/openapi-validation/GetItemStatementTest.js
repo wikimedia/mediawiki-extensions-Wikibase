@@ -63,15 +63,6 @@ describe( 'validate GET item statement responses', () => {
 				expect( response ).to.have.status( 404 );
 				expect( response ).to.satisfyApiSpec;
 			} );
-
-			it( '404 Not Found response is valid for a non-existing item', async () => {
-				const nonexistentItem = 'Q99999';
-				const response = await newRequestBuilder( `${nonexistentItem}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE` )
-					.makeRequest();
-
-				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
-			} );
 		} );
 	} );
 } );

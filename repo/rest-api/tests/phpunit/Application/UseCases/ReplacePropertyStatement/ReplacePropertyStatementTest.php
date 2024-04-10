@@ -79,18 +79,6 @@ class ReplacePropertyStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenStatementIdPrefixDoesNotMatchPropertyId_throwsUseCaseError(): void {
-		$statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		try {
-			$this->newUseCase()->execute( $this->newUseCaseRequest( 'P321', $statementId ) );
-
-			$this->fail( 'Exception not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
-		}
-	}
-
 	private function newUseCase(): ReplacePropertyStatement {
 		return new ReplacePropertyStatement(
 			$this->validator,

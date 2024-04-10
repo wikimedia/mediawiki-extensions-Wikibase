@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemStatementRequest extends GetStatementRequest implements ItemIdRequest {
+class GetItemStatementRequest extends GetStatementRequest implements ItemStatementIdRequest {
 
 	private string $itemId;
 

@@ -410,6 +410,24 @@ describe( 'PUT statement tests', () => {
 			assert.include( response.body.message, propertyId );
 		} );
 
+		it( 'responds 400 if property and statement do not match', async () => {
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const statementSerialization = entityHelper.newStatementWithRandomStringValue(
+				testStatementPropertyId
+			);
+
+			const response = await newReplacePropertyStatementRequestBuilder(
+				requestedPropertyId,
+				testStatementId,
+				statementSerialization
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatementId };
+			assertValidError( response, 400, 'property-statement-id-mismatch', context );
+		} );
+
 		it( 'responds 404 property-not-found for nonexistent property', async () => {
 			const propertyId = 'P9999999';
 			const statementId = `${propertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;

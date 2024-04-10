@@ -21,6 +21,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
@@ -33,6 +35,8 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterR
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
@@ -226,6 +230,32 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		);
 	}
 
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testGivenValidItemStatementIdRequest_returnsNull(): void {
+		$subjectId = new ItemId( 'Q123' );
+		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$request = $this->createStub( StatementItemIdUseCaseRequest::class );
+		$request->method( 'getStatementId' )->willReturn( "$statementId" );
+		$request->method( 'getItemId' )->willReturn( "$subjectId" );
+
+		$this->newRequestDeserializer()->validateAndDeserialize( $request );
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testGivenValidPropertyStatementIdRequest_returnsNull(): void {
+		$subjectId = new NumericPropertyId( 'P123' );
+		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$request = $this->createStub( StatementPropertyIdUseCaseRequest::class );
+		$request->method( 'getStatementId' )->willReturn( "$statementId" );
+		$request->method( 'getPropertyId' )->willReturn( "$subjectId" );
+
+		$this->newRequestDeserializer()->validateAndDeserialize( $request );
+	}
+
 	public function testGivenRepeatedValidRequests_returnsTheSameResultAndValidatesOnlyOnce(): void {
 		$stubStatementSerialization = [ 'statement' => 'serialization' ];
 		$request = $this->createStub( StatementSerializationUseCaseRequest::class );
@@ -356,6 +386,16 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			SitelinkEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
+		yield [
+			StatementItemIdUseCaseRequest::class,
+			ItemStatementIdRequestValidator::class,
+			ValidatingRequestDeserializer::ITEM_STATEMENT_ID_REQUEST_VALIDATOR,
+		];
+		yield [
+			StatementPropertyIdUseCaseRequest::class,
+			PropertyStatementIdRequestValidator::class,
+			ValidatingRequestDeserializer::PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR,
+		];
 	}
 
 	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
@@ -387,6 +427,8 @@ interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {
 
 }
 interface SitelinkUseCaseRequest extends UseCaseRequest, SitelinkEditRequest {}
+interface StatementItemIdUseCaseRequest extends UseCaseRequest, ItemStatementIdRequest {}
+interface StatementPropertyIdUseCaseRequest extends UseCaseRequest, PropertyStatementIdRequest {}
 class NullValidator {
 	public function validateAndDeserialize() {
 		return null;

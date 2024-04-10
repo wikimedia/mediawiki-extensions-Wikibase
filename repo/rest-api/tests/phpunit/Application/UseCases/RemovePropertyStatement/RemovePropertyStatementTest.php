@@ -78,21 +78,6 @@ class RemovePropertyStatementTest extends TestCase {
 		}
 	}
 
-	public function testGivenStatementIdDoesNotMatchPropertyId_throws(): void {
-		$statementId = 'P456$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$request = $this->createStub( RemovePropertyStatementRequest::class );
-		$request->method( 'getPropertyId' )->willReturn( 'P123' );
-		$request->method( 'getStatementId' )->willReturn( $statementId );
-
-		try {
-			$this->newUseCase()->execute( $request );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( $statementId, $e->getErrorMessage() );
-		}
-	}
-
 	public function testGivenPropertyNotFound_throws(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$statementId = new StatementGuid( $propertyId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );

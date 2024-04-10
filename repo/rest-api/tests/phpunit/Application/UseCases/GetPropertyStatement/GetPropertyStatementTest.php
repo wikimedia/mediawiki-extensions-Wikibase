@@ -3,14 +3,12 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
@@ -82,19 +80,6 @@ class GetPropertyStatementTest extends TestCase {
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseException $e ) {
 			$this->assertSame( $expectedException, $e );
-		}
-	}
-
-	public function testStatementSubjectIdNotMatchingPropertyId_throwsUseCaseError(): void {
-		$propertyId = 'P111';
-		$statementId = 'P1' . StatementGuid::SEPARATOR . 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-
-		try {
-			$this->newUseCase()->execute( new GetPropertyStatementRequest( $propertyId, $statementId ) );
-			$this->fail( 'expected exception was not thrown' );
-		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
 		}
 	}
 

@@ -39,6 +39,7 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_DATA_INVALID_FIELD = 'item-data-invalid-field';
 	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
+	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
@@ -79,6 +80,7 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const SITELINK_CONFLICT = 'sitelink-conflict';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
@@ -106,7 +108,9 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
 	public const CONTEXT_OPERATION = 'operation';
 	public const CONTEXT_PATH = 'path';
+	public const CONTEXT_ITEM_ID = 'item-id';
 	public const CONTEXT_PROPERTY_ID = 'property-id';
+	public const CONTEXT_STATEMENT_ID = 'statement-id';
 	public const CONTEXT_SITE_ID = 'site-id';
 	public const CONTEXT_TITLE = 'title';
 	public const CONTEXT_BADGE = 'badge';
@@ -150,6 +154,8 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_REDIRECTED => [],
 		self::ITEM_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
+		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
+		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_EMPTY => [],
 		self::LABEL_NOT_DEFINED => [],

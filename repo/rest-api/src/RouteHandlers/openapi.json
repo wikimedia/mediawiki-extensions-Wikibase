@@ -4332,6 +4332,9 @@
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
+              },
+              "item-statement-id-mismatch": {
+                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
               }
             }
           }
@@ -4358,6 +4361,9 @@
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
+              },
+              "property-statement-id-mismatch": {
+                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               }
             }
           }
@@ -4496,6 +4502,9 @@
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
               },
+              "item-statement-id-mismatch": {
+                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -4539,6 +4548,9 @@
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
+              },
+              "property-statement-id-mismatch": {
+                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4613,6 +4625,9 @@
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
               },
+              "item-statement-id-mismatch": {
+                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -4644,6 +4659,9 @@
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
+              },
+              "property-statement-id-mismatch": {
+                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -5801,6 +5819,9 @@
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
               },
+              "item-statement-id-mismatch": {
+                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -5850,6 +5871,9 @@
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
+              },
+              "property-statement-id-mismatch": {
+                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -8162,6 +8186,26 @@
         "value": {
           "code": "missing-labels-and-descriptions",
           "message": "Item requires at least a label or a description in a language"
+        }
+      },
+      "ItemStatementIdMismatchExample": {
+        "value": {
+          "code": "item-statement-id-mismatch",
+          "message": "IDs of the item and the statement do not match",
+          "context": {
+            "item-id": "{item_id}",
+            "statement-id": "{statement_id}"
+          }
+        }
+      },
+      "PropertyStatementIdMismatchExample": {
+        "value": {
+          "code": "property-statement-id-mismatch",
+          "message": "IDs of the property and the statement do not match",
+          "context": {
+            "property-id": "{property_id}",
+            "statement-id": "{statement_id}"
+          }
         }
       },
       "ItemStatementIdExample": {
