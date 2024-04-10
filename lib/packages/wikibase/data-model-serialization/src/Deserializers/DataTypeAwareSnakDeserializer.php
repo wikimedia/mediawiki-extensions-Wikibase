@@ -12,6 +12,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
+use Exception;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -127,14 +128,10 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 	private function deserializeDataValue( PropertyId $propertyId, array $serialization ): DataValue {
 		try {
 			return $this->needsDataTypeLookup( $serialization[DataValueDeserializer::TYPE_KEY] )
-				? $this->snakValueParser->parse( $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ), $serialization )
+				? $this->lookUpDataTypeAndParseValue( $propertyId, $serialization )
 				: $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
-			$value = $serialization[DataValueDeserializer::VALUE_KEY] ?? null;
-			$type = $serialization[DataValueDeserializer::TYPE_KEY] ?? null;
-			$error = $serialization['error'] ?? $ex->getMessage();
-
-			return new UnDeserializableValue( $value, $type, $error );
+			return $this->newUndeserializableValue( $serialization, $ex );
 		}
 	}
 
@@ -195,6 +192,24 @@ class DataTypeAwareSnakDeserializer implements DispatchableDeserializer {
 				$attributeName
 			);
 		}
+	}
+
+	public function newUndeserializableValue( array $serialization, Exception $exception ): UnDeserializableValue {
+		$value = $serialization[DataValueDeserializer::VALUE_KEY] ?? null;
+		$type = $serialization[DataValueDeserializer::TYPE_KEY] ?? null;
+		$error = $serialization['error'] ?? $exception->getMessage();
+
+		return new UnDeserializableValue( $value, $type, $error );
+	}
+
+	public function lookUpDataTypeAndParseValue( PropertyId $propertyId, array $serialization ): DataValue {
+		try {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		} catch ( Exception $e ) {
+			return $this->newUndeserializableValue( $serialization, $e );
+		}
+
+		return $this->snakValueParser->parse( $dataType, $serialization );
 	}
 
 }
