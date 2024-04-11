@@ -5,11 +5,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer
@@ -20,6 +22,17 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
+	private InMemoryItemRepository $itemRetriever;
+	private ItemDescriptionValidator $itemDescriptionValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->itemRetriever = new InMemoryItemRepository();
+		$this->itemRetriever->addItem( NewItem::withId( 'Q123' )->build() );
+		$this->itemDescriptionValidator = $this->createStub( ItemDescriptionValidator::class );
+	}
+
 	public function testGivenValidRequest_returnsDescription(): void {
 		$request = $this->createStub( ItemDescriptionEditRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
@@ -28,8 +41,45 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			new Term( 'en', 'root vegetable' ),
-			( new ItemDescriptionEditRequestValidatingDeserializer( $this->createStub( OldItemDescriptionValidator::class ) ) )
-				->validateAndDeserialize( $request )
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenItemDoesNotExist_skipsValidation(): void {
+		$this->itemRetriever = new InMemoryItemRepository();
+
+		$this->itemDescriptionValidator = $this->createMock( ItemDescriptionValidator::class );
+		$this->itemDescriptionValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( ItemDescriptionEditRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getDescription' )->willReturn( 'root vegetable' );
+
+		$this->assertEquals(
+			new Term( 'en', 'root vegetable' ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenDescriptionIsUnchanged_skipsValidation(): void {
+		$itemId = 'Q345';
+		$languageCode = 'en';
+		$description = 'root vegetable';
+
+		$this->itemRetriever = new InMemoryItemRepository();
+		$this->itemRetriever->addItem( NewItem::withId( $itemId )->andDescription( $languageCode, $description )->build() );
+		$this->itemDescriptionValidator = $this->createMock( ItemDescriptionValidator::class );
+		$this->itemDescriptionValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( ItemDescriptionEditRequest::class );
+		$request->method( 'getItemId' )->willReturn( $itemId );
+		$request->method( 'getLanguageCode' )->willReturn( $languageCode );
+		$request->method( 'getDescription' )->willReturn( $description );
+
+		$this->assertEquals(
+			new Term( $languageCode, $description ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}
 
@@ -47,12 +97,11 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getDescription' )->willReturn( 'my description' );
 
-		$itemDescriptionValidator = $this->createStub( OldItemDescriptionValidator::class );
-		$itemDescriptionValidator->method( 'validate' )->willReturn( $validationError );
+		$this->itemDescriptionValidator = $this->createStub( ItemDescriptionValidator::class );
+		$this->itemDescriptionValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new ItemDescriptionEditRequestValidatingDeserializer( $itemDescriptionValidator ) )
-				->validateAndDeserialize( $request );
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
@@ -63,7 +112,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
 	public static function invalidDescriptionProvider(): Generator {
 		yield 'description empty' => [
-			new ValidationError( OldItemDescriptionValidator::CODE_EMPTY ),
+			new ValidationError( ItemDescriptionValidator::CODE_EMPTY ),
 			UseCaseError::DESCRIPTION_EMPTY,
 			'Description must not be empty',
 		];
@@ -72,10 +121,10 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$limit = 40;
 		yield 'description too long' => [
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_TOO_LONG,
+				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-					OldItemDescriptionValidator::CONTEXT_LIMIT => $limit,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					ItemDescriptionValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
 			UseCaseError::DESCRIPTION_TOO_LONG,
@@ -89,8 +138,8 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$description = "tab characters \t not allowed";
 		yield 'invalid description' => [
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_INVALID,
-				[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+				ItemDescriptionValidator::CODE_INVALID,
+				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
 			UseCaseError::INVALID_DESCRIPTION,
 			"Not a valid description: $description",
@@ -99,8 +148,8 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$language = 'en';
 		yield 'label and description are equal' => [
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+				ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL,
+				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value",
@@ -113,12 +162,12 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		$matchingItemId = 'Q213';
 		yield 'label and description duplicate' => [
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE,
 				[
-					OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-					OldItemDescriptionValidator::CONTEXT_LABEL => $label,
-					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-					OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					ItemDescriptionValidator::CONTEXT_LABEL => $label,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 
 				],
 			),
@@ -132,6 +181,13 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 			],
 		];
+	}
+
+	private function newValidatingDeserializer(): ItemDescriptionEditRequestValidatingDeserializer {
+		return new ItemDescriptionEditRequestValidatingDeserializer(
+			$this->itemDescriptionValidator,
+			$this->itemRetriever
+		);
 	}
 
 }

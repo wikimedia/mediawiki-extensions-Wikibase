@@ -4,14 +4,13 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemDescriptions
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -23,13 +22,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PatchedDescriptionsValidatorTest extends TestCase {
 
-	private OldItemDescriptionValidator $descriptionValidator;
+	private ItemDescriptionValidator $descriptionValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->descriptionValidator = $this->createStub( OldItemDescriptionValidator::class );
+		$this->descriptionValidator = $this->createStub( ItemDescriptionValidator::class );
 		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
 	}
 
@@ -39,7 +38,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 	public function testWithValidDescriptions( array $descriptionsSerialization, TermList $expectedResult ): void {
 		$this->assertEquals(
 			$expectedResult,
-			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), $descriptionsSerialization )
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), $descriptionsSerialization )
 		);
 	}
 
@@ -55,7 +54,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 	}
 
 	public function testValidateOnlyModifiedDescriptions(): void {
-		$itemId = new ItemId( 'Q123' );
+		$originalLabels = new TermList();
 		$originalDescriptions = new TermList( [
 			new Term( 'en', 'description to change' ),
 			new Term( 'de', 'Beschreibung' ),
@@ -65,18 +64,18 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		$patchedDescriptions = [ 'en' => 'description', 'de' => 'Beschreibung', 'ar' => 'وصف' ];
 
 		// expect validation only for the modified descriptions
-		$this->descriptionValidator = $this->createMock( OldItemDescriptionValidator::class );
+		$this->descriptionValidator = $this->createMock( ItemDescriptionValidator::class );
 		$expectedArgs = [
-			[ $itemId, 'en', 'description' ],
-			[ $itemId, 'ar', 'وصف' ],
+			[ 'en', 'description', $originalLabels ],
+			[ 'ar', 'وصف', $originalLabels ],
 		];
 		$this->descriptionValidator->expects( $this->exactly( 2 ) )
 			->method( 'validate' )
-			->willReturnCallback( function ( $itemId, $language, $description ) use ( &$expectedArgs ) {
+			->willReturnCallback( function ( $language, $description, $labels ) use ( &$expectedArgs ) {
 				$curExpectedArgs = array_shift( $expectedArgs );
-				$this->assertSame( $curExpectedArgs[0], $itemId );
-				$this->assertSame( $curExpectedArgs[1], $language );
-				$this->assertSame( $curExpectedArgs[2], $description );
+				$this->assertSame( $curExpectedArgs[0], $language );
+				$this->assertSame( $curExpectedArgs[1], $description );
+				$this->assertSame( $curExpectedArgs[2], $labels );
 				return null;
 			} );
 
@@ -86,7 +85,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 				new Term( 'de', 'Beschreibung' ),
 				new Term( 'ar', 'وصف' ),
 			] ),
-			$this->newValidator()->validateAndDeserialize( $itemId, $originalDescriptions, $patchedDescriptions )
+			$this->newValidator()->validateAndDeserialize( $originalDescriptions, $originalLabels, $patchedDescriptions )
 		);
 	}
 
@@ -100,11 +99,11 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		string $expectedErrorMessage,
 		array $expectedContext = null
 	): void {
-		$this->descriptionValidator = $this->createStub( OldItemDescriptionValidator::class );
+		$this->descriptionValidator = $this->createStub( ItemDescriptionValidator::class );
 		$this->descriptionValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), $descriptionsSerialization );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), $descriptionsSerialization );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -120,8 +119,8 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		yield 'invalid description' => [
 			[ $language => $description ],
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_INVALID,
-				[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+				ItemDescriptionValidator::CODE_INVALID,
+				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
 			UseCaseError::PATCHED_DESCRIPTION_INVALID,
 			"Changed description for '$language' is invalid: {$description}",
@@ -135,11 +134,11 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		yield 'description too long' => [
 			[ $language => $tooLongDescription ],
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_TOO_LONG,
+				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $tooLongDescription,
-					OldItemDescriptionValidator::CONTEXT_LIMIT => 250,
-					OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $tooLongDescription,
+					ItemDescriptionValidator::CONTEXT_LIMIT => 250,
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
 				]
 			),
 			UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
@@ -157,12 +156,12 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		yield 'label/description collision' => [
 			[ $language => $collidingLabel ],
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE,
 				[
-					OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-					OldItemDescriptionValidator::CONTEXT_LABEL => $collidingLabel,
-					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $collidingDescription,
-					OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					ItemDescriptionValidator::CONTEXT_LABEL => $collidingLabel,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $collidingDescription,
+					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
 				]
 			),
 			UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
@@ -179,7 +178,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 
 	public function testGivenEmptyDescription_throwsEmptyDescriptionError(): void {
 		try {
-			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ 'en' => '' ] );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => '' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_DESCRIPTION_EMPTY, $e->getErrorCode() );
@@ -191,7 +190,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 	public function testGivenInvalidDescriptionType_throwsInvalidDescriptionError(): void {
 		$invalidDescription = 123;
 		try {
-			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ 'en' => $invalidDescription ] );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => $invalidDescription ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_DESCRIPTION_INVALID, $e->getErrorCode() );
@@ -206,16 +205,16 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 
 	public function testGivenDescriptionSameAsLabelForLanguage_throwsUseCaseError(): void {
 		$language = 'en';
-		$this->descriptionValidator = $this->createStub( OldItemDescriptionValidator::class );
+		$this->descriptionValidator = $this->createStub( ItemDescriptionValidator::class );
 		$this->descriptionValidator->method( 'validate' )->willReturn(
 			new ValidationError(
-				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language ]
+				ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL,
+				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ]
 			)
 		);
 		try {
 			$this->newValidator()->validateAndDeserialize(
-				new ItemId( 'Q345' ),
+				new TermList(),
 				new TermList(),
 				[ $language => 'Description same as label' ]
 			);
@@ -238,7 +237,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( new ItemId( 'Q123' ), new TermList(), [ $invalidLanguage => 'description' ] );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ $invalidLanguage => 'description' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE, $e->getErrorCode() );

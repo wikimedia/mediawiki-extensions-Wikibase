@@ -155,7 +155,6 @@ use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
-use Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
@@ -274,11 +273,11 @@ return [
 	VRD::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemDescriptionEditRequestValidatingDeserializer {
 			return new ItemDescriptionEditRequestValidatingDeserializer(
-				new ItemRetrieverItemDescriptionValidator(
+				new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services ),
-					WbRestApi::getItemDataRetriever( $services )
-				)
+					WikibaseRepo::getItemTermsCollisionDetector( $services )
+				),
+				WbRestApi::getItemDataRetriever( $services )
 			);
 		},
 
@@ -731,10 +730,9 @@ return [
 			WbRestApi::getItemDataRetriever( $services ),
 			new PatchedDescriptionsValidator(
 				new DescriptionsDeserializer(),
-				new ItemRetrieverItemDescriptionValidator(
+				new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services ),
-					WbRestApi::getItemDataRetriever( $services )
+					WikibaseRepo::getItemTermsCollisionDetector( $services )
 				),
 				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 			),

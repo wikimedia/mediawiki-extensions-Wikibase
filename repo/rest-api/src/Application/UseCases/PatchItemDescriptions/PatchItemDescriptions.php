@@ -65,8 +65,8 @@ class PatchItemDescriptions {
 		$item = $this->itemRetriever->getItem( $itemId );
 		$originalDescriptions = $item->getDescriptions();
 		$modifiedDescriptions = $this->patchedDescriptionsValidator->validateAndDeserialize(
-			$itemId,
 			$originalDescriptions,
+			$item->getLabels(),
 			$patchedDescriptions
 		);
 
