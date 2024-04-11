@@ -4,10 +4,11 @@
 .wikibase-sitelinkgroupview .mw-collapsible-toggle {
 	background-position: right;
 	background-repeat: no-repeat;
-	height: 24px;
+	background-size: 1.5rem 1.5rem;
+	height: 1.5rem;
 	overflow: hidden;
-	text-indent: 24px;
-	width: 24px;
+	text-indent: 1.5rem;
+	width: 1.5rem;
 }
 
 .wikibase-sitelinkgroupview .mw-collapsible-toggle,

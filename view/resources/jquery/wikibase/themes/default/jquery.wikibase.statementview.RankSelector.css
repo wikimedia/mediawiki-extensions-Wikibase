@@ -11,8 +11,9 @@
 .wikibase-rankselector .ui-icon.ui-icon-rankselector {
 	/* @embed */
 	background-image: url( images/rankselector.svg );
-	width: 8px;
-	height: 20px;
+	background-size: 6.6875rem 1.25rem; /* size of rankselector.svg */
+	width: 0.5rem;
+	height: 1.25rem;
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-preferred {
@@ -20,50 +21,50 @@
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-normal {
-	background-position: -9px;
+	background-position: -0.5624rem;
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -18px;
+	background-position: -1.125rem;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-preferred,
 .wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-preferred {
-	background-position: -27px;
+	background-position: -1.6875rem;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-normal,
 .wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-normal {
-	background-position: -36px;
+	background-position: -2.25rem;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-deprecated,
 .wb-edit.wikibase-rankselector.ui-state-active .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -45px;
+	background-position: -2.8125rem;
 }
 
 .wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-preferred {
-	background-position: -54px;
+	background-position: -3.375rem;
 }
 
 .wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-normal {
-	background-position: -63px;
+	background-position: -3.9375rem;
 }
 
 .wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -72px;
+	background-position: -4.5rem;
 }
 
 .wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-preferred {
-	background-position: -81px;
+	background-position: -5.0625rem;
 }
 
 .wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-normal {
-	background-position: -90px;
+	background-position: -5.625rem;
 }
 
 .wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -99px;
+	background-position: -6.1875rem;
 }
 
 .wikibase-rankselector-menu {

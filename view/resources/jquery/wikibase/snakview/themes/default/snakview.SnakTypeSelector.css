@@ -9,17 +9,18 @@
 .ui-state-default .ui-icon-snaktypeselector {
 	/* @embed */
 	background-image: url( images/ui-icon_snaktypeselector.svg );
-	background-position: -11px 0;
-	height: 20px; /* same height as rankselector.svg */
-	width: 14px;
+	background-position: -0.6875rem 0;
+	background-size: 2.25rem 1.25rem; /* size of ui-icon_snaktypeselector.svg */
+	height: 1.25rem; /* same height as rankselector.svg */
+	width: 0.875rem;
 }
 
 .ui-state-hover .ui-icon-snaktypeselector {
-	background-position: -24px 0;
+	background-position: -1.5rem 0;
 }
 
 .ui-state-active .ui-icon-snaktypeselector {
-	background-position: 2px 0;
+	background-position: 0.125rem 0;
 }
 
 .wikibase-snaktypeselector-menu {
