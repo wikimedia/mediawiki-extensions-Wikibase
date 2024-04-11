@@ -36,7 +36,9 @@
 				$text: '.wikibase-labelview-text'
 			},
 			value: null,
-			allLanguages: {},
+			allLanguages: function () {
+				return {};
+			},
 			inputNodeName: 'TEXTAREA',
 			helpMessage: mw.msg( 'wikibase-label-input-help-message' ),
 			showEntityId: false
@@ -118,8 +120,8 @@
 			// TODO: should be a for-of loop as soon as we can use #ES6
 			for ( var i = 0; i < chain.length; i++ ) {
 				var langCode = chain[ i ];
-				if ( this.options.allLanguages.hasItemForKey( langCode ) ) {
-					return this.options.allLanguages.getItemByKey( langCode );
+				if ( this.options.allLanguages().hasItemForKey( langCode ) ) {
+					return this.options.allLanguages().getItemByKey( langCode );
 				}
 			}
 			return null;

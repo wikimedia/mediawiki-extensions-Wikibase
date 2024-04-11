@@ -60,7 +60,9 @@
 				$description: '.wikibase-entitytermsforlanguageview-description',
 				$aliases: '.wikibase-entitytermsforlanguageview-aliases'
 			},
-			allLanguageLabels: {},
+			allLanguageLabels: function () {
+				return {};
+			},
 			value: null
 		},
 
