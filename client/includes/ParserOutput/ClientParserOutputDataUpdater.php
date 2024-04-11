@@ -154,7 +154,7 @@ class ClientParserOutputDataUpdater {
 		 */
 		$value = -$title->getNamespace();
 		if ( !isset( $pageProperties['expectedUnconnectedPage'] ) ) {
-			$parserOutputProvider->getParserOutput()->setPageProperty( 'unexpectedUnconnectedPage', $value );
+			$parserOutputProvider->getParserOutput()->setNumericPageProperty( 'unexpectedUnconnectedPage', $value );
 		}
 	}
 
