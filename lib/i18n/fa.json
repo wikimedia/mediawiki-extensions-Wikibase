@@ -20,7 +20,8 @@
 			"Pouyana",
 			"Reza1615",
 			"Rtemis",
-			"ZxxZxxZ"
+			"ZxxZxxZ",
+			"Jeeputer"
 		]
 	},
 	"specialpages-group-wikibase": "ویکی‌بیس",
@@ -36,6 +37,7 @@
 	"wikibase-error-ui-no-external-page": "صفحه $2\" در وب‌گاه \"$1\" پیدا نشد.",
 	"wikibase-error-ui-edit-conflict": "تعارض ویرایشی رخ داده است. خواهشمندیم تغییراتتان را به صورت محلی ذخیره کنید از نو صفحه بارگذاری و ذخیره کنید.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (نویسه‌گردانی‌شده)",
+	"wikibase-language-name-for-terms-mul": "مقدارهای پیش‌فرض برای تمام زبان‌ها",
 	"wikibase-quantitydetails-amount": "مبلغ",
 	"wikibase-quantitydetails-upperbound": "حد بالا",
 	"wikibase-quantitydetails-lowerbound": "حد پایین",
@@ -139,7 +141,9 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|توصیف‌گری|توصیف‌گر‌هایی}} اضافه شد",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|توصیف‌گری|توصیف‌گر‌هایی}} تغییر داده شد",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|توصیف‌گری|توصیف‌گر‌هایی}} حذف شد",
+	"wikibase-entity-summary-wbremovequalifiers-update": "{{PLURAL:$1|توصیف‌گری|توصیف‌گرهایی}} را حذف کرد",
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$1|ارجاعی|ارجاع‌هایی}} از خواسته حذف شد",
+	"wikibase-entity-summary-wbremovereferences-update": "{{PLURAL:$3|منبع|منابع}} را از خواسته حذف کرد",
 	"wikibase-entity-summary-wbmergeitems-from": "آیتم از $3 ادغام شد",
 	"wikibase-entity-summary-wbmergeitems-to": "آیتم به $3 ادغام شد",
 	"wikibase-item-summary-wbcreate-new": "آیتم جدیدی ایجاد شد",

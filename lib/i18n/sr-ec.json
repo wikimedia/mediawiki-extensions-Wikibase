@@ -136,6 +136,8 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|Додат квалификатор|Додати квалификатори}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|Промењен квалификатор|Промењени квалификатори}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Уклоњен квалификатор|Уклоњени квалификатори}}",
+	"wikibase-entity-summary-wbremovequalifiers-update": "{{PLURAL:$1|Уклоњен квалификатор|Уклоњени квалификатори}}",
+	"wikibase-entity-summary-wbremovereferences-update": "{{PLURAL:$3|Уклоњена референца|Уклоњене референце}} за тврдњу",
 	"wikibase-entity-summary-wbmergeitems-from": "Обједињена ставка из $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Обједињена ставка у $3",
 	"wikibase-item-summary-wbcreate-new": "Направљена нова ставка",

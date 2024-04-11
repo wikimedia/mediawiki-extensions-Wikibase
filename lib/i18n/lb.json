@@ -82,7 +82,7 @@
 	"wikibase-entity-summary-wbsetlabel-add": "[$2]-Etikett dobäigesat",
 	"wikibase-entity-summary-wbsetlabel-set": "Huet d'Etikett fir [$2] geännert",
 	"wikibase-entity-summary-wbsetlabel-remove": "Huet d'Etikett fir [$2] ewechgeholl",
-	"wikibase-entity-summary-wbsetdescription-add": "[$2]-Beschreiwung dobäigesat",
+	"wikibase-entity-summary-wbsetdescription-add": "[$2]-Beschreiwung derbäigesat",
 	"wikibase-entity-summary-wbsetdescription-set": "[$2]-Beschreiwung geännert",
 	"wikibase-entity-summary-wbsetdescription-remove": "[$2]-Beschreiwung ewechgeholl",
 	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|Alias|Aliassen}} [$2] aktualiséiert",
