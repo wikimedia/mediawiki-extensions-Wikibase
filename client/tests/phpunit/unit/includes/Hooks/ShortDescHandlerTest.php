@@ -88,10 +88,10 @@ class ShortDescHandlerTest extends TestCase {
 		$parser->method( 'getMagicWordFactory' )->willReturn(
 			MediaWikiServices::getInstance()->getMagicWordFactory() );
 		if ( $pageProperty === null ) {
-			$parserOutput->expects( $this->never() )->method( 'setPageProperty' );
+			$parserOutput->expects( $this->never() )->method( 'setUnsortedPageProperty' );
 		} else {
 			$parserOutput->expects( $this->once() )
-				->method( 'setPageProperty' )
+				->method( 'setUnsortedPageProperty' )
 				->with( DescriptionLookup::LOCAL_PROPERTY_NAME, $pageProperty );
 		}
 		$this->handler->doHandle( $parser, $inputString, '' );
@@ -116,7 +116,7 @@ class ShortDescHandlerTest extends TestCase {
 		$parser->method( 'getOutput' )->willReturn( $parserOutput );
 		$parserOutput->method( 'getPageProperty' )
 			->willReturn( 'bogus' );
-		$parserOutput->method( 'setPageProperty' )
+		$parserOutput->method( 'setUnsortedPageProperty' )
 			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
 				$this->assertSame( 'wikibase-shortdesc', $name );
 				$shortDesc = $value;

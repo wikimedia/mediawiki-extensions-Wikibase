@@ -91,7 +91,7 @@ class ShortDescHandler {
 
 		$shortDesc = $this->sanitize( $shortDesc );
 		if ( $this->isValid( $shortDesc ) ) {
-			$out->setPageProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
+			$out->setUnsortedPageProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
 		}
 	}
 
