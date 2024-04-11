@@ -336,6 +336,31 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @see https://www.owasp.org/index.php/PHP_Object_Injection
 	 */
 	private function unserialize( $string, $default, array $loggingContext ) {
+		$decoded = $this->decode( $string, $loggingContext );
+		if ( $decoded === null ) {
+			return $default;
+		}
+
+		[ 'signatureToCheck' => $signatureToCheck, 'data' => $data ] = $decoded;
+		if ( !$this->validate( $signatureToCheck, $data, $loggingContext ) ) {
+			return $default;
+		}
+
+		return $this->safelyUnserialize( $data, $default, $loggingContext );
+	}
+
+	/**
+	 * Decode the data in the cache, which is expected to be
+	 * a JSON-serialized array of the form
+	 * `[ 2, "signatureToCheck", "phpSerializedData" ]`
+	 * (where `2` is a version number that may be increased in future if necessary).
+	 *
+	 * @return string[]|null If successful, an array with 'signatureToCheck' and 'data';
+	 * `null` means that the data was invalid and an alert was already logged.
+	 * Keep in mind that a successfully decoded value is not trustworthy
+	 * until it has been {@link self::validate() validated}.
+	 */
+	private function decode( string $string, array $loggingContext ): ?array {
 		$result = json_decode( $string );
 
 		if ( !is_array( $result ) || count( $result ) !== 3 ) {
@@ -343,7 +368,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 				'type' => gettype( $result ),
 				'count' => is_array( $result ) ? count( $result ) : 'N/A',
 			] );
-			return $default;
+			return null;
 		}
 
 		[ $version, $signatureToCheck, $data ] = $result;
@@ -351,28 +376,47 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			$this->logger->alert( 'Unknown cache format version {formatVersion}', $loggingContext + [
 				'formatVersion' => $version,
 			] );
-			return $default;
+			return null;
 		}
 		if ( !is_string( $signatureToCheck ) ) {
 			$this->logger->alert( 'Invalid signature (not a string)', $loggingContext + [
 				'signature' => $signatureToCheck,
 			] );
-			return $default;
+			return null;
 		}
 		if ( !is_string( $data ) ) {
 			$this->logger->alert( 'Invalid data (not a string)', $loggingContext + [
-					'data' => $data,
-				] );
-			return $default;
+				'data' => $data,
+			] );
+			return null;
 		}
+
+		return [ 'signatureToCheck' => $signatureToCheck, 'data' => $data ];
+	}
+
+	/**
+	 * Validate the signature of the data from the cache.
+	 *
+	 * @return bool Whether the signature is valid or not.
+	 * In case of an invalid signature, an alert is logged.
+	 */
+	private function validate( string $signatureToCheck, string $data, array $loggingContext ): bool {
 		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
 		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
 		if ( !$hashEquals ) {
 			$this->logger->alert( "Incorrect signature", $loggingContext );
-			return $default;
 		}
-		$decodedData = $data;
+		return $hashEquals;
+	}
 
+	/**
+	 * Unserialize the data once it has been {@link self::decode() decoded}
+	 * and {@link self::validate() validated}.
+	 * Even then, we only support unserializing `stdClass`, no other classes.
+	 *
+	 * @return mixed
+	 */
+	private function safelyUnserialize( string $decodedData, $default, array $loggingContext ) {
 		if ( $decodedData === serialize( false ) ) {
 			return false;
 		}
