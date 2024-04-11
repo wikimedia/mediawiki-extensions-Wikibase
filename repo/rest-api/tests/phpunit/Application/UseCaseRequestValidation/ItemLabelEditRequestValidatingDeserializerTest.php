@@ -5,11 +5,14 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer
@@ -20,6 +23,17 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 
+	private ItemRetriever $itemRetriever;
+	private ItemLabelValidator $itemLabelValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->itemRetriever = new InMemoryItemRepository();
+		$this->itemRetriever->addItem( NewItem::withId( 'Q123' )->build() );
+		$this->itemLabelValidator = $this->createStub( ItemLabelValidator::class );
+	}
+
 	public function testGivenValidRequest_returnsLabel(): void {
 		$request = $this->createStub( ItemLabelEditRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
@@ -28,8 +42,45 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			new Term( 'en', 'potato' ),
-			( new ItemLabelEditRequestValidatingDeserializer( $this->createStub( OldItemLabelValidator::class ) ) )
-				->validateAndDeserialize( $request )
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenItemDoesNotExist_skipsValidation(): void {
+		$this->itemRetriever = new InMemoryItemRepository();
+
+		$this->itemLabelValidator = $this->createMock( ItemLabelValidator::class );
+		$this->itemLabelValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( ItemLabelEditRequest::class );
+		$request->method( 'getItemId' )->willReturn( 'Q123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getLabel' )->willReturn( 'potato' );
+
+		$this->assertEquals(
+			new Term( 'en', 'potato' ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenLabelIsUnchanged_skipsValidation(): void {
+		$itemId = 'Q345';
+		$languageCode = 'en';
+		$label = 'potato';
+
+		$this->itemRetriever = new InMemoryItemRepository();
+		$this->itemRetriever->addItem( NewItem::withId( $itemId )->andLabel( $languageCode, $label )->build() );
+		$this->itemLabelValidator = $this->createMock( ItemLabelValidator::class );
+		$this->itemLabelValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( ItemLabelEditRequest::class );
+		$request->method( 'getItemId' )->willReturn( $itemId );
+		$request->method( 'getLanguageCode' )->willReturn( $languageCode );
+		$request->method( 'getLabel' )->willReturn( $label );
+
+		$this->assertEquals(
+			new Term( $languageCode, $label ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}
 
@@ -47,12 +98,11 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getLabel' )->willReturn( 'my label' );
 
-		$itemLabelValidator = $this->createStub( OldItemLabelValidator::class );
-		$itemLabelValidator->method( 'validate' )->willReturn( $validationError );
+		$this->itemLabelValidator = $this->createStub( ItemLabelValidator::class );
+		$this->itemLabelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new ItemLabelEditRequestValidatingDeserializer( $itemLabelValidator ) )
-				->validateAndDeserialize( $request );
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
@@ -65,15 +115,15 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [
 			new ValidationError(
-				OldItemLabelValidator::CODE_INVALID,
-				[ OldItemLabelValidator::CONTEXT_LABEL => $label ],
+				ItemLabelValidator::CODE_INVALID,
+				[ ItemLabelValidator::CONTEXT_LABEL => $label ],
 			),
 			UseCaseError::INVALID_LABEL,
 			"Not a valid label: $label",
 		];
 
 		yield 'label empty' => [
-			new ValidationError( OldItemLabelValidator::CODE_EMPTY ),
+			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
 			UseCaseError::LABEL_EMPTY,
 			'Label must not be empty',
 		];
@@ -81,9 +131,9 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$label = 'This label is too long.';
 		$limit = 250;
 		yield 'label too long' => [
-			new ValidationError( OldItemLabelValidator::CODE_TOO_LONG, [
-				OldItemLabelValidator::CONTEXT_LABEL => $label,
-				OldItemLabelValidator::CONTEXT_LIMIT => $limit,
+			new ValidationError( ItemLabelValidator::CODE_TOO_LONG, [
+				ItemLabelValidator::CONTEXT_LABEL => $label,
+				ItemLabelValidator::CONTEXT_LIMIT => $limit,
 			] ),
 			UseCaseError::LABEL_TOO_LONG,
 			"Label must be no more than $limit characters long",
@@ -96,8 +146,8 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$language = 'en';
 		yield 'label equals description' => [
 			new ValidationError(
-				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ OldItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+				ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
 			),
 			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
 			"Label and description for language code '$language' can not have the same value.",
@@ -109,11 +159,11 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$description = 'My Description';
 		$itemId = 'Q456';
 		yield 'label/description not unique' => [
-			new ValidationError( OldItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, [
-				OldItemLabelValidator::CONTEXT_LANGUAGE => $language,
-				OldItemLabelValidator::CONTEXT_LABEL => $label,
-				OldItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-				OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
+			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, [
+				ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+				ItemLabelValidator::CONTEXT_LABEL => $label,
+				ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+				ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
 			] ),
 			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
 			"Item $itemId already has label '$label' associated with language code '$language', using the same description text.",
@@ -126,4 +176,10 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		];
 	}
 
+	private function newValidatingDeserializer(): ItemLabelEditRequestValidatingDeserializer {
+		return new ItemLabelEditRequestValidatingDeserializer(
+			$this->itemLabelValidator,
+			$this->itemRetriever
+		);
+	}
 }

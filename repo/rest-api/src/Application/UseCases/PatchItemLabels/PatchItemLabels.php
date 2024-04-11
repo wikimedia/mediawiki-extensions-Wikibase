@@ -70,10 +70,12 @@ class PatchItemLabels {
 		$patchedLabels = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
 		$item = $this->itemRetriever->getItem( $itemId );
-
 		$originalLabels = $item->getLabels();
-
-		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize( $itemId, $originalLabels, $patchedLabels );
+		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize(
+			$originalLabels,
+			$item->getDescriptions(),
+			$patchedLabels
+		);
 
 		$item->getFingerprint()->setLabels( $modifiedLabels );
 
