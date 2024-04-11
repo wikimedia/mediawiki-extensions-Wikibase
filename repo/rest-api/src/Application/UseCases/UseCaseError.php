@@ -127,7 +127,7 @@ class UseCaseError extends UseCaseException {
 		self::COMMENT_TOO_LONG => [],
 		self::DESCRIPTION_EMPTY => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
-		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
+		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::INVALID_ALIAS => [ self::CONTEXT_ALIAS ],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_EDIT_TAG => [],
@@ -230,9 +230,12 @@ class UseCaseError extends UseCaseException {
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
+		self::DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
+		self::INVALID_DESCRIPTION => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
+		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 	];
 
 	private string $errorCode;

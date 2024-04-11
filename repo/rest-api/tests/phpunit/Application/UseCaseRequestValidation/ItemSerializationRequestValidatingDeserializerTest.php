@@ -8,8 +8,10 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
-use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -39,6 +41,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider itemValidationErrorProvider
 	 * @dataProvider itemLabelsValidationErrorProvider
+	 * @dataProvider itemDescriptionsValidationErrorProvider
 	 */
 	public function testGivenInvalidRequest_throws( ValidationError $validationError, UseCaseError $expectedError ): void {
 		$itemSerialization = [ 'item serialization stub' ];
@@ -97,11 +100,92 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				'Item requires at least a label or a description in a language'
 			),
 		];
+	}
+
+	public function itemLabelsValidationErrorProvider(): Generator {
+		yield 'empty label' => [
+			new ValidationError(
+				ItemLabelValidator::CODE_EMPTY,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::LABEL_EMPTY,
+				'Label must not be empty',
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		yield 'label too long' => [
+			new ValidationError(
+				ItemLabelValidator::CODE_TOO_LONG,
+				[
+					ItemLabelValidator::CONTEXT_LABEL => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+				]
+			),
+			new UseCaseError(
+				UseCaseError::LABEL_TOO_LONG,
+				'Label must be no more than 50 characters long',
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_CHARACTER_LIMIT => 50,
+				]
+			),
+		];
+
+		yield 'invalid label deserialization' => [
+			new ValidationError(
+				ItemLabelValidator::CODE_INVALID,
+				[
+					ItemLabelValidator::CONTEXT_LABEL => 22,
+					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_LABEL,
+				'Not a valid label: 22',
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		yield 'invalid label' => [
+			new ValidationError(
+				ItemLabelValidator::CODE_INVALID,
+				[
+					ItemLabelValidator::CONTEXT_LABEL => "invalid \t",
+					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_LABEL,
+				"Not a valid label: invalid \t",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		yield 'invalid label language code' => [
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[
+					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemValidator::CONTEXT_FIELD_LABELS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_LANGUAGE_CODE,
+				'Not a valid language code: e2',
+				[
+					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_LABELS,
+					UseCaseError::CONTEXT_LANGUAGE => 'e2',
+				]
+			),
+		];
 
 		yield 'same value for label and description' => [
 			new ValidationError(
-				ItemValidator::CODE_LABEL_DESCRIPTION_SAME_VALUE,
-				[ ItemValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
@@ -112,12 +196,12 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'label and description duplication' => [
 			new ValidationError(
-				ItemValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemValidator::CONTEXT_FIELD_LANGUAGE => 'en',
-					ItemValidator::CONTEXT_FIELD_LABEL => 'en-label',
-					ItemValidator::CONTEXT_FIELD_DESCRIPTION => 'en-description',
-					ItemValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					ItemLabelValidator::CONTEXT_LABEL => 'en-label',
+					ItemLabelValidator::CONTEXT_DESCRIPTION => 'en-description',
+					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
 				]
 			),
 			new UseCaseError(
@@ -133,82 +217,112 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 	}
 
-	public function itemLabelsValidationErrorProvider(): Generator {
-		yield 'empty label' => [
+	public function itemDescriptionsValidationErrorProvider(): Generator {
+		yield 'empty description' => [
 			new ValidationError(
-				OldItemLabelValidator::CODE_EMPTY,
-				[ OldItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+				ItemDescriptionValidator::CODE_EMPTY,
+				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
-				UseCaseError::LABEL_EMPTY,
-				'Label must not be empty',
+				UseCaseError::DESCRIPTION_EMPTY,
+				'Description must not be empty',
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
-
-		yield 'label too long' => [
+		yield 'description too long' => [
 			new ValidationError(
-				OldItemLabelValidator::CODE_TOO_LONG,
+				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					OldItemLabelValidator::CONTEXT_LABEL => str_repeat( 'a', self::MAX_LENGTH + 1 ),
-					OldItemLabelValidator::CONTEXT_LANGUAGE => 'en',
-					OldItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
+					ItemDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			new UseCaseError(
-				UseCaseError::LABEL_TOO_LONG,
-				'Label must be no more than 50 characters long',
+				UseCaseError::DESCRIPTION_TOO_LONG,
+				'Description must be no more than 50 characters long',
 				[
 					UseCaseError::CONTEXT_LANGUAGE => 'en',
 					UseCaseError::CONTEXT_CHARACTER_LIMIT => 50,
 				]
 			),
 		];
-
-		yield 'invalid label deserialization' => [
+		yield 'invalid description deserialization' => [
 			new ValidationError(
-				ItemValidator::CODE_INVALID_LABEL,
+				ItemDescriptionValidator::CODE_INVALID,
 				[
-					ItemValidator::CONTEXT_FIELD_LABEL => 22,
-					ItemValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 22,
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
-				UseCaseError::INVALID_LABEL,
-				'Not a valid label: 22',
+				UseCaseError::INVALID_DESCRIPTION,
+				'Not a valid description: 22',
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
-
-		yield 'invalid label' => [
+		yield 'invalid description' => [
 			new ValidationError(
-				OldItemLabelValidator::CODE_INVALID,
+				ItemDescriptionValidator::CODE_INVALID,
 				[
-					OldItemLabelValidator::CONTEXT_LABEL => "invalid \t",
-					OldItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => "invalid \t",
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
-				UseCaseError::INVALID_LABEL,
-				"Not a valid label: invalid \t",
+				UseCaseError::INVALID_DESCRIPTION,
+				"Not a valid description: invalid \t",
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
-
-		yield 'invalid label language code' => [
+		yield 'invalid description language code' => [
 			new ValidationError(
-				ItemValidator::CODE_INVALID_LANGUAGE_CODE,
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					ItemValidator::CONTEXT_FIELD_NAME => ItemValidator::CONTEXT_FIELD_LABEL,
-					ItemValidator::CONTEXT_FIELD_LANGUAGE => 'e2',
+					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
 				]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: e2',
 				[
-					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_LABEL,
+					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
+				]
+			),
+		];
+
+		yield 'same value for description and label ' => [
+			new ValidationError(
+				ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL,
+				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
+				"Label and description for language 'en' can not have the same value",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		yield 'description and label duplication' => [
+			new ValidationError(
+				ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE,
+				[
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
+					ItemDescriptionValidator::CONTEXT_LABEL => 'en-label',
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 'en-description',
+					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
+				"Item 'Q123' already has label 'en-label' associated with language code 'en', using the same description text",
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_LABEL => 'en-label',
+					UseCaseError::CONTEXT_DESCRIPTION => 'en-description',
+					UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123',
 				]
 			),
 		];

@@ -107,9 +107,27 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, 'labels' );
 		} );
 
+		it( 'invalid descriptions list', async () => {
+			const invalidDescriptions = [ 'not a valid descriptions array' ];
+			const response = await newCreateItemRequestBuilder( { descriptions: invalidDescriptions } )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-data-invalid-field',
+				{ path: 'descriptions', value: invalidDescriptions }
+			);
+			assert.include( response.body.message, 'descriptions' );
+		} );
+
 		it( 'unexpected field', async () => {
 			const unexpectedField = 'foo';
-			const item = { [ unexpectedField ]: 'bar' };
+			const item = {
+				labels: { en: 'English label' },
+				[ unexpectedField ]: 'bar'
+			};
 
 			const response = await newCreateItemRequestBuilder( item ).assertValidRequest().makeRequest();
 
@@ -126,7 +144,21 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'invalid-language-code',
-				{ path: 'label', language: 'xyz' }
+				{ path: 'labels', language: 'xyz' }
+			);
+			assert.include( response.body.message, 'xyz' );
+		} );
+
+		it( 'invalid description language code', async () => {
+			const response = await newCreateItemRequestBuilder( { descriptions: { xyz: 'description' } } )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'invalid-language-code',
+				{ path: 'descriptions', language: 'xyz' }
 			);
 			assert.include( response.body.message, 'xyz' );
 		} );
@@ -139,6 +171,16 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			assertValidError( response, 400, 'invalid-label', { language: 'en' } );
 			assert.include( response.body.message, invalidLabel );
+		} );
+
+		it( 'invalid description', async () => {
+			const invalidDescription = 'tab characters \t not allowed';
+			const response = await newCreateItemRequestBuilder( { descriptions: { en: invalidDescription } } )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-description', { language: 'en' } );
+			assert.include( response.body.message, invalidDescription );
 		} );
 
 		it( 'empty label', async () => {

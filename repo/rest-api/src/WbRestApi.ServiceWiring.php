@@ -12,7 +12,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
@@ -123,6 +122,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
@@ -154,7 +155,6 @@ use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
-use Wikibase\Repo\RestApi\Infrastructure\ItemDeserializerItemValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
@@ -163,6 +163,8 @@ use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
@@ -342,13 +344,25 @@ return [
 
 	VRD::ITEM_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
 		function( MediaWikiServices $services ): ItemSerializationRequestValidatingDeserializer {
-			$termValidatorFactory = WikibaseRepo::getTermValidatorFactory( $services );
 			return new ItemSerializationRequestValidatingDeserializer(
-				new ItemDeserializerItemValidator(
-					WbRestApi::getItemDeserializer( $services ),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-					new TermValidatorFactoryLabelTextValidator( $termValidatorFactory ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services )
+				new ItemValidator(
+					new ItemLabelsAndDescriptionsValidator(
+						new TermValidatorFactoryItemLabelValidator(
+							WikibaseRepo::getTermValidatorFactory( $services ),
+							WikibaseRepo::getItemTermsCollisionDetector( $services )
+						),
+						new TermValidatorFactoryItemDescriptionValidator(
+							WikibaseRepo::getTermValidatorFactory( $services ),
+							WikibaseRepo::getItemTermsCollisionDetector( $services )
+						),
+						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+						new LabelsDeserializer(),
+						new DescriptionsDeserializer()
+					),
+					new AliasesDeserializer(),
+					new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ),
+					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) )
 				)
 			);
 		},
@@ -673,16 +687,6 @@ return [
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			),
 			new SitelinksReadModelConverter( $services->getSiteLookup() )
-		);
-	},
-
-	'WbRestApi.ItemDeserializer' => function ( MediaWikiServices $services ) {
-		return new ItemDeserializer(
-			new LabelsDeserializer(),
-			new DescriptionsDeserializer(),
-			new AliasesDeserializer(),
-			new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) ),
-			new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
 		);
 	},
 

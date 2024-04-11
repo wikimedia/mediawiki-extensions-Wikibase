@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
@@ -459,11 +458,6 @@ class WbRestApi {
 	public static function getSetSitelink( ContainerInterface $services = null ): SetSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SetSitelink' );
-	}
-
-	public static function getItemDeserializer( ContainerInterface $services = null ): ItemDeserializer {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ItemDeserializer' );
 	}
 
 }
