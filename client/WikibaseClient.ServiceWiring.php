@@ -120,6 +120,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityRedirectTargetLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -707,7 +708,11 @@ return [
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 
 		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
-			WikibaseClient::getWikibaseServices( $services )->getPropertyInfoLookup(),
+			new PropertyInfoTable(
+				WikibaseClient::getEntityIdComposer( $services ),
+				WikibaseClient::getRepoDomainDbFactory( $services )->newRepoDb(),
+				false
+			),
 			$services->getMainWANObjectCache(),
 			$cacheKeyGroup,
 			$cacheDuration

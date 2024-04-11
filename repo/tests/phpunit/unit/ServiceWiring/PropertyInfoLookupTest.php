@@ -4,7 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataAccess\WikibaseServices;
+use Wikibase\DataAccess\DatabaseEntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -19,12 +22,18 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class PropertyInfoLookupTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$wikibaseServices = $this->createMock( WikibaseServices::class );
-		$wikibaseServices->expects( $this->once() )
-			->method( 'getPropertyInfoLookup' )
-			->willReturn( $this->createStub( PropertyInfoLookup::class ) );
-		$this->mockService( 'WikibaseRepo.WikibaseServices', $wikibaseServices );
-
+		$this->mockService(
+			'WikibaseRepo.EntityIdComposer',
+			$this->createStub( EntityIdComposer::class )
+		);
+		$this->mockService(
+			'WikibaseRepo.RepoDomainDbFactory',
+			$this->createStub( RepoDomainDbFactory::class )
+		);
+		$entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
+		$entitySourceDefinitions->method( 'getDatabaseSourceForEntityType' )
+			->willReturn( $this->createStub( DatabaseEntitySource::class ) );
+		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions', $entitySourceDefinitions );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/test',
