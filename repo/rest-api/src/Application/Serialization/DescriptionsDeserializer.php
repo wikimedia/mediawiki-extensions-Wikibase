@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\TermList;
 class DescriptionsDeserializer {
 
 	/**
-	 * @throws InvalidFieldException
+	 * @throws InvalidDescriptionException
 	 * @throws EmptyDescriptionException
 	 */
 	public function deserialize( array $serialization ): TermList {
@@ -19,7 +19,7 @@ class DescriptionsDeserializer {
 
 		foreach ( $serialization as $language => $text ) {
 			if ( !is_string( $text ) ) {
-				throw new InvalidFieldException( $language, $text );
+				throw new InvalidDescriptionException( $language, $text );
 			}
 
 			$trimmedText = trim( $text );
