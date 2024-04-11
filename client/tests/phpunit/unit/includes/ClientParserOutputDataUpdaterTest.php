@@ -236,7 +236,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 		$instance->updateBadgesProperty( $title, $parserOutputProvider );
 		$this->assertTrue(
-			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ),
+			$parserOutput->getPageProperty( 'wikibase-badge-Q17' ) !== null,
 			'property "wikibase-badge-Q17" should be set'
 		);
 		$parserOutputProvider->close();
@@ -245,7 +245,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	public function testUpdateBadgesProperty_removesPreviousData(): void {
 		$parserOutput = new ParserOutput();
 		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
-		$parserOutput->setPageProperty( 'wikibase-badge-Q17', true );
+		$parserOutput->setUnsortedPageProperty( 'wikibase-badge-Q17' );
 
 		$title = $this->getTitle( 'Foo sr' );
 
