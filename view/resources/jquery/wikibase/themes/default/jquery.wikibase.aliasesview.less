@@ -4,34 +4,11 @@
  */
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-aliasesview,
-.wikibase-aliasesview-empty {
+.wikibase-aliasesview {
 	float: left; /* necessary for highlighting in edit mode */
 	width: 100%;
 }
 
-.wikibase-aliasesview .wikibase-aliasesview-container {
-	/* stylelint-disable-next-line declaration-no-important */
-	display: block !important;
-	padding-left: 10px;
-	padding-right: 19em;
-	position: relative;
-}
-
-.wikibase-aliasesview-label {
-	float: left;
-	font-weight: bold;
-	margin-right: 1em;
-	margin-top: 1px; /* even out border of alias values */
-	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space
-							underneath the label for one line in some cases */
-}
-
-.wikibase-aliasesview.wb-empty .wikibase-aliasesview-label {
-	font-weight: normal;
-}
-
-.wikibase-aliasesview .wikibase-aliasesview-label,
 .wikibase-aliasesview ul {
 	overflow: auto;
 }

@@ -9,25 +9,3 @@
 .wikibase-entitytermsforlanguageview .wb-error {
 	background-color: #fee7e6;
 }
-
-/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
-.wikibase-entitytermsforlanguageview .wb-editsection {
-	width: 18em;
-	position: static; /* clear absolute positioning */
-	float: none; /* overwrite edit section's float: right */
-	padding: 0;
-	margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
-	                applying margin to the edit section cell should not have any effect at all */
-}
-
-.wikibase-entitytermsforlanguageview .wb-editsection .wikibase-toolbar {
-	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
-}
-
-.wikibase-entitytermsforlanguageview .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-	margin-left: 1px; /* even out table cell's right border */
-}
-
-.wikibase-entitytermsforlanguageview .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-	margin-left: 0; /* do not apply margin to nested toolbar groups */
-}
