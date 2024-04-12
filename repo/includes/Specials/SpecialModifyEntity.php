@@ -240,8 +240,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		if ( $status->isOK() ) {
 			$this->redirectToEntityPage( $status );
 		} else {
-			$errors = $status->getErrorsArray();
-			$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
+			$errors = $status->getMessages();
+			$this->showErrorHTML( $this->msg( $errors[0] )->parse() );
 			$this->setForm( $entity );
 		}
 	}
