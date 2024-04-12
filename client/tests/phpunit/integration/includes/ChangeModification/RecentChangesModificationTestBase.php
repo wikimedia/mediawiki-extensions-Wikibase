@@ -8,6 +8,7 @@ use MediaWikiIntegrationTestCase;
 use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Extend this class in order to set up integration tests against the
@@ -135,7 +136,11 @@ abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTes
 	 * All changes have a unique rc_title value to make them easy to identify.
 	 */
 	protected function initRecentChanges() {
-		$this->db->delete( 'recentchanges', '*' );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'recentchanges' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 		$changes = [
 			[
 				'rc_timestamp' => '20111111111111',

@@ -110,13 +110,13 @@ class PruneItemsPerSite extends Maintenance {
 	}
 
 	private function deleteRows( IDatabase $dbw, array $rowsToDelete ): int {
-		$dbw->delete(
-			'wb_items_per_site',
-			[
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'wb_items_per_site' )
+			->where( [
 				'ips_row_id' => $rowsToDelete,
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		return $dbw->affectedRows();
 	}

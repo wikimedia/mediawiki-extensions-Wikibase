@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder
@@ -28,8 +29,16 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 	public function addDBDataOnce() {
 		$dbw = $this->getDb();
 
-		$dbw->delete( 'page', '*' );
-		$dbw->delete( 'page_props', '*' );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'page_props' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		// Create page row for Q100, ..., Q106
 		$pages = [];

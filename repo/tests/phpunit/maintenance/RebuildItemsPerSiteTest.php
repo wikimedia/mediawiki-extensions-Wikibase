@@ -156,7 +156,11 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 	}
 
 	private function clearItemsPerSite(): void {
-		$this->db->delete( 'wb_items_per_site', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'wb_items_per_site' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 }

@@ -16,6 +16,7 @@ use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder
@@ -78,7 +79,11 @@ class PropertyInfoTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function resetPropertyInfoTable( PropertyInfoTable $table ) {
 		$dbw = $table->getDomainDb()->connections()->getWriteConnection();
-		$dbw->delete( 'wb_property_info', '*' );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'wb_property_info' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	public function testRebuildPropertyInfo() {

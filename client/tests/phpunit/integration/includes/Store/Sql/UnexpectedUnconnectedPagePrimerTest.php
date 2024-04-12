@@ -25,7 +25,11 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
 		// Remove old stray pages.
-		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		$titles = [];
 		for ( $i = 1; $i < 5; $i++ ) {
@@ -230,7 +234,11 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 	 * @param array[] $pageProps Array of 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey'
 	 */
 	private function insertPageProps( array $pageProps ): void {
-		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page_props' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		$toInsert = [];
 		foreach ( $pageProps as $pageProp ) {

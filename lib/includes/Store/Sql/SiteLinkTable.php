@@ -183,14 +183,14 @@ class SiteLinkTable implements SiteLinkStore {
 			$siteIds[] = $siteLink->getSiteId();
 		}
 
-		$dbw->delete(
-			$this->table,
-			[
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( $this->table )
+			->where( [
 				'ips_item_id' => $item->getId()->getNumericId(),
 				'ips_site_id' => $siteIds,
-			],
-			__METHOD__
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		return true;
 	}
@@ -209,11 +209,11 @@ class SiteLinkTable implements SiteLinkStore {
 
 		$dbw = $this->db->connections()->getWriteConnection();
 
-		$dbw->delete(
-			$this->table,
-			[ 'ips_item_id' => $itemId->getNumericId() ],
-			__METHOD__
-		);
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( $this->table )
+			->where( [ 'ips_item_id' => $itemId->getNumericId() ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		return true;
 	}
