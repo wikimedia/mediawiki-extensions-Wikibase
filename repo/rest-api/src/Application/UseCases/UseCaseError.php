@@ -14,6 +14,7 @@ class UseCaseError extends UseCaseException {
 	public const ALIAS_LIST_EMPTY = 'alias-list-empty';
 	public const ALIAS_TOO_LONG = 'alias-too-long';
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
+	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
 	public const INVALID_ALIAS = 'invalid-alias';
 	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const DESCRIPTION_EMPTY = 'description-empty';
@@ -122,13 +123,14 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
 		self::ALIAS_EMPTY => [],
 		self::ALIAS_LIST_EMPTY => [],
-		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
+		self::ALIAS_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::ALIASES_NOT_DEFINED => [],
 		self::COMMENT_TOO_LONG => [],
 		self::DESCRIPTION_EMPTY => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
-		self::INVALID_ALIAS => [ self::CONTEXT_ALIAS ],
+		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
+		self::INVALID_ALIAS => [],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_EDIT_TAG => [],
 		self::INVALID_FIELD => [],
@@ -231,11 +233,16 @@ class UseCaseError extends UseCaseException {
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
+		self::ALIAS_EMPTY => [ self::CONTEXT_LANGUAGE ],
+		self::ALIAS_LIST_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_DESCRIPTION => [ self::CONTEXT_LANGUAGE ],
+		self::INVALID_ALIAS => [ self::CONTEXT_LANGUAGE, self::CONTEXT_ALIAS ],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
+		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
+		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 	];
 
 	private string $errorCode;

@@ -5,6 +5,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
@@ -32,6 +34,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		if ( $validationError ) {
 			$this->handleLabelValidationErrors( $validationError );
 			$this->handleDescriptionValidationErrors( $validationError );
+			$this->handleAliasesValidationErrors( $validationError );
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
@@ -50,6 +53,15 @@ class ItemSerializationRequestValidatingDeserializer {
 						[
 							UseCaseError::CONTEXT_PATH => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME],
 							UseCaseError::CONTEXT_VALUE => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE],
+						]
+					);
+				case ItemAliasesValidator::CODE_INVALID_ALIASES:
+					throw new UseCaseError(
+						UseCaseError::ITEM_DATA_INVALID_FIELD,
+						"Invalid input for 'aliases'",
+						[
+							UseCaseError::CONTEXT_PATH => 'aliases',
+							UseCaseError::CONTEXT_VALUE => $context[ItemAliasesValidator::CONTEXT_FIELD_ALIASES],
 						]
 					);
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
@@ -170,6 +182,56 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
 						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
+				);
+		}
+	}
+
+	private function handleAliasesValidationErrors( ValidationError $validationError ): void {
+		$context = $validationError->getContext();
+		switch ( $validationError->getCode() ) {
+			case ItemAliasesValidator::CODE_EMPTY_ALIAS:
+				throw new UseCaseError(
+					UseCaseError::ALIAS_EMPTY,
+					'Alias must not be empty',
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
+				);
+			case ItemAliasesValidator::CODE_EMPTY_ALIAS_LIST:
+				throw new UseCaseError(
+					UseCaseError::ALIAS_LIST_EMPTY,
+					'Alias list must not be empty',
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
+				);
+			case ItemAliasesValidator::CODE_DUPLICATE_ALIAS:
+				throw new UseCaseError(
+					UseCaseError::ALIAS_DUPLICATE,
+					"Alias list contains a duplicate alias: '{$context[ItemAliasesValidator::CONTEXT_FIELD_ALIAS]}'",
+					[
+						UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE],
+						UseCaseError::CONTEXT_ALIAS => $context[ItemAliasesValidator::CONTEXT_FIELD_ALIAS],
+					]
+				);
+			case ItemAliasesValidator::CODE_TOO_LONG_ALIAS:
+				throw new UseCaseError(
+					UseCaseError::ALIAS_TOO_LONG,
+					"Alias must be no more than {$context[ItemAliasesValidator::CONTEXT_FIELD_LIMIT]} characters long",
+					[
+						UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE],
+						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemAliasesValidator::CONTEXT_FIELD_LIMIT],
+					]
+				);
+			case ItemAliasesValidator::CODE_INVALID_ALIAS_LIST:
+				$language = $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE];
+				throw new UseCaseError(
+					UseCaseError::INVALID_ALIAS_LIST,
+					'Not a valid alias list',
+					[ UseCaseError::CONTEXT_LANGUAGE => $language ]
+				);
+			case ItemAliasesValidator::CODE_INVALID_ALIAS:
+				$aliasValue = $context[ItemAliasesValidator::CONTEXT_FIELD_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+				throw new UseCaseError(
+					UseCaseError::INVALID_ALIAS,
+					"Not a valid alias: $aliasValue",
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
 				);
 		}
 	}

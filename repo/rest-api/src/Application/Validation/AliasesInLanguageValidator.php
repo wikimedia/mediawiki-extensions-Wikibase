@@ -14,6 +14,7 @@ interface AliasesInLanguageValidator {
 
 	public const CONTEXT_VALUE = 'value';
 	public const CONTEXT_LIMIT = 'character-limit';
+	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_PATH = 'path';
 
 	public function validate( AliasGroup $aliasesInLanguage ): ?ValidationError;

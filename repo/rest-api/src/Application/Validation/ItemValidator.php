@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 
@@ -25,18 +24,18 @@ class ItemValidator {
 
 	private ?Item $deserializedItem = null;
 	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
-	private AliasesDeserializer $aliasesDeserializer;
+	private ItemAliasesValidator $itemAliasesValidator;
 	private StatementsDeserializer $statementsDeserializer;
 	private SitelinksDeserializer $sitelinksDeserializer;
 
 	public function __construct(
 		ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator,
-		AliasesDeserializer $aliasesDeserializer,
+		ItemAliasesValidator $itemAliasesValidator,
 		StatementsDeserializer $statementsDeserializer,
 		SitelinksDeserializer $sitelinksDeserializer
 	) {
 		$this->itemLabelsAndDescriptionsValidator = $itemLabelsAndDescriptionsValidator;
-		$this->aliasesDeserializer = $aliasesDeserializer;
+		$this->itemAliasesValidator = $itemAliasesValidator;
 		$this->statementsDeserializer = $statementsDeserializer;
 		$this->sitelinksDeserializer = $sitelinksDeserializer;
 	}
@@ -63,7 +62,8 @@ class ItemValidator {
 			}
 		}
 
-		$validationError = $this->validateLabelsAndDescriptions( $serialization );
+		$validationError = $this->validateLabelsAndDescriptions( $serialization ) ??
+						   $this->itemAliasesValidator->validate( $serialization['aliases'] );
 		if ( $validationError ) {
 			return $validationError;
 		}
@@ -73,7 +73,7 @@ class ItemValidator {
 			new Fingerprint(
 				$this->itemLabelsAndDescriptionsValidator->getValidatedLabels(),
 				$this->itemLabelsAndDescriptionsValidator->getValidatedDescriptions(),
-				$this->aliasesDeserializer->deserialize( $serialization['aliases'] )
+				$this->itemAliasesValidator->getValidatedAliases()
 			),
 			$this->sitelinksDeserializer->deserialize( $serialization['sitelinks'] ),
 			$this->statementsDeserializer->deserialize( $serialization['statements'] )

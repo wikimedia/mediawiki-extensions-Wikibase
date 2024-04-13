@@ -44,22 +44,26 @@ class TermValidatorFactoryAliasesInLanguageValidatorTest extends TestCase {
 	}
 
 	public static function provideInvalidAliases(): Generator {
+		$language = 'en';
 		$alias = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'alias too long' => [
-			new AliasGroup( 'en', [ $alias ] ),
+			new AliasGroup( $language, [ $alias ] ),
 			AliasesInLanguageValidator::CODE_TOO_LONG,
 			[
 				AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
+				AliasesInLanguageValidator::CONTEXT_LANGUAGE => $language,
 				AliasesInLanguageValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 			],
 		];
 
+		$language = 'en';
 		$alias = "alias with tab character \t not allowed";
 		yield 'alias has invalid character' => [
-			new AliasGroup( 'en', [ $alias ] ),
+			new AliasGroup( $language, [ $alias ] ),
 			AliasesInLanguageValidator::CODE_INVALID,
 			[
 				AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
+				AliasesInLanguageValidator::CONTEXT_LANGUAGE => $language,
 				AliasesInLanguageValidator::CONTEXT_PATH => 'en/0',
 			],
 		];
