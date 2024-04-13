@@ -85,6 +85,44 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '400 error response ', () => {
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.header[ 'content-language' ], 'en' );
+			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid bot flag', async () => {
+			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
 		it( 'invalid toplevel field', async () => {
 			const fieldWithInvalidValue = 'labels';
 			const invalidValue = 'not an object';
