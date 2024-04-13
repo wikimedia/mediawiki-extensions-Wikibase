@@ -8,8 +8,8 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -136,8 +136,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	public function itemLabelsValidationErrorProvider(): Generator {
 		yield 'empty label' => [
 			new ValidationError(
-				ItemLabelValidator::CODE_EMPTY,
-				[ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+				OldItemLabelValidator::CODE_EMPTY,
+				[ OldItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::LABEL_EMPTY,
@@ -148,11 +148,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'label too long' => [
 			new ValidationError(
-				ItemLabelValidator::CODE_TOO_LONG,
+				OldItemLabelValidator::CODE_TOO_LONG,
 				[
-					ItemLabelValidator::CONTEXT_LABEL => str_repeat( 'a', self::MAX_LENGTH + 1 ),
-					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
-					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+					OldItemLabelValidator::CONTEXT_LABEL => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					OldItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					OldItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			new UseCaseError(
@@ -182,10 +182,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid label' => [
 			new ValidationError(
-				ItemLabelValidator::CODE_INVALID,
+				OldItemLabelValidator::CODE_INVALID,
 				[
-					ItemLabelValidator::CONTEXT_LABEL => "invalid \t",
-					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					OldItemLabelValidator::CONTEXT_LABEL => "invalid \t",
+					OldItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(

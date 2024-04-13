@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLang
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
@@ -96,7 +96,7 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 				AliasesInLanguageValidator::CODE_TOO_LONG,
 				[
 					AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
-					ItemDescriptionValidator::CONTEXT_LIMIT => $limit,
+					OldItemDescriptionValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
 			UseCaseError::ALIAS_TOO_LONG,

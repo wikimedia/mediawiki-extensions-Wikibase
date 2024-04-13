@@ -8,22 +8,22 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemDescriptionValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemDescriptionValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
+class ItemRetrieverItemDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
@@ -89,23 +89,23 @@ class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
 	}
 
 	public static function provideInvalidDescription(): Generator {
-		yield 'description too short' => [ '', ItemDescriptionValidator::CODE_EMPTY ];
+		yield 'description too short' => [ '', OldItemDescriptionValidator::CODE_EMPTY ];
 
 		$description = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'description too long' => [
 			$description,
-			ItemDescriptionValidator::CODE_TOO_LONG,
+			OldItemDescriptionValidator::CODE_TOO_LONG,
 			[
-				ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-				ItemDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+				OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+				OldItemDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 			],
 		];
 
 		$description = "description with tab character \t not allowed";
 		yield 'description has invalid character' => [
 			$description,
-			ItemDescriptionValidator::CODE_INVALID,
-			[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+			OldItemDescriptionValidator::CODE_INVALID,
+			[ OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 		];
 	}
 
@@ -122,8 +122,8 @@ class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ]
+				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language ]
 			),
 			$this->newValidator()->validate( $itemId, $language, $itemLabel )
 		);
@@ -148,12 +148,12 @@ class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				OldItemDescriptionValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-					ItemDescriptionValidator::CONTEXT_LABEL => $label,
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
-					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					OldItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+					OldItemDescriptionValidator::CONTEXT_LABEL => $label,
+					OldItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 				]
 			),
 			$this->newValidator()->validate( $itemId, $language, $description )
@@ -179,8 +179,8 @@ class TermValidatorFactoryItemDescriptionValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( $itemId, $language, $description ) );
 	}
 
-	private function newValidator(): TermValidatorFactoryItemDescriptionValidator {
-		return new TermValidatorFactoryItemDescriptionValidator(
+	private function newValidator(): ItemRetrieverItemDescriptionValidator {
+		return new ItemRetrieverItemDescriptionValidator(
 			$this->newTermValidatorFactory(),
 			$this->termsCollisionDetector,
 			$this->itemRetriever

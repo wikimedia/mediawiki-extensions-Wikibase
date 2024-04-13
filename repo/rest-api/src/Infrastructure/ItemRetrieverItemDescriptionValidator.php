@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\Store\TermsCollisionDetector;
@@ -12,7 +12,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 /**
  * @license GPL-2.0-or-later
  */
-class TermValidatorFactoryItemDescriptionValidator implements ItemDescriptionValidator {
+class ItemRetrieverItemDescriptionValidator implements OldItemDescriptionValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
 	private TermsCollisionDetector $termsCollisionDetector;

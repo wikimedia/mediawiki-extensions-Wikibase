@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemDescriptionValidator {
+interface OldItemDescriptionValidator {
 
 	public const CODE_INVALID = 'invalid-description';
 	public const CODE_EMPTY = 'description-empty';

@@ -6,21 +6,21 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryLabelTextValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\LabelTextValidatorItemLabelValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\ItemRetrieverItemLabelValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class LabelTextValidatorItemLabelValidatorTest extends TestCase {
+class ItemRetrieverItemLabelValidatorTest extends TestCase {
 
 	private ItemRetriever $itemRetriever;
 	private TermsCollisionDetector $termsCollisionDetector;
@@ -93,8 +93,8 @@ class LabelTextValidatorItemLabelValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ OldItemLabelValidator::CONTEXT_LANGUAGE => $language ]
 			),
 			$this->newValidator()->validate( $itemId, $language, $description )
 		);
@@ -121,12 +121,12 @@ class LabelTextValidatorItemLabelValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemLabelValidator::CONTEXT_LANGUAGE => $languageCode,
-					ItemLabelValidator::CONTEXT_LABEL => $label,
-					ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					OldItemLabelValidator::CONTEXT_LANGUAGE => $languageCode,
+					OldItemLabelValidator::CONTEXT_LABEL => $label,
+					OldItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 				]
 
 			),
@@ -134,8 +134,8 @@ class LabelTextValidatorItemLabelValidatorTest extends TestCase {
 		);
 	}
 
-	private function newValidator(): LabelTextValidatorItemLabelValidator {
-		return new LabelTextValidatorItemLabelValidator(
+	private function newValidator(): ItemRetrieverItemLabelValidator {
+		return new ItemRetrieverItemLabelValidator(
 			$this->labelTextValidator,
 			$this->termsCollisionDetector,
 			$this->itemRetriever

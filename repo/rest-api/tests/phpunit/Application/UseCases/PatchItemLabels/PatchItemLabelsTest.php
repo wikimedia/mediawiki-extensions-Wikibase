@@ -20,8 +20,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsVa
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -61,7 +61,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(
 			new LabelsDeserializer(),
-			$this->createStub( ItemLabelValidator::class ),
+			$this->createStub( OldItemLabelValidator::class ),
 			$this->createStub( LanguageCodeValidator::class )
 		);
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );

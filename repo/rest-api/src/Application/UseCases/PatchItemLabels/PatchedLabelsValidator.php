@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,12 +19,12 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 class PatchedLabelsValidator {
 
 	private LabelsDeserializer $labelsDeserializer;
-	private ItemLabelValidator $labelValidator;
+	private OldItemLabelValidator $labelValidator;
 	private LanguageCodeValidator $languageCodeValidator;
 
 	public function __construct(
 		LabelsDeserializer $labelsDeserializer,
-		ItemLabelValidator $labelValidator,
+		OldItemLabelValidator $labelValidator,
 		LanguageCodeValidator $languageCodeValidator
 	) {
 		$this->labelsDeserializer = $labelsDeserializer;
@@ -87,7 +87,7 @@ class PatchedLabelsValidator {
 
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemLabelValidator::CODE_INVALID:
+			case OldItemLabelValidator::CODE_INVALID:
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID,
 					"Changed label for '{$label->getLanguageCode()}' is invalid: {$label->getText()}",
@@ -96,38 +96,38 @@ class PatchedLabelsValidator {
 						UseCaseError::CONTEXT_VALUE => $label->getText(),
 					]
 				);
-			case ItemLabelValidator::CODE_TOO_LONG:
-				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
+			case OldItemLabelValidator::CODE_TOO_LONG:
+				$maxLabelLength = $context[OldItemLabelValidator::CONTEXT_LIMIT];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_TOO_LONG,
 					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
-						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
+						UseCaseError::CONTEXT_VALUE => $context[OldItemLabelValidator::CONTEXT_LABEL],
+						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[OldItemLabelValidator::CONTEXT_LIMIT],
 					]
 				);
-			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				$languageCode = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				$label = $context[ItemLabelValidator::CONTEXT_LABEL];
-				$duplicateItemId = $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
+			case OldItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
+				$languageCode = $context[OldItemLabelValidator::CONTEXT_LANGUAGE];
+				$label = $context[OldItemLabelValidator::CONTEXT_LABEL];
+				$duplicateItemId = $context[OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					"Item $duplicateItemId already has label '$label' associated with language " .
 					"code $languageCode, using the same description text.",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_LANGUAGE => $context[OldItemLabelValidator::CONTEXT_LANGUAGE],
+						UseCaseError::CONTEXT_LABEL => $context[OldItemLabelValidator::CONTEXT_LABEL],
+						UseCaseError::CONTEXT_DESCRIPTION => $context[OldItemLabelValidator::CONTEXT_DESCRIPTION],
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
 				);
-			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
-				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+			case OldItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
+				$language = $context[OldItemLabelValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
 					"Label and description for language code {$language} can not have the same value.",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[OldItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );

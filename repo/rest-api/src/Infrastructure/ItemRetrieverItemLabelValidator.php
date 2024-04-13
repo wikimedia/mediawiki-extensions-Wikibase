@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\OldItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\Store\TermsCollisionDetector;
@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\TermsCollisionDetector;
 /**
  * @license GPL-2.0-or-later
  */
-class LabelTextValidatorItemLabelValidator implements ItemLabelValidator {
+class ItemRetrieverItemLabelValidator implements OldItemLabelValidator {
 
 	private TermValidatorFactoryLabelTextValidator $labelTextValidator;
 	private TermsCollisionDetector $termsCollisionDetector;
@@ -55,8 +55,8 @@ class LabelTextValidatorItemLabelValidator implements ItemLabelValidator {
 		$description = $item->getDescriptions()->getByLanguage( $language )->getText();
 		if ( $label === $description ) {
 			return new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ OldItemLabelValidator::CONTEXT_LANGUAGE => $language ],
 			);
 		}
 
@@ -64,12 +64,12 @@ class LabelTextValidatorItemLabelValidator implements ItemLabelValidator {
 			->detectLabelAndDescriptionCollision( $language, $label, $description );
 		if ( $entityId instanceof ItemId ) {
 			return new ValidationError(
-				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				OldItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
-					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
-					ItemLabelValidator::CONTEXT_LABEL => $label,
-					ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
+					OldItemLabelValidator::CONTEXT_LANGUAGE => $language,
+					OldItemLabelValidator::CONTEXT_LABEL => $label,
+					OldItemLabelValidator::CONTEXT_DESCRIPTION => $description,
+					OldItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
 				]
 			);
 		}
