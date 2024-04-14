@@ -458,18 +458,18 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		?string $expectedOutput
 	) {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
-		$this->db->insert(
-			'interwiki',
-			[
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'interwiki' )
+			->ignore()
+			->row( [
 				'iw_prefix' => 'metawikimedia',
 				'iw_url' => "https://example.com/wiki/$1",
 				'iw_api' => '',
 				'iw_wikiid' => '',
 				'iw_local' => false,
-			],
-			__METHOD__,
-			'IGNORE'
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$this->setMwGlobals( 'wgExtraInterlanguageLinkPrefixes', [ 'madeuplanguage' ] );
 		$linkTarget = $namespace !== null ?

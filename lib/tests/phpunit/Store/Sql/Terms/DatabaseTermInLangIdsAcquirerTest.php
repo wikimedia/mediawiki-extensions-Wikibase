@@ -210,27 +210,38 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			[ 'label', 'description', 'alias' ]
 		);
 
-		$this->db->insert( 'wbt_text', [ 'wbx_text' => 'same' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'same' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$sameTextId = $this->db->insertId();
 
-		$this->db->insert(
-			'wbt_text_in_lang',
-			[ 'wbxl_text_id' => $sameTextId, 'wbxl_language' => 'en' ]
-		);
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_text_id' => $sameTextId, 'wbxl_language' => 'en' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$enSameTextInLangId = $this->db->insertId();
 
-		$this->db->insert(
-			'wbt_term_in_lang',
-			[ 'wbtl_text_in_lang_id' => $enSameTextInLangId,
-			  'wbtl_type_id' => $alreadyAcquiredTypeIds['label'] ]
-		);
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [
+				'wbtl_text_in_lang_id' => $enSameTextInLangId,
+				'wbtl_type_id' => $alreadyAcquiredTypeIds['label'],
+			] )
+			->caller( __METHOD__ )
+			->execute();
 		$labelEnSameTermInLangId = (string)$this->db->insertId();
 
-		$this->db->insert(
-			'wbt_term_in_lang',
-			[ 'wbtl_text_in_lang_id' => $enSameTextInLangId,
-			  'wbtl_type_id' => $alreadyAcquiredTypeIds['alias'] ]
-		);
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [
+				'wbtl_text_in_lang_id' => $enSameTextInLangId,
+				'wbtl_type_id' => $alreadyAcquiredTypeIds['alias'],
+			] )
+			->caller( __METHOD__ )
+			->execute();
 		$aliasEnSameTermInLangId = (string)$this->db->insertId();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
@@ -366,8 +377,9 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			$typeIdsAcquirer
 		);
 
+		$fname = __METHOD__;
 		$dbTermIdsAcquirer->acquireTermInLangIds(
-			$termsArray, function ( $acquiredIds ) use ( $dbMaster ) {
+			$termsArray, function ( $acquiredIds ) use ( $dbMaster, $fname ) {
 				// This is going to:
 				// 1. insert into replica all records that exist in master
 				//    mimicing replication.
@@ -391,7 +403,11 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 						'wbx_text' => $record->wbx_text,
 					];
 				}
-				$this->db->insert( 'wbt_text', $recordsToInsertIntoReplica );
+				$this->db->newInsertQueryBuilder()
+					->insertInto( 'wbt_text' )
+					->rows( $recordsToInsertIntoReplica )
+					->caller( $fname )
+					->execute();
 
 				$recordsInMaster = $dbMaster->newSelectQueryBuilder()
 					->select( [ 'wbxl_id', 'wbxl_text_id', 'wbxl_language' ] )
@@ -405,7 +421,11 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 						'wbxl_language' => $record->wbxl_language,
 					];
 				}
-				$this->db->insert( 'wbt_text_in_lang', $recordsToInsertIntoReplica );
+				$this->db->newInsertQueryBuilder()
+					->insertInto( 'wbt_text_in_lang' )
+					->rows( $recordsToInsertIntoReplica )
+					->caller( $fname )
+					->execute();
 
 				$recordsInMaster = $dbMaster->newSelectQueryBuilder()
 					->select( [ 'wbtl_id', 'wbtl_text_in_lang_id', 'wbtl_type_id' ] )
@@ -419,7 +439,11 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 						'wbtl_type_id' => $record->wbtl_type_id,
 					];
 				}
-				$this->db->insert( 'wbt_term_in_lang', $recordsToInsertIntoReplica );
+				$this->db->newInsertQueryBuilder()
+					->insertInto( 'wbt_term_in_lang' )
+					->rows( $recordsToInsertIntoReplica )
+					->caller( $fname )
+					->execute();
 
 				// 2. Deleting records from master
 				$dbMaster->delete( 'wbt_text', '*' );

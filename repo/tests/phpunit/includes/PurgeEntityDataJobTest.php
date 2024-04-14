@@ -29,48 +29,50 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 			'ar_actor' => 1,
 			'ar_timestamp' => $this->db->timestamp(),
 		];
-		$this->db->insert( 'archive', [
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'archive' )
 			// relevant rows: the corresponding URLs should be purged
-			$defaultArchiveRow + [
+			->row( $defaultArchiveRow + [
 				'ar_id' => 1,
 				'ar_namespace' => 0,
 				'ar_title' => 'Q123',
 				'ar_page_id' => 123,
 				'ar_rev_id' => 1234,
-			],
-			$defaultArchiveRow + [
+			] )
+			->row( $defaultArchiveRow + [
 				'ar_id' => 2,
 				'ar_namespace' => 0,
 				'ar_title' => 'Q123',
 				'ar_page_id' => 123,
 				'ar_rev_id' => 1235,
-			],
+			] )
 			// irrelevant row: wrong namespace
-			$defaultArchiveRow + [
+			->row( $defaultArchiveRow + [
 				'ar_id' => 3,
 				'ar_namespace' => 1,
 				'ar_title' => 'Q123',
 				'ar_page_id' => 123,
 				'ar_rev_id' => 1236,
-			],
+			] )
 			// irrelevant row: wrong title
-			$defaultArchiveRow + [
+			->row( $defaultArchiveRow + [
 				'ar_id' => 4,
 				'ar_namespace' => 0,
 				'ar_title' => 'Q124',
 				'ar_page_id' => 123,
 				'ar_rev_id' => 1237,
-			],
+			] )
 			// irrelevant row: wrong page ID
 			// (possible if the same namespace+title was deleted several times)
-			$defaultArchiveRow + [
+			->row( $defaultArchiveRow + [
 				'ar_id' => 5,
 				'ar_namespace' => 1,
 				'ar_title' => 'Q123',
 				'ar_page_id' => 124,
 				'ar_rev_id' => 1238,
-			],
-		], __METHOD__ );
+			] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	public function testRun_purgesPotentiallyCachedUrls() {

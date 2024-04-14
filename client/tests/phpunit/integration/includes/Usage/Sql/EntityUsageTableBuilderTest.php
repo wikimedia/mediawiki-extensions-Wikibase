@@ -66,17 +66,19 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function putWikidataItemPageProps( array $entries ): void {
-		$this->db->startAtomic( __METHOD__ );
-
+		$rows = [];
 		foreach ( $entries as $pageId => $entityId ) {
-			$this->db->insert( 'page_props', [
+			$rows[] = [
 				'pp_page' => (int)$pageId,
 				'pp_propname' => 'wikibase_item',
 				'pp_value' => (string)$entityId,
-			], __METHOD__ );
+			];
 		}
-
-		$this->db->endAtomic( __METHOD__ );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'page_props' )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	/**

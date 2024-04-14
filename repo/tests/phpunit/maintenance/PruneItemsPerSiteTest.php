@@ -76,27 +76,25 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 		static $c = 0;
 		$c++;
 
-		$this->db->insert(
-			'wb_items_per_site',
-			[
-				[
-					'ips_item_id' => 3453577 + $c,
-					'ips_site_id' => 'dewiki',
-					'ips_site_page' => 'Blah_' . $c,
-				],
-				[
-					'ips_item_id' => 8985043 + $c,
-					'ips_site_id' => 'eswiki',
-					'ips_site_page' => 'BlahBlah_' . $c,
-				],
-				[
-					'ips_item_id' => 6834348 + $c,
-					'ips_site_id' => 'eswiki',
-					'ips_site_page' => 'BlahBlahBlah_' . $c,
-				],
-			],
-			__METHOD__
-		);
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wb_items_per_site' )
+			->row( [
+				'ips_item_id' => 3453577 + $c,
+				'ips_site_id' => 'dewiki',
+				'ips_site_page' => 'Blah_' . $c,
+			] )
+			->row( [
+				'ips_item_id' => 8985043 + $c,
+				'ips_site_id' => 'eswiki',
+				'ips_site_page' => 'BlahBlah_' . $c,
+			] )
+			->row( [
+				'ips_item_id' => 6834348 + $c,
+				'ips_site_id' => 'eswiki',
+				'ips_site_page' => 'BlahBlahBlah_' . $c,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 		// Create a page with the entity id as title, but in a non-entity NS
 		$this->editPage( 'User talk:Q' . ( 3453577 + $c ), __METHOD__, __METHOD__ );
 	}

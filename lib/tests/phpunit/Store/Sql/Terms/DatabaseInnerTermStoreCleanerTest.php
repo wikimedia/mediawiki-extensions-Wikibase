@@ -30,8 +30,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupEverything() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeId = $this->db->insertId();
 
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
@@ -47,12 +50,18 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupTermInLangButNoTextInLang() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$type1Id = $this->db->insertId();
 
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'description' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'description' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$type2Id = $this->db->insertId();
 
 		// insert two texts into wbt_text
@@ -81,8 +90,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupOneTextInLangButNoText() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeId = $this->db->insertId();
 
 		// insert two texts into wbt_text
@@ -114,8 +126,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupOneText() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeId = $this->db->insertId();
 
 		// insert two texts into wbt_text
@@ -134,8 +149,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupLeavesUnrelatedTextsUntouched() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeId = $this->db->insertId();
 
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
@@ -153,12 +171,18 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testT237984_sharedTextInLangIdsAreNotDeleted() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeIdLabel = $this->db->insertId();
 
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'description' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'description' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeIdDescription = $this->db->insertId();
 
 		[ $textId ] = $this->insertTexts( [ 'someText' ] );
@@ -188,8 +212,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testT237984_sharedTextIdsAreNotDeleted() {
-		$this->db->insert( 'wbt_type',
-			[ 'wby_name' => 'label' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->row( [ 'wby_name' => 'label' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$typeIdLabel = $this->db->insertId();
 
 		[ $textIdSingleUse, $textIdShared ] = $this->insertTexts( [ 'someText1', 'someText2' ] );
@@ -252,8 +279,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	private function insertTexts( array $texts ): array {
 		$ids = [];
 		foreach ( $texts as $text ) {
-			$this->db->insert( 'wbt_text',
-				[ 'wbx_text' => $text ] );
+			$this->db->newInsertQueryBuilder()
+				->insertInto( 'wbt_text' )
+				->row( [ 'wbx_text' => $text ] )
+				->caller( __METHOD__ )
+				->execute();
 			$ids[] = $this->db->insertId();
 		}
 		return $ids;
@@ -266,8 +296,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	private function insertTextsInLang( array $textIds ): array {
 		$ids = [];
 		foreach ( $textIds as $textId => $language ) {
-			$this->db->insert( 'wbt_text_in_lang',
-				[ 'wbxl_language' => $language, 'wbxl_text_id' => $textId ] );
+			$this->db->newInsertQueryBuilder()
+				->insertInto( 'wbt_text_in_lang' )
+				->row( [ 'wbxl_language' => $language, 'wbxl_text_id' => $textId ] )
+				->caller( __METHOD__ )
+				->execute();
 			$ids[] = $this->db->insertId();
 		}
 		return $ids;
@@ -285,8 +318,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 				$typeId = [ $typeId ];
 			}
 			foreach ( $typeId as $id ) {
-				$this->db->insert( 'wbt_term_in_lang',
-					[ 'wbtl_type_id' => $id, 'wbtl_text_in_lang_id' => $textInLangId ] );
+				$this->db->newInsertQueryBuilder()
+					->insertInto( 'wbt_term_in_lang' )
+					->row( [ 'wbtl_type_id' => $id, 'wbtl_text_in_lang_id' => $textInLangId ] )
+					->caller( __METHOD__ )
+					->execute();
 				$ids[] = $this->db->insertId();
 			}
 		}

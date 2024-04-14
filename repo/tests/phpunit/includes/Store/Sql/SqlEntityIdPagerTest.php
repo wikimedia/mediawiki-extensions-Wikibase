@@ -56,12 +56,16 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			$pageRows[] = $this->getPageRow( $redirect->getEntityId(), true );
 		}
 
+		if ( !$pageRows ) {
+			return;
+		}
+
 		$dbw = $this->db;
-		$dbw->insert(
-			'page',
-			$pageRows,
-			__METHOD__
-		);
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'page' )
+			->rows( $pageRows )
+			->caller( __METHOD__ )
+			->execute();
 
 		if ( !$redirects ) {
 			return;
@@ -72,11 +76,11 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			$redirectRows[] = $this->getRedirectRow( $redirect );
 		}
 
-		$dbw->insert(
-			'redirect',
-			$redirectRows,
-			__METHOD__
-		);
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'redirect' )
+			->rows( $redirectRows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function getPageRow( EntityId $entityId, $isRedirect ) {

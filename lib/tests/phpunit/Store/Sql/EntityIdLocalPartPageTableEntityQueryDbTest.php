@@ -26,43 +26,48 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	protected function setUp(): void {
 		parent::setUp();
 		$this->getExistingTestPage( Title::makeTitle( 1, 'LocalPartOne' ) );
-		$this->db->insert(
-			'page',
-			[
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'page' )
+			->row( [
 				'page_title' => 'localPartTwo',
 				'page_namespace' => 2,
 				'page_random' => 2,
 				'page_latest' => 221,
 				'page_len' => 2,
 				'page_touched' => $this->db->timestamp(),
-			]
-		);
-		$this->db->insert( // insert an older revision for one tests (no other revisions)
-			'revision',
-			[
+			] )
+			->caller( __METHOD__ )
+			->execute();
+		// insert an older revision for one tests (no other revisions)
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'revision' )
+			->row( [
 				'rev_id' => 220,
 				'rev_actor' => 0,
 				'rev_comment_id' => 0,
 				'rev_page' => $this->db->insertId(),
 				'rev_timestamp' => $this->db->timestamp(),
-			]
-		);
-		$this->db->insert(
-			'slots',
-			[
+			] )
+			->caller( __METHOD__ )
+			->execute();
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'slots' )
+			->row( [
 				'slot_revision_id' => 221,
 				'slot_role_id' => 22,
 				'slot_content_id' => 223,
 				'slot_origin' => 224,
-			]
-		);
-		$this->db->insert(
-			'slot_roles',
-			[
+			] )
+			->caller( __METHOD__ )
+			->execute();
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'slot_roles' )
+			->row( [
 				'role_id' => 22,
 				'role_name' => 'second',
-			]
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function getQuery() {

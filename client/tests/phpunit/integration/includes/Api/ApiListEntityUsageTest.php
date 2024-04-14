@@ -85,9 +85,11 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		];
 
 		foreach ( $dump as $table => $rows ) {
-			foreach ( $rows as $row ) {
-				$this->db->insert( $table, $row );
-			}
+			$this->db->newInsertQueryBuilder()
+				->insertInto( $table )
+				->rows( $rows )
+				->caller( __METHOD__ )
+				->execute();
 		}
 	}
 

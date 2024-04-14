@@ -242,7 +242,13 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			];
 		}
 
-		$this->db->insert( 'page_props', $toInsert, __METHOD__ );
+		if ( $toInsert ) {
+			$this->db->newInsertQueryBuilder()
+				->insertInto( 'page_props' )
+				->rows( $toInsert )
+				->caller( __METHOD__ )
+				->execute();
+		}
 	}
 
 }

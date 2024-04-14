@@ -327,7 +327,11 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function insertItemTermRow( int $itemid, int $termInLangId ): void {
-		$this->db->insert( 'wbt_item_terms', [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_item_terms' )
+			->row( [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 }

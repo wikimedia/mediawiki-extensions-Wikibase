@@ -46,26 +46,47 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testCanResolveEverything() {
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -162,29 +183,53 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	public function testCanResolveFiltered( array $expected, array $types = null, array $languages = null ) {
 		$termInLangIds = [];
 
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLangIds[] = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLangIds[] = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLangIds[] = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLangIds[] = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -212,26 +257,47 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped() {
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -283,26 +349,47 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped_CanResolveListOfMixedEmptyAndNonemptyLists() {
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -333,26 +420,47 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped_sameTermsInMultipleGroups() {
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
@@ -401,38 +509,65 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testResolveTermsViaJoin() {
-		$this->db->insert( 'wbt_text', [ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text', [ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
 
-		$this->db->insert( 'wbt_property_terms', [
-			'wbpt_property_id' => 1,
-			'wbpt_term_in_lang_id' => $termInLang1Id,
-		] );
-		$this->db->insert( 'wbt_property_terms', [
-			'wbpt_property_id' => 1,
-			'wbpt_term_in_lang_id' => $termInLang2Id,
-		] );
-		$this->db->insert( 'wbt_property_terms', [
-			'wbpt_property_id' => 2,
-			'wbpt_term_in_lang_id' => $termInLang3Id,
-		] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_property_terms' )
+			->row( [
+				'wbpt_property_id' => 1,
+				'wbpt_term_in_lang_id' => $termInLang1Id,
+			] )
+			->row( [
+				'wbpt_property_id' => 1,
+				'wbpt_term_in_lang_id' => $termInLang2Id,
+			] )
+			->row( [
+				'wbpt_property_id' => 2,
+				'wbpt_term_in_lang_id' => $termInLang3Id,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
@@ -460,31 +595,59 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped_filtered() {
-		$this->db->insert( 'wbt_text', [ 'wbx_text' => 'text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text' )
+			->row( [ 'wbx_text' => 'Text' ] )
+			->caller( __METHOD__ )
+			->execute();
 		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'ru', 'wbxl_text_id' => $text2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_text_in_lang' )
+			->row( [ 'wbxl_language' => 'ru', 'wbxl_text_id' => $text2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$textInLang3Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang3Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang3Id ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbt_term_in_lang' )
+			->row( [ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang3Id ] )
+			->caller( __METHOD__ )
+			->execute();
 		$termInLang4Id = $this->db->insertId();
 
 		$resolver = new DatabaseTermInLangIdsResolver(

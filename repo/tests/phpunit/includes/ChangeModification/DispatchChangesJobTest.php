@@ -45,10 +45,14 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		$dbw = $repoDb->connections()->getWriteConnection();
-		$dbw->insert( 'wb_changes_subscription', [
-			'cs_entity_id' => 'Q1',
-			'cs_subscriber_id' => $wiki,
-		] );
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'wb_changes_subscription' )
+			->row( [
+				'cs_entity_id' => 'Q1',
+				'cs_subscriber_id' => $wiki,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState(
 			null,
@@ -85,10 +89,14 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnection();
-		$dbw->insert( 'wb_changes_subscription', [
-			'cs_entity_id' => 'Q1',
-			'cs_subscriber_id' => 'client',
-		] );
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'wb_changes_subscription' )
+			->row( [
+				'cs_entity_id' => 'Q1',
+				'cs_subscriber_id' => 'client',
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
 
@@ -103,10 +111,14 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		$dbw = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections()->getWriteConnection();
-		$dbw->insert( 'wb_changes_subscription', [
-			'cs_entity_id' => 'Q1',
-			'cs_subscriber_id' => $wiki,
-		] );
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'wb_changes_subscription' )
+			->row( [
+				'cs_entity_id' => 'Q1',
+				'cs_subscriber_id' => $wiki,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$dispatchChangesJob = DispatchChangesJob::newFromGlobalState( null, [ 'entityId' => 'Q1' ] );
 

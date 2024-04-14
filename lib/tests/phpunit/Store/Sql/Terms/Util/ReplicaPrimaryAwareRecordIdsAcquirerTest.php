@@ -42,10 +42,11 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 	public function testWhenAllRecordsExistInReplica() {
 		$records = $this->getTestRecords();
 
-		$this->dbReplica->insert(
-			self::TABLE_NAME,
-			$records
-		);
+		$this->dbReplica->newInsertQueryBuilder()
+			->insertInto( self::TABLE_NAME )
+			->rows( $records )
+			->caller( __METHOD__ )
+			->execute();
 		$this->assertSameRecordsInDb( $records, $this->dbReplica );
 
 		$idsAcquirer = $this->getTestSubjectInstance();
@@ -58,10 +59,11 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 	public function testWhenAllRecordsExistInPrimary() {
 		$records = $this->getTestRecords();
 
-		$this->dbPrimary->insert(
-			self::TABLE_NAME,
-			$records
-		);
+		$this->dbPrimary->newInsertQueryBuilder()
+			->insertInto( self::TABLE_NAME )
+			->rows( $records )
+			->caller( __METHOD__ )
+			->execute();
 		$this->assertSameRecordsInDb( $records, $this->dbPrimary );
 
 		$idsAcquirer = $this->getTestSubjectInstance();
@@ -87,16 +89,18 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 		$recordsInReplica = [ $records[0], $records[1] ];
 		$recordsInPrimary = [ $records[2] ];
 
-		$this->dbReplica->insert(
-			self::TABLE_NAME,
-			$recordsInReplica
-		);
+		$this->dbReplica->newInsertQueryBuilder()
+			->insertInto( self::TABLE_NAME )
+			->rows( $recordsInReplica )
+			->caller( __METHOD__ )
+			->execute();
 		$this->assertSameRecordsInDb( $recordsInReplica, $this->dbReplica );
 
-		$this->dbPrimary->insert(
-			self::TABLE_NAME,
-			$recordsInPrimary
-		);
+		$this->dbPrimary->newInsertQueryBuilder()
+			->insertInto( self::TABLE_NAME )
+			->rows( $recordsInPrimary )
+			->caller( __METHOD__ )
+			->execute();
 		$this->assertSameRecordsInDb( $recordsInPrimary, $this->dbPrimary );
 
 		$idsAcquirer = $this->getTestSubjectInstance();
@@ -114,10 +118,11 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 	public function testWhenIgnoringReplica() {
 		$records = $this->getTestRecords();
 
-		$this->dbReplica->insert(
-			self::TABLE_NAME,
-			$records
-		);
+		$this->dbReplica->newInsertQueryBuilder()
+			->insertInto( self::TABLE_NAME )
+			->rows( $records )
+			->caller( __METHOD__ )
+			->execute();
 		$this->assertSameRecordsInDb( $records, $this->dbReplica );
 
 		$idsAcquirer = $this->getTestSubjectInstance(

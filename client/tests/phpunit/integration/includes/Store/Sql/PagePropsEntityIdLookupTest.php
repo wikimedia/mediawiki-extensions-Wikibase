@@ -35,14 +35,15 @@ class PagePropsEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function insertPageProps( int $pageId, EntityId $entityId ): void {
-		$this->db->insert(
-			'page_props',
-			[
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'page_props' )
+			->row( [
 				'pp_page' => $pageId,
 				'pp_propname' => 'wikibase_item',
 				'pp_value' => $entityId->getSerialization(),
-			]
-		);
+			] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	public function testGetEntityIdForTitle(): void {

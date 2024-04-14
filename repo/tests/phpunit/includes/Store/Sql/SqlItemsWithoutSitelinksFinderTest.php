@@ -63,11 +63,11 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 			'page_touched' => $dbw->timestamp(),
 		];
 
-		$dbw->insert(
-			'page',
-			$pages,
-			__METHOD__
-		);
+		$dbw->newInsertQueryBuilder()
+			->insertInto( 'page' )
+			->rows( $pages )
+			->caller( __METHOD__ )
+			->execute();
 
 		// Add wb-sitelinks = 0 for Items with id <= Q105
 		$dbw->insertSelect(

@@ -178,35 +178,34 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function putEntityUsage( array $entries ): void {
-		$this->db->startAtomic( __METHOD__ );
-
-		foreach ( $entries as $entry ) {
-			[ $entityId, $pageId ] = $entry;
-			$aspect = 'X';
-
-			$this->db->insert( EntityUsageTable::DEFAULT_TABLE_NAME, [
+		$rows = [];
+		foreach ( $entries as [ $entityId, $pageId ] ) {
+			$rows[] = [
 				'eu_entity_id' => $entityId,
-				'eu_aspect' => $aspect,
+				'eu_aspect' => 'X',
 				'eu_page_id' => (int)$pageId,
-			], __METHOD__ );
+			];
 		}
-
-		$this->db->endAtomic( __METHOD__ );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( EntityUsageTable::DEFAULT_TABLE_NAME )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function putSubscriptions( array $entries ): void {
-		$this->db->startAtomic( __METHOD__ );
-
-		foreach ( $entries as $entry ) {
-			[ $entityId, $subscriberId ] = $entry;
-
-			$this->db->insert( 'wb_changes_subscription', [
+		$rows = [];
+		foreach ( $entries as [ $entityId, $subscriberId ] ) {
+			$rows[] = [
 				'cs_entity_id' => $entityId,
 				'cs_subscriber_id' => $subscriberId,
-			], __METHOD__ );
+			];
 		}
-
-		$this->db->endAtomic( __METHOD__ );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wb_changes_subscription' )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function fetchAllSubscriptions(): array {

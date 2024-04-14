@@ -93,18 +93,19 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function putItemPerSite( array $entries ) {
-		$this->db->startAtomic( __METHOD__ );
-
-		foreach ( $entries as $entry ) {
-			[ $itemId, $siteId ] = $entry;
-			$this->db->insert( 'wb_items_per_site', [
+		$rows = [];
+		foreach ( $entries as [ $itemId, $siteId ] ) {
+			$rows[] = [
 				'ips_item_id' => (int)$itemId,
 				'ips_site_id' => $siteId,
 				'ips_site_page' => 'Page_about_Q' . $itemId . '_on_' . $siteId,
-			], __METHOD__ );
+			];
 		}
-
-		$this->db->endAtomic( __METHOD__ );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wb_items_per_site' )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function fetchAllSubscriptions() {

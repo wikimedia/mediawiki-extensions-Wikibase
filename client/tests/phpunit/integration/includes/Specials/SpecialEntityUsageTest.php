@@ -197,14 +197,18 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 			// Clean everything
 			$this->db->delete( $table, '*' );
 
-			foreach ( $rows as $row ) {
-				if ( $table === 'page' ) {
+			if ( $table === 'page' ) {
+				foreach ( $rows as $row ) {
 					$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 					$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
 					$page->insertOn( $this->db, $row['page_id'] );
-				} else {
-					$this->db->insert( $table, $row );
 				}
+			} else {
+				$this->db->newInsertQueryBuilder()
+					->insertInto( $table )
+					->rows( $rows )
+					->caller( __METHOD__ )
+					->execute();
 			}
 		}
 	}

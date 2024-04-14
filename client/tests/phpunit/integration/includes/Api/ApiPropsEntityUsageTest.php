@@ -90,9 +90,11 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 			// Clean everything
 			$this->db->delete( $table, '*' );
 
-			foreach ( $rows as $row ) {
-				$this->db->insert( $table, $row );
-			}
+			$this->db->newInsertQueryBuilder()
+				->insertInto( $table )
+				->rows( $rows )
+				->caller( __METHOD__ )
+				->execute();
 		}
 	}
 

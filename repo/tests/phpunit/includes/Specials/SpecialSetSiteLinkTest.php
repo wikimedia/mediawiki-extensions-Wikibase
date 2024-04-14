@@ -79,11 +79,15 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Hack: Make sure the 'user_autocreate_serial' table is not cleared between test runs,
 		// to match the 'user' table (which gets marked as used by createItems()).
 		// See T353961#9595560 and T353961#9595936.
-		$this->db->insert( 'user_autocreate_serial', [
-			'uas_shard' => 0,
-			'uas_year' => 0,
-			'uas_value' => 0,
-		] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'user_autocreate_serial' )
+			->row( [
+				'uas_shard' => 0,
+				'uas_year' => 0,
+				'uas_value' => 0,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 		$this->db->truncateTable( 'user_autocreate_serial' );
 	}
 

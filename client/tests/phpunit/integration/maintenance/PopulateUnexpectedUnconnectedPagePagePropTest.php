@@ -134,7 +134,11 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 			];
 		}
 
-		$this->db->insert( 'page_props', $toInsert, __METHOD__ );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'page_props' )
+			->rows( $toInsert )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 }

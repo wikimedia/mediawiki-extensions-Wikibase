@@ -68,18 +68,16 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		string $value = '',
 		float $sortKey = 0.0
 	): void {
-		$this->db->insert(
-			'page_props',
-			[
-				[
-					'pp_page' => $pageId,
-					'pp_propname' => $propName,
-					'pp_value' => $value,
-					'pp_sortkey' => $sortKey,
-				],
-			],
-			__METHOD__
-		);
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'page_props' )
+			->row( [
+				'pp_page' => $pageId,
+				'pp_propname' => $propName,
+				'pp_value' => $value,
+				'pp_sortkey' => $sortKey,
+			] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function insertExpectedUnconnectedPagePageProp(): void {
