@@ -11,6 +11,7 @@ use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Api\ListSubscribers
@@ -49,7 +50,11 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->delete( $table, '*' );
+			$this->db->newDeleteQueryBuilder()
+				->deleteFrom( $table )
+				->where( IDatabase::ALL_ROWS )
+				->caller( __METHOD__ )
+				->execute();
 
 			$this->db->newInsertQueryBuilder()
 				->insertInto( $table )

@@ -17,6 +17,7 @@ use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPager
@@ -38,8 +39,16 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
 		// We need to initially empty the table
-		$this->db->delete( 'page', '*', __METHOD__ );
-		$this->db->delete( 'redirect', '*', __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'redirect' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	/**

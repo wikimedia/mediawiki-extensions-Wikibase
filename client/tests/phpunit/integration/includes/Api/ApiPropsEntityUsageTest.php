@@ -11,6 +11,7 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Wikibase\Client\Api\ApiPropsEntityUsage;
 use Wikibase\Client\WikibaseClient;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Api\ApiPropsEntityUsage
@@ -50,7 +51,11 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->delete( $table, '*' );
+			$this->db->newDeleteQueryBuilder()
+				->deleteFrom( $table )
+				->where( IDatabase::ALL_ROWS )
+				->caller( __METHOD__ )
+				->execute();
 
 			foreach ( $rows as $row ) {
 				$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
@@ -88,7 +93,11 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->delete( $table, '*' );
+			$this->db->newDeleteQueryBuilder()
+				->deleteFrom( $table )
+				->where( IDatabase::ALL_ROWS )
+				->caller( __METHOD__ )
+				->execute();
 
 			$this->db->newInsertQueryBuilder()
 				->insertInto( $table )

@@ -299,9 +299,10 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			$typeIdsAcquirer
 		);
 
+		$fname = __METHOD__;
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
-			function ( $acquiredIds ) {
+			function ( $acquiredIds ) use ( $fname ) {
 				// This callback will delete first 3 acquired ids to mimic the case
 				// in which a cleaner might be working in-parallel and deleting ids
 				// that overlap with the ones returned by this acquirer.
@@ -310,7 +311,11 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 				// in which they are expected to be used as foreign keys in other tables.
 
 				$idsToDelete = array_slice( $acquiredIds, 0, 3 );
-				$this->db->delete( 'wbt_term_in_lang', [ 'wbtl_id' => $idsToDelete ] );
+				$this->db->newDeleteQueryBuilder()
+					->deleteFrom( 'wbt_term_in_lang' )
+					->where( [ 'wbtl_id' => $idsToDelete ] )
+					->caller( $fname )
+					->execute();
 			}
 		);
 		$uniqueAcquiredTermIds = array_values( array_unique( $acquiredTermIds ) );
@@ -446,9 +451,21 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 					->execute();
 
 				// 2. Deleting records from master
-				$dbMaster->delete( 'wbt_text', '*' );
-				$dbMaster->delete( 'wbt_text_in_lang', '*' );
-				$dbMaster->delete( 'wbt_term_in_lang', '*' );
+				$dbMaster->newDeleteQueryBuilder()
+					->deleteFrom( 'wbt_text' )
+					->where( IDatabase::ALL_ROWS )
+					->caller( $fname )
+					->execute();
+				$dbMaster->newDeleteQueryBuilder()
+					->deleteFrom( 'wbt_text_in_lang' )
+					->where( IDatabase::ALL_ROWS )
+					->caller( $fname )
+					->execute();
+				$dbMaster->newDeleteQueryBuilder()
+					->deleteFrom( 'wbt_term_in_lang' )
+					->where( IDatabase::ALL_ROWS )
+					->caller( $fname )
+					->execute();
 			} );
 
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds, $dbMaster );

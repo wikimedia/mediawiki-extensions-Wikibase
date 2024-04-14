@@ -50,7 +50,11 @@ class SqlChangeStore implements ChangeStore {
 		Assert::parameterElementType( 'integer', $changeIds, '$changeIds' );
 
 		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
-		$dbw->delete( 'wb_changes', [ 'change_id' => $changeIds ], __METHOD__ );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'wb_changes' )
+			->where( [ 'change_id' => $changeIds ] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	private function updateChange( ChangeRow $change ) {

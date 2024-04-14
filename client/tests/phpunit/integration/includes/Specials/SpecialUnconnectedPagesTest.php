@@ -42,7 +42,11 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$namespace = $this->getDefaultWikitextNS();
 
 		// Remove old stray pages.
-		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		$expectedUnconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-expectedUnconnected' );
 		$unconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-unconnected' );
@@ -108,7 +112,11 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	public function testReallyDoQuery() {
 		// Remove old stray page props
-		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page_props' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		// Insert page props
 		$this->insertWikibaseItemPageProp();
@@ -149,7 +157,11 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	public function testReallyDoQuery_noResults() {
 		// Remove old stray page props
-		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page_props' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		// Insert page props
 		$this->insertWikibaseItemPageProp();
@@ -169,7 +181,11 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	 */
 	public function testReallyDoQuery_unexpectedUnconnectedPage() {
 		// Make sure only the "unexpectedUnconnectedPage" page prop exists
-		$this->db->delete( 'page_props', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page_props' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 		$this->insertUnexpectedUnconnectedPagePageProp();
 
 		$namespace = $this->getDefaultWikitextNS();

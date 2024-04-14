@@ -281,13 +281,13 @@ class EntityUsageTable {
 		$writeConnection->startAtomic( __METHOD__ );
 
 		foreach ( $rowIdChunks as $chunk ) {
-			$writeConnection->delete(
-				$this->tableName,
-				[
+			$writeConnection->newDeleteQueryBuilder()
+				->deleteFrom( $this->tableName )
+				->where( [
 					'eu_row_id' => $chunk,
-				],
-				__METHOD__
-			);
+				] )
+				->caller( __METHOD__ )
+				->execute();
 		}
 
 		$writeConnection->endAtomic( __METHOD__ );

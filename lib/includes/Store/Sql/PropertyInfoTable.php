@@ -229,11 +229,11 @@ class PropertyInfoTable implements PropertyInfoLookup, PropertyInfoStore {
 
 		$dbw = $this->getWriteConnection();
 
-		$dbw->delete(
-			self::TABLE_NAME,
-			[ 'pi_property_id' => $propertyId->getNumericId() ],
-			__METHOD__
-		);
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( self::TABLE_NAME )
+			->where( [ 'pi_property_id' => $propertyId->getNumericId() ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		$c = $dbw->affectedRows();
 

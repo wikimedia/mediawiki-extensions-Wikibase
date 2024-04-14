@@ -9,6 +9,7 @@ use TrivialLanguageConverter;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialEntityUsage
@@ -195,7 +196,11 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->delete( $table, '*' );
+			$this->db->newDeleteQueryBuilder()
+				->deleteFrom( $table )
+				->where( IDatabase::ALL_ROWS )
+				->caller( __METHOD__ )
+				->execute();
 
 			if ( $table === 'page' ) {
 				foreach ( $rows as $row ) {

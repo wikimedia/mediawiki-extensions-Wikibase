@@ -26,7 +26,11 @@ use Wikimedia\TestingAccessWrapper;
 class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
-		$this->db->delete( 'page', IDatabase::ALL_ROWS, __METHOD__ );
+		$this->db->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( IDatabase::ALL_ROWS )
+			->caller( __METHOD__ )
+			->execute();
 
 		$titles = [];
 		$titles[10] = Title::makeTitle( $this->getDefaultWikitextNS(), 'LoadExtensionSchemaUpdatesHookHandlerTest-0' );
