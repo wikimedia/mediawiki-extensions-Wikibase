@@ -123,16 +123,17 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	 * @param string $type
 	 */
 	private function upsertId( IDatabase $database, $type ) {
-		$database->upsert(
-			'wb_id_counters',
-			[
+		$database->newInsertQueryBuilder()
+			->insertInto( 'wb_id_counters' )
+			->row( [
 				'id_type' => $type,
 				'id_value' => 1,
-			],
-			'id_type',
-			[ 'id_value = LAST_INSERT_ID(id_value + 1)' ],
-			__METHOD__
-		);
+			] )
+			->onDuplicateKeyUpdate()
+			->uniqueIndexFields( 'id_type' )
+			->set( [ 'id_value = LAST_INSERT_ID(id_value + 1)' ] )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 }
