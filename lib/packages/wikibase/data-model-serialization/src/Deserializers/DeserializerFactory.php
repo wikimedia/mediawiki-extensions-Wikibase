@@ -135,8 +135,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize Snak objects.
 	 */
-	public function newSnakDeserializer(): DataTypeAwareSnakDeserializer {
-		return new DataTypeAwareSnakDeserializer(
+	public function newSnakDeserializer(): SnakDeserializer {
+		return new SnakDeserializer(
 			$this->entityIdParser,
 			$this->dataValueDeserializer,
 			$this->dataTypeLookup,
