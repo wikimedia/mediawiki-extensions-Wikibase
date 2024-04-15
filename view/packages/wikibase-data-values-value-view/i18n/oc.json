@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BrennodAloisi",
 			"Cedric31",
 			"Guilhelma"
 		]
@@ -19,6 +20,9 @@
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
 	"valueview-expert-timevalue-calendar-julian": "Julian",
 	"valueview-expert-timeinput-precision": "Precision :",
+	"valueview-expert-timeinput-precision-year100": "sègle",
+	"valueview-expert-timeinput-precision-year10": "decenni",
+	"valueview-expert-timeinput-precision-month": "mes",
 	"valueview-expert-timeinput-calendar": "Calendièr :",
 	"valueview-expertextender-languageselector-label": "Lenga (obligatòri) :",
 	"valueview-expertextender-unitsuggester-label": "Unitat (facultatiu) :",
