@@ -80,7 +80,7 @@ class DataBridgeReferenceFormatter implements ReferenceFormatter {
 			$formattedParts[] = $this->messageLocalizer->msg(
 				'wikibase-reference-formatter-snak-retrieved',
 				$this->snakFormatter->formatSnak( $snak )
-			);
+			)->text();
 		}
 
 		$output = implode( $separator, $formattedParts );
