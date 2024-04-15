@@ -5,7 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
-use Wikibase\DataAccess\WikibaseServices;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -19,11 +20,8 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class PropertyInfoLookupTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$wikibaseServices = $this->createMock( WikibaseServices::class );
-		$wikibaseServices->expects( $this->once() )
-			->method( 'getPropertyInfoLookup' )
-			->willReturn( $this->createStub( PropertyInfoLookup::class ) );
-		$this->mockService( 'WikibaseClient.WikibaseServices', $wikibaseServices );
+		$this->mockService( 'WikibaseClient.EntityIdComposer', $this->createStub( EntityIdComposer::class ) );
+		$this->mockService( 'WikibaseClient.RepoDomainDbFactory', $this->createStub( RepoDomainDbFactory::class ) );
 
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [

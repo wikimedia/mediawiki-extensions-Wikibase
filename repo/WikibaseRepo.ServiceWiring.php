@@ -132,6 +132,7 @@ use Wikibase\Lib\Store\SourceAndTypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
@@ -1640,7 +1641,15 @@ return [
 		$cacheDuration = $repoSettings->getSetting( 'sharedCacheDuration' );
 
 		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
-			WikibaseRepo::getWikibaseServices( $services )->getPropertyInfoLookup(),
+			new PropertyInfoTable(
+				WikibaseRepo::getEntityIdComposer( $services ),
+				WikibaseRepo::getRepoDomainDbFactory( $services )->newForEntitySource(
+					// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+					WikibaseRepo::getEntitySourceDefinitions( $services )
+						->getDatabaseSourceForEntityType( Property::ENTITY_TYPE )
+				),
+				false
+			),
 			$services->getMainWANObjectCache(),
 			$cacheKeyGroup,
 			$cacheDuration
