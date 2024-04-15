@@ -139,6 +139,7 @@
 	 * @return {jQuery}
 	 *
 	 * @throws {Error} if the generated template's HTML is invalid.
+	 * @internal Wikibase JavaScript code is not considered a stable interface.
 	 */
 	mw.wbTemplate = function ( key, parameter1 /* [, parameter2[, ...]] */ ) {
 		var i,
