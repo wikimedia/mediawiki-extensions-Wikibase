@@ -15,7 +15,7 @@
 	"wikibase-linkitem-close": "Баракты кайра жүктөө",
 	"wikibase-linkitem-title": "Байланыштыруу",
 	"wikibase-linkitem-linkpage": "Байланыштыруу",
-	"wikibase-linkitem-selectlink": "Бул баракты кайсы тилдеги барак менен байланыштыруу керегин тандаңыз.",
+	"wikibase-linkitem-selectlink": "Тилди тандап, бул баракты тиешелүү барак менен байланыштырыңыз.",
 	"wikibase-linkitem-input-site": "Тил:",
 	"wikibase-linkitem-input-page": "Барак:",
 	"wikibase-linkitem-confirmitem-button": "Ырастоо",
