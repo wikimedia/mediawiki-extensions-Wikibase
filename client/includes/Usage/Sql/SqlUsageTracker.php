@@ -184,9 +184,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	): array {
 		$result = [];
 		foreach ( $newUsages as $identity => $newUsage ) {
-			if ( array_key_exists( $identity, $oldUsages ) === false ) {
+			if ( !array_key_exists( $identity, $oldUsages ) ) {
 				$withoutModifier = EntityUsage::stripModifier( $identity );
-				if ( array_key_exists( $withoutModifier, $oldUsages ) === false ) {
+				if ( !array_key_exists( $withoutModifier, $oldUsages ) ) {
 					$result[ $identity ] = $newUsage;
 				}
 			}
