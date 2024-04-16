@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Cedric31",
-			"Lhanars"
+			"Lhanars",
+			"BrennodAloisi"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -26,6 +27,8 @@
 	"datatypes-type-wikibase-item": "Element",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Julian",
+	"wikibase-time-precision-century": "sègle $1",
+	"wikibase-time-precision-BCE-century": "sègle $1 abC",
 	"wikibase-entity-summary-wbsetitem": "Creacion d’un element novèl",
 	"wikibase-entity-summary-wbsetreference": "Referéncia modificada",
 	"wikibase-entity-summary-wbsetreference-add": "Apondon d'una referéncia a una afirmacion",
