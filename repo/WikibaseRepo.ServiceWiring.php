@@ -41,6 +41,7 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\SourceAndTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
+use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -1803,7 +1804,11 @@ return [
 		return new SnakFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services ),
-			WikibaseRepo::getDataValueFactory( $services )
+			new SnakValueParser(
+				WikibaseRepo::getDataValueDeserializer( $services ),
+				WikibaseRepo::getDataTypeDefinitions( $services )
+					->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+			)
 		);
 	},
 
