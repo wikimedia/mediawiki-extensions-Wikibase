@@ -79,7 +79,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );
 		$this->setService( 'SiteLookup', $siteStore );
-		$this->sitesSetup = true;
 	}
 
 	/**
