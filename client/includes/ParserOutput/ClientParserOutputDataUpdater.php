@@ -90,7 +90,7 @@ class ClientParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$parserOutputProvider->getParserOutput()->setPageProperty( 'wikibase_item', $itemId->getSerialization() );
+			$parserOutputProvider->getParserOutput()->setUnsortedPageProperty( 'wikibase_item', $itemId->getSerialization() );
 
 			$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
