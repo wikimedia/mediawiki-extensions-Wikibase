@@ -126,15 +126,11 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	}
 
 	/**
-	 * Push the $updateRepo to the job queue if applicable,
-	 * and if successful, set the $titleProperty on the $title.
-	 * Hook handlers later look at this property in an attempt to determine
-	 * whether the update was successfully applied/enqueued or not.
+	 * Push the $updateRepo to the job queue if applicable.
 	 */
 	private function applyUpdateRepo(
 		UpdateRepo $updateRepo,
-		LinkTarget $title,
-		string $titleProperty = null
+		LinkTarget $title
 	): void {
 		if ( !$updateRepo->isApplicable() ) {
 			return;
@@ -145,16 +141,12 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 				$this->entitySource->getDatabaseName()
 			);
 			$updateRepo->injectJob( $jobQueueGroup );
-
-			// To be able to find out about this in the ArticleDeleteAfter
-			// hook (but see T268135)
-			if ( $titleProperty ) {
-				$title->$titleProperty = true;
-			}
 		} catch ( JobQueueError $e ) {
-			// This is not a reason to let an exception bubble up, we just
-			// show a message to the user that the Wikibase item needs to be
-			// manually updated.
+			// This is not a reason to let an exception bubble up; the messages shown by
+			// MovePageNotice and DeletePageNoticeCreator already ask the user to check
+			// that the item was correctly updated anyways.
+			// (We used to show different messages in this case, but this broke,
+			// went unnoticed for years, and the code was removed in T268135 and T353161.)
 			wfLogWarning( $e->getMessage() );
 
 			$this->logger->debug(
@@ -198,11 +190,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 
 		$updateRepo = $this->makeDelete( $user, $wikiPage->getTitle() );
 
-		$this->applyUpdateRepo(
-			$updateRepo,
-			$wikiPage->getTitle(),
-			'wikibasePushedDeleteToRepo'
-		);
+		$this->applyUpdateRepo( $updateRepo, $wikiPage->getTitle() );
 
 		return true;
 	}

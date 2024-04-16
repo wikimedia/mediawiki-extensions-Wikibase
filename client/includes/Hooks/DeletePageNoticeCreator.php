@@ -104,27 +104,15 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 			return null;
 		}
 
-		$msg = $this->getMessage( $title );
-
 		$html = Html::rawElement(
 			'div',
 			[
 				'class' => 'plainlinks',
 			],
-			wfMessage( $msg, $itemLink )->parse()
+			wfMessage( 'wikibase-after-page-delete', $itemLink )->parse()
 		);
 
 		return $html;
-	}
-
-	private function getMessage( Title $title ): string {
-		if ( isset( $title->wikibasePushedDeleteToRepo ) ) { // @phan-suppress-current-line PhanUndeclaredProperty
-			// We're going to update the item using the repo job queue \o/
-			return 'wikibase-after-page-delete-queued';
-		}
-
-		// The user has to update the item per hand for some reason
-		return 'wikibase-after-page-delete';
 	}
 
 }

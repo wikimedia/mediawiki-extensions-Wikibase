@@ -42,40 +42,21 @@ class DeletePageNoticeCreatorTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider getPageDeleteNoticeHtmlProvider
-	 */
-	public function testGetPageDeleteNoticeHtml( $expected, Title $title, $message ) {
+	public function testGetPageDeleteNoticeHtml() {
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
-
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->willReturn( new ItemId( 'Q4880' ) );
+		$title = Title::makeTitle( NS_MAIN, 'New Amsterdam' );
 
 		$deletePageNotice = new DeletePageNoticeCreator(
 			$siteLinkLookup,
 			'dewiki',
 			$this->getRepoLinker()
 		);
+		$actual = $deletePageNotice->getPageDeleteNoticeHtml( $title );
 
-		$this->assertEquals(
-			$expected,
-			$deletePageNotice->getPageDeleteNoticeHtml( $title ),
-			$message
-		);
-	}
-
-	public function getPageDeleteNoticeHtmlProvider() {
-		$title = Title::makeTitle( NS_MAIN, 'New Amsterdam' );
 		$expected = $this->getParsedMessage( 'wikibase-after-page-delete' );
-
-		$title2 = Title::makeTitle( NS_MAIN, 'New York' );
-		$title2->wikibasePushedDeleteToRepo = true;
-		$expected2 = $this->getParsedMessage( 'wikibase-after-page-delete-queued' );
-
-		return [
-			[ $expected, $title, 'after page delete' ],
-			[ $expected2, $title2, 'page delete queued' ],
-		];
+		$this->assertSame( $expected, $actual );
 	}
 
 	protected function getParsedMessage( $messageKey ) {
