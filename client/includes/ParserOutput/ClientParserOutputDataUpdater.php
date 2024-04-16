@@ -195,9 +195,8 @@ class ClientParserOutputDataUpdater {
 		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
 
 		foreach ( $siteLink->getBadges() as $badge ) {
-			$parserOutputProvider->getParserOutput()->setPageProperty(
-				'wikibase-badge-' . $badge->getSerialization(),
-				true
+			$parserOutputProvider->getParserOutput()->setUnsortedPageProperty(
+				'wikibase-badge-' . $badge->getSerialization()
 			);
 		}
 	}
