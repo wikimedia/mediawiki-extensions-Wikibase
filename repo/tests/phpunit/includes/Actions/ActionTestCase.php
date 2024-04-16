@@ -47,6 +47,9 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 */
 	private static $testItems = [];
 
+	/** @var int[] Revision IDs of test items, with *item IDs* (not logical handles!) as keys. */
+	private static $testItemRevids = [];
+
 	/**
 	 * @var bool[] List of items that have redirects in their revision history,
 	 * with logical handles as keys.
@@ -273,8 +276,8 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		$result = $rev->getEntity();
 
-		//XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
-		$result->revid = $rev->getRevisionId();
+		// save revid of item, so we can compare it later in resetTestItem()
+		self::$testItemRevids[$result->getId()->getSerialization()] = $rev->getRevisionId();
 		return $result;
 	}
 
@@ -297,8 +300,8 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 		$result = $redirect;
 
-		//XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
-		$result->revid = $revId;
+		// save revid of item, so we can compare it later in resetTestItem()
+		self::$testItemRevids[$result->getEntityId()->getSerialization()] = $revId;
 		return $result;
 	}
 
@@ -310,11 +313,16 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	protected function resetTestItem( $handle ) {
 		if ( isset( self::$testItems[ $handle ] ) ) {
 			$item = self::$testItems[ $handle ];
+			if ( $item instanceof EntityRedirect ) {
+				$itemId = $item->getEntityId();
+			} else {
+				$itemId = $item->getId();
+			}
 
 			// check current data
 			$page = $this->getTestItemPage( $handle );
 			if (
-				$page->getLatest() == $item->revid
+				$page->getLatest() == self::$testItemRevids[$itemId->getSerialization()]
 				&& !isset( self::TEST_ITEMS_WITH_REDIRECTS[$handle] )
 			) {
 				return; // current data is fresh
