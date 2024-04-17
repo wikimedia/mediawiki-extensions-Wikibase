@@ -188,7 +188,12 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-aliases-invalid-field', { path: language, value: invalidAlias } );
+			assertValidError(
+				response,
+				422,
+				'patched-aliases-invalid-field',
+				{ path: `${language}/0`, value: invalidAlias }
+			);
 			assert.include( response.body.message, language );
 		} );
 

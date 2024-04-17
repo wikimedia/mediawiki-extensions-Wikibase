@@ -9,6 +9,7 @@ use Throwable;
  */
 class InvalidFieldException extends SerializationException {
 	private string $field;
+	private string $path;
 
 	/** @var mixed */
 	private $value;
@@ -16,12 +17,14 @@ class InvalidFieldException extends SerializationException {
 	/**
 	 * @param string $field
 	 * @param mixed $value
+	 * @param string $path
 	 * @param string $message
 	 * @param Throwable|null $previous
 	 */
-	public function __construct( string $field, $value, string $message = '', Throwable $previous = null ) {
+	public function __construct( string $field, $value, string $path = '', string $message = '', Throwable $previous = null ) {
 		$this->field = $field;
 		$this->value = $value;
+		$this->path = $path;
 
 		parent::__construct( $message, 0, $previous );
 	}
@@ -35,5 +38,9 @@ class InvalidFieldException extends SerializationException {
 	 */
 	public function getValue() {
 		return $this->value;
+	}
+
+	public function getPath(): string {
+		return $this->path;
 	}
 }

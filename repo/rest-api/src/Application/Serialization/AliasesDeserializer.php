@@ -20,13 +20,15 @@ class AliasesDeserializer {
 
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			if ( !is_array( $aliasesInLanguage ) || !array_is_list( $aliasesInLanguage ) ) {
-				throw new InvalidFieldException( $language, $aliasesInLanguage );
+				throw new InvalidFieldException( $language, $aliasesInLanguage, $language );
 			}
 
 			$aliases = [];
-			foreach ( $aliasesInLanguage as $alias ) {
+			foreach ( $aliasesInLanguage as $index => $alias ) {
+
 				if ( !is_string( $alias ) ) {
-					throw new InvalidFieldException( $language, $alias );
+					$path = $language . '/' . $index;
+					throw new InvalidFieldException( $language, $alias, $path );
 				}
 
 				$alias = trim( $alias );

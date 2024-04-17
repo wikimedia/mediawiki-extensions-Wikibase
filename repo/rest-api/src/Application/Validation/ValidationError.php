@@ -21,4 +21,5 @@ class ValidationError {
 	public function getContext(): array {
 		return $this->context;
 	}
+
 }

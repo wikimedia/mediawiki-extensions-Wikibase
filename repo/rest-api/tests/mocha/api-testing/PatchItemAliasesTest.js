@@ -252,7 +252,12 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${testLanguage}`, value: [ alias ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-aliases-invalid-field', { path: testLanguage, value: alias } );
+			assertValidError(
+				response,
+				422,
+				'patched-aliases-invalid-field',
+				{ path: `${testLanguage}/0`, value: alias }
+			);
 			assert.include( response.body.message, testLanguage );
 		} );
 
