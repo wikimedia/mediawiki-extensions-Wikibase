@@ -44,16 +44,18 @@ class DeserializerFactory {
 	/**
 	 * @param Deserializer $dataValueDeserializer
 	 * @param EntityIdParser $idParser
+	 * @param CurrentDeserializerFactory $currentFactory
 	 * @param DispatchableDeserializer|null $currentEntityDeserializer used instead of constructing
 	 *        a new current Deserializer for entities using a current DeserializerFactory.
 	 */
 	public function __construct(
 		Deserializer $dataValueDeserializer,
 		EntityIdParser $idParser,
+		CurrentDeserializerFactory $currentFactory,
 		DispatchableDeserializer $currentEntityDeserializer = null
 	) {
 		$this->legacyFactory = new LegacyDeserializerFactory( $dataValueDeserializer, $idParser );
-		$this->currentFactory = new CurrentDeserializerFactory( $dataValueDeserializer, $idParser );
+		$this->currentFactory = $currentFactory;
 		$this->currentEntityDeserializer = $currentEntityDeserializer;
 	}
 

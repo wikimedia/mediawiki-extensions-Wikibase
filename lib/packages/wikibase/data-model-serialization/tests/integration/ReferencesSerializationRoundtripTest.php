@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -28,7 +29,10 @@ class ReferencesSerializationRoundtripTest extends TestCase {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			new InMemoryDataTypeLookup(),
+			[],
+			[]
 		);
 
 		$serialization = $serializerFactory->newReferencesSerializer()->serialize( $references );

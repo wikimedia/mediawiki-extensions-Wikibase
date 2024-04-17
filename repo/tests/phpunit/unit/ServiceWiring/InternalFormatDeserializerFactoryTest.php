@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\DispatchableDeserializer;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -26,6 +27,8 @@ class InternalFormatDeserializerFactoryTest extends ServiceWiringTestCase {
 			new ItemIdParser() );
 		$this->mockService( 'WikibaseRepo.AllTypesEntityDeserializer',
 			$this->createMock( DispatchableDeserializer::class ) );
+		$this->mockService( 'WikibaseRepo.BaseDataModelDeserializerFactory',
+			$this->createMock( DeserializerFactory::class ) );
 
 		$this->assertInstanceOf(
 			InternalDeserializerFactory::class,

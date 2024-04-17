@@ -4,9 +4,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use Psr\Log\LoggerInterface;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @coversNothing
@@ -26,6 +29,24 @@ class BaseDataModelDeserializerFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseClient.EntityIdParser',
 			$this->createMock( EntityIdParser::class )
+		);
+
+		$dataTypeDefinitions = $this->createStub( DataTypeDefinitions::class );
+		$dataTypeDefinitions->method( 'getValueTypes' )->willReturn( [] );
+		$dataTypeDefinitions->method( 'getParserFactoryCallbacks' )->willReturn( [] );
+		$this->mockService(
+			'WikibaseClient.DataTypeDefinitions',
+			$dataTypeDefinitions
+		);
+
+		$this->mockService(
+			'WikibaseClient.PropertyInfoLookup',
+			$this->createMock( PropertyInfoLookup::class )
+		);
+
+		$this->mockService(
+			'WikibaseClient.Logger',
+			$this->createMock( LoggerInterface::class )
 		);
 
 		$this->assertInstanceOf(

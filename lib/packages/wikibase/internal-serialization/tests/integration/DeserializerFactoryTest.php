@@ -4,6 +4,7 @@ namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
+use Wikibase\DataModel\Deserializers\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
@@ -39,6 +40,7 @@ class DeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new DeserializerFactory(
 			$this->createMock( Deserializer::class ),
 			new BasicEntityIdParser(),
+			$this->createStub( CurrentDeserializerFactory::class ),
 			$this->createMock( DispatchableDeserializer::class )
 		);
 

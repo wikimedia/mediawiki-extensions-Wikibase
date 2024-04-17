@@ -2,10 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -20,10 +18,7 @@ class ExternalFormatStatementDeserializerTest extends ServiceWiringTestCase {
 	public function testConstruction(): void {
 		$this->mockService(
 			'WikibaseRepo.BaseDataModelDeserializerFactory',
-			new DeserializerFactory(
-				new DataValueDeserializer(),
-				new BasicEntityIdParser()
-			)
+			$this->createStub( DeserializerFactory::class )
 		);
 
 		$this->assertInstanceOf(

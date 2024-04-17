@@ -6,6 +6,7 @@ namespace Wikibase\DataAccess;
 use Deserializers\Deserializer;
 use MediaWiki\Storage\NameTableStoreFactory;
 use Serializers\Serializer;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -56,6 +57,7 @@ class SingleEntitySourceServicesFactory {
 	 * @var RepoDomainDbFactory
 	 */
 	private $repoDomainDbFactory;
+	private DeserializerFactory $deserializerFactory;
 
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -66,7 +68,8 @@ class SingleEntitySourceServicesFactory {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepoDomainDbFactory $repoDomainDbFactory
+		RepoDomainDbFactory $repoDomainDbFactory,
+		DeserializerFactory $deserializerFactory
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
@@ -79,6 +82,7 @@ class SingleEntitySourceServicesFactory {
 		$this->repoDomainDbFactory = $repoDomainDbFactory;
 
 		$this->servicesBySource = [];
+		$this->deserializerFactory = $deserializerFactory;
 	}
 
 	public function getServicesForSource( DatabaseEntitySource $source ): SingleEntitySourceServices {
@@ -102,6 +106,7 @@ class SingleEntitySourceServicesFactory {
 			$this->languageFallbackChainFactory,
 			$this->storageEntitySerializer,
 			$this->repoDomainDbFactory->newForEntitySource( $source ),
+			$this->deserializerFactory,
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),

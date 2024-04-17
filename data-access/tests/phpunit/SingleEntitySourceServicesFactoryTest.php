@@ -11,6 +11,7 @@ use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
+use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -45,6 +46,7 @@ class SingleEntitySourceServicesFactoryTest extends TestCase {
 				Serializer::class,
 				EntityTypeDefinitions::class,
 				RepoDomainDbFactory::class,
+				DeserializerFactory::class,
 			]
 		);
 

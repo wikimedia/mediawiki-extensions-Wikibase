@@ -17,6 +17,7 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 
 /**
  * @covers DataValues\Deserializers\DataValueDeserializer
@@ -41,7 +42,10 @@ class EntityDeserializationCompatibilityTest extends TestCase {
 				'time' => TimeValue::class,
 				'wikibase-entityid' => EntityIdValue::class,
 			] ),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			new InMemoryDataTypeLookup(),
+			[],
+			[]
 		);
 
 		$this->deserializer = $deserializerFactory->newEntityDeserializer();

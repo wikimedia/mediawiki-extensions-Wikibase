@@ -9,6 +9,7 @@ use Deserializers\Deserializer;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\DeserializerFactory as DataModelDeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
@@ -45,7 +46,8 @@ class TestFactoryBuilder {
 	public static function newDeserializerFactory( TestCase $testCase ) {
 		return new DeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			self::newCurrentDeserializerFactory()
 		);
 	}
 
@@ -59,7 +61,8 @@ class TestFactoryBuilder {
 	public static function newDeserializerFactoryWithDataValueSupport() {
 		return new DeserializerFactory(
 			self::newRealDataValueDeserializer(),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			self::newCurrentDeserializerFactory()
 		);
 	}
 
@@ -87,7 +90,10 @@ class TestFactoryBuilder {
 	public static function newCurrentDeserializerFactory() {
 		return new DataModelDeserializerFactory(
 			self::newRealDataValueDeserializer(),
-			new BasicEntityIdParser()
+			new BasicEntityIdParser(),
+			new InMemoryDataTypeLookup(),
+			[],
+			[]
 		);
 	}
 

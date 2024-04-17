@@ -157,9 +157,17 @@ return [
 	},
 
 	'WikibaseClient.BaseDataModelDeserializerFactory' => function ( MediaWikiServices $services ): DeserializerFactory {
+		$dataTypeDefs = WikibaseClient::getDataTypeDefinitions( $services );
+
 		return new DeserializerFactory(
 			WikibaseClient::getDataValueDeserializer( $services ),
-			WikibaseClient::getEntityIdParser( $services )
+			WikibaseClient::getEntityIdParser( $services ),
+			new PropertyInfoDataTypeLookup(
+				WikibaseClient::getPropertyInfoLookup( $services ),
+				WikibaseClient::getLogger( $services )
+			),
+			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			$dataTypeDefs->getValueTypes()
 		);
 	},
 
@@ -1103,7 +1111,8 @@ return [
 			WikibaseClient::getLanguageFallbackChainFactory( $services ),
 			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
 			WikibaseClient::getEntityTypeDefinitions( $services ),
-			WikibaseClient::getRepoDomainDbFactory( $services )
+			WikibaseClient::getRepoDomainDbFactory( $services ),
+			WikibaseClient::getBaseDataModelDeserializerFactory( $services )
 		);
 
 		$singleSourceServices = [];

@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiIntegrationTestCase;
 use MWContentSerializationException;
+use Wikibase\DataModel\Deserializers\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityContentTooBigException;
@@ -32,7 +34,18 @@ class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 	private function getCodec( $maxBlobSize = 0 ) {
 		$idParser = new BasicEntityIdParser();
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
+		$dataValueDeserializer = new DataValueDeserializer();
+		$deserializerFactory = new DeserializerFactory(
+			$dataValueDeserializer,
+			$idParser,
+			new CurrentDeserializerFactory(
+				$dataValueDeserializer,
+				$idParser,
+				new InMemoryDataTypeLookup(),
+				[],
+				[]
+			)
+		);
 		return new EntityContentDataCodec(
 			$idParser,
 			$serializerFactory->newEntitySerializer(),
