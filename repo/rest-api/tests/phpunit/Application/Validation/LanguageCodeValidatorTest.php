@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -22,7 +23,10 @@ class LanguageCodeValidatorTest extends TestCase {
 		$this->assertNull( $validator->validate( 'de' ) );
 	}
 
-	public function testGivenInvalidLanguageCode_returnsValidationError(): void {
+	/**
+	 * @dataProvider provideInvalidLanguageCode
+	 */
+	public function testGivenInvalidLanguageCode_returnsValidationError( string $invalidLanguageCode ): void {
 		$validLanguageCodes = [ 'ar', 'de', 'en' ];
 		$validator = new LanguageCodeValidator( $validLanguageCodes );
 		$invalidLanguageCode = 'unknown-language-code';
@@ -38,6 +42,12 @@ class LanguageCodeValidatorTest extends TestCase {
 			$invalidLanguageCode,
 			$error->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]
 		);
+	}
+
+	public function provideInvalidLanguageCode(): Generator {
+		yield 'fr not in list of valid language codes' => [ 'fr' ];
+		yield 'empty string not in list of valid language codes' => [ '' ];
+		yield "'123' not in list of valid language codes" => [ '123' ];
 	}
 
 }

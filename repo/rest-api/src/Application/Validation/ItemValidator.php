@@ -45,7 +45,7 @@ class ItemValidator {
 		$expectedFields = [ 'labels', 'descriptions', 'aliases', 'sitelinks', 'statements' ];
 		foreach ( $expectedFields as $expectedField ) {
 			$serialization[$expectedField] ??= [];
-			if ( !$this->isArrayWithStringKeys( $serialization[$expectedField] ) ) {
+			if ( !is_array( $serialization[$expectedField] ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_FIELD,
 					[
@@ -62,6 +62,7 @@ class ItemValidator {
 				return new ValidationError( self::CODE_UNEXPECTED_FIELD, [ self::CONTEXT_FIELD_NAME => $field ] );
 			}
 		}
+
 		$validationError = $this->validateLabelsAndDescriptions( $serialization );
 		if ( $validationError ) {
 			return $validationError;
@@ -89,22 +90,14 @@ class ItemValidator {
 	}
 
 	private function validateLabelsAndDescriptions( array $itemSerialization ): ?ValidationError {
-		$labels = $itemSerialization['labels'] ?? [];
-		$descriptions = $itemSerialization['descriptions'] ?? [];
+		$labels = $itemSerialization['labels'];
+		$descriptions = $itemSerialization['descriptions'];
 
 		if ( $labels === [] && $descriptions === [] ) {
 			return new ValidationError( self::CODE_MISSING_LABELS_AND_DESCRIPTIONS );
 		}
 
 		return $this->itemLabelsAndDescriptionsValidator->validate( $labels, $descriptions );
-	}
-
-	/**
-	 * @param mixed $field
-	 */
-	private function isArrayWithStringKeys( $field ): bool {
-		return is_array( $field ) &&
-			   array_keys( $field ) === array_filter( array_keys( $field ), 'is_string' );
 	}
 
 }

@@ -16,12 +16,14 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
  */
 class ItemLabelsAndDescriptionsValidator {
 
-	public const CODE_INVALID_FIELD = 'invalid-item-field';
+	public const CODE_INVALID_FIELD = 'invalid-field';
 	public const CODE_EMPTY_LABEL = 'label-empty';
 	public const CODE_EMPTY_DESCRIPTION = 'description-empty';
 	public const CODE_INVALID_LABEL = 'invalid-label';
 	public const CODE_INVALID_DESCRIPTION = 'invalid-description';
 
+	public const CONTEXT_FIELD_NAME = 'field';
+	public const CONTEXT_FIELD_VALUE = 'value';
 	public const CONTEXT_FIELD_LABEL = 'label';
 	public const CONTEXT_FIELD_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD_LANGUAGE = 'language';
@@ -67,6 +69,29 @@ class ItemLabelsAndDescriptionsValidator {
 	}
 
 	private function deserializeLabels( array $labels ): ?ValidationError {
+		if ( count( $labels ) > 0 && array_is_list( $labels ) ) {
+			return new ValidationError(
+				self::CODE_INVALID_FIELD,
+				[
+					self::CONTEXT_FIELD_NAME => 'labels',
+					self::CONTEXT_FIELD_VALUE => $labels,
+				]
+			);
+		}
+
+		foreach ( $labels as $languageCode => $labelText ) {
+			$languageValidationError = $this->labelLanguageCodeValidator->validate( (string)$languageCode );
+			if ( $languageValidationError ) {
+				return new ValidationError(
+					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+					array_merge(
+						$languageValidationError->getContext(),
+						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => 'labels' ]
+					)
+				);
+			}
+		}
+
 		try {
 			$this->deserializedLabels = $this->labelsDeserializer->deserialize( $labels );
 		} catch ( EmptyLabelException $e ) {
@@ -79,19 +104,6 @@ class ItemLabelsAndDescriptionsValidator {
 				self::CODE_INVALID_LABEL,
 				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_LABEL => $e->getValue() ]
 			);
-		}
-
-		foreach ( $labels as $languageCode => $labelText ) {
-			$languageValidationError = $this->labelLanguageCodeValidator->validate( $languageCode );
-			if ( $languageValidationError ) {
-				return new ValidationError(
-					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-					array_merge(
-						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => 'labels' ]
-					)
-				);
-			}
 		}
 
 		return null;
@@ -110,6 +122,29 @@ class ItemLabelsAndDescriptionsValidator {
 	}
 
 	private function deserializeDescriptions( array $descriptions ): ?ValidationError {
+		if ( count( $descriptions ) > 0 && array_is_list( $descriptions ) ) {
+			return new ValidationError(
+				self::CODE_INVALID_FIELD,
+				[
+					self::CONTEXT_FIELD_NAME => 'descriptions',
+					self::CONTEXT_FIELD_VALUE => $descriptions,
+				]
+			);
+		}
+
+		foreach ( $descriptions as $languageCode => $descriptionText ) {
+			$languageValidationError = $this->descriptionLanguageCodeValidator->validate( (string)$languageCode );
+			if ( $languageValidationError !== null ) {
+				return new ValidationError(
+					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+					array_merge(
+						$languageValidationError->getContext(),
+						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => 'descriptions' ]
+					)
+				);
+			}
+		}
+
 		try {
 			$this->deserializedDescriptions = $this->descriptionsDeserializer->deserialize( $descriptions );
 		} catch ( EmptyDescriptionException $e ) {
@@ -122,19 +157,6 @@ class ItemLabelsAndDescriptionsValidator {
 				self::CODE_INVALID_DESCRIPTION,
 				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_DESCRIPTION => $e->getValue() ]
 			);
-		}
-
-		foreach ( $descriptions as $languageCode => $descriptionText ) {
-			$languageValidationError = $this->descriptionLanguageCodeValidator->validate( $languageCode );
-			if ( $languageValidationError !== null ) {
-				return new ValidationError(
-					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-					array_merge(
-						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => 'descriptions' ]
-					)
-				);
-			}
 		}
 
 		return null;

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -47,19 +48,29 @@ class ItemLabelsAndDescriptionsValidatorTest extends TestCase {
 		$this->assertNull( $this->newValidator()->validate( [ 'mul' => 'item label' ], [] ) );
 	}
 
-	public function testInvalidLabelLanguage_returnsValidationError(): void {
-		$language = 'xyz';
-
+	/**
+	 * @dataProvider provideInvalidLanguageCode
+	 *
+	 * @param mixed $invalidLanguageCode
+	 */
+	public function testInvalidLabelLanguage_returnsValidationError( $invalidLanguageCode ): void {
 		$this->assertEquals(
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $language,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguageCode,
 					LanguageCodeValidator::CONTEXT_PATH_VALUE => 'labels',
 				]
 			),
-			$this->newValidator()->validate( [ $language => 'item label' ], [] )
+			$this->newValidator()->validate( [ $invalidLanguageCode => 'item label' ], [] )
 		);
+	}
+
+	public function provideInvalidLanguageCode(): Generator {
+		yield "'fr' is not valid language code" => [ 'fr' ];
+		yield 'empty string not a valid language code' => [ '' ];
+		yield "'123' is not a valid language code" => [ '123' ];
+		yield '321 is not a valid language code' => [ 321 ];
 	}
 
 	public function testInvalidLabel_returnsValidationError(): void {
