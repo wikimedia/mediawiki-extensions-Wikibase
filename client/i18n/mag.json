@@ -8,7 +8,6 @@
 	"tooltip-t-wikibase": "जुड़ल दत्तान्स निधान बस्तुके कड़ी",
 	"wikibase-after-page-move": "अपनेके स्थानान्तरणके [$1 प्रभाव अखनी {{WBREPONAME}} बस्तु भाषाकड़ी] पर पड़ेके चाहि । कृपया एकर होवेके जाँच करी ।",
 	"wikibase-after-page-delete": "ई पन्नाके कड़ीके [$1 सम्बद्ध {{WBREPONAME}} बस्तु] से हटा देवेके चाहतियै हल । कृपया एकर होवेके जाँच करी ।",
-	"wikibase-after-page-delete-queued": "ई पन्नाके साथ सम्बद्ध [$1 {{WBREPONAME}} बस्तु] के स्वतः अद्यतन कैल जैतै । कृपया याद रखी जे एकरा तनी-सुन समयो लग सकहे ।",
 	"wikibase-comment-add": "{{WBREPONAME}} बस्तु बनावल गेलहे ।",
 	"wikibase-comment-remove": "सम्बद्ध {{WBREPONAME}} बस्तु मिटारल गेलहे । भाषाकड़ी हटावल गेलहे ।",
 	"wikibase-comment-linked": "{{WBREPONAME}} बस्तु ई पन्नासे जोड़ल गेलहे ।",

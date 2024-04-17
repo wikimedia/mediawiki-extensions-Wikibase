@@ -10,7 +10,6 @@
 	"tooltip-t-wikibase": "Link andmehoidla seonduva üksuse juurde",
 	"wikibase-after-page-move": "Teisaldamine peaks nüüd kajastuma [$1 Vikiandmete üksuse] keelelingi juures. Palume kontrollida, kas see ikka on nii.",
 	"wikibase-after-page-delete": "Link sellele leheküljele peaks olema nüüd [$1 Vikiandmete üksuse] juurest eemaldatud. Palume kontrollida, kas see ikka on nii.",
-	"wikibase-after-page-delete-queued": "Selle leheküljega seotud [$1 Vikiandmete üksus] uuendatakse automaatselt. See ei pruugi juhtuda hetkeliselt.",
 	"wikibase-comment-add": "Vikiandmete üksus on loodud.",
 	"wikibase-comment-remove": "Vastav Vikiandmete üksus on kustutatud. Keelelingid eemaldatud.",
 	"wikibase-comment-linked": "Vikiandmete üksus viitab nüüd sellele leheküljele.",

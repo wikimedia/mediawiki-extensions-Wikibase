@@ -10,7 +10,6 @@
 	"tooltip-t-wikibase": "Ingancio a l'elemento de l'archivvio di dæti connessi",
 	"wikibase-after-page-move": "O stramuo che t'hæ fæto oua o doviæ esise [$1 riflesso inte l'elemento {{WBREPONAME}}]. Te domandemmo de asseguâte ch'a segge proppio coscì.",
 	"wikibase-after-page-delete": "I inganci a sta paggina doviescian ese stæti levæ [$1 da l'elemento {{WBREPONAME}} associou]. Te domandemmo de controlâ s'a l'è proppio coscì.",
-	"wikibase-after-page-delete-queued": "L'[$1 elemento {{WBREPONAME}}] associou a sta paggina o saiâ agiornou aotomatticamente, ma pœu dâse ch'a no segge 'na cosa instantannia.",
 	"wikibase-comment-add": "Un elemento de {{WBREPONAME}} o l'è stæto creou.",
 	"wikibase-comment-remove": "L'elemento de {{WBREPONAME}} associou o l'è stæto scassou. I conligamenti interlenguisteghi son stæti rimossi.",
 	"wikibase-comment-linked": "Un elemento de {{WBREPONAME}} o l'è stæto conligou a questa paggina.",

@@ -25,7 +25,6 @@
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Przeniesienie powinno być odzwierciedlone w [$1 elemencie {{GRAMMAR:D.lp|{{WBREPONAME}}}}] w sekcji z linkami językowymi. Prosimy o sprawdzenie, czy tak się stało.",
 	"wikibase-after-page-delete": "Link do tej strony powinien zostać skasowany z [$1 elementu {{GRAMMAR:D.lp|{{WBREPONAME}}}}]. Prosimy o sprawdzenie, czy tak się stało.",
-	"wikibase-after-page-delete-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-comment-add": "Utworzono element Wikidanych.",
 	"wikibase-comment-remove": "Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.",
 	"wikibase-comment-linked": "Z tą stroną powiązano element Wikidanych.",

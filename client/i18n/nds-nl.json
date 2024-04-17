@@ -6,7 +6,6 @@
 	},
 	"wikibase-client-desc": "Klient vöär de Wikibase-uutbreiding",
 	"tooltip-t-wikibase": "Verwysing nå et objekt in et gegeavensarchiv",
-	"wikibase-after-page-delete-queued": "Et [$1 {{WBREPONAME}}-objekt] dat an disse syde koppeld is sal voord automatisk bywarked wörden. Hold der reakening mid dat dit neet voorddalik geböärt.",
 	"wikibase-comment-linked": "Der is en {{WBREPONAME}}-objekt an disse syde koppeld.",
 	"wikibase-comment-update": "{{WBREPONAME}}-objekt bywarked",
 	"wikibase-comment-sitelink-add": "Språkverwysing tovoogd: $1",

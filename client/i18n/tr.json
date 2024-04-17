@@ -32,7 +32,6 @@
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
 	"wikibase-after-page-move": "Taşıma işleminiz şu an {{WBREPONAME}} ögesinde dil bağlantısına [$1 yansıtılması gerekiyor]. Bunun gerçekleşip gerçekleşmediğini kontrol etmenizi rica ediyoruz.",
 	"wikibase-after-page-delete": "Bu sayfaya bağlantı, [$1 ilişkili {{WBREPONAME}} ögesinden] kaldırılmış olmalı. Bunun gerçekleşip gerçekleşmediğini kontrol etmenizi rica ediyoruz.",
-	"wikibase-after-page-delete-queued": "Bu sayfa ile ilişkili [$1 {{WBREPONAME}} ögesi] kısa bir süre içinde otomatik olarak güncellenecektir. Lütfen, bu işlemin hemen gerçekleşmeyebileceğini unutmayın.",
 	"wikibase-comment-add": "Bir {{WBREPONAME}} ögesi oluşturuldu.",
 	"wikibase-comment-remove": "İlişkili {{WBREPONAME}} ögesi silindi. Dil bağlantıları kaldırıldı.",
 	"wikibase-comment-linked": "Bu sayfaya bir {{WBREPONAME}} ögesi bağlandı.",

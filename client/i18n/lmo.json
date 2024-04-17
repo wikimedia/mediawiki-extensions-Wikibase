@@ -8,7 +8,6 @@
 	"tooltip-t-wikibase": "Conligament a l'element conness de l'archivi di dati",
 	"wikibase-after-page-move": "Verifica che [$1 l'element {{WBREPONAME}} associad] el sia stad sgiornad in automatich per mantegnì i conligament linguistegh in su la pagina.",
 	"wikibase-after-page-delete": "I conligament a questa pagina chì i gh'avarissen de vesser stad tolt via de l'element [$1 de l'element {{WBREPONAME}} asociad]. Te domandom de verificà che 'l sia sucedud.",
-	"wikibase-after-page-delete-queued": "L'[$1 element {{WBREPONAME}}] asociad con questa pagina chì el sarà sgiornad in automatich. en in cunt che 'l podaria vesser minga 'na roba instantanea .",
 	"wikibase-comment-add": "Un element de {{WBREPONAME}} l'è stad cread.",
 	"wikibase-comment-remove": "L'element de {{WBREPONAME}} asociad l'è stad scancelad. I conligament interlinghistich a inn stad tolt via.",
 	"wikibase-comment-linked": "Un element de {{WBREPONAME}} l'è stad conligad a questa pagina chì.",

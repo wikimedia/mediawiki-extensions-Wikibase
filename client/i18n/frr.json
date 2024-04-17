@@ -7,7 +7,6 @@
 	"wikibase-client-desc": "Wikibase-client",
 	"tooltip-t-wikibase": "Ferwisang tu det objekt uun't dootenarchiif",
 	"wikibase-after-page-move": "Dü skulst uk det {{WBREPONAME}}-element [$1 aktualisiare], am spriaklinks faan fersköwen sidjen üüb a leetst stant tu hualen.",
-	"wikibase-after-page-delete-queued": "Det [$1 {{WBREPONAME}}-objekt] tu detdiar sidj woort automaatisk aktualisiaret. Man det düüret noch en betj.",
 	"wikibase-comment-add": "En {{WBREPONAME}}-objekt as nei iinracht wurden.",
 	"wikibase-comment-remove": "Det ferbünjen {{WBREPONAME}}-objekt as stregen wurden. Spriaklinks san wechnimen wurden.",
 	"wikibase-comment-linked": "En {{WBREPONAME}}-objekt as mä detdiar sidj ferbünjen wurden.",

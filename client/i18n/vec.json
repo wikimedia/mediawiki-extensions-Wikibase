@@ -11,7 +11,6 @@
 	"tooltip-t-wikibase": "Cołigamento a l'ełemento de l'archivo dati cołigà",
 	"wikibase-after-page-move": "Verifega che [$1 l'ełemento {{WBREPONAME}} ligà] el sìpia sta ajornà automadegamente par mantegnere i linganbi łenguisteghi in te ła pàjina.",
 	"wikibase-after-page-delete": "I lingamenti a sta pàjina i garia da èsare stai cavai dal [$1 ełemento {{WBREPONAME}} ligà]. Te domandemo de vardare se i se gàpia cavà.",
-	"wikibase-after-page-delete-queued": "El [$1 ełemento {{WBREPONAME}}] ligà co sta pàjina el se ajornarà automadegamente. Podaria vołerghe tenpo.",
 	"wikibase-comment-add": "On ełemento de {{WBREPONAME}} el xé sta creà",
 	"wikibase-comment-remove": "El ełemento de {{WBREPONAME}} ligà el xé sta descançełà. I lighi interłenguisteghi i xé stai cavai.",
 	"wikibase-comment-linked": "On ełemento de {{WBREPONAME}} el xé sta ligà a sta pàjina.",

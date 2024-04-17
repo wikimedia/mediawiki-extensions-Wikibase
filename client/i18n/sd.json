@@ -14,7 +14,6 @@
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
 	"wikibase-after-page-move": "اوهان جو چورڻو هاڻي [$1 {{WBREPONAME}} آئٽم تي] ٻولي ڳنڍڻي ۾ نظر اچڻ گهرجي. تصديق ڪري وٺو تہ ڇا اهو نظر اچي پيو.",
 	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سان لاڳاپيل آئٽم] مان هن صفحي جو ڳنڍڻو ڊاهڻ لازمي آهي. اسان جي درخواست آهي تہ اوهان هڪ دفعو چڪاسي وٺو.",
-	"wikibase-after-page-delete-queued": "ھن صفحي سان لاڳاپيل [$1 {{WBREPONAME}} شيءِ] پاڻمرادو اپڊيٽ ٿي ويندي. مھرباني ڪري نوٽ ڪريو تہ اهو فوري طور تي نہ ٿو ٿي سگهي.",
 	"wikibase-comment-add": "هڪ {{WBREPONAME}} شيءِ سرجيو ويو آهي.",
 	"wikibase-comment-remove": "لاڳاپيل {{WBREPONAME}} شيءِ ڊاٿي وئي. ٻوليءَ جا ڳنڍڻا ھٽايا ويا.",
 	"wikibase-comment-linked": "هڪ {{WBREPONAME}} شيءِ هن صفحي سان ڳنڍي وئي آهي.",

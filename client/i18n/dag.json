@@ -19,7 +19,6 @@
 	"tooltip-t-wikibase": "Linki din gɔhiri lahabaya biɛgyu shee binyɛra",
 	"wikibase-after-page-move": "A napɔŋ yaabu ŋɔ tu ni di be [$1 yi ʒɛhira {{WBREPONAME}} item] zuliya yɛltɔɣa linki ŋɔ ni.Ti ni bɔri ni a lihi di puuni n-nya di beni.",
 	"wikibase-after-page-delete": "Yaɣili ŋɔ linki ŋɔ di tumi ni di yihi [$1 di ni baɣi  {{WBREPONAME}} binshɛli]. Ti bɔri ni a lihi n-nya di beni.",
-	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} bini ŋɔ] din tabi yaɣili ŋɔ nyɛla din yɛn taɣi di toli. Pahimi suɣilo baŋmi ni dimbɔŋɔ ku tooi taɣi pumpɔŋɔ.",
 	"wikibase-comment-add": "{{WBREPONAME}} nyɛla binshɛli din nam",
 	"wikibase-comment-remove": "{{WBREPONAME}} din tabi li la yihi bahhi. Zuliya yɛltɔɣa linkinima nyɛla din yi.",
 	"wikibase-comment-linked": "{{WBREPONAME}} nyɛla din linki zaŋ ti yaɣili ŋɔ.",

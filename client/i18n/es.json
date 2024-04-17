@@ -34,7 +34,6 @@
 	"tooltip-t-wikibase": "Enlace al elemento conectado del repositorio de datos",
 	"wikibase-after-page-move": "El traslado ahora debería [$1 verse reflejado en el enlace de idioma del elemento de {{WBREPONAME}}]. Rogamos que compruebes que esto ha ocurrido.",
 	"wikibase-after-page-delete": "El enlace a esta página debería haberse eliminado del [$1 elemento de {{WBREPONAME}} asociado]. Te pedimos que verifiques que esto haya ocurrido.",
-	"wikibase-after-page-delete-queued": "El [$1 elemento {{WBREPONAME}}] asociado a esta página se actualizará automáticamente. Puede que este no sea inmediato.",
 	"wikibase-comment-add": "Se ha creado un elemento de {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Se han borrado los elementos {{WBREPONAME}} asociados. Enlaces de idioma eliminados.",
 	"wikibase-comment-linked": "Un elemento {{WBREPONAME}} se ha vinculado a esta página.",

@@ -17,7 +17,6 @@
 	"tooltip-t-wikibase": "संबद्ध डेटा रिपॉज़िटरी आयटम की कड़ी",
 	"wikibase-after-page-move": "आपके स्थानांतरण का [$1 प्रभाव अब {{WBREPONAME}} आयटम के भाषा कड़ी] पर पड़ना चाहिए।",
 	"wikibase-after-page-delete": "इस पृष्ठ की कड़ी को [$1 संबद्ध {{WBREPONAME}} आयटम] से हटा दिया जाना चाहिए था। कृपया जाँचें कि ऐसा हुआ है या नहीं।",
-	"wikibase-after-page-delete-queued": "इस पृष्ठ के साथ संबद्ध [$1 {{WBREPONAME}} आयटम] को अपने आप अपडेट कर दिया जाएगा। कृपया याद रखें कि इसे थोड़ा-सा समय लग सकता है।",
 	"wikibase-comment-add": "{{WBREPONAME}} आयटम बनाया गया है।",
 	"wikibase-comment-remove": "संबद्ध {{WBREPONAME}} आयटम मिटा दी गई है। भाषा कड़ियाँ हटा दी गई हैं।",
 	"wikibase-comment-linked": "एक {{WBREPONAME}} आयटम को इस पृष्ठ से जोड़ा गया है।",

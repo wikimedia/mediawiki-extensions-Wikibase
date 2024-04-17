@@ -19,7 +19,6 @@
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
 	"tooltip-t-wikibase": "Odkaz na prepojenú položku dátového úložiska",
 	"wikibase-after-page-move": "Vaše presmerovanie by malo byť [$1 zohľadnené v jazykovom odkaze v položke {{grammar:2sg|{{WBREPONAME}}}}] language link. Prosíme, aby ste skontrolovali, či sa tak udialo.",
-	"wikibase-after-page-delete-queued": "Súvisiaca [$1 dátová položka] bude automaticky aktualizovaná. K aktualizácii nemusí dôjsť okamžite.",
 	"wikibase-comment-add": "Položka {{GRAMMAR:genitív|{{WBREPONAME}}}} bola vytvorená.",
 	"wikibase-comment-remove": "Súvisiaca položka {{GRAMMAR:genitív|{{WBREPONAME}}}} bola vymazaná. Medzijazykové odkazy odstránené.",
 	"wikibase-comment-linked": "Stránka bola prepojená s položkou {{GRAMMAR:genitív|{{WBREPONAME}}}}.",

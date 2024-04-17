@@ -36,7 +36,6 @@
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "ينبغي أن يكون نقلك الآن [$1 منعكسا في وصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] قد أزيلت. نطلب منك التحقق من حدوث هذا.",
-	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف عنصر {{WBREPONAME}} المرتبط. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-linked": "تم ربط عنصر {{WBREPONAME}} مع هذه الصفحة.",

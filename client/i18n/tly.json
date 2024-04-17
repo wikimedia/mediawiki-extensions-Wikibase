@@ -11,7 +11,6 @@
 	"tooltip-t-wikibase": "Link bə elementon repozitorijə məlumot",
 	"wikibase-after-page-move": "Šymə ovaxte nom bəpe [$1 zyvonə elementon linkonədə {{grammar:genitive|{{WBREPONAME}}}}] bybu. Osə bykənən cic byə.",
 	"wikibase-after-page-delete": "Link bə ym səhifə bəpe molə bybu ce [$1 elementiku {{GRAMMAR:genitive|{{WBREPONAME}}}}]. Əmə šyməku porsedəmon osə karde ymi.",
-	"wikibase-after-page-delete-queued": "De ym səhifə əloǧəjn byə [$1 element {{grammar:genitive|{{WBREPONAME}}}}] avtomatik nujə kardə bəbe. Cocašin bybən ki ym bə i ləz bejdəni.",
 	"wikibase-comment-add": "Soxtə byə element {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-comment-remove": "Əloǧəjnə element {{grammar:genitive|{{WBREPONAME}}}} molə byə. Zyvonə linkon molə byən.",
 	"wikibase-comment-linked": "Element {{grammar:genitive|{{WBREPONAME}}}} de ym səhifə əloǧəjne.",

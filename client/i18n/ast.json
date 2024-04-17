@@ -12,7 +12,6 @@
 	"tooltip-t-wikibase": "Enllaz al elementu del depósitu de datos coneutáu",
 	"wikibase-after-page-move": "El siguiente pasu tendría de ser l'enllaz de llingua [$1 reflexáu nel elementu de {{WBREPONAME}}]. Pidímoste que lo compruebes.",
 	"wikibase-after-page-delete": "L'enllaz a esta páxina tendría de tar desaniciáu del [$1 elementu de {{WBREPONAME}} asociáu]. Pidímoste que compruebes si asocedió.",
-	"wikibase-after-page-delete-queued": "L'[$1 elementu de {{WBREPONAME}}] asociáu con esta páxina pronto s'actualizará automáticamente. Decátate de qu'esto podría nun asoceder nel intre.",
 	"wikibase-comment-add": "Creóse un elementu en {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Desanicióse l'elementu asociáu de {{WBREPONAME}}. Quitáronse los enllaces de llingua.",
 	"wikibase-comment-linked": "Enllazóse un elementu de {{WBREPONAME}} a esta páxina.",

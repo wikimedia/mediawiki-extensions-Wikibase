@@ -12,7 +12,6 @@
 	},
 	"tooltip-t-wikibase": "Сілтеме дерек қойма данасымен байланысқан",
 	"wikibase-after-page-move": "Жылжытылған беттің тіл сілтемесін түзету үшін {{WBREPONAME}}-ке байланысқан элементті [$1 жаңартсаңыз] болады.",
-	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} данасы] бұл бетке байланысқан біраздан кейін автоматты жаңартылады.",
 	"wikibase-comment-add": "{{WBREPONAME}} данасы құрылды.",
 	"wikibase-comment-remove": "Байланысқан {{WBREPONAME}} данасын жойды. Тіл сілтемелерін алып тастады.",
 	"wikibase-comment-linked": "{{WBREPONAME}} данасы бұл бетке сілтенді.",

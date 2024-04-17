@@ -15,7 +15,6 @@
 	"tooltip-t-wikibase": "Ligilo al konektita datuma ero",
 	"wikibase-after-page-move": "Via movo nun devus esti [$1 spegulita en la {{WBREPONAME}} ero]-lingva ligilo. Ni petas, ke vi kontrolu, ke tio okazis.",
 	"wikibase-after-page-delete": "Ligo al ĉi tiu paĝo devus esti forigita de [$1 la rilata {{WBREPONAME}}-ero]. Ni petas, ke vi kontrolu, ke tio okazis.",
-	"wikibase-after-page-delete-queued": "La [ $1 {{WBREPONAME}}ero] asociita kun ĉi tiu paĝo estos aŭtomate ĝisdatigita. Bonvolu noti, ke tio eble ne okazas tuj.",
 	"wikibase-comment-add": "Ero en {{WBREPONAME}} estis kreita.",
 	"wikibase-comment-remove": "Ligita ero en {{WBREPONAME}} estis forigita. La lingvaj ligiloj estas forviŝitaj.",
 	"wikibase-comment-linked": "Ero en {{WBREPONAME}} estis ligita al ĉi tiu paĝo.",

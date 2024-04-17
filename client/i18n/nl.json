@@ -32,7 +32,6 @@
 	"tooltip-t-wikibase": "Koppeling naar item in verbonden gegevensrepository",
 	"wikibase-after-page-move": "Uw titelwijziging zou nu in de taalkoppeling van [$1 het {{WBREPONAME}}-item] bijgewerkt moeten zijn. We vragen u dit te controleren.",
 	"wikibase-after-page-delete": "De koppeling naar deze pagina zou nu van [$1 het gekoppelde {{WBREPONAME}}-item] verwijderd moeten zijn. We vragen u dit te controleren.",
-	"wikibase-after-page-delete-queued": "Het aan deze pagina gekoppelde [$1 {{WBREPONAME}}-item] wordt binnenkort automatisch bijgewerkt. Houd er dus rekening mee dat dit niet direct gebeurt.",
 	"wikibase-comment-add": "Er is een {{WBREPONAME}}-item aangemaakt.",
 	"wikibase-comment-remove": "Het gekoppelde {{WBREPONAME}}-item is verwijderd. Taalkoppelingen zijn verwijderd.",
 	"wikibase-comment-linked": "Er is een {{WBREPONAME}}-item aan deze pagina gekoppeld.",

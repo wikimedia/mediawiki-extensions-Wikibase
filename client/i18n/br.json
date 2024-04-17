@@ -15,7 +15,6 @@
 	"tooltip-t-wikibase": "Liamm war-zu elfenn gevreet kavlec'h ar roadennoù",
 	"wikibase-after-page-move": "Bremañ e tlefe liamm yezh [$1 {{WBREPONAME}} an elfenn] bezañ bet kemmet evit klotañ gant ho dilec’hiadenn. Gwiriit ha graet eo bet mar plij.",
 	"wikibase-after-page-delete": "Dleoat a rafe liammoù war-du ar bajenn-mañ bezañ bet dilamet eus [$1 an elfenn {{WBREPONAME}} liammet]. Gwiriit ha graet eo bet mar plij.",
-	"wikibase-after-page-delete-queued": "Hizivaet e vo ent emgefre an [$1 elfenn {{WBREPONAME}}] liammet ouzh ar bajenn-ma. Notit mat ne c'hoarvezo ket diouzhtu-diouzhtu ker buan all.",
 	"wikibase-comment-add": "Savet ez eus bet un elfenn {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Diverket eo bet an elfenn {{WBREPONAME}}. Dilamet eo bet al liammoù yezh.",
 	"wikibase-comment-linked": "Liammet ez eus bet un elfenn {{WBREPONAME}} d'ar bajenn-mañ.",

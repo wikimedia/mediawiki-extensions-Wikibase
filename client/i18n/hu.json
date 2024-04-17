@@ -18,7 +18,6 @@
 	"tooltip-t-wikibase": "Kapcsolt adattárelem",
 	"wikibase-after-page-move": "A lap címének meg kellett változnia a [$1 {{WBREPONAME}}-elemben] is, kérjük, ellenőrizd, hogy valóban így van-e.",
 	"wikibase-after-page-delete": "Az oldalra mutató hivatkozásnak el kellett távolítódnia a [$1 {{WBREPONAME}}-elemből], kérjük, ellenőrizd, hogy valóban így van-e.",
-	"wikibase-after-page-delete-queued": "Az ezzel a lappal összekapcsolt  [$1 {{WBREPONAME}}-elem] automatikusan frissülni fog. Vedd figyelembe, hogy ez nem feltétlenül történik meg azonnal.",
 	"wikibase-comment-add": "Egy {{WBREPONAME}}-elem létrejött.",
 	"wikibase-comment-remove": "Nyelvközi hivatkozások eltávolítása – a kapcsolt {{WBREPONAME}}-elemet törölték.",
 	"wikibase-comment-linked": "Egy {{WBREPONAME}}-elemet kapcsoltak ehhez az oldalhoz.",
