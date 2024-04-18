@@ -69,10 +69,6 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			->limit( 1000 ) // everything should have a hard limit
 			->caller( __METHOD__ )->fetchResultSet();
 
-		if ( !$res ) {
-			return [];
-		}
-
 		$ids = [];
 		foreach ( $res as $row ) {
 			$title = Title::makeTitle( $row->page_namespace, $row->page_title );

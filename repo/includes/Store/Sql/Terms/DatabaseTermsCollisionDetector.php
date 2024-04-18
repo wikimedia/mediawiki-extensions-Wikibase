@@ -179,11 +179,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			->whereMultiTerm( $termTypeId, $lang, $text );
 		$res = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
-		if ( $res === false ) {
-			// Log warning?
-			return [];
-		}
-
 		$values = [];
 		foreach ( $res as $row ) {
 			$dbEntityId = $row->{$queryBuilder->getEntityIdColumn()};
