@@ -32,7 +32,7 @@
 	"wikibase-error-ui-no-external-page": "Sivua ”$2” ei löytynyt sivustolta ”$1”.",
 	"wikibase-error-ui-edit-conflict": "Samaa arvoa muokattiin samaan aikaan, aiheuttaen muokkausristiriidan. Lataa sivu uudelleen.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitteroitu)",
-	"wikibase-language-name-for-terms-mul": "oletusarvot (mul)",
+	"wikibase-language-name-for-terms-mul": "oletusarvot kaikille kielille",
 	"wikibase-quantitydetails-amount": "Summa",
 	"wikibase-quantitydetails-upperbound": "Yläraja",
 	"wikibase-quantitydetails-lowerbound": "Alaraja",
