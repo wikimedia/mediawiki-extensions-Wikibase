@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use DataValues\DataValue;
-use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\IllegalValueException;
 use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -23,18 +23,18 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 
 	private ValueTypeLookup $valueTypeLookup;
 	private EntityIdParser $entityIdParser;
-	private DataValueDeserializer $dataValueDeserializer;
+	private SnakValueParser $snakValueParser;
 	private DataTypeValidatorFactory $validatorFactory;
 
 	public function __construct(
 		ValueTypeLookup $valueTypeLookup,
 		EntityIdParser $entityIdParser,
-		DataValueDeserializer $dataValueDeserializer,
+		SnakValueParser $snakValueParser,
 		DataTypeValidatorFactory $validatorFactory
 	) {
 		$this->valueTypeLookup = $valueTypeLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->dataValueDeserializer = $dataValueDeserializer;
+		$this->snakValueParser = $snakValueParser;
 		$this->validatorFactory = $validatorFactory;
 	}
 
@@ -53,7 +53,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 				break;
 			default:
 				try {
-					$dataValue = $this->dataValueDeserializer->deserialize( [
+					$dataValue = $this->snakValueParser->parse( $dataTypeId, [
 						'type' => $dataValueType,
 						'value' => $valueSerialization['content'],
 					] );
