@@ -1,4 +1,6 @@
 /**
+ * @param QUnit
+ * @param valueview
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */

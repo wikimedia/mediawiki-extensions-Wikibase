@@ -1,4 +1,7 @@
 /**
+ * @param $
+ * @param dv
+ * @param QUnit
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
