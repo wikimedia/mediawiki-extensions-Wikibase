@@ -17,13 +17,21 @@ local util = require 'libraryUtil'
 local checkType = util.checkType
 local checkTypeMulti = util.checkTypeMulti
 local settings = {}
+local counter = 0
 
 metatable.__index = methodtable
 
 local function incrementStatsKey( key )
-	if math.random() <= settings.trackLuaFunctionCallsSampleRate then
+	-- Per T360891#9664129: We only take a sample here, thus only every nth function call actually gets tracked.
+	-- The offset we use here is randomly generated in PHP and injected.
+	local counterWithOffset = counter + settings.trackLuaFunctionCallsCounterOffset
+	local divisor = math.ceil( 1 / settings.trackLuaFunctionCallsSampleRate - 0.5 )
+
+	if counterWithOffset % divisor == 0 then
 		php.incrementStatsKey( key )
 	end
+
+	counter = counter + 1
 end
 
 -- Claim ranks (Claim::RANK_* in PHP)
