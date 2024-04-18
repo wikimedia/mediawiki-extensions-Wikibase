@@ -6,6 +6,7 @@ use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -40,6 +41,15 @@ class ItemSerializationRequestValidatingDeserializer {
 						[
 							UseCaseError::CONTEXT_PATH => $context[ItemValidator::CONTEXT_FIELD_NAME],
 							UseCaseError::CONTEXT_VALUE => $context[ItemValidator::CONTEXT_FIELD_VALUE],
+						]
+					);
+				case ItemLabelsAndDescriptionsValidator::CODE_INVALID_FIELD:
+					throw new UseCaseError(
+						UseCaseError::ITEM_DATA_INVALID_FIELD,
+						"Invalid input for '{$context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME]}'",
+						[
+							UseCaseError::CONTEXT_PATH => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME],
+							UseCaseError::CONTEXT_VALUE => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE],
 						]
 					);
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
