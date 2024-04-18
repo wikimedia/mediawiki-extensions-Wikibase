@@ -1650,6 +1650,7 @@ return [
 		$cacheKeyGroup = $repoSettings->getSetting( 'sharedCacheKeyGroup' );
 		$cacheDuration = $repoSettings->getSetting( 'sharedCacheDuration' );
 
+		// NOTE: Keep this in aligned with SqlStore::newPropertyInfoStore so that the caches stay in sync.
 		$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
 			new PropertyInfoTable(
 				WikibaseRepo::getEntityIdComposer( $services ),

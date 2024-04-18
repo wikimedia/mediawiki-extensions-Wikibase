@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use BagOStuff;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -29,7 +30,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	protected $innerStore;
 
 	/**
-	 * @var WANObjectCache
+	 * @var WANObjectCache|BagOStuff
 	 */
 	protected $cache;
 
@@ -50,14 +51,14 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
 	/**
 	 * @param PropertyInfoStore $store The info store to call back to.
-	 * @param WANObjectCache $cache
+	 * @param WANObjectCache|BagOStuff $cache
 	 * @param int $cacheDuration Number of seconds to keep the cached version for.
 	 *                                 Defaults to 3600 seconds = 1 hour.
 	 * @param string $cacheKeyGroup Group name of the Wikibases to be used when generating global cache keys
 	 */
 	public function __construct(
 		PropertyInfoStore $store,
-		WANObjectCache $cache,
+		$cache,
 		$cacheDuration = 3600,
 		$cacheKeyGroup = ''
 	) {

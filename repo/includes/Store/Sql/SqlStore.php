@@ -477,14 +477,19 @@ class SqlStore implements Store {
 	private function newPropertyInfoStore() {
 		// TODO: this should be changed so it uses the same PropertyInfoTable instance which is used by the
 		// lookup configured for local entity source As we don't want to introduce DispatchingPropertyInfoStore service.
-
 		$table = $this->getPropertyInfoTable();
 
-		// TODO: we might want to register the CacheAwarePropertyInfoLookup instance created by
-		// newPropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
+		// TODO: we might want to register the CachingPropertyInfoLookup instance defined in
+		// WikibaseRepo.PropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
+		// NOTE: Keep this in aligned with WikibaseRepo.PropertyInfoLookup so that the caches stay in sync.
 		return new CacheAwarePropertyInfoStore(
-			$table,
-			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			new CacheAwarePropertyInfoStore(
+				$table,
+				MediaWikiServices::getInstance()->getMainWANObjectCache(),
+				$this->cacheDuration,
+				$this->cacheKeyGroup
+			),
+			MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 			$this->cacheDuration,
 			$this->cacheKeyGroup
 		);
