@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\DataValueFactory;
 use Wikibase\Repo\SnakFactory;
 
 /**
@@ -28,16 +28,16 @@ class SnakFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeFactory = new DataTypeFactory( [ 'string' => 'string' ] );
-		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( [
+		$snakValueParser = new SnakValueParser( new DataValueDeserializer( [
 			'string' => StringValue::class,
-		] ) );
+		] ), [] );
 
 		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( 'p1' ), 'string' );
 
 		$service = new SnakFactory(
 			$dataTypeLookup,
 			$dataTypeFactory,
-			$dataValueFactory
+			$snakValueParser
 		);
 
 		return $service;

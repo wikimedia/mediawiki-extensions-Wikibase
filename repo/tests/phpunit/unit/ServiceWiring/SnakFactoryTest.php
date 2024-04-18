@@ -4,9 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Lib\DataValueFactory;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -21,9 +22,12 @@ class SnakFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
 		$this->mockService(
-			'WikibaseRepo.DataValueFactory',
-			$this->createMock( DataValueFactory::class )
+			'WikibaseRepo.DataValueDeserializer',
+			$this->createMock( DataValueDeserializer::class )
 		);
+		$dataTypeDefinitions = $this->createStub( DataTypeDefinitions::class );
+		$dataTypeDefinitions->method( 'getParserFactoryCallbacks' )->willReturn( [] );
+		$this->mockService( 'WikibaseRepo.DataTypeDefinitions', $dataTypeDefinitions );
 		$this->mockService(
 			'WikibaseRepo.DataTypeFactory',
 			$this->createMock( DataTypeFactory::class )
