@@ -65,18 +65,16 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 					)
 				);
 			case VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER:
-				$entityIdParser = new BasicEntityIdParser();
 				$dataTypeLookup = new InMemoryDataTypeLookup();
 				$dataTypeLookup->setDataTypeForProperty(
 					new NumericPropertyId( TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ),
 					'string'
 				);
 				$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-					$entityIdParser,
+					new BasicEntityIdParser(),
 					$dataTypeLookup,
 					new DataValuesValueDeserializer(
 						new DataTypeFactoryValueTypeLookup( new DataTypeFactory( [] ) ),
-						$entityIdParser,
 						new SnakValueParser( new DataValueDeserializer( [] ), [] ),
 						new BuilderBasedDataTypeValidatorFactory( [] )
 					)
