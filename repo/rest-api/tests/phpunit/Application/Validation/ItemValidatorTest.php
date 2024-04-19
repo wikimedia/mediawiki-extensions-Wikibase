@@ -16,13 +16,13 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
+use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -40,19 +40,24 @@ class ItemValidatorTest extends TestCase {
 
 	public const MAX_LENGTH = 50;
 	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
+	private ItemAliasesValidator $itemAliasesValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
+
 		$this->itemLabelsAndDescriptionsValidator = $this->createStub( ItemLabelsAndDescriptionsValidator::class );
+		$this->itemAliasesValidator = $this->createStub( ItemAliasesValidator::class );
 	}
 
 	public function testValid(): void {
 		$labels = [ 'en' => 'english-label' ];
 		$descriptions = [ 'en' => 'english-description' ];
+		$aliases = [ 'en' => [ 'en-alias-1', 'en-alias-2' ] ];
+
 		$itemSerialization = [
 			'labels' => $labels,
 			'descriptions' => $descriptions,
-			'aliases' => [ 'en' => [ 'en-alias-1', 'en-alias-2' ] ],
+			'aliases' => $aliases,
 			'sitelinks' => [ 'somewiki' => [ 'title' => 'test-title' ] ],
 			'statements' => [
 				'P567' => [
@@ -64,8 +69,10 @@ class ItemValidatorTest extends TestCase {
 			],
 		];
 
-		$deserialisedLabels = new TermList( [ new Term( 'en', 'english-label' ) ] );
-		$deserialisedDescriptions = new TermList( [ new Term( 'en', 'english-description' ) ] );
+		$deserializedLabels = new TermList( [ new Term( 'en', 'english-label' ) ] );
+		$deserializedDescriptions = new TermList( [ new Term( 'en', 'english-description' ) ] );
+		$deserializedAliases = new AliasGroupList( [ new AliasGroup( 'en', [ 'en-alias-1', 'en-alias-2' ] ) ] );
+
 		$this->itemLabelsAndDescriptionsValidator = $this->createMock( ItemLabelsAndDescriptionsValidator::class );
 		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
 			->method( 'validate' )
@@ -73,10 +80,19 @@ class ItemValidatorTest extends TestCase {
 			->willReturn( null );
 		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
 			->method( 'getValidatedLabels' )
-			->willReturn( $deserialisedLabels );
+			->willReturn( $deserializedLabels );
 		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
 			->method( 'getValidatedDescriptions' )
-			->willReturn( $deserialisedDescriptions );
+			->willReturn( $deserializedDescriptions );
+
+		$this->itemAliasesValidator = $this->createMock( ItemAliasesValidator::class );
+		$this->itemAliasesValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $aliases )
+			->willReturn( null );
+		$this->itemAliasesValidator->expects( $this->once() )
+			->method( 'getValidatedAliases' )
+			->willReturn( $deserializedAliases );
 
 		$validator = $this->newValidator();
 		$this->assertNull(
@@ -87,8 +103,8 @@ class ItemValidatorTest extends TestCase {
 			new Item(
 				null,
 				new Fingerprint(
-					$deserialisedLabels,
-					$deserialisedDescriptions,
+					$deserializedLabels,
+					$deserializedDescriptions,
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'en-alias-1', 'en-alias-2' ] ) ] )
 				),
 				new SiteLinkList( [ new SiteLink( 'somewiki', 'test-title' ) ] ),
@@ -120,6 +136,21 @@ class ItemValidatorTest extends TestCase {
 		$this->itemLabelsAndDescriptionsValidator
 			->method( 'validate' )
 			->with( $invalidSerialization[ 'labels' ], $invalidSerialization[ 'descriptions' ], )
+			->willReturn( $expectedError );
+
+		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
+	}
+
+	public function testAliasesValidationError(): void {
+		$invalidSerialization = [
+			'labels' => [ 'en' => 'label' ],
+			'aliases' => [ 'invalid' => 'aliases' ],
+		];
+
+		$expectedError = $this->createStub( ValidationError::class );
+		$this->itemAliasesValidator = $this->createMock( ItemAliasesValidator::class );
+		$this->itemAliasesValidator->method( 'validate' )
+			->with( $invalidSerialization[ 'aliases' ] )
 			->willReturn( $expectedError );
 
 		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
@@ -169,7 +200,7 @@ class ItemValidatorTest extends TestCase {
 
 		return new ItemValidator(
 			$this->itemLabelsAndDescriptionsValidator,
-			new AliasesDeserializer(),
+			$this->itemAliasesValidator,
 			new StatementsDeserializer( new StatementDeserializer( $propValPairDeserializer, $referenceDeserializer ) ),
 			new SitelinksDeserializer(
 				new SitelinkDeserializer(

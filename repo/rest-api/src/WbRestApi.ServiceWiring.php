@@ -122,6 +122,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -357,7 +358,11 @@ return [
 						new LabelsDeserializer(),
 						new DescriptionsDeserializer()
 					),
-					new AliasesDeserializer(),
+					new ItemAliasesValidator(
+						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+						new AliasesDeserializer()
+					),
 					new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ),
 					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) )
 				)

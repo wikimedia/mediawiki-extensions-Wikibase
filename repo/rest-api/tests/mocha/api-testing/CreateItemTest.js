@@ -160,6 +160,17 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, 'descriptions' );
 		} );
 
+		it( 'invalid aliases field', async () => {
+			const labels = { en: 'item label' };
+			const invalidAliases = [ 'not a valid aliases object' ];
+			const response = await newCreateItemRequestBuilder( { labels, aliases: invalidAliases } )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'item-data-invalid-field', { path: 'aliases', value: invalidAliases } );
+			assert.include( response.body.message, 'aliases' );
+		} );
+
 		it( 'unexpected field', async () => {
 			const unexpectedField = 'foo';
 			const item = {
@@ -331,6 +342,115 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				`Item '${existingItemId}' already has label '${label}' associated with ` +
 				`language code '${languageCode}', using the same description text`
 			);
+		} );
+
+		it( 'invalid aliases language code', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { xyz: [ 'alias' ] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'invalid-language-code',
+				{ path: 'alias', language: 'xyz' }
+			);
+			assert.include( response.body.message, 'xyz' );
+		} );
+
+		it( 'alias is empty', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: [ 'en-alias-1', '' ] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'alias-empty', { language: 'en' } );
+			assert.strictEqual( response.body.message, 'Alias must not be empty' );
+		} );
+
+		it( 'alias list is empty', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: [] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'alias-list-empty', { language: 'en' } );
+			assert.strictEqual( response.body.message, 'Alias list must not be empty' );
+		} );
+
+		it( 'alias list is invalid', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: 'not a list' }
+			} )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-alias-list', { language: 'en' } );
+			assert.strictEqual( response.body.message, 'Not a valid alias list' );
+		} );
+
+		it( 'alias too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLabelLength = 250;
+			const aliasTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: [ aliasTooLong ] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'alias-too-long',
+				{ 'character-limit': maxLabelLength, language: 'en' }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Alias must be no more than ${maxLabelLength} characters long`
+			);
+
+		} );
+
+		it( 'alias contains invalid characters', async () => {
+			const invalidAlias = 'tab characters \t not allowed';
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: [ invalidAlias ] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-alias', { language: 'en' } );
+			assert.include( response.body.message, invalidAlias );
+		} );
+
+		it( 'duplicate input aliases', async () => {
+			const duplicateAlias = 'foo';
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				aliases: { en: [ duplicateAlias, duplicateAlias ] }
+			} )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'duplicate-alias',
+				{ alias: duplicateAlias, language: 'en' }
+			);
+			assert.include( response.body.message, duplicateAlias );
 		} );
 	} );
 } );

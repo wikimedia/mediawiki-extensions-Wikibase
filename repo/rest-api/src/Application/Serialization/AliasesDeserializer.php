@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 class AliasesDeserializer {
 
 	/**
-	 * @throws InvalidFieldException
+	 * @throws InvalidAliasesInLanguageException
 	 * @throws EmptyAliasException
 	 * @throws DuplicateAliasException
 	 */
@@ -20,7 +20,7 @@ class AliasesDeserializer {
 
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			if ( !is_array( $aliasesInLanguage ) || !array_is_list( $aliasesInLanguage ) ) {
-				throw new InvalidFieldException( $language, $aliasesInLanguage, $language );
+				throw new InvalidAliasesInLanguageException( $language, $aliasesInLanguage, $language );
 			}
 
 			$aliases = [];
@@ -28,7 +28,7 @@ class AliasesDeserializer {
 
 				if ( !is_string( $alias ) ) {
 					$path = $language . '/' . $index;
-					throw new InvalidFieldException( $language, $alias, $path );
+					throw new InvalidAliasesInLanguageException( $language, $alias, $path );
 				}
 
 				$alias = trim( $alias );
