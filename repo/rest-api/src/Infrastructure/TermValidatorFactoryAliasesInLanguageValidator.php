@@ -19,8 +19,9 @@ class TermValidatorFactoryAliasesInLanguageValidator implements AliasesInLanguag
 	}
 
 	public function validate( AliasGroup $aliasesInLanguage ): ?ValidationError {
-		foreach ( $aliasesInLanguage->getAliases() as $alias ) {
-			$validationError = $this->validateAliasText( $alias );
+		foreach ( $aliasesInLanguage->getAliases() as $index => $alias ) {
+			$path = $aliasesInLanguage->getLanguageCode() . '/' . $index;
+			$validationError = $this->validateAliasText( $alias, $path );
 			if ( $validationError !== null ) {
 				return $validationError;
 			}
@@ -29,7 +30,7 @@ class TermValidatorFactoryAliasesInLanguageValidator implements AliasesInLanguag
 		return null;
 	}
 
-	private function validateAliasText( string $aliasText ): ?ValidationError {
+	private function validateAliasText( string $aliasText, string $path ): ?ValidationError {
 		$result = $this->termValidatorFactory->getAliasValidator()->validate( $aliasText );
 		if ( !$result->isValid() ) {
 			$error = $result->getErrors()[ 0 ];
@@ -45,7 +46,10 @@ class TermValidatorFactoryAliasesInLanguageValidator implements AliasesInLanguag
 				default:
 					return new ValidationError(
 						AliasesInLanguageValidator::CODE_INVALID,
-						[ AliasesInLanguageValidator::CONTEXT_VALUE => $aliasText ]
+						[
+							AliasesInLanguageValidator::CONTEXT_VALUE => $aliasText,
+							AliasesInLanguageValidator::CONTEXT_PATH => $path,
+						]
 					);
 			}
 		}

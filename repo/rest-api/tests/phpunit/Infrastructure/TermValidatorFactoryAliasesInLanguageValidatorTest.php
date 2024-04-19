@@ -58,7 +58,10 @@ class TermValidatorFactoryAliasesInLanguageValidatorTest extends TestCase {
 		yield 'alias has invalid character' => [
 			new AliasGroup( 'en', [ $alias ] ),
 			AliasesInLanguageValidator::CODE_INVALID,
-			[ AliasesInLanguageValidator::CONTEXT_VALUE => $alias ],
+			[
+				AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
+				AliasesInLanguageValidator::CONTEXT_PATH => 'en/0',
+			],
 		];
 	}
 

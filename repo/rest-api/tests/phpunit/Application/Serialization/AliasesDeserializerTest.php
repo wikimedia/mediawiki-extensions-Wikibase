@@ -79,6 +79,7 @@ class AliasesDeserializerTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( InvalidFieldException $e ) {
 			$this->assertSame( 'en', $e->getField() );
+			$this->assertSame( 'en/0', $e->getPath() );
 			$this->assertSame( 123, $e->getValue() );
 		}
 	}

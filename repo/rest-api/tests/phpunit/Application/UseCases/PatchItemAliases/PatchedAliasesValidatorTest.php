@@ -104,7 +104,7 @@ class PatchedAliasesValidatorTest extends TestCase {
 				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 				"Patched value for 'en' is invalid",
 				[
-					UseCaseError::CONTEXT_PATH => 'en',
+					UseCaseError::CONTEXT_PATH => 'en/1',
 					UseCaseError::CONTEXT_VALUE => $invalidAlias,
 				]
 			),

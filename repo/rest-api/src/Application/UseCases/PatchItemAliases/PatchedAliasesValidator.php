@@ -72,7 +72,7 @@ class PatchedAliasesValidator {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 				"Patched value for '{$e->getField()}' is invalid",
-				[ UseCaseError::CONTEXT_PATH => $e->getField(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
+				[ UseCaseError::CONTEXT_PATH => $e->getPath(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
 			);
 		}
 	}
@@ -96,11 +96,12 @@ class PatchedAliasesValidator {
 						);
 					default:
 						$value = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+						$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
 						throw new UseCaseError(
 							UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 							"Patched value for '{$aliasGroup->getLanguageCode()}' is invalid",
 							[
-								UseCaseError::CONTEXT_PATH => $aliasGroup->getLanguageCode(),
+								UseCaseError::CONTEXT_PATH => $path,
 								UseCaseError::CONTEXT_VALUE => $value,
 							]
 						);
