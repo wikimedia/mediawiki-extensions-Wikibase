@@ -101,14 +101,23 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testGetRankedSearchResults_doesNotAddConceptUriWhenAlreadySet() {
 		$property1 = new NumericPropertyId( 'P123' );
 		$property1ConceptUri = 'alreadySet';
-
 		$property1TermSearchResult = new TermSearchResult(
 			new Term( 'en', 'foo' ),
 			'label',
 			$property1,
 			new Term( 'en', 'display label' ),
 			new Term( 'en', 'display description' ),
-			[ ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => 'alreadySet' ]
+			[ ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri ]
+		);
+
+		$entity1ConceptUri = 'alreadySetAsWell';
+		$entity1TermSearchResult = new TermSearchResult(
+			new Term( 'en', 'bar' ),
+			'label',
+			null,
+			new Term( 'en', 'display label 2' ),
+			new Term( 'en', 'display description 2' ),
+			[ ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $entity1ConceptUri ]
 		);
 
 		$searchText = 'some';
@@ -123,6 +132,7 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			->with( $searchText, $searchLanguageCode, $searchEntityType, $searchLimit, $searchStrictLanguage )
 			->willReturn( [
 				$property1TermSearchResult,
+				$entity1TermSearchResult,
 			] );
 
 		$searchHelper = new ConceptUriSearchHelper(
@@ -144,12 +154,13 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getEntityId(), $results[0]->getEntityId() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTerm(), $results[0]->getMatchedTerm() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
-		$this->assertEquals(
-			array_merge( $property1TermSearchResult->getMetaData(), [
-				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri,
-			] ),
-			$results[0]->getMetaData()
-		);
+		$this->assertSame( $property1TermSearchResult->getMetaData(), $results[0]->getMetaData() );
+		$this->assertSame( $entity1TermSearchResult->getDisplayDescription(), $results[1]->getDisplayDescription() );
+		$this->assertSame( $entity1TermSearchResult->getDisplayLabel(), $results[1]->getDisplayLabel() );
+		$this->assertSame( $entity1TermSearchResult->getEntityId(), $results[1]->getEntityId() );
+		$this->assertSame( $entity1TermSearchResult->getMatchedTerm(), $results[1]->getMatchedTerm() );
+		$this->assertSame( $entity1TermSearchResult->getMatchedTermType(), $results[1]->getMatchedTermType() );
+		$this->assertSame( $entity1TermSearchResult->getMetaData(), $results[1]->getMetaData() );
 	}
 
 }

@@ -609,6 +609,18 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @internal
+	 * @return string[] List of entity type identifiers for search.
+	 * This includes all the {@link self::getEnabledEntityTypes() enabled entity types},
+	 * and potentially additional types that are not registered with Wikibase’s entity registration yet.
+	 * Such “types” must be used with caution, as they may not support anything other than search.
+	 */
+	public static function getEnabledEntityTypesForSearch( ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EnabledEntityTypesForSearch' );
+	}
+
+	/**
 	 * @return string[] List of entity type identifiers (typically "item" and "property")
 	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
 	 *  entityNamespaces setting within the local entity source.

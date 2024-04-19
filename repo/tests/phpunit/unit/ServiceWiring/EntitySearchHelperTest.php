@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
@@ -26,8 +25,8 @@ class EntitySearchHelperTest extends ServiceWiringTestCase {
 		);
 
 		$this->mockService(
-			'WikibaseRepo.EntityTypeDefinitions',
-			$this->createMock( EntityTypeDefinitions::class )
+			'WikibaseRepo.EntitySearchHelperCallbacks',
+			[ 'item' => fn() => null ]
 		);
 
 		$this->assertInstanceOf(
@@ -44,8 +43,8 @@ class EntitySearchHelperTest extends ServiceWiringTestCase {
 		);
 
 		$this->mockService(
-			'WikibaseRepo.EntityTypeDefinitions',
-			$this->createMock( EntityTypeDefinitions::class )
+			'WikibaseRepo.EntitySearchHelperCallbacks',
+			[ 'item' => fn() => null ]
 		);
 
 		$this->mockService(

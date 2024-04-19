@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use InvalidArgumentException;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -54,15 +55,24 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 				return $searchResult;
 			}
 
+			$entityId = $searchResult->getEntityId();
+			if ( $entityId === null ) {
+				throw new InvalidArgumentException(
+					'Invalid TermSearchResult:' .
+					' if id is null, then ' . self::CONCEPTURI_META_DATA_KEY .
+					' must be set in the metadata!'
+				);
+			}
+
 			return new TermSearchResult(
 				$searchResult->getMatchedTerm(),
 				$searchResult->getMatchedTermType(),
-				$searchResult->getEntityId(),
+				$entityId,
 				$searchResult->getDisplayLabel(),
 				$searchResult->getDisplayDescription(),
 				array_merge(
 					$searchResult->getMetaData(),
-					[ self::CONCEPTURI_META_DATA_KEY => $this->getConceptUri( $searchResult->getEntityId() ) ]
+					[ self::CONCEPTURI_META_DATA_KEY => $this->getConceptUri( $entityId ) ]
 				) );
 		}, $results );
 	}

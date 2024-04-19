@@ -24,7 +24,7 @@ class TermSearchResult {
 	private $matchedTermType;
 
 	/**
-	 * @var EntityId
+	 * @var EntityId|null
 	 */
 	private $entityId;
 
@@ -46,14 +46,14 @@ class TermSearchResult {
 	/**
 	 * @param Term $matchedTerm
 	 * @param string $matchedTermType
-	 * @param EntityId $entityId
+	 * @param EntityId|null $entityId
 	 * @param Term|null $displayLabel
 	 * @param Term|null $displayDescription
 	 */
 	public function __construct(
 		Term $matchedTerm,
 		string $matchedTermType,
-		EntityId $entityId,
+		?EntityId $entityId,
 		Term $displayLabel = null,
 		Term $displayDescription = null,
 		array $metaData = []
@@ -81,7 +81,18 @@ class TermSearchResult {
 	}
 
 	/**
-	 * @return EntityId
+	 * The entity ID of the search result.
+	 *
+	 * This should usually be an {@link EntityId};
+	 * to support search for additional entity types
+	 * that are not registered with Wikibase’s entity registration yet,
+	 * it may temporarily be null.
+	 * In that case, the {@link self::getMetaData() meta data}
+	 * must include the entity ID serialization and additional data
+	 * which would usually be added automatically based on the entity ID
+	 * (i.e., id, title, pageid, url, concepturi).
+	 *
+	 * @return EntityId|null
 	 */
 	public function getEntityId() {
 		return $this->entityId;

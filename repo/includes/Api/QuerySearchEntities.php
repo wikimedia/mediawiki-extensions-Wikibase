@@ -32,7 +32,13 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	private ContentLanguages $termsLanguages;
 
 	/**
-	 * @var string[]
+	 * @var string[] The supported entity types.
+	 * This should be initialized from {@link WikibaseRepo::getEnabledEntityTypes()},
+	 * <strong>not</strong> from {@link WikibaseRepo::getEnabledEntityTypesForSearch()} –
+	 * unlike {@link SearchEntities}, this module does not support additional entity types
+	 * that are not registered with Wikibase’s entity registration yet
+	 * (every search result’s {@link TermSearchResult::getEntityId() entity ID}
+	 * must be non-null so that we can use the {@link EntityTitleLookup}).
 	 */
 	private array $entityTypes;
 

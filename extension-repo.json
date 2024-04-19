@@ -182,7 +182,7 @@
 			"services": [
 				"LinkBatchFactory",
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.EnabledEntityTypes",
+				"WikibaseRepo.EnabledEntityTypesForSearch",
 				"WikibaseRepo.EntityArticleIdLookup",
 				"WikibaseRepo.EntitySearchHelper",
 				"WikibaseRepo.EntitySourceLookup",
