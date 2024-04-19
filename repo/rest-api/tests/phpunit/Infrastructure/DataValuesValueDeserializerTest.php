@@ -156,7 +156,7 @@ class DataValuesValueDeserializerTest extends TestCase {
 		return new DataValuesValueDeserializer(
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
 			WikibaseRepo::getEntityIdParser(),
-			WikibaseRepo::getDataValueDeserializer(),
+			WikibaseRepo::getSnakValueParser(),
 			$this->dataTypeValidatorFactory
 		);
 	}

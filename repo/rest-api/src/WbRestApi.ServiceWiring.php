@@ -1110,7 +1110,7 @@ return [
 			new DataValuesValueDeserializer(
 				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
 				$entityIdParser,
-				WikibaseRepo::getDataValueDeserializer( $services ),
+				WikibaseRepo::getSnakValueParser( $services ),
 				WikibaseRepo::getDataTypeValidatorFactory( $services )
 			)
 		);
