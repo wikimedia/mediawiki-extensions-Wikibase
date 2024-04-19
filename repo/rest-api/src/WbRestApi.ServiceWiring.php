@@ -1103,13 +1103,11 @@ return [
 	},
 
 	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
-		$entityIdParser = WikibaseRepo::getEntityIdParser( $services );
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			$entityIdParser,
+			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			new DataValuesValueDeserializer(
 				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
-				$entityIdParser,
 				WikibaseRepo::getSnakValueParser( $services ),
 				WikibaseRepo::getDataTypeValidatorFactory( $services )
 			)

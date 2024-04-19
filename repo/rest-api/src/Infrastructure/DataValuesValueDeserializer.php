@@ -7,9 +7,6 @@ use DataValues\IllegalValueException;
 use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Deserializers\SnakValueParser;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
@@ -22,18 +19,15 @@ use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
 class DataValuesValueDeserializer implements ValueDeserializer {
 
 	private ValueTypeLookup $valueTypeLookup;
-	private EntityIdParser $entityIdParser;
 	private SnakValueParser $snakValueParser;
 	private DataTypeValidatorFactory $validatorFactory;
 
 	public function __construct(
 		ValueTypeLookup $valueTypeLookup,
-		EntityIdParser $entityIdParser,
 		SnakValueParser $snakValueParser,
 		DataTypeValidatorFactory $validatorFactory
 	) {
 		$this->valueTypeLookup = $valueTypeLookup;
-		$this->entityIdParser = $entityIdParser;
 		$this->snakValueParser = $snakValueParser;
 		$this->validatorFactory = $validatorFactory;
 	}
@@ -45,7 +39,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 		switch ( $dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId ) ) {
 			case 'wikibase-entityid':
 				$this->assertFieldIsString( $valueSerialization, 'content' );
-				$dataValue = $this->deserializeEntityIdValue( $valueSerialization['content'] );
+				$dataValue = $this->deserializeEntityIdValue( $dataTypeId, $valueSerialization['content'] );
 				break;
 			case 'time':
 				$this->assertFieldIsArray( $valueSerialization, 'content' );
@@ -72,14 +66,15 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 		return $dataValue;
 	}
 
-	private function deserializeEntityIdValue( string $content ): EntityIdValue {
+	private function deserializeEntityIdValue( string $dataTypeId, string $content ): DataValue {
 		try {
-			$entityId = $this->entityIdParser->parse( $content );
-		} catch ( EntityIdParsingException $e ) {
+			return $this->snakValueParser->parse( $dataTypeId, [
+				'value' => [ 'id' => $content ],
+				'type' => 'wikibase-entityid',
+			] );
+		} catch ( DeserializationException $e ) {
 			throw new InvalidFieldException( 'content', $content );
 		}
-
-		return new EntityIdValue( $entityId );
 	}
 
 	private function deserializeTimeValue( array $content ): TimeValue {
