@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Deserializers;
 
 use DataValues\DataValue;
 use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Exceptions\DeserializationException;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,6 +20,9 @@ class SnakValueParser {
 		$this->valueParserCallbacks = $valueParserCallbacks;
 	}
 
+	/**
+	 * @throws DeserializationException
+	 */
 	public function parse( string $dataType, array $serialization ): DataValue {
 		return isset( $this->valueParserCallbacks["PT:$dataType"] )
 			? $this->valueParserCallbacks["PT:$dataType"]()->parse( $serialization )
