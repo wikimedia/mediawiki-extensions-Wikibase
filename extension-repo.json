@@ -71,7 +71,9 @@
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataValueFactory",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.PropertyDataTypeLookup",
 				"WikibaseRepo.SnakFormatterFactory",
+				"WikibaseRepo.SnakValueParser",
 				"WikibaseRepo.ValueFormatterFactory"
 			]
 		},

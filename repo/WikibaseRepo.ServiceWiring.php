@@ -1805,11 +1805,7 @@ return [
 		return new SnakFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services ),
-			new SnakValueParser(
-				WikibaseRepo::getDataValueDeserializer( $services ),
-				WikibaseRepo::getDataTypeDefinitions( $services )
-					->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
-			)
+			WikibaseRepo::getSnakValueParser( $services )
 		);
 	},
 
@@ -1829,6 +1825,14 @@ return [
 			WikibaseRepo::getLogger( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services )
 				->getNormalizerFactoryCallbacks()
+		);
+	},
+
+	'WikibaseRepo.SnakValueParser' => function ( MediaWikiServices $services ): SnakValueParser {
+		return new SnakValueParser(
+			WikibaseRepo::getDataValueDeserializer( $services ),
+			WikibaseRepo::getDataTypeDefinitions( $services )
+				->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
 		);
 	},
 

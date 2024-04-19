@@ -8,10 +8,12 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -28,10 +30,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class FormatSnakValueTest extends ApiTestCase {
 
-	/** @var Item */
-	protected $testingItem;
-	/** @var Property */
-	protected $testingProperty;
+	protected Item $testingItem;
+	protected Property $testingProperty;
 
 	public static function provideApiRequest() {
 		$november11 = new TimeValue(
@@ -294,37 +294,97 @@ class FormatSnakValueTest extends ApiTestCase {
 	}
 
 	public static function provideInvalidParameters() {
-		yield 'FORMAT_TYPE_MISMATCH' => [ [
-			'action' => 'wbformatvalue',
-			'generate' => SnakFormatter::FORMAT_HTML,
-			'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"Q10-F3"}}',
-			'datatype' => 'wikibase-item',
-			'options' => json_encode( [ 'lang' => 'qqx' ] ),
-		] ];
+		yield 'FORMAT_TYPE_MISMATCH' => [
+			[
+				'action' => 'wbformatvalue',
+				'generate' => SnakFormatter::FORMAT_HTML,
+				'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"Q10-F3"}}',
+				'datatype' => 'wikibase-item',
+				'options' => json_encode( [ 'lang' => 'qqx' ] ),
+			],
+			"Can not parse id 'Q10-F3' to build EntityIdValue with",
+		];
 
-		yield 'BAD_DATA_VALUE_FORMAT' => [ [
-			'action' => 'wbformatvalue',
-			'generate' => SnakFormatter::FORMAT_HTML,
-			'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"X10-F3"}}',
-			'datatype' => 'wikibase-item',
-			'options' => json_encode( [ 'lang' => 'qqx' ] ),
-		] ];
+		yield 'BAD_DATA_VALUE_FORMAT' => [
+			[
+				'action' => 'wbformatvalue',
+				'generate' => SnakFormatter::FORMAT_HTML,
+				'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"X10-F3"}}',
+				'datatype' => 'wikibase-item',
+				'options' => json_encode( [ 'lang' => 'qqx' ] ),
+			],
+			"Can not parse id 'X10-F3' to build EntityIdValue with",
+		];
 
-		yield 'TYPE_UNKNOWN' => [ [
-			'action' => 'wbformatvalue',
-			'generate' => SnakFormatter::FORMAT_PLAIN,
-			'datavalue' => '{"type":"unknown", "value": "123"}',
-		] ];
+		yield 'TYPE_UNKNOWN' => [
+			[
+				'action' => 'wbformatvalue',
+				'generate' => SnakFormatter::FORMAT_PLAIN,
+				'datavalue' => '{"type":"unknown", "value": "123"}',
+			],
+			'An illegal set of parameters have been used.',
+		];
 	}
 
 	/**
 	 * @dataProvider provideInvalidParameters
 	 */
-	public function testExecute_throwsApiOnInvalidArgumentException( $params ) {
+	public function testExecute_throwsApiOnInvalidArgumentException( array $params, string $message ) {
 		$this->expectException( ApiUsageException::class );
-		$this->expectExceptionMessage( 'An illegal set of parameters have been used.' );
+		$this->expectExceptionMessage( $message );
 
 		$this->doApiRequest( $params );
+	}
+
+	/**
+	 * @dataProvider addPropertyOrDataTypeProvider
+	 */
+	public function testFormatValueWithDataTypeSpecificParser( callable $addPropertyOrDataType ): void {
+		$dataType = 'data type with custom parser';
+		$expectedValue = 'value from data type specific parser';
+		$parser = $this->createStub( ValueParser::class );
+		$parser->method( 'parse' )->willReturn( new StringValue( $expectedValue ) );
+
+		$propertyId = $this->createPropertyWithDataTypeWithCustomStringValueParser( $dataType, $parser );
+
+		[ $resultArray ] = $this->doApiRequest( $addPropertyOrDataType( [
+			'action' => 'wbformatvalue',
+			'generate' => 'text/plain',
+			'datavalue' => json_encode( ( new StringValue( 'some other value' ) )->toArray() ),
+		], $propertyId, $dataType ) );
+
+		$this->assertIsArray( $resultArray, 'top level element must be an array' );
+		$this->assertArrayHasKey( 'result', $resultArray, 'top level element must have a "result" key' );
+
+		$this->assertSame( $expectedValue, $resultArray['result'] );
+	}
+
+	public static function addPropertyOrDataTypeProvider() {
+		return [
+			'with property' => [ fn ( $params, $propertyId, $dataType ) => array_merge(
+				$params,
+				[ 'property' => $propertyId ]
+			) ],
+			'with data type' => [ fn ( $params, $propertyId, $dataType ) => array_merge(
+				$params,
+				[ 'datatype' => $dataType ]
+			) ],
+		];
+	}
+
+	protected function createPropertyWithDataTypeWithCustomStringValueParser( string $dataType, ValueParser $parser ): PropertyId {
+		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ) use ( $dataType, $parser ) {
+			$dataTypes["PT:$dataType"] = [
+				'value-type' => 'string',
+				'parser-factory-callback' => fn() => $parser,
+			];
+		} );
+		$this->resetServices();
+
+		return WikibaseRepo::getEntityStore()
+			->saveEntity( Property::newFromType( $dataType ), '', $this->getTestUser()->getUser(), EDIT_NEW )
+			->getEntity()
+			->getId();
 	}
 
 }
