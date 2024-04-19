@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use ArrayObject;
 use Error;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\TestCase;
@@ -10,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PageTableEntityQueryBase;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
@@ -62,8 +62,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 			[],
 			[ 'revision' => [ 'JOIN', [ 'rev_id=extraField' ] ] ]
 		)->willReturn(
-		// A Traversable object
-			new ArrayObject(
+			new FakeResultWrapper(
 				[
 					(object)[ 'page_title' => 'Q1' ],
 				]
@@ -127,8 +126,7 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 				"slots" => [ "JOIN", "rev_id=slot_revision_id" ],
 			]
 		)->willReturn(
-		// A Traversable object
-			new ArrayObject(
+			new FakeResultWrapper(
 				[
 					(object)[ 'page_title' => 'Q1' ],
 					(object)[ 'page_title' => 'ooo123' ],
