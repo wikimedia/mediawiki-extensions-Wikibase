@@ -55,27 +55,21 @@ class ItemLabelsAndDescriptionsValidator {
 	}
 
 	public function validate( array $labels, array $descriptions ): ?ValidationError {
-		$labelsError = $this->deserializeLabels( $labels );
-		if ( $labelsError ) {
-			return $labelsError;
-		}
-		$descriptionsError = $this->deserializeDescriptions( $descriptions );
-		if ( $descriptionsError ) {
-			return $descriptionsError;
-		}
-
-		return $this->validateLabels( $this->deserializedLabels, $this->deserializedDescriptions ) ??
+		return $this->deserializeLabels( $labels ) ??
+			   $this->deserializeDescriptions( $descriptions ) ??
+			   $this->validateLabels( $this->deserializedLabels, $this->deserializedDescriptions ) ??
 			   $this->validateDescriptions( $this->deserializedDescriptions, $this->deserializedLabels );
 	}
 
 	private function deserializeLabels( array $labels ): ?ValidationError {
-		if ( count( $labels ) > 0 && array_is_list( $labels ) ) {
+		if ( count( $labels ) == 0 ) {
+			$this->deserializedLabels = new TermList();
+			return null;
+		}
+		if ( array_is_list( $labels ) ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD,
-				[
-					self::CONTEXT_FIELD_NAME => 'labels',
-					self::CONTEXT_FIELD_VALUE => $labels,
-				]
+				[ self::CONTEXT_FIELD_NAME => 'labels', self::CONTEXT_FIELD_VALUE => $labels ]
 			);
 		}
 
@@ -122,7 +116,11 @@ class ItemLabelsAndDescriptionsValidator {
 	}
 
 	private function deserializeDescriptions( array $descriptions ): ?ValidationError {
-		if ( count( $descriptions ) > 0 && array_is_list( $descriptions ) ) {
+		if ( count( $descriptions ) == 0 ) {
+			$this->deserializedDescriptions = new TermList();
+			return null;
+		}
+		if ( array_is_list( $descriptions ) ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD,
 				[

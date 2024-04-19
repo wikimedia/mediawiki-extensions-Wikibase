@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerialization
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -218,6 +219,24 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	public function itemDescriptionsValidationErrorProvider(): Generator {
+		$invalidDescriptions = [ 'not a valid descriptions array' ];
+		yield 'invalid descriptions' => [
+			new ValidationError(
+				ItemLabelsAndDescriptionsValidator::CODE_INVALID_FIELD,
+				[
+					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME => 'descriptions',
+					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE => $invalidDescriptions,
+				]
+			),
+			new UseCaseError(
+				UseCaseError::ITEM_DATA_INVALID_FIELD,
+				"Invalid input for 'descriptions'",
+				[
+					UseCaseError::CONTEXT_PATH => 'descriptions',
+					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
+				]
+			),
+		];
 		yield 'empty description' => [
 			new ValidationError(
 				ItemDescriptionValidator::CODE_EMPTY,

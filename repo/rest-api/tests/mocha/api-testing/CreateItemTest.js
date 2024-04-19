@@ -135,8 +135,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, fieldWithInvalidValue );
 		} );
 
-		it( 'invalid labels list', async () => {
-			const invalidLabels = [ 'not a valid labels array' ];
+		it( 'invalid labels field', async () => {
+			const invalidLabels = [ 'not a valid labels object' ];
 			const response = await newCreateItemRequestBuilder( { labels: invalidLabels } )
 				.assertInvalidRequest()
 				.makeRequest();
@@ -145,8 +145,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, 'labels' );
 		} );
 
-		it( 'invalid descriptions list', async () => {
-			const invalidDescriptions = [ 'not a valid descriptions array' ];
+		it( 'invalid descriptions field', async () => {
+			const invalidDescriptions = [ 'not a valid descriptions object' ];
 			const response = await newCreateItemRequestBuilder( { descriptions: invalidDescriptions } )
 				.assertInvalidRequest()
 				.makeRequest();

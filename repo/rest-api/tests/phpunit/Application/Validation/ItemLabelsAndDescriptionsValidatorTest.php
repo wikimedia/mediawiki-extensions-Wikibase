@@ -51,7 +51,7 @@ class ItemLabelsAndDescriptionsValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideInvalidLanguageCode
 	 *
-	 * @param mixed $invalidLanguageCode
+	 * @param string|int $invalidLanguageCode
 	 */
 	public function testInvalidLabelLanguage_returnsValidationError( $invalidLanguageCode ): void {
 		$this->assertEquals(
@@ -66,11 +66,19 @@ class ItemLabelsAndDescriptionsValidatorTest extends TestCase {
 		);
 	}
 
-	public function provideInvalidLanguageCode(): Generator {
-		yield "'fr' is not valid language code" => [ 'fr' ];
-		yield 'empty string not a valid language code' => [ '' ];
-		yield "'123' is not a valid language code" => [ '123' ];
-		yield '321 is not a valid language code' => [ 321 ];
+	public function testInvalidLabels_returnsValidationError(): void {
+		$labels = [ 'item label' ];
+
+		$this->assertEquals(
+			new ValidationError(
+				ItemLabelsAndDescriptionsValidator::CODE_INVALID_FIELD,
+				[
+					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME => 'labels',
+					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE => $labels,
+				]
+			),
+			$this->newValidator()->validate( $labels, [] )
+		);
 	}
 
 	public function testInvalidLabel_returnsValidationError(): void {
@@ -132,18 +140,21 @@ class ItemLabelsAndDescriptionsValidatorTest extends TestCase {
 		);
 	}
 
-	public function testInvalidDescriptionLanguage_returnsValidationError(): void {
-		$language = 'xyz';
-
+	/**
+	 * @dataProvider provideInvalidLanguageCode
+	 *
+	 * @param string|int $invalidLanguageCode
+	 */
+	public function testInvalidDescriptionLanguage_returnsValidationError( $invalidLanguageCode ): void {
 		$this->assertEquals(
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_PATH_VALUE => 'descriptions',
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $language,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguageCode,
 				]
 			),
-			$this->newValidator()->validate( [], [ $language => 'item description' ] )
+			$this->newValidator()->validate( [], [ $invalidLanguageCode => 'item description' ] )
 		);
 	}
 
@@ -202,6 +213,13 @@ class ItemLabelsAndDescriptionsValidatorTest extends TestCase {
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer()
 		);
+	}
+
+	public function provideInvalidLanguageCode(): Generator {
+		yield "'fr' is not valid language code" => [ 'fr' ];
+		yield 'empty string not a valid language code' => [ '' ];
+		yield "'123' is not a valid language code" => [ '123' ];
+		yield '321 is not a valid language code' => [ 321 ];
 	}
 
 }
