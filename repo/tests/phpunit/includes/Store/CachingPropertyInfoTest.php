@@ -13,10 +13,11 @@ use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Integration tests for both CacheAwarePropertyInfoStore and CachingPropertyInfoLookup.
- * These are hard to test separately as as one is needed for observations about the other,
+ * These are hard to test separately as one is needed for observations about the other,
  * or one is needed to add test data for the other.
  *
  * @covers \Wikibase\Lib\Store\CacheAwarePropertyInfoStore
@@ -236,6 +237,39 @@ class CachingPropertyInfoTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $p1Info, $lookup->getPropertyInfo( $p1 ) );
 		$this->assertEquals( [ 'P1' => $p1Info ], $lookup->getAllPropertyInfo() );
 		$this->assertEquals( [ 'P1' => $p1Info ], $lookup->getPropertyInfoForDataType( $p1Type ) );
+	}
+
+	public function testStoreAndLookupServiceAlignment(): void {
+		// This is a regression test checking that info store and info lookup use the same cache setup.
+		// It simulates a situation in which a property is added and accessed in one request, and then
+		// another property is added and accessed in another request.
+		// If for example the store only uses a CacheAwarePropertyInfoStore for the WANCache (which
+		// happened in the past), then the lookup's local server cache doesn't get purged properly,
+		// which results in a failure when looking up the newer property.
+
+		$services = $this->getServiceContainer();
+		$lookup = WikibaseRepo::getPropertyInfoLookup( $services );
+		$store = WikibaseRepo::getStore( $services )->getPropertyInfoStore();
+		$services->getMainWANObjectCache()->useInterimHoldOffCaching( false );
+
+		$property1 = new NumericPropertyId( 'P123' );
+		$info1 = [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ];
+		$store->setPropertyInfo( $property1, $info1 );
+		$lookup->getPropertyInfo( $property1 ); // this is necessary because it may populate the lookup's additional cache
+
+		// recreate the two services, but keep the caches
+		$services->resetServiceForTesting( 'WikibaseRepo.PropertyInfoLookup' );
+		$services->resetServiceForTesting( 'WikibaseRepo.Store' );
+
+		$lookupAfterReset = WikibaseRepo::getPropertyInfoLookup( $services );
+		$storeAfterReset = WikibaseRepo::getStore( $services )->getPropertyInfoStore();
+
+		$property2 = new NumericPropertyId( 'P666' );
+		$info2 = [ PropertyInfoLookup::KEY_DATA_TYPE => 'wikibase-entityid' ];
+		$storeAfterReset->setPropertyInfo( $property2, $info2 );
+
+		$this->assertEquals( $info1, $lookupAfterReset->getPropertyInfo( $property1 ) );
+		$this->assertEquals( $info2, $lookupAfterReset->getPropertyInfo( $property2 ) );
 	}
 
 }

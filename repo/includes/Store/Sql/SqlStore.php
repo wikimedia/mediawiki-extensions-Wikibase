@@ -481,7 +481,6 @@ class SqlStore implements Store {
 
 		// TODO: we might want to register the CachingPropertyInfoLookup instance defined in
 		// WikibaseRepo.PropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
-		// NOTE: Keep this in aligned with WikibaseRepo.PropertyInfoLookup so that the caches stay in sync.
 		return new CacheAwarePropertyInfoStore(
 			new CacheAwarePropertyInfoStore(
 				$table,
