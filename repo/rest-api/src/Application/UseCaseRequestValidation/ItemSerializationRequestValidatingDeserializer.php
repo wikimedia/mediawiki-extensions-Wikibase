@@ -55,15 +55,6 @@ class ItemSerializationRequestValidatingDeserializer {
 							UseCaseError::CONTEXT_VALUE => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE],
 						]
 					);
-				case ItemAliasesValidator::CODE_INVALID_ALIASES:
-					throw new UseCaseError(
-						UseCaseError::ITEM_DATA_INVALID_FIELD,
-						"Invalid input for 'aliases'",
-						[
-							UseCaseError::CONTEXT_PATH => 'aliases',
-							UseCaseError::CONTEXT_VALUE => $context[ItemAliasesValidator::CONTEXT_FIELD_ALIASES],
-						]
-					);
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
 					throw new UseCaseError(
 						UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
@@ -189,6 +180,15 @@ class ItemSerializationRequestValidatingDeserializer {
 	private function handleAliasesValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
+			case ItemAliasesValidator::CODE_INVALID_ALIASES:
+				throw new UseCaseError(
+					UseCaseError::ITEM_DATA_INVALID_FIELD,
+					"Invalid input for 'aliases'",
+					[
+						UseCaseError::CONTEXT_PATH => 'aliases',
+						UseCaseError::CONTEXT_VALUE => $context[ItemAliasesValidator::CONTEXT_FIELD_ALIASES],
+					]
+				);
 			case ItemAliasesValidator::CODE_EMPTY_ALIAS:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_EMPTY,
