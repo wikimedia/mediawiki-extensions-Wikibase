@@ -4,6 +4,7 @@
 			"Bugoslav",
 			"MaGa",
 			"Neptune, the Mystic",
+			"Ponor",
 			"Roberta F.",
 			"Srđan"
 		]
@@ -38,7 +39,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "nepoznata vrijednost",
 	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
 	"wikibase-undeserializable-value": "Vrijednost nije valjana i ne može biti prikazana.",
-	"datatypes-type-string": "Niz",
+	"datatypes-type-string": "Niz znakova",
 	"datatypes-type-quantity": "Količina",
 	"datatypes-type-monolingualtext": "Jednojezični tekst",
 	"datatypes-type-multilingualtext": "Višejezični tekst",
