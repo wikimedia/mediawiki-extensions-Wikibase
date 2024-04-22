@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -39,25 +40,17 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 		if ( $item->getId() ) {
 			throw new InvalidArgumentException( 'new item cannot have an ID' );
 		}
-		return $this->createOrUpdate( $item, $editMetadata, true );
+		return $this->convertToItemRevision( $this->entityUpdater->create( $item, $editMetadata ) );
 	}
 
 	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
 		if ( !$item->getId() ) {
 			throw new InvalidArgumentException( 'updated item must have an ID' );
 		}
-		return $this->createOrUpdate( $item, $editMetadata, false );
+		return $this->convertToItemRevision( $this->entityUpdater->update( $item, $editMetadata ) );
 	}
 
-	private function createOrUpdate(
-		DataModelItem $item,
-		EditMetadata $editMetadata,
-		bool $isNew
-	): ItemRevision {
-		$entityRevision = $isNew ?
-			$this->entityUpdater->create( $item, $editMetadata ) :
-			$this->entityUpdater->update( $item, $editMetadata );
-
+	private function convertToItemRevision( EntityRevision $entityRevision ): ItemRevision {
 		/** @var DataModelItem $savedItem */
 		$savedItem = $entityRevision->getEntity();
 		'@phan-var DataModelItem $savedItem';
