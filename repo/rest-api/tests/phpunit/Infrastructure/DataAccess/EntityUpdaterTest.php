@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Fixtures\CustomEntityId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
@@ -261,8 +262,13 @@ class EntityUpdaterTest extends TestCase {
 	}
 
 	public function testGivenSavingSucceedsWithErrors_logsErrors(): void {
+		$entity = new FakeEntityDocument( new CustomEntityId( 'X1' ) );
 		$saveStatus = EditEntityStatus::newGood( [
-			'revision' => new EntityRevision( new FakeEntityDocument(), 123, '20221111070707' ),
+			'revision' => new EntityRevision(
+				$entity,
+				123,
+				'20221111070707'
+			),
 		] );
 		$saveStatus->merge( Status::newFatal( 'saving succeeded but something else went wrong' ) );
 		$saveStatus->setOK( true );
@@ -280,10 +286,7 @@ class EntityUpdaterTest extends TestCase {
 
 		$this->assertInstanceOf(
 			EntityRevision::class,
-			$this->newEntityUpdater()->update(
-				$this->createStub( EntityDocument::class ),
-				$this->createStub( EditMetadata::class )
-			)
+			$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) )
 		);
 	}
 

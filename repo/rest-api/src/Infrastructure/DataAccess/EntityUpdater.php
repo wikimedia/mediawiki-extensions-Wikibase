@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use IContextSource;
+use LogicException;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;
@@ -75,6 +76,12 @@ class EntityUpdater {
 		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
+		if ( $newOrUpdateFlag === EDIT_NEW ) {
+			$this->entityStore->assignFreshId( $entity );
+		}
+		if ( $entity->getId() === null ) {
+			throw new LogicException( 'The entity to be saved should have an ID at this point' );
+		}
 		if ( $entity instanceof StatementListProvidingEntity ) {
 			$this->generateStatementIds( $entity );
 		}
@@ -118,9 +125,6 @@ class EntityUpdater {
 	}
 
 	private function generateStatementIds( StatementListProvidingEntity $entity ): void {
-		if ( $entity->getId() === null ) {
-			$this->entityStore->assignFreshId( $entity );
-		}
 		foreach ( $entity->getStatements() as $statement ) {
 			if ( $statement->getGuid() === null ) {
 				$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
