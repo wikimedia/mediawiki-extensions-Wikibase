@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Soul Train"
+			"Soul Train",
+			"Saad Dargan"
 		]
 	},
+	"wikibase-editlinks": "Ссылкаби балбикӀес",
+	"wikibase-linkitem-addlinks": "Ссылкаби чеимцIадарес",
+	"wikibase-linkitem-title": "Бархабарес бхӀялизила",
+	"wikibase-linkitem-linkpage": "Бархабарес бхӀялизила",
+	"wikibase-linkitem-selectlink": "Тила бирулри, белкӀахъес сайт ва бяхӀ бархбарес бигай иш бяхӀ.",
+	"wikibase-linkitem-input-site": "Мез:",
+	"wikibase-linkitem-input-page": "БяхӀ:",
 	"wikibase-rc-wikibase-edit-letter": "Д"
 }
