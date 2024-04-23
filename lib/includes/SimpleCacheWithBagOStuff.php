@@ -338,36 +338,27 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private function unserialize( $string, $default, array $loggingContext ) {
 		$result = json_decode( $string );
 
-		if ( count( $result ) === 3 ) {
-			[ $version, $signatureToCheck, $data ] = $result;
-			if ( $version !== 2 ) {
-				$this->logger->alert( 'Unknown cache format version {formatVersion}', $loggingContext + [
-					'formatVersion' => $version,
-				] );
-				return $default;
-			}
-			$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
-			$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
-			if ( !$hashEquals ) {
-				$this->logger->alert( "Incorrect signature", $loggingContext );
-				return $default;
-			}
-			$decodedData = $data;
-		} elseif ( count( $result ) === 2 ) {
-			[ $signatureToCheck, $data ] = $result;
-			$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
-			$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
-			if ( !$hashEquals ) {
-				$this->logger->alert( "Incorrect signature", $loggingContext );
-				return $default;
-			}
-			$decodedData = mb_convert_encoding( $data, 'ISO-8859-1', 'UTF-8' );
-		} else {
+		if ( count( $result ) !== 3 ) {
 			$this->logger->alert( 'Unknown cache format (count {count})', $loggingContext + [
 				'count' => count( $result ),
 			] );
 			return $default;
 		}
+
+		[ $version, $signatureToCheck, $data ] = $result;
+		if ( $version !== 2 ) {
+			$this->logger->alert( 'Unknown cache format version {formatVersion}', $loggingContext + [
+				'formatVersion' => $version,
+			] );
+			return $default;
+		}
+		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
+		$hashEquals = hash_equals( $correctSignature, $signatureToCheck );
+		if ( !$hashEquals ) {
+			$this->logger->alert( "Incorrect signature", $loggingContext );
+			return $default;
+		}
+		$decodedData = $data;
 
 		if ( $decodedData === serialize( false ) ) {
 			return false;
