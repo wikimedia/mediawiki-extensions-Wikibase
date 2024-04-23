@@ -127,6 +127,66 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 		$got = $cache->get( 'key', 'some default value' );
 	}
 
+	public function testCachedValueCannotBeDecoded_ReturnsDefaultValue(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'prefix';
+		$key = 'key';
+		$inner->set( $inner->makeKey( $prefix, $key ), '{' ); // incomplete JSON
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'secret' );
+		$got = $cache->get( $key, 'some default value' );
+
+		$this->assertSame( 'some default value', $got );
+	}
+
+	public function testCachedValueIsNotArray_ReturnsDefaultValue(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'prefix';
+		$key = 'key';
+		$inner->set( $inner->makeKey( $prefix, $key ), '{}' );
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'secret' );
+		$got = $cache->get( $key, 'some default value' );
+
+		$this->assertSame( 'some default value', $got );
+	}
+
+	public function testCachedValueHasNonStringSignature_ReturnsDefaultValue(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'prefix';
+		$key = 'key';
+		$inner->set( $inner->makeKey( $prefix, $key ), '[2,3,"4"]' );
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'secret' );
+		$got = $cache->get( $key, 'some default value' );
+
+		$this->assertSame( 'some default value', $got );
+	}
+
+	public function testCachedValueHasNonStringData_ReturnsDefaultValue(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'prefix';
+		$key = 'key';
+		$inner->set( $inner->makeKey( $prefix, $key ), '[2,"3",4]' );
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'secret' );
+		$got = $cache->get( $key, 'some default value' );
+
+		$this->assertSame( 'some default value', $got );
+	}
+
+	public function testCachedValueHasWrongLength_ReturnsDefaultValue(): void {
+		$inner = new HashBagOStuff();
+		$prefix = 'prefix';
+		$key = 'key';
+		$inner->set( $inner->makeKey( $prefix, $key ), '[]' );
+
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'secret' );
+		$got = $cache->get( $key, 'some default value' );
+
+		$this->assertSame( 'some default value', $got );
+	}
+
 	public function testCachedValueCannotBeUnserialized_ReturnsDefaultValue() {
 		$inner = new HashBagOStuff();
 		$brokenData = 'O:1';

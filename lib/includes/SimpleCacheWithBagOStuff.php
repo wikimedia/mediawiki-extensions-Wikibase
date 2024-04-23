@@ -338,9 +338,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private function unserialize( $string, $default, array $loggingContext ) {
 		$result = json_decode( $string );
 
-		if ( count( $result ) !== 3 ) {
-			$this->logger->alert( 'Unknown cache format (count {count})', $loggingContext + [
-				'count' => count( $result ),
+		if ( !is_array( $result ) || count( $result ) !== 3 ) {
+			$this->logger->alert( 'Unknown or invalid cache format', $loggingContext + [
+				'type' => gettype( $result ),
+				'count' => is_array( $result ) ? count( $result ) : 'N/A',
 			] );
 			return $default;
 		}
@@ -350,6 +351,18 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			$this->logger->alert( 'Unknown cache format version {formatVersion}', $loggingContext + [
 				'formatVersion' => $version,
 			] );
+			return $default;
+		}
+		if ( !is_string( $signatureToCheck ) ) {
+			$this->logger->alert( 'Invalid signature (not a string)', $loggingContext + [
+				'signature' => $signatureToCheck,
+			] );
+			return $default;
+		}
+		if ( !is_string( $data ) ) {
+			$this->logger->alert( 'Invalid data (not a string)', $loggingContext + [
+					'data' => $data,
+				] );
 			return $default;
 		}
 		$correctSignature = hash_hmac( 'sha256', $data, $this->secret );
