@@ -282,15 +282,10 @@ class ItemSerializationRequestValidatingDeserializer {
 
 		switch ( $validationError->getCode() ) {
 			case SitelinksValidator::CODE_INVALID_SITELINK:
-				$siteId = $context[SitelinksValidator::CONTEXT_SITE_ID];
-				$path = "sitelinks/$siteId";
-				throw new UseCaseError( // FIXME I made this up. Discuss.
-					UseCaseError::ITEM_DATA_INVALID_FIELD,
-					"Invalid input for '$path'",
-					[
-						UseCaseError::CONTEXT_PATH => $path,
-						UseCaseError::CONTEXT_VALUE => $serialization[$siteId],
-					]
+				throw new UseCaseError(
+					UseCaseError::INVALID_SITELINK_TYPE,
+					'Not a valid sitelink type',
+					[ UseCaseError::CONTEXT_SITE_ID => $context[SitelinksValidator::CONTEXT_SITE_ID] ]
 				);
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				$path = 'sitelinks';
