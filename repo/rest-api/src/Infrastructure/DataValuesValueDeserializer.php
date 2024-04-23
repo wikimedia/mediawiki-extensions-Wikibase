@@ -32,18 +32,18 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 		$this->validatorFactory = $validatorFactory;
 	}
 
-	public function deserialize( string $dataTypeId, array $valueSerialization ): DataValue {
-		$this->assertFieldExists( $valueSerialization, 'content' );
+	public function deserialize( string $dataTypeId, array $valueSerialization, string $basePath = '' ): DataValue {
+		$this->assertFieldExists( $valueSerialization, 'content', $basePath );
 
 		// phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.Found
 		switch ( $dataValueType = $this->valueTypeLookup->getValueType( $dataTypeId ) ) {
 			case 'wikibase-entityid':
-				$this->assertFieldIsString( $valueSerialization, 'content' );
-				$dataValue = $this->deserializeEntityIdValue( $dataTypeId, $valueSerialization['content'] );
+				$this->assertFieldIsString( $valueSerialization, 'content', $basePath );
+				$dataValue = $this->deserializeEntityIdValue( $dataTypeId, $valueSerialization['content'], $basePath );
 				break;
 			case 'time':
-				$this->assertFieldIsArray( $valueSerialization, 'content' );
-				$dataValue = $this->deserializeTimeValue( $valueSerialization['content'] );
+				$this->assertFieldIsArray( $valueSerialization, 'content', $basePath );
+				$dataValue = $this->deserializeTimeValue( $valueSerialization['content'], $basePath );
 				break;
 			default:
 				try {
@@ -52,39 +52,39 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 						'value' => $valueSerialization['content'],
 					] );
 				} catch ( DeserializationException $e ) {
-					throw new InvalidFieldException( 'content', $valueSerialization['content'] );
+					throw new InvalidFieldException( 'content', $valueSerialization['content'], "$basePath/content" );
 				}
 				break;
 		}
 
 		foreach ( $this->validatorFactory->getValidators( $dataTypeId ) as $validator ) {
 			if ( !$validator->validate( $dataValue )->isValid() ) {
-				throw new InvalidFieldException( 'content', $valueSerialization['content'] );
+				throw new InvalidFieldException( 'content', $valueSerialization['content'], "$basePath/content" );
 			}
 		}
 
 		return $dataValue;
 	}
 
-	private function deserializeEntityIdValue( string $dataTypeId, string $content ): DataValue {
+	private function deserializeEntityIdValue( string $dataTypeId, string $content, string $basePath ): DataValue {
 		try {
 			return $this->snakValueParser->parse( $dataTypeId, [
 				'value' => [ 'id' => $content ],
 				'type' => 'wikibase-entityid',
 			] );
 		} catch ( DeserializationException $e ) {
-			throw new InvalidFieldException( 'content', $content );
+			throw new InvalidFieldException( 'content', $content, "$basePath/content" );
 		}
 	}
 
-	private function deserializeTimeValue( array $content ): TimeValue {
-		$this->assertFieldExists( $content, 'time' );
-		$this->assertFieldExists( $content, 'precision' );
-		$this->assertFieldExists( $content, 'calendarmodel' );
+	private function deserializeTimeValue( array $content, string $basePath ): TimeValue {
+		$this->assertFieldExists( $content, 'time', $basePath );
+		$this->assertFieldExists( $content, 'precision', $basePath );
+		$this->assertFieldExists( $content, 'calendarmodel', $basePath );
 
-		$this->assertFieldIsString( $content, 'time' );
-		$this->assertFieldIsInt( $content, 'precision' );
-		$this->assertFieldIsString( $content, 'calendarmodel' );
+		$this->assertFieldIsString( $content, 'time', $basePath );
+		$this->assertFieldIsInt( $content, 'precision', $basePath );
+		$this->assertFieldIsString( $content, 'calendarmodel', $basePath );
 
 		$timestamp = $content['time'];
 		$precision = $content['precision'];
@@ -93,33 +93,33 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 		try {
 			$timeValue = new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel );
 		} catch ( IllegalValueException $e ) {
-			throw new InvalidFieldException( 'content', $content );
+			throw new InvalidFieldException( 'content', $content, "$basePath/content" );
 		}
 
 		return $timeValue;
 	}
 
-	private function assertFieldExists( array $serialization, string $field ): void {
+	private function assertFieldExists( array $serialization, string $field, string $basePath ): void {
 		if ( !array_key_exists( $field, $serialization ) ) {
-			throw new MissingFieldException( $field );
+			throw new MissingFieldException( $field, $basePath );
 		}
 	}
 
-	private function assertFieldIsArray( array $serialization, string $field ): void {
+	private function assertFieldIsArray( array $serialization, string $field, string $basePath ): void {
 		if ( !is_array( $serialization[$field] ) ) {
-			throw new InvalidFieldException( $field, $serialization[$field] );
+			throw new InvalidFieldException( $field, $serialization[$field], "$basePath/$field" );
 		}
 	}
 
-	private function assertFieldIsString( array $serialization, string $field ): void {
+	private function assertFieldIsString( array $serialization, string $field, string $basePath ): void {
 		if ( !is_string( $serialization[$field] ) ) {
-			throw new InvalidFieldException( $field, $serialization[$field] );
+			throw new InvalidFieldException( $field, $serialization[$field], "$basePath/$field" );
 		}
 	}
 
-	private function assertFieldIsInt( array $serialization, string $field ): void {
+	private function assertFieldIsInt( array $serialization, string $field, string $basePath ): void {
 		if ( !is_int( $serialization[$field] ) ) {
-			throw new InvalidFieldException( $field, $serialization[$field] );
+			throw new InvalidFieldException( $field, $serialization[$field], "$basePath/$field" );
 		}
 	}
 

@@ -243,6 +243,7 @@ class UseCaseError extends UseCaseException {
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
+		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
 	];
 
 	private string $errorCode;

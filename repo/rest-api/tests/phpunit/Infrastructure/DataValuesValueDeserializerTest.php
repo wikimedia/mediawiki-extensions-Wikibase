@@ -102,12 +102,13 @@ class DataValuesValueDeserializerTest extends TestCase {
 	public function testGivenInvalidInput_deserializeThrowsException(
 		string $dataTypeId,
 		array $valueSerialization,
-		SerializationException $expectedException
+		SerializationException $expectedException,
+		string $basePath = ''
 	): void {
 		$this->dataTypeValidatorFactory = WikibaseRepo::getDataTypeValidatorFactory();
 
 		try {
-			$this->newDeserializer()->deserialize( $dataTypeId, $valueSerialization );
+			$this->newDeserializer()->deserialize( $dataTypeId, $valueSerialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
 		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
@@ -118,37 +119,51 @@ class DataValuesValueDeserializerTest extends TestCase {
 		yield 'invalid content field for string data-type' => [
 			'string',
 			[ 'type' => 'value', 'content' => 42 ],
-			new InvalidFieldException( 'content', 42 ),
+			new InvalidFieldException( 'content', 42, '/content' ),
 		];
 
 		yield 'invalid content field for url data-type' => [
 			'url',
 			[ 'type' => 'value', 'content' => 'not-a-url' ],
-			new InvalidFieldException( 'content', 'not-a-url' ),
+			new InvalidFieldException( 'content', 'not-a-url', '/content' ),
 		];
 
 		yield 'invalid content field for wikibase-item data-type' => [
 			'wikibase-item',
 			[ 'type' => 'value', 'content' => 'X123' ],
-			new InvalidFieldException( 'content', 'X123' ),
+			new InvalidFieldException( 'content', 'X123', '/content' ),
 		];
 
 		yield 'invalid content field for time data-type (string)' => [
 			'time',
 			[ 'type' => 'value', 'content' => '+1-00-00T00:00:00Z' ],
-			new InvalidFieldException( 'content', '+1-00-00T00:00:00Z' ),
+			new InvalidFieldException( 'content', '+1-00-00T00:00:00Z', '/content' ),
 		];
 
 		yield 'invalid content field for time data-type (int)' => [
 			'time',
 			[ 'type' => 'value', 'content' => 1672628645 ],
-			new InvalidFieldException( 'content', 1672628645 ),
+			new InvalidFieldException( 'content', 1672628645, '/content' ),
+		];
+
+		yield 'invalid content field for time data-type (int) with path' => [
+			'time',
+			[ 'type' => 'value', 'content' => 1672628645 ],
+			new InvalidFieldException( 'content', 1672628645, 'qualifiers/0/value/content' ),
+			'qualifiers/0/value',
 		];
 
 		yield 'missing content field' => [
 			'string',
 			'value' => [ 'type' => 'value' ],
-			new MissingFieldException( 'content' ),
+			new MissingFieldException( 'content', '' ),
+		];
+
+		yield 'missing content field with path' => [
+			'string',
+			'value' => [ 'type' => 'value' ],
+			new MissingFieldException( 'content', 'qualifiers/1/value' ),
+			'qualifiers/1/value',
 		];
 	}
 

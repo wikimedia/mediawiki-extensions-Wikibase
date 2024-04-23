@@ -17,9 +17,9 @@ class StatementsDeserializer {
 
 	public function deserialize( array $serialization ): StatementList {
 		$statementList = [];
-		foreach ( $serialization as $statementGroups ) {
-			foreach ( $statementGroups as $statement ) {
-				$statementList[] = $this->statementDeserializer->deserialize( $statement );
+		foreach ( $serialization as $propertyId => $statementGroups ) {
+			foreach ( $statementGroups as $statementIndex => $statement ) {
+				$statementList[] = $this->statementDeserializer->deserialize( $statement, "$propertyId/$statementIndex" );
 			}
 		}
 

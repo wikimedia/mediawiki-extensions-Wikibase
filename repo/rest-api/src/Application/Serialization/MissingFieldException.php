@@ -10,14 +10,20 @@ use Throwable;
 class MissingFieldException extends SerializationException {
 
 	private string $field;
+	private string $path;
 
-	public function __construct( string $field, string $message = '', Throwable $previous = null ) {
+	public function __construct( string $field, string $path = '', string $message = '', Throwable $previous = null ) {
 		$this->field = $field;
+		$this->path = $path;
 		parent::__construct( $message, 0, $previous );
 	}
 
 	public function getField(): string {
 		return $this->field;
+	}
+
+	public function getPath(): string {
+		return $this->path;
 	}
 
 }

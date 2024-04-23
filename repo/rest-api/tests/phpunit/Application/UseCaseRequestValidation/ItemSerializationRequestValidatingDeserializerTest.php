@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -45,6 +46,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	 * @dataProvider itemLabelsValidationErrorProvider
 	 * @dataProvider itemDescriptionsValidationErrorProvider
 	 * @dataProvider itemAliasesValidationErrorProvider
+	 * @dataProvider itemStatementsValidationErrorProvider
 	 */
 	public function testGivenInvalidRequest_throws( ValidationError $validationError, UseCaseError $expectedError ): void {
 		$itemSerialization = [ 'item serialization stub' ];
@@ -474,6 +476,55 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				[
 					UseCaseError::CONTEXT_PATH => ItemAliasesValidator::CONTEXT_FIELD_ALIAS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
+				]
+			),
+		];
+	}
+
+	public function itemStatementsValidationErrorProvider(): Generator {
+		$invalidStatements = [ 'not valid statements' ];
+		yield 'invalid statements array' => [
+			new ValidationError(
+				ItemStatementsValidator::CODE_INVALID_STATEMENTS,
+				[ ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements ]
+			),
+			new UseCaseError(
+				UseCaseError::ITEM_DATA_INVALID_FIELD,
+				"Invalid input for 'statements'",
+				[ UseCaseError::CONTEXT_PATH => 'statements', UseCaseError::CONTEXT_VALUE => $invalidStatements ]
+			),
+		];
+
+		yield 'missing statement field' => [
+			new ValidationError(
+				ItemStatementsValidator::CODE_MISSING_STATEMENT_DATA,
+				[
+					ItemStatementsValidator::CONTEXT_PATH => '/P1/0',
+					ItemStatementsValidator::CONTEXT_FIELD => 'value',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::STATEMENT_DATA_MISSING_FIELD,
+				'Mandatory field missing in the statement data: value',
+				[ UseCaseError::CONTEXT_PATH => '/P1/0', UseCaseError::CONTEXT_FIELD => 'value' ]
+			),
+		];
+
+		yield 'invalid statement field' => [
+			new ValidationError(
+				ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA,
+				[
+					ItemStatementsValidator::CONTEXT_PATH => '/P1/0/value',
+					ItemStatementsValidator::CONTEXT_FIELD => 'value',
+					ItemStatementsValidator::CONTEXT_VALUE => 'invalid-value',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::STATEMENT_DATA_INVALID_FIELD,
+				"Invalid input for 'value'",
+				[
+					UseCaseError::CONTEXT_PATH => '/P1/0/value',
+					UseCaseError::CONTEXT_VALUE => 'invalid-value',
 				]
 			),
 		];

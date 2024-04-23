@@ -9,6 +9,12 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
+	let predicatePropertyId;
+
+	before( async () => {
+		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+	} );
+
 	describe( '201 success response ', () => {
 		it( 'can create a minimal item', async () => {
 			const item = { labels: { en: `hello world ${utils.uniq()}` } };
@@ -169,6 +175,22 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			assertValidError( response, 400, 'item-data-invalid-field', { path: 'aliases', value: invalidAliases } );
 			assert.include( response.body.message, 'aliases' );
+		} );
+
+		it( 'invalid statements field', async () => {
+			const labels = { en: 'item label' };
+			const invalidStatements = [ 'not a valid statements object' ];
+			const response = await newCreateItemRequestBuilder( { labels, statements: invalidStatements } )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-data-invalid-field',
+				{ path: 'statements', value: invalidStatements }
+			);
+			assert.include( response.body.message, 'statements' );
 		} );
 
 		it( 'unexpected field', async () => {
@@ -451,6 +473,55 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				{ alias: duplicateAlias, language: 'en' }
 			);
 			assert.include( response.body.message, duplicateAlias );
+		} );
+
+		it( 'invalid statement field', async () => {
+			const invalidValue = 'not-a-valid-rank';
+			const invalidStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' },
+				rank: invalidValue
+			};
+
+			const itemToCreate = { labels: { en: 'en-label' } };
+			itemToCreate.statements = {};
+			itemToCreate.statements[ predicatePropertyId ] = [];
+			itemToCreate.statements[ predicatePropertyId ].push( invalidStatement );
+
+			const response = await newCreateItemRequestBuilder( itemToCreate )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'statement-data-invalid-field',
+				{ path: `${predicatePropertyId}/0/rank`, value: invalidValue }
+			);
+
+			assert.include( response.body.message, 'rank' );
+		} );
+
+		it( 'missing statement field', async () => {
+			const missingField = 'value';
+			const statementWthMissingValue = { property: { id: predicatePropertyId } };
+
+			const itemToCreate = { labels: { en: 'en-label' } };
+			itemToCreate.statements = {};
+			itemToCreate.statements[ predicatePropertyId ] = [];
+			itemToCreate.statements[ predicatePropertyId ].push( statementWthMissingValue );
+
+			const response = await newCreateItemRequestBuilder( itemToCreate )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'statement-data-missing-field',
+				{ path: `${predicatePropertyId}/0`, field: `${missingField}` }
+			);
+			assert.include( response.body.message, missingField );
 		} );
 	} );
 } );

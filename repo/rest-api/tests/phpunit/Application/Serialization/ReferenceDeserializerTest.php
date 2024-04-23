@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
+use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Throwable;
@@ -12,7 +13,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SerializationException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer
@@ -62,9 +62,9 @@ class ReferenceDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( SerializationException $expectedException, array $serialization ): void {
+	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath = '' ): void {
 		try {
-			$this->newDeserializer()->deserialize( $serialization );
+			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
 		} catch ( Throwable $e ) {
 			$this->assertEquals( $expectedException, $e );
@@ -73,23 +73,35 @@ class ReferenceDeserializerTest extends TestCase {
 
 	public static function invalidSerializationProvider(): Generator {
 		yield 'missing parts' => [
-			new MissingFieldException( 'parts' ),
+			new MissingFieldException( 'parts', '' ),
 			[],
 		];
 
+		yield 'missing parts with path' => [
+			new MissingFieldException( 'parts', 'references/0' ),
+			[],
+			'references/0',
+		];
+
 		yield 'null parts' => [
-			new InvalidFieldException( 'parts', null ),
+			new InvalidFieldException( 'parts', null, '/parts' ),
 			[ 'parts' => null ],
 		];
 
 		yield 'invalid parts type' => [
-			new InvalidFieldException( 'parts', 'potato' ),
+			new InvalidFieldException( 'parts', 'potato', '/parts' ),
 			[ 'parts' => 'potato' ],
 		];
 
 		yield 'invalid parts item type' => [
-			new InvalidFieldException( 'parts', [ 'potato' ] ),
+			new InvalidFieldException( 'parts', [ 'potato' ], '/parts' ),
 			[ 'parts' => [ 'potato' ] ],
+		];
+
+		yield 'invalid parts item type with path' => [
+			new InvalidFieldException( 'parts', [ 'potato' ], 'references/1/parts' ),
+			[ 'parts' => [ 'potato' ] ],
+			'references/1',
 		];
 	}
 
