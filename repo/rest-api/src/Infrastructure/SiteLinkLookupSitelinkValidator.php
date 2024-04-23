@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure;
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\RestApi\Application\Serialization\BadgeNotAllowed;
 use Wikibase\Repo\RestApi\Application\Serialization\EmptySitelinkException;
 use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
@@ -16,24 +16,26 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SiteLinkConflictLookupSitelinkValidator implements SitelinkValidator {
+class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 
 	private SitelinkDeserializer $sitelinkDeserializer;
-	private SiteLinkConflictLookup $siteLinkConflictLookup;
+	private SiteLinkLookup $siteLinkLookup;
 
 	private ?SiteLink $deserializedSitelink = null;
 
-	public function __construct( SitelinkDeserializer $sitelinkDeserializer, SiteLinkConflictLookup $siteLinkConflictLookup ) {
+	public function __construct( SitelinkDeserializer $sitelinkDeserializer, SiteLinkLookup $siteLinkLookup ) {
 		$this->sitelinkDeserializer = $sitelinkDeserializer;
-		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
+		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
-	public function validate( string $itemId, string $siteId, array $sitelink ): ?ValidationError {
+	/**
+	 * @param string|null $itemId - null if validating a new item
+	 */
+	public function validate( ?string $itemId, string $siteId, array $sitelink ): ?ValidationError {
 		try {
 			$this->deserializedSitelink = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink );
 		} catch ( MissingFieldException $e ) {
@@ -62,7 +64,7 @@ class SiteLinkConflictLookupSitelinkValidator implements SitelinkValidator {
 			return new ValidationError( self::CODE_TITLE_NOT_FOUND );
 		}
 
-		return $this->checkSitelinkConflict( $itemId, $siteId, $sitelink );
+		return $this->checkSitelinkConflict( $itemId, $this->deserializedSitelink );
 	}
 
 	public function getValidatedSitelink(): SiteLink {
@@ -73,20 +75,15 @@ class SiteLinkConflictLookupSitelinkValidator implements SitelinkValidator {
 		return $this->deserializedSitelink;
 	}
 
-	private function checkSitelinkConflict( string $itemId, string $siteId, array $sitelink ): ?ValidationError {
-		$sitelinkConflictArray = $this->siteLinkConflictLookup->getConflictsForItem(
-			new ItemId( $itemId ),
-			new SiteLinkList( [ new SiteLink( $siteId, $sitelink[ 'title' ] ) ] )
-		);
+	private function checkSitelinkConflict( ?string $itemId, SiteLink $siteLink ): ?ValidationError {
+		$existingItemWithSitelink = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 
-		if ( is_array( $sitelinkConflictArray ) && count( $sitelinkConflictArray ) > 0 ) {
-			return new ValidationError(
+		return $existingItemWithSitelink && ( !$itemId || !( new ItemId( $itemId ) )->equals( $existingItemWithSitelink ) )
+			? new ValidationError(
 				self::CODE_SITELINK_CONFLICT,
-				[ self::CONTEXT_CONFLICT_ITEM_ID => $sitelinkConflictArray[0]['itemId'] ]
-			);
-		}
-
-		return null;
+				[ self::CONTEXT_CONFLICT_ITEM_ID => $existingItemWithSitelink->getSerialization() ]
+			)
+			: null;
 	}
 
 }

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use EmptyBagOStuff;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
@@ -12,6 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -26,9 +26,8 @@ use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
-use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
@@ -54,14 +53,14 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 				);
 			case VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER:
 				return new SitelinkEditRequestValidatingDeserializer(
-					new SiteLinkConflictLookupSitelinkValidator(
+					new SiteLinkLookupSitelinkValidator(
 						new SitelinkDeserializer(
 							TestValidatingRequestDeserializer::INVALID_TITLE_REGEX,
 							TestValidatingRequestDeserializer::ALLOWED_BADGES,
 							new SameTitleSitelinkTargetResolver(),
 							new DummyItemRevisionMetaDataRetriever()
 						),
-						new BagOStuffSiteLinkConflictLookup( new EmptyBagOStuff() )
+						new HashSiteLinkStore()
 					)
 				);
 			case VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER:

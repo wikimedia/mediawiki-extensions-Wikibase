@@ -158,7 +158,7 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
@@ -172,7 +172,6 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFa
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\WbRestApi;
-use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
@@ -330,13 +329,10 @@ return [
 	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
-				new SiteLinkConflictLookupSitelinkValidator(
+				new SiteLinkLookupSitelinkValidator(
 					WbRestApi::getSitelinkDeserializer( $services ),
-					new SqlSiteLinkConflictLookup(
-						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
-						WikibaseRepo::getEntityIdComposer( $services )
-					),
-				),
+					WikibaseRepo::getStore( $services )->newSiteLinkStore()
+				)
 			);
 		},
 
@@ -891,12 +887,9 @@ return [
 				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 				) ),
-				new SiteLinkConflictLookupSitelinkValidator(
+				new SiteLinkLookupSitelinkValidator(
 					WbRestApi::getSitelinkDeserializer( $services ),
-					new SqlSiteLinkConflictLookup(
-						WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
-						WikibaseRepo::getEntityIdComposer( $services )
-					),
+					WikibaseRepo::getStore( $services )->newSiteLinkStore()
 				),
 			),
 			WbRestApi::getItemUpdater( $services )

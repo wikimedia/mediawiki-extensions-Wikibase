@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchSitelinks;
 
-use EmptyBagOStuff;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
@@ -28,8 +28,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
-use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -68,14 +67,14 @@ class PatchSitelinksTest extends TestCase {
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
 		$this->patchedSitelinksValidator = new PatchedSitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
-			new SiteLinkConflictLookupSitelinkValidator(
+			new SiteLinkLookupSitelinkValidator(
 				new SitelinkDeserializer(
 					'/\?/',
 					self::ALLOWED_BADGES,
 					new SameTitleSitelinkTargetResolver(),
 					new DummyItemRevisionMetaDataRetriever()
 				),
-				new BagOStuffSiteLinkConflictLookup( new EmptyBagOStuff() )
+				new HashSiteLinkStore()
 			)
 		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
