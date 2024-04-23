@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -35,6 +36,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			$this->handleLabelValidationErrors( $validationError );
 			$this->handleDescriptionValidationErrors( $validationError );
 			$this->handleAliasesValidationErrors( $validationError );
+			$this->handleStatementsValidationErrors( $validationError );
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
@@ -232,6 +234,39 @@ class ItemSerializationRequestValidatingDeserializer {
 					UseCaseError::INVALID_ALIAS,
 					"Not a valid alias: $aliasValue",
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
+				);
+		}
+	}
+
+	private function handleStatementsValidationErrors( ValidationError $validationError ): void {
+		$context = $validationError->getContext();
+		switch ( $validationError->getCode() ) {
+			case ItemStatementsValidator::CODE_INVALID_STATEMENTS:
+				throw new UseCaseError(
+					UseCaseError::ITEM_DATA_INVALID_FIELD,
+					"Invalid input for 'statements'",
+					[
+						UseCaseError::CONTEXT_PATH => 'statements',
+						UseCaseError::CONTEXT_VALUE => $context[ItemStatementsValidator::CONTEXT_STATEMENTS],
+					]
+				);
+			case ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA:
+				throw new UseCaseError(
+					UseCaseError::STATEMENT_DATA_INVALID_FIELD,
+					"Invalid input for '{$context[ItemStatementsValidator::CONTEXT_FIELD]}'",
+					[
+						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_VALUE => $context[ItemStatementsValidator::CONTEXT_VALUE],
+					]
+				);
+			case ItemStatementsValidator::CODE_MISSING_STATEMENT_DATA:
+				throw new UseCaseError(
+					UseCaseError::STATEMENT_DATA_MISSING_FIELD,
+					"Mandatory field missing in the statement data: {$context[ItemStatementsValidator::CONTEXT_FIELD]}",
+					[
+						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_FIELD => $context[ItemStatementsValidator::CONTEXT_FIELD],
+					]
 				);
 		}
 	}

@@ -124,6 +124,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
@@ -359,7 +360,7 @@ return [
 						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 						new AliasesDeserializer()
 					),
-					new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ),
+					new ItemStatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
 					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) )
 				)
 			);

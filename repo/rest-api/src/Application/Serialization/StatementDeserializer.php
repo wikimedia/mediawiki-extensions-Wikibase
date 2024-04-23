@@ -26,7 +26,7 @@ class StatementDeserializer {
 	 * @throws InvalidFieldException
 	 * @throws MissingFieldException
 	 */
-	public function deserialize( array $serialization ): Statement {
+	public function deserialize( array $serialization, string $basePath = '' ): Statement {
 		$serialization['id'] ??= null;
 		$serialization['qualifiers'] ??= [];
 		$serialization['references'] ??= [];
@@ -40,18 +40,20 @@ class StatementDeserializer {
 		];
 		foreach ( $fieldValidation as $field => $isValid ) {
 			if ( !$isValid ) {
-				throw new InvalidFieldException( $field, $serialization[$field] );
+				throw new InvalidFieldException( $field, $serialization[ $field ], "$basePath/$field" );
 			}
 		}
 
 		$statement = new Statement(
-			$this->propertyValuePairDeserializer->deserialize( $serialization ),
+			$this->propertyValuePairDeserializer->deserialize( $serialization, $basePath ),
 			new SnakList( array_map(
-				fn( array $q ) => $this->propertyValuePairDeserializer->deserialize( $q ),
+				fn( $i, array $q ) => $this->propertyValuePairDeserializer->deserialize( $q, "$basePath/qualifiers/$i" ),
+				array_keys( $serialization['qualifiers'] ),
 				$serialization['qualifiers']
 			) ),
 			new ReferenceList( array_map(
-				fn( array $r ) => $this->referenceDeserializer->deserialize( $r ),
+				fn( $i, array $r ) => $this->referenceDeserializer->deserialize( $r, "$basePath/references/$i" ),
+				array_keys( $serialization['references'] ),
 				$serialization['references']
 			) ),
 			$serialization['id']

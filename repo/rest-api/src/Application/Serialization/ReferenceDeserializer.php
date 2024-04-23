@@ -19,17 +19,18 @@ class ReferenceDeserializer {
 	 * @throws MissingFieldException
 	 * @throws InvalidFieldException
 	 */
-	public function deserialize( array $serialization ): Reference {
+	public function deserialize( array $serialization, string $basePath = '' ): Reference {
 		if ( !array_key_exists( 'parts', $serialization ) ) {
-			throw new MissingFieldException( 'parts' );
+			throw new MissingFieldException( 'parts', $basePath );
 		}
 		if ( !is_array( $serialization['parts'] ) || !$this->isArrayOfArrays( $serialization['parts'] ) ) {
-			throw new InvalidFieldException( 'parts', $serialization['parts'] );
+			throw new InvalidFieldException( 'parts', $serialization['parts'], "$basePath/parts" );
 		}
 
 		return new Reference( array_map(
-			fn( array $part ) => $this->propertyValuePairDeserializer->deserialize( $part ),
-			$serialization['parts']
+			fn( $i, array $part ) => $this->propertyValuePairDeserializer->deserialize( $part, "$basePath/parts/$i" ),
+			array_keys( $serialization['parts'] ),
+			$serialization['parts'],
 		) );
 	}
 

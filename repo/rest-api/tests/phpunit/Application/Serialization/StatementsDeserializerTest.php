@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
+use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -21,6 +23,22 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
  * @license GPL-2.0-or-later
  */
 class StatementsDeserializerTest extends TestCase {
+
+	private StatementDeserializer $statementDeserializer;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
+		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
+			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
+		);
+
+		$this->statementDeserializer = new StatementDeserializer(
+			$propValPairDeserializer,
+			$this->createStub( ReferenceDeserializer::class )
+		);
+	}
 
 	/**
 	 * @dataProvider provideSerializationAndExpectedOutput
@@ -44,14 +62,23 @@ class StatementsDeserializerTest extends TestCase {
 		yield 'deserialize empty statements' => [ [], new StatementList() ];
 	}
 
-	private function newDeserializer(): StatementsDeserializer {
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
-			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
-		);
+	public function testGivenInvalidStatementSerialization_throws(): void {
+		$expectedException = $this->createStub( MissingFieldException::class );
+		$this->statementDeserializer = $this->createMock( StatementDeserializer::class );
+		$this->statementDeserializer->expects( $this->once() )
+			->method( 'deserialize' )
+			->with( $this->anything(), 'P789/0' )
+			->willThrowException( $expectedException );
 
-		return new StatementsDeserializer(
-			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-		);
+		try {
+			$this->newDeserializer()->deserialize( [ 'P789' => [ [ 'property' => [ 'id' => 'P789' ] ] ] ] );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( Exception $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
+	}
+
+	private function newDeserializer(): StatementsDeserializer {
+		return new StatementsDeserializer( $this->statementDeserializer );
 	}
 }

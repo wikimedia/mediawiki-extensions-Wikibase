@@ -13,6 +13,6 @@ interface ValueDeserializer {
 	 * @throws MissingFieldException
 	 * @throws InvalidFieldException
 	 */
-	public function deserialize( string $dataTypeId, array $valueSerialization ): DataValue;
+	public function deserialize( string $dataTypeId, array $valueSerialization, string $basePath = '' ): DataValue;
 
 }

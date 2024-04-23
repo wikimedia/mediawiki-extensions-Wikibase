@@ -6,7 +6,6 @@ use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,18 +24,18 @@ class ItemValidator {
 	private ?Item $deserializedItem = null;
 	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
 	private ItemAliasesValidator $itemAliasesValidator;
-	private StatementsDeserializer $statementsDeserializer;
+	private ItemStatementsValidator $itemStatementsValidator;
 	private SitelinksDeserializer $sitelinksDeserializer;
 
 	public function __construct(
 		ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator,
 		ItemAliasesValidator $itemAliasesValidator,
-		StatementsDeserializer $statementsDeserializer,
+		ItemStatementsValidator $itemStatementsValidator,
 		SitelinksDeserializer $sitelinksDeserializer
 	) {
 		$this->itemLabelsAndDescriptionsValidator = $itemLabelsAndDescriptionsValidator;
 		$this->itemAliasesValidator = $itemAliasesValidator;
-		$this->statementsDeserializer = $statementsDeserializer;
+		$this->itemStatementsValidator = $itemStatementsValidator;
 		$this->sitelinksDeserializer = $sitelinksDeserializer;
 	}
 
@@ -63,7 +62,8 @@ class ItemValidator {
 		}
 
 		$validationError = $this->validateLabelsAndDescriptions( $serialization ) ??
-						   $this->itemAliasesValidator->validate( $serialization['aliases'] );
+						   $this->itemAliasesValidator->validate( $serialization['aliases'] ) ??
+						   $this->itemStatementsValidator->validate( $serialization['statements'] );
 		if ( $validationError ) {
 			return $validationError;
 		}
@@ -76,7 +76,7 @@ class ItemValidator {
 				$this->itemAliasesValidator->getValidatedAliases()
 			),
 			$this->sitelinksDeserializer->deserialize( $serialization['sitelinks'] ),
-			$this->statementsDeserializer->deserialize( $serialization['statements'] )
+			$this->itemStatementsValidator->getValidatedStatements()
 		);
 
 		return null;
