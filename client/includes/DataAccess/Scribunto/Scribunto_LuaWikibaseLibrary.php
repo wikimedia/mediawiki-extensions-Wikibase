@@ -375,6 +375,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase implements P
 			'allowArbitraryDataAccess' => $settings->getSetting( 'allowArbitraryDataAccess' ),
 			'siteGlobalID' => $settings->getSetting( 'siteGlobalID' ),
 			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
+			'trackLuaFunctionCallsCounterOffset' => mt_rand( 0, 10 ** 6 ),
 		];
 
 		return $this->getEngine()->registerInterface(

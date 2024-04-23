@@ -230,6 +230,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase implem
 		// These settings will be exposed to the Lua module.
 		$options = [
 			'trackLuaFunctionCallsSampleRate' => $settings->getSetting( 'trackLuaFunctionCallsSampleRate' ),
+			'trackLuaFunctionCallsCounterOffset' => mt_rand( 0, 10 ** 6 ),
 			'languageCode' => $this->getLanguage()->getCode(),
 			'globalSiteId' => $settings->getSetting( 'siteGlobalID' ),
 		];
