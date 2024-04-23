@@ -65,7 +65,9 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '404 - item does not exist', async () => {
-		const response = await newSetSitelinkRequestBuilder( 'Q9999999', siteId, sitelink )
+		const title = makeSitelinkTitle();
+		await createWikiPage( title );
+		const response = await newSetSitelinkRequestBuilder( 'Q9999999', siteId, { title } )
 			.makeRequest();
 
 		expect( response ).to.have.status( 404 );

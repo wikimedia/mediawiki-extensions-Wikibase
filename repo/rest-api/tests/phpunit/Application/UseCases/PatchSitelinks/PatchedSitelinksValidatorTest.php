@@ -7,14 +7,14 @@ use Monolog\Test\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkConflictLookupSitelinkValidator;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
@@ -31,12 +31,12 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	private const ALLOWED_BADGES = [ 'Q432' ];
 	private const SITELINK_ITEM_ID = 'Q123';
 
-	private SiteLinkConflictLookup $siteLinkConflictLookup;
+	private SiteLinkLookup $siteLinkLookup;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
+		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
 	}
 
 	/**
@@ -221,16 +221,8 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		$matchingItemId = 'Q987';
 		$pageTitle = 'test-title';
 
-		$this->siteLinkConflictLookup = $this->createStub( SiteLinkConflictLookup::class );
-		$this->siteLinkConflictLookup->method( 'getConflictsForItem' )->willReturn(
-			[
-				[
-					'siteId' => $validSiteId,
-					'itemId' => $matchingItemId,
-					'sitePage' => $pageTitle,
-				],
-			]
-		);
+		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
+		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $matchingItemId ) );
 
 		$expectedUseCaseError = new UseCaseError(
 			UseCaseError::PATCHED_SITELINK_CONFLICT,
@@ -280,14 +272,14 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	private function newValidator( SitelinkTargetTitleResolver $sitelinkTargetTitleResolver ): PatchedSitelinksValidator {
 		return new PatchedSitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
-			new SiteLinkConflictLookupSitelinkValidator(
+			new SiteLinkLookupSitelinkValidator(
 				new SitelinkDeserializer(
 					'/\?/',
 					self::ALLOWED_BADGES,
 					$sitelinkTargetTitleResolver,
 					new DummyItemRevisionMetaDataRetriever()
 				),
-				$this->siteLinkConflictLookup
+				$this->siteLinkLookup
 			)
 		);
 	}
