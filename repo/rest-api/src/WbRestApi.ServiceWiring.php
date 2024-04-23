@@ -92,6 +92,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator as PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
@@ -792,14 +793,16 @@ return [
 				new StatementListSerializer( WbRestApi::getStatementSerializer( $services ) )
 			),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			new PropertyDeserializer(
-				new LabelsDeserializer(),
-				new DescriptionsDeserializer(),
-				new AliasesDeserializer(),
-				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
-			),
 			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getPropertyDataRetriever( $services )
+			WbRestApi::getPropertyDataRetriever( $services ),
+			new PatchedPropertyValidator(
+				new PropertyDeserializer(
+					new LabelsDeserializer(),
+					new DescriptionsDeserializer(),
+					new AliasesDeserializer(),
+					new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
+				)
+			)
 		);
 	},
 

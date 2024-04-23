@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
@@ -62,6 +63,7 @@ class PatchPropertyTest extends TestCase {
 	private PropertyRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PropertyWriteModelRetriever $propertyWriteModelRetriever;
+	private PatchedPropertyValidator $patchedPropertyValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -73,6 +75,7 @@ class PatchPropertyTest extends TestCase {
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->propertyWriteModelRetriever = $this->createStub( PropertyWriteModelRetriever::class );
+		$this->patchedPropertyValidator = new PatchedPropertyValidator( $this->newPropertyDeserializer() );
 	}
 
 	public function testHappyPath(): void {
@@ -198,6 +201,28 @@ class PatchPropertyTest extends TestCase {
 		}
 	}
 
+	public function testGivenPropertyInvalidAfterPatching_throws(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$propertyRepo = new InMemoryPropertyRepository();
+		$propertyRepo->addProperty( new PropertyWriteModel( $propertyId, new Fingerprint(), 'string', null ) );
+
+		$this->propertyRetriever = $propertyRepo;
+		$this->propertyWriteModelRetriever = $propertyRepo;
+
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchedPropertyValidator = $this->createStub( PatchedPropertyValidator::class );
+		$this->patchedPropertyValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchPropertyRequest( "$propertyId", [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchProperty {
 		return new PatchProperty(
 			$this->validator,
@@ -211,9 +236,9 @@ class PatchPropertyTest extends TestCase {
 				$this->createStub( StatementListSerializer::class )
 			),
 			$this->patchJson,
-			$this->newPropertyDeserializer(),
 			$this->propertyUpdater,
-			$this->propertyWriteModelRetriever
+			$this->propertyWriteModelRetriever,
+			$this->patchedPropertyValidator
 		);
 	}
 

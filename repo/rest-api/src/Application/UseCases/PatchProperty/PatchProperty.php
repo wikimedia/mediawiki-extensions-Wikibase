@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -26,9 +25,9 @@ class PatchProperty {
 	private PropertyRetriever $propertyRetriever;
 	private PropertySerializer $propertySerializer;
 	private PatchJson $patchJson;
-	private PropertyDeserializer $propertyDeserializer;
 	private PropertyUpdater $propertyUpdater;
 	private PropertyWriteModelRetriever $propertyRetrieverWriteModel;
+	private PatchedPropertyValidator $patchedPropertyValidator;
 
 	public function __construct(
 		PatchPropertyValidator $validator,
@@ -37,9 +36,9 @@ class PatchProperty {
 		PropertyRetriever $propertyRetriever,
 		PropertySerializer $propertySerializer,
 		PatchJson $patchJson,
-		PropertyDeserializer $propertyDeserializer,
 		PropertyUpdater $propertyUpdater,
-		PropertyWriteModelRetriever $propertyRetrieverWriteModel
+		PropertyWriteModelRetriever $propertyRetrieverWriteModel,
+		PatchedPropertyValidator $patchedPropertyValidator
 	) {
 		$this->validator = $validator;
 		$this->assertPropertyExists = $assertPropertyExists;
@@ -47,9 +46,9 @@ class PatchProperty {
 		$this->propertyRetriever = $propertyRetriever;
 		$this->propertySerializer = $propertySerializer;
 		$this->patchJson = $patchJson;
-		$this->propertyDeserializer = $propertyDeserializer;
 		$this->propertyUpdater = $propertyUpdater;
 		$this->propertyRetrieverWriteModel = $propertyRetrieverWriteModel;
+		$this->patchedPropertyValidator = $patchedPropertyValidator;
 	}
 
 	/**
@@ -59,6 +58,7 @@ class PatchProperty {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();
 		$providedMetadata = $deserializedRequest->getEditMetadata();
+		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
 
 		$this->assertPropertyExists->execute( $propertyId );
 
@@ -67,18 +67,18 @@ class PatchProperty {
 			$providedMetadata->getUser()
 		);
 
-		$patchedProperty = $this->propertyDeserializer->deserialize(
-			$this->patchJson->execute(
-				ConvertArrayObjectsToArray::execute(
-					$this->propertySerializer->serialize(
-						// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-						$this->propertyRetriever->getProperty( $propertyId )
-					)
-				),
-				$deserializedRequest->getPatch()
+		$patchedPropertySerialization = $this->patchJson->execute(
+			ConvertArrayObjectsToArray::execute(
+				$this->propertySerializer->serialize(
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+					$this->propertyRetriever->getProperty( $propertyId )
+				)
 			),
+			$deserializedRequest->getPatch()
 		);
-		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
+
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+		$patchedProperty = $this->patchedPropertyValidator->validateAndDeserialize( $patchedPropertySerialization, $originalProperty );
 
 		$propertyRevision = $this->propertyUpdater->update(
 			$patchedProperty,
