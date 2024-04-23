@@ -707,8 +707,20 @@ Maximum number of entities to visit in a `mw.wikibase.getReferencedEntityId` cal
 #### trackLuaFunctionCallsPerSiteGroup
 Whether to track Lua function calls with a per-sitegroup key, like `MediaWiki.wikipedia.wikibase.client.scribunto.wikibase.functionName.call`.
 
+DEFAULT: `false` (no tracking per sitegroup)
+
 #### trackLuaFunctionCallsPerWiki
 Whether to track Lua function calls with a per-site key, like `MediaWiki.dewiki.wikibase.client.scribunto.wikibase.functionName.call`.
+
+DEFAULT: `false` (no tracking per site / wiki)
+
+#### trackLuaFunctionCallsSampleRate
+A rate between 0 and 1 of how many Lua function calls to track.
+For example, a value of 0.1 will only track every tenth call (on average);
+the metric is then scaled by this value, so that, on average, the count is still in the right order of magnitude.
+Only has an effect if `trackLuaFunctionCallsPerSiteGroup` and/or `trackLuaFunctionCallsPerWiki` is enabled.
+
+DEFAULT: `1` (track each function call individually, get 100% accurate counts)
 
 ### Sitelinks
 
