@@ -31,6 +31,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "ਅਣਜਾਣ ਮੁੱਲ",
 	"wikibase-snakview-snaktypeselector-novalue": "ਕੋਈ ਮੁੱਲ ਨਹੀਂ",
 	"wikibase-undeserializable-value": "ਮੁੱਲ ਅਵੈਧ ਹੈ ਅਤੇ ਪ੍ਰਦਰਸ਼ਿਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।",
+	"datatypes-type-quantity": "ਮਾਤਰਾ",
 	"datatypes-type-monolingualtext": "ਇੱਕ-ਭਾਸ਼ਾਈ ਲਿਖਤ",
 	"datatypes-type-multilingualtext": "ਬਹੁਭਾਸ਼ਾਈ ਲਿਖਤ",
 	"datatypes-type-number": "ਨੰਬਰ",
