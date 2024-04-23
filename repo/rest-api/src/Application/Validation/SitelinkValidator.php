@@ -22,8 +22,12 @@ interface SitelinkValidator {
 
 	public const CONTEXT_BADGE = 'badge';
 	public const CONTEXT_CONFLICT_ITEM_ID = 'conflict_item_id';
+	public const CONTEXT_SITE_ID = 'site-id';
 
-	public function validate( string $itemId, string $siteId, array $sitelink ): ?ValidationError;
+	/**
+	 * @param string|null $itemId - null if validating a new item
+	 */
+	public function validate( ?string $itemId, string $siteId, array $sitelink ): ?ValidationError;
 
 	public function getValidatedSitelink(): SiteLink;
 

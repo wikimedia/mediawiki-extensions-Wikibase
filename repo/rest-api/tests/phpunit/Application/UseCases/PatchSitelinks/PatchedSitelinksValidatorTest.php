@@ -12,6 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
@@ -271,15 +272,17 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 	private function newValidator( SitelinkTargetTitleResolver $sitelinkTargetTitleResolver ): PatchedSitelinksValidator {
 		return new PatchedSitelinksValidator(
-			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
-			new SiteLinkLookupSitelinkValidator(
-				new SitelinkDeserializer(
-					'/\?/',
-					self::ALLOWED_BADGES,
-					$sitelinkTargetTitleResolver,
-					new DummyItemRevisionMetaDataRetriever()
-				),
-				$this->siteLinkLookup
+			new SitelinksValidator(
+				new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+				new SiteLinkLookupSitelinkValidator(
+					new SitelinkDeserializer(
+						'/\?/',
+						self::ALLOWED_BADGES,
+						$sitelinkTargetTitleResolver,
+						new DummyItemRevisionMetaDataRetriever()
+					),
+					$this->siteLinkLookup
+				)
 			)
 		);
 	}

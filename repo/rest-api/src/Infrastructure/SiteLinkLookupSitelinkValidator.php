@@ -32,36 +32,39 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
-	/**
-	 * @param string|null $itemId - null if validating a new item
-	 */
 	public function validate( ?string $itemId, string $siteId, array $sitelink ): ?ValidationError {
 		try {
 			$this->deserializedSitelink = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink );
 		} catch ( MissingFieldException $e ) {
-			return new ValidationError( self::CODE_TITLE_MISSING );
+			return new ValidationError( self::CODE_TITLE_MISSING, [ self::CONTEXT_SITE_ID => $siteId ] );
 		} catch ( EmptySitelinkException $e ) {
-			return new ValidationError( self::CODE_EMPTY_TITLE );
+			return new ValidationError( self::CODE_EMPTY_TITLE, [ self::CONTEXT_SITE_ID => $siteId ] );
 		} catch ( InvalidFieldException $e ) {
 			if ( $e->getField() !== 'title' ) {
 				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldException}" );
 			}
-			return new ValidationError( self::CODE_INVALID_TITLE );
+			return new ValidationError( self::CODE_INVALID_TITLE, [ self::CONTEXT_SITE_ID => $siteId ] );
 		} catch ( InvalidFieldTypeException $e ) {
 			switch ( $e->getField() ) {
 				case 'title':
-					return new ValidationError( self::CODE_INVALID_TITLE_TYPE );
+					return new ValidationError( self::CODE_INVALID_TITLE_TYPE, [ self::CONTEXT_SITE_ID => $siteId ] );
 				case 'badges':
-					return new ValidationError( self::CODE_INVALID_BADGES_TYPE );
+					return new ValidationError( self::CODE_INVALID_BADGES_TYPE, [ self::CONTEXT_SITE_ID => $siteId ] );
 				default:
 					throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldTypeException}" );
 			}
 		} catch ( InvalidSitelinkBadgeException $e ) {
-			return new ValidationError( self::CODE_INVALID_BADGE, [ self::CONTEXT_BADGE => $e->getValue() ] );
+			return new ValidationError(
+				self::CODE_INVALID_BADGE,
+				[ self::CONTEXT_BADGE => $e->getValue(), self::CONTEXT_SITE_ID => $siteId ]
+			);
 		} catch ( BadgeNotAllowed $e ) {
-			return new ValidationError( self::CODE_BADGE_NOT_ALLOWED, [ self::CONTEXT_BADGE => $e->getBadge() ] );
+			return new ValidationError(
+				self::CODE_BADGE_NOT_ALLOWED,
+				[ self::CONTEXT_BADGE => $e->getBadge(), self::CONTEXT_SITE_ID => $siteId ]
+			);
 		} catch ( SitelinkTargetNotFound $e ) {
-			return new ValidationError( self::CODE_TITLE_NOT_FOUND );
+			return new ValidationError( self::CODE_TITLE_NOT_FOUND, [ self::CONTEXT_SITE_ID => $siteId ] );
 		}
 
 		return $this->checkSitelinkConflict( $itemId, $this->deserializedSitelink );
@@ -81,7 +84,10 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 		return $existingItemWithSitelink && ( !$itemId || !( new ItemId( $itemId ) )->equals( $existingItemWithSitelink ) )
 			? new ValidationError(
 				self::CODE_SITELINK_CONFLICT,
-				[ self::CONTEXT_CONFLICT_ITEM_ID => $existingItemWithSitelink->getSerialization() ]
+				[
+					self::CONTEXT_CONFLICT_ITEM_ID => $existingItemWithSitelink->getSerialization(),
+					self::CONTEXT_SITE_ID => $siteLink->getSiteId(),
+				]
 			)
 			: null;
 	}

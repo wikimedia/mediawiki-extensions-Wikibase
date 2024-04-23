@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchSitelinksVali
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -65,7 +66,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->patchedSitelinksValidator = new PatchedSitelinksValidator(
+		$this->patchedSitelinksValidator = new PatchedSitelinksValidator( new SitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
 			new SiteLinkLookupSitelinkValidator(
 				new SitelinkDeserializer(
@@ -76,7 +77,7 @@ class PatchSitelinksTest extends TestCase {
 				),
 				new HashSiteLinkStore()
 			)
-		);
+		) );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 

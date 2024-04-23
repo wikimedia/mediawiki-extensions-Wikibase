@@ -53,8 +53,10 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
 		$this->sitelinkDeserializer->method( 'deserialize' )->willThrowException( $deserializerException );
 
-		$validationError = $this->newSitelinkValidator()->validate( 'Q444', 'enwiki', [] );
+		$siteId = 'enwiki';
+		$validationError = $this->newSitelinkValidator()->validate( 'Q444', $siteId, [] );
 		$this->assertSame( $validationErrorCode, $validationError->getCode() );
+		$this->assertEquals( [ SitelinkValidator::CONTEXT_SITE_ID => $siteId ], $validationError->getContext() );
 	}
 
 	public function provideInvalidSitelink(): \Generator {
