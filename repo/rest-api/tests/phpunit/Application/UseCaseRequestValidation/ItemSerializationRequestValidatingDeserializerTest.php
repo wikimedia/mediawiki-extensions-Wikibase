@@ -15,6 +15,9 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -47,9 +50,13 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	 * @dataProvider itemDescriptionsValidationErrorProvider
 	 * @dataProvider itemAliasesValidationErrorProvider
 	 * @dataProvider itemStatementsValidationErrorProvider
+	 * @dataProvider sitelinksValidationErrorProvider
 	 */
-	public function testGivenInvalidRequest_throws( ValidationError $validationError, UseCaseError $expectedError ): void {
-		$itemSerialization = [ 'item serialization stub' ];
+	public function testGivenInvalidRequest_throws(
+		ValidationError $validationError,
+		UseCaseError $expectedError,
+		array $itemSerialization = [ 'item serialization stub' ]
+	): void {
 		$request = $this->createStub( ItemSerializationRequest::class );
 		$request->method( 'getItem' )->willReturn( $itemSerialization );
 
@@ -525,6 +532,150 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				[
 					UseCaseError::CONTEXT_PATH => '/P1/0/value',
 					UseCaseError::CONTEXT_VALUE => 'invalid-value',
+				]
+			),
+		];
+	}
+
+	public static function sitelinksValidationErrorProvider(): Generator {
+		$site = 'enwiki';
+		yield SitelinksValidator::CODE_INVALID_SITELINK => [
+			new ValidationError( SitelinksValidator::CODE_INVALID_SITELINK, [
+				SitelinksValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::ITEM_DATA_INVALID_FIELD,
+				"Invalid input for 'sitelinks/$site'",
+				[ UseCaseError::CONTEXT_PATH => "sitelinks/$site", UseCaseError::CONTEXT_VALUE => 'invalid' ]
+			),
+			[ 'sitelinks' => [ $site => 'invalid' ] ],
+		];
+		yield SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE => [
+			new ValidationError( SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE, [
+				SitelinksValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::ITEM_DATA_INVALID_FIELD,
+				"Invalid input for 'sitelinks'",
+				[
+					UseCaseError::CONTEXT_PATH => 'sitelinks',
+					UseCaseError::CONTEXT_VALUE => [ [ 'title' => 'Whatever' ] ],
+				]
+			),
+			[ 'sitelinks' => [ [ 'title' => 'Whatever' ] ] ],
+		];
+		yield SiteIdValidator::CODE_INVALID_SITE_ID => [
+			new ValidationError( SiteIdValidator::CODE_INVALID_SITE_ID, [
+				SiteIdValidator::CONTEXT_SITE_ID_VALUE => 'invalid-site-id',
+			] ),
+			new UseCaseError(
+				UseCaseError::INVALID_SITE_ID,
+				"Not a valid site ID: 'invalid-site-id'",
+				[ UseCaseError::CONTEXT_SITE_ID => 'invalid-site-id' ]
+			),
+		];
+		yield SitelinkValidator::CODE_TITLE_MISSING => [
+			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::SITELINK_DATA_MISSING_TITLE,
+				'Mandatory sitelink title missing',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+
+			),
+		];
+		yield SitelinkValidator::CODE_EMPTY_TITLE => [
+			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::TITLE_FIELD_EMPTY,
+				'Title must not be empty',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+			),
+		];
+		yield SitelinkValidator::CODE_INVALID_TITLE => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::INVALID_TITLE_FIELD,
+				'Not a valid input for title field',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+			),
+		];
+		yield SitelinkValidator::CODE_INVALID_TITLE_TYPE => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::INVALID_TITLE_FIELD,
+				'Not a valid input for title field',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+			),
+		];
+		yield SitelinkValidator::CODE_INVALID_BADGES_TYPE => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
+				'Value of badges field is not a list',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+			),
+			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => 'not-a-list' ] ] ],
+		];
+		yield SitelinkValidator::CODE_INVALID_BADGE => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_BADGE => 'P3',
+			] ),
+			new UseCaseError(
+				UseCaseError::INVALID_INPUT_SITELINK_BADGE,
+				'Badge input is not an item ID: P3',
+				[
+					UseCaseError::CONTEXT_SITE_ID => $site,
+					UseCaseError::CONTEXT_BADGE => 'P3',
+				]
+			),
+		];
+		yield SitelinkValidator::CODE_BADGE_NOT_ALLOWED => [
+			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_BADGE => 'Q1',
+			] ),
+			new UseCaseError(
+				UseCaseError::ITEM_NOT_A_BADGE,
+				'Item ID provided as badge is not allowed as a badge: Q1',
+				[
+					UseCaseError::CONTEXT_SITE_ID => $site,
+					UseCaseError::CONTEXT_BADGE => 'Q1',
+				]
+			),
+		];
+		yield SitelinkValidator::CODE_TITLE_NOT_FOUND => [
+			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+			] ),
+			new UseCaseError(
+				UseCaseError::SITELINK_TITLE_NOT_FOUND,
+				'Page with title Whatever does not exist on the given site',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
+			),
+			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever' ] ] ],
+		];
+		yield SitelinkValidator::CODE_SITELINK_CONFLICT => [
+			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [
+				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID => 'Q666',
+			] ),
+			new UseCaseError(
+				UseCaseError::SITELINK_CONFLICT,
+				'Sitelink is already being used on Q666',
+				[
+					UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q666',
+					UseCaseError::CONTEXT_SITE_ID => $site,
 				]
 			),
 		];

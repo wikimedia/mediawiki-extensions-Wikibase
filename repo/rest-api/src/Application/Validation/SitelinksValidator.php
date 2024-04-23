@@ -11,6 +11,8 @@ use Wikibase\DataModel\SiteLinkList;
 class SitelinksValidator {
 
 	public const CODE_INVALID_SITELINK = 'invalid-sitelink';
+	public const CODE_SITELINKS_NOT_ASSOCIATIVE = 'invalid-sitelinks';
+
 	public const CONTEXT_SITE_ID = 'site-id';
 
 	private SiteIdValidator $siteIdValidator;
@@ -26,6 +28,10 @@ class SitelinksValidator {
 	 * @param string|null $itemId - null if validating a new item
 	 */
 	public function validate( ?string $itemId, array $serialization ): ?ValidationError {
+		if ( count( $serialization ) && array_is_list( $serialization ) ) {
+			return new ValidationError( self::CODE_SITELINKS_NOT_ASSOCIATIVE );
+		}
+
 		return $this->validateSiteIds( array_keys( $serialization ) )
 			?: $this->validateSitelinks( $itemId, $serialization );
 	}

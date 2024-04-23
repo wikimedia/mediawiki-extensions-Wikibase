@@ -9,9 +9,14 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
+	let localWikiId;
+	let testWikiPage;
 	let predicatePropertyId;
 
 	before( async () => {
+		localWikiId = await entityHelper.getLocalSiteId();
+		testWikiPage = utils.title( 'Sitelink test page' );
+		await entityHelper.createWikiPage( testWikiPage );
 		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 	} );
 
@@ -48,7 +53,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				} ]
 			};
 
-			const localWikiId = await entityHelper.getLocalSiteId();
 			const linkedArticle = utils.title( 'Potato' );
 			await entityHelper.createWikiPage( linkedArticle );
 			const sitelinks = { [ localWikiId ]: { title: linkedArticle } };
@@ -523,5 +527,176 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			);
 			assert.include( response.body.message, missingField );
 		} );
+
+		it( 'invalid site ID', async () => {
+			const invalidSiteId = 'not-a-valid-site-id';
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ invalidSiteId ]: { title: testWikiPage } }
+			} )
+				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-site-id', { 'site-id': invalidSiteId } );
+			assert.include( response.body.message, invalidSiteId );
+		} );
+
+		it( 'sitelinks not an object', async () => {
+			const invalidSitelinks = [ { title: testWikiPage } ];
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: invalidSitelinks
+			} ).makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-data-invalid-field',
+				{ path: 'sitelinks', value: invalidSitelinks }
+			);
+			assert.strictEqual( response.body.message, "Invalid input for 'sitelinks'" );
+		} );
+
+		it( 'title is empty', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: '' } }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'title-field-empty', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Title must not be empty' );
+		} );
+
+		it( 'sitelink title field not provided', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: {} }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'sitelink-data-missing-title', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
+		} );
+
+		it( 'invalid title', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: 'invalid title%00' } }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'invalid-title-field', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+		} );
+
+		it( 'title is not a string', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: [ 'array', 'not', 'allowed' ] } }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'invalid-title-field', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+		} );
+
+		it( 'badges is not an array', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: 'Q123' } }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'invalid-sitelink-badges-format', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Value of badges field is not a list' );
+		} );
+
+		it( 'badge is not an item ID', async () => {
+			const invalidBadge = 'P33';
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ invalidBadge ] } }
+			} ).makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'invalid-input-sitelink-badge',
+				{ 'site-id': localWikiId, badge: invalidBadge }
+			);
+			assert.strictEqual( response.body.message, `Badge input is not an item ID: ${invalidBadge}` );
+		} );
+
+		it( 'provided item is not an allowed badge', async () => {
+			const badge = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ badge ] } }
+			} ).makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-not-a-badge',
+				{ 'site-id': localWikiId, badge: badge }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Item ID provided as badge is not allowed as a badge: ${badge}`
+			);
+		} );
+
+		it( 'badge item does not exist', async () => {
+			const badge = 'Q99999999';
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ badge ] } }
+			} )
+				.withHeader( 'X-Wikibase-CI-Badges', badge )
+				.makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'item-not-a-badge',
+				{ 'site-id': localWikiId, badge: badge }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Item ID provided as badge is not allowed as a badge: ${badge}`
+			);
+		} );
+
+		it( 'sitelink title does not exist', async () => {
+			const title = utils.title( 'does-not-exist-' );
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: { title } }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'title-does-not-exist', { 'site-id': localWikiId } );
+			assert.strictEqual(
+				response.body.message,
+				`Page with title ${title} does not exist on the given site`
+			);
+		} );
+	} );
+
+	it( '409 sitelink conflict', async () => {
+		const linkedArticle = utils.title( 'Potato' );
+		await entityHelper.createWikiPage( linkedArticle );
+
+		const createItemWithSitelink = newCreateItemRequestBuilder( {
+			labels: { en: 'en-label' },
+			sitelinks: { [ localWikiId ]: { title: linkedArticle } }
+		} );
+		const existingItemWithSitelink = await createItemWithSitelink.makeRequest();
+		expect( existingItemWithSitelink ).to.have.status( 201 );
+
+		const response = await createItemWithSitelink.makeRequest();
+
+		assertValidError(
+			response,
+			409,
+			'sitelink-conflict',
+			{ 'site-id': localWikiId, 'matching-item-id': existingItemWithSitelink.body.id }
+		);
+		assert.include( response.body.message, existingItemWithSitelink.body.id );
 	} );
 } );

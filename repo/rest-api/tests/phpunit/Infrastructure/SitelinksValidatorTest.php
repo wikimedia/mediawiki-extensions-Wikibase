@@ -108,6 +108,12 @@ class SitelinksValidatorTest extends TestCase {
 		);
 	}
 
+	public function testGivenSitelinksNotAnAssociativeArray_returnsValidationError(): void {
+		$error = $this->newValidator()->validate( 'Q123', [ [ 'title' => 'Whatever' ] ] );
+
+		$this->assertSame( SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE, $error->getCode() );
+	}
+
 	private function newValidator(): SitelinksValidator {
 		return new SitelinksValidator( new SiteIdValidator( self::VALID_SITES ), $this->sitelinkValidator );
 	}

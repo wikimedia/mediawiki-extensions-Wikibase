@@ -14,15 +14,12 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemValidator
@@ -37,6 +34,7 @@ class ItemValidatorTest extends TestCase {
 	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
 	private ItemAliasesValidator $itemAliasesValidator;
 	private ItemStatementsValidator $itemStatementsValidator;
+	private SitelinksValidator $sitelinksValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -44,6 +42,7 @@ class ItemValidatorTest extends TestCase {
 		$this->itemLabelsAndDescriptionsValidator = $this->createStub( ItemLabelsAndDescriptionsValidator::class );
 		$this->itemAliasesValidator = $this->createStub( ItemAliasesValidator::class );
 		$this->itemStatementsValidator = $this->createStub( ItemStatementsValidator::class );
+		$this->sitelinksValidator = $this->createStub( SitelinksValidator::class );
 	}
 
 	public function testValid(): void {
@@ -54,12 +53,14 @@ class ItemValidatorTest extends TestCase {
 			'P567' => [ [ 'property' => [ 'id' => 'P567' ], 'value' => [ 'type' => 'somevalue' ] ] ],
 			'P789' => [ [ 'property' => [ 'id' => 'P789' ], 'value' => [ 'type' => 'somevalue' ] ] ],
 		];
+		$siteId = 'somewiki';
+		$sitelinks = [ $siteId => [ 'title' => 'test-title' ] ];
 
 		$itemSerialization = [
 			'labels' => $labels,
 			'descriptions' => $descriptions,
 			'aliases' => $aliases,
-			'sitelinks' => [ 'somewiki' => [ 'title' => 'test-title' ] ],
+			'sitelinks' => $sitelinks,
 			'statements' => $statementsSerialization,
 		];
 
@@ -70,6 +71,7 @@ class ItemValidatorTest extends TestCase {
 			NewStatement::someValueFor( 'P567' )->build(),
 			NewStatement::someValueFor( 'P789' )->build()
 		);
+		$deserializedSitelinks = new SiteLinkList( [ new SiteLink( $siteId, $sitelinks[$siteId]['title'] ) ] );
 
 		$this->itemLabelsAndDescriptionsValidator = $this->createMock( ItemLabelsAndDescriptionsValidator::class );
 		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
@@ -101,6 +103,12 @@ class ItemValidatorTest extends TestCase {
 			->method( 'getValidatedStatements' )
 			->willReturn( $deserializedStatements );
 
+		$this->sitelinksValidator = $this->createMock( SitelinksValidator::class );
+		$this->sitelinksValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( null, $sitelinks );
+		$this->sitelinksValidator->method( 'getValidatedSitelinks' )->willReturn( $deserializedSitelinks );
+
 		$validator = $this->newValidator();
 		$this->assertNull(
 			$validator->validate( $itemSerialization )
@@ -110,7 +118,7 @@ class ItemValidatorTest extends TestCase {
 			new Item(
 				null,
 				new Fingerprint( $deserializedLabels, $deserializedDescriptions, $deserializedAliases ),
-				new SiteLinkList( [ new SiteLink( 'somewiki', 'test-title' ) ] ),
+				$deserializedSitelinks,
 				$deserializedStatements
 			),
 			$validator->getValidatedItem()
@@ -151,6 +159,21 @@ class ItemValidatorTest extends TestCase {
 		$this->itemAliasesValidator = $this->createMock( ItemAliasesValidator::class );
 		$this->itemAliasesValidator->method( 'validate' )
 			->with( $invalidSerialization[ 'aliases' ] )
+			->willReturn( $expectedError );
+
+		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
+	}
+
+	public function testSitelinksValidationError(): void {
+		$invalidSerialization = [
+			'labels' => [ 'en' => 'label' ],
+			'sitelinks' => [ 'invalid' => 'sitelinks' ],
+		];
+
+		$expectedError = $this->createStub( ValidationError::class );
+		$this->sitelinksValidator = $this->createMock( SitelinksValidator::class );
+		$this->sitelinksValidator->method( 'validate' )
+			->with( null, $invalidSerialization[ 'sitelinks' ] )
 			->willReturn( $expectedError );
 
 		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
@@ -211,14 +234,7 @@ class ItemValidatorTest extends TestCase {
 			$this->itemLabelsAndDescriptionsValidator,
 			$this->itemAliasesValidator,
 			$this->itemStatementsValidator,
-			new SitelinksDeserializer(
-				new SitelinkDeserializer(
-					'/\?/',
-					[ 'Q123' ],
-					new SameTitleSitelinkTargetResolver(),
-					new DummyItemRevisionMetaDataRetriever()
-				)
-			),
+			$this->sitelinksValidator
 		);
 	}
 }

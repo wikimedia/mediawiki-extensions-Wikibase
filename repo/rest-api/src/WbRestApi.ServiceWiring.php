@@ -21,7 +21,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -362,7 +361,15 @@ return [
 						new AliasesDeserializer()
 					),
 					new ItemStatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
-					new SitelinksDeserializer( WbRestApi::getSitelinkDeserializer( $services ) )
+					new SitelinksValidator(
+						new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
+							WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
+						) ),
+						new SiteLinkLookupSitelinkValidator(
+							WbRestApi::getSitelinkDeserializer( $services ),
+							WikibaseRepo::getStore( $services )->newSiteLinkStore()
+						),
+					)
 				)
 			);
 		},
