@@ -14,10 +14,15 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
+use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
@@ -31,7 +36,10 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 class ItemValidatorTest extends TestCase {
 
 	public const MAX_LENGTH = 50;
-	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
+	private LabelsSyntaxValidator $labelsSyntaxValidator;
+	private ItemLabelsContentsValidator $labelsContentsValidator;
+	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
+	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
 	private ItemAliasesValidator $itemAliasesValidator;
 	private ItemStatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
@@ -39,7 +47,10 @@ class ItemValidatorTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemLabelsAndDescriptionsValidator = $this->createStub( ItemLabelsAndDescriptionsValidator::class );
+		$this->labelsSyntaxValidator = $this->createStub( LabelsSyntaxValidator::class );
+		$this->labelsContentsValidator = $this->createStub( ItemLabelsContentsValidator::class );
+		$this->descriptionsSyntaxValidator = $this->createStub( DescriptionsSyntaxValidator::class );
+		$this->descriptionsContentsValidator = $this->createStub( ItemDescriptionsContentsValidator::class );
 		$this->itemAliasesValidator = $this->createStub( ItemAliasesValidator::class );
 		$this->itemStatementsValidator = $this->createStub( ItemStatementsValidator::class );
 		$this->sitelinksValidator = $this->createStub( SitelinksValidator::class );
@@ -73,15 +84,33 @@ class ItemValidatorTest extends TestCase {
 		);
 		$deserializedSitelinks = new SiteLinkList( [ new SiteLink( $siteId, $sitelinks[$siteId]['title'] ) ] );
 
-		$this->itemLabelsAndDescriptionsValidator = $this->createMock( ItemLabelsAndDescriptionsValidator::class );
-		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
+		$this->labelsSyntaxValidator = $this->createMock( LabelsSyntaxValidator::class );
+		$this->labelsSyntaxValidator->expects( $this->once() )
 			->method( 'validate' )
-			->with( $labels, $descriptions )
-			->willReturn( null );
-		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
+			->with( $labels );
+		$this->labelsSyntaxValidator->expects( $this->atLeastOnce() )
+			->method( 'getPartiallyValidatedLabels' )
+			->willReturn( new PartiallyValidatedLabels( $deserializedLabels ) );
+		$this->labelsContentsValidator = $this->createMock( ItemLabelsContentsValidator::class );
+		$this->labelsContentsValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( new PartiallyValidatedLabels( $deserializedLabels ), new PartiallyValidatedDescriptions( $deserializedDescriptions ) );
+		$this->labelsContentsValidator->expects( $this->once() )
 			->method( 'getValidatedLabels' )
 			->willReturn( $deserializedLabels );
-		$this->itemLabelsAndDescriptionsValidator->expects( $this->once() )
+
+		$this->descriptionsSyntaxValidator = $this->createMock( DescriptionsSyntaxValidator::class );
+		$this->descriptionsSyntaxValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $descriptions );
+		$this->descriptionsSyntaxValidator->expects( $this->atLeastOnce() )
+			->method( 'getPartiallyValidatedDescriptions' )
+			->willReturn( new PartiallyValidatedDescriptions( $deserializedDescriptions ) );
+		$this->descriptionsContentsValidator = $this->createMock( ItemDescriptionsContentsValidator::class );
+		$this->descriptionsContentsValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( new PartiallyValidatedDescriptions( $deserializedDescriptions ), new PartiallyValidatedLabels( $deserializedLabels ) );
+		$this->descriptionsContentsValidator->expects( $this->once() )
 			->method( 'getValidatedDescriptions' )
 			->willReturn( $deserializedDescriptions );
 
@@ -130,23 +159,6 @@ class ItemValidatorTest extends TestCase {
 
 		$this->assertInstanceOf( ValidationError::class, $error );
 		$this->assertSame( ItemValidator::CODE_MISSING_LABELS_AND_DESCRIPTIONS, $error->getCode() );
-	}
-
-	public function testLabelsOrDescriptionsValidationError(): void {
-		$invalidSerialization = [
-			'labels' => [ 'invalid' => 'labels' ],
-			'descriptions' => [ 'invalid' => 'descriptions' ],
-		];
-
-		$expectedError = $this->createStub( ValidationError::class );
-		$this->itemLabelsAndDescriptionsValidator =
-			$this->createMock( ItemLabelsAndDescriptionsValidator::class );
-		$this->itemLabelsAndDescriptionsValidator
-			->method( 'validate' )
-			->with( $invalidSerialization[ 'labels' ], $invalidSerialization[ 'descriptions' ], )
-			->willReturn( $expectedError );
-
-		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
 	}
 
 	public function testAliasesValidationError(): void {
@@ -223,7 +235,39 @@ class ItemValidatorTest extends TestCase {
 		);
 	}
 
-	public function testGetValidatedItem_calledBeforeValidate(): void {
+	public function testLabelSyntaxError(): void {
+		$expectedValidationError = $this->createStub( ValidationError::class );
+		$this->labelsSyntaxValidator = $this->createStub( LabelsSyntaxValidator::class );
+		$this->labelsSyntaxValidator->method( 'validate' )->willReturn( $expectedValidationError );
+
+		$this->assertSame( $expectedValidationError, $this->newValidator()->validate( [ 'labels' => [ 'en' => 'foo' ] ] ) );
+	}
+
+	public function testDescriptionsSyntaxError(): void {
+		$expectedValidationError = $this->createStub( ValidationError::class );
+		$this->descriptionsSyntaxValidator = $this->createStub( DescriptionsSyntaxValidator::class );
+		$this->descriptionsSyntaxValidator->method( 'validate' )->willReturn( $expectedValidationError );
+
+		$this->assertSame( $expectedValidationError, $this->newValidator()->validate( [ 'descriptions' => [ 'en' => 'foo' ] ] ) );
+	}
+
+	public function testLabelsContentError(): void {
+		$expectedValidationError = $this->createStub( ValidationError::class );
+		$this->labelsContentsValidator = $this->createStub( ItemLabelsContentsValidator::class );
+		$this->labelsContentsValidator->method( 'validate' )->willReturn( $expectedValidationError );
+
+		$this->assertSame( $expectedValidationError, $this->newValidator()->validate( [ 'labels' => [ 'en' => 'foo' ] ] ) );
+	}
+
+	public function testDescriptionsContentError(): void {
+		$expectedValidationError = $this->createStub( ValidationError::class );
+		$this->descriptionsContentsValidator = $this->createStub( ItemDescriptionsContentsValidator::class );
+		$this->descriptionsContentsValidator->method( 'validate' )->willReturn( $expectedValidationError );
+
+		$this->assertSame( $expectedValidationError, $this->newValidator()->validate( [ 'descriptions' => [ 'en' => 'foo' ] ] ) );
+	}
+
+	public function testGetValidatedItemCalledBeforeValidate_throws(): void {
 		$this->expectException( LogicException::class );
 
 		$this->newValidator()->getValidatedItem();
@@ -231,7 +275,10 @@ class ItemValidatorTest extends TestCase {
 
 	private function newValidator(): ItemValidator {
 		return new ItemValidator(
-			$this->itemLabelsAndDescriptionsValidator,
+			$this->labelsSyntaxValidator,
+			$this->labelsContentsValidator,
+			$this->descriptionsSyntaxValidator,
+			$this->descriptionsContentsValidator,
 			$this->itemAliasesValidator,
 			$this->itemStatementsValidator,
 			$this->sitelinksValidator

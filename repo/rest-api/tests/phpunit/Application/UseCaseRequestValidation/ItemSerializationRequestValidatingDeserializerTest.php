@@ -8,12 +8,13 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
@@ -115,10 +116,23 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	public function itemLabelsValidationErrorProvider(): Generator {
+		$invalidLabels = [ 'not an associative array' ];
+		yield 'invalid labels' => [
+			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
+			new UseCaseError(
+				UseCaseError::ITEM_DATA_INVALID_FIELD,
+				"Invalid input for 'labels'",
+				[
+					UseCaseError::CONTEXT_PATH => 'labels',
+					UseCaseError::CONTEXT_VALUE => $invalidLabels,
+				]
+			),
+			[ 'labels' => $invalidLabels ],
+		];
 		yield 'empty label' => [
 			new ValidationError(
-				ItemLabelValidator::CODE_EMPTY,
-				[ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
+				[ LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::LABEL_EMPTY,
@@ -146,17 +160,17 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			),
 		];
 
-		yield 'invalid label deserialization' => [
+		yield 'invalid label type' => [
 			new ValidationError(
-				ItemLabelValidator::CODE_INVALID,
+				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
 				[
-					ItemLabelValidator::CONTEXT_LABEL => 22,
-					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
+					LabelsSyntaxValidator::CONTEXT_FIELD_LABEL => [ 'invalid', 'label', 'type' ],
+					LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_LABEL,
-				'Not a valid label: 22',
+				'Not a valid label: ["invalid","label","type"]',
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
@@ -232,13 +246,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	public function itemDescriptionsValidationErrorProvider(): Generator {
 		$invalidDescriptions = [ 'not a valid descriptions array' ];
 		yield 'invalid descriptions' => [
-			new ValidationError(
-				ItemLabelsAndDescriptionsValidator::CODE_INVALID_FIELD,
-				[
-					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME => 'descriptions',
-					ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE => $invalidDescriptions,
-				]
-			),
+			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
 			new UseCaseError(
 				UseCaseError::ITEM_DATA_INVALID_FIELD,
 				"Invalid input for 'descriptions'",
@@ -247,11 +255,12 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
 				]
 			),
+			[ 'descriptions' => $invalidDescriptions ],
 		];
 		yield 'empty description' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_EMPTY,
-				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
+				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
+				[ DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::DESCRIPTION_EMPTY,
@@ -277,12 +286,12 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 		];
-		yield 'invalid description deserialization' => [
+		yield 'invalid description type' => [
 			new ValidationError(
-				ItemDescriptionValidator::CODE_INVALID,
+				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
 				[
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 22,
-					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
+					DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION => 22,
+					DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
