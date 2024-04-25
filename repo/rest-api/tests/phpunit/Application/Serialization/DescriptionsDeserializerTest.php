@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer

@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use DataValues\DataValue;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 
 /**
  * @license GPL-2.0-or-later

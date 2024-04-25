@@ -4,9 +4,9 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DuplicateAliasException;
-use Wikibase\Repo\RestApi\Application\Serialization\EmptyAliasException;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;

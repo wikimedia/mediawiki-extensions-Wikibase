@@ -5,6 +5,12 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 
 /**
  * @license GPL-2.0-or-later

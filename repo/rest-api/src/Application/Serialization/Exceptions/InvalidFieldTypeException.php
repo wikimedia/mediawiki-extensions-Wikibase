@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization;
+namespace Wikibase\Repo\RestApi\Application\Serialization\Exceptions;
 
 use Throwable;
 
 /**
  * @license GPL-2.0-or-later
  */
-class UnexpectedFieldException extends SerializationException {
+class InvalidFieldTypeException extends SerializationException {
 
 	private string $field;
 

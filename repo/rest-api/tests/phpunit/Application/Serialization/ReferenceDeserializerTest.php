@@ -9,8 +9,8 @@ use Throwable;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 

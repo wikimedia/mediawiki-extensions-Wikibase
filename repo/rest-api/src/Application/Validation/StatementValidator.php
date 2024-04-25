@@ -4,8 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 
 /**

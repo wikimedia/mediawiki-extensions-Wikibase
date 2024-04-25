@@ -8,8 +8,8 @@ use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\ValueDeserializer;
 use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
 

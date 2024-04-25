@@ -5,6 +5,8 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 
 /**
  * @license GPL-2.0-or-later

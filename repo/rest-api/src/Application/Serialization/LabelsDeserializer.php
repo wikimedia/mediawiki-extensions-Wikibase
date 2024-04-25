@@ -4,6 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidLabelException;
 
 /**
  * @license GPL-2.0-or-later

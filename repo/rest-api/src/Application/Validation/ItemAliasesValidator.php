@@ -5,9 +5,9 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DuplicateAliasException;
-use Wikibase\Repo\RestApi\Application\Serialization\EmptyAliasException;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidAliasesInLanguageException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 
 /**
  * @license GPL-2.0-or-later

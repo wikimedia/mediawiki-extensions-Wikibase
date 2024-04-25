@@ -5,10 +5,10 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\EmptyLabelException;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\InvalidLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidDescriptionException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidLabelException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 
 /**

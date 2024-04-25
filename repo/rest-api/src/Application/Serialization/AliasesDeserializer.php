@@ -4,6 +4,9 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 
 /**
  * @license GPL-2.0-or-later
