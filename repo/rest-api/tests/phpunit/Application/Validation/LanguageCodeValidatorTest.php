@@ -29,7 +29,6 @@ class LanguageCodeValidatorTest extends TestCase {
 	public function testGivenInvalidLanguageCode_returnsValidationError( string $invalidLanguageCode ): void {
 		$validLanguageCodes = [ 'ar', 'de', 'en' ];
 		$validator = new LanguageCodeValidator( $validLanguageCodes );
-		$invalidLanguageCode = 'unknown-language-code';
 
 		$error = $validator->validate( $invalidLanguageCode );
 
