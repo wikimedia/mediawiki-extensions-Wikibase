@@ -9,7 +9,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
@@ -120,7 +122,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 			[ $language => $label ],
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
-				[ ItemLabelValidator::CONTEXT_LABEL => $label ],
+				[ ItemLabelValidator::CONTEXT_LABEL => $label, ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
 			),
 			UseCaseError::PATCHED_LABEL_INVALID,
 			"Changed label for '$language' is invalid: {$label}",
@@ -248,9 +250,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	private function newValidator(): PatchedLabelsValidator {
 		return new PatchedLabelsValidator(
-			new LabelsDeserializer(),
-			$this->labelValidator,
-			$this->languageCodeValidator
+			new LabelsSyntaxValidator(
+				new LabelsDeserializer(),
+				$this->languageCodeValidator
+			),
+			new ItemLabelsContentsValidator( $this->labelValidator )
 		);
 	}
 

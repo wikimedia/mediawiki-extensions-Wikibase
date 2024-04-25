@@ -16,9 +16,10 @@ class ItemDescriptionsContentsValidator {
 		$this->descriptionValidator = $descriptionValidator;
 	}
 
-	public function validate( PartiallyValidatedDescriptions $descriptions, TermList $labels ): ?ValidationError {
-		foreach ( $descriptions as $description ) {
-			$error = $this->descriptionValidator->validate( $description->getLanguageCode(), $description->getText(), $labels );
+	public function validate( PartiallyValidatedDescriptions $descriptions, TermList $labels, array $languages = null ): ?ValidationError {
+		$languages ??= array_keys( $descriptions->toTextArray() );
+		foreach ( $languages as $language ) {
+			$error = $this->descriptionValidator->validate( $language, $descriptions->getByLanguage( $language )->getText(), $labels );
 			if ( $error ) {
 				return $error;
 			}

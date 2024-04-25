@@ -5,30 +5,24 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
 use LogicException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyLabelException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
  */
 class PatchedLabelsValidator {
 
-	private LabelsDeserializer $labelsDeserializer;
-	private ItemLabelValidator $labelValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private LabelsSyntaxValidator $syntaxValidator;
+	private ItemLabelsContentsValidator $contentsValidator;
 
-	public function __construct(
-		LabelsDeserializer $labelsDeserializer,
-		ItemLabelValidator $labelValidator,
-		LanguageCodeValidator $languageCodeValidator
-	) {
-		$this->labelsDeserializer = $labelsDeserializer;
-		$this->labelValidator = $labelValidator;
-		$this->languageCodeValidator = $languageCodeValidator;
+	public function __construct( LabelsSyntaxValidator $syntaxValidator, ItemLabelsContentsValidator $contentsValidator ) {
+		$this->syntaxValidator = $syntaxValidator;
+		$this->contentsValidator = $contentsValidator;
 	}
 
 	/**
@@ -39,73 +33,66 @@ class PatchedLabelsValidator {
 		TermList $originalDescriptions,
 		array $labelsSerialization
 	): TermList {
-		$patchedLabels = $this->deserializeLabels( $labelsSerialization );
-		foreach ( $this->getModifiedLabels( $originalLabels, $patchedLabels ) as $label ) {
-			$this->validateLanguageCode( $label );
-			$this->validateLabel( $label, $originalDescriptions );
+		$error = $this->syntaxValidator->validate( $labelsSerialization ) ?:
+			$this->contentsValidator->validate(
+				$this->syntaxValidator->getPartiallyValidatedLabels(),
+				$originalDescriptions,
+				$this->getModifiedLanguages( $originalLabels, $this->syntaxValidator->getPartiallyValidatedLabels() )
+			);
+
+		if ( $error ) {
+			$this->throwUseCaseError( $error );
 		}
 
-		return $patchedLabels;
+		return $this->contentsValidator->getValidatedLabels();
 	}
 
-	private function deserializeLabels( array $labelsSerialization ): TermList {
-		try {
-			$labels = $this->labelsDeserializer->deserialize( $labelsSerialization );
-		} catch ( EmptyLabelException $e ) {
-			$languageCode = $e->getField();
-			throw new UseCaseError(
-				UseCaseError::PATCHED_LABEL_EMPTY,
-				"Changed label for '$languageCode' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-			);
-		} catch ( InvalidFieldException $e ) {
-			$languageCode = $e->getField();
-			$invalidLabel = json_encode( $e->getValue() );
-			throw new UseCaseError(
-				UseCaseError::PATCHED_LABEL_INVALID,
-				"Changed label for '$languageCode' is invalid: $invalidLabel",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-					UseCaseError::CONTEXT_VALUE => $invalidLabel,
-				]
-			);
-		}
-
-		return $labels;
-	}
-
-	private function getModifiedLabels( TermList $original, TermList $modified ): array {
-		return array_filter(
+	private function getModifiedLanguages( TermList $original, TermList $modified ): array {
+		return array_keys( array_filter(
 			iterator_to_array( $modified ),
 			fn( Term $label ) => !$original->hasTermForLanguage( $label->getLanguageCode() ) ||
 				!$original->getByLanguage( $label->getLanguageCode() )->equals( $label )
-		);
+		) );
 	}
 
-	private function validateLabel( Term $label, TermList $descriptions ): void {
-		$validationError = $this->labelValidator->validate( $label->getLanguageCode(), $label->getText(), $descriptions );
-		if ( !$validationError ) {
-			return;
-		}
-
+	/**
+	 * @return never
+	 */
+	private function throwUseCaseError( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
+			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
+				$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
+					"Not a valid language code '$languageCode' in changed labels",
+					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
+				);
+			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
+				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_LABEL_EMPTY,
+					"Changed label for '$languageCode' cannot be empty",
+					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
+				);
+			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 			case ItemLabelValidator::CODE_INVALID:
+				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+				$value = $context[ItemLabelValidator::CONTEXT_LABEL];
+				$stringValue = is_string( $value ) ? $value : json_encode( $value );
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$label->getLanguageCode()}' is invalid: {$label->getText()}",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
-						UseCaseError::CONTEXT_VALUE => $label->getText(),
-					]
+					"Changed label for '{$language}' is invalid: {$stringValue}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $stringValue ]
 				);
 			case ItemLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
+				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_TOO_LONG,
-					"Changed label for '{$label->getLanguageCode()}' must not be more than $maxLabelLength characters long",
+					"Changed label for '{$language}' must not be more than $maxLabelLength characters long",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $label->getLanguageCode(),
+						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
 						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_LABEL],
 						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
 					]
@@ -119,10 +106,10 @@ class PatchedLabelsValidator {
 					"Item $duplicateItemId already has label '$label' associated with language " .
 					"code $languageCode, using the same description text.",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
+						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
+						UseCaseError::CONTEXT_LABEL => $label,
 						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $duplicateItemId,
 					]
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
@@ -136,17 +123,4 @@ class PatchedLabelsValidator {
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
 	}
-
-	private function validateLanguageCode( Term $label ): void {
-		$validationError = $this->languageCodeValidator->validate( $label->getLanguageCode() );
-		if ( $validationError ) {
-			$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE];
-			throw new UseCaseError(
-				UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
-				"Not a valid language code '$languageCode' in changed labels",
-				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-			);
-		}
-	}
-
 }

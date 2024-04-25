@@ -767,12 +767,16 @@ return [
 			new LabelsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemLabelsValidator(
-				new LabelsDeserializer(),
-				new TermValidatorFactoryItemLabelValidator(
-					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services )
+				new LabelsSyntaxValidator(
+					new LabelsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				new ItemLabelsContentsValidator(
+					new TermValidatorFactoryItemLabelValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WikibaseRepo::getItemTermsCollisionDetector( $services )
+					)
+				)
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services ),
