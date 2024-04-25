@@ -13,6 +13,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -145,6 +146,13 @@ class StatementDeserializerTest extends TestCase {
 	}
 
 	public static function invalidSerializationProvider(): Generator {
+		yield 'statement is not associative array' => [
+			new InvalidFieldTypeException( '' ),
+			[
+				[ 'id' => 'P123' ],
+				[ 'type' => 'somevalue' ],
+			],
+		];
 		yield 'invalid id field type' => [
 			new InvalidFieldException( 'id', [ 'invalid' ], '/id' ),
 			[

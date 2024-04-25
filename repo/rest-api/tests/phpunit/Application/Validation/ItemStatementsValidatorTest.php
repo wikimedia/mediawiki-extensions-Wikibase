@@ -85,37 +85,63 @@ class ItemStatementsValidatorTest extends TestCase {
 		);
 	}
 
-	public function testInvalidStatements_returnsValidationError(): void {
-		$invalidStatements = [ 'not a valid statements array' ];
-
-		$this->assertEquals(
-			new ValidationError(
-				ItemStatementsValidator::CODE_INVALID_STATEMENTS,
-				[ ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements ]
-			),
-			$this->newValidator()->validate( $invalidStatements )
-		);
+	/**
+	 * @dataProvider provideInvalidStatements
+	 */
+	public function testInvalidStatements_returnsValidationError( array $invalidStatements, ValidationError $expectedError ): void {
+		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidStatements ) );
 	}
 
-	public function testInvalidStatementRank_returnsValidationError(): void {
-		$predicateId = 'P567';
+	public function provideInvalidStatements(): Generator {
+		$invalidStatements = [ 'not a valid statements array' ];
+		yield 'statements field is not an associative array' => [
+			$invalidStatements,
+			new ValidationError(
+				ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				[
+					ItemStatementsValidator::CONTEXT_PATH => '',
+					ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+				]
+			),
+		];
+
+		$invalidStatementGroup = [
+			'property' => [ 'id' => 'P123' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'statement group is not a sequential array (list)' => [
+			[ 'P123' => $invalidStatementGroup ],
+			new ValidationError(
+				ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+				[ ItemStatementsValidator::CONTEXT_PATH => 'P123' ]
+			),
+		];
+
+		$invalidStatement = 'somevalue';
+		yield 'statement in statement group is not an array' => [
+			[ 'P123' => [ $invalidStatement ] ],
+			new ValidationError(
+				ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY,
+				[ ItemStatementsValidator::CONTEXT_PATH => 'P123/0' ]
+			),
+		];
+
 		$invalidStatement = [
-			'property' => [ 'id' => $predicateId ],
+			'property' => [ 'id' => 'P567' ],
 			'value' => [ 'type' => 'somevalue' ],
 			'rank' => 'not-a-valid-rank',
 		];
-
-		$this->assertEquals(
+		yield 'rank field in a statement is incorrect' => [
+			[ 'P567' => [ $invalidStatement ] ],
 			new ValidationError(
 				ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => "$predicateId/0/rank",
+					ItemStatementsValidator::CONTEXT_PATH => 'P567/0/rank',
 					ItemStatementsValidator::CONTEXT_FIELD => 'rank',
 					ItemStatementsValidator::CONTEXT_VALUE => 'not-a-valid-rank',
 				]
 			),
-			$this->newValidator()->validate( [ $predicateId => [ $invalidStatement ] ] )
-		);
+		];
 	}
 
 	public function testGivenGetValidatedStatementsCalledBeforeValidate_throws(): void {

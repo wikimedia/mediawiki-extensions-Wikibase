@@ -4142,6 +4142,12 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
               },
+              "invalid-statement-group-type": {
+                "$ref": "#/components/examples/InvalidStatementGroupTypeExample"
+              },
+              "invalid-statement-type": {
+                "$ref": "#/components/examples/InvalidStatementTypeExample"
+              },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
               },
@@ -8259,6 +8265,24 @@
           },
           "qualifiers": [],
           "references": []
+        }
+      },
+      "InvalidStatementGroupTypeExample": {
+        "value": {
+          "code": "invalid-statement-group-type",
+          "message": "Not a valid statement group",
+          "context": {
+            "path": "{property_id}"
+          }
+        }
+      },
+      "InvalidStatementTypeExample": {
+        "value": {
+          "code": "invalid-statement-type",
+          "message": "Not a valid statement type",
+          "context": {
+            "path": "{property_id}/{index}"
+          }
         }
       }
     }

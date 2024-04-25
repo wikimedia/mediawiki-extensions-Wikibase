@@ -33,6 +33,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
 	public const INVALID_SITE_ID = 'invalid-site-id';
+	public const INVALID_STATEMENT_TYPE = 'invalid-statement-type';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_SUBJECT_ID = 'invalid-statement-subject-id';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
@@ -97,8 +98,8 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_SITELINK_BADGES_FORMAT = 'invalid-sitelink-badges-format';
 	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
-
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
+	public const INVALID_STATEMENT_GROUP_TYPE = 'invalid-statement-group-type';
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
@@ -151,6 +152,7 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATCH_OPERATION => [ self::CONTEXT_OPERATION ],
 		self::INVALID_PROPERTY_ID => [ self::CONTEXT_PROPERTY_ID ],
 		self::INVALID_SITE_ID => [],
+		self::INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::INVALID_STATEMENT_ID => [],
 		self::INVALID_STATEMENT_SUBJECT_ID => [ self::CONTEXT_SUBJECT_ID ],
 		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [
@@ -218,6 +220,7 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_LABEL,
 			self::CONTEXT_MATCHING_PROPERTY_ID,
 		],
+		self::INVALID_STATEMENT_GROUP_TYPE => [ self::CONTEXT_PATH ],
 		self::STATEMENT_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::STATEMENT_NOT_FOUND => [],

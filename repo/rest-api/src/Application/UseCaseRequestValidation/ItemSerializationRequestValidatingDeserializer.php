@@ -249,8 +249,20 @@ class ItemSerializationRequestValidatingDeserializer {
 	private function handleStatementsValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemStatementsValidator::CODE_INVALID_STATEMENTS:
+			case ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'statements', 'statements', $context[ItemStatementsValidator::CONTEXT_STATEMENTS] );
+			case ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
+				throw new UseCaseError(
+					UseCaseError::INVALID_STATEMENT_GROUP_TYPE,
+					'Not a valid statement group',
+					[ UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH] ]
+				);
+			case ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY:
+				throw new UseCaseError(
+					UseCaseError::INVALID_STATEMENT_TYPE,
+					'Not a valid statement type',
+					[ UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH] ]
+				);
 			case ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_DATA_INVALID_FIELD,

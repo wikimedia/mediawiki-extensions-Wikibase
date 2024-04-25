@@ -970,5 +970,23 @@
 			"qualifiers": [],
 			"references": []
 		}
+	},
+	"InvalidStatementGroupTypeExample": {
+		"value": {
+			"code": "invalid-statement-group-type",
+			"message": "Not a valid statement group",
+			"context": {
+				"path": "{property_id}"
+			}
+		}
+	},
+	"InvalidStatementTypeExample": {
+		"value": {
+			"code": "invalid-statement-type",
+			"message": "Not a valid statement type",
+			"context": {
+				"path": "{property_id}/{index}"
+			}
+		}
 	}
 }

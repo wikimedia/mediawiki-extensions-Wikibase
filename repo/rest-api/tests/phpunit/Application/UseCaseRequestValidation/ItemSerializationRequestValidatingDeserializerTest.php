@@ -501,13 +501,40 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		$invalidStatements = [ 'not valid statements' ];
 		yield 'invalid statements array' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_INVALID_STATEMENTS,
-				[ ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements ]
+				ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				[
+					ItemStatementsValidator::CONTEXT_PATH => 'statements',
+					ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+				]
 			),
 			new UseCaseError(
 				UseCaseError::ITEM_DATA_INVALID_FIELD,
 				"Invalid input for 'statements'",
 				[ UseCaseError::CONTEXT_PATH => 'statements', UseCaseError::CONTEXT_VALUE => $invalidStatements ]
+			),
+		];
+
+		yield 'statement group not sequential' => [
+			new ValidationError(
+				ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+				[ ItemStatementsValidator::CONTEXT_PATH => 'P1' ]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_GROUP_TYPE,
+				'Not a valid statement group',
+				[ UseCaseError::CONTEXT_PATH => 'P1' ]
+			),
+		];
+
+		yield 'invalid statement type' => [
+			new ValidationError(
+				ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY,
+				[ ItemStatementsValidator::CONTEXT_PATH => 'P1/0' ]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_TYPE,
+				'Not a valid statement type',
+				[ UseCaseError::CONTEXT_PATH => 'P1/0' ]
 			),
 		];
 

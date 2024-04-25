@@ -6,6 +6,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 
 /**
@@ -25,10 +26,15 @@ class StatementDeserializer {
 	}
 
 	/**
+	 * @throws InvalidFieldTypeException
 	 * @throws InvalidFieldException
 	 * @throws MissingFieldException
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Statement {
+		if ( count( $serialization ) && array_is_list( $serialization ) ) {
+			throw new InvalidFieldTypeException( $basePath );
+		}
+
 		$serialization['id'] ??= null;
 		$serialization['qualifiers'] ??= [];
 		$serialization['references'] ??= [];
@@ -58,6 +64,7 @@ class StatementDeserializer {
 				array_keys( $serialization['references'] ),
 				$serialization['references']
 			) ),
+			// @phan-suppress-next-line PhanTypeMismatchArgument - 'id' has been checked that it is ?string above
 			$serialization['id']
 		);
 		$statement->setRank( array_flip( StatementSerializer::RANK_LABELS )[$serialization['rank']] );

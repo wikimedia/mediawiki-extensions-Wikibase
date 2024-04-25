@@ -501,6 +501,37 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, duplicateAlias );
 		} );
 
+		it( 'invalid statement group type', async () => {
+			const validStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const invalidStatementGroupType = { 1: validStatement };
+
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				statements: { [ predicatePropertyId ]: invalidStatementGroupType }
+			} ).assertInvalidRequest().makeRequest();
+
+			assertValidError( response, 400, 'invalid-statement-group-type', { path: predicatePropertyId } );
+			assert.equal( response.body.message, 'Not a valid statement group' );
+		} );
+
+		it( 'invalid statement type', async () => {
+			const invalidStatement = [ {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			} ];
+
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
+			} ).assertInvalidRequest().makeRequest();
+
+			assertValidError( response, 400, 'invalid-statement-type', { path: `${predicatePropertyId}/0` } );
+			assert.equal( response.body.message, 'Not a valid statement type' );
+		} );
+
 		it( 'invalid statement field', async () => {
 			const invalidValue = 'not-a-valid-rank';
 			const invalidStatement = {
@@ -509,14 +540,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				rank: invalidValue
 			};
 
-			const itemToCreate = { labels: { en: 'en-label' } };
-			itemToCreate.statements = {};
-			itemToCreate.statements[ predicatePropertyId ] = [];
-			itemToCreate.statements[ predicatePropertyId ].push( invalidStatement );
-
-			const response = await newCreateItemRequestBuilder( itemToCreate )
-				.assertInvalidRequest()
-				.makeRequest();
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
+			} ).assertInvalidRequest().makeRequest();
 
 			assertValidError(
 				response,
@@ -524,7 +551,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				'statement-data-invalid-field',
 				{ path: `${predicatePropertyId}/0/rank`, value: invalidValue }
 			);
-
 			assert.include( response.body.message, 'rank' );
 		} );
 

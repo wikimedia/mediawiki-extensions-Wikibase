@@ -5,6 +5,8 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidStatementsException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 
@@ -12,7 +14,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
  * @license GPL-2.0-or-later
  */
 class ItemStatementsValidator {
-	public const CODE_INVALID_STATEMENTS = 'invalid-statements';
+
+	public const CODE_STATEMENTS_NOT_ASSOCIATIVE = 'invalid-statements-type';
+	public const CODE_STATEMENT_GROUP_NOT_SEQUENTIAL = 'invalid-statement-group-type';
+	public const CODE_STATEMENT_NOT_ARRAY = 'invalid-statement-type';
 	public const CODE_INVALID_STATEMENT_DATA = 'statement-data-invalid-field';
 	public const CODE_MISSING_STATEMENT_DATA = 'statement-data-missing-field';
 
@@ -30,20 +35,28 @@ class ItemStatementsValidator {
 	}
 
 	public function validate( array $statements ): ?ValidationError {
-		if ( count( $statements ) === 0 ) {
-			$this->deserializedStatements = new StatementList();
-			return null;
-		}
-		if ( array_is_list( $statements ) ) {
-			return new ValidationError( self::CODE_INVALID_STATEMENTS, [ self::CONTEXT_STATEMENTS => $statements ] );
-		}
-
-		return $this->deserializeStatements( $statements );
-	}
-
-	private function deserializeStatements( array $statements ): ?ValidationError {
 		try {
 			$this->deserializedStatements = $this->statementsDeserializer->deserialize( $statements );
+		} catch ( InvalidFieldTypeException $e ) {
+			switch ( substr_count( $e->getField(), '/', ) ) {
+				case 0:
+					return new ValidationError(
+						self::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+						[ self::CONTEXT_PATH => $e->getField() ]
+					);
+				case 1:
+					return new ValidationError(
+						self::CODE_STATEMENT_NOT_ARRAY,
+						[ self::CONTEXT_PATH => $e->getField() ]
+					);
+				default:
+					throw new LogicException( 'Unable to handle exception' );
+			}
+		} catch ( InvalidStatementsException $e ) {
+			return new ValidationError(
+				self::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				[ self::CONTEXT_PATH => $e->getField(), self::CONTEXT_STATEMENTS => $e->getValue() ]
+			);
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_STATEMENT_DATA,
