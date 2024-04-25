@@ -30,7 +30,7 @@ class TemplateModule {
 ( function () {
 	'use strict';
 
-	// @internal Wikibase JavaScript code is not considered a stable interface.
+	/** @internal Wikibase JavaScript code is not considered a stable interface. */
 	mw.wbTemplates = mw.wbTemplates || {};
 	mw.wbTemplates.store = new mw.Map();
 	mw.wbTemplates.store.set( $templatesJson );
