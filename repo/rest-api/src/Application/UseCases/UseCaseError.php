@@ -244,6 +244,16 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
+		self::INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
+		self::SITELINK_DATA_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
+		self::TITLE_FIELD_EMPTY => [ self::CONTEXT_SITE_ID ],
+		self::INVALID_TITLE_FIELD => [ self::CONTEXT_SITE_ID ],
+		self::INVALID_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID ],
+		self::INVALID_INPUT_SITELINK_BADGE => [ self::CONTEXT_SITE_ID ],
+		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
+		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
+		self::SITELINK_CONFLICT => [ self::CONTEXT_SITE_ID ],
+
 	];
 
 	private string $errorCode;

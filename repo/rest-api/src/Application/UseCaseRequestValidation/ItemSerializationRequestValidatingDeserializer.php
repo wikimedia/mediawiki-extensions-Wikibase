@@ -13,6 +13,9 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -30,13 +33,15 @@ class ItemSerializationRequestValidatingDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( ItemSerializationRequest $request ): Item {
-		$validationError = $this->validator->validate( $request->getItem() );
+		$itemSerialization = $request->getItem();
+		$validationError = $this->validator->validate( $itemSerialization );
 
 		if ( $validationError ) {
 			$this->handleLabelValidationErrors( $validationError );
 			$this->handleDescriptionValidationErrors( $validationError );
 			$this->handleAliasesValidationErrors( $validationError );
 			$this->handleStatementsValidationErrors( $validationError );
+			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
@@ -266,6 +271,103 @@ class ItemSerializationRequestValidatingDeserializer {
 					[
 						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
 						UseCaseError::CONTEXT_FIELD => $context[ItemStatementsValidator::CONTEXT_FIELD],
+					]
+				);
+		}
+	}
+
+	private function handleSitelinksValidationErrors( ValidationError $validationError, array $serialization ): void {
+		$context = $validationError->getContext();
+		$siteId = fn() => $context[SitelinkValidator::CONTEXT_SITE_ID];
+
+		switch ( $validationError->getCode() ) {
+			case SitelinksValidator::CODE_INVALID_SITELINK:
+				$siteId = $context[SitelinksValidator::CONTEXT_SITE_ID];
+				$path = "sitelinks/$siteId";
+				throw new UseCaseError( // FIXME I made this up. Discuss.
+					UseCaseError::ITEM_DATA_INVALID_FIELD,
+					"Invalid input for '$path'",
+					[
+						UseCaseError::CONTEXT_PATH => $path,
+						UseCaseError::CONTEXT_VALUE => $serialization[$siteId],
+					]
+				);
+			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
+				$path = 'sitelinks';
+				throw new UseCaseError(
+					UseCaseError::ITEM_DATA_INVALID_FIELD,
+					"Invalid input for '$path'",
+					[
+						UseCaseError::CONTEXT_PATH => $path,
+						UseCaseError::CONTEXT_VALUE => $serialization,
+					]
+				);
+			case SiteIdValidator::CODE_INVALID_SITE_ID:
+				throw new UseCaseError(
+					UseCaseError::INVALID_SITE_ID,
+					"Not a valid site ID: '{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}'",
+					[ UseCaseError::CONTEXT_SITE_ID => $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] ]
+				);
+			case SitelinkValidator::CODE_TITLE_MISSING:
+				throw new UseCaseError(
+					UseCaseError::SITELINK_DATA_MISSING_TITLE,
+					'Mandatory sitelink title missing',
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_EMPTY_TITLE:
+				throw new UseCaseError(
+					UseCaseError::TITLE_FIELD_EMPTY,
+					'Title must not be empty',
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_INVALID_TITLE:
+			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
+				throw new UseCaseError(
+					UseCaseError::INVALID_TITLE_FIELD,
+					'Not a valid input for title field',
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
+				throw new UseCaseError(
+					UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
+					'Value of badges field is not a list',
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_INVALID_BADGE:
+				$badge = $context[ SitelinkValidator::CONTEXT_BADGE ];
+				throw new UseCaseError(
+					UseCaseError::INVALID_INPUT_SITELINK_BADGE,
+					"Badge input is not an item ID: $badge",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_BADGE => $badge,
+					]
+				);
+			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
+				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
+				throw new UseCaseError(
+					UseCaseError::ITEM_NOT_A_BADGE,
+					"Item ID provided as badge is not allowed as a badge: $badge",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_BADGE => $badge,
+					]
+				);
+			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
+				$title = $serialization[$siteId()]['title'];
+				throw new UseCaseError(
+					UseCaseError::SITELINK_TITLE_NOT_FOUND,
+					"Page with title $title does not exist on the given site",
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_SITELINK_CONFLICT:
+				$matchingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+				throw new UseCaseError(
+					UseCaseError::SITELINK_CONFLICT,
+					"Sitelink is already being used on $matchingItemId",
+					[
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => "$matchingItemId",
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
 					]
 				);
 		}
