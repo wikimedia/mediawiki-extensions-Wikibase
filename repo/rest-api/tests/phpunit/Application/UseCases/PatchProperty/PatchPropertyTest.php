@@ -29,6 +29,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -77,8 +80,12 @@ class PatchPropertyTest extends TestCase {
 		$this->patchedPropertyValidator = new PatchedPropertyValidator(
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer(),
-			new AliasesDeserializer(),
-			$this->newStatementsDeserializer()
+			new AliasesValidator(
+				$this->createStub( AliasesInLanguageValidator::class ),
+				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new AliasesDeserializer(),
+			),
+			$this->newStatementsDeserializer(),
 		);
 	}
 

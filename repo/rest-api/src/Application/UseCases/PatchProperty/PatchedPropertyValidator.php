@@ -5,11 +5,13 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,18 +20,18 @@ class PatchedPropertyValidator {
 
 	private LabelsDeserializer $labelsDeserializer;
 	private DescriptionsDeserializer $descriptionsDeserializer;
-	private AliasesDeserializer $aliasesDeserializer;
+	private AliasesValidator $aliasesValidator;
 	private StatementsDeserializer $statementsDeserializer;
 
 	public function __construct(
 		LabelsDeserializer $labelsDeserializer,
 		DescriptionsDeserializer $descriptionsDeserializer,
-		AliasesDeserializer $aliasesDeserializer,
+		AliasesValidator $aliasesValidator,
 		StatementsDeserializer $statementsDeserializer
 	) {
 		$this->labelsDeserializer = $labelsDeserializer;
 		$this->descriptionsDeserializer = $descriptionsDeserializer;
-		$this->aliasesDeserializer = $aliasesDeserializer;
+		$this->aliasesValidator = $aliasesValidator;
 		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
@@ -46,12 +48,14 @@ class PatchedPropertyValidator {
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 
+		$this->validateAliases( $serialization[ 'aliases' ] ?? [] );
+
 		return new Property(
 			new NumericPropertyId( $serialization[ 'id' ] ),
 			new Fingerprint(
 				$this->labelsDeserializer->deserialize( (array)( $serialization[ 'labels' ] ?? [] ) ),
 				$this->descriptionsDeserializer->deserialize( (array)( $serialization[ 'descriptions' ] ?? [] ) ),
-				$this->aliasesDeserializer->deserialize( (array)( $serialization[ 'aliases' ] ?? [] ) )
+				$this->aliasesValidator->getValidatedAliases()
 			),
 			$serialization[ 'data-type' ],
 			$this->statementsDeserializer->deserialize( (array)( $serialization[ 'statements' ] ?? [] ) )
@@ -112,4 +116,79 @@ class PatchedPropertyValidator {
 			);
 		}
 	}
+
+	/**
+	 * @param mixed $aliasesSerialization
+	 */
+	private function validateAliases( $aliasesSerialization ): void {
+		if (
+			!is_array( $aliasesSerialization ) ||
+			count( $aliasesSerialization ) && array_is_list( $aliasesSerialization )
+		) {
+			throw new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'aliases' is invalid",
+				[ UseCaseError::CONTEXT_PATH => '', UseCaseError::CONTEXT_VALUE => $aliasesSerialization ]
+			);
+		}
+
+		$validationError = $this->aliasesValidator->validate( $aliasesSerialization );
+		if ( $validationError ) {
+			$context = $validationError->getContext();
+			switch ( $validationError->getCode() ) {
+				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
+					$language = $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
+						"Not a valid language code '$language' in changed aliases",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
+					);
+				case AliasesValidator::CODE_EMPTY_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_EMPTY,
+						"Changed alias for '$language' cannot be empty",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
+					);
+				case AliasesValidator::CODE_DUPLICATE_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_FIELD_ALIAS];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_DUPLICATE,
+						"Aliases in language '$language' contain duplicate alias: '$value'",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+					);
+				case AliasesValidator::CODE_INVALID_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_FIELD_ALIAS];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+						"Patched value for '$language' is invalid",
+						[ UseCaseError::CONTEXT_PATH => $language, UseCaseError::CONTEXT_VALUE => $value ]
+					);
+				case AliasesInLanguageValidator::CODE_TOO_LONG:
+					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_TOO_LONG,
+						"Changed alias for '$language' must not be more than $limit characters long",
+						[
+							UseCaseError::CONTEXT_LANGUAGE => $language,
+							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
+							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
+						]
+					);
+				default:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+						"Patched value for '{$context[AliasesInLanguageValidator::CONTEXT_LANGUAGE]}' is invalid",
+						[
+							UseCaseError::CONTEXT_PATH => $context[AliasesInLanguageValidator::CONTEXT_PATH],
+							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
+						]
+					);
+			}
+		}
+	}
+
 }
