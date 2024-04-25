@@ -544,11 +544,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				SitelinksValidator::CONTEXT_SITE_ID => $site,
 			] ),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'sitelinks/$site'",
-				[ UseCaseError::CONTEXT_PATH => "sitelinks/$site", UseCaseError::CONTEXT_VALUE => 'invalid' ]
+				UseCaseError::INVALID_SITELINK_TYPE,
+				'Not a valid sitelink type',
+				[ UseCaseError::CONTEXT_SITE_ID => $site ]
 			),
-			[ 'sitelinks' => [ $site => 'invalid' ] ],
 		];
 		yield SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE => [
 			new ValidationError( SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE, [

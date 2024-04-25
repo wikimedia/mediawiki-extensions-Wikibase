@@ -96,6 +96,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::ITEM_NOT_A_BADGE => 400,
 		UseCaseError::SITELINK_DATA_MISSING_TITLE => 400,
 		UseCaseError::SITELINK_TITLE_NOT_FOUND => 400,
+		UseCaseError::INVALID_SITELINK_TYPE => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {

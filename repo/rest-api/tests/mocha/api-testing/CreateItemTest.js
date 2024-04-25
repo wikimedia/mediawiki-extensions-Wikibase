@@ -557,6 +557,16 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, "Invalid input for 'sitelinks'" );
 		} );
 
+		it( 'sitelink is not an object', async () => {
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				sitelinks: { [ localWikiId ]: 'not an object' }
+			} ).makeRequest();
+
+			assertValidError( response, 400, 'invalid-sitelink-type', { 'site-id': localWikiId } );
+			assert.strictEqual( response.body.message, 'Not a valid sitelink type' );
+		} );
+
 		it( 'title is empty', async () => {
 			const response = await newCreateItemRequestBuilder( {
 				labels: { en: 'en-label' },
