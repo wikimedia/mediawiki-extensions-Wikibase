@@ -40,8 +40,31 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 			throw new PatchPathException( $e->getMessage(), (array)$e->getOperation(), $e->getField() );
 		}
 
-		// TODO investigate. Casting to array is necessary if $target starts out as an empty array.
-		return is_object( $target ) ? (array)$target : $target;
+		// TODO investigate. JsonPatch (sometimes) adds/replaces new values as object, not associative array
+		return self::convertObjectsToArray( $target );
+	}
+
+	/**
+	 * @param mixed $serialization
+	 *
+	 * @return mixed
+	 */
+	private static function convertObjectsToArray( $serialization ) {
+		if ( !( is_object( $serialization ) || is_array( $serialization ) ) ) {
+			return $serialization;
+		}
+
+		$output = [];
+		foreach ( $serialization as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$output[ $key ] = self::convertObjectsToArray( $value );
+			} elseif ( is_object( $value ) ) {
+				$output[ $key ] = self::convertObjectsToArray( (array)$value );
+			} else {
+				$output[ $key ] = $value;
+			}
+		}
+		return $output;
 	}
 
 }

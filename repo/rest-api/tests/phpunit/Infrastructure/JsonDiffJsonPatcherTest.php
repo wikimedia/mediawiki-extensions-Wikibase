@@ -63,10 +63,40 @@ class JsonDiffJsonPatcherTest extends TestCase {
 			[ 'foo' => 'bar', 'baz' => 42 ],
 		];
 
-		yield 'add a key/value pair to an empty array' => [
+		yield 'add a new key/value pair to an empty array on top-level' => [
 			[],
 			[ [ 'op' => 'add', 'path' => '/foo', 'value' => 'new value' ] ],
 			[ 'foo' => 'new value' ],
+		];
+
+		yield 'add (replace) a string value to an existing string field on the top-level' => [
+			[ 'foo' => 'bar' ],
+			[ [ 'op' => 'add', 'path' => '/foo', 'value' => 'new value' ] ],
+			[ 'foo' => 'new value' ],
+		];
+
+		yield 'replace a string value to an existing string field on the top-level' => [
+			[ 'foo' => 'bar' ],
+			[ [ 'op' => 'replace', 'path' => '/foo', 'value' => 'new value' ] ],
+			[ 'foo' => 'new value' ],
+		];
+
+		yield 'add a new key/value pair to an existing empty array on lower level' => [
+			[ 'foo' => [] ],
+			[ [ 'op' => 'add', 'path' => '/foo/bar', 'value' => 'new value' ] ],
+			[ 'foo' => [ 'bar' => 'new value' ] ],
+		];
+
+		yield 'add (replace) a string value to an existing string field on lower level' => [
+			[ 'foo' => [ 'bar' => 'baz' ] ],
+			[ [ 'op' => 'add', 'path' => '/foo/bar', 'value' => 'new value' ] ],
+			[ 'foo' => [ 'bar' => 'new value' ] ],
+		];
+
+		yield 'replace a string value for an existing string field on lower level' => [
+			[ 'foo' => [ 'bar' => 'baz' ] ],
+			[ [ 'op' => 'replace', 'path' => '/foo/bar', 'value' => 'new value' ] ],
+			[ 'foo' => [ 'bar' => 'new value' ] ],
 		];
 
 		yield 'patch results in a string' => [
