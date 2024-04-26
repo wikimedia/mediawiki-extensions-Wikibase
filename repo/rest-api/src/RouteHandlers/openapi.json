@@ -4154,6 +4154,9 @@
               "statement-data-invalid-field": {
                 "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
+              "statement-group-property-id-mismatch": {
+                "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
+              },
               "invalid-site-id": {
                 "$ref": "#/components/examples/InvalidSiteIdWithSiteContextExample"
               },
@@ -8282,6 +8285,17 @@
           "message": "Not a valid statement type",
           "context": {
             "path": "{property_id}/{index}"
+          }
+        }
+      },
+      "StatementGroupPropertyIdMismatch": {
+        "value": {
+          "code": "statement-group-property-id-mismatch",
+          "message": "Statement's Property ID does not match the statement group key",
+          "context": {
+            "path": "{property_id_key}/{index}/property/id",
+            "statement-group-property-id": "{property_id_key}",
+            "statement-property-id": "{property_id_value}"
           }
         }
       }

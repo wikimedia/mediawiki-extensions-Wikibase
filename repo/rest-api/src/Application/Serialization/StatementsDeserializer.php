@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidStatementsException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyIdMismatchException;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,6 +24,7 @@ class StatementsDeserializer {
 	 * @throws InvalidFieldTypeException
 	 * @throws InvalidFieldException
 	 * @throws MissingFieldException
+	 * @throws PropertyIdMismatchException
 	 */
 	public function deserialize( array $serialization ): StatementList {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
@@ -39,7 +41,15 @@ class StatementsDeserializer {
 				if ( !is_array( $statement ) ) {
 					throw new InvalidFieldTypeException( "$propertyId/$index" );
 				}
-				$statementList[] = $this->statementDeserializer->deserialize( $statement, "$propertyId/$index" );
+
+				$deserializedStatement = $this->statementDeserializer->deserialize( $statement, "$propertyId/$index" );
+
+				$statementPropertyId = $deserializedStatement->getPropertyId()->getSerialization();
+				if ( $statementPropertyId !== $propertyId ) {
+					throw new PropertyIdMismatchException( $propertyId, $statementPropertyId, "$propertyId/$index/property/id" );
+				}
+
+				$statementList[] = $deserializedStatement;
 			}
 		}
 

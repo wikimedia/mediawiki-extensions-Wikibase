@@ -12,6 +12,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidStatementsException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyIdMismatchException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -111,6 +112,13 @@ class StatementsDeserializerTest extends TestCase {
 		yield 'statement not an array' => [
 			[ 'P789' => [ 'not a valid statement' ] ],
 			new InvalidFieldTypeException( 'P789/0' ),
+		];
+
+		$propertyIdKey = 'P123';
+		$propertyIdValue = 'P789';
+		yield 'statement property id does match key of the statement group' => [
+			[ $propertyIdKey => [ [ 'property' => [ 'id' => $propertyIdValue ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new PropertyIdMismatchException( $propertyIdKey, $propertyIdValue, "$propertyIdKey/0/property/id" ),
 		];
 	}
 
