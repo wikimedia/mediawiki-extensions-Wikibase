@@ -5,30 +5,24 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
 use LogicException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
  */
 class PatchedDescriptionsValidator {
 
-	private DescriptionsDeserializer $descriptionsDeserializer;
-	private ItemDescriptionValidator $descriptionValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private DescriptionsSyntaxValidator $syntaxValidator;
+	private ItemDescriptionsContentsValidator $contentsValidator;
 
-	public function __construct(
-		DescriptionsDeserializer $descriptionsDeserializer,
-		ItemDescriptionValidator $descriptionValidator,
-		LanguageCodeValidator $languageCodeValidator
-	) {
-		$this->descriptionsDeserializer = $descriptionsDeserializer;
-		$this->descriptionValidator = $descriptionValidator;
-		$this->languageCodeValidator = $languageCodeValidator;
+	public function __construct( DescriptionsSyntaxValidator $syntaxValidator, ItemDescriptionsContentsValidator $contentsValidator ) {
+		$this->syntaxValidator = $syntaxValidator;
+		$this->contentsValidator = $contentsValidator;
 	}
 
 	/**
@@ -39,74 +33,66 @@ class PatchedDescriptionsValidator {
 		TermList $originalLabels,
 		array $descriptionsSerialization
 	): TermList {
-		$patchedDescriptions = $this->deserializeDescriptions( $descriptionsSerialization );
-		foreach ( $this->getModifiedDescriptions( $originalDescriptions, $patchedDescriptions ) as $description ) {
-			$this->validateLanguageCode( $description );
-			$this->validateDescription( $description, $originalLabels );
+		$error = $this->syntaxValidator->validate( $descriptionsSerialization ) ?:
+			$this->contentsValidator->validate(
+				$this->syntaxValidator->getPartiallyValidatedDescriptions(),
+				$originalLabels,
+				$this->getModifiedLanguages( $originalDescriptions, $this->syntaxValidator->getPartiallyValidatedDescriptions() )
+			);
+		if ( $error ) {
+			$this->throwUseCaseError( $error );
 		}
 
-		return $patchedDescriptions;
+		return $this->contentsValidator->getValidatedDescriptions();
 	}
 
-	private function deserializeDescriptions( array $descriptionsSerialization ): TermList {
-		try {
-			$descriptions = $this->descriptionsDeserializer->deserialize( $descriptionsSerialization );
-		} catch ( EmptyDescriptionException $e ) {
-			$languageCode = $e->getField();
-			throw new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_EMPTY,
-				"Changed description for '$languageCode' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-			);
-		} catch ( InvalidFieldException $e ) {
-			$languageCode = $e->getField();
-			$invalidDescription = json_encode( $e->getValue() );
-			throw new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID,
-				"Changed description for '$languageCode' is invalid: $invalidDescription",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-					UseCaseError::CONTEXT_VALUE => $invalidDescription,
-				]
-			);
-		}
-
-		return $descriptions;
-	}
-
-	private function getModifiedDescriptions( TermList $original, TermList $modified ): array {
-		return array_filter(
+	private function getModifiedLanguages( TermList $original, TermList $modified ): array {
+		return array_keys( array_filter(
 			iterator_to_array( $modified ),
 			fn( Term $description ) => !$original->hasTermForLanguage( $description->getLanguageCode() ) ||
 				!$original->getByLanguage( $description->getLanguageCode() )->equals( $description )
-		);
+		) );
 	}
 
-	private function validateDescription( Term $description, TermList $labels ): void {
-		$validationError = $this->descriptionValidator->validate(
-			$description->getLanguageCode(),
-			$description->getText(),
-			$labels
-		);
-		if ( !$validationError ) {
-			return;
-		}
-
+	/**
+	 * @return never
+	 */
+	private function throwUseCaseError( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemDescriptionValidator::CODE_INVALID:
-				$descriptionText = $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ];
+			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
+				$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
+					"Not a valid language code '$languageCode' in changed descriptions",
+					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
+				);
+			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
+				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_DESCRIPTION_EMPTY,
+					"Changed description for '$languageCode' cannot be empty",
+					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
+				);
+			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
+				$language = $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION] );
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID,
-					"Changed description for '{$description->getLanguageCode()}' is invalid: $descriptionText",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $description->getLanguageCode(),
-						UseCaseError::CONTEXT_VALUE => $descriptionText,
-					]
+					"Changed description for '{$language}' is invalid: {$value}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				);
+			case ItemDescriptionValidator::CODE_INVALID:
+				$language = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];
+				$value = $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_DESCRIPTION_INVALID,
+					"Changed description for '{$language}' is invalid: {$value}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
 				);
 			case ItemDescriptionValidator::CODE_TOO_LONG:
-				$languageCode = $description->getLanguageCode();
-				$maxDescriptionLength = $context[ ItemDescriptionValidator::CONTEXT_LIMIT ];
+				$languageCode = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];
+				$maxDescriptionLength = $context[ItemDescriptionValidator::CONTEXT_LIMIT];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
 					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
@@ -140,18 +126,6 @@ class PatchedDescriptionsValidator {
 				);
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
-		}
-	}
-
-	private function validateLanguageCode( Term $description ): void {
-		$validationError = $this->languageCodeValidator->validate( $description->getLanguageCode() );
-		if ( $validationError ) {
-			$languageCode = $validationError->getContext()[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE ];
-			throw new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
-				"Not a valid language code '$languageCode' in changed descriptions",
-				[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-			);
 		}
 	}
 
