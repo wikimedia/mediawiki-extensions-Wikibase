@@ -2,8 +2,13 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -11,10 +16,21 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  */
 class PatchedPropertyValidator {
 
-	private PropertyDeserializer $propertyDeserializer;
+	private LabelsDeserializer $labelsDeserializer;
+	private DescriptionsDeserializer $descriptionsDeserializer;
+	private AliasesDeserializer $aliasesDeserializer;
+	private StatementsDeserializer $statementsDeserializer;
 
-	public function __construct( PropertyDeserializer $propertyDeserializer ) {
-		$this->propertyDeserializer = $propertyDeserializer;
+	public function __construct(
+		LabelsDeserializer $labelsDeserializer,
+		DescriptionsDeserializer $descriptionsDeserializer,
+		AliasesDeserializer $aliasesDeserializer,
+		StatementsDeserializer $statementsDeserializer
+	) {
+		$this->labelsDeserializer = $labelsDeserializer;
+		$this->descriptionsDeserializer = $descriptionsDeserializer;
+		$this->aliasesDeserializer = $aliasesDeserializer;
+		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
 	/**
@@ -30,7 +46,16 @@ class PatchedPropertyValidator {
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 
-		return $this->propertyDeserializer->deserialize( $serialization );
+		return new Property(
+			new NumericPropertyId( $serialization[ 'id' ] ),
+			new Fingerprint(
+				$this->labelsDeserializer->deserialize( (array)( $serialization[ 'labels' ] ?? [] ) ),
+				$this->descriptionsDeserializer->deserialize( (array)( $serialization[ 'descriptions' ] ?? [] ) ),
+				$this->aliasesDeserializer->deserialize( (array)( $serialization[ 'aliases' ] ?? [] ) )
+			),
+			$serialization[ 'data-type' ],
+			$this->statementsDeserializer->deserialize( (array)( $serialization[ 'statements' ] ?? [] ) )
+		);
 	}
 
 	private function assertNoMissingMandatoryFields( array $serialization ): void {

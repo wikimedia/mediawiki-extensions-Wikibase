@@ -7,10 +7,21 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
@@ -23,42 +34,66 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  */
 class PatchedPropertyValidatorTest extends TestCase {
 
-	private PropertyDeserializer $propertyDeserializer;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
-	}
-
-	public function testValid(): void {
+	/**
+	 * @dataProvider patchedPropertyProvider
+	 */
+	public function testValid( array $patchedPropertySerialization, Property $expectedPatchedProperty ): void {
 		$originalProperty = new Property(
 			new NumericPropertyId( 'P123' ),
 			new Fingerprint(),
 			'string'
 		);
 
-		$propertySerialization = [
-			'id' => 'P123',
-			'type' => 'property',
-			'data-type' => 'string',
-			'labels' => [ 'en' => 'english-label' ],
-		];
-
-		$expectedProperty = new Property(
-			new NumericPropertyId( 'P123' ),
-			new Fingerprint(
-				new TermList( [ new Term( 'en', 'english-label' ) ] ),
-			),
-			'string'
-		);
-		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
-		$this->propertyDeserializer->method( 'deserialize' )->willReturn( $expectedProperty );
-
 		$this->assertEquals(
-			$expectedProperty,
-			$this->newValidator()->validateAndDeserialize( $propertySerialization, $originalProperty )
+			$expectedPatchedProperty,
+			$this->newValidator()->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
 		);
+	}
+
+	public static function patchedPropertyProvider(): Generator {
+		yield 'minimal property' => [
+			[
+				'id' => 'P123',
+				'type' => 'property',
+				'data-type' => 'string',
+				'labels' => [ 'en' => 'english-label' ],
+			],
+			new Property(
+				new NumericPropertyId( 'P123' ),
+				new Fingerprint(
+					new TermList( [ new Term( 'en', 'english-label' ) ] ),
+				),
+				'string'
+			),
+		];
+		yield 'property with all fields' => [
+			[
+				'id' => 'P123',
+				'type' => 'property',
+				'data-type' => 'string',
+				'labels' => [ 'en' => 'english-label' ],
+				'descriptions' => [ 'en' => 'english-description' ],
+				'aliases' => [ 'en' => [ 'english-alias' ] ],
+				'statements' => [
+					'P321' => [
+						[
+							'property' => [ 'id' => 'P321' ],
+							'value' => [ 'type' => 'somevalue' ],
+						],
+					],
+				],
+			],
+			new Property(
+				new NumericPropertyId( 'P123' ),
+				new Fingerprint(
+					new TermList( [ new Term( 'en', 'english-label' ) ] ),
+					new TermList( [ new Term( 'en', 'english-description' ) ] ),
+					new AliasGroupList( [ new AliasGroup( 'en', [ 'english-alias' ] ) ] )
+				),
+				'string',
+				new StatementList( NewStatement::someValueFor( 'P321' )->build() )
+			),
+		];
 	}
 
 	public function testIgnoresPropertyIdRemoval(): void {
@@ -74,14 +109,6 @@ class PatchedPropertyValidatorTest extends TestCase {
 			'labels' => [ 'en' => 'english-label' ],
 		];
 
-		$expectedProperty = new Property(
-			new NumericPropertyId( 'P123' ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'english-label' ) ] ) ),
-			'string'
-		);
-
-		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
-		$this->propertyDeserializer->method( 'deserialize' )->willReturn( $expectedProperty );
 		$validatedProperty = $this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
 
 		$this->assertEquals( $originalProperty->getId(), $validatedProperty->getId() );
@@ -175,8 +202,18 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): PatchedPropertyValidator {
+		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
+		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
+			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
+		);
+
 		return new PatchedPropertyValidator(
-			$this->propertyDeserializer
+			new LabelsDeserializer(),
+			new DescriptionsDeserializer(),
+			new AliasesDeserializer(),
+			new StatementsDeserializer(
+				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			)
 		);
 	}
 
