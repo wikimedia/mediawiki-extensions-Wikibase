@@ -26,7 +26,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		await createWikiPage( linkedArticle );
 		const statementProperty = ( await createUniqueStringProperty() ).entity.id;
 		const response = await newCreateItemRequestBuilder( {
-			labels: { en: 'potato' },
+			labels: { en: utils.title( 'potato' ) },
 			descriptions: { en: 'root vegetable' },
 			aliases: { en: [ 'spud', 'tater' ] },
 			sitelinks: { [ localSiteId ]: { title: linkedArticle } },
