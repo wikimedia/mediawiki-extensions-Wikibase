@@ -27,13 +27,12 @@ use Wikimedia\ParamValidator\ParamValidator;
 class SetPropertyLabelRouteHandler extends SimpleHandler {
 	use AssertContentType;
 
-	public const PROPERTY_ID_PATH_PARAM = 'property_id';
-	public const LANGUAGE_CODE_PATH_PARAM = 'language_code';
-	public const LABEL_BODY_PARAM = 'label';
-
-	public const TAGS_BODY_PARAM = 'tags';
-	public const BOT_BODY_PARAM = 'bot';
-	public const COMMENT_BODY_PARAM = 'comment';
+	private const PROPERTY_ID_PATH_PARAM = 'property_id';
+	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
+	private const LABEL_BODY_PARAM = 'label';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private SetPropertyLabel $setPropertyLabel;
 	private ResponseFactory $responseFactory;

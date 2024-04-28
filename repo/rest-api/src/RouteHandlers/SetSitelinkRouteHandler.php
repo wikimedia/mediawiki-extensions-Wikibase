@@ -32,7 +32,6 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
 	private const SITELINK_BODY_PARAM = 'sitelink';
-
 	private const TAGS_BODY_PARAM = 'tags';
 	private const BOT_BODY_PARAM = 'bot';
 	private const COMMENT_BODY_PARAM = 'comment';

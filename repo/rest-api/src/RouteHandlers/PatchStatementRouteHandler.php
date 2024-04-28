@@ -30,11 +30,11 @@ use Wikimedia\ParamValidator\ParamValidator;
 class PatchStatementRouteHandler extends SimpleHandler {
 	use AssertContentType;
 
-	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
-	public const PATCH_BODY_PARAM = 'patch';
-	public const TAGS_BODY_PARAM = 'tags';
-	public const BOT_BODY_PARAM = 'bot';
-	public const COMMENT_BODY_PARAM = 'comment';
+	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
+	private const PATCH_BODY_PARAM = 'patch';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;

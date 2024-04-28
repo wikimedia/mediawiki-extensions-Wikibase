@@ -26,11 +26,11 @@ use Wikimedia\ParamValidator\ParamValidator;
 class RemovePropertyStatementRouteHandler extends SimpleHandler {
 	use AssertContentType;
 
-	public const PROPERTY_ID_PATH_PARAM = 'property_id';
-	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
-	public const TAGS_BODY_PARAM = 'tags';
-	public const BOT_BODY_PARAM = 'bot';
-	public const COMMENT_BODY_PARAM = 'comment';
+	private const PROPERTY_ID_PATH_PARAM = 'property_id';
+	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private const TAGS_PARAM_DEFAULT = [];
 	private const BOT_PARAM_DEFAULT = false;

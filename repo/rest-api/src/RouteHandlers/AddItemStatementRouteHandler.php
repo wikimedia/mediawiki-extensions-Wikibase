@@ -30,11 +30,11 @@ use Wikimedia\ParamValidator\ParamValidator;
 class AddItemStatementRouteHandler extends SimpleHandler {
 	use AssertContentType;
 
-	public const ITEM_ID_PATH_PARAM = 'item_id';
-	public const STATEMENT_BODY_PARAM = 'statement';
-	public const TAGS_BODY_PARAM = 'tags';
-	public const BOT_BODY_PARAM = 'bot';
-	public const COMMENT_BODY_PARAM = 'comment';
+	private const ITEM_ID_PATH_PARAM = 'item_id';
+	private const STATEMENT_BODY_PARAM = 'statement';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private AddItemStatement $addItemStatement;
 	private StatementSerializer $statementSerializer;

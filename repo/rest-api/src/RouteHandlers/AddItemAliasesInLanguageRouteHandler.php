@@ -28,13 +28,13 @@ use Wikimedia\ParamValidator\ParamValidator;
 class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 	use AssertContentType;
 
-	public const ITEM_ID_PATH_PARAM = 'item_id';
-	public const LANGUAGE_CODE_PATH_PARAM = 'language_code';
-	public const ALIASES_BODY_PARAM = 'aliases';
+	private const ITEM_ID_PATH_PARAM = 'item_id';
+	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
+	private const ALIASES_BODY_PARAM = 'aliases';
 
-	public const TAGS_BODY_PARAM = 'tags';
-	public const BOT_BODY_PARAM = 'bot';
-	public const COMMENT_BODY_PARAM = 'comment';
+	private const TAGS_BODY_PARAM = 'tags';
+	private const BOT_BODY_PARAM = 'bot';
+	private const COMMENT_BODY_PARAM = 'comment';
 
 	private AddItemAliasesInLanguage $addItemAliases;
 	private ResponseFactory $responseFactory;

@@ -26,7 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetStatementRouteHandler extends SimpleHandler {
 
-	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
+	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
 
 	private GetStatement $getStatement;
 	private StatementSerializer $statementSerializer;
