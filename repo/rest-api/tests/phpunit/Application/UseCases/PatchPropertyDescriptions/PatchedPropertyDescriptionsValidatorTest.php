@@ -15,7 +15,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
@@ -136,8 +138,8 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 			) );
 
 		return new PatchedPropertyDescriptionsValidator(
-			new DescriptionsDeserializer(),
-			new TermValidatorFactoryPropertyDescriptionValidator(
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), new LanguageCodeValidator( $validLanguageCodes ) ),
+			new PropertyDescriptionsContentsValidator( new TermValidatorFactoryPropertyDescriptionValidator(
 				new TermValidatorFactory(
 					self::LIMIT,
 					$validLanguageCodes,
@@ -147,8 +149,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 					$this->createStub( LanguageNameUtils::class )
 				),
 				$propertyRetriever
-			),
-			new LanguageCodeValidator( $validLanguageCodes )
+			) )
 		);
 	}
 
