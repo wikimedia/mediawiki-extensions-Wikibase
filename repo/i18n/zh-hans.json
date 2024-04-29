@@ -396,6 +396,8 @@
 	"wikibase-api-no-such-entity": "找不到任何ID为“$1”的实体。",
 	"wikibase-api-no-such-sitelink": "尝试编辑徽章时无法找到至“$1”的网站链接。",
 	"wikibase-api-not-supported": "请求的功能未被提供的实体支持。",
+	"wikibase-api-not-statement": "不是一个声明。",
+	"wikibase-api-not-item": "不是一个项目。",
 	"wikibase-api-not-recognized-datatype": "需要数据类型，但缺少或无法识别。",
 	"wikibase-api-not-recognized-siteid": "提供的网站标识符未被认可。",
 	"wikibase-api-not-recognized": "一些东西未被认可。",

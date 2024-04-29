@@ -69,6 +69,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Све {{WBREPONAME}} измене су означене као „мање”, тако да је „{{WBREPONAME}} edits” филтер у сукобу са филтером „Non-minor edits”.",
 	"wikibase-replicationnote": "Имајте на уму да је потребно и до неколико минута да промене постану видљиве на свим викијима.",
 	"wikibase-watchlist-show-changes-pref": "Приказуј измене на Википодацима на списку надгледања",
+	"wikibase-error-deserialize-error": "Десеријализација података није успела.",
 	"wikibase-error-serialize-error": "Неуспешна серијализација података",
 	"wikibase-error-invalid-entity-id": "ID „$2” је непознат систему. Користите валидан ID ентитета.",
 	"unconnectedpages": "Странице које нису повезане са ставкама",
