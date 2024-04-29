@@ -91,16 +91,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$this->setupUser();
 			$this->setupSites();
 		}
-		$activeHandles = EntityTestHelper::getActiveHandles();
-		$user = $this->getTestSysop()->getUser();
-
-		foreach ( $activeHandles as $handle => $id ) {
-			$title = $this->getTestEntityTitle( $handle );
-
-			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-			$page->doDeleteArticleReal( 'Test reset', $user );
-			EntityTestHelper::unRegisterEntity( $handle );
-		}
 
 		// Hack: make it possible to call this method from addDBDataOnce, which is called before ApiTestCase::setUp,
 		// when apiContext is still unset.
@@ -121,6 +111,15 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$idMap["%$handle%"] = $res['entity']['id'];
 		}
 		$this->apiContext = $oldContext;
+	}
+
+	public static function tearDownAfterClass(): void {
+		$activeHandles = EntityTestHelper::getActiveHandles();
+
+		foreach ( $activeHandles as $handle => $id ) {
+			EntityTestHelper::unRegisterEntity( $handle );
+		}
+		parent::tearDownAfterClass();
 	}
 
 	/**
