@@ -8,8 +8,8 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
@@ -370,8 +370,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	public function itemAliasesValidationErrorProvider(): Generator {
 		yield 'empty alias' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_EMPTY_ALIAS,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				AliasesValidator::CODE_EMPTY_ALIAS,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_EMPTY,
@@ -382,8 +382,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'empty aliases in language list' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_EMPTY_ALIAS_LIST,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_LIST_EMPTY,
@@ -395,8 +395,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		$invalidAliases = [ 'not a valid aliases array' ];
 		yield 'invalid aliases' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIASES,
-				[ ItemAliasesValidator::CONTEXT_FIELD_ALIASES => $invalidAliases ]
+				AliasesValidator::CODE_INVALID_ALIASES,
+				[ AliasesValidator::CONTEXT_FIELD_ALIASES => $invalidAliases ]
 			),
 			new UseCaseError(
 				UseCaseError::ITEM_DATA_INVALID_FIELD,
@@ -407,8 +407,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid aliases in language list' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				AliasesValidator::CODE_INVALID_ALIAS_LIST,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_ALIAS_LIST,
@@ -419,11 +419,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'alias too long' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_TOO_LONG_ALIAS,
+				AliasesValidator::CODE_TOO_LONG_ALIAS,
 				[
-					ItemAliasesValidator::CONTEXT_FIELD_ALIAS => str_repeat( 'a', self::MAX_LENGTH + 1 ),
-					ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
-					ItemAliasesValidator::CONTEXT_FIELD_LIMIT => self::MAX_LENGTH,
+					AliasesValidator::CONTEXT_FIELD_ALIAS => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_FIELD_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			new UseCaseError(
@@ -438,10 +438,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid alias deserialization' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIAS,
+				AliasesValidator::CODE_INVALID_ALIAS,
 				[
-					ItemAliasesValidator::CONTEXT_FIELD_ALIAS => 22,
-					ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_FIELD_ALIAS => 22,
+					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
@@ -453,10 +453,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid alias' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIAS,
+				AliasesValidator::CODE_INVALID_ALIAS,
 				[
-					ItemAliasesValidator::CONTEXT_FIELD_ALIAS => "invalid \t",
-					ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_FIELD_ALIAS => "invalid \t",
+					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
@@ -468,8 +468,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'duplicated alias' => [
 			new ValidationError(
-				ItemAliasesValidator::CODE_DUPLICATE_ALIAS,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en', ItemAliasesValidator::CONTEXT_FIELD_ALIAS => 'duplicated-alias' ]
+				AliasesValidator::CODE_DUPLICATE_ALIAS,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en', AliasesValidator::CONTEXT_FIELD_ALIAS => 'duplicated-alias' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_DUPLICATE,
@@ -482,7 +482,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemAliasesValidator::CONTEXT_FIELD_ALIAS,
+					LanguageCodeValidator::CONTEXT_PATH_VALUE => AliasesValidator::CONTEXT_FIELD_ALIAS,
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
 				]
 			),
@@ -490,7 +490,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: e2',
 				[
-					UseCaseError::CONTEXT_PATH => ItemAliasesValidator::CONTEXT_FIELD_ALIAS,
+					UseCaseError::CONTEXT_PATH => AliasesValidator::CONTEXT_FIELD_ALIAS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
 				]
 			),

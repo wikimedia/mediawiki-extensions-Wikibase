@@ -25,7 +25,7 @@ class ItemValidator {
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
-	private ItemAliasesValidator $itemAliasesValidator;
+	private AliasesValidator $itemAliasesValidator;
 	private ItemStatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
 
@@ -34,7 +34,7 @@ class ItemValidator {
 		ItemLabelsContentsValidator $labelsContentsValidator,
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
-		ItemAliasesValidator $itemAliasesValidator,
+		AliasesValidator $itemAliasesValidator,
 		ItemStatementsValidator $itemStatementsValidator,
 		SitelinksValidator $sitelinksValidator
 	) {
