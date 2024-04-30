@@ -133,7 +133,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.expectedType, 'boolean' );
 		} );
 
-		it( 'invalid toplevel field', async () => {
+		it( 'invalid top-level field', async () => {
 			const fieldWithInvalidValue = 'labels';
 			const invalidValue = 'not an object';
 			const invalidItem = { [ fieldWithInvalidValue ]: invalidValue };
@@ -259,15 +259,19 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'empty label', async () => {
-			const comment = 'Empty label';
-			const emptyLabel = '';
-			const response = await newCreateItemRequestBuilder( { labels: { en: emptyLabel } } )
-				.withJsonBodyParam( 'comment', comment )
-				.assertValidRequest()
-				.makeRequest();
+			const response = await newCreateItemRequestBuilder( { labels: { en: '' } } )
+				.assertValidRequest().makeRequest();
 
 			assertValidError( response, 400, 'label-empty', { language: 'en' } );
 			assert.strictEqual( response.body.message, 'Label must not be empty' );
+		} );
+
+		it( 'empty description', async () => {
+			const response = await newCreateItemRequestBuilder( { descriptions: { en: '' } } )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 400, 'description-empty', { language: 'en' } );
+			assert.strictEqual( response.body.message, 'Description must not be empty' );
 		} );
 
 		it( 'label too long', async () => {
@@ -275,11 +279,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLabelLength = 250;
 			const labelTooLong = 'x'.repeat( maxLabelLength + 1 );
-			const comment = 'Label too long';
 			const response = await newCreateItemRequestBuilder( { labels: { en: labelTooLong } } )
-				.withJsonBodyParam( 'comment', comment )
-				.assertValidRequest()
-				.makeRequest();
+				.assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
@@ -291,6 +292,27 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual(
 				response.body.message,
 				`Label must be no more than ${maxLabelLength} characters long`
+			);
+		} );
+
+		it( 'description too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxDescriptionLength = 250;
+			const descriptionTooLong = 'x'.repeat( maxDescriptionLength + 1 );
+			const response = await newCreateItemRequestBuilder( { descriptions: { en: descriptionTooLong } } )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'description-too-long',
+				{ 'character-limit': maxDescriptionLength, language: 'en' }
+			);
+
+			assert.strictEqual(
+				response.body.message,
+				`Description must be no more than ${maxDescriptionLength} characters long`
 			);
 		} );
 
