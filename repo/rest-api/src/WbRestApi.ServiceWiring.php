@@ -14,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
@@ -796,12 +795,10 @@ return [
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new PatchedPropertyValidator(
-				new PropertyDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer(),
-					new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
-				)
+				new LabelsDeserializer(),
+				new DescriptionsDeserializer(),
+				new AliasesDeserializer(),
+				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
 			)
 		);
 	},

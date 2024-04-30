@@ -15,7 +15,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -75,7 +74,12 @@ class PatchPropertyTest extends TestCase {
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->propertyWriteModelRetriever = $this->createStub( PropertyWriteModelRetriever::class );
-		$this->patchedPropertyValidator = new PatchedPropertyValidator( $this->newPropertyDeserializer() );
+		$this->patchedPropertyValidator = new PatchedPropertyValidator(
+			new LabelsDeserializer(),
+			new DescriptionsDeserializer(),
+			new AliasesDeserializer(),
+			$this->newStatementsDeserializer()
+		);
 	}
 
 	public function testHappyPath(): void {
@@ -242,19 +246,14 @@ class PatchPropertyTest extends TestCase {
 		);
 	}
 
-	private function newPropertyDeserializer(): PropertyDeserializer {
+	private function newStatementsDeserializer(): StatementsDeserializer {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
 		);
 
-		return new PropertyDeserializer(
-			new LabelsDeserializer(),
-			new DescriptionsDeserializer(),
-			new AliasesDeserializer(),
-			new StatementsDeserializer(
-				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-			)
+		return new StatementsDeserializer(
+			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 		);
 	}
 }
