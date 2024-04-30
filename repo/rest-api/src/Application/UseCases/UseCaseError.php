@@ -51,6 +51,12 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
 	public const PATCHED_PROPERTY_LABEL_DUPLICATE = 'patched-property-label-duplicate';
+	public const PATCHED_PROPERTY_INVALID_FIELD = 'patched-property-invalid-field';
+	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE =
+		'patched-property-invalid-operation-change-property-datatype';
+	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
+	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
+	public const PATCHED_PROPERTY_UNEXPECTED_FIELD = 'patched-property-unexpected-field';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
@@ -226,6 +232,11 @@ class UseCaseError extends UseCaseException {
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::UNEXPECTED_ERROR => [],
+		self::PATCHED_PROPERTY_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
+		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
+		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
+		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
 	];
 
 	/**

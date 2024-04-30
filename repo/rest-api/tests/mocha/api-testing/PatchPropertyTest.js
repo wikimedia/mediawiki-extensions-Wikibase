@@ -194,4 +194,61 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 	} );
 
+	describe( '422 error response', () => {
+		it( 'after patching: invalid operation change property id', async () => {
+			const patch = [
+				{ op: 'replace', path: '/id', value: 'P666' }
+			];
+
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-property-invalid-operation-change-property-id' );
+			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing property' );
+		} );
+
+		it( 'after patching: invalid operation change property datatype', async () => {
+			const patch = [
+				{ op: 'replace', path: '/data-type', value: 'wikibase-item' }
+			];
+
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-property-invalid-operation-change-property-datatype' );
+			assert.strictEqual( response.body.message, 'Cannot change the datatype of the existing property' );
+		} );
+
+		it( 'after patching labels: invalid field', async () => {
+			const patch = [
+				{ op: 'replace', path: '/labels', value: 'illegal string' }
+			];
+
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-property-invalid-field' );
+		} );
+
+		it( 'after patching: missing mandatory field', async () => {
+			const patch = [ { op: 'remove', path: '/data-type' } ];
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-property-missing-field' );
+		} );
+
+		it( 'after patching: unexpected field', async () => {
+			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 422 );
+			assert.strictEqual( response.body.code, 'patched-property-unexpected-field' );
+		} );
+	} );
 } );
