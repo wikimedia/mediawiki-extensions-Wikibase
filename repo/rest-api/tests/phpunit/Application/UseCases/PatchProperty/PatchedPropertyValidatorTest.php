@@ -26,7 +26,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyVali
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -37,6 +43,30 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  * @license GPL-2.0-or-later
  */
 class PatchedPropertyValidatorTest extends TestCase {
+
+	private LabelsSyntaxValidator $labelsSyntaxValidator;
+	private PropertyLabelsContentsValidator $labelsContentsValidator;
+	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
+	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->labelsSyntaxValidator = new LabelsSyntaxValidator(
+			new LabelsDeserializer(),
+			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+		);
+		$this->descriptionsSyntaxValidator = new DescriptionsSyntaxValidator(
+			new DescriptionsDeserializer(),
+			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+		);
+		$this->labelsContentsValidator = new PropertyLabelsContentsValidator(
+			$this->createStub( PropertyLabelValidator::class )
+		);
+		$this->descriptionsContentsValidator = new PropertyDescriptionsContentsValidator(
+			$this->createStub( PropertyDescriptionValidator::class )
+		);
+	}
 
 	private const LIMIT = 40;
 
@@ -211,6 +241,304 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	/**
+	 * @dataProvider labelsValidationErrorProvider
+	 * @dataProvider descriptionsValidationErrorProvider
+	 */
+	public function testGivenValidationErrorInField_throws(
+		callable $getFieldValidator,
+		ValidationError $validationError,
+		UseCaseError $expectedError,
+		array $patchedSerialization = []
+	): void {
+		$getFieldValidator( $this )->expects( $this->once() )->method( 'validate' )->willReturn( $validationError );
+
+		try {
+			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )->validateAndDeserialize(
+				array_merge( [ 'id' => 'P123', 'data-type' => 'string' ], $patchedSerialization ),
+				new Property(
+					new NumericPropertyId( 'P123' ),
+					new Fingerprint(),
+					'string'
+				)
+			);
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function labelsValidationErrorProvider(): Generator {
+		$mockSyntaxValidator = function ( self $test ) {
+			$test->labelsSyntaxValidator = $this->createMock( LabelsSyntaxValidator::class );
+			return $test->labelsSyntaxValidator;
+		};
+		$mockContentsValidator = function ( self $test ) {
+			$test->labelsContentsValidator = $this->createMock( PropertyLabelsContentsValidator::class );
+			return $test->labelsContentsValidator;
+		};
+
+		$invalidLabels = [ 'not an associative array' ];
+		yield 'invalid labels' => [
+			$mockSyntaxValidator,
+			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
+				"Invalid input for 'labels' in the patched property",
+				[
+					UseCaseError::CONTEXT_PATH => 'labels',
+					UseCaseError::CONTEXT_VALUE => $invalidLabels,
+				]
+			),
+			[ 'labels' => $invalidLabels ],
+		];
+
+		yield 'empty label' => [
+			$mockContentsValidator,
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
+				[ LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_LABEL_EMPTY,
+				"Changed label for 'en' cannot be empty",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		$longLabel = str_repeat( 'a', 51 );
+		$maxLength = 50;
+		yield 'label too long' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyLabelValidator::CODE_TOO_LONG,
+				[
+					PropertyLabelValidator::CONTEXT_LABEL => $longLabel,
+					PropertyLabelValidator::CONTEXT_LANGUAGE => 'en',
+					PropertyLabelValidator::CONTEXT_LIMIT => $maxLength,
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_LABEL_TOO_LONG,
+				"Changed label for 'en' must not be more than $maxLength characters long",
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_VALUE => $longLabel,
+					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
+				]
+			),
+		];
+
+		$labelOfInvalidType = [ 'invalid', 'label', 'type' ];
+		yield 'invalid label type' => [
+			$mockSyntaxValidator,
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
+				[
+					LabelsSyntaxValidator::CONTEXT_FIELD_LABEL => $labelOfInvalidType,
+					LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_LABEL_INVALID,
+				"Changed label for 'en' is invalid: " . json_encode( $labelOfInvalidType ),
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => json_encode( $labelOfInvalidType ) ]
+			),
+		];
+
+		$invalidLabel = "invalid \t";
+		yield 'invalid label' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyLabelValidator::CODE_INVALID,
+				[
+					PropertyLabelValidator::CONTEXT_LABEL => $invalidLabel,
+					PropertyLabelValidator::CONTEXT_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_LABEL_INVALID,
+				"Changed label for 'en' is invalid: $invalidLabel",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $invalidLabel ]
+			),
+		];
+
+		yield 'invalid label language code' => [
+			$mockSyntaxValidator,
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[
+					LanguageCodeValidator::CONTEXT_PATH => 'labels',
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
+				"Not a valid language code 'e2' in changed labels",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'e2' ]
+			),
+		];
+
+		yield 'same value for label and description' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ PropertyLabelValidator::CONTEXT_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
+				'Label and description for language code en can not have the same value.',
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		yield 'label and description duplication' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyLabelValidator::CODE_LABEL_DUPLICATE,
+				[
+					PropertyLabelValidator::CONTEXT_LANGUAGE => 'en',
+					PropertyLabelValidator::CONTEXT_LABEL => 'en-label',
+					PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => 'P123',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_LABEL_DUPLICATE,
+				"Property P123 already has label 'en-label' associated with language code 'en'",
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_LABEL => 'en-label',
+					UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => 'P123',
+				]
+			),
+		];
+	}
+
+	public function descriptionsValidationErrorProvider(): Generator {
+		$mockSyntaxValidator = function ( self $test ) {
+			$test->descriptionsSyntaxValidator = $this->createMock( DescriptionsSyntaxValidator::class );
+			return $test->descriptionsSyntaxValidator;
+		};
+		$mockContentsValidator = function ( self $test ) {
+			$test->descriptionsContentsValidator = $this->createMock( PropertyDescriptionsContentsValidator::class );
+			return $test->descriptionsContentsValidator;
+		};
+
+		$invalidDescriptions = [ 'not an associative array' ];
+		yield 'invalid descriptions' => [
+			$mockSyntaxValidator,
+			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
+				"Invalid input for 'descriptions' in the patched property",
+				[
+					UseCaseError::CONTEXT_PATH => 'descriptions',
+					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
+				]
+			),
+			[ 'descriptions' => $invalidDescriptions ],
+		];
+
+		yield 'empty description' => [
+			$mockContentsValidator,
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
+				[ DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_DESCRIPTION_EMPTY,
+				"Changed description for 'en' cannot be empty",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+
+		$longDescription = str_repeat( 'a', 51 );
+		$maxLength = 50;
+		yield 'description too long' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyDescriptionValidator::CODE_TOO_LONG,
+				[
+					PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $longDescription,
+					PropertyDescriptionValidator::CONTEXT_LANGUAGE => 'en',
+					PropertyDescriptionValidator::CONTEXT_LIMIT => $maxLength,
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
+				"Changed description for 'en' must not be more than $maxLength characters long",
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_VALUE => $longDescription,
+					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
+				]
+			),
+		];
+
+		$descriptionOfInvalidType = [ 'invalid', 'description', 'type' ];
+		yield 'invalid description type' => [
+			$mockSyntaxValidator,
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
+				[
+					DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION => $descriptionOfInvalidType,
+					DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_DESCRIPTION_INVALID,
+				"Changed description for 'en' is invalid: " . json_encode( $descriptionOfInvalidType ),
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => json_encode( $descriptionOfInvalidType ) ]
+			),
+		];
+
+		$invalidDescription = "invalid \t";
+		yield 'invalid description' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyDescriptionValidator::CODE_INVALID,
+				[
+					PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $invalidDescription,
+					PropertyDescriptionValidator::CONTEXT_LANGUAGE => 'en',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_DESCRIPTION_INVALID,
+				"Changed description for 'en' is invalid: $invalidDescription",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $invalidDescription ]
+			),
+		];
+
+		yield 'invalid description language code' => [
+			$mockSyntaxValidator,
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[
+					LanguageCodeValidator::CONTEXT_PATH => 'descriptions',
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
+				"Not a valid language code 'e2' in changed descriptions",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'e2' ]
+			),
+		];
+
+		yield 'same value for description and description' => [
+			$mockContentsValidator,
+			new ValidationError(
+				PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ PropertyDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
+			),
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
+				'Label and description for language code en can not have the same value.',
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+			),
+		];
+	}
+
+	/**
 	 * @dataProvider aliasesValidationErrorProvider
 	 */
 	public function testAliasesValidation(
@@ -356,8 +684,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 		);
 
 		return new PatchedPropertyValidator(
-			new LabelsDeserializer(),
-			new DescriptionsDeserializer(),
+			$this->labelsSyntaxValidator,
+			$this->labelsContentsValidator,
+			$this->descriptionsSyntaxValidator,
+			$this->descriptionsContentsValidator,
 			new AliasesValidator(
 				$aliasesInLanguageValidator,
 				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),

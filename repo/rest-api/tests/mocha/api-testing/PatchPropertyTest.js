@@ -16,12 +16,14 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	let originalRevisionId;
 	let predicatePropertyId;
 	const testEnglishLabel = `some-label-${utils.uniq()}`;
+	const languageWithExistingLabel = 'en';
+	const languageWithExistingDescription = 'en';
 
 	before( async function () {
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
 			datatype: 'string',
-			labels: [ { language: 'en', value: testEnglishLabel } ],
-			descriptions: [ { language: 'en', value: `some-description-${utils.uniq()}` } ],
+			labels: [ { language: languageWithExistingLabel, value: testEnglishLabel } ],
+			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
 			aliases: [ { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
 
@@ -195,7 +197,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '422 error response', () => {
-		it( 'after patching: invalid operation change property id', async () => {
+		it( 'invalid operation change property id', async () => {
 			const patch = [
 				{ op: 'replace', path: '/id', value: 'P666' }
 			];
@@ -208,7 +210,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing property' );
 		} );
 
-		it( 'after patching: invalid operation change property datatype', async () => {
+		it( 'invalid operation change property datatype', async () => {
 			const patch = [
 				{ op: 'replace', path: '/data-type', value: 'wikibase-item' }
 			];
@@ -233,7 +235,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'patched-property-invalid-field' );
 		} );
 
-		it( 'after patching: missing mandatory field', async () => {
+		it( 'missing mandatory field', async () => {
 			const patch = [ { op: 'remove', path: '/data-type' } ];
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
@@ -242,13 +244,242 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.code, 'patched-property-missing-field' );
 		} );
 
-		it( 'after patching: unexpected field', async () => {
+		it( 'unexpected field', async () => {
 			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 422 );
 			assert.strictEqual( response.body.code, 'patched-property-unexpected-field' );
+		} );
+
+		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
+			op: 'replace',
+			path: `/labels/${languageWithExistingLabel}`,
+			value: newLabel
+		} );
+
+		it( 'invalid labels type', async () => {
+			const invalidLabels = [ 'not', 'an', 'object' ];
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ { op: 'replace', path: '/labels', value: invalidLabels } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: 'labels', value: invalidLabels };
+			assertValidError( response, 422, 'patched-property-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched property" );
+		} );
+
+		it( 'invalid label', async () => {
+			const language = languageWithExistingLabel;
+			const invalidLabel = 'tab characters \t not allowed';
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-label-invalid', { language, value: invalidLabel } );
+			assert.include( response.body.message, invalidLabel );
+			assert.include( response.body.message, `'${language}'` );
+		} );
+
+		it( 'invalid label type', async () => {
+			const language = languageWithExistingLabel;
+			const label = { object: 'not allowed' };
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingLabelPatchOp( label ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-label-invalid', { language, value: JSON.stringify( label ) } );
+			assert.include( response.body.message, JSON.stringify( label ) );
+			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
+		} );
+
+		it( 'empty label', async () => {
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingLabelPatchOp( '' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-label-empty', { language: languageWithExistingLabel } );
+		} );
+
+		it( 'label too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongLabel = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingLabelPatchOp( tooLongLabel ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel };
+			assertValidError( response, 422, 'patched-label-too-long', context );
+			assert.strictEqual(
+				response.body.message,
+				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
+			);
+		} );
+
+		it( 'invalid label language code', async () => {
+			const language = 'invalid-language-code';
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ {
+					op: 'add',
+					path: `/labels/${language}`,
+					value: 'potato'
+				} ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-labels-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
+		} );
+
+		it( 'property with same label already exists', async () => {
+			const label = `test-label-${utils.uniq()}`;
+
+			const existingEntityResponse = await entityHelper.createEntity( 'property', {
+				labels: [ { language: languageWithExistingLabel, value: label } ],
+				datatype: 'string'
+			} );
+			const existingPropertyId = existingEntityResponse.entity.id;
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingLabelPatchOp( label ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { language: languageWithExistingLabel, label, 'matching-property-id': existingPropertyId };
+			assertValidError( response, 422, 'patched-property-label-duplicate', context );
+
+			assert.strictEqual(
+				response.body.message,
+				`Property ${existingPropertyId} already has label '${label}' associated with ` +
+				`language code '${languageWithExistingLabel}'`
+			);
+		} );
+
+		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
+			op: 'replace',
+			path: `/descriptions/${languageWithExistingDescription}`,
+			value: newDescription
+		} );
+
+		it( 'invalid descriptions type', async () => {
+			const invalidDescriptions = [ 'not', 'an', 'object' ];
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ { op: 'replace', path: '/descriptions', value: invalidDescriptions } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: 'descriptions', value: invalidDescriptions };
+			assertValidError( response, 422, 'patched-property-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'descriptions' in the patched property" );
+		} );
+
+		it( 'invalid description', async () => {
+			const language = 'en';
+			const invalidDescription = 'tab characters \t not allowed';
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-invalid', { language, value: invalidDescription } );
+			assert.include( response.body.message, invalidDescription );
+			assert.include( response.body.message, `'${language}'` );
+		} );
+
+		it( 'invalid description type', async () => {
+			const invalidDescription = { object: 'not allowed' };
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patched-description-invalid',
+				{ language: 'en', value: JSON.stringify( invalidDescription ) }
+			);
+			assert.include( response.body.message, JSON.stringify( invalidDescription ) );
+			assert.include( response.body.message, "'en'" );
+		} );
+
+		it( 'empty description', async () => {
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
+		} );
+
+		it( 'empty description after trimming whitespace in the input', async () => {
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
+		} );
+
+		it( 'description too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongDescription = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patched-description-too-long',
+				{ value: tooLongDescription, 'character-limit': maxLength, language: 'en' }
+			);
+			assert.strictEqual(
+				response.body.message,
+				`Changed description for 'en' must not be more than ${maxLength} characters long`
+			);
+		} );
+
+		it( 'invalid description language code', async () => {
+			const language = 'invalid-language-code';
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ { op: 'add', path: `/descriptions/${language}`, value: 'potato' } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
+		} );
+
+		// FIXME this doesn't work yet and will be enabled in a later patch.
+		// eslint-disable-next-line mocha/no-skipped-tests
+		it.skip( 'patched-property-label-description-same-value', async () => {
+			const language = languageWithExistingLabel;
+			const text = `label-and-description-text-${utils.uniq()}`;
+
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[
+					{ op: 'replace', path: '/labels/en', value: text },
+					{ op: 'replace', path: '/descriptions/en', value: text }
+				]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-property-label-description-same-value', { language } );
+			assert.strictEqual(
+				response.body.message,
+				`Label and description for language code ${language} can not have the same value.`
+			);
 		} );
 
 		it( 'empty alias', async () => {

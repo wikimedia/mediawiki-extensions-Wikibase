@@ -813,8 +813,28 @@ return [
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new PatchedPropertyValidator(
-				new LabelsDeserializer(),
-				new DescriptionsDeserializer(),
+				new LabelsSyntaxValidator(
+					new LabelsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new PropertyLabelsContentsValidator(
+					new TermValidatorFactoryPropertyLabelValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
+						WbRestApi::getPropertyDataRetriever( $services )
+					)
+				),
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new PropertyDescriptionsContentsValidator(
+					new TermValidatorFactoryPropertyDescriptionValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WbRestApi::getPropertyDataRetriever( $services )
+					)
+				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),

@@ -31,7 +31,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValida
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -78,8 +84,10 @@ class PatchPropertyTest extends TestCase {
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->propertyWriteModelRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->patchedPropertyValidator = new PatchedPropertyValidator(
-			new LabelsDeserializer(),
-			new DescriptionsDeserializer(),
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new PropertyLabelsContentsValidator( $this->createStub( PropertyLabelValidator::class ) ),
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new PropertyDescriptionsContentsValidator( $this->createStub( PropertyDescriptionValidator::class ) ),
 			new AliasesValidator(
 				$this->createStub( AliasesInLanguageValidator::class ),
 				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
