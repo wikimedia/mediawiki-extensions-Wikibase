@@ -58,8 +58,8 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'invalid-language',
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => 'descriptions',
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'invalid-language',
+					LanguageCodeValidator::CONTEXT_PATH => 'descriptions',
 				]
 			),
 		];

@@ -62,7 +62,7 @@ class PatchedLabelsValidator {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
-				$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE];
+				$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
 					"Not a valid language code '$languageCode' in changed labels",

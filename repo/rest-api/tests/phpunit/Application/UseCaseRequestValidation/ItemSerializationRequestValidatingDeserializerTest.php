@@ -194,8 +194,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemValidator::CONTEXT_FIELD_LABELS,
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
+					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_LABELS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
 			new UseCaseError(
@@ -318,8 +318,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
+					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
 			new UseCaseError(
@@ -482,8 +482,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => AliasesValidator::CONTEXT_FIELD_ALIAS,
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => 'e2',
+					LanguageCodeValidator::CONTEXT_PATH => AliasesValidator::CONTEXT_FIELD_ALIAS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
 			new UseCaseError(

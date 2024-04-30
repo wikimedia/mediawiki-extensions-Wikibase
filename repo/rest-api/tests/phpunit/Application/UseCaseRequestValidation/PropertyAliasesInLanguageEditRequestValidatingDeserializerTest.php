@@ -9,7 +9,6 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesIn
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
@@ -96,7 +95,7 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 				AliasesInLanguageValidator::CODE_TOO_LONG,
 				[
 					AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
-					PropertyDescriptionValidator::CONTEXT_LIMIT => $limit,
+					AliasesInLanguageValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
 			UseCaseError::ALIAS_TOO_LONG,

@@ -39,7 +39,7 @@ class LanguageCodeValidatorTest extends TestCase {
 		);
 		$this->assertSame(
 			$invalidLanguageCode,
-			$error->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]
+			$error->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]
 		);
 	}
 

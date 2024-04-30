@@ -234,7 +234,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		$this->languageCodeValidator->method( 'validate' )->willReturn(
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-				[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguage ]
+				[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => $invalidLanguage ]
 			)
 		);
 
