@@ -120,11 +120,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
@@ -341,19 +344,26 @@ return [
 		function( MediaWikiServices $services ): ItemSerializationRequestValidatingDeserializer {
 			return new ItemSerializationRequestValidatingDeserializer(
 				new ItemValidator(
-					new ItemLabelsAndDescriptionsValidator(
+					new LabelsSyntaxValidator(
+						new LabelsDeserializer(),
+						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					),
+					new ItemLabelsContentsValidator(
 						new TermValidatorFactoryItemLabelValidator(
 							WikibaseRepo::getTermValidatorFactory( $services ),
 							WikibaseRepo::getItemTermsCollisionDetector( $services )
-						),
+						)
+					),
+					new DescriptionsSyntaxValidator(
+						new DescriptionsDeserializer(),
+						// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
+						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					),
+					new ItemDescriptionsContentsValidator(
 						new TermValidatorFactoryItemDescriptionValidator(
 							WikibaseRepo::getTermValidatorFactory( $services ),
 							WikibaseRepo::getItemTermsCollisionDetector( $services )
-						),
-						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
-						new LabelsDeserializer(),
-						new DescriptionsDeserializer()
+						)
 					),
 					new ItemAliasesValidator(
 						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),

@@ -21,18 +21,27 @@ class ItemValidator {
 	public const CONTEXT_FIELD_DESCRIPTIONS = 'descriptions';
 
 	private ?Item $deserializedItem = null;
-	private ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator;
+	private LabelsSyntaxValidator $labelsSyntaxValidator;
+	private ItemLabelsContentsValidator $labelsContentsValidator;
+	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
+	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
 	private ItemAliasesValidator $itemAliasesValidator;
 	private ItemStatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
 
 	public function __construct(
-		ItemLabelsAndDescriptionsValidator $itemLabelsAndDescriptionsValidator,
+		LabelsSyntaxValidator $labelsSyntaxValidator,
+		ItemLabelsContentsValidator $labelsContentsValidator,
+		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
+		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
 		ItemAliasesValidator $itemAliasesValidator,
 		ItemStatementsValidator $itemStatementsValidator,
 		SitelinksValidator $sitelinksValidator
 	) {
-		$this->itemLabelsAndDescriptionsValidator = $itemLabelsAndDescriptionsValidator;
+		$this->labelsSyntaxValidator = $labelsSyntaxValidator;
+		$this->labelsContentsValidator = $labelsContentsValidator;
+		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
+		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
 		$this->itemAliasesValidator = $itemAliasesValidator;
 		$this->itemStatementsValidator = $itemStatementsValidator;
 		$this->sitelinksValidator = $sitelinksValidator;
@@ -71,8 +80,8 @@ class ItemValidator {
 		$this->deserializedItem = new Item(
 			null,
 			new Fingerprint(
-				$this->itemLabelsAndDescriptionsValidator->getValidatedLabels(),
-				$this->itemLabelsAndDescriptionsValidator->getValidatedDescriptions(),
+				$this->labelsContentsValidator->getValidatedLabels(),
+				$this->descriptionsContentsValidator->getValidatedDescriptions(),
 				$this->itemAliasesValidator->getValidatedAliases()
 			),
 			$this->sitelinksValidator->getValidatedSitelinks(),
@@ -97,7 +106,16 @@ class ItemValidator {
 			return new ValidationError( self::CODE_MISSING_LABELS_AND_DESCRIPTIONS );
 		}
 
-		return $this->itemLabelsAndDescriptionsValidator->validate( $labels, $descriptions );
+		return $this->labelsSyntaxValidator->validate( $labels ) ??
+			$this->descriptionsSyntaxValidator->validate( $descriptions ) ??
+			$this->labelsContentsValidator->validate(
+				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
+				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions()
+			) ??
+			$this->descriptionsContentsValidator->validate(
+				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
+				$this->labelsSyntaxValidator->getPartiallyValidatedLabels()
+			);
 	}
 
 }

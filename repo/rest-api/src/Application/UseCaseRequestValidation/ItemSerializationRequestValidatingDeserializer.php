@@ -6,17 +6,21 @@ use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsAndDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+
+// disable because it forces comments for switch-cases that look like fall-throughs but aren't
+// phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
 
 /**
  * @license GPL-2.0-or-later
@@ -37,31 +41,11 @@ class ItemSerializationRequestValidatingDeserializer {
 		$validationError = $this->validator->validate( $itemSerialization );
 
 		if ( $validationError ) {
-			$this->handleLabelValidationErrors( $validationError );
-			$this->handleDescriptionValidationErrors( $validationError );
-			$this->handleAliasesValidationErrors( $validationError );
-			$this->handleStatementsValidationErrors( $validationError );
-			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
-					throw new UseCaseError(
-						UseCaseError::ITEM_DATA_INVALID_FIELD,
-						"Invalid input for '{$context[ItemValidator::CONTEXT_FIELD_NAME]}'",
-						[
-							UseCaseError::CONTEXT_PATH => $context[ItemValidator::CONTEXT_FIELD_NAME],
-							UseCaseError::CONTEXT_VALUE => $context[ItemValidator::CONTEXT_FIELD_VALUE],
-						]
-					);
-				case ItemLabelsAndDescriptionsValidator::CODE_INVALID_FIELD:
-					throw new UseCaseError(
-						UseCaseError::ITEM_DATA_INVALID_FIELD,
-						"Invalid input for '{$context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME]}'",
-						[
-							UseCaseError::CONTEXT_PATH => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_NAME],
-							UseCaseError::CONTEXT_VALUE => $context[ItemLabelsAndDescriptionsValidator::CONTEXT_FIELD_VALUE],
-						]
-					);
+					$field = $context[ItemValidator::CONTEXT_FIELD_NAME];
+					$this->throwInvalidField( $field, $field, $context[ItemValidator::CONTEXT_FIELD_VALUE] );
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
 					throw new UseCaseError(
 						UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
@@ -82,21 +66,36 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS,
 						'Item requires at least a label or a description in a language'
 					);
-				default:
-					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
+
+			$this->handleLabelValidationErrors( $validationError, $itemSerialization['labels'] ?? [] );
+			$this->handleDescriptionValidationErrors( $validationError, $itemSerialization['descriptions'] ?? [] );
+			$this->handleAliasesValidationErrors( $validationError );
+			$this->handleStatementsValidationErrors( $validationError );
+			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
+
+			throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 		}
 
 		return $this->validator->getValidatedItem();
 	}
 
-	private function handleLabelValidationErrors( ValidationError $validationError ): void {
+	private function handleLabelValidationErrors( ValidationError $validationError, array $labelsSerialization ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemLabelValidator::CODE_EMPTY:
+			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
+				$this->throwInvalidField( 'labels', 'labels', $labelsSerialization );
+			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
 				throw new UseCaseError(
 					UseCaseError::LABEL_EMPTY,
 					'Label must not be empty',
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
+				);
+			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
+				$value = json_encode( $context[ItemLabelValidator::CONTEXT_LABEL] );
+				throw new UseCaseError(
+					UseCaseError::INVALID_LABEL,
+					"Not a valid label: {$value}",
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemLabelValidator::CODE_INVALID:
@@ -137,14 +136,23 @@ class ItemSerializationRequestValidatingDeserializer {
 		}
 	}
 
-	private function handleDescriptionValidationErrors( ValidationError $validationError ): void {
+	private function handleDescriptionValidationErrors( ValidationError $validationError, array $descriptionsSerialization ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemDescriptionValidator::CODE_EMPTY:
+			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
+				$this->throwInvalidField( 'descriptions', 'descriptions', $descriptionsSerialization );
+			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				throw new UseCaseError(
 					UseCaseError::DESCRIPTION_EMPTY,
 					'Description must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
+				);
+			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
+				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION] );
+				throw new UseCaseError(
+					UseCaseError::INVALID_DESCRIPTION,
+					"Not a valid description: {$value}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
 				);
 			case ItemDescriptionValidator::CODE_INVALID:
 				throw new UseCaseError(
@@ -188,14 +196,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case ItemAliasesValidator::CODE_INVALID_ALIASES:
-				throw new UseCaseError(
-					UseCaseError::ITEM_DATA_INVALID_FIELD,
-					"Invalid input for 'aliases'",
-					[
-						UseCaseError::CONTEXT_PATH => 'aliases',
-						UseCaseError::CONTEXT_VALUE => $context[ItemAliasesValidator::CONTEXT_FIELD_ALIASES],
-					]
-				);
+				$this->throwInvalidField( 'aliases', 'aliases', $context[ItemAliasesValidator::CONTEXT_FIELD_ALIASES] );
 			case ItemAliasesValidator::CODE_EMPTY_ALIAS:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_EMPTY,
@@ -247,14 +248,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case ItemStatementsValidator::CODE_INVALID_STATEMENTS:
-				throw new UseCaseError(
-					UseCaseError::ITEM_DATA_INVALID_FIELD,
-					"Invalid input for 'statements'",
-					[
-						UseCaseError::CONTEXT_PATH => 'statements',
-						UseCaseError::CONTEXT_VALUE => $context[ItemStatementsValidator::CONTEXT_STATEMENTS],
-					]
-				);
+				$this->throwInvalidField( 'statements', 'statements', $context[ItemStatementsValidator::CONTEXT_STATEMENTS] );
 			case ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_DATA_INVALID_FIELD,
@@ -288,15 +282,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $context[SitelinksValidator::CONTEXT_SITE_ID] ]
 				);
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
-				$path = 'sitelinks';
-				throw new UseCaseError(
-					UseCaseError::ITEM_DATA_INVALID_FIELD,
-					"Invalid input for '$path'",
-					[
-						UseCaseError::CONTEXT_PATH => $path,
-						UseCaseError::CONTEXT_VALUE => $serialization,
-					]
-				);
+				$this->throwInvalidField( 'sitelinks', 'sitelinks', $serialization );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw new UseCaseError(
 					UseCaseError::INVALID_SITE_ID,
@@ -366,6 +352,21 @@ class ItemSerializationRequestValidatingDeserializer {
 					]
 				);
 		}
+	}
+
+	/**
+	 * @param string $field
+	 * @param string $path
+	 * @param mixed $value
+	 *
+	 * @return never
+	 */
+	public function throwInvalidField( string $field, string $path, $value ): void {
+		throw new UseCaseError(
+			UseCaseError::ITEM_DATA_INVALID_FIELD,
+			"Invalid input for '$field'",
+			[ UseCaseError::CONTEXT_PATH => $path, UseCaseError::CONTEXT_VALUE => $value ]
+		);
 	}
 
 }
