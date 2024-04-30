@@ -30,7 +30,10 @@
 			"ネイ",
 			"朝彦",
 			"赤城。",
-			"아라"
+			"아라",
+			"Chqaz",
+			"MagicAho",
+			"Nikki"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -308,7 +311,7 @@
 	"wikibase-itemmerge-cant-load-entity-content": "項目を読み込めませんでした。",
 	"wikibase-itemmerge-cant-merge-self": "項目をそれ自身とは統合できません。",
 	"wikibase-tokencheck-missingtoken": "編集トークンが必要です。",
-	"wikibase-tokencheck-mustposttoken": "編集は POST 要求によってのみ可能です。",
+	"wikibase-tokencheck-mustposttoken": "編集はPOSTリクエストによってのみ可能です。",
 	"wikibase-tokencheck-badtoken": "不良な編集トークン（おそらくセッションの期限切れ）。",
 	"special-dispatchstats": "変更発送統計",
 	"wikibase-dispatchstats-intro": "このページはクライアントに発送された変更についての統計情報を提供します。{{SITENAME}}上の変更が通知され、そのウィキのジョブキューが通知を処理した後、クライアントのウィキはその変更を通知されます。",
