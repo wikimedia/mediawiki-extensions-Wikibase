@@ -62,9 +62,50 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 			);
 
 		$this->assertNull( $validator->validate( $termsToValidate, $termsToCompareWith ) );
-		$validationResult = $getValidationResult();
-		$this->assertEquals( $termsToValidate->asPlainTermList(), $validationResult );
-		$this->assertNotInstanceOf( $partialResultClass, $validationResult );
+		$this->assertEquals( $termsToValidate->asPlainTermList(), $getValidationResult() );
+		$this->assertNotInstanceOf( $partialResultClass, $getValidationResult() );
+	}
+
+	/**
+	 * @dataProvider validatorProvider
+	 *
+	 * @param MockObject $singleTermValidator
+	 * @param mixed $validator
+	 * @param string $partialResultClass
+	 * @param callable $getValidationResult
+	 */
+	public function testValidateSpecificLanguages(
+		MockObject $singleTermValidator,
+		$validator,
+		string $partialResultClass,
+		callable $getValidationResult
+	): void {
+		$languagesToValidate = [ 'ar', 'en' ];
+		$inputTerms = new $partialResultClass( [
+			new Term( 'ar', 'ar term' ),
+			new Term( 'de', 'de term' ),
+			new Term( 'en', 'en term' ),
+		] );
+		$termsToCompareWith = new TermList( [ new Term( 'en', 'some other term' ) ] );
+
+		$matcher = $this->exactly( count( $languagesToValidate ) );
+		$singleTermValidator->expects( $matcher )
+			->method( 'validate' )
+			->willReturnCallback(
+				function ( $language, $text, $otherTerms ) use ( $matcher, $languagesToValidate, $inputTerms, $termsToCompareWith ) {
+					$languageBeingValidated = $languagesToValidate[$matcher->getInvocationCount() - 1];
+
+					$this->assertSame( $languageBeingValidated, $language );
+					$this->assertSame( $inputTerms->getByLanguage( $languageBeingValidated )->getText(), $text );
+					$this->assertSame( $termsToCompareWith, $otherTerms );
+
+					return null;
+				}
+			);
+
+		$this->assertNull( $validator->validate( $inputTerms, $termsToCompareWith, $languagesToValidate ) );
+		$this->assertEquals( $inputTerms->asPlainTermList(), $getValidationResult() );
+		$this->assertNotInstanceOf( $partialResultClass, $getValidationResult() );
 	}
 
 	/**
