@@ -134,7 +134,7 @@
 	"wikibase-client-data-bridge-references-heading": "Белгилеу",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Системагъа кирмегенсиз",
 	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Кирмегенсиз. <strong>Кирирсегиз</strong> неда <strong>Хыйсаб болдурсагъыз</strong>, этген тюзетиуле, башха файдала бла бирге атыгъызгъа байламлы боллукъду.",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Эс бёлюгюз!</strong> Сиз системагъа кирмегенсиз. Тюрлендириу этсегиз, сизни IP-адресигиз бу бетни тюрлениу тарихине джазыллыкъды эмда ачыкъ кёрюннюкдю. Сиз <strong>кирсегиз</strong> неда <strong>хыйсаб къурасагъыз</strong>, тюрлендириулеригиз аны орнуна къошулуучу атыгъыз бла байламлы боллукъдула эмда башха онглулукъларыгъыз боллукъду.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Эс бёлюгюз:</strong> Системагъа кирмегенсиз. Тюзетиу этсегиз, сизни IP-адресигиз бу бетни тюзетиу тарихине джазыллыкъды эмда хар ким да кёрюрча боллукъду. Системагъа <strong>[кирсегиз]</strong> неда <strong>[хыйсаб къурасагъыз]</strong>, тюзетиулеригиз аны орнуна хайырланыучу атыгъыз бла байламлы боллукъду, эмда башха онглулукъларыгъыз боллукъду.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Олтуруу ачхмагъанлай тюзет",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Кир неда регистрация эт",
 	"wikibase-client-data-bridge-license-heading": "Хайырланыу эмда лиценизя",
