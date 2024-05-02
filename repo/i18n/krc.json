@@ -169,6 +169,7 @@
 	"wikibase-validator-unknown-unit": "Билинмеген бирим: $1",
 	"wikibase-validator-not-allowed": "Болмазлыкъ магъана: $1",
 	"wikibase-validator-no-validators": "Джасакъ",
+	"wikibase-validator-sitelink-conflict": "$1 джибериую $2 элемент алайсыз да хайырланнганды. Аныкъы тюл эсе $2 элементден къоратыргъа, бир теманы юсюнден эселе бирлешдирирге боллукъсуз.",
 	"wikibase-validator-sitelink-conflict-redirects-supported": "$1 джибериу алайсыз да $2 элемент бла хайырланады. Аны аныкъы тюл эсе $2 ичинден кетерирге боллукъсуз, неда бир тема эсе элементлени бирлешдирирге боллукъсуз. Болум къыйыныракъ эсе, бери къарагъыз [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-itembytitle-summary": "Special:ItemByTitle байланнган сайтда берилген бетде келишген элементни излеуде хайырланады.<br />Биринчи къырда \"{{int:wikibase-itembytitle-lookup-site}}\" сайтны тили бла кодун киргизтесиз.<br />Экинчи къырда \"{{int:wikibase-itembytitle-lookup-page}}\" байланнган сайтда чыкъгъаныча, бетни кескин атын белгилерге керекди.",
 	"wikibase-itemdisambiguation-lookup-language": "Тил код:",
