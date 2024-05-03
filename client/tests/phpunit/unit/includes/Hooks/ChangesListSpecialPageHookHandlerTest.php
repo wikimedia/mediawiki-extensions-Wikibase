@@ -63,11 +63,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	}
 
 	public function testAddFilter() {
-		$user = $this->getUser(
-			[
-				[ 'usenewrc' => 0 ],
-			]
-		);
+		$user = $this->createMock( User::class );
 
 		/** @var SpecialRecentChanges $specialPage */
 		$specialPage = MediaWikiServices::getInstance()->getSpecialPageFactory()
@@ -478,28 +474,6 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			[ 'Recentchanges' ],
 			[ 'Recentchangeslinked' ],
 		];
-	}
-
-	/**
-	 * @param array $userOptions
-	 *
-	 * @return User
-	 */
-	private function getUser( array $userOptions ) {
-		$user = $this->createMock( User::class );
-
-		$user->method( 'getOption' )
-			->willReturnCallback( static function ( $optionName ) use ( $userOptions ) {
-				foreach ( $userOptions as $key => $value ) {
-					if ( $optionName === $key ) {
-						return $value;
-					}
-				}
-
-				return null;
-			} );
-
-		return $user;
 	}
 
 	/**
