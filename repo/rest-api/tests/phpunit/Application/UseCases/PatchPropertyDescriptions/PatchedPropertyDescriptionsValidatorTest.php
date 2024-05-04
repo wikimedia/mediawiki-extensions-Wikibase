@@ -6,10 +6,7 @@ use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -18,7 +15,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -42,7 +38,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 		$this->assertEquals(
 			$expectedResult,
 			$this->newValidator()
-				->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), $descriptionsSerialization )
+				->validateAndDeserialize( new TermList(), new TermList(), $descriptionsSerialization )
 		);
 	}
 
@@ -62,7 +58,11 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 	 */
 	public function testWithInvalidDescriptions( array $serialization, UseCaseError $expectedError ): void {
 		try {
-			$this->newValidator()->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), $serialization );
+			$this->newValidator()->validateAndDeserialize(
+				new TermList(),
+				new TermList( [ new Term( 'en', self::EN_LABEL ) ] ),
+				$serialization
+			);
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -129,14 +129,6 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 	private function newValidator(): PatchedPropertyDescriptionsValidator {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
-		$propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
-		$propertyRetriever->method( 'getPropertyWriteModel' )
-			->willReturn( new Property(
-				null,
-				new Fingerprint( new TermList( [ new Term( 'en', self::EN_LABEL ) ] ) ),
-				'string'
-			) );
-
 		return new PatchedPropertyDescriptionsValidator(
 			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), new LanguageCodeValidator( $validLanguageCodes ) ),
 			new PropertyDescriptionsContentsValidator( new TermValidatorFactoryPropertyDescriptionValidator(
@@ -147,8 +139,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 					$this->createStub( TermsCollisionDetectorFactory::class ),
 					$this->createStub( TermLookup::class ),
 					$this->createStub( LanguageNameUtils::class )
-				),
-				$propertyRetriever
+				)
 			) )
 		);
 	}

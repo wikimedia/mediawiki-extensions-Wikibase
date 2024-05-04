@@ -461,9 +461,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, language );
 		} );
 
-		// FIXME this doesn't work yet and will be enabled in a later patch.
-		// eslint-disable-next-line mocha/no-skipped-tests
-		it.skip( 'patched-property-label-description-same-value', async () => {
+		it( 'patched-property-label-description-same-value', async () => {
 			const language = languageWithExistingLabel;
 			const text = `label-and-description-text-${utils.uniq()}`;
 

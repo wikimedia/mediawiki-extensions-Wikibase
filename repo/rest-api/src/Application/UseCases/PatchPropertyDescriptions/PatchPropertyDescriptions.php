@@ -73,8 +73,8 @@ class PatchPropertyDescriptions {
 		$originalDescriptions = $property->getDescriptions();
 
 		$modifiedDescriptionsAsTermList = $this->patchedDescriptionsValidator->validateAndDeserialize(
-			$propertyId,
 			$originalDescriptions,
+			$property->getLabels(),
 			$modifiedDescriptions
 		);
 		$property->getFingerprint()->setDescriptions( $modifiedDescriptionsAsTermList );

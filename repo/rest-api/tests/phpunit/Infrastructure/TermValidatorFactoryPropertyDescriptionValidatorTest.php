@@ -5,12 +5,10 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -26,50 +24,19 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
-	private PropertyWriteModelRetriever $propertyRetriever;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
-	}
-
 	public function testGivenValidDescription_returnsNull(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->setLabel( 'en', 'Property Label' );
-		$property->setDescription( 'en', 'Property Description' );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
-
 		$this->assertNull(
-			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
+			$this->newValidator()->validate(
+				'en',
+				'valid description',
+				new TermList( [ new Term( 'en', 'valid item label' ) ] )
+			)
 		);
 	}
 
 	public function testGivenValidDescriptionAndPropertyWithoutLabel_returnsNull(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->setDescription( 'en', 'Property Description' );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
-
 		$this->assertNull(
-			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
-		);
-	}
-
-	public function testGivenValidDescriptionForNonExistentProperty_returnsNull(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, null );
-
-		$this->assertNull(
-			$this->newValidator()->validate( $propertyId, 'en', 'valid description' )
+			$this->newValidator()->validate( 'en', 'valid description', new TermList( [] ) )
 		);
 	}
 
@@ -84,7 +51,7 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 	): void {
 		$this->assertEquals(
 			new ValidationError( $errorCode, $errorContext ),
-			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), $language, $description )
+			$this->newValidator()->validate( $language, $description, new TermList( [] ) )
 		);
 	}
 
@@ -122,46 +89,31 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 	}
 
 	public function testGivenDescriptionSameAsLabel_returnsValidationError(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
 		$propertyLabel = 'Property Label';
 		$language = 'en';
-
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->setLabel( $language, $propertyLabel );
-		$property->setDescription( $language, 'Property Description' );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertEquals(
 			new ValidationError(
 				PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
 				[ PropertyDescriptionValidator::CONTEXT_LANGUAGE => $language ]
 			),
-			$this->newValidator()->validate( $propertyId, $language, $propertyLabel )
+			$this->newValidator()->validate(
+				$language,
+				$propertyLabel,
+				new TermList( [ new Term( $language, $propertyLabel ) ] )
+			)
 		);
 	}
 
 	public function testUnchangedDescription_willNotPerformValidation(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
 		$language = 'en';
 		$description = 'Property Description';
 
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->setLabel( $language, 'New Label' );
-		$property->setDescription( $language, $description );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
-
-		$this->assertNull( $this->newValidator()->validate( $propertyId, $language, $description ) );
+		$this->assertNull( $this->newValidator()->validate( $language, $description, new TermList( [] ) ) );
 	}
 
 	private function newValidator(): TermValidatorFactoryPropertyDescriptionValidator {
-		return new TermValidatorFactoryPropertyDescriptionValidator(
-			$this->newTermValidatorFactory(),
-			$this->propertyRetriever
-		);
+		return new TermValidatorFactoryPropertyDescriptionValidator( $this->newTermValidatorFactory() );
 	}
 
 	private function newTermValidatorFactory(): TermValidatorFactory {
@@ -173,15 +125,6 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 			WikibaseRepo::getTermLookup(),
 			$this->createStub( LanguageNameUtils::class )
 		);
-	}
-
-	private function createPropertyWriteModelRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
-		$this->propertyRetriever = $this->createMock( PropertyWriteModelRetriever::class );
-		$this->propertyRetriever
-			->expects( $this->once() )
-			->method( 'getPropertyWriteModel' )
-			->with( $propertyId )
-			->willReturn( $property );
 	}
 
 }

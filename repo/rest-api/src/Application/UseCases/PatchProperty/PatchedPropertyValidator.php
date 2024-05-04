@@ -6,6 +6,8 @@ use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
@@ -62,8 +64,7 @@ class PatchedPropertyValidator {
 		$this->assertNoIllegalModification( $serialization, $originalProperty );
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
-		$this->assertValidLabelsAndDescriptions( $serialization );
-
+		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
 		$this->validateAliases( $serialization[ 'aliases' ] ?? [] );
 
 		return new Property(
@@ -126,16 +127,23 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	private function assertValidLabelsAndDescriptions( array $serialization ): void {
+	private function assertValidLabelsAndDescriptions( Property $property, array $serialization ): void {
 		$labels = $serialization['labels'] ?? [];
 		$descriptions = $serialization['descriptions'] ?? [];
-		$propertyId = new NumericPropertyId( $serialization['id'] );
-		$validationError = $this->labelsSyntaxValidator->validate( $labels )
-			?? $this->descriptionsSyntaxValidator->validate( $descriptions )
-			?? $this->labelsContentsValidator->validate( $this->labelsSyntaxValidator->getPartiallyValidatedLabels(), $propertyId )
-			?? $this->descriptionsContentsValidator->validate(
+		$validationError = $this->labelsSyntaxValidator->validate( $labels ) ??
+			$this->descriptionsSyntaxValidator->validate( $descriptions ) ??
+			$this->labelsContentsValidator->validate(
+				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
-				$propertyId
+				$this->getModifiedLanguages( $property->getLabels(), $this->labelsSyntaxValidator->getPartiallyValidatedLabels() )
+			) ??
+			$this->descriptionsContentsValidator->validate(
+				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
+				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
+				$this->getModifiedLanguages(
+					$property->getDescriptions(),
+					$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions()
+				)
 			);
 
 		if ( $validationError ) {
@@ -144,6 +152,14 @@ class PatchedPropertyValidator {
 			$this->handleDescriptionsValidationError( $validationError, $descriptions );
 			throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
+	}
+
+	private function getModifiedLanguages( TermList $original, TermList $modified ): array {
+		return array_keys( array_filter(
+			iterator_to_array( $modified ),
+			fn( Term $description ) => !$original->hasTermForLanguage( $description->getLanguageCode() ) ||
+				!$original->getByLanguage( $description->getLanguageCode() )->equals( $description )
+		) );
 	}
 
 	private function handleLanguageCodeValidationError( ValidationError $validationError ): void {

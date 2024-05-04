@@ -4,9 +4,9 @@ namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
@@ -17,24 +17,18 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 
 	private TermValidatorFactory $termValidatorFactory;
 	private TermsCollisionDetector $termsCollisionDetector;
-	private PropertyWriteModelRetriever $propertyRetriever;
 
-	public function __construct(
-		TermValidatorFactory $termValidatorFactory,
-		TermsCollisionDetector $termsCollisionDetector,
-		PropertyWriteModelRetriever $propertyRetriever
-	) {
+	public function __construct( TermValidatorFactory $termValidatorFactory, TermsCollisionDetector $termsCollisionDetector ) {
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
-		$this->propertyRetriever = $propertyRetriever;
 	}
 
-	public function validate( PropertyId $propertyId, string $language, string $label ): ?ValidationError {
-		return $this->validateLabel( $language, $label )
-			   ?? $this->validateProperty( $propertyId, $language, $label );
+	public function validate( string $language, string $labelText, TermList $existingDescriptions ): ?ValidationError {
+		return $this->validateLabelText( $labelText, $language )
+			   ?? $this->validateLabelWithDescriptions( $language, $labelText, $existingDescriptions );
 	}
 
-	public function validateLabel( string $language, string $labelText ): ?ValidationError {
+	public function validateLabelText( string $labelText, string $language ): ?ValidationError {
 		$result = $this->termValidatorFactory
 			->getLabelValidator( Property::ENTITY_TYPE )
 			->validate( $labelText );
@@ -66,21 +60,7 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 		return null;
 	}
 
-	private function validateProperty( PropertyId $propertyId, string $language, string $label ): ?ValidationError {
-		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
-
-		// skip if Property does not exist
-		if ( $property === null ) {
-			return null;
-		}
-
-		// skip if label is unchanged
-		if ( $property->getLabels()->hasTermForLanguage( $language ) &&
-			 $property->getLabels()->getByLanguage( $language )->getText() === $label
-		) {
-			return null;
-		}
-
+	private function validateLabelWithDescriptions( string $language, string $label, TermList $existingDescriptions ): ?ValidationError {
 		$entityId = $this->termsCollisionDetector->detectLabelCollision( $language, $label );
 		if ( $entityId instanceof PropertyId ) {
 			return new ValidationError(
@@ -94,11 +74,11 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 		}
 
 		// skip if Property does not have a description
-		if ( !$property->getDescriptions()->hasTermForLanguage( $language ) ) {
+		if ( !$existingDescriptions->hasTermForLanguage( $language ) ) {
 			return null;
 		}
 
-		$description = $property->getDescriptions()->getByLanguage( $language )->getText();
+		$description = $existingDescriptions->getByLanguage( $language )->getText();
 		if ( $label === $description ) {
 			return new ValidationError(
 				self::CODE_LABEL_DESCRIPTION_EQUAL,

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\Validation;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,6 +20,6 @@ interface PropertyLabelValidator {
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
 	public const CONTEXT_LIMIT = 'character-limit';
 
-	public function validate( PropertyId $propertyId, string $language, string $label ): ?ValidationError;
+	public function validate( string $language, string $labelText, TermList $existingDescriptions ): ?ValidationError;
 
 }

@@ -4,12 +4,18 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer
@@ -20,6 +26,17 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 
+	private PropertyWriteModelRetriever $propertyRetriever;
+	private PropertyLabelValidator $propertyLabelValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+		$this->propertyRetriever->addProperty( new Property( new NumericPropertyId( 'P123' ), null, 'string' ) );
+		$this->propertyLabelValidator = $this->createStub( PropertyLabelValidator::class );
+	}
+
 	public function testGivenValidRequest_returnsLabel(): void {
 		$request = $this->createStub( PropertyLabelEditRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P1' );
@@ -28,8 +45,50 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 
 		$this->assertEquals(
 			new Term( 'en', 'some-property-label' ),
-			( new PropertyLabelEditRequestValidatingDeserializer( $this->createStub( PropertyLabelValidator::class ) ) )
+			( new PropertyLabelEditRequestValidatingDeserializer( $this->propertyLabelValidator, $this->propertyRetriever ) )
 				->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenPropertyDoesNotExist_skipsValidation(): void {
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+
+		$this->propertyLabelValidator = $this->createMock( PropertyLabelValidator::class );
+		$this->propertyLabelValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( PropertyLabelEditRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( 'P123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getLabel' )->willReturn( 'potato' );
+
+		$this->assertEquals(
+			new Term( 'en', 'potato' ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenLabelIsUnchanged_skipsValidation(): void {
+		$propertyId = new NumericPropertyId( 'P345' );
+		$languageCode = 'en';
+		$label = 'potato';
+
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+		$this->propertyRetriever->addProperty( new Property(
+			$propertyId,
+			new Fingerprint( new TermList( [ new Term( $languageCode, $label ) ] ) ),
+			'string'
+		) );
+		$this->propertyLabelValidator = $this->createMock( PropertyLabelValidator::class );
+		$this->propertyLabelValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( PropertyLabelEditRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( "$propertyId" );
+		$request->method( 'getLanguageCode' )->willReturn( $languageCode );
+		$request->method( 'getLabel' )->willReturn( $label );
+
+		$this->assertEquals(
+			new Term( $languageCode, $label ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}
 
@@ -47,12 +106,11 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getLabel' )->willReturn( 'my label' );
 
-		$propertyLabelValidator = $this->createStub( PropertyLabelValidator::class );
-		$propertyLabelValidator->method( 'validate' )->willReturn( $validationError );
+		$this->propertyLabelValidator = $this->createStub( PropertyLabelValidator::class );
+		$this->propertyLabelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new PropertyLabelEditRequestValidatingDeserializer( $propertyLabelValidator ) )
-				->validateAndDeserialize( $request );
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
@@ -121,6 +179,10 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
 			],
 		];
+	}
+
+	private function newValidatingDeserializer(): PropertyLabelEditRequestValidatingDeserializer {
+		return new PropertyLabelEditRequestValidatingDeserializer( $this->propertyLabelValidator, $this->propertyRetriever );
 	}
 
 }

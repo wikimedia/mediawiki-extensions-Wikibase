@@ -201,7 +201,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
 		$this->patchedLabelsValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
-			->with( $property->getId(), new TermList(), $patchResult )
+			->with( new TermList(), new TermList(), $patchResult )
 			->willThrowException( $expectedUseCaseError );
 
 		try {

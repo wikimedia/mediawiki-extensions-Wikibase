@@ -29,6 +29,8 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
+use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
@@ -150,6 +152,112 @@ class PatchedPropertyValidatorTest extends TestCase {
 			->validateAndDeserialize( $patchedProperty, $originalProperty );
 
 		$this->assertEquals( $originalProperty->getId(), $validatedProperty->getId() );
+	}
+
+	public function testValidateOnlyModifiedLabels(): void {
+		$propertyId = new NumericPropertyId( 'P13' );
+
+		$originalProperty = new Property(
+			$propertyId,
+			new Fingerprint(
+				new TermList( [
+					new Term( 'en', 'spud' ),
+					new Term( 'de', 'Kartoffel' ),
+				] ),
+				new TermList(),
+				null
+			),
+			'string'
+		);
+
+		$patchedProperty = [
+			'id' => "$propertyId",
+			'type' => 'property',
+			'data-type' => 'string',
+			'labels' => [ 'en' => 'potato', 'de' => 'Kartoffel', 'ar' => 'بطاطا' ], // only 'en' and 'ar' labels have been patched
+		];
+
+		$inputTerms = new PartiallyValidatedLabels( [
+			new Term( 'en', 'potato' ),
+			new Term( 'de', 'Kartoffel' ),
+			new Term( 'ar', 'بطاطا' ),
+		] );
+		$termsToCompareWith = new PartiallyValidatedDescriptions();
+
+		// expect validation only for the modified labels
+		$this->labelsContentsValidator = $this->createMock( PropertyLabelsContentsValidator::class );
+
+		$this->labelsContentsValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $inputTerms, $termsToCompareWith, [ 'en', 'ar' ] )
+			->willReturn( null );
+
+		$this->labelsContentsValidator->expects( $this->once() )
+			->method( 'getValidatedLabels' )
+			->willReturn( $inputTerms->asPlainTermList() );
+
+		$this->assertEquals(
+			new Property(
+				$propertyId,
+				new Fingerprint( $inputTerms->asPlainTermList(), $termsToCompareWith->asPlainTermList(), null ),
+				'string'
+			),
+			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
+				->validateAndDeserialize( $patchedProperty, $originalProperty )
+		);
+	}
+
+	public function testValidateOnlyModifiedDescriptions(): void {
+		$propertyId = new NumericPropertyId( 'P13' );
+
+		$originalProperty = new Property(
+			$propertyId,
+			new Fingerprint(
+				new TermList(),
+				new TermList( [
+					new Term( 'en', 'en-description' ),
+					new Term( 'de', 'de-description' ),
+				] ),
+				null
+			),
+			'string'
+		);
+
+		$patchedProperty = [
+			'id' => "$propertyId",
+			'type' => 'property',
+			'data-type' => 'string',
+			'descriptions' => [ 'en' => 'updated-en-description', 'de' => 'de-description', 'ar' => 'ar-description' ],
+		];
+
+		$inputTerms = new PartiallyValidatedDescriptions( [
+			new Term( 'en', 'updated-en-description' ),
+			new Term( 'de', 'de-description' ),
+			new Term( 'ar', 'ar-description' ),
+		] );
+		$termsToCompareWith = new PartiallyValidatedLabels();
+
+		// expect validation only for the modified descriptions
+		$this->descriptionsContentsValidator = $this->createMock( PropertyDescriptionsContentsValidator::class );
+
+		$this->descriptionsContentsValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $inputTerms, $termsToCompareWith, [ 'en', 'ar' ] )
+			->willReturn( null );
+
+		$this->descriptionsContentsValidator->expects( $this->once() )
+			->method( 'getValidatedDescriptions' )
+			->willReturn( $inputTerms->asPlainTermList() );
+
+		$this->assertEquals(
+			new Property(
+				$propertyId,
+				new Fingerprint( $termsToCompareWith->asPlainTermList(), $inputTerms->asPlainTermList(), null ),
+				'string'
+			),
+			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
+				->validateAndDeserialize( $patchedProperty, $originalProperty )
+		);
 	}
 
 	/**

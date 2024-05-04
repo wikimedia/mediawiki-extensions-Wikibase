@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,19 +15,34 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 class PropertyLabelEditRequestValidatingDeserializer {
 
 	private PropertyLabelValidator $validator;
+	private PropertyWriteModelRetriever $propertyRetriever;
 
-	public function __construct( PropertyLabelValidator $validator ) {
+	public function __construct( PropertyLabelValidator $validator, PropertyWriteModelRetriever $propertyRetriever ) {
 		$this->validator = $validator;
+		$this->propertyRetriever = $propertyRetriever;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( PropertyLabelEditRequest $request ): Term {
+		$property = $this->propertyRetriever->getPropertyWriteModel( new NumericPropertyId( $request->getPropertyId() ) );
+		$label = $request->getLabel();
+		$language = $request->getLanguageCode();
+
+		// skip if property does not exist or label is unchanged
+		if ( !$property ||
+			 ( $property->getLabels()->hasTermForLanguage( $language ) &&
+			   $property->getLabels()->getByLanguage( $language )->getText() === $label
+			 )
+		) {
+			return new Term( $language, $label );
+		}
+
 		$validationError = $this->validator->validate(
-			new NumericPropertyId( $request->getPropertyId() ),
-			$request->getLanguageCode(),
-			$request->getLabel()
+			$language,
+			$label,
+			$property->getDescriptions()
 		);
 		if ( $validationError ) {
 			$context = $validationError->getContext();

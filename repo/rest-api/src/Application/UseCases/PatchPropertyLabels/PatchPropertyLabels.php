@@ -75,7 +75,11 @@ class PatchPropertyLabels {
 		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
 		$originalLabels = $property->getLabels();
 
-		$modifiedLabelsAsTermList = $this->patchedLabelsValidator->validateAndDeserialize( $propertyId, $originalLabels, $modifiedLabels );
+		$modifiedLabelsAsTermList = $this->patchedLabelsValidator->validateAndDeserialize(
+			$originalLabels,
+			$property->getDescriptions(),
+			$modifiedLabels
+		);
 		$property->getFingerprint()->setLabels( $modifiedLabelsAsTermList );
 
 		$editMetadata = new EditMetadata(

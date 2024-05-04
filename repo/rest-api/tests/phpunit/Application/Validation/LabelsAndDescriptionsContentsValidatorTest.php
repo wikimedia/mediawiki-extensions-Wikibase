@@ -14,11 +14,17 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator
  * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator
  *
  * @group Wikibase
  *
@@ -131,6 +137,24 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 	}
 
 	public function validatorProvider(): Generator {
+		$propertyLabelValidator = $this->createMock( PropertyLabelValidator::class );
+		$propertyLabelsContentsValidator = new PropertyLabelsContentsValidator( $propertyLabelValidator );
+		yield PropertyLabelsContentsValidator::class => [
+			$propertyLabelValidator,
+			$propertyLabelsContentsValidator,
+			PartiallyValidatedLabels::class,
+			fn() => $propertyLabelsContentsValidator->getValidatedLabels(),
+		];
+
+		$propertyDescriptionValidator = $this->createMock( PropertyDescriptionValidator::class );
+		$propertyDescriptionsContentsValidator = new PropertyDescriptionsContentsValidator( $propertyDescriptionValidator );
+		yield PropertyDescriptionsContentsValidator::class => [
+			$propertyDescriptionValidator,
+			$propertyDescriptionsContentsValidator,
+			PartiallyValidatedDescriptions::class,
+			fn() => $propertyDescriptionsContentsValidator->getValidatedDescriptions(),
+		];
+
 		$itemLabelValidator = $this->createMock( ItemLabelValidator::class );
 		$itemLabelsContentsValidator = new ItemLabelsContentsValidator( $itemLabelValidator );
 		yield ItemLabelsContentsValidator::class => [
