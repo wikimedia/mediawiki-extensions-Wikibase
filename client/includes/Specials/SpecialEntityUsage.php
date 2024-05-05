@@ -139,12 +139,12 @@ class SpecialEntityUsage extends QueryPage {
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-				'aspects' => $dbr->buildGroupConcatField(
-					'|',
-					'wbc_entity_usage',
-					'eu_aspect',
-					[ 'eu_page_id = page_id' ] + $conds
-				),
+				'aspects' => $dbr->newSelectQueryBuilder()
+					->table( 'wbc_entity_usage' )
+					->field( 'eu_aspect' )
+					->where( [ 'eu_page_id = page_id' ] )
+					->andWhere( $conds )
+					->buildGroupConcatField( '|' ),
 				'eu_page_id',
 			] )
 			->from( 'page' )
