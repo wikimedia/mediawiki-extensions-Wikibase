@@ -1222,12 +1222,6 @@
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
-					},
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
@@ -1322,8 +1316,14 @@
 					"patched-property-unexpected-field": { "$ref": "./examples.json#/PatchedPropertyInvalidUnexpectedExample" },
 					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
-					"statement-id-not-modifiable": {
-						"$ref": "./examples.json#/StatementIdNotModifiableExample"
+					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
+					"patched-statement-property-not-modifiable": {
+						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
+					},
+					"patched-invalid-statement-group-type": { "$ref": "./examples.json#/PatchedInvalidStatementGroupTypeExample" },
+					"patched-invalid-statement-type": { "$ref": "./examples.json#/PatchedInvalidStatementTypeExample" },
+					"patched-statement-group-property-id-mismatch": {
+						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
 					"patched-labels-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"

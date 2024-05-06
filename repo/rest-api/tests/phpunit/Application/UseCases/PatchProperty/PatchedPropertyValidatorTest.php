@@ -2,12 +2,15 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchProperty;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -15,6 +18,8 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
@@ -35,7 +40,11 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator
@@ -73,6 +82,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	private const LIMIT = 40;
+
+	private const EXISTING_STATEMENT_ID = 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659';
 
 	/**
 	 * @dataProvider patchedPropertyProvider
@@ -120,6 +131,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 							'property' => [ 'id' => 'P321' ],
 							'value' => [ 'type' => 'somevalue' ],
 						],
+						[
+							'property' => [ 'id' => 'P321' ],
+							'value' => [ 'type' => 'somevalue' ],
+						],
 					],
 				],
 			],
@@ -131,7 +146,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'english-alias' ] ) ] )
 				),
 				'string',
-				new StatementList( NewStatement::someValueFor( 'P321' )->build() )
+				new StatementList(
+					NewStatement::someValueFor( 'P321' )->build(),
+					NewStatement::someValueFor( 'P321' )->build()
+				)
 			),
 		];
 	}
@@ -783,10 +801,175 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider statementsProvider
+	 */
+	public function testStatementsValidation( array $patchedStatements, UseCaseError $expectedError ): void {
+		$originalProperty = new Property(
+			new NumericPropertyId( 'P123' ),
+			new Fingerprint(),
+			'string',
+			new StatementList(
+				NewStatement::someValueFor( 'P123' )
+					->withGuid( self::EXISTING_STATEMENT_ID )
+					->build()
+			)
+		);
+
+		$propertySerialization = [
+			'id' => 'P123',
+			'type' => 'property',
+			'data-type' => 'string',
+			'labels' => [ 'en' => 'english-label' ],
+			'statements' => $patchedStatements,
+		];
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $propertySerialization, $originalProperty );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function statementsProvider(): Generator {
+		yield 'Statements not associative' => [
+			[ 1, 2, 3 ],
+			new UseCaseError(
+				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
+				"Invalid input for 'statements' in the patched property",
+				[
+					UseCaseError::CONTEXT_PATH => 'statements',
+					UseCaseError::CONTEXT_VALUE => [ 1, 2, 3 ],
+				]
+			),
+		];
+
+		yield 'Invalid statement group type' =>
+		[
+			[ 'P321' => [ 'property' => [ 'id' => 'P321' ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
+				'Not a valid statement group',
+				[ UseCaseError::CONTEXT_PATH => 'P321' ]
+			),
+		];
+
+		yield 'Invalid statement type' =>
+		[
+			[ 'P321' => [ 'not a valid statement' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
+				'Not a valid statement type',
+				[ UseCaseError::CONTEXT_PATH => 'P321/0' ]
+			),
+		];
+
+		yield 'Invalid statement field' =>
+		[
+			[ 'P321' => [ [ 'rank' => 'bad rank' ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
+				"Invalid input for 'rank' in the patched statement",
+				[ UseCaseError::CONTEXT_PATH => 'rank', UseCaseError::CONTEXT_VALUE => 'bad rank' ]
+			),
+		];
+
+		yield 'Missing statement field' =>
+		[
+			[ 'P321' => [ [ 'property' => [ 'id' => 'P321' ] ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
+				'Mandatory field missing in the patched statement: value',
+				[ UseCaseError::CONTEXT_PATH => 'value' ]
+			),
+		];
+
+		yield 'Property id mismatch' =>
+		[
+			[ 'P321' => [ [ 'property' => [ 'id' => 'P122' ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+				"Statement's Property ID does not match the statement group key",
+				[
+					UseCaseError::CONTEXT_PATH => 'P321/0/property/id',
+					UseCaseError::CONTEXT_PROPERTY_ID_KEY => 'P321',
+					UseCaseError::CONTEXT_PROPERTY_ID_VALUE => 'P122',
+				]
+			),
+		];
+
+		$statementWithId = [
+			'id' => 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
+			'property' => [ 'id' => 'P321' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Statement IDs not modifiable or provided for new statements' =>
+		[
+			[ 'P321' => [ $statementWithId ] ],
+			new UseCaseError(
+				UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
+				'Statement IDs cannot be created or modified',
+				[ UseCaseError::CONTEXT_STATEMENT_ID => $statementWithId[ 'id' ] ]
+			),
+		];
+
+		$duplicateStatement = [
+			'id' => 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659',
+			'property' => [ 'id' => 'P321' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Duplicate Statement id' =>
+		[
+			[ 'P321' => [ $duplicateStatement, $duplicateStatement ] ],
+			new UseCaseError(
+				UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
+				'Statement IDs cannot be created or modified',
+				[ UseCaseError::CONTEXT_STATEMENT_ID => $duplicateStatement[ 'id' ] ]
+			),
+		];
+
+		$statementWithExistingId = [
+			'id' => self::EXISTING_STATEMENT_ID,
+			'property' => [ 'id' => 'P321' ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Property IDs modified' =>
+		[
+			[ 'P321' => [ $statementWithExistingId ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE,
+				'Property of a statement cannot be modified',
+				[
+					UseCaseError::CONTEXT_STATEMENT_ID => $statementWithExistingId[ 'id' ],
+					UseCaseError::STATEMENT_PROPERTY_ID => 'P123',
+				]
+			),
+		];
+	}
+
 	private function newValidator(): PatchedPropertyValidator {
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
-			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty(
+			new NumericPropertyId( TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ),
+			'string'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
+			new NumericPropertyId( 'P122' ),
+			'string'
+		);
+		$dataTypeLookup->setDataTypeForProperty(
+			new NumericPropertyId( 'P321' ),
+			'string'
+		);
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			new BasicEntityIdParser(),
+			$dataTypeLookup,
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( new DataTypeFactory( [] ) ),
+				new SnakValueParser( new DataValueDeserializer( [] ), [] ),
+				new BuilderBasedDataTypeValidatorFactory( [] )
+			)
 		);
 
 		return new PatchedPropertyValidator(
@@ -799,9 +982,14 @@ class PatchedPropertyValidatorTest extends TestCase {
 				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
 				new AliasesDeserializer(),
 			),
-			new StatementsDeserializer(
-				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-			),
+			new StatementsValidator(
+				new StatementsDeserializer(
+					new StatementDeserializer(
+						$propertyValuePairDeserializer,
+						$this->createStub( ReferenceDeserializer::class )
+					)
+				)
+			)
 		);
 	}
 

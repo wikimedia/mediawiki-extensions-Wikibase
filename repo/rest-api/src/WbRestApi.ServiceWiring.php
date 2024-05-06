@@ -834,7 +834,7 @@ return [
 					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 					new AliasesDeserializer()
 				),
-				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ),
+				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) )
 			)
 		);
 	},

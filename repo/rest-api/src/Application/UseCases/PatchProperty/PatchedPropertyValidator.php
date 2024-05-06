@@ -5,10 +5,11 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
 use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
@@ -34,7 +36,7 @@ class PatchedPropertyValidator {
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
 	private AliasesValidator $aliasesValidator;
-	private StatementsDeserializer $statementsDeserializer;
+	private StatementsValidator $statementsValidator;
 
 	public function __construct(
 		LabelsSyntaxValidator $labelsSyntaxValidator,
@@ -42,14 +44,14 @@ class PatchedPropertyValidator {
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		PropertyDescriptionsContentsValidator $descriptionsContentsValidator,
 		AliasesValidator $aliasesValidator,
-		StatementsDeserializer $statementsDeserializer
+		StatementsValidator $statementsValidator
 	) {
 		$this->labelsSyntaxValidator = $labelsSyntaxValidator;
 		$this->labelsContentsValidator = $labelsContentsValidator;
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
 		$this->aliasesValidator = $aliasesValidator;
-		$this->statementsDeserializer = $statementsDeserializer;
+		$this->statementsValidator = $statementsValidator;
 	}
 
 	/**
@@ -67,6 +69,8 @@ class PatchedPropertyValidator {
 		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
 		$this->validateAliases( $serialization[ 'aliases' ] ?? [] );
 
+		$this->validateStatements( $serialization[ 'statements' ] ?? [], $originalProperty );
+
 		return new Property(
 			new NumericPropertyId( $serialization[ 'id' ] ),
 			new Fingerprint(
@@ -75,7 +79,7 @@ class PatchedPropertyValidator {
 				$this->aliasesValidator->getValidatedAliases()
 			),
 			$serialization[ 'data-type' ],
-			$this->statementsDeserializer->deserialize( (array)( $serialization[ 'statements' ] ?? [] ) )
+			$this->statementsValidator->getValidatedStatements()
 		);
 	}
 
@@ -374,6 +378,88 @@ class PatchedPropertyValidator {
 		}
 	}
 
+	private function validateStatements( array $statementsSerialization, Property $originalProperty ): void {
+		$validationError = $this->statementsValidator->validate( $statementsSerialization );
+		if ( $validationError ) {
+			$context = $validationError->getContext();
+			switch ( $validationError->getCode() ) {
+				case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
+						'Not a valid statement group',
+						[ UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ] ]
+					);
+				case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
+						'Not a valid statement type',
+						[ UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ] ]
+					);
+				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
+					$this->throwInvalidField( 'statements', $context[ StatementsValidator::CONTEXT_STATEMENTS ] );
+				case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
+					$field = $context[ StatementsValidator::CONTEXT_FIELD ];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
+						"Invalid input for '{$field}' in the patched statement",
+						[
+							UseCaseError::CONTEXT_PATH => $field,
+							UseCaseError::CONTEXT_VALUE => $context[ StatementsValidator::CONTEXT_VALUE ],
+						]
+					);
+				case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
+					$field = $context[ StatementsValidator::CONTEXT_FIELD ];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
+						"Mandatory field missing in the patched statement: {$field}",
+						[ UseCaseError::CONTEXT_PATH => $field ]
+					);
+				case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+						"Statement's Property ID does not match the statement group key",
+						[
+							UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ],
+							UseCaseError::CONTEXT_PROPERTY_ID_KEY => $context[ StatementsValidator::CONTEXT_PROPERTY_ID_KEY ],
+							UseCaseError::CONTEXT_PROPERTY_ID_VALUE => $context[ StatementsValidator::CONTEXT_PROPERTY_ID_VALUE ],
+						]
+					);
+			}
+		}
+
+		$originalStatements = $originalProperty->getStatements();
+		$patchedStatements = $this->statementsValidator->getValidatedStatements();
+		$getStatementIds = fn( StatementList $statementList ) => array_filter( array_map(
+			fn( Statement $statement ) => $statement->getGuid(),
+			iterator_to_array( $statementList )
+		) );
+
+		$originalStatementsIds = $getStatementIds( $originalStatements );
+		$patchedStatementsIds = $getStatementIds( $patchedStatements );
+
+		foreach ( array_count_values( $patchedStatementsIds ) as $id => $occurrence ) {
+			if ( $occurrence > 1 || !in_array( $id, $originalStatementsIds ) ) {
+				throw new UseCaseError(
+					UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
+					'Statement IDs cannot be created or modified',
+					[ UseCaseError::CONTEXT_STATEMENT_ID => $id ]
+				);
+			}
+
+			$originalPropertyId = $originalStatements->getFirstStatementWithGuid( $id )->getPropertyId();
+			if ( !$patchedStatements->getFirstStatementWithGuid( $id )->getPropertyId()->equals( $originalPropertyId ) ) {
+				throw new UseCaseError(
+					UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE,
+					'Property of a statement cannot be modified',
+					[
+						UseCaseError::CONTEXT_STATEMENT_ID => $id,
+						UseCaseError::STATEMENT_PROPERTY_ID => $originalPropertyId->getSerialization(),
+					]
+				);
+			}
+		}
+	}
+
 	/**
 	 * @param string $field
 	 * @param mixed $value
@@ -390,5 +476,4 @@ class PatchedPropertyValidator {
 			]
 		);
 	}
-
 }

@@ -103,6 +103,11 @@ class UseCaseError extends UseCaseException {
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
+	public const PATCHED_INVALID_STATEMENT_GROUP_TYPE = 'patched-invalid-statement-group-type';
+	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
+	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
+	public const STATEMENT_ID_NOT_MODIFIABLE = 'statement-id-not-modifiable';
+	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
@@ -128,6 +133,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_VALUE = 'value';
 	public const CONTEXT_PROPERTY_ID_KEY = 'statement-group-property-id';
 	public const CONTEXT_PROPERTY_ID_VALUE = 'statement-property-id';
+	public const STATEMENT_PROPERTY_ID = 'statement-property-id';
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
@@ -246,6 +252,15 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
+		self::PATCHED_INVALID_STATEMENT_GROUP_TYPE => [ self::CONTEXT_PATH ],
+		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
+		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
+			self::CONTEXT_PATH,
+			self::CONTEXT_PROPERTY_ID_KEY,
+			self::CONTEXT_PROPERTY_ID_VALUE,
+		],
+		self::STATEMENT_ID_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID ],
+		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::STATEMENT_PROPERTY_ID ],
 	];
 
 	/**

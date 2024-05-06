@@ -38,6 +38,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -93,7 +94,7 @@ class PatchPropertyTest extends TestCase {
 				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
 				new AliasesDeserializer(),
 			),
-			$this->newStatementsDeserializer(),
+			new StatementsValidator( $this->newStatementsDeserializer() )
 		);
 	}
 

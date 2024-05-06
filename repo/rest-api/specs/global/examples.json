@@ -644,7 +644,49 @@
 	"StatementIdNotModifiableExample": {
 		"value": {
 			"code": "statement-id-not-modifiable",
-			"message": "Statement IDs cannot be created or modified"
+			"message": "Statement IDs cannot be created or modified",
+			"context": {
+				"statement-id": "{statement_id}"
+			}
+		}
+	},
+	"PatchedStatementPropertyNotModifiableExample": {
+		"value": {
+			"code": "patched-statement-property-not-modifiable",
+			"message": "Property of a statement cannot be modified",
+			"context": {
+				"statement-id": "{statement_id}",
+				"statement-property-id": "{property_of_statement_as_persisted}"
+			}
+		}
+	},
+	"PatchedInvalidStatementGroupTypeExample": {
+		"value": {
+			"code": "patched-invalid-statement-group-type",
+			"message": "Not a valid statement group",
+			"context": {
+				"path": "{property_id}"
+			}
+		}
+	},
+	"PatchedInvalidStatementTypeExample": {
+		"value": {
+			"code": "patched-invalid-statement-type",
+			"message": "Not a valid statement type",
+			"context": {
+				"path": "{property_id}/{index}"
+			}
+		}
+	},
+	"PatchedStatementGroupPropertyIdMismatchExample": {
+		"value": {
+			"code": "patched-statement-group-property-id-mismatch",
+			"message": "Statement's Property ID does not match the statement group key",
+			"context": {
+				"path": "{property_id_key}/{index}/property/id",
+				"statement-group-property-id": "{property_id_key}",
+				"statement-property-id": "{property_id_value}"
+			}
 		}
 	},
 	"PatchedPropertyLabelDescriptionSameValueExample": {
