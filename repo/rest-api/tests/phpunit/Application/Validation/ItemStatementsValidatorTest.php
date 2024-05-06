@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator
  *
  * @group Wikibase
  *

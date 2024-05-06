@@ -14,8 +14,8 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
@@ -40,7 +40,7 @@ class ItemValidatorTest extends TestCase {
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
-	private ItemAliasesValidator $itemAliasesValidator;
+	private AliasesValidator $itemAliasesValidator;
 	private ItemStatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
 
@@ -51,7 +51,7 @@ class ItemValidatorTest extends TestCase {
 		$this->labelsContentsValidator = $this->createStub( ItemLabelsContentsValidator::class );
 		$this->descriptionsSyntaxValidator = $this->createStub( DescriptionsSyntaxValidator::class );
 		$this->descriptionsContentsValidator = $this->createStub( ItemDescriptionsContentsValidator::class );
-		$this->itemAliasesValidator = $this->createStub( ItemAliasesValidator::class );
+		$this->itemAliasesValidator = $this->createStub( AliasesValidator::class );
 		$this->itemStatementsValidator = $this->createStub( ItemStatementsValidator::class );
 		$this->sitelinksValidator = $this->createStub( SitelinksValidator::class );
 	}
@@ -114,7 +114,7 @@ class ItemValidatorTest extends TestCase {
 			->method( 'getValidatedDescriptions' )
 			->willReturn( $deserializedDescriptions );
 
-		$this->itemAliasesValidator = $this->createMock( ItemAliasesValidator::class );
+		$this->itemAliasesValidator = $this->createMock( AliasesValidator::class );
 		$this->itemAliasesValidator->expects( $this->once() )
 			->method( 'validate' )
 			->with( $aliases )
@@ -168,7 +168,7 @@ class ItemValidatorTest extends TestCase {
 		];
 
 		$expectedError = $this->createStub( ValidationError::class );
-		$this->itemAliasesValidator = $this->createMock( ItemAliasesValidator::class );
+		$this->itemAliasesValidator = $this->createMock( AliasesValidator::class );
 		$this->itemAliasesValidator->method( 'validate' )
 			->with( $invalidSerialization[ 'aliases' ] )
 			->willReturn( $expectedError );

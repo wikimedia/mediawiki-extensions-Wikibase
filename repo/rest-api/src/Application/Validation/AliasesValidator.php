@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInL
 /**
  * @license GPL-2.0-or-later
  */
-class ItemAliasesValidator {
+class AliasesValidator {
 	public const CODE_EMPTY_ALIAS = 'alias-empty';
 	public const CODE_TOO_LONG_ALIAS = 'alias-too-long';
 	public const CODE_EMPTY_ALIAS_LIST = 'alias-list-empty';

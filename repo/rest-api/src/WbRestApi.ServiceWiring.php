@@ -120,9 +120,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
@@ -365,7 +365,7 @@ return [
 							WikibaseRepo::getItemTermsCollisionDetector( $services )
 						)
 					),
-					new ItemAliasesValidator(
+					new AliasesValidator(
 						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 						new AliasesDeserializer()

@@ -9,18 +9,18 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemAliasesValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\AliasesValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemAliasesValidatorTest extends TestCase {
+class AliasesValidatorTest extends TestCase {
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 
@@ -56,8 +56,8 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIASES,
-				[ ItemAliasesValidator::CONTEXT_FIELD_ALIASES => $invalidAliases ]
+				AliasesValidator::CODE_INVALID_ALIASES,
+				[ AliasesValidator::CONTEXT_FIELD_ALIASES => $invalidAliases ]
 			),
 			$this->newValidator()->validate( $invalidAliases )
 		);
@@ -74,7 +74,7 @@ class ItemAliasesValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguageCode,
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => ItemAliasesValidator::CONTEXT_FIELD_ALIAS,
+					LanguageCodeValidator::CONTEXT_PATH_VALUE => AliasesValidator::CONTEXT_FIELD_ALIAS,
 				]
 			),
 			$this->newValidator()->validate( [ $invalidLanguageCode => [ 'alias' ] ] )
@@ -93,8 +93,8 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_EMPTY_ALIAS_LIST,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => $language ]
+				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => $language ]
 			),
 			$this->newValidator()->validate( [ $language => [] ] )
 		);
@@ -109,8 +109,8 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => $languageCode ]
+				AliasesValidator::CODE_INVALID_ALIAS_LIST,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => $languageCode ]
 			),
 			$this->newValidator()->validate( [ $languageCode => $aliasesInLanguage ] )
 		);
@@ -135,8 +135,8 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_EMPTY_ALIAS,
-				[ ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => $language ]
+				AliasesValidator::CODE_EMPTY_ALIAS,
+				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => $language ]
 			),
 			$this->newValidator()->validate( [ $language => [ '' ] ] )
 		);
@@ -148,10 +148,10 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_DUPLICATE_ALIAS,
+				AliasesValidator::CODE_DUPLICATE_ALIAS,
 				[
-					ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => $language,
-					ItemAliasesValidator::CONTEXT_FIELD_ALIAS => $duplicatedAlias,
+					AliasesValidator::CONTEXT_FIELD_LANGUAGE => $language,
+					AliasesValidator::CONTEXT_FIELD_ALIAS => $duplicatedAlias,
 				]
 			),
 			$this->newValidator()->validate( [ $language => [ $duplicatedAlias, $duplicatedAlias ] ] )
@@ -164,10 +164,10 @@ class ItemAliasesValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemAliasesValidator::CODE_INVALID_ALIAS,
+				AliasesValidator::CODE_INVALID_ALIAS,
 				[
-					ItemAliasesValidator::CONTEXT_FIELD_LANGUAGE => $language,
-					ItemAliasesValidator::CONTEXT_FIELD_ALIAS => $invalidAlias,
+					AliasesValidator::CONTEXT_FIELD_LANGUAGE => $language,
+					AliasesValidator::CONTEXT_FIELD_ALIAS => $invalidAlias,
 				]
 			),
 			$this->newValidator()->validate( [ $language => [ $invalidAlias ] ] )
@@ -180,8 +180,8 @@ class ItemAliasesValidatorTest extends TestCase {
 		$this->newValidator()->getValidatedAliases();
 	}
 
-	private function newValidator(): ItemAliasesValidator {
-		return new ItemAliasesValidator(
+	private function newValidator(): AliasesValidator {
+		return new AliasesValidator(
 			$this->aliasesInLanguageValidator,
 			new LanguageCodeValidator( [ 'en', 'de', 'mul' ] ),
 			new AliasesDeserializer(),
