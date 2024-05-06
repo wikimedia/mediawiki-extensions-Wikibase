@@ -45,7 +45,7 @@ class DescriptionsSyntaxValidator {
 					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 					array_merge(
 						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => 'descriptions' ]
+						[ LanguageCodeValidator::CONTEXT_PATH => 'descriptions' ]
 					)
 				);
 			}

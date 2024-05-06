@@ -7,9 +7,10 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
  */
 class LanguageCodeValidator {
 
-	public const CODE_INVALID_LANGUAGE_CODE = 'invalid-language-code';
-	public const CONTEXT_LANGUAGE_CODE_VALUE = 'language-code-value';
-	public const CONTEXT_PATH_VALUE = 'path-value';
+	public const CODE_INVALID_LANGUAGE_CODE = 'language-code-validator-code-invalid-language-code';
+
+	public const CONTEXT_LANGUAGE_CODE = 'language-code-validator-context-language-code';
+	public const CONTEXT_PATH = 'language-code-validator-context-path';
 
 	private array $validLanguageCodes;
 
@@ -22,7 +23,7 @@ class LanguageCodeValidator {
 			? null
 			: new ValidationError(
 				self::CODE_INVALID_LANGUAGE_CODE,
-				[ self::CONTEXT_LANGUAGE_CODE_VALUE => $languageCode ]
+				[ self::CONTEXT_LANGUAGE_CODE => $languageCode ]
 			);
 	}
 

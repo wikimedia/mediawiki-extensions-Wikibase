@@ -146,7 +146,7 @@ class PatchedDescriptionsValidator {
 	private function validateLanguageCode( Term $description ): void {
 		$validationError = $this->languageCodeValidator->validate( $description->getLanguageCode() );
 		if ( $validationError ) {
-			$languageCode = $validationError->getContext()[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE ];
+			$languageCode = $validationError->getContext()[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE ];
 			throw new UseCaseError(
 				UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
 				"Not a valid language code '$languageCode' in changed descriptions",

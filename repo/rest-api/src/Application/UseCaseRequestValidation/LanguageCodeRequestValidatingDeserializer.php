@@ -24,7 +24,7 @@ class LanguageCodeRequestValidatingDeserializer {
 		if ( $validationError ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_LANGUAGE_CODE,
-				"Not a valid language code: {$validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE]}"
+				"Not a valid language code: {$validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]}"
 			);
 		}
 		return $request->getLanguageCode();

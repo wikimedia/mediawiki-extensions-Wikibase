@@ -73,8 +73,8 @@ class AliasesValidatorTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE_VALUE => $invalidLanguageCode,
-					LanguageCodeValidator::CONTEXT_PATH_VALUE => AliasesValidator::CONTEXT_FIELD_ALIAS,
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => $invalidLanguageCode,
+					LanguageCodeValidator::CONTEXT_PATH => 'alias',
 				]
 			),
 			$this->newValidator()->validate( [ $invalidLanguageCode => [ 'alias' ] ] )

@@ -13,18 +13,18 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInL
  * @license GPL-2.0-or-later
  */
 class AliasesValidator {
-	public const CODE_EMPTY_ALIAS = 'alias-empty';
-	public const CODE_TOO_LONG_ALIAS = 'alias-too-long';
-	public const CODE_EMPTY_ALIAS_LIST = 'alias-list-empty';
-	public const CODE_DUPLICATE_ALIAS = 'alias-duplicate';
-	public const CODE_INVALID_ALIASES = 'invalid-aliases';
-	public const CODE_INVALID_ALIAS = 'invalid-alias';
-	public const CODE_INVALID_ALIAS_LIST = 'invalid-alias-list';
+	public const CODE_EMPTY_ALIAS = 'aliases-validator-code-alias-empty';
+	public const CODE_TOO_LONG_ALIAS = 'aliases-validator-code-alias-too-long';
+	public const CODE_EMPTY_ALIAS_LIST = 'aliases-validator-code-alias-list-empty';
+	public const CODE_DUPLICATE_ALIAS = 'aliases-validator-code-alias-duplicate';
+	public const CODE_INVALID_ALIASES = 'aliases-validator-code-invalid-aliases';
+	public const CODE_INVALID_ALIAS = 'aliases-validator-code-invalid-alias';
+	public const CODE_INVALID_ALIAS_LIST = 'aliases-validator-code-invalid-alias-list';
 
-	public const CONTEXT_FIELD_ALIASES = 'aliases';
-	public const CONTEXT_FIELD_ALIAS = 'alias';
-	public const CONTEXT_FIELD_LIMIT = 'character-limit';
-	public const CONTEXT_FIELD_LANGUAGE = 'language';
+	public const CONTEXT_FIELD_ALIASES = 'aliases-validator-context-aliases';
+	public const CONTEXT_FIELD_ALIAS = 'aliases-validator-context-alias';
+	public const CONTEXT_FIELD_LIMIT = 'aliases-validator-context-character-limit';
+	public const CONTEXT_FIELD_LANGUAGE = 'aliases-validator-context-language';
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 	private LanguageCodeValidator $languageCodeValidator;
@@ -58,7 +58,7 @@ class AliasesValidator {
 					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 					array_merge(
 						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_PATH_VALUE => self::CONTEXT_FIELD_ALIAS ]
+						[ LanguageCodeValidator::CONTEXT_PATH => 'alias' ]
 					)
 				);
 			}
