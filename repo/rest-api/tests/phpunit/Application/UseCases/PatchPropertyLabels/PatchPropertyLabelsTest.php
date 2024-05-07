@@ -18,7 +18,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchProperty
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -62,9 +64,8 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(
-			new LabelsDeserializer(),
-			$this->createStub( PropertyLabelValidator::class ),
-			$this->createStub( LanguageCodeValidator::class )
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new PropertyLabelsContentsValidator( $this->createStub( PropertyLabelValidator::class ) )
 		);
 		$this->assertPropertyExists = $this->createStub( AssertPropertyExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );

@@ -25,11 +25,11 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 	}
 
 	public function validate( PropertyId $propertyId, string $language, string $description ): ?ValidationError {
-		return $this->validateDescription( $description )
+		return $this->validateDescription( $language, $description )
 			   ?? $this->validateProperty( $propertyId, $language, $description );
 	}
 
-	private function validateDescription( string $description ): ?ValidationError {
+	private function validateDescription( string $language, string $description ): ?ValidationError {
 		$result = $this->termValidatorFactory
 			->getDescriptionValidator()
 			->validate( $description );
@@ -37,19 +37,23 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 			$error = $result->getErrors()[0];
 			switch ( $error->getCode() ) {
 				case 'description-too-short':
-					return new ValidationError( self::CODE_EMPTY );
+					return new ValidationError( self::CODE_EMPTY, [ self::CONTEXT_LANGUAGE => $language ] );
 				case 'description-too-long':
 					return new ValidationError(
 						self::CODE_TOO_LONG,
 						[
 							self::CONTEXT_DESCRIPTION => $description,
 							self::CONTEXT_LIMIT => $error->getParameters()[0],
+							self::CONTEXT_LANGUAGE => $language,
 						]
 					);
 				default:
 					return new ValidationError(
 						self::CODE_INVALID,
-						[ self::CONTEXT_DESCRIPTION => $description ]
+						[
+							self::CONTEXT_DESCRIPTION => $description,
+							self::CONTEXT_LANGUAGE => $language,
+						]
 					);
 			}
 		}

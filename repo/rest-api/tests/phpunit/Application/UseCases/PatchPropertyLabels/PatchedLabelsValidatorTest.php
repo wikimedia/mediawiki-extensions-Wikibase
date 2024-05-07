@@ -10,7 +10,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
@@ -121,7 +123,10 @@ class PatchedLabelsValidatorTest extends TestCase {
 			[ $language => $label ],
 			new ValidationError(
 				PropertyLabelValidator::CODE_INVALID,
-				[ PropertyLabelValidator::CONTEXT_LABEL => $label ],
+				[
+					PropertyLabelValidator::CONTEXT_LABEL => $label,
+					PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
+				],
 			),
 			UseCaseError::PATCHED_LABEL_INVALID,
 			"Changed label for '$language' is invalid: {$label}",
@@ -247,9 +252,8 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	private function newValidator(): PatchedLabelsValidator {
 		return new PatchedLabelsValidator(
-			new LabelsDeserializer(),
-			$this->labelValidator,
-			$this->languageCodeValidator
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->languageCodeValidator ),
+			new PropertyLabelsContentsValidator( $this->labelValidator )
 		);
 	}
 

@@ -30,11 +30,11 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 	}
 
 	public function validate( PropertyId $propertyId, string $language, string $label ): ?ValidationError {
-		return $this->validateLabel( $label )
+		return $this->validateLabel( $language, $label )
 			   ?? $this->validateProperty( $propertyId, $language, $label );
 	}
 
-	public function validateLabel( string $labelText ): ?ValidationError {
+	public function validateLabel( string $language, string $labelText ): ?ValidationError {
 		$result = $this->termValidatorFactory
 			->getLabelValidator( Property::ENTITY_TYPE )
 			->validate( $labelText );
@@ -42,19 +42,23 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 			$error = $result->getErrors()[0];
 			switch ( $error->getCode() ) {
 				case 'label-too-short':
-					return new ValidationError( PropertyLabelValidator::CODE_EMPTY );
+					return new ValidationError( self::CODE_EMPTY, [ self::CONTEXT_LANGUAGE => $language ] );
 				case 'label-too-long':
 					return new ValidationError(
-						PropertyLabelValidator::CODE_TOO_LONG,
+						self::CODE_TOO_LONG,
 						[
-							PropertyLabelValidator::CONTEXT_LABEL => $labelText,
-							PropertyLabelValidator::CONTEXT_LIMIT => $error->getParameters()[0],
+							self::CONTEXT_LABEL => $labelText,
+							self::CONTEXT_LIMIT => $error->getParameters()[0],
+							self::CONTEXT_LANGUAGE => $language,
 						]
 					);
 				default:
 					return new ValidationError(
-						PropertyLabelValidator::CODE_INVALID,
-						[ PropertyLabelValidator::CONTEXT_LABEL => $labelText ]
+						self::CODE_INVALID,
+						[
+							self::CONTEXT_LABEL => $labelText,
+							self::CONTEXT_LANGUAGE => $language,
+						]
 					);
 			}
 		}
@@ -97,8 +101,8 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 		$description = $property->getDescriptions()->getByLanguage( $language )->getText();
 		if ( $label === $description ) {
 			return new ValidationError(
-				PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ PropertyLabelValidator::CONTEXT_LANGUAGE => $language ],
+				self::CODE_LABEL_DESCRIPTION_EQUAL,
+				[ self::CONTEXT_LANGUAGE => $language ],
 			);
 		}
 

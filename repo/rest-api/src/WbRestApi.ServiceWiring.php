@@ -129,7 +129,9 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
@@ -855,12 +857,14 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			new PatchedPropertyDescriptionsValidator(
-				new DescriptionsDeserializer(),
-				new TermValidatorFactoryPropertyDescriptionValidator(
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new PropertyDescriptionsContentsValidator( new TermValidatorFactoryPropertyDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
-				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				) )
 			),
 			WbRestApi::getPropertyUpdater( $services )
 		);
@@ -878,13 +882,15 @@ return [
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			new PatchedPropertyLabelsValidator(
-				new LabelsDeserializer(),
-				new TermValidatorFactoryPropertyLabelValidator(
+				new LabelsSyntaxValidator(
+					new LabelsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new PropertyLabelsContentsValidator( new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
 					WbRestApi::getPropertyDataRetriever( $services )
-				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				) )
 			),
 			WbRestApi::getAssertPropertyExists( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )

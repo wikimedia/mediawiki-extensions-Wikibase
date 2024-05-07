@@ -86,34 +86,47 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 	 * @dataProvider provideInvalidLabel
 	 */
 	public function testGivenInvalidDescription_returnsValidationError(
+		string $language,
 		string $label,
 		string $errorCode,
 		array $errorContext = []
 	): void {
 		$this->assertEquals(
 			new ValidationError( $errorCode, $errorContext ),
-			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), 'en', $label )
+			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), $language, $label )
 		);
 	}
 
 	public static function provideInvalidLabel(): Generator {
-		yield 'empty label' => [ '', PropertyLabelValidator::CODE_EMPTY ];
+		$language = 'en';
+		yield 'empty label' => [
+			$language,
+			'',
+			PropertyLabelValidator::CODE_EMPTY,
+			[ PropertyLabelValidator::CONTEXT_LANGUAGE => $language ],
+		];
 
 		$label = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'label too long' => [
+			$language,
 			$label,
 			PropertyLabelValidator::CODE_TOO_LONG,
 			[
 				PropertyLabelValidator::CONTEXT_LABEL => $label,
 				PropertyLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+				PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
 			],
 		];
 
 		$label = "label with tab character \t not allowed";
 		yield 'label has invalid character' => [
+			$language,
 			$label,
 			PropertyLabelValidator::CODE_INVALID,
-			[ PropertyLabelValidator::CONTEXT_LABEL => $label ],
+			[
+				PropertyLabelValidator::CONTEXT_LABEL => $label,
+				PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
+			],
 		];
 	}
 

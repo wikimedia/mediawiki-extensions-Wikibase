@@ -77,34 +77,47 @@ class TermValidatorFactoryPropertyDescriptionValidatorTest extends TestCase {
 	 * @dataProvider provideInvalidDescription
 	 */
 	public function testGivenInvalidDescription_returnsValidationError(
+		string $language,
 		string $description,
 		string $errorCode,
 		array $errorContext = []
 	): void {
 		$this->assertEquals(
 			new ValidationError( $errorCode, $errorContext ),
-			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), 'en', $description )
+			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), $language, $description )
 		);
 	}
 
 	public static function provideInvalidDescription(): Generator {
-		yield 'description too short' => [ '', PropertyDescriptionValidator::CODE_EMPTY ];
+		$language = 'en';
+		yield 'description too short' => [
+			$language,
+			'',
+			PropertyDescriptionValidator::CODE_EMPTY,
+			[ PropertyDescriptionValidator::CONTEXT_LANGUAGE => $language ],
+		];
 
 		$description = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'description too long' => [
+			$language,
 			$description,
 			PropertyDescriptionValidator::CODE_TOO_LONG,
 			[
 				PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description,
 				PropertyDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+				PropertyDescriptionValidator::CONTEXT_LANGUAGE => $language,
 			],
 		];
 
 		$description = "description with tab character \t not allowed";
 		yield 'description has invalid character' => [
+			$language,
 			$description,
 			PropertyDescriptionValidator::CODE_INVALID,
-			[ PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+			[
+				PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+				PropertyDescriptionValidator::CONTEXT_LANGUAGE => $language,
+			],
 		];
 	}
 
