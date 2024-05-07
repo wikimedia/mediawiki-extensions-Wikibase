@@ -9,6 +9,8 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -120,7 +122,10 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 			[ $language => $description ],
 			new ValidationError(
 				ItemDescriptionValidator::CODE_INVALID,
-				[ ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+				[
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
+				],
 			),
 			UseCaseError::PATCHED_DESCRIPTION_INVALID,
 			"Changed description for '$language' is invalid: {$description}",
@@ -248,9 +253,8 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 
 	private function newValidator(): PatchedDescriptionsValidator {
 		return new PatchedDescriptionsValidator(
-			new DescriptionsDeserializer(),
-			$this->descriptionValidator,
-			$this->languageCodeValidator
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->languageCodeValidator ),
+			new ItemDescriptionsContentsValidator( $this->descriptionValidator )
 		);
 	}
 

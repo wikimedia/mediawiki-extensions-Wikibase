@@ -749,12 +749,14 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getItemDataRetriever( $services ),
 			new PatchedDescriptionsValidator(
-				new DescriptionsDeserializer(),
-				new TermValidatorFactoryItemDescriptionValidator(
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new ItemDescriptionsContentsValidator( new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services )
-				),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				) )
 			),
 			WbRestApi::getItemUpdater( $services )
 		);
