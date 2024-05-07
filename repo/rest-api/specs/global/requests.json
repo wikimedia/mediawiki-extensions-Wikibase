@@ -22,7 +22,21 @@
 											"$ref": "./schemas.json#/Aliases"
 										},
 										"sitelinks": {
-											"$ref": "./schema-parts.json#/Sitelinks"
+											"type": "object",
+											"additionalProperties": {
+												"type": "object",
+												"items": { "$ref": "./schemas.json#/Sitelink" }
+											},
+											"example": {
+												"afwiki": {
+													"title": "Douglas Adams",
+													"badges": [ "Q17437798" ]
+												},
+												"arwiki": {
+													"title": "دوغلاس آدمز",
+													"badges": [ ]
+												}
+											}
 										},
 										"statements": {
 											"type": "object",
@@ -227,11 +241,11 @@
 									"properties": {
 										"title": {
 											"type": "string",
-											"example": "Sitelink page title"
+											"example": "Douglas Adams"
 										},
 										"badges": {
 											"type": "array",
-											"example": [ "Q45678", "Q87654" ],
+											"example": [],
 											"items": {
 												"type": "string"
 											}
