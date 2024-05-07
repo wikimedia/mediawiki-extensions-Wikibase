@@ -181,7 +181,6 @@ return call_user_func( function() {
 		'wikibase.ui.entityViewInit' => [
 			'packageFiles' => [
 				'repo/resources/wikibase.ui.entityViewInit.js',
-
 				'repo/resources/experts/getStore.js',
 				'repo/resources/dataTypes/wikibase.dataTypeStore.js',
 				'repo/resources/dataTypes/DataTypeStore.js',
@@ -217,10 +216,12 @@ return call_user_func( function() {
 					"callback" => function () {
 						$settings = WikibaseRepo::getSettings();
 						$tempUserEnabled = MediaWikiServices::getInstance()->getTempUserConfig()->isEnabled();
+						$dataTypeDefinitions = WikibaseRepo::getDataTypeDefinitions();
 						return [
 							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 							'tags' => $settings->getSetting( 'viewUiTags' ),
 							'tempUserEnabled' => $tempUserEnabled,
+							'registeredTypeIds' => $dataTypeDefinitions->getTypeIds(),
 						];
 					},
 				],
