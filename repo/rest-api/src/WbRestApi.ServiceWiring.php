@@ -815,8 +815,12 @@ return [
 			new PatchedPropertyValidator(
 				new LabelsDeserializer(),
 				new DescriptionsDeserializer(),
-				new AliasesDeserializer(),
-				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) )
+				new AliasesValidator(
+					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+					new AliasesDeserializer()
+				),
+				new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ),
 			)
 		);
 	},

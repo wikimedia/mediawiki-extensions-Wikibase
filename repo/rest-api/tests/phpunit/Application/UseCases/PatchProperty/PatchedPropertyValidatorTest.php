@@ -24,6 +24,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator
@@ -33,6 +37,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  * @license GPL-2.0-or-later
  */
 class PatchedPropertyValidatorTest extends TestCase {
+
+	private const LIMIT = 40;
 
 	/**
 	 * @dataProvider patchedPropertyProvider
@@ -46,7 +52,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedPatchedProperty,
-			$this->newValidator()->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
+			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
+				->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
 		);
 	}
 
@@ -109,13 +116,14 @@ class PatchedPropertyValidatorTest extends TestCase {
 			'labels' => [ 'en' => 'english-label' ],
 		];
 
-		$validatedProperty = $this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
+		$validatedProperty = $this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
+			->validateAndDeserialize( $patchedProperty, $originalProperty );
 
 		$this->assertEquals( $originalProperty->getId(), $validatedProperty->getId() );
 	}
 
 	/**
-	 * @dataProvider topLevelValidationProvider
+	 * @dataProvider topLevelValidationErrorProvider
 	 */
 	public function testTopLevelValidationError_throws( array $patchedProperty, Exception $expectedError ): void {
 		$originalProperty = new Property(
@@ -125,14 +133,15 @@ class PatchedPropertyValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
+			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
+				->validateAndDeserialize( $patchedProperty, $originalProperty );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
 		}
 	}
 
-	public function topLevelValidationProvider(): Generator {
+	public function topLevelValidationErrorProvider(): Generator {
 		yield 'unexpected field' => [
 			[
 				'id' => 'P123',
@@ -201,7 +210,146 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 	}
 
-	private function newValidator(): PatchedPropertyValidator {
+	/**
+	 * @dataProvider aliasesValidationErrorProvider
+	 */
+	public function testAliasesValidation(
+		AliasesInLanguageValidator $aliasesInLanguageValidator,
+		array $patchedAliases,
+		Exception $expectedError
+	): void {
+		$originalProperty = new Property(
+			new NumericPropertyId( 'P123' ),
+			new Fingerprint(),
+			'string'
+		);
+
+		$propertySerialization = [
+			'id' => 'P123',
+			'type' => 'property',
+			'data-type' => 'string',
+			'labels' => [ 'en' => 'english-label' ],
+			'aliases' => $patchedAliases,
+		];
+
+		try {
+			$this->newValidator( $aliasesInLanguageValidator )->validateAndDeserialize( $propertySerialization, $originalProperty );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function aliasesValidationErrorProvider(): Generator {
+		yield 'empty alias' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'de' => [ '' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_EMPTY,
+				"Changed alias for 'de' cannot be empty",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'de' ]
+			),
+		];
+
+		$duplicate = 'tomato';
+		yield 'duplicate alias' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ $duplicate, $duplicate ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_DUPLICATE,
+				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
+			),
+		];
+
+		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
+		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_TOO_LONG, [
+			AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
+			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+			AliasesInLanguageValidator::CONTEXT_LIMIT => self::LIMIT,
+		] );
+		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
+		$aliasesInLanguageValidator->method( 'validate' )
+			->with( new AliasGroup( 'en', [ $tooLongAlias ] ) )
+			->willReturn( $expectedResponse );
+		yield 'alias too long' => [
+			$aliasesInLanguageValidator,
+			[ 'en' => [ $tooLongAlias ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_TOO_LONG,
+				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
+					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
+				]
+			),
+		];
+
+		$invalidAlias = "tab\t tab\t tab";
+		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_INVALID, [
+			AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias,
+			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+			AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
+		] );
+		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
+		$aliasesInLanguageValidator->method( 'validate' )
+			->with( new AliasGroup( 'en', [ 'valid alias', $invalidAlias ] ) )
+			->willReturn( $expectedResponse );
+		yield 'alias contains invalid character' => [
+			$aliasesInLanguageValidator,
+			[ 'en' => [ 'valid alias', $invalidAlias ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => 'en/1',
+					UseCaseError::CONTEXT_VALUE => $invalidAlias,
+				]
+			),
+		];
+
+		yield 'aliases in language is not a list' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ 'associative array' => 'not a list' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => 'en',
+					UseCaseError::CONTEXT_VALUE => [ 'associative array' => 'not a list' ],
+				]
+			),
+		];
+
+		yield 'aliases is not an associative array' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'sequential array, not an associative array' ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'aliases' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => '',
+					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an associative array' ],
+				]
+			),
+		];
+
+		$invalidLanguage = 'not-a-valid-language-code';
+		yield 'invalid language code' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ $invalidLanguage => [ 'alias' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
+				"Not a valid language code '{$invalidLanguage}' in changed aliases",
+				[ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ]
+			),
+		];
+	}
+
+	private function newValidator(
+		AliasesInLanguageValidator $aliasesInLanguageValidator
+	): PatchedPropertyValidator {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
@@ -210,10 +358,14 @@ class PatchedPropertyValidatorTest extends TestCase {
 		return new PatchedPropertyValidator(
 			new LabelsDeserializer(),
 			new DescriptionsDeserializer(),
-			new AliasesDeserializer(),
+			new AliasesValidator(
+				$aliasesInLanguageValidator,
+				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new AliasesDeserializer(),
+			),
 			new StatementsDeserializer(
 				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-			)
+			),
 		);
 	}
 
