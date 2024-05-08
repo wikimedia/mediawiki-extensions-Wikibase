@@ -132,7 +132,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'empty label' => [
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
-				[ LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::LABEL_EMPTY,
@@ -164,8 +164,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
 				[
-					LabelsSyntaxValidator::CONTEXT_FIELD_LABEL => [ 'invalid', 'label', 'type' ],
-					LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					LabelsSyntaxValidator::CONTEXT_LABEL => [ 'invalid', 'label', 'type' ],
+					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(

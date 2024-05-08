@@ -89,14 +89,14 @@ class ItemSerializationRequestValidatingDeserializer {
 				throw new UseCaseError(
 					UseCaseError::LABEL_EMPTY,
 					'Label must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE] ]
 				);
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
-				$value = json_encode( $context[ItemLabelValidator::CONTEXT_LABEL] );
+				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
 				throw new UseCaseError(
 					UseCaseError::INVALID_LABEL,
 					"Not a valid label: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemLabelValidator::CODE_INVALID:
 				throw new UseCaseError(

@@ -71,7 +71,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 			[ 'de' => '' ],
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
-				[ LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'de' ]
+				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
 		yield 'invalid label type' => [
@@ -79,8 +79,8 @@ class LabelsSyntaxValidatorTest extends TestCase {
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
 				[
-					LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'de',
-					LabelsSyntaxValidator::CONTEXT_FIELD_LABEL => 7,
+					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
+					LabelsSyntaxValidator::CONTEXT_LABEL => 7,
 				]
 			),
 		];

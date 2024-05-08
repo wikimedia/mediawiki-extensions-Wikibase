@@ -295,7 +295,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$mockContentsValidator,
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
-				[ LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::PATCHED_LABEL_EMPTY,
@@ -333,8 +333,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
 				[
-					LabelsSyntaxValidator::CONTEXT_FIELD_LABEL => $labelOfInvalidType,
-					LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					LabelsSyntaxValidator::CONTEXT_LABEL => $labelOfInvalidType,
+					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
