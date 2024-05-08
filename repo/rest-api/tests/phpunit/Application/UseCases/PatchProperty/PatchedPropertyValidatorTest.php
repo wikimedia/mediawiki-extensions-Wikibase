@@ -48,6 +48,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 	private PropertyLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
+	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -66,6 +67,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$this->descriptionsContentsValidator = new PropertyDescriptionsContentsValidator(
 			$this->createStub( PropertyDescriptionValidator::class )
 		);
+		$this->aliasesInLanguageValidator = $this->createStub( AliasesInLanguageValidator::class );
 	}
 
 	private const LIMIT = 40;
@@ -82,8 +84,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedPatchedProperty,
-			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
-				->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
+			$this->newValidator()->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
 		);
 	}
 
@@ -146,8 +147,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			'labels' => [ 'en' => 'english-label' ],
 		];
 
-		$validatedProperty = $this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
-			->validateAndDeserialize( $patchedProperty, $originalProperty );
+		$validatedProperty = $this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
 
 		$this->assertEquals( $originalProperty->getId(), $validatedProperty->getId() );
 	}
@@ -163,8 +163,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
-				->validateAndDeserialize( $patchedProperty, $originalProperty );
+			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -253,7 +252,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$getFieldValidator( $this )->expects( $this->once() )->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )->validateAndDeserialize(
+			$this->newValidator()->validateAndDeserialize(
 				array_merge( [ 'id' => 'P123', 'data-type' => 'string' ], $patchedSerialization ),
 				new Property(
 					new NumericPropertyId( 'P123' ),
@@ -546,6 +545,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		array $patchedAliases,
 		Exception $expectedError
 	): void {
+		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;
 		$originalProperty = new Property(
 			new NumericPropertyId( 'P123' ),
 			new Fingerprint(),
@@ -561,7 +561,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator( $aliasesInLanguageValidator )->validateAndDeserialize( $propertySerialization, $originalProperty );
+			$this->newValidator()->validateAndDeserialize( $propertySerialization, $originalProperty );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -675,9 +675,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 	}
 
-	private function newValidator(
-		AliasesInLanguageValidator $aliasesInLanguageValidator
-	): PatchedPropertyValidator {
+	private function newValidator(): PatchedPropertyValidator {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
@@ -689,7 +687,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$this->descriptionsSyntaxValidator,
 			$this->descriptionsContentsValidator,
 			new AliasesValidator(
-				$aliasesInLanguageValidator,
+				$this->aliasesInLanguageValidator,
 				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
 				new AliasesDeserializer(),
 			),
