@@ -2,10 +2,11 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use EmptyBagOStuff;
 use HashBagOStuff;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
-use ObjectCache;
+use ObjectCacheFactory;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -169,6 +170,11 @@ class SqlStore implements Store {
 	private $entitySource;
 
 	/**
+	 * @var ObjectCacheFactory
+	 */
+	private $objectCacheFactory;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -193,7 +199,8 @@ class SqlStore implements Store {
 		HookContainer $hookContainer,
 		DatabaseEntitySource $entitySource,
 		SettingsArray $settings,
-		PropertyInfoLookup $propertyInfoLookup
+		PropertyInfoLookup $propertyInfoLookup,
+		ObjectCacheFactory $objectCacheFactory
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -205,6 +212,7 @@ class SqlStore implements Store {
 		$this->wikibaseServices = $wikibaseServices;
 		$this->hookContainer = $hookContainer;
 		$this->entitySource = $entitySource;
+		$this->objectCacheFactory = $objectCacheFactory;
 
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
@@ -401,7 +409,7 @@ class SqlStore implements Store {
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			new EntityRevisionCache(
-				ObjectCache::getInstance( CACHE_NONE ),
+				new EmptyBagOStuff(),
 				$this->cacheDuration,
 				$this->getEntityRevisionLookupCacheKey()
 			),
@@ -430,7 +438,7 @@ class SqlStore implements Store {
 		if ( !$this->cacheRetrievingEntityRevisionLookup ) {
 			$cacheRetrievingEntityRevisionLookup = new CacheRetrievingEntityRevisionLookup(
 				new EntityRevisionCache(
-					ObjectCache::getInstance( $this->cacheType ),
+					$this->objectCacheFactory->getInstance( $this->cacheType ),
 					$this->cacheDuration,
 					$this->getEntityRevisionLookupCacheKey()
 				),

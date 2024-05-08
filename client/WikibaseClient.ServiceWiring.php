@@ -759,7 +759,7 @@ return [
 		return new CachedDatabasePropertyLabelResolver(
 			$languageCode,
 			$databaseTermIdsResolver,
-			ObjectCache::getInstance( $cacheType ),
+			$services->getObjectCacheFactory()->getInstance( $cacheType ),
 			$cacheDuration,
 			$cacheKey
 		);
@@ -1028,7 +1028,8 @@ return [
 			$services->getStatsdDataFactory(),
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
-			$settings->getSetting( 'termFallbackCacheVersion' )
+			$settings->getSetting( 'termFallbackCacheVersion' ),
+			$services->getObjectCacheFactory()
 		);
 	},
 

@@ -7,7 +7,7 @@ namespace Wikibase\Lib\TermFallbackCache;
 use BagOStuff;
 use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
-use ObjectCache;
+use ObjectCacheFactory;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
@@ -17,8 +17,8 @@ use Wikibase\Lib\StatsdRecordingSimpleCache;
  */
 class TermFallbackCacheServiceFactory {
 
-	public function newSharedCache( $termFallbackCacheType ): BagOStuff {
-		return ObjectCache::getInstance( $termFallbackCacheType );
+	public function newSharedCache( $termFallbackCacheType, ObjectCacheFactory $objectCacheFactory ): BagOStuff {
+		return $objectCacheFactory->getInstance( $termFallbackCacheType );
 	}
 
 	public function newInMemoryCache( BagOStuff $bagOStuff ): CachedBagOStuff {

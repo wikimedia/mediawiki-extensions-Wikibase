@@ -57,6 +57,8 @@ class StoreTest extends ServiceWiringTestCase {
 			] ) );
 		$this->mockService( 'WikibaseRepo.PropertyInfoLookup',
 			$this->createMock( PropertyInfoLookup::class ) );
+		$this->serviceContainer->expects( $this->once() )
+				->method( 'getObjectCacheFactory' );
 
 		$this->assertInstanceOf(
 			SqlStore::class,

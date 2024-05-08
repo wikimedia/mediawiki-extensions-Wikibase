@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests;
 use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
+use ObjectCacheFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
@@ -73,7 +74,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 			$this->createMock( IBufferingStatsdDataFactory::class ),
 			'secret',
 			new TermFallbackCacheServiceFactory(),
-			null
+			null,
+			$this->createMock( ObjectCacheFactory::class )
 		);
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
