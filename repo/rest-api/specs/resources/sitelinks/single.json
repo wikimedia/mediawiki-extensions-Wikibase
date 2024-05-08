@@ -23,7 +23,7 @@
 		}
 	},
 	"put": {
-		"operationId": "SetSitelink",
+		"operationId": "setSitelink",
 		"tags": [ "sitelinks" ],
 		"summary": "Add / Replace an item's sitelink",
 		"parameters": [
