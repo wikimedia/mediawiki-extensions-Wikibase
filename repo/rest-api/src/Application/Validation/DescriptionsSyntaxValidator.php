@@ -10,14 +10,14 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidDescriptio
  * @license GPL-2.0-or-later
  */
 class DescriptionsSyntaxValidator {
-	public const CODE_DESCRIPTIONS_NOT_ASSOCIATIVE = 'descriptions-not-associative';
-	public const CODE_EMPTY_DESCRIPTION = 'description-empty';
-	public const CODE_INVALID_DESCRIPTION_TYPE = 'invalid-description-type';
+	public const CODE_DESCRIPTIONS_NOT_ASSOCIATIVE = 'descriptions-syntax-validator-code-descriptions-not-associative';
+	public const CODE_EMPTY_DESCRIPTION = 'descriptions-syntax-validator-code-description-empty';
+	public const CODE_INVALID_DESCRIPTION_TYPE = 'descriptions-syntax-validator-code-invalid-description-type';
 
-	public const CONTEXT_FIELD_NAME = 'field';
-	public const CONTEXT_FIELD_VALUE = 'value';
-	public const CONTEXT_FIELD_DESCRIPTION = 'description';
-	public const CONTEXT_FIELD_LANGUAGE = 'language';
+	public const CONTEXT_FIELD_NAME = 'descriptions-syntax-validator-context-field';
+	public const CONTEXT_FIELD_VALUE = 'descriptions-syntax-validator-context-value';
+	public const CONTEXT_FIELD_DESCRIPTION = 'descriptions-syntax-validator-context-description';
+	public const CONTEXT_FIELD_LANGUAGE = 'descriptions-syntax-validator-context-language';
 
 	private DescriptionsDeserializer $deserializer;
 	private LanguageCodeValidator $languageCodeValidator;

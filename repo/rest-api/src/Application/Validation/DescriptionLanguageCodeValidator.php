@@ -7,9 +7,9 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
  */
 interface DescriptionLanguageCodeValidator {
 
-	public const CODE_INVALID_LANGUAGE = 'invalid-language-code';
+	public const CODE_INVALID_LANGUAGE = 'description-language-code-validator-code-invalid-language-code';
 
-	public const CONTEXT_LANGUAGE = 'language';
+	public const CONTEXT_LANGUAGE = 'description-language-code-validator-context-language';
 
 	public function validate( string $language ): ?ValidationError;
 
