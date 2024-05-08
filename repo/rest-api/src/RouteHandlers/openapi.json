@@ -312,7 +312,7 @@
         }
       },
       "put": {
-        "operationId": "SetSitelink",
+        "operationId": "setSitelink",
         "tags": [
           "sitelinks"
         ],
