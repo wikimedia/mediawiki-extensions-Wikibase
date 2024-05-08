@@ -55,5 +55,6 @@
 	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي.",
 	"wikibase-sitelinks-sitename-columnheading": "ژبه",
 	"wikibase-sitelinks-link-columnheading": "تړلی مخ",
-	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}"
+	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "ددې ځانګړني سمول پر {{WBREPONAME}}"
 }
