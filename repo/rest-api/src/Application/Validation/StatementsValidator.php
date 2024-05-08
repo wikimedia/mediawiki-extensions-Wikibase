@@ -16,19 +16,19 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
  */
 class StatementsValidator {
 
-	public const CODE_STATEMENTS_NOT_ASSOCIATIVE = 'invalid-statements-type';
-	public const CODE_STATEMENT_GROUP_NOT_SEQUENTIAL = 'invalid-statement-group-type';
-	public const CODE_STATEMENT_NOT_ARRAY = 'invalid-statement-type';
-	public const CODE_INVALID_STATEMENT_DATA = 'statement-data-invalid-field';
-	public const CODE_MISSING_STATEMENT_DATA = 'statement-data-missing-field';
-	public const CODE_PROPERTY_ID_MISMATCH = 'property-id-mismatch';
+	public const CODE_STATEMENTS_NOT_ASSOCIATIVE = 'statements-validator-code-invalid-statements-type';
+	public const CODE_STATEMENT_GROUP_NOT_SEQUENTIAL = 'statements-validator-code-invalid-statement-group-type';
+	public const CODE_STATEMENT_NOT_ARRAY = 'statements-validator-code-invalid-statement-type';
+	public const CODE_INVALID_STATEMENT_DATA = 'statements-validator-code-statement-data-invalid-field';
+	public const CODE_MISSING_STATEMENT_DATA = 'statements-validator-code-statement-data-missing-field';
+	public const CODE_PROPERTY_ID_MISMATCH = 'statements-validator-code-property-id-mismatch';
 
-	public const CONTEXT_STATEMENTS = 'statements';
-	public const CONTEXT_PATH = 'path';
-	public const CONTEXT_FIELD = 'field';
-	public const CONTEXT_VALUE = 'value';
-	public const CONTEXT_PROPERTY_ID_KEY = 'property-id-key';
-	public const CONTEXT_PROPERTY_ID_VALUE = 'property-id-value';
+	public const CONTEXT_STATEMENTS = 'statements-validator-context-statements';
+	public const CONTEXT_PATH = 'statements-validator-context-path';
+	public const CONTEXT_FIELD = 'statements-validator-context-field';
+	public const CONTEXT_VALUE = 'statements-validator-context-value';
+	public const CONTEXT_PROPERTY_ID_KEY = 'statements-validator-context-property-id-key';
+	public const CONTEXT_PROPERTY_ID_VALUE = 'statements-validator-context-property-id-value';
 
 	private StatementsDeserializer $statementsDeserializer;
 

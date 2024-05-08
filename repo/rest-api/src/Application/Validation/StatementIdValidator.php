@@ -10,8 +10,8 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  */
 class StatementIdValidator {
 
-	public const CODE_INVALID = 'invalid-statement-id';
-	public const CONTEXT_VALUE = 'statement-id-value';
+	public const CODE_INVALID = 'statement-id-validator-code-invalid-statement-id';
+	public const CONTEXT_VALUE = 'statement-id-validator-context-statement-id-value';
 
 	private EntityIdParser $entityIdParser;
 
