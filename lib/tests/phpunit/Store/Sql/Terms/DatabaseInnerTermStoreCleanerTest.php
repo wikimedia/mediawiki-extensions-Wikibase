@@ -43,10 +43,22 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id, $termInLang2Id ] );
 
-		$this->assertSelect( 'wbt_text', 'wbx_id', '*', [] );
-		$this->assertSelect( 'wbt_text_in_lang', 'wbxl_id', '*', [] );
-		$this->assertSelect( 'wbt_term_in_lang', 'wbtl_id', '*', [] );
-		$this->assertSelect( 'wbt_type', 'wby_name', '*', [ [ 'label' ] ] );
+		$this->newSelectQueryBuilder()
+			->select( 'wbx_id' )
+			->from( 'wbt_text' )
+			->assertEmptyResult();
+		$this->newSelectQueryBuilder()
+			->select( 'wbxl_id' )
+			->from( 'wbt_text_in_lang' )
+			->assertEmptyResult();
+		$this->newSelectQueryBuilder()
+			->select( 'wbtl_id' )
+			->from( 'wbt_term_in_lang' )
+			->assertEmptyResult();
+		$this->newSelectQueryBuilder()
+			->select( 'wby_name' )
+			->from( 'wbt_type' )
+			->assertFieldValue( 'label' );
 	}
 
 	public function testCleanupTermInLangButNoTextInLang() {
@@ -246,18 +258,15 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function assertTableReturns( array $elements, string $table, string $field ) {
-		$this->assertSelect(
-			$table,
-			$field,
-			'*',
-			array_map(
+		$this->newSelectQueryBuilder()
+			->select( $field )
+			->from( $table )
+			->assertResultSet( array_map(
 				function( $element ) {
 					return [ $element ];
 				},
 				$elements
-			),
-			[ 'ORDER BY' => $field ]
-		);
+			) );
 	}
 
 	private function assertTextTableReturns( array $elements ) {

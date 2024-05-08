@@ -81,12 +81,10 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 		$this->maintenance->loadWithArgv( [] );
 		$this->maintenance->execute();
 
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			$expected
-		);
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( $expected );
 	}
 
 	public function testExecute_paging(): void {
@@ -106,18 +104,16 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 
 		$this->maintenance->loadWithArgv( $argv );
 		$this->maintenance->execute();
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			[
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( [
 				[ 1, 'expectedUnconnectedPage', '', 0.0 ],
 				// 2 is excluded
 				[ 3, 'wikibase_item', '', 0.0 ],
 				[ 4, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 				// 101 is excluded
-			]
-		);
+			] );
 	}
 
 	/**

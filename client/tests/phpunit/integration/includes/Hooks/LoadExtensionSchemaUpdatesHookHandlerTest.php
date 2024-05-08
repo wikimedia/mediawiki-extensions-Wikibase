@@ -78,16 +78,14 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 
 		$dbUpdater->runUpdates( $dbUpdater->getExtensionUpdates(), true );
 
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			[
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( [
 				[ 10, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 				// 20 is not in a Wikibase NS
 				[ 30, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
-			]
-		);
+			] );
 		$this->assertTrue(
 			$dbUpdater->updateRowExists( LoadExtensionSchemaUpdatesHookHandler::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE )
 		);
