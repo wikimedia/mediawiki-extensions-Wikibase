@@ -576,6 +576,30 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, missingField );
 		} );
 
+		it( 'statement property id mismatch', async () => {
+			const propertyIdKey = 'P123';
+			const validStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const response = await newCreateItemRequestBuilder( {
+				labels: { en: 'en-label' },
+				statements: { [ propertyIdKey ]: [ validStatement ] }
+			} ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'statement-group-property-id-mismatch',
+				{
+					path: `${propertyIdKey}/0/property/id`,
+					'statement-group-property-id': propertyIdKey,
+					'statement-property-id': predicatePropertyId
+				}
+			);
+			assert.equal( response.body.message, "Statement's Property ID does not match the statement group key" );
+		} );
+
 		it( 'invalid site ID', async () => {
 			const invalidSiteId = 'not-a-valid-site-id';
 			const response = await newCreateItemRequestBuilder( {

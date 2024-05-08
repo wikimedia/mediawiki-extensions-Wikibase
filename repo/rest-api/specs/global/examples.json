@@ -988,5 +988,16 @@
 				"path": "{property_id}/{index}"
 			}
 		}
+	},
+	"StatementGroupPropertyIdMismatch": {
+		"value": {
+			"code": "statement-group-property-id-mismatch",
+			"message": "Statement's Property ID does not match the statement group key",
+			"context": {
+				"path": "{property_id_key}/{index}/property/id",
+				"statement-group-property-id": "{property_id_key}",
+				"statement-property-id": "{property_id_value}"
+			}
+		}
 	}
 }

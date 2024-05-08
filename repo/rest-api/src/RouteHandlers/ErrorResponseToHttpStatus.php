@@ -104,6 +104,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_SITELINK_TYPE => 400,
 		UseCaseError::INVALID_STATEMENT_TYPE => 400,
 		UseCaseError::INVALID_STATEMENT_GROUP_TYPE => 400,
+		UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {

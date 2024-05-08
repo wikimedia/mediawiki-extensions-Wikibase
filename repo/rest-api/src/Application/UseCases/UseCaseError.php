@@ -103,6 +103,7 @@ class UseCaseError extends UseCaseException {
 	public const STATEMENT_DATA_INVALID_FIELD = 'statement-data-invalid-field';
 	public const STATEMENT_DATA_MISSING_FIELD = 'statement-data-missing-field';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
+	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
@@ -126,6 +127,8 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_BADGES = 'badges';
 	public const CONTEXT_SUBJECT_ID = 'subject-id';
 	public const CONTEXT_VALUE = 'value';
+	public const CONTEXT_PROPERTY_ID_KEY = 'statement-group-property-id';
+	public const CONTEXT_PROPERTY_ID_VALUE = 'statement-property-id';
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
@@ -234,6 +237,11 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
+		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
+			self::CONTEXT_PATH,
+			self::CONTEXT_PROPERTY_ID_KEY,
+			self::CONTEXT_PROPERTY_ID_VALUE,
+		],
 		self::UNEXPECTED_ERROR => [],
 		self::PATCHED_PROPERTY_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],

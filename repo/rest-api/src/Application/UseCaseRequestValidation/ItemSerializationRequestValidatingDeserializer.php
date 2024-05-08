@@ -281,6 +281,16 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::CONTEXT_FIELD => $context[ItemStatementsValidator::CONTEXT_FIELD],
 					]
 				);
+			case ItemStatementsValidator::CODE_PROPERTY_ID_MISMATCH:
+				throw new UseCaseError(
+					UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+					"Statement's Property ID does not match the statement group key",
+					[
+						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_PROPERTY_ID_KEY => $context[ItemStatementsValidator::CONTEXT_PROPERTY_ID_KEY],
+						UseCaseError::CONTEXT_PROPERTY_ID_VALUE => $context[ItemStatementsValidator::CONTEXT_PROPERTY_ID_VALUE],
+					]
+				);
 		}
 	}
 

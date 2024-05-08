@@ -457,6 +457,7 @@
 					"invalid-statement-type": { "$ref": "./examples.json#/InvalidStatementTypeExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
+					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
 					"invalid-site-id": {
 						"$ref": "./examples.json#/InvalidSiteIdWithSiteContextExample"
 					},
