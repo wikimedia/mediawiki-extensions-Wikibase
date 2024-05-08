@@ -2,8 +2,7 @@
 	"post": {
 		"operationId": "addItem",
 		"tags": [ "items" ],
-		"summary": "[WIP] Create a Wikibase Item",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Create a Wikibase Item",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],

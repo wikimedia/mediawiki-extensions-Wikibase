@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Product Platform Team",
@@ -77,8 +77,7 @@
         "tags": [
           "items"
         ],
-        "summary": "[WIP] Create a Wikibase Item",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Create a Wikibase Item",
         "parameters": [
           {
             "$ref": "#/components/parameters/Authorization"
