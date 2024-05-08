@@ -7,13 +7,13 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
  */
 interface JsonPatchValidator {
 
-	public const CODE_INVALID = 'patch-invalid';
-	public const CODE_INVALID_FIELD_TYPE = 'patch-invalid-field-type';
-	public const CODE_MISSING_FIELD = 'patch-missing-field';
-	public const CODE_INVALID_OPERATION = 'patch-invalid-op';
+	public const CODE_INVALID = 'json-patch-validator-code-invalid';
+	public const CODE_INVALID_FIELD_TYPE = 'json-patch-validator-code-invalid-field-type';
+	public const CODE_MISSING_FIELD = 'json-patch-validator-code-missing-field';
+	public const CODE_INVALID_OPERATION = 'json-patch-validator-code-invalid-op';
 
-	public const CONTEXT_OPERATION = 'operation';
-	public const CONTEXT_FIELD = 'field';
+	public const CONTEXT_OPERATION = 'json-patch-validator-context-operation';
+	public const CONTEXT_FIELD = 'json-patch-validator-context-field';
 
 	public function validate( array $patch ): ?ValidationError;
 
