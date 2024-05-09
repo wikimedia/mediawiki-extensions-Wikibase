@@ -10,7 +10,6 @@
 	},
 	"tooltip-t-wikibase": "د نښلېدلي اومتوک زېرمتون توکي سره تړنه",
 	"wikibase-after-page-move": "په لېږدول شوي مخ کې د ژبو د تړنو ساتلو لپاره تاسې بايد د [$1 اړونده {{WBREPONAME}} توکی] هممهاله کړئ.",
-	"wikibase-after-page-delete-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-comment-update": "{{WBREPONAME}} توکی بدل شو",
 	"wikibase-comment-sitelink-add": "د ژبې تړنه ورگډه شوه: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|بدلون|بدلونونه}}",
@@ -55,5 +54,6 @@
 	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي.",
 	"wikibase-sitelinks-sitename-columnheading": "ژبه",
 	"wikibase-sitelinks-link-columnheading": "تړلی مخ",
-	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}"
+	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "ددې ځانګړني سمول پر {{WBREPONAME}}"
 }
