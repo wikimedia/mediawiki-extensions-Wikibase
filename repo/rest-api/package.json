@@ -4,9 +4,10 @@
 	"description": "OpenAPI definition of Wikibase REST API",
 	"scripts": {
 		"test": "npm run lint",
-		"api-testing:e2e": "mocha --timeout 0 --inline-diffs --recursive tests/mocha/api-testing",
-		"api-testing:spec": "mocha --timeout 0 --inline-diffs --recursive --ext Test.js tests/mocha/openapi-validation",
+		"api-testing:e2e": "npm run mocha -- --recursive tests/mocha/api-testing",
+		"api-testing:spec": "npm run mocha -- --recursive --ext Test.js tests/mocha/openapi-validation",
 		"api-testing": "npm-run-all api-testing:*",
+		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel lint:*",
 		"lint:openapi": "swagger-cli validate specs/openapi.json",
 		"lint:eslint": "eslint . --max-warnings 0",
