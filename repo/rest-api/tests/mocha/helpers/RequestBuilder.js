@@ -1,11 +1,13 @@
 'use strict';
 
+const { readFileSync } = require( 'fs' );
 const { assert, clientFactory } = require( 'api-testing' );
 const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
 const basePath = 'rest.php/wikibase/v0';
+const builtSpec = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
 
 // "static" because it can be shared across requests, and we don't want to dereference it every time
 let openApiSpec = null;
@@ -205,7 +207,7 @@ class RequestBuilder {
 	}
 
 	getRouteDescription() {
-		return `${this.method} ${this.route}`;
+		return builtSpec.paths[ this.route ][ this.method.toLowerCase() ].operationId;
 	}
 
 	getMethod() {

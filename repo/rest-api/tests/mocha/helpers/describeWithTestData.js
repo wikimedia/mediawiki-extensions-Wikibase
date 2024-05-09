@@ -37,7 +37,7 @@ function describeWithTestData( testName, runAllTests ) {
 			describe( newRequestBuilder().getRouteDescription(), () => {
 				afterEach( async () => {
 					if ( newRequestBuilder().getMethod() === 'DELETE' ||
-						( newRequestBuilder().getRouteDescription().includes( 'sitelinks' ) &&
+						( newRequestBuilder().getRouteDescription().toLowerCase().includes( 'sitelink' ) &&
 						newRequestBuilder().getMethod() !== 'GET' ) ) {
 						const entity = await resetEntityTestData(
 							requestInputs.mainTestSubject,
