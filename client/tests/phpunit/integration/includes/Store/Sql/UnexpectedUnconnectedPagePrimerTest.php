@@ -172,12 +172,10 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		}
 		$primer->setPageProps();
 
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			$expectedPageProps
-		);
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( $expectedPageProps );
 	}
 
 	public function testInsertPageProp_continue(): void {
@@ -200,32 +198,28 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		// first run
 		$primer->setMaxPageId( 2 );
 		$primer->setPageProps();
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			[
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( [
 				[ 1, 'expectedUnconnectedPage', '', 0.0 ],
 				[ 2, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 				[ 3, 'wikibase_item', '', 0.0 ],
 				// 4 not yet processed
-			]
-		);
+			] );
 
 		$primer->setMinPageId( 3 );
 		$primer->setMaxPageId( 4 );
 		$primer->setPageProps();
-		$this->assertSelect(
-			'page_props',
-			[ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ],
-			IDatabase::ALL_ROWS,
-			[
+		$this->newSelectQueryBuilder()
+			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
+			->from( 'page_props' )
+			->assertResultSet( [
 				[ 1, 'expectedUnconnectedPage', '', 0.0 ],
 				[ 2, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 				[ 3, 'wikibase_item', '', 0.0 ],
 				[ 4, 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
-			]
-		);
+			] );
 	}
 
 	/**
