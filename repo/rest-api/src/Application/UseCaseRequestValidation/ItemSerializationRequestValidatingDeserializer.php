@@ -10,13 +10,13 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
@@ -249,46 +249,46 @@ class ItemSerializationRequestValidatingDeserializer {
 	private function handleStatementsValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
-			case ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'statements', 'statements', $context[ItemStatementsValidator::CONTEXT_STATEMENTS] );
-			case ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
+			case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
+				$this->throwInvalidField( 'statements', 'statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
+			case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
 				throw new UseCaseError(
 					UseCaseError::INVALID_STATEMENT_GROUP_TYPE,
 					'Not a valid statement group',
-					[ UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH] ]
+					[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
 				);
-			case ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY:
+			case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 				throw new UseCaseError(
 					UseCaseError::INVALID_STATEMENT_TYPE,
 					'Not a valid statement type',
-					[ UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH] ]
+					[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
 				);
-			case ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA:
+			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-					"Invalid input for '{$context[ItemStatementsValidator::CONTEXT_FIELD]}'",
+					"Invalid input for '{$context[StatementsValidator::CONTEXT_FIELD]}'",
 					[
-						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
-						UseCaseError::CONTEXT_VALUE => $context[ItemStatementsValidator::CONTEXT_VALUE],
+						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_VALUE => $context[StatementsValidator::CONTEXT_VALUE],
 					]
 				);
-			case ItemStatementsValidator::CODE_MISSING_STATEMENT_DATA:
+			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_DATA_MISSING_FIELD,
-					"Mandatory field missing in the statement data: {$context[ItemStatementsValidator::CONTEXT_FIELD]}",
+					"Mandatory field missing in the statement data: {$context[StatementsValidator::CONTEXT_FIELD]}",
 					[
-						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
-						UseCaseError::CONTEXT_FIELD => $context[ItemStatementsValidator::CONTEXT_FIELD],
+						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_FIELD => $context[StatementsValidator::CONTEXT_FIELD],
 					]
 				);
-			case ItemStatementsValidator::CODE_PROPERTY_ID_MISMATCH:
+			case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
 					"Statement's Property ID does not match the statement group key",
 					[
-						UseCaseError::CONTEXT_PATH => $context[ItemStatementsValidator::CONTEXT_PATH],
-						UseCaseError::CONTEXT_PROPERTY_ID_KEY => $context[ItemStatementsValidator::CONTEXT_PROPERTY_ID_KEY],
-						UseCaseError::CONTEXT_PROPERTY_ID_VALUE => $context[ItemStatementsValidator::CONTEXT_PROPERTY_ID_VALUE],
+						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
+						UseCaseError::CONTEXT_PROPERTY_ID_KEY => $context[StatementsValidator::CONTEXT_PROPERTY_ID_KEY],
+						UseCaseError::CONTEXT_PROPERTY_ID_VALUE => $context[StatementsValidator::CONTEXT_PROPERTY_ID_VALUE],
 					]
 				);
 		}

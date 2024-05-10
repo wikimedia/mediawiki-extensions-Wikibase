@@ -14,7 +14,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemStatementsValidator {
+class StatementsValidator {
 
 	public const CODE_STATEMENTS_NOT_ASSOCIATIVE = 'invalid-statements-type';
 	public const CODE_STATEMENT_GROUP_NOT_SEQUENTIAL = 'invalid-statement-group-type';

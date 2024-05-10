@@ -12,13 +12,13 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -501,10 +501,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		$invalidStatements = [ 'not valid statements' ];
 		yield 'invalid statements array' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => 'statements',
-					ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+					StatementsValidator::CONTEXT_PATH => 'statements',
+					StatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
 				]
 			),
 			new UseCaseError(
@@ -516,8 +516,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'statement group not sequential' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-				[ ItemStatementsValidator::CONTEXT_PATH => 'P1' ]
+				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+				[ StatementsValidator::CONTEXT_PATH => 'P1' ]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_GROUP_TYPE,
@@ -528,8 +528,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid statement type' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ ItemStatementsValidator::CONTEXT_PATH => 'P1/0' ]
+				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
+				[ StatementsValidator::CONTEXT_PATH => 'P1/0' ]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_STATEMENT_TYPE,
@@ -540,10 +540,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'missing statement field' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_MISSING_STATEMENT_DATA,
+				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => '/P1/0',
-					ItemStatementsValidator::CONTEXT_FIELD => 'value',
+					StatementsValidator::CONTEXT_PATH => '/P1/0',
+					StatementsValidator::CONTEXT_FIELD => 'value',
 				]
 			),
 			new UseCaseError(
@@ -555,11 +555,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid statement field' => [
 			new ValidationError(
-				ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA,
+				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => '/P1/0/value',
-					ItemStatementsValidator::CONTEXT_FIELD => 'value',
-					ItemStatementsValidator::CONTEXT_VALUE => 'invalid-value',
+					StatementsValidator::CONTEXT_PATH => '/P1/0/value',
+					StatementsValidator::CONTEXT_FIELD => 'value',
+					StatementsValidator::CONTEXT_VALUE => 'invalid-value',
 				]
 			),
 			new UseCaseError(
