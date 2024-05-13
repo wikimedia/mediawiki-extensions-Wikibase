@@ -9,7 +9,7 @@
 	"wikibase-comment-sitelink-add": "Lim de lengoua apondu : $1",
 	"wikibase-comment-sitelink-change": "Lim de lengoua changiê de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Lim de lengoua enlevâ : $1",
-	"wikibase-dataitem": "Piéce {{WBREPONAME}}",
+	"wikibase-dataitem": "Èlèment {{WBREPONAME}}",
 	"wikibase-editlinks": "Changiér los lims",
 	"wikibase-editlinkstitle": "Changiér los lims entèrlengoues",
 	"wikibase-linkitem-addlinks": "Apondre de lims",
@@ -24,7 +24,7 @@
 	"wikibase-rc-show-wikidata-pref": "Montrar los changements de Wikidata dedens los dèrriérs changements",
 	"wikibase-rc-wikibase-edit-letter": "B",
 	"wikibase-rc-wikibase-edit-title": "Changement de {{WBREPONAME}}",
-	"wikibase-otherprojects": "En ôtros projèts",
+	"wikibase-otherprojects": "Dens d’ôtros projèts",
 	"wikibase-sitelinks-sitename-columnheading": "Lengoua",
 	"wikibase-sitelinks-link-columnheading": "Articllo liyê"
 }
