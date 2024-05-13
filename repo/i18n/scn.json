@@ -222,7 +222,7 @@
 	"wikibase-itemmerge-failed-modify": "Nun s'arriniscìu a jùnciri li suggetti, pi favuri prima arrisorvi tutti li cunflitti.",
 	"wikibase-itemmerge-no-such-entity": "Suggettu nun attruvatu.",
 	"wikibase-itemmerge-cant-load-entity-content": "Lu carricamentu dû suggettu nun arriniscìu.",
-	"wikibase-itemmerge-cant-merge-self": "Nun si pò jùnciri nu suggettu cu iddu stissu.",
+	"wikibase-itemmerge-cant-merge-self": "Nun si pò jùnciri nu suggettu cu iḍḍu stissu.",
 	"wikibase-tokencheck-missingtoken": "Aggiuva nu token di canciamentu.",
 	"wikibase-tokencheck-mustposttoken": "Lu canciamentu si pò fari sulu adupirannu addumannati POST.",
 	"wikibase-tokencheck-badtoken": "Token di canciamentu nun bonu (forsi la tò sissioni scadìu).",
