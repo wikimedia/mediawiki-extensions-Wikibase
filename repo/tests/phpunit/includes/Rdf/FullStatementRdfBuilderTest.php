@@ -128,7 +128,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				$propertyId = $data[0];
 				return $propertyId->getSerialization();
 			},
-			$this->getTestData()->getTestProperties()
+			RdfBuilderTestData::getTestProperties()
 		);
 
 		$q4_minimal = [ 'Q4_statements' ];
@@ -178,7 +178,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				$propertyId = $data[0];
 				return $propertyId->getSerialization();
 			},
-			$this->getTestData()->getTestProperties()
+			RdfBuilderTestData::getTestProperties()
 		);
 
 		$q4_minimal = [ 'Q4_statements_foreignsource_properties' ];
