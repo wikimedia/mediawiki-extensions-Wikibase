@@ -4,7 +4,12 @@
 			"Eruedin"
 		]
 	},
+	"wikibase-editlinks": "Kobimisela ekangisi",
+	"wikibase-linkitem-addlinks": "Kobakisa ekangisi",
+	"wikibase-linkitem-title": "Ekangisi na lonkásá",
+	"wikibase-linkitem-linkpage": "Ekangisi na lonkásá",
 	"wikibase-linkitem-input-site": "Lokótá:",
+	"wikibase-linkitem-input-page": "Lonkásá:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Komɔ́nisa",
 	"wikibase-rc-wikibase-edit-letter": "D"

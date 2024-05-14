@@ -63,7 +63,7 @@
 	"wikibase-time-precision-BCE-millennium": "$1. millenniu a.C.",
 	"wikibase-time-precision-BCE-century": "$1. sèculu a.C.",
 	"wikibase-time-precision-BCE-10annum": "anni $1 a.C.",
-	"wikibase-snakformatter-valuetype-mismatch": "Lu tipu dû valuri \"$1\" nun cumbacia cu chiddu dâ prupità \"$2\".",
+	"wikibase-snakformatter-valuetype-mismatch": "Lu tipu dû valuri \"$1\" nun cumbacia cu chiḍḍu dâ prupità \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Prupità $1 nun attruvata, nun si pò ditirminari lu tipu di dati di adupirari",
 	"wikibase-entity-summary-wbsetitem": "Criatu n'elimentu novu",
 	"wikibase-entity-summary-wbcreateredirect": "Fattu rimannu a $4",

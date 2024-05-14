@@ -38,7 +38,8 @@
 			"아라",
 			"H78c67c",
 			"SunAfterRain",
-			"列维劳德"
+			"列维劳德",
+			"Cookai1205"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -60,7 +61,7 @@
 	"wikibase-addqualifier": "新增限定詞",
 	"wikibase-addreference": "新增參考文獻",
 	"wikibase-save-inprogress": "儲存中...",
-	"wikibase-publish-inprogress": "發佈中…",
+	"wikibase-publish-inprogress": "發布中…",
 	"wikibase-remove-inprogress": "移除中...",
 	"wikibase-statementlistview-add": "新增屬性值",
 	"wikibase-statementlistview-add-tooltip": "新增屬性值",
