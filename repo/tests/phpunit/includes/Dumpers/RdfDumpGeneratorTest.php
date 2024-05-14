@@ -68,12 +68,13 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->helper = new NTriplesRdfTestHelper(
-			new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/RdfDumpGenerator'
-			)
+		$rdfBuilderTestData = new RdfBuilderTestData(
+			__DIR__ . '/../../data/rdf/entities',
+			__DIR__ . '/../../data/rdf/RdfDumpGenerator'
 		);
+		$this->helper = new NTriplesRdfTestHelper( $rdfBuilderTestData );
+
+		$this->setService( 'WikibaseRepo.PropertyInfoLookup', $rdfBuilderTestData->getPropertyInfoLookup() );
 	}
 
 	public function getSiteLookup(): SiteLookup {
