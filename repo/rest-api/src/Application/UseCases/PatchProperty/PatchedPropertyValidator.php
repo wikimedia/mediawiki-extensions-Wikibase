@@ -285,23 +285,6 @@ class PatchedPropertyValidator {
 	}
 
 	/**
-	 * @param string $field
-	 * @param mixed $value
-	 *
-	 * @return never
-	 */
-	public function throwInvalidField( string $field, $value ): void {
-		throw new UseCaseError(
-			UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-			"Invalid input for '$field' in the patched property",
-			[
-				UseCaseError::CONTEXT_PATH => $field,
-				UseCaseError::CONTEXT_VALUE => $value,
-			]
-		);
-	}
-
-	/**
 	 * @param mixed $aliasesSerialization
 	 */
 	private function validateAliases( $aliasesSerialization ): void {
@@ -373,6 +356,23 @@ class PatchedPropertyValidator {
 					);
 			}
 		}
+	}
+
+	/**
+	 * @param string $field
+	 * @param mixed $value
+	 *
+	 * @return never
+	 */
+	private function throwInvalidField( string $field, $value ): void {
+		throw new UseCaseError(
+			UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
+			"Invalid input for '$field' in the patched property",
+			[
+				UseCaseError::CONTEXT_PATH => $field,
+				UseCaseError::CONTEXT_VALUE => $value,
+			]
+		);
 	}
 
 }
