@@ -14,17 +14,17 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\Validation\StatementsValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemStatementsValidatorTest extends TestCase {
+class StatementsValidatorTest extends TestCase {
 
 	private PropertyValuePairDeserializer $propValPairDeserializer;
 
@@ -75,10 +75,10 @@ class ItemStatementsValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				ItemStatementsValidator::CODE_MISSING_STATEMENT_DATA,
+				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => "$predicateId/0",
-					ItemStatementsValidator::CONTEXT_FIELD => 'value',
+					StatementsValidator::CONTEXT_PATH => "$predicateId/0",
+					StatementsValidator::CONTEXT_FIELD => 'value',
 				]
 			),
 			$this->newValidator()->validate( [ $predicateId => [ $statementWithMissingValue ] ] )
@@ -97,10 +97,10 @@ class ItemStatementsValidatorTest extends TestCase {
 		yield 'statements field is not an associative array' => [
 			$invalidStatements,
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => '',
-					ItemStatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+					StatementsValidator::CONTEXT_PATH => '',
+					StatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
 				]
 			),
 		];
@@ -112,8 +112,8 @@ class ItemStatementsValidatorTest extends TestCase {
 		yield 'statement group is not a sequential array (list)' => [
 			[ 'P123' => $invalidStatementGroup ],
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-				[ ItemStatementsValidator::CONTEXT_PATH => 'P123' ]
+				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+				[ StatementsValidator::CONTEXT_PATH => 'P123' ]
 			),
 		];
 
@@ -121,8 +121,8 @@ class ItemStatementsValidatorTest extends TestCase {
 		yield 'statement in statement group is not an array' => [
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
-				ItemStatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ ItemStatementsValidator::CONTEXT_PATH => 'P123/0' ]
+				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
+				[ StatementsValidator::CONTEXT_PATH => 'P123/0' ]
 			),
 		];
 
@@ -134,11 +134,11 @@ class ItemStatementsValidatorTest extends TestCase {
 		yield 'rank field in a statement is incorrect' => [
 			[ 'P567' => [ $invalidStatement ] ],
 			new ValidationError(
-				ItemStatementsValidator::CODE_INVALID_STATEMENT_DATA,
+				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					ItemStatementsValidator::CONTEXT_PATH => 'P567/0/rank',
-					ItemStatementsValidator::CONTEXT_FIELD => 'rank',
-					ItemStatementsValidator::CONTEXT_VALUE => 'not-a-valid-rank',
+					StatementsValidator::CONTEXT_PATH => 'P567/0/rank',
+					StatementsValidator::CONTEXT_FIELD => 'rank',
+					StatementsValidator::CONTEXT_VALUE => 'not-a-valid-rank',
 				]
 			),
 		];
@@ -149,8 +149,8 @@ class ItemStatementsValidatorTest extends TestCase {
 		$this->newValidator()->getValidatedStatements();
 	}
 
-	private function newValidator(): ItemStatementsValidator {
-		return new ItemStatementsValidator(
+	private function newValidator(): StatementsValidator {
+		return new StatementsValidator(
 			new StatementsDeserializer(
 				new StatementDeserializer(
 					$this->propValPairDeserializer,

@@ -125,7 +125,6 @@ use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -135,6 +134,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
@@ -372,7 +372,7 @@ return [
 						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
 						new AliasesDeserializer()
 					),
-					new ItemStatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
+					new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
 					new SitelinksValidator(
 						new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 							WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )

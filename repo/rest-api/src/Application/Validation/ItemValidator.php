@@ -26,7 +26,7 @@ class ItemValidator {
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
 	private AliasesValidator $itemAliasesValidator;
-	private ItemStatementsValidator $itemStatementsValidator;
+	private StatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
 
 	public function __construct(
@@ -35,7 +35,7 @@ class ItemValidator {
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
 		AliasesValidator $itemAliasesValidator,
-		ItemStatementsValidator $itemStatementsValidator,
+		StatementsValidator $itemStatementsValidator,
 		SitelinksValidator $sitelinksValidator
 	) {
 		$this->labelsSyntaxValidator = $labelsSyntaxValidator;
