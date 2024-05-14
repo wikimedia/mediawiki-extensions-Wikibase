@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bean49",
 			"Bencemac",
 			"Bináris",
 			"BáthoryPéter",
@@ -95,7 +96,7 @@
 	"wikibase-pageinfo-entity-usage-X": "Minden entitásadat",
 	"wikibase-pageinfo-entity-usage-O": "Egyéb (pl. más nevek, entitás létezése)",
 	"wikibase-property-render-error": "$1 tulajdonság feldolgozása sikertelen: $2",
-	"wikibase-otherprojects": "Társlapok",
+	"wikibase-otherprojects": "Társprojektek",
 	"wikibase-otherprojects-beta-message": "Társlapok oldalsáv",
 	"wikibase-otherprojects-beta-description": "Az oldalsávhoz hozzáad egy \"{{int:wikibase-otherprojects}}\" szakaszt, amely a {{WBREPONAME}} adatai alapján más WikiMedia-projektekhez nyújt linkeket.",
 	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
