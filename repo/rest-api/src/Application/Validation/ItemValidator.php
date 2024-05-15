@@ -13,7 +13,6 @@ class ItemValidator {
 
 	public const CODE_INVALID_FIELD = 'item-validator-code-invalid-item-field';
 	public const CODE_UNEXPECTED_FIELD = 'item-validator-code-item-data-unexpected-field';
-	public const CODE_MISSING_LABELS_AND_DESCRIPTIONS = 'item-validator-code-missing-labels-and-descriptions';
 
 	public const CONTEXT_FIELD_NAME = 'item-validator-context-field';
 	public const CONTEXT_FIELD_VALUE = 'item-validator-context-value';
@@ -99,15 +98,8 @@ class ItemValidator {
 	}
 
 	private function validateLabelsAndDescriptions( array $itemSerialization ): ?ValidationError {
-		$labels = $itemSerialization['labels'];
-		$descriptions = $itemSerialization['descriptions'];
-
-		if ( $labels === [] && $descriptions === [] ) {
-			return new ValidationError( self::CODE_MISSING_LABELS_AND_DESCRIPTIONS );
-		}
-
-		return $this->labelsSyntaxValidator->validate( $labels ) ??
-			$this->descriptionsSyntaxValidator->validate( $descriptions ) ??
+		return $this->labelsSyntaxValidator->validate( $itemSerialization['labels'] ) ??
+			$this->descriptionsSyntaxValidator->validate( $itemSerialization['descriptions'] ) ??
 			$this->labelsContentsValidator->validate(
 				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions()

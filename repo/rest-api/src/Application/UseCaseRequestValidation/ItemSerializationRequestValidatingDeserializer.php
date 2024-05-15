@@ -61,11 +61,6 @@ class ItemSerializationRequestValidatingDeserializer {
 							UseCaseError::CONTEXT_LANGUAGE => $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE],
 						]
 					);
-				case ItemValidator::CODE_MISSING_LABELS_AND_DESCRIPTIONS:
-					throw new UseCaseError(
-						UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS,
-						'Item requires at least a label or a description in a language'
-					);
 			}
 
 			$this->handleLabelValidationErrors( $validationError, $itemSerialization['labels'] ?? [] );

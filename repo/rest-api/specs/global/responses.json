@@ -434,7 +434,6 @@
 				"examples": {
 					"item-data-invalid-field": { "$ref": "./examples.json#/ItemDataInvalidFieldExample" },
 					"unexpected-field": { "$ref": "./examples.json#/ItemDataUnexpectedFieldExample" },
-					"missing-labels-and-descriptions": { "$ref": "./examples.json#/ItemDataMissingLabelsAndDescriptionsExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},

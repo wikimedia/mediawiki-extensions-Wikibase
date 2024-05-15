@@ -4097,9 +4097,6 @@
               "unexpected-field": {
                 "$ref": "#/components/examples/ItemDataUnexpectedFieldExample"
               },
-              "missing-labels-and-descriptions": {
-                "$ref": "#/components/examples/ItemDataMissingLabelsAndDescriptionsExample"
-              },
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
@@ -8204,12 +8201,6 @@
           "context": {
             "field": "{field}"
           }
-        }
-      },
-      "ItemDataMissingLabelsAndDescriptionsExample": {
-        "value": {
-          "code": "missing-labels-and-descriptions",
-          "message": "Item requires at least a label or a description in a language"
         }
       },
       "ItemStatementIdMismatchExample": {
