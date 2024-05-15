@@ -9,20 +9,19 @@ use Wikibase\DataModel\SiteLink;
  */
 interface SitelinkValidator {
 
-	public const CODE_TITLE_MISSING = 'title-missing';
-	public const CODE_EMPTY_TITLE = 'empty-title';
-	public const CODE_INVALID_TITLE = 'invalid-title';
-	public const CODE_INVALID_TITLE_TYPE = 'invalid-title-type';
+	public const CODE_TITLE_MISSING = 'sitelink-validator-code-title-missing';
+	public const CODE_EMPTY_TITLE = 'sitelink-validator-code-empty-title';
+	public const CODE_INVALID_TITLE = 'sitelink-validator-code-invalid-title';
+	public const CODE_INVALID_TITLE_TYPE = 'sitelink-validator-code-invalid-title-type';
+	public const CODE_INVALID_BADGES_TYPE = 'sitelink-validator-code-invalid-badges-type';
+	public const CODE_INVALID_BADGE = 'sitelink-validator-code-invalid-badge';
+	public const CODE_BADGE_NOT_ALLOWED = 'sitelink-validator-code-badge-not-allowed';
+	public const CODE_TITLE_NOT_FOUND = 'sitelink-validator-code-title-not-found';
+	public const CODE_SITELINK_CONFLICT = 'sitelink-validator-code-sitelink-conflict';
 
-	public const CODE_INVALID_BADGES_TYPE = 'invalid-badges-type';
-	public const CODE_INVALID_BADGE = 'invalid-badge';
-	public const CODE_BADGE_NOT_ALLOWED = 'badge-not-allowed';
-	public const CODE_TITLE_NOT_FOUND = 'title-not-found';
-	public const CODE_SITELINK_CONFLICT = 'sitelink-conflict';
-
-	public const CONTEXT_BADGE = 'badge';
-	public const CONTEXT_CONFLICT_ITEM_ID = 'conflict_item_id';
-	public const CONTEXT_SITE_ID = 'site-id';
+	public const CONTEXT_BADGE = 'sitelink-validator-context-badge';
+	public const CONTEXT_CONFLICT_ITEM_ID = 'sitelink-validator-context-conflict-item-id';
+	public const CONTEXT_SITE_ID = 'sitelink-validator-context-site-id';
 
 	/**
 	 * @param string|null $itemId - null if validating a new item

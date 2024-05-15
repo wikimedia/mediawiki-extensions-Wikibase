@@ -10,10 +10,10 @@ use Wikibase\DataModel\SiteLinkList;
  */
 class SitelinksValidator {
 
-	public const CODE_INVALID_SITELINK = 'invalid-sitelink';
-	public const CODE_SITELINKS_NOT_ASSOCIATIVE = 'invalid-sitelinks';
+	public const CODE_INVALID_SITELINK = 'sitelinks-validator-code-invalid-sitelink';
+	public const CODE_SITELINKS_NOT_ASSOCIATIVE = 'sitelinks-validator-code-invalid-sitelinks';
 
-	public const CONTEXT_SITE_ID = 'site-id';
+	public const CONTEXT_SITE_ID = 'sitelinks-validator-context-site-id';
 
 	private SiteIdValidator $siteIdValidator;
 	private SitelinkValidator $sitelinkValidator;

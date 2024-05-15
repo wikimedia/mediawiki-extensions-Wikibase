@@ -13,11 +13,11 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
  */
 class StatementValidator {
 
-	public const CODE_INVALID_FIELD = 'invalid-statement-field';
-	public const CODE_MISSING_FIELD = 'statement-data-missing-field';
+	public const CODE_INVALID_FIELD = 'statement-validator-code-invalid-statement-field';
+	public const CODE_MISSING_FIELD = 'statement-validator-code-missing-statement-field';
 
-	public const CONTEXT_FIELD_NAME = 'field';
-	public const CONTEXT_FIELD_VALUE = 'value';
+	public const CONTEXT_FIELD_NAME = 'statement-validator-context-field';
+	public const CONTEXT_FIELD_VALUE = 'statement-validator-context-value';
 
 	private StatementDeserializer $deserializer;
 

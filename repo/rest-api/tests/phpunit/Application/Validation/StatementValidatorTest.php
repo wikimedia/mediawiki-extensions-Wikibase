@@ -51,13 +51,16 @@ class StatementValidatorTest extends TestCase {
 		yield 'invalid field exception' => [
 			new InvalidFieldException( 'some-field', 'some-value' ),
 			StatementValidator::CODE_INVALID_FIELD,
-			[ 'field' => 'some-field', 'value' => 'some-value' ],
+			[
+				StatementValidator::CONTEXT_FIELD_NAME => 'some-field',
+				StatementValidator::CONTEXT_FIELD_VALUE => 'some-value',
+			],
 		];
 
 		yield 'missing field exception' => [
 			new MissingFieldException( 'property' ),
 			StatementValidator::CODE_MISSING_FIELD,
-			[ 'field' => 'property' ],
+			[ StatementValidator::CONTEXT_FIELD_NAME => 'property' ],
 		];
 	}
 

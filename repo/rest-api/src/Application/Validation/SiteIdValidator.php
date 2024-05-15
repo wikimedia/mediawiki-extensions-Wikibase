@@ -7,8 +7,8 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
  */
 class SiteIdValidator {
 
-	public const CODE_INVALID_SITE_ID = 'invalid-site-id';
-	public const CONTEXT_SITE_ID_VALUE = 'site-id-value';
+	public const CODE_INVALID_SITE_ID = 'site-id-validator-code-invalid-site-id';
+	public const CONTEXT_SITE_ID_VALUE = 'site-id-validator-context-site-id-value';
 
 	private array $validSiteIds;
 
