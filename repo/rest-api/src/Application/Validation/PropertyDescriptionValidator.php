@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\Validation;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,6 +18,6 @@ interface PropertyDescriptionValidator {
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_DESCRIPTION = 'description';
 
-	public function validate( PropertyId $propertyId, string $language, string $description ): ?ValidationError;
+	public function validate( string $language, string $descriptionText, TermList $existingLabels ): ?ValidationError;
 
 }

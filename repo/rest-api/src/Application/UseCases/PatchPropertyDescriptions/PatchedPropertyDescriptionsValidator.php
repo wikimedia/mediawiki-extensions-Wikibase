@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions;
 
 use LogicException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -30,14 +29,14 @@ class PatchedPropertyDescriptionsValidator {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize(
-		PropertyId $propertyId,
 		TermList $originalDescriptions,
-		array $patchedSerialization
+		TermList $originalLabels,
+		array $descriptionsSerialization
 	): TermList {
-		$error = $this->syntaxValidator->validate( $patchedSerialization ) ?:
+		$error = $this->syntaxValidator->validate( $descriptionsSerialization ) ?:
 			$this->contentsValidator->validate(
 				$this->syntaxValidator->getPartiallyValidatedDescriptions(),
-				$propertyId,
+				$originalLabels,
 				$this->getModifiedLanguages( $originalDescriptions, $this->syntaxValidator->getPartiallyValidatedDescriptions() )
 			);
 		if ( $error ) {

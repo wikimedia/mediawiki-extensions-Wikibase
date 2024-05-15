@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\Validation;
 
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -17,10 +16,10 @@ class PropertyLabelsContentsValidator {
 		$this->labelValidator = $labelValidator;
 	}
 
-	public function validate( PartiallyValidatedLabels $labels, PropertyId $propertyId, array $languages = null ): ?ValidationError {
+	public function validate( PartiallyValidatedLabels $labels, TermList $descriptions, array $languages = null ): ?ValidationError {
 		$languages ??= array_keys( $labels->toTextArray() );
 		foreach ( $languages as $language ) {
-			$error = $this->labelValidator->validate( $propertyId, $language, $labels->getByLanguage( $language )->getText() );
+			$error = $this->labelValidator->validate( $language, $labels->getByLanguage( $language )->getText(), $descriptions );
 			if ( $error ) {
 				return $error;
 			}

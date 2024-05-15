@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyDescript
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -66,7 +65,7 @@ class PatchPropertyDescriptionsTest extends TestCase {
 		$this->patchedDescriptionsValidator = $this->createStub( PatchedPropertyDescriptionsValidator::class );
 		$this->patchedDescriptionsValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback(
-				fn( PropertyId $id, TermList $descriptions, array $patchedDescriptions ) => ( new DescriptionsDeserializer() )
+				fn( TermList $descriptions, TermList $labels, array $patchedDescriptions ) => ( new DescriptionsDeserializer() )
 					->deserialize( $patchedDescriptions )
 			);
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );

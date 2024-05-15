@@ -6,14 +6,10 @@ use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -30,56 +26,18 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 
 	private const MAX_LENGTH = 50;
 
-	private PropertyWriteModelRetriever $propertyRetriever;
 	private TermsCollisionDetector $termsCollisionDetector;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
+
 		$this->termsCollisionDetector = $this->createStub( TermsCollisionDetector::class );
 	}
 
 	public function testValid(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-
-		$property = new Property( $propertyId,
-			new Fingerprint( new TermList( [ new Term( 'en', 'property label' ) ] ) ),
-			'string'
-		);
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
-
 		$this->assertNull(
-			$this->newValidator()->validate( $propertyId, 'en', 'valid label' )
+			$this->newValidator()->validate( 'en', 'valid label', new TermList( [] ) )
 		);
-	}
-
-	public function testGivenValidLabelForNonExistentProperty_returnsNull(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, null );
-		$this->assertNull(
-			$this->newValidator()->validate( $propertyId, 'en', 'valid label' )
-		);
-	}
-
-	public function testUnchangedLabel_willNotPerformValidation(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
-		$languageCode = 'en';
-		$propertyLabel = 'some property label';
-
-		$property = new Property( $propertyId,
-			new Fingerprint( new TermList( [ new Term( 'en', $propertyLabel ) ] ) ),
-			'string'
-		);
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
-
-		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
-		$this->termsCollisionDetector
-			->expects( $this->never() )
-			->method( 'detectLabelCollision' );
-
-		$this->assertNull( $this->newValidator()->validate( $propertyId, $languageCode, $propertyLabel ) );
 	}
 
 	/**
@@ -93,7 +51,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 	): void {
 		$this->assertEquals(
 			new ValidationError( $errorCode, $errorContext ),
-			$this->newValidator()->validate( new NumericPropertyId( 'P123' ), $language, $label )
+			$this->newValidator()->validate( $language, $label, new TermList( [] ) )
 		);
 	}
 
@@ -131,35 +89,22 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 	}
 
 	public function testLabelEqualsDescription_returnsValidationError(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
 		$languageCode = 'en';
 		$description = 'some description';
-
-		$property = new Property( $propertyId,
-			new Fingerprint( null, new TermList( [ new Term( $languageCode, $description ) ] ) ),
-			'string'
-		);
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->assertEquals(
 			new ValidationError(
 				PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
 				[ PropertyLabelValidator::CONTEXT_LANGUAGE => $languageCode ]
 			),
-			$this->newValidator()->validate( $propertyId, $languageCode, $description )
+			$this->newValidator()->validate( $languageCode, $description, new TermList( [ new Term( $languageCode, $description ) ] ) )
 		);
 	}
 
 	public function testLabelCollision_returnsValidationError(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
 		$languageCode = 'en';
 		$label = 'some label';
 		$matchingPropertyId = 'P456';
-
-		$property = new Property( $propertyId, new Fingerprint(), 'string' );
-
-		$this->createPropertyWriteModelRetrieverMock( $propertyId, $property );
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
@@ -177,7 +122,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 					PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => $matchingPropertyId,
 				]
 			),
-			$this->newValidator()->validate( $propertyId, $languageCode, $label )
+			$this->newValidator()->validate( $languageCode, $label, new TermList( [] ) )
 		);
 	}
 
@@ -192,17 +137,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 				$this->createStub( LanguageNameUtils::class )
 			),
 			$this->termsCollisionDetector,
-			$this->propertyRetriever
 		);
-	}
-
-	private function createPropertyWriteModelRetrieverMock( PropertyId $propertyId, ?Property $property ): void {
-		$this->propertyRetriever = $this->createMock( PropertyWriteModelRetriever::class );
-		$this->propertyRetriever
-			->expects( $this->once() )
-			->method( 'getPropertyWriteModel' )
-			->with( $propertyId )
-			->willReturn( $property );
 	}
 
 }

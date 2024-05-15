@@ -304,19 +304,17 @@ return [
 			return new PropertyLabelEditRequestValidatingDeserializer(
 				new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
-					WbRestApi::getPropertyDataRetriever( $services )
-				)
+					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
+				),
+				WbRestApi::getPropertyDataRetriever( $services )
 			);
 		},
 
 	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
 			return new PropertyDescriptionEditRequestValidatingDeserializer(
-				new TermValidatorFactoryPropertyDescriptionValidator(
-					WikibaseRepo::getTermValidatorFactory( $services ),
-					WbRestApi::getPropertyDataRetriever( $services )
-				)
+				new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				WbRestApi::getPropertyDataRetriever( $services )
 			);
 		},
 
@@ -820,8 +818,7 @@ return [
 				new PropertyLabelsContentsValidator(
 					new TermValidatorFactoryPropertyLabelValidator(
 						WikibaseRepo::getTermValidatorFactory( $services ),
-						WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
-						WbRestApi::getPropertyDataRetriever( $services )
+						WikibaseRepo::getPropertyTermsCollisionDetector( $services )
 					)
 				),
 				new DescriptionsSyntaxValidator(
@@ -830,10 +827,7 @@ return [
 					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 				),
 				new PropertyDescriptionsContentsValidator(
-					new TermValidatorFactoryPropertyDescriptionValidator(
-						WikibaseRepo::getTermValidatorFactory( $services ),
-						WbRestApi::getPropertyDataRetriever( $services )
-					)
+					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
@@ -885,10 +879,9 @@ return [
 					new DescriptionsDeserializer(),
 					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 				),
-				new PropertyDescriptionsContentsValidator( new TermValidatorFactoryPropertyDescriptionValidator(
-					WikibaseRepo::getTermValidatorFactory( $services ),
-					WbRestApi::getPropertyDataRetriever( $services )
-				) )
+				new PropertyDescriptionsContentsValidator(
+					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
+				)
 			),
 			WbRestApi::getPropertyUpdater( $services )
 		);
@@ -912,8 +905,7 @@ return [
 				),
 				new PropertyLabelsContentsValidator( new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getPropertyTermsCollisionDetector( $services ),
-					WbRestApi::getPropertyDataRetriever( $services )
+					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
 				) )
 			),
 			WbRestApi::getAssertPropertyExists( $services ),

@@ -2,10 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -14,25 +13,20 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescriptionValidator {
 
 	private TermValidatorFactory $termValidatorFactory;
-	private PropertyWriteModelRetriever $propertyRetriever;
 
-	public function __construct(
-		TermValidatorFactory $termValidatorFactory,
-		PropertyWriteModelRetriever $propertyRetriever
-	) {
+	public function __construct( TermValidatorFactory $termValidatorFactory ) {
 		$this->termValidatorFactory = $termValidatorFactory;
-		$this->propertyRetriever = $propertyRetriever;
 	}
 
-	public function validate( PropertyId $propertyId, string $language, string $description ): ?ValidationError {
-		return $this->validateDescription( $language, $description )
-			   ?? $this->validateProperty( $propertyId, $language, $description );
+	public function validate( string $language, string $descriptionText, TermList $existingLabels ): ?ValidationError {
+		return $this->validateDescriptionText( $descriptionText, $language )
+			   ?? $this->validateDescriptionWithLabels( $language, $descriptionText, $existingLabels );
 	}
 
-	private function validateDescription( string $language, string $description ): ?ValidationError {
+	private function validateDescriptionText( string $descriptionText, string $language ): ?ValidationError {
 		$result = $this->termValidatorFactory
 			->getDescriptionValidator()
-			->validate( $description );
+			->validate( $descriptionText );
 		if ( !$result->isValid() ) {
 			$error = $result->getErrors()[0];
 			switch ( $error->getCode() ) {
@@ -42,7 +36,7 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 					return new ValidationError(
 						self::CODE_TOO_LONG,
 						[
-							self::CONTEXT_DESCRIPTION => $description,
+							self::CONTEXT_DESCRIPTION => $descriptionText,
 							self::CONTEXT_LIMIT => $error->getParameters()[0],
 							self::CONTEXT_LANGUAGE => $language,
 						]
@@ -51,7 +45,7 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 					return new ValidationError(
 						self::CODE_INVALID,
 						[
-							self::CONTEXT_DESCRIPTION => $description,
+							self::CONTEXT_DESCRIPTION => $descriptionText,
 							self::CONTEXT_LANGUAGE => $language,
 						]
 					);
@@ -61,27 +55,13 @@ class TermValidatorFactoryPropertyDescriptionValidator implements PropertyDescri
 		return null;
 	}
 
-	private function validateProperty( PropertyId $propertyId, string $language, string $description ): ?ValidationError {
-		$property = $this->propertyRetriever->getPropertyWriteModel( $propertyId );
-
-		// skip if Property does not exist
-		if ( $property === null ) {
+	private function validateDescriptionWithLabels( string $language, string $description, TermList $existingLabels ): ?ValidationError {
+		// skip if Property does not have a label in the language
+		if ( !$existingLabels->hasTermForLanguage( $language ) ) {
 			return null;
 		}
 
-		// skip if description is unchanged
-		if ( $property->getDescriptions()->hasTermForLanguage( $language ) &&
-			 $property->getDescriptions()->getByLanguage( $language )->getText() === $description
-		) {
-			return null;
-		}
-
-		// skip if Property does not have a label
-		if ( !$property->getLabels()->hasTermForLanguage( $language ) ) {
-			return null;
-		}
-
-		$label = $property->getLabels()->getByLanguage( $language )->getText();
+		$label = $existingLabels->getByLanguage( $language )->getText();
 		if ( $label === $description ) {
 			return new ValidationError(
 				self::CODE_LABEL_DESCRIPTION_EQUAL,

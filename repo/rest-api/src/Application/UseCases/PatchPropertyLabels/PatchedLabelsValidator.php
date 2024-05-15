@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
 use LogicException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -29,11 +28,15 @@ class PatchedLabelsValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( PropertyId $propertyId, TermList $originalLabels, array $labelsSerialization ): TermList {
+	public function validateAndDeserialize(
+		TermList $originalLabels,
+		TermList $originalDescriptions,
+		array $labelsSerialization
+	): TermList {
 		$error = $this->syntaxValidator->validate( $labelsSerialization ) ?:
 			$this->contentsValidator->validate(
 				$this->syntaxValidator->getPartiallyValidatedLabels(),
-				$propertyId,
+				$originalDescriptions,
 				$this->getModifiedLanguages( $originalLabels, $this->syntaxValidator->getPartiallyValidatedLabels() )
 			);
 

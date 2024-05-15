@@ -4,12 +4,18 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
+use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer
@@ -20,6 +26,17 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 
+	private PropertyWriteModelRetriever $propertyRetriever;
+	private PropertyDescriptionValidator $propertyDescriptionValidator;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+		$this->propertyRetriever->addProperty( new Property( new NumericPropertyId( 'P123' ), null, 'string' ) );
+		$this->propertyDescriptionValidator = $this->createStub( PropertyDescriptionValidator::class );
+	}
+
 	public function testGivenValidRequest_returnsDescription(): void {
 		$request = $this->createStub( PropertyDescriptionEditRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
@@ -28,8 +45,49 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 
 		$this->assertEquals(
 			new Term( 'en', 'that class of which this subject is a particular example and member' ),
-			( new PropertyDescriptionEditRequestValidatingDeserializer( $this->createStub( PropertyDescriptionValidator::class ) ) )
-				->validateAndDeserialize( $request )
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenPropertyDoesNotExist_skipsValidation(): void {
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+
+		$this->propertyDescriptionValidator = $this->createMock( PropertyDescriptionValidator::class );
+		$this->propertyDescriptionValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( PropertyDescriptionEditRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( 'P123' );
+		$request->method( 'getLanguageCode' )->willReturn( 'en' );
+		$request->method( 'getDescription' )->willReturn( 'description' );
+
+		$this->assertEquals(
+			new Term( 'en', 'description' ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
+		);
+	}
+
+	public function testGivenDescriptionIsUnchanged_skipsValidation(): void {
+		$propertyId = new NumericPropertyId( 'P345' );
+		$languageCode = 'en';
+		$description = 'description';
+
+		$this->propertyRetriever = new InMemoryPropertyRepository();
+		$this->propertyRetriever->addProperty( new Property(
+			$propertyId,
+			new Fingerprint( null, new TermList( [ new Term( $languageCode, $description ) ] ) ),
+			'string'
+		) );
+		$this->propertyDescriptionValidator = $this->createMock( PropertyDescriptionValidator::class );
+		$this->propertyDescriptionValidator->expects( $this->never() )->method( 'validate' );
+
+		$request = $this->createStub( PropertyDescriptionEditRequest::class );
+		$request->method( 'getPropertyId' )->willReturn( "$propertyId" );
+		$request->method( 'getLanguageCode' )->willReturn( $languageCode );
+		$request->method( 'getDescription' )->willReturn( $description );
+
+		$this->assertEquals(
+			new Term( $languageCode, $description ),
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request )
 		);
 	}
 
@@ -47,12 +105,11 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getDescription' )->willReturn( 'my description' );
 
-		$propertyDescriptionValidator = $this->createStub( PropertyDescriptionValidator::class );
-		$propertyDescriptionValidator->method( 'validate' )->willReturn( $validationError );
+		$this->propertyDescriptionValidator = $this->createStub( PropertyDescriptionValidator::class );
+		$this->propertyDescriptionValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new PropertyDescriptionEditRequestValidatingDeserializer( $propertyDescriptionValidator ) )
-				->validateAndDeserialize( $request );
+			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
@@ -106,6 +163,13 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 			"Label and description for language code '$language' can not have the same value",
 			[ UseCaseError::CONTEXT_LANGUAGE => $language ],
 		];
+	}
+
+	private function newValidatingDeserializer(): PropertyDescriptionEditRequestValidatingDeserializer {
+		return new PropertyDescriptionEditRequestValidatingDeserializer(
+			$this->propertyDescriptionValidator,
+			$this->propertyRetriever
+		);
 	}
 
 }

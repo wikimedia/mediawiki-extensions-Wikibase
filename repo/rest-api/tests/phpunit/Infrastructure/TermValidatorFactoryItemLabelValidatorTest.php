@@ -38,18 +38,6 @@ class TermValidatorFactoryItemLabelValidatorTest extends TestCase {
 		);
 	}
 
-	public function testUnchangedLabel_willNotPerformValidation(): void {
-		$languageCode = 'en';
-		$label = 'some label';
-
-		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
-		$this->termsCollisionDetector
-			->expects( $this->never() )
-			->method( 'detectLabelAndDescriptionCollision' );
-
-		$this->newValidator()->validate( 'en', 'valid label', new TermList( [] ) );
-	}
-
 	/**
 	 * @dataProvider provideInvalidLabel
 	 */

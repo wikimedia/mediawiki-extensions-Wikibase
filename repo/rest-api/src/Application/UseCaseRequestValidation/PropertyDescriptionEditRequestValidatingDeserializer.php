@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,20 +15,34 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 class PropertyDescriptionEditRequestValidatingDeserializer {
 
 	private PropertyDescriptionValidator $validator;
+	private PropertyWriteModelRetriever $propertyRetriever;
 
-	public function __construct( PropertyDescriptionValidator $validator ) {
+	public function __construct( PropertyDescriptionValidator $validator, PropertyWriteModelRetriever $propertyRetriever ) {
 		$this->validator = $validator;
+		$this->propertyRetriever = $propertyRetriever;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( PropertyDescriptionEditRequest $request ): Term {
+		$property = $this->propertyRetriever->getPropertyWriteModel( new NumericPropertyId( $request->getPropertyId() ) );
 		$language = $request->getLanguageCode();
+		$description = $request->getDescription();
+
+		// skip if property does not exist or description is unchanged
+		if ( !$property ||
+			 ( $property->getDescriptions()->hasTermForLanguage( $language ) &&
+			   $property->getDescriptions()->getByLanguage( $language )->getText() === $description
+			 )
+		) {
+			return new Term( $language, $description );
+		}
+
 		$validationError = $this->validator->validate(
-			new NumericPropertyId( $request->getPropertyId() ),
 			$language,
-			$request->getDescription()
+			$request->getDescription(),
+			$property->getLabels()
 		);
 
 		if ( $validationError ) {

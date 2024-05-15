@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyLabels;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
@@ -41,7 +40,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 	public function testWithValidLabels( array $labelsSerialization, TermList $expectedResult ): void {
 		$this->assertEquals(
 			$expectedResult,
-			$this->newValidator()->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), $labelsSerialization )
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), $labelsSerialization )
 		);
 	}
 
@@ -57,11 +56,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 	}
 
 	public function testValidateOnlyModifiedLabels(): void {
-		$propertyId = new NumericPropertyId( 'P123' );
 		$originalLabels = new TermList( [
 			new Term( 'en', 'type' ),
 			new Term( 'de', 'ist ein(e)' ),
 		] );
+		$originalDescriptions = new TermList();
 
 		// only 'en' and 'bar' labels have been patched
 		$patchedLabels = [ 'en' => 'instance of', 'de' => 'ist ein(e)', 'bar' => 'is a' ];
@@ -69,16 +68,16 @@ class PatchedLabelsValidatorTest extends TestCase {
 		// expect validation only for the modified labels
 		$this->labelValidator = $this->createMock( PropertyLabelValidator::class );
 		$expectedArgs = [
-			[ $propertyId, 'en', 'instance of' ],
-			[ $propertyId, 'bar', 'is a' ],
+			[ 'en', 'instance of', $originalDescriptions ],
+			[ 'bar', 'is a', $originalDescriptions ],
 		];
 		$this->labelValidator->expects( $this->exactly( 2 ) )
 			->method( 'validate' )
-			->willReturnCallback( function ( $itemId, $language, $label ) use ( &$expectedArgs ) {
+			->willReturnCallback( function ( $language, $label, $descriptions ) use ( &$expectedArgs ) {
 				$curExpectedArgs = array_shift( $expectedArgs );
-				$this->assertSame( $curExpectedArgs[0], $itemId );
-				$this->assertSame( $curExpectedArgs[1], $language );
-				$this->assertSame( $curExpectedArgs[2], $label );
+				$this->assertSame( $curExpectedArgs[0], $language );
+				$this->assertSame( $curExpectedArgs[1], $label );
+				$this->assertSame( $curExpectedArgs[2], $descriptions );
 				return null;
 			} );
 
@@ -88,7 +87,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 				new Term( 'de', 'ist ein(e)' ),
 				new Term( 'bar', 'is a' ),
 			] ),
-			$this->newValidator()->validateAndDeserialize( $propertyId, $originalLabels, $patchedLabels )
+			$this->newValidator()->validateAndDeserialize( $originalLabels, $originalDescriptions, $patchedLabels )
 		);
 	}
 
@@ -106,7 +105,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		$this->labelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			$this->newValidator()->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), $labelsSerialization );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), $labelsSerialization );
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
@@ -178,7 +177,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	public function testGivenEmptyLabel_throwsEmptyLabelError(): void {
 		try {
-			$this->newValidator()->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), [ 'en' => '' ] );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => '' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
@@ -190,7 +189,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 	public function testGivenInvalidLabelType_throwsInvalidLabelError(): void {
 		$invalidLabel = 123;
 		try {
-			$this->newValidator()->validateAndDeserialize( new NumericPropertyId( 'P123' ), new TermList(), [ 'en' => $invalidLabel ] );
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => $invalidLabel ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID, $e->getErrorCode() );
@@ -214,7 +213,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		);
 		try {
 			$this->newValidator()->validateAndDeserialize(
-				new NumericPropertyId( 'P345' ),
+				new TermList(),
 				new TermList(),
 				[ $language => 'Label same as description.' ]
 			);
@@ -238,7 +237,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 		try {
 			$this->newValidator()->validateAndDeserialize(
-				new NumericPropertyId( 'P123' ),
+				new TermList(),
 				new TermList(),
 				[ $invalidLanguage => 'potato' ]
 			);
