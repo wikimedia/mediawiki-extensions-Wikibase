@@ -68,15 +68,15 @@ class PatchedDescriptionsValidator {
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
-				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_EMPTY,
 					"Changed description for '$languageCode' cannot be empty",
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$language = $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION] );
+				$language = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
+				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID,
 					"Changed description for '{$language}' is invalid: {$value}",

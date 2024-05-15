@@ -67,7 +67,7 @@ class PatchedStatementValidatorTest extends TestCase {
 		yield 'from invalid patched statement (missing field)' => [
 			new ValidationError(
 				StatementValidator::CODE_MISSING_FIELD,
-				[ StatementValidator::CONTEXT_FIELD_NAME => 'property' ]
+				[ StatementValidator::CONTEXT_FIELD => 'property' ]
 			),
 			UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 			'Mandatory field missing in the patched statement: property',
@@ -76,8 +76,8 @@ class PatchedStatementValidatorTest extends TestCase {
 
 		yield 'from invalid patched statement (invalid field)' => [
 			new ValidationError( StatementValidator::CODE_INVALID_FIELD, [
-				StatementValidator::CONTEXT_FIELD_NAME => 'rank',
-				StatementValidator::CONTEXT_FIELD_VALUE => 'not-a-valid-rank',
+				StatementValidator::CONTEXT_FIELD => 'rank',
+				StatementValidator::CONTEXT_VALUE => 'not-a-valid-rank',
 			] ),
 			UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
 			"Invalid input for 'rank' in the patched statement",

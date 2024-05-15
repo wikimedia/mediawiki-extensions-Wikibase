@@ -14,10 +14,10 @@ class DescriptionsSyntaxValidator {
 	public const CODE_EMPTY_DESCRIPTION = 'descriptions-syntax-validator-code-description-empty';
 	public const CODE_INVALID_DESCRIPTION_TYPE = 'descriptions-syntax-validator-code-invalid-description-type';
 
-	public const CONTEXT_FIELD_NAME = 'descriptions-syntax-validator-context-field';
-	public const CONTEXT_FIELD_VALUE = 'descriptions-syntax-validator-context-value';
-	public const CONTEXT_FIELD_DESCRIPTION = 'descriptions-syntax-validator-context-description';
-	public const CONTEXT_FIELD_LANGUAGE = 'descriptions-syntax-validator-context-language';
+	public const CONTEXT_FIELD = 'descriptions-syntax-validator-context-field';
+	public const CONTEXT_VALUE = 'descriptions-syntax-validator-context-value';
+	public const CONTEXT_DESCRIPTION = 'descriptions-syntax-validator-context-description';
+	public const CONTEXT_LANGUAGE = 'descriptions-syntax-validator-context-language';
 
 	private DescriptionsDeserializer $deserializer;
 	private LanguageCodeValidator $languageCodeValidator;
@@ -60,12 +60,12 @@ class DescriptionsSyntaxValidator {
 		} catch ( EmptyDescriptionException $e ) {
 			return new ValidationError(
 				self::CODE_EMPTY_DESCRIPTION,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField() ]
 			);
 		} catch ( InvalidDescriptionException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_DESCRIPTION_TYPE,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_DESCRIPTION => $e->getValue() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_DESCRIPTION => $e->getValue() ]
 			);
 		}
 

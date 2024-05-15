@@ -549,7 +549,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$mockContentsValidator,
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
-				[ DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::PATCHED_DESCRIPTION_EMPTY,
@@ -587,8 +587,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
 				[
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION => $descriptionOfInvalidType,
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => $descriptionOfInvalidType,
+					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(

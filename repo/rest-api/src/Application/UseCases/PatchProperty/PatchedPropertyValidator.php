@@ -256,15 +256,15 @@ class PatchedPropertyValidator {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'descriptions', $descriptionsSerialization );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
-				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_EMPTY,
 					"Changed description for '$languageCode' cannot be empty",
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$language = $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION] );
+				$language = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
+				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID,
 					"Changed description for '{$language}' is invalid: {$value}",
@@ -344,23 +344,23 @@ class PatchedPropertyValidator {
 						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
 					);
 				case AliasesValidator::CODE_EMPTY_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(
 						UseCaseError::PATCHED_ALIAS_EMPTY,
 						"Changed alias for '$language' cannot be empty",
 						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
 					);
 				case AliasesValidator::CODE_DUPLICATE_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
-					$value = $context[AliasesValidator::CONTEXT_FIELD_ALIAS];
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_ALIAS];
 					throw new UseCaseError(
 						UseCaseError::PATCHED_ALIAS_DUPLICATE,
 						"Aliases in language '$language' contain duplicate alias: '$value'",
 						[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
 					);
 				case AliasesValidator::CODE_INVALID_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
-					$value = $context[AliasesValidator::CONTEXT_FIELD_ALIAS];
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_ALIAS];
 					throw new UseCaseError(
 						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 						"Patched value for '$language' is invalid",

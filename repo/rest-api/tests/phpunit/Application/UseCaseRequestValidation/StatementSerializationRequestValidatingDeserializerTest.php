@@ -60,7 +60,7 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 
 	public function statementValidationErrorProvider(): Generator {
 		yield 'missing field' => [
-			new ValidationError( StatementValidator::CODE_MISSING_FIELD, [ StatementValidator::CONTEXT_FIELD_NAME => 'some-field' ] ),
+			new ValidationError( StatementValidator::CODE_MISSING_FIELD, [ StatementValidator::CONTEXT_FIELD => 'some-field' ] ),
 			new UseCaseError(
 				UseCaseError::STATEMENT_DATA_MISSING_FIELD,
 				'Mandatory field missing in the statement data: some-field',
@@ -71,8 +71,8 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementValidator::CODE_INVALID_FIELD,
 				[
-					StatementValidator::CONTEXT_FIELD_NAME => 'some-field',
-					StatementValidator::CONTEXT_FIELD_VALUE => 'some-value',
+					StatementValidator::CONTEXT_FIELD => 'some-field',
+					StatementValidator::CONTEXT_VALUE => 'some-value',
 				]
 			),
 			new UseCaseError(

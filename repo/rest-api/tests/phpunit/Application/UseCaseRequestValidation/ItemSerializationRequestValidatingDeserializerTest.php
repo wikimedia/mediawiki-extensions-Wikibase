@@ -80,8 +80,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				ItemValidator::CODE_INVALID_FIELD,
 				[
-					ItemValidator::CONTEXT_FIELD_NAME => 'some-field',
-					ItemValidator::CONTEXT_FIELD_VALUE => 'some-value',
+					ItemValidator::CONTEXT_FIELD => 'some-field',
+					ItemValidator::CONTEXT_VALUE => 'some-value',
 				]
 			),
 			new UseCaseError(
@@ -97,7 +97,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'unexpected field' => [
 			new ValidationError(
 				ItemValidator::CODE_UNEXPECTED_FIELD,
-				[ ItemValidator::CONTEXT_FIELD_NAME => 'some-field' ]
+				[ ItemValidator::CONTEXT_FIELD => 'some-field' ]
 			),
 			new UseCaseError(
 				UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
@@ -194,7 +194,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_LABELS,
+					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_LABELS,
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
@@ -202,7 +202,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: e2',
 				[
-					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_LABELS,
+					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_LABELS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
 				]
 			),
@@ -260,7 +260,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'empty description' => [
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
-				[ DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::DESCRIPTION_EMPTY,
@@ -290,8 +290,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
 				[
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION => 22,
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => 22,
+					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
@@ -318,7 +318,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
+					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_DESCRIPTIONS,
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
@@ -326,7 +326,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: e2',
 				[
-					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_FIELD_DESCRIPTIONS,
+					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_DESCRIPTIONS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
 				]
 			),
@@ -371,7 +371,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'empty alias' => [
 			new ValidationError(
 				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_EMPTY,
@@ -383,7 +383,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'empty aliases in language list' => [
 			new ValidationError(
 				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
-				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_LIST_EMPTY,
@@ -396,7 +396,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid aliases' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_ALIASES,
-				[ AliasesValidator::CONTEXT_FIELD_ALIASES => $invalidAliases ]
+				[ AliasesValidator::CONTEXT_ALIASES => $invalidAliases ]
 			),
 			new UseCaseError(
 				UseCaseError::ITEM_DATA_INVALID_FIELD,
@@ -408,7 +408,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid aliases in language list' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en' ]
+				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_ALIAS_LIST,
@@ -421,9 +421,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				AliasesValidator::CODE_TOO_LONG_ALIAS,
 				[
-					AliasesValidator::CONTEXT_FIELD_ALIAS => str_repeat( 'a', self::MAX_LENGTH + 1 ),
-					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
-					AliasesValidator::CONTEXT_FIELD_LIMIT => self::MAX_LENGTH,
+					AliasesValidator::CONTEXT_ALIAS => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					AliasesValidator::CONTEXT_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			new UseCaseError(
@@ -440,8 +440,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_ALIAS,
 				[
-					AliasesValidator::CONTEXT_FIELD_ALIAS => 22,
-					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_ALIAS => 22,
+					AliasesValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
@@ -455,8 +455,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_ALIAS,
 				[
-					AliasesValidator::CONTEXT_FIELD_ALIAS => "invalid \t",
-					AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en',
+					AliasesValidator::CONTEXT_ALIAS => "invalid \t",
+					AliasesValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
 			new UseCaseError(
@@ -469,7 +469,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'duplicated alias' => [
 			new ValidationError(
 				AliasesValidator::CODE_DUPLICATE_ALIAS,
-				[ AliasesValidator::CONTEXT_FIELD_LANGUAGE => 'en', AliasesValidator::CONTEXT_FIELD_ALIAS => 'duplicated-alias' ]
+				[ AliasesValidator::CONTEXT_LANGUAGE => 'en', AliasesValidator::CONTEXT_ALIAS => 'duplicated-alias' ]
 			),
 			new UseCaseError(
 				UseCaseError::ALIAS_DUPLICATE,
@@ -482,7 +482,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => AliasesValidator::CONTEXT_FIELD_ALIAS,
+					LanguageCodeValidator::CONTEXT_PATH => AliasesValidator::CONTEXT_ALIAS,
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
@@ -490,7 +490,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::INVALID_LANGUAGE_CODE,
 				'Not a valid language code: e2',
 				[
-					UseCaseError::CONTEXT_PATH => AliasesValidator::CONTEXT_FIELD_ALIAS,
+					UseCaseError::CONTEXT_PATH => AliasesValidator::CONTEXT_ALIAS,
 					UseCaseError::CONTEXT_LANGUAGE => 'e2',
 				]
 			),

@@ -212,8 +212,8 @@ class ItemValidatorTest extends TestCase {
 			new ValidationError(
 				ItemValidator::CODE_INVALID_FIELD,
 				[
-					ItemValidator::CONTEXT_FIELD_NAME => 'labels',
-					ItemValidator::CONTEXT_FIELD_VALUE => 'not an array',
+					ItemValidator::CONTEXT_FIELD => 'labels',
+					ItemValidator::CONTEXT_VALUE => 'not an array',
 				]
 			),
 			$this->newValidator()->validate( $invalidSerialization )
@@ -229,7 +229,7 @@ class ItemValidatorTest extends TestCase {
 		$this->assertEquals(
 			new ValidationError(
 				ItemValidator::CODE_UNEXPECTED_FIELD,
-				[ ItemValidator::CONTEXT_FIELD_NAME => 'foo' ]
+				[ ItemValidator::CONTEXT_FIELD => 'foo' ]
 			),
 			$this->newValidator()->validate( $unexpectedSerialization )
 		);

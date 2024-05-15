@@ -44,13 +44,13 @@ class ItemSerializationRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
-					$field = $context[ItemValidator::CONTEXT_FIELD_NAME];
-					$this->throwInvalidField( $field, $field, $context[ItemValidator::CONTEXT_FIELD_VALUE] );
+					$field = $context[ItemValidator::CONTEXT_FIELD];
+					$this->throwInvalidField( $field, $field, $context[ItemValidator::CONTEXT_VALUE] );
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
 					throw new UseCaseError(
 						UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
 						'The request body contains an unexpected field',
-						[ UseCaseError::CONTEXT_FIELD => $context[ItemValidator::CONTEXT_FIELD_NAME] ]
+						[ UseCaseError::CONTEXT_FIELD => $context[ItemValidator::CONTEXT_FIELD] ]
 					);
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw new UseCaseError(
@@ -145,14 +145,14 @@ class ItemSerializationRequestValidatingDeserializer {
 				throw new UseCaseError(
 					UseCaseError::DESCRIPTION_EMPTY,
 					'Description must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE] ]
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION] );
+				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
 				throw new UseCaseError(
 					UseCaseError::INVALID_DESCRIPTION,
 					"Not a valid description: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemDescriptionValidator::CODE_INVALID:
 				throw new UseCaseError(
@@ -196,39 +196,39 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case AliasesValidator::CODE_INVALID_ALIASES:
-				$this->throwInvalidField( 'aliases', 'aliases', $context[AliasesValidator::CONTEXT_FIELD_ALIASES] );
+				$this->throwInvalidField( 'aliases', 'aliases', $context[AliasesValidator::CONTEXT_ALIASES] );
 			case AliasesValidator::CODE_EMPTY_ALIAS:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_EMPTY,
 					'Alias must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_LANGUAGE] ]
 				);
 			case AliasesValidator::CODE_EMPTY_ALIAS_LIST:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_LIST_EMPTY,
 					'Alias list must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_LANGUAGE] ]
 				);
 			case AliasesValidator::CODE_DUPLICATE_ALIAS:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_DUPLICATE,
-					"Alias list contains a duplicate alias: '{$context[AliasesValidator::CONTEXT_FIELD_ALIAS]}'",
+					"Alias list contains a duplicate alias: '{$context[AliasesValidator::CONTEXT_ALIAS]}'",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE],
-						UseCaseError::CONTEXT_ALIAS => $context[AliasesValidator::CONTEXT_FIELD_ALIAS],
+						UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_LANGUAGE],
+						UseCaseError::CONTEXT_ALIAS => $context[AliasesValidator::CONTEXT_ALIAS],
 					]
 				);
 			case AliasesValidator::CODE_TOO_LONG_ALIAS:
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
-				$limit = $context[AliasesValidator::CONTEXT_FIELD_LIMIT] ?? $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-				$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
+				$limit = $context[AliasesValidator::CONTEXT_LIMIT] ?? $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::ALIAS_TOO_LONG,
 					"Alias must be no more than $limit characters long",
 					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit ]
 				);
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
-				$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE];
+				$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::INVALID_ALIAS_LIST,
 					'Not a valid alias list',
@@ -236,8 +236,8 @@ class ItemSerializationRequestValidatingDeserializer {
 				);
 			case AliasesValidator::CODE_INVALID_ALIAS:
 			case AliasesInLanguageValidator::CODE_INVALID:
-				$aliasValue = $context[AliasesValidator::CONTEXT_FIELD_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-				$language = $context[AliasesValidator::CONTEXT_FIELD_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
+				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::INVALID_ALIAS,
 					"Not a valid alias: $aliasValue",

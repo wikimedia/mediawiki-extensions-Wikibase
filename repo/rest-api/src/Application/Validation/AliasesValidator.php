@@ -21,10 +21,10 @@ class AliasesValidator {
 	public const CODE_INVALID_ALIAS = 'aliases-validator-code-invalid-alias';
 	public const CODE_INVALID_ALIAS_LIST = 'aliases-validator-code-invalid-alias-list';
 
-	public const CONTEXT_FIELD_ALIASES = 'aliases-validator-context-aliases';
-	public const CONTEXT_FIELD_ALIAS = 'aliases-validator-context-alias';
-	public const CONTEXT_FIELD_LIMIT = 'aliases-validator-context-character-limit';
-	public const CONTEXT_FIELD_LANGUAGE = 'aliases-validator-context-language';
+	public const CONTEXT_ALIASES = 'aliases-validator-context-aliases';
+	public const CONTEXT_ALIAS = 'aliases-validator-context-alias';
+	public const CONTEXT_LIMIT = 'aliases-validator-context-character-limit';
+	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 	private LanguageCodeValidator $languageCodeValidator;
@@ -48,7 +48,7 @@ class AliasesValidator {
 			return null;
 		}
 		if ( array_is_list( $aliases ) ) {
-			return new ValidationError( self::CODE_INVALID_ALIASES, [ self::CONTEXT_FIELD_ALIASES => $aliases ] );
+			return new ValidationError( self::CODE_INVALID_ALIASES, [ self::CONTEXT_ALIASES => $aliases ] );
 		}
 
 		foreach ( $aliases as $languageCode => $aliasesInLanguage ) {
@@ -67,14 +67,14 @@ class AliasesValidator {
 			if ( !is_array( $aliasesInLanguage ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_ALIAS_LIST,
-					[ self::CONTEXT_FIELD_LANGUAGE => $languageCode ]
+					[ self::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			}
 
 			if ( count( $aliasesInLanguage ) === 0 ) {
 				return new ValidationError(
 					self::CODE_EMPTY_ALIAS_LIST,
-					[ self::CONTEXT_FIELD_LANGUAGE => $languageCode ]
+					[ self::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			}
 		}
@@ -93,17 +93,17 @@ class AliasesValidator {
 		} catch ( EmptyAliasException $e ) {
 			return new ValidationError(
 				self::CODE_EMPTY_ALIAS,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField() ]
 			);
 		} catch ( DuplicateAliasException $e ) {
 			return new ValidationError(
 				self::CODE_DUPLICATE_ALIAS,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_ALIAS => $e->getValue() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_ALIAS => $e->getValue() ]
 			);
 		} catch ( InvalidAliasesInLanguageException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_ALIAS,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_ALIAS => $e->getValue() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_ALIAS => $e->getValue() ]
 			);
 		}
 
