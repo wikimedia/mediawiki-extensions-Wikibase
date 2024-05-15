@@ -69,21 +69,27 @@ class PatchedLabelsValidator {
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
-				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_FIELD_LANGUAGE];
+				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_EMPTY,
 					"Changed label for '$languageCode' cannot be empty",
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
+				$language = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
+				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
+				throw new UseCaseError(
+					UseCaseError::PATCHED_LABEL_INVALID,
+					"Changed label for '{$language}' is invalid: {$value}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				);
 			case PropertyLabelValidator::CODE_INVALID:
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 				$value = $context[PropertyLabelValidator::CONTEXT_LABEL];
-				$stringValue = is_string( $value ) ? $value : json_encode( $value );
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$language}' is invalid: {$stringValue}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $stringValue ]
+					"Changed label for '{$language}' is invalid: {$value}",
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
 				);
 			case PropertyLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];

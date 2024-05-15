@@ -10,14 +10,14 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
  * @license GPL-2.0-or-later
  */
 class LabelsSyntaxValidator {
-	public const CODE_LABELS_NOT_ASSOCIATIVE = 'labels-not-associative';
-	public const CODE_EMPTY_LABEL = 'label-empty';
-	public const CODE_INVALID_LABEL_TYPE = 'invalid-label-type';
+	public const CODE_LABELS_NOT_ASSOCIATIVE = 'labels-syntax-validator-code-labels-not-associative';
+	public const CODE_EMPTY_LABEL = 'labels-syntax-validator-code-label-empty';
+	public const CODE_INVALID_LABEL_TYPE = 'labels-syntax-validator-code-invalid-label-type';
 
-	public const CONTEXT_FIELD_NAME = 'field';
-	public const CONTEXT_FIELD_VALUE = 'value';
-	public const CONTEXT_FIELD_LABEL = 'label';
-	public const CONTEXT_FIELD_LANGUAGE = 'language';
+	public const CONTEXT_FIELD = 'labels-syntax-validator-context-field';
+	public const CONTEXT_VALUE = 'labels-syntax-validator-context-value';
+	public const CONTEXT_LABEL = 'labels-syntax-validator-context-label';
+	public const CONTEXT_LANGUAGE = 'labels-syntax-validator-context-language';
 
 	private LabelsDeserializer $deserializer;
 	private LanguageCodeValidator $languageCodeValidator;
@@ -60,12 +60,12 @@ class LabelsSyntaxValidator {
 		} catch ( EmptyLabelException $e ) {
 			return new ValidationError(
 				self::CODE_EMPTY_LABEL,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField() ]
 			);
 		} catch ( InvalidLabelException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_LABEL_TYPE,
-				[ self::CONTEXT_FIELD_LANGUAGE => $e->getField(), self::CONTEXT_FIELD_LABEL => $e->getValue() ]
+				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_LABEL => $e->getValue() ]
 			);
 		}
 
