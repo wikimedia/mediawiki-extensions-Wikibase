@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
  */
 class PropertyIdValidator {
 
-	public const CODE_INVALID = 'invalid-property-id';
-	public const CONTEXT_VALUE = 'property-id-value';
+	public const CODE_INVALID = 'property-id-validator-code-invalid-property-id';
+	public const CONTEXT_VALUE = 'property-id-validator-context-property-id-value';
 
 	public function validate( string $propertyId ): ?ValidationError {
 		try {

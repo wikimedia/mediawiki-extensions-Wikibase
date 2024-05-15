@@ -7,11 +7,11 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
  */
 class EditMetadataValidator {
 
-	public const CODE_INVALID_TAG = 'invalid-edit-tag';
-	public const CODE_COMMENT_TOO_LONG = 'comment-too-long';
+	public const CODE_INVALID_TAG = 'edit-metadata-validator-code-invalid-edit-tag';
+	public const CODE_COMMENT_TOO_LONG = 'edit-metadata-validator-code-comment-too-long';
 
-	public const CONTEXT_COMMENT_MAX_LENGTH = 'comment-max-length';
-	public const CONTEXT_TAG_VALUE = 'tag-value';
+	public const CONTEXT_COMMENT_MAX_LENGTH = 'edit-metadata-validator-context-comment-max-length';
+	public const CONTEXT_TAG_VALUE = 'edit-metadata-validator-context-tag-value';
 
 	private int $maxCommentLength;
 	private array $allowedTags;

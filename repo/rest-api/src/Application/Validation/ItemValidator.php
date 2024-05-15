@@ -11,14 +11,14 @@ use Wikibase\DataModel\Term\Fingerprint;
  */
 class ItemValidator {
 
-	public const CODE_INVALID_FIELD = 'invalid-item-field';
-	public const CODE_UNEXPECTED_FIELD = 'item-data-unexpected-field';
-	public const CODE_MISSING_LABELS_AND_DESCRIPTIONS = 'missing-labels-and-descriptions';
+	public const CODE_INVALID_FIELD = 'item-validator-code-invalid-item-field';
+	public const CODE_UNEXPECTED_FIELD = 'item-validator-code-item-data-unexpected-field';
+	public const CODE_MISSING_LABELS_AND_DESCRIPTIONS = 'item-validator-code-missing-labels-and-descriptions';
 
-	public const CONTEXT_FIELD_NAME = 'field';
-	public const CONTEXT_FIELD_VALUE = 'value';
-	public const CONTEXT_FIELD_LABELS = 'labels';
-	public const CONTEXT_FIELD_DESCRIPTIONS = 'descriptions';
+	public const CONTEXT_FIELD_NAME = 'item-validator-context-field';
+	public const CONTEXT_FIELD_VALUE = 'item-validator-context-value';
+	public const CONTEXT_FIELD_LABELS = 'item-validator-context-labels';
+	public const CONTEXT_FIELD_DESCRIPTIONS = 'item-validator-context-descriptions';
 
 	private ?Item $deserializedItem = null;
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
