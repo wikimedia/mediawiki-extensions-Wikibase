@@ -27,6 +27,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\ConceptUriSearchHelper;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
@@ -505,6 +506,58 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		} catch ( \ApiUsageException $aue ) {
 			$this->assertSame( $errorValue, $aue->getStatusValue() );
 		}
+	}
+
+	public function testResultWithoutEntityId(): void {
+		$params = [
+			'search' => 'some search',
+			'language' => 'en',
+		];
+		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, [ new TermSearchResult(
+			new Term( 'en', 'matched term' ),
+			'label',
+			null,
+			new Term( 'en', 'display label' ),
+			new Term( 'en', 'display description' ),
+			[
+				'id' => 'some ID string that is not an EntityId',
+				'title' => 'Special:BadTitle',
+				'pageid' => -1,
+				'url' => 'https://example.wiki/wiki/Special:BadTitle',
+				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => 'https://example.wiki/entity/bad',
+			]
+		) ] );
+
+		$result = $this->callApiModule( $params, $entitySearchHelper );
+
+		$this->assertCount( 1, $result['search'] );
+		$entry = $result['search'][0];
+		$expected = [
+			'id' => 'some ID string that is not an EntityId',
+			'title' => 'Special:BadTitle',
+			'pageid' => -1,
+			'url' => 'https://example.wiki/wiki/Special:BadTitle',
+			'concepturi' => 'https://example.wiki/entity/bad',
+			'display' => [
+				'label' => [
+					'value' => 'display label',
+					'language' => 'en',
+				],
+				'description' => [
+					'value' => 'display description',
+					'language' => 'en',
+				],
+			],
+			'label' => 'display label',
+			'description' => 'display description',
+			'match' => [
+				'type' => 'label',
+				'language' => 'en',
+				'text' => 'matched term',
+			],
+			'aliases' => [ 'matched term' ],
+		];
+		$this->assertSame( $expected, $entry );
 	}
 
 	private function getMockBrokenEntitySearchHelper( Status $errorStatus ): EntitySearchHelper {

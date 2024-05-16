@@ -653,6 +653,10 @@ return [
 		);
 	},
 
+	'WikibaseRepo.EnabledEntityTypesForSearch' => function ( MediaWikiServices $services ): array {
+		return array_keys( WikibaseRepo::getEntitySearchHelperCallbacks( $services ) );
+	},
+
 	'WikibaseRepo.EntityArticleIdLookup' => function ( MediaWikiServices $services ): EntityArticleIdLookup {
 		$callbacks = WikibaseRepo::getEntitySourceAndTypeDefinitions( $services )->getServiceBySourceAndType(
 				EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK
@@ -994,8 +998,7 @@ return [
 	},
 
 	'WikibaseRepo.EntitySearchHelper' => function ( MediaWikiServices $services ): EntitySearchHelper {
-		$entitySearchHelperCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
+		$entitySearchHelperCallbacks = WikibaseRepo::getEntitySearchHelperCallbacks( $services );
 
 		$typeDispatchingEntitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$entitySearchHelperCallbacks,
@@ -1016,8 +1019,12 @@ return [
 	},
 
 	'WikibaseRepo.EntitySearchHelperCallbacks' => function ( MediaWikiServices $services ): array {
-		return WikibaseRepo::getEntityTypeDefinitions( $services )
+		$callbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
+
+		$services->getHookContainer()->run( 'WikibaseRepoEntitySearchHelperCallbacks', [ &$callbacks ] );
+
+		return $callbacks;
 	},
 
 	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
