@@ -523,5 +523,6 @@
 		"wlshowwikibase": 0
 	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
+	"load_composer_autoloader": true,
 	"manifest_version": 2
 }
