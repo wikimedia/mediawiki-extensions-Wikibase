@@ -11,14 +11,14 @@
 			"JulesWinnfield-hu",
 			"Tacsipacsi",
 			"Tgr",
-			"Urbalazs"
+			"Urbalazs",
+			"Bean49"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
 	"tooltip-t-wikibase": "Kapcsolt adattárelem",
 	"wikibase-after-page-move": "A lap címének meg kellett változnia a [$1 {{WBREPONAME}}-elemben] is, kérjük, ellenőrizd, hogy valóban így van-e.",
 	"wikibase-after-page-delete": "Az oldalra mutató hivatkozásnak el kellett távolítódnia a [$1 {{WBREPONAME}}-elemből], kérjük, ellenőrizd, hogy valóban így van-e.",
-	"wikibase-after-page-delete-queued": "Az ezzel a lappal összekapcsolt  [$1 {{WBREPONAME}}-elem] automatikusan frissülni fog. Vedd figyelembe, hogy ez nem feltétlenül történik meg azonnal.",
 	"wikibase-comment-add": "Egy {{WBREPONAME}}-elem létrejött.",
 	"wikibase-comment-remove": "Nyelvközi hivatkozások eltávolítása – a kapcsolt {{WBREPONAME}}-elemet törölték.",
 	"wikibase-comment-linked": "Egy {{WBREPONAME}}-elemet kapcsoltak ehhez az oldalhoz.",
@@ -96,7 +96,7 @@
 	"wikibase-pageinfo-entity-usage-X": "Minden entitásadat",
 	"wikibase-pageinfo-entity-usage-O": "Egyéb (pl. más nevek, entitás létezése)",
 	"wikibase-property-render-error": "$1 tulajdonság feldolgozása sikertelen: $2",
-	"wikibase-otherprojects": "Társlapok",
+	"wikibase-otherprojects": "Társprojektek",
 	"wikibase-otherprojects-beta-message": "Társlapok oldalsáv",
 	"wikibase-otherprojects-beta-description": "Az oldalsávhoz hozzáad egy \"{{int:wikibase-otherprojects}}\" szakaszt, amely a {{WBREPONAME}} adatai alapján más WikiMedia-projektekhez nyújt linkeket.",
 	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
