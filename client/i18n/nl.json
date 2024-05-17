@@ -155,6 +155,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "De vorige waarde was correct, maar is nu verouderd.",
 	"wikibase-client-data-bridge-references-heading": "Referenties",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "U bent niet aangemeld",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "U bent niet aangemeld. Als u <strong>zich aanmeldt</strong> of <strong>een account aanmaakt</strong>, worden uw bewerkingen toegeschreven aan uw gebruikersnaam, onder andere voordelen.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Waarschuwing:</strong> U bent niet aangemeld.\nUw IP-adres zal voor iedereen zichtbaar zijn als u wijzigingen aanbrengt. Als u <strong>zich aanmeldt</strong> of <strong>een account aanmaakt</strong>, worden uw bewerkingen aan uw gebruikersnaam toegeschreven. Er zijn ook nog andere voordelen.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Bewerken zonder aan te melden",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Aanmelden of inschrijven",
