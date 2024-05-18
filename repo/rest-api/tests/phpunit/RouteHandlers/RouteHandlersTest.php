@@ -976,8 +976,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS, '' ),
-					$hasErrorCode ( UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS ),
+					new UseCaseError( UseCaseError::INVALID_LABEL, '' ),
+					$hasErrorCode ( UseCaseError::INVALID_LABEL ),
 				],
 			],
 		] ];

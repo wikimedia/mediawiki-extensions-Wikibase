@@ -907,12 +907,6 @@
 			}
 		}
 	},
-	"ItemDataMissingLabelsAndDescriptionsExample": {
-		"value": {
-			"code": "missing-labels-and-descriptions",
-			"message": "Item requires at least a label or a description in a language"
-		}
-	},
 	"ItemStatementIdMismatchExample": {
 		"value": {
 			"code": "item-statement-id-mismatch",

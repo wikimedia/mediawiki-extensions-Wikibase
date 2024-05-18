@@ -154,11 +154,44 @@ class ItemValidatorTest extends TestCase {
 		);
 	}
 
-	public function testGivenItemWithoutLabelsAndDescriptions_returnsValidationError(): void {
-		$error = $this->newValidator()->validate( [] );
+	public function testGivenEmptyItem(): void {
+		$this->labelsSyntaxValidator = $this->createMock( LabelsSyntaxValidator::class );
+		$this->labelsSyntaxValidator->expects( $this->atLeastOnce() )
+			->method( 'getPartiallyValidatedLabels' )
+			->willReturn( new PartiallyValidatedLabels( [] ) );
 
-		$this->assertInstanceOf( ValidationError::class, $error );
-		$this->assertSame( ItemValidator::CODE_MISSING_LABELS_AND_DESCRIPTIONS, $error->getCode() );
+		$this->labelsContentsValidator = $this->createMock( ItemLabelsContentsValidator::class );
+		$this->labelsContentsValidator->expects( $this->once() )
+			->method( 'getValidatedLabels' )
+			->willReturn( new TermList() );
+
+		$this->descriptionsSyntaxValidator = $this->createMock( DescriptionsSyntaxValidator::class );
+		$this->descriptionsSyntaxValidator->expects( $this->atLeastOnce() )
+			->method( 'getPartiallyValidatedDescriptions' )
+			->willReturn( new PartiallyValidatedDescriptions( [] ) );
+
+		$this->descriptionsContentsValidator = $this->createMock( ItemDescriptionsContentsValidator::class );
+		$this->descriptionsContentsValidator->expects( $this->once() )
+			->method( 'getValidatedDescriptions' )
+			->willReturn( new TermList() );
+
+		$this->itemAliasesValidator = $this->createMock( AliasesValidator::class );
+		$this->itemAliasesValidator->expects( $this->once() )
+			->method( 'getValidatedAliases' )
+			->willReturn( new AliasGroupList() );
+
+		$this->itemStatementsValidator = $this->createMock( StatementsValidator::class );
+		$this->itemStatementsValidator->expects( $this->once() )
+			->method( 'getValidatedStatements' )
+			->willReturn( new StatementList() );
+
+		$this->sitelinksValidator = $this->createMock( SitelinksValidator::class );
+		$this->sitelinksValidator->method( 'getValidatedSitelinks' )->willReturn( new SiteLinkList() );
+
+		$validator = $this->newValidator();
+
+		$this->assertNull( $validator->validate( [] ) );
+		$this->assertEquals( new Item(), $validator->getValidatedItem() );
 	}
 
 	public function testAliasesValidationError(): void {

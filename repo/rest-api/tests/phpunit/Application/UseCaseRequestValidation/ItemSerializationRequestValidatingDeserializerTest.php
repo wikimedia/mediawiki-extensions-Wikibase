@@ -105,14 +105,6 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				[ UseCaseError::CONTEXT_FIELD => 'some-field' ]
 			),
 		];
-
-		yield 'missing labels and descriptions' => [
-			new ValidationError( ItemValidator::CODE_MISSING_LABELS_AND_DESCRIPTIONS ),
-			new UseCaseError(
-				UseCaseError::MISSING_LABELS_AND_DESCRIPTIONS,
-				'Item requires at least a label or a description in a language'
-			),
-		];
 	}
 
 	public function itemLabelsValidationErrorProvider(): Generator {

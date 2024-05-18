@@ -21,14 +21,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '201 success response ', () => {
-		it( 'can create a minimal item', async () => {
-			const item = { labels: { en: `hello world ${utils.uniq()}` } };
-			const response = await newCreateItemRequestBuilder( item )
-				.assertValidRequest()
-				.makeRequest();
+		it( 'can create an empty item', async () => {
+			const response = await newCreateItemRequestBuilder( {} ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 201 );
-			assert.deepEqual( response.body.labels, item.labels );
 			assert.header( response, 'Location', `${response.request.url}/${response.body.id}` );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( response.body.id );
@@ -313,16 +309,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual(
 				response.body.message,
 				`Description must be no more than ${maxDescriptionLength} characters long`
-			);
-		} );
-
-		it( 'labels and descriptions missing', async () => {
-			const response = await newCreateItemRequestBuilder( {} ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 400, 'missing-labels-and-descriptions' );
-			assert.strictEqual(
-				response.body.message,
-				'Item requires at least a label or a description in a language'
 			);
 		} );
 

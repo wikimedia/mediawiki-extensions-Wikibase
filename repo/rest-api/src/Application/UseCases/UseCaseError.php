@@ -47,7 +47,6 @@ class UseCaseError extends UseCaseException {
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const LABEL_TOO_LONG = 'label-too-long';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
-	public const MISSING_LABELS_AND_DESCRIPTIONS = 'missing-labels-and-descriptions';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
@@ -175,7 +174,6 @@ class UseCaseError extends UseCaseException {
 		self::LABEL_NOT_DEFINED => [],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
-		self::MISSING_LABELS_AND_DESCRIPTIONS => [],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
 			self::CONTEXT_LABEL,
