@@ -542,7 +542,7 @@
 			"context": {
 				"language": "{language_code}",
 				"value": "{label}",
-				"limit": 250
+				"limit": "{limit}"
 			}
 		}
 	},
@@ -581,7 +581,7 @@
 			"context": {
 				"language": "{language_code}",
 				"value": "{description}",
-				"limit": 250
+				"limit": "{limit}"
 			}
 		}
 	},
@@ -757,7 +757,7 @@
 			"context": {
 				"language": "{language_code}",
 				"value": "{alias}",
-				"limit": 250
+				"limit": "{limit}"
 			}
 		}
 	},
