@@ -1,4 +1,26 @@
 {
+	"ItemPatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{
+				"properties": {
+					"patch": {
+						"items": {
+							"properties": {
+								"path": {
+									"example": "/labels/en"
+								},
+								"value": {
+									"example": "Douglas Adams"
+								}
+							}
+						}
+					}
+				}
+			},
+			{ "$ref": "#/MediawikiEdit" }
+		]
+	},
 	"PropertyPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },

@@ -72,6 +72,21 @@
 			}
 		}
 	},
+	"ItemPatch": {
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": {
+					"$ref": "./request-parts.json#/ItemPatchRequest"
+				}
+			},
+			"application/json": {
+				"schema": {
+					"$ref": "./request-parts.json#/ItemPatchRequest"
+				}
+			}
+		}
+	},
 	"PropertyPatch": {
 		"required": true,
 		"content": {

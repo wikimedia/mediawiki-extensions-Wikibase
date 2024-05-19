@@ -604,6 +604,28 @@
 			}
 		}
 	},
+	"PatchedItemInvalidOperationChangeItemIdExample": {
+		"value": {
+			"code": "patched-item-invalid-operation-change-item-id",
+			"message": "Cannot change the ID of the existing item"
+		}
+	},
+	"PatchedItemInvalidFieldExample": {
+		"value": {
+			"code": "patched-item-invalid-field",
+			"message": "Invalid input for '{field}' in the patched item",
+			"context": {
+				"path": "{field}",
+				"value": "{value}"
+			}
+		}
+	},
+	"PatchedItemInvalidUnexpectedExample": {
+		"value": {
+			"code": "patched-item-unexpected-field",
+			"message": "The patched request body contains an unexpected field: '{field}'"
+		}
+	},
 	"PatchedPropertyInvalidOperationChangePropertyIdExample": {
 		"value": {
 			"code": "patched-property-invalid-operation-change-property-id",
