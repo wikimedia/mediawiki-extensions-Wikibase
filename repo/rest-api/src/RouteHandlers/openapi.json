@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Product Platform Team",
@@ -521,8 +521,7 @@
         "tags": [
           "properties"
         ],
-        "summary": "[WIP] Change a single Wikibase Property by ID",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Change a single Wikibase Property by ID",
         "parameters": [
           {
             "$ref": "#/components/parameters/PropertyId"
