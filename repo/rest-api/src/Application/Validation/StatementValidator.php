@@ -16,8 +16,8 @@ class StatementValidator {
 	public const CODE_INVALID_FIELD = 'statement-validator-code-invalid-statement-field';
 	public const CODE_MISSING_FIELD = 'statement-validator-code-missing-statement-field';
 
-	public const CONTEXT_FIELD_NAME = 'statement-validator-context-field';
-	public const CONTEXT_FIELD_VALUE = 'statement-validator-context-value';
+	public const CONTEXT_FIELD = 'statement-validator-context-field';
+	public const CONTEXT_VALUE = 'statement-validator-context-value';
 
 	private StatementDeserializer $deserializer;
 
@@ -31,13 +31,13 @@ class StatementValidator {
 		try {
 			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
 		} catch ( MissingFieldException $e ) {
-			return new ValidationError( self::CODE_MISSING_FIELD, [ self::CONTEXT_FIELD_NAME => $e->getField() ] );
+			return new ValidationError( self::CODE_MISSING_FIELD, [ self::CONTEXT_FIELD => $e->getField() ] );
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD,
 				[
-					self::CONTEXT_FIELD_NAME => $e->getField(),
-					self::CONTEXT_FIELD_VALUE => $e->getValue(),
+					self::CONTEXT_FIELD => $e->getField(),
+					self::CONTEXT_VALUE => $e->getValue(),
 				]
 			);
 		}

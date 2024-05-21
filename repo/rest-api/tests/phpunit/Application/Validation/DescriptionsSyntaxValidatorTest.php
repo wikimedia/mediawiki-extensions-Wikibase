@@ -71,7 +71,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 			[ 'de' => '' ],
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
-				[ DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'de' ]
+				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
 		yield 'invalid description type' => [
@@ -79,8 +79,8 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
 				[
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_LANGUAGE => 'de',
-					DescriptionsSyntaxValidator::CONTEXT_FIELD_DESCRIPTION => 7,
+					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
+					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => 7,
 				]
 			),
 		];

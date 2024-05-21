@@ -14,10 +14,10 @@ class ItemValidator {
 	public const CODE_INVALID_FIELD = 'item-validator-code-invalid-item-field';
 	public const CODE_UNEXPECTED_FIELD = 'item-validator-code-item-data-unexpected-field';
 
-	public const CONTEXT_FIELD_NAME = 'item-validator-context-field';
-	public const CONTEXT_FIELD_VALUE = 'item-validator-context-value';
-	public const CONTEXT_FIELD_LABELS = 'item-validator-context-labels';
-	public const CONTEXT_FIELD_DESCRIPTIONS = 'item-validator-context-descriptions';
+	public const CONTEXT_FIELD = 'item-validator-context-field';
+	public const CONTEXT_VALUE = 'item-validator-context-value';
+	public const CONTEXT_LABELS = 'item-validator-context-labels';
+	public const CONTEXT_DESCRIPTIONS = 'item-validator-context-descriptions';
 
 	private ?Item $deserializedItem = null;
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
@@ -54,8 +54,8 @@ class ItemValidator {
 				return new ValidationError(
 					self::CODE_INVALID_FIELD,
 					[
-						self::CONTEXT_FIELD_NAME => $expectedField,
-						self::CONTEXT_FIELD_VALUE => $serialization[$expectedField],
+						self::CONTEXT_FIELD => $expectedField,
+						self::CONTEXT_VALUE => $serialization[$expectedField],
 					]
 				);
 			}
@@ -64,7 +64,7 @@ class ItemValidator {
 		foreach ( array_keys( $serialization ) as $field ) {
 			$ignoredFields = [ 'id', 'type' ];
 			if ( !in_array( $field, array_merge( $expectedFields, $ignoredFields ) ) ) {
-				return new ValidationError( self::CODE_UNEXPECTED_FIELD, [ self::CONTEXT_FIELD_NAME => $field ] );
+				return new ValidationError( self::CODE_UNEXPECTED_FIELD, [ self::CONTEXT_FIELD => $field ] );
 			}
 		}
 

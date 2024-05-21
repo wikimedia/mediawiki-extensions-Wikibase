@@ -29,17 +29,17 @@ class StatementSerializationRequestValidatingDeserializer {
 				case StatementValidator::CODE_INVALID_FIELD:
 					throw new UseCaseError(
 						UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD_NAME]}'",
+						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD]}'",
 						[
-							UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME],
-							UseCaseError::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_FIELD_VALUE],
+							UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD],
+							UseCaseError::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_VALUE],
 						]
 					);
 				case StatementValidator::CODE_MISSING_FIELD:
 					throw new UseCaseError(
 						UseCaseError::STATEMENT_DATA_MISSING_FIELD,
-						"Mandatory field missing in the statement data: {$context[StatementValidator::CONTEXT_FIELD_NAME]}",
-						[ UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD_NAME] ]
+						"Mandatory field missing in the statement data: {$context[StatementValidator::CONTEXT_FIELD]}",
+						[ UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD] ]
 					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
