@@ -53,6 +53,8 @@
 	"wikibase-unconnectedpages-submit": "Өту",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} данасы ID",
 	"wikibase-pageinfo-entity-id-none": "Ешқандай",
+	"wikibase-pageinfo-description-central": "Орталықтандырылған сипаттамасы",
+	"wikibase-pageinfo-entity-usage": "Бұл бетте қолданылған {{WBREPONAME}} мазмұны",
 	"wikibase-otherprojects": "Басқа жобаларда",
 	"wikibase-otherprojects-beta-message": "Басқа жобалар бүйірлік тақтасы",
 	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді.",

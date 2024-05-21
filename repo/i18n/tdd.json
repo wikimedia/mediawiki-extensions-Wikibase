@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Aey Tai Nuea",
-			"咽頭べさ"
+			"咽頭べさ",
+			"AeyTaiNuea"
 		]
 	},
 	"wikibase-edit": "ᥛᥨᥢᥳ ᥛᥥᥰ",
@@ -10,5 +11,5 @@
 	"wikibase-label-empty": "ᥙᥭᥱ ᥘᥭᥲ ᥛᥐᥴ ᥛᥢᥲ ᥝᥭᥳ ᥓᥪ",
 	"wikibase-description-empty": "ᥑᥨᥝᥲ ᥔᥙᥴ ᥘᥦᥒᥰ ᥙᥭᥱ ᥙᥣᥲ ᥛᥐᥴ ᥛᥢᥲ ᥝᥭᥳ",
 	"wikibase-sitelinks-special": "ᥖᥣᥒᥱ ᥟᥢ",
-	"wikibase-statementview-rank-normal": "ᥓᥢᥳᥙᥨᥒᥱᥐᥣᥒᥴ"
+	"wikibase-statementview-rank-normal": "ᥓᥢᥳ ᥙᥨᥒᥱ ᥐᥣᥒ"
 }
