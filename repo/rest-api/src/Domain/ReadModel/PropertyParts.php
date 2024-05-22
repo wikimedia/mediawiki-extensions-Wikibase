@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @license GPL-2.0-or-later
  */
 class PropertyParts {
-	public const TYPE = DataModelProperty::ENTITY_TYPE;
+	public const TYPE = PropertyWriteModel::ENTITY_TYPE;
 	public const FIELD_ID = 'id';
 	public const FIELD_TYPE = 'type';
 	public const FIELD_DATA_TYPE = 'data-type';

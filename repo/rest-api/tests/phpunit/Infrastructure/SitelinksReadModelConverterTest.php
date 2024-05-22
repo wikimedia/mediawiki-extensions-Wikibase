@@ -6,9 +6,9 @@ use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLink as SitelinkWriteModel;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink as SitelinkReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 
 /**
@@ -24,15 +24,15 @@ class SitelinksReadModelConverterTest extends TestCase {
 	private const DE_WIKI_URL_PREFIX = 'https://de.wikipedia.org/wiki/';
 
 	public function testConvert(): void {
-		$enSitelink = new SiteLink( 'enwiki', 'potato' );
-		$deSitelink = new SiteLink( 'dewiki', 'Kartoffel', [ new ItemId( 'Q123' ) ] );
+		$enSitelink = new SitelinkWriteModel( 'enwiki', 'potato' );
+		$deSitelink = new SitelinkWriteModel( 'dewiki', 'Kartoffel', [ new ItemId( 'Q123' ) ] );
 
 		$readModel = $this->newConverter()->convert(
 			new SiteLinkList( [ $enSitelink, $deSitelink ] )
 		);
 
 		$this->assertEquals(
-			new SitelinkReadModel(
+			new Sitelink(
 				$enSitelink->getSiteId(),
 				$enSitelink->getPageName(),
 				$enSitelink->getBadges(),
@@ -41,7 +41,7 @@ class SitelinksReadModelConverterTest extends TestCase {
 			$readModel[ 'enwiki' ]
 		);
 		$this->assertEquals(
-			new SitelinkReadModel(
+			new Sitelink(
 				$deSitelink->getSiteId(),
 				$deSitelink->getPageName(),
 				$deSitelink->getBadges(),

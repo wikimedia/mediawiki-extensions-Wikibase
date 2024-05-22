@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -36,14 +36,14 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function create( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
+	public function create( ItemWriteModel $item, EditMetadata $editMetadata ): ItemRevision {
 		if ( $item->getId() ) {
 			throw new InvalidArgumentException( 'new item cannot have an ID' );
 		}
 		return $this->convertToItemRevision( $this->entityUpdater->create( $item, $editMetadata ) );
 	}
 
-	public function update( DataModelItem $item, EditMetadata $editMetadata ): ItemRevision {
+	public function update( ItemWriteModel $item, EditMetadata $editMetadata ): ItemRevision {
 		if ( !$item->getId() ) {
 			throw new InvalidArgumentException( 'updated item must have an ID' );
 		}
@@ -51,18 +51,18 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 	}
 
 	private function convertToItemRevision( EntityRevision $entityRevision ): ItemRevision {
-		/** @var DataModelItem $savedItem */
+		/** @var ItemWriteModel $savedItem */
 		$savedItem = $entityRevision->getEntity();
-		'@phan-var DataModelItem $savedItem';
+		'@phan-var ItemWriteModel $savedItem';
 
 		return new ItemRevision(
-			$this->convertDataModelItemToReadModel( $savedItem ),
+			$this->convertItemItemWriteModelToReadModel( $savedItem ),
 			$entityRevision->getTimestamp(),
 			$entityRevision->getRevisionId()
 		);
 	}
 
-	private function convertDataModelItemToReadModel( DataModelItem $item ): Item {
+	private function convertItemItemWriteModelToReadModel( ItemWriteModel $item ): Item {
 		return new Item(
 			$item->getId(),
 			Labels::fromTermList( $item->getLabels() ),

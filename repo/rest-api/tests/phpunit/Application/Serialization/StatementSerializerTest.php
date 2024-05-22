@@ -5,14 +5,14 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Reference as ReferenceWriteModel;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference as ReadModelReference;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
 
@@ -55,7 +55,7 @@ class StatementSerializerTest extends TestCase {
 		yield 'some value statement with deprecated rank' => [
 			NewStatementReadModel::someValueFor( 'P123' )
 				->withGuid( self::STATEMENT_ID )
-				->withRank( DataModelStatement::RANK_DEPRECATED )
+				->withRank( StatementWriteModel::RANK_DEPRECATED )
 				->build(),
 			[
 				'id' => self::STATEMENT_ID,
@@ -86,11 +86,11 @@ class StatementSerializerTest extends TestCase {
 			],
 		];
 
-		$ref1 = new Reference( [
+		$ref1 = new ReferenceWriteModel( [
 			new PropertyNoValueSnak( new NumericPropertyId( 'P666' ) ),
 			new PropertyNoValueSnak( new NumericPropertyId( 'P777' ) ),
 		] );
-		$ref2 = new Reference( [
+		$ref2 = new ReferenceWriteModel( [
 			new PropertyNoValueSnak( new NumericPropertyId( 'P888' ) ),
 		] );
 		yield 'with references' => [
@@ -124,7 +124,7 @@ class StatementSerializerTest extends TestCase {
 			);
 		$referenceSerializer = $this->createStub( ReferenceSerializer::class );
 		$referenceSerializer->method( 'serialize' )
-			->willReturnCallback( fn( ReadModelReference $ref ) => [ $ref->getHash() ] );
+			->willReturnCallback( fn( Reference $ref ) => [ $ref->getHash() ] );
 
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	}

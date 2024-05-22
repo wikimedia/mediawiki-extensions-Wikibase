@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Domain\Services;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Reference as DataModelReference;
+use Wikibase\DataModel\Reference as ReferenceWriteModel;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -11,14 +11,14 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference as ReadModelReference;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\References;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement as ReadModelStatement;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
@@ -34,14 +34,14 @@ class StatementReadModelConverter {
 		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
-	public function convert( DataModelStatement $inputStatement ): ReadModelStatement {
+	public function convert( StatementWriteModel $inputStatement ): Statement {
 		$guid = $inputStatement->getGuid();
 		if ( $guid === null ) {
 			throw new InvalidArgumentException( 'Can only convert statements that have a non-null GUID' );
 		}
 		$mainPropertyValuePair = $this->convertSnakToPropertyValuePair( $inputStatement->getMainSnak() );
 
-		return new ReadModelStatement(
+		return new Statement(
 			$this->statementIdParser->parse( $guid ),
 			$mainPropertyValuePair->getProperty(),
 			$mainPropertyValuePair->getValue(),
@@ -63,7 +63,7 @@ class StatementReadModelConverter {
 	private function convertReferences( ReferenceList $references ): References {
 		return new References(
 			...array_map(
-				fn( DataModelReference $ref ) => new ReadModelReference(
+				fn( ReferenceWriteModel $ref ) => new Reference(
 					$ref->getHash(),
 					array_map(
 						[ $this, 'convertSnakToPropertyValuePair' ],

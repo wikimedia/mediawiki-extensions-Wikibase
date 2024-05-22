@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -26,21 +26,21 @@ class EntityUpdaterPropertyUpdater implements PropertyUpdater {
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function update( DataModelProperty $property, EditMetadata $editMetadata ): PropertyRevision {
+	public function update( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
 		$entityRevision = $this->entityUpdater->update( $property, $editMetadata );
 
-		/** @var DataModelProperty $savedProperty */
+		/** @var PropertyWriteModel $savedProperty */
 		$savedProperty = $entityRevision->getEntity();
-		'@phan-var DataModelProperty $savedProperty';
+		'@phan-var PropertyWriteModel $savedProperty';
 
 		return new PropertyRevision(
-			$this->convertDataModelPropertyToReadModel( $savedProperty ),
+			$this->convertPropertyWriteModelToReadModel( $savedProperty ),
 			$entityRevision->getTimestamp(),
 			$entityRevision->getRevisionId()
 		);
 	}
 
-	private function convertDataModelPropertyToReadModel( DataModelProperty $property ): Property {
+	private function convertPropertyWriteModelToReadModel( PropertyWriteModel $property ): Property {
 		return new Property(
 			$property->getId(),
 			$property->getDataTypeId(),

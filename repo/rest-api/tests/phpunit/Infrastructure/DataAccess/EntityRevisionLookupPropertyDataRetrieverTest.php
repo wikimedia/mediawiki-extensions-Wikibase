@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -57,7 +57,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
 			),
 			'string',
-			new DataModelStatementList( $expectedStatement )
+			new StatementListWriteModel( $expectedStatement )
 		);
 
 		$this->entityRevisionLookup = $this->createStub( EntityRevisionLookup::class );
@@ -114,7 +114,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
 			),
 			'wikibase-item',
-			new DataModelStatementList( $statement )
+			new StatementListWriteModel( $statement )
 		);
 
 		$fields = [ PropertyParts::FIELD_LABELS, PropertyParts::FIELD_DESCRIPTIONS, PropertyParts::FIELD_ALIASES ];
@@ -217,7 +217,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
 			),
 			'wikibase-item',
-			new DataModelStatementList( $statement1, $statement2 )
+			new StatementListWriteModel( $statement1, $statement2 )
 		);
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );
@@ -249,7 +249,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'spud', 'tater' ] ) ] )
 			),
 			'wikibase-item',
-			new DataModelStatementList( $statement1, $statement2 )
+			new StatementListWriteModel( $statement1, $statement2 )
 		);
 
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );

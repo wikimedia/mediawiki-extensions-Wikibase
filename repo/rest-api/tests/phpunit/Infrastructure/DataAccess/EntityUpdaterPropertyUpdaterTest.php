@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
-use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
+use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -82,14 +82,14 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 			->build();
 
 		return [
-			new DataModelProperty(
+			new PropertyWriteModel(
 				$propertyId,
 				new Fingerprint(
 					new TermList( [ new Term( 'en', 'English Label' ) ] ),
 					new TermList( [ new Term( 'en', 'English Description' ) ] )
 				),
 				'string',
-				new DataModelStatementList( $writeModelStatement )
+				new StatementListWriteModel( $writeModelStatement )
 			),
 			new Property(
 				$propertyId,

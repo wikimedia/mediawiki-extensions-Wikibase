@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use LogicException;
-use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement as StatementReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
@@ -22,7 +22,7 @@ class InMemoryStatementRepository implements StatementRetriever, StatementWriteM
 	private array $statements = [];
 	private array $latestRevisionData = [];
 
-	public function addStatement( Statement $statement ): void {
+	public function addStatement( StatementWriteModel $statement ): void {
 		if ( !$statement->getGuid() ) {
 			throw new LogicException( 'Test statement must have an ID.' );
 		}
@@ -42,7 +42,7 @@ class InMemoryStatementRepository implements StatementRetriever, StatementWriteM
 		return $this->latestRevisionData["$id"]['editMetadata'];
 	}
 
-	public function update( Statement $statement, EditMetadata $editMetadata ): StatementRevision {
+	public function update( StatementWriteModel $statement, EditMetadata $editMetadata ): StatementRevision {
 		$this->statements[$statement->getGuid()] = $statement;
 		$revisionData = $this->generateRevisionData( $editMetadata );
 		$this->latestRevisionData[$statement->getGuid()] = $revisionData;
@@ -59,11 +59,11 @@ class InMemoryStatementRepository implements StatementRetriever, StatementWriteM
 		$this->latestRevisionData["$id"] = $this->generateRevisionData( $editMetadata );
 	}
 
-	public function getStatement( StatementGuid $id ): ?StatementReadModel {
+	public function getStatement( StatementGuid $id ): ?Statement {
 		return $this->statements["$id"] ? $this->newStatementReadModelConverter()->convert( $this->statements["$id"] ) : null;
 	}
 
-	public function getStatementWriteModel( StatementGuid $id ): ?Statement {
+	public function getStatementWriteModel( StatementGuid $id ): ?StatementWriteModel {
 		return $this->statements["$id"] ?? null;
 	}
 

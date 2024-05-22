@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
@@ -13,9 +13,9 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
 class StatementSerializer {
 
 	public const RANK_LABELS = [
-		DataModelStatement::RANK_DEPRECATED => 'deprecated',
-		DataModelStatement::RANK_NORMAL => 'normal',
-		DataModelStatement::RANK_PREFERRED => 'preferred',
+		StatementWriteModel::RANK_DEPRECATED => 'deprecated',
+		StatementWriteModel::RANK_NORMAL => 'normal',
+		StatementWriteModel::RANK_PREFERRED => 'preferred',
 	];
 	private PropertyValuePairSerializer $propertyValuePairSerializer;
 	private ReferenceSerializer $referenceSerializer;

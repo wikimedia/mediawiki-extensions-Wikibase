@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetPropertyLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -54,7 +54,7 @@ class SetPropertyLabelTest extends TestCase {
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$property = new DataModelProperty( $propertyId, null, 'string' );
+		$property = new PropertyWriteModel( $propertyId, null, 'string' );
 
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty( $property );
@@ -86,7 +86,7 @@ class SetPropertyLabelTest extends TestCase {
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = "{$this->getName()} Comment";
-		$property = new DataModelProperty(
+		$property = new PropertyWriteModel(
 			$propertyId,
 			new Fingerprint( new TermList( [ new Term( 'en', 'Label to replace' ) ] ) ),
 			'string'

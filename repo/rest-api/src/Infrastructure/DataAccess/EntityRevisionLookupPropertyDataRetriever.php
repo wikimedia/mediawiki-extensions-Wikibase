@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -55,7 +55,7 @@ class EntityRevisionLookupPropertyDataRetriever
 			Labels::fromTermList( $property->getLabels() ),
 			Descriptions::fromTermList( $property->getDescriptions() ),
 			Aliases::fromAliasGroupList( $property->getAliasGroups() ),
-			$this->convertDataModelStatementListToReadModel( $property->getStatements() )
+			$this->convertStatementListWriteModelToReadModel( $property->getStatements() )
 		);
 	}
 
@@ -102,12 +102,12 @@ class EntityRevisionLookupPropertyDataRetriever
 			return null;
 		}
 
-		return $this->convertDataModelStatementListToReadModel(
+		return $this->convertStatementListWriteModelToReadModel(
 			$filterPropertyId ? $property->getStatements()->getByPropertyId( $filterPropertyId ) : $property->getStatements()
 		);
 	}
 
-	private function convertDataModelStatementListToReadModel( DataModelStatementList $list ): StatementList {
+	private function convertStatementListWriteModelToReadModel( StatementListWriteModel $list ): StatementList {
 		return new StatementList( ...array_map(
 			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $list )

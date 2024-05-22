@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use MediaWiki\Site\SiteLookup;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLink as SitelinkWriteModel;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink as SitelinkReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 
 /**
@@ -22,7 +22,7 @@ class SitelinksReadModelConverter {
 	public function convert( SiteLinkList $sitelinkList ): Sitelinks {
 		return new Sitelinks(
 			...array_map(
-				fn( SiteLink $sitelink ) => new SitelinkReadModel(
+				fn( SitelinkWriteModel $sitelink ) => new Sitelink(
 					$sitelink->getSiteId(),
 					$sitelink->getPageName(),
 					$sitelink->getBadges(),

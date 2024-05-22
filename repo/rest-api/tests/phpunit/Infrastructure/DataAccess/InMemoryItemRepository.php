@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 use HashSiteStore;
 use LogicException;
 use MediaWiki\Site\Site;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ReadModelItem;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
@@ -42,7 +42,7 @@ class InMemoryItemRepository implements
 	private array $items = [];
 	private array $latestRevisionData = [];
 
-	public function addItem( Item $item ): void {
+	public function addItem( ItemWriteModel $item ): void {
 		if ( !$item->getId() ) {
 			throw new LogicException( 'Test item must have an ID.' );
 		}
@@ -62,7 +62,7 @@ class InMemoryItemRepository implements
 		return $this->latestRevisionData["$id"]['editMetadata'];
 	}
 
-	public function getItem( ItemId $itemId ): ?Item {
+	public function getItem( ItemId $itemId ): ?ItemWriteModel {
 		return $this->items[$itemId->getSerialization()] ?? null;
 	}
 
@@ -82,13 +82,13 @@ class InMemoryItemRepository implements
 		return $this->convertToReadModel( $this->items["$itemId"] )->getSitelinks();
 	}
 
-	public function create( Item $item, EditMetadata $editMetadata ): ItemRevision {
+	public function create( ItemWriteModel $item, EditMetadata $editMetadata ): ItemRevision {
 		$item->setId( new ItemId( 'Q' . rand( 1, 9999 ) ) );
 
 		return $this->update( $item, $editMetadata );
 	}
 
-	public function update( Item $item, EditMetadata $editMetadata ): ItemRevision {
+	public function update( ItemWriteModel $item, EditMetadata $editMetadata ): ItemRevision {
 		$this->items[$item->getId()->getSerialization()] = $item;
 		$revisionData = [
 			'revId' => rand(),
@@ -105,8 +105,8 @@ class InMemoryItemRepository implements
 		return $this->newSiteForSiteId( $siteId )->getPageUrl( $title );
 	}
 
-	private function convertToReadModel( Item $item ): ReadModelItem {
-		return new ReadModelItem(
+	private function convertToReadModel( ItemWriteModel $item ): Item {
+		return new Item(
 			$item->getId(),
 			Labels::fromTermList( $item->getLabels() ),
 			Descriptions::fromTermList( $item->getDescriptions() ),

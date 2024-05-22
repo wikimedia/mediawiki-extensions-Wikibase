@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Statement\StatementList as DataModelStatementList;
+use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
@@ -85,7 +85,7 @@ class EntityRevisionLookupItemDataRetriever implements
 			$itemParts->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) );
 		}
 		if ( in_array( ItemParts::FIELD_STATEMENTS, $fields ) ) {
-			$itemParts->setStatements( $this->convertDataModelStatementListToReadModel( $item->getStatements() ) );
+			$itemParts->setStatements( $this->convertStatementListWriteModelToReadModel( $item->getStatements() ) );
 		}
 		if ( in_array( ItemParts::FIELD_SITELINKS, $fields ) ) {
 			$itemParts->setSitelinks( $this->sitelinksReadModelConverter->convert( $item->getSiteLinkList() ) );
@@ -100,12 +100,12 @@ class EntityRevisionLookupItemDataRetriever implements
 			return null;
 		}
 
-		return $this->convertDataModelStatementListToReadModel(
+		return $this->convertStatementListWriteModelToReadModel(
 			$propertyId ? $item->getStatements()->getByPropertyId( $propertyId ) : $item->getStatements()
 		);
 	}
 
-	private function convertDataModelStatementListToReadModel( DataModelStatementList $list ): StatementList {
+	private function convertStatementListWriteModelToReadModel( StatementListWriteModel $list ): StatementList {
 		return new StatementList( ...array_map(
 			[ $this->statementReadModelConverter, 'convert' ],
 			iterator_to_array( $list )
