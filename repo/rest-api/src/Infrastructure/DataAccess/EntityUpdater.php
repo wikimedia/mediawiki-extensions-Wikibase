@@ -109,8 +109,7 @@ class EntityUpdater {
 	}
 
 	private function isPreventedEdit( Status $status ): bool {
-		$errorMessage = $status->getErrors()[0]['message'];
-		$errorCode = is_string( $errorMessage ) ? $errorMessage : $errorMessage->getKey();
+		$errorCode = $status->getMessages()[0]->getKey();
 
 		return $errorCode === 'actionthrottledtext'
 			|| strpos( $errorCode, 'spam-blacklisted' ) === 0

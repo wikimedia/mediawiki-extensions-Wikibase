@@ -11,7 +11,6 @@ use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use Message;
 use MessageSpecifier;
 use StatusValue;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -61,10 +60,10 @@ class ApiErrorReporter {
 			return;
 		}
 
-		$warnings = $status->getErrorsByType( 'warning' );
+		$warnings = $status->getMessages( 'warning' );
 
 		if ( $warnings ) {
-			$warnings = $this->convertMessagesToResult( $warnings );
+			$warnings = $this->convertWarningsToResult( $warnings );
 			$this->setWarning( 'messages', $warnings );
 		}
 	}
@@ -133,7 +132,7 @@ class ApiErrorReporter {
 	 * @return string|null a plain text english error message, or null
 	 */
 	private function getPlainErrorMessageFromStatus( StatusValue $status ) {
-		$errors = $status->getErrorsByType( 'error' );
+		$errors = $status->getMessages( 'error' );
 		if ( !$errors ) {
 			return null;
 		}
@@ -270,12 +269,12 @@ class ApiErrorReporter {
 	/**
 	 * Add the given message to the $data array, for use in an error report.
 	 *
-	 * @param Message $message
+	 * @param MessageSpecifier $message
 	 * @param array|null &$data
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function addMessageToResult( Message $message, &$data ) {
+	private function addMessageToResult( MessageSpecifier $message, &$data ) {
 		if ( $data === null ) {
 			$data = [];
 		}
@@ -305,10 +304,9 @@ class ApiErrorReporter {
 	public function addStatusToResult( StatusValue $status, &$data ) {
 		// Use Wikibase specific representation of messages in the result.
 		// TODO: This should be phased out in favor of using ApiErrorFormatter, see below.
-		$messageSpecs = $status->getErrorsByType( 'error' );
-		$messages = $this->convertToMessageList( $messageSpecs );
+		$messageSpecs = $status->getMessages( 'error' );
 
-		foreach ( $messages as $message ) {
+		foreach ( $messageSpecs as $message ) {
 			$this->addMessageToResult( $message, $data );
 		}
 
@@ -321,56 +319,18 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Utility method for compiling a list of messages into a form suitable for use
+	 * Utility method for compiling a list of warning messages into a form suitable for use
 	 * in an API result structure.
 	 *
-	 * The $errors parameters is a list of (error) messages. Each entry in that array
-	 * represents on message; the message can be represented as:
-	 *
-	 * * a message key, as a string
-	 * * an indexed array with the message key as the first element, and the remaining elements
-	 *   acting as message parameters
-	 * * an associative array with the following fields:
-	 *   - message: the message key (as a string); may also be a Message object, see below for that.
-	 *   - params: a list of parameters (optional)
-	 *   - type: the type of message (warning or error) (optional)
-	 *   - html: an HTML rendering of the message (optional)
-	 * * an associative array like above, but containing a Message object in the 'message' field.
-	 *   In that case, the 'params' field is ignored and the parameter list is taken from the
-	 *   Message object.
-	 *
-	 * This provides support for message lists coming from StatusValue::getErrorsByType() as well as
-	 * Title::getUserPermissionsErrors() etc.
-	 *
-	 * @param array $messageSpecs a list of errors, as returned by StatusValue::getErrorsByType()
-	 *        or Title::getUserPermissionsErrors()
-	 *
-	 * @return array a result structure containing the messages from $errors as well as what
-	 *         was already present in the $messages parameter.
+	 * @param MessageSpecifier[] $messageSpecs Warnings returned by StatusValue::getMessages()
+	 * @return array A result structure containing the messages
 	 */
-	private function convertMessagesToResult( array $messageSpecs ) {
+	private function convertWarningsToResult( array $messageSpecs ) {
 		$result = [];
 
 		foreach ( $messageSpecs as $message ) {
-			$type = null;
-
-			if ( !( $message instanceof Message ) ) {
-				if ( is_array( $message ) && isset( $message['type'] ) ) {
-					$type = $message['type'];
-				}
-
-				$message = $this->convertToMessage( $message );
-			}
-
-			if ( !$message ) {
-				continue;
-			}
-
 			$row = $this->convertMessageToResult( $message );
-
-			if ( $type !== null ) {
-				ApiResult::setValue( $row, 'type', $type );
-			}
+			ApiResult::setValue( $row, 'type', 'warning' );
 
 			$result[] = $row;
 		}
@@ -380,43 +340,13 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Utility method for building a list of Message objects from
-	 * an array of message specs.
+	 * Constructs a result structure from the given message
 	 *
-	 * @see convertToMessage()
-	 *
-	 * @param array $messageSpecs a list of errors, as returned by StatusValue::getErrorsByType()
-	 *        or Title::getUserPermissionsErrors().
-	 *
-	 * @return array a result structure containing the messages from $errors as well as what
-	 *         was already present in the $messages parameter.
-	 */
-	private function convertToMessageList( array $messageSpecs ) {
-		$messages = [];
-
-		foreach ( $messageSpecs as $message ) {
-			if ( !( $message instanceof Message ) ) {
-				$message = $this->convertToMessage( $message );
-			}
-
-			if ( !$message ) {
-				continue;
-			}
-
-			$messages[] = $message;
-		}
-
-		return $messages;
-	}
-
-	/**
-	 * Constructs a result structure from the given Message
-	 *
-	 * @param Message $message
+	 * @param MessageSpecifier $message
 	 *
 	 * @return array
 	 */
-	private function convertMessageToResult( Message $message ) {
+	private function convertMessageToResult( MessageSpecifier $message ) {
 		$name = $message->getKey();
 		$params = $message->getParams();
 
@@ -426,76 +356,11 @@ class ApiErrorReporter {
 		ApiResult::setValue( $row, 'parameters', $params );
 		ApiResult::setIndexedTagName( $row['parameters'], 'parameter' );
 
-		$html = $message->setContext( $this->apiModule->getContext() )->useDatabase( true )->parse();
+		$html = $this->apiModule->msg( $message )->useDatabase( true )->parse();
 		ApiResult::setValue( $row, 'html', $html );
 		$row[ApiResult::META_BC_SUBELEMENTS][] = 'html';
 
 		return $row;
-	}
-
-	/**
-	 * Utility function for converting a message specified as a string or array
-	 * to a Message object. Returns null if this is not possible.
-	 *
-	 * The formats supported by this method are the formats used by the StatusValue class as well as
-	 * the one used by Title::getUserPermissionsErrors().
-	 *
-	 * The spec may be structured as follows:
-	 * * a message key, as a string
-	 * * an indexed array with the message key as the first element, and the remaining elements
-	 *   acting as message parameters
-	 * * an associative array with the following fields:
-	 *   - message: the message key (as a string); may also be a Message object, see below for that.
-	 *   - params: a list of parameters (optional)
-	 *   - type: the type of message (warning or error) (optional)
-	 *   - html: an HTML rendering of the message (optional)
-	 * * an associative array like above, but containing a Message object in the 'message' field.
-	 *   In that case, the 'params' field is ignored and the parameter list is taken from the
-	 *   Message object.
-	 *
-	 * @param string|array $messageSpec
-	 *
-	 * @return Message|null
-	 */
-	private function convertToMessage( $messageSpec ) {
-		$name = null;
-		$params = null;
-
-		if ( is_string( $messageSpec ) ) {
-			// it's a plain string containing a message key
-			$name = $messageSpec;
-		} elseif ( is_array( $messageSpec ) ) {
-			if ( isset( $messageSpec[0] ) ) {
-				// it's an indexed array, the first entry is the message key, the rest are parameters
-				$name = $messageSpec[0];
-				$params = array_slice( $messageSpec, 1 );
-			} else {
-				// it's an assoc array, find message key and params in fields.
-				$params = $messageSpec['params'] ?? null;
-
-				if ( isset( $messageSpec['message'] ) ) {
-					if ( $messageSpec['message'] instanceof Message ) {
-						// message object found, done.
-						return $messageSpec['message'];
-					} else {
-						// plain key and param list
-						$name = strval( $messageSpec['message'] );
-					}
-				}
-			}
-		}
-
-		if ( $name !== null ) {
-			$message = wfMessage( $name );
-
-			if ( $params ) {
-				$message->params( $params );
-			}
-
-			return $message;
-		}
-
-		return null;
 	}
 
 }

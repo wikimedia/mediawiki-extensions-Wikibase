@@ -22,7 +22,7 @@ class EntitySearchException extends \Exception {
 	 */
 	public function __construct( Status $status, string $message = "" ) {
 		parent::__construct( $message );
-		Assert::parameter( $status->getErrors() !== [], "status", "must have errors" );
+		Assert::parameter( $status->getMessages( 'error' ) !== [], "status", "must have errors" );
 		$this->status = $status;
 	}
 
