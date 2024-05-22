@@ -8,10 +8,17 @@ namespace Wikibase\Repo\RestApi\Application\Serialization\Exceptions;
 class PropertyIdMismatchException extends SerializationException {
 
 	private string $propertyIdKey;
-	private string $propertyIdValue;
 	private string $path;
 
-	public function __construct( string $propertyIdKey, string $propertyIdValue, string $path ) {
+	/** @var mixed */
+	private $propertyIdValue;
+
+	/**
+	 * @param string $propertyIdKey
+	 * @param mixed $propertyIdValue
+	 * @param string $path
+	 */
+	public function __construct( string $propertyIdKey, $propertyIdValue, string $path ) {
 		parent::__construct();
 		$this->propertyIdKey = $propertyIdKey;
 		$this->propertyIdValue = $propertyIdValue;
@@ -22,7 +29,10 @@ class PropertyIdMismatchException extends SerializationException {
 		return $this->propertyIdKey;
 	}
 
-	public function getPropertyIdValue(): string {
+	/**
+	 * @return mixed
+	 */
+	public function getPropertyIdValue() {
 		return $this->propertyIdValue;
 	}
 

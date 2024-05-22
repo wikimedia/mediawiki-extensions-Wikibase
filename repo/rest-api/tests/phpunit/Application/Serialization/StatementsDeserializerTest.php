@@ -84,6 +84,7 @@ class StatementsDeserializerTest extends TestCase {
 
 	/**
 	 * @dataProvider provideInvalidStatementsSerialization
+	 * @dataProvider provideStatementGroupPropertyIdMismatch
 	 *
 	 * @param mixed $serialization
 	 */
@@ -113,12 +114,28 @@ class StatementsDeserializerTest extends TestCase {
 			[ 'P789' => [ 'not a valid statement' ] ],
 			new InvalidFieldTypeException( 'P789/0' ),
 		];
+	}
 
+	public function provideStatementGroupPropertyIdMismatch(): Generator {
 		$propertyIdKey = 'P123';
 		$propertyIdValue = 'P789';
-		yield 'statement property id does match key of the statement group' => [
+		yield 'valid property id key and value' => [
 			[ $propertyIdKey => [ [ 'property' => [ 'id' => $propertyIdValue ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
 			new PropertyIdMismatchException( $propertyIdKey, $propertyIdValue, "$propertyIdKey/0/property/id" ),
+		];
+
+		$validPropertyIdKey = 'P123';
+		$invalidPropertyIdValue = [ 'P123' ];
+		yield 'invalid property id value type' => [
+			[ $validPropertyIdKey => [ [ 'property' => [ 'id' => $invalidPropertyIdValue ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new PropertyIdMismatchException( $validPropertyIdKey, $invalidPropertyIdValue, "$validPropertyIdKey/0/property/id" ),
+		];
+
+		$invalidPropertyIdKey = '123';
+		$validPropertyIdValue = 'P123';
+		yield 'invalid property id key' => [
+			[ $invalidPropertyIdKey => [ [ 'property' => [ 'id' => $validPropertyIdValue ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new PropertyIdMismatchException( $invalidPropertyIdKey, $validPropertyIdValue, "$invalidPropertyIdKey/0/property/id" ),
 		];
 	}
 

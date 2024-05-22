@@ -42,13 +42,16 @@ class StatementsDeserializer {
 					throw new InvalidFieldTypeException( "$propertyId/$index" );
 				}
 
-				$deserializedStatement = $this->statementDeserializer->deserialize( $statement, "$propertyId/$index" );
-
-				$statementPropertyId = $deserializedStatement->getPropertyId()->getSerialization();
-				if ( $statementPropertyId !== $propertyId ) {
-					throw new PropertyIdMismatchException( $propertyId, $statementPropertyId, "$propertyId/$index/property/id" );
+				$statementPropertyId = $statement[ 'property' ][ 'id' ] ?? null;
+				if ( $statementPropertyId && $statementPropertyId !== (string)$propertyId ) {
+					throw new PropertyIdMismatchException(
+						(string)$propertyId,
+						$statementPropertyId,
+						"$propertyId/$index/property/id"
+					);
 				}
 
+				$deserializedStatement = $this->statementDeserializer->deserialize( $statement, "$propertyId/$index" );
 				$statementList[] = $deserializedStatement;
 			}
 		}
