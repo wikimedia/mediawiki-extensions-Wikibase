@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
@@ -227,6 +228,29 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
 		$this->assertNull( $this->newRetriever()->getItemWriteModel( $itemId ) );
+	}
+
+	public function testGetItem(): void {
+		$itemId = new ItemId( 'Q321' );
+		$itemWriteModel = NewItem::withId( $itemId )->build();
+		$expectedItem = new Item(
+			$itemId,
+			new Labels(),
+			new Descriptions(),
+			new Aliases(),
+			new Sitelinks(),
+			new StatementList()
+		);
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $itemWriteModel );
+
+		$this->assertEquals( $expectedItem, $this->newRetriever()->getItem( $itemId ) );
+	}
+
+	public function testGivenItemNotFound_getItemReturnsNull(): void {
+		$id = new ItemId( 'Q123' );
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $id, null );
+
+		$this->assertNull( $this->newRetriever()->getItem( $id ) );
 	}
 
 	public function testGetSitelinks(): void {
