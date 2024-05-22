@@ -89,7 +89,7 @@
 	"wikibase-sitelinks-special": "Druge strani",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliknite za dodelitev značke.",
 	"wikibase-remove": "odstrani",
-	"wikibase-undo-title": "Razveljavljam urejanje »$1«",
+	"wikibase-undo-title": "Razveljavitev urejanja »$1«",
 	"wikibase-restore-title": "Obnavljam staro redakcijo »$1«",
 	"wikibase-partial-undo": "Urejanje je mogoče delno razveljaviti.",
 	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|sprememba|spremembi|spremembe|sprememb}} ni bilo mogoče razveljaviti, ker {{PLURAL:$1|se je ustrezna vrednost|sta se ustrezni vrednosti|so se ustrezne vrednosti}} vmes spremenile.",
