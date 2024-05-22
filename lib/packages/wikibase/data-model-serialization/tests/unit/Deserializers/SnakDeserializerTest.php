@@ -8,6 +8,8 @@ use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
+use Deserializers\Exceptions\MissingAttributeException;
+use Deserializers\Exceptions\MissingTypeException;
 use Exception;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
@@ -171,6 +173,37 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		$this->buildDeserializer()->deserialize( [
 			'snaktype' => 'somevalue',
 			'property' => 'xyz',
+		] );
+	}
+
+	public function testMissingDataValueType_throwsMissingTypeException(): void {
+		$this->expectException( MissingTypeException::class );
+		$this->buildDeserializer()->deserialize( [
+			'snaktype' => 'value',
+			'property' => self::STRING_PROPERTY_ID,
+			'datavalue' => [
+				'value' => 1337,
+			],
+		] );
+	}
+
+	public function testDataValueNotAnArray_throwsMissingTypeException(): void {
+		$this->expectException( MissingTypeException::class );
+		$this->buildDeserializer()->deserialize( [
+			'snaktype' => 'value',
+			'property' => self::STRING_PROPERTY_ID,
+			'datavalue' => 'not an array',
+		] );
+	}
+
+	public function testDataValueMissingValue_throwsMissingAttributeException(): void {
+		$this->expectException( MissingAttributeException::class );
+		$this->buildDeserializer()->deserialize( [
+			'snaktype' => 'value',
+			'property' => self::STRING_PROPERTY_ID,
+			'datavalue' => [
+				'type' => 'string',
+			],
 		] );
 	}
 
