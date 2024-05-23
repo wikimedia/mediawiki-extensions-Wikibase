@@ -36,6 +36,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\Deserialized
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\DeserializedGetPropertyStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\DeserializedGetSitelinkRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\DeserializedGetSitelinksRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\DeserializedPatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\DeserializedPatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\DeserializedPatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\DeserializedPatchItemLabelsRequest;
@@ -86,6 +87,7 @@ class DeserializedRequestAdapter implements
 	DeserializedGetPropertyAliasesInLanguageRequest,
 	DeserializedGetPropertyStatementRequest,
 	DeserializedGetPropertyStatementsRequest,
+	DeserializedPatchItemRequest,
 	DeserializedPatchItemLabelsRequest,
 	DeserializedPatchItemDescriptionsRequest,
 	DeserializedPatchItemAliasesRequest,
