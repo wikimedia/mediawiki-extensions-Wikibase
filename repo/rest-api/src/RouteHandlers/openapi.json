@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Product Platform Team",
@@ -151,6 +151,54 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedError"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchItem",
+        "tags": [
+          "items"
+        ],
+        "summary": "[WIP] Change a single Wikibase Item by ID",
+        "description": "This endpoint is currently in development and is not recommended for production use",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ItemId"
+          },
+          {
+            "$ref": "#/components/parameters/IfMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfUnmodifiedSince"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ItemPatch"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Item"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidItemPatch"
+          },
+          "404": {
+            "$ref": "#/components/responses/ItemNotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/CannotApplyItemPatch"
+          },
+          "412": {
+            "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidPatchedItem"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -3079,6 +3127,82 @@
           }
         }
       },
+      "ItemPatch": {
+        "required": true,
+        "content": {
+          "application/json-patch+json": {
+            "schema": {
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "patch": {
+                      "description": "A JSON Patch document as defined by RFC 6902",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "op": {
+                            "description": "The operation to perform",
+                            "type": "string",
+                            "enum": [
+                              "add",
+                              "copy",
+                              "move",
+                              "remove",
+                              "replace",
+                              "test"
+                            ],
+                            "example": "replace"
+                          },
+                          "path": {
+                            "description": "A JSON Pointer for the property to manipulate",
+                            "type": "string"
+                          },
+                          "value": {
+                            "description": "The value to be used within the operation"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "path"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "patch"
+                  ]
+                },
+                {
+                  "properties": {
+                    "patch": {
+                      "items": {
+                        "properties": {
+                          "path": {
+                            "example": "/labels/en"
+                          },
+                          "value": {
+                            "example": "Douglas Adams"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                }
+              ]
+            }
+          }
+        }
+      },
       "PropertyPatch": {
         "required": true,
         "content": {
@@ -3091,7 +3215,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -3157,7 +3281,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -3226,7 +3350,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -3291,7 +3415,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -3405,45 +3529,7 @@
             "schema": {
               "allOf": [
                 {
-                  "type": "object",
-                  "properties": {
-                    "patch": {
-                      "description": "A JSON Patch document as defined by RFC 6902",
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "op": {
-                            "description": "The operation to perform",
-                            "type": "string",
-                            "enum": [
-                              "add",
-                              "copy",
-                              "move",
-                              "remove",
-                              "replace",
-                              "test"
-                            ],
-                            "example": "replace"
-                          },
-                          "path": {
-                            "description": "A JSON Pointer for the property to manipulate",
-                            "type": "string"
-                          },
-                          "value": {
-                            "description": "The value to be used within the operation"
-                          }
-                        },
-                        "required": [
-                          "op",
-                          "path"
-                        ]
-                      }
-                    }
-                  },
-                  "required": [
-                    "patch"
-                  ]
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -3523,7 +3609,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1statements~1%7Bstatement_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -5458,6 +5544,131 @@
               "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
             },
             "examples": {
+              "patched-sitelink-invalid-site-id": {
+                "$ref": "#/components/examples/PatchedSitelinkSiteIdInvalidExample"
+              },
+              "patched-sitelink-missing-title": {
+                "$ref": "#/components/examples/PatchedSitelinkTitleMissingExample"
+              },
+              "patched-sitelink-title-empty": {
+                "$ref": "#/components/examples/PatchedSitelinkTitleEmptyExample"
+              },
+              "patched-sitelink-invalid-title": {
+                "$ref": "#/components/examples/PatchedSitelinkTitleInvalidExample"
+              },
+              "patched-sitelink-title-does-not-exist": {
+                "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
+              },
+              "patched-sitelink-invalid-badge": {
+                "$ref": "#/components/examples/PatchedSitelinkBadgeInvalidExample"
+              },
+              "patched-sitelink-item-not-a-badge": {
+                "$ref": "#/components/examples/PatchedSitelinkItemBadgeNotBadgeExample"
+              },
+              "patched-sitelink-badges-format": {
+                "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patched-sitelink-conflict": {
+                "$ref": "#/components/examples/PatchedSitelinkConflictExample"
+              },
+              "url-not-modifiable": {
+                "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the language in which error message is provided"
+          }
+        }
+      },
+      "InvalidPatchedItem": {
+        "description": "Applying the provided JSON Patch results in an invalid property",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+            },
+            "examples": {
+              "patched-item-invalid-operation-change-item-id": {
+                "$ref": "#/components/examples/PatchedItemInvalidOperationChangeItemIdExample"
+              },
+              "patched-item-invalid-field": {
+                "$ref": "#/components/examples/PatchedItemInvalidFieldExample"
+              },
+              "patched-item-unexpected-field": {
+                "$ref": "#/components/examples/PatchedItemInvalidUnexpectedExample"
+              },
+              "patched-statement-missing-field": {
+                "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
+              },
+              "patched-statement-invalid-field": {
+                "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
+              },
+              "statement-id-not-modifiable": {
+                "$ref": "#/components/examples/StatementIdNotModifiableExample"
+              },
+              "patched-statement-property-not-modifiable": {
+                "$ref": "#/components/examples/PatchedStatementPropertyNotModifiableExample"
+              },
+              "patched-invalid-statement-group-type": {
+                "$ref": "#/components/examples/PatchedInvalidStatementGroupTypeExample"
+              },
+              "patched-invalid-statement-type": {
+                "$ref": "#/components/examples/PatchedInvalidStatementTypeExample"
+              },
+              "patched-statement-group-property-id-mismatch": {
+                "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
+              },
+              "patched-labels-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
+              },
+              "patched-label-empty": {
+                "$ref": "#/components/examples/PatchedLabelEmptyExample"
+              },
+              "patched-label-too-long": {
+                "$ref": "#/components/examples/PatchedLabelTooLongExample"
+              },
+              "patched-label-invalid": {
+                "$ref": "#/components/examples/PatchedLabelInvalidExample"
+              },
+              "patched-descriptions-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
+              },
+              "patched-description-empty": {
+                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
+              },
+              "patched-description-too-long": {
+                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
+              },
+              "patched-description-invalid": {
+                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
+              },
+              "patched-item-label-description-same-value": {
+                "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
+              },
+              "patched-item-label-description-duplicate": {
+                "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
+              },
+              "patched-aliases-invalid-language-code": {
+                "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
+              },
+              "patched-alias-empty": {
+                "$ref": "#/components/examples/PatchedAliasEmptyExample"
+              },
+              "patched-alias-too-long": {
+                "$ref": "#/components/examples/PatchedAliasTooLongExample"
+              },
+              "patched-aliases-invalid-field": {
+                "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
+              },
+              "patched-duplicate-alias": {
+                "$ref": "#/components/examples/PatchedDuplicateAliasExample"
+              },
               "patched-sitelink-invalid-site-id": {
                 "$ref": "#/components/examples/PatchedSitelinkSiteIdInvalidExample"
               },
@@ -7892,6 +8103,28 @@
           "context": {
             "language": "{language_code}"
           }
+        }
+      },
+      "PatchedItemInvalidOperationChangeItemIdExample": {
+        "value": {
+          "code": "patched-item-invalid-operation-change-item-id",
+          "message": "Cannot change the ID of the existing item"
+        }
+      },
+      "PatchedItemInvalidFieldExample": {
+        "value": {
+          "code": "patched-item-invalid-field",
+          "message": "Invalid input for '{field}' in the patched item",
+          "context": {
+            "path": "{field}",
+            "value": "{value}"
+          }
+        }
+      },
+      "PatchedItemInvalidUnexpectedExample": {
+        "value": {
+          "code": "patched-item-unexpected-field",
+          "message": "The patched request body contains an unexpected field: '{field}'"
         }
       },
       "PatchedPropertyInvalidOperationChangePropertyIdExample": {
