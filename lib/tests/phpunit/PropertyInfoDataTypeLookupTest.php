@@ -6,7 +6,6 @@ use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -68,6 +67,14 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 				$id,
 				$dataTypeId,
 			];
+
+			// try with via lazy fallback
+			$argLists[] = [
+				$emptyInfoLookup,
+				fn () => $propertyDataTypeLookup,
+				$id,
+				$dataTypeId,
+			];
 		}
 
 		// try unknown property
@@ -89,6 +96,14 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 			false,
 		];
 
+		// try with via lazy fallback
+		$argLists[] = [
+			$emptyInfoLookup,
+			fn () => $propertyDataTypeLookup,
+			$id,
+			false,
+		];
+
 		return $argLists;
 	}
 
@@ -97,7 +112,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDataTypeForProperty(
 		PropertyInfoLookup $infoLookup,
-		?PropertyDataTypeLookup $fallbackLookup,
+		$fallbackLookup,
 		NumericPropertyId $propertyId,
 		$expectedDataType
 	) {

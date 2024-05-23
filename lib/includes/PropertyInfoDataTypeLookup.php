@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Psr\Log\LoggerInterface;
+use TypeError;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -18,7 +19,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 
 	/**
-	 * @var PropertyDataTypeLookup|null
+	 * @var PropertyDataTypeLookup|callable|null
 	 */
 	private $fallbackLookup;
 
@@ -35,12 +36,14 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	/**
 	 * @param PropertyInfoLookup $infoLookup
 	 * @param LoggerInterface $logger
-	 * @param PropertyDataTypeLookup|null $fallbackLookup
+	 * @param PropertyDataTypeLookup|callable|null $fallbackLookup Another lookup to fall back to,
+	 * or a callable which can be called (without arguments) to lazily return such a fallback,
+	 * or null to disable the fallback (i.e. fail if property info is not available).
 	 */
 	public function __construct(
 		PropertyInfoLookup $infoLookup,
 		LoggerInterface $logger,
-		PropertyDataTypeLookup $fallbackLookup = null
+		$fallbackLookup = null
 	) {
 		$this->infoLookup = $infoLookup;
 		$this->fallbackLookup = $fallbackLookup;
@@ -62,6 +65,12 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 		}
 
 		if ( $dataTypeId === null && $this->fallbackLookup !== null ) {
+			if ( is_callable( $this->fallbackLookup ) ) {
+				$this->fallbackLookup = ( $this->fallbackLookup )();
+				if ( !( $this->fallbackLookup instanceof PropertyDataTypeLookup ) ) {
+					throw new TypeError( '$fallbackLookup must return PropertyDataTypeLookup' );
+				}
+			}
 			$dataTypeId = $this->fallbackLookup->getDataTypeIdForProperty( $propertyId );
 
 			if ( $dataTypeId !== null ) {

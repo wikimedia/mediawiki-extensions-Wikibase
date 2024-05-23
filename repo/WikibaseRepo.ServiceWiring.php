@@ -94,7 +94,6 @@ use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
-use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
@@ -333,10 +332,7 @@ return [
 		return new DeserializerFactory(
 			WikibaseRepo::getDataValueDeserializer( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
-			new PropertyInfoDataTypeLookup(
-				WikibaseRepo::getPropertyInfoLookup( $services ),
-				WikibaseRepo::getLogger( $services )
-			),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$dataTypeDefs->getValueTypes()
 		);
@@ -1611,7 +1607,7 @@ return [
 			),
 			( new PropertyServices(
 				$entitySourceDefinitions,
-				PropertyServices::getServiceDefinitions()
+				PropertyServices::getServiceDefinitions( $services )
 			) )->get( PropertyServices::PROPERTY_DATA_TYPE_LOOKUP_CALLBACK )
 		);
 	},

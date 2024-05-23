@@ -162,10 +162,7 @@ return [
 		return new DeserializerFactory(
 			WikibaseClient::getDataValueDeserializer( $services ),
 			WikibaseClient::getEntityIdParser( $services ),
-			new PropertyInfoDataTypeLookup(
-				WikibaseClient::getPropertyInfoLookup( $services ),
-				WikibaseClient::getLogger( $services )
-			),
+			WikibaseClient::getPropertyDataTypeLookup( $services ),
 			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$dataTypeDefs->getValueTypes()
 		);
@@ -701,12 +698,10 @@ return [
 
 	'WikibaseClient.PropertyDataTypeLookup' => function ( MediaWikiServices $services ): PropertyDataTypeLookup {
 		$infoLookup = WikibaseClient::getPropertyInfoLookup( $services );
-		$entityLookup = WikibaseClient::getEntityLookup( $services );
-		$retrievingLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
 			WikibaseClient::getLogger( $services ),
-			$retrievingLookup
+			fn () => new EntityRetrievingDataTypeLookup( WikibaseClient::getEntityLookup( $services ) )
 		);
 	},
 
