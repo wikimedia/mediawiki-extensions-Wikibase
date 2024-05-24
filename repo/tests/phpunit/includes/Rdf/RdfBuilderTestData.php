@@ -20,10 +20,12 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Lib\Tests\MockEntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
@@ -402,6 +404,16 @@ class RdfBuilderTestData {
 		}
 
 		return $repo;
+	}
+
+	public function getPropertyInfoLookup(): PropertyInfoLookup {
+		$propertyInfo = [];
+		foreach ( self::getTestProperties() as $propertyAndDataType ) {
+			$propertyId = $propertyAndDataType[0]->getSerialization();
+			$propertyDataType = $propertyAndDataType[1];
+			$propertyInfo[$propertyId] = [ PropertyInfoLookup::KEY_DATA_TYPE => $propertyDataType ];
+		}
+		return new MockPropertyInfoLookup( $propertyInfo );
 	}
 
 }
