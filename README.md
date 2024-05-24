@@ -17,23 +17,11 @@ Lower level documentation can be found on doc.wikimedia.org [here](https://doc.w
 
 Wikibase depends on various [composer](http://getcomposer.org/) libraries.
 
-Once you have Wikibase in your MediaWiki extensions directory, add the `composer.json` of Wikibase to `composer.local.json` at the root of your MediaWiki folder, as documented in [MediaWiki's Composer documentation](https://www.mediawiki.org/wiki/Composer#Using_composer-merge-plugin).
+Once you have Wikibase in your MediaWiki extensions directory, go to the root of your MediaWiki folder,
+and if `composer.local.json` does not yet exist there, copy `composer.local.json-sample` to `composer.local.json`
+(see [MediaWiki's Composer documentation](https://www.mediawiki.org/wiki/Composer#Using_composer-merge-plugin)).
 
-It should now look similar to:
-```
-{
-  "extra": {
-    "merge-plugin": {
-       "include": [
-         "extensions/Wikibase/composer.json"
-       ]
-    }
-  }
-}
-```
-
-
-Then, in the root of your MediaWiki folder, run:
+Then run:
 ```bash
 composer install
 ```
