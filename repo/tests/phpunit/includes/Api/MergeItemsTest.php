@@ -29,6 +29,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ResultBuilder;
@@ -68,6 +69,10 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
+
+		$propertyInfoLookup = new MockPropertyInfoLookup( [ 'P1' => [ 'type' => 'string' ] ] );
+
+		$this->setService( 'WikibaseRepo.PropertyInfoLookup', $propertyInfoLookup );
 
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
