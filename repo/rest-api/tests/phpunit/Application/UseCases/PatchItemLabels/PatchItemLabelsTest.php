@@ -30,8 +30,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -49,7 +49,7 @@ class PatchItemLabelsTest extends TestCase {
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
 	private PatchedLabelsValidator $patchedLabelsValidator;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
 	private PatchItemLabelsValidator $validator;
@@ -65,7 +65,7 @@ class PatchItemLabelsTest extends TestCase {
 			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
 			new ItemLabelsContentsValidator( $this->createStub( ItemLabelValidator::class ) )
 		);
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );

@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,7 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 class SetItemLabel {
 
 	private AssertItemExists $assertItemExists;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private SetItemLabelValidator $validator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -25,7 +25,7 @@ class SetItemLabel {
 	public function __construct(
 		SetItemLabelValidator $validator,
 		AssertItemExists $assertItemExists,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
@@ -50,7 +50,7 @@ class SetItemLabel {
 		$editMetadata = $deserializedRequest->getEditMetadata();
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$labelExists = $item->getLabels()->hasTermForLanguage( $label->getLanguageCode() );
 		$item->getLabels()->setTerm( $label );
 

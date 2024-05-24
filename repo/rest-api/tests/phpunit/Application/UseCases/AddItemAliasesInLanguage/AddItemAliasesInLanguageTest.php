@@ -17,8 +17,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
@@ -31,7 +31,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  */
 class AddItemAliasesInLanguageTest extends TestCase {
 
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemUpdater $itemUpdater;
@@ -39,7 +39,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );

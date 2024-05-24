@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,14 +18,14 @@ class SetItemDescription {
 
 	private SetItemDescriptionValidator $validator;
 	private AssertItemExists $assertItemExists;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
 		SetItemDescriptionValidator $validator,
 		AssertItemExists $assertItemExists,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
@@ -50,7 +50,7 @@ class SetItemDescription {
 
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$descriptionExists = $item->getDescriptions()->hasTermForLanguage( $request->getLanguageCode() );
 		$item->getDescriptions()->setTerm( $description );
 

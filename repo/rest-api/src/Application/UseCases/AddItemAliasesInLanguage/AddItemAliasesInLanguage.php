@@ -9,22 +9,22 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class AddItemAliasesInLanguage {
 
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemUpdater $itemUpdater;
 	private AddItemAliasesInLanguageValidator $validator;
 
 	public function __construct(
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemUpdater $itemUpdater,
@@ -52,7 +52,7 @@ class AddItemAliasesInLanguage {
 		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$aliasesExist = $item->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 

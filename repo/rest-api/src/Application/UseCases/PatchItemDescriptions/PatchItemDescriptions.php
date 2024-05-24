@@ -9,8 +9,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -23,7 +23,7 @@ class PatchItemDescriptions {
 	private ItemDescriptionsRetriever $descriptionsRetriever;
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
 
@@ -34,7 +34,7 @@ class PatchItemDescriptions {
 		ItemDescriptionsRetriever $descriptionsRetriever,
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		PatchedDescriptionsValidator $patchedDescriptionsValidator,
 		ItemUpdater $itemUpdater
 	) {
@@ -62,7 +62,7 @@ class PatchItemDescriptions {
 
 		$patchedDescriptions = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$originalDescriptions = $item->getDescriptions();
 		$modifiedDescriptions = $this->patchedDescriptionsValidator->validateAndDeserialize(
 			$originalDescriptions,

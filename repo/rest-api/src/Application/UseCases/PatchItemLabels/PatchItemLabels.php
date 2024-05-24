@@ -11,8 +11,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,7 +24,7 @@ class PatchItemLabels {
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
 	private PatchedLabelsValidator $patchedLabelsValidator;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PatchItemLabelsValidator $useCaseValidator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -35,7 +35,7 @@ class PatchItemLabels {
 		LabelsSerializer $labelsSerializer,
 		PatchJson $patcher,
 		PatchedLabelsValidator $patchedLabelsValidator,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		PatchItemLabelsValidator $useCaseValidator,
 		AssertUserIsAuthorized $assertUserIsAuthorized
@@ -69,7 +69,7 @@ class PatchItemLabels {
 
 		$patchedLabels = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$originalLabels = $item->getLabels();
 		$modifiedLabels = $this->patchedLabelsValidator->validateAndDeserialize(
 			$originalLabels,

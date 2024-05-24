@@ -25,8 +25,8 @@ use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
@@ -50,7 +50,7 @@ class PatchSitelinksTest extends TestCase {
 	private SitelinksRetriever $sitelinksRetriever;
 	private SitelinksSerializer $sitelinksSerializer;
 	private PatchJson $patcher;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private PatchedSitelinksValidator $patchedSitelinksValidator;
 	private ItemUpdater $itemUpdater;
 
@@ -65,7 +65,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->sitelinksRetriever = $this->createStub( SitelinksRetriever::class );
 		$this->sitelinksSerializer = new SitelinksSerializer( new SitelinkSerializer() );
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->patchedSitelinksValidator = new PatchedSitelinksValidator( new SitelinksValidator(
 			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
 			new SiteLinkLookupSitelinkValidator(

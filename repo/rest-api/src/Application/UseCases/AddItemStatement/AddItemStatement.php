@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,7 +18,7 @@ class AddItemStatement {
 
 	private AddItemStatementValidator $validator;
 	private AssertItemExists $assertItemExists;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GuidGenerator $guidGenerator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -26,7 +26,7 @@ class AddItemStatement {
 	public function __construct(
 		AddItemStatementValidator $validator,
 		AssertItemExists $assertItemExists,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		GuidGenerator $guidGenerator,
 		AssertUserIsAuthorized $assertUserIsAuthorized
@@ -54,7 +54,7 @@ class AddItemStatement {
 
 		$newStatementGuid = $this->guidGenerator->newStatementId( $itemId );
 		$statement->setGuid( (string)$newStatementGuid );
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$item->getStatements()->addStatement( $statement );
 
 		$newRevision = $this->itemUpdater->update(

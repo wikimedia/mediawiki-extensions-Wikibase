@@ -11,8 +11,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -26,7 +26,7 @@ class PatchItemAliases {
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
 	private PatchedAliasesValidator $patchedAliasesValidator;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
@@ -37,7 +37,7 @@ class PatchItemAliases {
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patcher,
 		PatchedAliasesValidator $patchedAliasesValidator,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
@@ -70,7 +70,7 @@ class PatchItemAliases {
 		$patchedAliases = $this->patcher->execute( iterator_to_array( $serialization ), $deserializedRequest->getPatch() );
 		$modifiedAliases = $this->patchedAliasesValidator->validateAndDeserialize( $patchedAliases );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$originalAliases = $item->getAliasGroups();
 		$item->getFingerprint()->setAliasGroups( $modifiedAliases );
 

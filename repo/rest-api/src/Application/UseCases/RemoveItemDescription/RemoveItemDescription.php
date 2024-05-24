@@ -9,8 +9,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,14 +20,14 @@ class RemoveItemDescription {
 	private RemoveItemDescriptionValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
 		RemoveItemDescriptionValidator $useCaseValidator,
 		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {
 		$this->useCaseValidator = $useCaseValidator;
@@ -50,7 +50,7 @@ class RemoveItemDescription {
 		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $providedEditMetadata->getUser() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		try {
 			$description = $item->getDescriptions()->getByLanguage( $languageCode );
 		} catch ( OutOfBoundsException $e ) {

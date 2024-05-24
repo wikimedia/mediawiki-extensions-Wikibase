@@ -8,22 +8,22 @@ use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class RemoveSitelink {
 
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private AssertItemExists $assertItemExists;
 	private RemoveSitelinkValidator $validator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		AssertItemExists $assertItemExists,
 		RemoveSitelinkValidator $validator,
@@ -49,7 +49,7 @@ class RemoveSitelink {
 		$this->assertItemExists->execute( $itemId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $editMetadata->getUser() );
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 
 		if ( !$item->hasLinkToSite( $siteId ) ) {
 			throw new UseCaseError(
