@@ -5,6 +5,8 @@ const { assert, utils } = require( 'api-testing' );
 const { newPatchItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
+const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 
 describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
@@ -70,6 +72,74 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
 
+	} );
+
+	describe( '400 error response ', () => {
+
+		it( 'item ID is invalid', async () => {
+			const itemId = 'X123';
+			const response = await newPatchItemRequestBuilder( itemId, [] )
+				.assertInvalidRequest().makeRequest();
+
+			assertValidError( response, 400, 'invalid-item-id' );
+			assert.include( response.body.message, itemId );
+		} );
+
+		testValidatesPatch( ( patch ) => newPatchItemRequestBuilder( testItemId, patch ) );
+
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newPatchItemRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newPatchItemRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid edit tag type', async () => {
+			const response = await newPatchItemRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'tags' );
+			assert.strictEqual( response.body.expectedType, 'array' );
+		} );
+
+		it( 'invalid bot flag', async () => {
+			const response = await newPatchItemRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'bot' );
+			assert.strictEqual( response.body.expectedType, 'boolean' );
+		} );
+
+		it( 'invalid comment type', async () => {
+			const response = await newPatchItemRequestBuilder( testItemId, [] )
+				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-request-body' );
+			assert.strictEqual( response.body.fieldName, 'comment' );
+			assert.strictEqual( response.body.expectedType, 'string' );
+		} );
 	} );
 
 } );

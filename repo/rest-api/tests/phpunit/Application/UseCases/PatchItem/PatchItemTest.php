@@ -29,6 +29,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -130,6 +131,15 @@ class PatchItemTest extends TestCase {
 			),
 			$response->getItem()
 		);
+	}
+
+	public function testGivenInvalidRequest_throw(): void {
+		try {
+			$this->newUseCase()->execute( new PatchItemRequest( 'X321', [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+		}
 	}
 
 	private function newUseCase(): PatchItem {
