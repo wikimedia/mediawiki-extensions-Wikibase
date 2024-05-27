@@ -4,7 +4,7 @@ const { requireExtensions } = require( './utils' );
 const { action, utils, assert } = require( 'api-testing' );
 
 describe( 'Label Rendering in Comments', function () {
-	let anonUser;
+	let testUser;
 	let testItemId;
 	let stringPropertyId;
 	let stringPropertyLabel;
@@ -14,13 +14,13 @@ describe( 'Label Rendering in Comments', function () {
 	] ) );
 
 	before( 'set up user', async () => {
-		anonUser = await action.getAnon();
+		testUser = await action.alice();
 	} );
 
 	before( 'create test item', async () => {
-		const response = await anonUser.action( 'wbeditentity', {
+		const response = await testUser.action( 'wbeditentity', {
 			new: 'item',
-			token: await anonUser.token(),
+			token: await testUser.token(),
 			data: JSON.stringify( {
 				labels: {
 					en: { language: 'en', value: 'T327062 & an-English-label-' + utils.uniq() },
@@ -31,22 +31,22 @@ describe( 'Label Rendering in Comments', function () {
 	} );
 
 	before( 'create string property', async () => {
-		const stringProperty = await createProperty( anonUser, 'string', 'string-' );
+		const stringProperty = await createProperty( testUser, 'string', 'string-' );
 		stringPropertyId = stringProperty.id;
 		stringPropertyLabel = stringProperty.labels.en.value;
 	} );
 
 	it( 'renders entity labels in parsed edit summaries in API requests', async function () {
-		const changeResponse = await anonUser.action( 'wbcreateclaim', {
+		const changeResponse = await testUser.action( 'wbcreateclaim', {
 			entity: testItemId,
 			snaktype: 'value',
 			property: stringPropertyId,
 			value: '"some text"',
-			token: await anonUser.token( 'csrf' ),
+			token: await testUser.token( 'csrf' ),
 		}, 'POST' );
 		const oldRevId = changeResponse.pageinfo.lastrevid;
 
-		const queryResponse = await anonUser.action( 'query', {
+		const queryResponse = await testUser.action( 'query', {
 			prop: 'revisions',
 			formatversion: 2,
 			rvprop: 'comment|parsedcomment',
