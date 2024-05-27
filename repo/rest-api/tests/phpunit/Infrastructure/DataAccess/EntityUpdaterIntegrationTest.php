@@ -45,7 +45,7 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals(
 			$newRevision->getEntity(),
-			WbRestApi::getItemDataRetriever()->getItem( $createdItem->getId() ),
+			WbRestApi::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
 		);
 	}
 
@@ -68,7 +68,7 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals(
 			$newRevision->getEntity(),
-			WbRestApi::getItemDataRetriever()->getItem( $createdItem->getId() ),
+			WbRestApi::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
 		);
 	}
 

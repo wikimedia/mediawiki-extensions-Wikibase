@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
@@ -17,8 +17,8 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
@@ -28,7 +28,7 @@ use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
  * @license GPL-2.0-or-later
  */
 class EntityRevisionLookupItemDataRetriever implements
-	ItemRetriever,
+	ItemWriteModelRetriever,
 	ItemPartsRetriever,
 	ItemStatementsRetriever,
 	SitelinkRetriever,
@@ -49,7 +49,7 @@ class EntityRevisionLookupItemDataRetriever implements
 		$this->sitelinksReadModelConverter = $sitelinksReadModelConverter;
 	}
 
-	public function getItem( ItemId $itemId ): ?Item {
+	public function getItemWriteModel( ItemId $itemId ): ?ItemWriteModel {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
@@ -65,14 +65,14 @@ class EntityRevisionLookupItemDataRetriever implements
 	}
 
 	public function getItemParts( ItemId $itemId, array $fields ): ?ItemParts {
-		$item = $this->getItem( $itemId );
+		$item = $this->getItemWriteModel( $itemId );
 		if ( $item === null ) {
 			return null;
 		}
 		return $this->itemPartsFromRequestedFields( $fields, $item );
 	}
 
-	private function itemPartsFromRequestedFields( array $fields, Item $item ): ItemParts {
+	private function itemPartsFromRequestedFields( array $fields, ItemWriteModel $item ): ItemParts {
 		$itemParts = ( new ItemPartsBuilder( $item->getId(), $fields ) );
 
 		if ( in_array( ItemParts::FIELD_LABELS, $fields ) ) {
@@ -95,7 +95,7 @@ class EntityRevisionLookupItemDataRetriever implements
 	}
 
 	public function getStatements( ItemId $itemId, ?PropertyId $propertyId = null ): ?StatementList {
-		$item = $this->getItem( $itemId );
+		$item = $this->getItemWriteModel( $itemId );
 		if ( $item === null ) {
 			return null;
 		}

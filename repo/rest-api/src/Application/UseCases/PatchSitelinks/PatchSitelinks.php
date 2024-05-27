@@ -10,8 +10,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 
 /**
@@ -24,7 +24,7 @@ class PatchSitelinks {
 	private SitelinksRetriever $sitelinksRetriever;
 	private SitelinksSerializer $sitelinksSerializer;
 	private PatchJson $patcher;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private PatchedSitelinksValidator $patchedSitelinksValidator;
 	private ItemUpdater $itemUpdater;
 
@@ -35,7 +35,7 @@ class PatchSitelinks {
 		SitelinksRetriever $SitelinksRetriever,
 		SitelinksSerializer $sitelinksSerializer,
 		PatchJson $patcher,
-		ItemRetriever $itemRetriever,
+		ItemWriteModelRetriever $itemRetriever,
 		PatchedSitelinksValidator $patchedSitelinksValidator,
 		ItemUpdater $itemUpdater
 	) {
@@ -73,7 +73,7 @@ class PatchSitelinks {
 			$patchedSitelinks
 		);
 
-		$item = $this->itemRetriever->getItem( $itemId );
+		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		$item->setSiteLinkList( $modifiedSitelinks );
 
 		$editMetadata = new EditMetadata(

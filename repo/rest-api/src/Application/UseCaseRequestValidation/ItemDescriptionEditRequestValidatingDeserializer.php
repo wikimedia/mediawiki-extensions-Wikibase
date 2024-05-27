@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,11 +15,11 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 class ItemDescriptionEditRequestValidatingDeserializer {
 
 	private ItemDescriptionValidator $validator;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 
 	public function __construct(
 		ItemDescriptionValidator $validator,
-		ItemRetriever $itemRetriever
+		ItemWriteModelRetriever $itemRetriever
 	) {
 		$this->validator = $validator;
 		$this->itemRetriever = $itemRetriever;
@@ -29,7 +29,7 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( ItemDescriptionEditRequest $request ): Term {
-		$item = $this->itemRetriever->getItem( new ItemId( $request->getItemId() ) );
+		$item = $this->itemRetriever->getItemWriteModel( new ItemId( $request->getItemId() ) );
 		$language = $request->getLanguageCode();
 		$description = $request->getDescription();
 

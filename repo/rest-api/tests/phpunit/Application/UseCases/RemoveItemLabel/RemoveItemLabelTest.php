@@ -16,8 +16,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
@@ -34,7 +34,7 @@ class RemoveItemLabelTest extends TestCase {
 	private RemoveItemLabelValidator $validator;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
@@ -42,7 +42,7 @@ class RemoveItemLabelTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 
@@ -63,7 +63,7 @@ class RemoveItemLabelTest extends TestCase {
 			new RemoveItemLabelRequest( (string)$itemId, $languageCode, $tags, $isBot, $comment, null )
 		);
 
-		$this->assertFalse( $itemRepo->getItem( $itemId )->getLabels()->hasTermForLanguage( $languageCode ) );
+		$this->assertFalse( $itemRepo->getItemWriteModel( $itemId )->getLabels()->hasTermForLanguage( $languageCode ) );
 		$this->assertEquals(
 			new EditMetadata( $tags, $isBot, LabelEditSummary::newRemoveSummary(
 				$comment,
@@ -110,8 +110,8 @@ class RemoveItemLabelTest extends TestCase {
 		$language = 'en';
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
 
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
-		$this->itemRetriever->method( 'getItem' )->willReturn( NewItem::withId( $itemId )->build() );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
+		$this->itemRetriever->method( 'getItemWriteModel' )->willReturn( NewItem::withId( $itemId )->build() );
 
 		try {
 			$request = new RemoveItemLabelRequest( (string)$itemId, $language, $editTags, false, 'test', null );

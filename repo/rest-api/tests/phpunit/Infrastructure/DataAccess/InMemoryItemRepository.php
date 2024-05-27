@@ -19,8 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -29,7 +29,7 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  * @license GPL-2.0-or-later
  */
 class InMemoryItemRepository implements
-	ItemRetriever,
+	ItemWriteModelRetriever,
 	ItemLabelsRetriever,
 	ItemDescriptionsRetriever,
 	ItemAliasesRetriever,
@@ -62,7 +62,7 @@ class InMemoryItemRepository implements
 		return $this->latestRevisionData["$id"]['editMetadata'];
 	}
 
-	public function getItem( ItemId $itemId ): ?ItemWriteModel {
+	public function getItemWriteModel( ItemId $itemId ): ?ItemWriteModel {
 		return $this->items[$itemId->getSerialization()] ?? null;
 	}
 

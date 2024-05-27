@@ -54,7 +54,7 @@ class CreateItemTest extends TestCase {
 		$newItem = $response->getItem();
 		$this->assertEquals(
 			NewItem::withLabel( 'en', $enLabel )->andId( $newItem->getId() )->build(),
-			$itemRepo->getItem( $newItem->getId() )
+			$itemRepo->getItemWriteModel( $newItem->getId() )
 		);
 		$this->assertEquals( $itemRepo->getLabels( $newItem->getId() ), $newItem->getLabels() );
 		$this->assertSame( $itemRepo->getLatestRevisionId( $newItem->getId() ), $response->getRevisionId() );

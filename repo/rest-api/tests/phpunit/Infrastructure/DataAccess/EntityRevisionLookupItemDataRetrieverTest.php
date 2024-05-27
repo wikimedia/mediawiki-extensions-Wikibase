@@ -6,7 +6,7 @@ use Generator;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
@@ -88,7 +88,11 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 	/**
 	 * @dataProvider itemPartsWithFieldsProvider
 	 */
-	public function testGivenFields_getItemPartsReturnsOnlyRequestFields( Item $item, array $fields, ItemParts $itemParts ): void {
+	public function testGivenFields_getItemPartsReturnsOnlyRequestFields(
+		ItemWriteModel $item,
+		array $fields,
+		ItemParts $itemParts
+	): void {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
@@ -203,26 +207,26 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->assertNull( $this->newRetriever()->getStatements( $itemId ) );
 	}
 
-	public function testGetItem(): void {
+	public function testGetItemWriteModel(): void {
 		$itemId = new ItemId( 'Q321' );
-		$item = NewItem::withId( $itemId )->build();
-		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $item );
+		$itemWriteModel = NewItem::withId( $itemId )->build();
+		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, $itemWriteModel );
 
-		$this->assertSame( $item, $this->newRetriever()->getItem( $itemId ) );
+		$this->assertSame( $itemWriteModel, $this->newRetriever()->getItemWriteModel( $itemId ) );
 	}
 
-	public function testGivenItemDoesNotExist_getItemReturnsNull(): void {
+	public function testGivenItemDoesNotExist_getItemWriteModelReturnsNull(): void {
 		$itemId = new ItemId( 'Q666' );
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $itemId, null );
 
-		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
+		$this->assertNull( $this->newRetriever()->getItemWriteModel( $itemId ) );
 	}
 
-	public function testGivenItemRedirected_getItemReturnsNull(): void {
+	public function testGivenItemRedirected_getItemWriteModelReturnsNull(): void {
 		$itemId = new ItemId( 'Q666' );
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithRedirect( $itemId );
 
-		$this->assertNull( $this->newRetriever()->getItem( $itemId ) );
+		$this->assertNull( $this->newRetriever()->getItemWriteModel( $itemId ) );
 	}
 
 	public function testGetSitelinks(): void {
@@ -304,7 +308,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		);
 	}
 
-	private function newEntityRevisionLookupForIdWithReturnValue( ItemId $id, ?Item $returnValue ): EntityRevisionLookup {
+	private function newEntityRevisionLookupForIdWithReturnValue( ItemId $id, ?ItemWriteModel $returnValue ): EntityRevisionLookup {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )

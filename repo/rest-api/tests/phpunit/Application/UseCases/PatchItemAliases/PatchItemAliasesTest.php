@@ -24,8 +24,8 @@ use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -46,7 +46,7 @@ class PatchItemAliasesTest extends TestCase {
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
 	private PatchedAliasesValidator $patchedAliasesValidator;
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
@@ -62,7 +62,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}
 

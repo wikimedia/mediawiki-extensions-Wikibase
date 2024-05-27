@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemRetriever {
+interface ItemWriteModelRetriever {
 
-	public function getItem( ItemId $itemId ): ?Item;
+	public function getItemWriteModel( ItemId $itemId ): ?Item;
 
 }

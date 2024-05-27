@@ -15,8 +15,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
@@ -29,7 +29,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  */
 class RemoveSitelinkTest extends TestCase {
 
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 
 	private ItemUpdater $itemUpdater;
 
@@ -43,7 +43,7 @@ class RemoveSitelinkTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->itemRetriever = $this->createStub( ItemRetriever::class );
+		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 		$this->validator = new TestValidatingRequestDeserializer();
@@ -66,7 +66,7 @@ class RemoveSitelinkTest extends TestCase {
 		$request = new RemoveSitelinkRequest( "$itemId", self::VALID_SITE, $tags, $isBot, $comment, null );
 		$this->newUseCase()->execute( $request );
 
-		$this->assertFalse( $itemRepo->getItem( $itemId )->hasLinkToSite( self::VALID_SITE ) );
+		$this->assertFalse( $itemRepo->getItemWriteModel( $itemId )->hasLinkToSite( self::VALID_SITE ) );
 		$this->assertEquals(
 			$itemRepo->getLatestRevisionEditMetadata( $itemId ),
 			new EditMetadata( $tags, $isBot, SitelinkEditSummary::newRemoveSummary( $comment, $removedSitelink ) )

@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequ
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
@@ -23,7 +23,7 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository
  */
 class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 
-	private ItemRetriever $itemRetriever;
+	private ItemWriteModelRetriever $itemRetriever;
 	private ItemLabelValidator $itemLabelValidator;
 
 	protected function setUp(): void {
