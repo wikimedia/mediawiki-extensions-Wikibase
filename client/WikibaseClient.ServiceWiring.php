@@ -784,7 +784,7 @@ return [
 
 		return new CachingPropertyOrderProvider(
 			$innerProvider,
-			ObjectCache::getLocalClusterInstance()
+			$services->getObjectCacheFactory()->getLocalClusterInstance()
 		);
 	},
 
