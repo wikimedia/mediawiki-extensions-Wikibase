@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemovePropertyDescrip
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property as DataModelProperty;
+use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -60,7 +60,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 
 		$propertyRepo = new InMemoryPropertyRepository();
 		$propertyRepo->addProperty(
-			new DataModelProperty(
+			new PropertyWriteModel(
 				$propertyId,
 				new Fingerprint( null, new TermList( [ $descriptionToRemove, $descriptionToKeep ] ) ),
 				'string'
@@ -120,7 +120,7 @@ class RemovePropertyDescriptionTest extends TestCase {
 		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[ 1 ] ];
 
 		$propertyRepo = new InMemoryPropertyRepository();
-		$propertyRepo->addProperty( new DataModelProperty( $propertyId, new Fingerprint(), 'string' ) );
+		$propertyRepo->addProperty( new PropertyWriteModel( $propertyId, new Fingerprint(), 'string' ) );
 		$this->propertyRetriever = $propertyRepo;
 
 		try {

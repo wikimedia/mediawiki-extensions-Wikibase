@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
-use Wikibase\DataModel\Entity\Item as DataModelItem;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ItemParts {
-	public const TYPE = DataModelItem::ENTITY_TYPE;
+	public const TYPE = ItemWriteModel::ENTITY_TYPE;
 
 	public const FIELD_TYPE = 'type';
 	public const FIELD_LABELS = 'labels';

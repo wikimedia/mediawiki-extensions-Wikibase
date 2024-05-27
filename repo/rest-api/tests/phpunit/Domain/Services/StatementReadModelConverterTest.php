@@ -29,38 +29,38 @@ class StatementReadModelConverterTest extends TestCase {
 
 	public function testConvert_simpleStatement(): void {
 		$id = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
-		$dataModelStatement = NewStatement::forProperty( 'P123' )
+		$statementWriteModel = NewStatement::forProperty( 'P123' )
 			->withGuid( (string)$id )
 			->withValue( 'potato' )
 			->build();
 
-		$readModel = $this->newConverter()->convert( $dataModelStatement );
+		$readModel = $this->newConverter()->convert( $statementWriteModel );
 
 		$this->assertEquals( $id, $readModel->getGuid() );
-		$this->assertSame( $dataModelStatement->getRank(), $readModel->getRank()->asInt() );
-		$this->assertSame( $dataModelStatement->getPropertyId(), $readModel->getProperty()->getId() );
+		$this->assertSame( $statementWriteModel->getRank(), $readModel->getRank()->asInt() );
+		$this->assertSame( $statementWriteModel->getPropertyId(), $readModel->getProperty()->getId() );
 		$this->assertSame( 'string', $readModel->getProperty()->getDataType() );
-		$this->assertSame( $dataModelStatement->getMainSnak()->getDataValue(), $readModel->getValue()->getContent() );
+		$this->assertSame( $statementWriteModel->getMainSnak()->getDataValue(), $readModel->getValue()->getContent() );
 	}
 
 	public function testConvert_withQualifiers(): void {
-		$dataModelStatement = NewStatement::forProperty( 'P123' )
+		$statementWriteModel = NewStatement::forProperty( 'P123' )
 			->withGuid( 'Q321$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->withQualifier( self::STRING_PROPERTY, 'my P123 qualifier value' )
 			->withQualifier( self::ITEM_ID_PROPERTY_ID, new ItemId( 'Q456' ) )
 			->build();
 
-		$readModel = $this->newConverter()->convert( $dataModelStatement );
+		$readModel = $this->newConverter()->convert( $statementWriteModel );
 
-		$dataModelQualifier = $dataModelStatement->getQualifiers()[0];
+		$qualifierWriteModel = $statementWriteModel->getQualifiers()[0];
 		$readModelQualifier = $readModel->getQualifiers()[0];
 
 		$this->assertEquals(
-			$dataModelQualifier->getPropertyId(),
+			$qualifierWriteModel->getPropertyId(),
 			$readModelQualifier->getProperty()->getId()
 		);
 		$this->assertSame( 'string', $readModelQualifier->getProperty()->getDataType() );
-		$this->assertEquals( $dataModelQualifier->getDataValue(), $readModelQualifier->getValue()->getContent() );
+		$this->assertEquals( $qualifierWriteModel->getDataValue(), $readModelQualifier->getValue()->getContent() );
 		$this->assertSame( 'wikibase-item', $readModel->getQualifiers()[1]->getProperty()->getDataType() );
 	}
 
@@ -69,7 +69,7 @@ class StatementReadModelConverterTest extends TestCase {
 		$ref1Value2 = new EntityIdValue( new ItemId( 'Q123' ) );
 		$ref2Value1 = new StringValue( 'ref-2-1' );
 
-		$dataModelStatement = NewStatement::forProperty( 'P123' )
+		$statementWriteModel = NewStatement::forProperty( 'P123' )
 			->withGuid( 'Q321$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->withReference( new Reference( [
 				new PropertyValueSnak( new NumericPropertyId( self::STRING_PROPERTY ), $ref1Value1 ),
@@ -80,7 +80,7 @@ class StatementReadModelConverterTest extends TestCase {
 			] ) )
 			->build();
 
-		[ $ref1, $ref2 ] = $this->newConverter()->convert( $dataModelStatement )->getReferences();
+		[ $ref1, $ref2 ] = $this->newConverter()->convert( $statementWriteModel )->getReferences();
 
 		$this->assertSame( 'string', $ref1->getParts()[0]->getProperty()->getDataType() );
 		$this->assertSame( $ref1Value1, $ref1->getParts()[0]->getValue()->getContent() );

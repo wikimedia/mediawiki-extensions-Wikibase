@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property as PropertyReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,7 +27,7 @@ class PropertySerializer {
 		$this->statementsSerializer = $statementsSerializer;
 	}
 
-	public function serialize( PropertyReadModel $property ): array {
+	public function serialize( Property $property ): array {
 		return [
 			'id' => $property->getId()->getSerialization(),
 			'type' => PropertyWriteModel::ENTITY_TYPE,

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\RestApi\Domain\ReadModel;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Statement\Statement as DataModelStatement;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 
 /**
  * @license GPL-2.0-or-later
@@ -11,9 +11,9 @@ use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 class Rank {
 
 	private const RANKS = [
-		DataModelStatement::RANK_DEPRECATED,
-		DataModelStatement::RANK_NORMAL,
-		DataModelStatement::RANK_PREFERRED,
+		StatementWriteModel::RANK_DEPRECATED,
+		StatementWriteModel::RANK_NORMAL,
+		StatementWriteModel::RANK_PREFERRED,
 	];
 	private int $rank;
 
@@ -25,15 +25,15 @@ class Rank {
 	}
 
 	public static function deprecated(): self {
-		return new self( DataModelStatement::RANK_DEPRECATED );
+		return new self( StatementWriteModel::RANK_DEPRECATED );
 	}
 
 	public static function normal(): self {
-		return new self( DataModelStatement::RANK_NORMAL );
+		return new self( StatementWriteModel::RANK_NORMAL );
 	}
 
 	public static function preferred(): self {
-		return new self( DataModelStatement::RANK_PREFERRED );
+		return new self( StatementWriteModel::RANK_PREFERRED );
 	}
 
 	public function asInt(): int {

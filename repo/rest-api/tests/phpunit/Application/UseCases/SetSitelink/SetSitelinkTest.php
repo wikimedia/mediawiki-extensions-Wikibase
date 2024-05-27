@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetSitelink;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink as DataModelSitelink;
+use Wikibase\DataModel\SiteLink as SitelinkWriteModel;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -82,7 +82,7 @@ class SetSitelinkTest extends TestCase {
 				false,
 				SitelinkEditSummary::newAddSummary(
 					'',
-					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] )
+					new SitelinkWriteModel( $siteId, $title, [ new ItemId( $badge ) ] )
 				)
 			),
 			$itemRepo->getLatestRevisionEditMetadata( $itemId )
@@ -128,7 +128,7 @@ class SetSitelinkTest extends TestCase {
 				false,
 				SitelinkEditSummary::newReplaceSummary(
 					'',
-					new DataModelSitelink( $siteId, $title, [ new ItemId( $badge ) ] ),
+					new SitelinkWriteModel( $siteId, $title, [ new ItemId( $badge ) ] ),
 					$replacedSitelink
 				)
 			),
