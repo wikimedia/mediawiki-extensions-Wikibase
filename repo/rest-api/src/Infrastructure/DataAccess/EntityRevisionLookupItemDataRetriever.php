@@ -10,6 +10,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
@@ -17,6 +18,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkRetriever;
@@ -28,6 +30,7 @@ use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
  * @license GPL-2.0-or-later
  */
 class EntityRevisionLookupItemDataRetriever implements
+	ItemRetriever,
 	ItemWriteModelRetriever,
 	ItemPartsRetriever,
 	ItemStatementsRetriever,
@@ -62,6 +65,23 @@ class EntityRevisionLookupItemDataRetriever implements
 
 		// @phan-suppress-next-line PhanTypeMismatchReturn
 		return $entityRevision->getEntity();
+	}
+
+	public function getItem( ItemId $itemId ): ?Item {
+		$item = $this->getItemWriteModel( $itemId );
+
+		if ( $item === null ) {
+			return null;
+		}
+
+		return new Item(
+			$item->getId(),
+			Labels::fromTermList( $item->getLabels() ),
+			Descriptions::fromTermList( $item->getDescriptions() ),
+			Aliases::fromAliasGroupList( $item->getAliasGroups() ),
+			$this->sitelinksReadModelConverter->convert( $item->getSiteLinkList() ),
+			$this->convertStatementListWriteModelToReadModel( $item->getStatements() )
+		);
 	}
 
 	public function getItemParts( ItemId $itemId, array $fields ): ?ItemParts {
