@@ -4,8 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
+use BagOStuff;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
+use ObjectCacheFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -53,6 +55,13 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' )
 			->willReturn( $titleFactory );
+		$objectCacheFactory = $this->createMock( ObjectCacheFactory::class );
+		$objectCacheFactory->expects( $this->once() )
+			->method( 'getLocalClusterInstance' )
+			->willReturn( $this->createMock( BagOStuff::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getObjectCacheFactory' )
+			->willReturn( $objectCacheFactory );
 		$entityIdHtmlLinkFormatterFactory = $this->createMock( EntityIdHtmlLinkFormatterFactory::class );
 		$entityIdHtmlLinkFormatterFactory->method( 'getOutputFormat' )
 			->willReturn( SnakFormatter::FORMAT_HTML );

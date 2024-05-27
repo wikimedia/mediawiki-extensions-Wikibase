@@ -2159,7 +2159,7 @@ return [
 				$services->getTitleFactory()
 					->newFromText( 'MediaWiki:Wikibase-SortedProperties' )
 			),
-			ObjectCache::getLocalClusterInstance()
+			$services->getObjectCacheFactory()->getLocalClusterInstance()
 		);
 
 		return new ViewFactory(
