@@ -188,7 +188,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "语言代码。",
 	"apihelp-query+wbsearch-description": "使用标签和别名搜索实体。\n这可用作其他查询使用的生成器。\n返回应显示的匹配关键字。",
 	"apihelp-query+wbsearch-summary": "使用标签和别名搜索实体。",
-	"apihelp-query+wbsearch-extended-description": "这可被用作其他查询使用的生成器。\n返回应被显示的匹配关键字。",
+	"apihelp-query+wbsearch-extended-description": "这可以用作其他查询的生成器。返回要显示的匹配的搜索词。",
 	"apihelp-query+wbsearch-param-search": "搜索此文本。",
 	"apihelp-query+wbsearch-param-language": "在此语言搜索。",
 	"apihelp-query+wbsearch-param-strictlanguage": "是否禁用语言备选",

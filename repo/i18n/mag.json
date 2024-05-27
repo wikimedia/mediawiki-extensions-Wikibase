@@ -243,6 +243,7 @@
 	"wikibase-entitydata-not-acceptable": "कौनो मेल खायेवाला प्रारूप न मिलल । समर्थित MIME प्रकार: $1",
 	"wikibase-entitydata-bad-revision": "इकाई $1 के अवतरण $2 न देखावल जा सके ।",
 	"wikibase-entitydata-bad-id": "अमान्य ID: $1 ।",
+	"wikibase-entitydata-storage-error": "इकाई $1 के लोड् नै कैल जा सकल ।",
 	"wikibase-entitydata-title": "इकाई डेटा",
 	"special-entitypage": "इकाई पन्ना",
 	"wikibase-entitypage-title": "इकाई पन्ना",
