@@ -3,6 +3,7 @@
 		"authors": [
 			"Babanwalia",
 			"Bgo eiu",
+			"Cabal",
 			"Jagseer S Sidhu",
 			"Kuldeepburjbhalaike",
 			"Satdeep gill",
@@ -77,7 +78,7 @@
 	"wikibase-client-data-bridge-thank-you-head": "ਤੁਹਾਡੇ ਸੋਧ ਲਈ ਧੰਨਵਾਦ!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "{{WBREPONAME}} 'ਤੇ ਹਵਾਲਾ ਸੋਧੋ",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "ਤੁਸੀਂ ਲਾਗਇਨ ਨਹੀਂ ਹੋ",
-	"wikibase-client-data-bridge-saving-error-assertuser-publish": "ਦਾਖਲ ਹੋਏ ਬਿਨਾਂ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "ਦਾਖਲ ਹੋਏ ਬਿਨਾਂ ਛਾਪੋ",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "ਦਾਖਲ ਹੋਏ ਬਿਨਾਂ ਸੰਭਾਲੋ",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "ਲੌਗ ਇਨ ਕਰੋ (ਇੱਕ ਨਵੀਂ ਟੈਬ ਵਿੱਚ ਖੁੱਲ੍ਹਦਾ ਹੈ)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "ਸੋਧਣਾ ਜਾਰੀ ਰੱਖੋ"
