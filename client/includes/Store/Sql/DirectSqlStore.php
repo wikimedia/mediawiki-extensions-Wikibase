@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Store\Sql;
 
+use EmptyBagOStuff;
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
-use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
@@ -281,7 +281,7 @@ class DirectSqlStore implements ClientStore {
 		// TODO: Cleanup the cache, it's not needed as SqlBlobStore itself has a better cache
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			new EntityRevisionCache(
-				ObjectCache::getInstance( CACHE_NONE ),
+				new EmptyBagOStuff(),
 				$this->cacheDuration,
 				$cacheKeyPrefix
 			),

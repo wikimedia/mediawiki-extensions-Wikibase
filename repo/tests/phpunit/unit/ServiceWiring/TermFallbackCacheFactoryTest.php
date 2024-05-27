@@ -35,6 +35,8 @@ class TermFallbackCacheFactoryTest extends ServiceWiringTestCase {
 			->willReturn( new HashConfig( [
 				'SecretKey' => 'not so secret',
 			] ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getObjectCacheFactory' );
 
 		$termFallbackCacheFactory = $this->getService( 'WikibaseRepo.TermFallbackCacheFactory' );
 

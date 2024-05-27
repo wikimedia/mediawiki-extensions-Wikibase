@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Tests\TermFallbackCache;
 use BagOStuff;
 use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
+use ObjectCacheFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -24,9 +25,10 @@ class TermFallbackServiceFactoryTest extends TestCase {
 
 	public function testNewSharedCache() {
 		$sut = $this->createSUT();
+		$objectCacheFactory = $this->createMock( ObjectCacheFactory::class );
 		$this->assertInstanceOf(
 			BagOStuff::class,
-			$sut->newSharedCache( CACHE_ANYTHING )
+			$sut->newSharedCache( CACHE_ANYTHING, $objectCacheFactory )
 		);
 	}
 

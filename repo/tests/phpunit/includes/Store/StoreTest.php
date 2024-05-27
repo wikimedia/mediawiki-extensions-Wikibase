@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
+use ObjectCacheFactory;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Lib\Changes\ChangeStore;
@@ -52,7 +53,8 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 					'sharedCacheType' => CACHE_NONE,
 					'sharedCacheDuration' => 60 * 60,
 				] ),
-				WikibaseRepo::getPropertyInfoLookup()
+				WikibaseRepo::getPropertyInfoLookup(),
+				$this->createMock( ObjectCacheFactory::class )
 			),
 		];
 

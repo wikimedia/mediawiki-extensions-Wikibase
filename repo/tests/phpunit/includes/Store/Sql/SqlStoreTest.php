@@ -73,7 +73,8 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 				'sharedCacheType' => CACHE_NONE,
 				'sharedCacheDuration' => 60 * 60,
 			] ),
-			new MockPropertyInfoLookup()
+			new MockPropertyInfoLookup(),
+			$this->getServiceContainer()->getObjectCacheFactory()
 		);
 	}
 

@@ -1882,7 +1882,8 @@ return [
 			$services->getHookContainer(),
 			WikibaseRepo::getLocalEntitySource( $services ),
 			WikibaseRepo::getSettings( $services ),
-			WikibaseRepo::getPropertyInfoLookup( $services )
+			WikibaseRepo::getPropertyInfoLookup( $services ),
+			$services->getObjectCacheFactory()
 		);
 	},
 
@@ -1980,7 +1981,8 @@ return [
 			$services->getStatsdDataFactory(),
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
-			$settings->getSetting( 'termFallbackCacheVersion' )
+			$settings->getSetting( 'termFallbackCacheVersion' ),
+			$services->getObjectCacheFactory()
 		);
 	},
 

@@ -40,6 +40,9 @@ class PropertyLabelResolverTest extends ServiceWiringTestCase {
 			->willReturn( $repoDb );
 		$this->mockService( 'WikibaseClient.RepoDomainDbFactory', $dbFactory );
 
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getObjectCacheFactory' );
+
 		$this->assertInstanceOf(
 			PropertyLabelResolver::class,
 			$this->getService( 'WikibaseClient.PropertyLabelResolver' )
