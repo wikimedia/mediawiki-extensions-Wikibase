@@ -16,6 +16,9 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class CachingCommonsMediaFileNameLookupTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHttpRequestFactory' );
+
 		$this->assertInstanceOf(
 			CachingCommonsMediaFileNameLookup::class,
 			$this->getService( 'WikibaseRepo.CachingCommonsMediaFileNameLookup' )

@@ -38,6 +38,8 @@ class DefaultValidatorBuildersTest extends ServiceWiringTestCase {
 			new StaticContentLanguages( [] ) );
 		$this->mockService( 'WikibaseRepo.CachingCommonsMediaFileNameLookup',
 			$this->createMock( CachingCommonsMediaFileNameLookup::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getHttpRequestFactory' );
 
 		$this->assertInstanceOf(
 			ValidatorBuilders::class,
