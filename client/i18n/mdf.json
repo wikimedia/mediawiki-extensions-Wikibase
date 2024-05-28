@@ -5,15 +5,15 @@
 			"Валгриш"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} элементсь",
-	"wikibase-editlinks": "Петнемс лезксонди максф няфтематнень",
-	"wikibase-linkitem-addlinks": "Поладомс лезксонди максф няфтематнень",
-	"wikibase-linkitem-title": "Соткс лопать мархта",
-	"wikibase-linkitem-linkpage": "Сотомс лопать мархта",
-	"wikibase-linkitem-selectlink": "Кочкак сайт и лопа, конань ёралеть сюлмамс тя лопать мархта.",
+	"wikibase-dataitem": "Пялькс {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-editlinks": "Петнемс сюлмафкст",
+	"wikibase-linkitem-addlinks": "Сюлмафкст поладомс",
+	"wikibase-linkitem-title": "Лопать мархта сюлмавома",
+	"wikibase-linkitem-linkpage": "Лопать мархта сюлмама",
+	"wikibase-linkitem-selectlink": "Кочкак лопа, лопашире конатнень ёралеть сюлмамс тя лопать мархта.",
 	"wikibase-linkitem-input-site": "Кяль:",
 	"wikibase-linkitem-input-page": "Лопа:",
 	"wikibase-rc-hide-wikidata-hide": "Кяшемс",
 	"wikibase-rc-hide-wikidata-show": "Няфтемс",
-	"wikibase-otherprojects": "Лия проекттнень эса"
+	"wikibase-otherprojects": "Иля теварьсефкснень эса"
 }
