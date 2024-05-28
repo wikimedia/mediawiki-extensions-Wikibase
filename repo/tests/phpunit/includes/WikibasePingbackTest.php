@@ -153,6 +153,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			null,
 			null,
 			$requestFactory,
+			null,
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
 			self::TEST_KEY
 		);
@@ -185,6 +186,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			$extensions,
 			$wikibaseRepoSettings,
 			$requestFactory,
+			null,
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 		);
 	}
