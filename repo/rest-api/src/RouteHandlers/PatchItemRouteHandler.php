@@ -78,7 +78,6 @@ class PatchItemRouteHandler extends SimpleHandler {
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
-				WbRestApi::getItemDataRetriever(),
 				$itemSerializer,
 				new PatchJson( new JsonDiffJsonPatcher() ),
 				WbRestApi::getItemUpdater(),
@@ -90,7 +89,8 @@ class PatchItemRouteHandler extends SimpleHandler {
 						WbRestApi::getStatementDeserializer(),
 						WbRestApi::getSitelinkDeserializer()
 					)
-				)
+				),
+				WbRestApi::getItemDataRetriever()
 			),
 			$itemSerializer,
 			$responseFactory

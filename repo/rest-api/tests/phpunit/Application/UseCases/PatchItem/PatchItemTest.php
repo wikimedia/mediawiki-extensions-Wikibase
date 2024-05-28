@@ -31,6 +31,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -88,13 +90,12 @@ class PatchItemTest extends TestCase {
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'statement replaced by ' . __METHOD__;
-
-		$this->itemRepository->addItem(
-			new ItemWriteModel(
-				$itemId,
-				new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) )
-			)
+		$originalItem = new ItemWriteModel(
+			$itemId,
+			new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) )
 		);
+
+		$this->itemRepository->addItem( $originalItem );
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemRequest(
@@ -126,6 +127,18 @@ class PatchItemTest extends TestCase {
 				new StatementList()
 			),
 			$response->getItem()
+		);
+		$this->assertEquals(
+			new EditMetadata(
+				$editTags,
+				$isBot,
+				ItemEditSummary::newPatchSummary(
+					$comment,
+					$originalItem,
+					$this->itemRepository->getItemWriteModel( $itemId )
+				),
+			),
+			$this->itemRepository->getLatestRevisionEditMetadata( $itemId )
 		);
 	}
 
@@ -199,7 +212,6 @@ class PatchItemTest extends TestCase {
 			$this->validator,
 			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
-			$this->itemWriteModelRetriever,
 			new ItemSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
@@ -210,6 +222,7 @@ class PatchItemTest extends TestCase {
 			$this->patchJson,
 			$this->itemUpdater,
 			$this->patchedItemValidator,
+			$this->itemWriteModelRetriever,
 		);
 	}
 

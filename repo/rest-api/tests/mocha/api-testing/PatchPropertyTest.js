@@ -10,7 +10,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { formatPropertyEditSummary } = require( '../helpers/formatEditSummaries' );
+const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
 
 describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
@@ -83,7 +83,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 			assert.strictEqual(
 				editMetadata.comment,
-				formatPropertyEditSummary( 'update-languages-and-other-short', 'de, en, fr', editSummary )
+				formatWholeEntityEditSummary( 'update-languages-and-other-short', 'de, en, fr', editSummary )
 			);
 		} );
 

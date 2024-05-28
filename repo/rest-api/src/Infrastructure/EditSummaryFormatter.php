@@ -115,11 +115,9 @@ class EditSummaryFormatter {
 		} elseif ( $editSummary instanceof ItemEditSummary ) {
 			switch ( $editSummary->getEditAction() ) {
 				case EditSummary::ADD_ACTION:
-					$summary = new Summary( 'wbeditentity', 'create-item' );
-					$summary->setUserSummary( $editSummary->getUserComment() );
-					return $summary;
+					return $this->fullEntityEditSummaryConverter->newSummaryForItemCreate( $editSummary );
 				case EditSummary::PATCH_ACTION:
-					return new Summary();
+					return $this->fullEntityEditSummaryConverter->newSummaryForItemPatch( $editSummary );
 			}
 		}
 

@@ -31,20 +31,20 @@ class PatchItem {
 		PatchItemValidator $validator,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemRetriever $itemRetriever,
-		ItemWriteModelRetriever $itemWriteModelRetriever,
 		ItemSerializer $itemSerializer,
 		PatchJson $patchJson,
 		ItemUpdater $itemUpdater,
-		PatchedItemValidator $patchedItemValidator
+		PatchedItemValidator $patchedItemValidator,
+		ItemWriteModelRetriever $itemWriteModelRetriever
 	) {
 		$this->validator = $validator;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->itemRetriever = $itemRetriever;
-		$this->itemWriteModelRetriever = $itemWriteModelRetriever;
 		$this->itemSerializer = $itemSerializer;
 		$this->patchJson = $patchJson;
 		$this->itemUpdater = $itemUpdater;
 		$this->patchedItemValidator = $patchedItemValidator;
+		$this->itemWriteModelRetriever = $itemWriteModelRetriever;
 	}
 
 	/**
@@ -76,7 +76,8 @@ class PatchItem {
 			new EditMetadata(
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
-				ItemEditSummary::newPatchSummary( $providedMetadata->getComment() )
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				ItemEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalItem, $patchedItem )
 			)
 		);
 
