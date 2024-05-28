@@ -14,10 +14,11 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	let originalLastModified;
 	let originalRevisionId;
 	let predicatePropertyId;
+	const testEnglishLabel = `some-label-${utils.uniq()}`;
 
 	before( async function () {
 		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: 'en', value: `some-label-${utils.uniq()}` } ],
+			labels: [ { language: 'en', value: testEnglishLabel } ],
 			descriptions: [ { language: 'en', value: `some-description-${utils.uniq()}` } ],
 			aliases: [ { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
@@ -140,6 +141,41 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.fieldName, 'comment' );
 			assert.strictEqual( response.body.expectedType, 'string' );
 		} );
+	} );
+
+	describe( '409 error response', () => {
+
+		it( '"path" field target does not exist', async () => {
+			const operation = { op: 'remove', path: '/path/does/not/exist' };
+
+			const response = await newPatchItemRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
+			assert.include( response.body.message, operation.path );
+		} );
+
+		it( '"from" field target does not exist', async () => {
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: '/labels/en' };
+
+			const response = await newPatchItemRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
+			assert.include( response.body.message, operation.from );
+		} );
+
+		it( 'patch test condition failed', async () => {
+			const operation = { op: 'test', path: '/labels/en', value: 'german-label' };
+			const response = await newPatchItemRequestBuilder( testItemId, [ operation ] )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnglishLabel } );
+			assert.include( response.body.message, operation.path );
+			assert.include( response.body.message, JSON.stringify( operation.value ) );
+			assert.include( response.body.message, testEnglishLabel );
+		} );
+
 	} );
 
 } );

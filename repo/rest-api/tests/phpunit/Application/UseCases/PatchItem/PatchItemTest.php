@@ -142,6 +142,24 @@ class PatchItemTest extends TestCase {
 		}
 	}
 
+	public function testGivenErrorWhilePatch_throws(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$this->itemRepository->addItem( new ItemWriteModel( $itemId, new Fingerprint(), null, null ) );
+
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchJson = $this->createStub( PatchJson::class );
+		$this->patchJson->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchItemRequest( "$itemId", [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItem {
 		return new PatchItem(
 			$this->validator,
