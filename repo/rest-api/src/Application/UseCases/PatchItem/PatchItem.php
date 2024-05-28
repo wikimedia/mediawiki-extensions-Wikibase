@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
@@ -39,6 +40,9 @@ class PatchItem {
 		$this->itemUpdater = $itemUpdater;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PatchItemRequest $request ): PatchItemResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$providedMetadata = $deserializedRequest->getEditMetadata();
