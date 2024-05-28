@@ -3,7 +3,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use BagOStuff;
 use MediaWiki\Title\TitleFactory;
+use ObjectCacheFactory;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\SettingsArray;
@@ -42,6 +44,14 @@ class PropertyOrderProviderTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' )
 			->willReturn( $this->createMock( TitleFactory::class ) );
+
+		$objectCacheFactory = $this->createMock( ObjectCacheFactory::class );
+		$objectCacheFactory->expects( $this->once() )
+			->method( 'getLocalClusterInstance' )
+			->willReturn( $this->createMock( BagOStuff::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getObjectCacheFactory' )
+			->willReturn( $objectCacheFactory );
 
 		$this->assertInstanceOf(
 			CachingPropertyOrderProvider::class,
