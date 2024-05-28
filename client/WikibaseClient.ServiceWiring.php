@@ -663,7 +663,7 @@ return [
 			),
 			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
 			// sharedCacheDuration, but can not reuse these because this here is not shared.
-			ObjectCache::getLocalClusterInstance(),
+			$services->getObjectCacheFactory()->getLocalClusterInstance(),
 			60 * 60
 		);
 	},
