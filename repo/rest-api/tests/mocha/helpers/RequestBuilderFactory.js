@@ -99,6 +99,13 @@ module.exports = {
 			.withPathParam( 'property_id', propertyId );
 	},
 
+	newPatchItemRequestBuilder( itemId, patch ) {
+		return new RequestBuilder()
+			.withRoute( 'PATCH', '/entities/items/{item_id}' )
+			.withPathParam( 'item_id', itemId )
+			.withJsonBodyParam( 'patch', patch );
+	},
+
 	newPatchItemLabelsRequestBuilder( itemId, patch ) {
 		return new RequestBuilder()
 			.withRoute( 'PATCH', '/entities/items/{item_id}/labels' )

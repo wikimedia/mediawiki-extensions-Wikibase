@@ -19,6 +19,10 @@ class ItemEditSummary implements EditSummary {
 		return new self( self::ADD_ACTION, $userComment );
 	}
 
+	public static function newPatchSummary( ?string $userComment ): self {
+		return new self( self::PATCH_ACTION, $userComment );
+	}
+
 	public function getEditAction(): string {
 		return $this->editAction;
 	}

@@ -112,10 +112,15 @@ class EditSummaryFormatter {
 			$summary = new Summary( 'wbeditentity', 'update' );
 			$summary->setUserSummary( $editSummary->getUserComment() );
 			return $summary;
-		} elseif ( $editSummary instanceof ItemEditSummary && $editSummary->getEditAction() === EditSummary::ADD_ACTION ) {
-			$summary = new Summary( 'wbeditentity', 'create-item' );
-			$summary->setUserSummary( $editSummary->getUserComment() );
-			return $summary;
+		} elseif ( $editSummary instanceof ItemEditSummary ) {
+			switch ( $editSummary->getEditAction() ) {
+				case EditSummary::ADD_ACTION:
+					$summary = new Summary( 'wbeditentity', 'create-item' );
+					$summary->setUserSummary( $editSummary->getUserComment() );
+					return $summary;
+				case EditSummary::PATCH_ACTION:
+					return new Summary();
+			}
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

@@ -8,5 +8,10 @@
 		"path": "/wikibase/v0/entities/properties/{property_id}",
 		"method": "PATCH",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/items/{item_id}",
+		"method": "PATCH",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemRouteHandler::factory"
 	}
 ]
