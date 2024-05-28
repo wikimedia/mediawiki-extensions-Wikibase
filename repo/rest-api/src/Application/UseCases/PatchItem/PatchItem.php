@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItem;
 
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
@@ -19,6 +20,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 class PatchItem {
 
 	private PatchItemValidator $validator;
+	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private ItemRetriever $itemRetriever;
 	private ItemSerializer $itemSerializer;
@@ -29,6 +31,7 @@ class PatchItem {
 
 	public function __construct(
 		PatchItemValidator $validator,
+		AssertItemExists $assertItemExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized,
 		ItemRetriever $itemRetriever,
 		ItemWriteModelRetriever $itemWriteModelRetriever,
@@ -38,6 +41,7 @@ class PatchItem {
 		PatchedItemValidator $patchedItemValidator
 	) {
 		$this->validator = $validator;
+		$this->assertItemExists = $assertItemExists;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 		$this->itemRetriever = $itemRetriever;
 		$this->itemWriteModelRetriever = $itemWriteModelRetriever;
@@ -55,6 +59,8 @@ class PatchItem {
 		$providedMetadata = $deserializedRequest->getEditMetadata();
 		$itemId = $deserializedRequest->getItemId();
 		$originalItem = $this->itemWriteModelRetriever->getItemWriteModel( $itemId );
+
+		$this->assertItemExists->execute( $itemId );
 
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $providedMetadata->getUser() );
 

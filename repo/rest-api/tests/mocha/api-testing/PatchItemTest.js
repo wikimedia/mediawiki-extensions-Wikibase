@@ -143,6 +143,17 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
+	describe( '404 error response', () => {
+		it( 'item not found', async () => {
+			const itemId = 'Q99999';
+			const response = await newPatchItemRequestBuilder( itemId, [] )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 404, 'item-not-found' );
+			assert.include( response.body.message, itemId );
+		} );
+	} );
+
 	describe( '409 error response', () => {
 
 		it( '"path" field target does not exist', async () => {
@@ -176,6 +187,17 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, testEnglishLabel );
 		} );
 
+		it( 'item is a redirect', async () => {
+			const redirectTarget = testItemId;
+			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
+
+			const response = await newPatchItemRequestBuilder( redirectSource, [] )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 409, 'redirected-item' );
+			assert.include( response.body.message, redirectSource );
+			assert.include( response.body.message, redirectTarget );
+		} );
 	} );
 
 	describe( '422 error response', () => {

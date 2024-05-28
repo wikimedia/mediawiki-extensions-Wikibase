@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
@@ -66,6 +67,7 @@ class PatchItemTest extends TestCase {
 	private PatchJson $patchJson;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private AssertItemExists $assertItemExists;
 	private PatchedItemValidator $patchedItemValidator;
 	private ItemWriteModelRetriever $itemWriteModelRetriever;
 
@@ -81,6 +83,7 @@ class PatchItemTest extends TestCase {
 		$this->itemUpdater = $this->itemRepository;
 		$this->patchedItemValidator = new PatchedItemValidator( $this->newItemDeserializer() );
 		$this->itemWriteModelRetriever = $this->itemRepository;
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 	}
 
 	public function testHappyPath(): void {
@@ -174,6 +177,20 @@ class PatchItemTest extends TestCase {
 		}
 	}
 
+	public function testGivenItemNotFoundOrRedirect_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertItemExists = $this->createStub( AssertItemExists::class );
+		$this->assertItemExists->method( 'execute' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchItemRequest( 'Q999999', [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenUnauthorizedRequest_throws(): void {
 		$user = 'bad-user';
 		$itemId = new ItemId( 'Q123' );
@@ -197,6 +214,7 @@ class PatchItemTest extends TestCase {
 	private function newUseCase(): PatchItem {
 		return new PatchItem(
 			$this->validator,
+			$this->assertItemExists,
 			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
 			$this->itemWriteModelRetriever,
