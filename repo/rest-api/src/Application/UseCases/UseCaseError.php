@@ -49,6 +49,9 @@ class UseCaseError extends UseCaseException {
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
+	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
+	public const PATCHED_ITEM_INVALID_FIELD = 'patched-item-invalid-field';
+	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
 	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
 	public const PATCHED_PROPERTY_LABEL_DUPLICATE = 'patched-property-label-duplicate';
 	public const PATCHED_PROPERTY_INVALID_FIELD = 'patched-property-invalid-field';
@@ -187,6 +190,9 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_MATCHING_ITEM_ID,
 		],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
+		self::PATCHED_ITEM_UNEXPECTED_FIELD => [],
+		self::PATCHED_ITEM_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
 		self::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],

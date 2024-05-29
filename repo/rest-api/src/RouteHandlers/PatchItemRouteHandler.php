@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemResponse;
@@ -77,16 +78,19 @@ class PatchItemRouteHandler extends SimpleHandler {
 				WbRestApi::getValidatingRequestDeserializer(),
 				WbRestApi::getAssertUserIsAuthorized(),
 				WbRestApi::getItemDataRetriever(),
+				WbRestApi::getItemDataRetriever(),
 				$itemSerializer,
-				new ItemDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer(),
-					WbRestApi::getStatementDeserializer(),
-					WbRestApi::getSitelinkDeserializer()
-				),
 				new PatchJson( new JsonDiffJsonPatcher() ),
-				WbRestApi::getItemUpdater()
+				WbRestApi::getItemUpdater(),
+				new PatchedItemValidator(
+					new ItemDeserializer(
+						new LabelsDeserializer(),
+						new DescriptionsDeserializer(),
+						new AliasesDeserializer(),
+						WbRestApi::getStatementDeserializer(),
+						WbRestApi::getSitelinkDeserializer()
+					)
+				)
 			),
 			$itemSerializer,
 			$responseFactory
