@@ -9,7 +9,7 @@
 			"Элдин беги"
 		]
 	},
-	"wikibase-desc": "Түзүмдөлгөн маалымат сактагычы",
+	"wikibase-desc": "Түзүмдөлгөн маалымат сактагыч",
 	"wikibase-entity-item": "Элемент",
 	"nstab-item": "Элемент",
 	"wikibase-edit": "түзөтүү",
@@ -30,6 +30,7 @@
 	"wikibase-description-empty": "сыпаттама жок",
 	"wikibase-content-language-edit-label": "Тил:",
 	"wikibase-diffview-reference": "булак",
+	"wikibase-diffview-rank": "орун",
 	"wikibase-diffview-label": "аталыш",
 	"wikibase-diffview-description": "сыпаттама",
 	"wikibase-diffview-link": "шилтемелер",
@@ -40,7 +41,7 @@
 	"wikibase-remove": "өчүрүү",
 	"wikibase-statementview-rank-normal": "Кадимки ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|булак}}",
-	"wikibase-copyrighttooltip-acknowledge": "Келечектеги түзөтүүлөрүм үчүн бул шарттарды кабыл алам. Муну кайрадан көрсөтпөө.",
+	"wikibase-copyrighttooltip-acknowledge": "Кийинки түзөтүүлөрүм үчүн да бул шарттарды кабыл алам. Кайрадан көрсөтүлбөсүн.",
 	"wikibase-entityselector-more": "көбүрөөк",
 	"wikibase-anonymouseditwarning-heading": "Кирген жоксуз",
 	"wikibase-anonymouseditwarning-dismiss-button": "Кирбестен түзөтүү",

@@ -5,7 +5,8 @@
 			"Ladsgroup",
 			"Macofe",
 			"Satdeep gill",
-			"Kuldeepburjbhalaike"
+			"Kuldeepburjbhalaike",
+			"Cabal"
 		]
 	},
 	"wikibase-desc": "ਸੰਗਠਿਤ ਡਾਟਾ ਰਿਪੋਜ਼ਟਰੀ",
@@ -18,7 +19,7 @@
 	"tooltip-ca-nstab-property": "ਪ੍ਰਾਪਰਟੀ ਵੇਖੋ",
 	"wikibase-edit": "ਸੋਧੋ",
 	"wikibase-save": "ਸਾਂਭੋ",
-	"wikibase-publish": "ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+	"wikibase-publish": "ਛਾਪੋ",
 	"wikibase-cancel": "ਰੱਦ ਕਰੋ",
 	"wikibase-add": "ਜੋੜੋ",
 	"wikibase-addqualifier": "ਵਿਸ਼ੇਸ਼ਕ ਜੋੜੋ",
@@ -51,7 +52,7 @@
 	"wikibase-aliases-edit-label": "ਉਪਨਾਮ, ਪਾਈਪ-ਵੱਖ ਕੀਤੇਃ",
 	"wikibase-content-language-edit-label": "ਭਾਸ਼ਾ:",
 	"wikibase-diffview-reference": "ਹਵਾਲਾ",
-	"wikibase-diffview-rank": "ਰੈਂਕ",
+	"wikibase-diffview-rank": "ਦਰਜਾ",
 	"wikibase-diffview-rank-preferred": "ਤਰਜੀਹੀ ਰੈਂਕ",
 	"wikibase-diffview-rank-normal": "ਆਮ ਰੈਂਕ",
 	"wikibase-diffview-rank-deprecated": "ਨਾਪਸੰਦ ਰੈਂਕ",
