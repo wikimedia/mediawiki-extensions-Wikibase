@@ -54,6 +54,8 @@
 	"wikibase-rc-show-wikidata-pref": "Vis redigeringer af {{WBREPONAME}} i seneste ændringer",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redigering",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-redigeringer",
+	"wikibase-rcfilters-hide-wikibase-description": "Redigeringer som kommer fra {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Vær opmærksom på, at der kan gå flere minutter før ændringerne er synlige på alle wikier.",
 	"wikibase-watchlist-show-changes-pref": "Vis redigeringer af {{WBREPONAME}} på din overvågningsliste",
 	"wikibase-error-serialize-error": "Serialisering af data mislykkkedes",

@@ -424,7 +424,7 @@
 	"wikibase-api-no-data": "Er zijn geen gegevens om te verwerken.",
 	"wikibase-api-no-external-page": "De externe clientsite \"$1\" heeft geen paginagegevens verstrekt voor \"$2\".",
 	"wikibase-api-nosuchrevid": "Geen versie met deze ID gevonden.",
-	"wikibase-api-no-such-claim": "Kon een dergelijke bewering niet vinden.",
+	"wikibase-api-no-such-claim": "Kon een dergelijke verklaring niet vinden.",
 	"wikibase-api-no-such-entity": "Het was niet mogelijk een entiteit met ID \"$1\" te vinden.",
 	"wikibase-api-no-such-entity-link": "Kan geen item vinden met een sitekoppeling naar de opgegeven site- en paginanaam.",
 	"wikibase-api-no-such-reference": "Kon een dergelijke referentie niet vinden.",

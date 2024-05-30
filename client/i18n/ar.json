@@ -29,14 +29,14 @@
 			"ديفيد",
 			"زكريا",
 			"علاء",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Hubaishan"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "ينبغي أن يكون نقلك الآن [$1 منعكسا في وصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] قد أزيلت. نطلب منك التحقق من حدوث هذا.",
-	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف عنصر {{WBREPONAME}} المرتبط. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-linked": "تم ربط عنصر {{WBREPONAME}} مع هذه الصفحة.",
@@ -160,6 +160,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "القيمة السابقة كانت صحيحة في وقت سابق لكنها الآن قديمة.",
 	"wikibase-client-data-bridge-references-heading": "مراجع",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "أنت غير مسجل الدخول",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "لم تقم بتسجيل الدخول. إذا <strong>سجلتَ الدخول</strong> أو <strong>أنشأت حساب</strong>، فسيتم إسناد تعديلاتك إلى اسم المستخدم الخاص بك، إلى جانب المزايا الأخرى.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>تحذير</strong>: لمُ تُسجِّل الدخول. سيظهر عنوان بروتوكول الإنترنت الخاص بك علناً بعد قيامك بأي تعديل. إذا <strong>سجلت دخولك</strong> أو <strong>أنشأت حسابًا</strong>، فتعديلاتك ستنسب لاسم المستخدم الخاص بك، مع العديد من الميزات الأخرى.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "تحرير من غير تسجيل الدخول",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "تسجيل الدخول أو إنشاء حساب",
