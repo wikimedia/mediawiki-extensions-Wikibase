@@ -25,11 +25,13 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -61,6 +63,7 @@ class PatchItemTest extends TestCase {
 	private const ALLOWED_BADGES = [ 'Q999' ];
 
 	private InMemoryItemRepository $itemRepository;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 	private PatchItemValidator $validator;
 	private PatchJson $patchJson;
 	private ItemRetriever $itemRetriever;
@@ -72,6 +75,7 @@ class PatchItemTest extends TestCase {
 		$this->itemRepository = new InMemoryItemRepository();
 
 		$this->validator = new TestValidatingRequestDeserializer();
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->getMockBuilder( EntityRevisionLookupItemDataRetriever::class )
 			->onlyMethods( [ 'getItem' ] )
@@ -160,9 +164,30 @@ class PatchItemTest extends TestCase {
 		}
 	}
 
+	public function testGivenUnauthorizedRequest_throws(): void {
+		$user = 'bad-user';
+		$itemId = new ItemId( 'Q123' );
+		$request = new PatchItemRequest( (string)$itemId, [], [], false, null, $user );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->expects( $this->once() )
+			->method( 'checkEditPermissions' )
+			->with( $itemId, User::withUsername( $user ) )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): PatchItem {
 		return new PatchItem(
 			$this->validator,
+			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
 			new ItemSerializer(
 				new LabelsSerializer(),

@@ -103,7 +103,8 @@ module.exports = {
 		return new RequestBuilder()
 			.withRoute( 'PATCH', '/entities/items/{item_id}' )
 			.withPathParam( 'item_id', itemId )
-			.withJsonBodyParam( 'patch', patch );
+			.withJsonBodyParam( 'patch', patch )
+			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
 	},
 
 	newPatchItemLabelsRequestBuilder( itemId, patch ) {
