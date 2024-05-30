@@ -221,7 +221,8 @@ return call_user_func( function() {
 							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 							'tags' => $settings->getSetting( 'viewUiTags' ),
 							'tempUserEnabled' => $tempUserEnabled,
-							'registeredTypeIds' => $dataTypeDefinitions->getTypeIds(),
+							'dataTypes' => $dataTypeDefinitions->getTypeIds(),
+							'valueTypes' => array_values( array_unique( $dataTypeDefinitions->getValueTypes() ) ),
 						];
 					},
 				],
