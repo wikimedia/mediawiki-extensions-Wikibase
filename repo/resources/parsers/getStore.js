@@ -2,11 +2,11 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb, vp, dv ) {
+( function ( wb, vp ) {
 	'use strict';
 
 	var getApiBasedValueParserConstructor = require( './getApiBasedValueParserConstructor.js' ),
-		registeredTypeIds = require( '../config.json' ).registeredTypeIds;
+		{ dataTypes, valueTypes } = require( '../config.json' );
 
 	/**
 	 * @param {wikibase.api.RepoApi} api
@@ -17,14 +17,21 @@
 			ApiBasedValueParser = getApiBasedValueParserConstructor( apiCaller ),
 			parserStore = new vp.ValueParserStore( vp.NullParser );
 
-		// eslint-disable-next-line no-jquery/no-each-util
-		$.each( registeredTypeIds, function ( _idx, parserId ) {
+		dataTypes.forEach( function ( parserId ) {
 			var Parser = util.inherit(
 				ApiBasedValueParser,
 				{ API_VALUE_PARSER_ID: parserId }
 			);
 
 			parserStore.registerDataTypeParser( Parser, parserId );
+		} );
+		valueTypes.forEach( function ( parserId ) {
+			var Parser = util.inherit(
+				ApiBasedValueParser,
+				{ API_VALUE_PARSER_ID: parserId }
+			);
+
+			parserStore.registerDataValueParser( Parser, parserId );
 		} );
 
 		return parserStore;
