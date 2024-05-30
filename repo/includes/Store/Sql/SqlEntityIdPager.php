@@ -110,17 +110,18 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	public function fetchIds( $limit ) {
 		Assert::parameter( is_int( $limit ) && $limit > 0, '$limit', '$limit must be a positive integer' );
 
-		$queryBuilder = $this->db->connections()->getReadConnection()->newSelectQueryBuilder();
+		$dbr = $this->db->connections()->getReadConnection();
+		$queryBuilder = $dbr->newSelectQueryBuilder();
 
 		$queryBuilder->select( LinkCache::getSelectFields() )
 			->from( 'page' )
 			->where( [
-				'page_id > ' . (int)$this->position,
+				$dbr->expr( 'page_id', '>', (int)$this->position ),
 				'page_namespace' => $this->getEntityNamespaces( $this->entityTypes ),
 			] );
 
 		if ( $this->cutoffPosition !== null ) {
-			$queryBuilder->andWhere( 'page_id <= ' . (int)$this->cutoffPosition );
+			$queryBuilder->andWhere( $dbr->expr( 'page_id', '<=', (int)$this->cutoffPosition ) );
 		}
 
 		if ( $this->redirectMode === self::ONLY_REDIRECTS ) {
@@ -132,7 +133,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 			$queryBuilder->orderBy( 'page_id', SelectQueryBuilder::SORT_ASC );
 			if ( $this->redirectMode === self::NO_REDIRECTS ) {
 				$queryBuilder->leftJoin( 'redirect', null, 'page_id = rd_from' )
-					->andWhere( 'rd_from IS NULL' );
+					->andWhere( [ 'rd_from' => null ] );
 			}
 		}
 

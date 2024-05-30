@@ -165,7 +165,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	}
 
 	public function addWikibaseConditions( IReadableDatabase $dbr, array &$conds ): void {
-		$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
+		$conds[] = $dbr->expr( 'rc_source', '!=', RecentChangeFactory::SRC_WIKIBASE );
 	}
 
 	protected function hasWikibaseChangesEnabled(): bool {

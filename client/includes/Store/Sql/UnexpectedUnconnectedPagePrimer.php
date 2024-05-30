@@ -10,7 +10,6 @@ use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\ConnectionManager;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -197,21 +196,17 @@ class UnexpectedUnconnectedPagePrimer {
 			->where( [
 				'page_namespace' => $this->namespaceChecker->getWikibaseNamespaces(),
 				'page_is_redirect' => 0,
-				'page_id > ' . $this->position,
-				'page_id <= ' . $lastPosition,
+				$dbr->expr( 'page_id', '>', $this->position ),
+				$dbr->expr( 'page_id', '<=', $lastPosition ),
 			] )
 			// Either the propname needs to be null (the page prop is not set yet), or the
 			// propname matches and the value is larger than 0 (which is the legacy format
 			// where we used positive sort keys).
-			->andWhere( $dbr->makeList( [
-					'pp_propname IS NULL',
-					$dbr->makeList( [
-						'pp_propname = ' . $dbr->addQuotes( 'unexpectedUnconnectedPage' ),
-						'pp_sortkey > 0',
-					], IDatabase::LIST_AND ),
-				],
-				IDatabase::LIST_OR
-			) )
+			->andWhere( $dbr->expr( 'pp_propname', '=', null )
+				->orExpr(
+					$dbr->expr( 'pp_propname', '=', 'unexpectedUnconnectedPage' )
+						->and( 'pp_sortkey', '>', 0 )
+				) )
 			->orderBy( 'page_id', SelectQueryBuilder::SORT_ASC )
 			->limit( $this->batchSize )
 			->caller( __METHOD__ )->fetchResultSet();
