@@ -168,7 +168,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 			->join( 'wbt_text_in_lang', null, 'wbtl_text_in_lang_id=wbxl_id' )
 			->join( 'wbt_text', null, 'wbxl_text_id=wbx_id' );
 		if ( $types !== null ) {
-			$queryBuilder->where( [ 'wbtl_type_id' => $this->lookupTypeIds( $types ) ] );
+			$queryBuilder->where( [ 'wbtl_type_id' => array_values( $this->lookupTypeIds( $types ) ) ] );
 		}
 		if ( $languages !== null ) {
 			$queryBuilder->where( [ 'wbxl_language' => $languages ] );
