@@ -201,7 +201,7 @@ class WikiPageActionEntityChangeFactoryTest extends \MediaWikiIntegrationTestCas
 	private function newItemRedirect(): ItemContent {
 		$content = $this->createStub( ItemContent::class );
 		$content->method( 'isRedirect' )->willReturn( true );
-		$content->method( 'copy' )->willReturn( $content );
+		$content->method( 'copy' )->willReturnSelf();
 
 		return $content;
 	}
