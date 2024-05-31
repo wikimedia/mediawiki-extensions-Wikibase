@@ -25,7 +25,11 @@
  */
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -34,6 +38,7 @@ use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormat;
@@ -180,6 +185,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildCoordinateValidators();
 			},
+			'deserializer-builder' => GlobeCoordinateValue::class,
 			'parser-factory-callback' => function( ParserOptions $options ) {
 				return new GlobeCoordinateParser( $options );
 			},
@@ -208,6 +214,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildMonolingualTextValidators( $maxLength );
 			},
+			'deserializer-builder' => MonolingualTextValue::class,
 			'parser-factory-callback' => function( ParserOptions $options ) {
 				return new MonolingualTextParser( $options );
 			},
@@ -231,6 +238,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildQuantityValidators();
 			},
+			'deserializer-builder' => QuantityValue::class,
 			'parser-factory-callback' => function( ParserOptions $options ) {
 				$language = MediaWikiServices::getInstance()->getLanguageFactory()
 					->getLanguage( $options->getOption( ValueParser::OPT_LANG ) );
@@ -268,6 +276,7 @@ return call_user_func( function() {
 				// max length is also used in MetaDataBridgeConfig, make sure to keep in sync
 				return $factory->buildStringValidators( $maxLength );
 			},
+			'deserializer-builder' => StringValue::class,
 			'parser-factory-callback' => function ( ParserOptions $options ) {
 				$normalizer = WikibaseRepo::getStringNormalizer();
 				return new StringParser( new WikibaseStringValueNormalizer( $normalizer ) );
@@ -298,6 +307,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildTimeValidators();
 			},
+			'deserializer-builder' => TimeValue::class,
 			'parser-factory-callback' => function( ParserOptions $options ) {
 				$factory = new TimeParserFactory( $options );
 				return $factory->getTimeParser();
@@ -369,6 +379,27 @@ return call_user_func( function() {
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildEntityValidators();
+			},
+			'deserializer-builder' => static function ( $value ) {
+				// TODO this should perhaps be factored out into a class
+				if ( isset( $value['id'] ) ) {
+					try {
+						return new EntityIdValue( WikibaseRepo::getEntityIdParser()->parse( $value['id'] ) );
+					} catch ( EntityIdParsingException $parsingException ) {
+						if ( is_string( $value['id'] ) ) {
+							$message = 'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with';
+						} else {
+							$message = 'Can not parse id of type ' . gettype( $value['id'] ) . ' to build EntityIdValue with';
+						}
+						throw new InvalidArgumentException(
+							$message,
+							0,
+							$parsingException
+						);
+					}
+				} else {
+					return EntityIdValue::newFromArray( $value );
+				}
 			},
 			'parser-factory-callback' => function ( ParserOptions $options ) {
 				$entityIdParser = WikibaseRepo::getEntityIdParser();

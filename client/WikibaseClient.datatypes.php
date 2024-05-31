@@ -22,8 +22,14 @@
  * @author Daniel Kinzler
  */
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
 
 return call_user_func( function() {
@@ -44,24 +50,28 @@ return call_user_func( function() {
 			},
 		],
 		'VT:globecoordinate' => [
+			'deserializer-builder' => GlobeCoordinateValue::class,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newGlobeCoordinateFormatter( $format, $options );
 			},
 		],
 		'VT:monolingualtext' => [
+			'deserializer-builder' => MonolingualTextValue::class,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newMonolingualFormatter( $format, $options );
 			},
 		],
 		'VT:quantity' => [
+			'deserializer-builder' => QuantityValue::class,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newQuantityFormatter( $format, $options );
 			},
 		],
 		'VT:string' => [
+			'deserializer-builder' => StringValue::class,
 			'formatter-factory-callback' => function( $format ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newStringFormatter( $format );
@@ -92,12 +102,18 @@ return call_user_func( function() {
 			},
 		],
 		'VT:time' => [
+			'deserializer-builder' => TimeValue::class,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newTimeFormatter( $format, $options );
 			},
 		],
 		'VT:wikibase-entityid' => [
+			'deserializer-builder' => function ( $value ) {
+				return isset( $value['id'] )
+					? new EntityIdValue( WikibaseClient::getEntityIdParser()->parse( $value['id'] ) )
+					: EntityIdValue::newFromArray( $value );
+			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newEntityIdFormatter( $format, $options );

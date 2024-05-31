@@ -21,6 +21,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'VT:FOO' => [
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooValueFormatter',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooValueParser',
+				'deserializer-builder' => 'FooDeserializer',
 				'rdf-builder-factory-callback' => 'DataTypeDefinitionsTest::getFooRdfBuilder',
 			],
 			'PT:foo' => [
@@ -34,6 +35,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'VT:BAR' => [
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValueValidator',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getBarValueParser',
+				'deserializer-builder' => 'BarDeserializer',
 				'rdf-builder-factory-callback' => 'DataTypeDefinitionsTest::getBarValueRdfBuilder',
 			],
 			'PT:bar' => [
@@ -101,6 +103,16 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'VT:BAR' => 'DataTypeDefinitionsTest::getBarValueParser',
 		];
 		$this->assertSame( $expected, $defs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
+	}
+
+	public function testGetDataValueDeserializerBuilders() {
+		$this->assertSame(
+			[
+				'FOO' => 'FooDeserializer',
+				'BAR' => 'BarDeserializer',
+			],
+			$this->getDataTypeDefinitions()->getDataValueDeserializerBuilders()
+		);
 	}
 
 	public function testGetFormatterFactoryCallbacks() {

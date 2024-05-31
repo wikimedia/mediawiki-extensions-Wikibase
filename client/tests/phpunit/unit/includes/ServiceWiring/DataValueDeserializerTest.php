@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
+use Wikibase\Lib\DataTypeDefinitions;
 
 /**
  * @coversNothing
@@ -16,6 +17,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 class DataValueDeserializerTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->mockDataTypeDefs();
 		$dataValueDeserializer = $this->getService( 'WikibaseClient.DataValueDeserializer' );
 		$this->assertInstanceOf( DataValueDeserializer::class, $dataValueDeserializer );
 	}
@@ -40,12 +42,20 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 	 * @dataProvider dataValueProvider
 	 */
 	public function testCanDeserialize( $dataValue ): void {
+		$this->mockDataTypeDefs();
 		$dataValueDeserializer = $this->getService( 'WikibaseClient.DataValueDeserializer' );
 
 		$this->assertTrue( $dataValueDeserializer->isDeserializerFor( [
 			'type' => $dataValue,
 			'value' => null,
 		] ) );
+	}
+
+	public function mockDataTypeDefs(): void {
+		$this->mockService(
+			'WikibaseClient.DataTypeDefinitions',
+			new DataTypeDefinitions( require __DIR__ . '/../../../../../WikibaseClient.datatypes.php' )
+		);
 	}
 
 }

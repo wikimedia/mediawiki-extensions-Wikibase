@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -18,6 +18,7 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class DataValueDeserializerTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->mockDataTypeDefs();
 		$this->assertInstanceOf(
 			DataValueDeserializer::class,
 			$this->getService( 'WikibaseRepo.DataValueDeserializer' )
@@ -26,8 +27,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 
 	/** @dataProvider provideInvalidId */
 	public function testEntityIdErrorHandling( $invalidId ) {
-		$this->mockService( 'WikibaseRepo.EntityIdParser',
-			new DispatchingEntityIdParser( [ /* no builders => always throw */ ] ) );
+		$this->mockDataTypeDefs();
 		/** @var DataValueDeserializer $deserializer */
 		'@phan-var DataValueDeserializer $deserializer';
 		$deserializer = $this->getService( 'WikibaseRepo.DataValueDeserializer' );
@@ -42,6 +42,13 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 	public static function provideInvalidId(): iterable {
 		yield 'empty string' => [ '' ];
 		yield 'T334719' => [ [ 'array' => true ] ];
+	}
+
+	public function mockDataTypeDefs(): void {
+		$this->mockService(
+			'WikibaseRepo.DataTypeDefinitions',
+			new DataTypeDefinitions( require __DIR__ . '/../../../../WikibaseRepo.datatypes.php' )
+		);
 	}
 
 }

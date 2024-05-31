@@ -3,12 +3,7 @@
 declare( strict_types = 1 );
 
 use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\Geo\Values\GlobeCoordinateValue;
-use DataValues\MonolingualTextValue;
-use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
-use DataValues\StringValue;
-use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
@@ -44,8 +39,6 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Deserializers\SnakValueParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -505,35 +498,10 @@ return [
 	},
 
 	'WikibaseRepo.DataValueDeserializer' => function ( MediaWikiServices $services ): DataValueDeserializer {
-		return new DataValueDeserializer( [
-			'string' => StringValue::class,
-			'unknown' => UnknownValue::class,
-			'globecoordinate' => GlobeCoordinateValue::class,
-			'monolingualtext' => MonolingualTextValue::class,
-			'quantity' => QuantityValue::class,
-			'time' => TimeValue::class,
-			'wikibase-entityid' => static function ( $value ) use ( $services ) {
-				// TODO this should perhaps be factored out into a class
-				if ( isset( $value['id'] ) ) {
-					try {
-						return new EntityIdValue( WikibaseRepo::getEntityIdParser( $services )->parse( $value['id'] ) );
-					} catch ( EntityIdParsingException $parsingException ) {
-						if ( is_string( $value['id'] ) ) {
-							$message = 'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with';
-						} else {
-							$message = 'Can not parse id of type ' . gettype( $value['id'] ) . ' to build EntityIdValue with';
-						}
-						throw new InvalidArgumentException(
-							$message,
-							0,
-							$parsingException
-						);
-					}
-				} else {
-					return EntityIdValue::newFromArray( $value );
-				}
-			},
-		] );
+		return new DataValueDeserializer( array_merge(
+			WikibaseRepo::getDataTypeDefinitions( $services )->getDataValueDeserializerBuilders(),
+			[ 'unknown' => UnknownValue::class ]
+		) );
 	},
 
 	'WikibaseRepo.DataValueFactory' => function ( MediaWikiServices $services ): DataValueFactory {

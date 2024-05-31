@@ -43,6 +43,8 @@ class DataTypeDefinitions {
 	 * definitions for the property data types.
 	 */
 	private const RESOLVED_MODE = 'resolved';
+	private const VALUE_TYPE_PREFIX = 'VT:';
+	private const DATA_TYPE_PREFIX = 'PT:';
 
 	/**
 	 * @var array[]
@@ -139,7 +141,7 @@ class DataTypeDefinitions {
 	 * @return string[] a list of all registered property data types.
 	 */
 	public function getTypeIds() {
-		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, 'PT:' );
+		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, self::DATA_TYPE_PREFIX );
 		return array_keys( $ptDefinitions );
 	}
 
@@ -224,7 +226,7 @@ class DataTypeDefinitions {
 	public function getValueTypes() {
 		return $this->getFilteredByPrefix(
 			$this->getMapForDefinitionField( 'value-type' ),
-			'PT:'
+			self::DATA_TYPE_PREFIX
 		);
 	}
 
@@ -237,7 +239,7 @@ class DataTypeDefinitions {
 	public function getRdfTypeUris() {
 		return $this->getFilteredByPrefix(
 			$this->getMapForDefinitionField( 'rdf-uri' ),
-			'PT:'
+			self::DATA_TYPE_PREFIX
 		);
 	}
 
@@ -271,6 +273,21 @@ class DataTypeDefinitions {
 			$this->getMapForDefinitionField( 'parser-factory-callback' ),
 			$mode
 		);
+	}
+
+	/**
+	 * @return array<callable|string> map of value type IDs to deserializer builder callbacks or DataValue class names
+	 */
+	public function getDataValueDeserializerBuilders(): array {
+		$allBuilders = $this->getMapForDefinitionField( 'deserializer-builder' );
+		$dataValueBuilders = [];
+		foreach ( $allBuilders as $type => $builder ) {
+			if ( str_starts_with( $type, self::VALUE_TYPE_PREFIX ) ) {
+				$dataValueBuilders[substr( $type, strlen( self::VALUE_TYPE_PREFIX ) )] = $builder;
+			}
+		}
+
+		return $dataValueBuilders;
 	}
 
 	/**
@@ -339,7 +356,7 @@ class DataTypeDefinitions {
 			},
 			$this->getFilteredByPrefix(
 				$this->getMapForDefinitionField( 'rdf-data-type' ),
-				'PT:'
+				self::DATA_TYPE_PREFIX
 			)
 		);
 	}
