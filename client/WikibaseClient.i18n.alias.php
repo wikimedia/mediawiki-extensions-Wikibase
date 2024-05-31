@@ -73,6 +73,8 @@ $specialPageAliases['fi'] = [
 
 /** Hebrew (עברית) */
 $specialPageAliases['he'] = [
+	'EntityUsage' => [ 'שימוש בישויות' ],
+	'PagesWithBadges' => [ 'דפים עם סמלים' ],
 	'UnconnectedPages' => [ 'דפים_שאינם_מקושרים_לפריטים', 'דפים_שלא_מקושרים_לפריטים' ],
 ];
 
