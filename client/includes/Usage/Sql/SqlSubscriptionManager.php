@@ -96,7 +96,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 				->from( 'wb_changes_subscription' )
 				->where( [
 					'cs_subscriber_id' => $subscriber,
-					'cs_entity_id' => $subscriptions,
+					'cs_entity_id' => array_values( $subscriptions ),
 				] )
 				->caller( __METHOD__ )->fetchFieldValues();
 		}
