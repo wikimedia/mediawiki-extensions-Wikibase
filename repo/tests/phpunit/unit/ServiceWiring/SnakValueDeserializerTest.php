@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -16,20 +16,17 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  *
  * @license GPL-2.0-or-later
  */
-class SnakValueParserTest extends ServiceWiringTestCase {
+class SnakValueDeserializerTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->mockService(
-			'WikibaseRepo.DataValueDeserializer',
-			$this->createMock( DataValueDeserializer::class )
-		);
 		$dataTypeDefinitions = $this->createStub( DataTypeDefinitions::class );
-		$dataTypeDefinitions->method( 'getParserFactoryCallbacks' )->willReturn( [] );
+		$dataTypeDefinitions->method( 'getDeserializerBuilders' )->willReturn( [] );
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions', $dataTypeDefinitions );
+		$this->mockService( 'WikibaseRepo.DataValueDeserializer', new DataValueDeserializer( [] ) );
 
 		$this->assertInstanceOf(
-			SnakValueParser::class,
-			$this->getService( 'WikibaseRepo.SnakValueParser' )
+			SnakValueDeserializer::class,
+			$this->getService( 'WikibaseRepo.SnakValueDeserializer' )
 		);
 	}
 }

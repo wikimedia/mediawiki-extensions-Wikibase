@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
@@ -967,7 +967,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$dataTypeLookup,
 			new DataValuesValueDeserializer(
 				new DataTypeFactoryValueTypeLookup( new DataTypeFactory( [] ) ),
-				new SnakValueParser( new DataValueDeserializer( [] ), [] ),
+				new SnakValueDeserializer( new DataValueDeserializer( [] ), [] ),
 				new BuilderBasedDataTypeValidatorFactory( [] )
 			)
 		);

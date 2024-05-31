@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use UnexpectedValueException;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -271,6 +272,22 @@ class DataTypeDefinitions {
 	public function getParserFactoryCallbacks( $mode = self::RESOLVED_MODE ) {
 		return $this->applyMode(
 			$this->getMapForDefinitionField( 'parser-factory-callback' ),
+			$mode
+		);
+	}
+
+	/**
+	 * @see SnakValueDeserializer
+	 *
+	 * @param string $mode PREFIXED_MODE to request a callback map with "VT:" and "PT:" prefixes
+	 * for value types and property data types, or RESOLVED_MODE to retrieve a builder map for
+	 * property data types only, with value type fallback applied.
+	 *
+	 * @return array<callable|string>
+	 */
+	public function getDeserializerBuilders( $mode = self::RESOLVED_MODE ) {
+		return $this->applyMode(
+			$this->getMapForDefinitionField( 'deserializer-builder' ),
 			$mode
 		);
 	}

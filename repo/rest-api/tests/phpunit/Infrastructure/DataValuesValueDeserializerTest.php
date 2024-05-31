@@ -170,7 +170,7 @@ class DataValuesValueDeserializerTest extends TestCase {
 	private function newDeserializer(): DataValuesValueDeserializer {
 		return new DataValuesValueDeserializer(
 			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-			WikibaseRepo::getSnakValueParser(),
+			WikibaseRepo::getSnakValueDeserializer(),
 			$this->dataTypeValidatorFactory
 		);
 	}

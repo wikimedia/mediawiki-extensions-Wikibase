@@ -19,7 +19,7 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -1116,8 +1116,8 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.AnonymousEditWarningBuilder' );
 	}
 
-	public static function getSnakValueParser( ContainerInterface $services = null ): SnakValueParser {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WikibaseRepo.SnakValueParser' );
+	public static function getSnakValueDeserializer( ContainerInterface $services = null ): SnakValueDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WikibaseRepo.SnakValueDeserializer' );
 	}
 
 }

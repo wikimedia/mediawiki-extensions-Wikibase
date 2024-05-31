@@ -73,7 +73,7 @@
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.PropertyDataTypeLookup",
 				"WikibaseRepo.SnakFormatterFactory",
-				"WikibaseRepo.SnakValueParser",
+				"WikibaseRepo.SnakValueDeserializer",
 				"WikibaseRepo.ValueFormatterFactory"
 			]
 		},

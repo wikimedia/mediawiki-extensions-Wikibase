@@ -19,7 +19,7 @@ use NullStatsdDataFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -53,7 +53,7 @@ class FormatSnakValue extends ApiBase {
 	private IBufferingStatsdDataFactory $stats;
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private SnakValueParser $snakValueParser;
+	private SnakValueDeserializer $snakValueDeserializer;
 
 	/**
 	 * @see ApiBase::__construct
@@ -69,7 +69,7 @@ class FormatSnakValue extends ApiBase {
 		?IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
-		SnakValueParser $snakValueParser
+		SnakValueDeserializer $snakValueDeserializer
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -81,7 +81,7 @@ class FormatSnakValue extends ApiBase {
 		$this->stats = $stats ?: new NullStatsdDataFactory();
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->snakValueParser = $snakValueParser;
+		$this->snakValueDeserializer = $snakValueDeserializer;
 	}
 
 	public static function factory(
@@ -94,7 +94,7 @@ class FormatSnakValue extends ApiBase {
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
-		SnakValueParser $snakValueParser,
+		SnakValueDeserializer $snakValueDeserializer,
 		OutputFormatValueFormatterFactory $valueFormatterFactory
 	): self {
 		return new self(
@@ -108,7 +108,7 @@ class FormatSnakValue extends ApiBase {
 			$stats,
 			$entityIdParser,
 			$dataTypeLookup,
-			$snakValueParser
+			$snakValueDeserializer
 		);
 	}
 
@@ -218,7 +218,7 @@ class FormatSnakValue extends ApiBase {
 
 		try {
 			return $dataType
-				? $this->snakValueParser->parse( $dataType, $data )
+				? $this->snakValueDeserializer->deserialize( $dataType, $data )
 				: $this->dataValueFactory->newFromArray( $data );
 		} catch ( IllegalValueException | DeserializationException $ex ) {
 			$this->errorReporter->dieException( $ex, 'baddatavalue' );

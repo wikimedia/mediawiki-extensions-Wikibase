@@ -8,7 +8,6 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
-use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -192,7 +191,7 @@ class FormatSnakValueTest extends ApiTestCase {
 					'/wikibase-snakformatter-property-not-found/',
 				];
 			} ],
-			[ function ( self $test ) {
+			'wikibase-snakformatter-valuetype-mismatch' => [ function ( self $test ) {
 				$qid = $test->testingItem->getId();
 				$pid = $test->testingProperty->getId();
 
@@ -342,10 +341,9 @@ class FormatSnakValueTest extends ApiTestCase {
 	public function testFormatValueWithDataTypeSpecificParser( callable $addPropertyOrDataType ): void {
 		$dataType = 'data type with custom parser';
 		$expectedValue = 'value from data type specific parser';
-		$parser = $this->createStub( ValueParser::class );
-		$parser->method( 'parse' )->willReturn( new StringValue( $expectedValue ) );
+		$deserializerCallback = fn () => new StringValue( $expectedValue );
 
-		$propertyId = $this->createPropertyWithDataTypeWithCustomStringValueParser( $dataType, $parser );
+		$propertyId = $this->createPropertyWithDataTypeWithCustomDeserializer( $dataType, $deserializerCallback );
 
 		[ $resultArray ] = $this->doApiRequest( $addPropertyOrDataType( [
 			'action' => 'wbformatvalue',
@@ -372,11 +370,11 @@ class FormatSnakValueTest extends ApiTestCase {
 		];
 	}
 
-	protected function createPropertyWithDataTypeWithCustomStringValueParser( string $dataType, ValueParser $parser ): PropertyId {
-		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ) use ( $dataType, $parser ) {
+	protected function createPropertyWithDataTypeWithCustomDeserializer( string $dataType, callable $deserialize ): PropertyId {
+		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ) use ( $dataType, $deserialize ) {
 			$dataTypes["PT:$dataType"] = [
 				'value-type' => 'string',
-				'parser-factory-callback' => fn() => $parser,
+				'deserializer-builder' => $deserialize,
 			];
 		} );
 		$this->resetServices();

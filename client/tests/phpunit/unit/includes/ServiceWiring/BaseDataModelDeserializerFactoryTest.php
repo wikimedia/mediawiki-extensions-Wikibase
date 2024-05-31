@@ -37,7 +37,7 @@ class BaseDataModelDeserializerFactoryTest extends ServiceWiringTestCase {
 
 		$dataTypeDefinitions = $this->createStub( DataTypeDefinitions::class );
 		$dataTypeDefinitions->method( 'getValueTypes' )->willReturn( [] );
-		$dataTypeDefinitions->method( 'getParserFactoryCallbacks' )->willReturn( [] );
+		$dataTypeDefinitions->method( 'getDeserializerBuilders' )->willReturn( [] );
 		$this->mockService(
 			'WikibaseClient.DataTypeDefinitions',
 			$dataTypeDefinitions

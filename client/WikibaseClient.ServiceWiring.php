@@ -157,7 +157,7 @@ return [
 			WikibaseClient::getDataValueDeserializer( $services ),
 			WikibaseClient::getEntityIdParser( $services ),
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
-			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			$dataTypeDefs->getDeserializerBuilders( DataTypeDefinitions::PREFIXED_MODE ),
 			$dataTypeDefs->getValueTypes()
 		);
 	},

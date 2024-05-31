@@ -8,7 +8,7 @@ use DataValues\DataValue;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -29,16 +29,16 @@ class SnakFactory {
 
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private DataTypeFactory $dataTypeFactory;
-	private SnakValueParser $snakValueParser;
+	private SnakValueDeserializer $snakValueDeserializer;
 
 	public function __construct(
-	PropertyDataTypeLookup $dataTypeLookup,
-	DataTypeFactory $dataTypeFactory,
-	SnakValueParser $snakValueParser
+		PropertyDataTypeLookup $dataTypeLookup,
+		DataTypeFactory $dataTypeFactory,
+		SnakValueDeserializer $snakValueDeserializer
 	) {
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
-		$this->snakValueParser = $snakValueParser;
+		$this->snakValueDeserializer = $snakValueDeserializer;
 	}
 
 	/**
@@ -58,7 +58,10 @@ class SnakFactory {
 			case 'somevalue':
 				return new PropertySomeValueSnak( $propertyId );
 			case 'value':
-				return new PropertyValueSnak( $propertyId, $this->parseValue( $dataType, $rawValue ) );
+				return new PropertyValueSnak( $propertyId, $this->deserializeValue(
+					$dataType,
+					[ 'type' => $dataType->getDataValueType(), 'value' => $rawValue ]
+				) );
 			default:
 				throw new InvalidArgumentException( "bad snak type: $snakType" );
 		}
@@ -67,17 +70,14 @@ class SnakFactory {
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	private function parseValue( DataType $dataType, $rawValue ): DataValue {
+	private function deserializeValue( DataType $dataType, $rawValue ): DataValue {
 		if ( $rawValue === null ) {
 			throw new InvalidArgumentException( "value snaks require the "
 				. "'value' parameter to be set!" );
 		}
 
 		try {
-			return $this->snakValueParser->parse(
-				$dataType->getId(),
-				[ 'type' => $dataType->getDataValueType(), 'value' => $rawValue ]
-			);
+			return $this->snakValueDeserializer->deserialize( $dataType->getId(), $rawValue );
 		} catch ( DeserializationException $ex ) {
 			throw new InvalidArgumentException( $ex->getMessage(), 0, $ex );
 		}

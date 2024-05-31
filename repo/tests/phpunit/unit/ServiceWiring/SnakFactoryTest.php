@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\SnakFactory;
@@ -29,8 +29,8 @@ class SnakFactoryTest extends ServiceWiringTestCase {
 			$this->createMock( PropertyDataTypeLookup::class )
 		);
 		$this->mockService(
-			'WikibaseRepo.SnakValueParser',
-			$this->createMock( SnakValueParser::class )
+			'WikibaseRepo.SnakValueDeserializer',
+			$this->createMock( SnakValueDeserializer::class )
 		);
 		$this->assertInstanceOf(
 			SnakFactory::class,

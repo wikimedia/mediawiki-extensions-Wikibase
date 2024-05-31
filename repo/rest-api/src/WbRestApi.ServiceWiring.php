@@ -1182,7 +1182,7 @@ return [
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			new DataValuesValueDeserializer(
 				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory( $services ) ),
-				WikibaseRepo::getSnakValueParser( $services ),
+				WikibaseRepo::getSnakValueDeserializer( $services ),
 				WikibaseRepo::getDataTypeValidatorFactory( $services )
 			)
 		);

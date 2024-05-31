@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -74,7 +74,7 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 					$dataTypeLookup,
 					new DataValuesValueDeserializer(
 						new DataTypeFactoryValueTypeLookup( new DataTypeFactory( [] ) ),
-						new SnakValueParser( new DataValueDeserializer( [] ), [] ),
+						new SnakValueDeserializer( new DataValueDeserializer( [] ), [] ),
 						new BuilderBasedDataTypeValidatorFactory( [] )
 					)
 				);

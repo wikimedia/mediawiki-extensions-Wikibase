@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
@@ -19,16 +19,16 @@ use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
 class DataValuesValueDeserializer implements ValueDeserializer {
 
 	private ValueTypeLookup $valueTypeLookup;
-	private SnakValueParser $snakValueParser;
+	private SnakValueDeserializer $snakValueDeserializer;
 	private DataTypeValidatorFactory $validatorFactory;
 
 	public function __construct(
 		ValueTypeLookup $valueTypeLookup,
-		SnakValueParser $snakValueParser,
+		SnakValueDeserializer $snakValueDeserializer,
 		DataTypeValidatorFactory $validatorFactory
 	) {
 		$this->valueTypeLookup = $valueTypeLookup;
-		$this->snakValueParser = $snakValueParser;
+		$this->snakValueDeserializer = $snakValueDeserializer;
 		$this->validatorFactory = $validatorFactory;
 	}
 
@@ -47,7 +47,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 				break;
 			default:
 				try {
-					$dataValue = $this->snakValueParser->parse( $dataTypeId, [
+					$dataValue = $this->snakValueDeserializer->deserialize( $dataTypeId, [
 						'type' => $dataValueType,
 						'value' => $valueSerialization['content'],
 					] );
@@ -68,7 +68,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 
 	private function deserializeEntityIdValue( string $dataTypeId, string $content, string $basePath ): DataValue {
 		try {
-			return $this->snakValueParser->parse( $dataTypeId, [
+			return $this->snakValueDeserializer->deserialize( $dataTypeId, [
 				'value' => [ 'id' => $content ],
 				'type' => 'wikibase-entityid',
 			] );

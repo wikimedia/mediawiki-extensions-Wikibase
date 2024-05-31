@@ -21,20 +21,20 @@ class DeserializerFactory {
 	private DataValueDeserializer $dataValueDeserializer;
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private array $valueParserCallbacks;
+	private array $deserializerBuilders;
 	private array $dataTypeToValueTypeMap;
 
 	public function __construct(
 		DataValueDeserializer $dataValueDeserializer,
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
-		array $valueParserCallbacks,
+		array $deserializerBuilders,
 		array $dataTypeToValueTypeMap
 	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->valueParserCallbacks = $valueParserCallbacks;
+		$this->deserializerBuilders = $deserializerBuilders;
 		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
 	}
 
@@ -140,9 +140,12 @@ class DeserializerFactory {
 			$this->entityIdParser,
 			$this->dataValueDeserializer,
 			$this->dataTypeLookup,
-			$this->valueParserCallbacks,
+			$this->deserializerBuilders,
 			$this->dataTypeToValueTypeMap,
-			new SnakValueParser( $this->dataValueDeserializer, $this->valueParserCallbacks )
+			new SnakValueDeserializer(
+				$this->dataValueDeserializer,
+				$this->deserializerBuilders
+			)
 		);
 	}
 

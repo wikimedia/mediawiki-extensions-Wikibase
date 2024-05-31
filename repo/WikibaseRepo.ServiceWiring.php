@@ -36,7 +36,7 @@ use Wikibase\DataAccess\SingleEntitySourceServicesFactory;
 use Wikibase\DataAccess\SourceAndTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -326,7 +326,7 @@ return [
 			WikibaseRepo::getDataValueDeserializer( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			$dataTypeDefs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			$dataTypeDefs->getDeserializerBuilders( DataTypeDefinitions::PREFIXED_MODE ),
 			$dataTypeDefs->getValueTypes()
 		);
 	},
@@ -1775,7 +1775,7 @@ return [
 		return new SnakFactory(
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services ),
-			WikibaseRepo::getSnakValueParser( $services )
+			WikibaseRepo::getSnakValueDeserializer( $services )
 		);
 	},
 
@@ -1798,11 +1798,10 @@ return [
 		);
 	},
 
-	'WikibaseRepo.SnakValueParser' => function ( MediaWikiServices $services ): SnakValueParser {
-		return new SnakValueParser(
+	'WikibaseRepo.SnakValueDeserializer' => function ( MediaWikiServices $services ): SnakValueDeserializer {
+		return new SnakValueDeserializer(
 			WikibaseRepo::getDataValueDeserializer( $services ),
-			WikibaseRepo::getDataTypeDefinitions( $services )
-				->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+			WikibaseRepo::getDataTypeDefinitions( $services )->getDeserializerBuilders( DataTypeDefinitions::PREFIXED_MODE )
 		);
 	},
 

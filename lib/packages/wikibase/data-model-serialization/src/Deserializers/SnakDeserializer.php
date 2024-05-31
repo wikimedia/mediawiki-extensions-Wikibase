@@ -32,24 +32,24 @@ class SnakDeserializer implements DispatchableDeserializer {
 	private Deserializer $dataValueDeserializer;
 	private EntityIdParser $propertyIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private array $valueParserCallbacks;
+	private array $deserializerBuilders;
 	private array $dataTypeToValueTypeMap;
-	private SnakValueParser $snakValueParser;
+	private SnakValueDeserializer $snakValueDeserializer;
 
 	public function __construct(
 		EntityIdParser $propertyIdParser,
 		Deserializer $dataValueDeserializer,
 		PropertyDataTypeLookup $dataTypeLookup,
-		array $valueParserCallbacks,
+		array $deserializerBuilders,
 		array $dataTypeToValueTypeMap,
-		SnakValueParser $snakValueParser
+		SnakValueDeserializer $snakValueDeserializer
 	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->propertyIdParser = $propertyIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->valueParserCallbacks = $valueParserCallbacks;
+		$this->deserializerBuilders = $deserializerBuilders;
 		$this->dataTypeToValueTypeMap = $dataTypeToValueTypeMap;
-		$this->snakValueParser = $snakValueParser;
+		$this->snakValueDeserializer = $snakValueDeserializer;
 	}
 
 	/**
@@ -128,7 +128,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	private function deserializeDataValue( PropertyId $propertyId, array $serialization ): DataValue {
 		try {
 			return $this->needsDataTypeLookup( $serialization[DataValueDeserializer::TYPE_KEY] )
-				? $this->lookUpDataTypeAndParseValue( $propertyId, $serialization )
+				? $this->lookUpDataTypeAndDeserializeValue( $propertyId, $serialization )
 				: $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
 			return $this->newUndeserializableValue( $serialization, $ex );
@@ -144,7 +144,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 			array_keys( $this->dataTypeToValueTypeMap, $valueType, true )
 		);
 
-		return !empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->valueParserCallbacks ) ) );
+		return !empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->deserializerBuilders ) ) );
 	}
 
 	/**
@@ -202,14 +202,14 @@ class SnakDeserializer implements DispatchableDeserializer {
 		return new UnDeserializableValue( $value, $type, $error );
 	}
 
-	private function lookUpDataTypeAndParseValue( PropertyId $propertyId, array $serialization ): DataValue {
+	private function lookUpDataTypeAndDeserializeValue( PropertyId $propertyId, array $serialization ): DataValue {
 		try {
 			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( Exception $e ) {
 			return $this->newUndeserializableValue( $serialization, $e );
 		}
 
-		return $this->snakValueParser->parse( $dataType, $serialization );
+		return $this->snakValueDeserializer->deserialize( $dataType, $serialization );
 	}
 
 }

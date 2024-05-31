@@ -5,12 +5,12 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
+use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Exception;
-use ValueParsers\ValueParser;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnakValueParser;
+use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -29,7 +29,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 	private const STRING_PROPERTY_ID = 'P42';
 
 	private PropertyDataTypeLookup $dataTypeLookup;
-	private array $valueParserCallbacks;
+	private array $deserializerBuilders;
 	private array $dataTypeToValueTypeMap;
 
 	protected function setUp(): void {
@@ -37,21 +37,20 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 
 		$this->dataTypeLookup = new InMemoryDataTypeLookup();
 		$this->dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY_ID ), 'string' );
-		$this->valueParserCallbacks = [];
+		$this->deserializerBuilders = [];
 		$this->dataTypeToValueTypeMap = [ 'string' => 'string' ];
 	}
 
 	protected function buildDeserializer(): SnakDeserializer {
-		$dataValueDeserializer = new DataValueDeserializer( [
-			'string' => StringValue::class,
-		] );
 		return new SnakDeserializer(
 			new BasicEntityIdParser(),
-			$dataValueDeserializer,
+			new DataValueDeserializer( [
+				'string' => StringValue::class,
+			] ),
 			$this->dataTypeLookup,
-			$this->valueParserCallbacks,
+			$this->deserializerBuilders,
 			$this->dataTypeToValueTypeMap,
-			new SnakValueParser( $dataValueDeserializer, $this->valueParserCallbacks )
+			new SnakValueDeserializer( new DataValueDeserializer( [] ), $this->deserializerBuilders )
 		);
 	}
 
@@ -209,17 +208,15 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		$this->assertTrue( $snak->getDataValue()->equals( $expectedValue ) );
 	}
 
-	public function testDataTypeSpecificValueParser(): void {
-		$expectedValue = new StringValue( 'value produced by custom parser' );
-		$valueParser = $this->createStub( ValueParser::class );
-		$valueParser->method( 'parse' )->willReturn( $expectedValue );
-		$dataTypeWithValueParser = 'some-special-data-type';
+	public function testDataTypeSpecificValueDeserializer(): void {
+		$expectedValue = new StringValue( 'value produced by custom deserializer' );
+		$dataTypeWithDeserializer = 'some-special-data-type';
 		$propertyId = new NumericPropertyId( 'P777' );
 
-		$this->valueParserCallbacks = [ "PT:$dataTypeWithValueParser" => fn() => $valueParser ];
-		$this->dataTypeToValueTypeMap = [ $dataTypeWithValueParser => 'string' ];
+		$this->deserializerBuilders = [ "PT:$dataTypeWithDeserializer" => fn() => $expectedValue ];
+		$this->dataTypeToValueTypeMap = [ $dataTypeWithDeserializer => 'string' ];
 		$this->dataTypeLookup = new InMemoryDataTypeLookup();
-		$this->dataTypeLookup->setDataTypeForProperty( $propertyId, $dataTypeWithValueParser );
+		$this->dataTypeLookup->setDataTypeForProperty( $propertyId, $dataTypeWithDeserializer );
 
 		$snak = $this->buildDeserializer()->deserialize(
 			$this->newStringValueSnakSerialization( $propertyId, 'potato' )
@@ -244,7 +241,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 
 	public function testGivenDataTypeLookupFails_returnsUndeserializableValue(): void {
 		$dataTypeWithValueParser = 'some-special-data-type';
-		$this->valueParserCallbacks = [ "PT:$dataTypeWithValueParser" => fn() => $this->createStub( ValueParser::class ) ];
+		$this->deserializerBuilders = [ "PT:$dataTypeWithValueParser" => fn() => $this->createStub( Deserializer::class ) ];
 		$this->dataTypeToValueTypeMap = [ $dataTypeWithValueParser => 'string' ];
 		$this->dataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
 		$errorMessage = 'Data type lookup failed';

@@ -29,6 +29,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'rdf-uri' => 'http://acme.test/vocab/Foo',
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
+				'deserializer-builder' => 'FooDataTypeSpecificDeserializer',
 				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
 				'rdf-data-type' => 'acme-test',
 			],
@@ -112,6 +113,27 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'BAR' => 'BarDeserializer',
 			],
 			$this->getDataTypeDefinitions()->getDataValueDeserializerBuilders()
+		);
+	}
+
+	public function testGetDeserializerBuilders() {
+		$defs = $this->getDataTypeDefinitions();
+
+		$this->assertSame(
+			[
+				'foo' => 'FooDataTypeSpecificDeserializer',
+				'bar' => 'BarDeserializer',
+			],
+			$defs->getDeserializerBuilders()
+		);
+
+		$this->assertSame(
+			[
+				'VT:FOO' => 'FooDeserializer',
+				'PT:foo' => 'FooDataTypeSpecificDeserializer',
+				'VT:BAR' => 'BarDeserializer',
+			],
+			$defs->getDeserializerBuilders( DataTypeDefinitions::PREFIXED_MODE )
 		);
 	}
 
