@@ -9,7 +9,6 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -44,10 +43,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -81,20 +77,10 @@ class PatchItemTest extends TestCase {
 		$this->validator = new TestValidatingRequestDeserializer();
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->itemRetriever = $this->getMockBuilder( EntityRevisionLookupItemDataRetriever::class )
-			->onlyMethods( [ 'getItem' ] )
-			->setConstructorArgs( [
-				$this->createStub( EntityRevisionLookup::class ),
-				$this->createStub( StatementReadModelConverter::class ),
-				$this->createStub( SitelinksReadModelConverter::class ),
-			] )
-			->getMock();
-		$this->itemRetriever->method( 'getItem' )->willReturnCallback(
-			fn( $itemId ) => $this->itemRepository->getItem( $itemId )
-		);
+		$this->itemRetriever = $this->itemRepository;
 		$this->itemUpdater = $this->itemRepository;
 		$this->patchedItemValidator = new PatchedItemValidator( $this->newItemDeserializer() );
-		$this->itemWriteModelRetriever = $this->createStub( ItemWriteModelRetriever::class );
+		$this->itemWriteModelRetriever = $this->itemRepository;
 	}
 
 	public function testHappyPath(): void {
@@ -109,7 +95,6 @@ class PatchItemTest extends TestCase {
 				new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) )
 			)
 		);
-		$this->itemWriteModelRetriever = $this->itemRepository;
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemRequest(
@@ -175,7 +160,6 @@ class PatchItemTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$this->itemRepository->addItem( new ItemWriteModel( $itemId, new Fingerprint(), null, null ) );
-		$this->itemWriteModelRetriever = $this->itemRepository;
 
 		$expectedException = $this->createStub( UseCaseError::class );
 
