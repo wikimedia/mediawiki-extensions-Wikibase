@@ -322,7 +322,7 @@ return [
 		MediaWikiServices $services
 	): BagOStuffSiteLinkConflictLookup {
 		return new BagOStuffSiteLinkConflictLookup(
-			ObjectCache::getLocalClusterInstance()
+			$services->getObjectCacheFactory()->getLocalClusterInstance()
 		);
 	},
 

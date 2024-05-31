@@ -13,7 +13,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\SiteStats\SiteStats;
 use MediaWiki\Utils\MWTimestamp;
 use MWCryptRand;
-use ObjectCache;
+use ObjectCacheFactory;
 use Psr\Log\LoggerInterface;
 use RequestContext;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
@@ -77,6 +77,11 @@ class WikibasePingback {
 	private $requestFactory;
 
 	/**
+	 * @var ObjectCacheFactory
+	 */
+	private $objectCacheFactory;
+
+	/**
 	 * @var ConnectionManager
 	 */
 	private $repoConnections;
@@ -87,6 +92,7 @@ class WikibasePingback {
 	 * @param ExtensionRegistry|null $extensionRegistry
 	 * @param SettingsArray|null $wikibaseRepoSettings
 	 * @param HttpRequestFactory|null $requestFactory
+	 * @param ObjectCacheFactory|null $objectCacheFactory
 	 * @param RepoDomainDb|null $repoDomainDb
 	 * @param string|null $key
 	 */
@@ -96,6 +102,7 @@ class WikibasePingback {
 		ExtensionRegistry $extensionRegistry = null,
 		SettingsArray $wikibaseRepoSettings = null,
 		HTTPRequestFactory $requestFactory = null,
+		ObjectCacheFactory $objectCacheFactory = null,
 		RepoDomainDb $repoDomainDb = null,
 		string $key = null
 	) {
@@ -104,6 +111,7 @@ class WikibasePingback {
 		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getSettings();
 		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$this->objectCacheFactory = $objectCacheFactory ?: MediaWikiServices::getInstance()->getObjectCacheFactory();
 		$this->repoConnections = $repoDomainDb ? $repoDomainDb->connections() :
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections();
 
@@ -171,7 +179,7 @@ class WikibasePingback {
 	 * @return bool Whether lock was acquired
 	 */
 	private function acquireLock() {
-		$cache = ObjectCache::getLocalClusterInstance();
+		$cache = $this->objectCacheFactory->getLocalClusterInstance();
 		if ( !$cache->add( $this->key, 1, 60 * 60 ) ) {
 			return false;  // throttled
 		}
