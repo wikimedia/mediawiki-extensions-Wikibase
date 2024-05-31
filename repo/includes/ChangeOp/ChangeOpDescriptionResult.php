@@ -7,7 +7,6 @@ namespace Wikibase\Repo\ChangeOp;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Class ChangeOpDescriptionResult
  * @license GPL-2.0-or-later
  */
 class ChangeOpDescriptionResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
