@@ -238,9 +238,9 @@ class PatchItemTest extends TestCase {
 				new SitelinksSerializer( new SitelinkSerializer() )
 			),
 			$this->patchJson,
-			$this->itemUpdater,
 			$this->patchedItemValidator,
 			$this->itemWriteModelRetriever,
+			$this->itemUpdater,
 		);
 	}
 

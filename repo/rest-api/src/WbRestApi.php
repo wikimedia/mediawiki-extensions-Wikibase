@@ -40,6 +40,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetProperty
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -316,6 +317,11 @@ class WbRestApi {
 	public static function getUnexpectedErrorHandlerMiddleware( ContainerInterface $services = null ): UnexpectedErrorHandlerMiddleware {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.UnexpectedErrorHandlerMiddleware' );
+	}
+
+	public static function getPatchItem( ContainerInterface $services = null ): PatchItem {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.PatchItem' );
 	}
 
 	public static function getPatchItemLabels( ContainerInterface $services = null ): PatchItemLabels {

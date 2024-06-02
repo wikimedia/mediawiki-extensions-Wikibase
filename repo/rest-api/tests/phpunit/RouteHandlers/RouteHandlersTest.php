@@ -71,6 +71,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinksResponse
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
@@ -1003,6 +1005,32 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
 				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
 			] ],
+		] ];
+		yield 'PatchItem' => [ [
+			'useCase' => PatchItem::class,
+			'useCaseResponse' => new PatchItemResponse(
+				new Item(
+					new ItemId( 'Q1' ),
+					new Labels( new Label( 'en', 'new Item' ) ),
+					new Descriptions(),
+					new Aliases(),
+					new Sitelinks(),
+					new StatementList()
+				),
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [ 'item_id' => 'Q1' ],
+				'bodyContents' => [ 'patch' => [ [ 'op' => 'add', 'path' => '/labels/en', 'value' => 'new Item' ] ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
+					$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+			],
 		] ];
 		// phpcs:enable
 	}

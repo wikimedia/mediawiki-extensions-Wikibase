@@ -25,9 +25,9 @@ class PatchItem {
 	private ItemRetriever $itemRetriever;
 	private ItemSerializer $itemSerializer;
 	private PatchJson $patchJson;
-	private ItemUpdater $itemUpdater;
 	private PatchedItemValidator $patchedItemValidator;
 	private ItemWriteModelRetriever $itemWriteModelRetriever;
+	private ItemUpdater $itemUpdater;
 
 	public function __construct(
 		PatchItemValidator $validator,
@@ -36,9 +36,9 @@ class PatchItem {
 		ItemRetriever $itemRetriever,
 		ItemSerializer $itemSerializer,
 		PatchJson $patchJson,
-		ItemUpdater $itemUpdater,
 		PatchedItemValidator $patchedItemValidator,
-		ItemWriteModelRetriever $itemWriteModelRetriever
+		ItemWriteModelRetriever $itemWriteModelRetriever,
+		ItemUpdater $itemUpdater
 	) {
 		$this->validator = $validator;
 		$this->assertItemExists = $assertItemExists;
@@ -46,9 +46,9 @@ class PatchItem {
 		$this->itemRetriever = $itemRetriever;
 		$this->itemSerializer = $itemSerializer;
 		$this->patchJson = $patchJson;
-		$this->itemUpdater = $itemUpdater;
 		$this->patchedItemValidator = $patchedItemValidator;
 		$this->itemWriteModelRetriever = $itemWriteModelRetriever;
+		$this->itemUpdater = $itemUpdater;
 	}
 
 	/**

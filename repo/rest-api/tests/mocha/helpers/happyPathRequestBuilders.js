@@ -171,7 +171,15 @@ module.exports.getItemEditRequests = ( requestInputs ) => ( [
 	() => rbf.newAddItemAliasesInLanguageRequestBuilder( requestInputs.itemId, 'en', [ 'en-alias-' + utils.uniq() ] ),
 	() => rbf.newRemoveItemLabelRequestBuilder( requestInputs.itemId, 'en' ),
 	() => rbf.newRemoveItemDescriptionRequestBuilder( requestInputs.itemId, 'en' ),
-	() => rbf.newRemoveSitelinkRequestBuilder( requestInputs.itemId, requestInputs.siteId )
+	() => rbf.newRemoveSitelinkRequestBuilder( requestInputs.itemId, requestInputs.siteId ),
+	() => rbf.newPatchItemRequestBuilder(
+		requestInputs.itemId,
+		[ {
+			op: 'replace',
+			path: '/labels/en',
+			value: 'en-label' + utils.uniq()
+		} ]
+	)
 ].map( ( newRequestBuilder ) => ( { newRequestBuilder, requestInputs } ) ) );
 
 module.exports.getItemCreateRequest = ( requestInput ) => ( {

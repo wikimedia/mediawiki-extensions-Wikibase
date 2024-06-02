@@ -4,32 +4,28 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
+use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\BodyValidator;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -37,6 +33,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchItemRouteHandler extends SimpleHandler {
+
+	use AssertContentType;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -62,39 +60,26 @@ class PatchItemRouteHandler extends SimpleHandler {
 	}
 
 	public static function factory(): Handler {
-		$itemSerializer = new ItemSerializer(
-			new LabelsSerializer(),
-			new DescriptionsSerializer(),
-			new AliasesSerializer(),
-			new StatementListSerializer( WbRestApi::getStatementSerializer() ),
-			new SitelinksSerializer( new SitelinkSerializer() )
-		);
 		$responseFactory = new ResponseFactory();
+
 		return new self(
 			new MiddlewareHandler( [
+				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware(),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
-			] ),
-			new PatchItem(
-				WbRestApi::getValidatingRequestDeserializer(),
-				WbRestApi::getAssertItemExists(),
-				WbRestApi::getAssertUserIsAuthorized(),
-				WbRestApi::getItemDataRetriever(),
-				$itemSerializer,
-				new PatchJson( new JsonDiffJsonPatcher() ),
-				WbRestApi::getItemUpdater(),
-				new PatchedItemValidator(
-					new ItemDeserializer(
-						new LabelsDeserializer(),
-						new DescriptionsDeserializer(),
-						new AliasesDeserializer(),
-						WbRestApi::getStatementDeserializer(),
-						WbRestApi::getSitelinkDeserializer()
-					)
+				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
-				WbRestApi::getItemDataRetriever()
+			] ),
+			WbRestApi::getPatchItem(),
+			new ItemSerializer(
+				new LabelsSerializer(),
+				new DescriptionsSerializer(),
+				new AliasesSerializer(),
+				new StatementListSerializer( WbRestApi::getStatementSerializer() ),
+				new SitelinksSerializer( new SitelinkSerializer() )
 			),
-			$itemSerializer,
 			$responseFactory
 		);
 	}
@@ -160,6 +145,8 @@ class PatchItemRouteHandler extends SimpleHandler {
 	 * @inheritDoc
 	 */
 	public function getBodyValidator( $contentType ): BodyValidator {
+		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
+
 		return new TypeValidatingJsonBodyValidator( [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
@@ -190,6 +177,13 @@ class PatchItemRouteHandler extends SimpleHandler {
 	private function getUsername(): ?string {
 		$mwUser = $this->getAuthority()->getUser();
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+	}
+
+	/**
+	 * Preconditions are checked via {@link PreconditionMiddleware}
+	 */
+	public function checkPreconditions(): ?ResponseInterface {
+		return null;
 	}
 
 }

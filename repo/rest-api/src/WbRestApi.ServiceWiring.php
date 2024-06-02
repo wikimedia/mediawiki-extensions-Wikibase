@@ -12,6 +12,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
@@ -83,6 +85,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetProperty
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator as PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
@@ -715,6 +719,34 @@ return [
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
 			)
+		);
+	},
+
+	'WbRestApi.PatchItem' => function( MediaWikiServices $services ): PatchItem {
+		return new PatchItem(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getAssertItemExists(),
+			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbRestApi::getItemDataRetriever(),
+			new ItemSerializer(
+				new LabelsSerializer(),
+				new DescriptionsSerializer(),
+				new AliasesSerializer(),
+				new StatementListSerializer( WbRestApi::getStatementSerializer( $services ) ),
+				new SitelinksSerializer( new SitelinkSerializer() )
+			),
+			new PatchJson( new JsonDiffJsonPatcher() ),
+			new PatchedItemValidator(
+				new ItemDeserializer(
+					new LabelsDeserializer(),
+					new DescriptionsDeserializer(),
+					new AliasesDeserializer(),
+					WbRestApi::getStatementDeserializer(),
+					WbRestApi::getSitelinkDeserializer()
+				)
+			),
+			WbRestApi::getItemDataRetriever(),
+			WbRestApi::getItemUpdater()
 		);
 	},
 
