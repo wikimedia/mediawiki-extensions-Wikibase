@@ -31,7 +31,8 @@
 			"神樂坂秀吉",
 			"铁桶",
 			"Diskdance",
-			"LittlePaw365"
+			"LittlePaw365",
+			"Anterdc99"
 		]
 	},
 	"wikibase-client-desc": "Wikibase扩展的客户端",
@@ -79,7 +80,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}编辑",
 	"wikibase-rcfilters-hide-wikibase-description": "源自{{WBREPONAME}}的编辑。",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "该过滤器与一个或多个贡献质量或用户意图过滤器冲突。质量和意图预测不适用于{{WBREPONAME}}的编辑。",
-	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "“{{WBREPONAME}}编辑”过滤器与一个或多个贡献质量或用户意图过滤器冲突。质量和意图预测不适用于{{WBREPONAME}}编辑。冲突的过滤器标记在上面的“活跃过滤器”区域中。",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "“{{WBREPONAME}}编辑”筛选条件与一或多个贡献质量或用户意图筛选条件冲突。质量和意图预测不可用于{{WBREPONAME}}编辑。冲突的筛选条件在上面的活跃的筛选条件区域标出。",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "贡献质量预测对于某些更改类型不可用，因此该过滤器与以下更改{{PLURAL:$2|过滤器}}类型相冲突：$1",
 	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "用户意图预测对于某些更改类型不可用，因此该过滤器与以下更改{{PLURAL:$2|过滤器}}类型相冲突：$1",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "所有{{WBREPONAME}}的编辑都被指定为“小编辑”，因此“{{WBREPONAME}}编辑”过滤器与“不是小编辑”过滤器相冲突。",
