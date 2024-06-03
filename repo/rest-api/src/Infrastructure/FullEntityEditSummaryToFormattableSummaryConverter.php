@@ -16,11 +16,10 @@ class FullEntityEditSummaryToFormattableSummaryConverter {
 
 	use ModifiedLanguageCodes;
 
-	public function newSummaryForPropertyEdit( PropertyEditSummary $editSummary ): Summary {
+	public function newSummaryForPropertyPatch( PropertyEditSummary $editSummary ): Summary {
 		$originalProperty = $editSummary->getOriginalProperty();
 		$patchedProperty = $editSummary->getPatchedProperty();
-		$hasStatementsChanged = !$editSummary->getPatchedProperty()->getStatements()
-			->equals( $editSummary->getOriginalProperty()->getStatements() );
+		$hasStatementsChanged = !$patchedProperty->getStatements()->equals( $originalProperty->getStatements() );
 
 		$modifiedLanguages = $this->modifiedLanguageCodes( $originalProperty, $patchedProperty );
 

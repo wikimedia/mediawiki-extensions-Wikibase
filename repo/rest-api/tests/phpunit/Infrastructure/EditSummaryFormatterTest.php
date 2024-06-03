@@ -250,16 +250,16 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	public function testPropertyEditSummary_usesEditSummaryConverter(): void {
 		$propertyEditSummary = $this->createStub( PropertyEditSummary::class );
 		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
+
 		$editSummaryConverter = $this->createMock( FullEntityEditSummaryToFormattableSummaryConverter::class );
 		$editSummaryConverter->expects( $this->once() )
-			->method( 'newSummaryForPropertyEdit' )
+			->method( 'newSummaryForPropertyPatch' )
 			->with( $propertyEditSummary )
 			->willReturn( new Summary( 'wbeditentity', 'update-languages-short', null, [ 'de, en' ] ) );
+
 		$editSummaryFormatter = new EditSummaryFormatter( WikibaseRepo::getSummaryFormatter(), $converter, $editSummaryConverter );
-		$this->assertSame(
-			'/* wbeditentity-update-languages-short:0||de, en */',
-			$editSummaryFormatter->format( $propertyEditSummary )
-		);
+
+		$this->assertSame( '/* wbeditentity-update-languages-short:0||de, en */', $editSummaryFormatter->format( $propertyEditSummary ) );
 	}
 
 	public function testItemPatchEditSummary_usesEditSummaryConverter(): void {

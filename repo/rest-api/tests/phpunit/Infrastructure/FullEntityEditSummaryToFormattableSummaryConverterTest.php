@@ -29,7 +29,7 @@ class FullEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 	 */
 	public function testPatchPropertyEditSummary( PropertyEditSummary $editSummary, Summary $expectedSummary ): void {
 		$editSummaryFormatter = new FullEntityEditSummaryToFormattableSummaryConverter();
-		$this->assertEquals( $expectedSummary, $editSummaryFormatter->newSummaryForPropertyEdit( $editSummary ) );
+		$this->assertEquals( $expectedSummary, $editSummaryFormatter->newSummaryForPropertyPatch( $editSummary ) );
 	}
 
 	public function propertyEditSummaryProvider(): Generator {
