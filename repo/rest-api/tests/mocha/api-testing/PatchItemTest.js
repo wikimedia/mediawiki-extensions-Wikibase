@@ -178,4 +178,40 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
 	} );
 
+	describe( '422 error response', () => {
+		it( 'after patching: invalid operation change item id', async () => {
+			const patch = [
+				{ op: 'replace', path: '/id', value: 'Q123' }
+			];
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-item-invalid-operation-change-item-id' );
+			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing item' );
+		} );
+
+		it( 'after patching labels: invalid field', async () => {
+			const patch = [
+				{ op: 'replace', path: '/labels', value: 'invalid-labels' }
+			];
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { path: 'labels', value: 'invalid-labels' };
+			assertValidError( response, 422, 'patched-item-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched item" );
+		} );
+
+		it( 'after patching: unexpected field', async () => {
+			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-item-unexpected-field' );
+			assert.strictEqual( response.body.message, "The patched item contains an unexpected field: 'foo'" );
+		} );
+	} );
+
 } );

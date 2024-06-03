@@ -26,6 +26,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
@@ -42,6 +43,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
+use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
@@ -68,6 +70,8 @@ class PatchItemTest extends TestCase {
 	private PatchJson $patchJson;
 	private ItemRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
+	private PatchedItemValidator $patchedItemValidator;
+	private ItemWriteModelRetriever $itemWriteModelRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -89,6 +93,8 @@ class PatchItemTest extends TestCase {
 			fn( $itemId ) => $this->itemRepository->getItem( $itemId )
 		);
 		$this->itemUpdater = $this->itemRepository;
+		$this->patchedItemValidator = new PatchedItemValidator( $this->newItemDeserializer() );
+		$this->itemWriteModelRetriever = $this->createStub( ItemWriteModelRetriever::class );
 	}
 
 	public function testHappyPath(): void {
@@ -103,6 +109,7 @@ class PatchItemTest extends TestCase {
 				new Fingerprint( new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ) )
 			)
 		);
+		$this->itemWriteModelRetriever = $this->itemRepository;
 
 		$response = $this->newUseCase()->execute(
 			new PatchItemRequest(
@@ -164,6 +171,25 @@ class PatchItemTest extends TestCase {
 		}
 	}
 
+	public function testGivenItemInvalidAfterPatching_throws(): void {
+		$itemId = new ItemId( 'Q123' );
+
+		$this->itemRepository->addItem( new ItemWriteModel( $itemId, new Fingerprint(), null, null ) );
+		$this->itemWriteModelRetriever = $this->itemRepository;
+
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$this->patchedItemValidator = $this->createStub( PatchedItemValidator::class );
+		$this->patchedItemValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new PatchItemRequest( "$itemId", [], [], false, null, null ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	public function testGivenUnauthorizedRequest_throws(): void {
 		$user = 'bad-user';
 		$itemId = new ItemId( 'Q123' );
@@ -189,6 +215,7 @@ class PatchItemTest extends TestCase {
 			$this->validator,
 			$this->assertUserIsAuthorized,
 			$this->itemRetriever,
+			$this->itemWriteModelRetriever,
 			new ItemSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
@@ -196,9 +223,9 @@ class PatchItemTest extends TestCase {
 				$this->createStub( StatementListSerializer::class ),
 				new SitelinksSerializer( new SitelinkSerializer() )
 			),
-			$this->newItemDeserializer(),
 			$this->patchJson,
-			$this->itemUpdater
+			$this->itemUpdater,
+			$this->patchedItemValidator,
 		);
 	}
 
