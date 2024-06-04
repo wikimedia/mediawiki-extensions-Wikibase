@@ -5,12 +5,16 @@
 			"Guycn2",
 			"Meno25",
 			"Mr. Ibrahem",
-			"ديفيد"
+			"ديفيد",
+			"Alshamiri1",
+			"Hubaishan"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "يرجع كل أرقام الكيانات المستخدمة في الصفحات المعطاة.",
 	"apihelp-query+wbentityusage-summary": "يرجع كل معرفات الكيان المستخدمة في الصفحات المعطاة.",
 	"apihelp-query+wbentityusage-param-aspect": "فقط أرجع أرقام الكيانات المستخدمة في هذا الجانب.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "وصلات الكيان مستعملة",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "تسمية الكيان مستعملة",
 	"apihelp-query+wbentityusage-param-prop": "الخواص للإضافة للنتيجة.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "لو مفعلة مسار الكيان ستتم إضافته",
 	"apihelp-query+wbentityusage-param-entities": "فقط أرجع الصفحة التي تستخدم هذه الكيانات.",

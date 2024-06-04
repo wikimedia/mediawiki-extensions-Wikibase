@@ -8,7 +8,8 @@
 			"Serkanland",
 			"Toghrul Rahimli",
 			"Wertuose",
-			"Şeyx Şamil"
+			"Şeyx Şamil",
+			"Nemoralis"
 		]
 	},
 	"tooltip-t-wikibase": "Bağlanan məlumatların saxlanması elementinə keçid",
@@ -16,7 +17,7 @@
 	"wikibase-after-page-delete": "Bu səhifənin [$1 {{WBREPONAME}} elementi] ilə əlaqəsi kəsilmişdir. Bunun həyata keçib-keçməməsini təsdiqləməyinizi xahiş edirik.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementi dəyişdirildi",
 	"wikibase-dataitem": "{{WBREPONAME}} elementi",
-	"wikibase-editlinks": "Keçidlərin redaktəsi",
+	"wikibase-editlinks": "Keçidlərin redaktə et",
 	"wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
 	"wikibase-linkitem-addlinks": "Keçid əlavə et",
 	"wikibase-linkitem-close": "Pəncərəni bağla və səhifəni yenilə",
