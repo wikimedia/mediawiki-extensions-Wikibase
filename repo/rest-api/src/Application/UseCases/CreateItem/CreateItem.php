@@ -32,14 +32,13 @@ class CreateItem {
 	 */
 	public function execute( CreateItemRequest $request ): CreateItemResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
-		$item = $deserializedRequest->getItem();
 
 		$editMetadata = $deserializedRequest->getEditMetadata();
 
 		$this->assertUserIsAuthorized->checkCreateItemPermissions( $editMetadata->getUser() );
 
 		$revision = $this->itemCreator->create(
-			$item,
+			$deserializedRequest->getItem(),
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),

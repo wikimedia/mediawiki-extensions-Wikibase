@@ -37,7 +37,7 @@ module.exports = {
 		return `/* wbeditentity-update:0| */ ${userComment}`;
 	},
 
-	formatPropertyEditSummary( action, autoCommentArgs, userComment ) {
+	formatWholeEntityEditSummary( action, autoCommentArgs, userComment ) {
 		return `/* wbeditentity-${action}:0||${autoCommentArgs} */ ${userComment}`;
 	}
 
