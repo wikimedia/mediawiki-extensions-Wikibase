@@ -165,7 +165,6 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityRevisionLookup
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
@@ -177,6 +176,7 @@ use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
+use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -488,7 +488,7 @@ return [
 			new EditSummaryFormatter(
 				WikibaseRepo::getSummaryFormatter( $services ),
 				new TermsEditSummaryToFormattableSummaryConverter(),
-				new FullEntityEditSummaryToFormattableSummaryConverter()
+				new WholeEntityEditSummaryToFormattableSummaryConverter()
 			),
 			$services->getPermissionManager(),
 			WikibaseRepo::getEntityStore( $services ),

@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 /**
  * @license GPL-2.0-or-later
  */
-class FullEntityEditSummaryToFormattableSummaryConverter {
+class WholeEntityEditSummaryToFormattableSummaryConverter {
 
 	use ModifiedLanguageCodes;
 
