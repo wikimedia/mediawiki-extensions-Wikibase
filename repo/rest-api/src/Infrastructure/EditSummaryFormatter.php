@@ -8,12 +8,13 @@ use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
@@ -112,13 +113,12 @@ class EditSummaryFormatter {
 			$summary = new Summary( 'wbeditentity', 'update' );
 			$summary->setUserSummary( $editSummary->getUserComment() );
 			return $summary;
-		} elseif ( $editSummary instanceof ItemEditSummary ) {
-			switch ( $editSummary->getEditAction() ) {
-				case EditSummary::ADD_ACTION:
-					return $this->fullEntityEditSummaryConverter->newSummaryForItemCreate( $editSummary );
-				case EditSummary::PATCH_ACTION:
-					return $this->fullEntityEditSummaryConverter->newSummaryForItemPatch( $editSummary );
-			}
+		} elseif ( $editSummary instanceof CreateItemEditSummary ) {
+			$summary = new Summary( 'wbeditentity', 'create-item' );
+			$summary->setUserSummary( $editSummary->getUserComment() );
+			return $summary;
+		} elseif ( $editSummary instanceof PatchItemEditSummary ) {
+			return $this->fullEntityEditSummaryConverter->newSummaryForItemPatch( $editSummary );
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

@@ -11,12 +11,13 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
@@ -212,7 +213,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function createItemEditSummaryProvider(): Generator {
 		yield 'create item' => [
-			ItemEditSummary::newCreateSummary( 'user comment' ),
+			CreateItemEditSummary::newSummary( 'user comment' ),
 			'/* wbeditentity-create-item:0| */ user comment',
 		];
 	}
@@ -263,8 +264,8 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function testItemPatchEditSummary_usesEditSummaryConverter(): void {
-		$itemEditSummary = $this->createStub( ItemEditSummary::class );
-		$itemEditSummary->method( 'getEditAction' )->willReturn( ItemEditSummary::PATCH_ACTION );
+		$itemEditSummary = $this->createStub( PatchItemEditSummary::class );
+		$itemEditSummary->method( 'getEditAction' )->willReturn( PatchItemEditSummary::PATCH_ACTION );
 
 		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
 
