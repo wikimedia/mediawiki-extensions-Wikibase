@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			555,
 			"Athena in Wonderland",
 			"Cainamarques",
 			"CaiusSPQR",
@@ -23,8 +24,7 @@
 			"SandroHc",
 			"Vitorvicentevalente",
 			"Waldir",
-			"Waldyrious",
-			555
+			"Waldyrious"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
