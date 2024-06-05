@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			555,
 			"Almondega",
 			"Cainamarques",
 			"Dgstranz",
@@ -27,8 +28,7 @@
 			"Svjatysberega",
 			"TheEduGobi",
 			"Trigonometria87",
-			"Vivaelcelta",
-			555
+			"Vivaelcelta"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
