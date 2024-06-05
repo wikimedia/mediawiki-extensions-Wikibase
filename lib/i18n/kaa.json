@@ -9,6 +9,11 @@
 	"wikibase-timedetails-isotime": "Waqıt belgisi",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-entity-summary-wbsetitem": "Jańa element jaratıw",
+	"wikibase-entity-summary-wbsetlabel-add": "[$2] belgisi qosıldı",
+	"wikibase-entity-summary-wbsetsitelink-add": "Betke [$2] saytınan silteme ornatıldı",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Betke [$2] saytınan ornatılǵan silteme alıp taslandı",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
-	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|1 málimleme|málimleme}} óshirildi"
+	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|1 málimleme|málimleme}} óshirildi",
+	"wikibase-entity-summary-clientsitelink-update": "Bet [$3] degennen [$4] degenge kóshirildi",
+	"wikibase-entity-summary-clientsitelink-remove": "Bet [$3] saytınan óshirildi"
 }
