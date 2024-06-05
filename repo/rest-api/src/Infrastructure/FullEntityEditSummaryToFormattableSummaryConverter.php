@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 
 /**
@@ -29,20 +29,13 @@ class FullEntityEditSummaryToFormattableSummaryConverter {
 		return $summary;
 	}
 
-	public function newSummaryForItemCreate( ItemEditSummary $editSummary ): Summary {
-		$summary = new Summary( 'wbeditentity', 'create-item' );
-		$summary->setUserSummary( $editSummary->getUserComment() );
-		return $summary;
-	}
-
-	public function newSummaryForItemPatch( ItemEditSummary $editSummary ): Summary {
+	public function newSummaryForItemPatch( PatchItemEditSummary $editSummary ): Summary {
 		$originalItem = $editSummary->getOriginalItem();
 		$patchedItem = $editSummary->getPatchedItem();
 
 		$hasStatementsChanged = !$patchedItem->getStatements()->equals( $originalItem->getStatements() );
 		$hasSitelinksChanged = !$patchedItem->getSiteLinkList()->equals( $originalItem->getSiteLinkList() );
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$modifiedLanguages = $this->modifiedLanguageCodes( $originalItem, $patchedItem );
 
 		$summary = $this->setSummary( $modifiedLanguages, $hasStatementsChanged || $hasSitelinksChanged );

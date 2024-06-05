@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
@@ -83,7 +83,7 @@ class PatchItem {
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-				ItemEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalItem, $patchedItem )
+				PatchItemEditSummary::newSummary( $providedMetadata->getComment(), $originalItem, $patchedItem )
 			)
 		);
 

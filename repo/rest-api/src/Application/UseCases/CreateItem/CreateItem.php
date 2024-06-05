@@ -4,8 +4,8 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 
 /**
@@ -42,7 +42,7 @@ class CreateItem {
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),
-				ItemEditSummary::newCreateSummary( $request->getComment() )
+				CreateItemEditSummary::newSummary( $request->getComment() )
 			)
 		);
 

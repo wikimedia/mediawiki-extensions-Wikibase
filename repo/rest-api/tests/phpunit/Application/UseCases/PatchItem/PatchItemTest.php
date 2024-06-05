@@ -33,7 +33,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -135,7 +135,7 @@ class PatchItemTest extends TestCase {
 			new EditMetadata(
 				$editTags,
 				$isBot,
-				ItemEditSummary::newPatchSummary(
+				PatchItemEditSummary::newSummary(
 					$comment,
 					$originalItem,
 					$this->itemRepository->getItemWriteModel( $itemId )

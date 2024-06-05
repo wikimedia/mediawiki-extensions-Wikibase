@@ -8,8 +8,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\ItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
@@ -60,7 +60,7 @@ class CreateItemTest extends TestCase {
 		$this->assertSame( $itemRepo->getLatestRevisionId( $newItem->getId() ), $response->getRevisionId() );
 		$this->assertSame( $itemRepo->getLatestRevisionTimestamp( $newItem->getId() ), $response->getLastModified() );
 		$this->assertEquals(
-			new EditMetadata( $editTags, $isBot, ItemEditSummary::newCreateSummary( $comment ) ),
+			new EditMetadata( $editTags, $isBot, CreateItemEditSummary::newSummary( $comment ) ),
 			$itemRepo->getLatestRevisionEditMetadata( $newItem->getId() )
 		);
 	}
