@@ -3,7 +3,14 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItem;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -11,10 +18,24 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  */
 class PatchedItemValidator {
 
-	private ItemDeserializer $itemDeserializer;
+	private LabelsDeserializer $labelsDeserializer;
+	private DescriptionsDeserializer $descriptionsDeserializer;
+	private AliasesDeserializer $aliasesDeserializer;
+	private SitelinkDeserializer $sitelinkDeserializer;
+	private StatementsDeserializer $statementsDeserializer;
 
-	public function __construct( ItemDeserializer $itemDeserializer ) {
-		$this->itemDeserializer = $itemDeserializer;
+	public function __construct(
+		LabelsDeserializer $labelsDeserializer,
+		DescriptionsDeserializer $descriptionsDeserializer,
+		AliasesDeserializer $aliasesDeserializer,
+		SitelinkDeserializer $sitelinkDeserializer,
+		StatementsDeserializer $statementsDeserializer
+	) {
+		$this->labelsDeserializer = $labelsDeserializer;
+		$this->descriptionsDeserializer = $descriptionsDeserializer;
+		$this->aliasesDeserializer = $aliasesDeserializer;
+		$this->sitelinkDeserializer = $sitelinkDeserializer;
+		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
 	/**
@@ -29,7 +50,16 @@ class PatchedItemValidator {
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 
-		return $this->itemDeserializer->deserialize( $serialization );
+		return new Item(
+			new ItemId( $serialization[ 'id' ] ),
+			new Fingerprint(
+				$this->labelsDeserializer->deserialize( $serialization[ 'labels' ] ?? [] ),
+				$this->descriptionsDeserializer->deserialize( $serialization[ 'descriptions' ] ?? [] ),
+				$this->aliasesDeserializer->deserialize( $serialization[ 'aliases' ] ?? [] )
+			),
+			$this->deserializeSitelinks( $serialization[ 'sitelinks' ] ?? [] ),
+			$this->statementsDeserializer->deserialize( $serialization[ 'statements' ] ?? [] )
+		);
 	}
 
 	private function assertNoIllegalModification( array $serialization, Item $originalItem ): void {
@@ -68,6 +98,15 @@ class PatchedItemValidator {
 				);
 			}
 		}
+	}
+
+	private function deserializeSitelinks( array $sitelinksSerialization ): SiteLinkList {
+		$sitelinkList = [];
+		foreach ( $sitelinksSerialization as $siteId => $sitelink ) {
+			$sitelinkList[] = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink );
+		}
+
+		return new SiteLinkList( $sitelinkList );
 	}
 
 }

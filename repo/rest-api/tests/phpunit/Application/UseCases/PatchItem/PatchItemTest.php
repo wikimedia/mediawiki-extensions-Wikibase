@@ -13,7 +13,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
@@ -24,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
@@ -83,7 +83,13 @@ class PatchItemTest extends TestCase {
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->itemRepository;
 		$this->itemUpdater = $this->itemRepository;
-		$this->patchedItemValidator = new PatchedItemValidator( $this->newItemDeserializer() );
+		$this->patchedItemValidator = new PatchedItemValidator(
+			new LabelsDeserializer(),
+			new DescriptionsDeserializer(),
+			new AliasesDeserializer(),
+			$this->newSitelinkDeserializer(),
+			$this->newStatementsDeserializer(),
+		);
 		$this->itemWriteModelRetriever = $this->itemRepository;
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
 	}
@@ -244,23 +250,23 @@ class PatchItemTest extends TestCase {
 		);
 	}
 
-	private function newItemDeserializer(): ItemDeserializer {
+	private function newStatementsDeserializer(): StatementsDeserializer {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new ItemId( $p[ 'item' ][ 'id' ] ) )
 		);
 
-		return new ItemDeserializer(
-			new LabelsDeserializer(),
-			new DescriptionsDeserializer(),
-			new AliasesDeserializer(),
-			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) ),
-			new SitelinkDeserializer(
-				'/\?/',
-				self::ALLOWED_BADGES,
-				new SameTitleSitelinkTargetResolver(),
-				new DummyItemRevisionMetaDataRetriever()
-			)
+		return new StatementsDeserializer(
+			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+		);
+	}
+
+	private function newSitelinkDeserializer(): SitelinkDeserializer {
+		return new SitelinkDeserializer(
+			'/\?/',
+			self::ALLOWED_BADGES,
+			new SameTitleSitelinkTargetResolver(),
+			new DummyItemRevisionMetaDataRetriever()
 		);
 	}
 
