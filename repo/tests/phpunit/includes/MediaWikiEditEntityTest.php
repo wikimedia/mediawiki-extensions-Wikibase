@@ -447,8 +447,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$status = $edit->attemptSave( $item, 'testing', EDIT_NEW, $token );
-		$this->assertStatusNotOK( $status );
-		$this->assertStatusMessage( 'wikibase-error-entity-not-local', $status );
+		$this->assertStatusError( 'wikibase-error-entity-not-local', $status );
 	}
 
 	public static function provideAttemptSaveRateLimit(): iterable {
