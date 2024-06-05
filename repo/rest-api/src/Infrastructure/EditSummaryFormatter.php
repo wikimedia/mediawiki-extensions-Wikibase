@@ -48,7 +48,7 @@ class EditSummaryFormatter {
 	// phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof PropertyEditSummary ) {
-			return $this->fullEntityEditSummaryConverter->newSummaryForPropertyEdit( $editSummary );
+			return $this->fullEntityEditSummaryConverter->newSummaryForPropertyPatch( $editSummary );
 		} elseif ( $editSummary instanceof LabelsEditSummary ) {
 			return $this->termsEditSummaryConverter->convertLabelsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof LabelEditSummary ) {
