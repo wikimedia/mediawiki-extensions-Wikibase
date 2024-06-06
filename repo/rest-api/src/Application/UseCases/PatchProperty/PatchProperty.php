@@ -61,11 +61,7 @@ class PatchProperty {
 		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
 
 		$this->assertPropertyExists->execute( $propertyId );
-
-		$this->assertUserIsAuthorized->checkEditPermissions(
-			$deserializedRequest->getPropertyId(),
-			$providedMetadata->getUser()
-		);
+		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $providedMetadata->getUser() );
 
 		$patchedPropertySerialization = $this->patchJson->execute(
 			ConvertArrayObjectsToArray::execute(
