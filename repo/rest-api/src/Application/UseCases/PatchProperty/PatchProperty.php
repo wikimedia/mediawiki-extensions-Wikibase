@@ -58,7 +58,6 @@ class PatchProperty {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$propertyId = $deserializedRequest->getPropertyId();
 		$providedMetadata = $deserializedRequest->getEditMetadata();
-		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
 
 		$this->assertPropertyExists->execute( $propertyId );
 
@@ -77,6 +76,7 @@ class PatchProperty {
 			$deserializedRequest->getPatch()
 		);
 
+		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$patchedProperty = $this->patchedPropertyValidator->validateAndDeserialize( $patchedPropertySerialization, $originalProperty );
 
