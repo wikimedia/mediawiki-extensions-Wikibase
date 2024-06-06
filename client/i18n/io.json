@@ -60,7 +60,7 @@
 	"wikibase-otherprojects": "En altra projeti",
 	"wikibase-sitelinks-sitename-columnheading": "Linguo",
 	"wikibase-sitelinks-link-columnheading": "Pagino ligata",
-	"notification-header-page-connection": "La pagino <strong>$3</strong> {{GENDER:$2|konektesis}} a {{PLURAL:$4|-1=-1 ula elemento {{WBREPONAME}}|la listo {{WBREPONAME}} # $4}}, qua kontenas dati relativa a ca temo.",
+	"notification-header-page-connection": "La pagino <strong>$3</strong> {{GENDER:$2|konektesis}} a {{PLURAL:$4|-1=-1 ula elemento {{WBREPONAME}}|la listo {{WBREPONAME}} # $4}}, qua kontenas datumi relate ca temo.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ed {{PLURAL:$4|altra pagino|$4 altra pagini|100=plu kam 99 altra pagini}} {{GENDER:$2|ligesis}} ad artikli de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidar}} detalo",
 	"connected-redirect-category": "Ridirekti ligita ad artiklo de {{WBREPONAME}}",
