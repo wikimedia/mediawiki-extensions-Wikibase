@@ -58,10 +58,8 @@ class PatchItem {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 		$providedMetadata = $deserializedRequest->getEditMetadata();
 		$itemId = $deserializedRequest->getItemId();
-		$originalItem = $this->itemWriteModelRetriever->getItemWriteModel( $itemId );
 
 		$this->assertItemExists->execute( $itemId );
-
 		$this->assertUserIsAuthorized->checkEditPermissions( $itemId, $providedMetadata->getUser() );
 
 		$patchedItemSerialization = $this->patchJson->execute(
@@ -74,6 +72,7 @@ class PatchItem {
 			$deserializedRequest->getPatch()
 		);
 
+		$originalItem = $this->itemWriteModelRetriever->getItemWriteModel( $itemId );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
 		$patchedItem = $this->patchedItemValidator->validateAndDeserialize( $patchedItemSerialization, $originalItem );
 
