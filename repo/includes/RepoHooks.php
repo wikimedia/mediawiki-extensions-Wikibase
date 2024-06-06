@@ -547,16 +547,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Reorder the groups for the special pages
-	 *
-	 * @param array &$groups
-	 * @param bool $moveOther
-	 */
-	public static function onSpecialPageReorderPages( &$groups, $moveOther ) {
-		$groups = array_merge( [ 'wikibaserepo' => null ], $groups );
-	}
-
-	/**
 	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *

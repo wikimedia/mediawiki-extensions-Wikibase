@@ -999,7 +999,6 @@
 		"ShowSearchHitTitle": "ShowSearchHit",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation::Universal": "\\Wikibase\\Repo\\RepoHooks::onSkinTemplateNavigationUniversal",
-		"SpecialPage_reorderPages": "\\Wikibase\\Repo\\RepoHooks::onSpecialPageReorderPages",
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
 		"UnitTestsList": [
 			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
