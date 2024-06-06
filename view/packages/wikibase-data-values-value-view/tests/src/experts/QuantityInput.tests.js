@@ -22,7 +22,7 @@
 		);
 	}
 
-	QUnit.test( 'valueCharacteristics', function( assert ) {
+	QUnit.test( 'valueCharacteristics', ( assert ) => {
 		const expert = newExpert(),
 			characteristics = expert.valueCharacteristics();
 

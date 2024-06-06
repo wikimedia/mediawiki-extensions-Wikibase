@@ -10,12 +10,10 @@
 
 	testExpertExtenderExtension.all(
 		ExpertExtender.Container,
-		function() {
-			return new ExpertExtender.Container( $( '<div />' ), {} );
-		}
+		() => new ExpertExtender.Container( $( '<div />' ), {} )
 	);
 
-	QUnit.test( 'init calls child', function( assert ) {
+	QUnit.test( 'init calls child', ( assert ) => {
 		const $container = $( '<div />' );
 		const child = {
 			init: sinon.spy()

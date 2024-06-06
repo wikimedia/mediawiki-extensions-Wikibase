@@ -82,8 +82,8 @@
 		}
 	];
 
-	testCases.forEach( function ( params ) {
-		QUnit.test( 'constructor', function( assert ) {
+	testCases.forEach( ( params ) => {
+		QUnit.test( 'constructor', ( assert ) => {
 			const viewState = new MockViewState( params.constructorArg );
 			assert.ok(
 				viewState instanceof MockViewState,
@@ -102,7 +102,7 @@
 
 		QUnit.test( 'value', buildMemberTestFn( params, 'value' ) );
 
-		QUnit.test( 'option', function( assert ) {
+		QUnit.test( 'option', ( assert ) => {
 			const viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
@@ -119,7 +119,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Changing state after construction', function( assert ) {
+	QUnit.test( 'Changing state after construction', ( assert ) => {
 		const state = {},
 			viewState = new MockViewState( state );
 

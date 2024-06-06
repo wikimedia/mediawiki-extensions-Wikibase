@@ -312,11 +312,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		// displaying Kartographer maps in entities.
 		if ( this._value && this.options.dataValueType === 'globecoordinate' ) {
 			this._formatValue( this._value )
-			.done( function( formattedValue ) {
+			.done( ( formattedValue ) => {
 				self._formattedValue = formattedValue;
 				self.draw();
 			} )
-			.fail( function( message ) {
+			.fail( ( message ) => {
 				if ( message ) {
 					self._renderError( message );
 				}
@@ -324,7 +324,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 
 		this.draw()
-		.done( function() {
+		.done( () => {
 			self._trigger( 'afterstartediting' );
 		} );
 	},
@@ -363,7 +363,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		this.$value.detach();
 
 		this.draw()
-		.done( function() {
+		.done( () => {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -486,11 +486,11 @@ $.widget( 'valueview.valueview', PARENT, {
 			// TODO: Cache the initial formatted value in order to not have to trigger an API
 			// request when resetting.
 			this._formatValue( this._value )
-				.done( function( formattedValue ) {
+				.done( ( formattedValue ) => {
 					self._formattedValue = formattedValue;
 					self.draw();
 				} )
-				.fail( function( message ) {
+				.fail( ( message ) => {
 					if ( message ) {
 						self._renderError( message );
 					}
@@ -623,7 +623,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			.toggleClass( this.widgetBaseClass + '-ineditmode', this._isInEditMode );
 
 		return this.drawContent()
-			.done( function() {
+			.done( () => {
 				self._trigger( 'afterdraw' );
 			} );
 	},
@@ -638,7 +638,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			deferred = $.Deferred();
 
 		if ( this.isInEditMode() ) {
-			this._updateTextValue().then( function () {
+			this._updateTextValue().then( () => {
 				if ( !self.isInEditMode() ) {
 					// edit mode was left while formatting text value
 					return;
@@ -651,10 +651,10 @@ $.widget( 'valueview.valueview', PARENT, {
 				// if ( !self._expert ) { ... }
 
 				self._expert.draw()
-				.done( function() {
+				.done( () => {
 					deferred.resolve();
 				} )
-				.fail( function() {
+				.fail( () => {
 					deferred.reject();
 				} );
 			} );
@@ -697,7 +697,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		this._textValue = '';
 
 		return this._parseValue()
-			.done( function( parsedValue ) {
+			.done( ( parsedValue ) => {
 				self._value = parsedValue;
 
 				if ( self._value === null ) {
@@ -706,18 +706,18 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 
 				self._formatValue( parsedValue )
-					.done( function( formattedValue ) {
+					.done( ( formattedValue ) => {
 						self._formattedValue = formattedValue;
 						self.drawContent();
 					} )
-					.fail( function( message ) {
+					.fail( ( message ) => {
 						if ( message ) {
 							self._renderError( message );
 						}
 					} );
 
 			} )
-			.fail( function( message ) {
+			.fail( ( message ) => {
 				if ( message ) {
 					self._renderError( message );
 				}
@@ -773,7 +773,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		const valueParser = this._instantiateParser( expert.valueCharacteristics() );
 
 		self.__lastUpdateValue = rawValue;
-		this._parseTimer = setTimeout( function() {
+		this._parseTimer = setTimeout( () => {
 			// TODO: Hacky preview spinner activation. Necessary until we move the responsibility
 			//  for previews out of the experts. The preview should be handled in the same place for
 			//  all value types, could perhaps move into its own widget, listening to valueview
@@ -783,7 +783,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			}
 
 			valueParser.parse( rawValue )
-				.done( function( parsedValue ) {
+				.done( ( parsedValue ) => {
 					// Paranoia check against ValueParser interface:
 					if ( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
 						throw new Error( 'Unexpected value parser result' );
@@ -804,10 +804,10 @@ $.widget( 'valueview.valueview', PARENT, {
 
 					deferred.resolve( parsedValue );
 				} )
-				.fail( function( message ) {
+				.fail( ( message ) => {
 					deferred.reject( message );
 				} )
-				.always( function() {
+				.always( () => {
 					self._trigger( 'afterparse' );
 				} );
 		}, this.options.parseDelay );
@@ -863,7 +863,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			deferred = $.Deferred();
 
 		this.options.htmlFormatter.format( dataValue )
-			.done( function( formattedValue, formattedDataValue ) {
+			.done( ( formattedValue, formattedDataValue ) => {
 				if ( dataValue === formattedDataValue ) {
 					deferred.resolve( formattedValue );
 				} else {
@@ -871,10 +871,10 @@ $.widget( 'valueview.valueview', PARENT, {
 					deferred.reject();
 				}
 			} )
-			.fail( function( message ) {
+			.fail( ( message ) => {
 				deferred.reject( message );
 			} )
-			.always( function() {
+			.always( () => {
 				self._trigger( 'afterformat' );
 			} );
 
@@ -903,7 +903,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 
 		this.options.plaintextFormatter.format( dataValue )
-			.done( function( formattedValue, formattedDataValue ) {
+			.done( ( formattedValue, formattedDataValue ) => {
 				if ( dataValue === formattedDataValue ) {
 					self._textValue = formattedValue;
 					deferred.resolve();
@@ -912,7 +912,7 @@ $.widget( 'valueview.valueview', PARENT, {
 					deferred.reject();
 				}
 			} )
-			.fail( function( message ) {
+			.fail( ( message ) => {
 				deferred.reject( message );
 			} );
 
@@ -982,7 +982,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 				if ( changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
-					self._updateValue().done( function() {
+					self._updateValue().done( () => {
 						self._trigger( 'change' );
 					} );
 				}

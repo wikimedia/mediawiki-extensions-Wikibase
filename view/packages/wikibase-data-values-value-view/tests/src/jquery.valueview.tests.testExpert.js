@@ -51,8 +51,8 @@ function testExpert( testDefinition ) {
 	// We always have to destroy experts so all widgets used by them get destroyed as well in case
 	// they add something to the body.
 	function expertCasesTestAndCleanup( description, testFn ) {
-		createExpertDefinitions().forEach( function ( definition ) {
-			QUnit.test( description + ' (' + definition.title + ')', function( assert ) {
+		createExpertDefinitions().forEach( ( definition ) => {
+			QUnit.test( description + ' (' + definition.title + ')', ( assert ) => {
 				const $viewPort = definition.constructorArgs[0],
 					viewState = definition.constructorArgs[1],
 					notifier = definition.constructorArgs[2];
@@ -65,7 +65,7 @@ function testExpert( testDefinition ) {
 		} );
 	}
 
-	expertCasesTestAndCleanup( 'constructor', function( args, assert ) {
+	expertCasesTestAndCleanup( 'constructor', ( args, assert ) => {
 		assert.ok(
 			args.expert instanceof Expert,
 			'expert successfully constructed'
@@ -84,7 +84,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCasesTestAndCleanup( 'destroy', function( args, assert ) {
+	expertCasesTestAndCleanup( 'destroy', ( args, assert ) => {
 		const $viewPort = $( args.constructorArgs[0] );
 
 		args.expert.destroy();
@@ -99,7 +99,7 @@ function testExpert( testDefinition ) {
 
 	} );
 
-	expertCasesTestAndCleanup( 'valueCharacteristics', function( args, assert ) {
+	expertCasesTestAndCleanup( 'valueCharacteristics', ( args, assert ) => {
 		const valueCharacteristics = args.expert.valueCharacteristics();
 
 		assert.ok(
@@ -108,7 +108,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCasesTestAndCleanup( 'viewState', function( args, assert ) {
+	expertCasesTestAndCleanup( 'viewState', ( args, assert ) => {
 		const viewState = args.expert.viewState();
 		assert.notEqual(
 			viewState.getFormattedValue, 'undefined',
@@ -116,7 +116,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCasesTestAndCleanup( 'rawValue: initial value', function( args, assert ) {
+	expertCasesTestAndCleanup( 'rawValue: initial value', ( args, assert ) => {
 		const rawValue = args.expert.rawValue();
 		assert.ok(
 			rawValue === '' || rawValue === null,
@@ -125,7 +125,7 @@ function testExpert( testDefinition ) {
 	} );
 
 	const expertCasesMemberCallTest = function( memberName, additionalAssertionsFn ) {
-		expertCasesTestAndCleanup( memberName, function( args, assert ) {
+		expertCasesTestAndCleanup( memberName, ( args, assert ) => {
 			args.expert[ memberName ]();
 			assert.ok(
 				true,
@@ -136,7 +136,7 @@ function testExpert( testDefinition ) {
 			}
 		} );
 	};
-	expertCasesMemberCallTest( 'draw', function( args, assert ) {
+	expertCasesMemberCallTest( 'draw', ( args, assert ) => {
 		const $viewPort = $( args.constructorArgs[0] );
 
 		assert.ok(
@@ -145,7 +145,7 @@ function testExpert( testDefinition ) {
 		);
 	} );
 
-	expertCasesTestAndCleanup( 'focus', function( args, assert ) {
+	expertCasesTestAndCleanup( 'focus', ( args, assert ) => {
 		try {
 			args.expert.focus();
 		} catch ( e ) {

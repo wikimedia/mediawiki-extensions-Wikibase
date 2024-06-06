@@ -17,7 +17,7 @@ module.exports = ( function( $, vv ) {
 
 		this._unitSelector = new UnitSelector(
 			this._messageProvider,
-			function() {
+			( () => {
 				const value = self.viewState().value(),
 					unit = value && value.getUnit(),
 					formattedValue = self.viewState().getFormattedValue(),
@@ -26,10 +26,10 @@ module.exports = ( function( $, vv ) {
 					conceptUri: unit,
 					label: $unit.text() || unit
 				};
-			},
-			function() {
+			} ),
+			( () => {
 				self._viewNotifier.notify( 'change' );
-			},
+			} ),
 			{
 				language: this._options.language || null,
 				vocabularyLookupApiUrl: this._options.vocabularyLookupApiUrl || null

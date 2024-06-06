@@ -72,7 +72,7 @@
 				listrotatorEvents = 'listrotatorauto listrotatorselected';
 
 			this.rotator.element
-			.on( listrotatorEvents, function( event, newValue ) {
+			.on( listrotatorEvents, ( event, newValue ) => {
 				if ( newValue !== self._getUpstreamValue() ) {
 					self._onValueChange( newValue );
 				}

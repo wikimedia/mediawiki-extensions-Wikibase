@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender' );
 
-	QUnit.test( 'Constructor', function( assert ) {
+	QUnit.test( 'Constructor', ( assert ) => {
 		const expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		assert.ok(
@@ -19,7 +19,7 @@
 		assert.notDeepEqual( expertExtender, ExpertExtender.prototype );
 	} );
 
-	QUnit.test( 'destroy cleans up properties', function( assert ) {
+	QUnit.test( 'destroy cleans up properties', ( assert ) => {
 		const expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		expertExtender.destroy();
@@ -27,7 +27,7 @@
 		assert.deepEqual( expertExtender, ExpertExtender.prototype );
 	} );
 
-	QUnit.test( 'destroy calls extensions', function( assert ) {
+	QUnit.test( 'destroy calls extensions', ( assert ) => {
 		const destroy = sinon.spy(),
 			expertExtender = new ExpertExtender( $( '<input/>' ), [ {
 				destroy: destroy
@@ -38,7 +38,7 @@
 		sinon.assert.calledOnce( destroy );
 	} );
 
-	QUnit.test( 'init calls extensions', function( assert ) {
+	QUnit.test( 'init calls extensions', ( assert ) => {
 		const $input = $( '<input/>' ).appendTo( 'body' ),
 			init = sinon.spy(),
 			onInitialShow = sinon.spy(),
@@ -59,7 +59,7 @@
 			expertExtender._inputextender.showExtension();
 		}
 
-		window.setTimeout( function() {
+		window.setTimeout( () => {
 			sinon.assert.calledOnce( init );
 			sinon.assert.calledOnce( onInitialShow );
 			sinon.assert.calledOnce( draw );

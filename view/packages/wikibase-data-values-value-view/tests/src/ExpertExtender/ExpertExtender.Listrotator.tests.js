@@ -14,12 +14,10 @@
 
 	testExpertExtenderExtension.all(
 		ExpertExtender.Listrotator,
-		function() {
-			return new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ], null, null, messageProvider );
-		}
+		() => new ExpertExtender.Listrotator( '', [ { value: 'value', label: 'label' } ], null, null, messageProvider )
 	);
 
-	QUnit.test( 'supports custom values', function( assert ) {
+	QUnit.test( 'supports custom values', ( assert ) => {
 		const getUpstreamValue = function() {
 			return {
 				custom: true,
@@ -43,7 +41,7 @@
 		assert.strictEqual( listrotator.getValue(), 'custom value' );
 	} );
 
-	QUnit.test( 'supports switching away from custom values', function( assert ) {
+	QUnit.test( 'supports switching away from custom values', ( assert ) => {
 		const done = assert.async();
 		const onValueChange = sinon.spy();
 		const upstreamValue = {
@@ -68,7 +66,7 @@
 		listrotator.draw();
 		listrotator.rotator._setValue( 'fixed value' );
 
-		setTimeout( function() {
+		setTimeout( () => {
 			sinon.assert.calledOnce( onValueChange );
 			assert.strictEqual( listrotator.getValue(), 'fixed value' );
 

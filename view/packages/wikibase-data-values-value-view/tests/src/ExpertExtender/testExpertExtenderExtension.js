@@ -17,7 +17,7 @@
 		},
 
 		constructor: function( constructor, getInstance ) {
-			QUnit.test( 'Constructor', function( assert ) {
+			QUnit.test( 'Constructor', ( assert ) => {
 				const instance = getInstance();
 
 				assert.ok(
@@ -32,7 +32,7 @@
 		},
 
 		destroy: function( constructor, getInstance ) {
-			QUnit.test( 'destroy cleans up properties', function( assert ) {
+			QUnit.test( 'destroy cleans up properties', ( assert ) => {
 				const instance = getInstance();
 
 				instance.destroy();
@@ -42,7 +42,7 @@
 		},
 
 		init: function( getInstance ) {
-			QUnit.test( 'init appends an element', function( assert ) {
+			QUnit.test( 'init appends an element', ( assert ) => {
 				const instance = getInstance(),
 					$extender = $( '<div />' );
 

@@ -20,17 +20,13 @@
 
 	testExpertExtenderExtension.all(
 		LanguageSelector,
-		function() {
-			return new LanguageSelector(
-				{
-					getAll: function() {
- return null;
-}
-				},
-				messageProvider,
-				function() { }
-			);
-		}
+		() => new LanguageSelector(
+			{
+				getAll: () => null
+			},
+			messageProvider,
+			( () => { } )
+		)
 	);
 
 	/**
@@ -39,24 +35,18 @@
 	 */
 	function newContentLanguagesFromLanguageMap( languageMap ) {
 		return {
-			getAll: function() {
- return Object.keys( languageMap );
-},
-			getName: function( code ) {
- return languageMap[code] || null;
-}
+			getAll: () => Object.keys( languageMap ),
+			getName: ( code ) => languageMap[code] || null
 		};
 	}
 
-	QUnit.test( 'initial draw works when the upstream value is null', function( assert ) {
+	QUnit.test( 'initial draw works when the upstream value is null', ( assert ) => {
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label'
 			} ),
 			messageProvider,
-			function() {
-				return null;
-			}
+			( () => null )
 		);
 		const $extender = $( '<div />' );
 
@@ -73,7 +63,7 @@
 		assert.ok( true );
 	} );
 
-	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
+	QUnit.test( 'value does not change if upstream value changes', ( assert ) => {
 		let upstreamValue = 'en';
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
@@ -81,9 +71,7 @@
 				en: 'en label'
 			} ),
 			messageProvider,
-			function() {
-				return upstreamValue;
-			}
+			( () => upstreamValue )
 		);
 		const $extender = $( '<div />' );
 
@@ -108,15 +96,13 @@
 		assert.strictEqual( languageSelector.getValue(), 'en' );
 	} );
 
-	QUnit.test( 'returns correct value after initialization', function( assert ) {
+	QUnit.test( 'returns correct value after initialization', ( assert ) => {
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label'
 			} ),
 			messageProvider,
-			function() {
-				return 'en';
-			}
+			( () => 'en' )
 		);
 		const $extender = $( '<div />' );
 
@@ -134,16 +120,14 @@
 		assert.strictEqual( languageSelector.$selector.val(), 'en label en' );
 	} );
 
-	QUnit.test( 'returns correct value after changing it', function( assert ) {
+	QUnit.test( 'returns correct value after changing it', ( assert ) => {
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label',
 				fr: 'fr label'
 			} ),
 			messageProvider,
-			function() {
-				return 'en';
-			}
+			( () => 'en' )
 		);
 		const $extender = $( '<div />' );
 
@@ -163,16 +147,14 @@
 		assert.strictEqual( languageSelector.$selector.val(), 'fr' );
 	} );
 
-	QUnit.test( 'returns correct value after initialization for value without label in ContentLanguages', function( assert ) {
+	QUnit.test( 'returns correct value after initialization for value without label in ContentLanguages', ( assert ) => {
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label',
 				ar: null
 			} ),
 			messageProvider,
-			function() {
-				return 'ar';
-			}
+			( () => 'ar' )
 		);
 		const $extender = $( '<div />' );
 
@@ -190,16 +172,14 @@
 		assert.strictEqual( languageSelector.$selector.val(), 'ar' );
 	} );
 
-	QUnit.test( 'returns correct value after changing it to a value without label in ContentLanguages', function( assert ) {
+	QUnit.test( 'returns correct value after changing it to a value without label in ContentLanguages', ( assert ) => {
 		const languageSelector = new LanguageSelector(
 			newContentLanguagesFromLanguageMap( {
 				en: 'en label',
 				fr: null
 			} ),
 			messageProvider,
-			function() {
-				return 'en';
-			}
+			( () => 'en' )
 		);
 		const $extender = $( '<div />' );
 
