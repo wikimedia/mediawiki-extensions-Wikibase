@@ -462,6 +462,98 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				`'${languageWithExistingLabel}', using the same description text`
 			);
 		} );
+
+		it( 'empty alias', async () => {
+			const language = 'de';
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: [ '' ] }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-alias-empty', { language } );
+			assert.include( response.body.message, language );
+		} );
+
+		it( 'alias too long', async () => {
+			const language = 'de';
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongAlias = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: [ tooLongAlias ] }
+			] ).assertValidRequest().makeRequest();
+
+			const context = { language, value: tooLongAlias, 'character-limit': maxLength };
+			assertValidError( response, 422, 'patched-alias-too-long', context );
+			assert.include( response.body.message, language );
+		} );
+
+		it( 'duplicate alias', async () => {
+			const language = 'en';
+			const duplicate = 'tomato';
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: [ duplicate, duplicate ] }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
+			assert.include( response.body.message, language );
+			assert.include( response.body.message, duplicate );
+		} );
+
+		it( 'aliases in language not a list', async () => {
+			const language = 'en';
+			const invalidAliasesValue = { 'aliases in language': 'not a list' };
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: invalidAliasesValue }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patched-aliases-invalid-field',
+				{ path: language, value: invalidAliasesValue }
+			);
+		} );
+
+		it( 'aliases is not an object', async () => {
+			const invalidAliasesValue = [ 'not', 'an', 'object' ];
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: '/aliases', value: invalidAliasesValue }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patched-item-invalid-field',
+				{ path: 'aliases', value: invalidAliasesValue }
+			);
+		} );
+
+		it( 'alias contains invalid characters', async () => {
+			const language = 'en';
+			const invalidAlias = 'tab\t tab\t tab';
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: [ invalidAlias ] }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patched-aliases-invalid-field',
+				{ path: `${language}/0`, value: invalidAlias }
+			);
+			assert.include( response.body.message, language );
+		} );
+
+		it( 'invalid language code', async () => {
+			const language = 'not-a-valid-language';
+			const response = await newPatchItemRequestBuilder( testItemId, [
+				{ op: 'add', path: `/aliases/${language}`, value: [ 'alias' ] }
+			] ).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
+		} );
 	} );
 
 } );

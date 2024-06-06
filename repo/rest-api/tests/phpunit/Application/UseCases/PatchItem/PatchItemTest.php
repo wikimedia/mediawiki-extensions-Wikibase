@@ -32,6 +32,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -54,10 +55,12 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem
@@ -95,7 +98,11 @@ class PatchItemTest extends TestCase {
 			new ItemLabelsContentsValidator( $this->createStub( ItemLabelValidator::class ) ),
 			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
 			new ItemDescriptionsContentsValidator( $this->createStub( ItemDescriptionValidator::class ) ),
-			new AliasesDeserializer(),
+			new AliasesValidator(
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() ),
+				new AliasesDeserializer()
+			),
 			$this->newSitelinkDeserializer(),
 			$this->newStatementsDeserializer(),
 		);
