@@ -780,10 +780,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'sequential array, not an associative array' ],
 			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'aliases' is invalid",
+				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
+				"Invalid input for 'aliases' in the patched property",
 				[
-					UseCaseError::CONTEXT_PATH => '',
+					UseCaseError::CONTEXT_PATH => 'aliases',
 					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an associative array' ],
 				]
 			),

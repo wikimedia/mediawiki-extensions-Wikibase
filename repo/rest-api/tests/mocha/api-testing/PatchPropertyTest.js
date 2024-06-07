@@ -536,16 +536,16 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'aliases is not an object', async () => {
-			const invalidAliasesValue = [ 'not', 'an', 'object' ];
+			const invalidAliases = [ 'not', 'an', 'object' ];
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: '/aliases', value: invalidAliasesValue }
+				{ op: 'add', path: '/aliases', value: invalidAliases }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
 				422,
-				'patched-aliases-invalid-field',
-				{ path: '', value: invalidAliasesValue }
+				'patched-property-invalid-field',
+				{ path: 'aliases', value: invalidAliases }
 			);
 		} );
 

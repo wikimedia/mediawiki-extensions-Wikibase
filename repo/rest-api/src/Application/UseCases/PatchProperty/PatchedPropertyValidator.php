@@ -304,21 +304,7 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	/**
-	 * @param mixed $aliasesSerialization
-	 */
-	private function assertValidAliases( $aliasesSerialization ): void {
-		if (
-			!is_array( $aliasesSerialization ) ||
-			count( $aliasesSerialization ) && array_is_list( $aliasesSerialization )
-		) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'aliases' is invalid",
-				[ UseCaseError::CONTEXT_PATH => '', UseCaseError::CONTEXT_VALUE => $aliasesSerialization ]
-			);
-		}
-
+	private function assertValidAliases( array $aliasesSerialization ): void {
 		$validationError = $this->aliasesValidator->validate( $aliasesSerialization );
 		if ( $validationError ) {
 			$context = $validationError->getContext();
@@ -330,6 +316,8 @@ class PatchedPropertyValidator {
 						"Not a valid language code '$language' in changed aliases",
 						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
 					);
+				case AliasesValidator::CODE_INVALID_ALIASES:
+					$this->throwInvalidField( 'aliases', $aliasesSerialization );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(
