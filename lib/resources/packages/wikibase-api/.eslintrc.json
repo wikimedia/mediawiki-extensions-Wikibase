@@ -15,6 +15,7 @@
 		"jsdoc/check-alignment": "off",
 		"jsdoc/newline-after-description": "off",
 		"jsdoc/require-returns": "off",
-		"jsdoc/require-returns-check": "off"
+		"jsdoc/require-returns-check": "off",
+		"no-jquery/no-extend": "warn"
 	}
 }
