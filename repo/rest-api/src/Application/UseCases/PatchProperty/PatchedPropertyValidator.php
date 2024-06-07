@@ -66,10 +66,10 @@ class PatchedPropertyValidator {
 		$this->assertNoIllegalModification( $serialization, $originalProperty );
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
-		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
-		$this->validateAliases( $serialization[ 'aliases' ] ?? [] );
 
-		$this->validateStatements( $serialization[ 'statements' ] ?? [], $originalProperty );
+		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
+		$this->assertValidAliases( $serialization[ 'aliases' ] ?? [] );
+		$this->assertValidStatements( $serialization[ 'statements' ] ?? [], $originalProperty );
 
 		return new Property(
 			new NumericPropertyId( $serialization[ 'id' ] ),
@@ -307,7 +307,7 @@ class PatchedPropertyValidator {
 	/**
 	 * @param mixed $aliasesSerialization
 	 */
-	private function validateAliases( $aliasesSerialization ): void {
+	private function assertValidAliases( $aliasesSerialization ): void {
 		if (
 			!is_array( $aliasesSerialization ) ||
 			count( $aliasesSerialization ) && array_is_list( $aliasesSerialization )
@@ -378,7 +378,7 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	private function validateStatements( array $statementsSerialization, Property $originalProperty ): void {
+	private function assertValidStatements( array $statementsSerialization, Property $originalProperty ): void {
 		$validationError = $this->statementsValidator->validate( $statementsSerialization );
 		if ( $validationError ) {
 			$context = $validationError->getContext();
