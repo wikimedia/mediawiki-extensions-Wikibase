@@ -106,7 +106,7 @@ DEFAULT: [$wgMainCacheType]
 #### termFallbackCacheVersion {#common_termFallbackCacheVersion}
 Integer value to be appended to the shared cache prefix. Can be used to invalidate the term fallback cache by incrementing/changing this value.
 
-DEFAULT: null
+DEFAULT: ````null````
 
 ### Miscellaneous
 
