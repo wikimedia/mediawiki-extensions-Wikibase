@@ -12,7 +12,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
@@ -737,13 +736,11 @@ return [
 			),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemValidator(
-				new ItemDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer(),
-					WbRestApi::getStatementDeserializer(),
-					WbRestApi::getSitelinkDeserializer()
-				)
+				new LabelsDeserializer(),
+				new DescriptionsDeserializer(),
+				new AliasesDeserializer(),
+				WbRestApi::getSitelinkDeserializer(),
+				new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
 			),
 			WbRestApi::getItemDataRetriever(),
 			WbRestApi::getItemUpdater()
