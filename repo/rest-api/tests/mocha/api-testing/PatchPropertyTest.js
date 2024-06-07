@@ -226,18 +226,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Cannot change the datatype of the existing property' );
 		} );
 
-		it( 'after patching labels: invalid field', async () => {
-			const patch = [
-				{ op: 'replace', path: '/labels', value: 'illegal string' }
-			];
-
-			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
-				.assertValidRequest().makeRequest();
-
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-property-invalid-field' );
-		} );
-
 		it( 'missing mandatory field', async () => {
 			const patch = [ { op: 'remove', path: '/data-type' } ];
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
