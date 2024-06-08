@@ -339,7 +339,7 @@ return [
 		MediaWikiServices $services
 	): CachingCommonsMediaFileNameLookup {
 		return new CachingCommonsMediaFileNameLookup(
-			new MediaWikiPageNameNormalizer(),
+			new MediaWikiPageNameNormalizer( $services->getHttpRequestFactory() ),
 			new HashBagOStuff()
 		);
 	},
@@ -511,7 +511,7 @@ return [
 	'WikibaseRepo.DefaultSnakFormatterBuilders' => function ( MediaWikiServices $services ): WikibaseSnakFormatterBuilders {
 		return new WikibaseSnakFormatterBuilders(
 			WikibaseRepo::getDefaultValueFormatterBuilders( $services ),
-			WikibaseRepo::getPropertyInfoLookup(),
+			WikibaseRepo::getPropertyInfoLookup( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			WikibaseRepo::getDataTypeFactory( $services )
 		);
@@ -533,7 +533,7 @@ return [
 			WikibaseRepo::getItemVocabularyBaseUri( $services ),
 			WikibaseRepo::getMonolingualTextLanguages( $services ),
 			WikibaseRepo::getCachingCommonsMediaFileNameLookup( $services ),
-			new MediaWikiPageNameNormalizer(), // TODO should probably inject an HttpRequestFactory here (or get from $services?)
+			new MediaWikiPageNameNormalizer( $services->getHttpRequestFactory() ),
 			$settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 			$settings->getSetting( 'tabularDataStorageApiEndpointUrl' )
 		);
