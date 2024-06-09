@@ -73,7 +73,7 @@ class EntityChangeLookup {
 	public function loadChangesBefore( string $thisTimeOrOlder, int $batchSize, int $offset ): array {
 		$dbr = $this->db->connections()->getReadConnection();
 		return $this->newEntityChangeSelectQueryBuilder( $dbr )
-			->where( [ 'change_time <= ' . $dbr->addQuotes( $dbr->timestamp( $thisTimeOrOlder ) ) ] )
+			->where( $dbr->expr( 'change_time', '<=', $dbr->timestamp( $thisTimeOrOlder ) ) )
 			->limit( $batchSize )
 			->offset( $offset )
 			->caller( __METHOD__ )

@@ -87,7 +87,7 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				'pp_propname' => $dbw->addQuotes( 'wb-sitelinks' ),
 				'pp_value' => 0,
 			],
-			'page_title <= ' . $dbw->addQuotes( 'Q105' )
+			$dbw->expr( 'page_title', '<=', 'Q105' )
 		);
 		// Add wb-sitelinks = 12 for Item Q106
 		$dbw->insertSelect(

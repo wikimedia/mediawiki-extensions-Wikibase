@@ -10,6 +10,7 @@ use MediaWiki\Specials\SpecialRecentChanges;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
+use Wikimedia\Rdbms\Expression;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\TestingAccessWrapper;
 
@@ -232,22 +233,26 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	}
 
 	public function testAddWikibaseConditions() {
+		$db = $this->getDatabase();
 		$hookHandler = new ChangesListSpecialPageHookHandler(
-			$this->getDatabase(),
+			$db,
 			true,
 			false,
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		);
 
+		$db->expects( $this->once() )
+			->method( 'expr' )
+			->with( 'rc_source', '!=', 'wb' )
+			->willReturn( $this->createMock( Expression::class ) );
+
 		$conds = [];
 		$hookHandler->addWikibaseConditions(
-			$this->getDatabase(),
+			$db,
 			$conds
 		);
 
-		$expected = [ "rc_source != 'wb'" ];
-
-		$this->assertEquals( $expected, $conds );
+		$this->assertCount( 1, $conds );
 	}
 
 	/**

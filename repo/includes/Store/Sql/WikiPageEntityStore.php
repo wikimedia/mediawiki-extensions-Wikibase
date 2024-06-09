@@ -535,13 +535,13 @@ class WikiPageEntityStore implements EntityStore {
 			->from( 'revision' )
 			->where( [
 				'rev_page' => $revision->getPageId(),
-				'rev_id > ' . (int)$lastRevId
-				. ' OR rev_timestamp > ' . $dbw->addQuotes( $dbw->timestamp( $revision->getTimestamp() ) ),
+				$dbw->expr( 'rev_id', '>', (int)$lastRevId )
+					->or( 'rev_timestamp', '>', $dbw->timestamp( $revision->getTimestamp() ) ),
 			] );
 		$actorId = $this->actorNormalization->findActorId( $user, $dbw );
 		if ( $actorId !== null ) {
 			// @phan-suppress-next-line PhanRedundantCondition in case findActorId() changes return type
-			$queryBuilder->andWhere( 'rev_actor != ' . (int)$actorId );
+			$queryBuilder->andWhere( $dbw->expr( 'rev_actor', '!=', (int)$actorId ) );
 		}
 		$res = $queryBuilder
 			->orderBy( 'rev_timestamp', SelectQueryBuilder::SORT_ASC )

@@ -80,7 +80,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			] )
 			->from( 'wb_items_per_site' )
 			->where( $dbr->makeList( $linkConds, $dbr::LIST_OR ) )
-			->andWhere( [ 'ips_item_id != ' . $itemId->getNumericId() ] )
+			->andWhere( $dbr->expr( 'ips_item_id', '!=', $itemId->getNumericId() ) )
 			->caller( __METHOD__ )
 			->fetchResultSet();
 

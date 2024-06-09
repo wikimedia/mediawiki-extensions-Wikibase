@@ -102,9 +102,9 @@ class PruneItemsPerSite extends Maintenance {
 				'page_is_redirect' => 0,
 			] )
 			->where( [
-				'ips_row_id >= ' . $startRowId,
-				'ips_row_id < ' . $endRowId,
-				'page_id IS NULL',
+				$dbr->expr( 'ips_row_id', '>=', $startRowId ),
+				$dbr->expr( 'ips_row_id', '<', $endRowId ),
+				'page_id' => null,
 			] )
 			->caller( __METHOD__ )->fetchFieldValues();
 	}

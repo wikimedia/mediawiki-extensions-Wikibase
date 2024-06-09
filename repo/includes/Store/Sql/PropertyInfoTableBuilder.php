@@ -120,9 +120,9 @@ class PropertyInfoTableBuilder {
 			$queryBuilderTemplate->leftJoin(
 				$this->propertyInfoTable->getTableName(),
 				null,
-				$dbw->buildConcat( [ "'P'", 'pi_property_id' ] ) . ' = page_title'
+				$dbw->buildConcat( [ $dbw->addQuotes( 'P' ), 'pi_property_id' ] ) . ' = page_title'
 			);
-			$queryBuilderTemplate->where( 'pi_property_id IS NULL' ); // only add missing entries
+			$queryBuilderTemplate->where( [ 'pi_property_id' => null ] ); // only add missing entries
 		}
 
 		$queryBuilderTemplate->where( [ 'page_namespace' => $propertyNamespace ] )
@@ -142,7 +142,7 @@ class PropertyInfoTableBuilder {
 			$dbw->startAtomic( __METHOD__ );
 
 			$queryBuilder = clone $queryBuilderTemplate;
-			$queryBuilder->where( 'page_id > ' . $pageId );
+			$queryBuilder->where( $dbw->expr( 'page_id', '>', $pageId ) );
 			$props = $queryBuilder->fetchResultSet();
 
 			$c = 0;
