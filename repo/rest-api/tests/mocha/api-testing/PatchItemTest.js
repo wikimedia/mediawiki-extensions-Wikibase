@@ -16,11 +16,13 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	let originalRevisionId;
 	let predicatePropertyId;
 	const testEnglishLabel = `some-label-${utils.uniq()}`;
+	const languageWithExistingLabel = 'en';
+	const languageWithExistingDescription = 'en';
 
 	before( async function () {
 		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: 'en', value: testEnglishLabel } ],
-			descriptions: [ { language: 'en', value: `some-description-${utils.uniq()}` } ],
+			labels: [ { language: languageWithExistingLabel, value: testEnglishLabel } ],
+			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
 			aliases: [ { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
 
@@ -209,7 +211,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '422 error response', () => {
-		it( 'after patching: invalid operation change item id', async () => {
+		it( 'invalid operation change item id', async () => {
 			const patch = [
 				{ op: 'replace', path: '/id', value: 'Q123' }
 			];
@@ -221,26 +223,243 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing item' );
 		} );
 
-		it( 'after patching labels: invalid field', async () => {
-			const patch = [
-				{ op: 'replace', path: '/labels', value: 'invalid-labels' }
-			];
-
-			const response = await newPatchItemRequestBuilder( testItemId, patch )
-				.assertValidRequest().makeRequest();
-
-			const context = { path: 'labels', value: 'invalid-labels' };
-			assertValidError( response, 422, 'patched-item-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched item" );
-		} );
-
-		it( 'after patching: unexpected field', async () => {
+		it( 'unexpected field', async () => {
 			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patched-item-unexpected-field' );
 			assert.strictEqual( response.body.message, "The patched item contains an unexpected field: 'foo'" );
+		} );
+
+		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
+			op: 'replace',
+			path: `/labels/${languageWithExistingLabel}`,
+			value: newLabel
+		} );
+
+		it( 'invalid labels type', async () => {
+			const invalidLabels = [ 'not', 'an', 'object' ];
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '/labels', value: invalidLabels } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: 'labels', value: invalidLabels };
+			assertValidError( response, 422, 'patched-item-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched item" );
+		} );
+
+		it( 'invalid label', async () => {
+			const language = languageWithExistingLabel;
+			const invalidLabel = 'tab characters \t not allowed';
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-label-invalid', { language, value: invalidLabel } );
+			assert.include( response.body.message, invalidLabel );
+			assert.include( response.body.message, `'${language}'` );
+		} );
+
+		it( 'invalid label type', async () => {
+			const language = languageWithExistingLabel;
+			const label = { object: 'not allowed' };
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( label ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { language, value: JSON.stringify( label ) };
+			assertValidError( response, 422, 'patched-label-invalid', context );
+			assert.include( response.body.message, JSON.stringify( label ) );
+			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
+		} );
+
+		it( 'empty label', async () => {
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( '' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-label-empty', { language: languageWithExistingLabel } );
+		} );
+
+		it( 'label too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongLabel = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingLabelPatchOp( tooLongLabel ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel };
+			assertValidError( response, 422, 'patched-label-too-long', context );
+			assert.strictEqual(
+				response.body.message,
+				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
+			);
+		} );
+
+		it( 'invalid label language code', async () => {
+			const language = 'invalid-language-code';
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ {
+					op: 'add',
+					path: `/labels/${language}`,
+					value: 'potato'
+				} ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-labels-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
+		} );
+
+		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
+			op: 'replace',
+			path: `/descriptions/${languageWithExistingDescription}`,
+			value: newDescription
+		} );
+
+		it( 'invalid descriptions type', async () => {
+			const invalidDescriptions = [ 'not', 'an', 'object' ];
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '/descriptions', value: invalidDescriptions } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: 'descriptions', value: invalidDescriptions };
+			assertValidError( response, 422, 'patched-item-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'descriptions' in the patched item" );
+		} );
+
+		it( 'invalid description', async () => {
+			const language = 'en';
+			const invalidDescription = 'tab characters \t not allowed';
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-invalid', { language, value: invalidDescription } );
+			assert.include( response.body.message, invalidDescription );
+			assert.include( response.body.message, `'${language}'` );
+		} );
+
+		it( 'invalid description type', async () => {
+			const invalidDescription = { object: 'not allowed' };
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { language: 'en', value: JSON.stringify( invalidDescription ) };
+			assertValidError( response, 422, 'patched-description-invalid', context );
+			assert.include( response.body.message, JSON.stringify( invalidDescription ) );
+			assert.include( response.body.message, "'en'" );
+		} );
+
+		it( 'empty description', async () => {
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
+		} );
+
+		it( 'empty description after trimming whitespace in the input', async () => {
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-description-empty', { language: 'en' } );
+		} );
+
+		it( 'description too long', async () => {
+			// this assumes the default value of 250 from Wikibase.default.php is in place and
+			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
+			const maxLength = 250;
+			const tooLongDescription = 'x'.repeat( maxLength + 1 );
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { value: tooLongDescription, 'character-limit': maxLength, language: 'en' };
+			assertValidError( response, 422, 'patched-description-too-long', context );
+			assert.strictEqual(
+				response.body.message,
+				`Changed description for 'en' must not be more than ${maxLength} characters long`
+			);
+		} );
+
+		it( 'invalid description language code', async () => {
+			const language = 'invalid-language-code';
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: `/descriptions/${language}`, value: 'potato' } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
+			assert.include( response.body.message, language );
+		} );
+
+		it( 'label and description with the same value', async () => {
+			const sameValueForLabelAndDescription = 'a random value';
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[
+					makeReplaceExistingLabelPatchOp( sameValueForLabelAndDescription ),
+					makeReplaceExistingDescriptionPatchOperation( sameValueForLabelAndDescription )
+				]
+			).assertValidRequest().makeRequest();
+
+			const context = { language: languageWithExistingLabel };
+			assertValidError( response, 422, 'patched-item-label-description-same-value', context );
+
+			assert.strictEqual(
+				response.body.message,
+				`Label and description for language code '${languageWithExistingLabel}' can not have the same value`
+			);
+		} );
+
+		it( 'item with same label and description already exists', async () => {
+			const label = `test-label-${utils.uniq()}`;
+			const description = `test-description-${utils.uniq()}`;
+
+			const existingEntityResponse = await entityHelper.createEntity( 'item', {
+				labels: [ { language: languageWithExistingLabel, value: label } ],
+				descriptions: [ { language: languageWithExistingDescription, value: description } ]
+			} );
+
+			const existingItemId = existingEntityResponse.entity.id;
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[
+					makeReplaceExistingLabelPatchOp( label ),
+					makeReplaceExistingDescriptionPatchOperation( description )
+				]
+			).assertValidRequest().makeRequest();
+
+			const context = {
+				language: languageWithExistingLabel,
+				label,
+				description,
+				'matching-item-id': existingItemId
+			};
+			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
+			assert.strictEqual(
+				response.body.message,
+				`Item '${existingItemId}' already has label '${label}' associated with language code ` +
+				`'${languageWithExistingLabel}', using the same description text`
+			);
 		} );
 	} );
 
