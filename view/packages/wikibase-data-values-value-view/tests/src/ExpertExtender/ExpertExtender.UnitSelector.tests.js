@@ -18,22 +18,16 @@
 
 	testExpertExtenderExtension.all(
 		UnitSelector,
-		function() {
-			return new UnitSelector(
-				messageProvider,
-				function() {
-					return {};
-				}
-			);
-		}
+		() => new UnitSelector(
+			messageProvider,
+			( () => ( {} ) )
+		)
 	);
 
-	QUnit.test( 'getConceptUri() does change if input value changes', function( assert ) {
+	QUnit.test( 'getConceptUri() does change if input value changes', ( assert ) => {
 		const unitSelector = new UnitSelector(
 			messageProvider,
-			function() {
-				return { label: 'Ultrameter' };
-			}
+			( () => ( { label: 'Ultrameter' } ) )
 		);
 		const $extender = $( '<div />' );
 
@@ -54,12 +48,10 @@
 		assert.strictEqual( unitSelector.getConceptUri(), 'foobar' );
 	} );
 
-	QUnit.test( 'returns correct value after initialization', function( assert ) {
+	QUnit.test( 'returns correct value after initialization', ( assert ) => {
 		const unitSelector = new UnitSelector(
 			messageProvider,
-			function() {
-				return { conceptUri: 'Ultrameter' };
-			}
+			( () => ( { conceptUri: 'Ultrameter' } ) )
 		);
 		const $extender = $( '<div />' );
 

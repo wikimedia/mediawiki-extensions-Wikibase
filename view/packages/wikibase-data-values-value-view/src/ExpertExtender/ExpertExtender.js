@@ -23,7 +23,7 @@
 
 		const extendable = this._extendable = new Extendable();
 
-		$.each( extensions, function( k, extension ) {
+		$.each( extensions, ( k, extension ) => {
 			extendable.addExtension( extension );
 		} );
 	};
@@ -91,7 +91,7 @@
 		_initExtensions: function( $extender ) {
 			const self = this;
 			this._extendable.callExtensions( 'init', [ $extender ] );
-			this.$input.one( 'inputextenderaftertoggle', function() {
+			this.$input.one( 'inputextenderaftertoggle', () => {
 				self._extendable.callExtensions( 'onInitialShow' );
 				self._extendable.callExtensions( 'draw' );
 			} );

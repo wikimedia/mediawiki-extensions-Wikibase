@@ -35,13 +35,13 @@ module.exports = ( function( $, vv ) {
 			this.$input
 			.addClass( this.uiBaseClass + '-input valueview-input' )
 			.val( this.viewState().getTextValue() )
-			.on( 'keydown', function( event ) {
+			.on( 'keydown', ( event ) => {
 				// Prevent Enter key from adding a new line character:
 				if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					event.preventDefault();
 				}
 			} )
-			.on( 'eachchange', function() {
+			.on( 'eachchange', () => {
 				notifier.notify( 'change' );
 			} )
 			.appendTo( this.$viewPort );

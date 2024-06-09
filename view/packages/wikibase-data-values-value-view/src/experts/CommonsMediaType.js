@@ -35,11 +35,11 @@ module.exports = ( function( $, vv ) {
 			// Using the inputautoexpand plugin, the position of the dropdown needs to be updated
 			// whenever the input box expands vertically:
 			$input
-			.on( 'eachchange', function( event, oldValue ) {
+			.on( 'eachchange', ( event, oldValue ) => {
 				// TODO/OPTIMIZE: Only reposition when necessary, i.e. when expanding vertically
 				$input.data( 'commonssuggester' ).repositionMenu();
 			} )
-			.on( 'commonssuggesterchange', function( event, response ) {
+			.on( 'commonssuggesterchange', ( event, response ) => {
 				notifier.notify( 'change' );
 				$input.data( 'inputautoexpand' ).expand();
 			} );

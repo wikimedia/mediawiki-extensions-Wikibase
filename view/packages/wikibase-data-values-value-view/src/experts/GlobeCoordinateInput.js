@@ -35,9 +35,7 @@ module.exports = ( function( $, vv ) {
 		const self = this;
 
 		this.preview = new vv.ExpertExtender.Preview(
-			function() {
-				return self.viewState().getFormattedValue();
-			},
+			( () => self.viewState().getFormattedValue() ),
 			this._messageProvider
 		);
 
@@ -51,10 +49,10 @@ module.exports = ( function( $, vv ) {
 		this.precisionRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-precision',
 			this._getPrecisionValues(),
-			function( newPrecisionLevel ) {
+			( ( newPrecisionLevel ) => {
 				self._viewNotifier.notify( 'change' );
-			},
-			function() {
+			} ),
+			( () => {
 				const value = self.viewState().value();
 				if ( !value ) {
 					return value;
@@ -79,7 +77,7 @@ module.exports = ( function( $, vv ) {
 						[ self._getPrecisionLabel( precision ) ]
 					)
 				};
-			},
+			} ),
 			this._messageProvider
 		);
 
@@ -199,7 +197,7 @@ module.exports = ( function( $, vv ) {
 				actualPrecision = null,
 				roundedPrecision = this._roundPrecision( precision );
 
-			$.each( PRECISIONS, function( i, precision ) {
+			$.each( PRECISIONS, ( i, precision ) => {
 				if ( self._roundPrecision( precision ) === roundedPrecision ) {
 					actualPrecision = roundedPrecision;
 					return false;
@@ -218,7 +216,7 @@ module.exports = ( function( $, vv ) {
 		_getPrecisionValues: function() {
 			const self = this,
 				precisionValues = [];
-			$.each( PRECISIONS, function( i, precision ) {
+			$.each( PRECISIONS, ( i, precision ) => {
 				precisionValues.unshift( {
 					value: self._roundPrecision( precision ),
 					label: self._getPrecisionLabel( precision )

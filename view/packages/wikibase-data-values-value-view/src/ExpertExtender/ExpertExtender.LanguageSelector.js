@@ -87,7 +87,7 @@
 
 			if ( languages !== null ) {
 				this._labels = {};
-				$.each( languages, function( i, code ) {
+				$.each( languages, ( i, code ) => {
 					const languageName = self._contentLanguages.getName( code );
 
 					self._labels[code] = languageName ? self._messageProvider.getMessage(
@@ -108,9 +108,7 @@
 
 			if ( this._labels ) {
 				this.$selector.languagesuggester( {
-					source: $.map( this._labels, function( label, code ) {
-						return { code: code, label: label };
-					} )
+					source: $.map( this._labels, ( label, code ) => ( { code: code, label: label } ) )
 				} ).on( 'languagesuggesterchange', this._onValueChange );
 			} else {
 				this.$selector.on( 'eachchange', this._onValueChange );

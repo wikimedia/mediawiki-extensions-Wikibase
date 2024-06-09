@@ -12,7 +12,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 	function getPrecisionValues( messageProvider ) {
 		const precisionValues = [],
 			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
-		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
+		$.each( TimeValue.PRECISIONS, ( precisionValue, precision ) => {
 			let label;
 			if ( precisionValue <= dayPrecision ) {
 				// TODO: Remove this check as soon as time values are supported.
@@ -33,7 +33,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 	 */
 	function getCalendarValues( messageProvider ) {
 		const calendarValues = [];
-		$.each( TimeValue.CALENDARS, function( key, uri ) {
+		$.each( TimeValue.CALENDARS, ( key, uri ) => {
 			const label = messageProvider.getMessage(
 				'valueview-expert-timevalue-calendar-' + key.toLowerCase()
 			) || key.toLowerCase();
@@ -58,9 +58,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 		const self = this;
 
 		this.preview = new vv.ExpertExtender.Preview(
-			function() {
-				return self.viewState().getFormattedValue();
-			},
+			( () => self.viewState().getFormattedValue() ),
 			this._messageProvider
 		);
 
@@ -75,10 +73,10 @@ module.exports = ( function( $, vv, TimeValue ) {
 			this.uiBaseClass + '-precision',
 			getPrecisionValues( this._messageProvider ),
 			this._onRotatorChange.bind( this ),
-			function() {
+			( () => {
 				const value = self.viewState().value();
 				return value && value.getOption( 'precision' );
-			},
+			} ),
 			this._messageProvider
 		);
 
@@ -93,10 +91,10 @@ module.exports = ( function( $, vv, TimeValue ) {
 			this.uiBaseClass + '-calendar',
 			getCalendarValues( this._messageProvider ),
 			this._onRotatorChange.bind( this ),
-			function() {
+			( () => {
 				const value = self.viewState().value();
 				return value && value.getOption( 'calendarModel' );
-			},
+			} ),
 			this._messageProvider
 		);
 

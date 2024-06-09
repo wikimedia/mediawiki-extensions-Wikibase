@@ -10,11 +10,9 @@
 
 	testExpertExtenderExtension.all(
 		ExpertExtender.Preview,
-		function() {
-			return new ExpertExtender.Preview( null, {
-				getMessage: function() { }
-			} );
-		}
+		() => new ExpertExtender.Preview( null, {
+			getMessage: function() { }
+		} )
 	);
 
 } )(

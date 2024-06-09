@@ -63,7 +63,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertStore' );
 
-	QUnit.test( 'Constructor', function( assert ) {
+	QUnit.test( 'Constructor', ( assert ) => {
 		const expertStore = new vv.ExpertStore();
 
 		assert.ok(
@@ -72,11 +72,11 @@
 		);
 	} );
 
-	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
+	QUnit.test( 'registerDataTypeExpert(): Error handling', ( assert ) => {
 		const expertStore = new vv.ExpertStore();
 
 		assert.throws(
-			function() {
+			() => {
 				expertStore.registerDataTypeExpert( 'invalid', stringType.getId() );
 			},
 			'Failed trying to register an invalid expert constructor.'
@@ -85,18 +85,18 @@
 		expertStore.registerDataTypeExpert( MockExpertForStringDataType, stringType.getId() );
 
 		assert.throws(
-			function() {
+			() => {
 				expertStore.getExpert( stringType );
 			},
 			'Failed trying to get an expert with an invalid purpose.'
 		);
 	} );
 
-	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
+	QUnit.test( 'registerDataValueExpert(): Error handling', ( assert ) => {
 		const expertStore = new vv.ExpertStore();
 
 		assert.throws(
-			function() {
+			() => {
 				expertStore.registerDataValueExpert( 'invalid', StringValue.TYPE );
 			},
 			'Failed trying to register an invalid expert constructor.'
@@ -105,14 +105,14 @@
 		expertStore.registerDataValueExpert( MockExpertForStringValue, StringValue.TYPE );
 
 		assert.throws(
-			function() {
+			() => {
 				expertStore.getExpert( StringValue );
 			},
 			'Failed trying to get an expert with an invalid purpose.'
 		);
 	} );
 
-	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
+	QUnit.test( 'Return default expert constructor on getExpert()', ( assert ) => {
 		const expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
 
 		assert.strictEqual(
@@ -227,7 +227,7 @@
 		const expertStore = new vv.ExpertStore();
 
 		// Register experts as per definition:
-		$.each( toRegister, function( i, registerPair ) {
+		$.each( toRegister, ( i, registerPair ) => {
 			const purpose = registerPair[0],
 				Expert = registerPair[1];
 
@@ -244,7 +244,7 @@
 		} );
 
 		// Check for expected conditions:
-		$.each( toExpect, function( i, expectPair ) {
+		$.each( toExpect, ( i, expectPair ) => {
 			let purpose = expectPair[0],
 				Expert = expectPair[1],
 				RetrievedExpert;
@@ -266,10 +266,10 @@
 		} );
 	}
 
-	expertStoreRegistrationTestCases.forEach( function ( params ) {
+	expertStoreRegistrationTestCases.forEach( ( params ) => {
 		QUnit.test(
 			'registerDataTypeExpert()/registerDataValueExpert() & getExpert()',
-			function( assert ) {
+			( assert ) => {
 				expertStoreRegistrationTest( assert, params.register, params.expect );
 			}
 		);

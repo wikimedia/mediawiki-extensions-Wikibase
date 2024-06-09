@@ -33,12 +33,12 @@
 
 			// Since we're using the input auto expand, we have to update the position of the
 			// dropdown whenever the input box expands vertically:
-			$input.on( 'eachchange', function( event, oldValue ) {
+			$input.on( 'eachchange', ( event, oldValue ) => {
 				// TODO/OPTIMIZE: only reposition when necessary, i.e. when expanding vertically
 				$input.data( 'suggester' ).repositionMenu();
 			} );
 
-			$input.on( 'suggesterchange', function( event, response ) {
+			$input.on( 'suggesterchange', ( event, response ) => {
 				notifier.notify( 'change' ); // here in addition to 'eachchange' from StringValue expert
 				$input.data( 'inputautoexpand' ).expand();
 			} );

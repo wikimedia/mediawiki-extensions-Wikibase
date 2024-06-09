@@ -19,13 +19,13 @@ module.exports = ( function( vv ) {
 		this._languageSelector = new LanguageSelector(
 			this._options.contentLanguages,
 			this._messageProvider,
-			function() {
+			( () => {
 				const value = self.viewState().value();
 				return value && value.getLanguageCode();
-			},
-			function() {
+			} ),
+			( () => {
 				self._viewNotifier.notify( 'change' );
-			}
+			} )
 		);
 
 		const inputExtender = new vv.ExpertExtender(

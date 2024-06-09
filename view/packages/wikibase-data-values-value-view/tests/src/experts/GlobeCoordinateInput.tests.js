@@ -16,7 +16,7 @@
 		expertConstructor: valueview.experts.GlobeCoordinateInput
 	} );
 
-	QUnit.test( 'don\'t crash with null precision', function( assert ) {
+	QUnit.test( 'don\'t crash with null precision', ( assert ) => {
 		const $div = $( '<div/>' ).appendTo( 'body' );
 		const expert = new valueview.experts.GlobeCoordinateInput(
 			$div,
@@ -37,7 +37,7 @@
 		expert.init();
 		expert.draw();
 		expert.focus();
-		window.setTimeout( function() {
+		window.setTimeout( () => {
 			assert.ok( true );
 			$div.remove();
 			done();
