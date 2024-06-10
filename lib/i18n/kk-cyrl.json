@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arystanbek"
+			"Arystanbek",
+			"Casserium"
 		]
 	},
 	"specialpages-group-wikibase": "Уикиқор",
@@ -43,7 +44,7 @@
 	"wikibase-entity-summary-wbsetdescription-set": "[$2] сипаттамасы өзгертілді",
 	"wikibase-entity-summary-wbsetdescription-remove": "[$2]  сипаттамасы алынып тасталды",
 	"wikibase-entity-summary-wbsetsitelink-add": "[$2] сайтынан сілтеме қосты",
-	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] сайтынан сілтемені аластады",
+	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] сайтынан сілтемені алып тастады",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|мәлімдеме|мәлімдемелер}} басталды",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|мәлімдеме|мәлімдемелер}} басталды",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|мәлімдеме|мәлімдемелер}} басталды",

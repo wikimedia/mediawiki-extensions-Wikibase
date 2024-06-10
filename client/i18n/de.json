@@ -37,7 +37,7 @@
 	"wikibase-linkitem-failed-modify": "Seiten konnten nicht verbunden werden: Fehler beim Zusammenführen der Einträge auf {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Mit Seite verlinken",
 	"wikibase-linkitem-linkpage": "Mit Seite verlinken",
-	"wikibase-linkitem-selectlink": "Bitte {{#FORMAL:wähle|wählen Sie}} eine Website und eine Seite aus, die {{#FORMAL:du|Sie}} mit dieser Seite verlinken {{#FORMAL:willst|wollen}}.",
+	"wikibase-linkitem-selectlink": "Bitte eine Website und eine Seite auswählen, die mit dieser Seite verlinkt werden soll.",
 	"wikibase-linkitem-input-site": "Sprache:",
 	"wikibase-linkitem-input-page": "Seite:",
 	"wikibase-linkitem-confirmitem-text": "Die ausgewählte Seite ist bereits mit einem [$1 Objekt in unserem zentralen Datenrepositorium] verknüpft. Bitte bestätige, dass die unten {{PLURAL:$2|stehende Seite diejenige ist|stehenden Seiten diejenigen sind}}, die du mit dieser Seite verlinken willst.",
