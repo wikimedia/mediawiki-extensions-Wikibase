@@ -68,6 +68,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.statements[ predicatePropertyId ][ 0 ].value.content, newStatementValue );
 			assert.match(
 				response.body.statements[ predicatePropertyId ][ 0 ].id,
+				// eslint-disable-next-line security/detect-non-literal-regexp
 				new RegExp( `^${testItemId}\\$[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}$`, 'i' )
 			);
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );

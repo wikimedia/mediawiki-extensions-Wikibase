@@ -23,7 +23,9 @@ function format( obj ) {
 
 Assertion.addChainableMethod(
 	'status',
-	function ( code ) { this.equals( code ); },
+	function ( code ) {
+		this.equals( code );
+	},
 	function () {
 		const response = utils.flag( this, 'object' );
 		utils.flag( this, 'object', response.status );

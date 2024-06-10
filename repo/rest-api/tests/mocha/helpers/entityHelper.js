@@ -37,6 +37,8 @@ async function createUniqueStringProperty() {
 /**
  * @param {Array} statements
  * @param {string} entityType
+ *
+ * @return {Object}
  */
 async function createEntityWithStatements( statements, entityType ) {
 	statements.forEach( ( statement ) => {
@@ -53,6 +55,8 @@ async function createEntityWithStatements( statements, entityType ) {
 
 /**
  * @param {Array} statements
+ *
+ * @return {Object}
  */
 async function createItemWithStatements( statements ) {
 	return await createEntityWithStatements( statements, 'item' );
@@ -60,6 +64,8 @@ async function createItemWithStatements( statements ) {
 
 /**
  * @param {Array} statements
+ *
+ * @return {Object}
  */
 async function createPropertyWithStatements( statements ) {
 	return await createEntityWithStatements( statements, 'property' );
