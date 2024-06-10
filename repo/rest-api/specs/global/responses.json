@@ -139,7 +139,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
-					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample " }
+					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample" }
 				}
 			}
 		},
@@ -158,7 +158,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictWithSiteContextExample " }
+					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictWithSiteContextExample" }
 				}
 			}
 		},
