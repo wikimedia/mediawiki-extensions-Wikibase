@@ -38,21 +38,10 @@
 		"type": "object",
 		"properties": {
 			"code": { "type": "string" },
-			"message": { "type": "string" }
+			"message": { "type": "string" },
+			"context": { "type": "object" }
 		},
 		"required": [ "code", "message" ]
-	},
-	"ContextError": {
-		"allOf": [
-			{ "$ref": "#/Error" },
-			{
-				"properties": {
-					"context": {
-						"type": "object"
-					}
-				}
-			}
-		]
 	},
 	"StatementResponse": {
 		"allOf": [

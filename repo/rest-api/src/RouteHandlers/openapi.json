@@ -3755,6 +3755,9 @@
                 },
                 "message": {
                   "type": "string"
+                },
+                "context": {
+                  "type": "object"
                 }
               },
               "required": [
@@ -3855,18 +3858,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-                },
-                {
-                  "properties": {
-                    "context": {
-                      "type": "object"
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "sitelink-conflict": {
@@ -4172,7 +4164,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "item-data-invalid-field": {
@@ -4487,7 +4479,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -4522,7 +4514,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -4557,7 +4549,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-statement-id": {
@@ -4598,7 +4590,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -4645,7 +4637,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -4876,7 +4868,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -4923,7 +4915,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -4970,7 +4962,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -5017,7 +5009,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5061,7 +5053,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -5093,7 +5085,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5125,7 +5117,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -5157,7 +5149,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5189,7 +5181,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -5236,7 +5228,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5361,7 +5353,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -5402,7 +5394,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5443,7 +5435,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -5484,7 +5476,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "redirected-item": {
@@ -5513,7 +5505,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patch-test-failed": {
@@ -5539,7 +5531,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-sitelink-invalid-site-id": {
@@ -5589,7 +5581,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-item-invalid-operation-change-item-id": {
@@ -5714,7 +5706,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-property-invalid-operation-change-property-id": {
@@ -5815,7 +5807,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-labels-invalid-language-code": {
@@ -5853,7 +5845,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-labels-invalid-language-code": {
@@ -5891,7 +5883,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-descriptions-invalid-language-code": {
@@ -5929,7 +5921,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-descriptions-invalid-language-code": {
@@ -5964,7 +5956,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-aliases-invalid-language-code": {
@@ -5999,7 +5991,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-statement-id": {
@@ -6046,7 +6038,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-item-id": {
@@ -6099,7 +6091,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "invalid-property-id": {
@@ -6152,7 +6144,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patch-test-failed": {
@@ -6178,7 +6170,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/SitelinkConflict/content/application~1json/schema"
+              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
               "patched-statement-missing-field": {
