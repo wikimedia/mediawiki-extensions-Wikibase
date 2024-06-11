@@ -10,7 +10,9 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\LikeValue;
 
 /**
  * Base class for Jobs handling modifications to a set of client changes (identified
@@ -120,10 +122,14 @@ abstract class ChangeModificationNotificationJob extends Job {
 		array $revisionIdentifiers
 	): IResultWrapper {
 		$dbr = $this->clientDb->connections()->getReadConnection();
-		$rcParamPattern = $dbr->buildLike(
-			$dbr->anyString(),
-			'"', $entityIdSerialization, '"',
-			$dbr->anyString()
+		$rcParamPattern = $dbr->expr(
+			'rc_params',
+			IExpression::LIKE,
+			new LikeValue(
+				$dbr->anyString(),
+				'"', $entityIdSerialization, '"',
+				$dbr->anyString()
+			)
 		);
 
 		$timestamps = [];
@@ -136,7 +142,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 			->from( 'recentchanges' )
 			->where( [
 				'rc_timestamp' => $timestamps,
-				"rc_params $rcParamPattern",
+				$rcParamPattern,
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			] )
 			->caller( __METHOD__ )

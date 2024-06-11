@@ -15,8 +15,10 @@ use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\LikeValue;
 
 /**
  * MatchingTermsLookup implementation in the new term store. Mostly used for search.
@@ -163,7 +165,11 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$text = $mask->getText();
 		if ( $text !== null ) {
 			if ( $options['prefixSearch'] ) {
-				$queryBuilder->where( 'wbx_text ' . $dbr->buildLike( $text, $dbr->anyString() ) );
+				$queryBuilder->where( $dbr->expr(
+					'wbx_text',
+					IExpression::LIKE,
+					new LikeValue( $text, $dbr->anyString() )
+				) );
 			} else {
 				$queryBuilder->where( [ 'wbx_text' => $text ] );
 			}
