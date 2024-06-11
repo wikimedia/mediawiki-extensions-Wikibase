@@ -208,8 +208,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-property-invalid-operation-change-property-id' );
+			assertValidError( response, 422, 'patched-property-invalid-operation-change-property-id' );
 			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing property' );
 		} );
 
@@ -221,8 +220,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-property-invalid-operation-change-property-datatype' );
+			assertValidError( response, 422, 'patched-property-invalid-operation-change-property-datatype' );
 			assert.strictEqual( response.body.message, 'Cannot change the datatype of the existing property' );
 		} );
 
@@ -231,8 +229,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-property-missing-field' );
+			assertValidError( response, 422, 'patched-property-missing-field', { path: 'data-type' } );
 		} );
 
 		it( 'unexpected field', async () => {
@@ -240,8 +237,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 422 );
-			assert.strictEqual( response.body.code, 'patched-property-unexpected-field' );
+			assertValidError( response, 422, 'patched-property-unexpected-field' );
 		} );
 
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
