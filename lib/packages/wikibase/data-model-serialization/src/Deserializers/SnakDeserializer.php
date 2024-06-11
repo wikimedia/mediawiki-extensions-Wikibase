@@ -119,6 +119,8 @@ class SnakDeserializer implements DispatchableDeserializer {
 		$this->requireAttribute( $serialization, 'datavalue' );
 		$propertyId = $this->deserializePropertyId( $serialization['property'] );
 
+		$this->assertValidDataValue( $serialization['datavalue'] );
+
 		return new PropertyValueSnak(
 			$propertyId,
 			$this->deserializeDataValue( $propertyId, $serialization['datavalue'] )
@@ -132,6 +134,16 @@ class SnakDeserializer implements DispatchableDeserializer {
 				: $this->dataValueDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $ex ) {
 			return $this->newUndeserializableValue( $serialization, $ex );
+		}
+	}
+
+	private function assertValidDataValue( $serialization ): void {
+		if ( !is_array( $serialization ) || !array_key_exists( DataValueDeserializer::TYPE_KEY, $serialization ) ) {
+			throw new MissingTypeException( 'Not an array or missing the key "' . DataValueDeserializer::TYPE_KEY . '"' );
+		}
+
+		if ( !array_key_exists( DataValueDeserializer::VALUE_KEY, $serialization ) ) {
+			throw new MissingAttributeException( DataValueDeserializer::VALUE_KEY );
 		}
 	}
 
