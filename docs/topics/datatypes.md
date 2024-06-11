@@ -39,6 +39,8 @@ Each key is associated with a map that provides the following fields:
   * A callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
 * parser-factory-callback (repo only)
   * A callable that acts as a factory for a ValueParser for this data type.
+* deserializer-builder (repo and client)
+  * A builder (`callable( mixed $value ): DataValue` or `DataValue` class string) that is used to deserialize values of this type. Note that if this is configured for a data type, deserializing any values of the corresponding value type will require a data type lookup.
 * formatter-factory-callback (repo and client)
   * A callable that acts as a factory for ValueFormatters for use with this data type.
 * snak-formatter-factory-callback (repo and client)
