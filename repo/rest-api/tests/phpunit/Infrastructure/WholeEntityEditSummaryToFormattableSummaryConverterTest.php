@@ -13,22 +13,22 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
-use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class FullEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
+class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 	/**
 	 * @dataProvider propertyEditSummaryProvider
 	 */
 	public function testPatchPropertyEditSummary( PropertyEditSummary $editSummary, Summary $expectedSummary ): void {
-		$editSummaryFormatter = new FullEntityEditSummaryToFormattableSummaryConverter();
+		$editSummaryFormatter = new WholeEntityEditSummaryToFormattableSummaryConverter();
 		$this->assertEquals( $expectedSummary, $editSummaryFormatter->newSummaryForPropertyPatch( $editSummary ) );
 	}
 

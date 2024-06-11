@@ -28,16 +28,16 @@ class EditSummaryFormatter {
 
 	private SummaryFormatter $summaryFormatter;
 	private TermsEditSummaryToFormattableSummaryConverter $termsEditSummaryConverter;
-	private FullEntityEditSummaryToFormattableSummaryConverter $fullEntityEditSummaryConverter;
+	private WholeEntityEditSummaryToFormattableSummaryConverter $wholeEntityEditSummaryConverter;
 
 	public function __construct(
 		SummaryFormatter $summaryFormatter,
 		TermsEditSummaryToFormattableSummaryConverter $termsEditSummaryConverter,
-		FullEntityEditSummaryToFormattableSummaryConverter $fullEntityEditSummaryConverter
+		WholeEntityEditSummaryToFormattableSummaryConverter $wholeEntityEditSummaryConverter
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->termsEditSummaryConverter = $termsEditSummaryConverter;
-		$this->fullEntityEditSummaryConverter = $fullEntityEditSummaryConverter;
+		$this->wholeEntityEditSummaryConverter = $wholeEntityEditSummaryConverter;
 	}
 
 	public function format( EditSummary $summary ): string {
@@ -49,7 +49,7 @@ class EditSummaryFormatter {
 	// phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
 		if ( $editSummary instanceof PropertyEditSummary ) {
-			return $this->fullEntityEditSummaryConverter->newSummaryForPropertyPatch( $editSummary );
+			return $this->wholeEntityEditSummaryConverter->newSummaryForPropertyPatch( $editSummary );
 		} elseif ( $editSummary instanceof LabelsEditSummary ) {
 			return $this->termsEditSummaryConverter->convertLabelsEditSummary( $editSummary );
 		} elseif ( $editSummary instanceof LabelEditSummary ) {
@@ -118,7 +118,7 @@ class EditSummaryFormatter {
 			$summary->setUserSummary( $editSummary->getUserComment() );
 			return $summary;
 		} elseif ( $editSummary instanceof PatchItemEditSummary ) {
-			return $this->fullEntityEditSummaryConverter->newSummaryForItemPatch( $editSummary );
+			return $this->wholeEntityEditSummaryConverter->newSummaryForItemPatch( $editSummary );
 		}
 
 		throw new LogicException( "Unknown summary type '{$editSummary->getEditAction()}' " . get_class( $editSummary ) );

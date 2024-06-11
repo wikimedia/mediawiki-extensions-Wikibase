@@ -23,8 +23,8 @@ use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\RestApi\Infrastructure\FullEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -49,7 +49,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$editSummaryFormatter = new EditSummaryFormatter(
 			WikibaseRepo::getSummaryFormatter(),
 			new TermsEditSummaryToFormattableSummaryConverter(),
-			new FullEntityEditSummaryToFormattableSummaryConverter()
+			new WholeEntityEditSummaryToFormattableSummaryConverter()
 		);
 		$this->assertSame( $formattedSummary, $editSummaryFormatter->format( $editSummary ) );
 	}
@@ -220,7 +220,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function testGivenLabelsEditSummary_usesEditSummaryConverter(): void {
 		$labelsEditSummary = $this->createStub( LabelsEditSummary::class );
-		$editSummaryConverter = $this->createStub( FullEntityEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConverter = $this->createStub( WholeEntityEditSummaryToFormattableSummaryConverter::class );
 		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
 		$converter->expects( $this->once() )
 			->method( 'convertLabelsEditSummary' )
@@ -235,7 +235,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	public function testGivenDescriptionsEditSummary_usesEditSummaryConverter(): void {
 		$descriptionsEditSummary = $this->createStub( DescriptionsEditSummary::class );
-		$editSummaryConverter = $this->createStub( FullEntityEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConverter = $this->createStub( WholeEntityEditSummaryToFormattableSummaryConverter::class );
 		$converter = $this->createMock( TermsEditSummaryToFormattableSummaryConverter::class );
 		$converter->expects( $this->once() )
 			->method( 'convertDescriptionsEditSummary' )
@@ -252,7 +252,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		$propertyEditSummary = $this->createStub( PropertyEditSummary::class );
 		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
 
-		$editSummaryConverter = $this->createMock( FullEntityEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConverter = $this->createMock( WholeEntityEditSummaryToFormattableSummaryConverter::class );
 		$editSummaryConverter->expects( $this->once() )
 			->method( 'newSummaryForPropertyPatch' )
 			->with( $propertyEditSummary )
@@ -269,7 +269,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 
 		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
 
-		$editSummaryConverter = $this->createMock( FullEntityEditSummaryToFormattableSummaryConverter::class );
+		$editSummaryConverter = $this->createMock( WholeEntityEditSummaryToFormattableSummaryConverter::class );
 		$editSummaryConverter->expects( $this->once() )
 			->method( 'newSummaryForItemPatch' )
 			->with( $itemEditSummary )
