@@ -736,8 +736,27 @@ return [
 			),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemValidator(
-				new LabelsDeserializer(),
-				new DescriptionsDeserializer(),
+				new LabelsSyntaxValidator(
+					new LabelsDeserializer(),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new ItemLabelsContentsValidator(
+					new TermValidatorFactoryItemLabelValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WikibaseRepo::getItemTermsCollisionDetector()
+					)
+				),
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				),
+				new ItemDescriptionsContentsValidator(
+					new TermValidatorFactoryItemDescriptionValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WikibaseRepo::getItemTermsCollisionDetector()
+					)
+				),
 				new AliasesDeserializer(),
 				WbRestApi::getSitelinkDeserializer(),
 				new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
