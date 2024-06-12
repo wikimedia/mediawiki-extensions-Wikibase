@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "Povezati s straniceju",
 	"wikibase-linkitem-selectlink": "Prosimo, izberite sajt i stranicu, ktoru hočete povezati s tutoju straniceju.",
 	"wikibase-linkitem-input-site": "Jezyk:",
-	"wikibase-linkitem-input-page": "Stranica:"
+	"wikibase-linkitem-input-page": "Stranica:",
+	"wikibase-rc-hide-wikidata-hide": "Skryti",
+	"wikibase-rc-hide-wikidata-show": "Pokazati",
+	"wikibase-otherprojects": "V drugyh projektah"
 }
