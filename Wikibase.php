@@ -12,7 +12,7 @@
 if ( $wgEnableWikibaseRepo ?? true ) {
 	wfLoadExtension( 'WikibaseRepository', __DIR__ . '/extension-repo.json' );
 
-	if ( $wgWikimediaJenkinsCI ?? false ) {
+	if ( defined( 'MW_QUIBBLE_CI' ) ) {
 		require_once __DIR__ . '/repo/config/Wikibase.ci.php';
 	}
 }
@@ -20,7 +20,7 @@ if ( $wgEnableWikibaseRepo ?? true ) {
 if ( $wgEnableWikibaseClient ?? true ) {
 	wfLoadExtension( 'WikibaseClient', __DIR__ . '/extension-client.json' );
 
-	if ( $wgWikimediaJenkinsCI ?? false ) {
+	if ( defined( 'MW_QUIBBLE_CI' ) ) {
 		require_once __DIR__ . '/client/config/WikibaseClient.ci.php';
 	}
 }
