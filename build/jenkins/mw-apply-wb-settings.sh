@@ -34,8 +34,6 @@ function apply_client_settings {
 // mw-apply-wb-settings.php:
 $wgEnableWikibaseRepo = false;
 $wgEnableWikibaseClient = true;
-// $wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
-$wgWikimediaJenkinsCI = true;
 PHP
   echo -n '?>' >> LocalSettings.php
   cat LocalSettings-$$.php >> LocalSettings.php
@@ -51,8 +49,6 @@ function apply_repo_settings {
 // mw-apply-wb-settings.php:
 $wgEnableWikibaseRepo = true;
 $wgEnableWikibaseClient = true;
-// $wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
-$wgWikimediaJenkinsCI = true;
 PHP
   echo -n '?>' >> LocalSettings.php
   cat LocalSettings-$$.php >> LocalSettings.php
