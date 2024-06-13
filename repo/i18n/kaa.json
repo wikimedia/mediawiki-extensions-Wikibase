@@ -46,16 +46,19 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|jazıw|jazıw}}",
 	"wikibase-sitelinks-special": "Basqa saytlar",
 	"wikibase-remove": "alıp taslaw",
+	"wikibase-propertypage-datatype": "Maǵlıwmat túri",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|derek|derekler}}",
 	"wikibase-snakview-snaktypeselector-value": "anıq mánis",
 	"wikibase-shortcopyrightwarning": "«$1» túymesin basıw arqalı siz [[$2|qollanıw shártlerine]] razılıq bildiresiz hám óz úlesińizdi [$3 $4] astında járiyalawǵa qaytpaslıq kelisim beresiz.",
 	"wikibase-copyrighttooltip-acknowledge": "Men ózimniń aldaǵı redaktorlawlarım ushın usı shártlerdi qabıllayman. Bul xabar basqa kórsetilmesin.",
 	"wikibase-validator-illegal-string-chars": "Qatar boslıq penen baslanbawı yamasa tawsılmawı, sonıń menen birge, vertikal boslıq yamasa qosımsha betlerdi óz ishine almawı tiyis: $1",
 	"wikibase-gotolinkedpage-submit": "Ótiw",
+	"wikibase-newproperty-datatype": "Maǵlıwmat túri:",
 	"special-newitem": "Jańa element jaratıw",
 	"wikibase-newitem-fieldset": "Jańa element jaratıw",
 	"wikibase-newentity-label": "Tema:",
 	"wikibase-setlabel-label": "Tema:",
 	"wikibase-setlabeldescriptionaliases-continue": "Dawam etiw",
-	"wikibase-modifyterm-language": "Til kodı:"
+	"wikibase-modifyterm-language": "Til kodı:",
+	"wikibase-listproperties-datatype": "Maǵlıwmat túri:"
 }
