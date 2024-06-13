@@ -68,8 +68,8 @@ class PatchedItemValidator {
 		$this->assertNoIllegalModification( $serialization, $originalItem );
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
-		$this->assertValidLabelsAndDescriptions( $originalItem, $serialization );
-		$this->assertValidAliases( $serialization[ 'aliases' ] ?? [] );
+		$this->assertValidLabelsAndDescriptions( $serialization, $originalItem );
+		$this->assertValidAliases( $serialization );
 
 		return new Item(
 			new ItemId( $serialization[ 'id' ] ),
@@ -114,7 +114,7 @@ class PatchedItemValidator {
 		}
 	}
 
-	private function assertValidLabelsAndDescriptions( Item $item, array $serialization ): void {
+	private function assertValidLabelsAndDescriptions( array $serialization, Item $originalItem ): void {
 		$labels = $serialization['labels'] ?? [];
 		$descriptions = $serialization['descriptions'] ?? [];
 		$validationError = $this->labelsSyntaxValidator->validate( $labels ) ??
@@ -123,7 +123,7 @@ class PatchedItemValidator {
 							   $this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 							   $this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
 							   $this->getModifiedLanguages(
-								   $item->getLabels(),
+								   $originalItem->getLabels(),
 								   $this->labelsSyntaxValidator->getPartiallyValidatedLabels()
 							   )
 						   ) ??
@@ -131,7 +131,7 @@ class PatchedItemValidator {
 							   $this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
 							   $this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 							   $this->getModifiedLanguages(
-								   $item->getDescriptions(),
+								   $originalItem->getDescriptions(),
 								   $this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions()
 							   )
 						   );
@@ -295,7 +295,8 @@ class PatchedItemValidator {
 		}
 	}
 
-	private function assertValidAliases( array $aliasesSerialization ): void {
+	private function assertValidAliases( array $serialization ): void {
+		$aliasesSerialization = $serialization[ 'aliases' ] ?? [];
 		$validationError = $this->aliasesValidator->validate( $aliasesSerialization );
 		if ( $validationError ) {
 			$context = $validationError->getContext();
