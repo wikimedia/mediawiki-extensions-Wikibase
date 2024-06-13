@@ -763,7 +763,7 @@ return [
 					new AliasesDeserializer()
 				),
 				WbRestApi::getSitelinkDeserializer(),
-				new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
+				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer() ) )
 			),
 			WbRestApi::getItemDataRetriever(),
 			WbRestApi::getItemUpdater()

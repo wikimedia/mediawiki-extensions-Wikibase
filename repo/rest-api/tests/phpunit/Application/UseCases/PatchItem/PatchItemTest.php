@@ -40,6 +40,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -104,7 +105,7 @@ class PatchItemTest extends TestCase {
 				new AliasesDeserializer()
 			),
 			$this->newSitelinkDeserializer(),
-			$this->newStatementsDeserializer(),
+			$this->newStatementsValidator(),
 		);
 		$this->itemWriteModelRetriever = $this->itemRepository;
 		$this->assertItemExists = $this->createStub( AssertItemExists::class );
@@ -266,14 +267,16 @@ class PatchItemTest extends TestCase {
 		);
 	}
 
-	private function newStatementsDeserializer(): StatementsDeserializer {
+	private function newStatementsValidator(): StatementsValidator {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new ItemId( $p[ 'item' ][ 'id' ] ) )
 		);
 
-		return new StatementsDeserializer(
-			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+		return new StatementsValidator(
+			new StatementsDeserializer(
+				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+			)
 		);
 	}
 
