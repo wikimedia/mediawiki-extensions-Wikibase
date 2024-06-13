@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\ParserFunctions;
 
-use Parser;
+use MediaWiki\Parser\Parser;
 
 /**
  * Class definition for the CommaSeparatedList parser function

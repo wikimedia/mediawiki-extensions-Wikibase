@@ -6,9 +6,9 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use MediaWikiIntegrationTestCase;
-use Parser;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikimedia\TestingAccessWrapper;
 

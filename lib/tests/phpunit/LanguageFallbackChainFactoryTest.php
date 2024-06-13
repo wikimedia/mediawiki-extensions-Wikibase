@@ -3,11 +3,11 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MainConfigNames;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\StaticContentLanguages;

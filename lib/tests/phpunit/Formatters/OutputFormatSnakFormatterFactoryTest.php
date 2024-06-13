@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
-use Message;
+use MediaWiki\Message\Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
-use Message;
+use MediaWiki\Message\Message;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;

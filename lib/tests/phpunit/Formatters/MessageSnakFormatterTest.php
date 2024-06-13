@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
+use MediaWiki\Message\Message;
 use MediaWikiCoversValidator;
-use Message;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;

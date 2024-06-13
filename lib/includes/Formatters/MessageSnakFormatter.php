@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 use MediaWiki\Html\Html;
-use Message;
+use MediaWiki\Message\Message;
 use RuntimeException;
 use Wikibase\DataModel\Snak\Snak;
 

@@ -7,12 +7,12 @@ use FormatJson;
 use InvalidArgumentException;
 use Language;
 use MapCacheLRU;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use Parser;
 use ParserOptions;
-use RequestContext;
 
 /**
  * Service for embedding Kartographer mapframes for GlobeCoordinateValues.

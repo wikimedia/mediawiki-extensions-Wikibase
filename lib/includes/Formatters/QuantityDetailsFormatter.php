@@ -7,7 +7,7 @@ use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use InvalidArgumentException;
 use MediaWiki\Html\Html;
-use Message;
+use MediaWiki\Message\Message;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\NumberLocalizer;
