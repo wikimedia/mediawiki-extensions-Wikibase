@@ -18,6 +18,7 @@ use Wikimedia\Assert\Assert;
  * - validator-factory-callback: a callback for creating validators for the data type,
  *   as used by BuilderBasedDataTypeValidatorFactory.
  * - parser-factory-callback: a callback for instantiating a parser for the data type
+ * - deserializer-builder: a callback or DataValue class string for deserializing the value
  * - formatter-factory-callback: a callback for instantiating a formatter for the data type
  * - rdf-builder-factory-callback: a callback for instantiating a rdf mapping for the data type
  *
