@@ -27,9 +27,9 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		$defaultArchiveRow = [
 			'ar_comment_id' => 1,
 			'ar_actor' => 1,
-			'ar_timestamp' => $this->db->timestamp(),
+			'ar_timestamp' => $this->getDb()->timestamp(),
 		];
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'archive' )
 			// relevant rows: the corresponding URLs should be purged
 			->row( $defaultArchiveRow + [

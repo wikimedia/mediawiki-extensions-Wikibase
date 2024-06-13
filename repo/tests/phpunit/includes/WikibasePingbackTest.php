@@ -133,7 +133,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getPingbackTime() {
-		return $this->db->newSelectQueryBuilder()
+		return $this->getDb()->newSelectQueryBuilder()
 			->select( 'ul_value' )
 			->from( 'updatelog' )
 			->where( [ 'ul_key' => self::TEST_KEY ] )
@@ -145,7 +145,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$requestFactory->expects( $expectation )
 			->method( 'post' )
 			->willReturn( true );
-		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
+		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->getDb() ] ) ] );
 
 		return new WikibasePingback(
 			null,
@@ -164,7 +164,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$extensions = $this->createMock( ExtensionRegistry::class );
 		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );
 		$requestFactory ??= $this->createMock( HttpRequestFactory::class );
-		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] );
+		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->getDb() ] ) ] );
 
 		$wikibaseRepoSettings
 			->method( 'getSetting' )
@@ -192,7 +192,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function populateSiteStats() {
-		$this->db->newUpdateQueryBuilder()
+		$this->getDb()->newUpdateQueryBuilder()
 			->update( 'site_stats' )
 			->set( [
 				'ss_total_pages' => 11,

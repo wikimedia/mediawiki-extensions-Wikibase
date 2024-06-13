@@ -136,7 +136,7 @@ abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTes
 	 * All changes have a unique rc_title value to make them easy to identify.
 	 */
 	protected function initRecentChanges() {
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'recentchanges' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )

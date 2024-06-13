@@ -26,7 +26,7 @@ use Wikimedia\TestingAccessWrapper;
 class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -39,12 +39,12 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 
 		foreach ( $titles as $pageId => $title ) {
 			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-			$page->insertOn( $this->db, $pageId );
+			$page->insertOn( $this->getDb(), $pageId );
 		}
 	}
 
 	public function testOnLoadExtensionSchemaUpdates_skipAlreadyUpdated() {
-		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->db ) );
+		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->getDb() ) );
 		$dbUpdater->insertUpdateRow( LoadExtensionSchemaUpdatesHookHandler::UPDATE_KEY_UNEXPECTED_UNCONNECTED_PAGE );
 
 		$handler = new LoadExtensionSchemaUpdatesHookHandler();
@@ -63,7 +63,7 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 			->method( 'isQuiet' )
 			->willReturn( true );
 
-		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->db, false, $maintenance ) );
+		$dbUpdater = TestingAccessWrapper::newFromObject( DatabaseUpdater::newForDB( $this->getDb(), false, $maintenance ) );
 
 		$this->overrideMwServices( null, [
 			'WikibaseClient.NamespaceChecker' => function() {

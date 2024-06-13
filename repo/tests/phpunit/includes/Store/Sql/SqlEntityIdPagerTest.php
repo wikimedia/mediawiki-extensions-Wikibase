@@ -39,12 +39,12 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 
 	public function addDBDataOnce() {
 		// We need to initially empty the table
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
 			->execute();
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'redirect' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -69,7 +69,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			return;
 		}
 
-		$dbw = $this->db;
+		$dbw = $this->getDb();
 		$dbw->newInsertQueryBuilder()
 			->insertInto( 'page' )
 			->rows( $pageRows )
@@ -102,7 +102,7 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			'page_latest' => 0,
 			'page_len' => 1,
 			'page_is_redirect' => $isRedirect ? 1 : 0,
-			'page_touched' => $this->db->timestamp(),
+			'page_touched' => $this->getDb()->timestamp(),
 		];
 	}
 

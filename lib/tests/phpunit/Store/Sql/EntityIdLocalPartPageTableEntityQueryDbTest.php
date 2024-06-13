@@ -26,7 +26,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	protected function setUp(): void {
 		parent::setUp();
 		$this->getExistingTestPage( Title::makeTitle( 1, 'LocalPartOne' ) );
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'page' )
 			->row( [
 				'page_title' => 'localPartTwo',
@@ -34,23 +34,23 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				'page_random' => 2,
 				'page_latest' => 221,
 				'page_len' => 2,
-				'page_touched' => $this->db->timestamp(),
+				'page_touched' => $this->getDb()->timestamp(),
 			] )
 			->caller( __METHOD__ )
 			->execute();
 		// insert an older revision for one tests (no other revisions)
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'revision' )
 			->row( [
 				'rev_id' => 220,
 				'rev_actor' => 0,
 				'rev_comment_id' => 0,
-				'rev_page' => $this->db->insertId(),
-				'rev_timestamp' => $this->db->timestamp(),
+				'rev_page' => $this->getDb()->insertId(),
+				'rev_timestamp' => $this->getDb()->timestamp(),
 			] )
 			->caller( __METHOD__ )
 			->execute();
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'slots' )
 			->row( [
 				'slot_revision_id' => 221,
@@ -60,7 +60,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			] )
 			->caller( __METHOD__ )
 			->execute();
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'slot_roles' )
 			->row( [
 				'role_id' => 22,
@@ -172,7 +172,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			$fields,
 			$revisionJoinConds,
 			$entityIds,
-			$this->db
+			$this->getDb()
 		);
 		$this->assertEquals( $expected, $rows );
 	}

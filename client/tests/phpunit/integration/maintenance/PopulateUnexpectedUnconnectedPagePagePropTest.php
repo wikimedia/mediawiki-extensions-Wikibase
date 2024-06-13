@@ -41,7 +41,7 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 
 	public function addDBDataOnce() {
 		// Remove old stray pages.
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -55,7 +55,7 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 		$titles[101] = Title::makeTitle( $this->getDefaultWikitextNS(), 'PopulateUnexpectedUnconnectedPagePagePropTest-High-Page-id' );
 		foreach ( $titles as $pageId => $title ) {
 			$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-			$page->insertOn( $this->db, $pageId );
+			$page->insertOn( $this->getDb(), $pageId );
 		}
 	}
 
@@ -122,7 +122,7 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 	 * @param array[] $pageProps Array of 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey'
 	 */
 	private function insertPageProps( array $pageProps ): void {
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page_props' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -138,7 +138,7 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 			];
 		}
 
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'page_props' )
 			->rows( $toInsert )
 			->caller( __METHOD__ )

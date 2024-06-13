@@ -118,7 +118,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->newSqlChangeStore();
 		$store->saveChange( $change );
 
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( '*' )
 			->from( 'wb_changes' )
 			->caller( __METHOD__ )->fetchResultSet();
@@ -155,7 +155,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$expected = [
 			'change_id' => (string)$change->getId(),
 			'change_type' => 'wikibase-item~add',
-			'change_time' => $this->db->timestamp( '20121026200049' ),
+			'change_time' => $this->getDb()->timestamp( '20121026200049' ),
 			'change_object_id' => 'Q21389475',
 			'change_revision_id' => '0',
 			'change_user_id' => '0',
@@ -165,7 +165,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$change->setField( 'time', '20121026200049' );
 		$store->saveChange( $change );
 
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( '*' )
 			->from( 'wb_changes' )
 			->caller( __METHOD__ )->fetchResultSet();
@@ -185,7 +185,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
 		$store->deleteChangesByChangeIds( [ $change->getId() ] );
 
-		$rows = $this->db->newSelectQueryBuilder()
+		$rows = $this->getDb()->newSelectQueryBuilder()
 			->table( 'wb_changes' )
 			->caller( __METHOD__ )->fetchRowCount();
 		$this->assertSame( 0, $rows, 'row count' );

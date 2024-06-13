@@ -20,7 +20,7 @@ use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 class ChangeDeletionNotificationJobTest extends RecentChangesModificationTestBase {
 
 	private function countRevisions( array $conditions = null ): int {
-		$selectQueryBuilder = $this->db->newSelectQueryBuilder();
+		$selectQueryBuilder = $this->getDb()->newSelectQueryBuilder();
 		$selectQueryBuilder->table( 'recentchanges' );
 		if ( $conditions !== null ) { // ->where( $conditions ?: IDatabase::ALL_ROWS doesn’t work (T332329)
 			$selectQueryBuilder->where( $conditions );

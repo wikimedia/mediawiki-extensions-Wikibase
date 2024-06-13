@@ -458,7 +458,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		?string $expectedOutput
 	) {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'interwiki' )
 			->ignore()
 			->row( [

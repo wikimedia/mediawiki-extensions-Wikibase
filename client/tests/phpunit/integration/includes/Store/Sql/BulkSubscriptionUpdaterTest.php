@@ -186,7 +186,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 				'eu_page_id' => (int)$pageId,
 			];
 		}
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( EntityUsageTable::DEFAULT_TABLE_NAME )
 			->rows( $rows )
 			->caller( __METHOD__ )
@@ -201,7 +201,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 				'cs_subscriber_id' => $subscriberId,
 			];
 		}
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wb_changes_subscription' )
 			->rows( $rows )
 			->caller( __METHOD__ )
@@ -209,7 +209,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions(): array {
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'cs_subscriber_id', 'cs_entity_id' ] )
 			->from( 'wb_changes_subscription' )
 			->caller( __METHOD__ )->fetchResultSet();

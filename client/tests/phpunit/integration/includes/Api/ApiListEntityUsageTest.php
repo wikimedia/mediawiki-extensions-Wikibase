@@ -53,7 +53,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			foreach ( $rows as $row ) {
 				$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 				$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-				$page->insertOn( $this->db, $row['page_id'] );
+				$page->insertOn( $this->getDb(), $row['page_id'] );
 			}
 		}
 	}
@@ -85,7 +85,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		];
 
 		foreach ( $dump as $table => $rows ) {
-			$this->db->newInsertQueryBuilder()
+			$this->getDb()->newInsertQueryBuilder()
 				->insertInto( $table )
 				->rows( $rows )
 				->caller( __METHOD__ )

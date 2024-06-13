@@ -36,7 +36,7 @@ trait DatabaseTermStoreWriterTestGetTermsTrait {
 			$repoDb
 		);
 
-		$termInLangIds = $this->db->newSelectQueryBuilder()
+		$termInLangIds = $this->getDb()->newSelectQueryBuilder()
 			->select( $termInLangField )
 			->from( $termsTable )
 			->where( [ $idField => $entityId->getNumericId() ] )

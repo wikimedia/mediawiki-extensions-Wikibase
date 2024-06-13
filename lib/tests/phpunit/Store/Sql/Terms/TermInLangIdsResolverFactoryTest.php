@@ -46,7 +46,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_type' )
 			->row( [
 				'wby_id' => self::MOCK_TYPE_LABEL,
@@ -58,7 +58,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 		$fname = __METHOD__;
 		$this->termIds = array_map(
 			function ( string $lang, string $label ) use ( $fname ): int {
-				$this->db->newInsertQueryBuilder()
+				$this->getDb()->newInsertQueryBuilder()
 					->insertInto( 'wbt_text' )
 					->row( [
 						'wbx_text' => $label,
@@ -66,25 +66,25 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 					->caller( $fname )
 					->execute();
 
-				$this->db->newInsertQueryBuilder()
+				$this->getDb()->newInsertQueryBuilder()
 					->insertInto( 'wbt_text_in_lang' )
 					->row( [
 						'wbxl_language' => $lang,
-						'wbxl_text_id' => $this->db->insertId(),
+						'wbxl_text_id' => $this->getDb()->insertId(),
 					] )
 					->caller( $fname )
 					->execute();
 
-				$this->db->newInsertQueryBuilder()
+				$this->getDb()->newInsertQueryBuilder()
 					->insertInto( 'wbt_term_in_lang' )
 					->row( [
 						'wbtl_type_id' => self::MOCK_TYPE_LABEL,
-						'wbtl_text_in_lang_id' => $this->db->insertId(),
+						'wbtl_text_in_lang_id' => $this->getDb()->insertId(),
 					] )
 					->caller( $fname )
 					->execute();
 
-				return $this->db->insertId();
+				return $this->getDb()->insertId();
 			},
 			array_keys( self::MOCK_LANG_LABELS ),
 			self::MOCK_LANG_LABELS

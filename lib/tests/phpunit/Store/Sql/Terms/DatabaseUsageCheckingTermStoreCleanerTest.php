@@ -58,7 +58,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function insertItemTermRow( int $itemid, int $termInLangId ): void {
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_item_terms' )
 			->row( [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] )
 			->caller( __METHOD__ )
@@ -66,7 +66,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function insertPropertyTermRow( int $itemid, int $termInLangId ): void {
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_property_terms' )
 			->row( [ 'wbpt_property_id' => $itemid, 'wbpt_term_in_lang_id' => $termInLangId ] )
 			->caller( __METHOD__ )

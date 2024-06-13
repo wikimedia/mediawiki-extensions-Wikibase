@@ -211,7 +211,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function insertPropertyTermRow( int $itemid, int $termInLangId ): void {
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_property_terms' )
 			->row( [ 'wbpt_property_id' => $itemid, 'wbpt_term_in_lang_id' => $termInLangId ] )
 			->caller( __METHOD__ )
@@ -307,7 +307,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 		// Make sure the cleanup happened
 		$this->assertSame( 0,
-			$this->db->newSelectQueryBuilder()
+			$this->getDb()->newSelectQueryBuilder()
 				->table( 'wbt_text' )
 				->where( [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] )
 				->caller( __METHOD__ )->fetchRowCount() );
