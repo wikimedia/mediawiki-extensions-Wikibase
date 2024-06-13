@@ -757,7 +757,11 @@ return [
 						WikibaseRepo::getItemTermsCollisionDetector()
 					)
 				),
-				new AliasesDeserializer(),
+				new AliasesValidator(
+					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+					new AliasesDeserializer()
+				),
 				WbRestApi::getSitelinkDeserializer(),
 				new StatementsDeserializer( WbRestApi::getStatementDeserializer() )
 			),

@@ -9,10 +9,11 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -34,7 +35,7 @@ class PatchedItemValidator {
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
-	private AliasesDeserializer $aliasesDeserializer;
+	private AliasesValidator $aliasesValidator;
 	private SitelinkDeserializer $sitelinkDeserializer;
 	private StatementsDeserializer $statementsDeserializer;
 
@@ -43,7 +44,7 @@ class PatchedItemValidator {
 		ItemLabelsContentsValidator $labelsContentsValidator,
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
-		AliasesDeserializer $aliasesDeserializer,
+		AliasesValidator $aliasesValidator,
 		SitelinkDeserializer $sitelinkDeserializer,
 		StatementsDeserializer $statementsDeserializer
 	) {
@@ -51,7 +52,7 @@ class PatchedItemValidator {
 		$this->labelsContentsValidator = $labelsContentsValidator;
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
-		$this->aliasesDeserializer = $aliasesDeserializer;
+		$this->aliasesValidator = $aliasesValidator;
 		$this->sitelinkDeserializer = $sitelinkDeserializer;
 		$this->statementsDeserializer = $statementsDeserializer;
 	}
@@ -68,13 +69,14 @@ class PatchedItemValidator {
 		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 		$this->assertValidLabelsAndDescriptions( $originalItem, $serialization );
+		$this->assertValidAliases( $serialization[ 'aliases' ] ?? [] );
 
 		return new Item(
 			new ItemId( $serialization[ 'id' ] ),
 			new Fingerprint(
 				$this->labelsContentsValidator->getValidatedLabels(),
 				$this->descriptionsContentsValidator->getValidatedDescriptions(),
-				$this->aliasesDeserializer->deserialize( $serialization[ 'aliases' ] ?? [] )
+				$this->aliasesValidator->getValidatedAliases()
 			),
 			$this->deserializeSitelinks( $serialization[ 'sitelinks' ] ?? [] ),
 			$this->statementsDeserializer->deserialize( $serialization[ 'statements' ] ?? [] )
@@ -293,6 +295,68 @@ class PatchedItemValidator {
 		}
 	}
 
+	private function assertValidAliases( array $aliasesSerialization ): void {
+		$validationError = $this->aliasesValidator->validate( $aliasesSerialization );
+		if ( $validationError ) {
+			$context = $validationError->getContext();
+			switch ( $validationError->getCode() ) {
+				case AliasesValidator::CODE_INVALID_ALIASES:
+					$this->throwInvalidField( 'aliases', $aliasesSerialization );
+				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
+					$language = $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
+						"Not a valid language code '$language' in changed aliases",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
+					);
+				case AliasesValidator::CODE_EMPTY_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_EMPTY,
+						"Changed alias for '$language' cannot be empty",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
+					);
+				case AliasesValidator::CODE_DUPLICATE_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_ALIAS];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_DUPLICATE,
+						"Aliases in language '$language' contain duplicate alias: '$value'",
+						[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+					);
+				case AliasesValidator::CODE_INVALID_ALIAS:
+					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
+					$value = $context[AliasesValidator::CONTEXT_ALIAS];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+						"Patched value for '$language' is invalid",
+						[ UseCaseError::CONTEXT_PATH => $language, UseCaseError::CONTEXT_VALUE => $value ]
+					);
+				case AliasesInLanguageValidator::CODE_TOO_LONG:
+					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIAS_TOO_LONG,
+						"Changed alias for '$language' must not be more than $limit characters long",
+						[
+							UseCaseError::CONTEXT_LANGUAGE => $language,
+							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
+							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
+						]
+					);
+				default:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+						"Patched value for '{$context[AliasesInLanguageValidator::CONTEXT_LANGUAGE]}' is invalid",
+						[
+							UseCaseError::CONTEXT_PATH => $context[AliasesInLanguageValidator::CONTEXT_PATH],
+							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
+						]
+					);
+			}
+		}
+	}
+
 	private function getModifiedLanguages( TermList $original, TermList $modified ): array {
 		return array_keys( array_filter(
 			iterator_to_array( $modified ),
@@ -326,4 +390,5 @@ class PatchedItemValidator {
 			]
 		);
 	}
+
 }

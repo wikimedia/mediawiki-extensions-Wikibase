@@ -29,6 +29,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -55,6 +57,7 @@ class PatchedItemValidatorTest extends TestCase {
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
+	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -73,8 +76,10 @@ class PatchedItemValidatorTest extends TestCase {
 		$this->descriptionsContentsValidator = new ItemDescriptionsContentsValidator(
 			$this->createStub( ItemDescriptionValidator::class )
 		);
+		$this->aliasesInLanguageValidator = $this->createStub( AliasesInLanguageValidator::class );
 	}
 
+	private const LIMIT = 40;
 	private const ALLOWED_BADGES = [ 'Q999' ];
 
 	/**
@@ -593,6 +598,138 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider aliasesValidationErrorProvider
+	 */
+	public function testAliasesValidation(
+		AliasesInLanguageValidator $aliasesInLanguageValidator,
+		array $patchedAliases,
+		Exception $expectedError
+	): void {
+		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;
+		$originalItem = new Item( new ItemId( 'Q123' ) );
+
+		$itemSerialization = [
+			'id' => 'Q123',
+			'type' => 'item',
+			'aliases' => $patchedAliases,
+		];
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $itemSerialization, $originalItem );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function aliasesValidationErrorProvider(): Generator {
+		yield 'empty alias' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'de' => [ '' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_EMPTY,
+				"Changed alias for 'de' cannot be empty",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'de' ]
+			),
+		];
+
+		$duplicate = 'tomato';
+		yield 'duplicate alias' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ $duplicate, $duplicate ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_DUPLICATE,
+				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
+			),
+		];
+
+		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
+		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_TOO_LONG, [
+			AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
+			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+			AliasesInLanguageValidator::CONTEXT_LIMIT => self::LIMIT,
+		] );
+		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
+		$aliasesInLanguageValidator->method( 'validate' )
+			->with( new AliasGroup( 'en', [ $tooLongAlias ] ) )
+			->willReturn( $expectedResponse );
+		yield 'alias too long' => [
+			$aliasesInLanguageValidator,
+			[ 'en' => [ $tooLongAlias ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIAS_TOO_LONG,
+				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
+				[
+					UseCaseError::CONTEXT_LANGUAGE => 'en',
+					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
+					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
+				]
+			),
+		];
+
+		$invalidAlias = "tab\t tab\t tab";
+		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_INVALID, [
+			AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias,
+			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+			AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
+		] );
+		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
+		$aliasesInLanguageValidator->method( 'validate' )
+			->with( new AliasGroup( 'en', [ 'valid alias', $invalidAlias ] ) )
+			->willReturn( $expectedResponse );
+		yield 'alias contains invalid character' => [
+			$aliasesInLanguageValidator,
+			[ 'en' => [ 'valid alias', $invalidAlias ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => 'en/1',
+					UseCaseError::CONTEXT_VALUE => $invalidAlias,
+				]
+			),
+		];
+
+		yield 'aliases in language is not a list' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ 'associative array' => 'not a list' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
+				"Patched value for 'en' is invalid",
+				[
+					UseCaseError::CONTEXT_PATH => 'en',
+					UseCaseError::CONTEXT_VALUE => [ 'associative array' => 'not a list' ],
+				]
+			),
+		];
+
+		yield 'aliases is not an associative array' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'sequential array, not an associative array' ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
+				"Invalid input for 'aliases' in the patched item",
+				[
+					UseCaseError::CONTEXT_PATH => 'aliases',
+					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an associative array' ],
+				]
+			),
+		];
+
+		$invalidLanguage = 'not-a-valid-language-code';
+		yield 'invalid language code' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ $invalidLanguage => [ 'alias' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
+				"Not a valid language code '{$invalidLanguage}' in changed aliases",
+				[ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ]
+			),
+		];
+	}
+
 	private function newValidator(): PatchedItemValidator {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
@@ -603,7 +740,11 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->labelsContentsValidator,
 			$this->descriptionsSyntaxValidator,
 			$this->descriptionsContentsValidator,
-			new AliasesDeserializer(),
+			new AliasesValidator(
+				$this->aliasesInLanguageValidator,
+				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new AliasesDeserializer(),
+			),
 			new SitelinkDeserializer(
 				'/\?/',
 				self::ALLOWED_BADGES,
