@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"IJzeren Jan"
+		]
+	},
+	"wikibase-edit": "praviti",
+	"wikibase-add": "dodati",
+	"wikibase-description-empty": "Nemaje ješče podanogo opisa",
+	"wikibase-sitelinks-special": "Druge stranice"
+}
