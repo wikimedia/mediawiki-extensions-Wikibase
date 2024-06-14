@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Merge;
 
 use MediaWiki\Site\HashSiteStore;
-use TestSites;
+use MediaWiki\Tests\Site\TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;

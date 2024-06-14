@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
-use DerivativeContext;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Permissions\SimpleAuthority;
 use MediaWiki\Permissions\UltimateAuthority;
@@ -11,7 +12,6 @@ use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 
 /**

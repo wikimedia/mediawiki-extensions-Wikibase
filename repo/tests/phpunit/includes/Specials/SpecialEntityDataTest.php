@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\Serializers\DataValueSerializer;
-use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
@@ -143,7 +143,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			[],
 			$entityTitleStoreLookup
 		);
-		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$mockHtmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 
 		$useCdn = false;
 		$apiFrameOptions = 'DENY';

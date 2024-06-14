@@ -5,9 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
-use DerivativeContext;
-use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
@@ -16,7 +17,6 @@ use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
-use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
@@ -200,7 +200,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			],
 			$entityTitleStoreLookup
 		);
-		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$mockHtmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 
 		$entityTypesWithoutRdfOutput = [ 'property' ];
 

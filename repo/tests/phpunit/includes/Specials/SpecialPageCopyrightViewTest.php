@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Message\Message;
 use MediaWikiIntegrationTestCase;
-use Message;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 

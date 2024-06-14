@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
-use HTMLForm;
+use MediaWiki\HTMLForm\HTMLForm;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 

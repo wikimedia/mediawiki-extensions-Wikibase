@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Pager\HistoryPager;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;

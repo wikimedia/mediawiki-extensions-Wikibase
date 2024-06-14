@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Localizer;
 
 use InvalidArgumentException;
-use Message;
+use MediaWiki\Message\Message;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 

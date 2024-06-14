@@ -3,12 +3,12 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
-use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;

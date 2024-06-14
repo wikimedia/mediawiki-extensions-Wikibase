@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Interactors;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\User\User;
-use RequestContext;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 

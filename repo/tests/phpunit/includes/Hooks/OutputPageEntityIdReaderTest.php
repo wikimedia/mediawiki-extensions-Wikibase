@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
-use RequestContext;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
