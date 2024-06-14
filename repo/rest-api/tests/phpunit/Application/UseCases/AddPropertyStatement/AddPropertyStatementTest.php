@@ -55,7 +55,8 @@ class AddPropertyStatementTest extends TestCase {
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
 		$comment = 'edit comment';
-		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::noValueFor( 'P123' )
+		$predicatePropertyId = new NumericPropertyId( TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY );
+		[ $statementReadModel, $statementWriteModel ] = NewStatementReadModel::noValueFor( $predicatePropertyId )
 			->withGuid( $newGuid )
 			->buildReadAndWriteModel();
 
@@ -157,7 +158,7 @@ class AddPropertyStatementTest extends TestCase {
 	private function getValidNoValueStatementSerialization(): array {
 		return [
 			'property' => [
-				'id' => 'P123',
+				'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY,
 			],
 			'value' => [
 				'type' => 'novalue',

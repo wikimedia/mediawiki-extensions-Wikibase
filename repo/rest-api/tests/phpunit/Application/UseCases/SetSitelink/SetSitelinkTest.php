@@ -160,7 +160,7 @@ class SetSitelinkTest extends TestCase {
 			$this->newUseCase()->execute(
 				new SetSitelinkRequest(
 					'Q123',
-					'enwiki',
+					TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],
 					[ 'title' => 'title', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 2 ] ] ],
 					[],
 					false,
@@ -190,7 +190,7 @@ class SetSitelinkTest extends TestCase {
 			$this->newUseCase()->execute(
 				new SetSitelinkRequest(
 					"$itemId",
-					'enwiki',
+					TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1],
 					[ 'title' => 'title', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 0 ] ] ],
 					[],
 					false,

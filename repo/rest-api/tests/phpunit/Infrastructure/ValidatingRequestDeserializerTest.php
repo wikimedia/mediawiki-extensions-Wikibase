@@ -63,8 +63,6 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 class ValidatingRequestDeserializerTest extends TestCase {
 
 	private const VALID_LANGUAGE_CODE = 'en';
-	private const VALID_SITE_ID = 'enwiki';
-	private const EXISTING_PROPERTY = 'P123';
 
 	public function testGivenValidItemIdRequest_returnsDeserializedItemId(): void {
 		$request = $this->createStub( ItemIdUseCaseRequest::class );
@@ -91,25 +89,25 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	}
 
 	public function testGivenValidSiteIdRequest_returnsSiteId(): void {
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$request = $this->createStub( SiteIdUseCaseRequest::class );
-		$request->method( 'getSiteId' )->willReturn( self::VALID_SITE_ID );
+		$request->method( 'getSiteId' )->willReturn( $siteId );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-		$this->assertEquals( self::VALID_SITE_ID, $result->getSiteId() );
+		$this->assertEquals( $siteId, $result->getSiteId() );
 	}
 
 	public function testGivenValidSitelinkEditRequest_returnsSitelink(): void {
-		$sitelink = [ 'title' => 'Potato', 'badges' => [ TestValidatingRequestDeserializer::ALLOWED_BADGES[ 1 ] ] ];
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1];
+		$badge = TestValidatingRequestDeserializer::ALLOWED_BADGES[2];
+		$sitelink = [ 'title' => 'Potato', 'badges' => [ $badge ] ];
 		$request = $this->createStub( SitelinkUseCaseRequest::class );
 		$request->method( 'getItemId' )->willReturn( 'Q123' );
-		$request->method( 'getSiteId' )->willReturn( self::VALID_SITE_ID );
+		$request->method( 'getSiteId' )->willReturn( $siteId );
 		$request->method( 'getSitelink' )->willReturn( $sitelink );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-		$this->assertEquals(
-			new SiteLink( 'enwiki', 'Potato', [ new ItemId( TestValidatingRequestDeserializer::ALLOWED_BADGES[ 1 ] ) ] ),
-			$result->getSitelink()
-		);
+		$this->assertEquals( new SiteLink( $siteId, 'Potato', [ new ItemId( $badge ) ] ), $result->getSitelink() );
 	}
 
 	public function testGivenValidStatementIdRequest_returnsDeserializedStatementId(): void {
@@ -148,20 +146,21 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	}
 
 	public function testGivenValidStatementSerializationRequest_returnsStatement(): void {
+		$predicatePropertyId = TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY;
 		$request = $this->createStub( StatementSerializationUseCaseRequest::class );
 		$request->method( 'getStatement' )->willReturn( [
-			'property' => [ 'id' => self::EXISTING_PROPERTY ],
+			'property' => [ 'id' => $predicatePropertyId ],
 			'value' => [ 'type' => 'novalue' ],
 		] );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
-		$this->assertEquals( NewStatement::noValueFor( 'P123' )->build(), $result->getStatement() );
+		$this->assertEquals( NewStatement::noValueFor( $predicatePropertyId )->build(), $result->getStatement() );
 	}
 
 	public function testGivenValidEditMetadataRequest_returnsEditMetadata(): void {
 		$user = 'potato';
 		$isBot = false;
-		$editTags = [ 'allowed' ];
+		$editTags = [ TestValidatingRequestDeserializer::ALLOWED_TAGS[0] ];
 		$comment = 'edit comment';
 		$request = $this->createStub( EditMetadataUseCaseRequest::class );
 		$request->method( 'getUsername' )->willReturn( $user );

@@ -55,9 +55,10 @@ class ReplaceStatementTest extends TestCase {
 	 */
 	public function testReplaceStatement( EntityId $subjectId ): void {
 		$statementId = new StatementGuid( $subjectId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
+		$predicatePropertyId = TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY;
 		$newStatementSerialization = [
 			'id' => (string)$statementId,
-			'property' => [ 'id' => TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ],
+			'property' => [ 'id' => $predicatePropertyId ],
 			'value' => [
 				'type' => 'somevalue',
 			],
@@ -66,12 +67,12 @@ class ReplaceStatementTest extends TestCase {
 		$isBot = false;
 		$comment = 'statement replaced by ' . __METHOD__;
 
-		[ $expectedStatementReadModel, $expectedStatementWriteModel ] = NewStatementReadModel::someValueFor( 'P123' )
+		[ $expectedStatementReadModel, $expectedStatementWriteModel ] = NewStatementReadModel::someValueFor( $predicatePropertyId )
 			->withGuid( $statementId )
 			->buildReadAndWriteModel();
 
 		$statementsRepo = new InMemoryStatementRepository();
-		$statementsRepo->addStatement( NewStatement::noValueFor( 'P123' )->withGuid( $statementId )->build() );
+		$statementsRepo->addStatement( NewStatement::noValueFor( $predicatePropertyId )->withGuid( $statementId )->build() );
 		$this->statementUpdater = $statementsRepo;
 
 		$response = $this->newUseCase()->execute(

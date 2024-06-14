@@ -9,9 +9,9 @@ use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
  */
 class TestValidatingRequestDeserializer extends ValidatingRequestDeserializer {
 
-	public const ALLOWED_TAGS = [ 'allowed', 'also-allowed' ];
-	public const EXISTING_STRING_PROPERTY = 'P123';
-	public const ALLOWED_SITE_IDS = [ 'enwiki', 'dewiki', 'arwiki' ];
+	public const ALLOWED_TAGS = [ 'test tag', 'another-tag' ];
+	public const EXISTING_STRING_PROPERTY = 'P3975';
+	public const ALLOWED_SITE_IDS = [ 'enwiki-siteid', 'dewiki-siteid', 'arwiki-siteid' ];
 	public const ALLOWED_BADGES = [ 'Q777', 'Q888', 'Q999' ];
 	public const INVALID_TITLE_REGEX = '/\?/';
 
