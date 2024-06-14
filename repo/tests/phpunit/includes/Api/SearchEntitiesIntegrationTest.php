@@ -6,10 +6,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceLookup;

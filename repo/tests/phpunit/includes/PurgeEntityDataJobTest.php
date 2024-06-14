@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests;
 
-use HtmlCacheUpdater;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -94,7 +94,7 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 				return [ $ret ];
 			} );
 
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->once() )
 			->method( 'purgeUrls' )
 			->with( [
@@ -125,7 +125,7 @@ class PurgeEntityDataJobTest extends MediaWikiIntegrationTestCase {
 		$entityDataUriManager->method( 'getPotentiallyCachedUrls' )
 			->willReturn( [] );
 
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->never() )
 			->method( 'purgeUrls' );
 

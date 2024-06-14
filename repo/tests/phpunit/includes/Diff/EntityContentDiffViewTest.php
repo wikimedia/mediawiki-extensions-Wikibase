@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Diff;
 
+use MediaWiki\Context\RequestContext;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 
 /**

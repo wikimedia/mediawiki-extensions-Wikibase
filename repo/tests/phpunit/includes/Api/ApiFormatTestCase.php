@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\Api\ApiTestContext;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -64,7 +65,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 			$params['token'] = $this->user->getEditToken();
 		}
 		$request = new FauxRequest( $params, true );
-		$ctx = new \ApiTestContext();
+		$ctx = new ApiTestContext();
 		$ctx = $ctx->newTestContext( $request, $this->user );
 		$main = new ApiMain( $ctx, true );
 

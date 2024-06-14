@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -12,7 +13,6 @@ use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use ReflectionMethod;
-use RequestContext;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;

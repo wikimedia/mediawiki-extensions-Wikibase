@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
 use ApiUsageException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\Lib\SettingsArray;
 
 /**

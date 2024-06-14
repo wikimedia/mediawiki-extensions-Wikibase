@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;

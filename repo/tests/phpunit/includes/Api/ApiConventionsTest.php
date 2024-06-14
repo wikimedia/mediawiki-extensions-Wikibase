@@ -4,9 +4,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use ApiMain;
+use MediaWiki\Message\Message;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\Api\ApiTestContext;
 use MediaWikiIntegrationTestCase;
-use Message;
 use ReflectionMethod;
 
 /**
@@ -43,7 +44,7 @@ class ApiConventionsTest extends MediaWikiIntegrationTestCase {
 		$user = $this->getTestUser()->getUser();
 
 		$request = new FauxRequest( $params, true );
-		$ctx = new \ApiTestContext();
+		$ctx = new ApiTestContext();
 		$ctx = $ctx->newTestContext( $request, $user );
 		$main = new ApiMain( $ctx );
 		$module = new $moduleClass( $main, $moduleName );

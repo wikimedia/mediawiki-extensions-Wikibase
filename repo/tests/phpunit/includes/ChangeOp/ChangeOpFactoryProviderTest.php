@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use MediaWiki\Site\HashSiteStore;
-use TestSites;
+use MediaWiki\Tests\Site\TestSites;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;

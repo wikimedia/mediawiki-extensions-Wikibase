@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
-use ApiTestContext;
 use ApiUsageException;
 use ChangeTags;
 use DataValues\StringValue;
@@ -11,11 +9,13 @@ use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Tests\Api\ApiTestCase;
+use MediaWiki\Tests\Api\ApiTestContext;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
-use TestSites;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Normalization\DataValueNormalizer;
