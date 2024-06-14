@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator
@@ -89,7 +91,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 	private function newValidator(): DescriptionsSyntaxValidator {
 		return new DescriptionsSyntaxValidator(
 			new DescriptionsDeserializer(),
-			new LanguageCodeValidator( self::VALID_LANGUAGES )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( self::VALID_LANGUAGES ) )
 		);
 	}
 

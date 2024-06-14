@@ -6,8 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer
@@ -44,7 +44,7 @@ class LanguageCodeRequestValidatingDeserializerTest extends TestCase {
 
 	private function newValidatingDeserializerRequest(): LanguageCodeRequestValidatingDeserializer {
 		return new LanguageCodeRequestValidatingDeserializer(
-			new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'en-gb' ] ) )
 		);
 	}
 

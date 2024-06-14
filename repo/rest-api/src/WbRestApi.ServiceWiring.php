@@ -124,13 +124,15 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
@@ -175,6 +177,7 @@ use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryItemLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
@@ -230,7 +233,7 @@ return [
 	VRD::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
 			return new LanguageCodeRequestValidatingDeserializer(
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				WbRestApi::getLabelLanguageCodeValidator( $services ) // TODO this will be fixed in a follow-up.
 			);
 		},
 
@@ -349,7 +352,7 @@ return [
 				new ItemValidator(
 					new LabelsSyntaxValidator(
 						new LabelsDeserializer(),
-						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+						WbRestApi::getLabelLanguageCodeValidator( $services )
 					),
 					new ItemLabelsContentsValidator(
 						new TermValidatorFactoryItemLabelValidator(
@@ -359,8 +362,7 @@ return [
 					),
 					new DescriptionsSyntaxValidator(
 						new DescriptionsDeserializer(),
-						// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
-						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+						WbRestApi::getDescriptionLanguageCodeValidator( $services )
 					),
 					new ItemDescriptionsContentsValidator(
 						new TermValidatorFactoryItemDescriptionValidator(
@@ -370,7 +372,7 @@ return [
 					),
 					new AliasesValidator(
 						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-						new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+						WbRestApi::getAliasLanguageCodeValidator( $services ),
 						new AliasesDeserializer()
 					),
 					new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
@@ -450,6 +452,10 @@ return [
 		);
 	},
 
+	'WbRestApi.AliasLanguageCodeValidator' => function( MediaWikiServices $services ): AliasLanguageCodeValidator {
+		return new ValueValidatorLanguageCodeValidator( WikibaseRepo::getTermValidatorFactory( $services )->getAliasLanguageValidator() );
+	},
+
 	'WbRestApi.AssertItemExists' => function( MediaWikiServices $services ): AssertItemExists {
 		return new AssertItemExists( WbRestApi::getGetLatestItemRevisionMetadata( $services ) );
 	},
@@ -476,6 +482,12 @@ return [
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getItemUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.DescriptionLanguageCodeValidator' => function( MediaWikiServices $services ): DescriptionLanguageCodeValidator {
+		return new ValueValidatorLanguageCodeValidator(
+			WikibaseRepo::getTermValidatorFactory( $services )->getDescriptionLanguageValidator()
 		);
 	},
 
@@ -721,6 +733,10 @@ return [
 		);
 	},
 
+	'WbRestApi.LabelLanguageCodeValidator' => function( MediaWikiServices $services ): LabelLanguageCodeValidator {
+		return new ValueValidatorLanguageCodeValidator( WikibaseRepo::getTermValidatorFactory( $services )->getLabelLanguageValidator() );
+	},
+
 	'WbRestApi.PatchItem' => function( MediaWikiServices $services ): PatchItem {
 		return new PatchItem(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
@@ -738,7 +754,7 @@ return [
 			new PatchedItemValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getLabelLanguageCodeValidator( $services )
 				),
 				new ItemLabelsContentsValidator(
 					new TermValidatorFactoryItemLabelValidator(
@@ -748,8 +764,7 @@ return [
 				),
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getDescriptionLanguageCodeValidator( $services )
 				),
 				new ItemDescriptionsContentsValidator(
 					new TermValidatorFactoryItemDescriptionValidator(
@@ -759,7 +774,7 @@ return [
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+					WbRestApi::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer()
 				),
 				WbRestApi::getSitelinkDeserializer(),
@@ -784,7 +799,7 @@ return [
 			new PatchedItemAliasesValidator(
 				new AliasesDeserializer(),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+				WbRestApi::getAliasLanguageCodeValidator( $services )
 			),
 			WbRestApi::getItemDataRetriever( $services ),
 			WbRestApi::getItemUpdater( $services )
@@ -803,7 +818,7 @@ return [
 			new PatchedDescriptionsValidator(
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getDescriptionLanguageCodeValidator( $services )
 				),
 				new ItemDescriptionsContentsValidator( new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
@@ -823,7 +838,7 @@ return [
 			new PatchedItemLabelsValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getLabelLanguageCodeValidator( $services )
 				),
 				new ItemLabelsContentsValidator(
 					new TermValidatorFactoryItemLabelValidator(
@@ -865,7 +880,7 @@ return [
 			new PatchedPropertyValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getLabelLanguageCodeValidator( $services )
 				),
 				new PropertyLabelsContentsValidator(
 					new TermValidatorFactoryPropertyLabelValidator(
@@ -875,15 +890,14 @@ return [
 				),
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					// FIXME: this language code validator is wrong, but it was already wrong prior to this patch. fix later.
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getDescriptionLanguageCodeValidator( $services )
 				),
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+					WbRestApi::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer()
 				),
 				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) )
@@ -907,7 +921,7 @@ return [
 			new PatchedPropertyAliasesValidator(
 				new AliasesDeserializer(),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				new LanguageCodeValidator( $termLanguages->getLanguages() )
+				WbRestApi::getAliasLanguageCodeValidator( $services )
 			),
 			WbRestApi::getPropertyDataRetriever( $services ),
 			WbRestApi::getPropertyUpdater( $services )
@@ -929,7 +943,7 @@ return [
 			new PatchedPropertyDescriptionsValidator(
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getDescriptionLanguageCodeValidator( $services )
 				),
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
@@ -953,7 +967,7 @@ return [
 			new PatchedPropertyLabelsValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					new LanguageCodeValidator( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
+					WbRestApi::getLabelLanguageCodeValidator( $services )
 				),
 				new PropertyLabelsContentsValidator( new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),

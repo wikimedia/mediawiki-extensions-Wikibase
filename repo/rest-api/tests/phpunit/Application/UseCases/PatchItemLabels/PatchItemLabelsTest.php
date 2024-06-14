@@ -22,8 +22,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -62,7 +62,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->labelsSerializer = new LabelsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedLabelsValidator = new PatchedLabelsValidator(
-			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
 			new ItemLabelsContentsValidator( $this->createStub( ItemLabelValidator::class ) )
 		);
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );

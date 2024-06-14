@@ -27,14 +27,14 @@ class AliasesValidator {
 	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private AliasLanguageCodeValidator $languageCodeValidator;
 	private AliasesDeserializer $aliasesDeserializer;
 
 	private ?AliasGroupList $deserializedAliases = null;
 
 	public function __construct(
 		AliasesInLanguageValidator $aliasesInLanguageValidator,
-		LanguageCodeValidator $languageCodeValidator,
+		AliasLanguageCodeValidator $languageCodeValidator,
 		AliasesDeserializer $aliasesDeserializer
 	) {
 		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;

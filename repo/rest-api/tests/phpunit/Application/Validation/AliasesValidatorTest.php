@@ -12,6 +12,8 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Validation\AliasesValidator
@@ -183,7 +185,7 @@ class AliasesValidatorTest extends TestCase {
 	private function newValidator(): AliasesValidator {
 		return new AliasesValidator(
 			$this->aliasesInLanguageValidator,
-			new LanguageCodeValidator( [ 'en', 'de', 'mul' ] ),
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'en', 'de', 'mul' ] ) ),
 			new AliasesDeserializer(),
 		);
 	}

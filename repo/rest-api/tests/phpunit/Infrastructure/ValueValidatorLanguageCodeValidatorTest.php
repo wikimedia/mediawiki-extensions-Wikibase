@@ -4,19 +4,21 @@ namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryDescriptionLanguageCodeValidator;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryDescriptionLanguageCodeValidator
+ * @covers \Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TermValidatorFactoryDescriptionLanguageCodeValidatorTest extends TestCase {
+class ValueValidatorLanguageCodeValidatorTest extends TestCase {
+
+	private const ALLOWED_LANGUAGES = [ 'ar', 'de', 'en', 'en-gb' ];
 
 	/**
 	 * @dataProvider provideValidDescriptionLanguageCode
@@ -37,8 +39,8 @@ class TermValidatorFactoryDescriptionLanguageCodeValidatorTest extends TestCase 
 	 */
 	public function testGivenInvalidLanguageCode_returnsValidationError( string $language ): void {
 		$expectedValidationError = new ValidationError(
-			DescriptionLanguageCodeValidator::CODE_INVALID_LANGUAGE,
-			[ DescriptionLanguageCodeValidator::CONTEXT_LANGUAGE => $language ]
+			LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+			[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => $language ]
 		);
 		$validationError = $this->newValidator()->validate( $language );
 		$this->assertEquals( $expectedValidationError, $validationError );
@@ -47,13 +49,10 @@ class TermValidatorFactoryDescriptionLanguageCodeValidatorTest extends TestCase 
 	public static function provideInvalidDescriptionLanguageCode(): Generator {
 		yield 'xyz not a language code' => [ 'xyz' ];
 		yield 'en-uk not a language code' => [ 'en-uk' ];
-		yield "mul can't be used as a description language code" => [ 'mul' ];
 	}
 
-	private function newValidator(): TermValidatorFactoryDescriptionLanguageCodeValidator {
-		return new TermValidatorFactoryDescriptionLanguageCodeValidator(
-			WikibaseRepo::getTermValidatorFactory()
-		);
+	private function newValidator(): ValueValidatorLanguageCodeValidator {
+		return new ValueValidatorLanguageCodeValidator( new MembershipValidator( self::ALLOWED_LANGUAGES ) );
 	}
 
 }
