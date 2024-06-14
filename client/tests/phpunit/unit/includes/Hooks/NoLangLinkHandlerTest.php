@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
-use Parser;
 use ParserOptions;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\NamespaceChecker;

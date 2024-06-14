@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\Api;
 
 use ApiMain;
-use ApiTestContext;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\Api\ApiTestContext;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Api\ApiClientInfo;

@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWiki\Parser\Parser;
 use MediaWikiIntegrationTestCase;
-use Parser;
 use ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter;
 use Wikibase\DataModel\Entity\NumericPropertyId;

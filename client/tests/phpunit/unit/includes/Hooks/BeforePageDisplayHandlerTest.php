@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
-use RequestContext;
 use Skin;
 use SkinFallback;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;

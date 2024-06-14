@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Integration\Notifications;
 
-use EchoEvent;
-use EchoEventPresentationModel;
+use MediaWiki\Extension\Notifications\Formatters\EchoEventPresentationModel;
+use MediaWiki\Extension\Notifications\Model\Event;
+use MediaWiki\Message\Message;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use Message;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandler;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
@@ -31,13 +31,13 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param Title $title
 	 *
-	 * @return EchoEvent
+	 * @return Event
 	 */
 	private function mockEvent( Title $title ) {
 		$agent = User::newFromName( 'Agent' );
 
 		$methods = [ 'getAgent', 'getBundleHash', 'getExtraParam', 'getTitle', 'getType' ];
-		$event = $this->getMockBuilder( EchoEvent::class )
+		$event = $this->getMockBuilder( Event::class )
 			->disableOriginalConstructor()
 			->onlyMethods( $methods )
 			->getMock();

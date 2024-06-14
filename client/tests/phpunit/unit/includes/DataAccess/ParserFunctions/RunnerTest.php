@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Title\Title;
-use Parser;
 use ParserOptions;
 use PPFrame;
 use PPNode;

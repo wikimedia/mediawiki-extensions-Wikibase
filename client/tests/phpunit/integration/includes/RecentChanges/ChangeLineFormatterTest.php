@@ -3,9 +3,10 @@
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
 use ChangesList;
-use DerivativeContext;
 use HamcrestPHPUnitIntegration;
 use MediaWiki\CommentFormatter\CommentFormatter;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
@@ -13,7 +14,6 @@ use MediaWiki\User\User;
 use MediaWiki\User\UserNameUtils;
 use MediaWikiLangTestCase;
 use RecentChange;
-use RequestContext;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;

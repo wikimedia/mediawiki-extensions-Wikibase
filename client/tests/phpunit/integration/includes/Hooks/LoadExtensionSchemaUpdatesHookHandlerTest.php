@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use DatabaseUpdater;
 use Maintenance;
+use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\LoadExtensionSchemaUpdatesHookHandler;

@@ -6,10 +6,10 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaEngine;
+use MediaWiki\Extension\Scribunto\Engines\LuaStandalone\LuaStandaloneInterpreterFunction;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
 use ParserOptions;
-use Scribunto_LuaEngine;
-use Scribunto_LuaStandaloneInterpreterFunction;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
@@ -92,12 +92,12 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		// The value of setupInterface depends on the Lua runtime in use.
 		$isLuaFunction =
-			( $package['setupInterface'] instanceof Scribunto_LuaStandaloneInterpreterFunction ) ||
+			( $package['setupInterface'] instanceof LuaStandaloneInterpreterFunction ) ||
 			( $package['setupInterface'] instanceof LuaSandboxFunction );
 
 		$this->assertTrue(
 			$isLuaFunction,
-			'$package[\'setupInterface\'] needs to be Scribunto_LuaStandaloneInterpreterFunction or LuaSandboxFunction'
+			'$package[\'setupInterface\'] needs to be LuaStandaloneInterpreterFunction or LuaSandboxFunction'
 		);
 	}
 
@@ -604,7 +604,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		bool &$cacheSplit = false,
 		?Language $userLang = null
 	): Scribunto_LuaWikibaseLibrary {
-		/** @var $engine Scribunto_LuaEngine */
+		/** @var $engine LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 
