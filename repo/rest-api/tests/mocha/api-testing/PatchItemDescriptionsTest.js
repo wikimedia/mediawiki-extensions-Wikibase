@@ -290,15 +290,16 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			);
 		} );
 
-		it( 'invalid language code', async () => {
-			const language = 'invalid-language-code';
-			const response = await newPatchItemDescriptionsRequestBuilder(
-				testItemId,
-				[ { op: 'add', path: `/${language}`, value: 'potato' } ]
-			).assertValidRequest().makeRequest();
+		[ 'invalid-language-code', 'mul' ].forEach( ( language ) => {
+			it( `invalid language code: "${language}"`, async () => {
+				const response = await newPatchItemDescriptionsRequestBuilder(
+					testItemId,
+					[ { op: 'add', path: `/${language}`, value: 'potato' } ]
+				).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+				assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
+				assert.include( response.body.message, language );
+			} );
 		} );
 
 		it( 'patched label and description already exists in a different item', async () => {
