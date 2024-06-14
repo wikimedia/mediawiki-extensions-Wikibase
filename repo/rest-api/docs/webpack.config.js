@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 const outputPath = path.resolve( __dirname, '../../../docs/rest-api' ); // eslint-disable-line no-undef
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
 		app: require.resolve( __dirname, 'index.js' ) // eslint-disable-line no-undef
 	},
