@@ -5,11 +5,11 @@ namespace Wikibase\Client\Hooks;
 use Language;
 use MediaWiki\Hook\MagicWordwgVariableIDsHook;
 use MediaWiki\Hook\ParserGetVariableValueSwitchHook;
+use MediaWiki\Message\Message;
+use MediaWiki\Parser\Parser;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderJqueryMsgModuleMagicWordsHook;
-use Message;
-use Parser;
 use PPFrame;
 use Wikibase\Lib\SettingsArray;
 

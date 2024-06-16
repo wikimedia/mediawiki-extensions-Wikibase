@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Parser;
+use MediaWiki\Parser\Parser;
 use Wikibase\Client\Store\DescriptionLookup;
 
 /**

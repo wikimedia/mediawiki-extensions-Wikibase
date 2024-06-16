@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;

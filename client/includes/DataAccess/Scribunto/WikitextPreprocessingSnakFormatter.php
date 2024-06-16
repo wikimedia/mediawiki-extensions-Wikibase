@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Parser;
+use MediaWiki\Parser\Parser;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikimedia\Assert\Assert;

@@ -6,10 +6,10 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use Language;
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LibraryBase;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOutput;
-use Scribunto_LuaLibraryBase;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -26,7 +26,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  * @author Andrew Hall
  */
-class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase implements ParserOutputProvider {
+class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLuaEntityBindings|null

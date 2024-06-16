@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Usage\Sql;
 
-use DatabaseUpdater;
+use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use RuntimeException;

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Hooks;
 
-use EchoAttributeManager;
-use EchoUserLocator;
+use MediaWiki\Extension\Notifications\AttributeManager;
+use MediaWiki\Extension\Notifications\UserLocator;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 use Wikibase\Lib\SettingsArray;
 
@@ -70,8 +70,8 @@ class EchoSetupHookHandler
 		];
 
 		$notifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] = [
-			EchoAttributeManager::ATTR_LOCATORS => [
-				[ [ EchoUserLocator::class, 'locateArticleCreator' ] ],
+			AttributeManager::ATTR_LOCATORS => [
+				[ [ UserLocator::class, 'locateArticleCreator' ] ],
 			],
 			'category' => 'wikibase-action',
 			'group' => 'neutral',

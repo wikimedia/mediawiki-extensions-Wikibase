@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Specials;
 
 use HtmlArmor;
-use HTMLForm;
 use MediaWiki\Html\Html;
+use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\SpecialPage\QueryPage;

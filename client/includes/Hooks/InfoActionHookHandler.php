@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Hook\InfoActionHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;

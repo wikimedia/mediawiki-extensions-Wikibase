@@ -5,8 +5,8 @@ namespace Wikibase\Client\Hooks;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use EchoEvent;
 use ExtensionRegistry;
+use MediaWiki\Extension\Notifications\Model\Event;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\RedirectLookup;
 use MediaWiki\Title\Title;
@@ -114,10 +114,10 @@ class EchoNotificationsHandlers {
 	 * Handler for EchoGetBundleRules hook
 	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide#Bundled_notifications
 	 *
-	 * @param EchoEvent $event
+	 * @param Event $event
 	 * @param string &$bundleString
 	 */
-	public static function onEchoGetBundleRules( EchoEvent $event, &$bundleString ) {
+	public static function onEchoGetBundleRules( Event $event, &$bundleString ) {
 		if ( $event->getType() === self::NOTIFICATION_TYPE ) {
 			$bundleString = self::NOTIFICATION_TYPE;
 		}
@@ -196,7 +196,7 @@ class EchoNotificationsHandlers {
 			$metadata = $change->getMetadata();
 			$entityId = $change->getEntityId();
 			$agent = User::newFromName( $metadata['user_text'], false );
-			EchoEvent::create( [
+			Event::create( [
 				'agent' => $agent,
 				'extra' => [
 					// maybe also a diff link?

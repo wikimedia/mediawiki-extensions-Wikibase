@@ -6,8 +6,8 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\ParserClearStateHook;
 use MediaWiki\Hook\ParserLimitReportPrepareHook;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
-use Parser;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\SettingsArray;
 
