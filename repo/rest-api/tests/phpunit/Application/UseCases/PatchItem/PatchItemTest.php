@@ -9,6 +9,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -41,6 +42,8 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
@@ -57,6 +60,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
@@ -107,7 +111,7 @@ class PatchItemTest extends TestCase {
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'en-gb' ] ) ),
 				new AliasesDeserializer()
 			),
-			$this->newSitelinkDeserializer(),
+			$this->newSitelinksValidator(),
 			$this->newStatementsValidator(),
 		);
 		$this->itemWriteModelRetriever = $this->itemRepository;
@@ -283,12 +287,18 @@ class PatchItemTest extends TestCase {
 		);
 	}
 
-	private function newSitelinkDeserializer(): SitelinkDeserializer {
-		return new SitelinkDeserializer(
-			'/\?/',
-			self::ALLOWED_BADGES,
-			new SameTitleSitelinkTargetResolver(),
-			new DummyItemRevisionMetaDataRetriever()
+	private function newSitelinksValidator(): SitelinksValidator {
+		return new SitelinksValidator(
+			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+			new SiteLinkLookupSitelinkValidator(
+				new SitelinkDeserializer(
+					'/\?/',
+					self::ALLOWED_BADGES,
+					new SameTitleSitelinkTargetResolver(),
+					new DummyItemRevisionMetaDataRetriever()
+				),
+				new HashSiteLinkStore()
+			)
 		);
 	}
 

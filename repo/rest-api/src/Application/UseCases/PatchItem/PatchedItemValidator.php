@@ -5,13 +5,11 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItem;
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
@@ -22,8 +20,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ItemReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
 // phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
@@ -38,7 +41,7 @@ class PatchedItemValidator {
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
 	private AliasesValidator $aliasesValidator;
-	private SitelinkDeserializer $sitelinkDeserializer;
+	private SitelinksValidator $sitelinksValidator;
 	private StatementsValidator $statementsValidator;
 
 	public function __construct(
@@ -47,7 +50,7 @@ class PatchedItemValidator {
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
 		AliasesValidator $aliasesValidator,
-		SitelinkDeserializer $sitelinkDeserializer,
+		SitelinksValidator $sitelinksValidator,
 		StatementsValidator $statementsValidator
 	) {
 		$this->labelsSyntaxValidator = $labelsSyntaxValidator;
@@ -55,16 +58,16 @@ class PatchedItemValidator {
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
 		$this->aliasesValidator = $aliasesValidator;
-		$this->sitelinkDeserializer = $sitelinkDeserializer;
+		$this->sitelinksValidator = $sitelinksValidator;
 		$this->statementsValidator = $statementsValidator;
 	}
 
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( array $serialization, Item $originalItem ): Item {
-		if ( !isset( $serialization['id'] ) ) { // ignore ID removal
-			$serialization['id'] = $originalItem->getId()->getSerialization();
+	public function validateAndDeserialize( ItemReadModel $item, array $serialization, Item $originalItem ): Item {
+		if ( !isset( $serialization[ 'id' ] ) ) { // ignore ID removal
+			$serialization[ 'id' ] = $originalItem->getId()->getSerialization();
 		}
 
 		$this->assertNoIllegalModification( $serialization, $originalItem );
@@ -72,6 +75,7 @@ class PatchedItemValidator {
 		$this->assertValidFields( $serialization );
 		$this->assertValidLabelsAndDescriptions( $serialization, $originalItem );
 		$this->assertValidAliases( $serialization );
+		$this->assertValidSitelinks( $item, $serialization );
 		$this->assertValidStatements( $serialization, $originalItem );
 
 		return new Item(
@@ -81,7 +85,7 @@ class PatchedItemValidator {
 				$this->descriptionsContentsValidator->getValidatedDescriptions(),
 				$this->aliasesValidator->getValidatedAliases()
 			),
-			$this->deserializeSitelinks( $serialization[ 'sitelinks' ] ?? [] ),
+			$this->sitelinksValidator->getValidatedSitelinks(),
 			$this->statementsValidator->getValidatedStatements()
 		);
 	}
@@ -369,13 +373,125 @@ class PatchedItemValidator {
 		) );
 	}
 
-	private function deserializeSitelinks( array $sitelinksSerialization ): SiteLinkList {
-		$sitelinkList = [];
-		foreach ( $sitelinksSerialization as $siteId => $sitelink ) {
-			$sitelinkList[] = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink );
-		}
+	private function assertValidSitelinks( ItemReadModel $item, array $serialization ): void {
+		$itemId = $serialization['id'];
+		$sitelinksSerialization = $serialization['sitelinks'] ?? [];
+		$originalSitelinks = $item->getSitelinks();
+		$validationError = $this->sitelinksValidator->validate( $itemId, $sitelinksSerialization );
 
-		return new SiteLinkList( $sitelinkList );
+		if ( $validationError ) {
+			$this->handleSitelinksValidationError( $validationError, $sitelinksSerialization );
+		}
+		$this->assertUrlsNotModified( $originalSitelinks, $sitelinksSerialization );
+	}
+
+	private function handleSitelinksValidationError( ValidationError $validationError, array $sitelinksSerialization ): void {
+		$context = $validationError->getContext();
+		$siteId = fn() => $context[ SitelinkValidator::CONTEXT_SITE_ID ];
+		switch ( $validationError->getCode() ) {
+			case SitelinksValidator::CODE_INVALID_SITELINK:
+				throw new UseCaseError(
+					UseCaseError::PATCHED_INVALID_SITELINK_TYPE,
+					'Not a valid sitelink type in patched sitelinks',
+					[ UseCaseError::CONTEXT_SITE_ID => $context[ SitelinksValidator::CONTEXT_SITE_ID ] ]
+				);
+			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
+				$this->throwInvalidField( 'sitelinks', $sitelinksSerialization );
+			case SiteIdValidator::CODE_INVALID_SITE_ID:
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID,
+					"Not a valid site ID '{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}' in patched sitelinks",
+					[ UseCaseError::CONTEXT_SITE_ID => $context[ SiteIdValidator::CONTEXT_SITE_ID_VALUE ] ]
+				);
+			case SitelinkValidator::CODE_TITLE_MISSING:
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_MISSING_TITLE,
+					"No sitelink title provided for site '{$siteId()}' in patched sitelinks",
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_EMPTY_TITLE:
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_TITLE_EMPTY,
+					"Sitelink cannot be empty for site '{$siteId()}' in patched sitelinks",
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
+				);
+			case SitelinkValidator::CODE_INVALID_TITLE:
+			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
+				$title = $sitelinksSerialization[ $siteId() ][ 'title' ];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_INVALID_TITLE,
+					"Invalid sitelink title '$title' for site '{$siteId()}' in patched sitelinks",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_TITLE => $title,
+					]
+				);
+			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
+				$title = $sitelinksSerialization[ $siteId() ][ 'title' ];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST,
+					"Incorrect patched sitelinks. Page with title '$title' does not exist on site '{$siteId()}'",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_TITLE => $title,
+					]
+				);
+			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_BADGES_FORMAT,
+					"Badges value for site '{$siteId()}' is not a list in patched sitelinks",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_BADGES => $sitelinksSerialization[ $siteId() ][ 'badges' ],
+					]
+				);
+			case SitelinkValidator::CODE_INVALID_BADGE:
+				$badge = $context[ SitelinkValidator::CONTEXT_BADGE ];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_INVALID_BADGE,
+					"Incorrect patched sitelinks. Badge value '$badge' for site '{$siteId()}' is not an item ID",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_BADGE => $badge,
+					]
+				);
+			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
+				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_ITEM_NOT_A_BADGE,
+					"Incorrect patched sitelinks. Item '$badge' used for site '{$siteId()}' is not allowed as a badge",
+					[
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+						UseCaseError::CONTEXT_BADGE => $badge,
+					]
+				);
+			case SitelinkValidator::CODE_SITELINK_CONFLICT:
+				$matchingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_CONFLICT,
+					"Site '{$siteId()}' is already being used on '$matchingItemId'",
+					[
+						UseCaseError::CONTEXT_MATCHING_ITEM_ID => "$matchingItemId",
+						UseCaseError::CONTEXT_SITE_ID => $siteId(),
+					]
+				);
+		}
+	}
+
+	private function assertUrlsNotModified( Sitelinks $originalSitelinks, array $patchedSitelinkSerialization ): void {
+		foreach ( $patchedSitelinkSerialization as $siteId => $sitelink ) {
+			if (
+				isset( $sitelink[ 'url' ] ) &&
+				isset( $originalSitelinks[ $siteId ] ) &&
+				$originalSitelinks[ $siteId ]->getUrl() !== $sitelink[ 'url' ]
+			) {
+				throw new UseCaseError(
+					UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
+					'URL of sitelink cannot be modified',
+					[ UseCaseError::CONTEXT_SITE_ID => $siteId ]
+				);
+			}
+		}
 	}
 
 	private function assertValidStatements( array $serialization, Item $originalItem ): void {

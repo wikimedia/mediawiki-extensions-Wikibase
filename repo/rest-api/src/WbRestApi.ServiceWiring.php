@@ -785,7 +785,15 @@ return [
 					WbRestApi::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer()
 				),
-				WbRestApi::getSitelinkDeserializer(),
+				new SitelinksValidator(
+					new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
+						WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
+					) ),
+					new SiteLinkLookupSitelinkValidator(
+						WbRestApi::getSitelinkDeserializer( $services ),
+						WikibaseRepo::getStore( $services )->newSiteLinkStore()
+					),
+				),
 				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer() ) )
 			),
 			WbRestApi::getItemDataRetriever(),
