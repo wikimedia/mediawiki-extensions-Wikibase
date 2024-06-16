@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Validators;
 
-use Parser;
+use MediaWiki\Parser\Parser;
 use ValueValidators\ValueValidator;
 
 /**

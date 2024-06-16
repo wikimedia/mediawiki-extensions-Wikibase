@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Specials\HTMLForm;
 
-use HTMLComboboxField;
-use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\HTMLForm\Field\HTMLComboboxField;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\WikibaseRepo;
 

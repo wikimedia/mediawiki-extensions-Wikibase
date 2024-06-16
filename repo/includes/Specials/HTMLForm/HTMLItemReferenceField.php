@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Specials\HTMLForm;
 
-use Message;
+use MediaWiki\HTMLForm\Field\HTMLTextField;
+use MediaWiki\Message\Message;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -12,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class HTMLItemReferenceField extends \HTMLTextField {
+class HTMLItemReferenceField extends HTMLTextField {
 
 	/**
 	 * @var EntityLookup

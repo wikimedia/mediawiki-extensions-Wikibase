@@ -5,12 +5,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
 use ExtensionRegistry;
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Message\Message;
 use MediaWiki\SpecialPage\SpecialPage;
-use Message;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
 

@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
-use Message;
+use MediaWiki\Message\Message;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

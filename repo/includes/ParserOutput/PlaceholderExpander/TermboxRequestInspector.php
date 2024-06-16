@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**

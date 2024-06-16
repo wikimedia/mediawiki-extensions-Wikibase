@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use LogicException;
 use MediaWiki\Html\Html;
+use MediaWiki\HTMLForm\HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;

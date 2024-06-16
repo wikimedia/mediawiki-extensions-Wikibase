@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Localizer;
 
 use Exception;
 use InvalidArgumentException;
-use Message;
+use MediaWiki\Message\Message;
 
 /**
  * Interface for services that provide localized messages for various types of Exceptions.

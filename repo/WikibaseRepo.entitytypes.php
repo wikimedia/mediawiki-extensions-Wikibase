@@ -17,6 +17,7 @@
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Site\SiteLookup;

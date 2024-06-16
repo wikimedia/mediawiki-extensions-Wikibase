@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
 use Exception;
-use HTMLForm;
 use MediaWiki\Html\Html;
-use Message;
+use MediaWiki\HTMLForm\HTMLForm;
+use MediaWiki\Message\Message;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;

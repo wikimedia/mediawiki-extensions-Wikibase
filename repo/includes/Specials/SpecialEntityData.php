@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;
@@ -53,7 +53,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	public static function factory(
-		HtmlCacheUpdater $htmlCacheUpdater,
+		HTMLCacheUpdater $htmlCacheUpdater,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		EntityDataSerializationService $serializationService,
 		EntityDataUriManager $entityDataUriManager,

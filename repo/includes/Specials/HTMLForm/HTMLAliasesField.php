@@ -7,7 +7,8 @@
 
 namespace Wikibase\Repo\Specials\HTMLForm;
 
-use HTMLTextField;
+use MediaWiki\HTMLForm\Field\HTMLTextField;
+use MediaWiki\Message\Message;
 use Wikibase\Lib\StringNormalizer;
 
 /**
@@ -75,7 +76,7 @@ class HTMLAliasesField extends HTMLTextField {
 	 * @param array $value
 	 * @param array $alldata
 	 *
-	 * @return bool|\Message|string
+	 * @return bool|Message|string
 	 */
 	public function validate( $value, $alldata ) {
 		if ( isset( $this->mParams['required'] )
