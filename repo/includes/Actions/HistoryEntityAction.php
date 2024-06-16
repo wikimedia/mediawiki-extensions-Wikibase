@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Actions;
 
 use Article;
 use HistoryAction;
-use IContextSource;
-use Message;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Message\Message;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 

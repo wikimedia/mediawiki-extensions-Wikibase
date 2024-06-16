@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Actions;
 
 use Article;
-use IContextSource;
 use LogicException;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;

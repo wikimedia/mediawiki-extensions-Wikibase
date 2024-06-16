@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Actions;
 
 use Article;
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Linker\Linker;
 use MediaWiki\Permissions\PermissionManager;

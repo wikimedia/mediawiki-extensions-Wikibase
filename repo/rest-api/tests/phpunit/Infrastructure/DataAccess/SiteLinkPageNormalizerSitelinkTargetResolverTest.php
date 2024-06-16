@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
@@ -25,7 +26,7 @@ class SiteLinkPageNormalizerSitelinkTargetResolverTest extends TestCase {
 		$resolvedTitle = 'Bonny & Clyde';
 
 		$site = $this->createStub( Site::class );
-		$siteLookup = $this->createMock( \SiteLookup::class );
+		$siteLookup = $this->createMock( SiteLookup::class );
 		$siteLookup->expects( $this->once() )
 			->method( 'getSite' )
 			->with( $siteId )
@@ -45,7 +46,7 @@ class SiteLinkPageNormalizerSitelinkTargetResolverTest extends TestCase {
 	}
 
 	public function testGivenTitleNotFound_throws(): void {
-		$siteLookup = $this->createStub( \SiteLookup::class );
+		$siteLookup = $this->createStub( SiteLookup::class );
 		$siteLookup->method( 'getSite' )->willReturn( $this->createStub( Site::class ) );
 
 		$pageNormalizer = $this->createStub( SiteLinkPageNormalizer::class );

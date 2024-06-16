@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Interactors;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Repo\TempUserStatus;

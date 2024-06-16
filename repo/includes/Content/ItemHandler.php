@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Content;
 
 use Article;
 use Content;
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Revision\SlotRenderingProvider;
 use MediaWiki\Title\Title;
 use ParserOptions;

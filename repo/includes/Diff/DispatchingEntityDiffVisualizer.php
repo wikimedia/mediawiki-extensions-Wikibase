@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Diff;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**

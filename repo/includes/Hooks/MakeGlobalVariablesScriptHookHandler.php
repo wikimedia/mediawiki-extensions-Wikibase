@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use Language;
-use MediaWiki\Hook\MakeGlobalVariablesScriptHook;
+use MediaWiki\Output\Hook\MakeGlobalVariablesScriptHook;
 use MediaWiki\Output\OutputPage;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\SettingsArray;

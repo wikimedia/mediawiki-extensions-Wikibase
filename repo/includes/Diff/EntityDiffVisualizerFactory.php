@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Diff;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Site\SiteLookup;
-use RequestContext;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;

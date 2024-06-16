@@ -6,8 +6,8 @@ namespace Wikibase\Repo\Hooks;
 
 use IBufferingStatsdDataFactory;
 use Language;
-use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Output\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\User\Options\UserOptionsLookup;
 use Psr\Log\LoggerInterface;

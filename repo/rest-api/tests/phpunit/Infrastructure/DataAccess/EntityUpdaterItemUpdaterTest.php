@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use InvalidArgumentException;
+use MediaWiki\Site\Site;
+use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
-use Site;
-use SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;

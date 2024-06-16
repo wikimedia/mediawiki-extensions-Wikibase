@@ -3,8 +3,8 @@
 namespace Wikibase\Repo;
 
 use Language;
+use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
-use Message;
 use Wikimedia\Assert\Assert;
 
 /**
