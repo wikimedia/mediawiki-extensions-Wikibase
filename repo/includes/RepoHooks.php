@@ -11,6 +11,7 @@ use ApiQuerySiteinfo;
 use Content;
 use ExtensionRegistry;
 use IContextSource;
+use IDBAccessObject;
 use LogEntry;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
@@ -456,12 +457,16 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
 		$services = MediaWikiServices::getInstance();
 
-		$wikiPage = $services->getWikiPageFactory()->newFromTitle( $history->getTitle() );
-		$revisionRecord = $services->getRevisionFactory()->newRevisionFromRow( $row );
+		$title = $history->getTitle();
+		$revisionRecord = $services->getRevisionFactory()->newRevisionFromRow(
+			$row,
+			IDBAccessObject::READ_NORMAL,
+			$title
+		);
 		$linkTarget = $revisionRecord->getPageAsLinkTarget();
 
-		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
-			&& $wikiPage->getLatest() !== $revisionRecord->getId()
+		if ( $entityContentFactory->isEntityContentModel( $title->getContentModel() )
+			&& $title->getLatestRevID() !== $revisionRecord->getId()
 			&& $services->getPermissionManager()->quickUserCan(
 				'edit',
 				$history->getUser(),
