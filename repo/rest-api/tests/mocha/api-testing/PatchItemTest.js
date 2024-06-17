@@ -2,7 +2,7 @@
 
 const { expect } = require( '../helpers/chaiHelper' );
 const { assert, utils } = require( 'api-testing' );
-const { newPatchItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newPatchItemRequestBuilder, newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -553,6 +553,154 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
 			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
 			assert.include( response.body.message, language );
+		} );
+
+		const makeStatementPatchOperation = ( propertyId, invalidStatement ) => [ {
+			op: 'add',
+			path: '/statements',
+			value: { [ propertyId ]: [ invalidStatement ] }
+		} ];
+
+		it( 'invalid statements type', async () => {
+			const invalidStatements = [ 'invalid statements type' ];
+			const patch = [ { op: 'add', path: '/statements', value: invalidStatements } ];
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { path: 'statements', value: invalidStatements };
+			assertValidError( response, 422, 'patched-item-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'statements' in the patched item" );
+		} );
+
+		it( 'invalid statement group type', async () => {
+			const validStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const invalidStatementGroupType = { [ predicatePropertyId ]: validStatement };
+			const patch = [ { op: 'add', path: '/statements', value: invalidStatementGroupType } ];
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-invalid-statement-group-type', { path: predicatePropertyId } );
+			assert.strictEqual( response.body.message, 'Not a valid statement group' );
+		} );
+
+		it( 'invalid statement type', async () => {
+			const invalidStatement = [ {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			} ];
+			const patch = makeStatementPatchOperation( predicatePropertyId, invalidStatement );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-invalid-statement-type', { path: `${predicatePropertyId}/0` } );
+			assert.strictEqual( response.body.message, 'Not a valid statement type' );
+		} );
+
+		it( 'missing statement field', async () => {
+			const patch = makeStatementPatchOperation( predicatePropertyId, { value: { type: 'novalue' } } );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-statement-missing-field', { path: 'property' } );
+			assert.strictEqual( response.body.message, 'Mandatory field missing in the patched statement: property' );
+		} );
+
+		it( 'invalid statement field', async () => {
+			const invalidRankValue = 'invalid rank';
+			const invalidStatement = { rank: invalidRankValue };
+			const patch = makeStatementPatchOperation( predicatePropertyId, invalidStatement );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { path: 'rank', value: invalidRankValue };
+			assertValidError( response, 422, 'patched-statement-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'rank' in the patched statement" );
+		} );
+
+		it( 'statement property id mismatch', async () => {
+			const propertyIdKey = 'P123';
+			const validStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const patch = makeStatementPatchOperation( propertyIdKey, validStatement );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = {
+				path: `${propertyIdKey}/0/property/id`,
+				'statement-group-property-id': propertyIdKey,
+				'statement-property-id': predicatePropertyId
+			};
+			assertValidError( response, 422, 'patched-statement-group-property-id-mismatch', context );
+			assert.strictEqual( response.body.message, "Statement's Property ID does not match the statement group key" );
+		} );
+
+		it( 'statement IDs cannot be created or modified', async () => {
+			const invalidStatement = {
+				id: 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const patch = makeStatementPatchOperation( predicatePropertyId, invalidStatement );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { 'statement-id': invalidStatement.id };
+			assertValidError( response, 422, 'statement-id-not-modifiable', context );
+			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
+		} );
+
+		it( 'duplicate statement id', async () => {
+			const duplicateStatement = {
+				id: 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const invalidStatementGroup = [ duplicateStatement, duplicateStatement ];
+			const patch = [ {
+				op: 'add',
+				path: '/statements',
+				value: { [ predicatePropertyId ]: invalidStatementGroup }
+			} ];
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { 'statement-id': duplicateStatement.id };
+			assertValidError( response, 422, 'statement-id-not-modifiable', context );
+			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
+		} );
+
+		it( 'property IDs modified', async () => {
+			const newPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const existingStatementId = ( await newAddItemStatementRequestBuilder( testItemId, {
+				property: { id: predicatePropertyId },
+				value: { type: 'novalue' }
+			} ).makeRequest() ).body.id;
+			const invalidStatement = {
+				id: existingStatementId,
+				property: { id: newPropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const patch = makeStatementPatchOperation( newPropertyId, invalidStatement );
+
+			const response = await newPatchItemRequestBuilder( testItemId, patch )
+				.assertValidRequest().makeRequest();
+
+			const context = { 'statement-id': existingStatementId, 'statement-property-id': predicatePropertyId };
+			assertValidError( response, 422, 'patched-statement-property-not-modifiable', context );
+			assert.strictEqual( response.body.message, 'Property of a statement cannot be modified' );
 		} );
 	} );
 
