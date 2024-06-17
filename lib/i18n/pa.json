@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Babanwalia",
-			"Kuldeepburjbhalaike"
+			"Kuldeepburjbhalaike",
+			"Cabal"
 		]
 	},
 	"specialpages-group-wikibase": "ਵਿਕੀਬੇਸ",
@@ -15,7 +16,7 @@
 	"wikibase-error-remove-generic": "ਕਿਸੇ ਤਰੁੱਟੀ ਕਾਰਨ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।",
 	"wikibase-error-save-timeout": "ਸਾਨੂੰ ਤਕਨੀਕੀ ਸਮੱਸਿਆਵਾਂ ਦਾ ਸਾਹਮਣਾ ਕਰਨਾ ਪੈ ਰਿਹਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
 	"wikibase-error-remove-timeout": "ਸਾਨੂੰ ਤਕਨੀਕੀ ਸਮੱਸਿਆਵਾਂ ਦਾ ਸਾਹਮਣਾ ਕਰਨਾ ਪੈ ਰਿਹਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
-	"wikibase-error-ui-no-external-page": "ਪੰਨਾ \"$2\" \"$1\" ਉੱਤੇ ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਿਆ ਹੈ।",
+	"wikibase-error-ui-no-external-page": "\"$1\" ਉੱਤੇ ਸਫ਼ਾ \"$2\" ਨਹੀਂ ਲੱਭਿਆ ਜਾ ਸਕਿਆ ਹੈ।",
 	"wikibase-language-fallback-transliteration-hint": "$1 (ਲਿਪੀਅੰਤਰਿਤ)",
 	"wikibase-quantitydetails-unit": "ਇਕਾਈ",
 	"wikibase-timedetails-time": "ਸਮਾਂ",
