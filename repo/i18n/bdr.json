@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tofeiku"
+			"Tofeiku",
+			"Ultron90"
 		]
 	},
 	"wikibase-edit": "niuba",
 	"wikibase-add": "peniko",
+	"wikibase-label-empty": "Nyaun libal",
 	"wikibase-description-empty": "Nyaun keterangan",
 	"wikibase-sitelinks-special": "Tapak sediri"
 }
