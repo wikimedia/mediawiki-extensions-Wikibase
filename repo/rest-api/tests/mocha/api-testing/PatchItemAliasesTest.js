@@ -91,6 +91,17 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				formatTermsEditSummary( 'update-languages-short', 'de', editSummary )
 			);
 		} );
+
+		it( 'can add a "mul" alias', async () => {
+			const alias = `mul-alias-${utils.uniq()}`;
+			const response = await newPatchItemAliasesRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/mul', value: [ alias ] } ]
+			).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.deepEqual( response.body.mul, [ alias ] );
+		} );
 	} );
 
 	describe( '400 Bad Request', () => {

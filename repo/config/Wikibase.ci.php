@@ -74,3 +74,5 @@ $wgTempAccountCreationThrottle = [ [
 	'count' => 100,
 	'seconds' => 86400,
 ] ];
+
+$wgWBRepoSettings['tmpEnableMulLanguageCode'] = boolval( getallheaders()[ 'X-Wikibase-Ci-Enable-Mul' ] ?? false );

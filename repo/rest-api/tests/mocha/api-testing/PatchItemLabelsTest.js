@@ -99,6 +99,17 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				formatTermsEditSummary( 'update-languages-short', 'ar', editSummary )
 			);
 		} );
+
+		it( 'can add a "mul" label', async () => {
+			const label = `mul-label-${utils.uniq()}`;
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/mul', value: label } ]
+			).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.mul, label );
+		} );
 	} );
 
 	describe( '422 error response', () => {
