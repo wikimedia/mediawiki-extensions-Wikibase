@@ -20,10 +20,10 @@ class DescriptionsSyntaxValidator {
 	public const CONTEXT_LANGUAGE = 'descriptions-syntax-validator-context-language';
 
 	private DescriptionsDeserializer $deserializer;
-	private LanguageCodeValidator $languageCodeValidator;
+	private DescriptionLanguageCodeValidator $languageCodeValidator;
 	private PartiallyValidatedDescriptions $deserializedDescriptions;
 
-	public function __construct( DescriptionsDeserializer $deserializer, LanguageCodeValidator $languageCodeValidator ) {
+	public function __construct( DescriptionsDeserializer $deserializer, DescriptionLanguageCodeValidator $languageCodeValidator ) {
 		$this->deserializer = $deserializer;
 		$this->languageCodeValidator = $languageCodeValidator;
 	}

@@ -44,7 +44,9 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator
@@ -66,11 +68,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$this->labelsSyntaxValidator = new LabelsSyntaxValidator(
 			new LabelsDeserializer(),
-			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en' ] ) )
 		);
 		$this->descriptionsSyntaxValidator = new DescriptionsSyntaxValidator(
 			new DescriptionsDeserializer(),
-			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en' ] ) )
 		);
 		$this->labelsContentsValidator = new PropertyLabelsContentsValidator(
 			$this->createStub( PropertyLabelValidator::class )
@@ -979,7 +981,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$this->descriptionsContentsValidator,
 			new AliasesValidator(
 				$this->aliasesInLanguageValidator,
-				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
 				new AliasesDeserializer(),
 			),
 			new StatementsValidator(

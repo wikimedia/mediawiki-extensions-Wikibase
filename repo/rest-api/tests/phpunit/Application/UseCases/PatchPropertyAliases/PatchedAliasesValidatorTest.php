@@ -12,9 +12,10 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -159,7 +160,7 @@ class PatchedAliasesValidatorTest extends TestCase {
 					$this->createStub( LanguageNameUtils::class )
 				)
 			),
-			new LanguageCodeValidator( $validLanguageCodes )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( $validLanguageCodes ) )
 		);
 	}
 

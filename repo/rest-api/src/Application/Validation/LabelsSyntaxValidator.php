@@ -20,10 +20,10 @@ class LabelsSyntaxValidator {
 	public const CONTEXT_LANGUAGE = 'labels-syntax-validator-context-language';
 
 	private LabelsDeserializer $deserializer;
-	private LanguageCodeValidator $languageCodeValidator;
+	private LabelLanguageCodeValidator $languageCodeValidator;
 	private PartiallyValidatedLabels $deserializedLabels;
 
-	public function __construct( LabelsDeserializer $deserializer, LanguageCodeValidator $languageCodeValidator ) {
+	public function __construct( LabelsDeserializer $deserializer, LabelLanguageCodeValidator $languageCodeValidator ) {
 		$this->deserializer = $deserializer;
 		$this->languageCodeValidator = $languageCodeValidator;
 	}

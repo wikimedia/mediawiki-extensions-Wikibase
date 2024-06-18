@@ -68,6 +68,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription\SetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
+use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -464,6 +467,21 @@ class WbRestApi {
 	public static function getSetSitelink( ContainerInterface $services = null ): SetSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.SetSitelink' );
+	}
+
+	public static function getLabelLanguageCodeValidator( ContainerInterface $services = null ): LabelLanguageCodeValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.LabelLanguageCodeValidator' );
+	}
+
+	public static function getDescriptionLanguageCodeValidator( ContainerInterface $services = null ): DescriptionLanguageCodeValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.DescriptionLanguageCodeValidator' );
+	}
+
+	public static function getAliasLanguageCodeValidator( ContainerInterface $services = null ): AliasLanguageCodeValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.AliasLanguageCodeValidator' );
 	}
 
 }

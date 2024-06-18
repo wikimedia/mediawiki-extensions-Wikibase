@@ -9,7 +9,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasExcepti
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,12 +18,12 @@ class PatchedAliasesValidator {
 
 	private AliasesDeserializer $aliasesDeserializer;
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private AliasLanguageCodeValidator $languageCodeValidator;
 
 	public function __construct(
 		AliasesDeserializer $aliasesDeserializer,
 		AliasesInLanguageValidator $aliasesInLanguageValidator,
-		LanguageCodeValidator $languageCodeValidator
+		AliasLanguageCodeValidator $languageCodeValidator
 	) {
 		$this->aliasesDeserializer = $aliasesDeserializer;
 		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;

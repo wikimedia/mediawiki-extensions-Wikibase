@@ -33,13 +33,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
@@ -57,10 +58,12 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -95,13 +98,13 @@ class PatchItemTest extends TestCase {
 		$this->itemRetriever = $this->itemRepository;
 		$this->itemUpdater = $this->itemRepository;
 		$this->patchedItemValidator = new PatchedItemValidator(
-			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
 			new ItemLabelsContentsValidator( $this->createStub( ItemLabelValidator::class ) ),
-			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( DescriptionLanguageCodeValidator::class ) ),
 			new ItemDescriptionsContentsValidator( $this->createStub( ItemDescriptionValidator::class ) ),
 			new AliasesValidator(
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
-				new LanguageCodeValidator( WikibaseRepo::getTermsLanguages()->getLanguages() ),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'en-gb' ] ) ),
 				new AliasesDeserializer()
 			),
 			$this->newSitelinkDeserializer(),

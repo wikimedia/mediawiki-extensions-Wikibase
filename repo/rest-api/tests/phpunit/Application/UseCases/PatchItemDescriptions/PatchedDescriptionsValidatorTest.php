@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -25,13 +26,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 class PatchedDescriptionsValidatorTest extends TestCase {
 
 	private ItemDescriptionValidator $descriptionValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private DescriptionLanguageCodeValidator $languageCodeValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->descriptionValidator = $this->createStub( ItemDescriptionValidator::class );
-		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+		$this->languageCodeValidator = $this->createStub( DescriptionLanguageCodeValidator::class );
 	}
 
 	/**
@@ -233,7 +234,7 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 
 	public function testGivenInvalidLanguageCode_throwsUseCaseError(): void {
 		$invalidLanguage = 'not-a-valid-language-code';
-		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+		$this->languageCodeValidator = $this->createStub( DescriptionLanguageCodeValidator::class );
 		$this->languageCodeValidator->method( 'validate' )->willReturn(
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,

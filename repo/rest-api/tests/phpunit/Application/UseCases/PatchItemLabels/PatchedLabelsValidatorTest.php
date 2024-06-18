@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsVali
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
@@ -25,13 +26,13 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 class PatchedLabelsValidatorTest extends TestCase {
 
 	private ItemLabelValidator $labelValidator;
-	private LanguageCodeValidator $languageCodeValidator;
+	private LabelLanguageCodeValidator $languageCodeValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
-		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+		$this->languageCodeValidator = $this->createStub( LabelLanguageCodeValidator::class );
 	}
 
 	/**
@@ -230,7 +231,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	public function testGivenInvalidLanguageCode_throwsUseCaseError(): void {
 		$invalidLanguage = 'not-a-valid-language-code';
-		$this->languageCodeValidator = $this->createStub( LanguageCodeValidator::class );
+		$this->languageCodeValidator = $this->createStub( LabelLanguageCodeValidator::class );
 		$this->languageCodeValidator->method( 'validate' )->willReturn(
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,

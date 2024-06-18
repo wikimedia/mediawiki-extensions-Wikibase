@@ -19,10 +19,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDe
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -65,7 +65,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->patchedDescriptionsValidator = new PatchedDescriptionsValidator(
-			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( DescriptionLanguageCodeValidator::class ) ),
 			new ItemDescriptionsContentsValidator( $this->createStub( ItemDescriptionValidator::class ) )
 		);
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );

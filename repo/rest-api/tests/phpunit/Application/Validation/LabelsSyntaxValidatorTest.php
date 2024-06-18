@@ -10,6 +10,8 @@ use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator
@@ -89,7 +91,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 	private function newValidator(): LabelsSyntaxValidator {
 		return new LabelsSyntaxValidator(
 			new LabelsDeserializer(),
-			new LanguageCodeValidator( self::VALID_LANGUAGES )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( self::VALID_LANGUAGES ) )
 		);
 	}
 

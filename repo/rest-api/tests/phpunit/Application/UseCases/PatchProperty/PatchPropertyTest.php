@@ -31,9 +31,10 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchPropertyValida
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
@@ -53,8 +54,10 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty
@@ -85,13 +88,13 @@ class PatchPropertyTest extends TestCase {
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->propertyWriteModelRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->patchedPropertyValidator = new PatchedPropertyValidator(
-			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
 			new PropertyLabelsContentsValidator( $this->createStub( PropertyLabelValidator::class ) ),
-			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( LanguageCodeValidator::class ) ),
+			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( DescriptionLanguageCodeValidator::class ) ),
 			new PropertyDescriptionsContentsValidator( $this->createStub( PropertyDescriptionValidator::class ) ),
 			new AliasesValidator(
 				$this->createStub( AliasesInLanguageValidator::class ),
-				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
 				new AliasesDeserializer(),
 			),
 			new StatementsValidator( $this->newStatementsDeserializer() )

@@ -49,8 +49,10 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator
@@ -72,11 +74,11 @@ class PatchedItemValidatorTest extends TestCase {
 
 		$this->labelsSyntaxValidator = new LabelsSyntaxValidator(
 			new LabelsDeserializer(),
-			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en' ] ) )
 		);
 		$this->descriptionsSyntaxValidator = new DescriptionsSyntaxValidator(
 			new DescriptionsDeserializer(),
-			new LanguageCodeValidator( [ 'ar', 'de', 'en' ] )
+			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en' ] ) )
 		);
 		$this->labelsContentsValidator = new ItemLabelsContentsValidator(
 			$this->createStub( ItemLabelValidator::class )
@@ -848,7 +850,7 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->descriptionsContentsValidator,
 			new AliasesValidator(
 				$this->aliasesInLanguageValidator,
-				new LanguageCodeValidator( [ 'ar', 'de', 'en', 'fr' ] ),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
 				new AliasesDeserializer(),
 			),
 			new SitelinkDeserializer(

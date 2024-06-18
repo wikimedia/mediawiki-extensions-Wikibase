@@ -13,10 +13,11 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -130,7 +131,10 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
 		return new PatchedPropertyDescriptionsValidator(
-			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), new LanguageCodeValidator( $validLanguageCodes ) ),
+			new DescriptionsSyntaxValidator(
+				new DescriptionsDeserializer(),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( $validLanguageCodes ) )
+			),
 			new PropertyDescriptionsContentsValidator( new TermValidatorFactoryPropertyDescriptionValidator(
 				new TermValidatorFactory(
 					self::LIMIT,
