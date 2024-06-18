@@ -29,15 +29,15 @@ class ItemIdRequestValidatingDeserializerTest extends TestCase {
 
 	public function testGivenInvalidRequest_throws(): void {
 		$request = $this->createStub( ItemIdRequest::class );
-		$invalidId = 'P123';
-		$request->method( 'getItemId' )->willReturn( $invalidId );
+		$request->method( 'getItemId' )->willReturn( 'P123' );
 
 		try {
 			( new ItemIdRequestValidatingDeserializer() )->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( "Not a valid item ID: $invalidId", $useCaseEx->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'item_id'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'item_id' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

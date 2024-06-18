@@ -10,6 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  * @license GPL-2.0-or-later
  */
 class ItemIdRequestValidatingDeserializer {
+
 	/**
 	 * @throws UseCaseError
 	 */
@@ -17,7 +18,11 @@ class ItemIdRequestValidatingDeserializer {
 		try {
 			return new ItemId( $request->getItemId() );
 		} catch ( InvalidArgumentException $e ) {
-			throw new UseCaseError( UseCaseError::INVALID_ITEM_ID, "Not a valid item ID: {$request->getItemId()}" );
+			throw new UseCaseError(
+				UseCaseError::INVALID_PATH_PARAMETER,
+				"Invalid path parameter: 'item_id'",
+				[ UseCaseError::CONTEXT_PARAMETER => 'item_id' ]
+			);
 		}
 	}
 

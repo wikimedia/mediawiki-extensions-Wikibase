@@ -110,8 +110,12 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( itemId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, itemId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		testValidatesPatch( ( patch ) => newPatchItemAliasesRequestBuilder( testItemId, patch ) );

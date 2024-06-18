@@ -251,8 +251,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -291,8 +291,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -307,8 +307,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -319,8 +319,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -335,8 +335,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -347,8 +347,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -363,8 +363,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -377,8 +377,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'site_id' => 'dewiki' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -389,8 +389,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -413,8 +413,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
@@ -533,8 +533,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -548,8 +548,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -620,8 +620,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -649,8 +649,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -767,8 +767,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -787,8 +787,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -869,8 +869,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -913,8 +913,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -933,8 +933,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -952,8 +952,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_ITEM_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_ITEM_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],

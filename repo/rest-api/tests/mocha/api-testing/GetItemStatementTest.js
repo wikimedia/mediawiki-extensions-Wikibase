@@ -112,8 +112,12 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, itemId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		it( 'responds 400 if subject id in endpoint is not an item id', async () => {
@@ -123,8 +127,12 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, subjectId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {

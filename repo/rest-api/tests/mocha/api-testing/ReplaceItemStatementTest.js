@@ -318,8 +318,12 @@ describe( 'PUT statement tests', () => {
 			const response = await newReplaceItemStatementRequestBuilder( itemId, testStatementId, statement )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, itemId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		it( 'responds 400 if subject ID is not an item ID', async () => {
@@ -328,8 +332,12 @@ describe( 'PUT statement tests', () => {
 			const response = await newReplaceItemStatementRequestBuilder( itemId, testStatementId, statement )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, itemId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		it( 'responds 404 item-not-found for nonexistent item', async () => {

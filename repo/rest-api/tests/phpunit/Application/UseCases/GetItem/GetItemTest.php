@@ -93,7 +93,7 @@ class GetItemTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
 		}
 	}
 

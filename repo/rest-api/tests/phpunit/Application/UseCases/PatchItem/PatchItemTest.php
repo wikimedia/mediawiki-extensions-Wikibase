@@ -176,7 +176,9 @@ class PatchItemTest extends TestCase {
 			$this->newUseCase()->execute( new PatchItemRequest( 'X321', [], [], false, null, null ) );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'item_id'", $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'item_id' ], $e->getErrorContext() );
 		}
 	}
 
