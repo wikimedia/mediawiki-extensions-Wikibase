@@ -110,6 +110,17 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
+
+		it( 'can add a "mul" label', async () => {
+			const languageCode = 'mul';
+			const newLabel = `new mul label ${utils.uniq()}`;
+			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
+				.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, newLabel );
+		} );
 	} );
 
 	it( 'idempotency check: can set the same label twice', async () => {

@@ -230,11 +230,17 @@ return [
 			);
 		},
 
-	VRD::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+	VRD::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer(
-				WbRestApi::getLabelLanguageCodeValidator( $services ) // TODO this will be fixed in a follow-up.
-			);
+			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getLabelLanguageCodeValidator( $services ) );
+		},
+	VRD::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
+			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getDescriptionLanguageCodeValidator( $services ) );
+		},
+	VRD::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
+			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getAliasLanguageCodeValidator( $services ) );
 		},
 
 	VRD::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {

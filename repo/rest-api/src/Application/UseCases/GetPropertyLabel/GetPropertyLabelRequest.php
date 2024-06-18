@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyLabelRequest implements UseCaseRequest, PropertyIdRequest, LanguageCodeRequest {
+class GetPropertyLabelRequest implements UseCaseRequest, PropertyIdRequest, LabelLanguageCodeRequest {
 
 	private string $propertyId;
 	private string $languageCode;

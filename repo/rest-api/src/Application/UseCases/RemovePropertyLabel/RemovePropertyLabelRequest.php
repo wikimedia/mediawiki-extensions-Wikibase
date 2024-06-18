@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemovePropertyLabelRequest implements UseCaseRequest, PropertyIdRequest, LanguageCodeRequest, EditMetadataRequest {
+class RemovePropertyLabelRequest implements UseCaseRequest, PropertyIdRequest, LabelLanguageCodeRequest, EditMetadataRequest {
 
 	private string $propertyId;
 	private string $languageCode;

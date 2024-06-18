@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetItemLabelRequest implements UseCaseRequest, ItemIdRequest, LanguageCodeRequest {
+class GetItemLabelRequest implements UseCaseRequest, ItemIdRequest, LabelLanguageCodeRequest {
 
 	private string $itemId;
 	private string $languageCode;

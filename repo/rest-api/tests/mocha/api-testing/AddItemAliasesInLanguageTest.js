@@ -97,6 +97,15 @@ describe( newRequest().getRouteDescription(), () => {
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
+
+		it( 'can add a "mul" alias', async () => {
+			const response = await newRequest( testItemId, 'mul', [ 'mul alias' ] )
+				.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValid201Response( response, [ 'mul alias' ] );
+		} );
 	} );
 
 	describe( '400 error response', () => {

@@ -166,13 +166,14 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, invalidItemId );
 		} );
 
-		it( 'invalid language code', async () => {
-			const invalidLanguage = 'xyz';
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
-				.assertValidRequest().makeRequest();
+		[ 'xyz', 'mul' ].forEach( ( invalidLanguage ) => {
+			it( `invalid language code: "${invalidLanguage}"`, async () => {
+				const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
+					.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-language-code' );
-			assert.include( response.body.message, invalidLanguage );
+				assertValidError( response, 400, 'invalid-language-code' );
+				assert.include( response.body.message, invalidLanguage );
+			} );
 		} );
 
 		it( 'invalid description', async () => {

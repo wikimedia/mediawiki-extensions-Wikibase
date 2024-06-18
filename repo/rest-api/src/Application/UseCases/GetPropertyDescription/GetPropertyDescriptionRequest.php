@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class GetPropertyDescriptionRequest implements UseCaseRequest, PropertyIdRequest, LanguageCodeRequest {
+class GetPropertyDescriptionRequest implements UseCaseRequest, PropertyIdRequest, DescriptionLanguageCodeRequest {
 
 	private string $propertyId;
 	private string $languageCode;
