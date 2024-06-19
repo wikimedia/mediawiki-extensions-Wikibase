@@ -4230,6 +4230,9 @@
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
+              "invalid-sitelink-type": {
+                "$ref": "#/components/examples/InvalidSitelinkTypeExample"
+              },
               "invalid-site-id": {
                 "$ref": "#/components/examples/InvalidSiteIdWithSiteContextExample"
               },
@@ -7527,6 +7530,12 @@
             "path": "{field}",
             "language": "{language_code}"
           }
+        }
+      },
+      "InvalidSitelinkTypeExample": {
+        "value": {
+          "code": "invalid-sitelink-type",
+          "message": "Not a valid sitelink type"
         }
       },
       "InvalidSiteIdExample": {

@@ -53,6 +53,12 @@
 			}
 		}
 	},
+	"InvalidSitelinkTypeExample": {
+		"value": {
+			"code": "invalid-sitelink-type",
+			"message": "Not a valid sitelink type"
+		}
+	},
 	"InvalidSiteIdExample": {
 		"value": {
 			"code": "invalid-site-id",
