@@ -34,7 +34,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_SITE_ID = 'invalid-site-id';
 	public const INVALID_STATEMENT_TYPE = 'invalid-statement-type';
-	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
 	public const INVALID_STATEMENT_SUBJECT_ID = 'invalid-statement-subject-id';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const ITEM_NOT_FOUND = 'item-not-found';
@@ -166,7 +165,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PROPERTY_ID => [ self::CONTEXT_PROPERTY_ID ],
 		self::INVALID_SITE_ID => [],
 		self::INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
-		self::INVALID_STATEMENT_ID => [],
 		self::INVALID_STATEMENT_SUBJECT_ID => [ self::CONTEXT_SUBJECT_ID ],
 		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,

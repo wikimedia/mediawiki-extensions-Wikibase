@@ -146,21 +146,27 @@ describe( 'PATCH property statement', () => {
 			describe( '400 error response', () => {
 
 				it( 'statement ID contains invalid entity ID', async () => {
-					const statementId = testStatementId.replace( 'P', 'X' );
-					const response = await newPatchRequestBuilder( statementId, [] )
+					const response = await newPatchRequestBuilder( testStatementId.replace( 'P', 'X' ), [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
-					const response = await newPatchRequestBuilder( statementId, [] )
+					const response = await newPatchRequestBuilder( 'not-a-valid-format', [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				testValidatesPatch( ( patch ) => newPatchRequestBuilder( testStatementId, patch ) );
@@ -380,12 +386,15 @@ describe( 'PATCH property statement', () => {
 
 	describe( 'short route specific errors', () => {
 		it( 'responds 400 invalid-statement-id if statement is not on a supported entity type', async () => {
-			const statementId = testStatementId.replace( 'P', 'L' );
-			const response = await newPatchStatementRequestBuilder( statementId, [] )
+			const response = await newPatchStatementRequestBuilder( testStatementId.replace( 'P', 'L' ), [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-id' );
-			assert.include( response.body.message, statementId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'statement_id' }
+			);
 		} );
 
 		it( 'responds 404 statement-not-found for nonexistent property', async () => {

@@ -265,8 +265,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'GetItemAliasesInLanguage' => [ [
@@ -401,8 +401,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -499,8 +499,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'GetPropertyStatements' => [ [
@@ -518,8 +518,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -578,8 +578,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -592,8 +592,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'PatchStatement' => [ [
@@ -605,8 +605,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -678,8 +678,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -692,8 +692,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'RemoveStatement' => [ [
@@ -705,8 +705,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -720,8 +720,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],
@@ -734,8 +734,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-				$hasErrorCode( UseCaseError::INVALID_STATEMENT_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'ReplaceStatement' => [ [
@@ -747,8 +747,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_STATEMENT_ID, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_STATEMENT_ID ),
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::STATEMENT_NOT_FOUND ) ],
 			],

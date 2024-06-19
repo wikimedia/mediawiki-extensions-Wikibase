@@ -152,23 +152,29 @@ describe( 'PUT statement tests', () => {
 			describe( '400 error response', () => {
 
 				it( 'statement ID contains invalid entity ID', async () => {
-					const statementId = testStatementId.replace( 'Q', 'X' );
 					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-					const response = await newReplaceRequestBuilder( testItemId, statementId, statement )
+					const response = await newReplaceRequestBuilder( testItemId, testStatementId.replace( 'Q', 'X' ), statement )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
 					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-					const response = await newReplaceRequestBuilder( testItemId, statementId, statement )
+					const response = await newReplaceRequestBuilder( testItemId, 'not-a-valid-format', statement )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'comment too long', async () => {
@@ -386,8 +392,12 @@ describe( 'PUT statement tests', () => {
 			const response = await newReplaceStatementRequestBuilder( statementId, statement )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-id' );
-			assert.include( response.body.message, statementId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'statement_id' }
+			);
 		} );
 
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {

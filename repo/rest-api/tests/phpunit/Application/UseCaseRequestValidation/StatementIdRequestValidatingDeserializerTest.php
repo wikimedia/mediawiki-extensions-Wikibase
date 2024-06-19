@@ -52,8 +52,9 @@ class StatementIdRequestValidatingDeserializerTest extends TestCase {
 			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertStringContainsString( $id, $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'statement_id'", $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'statement_id' ], $e->getErrorContext() );
 		}
 	}
 

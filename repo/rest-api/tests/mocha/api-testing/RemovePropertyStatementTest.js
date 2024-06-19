@@ -108,23 +108,29 @@ describe( 'DELETE statement', () => {
 
 			describe( '400 error response', () => {
 				it( 'statement ID contains invalid entity ID', async () => {
-					const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRemoveRequestBuilder( statementId )
+					const response = await newRemoveRequestBuilder( 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
-					const response = await newRemoveRequestBuilder( statementId )
+					const response = await newRemoveRequestBuilder( 'not-a-valid-format' )
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 			} );
 
@@ -182,13 +188,16 @@ describe( 'DELETE statement', () => {
 
 	describe( 'short route specific errors', () => {
 		it( 'responds 400 invalid-statement-id if statement is not on a supported entity', async () => {
-			const statementId = 'L123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newRemoveStatementRequestBuilder( statementId )
+			const response = await newRemoveStatementRequestBuilder( 'L123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-id' );
-			assert.include( response.body.message, statementId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'statement_id' }
+			);
 		} );
 
 		it( 'responds 404 statement-not-found for nonexistent property', async () => {

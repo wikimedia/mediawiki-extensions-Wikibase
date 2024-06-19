@@ -4407,8 +4407,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               }
             }
           }
@@ -4432,9 +4432,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
@@ -4461,9 +4458,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
@@ -4558,8 +4552,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4601,9 +4595,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
@@ -4649,9 +4640,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
-              },
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
@@ -4693,8 +4681,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4724,9 +4712,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
@@ -4759,9 +4744,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
@@ -6003,8 +5985,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -6052,9 +6034,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
@@ -6105,9 +6084,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-statement-id": {
-                "$ref": "#/components/examples/InvalidStatementIdExample"
               },
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
@@ -7505,12 +7481,6 @@
           "context": {
             "parameter": "{path_parameter}"
           }
-        }
-      },
-      "InvalidStatementIdExample": {
-        "value": {
-          "code": "invalid-statement-id",
-          "message": "Not a valid statement ID: {statement_id}"
         }
       },
       "InvalidLanguageCodeExample": {

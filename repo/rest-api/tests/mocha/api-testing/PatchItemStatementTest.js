@@ -149,21 +149,27 @@ describe( 'PATCH statement tests', () => {
 			describe( '400 error response', () => {
 
 				it( 'statement ID contains invalid entity ID', async () => {
-					const statementId = testStatementId.replace( 'Q', 'X' );
-					const response = await newPatchRequestBuilder( statementId, [] )
+					const response = await newPatchRequestBuilder( testStatementId.replace( 'Q', 'X' ), [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
-					const response = await newPatchRequestBuilder( statementId, [] )
+					const response = await newPatchRequestBuilder( 'not-a-valid-format', [] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				testValidatesPatch( ( patch ) => newPatchRequestBuilder( testStatementId, patch ) );
@@ -400,8 +406,12 @@ describe( 'PATCH statement tests', () => {
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-id' );
-			assert.include( response.body.message, statementId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'statement_id' }
+			);
 		} );
 
 		it( 'responds 404 statement-not-found for nonexistent item', async () => {

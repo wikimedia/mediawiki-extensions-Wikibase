@@ -23,8 +23,9 @@ class StatementIdRequestValidatingDeserializer {
 		$validationError = $this->validator->validate( $request->getStatementId() );
 		if ( $validationError ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_ID,
-				"Not a valid statement ID: {$validationError->getContext()[StatementIdValidator::CONTEXT_VALUE]}"
+				UseCaseError::INVALID_PATH_PARAMETER,
+				"Invalid path parameter: 'statement_id'",
+				[ UseCaseError::CONTEXT_PARAMETER => 'statement_id' ]
 			);
 		}
 

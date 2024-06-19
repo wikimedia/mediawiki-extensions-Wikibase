@@ -70,23 +70,29 @@ describe( 'GET statement', () => {
 
 			describe( '400 error response', () => {
 				it( 'statement ID contains invalid subject ID', async () => {
-					const statementId = 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-					const response = await newRequestBuilder( statementId )
+					const response = await newRequestBuilder( 'X123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 
 				it( 'statement ID is invalid format', async () => {
-					const statementId = 'not-a-valid-format';
-					const response = await newRequestBuilder( statementId )
+					const response = await newRequestBuilder( 'not-a-valid-format' )
 						.assertInvalidRequest()
 						.makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-id' );
-					assert.include( response.body.message, statementId );
+					assertValidError(
+						response,
+						400,
+						'invalid-path-parameter',
+						{ parameter: 'statement_id' }
+					);
 				} );
 			} );
 
