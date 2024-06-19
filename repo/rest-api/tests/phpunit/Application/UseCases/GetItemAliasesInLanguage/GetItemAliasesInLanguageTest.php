@@ -73,9 +73,9 @@ class GetItemAliasesInLanguageTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: 1e', $useCaseEx->getErrorMessage() );
-			$this->assertSame( [], $useCaseEx->getErrorContext() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'language_code'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'language_code' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

@@ -23,8 +23,9 @@ class SiteIdRequestValidatingDeserializer {
 		$validationError = $this->siteIdValidator->validate( $request->getSiteId() );
 		if ( $validationError ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_SITE_ID,
-				"Not a valid site id: {$validationError->getContext()[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}",
+				UseCaseError::INVALID_PATH_PARAMETER,
+				"Invalid path parameter: 'site_id'",
+				[ UseCaseError::CONTEXT_PARAMETER => 'site_id' ]
 			);
 		}
 		return $request->getSiteId();

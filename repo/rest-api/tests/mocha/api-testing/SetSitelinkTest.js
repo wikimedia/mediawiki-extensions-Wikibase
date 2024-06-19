@@ -225,8 +225,12 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-site-id' );
-			assert.include( response.body.message, invalidSiteId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'site_id' }
+			);
 		} );
 
 		it( 'invalid edit tag', async () => {

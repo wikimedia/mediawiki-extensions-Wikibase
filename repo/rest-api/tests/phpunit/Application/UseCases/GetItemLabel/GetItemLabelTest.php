@@ -113,9 +113,9 @@ class GetItemLabelTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $error->getErrorCode() );
-			$this->assertSame( 'Not a valid language code: 1e', $error->getErrorMessage() );
-			$this->assertSame( [], $error->getErrorContext() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $error->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'language_code'", $error->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'language_code' ], $error->getErrorContext() );
 		}
 	}
 

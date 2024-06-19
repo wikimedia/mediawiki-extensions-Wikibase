@@ -29,15 +29,15 @@ class SiteIdRequestValidatingDeserializerTest extends TestCase {
 
 	public function testGivenInvalidRequest_throws(): void {
 		$request = $this->createStub( SiteIdRequest::class );
-		$invalidSiteId = 'not-a-valid-site-id';
-		$request->method( 'getSiteId' )->willReturn( $invalidSiteId );
+		$request->method( 'getSiteId' )->willReturn( 'not-a-valid-site-id' );
 
 		try {
 			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_SITE_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( "Not a valid site id: $invalidSiteId", $useCaseEx->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'site_id'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'site_id' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

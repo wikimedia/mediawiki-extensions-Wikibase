@@ -170,12 +170,15 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'invalid language code', async () => {
-			const language = 'xyz';
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, language, 'description' )
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'xyz', 'description' )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-language-code' );
-			assert.include( response.body.message, language );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'language_code' }
+			);
 		} );
 
 		it( 'invalid description', async () => {

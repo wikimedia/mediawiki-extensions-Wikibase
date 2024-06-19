@@ -175,8 +175,12 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
 					.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
 
-				assertValidError( response, 400, 'invalid-language-code' );
-				assert.include( response.body.message, invalidLanguage );
+				assertValidError(
+					response,
+					400,
+					'invalid-path-parameter',
+					{ parameter: 'language_code' }
+				);
 			} );
 		} );
 

@@ -25,12 +25,6 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
-	"InvalidLanguageCodeExample": {
-		"value": {
-			"code": "invalid-language-code",
-			"message": "Not a valid language code: {language_code}"
-		}
-	},
 	"InvalidLanguageCodeWithPathContextExample": {
 		"value": {
 			"code": "invalid-language-code",
@@ -45,12 +39,6 @@
 		"value": {
 			"code": "invalid-sitelink-type",
 			"message": "Not a valid sitelink type"
-		}
-	},
-	"InvalidSiteIdExample": {
-		"value": {
-			"code": "invalid-site-id",
-			"message": "Not a valid site ID: {site_id}"
 		}
 	},
 	"InvalidSiteIdWithSiteContextExample": {
