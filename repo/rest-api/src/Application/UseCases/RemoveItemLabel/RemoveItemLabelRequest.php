@@ -4,13 +4,13 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemLabelRequest implements UseCaseRequest, ItemIdRequest, LanguageCodeRequest, EditMetadataRequest {
+class RemoveItemLabelRequest implements UseCaseRequest, ItemIdRequest, LabelLanguageCodeRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $languageCode;

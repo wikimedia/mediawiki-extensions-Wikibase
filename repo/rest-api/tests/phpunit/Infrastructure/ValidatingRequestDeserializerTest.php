@@ -12,6 +12,8 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
@@ -23,7 +25,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequ
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequestValidator;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
@@ -80,8 +82,24 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		$this->assertEquals( new NumericPropertyId( 'P123' ), $result->getPropertyId() );
 	}
 
-	public function testGivenValidLanguageCodeRequest_returnsLanguageCode(): void {
-		$request = $this->createStub( LanguageCodeUseCaseRequest::class );
+	public function testGivenValidLabelLanguageCodeRequest_returnsLabelLanguageCode(): void {
+		$request = $this->createStub( LabelLanguageCodeUseCaseRequest::class );
+		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( self::VALID_LANGUAGE_CODE, $result->getLanguageCode() );
+	}
+
+	public function testGivenValidDescriptionLanguageCodeRequest_returnsDescriptionLanguageCode(): void {
+		$request = $this->createStub( DescriptionLanguageCodeUseCaseRequest::class );
+		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
+
+		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
+		$this->assertEquals( self::VALID_LANGUAGE_CODE, $result->getLanguageCode() );
+	}
+
+	public function testGivenValidAliasLanguageCodeRequest_returnsAliasLanguageCode(): void {
+		$request = $this->createStub( AliasLanguageCodeUseCaseRequest::class );
 		$request->method( 'getLanguageCode' )->willReturn( self::VALID_LANGUAGE_CODE );
 
 		$result = $this->newRequestDeserializer()->validateAndDeserialize( $request );
@@ -326,9 +344,19 @@ class ValidatingRequestDeserializerTest extends TestCase {
 			ValidatingRequestDeserializer::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
-			LanguageCodeUseCaseRequest::class,
+			LabelLanguageCodeUseCaseRequest::class,
 			LanguageCodeRequestValidatingDeserializer::class,
-			ValidatingRequestDeserializer::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+			ValidatingRequestDeserializer::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+		];
+		yield [
+			DescriptionLanguageCodeUseCaseRequest::class,
+			LanguageCodeRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+		];
+		yield [
+			AliasLanguageCodeUseCaseRequest::class,
+			LanguageCodeRequestValidatingDeserializer::class,
+			ValidatingRequestDeserializer::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemFieldsUseCaseRequest::class,
@@ -411,7 +439,9 @@ interface ItemIdUseCaseRequest extends UseCaseRequest, ItemIdRequest {}
 interface PropertyIdUseCaseRequest extends UseCaseRequest, PropertyIdRequest {}
 interface StatementIdUseCaseRequest extends UseCaseRequest, StatementIdRequest {}
 interface PropertyIdFilterUseCaseRequest extends UseCaseRequest, PropertyIdFilterRequest {}
-interface LanguageCodeUseCaseRequest extends UseCaseRequest, LanguageCodeRequest {}
+interface LabelLanguageCodeUseCaseRequest extends UseCaseRequest, LabelLanguageCodeRequest {}
+interface DescriptionLanguageCodeUseCaseRequest extends UseCaseRequest, DescriptionLanguageCodeRequest {}
+interface AliasLanguageCodeUseCaseRequest extends UseCaseRequest, AliasLanguageCodeRequest {}
 interface ItemFieldsUseCaseRequest extends UseCaseRequest, ItemFieldsRequest {}
 interface StatementSerializationUseCaseRequest extends UseCaseRequest, StatementSerializationRequest {}
 interface EditMetadataUseCaseRequest extends UseCaseRequest, EditMetadataRequest {}

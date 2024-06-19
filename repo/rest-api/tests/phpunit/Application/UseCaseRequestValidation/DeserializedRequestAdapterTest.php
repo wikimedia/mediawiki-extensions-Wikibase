@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
+use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -10,6 +11,8 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
@@ -17,7 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEd
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
@@ -96,10 +99,19 @@ class DeserializedRequestAdapterTest extends TestCase {
 		( new DeserializedRequestAdapter( [] ) )->getStatementId();
 	}
 
-	public function testGetLanguageCode(): void {
+	/**
+	 * @dataProvider languageCodeRequestProvider
+	 */
+	public function testGetLanguageCode( string $requestInterface ): void {
 		$languageCode = 'en';
-		$requestAdapter = new DeserializedRequestAdapter( [ LanguageCodeRequest::class => $languageCode ] );
+		$requestAdapter = new DeserializedRequestAdapter( [ $requestInterface => $languageCode ] );
 		$this->assertSame( $languageCode, $requestAdapter->getLanguageCode() );
+	}
+
+	public function languageCodeRequestProvider(): Generator {
+		yield [ LabelLanguageCodeRequest::class ];
+		yield [ DescriptionLanguageCodeRequest::class ];
+		yield [ AliasLanguageCodeRequest::class ];
 	}
 
 	public function testGivenNoLanguageCode_getLanguageCodeThrows(): void {

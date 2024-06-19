@@ -5,6 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 /**
  * @license GPL-2.0-or-later
  */
-interface PropertyAliasesInLanguageEditRequest extends PropertyIdRequest, LanguageCodeRequest {
+interface PropertyAliasesInLanguageEditRequest extends PropertyIdRequest, AliasLanguageCodeRequest {
 	public function getAliasesInLanguage(): array;
 }

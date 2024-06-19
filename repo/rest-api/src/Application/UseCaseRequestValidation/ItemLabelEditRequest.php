@@ -5,6 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemLabelEditRequest extends ItemIdRequest, LanguageCodeRequest {
+interface ItemLabelEditRequest extends ItemIdRequest, LabelLanguageCodeRequest {
 	public function getLabel(): string;
 }

@@ -5,6 +5,5 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 /**
  * @license GPL-2.0-or-later
  */
-interface ItemDescriptionEditRequest extends ItemIdRequest, DescriptionLanguageCodeRequest {
-	public function getDescription(): string;
+interface DescriptionLanguageCodeRequest extends LanguageCodeRequest {
 }

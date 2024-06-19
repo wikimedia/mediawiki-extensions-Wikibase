@@ -141,7 +141,17 @@ class DeserializedRequestAdapter implements
 	}
 
 	public function getLanguageCode(): string {
-		return $this->getRequestField( LanguageCodeRequest::class );
+		if ( array_key_exists( LabelLanguageCodeRequest::class, $this->deserializedRequest ) xor
+			( array_key_exists( DescriptionLanguageCodeRequest::class, $this->deserializedRequest ) xor
+				array_key_exists( AliasLanguageCodeRequest::class, $this->deserializedRequest ) ) ) {
+			return $this->deserializedRequest[LabelLanguageCodeRequest::class]
+				?? $this->deserializedRequest[DescriptionLanguageCodeRequest::class]
+				?? $this->deserializedRequest[AliasLanguageCodeRequest::class];
+		}
+
+		throw new LogicException(
+			'The request must be exactly one of: LabelLanguageCodeRequest, DescriptionLanguageCodeRequest, AliasLanguageCodeRequest'
+		);
 	}
 
 	public function getItemFields(): array {

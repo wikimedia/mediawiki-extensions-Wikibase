@@ -2,15 +2,15 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemDescription;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later
  */
-class RemoveItemDescriptionRequest implements UseCaseRequest, ItemIdRequest, LanguageCodeRequest, EditMetadataRequest {
+class RemoveItemDescriptionRequest implements UseCaseRequest, ItemIdRequest, DescriptionLanguageCodeRequest, EditMetadataRequest {
 
 	private string $itemId;
 	private string $languageCode;

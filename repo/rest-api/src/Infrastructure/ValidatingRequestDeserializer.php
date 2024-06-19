@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Infrastructure;
 
 use Psr\Container\ContainerInterface;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedRequestAdapter;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
@@ -12,7 +14,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
@@ -146,7 +148,10 @@ class ValidatingRequestDeserializer	implements
 	public const PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyIdRequestValidatingDeserializer';
 	public const STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'StatementIdRequestValidatingDeserializer';
 	public const PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyIdFilterRequestValidatingDeserializer';
-	public const LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'LanguageCodeRequestValidatingDeserializer';
+	public const LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'LabelLanguageCodeRequestValidatingDeserializer';
+	public const DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =
+		self::PREFIX . 'DescriptionLanguageCodeRequestValidatingDeserializer';
+	public const ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'AliasLanguageCodeRequestValidatingDeserializer';
 	public const SITE_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'SiteIdRequestValidatingDeserializer';
 	public const ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemFieldsRequestValidatingDeserializer';
 	public const PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyFieldsRequestValidatingDeserializer';
@@ -195,7 +200,9 @@ class ValidatingRequestDeserializer	implements
 			SiteIdRequest::class => self::SITE_ID_REQUEST_VALIDATING_DESERIALIZER,
 			StatementIdRequest::class => self::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyIdFilterRequest::class => self::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER,
-			LanguageCodeRequest::class => self::LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+			LabelLanguageCodeRequest::class => self::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+			DescriptionLanguageCodeRequest::class => self::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
+			AliasLanguageCodeRequest::class => self::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 			ItemFieldsRequest::class => self::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 			PropertyFieldsRequest::class => self::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 			StatementSerializationRequest::class => self::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER,
