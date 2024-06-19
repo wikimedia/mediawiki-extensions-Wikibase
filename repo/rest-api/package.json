@@ -12,7 +12,7 @@
 		"lint:openapi": "swagger-cli validate specs/openapi.json",
 		"lint:eslint": "eslint . --config .eslintrc.json --max-warnings 0",
 		"fix": "npm-run-all --parallel fix:*",
-		"fix:eslint": "eslint --fix .",
+		"fix:eslint": "eslint --config .eslintrc.json --fix .",
 		"build": "run-s build:docs build:spec",
 		"build:docs": "webpack --config docs/webpack.config.js",
 		"build:spec": "swagger-cli bundle specs/openapi.json -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
