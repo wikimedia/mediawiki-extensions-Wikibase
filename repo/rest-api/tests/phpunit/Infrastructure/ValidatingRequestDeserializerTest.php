@@ -15,36 +15,22 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LanguageCodeRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\MappedRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
@@ -301,18 +287,22 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testGivenInvalidRequest_throws( string $requestClass, string $validatorClass, string $stubbedServiceName ): void {
+	public function testGivenInvalidRequest_throws( string $requestClass, string $stubbedServiceName ): void {
+		$request = $this->createStub( $requestClass );
 		$expectedError = $this->createStub( UseCaseError::class );
-		$validator = $this->createStub( $validatorClass );
-		$validator->method( 'validateAndDeserialize' )->willThrowException( $expectedError );
+
+		$validator = $this->createMock( NullValidator::class ); // the type of validator doesn't matter for this test
+		$validator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $request )
+			->willThrowException( $expectedError );
+
 		$serviceContainer = $this->createMock( ContainerInterface::class );
 		$serviceContainer->expects( $this->atLeastOnce() )
 			->method( 'get' )
 			->willReturnCallback(
 				fn( string $serviceName ) => $serviceName === $stubbedServiceName ? $validator : new NullValidator()
 			);
-
-		$request = $this->createStub( $requestClass );
 
 		try {
 			$this->newRequestDeserializer( $serviceContainer )->validateAndDeserialize( $request );
@@ -325,102 +315,82 @@ class ValidatingRequestDeserializerTest extends TestCase {
 	public function invalidRequestProvider(): Generator {
 		yield [
 			ItemIdUseCaseRequest::class,
-			ItemIdRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyIdUseCaseRequest::class,
-			MappedRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			StatementIdUseCaseRequest::class,
-			StatementIdRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyIdFilterUseCaseRequest::class,
-			MappedRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			LabelLanguageCodeUseCaseRequest::class,
-			LanguageCodeRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			DescriptionLanguageCodeUseCaseRequest::class,
-			LanguageCodeRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			AliasLanguageCodeUseCaseRequest::class,
-			LanguageCodeRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemFieldsUseCaseRequest::class,
-			MappedRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyFieldsUseCaseRequest::class,
-			MappedRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			StatementSerializationUseCaseRequest::class,
-			StatementSerializationRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			EditMetadataUseCaseRequest::class,
-			EditMetadataRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PatchUseCaseRequest::class,
-			PatchRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PATCH_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemLabelEditUseCaseRequest::class,
-			ItemLabelEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyLabelEditUseCaseRequest::class,
-			PropertyLabelEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			ItemDescriptionEditUseCaseRequest::class,
-			ItemDescriptionEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::ITEM_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			PropertyDescriptionEditUseCaseRequest::class,
-			PropertyDescriptionEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			SiteIdUseCaseRequest::class,
-			SiteIdRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::SITE_ID_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			SitelinkUseCaseRequest::class,
-			SitelinkEditRequestValidatingDeserializer::class,
 			ValidatingRequestDeserializer::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER,
 		];
 		yield [
 			StatementItemIdUseCaseRequest::class,
-			ItemStatementIdRequestValidator::class,
 			ValidatingRequestDeserializer::ITEM_STATEMENT_ID_REQUEST_VALIDATOR,
 		];
 		yield [
 			StatementPropertyIdUseCaseRequest::class,
-			PropertyStatementIdRequestValidator::class,
 			ValidatingRequestDeserializer::PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR,
 		];
 	}
