@@ -11,6 +11,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
  */
 class PropertyIdFilterValidatingDeserializer {
 
+	private const PROPERTY_FILTER_QUERY_PARAM = 'property';
 	private PropertyIdValidator $propertyIdValidator;
 
 	public function __construct( PropertyIdValidator $validator ) {
@@ -23,11 +24,10 @@ class PropertyIdFilterValidatingDeserializer {
 	public function validateAndDeserialize( string $propertyId ): NumericPropertyId {
 		$validationError = $this->propertyIdValidator->validate( $propertyId );
 		if ( $validationError ) {
-			$invalidPropertyId = $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE];
 			throw new UseCaseError(
-				UseCaseError::INVALID_PROPERTY_ID,
-				"Not a valid property ID: $invalidPropertyId",
-				[ UseCaseError::CONTEXT_PROPERTY_ID => $invalidPropertyId ]
+				UseCaseError::INVALID_QUERY_PARAMETER,
+				"Invalid query parameter: '" . self::PROPERTY_FILTER_QUERY_PARAM . "'",
+				[ UseCaseError::CONTEXT_PARAMETER => self::PROPERTY_FILTER_QUERY_PARAM ]
 			);
 		}
 		return new NumericPropertyId( $propertyId );

@@ -96,15 +96,15 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		);
 	} );
 
-	it( '400 error - bad request, invalid property ID', async () => {
-		const propertyId = 'X123';
+	it( '400 error - bad request, invalid property ID filter', async () => {
+		const queryParamName = 'property';
 		const response = await newGetItemStatementsRequestBuilder( testItemId )
-			.withQueryParam( 'property', propertyId )
+			.withQueryParam( queryParamName, 'X123' )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-		assert.include( response.body.message, propertyId );
+		assertValidError( response, 400, 'invalid-query-parameter', { parameter: queryParamName } );
+		assert.include( response.body.message, queryParamName );
 	} );
 
 	it( '404 error - item not found', async () => {

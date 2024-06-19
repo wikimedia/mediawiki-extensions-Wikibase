@@ -114,14 +114,14 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 	} );
 
 	it( '400 error - bad request, invalid filter property ID', async () => {
-		const filterPropertyId = 'X123';
+		const queryParamName = 'property';
 		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
-			.withQueryParam( 'property', filterPropertyId )
+			.withQueryParam( queryParamName, 'X123' )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assertValidError( response, 400, 'invalid-property-id', { 'property-id': filterPropertyId } );
-		assert.include( response.body.message, filterPropertyId );
+		assertValidError( response, 400, 'invalid-query-parameter', { parameter: queryParamName } );
+		assert.include( response.body.message, queryParamName );
 	} );
 
 } );

@@ -23,7 +23,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_DESCRIPTION = 'invalid-description';
 	public const INVALID_EDIT_TAG = 'invalid-edit-tag';
-	public const INVALID_FIELD = 'invalid-field';
 	public const INVALID_LABEL = 'invalid-label';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
@@ -32,6 +31,7 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_FIELD_TYPE = 'invalid-patch-field-type';
 	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
+	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_SITE_ID = 'invalid-site-id';
 	public const INVALID_STATEMENT_TYPE = 'invalid-statement-type';
 	public const INVALID_STATEMENT_ID = 'invalid-statement-id';
@@ -155,7 +155,7 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_ALIAS => [],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_EDIT_TAG => [],
-		self::INVALID_FIELD => [],
+		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_LABEL => [],
 		self::INVALID_LANGUAGE_CODE => [],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],

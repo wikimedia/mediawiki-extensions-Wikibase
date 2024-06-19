@@ -18,7 +18,7 @@ class PropertyIdValidator {
 			// @phan-suppress-next-line PhanNoopNew
 			new NumericPropertyId( $propertyId );
 		} catch ( InvalidArgumentException $ex ) {
-			return new ValidationError( self::CODE_INVALID, [ self::CONTEXT_VALUE => $propertyId ] );
+			return new ValidationError( self::CODE_INVALID );
 		}
 		return null;
 	}

@@ -33,8 +33,12 @@ class FieldsFilterValidatingDeserializerTest extends TestCase {
 				->validateAndDeserialize( [ 'labels', $invalidField, 'descriptions' ] );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_FIELD, $useCaseEx->getErrorCode() );
-			$this->assertSame( "Not a valid field: $invalidField", $useCaseEx->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_QUERY_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame(
+				"Invalid query parameter: '_fields'",
+				$useCaseEx->getErrorMessage()
+			);
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => '_fields' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

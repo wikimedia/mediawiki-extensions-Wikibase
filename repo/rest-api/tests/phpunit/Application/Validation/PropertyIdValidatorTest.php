@@ -15,12 +15,9 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 class PropertyIdValidatorTest extends TestCase {
 
 	public function testWithInvalidId(): void {
-		$invalidId = 'X123';
-
-		$error = ( new PropertyIdValidator() )->validate( $invalidId );
+		$error = ( new PropertyIdValidator() )->validate( 'X123' );
 
 		$this->assertSame( PropertyIdValidator::CODE_INVALID, $error->getCode() );
-		$this->assertSame( $invalidId, $error->getContext()[PropertyIdValidator::CONTEXT_VALUE] );
 	}
 
 	public function testWithValidId(): void {

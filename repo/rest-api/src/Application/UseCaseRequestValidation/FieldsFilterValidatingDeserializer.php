@@ -9,6 +9,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
  */
 class FieldsFilterValidatingDeserializer {
 
+	public const FIELDS_QUERY_PARAM = '_fields';
 	private array $validFields;
 
 	public function __construct( array $validFields ) {
@@ -21,7 +22,11 @@ class FieldsFilterValidatingDeserializer {
 	public function validateAndDeserialize( array $fields ): array {
 		foreach ( $fields as $field ) {
 			if ( !in_array( $field, $this->validFields ) ) {
-				throw new UseCaseError( UseCaseError::INVALID_FIELD, "Not a valid field: $field" );
+				throw new UseCaseError(
+					UseCaseError::INVALID_QUERY_PARAMETER,
+					"Invalid query parameter: '" . self::FIELDS_QUERY_PARAM . "'",
+					[ UseCaseError::CONTEXT_PARAMETER => self::FIELDS_QUERY_PARAM ]
+				);
 			}
 		}
 

@@ -415,7 +415,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
+					"invalid-query-parameter": { "$ref": "./examples.json#/InvalidQueryParameterExample" }
 				}
 			}
 		},
@@ -501,7 +501,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
+					"invalid-query-parameter": { "$ref": "./examples.json#/InvalidQueryParameterExample" }
 				}
 			}
 		},
@@ -553,7 +553,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-property-id": { "$ref": "./examples.json#/InvalidFilterPropertyIdExample" }
+					"invalid-query-parameter": { "$ref": "./examples.json#/InvalidQueryParameterExample" }
 				}
 			}
 		},
@@ -571,7 +571,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-property-id": { "$ref": "./examples.json#/InvalidFilterPropertyIdExample" }
+					"invalid-query-parameter": { "$ref": "./examples.json#/InvalidQueryParameterExample" }
 				}
 			}
 		},

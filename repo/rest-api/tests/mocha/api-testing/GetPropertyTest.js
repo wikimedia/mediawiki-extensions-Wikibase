@@ -123,6 +123,17 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 		);
 	} );
 
+	it( '400 error - bad request, invalid field', async () => {
+		const queryParamName = '_fields';
+		const response = await newGetPropertyRequestBuilder( 'P123' )
+			.withQueryParam( queryParamName, 'unknown_field' )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		assertValidError( response, 400, 'invalid-query-parameter', { parameter: queryParamName } );
+		assert.include( response.body.message, queryParamName );
+	} );
+
 	it( '404 error - property not found', async () => {
 		const propertyId = 'P999999';
 		const response = await newGetPropertyRequestBuilder( propertyId ).assertValidRequest().makeRequest();

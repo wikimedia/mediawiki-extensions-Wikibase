@@ -131,14 +131,14 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '400 error - bad request, invalid field', async () => {
-		const itemId = 'Q123';
-		const response = await newGetItemRequestBuilder( itemId )
-			.withQueryParam( '_fields', 'unknown_field' )
+		const queryParamName = '_fields';
+		const response = await newGetItemRequestBuilder( 'Q123' )
+			.withQueryParam( queryParamName, 'unknown_field' )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assertValidError( response, 400, 'invalid-field' );
-		assert.include( response.body.message, 'unknown_field' );
+		assertValidError( response, 400, 'invalid-query-parameter', { parameter: queryParamName } );
+		assert.include( response.body.message, queryParamName );
 	} );
 
 	it( '404 error - item not found', async () => {

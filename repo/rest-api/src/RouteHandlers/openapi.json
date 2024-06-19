@@ -4144,8 +4144,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-field": {
-                "$ref": "#/components/examples/InvalidFieldExample"
+              "invalid-query-parameter": {
+                "$ref": "#/components/examples/InvalidQueryParameterExample"
               }
             }
           }
@@ -4286,8 +4286,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-field": {
-                "$ref": "#/components/examples/InvalidFieldExample"
+              "invalid-query-parameter": {
+                "$ref": "#/components/examples/InvalidQueryParameterExample"
               }
             }
           }
@@ -4358,8 +4358,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidFilterPropertyIdExample"
+              "invalid-query-parameter": {
+                "$ref": "#/components/examples/InvalidQueryParameterExample"
               }
             }
           }
@@ -4384,8 +4384,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidFilterPropertyIdExample"
+              "invalid-query-parameter": {
+                "$ref": "#/components/examples/InvalidQueryParameterExample"
               }
             }
           }
@@ -7489,10 +7489,13 @@
           "message": "Comment must not be longer than 500 characters"
         }
       },
-      "InvalidFieldExample": {
+      "InvalidQueryParameterExample": {
         "value": {
-          "code": "invalid-field",
-          "message": "Not a valid field: {field}"
+          "code": "invalid-query-parameter",
+          "message": "Invalid query parameter: '{parameter}'",
+          "context": {
+            "parameter": "{parameter}"
+          }
         }
       },
       "InvalidPathParameterExample": {
@@ -7501,15 +7504,6 @@
           "message": "Invalid path parameter: '{path_parameter}'",
           "context": {
             "parameter": "{path_parameter}"
-          }
-        }
-      },
-      "InvalidFilterPropertyIdExample": {
-        "value": {
-          "code": "invalid-property-id",
-          "message": "Not a valid property ID: {property_id}",
-          "context": {
-            "property-id": "{property_id}"
           }
         }
       },
