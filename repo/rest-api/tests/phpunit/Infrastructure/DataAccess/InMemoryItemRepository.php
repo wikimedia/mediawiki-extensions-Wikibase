@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
-use HashSiteStore;
 use LogicException;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;

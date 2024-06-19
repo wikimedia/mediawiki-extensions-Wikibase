@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
 use BatchRowIterator;
-use HtmlCacheUpdater;
 use Job;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -29,7 +29,7 @@ class PurgeEntityDataJob extends Job {
 	/** @var RepoDomainDb */
 	private $repoDb;
 
-	/** @var HtmlCacheUpdater */
+	/** @var HTMLCacheUpdater */
 	private $htmlCacheUpdater;
 
 	/** @var int */
@@ -39,7 +39,7 @@ class PurgeEntityDataJob extends Job {
 		EntityIdParser $entityIdParser,
 		EntityDataUriManager $entityDataUriManager,
 		RepoDomainDb $repoDb,
-		HtmlCacheUpdater $htmlCacheUpdater,
+		HTMLCacheUpdater $htmlCacheUpdater,
 		int $batchSize,
 		array $params
 	) {

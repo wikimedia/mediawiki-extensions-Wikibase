@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use DerivativeContext;
-use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;

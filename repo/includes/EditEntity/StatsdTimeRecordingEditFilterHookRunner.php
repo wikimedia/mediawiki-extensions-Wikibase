@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;

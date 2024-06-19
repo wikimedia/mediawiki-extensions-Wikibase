@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Page\PageProps;
 use MediaWiki\Site\SiteLookup;

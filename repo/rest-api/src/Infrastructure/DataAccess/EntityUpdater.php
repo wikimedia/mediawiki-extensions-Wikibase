@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use IContextSource;
 use LogicException;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;

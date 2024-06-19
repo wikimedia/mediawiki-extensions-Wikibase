@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use DerivativeContext;
 use Generator;
-use IContextSource;
 use Maintenance;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\User\User;
-use RequestContext;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

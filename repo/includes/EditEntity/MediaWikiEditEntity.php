@@ -4,16 +4,16 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\EditEntity;
 
-use IContextSource;
 use InvalidArgumentException;
 use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Message\Message;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
-use Message;
 use ReadOnlyError;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;

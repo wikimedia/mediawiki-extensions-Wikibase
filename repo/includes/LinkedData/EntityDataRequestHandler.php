@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\LinkedData;
 
-use HtmlCacheUpdater;
 use HttpError;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Request\WebResponse;
@@ -75,7 +75,7 @@ class EntityDataRequestHandler {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var HtmlCacheUpdater
+	 * @var HTMLCacheUpdater
 	 */
 	private $htmlCacheUpdater;
 
@@ -116,7 +116,7 @@ class EntityDataRequestHandler {
 
 	/**
 	 * @param EntityDataUriManager $uriManager
-	 * @param HtmlCacheUpdater $htmlCacheUpdater
+	 * @param HTMLCacheUpdater $htmlCacheUpdater
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -132,7 +132,7 @@ class EntityDataRequestHandler {
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
-		HtmlCacheUpdater $htmlCacheUpdater,
+		HTMLCacheUpdater $htmlCacheUpdater,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 
 /**
  * Interactor for checking edit tokens

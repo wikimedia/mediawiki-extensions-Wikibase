@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use IContextSource;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\TempUser\TempUserCreator;
 use Wikibase\DataModel\Entity\EntityId;

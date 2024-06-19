@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use IContextSource;
 use InvalidArgumentException;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Status\Status;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;

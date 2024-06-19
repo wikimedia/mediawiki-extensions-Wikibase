@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use HtmlCacheUpdater;
 use JobQueueGroup;
 use JobSpecification;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use MediaWiki\Title\Title;
@@ -25,7 +25,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	/** @var EntityDataUriManager */
 	private $entityDataUriManager;
 
-	/** @var HtmlCacheUpdater */
+	/** @var HTMLCacheUpdater */
 	private $htmlCacheUpdater;
 
 	/** @var JobQueueGroup */
@@ -34,7 +34,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
 		EntityDataUriManager $entityDataUriManager,
-		HtmlCacheUpdater $htmlCacheUpdater,
+		HTMLCacheUpdater $htmlCacheUpdater,
 		JobQueueGroup $jobQueueGroup
 	) {
 		$this->entityIdLookup = $entityIdLookup;
@@ -44,7 +44,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	}
 
 	public static function factory(
-		HtmlCacheUpdater $htmlCacheUpdater,
+		HTMLCacheUpdater $htmlCacheUpdater,
 		JobQueueGroup $jobQueueGroup,
 		EntityDataUriManager $entityDataUriManager,
 		EntityIdLookup $entityIdLookup

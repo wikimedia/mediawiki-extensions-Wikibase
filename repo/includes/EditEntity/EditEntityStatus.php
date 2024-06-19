@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\EditEntity;
 
 use ArrayAccess;
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\TempUserStatus;
