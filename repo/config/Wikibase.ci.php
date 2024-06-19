@@ -70,9 +70,5 @@ $wgAutoCreateTempUser = array_merge(
 	$wgAutoCreateTempUser,
 	json_decode( getallheaders()[ 'X-Wikibase-Ci-Tempuser-Config' ] ?? '{}', true )
 );
-$wgTempAccountCreationThrottle = [ [
-	'count' => 100,
-	'seconds' => 86400,
-] ];
 
 $wgWBRepoSettings['tmpEnableMulLanguageCode'] = boolval( getallheaders()[ 'X-Wikibase-Ci-Enable-Mul' ] ?? false );
