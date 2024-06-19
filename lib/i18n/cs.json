@@ -64,6 +64,7 @@
 	"version-wikibase": "Wikibáze",
 	"wikibase-time-calendar-gregorian": "gregoriánský",
 	"wikibase-time-calendar-julian": "juliánský",
+	"wikibase-time-precision-CE": "$1 n. l.",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|miliarda|miliardy|miliard}} let",
 	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|milion|miliony|milionů}} let",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|rok|roky|let}}",
