@@ -106,14 +106,17 @@ describe( 'GET statement', () => {
 
 	describe( 'long route specific errors', () => {
 		it( 'responds 400 for invalid Property ID', async () => {
-			const propertyId = 'X123';
-			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newGetPropertyStatementRequestBuilder( propertyId, statementId )
-				.assertInvalidRequest()
-				.makeRequest();
+			const response = await newGetPropertyStatementRequestBuilder(
+				'X123',
+				'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+			).assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'responds 400 if subject id in endpoint is not a property id', async () => {
@@ -123,8 +126,12 @@ describe( 'GET statement', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': subjectId } );
-			assert.include( response.body.message, subjectId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'responds property-not-found if property, statement, or statement prefix do not exist', async () => {

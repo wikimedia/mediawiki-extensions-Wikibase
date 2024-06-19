@@ -164,7 +164,7 @@ class PatchPropertyTest extends TestCase {
 			$this->newUseCase()->execute( new PatchPropertyRequest( 'X321', [], [], false, null, null ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
 		}
 	}
 

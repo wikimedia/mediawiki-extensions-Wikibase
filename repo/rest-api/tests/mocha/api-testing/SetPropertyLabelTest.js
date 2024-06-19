@@ -182,13 +182,16 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 	describe( '400 error response', () => {
 		it( 'invalid property id', async () => {
-			const propertyId = 'X123';
-			const response = await newSetPropertyLabelRequestBuilder( propertyId, 'en', 'test label' )
+			const response = await newSetPropertyLabelRequestBuilder( 'X123', 'en', 'test label' )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'invalid language code', async () => {

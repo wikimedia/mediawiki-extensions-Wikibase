@@ -66,9 +66,9 @@ class GetPropertyLabelsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid property ID: X321', $e->getErrorMessage() );
-			$this->assertSame( [ UseCaseError::CONTEXT_PROPERTY_ID => 'X321' ], $e->getErrorContext() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'property_id'", $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'property_id' ], $e->getErrorContext() );
 		}
 	}
 

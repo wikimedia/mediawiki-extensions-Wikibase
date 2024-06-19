@@ -31,9 +31,9 @@ class UseCaseErrorTest extends TestCase {
 		yield 'valid error without context' => [ UseCaseError::ALIASES_NOT_DEFINED, 'aliases not defined' ];
 
 		yield 'valid error with context' => [
-			UseCaseError::INVALID_PROPERTY_ID,
-			'invalid property id',
-			[ UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ],
+			UseCaseError::INVALID_PATH_PARAMETER,
+			"Invalid path parameter: 'property_id'",
+			[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ],
 		];
 
 		yield 'valid error with path context' => [
@@ -60,13 +60,13 @@ class UseCaseErrorTest extends TestCase {
 		yield 'error code not defined' => [ 'not-a-valid-error-code', 'not a valid error code' ];
 
 		yield 'error context contains incorrect key' => [
-			UseCaseError::INVALID_PROPERTY_ID,
+			UseCaseError::INVALID_PATH_PARAMETER,
 			'incorrect context key',
-			[ 'incorrect-context-key' => 'potato', UseCaseError::CONTEXT_PROPERTY_ID => 'X123' ],
+			[ 'incorrect-context-key' => 'potato', UseCaseError::INVALID_PATH_PARAMETER => 'property_id' ],
 		];
 
 		yield 'error context is missing expected keys' => [
-			UseCaseError::INVALID_PROPERTY_ID,
+			UseCaseError::INVALID_PATH_PARAMETER,
 			'error context key is missing',
 		];
 

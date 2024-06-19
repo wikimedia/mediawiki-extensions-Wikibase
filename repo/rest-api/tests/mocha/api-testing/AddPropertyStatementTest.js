@@ -156,13 +156,16 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid property id', async () => {
-			const propertyId = 'X123';
-			const response = await newAddPropertyStatementRequestBuilder( propertyId, testStatement )
+			const response = await newAddPropertyStatementRequestBuilder( 'X123', testStatement )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'comment too long', async () => {

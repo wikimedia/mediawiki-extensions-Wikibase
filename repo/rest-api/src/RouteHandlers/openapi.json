@@ -4280,8 +4280,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-field": {
                 "$ref": "#/components/examples/InvalidFieldExample"
@@ -4329,8 +4329,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               }
             }
           }
@@ -4356,7 +4356,7 @@
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+                "$ref": "#/components/examples/InvalidFilterPropertyIdExample"
               }
             }
           }
@@ -4378,8 +4378,11 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
+              },
               "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+                "$ref": "#/components/examples/InvalidFilterPropertyIdExample"
               }
             }
           }
@@ -4453,8 +4456,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4517,8 +4520,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4640,8 +4643,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4751,8 +4754,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4918,8 +4921,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5012,8 +5015,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5088,8 +5091,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5152,8 +5155,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5231,8 +5234,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5330,8 +5333,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5397,8 +5400,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -5438,8 +5441,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -6097,8 +6100,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-property-id": {
-                "$ref": "#/components/examples/InvalidPropertyIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -7498,7 +7501,7 @@
           }
         }
       },
-      "InvalidPropertyIdExample": {
+      "InvalidFilterPropertyIdExample": {
         "value": {
           "code": "invalid-property-id",
           "message": "Not a valid property ID: {property_id}",

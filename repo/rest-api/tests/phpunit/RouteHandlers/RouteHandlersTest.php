@@ -888,8 +888,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'aliases' => [ 'alias-1', 'alias-2' ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ 'property-id' => 'P1' ] ),
-				$hasErrorCode ( UseCaseError::INVALID_PROPERTY_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'property_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'PatchPropertyDescriptions' => [ [
@@ -900,8 +900,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/en' ] ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::INVALID_PROPERTY_ID, '', [ 'property-id' => 'P1' ] ),
-				$hasErrorCode ( UseCaseError::INVALID_PROPERTY_ID ),
+				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'property_id' ] ),
+				$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 			] ],
 		] ];
 		yield 'RemoveSitelink' => [ [

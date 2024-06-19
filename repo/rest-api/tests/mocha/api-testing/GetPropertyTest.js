@@ -113,11 +113,14 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '400 error - invalid property id', async () => {
-		const propertyId = 'X123';
-		const response = await newGetPropertyRequestBuilder( propertyId ).assertInvalidRequest().makeRequest();
+		const response = await newGetPropertyRequestBuilder( 'X123' ).assertInvalidRequest().makeRequest();
 
-		assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-		assert.include( response.body.message, propertyId );
+		assertValidError(
+			response,
+			400,
+			'invalid-path-parameter',
+			{ parameter: 'property_id' }
+		);
 	} );
 
 	it( '404 error - property not found', async () => {

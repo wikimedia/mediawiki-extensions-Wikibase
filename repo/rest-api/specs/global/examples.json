@@ -24,7 +24,7 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
-	"InvalidPropertyIdExample": {
+	"InvalidFilterPropertyIdExample": {
 		"value": {
 			"code": "invalid-property-id",
 			"message": "Not a valid property ID: {property_id}",

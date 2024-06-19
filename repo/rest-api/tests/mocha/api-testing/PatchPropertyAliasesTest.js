@@ -84,12 +84,15 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 	describe( '400 Bad Request', () => {
 		it( 'property ID is invalid', async () => {
-			const propertyId = 'X123';
-			const response = await newPatchPropertyAliasesRequestBuilder( propertyId, [] )
+			const response = await newPatchPropertyAliasesRequestBuilder( 'X123', [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		testValidatesPatch( ( patch ) => newPatchPropertyAliasesRequestBuilder( testPropertyId, patch ) );
