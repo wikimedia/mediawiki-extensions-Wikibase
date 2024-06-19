@@ -4,6 +4,9 @@
 			"Song GK"
 		]
 	},
+	"wikibase-edit": "edit",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Nadai label",
+	"wikibase-description-empty": "Nadai penerang",
 	"wikibase-sitelinks-special": "Laman web bukai"
 }
