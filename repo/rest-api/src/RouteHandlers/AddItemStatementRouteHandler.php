@@ -28,6 +28,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class AddItemStatementRouteHandler extends SimpleHandler {
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const STATEMENT_BODY_PARAM = 'statement';
@@ -91,9 +92,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
 
-		// ParamValidator::PARAM_TYPE => 'string' does not reject ints or bools and doesn't cast the value either
-		$comment = (string)$jsonBody[self::COMMENT_BODY_PARAM];
-
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
 				new AddItemStatementRequest(
@@ -101,7 +99,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 					$jsonBody[self::STATEMENT_BODY_PARAM],
 					$jsonBody[self::TAGS_BODY_PARAM],
 					$jsonBody[self::BOT_BODY_PARAM],
-					$comment,
+					$jsonBody[self::COMMENT_BODY_PARAM],
 					$this->getUsername()
 				)
 			);
@@ -118,7 +116,10 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 
 	public function parseBodyData( RequestInterface $request ): ?array {
 		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
-		return parent::parseBodyData( $request );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
+
+		return $body;
 	}
 
 	public function getParamSettings(): array {
