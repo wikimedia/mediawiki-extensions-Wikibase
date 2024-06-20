@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\GetDoubleUnderscoreIDsHook;
 use MediaWiki\Hook\ParserFirstCallInitHook;
-use Parser;
+use MediaWiki\Parser\Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;

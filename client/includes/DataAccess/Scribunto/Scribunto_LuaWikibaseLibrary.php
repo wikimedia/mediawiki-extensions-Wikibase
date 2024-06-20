@@ -7,11 +7,11 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
 use Language;
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LibraryBase;
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaError;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOutput;
-use Scribunto_LuaError;
-use Scribunto_LuaLibraryBase;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\ParserOutput\ParserOutputProvider;
@@ -36,7 +36,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  *
  * @license GPL-2.0-or-later
  */
-class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase implements ParserOutputProvider {
+class Scribunto_LuaWikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLanguageIndependentLuaBindings|null
@@ -423,7 +423,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase implements P
 
 		$limit = WikibaseClient::getSettings()->getSetting( 'referencedEntityIdAccessLimit' );
 		if ( $accesses > $limit ) {
-			throw new Scribunto_LuaError(
+			throw new LuaError(
 				wfMessage( 'wikibase-error-exceeded-referenced-entity-id-limit' )->params( 'IGNORED' )->numParams( 3 )->text()
 			);
 		}

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Specials;
 
-use HTMLForm;
 use InvalidArgumentException;
 use MediaWiki\Html\Html;
+use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Title\Title;
 use Skin;

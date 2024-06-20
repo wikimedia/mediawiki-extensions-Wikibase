@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Hooks;
 
-use DatabaseUpdater;
+use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\UnexpectedUnconnectedPagePrimer;

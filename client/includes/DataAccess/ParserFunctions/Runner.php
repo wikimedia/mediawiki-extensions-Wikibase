@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\ParserFunctions;
 
-use Parser;
+use MediaWiki\Parser\Parser;
 use PPFrame;
 use PPNode;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
