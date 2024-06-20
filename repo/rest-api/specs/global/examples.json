@@ -422,6 +422,15 @@
 			}
 		}
 	},
+	"PatchedInvalidSitelinkTypeExample": {
+		"value": {
+			"code": "patched-invalid-sitelink-type'",
+			"message": "Not a valid sitelink type in patched sitelinks",
+			"context": {
+				"site-id": "{site_id}"
+			}
+		}
+	},
 	"PatchedSitelinkSiteIdInvalidExample": {
 		"value": {
 			"code": "patched-sitelink-invalid-site-id",

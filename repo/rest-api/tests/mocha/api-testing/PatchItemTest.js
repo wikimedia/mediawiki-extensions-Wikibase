@@ -8,6 +8,8 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
+const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
+const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
@@ -18,6 +20,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	const testEnglishLabel = `some-label-${utils.uniq()}`;
 	const languageWithExistingLabel = 'en';
 	const languageWithExistingDescription = 'en';
+	let allowedBadges;
+	let siteId;
+	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async function () {
 		testItemId = ( await entityHelper.createEntity( 'item', {
@@ -25,6 +30,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
 			aliases: [ { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
+		await createLocalSitelink( testItemId, linkedArticle );
+		siteId = await getLocalSiteId();
+		allowedBadges = await getAllowedBadges();
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -705,6 +713,180 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const context = { 'statement-id': existingStatementId, 'statement-property-id': predicatePropertyId };
 			assertValidError( response, 422, 'patched-statement-property-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Property of a statement cannot be modified' );
+		} );
+
+		const makeReplaceExistingSitelinkPatchOperation = ( newSitelink ) => ( {
+			op: 'replace',
+			path: '/sitelinks',
+			value: { [ siteId ]: newSitelink }
+		} );
+
+		it( 'sitelink is not an object', async () => {
+			const invalidSitelinkType = 'not-valid-sitelink-type';
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: invalidSitelinkType } } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-invalid-sitelink-type', { 'site-id': siteId } );
+			assert.strictEqual( response.body.message, 'Not a valid sitelink type in patched sitelinks' );
+		} );
+
+		it( 'sitelinks not an object', async () => {
+			const invalidSitelinks = [ { title: linkedArticle } ];
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/sitelinks', value: invalidSitelinks } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: 'sitelinks', value: invalidSitelinks };
+			assertValidError( response, 422, 'patched-item-invalid-field', context );
+			assert.strictEqual( response.body.message, "Invalid input for 'sitelinks' in the patched item" );
+		} );
+
+		it( 'invalid site id', async () => {
+			const invalidSiteId = 'not-valid-site-id';
+			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/sitelinks', value: { [ invalidSiteId ]: sitelink } } ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-invalid-site-id', { 'site-id': invalidSiteId } );
+			assert.include( response.body.message, invalidSiteId );
+		} );
+
+		it( 'missing title', async () => {
+			const sitelink = { badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-missing-title', { 'site-id': siteId } );
+			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'empty title', async () => {
+			const sitelink = { title: '', badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-title-empty', { 'site-id': siteId } );
+			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'invalid title', async () => {
+			const title = 'invalid??%00';
+			const sitelink = { title, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-invalid-title', { 'site-id': siteId, title } );
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, title );
+		} );
+
+		it( 'title does not exist', async () => {
+			const title = 'this_title_does_not_exist';
+			const sitelink = { title, badges: [ allowedBadges[ 0 ] ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-title-does-not-exist', { 'site-id': siteId, title } );
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, title );
+		} );
+
+		it( 'invalid badge', async () => {
+			const badge = 'not-an-item-id';
+			const sitelink = { title: linkedArticle, badges: [ badge ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'patched-sitelink-invalid-badge', { 'site-id': siteId, badge } );
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, badge );
+		} );
+
+		it( 'item not a badge', async () => {
+			const notBadgeItemId = 'Q113';
+			const sitelink = { title: linkedArticle, badges: [ notBadgeItemId ] };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { 'site-id': siteId, badge: notBadgeItemId };
+			assertValidError( response, 422, 'patched-sitelink-item-not-a-badge', context );
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, notBadgeItemId );
+		} );
+
+		it( 'badges are not a list', async () => {
+			const badgesWithInvalidFormat = 'Q113, Q232, Q444';
+			const sitelink = { title: linkedArticle, badges: badgesWithInvalidFormat };
+
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+			).assertValidRequest().makeRequest();
+
+			const context = { 'site-id': siteId, badges: badgesWithInvalidFormat };
+			assertValidError( response, 422, 'patched-sitelink-badges-format', context );
+			assert.include( response.body.message, siteId );
+		} );
+
+		it( 'sitelink conflict', async () => {
+			await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: { title: linkedArticle } } } ]
+			).assertValidRequest().makeRequest();
+
+			const newItem = await createEntity( 'item', {} );
+			const response = await newPatchItemRequestBuilder(
+				newItem.entity.id,
+				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: { title: linkedArticle } } } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { 'site-id': siteId, 'matching-item-id': testItemId };
+			assertValidError( response, 422, 'patched-sitelink-conflict', context );
+			assert.include( response.body.message, siteId );
+			assert.include( response.body.message, testItemId );
+		} );
+
+		it( 'url is modified', async () => {
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ {
+					op: 'add',
+					path: '/sitelinks',
+					value: { [ siteId ]: {
+						title: linkedArticle,
+						url: 'https://en.wikipedia.org/wiki/Example.com'
+					} }
+				} ]
+			).assertValidRequest().makeRequest();
+
+			assertValidError( response, 422, 'url-not-modifiable', { 'site-id': siteId } );
+			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
 		} );
 	} );
 

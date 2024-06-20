@@ -112,6 +112,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => 422,
 		UseCaseError::STATEMENT_ID_NOT_MODIFIABLE => 422,
 		UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => 422,
+		UseCaseError::PATCHED_INVALID_SITELINK_TYPE => 422,
 	];
 
 	public static function lookup( string $errorCode ): int {

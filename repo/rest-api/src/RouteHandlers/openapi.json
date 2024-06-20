@@ -5659,6 +5659,9 @@
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
+              "patched-invalid-sitelink-type": {
+                "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
+              },
               "patched-sitelink-invalid-site-id": {
                 "$ref": "#/components/examples/PatchedSitelinkSiteIdInvalidExample"
               },
@@ -7912,6 +7915,15 @@
             "value": "{label}",
             "character-limit": "{limit}",
             "language": "{language_code}"
+          }
+        }
+      },
+      "PatchedInvalidSitelinkTypeExample": {
+        "value": {
+          "code": "patched-invalid-sitelink-type'",
+          "message": "Not a valid sitelink type in patched sitelinks",
+          "context": {
+            "site-id": "{site_id}"
           }
         }
       },

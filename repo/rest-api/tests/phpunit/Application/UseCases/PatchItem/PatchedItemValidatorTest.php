@@ -23,6 +23,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
@@ -45,11 +46,24 @@ use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
 use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
+use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ItemReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink as SitelinkReadModel;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList as Statements;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
 use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
 use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 use Wikibase\Repo\Validators\MembershipValidator;
@@ -63,11 +77,14 @@ use Wikibase\Repo\Validators\MembershipValidator;
  */
 class PatchedItemValidatorTest extends TestCase {
 
+	private SiteLinkLookup $siteLinkLookup;
+
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
+	private SitelinkTargetTitleResolver $sitelinkTargetTitleResolver;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -87,6 +104,8 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->createStub( ItemDescriptionValidator::class )
 		);
 		$this->aliasesInLanguageValidator = $this->createStub( AliasesInLanguageValidator::class );
+		$this->sitelinkTargetTitleResolver = new SameTitleSitelinkTargetResolver();
+		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
 	}
 
 	private const LIMIT = 40;
@@ -100,9 +119,11 @@ class PatchedItemValidatorTest extends TestCase {
 	public function testValid( array $patchedItemSerialization, Item $expectedPatchedItem ): void {
 		$originalItem = new Item( new ItemId( 'Q123' ), new Fingerprint() );
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		$this->assertEquals(
 			$expectedPatchedItem,
-			$this->newValidator()->validateAndDeserialize( $patchedItemSerialization, $originalItem )
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItemSerialization, $originalItem )
 		);
 	}
 
@@ -111,6 +132,8 @@ class PatchedItemValidatorTest extends TestCase {
 			[ 'id' => 'Q123' ],
 			new Item( new ItemId( 'Q123' ) ),
 		];
+
+		$siteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		yield 'item with all fields' => [
 			[
 				'id' => 'Q123',
@@ -118,7 +141,7 @@ class PatchedItemValidatorTest extends TestCase {
 				'labels' => [ 'en' => 'english-label' ],
 				'descriptions' => [ 'en' => 'english-description' ],
 				'aliases' => [ 'en' => [ 'english-alias' ] ],
-				'sitelinks' => [ 'enwiki' => [ 'title' => 'potato' ] ],
+				'sitelinks' => [ $siteId => [ 'title' => 'potato' ] ],
 				'statements' => [
 					self::EXISTING_STRING_PROPERTY_IDS[0] => [
 						[
@@ -135,7 +158,7 @@ class PatchedItemValidatorTest extends TestCase {
 					new TermList( [ new Term( 'en', 'english-description' ) ] ),
 					new AliasGroupList( [ new AliasGroup( 'en', [ 'english-alias' ] ) ] )
 				),
-				new SitelinkList( [ new SiteLink( 'enwiki', 'potato' ) ] ),
+				new SitelinkList( [ new SiteLink( $siteId, 'potato' ) ] ),
 				new StatementList( NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[0] )->build() )
 			),
 		];
@@ -144,12 +167,14 @@ class PatchedItemValidatorTest extends TestCase {
 	public function testIgnoresItemIdRemoval(): void {
 		$originalItem = new Item( new ItemId( 'Q123' ), new Fingerprint() );
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		$patchedItem = [
 			'type' => 'item',
 			'labels' => [ 'en' => 'potato' ],
 		];
 
-		$validatedItem = $this->newValidator()->validateAndDeserialize( $patchedItem, $originalItem );
+		$validatedItem = $this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem );
 
 		$this->assertEquals( $originalItem->getId(), $validatedItem->getId() );
 	}
@@ -163,8 +188,10 @@ class PatchedItemValidatorTest extends TestCase {
 			new Fingerprint(),
 		);
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		try {
-			$this->newValidator()->validateAndDeserialize( $patchedItem, $originalItem );
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -219,6 +246,8 @@ class PatchedItemValidatorTest extends TestCase {
 			->andLabel( 'de', 'Kartoffel' )
 			->build();
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		$patchedItem = [
 			'id' => "$itemId",
 			'type' => 'item',
@@ -250,7 +279,7 @@ class PatchedItemValidatorTest extends TestCase {
 				new Fingerprint( $inputTerms->asPlainTermList(), $termsToCompareWith->asPlainTermList(), null )
 			),
 			$this->newValidator()
-				->validateAndDeserialize( $patchedItem, $originalItem )
+				->validateAndDeserialize( $item, $patchedItem, $originalItem )
 		);
 	}
 
@@ -261,6 +290,8 @@ class PatchedItemValidatorTest extends TestCase {
 			->andDescription( 'en', 'en-description' )
 			->andDescription( 'de', 'de-description' )
 			->build();
+
+		$item = $this->createStub( ItemReadModel::class );
 
 		$patchedItem = [
 			'id' => "$itemId",
@@ -292,7 +323,7 @@ class PatchedItemValidatorTest extends TestCase {
 				$itemId,
 				new Fingerprint( $termsToCompareWith->asPlainTermList(), $inputTerms->asPlainTermList(), null ),
 			),
-			$this->newValidator()->validateAndDeserialize( $patchedItem, $originalItem )
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem )
 		);
 	}
 
@@ -308,9 +339,13 @@ class PatchedItemValidatorTest extends TestCase {
 	): void {
 		$getFieldValidator( $this )->expects( $this->once() )->method( 'validate' )->willReturn( $validationError );
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		try {
 			$this->newValidator()->validateAndDeserialize(
-				array_merge( [ 'id' => 'Q123' ], $patchedSerialization ), new Item( new ItemId( 'Q123' ) )
+				$item,
+				array_merge( [ 'id' => 'Q123' ], $patchedSerialization ),
+				new Item( new ItemId( 'Q123' ) )
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -621,6 +656,8 @@ class PatchedItemValidatorTest extends TestCase {
 		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;
 		$originalItem = new Item( new ItemId( 'Q123' ) );
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		$itemSerialization = [
 			'id' => 'Q123',
 			'type' => 'item',
@@ -628,7 +665,7 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -750,10 +787,12 @@ class PatchedItemValidatorTest extends TestCase {
 			NewStatement::someValueFor( 'P789' )->withGuid( self::EXISTING_STATEMENT_ID )->build()
 		)->build();
 
+		$item = $this->createStub( ItemReadModel::class );
+
 		$patchedItemSerialization = [ 'id' => 'Q123', 'type' => 'item', 'statements' => $patchedStatements ];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $patchedItemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItemSerialization, $originalItem );
 			$this->fail( 'expected exception not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -827,6 +866,243 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider sitelinksValidationErrorProvider
+	 */
+	public function testSitelinksValidation(
+		array $patchedSitelinks,
+		Exception $expectedError
+	): void {
+		$originalItem = new Item( new ItemId( 'Q123' ) );
+
+		$item = $this->createStub( ItemReadModel::class );
+
+		$itemSerialization = [
+			'id' => 'Q123',
+			'type' => 'item',
+			'sitelinks' => $patchedSitelinks,
+		];
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public static function sitelinksValidationErrorProvider(): Generator {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$badgeItemId = new ItemId( self::ALLOWED_BADGES[ 0 ] );
+
+		yield 'invalid sitelink type' => [
+			[ $validSiteId => 'invalid-sitelink' ],
+			new UseCaseError(
+				UseCaseError::PATCHED_INVALID_SITELINK_TYPE,
+				'Not a valid sitelink type in patched sitelinks',
+				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
+			),
+		];
+
+		$invalidSitelinks = [ 'invalid-sitelinks' ];
+		yield 'sitelinks not associative' => [
+			$invalidSitelinks,
+			new UseCaseError(
+				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
+				"Invalid input for 'sitelinks' in the patched item",
+				[
+					UseCaseError::CONTEXT_PATH => 'sitelinks',
+					UseCaseError::CONTEXT_VALUE => $invalidSitelinks,
+				]
+			),
+		];
+
+		yield 'invalid site id' => [
+			[ 'bad-site-id' => [ 'title' => 'test_title' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID,
+				"Not a valid site ID 'bad-site-id' in patched sitelinks",
+				[ UseCaseError::CONTEXT_SITE_ID => 'bad-site-id' ]
+			),
+		];
+
+		yield 'missing title' => [
+			[ $validSiteId => [ 'badges' => [ $badgeItemId ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_MISSING_TITLE,
+				"No sitelink title provided for site '$validSiteId' in patched sitelinks",
+				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
+			),
+		];
+
+		yield 'empty title' => [
+			[ $validSiteId => [ 'title' => '' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_TITLE_EMPTY,
+				"Sitelink cannot be empty for site '$validSiteId' in patched sitelinks",
+				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
+			),
+		];
+
+		$invalidTitle = 'invalid??%00';
+		yield 'invalid title' => [
+			[ $validSiteId => [ 'title' => $invalidTitle ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_INVALID_TITLE,
+				"Invalid sitelink title '$invalidTitle' for site '$validSiteId' in patched sitelinks",
+				[
+					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+					UseCaseError::CONTEXT_TITLE => $invalidTitle,
+				]
+			),
+		];
+
+		yield 'invalid badges format' => [
+			[ $validSiteId => [ 'title' => 'test_title', 'badges' => $badgeItemId ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_BADGES_FORMAT,
+				"Badges value for site '$validSiteId' is not a list in patched sitelinks",
+				[
+					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+					UseCaseError::CONTEXT_BADGES => $badgeItemId,
+				]
+			),
+		];
+
+		$invalidBadge = 'not-an-item-id';
+		yield 'invalid badge' => [
+			[ $validSiteId => [ 'title' => 'test_title', 'badges' => [ $invalidBadge ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_INVALID_BADGE,
+				"Incorrect patched sitelinks. Badge value '$invalidBadge' for site '$validSiteId' is not an item ID",
+				[
+					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+					UseCaseError::CONTEXT_BADGE => $invalidBadge,
+				]
+			),
+		];
+
+		$itemIdNotBadge = new ItemId( 'Q99' );
+		yield 'item is not a badge' => [
+			[ $validSiteId => [ 'title' => 'test_title', 'badges' => [ "$itemIdNotBadge" ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_SITELINK_ITEM_NOT_A_BADGE,
+				"Incorrect patched sitelinks. Item 'Q99' used for site '$validSiteId' is not allowed as a badge",
+				[
+					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+					UseCaseError::CONTEXT_BADGE => 'Q99',
+				]
+			),
+		];
+	}
+
+	public function testTitleDoesNotExist_throws(): void {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+
+		$originalItem = new Item( new ItemId( 'Q123' ) );
+
+		$item = $this->createStub( ItemReadModel::class );
+
+		$itemSerialization = [
+			'id' => 'Q123',
+			'type' => 'item',
+			'sitelinks' => [ $validSiteId => [ 'title' => 'non-existing-title' ] ],
+		];
+
+		$this->sitelinkTargetTitleResolver = $this->createStub( SameTitleSitelinkTargetResolver::class );
+		$this->sitelinkTargetTitleResolver->method( 'resolveTitle' )->willThrowException(
+			$this->createStub( SitelinkTargetNotFound::class )
+		);
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST,
+			"Incorrect patched sitelinks. Page with title 'non-existing-title' does not exist on site '$validSiteId'",
+			[
+				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+				UseCaseError::CONTEXT_TITLE => 'non-existing-title',
+			]
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function testSitelinkConflict_throws(): void {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$matchingItemId = 'Q987';
+
+		$originalItem = new Item( new ItemId( 'Q123' ) );
+
+		$item = $this->createStub( ItemReadModel::class );
+
+		$itemSerialization = [
+			'id' => 'Q123',
+			'type' => 'item',
+			'sitelinks' => [ $validSiteId => [ 'title' => 'test-title' ] ],
+		];
+
+		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $matchingItemId ) );
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PATCHED_SITELINK_CONFLICT,
+			"Site '$validSiteId' is already being used on '$matchingItemId'",
+			[
+				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
+			]
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function testSitelinkUrlModification_throws(): void {
+		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
+		$title = 'test_title';
+
+		$originalItem = new Item(
+			new ItemId( 'Q123' ),
+			new Fingerprint(),
+			new SitelinkList( [ new SiteLink( $validSiteId, $title ) ] ),
+		);
+
+		$item = new ItemReadModel(
+			new ItemId( 'Q123' ),
+			new Labels(),
+			new Descriptions(),
+			new Aliases(),
+			new Sitelinks( new SitelinkReadModel( $validSiteId, $title, [], 'https://en.wikipedia.org/wiki/Example.com' ) ),
+			new Statements()
+		);
+
+		$itemSerialization = [
+			'id' => 'Q123',
+			'type' => 'item',
+			'sitelinks' => [ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/.example' ] ],
+		];
+
+		$expectedError = new UseCaseError(
+			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
+			'URL of sitelink cannot be modified',
+			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $error ) {
+			$this->assertEquals( $expectedError, $error );
+		}
+	}
+
 	private function newValidator(): PatchedItemValidator {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
@@ -853,11 +1129,17 @@ class PatchedItemValidatorTest extends TestCase {
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
 				new AliasesDeserializer(),
 			),
-			new SitelinkDeserializer(
-				'/\?/',
-				self::ALLOWED_BADGES,
-				new SameTitleSitelinkTargetResolver(),
-				new DummyItemRevisionMetaDataRetriever()
+			new SitelinksValidator(
+				new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+				new SiteLinkLookupSitelinkValidator(
+					new SitelinkDeserializer(
+						'/\?/',
+						self::ALLOWED_BADGES,
+						$this->sitelinkTargetTitleResolver,
+						new DummyItemRevisionMetaDataRetriever()
+					),
+					$this->siteLinkLookup
+				)
 			),
 			new StatementsValidator(
 				new StatementsDeserializer(
