@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tofeiku"
+			"Tofeiku",
+			"Ultron90"
 		]
 	},
 	"tooltip-t-wikibase": "Sambungan ta' keserentaan pesimponon data diam sambungan",
@@ -11,6 +12,7 @@
 	"wikibase-linkitem-addlinks": "Namba sambungan",
 	"wikibase-linkitem-title": "Nepeng laman",
 	"wikibase-linkitem-linkpage": "Nepeng laman",
+	"wikibase-linkitem-selectlink": "Pinene' tapak kok laman yang kenginan bi nepeng kok laman tu.",
 	"wikibase-linkitem-input-site": "Ling:",
 	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-rc-hide-wikidata-hide": "Tenapuk",
