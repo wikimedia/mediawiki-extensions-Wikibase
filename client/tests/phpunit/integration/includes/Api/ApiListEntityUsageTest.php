@@ -7,10 +7,10 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use ApiContinuationManager;
 use ApiMain;
 use ApiPageSet;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
-use RequestContext;
 use Wikibase\Client\Api\ApiListEntityUsage;
 use Wikibase\Client\WikibaseClient;
 

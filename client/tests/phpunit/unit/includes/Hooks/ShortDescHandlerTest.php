@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use PHPUnit\Framework\TestCase;
 use UtfNormal\Utils;
@@ -83,7 +84,7 @@ class ShortDescHandlerTest extends TestCase {
 	 */
 	public function testDoHandle( $inputString, $pageProperty ) {
 		$parserOutput = $this->createMock( ParserOutput::class );
-		$parser = $this->createMock( \Parser::class );
+		$parser = $this->createMock( Parser::class );
 		$parser->method( 'getOutput' )->willReturn( $parserOutput );
 		$parser->method( 'getMagicWordFactory' )->willReturn(
 			MediaWikiServices::getInstance()->getMagicWordFactory() );
@@ -112,7 +113,7 @@ class ShortDescHandlerTest extends TestCase {
 		$shortDesc = null;
 
 		$parserOutput = $this->createMock( ParserOutput::class );
-		$parser = $this->createMock( \Parser::class );
+		$parser = $this->createMock( Parser::class );
 		$parser->method( 'getOutput' )->willReturn( $parserOutput );
 		$parserOutput->method( 'getPageProperty' )
 			->willReturn( 'bogus' );

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use ExtensionRegistry;
-use Parser;
+use MediaWiki\Parser\Parser;
 use ParserFactory;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Parser;
 use Wikibase\Client\Hooks\MagicWordHookHandler;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Lib\SettingsArray;

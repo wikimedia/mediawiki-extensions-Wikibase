@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use ExtensionRegistry;
+use MediaWiki\Extension\Scribunto\Tests\Engines\LuaCommon\LuaEngineTestBase;
 use MediaWiki\Title\Title;
-use Scribunto_LuaEngineTestBase;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
@@ -49,7 +49,7 @@ if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
  * @author Marius Hoch < hoo@online.de >
  * @author Daniel Kinzler
  */
-abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineTestBase {
+abstract class Scribunto_LuaWikibaseLibraryTestCase extends LuaEngineTestBase {
 
 	/**
 	 * @var bool|null

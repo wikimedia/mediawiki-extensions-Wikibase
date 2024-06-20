@@ -4,9 +4,9 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaEngine;
+use MediaWiki\Extension\Scribunto\Engines\LuaStandalone\LuaStandaloneInterpreterFunction;
 use ParserOptions;
-use Scribunto_LuaEngine;
-use Scribunto_LuaStandaloneInterpreterFunction;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
@@ -78,12 +78,12 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		// The value of create depends on the Lua runtime in use.
 		$isLuaFunction =
-			( $package['create'] instanceof Scribunto_LuaStandaloneInterpreterFunction ) ||
+			( $package['create'] instanceof LuaStandaloneInterpreterFunction ) ||
 			( $package['create'] instanceof LuaSandboxFunction );
 
 		$this->assertTrue(
 			$isLuaFunction,
-			'$package[\'create\'] needs to be Scribunto_LuaStandaloneInterpreterFunction or LuaSandboxFunction'
+			'$package[\'create\'] needs to be LuaStandaloneInterpreterFunction or LuaSandboxFunction'
 		);
 	}
 
@@ -279,7 +279,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 * @return Scribunto_LuaWikibaseEntityLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
-		/** @var $engine Scribunto_LuaEngine */
+		/** @var $engine LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 

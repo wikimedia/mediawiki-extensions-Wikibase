@@ -7,7 +7,7 @@ namespace Wikibase\Client\Tests\Integration\Changes;
 use ArrayIterator;
 use DataValues\DataValue;
 use DataValues\StringValue;
-use LinkBatch;
+use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Page\PageSelectQueryBuilder;
 use MediaWiki\Page\PageStore;

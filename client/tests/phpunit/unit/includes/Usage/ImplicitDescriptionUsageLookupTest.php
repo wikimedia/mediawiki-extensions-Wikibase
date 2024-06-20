@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Unit\Usage;
 
 use ArrayIterator;
 use Language;
-use LinkBatch;
+use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
-use ApiTestCase;
 use ApiUsageException;
 use FormatJson;
 use MediaWiki\Message\Message;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\WikibaseSettings;

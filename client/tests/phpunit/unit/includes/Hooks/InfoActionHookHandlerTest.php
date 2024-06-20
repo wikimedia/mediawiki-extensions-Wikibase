@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
-use RequestContext;
 use UnexpectedValueException;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\NamespaceChecker;

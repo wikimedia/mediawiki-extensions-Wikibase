@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Skin;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\NoLangLinkHandler;

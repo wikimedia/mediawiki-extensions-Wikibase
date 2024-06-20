@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\EditPage\EditPage;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
-use RequestContext;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
