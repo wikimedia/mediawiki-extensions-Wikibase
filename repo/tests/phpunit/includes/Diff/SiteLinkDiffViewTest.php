@@ -8,10 +8,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWikiTestCaseTrait;
-use RequestContext;
-use TestSites;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Diff\SiteLinkDiffView;
 

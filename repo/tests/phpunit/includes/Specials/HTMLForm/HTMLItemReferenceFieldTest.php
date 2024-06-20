@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
-use HTMLForm;
+use MediaWiki\HTMLForm\HTMLForm;
+use MediaWiki\Message\Message;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -53,7 +54,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	public function testValidationFailsWithInvalidFormatMessage_WhenEnteredTextDoesNotMatchItemIdFormat() {
 		$field = $this->createField();
 
-		/** @var \Message $failureMessage */
+		/** @var Message $failureMessage */
 		$failureMessage = $field->validate( 'x', [] );
 
 		$this->assertSame( 'wikibase-item-reference-edit-invalid-format', $failureMessage->getKey() );
@@ -62,7 +63,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	public function testValidationFailsWithNonexistentItemMessage_WhenItemHavingEnteredIdDoesNotExist() {
 		$field = $this->createField();
 
-		/** @var \Message $failureMessage */
+		/** @var Message $failureMessage */
 		$failureMessage = $field->validate( 'Q2', [] );
 
 		$this->assertSame( 'wikibase-item-reference-edit-nonexistent-item', $failureMessage->getKey() );
@@ -78,7 +79,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 			]
 		);
 
-		/** @var \Message $failureMessage */
+		/** @var Message $failureMessage */
 		$failureMessage = $field->validate( $existingItemId, [] );
 
 		$this->assertSame( 'some-message', $failureMessage->getKey() );

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;

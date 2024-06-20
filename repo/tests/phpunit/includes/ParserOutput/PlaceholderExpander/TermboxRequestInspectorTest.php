@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

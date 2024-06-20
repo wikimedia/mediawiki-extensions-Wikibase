@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\Message\Message;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Message;
 use Psr\Log\LoggerInterface;
 use Skin;
 use Wikibase\DataModel\Entity\EntityId;

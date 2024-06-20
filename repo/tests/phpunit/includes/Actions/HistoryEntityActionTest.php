@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use Article;
-use IContextSource;
 use MediaWiki\Config\HashConfig;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;

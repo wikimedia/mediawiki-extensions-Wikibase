@@ -4,20 +4,20 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Interactors;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWiki\User\TempUser\CreateStatus;
 use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
-use RequestContext;
-use TestSites;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;

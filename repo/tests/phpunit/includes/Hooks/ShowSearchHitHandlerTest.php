@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use ContextSource;
 use HtmlArmor;
+use MediaWiki\Context\ContextSource;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;

@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties\Diff;
 
-use DerivativeContext;
-use RequestContext;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

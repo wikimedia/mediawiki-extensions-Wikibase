@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Store;
 
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\StorageException;

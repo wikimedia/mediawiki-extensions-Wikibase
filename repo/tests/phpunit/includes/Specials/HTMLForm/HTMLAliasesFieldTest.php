@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
-use HTMLForm;
+use MediaWiki\HTMLForm\HTMLForm;
+use MediaWiki\Message\Message;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 
@@ -70,7 +71,7 @@ class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 	public function testValidationFailsWithGenericMessage_WhenRequiredAndEmptyArrayGivenAsValue() {
 		$field = $this->createField( [ 'required' => true ] );
 
-		/** @var \Message $failureMessage */
+		/** @var Message $failureMessage */
 		$failureMessage = $field->validate( [], [] );
 
 		$this->assertSame( 'htmlform-required', $failureMessage->getKey() );

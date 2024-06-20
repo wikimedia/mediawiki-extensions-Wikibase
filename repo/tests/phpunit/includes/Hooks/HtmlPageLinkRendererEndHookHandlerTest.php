@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
-use RequestContext;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;

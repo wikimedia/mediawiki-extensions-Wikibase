@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Localizer;
 
 use InvalidArgumentException;
-use Message;
+use MediaWiki\Message\Message;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MysqlUpdater;
+use MediaWiki\Installer\MysqlUpdater;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use Wikibase\Repo\Store\Store;
 use Wikimedia\Rdbms\IMaintainableDatabase;

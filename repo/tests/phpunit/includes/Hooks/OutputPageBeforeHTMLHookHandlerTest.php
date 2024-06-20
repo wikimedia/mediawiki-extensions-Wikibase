@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
@@ -13,7 +14,6 @@ use MediaWikiIntegrationTestCase;
 use NullHttpRequestFactory;
 use NullStatsdDataFactory;
 use PHPUnit\Framework\MockObject\MockObject;
-use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;

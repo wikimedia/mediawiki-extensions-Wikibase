@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\Message\Message;
 use MediaWiki\Request\FauxRequest;
-use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Content\EntityContent;
