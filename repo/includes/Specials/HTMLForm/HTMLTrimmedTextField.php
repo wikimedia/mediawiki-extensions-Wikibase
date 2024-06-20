@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials\HTMLForm;
 
-use HTMLTextField;
+use MediaWiki\HTMLForm\Field\HTMLTextField;
 use Wikibase\Lib\StringNormalizer;
 
 /**

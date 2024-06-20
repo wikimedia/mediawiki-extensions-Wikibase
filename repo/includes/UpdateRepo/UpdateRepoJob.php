@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use DerivativeContext;
 use Job;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
-use RequestContext;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;

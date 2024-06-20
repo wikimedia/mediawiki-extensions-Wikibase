@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Language;
 use MediaWiki\Html\Html;
-use Message;
+use MediaWiki\Message\Message;
 use Wikibase\Repo\CopyrightMessageBuilder;
 
 /**

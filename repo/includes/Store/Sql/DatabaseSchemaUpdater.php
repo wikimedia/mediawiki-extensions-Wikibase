@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Store\Sql;
 
-use DatabaseUpdater;
 use InvalidArgumentException;
+use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
