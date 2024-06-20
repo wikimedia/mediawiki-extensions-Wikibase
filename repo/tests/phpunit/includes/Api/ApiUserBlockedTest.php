@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
 use ApiUsageException;
 use MediaWiki\Block\DatabaseBlock;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 

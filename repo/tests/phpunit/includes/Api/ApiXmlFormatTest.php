@@ -7,7 +7,7 @@ use DOMDocument;
 use DOMXPath;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\HashSiteStore;
-use TestSites;
+use MediaWiki\Tests\Site\TestSites;
 use Wikibase\Lib\Tests\FakeCache;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\GetClaims;

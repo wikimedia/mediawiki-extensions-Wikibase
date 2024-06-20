@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\StaticContentLanguages;

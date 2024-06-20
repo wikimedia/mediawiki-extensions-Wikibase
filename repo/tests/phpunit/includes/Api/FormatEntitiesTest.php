@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
 use ApiUsageException;
 use HashBagOStuff;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiTestCase;
 use MediaWiki\MediaWikiServices;
-use TestSites;
+use MediaWiki\Tests\Api\ApiTestCase;
+use MediaWiki\Tests\Site\TestSites;
 
 /**
  * This class holds simple integration tests for Wikibase API modules

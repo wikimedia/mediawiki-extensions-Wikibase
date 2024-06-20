@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiQuery;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Site\HashSiteStore;
 use MediaWikiLangTestCase;
-use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;

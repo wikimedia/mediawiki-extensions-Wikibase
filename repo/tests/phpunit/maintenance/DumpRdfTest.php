@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWikiIntegrationTestCase;
-use TestSites;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
+use MediaWiki\Message\Message;
 use MediaWiki\Status\Status;
-use Message;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\Hooks;
 
-use HtmlCacheUpdater;
 use IJobSpecification;
 use JobQueueGroup;
+use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Title\Title;
 use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -41,7 +41,7 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 		$entityDataUriManager = $this->createMock( EntityDataUriManager::class );
 		$entityDataUriManager->expects( $this->never() )
 			->method( 'getPotentiallyCachedUrls' );
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->never() )
 			->method( 'purgeUrls' );
 		$purger = new EntityDataPurger(
@@ -67,7 +67,7 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 			->method( 'getPotentiallyCachedUrls' )
 			->with( $entityId, 1 )
 			->willReturn( [ 'urlA/Q1/1', 'urlB/Q1/1' ] );
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->once() )
 			->method( 'purgeUrls' )
 			->with( [ 'urlA/Q1/1', 'urlB/Q1/1' ] );
@@ -97,7 +97,7 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 				[ $entityId, 2, [ 'urlA/Q1/2', 'urlB/Q1/2' ] ],
 				[ $entityId, 3, [ 'urlA/Q1/3', 'urlB/Q1/3' ] ],
 			] );
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->once() )
 			->method( 'purgeUrls' )
 			->with( [
@@ -128,7 +128,7 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 		$entityDataUriManager = $this->createMock( EntityDataUriManager::class );
 		$entityDataUriManager->expects( $this->never() )
 			->method( 'getPotentiallyCachedUrls' );
-		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->never() )
 			->method( 'purgeUrls' );
 

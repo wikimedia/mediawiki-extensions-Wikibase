@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiQuery;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
-use RequestContext;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 
