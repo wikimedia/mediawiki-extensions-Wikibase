@@ -20,10 +20,10 @@ class UseCaseError extends UseCaseException {
 	public const DESCRIPTION_EMPTY = 'description-empty';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const DESCRIPTION_TOO_LONG = 'description-too-long';
+	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_DESCRIPTION = 'invalid-description';
 	public const INVALID_EDIT_TAG = 'invalid-edit-tag';
 	public const INVALID_FIELD = 'invalid-field';
-	public const INVALID_ITEM_ID = 'invalid-item-id';
 	public const INVALID_LABEL = 'invalid-label';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
@@ -124,6 +124,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
 	public const CONTEXT_OPERATION = 'operation';
+	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_ITEM_ID = 'item-id';
 	public const CONTEXT_PROPERTY_ID = 'property-id';
@@ -148,12 +149,12 @@ class UseCaseError extends UseCaseException {
 		self::DESCRIPTION_EMPTY => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
+		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_ALIAS => [],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_EDIT_TAG => [],
 		self::INVALID_FIELD => [],
-		self::INVALID_ITEM_ID => [],
 		self::INVALID_LABEL => [],
 		self::INVALID_LANGUAGE_CODE => [],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],

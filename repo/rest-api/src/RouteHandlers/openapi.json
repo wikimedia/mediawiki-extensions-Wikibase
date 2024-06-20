@@ -4141,8 +4141,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-field": {
                 "$ref": "#/components/examples/InvalidFieldExample"
@@ -4306,8 +4306,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               }
             }
           }
@@ -4352,8 +4352,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-property-id": {
                 "$ref": "#/components/examples/InvalidPropertyIdExample"
@@ -4424,8 +4424,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4482,8 +4482,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4593,8 +4593,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4716,8 +4716,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -4786,8 +4786,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-site-id": {
                 "$ref": "#/components/examples/InvalidSiteIdExample"
@@ -4818,8 +4818,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-site-id": {
                 "$ref": "#/components/examples/InvalidSiteIdExample"
@@ -4871,8 +4871,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -4965,8 +4965,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5056,8 +5056,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5120,8 +5120,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5184,8 +5184,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5278,8 +5278,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-site-id": {
                 "$ref": "#/components/examples/InvalidSiteIdExample"
@@ -5304,8 +5304,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeExample"
@@ -5356,8 +5356,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -6041,8 +6041,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "invalid-item-id": {
-                "$ref": "#/components/examples/InvalidItemIdExample"
+              "invalid-path-parameter": {
+                "$ref": "#/components/examples/InvalidPathParameterExample"
               },
               "invalid-statement-id": {
                 "$ref": "#/components/examples/InvalidStatementIdExample"
@@ -7486,10 +7486,13 @@
           "message": "Not a valid field: {field}"
         }
       },
-      "InvalidItemIdExample": {
+      "InvalidPathParameterExample": {
         "value": {
-          "code": "invalid-item-id",
-          "message": "Not a valid item ID: {item_id}"
+          "code": "invalid-path-parameter",
+          "message": "Invalid path parameter: '{path_parameter}'",
+          "context": {
+            "parameter": "{path_parameter}"
+          }
         }
       },
       "InvalidPropertyIdExample": {

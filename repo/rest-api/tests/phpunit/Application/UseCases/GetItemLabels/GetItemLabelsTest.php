@@ -66,9 +66,9 @@ class GetItemLabelsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $e->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: X321', $e->getErrorMessage() );
-			$this->assertSame( [], $e->getErrorContext() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'item_id'", $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'item_id' ], $e->getErrorContext() );
 		}
 	}
 

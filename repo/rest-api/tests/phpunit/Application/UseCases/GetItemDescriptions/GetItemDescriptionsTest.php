@@ -64,9 +64,9 @@ class GetItemDescriptionsTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_ITEM_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( 'Not a valid item ID: X321', $useCaseEx->getErrorMessage() );
-			$this->assertSame( [], $useCaseEx->getErrorContext() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'item_id'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'item_id' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

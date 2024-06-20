@@ -21,15 +21,18 @@ class ResponseFactoryTest extends TestCase {
 	/**
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
-	public function testNewErrorResponseFromException( string $errorCode, int $httpStatus ): void {
+	public function testNewErrorResponseFromException( string $errorCode, int $httpStatus, array $errorContext = [] ): void {
 		$errorMessage = 'testNewErrorResponseFromException error message';
+		$jsonErrorContext = json_encode( $errorContext );
 
 		$httpResponse = ( new ResponseFactory() )->newErrorResponseFromException(
-			new UseCaseError( $errorCode, $errorMessage )
+			new UseCaseError( $errorCode, $errorMessage, $errorContext )
 		);
 
 		$this->assertJsonStringEqualsJsonString(
-			"{ \"code\": \"$errorCode\", \"message\": \"$errorMessage\" }",
+			$errorContext ?
+				"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\", \"context\": $jsonErrorContext }" :
+				"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\" }",
 			$httpResponse->getBody()->getContents()
 		);
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
@@ -38,13 +41,16 @@ class ResponseFactoryTest extends TestCase {
 	/**
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
-	public function testNewErrorResponse( string $errorCode, int $httpStatus ): void {
+	public function testNewErrorResponse( string $errorCode, int $httpStatus, array $errorContext = null ): void {
 		$errorMessage = 'testNewErrorResponse error message';
+		$jsonErrorContext = json_encode( $errorContext );
 
-		$httpResponse = ( new ResponseFactory() )->newErrorResponse( $errorCode, $errorMessage );
+		$httpResponse = ( new ResponseFactory() )->newErrorResponse( $errorCode, $errorMessage, $errorContext );
 
 		$this->assertJsonStringEqualsJsonString(
-			"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\" }",
+			$errorContext ?
+				"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\", \"context\": $jsonErrorContext }" :
+				"{ \"code\": \"{$errorCode}\", \"message\": \"{$errorMessage}\" }",
 			$httpResponse->getBody()->getContents()
 		);
 		$this->assertSame( $httpStatus, $httpResponse->getStatusCode() );
@@ -52,7 +58,7 @@ class ResponseFactoryTest extends TestCase {
 
 	public static function errorCodeToHttpStatusCodeProvider(): Generator {
 		yield [ UseCaseError::INVALID_FIELD, 400 ];
-		yield [ UseCaseError::INVALID_ITEM_ID, 400 ];
+		yield [ UseCaseError::INVALID_PATH_PARAMETER, 400, [ 'parameter' => '' ] ];
 		yield [ UseCaseError::INVALID_STATEMENT_ID, 400 ];
 		yield [ UseCaseError::INVALID_FIELD, 400 ];
 		yield [ UseCaseError::ITEM_NOT_FOUND, 404 ];

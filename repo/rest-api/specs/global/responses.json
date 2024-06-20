@@ -414,7 +414,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-field": { "$ref": "./examples.json#/InvalidFieldExample" }
 				}
 			}
@@ -517,7 +517,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" }
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" }
 				}
 			}
 		},
@@ -551,7 +551,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-property-id": { "$ref": "./examples.json#/InvalidPropertyIdExample" }
 				}
 			}
@@ -603,7 +603,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" }
 				}
@@ -641,7 +641,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
@@ -710,7 +710,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
@@ -787,7 +787,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
@@ -829,7 +829,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
@@ -849,7 +849,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
@@ -876,7 +876,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
 					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
@@ -934,7 +934,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionExample" },
 					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyExample" },
@@ -989,7 +989,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
@@ -1029,7 +1029,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
@@ -1069,7 +1069,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" },
 					"alias-empty": { "$ref": "./examples.json#/AliasEmptyExample" },
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyExample" },
@@ -1119,7 +1119,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-site-id": { "$ref": "./examples.json#/InvalidSiteIdExample" }
 				}
 			}
@@ -1137,7 +1137,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeExample" }
 				}
 			}
@@ -1173,7 +1173,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
@@ -1594,7 +1594,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"invalid-item-id": { "$ref": "./examples.json#/InvalidItemIdExample" },
+					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-statement-id": { "$ref": "./examples.json#/InvalidStatementIdExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },

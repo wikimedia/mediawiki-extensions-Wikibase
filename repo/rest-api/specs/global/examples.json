@@ -17,10 +17,11 @@
 			"message": "Not a valid field: {field}"
 		}
 	},
-	"InvalidItemIdExample": {
+	"InvalidPathParameterExample": {
 		"value": {
-			"code": "invalid-item-id",
-			"message": "Not a valid item ID: {item_id}"
+			"code": "invalid-path-parameter",
+			"message": "Invalid path parameter: '{path_parameter}'",
+			"context": { "parameter": "{path_parameter}" }
 		}
 	},
 	"InvalidPropertyIdExample": {

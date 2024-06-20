@@ -46,8 +46,12 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-item-id' );
-			assert.include( response.body.message, invalidItemId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'item_id' }
+			);
 		} );
 
 		it( 'invalid site ID', async () => {
