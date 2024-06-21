@@ -16,6 +16,7 @@
 		"jsdoc/newline-after-description": "off",
 		"jsdoc/require-returns": "off",
 		"jsdoc/require-returns-check": "off",
-		"no-jquery/no-extend": "warn"
+		"no-jquery/no-extend": "warn",
+		"es-x/no-object-assign": "warn"
 	}
 }
