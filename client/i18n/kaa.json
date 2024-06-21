@@ -41,6 +41,8 @@
 	"wikibase-unconnectedpages-submit": "Betlerdi kórsetiw",
 	"pageswithbadges": "Nıshana berilgen maqalalar",
 	"entityusage": "Obyekttiń paydalanılıwı",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementi identifikatorı",
+	"wikibase-pageinfo-description-central": "Ortalıq sıpatlama",
 	"wikibase-pageinfo-entity-usage": "Bul bette paydalanılǵan {{WBREPONAME}} obyektleri",
 	"wikibase-otherprojects": "Basqa joybarlarda",
 	"wikibase-sitelinks-sitename-columnheading": "Til",

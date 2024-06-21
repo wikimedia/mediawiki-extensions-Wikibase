@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "Повезати с страницеју",
 	"wikibase-linkitem-selectlink": "Просимо, изберите сајт и страницу, ктору хочете повезати с тутоју страницеју.",
 	"wikibase-linkitem-input-site": "Језык:",
-	"wikibase-linkitem-input-page": "Страница:"
+	"wikibase-linkitem-input-page": "Страница:",
+	"wikibase-rc-hide-wikidata-hide": "Скрыти",
+	"wikibase-rc-hide-wikidata-show": "Показати",
+	"wikibase-otherprojects": "В другых пројектах"
 }
