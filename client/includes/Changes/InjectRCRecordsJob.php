@@ -8,7 +8,7 @@ use CannotCreateActorException;
 use InvalidArgumentException;
 use Job;
 use JobSpecification;
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
@@ -22,6 +22,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Job for injecting RecentChange records representing changes on the Wikibase repository.
@@ -63,15 +64,9 @@ class InjectRCRecordsJob extends Job {
 	 */
 	private $logger;
 
-	/**
-	 * @var StatsdDataFactoryInterface|null
-	 */
-	private $stats = null;
+	private ?StatsFactory $statsFactory = null;
 
-	/**
-	 * @var StatsdDataFactoryInterface|null
-	 */
-	private $perWikiStats = null;
+	private ?string $dbName = null;
 
 	/**
 	 * @param Title[] $titles
@@ -178,7 +173,10 @@ class InjectRCRecordsJob extends Job {
 		$job->setRecentChangesFinder( $store->getRecentChangesFinder() );
 
 		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
-		$job->setStats( $mwServices->getStatsdDataFactory(), $mwServices->getPerDbNameStatsdDataFactory() );
+		$job->setStatsFactory(
+			$mwServices->getStatsFactory(),
+			$mwServices->getMainConfig()->get( MainConfigNames::DBname )
+		);
 
 		return $job;
 	}
@@ -191,9 +189,9 @@ class InjectRCRecordsJob extends Job {
 		$this->logger = $logger;
 	}
 
-	public function setStats( StatsdDataFactoryInterface $stats, StatsdDataFactoryInterface $perWikiStats = null ): void {
-		$this->stats = $stats;
-		$this->perWikiStats = $perWikiStats;
+	public function setStatsFactory( StatsFactory $statsFactory, string $dbName ): void {
+		$this->statsFactory = $statsFactory;
+		$this->dbName = $dbName;
 	}
 
 	/**
@@ -277,28 +275,24 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
-		$this->incrementStats( 'InjectRCRecords.run.titles', count( $titles ) );
-		$this->recordDelay( $change->getAge() );
+		if ( $this->statsFactory !== null ) {
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
+				->setLabel( 'DBname', $this->dbName )
+				->copyToStatsdAt( [
+					'wikibase.client.pageupdates.InjectRCRecords.run.titles',
+				] )
+				->incrementBy( count( $titles ) );
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
+				->setLabel( 'DBname', $this->dbName )
+				->copyToStatsdAt( [
+					'wikibase.client.pageupdates.InjectRCRecords.delay',
+					"{$this->dbName}.wikibase.client.pageupdates.InjectRCRecords.delay",
+				] )
+				->observe( $change->getAge() * 1000 );
+		}
 
 		return true;
-	}
-
-	/**
-	 * @param string $updateType
-	 * @param int $delta
-	 */
-	private function incrementStats( string $updateType, int $delta ): void {
-		if ( $this->stats ) {
-			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
-		}
-	}
-
-	private function recordDelay( int $delay ): void {
-		if ( $this->stats ) {
-			$this->stats->timing( 'wikibase.client.pageupdates.InjectRCRecords.delay', $delay );
-		}
-		if ( $this->perWikiStats ) {
-			$this->perWikiStats->timing( 'wikibase.client.pageupdates.InjectRCRecords.delay', $delay );
-		}
 	}
 }

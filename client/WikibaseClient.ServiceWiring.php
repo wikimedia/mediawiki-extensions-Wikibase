@@ -168,7 +168,7 @@ return [
 		$pageUpdater = new WikiPageUpdater(
 			$services->getJobQueueGroup(),
 			$logger,
-			$services->getStatsdDataFactory()
+			$services->getStatsFactory()
 		);
 
 		$settings = WikibaseClient::getSettings( $services );

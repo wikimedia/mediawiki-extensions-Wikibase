@@ -59,7 +59,7 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 
 		$this->serviceContainer
 			->expects( $this->once() )
-			->method( 'getStatsdDataFactory' );
+			->method( 'getStatsFactory' );
 
 		$this->serviceContainer
 			->expects( $this->once() )
