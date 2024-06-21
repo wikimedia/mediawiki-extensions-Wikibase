@@ -55,13 +55,16 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	} );
 
 	it( '400 - invalid property ID', async () => {
-		const invalidPropertyId = 'X123';
-		const response = await newGetPropertyDescriptionRequestBuilder( invalidPropertyId, 'en' )
+		const response = await newGetPropertyDescriptionRequestBuilder( 'X123', 'en' )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
-		assert.include( response.body.message, invalidPropertyId );
+		assertValidError(
+			response,
+			400,
+			'invalid-path-parameter',
+			{ parameter: 'property_id' }
+		);
 	} );
 
 	it( '400 - invalid language code', async () => {

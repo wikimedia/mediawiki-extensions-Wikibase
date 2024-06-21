@@ -96,7 +96,7 @@ class GetPropertyLabelTest extends TestCase {
 			$this->newUseCase()->execute( new GetPropertyLabelRequest( 'X123', 'en' ) );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
 		}
 	}
 

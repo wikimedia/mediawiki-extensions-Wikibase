@@ -25,13 +25,13 @@ class PropertyIdValidatingDeserializerTest extends TestCase {
 	}
 
 	public function testGivenInvalidId_throws(): void {
-		$invalidId = 'Q123';
 		try {
-			( new PropertyIdValidatingDeserializer( new PropertyIdValidator() ) )->validateAndDeserialize( $invalidId );
+			( new PropertyIdValidatingDeserializer( new PropertyIdValidator() ) )->validateAndDeserialize( 'Q123' );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $useCaseEx->getErrorCode() );
-			$this->assertSame( "Not a valid property ID: $invalidId", $useCaseEx->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'property_id'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'property_id' ], $useCaseEx->getErrorContext() );
 		}
 	}
 

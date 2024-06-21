@@ -343,13 +343,16 @@ describe( 'PATCH property statement', () => {
 	describe( 'long route specific errors', () => {
 
 		it( 'responds 400 for invalid property ID', async () => {
-			const propertyId = 'X123';
-			const response = await newPatchPropertyStatementRequestBuilder( propertyId, testStatementId, [] )
+			const response = await newPatchPropertyStatementRequestBuilder( 'X123', testStatementId, [] )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'responds 400 if property and statement do not match', async () => {

@@ -94,7 +94,7 @@ class GetPropertyAliasesInLanguageTest extends TestCase {
 			$this->newUseCase()->execute( new GetPropertyAliasesInLanguageRequest( 'X321', 'en' ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_PROPERTY_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $e->getErrorCode() );
 		}
 	}
 

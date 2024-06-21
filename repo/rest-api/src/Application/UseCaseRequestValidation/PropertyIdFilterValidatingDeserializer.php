@@ -9,7 +9,8 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyIdValidatingDeserializer {
+class PropertyIdFilterValidatingDeserializer {
+
 	private PropertyIdValidator $propertyIdValidator;
 
 	public function __construct( PropertyIdValidator $validator ) {
@@ -22,10 +23,11 @@ class PropertyIdValidatingDeserializer {
 	public function validateAndDeserialize( string $propertyId ): NumericPropertyId {
 		$validationError = $this->propertyIdValidator->validate( $propertyId );
 		if ( $validationError ) {
+			$invalidPropertyId = $validationError->getContext()[PropertyIdValidator::CONTEXT_VALUE];
 			throw new UseCaseError(
-				UseCaseError::INVALID_PATH_PARAMETER,
-				"Invalid path parameter: 'property_id'",
-				[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ]
+				UseCaseError::INVALID_PROPERTY_ID,
+				"Not a valid property ID: $invalidPropertyId",
+				[ UseCaseError::CONTEXT_PROPERTY_ID => $invalidPropertyId ]
 			);
 		}
 		return new NumericPropertyId( $propertyId );

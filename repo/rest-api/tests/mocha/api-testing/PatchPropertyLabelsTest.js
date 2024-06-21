@@ -90,12 +90,15 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	describe( '400 error response', () => {
 		it( 'invalid property id', async () => {
-			const propertyId = testPropertyId.replace( 'P', 'L' );
-			const response = await newPatchPropertyLabelsRequestBuilder( propertyId, [] )
+			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId.replace( 'P', 'L' ), [] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		testValidatesPatch( ( patch ) => newPatchPropertyLabelsRequestBuilder( testPropertyId, patch ) );

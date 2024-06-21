@@ -73,12 +73,15 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 	describe( '400 error response', () => {
 		it( 'invalid property id', async () => {
-			const propertyId = testPropertyId.replace( 'P', 'Q' );
-			const response = await newRemovePropertyLabelRequestBuilder( propertyId, 'en' )
+			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId.replace( 'P', 'Q' ), 'en' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'invalid language code', async () => {

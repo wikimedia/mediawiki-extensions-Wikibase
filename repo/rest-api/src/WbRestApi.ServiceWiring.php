@@ -45,6 +45,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesIn
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequestValidatingDeserializer;
@@ -214,12 +215,12 @@ return [
 	},
 
 	VRD::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
-		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		$propertyIdFilterValidatingDeserializer = new PropertyIdFilterValidatingDeserializer( new PropertyIdValidator() );
 		return new MappedRequestValidatingDeserializer(
 			fn( PropertyIdFilterRequest $r ) => $r->getPropertyIdFilter() === null
 				? null
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-				: $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
+				: $propertyIdFilterValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
 		);
 	},
 

@@ -144,14 +144,17 @@ describe( 'DELETE statement', () => {
 
 	describe( 'long route specific errors', () => {
 		it( 'responds 400 for invalid property ID', async () => {
-			const propertyId = 'X123';
 			const statementId = 'P123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-			const response = await newRemovePropertyStatementRequestBuilder( propertyId, statementId )
+			const response = await newRemovePropertyStatementRequestBuilder( 'X123', statementId )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': propertyId } );
-			assert.include( response.body.message, propertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'responds 400 if property and statement do not match', async () => {

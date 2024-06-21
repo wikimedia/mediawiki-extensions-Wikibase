@@ -158,12 +158,15 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	describe( '400 error response', () => {
 
 		it( 'invalid property ID', async () => {
-			const invalidPropertyId = 'X11';
-			const response = await newSetPropertyDescriptionRequestBuilder( invalidPropertyId, 'en', 'description' )
+			const response = await newSetPropertyDescriptionRequestBuilder( 'X11', 'en', 'description' )
 				.assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-property-id', { 'property-id': invalidPropertyId } );
-			assert.include( response.body.message, invalidPropertyId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'property_id' }
+			);
 		} );
 
 		it( 'invalid language code', async () => {
