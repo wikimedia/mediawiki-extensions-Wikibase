@@ -299,7 +299,7 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 			->willReturn( false );
 
 		$pageSet = $this->createMock( \ApiPageSet::class );
-		$pageSet->method( 'getGoodTitles' )
+		$pageSet->method( 'getGoodPages' )
 			->willReturn( $this->makeTitles( $requestedPageIds ) );
 
 		$result = $this->createMock( \ApiResult::class );
