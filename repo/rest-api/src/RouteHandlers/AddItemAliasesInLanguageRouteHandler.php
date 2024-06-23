@@ -9,7 +9,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
@@ -26,7 +25,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
+
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -76,7 +77,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
 
 		try {
 			$useCaseResponse = $this->addItemAliases->execute(
@@ -102,13 +103,26 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
 
-		return new TypeValidatingJsonBodyValidator( [
+		return $body;
+	}
+
+	public function getParamSettings(): array {
+		return [
+			self::ITEM_ID_PATH_PARAM => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::LANGUAGE_CODE_PATH_PARAM => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
 			self::ALIASES_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -130,21 +144,6 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
-			],
-		] );
-	}
-
-	public function getParamSettings(): array {
-		return [
-			self::ITEM_ID_PATH_PARAM => [
-				self::PARAM_SOURCE => 'path',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
-			],
-			self::LANGUAGE_CODE_PATH_PARAM => [
-				self::PARAM_SOURCE => 'path',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
 	}

@@ -123,6 +123,50 @@ describe( newRequest().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'comment too long', async () => {
+			const comment = 'x'.repeat( 501 );
+			const response = await newRequest( testItemId, 'en', [ 'new alias' ] )
+				.withJsonBodyParam( 'comment', comment )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'comment-too-long' );
+			assert.include( response.body.message, '500' );
+		} );
+
+		it( 'invalid edit tag', async () => {
+			const invalidEditTag = 'invalid tag';
+			const response = await newRequest( testItemId, 'en', [ 'new alias' ] )
+				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.assertValidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-edit-tag' );
+			assert.include( response.body.message, invalidEditTag );
+		} );
+
+		it( 'invalid bot flag', async () => {
+			const response = await newRequest( testItemId, 'en', [ 'new alias' ] )
+				.withJsonBodyParam( 'bot', 'should be a boolean' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
+		} );
+
+		it( 'invalid comment', async () => {
+			const response = await newRequest( testItemId, 'en', [ 'new alias' ] )
+				.withJsonBodyParam( 'comment', 123 )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
+		} );
+
 		it( 'invalid language code', async () => {
 			const response = await newRequest( testItemId, '1e', [ 'new alias' ] )
 				.assertInvalidRequest()
