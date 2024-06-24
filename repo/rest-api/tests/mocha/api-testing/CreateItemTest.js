@@ -117,6 +117,15 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
+		it( 'invalid edit tag type', async () => {
+			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
+				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
+		} );
+
 		it( 'invalid bot flag', async () => {
 			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
 				.withJsonBodyParam( 'bot', 'should be a boolean' )
@@ -124,9 +133,19 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
+		} );
+
+		it( 'invalid comment', async () => {
+			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
+				.withJsonBodyParam( 'comment', 123 )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
 		} );
 
 		it( 'invalid top-level field', async () => {
