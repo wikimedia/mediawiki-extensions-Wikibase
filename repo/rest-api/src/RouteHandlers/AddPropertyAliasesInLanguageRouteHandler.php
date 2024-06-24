@@ -9,7 +9,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguageResponse;
@@ -25,7 +24,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
+
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -76,7 +77,7 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
 
 		try {
 			$useCaseResponse = $this->addPropertyAliases->execute(
@@ -97,13 +98,26 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
 
-		return new TypeValidatingJsonBodyValidator( [
+		return $body;
+	}
+
+	public function getParamSettings(): array {
+		return [
+			self::PROPERTY_ID_PATH_PARAM => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			self::LANGUAGE_CODE_PATH_PARAM => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
 			self::ALIASES_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -125,21 +139,6 @@ class AddPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
-			],
-		] );
-	}
-
-	public function getParamSettings(): array {
-		return [
-			self::PROPERTY_ID_PATH_PARAM => [
-				self::PARAM_SOURCE => 'path',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
-			],
-			self::LANGUAGE_CODE_PATH_PARAM => [
-				self::PARAM_SOURCE => 'path',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
 			],
 		];
 	}

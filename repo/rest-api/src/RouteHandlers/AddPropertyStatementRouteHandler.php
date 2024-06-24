@@ -8,7 +8,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
@@ -25,7 +24,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class AddPropertyStatementRouteHandler extends SimpleHandler {
+
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const STATEMENT_BODY_PARAM = 'statement';
@@ -84,7 +85,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId ): Response {
 		$body = $this->getValidatedBody();
-		'@phan-var array $body'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $body'; // guaranteed to be an array per parseBodyData()
 		try {
 			return $this->newSuccessHttpResponse(
 				$propertyId,
@@ -122,6 +123,14 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
+
+		return $body;
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::PROPERTY_ID_PATH_PARAM => [
@@ -129,19 +138,9 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-		];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'object',
+				ParamValidator::PARAM_TYPE => /* object */ 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
@@ -161,7 +160,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	private function setLocationHeader( Response $httpResponse, string $propertyId, string $statementGuid ): void {
