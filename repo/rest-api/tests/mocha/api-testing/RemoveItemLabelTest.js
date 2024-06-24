@@ -69,12 +69,15 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguageCode = 'xyz';
-			const response = await newRemoveItemLabelRequestBuilder( testItemId, invalidLanguageCode )
+			const response = await newRemoveItemLabelRequestBuilder( testItemId, 'xyz' )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-language-code' );
-			assert.include( response.body.message, invalidLanguageCode );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'language_code' }
+			);
 		} );
 
 		it( 'invalid edit tag', async () => {

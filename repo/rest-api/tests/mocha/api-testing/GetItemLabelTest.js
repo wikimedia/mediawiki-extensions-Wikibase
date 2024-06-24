@@ -82,12 +82,15 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '400 error - bad request, invalid language code', async () => {
-		const invalidLanguageCode = '1e';
-		const response = await newGetItemLabelRequestBuilder( 'Q123', invalidLanguageCode )
+		const response = await newGetItemLabelRequestBuilder( 'Q123', '1e' )
 			.assertInvalidRequest()
 			.makeRequest();
 
-		assertValidError( response, 400, 'invalid-language-code' );
-		assert.include( response.body.message, invalidLanguageCode );
+		assertValidError(
+			response,
+			400,
+			'invalid-path-parameter',
+			{ parameter: 'language_code' }
+		);
 	} );
 } );

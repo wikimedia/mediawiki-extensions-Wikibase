@@ -4777,9 +4777,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-site-id": {
-                "$ref": "#/components/examples/InvalidSiteIdExample"
-              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -4808,9 +4805,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-site-id": {
-                "$ref": "#/components/examples/InvalidSiteIdExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -4862,9 +4856,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-label": {
                 "$ref": "#/components/examples/InvalidLabelExample"
               },
@@ -4908,9 +4899,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
               },
               "invalid-label": {
                 "$ref": "#/components/examples/InvalidLabelExample"
@@ -4956,9 +4944,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-description": {
                 "$ref": "#/components/examples/InvalidDescriptionExample"
               },
@@ -5003,9 +4988,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-description": {
                 "$ref": "#/components/examples/InvalidDescriptionExample"
               },
@@ -5047,9 +5029,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -5078,9 +5057,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
               },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
@@ -5111,9 +5087,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -5143,9 +5116,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "invalid-edit-tag": {
                 "$ref": "#/components/examples/InvalidEditTagExample"
               },
@@ -5174,9 +5144,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
               },
               "alias-empty": {
                 "$ref": "#/components/examples/AliasEmptyExample"
@@ -5222,9 +5189,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
-              },
               "alias-empty": {
                 "$ref": "#/components/examples/AliasEmptyExample"
               },
@@ -5268,9 +5232,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-site-id": {
-                "$ref": "#/components/examples/InvalidSiteIdExample"
               }
             }
           }
@@ -5294,9 +5255,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
               }
             }
           }
@@ -5320,9 +5278,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeExample"
               }
             }
           }
@@ -7483,12 +7438,6 @@
           }
         }
       },
-      "InvalidLanguageCodeExample": {
-        "value": {
-          "code": "invalid-language-code",
-          "message": "Not a valid language code: {language_code}"
-        }
-      },
       "InvalidLanguageCodeWithPathContextExample": {
         "value": {
           "code": "invalid-language-code",
@@ -7503,12 +7452,6 @@
         "value": {
           "code": "invalid-sitelink-type",
           "message": "Not a valid sitelink type"
-        }
-      },
-      "InvalidSiteIdExample": {
-        "value": {
-          "code": "invalid-site-id",
-          "message": "Not a valid site ID: {site_id}"
         }
       },
       "InvalidSiteIdWithSiteContextExample": {

@@ -195,13 +195,16 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguageCode = '1e';
-			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, invalidLanguageCode, 'new label' )
+			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, '1e', 'new label' )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-language-code' );
-			assert.include( response.body.message, invalidLanguageCode );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'language_code' }
+			);
 		} );
 
 		it( 'invalid label', async () => {

@@ -55,13 +55,16 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid site ID', async () => {
-			const invalidSiteId = 'not-a-valid-site-id';
-			const response = await newGetSitelinkRequestBuilder( testItemId, invalidSiteId )
+			const response = await newGetSitelinkRequestBuilder( testItemId, 'not-a-valid-site-id' )
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-site-id' );
-			assert.include( response.body.message, invalidSiteId );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'site_id' }
+			);
 		} );
 	} );
 

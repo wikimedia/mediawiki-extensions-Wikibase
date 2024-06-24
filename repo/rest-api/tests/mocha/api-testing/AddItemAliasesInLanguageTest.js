@@ -124,13 +124,16 @@ describe( newRequest().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid language code', async () => {
-			const invalidLanguageCode = '1e';
-			const response = await newRequest( testItemId, invalidLanguageCode, [ 'new alias' ] )
+			const response = await newRequest( testItemId, '1e', [ 'new alias' ] )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-language-code' );
-			assert.include( response.body.message, invalidLanguageCode );
+			assertValidError(
+				response,
+				400,
+				'invalid-path-parameter',
+				{ parameter: 'language_code' }
+			);
 		} );
 
 		it( 'alias is empty', async () => {

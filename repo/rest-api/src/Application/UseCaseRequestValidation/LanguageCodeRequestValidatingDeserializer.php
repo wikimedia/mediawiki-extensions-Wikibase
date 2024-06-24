@@ -23,8 +23,9 @@ class LanguageCodeRequestValidatingDeserializer {
 		$validationError = $this->languageCodeValidator->validate( $request->getLanguageCode() );
 		if ( $validationError ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_LANGUAGE_CODE,
-				"Not a valid language code: {$validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]}"
+				UseCaseError::INVALID_PATH_PARAMETER,
+				"Invalid path parameter: 'language_code'",
+				[ UseCaseError::CONTEXT_PARAMETER => 'language_code' ]
 			);
 		}
 		return $request->getLanguageCode();

@@ -31,15 +31,15 @@ class LanguageCodeRequestValidatingDeserializerTest extends TestCase {
 
 	public function testGivenInvalidRequest_throws(): void {
 		$request = $this->createStub( DescriptionLanguageCodeRequest::class );
-		$invalidLanguageId = 'q4';
-		$request->method( 'getLanguageCode' )->willReturn( $invalidLanguageId );
+		$request->method( 'getLanguageCode' )->willReturn( 'q4' );
 
 		try {
 			$this->newValidatingDeserializerRequest()->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $useCaseEx ) {
-			$this->assertSame( UseCaseError::INVALID_LANGUAGE_CODE, $useCaseEx->getErrorCode() );
-			$this->assertSame( "Not a valid language code: $invalidLanguageId", $useCaseEx->getErrorMessage() );
+			$this->assertSame( UseCaseError::INVALID_PATH_PARAMETER, $useCaseEx->getErrorCode() );
+			$this->assertSame( "Invalid path parameter: 'language_code'", $useCaseEx->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PARAMETER => 'language_code' ], $useCaseEx->getErrorContext() );
 		}
 	}
 
