@@ -197,21 +197,21 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.error, 'parameter-validation-failed' );
+			assert.strictEqual( response.body.name, 'bot' );
+			assert.strictEqual( response.body.failureCode, 'badbool' );
 		} );
 
 		it( 'invalid comment', async () => {
 			const response = await newAddItemStatementRequestBuilder( testItemId, testStatement )
-				.withJsonBodyParam( 'comment', 1234 )
+				.withJsonBodyParam( 'comment', [ 'array', 'not', 'string' ] )
 				.assertInvalidRequest()
 				.makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'comment' );
-			assert.strictEqual( response.body.expectedType, 'string' );
+			assert.strictEqual( response.body.error, 'parameter-validation-failed' );
+			assert.strictEqual( response.body.name, 'comment' );
+			assert.strictEqual( response.body.failureCode, 'badvalue' );
 		} );
 
 		it( 'invalid statement field', async () => {

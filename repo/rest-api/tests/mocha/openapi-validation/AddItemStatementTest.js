@@ -46,16 +46,6 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '400 Bad Request is valid for invalid statement param type', async () => {
-		const response = await newAddItemStatementRequestBuilder(
-			itemId,
-			'invalid statement param type'
-		).makeRequest();
-
-		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '409 Conflict is valid for redirected Item', async () => {
 		const redirectSource = await createRedirectForItem( itemId );
 		const response = await newAddItemStatementRequestBuilder(

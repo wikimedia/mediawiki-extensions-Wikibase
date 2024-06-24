@@ -10,7 +10,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -90,7 +89,11 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 */
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
+
+		// ParamValidator::PARAM_TYPE => 'string' does not reject ints or bools and doesn't cast the value either
+		$comment = (string)$jsonBody[self::COMMENT_BODY_PARAM];
+
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
 				new AddItemStatementRequest(
@@ -98,7 +101,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 					$jsonBody[self::STATEMENT_BODY_PARAM],
 					$jsonBody[self::TAGS_BODY_PARAM],
 					$jsonBody[self::BOT_BODY_PARAM],
-					$jsonBody[self::COMMENT_BODY_PARAM],
+					$comment,
 					$this->getUsername()
 				)
 			);
@@ -113,6 +116,11 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		}
 	}
 
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
+		return parent::parseBodyData( $request );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -120,19 +128,9 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-		];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'object',
+				ParamValidator::PARAM_TYPE => /* object */ 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
@@ -152,7 +150,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( AddItemStatementResponse $useCaseResponse, string $itemId ): Response {
