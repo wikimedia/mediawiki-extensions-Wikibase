@@ -25,8 +25,7 @@
 	"patch": {
 		"operationId": "patchItem",
 		"tags": [ "items" ],
-		"summary": "[WIP] Change a single Wikibase Item by ID",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Change a single Wikibase Item by ID",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
