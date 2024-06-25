@@ -4,10 +4,10 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
@@ -31,7 +31,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class CreateItemRouteHandler extends SimpleHandler {
+
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const ITEM_BODY_PARAM = 'item';
 	private const TAGS_BODY_PARAM = 'tags';
@@ -85,7 +87,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 
 	public function runUseCase(): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -104,16 +106,19 @@ class CreateItemRouteHandler extends SimpleHandler {
 		}
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
 
-		return new TypeValidatingJsonBodyValidator( [
+		return $body;
+	}
+
+	public function getParamSettings(): array {
+		return [
 			self::ITEM_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'object',
+				ParamValidator::PARAM_TYPE => /* object */ 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
@@ -133,7 +138,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( CreateItemResponse $useCaseResponse ): Response {
