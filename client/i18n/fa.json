@@ -25,7 +25,8 @@
 			"Reza1615",
 			"Rtemis",
 			"ZxxZxxZ",
-			"درفش کاویانی"
+			"درفش کاویانی",
+			"Ebrahim"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌پایه",
@@ -132,13 +133,13 @@
 	"wikibase-client-data-bridge-semiprotected-on-repo-head": "این مقدار در حال حاضر در {{WBREPONAME}} [$1 نیمه‌حفاظت شده است] و فقط توسط [$2 کاربران تأییدشدهٔ خودکار] می‌تواند ویرایش شود.</strong>",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>نام کاربری و نشانی آی‌پی شما در {{WBREPONAME}} بسته شده است.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>نام کاربری و نشانی آی‌پی شما در این ویکی بسته شده است.</strong>",
-	"wikibase-client-data-bridge-permissions-error-unknown-body": "شما این مقدار را به دلایل ناشناخته نمی‌توانید ویرایش کنید.",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "این مقدار را به دلایل ناشناخته نمی‌توانید ویرایش کنید.",
 	"wikibase-client-data-bridge-edit-decision-heading": "لطفاً نوع ویرایشی که شما ساختید را انتخاب کنید.",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>من</strong> یک مقدار نادرست را <strong>درست می‌کنم</strong>",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>من</strong> یک مقدار تاریخ‌گذشته را <strong>روزآمد می‌کنم</strong>",
 	"wikibase-client-data-bridge-edit-decision-update-description": "مقداری قبلی استفاده‌شده زمانی درست بوده است ولی الان تاریخ‌گذشته است.",
 	"wikibase-client-data-bridge-references-heading": "ارجاعات",
-	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "شما وارد سامانه نشده‌ايد",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "وارد سامانه نشده‌ايد",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "ویرایش بدون وارد شدن به سامانه",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ورود به سامانه یا ثبت نام",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "ویرایش مقدار در {{WBREPONAME}}",
@@ -156,9 +157,9 @@
 	"wikibase-client-data-bridge-thank-you-head": "بابت ویرایش‌تان از شما سپاسگزاریم!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "با کلیک‌کردن دکمهٔ زیر می‌توانید ارجاعات برای این ویژگی را در {{WBREPONAME}} ویرایش کنید.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "ویرایش ارجاع در {{WBREPONAME}}",
-	"wikibase-client-data-bridge-saving-error-assertuser-heading": "شما وارد سامانه نشده‌ايد",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "وارد سامانه نشده‌ايد",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "انتشار بدون وارد شدن به سامانه",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "ذخیره بدون وارد شدن به سامانه",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "ورود به سامانه (در زبانهٔ جدید باز می‌شود)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "ادامهٔ ویرایش‌کردن"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "ادامهٔ ویرایش"
 }
