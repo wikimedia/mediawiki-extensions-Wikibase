@@ -25,13 +25,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->setContentLang( 'qqx' );
-		$this->setUserLang( 'qqx' );
-	}
-
 	protected function newSpecialPage() {
 		$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );
 		$prefetchingTermLookup->method( 'getDescription' )
