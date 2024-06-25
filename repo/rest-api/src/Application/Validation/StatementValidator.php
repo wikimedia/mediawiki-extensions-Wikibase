@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 
@@ -15,6 +16,7 @@ class StatementValidator {
 
 	public const CODE_INVALID_FIELD = 'statement-validator-code-invalid-statement-field';
 	public const CODE_MISSING_FIELD = 'statement-validator-code-missing-statement-field';
+	public const CODE_INVALID_FIELD_TYPE = 'statement-validator-code-invalid-statement-type';
 
 	public const CONTEXT_FIELD = 'statement-validator-context-field';
 	public const CONTEXT_VALUE = 'statement-validator-context-value';
@@ -39,6 +41,11 @@ class StatementValidator {
 					self::CONTEXT_FIELD => $e->getField(),
 					self::CONTEXT_VALUE => $e->getValue(),
 				]
+			);
+		} catch ( InvalidFieldTypeException $e ) {
+			return new ValidationError(
+				self::CODE_INVALID_FIELD_TYPE,
+				[ self::CONTEXT_FIELD => $e->getField() ]
 			);
 		}
 

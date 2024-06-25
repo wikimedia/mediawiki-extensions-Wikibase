@@ -245,6 +245,28 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 400, 'statement-data-missing-field', { path: missingField } );
 			assert.include( response.body.message, missingField );
 		} );
+
+		it( 'invalid statement type: string', async () => {
+			const invalidStatement = 'statement-not-string';
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/statement' } );
+		} );
+
+		it( 'invalid statement type: array', async () => {
+			const invalidStatement = [ 'statement-not-array' ];
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-statement-type', { path: '' } );
+		} );
 	} );
 
 	describe( '404 error response', () => {

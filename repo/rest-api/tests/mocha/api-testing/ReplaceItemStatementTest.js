@@ -150,7 +150,6 @@ describe( 'PUT statement tests', () => {
 			} );
 
 			describe( '400 error response', () => {
-
 				it( 'statement ID contains invalid entity ID', async () => {
 					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId.replace( 'Q', 'X' ), statement )
@@ -263,14 +262,21 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( response.body.expectedType, 'string' );
 				} );
 
-				it( 'invalid statement type', async () => {
-					const response = await newReplaceRequestBuilder( testItemId, testStatementId, 'invalid' )
+				it( 'invalid statement type: string', async () => {
+					const response = await newReplaceRequestBuilder( testItemId, testStatementId, 'statement-not-string' )
 						.assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
 					assert.strictEqual( response.body.code, 'invalid-request-body' );
 					assert.strictEqual( response.body.fieldName, 'statement' );
 					assert.strictEqual( response.body.expectedType, 'object' );
+				} );
+
+				it( 'invalid statement type: array', async () => {
+					const response = await newReplaceRequestBuilder( testItemId, testStatementId, [ 'statement-not-array' ] )
+						.assertInvalidRequest().makeRequest();
+
+					assertValidError( response, 400, 'invalid-statement-type', { path: '' } );
 				} );
 
 				it( 'invalid statement field', async () => {

@@ -7,6 +7,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -61,6 +62,12 @@ class StatementValidatorTest extends TestCase {
 			new MissingFieldException( 'property' ),
 			StatementValidator::CODE_MISSING_FIELD,
 			[ StatementValidator::CONTEXT_FIELD => 'property' ],
+		];
+
+		yield 'invalid field type exception' => [
+			new InvalidFieldTypeException( '' ),
+			StatementValidator::CODE_INVALID_FIELD_TYPE,
+			[ StatementValidator::CONTEXT_FIELD => '' ],
 		];
 	}
 

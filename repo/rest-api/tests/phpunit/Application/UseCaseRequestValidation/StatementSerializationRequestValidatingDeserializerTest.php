@@ -84,6 +84,18 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 		];
+
+		yield 'invalid field type' => [
+			new ValidationError(
+				StatementValidator::CODE_INVALID_FIELD_TYPE,
+				[ StatementValidator::CONTEXT_FIELD => '' ]
+			),
+			new UseCaseError(
+				UseCaseError::INVALID_STATEMENT_TYPE,
+				'Not a valid statement type',
+				[ UseCaseError::CONTEXT_PATH => '' ]
+			),
+		];
 	}
 
 }
