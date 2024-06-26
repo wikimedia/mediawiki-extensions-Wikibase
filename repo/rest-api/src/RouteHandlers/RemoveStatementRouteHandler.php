@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
@@ -26,7 +26,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class RemoveStatementRouteHandler extends SimpleHandler {
-	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	private const TAGS_BODY_PARAM = 'tags';
@@ -115,6 +115,11 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 		);
 	}
 
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::STATEMENT_ID_PATH_PARAM => [
@@ -125,13 +130,8 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::TAGS_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -150,7 +150,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse(): Response {
