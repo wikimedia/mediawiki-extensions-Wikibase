@@ -32,7 +32,8 @@
 			"Umherirrender",
 			"Vogone",
 			"Yellowcard",
-			"Zolo"
+			"Zolo",
+			"TomatoCake"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -389,7 +390,7 @@
 	"wikibase-redirect-permissiondenied": "Berechtigung abgelehnt",
 	"special-mylanguagefallbackchain": "Meine Sprach-Fallback-Kette",
 	"wikibase-mylanguagefallbackchain-text": "Die Fallbackkette für die anzuzeigenden Sprachen der Objektbezeichnungen wird nachstehend angezeigt.",
-	"wikibase-mylanguagefallbackchain-babel": "Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.",
+	"wikibase-mylanguagefallbackchain-babel": "Du kannst sie bearbeiten, indem du <nowiki>{{#babel: }}</nowiki> auf deiner [[Special:MyPage|{{GENDER:$1|Benutzerseite|Benutzerinnenseite}}]] einfügst.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, konvertiert von $3 – $4",
 	"wikibase-api-claim-value-missing": "Bei der Erstellung einer Behauptung mit dem PropertyValueSnak muss ein Wert angegeben werden.",
 	"wikibase-api-claim-value-unexpected": "Bei der Erstellung einer Behauptung ohne PropertyValueSnak als Hauptsnak kannst du keinen Wert angeben.",
