@@ -3,7 +3,10 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchPropertyDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyDescriptionsRequestBuilder,
+	newGetPropertyDescriptionRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -15,14 +18,20 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 	let originalLastModified;
 	let originalRevisionId;
 	const languageWithExistingDescription = 'en';
-	const testEnDescription = `some-description-${utils.uniq()}`;
 	const testEnLabel = `some-label-${utils.uniq()}`;
+
+	function assertValid200Response( response ) {
+		expect( response ).to.have.status( 200 );
+		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+	}
 
 	before( async function () {
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
 			datatype: 'string',
 			labels: [ { language: 'en', value: testEnLabel } ],
-			descriptions: [ { language: languageWithExistingDescription, value: testEnDescription } ]
+			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ]
 		} ) ).entity.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -43,11 +52,8 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ { op: 'add', path: '/de', value: description } ]
 			).makeRequest();
 
-			expect( response ).to.have.status( 200 );
+			assertValid200Response( response );
 			assert.strictEqual( response.body.de, description );
-			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
-			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
 
 		it( 'can patch labels with edit metadata', async () => {
@@ -64,11 +70,8 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				.withUser( user )
 				.assertValidRequest().makeRequest();
 
-			expect( response ).to.have.status( 200 );
+			assertValid200Response( response );
 			assert.strictEqual( response.body.ar, description );
-			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
-			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 			assert.include( editMetadata.tags, tag );
@@ -86,13 +89,44 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ { op: 'add', path: '/de', value: `\t${description}  ` } ]
 			).makeRequest();
 
-			expect( response ).to.have.status( 200 );
+			assertValid200Response( response );
 			assert.strictEqual( response.body.de, description );
+		} );
+
+		it( 'allows content-type application/json-patch+json', async () => {
+			const expectedValue = `new arabic description ${utils.uniq()}`;
+			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [
+				{
+					op: 'replace',
+					path: '/ar',
+					value: expectedValue
+				}
+			] )
+				.withHeader( 'content-type', 'application/json-patch+json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.strictEqual( response.body.ar, expectedValue );
+		} );
+
+		it( 'allows content-type application/json', async () => {
+			const expectedValue = `new arabic description ${utils.uniq()}`;
+			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [
+				{
+					op: 'replace',
+					path: '/ar',
+					value: expectedValue
+				}
+			] )
+				.withHeader( 'content-type', 'application/json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.strictEqual( response.body.ar, expectedValue );
 		} );
 	} );
 
 	describe( '400 error response', () => {
-
 		it( 'invalid property id', async () => {
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId.replace( 'P', 'Q' ), [] )
 				.assertInvalidRequest().makeRequest();
@@ -121,9 +155,8 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'tags' );
-			assert.strictEqual( response.body.expectedType, 'array' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
 		} );
 
 		it( 'invalid bot flag type', async () => {
@@ -131,9 +164,8 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
 		} );
 
 		it( 'comment too long', async () => {
@@ -150,9 +182,8 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'comment' );
-			assert.strictEqual( response.body.expectedType, 'string' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
 		} );
 	} );
 
@@ -192,13 +223,14 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 
 		it( 'patch test condition failed', async () => {
 			const operation = { op: 'test', path: '/en', value: 'incorrect' };
+			const enDescription = ( await newGetPropertyDescriptionRequestBuilder( testPropertyId, 'en' ).makeRequest() ).body;
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnDescription } );
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': enDescription } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testEnDescription );
+			assert.include( response.body.message, enDescription );
 		} );
 	} );
 

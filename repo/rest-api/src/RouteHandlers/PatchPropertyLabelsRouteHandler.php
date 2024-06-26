@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
@@ -26,7 +26,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchPropertyLabelsRouteHandler extends SimpleHandler {
-	use AssertContentType;
+
+	use AssertValidTopLevelFields;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -78,7 +79,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -98,6 +99,15 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 		}
 	}
 
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
+	public function getSupportedRequestTypes(): array {
+		return [ 'application/json', 'application/json-patch+json' ];
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::PROPERTY_ID_PATH_PARAM => [
@@ -108,13 +118,8 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -138,7 +143,7 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => null,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( PatchPropertyLabelsResponse $useCaseResponse ): Response {

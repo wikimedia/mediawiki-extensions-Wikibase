@@ -3,7 +3,10 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyAliasesRequestBuilder,
+	newGetPropertyAliasesInLanguageRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
@@ -15,6 +18,13 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let originalRevisionId;
 	const languageWithExistingAlias = 'en';
 	const existingEnAlias = `en-alias-${utils.uniq()}`;
+
+	function assertValid200Response( response ) {
+		expect( response ).to.have.status( 200 );
+		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+	}
 
 	before( async () => {
 		const aliases = {};
@@ -47,12 +57,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				]
 			).makeRequest();
 
-			expect( response ).to.have.status( 200 );
+			assertValid200Response( response );
 			assert.deepEqual( response.body.de, [ newDeAlias ] );
 			assert.deepEqual( response.body.en, [ existingEnAlias, newEnAlias ] );
-			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
-			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 		} );
 
 		it( 'can patch aliases providing edit metadata', async () => {
@@ -70,7 +77,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 200 );
+			assertValid200Response( response );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 			assert.include( editMetadata.tags, tag );
@@ -79,6 +86,38 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				editMetadata.comment,
 				formatTermsEditSummary( 'update-languages-short', 'de', editSummary )
 			);
+		} );
+
+		it( 'allows content-type application/json-patch+json', async () => {
+			const expectedValue = `en-alias-${utils.uniq()}`;
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{
+					op: 'add',
+					path: '/en',
+					value: [ expectedValue ]
+				}
+			] )
+				.withHeader( 'content-type', 'application/json-patch+json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.deepEqual( response.body.en, [ expectedValue ] );
+		} );
+
+		it( 'allows content-type application/json', async () => {
+			const expectedValue = `en-alias-${utils.uniq()}`;
+			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
+				{
+					op: 'add',
+					path: '/en',
+					value: [ expectedValue ]
+				}
+			] )
+				.withHeader( 'content-type', 'application/json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.deepEqual( response.body.en, [ expectedValue ] );
 		} );
 	} );
 
@@ -120,9 +159,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'tags' );
-			assert.strictEqual( response.body.expectedType, 'array' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
 		} );
 
 		it( 'invalid bot flag type', async () => {
@@ -130,9 +168,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
 		} );
 
 		it( 'invalid comment type', async () => {
@@ -140,9 +177,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'comment' );
-			assert.strictEqual( response.body.expectedType, 'string' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
 		} );
 	} );
 
@@ -244,14 +280,17 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'patch test condition failed', async () => {
 			const operation = { op: 'test', path: '/en/0', value: 'potato' };
+			const enAliases = ( await newGetPropertyAliasesInLanguageRequestBuilder( testPropertyId, 'en' )
+				.makeRequest() ).body;
+
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { 'actual-value': existingEnAlias, operation } );
+			assertValidError( response, 409, 'patch-test-failed', { 'actual-value': enAliases[ 0 ], operation } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, existingEnAlias );
+			assert.include( response.body.message, enAliases[ 0 ] );
 		} );
 	} );
 

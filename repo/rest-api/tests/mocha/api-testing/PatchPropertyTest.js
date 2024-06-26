@@ -4,7 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { assert, utils } = require( 'api-testing' );
 const {
 	newPatchPropertyRequestBuilder,
-	newAddPropertyStatementRequestBuilder
+	newAddPropertyStatementRequestBuilder, newGetPropertyLabelRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -18,14 +18,21 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	let originalLastModified;
 	let originalRevisionId;
 	let predicatePropertyId;
-	const testEnglishLabel = `some-label-${utils.uniq()}`;
 	const languageWithExistingLabel = 'en';
 	const languageWithExistingDescription = 'en';
+
+	function assertValid200Response( response ) {
+		expect( response ).to.have.status( 200 );
+		assert.strictEqual( response.body.id, testPropertyId );
+		assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
+		assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
+		assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
+	}
 
 	before( async function () {
 		testPropertyId = ( await entityHelper.createEntity( 'property', {
 			datatype: 'string',
-			labels: [ { language: languageWithExistingLabel, value: testEnglishLabel } ],
+			labels: [ { language: languageWithExistingLabel, value: `some-label-${utils.uniq()}` } ],
 			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
 			aliases: [ { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
@@ -43,7 +50,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '200 OK', () => {
-
 		it( 'can patch a property', async () => {
 			const newLabel = `neues deutsches label ${utils.uniq()}`;
 			const updatedDescription = `changed description ${utils.uniq()}`;
@@ -66,8 +72,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				]
 			).withJsonBodyParam( 'comment', editSummary ).makeRequest();
 
-			expect( response ).to.have.status( 200 );
-			assert.strictEqual( response.body.id, testPropertyId );
+			assertValid200Response( response );
 			assert.strictEqual( response.body.labels.de, newLabel );
 			assert.strictEqual( response.body.descriptions.en, updatedDescription );
 			assert.isEmpty( response.body.aliases );
@@ -77,9 +82,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				// eslint-disable-next-line security/detect-non-literal-regexp
 				new RegExp( `^${testPropertyId}\\$[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}$`, 'i' )
 			);
-			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
-			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
-			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 			assert.strictEqual(
@@ -88,10 +90,40 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'allows content-type application/json-patch+json', async () => {
+			const expectedValue = `new english label ${utils.uniq()}`;
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
+				{
+					op: 'add',
+					path: '/labels/en',
+					value: expectedValue
+				}
+			] )
+				.withHeader( 'content-type', 'application/json-patch+json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.strictEqual( response.body.labels.en, expectedValue );
+		} );
+
+		it( 'allows content-type application/json', async () => {
+			const expectedValue = `new english label ${utils.uniq()}`;
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
+				{
+					op: 'add',
+					path: '/labels/en',
+					value: expectedValue
+				}
+			] )
+				.withHeader( 'content-type', 'application/json' )
+				.assertValidRequest().makeRequest();
+
+			assertValid200Response( response );
+			assert.strictEqual( response.body.labels.en, expectedValue );
+		} );
 	} );
 
 	describe( '400 Bad Request', () => {
-
 		it( 'property ID is invalid', async () => {
 			const response = await newPatchPropertyRequestBuilder( 'X123', [] )
 				.assertInvalidRequest().makeRequest();
@@ -129,9 +161,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'tags' );
-			assert.strictEqual( response.body.expectedType, 'array' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
 		} );
 
 		it( 'invalid bot flag type', async () => {
@@ -139,9 +170,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
 		} );
 
 		it( 'invalid comment type', async () => {
@@ -149,9 +179,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'comment' );
-			assert.strictEqual( response.body.expectedType, 'string' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
 		} );
 
 	} );
@@ -192,15 +221,16 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'patch test condition failed', async () => {
 			const operation = { op: 'test', path: '/labels/en', value: 'german-label' };
+			const enLabel = ( await newGetPropertyLabelRequestBuilder( testPropertyId, 'en' ).makeRequest() ).body;
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnglishLabel } );
+			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': enLabel } );
 			assert.include( response.body.message, operation.path );
 			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testEnglishLabel );
+			assert.include( response.body.message, enLabel );
 		} );
-
 	} );
 
 	describe( '422 error response', () => {
