@@ -9,7 +9,6 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
@@ -27,7 +26,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchItemAliasesRouteHandler extends SimpleHandler {
+
 	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	public const ITEM_ID_PATH_PARAM = 'item_id';
 	public const PATCH_BODY_PARAM = 'patch';
@@ -80,7 +81,7 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -118,6 +119,14 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	public function parseBodyData( RequestInterface $request ): ?array {
+		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $request->getBodyType() ?? 'unknown' );
+		$body = parent::parseBodyData( $request );
+		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
+
+		return $body;
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -125,16 +134,6 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-		];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -158,7 +157,7 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => null,
 			],
-		] );
+		];
 	}
 
 	/**
