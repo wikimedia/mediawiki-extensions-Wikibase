@@ -9,6 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguageResponse;
@@ -26,7 +27,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
-	use AssertContentType;
 	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
@@ -77,7 +77,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			$useCaseResponse = $this->addItemAliases->execute(
@@ -103,12 +103,9 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 		return $this->newSuccessHttpResponse( $useCaseResponse );
 	}
 
-	public function parseBodyData( RequestInterface $request ): ?array {
-		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
-		$body = parent::parseBodyData( $request );
-		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
-
-		return $body;
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
 	}
 
 	public function getParamSettings(): array {
@@ -123,6 +120,11 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
+		];
+	}
+
+	public function getBodyParamSettings(): array {
+		return [
 			self::ALIASES_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
