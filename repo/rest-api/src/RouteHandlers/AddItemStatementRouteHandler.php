@@ -10,6 +10,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
@@ -27,7 +28,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class AddItemStatementRouteHandler extends SimpleHandler {
-	use AssertContentType;
 	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
@@ -90,7 +90,7 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 	 */
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			$useCaseResponse = $this->addItemStatement->execute(
@@ -114,12 +114,9 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		}
 	}
 
-	public function parseBodyData( RequestInterface $request ): ?array {
-		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
-		$body = parent::parseBodyData( $request );
-		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
-
-		return $body;
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
 	}
 
 	public function getParamSettings(): array {
@@ -129,6 +126,11 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
+		];
+	}
+
+	public function getBodyParamSettings(): array {
+		return [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => /* object */ 'array',
