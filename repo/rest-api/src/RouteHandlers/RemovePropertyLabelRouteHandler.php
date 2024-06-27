@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel\RemovePropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -24,7 +24,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class RemovePropertyLabelRouteHandler extends SimpleHandler {
-	use AssertContentType;
+
+	use AssertValidTopLevelFields;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -105,6 +106,11 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::PROPERTY_ID_PATH_PARAM => [
@@ -120,13 +126,8 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::TAGS_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -145,7 +146,7 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 			],
-		] );
+		];
 	}
 
 	/**
