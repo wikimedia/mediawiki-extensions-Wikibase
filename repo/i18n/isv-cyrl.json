@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Qiorly"
+		]
+	},
+	"wikibase-edit": "правити",
+	"wikibase-add": "додати",
+	"wikibase-label-empty": "Етикета не была означена",
+	"wikibase-description-empty": "Немаје јешче поданого описа",
+	"wikibase-sitelinks-special": "Друге странице"
+}

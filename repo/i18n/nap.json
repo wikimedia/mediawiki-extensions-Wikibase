@@ -39,7 +39,7 @@
 	"wikibase-description-empty": "Nisciuna descrizione definita",
 	"wikibase-description-edit-placeholder": "miette 'a descrizione",
 	"wikibase-description-edit-placeholder-language-aware": "miette a descrizione dint'a $1",
-	"wikibase-aliases-edit-placeholder": "azzecca cocche aliasse",
+	"wikibase-aliases-edit-placeholder": "azzecca n'aliasse",
 	"wikibase-aliases-edit-placeholder-language-aware": "miette coch'aliasse dint'a $1",
 	"wikibase-aliases-edit-label": "Aliasse, separato 'e tubbe:",
 	"wikibase-diffview-reference": "riferimiento",
