@@ -197,9 +197,8 @@ describe( 'PATCH statement tests', () => {
 						.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'tags' );
-					assert.strictEqual( response.body.expectedType, 'array' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/tags' } );
 				} );
 
 				it( 'invalid bot flag type', async () => {
@@ -207,9 +206,8 @@ describe( 'PATCH statement tests', () => {
 						.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'bot' );
-					assert.strictEqual( response.body.expectedType, 'boolean' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/bot' } );
 				} );
 
 				it( 'invalid comment type', async () => {
@@ -217,9 +215,8 @@ describe( 'PATCH statement tests', () => {
 						.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'comment' );
-					assert.strictEqual( response.body.expectedType, 'string' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/comment' } );
 				} );
 
 				it( 'rejects Property ID change', async () => {

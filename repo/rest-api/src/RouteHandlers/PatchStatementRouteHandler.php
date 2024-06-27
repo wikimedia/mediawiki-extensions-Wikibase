@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
@@ -28,7 +28,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class PatchStatementRouteHandler extends SimpleHandler {
-	use AssertContentType;
+
+	use AssertValidTopLevelFields;
 
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -93,7 +94,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $statementId ): Response {
 		$requestBody = $this->getValidatedBody();
-		'@phan-var array $requestBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $requestBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -118,6 +119,15 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		}
 	}
 
+	public function getSupportedRequestTypes(): array {
+		return [ 'application/json', 'application/json-patch+json' ];
+	}
+
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::STATEMENT_ID_PATH_PARAM => [
@@ -128,13 +138,8 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -158,7 +163,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => null,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( PatchStatementResponse $useCaseResponse ): Response {
