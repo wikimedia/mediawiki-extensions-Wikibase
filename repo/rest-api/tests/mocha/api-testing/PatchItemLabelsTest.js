@@ -65,6 +65,21 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.de, label );
 		} );
 
+		it( 'allows content-type application/json-patch+json', async () => {
+			const label = `neues deutsches label ${utils.uniq()}`;
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[
+					{ op: 'add', path: '/de', value: label }
+				]
+			)
+				.withHeader( 'content-type', 'application/json-patch+json' )
+				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.de, label );
+		} );
+
 		it( 'can patch labels with edit metadata', async () => {
 			const label = `new arabic label ${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot
