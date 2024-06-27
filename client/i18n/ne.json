@@ -13,6 +13,7 @@
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
 	"tooltip-t-wikibase": "जडान गरिएको डाटा भण्डार सामग्रका लागि सूत्र",
+	"wikibase-after-page-delete": "यस पृष्ठको कडी [$1 सम्बन्धित {{WBREPONAME}} वस्तुबाट हटाइएको हुनुपर्दछ]। तपाईले त्यसको जाँच गर्नुपर्ने छ।",
 	"wikibase-comment-add": "एउटा {{WBREPONAME}} आइटम निर्माण भयो।",
 	"wikibase-comment-remove": "सम्बद्ध {{WBREPONAME}} आइटम मेटियो। भाषाको कडी मेटियो।",
 	"wikibase-comment-linked": "एउटा {{WBREPONAME}} आइटम यस पृष्ठसँग जोडिएको छ।",
