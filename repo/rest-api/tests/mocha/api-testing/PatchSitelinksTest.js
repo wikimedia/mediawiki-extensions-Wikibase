@@ -57,6 +57,18 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			assertValidResponse( response, 200, sitelink.title, sitelink.badges );
 		} );
 
+		it( 'allows content-type application/json-patch+json', async () => {
+			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
+			)
+				.withHeader( 'content-type', 'application/json-patch+json' )
+				.assertValidRequest().makeRequest();
+
+			assertValidResponse( response, 200, sitelink.title, sitelink.badges );
+		} );
+
 		it( 'can patch sitelinks with edit metadata', async () => {
 			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 1 ] ] };
 			const user = await action.robby(); // robby is a bot
@@ -112,9 +124,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'tags' );
-			assert.strictEqual( response.body.expectedType, 'array' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
 		} );
 
 		it( 'invalid bot flag type', async () => {
@@ -122,9 +133,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'bot' );
-			assert.strictEqual( response.body.expectedType, 'boolean' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/bot' } );
 		} );
 
 		it( 'comment too long', async () => {
@@ -141,9 +151,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
 
 			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-request-body' );
-			assert.strictEqual( response.body.fieldName, 'comment' );
-			assert.strictEqual( response.body.expectedType, 'string' );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
 		} );
 
 	} );
