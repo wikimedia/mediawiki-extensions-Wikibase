@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
@@ -34,7 +34,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class PatchItemRouteHandler extends SimpleHandler {
 
-	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const PATCH_BODY_PARAM = 'patch';
@@ -93,7 +93,7 @@ class PatchItemRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -131,6 +131,15 @@ class PatchItemRouteHandler extends SimpleHandler {
 		return $httpResponse;
 	}
 
+	public function getSupportedRequestTypes(): array {
+		return [ 'application/json', 'application/json-patch+json' ];
+	}
+
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -141,13 +150,8 @@ class PatchItemRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -171,7 +175,7 @@ class PatchItemRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => null,
 			],
-		] );
+		];
 	}
 
 	private function getUsername(): ?string {
