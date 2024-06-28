@@ -9,6 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
@@ -27,7 +28,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class PatchItemLabelsRouteHandler extends SimpleHandler {
 
-	use AssertContentType;
 	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
@@ -82,7 +82,7 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -132,12 +132,13 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
-	public function parseBodyData( RequestInterface $request ): ?array {
-		$this->assertContentType( [ 'application/json', 'application/json-patch+json' ], $request->getBodyType() ?? 'unknown' );
-		$body = parent::parseBodyData( $request );
-		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
+	public function getSupportedRequestTypes(): array {
+		return [ 'application/json', 'application/json-patch+json' ];
+	}
 
-		return $body;
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
 	}
 
 	public function getParamSettings(): array {
@@ -147,6 +148,11 @@ class PatchItemLabelsRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
+		];
+	}
+
+	public function getBodyParamSettings(): array {
+		return [
 			self::PATCH_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
