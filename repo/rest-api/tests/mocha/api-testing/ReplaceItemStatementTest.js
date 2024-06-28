@@ -231,9 +231,8 @@ describe( 'PUT statement tests', () => {
 						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'tags' );
-					assert.strictEqual( response.body.expectedType, 'array' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/tags' } );
 				} );
 
 				it( 'invalid bot flag type', async () => {
@@ -244,9 +243,8 @@ describe( 'PUT statement tests', () => {
 						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'bot' );
-					assert.strictEqual( response.body.expectedType, 'boolean' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/bot' } );
 				} );
 
 				it( 'invalid comment type', async () => {
@@ -257,9 +255,8 @@ describe( 'PUT statement tests', () => {
 						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'comment' );
-					assert.strictEqual( response.body.expectedType, 'string' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/comment' } );
 				} );
 
 				it( 'invalid statement type: string', async () => {
@@ -267,9 +264,8 @@ describe( 'PUT statement tests', () => {
 						.assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'statement' );
-					assert.strictEqual( response.body.expectedType, 'object' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/statement' } );
 				} );
 
 				it( 'invalid statement type: array', async () => {

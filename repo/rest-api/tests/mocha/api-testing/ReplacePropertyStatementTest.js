@@ -276,54 +276,39 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid edit tag type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
-						testStatementPropertyId
-					);
-					const response = await newReplaceRequestBuilder(
-						testPropertyId,
-						testStatementId,
-						statementSerialization
-					).withJsonBodyParam( 'tags', 'not an array' )
-						.assertInvalidRequest().makeRequest();
+					const statement = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statement )
+						.withJsonBodyParam( 'tags', 'not an array' )
+						.assertInvalidRequest()
+						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'tags' );
-					assert.strictEqual( response.body.expectedType, 'array' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/tags' } );
 				} );
 
 				it( 'invalid bot flag type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
-						testStatementPropertyId
-					);
-					const response = await newReplaceRequestBuilder(
-						testPropertyId,
-						testStatementId,
-						statementSerialization
-					).withJsonBodyParam( 'bot', 'should be a boolean' )
-						.assertInvalidRequest().makeRequest();
+					const statement = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statement )
+						.withJsonBodyParam( 'bot', 'should be a boolean' )
+						.assertInvalidRequest()
+						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'bot' );
-					assert.strictEqual( response.body.expectedType, 'boolean' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/bot' } );
 				} );
 
 				it( 'invalid comment type', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
-						testStatementPropertyId
-					);
-					const response = await newReplaceRequestBuilder(
-						testPropertyId,
-						testStatementId,
-						statementSerialization
-					).withJsonBodyParam( 'comment', 1234 )
-						.assertInvalidRequest().makeRequest();
+					const statement = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statement )
+						.withJsonBodyParam( 'comment', 1234 )
+						.assertInvalidRequest()
+						.makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'comment' );
-					assert.strictEqual( response.body.expectedType, 'string' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/comment' } );
 				} );
 
 				it( 'invalid statement type: string', async () => {
@@ -331,9 +316,8 @@ describe( 'PUT statement tests', () => {
 						.assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-request-body' );
-					assert.strictEqual( response.body.fieldName, 'statement' );
-					assert.strictEqual( response.body.expectedType, 'object' );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: '/statement' } );
 				} );
 
 				it( 'invalid statement type: array', async () => {
