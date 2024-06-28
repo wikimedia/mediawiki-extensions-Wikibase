@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
@@ -27,7 +27,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SetSitelinkRouteHandler extends SimpleHandler {
-	use AssertContentType;
+
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
@@ -81,7 +82,7 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $siteId ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -107,9 +108,11 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 		}
 	}
 
-	/**
-	 * @inheritDoc
-	 */
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -125,13 +128,8 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::SITELINK_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -154,7 +152,7 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( SetSitelinkResponse $useCaseResponse ): Response {

@@ -8,7 +8,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\RemoveSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink\RemoveSitelinkRequest;
@@ -24,7 +24,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class RemoveSitelinkRouteHandler extends SimpleHandler {
-	use AssertContentType;
+
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const SITE_ID_PATH_PARAM = 'site_id';
@@ -96,6 +97,11 @@ class RemoveSitelinkRouteHandler extends SimpleHandler {
 		}
 	}
 
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -116,13 +122,8 @@ class RemoveSitelinkRouteHandler extends SimpleHandler {
 		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::TAGS_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'array',
@@ -141,7 +142,7 @@ class RemoveSitelinkRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessResponse(): Response {
