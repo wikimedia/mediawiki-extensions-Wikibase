@@ -250,6 +250,17 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, invalidEditTag );
 		} );
 
+		it( 'invalid comment type', async () => {
+			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', 'description' )
+				.withJsonBodyParam( 'comment', 1234 )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/comment' } );
+		} );
+
 		it( 'comment too long', async () => {
 			const comment = 'x'.repeat( 501 );
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', 'item description' )

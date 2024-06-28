@@ -217,6 +217,17 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			assert.include( response.body.message, 'en' );
 		} );
 
+		it( 'invalid edit tag type', async () => {
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
+				.withJsonBodyParam( 'tags', 'not an array' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'invalid-value' );
+			assert.deepEqual( response.body.context, { path: '/tags' } );
+		} );
+
 		it( 'invalid edit tag', async () => {
 			const invalidEditTag = 'invalid tag';
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
