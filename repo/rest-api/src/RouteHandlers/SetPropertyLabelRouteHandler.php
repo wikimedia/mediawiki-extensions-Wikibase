@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelResponse;
@@ -25,7 +25,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class SetPropertyLabelRouteHandler extends SimpleHandler {
-	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
@@ -75,7 +75,7 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 		try {
 			$useCaseResponse = $this->setPropertyLabel->execute(
 				new SetPropertyLabelRequest(
@@ -92,6 +92,11 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
 		return $this->newSuccessHttpResponse( $useCaseResponse );
+	}
+
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
 	}
 
 	/**
@@ -115,14 +120,15 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 	/**
 	 * @inheritDoc
 	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::LABEL_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
+				// ParamValidator::PARAM_REQUIRED => true,
+				// We want this param to be required instead of defaulting to '', but the framework currently can't tell a missing param
+				// from an empty one.
+				ParamValidator::PARAM_DEFAULT => '',
 			],
 			self::TAGS_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
@@ -141,7 +147,7 @@ class SetPropertyLabelRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	/**
