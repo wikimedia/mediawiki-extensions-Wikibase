@@ -85,13 +85,20 @@ abstract class DatabaseTermStoreWriterBase {
 	 * and return term in lang IDs that are no longer referenced
 	 * and might now need to be cleaned up.
 	 *
+	 * Updating the current state is done on a best effort basis, if two instances
+	 * try to update an entity's terms (near) simultaneously the records might end
+	 * up in an inconsistent state. Despite that all removed <prefix>_term_in_lang_ids
+	 * will always be accurately reported, we will never silently remove a reference
+	 * to the wbt_term_in_lang table.
+	 *
 	 * @param Int32EntityId $entityId
 	 * @param Fingerprint $fingerprint
 	 *
-	 * @return int[] <prefix>_term_in_lang_ids to that are no longer used by $entityId
-	 * The returned term in lang IDs might still be used in wbt_<entity>_terms rows
-	 * for other entity IDs or elsewhere, and this should be checked just before cleanup.
-	 * However, that may happen in a different transaction than this call.
+	 * @return int[] <prefix>_term_in_lang_ids that we removed (references to the
+	 * wbt_term_in_lang table).
+	 * The returned term in lang IDs might still be used in other wbt_<entity>_terms rows,
+	 * in case of a race condition potentially even on the same entity. This should be checked
+	 * just before cleanup. However, that may happen in a different transaction than this call.
 	 */
 	private function acquireAndInsertTerms( Int32EntityId $entityId, Fingerprint $fingerprint ): array {
 		$entityNumericId = $entityId->getNumericId();
@@ -105,11 +112,6 @@ abstract class DatabaseTermStoreWriterBase {
 
 		// Find term entries that already exist for the entity
 		$oldTermInLangIds = ( clone $queryBuilder )->fetchFieldValues();
-
-		// lock them with FOR UPDATE
-		if ( $oldTermInLangIds !== [] ) {
-			$oldTermInLangIds = ( clone $queryBuilder )->forUpdate()->fetchFieldValues();
-		}
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
 		$termInLangIdsToClean = [];
