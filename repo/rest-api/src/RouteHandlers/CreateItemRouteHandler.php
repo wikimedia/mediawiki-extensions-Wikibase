@@ -4,10 +4,10 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
-use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
@@ -32,7 +32,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class CreateItemRouteHandler extends SimpleHandler {
 
-	use AssertContentType;
 	use AssertValidTopLevelFields;
 
 	private const ITEM_BODY_PARAM = 'item';
@@ -87,7 +86,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 
 	public function runUseCase(): Response {
 		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per parseBodyData()
+		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			return $this->newSuccessHttpResponse(
@@ -106,15 +105,12 @@ class CreateItemRouteHandler extends SimpleHandler {
 		}
 	}
 
-	public function parseBodyData( RequestInterface $request ): ?array {
-		$this->assertContentType( [ 'application/json' ], $request->getBodyType() ?? 'unknown' );
-		$body = parent::parseBodyData( $request );
-		$this->assertValidTopLevelTypes( $body, $this->getBodyParamSettings() );
-
-		return $body;
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
 	}
 
-	public function getParamSettings(): array {
+	public function getBodyParamSettings(): array {
 		return [
 			self::ITEM_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
