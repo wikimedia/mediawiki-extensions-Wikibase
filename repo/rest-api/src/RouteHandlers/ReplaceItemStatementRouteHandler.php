@@ -9,7 +9,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use MediaWiki\Rest\Validator\BodyValidator;
+use MediaWiki\Rest\Validator\Validator;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement\ReplaceItemStatement;
@@ -27,7 +27,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class ReplaceItemStatementRouteHandler extends SimpleHandler {
-	use AssertContentType;
+	use AssertValidTopLevelFields;
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
@@ -91,7 +91,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $statementId ): Response {
 		$requestBody = $this->getValidatedBody();
-		'@phan-var array $requestBody'; // guaranteed to be an array per getBodyValidator()
+		'@phan-var array $requestBody'; // guaranteed to be an array per getBodyParamSettings()
 
 		try {
 			$useCaseResponse = $this->useCase->execute( new ReplaceItemStatementRequest(
@@ -114,6 +114,11 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		}
 	}
 
+	public function validate( Validator $restValidator ): void {
+		$this->assertValidTopLevelTypes( $this->getRequest()->getParsedBody(), $this->getBodyParamSettings() );
+		parent::validate( $restValidator );
+	}
+
 	public function getParamSettings(): array {
 		return [
 			self::ITEM_ID_PATH_PARAM => [
@@ -129,16 +134,11 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getBodyValidator( $contentType ): BodyValidator {
-		$this->assertContentType( [ 'application/json' ], $contentType );
-
-		return new TypeValidatingJsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			self::STATEMENT_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'object',
+				ParamValidator::PARAM_TYPE => /* object */ 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
@@ -158,7 +158,7 @@ class ReplaceItemStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
-		] );
+		];
 	}
 
 	private function newSuccessHttpResponse( ReplaceStatementResponse $useCaseResponse ): Response {
