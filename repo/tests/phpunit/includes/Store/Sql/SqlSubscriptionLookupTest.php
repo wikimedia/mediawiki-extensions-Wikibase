@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SqlSubscriptionLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function insertSubscriptions( array $rows ) {
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wb_changes_subscription' )
 			->rows( $rows )
 			->caller( __METHOD__ )

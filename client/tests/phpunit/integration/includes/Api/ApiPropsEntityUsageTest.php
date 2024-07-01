@@ -51,7 +51,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->newDeleteQueryBuilder()
+			$this->getDb()->newDeleteQueryBuilder()
 				->deleteFrom( $table )
 				->where( IDatabase::ALL_ROWS )
 				->caller( __METHOD__ )
@@ -60,7 +60,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 			foreach ( $rows as $row ) {
 				$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 				$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-				$page->insertOn( $this->db, $row['page_id'] );
+				$page->insertOn( $this->getDb(), $row['page_id'] );
 			}
 		}
 	}
@@ -93,13 +93,13 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->newDeleteQueryBuilder()
+			$this->getDb()->newDeleteQueryBuilder()
 				->deleteFrom( $table )
 				->where( IDatabase::ALL_ROWS )
 				->caller( __METHOD__ )
 				->execute();
 
-			$this->db->newInsertQueryBuilder()
+			$this->getDb()->newInsertQueryBuilder()
 				->insertInto( $table )
 				->rows( $rows )
 				->caller( __METHOD__ )

@@ -135,7 +135,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 		$loadBalancer->expects( $this->exactly( $getConnectionCount ) )
 			->method( 'getConnection' )
 			->willReturnCallback( function( $id ) use ( $selectCount ) {
-				$db = $realDB = $this->db;
+				$db = $realDB = $this->getDb();
 
 				if ( $id === ILoadBalancer::DB_REPLICA ) {
 					// This is a (fake) lagged database connection.

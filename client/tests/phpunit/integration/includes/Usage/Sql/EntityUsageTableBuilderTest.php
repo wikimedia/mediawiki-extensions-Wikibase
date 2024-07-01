@@ -74,7 +74,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 				'pp_value' => (string)$entityId,
 			];
 		}
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'page_props' )
 			->rows( $rows )
 			->caller( __METHOD__ )
@@ -85,7 +85,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 	 * @return string[]
 	 */
 	private function fetchAllUsageStrings(): array {
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ] )
 			->from( EntityUsageTable::DEFAULT_TABLE_NAME )
 			->caller( __METHOD__ )->fetchResultSet();

@@ -54,7 +54,7 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			$this->getRepoDomainDb(),
 			new ClientDomainDb(
 				LBFactorySingle::newFromConnection( $this->db ),
-				$this->db->getDomainID()
+				$this->getDb()->getDomainID()
 			)
 		);
 	}

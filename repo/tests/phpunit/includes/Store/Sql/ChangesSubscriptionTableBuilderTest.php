@@ -101,7 +101,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 				'ips_site_page' => 'Page_about_Q' . $itemId . '_on_' . $siteId,
 			];
 		}
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wb_items_per_site' )
 			->rows( $rows )
 			->caller( __METHOD__ )
@@ -109,7 +109,7 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions() {
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'cs_subscriber_id', 'cs_entity_id' ] )
 			->from( self::TABLE_NAME )
 			->caller( __METHOD__ )->fetchResultSet();

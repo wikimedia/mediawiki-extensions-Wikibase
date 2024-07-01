@@ -50,13 +50,13 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->newDeleteQueryBuilder()
+			$this->getDb()->newDeleteQueryBuilder()
 				->deleteFrom( $table )
 				->where( IDatabase::ALL_ROWS )
 				->caller( __METHOD__ )
 				->execute();
 
-			$this->db->newInsertQueryBuilder()
+			$this->getDb()->newInsertQueryBuilder()
 				->insertInto( $table )
 				->rows( $rows )
 				->caller( __METHOD__ )

@@ -111,7 +111,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testReallyDoQuery() {
-		if ( $this->db->getType() === 'mysql' &&
+		if ( $this->getDb()->getType() === 'mysql' &&
 			$this->usesTemporaryTables()
 		) {
 			$this->markTestSkipped( 'MySQL does not allow self-joins on temporary tables' );
@@ -196,7 +196,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
-			$this->db->newDeleteQueryBuilder()
+			$this->getDb()->newDeleteQueryBuilder()
 				->deleteFrom( $table )
 				->where( IDatabase::ALL_ROWS )
 				->caller( __METHOD__ )
@@ -206,10 +206,10 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				foreach ( $rows as $row ) {
 					$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
 					$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $title );
-					$page->insertOn( $this->db, $row['page_id'] );
+					$page->insertOn( $this->getDb(), $row['page_id'] );
 				}
 			} else {
-				$this->db->newInsertQueryBuilder()
+				$this->getDb()->newInsertQueryBuilder()
 					->insertInto( $table )
 					->rows( $rows )
 					->caller( __METHOD__ )

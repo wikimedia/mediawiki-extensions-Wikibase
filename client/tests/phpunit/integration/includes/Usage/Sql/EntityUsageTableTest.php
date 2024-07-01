@@ -49,7 +49,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
-		return new EntityUsageTable( new ItemIdParser(), $this->db, $batchSize );
+		return new EntityUsageTable( new ItemIdParser(), $this->getDb(), $batchSize );
 	}
 
 	public function testAddUsages() {
@@ -297,7 +297,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertSame( [], $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
-		if ( $this->db->getType() === 'mysql' ) {
+		if ( $this->getDb()->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that
 			// doesn't work in unit tests.
 			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
@@ -337,7 +337,7 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	 * @return bool
 	 */
 	private function rowExists( array $conditions ) {
-		$count = $this->db->newSelectQueryBuilder()
+		$count = $this->getDb()->newSelectQueryBuilder()
 			->table( EntityUsageTable::DEFAULT_TABLE_NAME )
 			->where( $conditions )
 			->limit( 1 ) // we only care if the count is > 0 or not

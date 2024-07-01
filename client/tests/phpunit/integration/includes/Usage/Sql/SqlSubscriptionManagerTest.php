@@ -76,7 +76,7 @@ class SqlSubscriptionManagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function fetchAllSubscriptions(): array {
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'cs_subscriber_id', 'cs_entity_id' ] )
 			->from( 'wb_changes_subscription' )
 			->caller( __METHOD__ )->fetchResultSet();

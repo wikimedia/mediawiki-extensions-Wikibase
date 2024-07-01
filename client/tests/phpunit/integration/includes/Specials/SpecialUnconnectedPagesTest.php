@@ -42,7 +42,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$namespace = $this->getDefaultWikitextNS();
 
 		// Remove old stray pages.
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -54,16 +54,16 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		$furtherUnconnectedTitle = Title::makeTitle( $namespace, 'SpecialUnconnectedPagesTest-unconnected2' );
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $expectedUnconnectedTitle );
-		$page->insertOn( $this->db, 100 );
+		$page->insertOn( $this->getDb(), 100 );
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $unconnectedTitle );
-		$page->insertOn( $this->db, 200 );
+		$page->insertOn( $this->getDb(), 200 );
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $connectedTitle );
-		$page->insertOn( $this->db, 300 );
+		$page->insertOn( $this->getDb(), 300 );
 
 		$page = $this->getServiceContainer()->getWikiPageFactory()->newFromTitle( $furtherUnconnectedTitle );
-		$page->insertOn( $this->db, 400 );
+		$page->insertOn( $this->getDb(), 400 );
 	}
 
 	private function insertPageProp(
@@ -72,7 +72,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		string $value = '',
 		float $sortKey = 0.0
 	): void {
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'page_props' )
 			->row( [
 				'pp_page' => $pageId,
@@ -112,7 +112,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	public function testReallyDoQuery() {
 		// Remove old stray page props
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page_props' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -157,7 +157,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	public function testReallyDoQuery_noResults() {
 		// Remove old stray page props
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page_props' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )
@@ -181,7 +181,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	 */
 	public function testReallyDoQuery_unexpectedUnconnectedPage() {
 		// Make sure only the "unexpectedUnconnectedPage" page prop exists
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'page_props' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )

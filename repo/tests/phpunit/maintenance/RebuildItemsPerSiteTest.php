@@ -88,7 +88,7 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->loadWithArgv( $argv );
 		$this->maintenance->execute();
 
-		$existingSiteLinks = $this->db->newSelectQueryBuilder()
+		$existingSiteLinks = $this->getDb()->newSelectQueryBuilder()
 			->select( 'ips_site_page' )
 			->from( 'wb_items_per_site' )
 			->caller( __METHOD__ )->fetchFieldValues();
@@ -106,7 +106,7 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->maintenance->execute();
 		unlink( $file );
 
-		$existingSiteLinks = $this->db->newSelectQueryBuilder()
+		$existingSiteLinks = $this->getDb()->newSelectQueryBuilder()
 			->select( 'ips_site_page' )
 			->from( 'wb_items_per_site' )
 			->caller( __METHOD__ )->fetchFieldValues();
@@ -156,7 +156,7 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 	}
 
 	private function clearItemsPerSite(): void {
-		$this->db->newDeleteQueryBuilder()
+		$this->getDb()->newDeleteQueryBuilder()
 			->deleteFrom( 'wb_items_per_site' )
 			->where( IDatabase::ALL_ROWS )
 			->caller( __METHOD__ )

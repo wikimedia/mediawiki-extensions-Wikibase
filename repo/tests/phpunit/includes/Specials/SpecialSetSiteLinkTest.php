@@ -79,7 +79,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Hack: Make sure the 'user_autocreate_serial' table is not cleared between test runs,
 		// to match the 'user' table (which gets marked as used by createItems()).
 		// See T353961#9595560 and T353961#9595936.
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'user_autocreate_serial' )
 			->row( [
 				'uas_shard' => 0,
@@ -88,7 +88,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			] )
 			->caller( __METHOD__ )
 			->execute();
-		$this->db->truncateTable( 'user_autocreate_serial' );
+		$this->getDb()->truncateTable( 'user_autocreate_serial' );
 	}
 
 	protected function newSpecialPage() {
@@ -292,7 +292,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		);
 
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $item->getId() );
-		$tags = ChangeTags::getTags( $this->db, null, $title->getLatestRevID() );
+		$tags = ChangeTags::getTags( $this->getDb(), null, $title->getLatestRevID() );
 		$this->assertArrayEquals( self::TAGS, $tags );
 	}
 

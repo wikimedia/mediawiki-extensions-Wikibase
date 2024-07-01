@@ -23,7 +23,7 @@ class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		if ( $this->db->getType() !== 'mysql' ) {
+		if ( $this->getDb()->getType() !== 'mysql' ) {
 			$this->markTestSkipped( 'Can only be tested with a mysql DB' );
 		}
 	}
