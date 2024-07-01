@@ -18,7 +18,7 @@
 	"wikibase-statementsection-statements": "ၶေႃႈၸၼ်ဢွၵ်ႇ",
 	"wikibase-sitelinks-special": "ဝႅပ်ႉသၢႆႉ တၢင်ႇဢၼ်",
 	"wikibase-statementview-rank-normal": "ၸၼ်ႉပူင်ႇၵၢင်",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|reference|ငဝ်ႈၵုမ်းပိူင်}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ဢိင်|ဢိင်}}",
 	"wikibase-gotolinkedpage-error-item-not-found": "ဢၼ်ၼႆႉ ဢမ်ႇႁၼ်",
 	"wikibase-newentity-description": "ၶေႃႈသပ်းလႅင်း:",
 	"wikibase-setdescription-submit": "သႂ်ႇ ၶေႃႈသပ်းလႅင်း",
