@@ -180,7 +180,7 @@
 	"wikibase-history-title-with-label": "Хийцамийн истори «$2» ($1)",
 	"wikibase-listproperties-datatype": "Хаамийн тайпа:",
 	"wikibase-listproperties-all": "Хаамийн массо тайпанаш",
-	"wikibase-listproperties-submit": "Каро",
+	"wikibase-listproperties-submit": "Лаха",
 	"wikibase-listproperties-invalid-datatype": "«$1» — магийна йоцу хаамийн тайпа.",
 	"special-entitydata": "Духхера хаамаш",
 	"wikibase-entitydata-bad-id": "ТӀецакхочу идентификатор: $1.",

@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Iketsi",
-			"Malafaya"
+			"Malafaya",
+			"Morozof"
 		]
 	},
 	"wikibase-edit": "redakön",
 	"wikibase-add": "läükön",
+	"wikibase-label-empty": "Mäk no pefümükon",
+	"wikibase-description-empty": "Bepenam no pefümükon",
 	"wikibase-sitelink-page-edit-placeholder": "pad",
 	"wikibase-sitelinks-special": "Bevüresodatopäds votik",
 	"wikibase-itembytitle-lookup-page": "Pad:",
