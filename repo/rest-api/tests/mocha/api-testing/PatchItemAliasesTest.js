@@ -80,7 +80,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		it( 'can patch aliases providing edit metadata', async () => {
 			const newDeAlias = `de-alias-${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,

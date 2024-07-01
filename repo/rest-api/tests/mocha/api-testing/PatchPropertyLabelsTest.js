@@ -56,7 +56,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		it( 'can patch labels with edit metadata', async () => {
 			const label = `new arabic label ${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,

@@ -4,7 +4,7 @@
 	"description": "OpenAPI definition of Wikibase REST API",
 	"scripts": {
 		"test": "npm run lint",
-		"api-testing:e2e": "npm run mocha -- --recursive tests/mocha/api-testing",
+		"api-testing:e2e": "npm run mocha -- --recursive --require tests/mocha/api-testing/hooks.js --parallel tests/mocha/api-testing",
 		"api-testing:spec": "npm run mocha -- --recursive --ext Test.js --require tests/mocha/openapi-validation/hooks.js --parallel tests/mocha/openapi-validation",
 		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
@@ -23,7 +23,7 @@
 	"devDependencies": {
 		"@apidevtools/swagger-cli": "^4.0.4",
 		"@apidevtools/swagger-parser": "^10.1.0",
-		"api-testing": "^1.5.0",
+		"api-testing": "^1.7.0",
 		"chai-openapi-response-validator": "^0.14.2",
 		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "^10.2.4",

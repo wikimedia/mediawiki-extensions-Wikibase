@@ -78,7 +78,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		it( 'can patch descriptions with edit metadata', async () => {
 			const description = `${utils.uniq()} وصف عربي جديد`;
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'I made a patch';
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				testItemId,

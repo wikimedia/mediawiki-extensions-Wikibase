@@ -44,7 +44,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can DELETE a sitelink with edit metadata provided', async () => {
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'removed a bad sitelink!';
 
 			const response = await newRemoveSitelinkRequestBuilder( testItemId, siteId )
