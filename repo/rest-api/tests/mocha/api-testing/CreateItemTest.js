@@ -514,8 +514,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				statements: { [ predicatePropertyId ]: invalidStatementGroupType }
 			} ).assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-group-type', { path: predicatePropertyId } );
-			assert.equal( response.body.message, 'Not a valid statement group' );
+			const path = '/item/statements/' + predicatePropertyId;
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'invalid statement type', async () => {

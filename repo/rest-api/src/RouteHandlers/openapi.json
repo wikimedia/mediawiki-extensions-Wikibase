@@ -4214,9 +4214,6 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
               },
-              "invalid-statement-group-type": {
-                "$ref": "#/components/examples/InvalidStatementGroupTypeExample"
-              },
               "invalid-statement-type": {
                 "$ref": "#/components/examples/InvalidStatementTypeExample"
               },
@@ -8466,15 +8463,6 @@
           },
           "qualifiers": [],
           "references": []
-        }
-      },
-      "InvalidStatementGroupTypeExample": {
-        "value": {
-          "code": "invalid-statement-group-type",
-          "message": "Not a valid statement group",
-          "context": {
-            "path": "{property_id}"
-          }
         }
       },
       "InvalidStatementTypeExample": {

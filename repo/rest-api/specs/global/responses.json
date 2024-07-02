@@ -452,7 +452,6 @@
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyWithLanguageContextExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongWithLanguageContextExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
-					"invalid-statement-group-type": { "$ref": "./examples.json#/InvalidStatementGroupTypeExample" },
 					"invalid-statement-type": { "$ref": "./examples.json#/InvalidStatementTypeExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },

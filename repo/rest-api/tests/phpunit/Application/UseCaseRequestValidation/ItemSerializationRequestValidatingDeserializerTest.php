@@ -512,9 +512,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				[ StatementsValidator::CONTEXT_PATH => 'P1' ]
 			),
 			new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_GROUP_TYPE,
-				'Not a valid statement group',
-				[ UseCaseError::CONTEXT_PATH => 'P1' ]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/statements/P1'",
+				[ UseCaseError::CONTEXT_PATH => '/item/statements/P1' ]
 			),
 		];
 
