@@ -5,7 +5,7 @@
 	"scripts": {
 		"test": "npm run lint",
 		"api-testing:e2e": "npm run mocha -- --recursive tests/mocha/api-testing",
-		"api-testing:spec": "npm run mocha -- --recursive --ext Test.js tests/mocha/openapi-validation",
+		"api-testing:spec": "npm run mocha -- --recursive --ext Test.js --require tests/mocha/openapi-validation/hooks.js --parallel tests/mocha/openapi-validation",
 		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel lint:*",

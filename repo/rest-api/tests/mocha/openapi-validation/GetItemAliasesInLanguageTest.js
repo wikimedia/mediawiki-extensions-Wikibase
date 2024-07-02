@@ -1,10 +1,9 @@
 'use strict';
 
 const { utils } = require( 'api-testing' );
-const chai = require( 'chai' );
+const { expect } = require( '../helpers/chaiHelper' );
 const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
 const { newGetItemAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const expect = chai.expect;
 
 describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 
