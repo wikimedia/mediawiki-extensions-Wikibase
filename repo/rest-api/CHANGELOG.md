@@ -1,4 +1,4 @@
-# CHANGELOG
+# CHANGELOG {#wb_rest_api_changelog}
 
 ## Version 0.4
 

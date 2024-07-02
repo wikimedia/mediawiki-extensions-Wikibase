@@ -58,6 +58,13 @@ API_URL='https://wikidata.org/w/rest.php' npm run build:docs
 
 The autodocs and the bundled OpenAPI specification files are generated in the `../../docs/rest-api/` directory.
 
+## Versioning
+
+* The _interface_ of the REST API is versioned, not the OpenAPI schema document. This means that changes to the code and OpenAPI schema, that don't change the interface, are allowed without increasing the version.
+* Versions will mostly follow the format described by [SemVer 2.0.0]. However, only `MAJOR.MINOR` versions, omitting `.PATCH`, will be created as we see little use for patch versions.
+* The version of the REST API is recorded in the `/info/version` field of the OpenAPI schema.
+* Changes for each version will be recorded in @subpage wb_rest_api_changelog "CHANGELOG.md".
+
 ## Development
 
 * @subpage rest_adr_index
@@ -115,4 +122,5 @@ The following needs to be correctly set up in order for all the tests to pass:
 [client and repo]: @ref docs_topics_repo-client-relationship
 [MediaWiki API integration tests]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests
 [OAuth extension]: https://www.mediawiki.org/wiki/Extension:OAuth
+[SemVer 2.0.0]: https://semver.org/spec/v2.0.0.html
 [Wikibase.ci.php]: https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/repo/config/Wikibase.ci.php
