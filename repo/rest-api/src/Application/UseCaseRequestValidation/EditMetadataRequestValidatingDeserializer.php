@@ -40,10 +40,8 @@ class EditMetadataRequestValidatingDeserializer {
 	private function validateEditTags( array $editTags ): void {
 		$validationError = $this->validator->validateEditTags( $editTags );
 		if ( $validationError ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_EDIT_TAG,
-				"Invalid MediaWiki tag: {$validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE]}"
-			);
+			$tagIndex = array_search( $validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE], $editTags );
+			throw UseCaseError::newInvalidValue( "/tags/$tagIndex" );
 		}
 	}
 

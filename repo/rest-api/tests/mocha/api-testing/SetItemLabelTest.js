@@ -268,14 +268,12 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid edit tag', async () => {
-			const invalidEditTag = 'invalid tag';
 			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', 'test label' )
-				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-edit-tag' );
-			assert.include( response.body.message, invalidEditTag );
+			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
 		} );
 
 		it( 'invalid bot flag', async () => {

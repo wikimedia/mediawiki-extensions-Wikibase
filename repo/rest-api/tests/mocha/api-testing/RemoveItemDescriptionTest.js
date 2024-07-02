@@ -81,12 +81,10 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		it( 'invalid edit tag', async () => {
-			const invalidEditTag = 'invalid tag';
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, 'en' )
-				.withJsonBodyParam( 'tags', [ invalidEditTag ] ).assertValidRequest().makeRequest();
+				.withJsonBodyParam( 'tags', [ 'invalid tag' ] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-edit-tag' );
-			assert.include( response.body.message, invalidEditTag );
+			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
 		} );
 
 		it( 'invalid edit tag type', async () => {

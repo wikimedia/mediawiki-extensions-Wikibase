@@ -1,8 +1,9 @@
 {
-	"InvalidEditTagExample": {
+	"InvalidValueExample": {
 		"value": {
-			"code": "invalid-edit-tag",
-			"message": "Invalid MediaWiki tag: {tag}"
+			"code": "invalid-value",
+			"message": "Invalid value at '{json_pointer}'",
+			"context": { "path": "{json_pointer}" }
 		}
 	},
 	"CommentTooLongExample": {

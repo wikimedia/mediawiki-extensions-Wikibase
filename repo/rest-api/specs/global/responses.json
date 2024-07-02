@@ -482,7 +482,7 @@
 					"invalid-input-sitelink-badge": {
 						"$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample"
 					},
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -642,7 +642,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
@@ -663,7 +663,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
@@ -684,7 +684,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
@@ -712,7 +712,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
@@ -740,7 +740,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
@@ -767,7 +767,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -787,7 +787,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -807,7 +807,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -826,7 +826,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -845,7 +845,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-title-field": { "$ref": "./examples.json#/InvalidTitleExample" },
 					"title-field-empty": { "$ref": "./examples.json#/TitleIsEmptyExample" },
@@ -880,7 +880,7 @@
 					"item-label-description-duplicate": {
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -908,7 +908,7 @@
 					"property-label-duplicate": {
 						"$ref": "./examples.json#/PropertyLabelDuplicateExample"
 					},
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -936,7 +936,7 @@
 					"item-label-description-duplicate": {
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -961,7 +961,7 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -980,7 +980,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -999,7 +999,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -1018,7 +1018,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -1037,7 +1037,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -1061,7 +1061,7 @@
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -1085,7 +1085,7 @@
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
 			}
@@ -1155,7 +1155,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
@@ -1178,7 +1178,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
@@ -1201,7 +1201,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
@@ -1548,7 +1548,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
@@ -1578,7 +1578,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
@@ -1608,7 +1608,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
-					"invalid-edit-tag": { "$ref": "./examples.json#/InvalidEditTagExample" },
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"

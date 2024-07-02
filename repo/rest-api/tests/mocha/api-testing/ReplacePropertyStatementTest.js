@@ -260,7 +260,6 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid edit tag', async () => {
-					const invalidEditTag = 'invalid tag';
 					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
 						testStatementPropertyId
 					);
@@ -268,11 +267,10 @@ describe( 'PUT statement tests', () => {
 						testPropertyId,
 						testStatementId,
 						statementSerialization
-					).withJsonBodyParam( 'tags', [ invalidEditTag ] )
+					).withJsonBodyParam( 'tags', [ 'invalid tag' ] )
 						.assertValidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-edit-tag' );
-					assert.include( response.body.message, invalidEditTag );
+					assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
 				} );
 
 				it( 'invalid edit tag type', async () => {

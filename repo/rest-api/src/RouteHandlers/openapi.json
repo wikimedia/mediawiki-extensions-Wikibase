@@ -4256,8 +4256,8 @@
               "invalid-input-sitelink-badge": {
                 "$ref": "#/components/examples/ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4484,8 +4484,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4519,8 +4519,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4554,8 +4554,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4598,8 +4598,8 @@
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4642,8 +4642,8 @@
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4683,8 +4683,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4715,8 +4715,8 @@
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4747,8 +4747,8 @@
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4776,8 +4776,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4805,8 +4805,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4870,8 +4870,8 @@
               "item-label-description-duplicate": {
                 "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4914,8 +4914,8 @@
               "property-label-duplicate": {
                 "$ref": "#/components/examples/PropertyLabelDuplicateExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4958,8 +4958,8 @@
               "item-label-description-duplicate": {
                 "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4999,8 +4999,8 @@
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5028,8 +5028,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5057,8 +5057,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5086,8 +5086,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5115,8 +5115,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5159,8 +5159,8 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5203,8 +5203,8 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5301,8 +5301,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5342,8 +5342,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5383,8 +5383,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5942,8 +5942,8 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -5992,8 +5992,8 @@
               "item-statement-id-mismatch": {
                 "$ref": "#/components/examples/ItemStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -6042,8 +6042,8 @@
               "property-statement-id-mismatch": {
                 "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
               },
-              "invalid-edit-tag": {
-                "$ref": "#/components/examples/InvalidEditTagExample"
+              "invalid-value": {
+                "$ref": "#/components/examples/InvalidValueExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -7407,10 +7407,13 @@
       }
     },
     "examples": {
-      "InvalidEditTagExample": {
+      "InvalidValueExample": {
         "value": {
-          "code": "invalid-edit-tag",
-          "message": "Invalid MediaWiki tag: {tag}"
+          "code": "invalid-value",
+          "message": "Invalid value at '{json_pointer}'",
+          "context": {
+            "path": "{json_pointer}"
+          }
         }
       },
       "CommentTooLongExample": {

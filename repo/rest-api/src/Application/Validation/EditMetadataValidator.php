@@ -41,7 +41,7 @@ class EditMetadataValidator {
 			if ( !in_array( $tag, $this->allowedTags ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_TAG,
-					[ self::CONTEXT_TAG_VALUE => json_encode( $tag ) ]
+					[ self::CONTEXT_TAG_VALUE => $tag ]
 				);
 			}
 		}

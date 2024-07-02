@@ -105,16 +105,12 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid edit tag', async () => {
-			const invalidEditTag = 'invalid tag';
 			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
-				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'invalid-edit-tag' );
-			assert.include( response.body.message, invalidEditTag );
+			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
 		} );
 
 		it( 'invalid edit tag type', async () => {
