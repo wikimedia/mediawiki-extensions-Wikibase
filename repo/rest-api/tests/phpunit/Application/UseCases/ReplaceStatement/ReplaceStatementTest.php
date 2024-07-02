@@ -185,7 +185,9 @@ class ReplaceStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE, $e->getErrorCode() );
+			$this->assertSame( 'The input value cannot be modified', $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PATH => '/statement/id' ], $e->getErrorContext() );
 		}
 	}
 
@@ -238,7 +240,9 @@ class ReplaceStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE, $e->getErrorCode() );
+			$this->assertSame( 'The input value cannot be modified', $e->getErrorMessage() );
+			$this->assertSame( [ UseCaseError::CONTEXT_PATH => '/statement/property/id' ], $e->getErrorContext() );
 		}
 	}
 

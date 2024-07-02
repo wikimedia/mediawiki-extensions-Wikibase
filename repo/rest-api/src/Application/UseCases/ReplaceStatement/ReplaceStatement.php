@@ -51,8 +51,9 @@ class ReplaceStatement {
 			$statement->setGuid( "$statementId" );
 		} elseif ( $statement->getGuid() !== "$statementId" ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
-				'Cannot change the ID of the existing statement'
+				UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE,
+				'The input value cannot be modified',
+				[ UseCaseError::CONTEXT_PATH => '/statement/id' ]
 			);
 		}
 
@@ -72,8 +73,9 @@ class ReplaceStatement {
 			);
 		} catch ( PropertyChangedException $e ) {
 			throw new UseCaseError(
-				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
-				'Cannot change the property of the existing statement'
+				UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE,
+				'The input value cannot be modified',
+				[ UseCaseError::CONTEXT_PATH => '/statement/property/id' ]
 			);
 		}
 

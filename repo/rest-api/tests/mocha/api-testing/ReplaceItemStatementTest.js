@@ -196,7 +196,12 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-operation-change-statement-id' );
+					assertValidError(
+						response,
+						400,
+						'cannot-modify-read-only-value',
+						{ path: '/statement/id' }
+					);
 				} );
 
 				it( 'invalid operation - new statement has a different Property ID', async () => {
@@ -208,7 +213,12 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
 						.assertValidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-operation-change-property-of-statement' );
+					assertValidError(
+						response,
+						400,
+						'cannot-modify-read-only-value',
+						{ path: '/statement/property/id' }
+					);
 				} );
 
 				it( 'invalid edit tag', async () => {
