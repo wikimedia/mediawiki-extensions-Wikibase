@@ -104,10 +104,7 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 			self::DESCRIPTION_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
-				// ParamValidator::PARAM_REQUIRED => true,
-				// We want this param to be required instead of defaulting to '',
-				// but the framework currently can't tell a missing param from an empty one.
-				ParamValidator::PARAM_DEFAULT => '',
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			self::TAGS_BODY_PARAM => [
 				self::PARAM_SOURCE => 'body',
