@@ -170,6 +170,15 @@
 			}
 		}
 	},
+	"CannotModifyReadOnlyValue": {
+		"value": {
+			"code": "cannot-modify-read-only-value",
+			"message": "The input value cannot be modified",
+			"context": {
+				"path": "{readonly_value_pointer}"
+			}
+		}
+	},
 	"InvalidOperationChangeStatementId": {
 		"value": {
 			"code": "invalid-operation-change-statement-id",

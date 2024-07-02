@@ -4566,11 +4566,8 @@
               "statement-data-invalid-field": {
                 "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
-              },
-              "invalid-operation-change-property-of-statement": {
-                "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
+              "cannot-modify-read-only-value": {
+                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
               }
             }
           }
@@ -4610,11 +4607,8 @@
               "statement-data-invalid-field": {
                 "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
-              },
-              "invalid-operation-change-property-of-statement": {
-                "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
+              "cannot-modify-read-only-value": {
+                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
               }
             }
           }
@@ -4654,11 +4648,8 @@
               "statement-data-invalid-field": {
                 "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
-              },
-              "invalid-operation-change-property-of-statement": {
-                "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
+              "cannot-modify-read-only-value": {
+                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
               }
             }
           }
@@ -7591,6 +7582,15 @@
           "context": {
             "path": "{field}",
             "value": "{value}"
+          }
+        }
+      },
+      "CannotModifyReadOnlyValue": {
+        "value": {
+          "code": "cannot-modify-read-only-value",
+          "message": "The input value cannot be modified",
+          "context": {
+            "path": "{readonly_value_pointer}"
           }
         }
       },

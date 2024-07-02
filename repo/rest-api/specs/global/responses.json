@@ -688,11 +688,8 @@
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					"cannot-modify-read-only-value": {
+						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
 				}
 			}
@@ -716,11 +713,8 @@
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					"cannot-modify-read-only-value": {
+						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
 				}
 			}
@@ -744,11 +738,8 @@
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
+					"cannot-modify-read-only-value": {
+						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
 				}
 			}

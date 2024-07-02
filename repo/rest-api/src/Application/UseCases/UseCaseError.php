@@ -16,6 +16,7 @@ class UseCaseError extends UseCaseException {
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
 	public const INVALID_ALIAS = 'invalid-alias';
+	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
 	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const DESCRIPTION_EMPTY = 'description-empty';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
@@ -157,6 +158,7 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_LABEL => [],
 		self::INVALID_LANGUAGE_CODE => [],
+		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
 		self::INVALID_PATCH => [],
