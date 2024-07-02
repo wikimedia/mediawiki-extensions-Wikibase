@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
 
-use Exception;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -139,16 +138,19 @@ class JsonDiffJsonPatcherTest extends TestCase {
 	}
 
 	public function testGivenInvalidPatchOperationPath_throwsException(): void {
-		$operation = [ 'op' => 'remove', 'path' => '/field/does/not/exist' ];
-
 		try {
-			( new JsonDiffJsonPatcher() )->patch( [ 'foo' => 'bar' ], [ $operation ] );
+			( new JsonDiffJsonPatcher() )->patch(
+				[ 'foo' => 'bar' ],
+				[
+					[ 'op' => 'remove', 'path' => '/foo' ],
+					[ 'op' => 'remove', 'path' => '/foo' ],
+				]
+			);
 
 			$this->fail( 'Exception was not thrown.' );
-		} catch ( Exception $exception ) {
-			$this->assertInstanceOf( PatchPathException::class, $exception );
+		} catch ( PatchPathException $exception ) {
+			$this->assertSame( 1, $exception->getOpIndex() );
 			$this->assertSame( 'path', $exception->getField() );
-			$this->assertSame( $operation, $exception->getOperation() );
 		}
 	}
 

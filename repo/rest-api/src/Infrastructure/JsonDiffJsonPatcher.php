@@ -37,7 +37,7 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 				$e->getActualValue()
 			);
 		} catch ( PathException $e ) {
-			throw new PatchPathException( $e->getMessage(), (array)$e->getOperation(), $e->getField() );
+			throw new PatchPathException( $e->getMessage(), $e->getField(), $e->getOpIndex() );
 		}
 
 		// TODO investigate. JsonPatch (sometimes) adds/replaces new values as object, not associative array
