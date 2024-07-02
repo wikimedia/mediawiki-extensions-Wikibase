@@ -1,4 +1,4 @@
-# Wikibase REST API Release Notes
+# CHANGELOG
 
 ## Version 0.4
 
