@@ -84,6 +84,8 @@
 	"wikibase-entityusage-submit": "Näytä sivut",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-kohteen tunniste",
 	"wikibase-pageinfo-entity-id-none": "Ei mitään",
+	"wikibase-pageinfo-description-local": "Paikallinen kuvaus",
+	"wikibase-pageinfo-description-central": "Keskitetty kuvaus",
 	"wikibase-pageinfo-entity-usage": "Tällä sivulla käytetyt {{WBREPONAME}}-kohteet",
 	"wikibase-pageinfo-entity-usage-S": "Sivulinkki",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Kuvaus: $1",

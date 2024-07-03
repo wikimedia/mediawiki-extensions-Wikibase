@@ -13,6 +13,7 @@
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
 	"tooltip-t-wikibase": "जडान गरिएको डाटा भण्डार सामग्रका लागि सूत्र",
+	"wikibase-after-page-delete": "यस पृष्ठको कडी [$1 सम्बन्धित {{WBREPONAME}} वस्तुबाट हटाइएको हुनुपर्दछ]। तपाईले त्यसको जाँच गर्नुपर्ने छ।",
 	"wikibase-comment-add": "एउटा {{WBREPONAME}} आइटम निर्माण भयो।",
 	"wikibase-comment-remove": "सम्बद्ध {{WBREPONAME}} आइटम मेटियो। भाषाको कडी मेटियो।",
 	"wikibase-comment-linked": "एउटा {{WBREPONAME}} आइटम यस पृष्ठसँग जोडिएको छ।",
@@ -67,6 +68,7 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> र {{PLURAL:$4|एउटा अर्को पृष्ठ|$4 अन्य पृष्ठहरू|100=९९+ अन्य पृष्ठहरू}}लाई {{WBREPONAME}} वस्तुहरूमा {{GENDER:$2|जडान}} गरिएको थियो, जहाँ विषयहरूसँग सान्दर्भिक डाटा सङ्कलन गर्न सकिन्छ।",
 	"notification-link-text-view-item": "वस्तु {{GENDER:$1|हेर्नुहोस्}}",
 	"notification-subject-page-connection": "{{SITENAME}}मा तपाईंले {{GENDER:$3|सिर्जित}} एउटा पृष्ठ {{WBREPONAME}} वस्तुसँग {{GENDER:$2|जडान}} गरिएको थियो",
+	"connected-redirect-category": "{{WBREPONAME}} वस्तुमा जोडिएका अनुप्रेषणहरू",
 	"wikibase-client-data-bridge-dialog-title": "$1 सम्पादन गर्नुहोस्",
 	"wikibase-client-data-bridge-permissions-error-info": "थप विवरण",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}}मा मान सम्पादन गर्नुहाेस्"

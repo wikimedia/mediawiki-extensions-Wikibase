@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Valentine Badu"
+			"Valentine Badu",
+			"Elliot one"
 		]
 	},
+	"wikibase-linkitem-addlinks": "Fa leenke ne bie boka nwo",
+	"wikibase-linkitem-title": "Leenke ye ne pegyi",
+	"wikibase-linkitem-linkpage": "Fa  ye ne pegyi bɔ nu",
+	"wikibase-linkitem-selectlink": "Me sɛlɛ fa saete ne nee pegyi ne mɔɔ ekpondɛ kɛ ɛ leenke ye la",
 	"wikibase-linkitem-input-site": "Neɛ",
 	"wikibase-linkitem-input-page": "Mukeleka",
 	"wikibase-rc-hide-wikidata-hide": "Fa fea",
