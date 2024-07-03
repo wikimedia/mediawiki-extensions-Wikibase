@@ -42,4 +42,9 @@ JS;
 		return array_values( $this->dataTypeDefinitions->getExpertModules() );
 	}
 
+	public function enableModuleContentVersion() {
+		// Let RL\Module::getVersionHash() invoke getScript() and hash that.
+		return true;
+	}
+
 }
