@@ -39,15 +39,15 @@ class PatchRequestValidatingDeserializerTest extends TestCase {
 		ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		array $expectedErrorContext
+		array $expectedErrorContext,
+		array $invalidPatchDocument = [ [ 'this is' => 'not a valid patch operation' ] ]
 	): void {
-		$invalidPatch = [ 'this is' => 'not a valid patch' ];
 		$request = $this->createStub( PatchRequest::class );
-		$request->method( 'getPatch' )->willReturn( $invalidPatch );
+		$request->method( 'getPatch' )->willReturn( $invalidPatchDocument );
 
 		$jsonPatchValidator = $this->createMock( JsonPatchValidator::class );
 		$jsonPatchValidator->method( 'validate' )
-			->with( $invalidPatch )
+			->with( $invalidPatchDocument )
 			->willReturn( $validationError );
 
 		try {
@@ -71,10 +71,14 @@ class PatchRequestValidatingDeserializerTest extends TestCase {
 
 		$operation = [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ];
 		yield 'from invalid patch operation' => [
-			new ValidationError( JsonPatchValidator::CODE_INVALID_OPERATION, [ JsonPatchValidator::CONTEXT_OPERATION => $operation ] ),
-			UseCaseError::INVALID_PATCH_OPERATION,
-			"Incorrect JSON patch operation: 'bad'",
-			[ UseCaseError::CONTEXT_OPERATION => $operation ],
+			new ValidationError(
+				JsonPatchValidator::CODE_INVALID_OPERATION,
+				[ JsonPatchValidator::CONTEXT_OPERATION => $operation ]
+			),
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/patch/0/op'",
+			[ UseCaseError::CONTEXT_PATH => '/patch/0/op' ],
+			[ $operation ],
 		];
 
 		$operation = [

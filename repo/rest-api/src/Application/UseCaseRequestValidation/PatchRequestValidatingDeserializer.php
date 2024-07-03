@@ -29,12 +29,12 @@ class PatchRequestValidatingDeserializer {
 					throw new UseCaseError( UseCaseError::INVALID_PATCH, 'The provided patch is invalid' );
 
 				case JsonPatchValidator::CODE_INVALID_OPERATION:
-					$op = $context[JsonPatchValidator::CONTEXT_OPERATION]['op'];
-					throw new UseCaseError(
-						UseCaseError::INVALID_PATCH_OPERATION,
-						"Incorrect JSON patch operation: '$op'",
-						[ UseCaseError::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION] ]
-					);
+					$opIndex = array_search( $context[JsonPatchValidator::CONTEXT_OPERATION], $request->getPatch() );
+					if ( !is_int( $opIndex ) ) {
+						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+					}
+
+					throw UseCaseError::newInvalidValue( "/patch/$opIndex/op" );
 
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
 					throw new UseCaseError(

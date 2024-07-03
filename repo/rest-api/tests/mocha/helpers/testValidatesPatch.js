@@ -77,12 +77,12 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 		} );
 
 		it( "invalid patch - invalid 'op' field", async () => {
-			const invalidOperation = { op: 'foobar', path: '/a/b/c', value: 'test' };
-			const response = await newRequestBuilder( [ invalidOperation ] )
+			const path = '/patch/0/op';
+			const response = await newRequestBuilder( [ { op: 'foobar', path: '/a/b/c', value: 'test' } ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-patch-operation', { operation: invalidOperation } );
-			assert.include( response.body.message, "'foobar'" );
+			assertValid400Response( response, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( "invalid patch - 'op' is not a string", async () => {

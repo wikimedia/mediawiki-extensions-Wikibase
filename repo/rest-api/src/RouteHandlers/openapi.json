@@ -5301,9 +5301,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
-              },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
@@ -5342,9 +5339,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
-              },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
@@ -5382,9 +5376,6 @@
               },
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
-              },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
               },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
@@ -5948,9 +5939,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
-              },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
@@ -5998,9 +5986,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
-              },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
@@ -6047,9 +6032,6 @@
               },
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
-              },
-              "invalid-patch-operation": {
-                "$ref": "#/components/examples/InvalidPatchOperationExample"
               },
               "invalid-patch-field-type": {
                 "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
@@ -7613,18 +7595,6 @@
         "value": {
           "code": "invalid-patch",
           "message": "The provided patch is invalid"
-        }
-      },
-      "InvalidPatchOperationExample": {
-        "value": {
-          "code": "invalid-patch-operation",
-          "message": "Incorrect JSON patch operation: '{op}'",
-          "context": {
-            "operation": {
-              "op": "{op}",
-              "path": "/some/path"
-            }
-          }
         }
       },
       "InvalidPatchFieldTypeExample": {

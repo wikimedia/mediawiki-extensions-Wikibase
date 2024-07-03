@@ -1149,7 +1149,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
@@ -1172,7 +1171,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
@@ -1195,7 +1193,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
@@ -1548,7 +1545,6 @@
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
@@ -1578,7 +1574,6 @@
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
@@ -1608,7 +1603,6 @@
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
 					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
-					"invalid-patch-operation": { "$ref": "./examples.json#/InvalidPatchOperationExample" },
 					"invalid-patch-field-type": { "$ref": "./examples.json#/InvalidPatchFieldTypeExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
