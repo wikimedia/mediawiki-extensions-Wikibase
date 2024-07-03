@@ -4,6 +4,7 @@ namespace Wikibase\Client\Api;
 
 use ApiQuery;
 use ApiQueryBase;
+use MediaWiki\Title\Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -60,7 +61,11 @@ class Description extends ApiQueryBase {
 		$continue = $this->getParameter( 'continue' );
 		$preferSource = $this->getParameter( 'prefersource' );
 
-		$titlesByPageId = $this->getPageSet()->getGoodTitles();
+		$pages = $this->getPageSet()->getGoodPages();
+		$titlesByPageId = [];
+		foreach ( $pages as $pageId => $title ) {
+			$titlesByPageId[$pageId] = Title::newFromPageIdentity( $title );
+		}
 		// Just in case we are dealing with titles from some very fast generator,
 		// apply some limits as a sanity check.
 		$limit = $this->getMain()->canApiHighLimits() ? self::LIMIT_BIG2 : self::LIMIT_BIG1;

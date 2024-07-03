@@ -67,10 +67,14 @@ class EntityTerms extends ApiQueryBase {
 		$params = $this->extractRequestParams();
 
 		# Only operate on existing pages
-		$titles = $this->getPageSet()->getGoodTitles();
-		if ( !count( $titles ) ) {
+		$pages = $this->getPageSet()->getGoodPages();
+		if ( !count( $pages ) ) {
 			# Nothing to do
 			return;
+		}
+		$titles = [];
+		foreach ( $pages as $pageId => $title ) {
+			$titles[$pageId] = Title::newFromPageIdentity( $title );
 		}
 
 		// NOTE: continuation relies on $titles being sorted by page ID.

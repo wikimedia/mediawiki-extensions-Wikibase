@@ -106,7 +106,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	}
 
 	public function doQuery( array $params ): ?IResultWrapper {
-		$pages = $this->getPageSet()->getGoodTitles();
+		$pages = $this->getPageSet()->getGoodPages();
 		if ( !$pages ) {
 			return null;
 		}
