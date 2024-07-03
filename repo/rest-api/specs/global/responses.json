@@ -454,7 +454,6 @@
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"invalid-statement-type": { "$ref": "./examples.json#/InvalidStatementTypeExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
 					"invalid-sitelink-type": { "$ref": "./examples.json#/InvalidSitelinkTypeExample" },
 					"invalid-site-id": {
@@ -643,8 +642,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
 				}
 			}
 		},
@@ -664,8 +662,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" }
+					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
 				}
 			}
 		},
@@ -686,7 +683,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -711,7 +707,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -736,7 +731,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
-					"statement-data-invalid-field": { "$ref": "./examples.json#/StatementDataInvalidFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}

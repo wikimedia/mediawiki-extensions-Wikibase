@@ -550,10 +550,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				400,
-				'statement-data-invalid-field',
-				{ path: `${predicatePropertyId}/0/rank`, value: invalidValue }
+				'invalid-value',
+				{ path: `/item/statements/${predicatePropertyId}/0/rank` }
 			);
-			assert.include( response.body.message, 'rank' );
+			assert.include( response.body.message, `/item/statements/${predicatePropertyId}/0/rank` );
 		} );
 
 		it( 'missing statement field', async () => {

@@ -75,14 +75,7 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 					StatementValidator::CONTEXT_VALUE => 'some-value',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-				"Invalid input for 'some-field'",
-				[
-					UseCaseError::CONTEXT_PATH => 'some-field',
-					UseCaseError::CONTEXT_VALUE => 'some-value',
-				]
-			),
+			UseCaseError::newInvalidValue( '/statement/some-field' ),
 		];
 
 		yield 'invalid field type' => [

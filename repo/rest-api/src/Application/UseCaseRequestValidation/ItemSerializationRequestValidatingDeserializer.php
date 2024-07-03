@@ -255,14 +255,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
 				);
 			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
-				throw new UseCaseError(
-					UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-					"Invalid input for '{$context[StatementsValidator::CONTEXT_FIELD]}'",
-					[
-						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
-						UseCaseError::CONTEXT_VALUE => $context[StatementsValidator::CONTEXT_VALUE],
-					]
-				);
+				throw UseCaseError::newInvalidValue( '/item/statements/' . $context[StatementsValidator::CONTEXT_PATH] );
 			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_DATA_MISSING_FIELD,

@@ -292,9 +292,13 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
 						.assertInvalidRequest().makeRequest();
 
-					const context = { path: invalidField, value: invalidValue };
-					assertValidError( response, 400, 'statement-data-invalid-field', context );
-					assert.include( response.body.message, invalidField );
+					assertValidError(
+						response,
+						400,
+						'invalid-value',
+						{ path: `/statement/${invalidField}` }
+					);
+					assert.include( response.body.message, `statement/${invalidField}` );
 				} );
 
 				it( 'missing statement field', async () => {

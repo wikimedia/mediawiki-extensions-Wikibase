@@ -549,19 +549,12 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => '/P1/0/value',
+					StatementsValidator::CONTEXT_PATH => 'P1/0/value',
 					StatementsValidator::CONTEXT_FIELD => 'value',
 					StatementsValidator::CONTEXT_VALUE => 'invalid-value',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-				"Invalid input for 'value'",
-				[
-					UseCaseError::CONTEXT_PATH => '/P1/0/value',
-					UseCaseError::CONTEXT_VALUE => 'invalid-value',
-				]
-			),
+			UseCaseError::newInvalidValue( '/item/statements/P1/0/value' ),
 		];
 	}
 

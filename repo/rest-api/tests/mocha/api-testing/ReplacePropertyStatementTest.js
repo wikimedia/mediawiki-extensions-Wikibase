@@ -350,9 +350,9 @@ describe( 'PUT statement tests', () => {
 					).assertInvalidRequest().makeRequest();
 
 					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'statement-data-invalid-field' );
-					assert.deepEqual( response.body.context, { path: invalidField, value: invalidValue } );
-					assert.include( response.body.message, invalidField );
+					assert.strictEqual( response.body.code, 'invalid-value' );
+					assert.deepEqual( response.body.context, { path: `/statement/${invalidField}` } );
+					assert.include( response.body.message, `statement/${invalidField}` );
 				} );
 
 				it( 'missing statement field', async () => {

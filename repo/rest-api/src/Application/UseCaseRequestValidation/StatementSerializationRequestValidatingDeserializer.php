@@ -27,14 +27,7 @@ class StatementSerializationRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case StatementValidator::CODE_INVALID_FIELD:
-					throw new UseCaseError(
-						UseCaseError::STATEMENT_DATA_INVALID_FIELD,
-						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD]}'",
-						[
-							UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD],
-							UseCaseError::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_VALUE],
-						]
-					);
+					throw UseCaseError::newInvalidValue( '/statement/' . $context[StatementValidator::CONTEXT_FIELD] );
 				case StatementValidator::CODE_MISSING_FIELD:
 					throw new UseCaseError(
 						UseCaseError::STATEMENT_DATA_MISSING_FIELD,

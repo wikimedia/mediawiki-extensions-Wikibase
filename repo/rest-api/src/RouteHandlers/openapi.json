@@ -4220,9 +4220,6 @@
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
               },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
-              },
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
@@ -4489,9 +4486,6 @@
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
-              },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               }
             }
           }
@@ -4524,9 +4518,6 @@
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
-              },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               }
             }
           }
@@ -4559,9 +4550,6 @@
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
-              },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -4601,9 +4589,6 @@
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
               },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
-              },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
               }
@@ -4641,9 +4626,6 @@
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
-              },
-              "statement-data-invalid-field": {
-                "$ref": "#/components/examples/StatementDataInvalidFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -7572,16 +7554,6 @@
           "message": "Mandatory field missing in the statement data: {field}",
           "context": {
             "path": "{field}"
-          }
-        }
-      },
-      "StatementDataInvalidFieldExample": {
-        "value": {
-          "code": "statement-data-invalid-field",
-          "message": "Invalid input for '{field}'",
-          "context": {
-            "path": "{field}",
-            "value": "{value}"
           }
         }
       },

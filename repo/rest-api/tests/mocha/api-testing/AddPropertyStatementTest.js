@@ -226,8 +226,12 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			const context = { path: invalidField, value: invalidValue };
-			assertValidError( response, 400, 'statement-data-invalid-field', context );
+			assertValidError(
+				response,
+				400,
+				'invalid-value',
+				{ path: `/statement/${invalidField}` }
+			);
 			assert.include( response.body.message, invalidField );
 		} );
 

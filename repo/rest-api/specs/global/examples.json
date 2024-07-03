@@ -161,16 +161,6 @@
 			}
 		}
 	},
-	"StatementDataInvalidFieldExample": {
-		"value": {
-			"code": "statement-data-invalid-field",
-			"message": "Invalid input for '{field}'",
-			"context": {
-				"path": "{field}",
-				"value": "{value}"
-			}
-		}
-	},
 	"CannotModifyReadOnlyValue": {
 		"value": {
 			"code": "cannot-modify-read-only-value",
