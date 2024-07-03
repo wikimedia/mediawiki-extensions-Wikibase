@@ -44,7 +44,8 @@ class DataTypeDefinitions {
 	 * with no prefixes in the array keys, but with fallbacks for value types merged into the
 	 * definitions for the property data types.
 	 */
-	private const RESOLVED_MODE = 'resolved';
+	public const RESOLVED_MODE = 'resolved';
+
 	private const VALUE_TYPE_PREFIX = 'VT:';
 	private const DATA_TYPE_PREFIX = 'PT:';
 
@@ -179,12 +180,16 @@ class DataTypeDefinitions {
 	 * have no PT or VT prefixes.
 	 *
 	 * @param array $definitions The map to process.
+	 * @param bool $allowMissing Whether to allow missing definitions,
+	 * i.e. known data types with no definition entry matching their data type or value type.
+	 * By default, this throws an exception, so that if the function returns successfully,
+	 * the resulting array is guaranteed to contain all data types.
 	 *
 	 * @throws UnexpectedValueException
 	 * @return array An associative array mapping data type IDs to one of the $definitions values.
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */
-	private function resolveValueTypeFallback( array $definitions ) {
+	private function resolveValueTypeFallback( array $definitions, bool $allowMissing = false ) {
 		$resolved = [];
 
 		foreach ( $this->getValueTypes() as $propertyType => $valueType ) {
@@ -195,7 +200,7 @@ class DataTypeDefinitions {
 				$resolved[$propertyType] = $definitions[$ptKey];
 			} elseif ( !empty( $definitions[$vtKey] ) ) {
 				$resolved[$propertyType] = $definitions[$vtKey];
-			} else {
+			} elseif ( !$allowMissing ) {
 				throw new UnexpectedValueException( "Missing definition for $ptKey or $vtKey" );
 			}
 		}
@@ -211,12 +216,13 @@ class DataTypeDefinitions {
 	 *
 	 * @param array $callbackMap
 	 * @param string $mode PREFIXED_MODE or RESOLVED_MODE
+	 * @param bool $allowMissing See {@link self::resolveValueTypeFallback()}
 	 *
 	 * @return array A version of $callbackMap with $mode applied.
 	 */
-	private function applyMode( array $callbackMap, $mode ) {
+	private function applyMode( array $callbackMap, string $mode, bool $allowMissing = false ) {
 		if ( $mode === self::RESOLVED_MODE ) {
-			return $this->resolveValueTypeFallback( $callbackMap );
+			return $this->resolveValueTypeFallback( $callbackMap, $allowMissing );
 		} else {
 			return $callbackMap;
 		}
@@ -351,10 +357,22 @@ class DataTypeDefinitions {
 
 	/**
 	 * Get data formatters for search indexing for each type.
-	 * @return callable[] List of callbacks, with keys having "VT:" prefixes.
+	 *
+	 * @param string $mode PREFIXED_MODE to request a callback map with "VT:" and "PT:" prefixes
+	 * for value types and property data types, or RESOLVED_MODE to retrieve a callback map for
+	 * property data types only, with value type fallback applied.
+	 *
+	 * @return callable[] A partial map with keys depending on the $mode.
+	 * Note that, unlike in other methods of this class,
+	 * the returned map is not guaranteed to cover all data or value types:
+	 * there are several data types and value types with no defined search index data formatter.
 	 */
-	public function getSearchIndexDataFormatterCallbacks() {
-		return $this->getMapForDefinitionField( 'search-index-data-formatter-callback' );
+	public function getSearchIndexDataFormatterCallbacks( $mode = self::RESOLVED_MODE ) {
+		return $this->applyMode(
+			$this->getMapForDefinitionField( 'search-index-data-formatter-callback' ),
+			$mode,
+			true
+		);
 	}
 
 	/**
