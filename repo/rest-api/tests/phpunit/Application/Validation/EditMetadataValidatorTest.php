@@ -48,8 +48,11 @@ class EditMetadataValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider invalidEditTagsProvider
+	 *
+	 * @param array $tags
+	 * @param mixed $invalidTag
 	 */
-	public function testValidateInvalidEditTags( array $tags, string $invalidTag ): void {
+	public function testValidateInvalidEditTags( array $tags, $invalidTag ): void {
 		$result = $this->newEditMetadataValidator()->validateEditTags( $tags );
 
 		$this->assertInstanceOf( ValidationError::class, $result );
@@ -60,15 +63,15 @@ class EditMetadataValidatorTest extends TestCase {
 	public static function invalidEditTagsProvider(): Generator {
 		yield 'disallowed tag' => [
 			[ 'bad tag' ],
-			'"bad tag"',
+			'bad tag',
 		];
 		yield 'non-string array element' => [
 			[ self::ALLOWED_TAGS[0], 123 ],
-			'123',
+			123,
 		];
 		yield 'complex non-string array element' => [
 			[ self::ALLOWED_TAGS[1], [ 'very', 'bad' ] ],
-			'["very","bad"]',
+			[ 'very', 'bad' ],
 		];
 	}
 

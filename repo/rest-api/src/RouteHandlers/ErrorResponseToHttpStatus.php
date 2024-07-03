@@ -25,7 +25,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_PROPERTY_MISSING_FIELD => 422,
 		UseCaseError::PATCHED_PROPERTY_UNEXPECTED_FIELD => 422,
 		UseCaseError::COMMENT_TOO_LONG => 400,
-		UseCaseError::INVALID_EDIT_TAG => 400,
+		UseCaseError::INVALID_VALUE => 400,
 		UseCaseError::SITELINK_CONFLICT => 409,
 		UseCaseError::SITELINK_NOT_DEFINED => 404,
 		UseCaseError::STATEMENT_DATA_INVALID_FIELD => 400,

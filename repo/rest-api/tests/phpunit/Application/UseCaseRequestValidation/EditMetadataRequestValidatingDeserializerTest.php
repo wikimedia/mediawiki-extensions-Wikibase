@@ -66,26 +66,26 @@ class EditMetadataRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	public function testWithInvalidEditTags(): void {
-		$invalidTags = [ 'bad', 'tags' ];
+		$invalidTag = 'bad tag';
+		$tags = [ 'good tag', $invalidTag ];
 		$request = $this->createStub( EditMetadataRequest::class );
-		$request->method( 'getEditTags' )->willReturn( $invalidTags );
+		$request->method( 'getEditTags' )->willReturn( $tags );
 
 		$validationError = new ValidationError(
 			EditMetadataValidator::CODE_INVALID_TAG,
-			[ EditMetadataValidator::CONTEXT_TAG_VALUE => json_encode( $invalidTags ) ]
+			[ EditMetadataValidator::CONTEXT_TAG_VALUE => $invalidTag ]
 		);
 
 		$editMetadataValidator = $this->createMock( EditMetadataValidator::class );
 		$editMetadataValidator->method( 'validateEditTags' )
-			->with( $invalidTags )
+			->with( $tags )
 			->willReturn( $validationError );
 
 		try {
 			( new EditMetadataRequestValidatingDeserializer( $editMetadataValidator ) )->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_EDIT_TAG, $e->getErrorCode() );
-			$this->assertSame( 'Invalid MediaWiki tag: ["bad","tags"]', $e->getErrorMessage() );
+			$this->assertEquals( UseCaseError::newInvalidValue( '/tags/1' ), $e );
 		}
 	}
 

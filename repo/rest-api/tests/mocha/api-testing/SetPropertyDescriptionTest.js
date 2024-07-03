@@ -229,14 +229,12 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'invalid edit tag', async () => {
-			const invalidEditTag = 'invalid tag';
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
-				.withJsonBodyParam( 'tags', [ invalidEditTag ] )
+				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-edit-tag' );
-			assert.include( response.body.message, invalidEditTag );
+			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
 		} );
 
 		it( 'comment too long', async () => {
