@@ -9,21 +9,20 @@ use Exception;
  */
 class PatchPathException extends Exception {
 
-	private array $operation;
 	private string $field;
+	private int $opIndex;
 
-	public function __construct( string $message, array $operation, string $field ) {
+	public function __construct( string $message, string $field, int $opIndex ) {
 		parent::__construct( $message );
-		$this->operation = $operation;
 		$this->field = $field;
-	}
-
-	public function getOperation(): array {
-		return $this->operation;
+		$this->opIndex = $opIndex;
 	}
 
 	public function getField(): string {
 		return $this->field;
 	}
 
+	public function getOpIndex(): int {
+		return $this->opIndex;
+	}
 }

@@ -60,14 +60,14 @@ class PatchJsonTest extends TestCase {
 		yield 'non-existent path' => [
 			[ $patchOperation ],
 			UseCaseError::PATCH_TARGET_NOT_FOUND,
-			[ 'operation' => $patchOperation, 'field' => 'path' ],
+			[ 'path' => '/patch/0/path' ],
 		];
 
 		$patchOperation = [ 'op' => 'copy', 'from' => '/path/does/not/exist', 'path' => '/baz' ];
 		yield 'non-existent from' => [
 			[ $patchOperation ],
 			UseCaseError::PATCH_TARGET_NOT_FOUND,
-			[ 'operation' => $patchOperation, 'field' => 'from' ],
+			[ 'path' => '/patch/0/from' ],
 		];
 
 		$patchOperation = [ 'op' => 'test', 'path' => '/some', 'value' => 'incorrect value' ];

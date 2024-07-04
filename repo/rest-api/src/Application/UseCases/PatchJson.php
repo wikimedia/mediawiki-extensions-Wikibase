@@ -24,10 +24,11 @@ class PatchJson {
 		try {
 			return $this->patcher->patch( $serialization, $patch );
 		} catch ( PatchPathException $e ) {
+			$jsonPointer = "/patch/{$e->getOpIndex()}/{$e->getField()}";
 			throw new UseCaseError(
 				UseCaseError::PATCH_TARGET_NOT_FOUND,
-				"Target '{$e->getOperation()[$e->getField()]}' not found on the resource",
-				[ UseCaseError::CONTEXT_OPERATION => $e->getOperation(), UseCaseError::CONTEXT_FIELD => $e->getField() ]
+				'Target not found on resource',
+				[ UseCaseError::CONTEXT_PATH => $jsonPointer ]
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
 			$operation = $e->getOperation();

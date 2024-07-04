@@ -7670,14 +7670,9 @@
       "PatchTargetNotFoundExample": {
         "value": {
           "code": "patch-target-not-found",
-          "message": "Target '{target}' not found on the resource",
+          "message": "Target not found on resource",
           "context": {
-            "operation": {
-              "op": "replace",
-              "path": "/some/path",
-              "value": "some value"
-            },
-            "field": "path"
+            "path": "{json_pointer_to_target_in_patch}"
           }
         }
       },

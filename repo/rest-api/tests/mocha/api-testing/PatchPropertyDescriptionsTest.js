@@ -205,8 +205,9 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-target-not-found', { field: 'path', operation } );
-			assert.include( response.body.message, operation.path );
+			const context = { path: '/patch/0/path' };
+			assertValidError( response, 409, 'patch-target-not-found', context );
+			assert.strictEqual( response.body.message, 'Target not found on resource' );
 		} );
 
 		it( '"from" field target does not exist', async () => {
@@ -215,8 +216,9 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-target-not-found', { field: 'from', operation } );
-			assert.include( response.body.message, operation.from );
+			const context = { path: '/patch/0/from' };
+			assertValidError( response, 409, 'patch-target-not-found', context );
+			assert.strictEqual( response.body.message, 'Target not found on resource' );
 		} );
 
 		it( 'patch test condition failed', async () => {
