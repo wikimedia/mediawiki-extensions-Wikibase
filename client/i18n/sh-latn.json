@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"BadDog"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
-	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
+	"tooltip-t-wikibase": "Pogledajte povezanu stavku u skladištu podataka",
 	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
 	"wikibase-dataitem": "Stavka na Wikipodacima",
 	"wikibase-editlinks": "Uredi veze",

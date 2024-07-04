@@ -33,7 +33,8 @@
 			"Weft",
 			"Wladek92",
 			"Wyz",
-			"Zolo"
+			"Zolo",
+			"SleaY"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -49,6 +50,7 @@
 	"wikibase-error-ui-no-external-page": "Une page « $2 » n’a pas pu être trouvée sur « $1 ».",
 	"wikibase-error-ui-edit-conflict": "La même valeur a été modifiée entre temps, ce qui a entraîné un conflit de mise à jour. Veuillez recharger la page.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translittéré)",
+	"wikibase-language-name-for-terms-mul": "valeurs par défaut pour toutes les langues",
 	"wikibase-quantitydetails-amount": "Quantité",
 	"wikibase-quantitydetails-upperbound": "Limite supérieure",
 	"wikibase-quantitydetails-lowerbound": "Limite inférieure",
