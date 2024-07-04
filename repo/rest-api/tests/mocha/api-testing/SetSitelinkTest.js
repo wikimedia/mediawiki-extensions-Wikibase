@@ -60,7 +60,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a sitelink with badges and edit metadata', async () => {
 			const badges = [ allowedBadges[ 0 ], allowedBadges[ 1 ] ];
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg – i created a sitelink!';
 
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1, badges } )

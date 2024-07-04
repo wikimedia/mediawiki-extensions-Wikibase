@@ -64,7 +64,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const description = `new US English description ${utils.uniq()}`;
 			const languageCode = 'en-us';
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg i added a description!!1';
 
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description )
@@ -106,7 +106,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const description = `new description ${utils.uniq()}`;
 			const languageCode = 'en';
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg i replaced a description!!1';
 
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description )

@@ -26,7 +26,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			await newSetItemDescriptionRequestBuilder( testItemId, languageCode, description ).makeRequest();
 
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'remove english description';
 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, languageCode )

@@ -67,7 +67,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can create an item with edit metadata provided', async () => {
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'omg look i made an edit';
 
 			const response = await newCreateItemRequestBuilder( { labels: { en: `test ${utils.uniq()}` } } )

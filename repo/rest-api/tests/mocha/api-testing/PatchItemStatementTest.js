@@ -110,7 +110,7 @@ describe( 'PATCH statement tests', () => {
 
 				it( 'can patch a statement with edit metadata', async () => {
 					const user = await action.robby(); // robby is a bot
-					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 					const editSummary = 'i made a patch';
 					const expectedValue = `${user.username} was here`;
 					const response = await newPatchRequestBuilder( testStatementId, [

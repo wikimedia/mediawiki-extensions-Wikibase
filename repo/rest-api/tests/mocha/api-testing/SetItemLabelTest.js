@@ -83,7 +83,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			const languageCode = 'en';
 			const newLabel = `new english label ${utils.uniq()}`;
 			const user = await action.robby(); // robby is a bot
-			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test' );
+			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
 				.withJsonBodyParam( 'tags', [ tag ] )
