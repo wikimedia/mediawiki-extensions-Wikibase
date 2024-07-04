@@ -52,7 +52,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		array $expectedErrorContext = []
 	): void {
 		$request = $this->createStub( SitelinkEditRequest::class );
-		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE ] );
+		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE, 'badges' => [ 'P3' ] ] );
 
 		$this->sitelinkValidator = $this->createStub( SitelinkValidator::class );
 		$this->sitelinkValidator->method( 'validate' )->willReturn( $validationError );
@@ -94,10 +94,10 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			'Value of badges field is not a list',
 		];
 		yield 'badge is not a valid item id' => [
-			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'invalid' ] ),
-			UseCaseError::INVALID_INPUT_SITELINK_BADGE,
-			'Badge input is not an item ID: invalid',
-			[ UseCaseError::CONTEXT_BADGE => 'invalid' ],
+			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'P3' ] ),
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/badges/0'",
+			[ UseCaseError::CONTEXT_PATH => '/badges/0' ],
 		];
 		yield 'badge is not allowed' => [
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),

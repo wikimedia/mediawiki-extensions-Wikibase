@@ -703,13 +703,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ invalidBadge ] } }
 			} ).makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-input-sitelink-badge',
-				{ 'site-id': localWikiId, badge: invalidBadge }
-			);
-			assert.strictEqual( response.body.message, `Badge input is not an item ID: ${invalidBadge}` );
+			const path = `/item/sitelinks/${localWikiId}/badges/0`;
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'provided item is not an allowed badge', async () => {

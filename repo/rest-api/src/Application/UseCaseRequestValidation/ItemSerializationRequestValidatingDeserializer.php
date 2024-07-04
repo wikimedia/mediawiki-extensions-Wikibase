@@ -315,15 +315,15 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
 				);
 			case SitelinkValidator::CODE_INVALID_BADGE:
-				$badge = $context[ SitelinkValidator::CONTEXT_BADGE ];
-				throw new UseCaseError(
-					UseCaseError::INVALID_INPUT_SITELINK_BADGE,
-					"Badge input is not an item ID: $badge",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_BADGE => $badge,
-					]
+				$badgeIndex = array_search(
+					$context[ SitelinkValidator::CONTEXT_BADGE],
+					$serialization[ $context[SitelinkValidator::CONTEXT_SITE_ID ] ][ 'badges' ]
 				);
+				if ( !is_int( $badgeIndex ) ) {
+					throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+				}
+				$path = '/item/sitelinks/' . $context[ SitelinkValidator::CONTEXT_SITE_ID ] . '/badges/' . $badgeIndex;
+				throw UseCaseError::newInvalidValue( $path );
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
 				throw new UseCaseError(

@@ -48,12 +48,15 @@ class SitelinkEditRequestValidatingDeserializer {
 						'Value of badges field is not a list'
 					);
 				case SitelinkValidator::CODE_INVALID_BADGE:
-					$badge = $validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
-					throw new UseCaseError(
-						UseCaseError::INVALID_INPUT_SITELINK_BADGE,
-						"Badge input is not an item ID: $badge",
-						[ UseCaseError::CONTEXT_BADGE => $badge ]
+					$badgeIndex = array_search(
+						$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE],
+						$request->getSitelink()[ 'badges' ]
 					);
+					if ( !is_int( $badgeIndex ) ) {
+						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+					}
+
+					throw UseCaseError::newInvalidValue( "/badges/{$badgeIndex}" );
 				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 					$badge = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
 					throw new UseCaseError(

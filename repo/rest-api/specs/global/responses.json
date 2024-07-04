@@ -473,9 +473,6 @@
 					"item-not-a-badge": {
 						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
 					},
-					"invalid-input-sitelink-badge": {
-						"$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
 				}
@@ -832,8 +829,7 @@
 					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
 					"sitelink-data-missing-title": { "$ref": "./examples.json#/SitelinkTitleFieldNotProvidedExample" },
 					"invalid-sitelink-badges-format": { "$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListExample" },
-					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeExample" },
-					"invalid-input-sitelink-badge": { "$ref": "./examples.json#/ValueProvidedAsABadgeIsNotAnItemIdExample" }
+					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeExample" }
 				}
 			}
 		},

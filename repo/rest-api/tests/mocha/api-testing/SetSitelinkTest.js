@@ -325,8 +325,9 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: [ invalidBadge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-input-sitelink-badge', { badge: 'P33' } );
-			assert.strictEqual( response.body.message, `Badge input is not an item ID: ${invalidBadge}` );
+			const path = '/badges/0';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'not an allowed badge', async () => {

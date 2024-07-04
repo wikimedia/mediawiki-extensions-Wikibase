@@ -126,25 +126,6 @@
 			}
 		}
 	},
-	"ValueProvidedAsABadgeIsNotAnItemIdExample": {
-		"value": {
-			"code": "invalid-input-sitelink-badge",
-			"message": "Badge input is not an item ID: {value}",
-			"context": {
-				"badge": "{value}"
-			}
-		}
-	},
-	"ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample": {
-		"value": {
-			"code": "invalid-input-sitelink-badge",
-			"message": "Badge input is not an item ID: {value}",
-			"context": {
-				"badge": "{value}",
-				"site": "{site_id}"
-			}
-		}
-	},
 	"StatementDataMissingFieldExample": {
 		"value": {
 			"code": "statement-data-missing-field",

@@ -4241,9 +4241,6 @@
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
               },
-              "invalid-input-sitelink-badge": {
-                "$ref": "#/components/examples/ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample"
-              },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
@@ -4792,9 +4789,6 @@
               },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeExample"
-              },
-              "invalid-input-sitelink-badge": {
-                "$ref": "#/components/examples/ValueProvidedAsABadgeIsNotAnItemIdExample"
               }
             }
           }
@@ -7504,25 +7498,6 @@
           "message": "Item ID provided as badge is not allowed as a badge: {item_id}",
           "context": {
             "badge": "{item_id}",
-            "site": "{site_id}"
-          }
-        }
-      },
-      "ValueProvidedAsABadgeIsNotAnItemIdExample": {
-        "value": {
-          "code": "invalid-input-sitelink-badge",
-          "message": "Badge input is not an item ID: {value}",
-          "context": {
-            "badge": "{value}"
-          }
-        }
-      },
-      "ValueProvidedAsABadgeIsNotAnItemIdWithSiteContextExample": {
-        "value": {
-          "code": "invalid-input-sitelink-badge",
-          "message": "Badge input is not an item ID: {value}",
-          "context": {
-            "badge": "{value}",
             "site": "{site_id}"
           }
         }
