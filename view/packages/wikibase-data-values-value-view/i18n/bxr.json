@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elvonudinium"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "хооһон байна",
+	"valueview-expert-globecoordinateinput-precision": "Нариибшалал:",
+	"valueview-expert-globecoordinateinput-nullprecision": "тодорхойгүй",
+	"valueview-expert-globecoordinateinput-customprecision": "($1) тусхай",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "аркминута хүрэтэр",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "арксекунда хүрэтэр",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "арксекундын 1/10 хүрэтэр",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "арксекундын 1/100 хүрэтэр",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "арксекундын 1/1000 хүрэтэр",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "Грегориин литэ",
+	"valueview-expert-timevalue-calendar-julian": "Юлиин литэ",
+	"valueview-expert-timeinput-precision": "Нариибшалал:",
+	"valueview-expert-timeinput-precision-year1g": "тэрбум жэл",
+	"valueview-expert-timeinput-precision-year100m": "зуун сая жэл",
+	"valueview-expert-timeinput-precision-year10m": "арбан сая жэл",
+	"valueview-expert-timeinput-precision-year1m": "сая жэл",
+	"valueview-expert-timeinput-precision-year100k": "зуун мянган жэл",
+	"valueview-expert-timeinput-precision-year10k": "арбан мянган жэл",
+	"valueview-expert-timeinput-precision-year1k": "мянган жэл",
+	"valueview-expert-timeinput-precision-year100": "зуун жэл",
+	"valueview-expert-timeinput-precision-year10": "арбан жэл",
+	"valueview-expert-timeinput-precision-year": "жэл",
+	"valueview-expert-timeinput-precision-month": "һара",
+	"valueview-expert-timeinput-precision-day": "үдэр",
+	"valueview-expert-timeinput-precision-hour": "саг",
+	"valueview-expert-timeinput-precision-minute": "минута",
+	"valueview-expert-timeinput-precision-second": "секунда",
+	"valueview-expert-timeinput-calendar": "Литэ:",
+	"valueview-expertextender-languageselector-label": "Хэлэн (заатагүй):",
+	"valueview-expertextender-unitsuggester-label": "Нэгэжэ (заабол бэшэ):",
+	"valueview-preview-label": "иигэжэ харуулагдаха:",
+	"valueview-preview-novalue": "зүб сэн танигдаагүй",
+	"valueview-listrotator-manually": "гараар табиха"
+}
