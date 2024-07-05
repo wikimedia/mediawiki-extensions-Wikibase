@@ -59,8 +59,8 @@ class PatchedAliasesValidator {
 		} catch ( EmptyAliasException $e ) {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_ALIAS_EMPTY,
-				"Changed alias for '{$e->getField()}' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => $e->getField() ]
+				"Changed alias for '{$e->getLanguage()}' cannot be empty",
+				[ UseCaseError::CONTEXT_LANGUAGE => $e->getLanguage() ]
 			);
 		} catch ( DuplicateAliasException $e ) {
 			throw new UseCaseError(

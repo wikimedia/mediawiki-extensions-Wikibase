@@ -36,7 +36,7 @@ class AliasesDeserializer {
 
 				$alias = trim( $alias );
 				if ( $alias === '' ) {
-					throw new EmptyAliasException( $language, '', "/{$language}/$index" );
+					throw new EmptyAliasException( $language, $index );
 				}
 
 				if ( in_array( $alias, $aliases ) ) {

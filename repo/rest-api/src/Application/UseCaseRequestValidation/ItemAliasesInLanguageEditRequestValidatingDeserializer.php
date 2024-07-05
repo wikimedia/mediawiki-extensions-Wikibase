@@ -56,8 +56,7 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 		try {
 			return $this->deserializer->deserialize( $requestAliases );
 		} catch ( EmptyAliasException $e ) {
-			// the exception's path always takes the form of "/$language/$index" and we don't need the language
-			throw UseCaseError::newInvalidValue( '/aliases/' . explode( '/', $e->getPath() )[2] );
+			throw UseCaseError::newInvalidValue( "/aliases/{$e->getIndex()}" );
 		} catch ( DuplicateAliasException $e ) {
 			$this->throwDuplicateAliasError( $e->getValue() );
 		}
