@@ -363,13 +363,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'empty alias' => [
 			new ValidationError(
 				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
+				[ AliasesValidator::CONTEXT_PATH => '/en/1' ]
 			),
-			new UseCaseError(
-				UseCaseError::ALIAS_EMPTY,
-				'Alias must not be empty',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
 		];
 
 		yield 'empty aliases in language list' => [

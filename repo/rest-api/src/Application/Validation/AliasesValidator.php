@@ -25,6 +25,7 @@ class AliasesValidator {
 	public const CONTEXT_ALIAS = 'aliases-validator-context-alias';
 	public const CONTEXT_LIMIT = 'aliases-validator-context-character-limit';
 	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
+	public const CONTEXT_PATH = 'aliases-validator-context-path';
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 	private AliasLanguageCodeValidator $languageCodeValidator;
@@ -93,7 +94,8 @@ class AliasesValidator {
 		} catch ( EmptyAliasException $e ) {
 			return new ValidationError(
 				self::CODE_EMPTY_ALIAS,
-				[ self::CONTEXT_LANGUAGE => $e->getField() ]
+				// TODO: remove CONTEXT_LANGUAGE, once it's no longer needed for patch validation
+				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_PATH => $e->getPath() ]
 			);
 		} catch ( DuplicateAliasException $e ) {
 			return new ValidationError(

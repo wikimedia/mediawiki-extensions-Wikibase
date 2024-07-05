@@ -132,16 +132,18 @@ class AliasesValidatorTest extends TestCase {
 		$this->assertEquals( $expectedError, $this->newValidator()->validate( [ $language => [ $invalidAlias ] ] ) );
 	}
 
-	public function testEmptyAlias_returnsValidationError(): void {
-		$language = 'en';
+	/**
+	 * @dataProvider provideEmptyAlias
+	 */
+	public function testEmptyAlias_returnsValidationError( array $listWithEmptyAlias, string $expectedPath ): void {
+		$validationError = $this->newValidator()->validate( $listWithEmptyAlias );
+		$this->assertEquals( AliasesValidator::CODE_EMPTY_ALIAS, $validationError->getCode() );
+		$this->assertEquals( $expectedPath, $validationError->getContext()[AliasesValidator::CONTEXT_PATH] );
+	}
 
-		$this->assertEquals(
-			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_LANGUAGE => $language ]
-			),
-			$this->newValidator()->validate( [ $language => [ '' ] ] )
-		);
+	public static function provideEmptyAlias(): Generator {
+		yield 'empty alias in pos 0' => [ [ 'en' => [ '' ] ], '/en/0' ];
+		yield 'empty alias in pos 1' => [ [ 'en' => [ 'foo', '' ] ], '/en/1' ];
 	}
 
 	public function testDuplicateAlias_returnsValidationError(): void {

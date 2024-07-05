@@ -57,7 +57,8 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 		try {
 			return $this->deserializer->deserialize( $requestAliases );
 		} catch ( EmptyAliasException $e ) {
-			throw new UseCaseError( UseCaseError::ALIAS_EMPTY, 'Alias must not be empty' );
+			// the exception's path always takes the form of "/$language/$index" and we don't need the language
+			throw UseCaseError::newInvalidValue( '/aliases/' . explode( '/', $e->getPath() )[2] );
 		} catch ( DuplicateAliasException $e ) {
 			$this->throwDuplicateAliasError( $e->getValue() );
 		}

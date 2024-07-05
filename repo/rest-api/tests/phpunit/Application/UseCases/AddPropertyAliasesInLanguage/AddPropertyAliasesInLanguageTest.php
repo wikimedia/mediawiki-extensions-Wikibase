@@ -121,7 +121,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 			$this->newUseCase()->execute( $this->newRequest( 'P123', 'en', [ '' ] ) );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ALIAS_EMPTY, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::INVALID_VALUE, $e->getErrorCode() );
 		}
 	}
 

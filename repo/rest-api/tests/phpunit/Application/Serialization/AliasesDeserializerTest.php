@@ -56,21 +56,22 @@ class AliasesDeserializerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideEmptyAliases
+	 * @dataProvider provideEmptyAlias
 	 */
-	public function testGivenEmptyAlias_throwsException( string $emptyAlias ): void {
+	public function testGivenEmptyAlias_throwsException( array $aliasesListWithEmptyAlias, string $path ): void {
 		try {
-			( new AliasesDeserializer() )->deserialize( [ 'en' => [ $emptyAlias ] ] );
+			( new AliasesDeserializer() )->deserialize( $aliasesListWithEmptyAlias );
 			$this->fail( 'this should not be reached' );
 		} catch ( EmptyAliasException $e ) {
-			$this->assertSame( 'en', $e->getField() );
+			$this->assertSame( $path, $e->getPath() );
 		}
 	}
 
-	public static function provideEmptyAliases(): Generator {
-		yield 'empty label' => [ '' ];
-		yield 'whitespace label' => [ '   ' ];
-		yield 'whitespace with tab label' => [ " \t " ];
+	public static function provideEmptyAlias(): Generator {
+		yield 'empty alias in pos 0' => [ [ 'en' => [ '' ] ], '/en/0' ];
+		yield 'empty alias in pos 1' => [ [ 'en' => [ 'foo', '' ] ], '/en/1' ];
+		yield 'whitespace alias' => [ [ 'en' => [ '   ' ] ], '/en/0' ];
+		yield 'whitespace with tab alias' => [ [ 'en' => [ " \t " ] ], '/en/0' ];
 	}
 
 	public function testGivenInvalidAliasType_throwsException(): void {

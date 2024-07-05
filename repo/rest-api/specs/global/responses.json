@@ -448,7 +448,6 @@
 					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyWithLanguageContextExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongWithLanguageContextExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasWithLanguageContextExample" },
-					"alias-empty": { "$ref": "./examples.json#/AliasEmptyWithLanguageContextExample" },
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyWithLanguageContextExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongWithLanguageContextExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
@@ -1040,7 +1039,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"alias-empty": { "$ref": "./examples.json#/AliasEmptyExample" },
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
@@ -1064,7 +1062,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"alias-empty": { "$ref": "./examples.json#/AliasEmptyExample" },
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },

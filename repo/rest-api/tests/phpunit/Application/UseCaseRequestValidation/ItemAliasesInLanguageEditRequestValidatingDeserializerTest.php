@@ -73,11 +73,20 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 	}
 
 	public static function invalidAliasesProvider(): Generator {
-		yield 'alias is empty' => [
+		yield 'alias on pos 0 is empty' => [
 			[ '' ],
 			null,
-			UseCaseError::ALIAS_EMPTY,
-			'Alias must not be empty',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/aliases/0'",
+			[ UseCaseError::CONTEXT_PATH => '/aliases/0' ],
+		];
+
+		yield 'alias on pos 1 is empty' => [
+			[ 'aka', '' ],
+			null,
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/aliases/1'",
+			[ UseCaseError::CONTEXT_PATH => '/aliases/1' ],
 		];
 
 		yield 'alias list is empty' => [

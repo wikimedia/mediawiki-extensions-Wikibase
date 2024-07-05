@@ -418,8 +418,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'alias-empty', { language: 'en' } );
-			assert.strictEqual( response.body.message, 'Alias must not be empty' );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/aliases/en/1' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/aliases/en/1'" );
 		} );
 
 		it( 'alias list is empty', async () => {

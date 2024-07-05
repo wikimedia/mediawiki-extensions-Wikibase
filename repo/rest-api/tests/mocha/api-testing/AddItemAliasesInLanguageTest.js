@@ -183,8 +183,8 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'alias-empty' );
-			assert.strictEqual( response.body.message, 'Alias must not be empty' );
+			assertValidError( response, 400, 'invalid-value', { path: '/aliases/0' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/aliases/0'" );
 		} );
 
 		it( 'alias list is empty', async () => {
