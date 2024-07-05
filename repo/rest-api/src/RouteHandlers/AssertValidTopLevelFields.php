@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\RouteHandlers;
 
 use InvalidArgumentException;
 use MediaWiki\Rest\HttpException;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikimedia\Assert\Assert;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -34,12 +35,13 @@ trait AssertValidTopLevelFields {
 		try {
 			Assert::parameterType( $type, $value, '$field' );
 		} catch ( InvalidArgumentException $exception ) {
+			$error = UseCaseError::newInvalidValue( "/$fieldName" );
 			throw new HttpException(
-				"Invalid value at '/$fieldName'",
-				400,
+				$error->getErrorMessage(),
+				ErrorResponseToHttpStatus::lookup( $error->getErrorCode() ),
 				[
-					'code' => 'invalid-value',
-					'context' => [ 'path' => "/$fieldName" ],
+					'code' => $error->getErrorCode(),
+					'context' => $error->getErrorContext(),
 				]
 			);
 		}
