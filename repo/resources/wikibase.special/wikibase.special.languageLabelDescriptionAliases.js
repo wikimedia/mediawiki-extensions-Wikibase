@@ -82,6 +82,12 @@
 
 		function indicateDescriptionSupport( languageCode ) {
 			var disabled = languageCode === 'mul';
+			var messageKey;
+			if ( mw.config.values.wgCanonicalSpecialPageName === 'NewProperty' ) {
+				messageKey = 'wikibase-property-description-edit-not-supported';
+			} else if ( mw.config.values.wgCanonicalSpecialPageName === 'NewItem' ) {
+				messageKey = 'wikibase-item-description-edit-not-supported';
+			}
 
 			fields.forEach( function ( field ) {
 				if ( field.name !== 'description' ) {
@@ -89,7 +95,10 @@
 				}
 				field.widget.setDisabled( disabled );
 				field.fieldLayoutWidget.setNotices(
-					disabled ? [ mw.msg( 'wikibase-description-edit-not-supported' ) ] : []
+					// The following messages can be used here:
+					// * wikibase-property-description-edit-not-supported
+					// * wikibase-item-description-edit-not-supported
+					disabled ? [ mw.msg( messageKey ) ] : []
 				);
 				if ( disabled ) {
 					// Clear the previous input if "mul" is selected.
