@@ -32,7 +32,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
-	public const INVALID_SITE_ID = 'invalid-site-id';
 	public const INVALID_STATEMENT_TYPE = 'invalid-statement-type';
 	public const INVALID_STATEMENT_SUBJECT_ID = 'invalid-statement-subject-id';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
@@ -161,7 +160,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATCH_FIELD_TYPE => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::INVALID_PATCH_OPERATION => [ self::CONTEXT_OPERATION ],
 		self::INVALID_PROPERTY_ID => [ self::CONTEXT_PROPERTY_ID ],
-		self::INVALID_SITE_ID => [],
 		self::INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::INVALID_STATEMENT_SUBJECT_ID => [ self::CONTEXT_SUBJECT_ID ],
 		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [
@@ -283,7 +281,6 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
-		self::INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_DATA_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
 		self::TITLE_FIELD_EMPTY => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_TITLE_FIELD => [ self::CONTEXT_SITE_ID ],

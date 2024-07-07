@@ -611,8 +611,13 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-site-id', { 'site-id': invalidSiteId } );
-			assert.include( response.body.message, invalidSiteId );
+			assertValidError(
+				response,
+				400,
+				'invalid-value',
+				{ path: `/item/sitelinks/${invalidSiteId}` }
+			);
+			assert.include( response.body.message, `/item/sitelinks/${invalidSiteId}` );
 		} );
 
 		it( 'sitelinks not an object', async () => {

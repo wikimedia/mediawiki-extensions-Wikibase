@@ -288,11 +288,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'sitelinks', 'sitelinks', $serialization );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
-				throw new UseCaseError(
-					UseCaseError::INVALID_SITE_ID,
-					"Not a valid site ID: '{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}'",
-					[ UseCaseError::CONTEXT_SITE_ID => $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}" );
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw new UseCaseError(
 					UseCaseError::SITELINK_DATA_MISSING_TITLE,
