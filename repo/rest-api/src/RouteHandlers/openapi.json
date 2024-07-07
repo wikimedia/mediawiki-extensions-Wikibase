@@ -4229,9 +4229,6 @@
               "invalid-title-field": {
                 "$ref": "#/components/examples/InvalidTitleWithSiteContextExample"
               },
-              "title-field-empty": {
-                "$ref": "#/components/examples/TitleIsEmptyWithSiteContextExample"
-              },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
               },
@@ -4780,9 +4777,6 @@
               },
               "invalid-title-field": {
                 "$ref": "#/components/examples/InvalidTitleExample"
-              },
-              "title-field-empty": {
-                "$ref": "#/components/examples/TitleIsEmptyExample"
               },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
@@ -7436,21 +7430,6 @@
         "value": {
           "code": "invalid-title-field",
           "message": "Not a valid input for title field",
-          "context": {
-            "site": "{site_id}"
-          }
-        }
-      },
-      "TitleIsEmptyExample": {
-        "value": {
-          "code": "title-field-empty",
-          "message": "Title must not be empty"
-        }
-      },
-      "TitleIsEmptyWithSiteContextExample": {
-        "value": {
-          "code": "title-field-empty",
-          "message": "Title must not be empty",
           "context": {
             "site": "{site_id}"
           }

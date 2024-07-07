@@ -646,9 +646,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: '' } }
 			} ).makeRequest();
+			const path = `/item/sitelinks/${localWikiId}/title`;
 
-			assertValidError( response, 400, 'title-field-empty', { 'site-id': localWikiId } );
-			assert.strictEqual( response.body.message, 'Title must not be empty' );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'sitelink title field not provided', async () => {

@@ -300,11 +300,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
 				);
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-				throw new UseCaseError(
-					UseCaseError::TITLE_FIELD_EMPTY,
-					'Title must not be empty',
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 				throw new UseCaseError(
