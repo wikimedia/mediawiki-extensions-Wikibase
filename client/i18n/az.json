@@ -48,7 +48,7 @@
 	"notification-header-page-connection": "<strong>$3</strong> səhifəsi əlaqəli məlumatların toplandığı {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 nömrəli {{WBREPONAME}} elementi}} ilə {{GENDER:$2|əlaqələndirildi}}.",
 	"notification-link-text-view-item": "Elementə {{GENDER:$1|bax}}",
 	"notification-subject-page-connection": "{{SITENAME}} saytında {{GENDER:$3|yaratdığınız}} səhifə {{WBREPONAME}} elementinə {{GENDER:$2|qoşulub}}",
-	"connected-redirect-category": "{{WBREPONAME}} elementinə bağlı olan yönləndirmələr",
+	"connected-redirect-category": "{{WBREPONAME}} elementi ilə əlaqələndirilmiş yönləndirmə səhifələri",
 	"connected-redirect-category-desc": "Bu kateqoriya {{WBREPONAME}} elementinə bağlı olan yönləndirmə səhifələrini özündə birləşdirir.",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>{{WBREPONAME}} layihəsində istifadəçi adınız və ya IP-adresiniz bloklanmışdır.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Bu vikidə istifadəçi adınız və ya IP-adresiniz bloklanmışdır.</strong>"

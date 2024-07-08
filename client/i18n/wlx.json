@@ -1,9 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Umar Asiya"
+			"Umar Asiya",
+			"Zakaria Tunsung"
 		]
 	},
-	"wikibase-editlinks": "Masks a linkehi eŋ",
-	"wikibase-linkitem-addlinks": "Paahi toonhibu"
+	"wikibase-dataitem": "{{WBREPONAME}} buŋ",
+	"wikibase-editlinks": "maale seu tɔɔhi jiihi",
+	"wikibase-linkitem-addlinks": "Paahi tɔɔhi jie",
+	"wikibase-linkitem-title": "Tɔɔhi ne peeji",
+	"wikibase-linkitem-linkpage": "Tɔɔhi ne peeji",
+	"wikibase-linkitem-selectlink": "Gaafera ihi bijie aneŋ peeji emboɔra ka e tɔɔhi ne a peeji ŋa.",
+	"wikibase-linkitem-input-site": "Kɔkɔre:",
+	"wikibase-linkitem-input-page": "Peeji:",
+	"wikibase-rc-hide-wikidata-hide": "Sɔgili",
+	"wikibase-rc-hide-wikidata-show": "Wuli"
 }
