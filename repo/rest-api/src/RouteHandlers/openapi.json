@@ -5226,9 +5226,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5264,9 +5261,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5301,9 +5295,6 @@
               },
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
-              },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -5864,9 +5855,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5911,9 +5899,6 @@
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
               },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5957,9 +5942,6 @@
               },
               "invalid-patch": {
                 "$ref": "#/components/examples/InvalidPatchExample"
-              },
-              "invalid-patch-field-type": {
-                "$ref": "#/components/examples/InvalidPatchFieldTypeExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -7467,23 +7449,6 @@
         "value": {
           "code": "invalid-patch",
           "message": "The provided patch is invalid"
-        }
-      },
-      "InvalidPatchFieldTypeExample": {
-        "value": {
-          "code": "invalid-patch-field-type",
-          "message": "The value of '{field}' must be of type string",
-          "context": {
-            "operation": {
-              "op": "remove",
-              "path": [
-                "not",
-                "a",
-                "string"
-              ]
-            },
-            "field": "path"
-          }
         }
       },
       "MissingJsonPatchFieldExample": {
