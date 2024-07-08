@@ -32,7 +32,6 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
-	public const ITEM_DATA_INVALID_FIELD = 'item-data-invalid-field';
 	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
@@ -156,7 +155,6 @@ class UseCaseError extends UseCaseException {
 		],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [],
-		self::ITEM_DATA_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],

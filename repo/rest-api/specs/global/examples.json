@@ -810,16 +810,6 @@
 			}
 		}
 	},
-	"ItemDataInvalidFieldExample": {
-		"value": {
-			"code": "item-data-invalid-field",
-			"message": "Invalid input for '{field}'",
-			"context": {
-				"path": "{field}",
-				"value": "{value}"
-			}
-		}
-	},
 	"ItemDataUnexpectedFieldExample": {
 		"value": {
 			"code": "unexpected-field",

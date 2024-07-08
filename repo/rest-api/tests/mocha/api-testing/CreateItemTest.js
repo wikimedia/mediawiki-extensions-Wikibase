@@ -151,9 +151,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newCreateItemRequestBuilder( invalidItem ).assertInvalidRequest().makeRequest();
 
-			const context = { path: fieldWithInvalidValue, value: invalidValue };
-			assertValidError( response, 400, 'item-data-invalid-field', context );
-			assert.include( response.body.message, fieldWithInvalidValue );
+			const context = { path: `/item/${fieldWithInvalidValue}` };
+			assertValidError( response, 400, 'invalid-value', context );
+			assert.strictEqual( response.body.message, `Invalid value at '/item/${fieldWithInvalidValue}'` );
 		} );
 
 		it( 'invalid labels field', async () => {
@@ -162,8 +162,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'item-data-invalid-field', { path: 'labels', value: invalidLabels } );
-			assert.include( response.body.message, 'labels' );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/labels' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/labels'" );
 		} );
 
 		it( 'invalid descriptions field', async () => {
@@ -175,10 +175,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				400,
-				'item-data-invalid-field',
-				{ path: 'descriptions', value: invalidDescriptions }
+				'invalid-value',
+				{ path: '/item/descriptions' }
 			);
-			assert.include( response.body.message, 'descriptions' );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/descriptions'" );
 		} );
 
 		it( 'invalid aliases field', async () => {
@@ -188,8 +188,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'item-data-invalid-field', { path: 'aliases', value: invalidAliases } );
-			assert.include( response.body.message, 'aliases' );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/aliases' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/aliases'" );
 		} );
 
 		it( 'invalid statements field', async () => {
@@ -199,13 +199,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'item-data-invalid-field',
-				{ path: 'statements', value: invalidStatements }
-			);
-			assert.include( response.body.message, 'statements' );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/statements' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/statements'" );
 		} );
 
 		it( 'unexpected field', async () => {
@@ -631,13 +626,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: invalidSitelinks
 			} ).makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'item-data-invalid-field',
-				{ path: 'sitelinks', value: invalidSitelinks }
-			);
-			assert.strictEqual( response.body.message, "Invalid input for 'sitelinks'" );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/sitelinks' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/sitelinks'" );
 		} );
 
 		it( 'sitelink is not an object', async () => {
