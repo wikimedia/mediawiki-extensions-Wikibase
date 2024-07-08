@@ -590,21 +590,13 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_TITLE_FIELD,
-				'Not a valid input for title field',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
 		];
 		yield SitelinkValidator::CODE_INVALID_TITLE_TYPE => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_TITLE_FIELD,
-				'Not a valid input for title field',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
 		];
 		yield SitelinkValidator::CODE_INVALID_BADGES_TYPE => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE, [

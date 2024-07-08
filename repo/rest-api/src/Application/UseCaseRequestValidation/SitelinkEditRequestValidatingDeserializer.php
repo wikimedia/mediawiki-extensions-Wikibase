@@ -32,13 +32,9 @@ class SitelinkEditRequestValidatingDeserializer {
 						'Mandatory sitelink title missing',
 					);
 				case SitelinkValidator::CODE_EMPTY_TITLE:
-					throw UseCaseError::newInvalidValue( '/sitelink/title' );
 				case SitelinkValidator::CODE_INVALID_TITLE:
 				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
-					throw new UseCaseError(
-						UseCaseError::INVALID_TITLE_FIELD,
-						'Not a valid input for title field'
-					);
+					throw UseCaseError::newInvalidValue( '/sitelink/title' );
 				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 					throw new UseCaseError(
 						UseCaseError::INVALID_SITELINK_BADGES_FORMAT,

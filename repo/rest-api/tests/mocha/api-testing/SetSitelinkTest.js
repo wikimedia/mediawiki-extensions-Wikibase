@@ -300,18 +300,20 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const newSitelinkWithInvalidTitle = { title: 'invalid title%00' };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithInvalidTitle )
 				.makeRequest();
+			const path = '/sitelink/title';
 
-			assertValidError( response, 400, 'invalid-title-field' );
-			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'title is not a string', async () => {
 			const newSitelinkWithInvalidTitle = { title: [ 'array', 'not', 'allowed' ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithInvalidTitle )
 				.makeRequest();
+			const path = '/sitelink/title';
 
-			assertValidError( response, 400, 'invalid-title-field' );
-			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'badges is not an array', async () => {
