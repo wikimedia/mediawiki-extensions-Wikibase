@@ -290,14 +290,9 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
 				);
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
-				throw new UseCaseError(
-					UseCaseError::INVALID_TITLE_FIELD,
-					'Not a valid input for title field',
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 				throw new UseCaseError(
 					UseCaseError::INVALID_SITELINK_BADGES_FORMAT,

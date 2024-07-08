@@ -42,19 +42,6 @@
 			"message": "Not a valid sitelink type"
 		}
 	},
-	"InvalidTitleExample": {
-		"value": {
-			"code": "invalid-title-field",
-			"message": "Not a valid input for title field"
-		}
-	},
-	"InvalidTitleWithSiteContextExample": {
-		"value": {
-			"code": "invalid-title-field",
-			"message": "Not a valid input for title field",
-			"context": { "site": "{site_id}" }
-		}
-	},
 	"TitleDoesNotExistOnGivenSiteExample": {
 		"value": {
 			"code": "title-does-not-exist",

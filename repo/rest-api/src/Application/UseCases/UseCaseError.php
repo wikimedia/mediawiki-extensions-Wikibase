@@ -91,7 +91,6 @@ class UseCaseError extends UseCaseException {
 	public const SITELINK_CONFLICT = 'sitelink-conflict';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
-	public const INVALID_TITLE_FIELD = 'invalid-title-field';
 	public const INVALID_SITELINK_BADGES_FORMAT = 'invalid-sitelink-badges-format';
 	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
@@ -229,7 +228,6 @@ class UseCaseError extends UseCaseException {
 		self::SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID ],
 		self::SITELINK_NOT_DEFINED => [],
 		self::SITELINK_DATA_MISSING_TITLE => [],
-		self::INVALID_TITLE_FIELD => [],
 		self::INVALID_SITELINK_BADGES_FORMAT => [],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],
@@ -274,7 +272,6 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
 		self::SITELINK_DATA_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
-		self::INVALID_TITLE_FIELD => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID ],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],

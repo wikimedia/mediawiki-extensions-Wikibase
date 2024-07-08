@@ -674,9 +674,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: 'invalid title%00' } }
 			} ).makeRequest();
+			const path = `/item/sitelinks/${localWikiId}/title`;
 
-			assertValidError( response, 400, 'invalid-title-field', { 'site-id': localWikiId } );
-			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'title is not a string', async () => {
@@ -684,9 +685,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: [ 'array', 'not', 'allowed' ] } }
 			} ).makeRequest();
+			const path = `/item/sitelinks/${localWikiId}/title`;
 
-			assertValidError( response, 400, 'invalid-title-field', { 'site-id': localWikiId } );
-			assert.strictEqual( response.body.message, 'Not a valid input for title field' );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'badges is not an array', async () => {

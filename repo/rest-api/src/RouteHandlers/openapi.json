@@ -4220,9 +4220,6 @@
               "invalid-sitelink-type": {
                 "$ref": "#/components/examples/InvalidSitelinkTypeExample"
               },
-              "invalid-title-field": {
-                "$ref": "#/components/examples/InvalidTitleWithSiteContextExample"
-              },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
               },
@@ -4765,9 +4762,6 @@
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
-              },
-              "invalid-title-field": {
-                "$ref": "#/components/examples/InvalidTitleExample"
               },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
@@ -7379,21 +7373,6 @@
         "value": {
           "code": "invalid-sitelink-type",
           "message": "Not a valid sitelink type"
-        }
-      },
-      "InvalidTitleExample": {
-        "value": {
-          "code": "invalid-title-field",
-          "message": "Not a valid input for title field"
-        }
-      },
-      "InvalidTitleWithSiteContextExample": {
-        "value": {
-          "code": "invalid-title-field",
-          "message": "Not a valid input for title field",
-          "context": {
-            "site": "{site_id}"
-          }
         }
       },
       "TitleDoesNotExistOnGivenSiteExample": {

@@ -80,15 +80,19 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			"Invalid value at '$path'",
 			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
+		$path = '/sitelink/title';
 		yield 'invalid title' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE ),
-			UseCaseError::INVALID_TITLE_FIELD,
-			'Not a valid input for title field',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '$path'",
+			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
+		$path = '/sitelink/title';
 		yield 'title field is not a string' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE ),
-			UseCaseError::INVALID_TITLE_FIELD,
-			'Not a valid input for title field',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '$path'",
+			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
 		yield 'badges field is not an array' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
