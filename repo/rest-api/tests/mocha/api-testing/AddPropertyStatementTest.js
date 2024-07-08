@@ -267,7 +267,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-type', { path: '' } );
+			assertValidError( response, 400, 'invalid-value', { path: '/statement' } );
 		} );
 	} );
 

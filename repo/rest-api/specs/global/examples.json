@@ -952,15 +952,6 @@
 			"references": []
 		}
 	},
-	"InvalidStatementTypeExample": {
-		"value": {
-			"code": "invalid-statement-type",
-			"message": "Not a valid statement type",
-			"context": {
-				"path": "{property_id}/{index}"
-			}
-		}
-	},
 	"StatementGroupPropertyIdMismatch": {
 		"value": {
 			"code": "statement-group-property-id-mismatch",

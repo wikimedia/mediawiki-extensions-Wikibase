@@ -519,11 +519,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
 				[ StatementsValidator::CONTEXT_PATH => 'P1/0' ]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_STATEMENT_TYPE,
-				'Not a valid statement type',
-				[ UseCaseError::CONTEXT_PATH => 'P1/0' ]
-			),
+			UseCaseError::newInvalidValue( '/item/statements/P1/0' ),
 		];
 
 		yield 'missing statement field' => [

@@ -4211,9 +4211,6 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
               },
-              "invalid-statement-type": {
-                "$ref": "#/components/examples/InvalidStatementTypeExample"
-              },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
               },
@@ -8318,15 +8315,6 @@
           },
           "qualifiers": [],
           "references": []
-        }
-      },
-      "InvalidStatementTypeExample": {
-        "value": {
-          "code": "invalid-statement-type",
-          "message": "Not a valid statement type",
-          "context": {
-            "path": "{property_id}/{index}"
-          }
         }
       },
       "StatementGroupPropertyIdMismatch": {

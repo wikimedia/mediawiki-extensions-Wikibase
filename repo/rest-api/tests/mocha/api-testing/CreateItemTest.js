@@ -530,8 +530,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
 			} ).assertInvalidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-statement-type', { path: `${predicatePropertyId}/0` } );
-			assert.equal( response.body.message, 'Not a valid statement type' );
+			const path = `/item/statements/${predicatePropertyId}/0`;
+
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'invalid statement field', async () => {
