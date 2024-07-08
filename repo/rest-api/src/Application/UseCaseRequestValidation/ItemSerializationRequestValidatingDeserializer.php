@@ -284,11 +284,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-				throw new UseCaseError(
-					UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
-					'Value of badges field is not a list',
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges" );
 			case SitelinkValidator::CODE_INVALID_BADGE:
 				$badgeIndex = array_search(
 					$context[ SitelinkValidator::CONTEXT_BADGE],

@@ -68,19 +68,6 @@
 			"context": { "site": "{site_id}" }
 		}
 	},
-	"ValueOfBadgesFieldIsNotAListExample": {
-		"value": {
-			"code": "invalid-sitelink-badges-format",
-			"message": "Value of badges field is not a list"
-		}
-	},
-	"ValueOfBadgesFieldIsNotAListWithSiteContextExample": {
-		"value": {
-			"code": "invalid-sitelink-badges-format",
-			"message": "Value of badges field is not a list",
-			"context": { "site": "{site_id}" }
-		}
-	},
 	"ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
 		"value": {
 			"code": "item-not-a-badge",

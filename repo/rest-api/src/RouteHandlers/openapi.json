@@ -4217,9 +4217,6 @@
               "sitelink-data-missing-title": {
                 "$ref": "#/components/examples/SitelinkTitleFieldNotProvidedWithSiteContextExample"
               },
-              "invalid-sitelink-badges-format": {
-                "$ref": "#/components/examples/ValueOfBadgesFieldIsNotAListWithSiteContextExample"
-              },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
               },
@@ -4759,9 +4756,6 @@
               },
               "sitelink-data-missing-title": {
                 "$ref": "#/components/examples/SitelinkTitleFieldNotProvidedExample"
-              },
-              "invalid-sitelink-badges-format": {
-                "$ref": "#/components/examples/ValueOfBadgesFieldIsNotAListExample"
               },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeExample"
@@ -7355,21 +7349,6 @@
         "value": {
           "code": "sitelink-data-missing-title",
           "message": "Mandatory sitelink title missing",
-          "context": {
-            "site": "{site_id}"
-          }
-        }
-      },
-      "ValueOfBadgesFieldIsNotAListExample": {
-        "value": {
-          "code": "invalid-sitelink-badges-format",
-          "message": "Value of badges field is not a list"
-        }
-      },
-      "ValueOfBadgesFieldIsNotAListWithSiteContextExample": {
-        "value": {
-          "code": "invalid-sitelink-badges-format",
-          "message": "Value of badges field is not a list",
           "context": {
             "site": "{site_id}"
           }

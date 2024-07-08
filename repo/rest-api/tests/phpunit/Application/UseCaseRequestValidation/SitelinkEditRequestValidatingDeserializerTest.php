@@ -96,8 +96,9 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		];
 		yield 'badges field is not an array' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
-			UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
-			'Value of badges field is not a list',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/sitelink/badges'",
+			[ UseCaseError::CONTEXT_PATH => '/sitelink/badges' ],
 		];
 		yield 'badge is not a valid item id' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'P3' ] ),

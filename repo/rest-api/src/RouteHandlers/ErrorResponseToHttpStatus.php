@@ -12,7 +12,6 @@ class ErrorResponseToHttpStatus {
 
 	private static array $lookupTable = [
 		UseCaseError::INVALID_PATH_PARAMETER => 400,
-		UseCaseError::INVALID_PROPERTY_ID => 400,
 		UseCaseError::INVALID_QUERY_PARAMETER => 400,
 		UseCaseError::INVALID_LANGUAGE_CODE => 400,
 		UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE => 422,
@@ -88,7 +87,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCH_TEST_FAILED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
 		UseCaseError::UNEXPECTED_ERROR => 500,
-		UseCaseError::INVALID_SITELINK_BADGES_FORMAT => 400,
 		UseCaseError::ITEM_NOT_A_BADGE => 400,
 		UseCaseError::SITELINK_DATA_MISSING_TITLE => 400,
 		UseCaseError::SITELINK_TITLE_NOT_FOUND => 400,
