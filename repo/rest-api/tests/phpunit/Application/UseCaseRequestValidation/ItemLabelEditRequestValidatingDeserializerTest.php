@@ -124,8 +124,9 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'label empty' => [
 			new ValidationError( ItemLabelValidator::CODE_EMPTY ),
-			UseCaseError::LABEL_EMPTY,
-			'Label must not be empty',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/label'",
+			[ UseCaseError::CONTEXT_PATH => '/label' ],
 		];
 
 		$label = 'This label is too long.';

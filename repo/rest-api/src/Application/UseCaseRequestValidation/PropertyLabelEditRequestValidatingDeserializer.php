@@ -53,7 +53,7 @@ class PropertyLabelEditRequestValidatingDeserializer {
 						"Not a valid label: {$context[PropertyLabelValidator::CONTEXT_LABEL]}"
 					);
 				case PropertyLabelValidator::CODE_EMPTY:
-					throw new UseCaseError( UseCaseError::LABEL_EMPTY, 'Label must not be empty' );
+					throw UseCaseError::newInvalidValue( '/label' );
 				case PropertyLabelValidator::CODE_TOO_LONG:
 					$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(

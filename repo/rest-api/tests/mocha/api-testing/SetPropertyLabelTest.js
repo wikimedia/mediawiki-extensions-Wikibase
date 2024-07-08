@@ -225,8 +225,8 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'label-empty' );
-			assert.strictEqual( response.body.message, 'Label must not be empty' );
+			assertValidError( response, 400, 'invalid-value', { path: '/label' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/label'" );
 		} );
 
 		it( 'label too long', async () => {
