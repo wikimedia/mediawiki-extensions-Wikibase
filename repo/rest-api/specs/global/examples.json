@@ -42,13 +42,6 @@
 			"message": "Not a valid sitelink type"
 		}
 	},
-	"InvalidSiteIdWithSiteContextExample": {
-		"value": {
-			"code": "invalid-site-id",
-			"message": "Not a valid site ID: {site_id}",
-			"context": { "site": "{site_id}" }
-		}
-	},
 	"InvalidTitleExample": {
 		"value": {
 			"code": "invalid-title-field",

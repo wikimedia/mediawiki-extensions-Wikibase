@@ -13,7 +13,6 @@ class ErrorResponseToHttpStatus {
 	private static array $lookupTable = [
 		UseCaseError::INVALID_PATH_PARAMETER => 400,
 		UseCaseError::INVALID_PROPERTY_ID => 400,
-		UseCaseError::INVALID_SITE_ID => 400,
 		UseCaseError::INVALID_QUERY_PARAMETER => 400,
 		UseCaseError::INVALID_LANGUAGE_CODE => 400,
 		UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE => 422,

@@ -584,11 +584,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SiteIdValidator::CODE_INVALID_SITE_ID, [
 				SiteIdValidator::CONTEXT_SITE_ID_VALUE => 'invalid-site-id',
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_SITE_ID,
-				"Not a valid site ID: 'invalid-site-id'",
-				[ UseCaseError::CONTEXT_SITE_ID => 'invalid-site-id' ]
-			),
+			UseCaseError::newInvalidValue( '/item/sitelinks/invalid-site-id' ),
 		];
 		yield SitelinkValidator::CODE_TITLE_MISSING => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [
@@ -598,7 +594,6 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::SITELINK_DATA_MISSING_TITLE,
 				'Mandatory sitelink title missing',
 				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-
 			),
 		];
 		yield SitelinkValidator::CODE_EMPTY_TITLE => [

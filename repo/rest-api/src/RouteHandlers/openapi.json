@@ -4223,9 +4223,6 @@
               "invalid-sitelink-type": {
                 "$ref": "#/components/examples/InvalidSitelinkTypeExample"
               },
-              "invalid-site-id": {
-                "$ref": "#/components/examples/InvalidSiteIdWithSiteContextExample"
-              },
               "invalid-title-field": {
                 "$ref": "#/components/examples/InvalidTitleWithSiteContextExample"
               },
@@ -7415,15 +7412,6 @@
         "value": {
           "code": "invalid-sitelink-type",
           "message": "Not a valid sitelink type"
-        }
-      },
-      "InvalidSiteIdWithSiteContextExample": {
-        "value": {
-          "code": "invalid-site-id",
-          "message": "Not a valid site ID: {site_id}",
-          "context": {
-            "site": "{site_id}"
-          }
         }
       },
       "InvalidTitleExample": {
