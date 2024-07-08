@@ -327,7 +327,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: [ invalidBadge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			const path = '/badges/0';
+			const path = '/sitelink/badges/0';
 			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );

@@ -53,7 +53,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
 					}
 
-					throw UseCaseError::newInvalidValue( "/badges/{$badgeIndex}" );
+					throw UseCaseError::newInvalidValue( "/sitelink/badges/{$badgeIndex}" );
 				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 					$badge = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
 					throw new UseCaseError(
