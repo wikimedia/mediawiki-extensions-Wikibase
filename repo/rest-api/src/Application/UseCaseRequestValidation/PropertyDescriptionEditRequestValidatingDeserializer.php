@@ -55,10 +55,7 @@ class PropertyDescriptionEditRequestValidatingDeserializer {
 						"Not a valid description: {$context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION]}"
 					);
 				case PropertyDescriptionValidator::CODE_EMPTY:
-					throw new UseCaseError(
-						UseCaseError::DESCRIPTION_EMPTY,
-						'Description must not be empty'
-					);
+					throw UseCaseError::newInvalidValue( '/description' );
 				case PropertyDescriptionValidator::CODE_TOO_LONG:
 					$limit = $context[PropertyDescriptionValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(

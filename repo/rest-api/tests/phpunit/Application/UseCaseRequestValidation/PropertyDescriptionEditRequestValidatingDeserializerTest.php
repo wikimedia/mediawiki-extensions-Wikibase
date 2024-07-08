@@ -121,8 +121,9 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 	public static function invalidDescriptionProvider(): Generator {
 		yield 'description empty' => [
 			new ValidationError( PropertyDescriptionValidator::CODE_EMPTY ),
-			UseCaseError::DESCRIPTION_EMPTY,
-			'Description must not be empty',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/description'",
+			[ UseCaseError::CONTEXT_PATH => '/description' ],
 		];
 
 		$description = 'description that is too long...';

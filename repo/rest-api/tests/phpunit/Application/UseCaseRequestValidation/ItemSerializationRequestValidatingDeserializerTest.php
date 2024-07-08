@@ -250,11 +250,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
 				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::DESCRIPTION_EMPTY,
-				'Description must not be empty',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/descriptions/en' ),
 		];
 		yield 'description too long' => [
 			new ValidationError(

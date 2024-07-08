@@ -281,8 +281,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newCreateItemRequestBuilder( { descriptions: { en: '' } } )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'description-empty', { language: 'en' } );
-			assert.strictEqual( response.body.message, 'Description must not be empty' );
+			const context = { path: '/item/descriptions/en' };
+			assertValidError( response, 400, 'invalid-value', context );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/descriptions/en'" );
 		} );
 
 		it( 'label too long', async () => {

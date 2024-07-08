@@ -444,7 +444,6 @@
 					"invalid-label": { "$ref": "./examples.json#/InvalidLabelWithLanguageContextExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongWithLanguageContextExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionWithLanguageContextExample" },
-					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyWithLanguageContextExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongWithLanguageContextExample" },
 					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasWithLanguageContextExample" },
 					"alias-list-empty": { "$ref": "./examples.json#/AliasListEmptyWithLanguageContextExample" },
@@ -896,7 +895,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionExample" },
-					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
@@ -924,7 +922,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionExample" },
-					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"

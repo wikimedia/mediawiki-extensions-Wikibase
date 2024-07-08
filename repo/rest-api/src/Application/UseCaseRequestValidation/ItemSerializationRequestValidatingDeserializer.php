@@ -133,10 +133,8 @@ class ItemSerializationRequestValidatingDeserializer {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'descriptions', 'descriptions', $descriptionsSerialization );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
-				throw new UseCaseError(
-					UseCaseError::DESCRIPTION_EMPTY,
-					'Description must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE] ]
+				throw UseCaseError::newInvalidValue(
+					"/item/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}"
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
 				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );

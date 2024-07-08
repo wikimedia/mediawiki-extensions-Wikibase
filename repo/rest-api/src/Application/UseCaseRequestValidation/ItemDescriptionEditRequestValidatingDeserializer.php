@@ -58,10 +58,7 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 						"Not a valid description: {$context[ItemDescriptionValidator::CONTEXT_DESCRIPTION]}"
 					);
 				case ItemDescriptionValidator::CODE_EMPTY:
-					throw new UseCaseError(
-						UseCaseError::DESCRIPTION_EMPTY,
-						'Description must not be empty'
-					);
+					throw UseCaseError::newInvalidValue( '/description' );
 				case ItemDescriptionValidator::CODE_TOO_LONG:
 					$limit = $context[ItemDescriptionValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(

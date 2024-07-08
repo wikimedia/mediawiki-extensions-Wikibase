@@ -197,7 +197,8 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', '' )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'description-empty' );
+			assertValidError( response, 400, 'invalid-value', { path: '/description' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/description'" );
 		} );
 
 		it( 'description too long', async () => {

@@ -717,19 +717,6 @@
 			"context": { "language": "{language_code}" }
 		}
 	},
-	"DescriptionEmptyExample": {
-		"value": {
-			"code": "description-empty",
-			"message": "Description must not be empty"
-		}
-	},
-	"DescriptionEmptyWithLanguageContextExample": {
-		"value": {
-			"code": "description-empty",
-			"message": "Description must not be empty",
-			"context": { "language": "{language_code}" }
-		}
-	},
 	"DescriptionTooLongExample": {
 		"value": {
 			"code": "description-too-long",

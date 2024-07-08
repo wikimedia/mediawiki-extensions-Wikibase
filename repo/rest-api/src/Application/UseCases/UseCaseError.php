@@ -17,7 +17,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_ALIAS = 'invalid-alias';
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
 	public const COMMENT_TOO_LONG = 'comment-too-long';
-	public const DESCRIPTION_EMPTY = 'description-empty';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const DESCRIPTION_TOO_LONG = 'description-too-long';
 	public const INVALID_VALUE = 'invalid-value';
@@ -137,7 +136,6 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::ALIASES_NOT_DEFINED => [],
 		self::COMMENT_TOO_LONG => [],
-		self::DESCRIPTION_EMPTY => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
@@ -259,7 +257,6 @@ class UseCaseError extends UseCaseException {
 	 * context.
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
-		self::DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::ALIAS_LIST_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],

@@ -36,7 +36,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::MISSING_JSON_PATCH_FIELD => 400,
 		UseCaseError::INVALID_LABEL => 400,
 		UseCaseError::PATCHED_LABEL_INVALID => 422,
-		UseCaseError::DESCRIPTION_EMPTY => 400,
 		UseCaseError::DESCRIPTION_TOO_LONG => 400,
 		UseCaseError::INVALID_DESCRIPTION => 400,
 		UseCaseError::LABEL_DESCRIPTION_SAME_VALUE => 400,
