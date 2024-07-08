@@ -91,12 +91,10 @@ class PatchRequestValidatingDeserializerTest extends TestCase {
 				JsonPatchValidator::CONTEXT_OPERATION => $operation,
 				JsonPatchValidator::CONTEXT_FIELD => 'op',
 			] ),
-			UseCaseError::INVALID_PATCH_FIELD_TYPE,
-			"The value of 'op' must be of type string",
-			[
-				UseCaseError::CONTEXT_OPERATION => $operation,
-				UseCaseError::CONTEXT_FIELD => 'op',
-			],
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/patch/0/op'",
+			[ UseCaseError::CONTEXT_PATH => '/patch/0/op' ],
+			[ $operation ],
 		];
 
 		$operation = [ 'path' => '/a/b/c', 'value' => 'test' ];

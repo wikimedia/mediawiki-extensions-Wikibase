@@ -90,12 +90,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response(
-				response,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'op' }
-			);
-			assert.include( response.body.message, "'op'" );
+			assertValid400Response( response, 'invalid-value', { path: '/patch/0/op' } );
+			assert.include( response.body.message, '/patch/0/op' );
 		} );
 
 		it( "invalid patch - 'path' is not a string", async () => {
@@ -103,12 +99,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response(
-				response,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'path' }
-			);
-			assert.include( response.body.message, "'path'" );
+			assertValid400Response( response, 'invalid-value', { path: '/patch/0/path' } );
+			assert.include( response.body.message, '/patch/0/path' );
 		} );
 
 		it( "invalid patch - 'from' is not a string", async () => {
@@ -116,12 +108,8 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.makeRequest();
 
-			assertValid400Response(
-				response,
-				'invalid-patch-field-type',
-				{ operation: invalidOperation, field: 'from' }
-			);
-			assert.include( response.body.message, "'from'" );
+			assertValid400Response( response, 'invalid-value', { path: '/patch/0/from' } );
+			assert.include( response.body.message, '/patch/0/from' );
 		} );
 	} );
 };

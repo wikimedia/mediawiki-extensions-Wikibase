@@ -37,14 +37,13 @@ class PatchRequestValidatingDeserializer {
 					throw UseCaseError::newInvalidValue( "/patch/$opIndex/op" );
 
 				case JsonPatchValidator::CODE_INVALID_FIELD_TYPE:
-					throw new UseCaseError(
-						UseCaseError::INVALID_PATCH_FIELD_TYPE,
-						"The value of '{$context[JsonPatchValidator::CONTEXT_FIELD]}' must be of type string",
-						[
-							UseCaseError::CONTEXT_OPERATION => $context[JsonPatchValidator::CONTEXT_OPERATION],
-							UseCaseError::CONTEXT_FIELD => $context[JsonPatchValidator::CONTEXT_FIELD],
-						]
-					);
+					$opField = $context[JsonPatchValidator::CONTEXT_FIELD];
+					$opIndex = array_search( $context[JsonPatchValidator::CONTEXT_OPERATION], $request->getPatch() );
+					if ( !is_int( $opIndex ) ) {
+						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+					}
+
+					throw UseCaseError::newInvalidValue( "/patch/$opIndex/$opField" );
 
 				case JsonPatchValidator::CODE_MISSING_FIELD:
 					throw new UseCaseError(
