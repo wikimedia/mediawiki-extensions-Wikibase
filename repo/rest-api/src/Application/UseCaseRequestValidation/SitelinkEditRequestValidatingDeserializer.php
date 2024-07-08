@@ -46,7 +46,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						$request->getSitelink()[ 'badges' ]
 					);
 					if ( !is_int( $badgeIndex ) ) {
-						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+						throw new LogicException( "The invalid badge wasn't found" );
 					}
 
 					throw UseCaseError::newInvalidValue( "/sitelink/badges/{$badgeIndex}" );

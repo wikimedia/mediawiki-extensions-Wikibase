@@ -295,7 +295,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					$serialization[ $context[SitelinkValidator::CONTEXT_SITE_ID ] ][ 'badges' ]
 				);
 				if ( !is_int( $badgeIndex ) ) {
-					throw new LogicException( "The invalid operation wasn't found in the original patch document" );
+					throw new LogicException( "The invalid badge wasn't found" );
 				}
 				$path = '/item/sitelinks/' . $context[ SitelinkValidator::CONTEXT_SITE_ID ] . '/badges/' . $badgeIndex;
 				throw UseCaseError::newInvalidValue( $path );
