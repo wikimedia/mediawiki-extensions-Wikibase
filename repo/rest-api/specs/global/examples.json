@@ -776,23 +776,6 @@
 			}
 		}
 	},
-	"InvalidAliasExample": {
-		"value": {
-			"code": "invalid-alias",
-			"message": "Not a valid alias: '{alias}'",
-			"context": { "alias": "{alias}" }
-		}
-	},
-	"InvalidAliasWithLanguageContextExample": {
-		"value": {
-			"code": "invalid-alias",
-			"message": "Not a valid alias: '{alias}'",
-			"context": {
-				"alias": "{alias}",
-				"language": "{language_code}"
-			}
-		}
-	},
 	"DuplicateAliasExample": {
 		"value": {
 			"code": "duplicate-alias",

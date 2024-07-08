@@ -13,7 +13,6 @@ class UseCaseError extends UseCaseException {
 	public const ALIAS_TOO_LONG = 'alias-too-long';
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
-	public const INVALID_ALIAS = 'invalid-alias';
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
 	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
@@ -137,7 +136,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
-		self::INVALID_ALIAS => [],
 		self::INVALID_DESCRIPTION => [],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_LABEL => [],
@@ -254,7 +252,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_DESCRIPTION => [ self::CONTEXT_LANGUAGE ],
-		self::INVALID_ALIAS => [ self::CONTEXT_LANGUAGE, self::CONTEXT_ALIAS ],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],

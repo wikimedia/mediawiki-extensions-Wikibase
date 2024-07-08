@@ -474,16 +474,16 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'alias contains invalid characters', async () => {
-			const invalidAlias = 'tab characters \t not allowed';
 			const response = await newCreateItemRequestBuilder( {
 				labels: { en: 'en-label' },
-				aliases: { en: [ invalidAlias ] }
+				aliases: { en: [ 'tab characters \t not allowed' ] }
 			} )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-alias', { language: 'en' } );
-			assert.include( response.body.message, invalidAlias );
+			const path = '/item/aliases/en/0';
+			assertValidError( response, 400, 'invalid-value', { path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'duplicate input aliases', async () => {

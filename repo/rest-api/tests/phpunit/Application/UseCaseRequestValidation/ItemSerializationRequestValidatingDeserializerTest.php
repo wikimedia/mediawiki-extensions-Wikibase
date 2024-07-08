@@ -420,11 +420,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					AliasesValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_ALIAS,
-				'Not a valid alias: 22',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
+			[ 'aliases' => [ 'en' => [ 'ok', 22 ] ] ],
 		];
 
 		yield 'invalid alias' => [
@@ -435,11 +432,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					AliasesValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_ALIAS,
-				"Not a valid alias: invalid \t",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/aliases/en/0' ),
+			[ 'aliases' => [ 'en' => [ "invalid \t" ] ] ],
 		];
 
 		yield 'duplicated alias' => [

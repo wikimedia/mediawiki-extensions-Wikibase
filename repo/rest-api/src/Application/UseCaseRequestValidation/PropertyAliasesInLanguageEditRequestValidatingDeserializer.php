@@ -71,11 +71,11 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case AliasesInLanguageValidator::CODE_INVALID:
-					throw new UseCaseError(
-						UseCaseError::INVALID_ALIAS,
-						"Not a valid alias: {$context[AliasesInLanguageValidator::CONTEXT_VALUE]}",
-						[ UseCaseError::CONTEXT_ALIAS => $context[AliasesInLanguageValidator::CONTEXT_VALUE] ]
-					);
+					$aliasIndex = array_search( $context[AliasesInLanguageValidator::CONTEXT_VALUE], $aliasesInLanguage->getAliases() );
+					if ( !is_int( $aliasIndex ) ) {
+						throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
+					}
+					throw UseCaseError::newInvalidValue( "/aliases/$aliasIndex" );
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(

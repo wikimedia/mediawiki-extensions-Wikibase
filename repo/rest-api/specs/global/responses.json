@@ -445,7 +445,6 @@
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongWithLanguageContextExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionWithLanguageContextExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongWithLanguageContextExample" },
-					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasWithLanguageContextExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongWithLanguageContextExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
@@ -1017,7 +1016,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
-					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }
@@ -1039,7 +1037,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongExample" },
-					"invalid-alias": { "$ref": "./examples.json#/InvalidAliasExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" }

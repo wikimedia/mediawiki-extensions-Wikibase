@@ -115,9 +115,9 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 				AliasesInLanguageValidator::CODE_INVALID,
 				[ AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias ]
 			),
-			UseCaseError::INVALID_ALIAS,
-			"Not a valid alias: $invalidAlias",
-			[ UseCaseError::CONTEXT_ALIAS => $invalidAlias ],
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/aliases/0'",
+			[ UseCaseError::CONTEXT_PATH => '/aliases/0' ],
 		];
 
 		$duplicateAlias = 'foo';

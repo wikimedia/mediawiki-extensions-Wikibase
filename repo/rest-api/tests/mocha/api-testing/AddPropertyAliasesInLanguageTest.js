@@ -220,13 +220,13 @@ describe( newRequest().getRouteDescription(), () => {
 		} );
 
 		it( 'alias contains invalid characters', async () => {
-			const invalidAlias = 'tab characters \t not allowed';
-			const response = await newRequest( testPropertyId, 'en', [ invalidAlias ] )
+			const response = await newRequest( testPropertyId, 'en', [ 'tab characters \t not allowed' ] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-alias', { alias: invalidAlias } );
-			assert.include( response.body.message, invalidAlias );
+			const path = '/aliases/0';
+			assertValidError( response, 400, 'invalid-value', { path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'duplicate input aliases', async () => {

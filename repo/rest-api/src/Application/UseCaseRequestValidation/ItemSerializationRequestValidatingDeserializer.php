@@ -65,7 +65,7 @@ class ItemSerializationRequestValidatingDeserializer {
 
 			$this->handleLabelValidationErrors( $validationError, $itemSerialization['labels'] ?? [] );
 			$this->handleDescriptionValidationErrors( $validationError, $itemSerialization['descriptions'] ?? [] );
-			$this->handleAliasesValidationErrors( $validationError );
+			$this->handleAliasesValidationErrors( $validationError, $itemSerialization['aliases'] ?? [] );
 			$this->handleStatementsValidationErrors( $validationError );
 			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
 
@@ -181,7 +181,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		}
 	}
 
-	private function handleAliasesValidationErrors( ValidationError $validationError ): void {
+	private function handleAliasesValidationErrors( ValidationError $validationError, array $aliasesSerialization ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case AliasesValidator::CODE_INVALID_ALIASES:
@@ -219,11 +219,11 @@ class ItemSerializationRequestValidatingDeserializer {
 			case AliasesInLanguageValidator::CODE_INVALID:
 				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::INVALID_ALIAS,
-					"Not a valid alias: $aliasValue",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language ]
-				);
+				$aliasIndex = array_search( $aliasValue, $aliasesSerialization[$language] );
+				if ( !is_int( $aliasIndex ) ) {
+					throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
+				}
+				throw UseCaseError::newInvalidValue( "/item/aliases/$language/$aliasIndex" );
 		}
 	}
 

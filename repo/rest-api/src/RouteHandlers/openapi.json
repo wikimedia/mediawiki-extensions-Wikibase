@@ -4193,9 +4193,6 @@
               "description-too-long": {
                 "$ref": "#/components/examples/DescriptionTooLongWithLanguageContextExample"
               },
-              "invalid-alias": {
-                "$ref": "#/components/examples/InvalidAliasWithLanguageContextExample"
-              },
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongWithLanguageContextExample"
               },
@@ -5069,9 +5066,6 @@
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongExample"
               },
-              "invalid-alias": {
-                "$ref": "#/components/examples/InvalidAliasExample"
-              },
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
               },
@@ -5106,9 +5100,6 @@
               },
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongExample"
-              },
-              "invalid-alias": {
-                "$ref": "#/components/examples/InvalidAliasExample"
               },
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
@@ -8070,25 +8061,6 @@
           "context": {
             "value": "{alias}",
             "character-limit": "{limit}",
-            "language": "{language_code}"
-          }
-        }
-      },
-      "InvalidAliasExample": {
-        "value": {
-          "code": "invalid-alias",
-          "message": "Not a valid alias: '{alias}'",
-          "context": {
-            "alias": "{alias}"
-          }
-        }
-      },
-      "InvalidAliasWithLanguageContextExample": {
-        "value": {
-          "code": "invalid-alias",
-          "message": "Not a valid alias: '{alias}'",
-          "context": {
-            "alias": "{alias}",
             "language": "{language_code}"
           }
         }
