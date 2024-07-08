@@ -332,7 +332,7 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, [ 'statement-not-array' ] )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-statement-type', { path: '' } );
+					assertValidError( response, 400, 'invalid-value', { path: '/statement' } );
 				} );
 
 				it( 'invalid statement field', async () => {

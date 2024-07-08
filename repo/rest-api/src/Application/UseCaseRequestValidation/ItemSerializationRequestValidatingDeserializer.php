@@ -243,13 +243,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'statements', 'statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
 			case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
-				throw UseCaseError::newInvalidValue( '/item/statements/' . $context[StatementsValidator::CONTEXT_PATH] );
 			case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
-				throw new UseCaseError(
-					UseCaseError::INVALID_STATEMENT_TYPE,
-					'Not a valid statement type',
-					[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
-				);
 			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw UseCaseError::newInvalidValue( '/item/statements/' . $context[StatementsValidator::CONTEXT_PATH] );
 			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
