@@ -6,7 +6,7 @@
 	},
 	"wikibase-edit": "praviti",
 	"wikibase-add": "dodati",
-	"wikibase-label-empty": "Etiketa ne byla označena",
-	"wikibase-description-empty": "Nemaje ješče podanogo opisa",
-	"wikibase-sitelinks-special": "Druge stranice"
+	"wikibase-label-empty": "Nemaje oprěděljenoj etikety",
+	"wikibase-description-empty": "Opis ne jest zapolnjeny",
+	"wikibase-sitelinks-special": "Druge sajty"
 }

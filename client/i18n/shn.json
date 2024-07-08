@@ -10,16 +10,16 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|လႅၵ်ႈလၢႆႈ|ၸိူဝ်းလႅၵ်ႈလၢႆႈ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} မီႇၵီး",
 	"wikibase-editlinks": "မႄးထတ်းႁဵင်းၵွင်ႉ",
-	"wikibase-editlinkstitle": "မႄးထတ်းႁဵင်းၵွင်ႉ ၽႃႇသႃႇၵႂၢမ်းၵႄႈၵၢင်ၵၼ်",
-	"wikibase-addlinkstitle": "ထႅမ်သႂ်ႇႁဵင်းၵွင်ႉ ၽႃႇသႃႇၵႂၢမ်း",
-	"wikibase-linkitem-addlinks": "ထႅမ်သႂ်ႇ ႁဵင်းၵွင်ႉ",
+	"wikibase-editlinkstitle": "မႄးထတ်းလိင်ႉၶ် ၽႃႇသႃႇတေႃႇၵၼ်",
+	"wikibase-addlinkstitle": "ထႅမ်သႂ်ႇလိင်ႉၶ် ၽႃႇသႃႇ",
+	"wikibase-linkitem-addlinks": "ထႅမ်သႂ်ႇ လိင်ႉၶ်",
 	"wikibase-linkitem-close": "ဢိုတ်းဢၼ်ၼႆႉသေ ပိုတ်ႇၶိုၼ်းၼႃႈလိၵ်ႈ",
 	"wikibase-linkitem-title": "ၵွင်ႉတင်း ၼႃႈလိၵ်ႈ",
 	"wikibase-linkitem-linkpage": "ၵွင်ႉတင်း ၼႃႈလိၵ်ႈ",
 	"wikibase-linkitem-selectlink": "ၶႅၼ်းတေႃး လိူၵ်ႈပၼ် ဝႅပ်ႉသၢႆႉ လႄႈ ၼႃႈလိၵ်ႈ ဢၼ်ၸဝ်ႈၵဝ်ႇ ၶႂ်ႈဢဝ် ၼႃႈလိၵ်ႈၼႆႉ ၵႂႃႇၵွင်ႉၸူးၼၼ်ႉ။",
-	"wikibase-linkitem-input-site": "ၽႃႇသႃႇၵႂၢမ်း :",
+	"wikibase-linkitem-input-site": "ၽႃႇသႃႇ :",
 	"wikibase-linkitem-input-page": "ၼႃႈလိၵ်ႈ :",
-	"wikibase-linkitem-success-link": "ၼႃႈလိၵ်ႈ ထုၵ်ႇ ၵွင်ႉၸူးဝႆႉယဝ်ႉ။ ၸဝ်ႈၵဝ်ႇ တေၸၢင်ႈႁႃတူၺ်း ၶွင်ဢၼ်ၶဝ်ႈပႃးဝႆႉ ႁဵင်းၵွင်ႉ တီႈ ၼႂ်း [$1 ယွင်ၶေႃႈမုၼ်း ၵၢင်ၵႅၼ်] ႁဝ်းၶႃႈ လႆႈယူႇ။",
+	"wikibase-linkitem-success-link": "ၼႃႈလိၵ်ႈၸိူဝ်းၼၼ်ႉ လႆႈၵွင်ႉသၢၼ်ဝႆႉယဝ်ႉ။ ၸဝ်ႈၵဝ်ႇ တေၸၢင်ႈႁႃတူၺ်း ၶွင်ဢၼ်ၶဝ်ႈပႃးဝႆႉ လိင်ႉၶ် တီႈ ၼႂ်း [$1 ႁူင်းသိမ်းၶေႃႈမုၼ်းသုၼ်ၵၢင်] ႁဝ်းၶႃႈ လႆႈယူႇ။",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "သိူင်ႇ",
 	"wikibase-rc-hide-wikidata-show": "ၼႄ",
@@ -30,5 +30,5 @@
 	"wikibase-pageinfo-description-local": "ၶေႃႈသပ်းလႅင်း ပိုၼ်ႉတီႈ",
 	"wikibase-pageinfo-entity-usage-D": "ၶေႃႈသပ်းလႅင်း ၵမ်ႈၽွင်ႈ",
 	"wikibase-otherprojects": "တီႈၼႂ်းၼႃႈၵၢၼ်တၢင်ႇဢၼ်",
-	"wikibase-client-data-bridge-references-heading": "ဢၢင်ႈဢိင်"
+	"wikibase-client-data-bridge-references-heading": "ၽိုၼ်ဢိင်"
 }
