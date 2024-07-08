@@ -279,9 +279,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::INVALID_DESCRIPTION,
-				'Not a valid description: 22',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/descriptions/en'",
+				[ UseCaseError::CONTEXT_PATH => '/item/descriptions/en' ]
 			),
 		];
 		yield 'invalid description' => [
@@ -293,9 +293,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::INVALID_DESCRIPTION,
-				"Not a valid description: invalid \t",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/descriptions/en'",
+				[ UseCaseError::CONTEXT_PATH => '/item/descriptions/en' ]
 			),
 		];
 		yield 'invalid description language code' => [

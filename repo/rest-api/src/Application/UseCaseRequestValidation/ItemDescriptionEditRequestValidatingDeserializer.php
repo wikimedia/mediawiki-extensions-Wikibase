@@ -53,10 +53,7 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case ItemDescriptionValidator::CODE_INVALID:
-					throw new UseCaseError(
-						UseCaseError::INVALID_DESCRIPTION,
-						"Not a valid description: {$context[ItemDescriptionValidator::CONTEXT_DESCRIPTION]}"
-					);
+					throw UseCaseError::newInvalidValue( '/description' );
 				case ItemDescriptionValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/description' );
 				case ItemDescriptionValidator::CODE_TOO_LONG:

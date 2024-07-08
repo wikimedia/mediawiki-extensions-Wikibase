@@ -150,8 +150,9 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 				PropertyDescriptionValidator::CODE_INVALID,
 				[ PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
 			),
-			UseCaseError::INVALID_DESCRIPTION,
-			"Not a valid description: $description",
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/description'",
+			[ UseCaseError::CONTEXT_PATH => '/description' ],
 		];
 
 		$language = 'en';

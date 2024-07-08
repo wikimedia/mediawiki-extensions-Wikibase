@@ -137,18 +137,11 @@ class ItemSerializationRequestValidatingDeserializer {
 					"/item/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}"
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
-				throw new UseCaseError(
-					UseCaseError::INVALID_DESCRIPTION,
-					"Not a valid description: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE] ]
+				throw UseCaseError::newInvalidValue(
+					"/item/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}"
 				);
 			case ItemDescriptionValidator::CODE_INVALID:
-				throw new UseCaseError(
-					UseCaseError::INVALID_DESCRIPTION,
-					"Not a valid description: {$context[ItemDescriptionValidator::CONTEXT_DESCRIPTION]}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/descriptions/{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}" );
 			case ItemDescriptionValidator::CODE_TOO_LONG:
 				throw new UseCaseError(
 					UseCaseError::DESCRIPTION_TOO_LONG,
