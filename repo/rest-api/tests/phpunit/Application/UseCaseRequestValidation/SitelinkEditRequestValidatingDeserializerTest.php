@@ -73,10 +73,12 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::SITELINK_DATA_MISSING_TITLE,
 			'Mandatory sitelink title missing',
 		];
+		$path = '/sitelink/title';
 		yield 'title is empty' => [
 			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE ),
-			UseCaseError::TITLE_FIELD_EMPTY,
-			'Title must not be empty',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '$path'",
+			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
 		yield 'invalid title' => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE ),

@@ -281,8 +281,10 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithEmptyTitle )
 				.makeRequest();
 
-			assertValidError( response, 400, 'title-field-empty' );
-			assert.strictEqual( response.body.message, 'Title must not be empty' );
+			const path = '/sitelink/title';
+
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'sitelink title field not provided', async () => {

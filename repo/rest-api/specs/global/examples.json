@@ -55,19 +55,6 @@
 			"context": { "site": "{site_id}" }
 		}
 	},
-	"TitleIsEmptyExample": {
-		"value": {
-			"code": "title-field-empty",
-			"message": "Title must not be empty"
-		}
-	},
-	"TitleIsEmptyWithSiteContextExample": {
-		"value": {
-			"code": "title-field-empty",
-			"message": "Title must not be empty",
-			"context": { "site": "{site_id}" }
-		}
-	},
 	"TitleDoesNotExistOnGivenSiteExample": {
 		"value": {
 			"code": "title-does-not-exist",

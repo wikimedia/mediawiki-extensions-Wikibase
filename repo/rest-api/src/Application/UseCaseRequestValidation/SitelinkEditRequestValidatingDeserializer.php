@@ -32,10 +32,7 @@ class SitelinkEditRequestValidatingDeserializer {
 						'Mandatory sitelink title missing',
 					);
 				case SitelinkValidator::CODE_EMPTY_TITLE:
-					throw new UseCaseError(
-						UseCaseError::TITLE_FIELD_EMPTY,
-						'Title must not be empty',
-					);
+					throw UseCaseError::newInvalidValue( '/sitelink/title' );
 				case SitelinkValidator::CODE_INVALID_TITLE:
 				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 					throw new UseCaseError(

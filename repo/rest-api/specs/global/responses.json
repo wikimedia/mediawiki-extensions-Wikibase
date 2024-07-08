@@ -458,9 +458,6 @@
 					"invalid-title-field": {
 						"$ref": "./examples.json#/InvalidTitleWithSiteContextExample"
 					},
-					"title-field-empty": {
-						"$ref": "./examples.json#/TitleIsEmptyWithSiteContextExample"
-					},
 					"title-does-not-exist": {
 						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
 					},
@@ -825,7 +822,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"invalid-title-field": { "$ref": "./examples.json#/InvalidTitleExample" },
-					"title-field-empty": { "$ref": "./examples.json#/TitleIsEmptyExample" },
 					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
 					"sitelink-data-missing-title": { "$ref": "./examples.json#/SitelinkTitleFieldNotProvidedExample" },
 					"invalid-sitelink-badges-format": { "$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListExample" },

@@ -600,11 +600,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::TITLE_FIELD_EMPTY,
-				'Title must not be empty',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
 		];
 		yield SitelinkValidator::CODE_INVALID_TITLE => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE, [
