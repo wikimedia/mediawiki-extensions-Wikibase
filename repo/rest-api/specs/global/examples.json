@@ -149,18 +149,6 @@
 			"message": "The provided patch is invalid"
 		}
 	},
-	"InvalidPatchOperationExample": {
-		"value": {
-			"code": "invalid-patch-operation",
-			"message": "Incorrect JSON patch operation: '{op}'",
-			"context": {
-				"operation": {
-					"op": "{op}",
-					"path": "/some/path"
-				}
-			}
-		}
-	},
 	"InvalidPatchFieldTypeExample": {
 		"value": {
 			"code": "invalid-patch-field-type",

@@ -29,7 +29,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_PATCH = 'invalid-patch';
 	public const INVALID_PATCH_FIELD_TYPE = 'invalid-patch-field-type';
-	public const INVALID_PATCH_OPERATION = 'invalid-patch-operation';
 	public const INVALID_PROPERTY_ID = 'invalid-property-id';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_STATEMENT_TYPE = 'invalid-statement-type';
@@ -156,7 +155,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
 		self::INVALID_PATCH => [],
 		self::INVALID_PATCH_FIELD_TYPE => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
-		self::INVALID_PATCH_OPERATION => [ self::CONTEXT_OPERATION ],
 		self::INVALID_PROPERTY_ID => [ self::CONTEXT_PROPERTY_ID ],
 		self::INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::INVALID_STATEMENT_SUBJECT_ID => [ self::CONTEXT_SUBJECT_ID ],
