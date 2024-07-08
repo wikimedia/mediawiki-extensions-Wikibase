@@ -39,7 +39,6 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
-	public const LABEL_EMPTY = 'label-empty';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const LABEL_TOO_LONG = 'label-too-long';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
@@ -169,7 +168,6 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
-		self::LABEL_EMPTY => [],
 		self::LABEL_NOT_DEFINED => [],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
@@ -261,7 +259,6 @@ class UseCaseError extends UseCaseException {
 	 * context.
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
-		self::LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::ALIAS_LIST_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
@@ -279,7 +276,6 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_CONFLICT => [ self::CONTEXT_SITE_ID ],
-
 	];
 
 	private string $errorCode;

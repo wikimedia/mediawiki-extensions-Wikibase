@@ -36,15 +36,16 @@ class UseCaseErrorTest extends TestCase {
 			[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ],
 		];
 
-		yield 'valid error with path context' => [
-			UseCaseError::LABEL_EMPTY,
-			'label empty',
-			[ UseCaseError::CONTEXT_LANGUAGE => 'en' ],
+		yield 'valid error with additional path context' => [
+			UseCaseError::SITELINK_CONFLICT,
+			'sitelink conflict',
+			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123', UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
 		];
 
-		yield 'valid error without path context' => [
-			UseCaseError::LABEL_EMPTY,
-			'label empty',
+		yield 'valid error without additional path context' => [
+			UseCaseError::SITELINK_CONFLICT,
+			'sitelink conflict',
+			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123' ],
 		];
 	}
 
@@ -71,9 +72,9 @@ class UseCaseErrorTest extends TestCase {
 		];
 
 		yield 'wrong path context field name' => [
-			UseCaseError::LABEL_EMPTY,
-			'label empty',
-			[ UseCaseError::CONTEXT_PATH => 'en' ],
+			UseCaseError::SITELINK_CONFLICT,
+			'sitelink conflict',
+			[ UseCaseError::CONTEXT_PATH => '/enwiki' ],
 		];
 	}
 

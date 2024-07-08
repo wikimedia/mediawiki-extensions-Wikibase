@@ -273,8 +273,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newCreateItemRequestBuilder( { labels: { en: '' } } )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'label-empty', { language: 'en' } );
-			assert.strictEqual( response.body.message, 'Label must not be empty' );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/labels/en' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/labels/en'" );
 		} );
 
 		it( 'empty description', async () => {

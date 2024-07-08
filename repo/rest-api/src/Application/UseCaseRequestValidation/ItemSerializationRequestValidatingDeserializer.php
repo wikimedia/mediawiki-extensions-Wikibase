@@ -81,11 +81,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'labels', 'labels', $labelsSerialization );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
-				throw new UseCaseError(
-					UseCaseError::LABEL_EMPTY,
-					'Label must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/labels/{$context[LabelsSyntaxValidator::CONTEXT_LANGUAGE]}" );
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
 				throw new UseCaseError(

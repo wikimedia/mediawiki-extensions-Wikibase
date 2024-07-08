@@ -56,7 +56,7 @@ class ItemLabelEditRequestValidatingDeserializer {
 						"Not a valid label: {$context[ItemLabelValidator::CONTEXT_LABEL]}"
 					);
 				case ItemLabelValidator::CODE_EMPTY:
-					throw new UseCaseError( UseCaseError::LABEL_EMPTY, 'Label must not be empty' );
+					throw UseCaseError::newInvalidValue( '/label' );
 				case ItemLabelValidator::CODE_TOO_LONG:
 					$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 					throw new UseCaseError(

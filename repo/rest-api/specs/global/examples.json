@@ -314,19 +314,6 @@
 			"context": { "language": "{language_code}" }
 		}
 	},
-	"LabelEmptyExample": {
-		"value": {
-			"code": "label-empty",
-			"message": "Label must not be empty"
-		}
-	},
-	"LabelEmptyWithLanguageContextExample": {
-		"value": {
-			"code": "label-empty",
-			"message": "Label must not be empty",
-			"context": { "language": "{language_code}" }
-		}
-	},
 	"LabelTooLongExample": {
 		"value": {
 			"code": "label-too-long",

@@ -4184,9 +4184,6 @@
               "invalid-label": {
                 "$ref": "#/components/examples/InvalidLabelWithLanguageContextExample"
               },
-              "label-empty": {
-                "$ref": "#/components/examples/LabelEmptyWithLanguageContextExample"
-              },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongWithLanguageContextExample"
               },
@@ -4807,9 +4804,6 @@
               "invalid-label": {
                 "$ref": "#/components/examples/InvalidLabelExample"
               },
-              "label-empty": {
-                "$ref": "#/components/examples/LabelEmptyExample"
-              },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongExample"
               },
@@ -4850,9 +4844,6 @@
               },
               "invalid-label": {
                 "$ref": "#/components/examples/InvalidLabelExample"
-              },
-              "label-empty": {
-                "$ref": "#/components/examples/LabelEmptyExample"
               },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongExample"
@@ -7662,21 +7653,6 @@
         "value": {
           "code": "invalid-label",
           "message": "Not a valid label: {label}",
-          "context": {
-            "language": "{language_code}"
-          }
-        }
-      },
-      "LabelEmptyExample": {
-        "value": {
-          "code": "label-empty",
-          "message": "Label must not be empty"
-        }
-      },
-      "LabelEmptyWithLanguageContextExample": {
-        "value": {
-          "code": "label-empty",
-          "message": "Label must not be empty",
           "context": {
             "language": "{language_code}"
           }

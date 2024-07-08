@@ -442,7 +442,6 @@
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
 					"invalid-label": { "$ref": "./examples.json#/InvalidLabelWithLanguageContextExample" },
-					"label-empty": { "$ref": "./examples.json#/LabelEmptyWithLanguageContextExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongWithLanguageContextExample" },
 					"invalid-description": { "$ref": "./examples.json#/InvalidDescriptionWithLanguageContextExample" },
 					"description-empty": { "$ref": "./examples.json#/DescriptionEmptyWithLanguageContextExample" },
@@ -843,7 +842,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
-					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
@@ -871,7 +869,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
-					"label-empty": { "$ref": "./examples.json#/LabelEmptyExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"

@@ -126,11 +126,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
 				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::LABEL_EMPTY,
-				'Label must not be empty',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/labels/en' ),
 		];
 
 		yield 'label too long' => [
