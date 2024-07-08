@@ -92,8 +92,9 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		yield 'alias list is empty' => [
 			[],
 			null,
-			UseCaseError::ALIAS_LIST_EMPTY,
-			'Alias list must not be empty',
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/aliases'",
+			[ UseCaseError::CONTEXT_PATH => '/aliases' ],
 		];
 
 		$alias = 'alias that is too long...';

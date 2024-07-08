@@ -138,6 +138,14 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
 			[ $duplicateAlias, 'baz' ],
 		];
+
+		yield 'alias list must not be empty' => [
+			[],
+			null,
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/aliases'",
+			[ UseCaseError::CONTEXT_PATH => '/aliases' ],
+		];
 	}
 
 	private function newStubPropertyAliasesInLanguageRetriever( array $enAliasesToReturn = [] ): PropertyAliasesInLanguageRetriever {

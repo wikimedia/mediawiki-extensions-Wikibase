@@ -38,7 +38,7 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 	public function validateAndDeserialize( ItemAliasesInLanguageEditRequest $request ): array {
 		$aliases = $request->getAliasesInLanguage();
 		if ( !$aliases ) {
-			throw new UseCaseError( UseCaseError::ALIAS_LIST_EMPTY, 'Alias list must not be empty' );
+			throw UseCaseError::newInvalidValue( '/aliases' );
 		}
 
 		$language = $request->getLanguageCode();

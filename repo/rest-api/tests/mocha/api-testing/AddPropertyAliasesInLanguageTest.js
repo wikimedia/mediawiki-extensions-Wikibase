@@ -200,8 +200,9 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'alias-list-empty' );
-			assert.strictEqual( response.body.message, 'Alias list must not be empty' );
+			const path = '/aliases';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'alias too long', async () => {

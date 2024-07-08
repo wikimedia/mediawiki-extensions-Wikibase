@@ -189,11 +189,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case AliasesValidator::CODE_EMPTY_ALIAS:
 				throw UseCaseError::newInvalidValue( '/item/aliases' . $context[AliasesValidator::CONTEXT_PATH] );
 			case AliasesValidator::CODE_EMPTY_ALIAS_LIST:
-				throw new UseCaseError(
-					UseCaseError::ALIAS_LIST_EMPTY,
-					'Alias list must not be empty',
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_LANGUAGE] ]
-				);
+				throw UseCaseError::newInvalidValue( '/item/aliases/' . $context[AliasesValidator::CONTEXT_LANGUAGE ] );
 			case AliasesValidator::CODE_DUPLICATE_ALIAS:
 				throw new UseCaseError(
 					UseCaseError::ALIAS_DUPLICATE,

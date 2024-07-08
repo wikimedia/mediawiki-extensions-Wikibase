@@ -365,11 +365,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
 				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::ALIAS_LIST_EMPTY,
-				'Alias list must not be empty',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/aliases/en' ),
 		];
 
 		$invalidAliases = [ 'not a valid aliases array' ];

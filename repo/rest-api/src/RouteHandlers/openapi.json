@@ -4196,9 +4196,6 @@
               "invalid-alias": {
                 "$ref": "#/components/examples/InvalidAliasWithLanguageContextExample"
               },
-              "alias-list-empty": {
-                "$ref": "#/components/examples/AliasListEmptyWithLanguageContextExample"
-              },
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongWithLanguageContextExample"
               },
@@ -5075,9 +5072,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "alias-list-empty": {
-                "$ref": "#/components/examples/AliasListEmptyExample"
-              },
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongExample"
               },
@@ -5115,9 +5109,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "alias-list-empty": {
-                "$ref": "#/components/examples/AliasListEmptyExample"
               },
               "alias-too-long": {
                 "$ref": "#/components/examples/AliasTooLongExample"
@@ -8115,21 +8106,6 @@
             "language": "{language}",
             "label": "{label}",
             "matching-property-id": "{duplicate_property_id}"
-          }
-        }
-      },
-      "AliasListEmptyExample": {
-        "value": {
-          "code": "alias-list-empty",
-          "message": "Alias list must not be empty"
-        }
-      },
-      "AliasListEmptyWithLanguageContextExample": {
-        "value": {
-          "code": "alias-list-empty",
-          "message": "Alias list must not be empty",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

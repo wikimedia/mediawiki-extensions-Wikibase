@@ -781,19 +781,6 @@
 			}
 		}
 	},
-	"AliasListEmptyExample": {
-		"value": {
-			"code": "alias-list-empty",
-			"message": "Alias list must not be empty"
-		}
-	},
-	"AliasListEmptyWithLanguageContextExample": {
-		"value": {
-			"code": "alias-list-empty",
-			"message": "Alias list must not be empty",
-			"context": { "language": "{language_code}" }
-		}
-	},
 	"AliasTooLongExample": {
 		"value": {
 			"code": "alias-too-long",

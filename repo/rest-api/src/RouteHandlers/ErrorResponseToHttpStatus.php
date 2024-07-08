@@ -41,7 +41,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::LABEL_DESCRIPTION_SAME_VALUE => 400,
 		UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE => 400,
 		UseCaseError::PROPERTY_LABEL_DUPLICATE => 400,
-		UseCaseError::ALIAS_LIST_EMPTY => 400,
 		UseCaseError::ALIAS_TOO_LONG => 400,
 		UseCaseError::INVALID_ALIAS_LIST => 400,
 		UseCaseError::INVALID_ALIAS => 400,

@@ -10,7 +10,6 @@ use LogicException;
 class UseCaseError extends UseCaseException {
 
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
-	public const ALIAS_LIST_EMPTY = 'alias-list-empty';
 	public const ALIAS_TOO_LONG = 'alias-too-long';
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
@@ -132,7 +131,6 @@ class UseCaseError extends UseCaseException {
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
-		self::ALIAS_LIST_EMPTY => [],
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::ALIASES_NOT_DEFINED => [],
 		self::COMMENT_TOO_LONG => [],
@@ -257,7 +255,6 @@ class UseCaseError extends UseCaseException {
 	 * context.
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
-		self::ALIAS_LIST_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_DESCRIPTION => [ self::CONTEXT_LANGUAGE ],

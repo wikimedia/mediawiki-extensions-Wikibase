@@ -431,8 +431,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'alias-list-empty', { language: 'en' } );
-			assert.strictEqual( response.body.message, 'Alias list must not be empty' );
+			const path = '/item/aliases/en';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'alias list is invalid', async () => {
