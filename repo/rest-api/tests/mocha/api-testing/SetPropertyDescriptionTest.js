@@ -186,8 +186,8 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', invalidDescription )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'invalid-description' );
-			assert.include( response.body.message, invalidDescription );
+			assertValidError( response, 400, 'invalid-value', { path: '/description' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/description'" );
 		} );
 
 		it( 'description empty', async () => {

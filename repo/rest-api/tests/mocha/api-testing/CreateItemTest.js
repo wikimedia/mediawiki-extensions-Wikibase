@@ -265,8 +265,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-description', { language: 'en' } );
-			assert.include( response.body.message, invalidDescription );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/descriptions/en' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/descriptions/en'" );
 		} );
 
 		it( 'empty label', async () => {

@@ -665,19 +665,6 @@
 			}
 		}
 	},
-	"InvalidDescriptionExample": {
-		"value": {
-			"code": "invalid-description",
-			"message": "Not a valid description: {description}"
-		}
-	},
-	"InvalidDescriptionWithLanguageContextExample": {
-		"value": {
-			"code": "invalid-description",
-			"message": "Not a valid description: {description}",
-			"context": { "language": "{language_code}" }
-		}
-	},
 	"DescriptionTooLongExample": {
 		"value": {
 			"code": "description-too-long",

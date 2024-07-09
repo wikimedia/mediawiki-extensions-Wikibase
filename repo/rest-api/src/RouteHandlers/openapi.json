@@ -4187,9 +4187,6 @@
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongWithLanguageContextExample"
               },
-              "invalid-description": {
-                "$ref": "#/components/examples/InvalidDescriptionWithLanguageContextExample"
-              },
               "description-too-long": {
                 "$ref": "#/components/examples/DescriptionTooLongWithLanguageContextExample"
               },
@@ -4862,9 +4859,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-description": {
-                "$ref": "#/components/examples/InvalidDescriptionExample"
-              },
               "description-too-long": {
                 "$ref": "#/components/examples/DescriptionTooLongExample"
               },
@@ -4902,9 +4896,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-description": {
-                "$ref": "#/components/examples/InvalidDescriptionExample"
               },
               "description-too-long": {
                 "$ref": "#/components/examples/DescriptionTooLongExample"
@@ -7940,21 +7931,6 @@
           "message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
           "context": {
             "alias": "{alias}",
-            "language": "{language_code}"
-          }
-        }
-      },
-      "InvalidDescriptionExample": {
-        "value": {
-          "code": "invalid-description",
-          "message": "Not a valid description: {description}"
-        }
-      },
-      "InvalidDescriptionWithLanguageContextExample": {
-        "value": {
-          "code": "invalid-description",
-          "message": "Not a valid description: {description}",
-          "context": {
             "language": "{language_code}"
           }
         }

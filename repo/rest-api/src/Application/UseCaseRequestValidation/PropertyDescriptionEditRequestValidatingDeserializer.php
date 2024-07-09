@@ -50,10 +50,7 @@ class PropertyDescriptionEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case PropertyDescriptionValidator::CODE_INVALID:
-					throw new UseCaseError(
-						UseCaseError::INVALID_DESCRIPTION,
-						"Not a valid description: {$context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION]}"
-					);
+					throw UseCaseError::newInvalidValue( '/description' );
 				case PropertyDescriptionValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/description' );
 				case PropertyDescriptionValidator::CODE_TOO_LONG:
