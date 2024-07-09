@@ -250,8 +250,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-label', { language: 'en' } );
-			assert.include( response.body.message, invalidLabel );
+			assertValidError( response, 400, 'invalid-value', { path: '/item/labels/en' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/item/labels/en'" );
 		} );
 
 		it( 'invalid description', async () => {

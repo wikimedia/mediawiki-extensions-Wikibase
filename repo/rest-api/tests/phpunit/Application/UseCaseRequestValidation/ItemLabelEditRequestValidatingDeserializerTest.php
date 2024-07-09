@@ -118,8 +118,9 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 				ItemLabelValidator::CODE_INVALID,
 				[ ItemLabelValidator::CONTEXT_LABEL => $label ],
 			),
-			UseCaseError::INVALID_LABEL,
-			"Not a valid label: $label",
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/label'",
+			[ UseCaseError::CONTEXT_PATH => '/label' ],
 		];
 
 		yield 'label empty' => [

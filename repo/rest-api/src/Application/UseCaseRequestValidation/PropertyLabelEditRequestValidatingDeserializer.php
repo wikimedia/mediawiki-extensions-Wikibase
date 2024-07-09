@@ -48,10 +48,7 @@ class PropertyLabelEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case PropertyLabelValidator::CODE_INVALID:
-					throw new UseCaseError(
-						UseCaseError::INVALID_LABEL,
-						"Not a valid label: {$context[PropertyLabelValidator::CONTEXT_LABEL]}"
-					);
+					throw UseCaseError::newInvalidValue( '/label' );
 				case PropertyLabelValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/label' );
 				case PropertyLabelValidator::CODE_TOO_LONG:

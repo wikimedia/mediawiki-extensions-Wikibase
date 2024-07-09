@@ -256,19 +256,6 @@
 			"message": "Property with the ID {property_id} does not have aliases in the language: {language_code}"
 		}
 	},
-	"InvalidLabelExample": {
-		"value": {
-			"code": "invalid-label",
-			"message": "Not a valid label: {label}"
-		}
-	},
-	"InvalidLabelWithLanguageContextExample": {
-		"value": {
-			"code": "invalid-label",
-			"message": "Not a valid label: {label}",
-			"context": { "language": "{language_code}" }
-		}
-	},
 	"LabelTooLongExample": {
 		"value": {
 			"code": "label-too-long",

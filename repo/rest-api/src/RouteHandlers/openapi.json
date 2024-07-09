@@ -4178,9 +4178,6 @@
               "item-label-description-duplicate": {
                 "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
               },
-              "invalid-label": {
-                "$ref": "#/components/examples/InvalidLabelWithLanguageContextExample"
-              },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongWithLanguageContextExample"
               },
@@ -4774,9 +4771,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "invalid-label": {
-                "$ref": "#/components/examples/InvalidLabelExample"
-              },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongExample"
               },
@@ -4814,9 +4808,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-label": {
-                "$ref": "#/components/examples/InvalidLabelExample"
               },
               "label-too-long": {
                 "$ref": "#/components/examples/LabelTooLongExample"
@@ -7501,21 +7492,6 @@
         "value": {
           "code": "aliases-not-defined",
           "message": "Property with the ID {property_id} does not have aliases in the language: {language_code}"
-        }
-      },
-      "InvalidLabelExample": {
-        "value": {
-          "code": "invalid-label",
-          "message": "Not a valid label: {label}"
-        }
-      },
-      "InvalidLabelWithLanguageContextExample": {
-        "value": {
-          "code": "invalid-label",
-          "message": "Not a valid label: {label}",
-          "context": {
-            "language": "{language_code}"
-          }
         }
       },
       "LabelTooLongExample": {

@@ -213,8 +213,8 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-label' );
-			assert.include( response.body.message, invalidLabel );
+			assertValidError( response, 400, 'invalid-value', { path: '/label' } );
+			assert.strictEqual( response.body.message, "Invalid value at '/label'" );
 		} );
 
 		it( 'label empty', async () => {

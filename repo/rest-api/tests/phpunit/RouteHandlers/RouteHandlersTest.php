@@ -978,8 +978,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::INVALID_LABEL, '' ),
-					$hasErrorCode ( UseCaseError::INVALID_LABEL ),
+					new UseCaseError(
+						UseCaseError::INVALID_VALUE,
+						"Invalid value at '/item/labels/en'",
+						[ UseCaseError::CONTEXT_PATH => '/item/labels/en' ]
+					),
+					$hasErrorCode ( UseCaseError::INVALID_VALUE ),
 				],
 			],
 		] ];

@@ -152,11 +152,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_LABEL,
-				'Not a valid label: ["invalid","label","type"]',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/labels/en' ),
 		];
 
 		yield 'invalid label' => [
@@ -167,11 +163,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_LABEL,
-				"Not a valid label: invalid \t",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/labels/en' ),
 		];
 
 		yield 'invalid label language code' => [

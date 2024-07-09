@@ -51,10 +51,7 @@ class ItemLabelEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case ItemLabelValidator::CODE_INVALID:
-					throw new UseCaseError(
-						UseCaseError::INVALID_LABEL,
-						"Not a valid label: {$context[ItemLabelValidator::CONTEXT_LABEL]}"
-					);
+					throw UseCaseError::newInvalidValue( '/label' );
 				case ItemLabelValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/label' );
 				case ItemLabelValidator::CODE_TOO_LONG:
