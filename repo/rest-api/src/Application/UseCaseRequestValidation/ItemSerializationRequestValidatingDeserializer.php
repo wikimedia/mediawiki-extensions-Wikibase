@@ -45,7 +45,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			switch ( $validationError->getCode() ) {
 				case ItemValidator::CODE_INVALID_FIELD:
 					$field = $context[ItemValidator::CONTEXT_FIELD];
-					$this->throwInvalidField( $field, $field, $context[ItemValidator::CONTEXT_VALUE] );
+					throw UseCaseError::newInvalidValue( "/item/$field" );
 				case ItemValidator::CODE_UNEXPECTED_FIELD:
 					throw new UseCaseError(
 						UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
@@ -79,7 +79,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'labels', 'labels', $labelsSerialization );
+				throw UseCaseError::newInvalidValue( '/item/labels' );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
 				throw UseCaseError::newInvalidValue( "/item/labels/{$context[LabelsSyntaxValidator::CONTEXT_LANGUAGE]}" );
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
@@ -131,7 +131,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'descriptions', 'descriptions', $descriptionsSerialization );
+				throw UseCaseError::newInvalidValue( '/item/descriptions' );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				throw UseCaseError::newInvalidValue(
 					"/item/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}"
@@ -178,7 +178,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case AliasesValidator::CODE_INVALID_ALIASES:
-				$this->throwInvalidField( 'aliases', 'aliases', $context[AliasesValidator::CONTEXT_ALIASES] );
+				throw UseCaseError::newInvalidValue( '/item/aliases' );
 			case AliasesValidator::CODE_EMPTY_ALIAS:
 				throw UseCaseError::newInvalidValue( '/item/aliases' . $context[AliasesValidator::CONTEXT_PATH] );
 			case AliasesValidator::CODE_EMPTY_ALIAS_LIST:
@@ -224,7 +224,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'statements', 'statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
+				throw UseCaseError::newInvalidValue( '/item/statements' );
 			case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
 			case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
@@ -263,7 +263,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $context[SitelinksValidator::CONTEXT_SITE_ID] ]
 				);
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'sitelinks', 'sitelinks', $serialization );
+				throw UseCaseError::newInvalidValue( '/item/sitelinks' );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}" );
 			case SitelinkValidator::CODE_TITLE_MISSING:
@@ -316,21 +316,6 @@ class ItemSerializationRequestValidatingDeserializer {
 					]
 				);
 		}
-	}
-
-	/**
-	 * @param string $field
-	 * @param string $path
-	 * @param mixed $value
-	 *
-	 * @return never
-	 */
-	public function throwInvalidField( string $field, string $path, $value ): void {
-		throw new UseCaseError(
-			UseCaseError::ITEM_DATA_INVALID_FIELD,
-			"Invalid input for '$field'",
-			[ UseCaseError::CONTEXT_PATH => $path, UseCaseError::CONTEXT_VALUE => $value ]
-		);
 	}
 
 }

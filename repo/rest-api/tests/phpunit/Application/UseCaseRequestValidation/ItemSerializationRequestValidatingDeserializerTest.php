@@ -85,11 +85,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'some-field'",
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/some-field'",
 				[
-					UseCaseError::CONTEXT_PATH => 'some-field',
-					UseCaseError::CONTEXT_VALUE => 'some-value',
+					UseCaseError::CONTEXT_PATH => '/item/some-field',
 				]
 			),
 		];
@@ -112,12 +111,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid labels' => [
 			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'labels'",
-				[
-					UseCaseError::CONTEXT_PATH => 'labels',
-					UseCaseError::CONTEXT_VALUE => $invalidLabels,
-				]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/labels'",
+				[ UseCaseError::CONTEXT_PATH => '/item/labels' ]
 			),
 			[ 'labels' => $invalidLabels ],
 		];
@@ -236,12 +232,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid descriptions' => [
 			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'descriptions'",
-				[
-					UseCaseError::CONTEXT_PATH => 'descriptions',
-					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
-				]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/descriptions'",
+				[ UseCaseError::CONTEXT_PATH => '/item/descriptions' ]
 			),
 			[ 'descriptions' => $invalidDescriptions ],
 		];
@@ -375,9 +368,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				[ AliasesValidator::CONTEXT_ALIASES => $invalidAliases ]
 			),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'aliases'",
-				[ UseCaseError::CONTEXT_PATH => 'aliases', UseCaseError::CONTEXT_VALUE => $invalidAliases ]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/aliases'",
+				[ UseCaseError::CONTEXT_PATH => '/item/aliases' ]
 			),
 		];
 
@@ -478,9 +471,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'statements'",
-				[ UseCaseError::CONTEXT_PATH => 'statements', UseCaseError::CONTEXT_VALUE => $invalidStatements ]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/statements'",
+				[ UseCaseError::CONTEXT_PATH => '/item/statements' ]
 			),
 		];
 
@@ -549,12 +542,9 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				SitelinksValidator::CONTEXT_SITE_ID => $site,
 			] ),
 			new UseCaseError(
-				UseCaseError::ITEM_DATA_INVALID_FIELD,
-				"Invalid input for 'sitelinks'",
-				[
-					UseCaseError::CONTEXT_PATH => 'sitelinks',
-					UseCaseError::CONTEXT_VALUE => [ [ 'title' => 'Whatever' ] ],
-				]
+				UseCaseError::INVALID_VALUE,
+				"Invalid value at '/item/sitelinks'",
+				[ UseCaseError::CONTEXT_PATH => '/item/sitelinks' ]
 			),
 			[ 'sitelinks' => [ [ 'title' => 'Whatever' ] ] ],
 		];

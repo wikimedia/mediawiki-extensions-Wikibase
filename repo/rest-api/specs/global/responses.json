@@ -432,7 +432,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"item-data-invalid-field": { "$ref": "./examples.json#/ItemDataInvalidFieldExample" },
 					"unexpected-field": { "$ref": "./examples.json#/ItemDataUnexpectedFieldExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"

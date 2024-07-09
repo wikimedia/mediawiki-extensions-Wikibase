@@ -4166,9 +4166,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "item-data-invalid-field": {
-                "$ref": "#/components/examples/ItemDataInvalidFieldExample"
-              },
               "unexpected-field": {
                 "$ref": "#/components/examples/ItemDataUnexpectedFieldExample"
               },
@@ -8036,16 +8033,6 @@
           "context": {
             "alias": "{alias}",
             "language": "{language_code}"
-          }
-        }
-      },
-      "ItemDataInvalidFieldExample": {
-        "value": {
-          "code": "item-data-invalid-field",
-          "message": "Invalid input for '{field}'",
-          "context": {
-            "path": "{field}",
-            "value": "{value}"
           }
         }
       },
