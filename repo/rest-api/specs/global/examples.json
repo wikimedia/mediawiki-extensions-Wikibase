@@ -117,12 +117,6 @@
 			"message": "Cannot change the property of the existing statement"
 		}
 	},
-	"InvalidPatchExample": {
-		"value": {
-			"code": "invalid-patch",
-			"message": "The provided patch is invalid"
-		}
-	},
 	"MissingJsonPatchFieldExample": {
 		"value": {
 			"code": "missing-json-patch-field",

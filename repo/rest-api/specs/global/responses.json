@@ -1102,7 +1102,6 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
@@ -1123,7 +1122,6 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
@@ -1144,7 +1142,6 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
@@ -1495,7 +1492,6 @@
 					"invalid-operation-change-property-of-statement": {
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
@@ -1523,7 +1519,6 @@
 					"invalid-operation-change-property-of-statement": {
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}
@@ -1551,7 +1546,6 @@
 					"invalid-operation-change-property-of-statement": {
 						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					},
-					"invalid-patch": { "$ref": "./examples.json#/InvalidPatchExample" },
 					"missing-json-patch-field": { "$ref": "./examples.json#/MissingJsonPatchFieldExample" }
 				}
 			}

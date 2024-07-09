@@ -5190,9 +5190,6 @@
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
               },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5225,9 +5222,6 @@
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
               },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5259,9 +5253,6 @@
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
-              },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -5819,9 +5810,6 @@
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
               },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5863,9 +5851,6 @@
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
               },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
-              },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
@@ -5906,9 +5891,6 @@
               },
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
-              },
-              "invalid-patch": {
-                "$ref": "#/components/examples/InvalidPatchExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -7380,12 +7362,6 @@
         "value": {
           "code": "invalid-operation-change-property-of-statement",
           "message": "Cannot change the property of the existing statement"
-        }
-      },
-      "InvalidPatchExample": {
-        "value": {
-          "code": "invalid-patch",
-          "message": "The provided patch is invalid"
         }
       },
       "MissingJsonPatchFieldExample": {

@@ -26,7 +26,7 @@ class PatchRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case JsonPatchValidator::CODE_INVALID:
-					throw new UseCaseError( UseCaseError::INVALID_PATCH, 'The provided patch is invalid' );
+					throw UseCaseError::newInvalidValue( '/patch' );
 
 				case JsonPatchValidator::CODE_INVALID_OPERATION:
 					$opIndex = array_search( $context[JsonPatchValidator::CONTEXT_OPERATION], $request->getPatch() );
