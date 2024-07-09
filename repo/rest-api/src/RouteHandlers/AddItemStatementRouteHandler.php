@@ -107,7 +107,8 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(
 				UseCaseError::ITEM_REDIRECTED,
-				"Item $itemId has been merged into {$e->getRedirectTargetId()}."
+				"Item $itemId has been redirected to {$e->getRedirectTargetId()}.",
+				[ UseCaseError::CONTEXT_REDIRECT_TARGET => $e->getRedirectTargetId() ]
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );

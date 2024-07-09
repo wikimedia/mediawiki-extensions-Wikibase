@@ -90,14 +90,15 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( 'responds 409 if the item is a redirect', async () => {
-		const redirectSource = await entityHelper.createRedirectForItem( testItemId );
+		const redirectTarget = testItemId;
+		const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 		const response = await newRemoveSitelinkRequestBuilder( redirectSource, siteId )
 			.assertValidRequest()
 			.makeRequest();
 
-		assertValidError( response, 409, 'redirected-item' );
+		assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
 		assert.include( response.body.message, redirectSource );
-
+		assert.include( response.body.message, redirectTarget );
 	} );
 
 	describe( '400', () => {

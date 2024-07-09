@@ -181,10 +181,9 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 409 );
+			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
-			assert.strictEqual( response.body.code, 'redirected-item' );
 		} );
 
 		it( '"path" field target does not exist', async () => {
