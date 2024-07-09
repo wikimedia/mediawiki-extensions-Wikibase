@@ -18,11 +18,11 @@ function assertValid400Response( response, responseBodyErrorCode, context = null
 module.exports = function testValidatesPatch( newRequestBuilder ) {
 	describe( 'validates the patch', () => {
 		it( 'invalid patch', async () => {
-			const invalidPatch = { foo: 'this is not a valid JSON Patch' };
-			const response = await newRequestBuilder( invalidPatch )
+			const response = await newRequestBuilder( { foo: 'this is not a valid JSON Patch' } )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-patch' );
+			assertValid400Response( response, 'invalid-value', { path: '/patch' } );
+			assert.include( response.body.message, '/patch' );
 		} );
 
 		it( "invalid patch - missing 'op' field", async () => {

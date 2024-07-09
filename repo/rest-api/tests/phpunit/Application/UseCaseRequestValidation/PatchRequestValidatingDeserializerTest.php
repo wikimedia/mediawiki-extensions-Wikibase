@@ -64,9 +64,9 @@ class PatchRequestValidatingDeserializerTest extends TestCase {
 	public static function invalidPatchProvider(): Generator {
 		yield 'from invalid patch' => [
 			new ValidationError( JsonPatchValidator::CODE_INVALID ),
-			UseCaseError::INVALID_PATCH,
-			'The provided patch is invalid',
-			[],
+			UseCaseError::INVALID_VALUE,
+			"Invalid value at '/patch'",
+			[ UseCaseError::CONTEXT_PATH => '/patch' ],
 		];
 
 		$operation = [ 'op' => 'bad', 'path' => '/a/b/c', 'value' => 'test' ];

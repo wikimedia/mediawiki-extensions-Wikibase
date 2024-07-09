@@ -24,7 +24,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
-	public const INVALID_PATCH = 'invalid-patch';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const ITEM_NOT_FOUND = 'item-not-found';
@@ -139,7 +138,6 @@ class UseCaseError extends UseCaseException {
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
-		self::INVALID_PATCH => [],
 		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
 			self::CONTEXT_LABEL,
