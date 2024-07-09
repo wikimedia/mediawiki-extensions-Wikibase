@@ -36,10 +36,7 @@ class SitelinkEditRequestValidatingDeserializer {
 				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 					throw UseCaseError::newInvalidValue( '/sitelink/title' );
 				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-					throw new UseCaseError(
-						UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
-						'Value of badges field is not a list'
-					);
+					throw UseCaseError::newInvalidValue( '/sitelink/badges' );
 				case SitelinkValidator::CODE_INVALID_BADGE:
 					$badgeIndex = array_search(
 						$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE],

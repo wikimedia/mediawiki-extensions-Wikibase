@@ -320,8 +320,9 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: testTitle1, badges: allowedBadges[ 1 ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-sitelink-badges-format' );
-			assert.strictEqual( response.body.message, 'Value of badges field is not a list' );
+			const path = '/sitelink/badges';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'badge is not an item ID', async () => {

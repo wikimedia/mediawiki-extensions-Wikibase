@@ -596,11 +596,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_SITELINK_BADGES_FORMAT,
-				'Value of badges field is not a list',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site/badges" ),
 			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => 'not-a-list' ] ] ],
 		];
 		yield SitelinkValidator::CODE_INVALID_BADGE => [

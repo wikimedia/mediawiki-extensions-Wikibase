@@ -456,9 +456,6 @@
 					"sitelink-data-missing-title": {
 						"$ref": "./examples.json#/SitelinkTitleFieldNotProvidedWithSiteContextExample"
 					},
-					"invalid-sitelink-badges-format": {
-						"$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListWithSiteContextExample"
-					},
 					"item-not-a-badge": {
 						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
 					},
@@ -815,7 +812,6 @@
 					"comment-too-long": { "$ref": "./examples.json#/CommentTooLongExample" },
 					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
 					"sitelink-data-missing-title": { "$ref": "./examples.json#/SitelinkTitleFieldNotProvidedExample" },
-					"invalid-sitelink-badges-format": { "$ref": "./examples.json#/ValueOfBadgesFieldIsNotAListExample" },
 					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeExample" }
 				}
 			}

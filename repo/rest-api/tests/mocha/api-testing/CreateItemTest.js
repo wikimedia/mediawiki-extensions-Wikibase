@@ -699,8 +699,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: 'Q123' } }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-sitelink-badges-format', { 'site-id': localWikiId } );
-			assert.strictEqual( response.body.message, 'Value of badges field is not a list' );
+			const path = `/item/sitelinks/${localWikiId}/badges`;
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'badge is not an item ID', async () => {
