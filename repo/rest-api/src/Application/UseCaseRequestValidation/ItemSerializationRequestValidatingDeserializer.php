@@ -129,13 +129,9 @@ class ItemSerializationRequestValidatingDeserializer {
 			case ItemDescriptionValidator::CODE_INVALID:
 				throw UseCaseError::newInvalidValue( "/item/descriptions/{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}" );
 			case ItemDescriptionValidator::CODE_TOO_LONG:
-				throw new UseCaseError(
-					UseCaseError::DESCRIPTION_TOO_LONG,
-					"Description must be no more than {$context[ItemDescriptionValidator::CONTEXT_LIMIT]} characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemDescriptionValidator::CONTEXT_LIMIT],
-					]
+				throw UseCaseError::newValueTooLong(
+					"/item/descriptions/{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}",
+					$context[ItemDescriptionValidator::CONTEXT_LIMIT],
 				);
 			case ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL:
 				throw new UseCaseError(
@@ -182,11 +178,13 @@ class ItemSerializationRequestValidatingDeserializer {
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
 				$limit = $context[AliasesValidator::CONTEXT_LIMIT] ?? $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::ALIAS_TOO_LONG,
-					"Alias must be no more than $limit characters long",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit ]
-				);
+				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+
+				$aliasIndex = array_search( $aliasValue, $aliasesSerialization[$language] );
+
+				$this->assertValidIndex( $aliasIndex, "The invalid alias wasn't found in the original aliases serialization" );
+
+				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -199,9 +197,9 @@ class ItemSerializationRequestValidatingDeserializer {
 				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
 				$aliasIndex = array_search( $aliasValue, $aliasesSerialization[$language] );
-				if ( !is_int( $aliasIndex ) ) {
-					throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
-				}
+
+				$this->assertValidIndex( $aliasIndex, "The invalid alias wasn't found in the original aliases serialization" );
+
 				throw UseCaseError::newInvalidValue( "/item/aliases/$language/$aliasIndex" );
 		}
 	}
@@ -265,9 +263,9 @@ class ItemSerializationRequestValidatingDeserializer {
 					$context[ SitelinkValidator::CONTEXT_BADGE],
 					$serialization[ $context[SitelinkValidator::CONTEXT_SITE_ID ] ][ 'badges' ]
 				);
-				if ( !is_int( $badgeIndex ) ) {
-					throw new LogicException( "The invalid badge wasn't found" );
-				}
+
+				$this->assertValidIndex( $badgeIndex, "The invalid badge wasn't found" );
+
 				$path = '/item/sitelinks/' . $context[ SitelinkValidator::CONTEXT_SITE_ID ] . '/badges/' . $badgeIndex;
 				throw UseCaseError::newInvalidValue( $path );
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
@@ -297,6 +295,18 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::CONTEXT_SITE_ID => $siteId(),
 					]
 				);
+		}
+	}
+
+	/**
+	 * @param mixed $index
+	 * @param string $message
+	 *
+	 * @return void
+	 */
+	private function assertValidIndex( $index, string $message ): void {
+		if ( !is_int( $index ) ) {
+			throw new LogicException( $message );
 		}
 	}
 

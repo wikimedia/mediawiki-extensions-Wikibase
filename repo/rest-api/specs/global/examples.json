@@ -26,12 +26,6 @@
 			}
 		}
 	},
-	"CommentTooLongExample": {
-		"value": {
-			"code": "comment-too-long",
-			"message": "Comment must not be longer than 500 characters"
-		}
-	},
 	"InvalidQueryParameterExample": {
 		"value": {
 			"code": "invalid-query-parameter",
@@ -631,27 +625,6 @@
 			}
 		}
 	},
-	"DescriptionTooLongExample": {
-		"value": {
-			"code": "description-too-long",
-			"message": "Description must be no more than {limit} characters long",
-			"context": {
-				"value": "{description}",
-				"character-limit": "{limit}"
-			}
-		}
-	},
-	"DescriptionTooLongWithLanguageContextExample": {
-		"value": {
-			"code": "description-too-long",
-			"message": "Description must be no more than {limit} characters long",
-			"context": {
-				"value": "{description}",
-				"character-limit": "{limit}",
-				"language": "{language_code}"
-			}
-		}
-	},
 	"LabelDescriptionSameValueExample": {
 		"value": {
 			"code": "label-description-same-value",
@@ -692,27 +665,6 @@
 				"language": "{language}",
 				"label": "{label}",
 				"matching-property-id": "{duplicate_property_id}"
-			}
-		}
-	},
-	"AliasTooLongExample": {
-		"value": {
-			"code": "alias-too-long",
-			"message": "Alias must be no more than {limit} characters long",
-			"context": {
-				"value": "{alias}",
-				"character-limit": "{limit}"
-			}
-		}
-	},
-	"AliasTooLongWithLanguageContextExample": {
-		"value": {
-			"code": "alias-too-long",
-			"message": "Alias must be no more than {limit} characters long",
-			"context": {
-				"value": "{alias}",
-				"character-limit": "{limit}",
-				"language": "{language_code}"
 			}
 		}
 	},

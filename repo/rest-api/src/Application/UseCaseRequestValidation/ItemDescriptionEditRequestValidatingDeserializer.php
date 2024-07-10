@@ -53,19 +53,10 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case ItemDescriptionValidator::CODE_INVALID:
-					throw UseCaseError::newInvalidValue( '/description' );
 				case ItemDescriptionValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/description' );
 				case ItemDescriptionValidator::CODE_TOO_LONG:
-					$limit = $context[ItemDescriptionValidator::CONTEXT_LIMIT];
-					throw new UseCaseError(
-						UseCaseError::DESCRIPTION_TOO_LONG,
-						"Description must be no more than $limit characters long",
-						[
-							UseCaseError::CONTEXT_VALUE => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
-						]
-					);
+					throw UseCaseError::newValueTooLong( '/description', $context[ItemDescriptionValidator::CONTEXT_LIMIT] );
 				case ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL:
 					throw new UseCaseError(
 						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,

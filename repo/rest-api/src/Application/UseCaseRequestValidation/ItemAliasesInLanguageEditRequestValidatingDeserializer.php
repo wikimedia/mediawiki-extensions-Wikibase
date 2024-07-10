@@ -76,15 +76,11 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 					}
 					throw UseCaseError::newInvalidValue( "/aliases/$aliasIndex" );
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
-					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-					throw new UseCaseError(
-						UseCaseError::ALIAS_TOO_LONG,
-						"Alias must be no more than $limit characters long",
-						[
-							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
-						]
-					);
+					$aliasIndex = array_search( $context[AliasesInLanguageValidator::CONTEXT_VALUE], $aliasesInLanguage->getAliases() );
+					if ( !is_int( $aliasIndex ) ) {
+						throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
+					}
+					throw UseCaseError::newValueTooLong( "/aliases/$aliasIndex", $context[AliasesInLanguageValidator::CONTEXT_LIMIT] );
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
 			}

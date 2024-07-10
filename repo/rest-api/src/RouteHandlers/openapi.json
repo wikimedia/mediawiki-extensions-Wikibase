@@ -4181,12 +4181,6 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "description-too-long": {
-                "$ref": "#/components/examples/DescriptionTooLongWithLanguageContextExample"
-              },
-              "alias-too-long": {
-                "$ref": "#/components/examples/AliasTooLongWithLanguageContextExample"
-              },
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
               },
@@ -4210,9 +4204,6 @@
               },
               "missing-field": {
                 "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
               }
             }
           }
@@ -4439,8 +4430,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
@@ -4471,8 +4462,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
@@ -4503,8 +4494,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
@@ -4541,8 +4532,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
@@ -4579,8 +4570,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "statement-data-missing-field": {
                 "$ref": "#/components/examples/StatementDataMissingFieldExample"
@@ -4614,8 +4605,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4646,8 +4637,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4678,8 +4669,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4707,8 +4698,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4739,8 +4730,8 @@
               "missing-field": {
                 "$ref": "#/components/examples/MissingFieldExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
@@ -4782,9 +4773,6 @@
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
               }
             }
           }
@@ -4820,9 +4808,6 @@
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
               }
             }
           }
@@ -4847,9 +4832,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "description-too-long": {
-                "$ref": "#/components/examples/DescriptionTooLongExample"
-              },
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
@@ -4859,8 +4841,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4885,17 +4867,14 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "description-too-long": {
-                "$ref": "#/components/examples/DescriptionTooLongExample"
-              },
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4923,8 +4902,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4952,8 +4931,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -4981,8 +4960,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -5010,8 +4989,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -5036,17 +5015,14 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "alias-too-long": {
-                "$ref": "#/components/examples/AliasTooLongExample"
-              },
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -5071,17 +5047,14 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "alias-too-long": {
-                "$ref": "#/components/examples/AliasTooLongExample"
-              },
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
@@ -5178,8 +5151,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -5210,8 +5183,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -5242,8 +5215,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "missing-json-patch-field": {
                 "$ref": "#/components/examples/MissingJsonPatchFieldExample"
@@ -5792,8 +5765,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "invalid-operation-change-statement-id": {
                 "$ref": "#/components/examples/InvalidOperationChangeStatementId"
@@ -5833,8 +5806,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "invalid-operation-change-statement-id": {
                 "$ref": "#/components/examples/InvalidOperationChangeStatementId"
@@ -5874,8 +5847,8 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
-              "comment-too-long": {
-                "$ref": "#/components/examples/CommentTooLongExample"
+              "value-too-long": {
+                "$ref": "#/components/examples/ValueTooLongExample"
               },
               "invalid-operation-change-statement-id": {
                 "$ref": "#/components/examples/InvalidOperationChangeStatementId"
@@ -7256,12 +7229,6 @@
           }
         }
       },
-      "CommentTooLongExample": {
-        "value": {
-          "code": "comment-too-long",
-          "message": "Comment must not be longer than 500 characters"
-        }
-      },
       "InvalidQueryParameterExample": {
         "value": {
           "code": "invalid-query-parameter",
@@ -7867,27 +7834,6 @@
           }
         }
       },
-      "DescriptionTooLongExample": {
-        "value": {
-          "code": "description-too-long",
-          "message": "Description must be no more than {limit} characters long",
-          "context": {
-            "value": "{description}",
-            "character-limit": "{limit}"
-          }
-        }
-      },
-      "DescriptionTooLongWithLanguageContextExample": {
-        "value": {
-          "code": "description-too-long",
-          "message": "Description must be no more than {limit} characters long",
-          "context": {
-            "value": "{description}",
-            "character-limit": "{limit}",
-            "language": "{language_code}"
-          }
-        }
-      },
       "LabelDescriptionSameValueExample": {
         "value": {
           "code": "label-description-same-value",
@@ -7928,27 +7874,6 @@
             "language": "{language}",
             "label": "{label}",
             "matching-property-id": "{duplicate_property_id}"
-          }
-        }
-      },
-      "AliasTooLongExample": {
-        "value": {
-          "code": "alias-too-long",
-          "message": "Alias must be no more than {limit} characters long",
-          "context": {
-            "value": "{alias}",
-            "character-limit": "{limit}"
-          }
-        }
-      },
-      "AliasTooLongWithLanguageContextExample": {
-        "value": {
-          "code": "alias-too-long",
-          "message": "Alias must be no more than {limit} characters long",
-          "context": {
-            "value": "{alias}",
-            "character-limit": "{limit}",
-            "language": "{language_code}"
           }
         }
       },

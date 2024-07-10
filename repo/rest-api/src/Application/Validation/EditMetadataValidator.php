@@ -29,7 +29,7 @@ class EditMetadataValidator {
 		if ( $comment !== null && strlen( $comment ) > $this->maxCommentLength ) {
 			return new ValidationError(
 				self::CODE_COMMENT_TOO_LONG,
-				[ self::CONTEXT_COMMENT_MAX_LENGTH => (string)$this->maxCommentLength ]
+				[ self::CONTEXT_COMMENT_MAX_LENGTH => $this->maxCommentLength ]
 			);
 		}
 

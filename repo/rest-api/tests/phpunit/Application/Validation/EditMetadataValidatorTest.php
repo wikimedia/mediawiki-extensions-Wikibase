@@ -33,7 +33,7 @@ class EditMetadataValidatorTest extends TestCase {
 		$this->assertInstanceOf( ValidationError::class, $result );
 		$this->assertSame( EditMetadataValidator::CODE_COMMENT_TOO_LONG, $result->getCode() );
 		$this->assertSame(
-			(string)self::MAX_COMMENT_LENGTH,
+			self::MAX_COMMENT_LENGTH,
 			$result->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH]
 		);
 	}

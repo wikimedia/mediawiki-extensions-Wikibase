@@ -50,19 +50,10 @@ class PropertyDescriptionEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case PropertyDescriptionValidator::CODE_INVALID:
-					throw UseCaseError::newInvalidValue( '/description' );
 				case PropertyDescriptionValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/description' );
 				case PropertyDescriptionValidator::CODE_TOO_LONG:
-					$limit = $context[PropertyDescriptionValidator::CONTEXT_LIMIT];
-					throw new UseCaseError(
-						UseCaseError::DESCRIPTION_TOO_LONG,
-						"Description must be no more than $limit characters long",
-						[
-							UseCaseError::CONTEXT_VALUE => $context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
-						]
-					);
+					throw UseCaseError::newValueTooLong( '/description', $context[PropertyDescriptionValidator::CONTEXT_LIMIT] );
 				case PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 					throw new UseCaseError(
 						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,

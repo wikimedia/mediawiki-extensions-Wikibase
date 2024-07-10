@@ -92,16 +92,13 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 	describe( '400 error response ', () => {
 		it( 'comment too long', async () => {
-			const comment = 'x'.repeat( 501 );
 			const response = await newCreateItemRequestBuilder( { labels: { en: 'a test item' } } )
-				.withJsonBodyParam( 'comment', comment )
+				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
 				.assertValidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.header[ 'content-language' ], 'en' );
-			assert.strictEqual( response.body.code, 'comment-too-long' );
-			assert.include( response.body.message, '500' );
+			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'invalid edit tag', async () => {
@@ -304,14 +301,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				400,
-				'description-too-long',
-				{ 'character-limit': maxDescriptionLength, language: 'en' }
+				'value-too-long',
+				{ path: '/item/descriptions/en', limit: maxDescriptionLength }
 			);
-
-			assert.strictEqual(
-				response.body.message,
-				`Description must be no more than ${maxDescriptionLength} characters long`
-			);
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'label and description with the same value', async () => {
@@ -437,8 +430,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		it( 'alias too long', async () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
-			const maxLabelLength = 250;
-			const aliasTooLong = 'x'.repeat( maxLabelLength + 1 );
+			const maxLength = 250;
+			const aliasTooLong = 'x'.repeat( maxLength + 1 );
 			const response = await newCreateItemRequestBuilder( {
 				labels: { en: 'en-label' },
 				aliases: { en: [ aliasTooLong ] }
@@ -446,16 +439,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'alias-too-long',
-				{ 'character-limit': maxLabelLength, language: 'en' }
-			);
-			assert.strictEqual(
-				response.body.message,
-				`Alias must be no more than ${maxLabelLength} characters long`
-			);
+			assertValidError( response, 400, 'value-too-long', { path: '/item/aliases/en/0', limit: maxLength } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 
 		} );
 
