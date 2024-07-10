@@ -19,7 +19,6 @@ class UseCaseError extends UseCaseException {
 	public const DESCRIPTION_TOO_LONG = 'description-too-long';
 	public const INVALID_VALUE = 'invalid-value';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
-	public const INVALID_LABEL = 'invalid-label';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
@@ -131,7 +130,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
-		self::INVALID_LABEL => [],
 		self::INVALID_LANGUAGE_CODE => [],
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
@@ -238,7 +236,6 @@ class UseCaseError extends UseCaseException {
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
-		self::INVALID_LABEL => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],

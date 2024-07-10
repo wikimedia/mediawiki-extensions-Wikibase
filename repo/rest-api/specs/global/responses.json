@@ -440,7 +440,6 @@
 					"item-label-description-duplicate": {
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
-					"invalid-label": { "$ref": "./examples.json#/InvalidLabelWithLanguageContextExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongWithLanguageContextExample" },
 					"description-too-long": { "$ref": "./examples.json#/DescriptionTooLongWithLanguageContextExample" },
 					"alias-too-long": { "$ref": "./examples.json#/AliasTooLongWithLanguageContextExample" },
@@ -828,7 +827,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
@@ -855,7 +853,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-label": { "$ref": "./examples.json#/InvalidLabelExample" },
 					"label-too-long": { "$ref": "./examples.json#/LabelTooLongExample" },
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"

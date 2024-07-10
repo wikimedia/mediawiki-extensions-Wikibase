@@ -81,20 +81,10 @@ class ItemSerializationRequestValidatingDeserializer {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newInvalidValue( '/item/labels' );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
-				throw UseCaseError::newInvalidValue( "/item/labels/{$context[LabelsSyntaxValidator::CONTEXT_LANGUAGE]}" );
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
-				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
-				throw new UseCaseError(
-					UseCaseError::INVALID_LABEL,
-					"Not a valid label: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/labels/{$context[LabelsSyntaxValidator::CONTEXT_LANGUAGE]}" );
 			case ItemLabelValidator::CODE_INVALID:
-				throw new UseCaseError(
-					UseCaseError::INVALID_LABEL,
-					"Not a valid label: {$context[ItemLabelValidator::CONTEXT_LABEL]}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/labels/{$context[ItemLabelValidator::CONTEXT_LANGUAGE]}" );
 			case ItemLabelValidator::CODE_TOO_LONG:
 				throw new UseCaseError(
 					UseCaseError::LABEL_TOO_LONG,
