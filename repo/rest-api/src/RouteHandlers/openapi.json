@@ -7433,7 +7433,10 @@
       "RedirectedItemExample": {
         "value": {
           "code": "redirected-item",
-          "message": "Item {item_id} has been merged into {other_id}"
+          "message": "Item {item_id} has been redirected to {redirect_target_id}",
+          "context": {
+            "redirect-target": "{redirect_target_id}"
+          }
         }
       },
       "SitelinkConflictExample": {

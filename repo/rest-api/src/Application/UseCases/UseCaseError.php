@@ -108,6 +108,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_ITEM_ID = 'item-id';
+	public const CONTEXT_REDIRECT_TARGET = 'redirect-target';
 	public const CONTEXT_PROPERTY_ID = 'property-id';
 	public const CONTEXT_STATEMENT_ID = 'statement-id';
 	public const CONTEXT_SITE_ID = 'site-id';
@@ -142,7 +143,7 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_MATCHING_ITEM_ID,
 		],
 		self::ITEM_NOT_FOUND => [],
-		self::ITEM_REDIRECTED => [],
+		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],

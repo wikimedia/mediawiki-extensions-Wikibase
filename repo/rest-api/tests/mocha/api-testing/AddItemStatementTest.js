@@ -284,7 +284,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newAddItemStatementRequestBuilder( redirectSource, testStatement ).makeRequest();
 
-			assertValidError( response, 409, 'redirected-item' );
+			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
