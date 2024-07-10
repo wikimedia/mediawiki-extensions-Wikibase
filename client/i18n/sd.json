@@ -7,7 +7,8 @@
 			"KaleemBhatti",
 			"Mehtab ahmed",
 			"Sindhu",
-			"Tweety"
+			"Tweety",
+			"Charoo"
 		]
 	},
 	"wikibase-client-desc": "وڪيبيس ايڪسٽينشن لاءِ ڪلائينٽ",
@@ -118,7 +119,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "صفحي کي ٻيھر لاھيو",
 	"wikibase-client-data-bridge-error-go-back": "واپس وڃو",
 	"wikibase-client-data-bridge-error-retry-save": "ٻيھر سانڍيو",
-	"wikibase-client-data-bridge-thank-you-head": "توھان جي سنوار لاءِ توھان جي مھرباني!",
+	"wikibase-client-data-bridge-thank-you-head": "توھان جي سنوار لاءِ مھرباني!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "توھان داخل ٿيل نہ آھيو",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "داخل ٿيڻ بغير ڇاپيو",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "داخل ٿيڻ بغير سانڍيو",
