@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\Validation;
 
 use LogicException;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
@@ -27,13 +29,13 @@ class SitelinksValidator {
 	/**
 	 * @param string|null $itemId - null if validating a new item
 	 */
-	public function validate( ?string $itemId, array $serialization ): ?ValidationError {
+	public function validate( ?string $itemId, array $serialization, array $sitesToValidate = null ): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
 			return new ValidationError( self::CODE_SITELINKS_NOT_ASSOCIATIVE );
 		}
 
 		return $this->validateSiteIds( array_keys( $serialization ) )
-			?: $this->validateSitelinks( $itemId, $serialization );
+			?: $this->validateSitelinks( $itemId, $serialization, $sitesToValidate );
 	}
 
 	public function getValidatedSitelinks(): SiteLinkList {
@@ -51,10 +53,20 @@ class SitelinksValidator {
 		);
 	}
 
-	private function validateSitelinks( ?string $itemId, array $serialization ): ?ValidationError {
+	private function validateSitelinks( ?string $itemId, array $serialization, array $sitesToValidate = null ): ?ValidationError {
+		$sitesToValidate ??= array_keys( $serialization );
 		$sitelinks = [];
 
 		foreach ( $serialization as $siteId => $sitelink ) {
+			if ( !in_array( $siteId, $sitesToValidate ) ) {
+				$sitelinks[] = new SiteLink(
+					$siteId,
+					$sitelink['title'],
+					array_map( fn( string $i ) => new ItemId( $i ), $sitelink['badges'] ?? [] )
+				);
+				continue;
+			}
+
 			if ( !is_array( $sitelink ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_SITELINK,

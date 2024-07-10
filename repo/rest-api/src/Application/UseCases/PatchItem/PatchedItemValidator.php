@@ -377,12 +377,29 @@ class PatchedItemValidator {
 		$itemId = $serialization['id'];
 		$sitelinksSerialization = $serialization['sitelinks'] ?? [];
 		$originalSitelinks = $item->getSitelinks();
-		$validationError = $this->sitelinksValidator->validate( $itemId, $sitelinksSerialization );
+		$validationError = $this->sitelinksValidator->validate(
+			$itemId,
+			$sitelinksSerialization,
+			$this->getModifiedSitelinksSites( $item->getSitelinks(), $sitelinksSerialization )
+		);
 
 		if ( $validationError ) {
 			$this->handleSitelinksValidationError( $validationError, $sitelinksSerialization );
 		}
 		$this->assertUrlsNotModified( $originalSitelinks, $sitelinksSerialization );
+	}
+
+	private function getModifiedSitelinksSites( Sitelinks $originalSitelinks, array $patchedSitelinks ): array {
+		return array_filter(
+			array_keys( $patchedSitelinks ),
+			function( string $siteId ) use ( $patchedSitelinks, $originalSitelinks ) {
+				$originalBadges = fn() => array_map( fn( ItemId $i ) => (string)$i, $originalSitelinks[$siteId]->getBadges() );
+
+				return !isset( $originalSitelinks[$siteId] )
+					|| ( $patchedSitelinks[$siteId]['title'] ?? '' ) !== $originalSitelinks[$siteId]->getTitle()
+					|| ( $patchedSitelinks[$siteId]['badges'] ?? [] ) !== $originalBadges();
+			}
+		);
 	}
 
 	private function handleSitelinksValidationError( ValidationError $validationError, array $sitelinksSerialization ): void {

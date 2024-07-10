@@ -24,13 +24,17 @@ class PatchedSitelinksValidator {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( string $itemId, array $originalSitelinks, array $serialization ): SiteLinkList {
-		$this->assertValidSitelinks( $itemId, $serialization );
+		$this->assertValidSitelinks( $itemId, $originalSitelinks, $serialization );
 		$this->assertUrlsNotModified( $originalSitelinks, $serialization );
 		return $this->sitelinksValidator->getValidatedSitelinks();
 	}
 
-	private function assertValidSitelinks( string $itemId, array $serialization ): void {
-		$validationError = $this->sitelinksValidator->validate( $itemId, $serialization );
+	private function assertValidSitelinks( string $itemId, array $originalSitelinks, array $serialization ): void {
+		$validationError = $this->sitelinksValidator->validate(
+			$itemId,
+			$serialization,
+			$this->getModifiedSitelinksSites( $originalSitelinks, $serialization )
+		);
 		if ( !$validationError ) {
 			return;
 		}
@@ -126,6 +130,15 @@ class PatchedSitelinksValidator {
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
+	}
+
+	private function getModifiedSitelinksSites( array $originalSitelinks, array $patchedSitelinks ): array {
+		return array_filter(
+			array_keys( $patchedSitelinks ),
+			fn( $siteId ) => !isset( $originalSitelinks[$siteId] )
+				|| ( $patchedSitelinks[$siteId]['title'] ?? '' ) !== $originalSitelinks[$siteId]['title']
+				|| ( $patchedSitelinks[$siteId]['badges'] ?? [] ) !== $originalSitelinks[$siteId]['badges']
+		);
 	}
 
 	private function assertUrlsNotModified( array $originalSitelinksSerialization, array $patchedSitelinkSerialization ): void {

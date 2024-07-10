@@ -109,7 +109,7 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	private const LIMIT = 40;
-	private const ALLOWED_BADGES = [ 'Q999' ];
+	private const ALLOWED_BADGES = [ 'Q999', 'Q777' ];
 	private const EXISTING_STATEMENT_ID = 'Q123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659';
 	private const EXISTING_STRING_PROPERTY_IDS = [ 'P1359', 'P3874', 'P2304', 'P6411' ];
 
@@ -993,6 +993,81 @@ class PatchedItemValidatorTest extends TestCase {
 					UseCaseError::CONTEXT_BADGE => 'Q99',
 				]
 			),
+		];
+	}
+
+	/**
+	 * @dataProvider modifiedSitelinksProvider
+	 */
+	public function testValidatesOnlyModifiedSitelinks(
+		Sitelinks $originalSitelinks,
+		array $patchedSitelinks,
+		array $expectedValidatedSitelinkSites
+	): void {
+		$itemId = new ItemId( 'Q13' );
+
+		$originalItem = NewItem::withId( $itemId )
+			->andLabel( 'en', 'spud' )
+			->andLabel( 'de', 'Kartoffel' )
+			->build();
+
+		$item = $this->createStub( ItemReadModel::class );
+		$item->method( 'getSitelinks' )->willReturn( $originalSitelinks );
+
+		$patchedItem = [
+			'id' => "$itemId",
+			'type' => 'item',
+			'labels' => [ 'en' => 'potato' ],
+			'sitelinks' => $patchedSitelinks,
+		];
+
+		$this->siteLinkLookup = $this->createMock( SiteLinkLookup::class );
+		$this->siteLinkLookup->expects( $this->exactly( count( $expectedValidatedSitelinkSites ) ) )
+			->method( 'getItemIdForSiteLink' )
+			->willReturnCallback( function ( SiteLink $sitelink ) use ( $expectedValidatedSitelinkSites ): void {
+				$this->assertContains( $sitelink->getSiteId(), $expectedValidatedSitelinkSites );
+			} );
+
+		$this->assertInstanceOf( Item::class, $this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem ) );
+	}
+
+	public function modifiedSitelinksProvider(): Generator {
+		$originalSitelinks = new Sitelinks(
+			new SitelinkReadModel(
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],
+				'Potato',
+				[ new ItemId( self::ALLOWED_BADGES[0] ) ],
+				''
+			),
+			new SitelinkReadModel( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1], 'Kartoffel', [], '' ),
+		);
+
+		yield 'new sitelink' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => [ self::ALLOWED_BADGES[0] ] ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel' ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[2] => [ 'title' => 'بطاطا' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[2] ],
+		];
+
+		yield 'modified sitelink title' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => [ self::ALLOWED_BADGES[0] ] ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Erdapfel' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] ],
+		];
+
+		yield 'modified sitelink badges' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => self::ALLOWED_BADGES ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] ],
 		];
 	}
 

@@ -114,6 +114,29 @@ class SitelinksValidatorTest extends TestCase {
 		$this->assertSame( SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE, $error->getCode() );
 	}
 
+	public function testPartialValidation(): void {
+		$itemId = 'Q123';
+		$siteToValidate = self::VALID_SITES[0];
+		$sitelinksSerialization = [
+			self::VALID_SITES[0] => [ 'title' => 'Potato' ],
+			self::VALID_SITES[1] => [ 'title' => 'Q10998' ],
+		];
+		$validatedSitelink = new SiteLink( self::VALID_SITES[0], 'Potato' );
+
+		$this->sitelinkValidator = $this->createMock( SitelinkValidator::class );
+		$this->sitelinkValidator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $itemId, $siteToValidate, $sitelinksSerialization[$siteToValidate] );
+		$this->sitelinkValidator->method( 'getValidatedSitelink' )->willReturn( $validatedSitelink );
+
+		$sitelinksValidator = $this->newValidator();
+		$this->assertNull( $sitelinksValidator->validate( $itemId, $sitelinksSerialization, [ $siteToValidate ] ) );
+		$this->assertEquals(
+			new SiteLinkList( [ $validatedSitelink, new SiteLink( self::VALID_SITES[1], 'Q10998' ) ] ),
+			$sitelinksValidator->getValidatedSitelinks()
+		);
+	}
+
 	private function newValidator(): SitelinksValidator {
 		return new SitelinksValidator( new SiteIdValidator( self::VALID_SITES ), $this->sitelinkValidator );
 	}

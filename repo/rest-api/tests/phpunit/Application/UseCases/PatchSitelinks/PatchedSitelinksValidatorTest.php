@@ -260,7 +260,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		try {
 			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
-				[ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/.example' ] ],
+				[ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/.example', 'badges' => [] ] ],
 				[ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/Example.com' ] ]
 			);
 
@@ -268,6 +268,63 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		} catch ( UseCaseError $error ) {
 			$this->assertEquals( $expectedError, $error );
 		}
+	}
+
+	/**
+	 * @dataProvider modifiedSitelinksProvider
+	 */
+	public function testValidatesOnlyModifiedSitelinks(
+		array $originalSitelinks,
+		array $patchedSitelinks,
+		array $expectedValidatedSitelinkSites
+	): void {
+		$this->siteLinkLookup = $this->createMock( SiteLinkLookup::class );
+		$this->siteLinkLookup->expects( $this->exactly( count( $expectedValidatedSitelinkSites ) ) )
+			->method( 'getItemIdForSiteLink' )
+			->willReturnCallback( function ( SiteLink $sitelink ) use ( $expectedValidatedSitelinkSites ): void {
+				$this->assertContains( $sitelink->getSiteId(), $expectedValidatedSitelinkSites );
+			} );
+
+		$this->assertInstanceOf(
+			SiteLinkList::class,
+			$this->newValidator( new SameTitleSitelinkTargetResolver() )
+				->validateAndDeserialize( 'Q13', $originalSitelinks, $patchedSitelinks )
+		);
+	}
+
+	public function modifiedSitelinksProvider(): Generator {
+		$originalSitelinks = [
+			TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => [] ],
+			TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel', 'badges' => [] ],
+		];
+
+		yield 'new sitelink' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato' ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel' ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[2] => [ 'title' => 'بطاطا' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[2] ],
+		];
+
+		yield 'modified sitelink title' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato' ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Erdapfel' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] ],
+		];
+
+		yield 'modified sitelink badges' => [
+			$originalSitelinks,
+			[
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => self::ALLOWED_BADGES ],
+				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel' ],
+			],
+			[ TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] ],
+		];
 	}
 
 	private function newValidator( SitelinkTargetTitleResolver $sitelinkTargetTitleResolver ): PatchedSitelinksValidator {
