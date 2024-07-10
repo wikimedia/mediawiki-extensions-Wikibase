@@ -30,7 +30,6 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
-	public const LABEL_TOO_LONG = 'label-too-long';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
@@ -91,10 +90,12 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const STATEMENT_ID_NOT_MODIFIABLE = 'statement-id-not-modifiable';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
+	public const VALUE_TOO_LONG = 'value-too-long';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
 	public const CONTEXT_ALIAS = 'alias';
+	public const CONTEXT_LIMIT = 'limit';
 	public const CONTEXT_CHARACTER_LIMIT = 'character-limit';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
@@ -147,7 +148,6 @@ class UseCaseError extends UseCaseException {
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_NOT_DEFINED => [],
-		self::LABEL_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
@@ -228,6 +228,7 @@ class UseCaseError extends UseCaseException {
 		],
 		self::STATEMENT_ID_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::STATEMENT_PROPERTY_ID ],
+		self::VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 	];
 
 	/**
@@ -236,7 +237,6 @@ class UseCaseError extends UseCaseException {
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
-		self::LABEL_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
@@ -277,6 +277,14 @@ class UseCaseError extends UseCaseException {
 
 	public static function newInvalidValue( string $path ): self {
 		return new self( self::INVALID_VALUE, "Invalid value at '$path'", [ self::CONTEXT_PATH => $path ] );
+	}
+
+	public static function newValueTooLong( string $path, int $maxLength ): self {
+		return new self(
+			self::VALUE_TOO_LONG,
+			'The input value is too long',
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_LIMIT => $maxLength ]
+		);
 	}
 
 	public function getErrorCode(): string {

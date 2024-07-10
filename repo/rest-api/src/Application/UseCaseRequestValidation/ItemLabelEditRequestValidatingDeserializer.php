@@ -55,15 +55,7 @@ class ItemLabelEditRequestValidatingDeserializer {
 				case ItemLabelValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/label' );
 				case ItemLabelValidator::CODE_TOO_LONG:
-					$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
-					throw new UseCaseError(
-						UseCaseError::LABEL_TOO_LONG,
-						"Label must be no more than $maxLabelLength characters long",
-						[
-							UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_LABEL],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLabelLength,
-						]
-					);
+					throw UseCaseError::newValueTooLong( '/label', $context[ItemLabelValidator::CONTEXT_LIMIT] );
 				case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
 					$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(

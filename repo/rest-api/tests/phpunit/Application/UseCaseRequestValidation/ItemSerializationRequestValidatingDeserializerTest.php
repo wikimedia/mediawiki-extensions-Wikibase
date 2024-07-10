@@ -134,14 +134,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::LABEL_TOO_LONG,
-				'Label must be no more than 50 characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => 50,
-				]
-			),
+			UseCaseError::newValueTooLong( '/item/labels/en', self::MAX_LENGTH ),
 		];
 
 		yield 'invalid label type' => [
