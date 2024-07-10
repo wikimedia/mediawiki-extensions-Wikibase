@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
+use LogicException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
 use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
@@ -31,14 +32,15 @@ class PatchJson {
 				[ UseCaseError::CONTEXT_PATH => $jsonPointer ]
 			);
 		} catch ( PatchTestConditionFailedException $e ) {
-			$operation = $e->getOperation();
+			$opIndex = array_search( $e->getOperation(), $patch );
+			if ( !is_int( $opIndex ) ) {
+				throw new LogicException( "The invalid test operation wasn't found in the original patch document" );
+			}
 			throw new UseCaseError(
 				UseCaseError::PATCH_TEST_FAILED,
-				"Test operation in the provided patch failed. At path '{$operation[ 'path' ]}'" .
-				" expected '" . json_encode( $operation[ 'value' ] ) .
-				"', actual: '" . json_encode( $e->getActualValue() ) . "'",
+				'Test operation in the provided patch failed',
 				[
-					UseCaseError::CONTEXT_OPERATION => $operation,
+					UseCaseError::CONTEXT_PATH => "/patch/{$opIndex}",
 					UseCaseError::CONTEXT_ACTUAL_VALUE => $e->getActualValue(),
 				]
 			);

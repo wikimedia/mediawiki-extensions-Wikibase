@@ -364,10 +364,8 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnLabel } );
-			assert.include( response.body.message, operation.path );
-			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testEnLabel );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testEnLabel } );
+			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
 
