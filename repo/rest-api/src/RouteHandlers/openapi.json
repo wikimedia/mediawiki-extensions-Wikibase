@@ -4202,14 +4202,14 @@
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
               },
-              "sitelink-data-missing-title": {
-                "$ref": "#/components/examples/SitelinkTitleFieldNotProvidedWithSiteContextExample"
-              },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
+              },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
@@ -4736,14 +4736,14 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "comment-too-long": {
                 "$ref": "#/components/examples/CommentTooLongExample"
               },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
-              },
-              "sitelink-data-missing-title": {
-                "$ref": "#/components/examples/SitelinkTitleFieldNotProvidedExample"
               },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeExample"
@@ -7236,6 +7236,16 @@
           }
         }
       },
+      "MissingFieldExample": {
+        "value": {
+          "code": "missing-field",
+          "message": "Required field missing",
+          "context": {
+            "path": "{json_pointer_to_parent}",
+            "field": "{missing_field}"
+          }
+        }
+      },
       "ValueTooLongExample": {
         "value": {
           "code": "value-too-long",
@@ -7296,21 +7306,6 @@
         "value": {
           "code": "title-does-not-exist",
           "message": "Page with title {title} does not exist on the given site",
-          "context": {
-            "site": "{site_id}"
-          }
-        }
-      },
-      "SitelinkTitleFieldNotProvidedExample": {
-        "value": {
-          "code": "sitelink-data-missing-title",
-          "message": "Mandatory sitelink title missing"
-        }
-      },
-      "SitelinkTitleFieldNotProvidedWithSiteContextExample": {
-        "value": {
-          "code": "sitelink-data-missing-title",
-          "message": "Mandatory sitelink title missing",
           "context": {
             "site": "{site_id}"
           }

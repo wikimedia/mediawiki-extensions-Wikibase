@@ -543,11 +543,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::SITELINK_DATA_MISSING_TITLE,
-				'Mandatory sitelink title missing',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newMissingField( "/item/sitelinks/$site", 'title' ),
 		];
 		yield SitelinkValidator::CODE_EMPTY_TITLE => [
 			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE, [

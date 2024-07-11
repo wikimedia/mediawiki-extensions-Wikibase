@@ -648,8 +648,13 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: {} }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'sitelink-data-missing-title', { 'site-id': localWikiId } );
-			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: `/item/sitelinks/${localWikiId}`, field: 'title' }
+			);
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( 'invalid title', async () => {

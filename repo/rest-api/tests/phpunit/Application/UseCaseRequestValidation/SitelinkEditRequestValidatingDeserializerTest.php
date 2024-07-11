@@ -70,8 +70,9 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	public function sitelinkValidationErrorProvider(): \Generator {
 		yield 'missing title' => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING ),
-			UseCaseError::SITELINK_DATA_MISSING_TITLE,
-			'Mandatory sitelink title missing',
+			UseCaseError::MISSING_FIELD,
+			'Required field missing',
+			[ UseCaseError::CONTEXT_PATH => '/sitelink', UseCaseError::CONTEXT_FIELD => 'title' ],
 		];
 		$path = '/sitelink/title';
 		yield 'title is empty' => [
