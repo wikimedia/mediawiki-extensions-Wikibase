@@ -7,14 +7,14 @@
 			"KaleemBhatti",
 			"Mehtab ahmed",
 			"Sindhu",
-			"Tweety"
+			"Tweety",
+			"Charoo"
 		]
 	},
 	"wikibase-client-desc": "وڪيبيس ايڪسٽينشن لاءِ ڪلائينٽ",
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
 	"wikibase-after-page-move": "اوهان جو چورڻو هاڻي [$1 {{WBREPONAME}} آئٽم تي] ٻولي ڳنڍڻي ۾ نظر اچڻ گهرجي. تصديق ڪري وٺو تہ ڇا اهو نظر اچي پيو.",
 	"wikibase-after-page-delete": "[$1 {{WBREPONAME}} سان لاڳاپيل آئٽم] مان هن صفحي جو ڳنڍڻو ڊاهڻ لازمي آهي. اسان جي درخواست آهي تہ اوهان هڪ دفعو چڪاسي وٺو.",
-	"wikibase-after-page-delete-queued": "ھن صفحي سان لاڳاپيل [$1 {{WBREPONAME}} شيءِ] پاڻمرادو اپڊيٽ ٿي ويندي. مھرباني ڪري نوٽ ڪريو تہ اهو فوري طور تي نہ ٿو ٿي سگهي.",
 	"wikibase-comment-add": "هڪ {{WBREPONAME}} شيءِ سرجيو ويو آهي.",
 	"wikibase-comment-remove": "لاڳاپيل {{WBREPONAME}} شيءِ ڊاٿي وئي. ٻوليءَ جا ڳنڍڻا ھٽايا ويا.",
 	"wikibase-comment-linked": "هڪ {{WBREPONAME}} شيءِ هن صفحي سان ڳنڍي وئي آهي.",
@@ -118,7 +118,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "صفحي کي ٻيھر لاھيو",
 	"wikibase-client-data-bridge-error-go-back": "واپس وڃو",
 	"wikibase-client-data-bridge-error-retry-save": "ٻيھر سانڍيو",
-	"wikibase-client-data-bridge-thank-you-head": "توھان جي سنوار لاءِ توھان جي مھرباني!",
+	"wikibase-client-data-bridge-thank-you-head": "توھان جي سنوار لاءِ مھرباني!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "توھان داخل ٿيل نہ آھيو",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "داخل ٿيڻ بغير ڇاپيو",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "داخل ٿيڻ بغير سانڍيو",
