@@ -4,11 +4,11 @@ namespace Wikibase\Client\Changes;
 
 use HTMLCacheUpdateJob;
 use JobQueueGroup;
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use RefreshLinksJob;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Service object for triggering different kinds of page updates
@@ -42,23 +42,18 @@ class WikiPageUpdater implements PageUpdater {
 	private $rcBatchSize = 300;
 
 	/**
-	 * @var StatsdDataFactoryInterface|null
+	 * @var StatsFactory|null
 	 */
-	private $stats;
+	private $statsFactory;
 
-	/**
-	 * @param JobQueueGroup $jobQueueGroup
-	 * @param LoggerInterface $logger
-	 * @param StatsdDataFactoryInterface|null $stats
-	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger,
-		StatsdDataFactoryInterface $stats = null
+		?StatsFactory $statsFactory = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->logger = $logger;
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory;
 	}
 
 	/**
@@ -73,16 +68,6 @@ class WikiPageUpdater implements PageUpdater {
 	 */
 	public function setRecentChangesBatchSize( $rcBatchSize ) {
 		$this->rcBatchSize = $rcBatchSize;
-	}
-
-	/**
-	 * @param string $updateType
-	 * @param int $delta
-	 */
-	private function incrementStats( $updateType, $delta ) {
-		if ( $this->stats ) {
-			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
-		}
 	}
 
 	/**
@@ -152,8 +137,17 @@ class WikiPageUpdater implements PageUpdater {
 		}
 
 		$this->jobQueueGroup->lazyPush( $jobs );
-		$this->incrementStats( 'WebCache.jobs', count( $jobs ) );
-		$this->incrementStats( 'WebCache.titles', count( $titles ) );
+
+		if ( $this->statsFactory !== null ) {
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_WebCache_jobs_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.WebCache.jobs' )
+				->incrementBy( count( $jobs ) );
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_WebCache_titles_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.WebCache.titles' )
+				->incrementBy( count( $titles ) );
+		}
 	}
 
 	/**
@@ -186,8 +180,16 @@ class WikiPageUpdater implements PageUpdater {
 			);
 		}
 
-		$this->incrementStats( 'RefreshLinks.jobs', $jobCount );
-		$this->incrementStats( 'RefreshLinks.titles', count( $titles ) );
+		if ( $this->statsFactory !== null ) {
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_RefreshLinks_jobs_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.RefreshLinks.jobs' )
+				->incrementBy( $jobCount );
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_RefreshLinks_titles_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.RefreshLinks.titles' )
+				->incrementBy( count( $titles ) );
+		}
 	}
 
 	/**
@@ -242,14 +244,28 @@ class WikiPageUpdater implements PageUpdater {
 
 		$this->jobQueueGroup->lazyPush( $jobs );
 
-		$this->incrementStats( 'InjectRCRecords.jobs', count( $jobs ) );
-		$this->incrementStats( 'InjectRCRecords.titles', $titleCount );
+		if ( $this->statsFactory !== null ) {
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_InjectRCRecords_jobs_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.jobs' )
+				->incrementBy( count( $jobs ) );
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_InjectRCRecords_titles_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.titles' )
+				->incrementBy( $titleCount );
 
-		// tracking fallout of the hacky fix for T177707
-		$delta = count( $titles ) - $titleCount;
-		$this->incrementStats( 'InjectRCRecords.discardedTitles', $delta );
-		if ( $delta !== 0 ) {
-			$this->incrementStats( 'InjectRCRecords.incompleteChanges', 1 );
+			// tracking fallout of the hacky fix for T177707
+			$delta = count( $titles ) - $titleCount;
+			$this->statsFactory->withComponent( 'WikibaseClient' )
+				->getCounter( 'PageUpdates_InjectRCRecords_discardedTitles_total' )
+				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.discardedTitles' )
+				->incrementBy( $delta );
+			if ( $delta !== 0 ) {
+				$this->statsFactory->withComponent( 'WikibaseClient' )
+					->getCounter( 'PageUpdates_InjectRCRecords_incompleteChanges_total' )
+					->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.incompleteChanges' )
+					->increment();
+			}
 		}
 	}
 
