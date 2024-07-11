@@ -118,18 +118,6 @@
 			"message": "Cannot change the property of the existing statement"
 		}
 	},
-	"MissingJsonPatchFieldExample": {
-		"value": {
-			"code": "missing-json-patch-field",
-			"message": "Missing '{field}' in JSON patch",
-			"context": {
-				"operation": {
-					"op": "remove"
-				},
-				"field": "path"
-			}
-		}
-	},
 	"PatchTestFailedExample": {
 		"value": {
 			"code": "patch-test-failed",

@@ -5151,11 +5151,11 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -5183,11 +5183,11 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -5215,11 +5215,11 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -5765,6 +5765,9 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -5773,9 +5776,6 @@
               },
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -5806,6 +5806,9 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -5814,9 +5817,6 @@
               },
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -5847,6 +5847,9 @@
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
+              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -5855,9 +5858,6 @@
               },
               "invalid-operation-change-property-of-statement": {
                 "$ref": "#/components/examples/InvalidOperationChangePropertyOfStatement"
-              },
-              "missing-json-patch-field": {
-                "$ref": "#/components/examples/MissingJsonPatchFieldExample"
               }
             }
           }
@@ -7325,18 +7325,6 @@
         "value": {
           "code": "invalid-operation-change-property-of-statement",
           "message": "Cannot change the property of the existing statement"
-        }
-      },
-      "MissingJsonPatchFieldExample": {
-        "value": {
-          "code": "missing-json-patch-field",
-          "message": "Missing '{field}' in JSON patch",
-          "context": {
-            "operation": {
-              "op": "remove"
-            },
-            "field": "path"
-          }
         }
       },
       "PatchTestFailedExample": {

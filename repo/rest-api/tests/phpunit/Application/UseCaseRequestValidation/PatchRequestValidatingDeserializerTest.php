@@ -103,12 +103,13 @@ class PatchRequestValidatingDeserializerTest extends TestCase {
 				JsonPatchValidator::CONTEXT_OPERATION => $operation,
 				JsonPatchValidator::CONTEXT_FIELD => 'op',
 			] ),
-			UseCaseError::MISSING_JSON_PATCH_FIELD,
-			"Missing 'op' in JSON patch",
+			UseCaseError::MISSING_FIELD,
+			'Required field missing',
 			[
-				UseCaseError::CONTEXT_OPERATION => $operation,
+				UseCaseError::CONTEXT_PATH => '/patch/0',
 				UseCaseError::CONTEXT_FIELD => 'op',
 			],
+			[ $operation ],
 		];
 	}
 
