@@ -299,12 +299,9 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					const context = { 'actual-value': testStatement.value.content, operation };
+					const context = { path: '/patch/0', 'actual-value': testStatement.value.content };
 					assertValidError( response, 409, 'patch-test-failed', context );
-					assert.include( response.body.message, 'Test operation in the provided patch failed.' );
-					assert.include( response.body.message, operation.path );
-					assert.include( response.body.message, JSON.stringify( operation.value ) );
-					assert.include( response.body.message, testStatement.value.content );
+					assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 				} );
 			} );
 

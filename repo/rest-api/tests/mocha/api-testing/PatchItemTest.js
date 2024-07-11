@@ -213,10 +213,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testEnglishLabel } );
-			assert.include( response.body.message, operation.path );
-			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testEnglishLabel );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testEnglishLabel } );
+			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 
 		it( 'item is a redirect', async () => {

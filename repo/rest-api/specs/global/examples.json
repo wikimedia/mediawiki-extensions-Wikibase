@@ -142,13 +142,9 @@
 	"PatchTestFailedExample": {
 		"value": {
 			"code": "patch-test-failed",
-			"message": "Test operation in the provided patch failed. At path '{path}' expected '{expected}', actual: '{actual}'",
+			"message": "Test operation in the provided patch failed",
 			"context": {
-				"operation": {
-					"op": "test",
-					"path": "/some/path",
-					"value": "expected value"
-				},
+				"path": "{json_pointer_to_patch_operation}" ,
 				"actual-value": "actual value"
 			}
 		}

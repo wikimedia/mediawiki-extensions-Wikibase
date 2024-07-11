@@ -74,7 +74,7 @@ class PatchJsonTest extends TestCase {
 		yield 'patch test operation failed' => [
 			[ $patchOperation ],
 			UseCaseError::PATCH_TEST_FAILED,
-			[ 'operation' => $patchOperation, 'actual-value' => 'value' ],
+			[ 'path' => '/patch/0', 'actual-value' => 'value' ],
 		];
 	}
 

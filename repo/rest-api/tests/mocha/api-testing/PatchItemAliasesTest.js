@@ -228,10 +228,8 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { 'actual-value': testAlias, operation } );
-			assert.include( response.body.message, operation.path );
-			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testAlias );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testAlias } );
+			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
 

@@ -228,10 +228,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': testDescription } );
-			assert.include( response.body.message, operation.path );
-			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, testDescription );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testDescription } );
+			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
 

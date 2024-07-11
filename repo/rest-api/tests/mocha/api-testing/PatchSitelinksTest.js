@@ -216,10 +216,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { operation, 'actual-value': linkedArticle } );
-			assert.include( response.body.message, operation.path );
-			assert.include( response.body.message, JSON.stringify( operation.value ) );
-			assert.include( response.body.message, linkedArticle );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': linkedArticle } );
+			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 
 	} );
