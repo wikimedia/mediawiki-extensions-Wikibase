@@ -111,7 +111,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "entrer une description en $1",
 	"wikibase-description-edit-placeholder-not-applicable": "non applicable",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Une description n’est pas applicable pour plusieurs langues",
-	"wikibase-description-edit-not-supported": "Les descriptions ne sont pas prises en charge pour cette langue. Veuillez fournir une description dans une autre langue une fois l’élément créé.",
+	"wikibase-item-description-edit-not-supported": "Les descriptions ne sont pas prises en charge pour cette langue. Veuillez fournir une description dans une autre langue une fois l’élément créé.",
 	"wikibase-description-not-applicable-title": "Une description n’est pas applicable pour plusieurs langues.",
 	"wikibase-aliases-edit-placeholder": "saisissez des alias",
 	"wikibase-aliases-edit-placeholder-language-aware": "entrer quelques alias en $1",

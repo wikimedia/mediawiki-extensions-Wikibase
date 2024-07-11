@@ -69,7 +69,7 @@
 	"wikibase-description-empty": "Жодного опису ще не визначено.",
 	"wikibase-description-edit-placeholder": "введіть опис",
 	"wikibase-description-edit-placeholder-language-aware": "введіть опис мовою $1",
-	"wikibase-description-edit-not-supported": "Описи не підтримуються цією мовою. Будь ласка, надайте опис іншою мовою, коли елемент буде створено.",
+	"wikibase-item-description-edit-not-supported": "Описи не підтримуються цією мовою. Будь ласка, надайте опис іншою мовою, коли елемент буде створено.",
 	"wikibase-aliases-edit-placeholder": "введіть альтернативні назви",
 	"wikibase-aliases-edit-placeholder-language-aware": "введіть альтернативні назви мовою $1",
 	"wikibase-aliases-edit-label": "Альтернативні назви, через вертикальну риску:",

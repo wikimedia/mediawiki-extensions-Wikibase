@@ -55,7 +55,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "$1 тилде ачыкълау киргизигиз",
 	"wikibase-description-edit-placeholder-not-applicable": "келишмейди",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Бютеу тилле ючюн тынгылау бла ачыкълау къошарча тюлдю",
-	"wikibase-description-edit-not-supported": "Ачыкълаулагъа бу тилде дагъан берилмейди. Элемент болдургъандан сора, тилейбиз, башха тилде ачыкълау беригиз.",
+	"wikibase-item-description-edit-not-supported": "Ачыкълаулагъа бу тилде дагъан берилмейди. Элемент болдургъандан сора, тилейбиз, башха тилде ачыкълау беригиз.",
 	"wikibase-description-not-applicable-title": "Бютеу тилле ючюн тынгылау бла ачыкълау къошарча тюлдю",
 	"wikibase-aliases-edit-placeholder": "башха атларын киргиз",
 	"wikibase-aliases-edit-placeholder-language-aware": "$1 тилде башха атларын киргиз",

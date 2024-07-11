@@ -41,6 +41,7 @@
 	"wikibase-description-empty": "Keng Beschreiwung definéiert",
 	"wikibase-description-edit-placeholder": "Beschreiwung aginn",
 	"wikibase-description-edit-placeholder-language-aware": "Beschreiwung op $1 aginn",
+	"wikibase-property-description-edit-not-supported": "Beschreiwunge gi fir dës Sprooch net ënnerstëtzt. Gitt wgl. eng Beschreiwung an enger anerer Sprooch un, soubal d'Eegenschaft ugeluecht ass.",
 	"wikibase-aliases-edit-placeholder": "gitt e puer Aliasen an",
 	"wikibase-aliases-edit-placeholder-language-aware": "gitt e puer Aliasen op $1 an",
 	"wikibase-content-language-edit-label": "Sprooch:",

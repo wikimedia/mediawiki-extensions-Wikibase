@@ -67,7 +67,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "προσθέστε περιγραφή στο $1",
 	"wikibase-description-edit-placeholder-not-applicable": "μη εφαρμόσιμο",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Μια περιγραφή δεν ισχύει για το εργαλείο των πολλών γλωσσών",
-	"wikibase-description-edit-not-supported": "Οι περιγραφές δεν υποστηρίζονται για αυτήν τη γλώσσα. Δώστε μια περιγραφή σε άλλη γλώσσα μόλις δημιουργηθεί το Στοιχείο.",
+	"wikibase-item-description-edit-not-supported": "Οι περιγραφές δεν υποστηρίζονται για αυτήν τη γλώσσα. Δώστε μια περιγραφή σε άλλη γλώσσα μόλις δημιουργηθεί το Στοιχείο.",
 	"wikibase-description-not-applicable-title": "Μια περιγραφή δεν είναι διαθέσιμη στο εργαλείο «πολλές γλώσσες».",
 	"wikibase-aliases-edit-placeholder": "εισαγάγετε μερικά αλλώνυμα",
 	"wikibase-aliases-edit-placeholder-language-aware": "εισαγάγετε μερικά αλλώνυμα στα $1",

@@ -48,7 +48,7 @@
 	"wikibase-description-empty": "Kirjeldust pole määratud",
 	"wikibase-description-edit-placeholder": "sisesta kirjeldus",
 	"wikibase-description-edit-placeholder-language-aware": "sisesta kirjeldus ($1)",
-	"wikibase-description-edit-not-supported": "Selles keeles kirjeldust ei toetata. Palun too ära teises keeles kirjeldus pärast seda, kui üksus on loodud.",
+	"wikibase-item-description-edit-not-supported": "Selles keeles kirjeldust ei toetata. Palun too ära teises keeles kirjeldus pärast seda, kui üksus on loodud.",
 	"wikibase-aliases-edit-placeholder": "sisesta rööpkujusid",
 	"wikibase-aliases-edit-placeholder-language-aware": "sisesta rööpkujusid ($1)",
 	"wikibase-aliases-edit-label": "Rööpkujud, eraldatud püstkriipsuga:",

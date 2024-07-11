@@ -66,7 +66,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "$1 ভাষায় একটি বিবরণ লিখুন",
 	"wikibase-description-edit-placeholder-not-applicable": "প্রযোজ্য নয়",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "একাধিক ভাষার জন্য একটি বিবরণ প্রযোজ্য নয়",
-	"wikibase-description-edit-not-supported": "এই ভাষার জন্য বিবরণ সমর্থিত নয়। আইটেমটি তৈরির পর অনুগ্রহ করে অন্য ভাষায় একটি বিবরণ প্রদান করুন।",
+	"wikibase-item-description-edit-not-supported": "এই ভাষার জন্য বিবরণ সমর্থিত নয়। আইটেমটি তৈরির পর অনুগ্রহ করে অন্য ভাষায় একটি বিবরণ প্রদান করুন।",
 	"wikibase-description-not-applicable-title": "একাধিক ভাষার জন্য একটি বিবরণ প্রযোজ্য নয়।",
 	"wikibase-aliases-edit-placeholder": "কিছু উপনাম লিখুন",
 	"wikibase-aliases-edit-placeholder-language-aware": "$1 ভাষায় কিছু উপনাম লিখুন",

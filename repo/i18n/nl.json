@@ -84,7 +84,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "beschrijving invoeren in de taal $1",
 	"wikibase-description-edit-placeholder-not-applicable": "niet toepasbaar",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Het is niet mogelijk om voor alle talen een standaardbeschrijving in te stellen",
-	"wikibase-description-edit-not-supported": "Beschrijvingen worden niet ondersteund voor deze taal. Geef een beschrijving in een andere taal op zodra het item is gemaakt.",
+	"wikibase-item-description-edit-not-supported": "Beschrijvingen worden niet ondersteund voor deze taal. Geef een beschrijving in een andere taal op zodra het item is gemaakt.",
 	"wikibase-description-not-applicable-title": "Het is niet mogelijk om voor alle talen een standaardbeschrijving in te stellen",
 	"wikibase-aliases-edit-placeholder": "geef aliassen op",
 	"wikibase-aliases-edit-placeholder-language-aware": "aliassen in de taal $1 invoeren",

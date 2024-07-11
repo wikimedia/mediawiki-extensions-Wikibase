@@ -64,6 +64,7 @@
 	"wikibase-otherprojects": "अन्य परियोजनाहरू",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार",
 	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"wikibase-sitelinks-link-columnheading": "जोडिएका पृष्ठहरू",
 	"notification-header-page-connection": "<strong>$3</strong> पृष्ठलाई विकिडाटा {{PLURAL:$4|-1= {{WBREPONAME}} वस्तु|{{WBREPONAME}} वस्तु $4}}मा {{GENDER:$2|जडान}} गरिएको थियो, जहाँ विषयसँग सम्बन्धित डाटा सङ्कलन गर्न सकिन्छ।",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> र {{PLURAL:$4|एउटा अर्को पृष्ठ|$4 अन्य पृष्ठहरू|100=९९+ अन्य पृष्ठहरू}}लाई {{WBREPONAME}} वस्तुहरूमा {{GENDER:$2|जडान}} गरिएको थियो, जहाँ विषयहरूसँग सान्दर्भिक डाटा सङ्कलन गर्न सकिन्छ।",
 	"notification-link-text-view-item": "वस्तु {{GENDER:$1|हेर्नुहोस्}}",

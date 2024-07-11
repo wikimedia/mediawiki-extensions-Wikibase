@@ -97,7 +97,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "请输入$1的描述",
 	"wikibase-description-edit-placeholder-not-applicable": "不适用",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "无法为所有语言设置默认描述",
-	"wikibase-description-edit-not-supported": "不支持此语言的描述。请在创建项目后提供其他语言的描述。",
+	"wikibase-item-description-edit-not-supported": "不支持此语言的描述。请在创建项目后提供其他语言的描述。",
 	"wikibase-description-not-applicable-title": "无法为所有语言设置默认描述",
 	"wikibase-aliases-edit-placeholder": "输入一些别名",
 	"wikibase-aliases-edit-placeholder-language-aware": "输入一些$1的别名",

@@ -70,7 +70,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "introduza uma descrição em $1",
 	"wikibase-description-edit-placeholder-not-applicable": "não aplicável",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Não é possível definir uma descrição pré-definida para todas as línguas",
-	"wikibase-description-edit-not-supported": "As descrições não são suportadas para esta língua. Forneça uma descrição noutra língua após o elemento ter sido criado, por favor.",
+	"wikibase-item-description-edit-not-supported": "As descrições não são suportadas para esta língua. Forneça uma descrição noutra língua após o elemento ter sido criado, por favor.",
 	"wikibase-description-not-applicable-title": "Não é possível definir uma descrição pré-definida para todas as línguas",
 	"wikibase-aliases-edit-placeholder": "introduza alguns nomes alternativos",
 	"wikibase-aliases-edit-placeholder-language-aware": "introduza alguns nomes alternativos em $1",
