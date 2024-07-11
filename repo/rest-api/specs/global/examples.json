@@ -6,6 +6,16 @@
 			"context": { "path": "{json_pointer}" }
 		}
 	},
+	"ValueTooLongExample": {
+		"value": {
+			"code": "value-too-long",
+			"message": "The input value is too long",
+			"context": {
+				"path": "{json_pointer_to_element}",
+				"limit": "{configured_limit}"
+			}
+		}
+	},
 	"CommentTooLongExample": {
 		"value": {
 			"code": "comment-too-long",
@@ -257,27 +267,6 @@
 		"value": {
 			"code": "aliases-not-defined",
 			"message": "Property with the ID {property_id} does not have aliases in the language: {language_code}"
-		}
-	},
-	"LabelTooLongExample": {
-		"value": {
-			"code": "label-too-long",
-			"message": "Label must be no more than {limit} characters long",
-			"context": {
-				"value": "{label}",
-				"character-limit": "{limit}"
-			}
-		}
-	},
-	"LabelTooLongWithLanguageContextExample": {
-		"value": {
-			"code": "label-too-long",
-			"message": "Label must be no more than {limit} characters long",
-			"context": {
-				"value": "{label}",
-				"character-limit": "{limit}",
-				"language": "{language_code}"
-			}
 		}
 	},
 	"PatchedInvalidSitelinkTypeExample": {

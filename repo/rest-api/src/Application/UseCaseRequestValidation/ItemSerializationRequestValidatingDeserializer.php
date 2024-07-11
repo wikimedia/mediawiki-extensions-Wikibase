@@ -86,13 +86,9 @@ class ItemSerializationRequestValidatingDeserializer {
 			case ItemLabelValidator::CODE_INVALID:
 				throw UseCaseError::newInvalidValue( "/item/labels/{$context[ItemLabelValidator::CONTEXT_LANGUAGE]}" );
 			case ItemLabelValidator::CODE_TOO_LONG:
-				throw new UseCaseError(
-					UseCaseError::LABEL_TOO_LONG,
-					"Label must be no more than {$context[ItemLabelValidator::CONTEXT_LIMIT]} characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
-					]
+				throw UseCaseError::newValueTooLong(
+					"/item/labels/{$context[ItemLabelValidator::CONTEXT_LANGUAGE]}",
+					$context[ItemLabelValidator::CONTEXT_LIMIT]
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
 				throw new UseCaseError(

@@ -44,7 +44,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => 422,
 		UseCaseError::PATCHED_ITEM_UNEXPECTED_FIELD => 422,
 		UseCaseError::PATCHED_ITEM_INVALID_FIELD => 422,
-		UseCaseError::LABEL_TOO_LONG => 400,
 		UseCaseError::ITEM_DATA_UNEXPECTED_FIELD => 400,
 		UseCaseError::ITEM_STATEMENT_ID_MISMATCH => 400,
 		UseCaseError::PROPERTY_STATEMENT_ID_MISMATCH => 400,
@@ -93,6 +92,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::STATEMENT_ID_NOT_MODIFIABLE => 422,
 		UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => 422,
 		UseCaseError::PATCHED_INVALID_SITELINK_TYPE => 422,
+		UseCaseError::VALUE_TOO_LONG => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {

@@ -240,8 +240,8 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'label-too-long', { value: labelTooLong, 'character-limit': limit } );
-			assert.strictEqual( response.body.message, `Label must be no more than ${limit} characters long` );
+			assertValidError( response, 400, 'value-too-long', { path: '/label', limit: limit } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'label equals description', async () => {

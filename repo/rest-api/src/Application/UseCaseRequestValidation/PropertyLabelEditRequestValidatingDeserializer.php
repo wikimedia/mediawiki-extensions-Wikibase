@@ -48,19 +48,10 @@ class PropertyLabelEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case PropertyLabelValidator::CODE_INVALID:
-					throw UseCaseError::newInvalidValue( '/label' );
 				case PropertyLabelValidator::CODE_EMPTY:
 					throw UseCaseError::newInvalidValue( '/label' );
 				case PropertyLabelValidator::CODE_TOO_LONG:
-					$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];
-					throw new UseCaseError(
-						UseCaseError::LABEL_TOO_LONG,
-						"Label must be no more than $maxLabelLength characters long",
-						[
-							UseCaseError::CONTEXT_VALUE => $context[PropertyLabelValidator::CONTEXT_LABEL],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLabelLength,
-						]
-					);
+					throw UseCaseError::newValueTooLong( '/label', $context[PropertyLabelValidator::CONTEXT_LIMIT] );
 				case PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 					$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(

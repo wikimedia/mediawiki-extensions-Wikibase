@@ -138,18 +138,17 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 			[ UseCaseError::CONTEXT_PATH => '/label' ],
 		];
 
-		$label = 'This label is too long.';
 		$limit = 250;
 		yield 'label too long' => [
 			new ValidationError( PropertyLabelValidator::CODE_TOO_LONG, [
-				PropertyLabelValidator::CONTEXT_LABEL => $label,
+				PropertyLabelValidator::CONTEXT_LABEL => 'This label is too long.',
 				PropertyLabelValidator::CONTEXT_LIMIT => $limit,
 			] ),
-			UseCaseError::LABEL_TOO_LONG,
-			"Label must be no more than $limit characters long",
+			UseCaseError::VALUE_TOO_LONG,
+			'The input value is too long',
 			[
-				UseCaseError::CONTEXT_VALUE => $label,
-				UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
+				UseCaseError::CONTEXT_PATH => '/label',
+				UseCaseError::CONTEXT_LIMIT => $limit,
 			],
 		];
 

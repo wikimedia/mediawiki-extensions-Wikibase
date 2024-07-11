@@ -289,17 +289,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newCreateItemRequestBuilder( { labels: { en: labelTooLong } } )
 				.assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'label-too-long',
-				{ 'character-limit': maxLabelLength, language: 'en' }
-			);
-
-			assert.strictEqual(
-				response.body.message,
-				`Label must be no more than ${maxLabelLength} characters long`
-			);
+			assertValidError( response, 400, 'value-too-long', { path: '/item/labels/en', limit: maxLabelLength } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'description too long', async () => {
