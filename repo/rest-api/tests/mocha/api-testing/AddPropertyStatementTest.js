@@ -7,6 +7,7 @@ const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBu
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -47,7 +48,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add a statement to a property with edit metadata', async () => {
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'omg look i made an edit';
 			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement )

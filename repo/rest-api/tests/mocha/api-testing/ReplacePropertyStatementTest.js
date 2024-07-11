@@ -11,6 +11,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( 'PUT statement tests', () => {
 	let testPropertyId;
@@ -82,7 +83,7 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'can replace a statement to an property with edit metadata provided', async () => {
-					const user = await action.robby(); // robby is a bot
+					const user = await getOrCreateBotUser();
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 					const editSummary = 'omg look i made an edit';
 					const statementSerialization = entityHelper.newStatementWithRandomStringValue(

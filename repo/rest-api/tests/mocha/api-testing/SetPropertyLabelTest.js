@@ -7,6 +7,7 @@ const { newSetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilde
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -75,7 +76,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a label with edit metadata provided', async () => {
 			const languageCode = 'en-us';
 			const newLabel = `new us-english label ${utils.uniq()}`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, newLabel )
@@ -131,7 +132,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		it( 'can replace a label with edit metadata provided', async () => {
 			const languageCode = 'en';
 			const newLabel = `new english label ${utils.uniq()}`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, newLabel )

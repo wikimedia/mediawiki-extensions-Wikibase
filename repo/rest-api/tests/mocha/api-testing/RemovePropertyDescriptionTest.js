@@ -10,6 +10,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 
@@ -43,7 +44,7 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 			const description = `english description ${utils.uniq()}`;
 			await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description ).makeRequest();
 
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'remove english description';
 

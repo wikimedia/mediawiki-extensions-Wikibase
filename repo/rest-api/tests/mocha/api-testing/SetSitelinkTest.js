@@ -12,6 +12,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { createEntity, getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -59,7 +60,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can add a sitelink with badges and edit metadata', async () => {
 			const badges = [ allowedBadges[ 0 ], allowedBadges[ 1 ] ];
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg – i created a sitelink!';
 

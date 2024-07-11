@@ -7,6 +7,7 @@ const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFac
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -82,7 +83,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		it( 'can replace a label with edit metadata provided', async () => {
 			const languageCode = 'en';
 			const newLabel = `new english label ${utils.uniq()}`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
