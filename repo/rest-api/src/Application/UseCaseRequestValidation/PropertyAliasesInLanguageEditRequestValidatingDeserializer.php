@@ -71,16 +71,12 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case AliasesInLanguageValidator::CODE_INVALID:
-					$aliasIndex = array_search( $context[AliasesInLanguageValidator::CONTEXT_VALUE], $aliasesInLanguage->getAliases() );
-					if ( !is_int( $aliasIndex ) ) {
-						throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
-					}
+					$alias = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+					$aliasIndex = Utils::getIndexOfValueInSerialization( $alias, $aliasesInLanguage->getAliases() );
 					throw UseCaseError::newInvalidValue( "/aliases/$aliasIndex" );
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
-					$aliasIndex = array_search( $context[AliasesInLanguageValidator::CONTEXT_VALUE], $aliasesInLanguage->getAliases() );
-					if ( !is_int( $aliasIndex ) ) {
-						throw new LogicException( "The invalid alias wasn't found in the original aliases serialization" );
-					}
+					$alias = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+					$aliasIndex = Utils::getIndexOfValueInSerialization( $alias, $aliasesInLanguage->getAliases() );
 					throw UseCaseError::newValueTooLong( "/aliases/$aliasIndex", $context[AliasesInLanguageValidator::CONTEXT_LIMIT] );
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
