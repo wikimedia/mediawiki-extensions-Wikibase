@@ -6,6 +6,16 @@
 			"context": { "path": "{json_pointer}" }
 		}
 	},
+	"MissingFieldExample": {
+		"value": {
+			"code": "missing-field",
+			"message": "Required field missing",
+			"context": {
+				"path": "{json_pointer_to_parent}",
+				"field": "{missing_field}"
+			}
+		}
+	},
 	"ValueTooLongExample": {
 		"value": {
 			"code": "value-too-long",
@@ -62,19 +72,6 @@
 		"value": {
 			"code": "title-does-not-exist",
 			"message": "Page with title {title} does not exist on the given site",
-			"context": { "site": "{site_id}" }
-		}
-	},
-	"SitelinkTitleFieldNotProvidedExample": {
-		"value": {
-			"code": "sitelink-data-missing-title",
-			"message": "Mandatory sitelink title missing"
-		}
-	},
-	"SitelinkTitleFieldNotProvidedWithSiteContextExample": {
-		"value": {
-			"code": "sitelink-data-missing-title",
-			"message": "Mandatory sitelink title missing",
 			"context": { "site": "{site_id}" }
 		}
 	},

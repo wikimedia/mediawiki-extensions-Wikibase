@@ -30,6 +30,7 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
+	public const MISSING_FIELD = 'missing-field';
 	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
@@ -78,7 +79,6 @@ class UseCaseError extends UseCaseException {
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const SITELINK_CONFLICT = 'sitelink-conflict';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
-	public const SITELINK_DATA_MISSING_TITLE = 'sitelink-data-missing-title';
 	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
@@ -148,6 +148,7 @@ class UseCaseError extends UseCaseException {
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_NOT_DEFINED => [],
+		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
@@ -204,7 +205,6 @@ class UseCaseError extends UseCaseException {
 		self::STATEMENT_NOT_FOUND => [],
 		self::SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID ],
 		self::SITELINK_NOT_DEFINED => [],
-		self::SITELINK_DATA_MISSING_TITLE => [],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
@@ -241,7 +241,6 @@ class UseCaseError extends UseCaseException {
 		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
-		self::SITELINK_DATA_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_CONFLICT => [ self::CONTEXT_SITE_ID ],
@@ -277,6 +276,14 @@ class UseCaseError extends UseCaseException {
 
 	public static function newInvalidValue( string $path ): self {
 		return new self( self::INVALID_VALUE, "Invalid value at '$path'", [ self::CONTEXT_PATH => $path ] );
+	}
+
+	public static function newMissingField( string $path, string $field ): self {
+		return new self(
+			self::MISSING_FIELD,
+			'Required field missing',
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_FIELD => $field ]
+		);
 	}
 
 	public static function newValueTooLong( string $path, int $maxLength ): self {

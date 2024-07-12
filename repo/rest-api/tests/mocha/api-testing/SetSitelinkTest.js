@@ -292,8 +292,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, newSitelinkWithTitleFieldMissing )
 				.makeRequest();
 
-			assertValidError( response, 400, 'sitelink-data-missing-title' );
-			assert.strictEqual( response.body.message, 'Mandatory sitelink title missing' );
+			assertValidError( response, 400, 'missing-field', { path: '/sitelink', field: 'title' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( 'invalid title', async () => {

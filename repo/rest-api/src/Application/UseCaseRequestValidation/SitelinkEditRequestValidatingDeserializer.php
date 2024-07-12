@@ -27,10 +27,7 @@ class SitelinkEditRequestValidatingDeserializer {
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
 				case SitelinkValidator::CODE_TITLE_MISSING:
-					throw new UseCaseError(
-						UseCaseError::SITELINK_DATA_MISSING_TITLE,
-						'Mandatory sitelink title missing',
-					);
+					throw UseCaseError::newMissingField( '/sitelink', 'title' );
 				case SitelinkValidator::CODE_EMPTY_TITLE:
 				case SitelinkValidator::CODE_INVALID_TITLE:
 				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
