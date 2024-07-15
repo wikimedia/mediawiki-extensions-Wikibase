@@ -10,6 +10,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 
@@ -42,7 +43,7 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const label = 'english label ' + utils.uniq();
 			await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label ).makeRequest();
 
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'remove english label';
 

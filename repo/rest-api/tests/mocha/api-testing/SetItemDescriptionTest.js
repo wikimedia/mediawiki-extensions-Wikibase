@@ -7,6 +7,7 @@ const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuil
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -62,7 +63,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a description with edit metadata provided', async () => {
 			const description = `new US English description ${utils.uniq()}`;
 			const languageCode = 'en-us';
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg i added a description!!1';
 
@@ -104,7 +105,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		it( 'can replace a description with edit metadata provided', async () => {
 			const description = `new description ${utils.uniq()}`;
 			const languageCode = 'en';
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg i replaced a description!!1';
 

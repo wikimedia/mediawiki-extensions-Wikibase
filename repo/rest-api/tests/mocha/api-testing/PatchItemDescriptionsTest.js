@@ -8,6 +8,7 @@ const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestB
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -77,7 +78,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 
 		it( 'can patch descriptions with edit metadata', async () => {
 			const description = `${utils.uniq()} وصف عربي جديد`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'I made a patch';
 			const response = await newPatchItemDescriptionsRequestBuilder(

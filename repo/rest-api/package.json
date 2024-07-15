@@ -4,7 +4,7 @@
 	"description": "OpenAPI definition of Wikibase REST API",
 	"scripts": {
 		"test": "npm run lint",
-		"api-testing:e2e": "npm run mocha -- --require tests/mocha/api-testing/hooks.js tests/mocha/api-testing",
+		"api-testing:e2e": "npm run mocha -- --require tests/mocha/api-testing/fixtures.cjs tests/mocha/api-testing",
 		"api-testing:spec": "npm run mocha -- --require tests/mocha/openapi-validation/hooks.js tests/mocha/openapi-validation",
 		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",

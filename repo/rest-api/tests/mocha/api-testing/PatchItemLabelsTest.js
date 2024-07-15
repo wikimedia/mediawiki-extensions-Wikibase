@@ -8,6 +8,7 @@ const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilder
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
@@ -82,7 +83,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can patch labels with edit metadata', async () => {
 			const label = `new arabic label ${utils.uniq()}`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
 			const response = await newPatchItemLabelsRequestBuilder(

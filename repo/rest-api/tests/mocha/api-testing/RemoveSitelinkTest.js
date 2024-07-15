@@ -9,6 +9,7 @@ const { createEntity, getLocalSiteId, createLocalSitelink } = require( '../helpe
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
@@ -43,7 +44,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can DELETE a sitelink with edit metadata provided', async () => {
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'removed a bad sitelink!';
 

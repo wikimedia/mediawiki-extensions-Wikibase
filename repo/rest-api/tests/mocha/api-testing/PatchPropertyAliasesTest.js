@@ -11,6 +11,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getOrCreateBotUser } = require( '../helpers/botUser' );
 
 describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;
@@ -64,7 +65,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can patch aliases providing edit metadata', async () => {
 			const newDeAlias = `de-alias-${utils.uniq()}`;
-			const user = await action.robby(); // robby is a bot
+			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
 			const response = await newPatchPropertyAliasesRequestBuilder(
