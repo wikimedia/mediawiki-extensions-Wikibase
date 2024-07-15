@@ -56,6 +56,7 @@
 	"wikibase-description-edit-placeholder-not-applicable": "неприменливо",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Не е возможно да се зададе подразбран натпис за сите јазици",
 	"wikibase-item-description-edit-not-supported": "Описите не се поддржани за овој јазик. Дајте опис на друг јазик откако ќе го создадете предметот.",
+	"wikibase-property-description-edit-not-supported": "Описите не се поддржани за овој јазик. Дајте опис на друг јазик откако ќе го создадете својството.",
 	"wikibase-description-not-applicable-title": "Не е возможно да се зададе подразбран опис за сите јазици",
 	"wikibase-aliases-edit-placeholder": "внесете некои истозначници",
 	"wikibase-aliases-edit-placeholder-language-aware": "внесете некои истозначници на $1",

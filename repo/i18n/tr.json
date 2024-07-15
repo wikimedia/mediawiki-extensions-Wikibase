@@ -83,6 +83,7 @@
 	"wikibase-description-edit-placeholder-not-applicable": "uygun değil",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Tüm diller için varsayılan bir açıklama eklemek olası değildir",
 	"wikibase-item-description-edit-not-supported": "Açıklamalar bu dil için desteklenmiyor. Öge oluşturulduktan sonra lütfen başka bir dilde bir açıklama sağlayın.",
+	"wikibase-property-description-edit-not-supported": "Açıklamalar bu dil için desteklenmiyor. Özellik oluşturulduktan sonra lütfen başka bir dilde bir açıklama sağlayın.",
 	"wikibase-description-not-applicable-title": "Tüm diller için varsayılan bir açıklama eklemek olası değildir",
 	"wikibase-aliases-edit-placeholder": "diğer adını girin",
 	"wikibase-aliases-edit-placeholder-language-aware": "$1 diğer adını girin",
