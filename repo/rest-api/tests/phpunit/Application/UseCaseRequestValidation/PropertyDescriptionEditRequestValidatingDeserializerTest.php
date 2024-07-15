@@ -126,29 +126,27 @@ class PropertyDescriptionEditRequestValidatingDeserializerTest extends TestCase 
 			[ UseCaseError::CONTEXT_PATH => '/description' ],
 		];
 
-		$description = 'description that is too long...';
 		$limit = 40;
 		yield 'description too long' => [
 			new ValidationError(
 				PropertyDescriptionValidator::CODE_TOO_LONG,
 				[
-					PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					PropertyDescriptionValidator::CONTEXT_DESCRIPTION => 'description that is too long...',
 					PropertyDescriptionValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
-			UseCaseError::DESCRIPTION_TOO_LONG,
-			'Description must be no more than 40 characters long',
+			UseCaseError::VALUE_TOO_LONG,
+			'The input value is too long',
 			[
-				UseCaseError::CONTEXT_VALUE => $description,
-				UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
+				UseCaseError::CONTEXT_PATH => '/description',
+				UseCaseError::CONTEXT_LIMIT => $limit,
 			],
 		];
 
-		$description = "tab characters \t not allowed";
 		yield 'invalid description' => [
 			new ValidationError(
 				PropertyDescriptionValidator::CODE_INVALID,
-				[ PropertyDescriptionValidator::CONTEXT_DESCRIPTION => $description ],
+				[ PropertyDescriptionValidator::CONTEXT_DESCRIPTION => "tab characters \t not allowed" ],
 			),
 			UseCaseError::INVALID_VALUE,
 			"Invalid value at '/description'",

@@ -160,12 +160,13 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'comment too long', async () => {
-			const comment = 'x'.repeat( 501 );
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [] )
-				.withJsonBodyParam( 'comment', comment ).assertValidRequest().makeRequest();
+				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
+				.assertValidRequest()
+				.makeRequest();
 
-			assertValidError( response, 400, 'comment-too-long' );
-			assert.include( response.body.message, '500' );
+			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'invalid comment type', async () => {

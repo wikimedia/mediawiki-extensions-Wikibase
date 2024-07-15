@@ -203,12 +203,11 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const limit = 250;
-			const description = 'a'.repeat( limit + 1 );
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', description )
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'a'.repeat( limit + 1 ) )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'description-too-long', { value: description, 'character-limit': limit } );
-			assert.include( response.body.message, limit );
+			assertValidError( response, 400, 'value-too-long', { path: '/description', limit: limit } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 		it( 'description is the same as the label', async () => {
@@ -240,14 +239,13 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'comment too long', async () => {
-			const comment = 'x'.repeat( 501 );
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
-				.withJsonBodyParam( 'comment', comment )
+				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'comment-too-long' );
-			assert.include( response.body.message, '500' );
+			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
+			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
 	} );

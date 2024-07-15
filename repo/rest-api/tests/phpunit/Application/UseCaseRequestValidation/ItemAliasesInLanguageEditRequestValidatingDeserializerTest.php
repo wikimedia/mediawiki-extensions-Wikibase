@@ -108,11 +108,11 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 					AliasesInLanguageValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
-			UseCaseError::ALIAS_TOO_LONG,
-			'Alias must be no more than 40 characters long',
+			UseCaseError::VALUE_TOO_LONG,
+			'The input value is too long',
 			[
-				UseCaseError::CONTEXT_VALUE => $alias,
-				UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
+				UseCaseError::CONTEXT_PATH => '/aliases/0',
+				UseCaseError::CONTEXT_LIMIT => $limit,
 			],
 		];
 

@@ -239,14 +239,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					ItemDescriptionValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::DESCRIPTION_TOO_LONG,
-				'Description must be no more than 50 characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => 50,
-				]
-			),
+			UseCaseError::newValueTooLong( '/item/descriptions/en', self::MAX_LENGTH ),
 		];
 		yield 'invalid description type' => [
 			new ValidationError(
@@ -371,23 +364,18 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			),
 		];
 
+		$tooLongAlias = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'alias too long' => [
 			new ValidationError(
 				AliasesValidator::CODE_TOO_LONG_ALIAS,
 				[
-					AliasesValidator::CONTEXT_ALIAS => str_repeat( 'a', self::MAX_LENGTH + 1 ),
+					AliasesValidator::CONTEXT_ALIAS => $tooLongAlias,
 					AliasesValidator::CONTEXT_LANGUAGE => 'en',
 					AliasesValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::ALIAS_TOO_LONG,
-				'Alias must be no more than 50 characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => 50,
-				]
-			),
+			UseCaseError::newValueTooLong( '/item/aliases/en/0', self::MAX_LENGTH ),
+			[ 'aliases' => [ 'en' => [ $tooLongAlias ] ] ],
 		];
 
 		yield 'invalid alias deserialization' => [

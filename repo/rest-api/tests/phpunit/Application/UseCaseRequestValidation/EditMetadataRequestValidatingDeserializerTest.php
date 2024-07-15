@@ -57,10 +57,11 @@ class EditMetadataRequestValidatingDeserializerTest extends TestCase {
 			( new EditMetadataRequestValidatingDeserializer( $editMetadataValidator ) )->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::COMMENT_TOO_LONG, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::VALUE_TOO_LONG, $e->getErrorCode() );
+			$this->assertSame( 'The input value is too long', $e->getErrorMessage() );
 			$this->assertSame(
-				'Comment must not be longer than ' . CommentStore::COMMENT_CHARACTER_LIMIT . ' characters.',
-				$e->getErrorMessage()
+				[ UseCaseError::CONTEXT_PATH => '/comment', UseCaseError::CONTEXT_LIMIT => CommentStore::COMMENT_CHARACTER_LIMIT ],
+				$e->getErrorContext()
 			);
 		}
 	}

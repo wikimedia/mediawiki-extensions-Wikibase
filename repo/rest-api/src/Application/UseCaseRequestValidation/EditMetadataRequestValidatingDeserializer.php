@@ -56,10 +56,7 @@ class EditMetadataRequestValidatingDeserializer {
 		$validationError = $this->validator->validateComment( $comment );
 		if ( $validationError ) {
 			$commentMaxLength = $validationError->getContext()[EditMetadataValidator::CONTEXT_COMMENT_MAX_LENGTH];
-			throw new UseCaseError(
-				UseCaseError::COMMENT_TOO_LONG,
-				"Comment must not be longer than $commentMaxLength characters.",
-			);
+			throw UseCaseError::newValueTooLong( '/comment', $commentMaxLength );
 		}
 	}
 

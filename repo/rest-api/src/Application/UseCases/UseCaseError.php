@@ -10,13 +10,10 @@ use LogicException;
 class UseCaseError extends UseCaseException {
 
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
-	public const ALIAS_TOO_LONG = 'alias-too-long';
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
-	public const COMMENT_TOO_LONG = 'comment-too-long';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
-	public const DESCRIPTION_TOO_LONG = 'description-too-long';
 	public const INVALID_VALUE = 'invalid-value';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
@@ -122,11 +119,8 @@ class UseCaseError extends UseCaseException {
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
-		self::ALIAS_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::ALIASES_NOT_DEFINED => [],
-		self::COMMENT_TOO_LONG => [],
 		self::DESCRIPTION_NOT_DEFINED => [],
-		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_CHARACTER_LIMIT ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
@@ -237,8 +231,6 @@ class UseCaseError extends UseCaseException {
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
-		self::DESCRIPTION_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
-		self::ALIAS_TOO_LONG => [ self::CONTEXT_VALUE, self::CONTEXT_LANGUAGE ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::STATEMENT_DATA_MISSING_FIELD => [ self::CONTEXT_FIELD ],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
