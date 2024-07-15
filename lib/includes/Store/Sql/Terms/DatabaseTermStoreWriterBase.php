@@ -85,11 +85,15 @@ abstract class DatabaseTermStoreWriterBase {
 	 * and return term in lang IDs that are no longer referenced
 	 * and might now need to be cleaned up.
 	 *
-	 * Updating the current state is done on a best effort basis, if two instances
-	 * try to update an entity's terms (near) simultaneously the records might end
-	 * up in an inconsistent state. Despite that all removed <prefix>_term_in_lang_ids
-	 * will always be accurately reported, we will never silently remove a reference
-	 * to the wbt_term_in_lang table.
+	 * Updating the current state is done on a best effort basis.
+	 * Because this method is called as a secondary data update, not in the primary transaction,
+	 * (nearly) simultaneous edits to the same entity can race on the term store update,
+	 * and the final state does not necessarily correspond to the terms of the latest revision.
+	 * (In theory, it may even be a mixture of the terms of several revisions, without exactly matching any of them.)
+	 * However, any future terms update should fix such a situation
+	 * (any out-of-sync state should not survive through later updates).
+	 * Additionally, all removed <prefix>_term_in_lang_ids will always be accurately reported:
+	 * we will never silently remove a reference to the wbt_term_in_lang table.
 	 *
 	 * @param Int32EntityId $entityId
 	 * @param Fingerprint $fingerprint
