@@ -20,6 +20,8 @@ trait AssertValidTopLevelFields {
 		foreach ( $paramSettings as $fieldName => $fieldSettings ) {
 			if ( isset( $body[$fieldName] ) ) {
 				$this->assertType( $fieldSettings[ParamValidator::PARAM_TYPE], $fieldName, $body[$fieldName] );
+			} elseif ( $fieldSettings[ParamValidator::PARAM_REQUIRED] === true ) {
+				throw $this->convertUseCaseErrorToHttpException( UseCaseError::newMissingField( '/', $fieldName ) );
 			}
 		}
 	}
@@ -35,16 +37,19 @@ trait AssertValidTopLevelFields {
 		try {
 			Assert::parameterType( $type, $value, '$field' );
 		} catch ( InvalidArgumentException $exception ) {
-			$error = UseCaseError::newInvalidValue( "/$fieldName" );
-			throw new HttpException(
-				$error->getErrorMessage(),
-				ErrorResponseToHttpStatus::lookup( $error->getErrorCode() ),
-				[
-					'code' => $error->getErrorCode(),
-					'context' => $error->getErrorContext(),
-				]
-			);
+			throw $this->convertUseCaseErrorToHttpException( UseCaseError::newInvalidValue( "/$fieldName" ) );
 		}
+	}
+
+	private function convertUseCaseErrorToHttpException( UseCaseError $error ): HttpException {
+		return new HttpException(
+			$error->getErrorMessage(),
+			ErrorResponseToHttpStatus::lookup( $error->getErrorCode() ),
+			[
+				'code' => $error->getErrorCode(),
+				'context' => $error->getErrorContext(),
+			]
+		);
 	}
 
 }

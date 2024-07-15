@@ -171,6 +171,18 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', 'new label' )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'label' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'invalid label', async () => {
 			const invalidLabel = 'tab characters \t not allowed';
 			const response = await newSetItemLabelRequestBuilder( testItemId, 'en', invalidLabel )

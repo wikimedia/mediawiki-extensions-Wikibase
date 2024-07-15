@@ -2,17 +2,7 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( './chaiHelper' );
-
-function assertValid400Response( response, responseBodyErrorCode, context = null ) {
-	expect( response ).to.have.status( 400 );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	if ( context === null ) {
-		assert.notProperty( response.body, 'context' );
-	} else {
-		assert.deepStrictEqual( response.body.context, context );
-	}
-}
+const { assertValidError } = require( './responseValidator' );
 
 // eslint-disable-next-line mocha/no-exports
 module.exports = function testValidatesPatch( newRequestBuilder ) {
@@ -21,23 +11,44 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( { foo: 'this is not a valid JSON Patch' } )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-value', { path: '/patch' } );
+			assertValidError( response, 400, 'invalid-value', { path: '/patch' } );
 			assert.include( response.body.message, '/patch' );
+		} );
+
+		it( 'missing top-level field', async () => {
+			const response = await newRequestBuilder()
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'patch' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - missing 'op' field", async () => {
 			const response = await newRequestBuilder( [ { path: '/a/b/c', value: 'test' } ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'op' } );
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: '/patch/0', field: 'op' }
+			);
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - missing 'path' field", async () => {
 			const response = await newRequestBuilder( [ { op: 'remove' } ] )
 				.assertInvalidRequest().makeRequest();
-
-			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'path' } );
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: '/patch/0', field: 'path' }
+			);
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
@@ -45,7 +56,12 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ { op: 'add', path: '/a/b/c' } ] )
 				.makeRequest();
 
-			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'value' } );
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: '/patch/0', field: 'value' }
+			);
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
@@ -53,7 +69,12 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ { op: 'move', path: '/a/b/c' } ] )
 				.makeRequest();
 
-			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'from' } );
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: '/patch/0', field: 'from' }
+			);
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
@@ -62,7 +83,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ { op: 'foobar', path: '/a/b/c', value: 'test' } ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-value', { path: path } );
+			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.include( response.body.message, path );
 		} );
 
@@ -71,7 +92,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-value', { path: '/patch/0/op' } );
+			assertValidError( response, 400, 'invalid-value', { path: '/patch/0/op' } );
 			assert.include( response.body.message, '/patch/0/op' );
 		} );
 
@@ -80,7 +101,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response( response, 'invalid-value', { path: '/patch/0/path' } );
+			assertValidError( response, 400, 'invalid-value', { path: '/patch/0/path' } );
 			assert.include( response.body.message, '/patch/0/path' );
 		} );
 
@@ -89,7 +110,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 			const response = await newRequestBuilder( [ invalidOperation ] )
 				.makeRequest();
 
-			assertValid400Response( response, 'invalid-value', { path: '/patch/0/from' } );
+			assertValidError( response, 400, 'invalid-value', { path: '/patch/0/from' } );
 			assert.include( response.body.message, '/patch/0/from' );
 		} );
 	} );

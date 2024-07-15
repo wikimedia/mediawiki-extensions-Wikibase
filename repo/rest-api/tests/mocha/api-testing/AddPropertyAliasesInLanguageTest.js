@@ -186,6 +186,18 @@ describe( newRequest().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newRequest( testPropertyId, '1e', [ 'new alias' ] )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'aliases' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'alias is empty', async () => {
 			const response = await newRequest( testPropertyId, 'en', [ '' ] )
 				.assertValidRequest()

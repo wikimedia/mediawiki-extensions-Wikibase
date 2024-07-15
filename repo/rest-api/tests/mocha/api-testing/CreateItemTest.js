@@ -532,6 +532,18 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, `/item/statements/${predicatePropertyId}/0/rank` );
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newCreateItemRequestBuilder( {} )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'item' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'missing statement field', async () => {
 			const missingField = 'value';
 			const statementWthMissingValue = { property: { id: predicatePropertyId } };
