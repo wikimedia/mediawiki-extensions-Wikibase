@@ -474,15 +474,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => '/P1/0',
+					StatementsValidator::CONTEXT_PATH => 'P1/0',
 					StatementsValidator::CONTEXT_FIELD => 'value',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::STATEMENT_DATA_MISSING_FIELD,
-				'Mandatory field missing in the statement data: value',
-				[ UseCaseError::CONTEXT_PATH => '/P1/0', UseCaseError::CONTEXT_FIELD => 'value' ]
-			),
+			UseCaseError::newMissingField( '/item/statements/P1/0', 'value' ),
 		];
 
 		yield 'invalid statement field' => [

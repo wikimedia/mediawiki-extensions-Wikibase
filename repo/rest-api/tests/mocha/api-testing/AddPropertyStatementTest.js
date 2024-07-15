@@ -256,8 +256,8 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'statement-data-missing-field', { path: missingField } );
-			assert.include( response.body.message, missingField );
+			assertValidError( response, 400, 'missing-field', { path: '/statement', field: missingField } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( 'invalid statement type: string', async () => {

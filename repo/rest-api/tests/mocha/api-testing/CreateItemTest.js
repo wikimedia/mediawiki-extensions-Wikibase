@@ -560,10 +560,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				400,
-				'statement-data-missing-field',
-				{ path: `${predicatePropertyId}/0`, field: `${missingField}` }
+				'missing-field',
+				{ path: `/item/statements/${predicatePropertyId}/0`, field: `${missingField}` }
 			);
-			assert.include( response.body.message, missingField );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( 'statement property id mismatch', async () => {

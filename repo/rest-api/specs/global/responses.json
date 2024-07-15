@@ -442,7 +442,6 @@
 					},
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
 					"invalid-sitelink-type": { "$ref": "./examples.json#/InvalidSitelinkTypeExample" },
 					"title-does-not-exist": {
@@ -614,7 +613,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
 			}
 		},
@@ -635,7 +634,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
 			}
 		},
@@ -656,7 +655,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -681,7 +680,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -706,7 +705,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
