@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -579,7 +580,7 @@ class MockRepositoryTest extends TestCase {
 	}
 
 	public function testUpdateWatchlist() {
-		$user = User::newFromName( 'WikiPageEntityStoreTestUser2' );
+		$user = MediaWikiServices::getInstance()->getUserFactory()->newFromName( 'WikiPageEntityStoreTestUser2' );
 
 		$item = new Item();
 		$this->repo->saveEntity( $item, 'testing', $user, EDIT_NEW );
@@ -593,8 +594,9 @@ class MockRepositoryTest extends TestCase {
 	}
 
 	public function testUserWasLastToEdit() {
-		$user1 = User::newFromName( 'WikiPageEntityStoreTestUserWasLastToEdit1' );
-		$user2 = User::newFromName( 'WikiPageEntityStoreTestUserWasLastToEdit2' );
+		$userFactory = MediaWikiServices::getInstance()->getUserFactory();
+		$user1 = $userFactory->newFromName( 'WikiPageEntityStoreTestUserWasLastToEdit1' );
+		$user2 = $userFactory->newFromName( 'WikiPageEntityStoreTestUserWasLastToEdit2' );
 
 		// initial revision
 		$item = new Item( new ItemId( 'Q42' ) );

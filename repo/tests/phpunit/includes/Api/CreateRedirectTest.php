@@ -280,7 +280,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	public function testSetRedirect_noPermission() {
 		$this->expectException( ApiUsageException::class );
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'UserWithoutPermission' );
 
 		$params = [ 'from' => 'Q11', 'to' => 'Q12' ];
 		$this->callApiModule( $params, $user );

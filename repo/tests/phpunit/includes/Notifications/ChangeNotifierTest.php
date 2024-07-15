@@ -6,7 +6,6 @@ use MediaWiki\Content\Content;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
@@ -97,7 +96,7 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function makeUser( $name ) {
-		$user = User::newFromName( $name );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( $name );
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();

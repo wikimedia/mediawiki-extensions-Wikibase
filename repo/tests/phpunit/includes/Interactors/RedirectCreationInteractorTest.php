@@ -272,7 +272,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	public function testSetRedirect_noPermission() {
 		$this->expectException( RedirectCreationException::class );
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = MediaWikiServices::getInstance()->getUserFactory()->newFromName( 'UserWithoutPermission' );
 
 		$interactor = $this->newInteractor( null, null );
 		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false, [], $this->getContext( $user ) );

@@ -7,7 +7,6 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
@@ -197,7 +196,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		string $title = 'WikibaseClientDataAccessTest'
 	): ParserOutput {
 		$popt = new ParserOptions(
-			User::newFromId( 0 ),
+			$this->getServiceContainer()->getUserFactory()->newFromId( 0 ),
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
 		$parser = $this->getServiceContainer()->getParserFactory()->create();

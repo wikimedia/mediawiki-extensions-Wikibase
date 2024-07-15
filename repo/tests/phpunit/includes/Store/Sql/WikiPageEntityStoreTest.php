@@ -529,7 +529,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		/** @var WikiPageEntityStore $store */
 		[ $store ] = $this->createStoreAndLookup();
 
-		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
+		$getUserFactory = $this->getServiceContainer()->getUserFactory();
+		$user = $getUserFactory->newFromName( "WikiPageEntityStoreTestUser2" );
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();
@@ -551,7 +552,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		/** @var WikiPageEntityStore $store */
 		[ $store ] = $this->createStoreAndLookup();
 
-		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
+		$getUserFactory = $this->getServiceContainer()->getUserFactory();
+		$user = $getUserFactory->newFromName( "WikiPageEntityStoreTestUser2" );
 
 		if ( $user->getId() === 0 ) {
 			$user->addToDatabase();

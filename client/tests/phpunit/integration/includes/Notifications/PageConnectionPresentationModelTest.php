@@ -6,7 +6,6 @@ use MediaWiki\Extension\Notifications\Formatters\EchoEventPresentationModel;
 use MediaWiki\Extension\Notifications\Model\Event;
 use MediaWiki\Message\Message;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandler;
@@ -34,7 +33,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 	 * @return Event
 	 */
 	private function mockEvent( Title $title ) {
-		$agent = User::newFromName( 'Agent' );
+		$agent = $this->getServiceContainer()->getUserFactory()->newFromName( 'Agent' );
 
 		$methods = [ 'getAgent', 'getBundleHash', 'getExtraParam', 'getTitle', 'getType' ];
 		$event = $this->getMockBuilder( Event::class )
@@ -76,7 +75,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 			"Failed asserting that Echo supports our notification events"
 		);
 
-		$user = User::newFromName( 'User' );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'User' );
 		$model = EchoEventPresentationModel::factory(
 			$event,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),

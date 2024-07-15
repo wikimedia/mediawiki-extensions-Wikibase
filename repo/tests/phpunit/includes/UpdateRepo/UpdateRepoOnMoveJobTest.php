@@ -10,7 +10,6 @@ use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -176,7 +175,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider runProvider
 	 */
 	public function testRun( string $expected, string $normalizedPageName, string $oldTitle ) {
-		$user = User::newFromName( 'UpdateRepo' );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'UpdateRepo' );
 
 		// Needed as UpdateRepoOnMoveJob instantiates a User object
 		$user->addToDatabase();
@@ -250,7 +249,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		$normalizedPageName = "New page name";
 		$oldTitle = "Old page name";
 
-		$user = User::newFromName( 'UpdateRepo' );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'UpdateRepo' );
 
 		// Needed as UpdateRepoOnMoveJob instantiates a User object
 		$user->addToDatabase();
@@ -283,14 +282,15 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$job = $this->getJob(
-							$params,
-							$this->redirectLookup,
-							$mockRepository,
-							$this->getSummaryFormatter(),
-							$normalizedPageName,
-							$redirectedItem,
-							$mockRepository,
-							$mockRepository );
+			$params,
+			$this->redirectLookup,
+			$mockRepository,
+			$this->getSummaryFormatter(),
+			$normalizedPageName,
+			$redirectedItem,
+			$mockRepository,
+			$mockRepository
+		);
 		$job->run();
 
 		/** @var Item $item */

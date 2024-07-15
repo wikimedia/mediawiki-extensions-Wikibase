@@ -8,7 +8,6 @@ use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -133,7 +132,8 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 
 		$mockRepository = new MockRepository();
 
-		$user = User::newFromName( 'UpdateRepo' );
+		$getUserFactory = $this->getServiceContainer()->getUserFactory();
+		$user = $getUserFactory->newFromName( 'UpdateRepo' );
 
 		// Needed as UpdateRepoOnDeleteJob instantiates a User object
 		$user->addToDatabase();

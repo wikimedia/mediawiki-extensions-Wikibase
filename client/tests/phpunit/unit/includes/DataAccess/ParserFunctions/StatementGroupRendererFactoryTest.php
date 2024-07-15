@@ -10,7 +10,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
@@ -336,7 +335,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$language = $languageFactory->getLanguage( $languageCode );
 		$userLanguage = $languageFactory->getLanguage( $userLanguageCode );
 
-		$parserOptions = new ParserOptions( User::newFromId( 0 ), $userLanguage );
+		$parserOptions = new ParserOptions( MediaWikiServices::getInstance()->getUserFactory()->newFromId( 0 ), $userLanguage );
 		$parserOptions->setTargetLanguage( $language );
 		$parserOptions->setInterfaceMessage( $interfaceMessage );
 		$parserOptions->disableContentConversion( $disableContentConversion );

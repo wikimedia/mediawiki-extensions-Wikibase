@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Tests\Api\ApiTestContext;
-use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Api\ApiClientInfo;
 use Wikibase\Lib\SettingsArray;
@@ -45,9 +44,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 	public function getApiModule( array $params ) {
 		$request = new FauxRequest( $params, true );
 
-		$user = User::newFromName( 'zombie' );
-
-		$context = $this->apiContext->newTestContext( $request, $user );
+		$context = $this->apiContext->newTestContext( $request );
 		$apiMain = new ApiMain( $context, true );
 		$apiQuery = $apiMain->getModuleManager()->getModule( 'query' );
 

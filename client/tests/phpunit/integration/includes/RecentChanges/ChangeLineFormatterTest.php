@@ -12,7 +12,6 @@ use MediaWiki\RecentChanges\ChangesList;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use MediaWiki\User\UserNameUtils;
 use MediaWikiLangTestCase;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
@@ -298,7 +297,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	private function getTestContext() {
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setLanguage( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
-		$context->setUser( User::newFromId( 0 ) );
+		$context->setUser( $this->getServiceContainer()->getUserFactory()->newFromId( 0 ) );
 
 		return $context;
 	}

@@ -6,8 +6,8 @@ use MediaWiki\JobQueue\IJobSpecification;
 use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueRedis;
 use MediaWiki\JobQueue\JobSpecification;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use Psr\Log\NullLogger;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\DataModel\Entity\ItemId;
@@ -43,7 +43,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'repoDB' => 'wikidata',
 			'siteLinkLookup' => $siteLinkLookupMock,
-			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
+			'user' => MediaWikiServices::getInstance()->getUserFactory()->newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
 			'oldTitle' => Title::makeTitle( NS_MAIN, 'ThisOneDoesntExist' ),
 			'newTitle' => Title::makeTitle( NS_MAIN, 'Bar' ),

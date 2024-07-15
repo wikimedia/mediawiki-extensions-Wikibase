@@ -268,7 +268,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			'toid' => 'Q2',
 		];
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = $this->getServiceContainer()->getUserFactory()
+			->newFromName( 'UserWithoutPermission' );
 
 		$html = $this->executeSpecialEntityRedirect( $params, $user );
 		$this->assertError( 'Wikibase\Repo\Interactors\RedirectCreationException:wikibase-redirect-permissiondenied', $html );

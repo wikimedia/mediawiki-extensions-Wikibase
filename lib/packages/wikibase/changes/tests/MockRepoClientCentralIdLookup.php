@@ -7,8 +7,8 @@ namespace Wikibase\Lib\Tests\Changes;
 use LogicException;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\User\CentralId\CentralIdLookup;
-use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
+use MediaWiki\User\UserIdentityValue;
 use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
@@ -88,7 +88,9 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 
 		$localUserId = $id / $this->toCentralFactor;
 
-		return User::newFromId( $localUserId );
+		$localUserId = (int)$localUserId;
+
+		return new UserIdentityValue( $localUserId, "User$localUserId" );
 	}
 
 	/** @inheritDoc */

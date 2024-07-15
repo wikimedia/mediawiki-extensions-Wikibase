@@ -64,7 +64,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
-		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
+		$context->setUser( $this->getServiceContainer()->getUserFactory()->newFromName( 'EditFilterHookRunnerTestUser' ) );
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
@@ -171,7 +171,8 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
-		$context->setUser( User::newFromName( 'EditFilterHookRunnerTestUser' ) );
+		$context->setUser( $this->getServiceContainer()->getUserFactory()
+			->newFromName( 'EditFilterHookRunnerTestUser' ) );
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(

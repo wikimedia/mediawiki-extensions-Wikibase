@@ -483,7 +483,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	public function testMergeItems_noPermission() {
 		$this->expectException( ItemMergeException::class );
 
-		$user = User::newFromName( self::USER_NAME_WITHOUT_PERMISSION );
+		$user = $this->getServiceContainer()->getUserFactory()
+			->newFromName( self::USER_NAME_WITHOUT_PERMISSION );
 
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );

@@ -8,6 +8,7 @@ use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\JobQueue\Job;
 use MediaWiki\Language\FormatterFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
@@ -138,7 +139,7 @@ abstract class UpdateRepoJob extends Job {
 	 * @return User|bool
 	 */
 	private function getUser( string $name ) {
-		$user = User::newFromName( $name );
+		$user = MediaWikiServices::getInstance()->getUserFactory()->newFromName( $name );
 		if ( !$user || !$user->isRegistered() ) {
 			$this->logger->debug( 'User {name} doesn\'t exist.', [ 'name' => $name ] );
 			return false;

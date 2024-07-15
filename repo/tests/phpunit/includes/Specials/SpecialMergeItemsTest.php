@@ -462,7 +462,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			'toid' => 'Q2',
 		];
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = $this->getServiceContainer()->getUserFactory()
+			->newFromName( 'UserWithoutPermission' );
 
 		$html = $this->executeSpecialMergeItems( $params, $user );
 		$this->assertError( 'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-permissiondenied', $html );
