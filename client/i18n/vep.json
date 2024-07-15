@@ -4,7 +4,8 @@
 			"Ghiutun",
 			"Sebranik",
 			"Игорь Бродский",
-			"Лариса Чиркова"
+			"Лариса Чиркова",
+			"Ростислав Мельников"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}}-element om toižetadud",
@@ -13,10 +14,10 @@
 	"wikibase-editlinkstitle": "Redaktiruida kelidenkeskeižid kosketusid",
 	"wikibase-linkitem-addlinks": "Ližada tarkendused",
 	"wikibase-linkitem-title": "Tarkenduz lehtpole",
-	"wikibase-linkitem-linkpage": "Tarkenduz lehtpole",
-	"wikibase-linkitem-selectlink": "Ole hüvä, valiče sait da lehtpol’, miččile sinä tahtoid mända tarkendusen abul.",
-	"wikibase-linkitem-input-site": "Kel':",
-	"wikibase-linkitem-input-page": "Lehtpol':",
+	"wikibase-linkitem-linkpage": "Sido lehtpolenke",
+	"wikibase-linkitem-selectlink": "Olgat hüväd, valikat lehtpolišt da lehtpol’, kudambad tahtoit sidoda neche lehtpolehe.",
+	"wikibase-linkitem-input-site": "Kel’:",
+	"wikibase-linkitem-input-page": "Lehtpol’:",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Ozuta",

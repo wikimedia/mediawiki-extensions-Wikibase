@@ -7,7 +7,7 @@
 		]
 	},
 	"wikibase-entity-item": "Element",
-	"wikibase-entity-property": "Qásiyet",
+	"wikibase-entity-property": "Parametr",
 	"wikibase-entity-query": "Soraw",
 	"wikibase-edit": "redaktorlaw",
 	"wikibase-save": "saqlaw",
@@ -42,6 +42,7 @@
 	"wikibase-remove": "alıp taslaw",
 	"wikibase-propertypage-datatype": "Maǵlıwmat túri",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|derek|derekler}}",
+	"wikibase-snakview-property-input-placeholder": "Parametr",
 	"wikibase-snakview-snaktypeselector-value": "anıq mánis",
 	"wikibase-shortcopyrightwarning": "«$1» túymesin basıw arqalı siz [[$2|qollanıw shártlerine]] razılıq bildiresiz hám óz úlesińizdi [$3 $4] astında járiyalawǵa qaytpaslıq kelisim beresiz.",
 	"wikibase-copyrighttooltip-acknowledge": "Men ózimniń aldaǵı redaktorlawlarım ushın usı shártlerdi qabıllayman. Bul xabar basqa kórsetilmesin.",
