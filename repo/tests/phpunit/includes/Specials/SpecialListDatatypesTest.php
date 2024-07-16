@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use MediaWiki\MediaWikiServices;
+use MediaWiki\MainConfigNames;
 use SpecialPageTestBase;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Specials\SpecialListDatatypes;
@@ -23,21 +23,8 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->setContentLang( 'qqx' );
-
-		$services = MediaWikiServices::getInstance();
-		$services->resetServiceForTesting( 'TitleFormatter' );
-		$services->resetServiceForTesting( 'TitleParser' );
-		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		$services = MediaWikiServices::getInstance();
-		$services->resetServiceForTesting( 'TitleFormatter' );
-		$services->resetServiceForTesting( 'TitleParser' );
-		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
+		// ensure the link to Special:ListProperties is not localized
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'en' );
 	}
 
 	protected function newSpecialPage() {
@@ -50,7 +37,7 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 	public function testExecute() {
 		// This also tests that there is no fatal error, that the restriction handling is working
 		// and doesn't block. That is, the default should let the user execute the page.
-		[ $output ] = $this->executeSpecialPage();
+		[ $output ] = $this->executeSpecialPage(); // note: $output is in uselang=qqx by default
 
 		$this->assertIsString( $output );
 		$this->assertStringContainsString( 'wikibase-listdatatypes-summary', $output );
