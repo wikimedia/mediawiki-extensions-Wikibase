@@ -8,6 +8,8 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Tests\Api\ApiTestCase;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -383,6 +385,50 @@ class FormatSnakValueTest extends ApiTestCase {
 			->saveEntity( Property::newFromType( $dataType ), '', $this->getTestUser()->getUser(), EDIT_NEW )
 			->getEntity()
 			->getId();
+	}
+
+	/** @dataProvider provideInvalidLang */
+	public function testApiRequest_invalidLangInOptions( string $invalidLang ): void {
+		$formatterWasUsed = false;
+		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$datatypes ) use ( &$formatterWasUsed ) {
+			$datatypes['PT:string']['formatter-factory-callback'] = function ( $_, FormatterOptions $options ) use ( &$formatterWasUsed ) {
+				$this->assertSame( 'und', $options->getOption( ValueFormatter::OPT_LANG ) );
+				$formatterWasUsed = true;
+			};
+		} );
+		$this->resetServices();
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'string',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ ValueFormatter::OPT_LANG => $invalidLang ] ),
+		] );
+
+		$this->assertTrue( $formatterWasUsed, 'custom test formatter should have been called' );
+	}
+
+	public static function provideInvalidLang(): iterable {
+		yield '!isValidBuiltInCode, isValidCode' => [ '-' ];
+		yield '!isValidBuiltInCode, !isValidCode' => [ '\\' ];
+	}
+
+	/** @dataProvider provideInvalidTypeLang */
+	public function testApiRequest_invalidTypeLangInOptions( $invalidTypeLang ): void {
+		$this->expectException( ApiUsageException::class, 'wikibase-api-invalid-formatter-options-lang' );
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'string',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ ValueFormatter::OPT_LANG => $invalidTypeLang ] ),
+		] );
+	}
+
+	public static function provideInvalidTypeLang(): iterable {
+		yield 'null' => [ null ];
+		yield 'int' => [ 1 ];
+		yield 'array' => [ [] ];
 	}
 
 }

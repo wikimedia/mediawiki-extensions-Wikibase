@@ -440,6 +440,7 @@
 	"wikibase-api-target-is-redirect": "The redirect's target must not be a redirect too.",
 	"wikibase-api-target-is-incompatible": "Attempt to redirect to an entity of a different type.",
 	"wikibase-api-cant-redirect": "Can't create redirect (possibly because redirects between this kind of entity are not supported at all).",
+	"wikibase-api-invalid-formatter-options-lang": "Illegal \"options\" given: \"lang\" needs to be a string (MediaWiki language code).",
 	"wikibase-self-conflict-patched": "Your edit was patched into the latest version, overriding some of your own intermediate changes.",
 	"wikibase-conflict-patched": "Your edit was patched into the latest version.",
 	"wikibase-save-unresolved-redirect": "Encountered an unresolved redirect from $1 to $2 while attempting to save a change.",
