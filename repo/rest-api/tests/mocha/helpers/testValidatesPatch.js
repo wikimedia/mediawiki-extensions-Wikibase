@@ -26,54 +26,35 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 		} );
 
 		it( "invalid patch - missing 'op' field", async () => {
-			const invalidOperation = { path: '/a/b/c', value: 'test' };
-			const response = await newRequestBuilder( [ invalidOperation ] )
+			const response = await newRequestBuilder( [ { path: '/a/b/c', value: 'test' } ] )
 				.assertInvalidRequest().makeRequest();
 
-			assertValid400Response(
-				response,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'op' }
-			);
-			assert.include( response.body.message, "'op'" );
+			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'op' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - missing 'path' field", async () => {
-			const invalidOperation = { op: 'remove' };
-			const response = await newRequestBuilder( [ invalidOperation ] )
+			const response = await newRequestBuilder( [ { op: 'remove' } ] )
 				.assertInvalidRequest().makeRequest();
-			assertValid400Response(
-				response,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'path' }
-			);
-			assert.include( response.body.message, "'path'" );
+
+			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'path' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - missing 'value' field", async () => {
-			const invalidOperation = { op: 'add', path: '/a/b/c' };
-			const response = await newRequestBuilder( [ invalidOperation ] )
+			const response = await newRequestBuilder( [ { op: 'add', path: '/a/b/c' } ] )
 				.makeRequest();
 
-			assertValid400Response(
-				response,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'value' }
-			);
-			assert.include( response.body.message, "'value'" );
+			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'value' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - missing 'from' field", async () => {
-			const invalidOperation = { op: 'move', path: '/a/b/c' };
-			const response = await newRequestBuilder( [ invalidOperation ] )
+			const response = await newRequestBuilder( [ { op: 'move', path: '/a/b/c' } ] )
 				.makeRequest();
 
-			assertValid400Response(
-				response,
-				'missing-json-patch-field',
-				{ operation: invalidOperation, field: 'from' }
-			);
-			assert.include( response.body.message, "'from'" );
+			assertValid400Response( response, 'missing-field', { path: '/patch/0', field: 'from' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
 		it( "invalid patch - invalid 'op' field", async () => {

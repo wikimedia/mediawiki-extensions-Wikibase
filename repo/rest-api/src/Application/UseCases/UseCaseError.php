@@ -28,7 +28,6 @@ class UseCaseError extends UseCaseException {
 	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const MISSING_FIELD = 'missing-field';
-	public const MISSING_JSON_PATCH_FIELD = 'missing-json-patch-field';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
@@ -143,7 +142,6 @@ class UseCaseError extends UseCaseException {
 		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_NOT_DEFINED => [],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
-		self::MISSING_JSON_PATCH_FIELD => [ self::CONTEXT_OPERATION, self::CONTEXT_FIELD ],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
 			self::CONTEXT_LANGUAGE,
 			self::CONTEXT_LABEL,
