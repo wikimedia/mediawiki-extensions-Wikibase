@@ -40,7 +40,8 @@ class EditMetadataRequestValidatingDeserializer {
 	private function validateEditTags( array $editTags ): void {
 		$validationError = $this->validator->validateEditTags( $editTags );
 		if ( $validationError ) {
-			$tagIndex = array_search( $validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE], $editTags );
+			$tag = $validationError->getContext()[EditMetadataValidator::CONTEXT_TAG_VALUE];
+			$tagIndex = Utils::getIndexOfValueInSerialization( $tag, $editTags );
 			throw UseCaseError::newInvalidValue( "/tags/$tagIndex" );
 		}
 	}

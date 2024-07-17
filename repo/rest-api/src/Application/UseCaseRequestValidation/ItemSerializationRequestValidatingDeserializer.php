@@ -179,11 +179,7 @@ class ItemSerializationRequestValidatingDeserializer {
 				$limit = $context[AliasesValidator::CONTEXT_LIMIT] ?? $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
 				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-
-				$aliasIndex = array_search( $aliasValue, $aliasesSerialization[$language] );
-
-				$this->assertValidIndex( $aliasIndex, "The invalid alias wasn't found in the original aliases serialization" );
-
+				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
 				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
@@ -196,10 +192,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case AliasesInLanguageValidator::CODE_INVALID:
 				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				$aliasIndex = array_search( $aliasValue, $aliasesSerialization[$language] );
-
-				$this->assertValidIndex( $aliasIndex, "The invalid alias wasn't found in the original aliases serialization" );
-
+				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
 				throw UseCaseError::newInvalidValue( "/item/aliases/$language/$aliasIndex" );
 		}
 	}
@@ -259,15 +252,9 @@ class ItemSerializationRequestValidatingDeserializer {
 			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges" );
 			case SitelinkValidator::CODE_INVALID_BADGE:
-				$badgeIndex = array_search(
-					$context[ SitelinkValidator::CONTEXT_BADGE],
-					$serialization[ $context[SitelinkValidator::CONTEXT_SITE_ID ] ][ 'badges' ]
-				);
-
-				$this->assertValidIndex( $badgeIndex, "The invalid badge wasn't found" );
-
-				$path = '/item/sitelinks/' . $context[ SitelinkValidator::CONTEXT_SITE_ID ] . '/badges/' . $badgeIndex;
-				throw UseCaseError::newInvalidValue( $path );
+				$badge = $context[SitelinkValidator::CONTEXT_BADGE];
+				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $serialization[$siteId()][ 'badges' ] );
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges/$badgeIndex" );
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
 				throw new UseCaseError(
@@ -295,18 +282,6 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::CONTEXT_SITE_ID => $siteId(),
 					]
 				);
-		}
-	}
-
-	/**
-	 * @param mixed $index
-	 * @param string $message
-	 *
-	 * @return void
-	 */
-	private function assertValidIndex( $index, string $message ): void {
-		if ( !is_int( $index ) ) {
-			throw new LogicException( $message );
 		}
 	}
 

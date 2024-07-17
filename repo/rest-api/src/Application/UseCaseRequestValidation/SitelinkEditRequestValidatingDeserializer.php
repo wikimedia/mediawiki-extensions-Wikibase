@@ -35,15 +35,9 @@ class SitelinkEditRequestValidatingDeserializer {
 				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 					throw UseCaseError::newInvalidValue( '/sitelink/badges' );
 				case SitelinkValidator::CODE_INVALID_BADGE:
-					$badgeIndex = array_search(
-						$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE],
-						$request->getSitelink()[ 'badges' ]
-					);
-					if ( !is_int( $badgeIndex ) ) {
-						throw new LogicException( "The invalid badge wasn't found" );
-					}
-
-					throw UseCaseError::newInvalidValue( "/sitelink/badges/{$badgeIndex}" );
+					$badge = $validationError->getContext()[SitelinkValidator::CONTEXT_BADGE];
+					$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $request->getSitelink()[ 'badges' ] );
+					throw UseCaseError::newInvalidValue( "/sitelink/badges/$badgeIndex" );
 				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 					$badge = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
 					throw new UseCaseError(
