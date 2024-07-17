@@ -27,6 +27,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider wikibaseForNamespaceProvider
+	 * @dataProvider pageConnectedToWikibaseProvider
+	 * @dataProvider pageNotConnectedToWikibaseProvider
+	 * @dataProvider handleUserLoggedOutWithEmptyLangLinksProvider
 	 */
 	public function testHandle_WikibaseForNamespace( $expectedJsModules, $expectedCssModules,
 		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
@@ -65,25 +68,6 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider pageConnectedToWikibaseProvider
-	 */
-	public function testHandlePageConnectedToWikibase( $expectedJsModules, $expectedCssModules,
-		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
-	) {
-		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, true );
-		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
-
-		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
-
-		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
-		$handler->addModules( $output, 'view', $skin );
-
-		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
-		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
-	}
-
 	public static function pageConnectedToWikibaseProvider() {
 		return [
 			[
@@ -112,25 +96,6 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( [], $output->getModuleStyles(), 'css modules' );
 	}
 
-	/**
-	 * @dataProvider pageNotConnectedToWikibaseProvider
-	 */
-	public function testHandlePageNotConnectedToWikibase( $expectedJsModules, $expectedCssModules,
-		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
-	) {
-		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, true );
-		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
-
-		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
-
-		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
-		$handler->addModules( $output, 'view', $skin );
-
-		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
-		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
-	}
-
 	public static function pageNotConnectedToWikibaseProvider() {
 		return [
 			[
@@ -142,25 +107,6 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				true, // user logged in
 			],
 		];
-	}
-
-	/**
-	 * @dataProvider handleUserLoggedOutWithEmptyLangLinksProvider
-	 */
-	public function testHandleUserLoggedOutWithEmptyLangLinks( $expectedJsModules, $expectedCssModules,
-		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
-	) {
-		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, true );
-		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
-
-		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
-
-		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
-		$handler->addModules( $output, 'view', $skin );
-
-		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
-		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
 	}
 
 	public static function handleUserLoggedOutWithEmptyLangLinksProvider() {
