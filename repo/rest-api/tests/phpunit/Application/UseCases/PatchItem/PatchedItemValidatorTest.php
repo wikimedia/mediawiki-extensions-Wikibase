@@ -2,16 +2,12 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItem;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
@@ -22,13 +18,10 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -59,11 +52,10 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList as Statements;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 use Wikibase\Repo\Validators\MembershipValidator;
@@ -1154,20 +1146,10 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): PatchedItemValidator {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$propertyValuePairDeserializerFactory = new TestPropertyValuePairDeserializerFactory();
 		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
-			$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
+			$propertyValuePairDeserializerFactory->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
 		}
-
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			new BasicEntityIdParser(),
-			$dataTypeLookup,
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( new DataTypeFactory( [] ) ),
-				new SnakValueDeserializer( new DataValueDeserializer( [] ), [] ),
-				new BuilderBasedDataTypeValidatorFactory( [] )
-			)
-		);
 
 		return new PatchedItemValidator(
 			$this->labelsSyntaxValidator,
@@ -1194,7 +1176,7 @@ class PatchedItemValidatorTest extends TestCase {
 			new StatementsValidator(
 				new StatementsDeserializer(
 					new StatementDeserializer(
-						$propertyValuePairDeserializer,
+						$propertyValuePairDeserializerFactory->createPropertyValuePairDeserializer(),
 						$this->createStub( ReferenceDeserializer::class )
 					)
 				)

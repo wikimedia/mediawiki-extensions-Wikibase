@@ -4,20 +4,15 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer
@@ -267,18 +262,9 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	private function newStatementSerializationRVD(): StatementSerializationRequestValidatingDeserializer {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ), 'string' );
-
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			new BasicEntityIdParser(),
-			$dataTypeLookup,
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-				WikibaseRepo::getSnakValueDeserializer(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
-		);
+		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
+		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ), 'string' );
+		$propertyValuePairDeserializer = $deserializerFactory->createPropertyValuePairDeserializer();
 
 		return new StatementSerializationRequestValidatingDeserializer(
 			new StatementValidator(
