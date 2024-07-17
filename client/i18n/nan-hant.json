@@ -5,6 +5,7 @@
 			"SupaplexTW"
 		]
 	},
+	"wikibase-comment-update": "已經改 {{WBREPONAME}} 項目",
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "改連結",
 	"wikibase-linkitem-input-site": "語言：",

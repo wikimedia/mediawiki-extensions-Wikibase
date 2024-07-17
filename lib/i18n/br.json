@@ -10,6 +10,8 @@
 			"Y-M D"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "elfenn diverket",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "talvoud dianav",
 	"wikibase-snakview-snaktypeselector-novalue": "talvoud ebet",
@@ -23,7 +25,9 @@
 	"datatypes-type-boolean": "Boolean",
 	"datatypes-type-globe-coordinate": "Daveennoù douaroniel",
 	"datatypes-type-time": "Mare en amzer",
+	"datatypes-type-wikibase-item": "Elfenn",
 	"datatypes-type-geo-shape": "Gwiskad douaroniel",
+	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-BCE-century": "{{PLURAL:$1|1añ kantved|$1vet kantved}} kt JK",
 	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
 	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet",
