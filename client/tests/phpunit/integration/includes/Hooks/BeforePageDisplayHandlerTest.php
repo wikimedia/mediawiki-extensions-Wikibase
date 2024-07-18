@@ -2,12 +2,14 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use MediaWiki\Context\RequestContext;
+use MediaWiki\Config\HashConfig;
+use MediaWiki\Context\IContextSource;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use Skin;
-use SkinFallback;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\NamespaceChecker;
 
@@ -29,8 +31,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandle_WikibaseForNamespace( $expectedJsModules, $expectedCssModules,
 		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, true );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, true );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -68,8 +71,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandlePageConnectedToWikibase( $expectedJsModules, $expectedCssModules,
 		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, true );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, true );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -94,10 +98,11 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testHandlePageConnectedToWikibase_noexternallinklinks() {
-		$skin = $this->getSkin( true, true ); // user logged in
+		$skin = $this->getSkin();
+		$context = $this->getContext( true, true );
 
 		// page connected, has links and noexternallanglinks
-		$output = $this->getOutputPage( $skin, [ 'de:Rom' ], 'Q4', [ '*' ] );
+		$output = $this->getOutputPage( $context, [ 'de:Rom' ], 'Q4', [ '*' ] );
 		$namespaceChecker = $this->getNamespaceChecker( true );
 
 		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, false );
@@ -113,8 +118,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandlePageNotConnectedToWikibase( $expectedJsModules, $expectedCssModules,
 		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, true );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, true );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -144,8 +150,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandleUserLoggedOutWithEmptyLangLinks( $expectedJsModules, $expectedCssModules,
 		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, true );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, true );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -175,8 +182,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandleTitleNotExist_NoWikibaseLinks( $expectedJsModules,
 		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, false );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, false );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -206,8 +214,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testHandle_HistoryActionWithEmptyLangLinks( $expectedJsModules,
 		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
-		$skin = $this->getSkin( $loggedIn, true );
-		$output = $this->getOutputPage( $skin, $langLinks, $prefixedId );
+		$skin = $this->getSkin();
+		$context = $this->getContext( $loggedIn, true );
+		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
@@ -238,8 +247,9 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$expectedJsModules, $expectedCssModules,
 		$dataBridgeEnabled, $wikibaseEnabled
 	) {
-		$skin = $this->getSkin( false, false );
-		$output = $this->getOutputPage( $skin, [] );
+		$skin = $this->getSkin();
+		$context = $this->getContext( false, false );
+		$output = $this->getOutputPage( $context, [] );
 		$namespaceChecker = $this->getNamespaceChecker( $wikibaseEnabled );
 
 		$handler = new BeforePageDisplayHandler( false, $namespaceChecker, $dataBridgeEnabled );
@@ -272,14 +282,16 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function getContext( $loggedIn, $titleExists ) {
-		$context = new RequestContext();
+	private function getContext( bool $loggedIn, bool $titleExists ): IContextSource {
+		$context = $this->createMock( IContextSource::class );
+		$context->method( 'getRequest' )->willReturn( new WebRequest() );
+		$context->method( 'getConfig' )->willReturn( new HashConfig() );
 
 		$title = $this->getTitle( $titleExists );
-		$context->setTitle( $title );
+		$context->method( 'getTitle' )->willReturn( $title );
 
 		$user = $this->getUser( $loggedIn );
-		$context->setUser( $user );
+		$context->method( 'getUser' )->willReturn( $user );
 
 		return $context;
 	}
@@ -326,10 +338,10 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		return $namespaceChecker;
 	}
 
-	private function getOutputPage( Skin $skin, $langLinks, $prefixedId = null,
+	private function getOutputPage( IContextSource $context, $langLinks, $prefixedId = null,
 		$noexternallanglinks = null
 	) {
-		$output = $skin->getOutput();
+		$output = new OutputPage( $context );
 		$output->setLanguageLinks( $langLinks );
 
 		if ( $prefixedId ) {
@@ -343,12 +355,8 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		return $output;
 	}
 
-	private function getSkin( $loggedIn, $titleExists ) {
-		$context = $this->getContext( $loggedIn, $titleExists );
-		$skin = new SkinFallback();
-		$skin->setContext( $context );
-
-		return $skin;
+	private function getSkin(): Skin {
+		return $this->createNoOpMock( Skin::class, [ 'getSkinName' ] );
 	}
 
 }
