@@ -299,6 +299,18 @@ describe( 'PUT statement tests', () => {
 					assert.include( response.body.message, `statement/${invalidField}` );
 				} );
 
+				it( 'missing top-level field', async () => {
+					const response = await newReplaceRequestBuilder( testItemId, testStatementId, {} )
+						.withEmptyJsonBody()
+						.assertInvalidRequest()
+						.makeRequest();
+
+					expect( response ).to.have.status( 400 );
+					assert.strictEqual( response.body.code, 'missing-field' );
+					assert.deepEqual( response.body.context, { path: '/', field: 'statement' } );
+					assert.strictEqual( response.body.message, 'Required field missing' );
+				} );
+
 				it( 'missing statement field', async () => {
 					const missingField = 'value';
 					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );

@@ -65,6 +65,11 @@ class RequestBuilder {
 		return this;
 	}
 
+	withEmptyJsonBody() {
+		this.jsonBodyParams = {};
+		return this;
+	}
+
 	/**
 	 * @param {string} name
 	 * @param {string|Function} value - function arguments will be evaluated when makeRequest() is called

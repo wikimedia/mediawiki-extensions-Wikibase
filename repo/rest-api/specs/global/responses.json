@@ -612,6 +612,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
 				}
@@ -632,6 +633,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" }
 				}
@@ -652,6 +654,7 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"cannot-modify-read-only-value": {
@@ -676,6 +679,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"cannot-modify-read-only-value": {
@@ -700,6 +704,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-data-missing-field": { "$ref": "./examples.json#/StatementDataMissingFieldExample" },
 					"cannot-modify-read-only-value": {
@@ -829,7 +834,8 @@
 					"item-label-description-duplicate": {
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" }
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
 			}
 		},
@@ -854,7 +860,8 @@
 					"property-label-duplicate": {
 						"$ref": "./examples.json#/PropertyLabelDuplicateExample"
 					},
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" }
+					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
 			}
 		},
@@ -879,6 +886,7 @@
 						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
 					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
@@ -901,6 +909,7 @@
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
@@ -997,6 +1006,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
@@ -1017,6 +1027,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}

@@ -182,6 +182,18 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			);
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'description' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'invalid description', async () => {
 			const invalidDescription = 'tab characters \t not allowed';
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', invalidDescription )

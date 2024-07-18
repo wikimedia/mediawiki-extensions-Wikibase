@@ -234,6 +234,18 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, {} )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'sitelink' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'invalid edit tag', async () => {
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.withJsonBodyParam( 'tags', [ 'invalid tag' ] ).assertValidRequest().makeRequest();

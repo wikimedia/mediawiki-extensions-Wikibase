@@ -84,6 +84,22 @@ class AssertValidTopLevelFieldsTest extends TestCase {
 				]
 			),
 		];
+
+		yield 'missing top-level field' => [
+			[],
+			[ 'patch' => [ ParamValidator::PARAM_REQUIRED => true ] ],
+			new HttpException(
+				'Required field missing',
+				400,
+				[
+					'code' => 'missing-field',
+					'context' => [
+						'path' => '/',
+						'field' => 'patch',
+					],
+				]
+			),
+		];
 	}
 
 }

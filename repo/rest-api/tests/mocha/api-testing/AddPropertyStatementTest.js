@@ -235,6 +235,18 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, invalidField );
 		} );
 
+		it( 'missing top-level field', async () => {
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, {} )
+				.withEmptyJsonBody()
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-field' );
+			assert.deepEqual( response.body.context, { path: '/', field: 'statement' } );
+			assert.strictEqual( response.body.message, 'Required field missing' );
+		} );
+
 		it( 'missing statement field', async () => {
 			const missingField = 'value';
 			const invalidStatement = { ...testStatement };
