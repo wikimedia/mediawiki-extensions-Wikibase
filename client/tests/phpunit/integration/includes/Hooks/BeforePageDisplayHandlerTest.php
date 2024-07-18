@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Client\Tests\Unit\Hooks;
+namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use PHPUnit\Framework\TestCase;
+use MediaWikiIntegrationTestCase;
 use Skin;
 use SkinFallback;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
@@ -21,7 +21,7 @@ use Wikibase\Client\NamespaceChecker;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class BeforePageDisplayHandlerTest extends TestCase {
+class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider wikibaseForNamespaceProvider
