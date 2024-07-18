@@ -5,14 +5,20 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Throwable;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer
@@ -22,6 +28,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
  * @license GPL-2.0-or-later
  */
 class ReferenceDeserializerTest extends TestCase {
+
+	private const EXISTING_STRING_PROPERTY_ID = 'P1968';
 
 	/**
 	 * @dataProvider serializationProvider
@@ -41,18 +49,18 @@ class ReferenceDeserializerTest extends TestCase {
 
 		yield 'reference with two parts' => [
 			new Reference( [
-				new PropertySomeValueSnak( new NumericPropertyId( 'P123' ) ),
-				new PropertySomeValueSnak( new NumericPropertyId( 'P321' ) ),
+				new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ) ),
+				new PropertyNoValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ) ),
 			] ),
 			[
 				'parts' => [
 					[
-						'property' => [ 'id' => 'P123' ],
+						'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ],
 						'value' => [ 'type' => 'somevalue' ],
 					],
 					[
-						'property' => [ 'id' => 'P321' ],
-						'value' => [ 'type' => 'somevalue' ],
+						'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ],
+						'value' => [ 'type' => 'novalue' ],
 					],
 				],
 			],
@@ -66,7 +74,7 @@ class ReferenceDeserializerTest extends TestCase {
 		try {
 			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
-		} catch ( Throwable $e ) {
+		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
 		}
 	}
@@ -83,35 +91,59 @@ class ReferenceDeserializerTest extends TestCase {
 			'references/0',
 		];
 
+		yield 'invalid serialization' => [
+			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/some/path' ),
+			[ 'not', 'an', 'associative', 'array' ],
+			'/some/path',
+		];
+
 		yield 'null parts' => [
 			new InvalidFieldException( 'parts', null, '/parts' ),
 			[ 'parts' => null ],
 		];
 
-		yield 'invalid parts type' => [
-			new InvalidFieldException( 'parts', 'potato', '/parts' ),
-			[ 'parts' => 'potato' ],
+		yield "invalid 'parts' type - string" => [
+			new InvalidFieldException( 'parts', 'not an array', '/parts' ),
+			[ 'parts' => 'not an array' ],
 		];
 
-		yield 'invalid parts item type' => [
-			new InvalidFieldException( 'parts', [ 'potato' ], '/parts' ),
+		yield "invalid 'parts' type - associative array" => [
+			new InvalidFieldException( 'parts', [ 'invalid' => 'parts' ], '/parts' ),
+			[ 'parts' => [ 'invalid' => 'parts' ] ],
+		];
+
+		yield "invalid 'parts/0' type - string" => [
+			new InvalidFieldException( '0', 'potato', '/parts/0' ),
 			[ 'parts' => [ 'potato' ] ],
 		];
 
-		yield 'invalid parts item type with path' => [
-			new InvalidFieldException( 'parts', [ 'potato' ], 'references/1/parts' ),
+		yield "invalid 'parts/0' type - sequential array" => [
+			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/parts/0' ),
+			[ 'parts' => [ [ 'not', 'an', 'associative', 'array' ] ] ],
+		];
+
+		yield "invalid 'parts/0' type with path" => [
+			new InvalidFieldException( '0', 'potato', '/statement/references/1/parts/0' ),
 			[ 'parts' => [ 'potato' ] ],
-			'references/1',
+			'/statement/references/1',
 		];
 	}
 
 	private function newDeserializer(): ReferenceDeserializer {
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
-			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p['property']['id'] ) )
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ), 'string' );
+
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			new BasicEntityIdParser(),
+			$dataTypeLookup,
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+				WikibaseRepo::getSnakValueDeserializer(),
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
 		);
 
-		return new ReferenceDeserializer( $propValPairDeserializer );
+		return new ReferenceDeserializer( $propertyValuePairDeserializer );
 	}
 
 }

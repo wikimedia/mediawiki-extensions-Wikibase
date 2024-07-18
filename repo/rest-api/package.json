@@ -18,7 +18,7 @@
 		"build:spec": "swagger-cli bundle specs/openapi.json -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
 	},
 	"engines": {
-		"node": ">=14"
+		"node": ">=18"
 	},
 	"devDependencies": {
 		"@apidevtools/swagger-cli": "^4.0.4",

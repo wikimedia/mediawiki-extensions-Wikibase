@@ -332,21 +332,16 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid statement field', async () => {
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
-						testStatementPropertyId
-					);
-					const invalidField = 'rank';
-					const invalidValue = 'not-a-valid-rank';
-					statementSerialization[ invalidField ] = invalidValue;
+					const invalidStatement = { property: { id: [ 'P1' ] }, value: { type: 'novalue' } };
 
 					const response = await newReplaceRequestBuilder(
 						testPropertyId,
 						testStatementId,
-						statementSerialization
+						invalidStatement
 					).assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'invalid-value', { path: `/statement/${invalidField}` } );
-					assert.include( response.body.message, `statement/${invalidField}` );
+					assertValidError( response, 400, 'invalid-value', { path: '/statement/property/id' } );
+					assert.include( response.body.message, 'statement/property/id' );
 				} );
 
 				it( 'missing top-level field', async () => {
@@ -362,19 +357,13 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'missing statement field', async () => {
-					const missingField = 'value';
-					const statementSerialization = entityHelper.newStatementWithRandomStringValue(
-						testStatementPropertyId
-					);
-					delete statementSerialization[ missingField ];
+					const statementSerialization = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					delete statementSerialization.property.id;
 
-					const response = await newReplaceRequestBuilder(
-						testPropertyId,
-						testStatementId,
-						statementSerialization
-					).assertInvalidRequest().makeRequest();
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statementSerialization )
+						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'missing-field', { path: '/statement', field: missingField } );
+					assertValidError( response, 400, 'missing-field', { path: '/statement/property', field: 'id' } );
 					assert.strictEqual( response.body.message, 'Required field missing' );
 				} );
 

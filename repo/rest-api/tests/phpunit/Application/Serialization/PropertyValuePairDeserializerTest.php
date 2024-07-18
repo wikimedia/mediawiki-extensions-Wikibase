@@ -6,8 +6,6 @@ use DataValues\StringValue;
 use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use ValueValidators\Result;
-use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
@@ -17,7 +15,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
@@ -41,17 +38,10 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
 
-	private DataTypeValidatorFactory $dataTypeValidatorFactory;
 	private ValueDeserializer $valueDeserializer;
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		$successValidator = $this->createStub( ValueValidator::class );
-		$successValidator->method( 'validate' )->willReturn( Result::newSuccess() );
-
-		$this->dataTypeValidatorFactory = $this->createStub( DataTypeValidatorFactory::class );
-		$this->dataTypeValidatorFactory->method( 'getValidators' )->willReturn( [ $successValidator ] );
 
 		$this->valueDeserializer = $this->createStub( ValueDeserializer::class );
 		$this->valueDeserializer->method( 'deserialize' )->willReturn( $this->createStub( StringValue::class ) );
@@ -111,8 +101,6 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath = '' ): void {
-		$this->dataTypeValidatorFactory = WikibaseRepo::getDataTypeValidatorFactory();
-
 		try {
 			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
@@ -122,10 +110,26 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	}
 
 	public static function invalidSerializationProvider(): Generator {
-		yield 'invalid value field type' => [
+		yield 'invalid type' => [
+			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/some/path' ),
+			[ 'not', 'an', 'associative', 'array' ],
+			'/some/path',
+		];
+
+		yield 'invalid value field type - int' => [
 			new InvalidFieldException( 'value', 42, '/value' ),
 			[
 				'value' => 42,
+				'property' => [
+					'id' => self::STRING_PROPERTY_ID,
+				],
+			],
+		];
+
+		yield 'invalid value field type - sequential array' => [
+			new InvalidFieldException( 'value', [ 'not an associative array' ], '/value' ),
+			[
+				'value' => [ 'not an associative array' ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
 				],
@@ -142,11 +146,19 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			],
 		];
 
-		yield 'invalid property field type' => [
+		yield 'invalid property field type - int' => [
 			new InvalidFieldException( 'property', 42, '/property' ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => 42,
+			],
+		];
+
+		yield 'invalid property field type - sequential array' => [
+			new InvalidFieldException( 'property', [ 'not an associative array' ], '/property' ),
+			[
+				'value' => [ 'type' => 'novalue' ],
+				'property' => [ 'not an associative array' ],
 			],
 		];
 
@@ -206,6 +218,16 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			new MissingFieldException( 'type', '/value' ),
 			[
 				'value' => [ 'content' => 'I am goat' ],
+				'property' => [
+					'id' => self::STRING_PROPERTY_ID,
+				],
+			],
+		];
+
+		yield 'missing value type field - empty array' => [
+			new MissingFieldException( 'type', '/value' ),
+			[
+				'value' => [],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
 				],
