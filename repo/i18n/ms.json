@@ -63,7 +63,7 @@
 	"wikibase-statementsection-identifiers": "Pengenal pasti",
 	"wikibase-sitelinks": "Pautan laman",
 	"wikibase-sitelinkgroupview-input-help-message": "Tambah pautan tapak web dengan menyatakan satu tapak dan satu halaman daripada tapak itu, menyunting atau mengalih keluar pautan-pautan sedia ada.",
-	"wikibase-sitelinks-counter": "$1 entri",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|masukan}}",
 	"wikibase-sitelinks-empty": "Perkara ini belum ada pautan tapak.",
 	"wikibase-sitelinks-special": "Tapak-tapak lain",
 	"wikibase-badgeselector-badge-placeholder-title": "Klik untuk berikan lencana.",
