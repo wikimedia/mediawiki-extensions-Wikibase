@@ -46,7 +46,7 @@ class ItemValidator {
 		$this->sitelinksValidator = $sitelinksValidator;
 	}
 
-	public function validate( array $serialization ): ?ValidationError {
+	public function validate( array $serialization, string $basePath = '' ): ?ValidationError {
 		$expectedFields = [ 'labels', 'descriptions', 'aliases', 'sitelinks', 'statements' ];
 		foreach ( $expectedFields as $expectedField ) {
 			$serialization[$expectedField] ??= [];
@@ -70,7 +70,7 @@ class ItemValidator {
 
 		$validationError = $this->validateLabelsAndDescriptions( $serialization ) ??
 			$this->itemAliasesValidator->validate( $serialization['aliases'] ) ??
-			$this->itemStatementsValidator->validate( $serialization['statements'] ) ??
+			$this->itemStatementsValidator->validate( $serialization['statements'], "$basePath/statements" ) ??
 			$this->sitelinksValidator->validate( null, $serialization['sitelinks'] );
 		if ( $validationError ) {
 			return $validationError;

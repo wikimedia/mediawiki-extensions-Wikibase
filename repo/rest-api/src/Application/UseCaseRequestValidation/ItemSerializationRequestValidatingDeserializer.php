@@ -38,7 +38,7 @@ class ItemSerializationRequestValidatingDeserializer {
 	 */
 	public function validateAndDeserialize( ItemSerializationRequest $request ): Item {
 		$itemSerialization = $request->getItem();
-		$validationError = $this->validator->validate( $itemSerialization );
+		$validationError = $this->validator->validate( $itemSerialization, '/item' );
 
 		if ( $validationError ) {
 			$context = $validationError->getContext();
@@ -201,14 +201,13 @@ class ItemSerializationRequestValidatingDeserializer {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-				throw UseCaseError::newInvalidValue( '/item/statements' );
 			case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
 			case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
-				throw UseCaseError::newInvalidValue( '/item/statements/' . $context[StatementsValidator::CONTEXT_PATH] );
+				throw UseCaseError::newInvalidValue( $context[StatementsValidator::CONTEXT_PATH] );
 			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
 				throw UseCaseError::newMissingField(
-					'/item/statements/' . $context[StatementsValidator::CONTEXT_PATH],
+					$context[StatementsValidator::CONTEXT_PATH],
 					$context[StatementsValidator::CONTEXT_FIELD]
 				);
 			case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:

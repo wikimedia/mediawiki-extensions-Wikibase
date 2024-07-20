@@ -38,20 +38,21 @@ class StatementsValidator {
 		$this->statementsDeserializer = $statementsDeserializer;
 	}
 
-	public function validate( array $statements ): ?ValidationError {
+	public function validate( array $statements, string $basePath = '' ): ?ValidationError {
 		try {
-			$this->deserializedStatements = $this->statementsDeserializer->deserialize( $statements );
+			$this->deserializedStatements = $this->statementsDeserializer->deserialize( $statements, $basePath );
 		} catch ( InvalidFieldTypeException $e ) {
-			switch ( substr_count( $e->getField(), '/', ) ) {
-				case 0:
-					return new ValidationError(
-						self::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-						[ self::CONTEXT_PATH => $e->getField() ]
-					);
+			// TODO: convert into a single CODE_INVALID_VALUE error once patch-result-invalid-value is implemented
+			switch ( substr_count( $e->getPath(), '/' ) - substr_count( $basePath, '/' ) ) {
 				case 1:
 					return new ValidationError(
+						self::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+						[ self::CONTEXT_PATH => $e->getPath() ]
+					);
+				case 2:
+					return new ValidationError(
 						self::CODE_STATEMENT_NOT_ARRAY,
-						[ self::CONTEXT_PATH => $e->getField() ]
+						[ self::CONTEXT_PATH => $e->getPath() ]
 					);
 				default:
 					throw new LogicException( 'Unable to handle exception' );
@@ -59,7 +60,7 @@ class StatementsValidator {
 		} catch ( InvalidStatementsException $e ) {
 			return new ValidationError(
 				self::CODE_STATEMENTS_NOT_ASSOCIATIVE,
-				[ self::CONTEXT_PATH => $e->getField(), self::CONTEXT_STATEMENTS => $e->getValue() ]
+				[ self::CONTEXT_PATH => $e->getPath(), self::CONTEXT_STATEMENTS => $e->getValue() ]
 			);
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(

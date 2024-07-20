@@ -375,13 +375,15 @@ class PatchedPropertyValidator {
 					throw new UseCaseError(
 						UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
 						'Not a valid statement group',
-						[ UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ] ]
+						// TODO: the path will be converted into a proper JSON Pointer in a future task
+						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
 					);
 				case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 					throw new UseCaseError(
 						UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
 						'Not a valid statement type',
-						[ UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ] ]
+						// TODO: the path will be converted into a proper JSON Pointer in a future task
+						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
 					);
 				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 					$this->throwInvalidField( 'statements', $context[ StatementsValidator::CONTEXT_STATEMENTS ] );

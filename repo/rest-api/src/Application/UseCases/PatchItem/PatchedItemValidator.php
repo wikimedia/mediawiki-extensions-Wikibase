@@ -522,7 +522,8 @@ class PatchedItemValidator {
 					throw new UseCaseError(
 						UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
 						'Not a valid statement group',
-						[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
+						// TODO: the path will be converted into a proper JSON Pointer in a future task
+						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
 					);
 				case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 					throw new UseCaseError(
@@ -538,7 +539,8 @@ class PatchedItemValidator {
 					throw new UseCaseError(
 						UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
 						'Not a valid statement type',
-						[ UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH] ]
+						// TODO: the path will be converted into a proper JSON Pointer in a future task
+						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
 					);
 				case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
 					$field = $context[StatementsValidator::CONTEXT_FIELD];

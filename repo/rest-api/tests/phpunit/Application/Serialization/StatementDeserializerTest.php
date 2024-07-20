@@ -147,7 +147,7 @@ class StatementDeserializerTest extends TestCase {
 
 	public static function invalidSerializationProvider(): Generator {
 		yield 'statement is not associative array' => [
-			new InvalidFieldTypeException( '/statements/P789' ),
+			new InvalidFieldTypeException( '/statements/P789', '/statements/P789' ),
 			[
 				[ 'id' => 'P123' ],
 				[ 'type' => 'somevalue' ],
