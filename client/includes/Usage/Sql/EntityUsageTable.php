@@ -103,10 +103,10 @@ class EntityUsageTable {
 		$db = $this->getWriteConnection();
 
 		foreach ( $usages as $usage ) {
-			$usageConditions[] = $db->makeList( [
+			$usageConditions[] = $db->andExpr( [
 				'eu_aspect' => $usage->getAspectKey(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-			], LIST_AND );
+			] );
 		}
 
 		// Collect affected row IDs, so we can use them for an
@@ -115,7 +115,7 @@ class EntityUsageTable {
 		foreach ( array_chunk( $usageConditions, $this->batchSize ) as $usageConditionChunk ) {
 			$where = [
 				'eu_page_id' => $pageId,
-				$db->makeList( $usageConditionChunk, LIST_OR ),
+				$db->orExpr( $usageConditionChunk ),
 			];
 
 			$rowIds = array_merge(

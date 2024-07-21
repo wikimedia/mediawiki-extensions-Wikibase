@@ -7,6 +7,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\RawSQLValue;
 
 /**
  * Unique Id generator implemented using an SQL table and an UPSERT query.
@@ -131,7 +132,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 			] )
 			->onDuplicateKeyUpdate()
 			->uniqueIndexFields( 'id_type' )
-			->set( [ 'id_value = LAST_INSERT_ID(id_value + 1)' ] )
+			->set( [ 'id_value' => new RawSQLValue( 'LAST_INSERT_ID(id_value + 1)' ) ] )
 			->caller( __METHOD__ )
 			->execute();
 	}

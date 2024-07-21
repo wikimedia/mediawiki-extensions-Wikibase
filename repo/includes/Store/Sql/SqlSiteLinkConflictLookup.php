@@ -62,10 +62,10 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$linkConds = [];
 
 		foreach ( $siteLinkList as $siteLink ) {
-			$linkConds[] = $dbr->makeList( [
+			$linkConds[] = $dbr->andExpr( [
 				'ips_site_id' => $siteLink->getSiteId(),
 				'ips_site_page' => $siteLink->getPageName(),
-			], $dbr::LIST_AND );
+			] );
 		}
 
 		// TODO: $linkConds might get very large and hit some size limit imposed
@@ -79,7 +79,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 				'ips_item_id',
 			] )
 			->from( 'wb_items_per_site' )
-			->where( $dbr->makeList( $linkConds, $dbr::LIST_OR ) )
+			->where( $dbr->orExpr( $linkConds ) )
 			->andWhere( $dbr->expr( 'ips_item_id', '!=', $itemId->getNumericId() ) )
 			->caller( __METHOD__ )
 			->fetchResultSet();

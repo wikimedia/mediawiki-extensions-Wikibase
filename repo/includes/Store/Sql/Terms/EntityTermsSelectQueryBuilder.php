@@ -60,15 +60,10 @@ class EntityTermsSelectQueryBuilder extends SelectQueryBuilder {
 			$language = $languages[$i];
 			$text = $texts[$i];
 
-			$conditions[] = $this->getTermInLanguageCondition( $typeId, $language, $text );
+			$conditions[] = $this->db->andExpr( $this->getTermInLanguageCondition( $typeId, $language, $text ) );
 		}
 
-		$labelStatements = [];
-		foreach ( $conditions as $condition ) {
-			$labelStatements[] = $this->db->makeList( $condition, $this->db::LIST_AND );
-		}
-
-		return $this->where( $this->db->makeList( $labelStatements, $this->db::LIST_OR ) );
+		return $this->where( $this->db->orExpr( $conditions ) );
 	}
 
 	public function getEntityIdColumn(): string {

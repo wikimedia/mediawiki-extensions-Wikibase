@@ -168,7 +168,7 @@ class EntityUsageTableBuilder {
 			->from( 'page_props' )
 			->where( [
 				'pp_propname' => 'wikibase_item',
-				'pp_page >= ' . $fromPageId,
+				$db->expr( 'pp_page', '>=', $fromPageId ),
 			] )
 			->orderBy( 'pp_page' )
 			->limit( $this->batchSize )

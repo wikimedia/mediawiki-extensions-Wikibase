@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Rdbms\IReadableDatabase;
+use Wikimedia\Rdbms\RawSQLExpression;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -106,15 +107,12 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 				$joinSlotsTable = true;
 			}
 
-			$where[] = $db->makeList(
-				$conditions,
-				LIST_AND
-			);
+			$where[] = $db->andExpr( $conditions );
 		}
 
 		if ( !$where ) {
 			// If we skipped all entity IDs, select nothing, not everything.
-			$queryBuilder->where( '0=1' );
+			$queryBuilder->where( new RawSQLExpression( '0=1' ) );
 			return;
 		}
 
@@ -124,7 +122,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 			$queryBuilder->join( 'slots', null, $slotJoinConds );
 		}
 
-		$queryBuilder->where( $db->makeList( $where, LIST_OR ) );
+		$queryBuilder->where( $db->orExpr( $where ) );
 	}
 
 	/**

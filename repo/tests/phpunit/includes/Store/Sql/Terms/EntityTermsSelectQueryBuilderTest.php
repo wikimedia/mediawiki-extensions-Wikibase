@@ -4,13 +4,13 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
+use MediaWiki\Tests\MockDatabase;
 use MediaWikiCoversValidator;
 use MediaWikiTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Store\Sql\Terms\EntityTermsSelectQueryBuilder;
-use Wikimedia\Rdbms\Database\DbQuoter;
+use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IReadableDatabase;
-use Wikimedia\Rdbms\Platform\SQLPlatform;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\EntityTermsSelectQueryBuilder
@@ -105,22 +105,22 @@ class EntityTermsSelectQueryBuilderTest extends TestCase {
 	}
 
 	public function testWhereMultiTerm(): void {
-		$quoter = $this->createMock( DbQuoter::class );
-		$quoter->method( 'addQuotes' )
-			->willReturnCallback( 'json_encode' ); // close enough
-		$platform = new SQLPlatform( $quoter );
-		$db = $this->createMock( IReadableDatabase::class );
-		$db->method( 'makeList' )
-			->willReturnCallback( [ $platform, 'makeList' ] );
+		$db = new MockDatabase();
 		$sqb = new EntityTermsSelectQueryBuilder( $db, 'item' );
 
 		$sqb->whereMultiTerm( 1, [ 'l1', 'l2' ], [ 't1', 't2' ] );
 
-		$expected = '(wbtl_type_id = 1 AND wbxl_language = "l1" AND wbx_text = "t1")' .
-			' OR (wbtl_type_id = 1 AND wbxl_language = "l2" AND wbx_text = "t2")';
+		$expected = '((wbtl_type_id = 1 AND wbxl_language = \'l1\' AND wbx_text = \'t1\')' .
+			' OR (wbtl_type_id = 1 AND wbxl_language = \'l2\' AND wbx_text = \'t2\'))';
+		$actualConds = $sqb->getQueryInfo()['conds'];
+		foreach ( $actualConds as &$conds ) {
+			if ( $conds instanceof IExpression ) {
+				$conds = $conds->toSql( $db );
+			}
+		}
 		$this->assertSame(
 			[ $expected ],
-			$sqb->getQueryInfo()['conds']
+			$actualConds
 		);
 	}
 
