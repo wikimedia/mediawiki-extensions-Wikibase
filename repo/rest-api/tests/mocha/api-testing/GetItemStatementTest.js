@@ -9,6 +9,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { runAllJobs } = require( 'api-testing/lib/wiki' );
 
 describe( 'GET statement', () => {
 	let testItemId;
@@ -40,6 +41,7 @@ describe( 'GET statement', () => {
 
 		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testStatementPropertyIdToDelete ][ 0 ];
 		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
+		await runAllJobs(); // wait for secondary data to catch up after deletion
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		testLastModified = testItemCreationMetadata.timestamp;
