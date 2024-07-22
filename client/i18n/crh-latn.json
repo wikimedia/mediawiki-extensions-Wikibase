@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Don Alessandro",
-			"TayfunEt."
+			"TayfunEt.",
+			"Zolgoyo"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} deñiştirilmesi",
@@ -29,7 +30,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} deñiştirilmesi",
 	"wikibase-watchlist-show-changes-pref": "Közetüv cedvelimde {{WBREPONAME}} deñiştirilmelerini köster",
 	"wikibase-error-serialize-error": "Malümat serializatsiya etilip olamadı.",
-	"wikibase-error-invalid-entity-id": "Yazılğan ID sistemağa belli degil. Keçerli IDlerden birini qullanıñız.",
+	"wikibase-error-invalid-entity-id": "“$2” degen ID sistemağa belli degil. Keçerli ID-lerden birini qullansañız.",
 	"unconnectedpages": "Elementlerge bağlanmağan saifeler",
 	"wikibase-otherprojects": "Başqa leyhalarda",
 	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife",

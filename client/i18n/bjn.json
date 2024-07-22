@@ -8,7 +8,7 @@
 	"wikibase-client-desc": "Klién gasan éksténsi Wikibase",
 	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada wadah panyimpanan data",
 	"wikibase-after-page-move": "Pamindahan Pian mustinya [$1 talihat di tautan basa item {{WBREPONAME}}]. Kami maminta Pian mamariksa apakah ngini sudah kajadian.",
-	"wikibase-after-page-delete": "Tautan ka laman ini mustinya tahapus matan  [$1 item {{WBREPONAME}} nang tarait]. Kami maminta Pian manukui apakah ini sudah kajadian.",
+	"wikibase-after-page-delete": "Tautan ka laman ini mustinya tahapus matan  [$1 item {{WBREPONAME}} nang tarait]. Kami maminta Pian mamariksa apa ini sudah digawiakan.",
 	"wikibase-comment-add": "Butir {{WBREPONAME}} sudah diulah.",
 	"wikibase-comment-remove": "Item {{WBREPONAME}} tarait dihapus. Interwiki dihapus.",
 	"wikibase-comment-linked": "Butir {{WBREPONAME}} sudah tataut ka laman ini.",
