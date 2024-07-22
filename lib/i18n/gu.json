@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ashok modhvadia",
+			"CptViraj",
 			"Dsvyas",
 			"KartikMistry",
 			"NehalDaveND"
@@ -16,7 +17,7 @@
 	"wikibase-timedetails-before": "પહેલાં",
 	"wikibase-timedetails-after": "પછી",
 	"wikibase-globedetails-longitude": "રેખાંશ",
-	"wikibase-globedetails-latitude": "અક્ષાંસ",
+	"wikibase-globedetails-latitude": "અક્ષાંશ",
 	"wikibase-globedetails-globe": "ગોળો",
 	"wikibase-sitelinks-wikipedia": "વિકિપીડિયા",
 	"wikibase-snakview-snaktypeselector-somevalue": "અજાણી કિંમત",
