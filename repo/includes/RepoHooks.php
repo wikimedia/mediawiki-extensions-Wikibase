@@ -67,8 +67,9 @@ use WikiPage;
 final class RepoHooks {
 
 	/**
-	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
-	 * replacing the native search box with the entity selector widget.
+	 * Handler for the BeforePageDisplay hook, that conditionally adds the wikibase
+	 * mobile styles and injects the wikibase.ui.entitysearch module replacing the
+	 * native search box with the entity selector widget.
 	 *
 	 * It additionally schedules a WikibasePingback
 	 *
@@ -76,9 +77,12 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
+		$namespace = $out->getTitle()->getNamespace();
+		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $namespace );
 		$settings = WikibaseRepo::getSettings();
-		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 
+		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$skinName = $skin->getSkinName();
 			if ( $skinName === 'vector-2022' ) {
 				$out->addModules( 'wikibase.vector.searchClient' );
@@ -91,23 +95,11 @@ final class RepoHooks {
 		if ( $settings->getSetting( 'wikibasePingback' ) ) {
 			WikibasePingback::schedulePingback();
 		}
-	}
 
-	/**
-	 * Handler for the BeforePageDisplayMobile hook that adds the wikibase mobile styles.
-	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
-	 */
-	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
-		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
-		$namespace = $out->getTitle()->getNamespace();
-		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $namespace );
-
-		if ( $isEntityTitle ) {
+		if ( $isEntityTitle && WikibaseRepo::getMobileSite() ) {
 			$out->addModules( 'wikibase.mobile' );
 
-			$useNewTermbox = WikibaseRepo::getSettings()->getSetting( 'termboxEnabled' );
+			$useNewTermbox = $settings->getSetting( 'termboxEnabled' );
 			$entityType = $entityNamespaceLookup->getEntityType( $namespace );
 			$isEntityTypeWithTermbox = $entityType === Item::ENTITY_TYPE
 				|| $entityType === Property::ENTITY_TYPE;

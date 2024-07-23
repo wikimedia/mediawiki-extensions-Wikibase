@@ -966,7 +966,6 @@
 		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
 		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
-		"BeforePageDisplayMobile": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplayMobile",
 		"ChangesListInitRows": "LabelPrefetch",
 		"ContentModelCanBeUsedOn": "\\Wikibase\\Repo\\RepoHooks::onContentModelCanBeUsedOn",
 		"DifferenceEngineViewHeader": "DifferenceEngineViewHeaderHookHandler",
