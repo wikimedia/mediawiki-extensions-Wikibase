@@ -14,7 +14,6 @@ use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
-use Wikibase\Lib\Summary;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
@@ -56,7 +55,6 @@ class SubmitEntityAction extends EditEntityAction {
 	private WatchlistManager $watchlistManager;
 	private WikiPageFactory $wikiPageFactory;
 	private EditFilterHookRunner $editFilterHookRunner;
-	private SummaryFormatter $summaryFormatter;
 
 	public function __construct(
 		Article $article,
@@ -77,14 +75,14 @@ class SubmitEntityAction extends EditEntityAction {
 			$permissionManager,
 			$revisionLookup,
 			$anonymousEditWarningBuilder,
-			$entityDiffVisualizerFactory
+			$entityDiffVisualizerFactory,
+			$summaryFormatter
 		);
 
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
 		$this->wikiPageFactory = $wikiPageFactory;
 		$this->editFilterHookRunner = $editFilterHookRunner;
-		$this->summaryFormatter = $summaryFormatter;
 	}
 
 	public function getName() {
@@ -226,25 +224,6 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		return Status::newGood( $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) ) );
-	}
-
-	/**
-	 * @param string $actionName
-	 * @param RevisionRecord $revision
-	 * @param string $userSummary
-	 *
-	 * @return string
-	 */
-	private function makeSummary( $actionName, RevisionRecord $revision, $userSummary ) {
-		$revUser = $revision->getUser();
-		$revUserText = $revUser ? $revUser->getName() : '';
-
-		$summary = new Summary();
-		$summary->setAction( $actionName );
-		$summary->addAutoCommentArgs( $revision->getId(), $revUserText );
-		$summary->setUserSummary( $userSummary );
-
-		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
 	public function execute() {
