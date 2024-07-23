@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiPageSet;
 use ApiQuery;
+use ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
@@ -377,6 +378,16 @@ class EntityTermsTest extends MediaWikiLangTestCase {
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'pages', $result['query'] );
 		$this->assertEquals( $expected, $result['query']['pages'] );
+	}
+
+	public function testEntityTerms_emptyTypes(): void {
+		$this->expectException( ApiUsageException::class );
+		$this->callApiModule( [
+			'action' => 'query',
+			'prop' => 'entityterms',
+			'titles' => 'Q11',
+			'wbetterms' => '', // should normally be e.g. 'label' or 'label|description'
+		], [ 11 => [] ] );
 	}
 
 }

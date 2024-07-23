@@ -84,6 +84,11 @@ class EntityTerms extends ApiQueryBase {
 		$termTypes = $params['terms'] ?? TermIndexEntry::$validTermTypes;
 		$languageCode = $params['language'] === 'uselang' ? $this->getLanguage()->getCode() : $params['language'];
 
+		if ( $termTypes === [] ) {
+			$encParamName = $this->encodeParamName( 'terms' );
+			$this->dieWithError( [ 'apierror-paramempty', $encParamName ], "paramempty_$encParamName" );
+		}
+
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 

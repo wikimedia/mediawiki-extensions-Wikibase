@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use ApiMain;
 use ApiPageSet;
 use ApiQuery;
+use ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
@@ -378,6 +379,16 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'pages', $result['query'] );
 		$this->assertEquals( $expected, $result['query']['pages'] );
+	}
+
+	public function testPageTerms_emptyTypes(): void {
+		$this->expectException( ApiUsageException::class );
+		$this->callApiModule( [
+			'action' => 'query',
+			'prop' => 'pageterms',
+			'titles' => 'No11',
+			'wbptterms' => '', // should normally be e.g. 'label' or 'label|description'
+		], [ 11 => [] ] );
 	}
 
 }
