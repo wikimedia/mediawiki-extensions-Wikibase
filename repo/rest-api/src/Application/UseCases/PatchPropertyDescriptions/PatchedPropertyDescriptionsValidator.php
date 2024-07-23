@@ -93,15 +93,7 @@ class PatchedPropertyDescriptionsValidator {
 			case PropertyDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE];
 				$maxDescriptionLength = $context[PropertyDescriptionValidator::CONTEXT_LIMIT];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_VALUE => $context[ PropertyDescriptionValidator::CONTEXT_DESCRIPTION ],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ PropertyDescriptionValidator::CONTEXT_LIMIT ],
-					]
-				);
+				throw UseCaseError::newValueTooLong( "/$languageCode", $maxDescriptionLength, true );
 			case PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 				$language = $context[ PropertyDescriptionValidator::CONTEXT_LANGUAGE ];
 				throw new UseCaseError(

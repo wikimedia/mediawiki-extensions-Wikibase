@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
@@ -85,15 +86,9 @@ class PatchedAliasesValidator {
 				switch ( $validationError->getCode() ) {
 					case AliasesInLanguageValidator::CODE_TOO_LONG:
 						$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-						throw new UseCaseError(
-							UseCaseError::PATCHED_ALIAS_TOO_LONG,
-							"Changed alias for '{$aliasGroup->getLanguageCode()}' must not be more than $limit characters long",
-							[
-								UseCaseError::CONTEXT_LANGUAGE => $aliasGroup->getLanguageCode(),
-								UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
-								UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
-							]
-						);
+						$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+						$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasGroup->getAliases() );
+						throw UseCaseError::newValueTooLong( "/{$aliasGroup->getLanguageCode()}/$aliasIndex", $limit, true );
 					default:
 						$value = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 						$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];

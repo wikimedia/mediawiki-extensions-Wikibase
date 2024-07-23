@@ -94,15 +94,7 @@ class PatchedLabelsValidator {
 			case ItemLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_TOO_LONG,
-					"Changed label for '{$language}' must not be more than $maxLabelLength characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_VALUE => $context[ItemLabelValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ItemLabelValidator::CONTEXT_LIMIT],
-					]
-				);
+				throw UseCaseError::newValueTooLong( "/$language", $maxLabelLength, true );
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
 				$languageCode = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 				$label = $context[ItemLabelValidator::CONTEXT_LABEL];

@@ -293,22 +293,14 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongDescription = 'x'.repeat( maxLength + 1 );
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
-				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
+				[ makeReplaceExistingDescriptionPatchOperation( 'x'.repeat( maxLength + 1 ) ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patched-description-too-long',
-				{ value: tooLongDescription, 'character-limit': maxLength, language: 'en' }
-			);
-			assert.strictEqual(
-				response.body.message,
-				`Changed description for 'en' must not be more than ${maxLength} characters long`
-			);
+			const context = { path: '/en', limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'invalid language code', async () => {

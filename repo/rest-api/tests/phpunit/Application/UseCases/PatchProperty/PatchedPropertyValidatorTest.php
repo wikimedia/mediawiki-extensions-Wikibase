@@ -444,15 +444,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					PropertyLabelValidator::CONTEXT_LIMIT => $maxLength,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_LABEL_TOO_LONG,
-				"Changed label for 'en' must not be more than $maxLength characters long",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $longLabel,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
-				]
-			),
+			UseCaseError::newValueTooLong( '/labels/en', $maxLength, true ),
 		];
 
 		$labelOfInvalidType = [ 'invalid', 'label', 'type' ];
@@ -590,15 +582,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					PropertyDescriptionValidator::CONTEXT_LIMIT => $maxLength,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-				"Changed description for 'en' must not be more than $maxLength characters long",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $longDescription,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
-				]
-			),
+			UseCaseError::newValueTooLong( '/descriptions/en', $maxLength, true ),
 		];
 
 		$descriptionOfInvalidType = [ 'invalid', 'description', 'type' ];
@@ -731,15 +715,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		yield 'alias too long' => [
 			$aliasesInLanguageValidator,
 			[ 'en' => [ $tooLongAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_TOO_LONG,
-				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
-				]
-			),
+			UseCaseError::newValueTooLong( '/aliases/en/0', self::LIMIT, true ),
 		];
 
 		$invalidAlias = "tab\t tab\t tab";

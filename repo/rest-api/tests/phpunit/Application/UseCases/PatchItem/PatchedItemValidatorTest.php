@@ -402,15 +402,7 @@ class PatchedItemValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LIMIT => $maxLength,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_LABEL_TOO_LONG,
-				"Changed label for 'en' must not be more than $maxLength characters long",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $longLabel,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
-				]
-			),
+			UseCaseError::newValueTooLong( '/labels/en', $maxLength, true ),
 		];
 
 		$labelOfInvalidType = [ 'invalid', 'label', 'type' ];
@@ -536,27 +528,18 @@ class PatchedItemValidatorTest extends TestCase {
 			),
 		];
 
-		$longDescription = str_repeat( 'a', 51 );
 		$maxLength = 50;
 		yield 'description too long' => [
 			$mockContentsValidator,
 			new ValidationError(
 				ItemDescriptionValidator::CODE_TOO_LONG,
 				[
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $longDescription,
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => str_repeat( 'a', 51 ),
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
 					ItemDescriptionValidator::CONTEXT_LIMIT => $maxLength,
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-				"Changed description for 'en' must not be more than $maxLength characters long",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $longDescription,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => $maxLength,
-				]
-			),
+			UseCaseError::newValueTooLong( '/descriptions/en', $maxLength, true ),
 		];
 
 		$descriptionOfInvalidType = [ 'invalid', 'description', 'type' ];
@@ -707,15 +690,7 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'alias too long' => [
 			$aliasesInLanguageValidator,
 			[ 'en' => [ $tooLongAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_TOO_LONG,
-				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
-				]
-			),
+			UseCaseError::newValueTooLong( '/aliases/en/0', self::LIMIT, true ),
 		];
 
 		$invalidAlias = "tab\t tab\t tab";

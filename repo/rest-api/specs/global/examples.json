@@ -33,6 +33,16 @@
 			}
 		}
 	},
+	"PatchResultValueTooLongExample": {
+		"value": {
+			"code": "patch-result-value-too-long",
+			"message": "Patched value is too long",
+			"context": {
+				"path": "{json_pointer_to_patched_element}",
+				"limit": "{configured_limit}"
+			}
+		}
+	},
 	"InvalidQueryParameterExample": {
 		"value": {
 			"code": "invalid-query-parameter",
@@ -365,17 +375,6 @@
 			}
 		}
 	},
-	"PatchedLabelTooLongExample": {
-		"value": {
-			"code": "patched-label-too-long",
-			"message": "Changed label for '{language_code}' must not be more than {limit} characters long",
-			"context": {
-				"language": "{language_code}",
-				"value": "{label}",
-				"limit": "{limit}"
-			}
-		}
-	},
 	"PatchedLabelInvalidExample": {
 		"value": {
 			"code": "patched-label-invalid",
@@ -401,17 +400,6 @@
 			"message": "Changed description for '{language_code}' cannot be empty",
 			"context": {
 				"language": "{language_code}"
-			}
-		}
-	},
-	"PatchedDescriptionTooLongExample": {
-		"value": {
-			"code": "patched-description-too-long",
-			"message": "Changed description for '{language_code}' must not be more than {limit} characters long",
-			"context": {
-				"language": "{language_code}",
-				"value": "{description}",
-				"limit": "{limit}"
 			}
 		}
 	},
@@ -577,17 +565,6 @@
 			"message": "Changed alias for '{language_code}' cannot be empty",
 			"context": {
 				"language": "{language_code}"
-			}
-		}
-	},
-	"PatchedAliasTooLongExample": {
-		"value": {
-			"code": "patched-alias-too-long",
-			"message": "Changed alias for '{language_code}' must not be more than {limit} characters long",
-			"context": {
-				"language": "{language_code}",
-				"value": "{alias}",
-				"limit": "{limit}"
 			}
 		}
 	},

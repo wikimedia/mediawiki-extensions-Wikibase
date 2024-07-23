@@ -84,18 +84,9 @@ class PatchedAliasesValidatorTest extends TestCase {
 			),
 		];
 
-		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
 		yield 'alias too long' => [
-			[ 'en' => [ $tooLongAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_TOO_LONG,
-				"Changed alias for 'en' must not be more than " . self::LIMIT . ' characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $tooLongAlias,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
-				]
-			),
+			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
+			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
 		];
 
 		$invalidAlias = "tab\t tab\t tab";
