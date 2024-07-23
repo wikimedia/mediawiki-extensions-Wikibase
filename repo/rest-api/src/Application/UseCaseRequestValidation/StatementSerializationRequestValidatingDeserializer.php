@@ -29,11 +29,7 @@ class StatementSerializationRequestValidatingDeserializer {
 				case StatementValidator::CODE_INVALID_FIELD:
 					throw UseCaseError::newInvalidValue( '/statement/' . $context[StatementValidator::CONTEXT_FIELD] );
 				case StatementValidator::CODE_MISSING_FIELD:
-					throw new UseCaseError(
-						UseCaseError::STATEMENT_DATA_MISSING_FIELD,
-						"Mandatory field missing in the statement data: {$context[StatementValidator::CONTEXT_FIELD]}",
-						[ UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD] ]
-					);
+					throw UseCaseError::newMissingField( '/statement', $context[StatementValidator::CONTEXT_FIELD] );
 				case StatementValidator::CODE_INVALID_FIELD_TYPE:
 					throw UseCaseError::newInvalidValue( '/statement' );
 				default:

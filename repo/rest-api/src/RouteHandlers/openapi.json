@@ -4184,9 +4184,6 @@
               "duplicate-alias": {
                 "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
-              },
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
@@ -4436,8 +4433,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               }
             }
           }
@@ -4471,8 +4468,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               }
             }
           }
@@ -4506,8 +4503,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -4547,8 +4544,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -4588,8 +4585,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "statement-data-missing-field": {
-                "$ref": "#/components/examples/StatementDataMissingFieldExample"
+              "missing-field": {
+                "$ref": "#/components/examples/MissingFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -7327,15 +7324,6 @@
           "context": {
             "badge": "{item_id}",
             "site": "{site_id}"
-          }
-        }
-      },
-      "StatementDataMissingFieldExample": {
-        "value": {
-          "code": "statement-data-missing-field",
-          "message": "Mandatory field missing in the statement data: {field}",
-          "context": {
-            "path": "{field}"
           }
         }
       },

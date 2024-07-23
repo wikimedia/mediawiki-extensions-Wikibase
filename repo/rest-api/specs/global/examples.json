@@ -88,15 +88,6 @@
 			}
 		}
 	},
-	"StatementDataMissingFieldExample": {
-		"value": {
-			"code": "statement-data-missing-field",
-			"message": "Mandatory field missing in the statement data: {field}",
-			"context": {
-				"path": "{field}"
-			}
-		}
-	},
 	"CannotModifyReadOnlyValue": {
 		"value": {
 			"code": "cannot-modify-read-only-value",

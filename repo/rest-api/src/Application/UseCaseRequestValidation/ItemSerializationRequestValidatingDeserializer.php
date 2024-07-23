@@ -207,13 +207,9 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw UseCaseError::newInvalidValue( '/item/statements/' . $context[StatementsValidator::CONTEXT_PATH] );
 			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
-				throw new UseCaseError(
-					UseCaseError::STATEMENT_DATA_MISSING_FIELD,
-					"Mandatory field missing in the statement data: {$context[StatementsValidator::CONTEXT_FIELD]}",
-					[
-						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
-						UseCaseError::CONTEXT_FIELD => $context[StatementsValidator::CONTEXT_FIELD],
-					]
+				throw UseCaseError::newMissingField(
+					'/item/statements/' . $context[StatementsValidator::CONTEXT_PATH],
+					$context[StatementsValidator::CONTEXT_FIELD]
 				);
 			case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 				throw new UseCaseError(

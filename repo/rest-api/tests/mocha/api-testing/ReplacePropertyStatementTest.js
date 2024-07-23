@@ -345,9 +345,7 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-value' );
-					assert.deepEqual( response.body.context, { path: `/statement/${invalidField}` } );
+					assertValidError( response, 400, 'invalid-value', { path: `/statement/${invalidField}` } );
 					assert.include( response.body.message, `statement/${invalidField}` );
 				} );
 
@@ -376,10 +374,8 @@ describe( 'PUT statement tests', () => {
 						statementSerialization
 					).assertInvalidRequest().makeRequest();
 
-					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'statement-data-missing-field' );
-					assert.deepEqual( response.body.context, { path: missingField } );
-					assert.include( response.body.message, missingField );
+					assertValidError( response, 400, 'missing-field', { path: '/statement', field: missingField } );
+					assert.strictEqual( response.body.message, 'Required field missing' );
 				} );
 
 			} );
