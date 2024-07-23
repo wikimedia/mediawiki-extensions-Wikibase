@@ -2933,7 +2933,7 @@
             "type": "string",
             "enum": [
               "type",
-              "data-type",
+              "data_type",
               "labels",
               "descriptions",
               "aliases",
@@ -6261,7 +6261,7 @@
                   "required": [
                     "id",
                     "type",
-                    "data-type",
+                    "data_type",
                     "labels",
                     "descriptions",
                     "aliases",
@@ -6511,7 +6511,7 @@
                         "property": {
                           "required": [
                             "id",
-                            "data-type"
+                            "data_type"
                           ]
                         },
                         "value": {
@@ -6747,7 +6747,7 @@
                   "rank": "normal",
                   "property": {
                     "id": "P370",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "content": "I am a goat",
@@ -6763,7 +6763,7 @@
                   "rank": "normal",
                   "property": {
                     "id": "P92",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "content": "I am a goat",
@@ -6817,7 +6817,7 @@
                   "rank": "normal",
                   "property": {
                     "id": "P370",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "content": "I am a goat",
@@ -6833,7 +6833,7 @@
                   "rank": "normal",
                   "property": {
                     "id": "P92",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "content": "I am a goat",
@@ -6963,7 +6963,7 @@
                   "references": [],
                   "property": {
                     "id": "P92",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "type": "value",
@@ -6986,7 +6986,7 @@
             "type": "string",
             "example": "property"
           },
-          "data-type": {
+          "data_type": {
             "type": "string",
             "example": "wikibase-item"
           },
@@ -7051,7 +7051,7 @@
                   "references": [],
                   "property": {
                     "id": "P92",
-                    "data-type": "string"
+                    "data_type": "string"
                   },
                   "value": {
                     "type": "value",
@@ -7182,7 +7182,7 @@
                 "type": "string",
                 "example": "P92"
               },
-              "data-type": {
+              "data_type": {
                 "description": "The data type of the Property",
                 "type": "string",
                 "readOnly": true,
@@ -7946,7 +7946,7 @@
           "rank": "normal",
           "property": {
             "id": "P31",
-            "data-type": "wikibase-item"
+            "data_type": "wikibase-item"
           },
           "value": {
             "type": "value",
@@ -7962,7 +7962,7 @@
           "rank": "normal",
           "property": {
             "id": "P31",
-            "data-type": "wikibase-item"
+            "data_type": "wikibase-item"
           },
           "value": {
             "type": "value",

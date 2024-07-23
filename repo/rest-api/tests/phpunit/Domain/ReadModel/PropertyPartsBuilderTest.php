@@ -110,7 +110,7 @@ class PropertyPartsBuilderTest extends TestCase {
 	}
 
 	public function nonRequiredFields(): Generator {
-		yield 'data-type' => [
+		yield 'data_type' => [
 			PropertyParts::FIELD_DATA_TYPE,
 			'setDataType',
 			'wikibase-item',

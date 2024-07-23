@@ -705,7 +705,7 @@
 			"rank": "normal",
 			"property": {
 				"id": "P31",
-				"data-type": "wikibase-item"
+				"data_type": "wikibase-item"
 			},
 			"value": {
 				"type": "value",
@@ -721,7 +721,7 @@
 			"rank": "normal",
 			"property": {
 				"id": "P31",
-				"data-type": "wikibase-item"
+				"data_type": "wikibase-item"
 			},
 			"value": {
 				"type": "value",

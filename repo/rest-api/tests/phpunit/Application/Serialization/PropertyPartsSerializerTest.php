@@ -94,7 +94,7 @@ class PropertyPartsSerializerTest extends TestCase {
 			[
 				'id' => $propertyId,
 				'type' => PropertyParts::TYPE,
-				'data-type' => $dataType,
+				'data_type' => $dataType,
 				'labels' => $expectedLabelsSerialization,
 				'descriptions' => $expectedDescriptionsSerialization,
 				'aliases' => $expectedAliasesSerialization,
@@ -146,7 +146,7 @@ class PropertyPartsSerializerTest extends TestCase {
 				->setAliases( new Aliases() )
 				->setStatements( new StatementList() )
 				->build(),
-			[ 'id', 'type', 'data-type', 'labels', 'descriptions', 'aliases', 'statements' ],
+			[ 'id', 'type', 'data_type', 'labels', 'descriptions', 'aliases', 'statements' ],
 		];
 	}
 

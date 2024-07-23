@@ -108,7 +108,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[
 				'id' => 'P123',
 				'type' => 'property',
-				'data-type' => 'string',
+				'data_type' => 'string',
 				'labels' => [ 'en' => 'english-label' ],
 			],
 			new Property(
@@ -123,7 +123,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[
 				'id' => 'P123',
 				'type' => 'property',
-				'data-type' => 'string',
+				'data_type' => 'string',
 				'labels' => [ 'en' => 'english-label' ],
 				'descriptions' => [ 'en' => 'english-description' ],
 				'aliases' => [ 'en' => [ 'english-alias' ] ],
@@ -165,7 +165,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$patchedProperty = [
 			'type' => 'property',
-			'data-type' => 'string',
+			'data_type' => 'string',
 			'labels' => [ 'en' => 'english-label' ],
 		];
 
@@ -193,7 +193,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$patchedProperty = [
 			'id' => "$propertyId",
 			'type' => 'property',
-			'data-type' => 'string',
+			'data_type' => 'string',
 			'labels' => [ 'en' => 'potato', 'de' => 'Kartoffel', 'ar' => 'بطاطا' ], // only 'en' and 'ar' labels have been patched
 		];
 
@@ -246,7 +246,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$patchedProperty = [
 			'id' => "$propertyId",
 			'type' => 'property',
-			'data-type' => 'string',
+			'data_type' => 'string',
 			'descriptions' => [ 'en' => 'updated-en-description', 'de' => 'de-description', 'ar' => 'ar-description' ],
 		];
 
@@ -303,7 +303,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[
 				'id' => 'P123',
 				'type' => 'property',
-				'data-type' => 'string',
+				'data_type' => 'string',
 				'labels' => [ 'en' => 'english-label' ],
 				'foo' => 'bar',
 			],
@@ -313,7 +313,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
-		yield "missing 'data-type' field" => [
+		yield "missing 'data_type' field" => [
 			[
 				'id' => 'P123',
 				'type' => 'property',
@@ -321,8 +321,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 			],
 			new UseCaseError(
 				UseCaseError::PATCHED_PROPERTY_MISSING_FIELD,
-				"Mandatory field missing in the patched property: 'data-type'",
-				[ UseCaseError::CONTEXT_PATH => 'data-type' ]
+				"Mandatory field missing in the patched property: 'data_type'",
+				[ UseCaseError::CONTEXT_PATH => 'data_type' ]
 			),
 		];
 
@@ -330,7 +330,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[
 				'id' => 'P123',
 				'type' => 'property',
-				'data-type' => 'string',
+				'data_type' => 'string',
 				'labels' => 'illegal string',
 			],
 			new UseCaseError(
@@ -344,7 +344,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[
 				'id' => 'P12',
 				'type' => 'property',
-				'data-type' => 'string',
+				'data_type' => 'string',
 				'labels' => [ 'en' => 'english-label' ],
 			],
 			new UseCaseError(
@@ -353,11 +353,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
-		yield "Illegal modification 'data-type' field" => [
+		yield "Illegal modification 'data_type' field" => [
 			[
 				'id' => 'P123',
 				'type' => 'property',
-				'data-type' => 'wikibase-item',
+				'data_type' => 'wikibase-item',
 				'labels' => [ 'en' => 'english-label' ],
 			],
 			new UseCaseError(
@@ -381,7 +381,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		try {
 			$this->newValidator()->validateAndDeserialize(
-				array_merge( [ 'id' => 'P123', 'data-type' => 'string' ], $patchedSerialization ),
+				array_merge( [ 'id' => 'P123', 'data_type' => 'string' ], $patchedSerialization ),
 				new Property(
 					new NumericPropertyId( 'P123' ),
 					new Fingerprint(),
@@ -683,7 +683,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$propertySerialization = [
 			'id' => 'P123',
 			'type' => 'property',
-			'data-type' => 'string',
+			'data_type' => 'string',
 			'labels' => [ 'en' => 'english-label' ],
 			'aliases' => $patchedAliases,
 		];
@@ -821,7 +821,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$propertySerialization = [
 			'id' => 'P123',
 			'type' => 'property',
-			'data-type' => 'string',
+			'data_type' => 'string',
 			'labels' => [ 'en' => 'english-label' ],
 			'statements' => $patchedStatements,
 		];

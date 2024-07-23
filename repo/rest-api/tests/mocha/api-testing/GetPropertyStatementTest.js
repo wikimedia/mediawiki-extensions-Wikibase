@@ -65,7 +65,7 @@ describe( 'GET statement', () => {
 					.makeRequest();
 
 				assertValid200Response( response, testStatementWithDeletedProperty );
-				assert.equal( response.body.property[ 'data-type' ], null );
+				assert.equal( response.body.property.data_type, null );
 			} );
 
 			describe( '400 error response', () => {

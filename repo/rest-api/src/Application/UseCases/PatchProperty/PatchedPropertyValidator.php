@@ -78,23 +78,23 @@ class PatchedPropertyValidator {
 				$this->descriptionsContentsValidator->getValidatedDescriptions(),
 				$this->aliasesValidator->getValidatedAliases()
 			),
-			$serialization[ 'data-type' ],
+			$serialization[ 'data_type' ],
 			$this->statementsValidator->getValidatedStatements()
 		);
 	}
 
 	private function assertNoMissingMandatoryFields( array $serialization ): void {
-		if ( !isset( $serialization['data-type'] ) ) {
+		if ( !isset( $serialization['data_type'] ) ) {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_PROPERTY_MISSING_FIELD,
-				"Mandatory field missing in the patched property: 'data-type'",
-				[ UseCaseError::CONTEXT_PATH => 'data-type' ]
+				"Mandatory field missing in the patched property: 'data_type'",
+				[ UseCaseError::CONTEXT_PATH => 'data_type' ]
 			);
 		}
 	}
 
 	private function assertNoUnexpectedFields( array $serialization ): void {
-		$expectedFields = [ 'id', 'data-type', 'type', 'labels', 'descriptions', 'aliases', 'statements' ];
+		$expectedFields = [ 'id', 'data_type', 'type', 'labels', 'descriptions', 'aliases', 'statements' ];
 
 		foreach ( array_keys( $serialization ) as $field ) {
 			if ( !in_array( $field, $expectedFields ) ) {
@@ -107,7 +107,7 @@ class PatchedPropertyValidator {
 	}
 
 	private function assertValidFields( array $serialization ): void {
-		// 'id' and 'data-type' are not modifiable and 'type' is ignored, so we only check the expected array fields
+		// 'id' and 'data_type' are not modifiable and 'type' is ignored, so we only check the expected array fields
 		foreach ( [ 'labels', 'descriptions', 'aliases', 'statements' ] as $field ) {
 			if ( isset( $serialization[$field] ) && !is_array( $serialization[$field] ) ) {
 				$this->throwInvalidField( $field, $serialization[$field] );
@@ -123,7 +123,7 @@ class PatchedPropertyValidator {
 			);
 		}
 
-		if ( $serialization['data-type'] !== $originalProperty->getDataTypeId() ) {
+		if ( $serialization['data_type'] !== $originalProperty->getDataTypeId() ) {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE,
 				'Cannot change the datatype of the existing property'

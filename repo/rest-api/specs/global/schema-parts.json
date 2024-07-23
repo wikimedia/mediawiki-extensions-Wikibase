@@ -28,7 +28,7 @@
 						"type": "string",
 						"example": "P92"
 					},
-					"data-type": {
+					"data_type": {
 						"description": "The data type of the Property",
 						"type": "string",
 						"readOnly": true,

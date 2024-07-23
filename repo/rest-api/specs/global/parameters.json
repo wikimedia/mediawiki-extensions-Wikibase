@@ -117,7 +117,7 @@
 			"type": "array",
 			"items": {
 				"type": "string",
-				"enum": [ "type", "data-type", "labels", "descriptions", "aliases", "statements" ]
+				"enum": [ "type", "data_type", "labels", "descriptions", "aliases", "statements" ]
 			}
 		},
 		"explode": false,

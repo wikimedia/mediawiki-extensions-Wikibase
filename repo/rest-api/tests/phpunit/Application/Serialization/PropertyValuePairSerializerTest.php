@@ -53,7 +53,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-					'data-type' => 'string',
+					'data_type' => 'string',
 				],
 			],
 		];
@@ -70,7 +70,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
-					'data-type' => 'wikibase-item',
+					'data_type' => 'wikibase-item',
 				],
 			],
 		];
@@ -93,7 +93,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				],
 				'property' => [
 					'id' => self::STRING_PROPERTY_ID,
-					'data-type' => 'string',
+					'data_type' => 'string',
 				],
 			],
 		];
@@ -116,7 +116,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
-					'data-type' => 'wikibase-item',
+					'data_type' => 'wikibase-item',
 				],
 			],
 		];
@@ -145,7 +145,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				],
 				'property' => [
 					'id' => self::TIME_PROPERTY_ID,
-					'data-type' => 'time',
+					'data_type' => 'time',
 				],
 			],
 		];
@@ -173,7 +173,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				],
 				'property' => [
 					'id' => self::GLOBECOORDINATE_PROPERTY_ID,
-					'data-type' => 'globe-coordinate',
+					'data_type' => 'globe-coordinate',
 				],
 			],
 		];
@@ -190,7 +190,7 @@ class PropertyValuePairSerializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::DELETED_PROPERTY_ID,
-					'data-type' => null,
+					'data_type' => null,
 				],
 			],
 		];

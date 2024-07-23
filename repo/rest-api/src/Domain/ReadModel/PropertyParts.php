@@ -12,7 +12,7 @@ class PropertyParts {
 	public const TYPE = PropertyWriteModel::ENTITY_TYPE;
 	public const FIELD_ID = 'id';
 	public const FIELD_TYPE = 'type';
-	public const FIELD_DATA_TYPE = 'data-type';
+	public const FIELD_DATA_TYPE = 'data_type';
 	public const FIELD_LABELS = 'labels';
 	public const FIELD_DESCRIPTIONS = 'descriptions';
 	public const FIELD_ALIASES = 'aliases';

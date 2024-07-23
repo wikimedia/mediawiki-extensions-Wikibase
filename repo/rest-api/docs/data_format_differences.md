@@ -82,7 +82,7 @@ The REST API's response format for statements has been re-structured, compared t
           "hash": "884531f6c60d8fbf3030857f2abd2086337af23c",             |            "references": [],
           "datavalue": {                                                  |            "property": {
             "value": "something",                                         |              "id": "P31",
-            "type": "string"                                              |              "data-type": "string"
+            "type": "string"                                              |              "data_type": "string"
           },                                                              |            },
           "datatype": "string"                                            |            "value": {
         },                                                                |              "type": "value",
@@ -95,7 +95,7 @@ The REST API's response format for statements has been re-structured, compared t
 }                                                                         |
 ```
 * The `mainsnak` field is removed
-* A top level `property` field is introduced, holding both the `id` and previous `mainsnak.datatype` as `data-type` (note: NOT `datatype`)
+* A top level `property` field is introduced, holding both the `id` and previous `mainsnak.datatype` as `data_type` (note: NOT `datatype`)
 * A top level `value` field is added, consisting of two fields:
   * `content` (string or JSON object) – capturing the value of the statement (previously `mainsnak.datavalue.value`)
   * `type` accepting values `novalue`, `somevalue`, `value` (previously `mainsnak.snaktype`)
@@ -117,7 +117,7 @@ The qualifiers are turned from a map of lists of snak objects into a list of pro
       "P2": [                                                             |        {
           {                                                               |            "property": {
               "snaktype": "value",                                        |                "id": "P2",
-              "property": "P2",                                           |                "data-type": "string"
+              "property": "P2",                                           |                "data_type": "string"
               "hash": "7979ff19997f8cc25524b0636f577e38753559ff",         |            },
               "datavalue": {                                              |            "value": {
                   "value": "qualified",                                   |                "type": "value",
@@ -149,7 +149,7 @@ The field `references.snaks` is renamed to `references.parts` and turned from a 
               "P3": [                                                     |                {
                   {                                                       |                    "property": {
                       "snaktype": "value",                                |                        "id": "P3",
-                      "property": "P3",                                   |                        "data-type": "string"
+                      "property": "P3",                                   |                        "data_type": "string"
                       "hash": "282704dd2827b7f05a7da4861d918b9b835f6ce5", |                    },
                       "datavalue": {                                      |                    "value": {
                           "value": "referenced",                          |                        "type": "value",
