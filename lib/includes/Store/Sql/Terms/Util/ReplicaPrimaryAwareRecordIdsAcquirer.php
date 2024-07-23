@@ -245,7 +245,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 	 */
 	private function findExistingRecords( IReadableDatabase $db, array $neededRecords ): array {
 		$recordsSelectConditions = array_map( function ( $record ) use ( $db ) {
-			return $db->makeList( $record, IDatabase::LIST_AND );
+			return $db->andExpr( $record );
 		}, $neededRecords );
 
 		/*
@@ -259,7 +259,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 			->select( array_keys( $neededRecords[0] ) )
 			->select( $this->idColumn )
 			->from( $this->table )
-			->where( $db->makeList( $recordsSelectConditions, IDatabase::LIST_OR ) )
+			->where( $db->orExpr( $recordsSelectConditions ) )
 			->caller( __METHOD__ )
 			->fetchResultSet();
 

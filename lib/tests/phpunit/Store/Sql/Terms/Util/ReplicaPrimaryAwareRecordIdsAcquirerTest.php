@@ -157,10 +157,10 @@ class ReplicaPrimaryAwareRecordIdsAcquirerTest extends TestCase {
 	private function recordsToSelectConditions( array $records, IDatabase $db ) {
 		$conditionsPairs = [];
 		foreach ( $records as $record ) {
-			$conditionPairs[] = $db->makeList( $record, IDatabase::LIST_AND );
+			$conditionPairs[] = $db->andExpr( $record );
 		}
 
-		return $db->makeList( $conditionPairs, IDatabase::LIST_OR );
+		return $db->orExpr( $conditionPairs );
 	}
 
 	private function getTestSubjectInstance( $flags = 0x0 ) {

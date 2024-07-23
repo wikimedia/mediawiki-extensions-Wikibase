@@ -121,12 +121,13 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 	 */
 	private function assertOtherTitlesUntouched( array $expectedRedactedTitles ) {
 		// Count the rows that have rc_deleted set that are not in $expectedRedactedTitles
-		$where = [ 'rc_deleted > 0' ];
+		$dbr = $this->getDb();
+		$where = [ $dbr->expr( 'rc_deleted', '>', 0 ) ];
 		if ( $expectedRedactedTitles ) {
-			$where[] = 'rc_title NOT IN (' . $this->getDb()->makeList( $expectedRedactedTitles ) . ')';
+			$where[] = $dbr->expr( 'rc_title', '!=', $expectedRedactedTitles );
 		}
 
-		$rcFalsePositiveCount = $this->getDb()->newSelectQueryBuilder()
+		$rcFalsePositiveCount = $dbr->newSelectQueryBuilder()
 			->table( 'recentchanges' )
 			->where( $where )
 			->caller( __METHOD__ )->fetchRowCount();
