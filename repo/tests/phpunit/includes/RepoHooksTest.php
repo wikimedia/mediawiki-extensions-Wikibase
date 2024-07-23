@@ -68,7 +68,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		return WikibaseRepo::getSettings();
 	}
 
-	public function onBeforePageDisplayProviderMobile() {
+	public function onBeforePageDisplayProvider() {
 		$wikibaseMobileNewTermbox = [ 'wikibase.mobile', 'wikibase.termbox' ];
 		$wikibaseMobileNewTermboxStyles = [ 'wikibase.termbox.styles' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];
@@ -95,6 +95,16 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			'namespace' => $itemNamespace,
 			'useNewTermbox' => true,
 		];
+		yield 'termbox entity page with enableEntitySearchUI' => [
+			'expectedModules' => array_merge(
+				[ 'wikibase.ui.entitysearch' ],
+				$wikibaseMobileNewTermbox
+			),
+			'expectedModuleStyles' => $wikibaseMobileNewTermboxStyles,
+			'namespace' => $itemNamespace,
+			'useNewTermbox' => true,
+			'enableEntitySearchUI' => true,
+		];
 		yield 'termbox non-entity page' => [
 			'expectedModules' => [],
 			'expectedModuleStyles' => [],
@@ -110,18 +120,26 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider onBeforePageDisplayProviderMobile
+	 * @dataProvider onBeforePageDisplayProvider
 	 */
-	public function testOnBeforePageDisplayMobile(
+	public function testOnBeforePageDisplay(
 		array $expectedModules,
 		array $expectedModuleStyles,
 		int $namespace,
-		bool $useNewTermbox
+		bool $useNewTermbox,
+		bool $enableEntitySearchUI = false
 	) {
 		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getNamespace' )
 			->willReturn( $namespace );
+
+		$this->overrideMwServices(
+			null,
+			[ 'WikibaseRepo.MobileSite' => function () {
+				return true;
+			} ]
+		);
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setTitle( $title );
@@ -135,8 +153,9 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( $entityNamespaces ) );
 		$settings = WikibaseRepo::getSettings();
 		$settings['termboxEnabled'] = $useNewTermbox;
+		$settings['enableEntitySearchUI'] = $enableEntitySearchUI;
 
-		RepoHooks::onBeforePageDisplayMobile(
+		RepoHooks::onBeforePageDisplay(
 			$outputPage,
 			$skin
 		);
