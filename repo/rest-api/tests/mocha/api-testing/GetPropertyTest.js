@@ -57,7 +57,7 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 200 );
 
 		assert.strictEqual( response.body.id, testPropertyId );
-		assert.strictEqual( response.body[ 'data-type' ], testPropertyDataType );
+		assert.strictEqual( response.body.data_type, testPropertyDataType );
 		assert.deepEqual( response.body.aliases, {} ); // expect {}, not []
 		assert.deepEqual( response.body.labels, {
 			de: germanLabel,

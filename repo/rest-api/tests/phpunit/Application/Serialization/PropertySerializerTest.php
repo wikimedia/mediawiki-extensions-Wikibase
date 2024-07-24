@@ -50,7 +50,7 @@ class PropertySerializerTest extends TestCase {
 		$expectedSerialization = [
 			'id' => "$propertyId",
 			'type' => 'property',
-			'data-type' => 'wikibase-item',
+			'data_type' => 'wikibase-item',
 			'labels' => new ArrayObject( [ 'en' => 'en label' ] ),
 			'descriptions' => new ArrayObject( [ 'en' => 'en description' ] ),
 			'aliases' => new ArrayObject( [ 'en' => [ 'en alias' ] ] ),

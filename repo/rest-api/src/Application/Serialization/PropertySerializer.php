@@ -31,7 +31,7 @@ class PropertySerializer {
 		return [
 			'id' => $property->getId()->getSerialization(),
 			'type' => PropertyWriteModel::ENTITY_TYPE,
-			'data-type' => $property->getDataType(),
+			'data_type' => $property->getDataType(),
 			'labels' => $this->labelsSerializer->serialize( $property->getLabels() ),
 			'descriptions' => $this->descriptionsSerializer->serialize( $property->getDescriptions() ),
 			'aliases' => $this->aliasesSerializer->serialize( $property->getAliases() ),

@@ -247,7 +247,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid operation change property datatype', async () => {
 			const patch = [
-				{ op: 'replace', path: '/data-type', value: 'wikibase-item' }
+				{ op: 'replace', path: '/data_type', value: 'wikibase-item' }
 			];
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
@@ -258,11 +258,11 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'missing mandatory field', async () => {
-			const patch = [ { op: 'remove', path: '/data-type' } ];
+			const patch = [ { op: 'remove', path: '/data_type' } ];
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-property-missing-field', { path: 'data-type' } );
+			assertValidError( response, 422, 'patched-property-missing-field', { path: 'data_type' } );
 		} );
 
 		it( 'unexpected field', async () => {

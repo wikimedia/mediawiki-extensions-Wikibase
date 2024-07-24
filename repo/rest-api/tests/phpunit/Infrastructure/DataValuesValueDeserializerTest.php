@@ -116,37 +116,37 @@ class DataValuesValueDeserializerTest extends TestCase {
 	}
 
 	public static function provideInvalidInput(): Generator {
-		yield 'invalid content field for string data-type' => [
+		yield 'invalid content field for string data type' => [
 			'string',
 			[ 'type' => 'value', 'content' => 42 ],
 			new InvalidFieldException( 'content', 42, '/content' ),
 		];
 
-		yield 'invalid content field for url data-type' => [
+		yield 'invalid content field for url data type' => [
 			'url',
 			[ 'type' => 'value', 'content' => 'not-a-url' ],
 			new InvalidFieldException( 'content', 'not-a-url', '/content' ),
 		];
 
-		yield 'invalid content field for wikibase-item data-type' => [
+		yield 'invalid content field for wikibase-item data type' => [
 			'wikibase-item',
 			[ 'type' => 'value', 'content' => 'X123' ],
 			new InvalidFieldException( 'content', 'X123', '/content' ),
 		];
 
-		yield 'invalid content field for time data-type (string)' => [
+		yield 'invalid content field for time data type (string)' => [
 			'time',
 			[ 'type' => 'value', 'content' => '+1-00-00T00:00:00Z' ],
 			new InvalidFieldException( 'content', '+1-00-00T00:00:00Z', '/content' ),
 		];
 
-		yield 'invalid content field for time data-type (int)' => [
+		yield 'invalid content field for time data type (int)' => [
 			'time',
 			[ 'type' => 'value', 'content' => 1672628645 ],
 			new InvalidFieldException( 'content', 1672628645, '/content' ),
 		];
 
-		yield 'invalid content field for time data-type (int) with path' => [
+		yield 'invalid content field for time data type (int) with path' => [
 			'time',
 			[ 'type' => 'value', 'content' => 1672628645 ],
 			new InvalidFieldException( 'content', 1672628645, 'qualifiers/0/value/content' ),

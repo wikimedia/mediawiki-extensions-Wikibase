@@ -61,7 +61,7 @@
 							"references": [],
 							"property": {
 								"id": "P92",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"type": "value",
@@ -84,7 +84,7 @@
 				"type": "string",
 				"example": "property"
 			},
-			"data-type": {
+			"data_type": {
 				"type": "string",
 				"example": "wikibase-item"
 			},
@@ -136,7 +136,7 @@
 							"references": [ ],
 							"property": {
 								"id": "P92",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"type": "value",

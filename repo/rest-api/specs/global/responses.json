@@ -2255,7 +2255,7 @@
 							"rank": "normal",
 							"property": {
 								"id": "P370",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"content": "I am a goat",
@@ -2271,7 +2271,7 @@
 							"rank": "normal",
 							"property": {
 								"id": "P92",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"content": "I am a goat",
@@ -2323,7 +2323,7 @@
 							"rank": "normal",
 							"property": {
 								"id": "P370",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"content": "I am a goat",
@@ -2339,7 +2339,7 @@
 							"rank": "normal",
 							"property": {
 								"id": "P92",
-								"data-type": "string"
+								"data_type": "string"
 							},
 							"value": {
 								"content": "I am a goat",

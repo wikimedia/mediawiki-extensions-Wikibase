@@ -23,7 +23,7 @@
 		"allOf": [
 			{ "$ref": "./schemas.json#/Property" },
 			{
-				"required": [ "id", "type", "data-type", "labels", "descriptions", "aliases", "statements" ],
+				"required": [ "id", "type", "data_type", "labels", "descriptions", "aliases", "statements" ],
 				"properties": {
 					"statements": {
 						"additionalProperties": {
@@ -82,7 +82,7 @@
 		"required": [ "property", "value" ],
 		"properties": {
 			"property": {
-				"required": [ "id", "data-type" ]
+				"required": [ "id", "data_type" ]
 			},
 			"value": {
 				"required": [ "type" ]

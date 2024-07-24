@@ -15,7 +15,7 @@ class PropertyValuePairSerializer {
 		$serialization = [
 			'property' => [
 				'id' => $propertyValuePair->getProperty()->getId()->getSerialization(),
-				'data-type' => $propertyValuePair->getProperty()->getDataType(),
+				'data_type' => $propertyValuePair->getProperty()->getDataType(),
 			],
 			'value' => [
 				'type' => $propertyValuePair->getValue()->getType(),
