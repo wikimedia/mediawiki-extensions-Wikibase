@@ -4432,9 +4432,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
               }
             }
           }
@@ -4467,9 +4464,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
               }
             }
           }
@@ -4502,9 +4496,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
@@ -4544,9 +4535,6 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
               }
@@ -4584,9 +4572,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"

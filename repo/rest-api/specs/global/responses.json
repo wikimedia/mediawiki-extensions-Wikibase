@@ -612,8 +612,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},
@@ -633,8 +632,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},
@@ -655,7 +653,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -680,7 +677,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
@@ -705,7 +701,6 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
 					}
