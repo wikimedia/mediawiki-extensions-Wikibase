@@ -11,6 +11,7 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\IConnectionProvider;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -41,6 +42,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	private $db;
 
 	public function __construct(
+		IConnectionProvider $dbProvider,
 		NamespaceInfo $namespaceInfo,
 		TitleFactory $titleFactory,
 		ClientDomainDbFactory $db,
@@ -51,7 +53,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		$this->titleFactory = $titleFactory;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->db = $db->newLocalDb();
-		$this->setDBLoadBalancer( $this->db->loadBalancer() );
+		$this->setDatabaseProvider( $dbProvider );
 	}
 
 	/**
