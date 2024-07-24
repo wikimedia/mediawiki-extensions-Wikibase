@@ -88,6 +88,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => 422,
 		UseCaseError::PATCHED_INVALID_SITELINK_TYPE => 422,
 		UseCaseError::VALUE_TOO_LONG => 400,
+		UseCaseError::INVALID_KEY => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {

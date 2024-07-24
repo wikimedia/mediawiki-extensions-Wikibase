@@ -86,6 +86,7 @@ class UseCaseError extends UseCaseException {
 	public const STATEMENT_ID_NOT_MODIFIABLE = 'statement-id-not-modifiable';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const VALUE_TOO_LONG = 'value-too-long';
+	public const INVALID_KEY = 'invalid-key';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
@@ -96,6 +97,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_FIELD = 'field';
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_LANGUAGE = 'language';
+	public const CONTEXT_KEY = 'key';
 
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
@@ -219,6 +221,7 @@ class UseCaseError extends UseCaseException {
 		self::STATEMENT_ID_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::STATEMENT_PROPERTY_ID ],
 		self::VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
+		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 	];
 
 	/**

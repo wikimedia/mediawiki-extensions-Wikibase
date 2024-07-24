@@ -451,7 +451,8 @@
 						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
 					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
+					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" }
 				}
 			}
 		},
