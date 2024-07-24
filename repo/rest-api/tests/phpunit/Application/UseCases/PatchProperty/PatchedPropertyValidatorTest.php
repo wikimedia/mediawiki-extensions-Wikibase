@@ -871,8 +871,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 				"Statement's Property ID does not match the statement group key",
 				[
 					UseCaseError::CONTEXT_PATH => 'P321/0/property/id',
-					UseCaseError::CONTEXT_PROPERTY_ID_KEY => 'P321',
-					UseCaseError::CONTEXT_PROPERTY_ID_VALUE => 'P122',
+					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => 'P321',
+					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P122',
 				]
 			),
 		];
@@ -920,7 +920,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				'Property of a statement cannot be modified',
 				[
 					UseCaseError::CONTEXT_STATEMENT_ID => $statementWithExistingId[ 'id' ],
-					UseCaseError::STATEMENT_PROPERTY_ID => 'P123',
+					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P123',
 				]
 			),
 		];
