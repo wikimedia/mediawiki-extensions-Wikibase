@@ -78,6 +78,7 @@
 	"wikibase-pageswithbadges-badge": "Arvomerkki:",
 	"wikibase-pageswithbadges-submit": "Näytä sivut",
 	"entityusage": "Kohteen käyttö",
+	"entityusage-summary": "Tämä sivu luettelee sivut, jotka käyttävät tiettyä kohdetta (esim. Q42). Luettelo on aakkostettu laskevasti sivun ID:n mukaan, joten uusimmat sivut ovat listattuna ensimmäisenä.",
 	"wikibase-entityusage-invalid-id": "$1 ei ole kelvollinen kohdetunniste",
 	"wikibase-entityusage-legend": "Luettelo sivuista, jotka käyttävät tiettyä kohdetta",
 	"wikibase-entityusage-entity": "Kohde:",
