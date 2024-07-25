@@ -4,6 +4,7 @@
 
 * Generalized several errors into a single `cannot-modify-read-only-value` error ([T366239](https://phabricator.wikimedia.org/T366239))
 * Generalized several errors into a single `invalid-value` error ([T366181](https://phabricator.wikimedia.org/T366181))
+* Generalized several errors into a single `missing-field` error ([T366177](https://phabricator.wikimedia.org/T366177))
 * Modified the `patch-target-not-found` error ([T366911](https://phabricator.wikimedia.org/T366911))
   * Changed message to `Target not found on resource`
   * Changed `context` object - replaced `operation` and `field` fields with `path`
