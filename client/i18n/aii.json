@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"ColumbaBush"
+			"ColumbaBush",
+			"ܐܢܐ"
 		]
 	},
+	"wikibase-linkitem-input-site": "ܠܫܢܐ:",
 	"wikibase-linkitem-input-page": "ܕܦܐ:"
 }
