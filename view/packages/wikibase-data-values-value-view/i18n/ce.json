@@ -1,13 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Робин",
 			"Умар"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" маьIанан таллам хӀинца а лелош бац.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "ХIокха тайпан \"$1\" маьIанан таллам хӀинца а лелош бац.",
 	"valueview-expert-emptyvalue-empty": "йаьсса",
 	"valueview-expert-globecoordinateinput-precision": "Нийсалла:",
 	"valueview-expert-globecoordinateinput-nullprecision": "Билгалйанза",
 	"valueview-expert-globecoordinateinput-customprecision": "леррина ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "дуган минотехь",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "дуган секундашкахь",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "1/10 дуган секунд",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "1/100 дуган секунд",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "1/1000 дуган секунд",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "Григорианан",
 	"valueview-expert-timevalue-calendar-julian": "Юлианан",
 	"valueview-expert-timeinput-precision": "Нийсалла:",
 	"valueview-expert-timeinput-precision-year1g": "миллиард шо",
@@ -29,5 +39,6 @@
 	"valueview-expertextender-languageselector-label": "Мотт (тӀехь ду):",
 	"valueview-expertextender-unitsuggester-label": "Йустар (тӀехь дац):",
 	"valueview-preview-label": "гуш хира йу иштта:",
+	"valueview-preview-novalue": "нийса маьIана билгалдаьккхина дац",
 	"valueview-listrotator-manually": "куьйга дӀахӀотта де"
 }
