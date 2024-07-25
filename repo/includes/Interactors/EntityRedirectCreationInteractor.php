@@ -243,14 +243,6 @@ abstract class EntityRedirectCreationInteractor {
 			$flags |= EDIT_UPDATE;
 		}
 
-		$hookStatus = $this->editFilterHookRunner->run( $redirect, $context, $summary );
-		if ( !$hookStatus->isOK() ) {
-			throw new RedirectCreationException(
-				'EditFilterHook stopped redirect creation',
-				'cant-redirect-due-to-edit-filter-hook'
-			);
-		}
-
 		$user = $context->getUser();
 		$savedTempUser = null;
 		if ( $this->tempUserCreator->shouldAutoCreate( $user, 'edit' ) ) {
@@ -265,6 +257,14 @@ abstract class EntityRedirectCreationInteractor {
 			$context = new DerivativeContext( $context );
 			$context->setUser( $user );
 			$savedTempUser = $user;
+		}
+
+		$hookStatus = $this->editFilterHookRunner->run( $redirect, $context, $summary );
+		if ( !$hookStatus->isOK() ) {
+			throw new RedirectCreationException(
+				'EditFilterHook stopped redirect creation',
+				'cant-redirect-due-to-edit-filter-hook'
+			);
 		}
 
 		try {

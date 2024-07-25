@@ -593,13 +593,13 @@ class MediaWikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		$this->checkEditFilter( $newEntity, $summary );
+		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user, $this->context and/or $this->status
 		if ( !$this->status->isOK() ) {
 			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
 		}
 
-		$savedTempUser = $this->createTempUserIfNeeded(); // updates $this->user, $this->context and/or $this->status
+		$this->checkEditFilter( $newEntity, $summary );
 		if ( !$this->status->isOK() ) {
 			$this->status->setErrorFlags( $this->errorType );
 			return $this->status;
