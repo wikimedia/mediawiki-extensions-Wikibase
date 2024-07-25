@@ -602,10 +602,10 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				400,
-				'invalid-value',
-				{ path: `/item/sitelinks/${invalidSiteId}` }
+				'invalid-key',
+				{ path: '/item/sitelinks', key: `${invalidSiteId}` }
 			);
-			assert.include( response.body.message, `/item/sitelinks/${invalidSiteId}` );
+			assert.strictEqual( response.body.message, `Invalid key '${invalidSiteId}' in '/item/sitelinks'` );
 		} );
 
 		it( 'sitelinks not an object', async () => {

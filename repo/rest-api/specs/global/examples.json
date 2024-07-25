@@ -6,6 +6,13 @@
 			"context": { "path": "{json_pointer}" }
 		}
 	},
+	"InvalidKeyExample": {
+		"value": {
+			"code": "invalid-key",
+			"message": "Invalid key '{key}' in '{json_pointer_to_parent}'",
+			"context": { "path": "{json_pointer_to_parent}", "key": "{key}" }
+		}
+	},
 	"MissingFieldExample": {
 		"value": {
 			"code": "missing-field",

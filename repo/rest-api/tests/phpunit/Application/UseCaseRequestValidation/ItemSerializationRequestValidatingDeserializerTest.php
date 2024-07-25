@@ -517,11 +517,16 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			),
 			[ 'sitelinks' => [ [ 'title' => 'Whatever' ] ] ],
 		];
+		$invalidSiteId = 'invalid-site-id';
 		yield SiteIdValidator::CODE_INVALID_SITE_ID => [
 			new ValidationError( SiteIdValidator::CODE_INVALID_SITE_ID, [
-				SiteIdValidator::CONTEXT_SITE_ID_VALUE => 'invalid-site-id',
+				SiteIdValidator::CONTEXT_SITE_ID_VALUE => $invalidSiteId,
 			] ),
-			UseCaseError::newInvalidValue( '/item/sitelinks/invalid-site-id' ),
+			new UseCaseError(
+				UseCaseError::INVALID_KEY,
+				"Invalid key '$invalidSiteId' in '/item/sitelinks'",
+				[ UseCaseError::CONTEXT_PATH => '/item/sitelinks', UseCaseError::CONTEXT_KEY => $invalidSiteId ]
+			),
 		];
 		yield SitelinkValidator::CODE_TITLE_MISSING => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [

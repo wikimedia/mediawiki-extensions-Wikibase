@@ -238,7 +238,15 @@ class ItemSerializationRequestValidatingDeserializer {
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newInvalidValue( '/item/sitelinks' );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
-				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}" );
+				$invalidSiteId = $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE];
+				throw new UseCaseError(
+					UseCaseError::INVALID_KEY,
+					"Invalid key '$invalidSiteId' in '/item/sitelinks'",
+					[
+						UseCaseError::CONTEXT_PATH => '/item/sitelinks',
+						UseCaseError::CONTEXT_KEY => $invalidSiteId,
+					]
+				);
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw UseCaseError::newMissingField( "/item/sitelinks/{$siteId()}", 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
