@@ -219,13 +219,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-language-code',
-				{ path: 'labels', language: 'xyz' }
-			);
-			assert.include( response.body.message, 'xyz' );
+			assertValidError( response, 400, 'invalid-key', { path: '/item/labels', key: 'xyz' } );
+			assert.strictEqual( response.body.message, "Invalid key 'xyz' in '/item/labels'" );
 		} );
 
 		it( 'invalid description language code', async () => {
@@ -233,13 +228,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-language-code',
-				{ path: 'descriptions', language: 'xyz' }
-			);
-			assert.include( response.body.message, 'xyz' );
+			assertValidError( response, 400, 'invalid-key', { path: '/item/descriptions', key: 'xyz' } );
+			assert.strictEqual( response.body.message, "Invalid key 'xyz' in '/item/descriptions'" );
 		} );
 
 		it( 'invalid label', async () => {
@@ -382,13 +372,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-language-code',
-				{ path: 'alias', language: 'xyz' }
-			);
-			assert.include( response.body.message, 'xyz' );
+			assertValidError( response, 400, 'invalid-key', { path: '/item/aliases', key: 'xyz' } );
+			assert.strictEqual( response.body.message, "Invalid key 'xyz' in '/item/aliases'" );
 		} );
 
 		it( 'alias is empty', async () => {
@@ -599,12 +584,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-key',
-				{ path: '/item/sitelinks', key: `${invalidSiteId}` }
-			);
+			assertValidError( response, 400, 'invalid-key', { path: '/item/sitelinks', key: `${invalidSiteId}` } );
 			assert.strictEqual( response.body.message, `Invalid key '${invalidSiteId}' in '/item/sitelinks'` );
 		} );
 

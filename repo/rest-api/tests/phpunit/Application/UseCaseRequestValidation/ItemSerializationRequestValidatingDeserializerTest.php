@@ -163,18 +163,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_LABELS,
+					LanguageCodeValidator::CONTEXT_PATH => 'labels',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_LANGUAGE_CODE,
-				'Not a valid language code: e2',
-				[
-					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_LABELS,
-					UseCaseError::CONTEXT_LANGUAGE => 'e2',
-				]
-			),
+			UseCaseError::newInvalidKey( '/item/labels', 'e2' ),
 		];
 
 		yield 'same value for label and description' => [
@@ -273,18 +266,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => ItemValidator::CONTEXT_DESCRIPTIONS,
+					LanguageCodeValidator::CONTEXT_PATH => 'descriptions',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_LANGUAGE_CODE,
-				'Not a valid language code: e2',
-				[
-					UseCaseError::CONTEXT_PATH => ItemValidator::CONTEXT_DESCRIPTIONS,
-					UseCaseError::CONTEXT_LANGUAGE => 'e2',
-				]
-			),
+			UseCaseError::newInvalidKey( '/item/descriptions', 'e2' ),
 		];
 
 		yield 'same value for description and label ' => [
@@ -418,18 +404,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_PATH => AliasesValidator::CONTEXT_ALIAS,
+					LanguageCodeValidator::CONTEXT_PATH => 'aliases',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_LANGUAGE_CODE,
-				'Not a valid language code: e2',
-				[
-					UseCaseError::CONTEXT_PATH => AliasesValidator::CONTEXT_ALIAS,
-					UseCaseError::CONTEXT_LANGUAGE => 'e2',
-				]
-			),
+			UseCaseError::newInvalidKey( '/item/aliases', 'e2' ),
 		];
 	}
 
@@ -522,11 +501,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SiteIdValidator::CODE_INVALID_SITE_ID, [
 				SiteIdValidator::CONTEXT_SITE_ID_VALUE => $invalidSiteId,
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_KEY,
-				"Invalid key '$invalidSiteId' in '/item/sitelinks'",
-				[ UseCaseError::CONTEXT_PATH => '/item/sitelinks', UseCaseError::CONTEXT_KEY => $invalidSiteId ]
-			),
+			UseCaseError::newInvalidKey( '/item/sitelinks', $invalidSiteId ),
 		];
 		yield SitelinkValidator::CODE_TITLE_MISSING => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [
