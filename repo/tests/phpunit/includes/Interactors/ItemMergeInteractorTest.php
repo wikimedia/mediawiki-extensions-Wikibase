@@ -53,8 +53,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	/** @var string User name that gets blocked by the permission checker. */
 	private const USER_NAME_WITHOUT_PERMISSION = 'UserWithoutPermission';
 
-	/** @var string User name that gets blocked by the edit filter. */
-	private const USER_NAME_WITH_EDIT_FILTER = 'UserWithEditFilter';
+	/** @var string User group that gets blocked by the edit filter. */
+	private const USER_GROUP_WITH_EDIT_FILTER = 'UserWithEditFilter';
 
 	private ?MockRepository $mockRepository = null;
 	private ?EntityModificationTestHelper $testHelper = null;
@@ -86,7 +86,8 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			->getMock();
 		$mock->method( 'run' )
 			->willReturnCallback( function ( $new, IContextSource $context, string $summary ) {
-				if ( $context->getUser()->getName() === self::USER_NAME_WITH_EDIT_FILTER ) {
+				$groups = $this->getServiceContainer()->getUserGroupManager()->getUserGroups( $context->getUser() );
+				if ( in_array( self::USER_GROUP_WITH_EDIT_FILTER, $groups, true ) ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
@@ -492,8 +493,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testMergeItems_editFilter(): void {
-		$user = $this->getServiceContainer()->getUserFactory()
-			->newFromName( self::USER_NAME_WITH_EDIT_FILTER );
+		$user = $this->getTestUser( self::USER_GROUP_WITH_EDIT_FILTER )->getUser();
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 		$interactor = $this->newInteractor();
