@@ -217,22 +217,13 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid statement field', async () => {
-			const invalidField = 'rank';
-			const invalidValue = 'not-a-valid-rank';
-			const invalidStatement = { ...testStatement };
-			invalidStatement[ invalidField ] = invalidValue;
-
+			const invalidStatement = { property: { id: [ 'P1' ] }, value: { type: 'novalue' } };
 			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-value',
-				{ path: `/statement/${invalidField}` }
-			);
-			assert.include( response.body.message, invalidField );
+			assertValidError( response, 400, 'invalid-value', { path: '/statement/property/id' } );
+			assert.include( response.body.message, '/statement/property/id' );
 		} );
 
 		it( 'missing top-level field', async () => {
@@ -248,15 +239,14 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'missing statement field', async () => {
-			const missingField = 'value';
-			const invalidStatement = { ...testStatement };
-			delete invalidStatement[ missingField ];
+			const invalidStatement = structuredClone( testStatement );
+			delete invalidStatement.property.id;
 
 			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, invalidStatement )
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'missing-field', { path: '/statement', field: missingField } );
+			assertValidError( response, 400, 'missing-field', { path: '/statement/property', field: 'id' } );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 

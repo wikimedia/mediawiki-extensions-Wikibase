@@ -282,21 +282,13 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid statement field', async () => {
-					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-					const invalidField = 'rank';
-					const invalidValue = 'not-a-valid-rank';
-					statement[ invalidField ] = invalidValue;
+					const invalidStatement = { property: { id: [ 'P1' ] }, value: { type: 'novalue' } };
 
-					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
+					const response = await newReplaceRequestBuilder( testItemId, testStatementId, invalidStatement )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError(
-						response,
-						400,
-						'invalid-value',
-						{ path: `/statement/${invalidField}` }
-					);
-					assert.include( response.body.message, `statement/${invalidField}` );
+					assertValidError( response, 400, 'invalid-value', { path: '/statement/property/id' } );
+					assert.include( response.body.message, 'statement/property/id' );
 				} );
 
 				it( 'missing top-level field', async () => {
@@ -312,14 +304,13 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'missing statement field', async () => {
-					const missingField = 'value';
 					const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
-					delete statement[ missingField ];
+					delete statement.property.id;
 
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
 						.assertInvalidRequest().makeRequest();
 
-					assertValidError( response, 400, 'missing-field', { path: '/statement', field: missingField } );
+					assertValidError( response, 400, 'missing-field', { path: '/statement/property', field: 'id' } );
 					assert.strictEqual( response.body.message, 'Required field missing' );
 				} );
 

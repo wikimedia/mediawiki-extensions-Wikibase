@@ -147,12 +147,14 @@ class StatementDeserializerTest extends TestCase {
 
 	public static function invalidSerializationProvider(): Generator {
 		yield 'statement is not associative array' => [
-			new InvalidFieldTypeException( '' ),
+			new InvalidFieldTypeException( '/statements/P789' ),
 			[
 				[ 'id' => 'P123' ],
 				[ 'type' => 'somevalue' ],
 			],
+			'/statements/P789',
 		];
+
 		yield 'invalid id field type' => [
 			new InvalidFieldException( 'id', [ 'invalid' ], '/id' ),
 			[
@@ -163,12 +165,13 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid rank' => [
-			new InvalidFieldException( 'rank', 'bad', '/rank' ),
+			new InvalidFieldException( 'rank', 'bad', '/statements/P789/rank' ),
 			[
 				'rank' => 'bad',
 				'property' => [ 'id' => 'P123' ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/statements/P789',
 		];
 
 		yield 'invalid qualifiers field type' => [
@@ -180,8 +183,8 @@ class StatementDeserializerTest extends TestCase {
 			],
 		];
 
-		yield 'invalid qualifier item type' => [
-			new InvalidFieldException( 'qualifiers', [ 'invalid' ], '/qualifiers' ),
+		yield 'invalid qualifier type' => [
+			new InvalidFieldException( '0', 'invalid', '/qualifiers/0' ),
 			[
 				'qualifiers' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
@@ -199,7 +202,7 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid reference item type' => [
-			new InvalidFieldException( 'references', [ 'invalid' ], '/references' ),
+			new InvalidFieldException( '0', 'invalid', '/references/0' ),
 			[
 				'references' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
@@ -208,13 +211,13 @@ class StatementDeserializerTest extends TestCase {
 		];
 
 		yield 'invalid reference item type with path provided' => [
-			new InvalidFieldException( 'references', [ 'invalid' ], 'abc/references' ),
+			new InvalidFieldException( '0', 'invalid', '/abc/references/0' ),
 			[
 				'references' => [ 'invalid' ],
 				'property' => [ 'id' => 'P123' ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
-			'abc',
+			'/abc',
 		];
 	}
 

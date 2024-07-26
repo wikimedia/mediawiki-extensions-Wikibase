@@ -22,22 +22,28 @@ class ReferenceDeserializer {
 	 * @throws InvalidFieldException
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Reference {
+		if ( count( $serialization ) && array_is_list( $serialization ) ) {
+			throw new InvalidFieldException( '', $serialization, $basePath );
+		}
+
 		if ( !array_key_exists( 'parts', $serialization ) ) {
 			throw new MissingFieldException( 'parts', $basePath );
 		}
-		if ( !is_array( $serialization['parts'] ) || !$this->isArrayOfArrays( $serialization['parts'] ) ) {
+
+		if ( !is_array( $serialization['parts'] ) || !array_is_list( $serialization['parts'] ) ) {
 			throw new InvalidFieldException( 'parts', $serialization['parts'], "$basePath/parts" );
 		}
 
-		return new Reference( array_map(
-			fn( $i, array $part ) => $this->propertyValuePairDeserializer->deserialize( $part, "$basePath/parts/$i" ),
-			array_keys( $serialization['parts'] ),
-			$serialization['parts'],
-		) );
-	}
+		$parts = [];
+		foreach ( $serialization['parts'] as $index => $part ) {
+			if ( !is_array( $part ) ) {
+				throw new InvalidFieldException( "$index", $part, "$basePath/parts/$index" );
+			}
 
-	private function isArrayOfArrays( array $list ): bool {
-		return array_reduce( $list, fn( bool $isValid, $item ) => $isValid && is_array( $item ), true );
+			$parts[] = $this->propertyValuePairDeserializer->deserialize( $part, "$basePath/parts/$index" );
+		}
+
+		return new Reference( $parts );
 	}
 
 }

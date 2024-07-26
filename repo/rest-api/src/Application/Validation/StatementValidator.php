@@ -19,6 +19,7 @@ class StatementValidator {
 	public const CODE_INVALID_FIELD_TYPE = 'statement-validator-code-invalid-statement-type';
 
 	public const CONTEXT_FIELD = 'statement-validator-context-field';
+	public const CONTEXT_PATH = 'statement-validator-context-path';
 	public const CONTEXT_VALUE = 'statement-validator-context-value';
 
 	private StatementDeserializer $deserializer;
@@ -29,17 +30,21 @@ class StatementValidator {
 		$this->deserializer = $deserializer;
 	}
 
-	public function validate( array $statementSerialization ): ?ValidationError {
+	public function validate( array $statementSerialization, string $basePath = '' ): ?ValidationError {
 		try {
-			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization );
+			$this->deserializedStatement = $this->deserializer->deserialize( $statementSerialization, $basePath );
 		} catch ( MissingFieldException $e ) {
-			return new ValidationError( self::CODE_MISSING_FIELD, [ self::CONTEXT_FIELD => $e->getField() ] );
+			return new ValidationError(
+				self::CODE_MISSING_FIELD,
+				[ self::CONTEXT_FIELD => $e->getField(), self::CONTEXT_PATH => $e->getPath() ]
+			);
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD,
 				[
 					self::CONTEXT_FIELD => $e->getField(),
 					self::CONTEXT_VALUE => $e->getValue(),
+					self::CONTEXT_PATH => $e->getPath(),
 				]
 			);
 		} catch ( InvalidFieldTypeException $e ) {

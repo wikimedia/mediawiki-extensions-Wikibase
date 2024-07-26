@@ -22,16 +22,19 @@ class StatementSerializationRequestValidatingDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( StatementSerializationRequest $request ): Statement {
-		$validationError = $this->validator->validate( $request->getStatement() );
+		$validationError = $this->validator->validate( $request->getStatement(), '/statement' );
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case StatementValidator::CODE_INVALID_FIELD:
-					throw UseCaseError::newInvalidValue( '/statement/' . $context[StatementValidator::CONTEXT_FIELD] );
+					throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 				case StatementValidator::CODE_MISSING_FIELD:
-					throw UseCaseError::newMissingField( '/statement', $context[StatementValidator::CONTEXT_FIELD] );
+					throw UseCaseError::newMissingField(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_FIELD]
+					);
 				case StatementValidator::CODE_INVALID_FIELD_TYPE:
-					throw UseCaseError::newInvalidValue( '/statement' );
+					throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_FIELD] );
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}

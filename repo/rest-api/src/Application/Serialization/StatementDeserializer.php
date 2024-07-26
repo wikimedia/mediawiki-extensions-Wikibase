@@ -43,8 +43,8 @@ class StatementDeserializer {
 		$fieldValidation = [
 			'id' => is_string( $serialization['id'] ) || $serialization['id'] === null,
 			'rank' => in_array( $serialization['rank'], StatementSerializer::RANK_LABELS, true ),
-			'qualifiers' => is_array( $serialization['qualifiers'] ) && $this->isArrayOfArrays( $serialization['qualifiers'] ),
-			'references' => is_array( $serialization['references'] ) && $this->isArrayOfArrays( $serialization['references'] ),
+			'qualifiers' => is_array( $serialization['qualifiers'] ) && array_is_list( $serialization['qualifiers'] ),
+			'references' => is_array( $serialization['references'] ) && array_is_list( $serialization['references'] ),
 		];
 		foreach ( $fieldValidation as $field => $isValid ) {
 			if ( !$isValid ) {
@@ -54,16 +54,8 @@ class StatementDeserializer {
 
 		$statement = new Statement(
 			$this->propertyValuePairDeserializer->deserialize( $serialization, $basePath ),
-			new SnakList( array_map(
-				fn( $i, array $q ) => $this->propertyValuePairDeserializer->deserialize( $q, "$basePath/qualifiers/$i" ),
-				array_keys( $serialization['qualifiers'] ),
-				$serialization['qualifiers']
-			) ),
-			new ReferenceList( array_map(
-				fn( $i, array $r ) => $this->referenceDeserializer->deserialize( $r, "$basePath/references/$i" ),
-				array_keys( $serialization['references'] ),
-				$serialization['references']
-			) ),
+			$this->deserializeQualifiers( $serialization, $basePath ),
+			$this->deserializeReferences( $serialization, $basePath ),
 			// @phan-suppress-next-line PhanTypeMismatchArgument - 'id' has been checked that it is ?string above
 			$serialization['id']
 		);
@@ -72,8 +64,28 @@ class StatementDeserializer {
 		return $statement;
 	}
 
-	private function isArrayOfArrays( array $list ): bool {
-		return array_reduce( $list, fn( bool $isValid, $item ) => $isValid && is_array( $item ), true );
+	private function deserializeQualifiers( array $serialization, string $basePath ): SnakList {
+		$qualifiers = [];
+		foreach ( $serialization['qualifiers'] as $index => $qualifier ) {
+			if ( !is_array( $qualifier ) ) {
+				throw new InvalidFieldException( "$index", $qualifier, "$basePath/qualifiers/$index" );
+			}
+			$qualifiers[] = $this->propertyValuePairDeserializer->deserialize( $qualifier, "$basePath/qualifiers/$index" );
+		}
+
+		return new SnakList( $qualifiers );
+	}
+
+	private function deserializeReferences( array $serialization, string $basePath ): ReferenceList {
+		$references = [];
+		foreach ( $serialization['references'] as $index => $reference ) {
+			if ( !is_array( $reference ) ) {
+				throw new InvalidFieldException( "$index", $reference, "$basePath/references/$index" );
+			}
+			$references[] = $this->referenceDeserializer->deserialize( $reference, "$basePath/references/$index" );
+		}
+
+		return new ReferenceList( $references );
 	}
 
 }

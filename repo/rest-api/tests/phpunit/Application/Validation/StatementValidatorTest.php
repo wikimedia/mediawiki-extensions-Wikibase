@@ -50,18 +50,19 @@ class StatementValidatorTest extends TestCase {
 
 	public static function deserializationErrorProvider(): Generator {
 		yield 'invalid field exception' => [
-			new InvalidFieldException( 'some-field', 'some-value' ),
+			new InvalidFieldException( 'some-field', 'some-value', '/path/to/some-field' ),
 			StatementValidator::CODE_INVALID_FIELD,
 			[
 				StatementValidator::CONTEXT_FIELD => 'some-field',
 				StatementValidator::CONTEXT_VALUE => 'some-value',
+				StatementValidator::CONTEXT_PATH => '/path/to/some-field',
 			],
 		];
 
 		yield 'missing field exception' => [
-			new MissingFieldException( 'property' ),
+			new MissingFieldException( 'property', '' ),
 			StatementValidator::CODE_MISSING_FIELD,
-			[ StatementValidator::CONTEXT_FIELD => 'property' ],
+			[ StatementValidator::CONTEXT_FIELD => 'property', StatementValidator::CONTEXT_PATH => '' ],
 		];
 
 		yield 'invalid field type exception' => [

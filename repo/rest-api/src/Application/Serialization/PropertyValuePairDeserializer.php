@@ -63,13 +63,17 @@ class PropertyValuePairDeserializer {
 	}
 
 	private function validateSerialization( array $serialization, string $basePath ): void {
+		if ( count( $serialization ) && array_is_list( $serialization ) ) {
+			throw new InvalidFieldException( '', $serialization, $basePath );
+		}
+
 		$this->assertFieldExists( $serialization, 'property', $basePath );
-		$this->assertFieldIsArray( $serialization, 'property', $basePath );
+		$this->assertFieldIsAssociativeArray( $serialization, 'property', $basePath );
 		$this->assertFieldExists( $serialization['property'], 'id', "$basePath/property" );
 		$this->assertFieldIsString( $serialization['property'], 'id', "$basePath/property" );
 
 		$this->assertFieldExists( $serialization, 'value', $basePath );
-		$this->assertFieldIsArray( $serialization, 'value', $basePath );
+		$this->assertFieldIsAssociativeArray( $serialization, 'value', $basePath );
 		$this->assertFieldExists( $serialization['value'], 'type', "$basePath/value" );
 		$this->assertFieldIsString( $serialization['value'], 'type', "$basePath/value" );
 	}
@@ -94,9 +98,10 @@ class PropertyValuePairDeserializer {
 		}
 	}
 
-	private function assertFieldIsArray( array $serializationPart, string $field, string $basePath ): void {
-		if ( !is_array( $serializationPart[$field] ) ) {
-			throw new InvalidFieldException( $field, $serializationPart[$field], "$basePath/$field" );
+	private function assertFieldIsAssociativeArray( array $serializationPart, string $field, string $basePath ): void {
+		$value = $serializationPart[$field];
+		if ( !is_array( $value ) || ( count( $value ) && array_is_list( $value ) ) ) {
+			throw new InvalidFieldException( $field, $value, "$basePath/$field" );
 		}
 	}
 
