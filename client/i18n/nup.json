@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Misbahu umar"
+			"Misbahu umar",
+			"Umar Ahmad2345"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} yangagi",
@@ -14,5 +15,6 @@
 	"wikibase-linkitem-input-site": "Ezhimi:",
 	"wikibase-linkitem-input-page": "Feregi:",
 	"wikibase-rc-hide-wikidata-hide": "So",
-	"wikibase-rc-hide-wikidata-show": "Wu"
+	"wikibase-rc-hide-wikidata-show": "Wu",
+	"wikibase-otherprojects": "Dan etun ndocizhi'o"
 }
