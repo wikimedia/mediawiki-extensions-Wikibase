@@ -356,7 +356,7 @@ class SubmitEntityAction extends EditEntityAction {
 	private function doWatch( Title $title ) {
 		$user = $this->getUser();
 
-		if ( $user->isRegistered()
+		if ( $user->isNamed()
 			&& $this->userOptionsLookup->getOption( $user, 'watchdefault' )
 			&& !$this->watchlistManager->isWatchedIgnoringRights( $user, $title )
 		) {
