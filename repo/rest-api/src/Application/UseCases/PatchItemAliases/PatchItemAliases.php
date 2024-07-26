@@ -25,7 +25,7 @@ class PatchItemAliases {
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patcher;
-	private PatchedAliasesValidator $patchedAliasesValidator;
+	private PatchedItemAliasesValidator $patchedAliasesValidator;
 	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
@@ -36,7 +36,7 @@ class PatchItemAliases {
 		ItemAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patcher,
-		PatchedAliasesValidator $patchedAliasesValidator,
+		PatchedItemAliasesValidator $patchedAliasesValidator,
 		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater
 	) {

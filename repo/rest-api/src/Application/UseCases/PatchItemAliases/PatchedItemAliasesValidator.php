@@ -15,7 +15,7 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
 /**
  * @license GPL-2.0-or-later
  */
-class PatchedAliasesValidator {
+class PatchedItemAliasesValidator {
 
 	private AliasesDeserializer $aliasesDeserializer;
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;

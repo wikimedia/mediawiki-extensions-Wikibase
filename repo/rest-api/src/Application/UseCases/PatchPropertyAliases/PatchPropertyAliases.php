@@ -24,7 +24,7 @@ class PatchPropertyAliases {
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
-	private PatchedAliasesValidator $patchedAliasesValidator;
+	private PatchedPropertyAliasesValidator $patchedAliasesValidator;
 	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -35,7 +35,7 @@ class PatchPropertyAliases {
 		PropertyAliasesRetriever $aliasesRetriever,
 		AliasesSerializer $aliasesSerializer,
 		PatchJson $patchJson,
-		PatchedAliasesValidator $patchedAliasesValidator,
+		PatchedPropertyAliasesValidator $patchedAliasesValidator,
 		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater
 	) {

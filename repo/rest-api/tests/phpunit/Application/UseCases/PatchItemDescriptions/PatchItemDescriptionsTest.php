@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptionsValidator;
@@ -51,7 +51,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
 	private ItemWriteModelRetriever $itemRetriever;
-	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
+	private PatchedItemDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
 
 	protected function setUp(): void {
@@ -64,7 +64,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->descriptionsSerializer = new DescriptionsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
-		$this->patchedDescriptionsValidator = new PatchedDescriptionsValidator(
+		$this->patchedDescriptionsValidator = new PatchedItemDescriptionsValidator(
 			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->createStub( DescriptionLanguageCodeValidator::class ) ),
 			new ItemDescriptionsContentsValidator( $this->createStub( ItemDescriptionValidator::class ) )
 		);
@@ -201,7 +201,7 @@ class PatchItemDescriptionsTest extends TestCase {
 		$this->itemRetriever = $itemRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->patchedDescriptionsValidator = $this->createMock( PatchedDescriptionsValidator::class );
+		$this->patchedDescriptionsValidator = $this->createMock( PatchedItemDescriptionsValidator::class );
 		$this->patchedDescriptionsValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( new TermList(), new TermList(), $patchResult )

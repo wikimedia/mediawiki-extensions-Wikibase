@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyAliases;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemAliases;
 
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
@@ -19,13 +19,13 @@ use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedItemAliasesValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PatchedAliasesValidatorTest extends TestCase {
+class PatchedItemAliasesValidatorTest extends TestCase {
 
 	private const LIMIT = 50;
 
@@ -91,37 +91,37 @@ class PatchedAliasesValidatorTest extends TestCase {
 
 		$invalidAlias = "tab\t tab\t tab";
 		yield 'alias contains invalid character' => [
-			[ 'en' => [ $invalidAlias ] ],
+			[ 'en' => [ 'valid alias', $invalidAlias ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 				"Patched value for 'en' is invalid",
 				[
-					UseCaseError::CONTEXT_PATH => 'en/0',
+					UseCaseError::CONTEXT_PATH => 'en/1',
 					UseCaseError::CONTEXT_VALUE => $invalidAlias,
 				]
 			),
 		];
 
 		yield 'aliases in language is not a list' => [
-			[ 'en' => 'not a list' ],
+			[ 'en' => [ 'associative array' => 'not a list' ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 				"Patched value for 'en' is invalid",
 				[
 					UseCaseError::CONTEXT_PATH => 'en',
-					UseCaseError::CONTEXT_VALUE => 'not a list',
+					UseCaseError::CONTEXT_VALUE => [ 'associative array' => 'not a list' ],
 				]
 			),
 		];
 
 		yield 'aliases is not an object' => [
-			'not an object',
+			[ 'sequential array, not an object' ],
 			new UseCaseError(
 				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
 				"Patched value for '' is invalid",
 				[
 					UseCaseError::CONTEXT_PATH => '',
-					UseCaseError::CONTEXT_VALUE => 'not an object',
+					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an object' ],
 				]
 			),
 		];
@@ -137,9 +137,9 @@ class PatchedAliasesValidatorTest extends TestCase {
 		];
 	}
 
-	private function newValidator(): PatchedAliasesValidator {
+	private function newValidator(): PatchedItemAliasesValidator {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
-		return new PatchedAliasesValidator(
+		return new PatchedItemAliasesValidator(
 			new AliasesDeserializer(),
 			new TermValidatorFactoryAliasesInLanguageValidator(
 				new TermValidatorFactory(

@@ -24,7 +24,7 @@ class PatchPropertyLabels {
 	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $useCaseValidator;
-	private PatchedLabelsValidator $patchedLabelsValidator;
+	private PatchedPropertyLabelsValidator $patchedLabelsValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
@@ -35,7 +35,7 @@ class PatchPropertyLabels {
 		PropertyWriteModelRetriever $propertyRetriever,
 		PropertyUpdater $propertyUpdater,
 		PatchPropertyLabelsValidator $useCaseValidator,
-		PatchedLabelsValidator $patchedLabelsValidator,
+		PatchedPropertyLabelsValidator $patchedLabelsValidator,
 		AssertPropertyExists $assertPropertyExists,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {

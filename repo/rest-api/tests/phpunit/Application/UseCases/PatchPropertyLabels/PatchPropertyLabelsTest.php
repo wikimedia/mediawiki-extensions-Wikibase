@@ -12,7 +12,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabelsValidator;
@@ -49,7 +49,7 @@ class PatchPropertyLabelsTest extends TestCase {
 	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 	private PatchPropertyLabelsValidator $validator;
-	private PatchedLabelsValidator $patchedLabelsValidator;
+	private PatchedPropertyLabelsValidator $patchedLabelsValidator;
 	private AssertPropertyExists $assertPropertyExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
@@ -63,7 +63,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 		$this->validator = new TestValidatingRequestDeserializer();
-		$this->patchedLabelsValidator = new PatchedLabelsValidator(
+		$this->patchedLabelsValidator = new PatchedPropertyLabelsValidator(
 			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
 			new PropertyLabelsContentsValidator( $this->createStub( PropertyLabelValidator::class ) )
 		);
@@ -198,7 +198,7 @@ class PatchPropertyLabelsTest extends TestCase {
 		$this->propertyRetriever = $propertyRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
+		$this->patchedLabelsValidator = $this->createMock( PatchedPropertyLabelsValidator::class );
 		$this->patchedLabelsValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( new TermList(), new TermList(), $patchResult )

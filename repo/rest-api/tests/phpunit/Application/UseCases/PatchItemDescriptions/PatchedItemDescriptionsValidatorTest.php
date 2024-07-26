@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
@@ -17,13 +17,13 @@ use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedItemDescriptionsValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PatchedDescriptionsValidatorTest extends TestCase {
+class PatchedItemDescriptionsValidatorTest extends TestCase {
 
 	private ItemDescriptionValidator $descriptionValidator;
 	private DescriptionLanguageCodeValidator $languageCodeValidator;
@@ -251,8 +251,8 @@ class PatchedDescriptionsValidatorTest extends TestCase {
 		}
 	}
 
-	private function newValidator(): PatchedDescriptionsValidator {
-		return new PatchedDescriptionsValidator(
+	private function newValidator(): PatchedItemDescriptionsValidator {
+		return new PatchedItemDescriptionsValidator(
 			new DescriptionsSyntaxValidator( new DescriptionsDeserializer(), $this->languageCodeValidator ),
 			new ItemDescriptionsContentsValidator( $this->descriptionValidator )
 		);

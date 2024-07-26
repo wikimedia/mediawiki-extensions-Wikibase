@@ -15,7 +15,7 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 /**
  * @license GPL-2.0-or-later
  */
-class PatchedDescriptionsValidator {
+class PatchedItemDescriptionsValidator {
 
 	private DescriptionsSyntaxValidator $syntaxValidator;
 	private ItemDescriptionsContentsValidator $contentsValidator;

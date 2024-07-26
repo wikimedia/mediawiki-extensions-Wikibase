@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliasesValidator;
@@ -46,7 +46,7 @@ class PatchPropertyAliasesTest extends TestCase {
 	private PropertyAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
-	private PatchedAliasesValidator $patchedAliasesValidator;
+	private PatchedPropertyAliasesValidator $patchedAliasesValidator;
 	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
 
@@ -60,7 +60,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedPropertyAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
 		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
@@ -146,7 +146,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		);
 
 		$expectedException = $this->createStub( UseCaseError::class );
-		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedPropertyAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {

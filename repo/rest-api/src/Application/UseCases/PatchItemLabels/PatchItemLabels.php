@@ -23,7 +23,7 @@ class PatchItemLabels {
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private PatchedLabelsValidator $patchedLabelsValidator;
+	private PatchedItemLabelsValidator $patchedLabelsValidator;
 	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private PatchItemLabelsValidator $useCaseValidator;
@@ -34,7 +34,7 @@ class PatchItemLabels {
 		ItemLabelsRetriever $labelsRetriever,
 		LabelsSerializer $labelsSerializer,
 		PatchJson $patcher,
-		PatchedLabelsValidator $patchedLabelsValidator,
+		PatchedItemLabelsValidator $patchedLabelsValidator,
 		ItemWriteModelRetriever $itemRetriever,
 		ItemUpdater $itemUpdater,
 		PatchItemLabelsValidator $useCaseValidator,

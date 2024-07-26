@@ -13,7 +13,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
@@ -48,7 +48,7 @@ class PatchItemLabelsTest extends TestCase {
 	private ItemLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
 	private PatchJson $patcher;
-	private PatchedLabelsValidator $patchedLabelsValidator;
+	private PatchedItemLabelsValidator $patchedLabelsValidator;
 	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
@@ -61,7 +61,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->labelsRetriever = $this->createStub( ItemLabelsRetriever::class );
 		$this->labelsSerializer = new LabelsSerializer();
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->patchedLabelsValidator = new PatchedLabelsValidator(
+		$this->patchedLabelsValidator = new PatchedItemLabelsValidator(
 			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
 			new ItemLabelsContentsValidator( $this->createStub( ItemLabelValidator::class ) )
 		);
@@ -189,7 +189,7 @@ class PatchItemLabelsTest extends TestCase {
 		$this->itemRetriever = $itemRepo;
 
 		$expectedUseCaseError = $this->createStub( UseCaseError::class );
-		$this->patchedLabelsValidator = $this->createMock( PatchedLabelsValidator::class );
+		$this->patchedLabelsValidator = $this->createMock( PatchedItemLabelsValidator::class );
 		$this->patchedLabelsValidator->expects( $this->once() )
 			->method( 'validateAndDeserialize' )
 			->with( new TermList(), new TermList(), $patchResult )

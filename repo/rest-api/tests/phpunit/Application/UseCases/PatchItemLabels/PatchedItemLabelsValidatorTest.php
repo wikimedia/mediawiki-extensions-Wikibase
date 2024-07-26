@@ -1,37 +1,37 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyLabels;
+namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator
+ * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PatchedLabelsValidatorTest extends TestCase {
+class PatchedItemLabelsValidatorTest extends TestCase {
 
-	private PropertyLabelValidator $labelValidator;
+	private ItemLabelValidator $labelValidator;
 	private LabelLanguageCodeValidator $languageCodeValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->labelValidator = $this->createStub( PropertyLabelValidator::class );
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
 		$this->languageCodeValidator = $this->createStub( LabelLanguageCodeValidator::class );
 	}
 
@@ -51,26 +51,26 @@ class PatchedLabelsValidatorTest extends TestCase {
 			new TermList(),
 		];
 		yield 'valid labels' => [
-			[ 'en' => 'instance of', 'de' => 'ist ein(e)' ],
-			new TermList( [ new Term( 'en', 'instance of' ), new Term( 'de', 'ist ein(e)' ) ] ),
+			[ 'en' => 'potato', 'de' => 'Kartoffel' ],
+			new TermList( [ new Term( 'en', 'potato' ), new Term( 'de', 'Kartoffel' ) ] ),
 		];
 	}
 
 	public function testValidateOnlyModifiedLabels(): void {
 		$originalLabels = new TermList( [
-			new Term( 'en', 'type' ),
-			new Term( 'de', 'ist ein(e)' ),
+			new Term( 'en', 'spud' ),
+			new Term( 'de', 'Kartoffel' ),
 		] );
 		$originalDescriptions = new TermList();
 
 		// only 'en' and 'bar' labels have been patched
-		$patchedLabels = [ 'en' => 'instance of', 'de' => 'ist ein(e)', 'bar' => 'is a' ];
+		$patchedLabels = [ 'en' => 'potato', 'de' => 'Kartoffel', 'bar' => 'Erdapfel' ];
 
 		// expect validation only for the modified labels
-		$this->labelValidator = $this->createMock( PropertyLabelValidator::class );
+		$this->labelValidator = $this->createMock( ItemLabelValidator::class );
 		$expectedArgs = [
-			[ 'en', 'instance of', $originalDescriptions ],
-			[ 'bar', 'is a', $originalDescriptions ],
+			[ 'en', 'potato', $originalDescriptions ],
+			[ 'bar', 'Erdapfel', $originalDescriptions ],
 		];
 		$this->labelValidator->expects( $this->exactly( 2 ) )
 			->method( 'validate' )
@@ -84,9 +84,9 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new TermList( [
-				new Term( 'en', 'instance of' ),
-				new Term( 'de', 'ist ein(e)' ),
-				new Term( 'bar', 'is a' ),
+				new Term( 'en', 'potato' ),
+				new Term( 'de', 'Kartoffel' ),
+				new Term( 'bar', 'Erdapfel' ),
 			] ),
 			$this->newValidator()->validateAndDeserialize( $originalLabels, $originalDescriptions, $patchedLabels )
 		);
@@ -102,7 +102,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		string $expectedErrorMessage,
 		array $expectedContext = null
 	): void {
-		$this->labelValidator = $this->createStub( PropertyLabelValidator::class );
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
 		$this->labelValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
@@ -122,11 +122,8 @@ class PatchedLabelsValidatorTest extends TestCase {
 		yield 'invalid label' => [
 			[ $language => $label ],
 			new ValidationError(
-				PropertyLabelValidator::CODE_INVALID,
-				[
-					PropertyLabelValidator::CONTEXT_LABEL => $label,
-					PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
-				],
+				ItemLabelValidator::CODE_INVALID,
+				[ ItemLabelValidator::CONTEXT_LABEL => $label, ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
 			),
 			UseCaseError::PATCHED_LABEL_INVALID,
 			"Changed label for '$language' is invalid: {$label}",
@@ -140,11 +137,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 		yield 'label too long' => [
 			[ $language => $tooLongLabel ],
 			new ValidationError(
-				PropertyLabelValidator::CODE_TOO_LONG,
+				ItemLabelValidator::CODE_TOO_LONG,
 				[
-					PropertyLabelValidator::CONTEXT_LABEL => $tooLongLabel,
-					PropertyLabelValidator::CONTEXT_LIMIT => 250,
-					PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
+					ItemLabelValidator::CONTEXT_LABEL => $tooLongLabel,
+					ItemLabelValidator::CONTEXT_LIMIT => 250,
+					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
 				]
 			),
 			UseCaseError::PATCH_RESULT_VALUE_TOO_LONG,
@@ -155,22 +152,28 @@ class PatchedLabelsValidatorTest extends TestCase {
 			],
 		];
 
-		$language = 'en';
-		$label = 'My Label';
-		$propertyId = 'P456';
-		yield 'label not unique' => [
-			[ $language => $label ],
-			new ValidationError( PropertyLabelValidator::CODE_LABEL_DUPLICATE, [
-				PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
-				PropertyLabelValidator::CONTEXT_LABEL => $label,
-				PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
-			] ),
-			UseCaseError::PATCHED_PROPERTY_LABEL_DUPLICATE,
-			"Property $propertyId already has label '$label' associated with language code '$language'",
+		$collidingLabel = 'This label already exists on an item with the same description.';
+		$collidingDescription = 'This discription already exists on an item with the same label.';
+		$collidingItemId = 'Q345';
+		yield 'label/description collision' => [
+			[ $language => $collidingLabel ],
+			new ValidationError(
+				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
+				[
+					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
+					ItemLabelValidator::CONTEXT_LABEL => $collidingLabel,
+					ItemLabelValidator::CONTEXT_DESCRIPTION => $collidingDescription,
+					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+				]
+			),
+			UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+			"Item $collidingItemId already has label '$collidingLabel' associated with language code $language, " .
+			'using the same description text.',
 			[
 				UseCaseError::CONTEXT_LANGUAGE => $language,
-				UseCaseError::CONTEXT_LABEL => $label,
-				UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
+				UseCaseError::CONTEXT_LABEL => $collidingLabel,
+				UseCaseError::CONTEXT_DESCRIPTION => $collidingDescription,
+				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
 			],
 		];
 	}
@@ -204,11 +207,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 
 	public function testGivenLabelSameAsDescriptionForLanguage_throwsUseCaseError(): void {
 		$language = 'en';
-		$this->labelValidator = $this->createStub( PropertyLabelValidator::class );
+		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
 		$this->labelValidator->method( 'validate' )->willReturn(
 			new ValidationError(
-				PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
-				[ PropertyLabelValidator::CONTEXT_LANGUAGE => $language ]
+				ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION,
+				[ ItemLabelValidator::CONTEXT_LANGUAGE => $language ]
 			)
 		);
 		try {
@@ -219,7 +222,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE, $e->getErrorCode() );
 			$this->assertSame( "Label and description for language code {$language} can not have the same value.", $e->getErrorMessage() );
 			$this->assertEquals( [ UseCaseError::CONTEXT_LANGUAGE => $language ], $e->getErrorContext() );
 		}
@@ -236,11 +239,7 @@ class PatchedLabelsValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize(
-				new TermList(),
-				new TermList(),
-				[ $invalidLanguage => 'potato' ]
-			);
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ $invalidLanguage => 'potato' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE, $e->getErrorCode() );
@@ -249,10 +248,13 @@ class PatchedLabelsValidatorTest extends TestCase {
 		}
 	}
 
-	private function newValidator(): PatchedLabelsValidator {
-		return new PatchedLabelsValidator(
-			new LabelsSyntaxValidator( new LabelsDeserializer(), $this->languageCodeValidator ),
-			new PropertyLabelsContentsValidator( $this->labelValidator )
+	private function newValidator(): PatchedItemLabelsValidator {
+		return new PatchedItemLabelsValidator(
+			new LabelsSyntaxValidator(
+				new LabelsDeserializer(),
+				$this->languageCodeValidator
+			),
+			new ItemLabelsContentsValidator( $this->labelValidator )
 		);
 	}
 

@@ -89,21 +89,21 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
 use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchItem;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator as PatchedItemAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedDescriptionsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchedItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions\PatchItemDescriptions;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedLabelsValidator as PatchedItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchProperty;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedAliasesValidator as PatchedPropertyAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchPropertyAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchPropertyDescriptions;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedLabelsValidator as PatchedPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement\PatchPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
@@ -832,7 +832,7 @@ return [
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbRestApi::getItemDataRetriever( $services ),
-			new PatchedDescriptionsValidator(
+			new PatchedItemDescriptionsValidator(
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
 					WbRestApi::getDescriptionLanguageCodeValidator( $services )

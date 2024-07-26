@@ -1,26 +1,26 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels;
+namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels;
 
 use LogicException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PatchedLabelsValidator {
+class PatchedPropertyLabelsValidator {
 
 	private LabelsSyntaxValidator $syntaxValidator;
-	private ItemLabelsContentsValidator $contentsValidator;
+	private PropertyLabelsContentsValidator $contentsValidator;
 
-	public function __construct( LabelsSyntaxValidator $syntaxValidator, ItemLabelsContentsValidator $contentsValidator ) {
+	public function __construct( LabelsSyntaxValidator $syntaxValidator, PropertyLabelsContentsValidator $contentsValidator ) {
 		$this->syntaxValidator = $syntaxValidator;
 		$this->contentsValidator = $contentsValidator;
 	}
@@ -83,39 +83,38 @@ class PatchedLabelsValidator {
 					"Changed label for '{$language}' is invalid: {$value}",
 					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
 				);
-			case ItemLabelValidator::CODE_INVALID:
-				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				$value = $context[ItemLabelValidator::CONTEXT_LABEL];
+			case PropertyLabelValidator::CODE_INVALID:
+				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
+				$value = $context[PropertyLabelValidator::CONTEXT_LABEL];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID,
 					"Changed label for '{$language}' is invalid: {$value}",
 					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
 				);
-			case ItemLabelValidator::CODE_TOO_LONG:
-				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
-				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+			case PropertyLabelValidator::CODE_TOO_LONG:
+				$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];
+				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 				throw UseCaseError::newValueTooLong( "/$language", $maxLabelLength, true );
-			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				$languageCode = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				$label = $context[ItemLabelValidator::CONTEXT_LABEL];
-				$duplicateItemId = $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
+			case PropertyLabelValidator::CODE_LABEL_DUPLICATE:
+				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
+				$label = $context[PropertyLabelValidator::CONTEXT_LABEL];
+				$matchingPropertyId = $context[PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID];
 				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
-					"Item $duplicateItemId already has label '$label' associated with language " .
-					"code $languageCode, using the same description text.",
+					UseCaseError::PATCHED_PROPERTY_LABEL_DUPLICATE,
+					"Property $matchingPropertyId already has label '$label' associated with " .
+					"language code '$language'",
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
+						UseCaseError::CONTEXT_LANGUAGE => $language,
 						UseCaseError::CONTEXT_LABEL => $label,
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $duplicateItemId,
+						UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => $matchingPropertyId,
 					]
 				);
-			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
-				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
+			case PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
+				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
+					UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
 					"Label and description for language code {$language} can not have the same value.",
-					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $context[PropertyLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			default:
 				throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );

@@ -24,7 +24,7 @@ class PatchItemDescriptions {
 	private DescriptionsSerializer $descriptionsSerializer;
 	private PatchJson $patcher;
 	private ItemWriteModelRetriever $itemRetriever;
-	private PatchedDescriptionsValidator $patchedDescriptionsValidator;
+	private PatchedItemDescriptionsValidator $patchedDescriptionsValidator;
 	private ItemUpdater $itemUpdater;
 
 	public function __construct(
@@ -35,7 +35,7 @@ class PatchItemDescriptions {
 		DescriptionsSerializer $descriptionsSerializer,
 		PatchJson $patcher,
 		ItemWriteModelRetriever $itemRetriever,
-		PatchedDescriptionsValidator $patchedDescriptionsValidator,
+		PatchedItemDescriptionsValidator $patchedDescriptionsValidator,
 		ItemUpdater $itemUpdater
 	) {
 		$this->requestValidator = $requestValidator;

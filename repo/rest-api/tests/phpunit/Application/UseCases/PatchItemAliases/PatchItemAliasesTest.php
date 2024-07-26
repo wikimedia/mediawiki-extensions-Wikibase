@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedAliasesValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchItemAliasesValidator;
@@ -45,7 +45,7 @@ class PatchItemAliasesTest extends TestCase {
 	private ItemAliasesRetriever $aliasesRetriever;
 	private AliasesSerializer $aliasesSerializer;
 	private PatchJson $patchJson;
-	private PatchedAliasesValidator $patchedAliasesValidator;
+	private PatchedItemAliasesValidator $patchedAliasesValidator;
 	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
 
@@ -59,7 +59,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
-		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedItemAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
 			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
@@ -176,7 +176,7 @@ class PatchItemAliasesTest extends TestCase {
 
 	public function testGivenPatchedAliasesInvalid_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
-		$this->patchedAliasesValidator = $this->createStub( PatchedAliasesValidator::class );
+		$this->patchedAliasesValidator = $this->createStub( PatchedItemAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )->willThrowException( $expectedException );
 
 		try {
