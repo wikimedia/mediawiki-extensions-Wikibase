@@ -61,7 +61,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'invalid-language',
-					LanguageCodeValidator::CONTEXT_PATH => 'labels',
+					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
 				]
 			),
 		];

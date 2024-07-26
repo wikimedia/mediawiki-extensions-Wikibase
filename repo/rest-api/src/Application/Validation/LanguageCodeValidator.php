@@ -10,7 +10,7 @@ interface LanguageCodeValidator {
 	public const CODE_INVALID_LANGUAGE_CODE = 'language-code-validator-code-invalid-language-code';
 
 	public const CONTEXT_LANGUAGE_CODE = 'language-code-validator-context-language-code';
-	public const CONTEXT_PATH = 'language-code-validator-context-path';
+	public const CONTEXT_FIELD = 'language-code-validator-context-field';
 
 	public function validate( string $languageCode ): ?ValidationError;
 

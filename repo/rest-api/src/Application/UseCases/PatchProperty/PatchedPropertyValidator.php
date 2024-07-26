@@ -173,7 +173,7 @@ class PatchedPropertyValidator {
 
 		$context = $validationError->getContext();
 		$languageCode = $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
-		switch ( $context[LanguageCodeValidator::CONTEXT_PATH] ) {
+		switch ( $context[LanguageCodeValidator::CONTEXT_FIELD] ) {
 			case 'labels':
 				throw new UseCaseError(
 					UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
