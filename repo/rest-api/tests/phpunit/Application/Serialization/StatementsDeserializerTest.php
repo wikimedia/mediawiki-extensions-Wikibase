@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
-use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -71,13 +70,13 @@ class StatementsDeserializerTest extends TestCase {
 		$this->statementDeserializer = $this->createMock( StatementDeserializer::class );
 		$this->statementDeserializer->expects( $this->once() )
 			->method( 'deserialize' )
-			->with( $this->anything(), 'P789/0' )
+			->with( $this->anything(), '/P789/0' )
 			->willThrowException( $expectedException );
 
 		try {
 			$this->newDeserializer()->deserialize( [ 'P789' => [ [ 'property' => [ 'id' => 'P789' ] ] ] ] );
 			$this->fail( 'Expected exception was not thrown' );
-		} catch ( Exception $e ) {
+		} catch ( MissingFieldException $e ) {
 			$this->assertEquals( $expectedException, $e );
 		}
 	}
@@ -107,12 +106,12 @@ class StatementsDeserializerTest extends TestCase {
 		$statementGroup = [ 'property' => [ 'id' => 'P123' ], 'value' => [ 'type' => 'somevalue' ] ];
 		yield 'statement group is associative array instead of sequential array' => [
 			[ 'P123' => $statementGroup ],
-			new InvalidFieldTypeException( 'P123' ),
+			new InvalidFieldTypeException( 'P123', '/P123' ),
 		];
 
 		yield 'statement not an array' => [
 			[ 'P789' => [ 'not a valid statement' ] ],
-			new InvalidFieldTypeException( 'P789/0' ),
+			new InvalidFieldTypeException( 'P789/0', '/P789/0' ),
 		];
 	}
 

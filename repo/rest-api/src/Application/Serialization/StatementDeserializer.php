@@ -32,7 +32,7 @@ class StatementDeserializer {
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Statement {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
-			throw new InvalidFieldTypeException( $basePath );
+			throw new InvalidFieldTypeException( $basePath, $basePath );
 		}
 
 		$serialization['id'] ??= null;

@@ -418,7 +418,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
-					StatementsValidator::CONTEXT_PATH => 'statements',
+					StatementsValidator::CONTEXT_PATH => '/item/statements',
 					StatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
 				]
 			),
@@ -432,7 +432,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'statement group not sequential' => [
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-				[ StatementsValidator::CONTEXT_PATH => 'P1' ]
+				[ StatementsValidator::CONTEXT_PATH => '/item/statements/P1' ]
 			),
 			new UseCaseError(
 				UseCaseError::INVALID_VALUE,
@@ -444,7 +444,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid statement type' => [
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ StatementsValidator::CONTEXT_PATH => 'P1/0' ]
+				[ StatementsValidator::CONTEXT_PATH => '/item/statements/P1/0' ]
 			),
 			UseCaseError::newInvalidValue( '/item/statements/P1/0' ),
 		];
@@ -453,7 +453,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => 'P1/0',
+					StatementsValidator::CONTEXT_PATH => '/item/statements/P1/0',
 					StatementsValidator::CONTEXT_FIELD => 'value',
 				]
 			),
@@ -464,7 +464,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => 'P1/0/value',
+					StatementsValidator::CONTEXT_PATH => '/item/statements/P1/0/value',
 					StatementsValidator::CONTEXT_FIELD => 'value',
 					StatementsValidator::CONTEXT_VALUE => 'invalid-value',
 				]

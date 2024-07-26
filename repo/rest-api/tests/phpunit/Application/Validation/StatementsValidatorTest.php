@@ -77,7 +77,7 @@ class StatementsValidatorTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => "$predicateId/0",
+					StatementsValidator::CONTEXT_PATH => "/$predicateId/0",
 					StatementsValidator::CONTEXT_FIELD => 'value',
 				]
 			),
@@ -113,7 +113,7 @@ class StatementsValidatorTest extends TestCase {
 			[ 'P123' => $invalidStatementGroup ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-				[ StatementsValidator::CONTEXT_PATH => 'P123' ]
+				[ StatementsValidator::CONTEXT_PATH => '/P123' ]
 			),
 		];
 
@@ -122,7 +122,16 @@ class StatementsValidatorTest extends TestCase {
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ StatementsValidator::CONTEXT_PATH => 'P123/0' ]
+				[ StatementsValidator::CONTEXT_PATH => '/P123/0' ]
+			),
+		];
+
+		$invalidStatement = [ 'statement not an associate array' ];
+		yield 'statement in statement group is not an associative array' => [
+			[ 'P123' => [ $invalidStatement ] ],
+			new ValidationError(
+				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
+				[ StatementsValidator::CONTEXT_PATH => '/P123/0' ]
 			),
 		];
 
@@ -136,7 +145,7 @@ class StatementsValidatorTest extends TestCase {
 			new ValidationError(
 				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
 				[
-					StatementsValidator::CONTEXT_PATH => 'P567/0/rank',
+					StatementsValidator::CONTEXT_PATH => '/P567/0/rank',
 					StatementsValidator::CONTEXT_FIELD => 'rank',
 					StatementsValidator::CONTEXT_VALUE => 'not-a-valid-rank',
 				]

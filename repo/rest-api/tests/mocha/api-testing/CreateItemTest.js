@@ -496,11 +496,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid statement field', async () => {
-			const invalidValue = 'not-a-valid-rank';
 			const invalidStatement = {
 				property: { id: predicatePropertyId },
-				value: { type: 'value', content: 'some-value' },
-				rank: invalidValue
+				value: { type: 'invalid', content: 'some value' }
 			};
 
 			const response = await newCreateItemRequestBuilder( {
@@ -508,13 +506,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
 			} ).assertInvalidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'invalid-value',
-				{ path: `/item/statements/${predicatePropertyId}/0/rank` }
-			);
-			assert.include( response.body.message, `/item/statements/${predicatePropertyId}/0/rank` );
+			const path = `/item/statements/${predicatePropertyId}/0/value/type`;
+			assertValidError( response, 400, 'invalid-value', { path } );
+			assert.include( response.body.message, path );
 		} );
 
 		it( 'missing top-level field', async () => {
@@ -530,24 +524,18 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'missing statement field', async () => {
-			const missingField = 'value';
-			const statementWthMissingValue = { property: { id: predicatePropertyId } };
-
-			const itemToCreate = { labels: { en: 'en-label' } };
-			itemToCreate.statements = {};
-			itemToCreate.statements[ predicatePropertyId ] = [];
-			itemToCreate.statements[ predicatePropertyId ].push( statementWthMissingValue );
+			const statementWthMissingField = { property: { id: predicatePropertyId }, value: { type: 'value' } };
+			const itemToCreate = {
+				labels: { en: 'en-label' },
+				statements: { [ predicatePropertyId ]: [ statementWthMissingField ] }
+			};
 
 			const response = await newCreateItemRequestBuilder( itemToCreate )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'missing-field',
-				{ path: `/item/statements/${predicatePropertyId}/0`, field: `${missingField}` }
-			);
+			const context = { path: `/item/statements/${predicatePropertyId}/0/value`, field: 'content' };
+			assertValidError( response, 400, 'missing-field', context );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 

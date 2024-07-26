@@ -26,20 +26,20 @@ class StatementsDeserializer {
 	 * @throws MissingFieldException
 	 * @throws PropertyIdMismatchException
 	 */
-	public function deserialize( array $serialization ): StatementList {
+	public function deserialize( array $serialization, string $basePath = '' ): StatementList {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
-			throw new InvalidStatementsException( '', $serialization );
+			throw new InvalidStatementsException( '', $serialization, $basePath );
 		}
 
 		$statementList = [];
 		foreach ( $serialization as $propertyId => $statementGroups ) {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop - $statementGroups is not guaranteed to be an array
 			if ( !( is_array( $statementGroups ) && array_is_list( $statementGroups ) ) ) {
-				throw new InvalidFieldTypeException( "$propertyId" );
+				throw new InvalidFieldTypeException( "$propertyId", "$basePath/$propertyId" );
 			}
 			foreach ( $statementGroups as $index => $statement ) {
 				if ( !is_array( $statement ) ) {
-					throw new InvalidFieldTypeException( "$propertyId/$index" );
+					throw new InvalidFieldTypeException( "$propertyId/$index", "$basePath/$propertyId/$index" );
 				}
 
 				$statementPropertyId = $statement[ 'property' ][ 'id' ] ?? null;
@@ -51,8 +51,7 @@ class StatementsDeserializer {
 					);
 				}
 
-				$deserializedStatement = $this->statementDeserializer->deserialize( $statement, "$propertyId/$index" );
-				$statementList[] = $deserializedStatement;
+				$statementList[] = $this->statementDeserializer->deserialize( $statement, "$basePath/$propertyId/$index" );
 			}
 		}
 
