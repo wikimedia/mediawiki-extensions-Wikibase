@@ -16,8 +16,6 @@ class ItemValidator {
 
 	public const CONTEXT_FIELD = 'item-validator-context-field';
 	public const CONTEXT_VALUE = 'item-validator-context-value';
-	public const CONTEXT_LABELS = 'item-validator-context-labels';
-	public const CONTEXT_DESCRIPTIONS = 'item-validator-context-descriptions';
 
 	private ?Item $deserializedItem = null;
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
