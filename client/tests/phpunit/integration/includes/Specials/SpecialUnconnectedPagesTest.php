@@ -103,6 +103,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	): SpecialUnconnectedPages {
 		$services = $this->getServiceContainer();
 		return new SpecialUnconnectedPages(
+			$services->getConnectionProvider(),
 			$services->getNamespaceInfo(),
 			$services->getTitleFactory(),
 			WikibaseClient::getClientDomainDbFactory( $services ),
@@ -271,6 +272,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 		$services = $this->getServiceContainer();
 		$specialPage = new SpecialUnconnectedPages(
+			$services->getConnectionProvider(),
 			$services->getNamespaceInfo(),
 			$titleFactoryMock,
 			WikibaseClient::getClientDomainDbFactory( $services ),

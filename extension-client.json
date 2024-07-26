@@ -486,6 +486,7 @@
 		"UnconnectedPages": {
 			"class": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
 			"services": [
+				"ConnectionProvider",
 				"NamespaceInfo",
 				"TitleFactory",
 				"WikibaseClient.ClientDomainDbFactory",
