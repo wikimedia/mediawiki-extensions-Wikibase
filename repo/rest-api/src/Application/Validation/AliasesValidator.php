@@ -59,7 +59,7 @@ class AliasesValidator {
 					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 					array_merge(
 						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_PATH => 'alias' ]
+						[ LanguageCodeValidator::CONTEXT_PATH => 'aliases' ]
 					)
 				);
 			}

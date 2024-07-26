@@ -53,13 +53,9 @@ class ItemSerializationRequestValidatingDeserializer {
 						[ UseCaseError::CONTEXT_FIELD => $context[ItemValidator::CONTEXT_FIELD] ]
 					);
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
-					throw new UseCaseError(
-						UseCaseError::INVALID_LANGUAGE_CODE,
-						"Not a valid language code: {$context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]}",
-						[
-							UseCaseError::CONTEXT_PATH => $context[LanguageCodeValidator::CONTEXT_PATH],
-							UseCaseError::CONTEXT_LANGUAGE => $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE],
-						]
+					throw UseCaseError::newInvalidKey(
+						"/item/{$context[LanguageCodeValidator::CONTEXT_PATH]}",
+						$context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]
 					);
 			}
 
@@ -239,14 +235,7 @@ class ItemSerializationRequestValidatingDeserializer {
 				throw UseCaseError::newInvalidValue( '/item/sitelinks' );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				$invalidSiteId = $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE];
-				throw new UseCaseError(
-					UseCaseError::INVALID_KEY,
-					"Invalid key '$invalidSiteId' in '/item/sitelinks'",
-					[
-						UseCaseError::CONTEXT_PATH => '/item/sitelinks',
-						UseCaseError::CONTEXT_KEY => $invalidSiteId,
-					]
-				);
+				throw UseCaseError::newInvalidKey( '/item/sitelinks', $invalidSiteId );
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw UseCaseError::newMissingField( "/item/sitelinks/{$siteId()}", 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:

@@ -16,7 +16,6 @@ class UseCaseError extends UseCaseException {
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const INVALID_VALUE = 'invalid-value';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
-	public const INVALID_LANGUAGE_CODE = 'invalid-language-code';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
@@ -125,7 +124,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
-		self::INVALID_LANGUAGE_CODE => [],
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
@@ -229,7 +227,6 @@ class UseCaseError extends UseCaseException {
 	 * context.
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
-		self::INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_PATH ],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
@@ -281,6 +278,14 @@ class UseCaseError extends UseCaseException {
 			self::VALUE_TOO_LONG,
 			'The input value is too long',
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_LIMIT => $maxLength ]
+		);
+	}
+
+	public static function newInvalidKey( string $path, string $key ): self {
+		return new self(
+			self::INVALID_KEY,
+			"Invalid key '{$key}' in '{$path}'",
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_KEY => $key ]
 		);
 	}
 
