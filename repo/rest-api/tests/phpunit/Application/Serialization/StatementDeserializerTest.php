@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
-use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Throwable;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
@@ -15,9 +15,13 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer
@@ -28,90 +32,86 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
  */
 class StatementDeserializerTest extends TestCase {
 
+	private const EXISTING_STRING_PROPERTY_IDS = [ 'P7517', 'P5414', 'P8832', 'P2659' ];
 	private const STATEMENT_ID = 'Q42$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 	/**
-	 * @dataProvider serializationProvider
+	 * @dataProvider validSerializationProvider
 	 */
 	public function testDeserialize( Statement $expectedStatement, array $serialization ): void {
 		$this->assertTrue(
-			$this->newDeserializer()->deserialize( $serialization )
-				->equals( $expectedStatement )
+			$this->newDeserializer()->deserialize( $serialization )->equals( $expectedStatement )
 		);
 	}
 
-	public static function serializationProvider(): Generator {
+	public static function validSerializationProvider(): Generator {
 		yield 'without id' => [
-			NewStatement::someValueFor( 'P123' )->build(),
+			NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[0] )->build(),
 			[
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
 		];
 
 		yield 'with id' => [
-			NewStatement::someValueFor( 'P234' )
-				->withGuid( self::STATEMENT_ID )
-				->build(),
+			NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[1] )->withGuid( self::STATEMENT_ID )->build(),
 			[
-				'property' => [ 'id' => 'P234' ],
-				'value' => [ 'type' => 'somevalue' ],
 				'id' => self::STATEMENT_ID,
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
+				'value' => [ 'type' => 'somevalue' ],
 			],
 		];
 
-		$statementWithQualifiers = NewStatement::someValueFor( 'P666' )->build();
+		yield 'with preferred rank' => [
+			NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[2] )->withPreferredRank()->build(),
+			[
+				'rank' => 'preferred',
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
+				'value' => [ 'type' => 'somevalue' ],
+			],
+		];
+
+		$statementWithQualifiers = NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[1] )->build();
 		$statementWithQualifiers->setQualifiers( new SnakList( [
-			new PropertySomeValueSnak( new NumericPropertyId( 'P777' ) ),
-			new PropertySomeValueSnak( new NumericPropertyId( 'P888' ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_IDS[2] ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_IDS[3] ) ),
 		] ) );
 		yield 'with qualifiers' => [
 			$statementWithQualifiers,
 			[
-				'property' => [ 'id' => 'P666' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
 				'value' => [ 'type' => 'somevalue' ],
 				'qualifiers' => [
 					[
-						'property' => [ 'id' => 'P777' ],
+						'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
 						'value' => [ 'type' => 'somevalue' ],
 					],
 					[
-						'property' => [ 'id' => 'P888' ],
+						'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ],
 						'value' => [ 'type' => 'somevalue' ],
 					],
 				],
 			],
 		];
 
-		yield 'with preferred rank' => [
-			NewStatement::someValueFor( 'P23' )
-				->withPreferredRank()
-				->build(),
-			[
-				'property' => [ 'id' => 'P23' ],
-				'value' => [ 'type' => 'somevalue' ],
-				'rank' => 'preferred',
-			],
-		];
-
 		yield 'with references' => [
-			NewStatement::someValueFor( 'P23' )
+			NewStatement::someValueFor( self::EXISTING_STRING_PROPERTY_IDS[0] )
 				->withReference( new Reference( [
-					new PropertySomeValueSnak( new NumericPropertyId( 'P234' ) ),
+					new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_IDS[1] ) ),
 				] ) )
 				->withReference( new Reference( [
-					new PropertySomeValueSnak( new NumericPropertyId( 'P345' ) ),
-					new PropertySomeValueSnak( new NumericPropertyId( 'P456' ) ),
+					new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_IDS[2] ) ),
+					new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_IDS[3] ) ),
 				] ) )
 				->build(),
 			[
-				'property' => [ 'id' => 'P23' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
 				'value' => [ 'type' => 'somevalue' ],
 				'references' => [
 					[
 						'parts' => [
 							[
-								'property' => [ 'id' => 'P234' ],
+								'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
 								'value' => [ 'type' => 'somevalue' ],
 							],
 						],
@@ -119,11 +119,11 @@ class StatementDeserializerTest extends TestCase {
 					[
 						'parts' => [
 							[
-								'property' => [ 'id' => 'P345' ],
+								'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
 								'value' => [ 'type' => 'somevalue' ],
 							],
 							[
-								'property' => [ 'id' => 'P456' ],
+								'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ],
 								'value' => [ 'type' => 'somevalue' ],
 							],
 						],
@@ -136,11 +136,11 @@ class StatementDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath = '' ): void {
+	public function testDeserializationErrors( SerializationException $expectedException, array $serialization, string $basePath ): void {
 		try {
 			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
-		} catch ( Throwable $e ) {
+		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
 		}
 	}
@@ -149,111 +149,130 @@ class StatementDeserializerTest extends TestCase {
 		yield 'statement is not associative array' => [
 			new InvalidFieldTypeException( '/statements/P789', '/statements/P789' ),
 			[
-				[ 'id' => 'P123' ],
+				[ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
 				[ 'type' => 'somevalue' ],
 			],
 			'/statements/P789',
 		];
 
-		yield 'invalid id field type' => [
-			new InvalidFieldException( 'id', [ 'invalid' ], '/id' ),
+		yield "invalid 'id' field - array" => [
+			new InvalidFieldException( 'id', [ self::STATEMENT_ID ], '/statement/id' ),
 			[
-				'id' => [ 'invalid' ],
-				'property' => [ 'id' => 'P123' ],
+				'id' => [ self::STATEMENT_ID ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/statement',
 		];
 
-		yield 'invalid rank' => [
+		yield "invalid 'rank' field" => [
 			new InvalidFieldException( 'rank', 'bad', '/statements/P789/rank' ),
 			[
 				'rank' => 'bad',
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
 			'/statements/P789',
 		];
 
-		yield 'invalid qualifiers field type' => [
-			new InvalidFieldException( 'qualifiers', 'invalid', '/qualifiers' ),
+		yield "invalid 'qualifiers' field - string" => [
+			new InvalidFieldException( 'qualifiers', 'invalid', '/statement/qualifiers' ),
 			[
 				'qualifiers' => 'invalid',
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/statement',
 		];
 
-		yield 'invalid qualifier type' => [
-			new InvalidFieldException( '0', 'invalid', '/qualifiers/0' ),
+		yield "invalid 'qualifiers' field - associative array" => [
+			new InvalidFieldException( 'qualifiers', [ 'invalid' => 'qualifiers' ], '/statement/qualifiers' ),
+			[
+				'qualifiers' => [ 'invalid' => 'qualifiers' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ],
+				'value' => [ 'type' => 'somevalue' ],
+			],
+			'/statement',
+		];
+
+		yield "invalid 'qualifiers/0' field - string" => [
+			new InvalidFieldException( '0', 'invalid', '/some/path/qualifiers/0' ),
 			[
 				'qualifiers' => [ 'invalid' ],
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/some/path',
 		];
 
-		yield 'invalid references field type' => [
-			new InvalidFieldException( 'references', 'invalid', '/references' ),
+		yield "invalid 'references' field - string" => [
+			new InvalidFieldException( 'references', 'invalid', '/statements/P789/references' ),
 			[
 				'references' => 'invalid',
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/statements/P789',
 		];
 
-		yield 'invalid reference item type' => [
-			new InvalidFieldException( '0', 'invalid', '/references/0' ),
+		yield "invalid 'references' field - associative array" => [
+			new InvalidFieldException( 'references', [ 'invalid' => 'references' ], '/statements/P789/references' ),
+			[
+				'references' => [ 'invalid' => 'references' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
+				'value' => [ 'type' => 'somevalue' ],
+			],
+			'/statements/P789',
+		];
+
+		yield "invalid 'references/0' field - string" => [
+			new InvalidFieldException( '0', 'invalid', '/statement/references/0' ),
 			[
 				'references' => [ 'invalid' ],
-				'property' => [ 'id' => 'P123' ],
+				'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
 				'value' => [ 'type' => 'somevalue' ],
 			],
+			'/statement',
 		];
 
-		yield 'invalid reference item type with path provided' => [
-			new InvalidFieldException( '0', 'invalid', '/abc/references/0' ),
-			[
-				'references' => [ 'invalid' ],
-				'property' => [ 'id' => 'P123' ],
-				'value' => [ 'type' => 'somevalue' ],
-			],
-			'/abc',
+		yield "missing 'property' field" => [
+			new MissingFieldException( 'property', '/statement' ),
+			[ 'value' => [ 'type' => 'somevalue' ] ],
+			'/statement',
 		];
-	}
 
-	public function testDeserializationErrorFromPropertyValuePair(): void {
-		$expectedException = new MissingFieldException( 'value' );
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )
-			->willThrowException( $expectedException );
+		yield "missing 'value' field" => [
+			new MissingFieldException( 'value', '/statement' ),
+			[ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ] ],
+			'/statement',
+		];
 
-		$deserializer = new StatementDeserializer(
-			$propValPairDeserializer,
-			$this->createStub( ReferenceDeserializer::class )
-		);
-
-		try {
-			$deserializer->deserialize( [ 'property' => [ 'id' => 'P123' ] ] );
-			$this->fail( 'Expected exception was not thrown.' );
-		} catch ( Throwable $e ) {
-			$this->assertEquals( $expectedException, $e );
-		}
+		yield "missing 'value/content' field" => [
+			new MissingFieldException( 'content', '/statement/value' ),
+			[ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ], 'value' => [ 'type' => 'value' ] ],
+			'/statement',
+		];
 	}
 
 	private function newDeserializer(): StatementDeserializer {
-		$newSomeValueSnakFromSerialization = fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p['property']['id'] ) );
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
+			$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
+		}
 
-		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
-		$propValPairDeserializer->method( 'deserialize' )
-			->willReturnCallback( $newSomeValueSnakFromSerialization );
+		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
+			new BasicEntityIdParser(),
+			$dataTypeLookup,
+			new DataValuesValueDeserializer(
+				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+				WikibaseRepo::getSnakValueDeserializer(),
+				WikibaseRepo::getDataTypeValidatorFactory()
+			)
+		);
 
-		$referenceDeserializer = $this->createStub( ReferenceDeserializer::class );
-		$referenceDeserializer->method( 'deserialize' )
-			->willReturnCallback( fn( array $ref ) => new Reference(
-				array_map( $newSomeValueSnakFromSerialization, $ref['parts'] )
-			) );
+		$referenceDeserializer = new ReferenceDeserializer( $propertyValuePairDeserializer );
 
-		return new StatementDeserializer( $propValPairDeserializer, $referenceDeserializer );
+		return new StatementDeserializer( $propertyValuePairDeserializer, $referenceDeserializer );
 	}
 
 }

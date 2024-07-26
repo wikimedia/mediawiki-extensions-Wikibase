@@ -70,7 +70,7 @@ class ReferenceDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath = '' ): void {
+	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath ): void {
 		try {
 			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
@@ -80,15 +80,16 @@ class ReferenceDeserializerTest extends TestCase {
 	}
 
 	public static function invalidSerializationProvider(): Generator {
-		yield 'missing parts' => [
-			new MissingFieldException( 'parts', '' ),
+		yield "missing 'parts' field" => [
+			new MissingFieldException( 'parts', '/statement/references/0' ),
 			[],
+			'/statement/references/0',
 		];
 
-		yield 'missing parts with path' => [
-			new MissingFieldException( 'parts', 'references/0' ),
-			[],
-			'references/0',
+		yield "missing 'parts/0/property' field" => [
+			new MissingFieldException( 'property', '/statement/references/1/parts/0' ),
+			[ 'parts' => [ [ 'value' => 'novalue' ] ] ],
+			'/statement/references/1',
 		];
 
 		yield 'invalid serialization' => [
@@ -98,34 +99,33 @@ class ReferenceDeserializerTest extends TestCase {
 		];
 
 		yield 'null parts' => [
-			new InvalidFieldException( 'parts', null, '/parts' ),
+			new InvalidFieldException( 'parts', null, '/statement/references/2/parts' ),
 			[ 'parts' => null ],
+			'/statement/references/2',
 		];
 
 		yield "invalid 'parts' type - string" => [
-			new InvalidFieldException( 'parts', 'not an array', '/parts' ),
+			new InvalidFieldException( 'parts', 'not an array', '/statements/P789/2/references/3/parts' ),
 			[ 'parts' => 'not an array' ],
+			'/statements/P789/2/references/3',
 		];
 
 		yield "invalid 'parts' type - associative array" => [
-			new InvalidFieldException( 'parts', [ 'invalid' => 'parts' ], '/parts' ),
+			new InvalidFieldException( 'parts', [ 'invalid' => 'parts' ], '/some/path/parts' ),
 			[ 'parts' => [ 'invalid' => 'parts' ] ],
+			'/some/path',
 		];
 
 		yield "invalid 'parts/0' type - string" => [
-			new InvalidFieldException( '0', 'potato', '/parts/0' ),
+			new InvalidFieldException( '0', 'potato', '/statement/references/4/parts/0' ),
 			[ 'parts' => [ 'potato' ] ],
+			'/statement/references/4',
 		];
 
 		yield "invalid 'parts/0' type - sequential array" => [
-			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/parts/0' ),
+			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/statement/references/5/parts/0' ),
 			[ 'parts' => [ [ 'not', 'an', 'associative', 'array' ] ] ],
-		];
-
-		yield "invalid 'parts/0' type with path" => [
-			new InvalidFieldException( '0', 'potato', '/statement/references/1/parts/0' ),
-			[ 'parts' => [ 'potato' ] ],
-			'/statement/references/1',
+			'/statement/references/5',
 		];
 	}
 

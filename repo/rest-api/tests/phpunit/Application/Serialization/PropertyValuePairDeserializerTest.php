@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use DataValues\StringValue;
-use Exception;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -19,7 +18,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ValueDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -37,15 +37,6 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	private const TIME_PROPERTY_ID = 'P456';
 	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
 	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
-
-	private ValueDeserializer $valueDeserializer;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->valueDeserializer = $this->createStub( ValueDeserializer::class );
-		$this->valueDeserializer->method( 'deserialize' )->willReturn( $this->createStub( StringValue::class ) );
-	}
 
 	/**
 	 * @dataProvider validSerializationProvider
@@ -88,7 +79,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield 'value for string property' => [
 			new PropertyValueSnak(
 				new NumericPropertyId( self::STRING_PROPERTY_ID ),
-				$this->createStub( StringValue::class )
+				new StringValue( 'potato' )
 			),
 			[
 				'value' => [ 'type' => 'value', 'content' => 'potato' ],
@@ -100,7 +91,11 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider invalidSerializationProvider
 	 */
-	public function testDeserializationErrors( Exception $expectedException, array $serialization, string $basePath = '' ): void {
+	public function testGivenInvalidSerialization_throwsSerializationException(
+		SerializationException $expectedException,
+		array $serialization,
+		string $basePath
+	): void {
 		try {
 			$this->newDeserializer()->deserialize( $serialization, $basePath );
 			$this->fail( 'Expected exception was not thrown.' );
@@ -110,188 +105,130 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	}
 
 	public static function invalidSerializationProvider(): Generator {
-		yield 'invalid type' => [
+		yield 'invalid serialization' => [
 			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/some/path' ),
 			[ 'not', 'an', 'associative', 'array' ],
 			'/some/path',
 		];
 
-		yield 'invalid value field type - int' => [
-			new InvalidFieldException( 'value', 42, '/value' ),
+		yield "invalid 'property' field - int" => [
+			new InvalidFieldException( 'property', 42, '/statement/references/3/parts/1/property' ),
 			[
-				'value' => 42,
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'invalid value field type - sequential array' => [
-			new InvalidFieldException( 'value', [ 'not an associative array' ], '/value' ),
-			[
-				'value' => [ 'not an associative array' ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'invalid value type field' => [
-			new InvalidFieldException( 'type', 'not-a-value-type', '/value/type' ),
-			[
-				'value' => [ 'content' => 'I am goat', 'type' => 'not-a-value-type' ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'invalid property field type - int' => [
-			new InvalidFieldException( 'property', 42, '/property' ),
-			[
-				'value' => [ 'type' => 'novalue' ],
 				'property' => 42,
+				'value' => [ 'type' => 'novalue' ],
 			],
+			'/statement/references/3/parts/1',
 		];
 
-		yield 'invalid property field type - sequential array' => [
-			new InvalidFieldException( 'property', [ 'not an associative array' ], '/property' ),
+		yield "invalid 'property' field - sequential array" => [
+			new InvalidFieldException( 'property', [ 'not an associative array' ], '/some/path/property' ),
 			[
-				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'not an associative array' ],
+				'value' => [ 'type' => 'novalue' ],
 			],
+			'/some/path',
 		];
 
-		yield 'invalid property id field' => [
-			new InvalidFieldException( 'id', 'not-a-property-id', '/property/id' ),
+		yield "invalid 'property/id' field" => [
+			new InvalidFieldException( 'id', 'not-a-property-id', '/statements/P789/0/property/id' ),
 			[
-				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'not-a-property-id' ],
-			],
-		];
-
-		yield 'invalid value type field type' => [
-			new InvalidFieldException( 'type', true, '/value/type' ),
-			[
-				'value' => [ 'type' => true ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'property id is a (valid) item id' => [
-			new InvalidFieldException( 'id', 'Q123', '/property/id' ),
-			[
 				'value' => [ 'type' => 'novalue' ],
+			],
+			'/statements/P789/0',
+		];
+
+		yield "invalid 'property/id' field - item id" => [
+			new InvalidFieldException( 'id', 'Q123', '/statements/P789/2/qualifiers/1/property/id' ),
+			[
 				'property' => [ 'id' => 'Q123' ],
+				'value' => [ 'type' => 'novalue' ],
 			],
+			'/statements/P789/2/qualifiers/1',
 		];
 
-		yield 'property does not exist' => [
-			new InvalidFieldException( 'id', 'P666', '/property/id' ),
+		yield "invalid 'property/id' field - property does not exist" => [
+			new InvalidFieldException( 'id', 'P666', '/statement/references/3/parts/1/property/id' ),
 			[
-				'value' => [ 'type' => 'novalue' ],
 				'property' => [ 'id' => 'P666' ],
-			],
-		];
-
-		yield 'property does not exist with path' => [
-			new InvalidFieldException( 'id', 'P666', 'P123/0/property/id' ),
-			[
-				'value' => [ 'type' => 'novalue' ],
-				'property' => [ 'id' => 'P666' ],
-			],
-			'P123/0',
-		];
-
-		yield 'missing value field' => [
-			new MissingFieldException( 'value', '' ),
-			[
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'missing value type field' => [
-			new MissingFieldException( 'type', '/value' ),
-			[
-				'value' => [ 'content' => 'I am goat' ],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'missing value type field - empty array' => [
-			new MissingFieldException( 'type', '/value' ),
-			[
-				'value' => [],
-				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'missing property field' => [
-			new MissingFieldException( 'property', '' ),
-			[
 				'value' => [ 'type' => 'novalue' ],
 			],
+			'/statement/references/3/parts/1',
 		];
 
-		yield 'missing property id field' => [
-			new MissingFieldException( 'id', '/property' ),
+		yield "invalid 'value' field - int" => [
+			new InvalidFieldException( 'value', 42, '/statements/P789/0/value' ),
 			[
-				'value' => [ 'type' => 'novalue' ],
-				'property' => [],
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'value' => 42,
 			],
+			'/statements/P789/0',
 		];
 
-		yield 'missing property id field with path' => [
-			new MissingFieldException( 'id', 'P123/1/property' ),
+		yield "invalid 'value' field - sequential array" => [
+			new InvalidFieldException( 'value', [ 'not an associative array' ], '/statement/value' ),
 			[
-				'value' => [ 'type' => 'novalue' ],
-				'property' => [],
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'value' => [ 'not an associative array' ],
 			],
-			'P123/1',
+			'/statement',
 		];
-	}
 
-	/**
-	 * @dataProvider valueDeserializerExceptionProvider
-	 */
-	public function testValueDeserializerThrowsException( array $serialization, SerializationException $exception ): void {
-		$this->valueDeserializer = $this->createMock( ValueDeserializer::class );
-		$this->valueDeserializer->expects( $this->once() )
-			->method( 'deserialize' )
-			->with( 'string', $serialization['value'] )
-			->willThrowException( $exception );
-
-		try {
-			$this->newDeserializer()->deserialize( $serialization );
-			$this->fail( 'Expected exception was not thrown.' );
-		} catch ( SerializationException $e ) {
-			$this->assertEquals( $exception, $e );
-		}
-	}
-
-	public static function valueDeserializerExceptionProvider(): Generator {
-		yield 'invalid field' => [
+		yield "invalid 'value/type' field - not one of the allowed value" => [
+			new InvalidFieldException( 'type', 'not-a-value-type', '/statements/P789/2/qualifiers/1/value/type' ),
 			[
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'value' => [ 'type' => 'not-a-value-type', 'content' => 'I am goat' ],
+			],
+			'/statements/P789/2/qualifiers/1',
+		];
+
+		yield "invalid 'value/content' field" => [
+			new InvalidFieldException( 'content', 42, '/statements/P789/3/references/2/parts/1/value/content' ),
+			[
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
 				'value' => [ 'type' => 'value', 'content' => 42 ],
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
 			],
-			new InvalidFieldException( 'content', 42 ),
+			'/statements/P789/3/references/2/parts/1',
 		];
 
-		yield 'missing field' => [
+		yield "missing 'property' field" => [
+			new MissingFieldException( 'property', '/statements/P789/2/qualifiers/1' ),
+			[ 'value' => [ 'type' => 'novalue' ] ],
+			'/statements/P789/2/qualifiers/1',
+		];
+
+		yield "missing 'property/id' field" => [
+			new MissingFieldException( 'id', '/statement/references/3/parts/1/property' ),
 			[
-				'value' => [ 'type' => 'value' ],
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [],
+				'value' => [ 'type' => 'novalue' ],
 			],
-			new MissingFieldException( 'content' ),
+			'/statement/references/3/parts/1',
+		];
+
+		yield "missing 'value' field" => [
+			new MissingFieldException( 'value', '/some/path' ),
+			[ 'property' => [ 'id' => self::STRING_PROPERTY_ID ] ],
+			'/some/path',
+		];
+
+		yield "missing 'value/type' field" => [
+			new MissingFieldException( 'type', '/statements/P789/0/value' ),
+			[
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'value' => [ 'content' => 'I am goat' ],
+			],
+			'/statements/P789/0',
+		];
+
+		yield "missing 'value/type' field - empty array" => [
+			new MissingFieldException( 'type', '/statement/value' ),
+			[
+				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'value' => [],
+			],
+			'/statement',
 		];
 	}
 
@@ -331,11 +268,13 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			return WikibaseRepo::getEntityIdParser()->parse( $id );
 		} );
 
-		return new PropertyValuePairDeserializer(
-			$entityIdParser,
-			$dataTypeLookup,
-			$this->valueDeserializer
+		$valueDeserializer = new DataValuesValueDeserializer(
+			new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
+			WikibaseRepo::getSnakValueDeserializer(),
+			WikibaseRepo::getDataTypeValidatorFactory()
 		);
+
+		return new PropertyValuePairDeserializer( $entityIdParser, $dataTypeLookup, $valueDeserializer );
 	}
 
 	private function newUriPropertyId( string $uri ): PropertyId {
