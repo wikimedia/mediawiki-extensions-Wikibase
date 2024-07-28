@@ -4806,8 +4806,8 @@
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
-              "property-label-duplicate": {
-                "$ref": "#/components/examples/PropertyLabelDuplicateExample"
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -5531,9 +5531,6 @@
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
-              "patched-property-label-duplicate": {
-                "$ref": "#/components/examples/PatchedPropertyLabelDuplicateExample"
-              },
               "patched-descriptions-invalid-language-code": {
                 "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
               },
@@ -5560,6 +5557,9 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -5631,11 +5631,11 @@
               "patched-property-label-description-same-value": {
                 "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
               },
-              "patched-property-label-duplicate": {
-                "$ref": "#/components/examples/PatchedPropertyLabelDuplicateExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -7245,6 +7245,18 @@
           }
         }
       },
+      "DataPolicyViolationExample": {
+        "value": {
+          "code": "data-policy-violation",
+          "message": "Edit violates data policy",
+          "context": {
+            "violation": "{violation_code}",
+            "violation_context": {
+              "some": "context"
+            }
+          }
+        }
+      },
       "PatchResultValueTooLongExample": {
         "value": {
           "code": "patch-result-value-too-long",
@@ -7824,28 +7836,6 @@
             "label": "{label}",
             "description": "{description}",
             "matching_item_id": "{duplicate_item_id}"
-          }
-        }
-      },
-      "PropertyLabelDuplicateExample": {
-        "value": {
-          "code": "property-label-duplicate",
-          "message": "Property '{duplicate_property_id}' already has label '{label}' associated with language code {language}",
-          "context": {
-            "language": "{language}",
-            "label": "{label}",
-            "matching_property_id": "{duplicate_property_id}"
-          }
-        }
-      },
-      "PatchedPropertyLabelDuplicateExample": {
-        "value": {
-          "code": "patched-property-label-duplicate",
-          "message": "Property '{duplicate_property_id}' already has label '{label}' associated with language code {language}",
-          "context": {
-            "language": "{language}",
-            "label": "{label}",
-            "matching_property_id": "{duplicate_property_id}"
           }
         }
       },

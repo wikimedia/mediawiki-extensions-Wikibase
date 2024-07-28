@@ -62,15 +62,12 @@ class PropertyLabelEditRequestValidatingDeserializer {
 				case PropertyLabelValidator::CODE_LABEL_DUPLICATE:
 					$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 					$matchingPropertyId = $context[PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID];
-					$label = $context[PropertyLabelValidator::CONTEXT_LABEL];
-					throw new UseCaseError(
-						UseCaseError::PROPERTY_LABEL_DUPLICATE,
-						"Property $matchingPropertyId already has label '$label' associated with " .
-						"language code '$language'",
+
+					throw UseCaseError::newDataPolicyViolation(
+						UseCaseError::POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE,
 						[
 							UseCaseError::CONTEXT_LANGUAGE => $language,
-							UseCaseError::CONTEXT_LABEL => $label,
-							UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => $matchingPropertyId,
+							UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $matchingPropertyId,
 						]
 					);
 				default:

@@ -368,14 +368,15 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( label ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: languageWithExistingLabel, label, matching_property_id: existingPropertyId };
-			assertValidError( response, 422, 'patched-property-label-duplicate', context );
-
-			assert.strictEqual(
-				response.body.message,
-				`Property ${existingPropertyId} already has label '${label}' associated with ` +
-				`language code '${languageWithExistingLabel}'`
-			);
+			const context = {
+				violation: 'property-label-duplicate',
+				violation_context: {
+					language: languageWithExistingLabel,
+					conflicting_property_id: existingPropertyId
+				}
+			};
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {

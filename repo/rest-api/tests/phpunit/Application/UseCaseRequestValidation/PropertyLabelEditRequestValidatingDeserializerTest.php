@@ -164,20 +164,21 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		$language = 'en';
-		$label = 'My Label';
 		$propertyId = 'P456';
 		yield 'label not unique' => [
 			new ValidationError( PropertyLabelValidator::CODE_LABEL_DUPLICATE, [
 				PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
-				PropertyLabelValidator::CONTEXT_LABEL => $label,
+				PropertyLabelValidator::CONTEXT_LABEL => 'My Label',
 				PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
 			] ),
-			UseCaseError::PROPERTY_LABEL_DUPLICATE,
-			"Property $propertyId already has label '$label' associated with language code '$language'",
+			UseCaseError::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
 			[
-				UseCaseError::CONTEXT_LANGUAGE => $language,
-				UseCaseError::CONTEXT_LABEL => $label,
-				UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+					UseCaseError::CONTEXT_LANGUAGE => $language,
+					UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $propertyId,
+				],
 			],
 		];
 	}

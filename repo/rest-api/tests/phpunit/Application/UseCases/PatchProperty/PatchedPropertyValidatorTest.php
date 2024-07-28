@@ -493,7 +493,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
-		yield 'label and description duplication' => [
+		yield 'label duplication' => [
 			$mockContentsValidator,
 			new ValidationError(
 				PropertyLabelValidator::CODE_LABEL_DUPLICATE,
@@ -503,14 +503,9 @@ class PatchedPropertyValidatorTest extends TestCase {
 					PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => 'P123',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_LABEL_DUPLICATE,
-				"Property P123 already has label 'en-label' associated with language code 'en'",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_LABEL => 'en-label',
-					UseCaseError::CONTEXT_MATCHING_PROPERTY_ID => 'P123',
-				]
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE,
+				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => 'P123' ]
 			),
 		];
 	}

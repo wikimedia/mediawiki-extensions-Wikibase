@@ -12,6 +12,7 @@ class UseCaseError extends UseCaseException {
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
 	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
+	public const DATA_POLICY_VIOLATION = 'data-policy-violation';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
 	public const INVALID_KEY = 'invalid-key';
@@ -56,7 +57,6 @@ class UseCaseError extends UseCaseException {
 		'patched-property-invalid-operation-change-property-datatype';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
 	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
-	public const PATCHED_PROPERTY_LABEL_DUPLICATE = 'patched-property-label-duplicate';
 	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
 	public const PATCHED_PROPERTY_UNEXPECTED_FIELD = 'patched-property-unexpected-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
@@ -74,7 +74,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
-	public const PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const SITELINK_CONFLICT = 'sitelink-conflict';
@@ -98,7 +98,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LIMIT = 'limit';
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching_item_id';
-	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching_property_id';
+	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'conflicting_property_id';
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
@@ -109,11 +109,14 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_STATEMENT_PROPERTY_ID = 'statement_property_id';
 	public const CONTEXT_TITLE = 'title';
 	public const CONTEXT_VALUE = 'value';
+	public const CONTEXT_VIOLATION = 'violation';
+	public const CONTEXT_VIOLATION_CONTEXT = 'violation_context';
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIASES_NOT_DEFINED => [],
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
+		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
@@ -167,11 +170,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
 		self::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_PROPERTY_LABEL_DUPLICATE => [
-			self::CONTEXT_LANGUAGE,
-			self::CONTEXT_LABEL,
-			self::CONTEXT_MATCHING_PROPERTY_ID,
-		],
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
@@ -193,11 +191,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_STATEMENT_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::CONTEXT_STATEMENT_PROPERTY_ID ],
 		self::PERMISSION_DENIED => [],
-		self::PROPERTY_LABEL_DUPLICATE => [
-			self::CONTEXT_LANGUAGE,
-			self::CONTEXT_LABEL,
-			self::CONTEXT_MATCHING_PROPERTY_ID,
-		],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID ],
@@ -278,6 +271,14 @@ class UseCaseError extends UseCaseException {
 			self::INVALID_KEY,
 			"Invalid key '{$key}' in '{$path}'",
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_KEY => $key ]
+		);
+	}
+
+	public static function newDataPolicyViolation( string $violationCode, array $violationContext ): self {
+		return new self(
+			self::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
+			[ self::CONTEXT_VIOLATION => $violationCode, self::CONTEXT_VIOLATION_CONTEXT => $violationContext ]
 		);
 	}
 

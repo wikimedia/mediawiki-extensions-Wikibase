@@ -297,13 +297,15 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
 				.assertValidRequest().makeRequest();
 
-			const context = { language: languageCode, label: label, matching_property_id: existingPropertyId };
-			assertValidError( response, 400, 'property-label-duplicate', context );
-			assert.strictEqual(
-				response.body.message,
-				`Property ${existingPropertyId} already has label '${label}' associated with ` +
-				`language code '${languageCode}'`
-			);
+			const context = {
+				violation: 'property-label-duplicate',
+				violation_context: {
+					language: languageCode,
+					conflicting_property_id: existingPropertyId
+				}
+			};
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'comment too long', async () => {

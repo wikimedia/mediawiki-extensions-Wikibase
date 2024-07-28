@@ -852,9 +852,7 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"property-label-duplicate": {
-						"$ref": "./examples.json#/PropertyLabelDuplicateExample"
-					},
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -1305,9 +1303,6 @@
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
-					"patched-property-label-duplicate": {
-						"$ref": "./examples.json#/PatchedPropertyLabelDuplicateExample"
-					},
 					"patched-descriptions-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
 					},
@@ -1322,7 +1317,8 @@
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
+					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
@@ -1375,10 +1371,8 @@
 					"patched-property-label-description-same-value": {
 						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
 					},
-					"patched-property-label-duplicate": {
-						"$ref": "./examples.json#/PatchedPropertyLabelDuplicateExample"
-					},
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
+					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
