@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
@@ -221,15 +222,7 @@ class PatchedPropertyValidator {
 			case PropertyLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_TOO_LONG,
-					"Changed label for '{$language}' must not be more than $maxLabelLength characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[PropertyLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_VALUE => $context[PropertyLabelValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[PropertyLabelValidator::CONTEXT_LIMIT],
-					]
-				);
+				throw UseCaseError::newValueTooLong( "/labels/$language", $maxLabelLength, true );
 			case PropertyLabelValidator::CODE_LABEL_DUPLICATE:
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 				$label = $context[PropertyLabelValidator::CONTEXT_LABEL];
@@ -285,15 +278,7 @@ class PatchedPropertyValidator {
 			case PropertyDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE];
 				$maxDescriptionLength = $context[PropertyDescriptionValidator::CONTEXT_LIMIT];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_VALUE => $context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[PropertyDescriptionValidator::CONTEXT_LIMIT],
-					]
-				);
+				throw UseCaseError::newValueTooLong( "/descriptions/$languageCode", $maxDescriptionLength, true );
 			case PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 				$language = $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -344,15 +329,9 @@ class PatchedPropertyValidator {
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIAS_TOO_LONG,
-						"Changed alias for '$language' must not be more than $limit characters long",
-						[
-							UseCaseError::CONTEXT_LANGUAGE => $language,
-							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
-							UseCaseError::CONTEXT_CHARACTER_LIMIT => $limit,
-						]
-					);
+					$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+					$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
+					throw UseCaseError::newValueTooLong( "/aliases/$language/$aliasIndex", $limit, true );
 				default:
 					throw new UseCaseError(
 						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,

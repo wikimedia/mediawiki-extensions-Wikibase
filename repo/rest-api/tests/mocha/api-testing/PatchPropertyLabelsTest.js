@@ -285,22 +285,18 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongLabel = 'x'.repeat( maxLength + 1 );
 			const comment = 'Label too long';
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,
-				[ makeReplaceExistingLabelPatchOp( tooLongLabel ) ]
+				[ makeReplaceExistingLabelPatchOp( 'x'.repeat( maxLength + 1 ) ) ]
 			)
 				.withJsonBodyParam( 'comment', comment )
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel };
-			assertValidError( response, 422, 'patched-label-too-long', context );
-			assert.strictEqual(
-				response.body.message,
-				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
-			);
+			const context = { path: '/en', limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'invalid language code', async () => {

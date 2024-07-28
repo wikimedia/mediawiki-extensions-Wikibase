@@ -147,12 +147,11 @@ class PatchedLabelsValidatorTest extends TestCase {
 					PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
 				]
 			),
-			UseCaseError::PATCHED_LABEL_TOO_LONG,
-			"Changed label for '$language' must not be more than 250 characters long",
+			UseCaseError::PATCH_RESULT_VALUE_TOO_LONG,
+			'Patched value is too long',
 			[
-				UseCaseError::CONTEXT_VALUE => $tooLongLabel,
-				UseCaseError::CONTEXT_CHARACTER_LIMIT => 250,
-				UseCaseError::CONTEXT_LANGUAGE => $language,
+				UseCaseError::CONTEXT_PATH => "/$language",
+				UseCaseError::CONTEXT_LIMIT => 250,
 			],
 		];
 

@@ -93,15 +93,7 @@ class PatchedDescriptionsValidator {
 			case ItemDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];
 				$maxDescriptionLength = $context[ItemDescriptionValidator::CONTEXT_LIMIT];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-					"Changed description for '$languageCode' must not be more than $maxDescriptionLength characters long",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_VALUE => $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ],
-						UseCaseError::CONTEXT_CHARACTER_LIMIT => $context[ ItemDescriptionValidator::CONTEXT_LIMIT ],
-					]
-				);
+				throw UseCaseError::newValueTooLong( "/$languageCode", $maxDescriptionLength, true );
 			case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:
 				$languageCode = $context[ ItemDescriptionValidator::CONTEXT_LANGUAGE ];
 				$description = $context[ ItemDescriptionValidator::CONTEXT_DESCRIPTION ];

@@ -43,15 +43,12 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
-	public const PATCHED_LABEL_TOO_LONG = 'patched-label-too-long';
 	public const PATCHED_DESCRIPTION_EMPTY = 'patched-description-empty';
 	public const PATCHED_DESCRIPTION_INVALID = 'patched-description-invalid';
 	public const PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE = 'patched-descriptions-invalid-language-code';
-	public const PATCHED_DESCRIPTION_TOO_LONG = 'patched-description-too-long';
 	public const PATCHED_ALIAS_EMPTY = 'patched-alias-empty';
 	public const PATCHED_ALIASES_INVALID_FIELD = 'patched-aliases-invalid-field';
 	public const PATCHED_ALIASES_INVALID_LANGUAGE_CODE = 'patched-aliases-invalid-language-code';
-	public const PATCHED_ALIAS_TOO_LONG = 'patched-alias-too-long';
 	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
 	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
@@ -84,6 +81,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const STATEMENT_ID_NOT_MODIFIABLE = 'statement-id-not-modifiable';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
+	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const VALUE_TOO_LONG = 'value-too-long';
 	public const INVALID_KEY = 'invalid-key';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
@@ -91,7 +89,6 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
 	public const CONTEXT_ALIAS = 'alias';
 	public const CONTEXT_LIMIT = 'limit';
-	public const CONTEXT_CHARACTER_LIMIT = 'character-limit';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
 	public const CONTEXT_LABEL = 'label';
@@ -100,7 +97,6 @@ class UseCaseError extends UseCaseException {
 
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
 	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
-	public const CONTEXT_OPERATION = 'operation';
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_ITEM_ID = 'item-id';
@@ -155,15 +151,12 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_LABEL_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_LABEL_TOO_LONG => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::PATCHED_DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_DESCRIPTION_TOO_LONG => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::PATCHED_ALIAS_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_ALIASES_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_ALIASES_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_ALIAS_TOO_LONG => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE, self::CONTEXT_CHARACTER_LIMIT ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_MISSING_FIELD => [ self::CONTEXT_PATH ],
@@ -218,6 +211,7 @@ class UseCaseError extends UseCaseException {
 		],
 		self::STATEMENT_ID_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::STATEMENT_PROPERTY_ID ],
+		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 	];
@@ -273,10 +267,10 @@ class UseCaseError extends UseCaseException {
 		);
 	}
 
-	public static function newValueTooLong( string $path, int $maxLength ): self {
+	public static function newValueTooLong( string $path, int $maxLength, bool $isPatchRequest = false ): self {
 		return new self(
-			self::VALUE_TOO_LONG,
-			'The input value is too long',
+			$isPatchRequest ? self::PATCH_RESULT_VALUE_TOO_LONG : self::VALUE_TOO_LONG,
+			$isPatchRequest ? 'Patched value is too long' : 'The input value is too long',
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_LIMIT => $maxLength ]
 		);
 	}

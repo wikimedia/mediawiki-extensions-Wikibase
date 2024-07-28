@@ -309,18 +309,14 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongLabel = 'x'.repeat( maxLength + 1 );
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
-				[ makeReplaceExistingLabelPatchOp( tooLongLabel ) ]
+				[ makeReplaceExistingLabelPatchOp( 'x'.repeat( maxLength + 1 ) ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { value: tooLongLabel, 'character-limit': maxLength, language: languageWithExistingLabel };
-			assertValidError( response, 422, 'patched-label-too-long', context );
-			assert.strictEqual(
-				response.body.message,
-				`Changed label for '${languageWithExistingLabel}' must not be more than ${maxLength} characters long`
-			);
+			const context = { path: '/labels/en', limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'invalid label language code', async () => {
@@ -404,18 +400,14 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongDescription = 'x'.repeat( maxLength + 1 );
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
-				[ makeReplaceExistingDescriptionPatchOperation( tooLongDescription ) ]
+				[ makeReplaceExistingDescriptionPatchOperation( 'x'.repeat( maxLength + 1 ) ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { value: tooLongDescription, 'character-limit': maxLength, language: 'en' };
-			assertValidError( response, 422, 'patched-description-too-long', context );
-			assert.strictEqual(
-				response.body.message,
-				`Changed description for 'en' must not be more than ${maxLength} characters long`
-			);
+			const context = { path: '/descriptions/en', limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'invalid description language code', async () => {
@@ -496,14 +488,13 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongAlias = 'x'.repeat( maxLength + 1 );
 			const response = await newPatchItemRequestBuilder( testItemId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ tooLongAlias ] }
+				{ op: 'add', path: `/aliases/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { language, value: tooLongAlias, 'character-limit': maxLength };
-			assertValidError( response, 422, 'patched-alias-too-long', context );
-			assert.include( response.body.message, language );
+			const context = { path: `/aliases/${language}/0`, limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'duplicate alias', async () => {

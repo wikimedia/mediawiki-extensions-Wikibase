@@ -250,13 +250,13 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
-			const tooLongAlias = 'x'.repeat( maxLength + 1 );
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ tooLongAlias ] }
+				{ op: 'add', path: `/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { language, value: tooLongAlias, 'character-limit': maxLength };
-			assertValidError( response, 422, 'patched-alias-too-long', context );
+			const context = { path: `/${language}/0`, limit: maxLength };
+			assertValidError( response, 422, 'patch-result-value-too-long', context );
+			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
 		it( 'duplicate alias', async () => {

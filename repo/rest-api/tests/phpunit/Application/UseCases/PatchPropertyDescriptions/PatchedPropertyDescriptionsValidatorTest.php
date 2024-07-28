@@ -103,18 +103,10 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 			),
 		];
 
-		$tooLongDescription = str_repeat( 'A', self::LIMIT + 1 );
+		$language = 'en';
 		yield 'description too long' => [
-			[ 'en' => $tooLongDescription ],
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_TOO_LONG,
-				"Changed description for 'en' must not be more than " . self::LIMIT . ' characters long',
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $tooLongDescription,
-					UseCaseError::CONTEXT_CHARACTER_LIMIT => self::LIMIT,
-				]
-			),
+			[ $language => str_repeat( 'A', self::LIMIT + 1 ) ],
+			UseCaseError::newValueTooLong( "/$language", self::LIMIT, true ),
 		];
 
 		yield 'description equals label' => [

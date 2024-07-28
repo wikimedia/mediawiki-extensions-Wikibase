@@ -5400,9 +5400,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-too-long": {
-                "$ref": "#/components/examples/PatchedLabelTooLongExample"
-              },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
@@ -5411,9 +5408,6 @@
               },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
-              "patched-description-too-long": {
-                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
               },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
@@ -5429,9 +5423,6 @@
               },
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
-              },
-              "patched-alias-too-long": {
-                "$ref": "#/components/examples/PatchedAliasTooLongExample"
               },
               "patched-aliases-invalid-field": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
@@ -5468,6 +5459,9 @@
               },
               "patched-sitelink-conflict": {
                 "$ref": "#/components/examples/PatchedSitelinkConflictExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
@@ -5534,9 +5528,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-too-long": {
-                "$ref": "#/components/examples/PatchedLabelTooLongExample"
-              },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
@@ -5548,9 +5539,6 @@
               },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
-              "patched-description-too-long": {
-                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
               },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
@@ -5564,14 +5552,14 @@
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
-              "patched-alias-too-long": {
-                "$ref": "#/components/examples/PatchedAliasTooLongExample"
-              },
               "patched-aliases-invalid-field": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -5599,9 +5587,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-too-long": {
-                "$ref": "#/components/examples/PatchedLabelTooLongExample"
-              },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
@@ -5610,6 +5595,9 @@
               },
               "patched-item-label-description-duplicate": {
                 "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -5637,9 +5625,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-too-long": {
-                "$ref": "#/components/examples/PatchedLabelTooLongExample"
-              },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
@@ -5648,6 +5633,9 @@
               },
               "patched-property-label-duplicate": {
                 "$ref": "#/components/examples/PatchedPropertyLabelDuplicateExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -5675,9 +5663,6 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
-              "patched-description-too-long": {
-                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
-              },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
@@ -5686,6 +5671,9 @@
               },
               "patched-item-label-description-duplicate": {
                 "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -5713,14 +5701,14 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
-              "patched-description-too-long": {
-                "$ref": "#/components/examples/PatchedDescriptionTooLongExample"
-              },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
               "patched-property-label-description-same-value": {
                 "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -5748,14 +5736,14 @@
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
-              "patched-alias-too-long": {
-                "$ref": "#/components/examples/PatchedAliasTooLongExample"
-              },
               "patched-aliases-invalid-field": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
+              },
+              "patch-result-value-too-long": {
+                "$ref": "#/components/examples/PatchResultValueTooLongExample"
               }
             }
           }
@@ -7257,6 +7245,16 @@
           }
         }
       },
+      "PatchResultValueTooLongExample": {
+        "value": {
+          "code": "patch-result-value-too-long",
+          "message": "Patched value is too long",
+          "context": {
+            "path": "{json_pointer_to_patched_element}",
+            "limit": "{configured_limit}"
+          }
+        }
+      },
       "InvalidQueryParameterExample": {
         "value": {
           "code": "invalid-query-parameter",
@@ -7595,17 +7593,6 @@
           }
         }
       },
-      "PatchedLabelTooLongExample": {
-        "value": {
-          "code": "patched-label-too-long",
-          "message": "Changed label for '{language_code}' must not be more than {limit} characters long",
-          "context": {
-            "language": "{language_code}",
-            "value": "{label}",
-            "limit": "{limit}"
-          }
-        }
-      },
       "PatchedLabelInvalidExample": {
         "value": {
           "code": "patched-label-invalid",
@@ -7631,17 +7618,6 @@
           "message": "Changed description for '{language_code}' cannot be empty",
           "context": {
             "language": "{language_code}"
-          }
-        }
-      },
-      "PatchedDescriptionTooLongExample": {
-        "value": {
-          "code": "patched-description-too-long",
-          "message": "Changed description for '{language_code}' must not be more than {limit} characters long",
-          "context": {
-            "language": "{language_code}",
-            "value": "{description}",
-            "limit": "{limit}"
           }
         }
       },
@@ -7807,17 +7783,6 @@
           "message": "Changed alias for '{language_code}' cannot be empty",
           "context": {
             "language": "{language_code}"
-          }
-        }
-      },
-      "PatchedAliasTooLongExample": {
-        "value": {
-          "code": "patched-alias-too-long",
-          "message": "Changed alias for '{language_code}' must not be more than {limit} characters long",
-          "context": {
-            "language": "{language_code}",
-            "value": "{alias}",
-            "limit": "{limit}"
           }
         }
       },
