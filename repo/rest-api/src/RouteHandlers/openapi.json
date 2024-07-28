@@ -4175,9 +4175,6 @@
               "invalid-language-code": {
                 "$ref": "#/components/examples/InvalidLanguageCodeWithPathContextExample"
               },
-              "item-label-description-duplicate": {
-                "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
-              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -4195,6 +4192,9 @@
               },
               "item-not-a-badge": {
                 "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -4768,8 +4768,8 @@
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
-              "item-label-description-duplicate": {
-                "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -4841,8 +4841,8 @@
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
-              "item-label-description-duplicate": {
-                "$ref": "#/components/examples/ItemLabelDescriptionDuplicateExample"
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -5415,9 +5415,6 @@
               "patched-item-label-description-same-value": {
                 "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
               },
-              "patched-item-label-description-duplicate": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
-              },
               "patched-aliases-invalid-language-code": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
               },
@@ -5465,6 +5462,9 @@
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -5593,11 +5593,11 @@
               "patched-item-label-description-same-value": {
                 "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
               },
-              "patched-item-label-description-duplicate": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -5669,11 +5669,11 @@
               "patched-item-label-description-same-value": {
                 "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
               },
-              "patched-item-label-description-duplicate": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionDuplicateExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -7768,18 +7768,6 @@
           }
         }
       },
-      "PatchedItemLabelDescriptionDuplicateExample": {
-        "value": {
-          "code": "patched-item-label-description-duplicate",
-          "message": "Item '{duplicate_id}' already has label '{label}' associated with language code '{language}', using the same description text",
-          "context": {
-            "language": "{language_code}",
-            "label": "{label}",
-            "description": "{description}",
-            "matching_item_id": "{duplicate_id}"
-          }
-        }
-      },
       "PatchedAliasesInvalidLanguageCodeExample": {
         "value": {
           "code": "patched-aliases-invalid-language-code",
@@ -7824,18 +7812,6 @@
           "message": "Label and description for language code '{language}' can not have the same value",
           "context": {
             "language": "{language}"
-          }
-        }
-      },
-      "ItemLabelDescriptionDuplicateExample": {
-        "value": {
-          "code": "item-label-description-duplicate",
-          "message": "Item '{duplicate_item_id}' already has label '{label}' associated with language code '{language}', using the same description text",
-          "context": {
-            "language": "{language}",
-            "label": "{label}",
-            "description": "{description}",
-            "matching_item_id": "{duplicate_item_id}"
           }
         }
       },

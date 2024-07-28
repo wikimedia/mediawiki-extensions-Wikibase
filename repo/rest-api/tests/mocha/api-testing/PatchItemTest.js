@@ -460,17 +460,15 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			).assertValidRequest().makeRequest();
 
 			const context = {
-				language: languageWithExistingLabel,
-				label,
-				description,
-				matching_item_id: existingItemId
+				violation: 'item-label-description-duplicate',
+				violation_context: {
+					language: languageWithExistingLabel,
+					conflicting_item_id: existingItemId
+				}
 			};
-			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
-			assert.strictEqual(
-				response.body.message,
-				`Item '${existingItemId}' already has label '${label}' associated with language code ` +
-				`'${languageWithExistingLabel}', using the same description text`
-			);
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'empty alias', async () => {

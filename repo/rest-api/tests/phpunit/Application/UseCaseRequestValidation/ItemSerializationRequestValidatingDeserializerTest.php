@@ -193,13 +193,14 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-				"Item 'Q123' already has label 'en-label' associated with language code 'en', using the same description text",
+				UseCaseError::DATA_POLICY_VIOLATION,
+				'Edit violates data policy',
 				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_LABEL => 'en-label',
-					UseCaseError::CONTEXT_DESCRIPTION => 'en-description',
-					UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+					UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+						UseCaseError::CONTEXT_LANGUAGE => 'en',
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
+					],
 				]
 			),
 		];
@@ -296,14 +297,15 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 			new UseCaseError(
-				UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-				"Item 'Q123' already has label 'en-label' associated with language code 'en', using the same description text",
+				UseCaseError::DATA_POLICY_VIOLATION,
+				'Edit violates data policy',
 				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_LABEL => 'en-label',
-					UseCaseError::CONTEXT_DESCRIPTION => 'en-description',
-					UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123',
-				]
+					UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+					UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+						UseCaseError::CONTEXT_LANGUAGE => 'en',
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
+					],
+				],
 			),
 		];
 	}

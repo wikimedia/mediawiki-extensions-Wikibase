@@ -94,16 +94,11 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				throw new UseCaseError(
-					UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-					"Item '{$context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID]}' already has label " .
-					"'{$context[ItemLabelValidator::CONTEXT_LABEL]}' associated with language code " .
-					"'{$context[ItemLabelValidator::CONTEXT_LANGUAGE]}', using the same description text",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_LABEL => $context[ItemLabelValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
 				);
 		}
@@ -137,16 +132,11 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:
-				throw new UseCaseError(
-					UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-					"Item '{$context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID]}' already has label " .
-					"'{$context[ItemDescriptionValidator::CONTEXT_LABEL]}' associated with language code " .
-					"'{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}', using the same description text",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_LABEL => $context[ItemDescriptionValidator::CONTEXT_LABEL],
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
 				);
 		}

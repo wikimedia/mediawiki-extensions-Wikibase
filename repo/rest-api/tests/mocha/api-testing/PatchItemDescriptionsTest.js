@@ -329,11 +329,16 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: `/${testLanguage}`, value: description } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: testLanguage, label, description, matching_item_id: existingItemId };
-			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
-			assert.include( response.body.message, existingItemId );
-			assert.include( response.body.message, description );
-			assert.include( response.body.message, testLanguage );
+			const context = {
+				violation: 'item-label-description-duplicate',
+				violation_context: {
+					language: testLanguage,
+					conflicting_item_id: existingItemId
+				}
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'patched-item-label-description-same-value', async () => {

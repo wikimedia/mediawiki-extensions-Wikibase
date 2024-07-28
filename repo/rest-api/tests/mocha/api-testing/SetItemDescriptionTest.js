@@ -245,11 +245,16 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, language, description )
 				.assertValidRequest().makeRequest();
 
-			const context = { language, label: testEnLabel, description, matching_item_id: matchingItemId };
-			assertValidError( response, 400, 'item-label-description-duplicate', context );
-			assert.include( response.body.message, matchingItemId );
-			assert.include( response.body.message, testEnLabel );
-			assert.include( response.body.message, language );
+			const context = {
+				violation: 'item-label-description-duplicate',
+				violation_context: {
+					language: language,
+					conflicting_item_id: matchingItemId
+				}
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'invalid edit tag', async () => {

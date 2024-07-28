@@ -437,9 +437,6 @@
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
 					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeWithPathContextExample" },
-					"item-label-description-duplicate": {
-						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
-					},
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
@@ -450,6 +447,7 @@
 					"item-not-a-badge": {
 						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
 					},
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" }
@@ -826,9 +824,7 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"item-label-description-duplicate": {
-						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
-					},
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -875,9 +871,7 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"item-label-description-duplicate": {
-						"$ref": "./examples.json#/ItemLabelDescriptionDuplicateExample"
-					},
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -1241,9 +1235,6 @@
 					"patched-item-label-description-same-value": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
 					},
-					"patched-item-label-description-duplicate": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
-					},
 					"patched-aliases-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
 					},
@@ -1261,7 +1252,8 @@
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
 					"patched-sitelink-conflict": { "$ref": "./examples.json#/PatchedSitelinkConflictExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
-					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" }
+					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
@@ -1343,10 +1335,8 @@
 					"patched-item-label-description-same-value": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
 					},
-					"patched-item-label-description-duplicate": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
-					},
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
+					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
@@ -1397,10 +1387,8 @@
 					"patched-item-label-description-same-value": {
 						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
 					},
-					"patched-item-label-description-duplicate": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionDuplicateExample"
-					},
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
+					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},

@@ -96,18 +96,11 @@ class PatchedItemLabelsValidator {
 				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 				throw UseCaseError::newValueTooLong( "/$language", $maxLabelLength, true );
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
-				$languageCode = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				$label = $context[ItemLabelValidator::CONTEXT_LABEL];
-				$duplicateItemId = $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
-					"Item $duplicateItemId already has label '$label' associated with language " .
-					"code $languageCode, using the same description text.",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
-						UseCaseError::CONTEXT_LANGUAGE => $languageCode,
-						UseCaseError::CONTEXT_LABEL => $label,
-						UseCaseError::CONTEXT_DESCRIPTION => $context[ItemLabelValidator::CONTEXT_DESCRIPTION],
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => $duplicateItemId,
+						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
 					]
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:

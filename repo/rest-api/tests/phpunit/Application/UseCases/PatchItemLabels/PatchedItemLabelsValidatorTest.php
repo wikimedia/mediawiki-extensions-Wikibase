@@ -166,14 +166,14 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
 				]
 			),
-			UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE,
-			"Item $collidingItemId already has label '$collidingLabel' associated with language code $language, " .
-			'using the same description text.',
+			UseCaseError::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
 			[
-				UseCaseError::CONTEXT_LANGUAGE => $language,
-				UseCaseError::CONTEXT_LABEL => $collidingLabel,
-				UseCaseError::CONTEXT_DESCRIPTION => $collidingDescription,
-				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+					UseCaseError::CONTEXT_LANGUAGE => $language,
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $collidingItemId,
+				],
 			],
 		];
 	}

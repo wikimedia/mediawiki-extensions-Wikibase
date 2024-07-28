@@ -246,20 +246,16 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patched-item-label-description-duplicate',
-				{
+			const context = {
+				violation: 'item-label-description-duplicate',
+				violation_context: {
 					language: languageCode,
-					label: label,
-					description: description,
-					matching_item_id: existingItemId
+					conflicting_item_id: existingItemId
 				}
-			);
-			assert.include( response.body.message, existingItemId );
-			assert.include( response.body.message, label );
-			assert.include( response.body.message, languageCode );
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'patched-item-label-description-same-value', async () => {

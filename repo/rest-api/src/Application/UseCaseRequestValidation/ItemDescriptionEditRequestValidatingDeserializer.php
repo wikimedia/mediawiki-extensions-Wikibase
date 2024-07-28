@@ -64,17 +64,11 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 						[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 					);
 				case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:
-					$matchingItemId = $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID];
-					$label = $context[ItemDescriptionValidator::CONTEXT_LABEL];
-					throw new UseCaseError(
-						UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-						"Item '$matchingItemId' already has label '$label' associated with "
-						. "language code '$language', using the same description text",
+					throw UseCaseError::newDataPolicyViolation(
+						UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 						[
 							UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-							UseCaseError::CONTEXT_LABEL => $label,
-							UseCaseError::CONTEXT_DESCRIPTION => $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION],
-							UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+							UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
 						]
 					);
 				default:
