@@ -129,6 +129,11 @@ class SidebarHookHandler implements
 		if ( $otherProjectsSidebar !== null ) {
 			$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
 		}
+
+		if ( $wikidataItemLink !== null || $otherProjectsSidebar !== null ) {
+			$outputPage = $skin->getContext()->getOutput();
+			$outputPage->addModules( 'wikibase.sidebar.tracking' );
+		}
 	}
 
 	/**

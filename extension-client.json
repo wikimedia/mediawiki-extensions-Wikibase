@@ -480,6 +480,9 @@
 				"mediawiki.storage",
 				"mediawiki.icon"
 			]
+		},
+		"wikibase.sidebar.tracking": {
+			"scripts": "wikibase.sidebar.tracking.js"
 		}
 	},
 	"SpecialPages": {
