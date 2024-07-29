@@ -3,7 +3,8 @@
 		"authors": [
 			"Mainframe98",
 			"Sjoerddebruin",
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"apihelp-query+wbentityusage-summary": "Retourneert alle entiteits-ID’s die op de opgegeven pagina’s worden gebruikt.",
@@ -43,7 +44,7 @@
 	"apihelp-query+description-example-central": "Vraag de beschrijving op voor de pagina ‘Londen’, waarbij de centrale beschrijving, als er een is, de voorkeur heeft.",
 	"apihelp-query+wikibase-summary": "Informatie opvragen over de Wikibase-cliënt en de bijbehorende Wikibase-repository.",
 	"apihelp-query+wikibase-example": "Vraag het URL-pad en andere informatie op over de Wikibase-cliënt en -repository.",
-	"apihelp-wbformatreference-summary": "Maakt een verwijzing op om aan gebruikers te tonen.",
+	"apihelp-wbformatreference-summary": "Maakt een verwijzing op om aan gebruikers weer te geven.",
 	"apihelp-wbformatreference-example-1": "Formatteer een lege referentie met behulp van de Data Bridge-stijl in HTML.",
 	"apihelp-wbformatreference-example-2": "Formatteer een verwijzing die één tekenreeks bevat met behulp van de Data Bridge-stijl in HTML.",
 	"apihelp-wbformatreference-param-reference": "De referentie als JSON-object.",
