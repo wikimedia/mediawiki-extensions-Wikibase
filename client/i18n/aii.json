@@ -6,5 +6,7 @@
 		]
 	},
 	"wikibase-linkitem-input-site": "ܠܫܢܐ:",
-	"wikibase-linkitem-input-page": "ܕܦܐ:"
+	"wikibase-linkitem-input-page": "ܕܦܐ:",
+	"wikibase-rc-hide-wikidata-hide": "ܛܫܝ",
+	"wikibase-rc-hide-wikidata-show": "ܐܚܘܝ"
 }
