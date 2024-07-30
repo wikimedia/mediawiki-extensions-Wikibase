@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -263,7 +262,7 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 
 	private function newStatementSerializationRVD(): StatementSerializationRequestValidatingDeserializer {
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::EXISTING_STRING_PROPERTY_ID ), 'string' );
+		$deserializerFactory->setDataTypeForProperty( self::EXISTING_STRING_PROPERTY_ID, 'string' );
 		$propertyValuePairDeserializer = $deserializerFactory->createPropertyValuePairDeserializer();
 
 		return new StatementSerializationRequestValidatingDeserializer(

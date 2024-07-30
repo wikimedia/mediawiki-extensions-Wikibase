@@ -251,10 +251,7 @@ class StatementDeserializerTest extends TestCase {
 
 	private function newDeserializer(): StatementDeserializer {
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
-		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
-			$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
-		}
-
+		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
 		$propertyValuePairDeserializer = $deserializerFactory->createPropertyValuePairDeserializer();
 		$referenceDeserializer = new ReferenceDeserializer( $propertyValuePairDeserializer );
 
