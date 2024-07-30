@@ -4,10 +4,8 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
@@ -16,12 +14,9 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer
@@ -255,21 +250,12 @@ class StatementDeserializerTest extends TestCase {
 	}
 
 	private function newDeserializer(): StatementDeserializer {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
 		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
-			$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
+			$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
 		}
 
-		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
-			new BasicEntityIdParser(),
-			$dataTypeLookup,
-			new DataValuesValueDeserializer(
-				new DataTypeFactoryValueTypeLookup( WikibaseRepo::getDataTypeFactory() ),
-				WikibaseRepo::getSnakValueDeserializer(),
-				WikibaseRepo::getDataTypeValidatorFactory()
-			)
-		);
-
+		$propertyValuePairDeserializer = $deserializerFactory->createPropertyValuePairDeserializer();
 		$referenceDeserializer = new ReferenceDeserializer( $propertyValuePairDeserializer );
 
 		return new StatementDeserializer( $propertyValuePairDeserializer, $referenceDeserializer );
