@@ -62,12 +62,6 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	public function provideInvalidStatementSerialization(): Generator {
-		// TODO: should invalid 'id' be ignored? If so create a test that asserts that.
-		// yield "invalid 'id' value" => [
-		// 	[ 'id' => 'invalid', 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ], 'value' => [ 'type' => 'novalue' ] ],
-		// 	UseCaseError::newInvalidValue( '/statement/id' ),
-		// ];
-
 		yield "invalid 'rank' value" => [
 			[ 'rank' => 'invalid', 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ], 'value' => [ 'type' => 'novalue' ] ],
 			UseCaseError::newInvalidValue( '/statement/rank' ),
@@ -87,12 +81,6 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 			[ 'property' => [ 'id' => 123 ], 'value' => [ 'type' => 'novalue' ] ],
 			UseCaseError::newInvalidValue( '/statement/property/id' ),
 		];
-
-		// TODO: should invalid 'data-type' be ignored? If so create a test that asserts that.
-		// yield "invalid 'property/data-type' value" => [
-		// 	[ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID, 'data-type' => 'invalid' ], 'value' => [ 'type' => 'novalue' ] ],
-		// 	UseCaseError::newInvalidValue( '/statement/property/data-type' ),
-		// ];
 
 		yield "invalid 'value' value - string" => [
 			[ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ], 'value' => 'not an array' ],
