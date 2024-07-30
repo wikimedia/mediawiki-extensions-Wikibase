@@ -834,8 +834,8 @@ class PatchedItemValidatorTest extends TestCase {
 				"Statement's Property ID does not match the statement group key",
 				[
 					UseCaseError::CONTEXT_PATH => "$propertyIdKey/0/property/id",
-					UseCaseError::CONTEXT_PROPERTY_ID_KEY => $propertyIdKey,
-					UseCaseError::CONTEXT_PROPERTY_ID_VALUE => $propertyIdValue,
+					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => $propertyIdKey,
+					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => $propertyIdValue,
 				]
 			),
 		];
