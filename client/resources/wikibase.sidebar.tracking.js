@@ -9,13 +9,15 @@
 mw.loader.using( 'ext.eventLogging' ).then( () => {
 	$( '#t-wikibase' ).on( 'click', () => {
 		mw.eventLog.submitClick( 'wikibase.client.interaction', {
-			actionSource: 'wbSidebarWikidataItemLinkClick'
+			// eslint-disable-next-line camelcase
+			action_source: 'wbSidebarWikidataItemLinkClick'
 		} );
 	} );
 
 	$( '.wb-otherproject-link.wb-otherproject-wikidata.mw-list-item' ).on( 'click', () => {
 		mw.eventLog.submitClick( 'wikibase.client.interaction', {
-			actionSource: 'wbSidebarWikidataOtherProjectsLinkClick'
+			// eslint-disable-next-line camelcase
+			action_source: 'wbSidebarWikidataOtherProjectsLinkClick'
 		} );
 	} );
 } );
