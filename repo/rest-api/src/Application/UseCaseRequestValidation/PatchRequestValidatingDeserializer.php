@@ -41,10 +41,8 @@ class PatchRequestValidatingDeserializer {
 
 				case JsonPatchValidator::CODE_MISSING_FIELD:
 					$opField = $context[JsonPatchValidator::CONTEXT_FIELD];
-					$opIndex = array_search( $context[JsonPatchValidator::CONTEXT_OPERATION], $request->getPatch() );
-					if ( !is_int( $opIndex ) ) {
-						throw new LogicException( "The invalid operation wasn't found in the original patch document" );
-					}
+					$operation = $context[JsonPatchValidator::CONTEXT_OPERATION];
+					$opIndex = Utils::getIndexOfValueInSerialization( $operation, $request->getPatch() );
 					throw UseCaseError::newMissingField( "/patch/$opIndex", $opField );
 
 				default:
