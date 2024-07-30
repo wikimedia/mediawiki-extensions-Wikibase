@@ -34,7 +34,7 @@
 	"wikibase-error-ui-no-external-page": "De pagina \"$2\" kon niet worden gevonden op \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Dezelfde waarde is bewerkt in de tussentijd, wat een bewerkingsconflict veroorzaakte. Laad de pagina opnieuw.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (getranslitereerd)",
-	"wikibase-language-name-for-terms-mul": "standaardwaarden voor alle talen",
+	"wikibase-language-name-for-terms-mul": "standaardwaarde voor alle talen",
 	"wikibase-quantitydetails-amount": "Hoeveelheid",
 	"wikibase-quantitydetails-upperbound": "Bovengrens",
 	"wikibase-quantitydetails-lowerbound": "Ondergrens",

@@ -88,6 +88,7 @@
 	"wikibase-pageinfo-description-central": "Keskitetty kuvaus",
 	"wikibase-pageinfo-entity-usage": "Tällä sivulla käytetyt {{WBREPONAME}}-kohteet",
 	"wikibase-pageinfo-entity-usage-S": "Sivulinkki",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Nimi: $1",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Kuvaus: $1",
 	"wikibase-pageinfo-entity-usage-T": "Otsikko",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Esitykset: $1",
