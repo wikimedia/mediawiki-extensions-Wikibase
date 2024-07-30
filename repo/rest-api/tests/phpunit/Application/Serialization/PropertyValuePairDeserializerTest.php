@@ -5,10 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use DataValues\StringValue;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -18,7 +15,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldExcep
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer
@@ -60,16 +56,6 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
 					'id' => self::ITEM_ID_PROPERTY_ID,
-				],
-			],
-		];
-
-		yield 'non-numeric property id (e.g. federated property)' => [
-			new PropertySomeValueSnak( $this->newUriPropertyId( self::STRING_URI_PROPERTY_ID ) ),
-			[
-				'value' => [ 'type' => 'somevalue' ],
-				'property' => [
-					'id' => self::STRING_URI_PROPERTY_ID,
 				],
 			],
 		];
@@ -231,32 +217,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 	}
 
 	private function newDeserializer(): PropertyValuePairDeserializer {
-		$entityIdParser = $this->createStub( EntityIdParser::class );
-		$entityIdParser->method( 'parse' )->willReturnCallback( function( $id ) {
-			if ( substr( $id, 0, 4 ) === 'http' ) {
-				return $this->newUriPropertyId( $id );
-			}
-
-			return WikibaseRepo::getEntityIdParser()->parse( $id );
-		} );
-
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
 		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY_ID ), 'string' );
 		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::URL_PROPERTY_ID ), 'url' );
 		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::TIME_PROPERTY_ID ), 'time' );
 		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ), 'globe-coordinate' );
 		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ), 'wikibase-item' );
-		$deserializerFactory->setDataTypeForProperty( $this->newUriPropertyId( self::STRING_URI_PROPERTY_ID ), 'string' );
 
-		return $deserializerFactory->createPropertyValuePairDeserializer( $entityIdParser );
-	}
-
-	private function newUriPropertyId( string $uri ): PropertyId {
-		$id = $this->createStub( PropertyId::class );
-		$id->method( 'getEntityType' )->willReturn( Property::ENTITY_TYPE );
-		$id->method( 'getSerialization' )->willReturn( $uri );
-
-		return $id;
+		return $deserializerFactory->createPropertyValuePairDeserializer();
 	}
 
 }
