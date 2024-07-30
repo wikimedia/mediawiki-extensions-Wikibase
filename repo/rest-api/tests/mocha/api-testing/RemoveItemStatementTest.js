@@ -216,7 +216,7 @@ describe( 'DELETE statement', () => {
 					.assertValidRequest()
 					.makeRequest();
 
-			const context = { 'item-id': testItemId, 'statement-id': statementId };
+			const context = { item_id: testItemId, statement_id: statementId };
 			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 

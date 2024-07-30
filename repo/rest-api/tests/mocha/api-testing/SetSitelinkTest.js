@@ -408,7 +408,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -423,7 +423,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'sitelink-conflict', { 'matching-item-id': testItemId } );
+			assertValidError( response, 409, 'sitelink-conflict', { matching_item_id: testItemId } );
 			assert.include( response.body.message, testItemId );
 		} );
 	} );

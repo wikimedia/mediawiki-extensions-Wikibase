@@ -198,7 +198,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( redirectSource, [] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -230,7 +230,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testAlias } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: testAlias } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );

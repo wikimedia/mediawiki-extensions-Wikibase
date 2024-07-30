@@ -245,7 +245,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, language, description )
 				.assertValidRequest().makeRequest();
 
-			const context = { language, label: testEnLabel, description, 'matching-item-id': matchingItemId };
+			const context = { language, label: testEnLabel, description, matching_item_id: matchingItemId };
 			assertValidError( response, 400, 'item-label-description-duplicate', context );
 			assert.include( response.body.message, matchingItemId );
 			assert.include( response.body.message, testEnLabel );
@@ -303,7 +303,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( redirectSource, 'en', 'test description' )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -320,7 +320,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemDescriptionRequestBuilder( redirectSource, 'en', description )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );

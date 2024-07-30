@@ -260,7 +260,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemLabelRequestBuilder( testItemId, language, label )
 				.assertValidRequest().makeRequest();
 
-			const context = { language, label, description, 'matching-item-id': existingItemId };
+			const context = { language, label, description, matching_item_id: existingItemId };
 			assertValidError( response, 400, 'item-label-description-duplicate', context );
 			assert.strictEqual(
 				response.body.message,
@@ -321,7 +321,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -334,7 +334,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );

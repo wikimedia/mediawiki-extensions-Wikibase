@@ -195,7 +195,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -230,7 +230,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testDescription } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: testDescription } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
@@ -329,7 +329,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: `/${testLanguage}`, value: description } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: testLanguage, label, description, 'matching-item-id': existingItemId };
+			const context = { language: testLanguage, label, description, matching_item_id: existingItemId };
 			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
 			assert.include( response.body.message, existingItemId );
 			assert.include( response.body.message, description );

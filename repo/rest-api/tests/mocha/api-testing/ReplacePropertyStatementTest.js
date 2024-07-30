@@ -424,7 +424,7 @@ describe( 'PUT statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatementId };
+			const context = { property_id: requestedPropertyId, statement_id: testStatementId };
 			assertValidError( response, 400, 'property-statement-id-mismatch', context );
 		} );
 

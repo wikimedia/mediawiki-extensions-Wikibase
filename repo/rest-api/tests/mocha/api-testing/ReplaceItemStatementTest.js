@@ -394,7 +394,7 @@ describe( 'PUT statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'item-id': itemId, 'statement-id': testStatementId };
+			const context = { item_id: itemId, statement_id: testStatementId };
 			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 

@@ -7350,7 +7350,7 @@
           "message": "Test operation in the provided patch failed",
           "context": {
             "path": "{json_pointer_to_patch_operation}",
-            "actual-value": "actual value"
+            "actual_value": "actual value"
           }
         }
       },
@@ -7399,7 +7399,7 @@
           "code": "redirected-item",
           "message": "Item {item_id} has been redirected to {redirect_target_id}",
           "context": {
-            "redirect-target": "{redirect_target_id}"
+            "redirect_target": "{redirect_target_id}"
           }
         }
       },
@@ -7408,7 +7408,7 @@
           "code": "sitelink-conflict",
           "message": "Sitelink is already being used on {other_item_id}",
           "context": {
-            "matching-item-id": "{other_item_id}"
+            "matching_item_id": "{other_item_id}"
           }
         }
       },
@@ -7417,7 +7417,7 @@
           "code": "sitelink-conflict",
           "message": "Sitelink is already being used on {other_item_id}",
           "context": {
-            "matching-item-id": "{other_item_id}",
+            "matching_item_id": "{other_item_id}",
             "site": "{site_id}"
           }
         }
@@ -7475,7 +7475,7 @@
           "code": "patched-invalid-sitelink-type'",
           "message": "Not a valid sitelink type in patched sitelinks",
           "context": {
-            "site-id": "{site_id}"
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7484,7 +7484,7 @@
           "code": "patched-sitelink-invalid-site-id",
           "message": "Not a valid site ID {site_id} in patched sitelinks",
           "context": {
-            "site-id": "{site_id}"
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7493,7 +7493,7 @@
           "code": "patched-sitelink-missing-title",
           "message": "No sitelink title provided for site {site_id} in patched sitelinks",
           "context": {
-            "site-id": "{site_id}"
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7502,7 +7502,7 @@
           "code": "patched-sitelink-title-empty",
           "message": "Sitelink cannot be empty for site {site_id} in patched sitelinks",
           "context": {
-            "site-id": "{site_id}"
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7511,7 +7511,7 @@
           "code": "patched-sitelink-invalid-title",
           "message": "Invalid sitelink title {title} for site {site_id} in patched sitelinks",
           "context": {
-            "site-id": "{site_id}",
+            "site_id": "{site_id}",
             "title": "{title}"
           }
         }
@@ -7521,7 +7521,7 @@
           "code": "patched-sitelink-title-does-not-exist",
           "message": "Incorrect patched sitelinks. Page with title {title} does not exist on site {site_id}",
           "context": {
-            "site-id": "{site_id}",
+            "site_id": "{site_id}",
             "title": "{title}"
           }
         }
@@ -7531,7 +7531,7 @@
           "code": "patched-sitelink-invalid-badge",
           "message": "Incorrect patched sitelinks. Badge value {badge} for site {site_id} is not an item ID",
           "context": {
-            "site-id": "{site_id}",
+            "site_id": "{site_id}",
             "badge": "{badge}"
           }
         }
@@ -7541,7 +7541,7 @@
           "code": "patched-sitelink-item-not-a-badge",
           "message": "Incorrect patched sitelinks. Item {badge} used for site {site_id} is not allowed as a badge",
           "context": {
-            "site-id": "{site_id}",
+            "site_id": "{site_id}",
             "badge": "{badge}"
           }
         }
@@ -7551,7 +7551,7 @@
           "code": "patched-sitelink-badges-format",
           "message": "Badges for site {site_id} is not a list in patched sitelinks",
           "context": {
-            "site-id": "{site_id}",
+            "site_id": "{site_id}",
             "badge": "{badge}"
           }
         }
@@ -7561,8 +7561,8 @@
           "code": "patched-sitelink-conflict",
           "message": "Site {site_id} is already being used on {other_item_id}",
           "context": {
-            "matching-item-id": "{other_item_id}",
-            "site-id": "{site_id}"
+            "matching_item_id": "{other_item_id}",
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7571,7 +7571,7 @@
           "code": "url-not-modifiable",
           "message": "URL of sitelink cannot be modified",
           "context": {
-            "site-id": "{site_id}"
+            "site_id": "{site_id}"
           }
         }
       },
@@ -7704,7 +7704,7 @@
           "code": "statement-id-not-modifiable",
           "message": "Statement IDs cannot be created or modified",
           "context": {
-            "statement-id": "{statement_id}"
+            "statement_id": "{statement_id}"
           }
         }
       },
@@ -7713,8 +7713,8 @@
           "code": "patched-statement-property-not-modifiable",
           "message": "Property of a statement cannot be modified",
           "context": {
-            "statement-id": "{statement_id}",
-            "statement-property-id": "{property_of_statement_as_persisted}"
+            "statement_id": "{statement_id}",
+            "statement_property_id": "{property_of_statement_as_persisted}"
           }
         }
       },
@@ -7742,8 +7742,8 @@
           "message": "Statement's Property ID does not match the statement group key",
           "context": {
             "path": "{property_id_key}/{index}/property/id",
-            "statement-group-property-id": "{property_id_key}",
-            "statement-property-id": "{property_id_value}"
+            "statement_group_property_id": "{property_id_key}",
+            "statement_property_id": "{property_id_value}"
           }
         }
       },
@@ -7764,7 +7764,7 @@
             "language": "{language_code}",
             "label": "{label}",
             "description": "{description}",
-            "matching-item-id": "{duplicate_id}"
+            "matching_item_id": "{duplicate_id}"
           }
         }
       },
@@ -7823,7 +7823,7 @@
             "language": "{language}",
             "label": "{label}",
             "description": "{description}",
-            "matching-item-id": "{duplicate_item_id}"
+            "matching_item_id": "{duplicate_item_id}"
           }
         }
       },
@@ -7834,7 +7834,7 @@
           "context": {
             "language": "{language}",
             "label": "{label}",
-            "matching-property-id": "{duplicate_property_id}"
+            "matching_property_id": "{duplicate_property_id}"
           }
         }
       },
@@ -7845,7 +7845,7 @@
           "context": {
             "language": "{language}",
             "label": "{label}",
-            "matching-property-id": "{duplicate_property_id}"
+            "matching_property_id": "{duplicate_property_id}"
           }
         }
       },
@@ -7882,8 +7882,8 @@
           "code": "item-statement-id-mismatch",
           "message": "IDs of the item and the statement do not match",
           "context": {
-            "item-id": "{item_id}",
-            "statement-id": "{statement_id}"
+            "item_id": "{item_id}",
+            "statement_id": "{statement_id}"
           }
         }
       },
@@ -7892,8 +7892,8 @@
           "code": "property-statement-id-mismatch",
           "message": "IDs of the property and the statement do not match",
           "context": {
-            "property-id": "{property_id}",
-            "statement-id": "{statement_id}"
+            "property_id": "{property_id}",
+            "statement_id": "{statement_id}"
           }
         }
       },
@@ -7941,8 +7941,8 @@
           "message": "Statement's Property ID does not match the statement group key",
           "context": {
             "path": "{property_id_key}/{index}/property/id",
-            "statement-group-property-id": "{property_id_key}",
-            "statement-property-id": "{property_id_value}"
+            "statement_group_property_id": "{property_id_key}",
+            "statement_property_id": "{property_id_value}"
           }
         }
       }

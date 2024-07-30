@@ -215,7 +215,7 @@ describe( 'DELETE statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'property-id': requestedPropertyId, 'statement-id': statementId };
+			const context = { property_id: requestedPropertyId, statement_id: statementId };
 			assertValidError( response, 400, 'property-statement-id-mismatch', context );
 		} );
 

@@ -150,7 +150,7 @@ describe( 'GET statement', () => {
 				testStatement.id
 			).assertValidRequest().makeRequest();
 
-			const context = { 'item-id': requestedItemId, 'statement-id': testStatement.id };
+			const context = { item_id: requestedItemId, statement_id: testStatement.id };
 			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 

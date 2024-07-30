@@ -254,7 +254,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 					language: languageCode,
 					label: label,
 					description: description,
-					'matching-item-id': existingItemId
+					matching_item_id: existingItemId
 				}
 			);
 			assert.include( response.body.message, existingItemId );
@@ -318,7 +318,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -353,7 +353,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testEnLabel } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: testEnLabel } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );

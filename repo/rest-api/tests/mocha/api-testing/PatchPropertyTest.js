@@ -227,7 +227,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': enLabel } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: enLabel } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
@@ -368,7 +368,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( label ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: languageWithExistingLabel, label, 'matching-property-id': existingPropertyId };
+			const context = { language: languageWithExistingLabel, label, matching_property_id: existingPropertyId };
 			assertValidError( response, 422, 'patched-property-label-duplicate', context );
 
 			assert.strictEqual(
@@ -671,8 +671,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 			const context = {
 				path: `${propertyIdKey}/0/property/id`,
-				'statement-group-property-id': propertyIdKey,
-				'statement-property-id': predicatePropertyId
+				statement_group_property_id: propertyIdKey,
+				statement_property_id: predicatePropertyId
 			};
 			assertValidError( response, 422, 'patched-statement-group-property-id-mismatch', context );
 			assert.strictEqual(
@@ -692,7 +692,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': invalidStatement.id };
+			const context = { statement_id: invalidStatement.id };
 			assertValidError( response, 422, 'statement-id-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
 		} );
@@ -713,7 +713,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': duplicateStatement.id };
+			const context = { statement_id: duplicateStatement.id };
 			assertValidError( response, 422, 'statement-id-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
 		} );
@@ -735,7 +735,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': existingStatementsId, 'statement-property-id': predicatePropertyId };
+			const context = { statement_id: existingStatementsId, statement_property_id: predicatePropertyId };
 			assertValidError( response, 422, 'patched-statement-property-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Property of a statement cannot be modified' );
 		} );

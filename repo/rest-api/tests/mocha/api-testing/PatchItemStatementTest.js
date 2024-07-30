@@ -301,7 +301,7 @@ describe( 'PATCH statement tests', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					const context = { path: '/patch/0', 'actual-value': testStatement.value.content };
+					const context = { path: '/patch/0', actual_value: testStatement.value.content };
 					assertValidError( response, 409, 'patch-test-failed', context );
 					assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 				} );
@@ -368,7 +368,7 @@ describe( 'PATCH statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'item-id': requestedItemId, 'statement-id': testStatement.id };
+			const context = { item_id: requestedItemId, statement_id: testStatement.id };
 			assertValidError( response, 400, 'item-statement-id-mismatch', context );
 		} );
 

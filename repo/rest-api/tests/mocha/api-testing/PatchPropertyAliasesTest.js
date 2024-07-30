@@ -288,7 +288,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': enAliases[ 0 ] } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: enAliases[ 0 ] } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
