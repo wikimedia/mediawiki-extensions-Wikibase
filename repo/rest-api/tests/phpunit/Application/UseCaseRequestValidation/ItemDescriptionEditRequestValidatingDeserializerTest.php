@@ -157,7 +157,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		$language = 'en';
-		$matchingItemId = 'Q213';
+		$conflictingItemId = 'Q213';
 		yield 'label and description duplicate' => [
 			new ValidationError(
 				ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE,
@@ -165,7 +165,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
 					ItemDescriptionValidator::CONTEXT_LABEL => 'test label',
 					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 'test description',
-					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					ItemDescriptionValidator::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 
 				],
 			),
@@ -175,7 +175,7 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
 					UseCaseError::CONTEXT_LANGUAGE => $language,
-					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $matchingItemId,
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				],
 			],
 		];

@@ -68,7 +68,7 @@ class TermValidatorFactoryPropertyLabelValidator implements PropertyLabelValidat
 				[
 					self::CONTEXT_LANGUAGE => $language,
 					self::CONTEXT_LABEL => $label,
-					self::CONTEXT_MATCHING_PROPERTY_ID => (string)$entityId,
+					self::CONTEXT_CONFLICTING_PROPERTY_ID => (string)$entityId,
 				]
 			);
 		}

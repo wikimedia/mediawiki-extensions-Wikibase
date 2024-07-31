@@ -104,14 +104,14 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 	public function testLabelCollision_returnsValidationError(): void {
 		$languageCode = 'en';
 		$label = 'some label';
-		$matchingPropertyId = 'P456';
+		$conflictingItemId = 'P456';
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
 			->expects( $this->once() )
 			->method( 'detectLabelCollision' )
 			->with( $languageCode, $label )
-			->willReturn( new NumericPropertyId( $matchingPropertyId ) );
+			->willReturn( new NumericPropertyId( $conflictingItemId ) );
 
 		$this->assertEquals(
 			new ValidationError(
@@ -119,7 +119,7 @@ class TermValidatorFactoryPropertyLabelValidatorTest extends TestCase {
 				[
 					PropertyLabelValidator::CONTEXT_LANGUAGE => $languageCode,
 					PropertyLabelValidator::CONTEXT_LABEL => $label,
-					PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => $matchingPropertyId,
+					PropertyLabelValidator::CONTEXT_CONFLICTING_PROPERTY_ID => $conflictingItemId,
 				]
 			),
 			$this->newValidator()->validate( $languageCode, $label, new TermList( [] ) )

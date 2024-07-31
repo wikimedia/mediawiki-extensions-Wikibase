@@ -39,13 +39,13 @@ class UseCaseErrorTest extends TestCase {
 		yield 'valid error with additional path context' => [
 			UseCaseError::SITELINK_CONFLICT,
 			'sitelink conflict',
-			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123', UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
+			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123', UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
 		];
 
 		yield 'valid error without additional path context' => [
 			UseCaseError::SITELINK_CONFLICT,
 			'sitelink conflict',
-			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q123' ],
+			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123' ],
 		];
 	}
 

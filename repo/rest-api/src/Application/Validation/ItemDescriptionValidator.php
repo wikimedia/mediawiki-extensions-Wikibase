@@ -19,7 +19,7 @@ interface ItemDescriptionValidator {
 	public const CONTEXT_LANGUAGE = 'item-description-validator-context-language';
 	public const CONTEXT_LABEL = 'item-description-validator-context-label';
 	public const CONTEXT_DESCRIPTION = 'item-description-validator-context-description';
-	public const CONTEXT_MATCHING_ITEM_ID = 'item-description-validator-context-matching-item-id';
+	public const CONTEXT_CONFLICTING_ITEM_ID = 'item-description-validator-context-conflicting-item-id';
 
 	public function validate( string $language, string $descriptionText, TermList $existingLabels ): ?ValidationError;
 

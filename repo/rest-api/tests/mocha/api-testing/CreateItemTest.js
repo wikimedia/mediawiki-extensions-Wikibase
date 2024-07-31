@@ -733,7 +733,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			response,
 			409,
 			'sitelink-conflict',
-			{ site_id: localWikiId, matching_item_id: existingItemWithSitelink.body.id }
+			{ site_id: localWikiId, conflicting_item_id: existingItemWithSitelink.body.id }
 		);
 		assert.include( response.body.message, existingItemWithSitelink.body.id );
 	} );

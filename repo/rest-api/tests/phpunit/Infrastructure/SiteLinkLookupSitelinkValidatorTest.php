@@ -104,7 +104,7 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		$this->assertSame( SitelinkValidator::CODE_SITELINK_CONFLICT, $validationError->getCode() );
 		$this->assertSame(
 			$conflictItemId,
-			$validationError->getContext()[SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID]
+			$validationError->getContext()[SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID]
 		);
 	}
 

@@ -351,7 +351,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { site_id: siteId, matching_item_id: testItemId };
+			const context = { site_id: siteId, conflicting_item_id: testItemId };
 			assertValidError( response, 422, 'patched-sitelink-conflict', context );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, testItemId );

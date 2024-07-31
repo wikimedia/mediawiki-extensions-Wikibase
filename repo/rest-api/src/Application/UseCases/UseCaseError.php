@@ -98,7 +98,6 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LIMIT = 'limit';
-	public const CONTEXT_MATCHING_ITEM_ID = 'matching_item_id';
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
@@ -161,7 +160,7 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
-		self::PATCHED_SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID, self::CONTEXT_SITE_ID ],
+		self::PATCHED_SITELINK_CONFLICT => [ self::CONTEXT_CONFLICTING_ITEM_ID, self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
@@ -181,7 +180,7 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
-		self::SITELINK_CONFLICT => [ self::CONTEXT_MATCHING_ITEM_ID ],
+		self::SITELINK_CONFLICT => [ self::CONTEXT_CONFLICTING_ITEM_ID ],
 		self::SITELINK_NOT_DEFINED => [],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [

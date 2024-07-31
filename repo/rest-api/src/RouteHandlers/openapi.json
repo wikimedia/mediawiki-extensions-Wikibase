@@ -7420,7 +7420,7 @@
           "code": "sitelink-conflict",
           "message": "Sitelink is already being used on {other_item_id}",
           "context": {
-            "matching_item_id": "{other_item_id}"
+            "conflicting_item_id": "{other_item_id}"
           }
         }
       },
@@ -7429,7 +7429,7 @@
           "code": "sitelink-conflict",
           "message": "Sitelink is already being used on {other_item_id}",
           "context": {
-            "matching_item_id": "{other_item_id}",
+            "conflicting_item_id": "{other_item_id}",
             "site": "{site_id}"
           }
         }
@@ -7573,7 +7573,7 @@
           "code": "patched-sitelink-conflict",
           "message": "Site {site_id} is already being used on {other_item_id}",
           "context": {
-            "matching_item_id": "{other_item_id}",
+            "conflicting_item_id": "{other_item_id}",
             "site_id": "{site_id}"
           }
         }

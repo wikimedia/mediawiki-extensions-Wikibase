@@ -98,14 +98,14 @@ class TermValidatorFactoryItemLabelValidatorTest extends TestCase {
 		$languageCode = 'en';
 		$label = 'some label';
 		$description = 'some description';
-		$matchingItemId = 'Q456';
+		$conflictingItemId = 'Q456';
 
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termsCollisionDetector
 			->expects( $this->once() )
 			->method( 'detectLabelAndDescriptionCollision' )
 			->with( $languageCode, $label, $description )
-			->willReturn( new ItemId( $matchingItemId ) );
+			->willReturn( new ItemId( $conflictingItemId ) );
 
 		$this->assertEquals(
 			new ValidationError(
@@ -114,7 +114,7 @@ class TermValidatorFactoryItemLabelValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => $languageCode,
 					ItemLabelValidator::CONTEXT_LABEL => $label,
 					ItemLabelValidator::CONTEXT_DESCRIPTION => $description,
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+					ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				]
 
 			),

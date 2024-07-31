@@ -85,7 +85,7 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 			? new ValidationError(
 				self::CODE_SITELINK_CONFLICT,
 				[
-					self::CONTEXT_CONFLICT_ITEM_ID => $existingItemWithSitelink->getSerialization(),
+					self::CONTEXT_CONFLICTING_ITEM_ID => $existingItemWithSitelink->getSerialization(),
 					self::CONTEXT_SITE_ID => $siteLink->getSiteId(),
 				]
 			)

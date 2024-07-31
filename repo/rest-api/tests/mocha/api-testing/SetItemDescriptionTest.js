@@ -240,7 +240,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				labels: [ { language, value: testEnLabel } ],
 				descriptions: [ { language, value: description } ]
 			} );
-			const matchingItemId = createEntityResponse.entity.id;
+			const conflictingItemId = createEntityResponse.entity.id;
 
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, language, description )
 				.assertValidRequest().makeRequest();
@@ -249,7 +249,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 				violation: 'item-label-description-duplicate',
 				violation_context: {
 					language: language,
-					conflicting_item_id: matchingItemId
+					conflicting_item_id: conflictingItemId
 				}
 			};
 

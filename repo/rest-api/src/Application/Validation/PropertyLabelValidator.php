@@ -17,7 +17,7 @@ interface PropertyLabelValidator {
 
 	public const CONTEXT_LANGUAGE = 'property-label-validator-context-language';
 	public const CONTEXT_LABEL = 'property-label-validator-context-label';
-	public const CONTEXT_MATCHING_PROPERTY_ID = 'property-label-validator-context-matching-property-id';
+	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'property-label-validator-context-conflicting-property-id';
 	public const CONTEXT_LIMIT = 'property-label-validator-context-character-limit';
 
 	public function validate( string $language, string $labelText, TermList $existingDescriptions ): ?ValidationError;

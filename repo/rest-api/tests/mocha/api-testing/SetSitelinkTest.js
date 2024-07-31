@@ -423,7 +423,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'sitelink-conflict', { matching_item_id: testItemId } );
+			assertValidError( response, 409, 'sitelink-conflict', { conflicting_item_id: testItemId } );
 			assert.include( response.body.message, testItemId );
 		} );
 	} );
