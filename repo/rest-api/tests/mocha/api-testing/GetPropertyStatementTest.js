@@ -170,7 +170,7 @@ describe( 'GET statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatement.id };
+			const context = { property_id: requestedPropertyId, statement_id: testStatement.id };
 			assertValidError( response, 400, 'property-statement-id-mismatch', context );
 		} );
 	} );

@@ -229,7 +229,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': enDescription } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: enDescription } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );

@@ -298,7 +298,7 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					const context = { path: '/patch/0', 'actual-value': testStatement.value.content };
+					const context = { path: '/patch/0', actual_value: testStatement.value.content };
 					assertValidError( response, 409, 'patch-test-failed', context );
 					assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 				} );
@@ -364,7 +364,7 @@ describe( 'PATCH property statement', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { 'property-id': requestedPropertyId, 'statement-id': testStatementId };
+			const context = { property_id: requestedPropertyId, statement_id: testStatementId };
 			assertValidError( response, 400, 'property-statement-id-mismatch', context );
 		} );
 

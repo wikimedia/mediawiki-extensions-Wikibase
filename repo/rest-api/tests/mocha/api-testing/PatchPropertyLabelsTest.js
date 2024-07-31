@@ -228,7 +228,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': enLabel } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: enLabel } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 	} );
@@ -366,7 +366,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			)
 				.assertValidRequest().makeRequest();
 
-			const context = { language: languageWithExistingLabel, label, 'matching-property-id': existingPropertyId };
+			const context = { language: languageWithExistingLabel, label, matching_property_id: existingPropertyId };
 			assertValidError( response, 422, 'patched-property-label-duplicate', context );
 
 			assert.strictEqual(

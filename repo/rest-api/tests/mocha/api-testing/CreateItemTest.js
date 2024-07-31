@@ -353,7 +353,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 					language: languageCode,
 					label: label,
 					description: description,
-					'matching-item-id': existingItemId
+					matching_item_id: existingItemId
 				}
 			);
 
@@ -556,8 +556,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				'statement-group-property-id-mismatch',
 				{
 					path: `${propertyIdKey}/0/property/id`,
-					'statement-group-property-id': propertyIdKey,
-					'statement-property-id': predicatePropertyId
+					statement_group_property_id: propertyIdKey,
+					statement_property_id: predicatePropertyId
 				}
 			);
 			assert.equal( response.body.message, "Statement's Property ID does not match the statement group key" );
@@ -593,7 +593,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: 'not an object' }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-sitelink-type', { 'site-id': localWikiId } );
+			assertValidError( response, 400, 'invalid-sitelink-type', { site_id: localWikiId } );
 			assert.strictEqual( response.body.message, 'Not a valid sitelink type' );
 		} );
 
@@ -679,7 +679,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'item-not-a-badge',
-				{ 'site-id': localWikiId, badge: badge }
+				{ site_id: localWikiId, badge: badge }
 			);
 			assert.strictEqual(
 				response.body.message,
@@ -700,7 +700,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'item-not-a-badge',
-				{ 'site-id': localWikiId, badge: badge }
+				{ site_id: localWikiId, badge: badge }
 			);
 			assert.strictEqual(
 				response.body.message,
@@ -715,7 +715,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title } }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'title-does-not-exist', { 'site-id': localWikiId } );
+			assertValidError( response, 400, 'title-does-not-exist', { site_id: localWikiId } );
 			assert.strictEqual(
 				response.body.message,
 				`Page with title ${title} does not exist on the given site`
@@ -740,7 +740,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			response,
 			409,
 			'sitelink-conflict',
-			{ 'site-id': localWikiId, 'matching-item-id': existingItemWithSitelink.body.id }
+			{ site_id: localWikiId, matching_item_id: existingItemWithSitelink.body.id }
 		);
 		assert.include( response.body.message, existingItemWithSitelink.body.id );
 	} );

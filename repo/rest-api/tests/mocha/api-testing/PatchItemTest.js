@@ -212,7 +212,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', 'actual-value': testEnglishLabel } );
+			assertValidError( response, 409, 'patch-test-failed', { path: '/patch/0', actual_value: testEnglishLabel } );
 			assert.strictEqual( response.body.message, 'Test operation in the provided patch failed' );
 		} );
 
@@ -223,7 +223,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( redirectSource, [] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { 'redirect-target': redirectTarget } );
+			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
@@ -463,7 +463,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				language: languageWithExistingLabel,
 				label,
 				description,
-				'matching-item-id': existingItemId
+				matching_item_id: existingItemId
 			};
 			assertValidError( response, 422, 'patched-item-label-description-duplicate', context );
 			assert.strictEqual(
@@ -647,8 +647,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
 			const context = {
 				path: `${propertyIdKey}/0/property/id`,
-				'statement-group-property-id': propertyIdKey,
-				'statement-property-id': predicatePropertyId
+				statement_group_property_id: propertyIdKey,
+				statement_property_id: predicatePropertyId
 			};
 			assertValidError( response, 422, 'patched-statement-group-property-id-mismatch', context );
 			assert.strictEqual( response.body.message, "Statement's Property ID does not match the statement group key" );
@@ -665,7 +665,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': invalidStatement.id };
+			const context = { statement_id: invalidStatement.id };
 			assertValidError( response, 422, 'statement-id-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
 		} );
@@ -686,7 +686,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': duplicateStatement.id };
+			const context = { statement_id: duplicateStatement.id };
 			assertValidError( response, 422, 'statement-id-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
 		} );
@@ -707,7 +707,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { 'statement-id': existingStatementId, 'statement-property-id': predicatePropertyId };
+			const context = { statement_id: existingStatementId, statement_property_id: predicatePropertyId };
 			assertValidError( response, 422, 'patched-statement-property-not-modifiable', context );
 			assert.strictEqual( response.body.message, 'Property of a statement cannot be modified' );
 		} );
@@ -726,7 +726,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: invalidSitelinkType } } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-invalid-sitelink-type', { 'site-id': siteId } );
+			assertValidError( response, 422, 'patched-invalid-sitelink-type', { site_id: siteId } );
 			assert.strictEqual( response.body.message, 'Not a valid sitelink type in patched sitelinks' );
 		} );
 
@@ -752,7 +752,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ invalidSiteId ]: sitelink } } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-site-id', { 'site-id': invalidSiteId } );
+			assertValidError( response, 422, 'patched-sitelink-invalid-site-id', { site_id: invalidSiteId } );
 			assert.include( response.body.message, invalidSiteId );
 		} );
 
@@ -764,7 +764,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-missing-title', { 'site-id': siteId } );
+			assertValidError( response, 422, 'patched-sitelink-missing-title', { site_id: siteId } );
 			assert.include( response.body.message, siteId );
 		} );
 
@@ -776,7 +776,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-title-empty', { 'site-id': siteId } );
+			assertValidError( response, 422, 'patched-sitelink-title-empty', { site_id: siteId } );
 			assert.include( response.body.message, siteId );
 		} );
 
@@ -789,7 +789,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-title', { 'site-id': siteId, title } );
+			assertValidError( response, 422, 'patched-sitelink-invalid-title', { site_id: siteId, title } );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, title );
 		} );
@@ -803,7 +803,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-title-does-not-exist', { 'site-id': siteId, title } );
+			assertValidError( response, 422, 'patched-sitelink-title-does-not-exist', { site_id: siteId, title } );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, title );
 		} );
@@ -817,7 +817,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-badge', { 'site-id': siteId, badge } );
+			assertValidError( response, 422, 'patched-sitelink-invalid-badge', { site_id: siteId, badge } );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, badge );
 		} );
@@ -831,7 +831,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { 'site-id': siteId, badge: notBadgeItemId };
+			const context = { site_id: siteId, badge: notBadgeItemId };
 			assertValidError( response, 422, 'patched-sitelink-item-not-a-badge', context );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, notBadgeItemId );
@@ -846,7 +846,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { 'site-id': siteId, badges: badgesWithInvalidFormat };
+			const context = { site_id: siteId, badges: badgesWithInvalidFormat };
 			assertValidError( response, 422, 'patched-sitelink-badges-format', context );
 			assert.include( response.body.message, siteId );
 		} );
@@ -863,7 +863,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: { title: linkedArticle } } } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { 'site-id': siteId, 'matching-item-id': testItemId };
+			const context = { site_id: siteId, matching_item_id: testItemId };
 			assertValidError( response, 422, 'patched-sitelink-conflict', context );
 			assert.include( response.body.message, siteId );
 			assert.include( response.body.message, testItemId );
@@ -882,7 +882,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'url-not-modifiable', { 'site-id': siteId } );
+			assertValidError( response, 422, 'url-not-modifiable', { site_id: siteId } );
 			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
 		} );
 	} );

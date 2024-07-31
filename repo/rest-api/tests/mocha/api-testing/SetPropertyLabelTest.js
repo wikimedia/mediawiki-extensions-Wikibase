@@ -297,7 +297,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
 				.assertValidRequest().makeRequest();
 
-			const context = { language: languageCode, label: label, 'matching-property-id': existingPropertyId };
+			const context = { language: languageCode, label: label, matching_property_id: existingPropertyId };
 			assertValidError( response, 400, 'property-label-duplicate', context );
 			assert.strictEqual(
 				response.body.message,

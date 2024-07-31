@@ -12,6 +12,7 @@
 		"max-len": [ "warn", { "code":  130 } ],
 		"no-unused-expressions": "off",
 		"prefer-arrow-callback": "off",
-		"template-curly-spacing": "off"
+		"template-curly-spacing": "off",
+		"camelcase": "off"
 	}
 }

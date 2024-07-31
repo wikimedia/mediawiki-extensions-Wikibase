@@ -86,27 +86,27 @@ class UseCaseError extends UseCaseException {
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 	public const VALUE_TOO_LONG = 'value-too-long';
 
-	public const CONTEXT_ACTUAL_VALUE = 'actual-value';
+	public const CONTEXT_ACTUAL_VALUE = 'actual_value';
 	public const CONTEXT_ALIAS = 'alias';
 	public const CONTEXT_BADGE = 'badge';
 	public const CONTEXT_BADGES = 'badges';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
-	public const CONTEXT_ITEM_ID = 'item-id';
+	public const CONTEXT_ITEM_ID = 'item_id';
 	public const CONTEXT_KEY = 'key';
 	public const CONTEXT_LABEL = 'label';
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LIMIT = 'limit';
-	public const CONTEXT_MATCHING_ITEM_ID = 'matching-item-id';
-	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching-property-id';
+	public const CONTEXT_MATCHING_ITEM_ID = 'matching_item_id';
+	public const CONTEXT_MATCHING_PROPERTY_ID = 'matching_property_id';
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
-	public const CONTEXT_PROPERTY_ID = 'property-id';
-	public const CONTEXT_REDIRECT_TARGET = 'redirect-target';
-	public const CONTEXT_SITE_ID = 'site-id';
-	public const CONTEXT_STATEMENT_GROUP_PROPERTY_ID = 'statement-group-property-id';
-	public const CONTEXT_STATEMENT_ID = 'statement-id';
-	public const CONTEXT_STATEMENT_PROPERTY_ID = 'statement-property-id';
+	public const CONTEXT_PROPERTY_ID = 'property_id';
+	public const CONTEXT_REDIRECT_TARGET = 'redirect_target';
+	public const CONTEXT_SITE_ID = 'site_id';
+	public const CONTEXT_STATEMENT_GROUP_PROPERTY_ID = 'statement_group_property_id';
+	public const CONTEXT_STATEMENT_ID = 'statement_id';
+	public const CONTEXT_STATEMENT_PROPERTY_ID = 'statement_property_id';
 	public const CONTEXT_TITLE = 'title';
 	public const CONTEXT_VALUE = 'value';
 
