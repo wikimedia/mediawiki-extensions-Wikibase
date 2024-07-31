@@ -23,7 +23,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
 	public const INVALID_VALUE = 'invalid-value';
 	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
-	public const ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
@@ -46,7 +45,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
 	public const PATCHED_ITEM_INVALID_FIELD = 'patched-item-invalid-field';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
-	public const PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'patched-item-label-description-duplicate';
 	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
@@ -74,6 +72,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
+	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
@@ -90,6 +89,8 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_ALIAS = 'alias';
 	public const CONTEXT_BADGE = 'badge';
 	public const CONTEXT_BADGES = 'badges';
+	public const CONTEXT_CONFLICTING_ITEM_ID = 'conflicting_item_id';
+	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'conflicting_property_id';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
 	public const CONTEXT_ITEM_ID = 'item_id';
@@ -98,7 +99,6 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_LANGUAGE = 'language';
 	public const CONTEXT_LIMIT = 'limit';
 	public const CONTEXT_MATCHING_ITEM_ID = 'matching_item_id';
-	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'conflicting_property_id';
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
@@ -127,12 +127,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
 		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
-		self::ITEM_LABEL_DESCRIPTION_DUPLICATE => [
-			self::CONTEXT_LANGUAGE,
-			self::CONTEXT_LABEL,
-			self::CONTEXT_DESCRIPTION,
-			self::CONTEXT_MATCHING_ITEM_ID,
-		],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
@@ -155,12 +149,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_ITEM_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
-		self::PATCHED_ITEM_LABEL_DESCRIPTION_DUPLICATE => [
-			self::CONTEXT_LANGUAGE,
-			self::CONTEXT_LABEL,
-			self::CONTEXT_DESCRIPTION,
-			self::CONTEXT_MATCHING_ITEM_ID,
-		],
 		self::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_ITEM_UNEXPECTED_FIELD => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],

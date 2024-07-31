@@ -345,23 +345,16 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				400,
-				'item-label-description-duplicate',
-				{
+			const context = {
+				violation: 'item-label-description-duplicate',
+				violation_context: {
 					language: languageCode,
-					label: label,
-					description: description,
-					matching_item_id: existingItemId
+					conflicting_item_id: existingItemId
 				}
-			);
+			};
 
-			assert.strictEqual(
-				response.body.message,
-				`Item '${existingItemId}' already has label '${label}' associated with ` +
-				`language code '${languageCode}', using the same description text`
-			);
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'invalid aliases language code', async () => {

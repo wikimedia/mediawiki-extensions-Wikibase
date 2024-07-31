@@ -260,13 +260,16 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newSetItemLabelRequestBuilder( testItemId, language, label )
 				.assertValidRequest().makeRequest();
 
-			const context = { language, label, description, matching_item_id: existingItemId };
-			assertValidError( response, 400, 'item-label-description-duplicate', context );
-			assert.strictEqual(
-				response.body.message,
-				`Item ${existingItemId} already has label '${label}' associated with ` +
-				`language code '${language}', using the same description text.`
-			);
+			const context = {
+				violation: 'item-label-description-duplicate',
+				violation_context: {
+					language: language,
+					conflicting_item_id: existingItemId
+				}
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'comment too long', async () => {

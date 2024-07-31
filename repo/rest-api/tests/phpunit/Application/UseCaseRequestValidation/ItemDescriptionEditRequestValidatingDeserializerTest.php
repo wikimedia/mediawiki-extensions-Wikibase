@@ -157,28 +157,26 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		$language = 'en';
-		$label = 'test label';
-		$description = 'test description';
 		$matchingItemId = 'Q213';
 		yield 'label and description duplicate' => [
 			new ValidationError(
 				ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE,
 				[
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
-					ItemDescriptionValidator::CONTEXT_LABEL => $label,
-					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $description,
+					ItemDescriptionValidator::CONTEXT_LABEL => 'test label',
+					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 'test description',
 					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
 
 				],
 			),
-			UseCaseError::ITEM_LABEL_DESCRIPTION_DUPLICATE,
-			"Item '$matchingItemId' already has label '$label' associated with "
-			. "language code '$language', using the same description text",
+			UseCaseError::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
 			[
-				UseCaseError::CONTEXT_LANGUAGE => $language,
-				UseCaseError::CONTEXT_LABEL => $label,
-				UseCaseError::CONTEXT_DESCRIPTION => $description,
-				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+					UseCaseError::CONTEXT_LANGUAGE => $language,
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $matchingItemId,
+				],
 			],
 		];
 	}
