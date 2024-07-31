@@ -75,8 +75,11 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '409 - item redirected', async () => {
+		const title = makeSitelinkTitle();
+		await createWikiPage( title, 'wiki page test' );
+
 		const redirectSource = await createRedirectForItem( testItemId );
-		const response = await newSetSitelinkRequestBuilder( redirectSource, siteId, sitelink )
+		const response = await newSetSitelinkRequestBuilder( redirectSource, siteId, { title } )
 			.makeRequest();
 
 		expect( response ).to.have.status( 409 );
@@ -90,6 +93,27 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '422 - sitelink conflict', async () => {
+		const articleTitle = makeSitelinkTitle();
+		await createWikiPage( articleTitle, 'wiki page test' );
+		const createItemResponse = await createEntity( 'item', {} );
+
+		await newSetSitelinkRequestBuilder(
+			createItemResponse.entity.id,
+			siteId,
+			{ title: articleTitle }
+		).makeRequest();
+
+		const response = await newSetSitelinkRequestBuilder(
+			testItemId,
+			siteId,
+			{ title: articleTitle }
+		).makeRequest();
+
+		expect( response ).to.have.status( 422 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 } );

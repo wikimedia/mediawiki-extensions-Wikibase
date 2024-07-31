@@ -48,7 +48,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::ITEM_REDIRECTED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
 		UseCaseError::PATCH_TEST_FAILED => 409,
-		UseCaseError::SITELINK_CONFLICT => 409,
 
 		// 422 errors:
 		UseCaseError::DATA_POLICY_VIOLATION => 422,
@@ -77,7 +76,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_PROPERTY_MISSING_FIELD => 422,
 		UseCaseError::PATCHED_PROPERTY_UNEXPECTED_FIELD => 422,
 		UseCaseError::PATCHED_SITELINK_BADGES_FORMAT => 422,
-		UseCaseError::PATCHED_SITELINK_CONFLICT => 422,
 		UseCaseError::PATCHED_SITELINK_INVALID_BADGE => 422,
 		UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID => 422,
 		UseCaseError::PATCHED_SITELINK_INVALID_TITLE => 422,

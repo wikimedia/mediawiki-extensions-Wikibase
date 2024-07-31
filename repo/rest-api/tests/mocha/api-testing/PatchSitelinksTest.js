@@ -351,10 +351,13 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { site_id: siteId, conflicting_item_id: testItemId };
-			assertValidError( response, 422, 'patched-sitelink-conflict', context );
-			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, testItemId );
+			const context = {
+				violation: 'sitelink-conflict',
+				violation_context: { site_id: siteId, conflicting_item_id: testItemId }
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'url is modified', async () => {

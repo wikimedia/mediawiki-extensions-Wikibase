@@ -574,9 +574,8 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 				SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q666',
 			] ),
-			new UseCaseError(
-				UseCaseError::SITELINK_CONFLICT,
-				'Sitelink is already being used on Q666',
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 				[
 					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q666',
 					UseCaseError::CONTEXT_SITE_ID => $site,
