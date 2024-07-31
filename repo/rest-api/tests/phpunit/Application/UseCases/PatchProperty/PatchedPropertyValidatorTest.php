@@ -19,7 +19,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
@@ -34,6 +33,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
@@ -812,9 +812,19 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
-		yield 'Invalid statement type' =>
+		yield 'Invalid statement type: statement not an array' =>
 		[
 			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ 'not a valid statement' ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
+				'Not a valid statement type',
+				[ UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[1] . '/0' ]
+			),
+		];
+
+		yield 'Invalid statement type: statement not an associative array' =>
+		[
+			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ [ 'not a valid statement' ] ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
 				'Not a valid statement type',
@@ -922,7 +932,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				new AliasesDeserializer(),
 			),
 			new StatementsValidator(
-				new StatementsDeserializer(
+				new StatementValidator(
 					new StatementDeserializer(
 						$propertyValuePairDeserializerFactory->createPropertyValuePairDeserializer(),
 						$this->createStub( ReferenceDeserializer::class )

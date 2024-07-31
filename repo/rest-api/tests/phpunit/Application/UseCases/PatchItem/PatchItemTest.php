@@ -24,7 +24,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
@@ -45,6 +44,7 @@ use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -283,7 +283,7 @@ class PatchItemTest extends TestCase {
 		);
 
 		return new StatementsValidator(
-			new StatementsDeserializer(
+			new StatementValidator(
 				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 			)
 		);

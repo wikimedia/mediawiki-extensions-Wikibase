@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
@@ -364,20 +365,27 @@ class PatchedPropertyValidator {
 						// TODO: the path will be converted into a proper JSON Pointer in a future task
 						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
 					);
+				case StatementValidator::CODE_INVALID_FIELD_TYPE:
+					throw new UseCaseError(
+						UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
+						'Not a valid statement type',
+						// TODO: the path will be converted into a proper JSON Pointer in a future task
+						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementValidator::CONTEXT_FIELD], 1 ) ]
+					);
 				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 					$this->throwInvalidField( 'statements', $context[ StatementsValidator::CONTEXT_STATEMENTS ] );
-				case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
-					$field = $context[ StatementsValidator::CONTEXT_FIELD ];
+				case StatementValidator::CODE_INVALID_FIELD:
+					$field = $context[ StatementValidator::CONTEXT_FIELD ];
 					throw new UseCaseError(
 						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
 						"Invalid input for '{$field}' in the patched statement",
 						[
 							UseCaseError::CONTEXT_PATH => $field,
-							UseCaseError::CONTEXT_VALUE => $context[ StatementsValidator::CONTEXT_VALUE ],
+							UseCaseError::CONTEXT_VALUE => $context[ StatementValidator::CONTEXT_VALUE ],
 						]
 					);
-				case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
-					$field = $context[ StatementsValidator::CONTEXT_FIELD ];
+				case StatementValidator::CODE_MISSING_FIELD:
+					$field = $context[ StatementValidator::CONTEXT_FIELD ];
 					throw new UseCaseError(
 						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
 						"Mandatory field missing in the patched statement: {$field}",

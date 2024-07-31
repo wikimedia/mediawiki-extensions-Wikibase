@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -451,10 +452,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'missing statement field' => [
 			new ValidationError(
-				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
+				StatementValidator::CODE_MISSING_FIELD,
 				[
-					StatementsValidator::CONTEXT_PATH => '/item/statements/P1/0',
-					StatementsValidator::CONTEXT_FIELD => 'value',
+					StatementValidator::CONTEXT_PATH => '/item/statements/P1/0',
+					StatementValidator::CONTEXT_FIELD => 'value',
 				]
 			),
 			UseCaseError::newMissingField( '/item/statements/P1/0', 'value' ),
@@ -462,11 +463,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'invalid statement field' => [
 			new ValidationError(
-				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
+				StatementValidator::CODE_INVALID_FIELD,
 				[
-					StatementsValidator::CONTEXT_PATH => '/item/statements/P1/0/value',
-					StatementsValidator::CONTEXT_FIELD => 'value',
-					StatementsValidator::CONTEXT_VALUE => 'invalid-value',
+					StatementValidator::CONTEXT_PATH => '/item/statements/P1/0/value',
+					StatementValidator::CONTEXT_FIELD => 'value',
+					StatementValidator::CONTEXT_VALUE => 'invalid-value',
 				]
 			),
 			UseCaseError::newInvalidValue( '/item/statements/P1/0/value' ),

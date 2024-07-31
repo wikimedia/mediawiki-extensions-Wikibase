@@ -20,7 +20,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserialize
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
@@ -40,6 +39,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -97,7 +97,7 @@ class PatchPropertyTest extends TestCase {
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
 				new AliasesDeserializer(),
 			),
-			new StatementsValidator( $this->newStatementsDeserializer() )
+			new StatementsValidator( $this->newStatementValidator() )
 		);
 	}
 
@@ -265,13 +265,13 @@ class PatchPropertyTest extends TestCase {
 		);
 	}
 
-	private function newStatementsDeserializer(): StatementsDeserializer {
+	private function newStatementValidator(): StatementValidator {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
 			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
 		);
 
-		return new StatementsDeserializer(
+		return new StatementValidator(
 			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 		);
 	}
