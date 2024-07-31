@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Glacious"
+			"Glacious",
+			"MAL MALDIVE"
 		]
 	},
-	"wikibase-add": "އިތުރު ކުރައްވާ"
+	"wikibase-edit": "އުނިއިތުރު ގެންނަވާ",
+	"wikibase-add": "އިތުރު ކުރައްވާ",
+	"wikibase-sitelinks-special": "އެހެން"
 }

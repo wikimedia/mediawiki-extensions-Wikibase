@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"SupaplexTW"
+		]
+	},
+	"wikibase-editlinks": "改连结",
+	"wikibase-linkitem-addlinks": "加添连结",
+	"wikibase-linkitem-title": "链接页面",
+	"wikibase-linkitem-linkpage": "链接页面",
+	"wikibase-linkitem-input-site": "语言：",
+	"wikibase-linkitem-input-page": "页："
+}
