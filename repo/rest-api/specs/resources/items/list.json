@@ -10,7 +10,7 @@
 		"responses": {
 			"201": { "$ref": "../../global/responses.json#/Item" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewItemInput" },
-			"409": { "$ref": "../../global/responses.json#/SitelinkConflict" },
+			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

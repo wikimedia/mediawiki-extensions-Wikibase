@@ -51,7 +51,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '409', async () => {
+	// to be reactivated in Ib518ac9a5ace76a6ad676b2581307ce26ca78d4d
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip( '422', async () => {
 		const linkedArticle = utils.title( 'Some article' );
 		await createWikiPage( linkedArticle );
 		await newCreateItemRequestBuilder( {
@@ -60,11 +62,11 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} ).makeRequest();
 
 		const response = await newCreateItemRequestBuilder( {
-			labels: { en: '409 test' },
+			labels: { en: '422 test' },
 			sitelinks: { [ localSiteId ]: { title: linkedArticle } }
 		} ).makeRequest();
 
-		expect( response ).to.have.status( 409 );
+		expect( response ).to.have.status( 422 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 } );

@@ -132,33 +132,13 @@
 			}
 		}
 	},
-	"ItemRedirectedOrSitelinkConflict": {
-		"description": "The specified Item was redirected or there is a Sitelink conflict",
+	"DataPolicyViolation": {
+		"description": "The edit request violates data policy",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"redirected-item": { "$ref": "./examples.json#/RedirectedItemExample" },
-					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"SitelinkConflict": {
-		"description": "There is a Sitelink conflict",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"sitelink-conflict": { "$ref": "./examples.json#/SitelinkConflictWithSiteContextExample" }
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
@@ -447,7 +427,6 @@
 					"item-not-a-badge": {
 						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
 					},
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" }
@@ -824,7 +803,6 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -848,7 +826,6 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -871,7 +848,6 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -1188,8 +1164,8 @@
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
-					"patched-sitelink-conflict": { "$ref": "./examples.json#/PatchedSitelinkConflictExample" },
-					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" }
+					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},
@@ -1250,7 +1226,6 @@
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
-					"patched-sitelink-conflict": { "$ref": "./examples.json#/PatchedSitelinkConflictExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
