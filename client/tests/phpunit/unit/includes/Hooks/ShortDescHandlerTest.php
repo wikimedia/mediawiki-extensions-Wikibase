@@ -42,7 +42,7 @@ class ShortDescHandlerTest extends TestCase {
 	public static function provideIsValid() {
 		return [
 			// sanitized parser function parameter, is valid
-			'empty' => [ '', false ],
+			'empty is valid' => [ '', true ],
 			'punctuation (period)' => [ '.', false ],
 			'punctuation (middle dot)' => [ '·', false ],
 			'whitespace (space)' => [ ' ', false ],
@@ -67,6 +67,7 @@ class ShortDescHandlerTest extends TestCase {
 			// expanded parser function parameter, sanitized value
 			'trim' => [ ' foo ', 'foo' ],
 			'remove HTML' => [ 'a<i>b</i>c', 'abc' ],
+			'remove HTML #2' => [ '<b></b>', '' ],
 			'remove newline' => [ "a\nb\n \nc", 'a b c' ],
 			'decode' => [ 'a&lt;div&gt;b', 'a<div>b' ],
 			'decode and trim' => [ '&#32;a', 'a' ],
@@ -101,7 +102,8 @@ class ShortDescHandlerTest extends TestCase {
 	public static function provideDoHandle() {
 		return [
 			// expanded parser function parameter, expected page property
-			'invalid' => [ '', null ],
+			'empty is valid' => [ '', '' ],
+			'invalid' => [ '<b></b>', null ],
 			'invalid #2' => [ ' ', null ],
 			'invalid #3' => [ '&nbsp;', null ],
 			'valid' => [ 'foo', 'foo' ],

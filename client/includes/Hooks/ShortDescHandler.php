@@ -43,6 +43,11 @@ class ShortDescHandler {
 	 * @return bool
 	 */
 	public function isValid( $shortDesc ) {
+		if ( $shortDesc === '' ) {
+			// T326898#8654683 the empty string is a valid value, indicating
+			// that the short description should be suppressed.
+			return true;
+		}
 		return !preg_match( '/^[\s\p{P}\p{Z}]*$/u', $shortDesc );
 	}
 
@@ -89,10 +94,18 @@ class ShortDescHandler {
 			return;
 		}
 
-		$shortDesc = $this->sanitize( $shortDesc );
-		if ( $this->isValid( $shortDesc ) ) {
-			$out->setUnsortedPageProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
+		// T326898#8654683 the empty string is a valid value, indicating
+		// that the short description should be suppressed, but distinguish
+		// this from a short description containing junk that happens to be
+		// removed during sanitization.  ie '<b></b>' is not valid, even
+		// though it sanitizes to '' which is valid.
+		if ( $shortDesc !== '' ) {
+			$shortDesc = $this->sanitize( $shortDesc );
+			if ( $shortDesc === '' || !$this->isValid( $shortDesc ) ) {
+				return; // invalid
+			}
 		}
+		$out->setUnsortedPageProperty( DescriptionLookup::LOCAL_PROPERTY_NAME, $shortDesc );
 	}
 
 	/**

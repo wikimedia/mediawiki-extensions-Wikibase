@@ -115,11 +115,11 @@ class InfoActionHookHandler implements InfoActionHook {
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
 			$pageInfo['header-basic'][] = $this->getPageInfoRow( $context, $title );
 		}
-		if ( $localDescription ) {
+		if ( $localDescription !== null ) {
 			$pageInfo['header-basic'][] = $this->getDescriptionInfoRow( $context, $localDescription,
 				DescriptionLookup::SOURCE_LOCAL );
 		}
-		if ( $centralDescription ) {
+		if ( $centralDescription !== null ) {
 			$pageInfo['header-basic'][] = $this->getDescriptionInfoRow( $context, $centralDescription,
 				DescriptionLookup::SOURCE_CENTRAL );
 		}
