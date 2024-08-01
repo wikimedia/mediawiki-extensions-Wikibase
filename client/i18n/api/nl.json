@@ -3,7 +3,8 @@
 		"authors": [
 			"Mainframe98",
 			"McDutchie",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"Siebrand"
 		]
 	},
 	"apihelp-query+wbentityusage-summary": "Retourneert alle entiteits-ID’s die op de opgegeven pagina’s worden gebruikt.",
@@ -46,7 +47,7 @@
 	"apihelp-query+wikibase-param-prop": "Welke eigenschappen op te vragen:",
 	"apihelp-query+wikibase-paramvalue-prop-url": "Basis-URL, scriptpad en artikelpad van de Wikibase-repository.",
 	"apihelp-query+wikibase-paramvalue-prop-siteid": "De siteid van deze site.",
-	"apihelp-wbformatreference-summary": "Maakt een verwijzing op om aan gebruikers te tonen.",
+	"apihelp-wbformatreference-summary": "Maakt een verwijzing op om aan gebruikers weer te geven.",
 	"apihelp-wbformatreference-example-1": "Formatteer een lege referentie met behulp van de Data Bridge-stijl in HTML.",
 	"apihelp-wbformatreference-example-2": "Formatteer een verwijzing die één tekenreeks bevat met behulp van de Data Bridge-stijl in HTML.",
 	"apihelp-wbformatreference-param-reference": "De referentie als JSON-object.",
