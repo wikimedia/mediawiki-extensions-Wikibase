@@ -45,12 +45,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider sitelinkValidationErrorProvider
 	 */
-	public function testGivenInvalidRequest_throws(
-		ValidationError $validationError,
-		string $expectedErrorCode,
-		string $expectedErrorMessage,
-		array $expectedErrorContext = []
-	): void {
+	public function testGivenInvalidRequest_throws( UseCaseError $expectedError, ValidationError $validationError ): void {
 		$request = $this->createStub( SitelinkEditRequest::class );
 		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE, 'badges' => [ 'P3' ] ] );
 
@@ -61,71 +56,64 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			$this->newValidatingDeserializer()->validateAndDeserialize( $request );
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( $expectedErrorCode, $e->getErrorCode() );
-			$this->assertSame( $expectedErrorMessage, $e->getErrorMessage() );
-			$this->assertSame( $expectedErrorContext, $e->getErrorContext() );
+			$this->assertEquals( $expectedError, $e );
 		}
 	}
 
 	public function sitelinkValidationErrorProvider(): \Generator {
 		yield 'missing title' => [
+			UseCaseError::newMissingField( '/sitelink', 'title' ),
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING ),
-			UseCaseError::MISSING_FIELD,
-			'Required field missing',
-			[ UseCaseError::CONTEXT_PATH => '/sitelink', UseCaseError::CONTEXT_FIELD => 'title' ],
 		];
-		$path = '/sitelink/title';
+
 		yield 'title is empty' => [
+			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE ),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '$path'",
-			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
-		$path = '/sitelink/title';
+
 		yield 'invalid title' => [
+			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE ),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '$path'",
-			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
-		$path = '/sitelink/title';
+
 		yield 'title field is not a string' => [
+			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE ),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '$path'",
-			[ UseCaseError::CONTEXT_PATH => $path ],
 		];
+
 		yield 'badges field is not an array' => [
+			UseCaseError::newInvalidValue( '/sitelink/badges' ),
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/sitelink/badges'",
-			[ UseCaseError::CONTEXT_PATH => '/sitelink/badges' ],
 		];
+
 		yield 'badge is not a valid item id' => [
+			UseCaseError::newInvalidValue( '/sitelink/badges/0' ),
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'P3' ] ),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/sitelink/badges/0'",
-			[ UseCaseError::CONTEXT_PATH => '/sitelink/badges/0' ],
 		];
+
 		yield 'badge is not allowed' => [
+			new UseCaseError(
+				UseCaseError::ITEM_NOT_A_BADGE,
+				'Item ID provided as badge is not allowed as a badge: Q654',
+				[ UseCaseError::CONTEXT_BADGE => 'Q654' ]
+			),
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
-			UseCaseError::ITEM_NOT_A_BADGE,
-			'Item ID provided as badge is not allowed as a badge: Q654',
-			[ UseCaseError::CONTEXT_BADGE => 'Q654' ],
 		];
+
 		yield 'title not found' => [
+			new UseCaseError(
+				UseCaseError::SITELINK_TITLE_NOT_FOUND,
+				'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site'
+			),
 			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND ),
-			UseCaseError::SITELINK_TITLE_NOT_FOUND,
-			'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site',
 		];
+
 		yield 'another item has the same sitelink' => [
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
+				[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
+			),
 			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ] ),
-			UseCaseError::DATA_POLICY_VIOLATION,
-			'Edit violates data policy',
-			[
-				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
-				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
-			],
 		];
 	}
 
