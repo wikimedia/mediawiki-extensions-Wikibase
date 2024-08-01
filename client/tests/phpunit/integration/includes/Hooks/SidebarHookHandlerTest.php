@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
@@ -76,6 +77,45 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$badgeDisplay,
 			$namespaceChecker
 		);
+	}
+
+	public static function onSidebarBeforeOutputProvider() {
+		yield 'no modules expected' => [
+			null, [], [],
+		];
+
+		yield 'Wikidata item link exists' => [
+			"Q42", [ 'wikibase.sidebar.tracking' ], [],
+		];
+
+		yield 'Other projects links exist' => [
+			null, [ 'wikibase.sidebar.tracking' ], [ 'foo' => 'bar' ],
+		];
+	}
+
+	/**
+	 * @dataProvider onSidebarBeforeOutputProvider
+	 */
+	public function testOnSidebarBeforeOutput( ?string $itemId, array $expectedJsModules, array $projects ) {
+
+		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
+
+		$context = new RequestContext();
+
+		$output = new OutputPage( $context );
+		$output->setTitle( $title );
+		$output->setProperty( 'wikibase_item', $itemId );
+		$output->setProperty( 'wikibase-otherprojects-sidebar', $projects );
+
+		$context->setOutput( $output );
+		$skin = $this->newSkin( $context );
+		$sidebar = [];
+
+		$handler = $this->newSidebarHookHandler();
+
+		$handler->onSidebarBeforeOutput( $skin, $sidebar );
+
+		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 	}
 
 	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData, array $extensionDataAppend ) {
@@ -181,6 +221,12 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$skin->method( 'getContext' )
 			->willReturn( $context );
+
+		$skin->method( 'getOutput' )
+			->willReturn( $context->getOutput() );
+
+		$skin->method( 'msg' )
+			->willReturn( new Message( "" ) );
 
 		return $skin;
 	}
