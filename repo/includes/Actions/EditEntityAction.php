@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Actions;
 
 use Article;
+use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Linker\Linker;
@@ -18,12 +19,14 @@ use OOUI\FieldLayout;
 use OOUI\HtmlSnippet;
 use OOUI\TextInputWidget;
 use RuntimeException;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Handles the edit action for Wikibase entities.
@@ -48,6 +51,7 @@ class EditEntityAction extends ViewEntityAction {
 			'RevisionLookup',
 			'WikibaseRepo.AnonymousEditWarningBuilder',
 			'WikibaseRepo.EntityDiffVisualizerFactory',
+			'WikibaseRepo.SummaryFormatter',
 		],
 	];
 
@@ -59,6 +63,7 @@ class EditEntityAction extends ViewEntityAction {
 	 */
 	private $entityDiffVisualizer;
 	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+	private SummaryFormatter $summaryFormatter;
 
 	public function __construct(
 		Article $article,
@@ -66,7 +71,8 @@ class EditEntityAction extends ViewEntityAction {
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
-		EntityDiffVisualizerFactory $entityDiffVisualizerFactory
+		EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
+		SummaryFormatter $summaryFormatter
 	) {
 		parent::__construct( $article, $context );
 
@@ -77,6 +83,7 @@ class EditEntityAction extends ViewEntityAction {
 			$this->getContext()
 		);
 		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
+		$this->summaryFormatter = $summaryFormatter;
 	}
 
 	/**
@@ -330,10 +337,31 @@ class EditEntityAction extends ViewEntityAction {
 		$this->displayUndoDiff( $appDiff );
 
 		if ( $restore ) {
-			$this->showConfirmationForm();
+			$autoSummaryLength = mb_strlen( $this->makeSummary( 'restore', $olderRevision, 'x' ) ) - 1;
+			$this->showConfirmationForm( $autoSummaryLength );
 		} else {
-			$this->showConfirmationForm( $newerRevision->getId() );
+			$autoSummaryLength = mb_strlen( $this->makeSummary( 'undo', $newerRevision, 'x' ) ) - 1;
+			$this->showConfirmationForm( $autoSummaryLength, $newerRevision->getId() );
 		}
+	}
+
+	/**
+	 * @param string $actionName
+	 * @param RevisionRecord $revision
+	 * @param string $userSummary
+	 *
+	 * @return string
+	 */
+	protected function makeSummary( $actionName, RevisionRecord $revision, $userSummary ) {
+		$revUser = $revision->getUser();
+		$revUserText = $revUser ? $revUser->getName() : '';
+
+		$summary = new Summary();
+		$summary->setAction( $actionName );
+		$summary->addAutoCommentArgs( $revision->getId(), $revUserText );
+		$summary->setUserSummary( $userSummary );
+
+		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
 	/**
@@ -374,13 +402,14 @@ class EditEntityAction extends ViewEntityAction {
 	 * Generate standard summary input and label (wgSummary), compatible to \MediaWiki\EditPage\EditPage.
 	 *
 	 * @param string $labelText The html to place inside the label
+	 * @param int $autoSummaryLength
 	 *
 	 * @return string HTML
 	 */
-	private function getSummaryInput( $labelText ) {
+	private function getSummaryInput( $labelText, $autoSummaryLength ) {
 		$inputAttrs = [
 			'name' => 'wpSummary',
-			'maxLength' => 200,
+			'maxLength' => max( CommentStore::COMMENT_CHARACTER_LIMIT - $autoSummaryLength, 0 ),
 			'size' => 60,
 			'spellcheck' => 'true',
 			'accessKey' => $this->msg( 'accesskey-summary' )->plain(),
@@ -455,9 +484,10 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Shows a form that can be used to confirm the requested undo/restore action.
 	 *
+	 * @param int $autoSummaryLength
 	 * @param int $undidRevision
 	 */
-	private function showConfirmationForm( $undidRevision = 0 ) {
+	private function showConfirmationForm( $autoSummaryLength, $undidRevision = 0 ) {
 		$req = $this->getRequest();
 
 		$args = [
@@ -490,7 +520,7 @@ class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( "<div class='editOptions'>\n" );
 
 		$labelText = $this->msg( 'wikibase-summary-generated' )->escaped();
-		$this->getOutput()->addHTML( $this->getSummaryInput( $labelText ) );
+		$this->getOutput()->addHTML( $this->getSummaryInput( $labelText, $autoSummaryLength ) );
 		$this->getOutput()->addHTML( Html::rawElement( 'br' ) );
 		$this->getOutput()->addHTML( "<div class='editButtons'>\n" );
 		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
