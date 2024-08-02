@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Actions;
 
 use Article;
@@ -85,11 +87,11 @@ class SubmitEntityAction extends EditEntityAction {
 		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
-	public function getName() {
+	public function getName(): string {
 		return 'submit';
 	}
 
-	public function doesWrites() {
+	public function doesWrites(): bool {
 		return true;
 	}
 
@@ -97,7 +99,7 @@ class SubmitEntityAction extends EditEntityAction {
 	 * Show the entity using parent::show(), unless an undo operation is requested.
 	 * In that case $this->undo(); is called to perform the action after a permission check.
 	 */
-	public function show() {
+	public function show(): void {
 		$request = $this->getRequest();
 
 		if ( $request->getCheck( 'undo' ) || $request->getCheck( 'undoafter' ) || $request->getCheck( 'restore' ) ) {
@@ -115,7 +117,7 @@ class SubmitEntityAction extends EditEntityAction {
 	/**
 	 * Perform the undo operation specified by the web request.
 	 */
-	public function undo() {
+	public function undo(): void {
 		$request = $this->getRequest();
 		$undidRevId = $request->getInt( 'undo' );
 		$undidAfterRevId = $request->getInt( 'undoafter' );
@@ -194,17 +196,13 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 	/**
-	 * @param RevisionRecord $olderRevision
-	 * @param RevisionRecord $newerRevision
-	 * @param RevisionRecord $latestRevision
-	 *
 	 * @return Status containing EntityContent
 	 */
 	private function getPatchContent(
 		RevisionRecord $olderRevision,
 		RevisionRecord $newerRevision,
 		RevisionRecord $latestRevision
-	) {
+	): Status {
 		/**
 		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
@@ -226,24 +224,19 @@ class SubmitEntityAction extends EditEntityAction {
 		return Status::newGood( $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) ) );
 	}
 
-	public function execute() {
+	public function execute(): void {
 		// @phan-suppress-previous-line PhanPluginNeverReturnMethod
 		throw new LogicException( 'Not applicable.' );
 	}
 
-	/**
-	 * @param Title $title
-	 * @param EntityContent $content
-	 * @param string $summary
-	 * @param int $undidRevId
-	 * @param int $originalRevId
-	 * @param string $editToken
-	 *
-	 * @return Status
-	 */
 	private function attemptSave(
-		Title $title, EntityContent $content, $summary, $undidRevId, $originalRevId, $editToken
-	) {
+		Title $title,
+		EntityContent $content,
+		string $summary,
+		int $undidRevId,
+		int $originalRevId,
+		string $editToken
+	): Status {
 		$status = $this->getEditTokenStatus( $editToken );
 
 		if ( !$status->isOK() ) {
@@ -288,17 +281,13 @@ class SubmitEntityAction extends EditEntityAction {
 	/**
 	 * Checks the given permission.
 	 *
-	 * @param string $permission
-	 * @param Title $title
-	 * @param string $rigor
-	 *
 	 * @return Status a status object representing the check's result.
 	 */
 	private function getPermissionStatus(
-		$permission,
+		string $permission,
 		Title $title,
-		$rigor = PermissionManager::RIGOR_SECURE
-	) {
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): Status {
 		$errors = $this->permissionManager
 			->getPermissionErrors( $permission, $this->getUser(), $title, $rigor );
 		$status = Status::newGood();
@@ -313,12 +302,8 @@ class SubmitEntityAction extends EditEntityAction {
 
 	/**
 	 * Checks that the given token is valid.
-	 *
-	 * @param string $editToken
-	 *
-	 * @return Status
 	 */
-	private function getEditTokenStatus( $editToken ) {
+	private function getEditTokenStatus( string $editToken ): Status {
 		$status = Status::newGood();
 		$user = $this->getUser();
 		if ( !$user->matchEditToken( $editToken ) ) {
@@ -329,10 +314,8 @@ class SubmitEntityAction extends EditEntityAction {
 
 	/**
 	 * Update watchlist.
-	 *
-	 * @param Title $title
 	 */
-	private function doWatch( Title $title ) {
+	private function doWatch( Title $title ): void {
 		$user = $this->getUser();
 
 		if ( $user->isRegistered()
