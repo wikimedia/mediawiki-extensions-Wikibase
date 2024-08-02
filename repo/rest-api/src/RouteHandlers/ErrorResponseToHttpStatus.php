@@ -23,7 +23,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_SITELINK_TYPE => 400,
 		UseCaseError::INVALID_VALUE => 400,
 		UseCaseError::ITEM_DATA_UNEXPECTED_FIELD => 400,
-		UseCaseError::ITEM_NOT_A_BADGE => 400,
 		UseCaseError::ITEM_STATEMENT_ID_MISMATCH => 400,
 		UseCaseError::LABEL_DESCRIPTION_SAME_VALUE => 400,
 		UseCaseError::MISSING_FIELD => 400,

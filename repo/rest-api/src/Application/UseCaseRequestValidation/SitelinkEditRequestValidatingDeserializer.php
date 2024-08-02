@@ -35,16 +35,10 @@ class SitelinkEditRequestValidatingDeserializer {
 				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 					throw UseCaseError::newInvalidValue( '/sitelink/badges' );
 				case SitelinkValidator::CODE_INVALID_BADGE:
+				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 					$badge = $validationError->getContext()[SitelinkValidator::CONTEXT_BADGE];
 					$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $request->getSitelink()[ 'badges' ] );
 					throw UseCaseError::newInvalidValue( "/sitelink/badges/$badgeIndex" );
-				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-					$badge = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_BADGE ];
-					throw new UseCaseError(
-						UseCaseError::ITEM_NOT_A_BADGE,
-						"Item ID provided as badge is not allowed as a badge: $badge",
-						[ UseCaseError::CONTEXT_BADGE => $badge ]
-					);
 				case SitelinkValidator::CODE_TITLE_NOT_FOUND:
 					throw new UseCaseError(
 						UseCaseError::SITELINK_TITLE_NOT_FOUND,

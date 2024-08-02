@@ -45,9 +45,14 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	/**
 	 * @dataProvider sitelinkValidationErrorProvider
 	 */
-	public function testGivenInvalidRequest_throws( UseCaseError $expectedError, ValidationError $validationError ): void {
+	public function testGivenInvalidRequest_throws(
+		UseCaseError $expectedError,
+		ValidationError $validationError,
+		?array $sitelinkSerialization = null
+	): void {
+		$sitelinkSerialization = $sitelinkSerialization ?? [ 'title' => self::SITELINK_TITLE, 'badges' => [ 'P3' ] ];
 		$request = $this->createStub( SitelinkEditRequest::class );
-		$request->method( 'getSitelink' )->willReturn( [ 'title' => self::SITELINK_TITLE, 'badges' => [ 'P3' ] ] );
+		$request->method( 'getSitelink' )->willReturn( $sitelinkSerialization );
 
 		$this->sitelinkValidator = $this->createStub( SitelinkValidator::class );
 		$this->sitelinkValidator->method( 'validate' )->willReturn( $validationError );
@@ -92,12 +97,9 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		yield 'badge is not allowed' => [
-			new UseCaseError(
-				UseCaseError::ITEM_NOT_A_BADGE,
-				'Item ID provided as badge is not allowed as a badge: Q654',
-				[ UseCaseError::CONTEXT_BADGE => 'Q654' ]
-			),
+			UseCaseError::newInvalidValue( '/sitelink/badges/1' ),
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
+			[ 'title' => self::SITELINK_TITLE, 'badges' => [ 'Q987', 'Q654' ] ],
 		];
 
 		yield 'title not found' => [

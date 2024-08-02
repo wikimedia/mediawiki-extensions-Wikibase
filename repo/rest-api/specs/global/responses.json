@@ -424,9 +424,6 @@
 					"title-does-not-exist": {
 						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
 					},
-					"item-not-a-badge": {
-						"$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" }
@@ -780,8 +777,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" },
-					"item-not-a-badge": { "$ref": "./examples.json#/ItemProvidedIsNotAllowedAsSitelinkBadgeExample" }
+					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" }
 				}
 			}
 		},
