@@ -10,6 +10,7 @@ const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
 const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
+const { runAllJobs } = require( 'api-testing/lib/wiki' );
 
 describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 
@@ -100,6 +101,26 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			)
 				.withHeader( 'content-type', 'application/json-patch+json' )
 				.assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.labels.de, label );
+		} );
+
+		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
+			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			await newAddItemStatementRequestBuilder(
+				testItemId,
+				{ property: { id: propertyToDelete }, value: { type: 'novalue' } }
+			).makeRequest();
+
+			await entityHelper.deleteProperty( propertyToDelete );
+			await runAllJobs(); // wait for secondary data to catch up after deletion
+
+			const label = `some-label-${utils.uniq()}`;
+			const response = await newPatchItemRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '/labels/de', value: label } ]
+			).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.labels.de, label );

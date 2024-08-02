@@ -67,7 +67,12 @@ class PatchedItemValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( ItemReadModel $item, array $serialization, Item $originalItem ): Item {
+	public function validateAndDeserialize(
+		ItemReadModel $item,
+		array $serialization,
+		Item $originalItem,
+		array $originalSerialization
+	): Item {
 		if ( !isset( $serialization[ 'id' ] ) ) { // ignore ID removal
 			$serialization[ 'id' ] = $originalItem->getId()->getSerialization();
 		}
@@ -78,7 +83,7 @@ class PatchedItemValidator {
 		$this->assertValidLabelsAndDescriptions( $serialization, $originalItem );
 		$this->assertValidAliases( $serialization );
 		$this->assertValidSitelinks( $item, $serialization );
-		$this->assertValidStatements( $serialization, $originalItem );
+		$this->assertValidStatements( $serialization, $originalItem, $originalSerialization['statements'] );
 
 		return new Item(
 			new ItemId( $serialization[ 'id' ] ),
@@ -491,8 +496,12 @@ class PatchedItemValidator {
 		}
 	}
 
-	private function assertValidStatements( array $serialization, Item $originalItem ): void {
-		$validationError = $this->statementsValidator->validate( $serialization['statements'] ?? [] );
+	private function assertValidStatements( array $serialization, Item $originalItem, array $originalStatementsSerialization ): void {
+		$validationError = $this->statementsValidator->validateModifiedStatements(
+			$originalStatementsSerialization,
+			$originalItem->getStatements(),
+			$serialization['statements'] ?? []
+		);
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {

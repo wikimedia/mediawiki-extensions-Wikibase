@@ -86,7 +86,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedPatchedProperty,
-			$this->newValidator()->validateAndDeserialize( $patchedPropertySerialization, $originalProperty )
+			$this->newValidator()->validateAndDeserialize(
+				$patchedPropertySerialization,
+				$originalProperty,
+				[ 'id' => 'P123', 'statements' => [] ]
+			)
 		);
 	}
 
@@ -156,7 +160,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 			'labels' => [ 'en' => 'english-label' ],
 		];
 
-		$validatedProperty = $this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
+		$validatedProperty = $this->newValidator()->validateAndDeserialize(
+			$patchedProperty,
+			$originalProperty,
+			[ 'id' => 'P123', 'statements' => [] ]
+		);
 
 		$this->assertEquals( $originalProperty->getId(), $validatedProperty->getId() );
 	}
@@ -209,8 +217,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				new Fingerprint( $inputTerms->asPlainTermList(), $termsToCompareWith->asPlainTermList(), null ),
 				'string'
 			),
-			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
-				->validateAndDeserialize( $patchedProperty, $originalProperty )
+			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty, [ 'id' => 'P123', 'statements' => [] ] )
 		);
 	}
 
@@ -262,8 +269,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				new Fingerprint( $termsToCompareWith->asPlainTermList(), $inputTerms->asPlainTermList(), null ),
 				'string'
 			),
-			$this->newValidator( $this->createStub( AliasesInLanguageValidator::class ) )
-				->validateAndDeserialize( $patchedProperty, $originalProperty )
+			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty, [ 'id' => 'P123', 'statements' => [] ] )
 		);
 	}
 
@@ -274,7 +280,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$originalProperty = new Property( new NumericPropertyId( 'P123' ), new Fingerprint(), 'string' );
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty );
+			$this->newValidator()->validateAndDeserialize( $patchedProperty, $originalProperty, [ 'id' => 'P123', 'statements' => [] ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -369,7 +375,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 					new NumericPropertyId( 'P123' ),
 					new Fingerprint(),
 					'string'
-				)
+				),
+				[ 'id' => 'P123', 'statements' => [] ]
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -652,7 +659,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $propertySerialization, $originalProperty );
+			$this->newValidator()->validateAndDeserialize(
+				$propertySerialization,
+				$originalProperty,
+				[ 'id' => 'P123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -782,7 +793,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $propertySerialization, $originalProperty );
+			$this->newValidator()->validateAndDeserialize(
+				$propertySerialization,
+				$originalProperty,
+				[ 'id' => 'P123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );

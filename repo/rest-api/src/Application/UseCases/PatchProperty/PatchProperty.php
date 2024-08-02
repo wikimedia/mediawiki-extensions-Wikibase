@@ -62,19 +62,20 @@ class PatchProperty {
 		$this->assertPropertyExists->execute( $propertyId );
 		$this->assertUserIsAuthorized->checkEditPermissions( $propertyId, $providedMetadata->getUser() );
 
-		$patchedPropertySerialization = $this->patchJson->execute(
-			ConvertArrayObjectsToArray::execute(
-				$this->propertySerializer->serialize(
-				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-					$this->propertyRetriever->getProperty( $propertyId )
-				)
-			),
-			$deserializedRequest->getPatch()
+		$originalSerialization = ConvertArrayObjectsToArray::execute(
+			$this->propertySerializer->serialize(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				$this->propertyRetriever->getProperty( $propertyId )
+			)
 		);
+		$patchedPropertySerialization = $this->patchJson->execute( $originalSerialization, $deserializedRequest->getPatch() );
 
 		$originalProperty = $this->propertyRetrieverWriteModel->getPropertyWriteModel( $propertyId );
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$patchedProperty = $this->patchedPropertyValidator->validateAndDeserialize( $patchedPropertySerialization, $originalProperty );
+		$patchedProperty = $this->patchedPropertyValidator->validateAndDeserialize(
+			$patchedPropertySerialization,
+			$originalProperty, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$originalSerialization
+		);
 
 		$propertyRevision = $this->propertyUpdater->update(
 			$patchedProperty,

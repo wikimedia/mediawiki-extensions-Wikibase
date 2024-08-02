@@ -4,13 +4,15 @@ const { expect } = require( '../helpers/chaiHelper' );
 const { assert, utils } = require( 'api-testing' );
 const {
 	newPatchPropertyRequestBuilder,
-	newAddPropertyStatementRequestBuilder, newGetPropertyLabelRequestBuilder
+	newAddPropertyStatementRequestBuilder,
+	newGetPropertyLabelRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
+const { runAllJobs } = require( 'api-testing/lib/wiki' );
 
 describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
@@ -120,6 +122,26 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 			assertValid200Response( response );
 			assert.strictEqual( response.body.labels.en, expectedValue );
+		} );
+
+		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
+			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			await newAddPropertyStatementRequestBuilder(
+				testPropertyId,
+				{ property: { id: propertyToDelete }, value: { type: 'novalue' } }
+			).makeRequest();
+
+			await entityHelper.deleteProperty( propertyToDelete );
+			await runAllJobs(); // wait for secondary data to catch up after deletion
+
+			const label = `some-label-${utils.uniq()}`;
+			const response = await newPatchPropertyRequestBuilder(
+				testPropertyId,
+				[ { op: 'add', path: '/labels/de', value: label } ]
+			).assertValidRequest().makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.strictEqual( response.body.labels.de, label );
 		} );
 	} );
 

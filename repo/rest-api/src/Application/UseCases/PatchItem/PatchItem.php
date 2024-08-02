@@ -64,15 +64,20 @@ class PatchItem {
 
 		$item = $this->itemRetriever->getItem( $itemId );
 
-		$patchedItemSerialization = $this->patchJson->execute(
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			ConvertArrayObjectsToArray::execute( $this->itemSerializer->serialize( $item ) ),
+		$originalSerialization = ConvertArrayObjectsToArray::execute( $this->itemSerializer->serialize( $item ) );
+		$patchedItemSerialization = $this->patchJson->execute(
+			$originalSerialization,
 			$deserializedRequest->getPatch()
 		);
 
 		$originalItem = $this->itemWriteModelRetriever->getItemWriteModel( $itemId );
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$patchedItem = $this->patchedItemValidator->validateAndDeserialize( $item, $patchedItemSerialization, $originalItem );
+		$patchedItem = $this->patchedItemValidator->validateAndDeserialize(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$patchedItemSerialization,
+			$originalItem, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$originalSerialization
+		);
 
 		$itemRevision = $this->itemUpdater->update(
 			$patchedItem,
