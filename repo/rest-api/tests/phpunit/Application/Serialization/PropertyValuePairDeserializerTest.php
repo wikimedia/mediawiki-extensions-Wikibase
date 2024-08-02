@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -26,11 +29,11 @@ use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory
 class PropertyValuePairDeserializerTest extends TestCase {
 
 	private const EXISTING_PROPERTIES_BY_DATA_TYPE = [
-		'string' => 'P123',
-		'url' => 'P789',
-		'wikibase-item' => 'P321',
-		'time' => 'P456',
-		'globe-coordinate' => 'P678',
+		'string' => 'P6308',
+		'url' => 'P7527',
+		'wikibase-item' => 'P1572',
+		'time' => 'P4129',
+		'globe-coordinate' => 'P8958',
 	];
 
 	/**
@@ -69,6 +72,55 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			[
 				'value' => [ 'type' => 'value', 'content' => 'potato' ],
 				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
+			],
+		];
+
+		yield 'value for url property' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE['url'] ),
+				new StringValue( 'https://example.org' )
+			),
+			[
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE['url'] ],
+				'value' => [ 'type' => 'value', 'content' => 'https://example.org' ],
+			],
+		];
+
+		yield 'value for time property' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE['time'] ),
+				new TimeValue(
+					'+2023-11-08T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN
+				)
+			),
+			[
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE['time'] ],
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						'time' => '+2023-11-08T00:00:00Z',
+						'precision' => TimeValue::PRECISION_DAY,
+						'calendarmodel' => TimeValue::CALENDAR_GREGORIAN,
+					],
+				],
+			],
+		];
+
+		yield 'value for globe-coordinate property' => [
+			new PropertyValueSnak(
+				new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE['globe-coordinate'] ),
+				new GlobeCoordinateValue( new LatLongValue( 14.57718, 4.19741 ), 0.0001 )
+			),
+			[
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE['globe-coordinate'] ],
+				'value' => [
+					'type' => 'value',
+					'content' => [
+						'latitude' => 14.57718,
+						'longitude' => 4.19741,
+						'precision' => 0.0001,
+					],
+				],
 			],
 		];
 	}

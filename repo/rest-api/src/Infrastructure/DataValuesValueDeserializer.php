@@ -58,7 +58,8 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 		}
 
 		foreach ( $this->validatorFactory->getValidators( $dataTypeId ) as $validator ) {
-			if ( !$validator->validate( $dataValue )->isValid() ) {
+			$result = $validator->validate( $dataValue );
+			if ( !$result->isValid() ) {
 				throw new InvalidFieldException( 'content', $valueSerialization['content'], "$basePath/content" );
 			}
 		}
