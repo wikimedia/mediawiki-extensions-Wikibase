@@ -17,10 +17,15 @@
 	"wikibase-entity-summary-wbsetdescription-set": "[$2] sıpatlaması ózgertildi",
 	"wikibase-entity-summary-wbsetsitelink-add": "Betke [$2] saytınan silteme ornatıldı",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Betke [$2] saytınan ornatılǵan silteme alıp taslandı",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|1 málimleme|málimleme}} óshirildi",
+	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|1 málimleme|málimleme}} óshirildi",
 	"wikibase-entity-summary-wbcreateclaim-create": "Málimleme jaratıldı",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Málimleme|Málimlemeler}} ózgertildi",
+	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$1|1 málimleme|málimleme}} jaratıldı",
 	"wikibase-entity-summary-clientsitelink-update": "Bet [$3] degennen [$4] degenge kóshirildi",
 	"wikibase-entity-summary-clientsitelink-remove": "Bet [$3] saytınan óshirildi"
 }

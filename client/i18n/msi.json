@@ -4,6 +4,9 @@
 			"Tofeiku"
 		]
 	},
+	"wikibase-linkitem-addlinks": "Tambah link",
+	"wikibase-linkitem-title": "Kasih link sama laman",
+	"wikibase-linkitem-linkpage": "Kasih link sama laman",
 	"wikibase-linkitem-input-site": "Bahasa:",
 	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-rc-hide-wikidata-hide": "Tapuk",

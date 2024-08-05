@@ -44,7 +44,7 @@
 	"wikibase-description-edit-placeholder": "дӀайазде цуьнах лаьцна",
 	"wikibase-description-edit-placeholder-language-aware": "йазде цунах лаьцна ($1)",
 	"wikibase-aliases-edit-placeholder": "йазйе альтернативан цӀе",
-	"wikibase-aliases-edit-placeholder-language-aware": "йазйе интернациональни цӀе ($1)",
+	"wikibase-aliases-edit-placeholder-language-aware": "йазйе интернационалан цӀе ($1)",
 	"wikibase-aliases-edit-label": "Псевдонимаш, дӀасакъаьстина верт. сизал:",
 	"wikibase-content-language-edit-label": "Мотт:",
 	"wikibase-content-language-edit-not-recognized-language": "Билгалйаьккхина меттан код ца йевзира.",

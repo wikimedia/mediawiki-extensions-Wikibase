@@ -15,5 +15,8 @@
 	"wikibase-rc-hide-wikidata-hide": "Skryti",
 	"wikibase-rc-hide-wikidata-show": "Pokazati",
 	"wikibase-rcfilters-hide-wikibase-description": "Pravky proizhodeče iz Vikidanyh",
+	"unconnectedpages": "Stranice ne povezane s elementami",
+	"unconnectedpages-summary": "Tuta stranica sodrživaje spisok stranic, ktore ne sut povezane s nijednym elementom danyh (v imennyh prostorah, ktore poddrživajut povezanje elementov).",
+	"wikibase-unconnectedpages-submit": "Pokazati stranice",
 	"wikibase-otherprojects": "V drugyh projektah"
 }

@@ -99,6 +99,7 @@
 	"wikibase-propertypage-bad-datatype": "Tipo de dato descoñecido: $1",
 	"wikibase-claimview-snak-tooltip": "Insira un valor correspondente á propiedade chamada \"$1\". Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa teclear un valor premendo na icona ó lado da caixa de entrada.",
 	"wikibase-claimview-snak-new-tooltip": "Despois de especificar unha propiedade pode inserir o valor correspondente. Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa teclear un valor premendo na icona que está ó lado da caixa de entrada.",
+	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-preferred": "Rango privilexiado",
 	"wikibase-statementview-rank-tooltip-preferred": "Valor válido e actualizado",
 	"wikibase-statementview-rank-normal": "Rango normal",
@@ -387,5 +388,7 @@
 	"wikibase-pageinfo-subscription": "Wikis subscritos a esta entidade",
 	"wikibase-pageinfo-subscription-none": "Ningún",
 	"wikibase-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
-	"wikibase-search-bad-profile-name": "Nome de perfil de procura non válido: $1"
+	"wikibase-search-bad-profile-name": "Nome de perfil de procura non válido: $1",
+	"wikibase-tainted-ref-popper-help-link-text": "Axuda",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Cancelar"
 }
