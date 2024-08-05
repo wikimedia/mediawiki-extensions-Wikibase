@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
@@ -56,12 +55,9 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 					)
 				);
 			case VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER:
-				$propertyValuePairDeserializerFactory = new TestPropertyValuePairDeserializerFactory();
-				$propertyValuePairDeserializerFactory->setDataTypeForProperty(
-					new NumericPropertyId( TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY ),
-					'string'
-				);
-				$propertyValuePairDeserializer = $propertyValuePairDeserializerFactory->createPropertyValuePairDeserializer();
+				$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
+				$deserializerFactory->setDataTypeForProperty( TestValidatingRequestDeserializer::EXISTING_STRING_PROPERTY, 'string' );
+				$propertyValuePairDeserializer = $deserializerFactory->createPropertyValuePairDeserializer();
 
 				return new StatementSerializationRequestValidatingDeserializer(
 					new StatementValidator(

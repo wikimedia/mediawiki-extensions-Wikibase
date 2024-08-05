@@ -7,7 +7,6 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
@@ -1148,10 +1147,8 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): PatchedItemValidator {
-		$propertyValuePairDeserializerFactory = new TestPropertyValuePairDeserializerFactory();
-		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
-			$propertyValuePairDeserializerFactory->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
-		}
+		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
+		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
 
 		return new PatchedItemValidator(
 			$this->labelsSyntaxValidator,
@@ -1178,7 +1175,7 @@ class PatchedItemValidatorTest extends TestCase {
 			new StatementsValidator(
 				new StatementsDeserializer(
 					new StatementDeserializer(
-						$propertyValuePairDeserializerFactory->createPropertyValuePairDeserializer(),
+						$deserializerFactory->createPropertyValuePairDeserializer(),
 						$this->createStub( ReferenceDeserializer::class )
 					)
 				)

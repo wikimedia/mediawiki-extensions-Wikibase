@@ -901,10 +901,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): PatchedPropertyValidator {
-		$propertyValuePairDeserializerFactory = new TestPropertyValuePairDeserializerFactory();
-		foreach ( self::EXISTING_STRING_PROPERTY_IDS as $propertyId ) {
-			$propertyValuePairDeserializerFactory->setDataTypeForProperty( new NumericPropertyId( $propertyId ), 'string' );
-		}
+		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
+		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
 
 		return new PatchedPropertyValidator(
 			$this->labelsSyntaxValidator,
@@ -919,7 +917,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			new StatementsValidator(
 				new StatementsDeserializer(
 					new StatementDeserializer(
-						$propertyValuePairDeserializerFactory->createPropertyValuePairDeserializer(),
+						$deserializerFactory->createPropertyValuePairDeserializer(),
 						$this->createStub( ReferenceDeserializer::class )
 					)
 				)

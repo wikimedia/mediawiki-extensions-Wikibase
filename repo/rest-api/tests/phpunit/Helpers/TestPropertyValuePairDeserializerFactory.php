@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Helpers;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -23,8 +24,21 @@ class TestPropertyValuePairDeserializerFactory {
 		$this->dataTypeLookup = new InMemoryDataTypeLookup();
 	}
 
-	public function setDataTypeForProperty( PropertyId $propertyId, string $dataTypeId ): void {
+	/**
+	 * @param PropertyId|string $propertyId
+	 * @param string $dataTypeId
+	 */
+	public function setDataTypeForProperty( $propertyId, string $dataTypeId ): void {
+		if ( !$propertyId instanceof PropertyId ) {
+			$propertyId = new NumericPropertyId( $propertyId );
+		}
 		$this->dataTypeLookup->setDataTypeForProperty( $propertyId, $dataTypeId );
+	}
+
+	public function setDataTypeForProperties( array $propertyIdToDataTypeIdMap ): void {
+		foreach ( $propertyIdToDataTypeIdMap as $propertyId => $dataTypeId ) {
+			$this->setDataTypeForProperty( $propertyId, $dataTypeId );
+		}
 	}
 
 	public function createPropertyValuePairDeserializer(

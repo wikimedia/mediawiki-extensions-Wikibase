@@ -25,12 +25,13 @@ use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory
  */
 class PropertyValuePairDeserializerTest extends TestCase {
 
-	private const STRING_PROPERTY_ID = 'P123';
-	private const URL_PROPERTY_ID = 'P789';
-	private const ITEM_ID_PROPERTY_ID = 'P321';
-	private const TIME_PROPERTY_ID = 'P456';
-	private const GLOBECOORDINATE_PROPERTY_ID = 'P678';
-	private const STRING_URI_PROPERTY_ID = 'https://example.com/P1';
+	private const EXISTING_PROPERTIES_BY_DATA_TYPE = [
+		'string' => 'P123',
+		'url' => 'P789',
+		'wikibase-item' => 'P321',
+		'time' => 'P456',
+		'globe-coordinate' => 'P678',
+	];
 
 	/**
 	 * @dataProvider validSerializationProvider
@@ -41,33 +42,33 @@ class PropertyValuePairDeserializerTest extends TestCase {
 
 	public function validSerializationProvider(): Generator {
 		yield 'no value for string property' => [
-			new PropertyNoValueSnak( new NumericPropertyId( self::STRING_PROPERTY_ID ) ),
+			new PropertyNoValueSnak( new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ) ),
 			[
 				'value' => [ 'type' => 'novalue' ],
 				'property' => [
-					'id' => self::STRING_PROPERTY_ID,
+					'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ],
 				],
 			],
 		];
 
 		yield 'some value for item id property' => [
-			new PropertySomeValueSnak( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ) ),
+			new PropertySomeValueSnak( new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'wikibase-item' ] ) ),
 			[
 				'value' => [ 'type' => 'somevalue' ],
 				'property' => [
-					'id' => self::ITEM_ID_PROPERTY_ID,
+					'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'wikibase-item' ],
 				],
 			],
 		];
 
 		yield 'value for string property' => [
 			new PropertyValueSnak(
-				new NumericPropertyId( self::STRING_PROPERTY_ID ),
+				new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ),
 				new StringValue( 'potato' )
 			),
 			[
 				'value' => [ 'type' => 'value', 'content' => 'potato' ],
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 			],
 		];
 	}
@@ -143,7 +144,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield "invalid 'value' field - int" => [
 			new InvalidFieldException( 'value', 42, '/statements/P789/0/value' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => 42,
 			],
 			'/statements/P789/0',
@@ -152,7 +153,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield "invalid 'value' field - sequential array" => [
 			new InvalidFieldException( 'value', [ 'not an associative array' ], '/statement/value' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => [ 'not an associative array' ],
 			],
 			'/statement',
@@ -161,7 +162,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield "invalid 'value/type' field - not one of the allowed value" => [
 			new InvalidFieldException( 'type', 'not-a-value-type', '/statements/P789/2/qualifiers/1/value/type' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => [ 'type' => 'not-a-value-type', 'content' => 'I am goat' ],
 			],
 			'/statements/P789/2/qualifiers/1',
@@ -170,7 +171,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield "invalid 'value/content' field" => [
 			new InvalidFieldException( 'content', 42, '/statements/P789/3/references/2/parts/1/value/content' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => [ 'type' => 'value', 'content' => 42 ],
 			],
 			'/statements/P789/3/references/2/parts/1',
@@ -193,14 +194,14 @@ class PropertyValuePairDeserializerTest extends TestCase {
 
 		yield "missing 'value' field" => [
 			new MissingFieldException( 'value', '/some/path' ),
-			[ 'property' => [ 'id' => self::STRING_PROPERTY_ID ] ],
+			[ 'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ] ],
 			'/some/path',
 		];
 
 		yield "missing 'value/type' field" => [
 			new MissingFieldException( 'type', '/statements/P789/0/value' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => [ 'content' => 'I am goat' ],
 			],
 			'/statements/P789/0',
@@ -209,7 +210,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		yield "missing 'value/type' field - empty array" => [
 			new MissingFieldException( 'type', '/statement/value' ),
 			[
-				'property' => [ 'id' => self::STRING_PROPERTY_ID ],
+				'property' => [ 'id' => self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ],
 				'value' => [],
 			],
 			'/statement',
@@ -218,11 +219,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 
 	private function newDeserializer(): PropertyValuePairDeserializer {
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::STRING_PROPERTY_ID ), 'string' );
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::URL_PROPERTY_ID ), 'url' );
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::TIME_PROPERTY_ID ), 'time' );
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::GLOBECOORDINATE_PROPERTY_ID ), 'globe-coordinate' );
-		$deserializerFactory->setDataTypeForProperty( new NumericPropertyId( self::ITEM_ID_PROPERTY_ID ), 'wikibase-item' );
+		$deserializerFactory->setDataTypeForProperties( array_flip( self::EXISTING_PROPERTIES_BY_DATA_TYPE ) );
 
 		return $deserializerFactory->createPropertyValuePairDeserializer();
 	}
