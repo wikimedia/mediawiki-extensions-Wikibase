@@ -114,7 +114,12 @@ class PatchedItemValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedPatchedItem,
-			$this->newValidator()->validateAndDeserialize( $item, $patchedItemSerialization, $originalItem )
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$patchedItemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			)
 		);
 	}
 
@@ -165,7 +170,12 @@ class PatchedItemValidatorTest extends TestCase {
 			'labels' => [ 'en' => 'potato' ],
 		];
 
-		$validatedItem = $this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem );
+		$validatedItem = $this->newValidator()->validateAndDeserialize(
+			$item,
+			$patchedItem,
+			$originalItem,
+			[ 'id' => 'Q123', 'statements' => [] ]
+		);
 
 		$this->assertEquals( $originalItem->getId(), $validatedItem->getId() );
 	}
@@ -182,7 +192,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$item = $this->createStub( ItemReadModel::class );
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem );
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem, [ 'id' => 'Q123', 'statements' => [] ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -270,7 +280,7 @@ class PatchedItemValidatorTest extends TestCase {
 				new Fingerprint( $inputTerms->asPlainTermList(), $termsToCompareWith->asPlainTermList(), null )
 			),
 			$this->newValidator()
-				->validateAndDeserialize( $item, $patchedItem, $originalItem )
+				->validateAndDeserialize( $item, $patchedItem, $originalItem, [ 'id' => "$itemId", 'statements' => [] ] )
 		);
 	}
 
@@ -314,7 +324,7 @@ class PatchedItemValidatorTest extends TestCase {
 				$itemId,
 				new Fingerprint( $termsToCompareWith->asPlainTermList(), $inputTerms->asPlainTermList(), null ),
 			),
-			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem )
+			$this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem, [ 'id' => "$itemId", 'statements' => [] ] )
 		);
 	}
 
@@ -336,7 +346,8 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize(
 				$item,
 				array_merge( [ 'id' => 'Q123' ], $patchedSerialization ),
-				new Item( new ItemId( 'Q123' ) )
+				new Item( new ItemId( 'Q123' ) ),
+				[ 'id' => 'Q123', 'statements' => [] ]
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
@@ -641,7 +652,12 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$itemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -760,7 +776,12 @@ class PatchedItemValidatorTest extends TestCase {
 		$patchedItemSerialization = [ 'id' => 'Q123', 'type' => 'item', 'statements' => $patchedStatements ];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $patchedItemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$patchedItemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'expected exception not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -862,7 +883,12 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$itemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -1006,7 +1032,12 @@ class PatchedItemValidatorTest extends TestCase {
 				$this->assertContains( $sitelink->getSiteId(), $expectedValidatedSitelinkSites );
 			} );
 
-		$this->assertInstanceOf( Item::class, $this->newValidator()->validateAndDeserialize( $item, $patchedItem, $originalItem ) );
+		$this->assertInstanceOf( Item::class, $this->newValidator()->validateAndDeserialize(
+			$item,
+			$patchedItem,
+			$originalItem,
+			[ 'id' => 'Q123', 'statements' => [] ]
+		) );
 	}
 
 	public function modifiedSitelinksProvider(): Generator {
@@ -1077,7 +1108,12 @@ class PatchedItemValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$itemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -1109,7 +1145,12 @@ class PatchedItemValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$itemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -1148,7 +1189,12 @@ class PatchedItemValidatorTest extends TestCase {
 		);
 
 		try {
-			$this->newValidator()->validateAndDeserialize( $item, $itemSerialization, $originalItem );
+			$this->newValidator()->validateAndDeserialize(
+				$item,
+				$itemSerialization,
+				$originalItem,
+				[ 'id' => 'Q123', 'statements' => [] ]
+			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertEquals( $expectedError, $error );

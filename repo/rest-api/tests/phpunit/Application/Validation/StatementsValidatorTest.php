@@ -49,8 +49,8 @@ class StatementsValidatorTest extends TestCase {
 	public function provideValidStatements(): Generator {
 		yield 'two valid statements' => [
 			[
-				'P567' => [ [ 'property' => [ 'id' => 'P567' ], 'value' => [ 'type' => 'somevalue' ] ] ],
-				'P789' => [ [ 'property' => [ 'id' => 'P789' ], 'value' => [ 'type' => 'somevalue' ] ] ],
+				'P567' => [ $this->newSomeValueSerialization( 'P567' ) ],
+				'P789' => [ $this->newSomeValueSerialization( 'P789' ) ],
 			],
 			new StatementList(
 				NewStatement::someValueFor( 'P567' )->build(),
@@ -105,10 +105,7 @@ class StatementsValidatorTest extends TestCase {
 			),
 		];
 
-		$invalidStatementGroup = [
-			'property' => [ 'id' => 'P123' ],
-			'value' => [ 'type' => 'somevalue' ],
-		];
+		$invalidStatementGroup = $this->newSomeValueSerialization( 'P123' );
 		yield 'statement group is not a sequential array (list)' => [
 			[ 'P123' => $invalidStatementGroup ],
 			new ValidationError(
@@ -154,12 +151,7 @@ class StatementsValidatorTest extends TestCase {
 
 		yield 'property id mismatch' => [
 			[
-				'P123' => [
-					[
-						'property' => [ 'id' => 'P567' ],
-						'value' => [ 'type' => 'somevalue' ],
-					],
-				],
+				'P123' => [ $this->newSomeValueSerialization( 'P567' ) ],
 			],
 			new ValidationError(
 				StatementsValidator::CODE_PROPERTY_ID_MISMATCH,
@@ -172,20 +164,105 @@ class StatementsValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider modifiedStatementsProvider
+	 */
+	public function testValidatesModifiedStatements(
+		array $originalSerialization,
+		array $serializationToValidate,
+		array $expectedValidatedStatements
+	): void {
+		$actualStatementValidator = $this->newStatementValidator();
+		$spyStatementValidator = $this->createMock( StatementValidator::class );
+		$spyStatementValidator->expects( $this->exactly( count( $expectedValidatedStatements ) ) )
+			->method( 'validate' )
+			->with( $this->callback( function( array $statement ) use ( $expectedValidatedStatements, $actualStatementValidator ) {
+				$this->assertNull( $actualStatementValidator->validate( $statement ) );
+
+				return in_array( $statement, $expectedValidatedStatements );
+			} ) );
+		$spyStatementValidator->method( 'getValidatedStatement' )
+			->willReturnCallback( fn() => $actualStatementValidator->getValidatedStatement() );
+
+		$statementsValidator = $this->newValidator( $spyStatementValidator );
+
+		$this->assertNull( $statementsValidator->validateModifiedStatements(
+			$originalSerialization,
+			$this->deserializeStatements( $originalSerialization ),
+			$serializationToValidate
+		) );
+	}
+
+	public function modifiedStatementsProvider(): Generator {
+		$existingStatementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$existingStatement = $this->newSomeValueSerialization( 'P123' );
+		$existingStatement['id'] = $existingStatementId;
+		$originalSerialization = [ 'P123' => [ $existingStatement ] ];
+		yield 'statements unmodified => nothing validated' => [
+			$originalSerialization,
+			$originalSerialization,
+			[],
+		];
+
+		$newStatement = $this->newSomeValueSerialization( 'P123' );
+		yield 'new statement gets validated' => [
+			[],
+			[ 'P123' => [ $newStatement ] ],
+			[ $newStatement ],
+		];
+
+		$unmodifiedStatement = $this->newSomeValueSerialization( 'P321' );
+		$unmodifiedStatement['id'] = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+
+		$modifiedStatementId = 'Q123$ZZZZZZ-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		$modifiedStatement = $this->newSomeValueSerialization( 'P123' );
+		$modifiedStatement['id'] = $modifiedStatementId;
+		yield 'modified statements get validated' => [
+			[
+				'P123' => [
+					[
+						'property' => [ 'id' => 'P123' ], 'value' => [ 'type' => 'novalue' ],
+						'id' => $modifiedStatementId,
+					],
+				],
+				'P321' => [ $unmodifiedStatement ],
+			],
+			[
+				'P123' => [ $modifiedStatement ],
+				'P321' => [ $unmodifiedStatement ],
+			],
+			[ $modifiedStatement ],
+		];
+	}
+
 	public function testGivenGetValidatedStatementsCalledBeforeValidate_throws(): void {
 		$this->expectException( LogicException::class );
 		$this->newValidator()->getValidatedStatements();
 	}
 
-	private function newValidator(): StatementsValidator {
-		return new StatementsValidator(
-			new StatementValidator(
-				new StatementDeserializer(
-					$this->propValPairDeserializer,
-					$this->createStub( ReferenceDeserializer::class )
-				)
-			)
-		);
+	private function newValidator( StatementValidator $statementValidator = null ): StatementsValidator {
+		return new StatementsValidator( $statementValidator ?? $this->newStatementValidator() );
 	}
 
+	private function newStatementValidator(): StatementValidator {
+		return new StatementValidator( $this->newStatementDeserializer() );
+	}
+
+	private function newSomeValueSerialization( string $propertyId ): array {
+		return [ 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'somevalue' ] ];
+	}
+
+	private function deserializeStatements( array $statements ): StatementList {
+		return new StatementList( ...array_map(
+			[ $this->newStatementDeserializer(), 'deserialize' ],
+			array_merge( ...array_values( $statements ) )
+		) );
+	}
+
+	private function newStatementDeserializer(): StatementDeserializer {
+		return new StatementDeserializer(
+			$this->propValPairDeserializer,
+			$this->createStub( ReferenceDeserializer::class )
+		);
+	}
 }

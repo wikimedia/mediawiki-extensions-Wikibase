@@ -31,6 +31,15 @@ class StatementsValidator {
 	}
 
 	public function validate( array $serialization, string $basePath = '' ): ?ValidationError {
+		return $this->validateModifiedStatements( [], new StatementList(), $serialization, $basePath );
+	}
+
+	public function validateModifiedStatements(
+		array $originalSerialization,
+		StatementList $originalStatements,
+		array $serialization,
+		string $basePath = ''
+	): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
 			return new ValidationError( self::CODE_STATEMENTS_NOT_ASSOCIATIVE, [
 				self::CONTEXT_PATH => $basePath, self::CONTEXT_STATEMENTS => $serialization,
@@ -46,6 +55,11 @@ class StatementsValidator {
 				] );
 			}
 			foreach ( $statementGroup as $groupIndex => $statement ) {
+				if ( $statement === ( $originalSerialization[$propertyId][$groupIndex] ?? null ) ) {
+					$deserializedStatements[] = $originalStatements->getFirstStatementWithGuid( $statement['id'] );
+					continue;
+				}
+
 				if ( !is_array( $statement ) ) {
 					return new ValidationError( self::CODE_STATEMENT_NOT_ARRAY, [
 						self::CONTEXT_PATH => "$basePath/$propertyId/$groupIndex",

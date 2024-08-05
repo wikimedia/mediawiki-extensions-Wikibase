@@ -59,7 +59,11 @@ class PatchedPropertyValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserialize( array $serialization, Property $originalProperty ): Property {
+	public function validateAndDeserialize(
+		array $serialization,
+		Property $originalProperty,
+		array $originalPropertySerialization
+	): Property {
 		if ( !isset( $serialization['id'] ) ) { // ignore ID removal
 			$serialization['id'] = $originalProperty->getId()->getSerialization();
 		}
@@ -71,7 +75,11 @@ class PatchedPropertyValidator {
 
 		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
 		$this->assertValidAliases( $serialization[ 'aliases' ] ?? [] );
-		$this->assertValidStatements( $serialization[ 'statements' ] ?? [], $originalProperty );
+		$this->assertValidStatements(
+			$serialization['statements'] ?? [],
+			$originalProperty,
+			$originalPropertySerialization['statements']
+		);
 
 		return new Property(
 			new NumericPropertyId( $serialization[ 'id' ] ),
@@ -340,8 +348,16 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	private function assertValidStatements( array $statementsSerialization, Property $originalProperty ): void {
-		$validationError = $this->statementsValidator->validate( $statementsSerialization );
+	private function assertValidStatements(
+		array $statementsSerialization,
+		Property $originalProperty,
+		array $originalStatementsSerialization
+	): void {
+		$validationError = $this->statementsValidator->validateModifiedStatements(
+			$originalStatementsSerialization,
+			$originalProperty->getStatements(),
+			$statementsSerialization
+		);
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
