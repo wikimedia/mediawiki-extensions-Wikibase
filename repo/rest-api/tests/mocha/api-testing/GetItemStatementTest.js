@@ -61,7 +61,18 @@ describe( 'GET statement', () => {
 				assertValid200Response( response, testStatement );
 			} );
 
-			it( 'can get a statement with a deleted property', async () => {
+			let retries = 0;
+			it( 'can get a statement with a deleted property', async function () {
+				// The property deletion isn't always immediately taking effect here for some reason.
+				// Retrying with a timeout so that secondary data can catch up.
+				this.retries( 3 );
+				if ( retries > 0 ) {
+					await new Promise( ( resolve ) => {
+						setTimeout( resolve, 1000 );
+					} );
+				}
+				retries++;
+
 				const response = await newGetStatementRequestBuilder( testStatementWithDeletedProperty.id )
 					.assertValidRequest()
 					.makeRequest();
