@@ -412,7 +412,9 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );
+	} );
 
+	describe( '422', () => {
 		it( 'sitelink conflict', async () => {
 			await newSetSitelinkRequestBuilder( testItemId, siteId, { title: testTitle1 } )
 				.assertValidRequest()
@@ -423,8 +425,13 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 409, 'sitelink-conflict', { conflicting_item_id: testItemId } );
-			assert.include( response.body.message, testItemId );
+			const context = {
+				violation: 'sitelink-conflict',
+				violation_context: { conflicting_item_id: testItemId }
+			};
+
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 	} );
 } );

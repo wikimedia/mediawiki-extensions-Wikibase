@@ -225,9 +225,8 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
 		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $conflictingItemId ) );
 
-		$expectedUseCaseError = new UseCaseError(
-			UseCaseError::PATCHED_SITELINK_CONFLICT,
-			"Site '$validSiteId' is already being used on '$conflictingItemId'",
+		$expectedUseCaseError = UseCaseError::newDataPolicyViolation(
+			UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 			[
 				UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				UseCaseError::CONTEXT_SITE_ID => $validSiteId,

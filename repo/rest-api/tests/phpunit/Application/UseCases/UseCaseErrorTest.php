@@ -36,16 +36,21 @@ class UseCaseErrorTest extends TestCase {
 			[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ],
 		];
 
+		$duplicateAlias = 'alias';
 		yield 'valid error with additional path context' => [
-			UseCaseError::SITELINK_CONFLICT,
-			'sitelink conflict',
-			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123', UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
+			UseCaseError::ALIAS_DUPLICATE,
+			"Alias list contains a duplicate alias: '$duplicateAlias'",
+			[
+				UseCaseError::CONTEXT_LANGUAGE => 'en',
+				UseCaseError::CONTEXT_ALIAS => $duplicateAlias,
+			],
 		];
 
+		$duplicateAlias = 'alias';
 		yield 'valid error without additional path context' => [
-			UseCaseError::SITELINK_CONFLICT,
-			'sitelink conflict',
-			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q123' ],
+			UseCaseError::ALIAS_DUPLICATE,
+			"Alias list contains a duplicate alias: '$duplicateAlias'",
+			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
 		];
 	}
 
@@ -71,10 +76,11 @@ class UseCaseErrorTest extends TestCase {
 			'error context key is missing',
 		];
 
+		$duplicateAlias = 'alias';
 		yield 'wrong path context field name' => [
-			UseCaseError::SITELINK_CONFLICT,
-			'sitelink conflict',
-			[ UseCaseError::CONTEXT_PATH => '/enwiki' ],
+			UseCaseError::ALIAS_DUPLICATE,
+			"Alias list contains a duplicate alias: '$duplicateAlias'",
+			[ UseCaseError::CONTEXT_PATH => $duplicateAlias ],
 		];
 	}
 

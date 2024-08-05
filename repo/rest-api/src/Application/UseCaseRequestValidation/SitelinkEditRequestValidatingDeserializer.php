@@ -52,9 +52,8 @@ class SitelinkEditRequestValidatingDeserializer {
 					);
 				case SitelinkValidator::CODE_SITELINK_CONFLICT:
 					$conflictingItemId = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
-					throw new UseCaseError(
-						UseCaseError::SITELINK_CONFLICT,
-						"Sitelink is already being used on $conflictingItemId",
+					throw UseCaseError::newDataPolicyViolation(
+						UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 						[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId ]
 					);
 				default:

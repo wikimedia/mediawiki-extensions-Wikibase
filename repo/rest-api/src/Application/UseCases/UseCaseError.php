@@ -58,7 +58,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
 	public const PATCHED_PROPERTY_UNEXPECTED_FIELD = 'patched-property-unexpected-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
-	public const PATCHED_SITELINK_CONFLICT = 'patched-sitelink-conflict';
 	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
 	public const PATCHED_SITELINK_INVALID_SITE_ID = 'patched-sitelink-invalid-site-id';
 	public const PATCHED_SITELINK_INVALID_TITLE = 'patched-sitelink-invalid-title';
@@ -74,9 +73,9 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
-	public const SITELINK_CONFLICT = 'sitelink-conflict';
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
@@ -160,7 +159,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
-		self::PATCHED_SITELINK_CONFLICT => [ self::CONTEXT_CONFLICTING_ITEM_ID, self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
@@ -180,7 +178,6 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
-		self::SITELINK_CONFLICT => [ self::CONTEXT_CONFLICTING_ITEM_ID ],
 		self::SITELINK_NOT_DEFINED => [],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
@@ -201,7 +198,6 @@ class UseCaseError extends UseCaseException {
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
-		self::SITELINK_CONFLICT => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 	];
 

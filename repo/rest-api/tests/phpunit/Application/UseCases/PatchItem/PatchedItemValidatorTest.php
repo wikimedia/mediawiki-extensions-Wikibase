@@ -1090,9 +1090,8 @@ class PatchedItemValidatorTest extends TestCase {
 
 		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $conflictingItemId ) );
 
-		$expectedError = new UseCaseError(
-			UseCaseError::PATCHED_SITELINK_CONFLICT,
-			"Site '$validSiteId' is already being used on '$conflictingItemId'",
+		$expectedError = UseCaseError::newDataPolicyViolation(
+			UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 			[
 				UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				UseCaseError::CONTEXT_SITE_ID => $validSiteId,

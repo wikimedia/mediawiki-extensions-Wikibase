@@ -716,7 +716,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 	} );
 
-	it( '409 sitelink conflict', async () => {
+	it( '422 sitelink conflict', async () => {
 		const linkedArticle = utils.title( 'Potato' );
 		await entityHelper.createWikiPage( linkedArticle );
 
@@ -729,12 +729,12 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 		const response = await createItemWithSitelink.makeRequest();
 
-		assertValidError(
-			response,
-			409,
-			'sitelink-conflict',
-			{ site_id: localWikiId, conflicting_item_id: existingItemWithSitelink.body.id }
-		);
-		assert.include( response.body.message, existingItemWithSitelink.body.id );
+		const context = {
+			violation: 'sitelink-conflict',
+			violation_context: { site_id: localWikiId, conflicting_item_id: existingItemWithSitelink.body.id }
+		};
+
+		assertValidError( response, 422, 'data-policy-violation', context );
+		assert.strictEqual( response.body.message, 'Edit violates data policy' );
 	} );
 } );

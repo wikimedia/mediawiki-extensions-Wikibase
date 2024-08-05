@@ -51,9 +51,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	// to be reactivated in Ib518ac9a5ace76a6ad676b2581307ce26ca78d4d
-	// eslint-disable-next-line mocha/no-skipped-tests
-	it.skip( '422', async () => {
+	it( '422', async () => {
 		const linkedArticle = utils.title( 'Some article' );
 		await createWikiPage( linkedArticle );
 		await newCreateItemRequestBuilder( {

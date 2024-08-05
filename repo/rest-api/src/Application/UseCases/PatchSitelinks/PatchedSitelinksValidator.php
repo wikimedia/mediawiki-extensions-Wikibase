@@ -118,9 +118,8 @@ class PatchedSitelinksValidator {
 
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
 				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_CONFLICT,
-					"Site '{$siteId()}' is already being used on '$conflictingItemId'",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 					[
 						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => "$conflictingItemId",
 						UseCaseError::CONTEXT_SITE_ID => $siteId(),

@@ -120,9 +120,12 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		];
 		yield 'another item has the same sitelink' => [
 			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ] ),
-			UseCaseError::SITELINK_CONFLICT,
-			'Sitelink is already being used on Q654',
-			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
+			UseCaseError::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
+			[
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
+			],
 		];
 	}
 
