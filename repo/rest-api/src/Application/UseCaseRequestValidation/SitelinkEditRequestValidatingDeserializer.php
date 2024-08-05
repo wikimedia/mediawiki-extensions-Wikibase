@@ -51,11 +51,11 @@ class SitelinkEditRequestValidatingDeserializer {
 						"Page with title {$request->getSitelink()['title']} does not exist on the given site"
 					);
 				case SitelinkValidator::CODE_SITELINK_CONFLICT:
-					$conflictItemId = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+					$conflictingItemId = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 					throw new UseCaseError(
 						UseCaseError::SITELINK_CONFLICT,
-						"Sitelink is already being used on $conflictItemId",
-						[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => $conflictItemId ]
+						"Sitelink is already being used on $conflictingItemId",
+						[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId ]
 					);
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );

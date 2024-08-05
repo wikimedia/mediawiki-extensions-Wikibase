@@ -219,17 +219,17 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 	public function testSitelinkConflict_throws(): void {
 		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
-		$matchingItemId = 'Q987';
+		$conflictingItemId = 'Q987';
 		$pageTitle = 'test-title';
 
 		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
-		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $matchingItemId ) );
+		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $conflictingItemId ) );
 
 		$expectedUseCaseError = new UseCaseError(
 			UseCaseError::PATCHED_SITELINK_CONFLICT,
-			"Site '$validSiteId' is already being used on '$matchingItemId'",
+			"Site '$validSiteId' is already being used on '$conflictingItemId'",
 			[
-				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
 			]
 		);

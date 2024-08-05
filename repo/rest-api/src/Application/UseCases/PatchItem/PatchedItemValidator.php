@@ -213,7 +213,7 @@ class PatchedItemValidator {
 					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID],
 					]
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
@@ -271,7 +271,7 @@ class PatchedItemValidator {
 					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_CONFLICTING_ITEM_ID],
 					]
 				);
 		}
@@ -452,12 +452,12 @@ class PatchedItemValidator {
 					]
 				);
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
-				$matchingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 				throw new UseCaseError(
 					UseCaseError::PATCHED_SITELINK_CONFLICT,
-					"Site '{$siteId()}' is already being used on '$matchingItemId'",
+					"Site '{$siteId()}' is already being used on '$conflictingItemId'",
 					[
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => "$matchingItemId",
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => "$conflictingItemId",
 						UseCaseError::CONTEXT_SITE_ID => $siteId(),
 					]
 				);

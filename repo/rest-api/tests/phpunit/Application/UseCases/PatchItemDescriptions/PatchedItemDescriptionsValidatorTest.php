@@ -157,7 +157,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 
 		$collidingLabel = 'label already exists on an item with the same description';
 		$collidingDescription = 'description already exists on an item with the same label';
-		$collidingItemId = 'Q345';
+		$conflictingItemId = 'Q345';
 		yield 'label/description collision' => [
 			[ $language => $collidingLabel ],
 			new ValidationError(
@@ -166,7 +166,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
 					ItemDescriptionValidator::CONTEXT_LABEL => $collidingLabel,
 					ItemDescriptionValidator::CONTEXT_DESCRIPTION => $collidingDescription,
-					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => $collidingItemId,
+					ItemDescriptionValidator::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				]
 			),
 			UseCaseError::DATA_POLICY_VIOLATION,
@@ -175,7 +175,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
 					UseCaseError::CONTEXT_LANGUAGE => $language,
-					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $collidingItemId,
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				],
 			],
 		];

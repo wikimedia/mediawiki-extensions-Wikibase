@@ -189,7 +189,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 					ItemLabelValidator::CONTEXT_LABEL => 'en-label',
 					ItemLabelValidator::CONTEXT_DESCRIPTION => 'en-description',
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
 				]
 			),
 			new UseCaseError(
@@ -293,7 +293,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en',
 					ItemDescriptionValidator::CONTEXT_LABEL => 'en-label',
 					ItemDescriptionValidator::CONTEXT_DESCRIPTION => 'en-description',
-					ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					ItemDescriptionValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
 				]
 			),
 			new UseCaseError(
@@ -572,13 +572,13 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield SitelinkValidator::CODE_SITELINK_CONFLICT => [
 			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
-				SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID => 'Q666',
+				SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q666',
 			] ),
 			new UseCaseError(
 				UseCaseError::SITELINK_CONFLICT,
 				'Sitelink is already being used on Q666',
 				[
-					UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q666',
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q666',
 					UseCaseError::CONTEXT_SITE_ID => $site,
 				]
 			),

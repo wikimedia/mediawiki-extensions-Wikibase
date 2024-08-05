@@ -164,12 +164,12 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		$language = 'en';
-		$propertyId = 'P456';
+		$conflictingPropertyId = 'P456';
 		yield 'label not unique' => [
 			new ValidationError( PropertyLabelValidator::CODE_LABEL_DUPLICATE, [
 				PropertyLabelValidator::CONTEXT_LANGUAGE => $language,
 				PropertyLabelValidator::CONTEXT_LABEL => 'My Label',
-				PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => $propertyId,
+				PropertyLabelValidator::CONTEXT_CONFLICTING_PROPERTY_ID => $conflictingPropertyId,
 			] ),
 			UseCaseError::DATA_POLICY_VIOLATION,
 			'Edit violates data policy',
@@ -177,7 +177,7 @@ class PropertyLabelEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE,
 				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
 					UseCaseError::CONTEXT_LANGUAGE => $language,
-					UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $propertyId,
+					UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $conflictingPropertyId,
 				],
 			],
 		];

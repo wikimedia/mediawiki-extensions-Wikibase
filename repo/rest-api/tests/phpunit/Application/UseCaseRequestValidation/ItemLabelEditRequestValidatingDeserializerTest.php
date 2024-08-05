@@ -156,13 +156,13 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		$language = 'en';
-		$itemId = 'Q456';
+		$conflictingItemId = 'Q456';
 		yield 'label/description not unique' => [
 			new ValidationError( ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE, [
 				ItemLabelValidator::CONTEXT_LANGUAGE => $language,
 				ItemLabelValidator::CONTEXT_LABEL => 'My Label',
 				ItemLabelValidator::CONTEXT_DESCRIPTION => 'My Description',
-				ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => $itemId,
+				ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 			] ),
 			UseCaseError::DATA_POLICY_VIOLATION,
 			'Edit violates data policy',
@@ -170,7 +170,7 @@ class ItemLabelEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
 					UseCaseError::CONTEXT_LANGUAGE => $language,
-					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $itemId,
+					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				],
 			],
 		];

@@ -466,7 +466,7 @@ class PatchedItemValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 					ItemLabelValidator::CONTEXT_LABEL => 'en-label',
 					ItemLabelValidator::CONTEXT_DESCRIPTION => 'en-description',
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
 				]
 			),
 			new UseCaseError(
@@ -605,7 +605,7 @@ class PatchedItemValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => 'en',
 					ItemLabelValidator::CONTEXT_LABEL => 'en-label',
 					ItemLabelValidator::CONTEXT_DESCRIPTION => 'en-description',
-					ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID => 'Q123',
+					ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q123',
 				]
 			),
 			new UseCaseError(
@@ -1077,7 +1077,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 	public function testSitelinkConflict_throws(): void {
 		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
-		$matchingItemId = 'Q987';
+		$conflictingItemId = 'Q987';
 
 		$originalItem = new Item( new ItemId( 'Q123' ) );
 
@@ -1089,13 +1089,13 @@ class PatchedItemValidatorTest extends TestCase {
 			'sitelinks' => [ $validSiteId => [ 'title' => 'test-title' ] ],
 		];
 
-		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $matchingItemId ) );
+		$this->siteLinkLookup->method( 'getItemIdForSiteLink' )->willReturn( new ItemId( $conflictingItemId ) );
 
 		$expectedError = new UseCaseError(
 			UseCaseError::PATCHED_SITELINK_CONFLICT,
-			"Site '$validSiteId' is already being used on '$matchingItemId'",
+			"Site '$validSiteId' is already being used on '$conflictingItemId'",
 			[
-				UseCaseError::CONTEXT_MATCHING_ITEM_ID => $matchingItemId,
+				UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
 			]
 		);

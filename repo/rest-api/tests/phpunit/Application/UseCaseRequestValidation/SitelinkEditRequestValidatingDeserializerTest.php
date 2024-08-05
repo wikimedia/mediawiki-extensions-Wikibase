@@ -119,10 +119,10 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site',
 		];
 		yield 'another item has the same sitelink' => [
-			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID => 'Q654' ] ),
+			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ] ),
 			UseCaseError::SITELINK_CONFLICT,
 			'Sitelink is already being used on Q654',
-			[ UseCaseError::CONTEXT_MATCHING_ITEM_ID => 'Q654' ],
+			[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
 		];
 	}
 

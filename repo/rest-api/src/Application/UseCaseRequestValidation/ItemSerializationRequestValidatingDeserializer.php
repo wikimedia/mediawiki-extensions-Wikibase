@@ -98,7 +98,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID],
 					]
 				);
 		}
@@ -136,7 +136,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
 					[
 						UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_MATCHING_ITEM_ID],
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $context[ItemDescriptionValidator::CONTEXT_CONFLICTING_ITEM_ID],
 					]
 				);
 		}
@@ -255,12 +255,12 @@ class ItemSerializationRequestValidatingDeserializer {
 					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
 				);
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
-				$matchingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICT_ITEM_ID ];
+				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 				throw new UseCaseError(
 					UseCaseError::SITELINK_CONFLICT,
-					"Sitelink is already being used on $matchingItemId",
+					"Sitelink is already being used on $conflictingItemId",
 					[
-						UseCaseError::CONTEXT_MATCHING_ITEM_ID => "$matchingItemId",
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => "$conflictingItemId",
 						UseCaseError::CONTEXT_SITE_ID => $siteId(),
 					]
 				);

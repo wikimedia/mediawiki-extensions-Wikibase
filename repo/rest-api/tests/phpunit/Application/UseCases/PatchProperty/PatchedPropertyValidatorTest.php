@@ -500,7 +500,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				[
 					PropertyLabelValidator::CONTEXT_LANGUAGE => 'en',
 					PropertyLabelValidator::CONTEXT_LABEL => 'en-label',
-					PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID => 'P123',
+					PropertyLabelValidator::CONTEXT_CONFLICTING_PROPERTY_ID => 'P123',
 				]
 			),
 			UseCaseError::newDataPolicyViolation(

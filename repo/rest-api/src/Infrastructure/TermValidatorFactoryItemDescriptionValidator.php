@@ -89,7 +89,7 @@ class TermValidatorFactoryItemDescriptionValidator implements ItemDescriptionVal
 					self::CONTEXT_LANGUAGE => $language,
 					self::CONTEXT_LABEL => $label,
 					self::CONTEXT_DESCRIPTION => $description,
-					self::CONTEXT_MATCHING_ITEM_ID => (string)$entityId,
+					self::CONTEXT_CONFLICTING_ITEM_ID => (string)$entityId,
 				]
 			);
 		}

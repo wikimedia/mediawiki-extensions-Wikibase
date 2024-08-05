@@ -20,7 +20,7 @@ interface SitelinkValidator {
 	public const CODE_SITELINK_CONFLICT = 'sitelink-validator-code-sitelink-conflict';
 
 	public const CONTEXT_BADGE = 'sitelink-validator-context-badge';
-	public const CONTEXT_CONFLICT_ITEM_ID = 'sitelink-validator-context-conflict-item-id';
+	public const CONTEXT_CONFLICTING_ITEM_ID = 'sitelink-validator-context-conflicting-item-id';
 	public const CONTEXT_SITE_ID = 'sitelink-validator-context-site-id';
 
 	/**

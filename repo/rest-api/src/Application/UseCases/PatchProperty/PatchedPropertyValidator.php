@@ -225,11 +225,11 @@ class PatchedPropertyValidator {
 				throw UseCaseError::newValueTooLong( "/labels/$language", $maxLabelLength, true );
 			case PropertyLabelValidator::CODE_LABEL_DUPLICATE:
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
-				$matchingPropertyId = $context[PropertyLabelValidator::CONTEXT_MATCHING_PROPERTY_ID];
+				$conflictingPropertyId = $context[PropertyLabelValidator::CONTEXT_CONFLICTING_PROPERTY_ID];
 
 				throw UseCaseError::newDataPolicyViolation(
 					UseCaseError::POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE,
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $matchingPropertyId ]
+					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $conflictingPropertyId ]
 				);
 			case PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
