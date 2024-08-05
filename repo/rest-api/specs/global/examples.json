@@ -197,25 +197,6 @@
 			}
 		}
 	},
-	"SitelinkConflictExample": {
-		"value": {
-			"code": "sitelink-conflict",
-			"message": "Sitelink is already being used on {other_item_id}",
-			"context": {
-				"conflicting_item_id": "{other_item_id}"
-			}
-		}
-	},
-	"SitelinkConflictWithSiteContextExample": {
-		"value": {
-			"code": "sitelink-conflict",
-			"message": "Sitelink is already being used on {other_item_id}",
-			"context": {
-				"conflicting_item_id": "{other_item_id}",
-				"site": "{site_id}"
-			}
-		}
-	},
 	"StatementNotFoundExample": {
 		"value": {
 			"code": "statement-not-found",
@@ -347,16 +328,6 @@
 			"context": {
 				"site_id": "{site_id}",
 				"badge": "{badge}"
-			}
-		}
-	},
-	"PatchedSitelinkConflictExample": {
-		"value": {
-			"code": "patched-sitelink-conflict",
-			"message": "Site {site_id} is already being used on {other_item_id}",
-			"context": {
-				"conflicting_item_id": "{other_item_id}",
-				"site_id": "{site_id}"
 			}
 		}
 	},

@@ -50,6 +50,7 @@
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
