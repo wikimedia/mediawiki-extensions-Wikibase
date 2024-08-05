@@ -17,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
@@ -189,12 +190,15 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 			case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
 			case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
-			case StatementsValidator::CODE_INVALID_STATEMENT_DATA:
 				throw UseCaseError::newInvalidValue( $context[StatementsValidator::CONTEXT_PATH] );
-			case StatementsValidator::CODE_MISSING_STATEMENT_DATA:
+			case StatementValidator::CODE_INVALID_FIELD:
+				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
+			case StatementValidator::CODE_INVALID_FIELD_TYPE:
+				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_FIELD] );
+			case StatementValidator::CODE_MISSING_FIELD:
 				throw UseCaseError::newMissingField(
-					$context[StatementsValidator::CONTEXT_PATH],
-					$context[StatementsValidator::CONTEXT_FIELD]
+					$context[StatementValidator::CONTEXT_PATH],
+					$context[StatementValidator::CONTEXT_FIELD]
 				);
 			case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 				throw new UseCaseError(

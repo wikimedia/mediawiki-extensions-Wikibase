@@ -24,7 +24,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
@@ -41,6 +40,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -790,12 +790,22 @@ class PatchedItemValidatorTest extends TestCase {
 			),
 		];
 
-		yield 'invalid statement type' => [
+		yield 'invalid statement type: statement not an array' => [
 			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'somevalue' ] ], 'invalid' ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
 				'Not a valid statement type',
 				[ UseCaseError::CONTEXT_PATH => "$propertyId/1" ]
+			),
+		];
+
+		yield 'Invalid statement type: statement not an associative array' =>
+		[
+			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ [ 'not a valid statement' ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
+				'Not a valid statement type',
+				[ UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[1] . '/0' ]
 			),
 		];
 
@@ -1172,7 +1182,7 @@ class PatchedItemValidatorTest extends TestCase {
 				)
 			),
 			new StatementsValidator(
-				new StatementsDeserializer(
+				new StatementValidator(
 					new StatementDeserializer(
 						$deserializerFactory->createPropertyValuePairDeserializer(),
 						$this->createStub( ReferenceDeserializer::class )

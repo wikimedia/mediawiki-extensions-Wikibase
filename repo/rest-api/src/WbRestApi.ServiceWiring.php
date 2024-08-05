@@ -27,7 +27,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
@@ -384,7 +383,7 @@ return [
 						WbRestApi::getAliasLanguageCodeValidator( $services ),
 						new AliasesDeserializer()
 					),
-					new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) ),
+					new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 					new SitelinksValidator(
 						new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 							WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
@@ -795,7 +794,7 @@ return [
 						WikibaseRepo::getStore( $services )->newSiteLinkStore()
 					),
 				),
-				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer() ) )
+				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) )
 			),
 			WbRestApi::getItemDataRetriever(),
 			WbRestApi::getItemUpdater()
@@ -917,7 +916,7 @@ return [
 					WbRestApi::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer()
 				),
-				new StatementsValidator( new StatementsDeserializer( WbRestApi::getStatementDeserializer( $services ) ) )
+				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) )
 			)
 		);
 	},

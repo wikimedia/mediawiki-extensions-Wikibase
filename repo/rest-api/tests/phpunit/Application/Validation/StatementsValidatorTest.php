@@ -13,8 +13,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldExcep
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementsDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -75,10 +75,10 @@ class StatementsValidatorTest extends TestCase {
 
 		$this->assertEquals(
 			new ValidationError(
-				StatementsValidator::CODE_MISSING_STATEMENT_DATA,
+				StatementValidator::CODE_MISSING_FIELD,
 				[
-					StatementsValidator::CONTEXT_PATH => "/$predicateId/0",
-					StatementsValidator::CONTEXT_FIELD => 'value',
+					StatementValidator::CONTEXT_PATH => "/$predicateId/0",
+					StatementValidator::CONTEXT_FIELD => 'value',
 				]
 			),
 			$this->newValidator()->validate( [ $predicateId => [ $statementWithMissingValue ] ] )
@@ -130,8 +130,8 @@ class StatementsValidatorTest extends TestCase {
 		yield 'statement in statement group is not an associative array' => [
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
-				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ StatementsValidator::CONTEXT_PATH => '/P123/0' ]
+				StatementValidator::CODE_INVALID_FIELD_TYPE,
+				[ StatementValidator::CONTEXT_FIELD => '/P123/0' ]
 			),
 		];
 
@@ -143,11 +143,30 @@ class StatementsValidatorTest extends TestCase {
 		yield 'rank field in a statement is incorrect' => [
 			[ 'P567' => [ $invalidStatement ] ],
 			new ValidationError(
-				StatementsValidator::CODE_INVALID_STATEMENT_DATA,
+				StatementValidator::CODE_INVALID_FIELD,
 				[
-					StatementsValidator::CONTEXT_PATH => '/P567/0/rank',
-					StatementsValidator::CONTEXT_FIELD => 'rank',
-					StatementsValidator::CONTEXT_VALUE => 'not-a-valid-rank',
+					StatementValidator::CONTEXT_PATH => '/P567/0/rank',
+					StatementValidator::CONTEXT_FIELD => 'rank',
+					StatementValidator::CONTEXT_VALUE => 'not-a-valid-rank',
+				]
+			),
+		];
+
+		yield 'property id mismatch' => [
+			[
+				'P123' => [
+					[
+						'property' => [ 'id' => 'P567' ],
+						'value' => [ 'type' => 'somevalue' ],
+					],
+				],
+			],
+			new ValidationError(
+				StatementsValidator::CODE_PROPERTY_ID_MISMATCH,
+				[
+					StatementsValidator::CONTEXT_PATH => 'P123/0/property/id',
+					StatementsValidator::CONTEXT_PROPERTY_ID_KEY => 'P123',
+					StatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'P567',
 				]
 			),
 		];
@@ -160,7 +179,7 @@ class StatementsValidatorTest extends TestCase {
 
 	private function newValidator(): StatementsValidator {
 		return new StatementsValidator(
-			new StatementsDeserializer(
+			new StatementValidator(
 				new StatementDeserializer(
 					$this->propValPairDeserializer,
 					$this->createStub( ReferenceDeserializer::class )
