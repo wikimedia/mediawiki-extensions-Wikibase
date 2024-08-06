@@ -69,16 +69,6 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
-	"InvalidLanguageCodeWithPathContextExample": {
-		"value": {
-			"code": "invalid-language-code",
-			"message": "Not a valid language code: {language_code}",
-			"context": {
-				"path": "{field}",
-				"language": "{language_code}"
-			}
-		}
-	},
 	"InvalidSitelinkTypeExample": {
 		"value": {
 			"code": "invalid-sitelink-type",
