@@ -176,7 +176,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		parent::processArguments( $subPage );
 
 		$request = $this->getRequest();
-		// explode the sub page from the format Special:SetSitelink/q123/enwiki
+		// explode the subpage from the format Special:SetSitelink/q123/enwiki
 		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
 
 		$entityId = $this->getEntityId();

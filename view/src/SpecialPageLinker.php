@@ -14,7 +14,7 @@ interface SpecialPageLinker {
 	 * Returns the URL to a special page with optional params
 	 *
 	 * @param string $pageName
-	 * @param string[] $subPageParams Parameters to be added as slash-separated sub pages
+	 * @param string[] $subPageParams Parameters to be added as slash-separated subpages
 	 *
 	 * @return string
 	 */

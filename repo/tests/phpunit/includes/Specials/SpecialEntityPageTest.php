@@ -61,7 +61,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 	public static function provideLocalEntityIdArgumentsToSpecialPage() {
 		return [
-			'id as a sub page' => [ 'Q100', [] ],
+			'id as a subpage' => [ 'Q100', [] ],
 			'id as a request parameter' => [ null, [ 'id' => 'Q100' ] ],
 		];
 	}
@@ -110,7 +110,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 	public static function provideInvalidEntityIdArgumentsToSpecialPage() {
 		return [
-			'id as a sub page' => [ 'ABCDEF', [], 'ABCDEF' ],
+			'id as a subpage' => [ 'ABCDEF', [], 'ABCDEF' ],
 			'id as a request parameter' => [ null, [ 'id' => 'ABCDEF' ], 'ABCDEF' ],
 		];
 	}
@@ -156,7 +156,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 	public static function provideNoEntityIdArgumentsToSpecialPage() {
 		return [
-			'no sub page' => [ '' ],
+			'no subpage' => [ '' ],
 			'empty id as a request parameter' => [ null, [ 'id' => '' ] ],
 		];
 	}

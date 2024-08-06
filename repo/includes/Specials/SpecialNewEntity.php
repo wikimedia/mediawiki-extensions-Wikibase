@@ -24,7 +24,7 @@ use Wikibase\Repo\SummaryFormatter;
 abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 	/**
-	 * Contains pieces of the sub-page name of this special page if a subpage was called.
+	 * Contains pieces of the subpage name of this special page if a subpage was called.
 	 * E.g. [ 'a', 'b' ] in case of 'Special:NewEntity/a/b'
 	 * @var string[]|null
 	 */
