@@ -98,25 +98,6 @@
 			"context": { "site": "{site_id}" }
 		}
 	},
-	"ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
-		"value": {
-			"code": "item-not-a-badge",
-			"message": "Item ID provided as badge is not allowed as a badge: {item_id}",
-			"context": {
-				"badge": "{item_id}"
-			}
-		}
-	},
-	"ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample": {
-		"value": {
-			"code": "item-not-a-badge",
-			"message": "Item ID provided as badge is not allowed as a badge: {item_id}",
-			"context": {
-				"badge": "{item_id}",
-				"site": "{site_id}"
-			}
-		}
-	},
 	"CannotModifyReadOnlyValue": {
 		"value": {
 			"code": "cannot-modify-read-only-value",

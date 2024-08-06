@@ -350,15 +350,12 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'not an allowed badge', async () => {
-			const badge = testItemId;
-			const sitelink = { title: testTitle1, badges: [ badge ] };
+			const sitelink = { title: testTitle1, badges: [ testItemId ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidError( response, 400, 'item-not-a-badge', { badge: badge } );
-			assert.strictEqual(
-				response.body.message,
-				`Item ID provided as badge is not allowed as a badge: ${badge}`
-			);
+			const path = '/sitelink/badges/0';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'badge item does not exist', async () => {
@@ -368,11 +365,9 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.withHeader( 'X-Wikibase-CI-Badges', badge )
 				.makeRequest();
 
-			assertValidError( response, 400, 'item-not-a-badge', { badge: badge } );
-			assert.strictEqual(
-				response.body.message,
-				`Item ID provided as badge is not allowed as a badge: ${badge}`
-			);
+			const path = '/sitelink/badges/0';
+			assertValidError( response, 400, 'invalid-value', { path: path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'sitelink title does not exist', async () => {

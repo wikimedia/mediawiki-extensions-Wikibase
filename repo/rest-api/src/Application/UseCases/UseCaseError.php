@@ -23,7 +23,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
 	public const INVALID_VALUE = 'invalid-value';
 	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
-	public const ITEM_NOT_A_BADGE = 'item-not-a-badge';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
@@ -125,7 +124,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
 		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
-		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_BADGE ],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
@@ -197,7 +195,6 @@ class UseCaseError extends UseCaseException {
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
 		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
-		self::ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 	];
 

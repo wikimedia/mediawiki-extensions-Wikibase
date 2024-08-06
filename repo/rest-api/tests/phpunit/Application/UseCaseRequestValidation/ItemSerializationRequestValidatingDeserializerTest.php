@@ -548,16 +548,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield SitelinkValidator::CODE_BADGE_NOT_ALLOWED => [
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
-				SitelinkValidator::CONTEXT_BADGE => 'Q1',
+				SitelinkValidator::CONTEXT_BADGE => 'Q3',
 			] ),
-			new UseCaseError(
-				UseCaseError::ITEM_NOT_A_BADGE,
-				'Item ID provided as badge is not allowed as a badge: Q1',
-				[
-					UseCaseError::CONTEXT_SITE_ID => $site,
-					UseCaseError::CONTEXT_BADGE => 'Q1',
-				]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site/badges/2" ),
+			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => [ 'Q1', 'Q2', 'Q3' ] ] ] ],
 		];
 		yield SitelinkValidator::CODE_TITLE_NOT_FOUND => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND, [

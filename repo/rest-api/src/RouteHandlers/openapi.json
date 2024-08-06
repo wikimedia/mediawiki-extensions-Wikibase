@@ -4176,9 +4176,6 @@
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
               },
-              "item-not-a-badge": {
-                "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample"
-              },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
@@ -4718,9 +4715,6 @@
               },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
-              },
-              "item-not-a-badge": {
-                "$ref": "#/components/examples/ItemProvidedIsNotAllowedAsSitelinkBadgeExample"
               }
             }
           }
@@ -7283,25 +7277,6 @@
           "code": "title-does-not-exist",
           "message": "Page with title {title} does not exist on the given site",
           "context": {
-            "site": "{site_id}"
-          }
-        }
-      },
-      "ItemProvidedIsNotAllowedAsSitelinkBadgeExample": {
-        "value": {
-          "code": "item-not-a-badge",
-          "message": "Item ID provided as badge is not allowed as a badge: {item_id}",
-          "context": {
-            "badge": "{item_id}"
-          }
-        }
-      },
-      "ItemProvidedIsNotAllowedAsSitelinkBadgeWithSiteContextExample": {
-        "value": {
-          "code": "item-not-a-badge",
-          "message": "Item ID provided as badge is not allowed as a badge: {item_id}",
-          "context": {
-            "badge": "{item_id}",
             "site": "{site_id}"
           }
         }
