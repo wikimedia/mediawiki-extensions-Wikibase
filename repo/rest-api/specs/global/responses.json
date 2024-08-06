@@ -416,7 +416,6 @@
 					"label-description-same-value": {
 						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
 					},
-					"invalid-language-code": { "$ref": "./examples.json#/InvalidLanguageCodeWithPathContextExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },

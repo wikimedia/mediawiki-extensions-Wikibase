@@ -4158,9 +4158,6 @@
               "label-description-same-value": {
                 "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
-              "invalid-language-code": {
-                "$ref": "#/components/examples/InvalidLanguageCodeWithPathContextExample"
-              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -7253,16 +7250,6 @@
           "message": "Invalid path parameter: '{path_parameter}'",
           "context": {
             "parameter": "{path_parameter}"
-          }
-        }
-      },
-      "InvalidLanguageCodeWithPathContextExample": {
-        "value": {
-          "code": "invalid-language-code",
-          "message": "Not a valid language code: {language_code}",
-          "context": {
-            "path": "{field}",
-            "language": "{language_code}"
           }
         }
       },
