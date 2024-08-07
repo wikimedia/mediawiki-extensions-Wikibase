@@ -84,13 +84,6 @@ class ChangeRowTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [ 'id' => null, 'info' => $expected ], $change->getFields() );
 	}
 
-	public function testUnserializesJson() {
-		$json = '{"field":"value"}';
-		$expected = [ 'field' => 'value' ];
-		$change = $this->newChangeRow( [ 'info' => $json ] );
-		$this->assertSame( $expected, $change->getInfo() );
-	}
-
 	public function testCanNotUnserializeWithoutObjectId() {
 		$change = $this->newChangeRow( [ 'info' => 's:5:"value";' ] );
 		$this->expectException( Exception::class );

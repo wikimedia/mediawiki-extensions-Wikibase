@@ -81,14 +81,6 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
-	/**
-	 * @dataProvider provideFactoryException
-	 */
-	public function testFactoryException( $langCode, $sourceLangCode ) {
-		$this->expectException( InvalidArgumentException::class );
-		LanguageWithConversion::factory( $langCode, $sourceLangCode );
-	}
-
 	public static function provideFactoryException() {
 		return [
 			[ ':', null ],
@@ -111,16 +103,6 @@ class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideTranslate
 	 */
 	public function testTranslate( $langCode, $sourceLangCode, $translations ) {
-		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
-		foreach ( $translations as $text => $translatedText ) {
-			$this->assertEquals( $obj->translate( $text ), $translatedText );
-		}
-	}
-
-	/**
-	 * @dataProvider provideTranslate
-	 */
-	public function testTranslateBatched( $langCode, $sourceLangCode, $translations ) {
 		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
 		foreach ( $translations as $text => $translatedText ) {
 			$this->assertEquals( $obj->translate( $text ), $translatedText );

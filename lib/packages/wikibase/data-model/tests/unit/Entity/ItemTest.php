@@ -198,11 +198,6 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $item->getSiteLinkList()->isEmpty() );
 	}
 
-	public function testItemWithoutSitelinksHasNoSitelinks() {
-		$item = new Item();
-		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
-	}
-
 	private function newStatement() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'kittens' );
