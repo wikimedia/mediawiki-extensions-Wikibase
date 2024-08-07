@@ -151,9 +151,12 @@ class ItemDescriptionEditRequestValidatingDeserializerTest extends TestCase {
 				ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL,
 				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => $language ],
 			),
-			UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
-			"Label and description for language code '$language' can not have the same value",
-			[ UseCaseError::CONTEXT_LANGUAGE => $language ],
+			UseCaseError::DATA_POLICY_VIOLATION,
+			'Edit violates data policy',
+			[
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [ UseCaseError::CONTEXT_LANGUAGE => $language ],
+			],
 		];
 
 		$language = 'en';

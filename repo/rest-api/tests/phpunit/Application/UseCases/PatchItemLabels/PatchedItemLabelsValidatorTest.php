@@ -222,9 +222,12 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE, $e->getErrorCode() );
-			$this->assertSame( "Label and description for language code {$language} can not have the same value.", $e->getErrorMessage() );
-			$this->assertEquals( [ UseCaseError::CONTEXT_LANGUAGE => $language ], $e->getErrorContext() );
+			$this->assertSame( UseCaseError::DATA_POLICY_VIOLATION, $e->getErrorCode() );
+			$this->assertSame( 'Edit violates data policy', $e->getErrorMessage() );
+			$this->assertEquals( [
+				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
+				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [ UseCaseError::CONTEXT_LANGUAGE => $language ],
+			], $e->getErrorContext() );
 		}
 	}
 

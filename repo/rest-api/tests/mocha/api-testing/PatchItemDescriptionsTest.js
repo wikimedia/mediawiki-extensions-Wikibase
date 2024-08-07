@@ -341,17 +341,19 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
-		it( 'patched-item-label-description-same-value', async () => {
+		it( 'label-description-same-value', async () => {
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				testItemId,
 				[ makeReplaceExistingDescriptionPatchOperation( testLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-item-label-description-same-value', { language: testLanguage } );
-			assert.strictEqual(
-				response.body.message,
-				`Label and description for language code ${testLanguage} can not have the same value.`
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language: testLanguage } }
 			);
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 	} );
 

@@ -226,8 +226,13 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', testEnLabel )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 400, 'label-description-same-value', { language: 'en' } );
-			assert.include( response.body.message, 'en' );
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language: 'en' } }
+			);
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'invalid edit tag type', async () => {

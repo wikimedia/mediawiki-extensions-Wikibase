@@ -26,7 +26,6 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
-	public const LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const MISSING_FIELD = 'missing-field';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
@@ -44,7 +43,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
 	public const PATCHED_ITEM_INVALID_FIELD = 'patched-item-invalid-field';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
-	public const PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE = 'patched-item-label-description-same-value';
 	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
@@ -53,7 +51,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE =
 		'patched-property-invalid-operation-change-property-datatype';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
-	public const PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE = 'patched-property-label-description-same-value';
 	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
 	public const PATCHED_PROPERTY_UNEXPECTED_FIELD = 'patched-property-unexpected-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
@@ -72,6 +69,7 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
+	public const POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
@@ -127,7 +125,6 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
-		self::LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::LABEL_NOT_DEFINED => [],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
@@ -145,7 +142,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_ITEM_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
-		self::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_ITEM_UNEXPECTED_FIELD => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
@@ -153,7 +149,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
-		self::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],

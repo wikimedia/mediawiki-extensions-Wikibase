@@ -111,9 +111,8 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 
 		yield 'description equals label' => [
 			[ 'en' => self::EN_LABEL ],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
-				'Label and description for language code en can not have the same value.',
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];

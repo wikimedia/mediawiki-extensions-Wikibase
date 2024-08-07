@@ -58,9 +58,8 @@ class ItemDescriptionEditRequestValidatingDeserializer {
 				case ItemDescriptionValidator::CODE_TOO_LONG:
 					throw UseCaseError::newValueTooLong( '/description', $context[ItemDescriptionValidator::CONTEXT_LIMIT] );
 				case ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL:
-					throw new UseCaseError(
-						UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
-						"Label and description for language code '$language' can not have the same value",
+					throw UseCaseError::newDataPolicyViolation(
+						UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 						[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 					);
 				case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:

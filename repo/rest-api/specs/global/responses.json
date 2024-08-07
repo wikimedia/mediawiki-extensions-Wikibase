@@ -413,9 +413,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"unexpected-field": { "$ref": "./examples.json#/ItemDataUnexpectedFieldExample" },
-					"label-description-same-value": {
-						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
-					},
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
@@ -795,9 +792,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"label-description-same-value": {
-						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -818,9 +812,6 @@
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"label-description-same-value": {
-						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
 				}
@@ -840,9 +831,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"label-description-same-value": {
-						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -863,9 +851,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"label-description-same-value": {
-						"$ref": "./examples.json#/LabelDescriptionSameValueExample"
-					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -1203,9 +1188,6 @@
 					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-item-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
-					},
 					"patched-aliases-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
 					},
@@ -1270,9 +1252,6 @@
 					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-property-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
-					},
 					"patched-aliases-invalid-language-code": {
 						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
 					},
@@ -1302,9 +1281,6 @@
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
-					"patched-item-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
-					},
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1328,9 +1304,6 @@
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
-					"patched-property-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
-					},
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1354,9 +1327,6 @@
 					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-item-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedItemLabelDescriptionSameValueExample"
-					},
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1380,10 +1350,8 @@
 					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-property-label-description-same-value": {
-						"$ref": "./examples.json#/PatchedPropertyLabelDescriptionSameValueExample"
-					},
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
+					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
 		},

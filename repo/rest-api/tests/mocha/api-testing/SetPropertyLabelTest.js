@@ -273,11 +273,13 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'label-description-same-value', { language } );
-			assert.strictEqual(
-				response.body.message,
-				`Label and description for language code '${language}' can not have the same value.`
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language } }
 			);
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'property with same label already exists', async () => {

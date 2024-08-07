@@ -493,9 +493,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 				PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL,
 				[ PropertyLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
-				'Label and description for language code en can not have the same value.',
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
@@ -626,9 +625,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 				PropertyDescriptionValidator::CODE_LABEL_DESCRIPTION_EQUAL,
 				[ PropertyDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
-				'Label and description for language code en can not have the same value.',
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
