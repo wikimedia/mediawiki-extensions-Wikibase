@@ -72,7 +72,7 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 	}
 
 	/**
-	 * @dataProvider provideNonExistingEntitiesAndPermissionsThatAllowEdit
+	 * @dataProvider provideNonExistingEntitiesAndPermissionsThatAllowEditingTerms
 	 */
 	public function testAllRequiredPermissionsAreNeededToEditNonExistingEntity(
 		EntityDocument $nonExistingEntity,
@@ -81,27 +81,6 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->anyUserHasPermissions( $groupPermissions );
 
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_EDIT, $nonExistingEntity );
-	}
-
-	public function provideNonExistingEntitiesAndPermissionsThatAllowEdit() {
-		return [
-			'non-existing item, createpage permission' => [
-				$this->getNonExistingItem(),
-				[ 'createpage' => true ],
-			],
-			'non-existing item (null ID), createpage permission' => [
-				$this->getNonExistingItemWithNullId(),
-				[ 'createpage' => true ],
-			],
-			'non-existing property, createpage and property-create permission' => [
-				$this->getNonExistingProperty(),
-				[ 'createpage' => true, 'property-create' => true ],
-			],
-			'non-existing property (null ID), createpage and property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
-				[ 'createpage' => true, 'property-create' => true ],
-			],
-		];
 	}
 
 	/**

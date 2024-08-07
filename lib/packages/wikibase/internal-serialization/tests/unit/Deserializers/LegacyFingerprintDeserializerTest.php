@@ -29,32 +29,12 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider TermListProvider
+	 * @dataProvider descriptionListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labelSerialization, $expected ) {
 		$fingerprint = $this->deserializer->deserialize( [ 'label' => $labelSerialization ] );
 
 		$this->assertEquals( $expected, $fingerprint->getLabels() );
-	}
-
-	public static function TermListProvider() {
-		return [
-			[
-				[],
-				new TermList( [] ),
-			],
-
-			[
-				[
-					'en' => 'foo',
-					'de' => 'bar',
-				],
-				new TermList( [
-					new Term( 'en', 'foo' ),
-					new Term( 'de', 'bar' ),
-				] ),
-			],
-		];
 	}
 
 	public function testGivenNonArray_exceptionIsThrown() {

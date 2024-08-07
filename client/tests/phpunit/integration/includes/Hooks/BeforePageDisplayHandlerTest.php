@@ -137,7 +137,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider handleTitleNotExist_NoWikibaseLinksProvider
+	 * @dataProvider handleHistoryActionWithEmptyLangLinksProvider
 	 */
 	public function testHandleTitleNotExist_NoWikibaseLinks( $expectedJsModules,
 		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn
@@ -153,20 +153,6 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertEquals( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
-	}
-
-	public static function handleTitleNotExist_NoWikibaseLinksProvider() {
-		return [
-			[
-				[],
-				[],
-				true, // wikibase enabled for namespace
-				[], // no lang links
-				null, // no prefixed id
-				true, // user logged in
-				false, // user not temp user
-			],
-		];
 	}
 
 	/**

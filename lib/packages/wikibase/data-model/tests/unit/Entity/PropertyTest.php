@@ -291,16 +291,8 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
-	public static function descriptionProvider() {
-		return [
-			[ 'en', 'spam' ],
-			[ 'en', 'spam', 'spam' ],
-			[ 'de', 'foo bar baz' ],
-		];
-	}
-
 	/**
-	 * @dataProvider descriptionProvider
+	 * @dataProvider labelProvider
 	 * @param string $languageCode
 	 * @param string $description
 	 * @param string $moarText
