@@ -21,7 +21,7 @@
 	},
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Kohde poistettu",
-	"wikibase-deletedentity-property": "Ominaisuus poistettu",
+	"wikibase-deletedentity-property": "Poistettu ominaisuus",
 	"wikibase-deletedentity-query": "Kysely poistettu",
 	"wikibase-error-unexpected": "Virhe: $1.",
 	"wikibase-error-unknown": "Tapahtui virhe.",
