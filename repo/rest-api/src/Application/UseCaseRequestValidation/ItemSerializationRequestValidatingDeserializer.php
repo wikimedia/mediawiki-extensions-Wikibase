@@ -88,10 +88,8 @@ class ItemSerializationRequestValidatingDeserializer {
 					$context[ItemLabelValidator::CONTEXT_LIMIT]
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
-				throw new UseCaseError(
-					UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
-					"Label and description for language '{$context[ItemLabelValidator::CONTEXT_LANGUAGE]}'" .
-					' can not have the same value',
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE:
@@ -126,10 +124,8 @@ class ItemSerializationRequestValidatingDeserializer {
 					$context[ItemDescriptionValidator::CONTEXT_LIMIT],
 				);
 			case ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL:
-				throw new UseCaseError(
-					UseCaseError::LABEL_DESCRIPTION_SAME_VALUE,
-					"Label and description for language '{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}'" .
-					' can not have the same value',
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:

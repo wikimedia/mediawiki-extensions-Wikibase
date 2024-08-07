@@ -224,9 +224,8 @@ class PatchedItemValidator {
 				);
 			case ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION:
 				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
-					"Label and description for language code '{$language}' can not have the same value",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 		}
@@ -267,9 +266,8 @@ class PatchedItemValidator {
 				throw UseCaseError::newValueTooLong( "/descriptions/$languageCode", $maxDescriptionLength, true );
 			case ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL:
 				$language = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
-					"Label and description for language code '{$language}' can not have the same value",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[ItemDescriptionValidator::CONTEXT_LANGUAGE] ]
 				);
 			case ItemDescriptionValidator::CODE_DESCRIPTION_LABEL_DUPLICATE:

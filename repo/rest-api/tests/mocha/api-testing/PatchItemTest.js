@@ -453,13 +453,13 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: languageWithExistingLabel };
-			assertValidError( response, 422, 'patched-item-label-description-same-value', context );
-
-			assert.strictEqual(
-				response.body.message,
-				`Label and description for language code '${languageWithExistingLabel}' can not have the same value`
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language: languageWithExistingLabel } }
 			);
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'item with same label and description already exists', async () => {

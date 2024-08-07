@@ -1038,6 +1038,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "422": {
+            "$ref": "#/components/responses/DataPolicyViolation"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -4155,9 +4158,6 @@
               "unexpected-field": {
                 "$ref": "#/components/examples/ItemDataUnexpectedFieldExample"
               },
-              "label-description-same-value": {
-                "$ref": "#/components/examples/LabelDescriptionSameValueExample"
-              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -4739,9 +4739,6 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "label-description-same-value": {
-                "$ref": "#/components/examples/LabelDescriptionSameValueExample"
-              },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
@@ -4774,9 +4771,6 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "label-description-same-value": {
-                "$ref": "#/components/examples/LabelDescriptionSameValueExample"
-              },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
@@ -4805,9 +4799,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "label-description-same-value": {
-                "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -4840,9 +4831,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "label-description-same-value": {
-                "$ref": "#/components/examples/LabelDescriptionSameValueExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -5377,9 +5365,6 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-item-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
-              },
               "patched-aliases-invalid-language-code": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
               },
@@ -5502,9 +5487,6 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-property-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
-              },
               "patched-aliases-invalid-language-code": {
                 "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
               },
@@ -5552,9 +5534,6 @@
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
-              "patched-item-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
               },
@@ -5589,9 +5568,6 @@
               },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
-              "patched-property-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5628,9 +5604,6 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-item-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedItemLabelDescriptionSameValueExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
               },
@@ -5666,11 +5639,11 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-property-label-description-same-value": {
-                "$ref": "#/components/examples/PatchedPropertyLabelDescriptionSameValueExample"
-              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "data-policy-violation": {
+                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -7547,15 +7520,6 @@
           }
         }
       },
-      "PatchedItemLabelDescriptionSameValueExample": {
-        "value": {
-          "code": "patched-item-label-description-same-value",
-          "message": "Label and description for language code '{language}' can not have the same value",
-          "context": {
-            "language": "{language_code}"
-          }
-        }
-      },
       "PatchedItemInvalidOperationChangeItemIdExample": {
         "value": {
           "code": "patched-item-invalid-operation-change-item-id",
@@ -7663,15 +7627,6 @@
           }
         }
       },
-      "PatchedPropertyLabelDescriptionSameValueExample": {
-        "value": {
-          "code": "patched-property-label-description-same-value",
-          "message": "Label and description for language code '{language}' can not have the same value",
-          "context": {
-            "language": "{language_code}"
-          }
-        }
-      },
       "PatchedAliasesInvalidLanguageCodeExample": {
         "value": {
           "code": "patched-aliases-invalid-language-code",
@@ -7707,15 +7662,6 @@
           "context": {
             "alias": "{alias}",
             "language": "{language_code}"
-          }
-        }
-      },
-      "LabelDescriptionSameValueExample": {
-        "value": {
-          "code": "label-description-same-value",
-          "message": "Label and description for language code '{language}' can not have the same value",
-          "context": {
-            "language": "{language}"
           }
         }
       },

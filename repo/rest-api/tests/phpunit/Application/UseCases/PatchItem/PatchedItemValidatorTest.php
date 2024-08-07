@@ -462,9 +462,8 @@ class PatchedItemValidatorTest extends TestCase {
 				ItemLabelValidator::CODE_LABEL_SAME_AS_DESCRIPTION,
 				[ ItemLabelValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
-				"Label and description for language code 'en' can not have the same value",
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
@@ -601,9 +600,8 @@ class PatchedItemValidatorTest extends TestCase {
 				ItemDescriptionValidator::CODE_DESCRIPTION_SAME_AS_LABEL,
 				[ ItemDescriptionValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_LABEL_DESCRIPTION_SAME_VALUE,
-				"Label and description for language code 'en' can not have the same value",
+			UseCaseError::newDataPolicyViolation(
+				UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];

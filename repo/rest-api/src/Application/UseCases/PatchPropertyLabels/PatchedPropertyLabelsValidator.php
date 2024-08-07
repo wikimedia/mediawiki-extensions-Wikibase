@@ -104,10 +104,8 @@ class PatchedPropertyLabelsValidator {
 					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_CONFLICTING_PROPERTY_ID => $conflictingPropertyId ]
 				);
 			case PropertyLabelValidator::CODE_LABEL_DESCRIPTION_EQUAL:
-				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_PROPERTY_LABEL_DESCRIPTION_SAME_VALUE,
-					"Label and description for language code {$language} can not have the same value.",
+				throw UseCaseError::newDataPolicyViolation(
+					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[PropertyLabelValidator::CONTEXT_LANGUAGE] ]
 				);
 			default:

@@ -367,15 +367,6 @@
 			}
 		}
 	},
-	"PatchedItemLabelDescriptionSameValueExample": {
-		"value": {
-			"code": "patched-item-label-description-same-value",
-			"message": "Label and description for language code '{language}' can not have the same value",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedItemInvalidOperationChangeItemIdExample": {
 		"value": {
 			"code": "patched-item-invalid-operation-change-item-id",
@@ -483,15 +474,6 @@
 			}
 		}
 	},
-	"PatchedPropertyLabelDescriptionSameValueExample": {
-		"value": {
-			"code": "patched-property-label-description-same-value",
-			"message": "Label and description for language code '{language}' can not have the same value",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedAliasesInvalidLanguageCodeExample": {
 		"value": {
 			"code": "patched-aliases-invalid-language-code",
@@ -527,15 +509,6 @@
 			"context": {
 				"alias": "{alias}",
 				"language": "{language_code}"
-			}
-		}
-	},
-	"LabelDescriptionSameValueExample": {
-		"value": {
-			"code": "label-description-same-value",
-			"message": "Label and description for language code '{language}' can not have the same value",
-			"context": {
-				"language": "{language}"
 			}
 		}
 	},

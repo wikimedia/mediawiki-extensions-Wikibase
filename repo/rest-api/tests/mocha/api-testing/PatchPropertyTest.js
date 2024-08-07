@@ -492,7 +492,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, language );
 		} );
 
-		it( 'patched-property-label-description-same-value', async () => {
+		it( 'label-description-same-value', async () => {
 			const language = languageWithExistingLabel;
 			const text = `label-and-description-text-${utils.uniq()}`;
 
@@ -504,11 +504,13 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-property-label-description-same-value', { language } );
-			assert.strictEqual(
-				response.body.message,
-				`Label and description for language code ${language} can not have the same value.`
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language } }
 			);
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
 		it( 'empty alias', async () => {
