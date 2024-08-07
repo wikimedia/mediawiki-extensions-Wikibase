@@ -28,6 +28,7 @@ class UseCaseError extends UseCaseException {
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const MISSING_FIELD = 'missing-field';
+	public const PATCH_RESULT_INVALID_KEY = 'patch-result-invalid-key';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
@@ -46,7 +47,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
-	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
 	public const PATCHED_PROPERTY_INVALID_FIELD = 'patched-property-invalid-field';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE =
 		'patched-property-invalid-operation-change-property-datatype';
@@ -128,6 +128,7 @@ class UseCaseError extends UseCaseException {
 		self::LABEL_NOT_DEFINED => [],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
+		self::PATCH_RESULT_INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
@@ -145,7 +146,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_ITEM_UNEXPECTED_FIELD => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
-		self::PATCHED_LABEL_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_PROPERTY_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
@@ -245,6 +245,14 @@ class UseCaseError extends UseCaseException {
 		return new self(
 			self::INVALID_KEY,
 			"Invalid key '{$key}' in '{$path}'",
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_KEY => $key ]
+		);
+	}
+
+	public static function newPatchResultInvalidKey( string $path, string $key ): self {
+		return new self(
+			self::PATCH_RESULT_INVALID_KEY,
+			'Invalid key in patch result',
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_KEY => $key ]
 		);
 	}

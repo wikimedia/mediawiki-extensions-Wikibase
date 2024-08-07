@@ -218,8 +218,14 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 422, 'patched-labels-invalid-language-code', { language: invalidLanguage } );
-			assert.include( response.body.message, invalidLanguage );
+			assertValidError(
+				response,
+				422,
+				'patch-result-invalid-key',
+				{
+					path: '',
+					key: `${invalidLanguage}` }
+			);
 		} );
 
 		it( 'patched label and description already exists in a different item', async () => {
