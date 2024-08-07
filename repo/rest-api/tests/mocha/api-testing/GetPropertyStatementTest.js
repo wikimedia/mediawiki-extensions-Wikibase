@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetPropertyStatementRequestBuilder,
-	newGetStatementRequestBuilder
+	newGetStatementRequestBuilder,
+	newAddPropertyStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -28,20 +29,23 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		const statementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 
-		const createPropertyResponse = await entityHelper.createPropertyWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyId ),
-			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyIdToDelete )
-		] );
-
-		testPropertyId = createPropertyResponse.entity.id;
-		testStatement = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ];
-
-		testStatementWithDeletedProperty = createPropertyResponse.entity.claims[ statementPropertyIdToDelete ][ 0 ];
-		await entityHelper.deleteProperty( statementPropertyIdToDelete );
+		// creating the statement with the to be deleted property first, so that creating the "happy path" property
+		// hopefully invalidates any caches that could claim that this property still exists (T369702)
+		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatementWithDeletedProperty = ( await newAddPropertyStatementRequestBuilder(
+			testPropertyId,
+			entityHelper.newStatementWithRandomStringValue( testStatementPropertyIdToDelete )
+		).makeRequest() ).body;
+		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 		await runAllJobs(); // wait for secondary data to catch up after deletion
+
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatement = ( await newAddPropertyStatementRequestBuilder(
+			testPropertyId,
+			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+		).makeRequest() ).body;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		testLastModified = testPropertyCreationMetadata.timestamp;

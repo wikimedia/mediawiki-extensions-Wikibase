@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
-	newGetStatementRequestBuilder
+	newGetStatementRequestBuilder,
+	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -28,20 +29,23 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+
+		// creating the statement with the to be deleted property first, so that creating the "happy path" property
+		// hopefully invalidates any caches that could claim that this property still exists (T369702)
 		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-
-		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
-			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyIdToDelete )
-		] );
-
-		testItemId = createItemResponse.entity.id;
-		testStatement = createItemResponse.entity.claims[ testStatementPropertyId ][ 0 ];
-
-		testStatementWithDeletedProperty = createItemResponse.entity.claims[ testStatementPropertyIdToDelete ][ 0 ];
+		testStatementWithDeletedProperty = ( await newAddItemStatementRequestBuilder(
+			testItemId,
+			entityHelper.newStatementWithRandomStringValue( testStatementPropertyIdToDelete )
+		).makeRequest() ).body;
 		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 		await runAllJobs(); // wait for secondary data to catch up after deletion
+
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatement = ( await newAddItemStatementRequestBuilder(
+			testItemId,
+			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+		).makeRequest() ).body;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		testLastModified = testItemCreationMetadata.timestamp;
