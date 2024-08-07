@@ -21,8 +21,6 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 
 	private SitelinkValidator $sitelinkValidator;
 
-	private const SITELINK_TITLE = 'Potato';
-
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -48,9 +46,8 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	public function testGivenInvalidRequest_throws(
 		UseCaseError $expectedError,
 		ValidationError $validationError,
-		?array $sitelinkSerialization = null
+		?array $sitelinkSerialization = [ 'sitelink serialization stub' ]
 	): void {
-		$sitelinkSerialization = $sitelinkSerialization ?? [ 'title' => self::SITELINK_TITLE, 'badges' => [ 'P3' ] ];
 		$request = $this->createStub( SitelinkEditRequest::class );
 		$request->method( 'getSitelink' )->willReturn( $sitelinkSerialization );
 
@@ -68,46 +65,72 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 	public function sitelinkValidationErrorProvider(): \Generator {
 		yield 'missing title' => [
 			UseCaseError::newMissingField( '/sitelink', 'title' ),
-			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING ),
+			new ValidationError(
+				SitelinkValidator::CODE_TITLE_MISSING,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+			),
 		];
 
 		yield 'title is empty' => [
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
-			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE ),
+			new ValidationError(
+				SitelinkValidator::CODE_EMPTY_TITLE,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]
+			),
 		];
 
 		yield 'invalid title' => [
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
-			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE ),
+			new ValidationError(
+				SitelinkValidator::CODE_INVALID_TITLE,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ]
+			),
 		];
 
 		yield 'title field is not a string' => [
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
-			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE ),
+			new ValidationError(
+				SitelinkValidator::CODE_INVALID_TITLE_TYPE,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+			),
 		];
 
 		yield 'badges field is not an array' => [
 			UseCaseError::newInvalidValue( '/sitelink/badges' ),
-			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE ),
+			new ValidationError(
+				SitelinkValidator::CODE_INVALID_BADGES_TYPE,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]
+			),
 		];
 
 		yield 'badge is not a valid item id' => [
 			UseCaseError::newInvalidValue( '/sitelink/badges/0' ),
-			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [ SitelinkValidator::CONTEXT_BADGE => 'P3' ] ),
+			new ValidationError(
+				SitelinkValidator::CODE_INVALID_BADGE,
+				[ SitelinkValidator::CONTEXT_BADGE => 'P3', SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ]
+			),
+			[ 'title' => 'بعض_العنوان', 'badges' => [ 'P3' ] ],
 		];
 
 		yield 'badge is not allowed' => [
 			UseCaseError::newInvalidValue( '/sitelink/badges/1' ),
-			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [ SitelinkValidator::CONTEXT_BADGE => 'Q654' ] ),
-			[ 'title' => self::SITELINK_TITLE, 'badges' => [ 'Q987', 'Q654' ] ],
+			new ValidationError(
+				SitelinkValidator::CODE_BADGE_NOT_ALLOWED,
+				[ SitelinkValidator::CONTEXT_BADGE => 'Q8172', SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+			),
+			[ 'title' => 'Some_title', 'badges' => [ 'Q8622', 'Q8172' ] ],
 		];
 
 		yield 'title not found' => [
 			new UseCaseError(
 				UseCaseError::SITELINK_TITLE_NOT_FOUND,
-				'Page with title ' . self::SITELINK_TITLE . ' does not exist on the given site'
+				'Page with title Irgendein_titel does not exist on the given site'
 			),
-			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND ),
+			new ValidationError(
+				SitelinkValidator::CODE_TITLE_NOT_FOUND,
+				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]
+			),
+			[ 'title' => 'Irgendein_titel', 'badges' => [ 'Q8622', 'Q8172' ] ],
 		];
 
 		yield 'another item has the same sitelink' => [
@@ -115,7 +138,10 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 				UseCaseError::POLICY_VIOLATION_SITELINK_CONFLICT,
 				[ UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ],
 			),
-			new ValidationError( SitelinkValidator::CODE_SITELINK_CONFLICT, [ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q654' ] ),
+			new ValidationError(
+				SitelinkValidator::CODE_SITELINK_CONFLICT,
+				[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID => 'Q654', SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ],
+			),
 		];
 	}
 
