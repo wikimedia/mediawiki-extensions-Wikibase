@@ -55,7 +55,8 @@ class StatementsValidator {
 				] );
 			}
 			foreach ( $statementGroup as $groupIndex => $statement ) {
-				if ( $statement === ( $originalSerialization[$propertyId][$groupIndex] ?? null ) ) {
+				if ( isset( $statement['id'] ) && is_string( $statement['id'] ) &&
+					$statement === $this->findInGroup( $originalSerialization[$propertyId] ?? [], $statement['id'] ) ) {
 					$deserializedStatements[] = $originalStatements->getFirstStatementWithGuid( $statement['id'] );
 					continue;
 				}
@@ -85,6 +86,16 @@ class StatementsValidator {
 		}
 
 		$this->deserializedStatements = new StatementList( ...$deserializedStatements );
+
+		return null;
+	}
+
+	private function findInGroup( array $statementGroup, string $statementId ): ?array {
+		foreach ( $statementGroup as $statement ) {
+			if ( $statement['id'] === $statementId ) {
+				return $statement;
+			}
+		}
 
 		return null;
 	}

@@ -204,6 +204,14 @@ class StatementsValidatorTest extends TestCase {
 			[],
 		];
 
+		$deletedStatement = $this->newSomeValueSerialization( 'P123' );
+		$deletedStatement['id'] = 'Q123$DDDDDD-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+		yield 'only deleted a statement (group index shift) => nothing validated' => [
+			[ 'P123' => [ $deletedStatement, $existingStatement ] ],
+			[ 'P123' => [ $existingStatement ] ],
+			[],
+		];
+
 		$newStatement = $this->newSomeValueSerialization( 'P123' );
 		yield 'new statement gets validated' => [
 			[],
