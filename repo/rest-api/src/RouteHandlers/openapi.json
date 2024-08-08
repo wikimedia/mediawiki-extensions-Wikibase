@@ -5353,9 +5353,6 @@
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
-              "patched-descriptions-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
-              },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
@@ -5475,9 +5472,6 @@
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
-              "patched-descriptions-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
-              },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
@@ -5595,9 +5589,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-descriptions-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
-              },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
@@ -5630,9 +5621,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-descriptions-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedDescriptionsInvalidLanguageCodeExample"
-              },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
@@ -7490,15 +7478,6 @@
           "context": {
             "language": "{language_code}",
             "value": "{label}"
-          }
-        }
-      },
-      "PatchedDescriptionsInvalidLanguageCodeExample": {
-        "value": {
-          "code": "patched-descriptions-invalid-language-code",
-          "message": "Not a valid language code '{language_code}' in changed descriptions",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

@@ -351,14 +351,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patch-result-invalid-key',
-				{
-					path: '/labels',
-					key: `${invalidLanguage}` }
-			);
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/labels', key: invalidLanguage } );
 		} );
 
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
@@ -438,14 +431,13 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid description language code', async () => {
-			const language = 'invalid-language-code';
+			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/descriptions/${language}`, value: 'potato' } ]
+				[ { op: 'add', path: `/descriptions/${invalidLanguage}`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/descriptions', key: invalidLanguage } );
 		} );
 
 		it( 'label and description with the same value', async () => {

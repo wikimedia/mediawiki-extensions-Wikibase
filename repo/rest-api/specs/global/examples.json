@@ -337,15 +337,6 @@
 			}
 		}
 	},
-	"PatchedDescriptionsInvalidLanguageCodeExample": {
-		"value": {
-			"code": "patched-descriptions-invalid-language-code",
-			"message": "Not a valid language code '{language_code}' in changed descriptions",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedDescriptionEmptyExample": {
 		"value": {
 			"code": "patched-description-empty",

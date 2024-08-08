@@ -304,14 +304,13 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 
 		it( 'invalid language code', async () => {
-			const language = 'invalid-language-code';
+			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: `/${language}`, value: 'potato' } ]
+				[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 		} );
 
 		it( 'label-description-same-value', async () => {

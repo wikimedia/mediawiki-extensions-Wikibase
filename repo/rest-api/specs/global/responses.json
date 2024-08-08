@@ -1180,9 +1180,6 @@
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
-					"patched-descriptions-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
-					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
 					"patched-aliases-invalid-language-code": {
@@ -1242,9 +1239,6 @@
 					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
-					"patched-descriptions-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
-					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
 					"patched-aliases-invalid-language-code": {
@@ -1314,9 +1308,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-descriptions-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
-					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
@@ -1337,9 +1328,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-descriptions-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedDescriptionsInvalidLanguageCodeExample"
-					},
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
