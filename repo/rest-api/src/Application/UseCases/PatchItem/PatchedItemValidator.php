@@ -78,7 +78,6 @@ class PatchedItemValidator {
 		}
 
 		$this->assertNoIllegalModification( $serialization, $originalItem );
-		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 		$this->assertValidLabelsAndDescriptions( $serialization, $originalItem );
 		$this->assertValidAliases( $serialization );
@@ -103,19 +102,6 @@ class PatchedItemValidator {
 				UseCaseError::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID,
 				'Cannot change the ID of the existing item'
 			);
-		}
-	}
-
-	private function assertNoUnexpectedFields( array $serialization ): void {
-		$expectedFields = [ 'id', 'type', 'labels', 'descriptions', 'aliases', 'sitelinks', 'statements' ];
-
-		foreach ( array_keys( $serialization ) as $field ) {
-			if ( !in_array( $field, $expectedFields ) ) {
-				throw new UseCaseError(
-					UseCaseError::PATCHED_ITEM_UNEXPECTED_FIELD,
-					"The patched item contains an unexpected field: '$field'"
-				);
-			}
 		}
 	}
 

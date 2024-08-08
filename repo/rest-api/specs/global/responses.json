@@ -412,7 +412,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"unexpected-field": { "$ref": "./examples.json#/ItemDataUnexpectedFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
@@ -1166,7 +1165,6 @@
 						"$ref": "./examples.json#/PatchedItemInvalidOperationChangeItemIdExample"
 					},
 					"patched-item-invalid-field": { "$ref": "./examples.json#/PatchedItemInvalidFieldExample" },
-					"patched-item-unexpected-field": { "$ref": "./examples.json#/PatchedItemInvalidUnexpectedExample" },
 					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
@@ -1230,7 +1228,6 @@
 					},
 					"patched-property-missing-field": { "$ref": "./examples.json#/PatchedPropertyMissingFieldExample" },
 					"patched-property-invalid-field": { "$ref": "./examples.json#/PatchedPropertyInvalidFieldExample" },
-					"patched-property-unexpected-field": { "$ref": "./examples.json#/PatchedPropertyInvalidUnexpectedExample" },
 					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },

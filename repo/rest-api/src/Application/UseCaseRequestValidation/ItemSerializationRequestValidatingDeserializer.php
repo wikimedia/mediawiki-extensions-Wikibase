@@ -47,12 +47,6 @@ class ItemSerializationRequestValidatingDeserializer {
 				case ItemValidator::CODE_INVALID_FIELD:
 					$field = $context[ItemValidator::CONTEXT_FIELD];
 					throw UseCaseError::newInvalidValue( "/item/$field" );
-				case ItemValidator::CODE_UNEXPECTED_FIELD:
-					throw new UseCaseError(
-						UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
-						'The request body contains an unexpected field',
-						[ UseCaseError::CONTEXT_FIELD => $context[ItemValidator::CONTEXT_FIELD] ]
-					);
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newInvalidKey(
 						"/item/{$context[LanguageCodeValidator::CONTEXT_FIELD]}",

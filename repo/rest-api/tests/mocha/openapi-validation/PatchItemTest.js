@@ -74,10 +74,10 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '422 - unexpected field', async () => {
+	it( '422 - invalid field', async () => {
 		const response = await newPatchItemRequestBuilder(
 			itemId,
-			[ { op: 'add', path: '/foo', value: 'bar' } ]
+			[ { op: 'add', path: '/descriptions/de', value: 42 } ]
 		).makeRequest();
 		expect( response ).to.have.status( 422 );
 		expect( response ).to.satisfyApiSpec;

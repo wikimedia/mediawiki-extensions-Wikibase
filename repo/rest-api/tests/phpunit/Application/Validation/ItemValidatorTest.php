@@ -253,21 +253,6 @@ class ItemValidatorTest extends TestCase {
 		);
 	}
 
-	public function testGivenUnexpectedField_validateReturnsValidationError(): void {
-		$unexpectedSerialization = [
-			'labels' => [ 'en' => 'English Label' ],
-			'descriptions' => [ 'en' => 'English Description' ],
-			'foo' => 'var',
-		];
-		$this->assertEquals(
-			new ValidationError(
-				ItemValidator::CODE_UNEXPECTED_FIELD,
-				[ ItemValidator::CONTEXT_FIELD => 'foo' ]
-			),
-			$this->newValidator()->validate( $unexpectedSerialization )
-		);
-	}
-
 	public function testLabelSyntaxError(): void {
 		$expectedValidationError = $this->createStub( ValidationError::class );
 		$this->labelsSyntaxValidator = $this->createStub( LabelsSyntaxValidator::class );

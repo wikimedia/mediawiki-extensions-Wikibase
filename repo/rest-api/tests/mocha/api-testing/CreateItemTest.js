@@ -201,19 +201,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, "Invalid value at '/item/statements'" );
 		} );
 
-		it( 'unexpected field', async () => {
-			const unexpectedField = 'foo';
-			const item = {
-				labels: { en: 'English label' },
-				[ unexpectedField ]: 'bar'
-			};
-
-			const response = await newCreateItemRequestBuilder( item ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 400, 'unexpected-field', { field: unexpectedField } );
-			assert.strictEqual( response.body.message, 'The request body contains an unexpected field' );
-		} );
-
 		it( 'invalid label language code', async () => {
 			const response = await newCreateItemRequestBuilder( { labels: { xyz: 'label' } } )
 				.assertValidRequest()

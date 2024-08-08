@@ -70,7 +70,6 @@ class PatchedPropertyValidator {
 
 		$this->assertNoMissingMandatoryFields( $serialization );
 		$this->assertNoIllegalModification( $serialization, $originalProperty );
-		$this->assertNoUnexpectedFields( $serialization );
 		$this->assertValidFields( $serialization );
 
 		$this->assertValidLabelsAndDescriptions( $originalProperty, $serialization );
@@ -100,19 +99,6 @@ class PatchedPropertyValidator {
 				"Mandatory field missing in the patched property: 'data_type'",
 				[ UseCaseError::CONTEXT_PATH => 'data_type' ]
 			);
-		}
-	}
-
-	private function assertNoUnexpectedFields( array $serialization ): void {
-		$expectedFields = [ 'id', 'data_type', 'type', 'labels', 'descriptions', 'aliases', 'statements' ];
-
-		foreach ( array_keys( $serialization ) as $field ) {
-			if ( !in_array( $field, $expectedFields ) ) {
-				throw new UseCaseError(
-					UseCaseError::PATCHED_PROPERTY_UNEXPECTED_FIELD,
-					"The patched property contains an unexpected field: '$field'"
-				);
-			}
 		}
 	}
 

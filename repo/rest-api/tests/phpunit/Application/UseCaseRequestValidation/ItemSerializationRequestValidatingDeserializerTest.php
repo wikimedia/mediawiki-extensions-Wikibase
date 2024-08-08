@@ -93,18 +93,6 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				]
 			),
 		];
-
-		yield 'unexpected field' => [
-			new ValidationError(
-				ItemValidator::CODE_UNEXPECTED_FIELD,
-				[ ItemValidator::CONTEXT_FIELD => 'some-field' ]
-			),
-			new UseCaseError(
-				UseCaseError::ITEM_DATA_UNEXPECTED_FIELD,
-				'The request body contains an unexpected field',
-				[ UseCaseError::CONTEXT_FIELD => 'some-field' ]
-			),
-		];
 	}
 
 	public function itemLabelsValidationErrorProvider(): Generator {

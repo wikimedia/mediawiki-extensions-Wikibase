@@ -383,12 +383,6 @@
 			}
 		}
 	},
-	"PatchedItemInvalidUnexpectedExample": {
-		"value": {
-			"code": "patched-item-unexpected-field",
-			"message": "The patched request body contains an unexpected field: '{field}'"
-		}
-	},
 	"PatchedPropertyInvalidOperationChangePropertyIdExample": {
 		"value": {
 			"code": "patched-property-invalid-operation-change-property-id",
@@ -418,12 +412,6 @@
 				"path": "{field}",
 				"value": "{value}"
 			}
-		}
-	},
-	"PatchedPropertyInvalidUnexpectedExample": {
-		"value": {
-			"code": "patched-property-unexpected-field",
-			"message": "The patched property contains an unexpected field: '{field}'"
 		}
 	},
 	"StatementIdNotModifiableExample": {
@@ -526,15 +514,6 @@
 			"context": {
 				"alias": "{alias}",
 				"language": "{language_code}"
-			}
-		}
-	},
-	"ItemDataUnexpectedFieldExample": {
-		"value": {
-			"code": "unexpected-field",
-			"message": "The request body contains an unexpected field",
-			"context": {
-				"field": "{field}"
 			}
 		}
 	},
