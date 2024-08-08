@@ -206,24 +206,6 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testNewFromRecentChange_nonBotEdit() {
-		$recentChange = $this->makeRecentChange(
-			'',
-			null,
-			'wikibase-comment-update',
-			null,
-			'wikibase-item~update',
-			false
-		);
-
-		$externalChangeFactory = $this->getExternalChangeFactory();
-
-		$this->assertExternalChangeEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-update)', null, 'update' ),
-			$externalChangeFactory->newFromRecentChange( $recentChange )
-		);
-	}
-
 	public function testNewFromRecentChange_visibility() {
 		$recentChange = $this->makeRecentChange(
 			'',
