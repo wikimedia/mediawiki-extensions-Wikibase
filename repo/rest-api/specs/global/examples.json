@@ -463,15 +463,6 @@
 			}
 		}
 	},
-	"PatchedAliasesInvalidLanguageCodeExample": {
-		"value": {
-			"code": "patched-aliases-invalid-language-code",
-			"message": "Not a valid language code '{language_code}' in changed aliases",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedAliasEmptyExample": {
 		"value": {
 			"code": "patched-alias-empty",

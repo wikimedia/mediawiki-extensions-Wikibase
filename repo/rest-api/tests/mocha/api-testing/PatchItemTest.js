@@ -571,14 +571,13 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.message, language );
 		} );
 
-		it( 'invalid language code', async () => {
-			const language = 'not-a-valid-language';
+		it( 'invalid aliases language code', async () => {
+			const invalidLanguage = 'not-a-valid-language';
 			const response = await newPatchItemRequestBuilder( testItemId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ 'alias' ] }
+				{ op: 'add', path: `/aliases/${invalidLanguage}`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/aliases', key: invalidLanguage } );
 		} );
 
 		const makeStatementPatchOperation = ( propertyId, invalidStatement ) => [ {

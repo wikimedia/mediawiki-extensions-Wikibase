@@ -1182,9 +1182,6 @@
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-aliases-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
-					},
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
@@ -1241,9 +1238,6 @@
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-aliases-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
-					},
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
@@ -1348,12 +1342,10 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-aliases-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedAliasesInvalidLanguageCodeExample"
-					},
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
 				}
 			}

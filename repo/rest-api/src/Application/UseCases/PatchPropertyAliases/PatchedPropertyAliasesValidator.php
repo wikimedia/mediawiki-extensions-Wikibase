@@ -108,11 +108,7 @@ class PatchedPropertyAliasesValidator {
 	private function validateLanguageCodes( array $languageCodes ): void {
 		foreach ( $languageCodes as $languageCode ) {
 			if ( $this->languageCodeValidator->validate( $languageCode ) ) {
-				throw new UseCaseError(
-					UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
-					"Not a valid language code '$languageCode' in changed aliases",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				throw UseCaseError::newPatchResultInvalidKey( '', $languageCode );
 			}
 		}
 	}

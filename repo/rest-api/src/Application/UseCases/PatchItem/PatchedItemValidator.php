@@ -279,12 +279,7 @@ class PatchedItemValidator {
 				case AliasesValidator::CODE_INVALID_ALIASES:
 					$this->throwInvalidField( 'aliases', $aliasesSerialization );
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
-					$language = $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
-						"Not a valid language code '$language' in changed aliases",
-						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
-					);
+					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(
