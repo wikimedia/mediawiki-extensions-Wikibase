@@ -40,12 +40,7 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	 */
 	public function canRender() {
 		$title = $this->event->getTitle();
-
-		if ( $title !== null ) {
-			return $title->exists();
-		}
-
-		return false;
+		return $title && $title->exists();
 	}
 
 	/**

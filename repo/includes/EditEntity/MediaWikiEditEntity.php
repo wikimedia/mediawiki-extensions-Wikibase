@@ -221,10 +221,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 */
 	private function isNewPage(): bool {
 		$title = $this->getTitle();
-		if ( $title !== null ) {
-			return !$title->exists();
-		}
-		return true;
+		return !$title || !$title->exists();
 	}
 
 	/**
