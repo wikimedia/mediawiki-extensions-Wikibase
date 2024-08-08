@@ -5267,9 +5267,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-sitelink-invalid-site-id": {
-                "$ref": "#/components/examples/PatchedSitelinkSiteIdInvalidExample"
-              },
               "patched-sitelink-missing-title": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleMissingExample"
               },
@@ -5290,6 +5287,9 @@
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
@@ -5370,9 +5370,6 @@
               },
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
-              },
-              "patched-sitelink-invalid-site-id": {
-                "$ref": "#/components/examples/PatchedSitelinkSiteIdInvalidExample"
               },
               "patched-sitelink-missing-title": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleMissingExample"
@@ -7355,15 +7352,6 @@
         "value": {
           "code": "patched-invalid-sitelink-type'",
           "message": "Not a valid sitelink type in patched sitelinks",
-          "context": {
-            "site_id": "{site_id}"
-          }
-        }
-      },
-      "PatchedSitelinkSiteIdInvalidExample": {
-        "value": {
-          "code": "patched-sitelink-invalid-site-id",
-          "message": "Not a valid site ID {site_id} in patched sitelinks",
           "context": {
             "site_id": "{site_id}"
           }

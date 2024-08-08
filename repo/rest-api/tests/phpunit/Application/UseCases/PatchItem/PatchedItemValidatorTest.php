@@ -909,11 +909,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'invalid site id' => [
 			[ 'bad-site-id' => [ 'title' => 'test_title' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID,
-				"Not a valid site ID 'bad-site-id' in patched sitelinks",
-				[ UseCaseError::CONTEXT_SITE_ID => 'bad-site-id' ]
-			),
+			UseCaseError::newPatchResultInvalidKey( '/sitelinks', 'bad-site-id' ),
 		];
 
 		yield 'missing title' => [

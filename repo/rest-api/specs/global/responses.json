@@ -1136,7 +1136,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-sitelink-invalid-site-id": { "$ref": "./examples.json#/PatchedSitelinkSiteIdInvalidExample" },
 					"patched-sitelink-missing-title": { "$ref": "./examples.json#/PatchedSitelinkTitleMissingExample" },
 					"patched-sitelink-title-empty": { "$ref": "./examples.json#/PatchedSitelinkTitleEmptyExample" },
 					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
@@ -1144,6 +1143,7 @@
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1186,7 +1186,6 @@
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
-					"patched-sitelink-invalid-site-id": { "$ref": "./examples.json#/PatchedSitelinkSiteIdInvalidExample" },
 					"patched-sitelink-missing-title": { "$ref": "./examples.json#/PatchedSitelinkTitleMissingExample" },
 					"patched-sitelink-title-empty": { "$ref": "./examples.json#/PatchedSitelinkTitleEmptyExample" },
 					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },

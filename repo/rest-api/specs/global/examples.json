@@ -225,15 +225,6 @@
 			}
 		}
 	},
-	"PatchedSitelinkSiteIdInvalidExample": {
-		"value": {
-			"code": "patched-sitelink-invalid-site-id",
-			"message": "Not a valid site ID {site_id} in patched sitelinks",
-			"context": {
-				"site_id": "{site_id}"
-			}
-		}
-	},
 	"PatchedSitelinkTitleMissingExample": {
 		"value": {
 			"code": "patched-sitelink-missing-title",
