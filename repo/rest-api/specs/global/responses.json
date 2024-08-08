@@ -1134,13 +1134,13 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-sitelink-missing-title": { "$ref": "./examples.json#/PatchedSitelinkTitleMissingExample" },
 					"patched-sitelink-title-empty": { "$ref": "./examples.json#/PatchedSitelinkTitleEmptyExample" },
 					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
 					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
+					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
@@ -1164,7 +1164,6 @@
 						"$ref": "./examples.json#/PatchedItemInvalidOperationChangeItemIdExample"
 					},
 					"patched-item-invalid-field": { "$ref": "./examples.json#/PatchedItemInvalidFieldExample" },
-					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
@@ -1183,13 +1182,13 @@
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
-					"patched-sitelink-missing-title": { "$ref": "./examples.json#/PatchedSitelinkTitleMissingExample" },
 					"patched-sitelink-title-empty": { "$ref": "./examples.json#/PatchedSitelinkTitleEmptyExample" },
 					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
 					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
+					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
@@ -1216,9 +1215,8 @@
 					"patched-property-invalid-operation-change-property-datatype": {
 						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
 					},
-					"patched-property-missing-field": { "$ref": "./examples.json#/PatchedPropertyMissingFieldExample" },
+					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patched-property-invalid-field": { "$ref": "./examples.json#/PatchedPropertyInvalidFieldExample" },
-					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
@@ -1458,7 +1456,7 @@
 					"$ref": "./response-parts.json#/Error"
 				},
 				"examples": {
-					"patched-statement-missing-field": { "$ref": "./examples.json#/PatchedStatementMissingFieldExample" },
+					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" }
 				}
 			}

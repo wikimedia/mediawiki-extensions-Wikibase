@@ -67,11 +67,14 @@ class PatchedStatementValidatorTest extends TestCase {
 		yield 'from invalid patched statement (missing field)' => [
 			new ValidationError(
 				StatementValidator::CODE_MISSING_FIELD,
-				[ StatementValidator::CONTEXT_FIELD => 'property' ]
+				[
+					StatementValidator::CONTEXT_PATH => '',
+					StatementValidator::CONTEXT_FIELD => 'property',
+				]
 			),
-			UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-			'Mandatory field missing in the patched statement: property',
-			[ UseCaseError::CONTEXT_PATH => 'property' ],
+			UseCaseError::PATCH_RESULT_MISSING_FIELD,
+			'Required field missing in patch result',
+			[ UseCaseError::CONTEXT_PATH => '', UseCaseError::CONTEXT_FIELD => 'property' ],
 		];
 
 		yield 'from invalid patched statement (invalid field)' => [

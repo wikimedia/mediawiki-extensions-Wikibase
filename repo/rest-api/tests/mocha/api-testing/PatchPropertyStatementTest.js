@@ -314,7 +314,8 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidError( response, 422, 'patched-statement-missing-field', { path: 'value' } );
+					const context = { path: '', field: 'value' };
+					assertValidError( response, 422, 'patch-result-missing-field', context );
 				} );
 
 				it( 'incorrect value type', async () => {

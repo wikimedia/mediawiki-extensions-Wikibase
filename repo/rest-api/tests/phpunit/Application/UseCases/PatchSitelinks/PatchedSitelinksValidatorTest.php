@@ -115,11 +115,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 		yield 'missing title' => [
 			[ $validSiteId => [ 'badges' => [ $badgeItemId ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_MISSING_TITLE,
-				"No sitelink title provided for site '$validSiteId' in patched sitelinks",
-				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-			),
+			UseCaseError::newMissingFieldInPatchResult( "/{$validSiteId}", 'title' ),
 		];
 
 		yield 'empty title' => [

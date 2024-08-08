@@ -27,10 +27,9 @@ class PatchedStatementValidator {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case StatementValidator::CODE_MISSING_FIELD:
-					throw new UseCaseError(
-						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-						"Mandatory field missing in the patched statement: {$context[StatementValidator::CONTEXT_FIELD]}",
-						[ UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD] ]
+					throw UseCaseError::newMissingFieldInPatchResult(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_FIELD]
 					);
 
 				case StatementValidator::CODE_INVALID_FIELD:

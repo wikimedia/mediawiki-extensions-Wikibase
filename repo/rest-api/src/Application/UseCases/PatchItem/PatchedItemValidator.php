@@ -360,11 +360,7 @@ class PatchedItemValidator {
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw UseCaseError::newPatchResultInvalidKey( '/sitelinks', $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] );
 			case SitelinkValidator::CODE_TITLE_MISSING:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_MISSING_TITLE,
-					"No sitelink title provided for site '{$siteId()}' in patched sitelinks",
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newMissingFieldInPatchResult( "/sitelinks/{$siteId()}", 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
 				throw new UseCaseError(
 					UseCaseError::PATCHED_SITELINK_TITLE_EMPTY,
@@ -492,11 +488,9 @@ class PatchedItemValidator {
 						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementValidator::CONTEXT_FIELD], 1 ) ]
 					);
 				case StatementValidator::CODE_MISSING_FIELD:
-					$field = $context[StatementValidator::CONTEXT_FIELD];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-						"Mandatory field missing in the patched statement: {$field}",
-						[ UseCaseError::CONTEXT_PATH => $field ]
+					throw UseCaseError::newMissingFieldInPatchResult(
+						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_FIELD]
 					);
 				case StatementValidator::CODE_INVALID_FIELD:
 					$field = $context[StatementValidator::CONTEXT_FIELD];

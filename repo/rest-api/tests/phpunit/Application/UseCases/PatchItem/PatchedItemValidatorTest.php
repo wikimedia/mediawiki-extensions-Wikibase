@@ -806,11 +806,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'missing field in statement' => [
 			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ] ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-				'Mandatory field missing in the patched statement: value',
-				[ UseCaseError::CONTEXT_PATH => 'value' ]
-			),
+			UseCaseError::newMissingFieldInPatchResult( "/statements/$propertyId/0", 'value' ),
 		];
 
 		$invalidStatement = [ 'rank' => 'bad rank', 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'novalue' ] ];
@@ -902,11 +898,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'missing title' => [
 			[ $validSiteId => [ 'badges' => [ $badgeItemId ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_MISSING_TITLE,
-				"No sitelink title provided for site '$validSiteId' in patched sitelinks",
-				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-			),
+			UseCaseError::newMissingFieldInPatchResult( "/sitelinks/{$validSiteId}", 'title' ),
 		];
 
 		yield 'empty title' => [

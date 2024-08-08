@@ -94,11 +94,7 @@ class PatchedPropertyValidator {
 
 	private function assertNoMissingMandatoryFields( array $serialization ): void {
 		if ( !isset( $serialization['data_type'] ) ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_MISSING_FIELD,
-				"Mandatory field missing in the patched property: 'data_type'",
-				[ UseCaseError::CONTEXT_PATH => 'data_type' ]
-			);
+			throw UseCaseError::newMissingFieldInPatchResult( '', 'data_type' );
 		}
 	}
 
@@ -361,11 +357,9 @@ class PatchedPropertyValidator {
 						]
 					);
 				case StatementValidator::CODE_MISSING_FIELD:
-					$field = $context[ StatementValidator::CONTEXT_FIELD ];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-						"Mandatory field missing in the patched statement: {$field}",
-						[ UseCaseError::CONTEXT_PATH => $field ]
+					throw UseCaseError::newMissingFieldInPatchResult(
+						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_FIELD]
 					);
 				case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 					throw new UseCaseError(

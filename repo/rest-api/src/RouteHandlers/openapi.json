@@ -5261,9 +5261,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-sitelink-missing-title": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleMissingExample"
-              },
               "patched-sitelink-title-empty": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleEmptyExample"
               },
@@ -5281,6 +5278,9 @@
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patch-result-missing-field": {
+                "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
@@ -5316,9 +5316,6 @@
               },
               "patched-item-invalid-field": {
                 "$ref": "#/components/examples/PatchedItemInvalidFieldExample"
-              },
-              "patched-statement-missing-field": {
-                "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
               },
               "patched-statement-invalid-field": {
                 "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
@@ -5362,9 +5359,6 @@
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
               },
-              "patched-sitelink-missing-title": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleMissingExample"
-              },
               "patched-sitelink-title-empty": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleEmptyExample"
               },
@@ -5382,6 +5376,9 @@
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patch-result-missing-field": {
+                "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
@@ -5421,14 +5418,11 @@
               "patched-property-invalid-operation-change-property-datatype": {
                 "$ref": "#/components/examples/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
               },
-              "patched-property-missing-field": {
-                "$ref": "#/components/examples/PatchedPropertyMissingFieldExample"
+              "patch-result-missing-field": {
+                "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
               "patched-property-invalid-field": {
                 "$ref": "#/components/examples/PatchedPropertyInvalidFieldExample"
-              },
-              "patched-statement-missing-field": {
-                "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
               },
               "patched-statement-invalid-field": {
                 "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
@@ -5813,8 +5807,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-statement-missing-field": {
-                "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
+              "patch-result-missing-field": {
+                "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
               "patched-statement-invalid-field": {
                 "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
@@ -7242,15 +7236,6 @@
           }
         }
       },
-      "PatchedStatementMissingFieldExample": {
-        "value": {
-          "code": "patched-statement-missing-field",
-          "message": "Mandatory field missing in the patched statement: {field}",
-          "context": {
-            "path": "{field}"
-          }
-        }
-      },
       "PatchedStatementInvalidFieldExample": {
         "value": {
           "code": "patched-statement-invalid-field",
@@ -7334,15 +7319,6 @@
         "value": {
           "code": "patched-invalid-sitelink-type'",
           "message": "Not a valid sitelink type in patched sitelinks",
-          "context": {
-            "site_id": "{site_id}"
-          }
-        }
-      },
-      "PatchedSitelinkTitleMissingExample": {
-        "value": {
-          "code": "patched-sitelink-missing-title",
-          "message": "No sitelink title provided for site {site_id} in patched sitelinks",
           "context": {
             "site_id": "{site_id}"
           }
@@ -7492,12 +7468,13 @@
           "message": "Cannot change the datatype of the existing property"
         }
       },
-      "PatchedPropertyMissingFieldExample": {
+      "PatchResultMissingFieldExample": {
         "value": {
-          "code": "patched-property-missing-field",
-          "message": "Mandatory field missing in the patched property: '{field}'",
+          "code": "patch-result-missing-field",
+          "message": "Required field missing in patch result",
           "context": {
-            "path": "{field}"
+            "path": "{json_pointer_to_parent}",
+            "field": "{missing_field}"
           }
         }
       },

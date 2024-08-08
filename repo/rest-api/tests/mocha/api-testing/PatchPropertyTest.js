@@ -284,7 +284,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-property-missing-field', { path: 'data_type' } );
+			const context = { path: '', field: 'data_type' };
+			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
@@ -664,12 +665,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: 'property' };
-			assertValidError( response, 422, 'patched-statement-missing-field', context );
-			assert.strictEqual(
-				response.body.message,
-				'Mandatory field missing in the patched statement: property'
-			);
+			const context = { path: `/statements/${predicatePropertyId}/0`, field: 'property' };
+			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
 		it( 'statement property id mismatch', async () => {
