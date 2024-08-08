@@ -4,5 +4,8 @@
 			"Mbee-wiki"
 		]
 	},
-	"wikibase-linkitem-input-site": "Bahasa:"
+	"wikibase-editlinks": "Kase roba",
+	"wikibase-linkitem-input-site": "Bahasa:",
+	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-otherprojects": "Dalang proyek laeng"
 }

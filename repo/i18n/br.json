@@ -44,6 +44,8 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Yezh",
 	"wikibase-entitytermsforlanguagelistview-more": "An holl yezhoù merket",
 	"wikibase-entitytermsforlanguagelistview-less": "Nebeutoc'h a yezhoù",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "Nevez ! Ouzhpennañ tikedennoù ha lesanvioù dre ziouer evit an holl yezhoù",
+	"wikibase-entityterms-languagelistview-mul-popup-content": "Implijet e vez an talvoudoù dre ziouer evit an holl yezhoù gant tikedennoù ha lesanvioù all goullo a-benn digreskiñ an adlavaret. [$1 Muioc'h a ditouroù]",
 	"wikibase-label-empty": "Tikedenn termenet ebet",
 	"wikibase-label-edit-placeholder": "lakaat un dikedenn",
 	"wikibase-label-edit-placeholder-language-aware": "lakaat un dikedenn e $1",

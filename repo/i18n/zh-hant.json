@@ -307,7 +307,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "標籤：",
 	"wikibase-setlabeldescriptionaliases-description-label": "描述：",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "別名：",
-	"wikibase-setlabeldescriptionaliases-description-not-supported": "描述不支援此語言。",
+	"wikibase-setlabeldescriptionaliases-description-not-supported": "不支援此語言的描述。",
 	"wikibase-setlabeldescriptionaliases-submit": "設定標籤、描述與別名",
 	"wikibase-setlabeldescriptionaliases-continue": "繼續",
 	"special-setsitelink": "設定項目網站連結",
