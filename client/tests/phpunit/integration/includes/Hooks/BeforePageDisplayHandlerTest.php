@@ -32,10 +32,10 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider handleUserLoggedOutWithEmptyLangLinksProvider
 	 */
 	public function testHandle_WikibaseForNamespace( $expectedJsModules, $expectedCssModules,
-		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn
+		$enabledForNamespace, $langLinks, $prefixedId, $loggedIn, $tempUser
 	) {
 		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, true );
+		$context = $this->getContext( $loggedIn, $tempUser, true );
 		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
@@ -56,6 +56,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'de:Rom' ], // local site link
 				null, // not connected item, no prefixed id
 				true, // user logged in
+				false, // user not temp user
 			],
 			[
 				[],
@@ -64,6 +65,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'de:Rom' ],
 				'Q4', // has connected item
 				true, // user logged in
+				false, // user not temp user
 			],
 		];
 	}
@@ -77,13 +79,14 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[ 'de:Rom' ],
 				'Q4', // has connected item
 				true, // user logged in
+				false, // user not temp user
 			],
 		];
 	}
 
 	public function testHandlePageConnectedToWikibase_noexternallinklinks() {
 		$skin = $this->getSkin();
-		$context = $this->getContext( true, true );
+		$context = $this->getContext( true, false, true );
 
 		// page connected, has links and noexternallanglinks
 		$output = $this->getOutputPage( $context, [ 'de:Rom' ], 'Q4', [ '*' ] );
@@ -105,6 +108,16 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[], // no lang links
 				null, // no prefixed id
 				true, // user logged in
+				false, // user not temp user
+			],
+			[
+				[],
+				[ 'wikibase.client.init' ],
+				true, // wikibase enabled for namespace
+				[], // no lang links
+				null, // no prefixed id
+				true, // user logged in
+				true, // user is a temp user
 			],
 		];
 	}
@@ -118,6 +131,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[], // no lang links
 				null, // no prefixed id
 				false, // user logged out
+				false, // user not temp user
 			],
 		];
 	}
@@ -129,7 +143,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn
 	) {
 		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, false );
+		$context = $this->getContext( $loggedIn, false, false );
 		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
@@ -150,6 +164,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[], // no lang links
 				null, // no prefixed id
 				true, // user logged in
+				false, // user not temp user
 			],
 		];
 	}
@@ -158,10 +173,10 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider handleHistoryActionWithEmptyLangLinksProvider
 	 */
 	public function testHandle_HistoryActionWithEmptyLangLinks( $expectedJsModules,
-		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn
+		$expectedCssModules, $enabledForNamespace, $langLinks, $prefixedId, $loggedIn, $tempUser
 	) {
 		$skin = $this->getSkin();
-		$context = $this->getContext( $loggedIn, true );
+		$context = $this->getContext( $loggedIn, $tempUser, true );
 		$output = $this->getOutputPage( $context, $langLinks, $prefixedId );
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
@@ -182,6 +197,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 				[], // no lang links
 				null, // no prefixed id
 				true, // user logged in
+				false, // user is not temp user
 			],
 		];
 	}
@@ -194,7 +210,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$dataBridgeEnabled, $wikibaseEnabled
 	) {
 		$skin = $this->getSkin();
-		$context = $this->getContext( false, false );
+		$context = $this->getContext( false, false, false );
 		$output = $this->getOutputPage( $context, [] );
 		$namespaceChecker = $this->getNamespaceChecker( $wikibaseEnabled );
 
@@ -228,7 +244,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function getContext( bool $loggedIn, bool $titleExists ): IContextSource {
+	private function getContext( bool $loggedIn, bool $tempUser, bool $titleExists ): IContextSource {
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getRequest' )->willReturn( new WebRequest() );
 		$context->method( 'getConfig' )->willReturn( new HashConfig() );
@@ -236,7 +252,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = $this->getTitle( $titleExists );
 		$context->method( 'getTitle' )->willReturn( $title );
 
-		$user = $this->getUser( $loggedIn );
+		$user = $this->getUser( $loggedIn, $tempUser );
 		$context->method( 'getUser' )->willReturn( $user );
 
 		return $context;
@@ -261,11 +277,13 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return User
 	 */
-	private function getUser( $loggedIn ) {
+	private function getUser( $loggedIn, $tempUser ) {
 		$user = $this->createMock( User::class );
 
 		$user->method( 'isRegistered' )
 			->willReturn( $loggedIn );
+		$user->method( 'isNamed' )
+			->willReturn( $loggedIn && !$tempUser );
 
 		return $user;
 	}
