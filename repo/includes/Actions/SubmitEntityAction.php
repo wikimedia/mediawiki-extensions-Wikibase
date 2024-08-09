@@ -243,10 +243,11 @@ class SubmitEntityAction extends EditEntityAction {
 			return $status;
 		}
 
-		$status = $this->getPermissionStatus( 'edit', $title );
+		$status = $this->permissionManager->getPermissionStatus(
+			'edit', $this->getUser(), $title, PermissionManager::RIGOR_SECURE );
 
 		if ( !$status->isOK() ) {
-			return $status;
+			return Status::wrap( $status );
 		}
 
 		$status = $this->editFilterHookRunner->run( $content, $this->getContext(), $summary );
@@ -274,28 +275,6 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		$this->doWatch( $title );
-
-		return $status;
-	}
-
-	/**
-	 * Checks the given permission.
-	 *
-	 * @return Status a status object representing the check's result.
-	 */
-	private function getPermissionStatus(
-		string $permission,
-		Title $title,
-		string $rigor = PermissionManager::RIGOR_SECURE
-	): Status {
-		$errors = $this->permissionManager
-			->getPermissionErrors( $permission, $this->getUser(), $title, $rigor );
-		$status = Status::newGood();
-
-		foreach ( $errors as $error ) {
-			$status->fatal( ...$error );
-			$status->setResult( false );
-		}
 
 		return $status;
 	}

@@ -96,12 +96,14 @@ class EditEntityAction extends ViewEntityAction {
 	 * @return bool true if there were permission errors
 	 */
 	protected function showPermissionError( string $action ): bool {
-		$rigor = $this->getRequest()->wasPosted() ? 'secure' : 'full';
-		if ( !$this->permissionManager->userCan( $action, $this->getUser(), $this->getTitle(), $rigor ) ) {
-			$this->getOutput()->showPermissionsErrorPage(
-				$this->permissionManager->getPermissionErrors( $action, $this->getUser(), $this->getTitle(), $rigor ),
-				$action
-			);
+		$rigor = $this->getRequest()->wasPosted() ?
+			PermissionManager::RIGOR_SECURE : PermissionManager::RIGOR_FULL;
+
+		$status = $this->permissionManager->getPermissionStatus(
+			$action, $this->getUser(), $this->getTitle(), $rigor );
+
+		if ( !$status->isGood() ) {
+			$this->getOutput()->showPermissionStatus( $status, $action );
 
 			return true;
 		}

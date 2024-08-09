@@ -192,7 +192,8 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		$mediaWikiPermissions = array_unique( $mediaWikiPermissions );
 
 		foreach ( $mediaWikiPermissions as $mwPermission ) {
-			$partialStatus = $this->getPermissionStatus( $user, $mwPermission, $title, $rigor );
+			$partialStatus = $this->permissionManager->getPermissionStatus(
+				$mwPermission, $user, $title, $rigor );
 			$status->merge( $partialStatus );
 		}
 
@@ -255,26 +256,6 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 
 	private function mediawikiPermissionExists( $permission ) {
 		return in_array( $permission, $this->availableRights );
-	}
-
-	private function getPermissionStatus( User $user,
-		$permission,
-		Title $title,
-		$rigor = PermissionManager::RIGOR_SECURE
-	) {
-		$status = Status::newGood();
-
-		$errors = $this->permissionManager->getPermissionErrors(
-			$permission, $user, $title, $rigor );
-
-		if ( $errors ) {
-			$status->setResult( false );
-			foreach ( $errors as $error ) {
-				$status->fatal( ...$error );
-			}
-		}
-
-		return $status;
 	}
 
 }
