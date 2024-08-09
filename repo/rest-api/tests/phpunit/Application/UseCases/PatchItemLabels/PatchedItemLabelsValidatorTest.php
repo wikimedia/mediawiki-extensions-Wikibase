@@ -245,9 +245,7 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ $invalidLanguage => 'potato' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE, $e->getErrorCode() );
-			$this->assertSame( "Not a valid language code '$invalidLanguage' in changed labels", $e->getErrorMessage() );
-			$this->assertEquals( [ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ], $e->getErrorContext() );
+			$this->assertEquals( UseCaseError::newPatchResultInvalidKey( '', $invalidLanguage ), $e );
 		}
 	}
 

@@ -171,11 +171,7 @@ class PatchedPropertyValidator {
 		$languageCode = $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
 		switch ( $context[LanguageCodeValidator::CONTEXT_FIELD] ) {
 			case 'labels':
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_INVALID_LANGUAGE_CODE,
-					"Not a valid language code '$languageCode' in changed labels",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				throw UseCaseError::newPatchResultInvalidKey( '/labels', $languageCode );
 			case 'descriptions':
 				throw new UseCaseError(
 					UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,

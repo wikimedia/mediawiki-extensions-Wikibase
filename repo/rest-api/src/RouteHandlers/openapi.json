@@ -5341,9 +5341,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-labels-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
-              },
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
@@ -5397,6 +5394,9 @@
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5460,9 +5460,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-labels-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
-              },
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
@@ -5490,6 +5487,9 @@
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
               },
@@ -5516,14 +5516,14 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-labels-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
-              },
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5551,14 +5551,14 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-labels-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedLabelsInvalidLanguageCodeExample"
-              },
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -7455,12 +7455,13 @@
           }
         }
       },
-      "PatchedLabelsInvalidLanguageCodeExample": {
+      "PatchResultInvalidKeyExample": {
         "value": {
-          "code": "patched-labels-invalid-language-code",
-          "message": "Not a valid language code '{language_code}' in changed labels",
+          "code": "patch-result-invalid-key",
+          "message": "Invalid key in patch result",
           "context": {
-            "language": "{language_code}"
+            "path": "{json_pointer_to_parent_in_patch_result}",
+            "key": "{key}"
           }
         }
       },

@@ -355,18 +355,24 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid label language code', async () => {
-			const language = 'invalid-language-code';
+			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ {
 					op: 'add',
-					path: `/labels/${language}`,
+					path: `/labels/${invalidLanguage}`,
 					value: 'potato'
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-labels-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError(
+				response,
+				422,
+				'patch-result-invalid-key',
+				{
+					path: '/labels',
+					key: `${invalidLanguage}` }
+			);
 		} );
 
 		it( 'property with same label already exists', async () => {

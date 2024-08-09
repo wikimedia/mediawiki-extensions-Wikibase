@@ -1176,9 +1176,6 @@
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
-					"patched-labels-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
-					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-descriptions-invalid-language-code": {
@@ -1201,6 +1198,7 @@
 					"patched-sitelink-invalid-badge": { "$ref": "./examples.json#/PatchedSitelinkBadgeInvalidExample" },
 					"patched-sitelink-item-not-a-badge": { "$ref": "./examples.json#/PatchedSitelinkItemBadgeNotBadgeExample" },
 					"patched-sitelink-badges-format": { "$ref": "./examples.json#/PatchedSiteLinkBadgeFormatExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
@@ -1239,9 +1237,6 @@
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
-					"patched-labels-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
-					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-descriptions-invalid-language-code": {
@@ -1255,6 +1250,7 @@
 					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-aliases-invalid-field": { "$ref": "./examples.json#/PatchedAliasesInvalidFieldExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1273,11 +1269,9 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-labels-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
-					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1296,11 +1290,9 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-labels-invalid-language-code": {
-						"$ref": "./examples.json#/PatchedLabelsInvalidLanguageCodeExample"
-					},
 					"patched-label-empty": { "$ref": "./examples.json#/PatchedLabelEmptyExample" },
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}

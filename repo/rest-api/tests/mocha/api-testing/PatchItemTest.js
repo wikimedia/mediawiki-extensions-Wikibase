@@ -332,18 +332,24 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid label language code', async () => {
-			const language = 'invalid-language-code';
+			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
 				[ {
 					op: 'add',
-					path: `/labels/${language}`,
+					path: `/labels/${invalidLanguage}`,
 					value: 'potato'
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-labels-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError(
+				response,
+				422,
+				'patch-result-invalid-key',
+				{
+					path: '/labels',
+					key: `${invalidLanguage}` }
+			);
 		} );
 
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {

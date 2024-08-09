@@ -311,13 +311,11 @@
 			}
 		}
 	},
-	"PatchedLabelsInvalidLanguageCodeExample": {
+	"PatchResultInvalidKeyExample": {
 		"value": {
-			"code": "patched-labels-invalid-language-code",
-			"message": "Not a valid language code '{language_code}' in changed labels",
-			"context": {
-				"language": "{language_code}"
-			}
+			"code": "patch-result-invalid-key",
+			"message": "Invalid key in patch result",
+			"context": { "path": "{json_pointer_to_parent_in_patch_result}", "key": "{key}" }
 		}
 	},
 	"PatchedLabelEmptyExample": {
