@@ -20,7 +20,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
-	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
 	public const INVALID_VALUE = 'invalid-value';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
@@ -116,7 +115,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
-		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],

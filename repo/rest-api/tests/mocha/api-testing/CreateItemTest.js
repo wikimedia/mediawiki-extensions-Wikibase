@@ -570,8 +570,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: 'not an object' }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-sitelink-type', { site_id: localWikiId } );
-			assert.strictEqual( response.body.message, 'Not a valid sitelink type' );
+			assertValidError( response, 400, 'invalid-value', { path: `/item/sitelinks/${localWikiId}` } );
+			assert.strictEqual( response.body.message, `Invalid value at '/item/sitelinks/${localWikiId}'` );
 		} );
 
 		it( 'title is empty', async () => {

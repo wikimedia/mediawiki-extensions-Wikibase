@@ -69,12 +69,6 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
-	"InvalidSitelinkTypeExample": {
-		"value": {
-			"code": "invalid-sitelink-type",
-			"message": "Not a valid sitelink type"
-		}
-	},
 	"TitleDoesNotExistOnGivenSiteExample": {
 		"value": {
 			"code": "title-does-not-exist",

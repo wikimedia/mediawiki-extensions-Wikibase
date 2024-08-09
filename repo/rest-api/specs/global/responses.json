@@ -415,7 +415,6 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
-					"invalid-sitelink-type": { "$ref": "./examples.json#/InvalidSitelinkTypeExample" },
 					"title-does-not-exist": {
 						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
 					},

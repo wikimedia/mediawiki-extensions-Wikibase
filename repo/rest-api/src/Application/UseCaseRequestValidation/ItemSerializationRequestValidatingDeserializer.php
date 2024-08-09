@@ -209,11 +209,7 @@ class ItemSerializationRequestValidatingDeserializer {
 
 		switch ( $validationError->getCode() ) {
 			case SitelinksValidator::CODE_INVALID_SITELINK:
-				throw new UseCaseError(
-					UseCaseError::INVALID_SITELINK_TYPE,
-					'Not a valid sitelink type',
-					[ UseCaseError::CONTEXT_SITE_ID => $context[SitelinksValidator::CONTEXT_SITE_ID] ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$context[SitelinksValidator::CONTEXT_SITE_ID]}" );
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newInvalidValue( '/item/sitelinks' );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
