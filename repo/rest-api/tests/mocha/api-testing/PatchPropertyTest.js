@@ -287,14 +287,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 422, 'patched-property-missing-field', { path: 'data_type' } );
 		} );
 
-		it( 'unexpected field', async () => {
-			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
-			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
-				.assertValidRequest().makeRequest();
-
-			assertValidError( response, 422, 'patched-property-unexpected-field' );
-		} );
-
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
 			op: 'replace',
 			path: `/labels/${languageWithExistingLabel}`,

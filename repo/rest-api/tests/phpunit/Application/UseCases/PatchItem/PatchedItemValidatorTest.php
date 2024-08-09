@@ -200,18 +200,6 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	public function topLevelValidationProvider(): Generator {
-		yield 'unexpected field' => [
-			[
-				'id' => 'Q123',
-				'type' => 'item',
-				'labels' => [ 'de' => 'Kartoffel' ],
-				'foo' => 'bar',
-			],
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_UNEXPECTED_FIELD,
-				"The patched item contains an unexpected field: 'foo'"
-			),
-		];
 
 		yield 'invalid field' => [
 			[

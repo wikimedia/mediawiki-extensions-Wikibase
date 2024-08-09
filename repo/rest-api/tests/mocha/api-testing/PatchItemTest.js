@@ -263,15 +263,6 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing item' );
 		} );
 
-		it( 'unexpected field', async () => {
-			const patch = [ { op: 'add', path: '/foo', value: 'bar' } ];
-			const response = await newPatchItemRequestBuilder( testItemId, patch )
-				.assertValidRequest().makeRequest();
-
-			assertValidError( response, 422, 'patched-item-unexpected-field' );
-			assert.strictEqual( response.body.message, "The patched item contains an unexpected field: 'foo'" );
-		} );
-
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
 			op: 'replace',
 			path: `/labels/${languageWithExistingLabel}`,

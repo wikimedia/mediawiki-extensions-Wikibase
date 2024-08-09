@@ -12,7 +12,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 class ItemValidator {
 
 	public const CODE_INVALID_FIELD = 'item-validator-code-invalid-item-field';
-	public const CODE_UNEXPECTED_FIELD = 'item-validator-code-item-data-unexpected-field';
 
 	public const CONTEXT_FIELD = 'item-validator-context-field';
 	public const CONTEXT_VALUE = 'item-validator-context-value';
@@ -56,13 +55,6 @@ class ItemValidator {
 						self::CONTEXT_VALUE => $serialization[$expectedField],
 					]
 				);
-			}
-		}
-
-		foreach ( array_keys( $serialization ) as $field ) {
-			$ignoredFields = [ 'id', 'type' ];
-			if ( !in_array( $field, array_merge( $expectedFields, $ignoredFields ) ) ) {
-				return new ValidationError( self::CODE_UNEXPECTED_FIELD, [ self::CONTEXT_FIELD => $field ] );
 			}
 		}
 

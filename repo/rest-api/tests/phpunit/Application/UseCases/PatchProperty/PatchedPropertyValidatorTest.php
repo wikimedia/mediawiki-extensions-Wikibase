@@ -288,19 +288,6 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	public function topLevelValidationErrorProvider(): Generator {
-		yield 'unexpected field' => [
-			[
-				'id' => 'P123',
-				'type' => 'property',
-				'data_type' => 'string',
-				'labels' => [ 'en' => 'english-label' ],
-				'foo' => 'bar',
-			],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_UNEXPECTED_FIELD,
-				"The patched property contains an unexpected field: 'foo'"
-			),
-		];
 
 		yield "missing 'data_type' field" => [
 			[

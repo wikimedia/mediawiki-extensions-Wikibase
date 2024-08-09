@@ -22,7 +22,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_SITELINK_TYPE = 'invalid-sitelink-type';
 	public const INVALID_VALUE = 'invalid-value';
-	public const ITEM_DATA_UNEXPECTED_FIELD = 'unexpected-field';
 	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
@@ -43,7 +42,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
 	public const PATCHED_ITEM_INVALID_FIELD = 'patched-item-invalid-field';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
-	public const PATCHED_ITEM_UNEXPECTED_FIELD = 'patched-item-unexpected-field';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
 	public const PATCHED_LABEL_INVALID_LANGUAGE_CODE = 'patched-labels-invalid-language-code';
@@ -52,7 +50,6 @@ class UseCaseError extends UseCaseException {
 		'patched-property-invalid-operation-change-property-datatype';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
 	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
-	public const PATCHED_PROPERTY_UNEXPECTED_FIELD = 'patched-property-unexpected-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
 	public const PATCHED_SITELINK_INVALID_SITE_ID = 'patched-sitelink-invalid-site-id';
@@ -121,7 +118,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
-		self::ITEM_DATA_UNEXPECTED_FIELD => [ self::CONTEXT_FIELD ],
 		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
@@ -142,7 +138,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_ITEM_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
-		self::PATCHED_ITEM_UNEXPECTED_FIELD => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_LABEL_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
@@ -150,7 +145,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
-		self::PATCHED_PROPERTY_UNEXPECTED_FIELD => [],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],

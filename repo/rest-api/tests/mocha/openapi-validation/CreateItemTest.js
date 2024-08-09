@@ -42,16 +42,16 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '400', async () => {
+	it( '400 - invalid field', async () => {
 		const response = await newCreateItemRequestBuilder( {
-			unknownField: 'asdf'
+			labels: { en: 42 }
 		} ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '422', async () => {
+	it( '422 ', async () => {
 		const linkedArticle = utils.title( 'Some article' );
 		await createWikiPage( linkedArticle );
 		await newCreateItemRequestBuilder( {

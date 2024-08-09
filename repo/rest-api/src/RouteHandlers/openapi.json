@@ -4155,9 +4155,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "unexpected-field": {
-                "$ref": "#/components/examples/ItemDataUnexpectedFieldExample"
-              },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
@@ -5323,9 +5320,6 @@
               "patched-item-invalid-field": {
                 "$ref": "#/components/examples/PatchedItemInvalidFieldExample"
               },
-              "patched-item-unexpected-field": {
-                "$ref": "#/components/examples/PatchedItemInvalidUnexpectedExample"
-              },
               "patched-statement-missing-field": {
                 "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
               },
@@ -5444,9 +5438,6 @@
               },
               "patched-property-invalid-field": {
                 "$ref": "#/components/examples/PatchedPropertyInvalidFieldExample"
-              },
-              "patched-property-unexpected-field": {
-                "$ref": "#/components/examples/PatchedPropertyInvalidUnexpectedExample"
               },
               "patched-statement-missing-field": {
                 "$ref": "#/components/examples/PatchedStatementMissingFieldExample"
@@ -7536,12 +7527,6 @@
           }
         }
       },
-      "PatchedItemInvalidUnexpectedExample": {
-        "value": {
-          "code": "patched-item-unexpected-field",
-          "message": "The patched request body contains an unexpected field: '{field}'"
-        }
-      },
       "PatchedPropertyInvalidOperationChangePropertyIdExample": {
         "value": {
           "code": "patched-property-invalid-operation-change-property-id",
@@ -7571,12 +7556,6 @@
             "path": "{field}",
             "value": "{value}"
           }
-        }
-      },
-      "PatchedPropertyInvalidUnexpectedExample": {
-        "value": {
-          "code": "patched-property-unexpected-field",
-          "message": "The patched property contains an unexpected field: '{field}'"
         }
       },
       "StatementIdNotModifiableExample": {
@@ -7681,15 +7660,6 @@
           "context": {
             "alias": "{alias}",
             "language": "{language_code}"
-          }
-        }
-      },
-      "ItemDataUnexpectedFieldExample": {
-        "value": {
-          "code": "unexpected-field",
-          "message": "The request body contains an unexpected field",
-          "context": {
-            "field": "{field}"
           }
         }
       },
