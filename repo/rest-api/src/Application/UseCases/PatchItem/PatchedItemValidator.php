@@ -358,11 +358,7 @@ class PatchedItemValidator {
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				$this->throwInvalidField( 'sitelinks', $sitelinksSerialization );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_INVALID_SITE_ID,
-					"Not a valid site ID '{$context[SiteIdValidator::CONTEXT_SITE_ID_VALUE]}' in patched sitelinks",
-					[ UseCaseError::CONTEXT_SITE_ID => $context[ SiteIdValidator::CONTEXT_SITE_ID_VALUE ] ]
-				);
+				throw UseCaseError::newPatchResultInvalidKey( '/sitelinks', $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] );
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw new UseCaseError(
 					UseCaseError::PATCHED_SITELINK_MISSING_TITLE,

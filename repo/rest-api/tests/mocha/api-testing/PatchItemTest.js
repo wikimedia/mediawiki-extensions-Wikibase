@@ -759,8 +759,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ invalidSiteId ]: sitelink } } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-site-id', { site_id: invalidSiteId } );
-			assert.include( response.body.message, invalidSiteId );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/sitelinks', key: invalidSiteId } );
 		} );
 
 		it( 'missing title', async () => {

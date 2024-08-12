@@ -549,7 +549,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				// .assertInvalidRequest() - valid per OAS because it only checks whether it is a string
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-key', { path: '/item/sitelinks', key: `${invalidSiteId}` } );
+			assertValidError( response, 400, 'invalid-key', { path: '/item/sitelinks', key: invalidSiteId } );
 			assert.strictEqual( response.body.message, `Invalid key '${invalidSiteId}' in '/item/sitelinks'` );
 		} );
 

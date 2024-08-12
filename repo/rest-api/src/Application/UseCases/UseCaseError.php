@@ -50,7 +50,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
-	public const PATCHED_SITELINK_INVALID_SITE_ID = 'patched-sitelink-invalid-site-id';
 	public const PATCHED_SITELINK_INVALID_TITLE = 'patched-sitelink-invalid-title';
 	public const PATCHED_SITELINK_ITEM_NOT_A_BADGE = 'patched-sitelink-item-not-a-badge';
 	public const PATCHED_SITELINK_MISSING_TITLE = 'patched-sitelink-missing-title';
@@ -143,7 +142,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
-		self::PATCHED_SITELINK_INVALID_SITE_ID => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
