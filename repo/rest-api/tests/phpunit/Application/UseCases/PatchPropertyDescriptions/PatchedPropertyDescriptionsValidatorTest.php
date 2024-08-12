@@ -74,11 +74,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 	public static function invalidDescriptionsProvider(): Generator {
 		yield 'invalid language' => [
 			[ 'bad-language-code' => 'description text' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
-				"Not a valid language code 'bad-language-code' in changed descriptions",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'bad-language-code' ]
-			),
+			UseCaseError::newPatchResultInvalidKey( '', 'bad-language-code' ),
 		];
 
 		yield 'empty description' => [

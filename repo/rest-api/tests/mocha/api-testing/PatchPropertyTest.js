@@ -365,14 +365,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				} ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patch-result-invalid-key',
-				{
-					path: '/labels',
-					key: `${invalidLanguage}` }
-			);
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/labels', key: invalidLanguage } );
 		} );
 
 		it( 'property with same label already exists', async () => {
@@ -480,14 +473,13 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid description language code', async () => {
-			const language = 'invalid-language-code';
+			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: `/descriptions/${language}`, value: 'potato' } ]
+				[ { op: 'add', path: `/descriptions/${invalidLanguage}`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/descriptions', key: invalidLanguage } );
 		} );
 
 		it( 'label-description-same-value', async () => {

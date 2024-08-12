@@ -300,15 +300,14 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
 
-		[ 'invalid-language-code', 'mul' ].forEach( ( language ) => {
-			it( `invalid language code: "${language}"`, async () => {
+		[ 'invalid-language-code', 'mul' ].forEach( ( invalidLanguage ) => {
+			it( `invalid language code: "${invalidLanguage}"`, async () => {
 				const response = await newPatchItemDescriptionsRequestBuilder(
 					testItemId,
-					[ { op: 'add', path: `/${language}`, value: 'potato' } ]
+					[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
 				).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
 
-				assertValidError( response, 422, 'patched-descriptions-invalid-language-code', { language } );
-				assert.include( response.body.message, language );
+				assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 			} );
 		} );
 

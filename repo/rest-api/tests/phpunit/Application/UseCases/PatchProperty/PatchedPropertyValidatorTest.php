@@ -595,11 +595,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
-				"Not a valid language code 'e2' in changed descriptions",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'e2' ]
-			),
+			UseCaseError::newPatchResultInvalidKey( '/descriptions', 'e2' ),
 		];
 
 		yield 'same value for description and description' => [

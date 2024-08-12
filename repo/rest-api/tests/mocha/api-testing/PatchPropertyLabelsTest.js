@@ -312,14 +312,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patch-result-invalid-key',
-				{
-					path: '',
-					key: `${invalidLanguage}` }
-			);
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 		} );
 
 		it( 'label-description-same-value', async () => {

@@ -248,9 +248,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ $invalidLanguage => 'description' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE, $e->getErrorCode() );
-			$this->assertSame( "Not a valid language code '$invalidLanguage' in changed descriptions", $e->getErrorMessage() );
-			$this->assertEquals( [ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ], $e->getErrorContext() );
+			$this->assertEquals( $e, UseCaseError::newPatchResultInvalidKey( '', $invalidLanguage ) );
 		}
 	}
 

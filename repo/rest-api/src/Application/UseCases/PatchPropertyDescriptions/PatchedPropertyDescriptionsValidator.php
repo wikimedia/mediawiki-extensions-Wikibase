@@ -61,12 +61,7 @@ class PatchedPropertyDescriptionsValidator {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
-				$languageCode = $validationError->getContext()[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE,
-					"Not a valid language code '$languageCode' in changed descriptions",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				throw UseCaseError::newPatchResultInvalidKey( '', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(

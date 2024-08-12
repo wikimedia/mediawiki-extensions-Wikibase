@@ -37,7 +37,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ALIASES_INVALID_LANGUAGE_CODE = 'patched-aliases-invalid-language-code';
 	public const PATCHED_DESCRIPTION_EMPTY = 'patched-description-empty';
 	public const PATCHED_DESCRIPTION_INVALID = 'patched-description-invalid';
-	public const PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE = 'patched-descriptions-invalid-language-code';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
 	public const PATCHED_INVALID_STATEMENT_GROUP_TYPE = 'patched-invalid-statement-group-type';
 	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
@@ -133,7 +132,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_ALIASES_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
-		self::PATCHED_DESCRIPTION_INVALID_LANGUAGE_CODE => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_INVALID_STATEMENT_GROUP_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
