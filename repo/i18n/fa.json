@@ -304,7 +304,7 @@
 	"wikibase-listproperties-legend": "دریافت یک فهرست از ویژگی‌ها بر پایهٔ نوع داده",
 	"wikibase-listproperties-datatype": "نوع داده:",
 	"wikibase-listproperties-all": "همهٔ نوع‌های داده",
-	"wikibase-listproperties-submit": "پیدا کن",
+	"wikibase-listproperties-submit": "جستجو",
 	"wikibase-listproperties-invalid-datatype": "\"$1\" یک نوع داده معتبر نیست",
 	"special-itemswithoutsitelinks": "آیتم‌های بدون پیوندهای وبگاه",
 	"special-entitydata": "داده‌های هستار",
