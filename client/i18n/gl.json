@@ -109,5 +109,21 @@
 	"unresolved-property-category": "Páxinas con propiedades non resoltas",
 	"unresolved-property-category-desc": "Esta categoría amosa páxinas que referencian propiedades {{WBREPONAME}} que non  se poden atopar polo seu identificador de propiedade nin pola súa etiqueta.",
 	"connected-redirect-category": "Redireccións ligadas a un elemento {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Esta categoría lista as páxinas de redireccionamento que están ligadas a um elemento {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Esta categoría lista as páxinas de redireccionamento que están ligadas a um elemento {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-dialog-title": "Editar \"$1\"",
+	"wikibase-client-data-bridge-permissions-error-info": "Máis detalles",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Erro de permisos descoñecido",
+	"wikibase-client-data-bridge-references-heading": "Referencias",
+	"wikibase-client-data-bridge-license-heading": "Uso e licenza",
+	"wikibase-client-data-bridge-saving-error-heading": "No se puideron gardar os cambios",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Detectouse un conflito de edición",
+	"wikibase-client-data-bridge-unknown-error-heading": "Algo foi mal",
+	"wikibase-client-data-bridge-error-reload-bridge": "Recargar",
+	"wikibase-client-data-bridge-error-reload-page": "Recargar a páxina",
+	"wikibase-client-data-bridge-error-go-back": "Volver",
+	"wikibase-client-data-bridge-error-retry-save": "Reintentar o gardado",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicar sen iniciar sesión",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Gardar sen iniciar sesión",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Iniciar sesión (abre un nova lapela)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Seguir editando"
 }
