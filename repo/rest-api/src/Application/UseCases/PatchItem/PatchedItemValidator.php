@@ -109,7 +109,7 @@ class PatchedItemValidator {
 		// 'id' is not modifiable and 'type' is ignored, so we only check the expected array fields
 		foreach ( [ 'labels', 'descriptions', 'aliases', 'sitelinks', 'statements' ] as $field ) {
 			if ( isset( $serialization[$field] ) && !is_array( $serialization[$field] ) ) {
-				$this->throwInvalidField( $field, $serialization[$field] );
+				throw UseCaseError::newPatchResultInvalidValue( "/$field", $serialization[$field] );
 			}
 		}
 	}
@@ -161,7 +161,7 @@ class PatchedItemValidator {
 
 		switch ( $validationError->getCode() ) {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'labels', $labelsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/labels', $labelsSerialization );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
 				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -211,7 +211,7 @@ class PatchedItemValidator {
 
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'descriptions', $descriptionsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/descriptions', $descriptionsSerialization );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -263,7 +263,7 @@ class PatchedItemValidator {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case AliasesValidator::CODE_INVALID_ALIASES:
-					$this->throwInvalidField( 'aliases', $aliasesSerialization );
+					throw UseCaseError::newPatchResultInvalidValue( '/aliases', $aliasesSerialization );
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
@@ -356,7 +356,7 @@ class PatchedItemValidator {
 					[ UseCaseError::CONTEXT_SITE_ID => $context[ SitelinksValidator::CONTEXT_SITE_ID ] ]
 				);
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'sitelinks', $sitelinksSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/sitelinks', $sitelinksSerialization );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw UseCaseError::newPatchResultInvalidKey( '/sitelinks', $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] );
 			case SitelinkValidator::CODE_TITLE_MISSING:
@@ -455,7 +455,7 @@ class PatchedItemValidator {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-					$this->throwInvalidField( 'statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
+					throw UseCaseError::newPatchResultInvalidValue( '/statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
 				case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
 					throw new UseCaseError(
 						UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
@@ -538,23 +538,6 @@ class PatchedItemValidator {
 				);
 			}
 		}
-	}
-
-	/**
-	 * @param string $field
-	 * @param mixed $value
-	 *
-	 * @return never
-	 */
-	private function throwInvalidField( string $field, $value ): void {
-		throw new UseCaseError(
-			UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-			"Invalid input for '$field' in the patched item",
-			[
-				UseCaseError::CONTEXT_PATH => $field,
-				UseCaseError::CONTEXT_VALUE => $value,
-			]
-		);
 	}
 
 }

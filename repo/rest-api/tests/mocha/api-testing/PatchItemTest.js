@@ -276,9 +276,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'replace', path: '/labels', value: invalidLabels } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: 'labels', value: invalidLabels };
-			assertValidError( response, 422, 'patched-item-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched item" );
+			const context = { path: '/labels', value: invalidLabels };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid label', async () => {
@@ -358,9 +358,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'replace', path: '/descriptions', value: invalidDescriptions } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: 'descriptions', value: invalidDescriptions };
-			assertValidError( response, 422, 'patched-item-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'descriptions' in the patched item" );
+			const context = { path: '/descriptions', value: invalidDescriptions };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid description', async () => {
@@ -541,8 +541,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				422,
-				'patched-item-invalid-field',
-				{ path: 'aliases', value: invalidAliasesValue }
+				'patch-result-invalid-value',
+				{ path: '/aliases', value: invalidAliasesValue }
 			);
 		} );
 
@@ -584,9 +584,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: 'statements', value: invalidStatements };
-			assertValidError( response, 422, 'patched-item-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'statements' in the patched item" );
+			const context = { path: '/statements', value: invalidStatements };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid statement group type', async () => {
@@ -745,9 +745,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: invalidSitelinks } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: 'sitelinks', value: invalidSitelinks };
-			assertValidError( response, 422, 'patched-item-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'sitelinks' in the patched item" );
+			const context = { path: '/sitelinks', value: invalidSitelinks };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid site id', async () => {

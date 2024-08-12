@@ -329,13 +329,13 @@
 			"message": "Cannot change the ID of the existing item"
 		}
 	},
-	"PatchedItemInvalidFieldExample": {
+	"PatchResultInvalidValueExample": {
 		"value": {
-			"code": "patched-item-invalid-field",
-			"message": "Invalid input for '{field}' in the patched item",
+			"code": "patch-result-invalid-value",
+			"message": "Invalid value in patch result",
 			"context": {
-				"path": "{field}",
-				"value": "{value}"
+				"value": "{value}",
+				"path": "{path}"
 			}
 		}
 	},
