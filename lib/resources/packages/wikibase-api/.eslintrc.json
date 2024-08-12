@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"extends": [
-		"wikimedia/client-es5",
+		"wikimedia/client",
 		"wikimedia/mediawiki",
 		"wikimedia/jquery"
 	],
@@ -11,12 +11,13 @@
 	"rules": {
 		"max-len": "off",
 		"no-underscore-dangle": "off",
+		"no-var": "warn",
 		"operator-linebreak": "off",
+		"prefer-arrow-callback": "warn",
 		"jsdoc/check-alignment": "off",
 		"jsdoc/newline-after-description": "off",
 		"jsdoc/require-returns": "off",
 		"jsdoc/require-returns-check": "off",
-		"no-jquery/no-extend": "warn",
-		"es-x/no-object-assign": "warn"
+		"no-jquery/no-extend": "warn"
 	}
 }
