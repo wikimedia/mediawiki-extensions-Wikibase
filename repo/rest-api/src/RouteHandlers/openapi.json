@@ -5353,9 +5353,6 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-aliases-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
-              },
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
@@ -5468,9 +5465,6 @@
               },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
-              },
-              "patched-aliases-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
               },
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
@@ -5644,9 +5638,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-aliases-invalid-language-code": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidLanguageCodeExample"
-              },
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
@@ -5655,6 +5646,9 @@
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -7583,15 +7577,6 @@
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",
             "statement_property_id": "{property_id_value}"
-          }
-        }
-      },
-      "PatchedAliasesInvalidLanguageCodeExample": {
-        "value": {
-          "code": "patched-aliases-invalid-language-code",
-          "message": "Not a valid language code '{language_code}' in changed aliases",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

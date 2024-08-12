@@ -730,14 +730,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';
-		yield 'invalid language code' => [
+		yield 'invalid aliases language code' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ $invalidLanguage => [ 'alias' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
-				"Not a valid language code '{$invalidLanguage}' in changed aliases",
-				[ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ]
-			),
+			UseCaseError::newPatchResultInvalidKey( '/aliases', $invalidLanguage ),
 		];
 	}
 

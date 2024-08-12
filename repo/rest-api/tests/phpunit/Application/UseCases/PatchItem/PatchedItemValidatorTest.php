@@ -733,11 +733,7 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'invalid language code' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ $invalidLanguage => [ 'alias' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_LANGUAGE_CODE,
-				"Not a valid language code '{$invalidLanguage}' in changed aliases",
-				[ UseCaseError::CONTEXT_LANGUAGE => $invalidLanguage ]
-			),
+			UseCaseError::newPatchResultInvalidKey( '/aliases', $invalidLanguage ),
 		];
 	}
 

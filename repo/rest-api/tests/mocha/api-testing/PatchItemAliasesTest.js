@@ -309,13 +309,12 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid language code', async () => {
-			const language = 'not-a-valid-language';
+			const invalidLanguage = 'not-a-valid-language';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ 'alias' ] }
+				{ op: 'add', path: `/${invalidLanguage}`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-aliases-invalid-language-code', { language } );
-			assert.include( response.body.message, language );
+			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 		} );
 	} );
 
