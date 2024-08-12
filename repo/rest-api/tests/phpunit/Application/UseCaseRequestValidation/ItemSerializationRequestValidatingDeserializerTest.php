@@ -468,11 +468,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinksValidator::CODE_INVALID_SITELINK, [
 				SitelinksValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::INVALID_SITELINK_TYPE,
-				'Not a valid sitelink type',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newInvalidValue( "/item/sitelinks/$site" ),
 		];
 		yield SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE => [
 			new ValidationError( SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE, [

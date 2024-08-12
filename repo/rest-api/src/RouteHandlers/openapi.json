@@ -4164,9 +4164,6 @@
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
-              "invalid-sitelink-type": {
-                "$ref": "#/components/examples/InvalidSitelinkTypeExample"
-              },
               "title-does-not-exist": {
                 "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
               },
@@ -7188,12 +7185,6 @@
           "context": {
             "parameter": "{path_parameter}"
           }
-        }
-      },
-      "InvalidSitelinkTypeExample": {
-        "value": {
-          "code": "invalid-sitelink-type",
-          "message": "Not a valid sitelink type"
         }
       },
       "TitleDoesNotExistOnGivenSiteExample": {

@@ -20,7 +20,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
 		UseCaseError::INVALID_PATH_PARAMETER => 400,
 		UseCaseError::INVALID_QUERY_PARAMETER => 400,
-		UseCaseError::INVALID_SITELINK_TYPE => 400,
 		UseCaseError::INVALID_VALUE => 400,
 		UseCaseError::ITEM_STATEMENT_ID_MISMATCH => 400,
 		UseCaseError::MISSING_FIELD => 400,
