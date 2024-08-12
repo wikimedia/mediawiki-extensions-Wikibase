@@ -389,7 +389,7 @@ return call_user_func( function() {
 						if ( is_string( $value['id'] ) ) {
 							$message = 'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with';
 						} else {
-							$message = 'Can not parse id of type ' . gettype( $value['id'] ) . ' to build EntityIdValue with';
+							$message = 'Can not parse id of type ' . get_debug_type( $value['id'] ) . ' to build EntityIdValue with';
 						}
 						throw new InvalidArgumentException(
 							$message,
