@@ -31,4 +31,4 @@
 
 ## Version 0.1
 
-* The majority of endpoints where created during version 0.1
+* The majority of endpoints were created during version 0.1
