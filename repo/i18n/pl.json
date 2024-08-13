@@ -74,6 +74,7 @@
 	"wikibase-description-edit-placeholder-not-applicable": "nie dotyczy",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Nie jest możliwe podanie opisu dla wszystkich języków",
 	"wikibase-item-description-edit-not-supported": "Opisy nie są obsługiwane w tym języku. Podaj opis w innym języku po utworzeniu elementu.",
+	"wikibase-property-description-edit-not-supported": "Opisy nie są obsługiwane w tym języku. Podaj opis w innym języku po utworzeniu właściwości.",
 	"wikibase-description-not-applicable-title": "Nie jest możliwe podanie opisu dla wszystkich języków",
 	"wikibase-aliases-edit-placeholder": "podaj nazwy alternatywne",
 	"wikibase-aliases-edit-placeholder-language-aware": "podaj alternatywne nazwy w $1",
