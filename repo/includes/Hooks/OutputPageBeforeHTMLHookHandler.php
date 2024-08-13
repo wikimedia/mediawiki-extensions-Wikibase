@@ -318,7 +318,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			);
 		} else {
 			throw new RuntimeException(
-				'Unexpected type ' . gettype( $items ) . ' for wikibase-terms-list-items: ' . $out->getTitle()->getPrefixedText()
+				'Unexpected type ' . get_debug_type( $items ) . ' for wikibase-terms-list-items: ' . $out->getTitle()->getPrefixedText()
 			);
 		}
 	}

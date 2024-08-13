@@ -143,7 +143,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 */
 	public function hasLinkWithSiteId( $siteId ) {
 		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
+			throw new InvalidArgumentException( '$siteId must be a string; got ' . get_debug_type( $siteId ) );
 		}
 
 		return array_key_exists( $siteId, $this->siteLinks );
@@ -193,7 +193,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 */
 	public function removeLinkWithSiteId( $siteId ) {
 		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId must be a string; got ' . gettype( $siteId ) );
+			throw new InvalidArgumentException( '$siteId must be a string; got ' . get_debug_type( $siteId ) );
 		}
 
 		unset( $this->siteLinks[$siteId] );

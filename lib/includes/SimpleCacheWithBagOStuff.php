@@ -235,7 +235,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	private function assertKeyIsValid( $key ): void {
 		if ( !is_string( $key ) ) {
-			$type = gettype( $key );
+			$type = get_debug_type( $key );
 			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
 		}
 
@@ -257,7 +257,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		if ( is_array( $var ) ) {
 			return $var;
 		} elseif ( !( $var instanceof \Traversable ) ) {
-			$type = gettype( $var );
+			$type = get_debug_type( $var );
 			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
@@ -273,7 +273,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		if ( is_array( $var ) ) {
 			return $var;
 		} elseif ( !is_iterable( $var ) ) {
-			$type = gettype( $var );
+			$type = get_debug_type( $var );
 			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
@@ -310,7 +310,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			return BagOStuff::TTL_INDEFINITE;
 		}
 
-		$type = gettype( $ttl );
+		$type = get_debug_type( $ttl );
 		throw new CacheInvalidArgumentException( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 	}
 
@@ -365,7 +365,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 		if ( !is_array( $result ) || count( $result ) !== 3 ) {
 			$this->logger->alert( 'Unknown or invalid cache format', $loggingContext + [
-				'type' => gettype( $result ),
+				'type' => get_debug_type( $result ),
 				'count' => is_array( $result ) ? count( $result ) : 'N/A',
 			] );
 			return null;
