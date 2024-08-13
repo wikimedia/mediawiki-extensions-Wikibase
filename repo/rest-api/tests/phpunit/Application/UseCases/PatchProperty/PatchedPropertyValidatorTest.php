@@ -295,11 +295,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				'type' => 'property',
 				'labels' => [ 'en' => 'english-label' ],
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_MISSING_FIELD,
-				"Mandatory field missing in the patched property: 'data_type'",
-				[ UseCaseError::CONTEXT_PATH => 'data_type' ]
-			),
+			UseCaseError::newMissingFieldInPatchResult( '', 'data_type' ),
 		];
 
 		yield 'invalid field' => [
@@ -825,14 +821,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[3];
 		yield 'Missing statement field' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[3] => [ [ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ] ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_STATEMENT_MISSING_FIELD,
-				'Mandatory field missing in the patched statement: value',
-				[ UseCaseError::CONTEXT_PATH => 'value' ]
-			),
+			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ] ] ] ],
+			UseCaseError::newMissingFieldInPatchResult( "/statements/$propertyId/0", 'value' ),
 		];
 
 		yield 'Property id mismatch' =>

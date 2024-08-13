@@ -624,8 +624,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-statement-missing-field', { path: 'property' } );
-			assert.strictEqual( response.body.message, 'Mandatory field missing in the patched statement: property' );
+			const context = { path: `/statements/${predicatePropertyId}/0`, field: 'property' };
+			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
 		it( 'invalid statement field', async () => {
@@ -770,8 +770,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-missing-title', { site_id: siteId } );
-			assert.include( response.body.message, siteId );
+			const context = { path: `/sitelinks/${siteId}`, field: 'title' };
+			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
 		it( 'empty title', async () => {

@@ -122,15 +122,6 @@
 			}
 		}
 	},
-	"PatchedStatementMissingFieldExample": {
-		"value": {
-			"code": "patched-statement-missing-field",
-			"message": "Mandatory field missing in the patched statement: {field}",
-			"context": {
-				"path": "{field}"
-			}
-		}
-	},
 	"PatchedStatementInvalidFieldExample": {
 		"value": {
 			"code": "patched-statement-invalid-field",
@@ -214,15 +205,6 @@
 		"value": {
 			"code": "patched-invalid-sitelink-type'",
 			"message": "Not a valid sitelink type in patched sitelinks",
-			"context": {
-				"site_id": "{site_id}"
-			}
-		}
-	},
-	"PatchedSitelinkTitleMissingExample": {
-		"value": {
-			"code": "patched-sitelink-missing-title",
-			"message": "No sitelink title provided for site {site_id} in patched sitelinks",
 			"context": {
 				"site_id": "{site_id}"
 			}
@@ -369,13 +351,11 @@
 			"message": "Cannot change the datatype of the existing property"
 		}
 	},
-	"PatchedPropertyMissingFieldExample": {
+	"PatchResultMissingFieldExample": {
 		"value": {
-			"code": "patched-property-missing-field",
-			"message": "Mandatory field missing in the patched property: '{field}'",
-			"context": {
-				"path": "{field}"
-			}
+			"code": "patch-result-missing-field",
+			"message": "Required field missing in patch result",
+			"context": { "path": "{json_pointer_to_parent}", "field": "{missing_field}" }
 		}
 	},
 	"PatchedPropertyInvalidFieldExample": {

@@ -27,6 +27,7 @@ class UseCaseError extends UseCaseException {
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const MISSING_FIELD = 'missing-field';
 	public const PATCH_RESULT_INVALID_KEY = 'patch-result-invalid-key';
+	public const PATCH_RESULT_MISSING_FIELD = 'patch-result-missing-field';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
@@ -46,18 +47,15 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE =
 		'patched-property-invalid-operation-change-property-datatype';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
-	public const PATCHED_PROPERTY_MISSING_FIELD = 'patched-property-missing-field';
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCHED_SITELINK_INVALID_BADGE = 'patched-sitelink-invalid-badge';
 	public const PATCHED_SITELINK_INVALID_TITLE = 'patched-sitelink-invalid-title';
 	public const PATCHED_SITELINK_ITEM_NOT_A_BADGE = 'patched-sitelink-item-not-a-badge';
-	public const PATCHED_SITELINK_MISSING_TITLE = 'patched-sitelink-missing-title';
 	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
 	public const PATCHED_SITELINK_TITLE_EMPTY = 'patched-sitelink-title-empty';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
-	public const PATCHED_STATEMENT_MISSING_FIELD = 'patched-statement-missing-field';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
@@ -137,12 +135,11 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_PROPERTY_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
-		self::PATCHED_PROPERTY_MISSING_FIELD => [ self::CONTEXT_PATH ],
+		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCHED_SITELINK_INVALID_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
 		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_ITEM_NOT_A_BADGE => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGE ],
-		self::PATCHED_SITELINK_MISSING_TITLE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_TITLE_EMPTY => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_URL_NOT_MODIFIABLE => [ self::CONTEXT_SITE_ID ],
@@ -152,7 +149,6 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_STATEMENT_PROPERTY_ID,
 		],
 		self::PATCHED_STATEMENT_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
-		self::PATCHED_STATEMENT_MISSING_FIELD => [ self::CONTEXT_PATH ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::CONTEXT_STATEMENT_PROPERTY_ID ],
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],
@@ -215,6 +211,14 @@ class UseCaseError extends UseCaseException {
 		return new self(
 			self::MISSING_FIELD,
 			'Required field missing',
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_FIELD => $field ]
+		);
+	}
+
+	public static function newMissingFieldInPatchResult( string $path, string $field ): self {
+		return new self(
+			self::PATCH_RESULT_MISSING_FIELD,
+			'Required field missing in patch result',
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_FIELD => $field ]
 		);
 	}

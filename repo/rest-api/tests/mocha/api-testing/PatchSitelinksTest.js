@@ -251,8 +251,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-missing-title', { site_id: siteId } );
-			assert.include( response.body.message, siteId );
+			const context = { path: `/${siteId}`, field: 'title' };
+			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
 		it( 'empty title', async () => {
