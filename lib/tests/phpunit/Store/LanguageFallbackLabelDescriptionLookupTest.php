@@ -45,7 +45,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
 
 		/** @var TermFallback $term */
-		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q118' ) );
+		$term = $labelDescriptionLookup->getDescription( new ItemId( 'Q118' ) );
 
 		$this->assertInstanceOf( TermFallback::class, $term );
 		$this->assertEquals( 'fallbackterm', $term->getText() );
