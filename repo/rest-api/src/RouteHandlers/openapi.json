@@ -5317,9 +5317,6 @@
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
-              "patched-statement-invalid-field": {
-                "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
-              },
               "statement-id-not-modifiable": {
                 "$ref": "#/components/examples/StatementIdNotModifiableExample"
               },
@@ -5424,9 +5421,6 @@
               "patched-property-invalid-field": {
                 "$ref": "#/components/examples/PatchedPropertyInvalidFieldExample"
               },
-              "patched-statement-invalid-field": {
-                "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
-              },
               "statement-id-not-modifiable": {
                 "$ref": "#/components/examples/StatementIdNotModifiableExample"
               },
@@ -5465,6 +5459,9 @@
               },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+              },
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5810,8 +5807,8 @@
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
-              "patched-statement-invalid-field": {
-                "$ref": "#/components/examples/PatchedStatementInvalidFieldExample"
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               }
             }
           }
@@ -7233,16 +7230,6 @@
           "message": "Target not found on resource",
           "context": {
             "path": "{json_pointer_to_target_in_patch}"
-          }
-        }
-      },
-      "PatchedStatementInvalidFieldExample": {
-        "value": {
-          "code": "patched-statement-invalid-field",
-          "message": "Invalid input for '{field}' in the patched statement",
-          "context": {
-            "path": "{field}",
-            "value": "{value}"
           }
         }
       },

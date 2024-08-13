@@ -493,14 +493,9 @@ class PatchedItemValidator {
 						$context[StatementValidator::CONTEXT_FIELD]
 					);
 				case StatementValidator::CODE_INVALID_FIELD:
-					$field = $context[StatementValidator::CONTEXT_FIELD];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
-						"Invalid input for '{$field}' in the patched statement",
-						[
-							UseCaseError::CONTEXT_PATH => $field,
-							UseCaseError::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_VALUE],
-						]
+					throw UseCaseError::newPatchResultInvalidValue(
+						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_VALUE]
 					);
 			}
 		}

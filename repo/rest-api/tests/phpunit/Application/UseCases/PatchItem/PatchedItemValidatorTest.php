@@ -780,11 +780,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$invalidStatement = [ 'rank' => 'bad rank', 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'novalue' ] ];
 		yield 'invalid field in statement' => [
 			[ $propertyId => [ $invalidStatement ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
-				"Invalid input for 'rank' in the patched statement",
-				[ UseCaseError::CONTEXT_PATH => 'rank', UseCaseError::CONTEXT_VALUE => 'bad rank' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0/rank", 'bad rank' ),
 		];
 
 		$propertyIdKey = self::EXISTING_STRING_PROPERTY_IDS[2];
