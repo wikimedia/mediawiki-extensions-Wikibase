@@ -332,11 +332,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				AliasesValidator::CODE_INVALID_ALIAS_LIST,
 				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::INVALID_ALIAS_LIST,
-				'Not a valid alias list',
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newInvalidValue( '/item/aliases/en' ),
 		];
 
 		$tooLongAlias = str_repeat( 'a', self::MAX_LENGTH + 1 );

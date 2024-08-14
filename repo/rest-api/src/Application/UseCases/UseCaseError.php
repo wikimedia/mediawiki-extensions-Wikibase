@@ -14,7 +14,6 @@ class UseCaseError extends UseCaseException {
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
 	public const DATA_POLICY_VIOLATION = 'data-policy-violation';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
-	public const INVALID_ALIAS_LIST = 'invalid-alias-list';
 	public const INVALID_KEY = 'invalid-key';
 	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
@@ -104,7 +103,6 @@ class UseCaseError extends UseCaseException {
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
 		self::DESCRIPTION_NOT_DEFINED => [],
-		self::INVALID_ALIAS_LIST => [ self::CONTEXT_LANGUAGE ],
 		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],

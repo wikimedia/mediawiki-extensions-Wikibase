@@ -159,12 +159,7 @@ class ItemSerializationRequestValidatingDeserializer {
 				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
 				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
-				$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::INVALID_ALIAS_LIST,
-					'Not a valid alias list',
-					[ UseCaseError::CONTEXT_LANGUAGE => $language ]
-				);
+				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesValidator::CONTEXT_LANGUAGE]}" );
 			case AliasesValidator::CODE_INVALID_ALIAS:
 			case AliasesInLanguageValidator::CODE_INVALID:
 				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];

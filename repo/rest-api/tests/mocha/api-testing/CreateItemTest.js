@@ -386,8 +386,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			assertValidError( response, 400, 'invalid-alias-list', { language: 'en' } );
-			assert.strictEqual( response.body.message, 'Not a valid alias list' );
+			const path = '/item/aliases/en';
+			assertValidError( response, 400, 'invalid-value', { path } );
+			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
 		} );
 
 		it( 'alias too long', async () => {

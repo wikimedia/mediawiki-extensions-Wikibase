@@ -14,7 +14,6 @@ class ErrorResponseToHttpStatus {
 		// 400 errors:
 		UseCaseError::ALIAS_DUPLICATE => 400,
 		UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE => 400,
-		UseCaseError::INVALID_ALIAS_LIST => 400,
 		UseCaseError::INVALID_KEY => 400,
 		UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY => 400,
 		UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID => 400,
