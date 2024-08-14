@@ -5,7 +5,8 @@
 			"Azniv Stepanian",
 			"Kareyac",
 			"Rajemian",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Շահէն"
 		]
 	},
 	"tooltip-t-wikibase": "Յղում տուեալներու աղբիւրի համապատասխան գրառման",
@@ -15,6 +16,9 @@
 	"wikibase-editlinkstitle": "‎Խմբագրել միջլեզուական յղումները",
 	"wikibase-addlinkstitle": "Աւելցնել միջլեզուական յղումներ",
 	"wikibase-linkitem-addlinks": "Ստեղծել յղումը",
+	"wikibase-linkitem-title": "Կապել էջին հետ",
+	"wikibase-linkitem-linkpage": "Կապել էջին հետ",
+	"wikibase-linkitem-selectlink": "Ընտրել լեզուն եւ էջը որոնք կ՚ուզէք կապել հոս։",
 	"wikibase-linkitem-input-site": "Լեզու.",
 	"wikibase-linkitem-input-page": "Էջ.",
 	"wikibase-linkitem-confirmitem-button": "Հաստատել",

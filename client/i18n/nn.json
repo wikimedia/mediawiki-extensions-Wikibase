@@ -71,6 +71,7 @@
 	"wikibase-pageinfo-entity-usage-L": "Nokre merkelappar",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Merkelapp: $1",
 	"wikibase-pageinfo-entity-usage-D": "Nokre skildringar",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Skildring: $1",
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
 	"wikibase-pageinfo-entity-usage-C": "Nokre utsegner",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsegn: $1",

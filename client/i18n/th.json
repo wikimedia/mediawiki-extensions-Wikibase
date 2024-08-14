@@ -94,6 +94,7 @@
 	"wikibase-sitelinks-link-columnheading": "หน้าที่เชื่อมโยง",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|การเชื่อมโยง}}กับ{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "แจ้งเตือนฉันเมื่อมีคนเชื่อมโยงหน้าที่{{GENDER:|ฉันสร้าง}}กับรายการ {{WBREPONAME}}",
+	"notification-header-page-connection": "หน้า <strong>$3</strong> ได้ถูก{{GENDER:$2|เชื่อมต่อ}}ไปยัง{{PLURAL:$4|-1=รายการ {{WBREPONAME}}|รายการ {{WBREPONAME}} $4}} โดยที่สามารถรวบรวมข้อมูลที่เกี่ยวข้องกับหัวข้อได้",
 	"notification-link-text-view-item": "{{GENDER:$1|ดู}}สิ่งนี้",
 	"notification-subject-page-connection": "หน้าหนึ่งบน {{SITENAME}} ที่คุณ{{GENDER:$3|ได้สร้างไว้}} ได้{{GENDER:$2|เชื่อมโยง}}เข้ากับรายการของสิ่งหนึ่งใน {{WBREPONAME}}",
 	"wikibase-client-data-bridge-dialog-title": "แก้ไข $1",
