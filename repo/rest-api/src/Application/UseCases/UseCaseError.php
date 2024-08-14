@@ -54,7 +54,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_SITELINK_TITLE_EMPTY = 'patched-sitelink-title-empty';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
-	public const PATCHED_STATEMENT_INVALID_FIELD = 'patched-statement-invalid-field';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
@@ -146,7 +145,6 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
 			self::CONTEXT_STATEMENT_PROPERTY_ID,
 		],
-		self::PATCHED_STATEMENT_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::CONTEXT_STATEMENT_PROPERTY_ID ],
 		self::PERMISSION_DENIED => [],
 		self::PROPERTY_NOT_FOUND => [],

@@ -653,9 +653,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: 'rank', value: invalidRankValue };
-			assertValidError( response, 422, 'patched-statement-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'rank' in the patched statement" );
+			const context = { path: `/statements/${predicatePropertyId}/0/rank`, value: invalidRankValue };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'missing statement field', async () => {

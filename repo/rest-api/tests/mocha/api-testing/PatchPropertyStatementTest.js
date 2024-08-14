@@ -336,7 +336,7 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidError( response, 422, 'patched-statement-invalid-field', { path: 'content', value } );
+					assertValidError( response, 422, 'patch-result-invalid-value', { path: '/value/content', value } );
 				} );
 			} );
 

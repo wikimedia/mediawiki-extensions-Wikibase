@@ -79,13 +79,13 @@ class PatchedStatementValidatorTest extends TestCase {
 
 		yield 'from invalid patched statement (invalid field)' => [
 			new ValidationError( StatementValidator::CODE_INVALID_FIELD, [
-				StatementValidator::CONTEXT_FIELD => 'rank',
+				StatementValidator::CONTEXT_PATH => '/rank',
 				StatementValidator::CONTEXT_VALUE => 'not-a-valid-rank',
 			] ),
-			UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
-			"Invalid input for 'rank' in the patched statement",
+			UseCaseError::PATCH_RESULT_INVALID_VALUE,
+			'Invalid value in patch result',
 			[
-				UseCaseError::CONTEXT_PATH => 'rank',
+				UseCaseError::CONTEXT_PATH => '/rank',
 				UseCaseError::CONTEXT_VALUE => 'not-a-valid-rank',
 			],
 		];

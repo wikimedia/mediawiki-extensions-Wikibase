@@ -122,16 +122,6 @@
 			}
 		}
 	},
-	"PatchedStatementInvalidFieldExample": {
-		"value": {
-			"code": "patched-statement-invalid-field",
-			"message": "Invalid input for '{field}' in the patched statement",
-			"context": {
-				"path": "{field}",
-				"value": "{value}"
-			}
-		}
-	},
 	"ItemNotFoundExample": {
 		"value": {
 			"code": "item-not-found",

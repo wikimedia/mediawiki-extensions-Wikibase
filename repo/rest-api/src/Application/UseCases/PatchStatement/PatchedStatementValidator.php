@@ -31,17 +31,11 @@ class PatchedStatementValidator {
 						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_FIELD]
 					);
-
 				case StatementValidator::CODE_INVALID_FIELD:
-					throw new UseCaseError(
-						UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
-						"Invalid input for '{$context[StatementValidator::CONTEXT_FIELD]}' in the patched statement",
-						[
-							UseCaseError::CONTEXT_PATH => $context[StatementValidator::CONTEXT_FIELD],
-							UseCaseError::CONTEXT_VALUE => $context[StatementValidator::CONTEXT_VALUE],
-						]
+					throw UseCaseError::newPatchResultInvalidValue(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_VALUE]
 					);
-
 				default:
 					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
 			}

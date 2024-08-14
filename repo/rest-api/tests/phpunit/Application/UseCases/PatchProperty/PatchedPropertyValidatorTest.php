@@ -811,14 +811,11 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];
 		yield 'Invalid statement field' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[2] => [ [ 'rank' => 'bad rank' ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_STATEMENT_INVALID_FIELD,
-				"Invalid input for 'rank' in the patched statement",
-				[ UseCaseError::CONTEXT_PATH => 'rank', UseCaseError::CONTEXT_VALUE => 'bad rank' ]
-			),
+			[ $propertyId => [ [ 'rank' => 'bad rank' ] ] ],
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0/rank", 'bad rank' ),
 		];
 
 		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[3];
