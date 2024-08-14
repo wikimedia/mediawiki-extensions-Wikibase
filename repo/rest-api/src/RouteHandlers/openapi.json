@@ -5326,9 +5326,6 @@
               "patched-invalid-statement-group-type": {
                 "$ref": "#/components/examples/PatchedInvalidStatementGroupTypeExample"
               },
-              "patched-invalid-statement-type": {
-                "$ref": "#/components/examples/PatchedInvalidStatementTypeExample"
-              },
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
@@ -5429,9 +5426,6 @@
               },
               "patched-invalid-statement-group-type": {
                 "$ref": "#/components/examples/PatchedInvalidStatementGroupTypeExample"
-              },
-              "patched-invalid-statement-type": {
-                "$ref": "#/components/examples/PatchedInvalidStatementTypeExample"
               },
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
@@ -7500,15 +7494,6 @@
           "message": "Not a valid statement group",
           "context": {
             "path": "{property_id}"
-          }
-        }
-      },
-      "PatchedInvalidStatementTypeExample": {
-        "value": {
-          "code": "patched-invalid-statement-type",
-          "message": "Not a valid statement type",
-          "context": {
-            "path": "{property_id}/{index}"
           }
         }
       },

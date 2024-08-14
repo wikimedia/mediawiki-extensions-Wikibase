@@ -110,7 +110,10 @@ class StatementsValidatorTest extends TestCase {
 			[ 'P123' => $invalidStatementGroup ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
-				[ StatementsValidator::CONTEXT_PATH => '/P123' ]
+				[
+					StatementsValidator::CONTEXT_PATH => '/P123',
+					StatementsValidator::CONTEXT_VALUE => $invalidStatementGroup,
+				]
 			),
 		];
 
@@ -119,7 +122,10 @@ class StatementsValidatorTest extends TestCase {
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
-				[ StatementsValidator::CONTEXT_PATH => '/P123/0' ]
+				[
+					StatementsValidator::CONTEXT_PATH => '/P123/0',
+					StatementsValidator::CONTEXT_VALUE => $invalidStatement,
+				]
 			),
 		];
 
@@ -128,7 +134,11 @@ class StatementsValidatorTest extends TestCase {
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementValidator::CODE_INVALID_FIELD_TYPE,
-				[ StatementValidator::CONTEXT_FIELD => '/P123/0' ]
+				[
+					StatementValidator::CONTEXT_PATH => '/P123/0',
+					StatementValidator::CONTEXT_VALUE => $invalidStatement,
+					StatementValidator::CONTEXT_FIELD => '/P123/0',
+				]
 			),
 		];
 

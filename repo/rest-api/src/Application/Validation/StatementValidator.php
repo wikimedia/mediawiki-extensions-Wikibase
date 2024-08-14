@@ -50,7 +50,11 @@ class StatementValidator {
 		} catch ( InvalidFieldTypeException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_FIELD_TYPE,
-				[ self::CONTEXT_FIELD => $e->getField() ]
+				[
+					self::CONTEXT_PATH => $e->getPath(),
+					self::CONTEXT_VALUE => $e->getValue(),
+					self::CONTEXT_FIELD => $e->getField(),
+				]
 			);
 		}
 

@@ -629,8 +629,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-invalid-statement-type', { path: `${predicatePropertyId}/0` } );
-			assert.strictEqual( response.body.message, 'Not a valid statement type' );
+			const context = { path: `/statements/${predicatePropertyId}/0`, value: invalidStatement };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid statements type', async () => {

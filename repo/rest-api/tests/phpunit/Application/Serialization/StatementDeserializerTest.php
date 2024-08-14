@@ -141,12 +141,13 @@ class StatementDeserializerTest extends TestCase {
 	}
 
 	public static function invalidSerializationProvider(): Generator {
+		$serialization = [
+			[ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
+			[ 'type' => 'somevalue' ],
+		];
 		yield 'statement is not associative array' => [
-			new InvalidFieldTypeException( '/statements/P789', '/statements/P789' ),
-			[
-				[ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ],
-				[ 'type' => 'somevalue' ],
-			],
+			new InvalidFieldTypeException( '/statements/P789', '/statements/P789', $serialization ),
+			$serialization,
 			'/statements/P789',
 		];
 
