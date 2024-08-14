@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Status\Status;
+use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use RuntimeException;
@@ -30,6 +31,8 @@ use WikiPage;
  * @group medium
  */
 class EditEntityActionTest extends ActionTestCase {
+
+	use TempUserTestTrait;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -1189,6 +1192,52 @@ class EditEntityActionTest extends ActionTestCase {
 			$this->assertMatchesRegularExpression( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 		}
 
+		self::resetTestItem( $handle );
+	}
+
+	public function testTempUserCreated(): void {
+		$this->enableAutoCreateTempUser();
+		$actualReturnTo = null;
+		$this->setTemporaryHook( 'TempUserCreatedRedirect', function (
+			$session,
+			$user,
+			$returnTo,
+			$returnToQuery,
+			$returnToAnchor,
+			&$redirectUrl
+		) use ( &$actualReturnTo ) {
+			$actualReturnTo = $returnTo;
+			$this->assertSame( '', $returnToQuery );
+			$this->assertSame( '', $returnToAnchor );
+			$redirectUrl = 'https://wiki.example/';
+		} );
+
+		$handle = 'London';
+		self::resetTestItem( $handle );
+
+		$page = $this->getTestItemPage( $handle );
+
+		$originalUser = self::$user;
+		$this->setUser( $this->getServiceContainer()->getUserFactory()->newAnonymous() );
+
+		$params = [
+			'wpEditToken' => self::$user->getEditToken(),
+			'wpSave' => 1,
+			'undo' => $page->getLatest(),
+		];
+		$out = $this->callAction( 'submit', $page, $params, true );
+
+		$page = $this->getTestItemPage( $handle );
+		$user = $this->getServiceContainer()->getRevisionLookup()
+			->getRevisionById( $page->getLatest() )
+			->getUser();
+		$this->assertTrue( $user->isRegistered() );
+		$userIdentityUtils = $this->getServiceContainer()->getUserIdentityUtils();
+		$this->assertTrue( $userIdentityUtils->isTemp( $user ) );
+		$this->assertSame( 'https://wiki.example/', $out->getRedirect() );
+		$this->assertSame( $page->getTitle()->getPrefixedDBkey(), $actualReturnTo );
+
+		$this->setUser( $originalUser );
 		self::resetTestItem( $handle );
 	}
 

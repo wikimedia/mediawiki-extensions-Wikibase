@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Actions;
 
 use Article;
 use LogicException;
+use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
@@ -15,12 +16,14 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\TempUser\TempUserCreator;
 use MediaWiki\Watchlist\WatchlistManager;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\SummaryFormatter;
+use Wikimedia\Assert\Assert;
 
 /**
  * Handles the submit action for Wikibase entities.
@@ -43,6 +46,7 @@ class SubmitEntityAction extends EditEntityAction {
 		'services' => [
 			'PermissionManager',
 			'RevisionLookup',
+			'TempUserCreator',
 			'UserOptionsLookup',
 			'WatchlistManager',
 			'WikiPageFactory',
@@ -53,6 +57,7 @@ class SubmitEntityAction extends EditEntityAction {
 		],
 	];
 
+	private TempUserCreator $tempUserCreator;
 	private UserOptionsLookup $userOptionsLookup;
 	private WatchlistManager $watchlistManager;
 	private WikiPageFactory $wikiPageFactory;
@@ -63,6 +68,7 @@ class SubmitEntityAction extends EditEntityAction {
 		IContextSource $context,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
+		TempUserCreator $tempUserCreator,
 		UserOptionsLookup $userOptionsLookup,
 		WatchlistManager $watchlistManager,
 		WikiPageFactory $wikiPageFactory,
@@ -81,6 +87,7 @@ class SubmitEntityAction extends EditEntityAction {
 			$summaryFormatter
 		);
 
+		$this->tempUserCreator = $tempUserCreator;
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->watchlistManager = $watchlistManager;
 		$this->wikiPageFactory = $wikiPageFactory;
@@ -164,7 +171,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 
 		if ( $patchedContent->getValue()->equals( $latestContent ) ) {
-			$status = Status::newGood();
+			$status = SubmitEntityStatus::newEdit( null, $this->getContext() );
 			$status->warning( 'wikibase-empty-undo' );
 		} else {
 			$summary = $request->getText( 'wpSummary' );
@@ -189,7 +196,7 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		if ( $status->isOK() ) {
-			$this->getOutput()->redirect( $title->getFullURL() );
+			$this->redirectToEntityPage( $status );
 		} else {
 			$this->showUndoErrorPage( $status );
 		}
@@ -236,21 +243,25 @@ class SubmitEntityAction extends EditEntityAction {
 		int $undidRevId,
 		int $originalRevId,
 		string $editToken
-	): Status {
+	): SubmitEntityStatus {
 		$status = $this->getEditTokenStatus( $editToken );
+		if ( !$status->isOK() ) {
+			return SubmitEntityStatus::wrap( $status );
+		}
+
+		$status = $this->getTempUserStatus();
+		if ( !$status->isOK() ) {
+			return $status;
+		}
+
+		$status->merge( $this->permissionManager->getPermissionStatus(
+			'edit', $this->getUser(), $title, PermissionManager::RIGOR_SECURE ) );
 
 		if ( !$status->isOK() ) {
 			return $status;
 		}
 
-		$status = $this->permissionManager->getPermissionStatus(
-			'edit', $this->getUser(), $title, PermissionManager::RIGOR_SECURE );
-
-		if ( !$status->isOK() ) {
-			return Status::wrap( $status );
-		}
-
-		$status = $this->editFilterHookRunner->run( $content, $this->getContext(), $summary );
+		$status->merge( $this->editFilterHookRunner->run( $content, $status->getContext(), $summary ) );
 
 		if ( !$status->isOK() ) {
 			return $status;
@@ -260,15 +271,15 @@ class SubmitEntityAction extends EditEntityAction {
 		$page = $this->wikiPageFactory->newFromTitle( $title );
 
 		// NOTE: Constraint checks are performed automatically via EntityHandler::validateSave.
-		$status = $page->doUserEditContent(
+		$status->merge( $page->doUserEditContent(
 			$content,
-			$this->getUser(),
+			$status->getSavedTempUser() ?? $this->getUser(),
 			$summary,
 			/* flags */ 0,
 			$originalRevId ?: false,
 			/* tags */ [],
 			$undidRevId
-		);
+		) );
 
 		if ( !$status->isOK() ) {
 			return $status;
@@ -291,6 +302,21 @@ class SubmitEntityAction extends EditEntityAction {
 		return $status;
 	}
 
+	private function getTempUserStatus(): SubmitEntityStatus {
+		if ( $this->tempUserCreator->shouldAutoCreate( $this->getUser(), 'edit' ) ) {
+			$status = $this->tempUserCreator->create( null, $this->getRequest() );
+			if ( !$status->isOK() ) {
+				return SubmitEntityStatus::wrap( $status );
+			}
+			$user = $status->getUser();
+			$context = new DerivativeContext( $this->getContext() );
+			$context->setUser( $user );
+			return SubmitEntityStatus::newEdit( $user, $context );
+		} else {
+			return SubmitEntityStatus::newEdit( null, $this->getContext() );
+		}
+	}
+
 	/**
 	 * Update watchlist.
 	 */
@@ -303,6 +329,33 @@ class SubmitEntityAction extends EditEntityAction {
 		) {
 			$this->watchlistManager->addWatchIgnoringRights( $user, $title );
 		}
+	}
+
+	/**
+	 * Redirect to the page of the entity that was successfully edited.
+	 *
+	 * @param SubmitEntityStatus $status A status as returned by {@link self::attemptSave()}.
+	 * The status must be {@link StatusValue::isOK() OK}.
+	 */
+	private function redirectToEntityPage( SubmitEntityStatus $status ): void {
+		Assert::parameter( $status->isOK(), '$status', 'must be OK' );
+		$title = $this->getTitle();
+		$savedTempUser = $status->getSavedTempUser();
+		$redirectUrl = '';
+		if ( $savedTempUser !== null ) {
+			$this->getHookRunner()->onTempUserCreatedRedirect(
+				$this->getRequest()->getSession(),
+				$savedTempUser,
+				$title->getPrefixedDBkey(),
+				'',
+				'',
+				$redirectUrl
+			);
+		}
+		if ( !$redirectUrl ) {
+			$redirectUrl = $title->getFullURL();
+		}
+		$this->getOutput()->redirect( $redirectUrl );
 	}
 
 }
