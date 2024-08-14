@@ -207,11 +207,7 @@ class PatchedItemValidatorTest extends TestCase {
 				'type' => 'item',
 				'labels' => 'invalid-labels',
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'labels' in the patched item",
-				[ UseCaseError::CONTEXT_PATH => 'labels', UseCaseError::CONTEXT_VALUE => 'invalid-labels' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels', 'invalid-labels' ),
 		];
 
 		yield "Illegal modification 'id' field" => [
@@ -357,14 +353,7 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'invalid labels' => [
 			$mockSyntaxValidator,
 			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'labels' in the patched item",
-				[
-					UseCaseError::CONTEXT_PATH => 'labels',
-					UseCaseError::CONTEXT_VALUE => $invalidLabels,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels', $invalidLabels ),
 			[ 'labels' => $invalidLabels ],
 		];
 		yield 'empty label' => [
@@ -490,14 +479,7 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'invalid descriptions' => [
 			$mockSyntaxValidator,
 			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'descriptions' in the patched item",
-				[
-					UseCaseError::CONTEXT_PATH => 'descriptions',
-					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/descriptions', $invalidDescriptions ),
 			[ 'descriptions' => $invalidDescriptions ],
 		];
 
@@ -719,14 +701,7 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'aliases is not an associative array' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'sequential array, not an associative array' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'aliases' in the patched item",
-				[
-					UseCaseError::CONTEXT_PATH => 'aliases',
-					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an associative array' ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'sequential array, not an associative array' ] ),
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';
@@ -766,14 +741,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		yield 'statements not an associative array' => [
 			[ 1, 2, 3 ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'statements' in the patched item",
-				[
-					UseCaseError::CONTEXT_PATH => 'statements',
-					UseCaseError::CONTEXT_VALUE => [ 1, 2, 3 ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/statements', [ 1, 2, 3 ] ),
 		];
 
 		yield 'invalid statement group type' => [
@@ -881,14 +849,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$invalidSitelinks = [ 'invalid-sitelinks' ];
 		yield 'sitelinks not associative' => [
 			$invalidSitelinks,
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_FIELD,
-				"Invalid input for 'sitelinks' in the patched item",
-				[
-					UseCaseError::CONTEXT_PATH => 'sitelinks',
-					UseCaseError::CONTEXT_VALUE => $invalidSitelinks,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/sitelinks', $invalidSitelinks ),
 		];
 
 		yield 'invalid site id' => [

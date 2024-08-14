@@ -1163,7 +1163,7 @@
 					"patched-item-invalid-operation-change-item-id": {
 						"$ref": "./examples.json#/PatchedItemInvalidOperationChangeItemIdExample"
 					},
-					"patched-item-invalid-field": { "$ref": "./examples.json#/PatchedItemInvalidFieldExample" },
+					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patched-statement-invalid-field": { "$ref": "./examples.json#/PatchedStatementInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {

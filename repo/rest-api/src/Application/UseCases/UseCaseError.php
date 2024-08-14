@@ -26,6 +26,7 @@ class UseCaseError extends UseCaseException {
 	public const LABEL_NOT_DEFINED = 'label-not-defined';
 	public const MISSING_FIELD = 'missing-field';
 	public const PATCH_RESULT_INVALID_KEY = 'patch-result-invalid-key';
+	public const PATCH_RESULT_INVALID_VALUE = 'patch-result-invalid-value';
 	public const PATCH_RESULT_MISSING_FIELD = 'patch-result-missing-field';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
@@ -38,7 +39,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
 	public const PATCHED_INVALID_STATEMENT_GROUP_TYPE = 'patched-invalid-statement-group-type';
 	public const PATCHED_INVALID_STATEMENT_TYPE = 'patched-invalid-statement-type';
-	public const PATCHED_ITEM_INVALID_FIELD = 'patched-item-invalid-field';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
@@ -116,6 +116,7 @@ class UseCaseError extends UseCaseException {
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_RESULT_INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
+		self::PATCH_RESULT_INVALID_VALUE => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
@@ -126,7 +127,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_INVALID_STATEMENT_GROUP_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_INVALID_STATEMENT_TYPE => [ self::CONTEXT_PATH ],
-		self::PATCHED_ITEM_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
@@ -203,6 +203,19 @@ class UseCaseError extends UseCaseException {
 
 	public static function newInvalidValue( string $path ): self {
 		return new self( self::INVALID_VALUE, "Invalid value at '$path'", [ self::CONTEXT_PATH => $path ] );
+	}
+
+	/**
+	 * @param string $path
+	 * @param mixed $value
+	 * @return self
+	 */
+	public static function newPatchResultInvalidValue( string $path, $value ): self {
+		return new self(
+			self::PATCH_RESULT_INVALID_VALUE,
+			'Invalid value in patch result',
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_VALUE => $value ]
+		);
 	}
 
 	public static function newMissingField( string $path, string $field ): self {
