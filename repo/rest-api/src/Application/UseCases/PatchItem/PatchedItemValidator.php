@@ -409,14 +409,8 @@ class PatchedItemValidator {
 				);
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_ITEM_NOT_A_BADGE,
-					"Incorrect patched sitelinks. Item '$badge' used for site '{$siteId()}' is not allowed as a badge",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_BADGE => $badge,
-					]
-				);
+				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $sitelinksSerialization[$siteId()]['badges'] );
+				throw UseCaseError::newPatchResultInvalidValue( "/sitelinks/{$siteId()}/badges/$badgeIndex", $badge );
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
 				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 				throw UseCaseError::newDataPolicyViolation(

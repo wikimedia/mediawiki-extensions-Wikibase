@@ -5273,11 +5273,11 @@
               "patched-sitelink-invalid-badge": {
                 "$ref": "#/components/examples/PatchedSitelinkBadgeInvalidExample"
               },
-              "patched-sitelink-item-not-a-badge": {
-                "$ref": "#/components/examples/PatchedSitelinkItemBadgeNotBadgeExample"
-              },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
+              },
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
@@ -5367,9 +5367,6 @@
               },
               "patched-sitelink-invalid-badge": {
                 "$ref": "#/components/examples/PatchedSitelinkBadgeInvalidExample"
-              },
-              "patched-sitelink-item-not-a-badge": {
-                "$ref": "#/components/examples/PatchedSitelinkItemBadgeNotBadgeExample"
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
@@ -7344,16 +7341,6 @@
         "value": {
           "code": "patched-sitelink-invalid-badge",
           "message": "Incorrect patched sitelinks. Badge value {badge} for site {site_id} is not an item ID",
-          "context": {
-            "site_id": "{site_id}",
-            "badge": "{badge}"
-          }
-        }
-      },
-      "PatchedSitelinkItemBadgeNotBadgeExample": {
-        "value": {
-          "code": "patched-sitelink-item-not-a-badge",
-          "message": "Incorrect patched sitelinks. Item {badge} used for site {site_id} is not allowed as a badge",
           "context": {
             "site_id": "{site_id}",
             "badge": "{badge}"

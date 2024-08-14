@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks;
 
 use LogicException;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
@@ -88,14 +89,8 @@ class PatchedSitelinksValidator {
 
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_ITEM_NOT_A_BADGE,
-					"Incorrect patched sitelinks. Item '$badge' used for site '{$siteId()}' is not allowed as a badge",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_BADGE => $badge,
-					]
-				);
+				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $serialization[$siteId()]['badges'] );
+				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges/$badgeIndex", $badge );
 
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
 				$title = $serialization[$siteId()]['title'];

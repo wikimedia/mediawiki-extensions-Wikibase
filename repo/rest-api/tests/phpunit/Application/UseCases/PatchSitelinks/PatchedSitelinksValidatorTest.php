@@ -165,17 +165,10 @@ class PatchedSitelinksValidatorTest extends TestCase {
 			),
 		];
 
-		$itemIdNotBadge = new ItemId( 'Q99' );
+		$itemIdNotBadge = 'Q99';
 		yield 'item is not a badge' => [
-			[ $validSiteId => [ 'title' => 'test_title', 'badges' => [ "$itemIdNotBadge" ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_ITEM_NOT_A_BADGE,
-				"Incorrect patched sitelinks. Item 'Q99' used for site '$validSiteId' is not allowed as a badge",
-				[
-					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
-					UseCaseError::CONTEXT_BADGE => 'Q99',
-				]
-			),
+			[ $validSiteId => [ 'title' => 'test_title', 'badges' => [ $itemIdNotBadge ] ] ],
+			UseCaseError::newPatchResultInvalidValue( "/$validSiteId/badges/0", $itemIdNotBadge ),
 		];
 	}
 
