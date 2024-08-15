@@ -229,16 +229,6 @@
 			}
 		}
 	},
-	"PatchedSitelinkBadgeInvalidExample": {
-		"value": {
-			"code": "patched-sitelink-invalid-badge",
-			"message": "Incorrect patched sitelinks. Badge value {badge} for site {site_id} is not an item ID",
-			"context": {
-				"site_id": "{site_id}",
-				"badge": "{badge}"
-			}
-		}
-	},
 	"PatchedSiteLinkBadgeFormatExample": {
 		"value": {
 			"code": "patched-sitelink-badges-format",

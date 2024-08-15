@@ -823,9 +823,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-badge', { site_id: siteId, badge } );
-			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, badge );
+			const context = { path: `/sitelinks/${siteId}/badges/0`, value: badge };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'item not a badge', async () => {

@@ -5270,9 +5270,6 @@
               "patched-sitelink-title-does-not-exist": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
               },
-              "patched-sitelink-invalid-badge": {
-                "$ref": "#/components/examples/PatchedSitelinkBadgeInvalidExample"
-              },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
               },
@@ -5364,9 +5361,6 @@
               },
               "patched-sitelink-title-does-not-exist": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
-              },
-              "patched-sitelink-invalid-badge": {
-                "$ref": "#/components/examples/PatchedSitelinkBadgeInvalidExample"
               },
               "patched-sitelink-badges-format": {
                 "$ref": "#/components/examples/PatchedSiteLinkBadgeFormatExample"
@@ -7334,16 +7328,6 @@
           "context": {
             "site_id": "{site_id}",
             "title": "{title}"
-          }
-        }
-      },
-      "PatchedSitelinkBadgeInvalidExample": {
-        "value": {
-          "code": "patched-sitelink-invalid-badge",
-          "message": "Incorrect patched sitelinks. Badge value {badge} for site {site_id} is not an item ID",
-          "context": {
-            "site_id": "{site_id}",
-            "badge": "{badge}"
           }
         }
       },

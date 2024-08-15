@@ -895,14 +895,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$invalidBadge = 'not-an-item-id';
 		yield 'invalid badge' => [
 			[ $validSiteId => [ 'title' => 'test_title', 'badges' => [ $invalidBadge ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_INVALID_BADGE,
-				"Incorrect patched sitelinks. Badge value '$invalidBadge' for site '$validSiteId' is not an item ID",
-				[
-					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
-					UseCaseError::CONTEXT_BADGE => $invalidBadge,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( "/sitelinks/$validSiteId/badges/0", $invalidBadge ),
 		];
 
 		$itemIdNotBadge = 'Q99';

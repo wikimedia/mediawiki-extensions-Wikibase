@@ -398,15 +398,6 @@ class PatchedItemValidator {
 					]
 				);
 			case SitelinkValidator::CODE_INVALID_BADGE:
-				$badge = $context[ SitelinkValidator::CONTEXT_BADGE ];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_INVALID_BADGE,
-					"Incorrect patched sitelinks. Badge value '$badge' for site '{$siteId()}' is not an item ID",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_BADGE => $badge,
-					]
-				);
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
 				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
 				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $sitelinksSerialization[$siteId()]['badges'] );
