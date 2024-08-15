@@ -37,7 +37,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_DESCRIPTION_EMPTY = 'patched-description-empty';
 	public const PATCHED_DESCRIPTION_INVALID = 'patched-description-invalid';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
-	public const PATCHED_INVALID_STATEMENT_GROUP_TYPE = 'patched-invalid-statement-group-type';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
 	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_LABEL_INVALID = 'patched-label-invalid';
@@ -122,7 +121,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
-		self::PATCHED_INVALID_STATEMENT_GROUP_TYPE => [ self::CONTEXT_PATH ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
 		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_LABEL_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],

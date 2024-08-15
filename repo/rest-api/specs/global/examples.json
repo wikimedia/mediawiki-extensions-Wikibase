@@ -367,15 +367,6 @@
 			}
 		}
 	},
-	"PatchedInvalidStatementGroupTypeExample": {
-		"value": {
-			"code": "patched-invalid-statement-group-type",
-			"message": "Not a valid statement group",
-			"context": {
-				"path": "{property_id}"
-			}
-		}
-	},
 	"PatchedStatementGroupPropertyIdMismatchExample": {
 		"value": {
 			"code": "patched-statement-group-property-id-mismatch",

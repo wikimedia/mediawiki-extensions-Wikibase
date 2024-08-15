@@ -773,22 +773,20 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[ 1, 2, 3 ],
 			new UseCaseError(
 				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for 'statements' in the patched property",
+				"Invalid input for '/statements' in the patched property",
 				[
-					UseCaseError::CONTEXT_PATH => 'statements',
+					UseCaseError::CONTEXT_PATH => '/statements',
 					UseCaseError::CONTEXT_VALUE => [ 1, 2, 3 ],
 				]
 			),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[0];
+		$invalidStatementGroup = [ 'property' => [ 'id' => $propertyId ] ];
 		yield 'Invalid statement group type' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[0] => [ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
-				'Not a valid statement group',
-				[ UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[0] ]
-			),
+			[ $propertyId => $invalidStatementGroup ],
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId", $invalidStatementGroup ),
 		];
 
 		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
