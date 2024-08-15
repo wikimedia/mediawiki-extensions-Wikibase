@@ -791,24 +791,17 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		yield 'Invalid statement type: statement not an array' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ 'not a valid statement' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
-				'Not a valid statement type',
-				[ UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[1] . '/0' ]
-			),
+			[ $propertyId => [ 'not a valid statement' ] ],
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0", 'not a valid statement' ),
 		];
 
 		yield 'Invalid statement type: statement not an associative array' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ [ 'not a valid statement' ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_INVALID_STATEMENT_TYPE,
-				'Not a valid statement type',
-				[ UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[1] . '/0' ]
-			),
+			[ $propertyId => [ [ 'not a valid statement' ] ] ],
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0", [ 'not a valid statement' ] ),
 		];
 
 		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];

@@ -50,9 +50,10 @@ class StatementsValidator {
 		foreach ( $serialization as $propertyId => $statementGroup ) {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop - $statementGroup is not guaranteed to be an array
 			if ( !is_array( $statementGroup ) || !array_is_list( $statementGroup ) ) {
-				return new ValidationError( self::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL, [
-					self::CONTEXT_PATH => "$basePath/$propertyId",
-				] );
+				return new ValidationError(
+					self::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
+					[ self::CONTEXT_PATH => "$basePath/$propertyId", self::CONTEXT_VALUE => $statementGroup ]
+				);
 			}
 			foreach ( $statementGroup as $groupIndex => $statement ) {
 				if ( isset( $statement['id'] ) && is_string( $statement['id'] ) &&
@@ -62,9 +63,10 @@ class StatementsValidator {
 				}
 
 				if ( !is_array( $statement ) ) {
-					return new ValidationError( self::CODE_STATEMENT_NOT_ARRAY, [
-						self::CONTEXT_PATH => "$basePath/$propertyId/$groupIndex",
-					] );
+					return new ValidationError(
+						self::CODE_STATEMENT_NOT_ARRAY,
+						[ self::CONTEXT_PATH => "$basePath/$propertyId/$groupIndex", self::CONTEXT_VALUE => $statement ]
+					);
 				}
 
 				$statementPropertyId = $statement['property']['id'] ?? null;
