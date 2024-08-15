@@ -42,11 +42,11 @@
 		"swaggest/json-diff": "^3.11.0"
 	},
 	"require-dev": {
-		"mediawiki/mediawiki-codesniffer": "43.0.0",
+		"mediawiki/mediawiki-codesniffer": "44.0.0",
 		"mediawiki/mediawiki-phan-config": "0.14.0",
-		"mediawiki/minus-x": "1.1.1",
+		"mediawiki/minus-x": "1.1.3",
 		"php-parallel-lint/php-console-highlighter": "1.0.0",
-		"php-parallel-lint/php-parallel-lint": "1.3.2",
+		"php-parallel-lint/php-parallel-lint": "1.4.0",
 		"phpat/phpat": "^0.10.14",
 		"phpstan/phpstan": "^1.9",
 		"slevomat/coding-standard": "^6.4"
@@ -56,7 +56,7 @@
 	},
 	"scripts": {
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git --exclude lib/packages/*/*/vendor",
-		"phpcs": "phpcs -p -s",
+		"phpcs": "phpcs -p -s --cache",
 		"phpcs:rest-api": "phpcs -p -s --standard=./repo/rest-api/ruleset.xml repo/rest-api/",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
