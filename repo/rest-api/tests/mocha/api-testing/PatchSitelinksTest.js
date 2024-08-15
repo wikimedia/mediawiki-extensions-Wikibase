@@ -318,10 +318,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { site_id: siteId, badge: notBadgeItemId };
-			assertValidError( response, 422, 'patched-sitelink-item-not-a-badge', context );
-			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, notBadgeItemId );
+			const context = { path: `/${siteId}/badges/0`, value: notBadgeItemId };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'badges are not a list', async () => {
