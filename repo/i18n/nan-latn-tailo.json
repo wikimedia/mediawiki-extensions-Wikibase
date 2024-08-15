@@ -4,5 +4,9 @@
 			"SupaplexTW"
 		]
 	},
-	"wikibase-edit": "siu-kái"
+	"wikibase-edit": "siu-kái",
+	"wikibase-add": "ka-thiam",
+	"wikibase-label-empty": "Tshiam-tiâu iáu-buē tīng-gī",
+	"wikibase-description-empty": "Iáu-bē tīng-gī ê biâu-su̍t",
+	"wikibase-sitelinks-special": "Kî-tha ê tsām"
 }

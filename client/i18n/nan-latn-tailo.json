@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "Liân-kiat ia̍h",
 	"wikibase-linkitem-selectlink": "Tshiánn suán-ti̍k bāng-tsām kah lí siūnn-bueh liân-kiat ê ia̍h-bīn.",
 	"wikibase-linkitem-input-site": "Gú-giân:",
-	"wikibase-linkitem-input-page": "Ia̍h:"
+	"wikibase-linkitem-input-page": "Ia̍h:",
+	"wikibase-rc-hide-wikidata-hide": "Bih",
+	"wikibase-rc-hide-wikidata-show": "Hián-sī",
+	"wikibase-otherprojects": "Kî-tha tsuan-àn"
 }
