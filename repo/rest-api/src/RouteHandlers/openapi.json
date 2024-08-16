@@ -5261,9 +5261,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-sitelink-title-empty": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleEmptyExample"
-              },
               "patched-sitelink-invalid-title": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleInvalidExample"
               },
@@ -5346,9 +5343,6 @@
               },
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
-              },
-              "patched-sitelink-title-empty": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleEmptyExample"
               },
               "patched-sitelink-invalid-title": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleInvalidExample"
@@ -7285,15 +7279,6 @@
         "value": {
           "code": "patched-invalid-sitelink-type'",
           "message": "Not a valid sitelink type in patched sitelinks",
-          "context": {
-            "site_id": "{site_id}"
-          }
-        }
-      },
-      "PatchedSitelinkTitleEmptyExample": {
-        "value": {
-          "code": "patched-sitelink-title-empty",
-          "message": "Sitelink cannot be empty for site {site_id} in patched sitelinks",
           "context": {
             "site_id": "{site_id}"
           }

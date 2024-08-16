@@ -849,11 +849,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'empty title' => [
 			[ $validSiteId => [ 'title' => '' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_TITLE_EMPTY,
-				"Sitelink cannot be empty for site '$validSiteId' in patched sitelinks",
-				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-			),
+			UseCaseError::newPatchResultInvalidValue( "/sitelinks/$validSiteId/title", '' ),
 		];
 
 		$invalidTitle = 'invalid??%00';

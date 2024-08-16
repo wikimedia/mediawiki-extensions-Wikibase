@@ -47,7 +47,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_SITELINK_BADGES_FORMAT = 'patched-sitelink-badges-format';
 	public const PATCHED_SITELINK_INVALID_TITLE = 'patched-sitelink-invalid-title';
 	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
-	public const PATCHED_SITELINK_TITLE_EMPTY = 'patched-sitelink-title-empty';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
@@ -130,7 +129,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_SITELINK_BADGES_FORMAT => [ self::CONTEXT_SITE_ID, self::CONTEXT_BADGES ],
 		self::PATCHED_SITELINK_INVALID_TITLE => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
-		self::PATCHED_SITELINK_TITLE_EMPTY => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_SITELINK_URL_NOT_MODIFIABLE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
