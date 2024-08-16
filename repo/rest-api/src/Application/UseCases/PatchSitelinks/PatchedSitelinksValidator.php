@@ -67,14 +67,7 @@ class PatchedSitelinksValidator {
 				);
 
 			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_BADGES_FORMAT,
-					"Badges value for site '{$siteId()}' is not a list in patched sitelinks",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_BADGES => $serialization[$siteId()][ 'badges' ],
-					]
-				);
+				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges", $serialization[$siteId()][ 'badges' ] );
 
 			case SitelinkValidator::CODE_INVALID_BADGE:
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:

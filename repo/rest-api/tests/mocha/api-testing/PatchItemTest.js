@@ -852,9 +852,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { site_id: siteId, badges: badgesWithInvalidFormat };
-			assertValidError( response, 422, 'patched-sitelink-badges-format', context );
-			assert.include( response.body.message, siteId );
+			const context = { path: `/sitelinks/${siteId}/badges`, value: badgesWithInvalidFormat };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'sitelink conflict', async () => {

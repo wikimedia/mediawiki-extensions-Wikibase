@@ -229,16 +229,6 @@
 			}
 		}
 	},
-	"PatchedSiteLinkBadgeFormatExample": {
-		"value": {
-			"code": "patched-sitelink-badges-format",
-			"message": "Badges for site {site_id} is not a list in patched sitelinks",
-			"context": {
-				"site_id": "{site_id}",
-				"badge": "{badge}"
-			}
-		}
-	},
 	"SitelinkUrlNotModifiableExample": {
 		"value": {
 			"code": "url-not-modifiable",
