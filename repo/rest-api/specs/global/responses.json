@@ -1168,7 +1168,6 @@
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},
-					"patched-invalid-statement-group-type": { "$ref": "./examples.json#/PatchedInvalidStatementGroupTypeExample" },
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
@@ -1218,7 +1217,6 @@
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},
-					"patched-invalid-statement-group-type": { "$ref": "./examples.json#/PatchedInvalidStatementGroupTypeExample" },
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},

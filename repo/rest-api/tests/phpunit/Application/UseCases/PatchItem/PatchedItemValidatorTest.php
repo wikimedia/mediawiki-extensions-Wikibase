@@ -744,13 +744,10 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidValue( '/statements', [ 1, 2, 3 ] ),
 		];
 
+		$invalidStatementGroup = [ 'property' => [ 'id' => $propertyId ] ];
 		yield 'invalid statement group type' => [
-			[ $propertyId => [ 'property' => [ 'id' => $propertyId ] ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
-				'Not a valid statement group',
-				[ UseCaseError::CONTEXT_PATH => $propertyId ]
-			),
+			[ $propertyId => $invalidStatementGroup ],
+			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId", $invalidStatementGroup ),
 		];
 
 		yield 'invalid statement type: statement not an array' => [

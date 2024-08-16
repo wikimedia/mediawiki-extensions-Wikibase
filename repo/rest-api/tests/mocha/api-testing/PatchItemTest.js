@@ -600,8 +600,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-invalid-statement-group-type', { path: predicatePropertyId } );
-			assert.strictEqual( response.body.message, 'Not a valid statement group' );
+			const context = { path: `/statements/${predicatePropertyId}`, value: validStatement };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid statement type', async () => {

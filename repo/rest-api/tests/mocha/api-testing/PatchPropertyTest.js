@@ -614,8 +614,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-invalid-statement-group-type', { path: predicatePropertyId } );
-			assert.strictEqual( response.body.message, 'Not a valid statement group' );
+			const context = { path: `/statements/${predicatePropertyId}`, value: validStatement };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 
 		} );
 
@@ -641,9 +642,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: 'statements', value: invalidStatements };
+			const context = { path: '/statements', value: invalidStatements };
 			assertValidError( response, 422, 'patched-property-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'statements' in the patched property" );
+			assert.strictEqual( response.body.message, "Invalid input for '/statements' in the patched property" );
 		} );
 
 		it( 'invalid statement field', async () => {

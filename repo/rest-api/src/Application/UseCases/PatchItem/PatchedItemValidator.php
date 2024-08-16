@@ -443,19 +443,21 @@ class PatchedItemValidator {
 		$validationError = $this->statementsValidator->validateModifiedStatements(
 			$originalStatementsSerialization,
 			$originalItem->getStatements(),
-			$serialization['statements'] ?? []
+			$serialization['statements'] ?? [],
+			'/statements'
 		);
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-					throw UseCaseError::newPatchResultInvalidValue( '/statements', $context[StatementsValidator::CONTEXT_STATEMENTS] );
+					throw UseCaseError::newPatchResultInvalidValue(
+						$context[StatementsValidator::CONTEXT_PATH],
+						$context[StatementsValidator::CONTEXT_STATEMENTS]
+					);
 				case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
-					throw new UseCaseError(
-						UseCaseError::PATCHED_INVALID_STATEMENT_GROUP_TYPE,
-						'Not a valid statement group',
-						// TODO: the path will be converted into a proper JSON Pointer in a future task
-						[ UseCaseError::CONTEXT_PATH => substr( $context[StatementsValidator::CONTEXT_PATH], 1 ) ]
+					throw UseCaseError::newPatchResultInvalidValue(
+						$context[StatementsValidator::CONTEXT_PATH],
+						$context[StatementsValidator::CONTEXT_VALUE]
 					);
 				case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 					throw new UseCaseError(
@@ -469,22 +471,22 @@ class PatchedItemValidator {
 					);
 				case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/statements{$context[StatementsValidator::CONTEXT_PATH]}",
+						$context[StatementsValidator::CONTEXT_PATH],
 						$context[StatementsValidator::CONTEXT_VALUE]
 					);
 				case StatementValidator::CODE_INVALID_FIELD_TYPE:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_VALUE]
 					);
 				case StatementValidator::CODE_MISSING_FIELD:
 					throw UseCaseError::newMissingFieldInPatchResult(
-						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_FIELD]
 					);
 				case StatementValidator::CODE_INVALID_FIELD:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/statements{$context[StatementValidator::CONTEXT_PATH]}",
+						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_VALUE]
 					);
 			}
