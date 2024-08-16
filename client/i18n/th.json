@@ -76,6 +76,7 @@
 	"wikibase-entityusage-submit": "แสดงหน้า",
 	"wikibase-pageinfo-entity-id": "หมายเลขสารสนเทศใน {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ไม่มี",
+	"wikibase-pageinfo-description-central": "คำอธิบายส่วนกลาง",
 	"wikibase-pageinfo-entity-usage": "รายการสนเทศจาก{{WBREPONAME}}ที่ใช้ในหน้านี้",
 	"wikibase-pageinfo-entity-usage-S": "การเชื่อมโยงข้ามไซต์",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "ป้ายชื่อ: $1",
