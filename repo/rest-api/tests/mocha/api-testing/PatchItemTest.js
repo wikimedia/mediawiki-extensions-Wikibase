@@ -784,8 +784,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-title-empty', { site_id: siteId } );
-			assert.include( response.body.message, siteId );
+			const context = { path: `/sitelinks/${siteId}/title`, value: '' };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid title', async () => {

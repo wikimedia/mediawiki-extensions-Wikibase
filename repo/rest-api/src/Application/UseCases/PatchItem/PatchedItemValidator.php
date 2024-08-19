@@ -362,11 +362,7 @@ class PatchedItemValidator {
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw UseCaseError::newMissingFieldInPatchResult( "/sitelinks/{$siteId()}", 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_TITLE_EMPTY,
-					"Sitelink cannot be empty for site '{$siteId()}' in patched sitelinks",
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newPatchResultInvalidValue( "/sitelinks/{$siteId()}/title", '' );
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 				$title = $sitelinksSerialization[ $siteId() ][ 'title' ];
