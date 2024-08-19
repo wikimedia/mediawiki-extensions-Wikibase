@@ -10,11 +10,11 @@
 	"wikibase-entity-item": "شي",
 	"wikibase-entity-property": "خاصية",
 	"wikibase-entity-query": "استعلام",
-	"wikibase-edit": "تعديل",
+	"wikibase-edit": "عدل",
 	"wikibase-save": "إحفظ",
 	"wikibase-publish": "انشر",
 	"wikibase-cancel": "الغي",
-	"wikibase-add": "ضيف",
+	"wikibase-add": "خلي",
 	"wikibase-addqualifier": "حط تصفية",
 	"wikibase-addreference": "حط مرجع",
 	"wikibase-save-inprogress": "جاي يحفظ...",
@@ -31,7 +31,7 @@
 	"wikibase-entitytermsforlanguagelistview-aliases": "معروف همين بـ",
 	"wikibase-entitytermsforlanguagelistview-description": "وصف",
 	"wikibase-entitytermsforlanguagelistview-label": "تسمية",
-	"wikibase-entitytermsforlanguagelistview-language": "لغة",
+	"wikibase-entitytermsforlanguagelistview-language": "لغه",
 	"wikibase-entitytermsforlanguagelistview-more": "طلع اللغات المُدخلة كلَّها",
 	"wikibase-entitytermsforlanguagelistview-less": "لغات اقل",
 	"wikibase-label-empty": "ما حاط التسمية",
@@ -45,5 +45,5 @@
 	"wikibase-aliases-edit-label": "الاسامي المستعارة، مفصولة بـpipe:",
 	"wikibase-content-language-edit-label": "لغة:",
 	"wikibase-content-language-edit-not-recognized-language": "رمز اللغة المُستعمَل مو معروف.",
-	"wikibase-sitelinks-special": "مواقع غيرها"
+	"wikibase-sitelinks-special": "مواقع غيرهه"
 }
