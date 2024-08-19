@@ -286,10 +286,9 @@ class PatchedPropertyValidator {
 				case AliasesValidator::CODE_INVALID_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					$value = $context[AliasesValidator::CONTEXT_ALIAS];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-						"Patched value for '$language' is invalid",
-						[ UseCaseError::CONTEXT_PATH => $language, UseCaseError::CONTEXT_VALUE => $value ]
+					throw UseCaseError::newPatchResultInvalidValue(
+						"/aliases/$language",
+						$value
 					);
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
@@ -298,13 +297,9 @@ class PatchedPropertyValidator {
 					$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
 					throw UseCaseError::newValueTooLong( "/aliases/$language/$aliasIndex", $limit, true );
 				default:
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-						"Patched value for '{$context[AliasesInLanguageValidator::CONTEXT_LANGUAGE]}' is invalid",
-						[
-							UseCaseError::CONTEXT_PATH => $context[AliasesInLanguageValidator::CONTEXT_PATH],
-							UseCaseError::CONTEXT_VALUE => $context[AliasesInLanguageValidator::CONTEXT_VALUE],
-						]
+					throw UseCaseError::newPatchResultInvalidValue(
+						"/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}",
+						$context[AliasesInLanguageValidator::CONTEXT_VALUE]
 					);
 			}
 		}

@@ -33,7 +33,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_ALIAS_EMPTY = 'patched-alias-empty';
-	public const PATCHED_ALIASES_INVALID_FIELD = 'patched-aliases-invalid-field';
 	public const PATCHED_DESCRIPTION_EMPTY = 'patched-description-empty';
 	public const PATCHED_DESCRIPTION_INVALID = 'patched-description-invalid';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
@@ -115,7 +114,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_ALIAS_EMPTY => [ self::CONTEXT_LANGUAGE ],
-		self::PATCHED_ALIASES_INVALID_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCHED_DESCRIPTION_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_DESCRIPTION_INVALID => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],

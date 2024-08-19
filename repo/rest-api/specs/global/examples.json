@@ -367,16 +367,6 @@
 			}
 		}
 	},
-	"PatchedAliasesInvalidFieldExample": {
-		"value": {
-			"code": "patched-aliases-invalid-field",
-			"message": "Patched value for '{field}' is invalid",
-			"context": {
-				"path": "{path}",
-				"value": "{value}"
-			}
-		}
-	},
 	"PatchedDuplicateAliasExample": {
 		"value": {
 			"code": "patched-duplicate-alias",

@@ -92,38 +92,17 @@ class PatchedPropertyAliasesValidatorTest extends TestCase {
 		$invalidAlias = "tab\t tab\t tab";
 		yield 'alias contains invalid character' => [
 			[ 'en' => [ $invalidAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en/0',
-					UseCaseError::CONTEXT_VALUE => $invalidAlias,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en/0', $invalidAlias ),
 		];
 
 		yield 'aliases in language is not a list' => [
 			[ 'en' => 'not a list' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en',
-					UseCaseError::CONTEXT_VALUE => 'not a list',
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en', 'not a list' ),
 		];
 
 		yield 'aliases is not an object' => [
 			'not an object',
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for '' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => '',
-					UseCaseError::CONTEXT_VALUE => 'not an object',
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '', 'not an object' ),
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';

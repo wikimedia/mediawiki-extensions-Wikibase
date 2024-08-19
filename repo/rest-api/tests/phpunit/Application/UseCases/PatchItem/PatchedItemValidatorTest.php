@@ -675,27 +675,13 @@ class PatchedItemValidatorTest extends TestCase {
 		yield 'alias contains invalid character' => [
 			$aliasesInLanguageValidator,
 			[ 'en' => [ 'valid alias', $invalidAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en/1',
-					UseCaseError::CONTEXT_VALUE => $invalidAlias,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', $invalidAlias ),
 		];
 
 		yield 'aliases in language is not a list' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 'associative array' => 'not a list' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en',
-					UseCaseError::CONTEXT_VALUE => [ 'associative array' => 'not a list' ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'associative array' => 'not a list' ] ),
 		];
 
 		yield 'aliases is not an associative array' => [
