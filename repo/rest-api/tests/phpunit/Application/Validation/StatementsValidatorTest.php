@@ -100,7 +100,7 @@ class StatementsValidatorTest extends TestCase {
 				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
 					StatementsValidator::CONTEXT_PATH => '',
-					StatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+					StatementsValidator::CONTEXT_VALUE => $invalidStatements,
 				]
 			),
 		];

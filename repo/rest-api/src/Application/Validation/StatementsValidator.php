@@ -15,7 +15,6 @@ class StatementsValidator {
 	public const CODE_STATEMENT_NOT_ARRAY = 'statements-validator-code-invalid-statement-type';
 	public const CODE_PROPERTY_ID_MISMATCH = 'statements-validator-code-property-id-mismatch';
 
-	public const CONTEXT_STATEMENTS = 'statements-validator-context-statements';
 	public const CONTEXT_PATH = 'statements-validator-context-path';
 	public const CONTEXT_FIELD = 'statements-validator-context-field';
 	public const CONTEXT_VALUE = 'statements-validator-context-value';
@@ -42,7 +41,7 @@ class StatementsValidator {
 	): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
 			return new ValidationError( self::CODE_STATEMENTS_NOT_ASSOCIATIVE, [
-				self::CONTEXT_PATH => $basePath, self::CONTEXT_STATEMENTS => $serialization,
+				self::CONTEXT_PATH => $basePath, self::CONTEXT_VALUE => $serialization,
 			] );
 		}
 

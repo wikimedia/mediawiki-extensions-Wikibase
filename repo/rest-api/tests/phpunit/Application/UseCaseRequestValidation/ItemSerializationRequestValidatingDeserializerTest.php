@@ -404,7 +404,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
 					StatementsValidator::CONTEXT_PATH => '/item/statements',
-					StatementsValidator::CONTEXT_STATEMENTS => $invalidStatements,
+					StatementsValidator::CONTEXT_VALUE => $invalidStatements,
 				]
 			),
 			new UseCaseError(

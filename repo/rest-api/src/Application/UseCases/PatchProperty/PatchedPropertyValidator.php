@@ -319,20 +319,12 @@ class PatchedPropertyValidator {
 		if ( $validationError ) {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
+				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
 				case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
-					throw UseCaseError::newPatchResultInvalidValue(
-						$context[StatementsValidator::CONTEXT_PATH],
-						$context[StatementsValidator::CONTEXT_VALUE]
-					);
 				case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
 					throw UseCaseError::newPatchResultInvalidValue(
 						$context[StatementsValidator::CONTEXT_PATH],
 						$context[StatementsValidator::CONTEXT_VALUE]
-					);
-				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-					throw UseCaseError::newPatchResultInvalidValue(
-						$context[StatementsValidator::CONTEXT_PATH],
-						$context[ StatementsValidator::CONTEXT_STATEMENTS ]
 					);
 				case StatementValidator::CODE_INVALID_FIELD_TYPE:
 				case StatementValidator::CODE_INVALID_FIELD:
