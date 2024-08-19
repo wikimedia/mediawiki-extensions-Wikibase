@@ -280,10 +280,9 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				422,
-				'patched-aliases-invalid-field',
-				{ path: `${testLanguage}/0`, value: alias }
+				'patch-result-invalid-value',
+				{ path: `/${testLanguage}/0`, value: alias }
 			);
-			assert.include( response.body.message, testLanguage );
 		} );
 
 		it( 'aliases in language is not a list', async () => {
@@ -292,9 +291,8 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${testLanguage}`, value: invalidAliasesInLanguage }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: testLanguage, value: invalidAliasesInLanguage };
-			assertValidError( response, 422, 'patched-aliases-invalid-field', context );
-			assert.include( response.body.message, testLanguage );
+			const context = { path: `/${testLanguage}`, value: invalidAliasesInLanguage };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'aliases is not an object', async () => {
@@ -304,8 +302,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			] ).assertValidRequest().makeRequest();
 
 			const context = { path: '', value: invalidAliases };
-			assertValidError( response, 422, 'patched-aliases-invalid-field', context );
-			assert.strictEqual( response.body.message, "Patched value for '' is invalid" );
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'invalid language code', async () => {

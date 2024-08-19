@@ -92,38 +92,17 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 		$invalidAlias = "tab\t tab\t tab";
 		yield 'alias contains invalid character' => [
 			[ 'en' => [ 'valid alias', $invalidAlias ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en/1',
-					UseCaseError::CONTEXT_VALUE => $invalidAlias,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en/1', $invalidAlias ),
 		];
 
 		yield 'aliases in language is not a list' => [
 			[ 'en' => [ 'associative array' => 'not a list' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for 'en' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => 'en',
-					UseCaseError::CONTEXT_VALUE => [ 'associative array' => 'not a list' ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en', [ 'associative array' => 'not a list' ] ),
 		];
 
 		yield 'aliases is not an object' => [
 			[ 'sequential array, not an object' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for '' is invalid",
-				[
-					UseCaseError::CONTEXT_PATH => '',
-					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an object' ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '', [ 'sequential array, not an object' ] ),
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';

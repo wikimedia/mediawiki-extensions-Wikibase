@@ -38,11 +38,7 @@ class PatchedItemAliasesValidator {
 	 */
 	public function validateAndDeserialize( $serialization ): AliasGroupList {
 		if ( !is_array( $serialization ) || ( array_is_list( $serialization ) && count( $serialization ) > 0 ) ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for '' is invalid",
-				[ UseCaseError::CONTEXT_PATH => '', UseCaseError::CONTEXT_VALUE => $serialization ]
-			);
+			throw UseCaseError::newPatchResultInvalidValue( '', $serialization );
 		}
 
 		$this->validateLanguageCodes( array_keys( $serialization ) );
@@ -70,11 +66,7 @@ class PatchedItemAliasesValidator {
 				[ UseCaseError::CONTEXT_LANGUAGE => $e->getField(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
 			);
 		} catch ( InvalidFieldException $e ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-				"Patched value for '{$e->getField()}' is invalid",
-				[ UseCaseError::CONTEXT_PATH => $e->getPath(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
-			);
+			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getPath()}", $e->getValue() );
 		}
 	}
 
@@ -92,14 +84,7 @@ class PatchedItemAliasesValidator {
 					default:
 						$value = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 						$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
-						throw new UseCaseError(
-							UseCaseError::PATCHED_ALIASES_INVALID_FIELD,
-							"Patched value for '{$aliasGroup->getLanguageCode()}' is invalid",
-							[
-								UseCaseError::CONTEXT_PATH => $path,
-								UseCaseError::CONTEXT_VALUE => $value,
-							]
-						);
+						throw UseCaseError::newPatchResultInvalidValue( "/$path", $value );
 				}
 			}
 		}

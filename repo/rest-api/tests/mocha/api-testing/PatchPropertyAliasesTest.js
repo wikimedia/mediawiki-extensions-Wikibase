@@ -229,10 +229,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			assertValidError(
 				response,
 				422,
-				'patched-aliases-invalid-field',
-				{ path: `${language}/0`, value: invalidAlias }
+				'patch-result-invalid-value',
+				{ path: `/${language}/0`, value: invalidAlias }
 			);
-			assert.include( response.body.message, language );
 		} );
 
 		it( 'invalid language code', async () => {

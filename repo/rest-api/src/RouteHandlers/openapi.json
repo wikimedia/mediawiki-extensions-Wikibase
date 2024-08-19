@@ -5332,9 +5332,6 @@
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
-              "patched-aliases-invalid-field": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5417,9 +5414,6 @@
               },
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
-              },
-              "patched-aliases-invalid-field": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
@@ -5593,11 +5587,11 @@
               "patched-alias-empty": {
                 "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
-              "patched-aliases-invalid-field": {
-                "$ref": "#/components/examples/PatchedAliasesInvalidFieldExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
+              },
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
@@ -7439,16 +7433,6 @@
           "message": "Changed alias for '{language_code}' cannot be empty",
           "context": {
             "language": "{language_code}"
-          }
-        }
-      },
-      "PatchedAliasesInvalidFieldExample": {
-        "value": {
-          "code": "patched-aliases-invalid-field",
-          "message": "Patched value for '{field}' is invalid",
-          "context": {
-            "path": "{path}",
-            "value": "{value}"
           }
         }
       },
