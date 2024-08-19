@@ -52,14 +52,7 @@ class PatchedSitelinksValidator {
 
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_INVALID_TITLE,
-					"Invalid sitelink title '{$serialization[$siteId()][ 'title' ]}' for site '{$siteId()}' in patched sitelinks",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_TITLE => $serialization[$siteId()][ 'title' ],
-					]
-				);
+				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/title", $serialization[$siteId()][ 'title' ] );
 
 			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
 				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges", $serialization[$siteId()][ 'badges' ] );

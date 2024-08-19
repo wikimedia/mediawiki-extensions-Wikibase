@@ -270,16 +270,14 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid title', async () => {
 			const title = 'invalid??%00';
-			const sitelink = { title, badges: [ allowedBadges[ 0 ] ] };
-
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
+				[ makeReplaceExistingSitelinkPatchOperation( { title } ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-invalid-title', { site_id: siteId, title } );
-			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, title );
+			const context = { path: `/${siteId}/title`, value: title };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'title does not exist', async () => {

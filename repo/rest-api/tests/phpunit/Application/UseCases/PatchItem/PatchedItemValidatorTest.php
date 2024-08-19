@@ -817,14 +817,7 @@ class PatchedItemValidatorTest extends TestCase {
 		$invalidTitle = 'invalid??%00';
 		yield 'invalid title' => [
 			[ $validSiteId => [ 'title' => $invalidTitle ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_SITELINK_INVALID_TITLE,
-				"Invalid sitelink title '$invalidTitle' for site '$validSiteId' in patched sitelinks",
-				[
-					UseCaseError::CONTEXT_SITE_ID => $validSiteId,
-					UseCaseError::CONTEXT_TITLE => $invalidTitle,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( "/sitelinks/$validSiteId/title", $invalidTitle ),
 		];
 
 		yield 'invalid badges format' => [
