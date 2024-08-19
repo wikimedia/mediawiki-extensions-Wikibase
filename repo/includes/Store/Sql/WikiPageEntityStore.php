@@ -568,7 +568,7 @@ class WikiPageEntityStore implements EntityStore {
 		$title = $this->getTitleForEntity( $id );
 
 		if (
-			$user->isRegistered() &&
+			$user->isNamed() &&
 			$title &&
 			( $watch != $this->watchlistManager->isWatchedIgnoringRights( $user, $title ) )
 		) {
