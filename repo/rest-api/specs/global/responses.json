@@ -1205,7 +1205,6 @@
 						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
 					},
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
-					"patched-property-invalid-field": { "$ref": "./examples.json#/PatchedPropertyInvalidFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"

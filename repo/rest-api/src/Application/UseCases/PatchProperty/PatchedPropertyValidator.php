@@ -102,7 +102,7 @@ class PatchedPropertyValidator {
 		// 'id' and 'data_type' are not modifiable and 'type' is ignored, so we only check the expected array fields
 		foreach ( [ 'labels', 'descriptions', 'aliases', 'statements' ] as $field ) {
 			if ( isset( $serialization[$field] ) && !is_array( $serialization[$field] ) ) {
-				$this->throwInvalidField( $field, $serialization[$field] );
+				throw UseCaseError::newPatchResultInvalidValue( "/$field", $serialization[$field] );
 			}
 		}
 	}
@@ -175,7 +175,7 @@ class PatchedPropertyValidator {
 
 		switch ( $validationError->getCode() ) {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'labels', $labelsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/labels', $labelsSerialization );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
 				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -223,7 +223,7 @@ class PatchedPropertyValidator {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
-				$this->throwInvalidField( 'descriptions', $descriptionsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/descriptions', $descriptionsSerialization );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw new UseCaseError(
@@ -267,7 +267,7 @@ class PatchedPropertyValidator {
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 				case AliasesValidator::CODE_INVALID_ALIASES:
-					$this->throwInvalidField( 'aliases', $aliasesSerialization );
+					throw UseCaseError::newPatchResultInvalidValue( '/aliases', $aliasesSerialization );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					throw new UseCaseError(
@@ -329,20 +329,16 @@ class PatchedPropertyValidator {
 						$context[StatementsValidator::CONTEXT_PATH],
 						$context[StatementsValidator::CONTEXT_VALUE]
 					);
-				case StatementValidator::CODE_INVALID_FIELD_TYPE:
-					throw UseCaseError::newPatchResultInvalidValue(
-						$context[StatementValidator::CONTEXT_PATH],
-						$context[StatementValidator::CONTEXT_VALUE]
-					);
 				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
-					$this->throwInvalidField(
+					throw UseCaseError::newPatchResultInvalidValue(
 						$context[StatementsValidator::CONTEXT_PATH],
 						$context[ StatementsValidator::CONTEXT_STATEMENTS ]
 					);
+				case StatementValidator::CODE_INVALID_FIELD_TYPE:
 				case StatementValidator::CODE_INVALID_FIELD:
 					throw UseCaseError::newPatchResultInvalidValue(
 						$context[StatementValidator::CONTEXT_PATH],
-						$context[ StatementValidator::CONTEXT_VALUE ]
+						$context[StatementValidator::CONTEXT_VALUE]
 					);
 				case StatementValidator::CODE_MISSING_FIELD:
 					throw UseCaseError::newMissingFieldInPatchResult(
@@ -395,20 +391,4 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	/**
-	 * @param string $field
-	 * @param mixed $value
-	 *
-	 * @return never
-	 */
-	private function throwInvalidField( string $field, $value ): void {
-		throw new UseCaseError(
-			UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-			"Invalid input for '$field' in the patched property",
-			[
-				UseCaseError::CONTEXT_PATH => $field,
-				UseCaseError::CONTEXT_VALUE => $value,
-			]
-		);
-	}
 }

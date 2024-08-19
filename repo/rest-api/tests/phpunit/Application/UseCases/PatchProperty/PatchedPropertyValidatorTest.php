@@ -305,11 +305,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				'data_type' => 'string',
 				'labels' => 'illegal string',
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for 'labels' in the patched property",
-				[ UseCaseError::CONTEXT_PATH => 'labels', UseCaseError::CONTEXT_VALUE => 'illegal string' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels', 'illegal string' ),
 		];
 
 		yield "Illegal modification 'id' field" => [
@@ -381,14 +377,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		yield 'invalid labels' => [
 			$mockSyntaxValidator,
 			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for 'labels' in the patched property",
-				[
-					UseCaseError::CONTEXT_PATH => 'labels',
-					UseCaseError::CONTEXT_VALUE => $invalidLabels,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels', $invalidLabels ),
 			[ 'labels' => $invalidLabels ],
 		];
 
@@ -509,14 +498,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		yield 'invalid descriptions' => [
 			$mockSyntaxValidator,
 			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for 'descriptions' in the patched property",
-				[
-					UseCaseError::CONTEXT_PATH => 'descriptions',
-					UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/descriptions', $invalidDescriptions ),
 			[ 'descriptions' => $invalidDescriptions ],
 		];
 
@@ -701,14 +683,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		yield 'aliases is not an associative array' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'sequential array, not an associative array' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for 'aliases' in the patched property",
-				[
-					UseCaseError::CONTEXT_PATH => 'aliases',
-					UseCaseError::CONTEXT_VALUE => [ 'sequential array, not an associative array' ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'sequential array, not an associative array' ] ),
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';
@@ -757,14 +732,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 	public function statementsProvider(): Generator {
 		yield 'Statements not associative' => [
 			[ 1, 2, 3 ],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_FIELD,
-				"Invalid input for '/statements' in the patched property",
-				[
-					UseCaseError::CONTEXT_PATH => '/statements',
-					UseCaseError::CONTEXT_VALUE => [ 1, 2, 3 ],
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/statements', [ 1, 2, 3 ] ),
 		];
 
 		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[0];

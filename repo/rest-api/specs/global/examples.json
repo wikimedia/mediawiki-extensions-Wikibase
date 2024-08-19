@@ -309,16 +309,6 @@
 			"context": { "path": "{json_pointer_to_parent}", "field": "{missing_field}" }
 		}
 	},
-	"PatchedPropertyInvalidFieldExample": {
-		"value": {
-			"code": "patched-property-invalid-field",
-			"message": "Invalid input for '{field}' in the patched property",
-			"context": {
-				"path": "{field}",
-				"value": "{value}"
-			}
-		}
-	},
 	"StatementIdNotModifiableExample": {
 		"value": {
 			"code": "statement-id-not-modifiable",

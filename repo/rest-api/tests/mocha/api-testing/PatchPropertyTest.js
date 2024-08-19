@@ -301,9 +301,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'replace', path: '/labels', value: invalidLabels } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: 'labels', value: invalidLabels };
-			assertValidError( response, 422, 'patched-property-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'labels' in the patched property" );
+			const context = { path: '/labels', value: invalidLabels };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid label', async () => {
@@ -406,9 +406,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'replace', path: '/descriptions', value: invalidDescriptions } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: 'descriptions', value: invalidDescriptions };
-			assertValidError( response, 422, 'patched-property-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for 'descriptions' in the patched property" );
+			const context = { path: '/descriptions', value: invalidDescriptions };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid description', async () => {
@@ -561,12 +561,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: '/aliases', value: invalidAliases }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError(
-				response,
-				422,
-				'patched-property-invalid-field',
-				{ path: 'aliases', value: invalidAliases }
-			);
+			assertValidError( response, 422, 'patch-result-invalid-value', { path: '/aliases', value: invalidAliases } );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'alias contains invalid characters', async () => {
@@ -642,8 +638,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest().makeRequest();
 
 			const context = { path: '/statements', value: invalidStatements };
-			assertValidError( response, 422, 'patched-property-invalid-field', context );
-			assert.strictEqual( response.body.message, "Invalid input for '/statements' in the patched property" );
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid statement field', async () => {
