@@ -245,16 +245,6 @@
 			}
 		}
 	},
-	"PatchedLabelInvalidExample": {
-		"value": {
-			"code": "patched-label-invalid",
-			"message": "Changed label for '{language_code}' is invalid: '{label}'",
-			"context": {
-				"language": "{language_code}",
-				"value": "{label}"
-			}
-		}
-	},
 	"PatchedItemInvalidOperationChangeItemIdExample": {
 		"value": {
 			"code": "patched-item-invalid-operation-change-item-id",

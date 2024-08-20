@@ -419,11 +419,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_LABEL_INVALID,
-				"Changed label for 'en' is invalid: " . json_encode( $labelOfInvalidType ),
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => json_encode( $labelOfInvalidType ) ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels/en', $labelOfInvalidType ),
 		];
 
 		$invalidLabel = "invalid \t";
@@ -436,11 +432,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					PropertyLabelValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_LABEL_INVALID,
-				"Changed label for 'en' is invalid: $invalidLabel",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $invalidLabel ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels/en', $invalidLabel ),
 		];
 
 		yield 'invalid label language code' => [

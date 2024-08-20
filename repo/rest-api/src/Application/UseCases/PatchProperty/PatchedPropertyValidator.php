@@ -185,20 +185,12 @@ class PatchedPropertyValidator {
 				);
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 				$language = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
-				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
-				);
+				$value = $context[LabelsSyntaxValidator::CONTEXT_LABEL];
+				throw UseCaseError::newPatchResultInvalidValue( "/labels/$language", $value );
 			case PropertyLabelValidator::CODE_INVALID:
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];
 				$value = $context[PropertyLabelValidator::CONTEXT_LABEL];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
-				);
+				throw UseCaseError::newPatchResultInvalidValue( "/labels/$language", $value );
 			case PropertyLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[PropertyLabelValidator::CONTEXT_LIMIT];
 				$language = $context[PropertyLabelValidator::CONTEXT_LANGUAGE];

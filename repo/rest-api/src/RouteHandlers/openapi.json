@@ -5320,9 +5320,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-invalid": {
-                "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5391,9 +5388,6 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-invalid": {
-                "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5432,11 +5426,11 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-invalid": {
-                "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+              },
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5467,11 +5461,11 @@
               "patched-label-empty": {
                 "$ref": "#/components/examples/PatchedLabelEmptyExample"
               },
-              "patched-label-invalid": {
-                "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+              },
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -7293,16 +7287,6 @@
           "message": "Changed label for '{language_code}' cannot be empty",
           "context": {
             "language": "{language_code}"
-          }
-        }
-      },
-      "PatchedLabelInvalidExample": {
-        "value": {
-          "code": "patched-label-invalid",
-          "message": "Changed label for '{language_code}' is invalid: '{label}'",
-          "context": {
-            "language": "{language_code}",
-            "value": "{label}"
           }
         }
       },

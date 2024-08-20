@@ -72,20 +72,12 @@ class PatchedItemLabelsValidator {
 				);
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 				$language = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
-				$value = json_encode( $context[LabelsSyntaxValidator::CONTEXT_LABEL] );
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
-				);
+				$value = $context[LabelsSyntaxValidator::CONTEXT_LABEL];
+				throw UseCaseError::newPatchResultInvalidValue( "/$language", $value );
 			case ItemLabelValidator::CODE_INVALID:
 				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];
 				$value = $context[ItemLabelValidator::CONTEXT_LABEL];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_INVALID,
-					"Changed label for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
-				);
+				throw UseCaseError::newPatchResultInvalidValue( "/$language", $value );
 			case ItemLabelValidator::CODE_TOO_LONG:
 				$maxLabelLength = $context[ItemLabelValidator::CONTEXT_LIMIT];
 				$language = $context[ItemLabelValidator::CONTEXT_LANGUAGE];

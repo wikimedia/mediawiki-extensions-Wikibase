@@ -289,23 +289,21 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-label-invalid', { language, value: invalidLabel } );
-			assert.include( response.body.message, invalidLabel );
-			assert.include( response.body.message, `'${language}'` );
+			const context = { path: `/labels/${language}`, value: invalidLabel };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid label type', async () => {
-			const language = languageWithExistingLabel;
-			const label = { object: 'not allowed' };
+			const invalidLabel = { object: 'not allowed' };
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
-				[ makeReplaceExistingLabelPatchOp( label ) ]
+				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language, value: JSON.stringify( label ) };
-			assertValidError( response, 422, 'patched-label-invalid', context );
-			assert.include( response.body.message, JSON.stringify( label ) );
-			assert.include( response.body.message, `'${languageWithExistingLabel}'` );
+			const context = { path: `/labels/${languageWithExistingLabel}`, value: invalidLabel };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'empty label', async () => {

@@ -96,11 +96,9 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 	 * @dataProvider invalidLabelsProvider
 	 */
 	public function testWithInvalidLabels(
-		array $labelsSerialization,
+		UseCaseError $expectedError,
 		ValidationError $validationError,
-		string $expectedErrorCode,
-		string $expectedErrorMessage,
-		array $expectedContext = null
+		array $labelsSerialization
 	): void {
 		$this->labelValidator = $this->createStub( ItemLabelValidator::class );
 		$this->labelValidator->method( 'validate' )->willReturn( $validationError );
@@ -110,9 +108,7 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
-			$this->assertSame( $expectedErrorMessage, $error->getErrorMessage() );
-			$this->assertEquals( $expectedContext, $error->getErrorContext() );
+			$this->assertEquals( $expectedError, $error );
 		}
 	}
 
@@ -120,22 +116,21 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 		$language = 'en';
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [
-			[ $language => $label ],
+			UseCaseError::newPatchResultInvalidValue( "/$language", $label ),
 			new ValidationError(
 				ItemLabelValidator::CODE_INVALID,
 				[ ItemLabelValidator::CONTEXT_LABEL => $label, ItemLabelValidator::CONTEXT_LANGUAGE => $language ],
 			),
-			UseCaseError::PATCHED_LABEL_INVALID,
-			"Changed label for '$language' is invalid: {$label}",
-			[
-				UseCaseError::CONTEXT_LANGUAGE => $language,
-				UseCaseError::CONTEXT_VALUE => $label,
-			],
+			[ $language => $label ],
 		];
 
 		$tooLongLabel = 'This label is too long.';
 		yield 'label too long' => [
-			[ $language => $tooLongLabel ],
+			new UseCaseError(
+				UseCaseError::PATCH_RESULT_VALUE_TOO_LONG,
+				'Patched value is too long',
+				[ UseCaseError::CONTEXT_PATH => "/$language", UseCaseError::CONTEXT_LIMIT => 250 ]
+			),
 			new ValidationError(
 				ItemLabelValidator::CODE_TOO_LONG,
 				[
@@ -144,19 +139,24 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_LANGUAGE => $language,
 				]
 			),
-			UseCaseError::PATCH_RESULT_VALUE_TOO_LONG,
-			'Patched value is too long',
-			[
-				UseCaseError::CONTEXT_PATH => "/$language",
-				UseCaseError::CONTEXT_LIMIT => 250,
-			],
+			[ $language => $tooLongLabel ],
 		];
 
 		$collidingLabel = 'This label already exists on an item with the same description.';
 		$collidingDescription = 'This discription already exists on an item with the same label.';
 		$conflictingItemId = 'Q345';
 		yield 'label/description collision' => [
-			[ $language => $collidingLabel ],
+			new UseCaseError(
+				UseCaseError::DATA_POLICY_VIOLATION,
+				'Edit violates data policy',
+				[
+					UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
+					UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
+						UseCaseError::CONTEXT_LANGUAGE => $language,
+						UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
+					],
+				]
+			),
 			new ValidationError(
 				ItemLabelValidator::CODE_LABEL_DESCRIPTION_DUPLICATE,
 				[
@@ -166,15 +166,7 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 					ItemLabelValidator::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
 				]
 			),
-			UseCaseError::DATA_POLICY_VIOLATION,
-			'Edit violates data policy',
-			[
-				UseCaseError::CONTEXT_VIOLATION => UseCaseError::POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE,
-				UseCaseError::CONTEXT_VIOLATION_CONTEXT => [
-					UseCaseError::CONTEXT_LANGUAGE => $language,
-					UseCaseError::CONTEXT_CONFLICTING_ITEM_ID => $conflictingItemId,
-				],
-			],
+			[ $language => $collidingLabel ],
 		];
 	}
 
@@ -195,13 +187,7 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => $invalidLabel ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_LABEL_INVALID, $e->getErrorCode() );
-			$this->assertStringContainsString( 'en', $e->getErrorMessage() );
-			$this->assertStringContainsString( "$invalidLabel", $e->getErrorMessage() );
-			$this->assertEquals(
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => "$invalidLabel" ],
-				$e->getErrorContext()
-			);
+			$this->assertEquals( UseCaseError::newPatchResultInvalidValue( '/en', $invalidLabel ), $e );
 		}
 	}
 
