@@ -54,8 +54,8 @@ class ItemSerializationRequestValidatingDeserializer {
 					);
 			}
 
-			$this->handleLabelValidationErrors( $validationError, $itemSerialization['labels'] ?? [] );
-			$this->handleDescriptionValidationErrors( $validationError, $itemSerialization['descriptions'] ?? [] );
+			$this->handleLabelValidationErrors( $validationError );
+			$this->handleDescriptionValidationErrors( $validationError );
 			$this->handleAliasesValidationErrors( $validationError, $itemSerialization['aliases'] ?? [] );
 			$this->handleStatementsValidationErrors( $validationError );
 			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
@@ -66,7 +66,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		return $this->validator->getValidatedItem();
 	}
 
-	private function handleLabelValidationErrors( ValidationError $validationError, array $labelsSerialization ): void {
+	private function handleLabelValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
@@ -97,7 +97,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		}
 	}
 
-	private function handleDescriptionValidationErrors( ValidationError $validationError, array $descriptionsSerialization ): void {
+	private function handleDescriptionValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
