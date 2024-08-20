@@ -65,8 +65,6 @@ class UseCaseError extends UseCaseException {
 
 	public const CONTEXT_ACTUAL_VALUE = 'actual_value';
 	public const CONTEXT_ALIAS = 'alias';
-	public const CONTEXT_BADGE = 'badge';
-	public const CONTEXT_BADGES = 'badges';
 	public const CONTEXT_CONFLICTING_ITEM_ID = 'conflicting_item_id';
 	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'conflicting_property_id';
 	public const CONTEXT_DESCRIPTION = 'description';
