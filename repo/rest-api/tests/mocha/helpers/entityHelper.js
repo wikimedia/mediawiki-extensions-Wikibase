@@ -20,7 +20,7 @@ async function editEntity( id, entityData, clear = false ) {
 }
 
 async function deleteProperty( propertyId ) {
-	const admin = await action.mindy();
+	const admin = await action.root();
 	return admin.action( 'delete', {
 		title: `Property:${propertyId}`,
 		token: await admin.token()
@@ -102,11 +102,11 @@ async function getLatestEditMetadata( entityId ) {
 }
 
 async function changeEntityProtectionStatus( entityId, allowedUserGroup ) {
-	const mindy = await action.mindy();
+	const admin = await action.root();
 	const pageNamespace = entityId.startsWith( 'Q' ) ? 'Item' : 'Property';
-	await mindy.action( 'protect', {
+	await admin.action( 'protect', {
 		title: `${pageNamespace}:${entityId}`,
-		token: await mindy.token(),
+		token: await admin.token(),
 		protections: `edit=${allowedUserGroup}`,
 		expiry: 'infinite'
 	}, 'POST' );
