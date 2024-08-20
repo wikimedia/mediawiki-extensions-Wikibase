@@ -28,7 +28,7 @@
 	"wikibase-error-ui-no-external-page": "\"$2\" পাতাটি \"$1\"-এ পাওয়া যায়নি।",
 	"wikibase-error-ui-edit-conflict": "ইতিমধ্যে একই মান সম্পাদনা করা হয়েছে, যা একটি সম্পাদনা সংঘাতের সৃষ্টি করেছে। দয়া করে পৃষ্ঠাটি পুনরায় লোড করুন।",
 	"wikibase-language-fallback-transliteration-hint": "$1 (প্রতিলিপিকৃত)",
-	"wikibase-language-name-for-terms-mul": "সকল ভাষার জন্য পূর্বনির্ধারিত মান",
+	"wikibase-language-name-for-terms-mul": "সকল ভাষার জন্য পূর্বনির্ধারিত",
 	"wikibase-quantitydetails-amount": "পরিমাণ",
 	"wikibase-quantitydetails-upperbound": "ঊর্ধ্বসীমা",
 	"wikibase-quantitydetails-lowerbound": "নিম্নসীমা",
