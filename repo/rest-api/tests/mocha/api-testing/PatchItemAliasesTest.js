@@ -242,7 +242,9 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 				{ op: 'add', path: `/${language}`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-alias-empty', { language } );
+			const context = { path: `/${language}/0`, value: '' };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'alias too long', async () => {

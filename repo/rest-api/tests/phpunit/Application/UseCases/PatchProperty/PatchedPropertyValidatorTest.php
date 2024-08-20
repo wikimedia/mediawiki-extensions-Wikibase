@@ -624,11 +624,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		yield 'empty alias' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ '' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_EMPTY,
-				"Changed alias for 'de' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'de' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
 		$duplicate = 'tomato';
