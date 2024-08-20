@@ -349,15 +349,6 @@
 			}
 		}
 	},
-	"PatchedAliasEmptyExample": {
-		"value": {
-			"code": "patched-alias-empty",
-			"message": "Changed alias for '{language_code}' cannot be empty",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedDuplicateAliasExample": {
 		"value": {
 			"code": "patched-duplicate-alias",

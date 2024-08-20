@@ -5329,9 +5329,6 @@
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
-              "patched-alias-empty": {
-                "$ref": "#/components/examples/PatchedAliasEmptyExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5411,9 +5408,6 @@
               },
               "patched-description-invalid": {
                 "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
-              },
-              "patched-alias-empty": {
-                "$ref": "#/components/examples/PatchedAliasEmptyExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
@@ -5584,9 +5578,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-alias-empty": {
-                "$ref": "#/components/examples/PatchedAliasEmptyExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -7424,15 +7415,6 @@
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",
             "statement_property_id": "{property_id_value}"
-          }
-        }
-      },
-      "PatchedAliasEmptyExample": {
-        "value": {
-          "code": "patched-alias-empty",
-          "message": "Changed alias for '{language_code}' cannot be empty",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

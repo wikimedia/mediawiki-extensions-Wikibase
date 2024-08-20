@@ -94,8 +94,7 @@ class AliasesValidator {
 		} catch ( EmptyAliasException $e ) {
 			return new ValidationError(
 				self::CODE_EMPTY_ALIAS,
-				// TODO: remove CONTEXT_LANGUAGE, once it's no longer needed for patch validation
-				[ self::CONTEXT_LANGUAGE => $e->getLanguage(), self::CONTEXT_PATH => "/{$e->getLanguage()}/{$e->getIndex()}" ]
+				[ self::CONTEXT_PATH => "/{$e->getLanguage()}/{$e->getIndex()}" ]
 			);
 		} catch ( DuplicateAliasException $e ) {
 			return new ValidationError(

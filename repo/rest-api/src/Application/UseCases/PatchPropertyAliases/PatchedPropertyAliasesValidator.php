@@ -54,11 +54,7 @@ class PatchedPropertyAliasesValidator {
 		try {
 			return $this->aliasesDeserializer->deserialize( $serialization );
 		} catch ( EmptyAliasException $e ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_EMPTY,
-				"Changed alias for '{$e->getLanguage()}' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => $e->getLanguage() ]
-			);
+			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getLanguage()}/{$e->getIndex()}", '' );
 		} catch ( DuplicateAliasException $e ) {
 			throw new UseCaseError(
 				UseCaseError::PATCHED_ALIAS_DUPLICATE,

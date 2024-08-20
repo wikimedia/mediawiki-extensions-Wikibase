@@ -269,12 +269,7 @@ class PatchedPropertyValidator {
 				case AliasesValidator::CODE_INVALID_ALIASES:
 					$this->throwInvalidField( 'aliases', $aliasesSerialization );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIAS_EMPTY,
-						"Changed alias for '$language' cannot be empty",
-						[ UseCaseError::CONTEXT_LANGUAGE => $language ]
-					);
+					throw UseCaseError::newPatchResultInvalidValue( "/aliases{$context[AliasesValidator::CONTEXT_PATH]}", '' );
 				case AliasesValidator::CODE_DUPLICATE_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					$value = $context[AliasesValidator::CONTEXT_ALIAS];

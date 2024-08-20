@@ -67,11 +67,7 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 	public static function invalidAliasesProvider(): Generator {
 		yield 'empty alias' => [
 			[ 'de' => [ '' ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_EMPTY,
-				"Changed alias for 'de' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'de' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/de/0', '' ),
 		];
 
 		$duplicate = 'tomato';

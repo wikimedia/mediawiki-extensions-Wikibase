@@ -1172,7 +1172,6 @@
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
 					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
@@ -1217,7 +1216,6 @@
 					"patched-label-invalid": { "$ref": "./examples.json#/PatchedLabelInvalidExample" },
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
 					"patched-description-invalid": { "$ref": "./examples.json#/PatchedDescriptionInvalidExample" },
-					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
@@ -1321,7 +1319,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-alias-empty": { "$ref": "./examples.json#/PatchedAliasEmptyExample" },
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
