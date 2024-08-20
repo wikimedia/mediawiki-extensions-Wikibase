@@ -128,10 +128,10 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 					ItemDescriptionValidator::CONTEXT_LANGUAGE => $language,
 				],
 			),
-			UseCaseError::PATCHED_DESCRIPTION_INVALID,
-			"Changed description for '$language' is invalid: {$description}",
+			UseCaseError::PATCH_RESULT_INVALID_VALUE,
+			'Invalid value in patch result',
 			[
-				UseCaseError::CONTEXT_LANGUAGE => $language,
+				UseCaseError::CONTEXT_PATH => "/$language",
 				UseCaseError::CONTEXT_VALUE => $description,
 			],
 		];
@@ -198,13 +198,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => $invalidDescription ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_DESCRIPTION_INVALID, $e->getErrorCode() );
-			$this->assertStringContainsString( 'en', $e->getErrorMessage() );
-			$this->assertStringContainsString( "$invalidDescription", $e->getErrorMessage() );
-			$this->assertEquals(
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => "$invalidDescription" ],
-				$e->getErrorContext()
-			);
+			$this->assertEquals( UseCaseError::newPatchResultInvalidValue( '/en', $invalidDescription ), $e );
 		}
 	}
 

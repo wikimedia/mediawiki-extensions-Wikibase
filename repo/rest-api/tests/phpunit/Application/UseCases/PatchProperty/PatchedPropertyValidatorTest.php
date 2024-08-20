@@ -540,11 +540,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID,
-				"Changed description for 'en' is invalid: " . json_encode( $descriptionOfInvalidType ),
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => json_encode( $descriptionOfInvalidType ) ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/descriptions/en', $descriptionOfInvalidType ),
 		];
 
 		$invalidDescription = "invalid \t";
@@ -557,11 +553,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 					PropertyDescriptionValidator::CONTEXT_LANGUAGE => 'en',
 				]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID,
-				"Changed description for 'en' is invalid: $invalidDescription",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $invalidDescription ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/descriptions/en', $invalidDescription ),
 		];
 
 		yield 'invalid description language code' => [

@@ -70,20 +70,14 @@ class PatchedItemDescriptionsValidator {
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$language = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_INVALID,
-					"Changed description for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}",
+					$context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION]
 				);
 			case ItemDescriptionValidator::CODE_INVALID:
-				$language = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];
-				$value = $context[ItemDescriptionValidator::CONTEXT_DESCRIPTION];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_INVALID,
-					"Changed description for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/{$context[ItemDescriptionValidator::CONTEXT_LANGUAGE]}",
+					$context[ItemDescriptionValidator::CONTEXT_DESCRIPTION]
 				);
 			case ItemDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $context[ItemDescriptionValidator::CONTEXT_LANGUAGE];

@@ -264,16 +264,6 @@
 			}
 		}
 	},
-	"PatchedDescriptionInvalidExample": {
-		"value": {
-			"code": "patched-description-invalid",
-			"message": "Changed description for '{language_code}' is invalid: '{label}'",
-			"context": {
-				"language": "{language_code}",
-				"value": "{description}"
-			}
-		}
-	},
 	"PatchedItemInvalidOperationChangeItemIdExample": {
 		"value": {
 			"code": "patched-item-invalid-operation-change-item-id",

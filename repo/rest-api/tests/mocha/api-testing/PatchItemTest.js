@@ -364,16 +364,15 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'invalid description', async () => {
-			const language = 'en';
 			const invalidDescription = 'tab characters \t not allowed';
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-description-invalid', { language, value: invalidDescription } );
-			assert.include( response.body.message, invalidDescription );
-			assert.include( response.body.message, `'${language}'` );
+			const context = { path: `/descriptions/${languageWithExistingDescription}`, value: invalidDescription };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'invalid description type', async () => {
@@ -383,10 +382,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { language: 'en', value: JSON.stringify( invalidDescription ) };
-			assertValidError( response, 422, 'patched-description-invalid', context );
-			assert.include( response.body.message, JSON.stringify( invalidDescription ) );
-			assert.include( response.body.message, "'en'" );
+			const context = { path: `/descriptions/${languageWithExistingDescription}`, value: invalidDescription };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'empty description', async () => {

@@ -232,20 +232,14 @@ class PatchedPropertyValidator {
 					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
-				$language = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
-				$value = json_encode( $context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION] );
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_INVALID,
-					"Changed description for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}",
+					$context[DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION]
 				);
 			case PropertyDescriptionValidator::CODE_INVALID:
-				$language = $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE];
-				$value = $context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_INVALID,
-					"Changed description for '{$language}' is invalid: {$value}",
-					[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/descriptions/{$context[PropertyDescriptionValidator::CONTEXT_LANGUAGE]}",
+					$context[PropertyDescriptionValidator::CONTEXT_DESCRIPTION]
 				);
 			case PropertyDescriptionValidator::CODE_TOO_LONG:
 				$languageCode = $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE];

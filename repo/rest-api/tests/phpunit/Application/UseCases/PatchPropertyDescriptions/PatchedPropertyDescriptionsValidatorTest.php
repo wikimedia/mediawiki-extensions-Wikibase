@@ -89,14 +89,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 		$invalidDescriptionText = "tab\t tab";
 		yield 'invalid description text' => [
 			[ 'en' => $invalidDescriptionText ],
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_INVALID,
-				"Changed description for 'en' is invalid: $invalidDescriptionText",
-				[
-					UseCaseError::CONTEXT_LANGUAGE => 'en',
-					UseCaseError::CONTEXT_VALUE => $invalidDescriptionText,
-				]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en', $invalidDescriptionText ),
 		];
 
 		$language = 'en';

@@ -5326,9 +5326,6 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
-              "patched-description-invalid": {
-                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5402,9 +5399,6 @@
               },
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
-              "patched-description-invalid": {
-                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
@@ -5514,8 +5508,8 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
-              "patched-description-invalid": {
-                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -5546,8 +5540,8 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
-              "patched-description-invalid": {
-                "$ref": "#/components/examples/PatchedDescriptionInvalidExample"
+              "patch-result-invalid-value": {
+                "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
@@ -7324,16 +7318,6 @@
           "message": "Changed description for '{language_code}' cannot be empty",
           "context": {
             "language": "{language_code}"
-          }
-        }
-      },
-      "PatchedDescriptionInvalidExample": {
-        "value": {
-          "code": "patched-description-invalid",
-          "message": "Changed description for '{language_code}' is invalid: '{label}'",
-          "context": {
-            "language": "{language_code}",
-            "value": "{description}"
           }
         }
       },
