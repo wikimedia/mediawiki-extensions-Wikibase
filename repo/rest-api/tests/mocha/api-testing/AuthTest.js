@@ -20,6 +20,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 
 	// eslint-disable-next-line mocha/no-top-level-hooks
 	before( async () => {
+		// can't use action.root() here because blocking it might interfere with other tests
 		user = await action.mindy();
 	} );
 
