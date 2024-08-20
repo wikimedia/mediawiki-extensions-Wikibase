@@ -336,7 +336,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-label-empty', { language: languageWithExistingLabel } );
+			const context = { path: `/labels/${languageWithExistingLabel}`, value: '' };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'label too long', async () => {

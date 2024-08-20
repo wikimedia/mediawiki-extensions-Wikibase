@@ -5317,9 +5317,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-label-empty": {
-                "$ref": "#/components/examples/PatchedLabelEmptyExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5385,9 +5382,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-label-empty": {
-                "$ref": "#/components/examples/PatchedLabelEmptyExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5423,9 +5417,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-label-empty": {
-                "$ref": "#/components/examples/PatchedLabelEmptyExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
@@ -5458,9 +5449,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-label-empty": {
-                "$ref": "#/components/examples/PatchedLabelEmptyExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
@@ -7278,15 +7266,6 @@
           "context": {
             "path": "{json_pointer_to_parent_in_patch_result}",
             "key": "{key}"
-          }
-        }
-      },
-      "PatchedLabelEmptyExample": {
-        "value": {
-          "code": "patched-label-empty",
-          "message": "Changed label for '{language_code}' cannot be empty",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

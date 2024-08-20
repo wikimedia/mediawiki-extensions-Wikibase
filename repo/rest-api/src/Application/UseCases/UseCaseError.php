@@ -34,7 +34,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
-	public const PATCHED_LABEL_EMPTY = 'patched-label-empty';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE =
 		'patched-property-invalid-operation-change-property-datatype';
 	public const PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID = 'patched-property-invalid-operation-change-property-id';
@@ -107,7 +106,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
-		self::PATCHED_LABEL_EMPTY => [ self::CONTEXT_LANGUAGE ],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE => [],
 		self::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID => [],
 		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],

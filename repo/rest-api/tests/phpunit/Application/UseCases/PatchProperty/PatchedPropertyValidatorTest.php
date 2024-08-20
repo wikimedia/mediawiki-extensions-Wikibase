@@ -387,11 +387,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
 				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_LABEL_EMPTY,
-				"Changed label for 'en' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/labels/en', '' ),
 		];
 
 		$longLabel = str_repeat( 'a', 51 );

@@ -64,12 +64,8 @@ class PatchedPropertyLabelsValidator {
 			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 				throw UseCaseError::newPatchResultInvalidKey( '', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
-				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_EMPTY,
-					"Changed label for '$languageCode' cannot be empty",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				$languageCode = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
+				throw UseCaseError::newPatchResultInvalidValue( "/$languageCode", '' );
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 				$language = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				$value = $context[LabelsSyntaxValidator::CONTEXT_LABEL];

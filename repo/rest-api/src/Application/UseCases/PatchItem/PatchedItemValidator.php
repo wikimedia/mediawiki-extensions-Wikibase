@@ -163,12 +163,8 @@ class PatchedItemValidator {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newPatchResultInvalidValue( '/labels', $labelsSerialization );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
-				$languageCode = $validationError->getContext()[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_LABEL_EMPTY,
-					"Changed label for '$languageCode' cannot be empty",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				$languageCode = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
+				throw UseCaseError::newPatchResultInvalidValue( "/labels/$languageCode", '' );
 			case LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE:
 				$language = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				$value = $context[LabelsSyntaxValidator::CONTEXT_LABEL];

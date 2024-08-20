@@ -236,15 +236,6 @@
 			"context": { "path": "{json_pointer_to_parent_in_patch_result}", "key": "{key}" }
 		}
 	},
-	"PatchedLabelEmptyExample": {
-		"value": {
-			"code": "patched-label-empty",
-			"message": "Changed label for '{language_code}' cannot be empty",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedItemInvalidOperationChangeItemIdExample": {
 		"value": {
 			"code": "patched-item-invalid-operation-change-item-id",

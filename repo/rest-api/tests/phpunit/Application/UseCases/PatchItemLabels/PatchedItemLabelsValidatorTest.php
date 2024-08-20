@@ -175,9 +175,7 @@ class PatchedItemLabelsValidatorTest extends TestCase {
 			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), [ 'en' => '' ] );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PATCHED_LABEL_EMPTY, $e->getErrorCode() );
-			$this->assertSame( "Changed label for 'en' cannot be empty", $e->getErrorMessage() );
-			$this->assertEquals( [ UseCaseError::CONTEXT_LANGUAGE => 'en' ], $e->getErrorContext() );
+			$this->assertEquals( UseCaseError::newPatchResultInvalidValue( '/en', '' ), $e );
 		}
 	}
 
