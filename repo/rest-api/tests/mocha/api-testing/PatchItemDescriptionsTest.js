@@ -272,7 +272,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-description-empty', { language: testLanguage } );
+			const context = { path: `/${testLanguage}`, value: '' };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'empty description after trimming whitespace in the input', async () => {
@@ -281,7 +282,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-description-empty', { language: testLanguage } );
+			const context = { path: `/${testLanguage}`, value: '' };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
 		it( 'description too long', async () => {

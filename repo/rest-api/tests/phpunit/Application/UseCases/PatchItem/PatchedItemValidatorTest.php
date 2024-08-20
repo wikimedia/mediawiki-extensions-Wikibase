@@ -489,11 +489,7 @@ class PatchedItemValidatorTest extends TestCase {
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
 				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_EMPTY,
-				"Changed description for 'en' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/descriptions/en', '' ),
 		];
 
 		$maxLength = 50;

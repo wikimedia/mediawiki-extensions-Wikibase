@@ -255,15 +255,6 @@
 			}
 		}
 	},
-	"PatchedDescriptionEmptyExample": {
-		"value": {
-			"code": "patched-description-empty",
-			"message": "Changed description for '{language_code}' cannot be empty",
-			"context": {
-				"language": "{language_code}"
-			}
-		}
-	},
 	"PatchedItemInvalidOperationChangeItemIdExample": {
 		"value": {
 			"code": "patched-item-invalid-operation-change-item-id",

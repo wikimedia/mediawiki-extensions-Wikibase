@@ -5323,9 +5323,6 @@
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
               },
-              "patched-description-empty": {
-                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
@@ -5396,9 +5393,6 @@
               },
               "patched-label-invalid": {
                 "$ref": "#/components/examples/PatchedLabelInvalidExample"
-              },
-              "patched-description-empty": {
-                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
               "patched-duplicate-alias": {
                 "$ref": "#/components/examples/PatchedDuplicateAliasExample"
@@ -5505,9 +5499,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-description-empty": {
-                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
@@ -5540,9 +5531,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-description-empty": {
-                "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
-              },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
@@ -7315,15 +7303,6 @@
           "context": {
             "language": "{language_code}",
             "value": "{label}"
-          }
-        }
-      },
-      "PatchedDescriptionEmptyExample": {
-        "value": {
-          "code": "patched-description-empty",
-          "message": "Changed description for '{language_code}' cannot be empty",
-          "context": {
-            "language": "{language_code}"
           }
         }
       },

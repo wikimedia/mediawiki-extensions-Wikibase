@@ -213,12 +213,8 @@ class PatchedItemValidator {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newPatchResultInvalidValue( '/descriptions', $descriptionsSerialization );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
-				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_DESCRIPTION_EMPTY,
-					"Changed description for '$languageCode' cannot be empty",
-					[ UseCaseError::CONTEXT_LANGUAGE => $languageCode ]
-				);
+				$languageCode = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
+				throw UseCaseError::newPatchResultInvalidValue( "/descriptions/$languageCode", '' );
 			case DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE:
 				throw UseCaseError::newPatchResultInvalidValue(
 					"/descriptions/{$context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE]}",

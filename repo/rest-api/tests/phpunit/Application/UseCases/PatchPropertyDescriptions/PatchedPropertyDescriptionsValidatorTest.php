@@ -79,11 +79,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 
 		yield 'empty description' => [
 			[ 'en' => '' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_DESCRIPTION_EMPTY,
-				"Changed description for 'en' cannot be empty",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
-			),
+			UseCaseError::newPatchResultInvalidValue( '/en', '' ),
 		];
 
 		$invalidDescriptionText = "tab\t tab";
