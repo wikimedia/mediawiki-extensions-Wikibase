@@ -1277,6 +1277,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
@@ -1297,6 +1298,7 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patched-description-empty": { "$ref": "./examples.json#/PatchedDescriptionEmptyExample" },
+					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }

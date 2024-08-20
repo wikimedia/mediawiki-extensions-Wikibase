@@ -5508,6 +5508,9 @@
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
               },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+              },
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
@@ -5539,6 +5542,9 @@
             "examples": {
               "patched-description-empty": {
                 "$ref": "#/components/examples/PatchedDescriptionEmptyExample"
+              },
+              "patch-result-invalid-key": {
+                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
               },
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
