@@ -22,31 +22,43 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
  */
 class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCase {
 
-	public function testGivenValidRequest_returnsAliases(): void {
+	/**
+	 * @dataProvider provideValidAliases
+	 */
+	public function testGivenValidRequest_returnsAliases( array $aliases, array $expectedDeserializedAliases ): void {
 		$request = $this->createStub( PropertyAliasesInLanguageEditRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
-		$request->method( 'getAliasesInLanguage' )->willReturn( [ 'first alias', 'second alias' ] );
+		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
-		$this->assertEquals(
-			[ 'first alias', 'second alias' ],
-			( new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				$this->createStub( AliasesInLanguageValidator::class ),
-				new AliasesDeserializer(),
-				$this->newStubPropertyAliasesInLanguageRetriever()
-			) )->validateAndDeserialize( $request )
+		$requestValidatingDeserializer = new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
+			new AliasesDeserializer(),
+			$this->createStub( AliasesInLanguageValidator::class ),
+			$this->newStubPropertyAliasesInLanguageRetriever()
 		);
+
+		$this->assertSame( $expectedDeserializedAliases, $requestValidatingDeserializer->validateAndDeserialize( $request ) );
+	}
+
+	public function provideValidAliases(): Generator {
+		yield 'valid aliases pass validation' => [
+			[ 'first alias', 'second alias' ],
+			[ 'first alias', 'second alias' ],
+		];
+
+		yield 'white space is trimmed from aliases' => [
+			[ ' space at the start', "\ttab at the start", 'space at end ', "tab at end\t", "\t  multiple spaces and tabs \t" ],
+			[ 'space at the start', 'tab at the start', 'space at end', 'tab at end', 'multiple spaces and tabs' ],
+		];
 	}
 
 	/**
 	 * @dataProvider invalidAliasesProvider
 	 */
 	public function testWithInvalidAliases(
+		UseCaseError $expectedException,
 		array $aliases,
-		?ValidationError $validationError,
-		string $expectedErrorCode,
-		string $expectedErrorMessage,
-		array $expectedContext = [],
+		ValidationError $validationError = null,
 		array $existingAliases = []
 	): void {
 		$request = $this->createStub( PropertyAliasesInLanguageEditRequest::class );
@@ -59,39 +71,37 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 
 		try {
 			( new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				$aliasesValidator,
 				new AliasesDeserializer(),
+				$aliasesValidator,
 				$this->newStubPropertyAliasesInLanguageRetriever( $existingAliases )
 			) )
 				->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertSame( $expectedErrorCode, $error->getErrorCode() );
-			$this->assertSame( $expectedErrorMessage, $error->getErrorMessage() );
-			$this->assertSame( $expectedContext, $error->getErrorContext() );
+			$this->assertEquals( $expectedException, $error );
 		}
 	}
 
 	public static function invalidAliasesProvider(): Generator {
-		yield 'alias on pos 0 is empty' => [
-			[ '' ],
-			null,
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/aliases/0'",
-			[ UseCaseError::CONTEXT_PATH => '/aliases/0' ],
+		yield 'alias list is empty' => [
+			UseCaseError::newInvalidValue( '/aliases' ),
+			[],
 		];
 
-		yield 'alias on pos 1 is empty' => [
+		yield 'alias at position 0 is empty' => [
+			UseCaseError::newInvalidValue( '/aliases/0' ),
+			[ '' ],
+		];
+
+		yield 'alias at position 1 is empty' => [
+			UseCaseError::newInvalidValue( '/aliases/1' ),
 			[ 'aka', '' ],
-			null,
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/aliases/1'",
-			[ UseCaseError::CONTEXT_PATH => '/aliases/1' ],
 		];
 
 		$alias = 'alias that is too long...';
 		$limit = 40;
 		yield 'alias too long' => [
+			UseCaseError::newValueTooLong( '/aliases/0', $limit ),
 			[ $alias ],
 			new ValidationError(
 				AliasesInLanguageValidator::CODE_TOO_LONG,
@@ -100,51 +110,38 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 					AliasesInLanguageValidator::CONTEXT_LIMIT => $limit,
 				]
 			),
-			UseCaseError::VALUE_TOO_LONG,
-			'The input value is too long',
-			[
-				UseCaseError::CONTEXT_PATH => '/aliases/0',
-				UseCaseError::CONTEXT_LIMIT => $limit,
-			],
 		];
 
 		$invalidAlias = "tab characters \t not allowed";
 		yield 'alias invalid' => [
+			UseCaseError::newInvalidValue( '/aliases/0' ),
 			[ $invalidAlias ],
 			new ValidationError(
 				AliasesInLanguageValidator::CODE_INVALID,
 				[ AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias ]
 			),
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/aliases/0'",
-			[ UseCaseError::CONTEXT_PATH => '/aliases/0' ],
 		];
 
 		$duplicateAlias = 'foo';
 		yield 'alias duplicate in the request' => [
+			new UseCaseError(
+				UseCaseError::ALIAS_DUPLICATE,
+				"Alias list contains a duplicate alias: '$duplicateAlias'",
+				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
+			),
 			[ $duplicateAlias, 'bar', $duplicateAlias ],
-			null,
-			UseCaseError::ALIAS_DUPLICATE,
-			"Alias list contains a duplicate alias: '{$duplicateAlias}'",
-			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
 		];
 
 		$duplicateAlias = 'foo';
 		yield 'alias already exists' => [
+			new UseCaseError(
+				UseCaseError::ALIAS_DUPLICATE,
+				"Alias list contains a duplicate alias: '$duplicateAlias'",
+				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
+			),
 			[ $duplicateAlias, 'bar' ],
 			null,
-			UseCaseError::ALIAS_DUPLICATE,
-			"Alias list contains a duplicate alias: '{$duplicateAlias}'",
-			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
 			[ $duplicateAlias, 'baz' ],
-		];
-
-		yield 'alias list must not be empty' => [
-			[],
-			null,
-			UseCaseError::INVALID_VALUE,
-			"Invalid value at '/aliases'",
-			[ UseCaseError::CONTEXT_PATH => '/aliases' ],
 		];
 	}
 

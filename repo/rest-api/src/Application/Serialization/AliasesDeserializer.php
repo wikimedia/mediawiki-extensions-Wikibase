@@ -20,7 +20,6 @@ class AliasesDeserializer {
 	 */
 	public function deserialize( array $serialization ): AliasGroupList {
 		$aliasGroups = [];
-
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			if ( !is_array( $aliasesInLanguage ) || !array_is_list( $aliasesInLanguage ) ) {
 				throw new InvalidAliasesInLanguageException( $language, $aliasesInLanguage, $language );
@@ -28,10 +27,8 @@ class AliasesDeserializer {
 
 			$aliases = [];
 			foreach ( $aliasesInLanguage as $index => $alias ) {
-
 				if ( !is_string( $alias ) ) {
-					$path = $language . '/' . $index;
-					throw new InvalidAliasesInLanguageException( $language, $alias, $path );
+					throw new InvalidAliasesInLanguageException( $language, $alias, "$language/$index" );
 				}
 
 				$alias = trim( $alias );

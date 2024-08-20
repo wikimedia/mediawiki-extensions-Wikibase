@@ -65,6 +65,16 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 	}
 
 	public static function invalidAliasesProvider(): Generator {
+		yield 'aliases is not an object' => [
+			[ 'sequential array, not an object' ],
+			UseCaseError::newPatchResultInvalidValue( '', [ 'sequential array, not an object' ] ),
+		];
+
+		yield 'aliases in language is not a list' => [
+			[ 'en' => [ 'associative array' => 'not a list' ] ],
+			UseCaseError::newPatchResultInvalidValue( '/en', [ 'associative array' => 'not a list' ] ),
+		];
+
 		yield 'empty alias' => [
 			[ 'de' => [ '' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/de/0', '' ),
@@ -89,16 +99,6 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 		yield 'alias contains invalid character' => [
 			[ 'en' => [ 'valid alias', $invalidAlias ] ],
 			UseCaseError::newPatchResultInvalidValue( '/en/1', $invalidAlias ),
-		];
-
-		yield 'aliases in language is not a list' => [
-			[ 'en' => [ 'associative array' => 'not a list' ] ],
-			UseCaseError::newPatchResultInvalidValue( '/en', [ 'associative array' => 'not a list' ] ),
-		];
-
-		yield 'aliases is not an object' => [
-			[ 'sequential array, not an object' ],
-			UseCaseError::newPatchResultInvalidValue( '', [ 'sequential array, not an object' ] ),
 		];
 
 		$invalidLanguage = 'not-a-valid-language-code';

@@ -8,7 +8,8 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer
@@ -56,45 +57,50 @@ class AliasesDeserializerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideEmptyAlias
+	 * @dataProvider provideInvalidAliases
 	 */
-	public function testGivenEmptyAlias_throwsException( array $aliasesListWithEmptyAlias, string $language, int $index ): void {
+	public function testGivenInvalidAliases_throwsException(
+		SerializationException $expectedException,
+		array $invalidAliases
+	): void {
 		try {
-			( new AliasesDeserializer() )->deserialize( $aliasesListWithEmptyAlias );
-			$this->fail( 'this should not be reached' );
-		} catch ( EmptyAliasException $e ) {
-			$this->assertSame( $language, $e->getLanguage() );
-			$this->assertSame( $index, $e->getIndex() );
+			( new AliasesDeserializer() )->deserialize( $invalidAliases );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( SerializationException $e ) {
+			$this->assertEquals( $expectedException, $e );
 		}
 	}
 
-	public static function provideEmptyAlias(): Generator {
-		yield 'empty alias in pos 0' => [ [ 'en' => [ '' ] ], 'en', 0 ];
-		yield 'empty alias in pos 1' => [ [ 'en' => [ 'foo', '' ] ], 'en', 1 ];
-		yield 'whitespace alias' => [ [ 'en' => [ '   ' ] ], 'en', 0 ];
-		yield 'whitespace with tab alias' => [ [ 'en' => [ " \t " ] ], 'en', 0 ];
-	}
+	public function provideInvalidAliases(): Generator {
+		yield "invalid 'aliases in language' - string" => [
+			new InvalidAliasesInLanguageException( 'de', 'this should be a list of strings', 'de' ),
+			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => 'this should be a list of strings' ],
+		];
 
-	public function testGivenInvalidAliasType_throwsException(): void {
-		try {
-			( new AliasesDeserializer() )->deserialize( [ 'en' => [ 123 ] ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( InvalidFieldException $e ) {
-			$this->assertSame( 'en', $e->getField() );
-			$this->assertSame( 'en/0', $e->getPath() );
-			$this->assertSame( 123, $e->getValue() );
-		}
-	}
+		yield "invalid 'aliases in language' - associative array" => [
+			new InvalidAliasesInLanguageException( 'de', [ 'not' => 'a', 'sequential' => 'array' ], 'de' ),
+			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+		];
 
-	public function testGivenInvalidAliasesType_throwsException(): void {
-		$invalidAliasesInLanguage = [ 'associative' => 'not a list' ];
-		try {
-			( new AliasesDeserializer() )->deserialize( [ 'en' => $invalidAliasesInLanguage ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( InvalidFieldException $e ) {
-			$this->assertSame( 'en', $e->getField() );
-			$this->assertSame( $invalidAliasesInLanguage, $e->getValue() );
-		}
+		yield "invalid 'alias' type - integer" => [
+			new InvalidAliasesInLanguageException( 'en', 9183, 'en/0' ),
+			[ 'en' => [ 9183, 'list', 'of', 'aliases' ] ],
+		];
+
+		yield "invalid 'alias' value - zero length string" => [
+			new EmptyAliasException( 'en', 1 ),
+			[ 'en' => [ 'list', '', 'of', 'aliases' ] ],
+		];
+
+		yield "invalid 'alias' value - four spaces" => [
+			new EmptyAliasException( 'en', 2 ),
+			[ 'en' => [ 'list', 'of', '    ', 'aliases' ] ],
+		];
+
+		yield "invalid 'alias' value - spaces and tab" => [
+			new EmptyAliasException( 'en', 3 ),
+			[ 'en' => [ 'list', 'of', 'aliases', "  \t  " ] ],
+		];
 	}
 
 }
