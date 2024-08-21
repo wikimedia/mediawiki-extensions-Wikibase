@@ -5261,9 +5261,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-sitelink-invalid-title": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleInvalidExample"
-              },
               "patched-sitelink-title-does-not-exist": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
               },
@@ -5322,9 +5319,6 @@
               },
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
-              },
-              "patched-sitelink-invalid-title": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleInvalidExample"
               },
               "patched-sitelink-title-does-not-exist": {
                 "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
@@ -7227,16 +7221,6 @@
           "message": "Not a valid sitelink type in patched sitelinks",
           "context": {
             "site_id": "{site_id}"
-          }
-        }
-      },
-      "PatchedSitelinkTitleInvalidExample": {
-        "value": {
-          "code": "patched-sitelink-invalid-title",
-          "message": "Invalid sitelink title {title} for site {site_id} in patched sitelinks",
-          "context": {
-            "site_id": "{site_id}",
-            "title": "{title}"
           }
         }
       },

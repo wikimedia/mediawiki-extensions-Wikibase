@@ -1134,7 +1134,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
 					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
@@ -1170,7 +1169,6 @@
 					},
 					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
-					"patched-sitelink-invalid-title": { "$ref": "./examples.json#/PatchedSitelinkTitleInvalidExample" },
 					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },

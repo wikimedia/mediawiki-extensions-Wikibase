@@ -200,16 +200,6 @@
 			}
 		}
 	},
-	"PatchedSitelinkTitleInvalidExample": {
-		"value": {
-			"code": "patched-sitelink-invalid-title",
-			"message": "Invalid sitelink title {title} for site {site_id} in patched sitelinks",
-			"context": {
-				"site_id": "{site_id}",
-				"title": "{title}"
-			}
-		}
-	},
 	"PatchedSitelinkTitleNotExistExample": {
 		"value": {
 			"code": "patched-sitelink-title-does-not-exist",
