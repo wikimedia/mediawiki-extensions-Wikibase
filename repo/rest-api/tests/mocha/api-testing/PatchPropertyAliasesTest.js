@@ -11,7 +11,7 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;

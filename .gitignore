@@ -18,7 +18,7 @@ tests/browser/.idea
 tests/browser/.bundle/*
 tests/browser/config/config.yml
 .api-testing.config.json
-repo/rest-api/tests/mocha/helpers/.bot-credentials.json
+repo/rest-api/tests/mocha/helpers/.test-user-credentials.json
 
 # Doxygen
 docs/php

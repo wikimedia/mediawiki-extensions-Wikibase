@@ -11,7 +11,7 @@ const {
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( 'DELETE statement', () => {
 

@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newAddItemAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newRequest().getRouteDescription(), () => {
 	let testItemId;

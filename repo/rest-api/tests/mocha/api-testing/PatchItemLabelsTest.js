@@ -8,7 +8,7 @@ const { newPatchItemLabelsRequestBuilder } = require( '../helpers/RequestBuilder
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let testItemId;

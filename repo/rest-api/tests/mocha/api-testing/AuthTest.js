@@ -14,14 +14,17 @@ const {
 	getPropertyEditRequests,
 	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
+const { getOrCreateAuthTestUser } = require( '../helpers/testUsers' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
+	let root;
 
 	// eslint-disable-next-line mocha/no-top-level-hooks
 	before( async () => {
-		// can't use action.root() here because blocking it might interfere with other tests
-		user = await action.mindy();
+		// using a single-purpose user here because blocking it might interfere with other tests
+		user = await getOrCreateAuthTestUser();
+		root = await action.root();
 	} );
 
 	const editRequests = [
@@ -81,17 +84,17 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
 				describe( 'Blocked user', () => {
 					before( async () => {
-						await user.action( 'block', {
+						await root.action( 'block', {
 							user: user.username,
 							reason: 'testing',
-							token: await user.token()
+							token: await root.token()
 						}, 'POST' );
 					} );
 
 					after( async () => {
-						await user.action( 'unblock', {
+						await root.action( 'unblock', {
 							user: user.username,
-							token: await user.token()
+							token: await root.token()
 						}, 'POST' );
 					} );
 

@@ -7,7 +7,7 @@ const { newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBu
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let testPropertyId;

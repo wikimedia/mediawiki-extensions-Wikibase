@@ -7,7 +7,7 @@ const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuil
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let testItemId;

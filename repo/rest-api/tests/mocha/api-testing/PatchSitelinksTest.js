@@ -10,7 +10,7 @@ const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries'
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 

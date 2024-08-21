@@ -10,7 +10,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 

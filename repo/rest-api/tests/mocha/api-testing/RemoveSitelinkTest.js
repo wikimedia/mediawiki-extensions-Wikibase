@@ -9,7 +9,7 @@ const { createEntity, getLocalSiteId, createLocalSitelink } = require( '../helpe
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { getOrCreateBotUser } = require( '../helpers/botUser' );
+const { getOrCreateBotUser } = require( '../helpers/testUsers' );
 
 describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
