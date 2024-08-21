@@ -16,11 +16,11 @@
 	"tooltip-ca-nstab-property": "طلع الخاصيه",
 	"nstab-query": "استعلام",
 	"tooltip-ca-nstab-query": "طلع الاستعلام",
-	"wikibase-edit": "تعديل",
+	"wikibase-edit": "عدل",
 	"wikibase-save": "إحفظ",
 	"wikibase-publish": "انشر",
 	"wikibase-cancel": "الغي",
-	"wikibase-add": "ضيف",
+	"wikibase-add": "خلي",
 	"wikibase-addqualifier": "حط تصفية",
 	"wikibase-addreference": "حط مرجع",
 	"wikibase-save-inprogress": "جاي يحفظ...",
@@ -51,5 +51,5 @@
 	"wikibase-aliases-edit-label": "الاسامي المستعارة، مفصولة بـpipe:",
 	"wikibase-content-language-edit-label": "لغة:",
 	"wikibase-content-language-edit-not-recognized-language": "رمز اللغة المُستعمَل مو معروف.",
-	"wikibase-sitelinks-special": "مواقع غيرها"
+	"wikibase-sitelinks-special": "مواقع غيرهه"
 }
