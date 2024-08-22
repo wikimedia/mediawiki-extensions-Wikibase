@@ -211,9 +211,8 @@ class ItemSerializationRequestValidatingDeserializer {
 				$invalidSiteId = $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE];
 				throw UseCaseError::newInvalidKey( '/item/sitelinks', $invalidSiteId );
 			case SitelinkValidator::CODE_TITLE_MISSING:
-				throw UseCaseError::newMissingField( "/item/sitelinks/{$siteId()}", 'title' );
+				throw UseCaseError::newMissingField( $context[SitelinkValidator::CONTEXT_PATH], 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
 				throw UseCaseError::newInvalidValue( $context[SitelinkValidator::CONTEXT_PATH] );

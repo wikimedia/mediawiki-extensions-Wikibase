@@ -28,9 +28,8 @@ class SitelinkEditRequestValidatingDeserializer {
 			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case SitelinkValidator::CODE_TITLE_MISSING:
-					throw UseCaseError::newMissingField( '/sitelink', 'title' );
+					throw UseCaseError::newMissingField( $context[SitelinkValidator::CONTEXT_PATH], 'title' );
 				case SitelinkValidator::CODE_EMPTY_TITLE:
-					throw UseCaseError::newInvalidValue( '/sitelink/title' );
 				case SitelinkValidator::CODE_INVALID_TITLE:
 				case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
 					throw UseCaseError::newInvalidValue( $context[SitelinkValidator::CONTEXT_PATH] );

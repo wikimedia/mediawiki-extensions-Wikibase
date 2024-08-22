@@ -46,10 +46,8 @@ class PatchedSitelinksValidator {
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw UseCaseError::newPatchResultInvalidKey( '', $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] );
 			case SitelinkValidator::CODE_TITLE_MISSING:
-				throw UseCaseError::newMissingFieldInPatchResult( "/{$siteId()}", 'title' );
+				throw UseCaseError::newMissingFieldInPatchResult( $context[SitelinkValidator::CONTEXT_PATH], 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/title", '' );
-
 			case SitelinkValidator::CODE_INVALID_TITLE:
 			case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
 				throw UseCaseError::newPatchResultInvalidValue(

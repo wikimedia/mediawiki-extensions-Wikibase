@@ -54,7 +54,7 @@ class SitelinkDeserializer {
 	 */
 	public function deserialize( string $siteId, array $serialization, string $basePath = '' ): SiteLink {
 		if ( !array_key_exists( 'title', $serialization ) ) {
-			throw new MissingFieldException( 'title' );
+			throw new MissingFieldException( 'title', $basePath );
 		}
 
 		if ( !is_string( $serialization[ 'title' ] ) ) {
@@ -63,7 +63,7 @@ class SitelinkDeserializer {
 
 		$trimmedTitle = trim( $serialization[ 'title' ] );
 		if ( $trimmedTitle === '' ) {
-			throw new EmptySitelinkException( 'title', $trimmedTitle );
+			throw new EmptySitelinkException( 'title', $trimmedTitle, "$basePath/title" );
 		}
 		if ( preg_match( $this->invalidTitleRegex, $trimmedTitle ) === 1 ) {
 			throw new InvalidFieldException( 'title', $trimmedTitle, "$basePath/title" );
