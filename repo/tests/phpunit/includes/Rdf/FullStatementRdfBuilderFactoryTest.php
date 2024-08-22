@@ -23,12 +23,19 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class FullStatementRdfBuilderFactoryTest extends TestCase {
 
+	/** @var DedupeBag */
 	private $dedupe;
+	/** @var RdfVocabulary */
 	private $vocabulary;
+	/** @var RdfWriter */
 	private $writer;
+	/** @var EntityMentionListener */
 	private $mentionedEntityTracker;
+	/** @var ValueSnakRdfBuilderFactory */
 	private $valueSnakRdfBuilderFactory;
+	/** @var DispatchingValueSnakRdfBuilder */
 	private $valueSnakRdfBuilder;
+	/** @var PropertyDataTypeLookup */
 	private $propertyDataLookup;
 
 	protected function setUp(): void {

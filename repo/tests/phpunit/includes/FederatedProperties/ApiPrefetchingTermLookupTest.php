@@ -23,6 +23,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	use HttpResponseMockerTrait;
 
+	/** @var string[] */
 	private $responseDataFiles = [
 		'q42-en' => 'api-prefetching-term-lookup-test-data-q42-en.json',
 		'p18-en' => 'api-prefetching-term-lookup-test-data-p18-en.json',
@@ -36,9 +37,12 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		'p18-p31-en-de' => 'api-prefetching-term-lookup-test-data-p18-p31-en-de.json',
 	];
 
+	/** @var string[] */
 	private $data = [];
 
+	/** @var FederatedPropertyId */
 	private $fp18;
+	/** @var FederatedPropertyId */
 	private $fp31;
 	private const CONCEPT_BASE_URI = 'http://wikidata.org/entity/';
 

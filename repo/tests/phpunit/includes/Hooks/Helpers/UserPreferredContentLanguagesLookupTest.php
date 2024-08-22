@@ -17,7 +17,9 @@ use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
  */
 class UserPreferredContentLanguagesLookupTest extends TestCase {
 
+	/** @var UserLanguageLookup */
 	private $userLanguageLookup;
+	/** @var StaticContentLanguages */
 	private $contentLanguages;
 
 	protected function setUp(): void {

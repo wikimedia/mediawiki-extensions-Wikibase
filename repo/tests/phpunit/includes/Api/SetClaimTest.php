@@ -44,6 +44,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SetClaimTest extends WikibaseApiTestCase {
 
+	/** @var PropertyId[] */
 	private static $propertyIds;
 
 	public function addDBDataOnce() {

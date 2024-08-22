@@ -14,7 +14,9 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 
+	/** @var string */
 	private $termInLangId;
+	/** @var array */
 	private $params;
 
 	protected function setUp(): void {

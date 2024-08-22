@@ -28,14 +28,23 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class ItemRdfBuilderTest extends TestCase {
 
+	/** @var DedupeBag */
 	private $dedupe;
+	/** @var RdfVocabulary */
 	private $vocabulary;
+	/** @var RdfWriter */
 	private $writer;
+	/** @var EntityMentionListener */
 	private $mentionedEntityTracker;
+	/** @var SiteLinksRdfBuilder */
 	private $siteLinksRdfBuilder;
+	/** @var ValueSnakRdfBuilderFactory */
 	private $valueSnakRdfBuilderFactory;
+	/** @var TermsRdfBuilder */
 	private $termsRdfBuilder;
+	/** @var TruthyStatementRdfBuilderFactory */
 	private $truthyStatementRdfBuilderFactory;
+	/** @var FullStatementRdfBuilderFactory */
 	private $fullStatementRdfBuilderFactory;
 
 	protected function setUp(): void {

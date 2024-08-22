@@ -43,8 +43,10 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
+	/** @var MockJobQueueFactory */
 	private $mockJobQueueFactory;
 
+	/** @var JobQueueGroup */
 	private $jobQueueMock;
 
 	protected function setUp(): void {

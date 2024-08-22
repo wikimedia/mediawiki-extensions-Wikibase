@@ -15,6 +15,7 @@ use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
  */
 class CommaSeparatedListTest extends \PHPUnit\Framework\TestCase {
 
+	/** @var CommaSeparatedList */
 	private $handler;
 
 	protected function setUp(): void {

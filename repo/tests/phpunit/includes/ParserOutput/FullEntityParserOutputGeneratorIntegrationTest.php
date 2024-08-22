@@ -38,8 +38,10 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	 */
 	private $repo;
 
+	/** @var string */
 	private $itemNamespace;
 
+	/** @var string */
 	private $propertyNamespace;
 
 	protected function setUp(): void {

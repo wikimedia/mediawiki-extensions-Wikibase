@@ -22,6 +22,7 @@ use MediaWiki\Title\Title;
  */
 class GetEntitiesTest extends WikibaseApiTestCase {
 
+	/** @var string[] */
 	private static $usedHandles = [ 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' ];
 
 	public function addDBDataOnce() {

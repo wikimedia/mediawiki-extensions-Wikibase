@@ -18,21 +18,25 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  */
 class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 
+	/** @var array */
 	private static $apiMimeTypes = [
 		'application/vnd.php.serialized',
 		'application/json',
 	];
 
+	/** @var array */
 	private static $apiExtensions = [
 		'php',
 		'json',
 	];
 
+	/** @var array */
 	private static $apiFormats = [
 		'php',
 		'json',
 	];
 
+	/** @var array */
 	private static $rdfMimeTypes = [
 		'application/rdf+xml',
 		'text/n3',
@@ -44,6 +48,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'application/ld+json',
 	];
 
+	/** @var array */
 	private static $rdfExtensions = [
 		'rdf',
 		'n3',
@@ -52,6 +57,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'jsonld',
 	];
 
+	/** @var array */
 	private static $rdfFormats = [
 		'rdfxml',
 		'n3',
@@ -60,24 +66,28 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'jsonld',
 	];
 
+	/** @var array */
 	private static $badMimeTypes = [
 		'text/html',
 		'text/text',
 		// 'text/plain', // ntriples presents as text/plain!
 	];
 
+	/** @var array */
 	private static $badExtensions = [
 		'html',
 		'text',
 		'txt',
 	];
 
+	/** @var array */
 	private static $badFormats = [
 		'html',
 		'text',
 		'xml',
 	];
 
+	/** @var array */
 	private static $formatMappings = [
 		'json' => 'json', // should be api json
 		'application/json' => 'json', // should be api json

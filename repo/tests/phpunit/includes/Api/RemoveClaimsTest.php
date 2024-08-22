@@ -33,6 +33,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveClaimsTest extends WikibaseApiTestCase {
 
+	/** @var PropertyId */
 	private static $propertyId;
 
 	private function addStatementsAndSave( Item $item ): Item {

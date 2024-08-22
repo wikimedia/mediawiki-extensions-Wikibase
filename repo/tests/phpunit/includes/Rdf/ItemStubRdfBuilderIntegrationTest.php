@@ -24,6 +24,7 @@ class ItemStubRdfBuilderIntegrationTest extends MediaWikiIntegrationTestCase {
 	 * @var NTriplesRdfTestHelper
 	 */
 	private $helper;
+	/** @var InMemoryPrefetchingTermLookup */
 	private $termLookup;
 
 	protected function setUp(): void {

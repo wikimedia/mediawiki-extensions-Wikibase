@@ -22,9 +22,13 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class ItemStubRdfBuilderTest extends TestCase {
 
+	/** @var RdfWriter */
 	private $writer;
+	/** @var RdfVocabulary */
 	private $vocab;
+	/** @var PrefetchingItemTermLookup */
 	private $termLookup;
+	/** @var string[] */
 	private $languages;
 
 	protected function setUp(): void {

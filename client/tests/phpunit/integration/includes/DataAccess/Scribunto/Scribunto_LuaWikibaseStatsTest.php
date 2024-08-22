@@ -21,8 +21,11 @@ use Wikibase\Client\WikibaseClient;
  */
 class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/** @var bool */
 	private $oldTrackLuaFunctionCallsPerWiki;
+	/** @var bool */
 	private $oldTrackLuaFunctionCallsPerSiteGroup;
+	/** @var int */
 	private $oldTrackLuaFunctionCallsSampleRate;
 
 	/** @inheritDoc */
