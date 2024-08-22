@@ -22,21 +22,21 @@ class SitelinkEditRequestValidatingDeserializer {
 	 * @throws UseCaseError
 	 */
 	public function validateAndDeserialize( SitelinkEditRequest $request ): SiteLink {
-		$validationError = $this->validator->validate( $request->getItemId(), $request->getSiteId(), $request->getSitelink() );
+		$validationError = $this->validator->validate( $request->getItemId(), $request->getSiteId(), $request->getSitelink(), '/sitelink' );
 
 		if ( $validationError ) {
+			$context = $validationError->getContext();
 			switch ( $validationError->getCode() ) {
 				case SitelinkValidator::CODE_TITLE_MISSING:
 					throw UseCaseError::newMissingField( '/sitelink', 'title' );
 				case SitelinkValidator::CODE_EMPTY_TITLE:
-				case SitelinkValidator::CODE_INVALID_TITLE:
-				case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 					throw UseCaseError::newInvalidValue( '/sitelink/title' );
-				case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-					throw UseCaseError::newInvalidValue( '/sitelink/badges' );
+				case SitelinkValidator::CODE_INVALID_TITLE:
+				case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
+					throw UseCaseError::newInvalidValue( $context[SitelinkValidator::CONTEXT_PATH] );
 				case SitelinkValidator::CODE_INVALID_BADGE:
 				case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-					$badge = $validationError->getContext()[SitelinkValidator::CONTEXT_BADGE];
+					$badge = $context[SitelinkValidator::CONTEXT_VALUE];
 					$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $request->getSitelink()[ 'badges' ] );
 					throw UseCaseError::newInvalidValue( "/sitelink/badges/$badgeIndex" );
 				case SitelinkValidator::CODE_TITLE_NOT_FOUND:

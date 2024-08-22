@@ -34,7 +34,7 @@ class StatementSerializationRequestValidatingDeserializer {
 						$context[StatementValidator::CONTEXT_FIELD]
 					);
 				case StatementValidator::CODE_INVALID_FIELD_TYPE:
-					throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_FIELD] );
+					throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 				default:
 					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}

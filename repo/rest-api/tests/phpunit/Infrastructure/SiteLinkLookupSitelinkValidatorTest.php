@@ -48,7 +48,8 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 	 */
 	public function testGivenSitelinkDeserializerThrows_returnsValidationErrors(
 		Exception $deserializerException,
-		string $validationErrorCode
+		string $validationErrorCode,
+		array $context
 	): void {
 		$this->sitelinkDeserializer = $this->createStub( SitelinkDeserializer::class );
 		$this->sitelinkDeserializer->method( 'deserialize' )->willThrowException( $deserializerException );
@@ -56,19 +57,39 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		$siteId = 'enwiki';
 		$validationError = $this->newSitelinkValidator()->validate( 'Q444', $siteId, [] );
 		$this->assertSame( $validationErrorCode, $validationError->getCode() );
-		$this->assertEquals( [ SitelinkValidator::CONTEXT_SITE_ID => $siteId ], $validationError->getContext() );
+		$this->assertEquals( $context, $validationError->getContext() );
 	}
 
 	public function provideInvalidSitelink(): \Generator {
-		yield 'missing title' => [ new MissingFieldException( 'title' ), SitelinkValidator::CODE_TITLE_MISSING ];
+		yield 'missing title' => [
+			new MissingFieldException( 'title' ),
+			SitelinkValidator::CODE_TITLE_MISSING,
+			[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ],
+		];
 
-		yield 'title is empty' => [ new EmptySitelinkException( 'title', '' ), SitelinkValidator::CODE_EMPTY_TITLE ];
+		yield 'title is empty' => [
+			new EmptySitelinkException( 'title', '' ),
+			SitelinkValidator::CODE_EMPTY_TITLE,
+			[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ],
+		];
 
-		yield 'invalid title' => [ new InvalidFieldException( 'title', 'invalid?' ), SitelinkValidator::CODE_INVALID_TITLE ];
+		yield 'invalid title' => [
+			new InvalidFieldException( 'title', 'invalid?', '/title' ),
+			SitelinkValidator::CODE_INVALID_TITLE,
+			[ SitelinkValidator::CONTEXT_PATH => '/title', SitelinkValidator::CONTEXT_VALUE => 'invalid?' ],
+		];
 
-		yield 'invalid title type' => [ new InvalidFieldTypeException( 'title' ), SitelinkValidator::CODE_INVALID_TITLE_TYPE ];
+		yield 'invalid title type' => [
+			new InvalidFieldTypeException( 123, '/title' ),
+			SitelinkValidator::CODE_INVALID_FIELD_TYPE,
+			[ SitelinkValidator::CONTEXT_PATH => '/title', SitelinkValidator::CONTEXT_VALUE => 123 ],
+		];
 
-		yield 'title not found' => [ new SitelinkTargetNotFound(), SitelinkValidator::CODE_TITLE_NOT_FOUND ];
+		yield 'title not found' => [
+			new SitelinkTargetNotFound(),
+			SitelinkValidator::CODE_TITLE_NOT_FOUND,
+			[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ],
+		];
 	}
 
 	public function testGivenGetValidatedSitelinkCalledBeforeValidate_throws(): void {

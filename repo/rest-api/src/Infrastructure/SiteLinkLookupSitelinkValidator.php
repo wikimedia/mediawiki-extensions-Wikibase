@@ -32,9 +32,14 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
-	public function validate( ?string $itemId, string $siteId, array $sitelink ): ?ValidationError {
+	public function validate(
+		?string $itemId,
+		string $siteId,
+		array $sitelink,
+		string $basePath = ''
+	): ?ValidationError {
 		try {
-			$this->deserializedSitelink = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink );
+			$this->deserializedSitelink = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink, $basePath );
 		} catch ( MissingFieldException $e ) {
 			return new ValidationError( self::CODE_TITLE_MISSING, [ self::CONTEXT_SITE_ID => $siteId ] );
 		} catch ( EmptySitelinkException $e ) {
@@ -43,25 +48,24 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 			if ( $e->getField() !== 'title' ) {
 				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldException}" );
 			}
-			return new ValidationError( self::CODE_INVALID_TITLE, [ self::CONTEXT_SITE_ID => $siteId ] );
+			return new ValidationError(
+				self::CODE_INVALID_TITLE,
+				[ self::CONTEXT_PATH => $e->getPath(), self::CONTEXT_VALUE => $e->getValue() ]
+			);
 		} catch ( InvalidFieldTypeException $e ) {
-			switch ( $e->getField() ) {
-				case 'title':
-					return new ValidationError( self::CODE_INVALID_TITLE_TYPE, [ self::CONTEXT_SITE_ID => $siteId ] );
-				case 'badges':
-					return new ValidationError( self::CODE_INVALID_BADGES_TYPE, [ self::CONTEXT_SITE_ID => $siteId ] );
-				default:
-					throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldTypeException}" );
-			}
+			return new ValidationError(
+				self::CODE_INVALID_FIELD_TYPE,
+				[ self::CONTEXT_PATH => $e->getPath(), self::CONTEXT_VALUE => $e->getValue() ]
+			);
 		} catch ( InvalidSitelinkBadgeException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_BADGE,
-				[ self::CONTEXT_BADGE => $e->getValue(), self::CONTEXT_SITE_ID => $siteId ]
+				[ self::CONTEXT_VALUE => $e->getValue(), self::CONTEXT_SITE_ID => $siteId ]
 			);
 		} catch ( BadgeNotAllowed $e ) {
 			return new ValidationError(
 				self::CODE_BADGE_NOT_ALLOWED,
-				[ self::CONTEXT_BADGE => $e->getBadge(), self::CONTEXT_SITE_ID => $siteId ]
+				[ self::CONTEXT_VALUE => $e->getBadge(), self::CONTEXT_SITE_ID => $siteId ]
 			);
 		} catch ( SitelinkTargetNotFound $e ) {
 			return new ValidationError( self::CODE_TITLE_NOT_FOUND, [ self::CONTEXT_SITE_ID => $siteId ] );

@@ -137,7 +137,6 @@ class StatementsValidatorTest extends TestCase {
 				[
 					StatementValidator::CONTEXT_PATH => '/P123/0',
 					StatementValidator::CONTEXT_VALUE => $invalidStatement,
-					StatementValidator::CONTEXT_FIELD => '/P123/0',
 				]
 			),
 		];

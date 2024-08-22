@@ -179,7 +179,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementValidator::CODE_INVALID_FIELD:
 				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 			case StatementValidator::CODE_INVALID_FIELD_TYPE:
-				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_FIELD] );
+				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 			case StatementValidator::CODE_MISSING_FIELD:
 				throw UseCaseError::newMissingField(
 					$context[StatementValidator::CONTEXT_PATH],
@@ -213,14 +213,13 @@ class ItemSerializationRequestValidatingDeserializer {
 			case SitelinkValidator::CODE_TITLE_MISSING:
 				throw UseCaseError::newMissingField( "/item/sitelinks/{$siteId()}", 'title' );
 			case SitelinkValidator::CODE_EMPTY_TITLE:
-			case SitelinkValidator::CODE_INVALID_TITLE:
-			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/title" );
-			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges" );
+			case SitelinkValidator::CODE_INVALID_TITLE:
+			case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
+				throw UseCaseError::newInvalidValue( $context[SitelinkValidator::CONTEXT_PATH] );
 			case SitelinkValidator::CODE_INVALID_BADGE:
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-				$badge = $context[SitelinkValidator::CONTEXT_BADGE];
+				$badge = $context[SitelinkValidator::CONTEXT_VALUE];
 				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $serialization[$siteId()][ 'badges' ] );
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges/$badgeIndex" );
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
