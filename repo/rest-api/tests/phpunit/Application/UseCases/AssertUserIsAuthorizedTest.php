@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 
@@ -27,7 +28,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker->expects( $this->once() )
 			->method( 'canCreateItem' )
 			->with( User::newAnonymous() )
-			->willReturn( true );
+			->willReturn( PermissionCheckResult::newAllowed() );
 
 		$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
 	}
@@ -37,7 +38,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker->expects( $this->once() )
 			->method( 'canCreateItem' )
 			->with( User::newAnonymous() )
-			->willReturn( false );
+			->willReturn( PermissionCheckResult::newDenialForUnknownReason() );
 
 		try {
 			$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
@@ -55,7 +56,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
 			->with( User::newAnonymous(), $entityId )
-			->willReturn( true );
+			->willReturn( PermissionCheckResult::newAllowed() );
 
 		$this->newAssertUserIsAuthorized( $permissionChecker )->checkEditPermissions( $entityId, User::newAnonymous() );
 	}
@@ -68,7 +69,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
 			->with( User::newAnonymous(), $entityId )
-			->willReturn( false );
+			->willReturn( PermissionCheckResult::newDenialForUnknownReason() );
 
 		try {
 			$this->newAssertUserIsAuthorized( $permissionChecker )->checkEditPermissions( $entityId, User::newAnonymous() );
