@@ -28,6 +28,12 @@ class AssertUserIsAuthorized {
 				'Access to resource is denied',
 				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ]
 			);
+		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
+			throw new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
+				'Access to resource is denied',
+				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
+			);
 		} else {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
@@ -37,12 +43,21 @@ class AssertUserIsAuthorized {
 	}
 
 	public function checkCreateItemPermissions( User $user ): void {
-		if ( $this->permissionChecker->canCreateItem( $user )->isDenied() ) {
+		$permissionCheckResult = $this->permissionChecker->canCreateItem( $user );
+		if ( !$permissionCheckResult->isDenied() ) {
+			return;
+		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
 			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
-				'You have no permission to create an item'
+				UseCaseError::PERMISSION_DENIED,
+				'Access to resource is denied',
+				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
 			);
 		}
+
+		throw new UseCaseError(
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+			'You have no permission to create an item'
+		);
 	}
 
 }

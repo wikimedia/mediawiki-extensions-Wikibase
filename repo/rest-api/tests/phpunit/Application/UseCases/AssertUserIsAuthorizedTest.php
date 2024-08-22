@@ -33,19 +33,44 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
 	}
 
-	public function testGivenUserIsUnauthorizedToCreateAnItem_throwsUseCaseError(): void {
+	/**
+	 * @dataProvider itemCreationDeniedProvider
+	 */
+	public function testGivenUserIsUnauthorizedToCreateAnItem_throwsUseCaseError(
+		PermissionCheckResult $checkResult,
+		UseCaseError $expectedError
+	): void {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canCreateItem' )
 			->with( User::newAnonymous() )
-			->willReturn( PermissionCheckResult::newDenialForUnknownReason() );
+			->willReturn( $checkResult );
 
 		try {
 			$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON, $e->getErrorCode() );
+			$this->assertEquals( $expectedError, $e );
 		}
+	}
+
+	public function itemCreationDeniedProvider(): Generator {
+		yield 'unknown reason' => [
+			PermissionCheckResult::newDenialForUnknownReason(),
+			new UseCaseError(
+				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+				'You have no permission to create an item'
+			),
+		];
+
+		yield 'user blocked' => [
+			PermissionCheckResult::newUserBlocked(),
+			new UseCaseError(
+				UseCaseError::PERMISSION_DENIED,
+				'Access to resource is denied',
+				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
+			),
+		];
 	}
 
 	/**
@@ -106,6 +131,16 @@ class AssertUserIsAuthorizedTest extends TestCase {
 					UseCaseError::PERMISSION_DENIED,
 					'Access to resource is denied',
 					[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ]
+				),
+			];
+
+			yield "{$id->getEntityType()} - permission denied, user blocked" => [
+				$id,
+				PermissionCheckResult::newUserBlocked(),
+				new UseCaseError(
+					UseCaseError::PERMISSION_DENIED,
+					'Access to resource is denied',
+					[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
 				),
 			];
 		}

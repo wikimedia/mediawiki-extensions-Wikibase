@@ -60,6 +60,8 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 			return PermissionCheckResult::newAllowed();
 		} elseif ( $this->hasError( 'protectedpagetext', $status ) ) {
 			return PermissionCheckResult::newPageProtected();
+		} elseif ( $this->hasError( 'blockedtext', $status ) ) {
+			return PermissionCheckResult::newUserBlocked();
 		}
 
 		return PermissionCheckResult::newDenialForUnknownReason();

@@ -43,6 +43,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PERMISSION_DENIED_REASON_PAGE_PROTECTED = 'resource-protected';
+	public const PERMISSION_DENIED_REASON_USER_BLOCKED = 'blocked-user';
 	public const PERMISSION_DENIED_UNKNOWN_REASON = 'permission-denied-unknown-reason';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
