@@ -34,7 +34,8 @@
 			"Wladek92",
 			"Wyz",
 			"Zolo",
-			"SleaY"
+			"SleaY",
+			"Bouzinac"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -159,7 +160,9 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "Qualificatif{{PLURAL:$1||s}} ajouté{{PLURAL:$1||s}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Qualificatif{{PLURAL:$1||s}} modifié{{PLURAL:$1||s}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Qualificatif{{PLURAL:$1||s}} retiré{{PLURAL:$1||s}}",
+	"wikibase-entity-summary-wbremovequalifiers-update": "Qualificatif {{PLURAL:$1|qualifier|qualifiers}} retiré",
 	"wikibase-entity-summary-wbremovereferences-remove": "Référence{{PLURAL:$3||s}} retirée{{PLURAL:$3||s}} d’une déclaration",
+	"wikibase-entity-summary-wbremovereferences-update": "Référence{{PLURAL:$3||s}} retirée{{PLURAL:$3||s}} d’une déclaration",
 	"wikibase-entity-summary-wbmergeitems-from": "Élément fusionné depuis $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Élément fusionné vers $3",
 	"wikibase-item-summary-wbcreate-new": "Nouvel élément créé",

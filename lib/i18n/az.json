@@ -4,7 +4,8 @@
 			"Dağlı95",
 			"Eminn",
 			"Toghrul Rahimli",
-			"Wertuose"
+			"Wertuose",
+			"Nemoralis"
 		]
 	},
 	"specialpages-group-wikibase": "Vikibaza",
@@ -17,6 +18,7 @@
 	"wikibase-error-remove-generic": "Xətaya görə silmək mümkün olmadı.",
 	"wikibase-error-save-timeout": "Hazırda texniki çətinliklər mövcuddur. Zəhmət olmasa, bir daha cəhd edin.",
 	"wikibase-error-remove-timeout": "Hazırda texniki çətinliklər mövcuddur. Zəhmət olmasa, bir daha cəhd edin.",
+	"wikibase-error-ui-no-external-page": "\"$2\" səhifəsini \"$1\" saytında tapmaq mümkün olmadı.",
 	"wikibase-timedetails-calendar": "Təqvim",
 	"wikibase-timedetails-precision": "Dəqiqlik",
 	"wikibase-globedetails-precision": "Dəqiqlik",
