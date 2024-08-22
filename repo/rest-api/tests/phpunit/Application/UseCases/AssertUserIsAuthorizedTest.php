@@ -44,7 +44,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreateItemPermissions( User::newAnonymous() );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::PERMISSION_DENIED, $e->getErrorCode() );
+			$this->assertSame( UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON, $e->getErrorCode() );
 		}
 	}
 
@@ -62,29 +62,53 @@ class AssertUserIsAuthorizedTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideEntityId
+	 * @dataProvider editPermissionDeniedProvider
 	 */
-	public function testGivenUserIsUnauthorizedToEdit_throwsUseCaseError( EntityId $entityId ): void {
+	public function testGivenUserIsUnauthorizedToEdit_throwsUseCaseError(
+		EntityId $entityId,
+		PermissionCheckResult $checkResult,
+		UseCaseError $expectedError
+	): void {
 		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
 		$permissionChecker->expects( $this->once() )
 			->method( 'canEdit' )
 			->with( User::newAnonymous(), $entityId )
-			->willReturn( PermissionCheckResult::newDenialForUnknownReason() );
+			->willReturn( $checkResult );
 
 		try {
 			$this->newAssertUserIsAuthorized( $permissionChecker )->checkEditPermissions( $entityId, User::newAnonymous() );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame(
-				UseCaseError::PERMISSION_DENIED,
-				$e->getErrorCode()
-			);
+			$this->assertEquals( $expectedError, $e );
 		}
 	}
 
 	public function provideEntityId(): Generator {
 		yield 'item id' => [ new ItemId( 'Q123' ) ];
 		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
+	}
+
+	public function editPermissionDeniedProvider(): Generator {
+		foreach ( $this->provideEntityId() as [ $id ] ) {
+			yield "{$id->getEntityType()} - permission denied, unknown reason" => [
+				$id,
+				PermissionCheckResult::newDenialForUnknownReason(),
+				new UseCaseError(
+					UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+					'You have no permission to edit this resource'
+				),
+			];
+
+			yield "{$id->getEntityType()} - permission denied, page protected" => [
+				$id,
+				PermissionCheckResult::newPageProtected(),
+				new UseCaseError(
+					UseCaseError::PERMISSION_DENIED,
+					'Access to resource is denied',
+					[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ]
+				),
+			];
+		}
 	}
 
 	private function newAssertUserIsAuthorized( PermissionChecker $permissionChecker ): AssertUserIsAuthorized {

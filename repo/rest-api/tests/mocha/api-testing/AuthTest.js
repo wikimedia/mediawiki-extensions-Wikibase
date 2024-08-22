@@ -15,6 +15,7 @@ const {
 	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { getOrCreateAuthTestUser } = require( '../helpers/testUsers' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -63,7 +64,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	} );
 
 	describe( 'Authorization', () => {
-		function assertPermissionDenied( response ) {
+		function assertGenericPermissionDenied( response ) {
 			expect( response ).to.have.status( 403 );
 			assert.strictEqual( response.body.httpCode, 403 );
 			assert.strictEqual( response.body.httpReason, 'Forbidden' );
@@ -73,7 +74,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		describeEachRouteWithReset(
 			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
 				it( 'Unauthorized bot edit', async () => {
-					assertPermissionDenied(
+					assertGenericPermissionDenied(
 						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
 					);
 				} );
@@ -122,7 +123,12 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 					// this test often hits a race condition where this request is made before the entity is protected
 					this.retries( 3 );
 
-					assertPermissionDenied( await newRequestBuilder().makeRequest() );
+					assertValidError(
+						await newRequestBuilder().makeRequest(),
+						403,
+						'permission-denied',
+						{ reason: 'resource-protected' }
+					);
 				} );
 			} );
 		} );

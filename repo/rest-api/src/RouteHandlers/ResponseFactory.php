@@ -17,8 +17,8 @@ class ResponseFactory {
 	}
 
 	public function newErrorResponse( string $code, string $message, array $context = null ): Response {
-		// respond with framework error, when user cannot edit the Item
-		if ( $code === UseCaseError::PERMISSION_DENIED ) {
+		// respond with framework error, when user cannot edit the Item for an unknown reason
+		if ( $code === UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON ) {
 			return $this->newFrameworkAlikePermissionDeniedResponse();
 		}
 

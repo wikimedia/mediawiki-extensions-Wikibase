@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
+use MessageSpecifier;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -57,9 +58,21 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 	private function newPermissionCheckResultFromStatus( Status $status ): PermissionCheckResult {
 		if ( $status->isGood() ) {
 			return PermissionCheckResult::newAllowed();
+		} elseif ( $this->hasError( 'protectedpagetext', $status ) ) {
+			return PermissionCheckResult::newPageProtected();
 		}
 
 		return PermissionCheckResult::newDenialForUnknownReason();
+	}
+
+	private function hasError( string $error, Status $status ): bool {
+		return in_array(
+			$error,
+			array_map(
+				fn( MessageSpecifier $message ) => $message->getKey(),
+				$status->getMessages()
+			)
+		);
 	}
 
 }

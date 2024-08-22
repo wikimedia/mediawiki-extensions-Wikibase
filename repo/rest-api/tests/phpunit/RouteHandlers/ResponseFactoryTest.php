@@ -68,7 +68,7 @@ class ResponseFactoryTest extends TestCase {
 	public function testGivenAuthorizationError_newErrorResponseReturnsRestWriteDenied(): void {
 
 		$httpResponse = ( new ResponseFactory() )
-			->newErrorResponse( UseCaseError::PERMISSION_DENIED, 'item protected' );
+			->newErrorResponse( UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON, 'item protected' );
 
 		$this->assertSame( 403, $httpResponse->getStatusCode() );
 		$this->assertStringContainsString( 'rest-write-denied', $httpResponse->getBody()->getContents() );

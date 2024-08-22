@@ -42,6 +42,8 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
+	public const PERMISSION_DENIED_REASON_PAGE_PROTECTED = 'resource-protected';
+	public const PERMISSION_DENIED_UNKNOWN_REASON = 'permission-denied-unknown-reason';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
@@ -70,6 +72,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
+	public const CONTEXT_REASON = 'reason';
 	public const CONTEXT_REDIRECT_TARGET = 'redirect_target';
 	public const CONTEXT_SITE_ID = 'site_id';
 	public const CONTEXT_STATEMENT_GROUP_PROPERTY_ID = 'statement_group_property_id';
@@ -116,7 +119,8 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_STATEMENT_PROPERTY_ID,
 		],
 		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::CONTEXT_STATEMENT_PROPERTY_ID ],
-		self::PERMISSION_DENIED => [],
+		self::PERMISSION_DENIED => [ self::CONTEXT_REASON ],
+		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::SITELINK_NOT_DEFINED => [],

@@ -128,7 +128,7 @@ class RemoveItemDescriptionTest extends TestCase {
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
-		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'You have no permission to edit this item.' );
+		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON, 'You have no permission to edit this item.' );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $itemId, User::newAnonymous() )
