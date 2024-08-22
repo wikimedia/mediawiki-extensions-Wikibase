@@ -13,9 +13,9 @@ use Wikibase\Lib\Store\EntityTermLookupBase;
  */
 class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {
 
-	private $dispatcher;
+	private ServiceBySourceAndTypeDispatcher $dispatcher;
 
-	private $sourceLookup;
+	private EntitySourceLookup $sourceLookup;
 
 	public function __construct(
 		ServiceBySourceAndTypeDispatcher $dispatcher,

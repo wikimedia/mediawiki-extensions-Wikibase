@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class PropertyRdfBuilder implements EntityRdfBuilder {
 
-	private $truthyStatementRdfBuilder;
-	private $fullStatementRdfBuilder;
-	private $termsRdfBuilder;
-	private $propertySpecificComponentsRdfBuilder;
+	private ?TruthyStatementRdfBuilder $truthyStatementRdfBuilder = null;
+	private ?FullStatementRdfBuilder $fullStatementRdfBuilder = null;
+	private TermsRdfBuilder $termsRdfBuilder;
+	private PropertySpecificComponentsRdfBuilder $propertySpecificComponentsRdfBuilder;
 
 	public function __construct(
 		int $flavorFlags,

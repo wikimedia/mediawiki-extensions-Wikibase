@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class LegacyAdapterPropertyLookup implements PropertyLookup {
 
-	private $lookup;
+	private EntityLookup $lookup;
 
 	public function __construct( EntityLookup $lookup ) {
 		$this->lookup = $lookup;

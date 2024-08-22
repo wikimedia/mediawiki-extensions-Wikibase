@@ -13,11 +13,11 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class RdfBuilderFactory {
 
-	private $vocabulary;
-	private $entityRdfBuilderFactory;
-	private $entityContentFactory;
-	private $entityStubRdfBuilderFactory;
-	private $entityRevisionLookup;
+	private RdfVocabulary $vocabulary;
+	private EntityRdfBuilderFactory $entityRdfBuilderFactory;
+	private EntityContentFactory $entityContentFactory;
+	private EntityStubRdfBuilderFactory $entityStubRdfBuilderFactory;
+	private EntityRevisionLookup $entityRevisionLookup;
 
 	public function __construct(
 		RdfVocabulary $vocabulary,

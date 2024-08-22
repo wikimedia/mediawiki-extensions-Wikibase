@@ -22,9 +22,9 @@ use Wikibase\Repo\Content\EntityContent;
  */
 class WikiPageActionEntityChangeFactory {
 
-	private $changeFactory;
+	private EntityChangeFactory $changeFactory;
 
-	private $centralIdLookup;
+	private ?CentralIdLookup $centralIdLookup;
 
 	public function __construct(
 		EntityChangeFactory $changeFactory,

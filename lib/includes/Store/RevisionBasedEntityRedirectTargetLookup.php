@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
  */
 class RevisionBasedEntityRedirectTargetLookup implements EntityRedirectTargetLookup {
 
-	private $entityRevisionLookup;
+	private EntityRevisionLookup $entityRevisionLookup;
 
 	public function __construct( EntityRevisionLookup $entityRevisionLookup ) {
 		$this->entityRevisionLookup = $entityRevisionLookup;

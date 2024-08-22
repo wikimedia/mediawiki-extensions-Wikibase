@@ -21,7 +21,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 	 */
 	private $parser;
 
-	private $baseUriExtractor;
+	private BaseUriExtractor $baseUriExtractor;
 
 	/**
 	 * @var EntitySourceDefinitions

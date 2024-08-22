@@ -12,7 +12,7 @@ namespace Wikibase\DataModel\Entity;
  */
 class BasicEntityIdParser implements EntityIdParser {
 
-	private $idParser;
+	private DispatchingEntityIdParser $idParser;
 
 	public function __construct() {
 		$this->idParser = new DispatchingEntityIdParser( self::getBuilders() );
