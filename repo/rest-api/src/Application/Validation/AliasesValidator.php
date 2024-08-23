@@ -80,12 +80,7 @@ class AliasesValidator {
 			}
 		}
 
-		$aliasesDeserializationError = $this->deserializeAliases( $aliases );
-		if ( $aliasesDeserializationError ) {
-			return $aliasesDeserializationError;
-		}
-
-		return $this->validateAliasesInLanguage( $this->deserializedAliases );
+		return $this->deserializeAliases( $aliases ) ?? $this->validateAliasesInLanguage( $this->deserializedAliases );
 	}
 
 	private function deserializeAliases( array $aliases ): ?ValidationError {

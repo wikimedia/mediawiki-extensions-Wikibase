@@ -601,7 +601,31 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	public function aliasesValidationErrorProvider(): Generator {
-		yield 'empty alias' => [
+		yield 'invalid aliases - sequential array' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'not', 'an', 'associative', 'array' ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
+		];
+
+		yield 'invalid language code - xyz' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'xyz' => [ 'alias' ] ],
+			UseCaseError::newPatchResultInvalidKey( '/aliases', 'xyz' ),
+		];
+
+		yield 'invalid language code - empty string' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ '' => [ 'alias' ] ],
+			UseCaseError::newPatchResultInvalidKey( '/aliases', '' ),
+		];
+
+		yield "invalid 'aliases in language' list - associative array" => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'not' => 'a', 'sequential' => 'array' ] ),
+		];
+
+		yield 'invalid alias - empty string' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ '' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
@@ -616,6 +640,12 @@ class PatchedItemValidatorTest extends TestCase {
 				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
 			),
+		];
+
+		yield 'invalid alias - only white space' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'de' => [ " \t " ] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
 		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
@@ -648,25 +678,6 @@ class PatchedItemValidatorTest extends TestCase {
 			$aliasesInLanguageValidator,
 			[ 'en' => [ 'valid alias', $invalidAlias ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', $invalidAlias ),
-		];
-
-		yield 'aliases in language is not a list' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
-			[ 'en' => [ 'associative array' => 'not a list' ] ],
-			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'associative array' => 'not a list' ] ),
-		];
-
-		yield 'aliases is not an associative array' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
-			[ 'sequential array, not an associative array' ],
-			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'sequential array, not an associative array' ] ),
-		];
-
-		$invalidLanguage = 'not-a-valid-language-code';
-		yield 'invalid language code' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
-			[ $invalidLanguage => [ 'alias' ] ],
-			UseCaseError::newPatchResultInvalidKey( '/aliases', $invalidLanguage ),
 		];
 	}
 
@@ -802,7 +813,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'missing title' => [
 			[ $validSiteId => [ 'badges' => [ $badgeItemId ] ] ],
-			UseCaseError::newMissingFieldInPatchResult( "/sitelinks/{$validSiteId}", 'title' ),
+			UseCaseError::newMissingFieldInPatchResult( "/sitelinks/$validSiteId", 'title' ),
 		];
 
 		yield 'empty title' => [

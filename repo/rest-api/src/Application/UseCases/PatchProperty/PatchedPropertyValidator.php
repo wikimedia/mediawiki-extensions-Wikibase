@@ -259,10 +259,7 @@ class PatchedPropertyValidator {
 				case AliasesValidator::CODE_INVALID_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					$value = $context[AliasesValidator::CONTEXT_ALIAS];
-					throw UseCaseError::newPatchResultInvalidValue(
-						"/aliases/$language",
-						$value
-					);
+					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language", $value );
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];

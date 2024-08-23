@@ -18,17 +18,17 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
  */
 class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 
-	private AliasesInLanguageValidator $validator;
 	private AliasesDeserializer $deserializer;
+	private AliasesInLanguageValidator $validator;
 	private ItemAliasesInLanguageRetriever $aliasesRetriever;
 
 	public function __construct(
-		AliasesInLanguageValidator $validator,
 		AliasesDeserializer $deserializer,
+		AliasesInLanguageValidator $validator,
 		ItemAliasesInLanguageRetriever $aliasesRetriever
 	) {
-		$this->validator = $validator;
 		$this->deserializer = $deserializer;
+		$this->validator = $validator;
 		$this->aliasesRetriever = $aliasesRetriever;
 	}
 
@@ -64,7 +64,6 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 
 	private function validate( AliasGroup $aliasesInLanguage ): void {
 		$validationError = $this->validator->validate( $aliasesInLanguage );
-
 		if ( $validationError ) {
 			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();

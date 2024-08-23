@@ -66,10 +66,7 @@ describe( newRequest().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValid200Response(
-				response,
-				[ existingEnglishAlias, 'next english alias' ]
-			);
+			assertValid200Response( response, [ existingEnglishAlias, 'next english alias' ] );
 		} );
 
 		it( 'can add aliases with edit metadata provided', async () => {
