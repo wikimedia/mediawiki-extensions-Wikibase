@@ -288,7 +288,8 @@ class PatchedItemValidator {
 		$validationError = $this->sitelinksValidator->validate(
 			$itemId,
 			$sitelinksSerialization,
-			$this->getModifiedSitelinksSites( $item->getSitelinks(), $sitelinksSerialization )
+			$this->getModifiedSitelinksSites( $item->getSitelinks(), $sitelinksSerialization ),
+			'/sitelinks'
 		);
 
 		if ( $validationError ) {
@@ -329,9 +330,11 @@ class PatchedItemValidator {
 			case SitelinkValidator::CODE_EMPTY_TITLE:
 				throw UseCaseError::newPatchResultInvalidValue( "/sitelinks/{$siteId()}/title", '' );
 			case SitelinkValidator::CODE_INVALID_TITLE:
-			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
-				$title = $sitelinksSerialization[ $siteId() ][ 'title' ];
-				throw UseCaseError::newPatchResultInvalidValue( "/sitelinks/{$siteId()}/title", $title );
+			case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
+				throw UseCaseError::newPatchResultInvalidValue(
+					$context[SitelinkValidator::CONTEXT_PATH],
+					$context[SitelinkValidator::CONTEXT_VALUE]
+				);
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
 				$title = $sitelinksSerialization[ $siteId() ][ 'title' ];
 				throw new UseCaseError(
@@ -342,14 +345,9 @@ class PatchedItemValidator {
 						UseCaseError::CONTEXT_TITLE => $title,
 					]
 				);
-			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-				throw UseCaseError::newPatchResultInvalidValue(
-					"/sitelinks/{$siteId()}/badges",
-					$sitelinksSerialization[$siteId()]['badges']
-				);
 			case SitelinkValidator::CODE_INVALID_BADGE:
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
+				$badge = (string)$context[ SitelinkValidator::CONTEXT_VALUE];
 				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $sitelinksSerialization[$siteId()]['badges'] );
 				throw UseCaseError::newPatchResultInvalidValue( "/sitelinks/{$siteId()}/badges/$badgeIndex", $badge );
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:

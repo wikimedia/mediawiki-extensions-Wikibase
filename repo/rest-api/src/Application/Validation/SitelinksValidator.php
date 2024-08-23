@@ -29,13 +29,18 @@ class SitelinksValidator {
 	/**
 	 * @param string|null $itemId - null if validating a new item
 	 */
-	public function validate( ?string $itemId, array $serialization, array $sitesToValidate = null ): ?ValidationError {
+	public function validate(
+		?string $itemId,
+		array $serialization,
+		array $sitesToValidate = null,
+		string $basePath = ''
+	): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
 			return new ValidationError( self::CODE_SITELINKS_NOT_ASSOCIATIVE );
 		}
 
 		return $this->validateSiteIds( array_keys( $serialization ) )
-			?: $this->validateSitelinks( $itemId, $serialization, $sitesToValidate );
+			?: $this->validateSitelinks( $itemId, $serialization, $sitesToValidate, $basePath );
 	}
 
 	public function getValidatedSitelinks(): SiteLinkList {
@@ -53,7 +58,12 @@ class SitelinksValidator {
 		);
 	}
 
-	private function validateSitelinks( ?string $itemId, array $serialization, array $sitesToValidate = null ): ?ValidationError {
+	private function validateSitelinks(
+		?string $itemId,
+		array $serialization,
+		array $sitesToValidate = null,
+		string $basePath = ''
+	): ?ValidationError {
 		$sitesToValidate ??= array_keys( $serialization );
 		$sitelinks = [];
 
@@ -74,7 +84,7 @@ class SitelinksValidator {
 				);
 			}
 
-			$validationError = $this->sitelinkValidator->validate( $itemId, $siteId, $sitelink );
+			$validationError = $this->sitelinkValidator->validate( $itemId, $siteId, $sitelink, "$basePath/$siteId" );
 			if ( $validationError ) {
 				return $validationError;
 			}

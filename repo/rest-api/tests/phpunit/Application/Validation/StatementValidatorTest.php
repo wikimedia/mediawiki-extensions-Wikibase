@@ -66,12 +66,11 @@ class StatementValidatorTest extends TestCase {
 		];
 
 		yield 'invalid field type exception' => [
-			new InvalidFieldTypeException( 'some-field', '/path/to/some-field', 'some-value' ),
+			new InvalidFieldTypeException( 'some-value', '/path/to/some-field' ),
 			StatementValidator::CODE_INVALID_FIELD_TYPE,
 			[
 				StatementValidator::CONTEXT_PATH => '/path/to/some-field',
 				StatementValidator::CONTEXT_VALUE => 'some-value',
-				StatementValidator::CONTEXT_FIELD => 'some-field',
 			],
 		];
 	}

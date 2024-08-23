@@ -498,27 +498,20 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 		yield SitelinkValidator::CODE_INVALID_TITLE => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE, [
-				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_PATH => "/item/sitelinks/$site/title",
 			] ),
 			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
 		];
-		yield SitelinkValidator::CODE_INVALID_TITLE_TYPE => [
-			new ValidationError( SitelinkValidator::CODE_INVALID_TITLE_TYPE, [
-				SitelinkValidator::CONTEXT_SITE_ID => $site,
+		yield SitelinkValidator::CODE_INVALID_FIELD_TYPE => [
+			new ValidationError( SitelinkValidator::CODE_INVALID_FIELD_TYPE, [
+				SitelinkValidator::CONTEXT_PATH => "/item/sitelinks/$site/title",
 			] ),
 			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
-		];
-		yield SitelinkValidator::CODE_INVALID_BADGES_TYPE => [
-			new ValidationError( SitelinkValidator::CODE_INVALID_BADGES_TYPE, [
-				SitelinkValidator::CONTEXT_SITE_ID => $site,
-			] ),
-			UseCaseError::newInvalidValue( "/item/sitelinks/$site/badges" ),
-			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => 'not-a-list' ] ] ],
 		];
 		yield SitelinkValidator::CODE_INVALID_BADGE => [
 			new ValidationError( SitelinkValidator::CODE_INVALID_BADGE, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
-				SitelinkValidator::CONTEXT_BADGE => 'P3',
+				SitelinkValidator::CONTEXT_VALUE => 'P3',
 			] ),
 			UseCaseError::newInvalidValue( "/item/sitelinks/$site/badges/1" ),
 			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => [ 'Q12', 'P3' ] ] ] ],
@@ -526,7 +519,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield SitelinkValidator::CODE_BADGE_NOT_ALLOWED => [
 			new ValidationError( SitelinkValidator::CODE_BADGE_NOT_ALLOWED, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
-				SitelinkValidator::CONTEXT_BADGE => 'Q3',
+				SitelinkValidator::CONTEXT_VALUE => 'Q3',
 			] ),
 			UseCaseError::newInvalidValue( "/item/sitelinks/$site/badges/2" ),
 			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever', 'badges' => [ 'Q1', 'Q2', 'Q3' ] ] ] ],

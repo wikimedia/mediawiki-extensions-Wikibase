@@ -146,7 +146,7 @@ class StatementDeserializerTest extends TestCase {
 			[ 'type' => 'somevalue' ],
 		];
 		yield 'statement is not associative array' => [
-			new InvalidFieldTypeException( '/statements/P789', '/statements/P789', $serialization ),
+			new InvalidFieldTypeException( $serialization, '/statements/P789' ),
 			$serialization,
 			'/statements/P789',
 		];

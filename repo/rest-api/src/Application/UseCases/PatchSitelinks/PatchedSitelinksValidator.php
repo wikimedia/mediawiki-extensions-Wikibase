@@ -51,15 +51,15 @@ class PatchedSitelinksValidator {
 				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/title", '' );
 
 			case SitelinkValidator::CODE_INVALID_TITLE:
-			case SitelinkValidator::CODE_INVALID_TITLE_TYPE:
-				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/title", $serialization[$siteId()][ 'title' ] );
-
-			case SitelinkValidator::CODE_INVALID_BADGES_TYPE:
-				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges", $serialization[$siteId()][ 'badges' ] );
+			case SitelinkValidator::CODE_INVALID_FIELD_TYPE:
+				throw UseCaseError::newPatchResultInvalidValue(
+					$context[SitelinkValidator::CONTEXT_PATH],
+					$context[SitelinkValidator::CONTEXT_VALUE]
+				);
 
 			case SitelinkValidator::CODE_INVALID_BADGE:
 			case SitelinkValidator::CODE_BADGE_NOT_ALLOWED:
-				$badge = (string)$context[ SitelinkValidator::CONTEXT_BADGE ];
+				$badge = (string)$context[ SitelinkValidator::CONTEXT_VALUE ];
 				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $serialization[$siteId()]['badges'] );
 				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges/$badgeIndex", $badge );
 

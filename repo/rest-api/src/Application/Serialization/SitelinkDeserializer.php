@@ -52,13 +52,13 @@ class SitelinkDeserializer {
 	 * @throws BadgeNotAllowed
 	 * @throws SitelinkTargetNotFound
 	 */
-	public function deserialize( string $siteId, array $serialization ): SiteLink {
+	public function deserialize( string $siteId, array $serialization, string $basePath = '' ): SiteLink {
 		if ( !array_key_exists( 'title', $serialization ) ) {
 			throw new MissingFieldException( 'title' );
 		}
 
 		if ( !is_string( $serialization[ 'title' ] ) ) {
-			throw new InvalidFieldTypeException( 'title' );
+			throw new InvalidFieldTypeException( $serialization[ 'title' ], "$basePath/title" );
 		}
 
 		$trimmedTitle = trim( $serialization[ 'title' ] );
@@ -66,12 +66,12 @@ class SitelinkDeserializer {
 			throw new EmptySitelinkException( 'title', $trimmedTitle );
 		}
 		if ( preg_match( $this->invalidTitleRegex, $trimmedTitle ) === 1 ) {
-			throw new InvalidFieldException( 'title', $trimmedTitle );
+			throw new InvalidFieldException( 'title', $trimmedTitle, "$basePath/title" );
 		}
 
 		$serialization[ 'badges' ] ??= [];
 		if ( !is_array( $serialization[ 'badges' ] ) ) {
-			throw new InvalidFieldTypeException( 'badges' );
+			throw new InvalidFieldTypeException( $serialization[ 'badges' ], "$basePath/badges" );
 		}
 
 		$badges = [];

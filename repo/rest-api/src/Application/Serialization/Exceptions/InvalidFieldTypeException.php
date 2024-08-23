@@ -9,28 +9,21 @@ use Throwable;
  */
 class InvalidFieldTypeException extends SerializationException {
 
-	private string $field;
 	private string $path;
 
 	/** @var mixed */
 	private $value;
 
 	/**
-	 * @param string $field
-	 * @param string $path
 	 * @param mixed $value
+	 * @param string $path
 	 * @param string $message
 	 * @param Throwable|null $previous
 	 */
-	public function __construct( string $field, string $path = '', $value = null, string $message = '', Throwable $previous = null ) {
-		$this->field = $field;
+	public function __construct( $value, string $path, string $message = '', Throwable $previous = null ) {
 		$this->path = $path;
 		$this->value = $value;
 		parent::__construct( $message, 0, $previous );
-	}
-
-	public function getField(): string {
-		return $this->field;
 	}
 
 	public function getPath(): string {

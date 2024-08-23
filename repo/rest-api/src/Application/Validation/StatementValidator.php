@@ -53,7 +53,6 @@ class StatementValidator {
 				[
 					self::CONTEXT_PATH => $e->getPath(),
 					self::CONTEXT_VALUE => $e->getValue(),
-					self::CONTEXT_FIELD => $e->getField(),
 				]
 			);
 		}

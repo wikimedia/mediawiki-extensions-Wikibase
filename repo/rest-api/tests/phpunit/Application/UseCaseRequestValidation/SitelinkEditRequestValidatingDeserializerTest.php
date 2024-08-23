@@ -83,23 +83,23 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError(
 				SitelinkValidator::CODE_INVALID_TITLE,
-				[ SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ]
+				[ SitelinkValidator::CONTEXT_PATH => '/sitelink/title' ]
 			),
 		];
 
 		yield 'title field is not a string' => [
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError(
-				SitelinkValidator::CODE_INVALID_TITLE_TYPE,
-				[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+				SitelinkValidator::CODE_INVALID_FIELD_TYPE,
+				[ SitelinkValidator::CONTEXT_PATH => '/sitelink/title' ]
 			),
 		];
 
 		yield 'badges field is not an array' => [
 			UseCaseError::newInvalidValue( '/sitelink/badges' ),
 			new ValidationError(
-				SitelinkValidator::CODE_INVALID_BADGES_TYPE,
-				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]
+				SitelinkValidator::CODE_INVALID_FIELD_TYPE,
+				[ SitelinkValidator::CONTEXT_PATH => '/sitelink/badges' ]
 			),
 		];
 
@@ -107,7 +107,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::newInvalidValue( '/sitelink/badges/0' ),
 			new ValidationError(
 				SitelinkValidator::CODE_INVALID_BADGE,
-				[ SitelinkValidator::CONTEXT_BADGE => 'P3', SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ]
+				[ SitelinkValidator::CONTEXT_VALUE => 'P3', SitelinkValidator::CONTEXT_SITE_ID => 'arwiki' ]
 			),
 			[ 'title' => 'بعض_العنوان', 'badges' => [ 'P3' ] ],
 		];
@@ -116,7 +116,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::newInvalidValue( '/sitelink/badges/1' ),
 			new ValidationError(
 				SitelinkValidator::CODE_BADGE_NOT_ALLOWED,
-				[ SitelinkValidator::CONTEXT_BADGE => 'Q8172', SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+				[ SitelinkValidator::CONTEXT_VALUE => 'Q8172', SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
 			),
 			[ 'title' => 'Some_title', 'badges' => [ 'Q8622', 'Q8172' ] ],
 		];
