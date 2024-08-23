@@ -18,6 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementSerializer implements DispatchableSerializer {
 
+	/** @var array */
 	private $rankLabels = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',

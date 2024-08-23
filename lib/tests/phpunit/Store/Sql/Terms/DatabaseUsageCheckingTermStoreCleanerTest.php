@@ -20,6 +20,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 
 	use LocalRepoDbTestHelper;
 
+	/** @var DatabaseInnerTermStoreCleaner */
 	private $innerCleaner;
 
 	protected function setUp(): void {

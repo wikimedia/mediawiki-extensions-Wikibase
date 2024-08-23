@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * @license GPL-2.0-or-later
  */
 class ItemRdfBuilder implements EntityRdfBuilder {
+	/** @var SiteLinksRdfBuilder */
 	private $siteLinksRdfBuilder;
 	/**
 	 * @var TruthyStatementRdfBuilder

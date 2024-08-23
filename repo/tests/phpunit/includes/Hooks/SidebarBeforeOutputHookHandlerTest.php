@@ -23,8 +23,11 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 
+	/** @var EntityNamespaceLookup */
 	private $entityNamespaceLookup;
+	/** @var EntityIdLookup */
 	private $entityIdLookup;
+	/** @var EntityLookup */
 	private $entityLookup;
 	/**
 	 * @var \PHPUnit\Framework\MockObject\MockObject|Skin

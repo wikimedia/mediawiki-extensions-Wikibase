@@ -15,6 +15,7 @@ use Traversable;
  */
 class MapValueHasher {
 
+	/** @var bool */
 	private $isOrdered;
 
 	public function __construct( $holdOrderIntoAccount = false ) {

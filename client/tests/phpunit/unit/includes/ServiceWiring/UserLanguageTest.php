@@ -17,6 +17,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
  */
 class UserLanguageTest extends ServiceWiringTestCase {
 
+	/** @var Language */
 	private $cachedLang;
 
 	protected function setUp(): void {

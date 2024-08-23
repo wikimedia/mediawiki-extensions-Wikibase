@@ -27,14 +27,23 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class DataBridgeReferenceFormatterTest extends TestCase {
 
+	/** @var NumericPropertyId */
 	private $referenceUrlPropertyId;
+	/** @var NumericPropertyId */
 	private $titlePropertyId;
+	/** @var NumericPropertyId */
 	private $statedInPropertyId;
+	/** @var NumericPropertyId */
 	private $authorPropertyId;
+	/** @var NumericPropertyId */
 	private $publisherPropertyId;
+	/** @var NumericPropertyId */
 	private $publicationDatePropertyId;
+	/** @var NumericPropertyId */
 	private $retrievedDatePropertyId;
+	/** @var NumericPropertyId */
 	private $otherPropertyId1;
+	/** @var NumericPropertyId */
 	private $otherPropertyId2;
 
 	protected function setUp(): void {

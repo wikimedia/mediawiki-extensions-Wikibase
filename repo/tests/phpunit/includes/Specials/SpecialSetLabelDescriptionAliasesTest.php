@@ -51,8 +51,10 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	private const TAGS = [ 'mw-replace' ];
 
+	/** @var string[] */
 	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'mul', 'zh' ];
 
+	/** @var string */
 	private $submitButtonMessage;
 
 	protected function setUp(): void {

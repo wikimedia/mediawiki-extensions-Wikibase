@@ -22,6 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementDeserializer implements DispatchableDeserializer {
 
+	/** @var array */
 	private static $rankIds = [
 		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,

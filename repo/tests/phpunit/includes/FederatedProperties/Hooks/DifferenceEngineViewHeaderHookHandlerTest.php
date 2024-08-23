@@ -34,7 +34,9 @@ use Wikibase\Repo\Hooks\DifferenceEngineViewHeaderHookHandler;
  */
 class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 
+	/** @var PrefetchingTermLookup */
 	private $prefetchingLookup;
+	/** @var Item */
 	private $entity;
 
 	/**

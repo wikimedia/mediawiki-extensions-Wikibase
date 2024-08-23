@@ -31,11 +31,17 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 
 	private const DEFAULT_URL = '/wiki/Q42';
 
+	/** @var LabelDescriptionLookup */
 	private $labelDescriptionLookup;
+	/** @var LanguageNameLookup */
 	private $languageNameLookup;
+	/** @var EntityExistenceChecker */
 	private $existenceChecker;
+	/** @var EntityTitleTextLookup */
 	private $titleTextFormatter;
+	/** @var EntityUrlLookup */
 	private $urlLookup;
+	/** @var EntityRedirectChecker */
 	private $redirectChecker;
 
 	protected function setUp(): void {

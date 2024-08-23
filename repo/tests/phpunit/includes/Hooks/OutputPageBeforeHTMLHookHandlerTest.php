@@ -40,13 +40,20 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
+	/** @var OutputPageEditability */
 	private $editability;
+	/** @var string */
 	private $uiLanguageCode;
+	/** @var EntityRevisionLookup */
 	private $entityRevisionLookup;
+	/** @var OutputPageEntityIdReader */
 	private $outputPageEntityIdReader;
+	/** @var EntityFactory */
 	private $entityFactory;
 	private ItemId $itemId;
+	/** @var LanguageNameLookup */
 	private $languageNameLookup;
+	/** @var UserPreferredContentLanguagesLookup */
 	private $preferredLanguageLookup;
 	private bool $isExternallyRendered;
 

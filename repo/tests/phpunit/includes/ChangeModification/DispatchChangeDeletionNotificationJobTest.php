@@ -28,6 +28,7 @@ use WikiPage;
  */
 class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTestCase {
 
+	/** @var string[] */
 	private $expectedLocalClientWikis;
 
 	protected function setUp(): void {

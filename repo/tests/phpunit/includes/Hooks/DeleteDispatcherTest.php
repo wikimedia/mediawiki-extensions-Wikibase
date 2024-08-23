@@ -23,6 +23,7 @@ use WikiPage;
  */
 class DeleteDispatcherTest extends TestCase {
 
+	/** @var string[] */
 	private $localClientDatabases = [ 'asdfwiki', 'somewiki' ];
 
 	public function earlyAbortProvider() {

@@ -19,6 +19,7 @@ use Wikibase\Lib\SettingsArray;
  */
 class AvailableBadgesTest extends ApiTestCase {
 
+	/** @var string */
 	private static $badgeItems = [
 		'Q123' => '',
 		'Q999' => '',

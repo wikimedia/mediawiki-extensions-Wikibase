@@ -22,6 +22,7 @@ use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
  */
 class SummaryParsingPrefetchHelperTest extends TestCase {
 
+	/** @var PrefetchingTermLookup */
 	private $prefetchingLookup;
 
 	protected function setUp(): void {

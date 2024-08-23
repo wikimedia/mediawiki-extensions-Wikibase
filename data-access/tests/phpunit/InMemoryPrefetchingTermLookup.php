@@ -22,6 +22,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 
 	/** @var (string|string[])[][] */
 	private $buffer;
+	/** @var array */
 	private $entityData;
 	private bool $loadEntitiesIfNotPrefetched;
 
