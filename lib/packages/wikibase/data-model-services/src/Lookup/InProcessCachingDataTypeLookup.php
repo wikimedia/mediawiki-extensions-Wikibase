@@ -19,7 +19,7 @@ class InProcessCachingDataTypeLookup implements PropertyDataTypeLookup {
 	 */
 	private $propertyIds = [];
 
-	private $lookup;
+	private PropertyDataTypeLookup $lookup;
 
 	public function __construct( PropertyDataTypeLookup $propertyDataTypeLookup ) {
 		$this->lookup = $propertyDataTypeLookup;

@@ -12,9 +12,9 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class FederatedPropertyId implements PropertyId {
 
-	private $serialization;
+	private string $serialization;
 
-	private $remoteId;
+	private string $remoteId;
 
 	/**
 	 * @param string $uriSerialization The concept URI serialization of the ID

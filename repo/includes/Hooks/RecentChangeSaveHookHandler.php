@@ -29,13 +29,13 @@ use Wikibase\Repo\Store\SubscriptionLookup;
  */
 class RecentChangeSaveHookHandler {
 
-	private $changeStore;
+	private ChangeStore $changeStore;
 
-	private $centralIdLookup;
+	private ?CentralIdLookup $centralIdLookup;
 
-	private $changeHolder;
+	private ChangeHolder $changeHolder;
 
-	private $subscriptionLookup;
+	private SubscriptionLookup $subscriptionLookup;
 
 	public function __construct(
 		ChangeStore $changeStore,

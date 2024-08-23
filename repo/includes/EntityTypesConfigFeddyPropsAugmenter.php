@@ -16,7 +16,7 @@ use function wfArrayPlus2d;
  * @license GPL-2.0-or-later
  */
 class EntityTypesConfigFeddyPropsAugmenter {
-	private $fedPropsEntityTypeDefinitions;
+	private array $fedPropsEntityTypeDefinitions;
 
 	public function __construct( array $fedPropsEntityTypeDefinitions ) {
 		$this->fedPropsEntityTypeDefinitions = $fedPropsEntityTypeDefinitions;

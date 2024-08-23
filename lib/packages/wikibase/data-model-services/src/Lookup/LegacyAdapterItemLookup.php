@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class LegacyAdapterItemLookup implements ItemLookup {
 
-	private $lookup;
+	private EntityLookup $lookup;
 
 	public function __construct( EntityLookup $lookup ) {
 		$this->lookup = $lookup;

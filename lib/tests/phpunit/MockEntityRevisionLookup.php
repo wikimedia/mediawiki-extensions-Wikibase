@@ -16,8 +16,10 @@ use Wikibase\Lib\Store\StorageException;
  * @license GPL-2.0-or-later
  */
 class MockEntityRevisionLookup implements EntityRevisionLookup {
-	private $redirects;
-	private $entities;
+	/** @var array<string,RedirectRevision> */
+	private array $redirects;
+	/** @var array<string,array<int,EntityRevision>> */
+	private array $entities;
 
 	/**
 	 * @param array<string,RedirectRevision> $redirects
