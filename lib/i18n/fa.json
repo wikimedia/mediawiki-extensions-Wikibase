@@ -38,7 +38,7 @@
 	"wikibase-error-ui-no-external-page": "صفحه $2\" در وب‌گاه \"$1\" پیدا نشد.",
 	"wikibase-error-ui-edit-conflict": "تعارض ویرایشی رخ داده است. خواهشمندیم تغییراتتان را به صورت محلی ذخیره کنید از نو صفحه بارگذاری و ذخیره کنید.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (نویسه‌گردانی‌شده)",
-	"wikibase-language-name-for-terms-mul": "مقدارهای پیش‌فرض برای تمام زبان‌ها",
+	"wikibase-language-name-for-terms-mul": "پیش‌فرض برای تمام زبان‌ها",
 	"wikibase-quantitydetails-amount": "مبلغ",
 	"wikibase-quantitydetails-upperbound": "حد بالا",
 	"wikibase-quantitydetails-lowerbound": "حد پایین",
