@@ -18,7 +18,7 @@ class AssertUserIsAuthorized {
 	}
 
 	public function checkEditPermissions( EntityId $id, User $user ): void {
-		if ( !$this->permissionChecker->canEdit( $user, $id ) ) {
+		if ( $this->permissionChecker->canEdit( $user, $id )->isDenied() ) {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to edit this resource'
@@ -27,7 +27,7 @@ class AssertUserIsAuthorized {
 	}
 
 	public function checkCreateItemPermissions( User $user ): void {
-		if ( !$this->permissionChecker->canCreateItem( $user ) ) {
+		if ( $this->permissionChecker->canCreateItem( $user )->isDenied() ) {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED,
 				'You have no permission to create an item'

@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
+use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\RestApi\Domain\Model\User;
+use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
@@ -22,30 +24,42 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		$this->userFactory = $userFactory;
 	}
 
-	public function canEdit( User $user, EntityId $id ): bool {
+	public function canEdit( User $user, EntityId $id ): PermissionCheckResult {
 		$mwUser = $user->isAnonymous() ?
 			$this->userFactory->newAnonymous() :
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable isAnonymous checks for null
 			$this->userFactory->newFromName( $user->getUsername() );
 
-		return $this->entityPermissionChecker->getPermissionStatusForEntityId(
-			$mwUser,
-			EntityPermissionChecker::ACTION_EDIT,
-			$id
-		)->isGood();
+		return $this->newPermissionCheckResultFromStatus(
+			$this->entityPermissionChecker->getPermissionStatusForEntityId(
+				$mwUser,
+				EntityPermissionChecker::ACTION_EDIT,
+				$id
+			)
+		);
 	}
 
-	public function canCreateItem( User $user ): bool {
+	public function canCreateItem( User $user ): PermissionCheckResult {
 		$mwUser = $user->isAnonymous() ?
 			$this->userFactory->newAnonymous() :
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable isAnonymous checks for null
 			$this->userFactory->newFromName( $user->getUsername() );
 
-		return $this->entityPermissionChecker->getPermissionStatusForEntity(
-			$mwUser,
-			EntityPermissionChecker::ACTION_EDIT,
-			new Item()
-		)->isGood();
+		return $this->newPermissionCheckResultFromStatus(
+			$this->entityPermissionChecker->getPermissionStatusForEntity(
+				$mwUser,
+				EntityPermissionChecker::ACTION_EDIT,
+				new Item()
+			)
+		);
+	}
+
+	private function newPermissionCheckResultFromStatus( Status $status ): PermissionCheckResult {
+		if ( $status->isGood() ) {
+			return PermissionCheckResult::newAllowed();
+		}
+
+		return PermissionCheckResult::newDenialForUnknownReason();
 	}
 
 }
