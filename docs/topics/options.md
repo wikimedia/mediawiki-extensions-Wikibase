@@ -685,6 +685,11 @@ Allows users to split the ParserCache by user language.
 
 DEFAULT: ```false```
 
+#### moveConnectedItemLinkToOtherProjects
+Switch to move connected wikibase item to the Other Projects section of the sidebar. This is a temporary switch to allow for a controlled release of the feature due to previous deployments requiring rollback.
+
+DEFAULT: ```false```
+
 #### disabledAccessEntityTypes
 List of entity types that access to them in the client should be disabled.
 

@@ -13,6 +13,7 @@ use MediaWiki\Title\Title;
 use Skin;
 use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Handler for ParserOutput-related hooks.
@@ -35,12 +36,19 @@ class SidebarHookHandler implements
 	 */
 	private $badgeDisplay;
 
+	/**
+	 * @var SettingsArray
+	 */
+	private $clientSettings;
+
 	public function __construct(
 		LanguageLinkBadgeDisplay $badgeDisplay,
-		NamespaceChecker $namespaceChecker
+		NamespaceChecker $namespaceChecker,
+		SettingsArray $clientSettings
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
+		$this->clientSettings = $clientSettings;
 	}
 
 	/**
@@ -116,18 +124,23 @@ class SidebarHookHandler implements
 	 * @param array &$sidebar
 	 */
 	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
+		// Add the 'In other projects' section
+		$otherProjectsSidebar = $this->buildOtherProjectsSidebar( $skin );
+		$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar === null ? [] : $otherProjectsSidebar;
+
 		// Add 'Wikidata item' to the toolbox
 		$wikidataItemLink = ClientHooks::buildWikidataItemLink( $skin );
 
 		if ( $wikidataItemLink !== null ) {
-			$sidebar['TOOLBOX']['wikibase'] = $wikidataItemLink;
-		}
+			$wikidataInOtherProjects = $this->clientSettings->getSetting( 'moveConnectedItemLinkToOtherProjects' );
 
-		// Add the 'In other projects' section
-		$otherProjectsSidebar = $this->buildOtherProjectsSidebar( $skin );
-
-		if ( $otherProjectsSidebar !== null ) {
-			$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			if ( $wikidataInOtherProjects ) {
+				$wikidataItemLink['class'] = 'wb-otherproject-link wb-otherproject-wikibase-dataitem';
+				// This automatically appends the wikidata item link to the end of the Other Projects
+				$sidebar['wikibase-otherprojects'][] = $wikidataItemLink;
+			} else {
+				$sidebar['TOOLBOX']['wikibase'] = $wikidataItemLink;
+			}
 		}
 
 		if ( $wikidataItemLink !== null || $otherProjectsSidebar !== null ) {

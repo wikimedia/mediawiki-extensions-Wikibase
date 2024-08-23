@@ -47,20 +47,21 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return SettingsArray
 	 */
-	private function newSettings() {
+	private function newSettings( bool $moveConnectedItemFlag ) {
 		$defaults = [
 			'siteGlobalID' => 'enwiki',
 			'languageLinkSiteGroup' => 'wikipedia',
 			'namespaces' => [ NS_MAIN, NS_CATEGORY ],
 			'otherProjectsLinks' => [ 'commonswiki' ],
+			'moveConnectedItemLinkToOtherProjects' => $moveConnectedItemFlag,
 		];
 
 		return new SettingsArray( $defaults );
 	}
 
-	private function newSidebarHookHandler() {
+	private function newSidebarHookHandler( bool $moveConnectedItemFlag = false ) {
 		$en = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
-		$settings = $this->newSettings();
+		$settings = $this->newSettings( $moveConnectedItemFlag );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( [], $namespaces );
@@ -75,7 +76,8 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		return new SidebarHookHandler(
 			$badgeDisplay,
-			$namespaceChecker
+			$namespaceChecker,
+			$settings
 		);
 	}
 
@@ -116,6 +118,49 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler->onSidebarBeforeOutput( $skin, $sidebar );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
+	}
+
+	private function getOnSidebarBeforeOutputResult( bool $moveLink ): array {
+
+		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
+
+		$context = new RequestContext();
+
+		$output = new OutputPage( $context );
+		$output->setTitle( $title );
+		$output->setProperty( 'wikibase_item', 'Q42' );
+		$output->setProperty( 'wikibase-otherprojects-sidebar', [ [ 'id' => 'foo' ], [ 'id' => 'foo' ] ] );
+
+		$context->setOutput( $output );
+		$skin = $this->newSkin( $context );
+		$sidebar = [];
+
+		$handler = $this->newSidebarHookHandler( $moveLink );
+
+		$handler->onSidebarBeforeOutput( $skin, $sidebar );
+
+		return $sidebar;
+	}
+
+	public function testMoveConnectedItemFeatureFlag_active() {
+		$sidebar = $this->getOnSidebarBeforeOutputResult( true );
+
+		$sidebarFilteredForWikibaseLink = array_filter( $sidebar['wikibase-otherprojects'], function( $link ){
+			return $link['id'] === 't-wikibase';
+		} );
+		$this->assertCount( 1, $sidebarFilteredForWikibaseLink );
+
+		$this->assertArrayNotHasKey( 'wikibase', $sidebar['TOOLBOX'] ?? [] );
+	}
+
+	public function testMoveConnectedItemFeatureFlag_inActive() {
+		$sidebar = $this->getOnSidebarBeforeOutputResult( false );
+
+		$sidebarFilteredForWikibaseLink = array_filter( $sidebar['wikibase-otherprojects'], function( $link ){
+			return $link['id'] === 't-wikibase';
+		} );
+		$this->assertCount( 0, $sidebarFilteredForWikibaseLink );
+		$this->assertArrayHasKey( 'wikibase', $sidebar['TOOLBOX'] );
 	}
 
 	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData, array $extensionDataAppend ) {

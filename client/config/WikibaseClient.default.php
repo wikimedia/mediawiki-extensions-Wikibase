@@ -60,6 +60,7 @@ return call_user_func( function() {
 		// in the parser functions and via Lua.
 		// Allows users to split the ParserCache by user language.
 		'allowDataAccessInUserLanguage' => false,
+		'moveConnectedItemLinkToOtherProjects' => false,
 
 		/**
 		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all

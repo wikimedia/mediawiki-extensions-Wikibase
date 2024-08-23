@@ -111,6 +111,8 @@ final class ClientHooks {
 			$repoLinker = WikibaseClient::getRepoLinker();
 
 			return [
+				// Warning: This id is misleading; the 't' refers to the link's original place in the toolbox,
+				// it now lives in the other projects section, but we must keep the 't' for compatibility with gadgets.
 				'id' => 't-wikibase',
 				'icon' => 'logoWikidata',
 				'text' => $skin->msg( 'wikibase-dataitem' )->text(),

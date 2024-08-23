@@ -206,7 +206,8 @@
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
 			"services": [
 				"WikibaseClient.LanguageLinkBadgeDisplay",
-				"WikibaseClient.NamespaceChecker"
+				"WikibaseClient.NamespaceChecker",
+				"WikibaseClient.Settings"
 			]
 		},
 		"SkinAfterPortlet": {
