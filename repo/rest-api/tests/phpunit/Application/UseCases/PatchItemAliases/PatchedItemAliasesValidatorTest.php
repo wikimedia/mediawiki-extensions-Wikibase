@@ -53,9 +53,10 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 	/**
 	 * @dataProvider invalidAliasesProvider
 	 *
+	 * @param UseCaseError $expectedError
 	 * @param mixed $serialization
 	 */
-	public function testWithInvalidAliases( $serialization, UseCaseError $expectedError ): void {
+	public function testWithInvalidAliases( UseCaseError $expectedError, $serialization ): void {
 		try {
 			$this->newValidator()->validateAndDeserialize( $serialization );
 			$this->fail( 'expected exception was not thrown' );
@@ -65,46 +66,64 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 	}
 
 	public static function invalidAliasesProvider(): Generator {
-		yield 'aliases is not an object' => [
-			[ 'sequential array, not an object' ],
-			UseCaseError::newPatchResultInvalidValue( '', [ 'sequential array, not an object' ] ),
+		yield 'invalid serialization - string' => [
+			UseCaseError::newPatchResultInvalidValue( '', 'not an array' ),
+			'not an array',
 		];
 
-		yield 'aliases in language is not a list' => [
-			[ 'en' => [ 'associative array' => 'not a list' ] ],
-			UseCaseError::newPatchResultInvalidValue( '/en', [ 'associative array' => 'not a list' ] ),
+		yield 'invalid serialization - sequential array' => [
+			UseCaseError::newPatchResultInvalidValue( '', [ 'not', 'an', 'associative', 'array' ] ),
+			[ 'not', 'an', 'associative', 'array' ],
 		];
 
-		yield 'empty alias' => [
-			[ 'de' => [ '' ] ],
-			UseCaseError::newPatchResultInvalidValue( '/de/0', '' ),
+		yield 'invalid language code - not an allowed language code' => [
+			UseCaseError::newPatchResultInvalidKey( '', 'xyz' ),
+			[ 'xyz' => [ 'alias 1' ] ],
+		];
+
+		yield 'invalid aliases in language - string' => [
+			UseCaseError::newPatchResultInvalidValue( '/en', 'not a list' ),
+			[ 'en' => 'not a list' ],
+		];
+
+		yield 'invalid aliases in language - associative array' => [
+			UseCaseError::newPatchResultInvalidValue( '/en', [ 'not' => 'a', 'sequential' => 'array' ] ),
+			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+		];
+
+		yield 'invalid alias - integer' => [
+			UseCaseError::newPatchResultInvalidValue( '/en/0', 7940 ),
+			[ 'en' => [ 7940, 'alias 2' ] ],
+		];
+
+		yield 'invalid alias - zero length string' => [
+			UseCaseError::newPatchResultInvalidValue( '/en/1', '' ),
+			[ 'en' => [ 'alias 1', '' ] ],
+		];
+
+		yield 'invalid alias - whitespace only' => [
+			UseCaseError::newPatchResultInvalidValue( '/en/0', '' ),
+			[ 'en' => [ "  \t  ", 'alias 1' ] ],
+		];
+
+		yield 'invalid alias - invalid characters' => [
+			UseCaseError::newPatchResultInvalidValue( '/en/1', "alias \t with \t tabs" ),
+			[ 'en' => [ 'alias 1', "alias \t with \t tabs" ] ],
+		];
+
+		yield 'invalid alias - too long' => [
+			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
+			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
 		];
 
 		$duplicate = 'tomato';
-		yield 'duplicate alias' => [
-			[ 'en' => [ $duplicate, $duplicate ] ],
+		yield 'invalid alias - duplicate' => [
 			new UseCaseError(
 				UseCaseError::PATCHED_ALIAS_DUPLICATE,
 				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
 			),
-		];
-
-		yield 'alias too long' => [
-			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
-			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
-		];
-
-		$invalidAlias = "tab\t tab\t tab";
-		yield 'alias contains invalid character' => [
-			[ 'en' => [ 'valid alias', $invalidAlias ] ],
-			UseCaseError::newPatchResultInvalidValue( '/en/1', $invalidAlias ),
-		];
-
-		$invalidLanguage = 'not-a-valid-language-code';
-		yield 'invalid language code' => [
-			[ $invalidLanguage => [ 'alias' ] ],
-			UseCaseError::newPatchResultInvalidKey( '', $invalidLanguage ),
+			[ 'en' => [ $duplicate, $duplicate ] ],
 		];
 	}
 
