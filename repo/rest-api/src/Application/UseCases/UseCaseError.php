@@ -42,6 +42,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
+	public const PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT = 'unauthorized-bot-edit';
 	public const PERMISSION_DENIED_REASON_PAGE_PROTECTED = 'resource-protected';
 	public const PERMISSION_DENIED_REASON_USER_BLOCKED = 'blocked-user';
 	public const PERMISSION_DENIED_UNKNOWN_REASON = 'permission-denied-unknown-reason';
