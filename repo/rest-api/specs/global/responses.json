@@ -1332,9 +1332,6 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					}
 				}
 			}
@@ -1359,9 +1356,6 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					}
 				}
 			}
@@ -1386,9 +1380,6 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"invalid-operation-change-statement-id": {
 						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					},
-					"invalid-operation-change-property-of-statement": {
-						"$ref": "./examples.json#/InvalidOperationChangePropertyOfStatement"
 					}
 				}
 			}
@@ -1427,7 +1418,10 @@
 				},
 				"examples": {
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
-					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" }
+					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
+					"patch-result-modified-read-only-value": {
+						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
+					}
 				}
 			}
 		},

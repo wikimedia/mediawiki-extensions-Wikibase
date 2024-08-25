@@ -95,10 +95,7 @@ class PatchStatement {
 				)
 			);
 		} catch ( PropertyChangedException $e ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_OPERATION_CHANGED_PROPERTY,
-				'Cannot change the property of the existing statement'
-			);
+			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/property/id' );
 		}
 
 		return new PatchStatementResponse( $newRevision->getStatement(), $newRevision->getLastModified(), $newRevision->getRevisionId() );

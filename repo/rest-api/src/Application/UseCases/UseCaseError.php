@@ -15,7 +15,6 @@ class UseCaseError extends UseCaseException {
 	public const DATA_POLICY_VIOLATION = 'data-policy-violation';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const INVALID_KEY = 'invalid-key';
-	public const INVALID_OPERATION_CHANGED_PROPERTY = 'invalid-operation-change-property-of-statement';
 	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
@@ -28,6 +27,7 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_RESULT_INVALID_KEY = 'patch-result-invalid-key';
 	public const PATCH_RESULT_INVALID_VALUE = 'patch-result-invalid-value';
 	public const PATCH_RESULT_MISSING_FIELD = 'patch-result-missing-field';
+	public const PATCH_RESULT_MODIFIED_READ_ONLY_VALUE = 'patch-result-modified-read-only-value';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
@@ -87,7 +87,6 @@ class UseCaseError extends UseCaseException {
 		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
-		self::INVALID_OPERATION_CHANGED_PROPERTY => [],
 		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
@@ -100,6 +99,7 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_RESULT_INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 		self::PATCH_RESULT_INVALID_VALUE => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
@@ -231,6 +231,14 @@ class UseCaseError extends UseCaseException {
 			self::DATA_POLICY_VIOLATION,
 			'Edit violates data policy',
 			[ self::CONTEXT_VIOLATION => $violationCode, self::CONTEXT_VIOLATION_CONTEXT => $violationContext ]
+		);
+	}
+
+	public static function newPatchResultModifiedReadOnlyValue( string $path ): self {
+		return new self(
+			self::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE,
+			'Read only value in patch result cannot be modified',
+			[ self::CONTEXT_PATH => $path ]
 		);
 	}
 
