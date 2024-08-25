@@ -208,8 +208,9 @@ class PatchStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID, $e->getErrorCode() );
-			$this->assertSame( 'Cannot change the ID of the existing statement', $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE, $e->getErrorCode() );
+			$this->assertSame( 'Read only value in patch result cannot be modified', $e->getErrorMessage() );
+			$this->assertSame( [ 'path' => '/id' ], $e->getErrorContext() );
 		}
 	}
 

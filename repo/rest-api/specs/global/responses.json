@@ -1329,10 +1329,7 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					}
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},
@@ -1353,10 +1350,7 @@
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					}
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},
@@ -1377,10 +1371,7 @@
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"invalid-operation-change-statement-id": {
-						"$ref": "./examples.json#/InvalidOperationChangeStatementId"
-					}
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},

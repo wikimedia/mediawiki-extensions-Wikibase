@@ -5582,9 +5582,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
               }
             }
           }
@@ -5620,9 +5617,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
               }
             }
           }
@@ -5658,9 +5652,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "invalid-operation-change-statement-id": {
-                "$ref": "#/components/examples/InvalidOperationChangeStatementId"
               }
             }
           }
@@ -7107,12 +7098,6 @@
           "context": {
             "path": "{readonly_value_pointer}"
           }
-        }
-      },
-      "InvalidOperationChangeStatementId": {
-        "value": {
-          "code": "invalid-operation-change-statement-id",
-          "message": "Cannot change the ID of the existing statement"
         }
       },
       "PatchResultModifiedReadOnlyValue": {

@@ -91,12 +91,6 @@
 			}
 		}
 	},
-	"InvalidOperationChangeStatementId": {
-		"value": {
-			"code": "invalid-operation-change-statement-id",
-			"message": "Cannot change the ID of the existing statement"
-		}
-	},
 	"PatchResultModifiedReadOnlyValue": {
 		"value": {
 			"code": "patch-result-modified-read-only-value",
