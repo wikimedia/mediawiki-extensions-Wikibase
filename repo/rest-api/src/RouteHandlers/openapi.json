@@ -5358,12 +5358,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-property-invalid-operation-change-property-id": {
-                "$ref": "#/components/examples/PatchedPropertyInvalidOperationChangePropertyIdExample"
-              },
-              "patched-property-invalid-operation-change-property-datatype": {
-                "$ref": "#/components/examples/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
-              },
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
               },
@@ -5387,6 +5381,9 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "patch-result-modified-read-only-value": {
+                "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
               },
               "data-policy-violation": {
                 "$ref": "#/components/examples/DataPolicyViolationExample"
@@ -7249,18 +7246,6 @@
             "value": "{value}",
             "path": "{path}"
           }
-        }
-      },
-      "PatchedPropertyInvalidOperationChangePropertyIdExample": {
-        "value": {
-          "code": "patched-property-invalid-operation-change-property-id",
-          "message": "Cannot change the ID of the existing property"
-        }
-      },
-      "PatchedPropertyInvalidOperationChangePropertyDatatypeExample": {
-        "value": {
-          "code": "patched-property-invalid-operation-change-property-datatype",
-          "message": "Cannot change the datatype of the existing property"
         }
       },
       "PatchResultMissingFieldExample": {

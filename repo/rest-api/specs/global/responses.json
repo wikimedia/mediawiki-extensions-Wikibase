@@ -1191,12 +1191,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-property-invalid-operation-change-property-id": {
-						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyIdExample"
-					},
-					"patched-property-invalid-operation-change-property-datatype": {
-						"$ref": "./examples.json#/PatchedPropertyInvalidOperationChangePropertyDatatypeExample"
-					},
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
@@ -1209,6 +1203,9 @@
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"patch-result-modified-read-only-value": {
+						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
+					},
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
