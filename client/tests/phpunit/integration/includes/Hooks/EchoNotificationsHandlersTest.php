@@ -2,9 +2,11 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\Page\RedirectLookup;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
+use MediaWiki\User\UserIdentityLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;
@@ -56,6 +58,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			$this->repoLinker,
 			$this->namespaceChecker,
 			$this->getServiceContainer()->getRedirectLookup(),
+			$this->getServiceContainer()->getUserIdentityLookup(),
 			$this->createMock( UserOptionsManager::class ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
@@ -199,7 +202,8 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
-			$this->getServiceContainer()->getRedirectLookup(),
+			$this->createNoopMock( RedirectLookup::class ),
+			$this->createNoopMock( UserIdentityLookup::class ),
 			$userOptionsManager,
 			'enwiki',
 			$enabled,

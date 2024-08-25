@@ -57,17 +57,23 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 			[ $this, 'callbackForBundleCount' ]
 		);
 
+		$msgKey = $count > 0 ? "notification-bundle-header-{$this->type}" : "notification-header-{$this->type}";
+		if ( $this->event->getAgent() !== null ) {
+			$msg = $this->getMessageWithAgent( $msgKey );
+		} else {
+			// $1 is unused
+			// $2 is for GENDER, force the site/language default
+			$msg = $this->msg( $msgKey )->params( '', '[]' );
+		}
+
 		$truncated = $this->getTruncatedTitleText( $this->event->getTitle(), true );
+		$msg->params( $truncated );
 
 		if ( $count > 0 ) {
-			$msg = $this->getMessageWithAgent( "notification-bundle-header-{$this->type}" )
-				->params( $truncated )
-				->numParams( $count );
+			$msg->numParams( $count );
 		} else {
-			$msg = $this->getMessageWithAgent( "notification-header-{$this->type}" )
-				->params( $truncated )
-				// Old events did not had this parameter. Default to -1 for the PLURAL function.
-				->params( $this->event->getExtraParam( 'entity', -1 ) );
+			// Old events did not have this parameter. Default to -1 for the PLURAL function.
+			$msg->params( $this->event->getExtraParam( 'entity', -1 ) );
 		}
 
 		return $msg;
