@@ -26,7 +26,10 @@
 	"valueview-expert-timeinput-precision-day": "hari",
 	"valueview-expert-timeinput-precision-hour": "jam",
 	"valueview-expert-timeinput-precision-minute": "minit",
+	"valueview-expert-timeinput-precision-second": "saat",
 	"valueview-expert-timeinput-calendar": "Kalendar:",
+	"valueview-expertextender-languageselector-label": "Bahasa (wajib):",
+	"valueview-expertextender-unitsuggester-label": "Unit (pilihan):",
 	"valueview-preview-label": "akan dipaparkan sebagai:",
 	"valueview-preview-novalue": "tiada nilai sah yang dikenali"
 }
