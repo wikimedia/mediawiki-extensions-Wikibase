@@ -79,10 +79,7 @@ class PatchStatement {
 		if ( $patchedStatement->getGuid() === null ) {
 			$patchedStatement->setGuid( (string)$deserializedRequest->getStatementId() );
 		} elseif ( $patchedStatement->getGuid() !== (string)$deserializedRequest->getStatementId() ) {
-			throw new UseCaseError(
-				UseCaseError::INVALID_OPERATION_CHANGED_STATEMENT_ID,
-				'Cannot change the ID of the existing statement'
-			);
+			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/id' );
 		}
 
 		try {

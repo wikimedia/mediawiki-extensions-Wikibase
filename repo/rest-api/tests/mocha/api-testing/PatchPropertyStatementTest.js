@@ -216,18 +216,6 @@ describe( 'PATCH property statement', () => {
 					assert.deepEqual( response.body.context, { path: '/comment' } );
 				} );
 
-				it( 'rejects Statement ID change', async () => {
-					const patch = [ {
-						op: 'replace',
-						path: '/id',
-						value: `${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`
-					} ];
-					const response = await newPatchRequestBuilder( testStatementId, patch )
-						.assertValidRequest().makeRequest();
-
-					assertValidError( response, 400, 'invalid-operation-change-statement-id' );
-				} );
-
 			} );
 
 			describe( '404 statement not found', () => {
@@ -337,6 +325,19 @@ describe( 'PATCH property statement', () => {
 						.assertValidRequest().makeRequest();
 
 					assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/property/id' } );
+					assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
+				} );
+
+				it( 'rejects Statement ID change', async () => {
+					const patch = [ {
+						op: 'replace',
+						path: '/id',
+						value: `${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest().makeRequest();
+
+					assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/id' } );
 					assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 				} );
 			} );

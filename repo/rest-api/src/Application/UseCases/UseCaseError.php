@@ -15,7 +15,6 @@ class UseCaseError extends UseCaseException {
 	public const DATA_POLICY_VIOLATION = 'data-policy-violation';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
 	public const INVALID_KEY = 'invalid-key';
-	public const INVALID_OPERATION_CHANGED_STATEMENT_ID = 'invalid-operation-change-statement-id';
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_VALUE = 'invalid-value';
@@ -91,7 +90,6 @@ class UseCaseError extends UseCaseException {
 		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
 		self::DESCRIPTION_NOT_DEFINED => [],
 		self::INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
-		self::INVALID_OPERATION_CHANGED_STATEMENT_ID => [],
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
