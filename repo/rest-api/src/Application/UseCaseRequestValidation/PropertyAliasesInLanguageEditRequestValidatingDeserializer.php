@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 use LogicException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
@@ -41,8 +40,6 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 	private function deserialize( array $requestAliases ): array {
 		try {
 			return $this->deserializer->deserialize( $requestAliases, '/aliases' );
-		} catch ( InvalidAliasesInLanguageException $e ) {
-			throw UseCaseError::newInvalidValue( '/aliases' );
 		} catch ( InvalidFieldException $e ) {
 			throw UseCaseError::newInvalidValue( $e->getPath() );
 		}

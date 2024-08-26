@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 
 /**
@@ -20,7 +19,6 @@ class AliasesDeserializer {
 
 	/**
 	 * @throws InvalidFieldException
-	 * @throws InvalidAliasesInLanguageException
 	 */
 	public function deserialize( array $serialization ): AliasGroupList {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
@@ -31,7 +29,7 @@ class AliasesDeserializer {
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop
 			if ( !is_array( $aliasesInLanguage ) ) {
-				throw new InvalidAliasesInLanguageException( (string)$language, $aliasesInLanguage, (string)$language );
+				throw new InvalidFieldException( (string)$language, $aliasesInLanguage, (string)$language );
 			}
 
 			$aliases = $this->aliasesInLanguageDeserializer->deserialize( $aliasesInLanguage, (string)$language );

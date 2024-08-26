@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 
@@ -60,13 +59,13 @@ class AliasesInLanguageDeserializerTest extends TestCase {
 
 	public function provideInvalidAliases(): Generator {
 		yield 'invalid serialization - associative array' => [
-			new InvalidAliasesInLanguageException( '/aliases', [ 'not' => 'a', 'sequential' => 'array' ], '/aliases' ),
+			new InvalidFieldException( 'aliases', [ 'not' => 'a', 'sequential' => 'array' ], '/aliases' ),
 			[ 'not' => 'a', 'sequential' => 'array' ],
 			'/aliases',
 		];
 
 		yield 'invalid serialization - empty array' => [
-			new InvalidAliasesInLanguageException( '/item/aliases/de', [], '/item/aliases/de' ),
+			new InvalidFieldException( 'de', [], '/item/aliases/de' ),
 			[],
 			'/item/aliases/de',
 		];
