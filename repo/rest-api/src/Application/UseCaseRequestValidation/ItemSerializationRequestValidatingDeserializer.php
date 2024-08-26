@@ -151,11 +151,10 @@ class ItemSerializationRequestValidatingDeserializer {
 						UseCaseError::CONTEXT_ALIAS => $context[AliasesValidator::CONTEXT_ALIAS],
 					]
 				);
-			case AliasesValidator::CODE_TOO_LONG_ALIAS:
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
-				$limit = $context[AliasesValidator::CONTEXT_LIMIT] ?? $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
+				$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+				$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
+				$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
 				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:

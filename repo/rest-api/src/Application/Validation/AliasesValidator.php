@@ -14,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInL
  */
 class AliasesValidator {
 	public const CODE_EMPTY_ALIAS = 'aliases-validator-code-alias-empty';
-	public const CODE_TOO_LONG_ALIAS = 'aliases-validator-code-alias-too-long';
 	public const CODE_EMPTY_ALIAS_LIST = 'aliases-validator-code-alias-list-empty';
 	public const CODE_DUPLICATE_ALIAS = 'aliases-validator-code-alias-duplicate';
 	public const CODE_INVALID_ALIASES = 'aliases-validator-code-invalid-aliases';
@@ -23,7 +22,6 @@ class AliasesValidator {
 
 	public const CONTEXT_ALIASES = 'aliases-validator-context-aliases';
 	public const CONTEXT_ALIAS = 'aliases-validator-context-alias';
-	public const CONTEXT_LIMIT = 'aliases-validator-context-character-limit';
 	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
 	public const CONTEXT_PATH = 'aliases-validator-context-path';
 

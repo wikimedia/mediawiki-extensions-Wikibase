@@ -8,6 +8,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
@@ -338,11 +339,11 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		$tooLongAlias = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'alias too long' => [
 			new ValidationError(
-				AliasesValidator::CODE_TOO_LONG_ALIAS,
+				AliasesInLanguageValidator::CODE_TOO_LONG,
 				[
-					AliasesValidator::CONTEXT_ALIAS => $tooLongAlias,
-					AliasesValidator::CONTEXT_LANGUAGE => 'en',
-					AliasesValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+					AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
+					AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+					AliasesInLanguageValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
 				]
 			),
 			UseCaseError::newValueTooLong( '/item/aliases/en/0', self::MAX_LENGTH ),
