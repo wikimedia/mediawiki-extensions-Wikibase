@@ -29,7 +29,7 @@ class BotRightCheckMiddleware implements Middleware {
 
 		if ( isset( $jsonBody['bot'] ) && $jsonBody['bot'] && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
 			return $this->responseFactory->newErrorResponse(
-				UseCaseError::PERMISSION_DENIED,
+				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
 				'Unauthorized bot edit'
 			);
 		}

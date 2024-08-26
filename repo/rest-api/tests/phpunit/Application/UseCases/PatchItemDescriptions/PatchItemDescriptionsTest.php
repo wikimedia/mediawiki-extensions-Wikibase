@@ -153,7 +153,7 @@ class PatchItemDescriptionsTest extends TestCase {
 	public function testGivenEditIsUnauthorized_throwsUseCaseError(): void {
 		$itemId = new ItemId( 'Q123' );
 
-		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED, 'permission denied' );
+		$expectedError = new UseCaseError( UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON, 'permission denied' );
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
 		$this->assertUserIsAuthorized->method( 'checkEditPermissions' )
 			->with( $itemId, User::newAnonymous() )

@@ -131,7 +131,7 @@ class AddItemStatementTest extends TestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$expectedError = new UseCaseError(
-			UseCaseError::PERMISSION_DENIED,
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
 			'You have no permission to edit this item.'
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );

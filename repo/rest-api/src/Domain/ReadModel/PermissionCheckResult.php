@@ -7,7 +7,8 @@ namespace Wikibase\Repo\RestApi\Domain\ReadModel;
  */
 class PermissionCheckResult {
 
-	private const DENIAL_REASON_UNKNOWN = 0;
+	public const DENIAL_REASON_UNKNOWN = 0;
+	public const DENIAL_REASON_PAGE_PROTECTED = 1;
 
 	private ?int $denialReason;
 
@@ -19,12 +20,20 @@ class PermissionCheckResult {
 		return new self( null );
 	}
 
+	public static function newPageProtected(): self {
+		return new self( self::DENIAL_REASON_PAGE_PROTECTED );
+	}
+
 	public static function newDenialForUnknownReason(): self {
 		return new self( self::DENIAL_REASON_UNKNOWN );
 	}
 
 	public function isDenied(): bool {
 		return $this->denialReason !== null;
+	}
+
+	public function getDenialReason(): ?int {
+		return $this->denialReason;
 	}
 
 }

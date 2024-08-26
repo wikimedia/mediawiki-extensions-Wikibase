@@ -151,7 +151,7 @@ class RemoveStatementTest extends TestCase {
 	 */
 	public function testGivenProtectedStatementSubject_throwsUseCaseError( EntityId $subjectId ): void {
 		$expectedError = new UseCaseError(
-			UseCaseError::PERMISSION_DENIED,
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
 			'You have no permission to edit this item.'
 		);
 

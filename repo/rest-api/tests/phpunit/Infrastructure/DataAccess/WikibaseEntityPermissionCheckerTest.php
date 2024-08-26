@@ -122,7 +122,14 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		];
 
 		$permissionStatuses = [
-			'fatal status' => [ Status::newFatal( 'insufficient permissions' ), PermissionCheckResult::newDenialForUnknownReason() ],
+			'denied, unknown reason' => [
+				Status::newFatal( 'insufficient permissions' ),
+				PermissionCheckResult::newDenialForUnknownReason(),
+			],
+			'denied, page protected' => [
+				Status::newFatal( 'protectedpagetext' ),
+				PermissionCheckResult::newPageProtected(),
+			],
 			'good status' => [ Status::newGood(), PermissionCheckResult::newAllowed() ],
 		];
 

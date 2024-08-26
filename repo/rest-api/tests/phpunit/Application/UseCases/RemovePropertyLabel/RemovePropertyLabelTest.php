@@ -135,7 +135,7 @@ class RemovePropertyLabelTest extends TestCase {
 		$propertyId = new NumericPropertyId( 'P123' );
 
 		$expectedError = new UseCaseError(
-			UseCaseError::PERMISSION_DENIED,
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
 			'You have no permission to edit this property.'
 		);
 		$this->assertUserIsAuthorized = $this->createMock( AssertUserIsAuthorized::class );
