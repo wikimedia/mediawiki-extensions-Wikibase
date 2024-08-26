@@ -607,6 +607,12 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
 		];
 
+		yield 'invalid language code - integer' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 3248 => [ 'alias' ] ],
+			UseCaseError::newPatchResultInvalidKey( '/aliases', '3248' ),
+		];
+
 		yield 'invalid language code - xyz' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'xyz' => [ 'alias' ] ],
@@ -619,10 +625,28 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidKey( '/aliases', '' ),
 		];
 
+		yield "invalid 'aliases in language' list - string" => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => 'not a list of aliases in a language' ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en', 'not a list of aliases in a language' ),
+		];
+
 		yield "invalid 'aliases in language' list - associative array" => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'not' => 'a', 'sequential' => 'array' ] ),
+		];
+
+		yield "invalid 'aliases in language' list - empty array" => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [] ),
+		];
+
+		yield 'invalid alias - integer' => [
+			$this->createStub( AliasesInLanguageValidator::class ),
+			[ 'en' => [ 3146, 'second alias' ] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en/0', 3146 ),
 		];
 
 		yield 'invalid alias - empty string' => [

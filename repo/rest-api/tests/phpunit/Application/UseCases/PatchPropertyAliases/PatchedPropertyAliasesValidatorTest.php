@@ -71,6 +71,16 @@ class PatchedPropertyAliasesValidatorTest extends TestCase {
 			'not an array',
 		];
 
+		yield 'invalid serialization - sequential array' => [
+			UseCaseError::newPatchResultInvalidValue( '', [ 'not', 'an', 'associative', 'array' ] ),
+			[ 'not', 'an', 'associative', 'array' ],
+		];
+
+		yield 'invalid language code - int' => [
+			UseCaseError::newPatchResultInvalidKey( '', '3912' ),
+			[ 3912 => [ 'alias 1' ] ],
+		];
+
 		yield 'invalid language code - not an allowed language code' => [
 			UseCaseError::newPatchResultInvalidKey( '', 'xyz' ),
 			[ 'xyz' => [ 'alias 1' ] ],

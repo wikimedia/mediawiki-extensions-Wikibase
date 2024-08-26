@@ -83,9 +83,24 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 	}
 
 	public static function invalidAliasesProvider(): Generator {
+		yield 'alias list is associative array' => [
+			UseCaseError::newInvalidValue( '/aliases' ),
+			[ 'not' => 'a', 'sequential' => 'array' ],
+		];
+
 		yield 'alias list is empty' => [
 			UseCaseError::newInvalidValue( '/aliases' ),
 			[],
+		];
+
+		yield 'alias at position 0 is not a string' => [
+			UseCaseError::newInvalidValue( '/aliases/0' ),
+			[ 5675 ],
+		];
+
+		yield 'alias at position 1 is not a string' => [
+			UseCaseError::newInvalidValue( '/aliases/1' ),
+			[ 'alias', 1085 ],
 		];
 
 		yield 'alias at position 0 is empty' => [
