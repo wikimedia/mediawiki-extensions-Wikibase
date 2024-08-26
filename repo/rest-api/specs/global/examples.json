@@ -239,18 +239,6 @@
 			}
 		}
 	},
-	"PatchedPropertyInvalidOperationChangePropertyIdExample": {
-		"value": {
-			"code": "patched-property-invalid-operation-change-property-id",
-			"message": "Cannot change the ID of the existing property"
-		}
-	},
-	"PatchedPropertyInvalidOperationChangePropertyDatatypeExample": {
-		"value": {
-			"code": "patched-property-invalid-operation-change-property-datatype",
-			"message": "Cannot change the datatype of the existing property"
-		}
-	},
 	"PatchResultMissingFieldExample": {
 		"value": {
 			"code": "patch-result-missing-field",

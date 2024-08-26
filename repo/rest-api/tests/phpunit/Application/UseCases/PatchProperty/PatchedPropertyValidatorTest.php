@@ -315,10 +315,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				'data_type' => 'string',
 				'labels' => [ 'en' => 'english-label' ],
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID,
-				'Cannot change the ID of the existing property'
-			),
+			UseCaseError::newPatchResultModifiedReadOnlyValue( '/id' ),
 		];
 
 		yield "Illegal modification 'data_type' field" => [
@@ -328,10 +325,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 				'data_type' => 'wikibase-item',
 				'labels' => [ 'en' => 'english-label' ],
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE,
-				'Cannot change the datatype of the existing property'
-			),
+			UseCaseError::newPatchResultModifiedReadOnlyValue( '/data_type' ),
 		];
 	}
 

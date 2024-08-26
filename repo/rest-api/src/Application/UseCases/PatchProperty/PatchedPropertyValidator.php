@@ -109,17 +109,11 @@ class PatchedPropertyValidator {
 
 	private function assertNoIllegalModification( array $serialization, Property $originalProperty ): void {
 		if ( $serialization['id'] !== $originalProperty->getId()->getSerialization() ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_ID,
-				'Cannot change the ID of the existing property'
-			);
+			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/id' );
 		}
 
 		if ( $serialization['data_type'] !== $originalProperty->getDataTypeId() ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_PROPERTY_INVALID_OPERATION_CHANGE_PROPERTY_DATATYPE,
-				'Cannot change the datatype of the existing property'
-			);
+			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/data_type' );
 		}
 	}
 

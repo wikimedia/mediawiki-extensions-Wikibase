@@ -263,8 +263,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-property-invalid-operation-change-property-id' );
-			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing property' );
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/id' } );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		it( 'invalid operation change property datatype', async () => {
@@ -275,8 +275,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-property-invalid-operation-change-property-datatype' );
-			assert.strictEqual( response.body.message, 'Cannot change the datatype of the existing property' );
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/data_type' } );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		it( 'missing mandatory field', async () => {
