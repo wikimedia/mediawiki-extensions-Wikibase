@@ -5305,9 +5305,6 @@
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
-              "statement-id-not-modifiable": {
-                "$ref": "#/components/examples/StatementIdNotModifiableExample"
-              },
               "patched-statement-property-not-modifiable": {
                 "$ref": "#/components/examples/PatchedStatementPropertyNotModifiableExample"
               },
@@ -5331,6 +5328,9 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "patch-result-modified-read-only-value": {
+                "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
@@ -5360,9 +5360,6 @@
             "examples": {
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
-              },
-              "statement-id-not-modifiable": {
-                "$ref": "#/components/examples/StatementIdNotModifiableExample"
               },
               "patched-statement-property-not-modifiable": {
                 "$ref": "#/components/examples/PatchedStatementPropertyNotModifiableExample"
@@ -7255,15 +7252,6 @@
           "context": {
             "path": "{json_pointer_to_parent}",
             "field": "{missing_field}"
-          }
-        }
-      },
-      "StatementIdNotModifiableExample": {
-        "value": {
-          "code": "statement-id-not-modifiable",
-          "message": "Statement IDs cannot be created or modified",
-          "context": {
-            "statement_id": "{statement_id}"
           }
         }
       },

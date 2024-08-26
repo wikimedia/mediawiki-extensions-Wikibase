@@ -1160,7 +1160,6 @@
 						"$ref": "./examples.json#/PatchedItemInvalidOperationChangeItemIdExample"
 					},
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},
@@ -1173,6 +1172,9 @@
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
+					"patch-result-modified-read-only-value": {
+						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
+					},
 					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
@@ -1192,7 +1194,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
-					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},

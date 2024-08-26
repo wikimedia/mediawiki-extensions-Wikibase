@@ -761,34 +761,28 @@ class PatchedPropertyValidatorTest extends TestCase {
 			),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		$statementWithId = [
 			'id' => 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
-			'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[1] ],
+			'property' => [ 'id' => $propertyId ],
 			'value' => [ 'type' => 'somevalue' ],
 		];
 		yield 'Statement IDs not modifiable or provided for new statements' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[1] => [ $statementWithId ] ],
-			new UseCaseError(
-				UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
-				'Statement IDs cannot be created or modified',
-				[ UseCaseError::CONTEXT_STATEMENT_ID => $statementWithId[ 'id' ] ]
-			),
+			[ $propertyId => [ $statementWithId ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];
 		$duplicateStatement = [
 			'id' => 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659',
-			'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[2] ],
+			'property' => [ 'id' => $propertyId ],
 			'value' => [ 'type' => 'somevalue' ],
 		];
 		yield 'Duplicate Statement id' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[2] => [ $duplicateStatement, $duplicateStatement ] ],
-			new UseCaseError(
-				UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
-				'Statement IDs cannot be created or modified',
-				[ UseCaseError::CONTEXT_STATEMENT_ID => $duplicateStatement[ 'id' ] ]
-			),
+			[ $propertyId => [ $duplicateStatement, $duplicateStatement ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
 		];
 
 		$statementWithExistingId = [

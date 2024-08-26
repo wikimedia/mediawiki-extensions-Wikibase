@@ -423,17 +423,26 @@ class PatchedItemValidator {
 			iterator_to_array( $statementList )
 		) );
 
+		$getStatementIdPath = function( array $serialization, string $id ): string {
+			foreach ( $serialization as $propertyId => $statementGroup ) {
+				foreach ( $statementGroup as $groupIndex => $statement ) {
+					if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
+						return "/statements/$propertyId/$groupIndex/id";
+					}
+				}
+			}
+
+			throw new LogicException( "Statement ID '$id' not found in patch result" );
+		};
+
 		$originalStatements = $originalItem->getStatements();
 		$originalStatementsIds = $getStatementIds( $originalStatements );
 		$patchedStatements = $this->statementsValidator->getValidatedStatements();
 		$patchedStatementsIds = $getStatementIds( $patchedStatements );
 		foreach ( array_count_values( $patchedStatementsIds ) as $id => $occurrence ) {
 			if ( $occurrence > 1 || !in_array( $id, $originalStatementsIds ) ) {
-				throw new UseCaseError(
-					UseCaseError::STATEMENT_ID_NOT_MODIFIABLE,
-					'Statement IDs cannot be created or modified',
-					[ UseCaseError::CONTEXT_STATEMENT_ID => $id ]
-				);
+				$path = $getStatementIdPath( $serialization['statements'], $id );
+				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 
 			$originalPropertyId = $originalStatements->getFirstStatementWithGuid( $id )->getPropertyId();

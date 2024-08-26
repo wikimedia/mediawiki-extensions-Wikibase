@@ -741,6 +741,28 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0/rank", 'bad rank' ),
 		];
 
+		$statementWithId = [
+			'id' => 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
+			'property' => [ 'id' => $propertyId ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Statement IDs not modifiable or provided for new statements' =>
+		[
+			[ $propertyId => [ $statementWithId ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
+		];
+
+		$duplicateStatement = [
+			'id' => 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659',
+			'property' => [ 'id' => $propertyId ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Duplicate Statement id' =>
+		[
+			[ $propertyId => [ $duplicateStatement, $duplicateStatement ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
+		];
+
 		$propertyIdKey = self::EXISTING_STRING_PROPERTY_IDS[2];
 		$propertyIdValue = self::EXISTING_STRING_PROPERTY_IDS[3];
 		yield 'property id mismatch' => [
