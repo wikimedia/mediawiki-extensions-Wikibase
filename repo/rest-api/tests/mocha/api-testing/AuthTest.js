@@ -100,8 +100,12 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 					} );
 
 					it( 'cannot create/edit if blocked', async () => {
-						const response = await newRequestBuilder().withUser( user ).makeRequest();
-						expect( response ).to.have.status( 403 );
+						assertValidError(
+							await newRequestBuilder().withUser( user ).makeRequest(),
+							403,
+							'permission-denied',
+							{ reason: 'blocked-user' }
+						);
 					} );
 				} );
 			}

@@ -9,6 +9,7 @@ class PermissionCheckResult {
 
 	public const DENIAL_REASON_UNKNOWN = 0;
 	public const DENIAL_REASON_PAGE_PROTECTED = 1;
+	public const DENIAL_REASON_USER_BLOCKED = 2;
 
 	private ?int $denialReason;
 
@@ -22,6 +23,10 @@ class PermissionCheckResult {
 
 	public static function newPageProtected(): self {
 		return new self( self::DENIAL_REASON_PAGE_PROTECTED );
+	}
+
+	public static function newUserBlocked(): self {
+		return new self( self::DENIAL_REASON_USER_BLOCKED );
 	}
 
 	public static function newDenialForUnknownReason(): self {
