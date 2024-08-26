@@ -91,7 +91,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 			new Fingerprint( null, null, new AliasGroupList( [ new AliasGroup( $languageCode, $existingAliases ) ] ) ),
 			'string'
 		);
-		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
+		$aliasesToAdd = [ 'alias 3', 'alias 2', 'alias 4' ];
 		$request = $this->newRequest( "{$property->getId()}", $languageCode, $aliasesToAdd );
 
 		$propertyRepo = new InMemoryPropertyRepository();
@@ -102,7 +102,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		$response = $this->newUseCase()->execute( $request );
 
 		$this->assertEquals(
-			new AliasesInLanguage( $languageCode, array_merge( $existingAliases, $aliasesToAdd ) ),
+			new AliasesInLanguage( $languageCode, [ 'alias 1', 'alias 2', 'alias 3', 'alias 4' ] ),
 			$response->getAliases()
 		);
 		$this->assertTrue( $response->wasAddedToExistingAliasGroup() );
@@ -110,7 +110,7 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 			new EditMetadata(
 				[],
 				false,
-				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, [ 'alias 3', 'alias 4' ] ) )
 			),
 			$propertyRepo->getLatestRevisionEditMetadata( $property->getId() )
 		);

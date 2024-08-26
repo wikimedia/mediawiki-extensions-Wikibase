@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
@@ -15,7 +14,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
  */
 class AliasesValidator {
 	public const CODE_EMPTY_ALIAS = 'aliases-validator-code-alias-empty';
-	public const CODE_DUPLICATE_ALIAS = 'aliases-validator-code-alias-duplicate';
 	public const CODE_INVALID_ALIASES = 'aliases-validator-code-invalid-aliases';
 	public const CODE_INVALID_ALIAS = 'aliases-validator-code-invalid-alias';
 	public const CODE_INVALID_ALIAS_LIST = 'aliases-validator-code-invalid-alias-list';
@@ -81,11 +79,6 @@ class AliasesValidator {
 			return new ValidationError(
 				self::CODE_EMPTY_ALIAS,
 				[ self::CONTEXT_PATH => "/{$e->getLanguage()}/{$e->getIndex()}" ]
-			);
-		} catch ( DuplicateAliasException $e ) {
-			return new ValidationError(
-				self::CODE_DUPLICATE_ALIAS,
-				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_ALIAS => $e->getValue() ]
 			);
 		} catch ( InvalidAliasesInLanguageException $e ) {
 			return new ValidationError( self::CODE_INVALID_ALIAS_LIST, [ self::CONTEXT_LANGUAGE => $e->getField() ] );

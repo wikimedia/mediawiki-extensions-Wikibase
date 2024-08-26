@@ -22,6 +22,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	let predicatePropertyId;
 	const languageWithExistingLabel = 'en';
 	const languageWithExistingDescription = 'en';
+	const existingEnAlias = 'synonym';
 
 	function assertValid200Response( response ) {
 		expect( response ).to.have.status( 200 );
@@ -36,7 +37,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			datatype: 'string',
 			labels: [ { language: languageWithExistingLabel, value: `some-label-${utils.uniq()}` } ],
 			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
-			aliases: [ { language: 'fr', value: 'croissant' } ]
+			aliases: [ { language: 'en', value: existingEnAlias }, { language: 'fr', value: 'croissant' } ]
 		} ) ).entity.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -62,6 +63,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[
 					{ op: 'add', path: '/labels/de', value: newLabel },
 					{ op: 'replace', path: '/descriptions/en', value: updatedDescription },
+					{ op: 'add', path: '/aliases/en/-', value: 'new en alias' },
+					{ op: 'add', path: '/aliases/en/-', value: existingEnAlias },
 					{ op: 'remove', path: '/aliases/fr' },
 					{
 						op: 'add',
@@ -77,7 +80,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assertValid200Response( response );
 			assert.strictEqual( response.body.labels.de, newLabel );
 			assert.strictEqual( response.body.descriptions.en, updatedDescription );
-			assert.isEmpty( response.body.aliases );
+			assert.deepStrictEqual( response.body.aliases, { en: [ existingEnAlias, 'new en alias' ] } );
 			assert.strictEqual( response.body.statements[ predicatePropertyId ][ 0 ].value.content, newStatementValue );
 			assert.match(
 				response.body.statements[ predicatePropertyId ][ 0 ].id,
@@ -526,18 +529,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const context = { path: `/aliases/${language}/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
-		} );
-
-		it( 'duplicate alias', async () => {
-			const language = 'en';
-			const duplicate = 'tomato';
-			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ duplicate, duplicate ] }
-			] ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
-			assert.include( response.body.message, language );
-			assert.include( response.body.message, duplicate );
 		} );
 
 		it( 'aliases in language not a list', async () => {

@@ -36,7 +36,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		it( 'can create an item with all fields', async () => {
 			const labels = { en: `potato ${utils.uniq()}` };
 			const descriptions = { en: `root vegetable ${utils.uniq()}` };
-			const aliases = { en: [ 'spud', 'tater' ] };
+			const aliases = { en: [ 'spud', 'tater', 'spud' ] };
 
 			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 			const statementValue = 'Solanum tuberosum';
@@ -61,7 +61,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			expect( response ).to.have.status( 201 );
 			assert.deepEqual( response.body.labels, labels );
 			assert.deepEqual( response.body.descriptions, descriptions );
-			assert.deepEqual( response.body.aliases, aliases );
+			assert.deepEqual( response.body.aliases, { en: [ 'spud', 'tater' ] } );
 			assert.strictEqual( response.body.sitelinks[ localWikiId ].title, linkedArticle );
 			assert.strictEqual( response.body.statements[ statementPropertyId ][ 0 ].value.content, statementValue );
 		} );
@@ -419,24 +419,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const path = '/item/aliases/en/0';
 			assertValidError( response, 400, 'invalid-value', { path } );
 			assert.include( response.body.message, path );
-		} );
-
-		it( 'duplicate input aliases', async () => {
-			const duplicateAlias = 'foo';
-			const response = await newCreateItemRequestBuilder( {
-				labels: { en: 'en-label' },
-				aliases: { en: [ duplicateAlias, duplicateAlias ] }
-			} )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError(
-				response,
-				400,
-				'duplicate-alias',
-				{ alias: duplicateAlias, language: 'en' }
-			);
-			assert.include( response.body.message, duplicateAlias );
 		} );
 
 		it( 'invalid statement group type', async () => {

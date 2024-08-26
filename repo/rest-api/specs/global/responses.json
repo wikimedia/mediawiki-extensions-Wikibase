@@ -413,7 +413,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasWithLanguageContextExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
 					"title-does-not-exist": {
 						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
@@ -945,7 +944,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -966,7 +964,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"duplicate-alias": { "$ref": "./examples.json#/DuplicateAliasExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
@@ -1167,7 +1164,6 @@
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
-					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
 					"patched-sitelink-title-does-not-exist": { "$ref": "./examples.json#/PatchedSitelinkTitleNotExistExample" },
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
@@ -1199,7 +1195,6 @@
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
-					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
@@ -1303,7 +1298,6 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"patched-duplicate-alias": { "$ref": "./examples.json#/PatchedDuplicateAliasExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }

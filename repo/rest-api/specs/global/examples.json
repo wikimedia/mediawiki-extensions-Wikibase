@@ -276,33 +276,6 @@
 			}
 		}
 	},
-	"PatchedDuplicateAliasExample": {
-		"value": {
-			"code": "patched-duplicate-alias",
-			"message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
-			"context": {
-				"alias": "{alias}",
-				"language": "{language_code}"
-			}
-		}
-	},
-	"DuplicateAliasExample": {
-		"value": {
-			"code": "duplicate-alias",
-			"message": "Alias list contains a duplicate alias: '{alias}'",
-			"context": { "alias": "{alias}" }
-		}
-	},
-	"DuplicateAliasWithLanguageContextExample": {
-		"value": {
-			"code": "duplicate-alias",
-			"message": "Alias list contains a duplicate alias: '{alias}'",
-			"context": {
-				"alias": "{alias}",
-				"language": "{language_code}"
-			}
-		}
-	},
 	"ItemStatementIdMismatchExample": {
 		"value": {
 			"code": "item-statement-id-mismatch",

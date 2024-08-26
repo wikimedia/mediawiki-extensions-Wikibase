@@ -54,7 +54,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				testPropertyId,
 				[
 					{ op: 'add', path: '/de', value: [ newDeAlias ] },
-					{ op: 'add', path: '/en/-', value: newEnAliasWithTrailingWhitespace }
+					{ op: 'add', path: '/en/-', value: newEnAliasWithTrailingWhitespace },
+					{ op: 'add', path: '/en/-', value: existingEnAlias }
 				]
 			).makeRequest();
 
@@ -206,18 +207,6 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			const context = { path: `/${language}/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
-		} );
-
-		it( 'duplicate alias', async () => {
-			const language = 'en';
-			const duplicate = 'tomato';
-			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/${language}`, value: [ duplicate, duplicate ] }
-			] ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
-			assert.include( response.body.message, language );
-			assert.include( response.body.message, duplicate );
 		} );
 
 		it( 'alias contains invalid characters', async () => {

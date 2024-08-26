@@ -54,14 +54,17 @@ class AddPropertyAliasesInLanguage {
 		$aliasesExist = $property->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $property->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 
-		$property->getAliasGroups()->setAliasesForLanguage( $languageCode, array_merge( $originalAliases, $newAliases ) );
+		$property->getAliasGroups()->setAliasesForLanguage( $languageCode, array_unique( array_merge( $originalAliases, $newAliases ) ) );
 
 		$newRevision = $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
 				$editMetadata->getTags(),
 				$editMetadata->isBot(),
-				AliasesInLanguageEditSummary::newAddSummary( $editMetadata->getComment(), new AliasGroup( $languageCode, $newAliases ) )
+				AliasesInLanguageEditSummary::newAddSummary(
+					$editMetadata->getComment(),
+					new AliasGroup( $languageCode, array_diff( $newAliases, $originalAliases ) )
+				)
 			)
 		);
 

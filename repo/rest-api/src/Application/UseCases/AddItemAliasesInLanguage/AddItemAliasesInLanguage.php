@@ -56,7 +56,7 @@ class AddItemAliasesInLanguage {
 		$aliasesExist = $item->getAliasGroups()->hasGroupForLanguage( $languageCode );
 		$originalAliases = $aliasesExist ? $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 
-		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, array_merge( $originalAliases, $newAliases ) );
+		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, array_unique( array_merge( $originalAliases, $newAliases ) ) );
 		$newRevision = $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
@@ -64,7 +64,7 @@ class AddItemAliasesInLanguage {
 				$editMetadata->isBot(),
 				AliasesInLanguageEditSummary::newAddSummary(
 					$editMetadata->getComment(),
-					new AliasGroup( $languageCode, $newAliases )
+					new AliasGroup( $languageCode, array_diff( $newAliases, $originalAliases ) )
 				)
 			)
 		);

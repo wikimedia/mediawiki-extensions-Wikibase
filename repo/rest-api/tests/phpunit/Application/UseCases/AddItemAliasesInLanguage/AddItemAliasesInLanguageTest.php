@@ -89,7 +89,7 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		$languageCode = 'en';
 		$existingAliases = [ 'alias 1', 'alias 2' ];
 		$item = NewItem::withId( 'Q123' )->andAliases( $languageCode, $existingAliases )->build();
-		$aliasesToAdd = [ 'alias 3', 'alias 4' ];
+		$aliasesToAdd = [ 'alias 3', 'alias 2', 'alias 4' ];
 
 		$request = $this->newRequest( "{$item->getId()}", $languageCode, $aliasesToAdd );
 
@@ -102,14 +102,14 @@ class AddItemAliasesInLanguageTest extends TestCase {
 
 		$this->assertInstanceOf( AddItemAliasesInLanguageResponse::class, $response );
 		$this->assertEquals(
-			new AliasesInLanguage( $languageCode, array_merge( $existingAliases, $aliasesToAdd ) ),
+			new AliasesInLanguage( $languageCode, [ 'alias 1', 'alias 2', 'alias 3', 'alias 4' ] ),
 			$response->getAliases()
 		);
 		$this->assertEquals(
 			new EditMetadata(
 				[],
 				false,
-				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, $aliasesToAdd ) )
+				AliasesInLanguageEditSummary::newAddSummary( null, new AliasGroup( $languageCode, [ 'alias 3', 'alias 4' ] ) )
 			),
 			$itemRepo->getLatestRevisionEditMetadata( $item->getId() )
 		);

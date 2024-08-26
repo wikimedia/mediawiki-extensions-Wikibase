@@ -62,7 +62,7 @@ describe( newRequest().getRouteDescription(), () => {
 		} );
 
 		it( 'can add to an existing list of aliases with edit metadata omitted', async () => {
-			const response = await newRequest( testItemId, 'en', [ 'next english alias' ] )
+			const response = await newRequest( testItemId, 'en', [ 'next english alias', existingEnglishAlias ] )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -227,25 +227,6 @@ describe( newRequest().getRouteDescription(), () => {
 			const path = '/aliases/0';
 			assertValidError( response, 400, 'invalid-value', { path } );
 			assert.include( response.body.message, path );
-		} );
-
-		it( 'duplicate input aliases', async () => {
-			const duplicateAlias = 'foo';
-			const response = await newRequest( testItemId, 'en', [ duplicateAlias, 'foo', duplicateAlias ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'duplicate-alias', { alias: duplicateAlias } );
-			assert.include( response.body.message, duplicateAlias );
-		} );
-
-		it( 'input alias already exist', async () => {
-			const response = await newRequest( testItemId, 'en', [ existingEnglishAlias ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'duplicate-alias', { alias: existingEnglishAlias } );
-			assert.include( response.body.message, existingEnglishAlias );
 		} );
 	} );
 

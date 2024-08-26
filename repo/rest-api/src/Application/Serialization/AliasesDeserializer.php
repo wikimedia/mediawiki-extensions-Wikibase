@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
@@ -18,7 +17,6 @@ class AliasesDeserializer {
 	 * @throws InvalidFieldException
 	 * @throws InvalidAliasesInLanguageException
 	 * @throws EmptyAliasException
-	 * @throws DuplicateAliasException
 	 */
 	public function deserialize( array $serialization ): AliasGroupList {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
@@ -46,11 +44,9 @@ class AliasesDeserializer {
 					throw new EmptyAliasException( (string)$language, $index );
 				}
 
-				if ( in_array( $alias, $aliases ) ) {
-					throw new DuplicateAliasException( (string)$language, $alias );
+				if ( !in_array( $alias, $aliases ) ) {
+					$aliases[] = $alias;
 				}
-
-				$aliases[] = $alias;
 			}
 
 			$aliasGroups[] = new AliasGroup( $language, $aliases );
