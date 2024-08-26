@@ -23,17 +23,9 @@ class AssertUserIsAuthorized {
 		if ( !$permissionCheckResult->isDenied() ) {
 			return;
 		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_PAGE_PROTECTED ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'Access to resource is denied',
-				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ]
-			);
+			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED );
 		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'Access to resource is denied',
-				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
-			);
+			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
 		} else {
 			throw new UseCaseError(
 				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
@@ -47,11 +39,7 @@ class AssertUserIsAuthorized {
 		if ( !$permissionCheckResult->isDenied() ) {
 			return;
 		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'Access to resource is denied',
-				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
-			);
+			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
 		}
 
 		throw new UseCaseError(

@@ -65,11 +65,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 
 		yield 'user blocked' => [
 			PermissionCheckResult::newUserBlocked(),
-			new UseCaseError(
-				UseCaseError::PERMISSION_DENIED,
-				'Access to resource is denied',
-				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
-			),
+			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
 		];
 	}
 
@@ -127,21 +123,13 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			yield "{$id->getEntityType()} - permission denied, page protected" => [
 				$id,
 				PermissionCheckResult::newPageProtected(),
-				new UseCaseError(
-					UseCaseError::PERMISSION_DENIED,
-					'Access to resource is denied',
-					[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ]
-				),
+				UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED ),
 			];
 
 			yield "{$id->getEntityType()} - permission denied, user blocked" => [
 				$id,
 				PermissionCheckResult::newUserBlocked(),
-				new UseCaseError(
-					UseCaseError::PERMISSION_DENIED,
-					'Access to resource is denied',
-					[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ]
-				),
+				UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
 			];
 		}
 	}

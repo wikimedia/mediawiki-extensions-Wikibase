@@ -28,10 +28,8 @@ class BotRightCheckMiddleware implements Middleware {
 		$user = $routeHandler->getAuthority()->getUser();
 
 		if ( isset( $jsonBody['bot'] ) && $jsonBody['bot'] && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
-			return $this->responseFactory->newErrorResponse(
-				UseCaseError::PERMISSION_DENIED,
-				'Access to resource is denied',
-				[ UseCaseError::CONTEXT_REASON => UseCaseError::PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT ]
+			return $this->responseFactory->newErrorResponseFromException(
+				UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT )
 			);
 		}
 

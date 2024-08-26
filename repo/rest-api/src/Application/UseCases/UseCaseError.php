@@ -241,6 +241,10 @@ class UseCaseError extends UseCaseException {
 		);
 	}
 
+	public static function newPermissionDenied( string $reason ): self {
+		return new self( self::PERMISSION_DENIED, 'Access to resource is denied', [ self::CONTEXT_REASON => $reason ] );
+	}
+
 	public function getErrorCode(): string {
 		return $this->errorCode;
 	}
