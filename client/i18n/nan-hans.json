@@ -11,5 +11,8 @@
 	"wikibase-linkitem-linkpage": "链接页面",
 	"wikibase-linkitem-selectlink": "请选择网站佮你想欲连结的页面。",
 	"wikibase-linkitem-input-site": "语言：",
-	"wikibase-linkitem-input-page": "页："
+	"wikibase-linkitem-input-page": "页：",
+	"wikibase-rc-hide-wikidata-hide": "掩",
+	"wikibase-rc-hide-wikidata-show": "显示",
+	"wikibase-otherprojects": "其他专案"
 }

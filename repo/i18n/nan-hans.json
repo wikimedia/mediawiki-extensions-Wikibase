@@ -4,5 +4,7 @@
 			"SupaplexTW"
 		]
 	},
-	"wikibase-edit": "修改"
+	"wikibase-edit": "修改",
+	"wikibase-add": "加添",
+	"wikibase-sitelinks-special": "其他的网站"
 }
