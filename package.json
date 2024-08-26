@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"api-testing": "npm-run-all -p api-testing:*",
+		"api-testing": "npm-run-all -p --aggregate-output api-testing:*",
 		"api-testing:wikibase": "mocha --timeout 0 --recursive tests/api-testing",
 		"api-testing:rest-api": "npm --prefix repo/rest-api run api-testing",
 		"doc": "npm-run-all doc:*",
