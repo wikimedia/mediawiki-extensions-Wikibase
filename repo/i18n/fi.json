@@ -312,10 +312,13 @@
 	"wikibase-entitydata-storage-error": "Entiteetin $1 lataaminen epäonnistui.",
 	"wikibase-entitydata-title": "Entiteetin tiedot",
 	"wikibase-entitydata-text": "Tämä sivu tarjoaa linkitetyn datan näkymän aiheen arvoille. Kirjoita aiheen tunnus verkko-osoitteesta alasivumuotoa käyttäen.",
+	"special-entitypage": "Entiteettisivu",
+	"wikibase-entitypage-title": "Entiteettisivu",
 	"wikibase-parse-error": "Virheellinen arvo.",
 	"wikibase-parse-error-coordinate": "Koordinaattiarvo on väärin muotoiltu.",
 	"wikibase-parse-error-entity-id": "Aiheen tunniste on väärin muotoiltu.",
 	"wikibase-parse-error-time": "Aika-arvo on väärin muotoiltu.",
+	"special-redirectentity": "Uudelleenohjaa entiteetti",
 	"wikibase-redirectentity-success": "$1 ohjattiin kohteeseen $2.",
 	"wikibase-redirectentity-submit": "Ohjaus",
 	"wikibase-redirect-no-such-entity": "Entiteettiä $1 ei löytynyt",
@@ -324,7 +327,7 @@
 	"wikibase-redirect-permissiondenied": "Käyttö estetty",
 	"special-mylanguagefallbackchain": "Varakieliketjuni",
 	"wikibase-mylanguagefallbackchain-text": "Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.",
-	"wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].",
+	"wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> [[Special:MyPage|{{GENDER:$1|käyttäjäsivullesi}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, muunnettu kielestä $3 – $4",
 	"wikibase-api-failed-save": "Tallennus epäonnistui.",
 	"wikibase-api-no-such-sitelink": "Sivustolinkkiä sivustolle ”$1” ei löytynyt yritettäessä muokata merkkejä.",
@@ -386,5 +389,8 @@
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Älä näytä tätä viestiä uudelleen",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Yritä uudelleen",
 	"wikibase-federated-properties-edit-request-failed-notice-header": "Muokkaus epäonnistui",
-	"special-setlabeldescriptionaliases-parameterized": "Aseta kohteelle/ominaisuudelle nimi, kuvaus ja/tai aliaksia"
+	"special-setaliases-parameterized": "Aseta $1-aliakset",
+	"special-setlabel-parameterized": "Aseta $1-nimi",
+	"special-setdescription-parameterized": "Aseta $1-kuvaus",
+	"special-setlabeldescriptionaliases-parameterized": "Aseta $1-nimi, -kuvaus ja -aliakset"
 }

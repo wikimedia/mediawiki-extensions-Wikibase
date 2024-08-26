@@ -7,6 +7,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "ଡାଟା ଭଣ୍ଡାରଙ୍କୁ ଯୋଡିବା ପାଇଁ ଲିଙ୍କ",
+	"wikibase-after-page-move": "ଆପଣଙ୍କର ବଦଳ ଏବେ [$1 {{WBREPONAME}} ଆଇଟମ] ଭାଷା ଲିଙ୍କରେ ବଦଳିଯିବ | ତେବେ ଏହା ହୋଇଛି କି ନାହିଁ ଯାଞ୍ଚକରିନେବାକୁ ଅନୁରୋଧ |",
 	"wikibase-comment-update": "{{WBREPONAME}} ଜିନିଷ ବଦଳାଯାଇଥିବା",
 	"wikibase-dataitem": "{{WBREPONAME}} ଜିନିଷ",
 	"wikibase-editlinks": "ଲିଙ୍କଗୁଡ଼ିକୁ ବଦଳାଇବେ",
