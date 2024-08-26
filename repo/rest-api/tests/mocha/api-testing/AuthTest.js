@@ -64,18 +64,15 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	} );
 
 	describe( 'Authorization', () => {
-		function assertGenericPermissionDenied( response ) {
-			expect( response ).to.have.status( 403 );
-			assert.strictEqual( response.body.httpCode, 403 );
-			assert.strictEqual( response.body.httpReason, 'Forbidden' );
-			assert.strictEqual( response.body.error, 'rest-write-denied' );
-		}
 
 		describeEachRouteWithReset(
 			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
 				it( 'Unauthorized bot edit', async () => {
-					assertGenericPermissionDenied(
-						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest()
+					assertValidError(
+						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
+						403,
+						'permission-denied',
+						{ reason: 'unauthorized-bot-edit' }
 					);
 				} );
 			}
