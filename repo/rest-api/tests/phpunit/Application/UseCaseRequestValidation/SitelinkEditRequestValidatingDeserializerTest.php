@@ -67,7 +67,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::newMissingField( '/sitelink', 'title' ),
 			new ValidationError(
 				SitelinkValidator::CODE_TITLE_MISSING,
-				[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ]
+				[ SitelinkValidator::CONTEXT_PATH => '/sitelink' ]
 			),
 		];
 
@@ -75,7 +75,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 			UseCaseError::newInvalidValue( '/sitelink/title' ),
 			new ValidationError(
 				SitelinkValidator::CODE_EMPTY_TITLE,
-				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]
+				[ SitelinkValidator::CONTEXT_PATH => '/sitelink/title', SitelinkValidator::CONTEXT_VALUE => '' ]
 			),
 		];
 

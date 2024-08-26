@@ -41,9 +41,12 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 		try {
 			$this->deserializedSitelink = $this->sitelinkDeserializer->deserialize( $siteId, $sitelink, $basePath );
 		} catch ( MissingFieldException $e ) {
-			return new ValidationError( self::CODE_TITLE_MISSING, [ self::CONTEXT_SITE_ID => $siteId ] );
+			return new ValidationError( self::CODE_TITLE_MISSING, [ self::CONTEXT_PATH => $e->getPath() ] );
 		} catch ( EmptySitelinkException $e ) {
-			return new ValidationError( self::CODE_EMPTY_TITLE, [ self::CONTEXT_SITE_ID => $siteId ] );
+			return new ValidationError(
+				self::CODE_EMPTY_TITLE,
+				[ self::CONTEXT_PATH => $e->getPath(), self::CONTEXT_VALUE => $e->getValue() ]
+			);
 		} catch ( InvalidFieldException $e ) {
 			if ( $e->getField() !== 'title' ) {
 				throw new LogicException( "Unknown field '{$e->getField()}' in InvalidFieldException}" );

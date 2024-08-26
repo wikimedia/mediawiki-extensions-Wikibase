@@ -486,13 +486,14 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 		yield SitelinkValidator::CODE_TITLE_MISSING => [
 			new ValidationError( SitelinkValidator::CODE_TITLE_MISSING, [
-				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_PATH => "/item/sitelinks/$site",
 			] ),
 			UseCaseError::newMissingField( "/item/sitelinks/$site", 'title' ),
 		];
 		yield SitelinkValidator::CODE_EMPTY_TITLE => [
 			new ValidationError( SitelinkValidator::CODE_EMPTY_TITLE, [
-				SitelinkValidator::CONTEXT_SITE_ID => $site,
+				SitelinkValidator::CONTEXT_PATH => "/item/sitelinks/$site/title",
+				SitelinkValidator::CONTEXT_VALUE => '',
 			] ),
 			UseCaseError::newInvalidValue( "/item/sitelinks/$site/title" ),
 		];

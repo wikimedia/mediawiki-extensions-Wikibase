@@ -64,13 +64,13 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		yield 'missing title' => [
 			new MissingFieldException( 'title' ),
 			SitelinkValidator::CODE_TITLE_MISSING,
-			[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ],
+			[ SitelinkValidator::CONTEXT_PATH => '' ],
 		];
 
 		yield 'title is empty' => [
 			new EmptySitelinkException( 'title', '' ),
 			SitelinkValidator::CODE_EMPTY_TITLE,
-			[ SitelinkValidator::CONTEXT_SITE_ID => 'enwiki' ],
+			[ SitelinkValidator::CONTEXT_PATH => '', SitelinkValidator::CONTEXT_VALUE => '' ],
 		];
 
 		yield 'invalid title' => [

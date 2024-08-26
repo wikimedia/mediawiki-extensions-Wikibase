@@ -74,12 +74,12 @@ class SitelinkDeserializerTest extends TestCase {
 	}
 
 	public function provideInvalidSitelinkSerialization(): Generator {
-		yield 'title missing' => [ [ 'badges' => self::ALLOWED_BADGES[ 0 ] ], new MissingFieldException( 'title' ) ];
+		yield 'title missing' => [ [ 'badges' => self::ALLOWED_BADGES[ 0 ] ], new MissingFieldException( 'title', '' ) ];
 		yield 'title empty' => [
 			[ 'title' => '', 'badges' => self::ALLOWED_BADGES[ 1 ] ],
-			new EmptySitelinkException( 'title', '' ),
+			new EmptySitelinkException( 'title', '', '/title' ),
 		];
-		yield 'title empty w/ whitespace' => [ [ 'title' => " \t" ], new EmptySitelinkException( 'title', '' ) ];
+		yield 'title empty w/ whitespace' => [ [ 'title' => " \t" ], new EmptySitelinkException( 'title', '', '/title' ) ];
 		yield 'title invalid' => [ [ 'title' => 'invalid?' ], new InvalidFieldException( 'title', 'invalid?', '/title' ) ];
 		yield 'title not a string' => [
 			[ 'title' => [ 'arrrays', 'not', 'allowed' ] ],
