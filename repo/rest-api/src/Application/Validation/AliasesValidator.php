@@ -36,7 +36,7 @@ class AliasesValidator {
 		$this->languageCodeValidator = $languageCodeValidator;
 	}
 
-	public function validate( array $aliases ): ?ValidationError {
+	public function validate( array $aliases, string $basePath ): ?ValidationError {
 		if ( count( $aliases ) === 0 ) {
 			$this->deserializedAliases = new AliasGroupList();
 			return null;
@@ -66,12 +66,12 @@ class AliasesValidator {
 			}
 		}
 
-		return $this->deserializeAliases( $aliases ) ?? $this->validateAliasesInLanguage( $this->deserializedAliases );
+		return $this->deserializeAliases( $aliases, $basePath ) ?? $this->validateAliases( $this->deserializedAliases );
 	}
 
-	private function deserializeAliases( array $aliases ): ?ValidationError {
+	private function deserializeAliases( array $aliases, string $basePath ): ?ValidationError {
 		try {
-			$this->deserializedAliases = $this->aliasesDeserializer->deserialize( $aliases, '' );
+			$this->deserializedAliases = $this->aliasesDeserializer->deserialize( $aliases, $basePath );
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_VALUE,
@@ -82,7 +82,7 @@ class AliasesValidator {
 		return null;
 	}
 
-	private function validateAliasesInLanguage( AliasGroupList $aliases ): ?ValidationError {
+	private function validateAliases( AliasGroupList $aliases ): ?ValidationError {
 		foreach ( $aliases as $aliasesInLanguage ) {
 			$aliasesInLanguageValidationError = $this->aliasesInLanguageValidator->validate( $aliasesInLanguage );
 			if ( $aliasesInLanguageValidationError ) {
