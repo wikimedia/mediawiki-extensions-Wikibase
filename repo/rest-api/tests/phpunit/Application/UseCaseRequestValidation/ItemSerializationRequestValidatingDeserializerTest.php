@@ -299,10 +299,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	public function itemAliasesValidationErrorProvider(): Generator {
-		yield 'empty alias' => [
+		yield 'invalid value' => [
 			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_PATH => '/en/1' ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[ AliasesValidator::CONTEXT_PATH => 'en/1', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
 		];
@@ -350,28 +350,17 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			[ 'aliases' => [ 'en' => [ $tooLongAlias ] ] ],
 		];
 
-		yield 'invalid alias deserialization' => [
+		yield 'invalid alias' => [
 			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS,
+				AliasesInLanguageValidator::CODE_INVALID,
 				[
-					AliasesValidator::CONTEXT_ALIAS => 22,
-					AliasesValidator::CONTEXT_LANGUAGE => 'en',
+					AliasesInLanguageValidator::CONTEXT_VALUE => "alias \t with \t tabs",
+					AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
+					AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
 				]
 			),
 			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
-			[ 'aliases' => [ 'en' => [ 'ok', 22 ] ] ],
-		];
-
-		yield 'invalid alias' => [
-			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS,
-				[
-					AliasesValidator::CONTEXT_ALIAS => "invalid \t",
-					AliasesValidator::CONTEXT_LANGUAGE => 'en',
-				]
-			),
-			UseCaseError::newInvalidValue( '/item/aliases/en/0' ),
-			[ 'aliases' => [ 'en' => [ "invalid \t" ] ] ],
+			[ 'aliases' => [ 'en' => [ 'valid alias', "alias \t with \t tabs" ] ] ],
 		];
 
 		yield 'invalid aliases language code' => [

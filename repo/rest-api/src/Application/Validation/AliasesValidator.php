@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 
@@ -13,13 +12,12 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
  * @license GPL-2.0-or-later
  */
 class AliasesValidator {
-	public const CODE_EMPTY_ALIAS = 'aliases-validator-code-alias-empty';
+	public const CODE_INVALID_VALUE = 'aliases-validator-code-invalid-value';
 	public const CODE_INVALID_ALIASES = 'aliases-validator-code-invalid-aliases';
-	public const CODE_INVALID_ALIAS = 'aliases-validator-code-invalid-alias';
 	public const CODE_INVALID_ALIAS_LIST = 'aliases-validator-code-invalid-alias-list';
 
+	public const CONTEXT_VALUE = 'aliases-validator-context-value';
 	public const CONTEXT_ALIASES = 'aliases-validator-context-aliases';
-	public const CONTEXT_ALIAS = 'aliases-validator-context-alias';
 	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
 	public const CONTEXT_PATH = 'aliases-validator-context-path';
 
@@ -75,18 +73,12 @@ class AliasesValidator {
 	private function deserializeAliases( array $aliases ): ?ValidationError {
 		try {
 			$this->deserializedAliases = $this->aliasesDeserializer->deserialize( $aliases );
-		} catch ( EmptyAliasException $e ) {
-			return new ValidationError(
-				self::CODE_EMPTY_ALIAS,
-				[ self::CONTEXT_PATH => "/{$e->getLanguage()}/{$e->getIndex()}" ]
-			);
 		} catch ( InvalidAliasesInLanguageException $e ) {
 			return new ValidationError( self::CODE_INVALID_ALIAS_LIST, [ self::CONTEXT_LANGUAGE => $e->getField() ] );
 		} catch ( InvalidFieldException $e ) {
-			$language = explode( '/', $e->getPath() )[0];
 			return new ValidationError(
-				self::CODE_INVALID_ALIAS,
-				[ self::CONTEXT_LANGUAGE => $language, self::CONTEXT_ALIAS => $e->getValue() ]
+				self::CODE_INVALID_VALUE,
+				[ self::CONTEXT_PATH => $e->getPath(), self::CONTEXT_VALUE => $e->getValue() ]
 			);
 		}
 

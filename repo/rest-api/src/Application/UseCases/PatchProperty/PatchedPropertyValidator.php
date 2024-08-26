@@ -239,18 +239,16 @@ class PatchedPropertyValidator {
 			switch ( $errorCode ) {
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
+				case AliasesValidator::CODE_INVALID_VALUE:
+					throw UseCaseError::newPatchResultInvalidValue(
+						"/aliases/{$context[AliasesValidator::CONTEXT_PATH]}",
+						$context[AliasesValidator::CONTEXT_VALUE]
+					);
 				case AliasesValidator::CODE_INVALID_ALIASES:
 					throw UseCaseError::newPatchResultInvalidValue( '/aliases', $aliasesSerialization );
 				case AliasesValidator::CODE_INVALID_ALIAS_LIST:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language", $aliasesSerialization[$language] );
-				case AliasesValidator::CODE_EMPTY_ALIAS:
-					throw UseCaseError::newPatchResultInvalidValue( "/aliases{$context[AliasesValidator::CONTEXT_PATH]}", '' );
-				case AliasesValidator::CODE_INVALID_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
-					$value = $context[AliasesValidator::CONTEXT_ALIAS];
-					$aliasIndex = Utils::getIndexOfValueInSerialization( $value, $aliasesSerialization[$language] );
-					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language/$aliasIndex", $value );
 				case AliasesInLanguageValidator::CODE_INVALID:
 					throw UseCaseError::newPatchResultInvalidValue(
 						"/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}",

@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
@@ -123,22 +122,22 @@ class AliasesDeserializerTest extends TestCase {
 		];
 
 		yield "invalid 'alias' value - zero length string" => [
-			new EmptyAliasException( 'en', 1 ),
+			new InvalidFieldException( '1', '', 'en/1' ),
 			[ 'en' => [ 'list', '', 'of', 'aliases' ] ],
 		];
 
 		yield "invalid 'alias' value - zero length string and incorrect type for key" => [
-			new EmptyAliasException( '9667', 1 ),
+			new InvalidFieldException( '1', '', '9667/1' ),
 			[ 9667 => [ 'list', '', 'of', 'aliases' ] ],
 		];
 
 		yield "invalid 'alias' value - four spaces" => [
-			new EmptyAliasException( 'en', 2 ),
+			new InvalidFieldException( '2', '', 'en/2' ),
 			[ 'en' => [ 'list', 'of', '    ', 'aliases' ] ],
 		];
 
 		yield "invalid 'alias' value - spaces and tab" => [
-			new EmptyAliasException( 'en', 3 ),
+			new InvalidFieldException( '3', '', 'en/3' ),
 			[ 'en' => [ 'list', 'of', 'aliases', "  \t  " ] ],
 		];
 	}

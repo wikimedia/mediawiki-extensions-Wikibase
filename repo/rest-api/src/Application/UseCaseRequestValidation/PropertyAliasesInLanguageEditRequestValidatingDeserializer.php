@@ -6,7 +6,6 @@ use LogicException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -48,8 +47,6 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			return $this->deserializer->deserialize( $requestAliases );
 		} catch ( InvalidAliasesInLanguageException $e ) {
 			throw UseCaseError::newInvalidValue( '/aliases' );
-		} catch ( EmptyAliasException $e ) {
-			throw UseCaseError::newInvalidValue( "/aliases/{$e->getIndex()}" );
 		} catch ( InvalidFieldException $e ) {
 			throw UseCaseError::newInvalidValue( "/aliases/{$e->getField()}" );
 		}

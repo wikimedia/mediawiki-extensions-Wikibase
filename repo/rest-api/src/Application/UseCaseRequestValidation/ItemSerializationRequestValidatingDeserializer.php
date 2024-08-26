@@ -136,10 +136,10 @@ class ItemSerializationRequestValidatingDeserializer {
 	private function handleAliasesValidationErrors( ValidationError $validationError, array $aliasesSerialization ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
+			case AliasesValidator::CODE_INVALID_VALUE:
+				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesValidator::CONTEXT_PATH]}" );
 			case AliasesValidator::CODE_INVALID_ALIASES:
 				throw UseCaseError::newInvalidValue( '/item/aliases' );
-			case AliasesValidator::CODE_EMPTY_ALIAS:
-				throw UseCaseError::newInvalidValue( '/item/aliases' . $context[AliasesValidator::CONTEXT_PATH] );
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
 				$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 				$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
@@ -148,12 +148,8 @@ class ItemSerializationRequestValidatingDeserializer {
 				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
 				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesValidator::CONTEXT_LANGUAGE]}" );
-			case AliasesValidator::CODE_INVALID_ALIAS:
 			case AliasesInLanguageValidator::CODE_INVALID:
-				$aliasValue = $context[AliasesValidator::CONTEXT_ALIAS] ?? $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-				$language = $context[AliasesValidator::CONTEXT_LANGUAGE] ?? $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
-				throw UseCaseError::newInvalidValue( "/item/aliases/$language/$aliasIndex" );
+				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}" );
 		}
 	}
 
