@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -62,7 +63,7 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedPropertyAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
-			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
+			->willReturnCallback( [ new AliasesDeserializer( new AliasesInLanguageDeserializer() ), 'deserialize' ] );
 		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}

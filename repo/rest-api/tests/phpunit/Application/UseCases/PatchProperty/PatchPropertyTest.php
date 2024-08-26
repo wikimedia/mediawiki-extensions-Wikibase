@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
@@ -95,7 +96,7 @@ class PatchPropertyTest extends TestCase {
 			new AliasesValidator(
 				$this->createStub( AliasesInLanguageValidator::class ),
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
-				new AliasesDeserializer(),
+				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			),
 			new StatementsValidator( $this->newStatementValidator() )
 		);

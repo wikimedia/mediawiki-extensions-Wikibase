@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
@@ -125,7 +126,7 @@ class PatchedPropertyAliasesValidatorTest extends TestCase {
 	private function newValidator(): PatchedPropertyAliasesValidator {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 		return new PatchedPropertyAliasesValidator(
-			new AliasesDeserializer(),
+			new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			new TermValidatorFactoryAliasesInLanguageValidator(
 				new TermValidatorFactory(
 					self::LIMIT,

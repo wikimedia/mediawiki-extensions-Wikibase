@@ -4,8 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
 
 use LogicException;
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -16,10 +15,10 @@ use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
  */
 class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 
-	private AliasesDeserializer $deserializer;
+	private AliasesInLanguageDeserializer $deserializer;
 	private AliasesInLanguageValidator $validator;
 
-	public function __construct( AliasesDeserializer $deserializer, AliasesInLanguageValidator $validator ) {
+	public function __construct( AliasesInLanguageDeserializer $deserializer, AliasesInLanguageValidator $validator ) {
 		$this->deserializer = $deserializer;
 		$this->validator = $validator;
 	}
@@ -33,22 +32,19 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			throw UseCaseError::newInvalidValue( '/aliases' );
 		}
 
-		$language = $request->getLanguageCode();
-		$deserializedAliases = $this->deserialize( [ $language => $aliases ] );
-
-		$aliasesInLanguage = $deserializedAliases->getByLanguage( $language );
+		$aliasesInLanguage = new AliasGroup( $request->getLanguageCode(), $this->deserialize( $aliases ) );
 		$this->validate( $aliasesInLanguage );
 
 		return $aliasesInLanguage->getAliases();
 	}
 
-	private function deserialize( array $requestAliases ): AliasGroupList {
+	private function deserialize( array $requestAliases ): array {
 		try {
-			return $this->deserializer->deserialize( $requestAliases );
+			return $this->deserializer->deserialize( $requestAliases, '/aliases' );
 		} catch ( InvalidAliasesInLanguageException $e ) {
 			throw UseCaseError::newInvalidValue( '/aliases' );
 		} catch ( InvalidFieldException $e ) {
-			throw UseCaseError::newInvalidValue( "/aliases/{$e->getField()}" );
+			throw UseCaseError::newInvalidValue( $e->getPath() );
 		}
 	}
 
