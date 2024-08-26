@@ -97,10 +97,13 @@
 			"message": "Cannot change the ID of the existing statement"
 		}
 	},
-	"InvalidOperationChangePropertyOfStatement": {
+	"PatchResultModifiedReadOnlyValue": {
 		"value": {
-			"code": "invalid-operation-change-property-of-statement",
-			"message": "Cannot change the property of the existing statement"
+			"code": "patch-result-modified-read-only-value",
+			"message": "Read only value in patch result cannot be modified",
+			"context": {
+				"path": "{json_pointer_to_readonly_value}"
+			}
 		}
 	},
 	"PatchTestFailedExample": {

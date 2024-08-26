@@ -219,22 +219,6 @@ describe( 'PATCH statement tests', () => {
 					assert.deepEqual( response.body.context, { path: '/comment' } );
 				} );
 
-				it( 'rejects Property ID change', async () => {
-					const otherStringPropertyId = ( await entityHelper.createEntity(
-						'property',
-						{ datatype: 'string' }
-					) ).entity.id;
-					const patch = [ {
-						op: 'replace',
-						path: '/property/id',
-						value: otherStringPropertyId
-					} ];
-					const response = await newPatchRequestBuilder( testStatementId, patch )
-						.assertValidRequest().makeRequest();
-
-					assertValidError( response, 400, 'invalid-operation-change-property-of-statement' );
-				} );
-
 				it( 'rejects Statement ID change', async () => {
 					const patch = [ {
 						op: 'replace',
@@ -340,6 +324,23 @@ describe( 'PATCH statement tests', () => {
 						.makeRequest();
 
 					assertValidError( response, 422, 'patch-result-invalid-value', { path: '/value/content', value } );
+				} );
+
+				it( 'rejects Property ID change', async () => {
+					const otherStringPropertyId = ( await entityHelper.createEntity(
+						'property',
+						{ datatype: 'string' }
+					) ).entity.id;
+					const patch = [ {
+						op: 'replace',
+						path: '/property/id',
+						value: otherStringPropertyId
+					} ];
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest().makeRequest();
+
+					assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/property/id' } );
+					assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 				} );
 			} );
 
