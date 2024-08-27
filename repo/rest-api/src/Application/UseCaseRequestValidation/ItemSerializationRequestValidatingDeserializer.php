@@ -138,8 +138,6 @@ class ItemSerializationRequestValidatingDeserializer {
 		switch ( $validationError->getCode() ) {
 			case AliasesValidator::CODE_INVALID_VALUE:
 				throw UseCaseError::newInvalidValue( $context[AliasesValidator::CONTEXT_PATH] );
-			case AliasesValidator::CODE_INVALID_ALIASES:
-				throw UseCaseError::newInvalidValue( '/item/aliases' );
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
 				throw UseCaseError::newValueTooLong(
 					$context[AliasesInLanguageValidator::CONTEXT_PATH],

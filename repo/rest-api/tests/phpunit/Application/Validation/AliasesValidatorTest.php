@@ -68,11 +68,14 @@ class AliasesValidatorTest extends TestCase {
 	public function provideInvalidAliases(): Generator {
 		yield 'invalid aliases - sequential array' => [
 			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIASES,
-				[ AliasesValidator::CONTEXT_ALIASES => [ 'not', 'an', 'associative', 'array' ] ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[
+					AliasesValidator::CONTEXT_VALUE => [ 'not', 'an', 'associative', 'array' ],
+					AliasesValidator::CONTEXT_PATH => '/aliases',
+				]
 			),
 			[ 'not', 'an', 'associative', 'array' ],
-			'',
+			'/aliases',
 		];
 
 		yield 'invalid language code - integer' => [

@@ -241,8 +241,6 @@ class PatchedItemValidator {
 						$context[AliasesValidator::CONTEXT_PATH],
 						$context[AliasesValidator::CONTEXT_VALUE]
 					);
-				case AliasesValidator::CODE_INVALID_ALIASES:
-					throw UseCaseError::newPatchResultInvalidValue( '/aliases', $aliasesSerialization );
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 				case AliasesValidator::CODE_INVALID_ALIAS_LIST:
