@@ -88,8 +88,10 @@ class PatchedItemAliasesValidator {
 
 	private function validateLanguageCodes( array $languageCodes ): void {
 		foreach ( $languageCodes as $languageCode ) {
-			if ( $this->languageCodeValidator->validate( $languageCode ) ) {
-				throw UseCaseError::newPatchResultInvalidKey( '', $languageCode );
+			// need to cast $languageCode to a string because, while json object keys are always strings,
+			// php converts numeric looking keys to integers
+			if ( $this->languageCodeValidator->validate( (string)$languageCode ) ) {
+				throw UseCaseError::newPatchResultInvalidKey( '', (string)$languageCode );
 			}
 		}
 	}

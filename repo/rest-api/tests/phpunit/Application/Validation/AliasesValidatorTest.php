@@ -110,9 +110,17 @@ class AliasesValidatorTest extends TestCase {
 			[ 'en' => 'not a list of aliases in a language' ],
 		];
 
+		yield "invalid 'aliases in language' list - associative array" => [
+			new ValidationError(
+				AliasesValidator::CODE_INVALID_ALIAS_LIST,
+				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
+			),
+			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+		];
+
 		yield "invalid 'aliases in language' list - empty array" => [
 			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
+				AliasesValidator::CODE_INVALID_ALIAS_LIST,
 				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			[ 'en' => [] ],

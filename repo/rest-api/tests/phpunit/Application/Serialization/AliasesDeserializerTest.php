@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 
 /**
@@ -72,6 +73,11 @@ class AliasesDeserializerTest extends TestCase {
 	}
 
 	public function provideInvalidAliases(): Generator {
+		yield "invalid 'aliases' - sequential array" => [
+			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '' ),
+			[ 'not', 'an', 'associative', 'array' ],
+		];
+
 		yield "invalid 'aliases in language' - string" => [
 			new InvalidAliasesInLanguageException( 'de', 'this should be a list of strings', 'de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => 'this should be a list of strings' ],
@@ -82,14 +88,39 @@ class AliasesDeserializerTest extends TestCase {
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [ 'not' => 'a', 'sequential' => 'array' ] ],
 		];
 
+		yield "invalid 'aliases in language' - associative array and incorrect type for key" => [
+			new InvalidAliasesInLanguageException( '5772', [ 'not' => 'a', 'sequential' => 'array' ], '5772' ),
+			[ 'en' => [ 'list', 'of', 'aliases' ], 5772 => [ 'not' => 'a', 'sequential' => 'array' ] ],
+		];
+
+		yield "invalid 'aliases in language' - empty array" => [
+			new InvalidAliasesInLanguageException( 'de', [], 'de' ),
+			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [] ],
+		];
+
+		yield "invalid 'aliases in language' - empty array and incorrect type for key" => [
+			new InvalidAliasesInLanguageException( '6071', [], '6071' ),
+			[ 'en' => [ 'list', 'of', 'aliases' ], 6071 => [] ],
+		];
+
+		yield "invalid 'alias' type - integer and incorrect type for key" => [
+			new InvalidFieldException( '0', 9183, '5593/0' ),
+			[ 5593 => [ 9183, 'list', 'of', 'aliases' ] ],
+		];
+
 		yield "invalid 'alias' type - integer" => [
-			new InvalidAliasesInLanguageException( 'en', 9183, 'en/0' ),
+			new InvalidFieldException( '0', 9183, 'en/0' ),
 			[ 'en' => [ 9183, 'list', 'of', 'aliases' ] ],
 		];
 
 		yield "invalid 'alias' value - zero length string" => [
 			new EmptyAliasException( 'en', 1 ),
 			[ 'en' => [ 'list', '', 'of', 'aliases' ] ],
+		];
+
+		yield "invalid 'alias' value - zero length string and incorrect type for key" => [
+			new EmptyAliasException( '9667', 1 ),
+			[ 9667 => [ 'list', '', 'of', 'aliases' ] ],
 		];
 
 		yield "invalid 'alias' value - four spaces" => [

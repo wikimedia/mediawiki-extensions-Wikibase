@@ -309,7 +309,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'empty aliases in language list' => [
 			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS_LIST,
+				AliasesValidator::CODE_INVALID_ALIAS_LIST,
 				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			UseCaseError::newInvalidValue( '/item/aliases/en' ),

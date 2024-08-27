@@ -8,13 +8,13 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 
 /**
  * @license GPL-2.0-or-later
  */
 class AliasesValidator {
 	public const CODE_EMPTY_ALIAS = 'aliases-validator-code-alias-empty';
-	public const CODE_EMPTY_ALIAS_LIST = 'aliases-validator-code-alias-list-empty';
 	public const CODE_DUPLICATE_ALIAS = 'aliases-validator-code-alias-duplicate';
 	public const CODE_INVALID_ALIASES = 'aliases-validator-code-invalid-aliases';
 	public const CODE_INVALID_ALIAS = 'aliases-validator-code-invalid-alias';
@@ -69,13 +69,6 @@ class AliasesValidator {
 					[ self::CONTEXT_LANGUAGE => $languageCode ]
 				);
 			}
-
-			if ( count( $aliasesInLanguage ) === 0 ) {
-				return new ValidationError(
-					self::CODE_EMPTY_ALIAS_LIST,
-					[ self::CONTEXT_LANGUAGE => $languageCode ]
-				);
-			}
 		}
 
 		return $this->deserializeAliases( $aliases ) ?? $this->validateAliasesInLanguage( $this->deserializedAliases );
@@ -95,9 +88,12 @@ class AliasesValidator {
 				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_ALIAS => $e->getValue() ]
 			);
 		} catch ( InvalidAliasesInLanguageException $e ) {
+			return new ValidationError( self::CODE_INVALID_ALIAS_LIST, [ self::CONTEXT_LANGUAGE => $e->getField() ] );
+		} catch ( InvalidFieldException $e ) {
+			$language = explode( '/', $e->getPath() )[0];
 			return new ValidationError(
 				self::CODE_INVALID_ALIAS,
-				[ self::CONTEXT_LANGUAGE => $e->getField(), self::CONTEXT_ALIAS => $e->getValue() ]
+				[ self::CONTEXT_LANGUAGE => $language, self::CONTEXT_ALIAS => $e->getValue() ]
 			);
 		}
 

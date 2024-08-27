@@ -10,6 +10,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
@@ -56,10 +58,14 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 	private function deserialize( array $requestAliases ): AliasGroupList {
 		try {
 			return $this->deserializer->deserialize( $requestAliases );
+		} catch ( InvalidAliasesInLanguageException $e ) {
+			throw UseCaseError::newInvalidValue( '/aliases' );
 		} catch ( EmptyAliasException $e ) {
 			throw UseCaseError::newInvalidValue( "/aliases/{$e->getIndex()}" );
 		} catch ( DuplicateAliasException $e ) {
 			$this->throwDuplicateAliasError( $e->getValue() );
+		} catch ( InvalidFieldException $e ) {
+			throw UseCaseError::newInvalidValue( "/aliases/{$e->getField()}" );
 		}
 	}
 
