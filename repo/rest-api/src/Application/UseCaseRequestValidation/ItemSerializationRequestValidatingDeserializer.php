@@ -143,8 +143,6 @@ class ItemSerializationRequestValidatingDeserializer {
 					$context[AliasesInLanguageValidator::CONTEXT_PATH],
 					$context[AliasesInLanguageValidator::CONTEXT_LIMIT]
 				);
-			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
-				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesValidator::CONTEXT_LANGUAGE]}" );
 			case AliasesInLanguageValidator::CODE_INVALID:
 				throw UseCaseError::newInvalidValue( $context[AliasesInLanguageValidator::CONTEXT_PATH] );
 		}

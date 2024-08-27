@@ -12,10 +12,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
  */
 class AliasesValidator {
 	public const CODE_INVALID_VALUE = 'aliases-validator-code-invalid-value';
-	public const CODE_INVALID_ALIAS_LIST = 'aliases-validator-code-invalid-alias-list';
 
 	public const CONTEXT_VALUE = 'aliases-validator-context-value';
-	public const CONTEXT_LANGUAGE = 'aliases-validator-context-language';
 	public const CONTEXT_PATH = 'aliases-validator-context-path';
 
 	private AliasesInLanguageValidator $aliasesInLanguageValidator;
@@ -61,8 +59,8 @@ class AliasesValidator {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop
 			if ( !is_array( $aliasesInLanguage ) ) {
 				return new ValidationError(
-					self::CODE_INVALID_ALIAS_LIST,
-					[ self::CONTEXT_LANGUAGE => $languageCode ]
+					self::CODE_INVALID_VALUE,
+					[ self::CONTEXT_PATH => "$basePath/$languageCode", self::CONTEXT_VALUE => $aliasesInLanguage ]
 				);
 			}
 		}
