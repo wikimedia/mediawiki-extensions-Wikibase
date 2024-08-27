@@ -3,13 +3,17 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer
@@ -19,6 +23,8 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  * @license GPL-2.0-or-later
  */
 class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCase {
+
+	private const MAX_LENGTH = 40;
 
 	/**
 	 * @dataProvider provideValidAliases
@@ -52,90 +58,66 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 	}
 
 	/**
-	 * @dataProvider invalidAliasesProvider
+	 * @dataProvider provideInvalidAliases
 	 */
-	public function testWithInvalidAliases(
-		UseCaseError $expectedException,
-		array $aliases,
-		ValidationError $validationError = null
-	): void {
+	public function testGivenInvalidAliases_throwsUseCaseError( UseCaseError $expectedException, array $aliases ): void {
 		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
 		try {
-			$this->newRequestValidatingDeserializer( $validationError )->validateAndDeserialize( $request );
-			$this->fail( 'this should not be reached' );
-		} catch ( UseCaseError $error ) {
-			$this->assertEquals( $expectedException, $error );
+			$this->newRequestValidatingDeserializer()->validateAndDeserialize( $request );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedException, $e );
 		}
 	}
 
-	public static function invalidAliasesProvider(): Generator {
-		yield 'alias list is associative array' => [
+	public static function provideInvalidAliases(): Generator {
+		yield 'invalid aliases - associative array' => [
 			UseCaseError::newInvalidValue( '/aliases' ),
 			[ 'not' => 'a', 'sequential' => 'array' ],
 		];
 
-		yield 'alias list is empty' => [
+		yield 'invalid aliases - empty array' => [
 			UseCaseError::newInvalidValue( '/aliases' ),
 			[],
 		];
 
-		yield 'alias at position 0 is not a string' => [
+		yield 'invalid alias - integer' => [
 			UseCaseError::newInvalidValue( '/aliases/0' ),
 			[ 5675 ],
 		];
 
-		yield 'alias at position 1 is not a string' => [
-			UseCaseError::newInvalidValue( '/aliases/1' ),
-			[ 'alias', 1085 ],
-		];
-
-		yield 'alias at position 0 is empty' => [
-			UseCaseError::newInvalidValue( '/aliases/0' ),
-			[ '' ],
-		];
-
-		yield 'alias at position 1 is empty' => [
+		yield 'invalid alias - zero length string' => [
 			UseCaseError::newInvalidValue( '/aliases/1' ),
 			[ 'aka', '' ],
 		];
 
-		$alias = 'alias that is too long...';
-		$limit = 40;
-		yield 'alias too long' => [
-			UseCaseError::newValueTooLong( '/aliases/0', $limit ),
-			[ $alias ],
-			new ValidationError(
-				AliasesInLanguageValidator::CODE_TOO_LONG,
-				[
-					AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
-					AliasesInLanguageValidator::CONTEXT_LIMIT => $limit,
-				]
-			),
+		yield 'invalid alias - alias too long' => [
+			UseCaseError::newValueTooLong( '/aliases/0', self::MAX_LENGTH ),
+			[ 'this alias is too long for the configured limit' ],
 		];
 
-		$invalidAlias = "tab characters \t not allowed";
-		yield 'alias invalid' => [
-			UseCaseError::newInvalidValue( '/aliases/0' ),
-			[ $invalidAlias ],
-			new ValidationError(
-				AliasesInLanguageValidator::CODE_INVALID,
-				[ AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias ]
-			),
+		yield 'invalid alias - disallowed character' => [
+			UseCaseError::newInvalidValue( '/aliases/1' ),
+			[ 'aka', "tabs \t not \t allowed" ],
 		];
 	}
 
-	private function newRequestValidatingDeserializer(
-		ValidationError $validationError = null
-	): ItemAliasesInLanguageEditRequestValidatingDeserializer {
-		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
-		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
-
+	private function newRequestValidatingDeserializer(): ItemAliasesInLanguageEditRequestValidatingDeserializer {
 		return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
 			new AliasesInLanguageDeserializer(),
-			$aliasesValidator
+			new TermValidatorFactoryAliasesInLanguageValidator(
+				new TermValidatorFactory(
+					self::MAX_LENGTH,
+					[ 'en', 'de', 'ar', 'mul' ],
+					$this->createStub( EntityIdParser::class ),
+					$this->createStub( TermsCollisionDetectorFactory::class ),
+					WikibaseRepo::getTermLookup(),
+					$this->createStub( LanguageNameUtils::class )
+				)
+			)
 		);
 	}
 

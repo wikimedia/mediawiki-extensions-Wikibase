@@ -5,7 +5,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
@@ -58,19 +57,19 @@ class PatchedPropertyAliasesValidator {
 
 	private function validateAliases( AliasGroupList $aliases ): void {
 		foreach ( $aliases as $aliasGroup ) {
-			$validationError = $this->aliasesInLanguageValidator->validate( $aliasGroup );
+			$validationError = $this->aliasesInLanguageValidator->validate( $aliasGroup, "/{$aliasGroup->getLanguageCode()}" );
 			if ( $validationError ) {
 				$context = $validationError->getContext();
 				switch ( $validationError->getCode() ) {
 					case AliasesInLanguageValidator::CODE_TOO_LONG:
-						$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-						$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-						$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasGroup->getAliases() );
-						throw UseCaseError::newValueTooLong( "/{$aliasGroup->getLanguageCode()}/$aliasIndex", $limit, true );
-					default:
-						$value = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
 						$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
-						throw UseCaseError::newPatchResultInvalidValue( "/$path", $value );
+						$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+						throw UseCaseError::newValueTooLong( $path, $limit, true );
+					default:
+						throw UseCaseError::newPatchResultInvalidValue(
+							$context[AliasesInLanguageValidator::CONTEXT_PATH],
+							$context[AliasesInLanguageValidator::CONTEXT_VALUE]
+						);
 				}
 			}
 		}

@@ -17,6 +17,6 @@ interface AliasesInLanguageValidator {
 	public const CONTEXT_LANGUAGE = 'aliases-in-language-validator-context-language';
 	public const CONTEXT_PATH = 'aliases-in-language-validator-context-path';
 
-	public function validate( AliasGroup $aliasesInLanguage ): ?ValidationError;
+	public function validate( AliasGroup $aliasesInLanguage, string $basePath ): ?ValidationError;
 
 }

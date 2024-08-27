@@ -66,7 +66,7 @@ class AliasesValidator {
 			}
 		}
 
-		return $this->deserializeAliases( $aliases, $basePath ) ?? $this->validateAliases( $this->deserializedAliases );
+		return $this->deserializeAliases( $aliases, $basePath ) ?? $this->validateAliases( $this->deserializedAliases, $basePath );
 	}
 
 	private function deserializeAliases( array $aliases, string $basePath ): ?ValidationError {
@@ -82,11 +82,12 @@ class AliasesValidator {
 		return null;
 	}
 
-	private function validateAliases( AliasGroupList $aliases ): ?ValidationError {
+	private function validateAliases( AliasGroupList $aliases, string $basePath ): ?ValidationError {
 		foreach ( $aliases as $aliasesInLanguage ) {
-			$aliasesInLanguageValidationError = $this->aliasesInLanguageValidator->validate( $aliasesInLanguage );
-			if ( $aliasesInLanguageValidationError ) {
-				return $aliasesInLanguageValidationError;
+			$languageCode = $aliasesInLanguage->getLanguageCode();
+			$validationError = $this->aliasesInLanguageValidator->validate( $aliasesInLanguage, "$basePath/$languageCode" );
+			if ( $validationError ) {
+				return $validationError;
 			}
 		}
 

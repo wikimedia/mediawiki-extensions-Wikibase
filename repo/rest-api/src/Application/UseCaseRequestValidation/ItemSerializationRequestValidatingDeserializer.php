@@ -56,7 +56,7 @@ class ItemSerializationRequestValidatingDeserializer {
 
 			$this->handleLabelValidationErrors( $validationError );
 			$this->handleDescriptionValidationErrors( $validationError );
-			$this->handleAliasesValidationErrors( $validationError, $itemSerialization['aliases'] ?? [] );
+			$this->handleAliasesValidationErrors( $validationError );
 			$this->handleStatementsValidationErrors( $validationError );
 			$this->handleSitelinksValidationErrors( $validationError, $itemSerialization['sitelinks'] ?? [] );
 
@@ -133,7 +133,7 @@ class ItemSerializationRequestValidatingDeserializer {
 		}
 	}
 
-	private function handleAliasesValidationErrors( ValidationError $validationError, array $aliasesSerialization ): void {
+	private function handleAliasesValidationErrors( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case AliasesValidator::CODE_INVALID_VALUE:
@@ -141,15 +141,14 @@ class ItemSerializationRequestValidatingDeserializer {
 			case AliasesValidator::CODE_INVALID_ALIASES:
 				throw UseCaseError::newInvalidValue( '/item/aliases' );
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
-				$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-				$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-				$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-				$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
-				throw UseCaseError::newValueTooLong( "/item/aliases/$language/$aliasIndex", $limit );
+				throw UseCaseError::newValueTooLong(
+					$context[AliasesInLanguageValidator::CONTEXT_PATH],
+					$context[AliasesInLanguageValidator::CONTEXT_LIMIT]
+				);
 			case AliasesValidator::CODE_INVALID_ALIAS_LIST:
 				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesValidator::CONTEXT_LANGUAGE]}" );
 			case AliasesInLanguageValidator::CODE_INVALID:
-				throw UseCaseError::newInvalidValue( "/item/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}" );
+				throw UseCaseError::newInvalidValue( $context[AliasesInLanguageValidator::CONTEXT_PATH] );
 		}
 	}
 

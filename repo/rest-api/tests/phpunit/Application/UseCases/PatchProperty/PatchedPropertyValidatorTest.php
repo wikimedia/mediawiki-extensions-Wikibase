@@ -4,7 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchProperty;
 
 use Exception;
 use Generator;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\StatementList;
@@ -36,9 +38,13 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchProperty\PatchedPropertyValidator
@@ -72,10 +78,9 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$this->descriptionsContentsValidator = new PropertyDescriptionsContentsValidator(
 			$this->createStub( PropertyDescriptionValidator::class )
 		);
-		$this->aliasesInLanguageValidator = $this->createStub( AliasesInLanguageValidator::class );
 	}
 
-	private const LIMIT = 40;
+	private const MAX_LENGTH = 40;
 	private const EXISTING_STATEMENT_ID = 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659';
 	private const EXISTING_STRING_PROPERTY_IDS = [ 'P3685', 'P3177', 'P6920', 'P4877' ];
 
@@ -566,14 +571,8 @@ class PatchedPropertyValidatorTest extends TestCase {
 	/**
 	 * @dataProvider aliasesValidationErrorProvider
 	 */
-	public function testAliasesValidation(
-		AliasesInLanguageValidator $aliasesInLanguageValidator,
-		array $patchedAliases,
-		Exception $expectedError
-	): void {
-		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;
+	public function testAliasesValidation( array $patchedAliases, Exception $expectedError ): void {
 		$originalProperty = new Property( new NumericPropertyId( 'P123' ), new Fingerprint(), 'string' );
-
 		$propertySerialization = [
 			'id' => 'P123',
 			'type' => 'property',
@@ -596,95 +595,63 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 	public function aliasesValidationErrorProvider(): Generator {
 		yield 'invalid aliases - sequential array' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'not', 'an', 'associative', 'array' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
 		];
 
 		yield 'invalid language code - integer' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 3248 => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', '3248' ),
 		];
 
 		yield 'invalid language code - xyz' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'xyz' => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', 'xyz' ),
 		];
 
 		yield 'invalid language code - empty string' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ '' => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', '' ),
 		];
 
 		yield "invalid 'aliases in language' list - string" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => 'not a list of aliases in a language' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', 'not a list of aliases in a language' ),
 		];
 
 		yield "invalid 'aliases in language' list - associative array" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'not' => 'a', 'sequential' => 'array' ] ),
 		];
 
 		yield "invalid 'aliases in language' list - empty array" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [] ),
 		];
 
 		yield 'invalid alias - integer' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 3146, 'second alias' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en/0', 3146 ),
 		];
 
 		yield 'invalid alias - empty string' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ '' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
 		yield 'invalid alias - only white space' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ " \t " ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
-		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
-		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_TOO_LONG, [
-			AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
-			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-			AliasesInLanguageValidator::CONTEXT_LIMIT => self::LIMIT,
-		] );
-		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
-		$aliasesInLanguageValidator->method( 'validate' )
-			->with( new AliasGroup( 'en', [ $tooLongAlias ] ) )
-			->willReturn( $expectedResponse );
 		yield 'alias too long' => [
-			$aliasesInLanguageValidator,
-			[ 'en' => [ $tooLongAlias ] ],
-			UseCaseError::newValueTooLong( '/aliases/en/0', self::LIMIT, true ),
+			[ 'en' => [ 'this alias is too long for the configured limit' ] ],
+			UseCaseError::newValueTooLong( '/aliases/en/0', self::MAX_LENGTH, true ),
 		];
 
-		$invalidAlias = "tab\t tab\t tab";
-		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_INVALID, [
-			AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias,
-			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-			AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
-		] );
-		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
-		$aliasesInLanguageValidator->method( 'validate' )
-			->with( new AliasGroup( 'en', [ 'valid alias', $invalidAlias ] ) )
-			->willReturn( $expectedResponse );
 		yield 'alias contains invalid character' => [
-			$aliasesInLanguageValidator,
-			[ 'en' => [ 'valid alias', $invalidAlias ] ],
-			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', $invalidAlias ),
+			[ 'en' => [ 'valid alias', "tabs \t not \t allowed" ] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', "tabs \t not \t allowed" ),
 		];
 	}
 
@@ -818,6 +785,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 	private function newValidator(): PatchedPropertyValidator {
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
 		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
+		$allowedLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
 		return new PatchedPropertyValidator(
 			$this->labelsSyntaxValidator,
@@ -825,8 +793,17 @@ class PatchedPropertyValidatorTest extends TestCase {
 			$this->descriptionsSyntaxValidator,
 			$this->descriptionsContentsValidator,
 			new AliasesValidator(
-				$this->aliasesInLanguageValidator,
-				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator(
+					new TermValidatorFactory(
+						self::MAX_LENGTH,
+						$allowedLanguageCodes,
+						$this->createStub( EntityIdParser::class ),
+						$this->createStub( TermsCollisionDetectorFactory::class ),
+						WikibaseRepo::getTermLookup(),
+						$this->createStub( LanguageNameUtils::class )
+					)
+				),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( $allowedLanguageCodes ) ),
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			),
 			new StatementsValidator(
