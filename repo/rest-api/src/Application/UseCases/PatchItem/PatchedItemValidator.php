@@ -421,7 +421,7 @@ class PatchedItemValidator {
 			foreach ( $serialization as $propertyId => $statementGroup ) {
 				foreach ( $statementGroup as $groupIndex => $statement ) {
 					if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
-						return "/statements/$propertyId/$groupIndex/id";
+						return "/statements/$propertyId/$groupIndex";
 					}
 				}
 			}
@@ -435,7 +435,7 @@ class PatchedItemValidator {
 		$patchedStatementsIds = $getStatementIds( $patchedStatements );
 		foreach ( array_count_values( $patchedStatementsIds ) as $id => $occurrence ) {
 			if ( $occurrence > 1 || !in_array( $id, $originalStatementsIds ) ) {
-				$path = $getStatementIdPath( $serialization['statements'], $id );
+				$path = "{$getStatementIdPath( $serialization['statements'], $id )}/id";
 				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 
@@ -443,14 +443,8 @@ class PatchedItemValidator {
 			if ( !$patchedStatements->getFirstStatementWithGuid( $id )->getPropertyId()->equals(
 				$originalPropertyId
 			) ) {
-				throw new UseCaseError(
-					UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE,
-					'Property of a statement cannot be modified',
-					[
-						UseCaseError::CONTEXT_STATEMENT_ID => $id,
-						UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => $originalPropertyId->getSerialization(),
-					]
-				);
+				$path = "{$getStatementIdPath( $serialization['statements'], $id )}/property/id";
+				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 		}
 	}

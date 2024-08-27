@@ -718,18 +718,20 @@ class PatchedItemValidatorTest extends TestCase {
 	}
 
 	public function providePatchInvalidStatements(): Generator {
-		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
+
 		yield 'statements not an associative array' => [
 			[ 1, 2, 3 ],
 			UseCaseError::newPatchResultInvalidValue( '/statements', [ 1, 2, 3 ] ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		$invalidStatementGroup = [ 'property' => [ 'id' => $propertyId ] ];
 		yield 'invalid statement group type' => [
 			[ $propertyId => $invalidStatementGroup ],
 			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId", $invalidStatementGroup ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		yield 'invalid statement type: statement not an array' => [
 			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'somevalue' ] ], 'invalid' ] ],
 			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/1", 'invalid' ),
@@ -741,17 +743,20 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0", [ 'not a valid statement' ] ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];
 		yield 'missing field in statement' => [
 			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ] ] ] ],
 			UseCaseError::newMissingFieldInPatchResult( "/statements/$propertyId/0", 'value' ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[3];
 		$invalidStatement = [ 'rank' => 'bad rank', 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'novalue' ] ];
 		yield 'invalid field in statement' => [
 			[ $propertyId => [ $invalidStatement ] ],
 			UseCaseError::newPatchResultInvalidValue( "/statements/$propertyId/0/rank", 'bad rank' ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
 		$statementWithId = [
 			'id' => 'P123$4YY2B0D8-BEC1-4D30-B88E-347E08AFD987',
 			'property' => [ 'id' => $propertyId ],
@@ -763,6 +768,7 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
 		];
 
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];
 		$duplicateStatement = [
 			'id' => 'P123$5FF2B0D8-BEC1-4D30-B88E-347E08AFD659',
 			'property' => [ 'id' => $propertyId ],
@@ -772,6 +778,17 @@ class PatchedItemValidatorTest extends TestCase {
 		[
 			[ $propertyId => [ $duplicateStatement, $duplicateStatement ] ],
 			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/id" ),
+		];
+
+		$statementWithExistingId = [
+			'id' => self::EXISTING_STATEMENT_ID,
+			'property' => [ 'id' => $propertyId ],
+			'value' => [ 'type' => 'somevalue' ],
+		];
+		yield 'Property IDs modified' =>
+		[
+			[ $propertyId => [ $statementWithExistingId ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/property/id" ),
 		];
 
 		$propertyIdKey = self::EXISTING_STRING_PROPERTY_IDS[2];

@@ -706,9 +706,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { statement_id: existingStatementId, statement_property_id: predicatePropertyId };
-			assertValidError( response, 422, 'patched-statement-property-not-modifiable', context );
-			assert.strictEqual( response.body.message, 'Property of a statement cannot be modified' );
+			const context = { path: `/statements/${newPropertyId}/0/property/id` };
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		const makeReplaceExistingSitelinkPatchOperation = ( newSitelink ) => ( {

@@ -5293,9 +5293,6 @@
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
-              "patched-statement-property-not-modifiable": {
-                "$ref": "#/components/examples/PatchedStatementPropertyNotModifiableExample"
-              },
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
@@ -5345,9 +5342,6 @@
             "examples": {
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
-              },
-              "patched-statement-property-not-modifiable": {
-                "$ref": "#/components/examples/PatchedStatementPropertyNotModifiableExample"
               },
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
@@ -7225,16 +7219,6 @@
           "context": {
             "path": "{json_pointer_to_parent}",
             "field": "{missing_field}"
-          }
-        }
-      },
-      "PatchedStatementPropertyNotModifiableExample": {
-        "value": {
-          "code": "patched-statement-property-not-modifiable",
-          "message": "Property of a statement cannot be modified",
-          "context": {
-            "statement_id": "{statement_id}",
-            "statement_property_id": "{property_of_statement_as_persisted}"
           }
         }
       },
