@@ -655,17 +655,6 @@ class PatchedItemValidatorTest extends TestCase {
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
-		$duplicate = 'tomato';
-		yield 'duplicate alias' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
-			[ 'en' => [ $duplicate, $duplicate ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_DUPLICATE,
-				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
-			),
-		];
-
 		yield 'invalid alias - only white space' => [
 			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ " \t " ] ],

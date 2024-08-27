@@ -305,11 +305,7 @@ return [
 		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
 			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
 				new AliasesDeserializer(),
-				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				new PrefetchingTermLookupAliasesRetriever(
-					WikibaseRepo::getPrefetchingTermLookup( $services ),
-					WikibaseRepo::getTermsLanguages( $services )
-				)
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 			);
 		},
 
@@ -336,11 +332,7 @@ return [
 		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
 				new AliasesDeserializer(),
-				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				new PrefetchingTermLookupAliasesRetriever(
-					WikibaseRepo::getPrefetchingTermLookup( $services ),
-					WikibaseRepo::getTermsLanguages( $services )
-				)
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 			);
 		},
 

@@ -48,6 +48,11 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 			[ 'en' => $enAliases, 'de' => $deAliases ],
 			new AliasGroupList( [ new AliasGroup( 'en', $enAliases ), new AliasGroup( 'de', $deAliases ) ] ),
 		];
+
+		yield 'duplicates are removed' => [
+			[ 'en' => [ 'first alias', 'second alias', 'third alias', 'second alias' ] ],
+			new AliasGroupList( [ new AliasGroup( 'en', [ 'first alias', 'second alias', 'third alias' ] ) ] ),
+		];
 	}
 
 	/**
@@ -119,16 +124,6 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 		yield 'invalid alias - too long' => [
 			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
 			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
-		];
-
-		$duplicate = 'tomato';
-		yield 'invalid alias - duplicate' => [
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_DUPLICATE,
-				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
-			),
-			[ 'en' => [ $duplicate, $duplicate ] ],
 		];
 	}
 

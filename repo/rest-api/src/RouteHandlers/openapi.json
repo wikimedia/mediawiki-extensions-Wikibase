@@ -4158,9 +4158,6 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "duplicate-alias": {
-                "$ref": "#/components/examples/DuplicateAliasWithLanguageContextExample"
-              },
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
@@ -4974,9 +4971,6 @@
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
               },
-              "duplicate-alias": {
-                "$ref": "#/components/examples/DuplicateAliasExample"
-              },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
               },
@@ -5008,9 +5002,6 @@
             "examples": {
               "invalid-path-parameter": {
                 "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "duplicate-alias": {
-                "$ref": "#/components/examples/DuplicateAliasExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -5314,9 +5305,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-duplicate-alias": {
-                "$ref": "#/components/examples/PatchedDuplicateAliasExample"
-              },
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
               },
@@ -5369,9 +5357,6 @@
               },
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
-              },
-              "patched-duplicate-alias": {
-                "$ref": "#/components/examples/PatchedDuplicateAliasExample"
               },
               "patch-result-invalid-key": {
                 "$ref": "#/components/examples/PatchResultInvalidKeyExample"
@@ -5536,9 +5521,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-duplicate-alias": {
-                "$ref": "#/components/examples/PatchedDuplicateAliasExample"
-              },
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
@@ -7285,35 +7267,6 @@
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",
             "statement_property_id": "{property_id_value}"
-          }
-        }
-      },
-      "PatchedDuplicateAliasExample": {
-        "value": {
-          "code": "patched-duplicate-alias",
-          "message": "Aliases in language '{language_code}' contain duplicate alias: '{alias}'",
-          "context": {
-            "alias": "{alias}",
-            "language": "{language_code}"
-          }
-        }
-      },
-      "DuplicateAliasExample": {
-        "value": {
-          "code": "duplicate-alias",
-          "message": "Alias list contains a duplicate alias: '{alias}'",
-          "context": {
-            "alias": "{alias}"
-          }
-        }
-      },
-      "DuplicateAliasWithLanguageContextExample": {
-        "value": {
-          "code": "duplicate-alias",
-          "message": "Alias list contains a duplicate alias: '{alias}'",
-          "context": {
-            "alias": "{alias}",
-            "language": "{language_code}"
           }
         }
       },

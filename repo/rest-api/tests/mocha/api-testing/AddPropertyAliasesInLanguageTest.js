@@ -72,7 +72,7 @@ describe( newRequest().getRouteDescription(), () => {
 			const language = 'fr';
 			const newAlias = 'fr-alias';
 
-			const response = await newRequest( testPropertyId, language, [ newAlias ] )
+			const response = await newRequest( testPropertyId, language, [ newAlias, existingFrenchAlias ] )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
@@ -239,25 +239,6 @@ describe( newRequest().getRouteDescription(), () => {
 			const path = '/aliases/0';
 			assertValidError( response, 400, 'invalid-value', { path } );
 			assert.include( response.body.message, path );
-		} );
-
-		it( 'duplicate input aliases', async () => {
-			const duplicateAlias = 'foo';
-			const response = await newRequest( testPropertyId, 'en', [ duplicateAlias, 'foo', duplicateAlias ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'duplicate-alias', { alias: duplicateAlias } );
-			assert.include( response.body.message, duplicateAlias );
-		} );
-
-		it( 'input alias already exist', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ existingEnglishAlias ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'duplicate-alias', { alias: existingEnglishAlias } );
-			assert.include( response.body.message, existingEnglishAlias );
 		} );
 	} );
 

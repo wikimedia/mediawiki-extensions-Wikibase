@@ -12,7 +12,6 @@ class ErrorResponseToHttpStatus {
 
 	private static array $lookupTable = [
 		// 400 errors:
-		UseCaseError::ALIAS_DUPLICATE => 400,
 		UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE => 400,
 		UseCaseError::INVALID_KEY => 400,
 		UseCaseError::INVALID_PATH_PARAMETER => 400,
@@ -49,7 +48,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCH_RESULT_VALUE_TOO_LONG => 422,
 		UseCaseError::PATCH_RESULT_MISSING_FIELD => 422,
 		UseCaseError::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE => 422,
-		UseCaseError::PATCHED_ALIAS_DUPLICATE => 422,
 		UseCaseError::PATCHED_INVALID_SITELINK_TYPE => 422,
 		UseCaseError::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => 422,
 		UseCaseError::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => 422,

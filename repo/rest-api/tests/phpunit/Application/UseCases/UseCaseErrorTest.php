@@ -36,21 +36,15 @@ class UseCaseErrorTest extends TestCase {
 			[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ],
 		];
 
-		$duplicateAlias = 'alias';
 		yield 'valid error with additional path context' => [
-			UseCaseError::ALIAS_DUPLICATE,
-			"Alias list contains a duplicate alias: '$duplicateAlias'",
-			[
-				UseCaseError::CONTEXT_LANGUAGE => 'en',
-				UseCaseError::CONTEXT_ALIAS => $duplicateAlias,
-			],
+			UseCaseError::SITELINK_TITLE_NOT_FOUND,
+			'Page with title Test_article does not exist on the given site',
+			[ UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
 		];
 
-		$duplicateAlias = 'alias';
 		yield 'valid error without additional path context' => [
-			UseCaseError::ALIAS_DUPLICATE,
-			"Alias list contains a duplicate alias: '$duplicateAlias'",
-			[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ],
+			UseCaseError::SITELINK_TITLE_NOT_FOUND,
+			'Page with title Test_article does not exist on the given site',
 		];
 	}
 
@@ -76,11 +70,10 @@ class UseCaseErrorTest extends TestCase {
 			'error context key is missing',
 		];
 
-		$duplicateAlias = 'alias';
 		yield 'wrong path context field name' => [
-			UseCaseError::ALIAS_DUPLICATE,
-			"Alias list contains a duplicate alias: '$duplicateAlias'",
-			[ UseCaseError::CONTEXT_PATH => $duplicateAlias ],
+			UseCaseError::SITELINK_TITLE_NOT_FOUND,
+			'Page with title Test_article does not exist on the given site',
+			[ UseCaseError::CONTEXT_TITLE => 'Test_article' ],
 		];
 	}
 

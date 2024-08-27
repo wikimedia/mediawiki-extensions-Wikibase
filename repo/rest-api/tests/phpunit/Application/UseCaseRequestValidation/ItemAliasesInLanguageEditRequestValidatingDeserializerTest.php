@@ -10,8 +10,6 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLang
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer
@@ -27,17 +25,13 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 	 */
 	public function testGivenValidRequest_returnsAliases( array $aliases, array $expectedDeserializedAliases ): void {
 		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'Q123' );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
-		$requestValidatingDeserializer = new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-			new AliasesDeserializer(),
-			$this->createStub( AliasesInLanguageValidator::class ),
-			$this->newStubItemAliasesInLanguageRetriever()
+		$this->assertSame(
+			$expectedDeserializedAliases,
+			$this->newRequestValidatingDeserializer()->validateAndDeserialize( $request )
 		);
-
-		$this->assertSame( $expectedDeserializedAliases, $requestValidatingDeserializer->validateAndDeserialize( $request ) );
 	}
 
 	public function provideValidAliases(): Generator {
@@ -50,6 +44,11 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 			[ ' space at the start', "\ttab at the start", 'space at end ', "tab at end\t", "\t  multiple spaces and tabs \t" ],
 			[ 'space at the start', 'tab at the start', 'space at end', 'tab at end', 'multiple spaces and tabs' ],
 		];
+
+		yield 'duplicates are removed' => [
+			[ 'first alias', 'second alias', 'third alias', 'second alias' ],
+			[ 'first alias', 'second alias', 'third alias' ],
+		];
 	}
 
 	/**
@@ -58,24 +57,14 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 	public function testWithInvalidAliases(
 		UseCaseError $expectedException,
 		array $aliases,
-		ValidationError $validationError = null,
-		array $existingAliases = []
+		ValidationError $validationError = null
 	): void {
 		$request = $this->createStub( ItemAliasesInLanguageEditRequest::class );
-		$request->method( 'getItemId' )->willReturn( 'Q123' );
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
-		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
-		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
-
 		try {
-			( new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesDeserializer(),
-				$aliasesValidator,
-				$this->newStubItemAliasesInLanguageRetriever( $existingAliases )
-			) )
-				->validateAndDeserialize( $request );
+			$this->newRequestValidatingDeserializer( $validationError )->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertEquals( $expectedException, $error );
@@ -136,35 +125,15 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 				[ AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias ]
 			),
 		];
-
-		$duplicateAlias = 'foo';
-		yield 'alias duplicate in the request' => [
-			new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '$duplicateAlias'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
-			),
-			[ $duplicateAlias, 'bar', $duplicateAlias ],
-		];
-
-		$duplicateAlias = 'foo';
-		yield 'alias already exists' => [
-			new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '$duplicateAlias'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
-			),
-			[ $duplicateAlias, 'bar' ],
-			null,
-			[ $duplicateAlias, 'baz' ],
-		];
 	}
 
-	private function newStubItemAliasesInLanguageRetriever( array $enAliasesToReturn = [] ): ItemAliasesInLanguageRetriever {
-		$retriever = $this->createStub( ItemAliasesInLanguageRetriever::class );
-		$retriever->method( 'getAliasesInLanguage' )->willReturn( new AliasesInLanguage( 'en', $enAliasesToReturn ) );
+	private function newRequestValidatingDeserializer(
+		ValidationError $validationError = null
+	): ItemAliasesInLanguageEditRequestValidatingDeserializer {
+		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
+		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
-		return $retriever;
+		return new ItemAliasesInLanguageEditRequestValidatingDeserializer( new AliasesDeserializer(), $aliasesValidator );
 	}
 
 }

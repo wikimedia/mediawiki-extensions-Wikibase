@@ -140,15 +140,6 @@ class ItemSerializationRequestValidatingDeserializer {
 				throw UseCaseError::newInvalidValue( '/item/aliases' );
 			case AliasesValidator::CODE_EMPTY_ALIAS:
 				throw UseCaseError::newInvalidValue( '/item/aliases' . $context[AliasesValidator::CONTEXT_PATH] );
-			case AliasesValidator::CODE_DUPLICATE_ALIAS:
-				throw new UseCaseError(
-					UseCaseError::ALIAS_DUPLICATE,
-					"Alias list contains a duplicate alias: '{$context[AliasesValidator::CONTEXT_ALIAS]}'",
-					[
-						UseCaseError::CONTEXT_LANGUAGE => $context[AliasesValidator::CONTEXT_LANGUAGE],
-						UseCaseError::CONTEXT_ALIAS => $context[AliasesValidator::CONTEXT_ALIAS],
-					]
-				);
 			case AliasesInLanguageValidator::CODE_TOO_LONG:
 				$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 				$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];

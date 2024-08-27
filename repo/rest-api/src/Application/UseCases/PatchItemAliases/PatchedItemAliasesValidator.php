@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\DuplicateAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
@@ -55,12 +54,6 @@ class PatchedItemAliasesValidator {
 			return $this->aliasesDeserializer->deserialize( $serialization );
 		} catch ( EmptyAliasException $e ) {
 			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getLanguage()}/{$e->getIndex()}", '' );
-		} catch ( DuplicateAliasException $e ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_DUPLICATE,
-				"Aliases in language '{$e->getField()}' contain duplicate alias: '{$e->getValue()}'",
-				[ UseCaseError::CONTEXT_LANGUAGE => $e->getField(), UseCaseError::CONTEXT_VALUE => $e->getValue() ]
-			);
 		} catch ( InvalidFieldException $e ) {
 			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getPath()}", $e->getValue() );
 		}

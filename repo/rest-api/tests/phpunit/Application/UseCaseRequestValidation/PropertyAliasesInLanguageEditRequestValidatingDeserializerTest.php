@@ -10,8 +10,6 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesIn
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequestValidatingDeserializer
@@ -31,13 +29,10 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 		$request->method( 'getLanguageCode' )->willReturn( 'en' );
 		$request->method( 'getAliasesInLanguage' )->willReturn( $aliases );
 
-		$requestValidatingDeserializer = new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-			new AliasesDeserializer(),
-			$this->createStub( AliasesInLanguageValidator::class ),
-			$this->newStubPropertyAliasesInLanguageRetriever()
+		$this->assertSame(
+			$expectedDeserializedAliases,
+			$this->newRequestValidatingDeserializer()->validateAndDeserialize( $request )
 		);
-
-		$this->assertSame( $expectedDeserializedAliases, $requestValidatingDeserializer->validateAndDeserialize( $request ) );
 	}
 
 	public function provideValidAliases(): Generator {
@@ -50,6 +45,11 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 			[ ' space at the start', "\ttab at the start", 'space at end ', "tab at end\t", "\t  multiple spaces and tabs \t" ],
 			[ 'space at the start', 'tab at the start', 'space at end', 'tab at end', 'multiple spaces and tabs' ],
 		];
+
+		yield 'duplicates are removed' => [
+			[ 'first alias', 'second alias', 'third alias', 'second alias' ],
+			[ 'first alias', 'second alias', 'third alias' ],
+		];
 	}
 
 	/**
@@ -58,8 +58,7 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 	public function testWithInvalidAliases(
 		UseCaseError $expectedException,
 		array $aliases,
-		ValidationError $validationError = null,
-		array $existingAliases = []
+		ValidationError $validationError = null
 	): void {
 		$request = $this->createStub( PropertyAliasesInLanguageEditRequest::class );
 		$request->method( 'getPropertyId' )->willReturn( 'P123' );
@@ -70,12 +69,7 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
 		try {
-			( new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesDeserializer(),
-				$aliasesValidator,
-				$this->newStubPropertyAliasesInLanguageRetriever( $existingAliases )
-			) )
-				->validateAndDeserialize( $request );
+			$this->newRequestValidatingDeserializer( $validationError )->validateAndDeserialize( $request );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
 			$this->assertEquals( $expectedException, $error );
@@ -136,35 +130,15 @@ class PropertyAliasesInLanguageEditRequestValidatingDeserializerTest extends Tes
 				[ AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias ]
 			),
 		];
-
-		$duplicateAlias = 'foo';
-		yield 'alias duplicate in the request' => [
-			new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '$duplicateAlias'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
-			),
-			[ $duplicateAlias, 'bar', $duplicateAlias ],
-		];
-
-		$duplicateAlias = 'foo';
-		yield 'alias already exists' => [
-			new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: '$duplicateAlias'",
-				[ UseCaseError::CONTEXT_ALIAS => $duplicateAlias ]
-			),
-			[ $duplicateAlias, 'bar' ],
-			null,
-			[ $duplicateAlias, 'baz' ],
-		];
 	}
 
-	private function newStubPropertyAliasesInLanguageRetriever( array $enAliasesToReturn = [] ): PropertyAliasesInLanguageRetriever {
-		$retriever = $this->createStub( PropertyAliasesInLanguageRetriever::class );
-		$retriever->method( 'getAliasesInLanguage' )->willReturn( new AliasesInLanguage( 'en', $enAliasesToReturn ) );
+	private function newRequestValidatingDeserializer(
+		ValidationError $validationError = null
+	): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
+		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
+		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
-		return $retriever;
+		return new PropertyAliasesInLanguageEditRequestValidatingDeserializer( new AliasesDeserializer(), $aliasesValidator );
 	}
 
 }

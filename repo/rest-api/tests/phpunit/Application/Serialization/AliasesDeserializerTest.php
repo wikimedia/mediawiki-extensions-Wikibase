@@ -55,6 +55,15 @@ class AliasesDeserializerTest extends TestCase {
 				new AliasGroup( 'de', [ 'Leerzeichen' ] ),
 			] ),
 		];
+
+		yield 'duplicate aliases are ignored' => [
+			[
+				'en' => [ 'alias one', 'alias two', 'alias three', 'alias two' ],
+			],
+			new AliasGroupList( [
+				new AliasGroup( 'en', [ 'alias one', 'alias two', 'alias three' ] ),
+			] ),
+		];
 	}
 
 	/**

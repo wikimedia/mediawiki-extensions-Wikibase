@@ -374,18 +374,6 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			[ 'aliases' => [ 'en' => [ "invalid \t" ] ] ],
 		];
 
-		yield 'duplicated alias' => [
-			new ValidationError(
-				AliasesValidator::CODE_DUPLICATE_ALIAS,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en', AliasesValidator::CONTEXT_ALIAS => 'duplicated-alias' ]
-			),
-			new UseCaseError(
-				UseCaseError::ALIAS_DUPLICATE,
-				"Alias list contains a duplicate alias: 'duplicated-alias'",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_ALIAS => 'duplicated-alias' ]
-			),
-		];
-
 		yield 'invalid aliases language code' => [
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,

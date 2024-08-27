@@ -120,16 +120,6 @@ class PatchedPropertyAliasesValidatorTest extends TestCase {
 			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
 			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
 		];
-
-		$duplicate = 'tomato';
-		yield 'invalid alias - duplicate' => [
-			new UseCaseError(
-				UseCaseError::PATCHED_ALIAS_DUPLICATE,
-				"Aliases in language 'en' contain duplicate alias: '{$duplicate}'",
-				[ UseCaseError::CONTEXT_LANGUAGE => 'en', UseCaseError::CONTEXT_VALUE => $duplicate ]
-			),
-			[ 'en' => [ $duplicate, $duplicate ] ],
-		];
 	}
 
 	private function newValidator(): PatchedPropertyAliasesValidator {

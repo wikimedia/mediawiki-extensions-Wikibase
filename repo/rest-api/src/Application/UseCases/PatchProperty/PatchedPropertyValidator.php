@@ -246,14 +246,6 @@ class PatchedPropertyValidator {
 					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language", $aliasesSerialization[$language] );
 				case AliasesValidator::CODE_EMPTY_ALIAS:
 					throw UseCaseError::newPatchResultInvalidValue( "/aliases{$context[AliasesValidator::CONTEXT_PATH]}", '' );
-				case AliasesValidator::CODE_DUPLICATE_ALIAS:
-					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
-					$value = $context[AliasesValidator::CONTEXT_ALIAS];
-					throw new UseCaseError(
-						UseCaseError::PATCHED_ALIAS_DUPLICATE,
-						"Aliases in language '$language' contain duplicate alias: '$value'",
-						[ UseCaseError::CONTEXT_LANGUAGE => $language, UseCaseError::CONTEXT_VALUE => $value ]
-					);
 				case AliasesValidator::CODE_INVALID_ALIAS:
 					$language = $context[AliasesValidator::CONTEXT_LANGUAGE];
 					$value = $context[AliasesValidator::CONTEXT_ALIAS];

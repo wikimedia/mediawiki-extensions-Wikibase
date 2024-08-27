@@ -42,12 +42,14 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const alias = 'another English alias';
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: '/en/-', value: alias } ]
+				[
+					{ op: 'add', path: '/en/-', value: alias },
+					{ op: 'add', path: '/en/-', value: testAlias }
+				]
 			).makeRequest();
 
 			expect( response ).to.have.status( 200 );
-			assert.include( response.body.en, testAlias );
-			assert.include( response.body.en, alias );
+			assert.deepStrictEqual( response.body, { en: [ testAlias, alias ] } );
 			assert.strictEqual( response.header[ 'content-type' ], 'application/json' );
 			assert.isAbove( new Date( response.header[ 'last-modified' ] ), originalLastModified );
 			assert.notStrictEqual( response.header.etag, makeEtag( originalRevisionId ) );
@@ -259,18 +261,6 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const context = { path: `/${language}/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
-		} );
-
-		it( 'duplicate alias', async () => {
-			const language = 'en';
-			const duplicate = 'tomato';
-			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ duplicate, duplicate ] }
-			] ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 422, 'patched-duplicate-alias', { language, value: duplicate } );
-			assert.include( response.body.message, language );
-			assert.include( response.body.message, duplicate );
 		} );
 
 		it( 'alias contains invalid characters', async () => {

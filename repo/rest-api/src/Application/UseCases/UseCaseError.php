@@ -10,7 +10,6 @@ use LogicException;
 class UseCaseError extends UseCaseException {
 
 	public const ALIASES_NOT_DEFINED = 'aliases-not-defined';
-	public const ALIAS_DUPLICATE = 'duplicate-alias';
 	public const CANNOT_MODIFY_READ_ONLY_VALUE = 'cannot-modify-read-only-value';
 	public const DATA_POLICY_VIOLATION = 'data-policy-violation';
 	public const DESCRIPTION_NOT_DEFINED = 'description-not-defined';
@@ -30,7 +29,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
-	public const PATCHED_ALIAS_DUPLICATE = 'patched-duplicate-alias';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
 	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
 	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
@@ -83,7 +81,6 @@ class UseCaseError extends UseCaseException {
 
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::ALIASES_NOT_DEFINED => [],
-		self::ALIAS_DUPLICATE => [ self::CONTEXT_ALIAS ],
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
 		self::DESCRIPTION_NOT_DEFINED => [],
@@ -102,7 +99,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
-		self::PATCHED_ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE, self::CONTEXT_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
 		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
@@ -136,7 +132,6 @@ class UseCaseError extends UseCaseException {
 	 * context.
 	 */
 	private const ADDITIONAL_PATH_CONTEXT = [
-		self::ALIAS_DUPLICATE => [ self::CONTEXT_LANGUAGE ],
 		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 	];
 
