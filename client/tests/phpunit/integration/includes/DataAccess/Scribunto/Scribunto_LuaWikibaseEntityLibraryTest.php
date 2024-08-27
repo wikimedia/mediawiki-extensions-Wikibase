@@ -234,11 +234,20 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertArrayHasKey( 'Q32488#D', $usages );
 	}
 
-	public function testAddSitelinksUsage() {
+	public function addTitleOrSitelinksUsageProvider() {
+		yield "request for sitelink from current site" => [ null, 'Q32488#T' ];
+		yield "request for sitelink on another site" => [ "ruwiki", 'Q32488#S' ];
+	}
+
+	/**
+	 * @dataProvider addTitleOrSitelinksUsageProvider
+	 */
+	public function testAddTitleOrSitelinksUsage( ?string $requestedSiteId, string $aspectTracked ) {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->addSiteLinksUsage( 'Q32488' );
+		$luaWikibaseLibrary->addTitleOrSiteLinksUsage( 'Q32488', $requestedSiteId );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertArrayHasKey( 'Q32488#S', $usages );
+
+		$this->assertArrayHasKey( $aspectTracked, $usages );
 	}
 
 	public function testAddOtherUsage() {

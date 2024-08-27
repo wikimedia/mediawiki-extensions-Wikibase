@@ -23,19 +23,22 @@ class WikibaseLuaEntityBindings {
 	private EntityIdParser $entityIdParser;
 	private UsageAccumulator $usageAccumulator;
 	private ContentLanguages $termsLanguages;
+	private string $globalSiteId;
 
 	public function __construct(
 		StatementTransclusionInteractor $plainTextTransclusionInteractor,
 		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
 		ContentLanguages $termsLanguages,
-		UsageAccumulator $usageAccumulator
+		UsageAccumulator $usageAccumulator,
+		string $globalSiteId
 	) {
 		$this->plainTextTransclusionInteractor = $plainTextTransclusionInteractor;
 		$this->richWikitextTransclusionInteractor = $richWikitextTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->termsLanguages = $termsLanguages;
+		$this->globalSiteId = $globalSiteId;
 	}
 
 	/**
@@ -141,9 +144,16 @@ class WikibaseLuaEntityBindings {
 	 * Add a sitelink usage (called once any sitelink is accessed).
 	 *
 	 * @param string $entityId The Entity from which the sitelinks were accessed.
+	 * @param string|null $requestedSiteId The site for which a specific sitelink is requested.
 	 */
-	public function addSiteLinksUsage( string $entityId ): void {
+	public function addTitleOrSiteLinksUsage( string $entityId, ?string $requestedSiteId ): void {
 		$entityId = $this->entityIdParser->parse( $entityId );
-		$this->usageAccumulator->addSiteLinksUsage( $entityId );
+		$requestedSiteId = $requestedSiteId ?: $this->globalSiteId;
+
+		if ( $requestedSiteId === $this->globalSiteId ) {
+			$this->usageAccumulator->addTitleUsage( $entityId );
+		} else {
+			$this->usageAccumulator->addSiteLinksUsage( $entityId );
+		}
 	}
 }

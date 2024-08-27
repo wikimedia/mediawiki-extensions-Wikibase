@@ -110,7 +110,7 @@ end
 local function maskEntityTables( entity )
 	maskEntityTable( entity, 'claims', addStatementUsage )
 	maskEntityTable( entity, 'labels', php.addLabelUsage )
-	maskEntityTable( entity, 'sitelinks', php.addSiteLinksUsage )
+	maskEntityTable( entity, 'sitelinks', php.addTitleOrSiteLinksUsage )
 	maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
 	maskEntityTable( entity, 'aliases', php.addOtherUsage )
 end
