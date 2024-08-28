@@ -4,7 +4,6 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyAliasException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -52,8 +51,6 @@ class PatchedItemAliasesValidator {
 	private function deserialize( array $serialization ): AliasGroupList {
 		try {
 			return $this->aliasesDeserializer->deserialize( $serialization );
-		} catch ( EmptyAliasException $e ) {
-			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getLanguage()}/{$e->getIndex()}", '' );
 		} catch ( InvalidFieldException $e ) {
 			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getPath()}", $e->getValue() );
 		}

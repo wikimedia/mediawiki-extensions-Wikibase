@@ -128,24 +128,24 @@ class AliasesValidatorTest extends TestCase {
 
 		yield 'invalid alias - integer' => [
 			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en', AliasesValidator::CONTEXT_ALIAS => 1794 ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[ AliasesValidator::CONTEXT_PATH => 'en/1', AliasesValidator::CONTEXT_VALUE => 1794 ]
 			),
 			[ 'en' => [ 'first alias', 1794 ] ],
 		];
 
 		yield 'invalid alias - empty alias at position 0' => [
 			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_PATH => '/en/0' ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[ AliasesValidator::CONTEXT_PATH => 'en/0', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			[ 'en' => [ '', 'second alias' ] ],
 		];
 
 		yield 'invalid alias - empty alias at position 1' => [
 			new ValidationError(
-				AliasesValidator::CODE_EMPTY_ALIAS,
-				[ AliasesValidator::CONTEXT_PATH => '/en/1' ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[ AliasesValidator::CONTEXT_PATH => 'en/1', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			[ 'en' => [ 'first alias', '' ] ],
 		];
