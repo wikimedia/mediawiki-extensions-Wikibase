@@ -216,10 +216,7 @@ class PatchedItemValidatorTest extends TestCase {
 				'type' => 'item',
 				'labels' => [ 'en' => 'potato' ],
 			],
-			new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID,
-				'Cannot change the ID of the existing item'
-			),
+			UseCaseError::newPatchResultModifiedReadOnlyValue( '/id' ),
 		];
 	}
 

@@ -5299,9 +5299,6 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-item-invalid-operation-change-item-id": {
-                "$ref": "#/components/examples/PatchedItemInvalidOperationChangeItemIdExample"
-              },
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
@@ -5331,6 +5328,9 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
+              },
+              "patch-result-modified-read-only-value": {
+                "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
               },
               "url-not-modifiable": {
                 "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
@@ -7230,12 +7230,6 @@
             "path": "{json_pointer_to_parent_in_patch_result}",
             "key": "{key}"
           }
-        }
-      },
-      "PatchedItemInvalidOperationChangeItemIdExample": {
-        "value": {
-          "code": "patched-item-invalid-operation-change-item-id",
-          "message": "Cannot change the ID of the existing item"
         }
       },
       "PatchResultInvalidValueExample": {

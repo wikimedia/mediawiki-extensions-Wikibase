@@ -98,10 +98,7 @@ class PatchedItemValidator {
 
 	private function assertNoIllegalModification( array $serialization, Item $originalItem ): void {
 		if ( $serialization[ 'id' ] !== $originalItem->getId()->getSerialization() ) {
-			throw new UseCaseError(
-				UseCaseError::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID,
-				'Cannot change the ID of the existing item'
-			);
+			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/id' );
 		}
 	}
 
