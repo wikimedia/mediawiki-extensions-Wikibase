@@ -6,13 +6,21 @@
 			"Okras",
 			"Putnik",
 			"Александр Сигачёв",
-			"Туллук"
+			"Туллук",
+			"Amire80"
 		]
 	},
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "Используется метка сущности",
 	"apihelp-query+wbentityusage-paramvalue-aspect-D": "Используется описание сущности",
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Используется заголовок локальной страницы, соответствующей сущности",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Используются утверждения из сущности",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Все аспекты сущности используются или могут быть использованы",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Используется что-то ещё, связанное с сущностью. В настоящее время это подразумевает использование синонима и явные проверки существования сущности.",
 	"apihelp-query+wbentityusage-param-prop": "Свойства для включения в результат",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Если это включено, будет добавлен URL-адрес сущности",
+	"apihelp-query+wbentityusage-param-entities": "Возвращать только те страницы, которые использовали эти сущности.",
 	"apihelp-query+wbentityusage-param-limit": "Сколько всего использований сущности возвращать.",
+	"apihelp-query+wbentityusage-example-simple": "Получить сущности, используемые на странице <kbd>Main Page</kbd>.",
 	"apihelp-query+wblistentityusage-summary": "Возвращает все страницы, которые используют идентификаторы указанной сущности.",
 	"apihelp-query+wblistentityusage-param-prop": "Свойства для включения в результат.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Если активировано, URL сущности будет добавлен к результату запроса.",
@@ -22,5 +30,7 @@
 	"apihelp-query+wblistentityusage-example-simple": "Получить страницы, использующие сущность <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Получить страницы, использующие сущность <kbd>Q2</kbd> с учетом включения URL",
 	"apihelp-query+wblistentityusage-example-aspect": "Получить страницы, использующие сущность <kbd>Q2</kbd> и ссылку на сайт или утверждение в качестве аспекта.",
+	"apihelp-query+pageterms-summary": "Получить термины {{WBREPONAME}} (обычно метки, описания и синонимы), связанные со страницей, через ссылку на сайт.",
+	"apihelp-query+pageterms-example-simple": "Получить все термины, связанные со страницей «London», на языке пользователя.",
 	"apihelp-query+pageterms-example-label-en": "Получить метки и синонимы, связанные с английской страницей «London»"
 }
