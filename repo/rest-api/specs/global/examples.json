@@ -223,12 +223,6 @@
 			"context": { "path": "{json_pointer_to_parent_in_patch_result}", "key": "{key}" }
 		}
 	},
-	"PatchedItemInvalidOperationChangeItemIdExample": {
-		"value": {
-			"code": "patched-item-invalid-operation-change-item-id",
-			"message": "Cannot change the ID of the existing item"
-		}
-	},
 	"PatchResultInvalidValueExample": {
 		"value": {
 			"code": "patch-result-invalid-value",

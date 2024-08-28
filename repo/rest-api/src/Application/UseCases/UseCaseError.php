@@ -30,7 +30,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
-	public const PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID = 'patched-item-invalid-operation-change-item-id';
 	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
@@ -100,7 +99,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
-		self::PATCHED_ITEM_INVALID_OPERATION_CHANGE_ITEM_ID => [],
 		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_URL_NOT_MODIFIABLE => [ self::CONTEXT_SITE_ID ],

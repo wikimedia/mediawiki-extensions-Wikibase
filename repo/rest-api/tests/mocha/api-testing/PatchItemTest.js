@@ -262,8 +262,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( testItemId, patch )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-item-invalid-operation-change-item-id' );
-			assert.strictEqual( response.body.message, 'Cannot change the ID of the existing item' );
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', { path: '/id' } );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
