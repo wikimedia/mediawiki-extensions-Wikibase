@@ -18,8 +18,10 @@ class DescriptionsDeserializer {
 	 */
 	public function deserialize( array $serialization ): TermList {
 		$terms = [];
-
 		foreach ( $serialization as $language => $text ) {
+			// casting to string required - while json keys are always strings, php converts numeric keys to integers
+			$language = (string)$language;
+
 			if ( !is_string( $text ) ) {
 				throw new InvalidDescriptionException( $language, $text );
 			}
@@ -28,6 +30,7 @@ class DescriptionsDeserializer {
 			if ( $trimmedText === '' ) {
 				throw new EmptyDescriptionException( $language, '' );
 			}
+
 			$terms[] = new Term( $language, $trimmedText );
 		}
 

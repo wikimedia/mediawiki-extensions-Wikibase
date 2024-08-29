@@ -55,7 +55,27 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 	}
 
 	public static function invalidDescriptionsProvider(): Generator {
-		yield 'invalid language code' => [
+		$invalidDescriptions = [ 'some description', 'some other description' ];
+		yield 'invalid descriptions - sequential array' => [
+			$invalidDescriptions,
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
+				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
+			),
+		];
+
+		yield 'invalid language code - integer' => [
+			[ 4290 => 'some description' ],
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => '4290',
+					LanguageCodeValidator::CONTEXT_FIELD => 'descriptions',
+				]
+			),
+		];
+
+		yield 'invalid language code - not in the allowed list' => [
 			[ 'invalid-language' => 'some description' ],
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
@@ -65,29 +85,31 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				]
 			),
 		];
-		$invalidDescriptions = [ 'not an associative array' ];
-		yield 'invalid descriptions' => [
-			$invalidDescriptions,
+
+		yield 'invalid description - integer' => [
+			[ 'de' => 2421 ],
 			new ValidationError(
-				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
-				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
+				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
+				[
+					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
+					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => 2421,
+				]
 			),
 		];
-		yield 'description empty' => [
+
+		yield 'invalid description - zero length string' => [
 			[ 'de' => '' ],
 			new ValidationError(
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
 				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
-		yield 'invalid description type' => [
-			[ 'de' => 7 ],
+
+		yield 'invalid description - whitespace only' => [
+			[ 'de' => " \t " ],
 			new ValidationError(
-				DescriptionsSyntaxValidator::CODE_INVALID_DESCRIPTION_TYPE,
-				[
-					DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
-					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => 7,
-				]
+				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
+				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
 	}

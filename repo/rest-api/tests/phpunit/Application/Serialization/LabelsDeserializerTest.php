@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyLabelException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidLabelException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 
 /**
@@ -59,30 +60,35 @@ class LabelsDeserializerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider emptyLabelsProvider
+	 * @dataProvider provideInvalidLabels
 	 */
-	public function testGivenEmptyLabel_throwsException( string $emptyLabel ): void {
+	public function testGivenInvalidSerialization_throwsException(
+		SerializationException $expectedException,
+		array $labels
+	): void {
 		try {
-			( new LabelsDeserializer() )->deserialize( [ 'en' => $emptyLabel ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( EmptyLabelException $e ) {
-			$this->assertSame( 'en', $e->getField() );
+			( new LabelsDeserializer() )->deserialize( $labels );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( SerializationException $e ) {
+			$this->assertEquals( $expectedException, $e );
 		}
 	}
 
-	public static function emptyLabelsProvider(): Generator {
-		yield 'empty label' => [ '' ];
-		yield 'whitespace only label' => [ '   ' ];
-	}
+	public static function provideInvalidLabels(): Generator {
+		yield 'invalid label - int' => [
+			new InvalidLabelException( 'en', 1954 ),
+			[ 'en' => 1954 ],
+		];
 
-	public function testGivenInvalidLabelType_throwsException(): void {
-		try {
-			( new LabelsDeserializer() )->deserialize( [ 'en' => 123 ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( InvalidFieldException $e ) {
-			$this->assertSame( 'en', $e->getField() );
-			$this->assertSame( 123, $e->getValue() );
-		}
+		yield 'invalid label - zero length string' => [
+			new EmptyLabelException( 'en', '' ),
+			[ 'en' => '' ],
+		];
+
+		yield 'invalid label - whitespace only' => [
+			new EmptyLabelException( '5971', '' ),
+			[ 5971 => " \t " ],
+		];
 	}
 
 }
