@@ -189,7 +189,7 @@
 	"apihelp-wbsearchentities-extended-description": "{{doc-apihelp-extended-description|wbsearchentities}}",
 	"apihelp-wbsearchentities-param-search": "{{doc-apihelp-param|wbsearchentities|search}}",
 	"apihelp-wbsearchentities-param-language": "{{doc-apihelp-param|wbsearchentities|language}}",
-	"apihelp-wbsearchentities-param-strictlanguage": "{{doc-apihelp-param|wbsearchentities|strictlanguage|info = This message is used [https://www.wikidata.org/wiki/Special:ApiSandbox#action=wbsearchentities here] at param 3. If enabled only matches in the current language are shown}}",
+	"apihelp-wbsearchentities-param-strictlanguage": "{{doc-apihelp-param|wbsearchentities|strictlanguage|info = This message is used [https://www.wikidata.org/wiki/Special:ApiSandbox#action=wbsearchentities here] at param 3. If enabled, only matches in the current language are shown.}}",
 	"apihelp-wbsearchentities-param-type": "{{doc-apihelp-param|wbsearchentities|type}}",
 	"apihelp-wbsearchentities-param-props": "{{doc-apihelp-param|wbsearchentities|props}}",
 	"apihelp-wbsearchentities-param-limit": "{{doc-apihelp-param|wbsearchentities|limit}}",

@@ -16,7 +16,8 @@
 			"נדב ס",
 			"ערן",
 			"פוילישער",
-			"שמזן"
+			"שמזן",
+			"מקף"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובְנים",
@@ -314,7 +315,7 @@
 	"wikibase-itemmerge-no-such-entity": "הפריט לא נמצא.",
 	"wikibase-itemmerge-cant-load-entity-content": "טעינת פריט נכשלה.",
 	"wikibase-itemmerge-cant-merge-self": "לא ניתן למזג פריט עם עצמו.",
-	"wikibase-itemmerge-cant-create-temp-user": "לא ניתן ליצור משתמש זמני",
+	"wikibase-itemmerge-cant-create-temp-user": "לא ניתן ליצור חשבון חולף",
 	"wikibase-tokencheck-missingtoken": "נדרש אסימון עריכה.",
 	"wikibase-tokencheck-mustposttoken": "העריכה אפשרית רק עם בקשות POST.",
 	"wikibase-tokencheck-badtoken": "אסימון עריכה גרוע (אולי ההתחברות שלך פגה).",
@@ -375,7 +376,7 @@
 	"wikibase-redirect-target-is-redirect": "הישות $1 היא הפניה",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook מנע יצירה של הפניה",
 	"wikibase-redirect-cant-redirect": "יצירת ההפניה נכשלה בשל בעיות טכניות",
-	"wikibase-redirect-cant-create-temp-user": "לא ניתן ליצור משתמש זמני",
+	"wikibase-redirect-cant-create-temp-user": "לא ניתן ליצור חשבון חולף",
 	"wikibase-redirect-permissiondenied": "ההרשאה נדחתה",
 	"special-mylanguagefallbackchain": "שרשרת שפות הגיבוי שלי",
 	"wikibase-mylanguagefallbackchain-text": "שרשרת שפות הגיבוי שמציגה לך את תוויות הישות מוצגת להלן.",

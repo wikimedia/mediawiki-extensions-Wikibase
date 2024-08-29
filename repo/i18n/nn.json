@@ -46,6 +46,7 @@
 	"wikibase-description-empty": "Inga skildring er definert",
 	"wikibase-description-edit-placeholder": "skriv inn skildring",
 	"wikibase-description-edit-placeholder-language-aware": "skriv inn ei skildring på $1",
+	"wikibase-description-edit-placeholder-not-applicable": "ikkje høvande",
 	"wikibase-aliases-edit-placeholder": "skriv inn nokre andre namn",
 	"wikibase-aliases-edit-placeholder-language-aware": "skriv inn nokre andre namn på $1",
 	"wikibase-aliases-edit-label": "Andre namn, fråskilde av vertikalstrekar:",

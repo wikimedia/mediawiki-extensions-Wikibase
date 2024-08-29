@@ -33,7 +33,8 @@
 			"朝彦",
 			"赤城。",
 			"아라",
-			"Chqaz"
+			"Chqaz",
+			"FlatLanguage"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -70,7 +71,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "言語",
 	"wikibase-entitytermsforlanguagelistview-more": "入力済みの全言語",
 	"wikibase-entitytermsforlanguagelistview-less": "表示を減らす",
-	"wikibase-entityterms-languagelistview-mul-popup-title": "新しい！複数言語のフォールバック",
+	"wikibase-entityterms-languagelistview-mul-popup-title": "新機能！全言語に規定のラベルと別名を追加する",
 	"wikibase-label-empty": "ラベルは設定されていません",
 	"wikibase-label-edit-placeholder": "ラベルを入力",
 	"wikibase-label-edit-placeholder-language-aware": "$1でのラベル名を設定してください",
