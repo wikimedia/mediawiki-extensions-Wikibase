@@ -55,14 +55,6 @@ class AliasesValidator {
 					)
 				);
 			}
-
-			// @phan-suppress-next-line PhanRedundantConditionInLoop
-			if ( !is_array( $aliasesInLanguage ) ) {
-				return new ValidationError(
-					self::CODE_INVALID_VALUE,
-					[ self::CONTEXT_PATH => "$basePath/$languageCode", self::CONTEXT_VALUE => $aliasesInLanguage ]
-				);
-			}
 		}
 
 		return $this->deserializeAliases( $aliases, $basePath ) ?? $this->validateAliases( $this->deserializedAliases, $basePath );
