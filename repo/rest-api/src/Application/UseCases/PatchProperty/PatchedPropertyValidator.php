@@ -119,8 +119,8 @@ class PatchedPropertyValidator {
 	private function assertValidLabelsAndDescriptions( Property $property, array $serialization ): void {
 		$labels = $serialization['labels'] ?? [];
 		$descriptions = $serialization['descriptions'] ?? [];
-		$validationError = $this->labelsSyntaxValidator->validate( $labels ) ??
-			$this->descriptionsSyntaxValidator->validate( $descriptions ) ??
+		$validationError = $this->labelsSyntaxValidator->validate( $labels, '/labels' ) ??
+			$this->descriptionsSyntaxValidator->validate( $descriptions, '/descriptions' ) ??
 			$this->labelsContentsValidator->validate(
 				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions(),
@@ -158,7 +158,7 @@ class PatchedPropertyValidator {
 
 		$context = $validationError->getContext();
 		throw UseCaseError::newPatchResultInvalidKey(
-			'/' . $context[LanguageCodeValidator::CONTEXT_FIELD],
+			$context[LanguageCodeValidator::CONTEXT_PATH],
 			$context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]
 		);
 	}

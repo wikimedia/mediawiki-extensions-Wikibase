@@ -275,7 +275,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
+					LanguageCodeValidator::CONTEXT_PATH => '/item/labels',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
@@ -381,7 +381,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_FIELD => 'descriptions',
+					LanguageCodeValidator::CONTEXT_PATH => '/item/descriptions',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),

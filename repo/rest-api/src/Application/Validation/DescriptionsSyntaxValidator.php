@@ -28,26 +28,20 @@ class DescriptionsSyntaxValidator {
 		$this->languageCodeValidator = $languageCodeValidator;
 	}
 
-	public function validate( array $serialization ): ?ValidationError {
+	public function validate( array $serialization, string $basePath = '' ): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
 			return new ValidationError( self::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE, [ self::CONTEXT_VALUE => $serialization ] );
 		}
 
-		return $this->validateLanguageCodes( array_keys( $serialization ) )
+		return $this->validateLanguageCodes( array_keys( $serialization ), $basePath )
 			?: $this->validateSerialization( $serialization );
 	}
 
-	private function validateLanguageCodes( array $languageCodes ): ?ValidationError {
+	private function validateLanguageCodes( array $languageCodes, string $basePath ): ?ValidationError {
 		foreach ( $languageCodes as $languageCode ) {
-			$languageValidationError = $this->languageCodeValidator->validate( (string)$languageCode );
+			$languageValidationError = $this->languageCodeValidator->validate( (string)$languageCode, $basePath );
 			if ( $languageValidationError ) {
-				return new ValidationError(
-					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-					array_merge(
-						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_FIELD => 'descriptions' ]
-					)
-				);
+				return $languageValidationError;
 			}
 		}
 

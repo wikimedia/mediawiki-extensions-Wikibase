@@ -49,7 +49,7 @@ class ItemSerializationRequestValidatingDeserializer {
 					throw UseCaseError::newInvalidValue( "/item/$field" );
 				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 					throw UseCaseError::newInvalidKey(
-						"/item/{$context[LanguageCodeValidator::CONTEXT_FIELD]}",
+						$context[LanguageCodeValidator::CONTEXT_PATH],
 						$context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE]
 					);
 			}

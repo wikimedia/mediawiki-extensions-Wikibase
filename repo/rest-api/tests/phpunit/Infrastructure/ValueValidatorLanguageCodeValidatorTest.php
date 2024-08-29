@@ -37,18 +37,21 @@ class ValueValidatorLanguageCodeValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideInvalidDescriptionLanguageCode
 	 */
-	public function testGivenInvalidLanguageCode_returnsValidationError( string $language ): void {
+	public function testGivenInvalidLanguageCode_returnsValidationError( string $language, string $basePath = '' ): void {
 		$expectedValidationError = new ValidationError(
 			LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-			[ LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => $language ]
+			[
+				LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => $language,
+				LanguageCodeValidator::CONTEXT_PATH => $basePath,
+			]
 		);
-		$validationError = $this->newValidator()->validate( $language );
+		$validationError = $this->newValidator()->validate( $language, $basePath );
 		$this->assertEquals( $expectedValidationError, $validationError );
 	}
 
 	public static function provideInvalidDescriptionLanguageCode(): Generator {
 		yield 'xyz not a language code' => [ 'xyz' ];
-		yield 'en-uk not a language code' => [ 'en-uk' ];
+		yield 'en-uk not a language code' => [ 'en-uk', '/some/base/path' ];
 	}
 
 	private function newValidator(): ValueValidatorLanguageCodeValidator {

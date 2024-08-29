@@ -416,7 +416,7 @@ class PatchedItemValidatorTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
+					LanguageCodeValidator::CONTEXT_PATH => '/labels',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
@@ -533,7 +533,7 @@ class PatchedItemValidatorTest extends TestCase {
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
-					LanguageCodeValidator::CONTEXT_FIELD => 'descriptions',
+					LanguageCodeValidator::CONTEXT_PATH => '/descriptions',
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
 				]
 			),
