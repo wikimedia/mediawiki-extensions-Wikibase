@@ -19,9 +19,16 @@ class PatchedStatementValidator {
 	}
 
 	/**
+	 * @param mixed $patchedStatement
+	 *
 	 * @throws UseCaseError
 	 */
-	public function validateAndDeserializeStatement( array $patchedStatement ): Statement {
+	public function validateAndDeserializeStatement( $patchedStatement ): Statement {
+		if (
+			!is_array( $patchedStatement ) || ( count( $patchedStatement ) && array_is_list( $patchedStatement ) ) ) {
+			throw UseCaseError::newPatchResultInvalidValue( '', $patchedStatement );
+		}
+
 		$validationError = $this->statementValidator->validate( $patchedStatement );
 		if ( $validationError ) {
 			$context = $validationError->getContext();

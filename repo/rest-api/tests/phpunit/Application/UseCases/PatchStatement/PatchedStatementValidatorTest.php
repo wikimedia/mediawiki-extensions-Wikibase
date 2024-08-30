@@ -39,6 +39,35 @@ class PatchedStatementValidatorTest extends TestCase {
 	}
 
 	/**
+	 * @dataProvider invalidStatementsTypeProvider
+	 *
+	 * @param UseCaseError $expectedError
+	 * @param mixed $serialization
+	 */
+	public function testWithInvalidStatementsType( UseCaseError $expectedError, $serialization ): void {
+		$statementValidator = $this->createMock( StatementValidator::class );
+
+		try {
+			( new PatchedStatementValidator( $statementValidator ) )->validateAndDeserializeStatement( $serialization );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public static function invalidStatementsTypeProvider(): Generator {
+		yield 'invalid serialization - string' => [
+			UseCaseError::newPatchResultInvalidValue( '', 'not an array' ),
+			'not an array',
+		];
+
+		yield 'invalid serialization - sequential array' => [
+			UseCaseError::newPatchResultInvalidValue( '', [ 'not', 'an', 'associative', 'array' ] ),
+			[ 'not', 'an', 'associative', 'array' ],
+		];
+	}
+
+	/**
 	 * @dataProvider invalidPatchedStatementProvider
 	 */
 	public function testValidateStatement_withInvalidStatement(
