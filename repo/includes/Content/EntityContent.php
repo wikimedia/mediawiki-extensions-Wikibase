@@ -179,7 +179,7 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		// @todo this text for filters stuff should be it's own class with test coverage!
+		// @todo this text for filters stuff should be its own class with test coverage!
 		$codec = WikibaseRepo::getEntityContentDataCodec();
 		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
 		$data = json_decode( $json, true );

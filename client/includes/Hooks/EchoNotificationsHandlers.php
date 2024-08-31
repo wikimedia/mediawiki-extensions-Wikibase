@@ -241,7 +241,7 @@ class EchoNotificationsHandlers {
 			$old = $siteLinkDiffOp->getOldValue();
 			$oldTitle = Title::newFromText( $old );
 
-			// propably means that there was a page move
+			// probably means that there was a page move
 			// without keeping the old title as redirect
 			if ( !$oldTitle->exists() ) {
 				return false;

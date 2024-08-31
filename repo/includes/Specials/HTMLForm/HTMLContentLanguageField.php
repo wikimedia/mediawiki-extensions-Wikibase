@@ -40,7 +40,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 			 || isset( $params['options-messages'] )
 		) {
 			throw new InvalidArgumentException(
-				"Cannot set options for content language field. It already has it's own options"
+				"Cannot set options for content language field. It already has its own options"
 			);
 		}
 
