@@ -56,8 +56,10 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider invalidDescriptionsProvider
+	 *
+	 * @param mixed $serialization
 	 */
-	public function testWithInvalidDescriptions( array $serialization, UseCaseError $expectedError ): void {
+	public function testWithInvalidDescriptions( $serialization, UseCaseError $expectedError ): void {
 		try {
 			$this->newValidator()->validateAndDeserialize(
 				new TermList(),
@@ -75,6 +77,17 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 		yield 'invalid language' => [
 			[ 'bad-language-code' => 'description text' ],
 			UseCaseError::newPatchResultInvalidKey( '', 'bad-language-code' ),
+		];
+
+		yield 'invalid descriptions - string' => [
+			'',
+			UseCaseError::newPatchResultInvalidValue( '', '' ),
+		];
+
+		$invalidDescriptions = [ 'not', 'an', 'associative', 'array' ];
+		yield 'invalid descriptions - sequential array' => [
+			$invalidDescriptions,
+			UseCaseError::newPatchResultInvalidValue( '', $invalidDescriptions ),
 		];
 
 		yield 'empty description' => [
