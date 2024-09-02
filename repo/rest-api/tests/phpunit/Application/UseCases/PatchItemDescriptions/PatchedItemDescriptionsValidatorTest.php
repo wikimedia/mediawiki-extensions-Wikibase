@@ -117,6 +117,21 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 	}
 
 	public static function invalidDescriptionsProvider(): Generator {
+		$invalidDescriptions = [ 'not', 'an', 'associative', 'array' ];
+		yield 'invalid descriptions - sequential array' => [
+			$invalidDescriptions,
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
+				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ],
+			),
+			UseCaseError::PATCH_RESULT_INVALID_VALUE,
+			'Invalid value in patch result',
+			[
+				UseCaseError::CONTEXT_PATH => '',
+				UseCaseError::CONTEXT_VALUE => $invalidDescriptions,
+			],
+		];
+
 		$language = 'en';
 		$description = "tab characters \t not allowed";
 		yield 'invalid description' => [
@@ -179,6 +194,15 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 				],
 			],
 		];
+	}
+
+	public function testGivenInvalidDescriptions_throwsInvalidDescriptionsError(): void {
+		try {
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), '' );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( UseCaseError::newPatchResultInvalidValue( '', '' ), $e );
+		}
 	}
 
 	public function testGivenEmptyDescription_throwsEmptyDescriptionError(): void {

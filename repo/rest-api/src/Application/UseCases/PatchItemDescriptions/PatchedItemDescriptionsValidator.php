@@ -26,13 +26,22 @@ class PatchedItemDescriptionsValidator {
 	}
 
 	/**
+	 * @param TermList $originalDescriptions
+	 * @param TermList $originalLabels
+	 * @param mixed $descriptionsSerialization
+	 *
 	 * @throws UseCaseError
+	 * @return TermList
 	 */
 	public function validateAndDeserialize(
 		TermList $originalDescriptions,
 		TermList $originalLabels,
-		array $descriptionsSerialization
+		$descriptionsSerialization
 	): TermList {
+		if ( !is_array( $descriptionsSerialization ) ) {
+			throw UseCaseError::newPatchResultInvalidValue( '', $descriptionsSerialization );
+		}
+
 		$error = $this->syntaxValidator->validate( $descriptionsSerialization ) ?:
 			$this->contentsValidator->validate(
 				$this->syntaxValidator->getPartiallyValidatedDescriptions(),
@@ -62,6 +71,8 @@ class PatchedItemDescriptionsValidator {
 		switch ( $validationError->getCode() ) {
 			case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
 				throw UseCaseError::newPatchResultInvalidKey( '', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
+			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
+				throw UseCaseError::newPatchResultInvalidValue( '', $context[DescriptionsSyntaxValidator::CONTEXT_VALUE ] );
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				$languageCode = $context[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw UseCaseError::newPatchResultInvalidValue( "/$languageCode", '' );

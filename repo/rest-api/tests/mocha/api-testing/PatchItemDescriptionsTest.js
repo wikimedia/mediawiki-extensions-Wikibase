@@ -242,6 +242,30 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			value: newDescription
 		} );
 
+		it( 'invalid descriptions type', async () => {
+			const invalidDescriptions = '';
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '', value: invalidDescriptions } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: '', value: invalidDescriptions };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
+		it( 'descriptions is not an object', async () => {
+			const invalidDescriptions = [ 'list, not an object' ];
+			const response = await newPatchItemDescriptionsRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '', value: invalidDescriptions } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: '', value: invalidDescriptions };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
 		it( 'invalid description', async () => {
 			const invalidDescription = 'tab characters \t not allowed';
 			const response = await newPatchItemDescriptionsRequestBuilder(
