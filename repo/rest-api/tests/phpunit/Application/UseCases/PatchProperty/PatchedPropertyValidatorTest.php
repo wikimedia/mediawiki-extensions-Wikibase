@@ -480,7 +480,10 @@ class PatchedPropertyValidatorTest extends TestCase {
 		$invalidDescriptions = [ 'not an associative array' ];
 		yield 'invalid descriptions' => [
 			$mockSyntaxValidator,
-			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
+				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
+			),
 			UseCaseError::newPatchResultInvalidValue( '/descriptions', $invalidDescriptions ),
 			[ 'descriptions' => $invalidDescriptions ],
 		];

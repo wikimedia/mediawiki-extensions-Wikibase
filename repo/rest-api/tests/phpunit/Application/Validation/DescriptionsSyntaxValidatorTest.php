@@ -65,9 +65,13 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				]
 			),
 		];
-		yield 'descriptions not associative' => [
-			[ 'some description', 'some other description' ],
-			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
+		$invalidDescriptions = [ 'not an associative array' ];
+		yield 'invalid descriptions' => [
+			$invalidDescriptions,
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
+				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
+			),
 		];
 		yield 'description empty' => [
 			[ 'de' => '' ],
