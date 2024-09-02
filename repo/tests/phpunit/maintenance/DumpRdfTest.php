@@ -222,8 +222,8 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 	): void {
 		$dumpScript = $this->getDumpRdf( $existingEntityTypes, $entityTypesWithoutRdfOutput );
 
-		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
-		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
+		$logFileName = $this->getNewTempFile();
+		$outFileName = $this->getNewTempFile();
 
 		$opts = $opts + [ 'format' => 'n-triples', 'log' => $logFileName, 'output' => $outFileName ];
 		$dumpScript->loadParamsAndArgs( null, $opts );

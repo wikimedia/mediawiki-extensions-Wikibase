@@ -99,12 +99,11 @@ class RebuildItemsPerSiteTest extends MaintenanceBaseTestCase {
 		$this->clearItemsPerSite();
 
 		// Create a file containing the first and the third item ids (the "Cat" and the "Кошка" ones).
-		$file = tempnam( sys_get_temp_dir(), "Wikibase-RebuildItemsPerSiteTest" );
+		$file = $this->getNewTempFile();
 		file_put_contents( $file, $this->itemIds[0] . PHP_EOL . $this->itemIds[2] );
 
 		$this->maintenance->loadWithArgv( [ '--file', $file ] );
 		$this->maintenance->execute();
-		unlink( $file );
 
 		$existingSiteLinks = $this->getDb()->newSelectQueryBuilder()
 			->select( 'ips_site_page' )
