@@ -280,6 +280,31 @@ describe( 'PATCH statement tests', () => {
 			} );
 
 			describe( '422 Unprocessable Entity', () => {
+				it( 'invalid statement - string', async () => {
+					const patch = [
+						{ op: 'replace', path: '', value: '' }
+					];
+
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest()
+						.makeRequest();
+
+					assertValidError( response, 422, 'patch-result-invalid-value', { path: '', value: '' } );
+				} );
+
+				it( 'invalid statement - array', async () => {
+					const value = [ 'not', 'an', 'associative', 'array' ];
+					const patch = [
+						{ op: 'replace', path: '', value }
+					];
+
+					const response = await newPatchRequestBuilder( testStatementId, patch )
+						.assertValidRequest()
+						.makeRequest();
+
+					assertValidError( response, 422, 'patch-result-invalid-value', { path: '', value } );
+				} );
+
 				it( 'malformed statement serialization', async () => {
 					const patch = [ {
 						op: 'remove',
