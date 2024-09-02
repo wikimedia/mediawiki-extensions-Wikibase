@@ -108,7 +108,7 @@
 	"apihelp-wbsearchentities-param-continue": "Lüke, mille juurest otsimist jätkata",
 	"apihelp-wbsearchentities-example-1": "Otsi teksti \"abc\" inglise keeles, kasuta tüübi ja piirangu vaikeväärtust",
 	"apihelp-wbsearchentities-example-2": "Otsi teksti \"abc\" inglise keeles, piira tulemused 50-le",
-	"apihelp-wbsearchentities-example-3": "Otsi teksti \"alphabet\" inglise keeles omaduse tüüpi olemitest",
+	"apihelp-wbsearchentities-example-3": "Otsi teksti \"alphabet\" inglise keeles ja ainult omaduste juurest",
 	"apihelp-wbsetaliases-param-id": "Olemi identifikaator, kaasa arvatud eesliide.\nKasuta parameetriga <var>title</var> kas parameetrit <var>id</var> või <var>site</var>.",
 	"apihelp-wbsetaliases-param-site": "Võrgukoht, kus lehekülg asub, identifikaator.\nKasuta parameetriga <var>title</var>, et koostada täielik võrgukohalink.",
 	"apihelp-wbsetaliases-param-title": "Seostatava lehekülje pealkiri.\nKasuta parameetriga <var>site</var>, et koostada täielik võrgukohalink.",

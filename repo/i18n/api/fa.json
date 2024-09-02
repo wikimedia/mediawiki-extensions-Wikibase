@@ -20,7 +20,7 @@
 	"apihelp-wbcreateclaim-param-value": "مقدار اسنک در هنگام ایجاد اظهارات با اسنکی که مقدار دارد",
 	"apihelp-wbcreateclaim-param-snaktype": "نوع بست (اسنک)",
 	"apihelp-wbcreateclaim-param-summary": "خلاصه ویرایش.\nیک نظر خود به خودی ایجاد می‌شود. محدودیت طول آن، ۲۶۰ نویسه است. دقت کنید که بیشتر از آن نشان داده نمی‌شود.",
-	"apihelp-wbcreateclaim-example-1": "یک اظهارات (اظهار نظر) برای آیتم <samp>Q42</samp با استفاده از خصوصیت <samp>P9001</samp> ایجاد می‌کند که مقدار اسنک آن، «{{int:wikibase-snakview-snaktypeselector-novalue}}» است.",
+	"apihelp-wbcreateclaim-example-1": "یک اظهار برای آیتم <samp>P9001</samp> با استفاده از خصوصیت <samp>P9001</samp> ایجاد می‌کند که مقدار اسنک آن، «{{int:wikibase-snakview-snaktypeselector-novalue}}» است.",
 	"apihelp-wbcreateclaim-example-2": "یک اظهارات (اظهار نظر) برای آیتم <samp>Q42</samp> با استفاده از خصوصیت <samp>P9002</samp> ایجاد می‌کند که مقدار رشته آن، «<var>itsastring</var>» است.",
 	"apihelp-wbcreateclaim-example-3": "یک اظهارات (اظهار نظر) برای آیتم <samp>Q42</samp> با استفاده از خصوصیت <samp>P9003</samp> ایجاد می‌کند که مقدار آیتم آن، <samp>Q1</samp> است.",
 	"apihelp-wbcreateclaim-example-4": "یک اظهارات (اظهار نظر) برای آیتم <samp>Q42</samp> با استفاده از خصوصیت <samp>P9004</samp> ایجاد می‌کند که مقدار اسنک آن، مختصات جغرافیایی است.",
