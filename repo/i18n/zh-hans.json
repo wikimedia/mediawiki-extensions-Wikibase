@@ -387,6 +387,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2，转换自$3 - $4",
 	"wikibase-api-claim-value-missing": "使用PropertyValueSnak snak创建声明时需要提供一个值。",
 	"wikibase-api-claim-value-unexpected": "在创建没有PropertyValueSnak作为主要Snak的声明时，您不能提供值。",
+	"wikibase-api-common-item": "检测到共用项目。",
 	"wikibase-api-badtoken": "检测到错误的令牌。",
 	"wikibase-api-cant-load-entity-content": "无法访问内容，修订版本可能已被删除。",
 	"wikibase-api-unresolved-redirect": "指定的实体ID是重定向，在此上下文中不受支持。",

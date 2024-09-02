@@ -162,7 +162,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "O elemento con este identificador non existe",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non é un identificador de elemento válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Descoñécese o código de lingua \"$1\". Utilice un código de lingua coñecido para o sistema, como \"gl\".",
-	"wikibase-wikibaserepopage-invalid-id": "O sistema descoñece o ID \"$1\". Utilice un identificador de entidade válido.",
+	"wikibase-wikibaserepopage-invalid-id": "O sistema descoñece o identificador \"$1\". Utiliza un identificador de entidade válido.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 é unha redirección.",
 	"wikibase-wikibaserepopage-storage-exception": "Houbo un erro ó intentar cargar $1: $2.",
 	"special-availablebadges": "Insignias dispoñibles",
