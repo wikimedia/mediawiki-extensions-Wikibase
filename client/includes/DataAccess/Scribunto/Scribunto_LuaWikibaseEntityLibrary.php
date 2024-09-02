@@ -88,7 +88,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOu
 			$richWikitextTransclusionInteractor,
 			WikibaseClient::getEntityIdParser(),
 			WikibaseClient::getTermsLanguages(),
-			$this->getUsageAccumulator()
+			$this->getUsageAccumulator(),
+			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
@@ -192,9 +193,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOu
 	 * Add a sitelinks usage (called once specific sitelinks are accessed).
 	 *
 	 * @param string $entityId The Entity from which the sitelinks were accessed.
+	 * @param string|null $requestedSiteId The site for which a specific sitelink is requested.
 	 */
-	public function addSiteLinksUsage( string $entityId ): void {
-		$this->getImplementation()->addSiteLinksUsage( $entityId );
+	public function addTitleOrSiteLinksUsage( string $entityId, ?string $requestedSiteId ): void {
+		$this->getImplementation()->addTitleOrSiteLinksUsage( $entityId, $requestedSiteId );
 	}
 
 	/**
@@ -221,7 +223,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOu
 			'addStatementUsage' => [ $this, 'addStatementUsage' ],
 			'addLabelUsage' => [ $this, 'addLabelUsage' ],
 			'addDescriptionUsage' => [ $this, 'addDescriptionUsage' ],
-			'addSiteLinksUsage' => [ $this, 'addSiteLinksUsage' ],
+			'addTitleOrSiteLinksUsage' => [ $this, 'addTitleOrSiteLinksUsage' ],
 			'addOtherUsage' => [ $this, 'addOtherUsage' ],
 			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];

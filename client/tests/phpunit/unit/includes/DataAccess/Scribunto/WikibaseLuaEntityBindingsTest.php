@@ -46,7 +46,8 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 			$richWikitextTransclusionInteractor,
 			new BasicEntityIdParser(),
 			WikibaseClient::getTermsLanguages(),
-			$usageAccumulator ?: new HashUsageAccumulator()
+			$usageAccumulator ?: new HashUsageAccumulator(),
+			WikibaseClient::getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
