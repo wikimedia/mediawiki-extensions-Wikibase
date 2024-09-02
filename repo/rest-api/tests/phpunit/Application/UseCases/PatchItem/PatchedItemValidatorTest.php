@@ -19,6 +19,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -1068,7 +1069,7 @@ class PatchedItemValidatorTest extends TestCase {
 			new AliasesValidator(
 				$this->aliasesInLanguageValidator,
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
-				new AliasesDeserializer(),
+				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			),
 			new SitelinksValidator(
 				new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),

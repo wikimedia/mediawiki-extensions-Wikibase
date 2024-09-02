@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -175,7 +176,7 @@ class AliasesValidatorTest extends TestCase {
 		return new AliasesValidator(
 			$this->aliasesInLanguageValidator,
 			new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'en', 'de', 'mul' ] ) ),
-			new AliasesDeserializer(),
+			new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 		);
 	}
 

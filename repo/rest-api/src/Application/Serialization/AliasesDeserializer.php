@@ -12,6 +12,12 @@ use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldExcep
  */
 class AliasesDeserializer {
 
+	private AliasesInLanguageDeserializer $aliasesInLanguageDeserializer;
+
+	public function __construct( AliasesInLanguageDeserializer $aliasesInLanguageDeserializer ) {
+		$this->aliasesInLanguageDeserializer = $aliasesInLanguageDeserializer;
+	}
+
 	/**
 	 * @throws InvalidFieldException
 	 * @throws InvalidAliasesInLanguageException
@@ -24,29 +30,11 @@ class AliasesDeserializer {
 		$aliasGroups = [];
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop
-			if ( !is_array( $aliasesInLanguage ) || !array_is_list( $aliasesInLanguage ) ) {
-				throw new InvalidAliasesInLanguageException( (string)$language, $aliasesInLanguage, (string)$language );
-			}
-			if ( count( $aliasesInLanguage ) === 0 ) {
+			if ( !is_array( $aliasesInLanguage ) ) {
 				throw new InvalidAliasesInLanguageException( (string)$language, $aliasesInLanguage, (string)$language );
 			}
 
-			$aliases = [];
-			foreach ( $aliasesInLanguage as $index => $alias ) {
-				if ( !is_string( $alias ) ) {
-					throw new InvalidFieldException( (string)$index, $alias, "$language/$index" );
-				}
-
-				$alias = trim( $alias );
-				if ( $alias === '' ) {
-					throw new InvalidFieldException( (string)$index, $alias, "$language/$index" );
-				}
-
-				if ( !in_array( $alias, $aliases ) ) {
-					$aliases[] = $alias;
-				}
-			}
-
+			$aliases = $this->aliasesInLanguageDeserializer->deserialize( $aliasesInLanguage, (string)$language );
 			$aliasGroups[] = new AliasGroup( $language, $aliases );
 		}
 

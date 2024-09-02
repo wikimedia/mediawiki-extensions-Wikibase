@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -133,7 +133,10 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		$aliasesValidator = $this->createStub( AliasesInLanguageValidator::class );
 		$aliasesValidator->method( 'validate' )->willReturn( $validationError );
 
-		return new ItemAliasesInLanguageEditRequestValidatingDeserializer( new AliasesDeserializer(), $aliasesValidator );
+		return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
+			new AliasesInLanguageDeserializer(),
+			$aliasesValidator
+		);
 	}
 
 }

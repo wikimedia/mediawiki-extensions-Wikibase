@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
@@ -304,7 +305,7 @@ return [
 	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
 			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesDeserializer(),
+				new AliasesInLanguageDeserializer(),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 			);
 		},
@@ -331,7 +332,7 @@ return [
 	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
 			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesDeserializer(),
+				new AliasesInLanguageDeserializer(),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 			);
 		},
@@ -373,7 +374,7 @@ return [
 					new AliasesValidator(
 						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 						WbRestApi::getAliasLanguageCodeValidator( $services ),
-						new AliasesDeserializer()
+						new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 					),
 					new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
 					new SitelinksValidator(
@@ -775,7 +776,7 @@ return [
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WbRestApi::getAliasLanguageCodeValidator( $services ),
-					new AliasesDeserializer()
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
 				new SitelinksValidator(
 					new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
@@ -805,7 +806,7 @@ return [
 			new AliasesSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemAliasesValidator(
-				new AliasesDeserializer(),
+				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				WbRestApi::getAliasLanguageCodeValidator( $services )
 			),
@@ -906,7 +907,7 @@ return [
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 					WbRestApi::getAliasLanguageCodeValidator( $services ),
-					new AliasesDeserializer()
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
 				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) )
 			)
@@ -927,7 +928,7 @@ return [
 			new AliasesSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedPropertyAliasesValidator(
-				new AliasesDeserializer(),
+				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
 				WbRestApi::getAliasLanguageCodeValidator( $services )
 			),

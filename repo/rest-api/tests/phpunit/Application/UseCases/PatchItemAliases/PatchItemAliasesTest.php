@@ -8,6 +8,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
@@ -61,7 +62,7 @@ class PatchItemAliasesTest extends TestCase {
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedItemAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
-			->willReturnCallback( [ new AliasesDeserializer(), 'deserialize' ] );
+			->willReturnCallback( [ new AliasesDeserializer( new AliasesInLanguageDeserializer() ), 'deserialize' ] );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}

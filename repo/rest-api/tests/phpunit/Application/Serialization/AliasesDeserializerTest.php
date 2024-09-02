@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
@@ -24,7 +25,7 @@ class AliasesDeserializerTest extends TestCase {
 	 * @dataProvider provideValidAliases
 	 */
 	public function testDeserialize( array $serialization, AliasGroupList $expectedAliases ): void {
-		$this->assertEquals( $expectedAliases, ( new AliasesDeserializer() )->deserialize( $serialization ) );
+		$this->assertEquals( $expectedAliases, $this->newAliasesDeserializer()->deserialize( $serialization ) );
 	}
 
 	public static function provideValidAliases(): Generator {
@@ -73,7 +74,7 @@ class AliasesDeserializerTest extends TestCase {
 		array $invalidAliases
 	): void {
 		try {
-			( new AliasesDeserializer() )->deserialize( $invalidAliases );
+			$this->newAliasesDeserializer()->deserialize( $invalidAliases );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
@@ -140,6 +141,10 @@ class AliasesDeserializerTest extends TestCase {
 			new InvalidFieldException( '3', '', 'en/3' ),
 			[ 'en' => [ 'list', 'of', 'aliases', "  \t  " ] ],
 		];
+	}
+
+	private function newAliasesDeserializer(): AliasesDeserializer {
+		return new AliasesDeserializer( new AliasesInLanguageDeserializer() );
 	}
 
 }

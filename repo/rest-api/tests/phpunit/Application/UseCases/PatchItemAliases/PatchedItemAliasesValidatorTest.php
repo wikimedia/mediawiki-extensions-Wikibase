@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases\PatchedItemAliasesValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
@@ -130,7 +131,7 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 	private function newValidator(): PatchedItemAliasesValidator {
 		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 		return new PatchedItemAliasesValidator(
-			new AliasesDeserializer(),
+			new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			new TermValidatorFactoryAliasesInLanguageValidator(
 				new TermValidatorFactory(
 					self::LIMIT,
