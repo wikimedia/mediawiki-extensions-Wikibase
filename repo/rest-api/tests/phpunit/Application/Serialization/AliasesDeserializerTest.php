@@ -8,7 +8,6 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 
@@ -88,27 +87,27 @@ class AliasesDeserializerTest extends TestCase {
 		];
 
 		yield "invalid 'aliases in language' - string" => [
-			new InvalidAliasesInLanguageException( 'de', 'this should be a list of strings', 'de' ),
+			new InvalidFieldException( 'de', 'this should be a list of strings', 'de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => 'this should be a list of strings' ],
 		];
 
 		yield "invalid 'aliases in language' - associative array" => [
-			new InvalidAliasesInLanguageException( 'de', [ 'not' => 'a', 'sequential' => 'array' ], 'de' ),
+			new InvalidFieldException( 'de', [ 'not' => 'a', 'sequential' => 'array' ], 'de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [ 'not' => 'a', 'sequential' => 'array' ] ],
 		];
 
 		yield "invalid 'aliases in language' - associative array and incorrect type for key" => [
-			new InvalidAliasesInLanguageException( '5772', [ 'not' => 'a', 'sequential' => 'array' ], '5772' ),
+			new InvalidFieldException( '5772', [ 'not' => 'a', 'sequential' => 'array' ], '5772' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 5772 => [ 'not' => 'a', 'sequential' => 'array' ] ],
 		];
 
 		yield "invalid 'aliases in language' - empty array" => [
-			new InvalidAliasesInLanguageException( 'de', [], 'de' ),
+			new InvalidFieldException( 'de', [], 'de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [] ],
 		];
 
 		yield "invalid 'aliases in language' - empty array and incorrect type for key" => [
-			new InvalidAliasesInLanguageException( '6071', [], '6071' ),
+			new InvalidFieldException( '6071', [], '6071' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 6071 => [] ],
 		];
 

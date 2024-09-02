@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\Serialization;
 
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidAliasesInLanguageException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 
 /**
@@ -12,11 +11,11 @@ class AliasesInLanguageDeserializer {
 
 	/**
 	 * @throws InvalidFieldException
-	 * @throws InvalidAliasesInLanguageException
 	 */
 	public function deserialize( array $serialization, string $basePath ): array {
 		if ( !count( $serialization ) || !array_is_list( $serialization ) ) {
-			throw new InvalidAliasesInLanguageException( $basePath, $serialization, $basePath );
+			$parts = explode( '/', $basePath );
+			throw new InvalidFieldException( $parts[array_key_last( $parts )], $serialization, $basePath );
 		}
 
 		$aliases = [];
