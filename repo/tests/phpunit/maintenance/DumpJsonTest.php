@@ -175,8 +175,8 @@ class DumpJsonTest extends MediaWikiIntegrationTestCase {
 	public function testScript( array $opts, $expectedLogFile, $expectedOutFile ) {
 		$dumpScript = $this->getDumpJson();
 
-		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );
-		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );
+		$logFileName = $this->getNewTempFile();
+		$outFileName = $this->getNewTempFile();
 
 		$opts = $opts + [ 'log' => $logFileName, 'output' => $outFileName ];
 		$dumpScript->loadParamsAndArgs( null, $opts );
