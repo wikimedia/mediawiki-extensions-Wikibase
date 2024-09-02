@@ -139,7 +139,7 @@ class PatchedPropertyValidator {
 		if ( $validationError ) {
 			$this->handleLanguageCodeValidationError( $validationError );
 			$this->handleLabelsValidationError( $validationError, $labels );
-			$this->handleDescriptionsValidationError( $validationError, $descriptions );
+			$this->handleDescriptionsValidationError( $validationError );
 			throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
 	}
@@ -201,11 +201,14 @@ class PatchedPropertyValidator {
 		}
 	}
 
-	private function handleDescriptionsValidationError( ValidationError $validationError, array $descriptionsSerialization ): void {
+	private function handleDescriptionsValidationError( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
-				throw UseCaseError::newPatchResultInvalidValue( '/descriptions', $descriptionsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue(
+					'/descriptions',
+					$context[ DescriptionsSyntaxValidator::CONTEXT_VALUE ]
+				);
 			case DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION:
 				$languageCode = $validationError->getContext()[DescriptionsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw UseCaseError::newPatchResultInvalidValue( "/descriptions/$languageCode", '' );

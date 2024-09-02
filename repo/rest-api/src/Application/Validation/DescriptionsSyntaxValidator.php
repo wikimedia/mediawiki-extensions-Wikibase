@@ -30,7 +30,7 @@ class DescriptionsSyntaxValidator {
 
 	public function validate( array $serialization ): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
-			return new ValidationError( self::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE );
+			return new ValidationError( self::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE, [ self::CONTEXT_VALUE => $serialization ] );
 		}
 
 		return $this->validateLanguageCodes( array_keys( $serialization ) )

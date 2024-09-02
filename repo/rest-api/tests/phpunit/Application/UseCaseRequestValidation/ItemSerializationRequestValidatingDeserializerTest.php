@@ -198,7 +198,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	public function itemDescriptionsValidationErrorProvider(): Generator {
 		$invalidDescriptions = [ 'not a valid descriptions array' ];
 		yield 'invalid descriptions' => [
-			new ValidationError( DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE ),
+			new ValidationError(
+				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
+				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
+			),
 			new UseCaseError(
 				UseCaseError::INVALID_VALUE,
 				"Invalid value at '/item/descriptions'",
