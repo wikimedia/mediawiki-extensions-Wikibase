@@ -33,7 +33,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
-	public const PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE = 'patched-statement-property-not-modifiable';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT = 'unauthorized-bot-edit';
 	public const PERMISSION_DENIED_REASON_PAGE_PROTECTED = 'resource-protected';
@@ -106,7 +105,6 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
 			self::CONTEXT_STATEMENT_PROPERTY_ID,
 		],
-		self::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID, self::CONTEXT_STATEMENT_PROPERTY_ID ],
 		self::PERMISSION_DENIED => [ self::CONTEXT_REASON ],
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_NOT_FOUND => [],

@@ -721,6 +721,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 	}
 
 	public function statementsProvider(): Generator {
+
 		yield 'Statements not associative' => [
 			[ 1, 2, 3 ],
 			UseCaseError::newPatchResultInvalidValue( '/statements', [ 1, 2, 3 ] ),
@@ -801,20 +802,13 @@ class PatchedPropertyValidatorTest extends TestCase {
 
 		$statementWithExistingId = [
 			'id' => self::EXISTING_STATEMENT_ID,
-			'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[3] ],
+			'property' => [ 'id' => $propertyId ],
 			'value' => [ 'type' => 'somevalue' ],
 		];
 		yield 'Property IDs modified' =>
 		[
-			[ self::EXISTING_STRING_PROPERTY_IDS[3] => [ $statementWithExistingId ] ],
-			new UseCaseError(
-				UseCaseError::PATCHED_STATEMENT_PROPERTY_NOT_MODIFIABLE,
-				'Property of a statement cannot be modified',
-				[
-					UseCaseError::CONTEXT_STATEMENT_ID => $statementWithExistingId[ 'id' ],
-					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P123',
-				]
-			),
+			[ $propertyId => [ $statementWithExistingId ] ],
+			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/property/id" ),
 		];
 	}
 
