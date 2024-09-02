@@ -691,9 +691,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { statement_id: invalidStatement.id };
-			assertValidError( response, 422, 'statement-id-not-modifiable', context );
-			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
+			const context = { path: `/statements/${predicatePropertyId}/0/id` };
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		it( 'duplicate Statement id', async () => {
@@ -712,9 +712,9 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { statement_id: duplicateStatement.id };
-			assertValidError( response, 422, 'statement-id-not-modifiable', context );
-			assert.strictEqual( response.body.message, 'Statement IDs cannot be created or modified' );
+			const context = { path: `/statements/${predicatePropertyId}/0/id` };
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 		it( 'property IDs modified', async () => {

@@ -1154,7 +1154,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},
@@ -1188,7 +1187,6 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
-					"statement-id-not-modifiable": { "$ref": "./examples.json#/StatementIdNotModifiableExample" },
 					"patched-statement-property-not-modifiable": {
 						"$ref": "./examples.json#/PatchedStatementPropertyNotModifiableExample"
 					},

@@ -48,7 +48,6 @@ class UseCaseError extends UseCaseException {
 	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
-	public const STATEMENT_ID_NOT_MODIFIABLE = 'statement-id-not-modifiable';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 	public const VALUE_TOO_LONG = 'value-too-long';
@@ -119,7 +118,6 @@ class UseCaseError extends UseCaseException {
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
 			self::CONTEXT_STATEMENT_PROPERTY_ID,
 		],
-		self::STATEMENT_ID_NOT_MODIFIABLE => [ self::CONTEXT_STATEMENT_ID ],
 		self::STATEMENT_NOT_FOUND => [],
 		self::UNEXPECTED_ERROR => [],
 		self::VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
