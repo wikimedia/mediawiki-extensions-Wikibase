@@ -99,7 +99,10 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	public function itemLabelsValidationErrorProvider(): Generator {
 		$invalidLabels = [ 'not an associative array' ];
 		yield 'invalid labels' => [
-			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
+				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
+			),
 			new UseCaseError(
 				UseCaseError::INVALID_VALUE,
 				"Invalid value at '/item/labels'",

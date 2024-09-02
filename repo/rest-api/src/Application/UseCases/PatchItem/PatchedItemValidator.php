@@ -135,7 +135,7 @@ class PatchedItemValidator {
 
 		if ( $validationError ) {
 			$this->handleLanguageCodeValidationError( $validationError );
-			$this->handleLabelsValidationError( $validationError, $labels );
+			$this->handleLabelsValidationError( $validationError );
 			$this->handleDescriptionsValidationError( $validationError );
 			throw new LogicException( "Unknown validation error: {$validationError->getCode()}" );
 		}
@@ -153,12 +153,12 @@ class PatchedItemValidator {
 			);
 	}
 
-	private function handleLabelsValidationError( ValidationError $validationError, array $labelsSerialization ): void {
+	private function handleLabelsValidationError( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
 
 		switch ( $validationError->getCode() ) {
 			case LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE:
-				throw UseCaseError::newPatchResultInvalidValue( '/labels', $labelsSerialization );
+				throw UseCaseError::newPatchResultInvalidValue( '/labels', $context[ LabelsSyntaxValidator::CONTEXT_VALUE ] );
 			case LabelsSyntaxValidator::CODE_EMPTY_LABEL:
 				$languageCode = $context[LabelsSyntaxValidator::CONTEXT_LANGUAGE];
 				throw UseCaseError::newPatchResultInvalidValue( "/labels/$languageCode", '' );

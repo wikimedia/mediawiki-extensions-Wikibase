@@ -65,9 +65,13 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				]
 			),
 		];
+		$invalidLabels = [ 'some label', 'some other label' ];
 		yield 'labels not associative' => [
-			[ 'some label', 'some other label' ],
-			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
+			$invalidLabels,
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
+				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
+			),
 		];
 		yield 'label empty' => [
 			[ 'de' => '' ],
