@@ -350,7 +350,10 @@ class PatchedItemValidatorTest extends TestCase {
 		$invalidLabels = [ 'not an associative array' ];
 		yield 'invalid labels' => [
 			$mockSyntaxValidator,
-			new ValidationError( LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE ),
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
+				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
+			),
 			UseCaseError::newPatchResultInvalidValue( '/labels', $invalidLabels ),
 			[ 'labels' => $invalidLabels ],
 		];
