@@ -112,6 +112,16 @@ class PatchedPropertyLabelsValidatorTest extends TestCase {
 	}
 
 	public static function invalidLabelsProvider(): Generator {
+		$invalidLabels = [ 'not', 'an', 'associative', 'array' ];
+		yield 'invalid labels - sequential array' => [
+			UseCaseError::newPatchResultInvalidValue( '', $invalidLabels ),
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
+				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ],
+			),
+			$invalidLabels,
+		];
+
 		$language = 'en';
 		$label = "tab characters \t not allowed";
 		yield 'invalid label' => [
@@ -166,6 +176,15 @@ class PatchedPropertyLabelsValidatorTest extends TestCase {
 			] ),
 			[ $language => $label ],
 		];
+	}
+
+	public function testGivenInvalidLabels_throwsInvalidLabelsError(): void {
+		try {
+			$this->newValidator()->validateAndDeserialize( new TermList(), new TermList(), '' );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( UseCaseError::newPatchResultInvalidValue( '', '' ), $e );
+		}
 	}
 
 	public function testGivenEmptyLabel_throwsEmptyLabelError(): void {
