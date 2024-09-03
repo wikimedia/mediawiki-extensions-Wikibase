@@ -60,9 +60,10 @@ class PatchItemAliasesTest extends TestCase {
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
+		$aliasesDeserializer = new AliasesDeserializer( new AliasesInLanguageDeserializer() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedItemAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
-			->willReturnCallback( [ new AliasesDeserializer( new AliasesInLanguageDeserializer() ), 'deserialize' ] );
+			->willReturnCallback( fn( array $aliases ) => ( $aliasesDeserializer )->deserialize( $aliases, '' ) );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->itemUpdater = $this->createStub( ItemUpdater::class );
 	}

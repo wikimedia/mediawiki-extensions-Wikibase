@@ -244,7 +244,7 @@ class PatchedPropertyValidator {
 					throw UseCaseError::newPatchResultInvalidKey( '/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
 				case AliasesValidator::CODE_INVALID_VALUE:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/aliases/{$context[AliasesValidator::CONTEXT_PATH]}",
+						"/aliases{$context[AliasesValidator::CONTEXT_PATH]}",
 						$context[AliasesValidator::CONTEXT_VALUE]
 					);
 				case AliasesValidator::CODE_INVALID_ALIASES:

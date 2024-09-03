@@ -308,7 +308,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		yield 'invalid value' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_VALUE,
-				[ AliasesValidator::CONTEXT_PATH => 'en/1', AliasesValidator::CONTEXT_VALUE => '' ]
+				[ AliasesValidator::CONTEXT_PATH => '/en/1', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
 		];

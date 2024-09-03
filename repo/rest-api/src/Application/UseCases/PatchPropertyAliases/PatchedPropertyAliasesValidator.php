@@ -50,9 +50,9 @@ class PatchedPropertyAliasesValidator {
 
 	private function deserialize( array $serialization ): AliasGroupList {
 		try {
-			return $this->aliasesDeserializer->deserialize( $serialization );
+			return $this->aliasesDeserializer->deserialize( $serialization, '' );
 		} catch ( InvalidFieldException $e ) {
-			throw UseCaseError::newPatchResultInvalidValue( "/{$e->getPath()}", $e->getValue() );
+			throw UseCaseError::newPatchResultInvalidValue( $e->getPath(), $e->getValue() );
 		}
 	}
 

@@ -71,7 +71,7 @@ class AliasesValidator {
 
 	private function deserializeAliases( array $aliases ): ?ValidationError {
 		try {
-			$this->deserializedAliases = $this->aliasesDeserializer->deserialize( $aliases );
+			$this->deserializedAliases = $this->aliasesDeserializer->deserialize( $aliases, '' );
 		} catch ( InvalidFieldException $e ) {
 			return new ValidationError(
 				self::CODE_INVALID_VALUE,

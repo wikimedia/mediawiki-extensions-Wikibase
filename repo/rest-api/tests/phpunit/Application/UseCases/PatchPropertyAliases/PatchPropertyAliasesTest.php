@@ -61,9 +61,10 @@ class PatchPropertyAliasesTest extends TestCase {
 		$this->aliasesRetriever->method( 'getAliases' )->willReturn( new Aliases() );
 		$this->aliasesSerializer = new AliasesSerializer();
 		$this->patchJson = new PatchJson( new JsonDiffJsonPatcher() );
+		$aliasesDeserializer = new AliasesDeserializer( new AliasesInLanguageDeserializer() );
 		$this->patchedAliasesValidator = $this->createStub( PatchedPropertyAliasesValidator::class );
 		$this->patchedAliasesValidator->method( 'validateAndDeserialize' )
-			->willReturnCallback( [ new AliasesDeserializer( new AliasesInLanguageDeserializer() ), 'deserialize' ] );
+			->willReturnCallback( fn( array $aliases ) => ( $aliasesDeserializer )->deserialize( $aliases, '' ) );
 		$this->propertyRetriever = $this->createStub( PropertyWriteModelRetriever::class );
 		$this->propertyUpdater = $this->createStub( PropertyUpdater::class );
 	}

@@ -20,19 +20,20 @@ class AliasesDeserializer {
 	/**
 	 * @throws InvalidFieldException
 	 */
-	public function deserialize( array $serialization ): AliasGroupList {
+	public function deserialize( array $serialization, string $basePath ): AliasGroupList {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
-			throw new InvalidFieldException( '', $serialization, '' );
+			$parts = explode( '/', $basePath );
+			throw new InvalidFieldException( $parts[array_key_last( $parts )], $serialization, $basePath );
 		}
 
 		$aliasGroups = [];
 		foreach ( $serialization as $language => $aliasesInLanguage ) {
 			// @phan-suppress-next-line PhanRedundantConditionInLoop
 			if ( !is_array( $aliasesInLanguage ) ) {
-				throw new InvalidFieldException( (string)$language, $aliasesInLanguage, (string)$language );
+				throw new InvalidFieldException( (string)$language, $aliasesInLanguage, "$basePath/$language" );
 			}
 
-			$aliases = $this->aliasesInLanguageDeserializer->deserialize( $aliasesInLanguage, (string)$language );
+			$aliases = $this->aliasesInLanguageDeserializer->deserialize( $aliasesInLanguage, "$basePath/$language" );
 			$aliasGroups[] = new AliasGroup( $language, $aliases );
 		}
 

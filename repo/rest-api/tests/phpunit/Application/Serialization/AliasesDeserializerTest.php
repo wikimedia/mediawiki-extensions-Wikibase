@@ -24,7 +24,7 @@ class AliasesDeserializerTest extends TestCase {
 	 * @dataProvider provideValidAliases
 	 */
 	public function testDeserialize( array $serialization, AliasGroupList $expectedAliases ): void {
-		$this->assertEquals( $expectedAliases, $this->newAliasesDeserializer()->deserialize( $serialization ) );
+		$this->assertEquals( $expectedAliases, $this->newAliasesDeserializer()->deserialize( $serialization, '' ) );
 	}
 
 	public static function provideValidAliases(): Generator {
@@ -70,10 +70,11 @@ class AliasesDeserializerTest extends TestCase {
 	 */
 	public function testGivenInvalidAliases_throwsException(
 		SerializationException $expectedException,
-		array $invalidAliases
+		array $invalidAliases,
+		string $basePath
 	): void {
 		try {
-			$this->newAliasesDeserializer()->deserialize( $invalidAliases );
+			$this->newAliasesDeserializer()->deserialize( $invalidAliases, $basePath );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( SerializationException $e ) {
 			$this->assertEquals( $expectedException, $e );
@@ -82,63 +83,75 @@ class AliasesDeserializerTest extends TestCase {
 
 	public function provideInvalidAliases(): Generator {
 		yield "invalid 'aliases' - sequential array" => [
-			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '' ),
+			new InvalidFieldException( 'path', [ 'not', 'an', 'associative', 'array' ], '/base/path' ),
 			[ 'not', 'an', 'associative', 'array' ],
+			'/base/path',
 		];
 
 		yield "invalid 'aliases in language' - string" => [
-			new InvalidFieldException( 'de', 'this should be a list of strings', 'de' ),
+			new InvalidFieldException( 'de', 'this should be a list of strings', '/item/aliases/de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => 'this should be a list of strings' ],
+			'/item/aliases',
 		];
 
 		yield "invalid 'aliases in language' - associative array" => [
-			new InvalidFieldException( 'de', [ 'not' => 'a', 'sequential' => 'array' ], 'de' ),
+			new InvalidFieldException( 'de', [ 'not' => 'a', 'sequential' => 'array' ], '/property/aliases/de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+			'/property/aliases',
 		];
 
 		yield "invalid 'aliases in language' - associative array and incorrect type for key" => [
-			new InvalidFieldException( '5772', [ 'not' => 'a', 'sequential' => 'array' ], '5772' ),
+			new InvalidFieldException( '5772', [ 'not' => 'a', 'sequential' => 'array' ], '/5772' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 5772 => [ 'not' => 'a', 'sequential' => 'array' ] ],
+			'',
 		];
 
 		yield "invalid 'aliases in language' - empty array" => [
-			new InvalidFieldException( 'de', [], 'de' ),
+			new InvalidFieldException( 'de', [], '/item/aliases/de' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 'de' => [] ],
+			'/item/aliases',
 		];
 
 		yield "invalid 'aliases in language' - empty array and incorrect type for key" => [
-			new InvalidFieldException( '6071', [], '6071' ),
+			new InvalidFieldException( '6071', [], '/property/aliases/6071' ),
 			[ 'en' => [ 'list', 'of', 'aliases' ], 6071 => [] ],
+			'/property/aliases',
 		];
 
 		yield "invalid 'alias' type - integer and incorrect type for key" => [
-			new InvalidFieldException( '0', 9183, '5593/0' ),
+			new InvalidFieldException( '0', 9183, '/5593/0' ),
 			[ 5593 => [ 9183, 'list', 'of', 'aliases' ] ],
+			'',
 		];
 
 		yield "invalid 'alias' type - integer" => [
-			new InvalidFieldException( '0', 9183, 'en/0' ),
+			new InvalidFieldException( '0', 9183, '/item/aliases/en/0' ),
 			[ 'en' => [ 9183, 'list', 'of', 'aliases' ] ],
+			'/item/aliases',
 		];
 
 		yield "invalid 'alias' value - zero length string" => [
-			new InvalidFieldException( '1', '', 'en/1' ),
+			new InvalidFieldException( '1', '', '/property/aliases/en/1' ),
 			[ 'en' => [ 'list', '', 'of', 'aliases' ] ],
+			'/property/aliases',
 		];
 
 		yield "invalid 'alias' value - zero length string and incorrect type for key" => [
-			new InvalidFieldException( '1', '', '9667/1' ),
+			new InvalidFieldException( '1', '', '/9667/1' ),
 			[ 9667 => [ 'list', '', 'of', 'aliases' ] ],
+			'',
 		];
 
 		yield "invalid 'alias' value - four spaces" => [
-			new InvalidFieldException( '2', '', 'en/2' ),
+			new InvalidFieldException( '2', '', '/item/aliases/en/2' ),
 			[ 'en' => [ 'list', 'of', '    ', 'aliases' ] ],
+			'/item/aliases',
 		];
 
 		yield "invalid 'alias' value - spaces and tab" => [
-			new InvalidFieldException( '3', '', 'en/3' ),
+			new InvalidFieldException( '3', '', '/property/aliases/en/3' ),
 			[ 'en' => [ 'list', 'of', 'aliases', "  \t  " ] ],
+			'/property/aliases',
 		];
 	}
 
