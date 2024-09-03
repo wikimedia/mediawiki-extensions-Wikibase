@@ -135,6 +135,34 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			value: newLabel
 		} );
 
+		it( 'invalid labels type', async () => {
+			const invalidLabels = 'foo';
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '', value: invalidLabels } ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { path: '', value: invalidLabels };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
+		it( 'labels is not an object', async () => {
+			const invalidLabels = [ 'list, not an object' ];
+			const response = await newPatchItemLabelsRequestBuilder(
+				testItemId,
+				[ { op: 'replace', path: '', value: invalidLabels } ]
+			)
+				.assertValidRequest()
+				.makeRequest();
+
+			const context = { path: '', value: invalidLabels };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
 		it( 'invalid label', async () => {
 			const invalidLabel = 'tab characters \t not allowed';
 			const response = await newPatchItemLabelsRequestBuilder(
