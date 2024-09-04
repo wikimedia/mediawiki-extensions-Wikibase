@@ -3,15 +3,22 @@
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
 
 use Generator;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
@@ -22,6 +29,11 @@ use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer
@@ -48,10 +60,117 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	/**
+	 * In contrast to the solitary testGivenInvalidRequest_throws() method, this is a sociable test.
+	 * It is more thorough at testing the behaviour of the SUT and is expected to be more resilient to refactoring of the SUT.
+	 * I suggest that if other parts of the SUT are touched, we also refactor the related tests to this more sociable style.
+	 *
+	 * @dataProvider provideInvalidAliases
+	 */
+	public function testGivenInvalidRequest_throwsUseCaseError( UseCaseError $expectedError, array $serialization ): void {
+		try {
+			$this->newRequestValidatingDeserializer()->validateAndDeserialize(
+				new CreateItemRequest( $serialization, [], false, null, null )
+			);
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function provideInvalidAliases(): Generator {
+		yield 'invalid serialization - string' => [
+			UseCaseError::newInvalidValue( '/item/aliases' ),
+			[ 'aliases' => 'not an array' ],
+		];
+
+		yield 'invalid serialization - sequential array' => [
+			UseCaseError::newInvalidValue( '/item/aliases' ),
+			[ 'aliases' => [ 'not', 'an', 'associative', 'array' ] ],
+		];
+
+		yield 'invalid language code - int' => [
+			UseCaseError::newInvalidKey( '/item/aliases', '3912' ),
+			[ 'aliases' => [ 3912 => [ 'alias 1' ] ] ],
+		];
+
+		yield 'invalid language code - not an allowed language code' => [
+			UseCaseError::newInvalidKey( '/item/aliases', 'xyz' ),
+			[ 'aliases' => [ 'xyz' => [ 'alias 1' ] ] ],
+		];
+
+		yield 'invalid aliases in language - string' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en' ),
+			[ 'aliases' => [ 'en' => 'not a list' ] ],
+		];
+
+		yield 'invalid aliases in language - associative array' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en' ),
+			[ 'aliases' => [ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ] ],
+		];
+
+		yield 'invalid aliases in language - empty array' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en' ),
+			[ 'aliases' => [ 'en' => [] ] ],
+		];
+
+		yield 'invalid alias - integer' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en/0' ),
+			[ 'aliases' => [ 'en' => [ 7940, 'alias 2' ] ] ],
+		];
+
+		yield 'invalid alias - zero length string' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
+			[ 'aliases' => [ 'en' => [ 'alias 1', '' ] ] ],
+		];
+
+		yield 'invalid alias - whitespace only' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en/0' ),
+			[ 'aliases' => [ 'en' => [ "  \t  ", 'alias 2' ] ] ],
+		];
+
+		yield 'invalid alias - invalid characters' => [
+			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
+			[ 'aliases' => [ 'en' => [ 'alias 1', "alias \t with \t tabs" ] ] ],
+		];
+
+		yield 'invalid alias - too long' => [
+			UseCaseError::newValueTooLong( '/item/aliases/en/0', self::MAX_LENGTH ),
+			[ 'aliases' => [ 'en' => [ str_repeat( 'A', self::MAX_LENGTH + 1 ) ] ] ],
+		];
+	}
+
+	private function newRequestValidatingDeserializer(): ItemSerializationRequestValidatingDeserializer {
+		$validLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
+		return new ItemSerializationRequestValidatingDeserializer(
+			new ItemValidator(
+				$this->createStub( LabelsSyntaxValidator::class ),
+				$this->createStub( ItemLabelsContentsValidator::class ),
+				$this->createStub( DescriptionsSyntaxValidator::class ),
+				$this->createStub( ItemDescriptionsContentsValidator::class ),
+				new AliasesValidator(
+					new TermValidatorFactoryAliasesInLanguageValidator(
+						new TermValidatorFactory(
+							self::MAX_LENGTH,
+							$validLanguageCodes,
+							$this->createStub( EntityIdParser::class ),
+							$this->createStub( TermsCollisionDetectorFactory::class ),
+							$this->createStub( TermLookup::class ),
+							$this->createStub( LanguageNameUtils::class )
+						)
+					),
+					new ValueValidatorLanguageCodeValidator( new MembershipValidator( $validLanguageCodes ) ),
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
+				),
+				$this->createStub( StatementsValidator::class ),
+				$this->createStub( SitelinksValidator::class ),
+			)
+		);
+	}
+
+	/**
 	 * @dataProvider itemValidationErrorProvider
 	 * @dataProvider itemLabelsValidationErrorProvider
 	 * @dataProvider itemDescriptionsValidationErrorProvider
-	 * @dataProvider itemAliasesValidationErrorProvider
 	 * @dataProvider itemStatementsValidationErrorProvider
 	 * @dataProvider sitelinksValidationErrorProvider
 	 */
@@ -301,83 +420,6 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					],
 				],
 			),
-		];
-	}
-
-	public function itemAliasesValidationErrorProvider(): Generator {
-		yield 'invalid value' => [
-			new ValidationError(
-				AliasesValidator::CODE_INVALID_VALUE,
-				[ AliasesValidator::CONTEXT_PATH => '/en/1', AliasesValidator::CONTEXT_VALUE => '' ]
-			),
-			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
-		];
-
-		yield 'empty aliases in language list' => [
-			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
-			),
-			UseCaseError::newInvalidValue( '/item/aliases/en' ),
-		];
-
-		$invalidAliases = [ 'not a valid aliases array' ];
-		yield 'invalid aliases' => [
-			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIASES,
-				[ AliasesValidator::CONTEXT_ALIASES => $invalidAliases ]
-			),
-			new UseCaseError(
-				UseCaseError::INVALID_VALUE,
-				"Invalid value at '/item/aliases'",
-				[ UseCaseError::CONTEXT_PATH => '/item/aliases' ]
-			),
-		];
-
-		yield 'invalid aliases in language list' => [
-			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
-			),
-			UseCaseError::newInvalidValue( '/item/aliases/en' ),
-		];
-
-		$tooLongAlias = str_repeat( 'a', self::MAX_LENGTH + 1 );
-		yield 'alias too long' => [
-			new ValidationError(
-				AliasesInLanguageValidator::CODE_TOO_LONG,
-				[
-					AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
-					AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-					AliasesInLanguageValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
-				]
-			),
-			UseCaseError::newValueTooLong( '/item/aliases/en/0', self::MAX_LENGTH ),
-			[ 'aliases' => [ 'en' => [ $tooLongAlias ] ] ],
-		];
-
-		yield 'invalid alias' => [
-			new ValidationError(
-				AliasesInLanguageValidator::CODE_INVALID,
-				[
-					AliasesInLanguageValidator::CONTEXT_VALUE => "alias \t with \t tabs",
-					AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-					AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
-				]
-			),
-			UseCaseError::newInvalidValue( '/item/aliases/en/1' ),
-			[ 'aliases' => [ 'en' => [ 'valid alias', "alias \t with \t tabs" ] ] ],
-		];
-
-		yield 'invalid aliases language code' => [
-			new ValidationError(
-				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-				[
-					LanguageCodeValidator::CONTEXT_FIELD => 'aliases',
-					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'e2',
-				]
-			),
-			UseCaseError::newInvalidKey( '/item/aliases', 'e2' ),
 		];
 	}
 

@@ -21,7 +21,7 @@ class ItemValidator {
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
-	private AliasesValidator $itemAliasesValidator;
+	private AliasesValidator $aliasesValidator;
 	private StatementsValidator $itemStatementsValidator;
 	private SitelinksValidator $sitelinksValidator;
 
@@ -30,7 +30,7 @@ class ItemValidator {
 		ItemLabelsContentsValidator $labelsContentsValidator,
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		ItemDescriptionsContentsValidator $descriptionsContentsValidator,
-		AliasesValidator $itemAliasesValidator,
+		AliasesValidator $aliasesValidator,
 		StatementsValidator $itemStatementsValidator,
 		SitelinksValidator $sitelinksValidator
 	) {
@@ -38,7 +38,7 @@ class ItemValidator {
 		$this->labelsContentsValidator = $labelsContentsValidator;
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
-		$this->itemAliasesValidator = $itemAliasesValidator;
+		$this->aliasesValidator = $aliasesValidator;
 		$this->itemStatementsValidator = $itemStatementsValidator;
 		$this->sitelinksValidator = $sitelinksValidator;
 	}
@@ -59,7 +59,7 @@ class ItemValidator {
 		}
 
 		$validationError = $this->validateLabelsAndDescriptions( $serialization ) ??
-			$this->itemAliasesValidator->validate( $serialization['aliases'] ) ??
+			$this->aliasesValidator->validate( $serialization['aliases'], "$basePath/aliases" ) ??
 			$this->itemStatementsValidator->validate( $serialization['statements'], "$basePath/statements" ) ??
 			$this->sitelinksValidator->validate( null, $serialization['sitelinks'], null, "$basePath/sitelinks" );
 		if ( $validationError ) {
@@ -71,7 +71,7 @@ class ItemValidator {
 			new Fingerprint(
 				$this->labelsContentsValidator->getValidatedLabels(),
 				$this->descriptionsContentsValidator->getValidatedDescriptions(),
-				$this->itemAliasesValidator->getValidatedAliases()
+				$this->aliasesValidator->getValidatedAliases()
 			),
 			$this->sitelinksValidator->getValidatedSitelinks(),
 			$this->itemStatementsValidator->getValidatedStatements()

@@ -38,26 +38,30 @@ class AliasesValidatorTest extends TestCase {
 
 		$validator = $this->newValidator();
 
-		$this->assertNull( $validator->validate( [ $language => $aliases ] ) );
+		$this->assertNull( $validator->validate( [ $language => $aliases ], '' ) );
 		$this->assertEquals( new AliasGroupList( [ new AliasGroup( $language, $aliases ) ] ), $validator->getValidatedAliases() );
 	}
 
 	public function testValidWithEmptyAliases(): void {
 		$validator = $this->newValidator();
 
-		$this->assertNull( $validator->validate( [] ) );
+		$this->assertNull( $validator->validate( [], '/item/aliases' ) );
 		$this->assertEquals( new AliasGroupList(), $validator->getValidatedAliases() );
 	}
 
 	public function testMulLanguage_isValid(): void {
-		$this->assertNull( $this->newValidator()->validate( [ 'mul' => [ 'alias' ] ] ) );
+		$this->assertNull( $this->newValidator()->validate( [ 'mul' => [ 'alias' ] ], '/property/aliases' ) );
 	}
 
 	/**
 	 * @dataProvider provideInvalidAliases
 	 */
-	public function testInvalidSerialization_returnsValidationError( ValidationError $expectedError, array $aliases ): void {
-		$validationError = $this->newValidator()->validate( $aliases );
+	public function testInvalidSerialization_returnsValidationError(
+		ValidationError $expectedError,
+		array $aliases,
+		string $basePath
+	): void {
+		$validationError = $this->newValidator()->validate( $aliases, $basePath );
 		$this->assertEquals( $expectedError, $validationError );
 	}
 
@@ -68,6 +72,7 @@ class AliasesValidatorTest extends TestCase {
 				[ AliasesValidator::CONTEXT_ALIASES => [ 'not', 'an', 'associative', 'array' ] ]
 			),
 			[ 'not', 'an', 'associative', 'array' ],
+			'',
 		];
 
 		yield 'invalid language code - integer' => [
@@ -79,6 +84,7 @@ class AliasesValidatorTest extends TestCase {
 				]
 			),
 			[ 4602 => [ 'alias 1', 'alias 2' ] ],
+			'/item/aliases',
 		];
 
 		yield 'invalid language code - xyz' => [
@@ -90,6 +96,7 @@ class AliasesValidatorTest extends TestCase {
 				]
 			),
 			[ 'xyz' => [ 'alias 1', 'alias 2' ] ],
+			'/property/aliases',
 		];
 
 		yield 'invalid language code - empty string' => [
@@ -101,6 +108,7 @@ class AliasesValidatorTest extends TestCase {
 				]
 			),
 			[ '' => [ 'alias 1', 'alias 2' ] ],
+			'',
 		];
 
 		yield "invalid 'aliases in language' list - string" => [
@@ -109,17 +117,19 @@ class AliasesValidatorTest extends TestCase {
 				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
 			),
 			[ 'en' => 'not a list of aliases in a language' ],
+			'/item/aliases',
 		];
 
 		yield "invalid 'aliases in language' list - associative array" => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_VALUE,
 				[
-					AliasesValidator::CONTEXT_PATH => '/en',
+					AliasesValidator::CONTEXT_PATH => '/property/aliases/en',
 					AliasesValidator::CONTEXT_VALUE => [ 'not' => 'a', 'sequential' => 'array' ],
 				]
 			),
 			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+			'/property/aliases',
 		];
 
 		yield "invalid 'aliases in language' list - empty array" => [
@@ -128,22 +138,25 @@ class AliasesValidatorTest extends TestCase {
 				[ AliasesValidator::CONTEXT_VALUE => [], AliasesValidator::CONTEXT_PATH => '/en' ]
 			),
 			[ 'en' => [] ],
+			'',
 		];
 
 		yield 'invalid alias - integer' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_VALUE,
-				[ AliasesValidator::CONTEXT_PATH => '/en/1', AliasesValidator::CONTEXT_VALUE => 1794 ]
+				[ AliasesValidator::CONTEXT_PATH => '/item/aliases/en/1', AliasesValidator::CONTEXT_VALUE => 1794 ]
 			),
 			[ 'en' => [ 'first alias', 1794 ] ],
+			'/item/aliases',
 		];
 
 		yield 'invalid alias - empty alias at position 0' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_VALUE,
-				[ AliasesValidator::CONTEXT_PATH => '/en/0', AliasesValidator::CONTEXT_VALUE => '' ]
+				[ AliasesValidator::CONTEXT_PATH => '/property/aliases/en/0', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			[ 'en' => [ '', 'second alias' ] ],
+			'/property/aliases',
 		];
 
 		yield 'invalid alias - empty alias at position 1' => [
@@ -152,6 +165,7 @@ class AliasesValidatorTest extends TestCase {
 				[ AliasesValidator::CONTEXT_PATH => '/en/1', AliasesValidator::CONTEXT_VALUE => '' ]
 			),
 			[ 'en' => [ 'first alias', '' ] ],
+			'',
 		];
 	}
 
@@ -166,7 +180,7 @@ class AliasesValidatorTest extends TestCase {
 			->with( new AliasGroup( $language, [ $invalidAlias ] ) )
 			->willReturn( $expectedError );
 
-		$this->assertEquals( $expectedError, $this->newValidator()->validate( [ $language => [ $invalidAlias ] ] ) );
+		$this->assertEquals( $expectedError, $this->newValidator()->validate( [ $language => [ $invalidAlias ] ], '' ) );
 	}
 
 	public function testGivenGetValidatedAliasesCalledBeforeValidate_throws(): void {

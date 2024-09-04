@@ -231,14 +231,14 @@ class PatchedItemValidator {
 
 	private function assertValidAliases( array $serialization ): void {
 		$aliasesSerialization = $serialization[ 'aliases' ] ?? [];
-		$validationError = $this->aliasesValidator->validate( $aliasesSerialization );
+		$validationError = $this->aliasesValidator->validate( $aliasesSerialization, '/aliases' );
 		if ( $validationError ) {
 			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case AliasesValidator::CODE_INVALID_VALUE:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/aliases{$context[AliasesValidator::CONTEXT_PATH]}",
+						$context[AliasesValidator::CONTEXT_PATH],
 						$context[AliasesValidator::CONTEXT_VALUE]
 					);
 				case AliasesValidator::CODE_INVALID_ALIASES:
