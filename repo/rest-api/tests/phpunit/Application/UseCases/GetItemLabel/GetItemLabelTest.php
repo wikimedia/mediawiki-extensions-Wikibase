@@ -89,9 +89,9 @@ class GetItemLabelTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::LABEL_NOT_DEFINED, $e->getErrorCode() );
-			$this->assertSame( 'Item with the ID Q11 does not have a label in the language: en', $e->getErrorMessage() );
-			$this->assertSame( [], $e->getErrorContext() );
+			$this->assertSame( UseCaseError::RESOURCE_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'The requested resource does not exist', $e->getErrorMessage() );
+			$this->assertSame( [ 'resource_type' => 'label' ], $e->getErrorContext() );
 		}
 	}
 

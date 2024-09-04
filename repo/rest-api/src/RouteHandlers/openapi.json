@@ -3976,8 +3976,8 @@
               "item-not-found": {
                 "$ref": "#/components/examples/ItemNotFoundExample"
               },
-              "label-not-defined": {
-                "$ref": "#/components/examples/ItemLabelNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -4002,8 +4002,8 @@
               "property-not-found": {
                 "$ref": "#/components/examples/PropertyNotFoundExample"
               },
-              "label-not-defined": {
-                "$ref": "#/components/examples/PropertyLabelNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -4028,8 +4028,8 @@
               "item-not-found": {
                 "$ref": "#/components/examples/ItemNotFoundExample"
               },
-              "aliases-not-defined": {
-                "$ref": "#/components/examples/ItemAliasesNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -4054,8 +4054,8 @@
               "property-not-found": {
                 "$ref": "#/components/examples/PropertyNotFoundExample"
               },
-              "aliases-not-defined": {
-                "$ref": "#/components/examples/PropertyAliasesNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -4080,8 +4080,8 @@
               "item-not-found": {
                 "$ref": "#/components/examples/ItemNotFoundExample"
               },
-              "description-not-defined": {
-                "$ref": "#/components/examples/ItemDescriptionNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -4106,8 +4106,8 @@
               "property-not-found": {
                 "$ref": "#/components/examples/PropertyNotFoundExample"
               },
-              "description-not-defined": {
-                "$ref": "#/components/examples/PropertyDescriptionNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -7129,42 +7129,6 @@
           "context": {
             "resource_type": "{resource_type}"
           }
-        }
-      },
-      "ItemLabelNotDefinedExample": {
-        "value": {
-          "code": "label-not-defined",
-          "message": "Item with the ID {item_id} does not have a label in the language: {language_code}"
-        }
-      },
-      "PropertyLabelNotDefinedExample": {
-        "value": {
-          "code": "label-not-defined",
-          "message": "Property with the ID {property_id} does not have a label in the language: {language_code}"
-        }
-      },
-      "ItemDescriptionNotDefinedExample": {
-        "value": {
-          "code": "description-not-defined",
-          "message": "Item with the ID {item_id} does not have a description in the language: {language_code}"
-        }
-      },
-      "PropertyDescriptionNotDefinedExample": {
-        "value": {
-          "code": "description-not-defined",
-          "message": "Property with the ID {property_id} does not have a description in the language: {language_code}"
-        }
-      },
-      "ItemAliasesNotDefinedExample": {
-        "value": {
-          "code": "aliases-not-defined",
-          "message": "Item with the ID {item_id} does not have aliases in the language: {language_code}"
-        }
-      },
-      "PropertyAliasesNotDefinedExample": {
-        "value": {
-          "code": "aliases-not-defined",
-          "message": "Property with the ID {property_id} does not have aliases in the language: {language_code}"
         }
       },
       "PatchedInvalidSitelinkTypeExample": {

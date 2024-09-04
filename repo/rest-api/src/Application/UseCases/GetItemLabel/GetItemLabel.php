@@ -39,10 +39,7 @@ class GetItemLabel {
 
 		$label = $this->itemLabelRetriever->getLabel( $itemId, $languageCode );
 		if ( !$label ) {
-			throw new UseCaseError(
-				UseCaseError::LABEL_NOT_DEFINED,
-				"Item with the ID {$itemId->getSerialization()} does not have a label in the language: {$languageCode}"
-			);
+			throw UseCaseError::newResourceNotFound( 'label' );
 		}
 
 		return new GetItemLabelResponse(

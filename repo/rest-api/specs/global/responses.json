@@ -253,8 +253,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"label-not-defined": {
-						"$ref": "./examples.json#/ItemLabelNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -277,8 +277,8 @@
 					"property-not-found": {
 						"$ref": "./examples.json#/PropertyNotFoundExample"
 					},
-					"label-not-defined": {
-						"$ref": "./examples.json#/PropertyLabelNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -301,8 +301,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"aliases-not-defined": {
-						"$ref": "./examples.json#/ItemAliasesNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -325,8 +325,8 @@
 					"property-not-found": {
 						"$ref": "./examples.json#/PropertyNotFoundExample"
 					},
-					"aliases-not-defined": {
-						"$ref": "./examples.json#/PropertyAliasesNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -349,8 +349,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"description-not-defined": {
-						"$ref": "./examples.json#/ItemDescriptionNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -373,8 +373,8 @@
 					"property-not-found": {
 						"$ref": "./examples.json#/PropertyNotFoundExample"
 					},
-					"description-not-defined": {
-						"$ref": "./examples.json#/PropertyDescriptionNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}

@@ -93,7 +93,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 			.assertValidRequest()
 			.makeRequest();
 
-		assertValidError( response, 404, 'aliases-not-defined' );
-		assert.include( response.body.message, languageCode );
+		assertValidError( response, 404, 'resource-not-found', { resource_type: 'aliases' } );
+		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 	} );
 } );

@@ -28,10 +28,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PERMISSION_DENIED => 403,
 
 		// 404 errors:
-		UseCaseError::ALIASES_NOT_DEFINED => 404,
-		UseCaseError::DESCRIPTION_NOT_DEFINED => 404,
 		UseCaseError::ITEM_NOT_FOUND => 404,
-		UseCaseError::LABEL_NOT_DEFINED => 404,
 		UseCaseError::PROPERTY_NOT_FOUND => 404,
 		UseCaseError::RESOURCE_NOT_FOUND => 404,
 		UseCaseError::STATEMENT_NOT_FOUND => 404,

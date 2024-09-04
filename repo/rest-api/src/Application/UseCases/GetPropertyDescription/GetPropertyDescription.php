@@ -37,10 +37,7 @@ class GetPropertyDescription {
 
 		$description = $this->descriptionRetriever->getDescription( $propertyId, $languageCode );
 		if ( !$description ) {
-			throw new UseCaseError(
-				UseCaseError::DESCRIPTION_NOT_DEFINED,
-				"Property with the ID {$propertyId->getSerialization()} does not have a description in the language: $languageCode"
-			);
+			throw UseCaseError::newResourceNotFound( 'description' );
 		}
 
 		return new GetPropertyDescriptionResponse( $description, $lastModified, $revisionId );

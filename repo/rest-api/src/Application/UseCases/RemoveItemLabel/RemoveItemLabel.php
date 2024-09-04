@@ -51,10 +51,7 @@ class RemoveItemLabel {
 		try {
 			$label = $item->getLabels()->getByLanguage( $languageCode );
 		} catch ( OutOfBoundsException $e ) {
-			throw new UseCaseError(
-				UseCaseError::LABEL_NOT_DEFINED,
-				"Item with the ID $itemId does not have a label in the language: $languageCode"
-			);
+			throw UseCaseError::newResourceNotFound( 'label' );
 		}
 
 		$item->getLabels()->removeByLanguage( $languageCode );

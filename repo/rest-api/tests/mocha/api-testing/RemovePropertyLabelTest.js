@@ -157,9 +157,8 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 			const response = await newRemovePropertyLabelRequestBuilder( testPropertyId, languageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'label-not-defined' );
-			assert.include( response.body.message, testPropertyId );
-			assert.include( response.body.message, languageCode );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'label' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 } );

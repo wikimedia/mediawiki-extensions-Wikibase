@@ -54,10 +54,7 @@ class RemoveItemDescription {
 		try {
 			$description = $item->getDescriptions()->getByLanguage( $languageCode );
 		} catch ( OutOfBoundsException $e ) {
-			throw new UseCaseError(
-				UseCaseError::DESCRIPTION_NOT_DEFINED,
-				"Item with the ID $itemId does not have a description in the language: $languageCode"
-			);
+			throw UseCaseError::newResourceNotFound( 'description' );
 		}
 		$item->getDescriptions()->removeByLanguage( $languageCode );
 

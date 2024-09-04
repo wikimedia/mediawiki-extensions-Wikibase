@@ -80,10 +80,7 @@ class GetPropertyAliasesInLanguageTest extends TestCase {
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals(
-				new UseCaseError(
-					UseCaseError::ALIASES_NOT_DEFINED,
-					"Property with the ID $propertyId does not have aliases in the language: $languageCode"
-				),
+				UseCaseError::newResourceNotFound( 'aliases' ),
 				$e
 			);
 		}
