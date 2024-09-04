@@ -1,13 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"SupaplexTW"
 		]
 	},
 	"wikibase-entity": "Si̍t-thé",
 	"wikibase-entity-item": "Hāng-bo̍k",
 	"wikibase-entity-property": "Sio̍k-sèng",
 	"wikibase-entity-query": "Chhoē",
+	"nstab-item": "Hāng-bo̍k",
+	"tooltip-ca-nstab-item": "Khòaⁿ hāng-bo̍k",
+	"nstab-property": "Sio̍k-sèng",
+	"tooltip-ca-nstab-property": "Khòaⁿ sio̍k-sèng",
+	"nstab-query": "Chhōe",
+	"tooltip-ca-nstab-query": "Khòaⁿ chhōe",
 	"wikibase-edit": "siu-kái",
 	"wikibase-save": "Pó-chûn",
 	"wikibase-publish": "hoat-piáu",
