@@ -44,7 +44,7 @@ class UseCaseError extends UseCaseException {
 	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
 	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
-	public const SITELINK_NOT_DEFINED = 'sitelink-not-defined';
+	public const RESOURCE_NOT_FOUND = 'resource-not-found';
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
 	public const STATEMENT_NOT_FOUND = 'statement-not-found';
@@ -67,6 +67,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_PROPERTY_ID = 'property_id';
 	public const CONTEXT_REASON = 'reason';
 	public const CONTEXT_REDIRECT_TARGET = 'redirect_target';
+	public const CONTEXT_RESOURCE_TYPE = 'resource_type';
 	public const CONTEXT_SITE_ID = 'site_id';
 	public const CONTEXT_STATEMENT_GROUP_PROPERTY_ID = 'statement_group_property_id';
 	public const CONTEXT_STATEMENT_ID = 'statement_id';
@@ -109,7 +110,7 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
-		self::SITELINK_NOT_DEFINED => [],
+		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
@@ -232,6 +233,14 @@ class UseCaseError extends UseCaseException {
 
 	public static function newPermissionDenied( string $reason ): self {
 		return new self( self::PERMISSION_DENIED, 'Access to resource is denied', [ self::CONTEXT_REASON => $reason ] );
+	}
+
+	public static function newResourceNotFound( string $resourceType ): self {
+		return new self(
+			self::RESOURCE_NOT_FOUND,
+			'The requested resource does not exist',
+			[ self::CONTEXT_RESOURCE_TYPE => $resourceType ]
+		);
 	}
 
 	public function getErrorCode(): string {

@@ -109,12 +109,9 @@ class GetSitelinkTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::SITELINK_NOT_DEFINED, $e->getErrorCode() );
-			$this->assertSame(
-				'No sitelink found for the ID: Q11 for the site ' . TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],
-				$e->getErrorMessage()
-			);
-			$this->assertSame( [], $e->getErrorContext() );
+			$this->assertSame( UseCaseError::RESOURCE_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'The requested resource does not exist', $e->getErrorMessage() );
+			$this->assertSame( [ 'resource_type' => 'sitelink' ], $e->getErrorContext() );
 		}
 	}
 

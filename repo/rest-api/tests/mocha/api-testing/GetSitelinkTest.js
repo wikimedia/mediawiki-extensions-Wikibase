@@ -85,8 +85,8 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'sitelink-not-defined' );
-			assert.include( response.body.message, siteId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'sitelink' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

@@ -52,10 +52,7 @@ class RemoveSitelink {
 		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 
 		if ( !$item->hasLinkToSite( $siteId ) ) {
-			throw new UseCaseError(
-				UseCaseError::SITELINK_NOT_DEFINED,
-				"No sitelink found for the ID: $itemId for the site $siteId"
-			);
+			throw UseCaseError::newResourceNotFound( 'sitelink' );
 		}
 
 		$removedSitelink = $item->getSiteLink( $siteId );

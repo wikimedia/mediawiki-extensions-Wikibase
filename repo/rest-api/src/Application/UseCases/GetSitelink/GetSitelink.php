@@ -39,10 +39,7 @@ class GetSitelink {
 
 		$sitelink = $this->sitelinkRetriever->getSitelink( $itemId, $siteId );
 		if ( !$sitelink ) {
-			throw new UseCaseError(
-				UseCaseError::SITELINK_NOT_DEFINED,
-				"No sitelink found for the ID: {$itemId->getSerialization()} for the site $siteId"
-			);
+			throw UseCaseError::newResourceNotFound( 'sitelink' );
 		}
 
 		return new GetSitelinkResponse( $sitelink, $lastModified, $revisionId );
