@@ -46,19 +46,18 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializer {
 	}
 
 	private function validate( AliasGroup $aliasesInLanguage ): void {
-		$validationError = $this->validator->validate( $aliasesInLanguage );
+		$validationError = $this->validator->validate( $aliasesInLanguage, '/aliases' );
 		if ( $validationError ) {
 			$errorCode = $validationError->getCode();
 			$context = $validationError->getContext();
 			switch ( $errorCode ) {
 				case AliasesInLanguageValidator::CODE_INVALID:
-					$alias = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-					$aliasIndex = Utils::getIndexOfValueInSerialization( $alias, $aliasesInLanguage->getAliases() );
-					throw UseCaseError::newInvalidValue( "/aliases/$aliasIndex" );
+					throw UseCaseError::newInvalidValue( $context[AliasesInLanguageValidator::CONTEXT_PATH] );
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
-					$alias = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-					$aliasIndex = Utils::getIndexOfValueInSerialization( $alias, $aliasesInLanguage->getAliases() );
-					throw UseCaseError::newValueTooLong( "/aliases/$aliasIndex", $context[AliasesInLanguageValidator::CONTEXT_LIMIT] );
+					throw UseCaseError::newValueTooLong(
+						$context[AliasesInLanguageValidator::CONTEXT_PATH],
+						$context[AliasesInLanguageValidator::CONTEXT_LIMIT]
+					);
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
 			}

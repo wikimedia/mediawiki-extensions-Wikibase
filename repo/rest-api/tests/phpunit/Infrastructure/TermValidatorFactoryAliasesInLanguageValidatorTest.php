@@ -26,7 +26,7 @@ class TermValidatorFactoryAliasesInLanguageValidatorTest extends TestCase {
 	private const MAX_LENGTH = 50;
 
 	public function testValid(): void {
-		$this->assertNull( $this->newValidator()->validate( new AliasGroup( 'en', [ 'valid alias' ] ) ) );
+		$this->assertNull( $this->newValidator()->validate( new AliasGroup( 'en', [ 'valid alias' ] ), '/aliases' ) );
 	}
 
 	/**
@@ -34,37 +34,37 @@ class TermValidatorFactoryAliasesInLanguageValidatorTest extends TestCase {
 	 */
 	public function testGivenInvalidAliases_returnsValidationError(
 		AliasGroup $aliasesInLanguage,
+		string $basePath,
 		string $errorCode,
 		array $errorContext = []
 	): void {
 		$this->assertEquals(
 			new ValidationError( $errorCode, $errorContext ),
-			$this->newValidator()->validate( $aliasesInLanguage )
+			$this->newValidator()->validate( $aliasesInLanguage, $basePath )
 		);
 	}
 
 	public static function provideInvalidAliases(): Generator {
-		$language = 'en';
 		$alias = str_repeat( 'a', self::MAX_LENGTH + 1 );
 		yield 'alias too long' => [
-			new AliasGroup( $language, [ $alias ] ),
+			new AliasGroup( 'en', [ $alias ] ),
+			'/aliases',
 			AliasesInLanguageValidator::CODE_TOO_LONG,
 			[
 				AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
-				AliasesInLanguageValidator::CONTEXT_LANGUAGE => $language,
 				AliasesInLanguageValidator::CONTEXT_LIMIT => self::MAX_LENGTH,
+				AliasesInLanguageValidator::CONTEXT_PATH => '/aliases/0',
 			],
 		];
 
-		$language = 'en';
 		$alias = "alias with tab character \t not allowed";
 		yield 'alias has invalid character' => [
-			new AliasGroup( $language, [ $alias ] ),
+			new AliasGroup( 'en', [ 'valid alias', $alias ] ),
+			'/aliases/en',
 			AliasesInLanguageValidator::CODE_INVALID,
 			[
 				AliasesInLanguageValidator::CONTEXT_VALUE => $alias,
-				AliasesInLanguageValidator::CONTEXT_LANGUAGE => $language,
-				AliasesInLanguageValidator::CONTEXT_PATH => 'en/0',
+				AliasesInLanguageValidator::CONTEXT_PATH => '/aliases/en/1',
 			],
 		];
 	}

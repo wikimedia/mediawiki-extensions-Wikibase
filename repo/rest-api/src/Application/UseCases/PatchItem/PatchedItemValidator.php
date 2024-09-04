@@ -250,15 +250,13 @@ class PatchedItemValidator {
 					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language", $aliasesSerialization[$language] );
 				case AliasesInLanguageValidator::CODE_INVALID:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}",
+						$context[AliasesInLanguageValidator::CONTEXT_PATH],
 						$context[AliasesInLanguageValidator::CONTEXT_VALUE]
 					);
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
+					$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-					$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-					$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
-					throw UseCaseError::newValueTooLong( "/aliases/$language/$aliasIndex", $limit, true );
+					throw UseCaseError::newValueTooLong( $path, $limit, true );
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
 			}

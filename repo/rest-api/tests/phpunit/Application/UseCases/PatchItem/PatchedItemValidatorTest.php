@@ -4,7 +4,9 @@ namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItem;
 
 use Exception;
 use Generator;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -27,7 +29,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
@@ -53,12 +54,16 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList as Statements;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
 use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
 use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator
@@ -70,13 +75,13 @@ use Wikibase\Repo\Validators\MembershipValidator;
 class PatchedItemValidatorTest extends TestCase {
 
 	private SiteLinkLookup $siteLinkLookup;
-
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
 	private ItemLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private ItemDescriptionsContentsValidator $descriptionsContentsValidator;
-	private AliasesInLanguageValidator $aliasesInLanguageValidator;
 	private SitelinkTargetTitleResolver $sitelinkTargetTitleResolver;
+
+	private const MAX_LENGTH = 40;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -95,7 +100,6 @@ class PatchedItemValidatorTest extends TestCase {
 		$this->descriptionsContentsValidator = new ItemDescriptionsContentsValidator(
 			$this->createStub( ItemDescriptionValidator::class )
 		);
-		$this->aliasesInLanguageValidator = $this->createStub( AliasesInLanguageValidator::class );
 		$this->sitelinkTargetTitleResolver = new SameTitleSitelinkTargetResolver();
 		$this->siteLinkLookup = $this->createStub( SiteLinkLookup::class );
 	}
@@ -575,16 +579,9 @@ class PatchedItemValidatorTest extends TestCase {
 	/**
 	 * @dataProvider aliasesValidationErrorProvider
 	 */
-	public function testAliasesValidation(
-		AliasesInLanguageValidator $aliasesInLanguageValidator,
-		array $patchedAliases,
-		Exception $expectedError
-	): void {
-		$this->aliasesInLanguageValidator = $aliasesInLanguageValidator;
+	public function testAliasesValidation( array $patchedAliases, Exception $expectedError ): void {
 		$originalItem = new Item( new ItemId( 'Q123' ) );
-
 		$item = $this->createStub( ItemReadModel::class );
-
 		$itemSerialization = [
 			'id' => 'Q123',
 			'type' => 'item',
@@ -606,95 +603,63 @@ class PatchedItemValidatorTest extends TestCase {
 
 	public function aliasesValidationErrorProvider(): Generator {
 		yield 'invalid aliases - sequential array' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'not', 'an', 'associative', 'array' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
 		];
 
 		yield 'invalid language code - integer' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 3248 => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', '3248' ),
 		];
 
 		yield 'invalid language code - xyz' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'xyz' => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', 'xyz' ),
 		];
 
 		yield 'invalid language code - empty string' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ '' => [ 'alias' ] ],
 			UseCaseError::newPatchResultInvalidKey( '/aliases', '' ),
 		];
 
 		yield "invalid 'aliases in language' list - string" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => 'not a list of aliases in a language' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', 'not a list of aliases in a language' ),
 		];
 
 		yield "invalid 'aliases in language' list - associative array" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [ 'not' => 'a', 'sequential' => 'array' ] ),
 		];
 
 		yield "invalid 'aliases in language' list - empty array" => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en', [] ),
 		];
 
 		yield 'invalid alias - integer' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'en' => [ 3146, 'second alias' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/en/0', 3146 ),
 		];
 
 		yield 'invalid alias - empty string' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ '' ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
 		yield 'invalid alias - only white space' => [
-			$this->createStub( AliasesInLanguageValidator::class ),
 			[ 'de' => [ " \t " ] ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases/de/0', '' ),
 		];
 
-		$tooLongAlias = str_repeat( 'A', self::LIMIT + 1 );
-		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_TOO_LONG, [
-			AliasesInLanguageValidator::CONTEXT_VALUE => $tooLongAlias,
-			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-			AliasesInLanguageValidator::CONTEXT_LIMIT => self::LIMIT,
-		] );
-		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
-		$aliasesInLanguageValidator->method( 'validate' )
-			->with( new AliasGroup( 'en', [ $tooLongAlias ] ) )
-			->willReturn( $expectedResponse );
 		yield 'alias too long' => [
-			$aliasesInLanguageValidator,
-			[ 'en' => [ $tooLongAlias ] ],
+			[ 'en' => [ 'this alias is too long for the configured limit' ] ],
 			UseCaseError::newValueTooLong( '/aliases/en/0', self::LIMIT, true ),
 		];
 
-		$invalidAlias = "tab\t tab\t tab";
-		$expectedResponse = new ValidationError( AliasesInLanguageValidator::CODE_INVALID, [
-			AliasesInLanguageValidator::CONTEXT_VALUE => $invalidAlias,
-			AliasesInLanguageValidator::CONTEXT_LANGUAGE => 'en',
-			AliasesInLanguageValidator::CONTEXT_PATH => 'en/1',
-		] );
-		$aliasesInLanguageValidator = $this->createMock( AliasesInLanguageValidator::class );
-		$aliasesInLanguageValidator->method( 'validate' )
-			->with( new AliasGroup( 'en', [ 'valid alias', $invalidAlias ] ) )
-			->willReturn( $expectedResponse );
 		yield 'alias contains invalid character' => [
-			$aliasesInLanguageValidator,
-			[ 'en' => [ 'valid alias', $invalidAlias ] ],
-			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', $invalidAlias ),
+			[ 'en' => [ 'valid alias', "tabs \t not \t allowed" ] ],
+			UseCaseError::newPatchResultInvalidValue( '/aliases/en/1', "tabs \t not \t allowed" ),
 		];
 	}
 
@@ -1105,6 +1070,7 @@ class PatchedItemValidatorTest extends TestCase {
 	private function newValidator(): PatchedItemValidator {
 		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
 		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
+		$allowedLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
 		return new PatchedItemValidator(
 			$this->labelsSyntaxValidator,
@@ -1112,8 +1078,17 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->descriptionsSyntaxValidator,
 			$this->descriptionsContentsValidator,
 			new AliasesValidator(
-				$this->aliasesInLanguageValidator,
-				new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'fr' ] ) ),
+				new TermValidatorFactoryAliasesInLanguageValidator(
+					new TermValidatorFactory(
+						self::MAX_LENGTH,
+						$allowedLanguageCodes,
+						$this->createStub( EntityIdParser::class ),
+						$this->createStub( TermsCollisionDetectorFactory::class ),
+						WikibaseRepo::getTermLookup(),
+						$this->createStub( LanguageNameUtils::class )
+					)
+				),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( $allowedLanguageCodes ) ),
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			),
 			new SitelinksValidator(

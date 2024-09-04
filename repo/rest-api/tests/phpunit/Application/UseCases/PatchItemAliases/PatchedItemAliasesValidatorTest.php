@@ -28,7 +28,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  */
 class PatchedItemAliasesValidatorTest extends TestCase {
 
-	private const LIMIT = 50;
+	private const MAX_LENGTH = 40;
 
 	/**
 	 * @dataProvider validAliasesProvider
@@ -123,8 +123,8 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 		];
 
 		yield 'invalid alias - too long' => [
-			UseCaseError::newValueTooLong( '/en/0', self::LIMIT, true ),
-			[ 'en' => [ str_repeat( 'A', self::LIMIT + 1 ) ] ],
+			UseCaseError::newValueTooLong( '/en/0', self::MAX_LENGTH, true ),
+			[ 'en' => [ 'this alias is too long for the configured limit' ] ],
 		];
 	}
 
@@ -134,7 +134,7 @@ class PatchedItemAliasesValidatorTest extends TestCase {
 			new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			new TermValidatorFactoryAliasesInLanguageValidator(
 				new TermValidatorFactory(
-					self::LIMIT,
+					self::MAX_LENGTH,
 					$validLanguageCodes,
 					$this->createStub( EntityIdParser::class ),
 					$this->createStub( TermsCollisionDetectorFactory::class ),

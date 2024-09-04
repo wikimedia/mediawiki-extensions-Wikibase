@@ -10,7 +10,6 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
@@ -254,15 +253,13 @@ class PatchedPropertyValidator {
 					throw UseCaseError::newPatchResultInvalidValue( "/aliases/$language", $aliasesSerialization[$language] );
 				case AliasesInLanguageValidator::CODE_INVALID:
 					throw UseCaseError::newPatchResultInvalidValue(
-						"/aliases/{$context[AliasesInLanguageValidator::CONTEXT_PATH]}",
+						$context[AliasesInLanguageValidator::CONTEXT_PATH],
 						$context[AliasesInLanguageValidator::CONTEXT_VALUE]
 					);
 				case AliasesInLanguageValidator::CODE_TOO_LONG:
+					$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
-					$language = $context[AliasesInLanguageValidator::CONTEXT_LANGUAGE];
-					$aliasValue = $context[AliasesInLanguageValidator::CONTEXT_VALUE];
-					$aliasIndex = Utils::getIndexOfValueInSerialization( $aliasValue, $aliasesSerialization[$language] );
-					throw UseCaseError::newValueTooLong( "/aliases/$language/$aliasIndex", $limit, true );
+					throw UseCaseError::newValueTooLong( $path, $limit, true );
 				default:
 					throw new LogicException( "Unexpected validation error code: $errorCode" );
 			}
