@@ -116,8 +116,11 @@ class AliasesValidatorTest extends TestCase {
 
 		yield "invalid 'aliases in language' list - string" => [
 			new ValidationError(
-				AliasesValidator::CODE_INVALID_ALIAS_LIST,
-				[ AliasesValidator::CONTEXT_LANGUAGE => 'en' ]
+				AliasesValidator::CODE_INVALID_VALUE,
+				[
+					AliasesValidator::CONTEXT_PATH => '/item/aliases/en',
+					AliasesValidator::CONTEXT_VALUE => 'not a list of aliases in a language',
+				]
 			),
 			[ 'en' => 'not a list of aliases in a language' ],
 			'/item/aliases',
