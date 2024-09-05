@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 use DataValues\DataValue;
 use Language;
 use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\MwEraParser;
@@ -18,10 +18,7 @@ use Wikibase\Repo\Parsers\MwEraParser;
  * @group TimeParsers
  * @license GPL-2.0-or-later
  */
-class MwEraParserTest extends \PHPUnit\Framework\TestCase {
-
-	/** @var LanguageFactory */
-	private $oldLangFactory;
+class MwEraParserTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @see ValueParserTestBase::getInstance
@@ -38,27 +35,9 @@ class MwEraParserTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$services = MediaWikiServices::getInstance();
-		$this->oldLangFactory = $services->getLanguageFactory();
 		$stub = $this->createMock( LanguageFactory::class );
 		$stub->method( 'getLanguage' )->willReturn( $this->getLanguage() );
-		$services->disableService( 'LanguageFactory' );
-		$services->redefineService( 'LanguageFactory',
-			function () use ( $stub ) {
-				return $stub;
-			}
-		);
-	}
-
-	protected function tearDown(): void {
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
-		MediaWikiServices::getInstance()->redefineService(
-			'LanguageFactory',
-			function () {
-				return $this->oldLangFactory;
-			}
-		);
-		parent::tearDown();
+		$this->setService( 'LanguageFactory', $stub );
 	}
 
 	private function getLanguage() {
