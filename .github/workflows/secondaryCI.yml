@@ -89,8 +89,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
+        username: ${{secrets.WMDE_CI_MAIL_USERNAME}}
+        password: ${{secrets.WMDE_CI_MAIL_PASSWORD}}
         subject: Github Action job failed for Wikibase
         html_body: |
           Job secondary-ci failed!
