@@ -58,7 +58,7 @@ class ItemValidator {
 			}
 		}
 
-		$validationError = $this->validateLabelsAndDescriptions( $serialization ) ??
+		$validationError = $this->validateLabelsAndDescriptions( $serialization, $basePath ) ??
 			$this->aliasesValidator->validate( $serialization['aliases'], "$basePath/aliases" ) ??
 			$this->itemStatementsValidator->validate( $serialization['statements'], "$basePath/statements" ) ??
 			$this->sitelinksValidator->validate( null, $serialization['sitelinks'], null, "$basePath/sitelinks" );
@@ -87,9 +87,9 @@ class ItemValidator {
 		return $this->deserializedItem;
 	}
 
-	private function validateLabelsAndDescriptions( array $itemSerialization ): ?ValidationError {
-		return $this->labelsSyntaxValidator->validate( $itemSerialization['labels'] ) ??
-			$this->descriptionsSyntaxValidator->validate( $itemSerialization['descriptions'] ) ??
+	private function validateLabelsAndDescriptions( array $itemSerialization, string $basePath ): ?ValidationError {
+		return $this->labelsSyntaxValidator->validate( $itemSerialization['labels'], "$basePath/labels" ) ??
+			$this->descriptionsSyntaxValidator->validate( $itemSerialization['descriptions'], "$basePath/descriptions" ) ??
 			$this->labelsContentsValidator->validate(
 				$this->labelsSyntaxValidator->getPartiallyValidatedLabels(),
 				$this->descriptionsSyntaxValidator->getPartiallyValidatedDescriptions()

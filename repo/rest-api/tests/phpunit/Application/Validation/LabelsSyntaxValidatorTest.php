@@ -47,10 +47,10 @@ class LabelsSyntaxValidatorTest extends TestCase {
 	/**
 	 * @dataProvider invalidLabelsProvider
 	 */
-	public function testInvalid( array $serialization, ValidationError $expectedError ): void {
+	public function testInvalid( array $serialization, ValidationError $expectedError, string $basePath ): void {
 		$this->assertEquals(
 			$expectedError,
-			$this->newValidator()->validate( $serialization )
+			$this->newValidator()->validate( $serialization, $basePath )
 		);
 	}
 
@@ -62,6 +62,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
 				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
 			),
+			'',
 		];
 
 		yield 'invalid language code - integer' => [
@@ -70,9 +71,10 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => '9729',
-					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
+					LanguageCodeValidator::CONTEXT_PATH => '/labels',
 				]
 			),
+			'/labels',
 		];
 
 		yield 'invalid language code - not in the allowed list' => [
@@ -81,9 +83,10 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'invalid-language',
-					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
+					LanguageCodeValidator::CONTEXT_PATH => '',
 				]
 			),
+			'',
 		];
 
 		yield 'invalid label - integer' => [
@@ -95,6 +98,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 					LabelsSyntaxValidator::CONTEXT_LABEL => 6729,
 				]
 			),
+			'/item/labels',
 		];
 
 		yield 'invalid label - zero length string' => [
@@ -103,6 +107,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
 				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
+			'/property/labels',
 		];
 
 		yield 'invalid label - whitespace only' => [
@@ -111,6 +116,7 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
 				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
+			'',
 		];
 	}
 

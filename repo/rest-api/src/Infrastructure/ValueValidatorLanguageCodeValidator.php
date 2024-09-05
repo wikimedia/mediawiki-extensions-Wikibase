@@ -20,12 +20,12 @@ class ValueValidatorLanguageCodeValidator
 		$this->validator = $validator;
 	}
 
-	public function validate( string $language ): ?ValidationError {
-		$result = $this->validator->validate( $language );
+	public function validate( string $languageCode, string $basePath = '' ): ?ValidationError {
+		$result = $this->validator->validate( $languageCode );
 		if ( !$result->isValid() ) {
 			return new ValidationError(
 				self::CODE_INVALID_LANGUAGE_CODE,
-				[ self::CONTEXT_LANGUAGE_CODE => $language ]
+				[ self::CONTEXT_LANGUAGE_CODE => $languageCode, self::CONTEXT_PATH => $basePath ]
 			);
 		}
 

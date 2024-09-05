@@ -47,10 +47,10 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 	/**
 	 * @dataProvider invalidDescriptionsProvider
 	 */
-	public function testInvalid( array $serialization, ValidationError $expectedError ): void {
+	public function testInvalid( array $serialization, ValidationError $expectedError, string $basePath ): void {
 		$this->assertEquals(
 			$expectedError,
-			$this->newValidator()->validate( $serialization )
+			$this->newValidator()->validate( $serialization, $basePath )
 		);
 	}
 
@@ -62,6 +62,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE,
 				[ DescriptionsSyntaxValidator::CONTEXT_VALUE => $invalidDescriptions ]
 			),
+			'',
 		];
 
 		yield 'invalid language code - integer' => [
@@ -70,9 +71,10 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => '4290',
-					LanguageCodeValidator::CONTEXT_FIELD => 'descriptions',
+					LanguageCodeValidator::CONTEXT_PATH => '/descriptions',
 				]
 			),
+			'/descriptions',
 		];
 
 		yield 'invalid language code - not in the allowed list' => [
@@ -81,9 +83,10 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'invalid-language',
-					LanguageCodeValidator::CONTEXT_FIELD => 'descriptions',
+					LanguageCodeValidator::CONTEXT_PATH => '',
 				]
 			),
+			'',
 		];
 
 		yield 'invalid description - integer' => [
@@ -95,6 +98,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 					DescriptionsSyntaxValidator::CONTEXT_DESCRIPTION => 2421,
 				]
 			),
+			'/item/descriptions',
 		];
 
 		yield 'invalid description - zero length string' => [
@@ -103,6 +107,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
 				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
+			'',
 		];
 
 		yield 'invalid description - whitespace only' => [
@@ -111,6 +116,7 @@ class DescriptionsSyntaxValidatorTest extends TestCase {
 				DescriptionsSyntaxValidator::CODE_EMPTY_DESCRIPTION,
 				[ DescriptionsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
+			'/property/descriptions',
 		];
 	}
 

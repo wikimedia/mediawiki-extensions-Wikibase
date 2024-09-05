@@ -45,15 +45,9 @@ class AliasesValidator {
 		}
 
 		foreach ( $aliases as $languageCode => $aliasesInLanguage ) {
-			$languageValidationError = $this->languageCodeValidator->validate( (string)$languageCode );
+			$languageValidationError = $this->languageCodeValidator->validate( (string)$languageCode, $basePath );
 			if ( $languageValidationError ) {
-				return new ValidationError(
-					LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
-					array_merge(
-						$languageValidationError->getContext(),
-						[ LanguageCodeValidator::CONTEXT_FIELD => 'aliases' ]
-					)
-				);
+				return $languageValidationError;
 			}
 		}
 

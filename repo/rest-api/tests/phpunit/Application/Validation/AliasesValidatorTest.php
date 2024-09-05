@@ -83,7 +83,7 @@ class AliasesValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 4602,
-					LanguageCodeValidator::CONTEXT_FIELD => 'aliases',
+					LanguageCodeValidator::CONTEXT_PATH => '/item/aliases',
 				]
 			),
 			[ 4602 => [ 'alias 1', 'alias 2' ] ],
@@ -95,7 +95,7 @@ class AliasesValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => 'xyz',
-					LanguageCodeValidator::CONTEXT_FIELD => 'aliases',
+					LanguageCodeValidator::CONTEXT_PATH => '/property/aliases',
 				]
 			),
 			[ 'xyz' => [ 'alias 1', 'alias 2' ] ],
@@ -107,7 +107,7 @@ class AliasesValidatorTest extends TestCase {
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
 				[
 					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => '',
-					LanguageCodeValidator::CONTEXT_FIELD => 'aliases',
+					LanguageCodeValidator::CONTEXT_PATH => '',
 				]
 			),
 			[ '' => [ 'alias 1', 'alias 2' ] ],
