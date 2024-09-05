@@ -229,8 +229,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"sitelink-not-defined": {
-						"$ref": "./examples.json#/SitelinkNotDefinedExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}

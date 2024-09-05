@@ -3950,8 +3950,8 @@
               "item-not-found": {
                 "$ref": "#/components/examples/ItemNotFoundExample"
               },
-              "sitelink-not-defined": {
-                "$ref": "#/components/examples/SitelinkNotDefinedExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -7122,10 +7122,13 @@
           "message": "Could not find a statement with the ID: {statement_id}"
         }
       },
-      "SitelinkNotDefinedExample": {
+      "ResourceNotFoundExample": {
         "value": {
-          "code": "sitelink-not-defined",
-          "message": "No sitelink found for the ID: {item_id} for the site {site_id}"
+          "code": "resource-not-found",
+          "message": "The requested resource does not exist",
+          "context": {
+            "resource_type": "{resource_type}"
+          }
         }
       },
       "ItemLabelNotDefinedExample": {
