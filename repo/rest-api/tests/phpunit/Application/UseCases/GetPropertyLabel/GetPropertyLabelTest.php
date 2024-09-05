@@ -82,10 +82,7 @@ class GetPropertyLabelTest extends TestCase {
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals(
-				new UseCaseError(
-					UseCaseError::LABEL_NOT_DEFINED,
-					"Property with the ID {$propertyId} does not have a label in the language: {$languageCode}"
-				),
+				UseCaseError::newResourceNotFound( 'label' ),
 				$e
 			);
 		}

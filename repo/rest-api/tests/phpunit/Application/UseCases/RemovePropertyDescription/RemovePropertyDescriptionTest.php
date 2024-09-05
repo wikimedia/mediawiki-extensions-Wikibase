@@ -129,9 +129,9 @@ class RemovePropertyDescriptionTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::DESCRIPTION_NOT_DEFINED, $e->getErrorCode() );
-			$this->assertStringContainsString( (string)$propertyId, $e->getErrorMessage() );
-			$this->assertStringContainsString( $language, $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::RESOURCE_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'The requested resource does not exist', $e->getErrorMessage() );
+			$this->assertSame( [ 'resource_type' => 'description' ], $e->getErrorContext() );
 		}
 	}
 

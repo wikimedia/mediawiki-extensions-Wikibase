@@ -141,9 +141,8 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			const response = await newRemoveItemDescriptionRequestBuilder( testItemId, languageCode )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'description-not-defined' );
-			assert.include( response.body.message, testItemId );
-			assert.include( response.body.message, languageCode );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'description' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

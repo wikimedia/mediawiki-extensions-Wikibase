@@ -40,10 +40,7 @@ class GetItemAliasesInLanguage {
 
 		$aliases = $this->itemAliasesInLanguageRetriever->getAliasesInLanguage( $itemId, $languageCode );
 		if ( !$aliases ) {
-			throw new UseCaseError(
-				UseCaseError::ALIASES_NOT_DEFINED,
-				"Item with the ID $itemId does not have aliases in the language: $languageCode"
-			);
+			throw UseCaseError::newResourceNotFound( 'aliases' );
 		}
 
 		return new GetItemAliasesInLanguageResponse( $aliases, $lastModified, $revisionId );

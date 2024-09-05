@@ -28,7 +28,11 @@ class UseCaseErrorTest extends TestCase {
 	}
 
 	public function provideValidUseCaseErrorData(): Generator {
-		yield 'valid error without context' => [ UseCaseError::ALIASES_NOT_DEFINED, 'aliases not defined' ];
+		yield 'valid error without context' => [
+			UseCaseError::RESOURCE_NOT_FOUND,
+			'The requested resource does not exist',
+			[ UseCaseError::CONTEXT_RESOURCE_TYPE => 'aliases' ],
+		];
 
 		yield 'valid error with context' => [
 			UseCaseError::INVALID_PATH_PARAMETER,

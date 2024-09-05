@@ -37,10 +37,7 @@ class GetPropertyAliasesInLanguage {
 
 		$aliases = $this->propertyAliasesRetriever->getAliasesInLanguage( $propertyId, $languageCode );
 		if ( !$aliases ) {
-			throw new UseCaseError(
-				UseCaseError::ALIASES_NOT_DEFINED,
-				"Property with the ID $propertyId does not have aliases in the language: $languageCode"
-			);
+			throw UseCaseError::newResourceNotFound( 'aliases' );
 		}
 
 		return new GetPropertyAliasesInLanguageResponse( $aliases, $lastModified, $revisionId );

@@ -39,10 +39,7 @@ class GetItemDescription {
 
 		$description = $this->itemDescriptionRetriever->getDescription( $itemId, $languageCode );
 		if ( $description === null ) {
-			throw new UseCaseError(
-				UseCaseError::DESCRIPTION_NOT_DEFINED,
-				"Item with the ID {$itemId} does not have a description in the language: {$languageCode}"
-			);
+			throw UseCaseError::newResourceNotFound( 'description' );
 		}
 
 		return new GetItemDescriptionResponse(

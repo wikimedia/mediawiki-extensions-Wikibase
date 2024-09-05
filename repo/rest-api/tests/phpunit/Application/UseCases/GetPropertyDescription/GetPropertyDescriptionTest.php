@@ -80,10 +80,7 @@ class GetPropertyDescriptionTest extends TestCase {
 			$this->fail( 'expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals(
-				new UseCaseError(
-					UseCaseError::DESCRIPTION_NOT_DEFINED,
-					"Property with the ID $propertyId does not have a description in the language: $languageCode"
-				),
+				UseCaseError::newResourceNotFound( 'description' ),
 				$e
 			);
 		}

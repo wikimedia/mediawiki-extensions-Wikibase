@@ -279,8 +279,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::ALIASES_NOT_DEFINED, '' ),
-					$hasErrorCode ( UseCaseError::ALIASES_NOT_DEFINED ),
+					UseCaseError::newResourceNotFound( 'aliases' ),
+					$hasErrorCode ( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
