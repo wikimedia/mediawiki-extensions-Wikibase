@@ -57,7 +57,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
-			"400": { "$ref": "../../global/responses.json#/InvalidStatementPatch" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"404": { "$ref": "../../global/responses.json#/StatementNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

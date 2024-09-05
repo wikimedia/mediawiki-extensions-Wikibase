@@ -35,7 +35,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/ItemPatch" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Item" },
-			"400": { "$ref": "../../global/responses.json#/InvalidItemPatch" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyItemPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

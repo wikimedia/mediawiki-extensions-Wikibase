@@ -16,7 +16,7 @@
 			"200": { "$ref": "../../global/responses.json#/ItemStatements" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveItemStatementsInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementsInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -35,7 +35,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
 			"201": { "$ref": "../../global/responses.json#/ItemStatementCreated" },
-			"400": { "$ref": "../../global/responses.json#/InvalidNewItemStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
