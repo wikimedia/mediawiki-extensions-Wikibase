@@ -15,7 +15,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatements" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRetrievePropertyStatementsInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementsInput" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -34,7 +34,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
 			"201": { "$ref": "../../global/responses.json#/PropertyStatementCreated" },
-			"400": { "$ref": "../../global/responses.json#/InvalidNewPropertyStatementInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }

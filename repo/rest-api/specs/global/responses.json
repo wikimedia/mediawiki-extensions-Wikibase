@@ -448,7 +448,7 @@
 			}
 		}
 	},
-	"InvalidItemIdInput": {
+	"InvalidEntityIdInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -465,42 +465,7 @@
 			}
 		}
 	},
-	"InvalidPropertyIdInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidRetrieveItemStatementsInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-query-parameter": { "$ref": "./examples.json#/InvalidQueryParameterExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidRetrievePropertyStatementsInput": {
+	"InvalidRetrieveStatementsInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -571,27 +536,7 @@
 			}
 		}
 	},
-	"InvalidNewItemStatementInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidNewPropertyStatementInput": {
+	"InvalidNewStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -781,7 +726,7 @@
 			}
 		}
 	},
-	"InvalidSetItemLabelInput": {
+	"InvalidSetLabelInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -801,27 +746,7 @@
 			}
 		}
 	},
-	"InvalidSetPropertyLabelInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidSetItemDescriptionInput": {
+	"InvalidSetDescriptionInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -841,27 +766,7 @@
 			}
 		}
 	},
-	"InvalidSetPropertyDescriptionInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidRemoveItemLabelInput": {
+	"InvalidRemoveLabelInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -880,7 +785,7 @@
 			}
 		}
 	},
-	"InvalidRemovePropertyLabelInput": {
+	"InvalidRemoveDescriptionInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -899,65 +804,7 @@
 			}
 		}
 	},
-	"InvalidRemoveItemDescriptionInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidRemovePropertyDescriptionInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidAddItemAliasesInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidAddPropertyAliasesInput": {
+	"InvalidAddAliasesInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -994,7 +841,7 @@
 			}
 		}
 	},
-	"InvalidItemTermByLanguageInput": {
+	"InvalidTermByLanguageInput": {
 		"description": "The request cannot be processed",
 		"content": {
 			"application/json": {
@@ -1011,64 +858,7 @@
 			}
 		}
 	},
-	"InvalidPropertyTermByLanguageInput": {
-		"description": "The request cannot be processed",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidItemPatch": {
-		"description": "The provided JSON Patch request is invalid",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidPropertyTermPatch": {
-		"description": "The provided JSON Patch request is invalid",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidPropertyPatch": {
+	"InvalidPatch": {
 		"description": "The provided JSON Patch request is invalid",
 		"content": {
 			"application/json": {
@@ -1204,7 +994,7 @@
 			}
 		}
 	},
-	"InvalidPatchedItemLabels": {
+	"InvalidPatchedLabels": {
 		"description": "Applying the provided JSON Patch results in invalid Labels",
 		"content": {
 			"application/json": {
@@ -1224,47 +1014,7 @@
 			}
 		}
 	},
-	"InvalidPatchedPropertyLabels": {
-		"description": "Applying the provided JSON Patch results in invalid Labels",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
-					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidPatchedItemDescriptions": {
-		"description": "Applying the provided JSON Patch results in invalid descriptions",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
-					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
-					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidPatchedPropertyDescriptions": {
+	"InvalidPatchedDescriptions": {
 		"description": "Applying the provided JSON Patch results in invalid descriptions",
 		"content": {
 			"application/json": {
@@ -1293,26 +1043,6 @@
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" }
-				}
-			}
-		},
-		"headers": {
-			"Content-Language": {
-				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
-			}
-		}
-	},
-	"InvalidStatementPatch": {
-		"description": "The provided JSON Patch is invalid",
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "./response-parts.json#/Error" },
-				"examples": {
-					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
-					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
 				}
 			}
 		},

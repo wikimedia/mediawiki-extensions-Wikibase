@@ -14,7 +14,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyAliases" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidPropertyIdInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidEntityIdInput" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -33,7 +33,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/AliasesPatch" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyAliases" },
-			"400": { "$ref": "../../global/responses.json#/InvalidPropertyTermPatch" },
+			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyPropertyPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

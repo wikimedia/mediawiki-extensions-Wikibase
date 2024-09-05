@@ -16,7 +16,7 @@
 			"200": { "$ref": "../../global/responses.json#/Label" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidItemTermByLanguageInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemLabelNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -46,7 +46,7 @@
 				"description": "The newly added Label in a specific language"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidSetItemLabelInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidSetLabelInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
@@ -70,7 +70,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/LabelDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRemoveItemLabelInput" },
+			"400": { "$ref": "../../global/responses.json#/InvalidRemoveLabelInput" },
 			"404": { "$ref": "../../global/responses.json#/ItemLabelNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

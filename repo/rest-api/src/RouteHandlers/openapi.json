@@ -184,7 +184,7 @@
             "$ref": "#/components/responses/Item"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -242,7 +242,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -283,7 +283,7 @@
             "$ref": "#/components/responses/Sitelinks"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -545,7 +545,7 @@
             "$ref": "#/components/responses/Property"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -603,7 +603,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -645,7 +645,7 @@
             "$ref": "#/components/responses/ItemDescriptions"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -657,7 +657,7 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "$ref": "#/components/responses/InvalidPatchedItemDescriptions"
+            "$ref": "#/components/responses/InvalidPatchedDescriptions"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -700,7 +700,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -742,7 +742,7 @@
             "$ref": "#/components/responses/PropertyDescriptions"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -754,7 +754,7 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "$ref": "#/components/responses/InvalidPatchedPropertyDescriptions"
+            "$ref": "#/components/responses/InvalidPatchedDescriptions"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -803,7 +803,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemDescriptionNotFound"
@@ -861,7 +861,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidSetItemDescriptionInput"
+            "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -917,7 +917,7 @@
             "$ref": "#/components/responses/DescriptionDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemoveItemDescriptionInput"
+            "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemDescriptionNotFound"
@@ -972,7 +972,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyDescriptionNotFound"
@@ -1030,7 +1030,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidSetPropertyDescriptionInput"
+            "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -1083,7 +1083,7 @@
             "$ref": "#/components/responses/DescriptionDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemovePropertyDescriptionInput"
+            "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyDescriptionNotFound"
@@ -1138,7 +1138,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRetrieveItemStatementsInput"
+            "$ref": "#/components/responses/InvalidRetrieveStatementsInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1179,7 +1179,7 @@
             "$ref": "#/components/responses/ItemStatementCreated"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidNewItemStatementInput"
+            "$ref": "#/components/responses/InvalidNewStatementInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1428,7 +1428,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1469,7 +1469,7 @@
             "$ref": "#/components/responses/ItemLabels"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1481,7 +1481,7 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "$ref": "#/components/responses/InvalidPatchedItemLabels"
+            "$ref": "#/components/responses/InvalidPatchedLabels"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1524,7 +1524,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -1565,7 +1565,7 @@
             "$ref": "#/components/responses/PropertyLabels"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -1577,7 +1577,7 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "$ref": "#/components/responses/InvalidPatchedPropertyLabels"
+            "$ref": "#/components/responses/InvalidPatchedLabels"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1626,7 +1626,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemLabelNotFound"
@@ -1684,7 +1684,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidSetItemLabelInput"
+            "$ref": "#/components/responses/InvalidSetLabelInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1740,7 +1740,7 @@
             "$ref": "#/components/responses/LabelDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemoveItemLabelInput"
+            "$ref": "#/components/responses/InvalidRemoveLabelInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemLabelNotFound"
@@ -1795,7 +1795,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyLabelNotFound"
@@ -1853,7 +1853,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidSetPropertyLabelInput"
+            "$ref": "#/components/responses/InvalidSetLabelInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -1906,7 +1906,7 @@
             "$ref": "#/components/responses/LabelDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemovePropertyLabelInput"
+            "$ref": "#/components/responses/InvalidRemoveLabelInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyLabelNotFound"
@@ -1958,7 +1958,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -1999,7 +1999,7 @@
             "$ref": "#/components/responses/ItemAliases"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -2054,7 +2054,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyIdInput"
+            "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2095,7 +2095,7 @@
             "$ref": "#/components/responses/PropertyAliases"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2156,7 +2156,7 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemAliasesInLanguageNotFound"
@@ -2214,7 +2214,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidAddItemAliasesInput"
+            "$ref": "#/components/responses/InvalidAddAliasesInput"
           },
           "404": {
             "$ref": "#/components/responses/ItemNotFound"
@@ -2269,7 +2269,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyTermByLanguageInput"
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyAliasesInLanguageNotFound"
@@ -2327,7 +2327,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidAddPropertyAliasesInput"
+            "$ref": "#/components/responses/InvalidAddAliasesInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2379,7 +2379,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRetrievePropertyStatementsInput"
+            "$ref": "#/components/responses/InvalidRetrieveStatementsInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2420,7 +2420,7 @@
             "$ref": "#/components/responses/PropertyStatementCreated"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidNewPropertyStatementInput"
+            "$ref": "#/components/responses/InvalidNewStatementInput"
           },
           "404": {
             "$ref": "#/components/responses/PropertyNotFound"
@@ -2748,7 +2748,7 @@
             "$ref": "#/components/responses/Statement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidStatementPatch"
+            "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
             "$ref": "#/components/responses/StatementNotFound"
@@ -4211,7 +4211,7 @@
           }
         }
       },
-      "InvalidItemIdInput": {
+      "InvalidEntityIdInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4234,56 +4234,7 @@
           }
         }
       },
-      "InvalidPropertyIdInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRetrieveItemStatementsInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-query-parameter": {
-                "$ref": "#/components/examples/InvalidQueryParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRetrievePropertyStatementsInput": {
+      "InvalidRetrieveStatementsInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4384,39 +4335,7 @@
           }
         }
       },
-      "InvalidNewItemStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidNewPropertyStatementInput": {
+      "InvalidNewStatementInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4716,7 +4635,7 @@
           }
         }
       },
-      "InvalidSetItemLabelInput": {
+      "InvalidSetLabelInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4748,39 +4667,7 @@
           }
         }
       },
-      "InvalidSetPropertyLabelInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidSetItemDescriptionInput": {
+      "InvalidSetDescriptionInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4812,39 +4699,7 @@
           }
         }
       },
-      "InvalidSetPropertyDescriptionInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemoveItemLabelInput": {
+      "InvalidRemoveLabelInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4873,7 +4728,7 @@
           }
         }
       },
-      "InvalidRemovePropertyLabelInput": {
+      "InvalidRemoveDescriptionInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -4902,97 +4757,7 @@
           }
         }
       },
-      "InvalidRemoveItemDescriptionInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemovePropertyDescriptionInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidAddItemAliasesInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidAddPropertyAliasesInput": {
+      "InvalidAddAliasesInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -5047,7 +4812,7 @@
           }
         }
       },
-      "InvalidItemTermByLanguageInput": {
+      "InvalidTermByLanguageInput": {
         "description": "The request cannot be processed",
         "content": {
           "application/json": {
@@ -5070,94 +4835,7 @@
           }
         }
       },
-      "InvalidPropertyTermByLanguageInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidItemPatch": {
-        "description": "The provided JSON Patch request is invalid",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPropertyTermPatch": {
-        "description": "The provided JSON Patch request is invalid",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPropertyPatch": {
+      "InvalidPatch": {
         "description": "The provided JSON Patch request is invalid",
         "content": {
           "application/json": {
@@ -5373,7 +5051,7 @@
           }
         }
       },
-      "InvalidPatchedItemLabels": {
+      "InvalidPatchedLabels": {
         "description": "Applying the provided JSON Patch results in invalid Labels",
         "content": {
           "application/json": {
@@ -5405,71 +5083,7 @@
           }
         }
       },
-      "InvalidPatchedPropertyLabels": {
-        "description": "Applying the provided JSON Patch results in invalid Labels",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "patch-result-invalid-key": {
-                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
-              },
-              "patch-result-invalid-value": {
-                "$ref": "#/components/examples/PatchResultInvalidValueExample"
-              },
-              "patch-result-value-too-long": {
-                "$ref": "#/components/examples/PatchResultValueTooLongExample"
-              },
-              "data-policy-violation": {
-                "$ref": "#/components/examples/DataPolicyViolationExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPatchedItemDescriptions": {
-        "description": "Applying the provided JSON Patch results in invalid descriptions",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "patch-result-invalid-key": {
-                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
-              },
-              "patch-result-invalid-value": {
-                "$ref": "#/components/examples/PatchResultInvalidValueExample"
-              },
-              "patch-result-value-too-long": {
-                "$ref": "#/components/examples/PatchResultValueTooLongExample"
-              },
-              "data-policy-violation": {
-                "$ref": "#/components/examples/DataPolicyViolationExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPatchedPropertyDescriptions": {
+      "InvalidPatchedDescriptions": {
         "description": "Applying the provided JSON Patch results in invalid descriptions",
         "content": {
           "application/json": {
@@ -5517,38 +5131,6 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidStatementPatch": {
-        "description": "The provided JSON Patch is invalid",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
               }
             }
           }
