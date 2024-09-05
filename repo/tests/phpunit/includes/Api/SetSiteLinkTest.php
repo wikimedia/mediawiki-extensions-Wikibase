@@ -632,8 +632,6 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true ],
 		] );
 
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
-
 		// And an item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -682,8 +680,6 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true ],
 		] );
-
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// Then the request is denied
 		$expected = [

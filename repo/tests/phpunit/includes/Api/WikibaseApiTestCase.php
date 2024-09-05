@@ -73,7 +73,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$customRepoSettings = $wgWBRepoSettings;
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
 		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );

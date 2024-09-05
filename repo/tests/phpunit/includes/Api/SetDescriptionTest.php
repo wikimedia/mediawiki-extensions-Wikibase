@@ -104,8 +104,6 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true ],
 		] );
 
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
-
 		// And an item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -154,8 +152,6 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true ],
 		] );
-
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// Then the request is denied
 		$expected = [
