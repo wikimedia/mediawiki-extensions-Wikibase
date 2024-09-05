@@ -33,7 +33,7 @@
 	"wikibase-statementgrouplistview-add-tooltip": "Legg til ei ny utsegn",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "På fleire språk",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Vis merkelappar, tilleggsnamn og skildringar på alle språka mine når sida vert lasta inn",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Personlege språk i tillegg til språket i brukargrensesnittet kan veljast ved å nytta syntakset frå [[mw:Special:MyLanguage/Extension:Babel|Babel-utvidinga]] på brukarsida.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Personlege språk i tillegg til språket i brukargrensesnittet kan veljast ved å nytta syntaksen frå [[mw:Special:MyLanguage/Extension:Babel|Babel-utvidinga]] på brukarsida.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Dessutan kjend som",
 	"wikibase-entitytermsforlanguagelistview-description": "Skildring",
 	"wikibase-entitytermsforlanguagelistview-label": "Merkelapp",
