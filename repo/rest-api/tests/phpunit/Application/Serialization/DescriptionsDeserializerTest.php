@@ -8,7 +8,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidDescriptionException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer
@@ -44,32 +45,35 @@ class DescriptionsDeserializerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider emptyDescriptionsProvider
+	 * @dataProvider provideInvalidDescriptions
 	 */
-	public function testGivenEmptyDescription_throwsException( string $emptyDescription ): void {
+	public function testGivenEmptyDescription_throwsException(
+		SerializationException $expectedException,
+		array $description
+	): void {
 		try {
-			( new DescriptionsDeserializer() )->deserialize( [ 'en' => $emptyDescription ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( EmptyDescriptionException $e ) {
-			$this->assertSame( 'en', $e->getField() );
+			( new DescriptionsDeserializer() )->deserialize( $description );
+			$this->fail( 'Expected exception not thrown' );
+		} catch ( SerializationException $e ) {
+			$this->assertEquals( $expectedException, $e );
 		}
 	}
 
-	public static function emptyDescriptionsProvider(): Generator {
-		yield 'empty description' => [ '' ];
-		yield 'empty description with spaces' => [ '   ' ];
-		yield 'empty description with tabs' => [ "\t\t" ];
-		yield 'empty description with spaces and tabs' => [ " \t \t " ];
-	}
+	public static function provideInvalidDescriptions(): Generator {
+		yield 'invalid description - int' => [
+			new InvalidDescriptionException( 'en', 1954 ),
+			[ 'en' => 1954 ],
+		];
 
-	public function testGivenInvalidDescriptionType_throwsException(): void {
-		try {
-			( new DescriptionsDeserializer() )->deserialize( [ 'en' => 123 ] );
-			$this->fail( 'this should not be reached' );
-		} catch ( InvalidFieldException $e ) {
-			$this->assertSame( 'en', $e->getField() );
-			$this->assertSame( 123, $e->getValue() );
-		}
+		yield 'invalid description - zero length string' => [
+			new EmptyDescriptionException( 'en', '' ),
+			[ 'en' => '' ],
+		];
+
+		yield 'invalid description - whitespace only' => [
+			new EmptyDescriptionException( '5971', '' ),
+			[ 5971 => " \t " ],
+		];
 	}
 
 }

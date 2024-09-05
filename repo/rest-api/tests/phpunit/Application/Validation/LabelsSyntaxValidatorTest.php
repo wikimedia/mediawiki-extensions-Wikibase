@@ -55,7 +55,27 @@ class LabelsSyntaxValidatorTest extends TestCase {
 	}
 
 	public static function invalidLabelsProvider(): Generator {
-		yield 'invalid language code' => [
+		$invalidLabels = [ 'some label', 'some other label' ];
+		yield 'invalid labels - sequential array' => [
+			$invalidLabels,
+			new ValidationError(
+				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
+				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
+			),
+		];
+
+		yield 'invalid language code - integer' => [
+			[ 9729 => 'some label' ],
+			new ValidationError(
+				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
+				[
+					LanguageCodeValidator::CONTEXT_LANGUAGE_CODE => '9729',
+					LanguageCodeValidator::CONTEXT_FIELD => 'labels',
+				]
+			),
+		];
+
+		yield 'invalid language code - not in the allowed list' => [
 			[ 'invalid-language' => 'some label' ],
 			new ValidationError(
 				LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE,
@@ -65,29 +85,31 @@ class LabelsSyntaxValidatorTest extends TestCase {
 				]
 			),
 		];
-		$invalidLabels = [ 'some label', 'some other label' ];
-		yield 'labels not associative' => [
-			$invalidLabels,
+
+		yield 'invalid label - integer' => [
+			[ 'de' => 6729 ],
 			new ValidationError(
-				LabelsSyntaxValidator::CODE_LABELS_NOT_ASSOCIATIVE,
-				[ LabelsSyntaxValidator::CONTEXT_VALUE => $invalidLabels ]
+				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
+				[
+					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
+					LabelsSyntaxValidator::CONTEXT_LABEL => 6729,
+				]
 			),
 		];
-		yield 'label empty' => [
+
+		yield 'invalid label - zero length string' => [
 			[ 'de' => '' ],
 			new ValidationError(
 				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
 				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
-		yield 'invalid label type' => [
-			[ 'de' => 7 ],
+
+		yield 'invalid label - whitespace only' => [
+			[ 'de' => " \t " ],
 			new ValidationError(
-				LabelsSyntaxValidator::CODE_INVALID_LABEL_TYPE,
-				[
-					LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de',
-					LabelsSyntaxValidator::CONTEXT_LABEL => 7,
-				]
+				LabelsSyntaxValidator::CODE_EMPTY_LABEL,
+				[ LabelsSyntaxValidator::CONTEXT_LANGUAGE => 'de' ]
 			),
 		];
 	}

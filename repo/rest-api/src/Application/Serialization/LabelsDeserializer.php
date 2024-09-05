@@ -18,8 +18,10 @@ class LabelsDeserializer {
 	 */
 	public function deserialize( array $serialization ): TermList {
 		$terms = [];
-
 		foreach ( $serialization as $language => $text ) {
+			// casting to string required - while json keys are always strings, php converts numeric keys to integers
+			$language = (string)$language;
+
 			if ( !is_string( $text ) ) {
 				throw new InvalidLabelException( $language, $text );
 			}
@@ -28,6 +30,7 @@ class LabelsDeserializer {
 			if ( $trimmedText === '' ) {
 				throw new EmptyLabelException( $language, '' );
 			}
+
 			$terms[] = new Term( $language, $trimmedText );
 		}
 
