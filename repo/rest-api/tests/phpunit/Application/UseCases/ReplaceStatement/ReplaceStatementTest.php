@@ -220,7 +220,7 @@ class ReplaceStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
+			$this->assertEquals( UseCaseError::newResourceNotFound( 'statement' ), $e );
 		}
 	}
 

@@ -109,8 +109,8 @@ describe( 'GET statement', () => {
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+					assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 				} );
 			} );
 		} );
@@ -157,15 +157,15 @@ describe( 'GET statement', () => {
 			assert.include( response.body.message, propertyId );
 		} );
 
-		it( 'responds statement-not-found if property and subject prefix exist but statement does not', async () => {
+		it( 'responds statement not found if property and subject prefix exist but statement does not', async () => {
 			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 			const statementId = `${requestedPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, statementId )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 		it( 'responds property-statement-id-mismatch if property and statement do not match', async () => {
@@ -180,14 +180,14 @@ describe( 'GET statement', () => {
 	} );
 
 	describe( 'short route specific errors', () => {
-		it( 'responds statement-not-found if property not found', async () => {
+		it( 'responds statement not found if property not found', async () => {
 			const statementId = 'P999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newGetStatementRequestBuilder( statementId )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

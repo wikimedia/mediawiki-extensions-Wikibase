@@ -31,7 +31,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::ITEM_NOT_FOUND => 404,
 		UseCaseError::PROPERTY_NOT_FOUND => 404,
 		UseCaseError::RESOURCE_NOT_FOUND => 404,
-		UseCaseError::STATEMENT_NOT_FOUND => 404,
 
 		// 409 errors:
 		UseCaseError::ITEM_REDIRECTED => 409,

@@ -219,14 +219,14 @@ describe( 'PATCH property statement', () => {
 			} );
 
 			describe( '404 statement not found', () => {
-				it( 'responds 404 statement-not-found for nonexistent statement', async () => {
+				it( 'responds 404 statement not found for nonexistent statement', async () => {
 					const statementId = `${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 					const response = await newPatchRequestBuilder( statementId, [] )
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+					assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 				} );
 			} );
 
@@ -421,14 +421,14 @@ describe( 'PATCH property statement', () => {
 			);
 		} );
 
-		it( 'responds 404 statement-not-found for nonexistent property', async () => {
+		it( 'responds 404 statement not found for nonexistent property', async () => {
 			const statementId = 'P999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

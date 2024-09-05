@@ -103,10 +103,8 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 		} catch ( UseCaseError $exception ) {
 			return $this->responseFactory->newErrorResponseFromException( $exception );
 		} catch ( ItemRedirect $e ) {
-			return $this->responseFactory->newErrorResponse(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
+			return $this->responseFactory
+				->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 		}
 
 		return $this->newSuccessHttpResponse();

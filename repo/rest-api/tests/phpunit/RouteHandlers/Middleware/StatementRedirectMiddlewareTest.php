@@ -57,7 +57,9 @@ class StatementRedirectMiddlewareTest extends TestCase {
 			self::SUBJECT_ID_PATH_PARAM
 		);
 
-		$expectedResponse = new Response( '{ "code": "statement-not-found" }' );
+		$expectedResponse = new Response( json_encode(
+			[ 'code' => 'resource-not-found', 'context' => [ 'resource_type' => 'statement' ] ]
+		) );
 		$expectedResponse->setStatus( 404 );
 		$response = $middleware->run(
 			$this->newRouteHandlerWithRequest( $requestedStatementId, $requestedSubjectId ),
@@ -79,7 +81,9 @@ class StatementRedirectMiddlewareTest extends TestCase {
 			null
 		);
 
-		$expectedResponse = new Response( '{ "code": "statement-not-found" }' );
+		$expectedResponse = new Response( json_encode(
+			[ 'code' => 'resource-not-found', 'context' => [ 'resource_type' => 'statement' ] ]
+		) );
 		$expectedResponse->setStatus( 404 );
 		$response = $middleware->run(
 			$this->newRouteHandlerWithRequest( $requestedStatementId, null ),
@@ -101,7 +105,7 @@ class StatementRedirectMiddlewareTest extends TestCase {
 		);
 
 		$routeHandler = $this->newRouteHandlerWithRequest( $requestedStatementId, 'Q1' );
-		$response = new Response( '{ "code": "statement-not-found" }' );
+		$response = new Response( json_encode( [ 'code' => 'resource-not-found', 'context' => [ 'resource_type' => 'statement' ] ] ) );
 		$response->setStatus( 404 );
 		$response = $middleware->run( $routeHandler, fn() => $response );
 
@@ -123,7 +127,7 @@ class StatementRedirectMiddlewareTest extends TestCase {
 			null
 		);
 
-		$response = new Response( '{ "code": "statement-not-found" }' );
+		$response = new Response( json_encode( [ 'code' => 'resource-not-found', 'context' => [ 'resource_type' => 'statement' ] ] ) );
 		$response->setStatus( 404 );
 
 		$routeHandler = $this->newRouteHandlerWithRequest( $requestedStatementId, null );

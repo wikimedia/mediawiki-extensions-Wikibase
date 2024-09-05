@@ -109,10 +109,8 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	}
 
 	private function respondStatementNotFound( string $statementId ): Response {
-		return $this->responseFactory->newErrorResponse(
-			UseCaseError::STATEMENT_NOT_FOUND,
-			"Could not find a statement with the ID: $statementId"
-		);
+		return $this->responseFactory
+			->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 	}
 
 	public function validate( Validator $restValidator ): void {

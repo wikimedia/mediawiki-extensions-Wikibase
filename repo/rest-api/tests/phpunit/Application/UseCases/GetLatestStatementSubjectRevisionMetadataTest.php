@@ -53,8 +53,7 @@ class GetLatestStatementSubjectRevisionMetadataTest extends TestCase {
 			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $statementId );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertStringContainsString( "$statementId", $e->getErrorMessage() );
+			$this->assertEquals( UseCaseError::newResourceNotFound( 'statement' ), $e );
 		}
 	}
 

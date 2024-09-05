@@ -112,10 +112,8 @@ class PatchStatementRouteHandler extends SimpleHandler {
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $e ) {
-			return $this->responseFactory->newErrorResponse(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
+			return $this->responseFactory
+				->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 		}
 	}
 

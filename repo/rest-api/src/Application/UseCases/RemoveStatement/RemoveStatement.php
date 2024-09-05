@@ -52,10 +52,7 @@ class RemoveStatement {
 
 		$statementToRemove = $this->statementRetriever->getStatementWriteModel( $deserializedRequest->getStatementId() );
 		if ( !$statementToRemove ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: {$deserializedRequest->getStatementId()}"
-			);
+			throw UseCaseError::newResourceNotFound( 'statement' );
 		}
 
 		$editMetadata = new EditMetadata(

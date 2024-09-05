@@ -67,7 +67,9 @@ class StatementRedirectMiddleware implements Middleware {
 	private function isStatementNotFoundResponse( Response $response ): bool {
 		$responseBody = json_decode( (string)$response->getBody(), true );
 		return $response->getStatusCode() === 404 &&
-			is_array( $responseBody ) && $responseBody['code'] === UseCaseError::STATEMENT_NOT_FOUND;
+			is_array( $responseBody ) &&
+			$responseBody['code'] === UseCaseError::RESOURCE_NOT_FOUND &&
+			$responseBody['context']['resource_type'] === 'statement';
 	}
 
 	private function getStatementSubject( ?string $subjectId, string $statementId ): ?StatementListProvidingEntity {

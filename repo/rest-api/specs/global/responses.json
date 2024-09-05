@@ -151,14 +151,14 @@
 			}
 		}
 	},
-	"StatementNotFound": {
-		"description": "The specified Statement was not found",
+	"ResourceNotFound": {
+		"description": "The specified resource was not found",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"statement-not-found": {
-						"$ref": "./examples.json#/StatementNotFoundExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -181,8 +181,8 @@
 					"item-not-found": {
 						"$ref": "./examples.json#/ItemNotFoundExample"
 					},
-					"statement-not-found": {
-						"$ref": "./examples.json#/StatementNotFoundExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}
@@ -205,8 +205,8 @@
 					"property-not-found": {
 						"$ref": "./examples.json#/PropertyNotFoundExample"
 					},
-					"statement-not-found": {
-						"$ref": "./examples.json#/StatementNotFoundExample"
+					"resource-not-found": {
+						"$ref": "./examples.json#/ResourceNotFoundExample"
 					}
 				}
 			}

@@ -143,11 +143,7 @@ class PatchStatementTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame(
-				"Could not find a statement with the ID: $subjectId\$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-				$e->getErrorMessage()
-			);
+			$this->assertEquals( UseCaseError::newResourceNotFound( 'statement' ), $e );
 		}
 	}
 

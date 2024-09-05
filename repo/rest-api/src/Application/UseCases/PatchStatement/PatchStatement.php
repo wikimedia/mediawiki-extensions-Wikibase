@@ -62,10 +62,7 @@ class PatchStatement {
 		$statementToPatch = $this->statementRetriever->getStatement( $statementId );
 
 		if ( !$statementToPatch ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
+			throw UseCaseError::newResourceNotFound( 'statement' );
 		}
 
 		$this->assertUserIsAuthorized->checkEditPermissions( $statementId->getEntityId(), $editMetadata->getUser() );

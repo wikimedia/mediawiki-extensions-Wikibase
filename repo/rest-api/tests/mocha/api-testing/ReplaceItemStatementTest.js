@@ -323,8 +323,8 @@ describe( 'PUT statement tests', () => {
 					const response = await newReplaceRequestBuilder( testItemId, statementId, statement )
 						.assertValidRequest().makeRequest();
 
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+					assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 				} );
 			} );
 		} );
@@ -382,8 +382,8 @@ describe( 'PUT statement tests', () => {
 				.withJsonBodyParam( 'statement', statement )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {
@@ -415,7 +415,7 @@ describe( 'PUT statement tests', () => {
 			);
 		} );
 
-		it( 'responds 404 statement-not-found for nonexistent item', async () => {
+		it( 'responds 404 statement not found for nonexistent item', async () => {
 			const statementId = 'Q9999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 			const response = await newReplaceStatementRequestBuilder( statementId )
@@ -423,8 +423,8 @@ describe( 'PUT statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 		it( 'responds 404 if statement subject is a redirect', async () => {
@@ -435,8 +435,8 @@ describe( 'PUT statement tests', () => {
 				.withJsonBodyParam( 'statement', statement )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

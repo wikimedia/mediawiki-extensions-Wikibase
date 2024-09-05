@@ -67,10 +67,7 @@ class ReplaceStatement {
 				)
 			);
 		} catch ( StatementNotFoundException $e ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
+			throw UseCaseError::newResourceNotFound( 'statement' );
 		} catch ( PropertyChangedException $e ) {
 			throw new UseCaseError(
 				UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE,

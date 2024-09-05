@@ -2667,7 +2667,7 @@
             "$ref": "#/components/responses/InvalidRetrieveStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/StatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2709,7 +2709,7 @@
             "$ref": "#/components/responses/InvalidReplaceStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/StatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2751,7 +2751,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/StatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyStatementPatch"
@@ -2799,7 +2799,7 @@
             "$ref": "#/components/responses/InvalidRemoveStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/StatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -3864,16 +3864,16 @@
           }
         }
       },
-      "StatementNotFound": {
-        "description": "The specified Statement was not found",
+      "ResourceNotFound": {
+        "description": "The specified resource was not found",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "statement-not-found": {
-                "$ref": "#/components/examples/StatementNotFoundExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -3898,8 +3898,8 @@
               "item-not-found": {
                 "$ref": "#/components/examples/ItemNotFoundExample"
               },
-              "statement-not-found": {
-                "$ref": "#/components/examples/StatementNotFoundExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -3924,8 +3924,8 @@
               "property-not-found": {
                 "$ref": "#/components/examples/PropertyNotFoundExample"
               },
-              "statement-not-found": {
-                "$ref": "#/components/examples/StatementNotFoundExample"
+              "resource-not-found": {
+                "$ref": "#/components/examples/ResourceNotFoundExample"
               }
             }
           }
@@ -6696,12 +6696,6 @@
           "context": {
             "redirect_target": "{redirect_target_id}"
           }
-        }
-      },
-      "StatementNotFoundExample": {
-        "value": {
-          "code": "statement-not-found",
-          "message": "Could not find a statement with the ID: {statement_id}"
         }
       },
       "ResourceNotFoundExample": {

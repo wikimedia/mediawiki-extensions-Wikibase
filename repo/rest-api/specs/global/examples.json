@@ -140,12 +140,6 @@
 			}
 		}
 	},
-	"StatementNotFoundExample": {
-		"value": {
-			"code": "statement-not-found",
-			"message": "Could not find a statement with the ID: {statement_id}"
-		}
-	},
 	"ResourceNotFoundExample": {
 		"value": {
 			"code": "resource-not-found",

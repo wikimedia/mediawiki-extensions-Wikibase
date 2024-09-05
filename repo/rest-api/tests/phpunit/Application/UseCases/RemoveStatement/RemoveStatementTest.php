@@ -141,8 +141,7 @@ class RemoveStatementTest extends TestCase {
 
 			$this->fail( 'Exception was not thrown.' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::STATEMENT_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find a statement with the ID: $statementId", $e->getErrorMessage() );
+			$this->assertEquals( UseCaseError::newResourceNotFound( 'statement' ), $e );
 		}
 	}
 

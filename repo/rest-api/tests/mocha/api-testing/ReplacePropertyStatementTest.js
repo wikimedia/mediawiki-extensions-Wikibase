@@ -379,10 +379,8 @@ describe( 'PUT statement tests', () => {
 						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 					).assertValidRequest().makeRequest();
 
-					expect( response ).to.have.status( 404 );
-					assert.header( response, 'Content-Language', 'en' );
-					assert.equal( response.body.code, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+					assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 				} );
 
 			} );
@@ -461,7 +459,7 @@ describe( 'PUT statement tests', () => {
 			);
 		} );
 
-		it( 'responds 404 statement-not-found for nonexistent property', async () => {
+		it( 'responds 404 statement not found for nonexistent property', async () => {
 			const statementId = 'P9999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newReplaceStatementRequestBuilder( statementId )
 				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue(
@@ -469,8 +467,8 @@ describe( 'PUT statement tests', () => {
 				) )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

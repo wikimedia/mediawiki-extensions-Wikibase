@@ -26,10 +26,7 @@ class GetLatestStatementSubjectRevisionMetadata {
 		$metaDataResult = $this->metadataRetriever->getLatestRevisionMetadata( $statementId );
 
 		if ( !$metaDataResult->subjectExists() ) {
-			throw new UseCaseError(
-				UseCaseError::STATEMENT_NOT_FOUND,
-				"Could not find a statement with the ID: $statementId"
-			);
+			throw UseCaseError::newResourceNotFound( 'statement' );
 		}
 
 		if ( $metaDataResult->isRedirect() ) {

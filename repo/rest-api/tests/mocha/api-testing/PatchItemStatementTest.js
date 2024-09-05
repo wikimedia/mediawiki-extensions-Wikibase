@@ -222,14 +222,14 @@ describe( 'PATCH statement tests', () => {
 			} );
 
 			describe( '404 statement not found', () => {
-				it( 'responds 404 statement-not-found for nonexistent statement', async () => {
+				it( 'responds 404 statement not found for nonexistent statement', async () => {
 					const statementId = `${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 					const response = await newPatchRequestBuilder( statementId, [] )
 						.assertValidRequest()
 						.makeRequest();
 
-					assertValidError( response, 404, 'statement-not-found' );
-					assert.include( response.body.message, statementId );
+					assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+					assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 				} );
 			} );
 
@@ -418,8 +418,8 @@ describe( 'PATCH statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 	} );
@@ -438,14 +438,14 @@ describe( 'PATCH statement tests', () => {
 			);
 		} );
 
-		it( 'responds 404 statement-not-found for nonexistent item', async () => {
+		it( 'responds 404 statement not found for nonexistent item', async () => {
 			const statementId = 'Q999999999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newPatchStatementRequestBuilder( statementId, [] )
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 		it( 'responds 404 if statement subject is a redirect', async () => {
@@ -455,8 +455,8 @@ describe( 'PATCH statement tests', () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'statement-not-found' );
-			assert.include( response.body.message, statementId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'statement' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

@@ -61,7 +61,7 @@ class ResponseFactoryTest extends TestCase {
 		yield [ UseCaseError::INVALID_PATH_PARAMETER, 400, [ 'parameter' => '' ] ];
 		yield [ UseCaseError::ITEM_NOT_FOUND, 404 ];
 		yield [ UseCaseError::PROPERTY_NOT_FOUND, 404 ];
-		yield [ UseCaseError::STATEMENT_NOT_FOUND, 404 ];
+		yield [ UseCaseError::RESOURCE_NOT_FOUND, 404, [ 'resource_type' => 'statement' ] ];
 		yield [ UseCaseError::UNEXPECTED_ERROR, 500 ];
 	}
 
