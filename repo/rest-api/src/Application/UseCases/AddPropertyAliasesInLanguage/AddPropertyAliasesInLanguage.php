@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguag
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -15,6 +16,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class AddPropertyAliasesInLanguage {
+
+	use UpdateExceptionHandler;
 
 	private AddPropertyAliasesInLanguageValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -56,7 +59,7 @@ class AddPropertyAliasesInLanguage {
 
 		$property->getAliasGroups()->setAliasesForLanguage( $languageCode, array_unique( array_merge( $originalAliases, $newAliases ) ) );
 
-		$newRevision = $this->propertyUpdater->update(
+		$newRevision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
 				$editMetadata->getTags(),
@@ -66,7 +69,7 @@ class AddPropertyAliasesInLanguage {
 					new AliasGroup( $languageCode, array_diff( $newAliases, $originalAliases ) )
 				)
 			)
-		);
+		) );
 
 		return new AddPropertyAliasesInLanguageResponse(
 			$newRevision->getProperty()->getAliases()[ $languageCode ],

@@ -3877,6 +3877,9 @@
               },
               "invalid-key": {
                 "$ref": "#/components/examples/InvalidKeyExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4059,6 +4062,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4094,6 +4100,9 @@
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4132,6 +4141,9 @@
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4170,6 +4182,9 @@
               },
               "cannot-modify-read-only-value": {
                 "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4327,6 +4342,9 @@
               },
               "referenced-resource-not-found": {
                 "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4359,6 +4377,9 @@
               },
               "missing-field": {
                 "$ref": "#/components/examples/MissingFieldExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4391,6 +4412,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4481,6 +4505,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4574,6 +4601,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4886,6 +4916,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -4921,6 +4954,9 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
+              },
+              "resource-too-large": {
+                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -6342,6 +6378,15 @@
           "message": "Invalid path parameter: '{path_parameter}'",
           "context": {
             "parameter": "{path_parameter}"
+          }
+        }
+      },
+      "ResourceTooLargeExample": {
+        "value": {
+          "code": "resource-too-large",
+          "message": "Edit resulted in a resource that exceeds the size limit of {configured_limit}",
+          "context": {
+            "limit": "configured_limit_as_int"
           }
         }
       },

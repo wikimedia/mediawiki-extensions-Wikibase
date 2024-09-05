@@ -8,7 +8,11 @@ const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
-const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
+const {
+	createEntity,
+	createLocalSitelink,
+	getLocalSiteId
+} = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 const { runAllJobs } = require( 'api-testing/lib/wiki' );
 

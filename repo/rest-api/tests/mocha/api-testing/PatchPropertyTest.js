@@ -149,6 +149,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '400 Bad Request', () => {
+
 		it( 'property ID is invalid', async () => {
 			const response = await newPatchPropertyRequestBuilder( 'X123', [] )
 				.assertInvalidRequest().makeRequest();

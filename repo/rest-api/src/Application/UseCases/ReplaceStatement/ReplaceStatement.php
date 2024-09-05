@@ -7,6 +7,7 @@ use Wikibase\DataModel\Exception\StatementNotFoundException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -16,6 +17,8 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
  * @license GPL-2.0-or-later
  */
 class ReplaceStatement {
+
+	use UpdateExceptionHandler;
 
 	private ReplaceStatementValidator $validator;
 	private AssertStatementSubjectExists $assertStatementSubjectExists;
@@ -58,14 +61,14 @@ class ReplaceStatement {
 		}
 
 		try {
-			$newRevision = $this->statementUpdater->update(
+			$newRevision = $this->executeWithExceptionHandling( fn() => $this->statementUpdater->update(
 				$statement,
 				new EditMetadata(
 					$editMetadata->getTags(),
 					$editMetadata->isBot(),
 					StatementEditSummary::newReplaceSummary( $editMetadata->getComment(), $statement )
 				)
-			);
+			) );
 		} catch ( StatementNotFoundException $e ) {
 			throw UseCaseError::newResourceNotFound( 'statement' );
 		} catch ( PropertyChangedException $e ) {

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -14,6 +15,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class SetPropertyLabel {
+
+	use UpdateExceptionHandler;
 
 	private PropertyWriteModelRetriever $propertyRetriever;
 	private PropertyUpdater $propertyUpdater;
@@ -55,10 +58,10 @@ class SetPropertyLabel {
 			? LabelEditSummary::newReplaceSummary( $editMetadata->getComment(), $label )
 			: LabelEditSummary::newAddSummary( $editMetadata->getComment(), $label );
 
-		$newRevision = $this->propertyUpdater->update(
+		$newRevision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( $editMetadata->getTags(), $editMetadata->isBot(), $editSummary )
-		);
+		) );
 
 		return new SetPropertyLabelResponse(
 			$newRevision->getProperty()->getLabels()[$label->getLanguageCode()],

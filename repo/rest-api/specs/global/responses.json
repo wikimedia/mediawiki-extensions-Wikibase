@@ -165,7 +165,8 @@
 					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" }
+					"invalid-key": { "$ref": "./examples.json#/InvalidKeyExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -291,7 +292,8 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -314,7 +316,8 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
-					}
+					},
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -338,7 +341,8 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
-					}
+					},
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -362,7 +366,8 @@
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"cannot-modify-read-only-value": {
 						"$ref": "./examples.json#/CannotModifyReadOnlyValue"
-					}
+					},
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -461,7 +466,8 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"referenced-resource-not-found": { "$ref": "./examples.json#/ReferencedResourceNotFoundExample" }
+					"referenced-resource-not-found": { "$ref": "./examples.json#/ReferencedResourceNotFoundExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -481,7 +487,8 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
-					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" }
+					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -501,7 +508,8 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -559,7 +567,8 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -613,7 +622,8 @@
 					"invalid-path-parameter": { "$ref": "./examples.json#/InvalidPathParameterExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -809,7 +819,8 @@
 					"item-statement-id-mismatch": { "$ref": "./examples.json#/ItemStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},
@@ -830,7 +841,8 @@
 					"property-statement-id-mismatch": { "$ref": "./examples.json#/PropertyStatementIdMismatchExample" },
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
-					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" }
+					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
 				}
 			}
 		},

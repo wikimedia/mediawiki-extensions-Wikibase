@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -12,6 +13,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
  * @license GPL-2.0-or-later
  */
 class CreateItem {
+
+	use UpdateExceptionHandler;
 
 	private CreateItemValidator $validator;
 	private ItemCreator $itemCreator;
@@ -37,14 +40,14 @@ class CreateItem {
 
 		$this->assertUserIsAuthorized->checkCreateItemPermissions( $editMetadata->getUser() );
 
-		$revision = $this->itemCreator->create(
+		$revision = $this->executeWithExceptionHandling( fn() => $this->itemCreator->create(
 			$deserializedRequest->getItem(),
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),
 				CreateItemEditSummary::newSummary( $request->getComment() )
 			)
-		);
+		) );
 
 		return new CreateItemResponse( $revision->getItem(), $revision->getLastModified(), $revision->getRevisionId() );
 	}

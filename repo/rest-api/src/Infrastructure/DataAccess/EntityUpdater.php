@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -67,6 +68,7 @@ class EntityUpdater {
 
 	/**
 	 * @throws EntityUpdateFailed
+	 * @throws ResourceTooLargeException
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -96,6 +98,11 @@ class EntityUpdater {
 		);
 
 		if ( !$status->isOK() ) {
+			if ( $status->getMessages()[0]->getKey() === 'wikibase-error-entity-too-big' ) {
+				$maxSizeInKiloBytes = $status->getMessages()[0]->getParams()[0]['size'] / 1024;
+				throw new ResourceTooLargeException( $maxSizeInKiloBytes );
+			}
+
 			if ( $this->isPreventedEdit( $status ) ) {
 				throw new EntityUpdatePrevented( (string)$status );
 			}

@@ -8,6 +8,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -18,6 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
  * @license GPL-2.0-or-later
  */
 class PatchStatement {
+
+	use UpdateExceptionHandler;
 
 	private PatchStatementValidator $useCaseValidator;
 	private PatchedStatementValidator $patchedStatementValidator;
@@ -80,14 +83,14 @@ class PatchStatement {
 		}
 
 		try {
-			$newRevision = $this->statementUpdater->update(
+			$newRevision = $this->executeWithExceptionHandling( fn() => $this->statementUpdater->update(
 				$patchedStatement,
 				new EditMetadata(
 					$editMetadata->getTags(),
 					$editMetadata->isBot(),
 					StatementEditSummary::newPatchSummary( $editMetadata->getComment(), $patchedStatement )
 				)
-			);
+			) );
 		} catch ( PropertyChangedException $e ) {
 			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/property/id' );
 		}

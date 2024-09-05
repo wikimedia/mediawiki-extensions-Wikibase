@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
@@ -18,6 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchItem {
+
+	use UpdateExceptionHandler;
 
 	private PatchItemValidator $validator;
 	private AssertItemExists $assertItemExists;
@@ -79,15 +82,15 @@ class PatchItem {
 			$originalSerialization
 		);
 
-		$itemRevision = $this->itemUpdater->update(
+		$itemRevision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$patchedItem,
 			new EditMetadata(
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-				PatchItemEditSummary::newSummary( $providedMetadata->getComment(), $originalItem, $patchedItem )
+					PatchItemEditSummary::newSummary( $providedMetadata->getComment(), $originalItem, $patchedItem )
 			)
-		);
+		) );
 
 		return new PatchItemResponse(
 			$itemRevision->getItem(),

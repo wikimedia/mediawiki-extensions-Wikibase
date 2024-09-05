@@ -6,6 +6,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -16,6 +17,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class AddItemAliasesInLanguage {
+
+	use UpdateExceptionHandler;
 
 	private ItemWriteModelRetriever $itemRetriever;
 	private AssertItemExists $assertItemExists;
@@ -57,7 +60,7 @@ class AddItemAliasesInLanguage {
 		$originalAliases = $aliasesExist ? $item->getAliasGroups()->getByLanguage( $languageCode )->getAliases() : [];
 
 		$item->getAliasGroups()->setAliasesForLanguage( $languageCode, array_unique( array_merge( $originalAliases, $newAliases ) ) );
-		$newRevision = $this->itemUpdater->update(
+		$newRevision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
 				$editMetadata->getTags(),
@@ -67,7 +70,7 @@ class AddItemAliasesInLanguage {
 					new AliasGroup( $languageCode, array_diff( $newAliases, $originalAliases ) )
 				)
 			)
-		);
+		) );
 
 		return new AddItemAliasesInLanguageResponse(
 			$newRevision->getItem()->getAliases()[ $languageCode ],
