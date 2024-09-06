@@ -911,7 +911,13 @@ abstract class EntityHandler extends ContentHandler {
 
 		$properties = $content->getEntityPageProperties();
 		foreach ( $properties as $name => $value ) {
-			$parserOutput->setPageProperty( $name, $value );
+			if ( is_numeric( $value ) ) {
+				$parserOutput->setNumericPageProperty( $name, $value );
+			} elseif ( is_bool( $value ) ) {
+				$parserOutput->setNumericPageProperty( $name, (int)$value );
+			} else {
+				$parserOutput->setUnsortedPageProperty( $name, $value );
+			}
 		}
 	}
 

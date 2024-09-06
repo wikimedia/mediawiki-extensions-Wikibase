@@ -181,7 +181,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 			$parserOutput->unsetPageProperty( $this->pagePropName );
 		} else {
 			$fileName = str_replace( ' ', '_', $this->bestFileName );
-			$parserOutput->setPageProperty( $this->pagePropName, $fileName );
+			$parserOutput->setUnsortedPageProperty( $this->pagePropName, $fileName );
 		}
 	}
 
