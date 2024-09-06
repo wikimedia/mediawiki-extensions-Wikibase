@@ -5,11 +5,11 @@
 		]
 	},
 	"wikibase-dataitem": "Butir di {{WBREPONAME}}",
-	"wikibase-editlinks": "Edit pranala",
+	"wikibase-editlinks": "Dandani pranala",
 	"wikibase-linkitem-addlinks": "Tambahko pranala",
 	"wikibase-linkitem-title": "Kahikko rik halaman",
 	"wikibase-linkitem-linkpage": "Kahikko rik halaman",
-	"wikibase-linkitem-selectlink": "Silahko pilih situs rik laman sai haga Niku tautko rik laman sija.",
+	"wikibase-linkitem-selectlink": "Payu pilih situs rik halaman say haga tikahikko rik halaman sija.",
 	"wikibase-linkitem-input-site": "Basa:",
 	"wikibase-linkitem-input-page": "Halaman:",
 	"wikibase-rc-hide-wikidata-hide": "Jamotko",
