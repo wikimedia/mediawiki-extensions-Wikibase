@@ -75,8 +75,8 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'item-not-found' );
-			assert.include( response.body.message, nonExistentItem );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'item' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 
 		it( 'item has no sitelink with the requested site id', async () => {

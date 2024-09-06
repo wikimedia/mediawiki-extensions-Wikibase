@@ -15,7 +15,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_VALUE = 'invalid-value';
-	public const ITEM_NOT_FOUND = 'item-not-found';
 	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const MISSING_FIELD = 'missing-field';
@@ -39,7 +38,6 @@ class UseCaseError extends UseCaseException {
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
 	public const POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
-	public const PROPERTY_NOT_FOUND = 'property-not-found';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
 	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
@@ -79,7 +77,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
-		self::ITEM_NOT_FOUND => [],
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
@@ -100,7 +97,6 @@ class UseCaseError extends UseCaseException {
 		],
 		self::PERMISSION_DENIED => [ self::CONTEXT_REASON ],
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
-		self::PROPERTY_NOT_FOUND => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
 		self::SITELINK_TITLE_NOT_FOUND => [],

@@ -119,18 +119,6 @@
 			}
 		}
 	},
-	"ItemNotFoundExample": {
-		"value": {
-			"code": "item-not-found",
-			"message": "Could not find an item with the ID: {item_id}"
-		}
-	},
-	"PropertyNotFoundExample": {
-		"value": {
-			"code": "property-not-found",
-			"message": "Could not find a property with the ID: {property_id}"
-		}
-	},
 	"RedirectedItemExample": {
 		"value": {
 			"code": "redirected-item",

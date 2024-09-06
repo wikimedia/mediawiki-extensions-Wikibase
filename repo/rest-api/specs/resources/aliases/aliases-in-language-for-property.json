@@ -16,7 +16,7 @@
 			"200": { "$ref": "../../global/responses.json#/PropertyAliasesInLanguage" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyAliasesInLanguageNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -46,7 +46,7 @@
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidAddAliasesInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

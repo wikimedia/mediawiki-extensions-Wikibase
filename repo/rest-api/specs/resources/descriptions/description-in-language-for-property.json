@@ -16,7 +16,7 @@
 			"200": { "$ref": "../../global/responses.json#/Description" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyDescriptionNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -46,7 +46,7 @@
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidSetDescriptionInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -69,7 +69,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/DescriptionDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveDescriptionInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyDescriptionNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

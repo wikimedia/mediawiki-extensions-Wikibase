@@ -202,8 +202,8 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemRequestBuilder( itemId, [] )
 				.assertValidRequest().makeRequest();
 
-			assertValidError( response, 404, 'item-not-found' );
-			assert.include( response.body.message, itemId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'item' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 

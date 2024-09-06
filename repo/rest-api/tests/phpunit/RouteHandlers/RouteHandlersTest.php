@@ -424,8 +424,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetPropertyAliasesResponse( new Aliases(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyAliasesInLanguage' => [ [
@@ -437,8 +437,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyDescription' => [ [
@@ -450,8 +450,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyDescriptions' => [ [
@@ -459,8 +459,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetPropertyDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyLabel' => [ [
@@ -468,8 +468,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetPropertyLabelResponse( new Label( 'en', 'instance of' ), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyLabels' => [ [
@@ -477,8 +477,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetPropertyLabelsResponse( new Labels(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetProperty' => [ [
@@ -490,8 +490,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetPropertyStatement' => [ [
@@ -508,8 +508,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCaseResponse' => new GetPropertyStatementsResponse( new StatementList(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1' ] ],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'GetStatement' => [ [
@@ -563,8 +563,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
-					$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'item' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
@@ -635,8 +635,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'property' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 			],
 		] ];
@@ -664,8 +664,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'property' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 			],
 		] ];
@@ -807,8 +807,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'property' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 			],
 		] ];
@@ -826,8 +826,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-					$hasErrorCode ( UseCaseError::PROPERTY_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'property' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 			],
 		] ];
@@ -839,8 +839,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/fr' ] ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'PatchPropertyLabels' => [ [
@@ -851,8 +851,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/fr' ] ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'AddItemAliasesInLanguage' => [ [
@@ -1006,8 +1006,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'add', 'path' => '/labels/en', 'value' => 'new Property' ] ] ],
 			],
 			'expectedExceptions' => [ [
-				new UseCaseError( UseCaseError::PROPERTY_NOT_FOUND, '' ),
-				$hasErrorCode( UseCaseError::PROPERTY_NOT_FOUND ),
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
 		yield 'PatchItem' => [ [
@@ -1030,8 +1030,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedExceptions' => [
 				[
-					new UseCaseError( UseCaseError::ITEM_NOT_FOUND, '' ),
-					$hasErrorCode( UseCaseError::ITEM_NOT_FOUND ),
+					UseCaseError::newResourceNotFound( 'item' ),
+					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
 				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
 			],
