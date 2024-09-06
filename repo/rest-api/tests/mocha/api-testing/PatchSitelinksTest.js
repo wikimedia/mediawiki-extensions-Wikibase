@@ -289,9 +289,9 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-sitelink-title-does-not-exist', { site_id: siteId, title } );
-			assert.include( response.body.message, siteId );
-			assert.include( response.body.message, title );
+			const context = { path: `/${siteId}/title`, value: title };
+			assertValidError( response, 422, 'patch-result-referenced-resource-not-found', context );
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
 
 		it( 'invalid badge', async () => {

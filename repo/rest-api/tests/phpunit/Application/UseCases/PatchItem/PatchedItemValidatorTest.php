@@ -964,15 +964,7 @@ class PatchedItemValidatorTest extends TestCase {
 			$this->createStub( SitelinkTargetNotFound::class )
 		);
 
-		$expectedError = new UseCaseError(
-			UseCaseError::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST,
-			"Incorrect patched sitelinks. Page with title 'non-existing-title' does not exist on site '$validSiteId'",
-			[
-				UseCaseError::CONTEXT_SITE_ID => $validSiteId,
-				UseCaseError::CONTEXT_TITLE => 'non-existing-title',
-			]
-		);
-
+		$nonExistingTitle = 'non-existing-title';
 		try {
 			$this->newValidator()->validateAndDeserialize(
 				$item,
@@ -982,7 +974,7 @@ class PatchedItemValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertEquals( $expectedError, $e );
+			$this->assertEquals( UseCaseError::newPatchResultResourceNotFound( "/sitelinks/$validSiteId/title", $nonExistingTitle ), $e );
 		}
 	}
 

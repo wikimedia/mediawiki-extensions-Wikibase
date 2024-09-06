@@ -4930,8 +4930,8 @@
               "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
             },
             "examples": {
-              "patched-sitelink-title-does-not-exist": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
+              "patch-result-referenced-resource-not-found": {
+                "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
               },
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
@@ -4977,8 +4977,8 @@
               "patched-invalid-sitelink-type": {
                 "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
               },
-              "patched-sitelink-title-does-not-exist": {
-                "$ref": "#/components/examples/PatchedSitelinkTitleNotExistExample"
+              "patch-result-referenced-resource-not-found": {
+                "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
               },
               "patch-result-missing-field": {
                 "$ref": "#/components/examples/PatchResultMissingFieldExample"
@@ -6716,13 +6716,13 @@
           }
         }
       },
-      "PatchedSitelinkTitleNotExistExample": {
+      "PatchResultResourceNotFoundExample": {
         "value": {
-          "code": "patched-sitelink-title-does-not-exist",
-          "message": "Incorrect patched sitelinks. Page with title {title} does not exist on site {site_id}",
+          "code": "patch-result-referenced-resource-not-found",
+          "message": "The referenced resource does not exist",
           "context": {
-            "site_id": "{site_id}",
-            "title": "{title}"
+            "path": "{json_pointer_to_missing_resource_in_patch_result}",
+            "value": "{value}"
           }
         }
       },
