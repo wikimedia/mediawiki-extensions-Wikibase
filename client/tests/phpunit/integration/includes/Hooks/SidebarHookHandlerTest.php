@@ -165,7 +165,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function primeParserOutput( ParserOutput $parserOutput, array $pageProps, array $extensionData, array $extensionDataAppend ) {
 		foreach ( $pageProps as $name => $value ) {
-			$parserOutput->setPageProperty( $name, $value );
+			$parserOutput->setUnsortedPageProperty( $name, $value );
 		}
 
 		foreach ( $extensionData as $key => $value ) {

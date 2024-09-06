@@ -388,7 +388,11 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$parserOutput = new ParserOutput();
 		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		foreach ( $priorPageProps as $key => $value ) {
-			$parserOutput->setPageProperty( $key, $value );
+			if ( is_numeric( $value ) ) {
+				$parserOutput->setNumericPageProperty( $key, $value );
+			} else {
+				$parserOutput->setUnsortedPageProperty( $key, $value );
+			}
 		}
 
 		$content = $this->createMock( Content::class );
