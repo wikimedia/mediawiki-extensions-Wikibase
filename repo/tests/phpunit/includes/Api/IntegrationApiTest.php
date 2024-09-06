@@ -39,7 +39,6 @@ class IntegrationApiTest extends ApiTestCase {
 		$customRepoSettings = $wgWBRepoSettings;
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
 		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
 	public static function apiRequestProvider() {

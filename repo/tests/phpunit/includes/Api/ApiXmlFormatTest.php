@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use DOMDocument;
 use DOMXPath;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Tests\Site\TestSites;
 use Wikibase\Lib\Tests\FakeCache;
@@ -46,7 +45,6 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$customRepoSettings = $wgWBRepoSettings;
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
 		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
 	/**

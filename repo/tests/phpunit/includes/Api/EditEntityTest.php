@@ -455,8 +455,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'edit' => false ],
 		] );
 
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
-
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -489,8 +487,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'all-permission' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			'*' => [ 'read' => true, 'edit' => false ],
 		] );
-
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );

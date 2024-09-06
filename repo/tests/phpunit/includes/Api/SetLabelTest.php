@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -194,8 +193,6 @@ class SetLabelTest extends ModifyTermTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true ],
 		] );
-
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// Then the request is denied
 		$expected = [
