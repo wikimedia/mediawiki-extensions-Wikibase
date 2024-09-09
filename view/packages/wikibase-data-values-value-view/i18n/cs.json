@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"MasterStudioCZ",
 			"Matěj Suchánek",
 			"Mormegil"
 		]
@@ -11,9 +12,30 @@
 	"valueview-expert-globecoordinateinput-precision": "Přesnost:",
 	"valueview-expert-globecoordinateinput-nullprecision": "neuvedená",
 	"valueview-expert-globecoordinateinput-customprecision": "speciální ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "na úhlovou minutu",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "na úhlovou sekundu",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "na 1/10 úhlové sekundy",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "na 1/100 úhlové sekundy",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "na 1/1000 úhlové sekundy",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "gregoriánský",
 	"valueview-expert-timevalue-calendar-julian": "juliánský",
 	"valueview-expert-timeinput-precision": "Přesnost:",
+	"valueview-expert-timeinput-precision-year1g": "miliarda let",
+	"valueview-expert-timeinput-precision-year100m": "sto milionů let",
+	"valueview-expert-timeinput-precision-year10m": "deset milionů let",
+	"valueview-expert-timeinput-precision-year1m": "milion let",
+	"valueview-expert-timeinput-precision-year100k": "100&nbsp;000&nbsp;let",
+	"valueview-expert-timeinput-precision-year10k": "10&nbsp;000&nbsp;let",
+	"valueview-expert-timeinput-precision-year1k": "tisíciletí",
+	"valueview-expert-timeinput-precision-year100": "století",
+	"valueview-expert-timeinput-precision-year10": "desetiletí",
+	"valueview-expert-timeinput-precision-year": "rok",
+	"valueview-expert-timeinput-precision-month": "měsíc",
+	"valueview-expert-timeinput-precision-day": "den",
+	"valueview-expert-timeinput-precision-hour": "hodina",
+	"valueview-expert-timeinput-precision-minute": "minuta",
+	"valueview-expert-timeinput-precision-second": "sekunda",
 	"valueview-expert-timeinput-calendar": "Kalendář:",
 	"valueview-expertextender-languageselector-label": "Jazyk (povinný):",
 	"valueview-expertextender-unitsuggester-label": "Jednotka (volitelná):",
