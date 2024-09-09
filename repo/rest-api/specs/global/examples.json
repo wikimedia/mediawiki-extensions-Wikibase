@@ -158,13 +158,13 @@
 			}
 		}
 	},
-	"PatchedSitelinkTitleNotExistExample": {
+	"PatchResultResourceNotFoundExample": {
 		"value": {
-			"code": "patched-sitelink-title-does-not-exist",
-			"message": "Incorrect patched sitelinks. Page with title {title} does not exist on site {site_id}",
+			"code": "patch-result-referenced-resource-not-found",
+			"message": "The referenced resource does not exist",
 			"context": {
-				"site_id": "{site_id}",
-				"title": "{title}"
+				"path": "{json_pointer_to_missing_resource_in_patch_result}",
+				"value": "{value}"
 			}
 		}
 	},

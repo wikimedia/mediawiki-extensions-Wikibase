@@ -23,11 +23,11 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_RESULT_INVALID_VALUE = 'patch-result-invalid-value';
 	public const PATCH_RESULT_MISSING_FIELD = 'patch-result-missing-field';
 	public const PATCH_RESULT_MODIFIED_READ_ONLY_VALUE = 'patch-result-modified-read-only-value';
+	public const PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND = 'patch-result-referenced-resource-not-found';
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
 	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
-	public const PATCHED_SITELINK_TITLE_DOES_NOT_EXIST = 'patched-sitelink-title-does-not-exist';
 	public const PATCHED_SITELINK_URL_NOT_MODIFIABLE = 'url-not-modifiable';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PERMISSION_DENIED = 'permission-denied';
@@ -83,15 +83,15 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
-		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_RESULT_INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 		self::PATCH_RESULT_INVALID_VALUE => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCH_RESULT_MODIFIED_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
+		self::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
+		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
 		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
-		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
-		self::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST => [ self::CONTEXT_SITE_ID, self::CONTEXT_TITLE ],
 		self::PATCHED_SITELINK_URL_NOT_MODIFIABLE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
@@ -231,6 +231,14 @@ class UseCaseError extends UseCaseException {
 			self::RESOURCE_NOT_FOUND,
 			'The requested resource does not exist',
 			[ self::CONTEXT_RESOURCE_TYPE => $resourceType ]
+		);
+	}
+
+	public static function newPatchResultResourceNotFound( string $path, string $value ): self {
+		return new self(
+			self::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
+			'The referenced resource does not exist',
+			[ self::CONTEXT_PATH => $path, self::CONTEXT_VALUE => $value ]
 		);
 	}
 

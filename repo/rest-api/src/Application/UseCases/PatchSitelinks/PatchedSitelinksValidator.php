@@ -62,15 +62,7 @@ class PatchedSitelinksValidator {
 				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges/$badgeIndex", $badge );
 
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
-				$title = $serialization[$siteId()]['title'];
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_TITLE_DOES_NOT_EXIST,
-					"Incorrect patched sitelinks. Page with title '$title' does not exist on site '{$siteId()}'",
-					[
-						UseCaseError::CONTEXT_SITE_ID => $siteId(),
-						UseCaseError::CONTEXT_TITLE => $serialization[$siteId()][ 'title' ],
-					]
-				);
+				throw UseCaseError::newPatchResultResourceNotFound( '/' . $siteId() . '/title', $serialization[$siteId()][ 'title' ] );
 
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
 				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
