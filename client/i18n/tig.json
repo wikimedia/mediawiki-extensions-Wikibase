@@ -1,8 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bbeshir"
+			"Bbeshir",
+			"IdrisSeid"
 		]
 	},
-	"wikibase-linkitem-input-site": "ሉቃት"
+	"wikibase-editlinks": "ዐደሎት መዐደዪ",
+	"wikibase-linkitem-addlinks": "መዐድዪ ወስክ",
+	"wikibase-linkitem-title": "ምስል ገጽ ዐዴ",
+	"wikibase-linkitem-linkpage": "ምስል ገጽ ዐዴ",
+	"wikibase-linkitem-selectlink": "ምስል እሊ ገጽ እግል ትልጠሞ ለተሐዜ ገጽ ዎ አካን ሕሬ",
+	"wikibase-linkitem-input-site": "ሉቃት",
+	"wikibase-linkitem-input-page": "ገጽ:"
 }

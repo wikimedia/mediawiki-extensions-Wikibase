@@ -4,5 +4,14 @@
 			"Chrisdanielkazadi"
 		]
 	},
-	"wikibase-linkitem-addlinks": "Kukumbaja links"
+	"wikibase-dataitem": "Mufundu{{WBREPONAME}}",
+	"wikibase-editlinks": "Kushitulula bidi bu bela pamua",
+	"wikibase-linkitem-addlinks": "Kukumbaja links",
+	"wikibase-linkitem-title": "Maapeta ne dibeji",
+	"wikibase-linkitem-linkpage": "Diela pamua ne dibeji",
+	"wikibase-linkitem-selectlink": "Sungula kaaba ne dibeji udi wewa musua kupeta maapeta ne dibeji edi.",
+	"wikibase-linkitem-input-site": "Muakulu",
+	"wikibase-linkitem-input-page": "Dibeji",
+	"wikibase-rc-hide-wikidata-hide": "Kusokoka",
+	"wikibase-rc-hide-wikidata-show": "Kuleeja"
 }
