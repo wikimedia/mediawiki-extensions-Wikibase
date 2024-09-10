@@ -140,7 +140,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase',
-				'mediawiki.Uri',
+				'web2017-polyfills',
 			],
 		],
 
@@ -235,7 +235,6 @@ return call_user_func( function() {
 				'mediawiki.api',
 				'mediawiki.cookie',
 				'mediawiki.page.watch.ajax',
-				'mediawiki.Uri',
 				'mediawiki.user',
 				'mw.config.values.wbRepo',
 				'mw.config.values.wbDataTypes',
