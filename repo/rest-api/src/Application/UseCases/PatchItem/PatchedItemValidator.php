@@ -320,7 +320,7 @@ class PatchedItemValidator {
 					$context[SitelinkValidator::CONTEXT_VALUE]
 				);
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
-				throw UseCaseError::newPatchResultResourceNotFound(
+				throw UseCaseError::newPatchResultReferencedResourceNotFound(
 					'/sitelinks/' . $siteId() . '/title',
 					$sitelinksSerialization[ $siteId() ][ 'title' ]
 				);

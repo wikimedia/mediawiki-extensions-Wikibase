@@ -230,7 +230,7 @@ class UseCaseError extends UseCaseException {
 		);
 	}
 
-	public static function newPatchResultResourceNotFound( string $path, string $value ): self {
+	public static function newPatchResultReferencedResourceNotFound( string $path, string $value ): self {
 		return new self(
 			self::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
 			'The referenced resource does not exist',
