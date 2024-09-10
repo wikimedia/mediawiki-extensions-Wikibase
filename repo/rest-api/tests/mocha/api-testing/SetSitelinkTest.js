@@ -374,11 +374,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: utils.title( 'does-not-exist-' ) };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink ).makeRequest();
 
-			assertValidError( response, 400, 'title-does-not-exist' );
-			assert.strictEqual(
-				response.body.message,
-				`Page with title ${sitelink.title} does not exist on the given site`
-			);
+			assertValidError( response, 400, 'referenced-resource-not-found', { path: '/sitelink/title' } );
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
 	} );
 

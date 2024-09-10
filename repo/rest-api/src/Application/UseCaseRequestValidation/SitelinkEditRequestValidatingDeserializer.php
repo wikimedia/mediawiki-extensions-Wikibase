@@ -39,10 +39,7 @@ class SitelinkEditRequestValidatingDeserializer {
 					$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $request->getSitelink()[ 'badges' ] );
 					throw UseCaseError::newInvalidValue( "/sitelink/badges/$badgeIndex" );
 				case SitelinkValidator::CODE_TITLE_NOT_FOUND:
-					throw new UseCaseError(
-						UseCaseError::SITELINK_TITLE_NOT_FOUND,
-						"Page with title {$request->getSitelink()['title']} does not exist on the given site"
-					);
+					throw UseCaseError::newReferencedResourceNotFound( '/sitelink/title' );
 				case SitelinkValidator::CODE_SITELINK_CONFLICT:
 					$conflictingItemId = (string)$validationError->getContext()[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 					throw UseCaseError::newDataPolicyViolation(
