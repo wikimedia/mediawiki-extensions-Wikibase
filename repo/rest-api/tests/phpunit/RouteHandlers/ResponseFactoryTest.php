@@ -59,8 +59,6 @@ class ResponseFactoryTest extends TestCase {
 	public static function errorCodeToHttpStatusCodeProvider(): Generator {
 		yield [ UseCaseError::INVALID_QUERY_PARAMETER, 400, [ 'parameter' => '_fields' ] ];
 		yield [ UseCaseError::INVALID_PATH_PARAMETER, 400, [ 'parameter' => '' ] ];
-		yield [ UseCaseError::ITEM_NOT_FOUND, 404 ];
-		yield [ UseCaseError::PROPERTY_NOT_FOUND, 404 ];
 		yield [ UseCaseError::RESOURCE_NOT_FOUND, 404, [ 'resource_type' => 'statement' ] ];
 		yield [ UseCaseError::UNEXPECTED_ERROR, 500 ];
 	}

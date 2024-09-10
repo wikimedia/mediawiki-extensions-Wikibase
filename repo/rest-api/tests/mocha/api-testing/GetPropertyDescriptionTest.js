@@ -40,8 +40,8 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.assertValidRequest()
 			.makeRequest();
 
-		assertValidError( response, 404, 'property-not-found' );
-		assert.include( response.body.message, nonExistentProperty );
+		assertValidError( response, 404, 'resource-not-found', { resource_type: 'property' } );
+		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 	} );
 
 	it( 'responds 404 in case the property has no description in the requested language', async () => {

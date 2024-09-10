@@ -28,8 +28,6 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PERMISSION_DENIED => 403,
 
 		// 404 errors:
-		UseCaseError::ITEM_NOT_FOUND => 404,
-		UseCaseError::PROPERTY_NOT_FOUND => 404,
 		UseCaseError::RESOURCE_NOT_FOUND => 404,
 
 		// 409 errors:

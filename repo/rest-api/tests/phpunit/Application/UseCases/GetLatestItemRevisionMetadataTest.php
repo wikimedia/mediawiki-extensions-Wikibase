@@ -45,8 +45,9 @@ class GetLatestItemRevisionMetadataTest extends TestCase {
 			$this->newGetRevisionMetadata( $metadataRetriever )->execute( $itemId );
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertSame( UseCaseError::ITEM_NOT_FOUND, $e->getErrorCode() );
-			$this->assertSame( "Could not find an item with the ID: {$itemId}", $e->getErrorMessage() );
+			$this->assertSame( UseCaseError::RESOURCE_NOT_FOUND, $e->getErrorCode() );
+			$this->assertSame( 'The requested resource does not exist', $e->getErrorMessage() );
+			$this->assertSame( [ 'resource_type' => 'item' ], $e->getErrorContext() );
 		}
 	}
 

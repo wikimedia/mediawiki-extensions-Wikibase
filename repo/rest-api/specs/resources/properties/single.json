@@ -15,7 +15,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Property" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPropertyInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -33,7 +33,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Property" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
-			"404": { "$ref": "../../global/responses.json#/PropertyNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyPropertyPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedProperty" },

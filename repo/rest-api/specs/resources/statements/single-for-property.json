@@ -19,7 +19,7 @@
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRetrievePropertyStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 
@@ -41,7 +41,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidReplacePropertyStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -62,7 +62,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPropertyStatementPatch" },
-			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
@@ -85,7 +85,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemovePropertyStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/PropertyStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

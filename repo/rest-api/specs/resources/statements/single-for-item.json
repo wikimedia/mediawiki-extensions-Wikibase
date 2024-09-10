@@ -19,7 +19,7 @@
 			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveItemStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -40,7 +40,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidReplaceItemStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
@@ -61,7 +61,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ItemStatement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidItemStatementPatch" },
-			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
@@ -84,7 +84,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveItemStatementInput" },
-			"404": { "$ref": "../../global/responses.json#/ItemStatementNotFound" },
+			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

@@ -146,7 +146,7 @@
             "$ref": "#/components/responses/InvalidGetItemInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -187,7 +187,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyItemPatch"
@@ -245,7 +245,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -286,7 +286,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyItemPatch"
@@ -347,7 +347,7 @@
             "$ref": "#/components/responses/InvalidGetSitelinkInput"
           },
           "404": {
-            "$ref": "#/components/responses/SitelinkNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -402,7 +402,7 @@
             "$ref": "#/components/responses/InvalidSetSitelinkInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -458,7 +458,7 @@
             "$ref": "#/components/responses/InvalidRemoveSitelinkInput"
           },
           "404": {
-            "$ref": "#/components/responses/SitelinkNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -510,7 +510,7 @@
             "$ref": "#/components/responses/InvalidPropertyInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -548,7 +548,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyPropertyPatch"
@@ -606,7 +606,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -648,7 +648,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyItemPatch"
@@ -703,7 +703,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -745,7 +745,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyPropertyPatch"
@@ -806,7 +806,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemDescriptionNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -864,7 +864,7 @@
             "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -920,7 +920,7 @@
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemDescriptionNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -975,7 +975,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyDescriptionNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1033,7 +1033,7 @@
             "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1086,7 +1086,7 @@
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyDescriptionNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1141,7 +1141,7 @@
             "$ref": "#/components/responses/InvalidRetrieveStatementsInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1182,7 +1182,7 @@
             "$ref": "#/components/responses/InvalidNewStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -1238,7 +1238,7 @@
             "$ref": "#/components/responses/InvalidRetrieveItemStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1283,7 +1283,7 @@
             "$ref": "#/components/responses/InvalidReplaceItemStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1328,7 +1328,7 @@
             "$ref": "#/components/responses/InvalidItemStatementPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyStatementPatch"
@@ -1379,7 +1379,7 @@
             "$ref": "#/components/responses/InvalidRemoveItemStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1431,7 +1431,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1472,7 +1472,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyItemPatch"
@@ -1527,7 +1527,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1568,7 +1568,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyPropertyPatch"
@@ -1629,7 +1629,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemLabelNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1687,7 +1687,7 @@
             "$ref": "#/components/responses/InvalidSetLabelInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -1743,7 +1743,7 @@
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemLabelNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -1798,7 +1798,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyLabelNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1856,7 +1856,7 @@
             "$ref": "#/components/responses/InvalidSetLabelInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1909,7 +1909,7 @@
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyLabelNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -1961,7 +1961,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2002,7 +2002,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyItemPatch"
@@ -2057,7 +2057,7 @@
             "$ref": "#/components/responses/InvalidEntityIdInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2098,7 +2098,7 @@
             "$ref": "#/components/responses/InvalidPatch"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyPropertyPatch"
@@ -2159,7 +2159,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemAliasesInLanguageNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2217,7 +2217,7 @@
             "$ref": "#/components/responses/InvalidAddAliasesInput"
           },
           "404": {
-            "$ref": "#/components/responses/ItemNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/ItemRedirected"
@@ -2272,7 +2272,7 @@
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyAliasesInLanguageNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2330,7 +2330,7 @@
             "$ref": "#/components/responses/InvalidAddAliasesInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2382,7 +2382,7 @@
             "$ref": "#/components/responses/InvalidRetrieveStatementsInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2423,7 +2423,7 @@
             "$ref": "#/components/responses/InvalidNewStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2476,7 +2476,7 @@
             "$ref": "#/components/responses/InvalidRetrievePropertyStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2521,7 +2521,7 @@
             "$ref": "#/components/responses/InvalidReplacePropertyStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -2566,7 +2566,7 @@
             "$ref": "#/components/responses/InvalidPropertyStatementPatch"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "409": {
             "$ref": "#/components/responses/CannotApplyStatementPatch"
@@ -2617,7 +2617,7 @@
             "$ref": "#/components/responses/InvalidRemovePropertyStatementInput"
           },
           "404": {
-            "$ref": "#/components/responses/PropertyStatementNotFound"
+            "$ref": "#/components/responses/ResourceNotFound"
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
@@ -3757,73 +3757,12 @@
           }
         }
       },
-      "ItemNotFound": {
-        "description": "The specified Item was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "context": {
-                  "type": "object"
-                }
-              },
-              "required": [
-                "code",
-                "message"
-              ]
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "PropertyNotFound": {
-        "description": "The specified property was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "property-not-found": {
-                "$ref": "#/components/examples/PropertyNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
       "ItemRedirected": {
         "description": "The specified Item was redirected",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "redirected-item": {
@@ -3846,7 +3785,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "data-policy-violation": {
@@ -3869,243 +3808,9 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "ItemStatementNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "PropertyStatementNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "property-not-found": {
-                "$ref": "#/components/examples/PropertyNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "SitelinkNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "ItemLabelNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "PropertyLabelNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "property-not-found": {
-                "$ref": "#/components/examples/PropertyNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "ItemAliasesInLanguageNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "PropertyAliasesInLanguageNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "property-not-found": {
-                "$ref": "#/components/examples/PropertyNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "ItemDescriptionNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "item-not-found": {
-                "$ref": "#/components/examples/ItemNotFoundExample"
-              },
-              "resource-not-found": {
-                "$ref": "#/components/examples/ResourceNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "PropertyDescriptionNotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
-            },
-            "examples": {
-              "property-not-found": {
-                "$ref": "#/components/examples/PropertyNotFoundExample"
-              },
               "resource-not-found": {
                 "$ref": "#/components/examples/ResourceNotFoundExample"
               }
@@ -4126,7 +3831,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4152,7 +3857,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "value-too-long": {
@@ -4190,7 +3895,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4216,7 +3921,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4239,7 +3944,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4265,7 +3970,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4288,7 +3993,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4314,7 +4019,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4340,7 +4045,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4372,7 +4077,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4407,7 +4112,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4445,7 +4150,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4483,7 +4188,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4512,7 +4217,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4544,7 +4249,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4576,7 +4281,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4605,7 +4310,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4640,7 +4345,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4672,7 +4377,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4704,7 +4409,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4733,7 +4438,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4762,7 +4467,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4794,7 +4499,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4817,7 +4522,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4840,7 +4545,22 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "context": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ]
             },
             "examples": {
               "invalid-path-parameter": {
@@ -4872,7 +4592,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "redirected-item": {
@@ -4901,7 +4621,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-test-failed": {
@@ -4927,7 +4647,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-referenced-resource-not-found": {
@@ -4965,7 +4685,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-invalid-value": {
@@ -5015,7 +4735,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-missing-field": {
@@ -5056,7 +4776,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-invalid-key": {
@@ -5088,7 +4808,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-invalid-key": {
@@ -5120,7 +4840,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-invalid-value": {
@@ -5149,7 +4869,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -5184,7 +4904,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "invalid-path-parameter": {
@@ -5219,7 +4939,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-test-failed": {
@@ -5245,7 +4965,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "examples": {
               "patch-result-missing-field": {
@@ -5277,7 +4997,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/responses/ItemNotFound/content/application~1json/schema"
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
             },
             "example": {
               "code": "unexpected-error",
@@ -6675,18 +6395,6 @@
           "context": {
             "path": "{json_pointer_to_target_in_patch}"
           }
-        }
-      },
-      "ItemNotFoundExample": {
-        "value": {
-          "code": "item-not-found",
-          "message": "Could not find an item with the ID: {item_id}"
-        }
-      },
-      "PropertyNotFoundExample": {
-        "value": {
-          "code": "property-not-found",
-          "message": "Could not find a property with the ID: {property_id}"
         }
       },
       "RedirectedItemExample": {

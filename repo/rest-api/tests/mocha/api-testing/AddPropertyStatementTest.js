@@ -280,8 +280,8 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			assertValidError( response, 404, 'property-not-found' );
-			assert.include( response.body.message, propertyId );
+			assertValidError( response, 404, 'resource-not-found', { resource_type: 'property' } );
+			assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 		} );
 	} );
 } );
