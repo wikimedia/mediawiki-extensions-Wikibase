@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
@@ -184,15 +185,6 @@ class PropertyValuePairDeserializerTest extends TestCase {
 			'/statements/P789/2/qualifiers/1',
 		];
 
-		yield "invalid 'property/id' field - property does not exist" => [
-			new InvalidFieldException( 'id', 'P666', '/statement/references/3/parts/1/property/id' ),
-			[
-				'property' => [ 'id' => 'P666' ],
-				'value' => [ 'type' => 'novalue' ],
-			],
-			'/statement/references/3/parts/1',
-		];
-
 		yield "invalid 'value' field - int" => [
 			new InvalidFieldException( 'value', 42, '/statements/P789/0/value' ),
 			[
@@ -266,6 +258,15 @@ class PropertyValuePairDeserializerTest extends TestCase {
 				'value' => [],
 			],
 			'/statement',
+		];
+
+		yield 'referenced property does not exist' => [
+			new PropertyNotFoundException( 'P666', '/statement/references/3/parts/1/property/id' ),
+			[
+				'property' => [ 'id' => 'P666' ],
+				'value' => [ 'type' => 'novalue' ],
+			],
+			'/statement/references/3/parts/1',
 		];
 	}
 

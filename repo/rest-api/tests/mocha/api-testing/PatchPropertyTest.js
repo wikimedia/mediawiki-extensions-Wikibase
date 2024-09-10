@@ -694,5 +694,73 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
 			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
+
+		it( 'rejects statement with non-existent property', async () => {
+			const nonExistentProperty = 'P9999999';
+			const patch = [ {
+				op: 'add',
+				path: `/statements/${nonExistentProperty}`,
+				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+			} ];
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patch-result-referenced-resource-not-found',
+				{ path: `/statements/${nonExistentProperty}/0/property/id`, value: nonExistentProperty }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'rejects qualifier with non-existent property', async () => {
+			await newAddPropertyStatementRequestBuilder( testPropertyId, {
+				property: { id: predicatePropertyId },
+				value: { type: 'novalue' }
+			} ).makeRequest();
+
+			const nonExistentProperty = 'P9999999';
+			const patch = [ {
+				op: 'add',
+				path: `/statements/${predicatePropertyId}/0/qualifiers`,
+				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+			} ];
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patch-result-referenced-resource-not-found',
+				{ path: `/statements/${predicatePropertyId}/0/qualifiers/0/property/id`, value: nonExistentProperty }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'rejects reference with non-existent property', async () => {
+			await newAddPropertyStatementRequestBuilder( testPropertyId, {
+				property: { id: predicatePropertyId },
+				value: { type: 'novalue' }
+			} ).makeRequest();
+
+			const nonExistentProperty = 'P9999999';
+			const patch = [ {
+				op: 'add',
+				path: `/statements/${predicatePropertyId}/0/references/0`,
+				value: { parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ] }
+			} ];
+			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'patch-result-referenced-resource-not-found',
+				{ path: `/statements/${predicatePropertyId}/0/references/0/parts/0/property/id`, value: nonExistentProperty }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
 	} );
 } );

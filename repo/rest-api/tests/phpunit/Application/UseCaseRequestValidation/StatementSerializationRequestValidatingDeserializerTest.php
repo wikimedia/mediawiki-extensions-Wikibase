@@ -258,6 +258,11 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 			],
 			UseCaseError::newMissingField( '/statement/references/1', 'parts' ),
 		];
+
+		yield 'property does not exist' => [
+			[ 'property' => [ 'id' => 'P9999999' ], 'value' => [ 'type' => 'novalue' ] ],
+			UseCaseError::newInvalidValue( '/statement/property/id' ),
+		];
 	}
 
 	private function newStatementSerializationRVD(): StatementSerializationRequestValidatingDeserializer {

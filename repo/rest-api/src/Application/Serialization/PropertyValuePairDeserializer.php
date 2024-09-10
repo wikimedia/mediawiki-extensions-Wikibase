@@ -13,6 +13,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
 
 /**
@@ -37,6 +38,7 @@ class PropertyValuePairDeserializer {
 	/**
 	 * @throws MissingFieldException
 	 * @throws InvalidFieldException
+	 * @throws PropertyNotFoundException
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Snak {
 		$this->validateSerialization( $serialization, $basePath );
@@ -46,7 +48,7 @@ class PropertyValuePairDeserializer {
 		try {
 			$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( Exception $e ) {
-			throw new InvalidFieldException( 'id', $serialization['property']['id'], "$basePath/property/id" );
+			throw new PropertyNotFoundException( $serialization['property']['id'], "$basePath/property/id" );
 		}
 
 		switch ( $serialization['value']['type'] ) {

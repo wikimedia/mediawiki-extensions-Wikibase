@@ -395,34 +395,24 @@ class PatchedItemValidator {
 						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_FIELD]
 					);
+				case StatementValidator::CODE_PROPERTY_NOT_FOUND:
+					throw UseCaseError::newPatchResultReferencedResourceNotFound(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_VALUE]
+					);
+
+				default:
+					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
 		}
 
-		// get StatementIds for all Statements in a StatementList, removing any that are null
-		$getStatementIds = fn( StatementList $statementList ) => array_filter( array_map(
-			fn( Statement $statement ) => $statement->getGuid(),
-			iterator_to_array( $statementList )
-		) );
-
-		$getStatementIdPath = function( array $serialization, string $id ): string {
-			foreach ( $serialization as $propertyId => $statementGroup ) {
-				foreach ( $statementGroup as $groupIndex => $statement ) {
-					if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
-						return "/statements/$propertyId/$groupIndex";
-					}
-				}
-			}
-
-			throw new LogicException( "Statement ID '$id' not found in patch result" );
-		};
-
 		$originalStatements = $originalItem->getStatements();
-		$originalStatementsIds = $getStatementIds( $originalStatements );
+		$originalStatementsIds = $this->getStatementIds( $originalStatements );
 		$patchedStatements = $this->statementsValidator->getValidatedStatements();
-		$patchedStatementsIds = $getStatementIds( $patchedStatements );
+		$patchedStatementsIds = $this->getStatementIds( $patchedStatements );
 		foreach ( array_count_values( $patchedStatementsIds ) as $id => $occurrence ) {
 			if ( $occurrence > 1 || !in_array( $id, $originalStatementsIds ) ) {
-				$path = "{$getStatementIdPath( $serialization['statements'], $id )}/id";
+				$path = "{$this->getStatementIdPath( $serialization['statements'], $id )}/id";
 				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 
@@ -430,10 +420,29 @@ class PatchedItemValidator {
 			if ( !$patchedStatements->getFirstStatementWithGuid( $id )->getPropertyId()->equals(
 				$originalPropertyId
 			) ) {
-				$path = "{$getStatementIdPath( $serialization['statements'], $id )}/property/id";
+				$path = "{$this->getStatementIdPath( $serialization['statements'], $id )}/property/id";
 				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 		}
+	}
+
+	private function getStatementIds( StatementList $statementList ): array {
+		return array_filter( array_map(
+			fn( Statement $statement ) => $statement->getGuid(),
+			iterator_to_array( $statementList )
+		) );
+	}
+
+	private function getStatementIdPath( array $serialization, string $id ): string {
+		foreach ( $serialization as $propertyId => $statementGroup ) {
+			foreach ( $statementGroup as $groupIndex => $statement ) {
+				if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
+					return "/statements/$propertyId/$groupIndex";
+				}
+			}
+		}
+
+		throw new LogicException( "Statement ID '$id' not found in patch result" );
 	}
 
 }

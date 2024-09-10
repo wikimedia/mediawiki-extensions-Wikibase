@@ -13,6 +13,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
@@ -126,6 +127,12 @@ class ReferenceDeserializerTest extends TestCase {
 			new InvalidFieldException( '', [ 'not', 'an', 'associative', 'array' ], '/statement/references/5/parts/0' ),
 			[ 'parts' => [ [ 'not', 'an', 'associative', 'array' ] ] ],
 			'/statement/references/5',
+		];
+
+		yield 'property does not exist' => [
+			new PropertyNotFoundException( 'P9999999', '/statement/references/0/parts/0/property/id' ),
+			[ 'parts' => [ [ 'property' => [ 'id' => 'P9999999' ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			'/statement/references/0',
 		];
 	}
 

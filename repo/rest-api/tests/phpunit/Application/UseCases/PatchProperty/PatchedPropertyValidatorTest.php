@@ -783,6 +783,19 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[ $propertyId => [ $statementWithExistingId ] ],
 			UseCaseError::newPatchResultModifiedReadOnlyValue( "/statements/$propertyId/0/property/id" ),
 		];
+
+		$nonExistingPropertyId = 'P9999999';
+		yield 'non-existing property' => [
+			[ $nonExistingPropertyId => [ [ 'property' => [ 'id' => $nonExistingPropertyId ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
+				'The referenced resource does not exist',
+				[
+					UseCaseError::CONTEXT_PATH => "/statements/$nonExistingPropertyId/0/property/id",
+					UseCaseError::CONTEXT_VALUE => $nonExistingPropertyId,
+				]
+			),
+		];
 	}
 
 	private function newValidator(): PatchedPropertyValidator {

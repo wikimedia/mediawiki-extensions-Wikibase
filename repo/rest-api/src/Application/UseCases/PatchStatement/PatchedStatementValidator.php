@@ -43,6 +43,12 @@ class PatchedStatementValidator {
 						$context[StatementValidator::CONTEXT_PATH],
 						$context[StatementValidator::CONTEXT_VALUE]
 					);
+				case StatementValidator::CODE_PROPERTY_NOT_FOUND:
+					throw UseCaseError::newPatchResultReferencedResourceNotFound(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_VALUE]
+					);
+
 				default:
 					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
 			}

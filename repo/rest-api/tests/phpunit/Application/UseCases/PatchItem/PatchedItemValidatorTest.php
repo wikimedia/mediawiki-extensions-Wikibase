@@ -776,6 +776,19 @@ class PatchedItemValidatorTest extends TestCase {
 				]
 			),
 		];
+
+		$nonExistingPropertyId = 'P9999999';
+		yield 'non-existing property' => [
+			[ $nonExistingPropertyId => [ [ 'property' => [ 'id' => $nonExistingPropertyId ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new UseCaseError(
+				UseCaseError::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
+				'The referenced resource does not exist',
+				[
+					UseCaseError::CONTEXT_PATH => "/statements/$nonExistingPropertyId/0/property/id",
+					UseCaseError::CONTEXT_VALUE => $nonExistingPropertyId,
+				]
+			),
+		];
 	}
 
 	/**

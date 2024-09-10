@@ -303,6 +303,14 @@ class PatchedPropertyValidator {
 							UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => $context[ StatementsValidator::CONTEXT_PROPERTY_ID_VALUE ],
 						]
 					);
+				case StatementValidator::CODE_PROPERTY_NOT_FOUND:
+					throw UseCaseError::newPatchResultReferencedResourceNotFound(
+						$context[StatementValidator::CONTEXT_PATH],
+						$context[StatementValidator::CONTEXT_VALUE]
+					);
+
+				default:
+					throw new LogicException( "Unknown validation error code: {$validationError->getCode()}" );
 			}
 		}
 
@@ -316,31 +324,31 @@ class PatchedPropertyValidator {
 		$originalStatementsIds = $getStatementIds( $originalStatements );
 		$patchedStatementsIds = $getStatementIds( $patchedStatements );
 
-		$getStatementIdPath = function( array $serialization, string $id ): string {
-			foreach ( $serialization as $propertyId => $statementGroup ) {
-				foreach ( $statementGroup as $groupIndex => $statement ) {
-					if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
-						return "/statements/$propertyId/$groupIndex";
-					}
-				}
-			}
-
-			throw new LogicException( "Statement ID '$id' not found in patch result" );
-		};
-
 		foreach ( array_count_values( $patchedStatementsIds ) as $id => $occurrence ) {
 			if ( $occurrence > 1 || !in_array( $id, $originalStatementsIds ) ) {
-				$path = "{$getStatementIdPath( $statementsSerialization, $id )}/id";
+				$path = "{$this->getStatementIdPath( $statementsSerialization, $id )}/id";
 				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 
 			}
 
 			$originalPropertyId = $originalStatements->getFirstStatementWithGuid( $id )->getPropertyId();
 			if ( !$patchedStatements->getFirstStatementWithGuid( $id )->getPropertyId()->equals( $originalPropertyId ) ) {
-				$path = "{$getStatementIdPath( $statementsSerialization, $id )}/property/id";
+				$path = "{$this->getStatementIdPath( $statementsSerialization, $id )}/property/id";
 				throw UseCaseError::newPatchResultModifiedReadOnlyValue( $path );
 			}
 		}
+	}
+
+	private function getStatementIdPath( array $serialization, string $id ): string {
+		foreach ( $serialization as $propertyId => $statementGroup ) {
+			foreach ( $statementGroup as $groupIndex => $statement ) {
+				if ( isset( $statement['id'] ) && $statement['id'] === $id ) {
+					return "/statements/$propertyId/$groupIndex";
+				}
+			}
+		}
+
+		throw new LogicException( "Statement ID '$id' not found in patch result" );
 	}
 
 }
