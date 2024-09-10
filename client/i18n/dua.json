@@ -1,11 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"EbelleMarcel"
+			"EbelleMarcel",
+			"Olivier Moukodi"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} mambo",
+	"wikibase-editlinks": "Tukwa la ɓeɓolan ɓá tiŋgamɛ",
+	"wikibase-linkitem-addlinks": "Ɓáta lá matiŋgamɛ",
+	"wikibase-linkitem-title": "Kwélanɛ ná dipapá",
 	"wikibase-linkitem-linkpage": "mukwélan na dipapa",
+	"wikibase-linkitem-selectlink": "Pɔsɔ mulomba ná dipapá wá pulanɔ́ o sɔ́psan ná dín dipapá",
 	"wikibase-linkitem-input-site": "Bwambo",
 	"wikibase-linkitem-input-page": "Dipapa"
 }
