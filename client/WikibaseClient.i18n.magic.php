@@ -34,6 +34,15 @@ $magicWords['arz'] = [
 	'wbreponame' => [ 0, 'اسم_ريبو_وب' ],
 ];
 
+/** Bengali (বাংলা) */
+$magicWords['bn'] = [
+	'noexternallanglinks' => [ 0, 'কোনও_বহিঃস্থ_ভাষা_সংযোগ_নয়' ],
+	'property' => [ 0, 'বৈশিষ্ট্য' ],
+	'statements' => [ 0, 'বিবৃতি' ],
+	'commaSeparatedList' => [ 0, 'কমাবিভক্ত_তালিকা' ],
+	'expectedUnconnectedPage' => [ 1, '__প্রত্যাশিত_অসংযুক্ত_পাতা__' ],
+];
+
 /** Czech (čeština) */
 $magicWords['cs'] = [
 	'property' => [ 0, 'vlastnost' ],
