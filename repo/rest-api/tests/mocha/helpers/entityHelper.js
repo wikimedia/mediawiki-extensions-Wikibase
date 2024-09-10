@@ -1,7 +1,12 @@
 'use strict';
 
 const { action, utils } = require( 'api-testing' );
-const { newSetSitelinkRequestBuilder } = require( './RequestBuilderFactory' );
+const {
+	newSetSitelinkRequestBuilder,
+	newCreateItemRequestBuilder,
+	newAddPropertyStatementRequestBuilder,
+	newGetPropertyRequestBuilder
+} = require( './RequestBuilderFactory' );
 
 async function makeEditEntityRequest( params, entity ) {
 	return action.getAnon().action( 'wbeditentity', {
@@ -36,30 +41,21 @@ async function createUniqueStringProperty() {
 
 /**
  * @param {Array} statements
- * @param {string} entityType
- *
- * @return {Object}
- */
-async function createEntityWithStatements( statements, entityType ) {
-	statements.forEach( ( statement ) => {
-		statement.type = 'statement';
-	} );
-
-	const entity = { claims: statements };
-	if ( entityType === 'property' ) {
-		entity.datatype = 'string';
-	}
-
-	return await createEntity( entityType, entity );
-}
-
-/**
- * @param {Array} statements
  *
  * @return {Object}
  */
 async function createItemWithStatements( statements ) {
-	return await createEntityWithStatements( statements, 'item' );
+	return ( await newCreateItemRequestBuilder( {
+		labels: { en: `item with statements ${utils.uniq()}` },
+		statements: Array.isArray( statements ) ? statementListToStatementGroups( statements ) : statements
+	} ).makeRequest() ).body;
+}
+
+function statementListToStatementGroups( statementList ) {
+	return statementList.reduce( ( groups, statement ) => ( {
+		...groups,
+		[ statement.property.id ]: [ ...( groups[ statement.property.id ] || [] ), statement ]
+	} ), {} );
 }
 
 /**
@@ -68,7 +64,12 @@ async function createItemWithStatements( statements ) {
  * @return {Object}
  */
 async function createPropertyWithStatements( statements ) {
-	return await createEntityWithStatements( statements, 'property' );
+	const propertyId = ( await createUniqueStringProperty() ).entity.id;
+	for ( const statement of statements ) {
+		await newAddPropertyStatementRequestBuilder( propertyId, statement ).makeRequest();
+	}
+
+	return ( await newGetPropertyRequestBuilder( propertyId ).makeRequest() ).body;
 }
 
 /**
@@ -114,24 +115,6 @@ async function changeEntityProtectionStatus( entityId, allowedUserGroup ) {
 
 /**
  * @param {string} propertyId
- * @return {{mainsnak: {datavalue: {type: string, value: string}, property: string, snaktype: string}}}
- */
-function newLegacyStatementWithRandomStringValue( propertyId ) {
-	return {
-		mainsnak: {
-			snaktype: 'value',
-			datavalue: {
-				type: 'string',
-				value: 'random-string-value-' + utils.uniq()
-			},
-			property: propertyId
-		},
-		type: 'statement'
-	};
-}
-
-/**
- * @param {string} propertyId
  * @return {{property: {id: string}, value: {type: string, content: string}}}
  */
 function newStatementWithRandomStringValue( propertyId ) {
@@ -171,7 +154,6 @@ module.exports = {
 	createEntity,
 	editEntity,
 	deleteProperty,
-	createEntityWithStatements,
 	createItemWithStatements,
 	createPropertyWithStatements,
 	createUniqueStringProperty,
@@ -179,7 +161,6 @@ module.exports = {
 	getLatestEditMetadata,
 	changeEntityProtectionStatus,
 	newStatementWithRandomStringValue,
-	newLegacyStatementWithRandomStringValue,
 	getLocalSiteId,
 	createLocalSitelink,
 	createWikiPage

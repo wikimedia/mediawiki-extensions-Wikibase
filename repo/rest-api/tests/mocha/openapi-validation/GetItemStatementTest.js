@@ -15,12 +15,12 @@ describe( 'validate GET item statement responses', () => {
 
 	before( async () => {
 		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( statementPropertyId )
+		const item = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 		] );
-		testItemId = createItemResponse.entity.id;
-		testStatementId = Object.values( createItemResponse.entity.claims )[ 0 ][ 0 ].id;
-		lastRevId = createItemResponse.entity.lastrevid;
+		testItemId = item.id;
+		testStatementId = item.statements[ statementPropertyId ][ 0 ].id;
+		lastRevId = ( await entityHelper.getLatestEditMetadata( testItemId ) ).revid;
 	} );
 
 	[

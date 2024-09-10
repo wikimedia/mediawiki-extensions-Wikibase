@@ -5,9 +5,9 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
-	newReplacePropertyStatementRequestBuilder,
 	newReplaceStatementRequestBuilder,
-	newGetPropertyStatementsRequestBuilder
+	newGetPropertyStatementsRequestBuilder,
+	newReplacePropertyStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -23,10 +23,10 @@ describe( 'PUT statement tests', () => {
 	before( async () => {
 		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createPropertyResponse = await entityHelper.createPropertyWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId )
+			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 		] );
-		testPropertyId = createPropertyResponse.entity.id;
-		testStatementId = createPropertyResponse.entity.claims[ testStatementPropertyId ][ 0 ].id;
+		testPropertyId = createPropertyResponse.id;
+		testStatementId = createPropertyResponse.statements[ testStatementPropertyId ][ 0 ].id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
@@ -146,12 +146,12 @@ describe( 'PUT statement tests', () => {
 					// This is tested here by creating a new test property with three statements, replacing the
 					// middle one and then checking that it's still in the middle afterwards.
 					const newTestProperty = ( await entityHelper.createPropertyWithStatements( [
-						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( testStatementPropertyId )
-					] ) ).entity;
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId ),
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId ),
+						entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
+					] ) );
 
-					const originalSecondStatement = newTestProperty.claims[ testStatementPropertyId ][ 1 ];
+					const originalSecondStatement = newTestProperty.statements[ testStatementPropertyId ][ 1 ];
 					const newSecondStatement = entityHelper.newStatementWithRandomStringValue(
 						testStatementPropertyId
 					);
@@ -173,7 +173,7 @@ describe( 'PUT statement tests', () => {
 					);
 					assert.notEqual(
 						actualSecondStatement.value.content,
-						originalSecondStatement.mainsnak.datavalue.value
+						originalSecondStatement.value.content
 					);
 				} );
 

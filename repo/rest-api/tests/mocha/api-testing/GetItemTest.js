@@ -3,15 +3,14 @@
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	getLatestEditMetadata,
-	newLegacyStatementWithRandomStringValue,
+	newStatementWithRandomStringValue,
 	createUniqueStringProperty,
 	getLocalSiteId,
 	createLocalSitelink
 } = require( '../helpers/entityHelper' );
-const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetItemRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -36,19 +35,17 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 		siteId = await getLocalSiteId();
 
 		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		testStatement = newLegacyStatementWithRandomStringValue( testStatementPropertyId );
+		testStatement = newStatementWithRandomStringValue( testStatementPropertyId );
 
-		const createItemResponse = await createEntity( 'item', {
+		const createItemResponse = await newCreateItemRequestBuilder( {
 			labels: {
-				de: { language: 'de', value: germanLabel },
-				en: { language: 'en', value: englishLabel }
+				de: germanLabel,
+				en: englishLabel
 			},
-			descriptions: {
-				en: { language: 'en', value: englishDescription }
-			},
-			claims: [ testStatement ]
-		} );
-		testItemId = createItemResponse.entity.id;
+			descriptions: { en: englishDescription },
+			statements: { [ testStatementPropertyId ]: [ testStatement ] }
+		} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
@@ -69,9 +66,9 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 		} );
 		assert.deepEqual( response.body.descriptions, { en: englishDescription } );
 
-		assert.strictEqual(
-			response.body.statements[ testStatementPropertyId ][ 0 ].value.content,
-			testStatement.mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body.statements[ testStatementPropertyId ][ 0 ].value,
+			testStatement.value
 		);
 
 		assert.include( response.body.sitelinks[ siteId ].url, linkedArticle );

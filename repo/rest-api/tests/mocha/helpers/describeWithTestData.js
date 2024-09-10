@@ -3,14 +3,13 @@
 const { utils } = require( 'api-testing' );
 const {
 	createLocalSitelink,
-	editEntity,
-	newLegacyStatementWithRandomStringValue,
 	createWikiPage,
 	createUniqueStringProperty,
 	createEntity,
-	getLocalSiteId
+	getLocalSiteId, newStatementWithRandomStringValue
 } = require( './entityHelper' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
+const { newPatchItemRequestBuilder, newPatchPropertyRequestBuilder } = require( './RequestBuilderFactory' );
 
 function describeWithTestData( testName, runAllTests ) {
 	const itemRequestInputs = {};
@@ -19,17 +18,23 @@ function describeWithTestData( testName, runAllTests ) {
 	const newLinkedArticle = utils.title( 'New-article-linked-to-test-item' );
 
 	async function resetEntityTestData( id, statementPropertyId ) {
-		const editEntityResponse = await editEntity( id, {
-			labels: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-			descriptions: [ { language: 'en', value: `entity-with-statements-${utils.uniq()}` } ],
-			aliases: [ { language: 'en', value: 'entity' }, { language: 'en', value: 'thing' } ],
-			claims: { [ statementPropertyId ]: [ newLegacyStatementWithRandomStringValue( statementPropertyId ) ] }
-		}, true );
-		if ( id.startsWith( 'Q' ) ) {
+		const isItem = id.startsWith( 'Q' );
+		const patchEntity = isItem ? newPatchItemRequestBuilder : newPatchPropertyRequestBuilder;
+		const editEntityResponse = await patchEntity( id, [
+			{ op: 'add', path: '/labels/en', value: `entity-with-statements-${utils.uniq()}` },
+			{ op: 'add', path: '/descriptions/en', value: `entity-with-statements-${utils.uniq()}` },
+			{ op: 'add', path: '/aliases/en', value: [ 'entity', 'thing' ] },
+			{
+				op: 'add',
+				path: `/statements/${statementPropertyId}`,
+				value: [ newStatementWithRandomStringValue( statementPropertyId ) ]
+			}
+		] ).makeRequest();
+		if ( isItem ) {
 			await createLocalSitelink( id, originalLinkedArticle, [ ( await getAllowedBadges() )[ 0 ] ] );
 		}
 
-		return editEntityResponse.entity;
+		return editEntityResponse.body;
 	}
 
 	function describeEachRouteWithReset( routes, runForEachRoute ) {
@@ -43,7 +48,7 @@ function describeWithTestData( testName, runAllTests ) {
 							requestInputs.mainTestSubject,
 							requestInputs.statementPropertyId
 						);
-						requestInputs.statementId = entity.claims[ requestInputs.statementPropertyId ][ 0 ].id;
+						requestInputs.statementId = entity.statements[ requestInputs.statementPropertyId ][ 0 ].id;
 					}
 				} );
 
@@ -61,7 +66,7 @@ function describeWithTestData( testName, runAllTests ) {
 			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
 			itemRequestInputs.mainTestSubject = itemId;
 			itemRequestInputs.itemId = itemId;
-			itemRequestInputs.statementId = item.claims[ statementPropertyId ][ 0 ].id;
+			itemRequestInputs.statementId = item.statements[ statementPropertyId ][ 0 ].id;
 			itemRequestInputs.statementPropertyId = statementPropertyId;
 			itemRequestInputs.siteId = await getLocalSiteId();
 			itemRequestInputs.linkedArticle = newLinkedArticle;
@@ -70,7 +75,7 @@ function describeWithTestData( testName, runAllTests ) {
 			const property = await resetEntityTestData( propertyId, statementPropertyId );
 			propertyRequestInputs.mainTestSubject = propertyId;
 			propertyRequestInputs.propertyId = propertyId;
-			propertyRequestInputs.statementId = property.claims[ statementPropertyId ][ 0 ].id;
+			propertyRequestInputs.statementId = property.statements[ statementPropertyId ][ 0 ].id;
 			propertyRequestInputs.statementPropertyId = statementPropertyId;
 
 		} );

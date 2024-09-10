@@ -2,9 +2,9 @@
 
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntityWithStatements,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue
+	createPropertyWithStatements,
+	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
@@ -28,10 +28,10 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 
 	it( '200 OK response is valid for an Property with statements', async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const { entity: { id } } = await createEntityWithStatements( [
-			newLegacyStatementWithRandomStringValue( statementPropertyId ),
-			newLegacyStatementWithRandomStringValue( statementPropertyId )
-		], 'property' );
+		const { id } = await createPropertyWithStatements( [
+			newStatementWithRandomStringValue( statementPropertyId ),
+			newStatementWithRandomStringValue( statementPropertyId )
+		] );
 		const response = await newGetPropertyStatementsRequestBuilder( id ).makeRequest();
 
 		expect( response ).to.have.status( 200 );

@@ -6,7 +6,7 @@ const {
 	createRedirectForItem,
 	createItemWithStatements,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue
+	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
@@ -30,9 +30,9 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 	it( '200 OK response is valid for an Item with statements', async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const { entity: { id } } = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( statementPropertyId ),
-			newLegacyStatementWithRandomStringValue( statementPropertyId )
+		const { id } = await createItemWithStatements( [
+			newStatementWithRandomStringValue( statementPropertyId ),
+			newStatementWithRandomStringValue( statementPropertyId )
 		] );
 		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 

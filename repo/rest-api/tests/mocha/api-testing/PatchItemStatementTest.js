@@ -6,7 +6,6 @@ const entityHelper = require( '../helpers/entityHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
-	newAddItemStatementRequestBuilder,
 	newPatchItemStatementRequestBuilder,
 	newPatchStatementRequestBuilder,
 	newReplaceStatementRequestBuilder
@@ -23,17 +22,13 @@ describe( 'PATCH statement tests', () => {
 	let previousEtag;
 
 	before( async function () {
-		testItemId = ( await entityHelper.createItemWithStatements( [] ) ).entity.id;
+		const propertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const item = await entityHelper.createItemWithStatements( [
+			entityHelper.newStatementWithRandomStringValue( propertyId )
+		] );
 
-		const addStatementResponse = await newAddItemStatementRequestBuilder(
-			testItemId,
-			entityHelper.newStatementWithRandomStringValue(
-				( await entityHelper.createUniqueStringProperty() ).entity.id
-			)
-		).assertValidRequest().makeRequest();
-
-		expect( addStatementResponse ).to.have.status( 201 );
-		testStatement = addStatementResponse.body;
+		testItemId = item.id;
+		testStatement = item.statements[ propertyId ][ 0 ];
 		testStatementId = testStatement.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
