@@ -8,6 +8,7 @@ use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleValue;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\LangLinkHandler;
@@ -164,7 +165,7 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 		NoLangLinkHandler::appendNoExternalLangLinks( $parserOutput, $noExternalLangLinks );
 
 		foreach ( $langLinks as $lang => $link ) {
-			$parserOutput->addLanguageLink( "$lang:$link" );
+			$parserOutput->addLanguageLink( new TitleValue( NS_MAIN, $link, '', $lang ) );
 		}
 
 		return $parserOutput;
