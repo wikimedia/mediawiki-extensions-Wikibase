@@ -23,10 +23,10 @@ describe( 'PUT statement tests', () => {
 	before( async () => {
 		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
-			entityHelper.newLegacyStatementWithRandomStringValue( predicatePropertyId )
+			entityHelper.newStatementWithRandomStringValue( predicatePropertyId )
 		] );
-		testItemId = createItemResponse.entity.id;
-		testStatementId = createItemResponse.entity.claims[ predicatePropertyId ][ 0 ].id;
+		testItemId = createItemResponse.id;
+		testStatementId = createItemResponse.statements[ predicatePropertyId ][ 0 ].id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -125,12 +125,12 @@ describe( 'PUT statement tests', () => {
 					// This is tested here by creating a new test item with three statements, replacing the
 					// middle one and then checking that it's still in the middle afterwards.
 					const newTestItem = ( await entityHelper.createItemWithStatements( [
-						entityHelper.newLegacyStatementWithRandomStringValue( predicatePropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( predicatePropertyId ),
-						entityHelper.newLegacyStatementWithRandomStringValue( predicatePropertyId )
-					] ) ).entity;
+						entityHelper.newStatementWithRandomStringValue( predicatePropertyId ),
+						entityHelper.newStatementWithRandomStringValue( predicatePropertyId ),
+						entityHelper.newStatementWithRandomStringValue( predicatePropertyId )
+					] ) );
 
-					const originalSecondStatement = newTestItem.claims[ predicatePropertyId ][ 1 ];
+					const originalSecondStatement = newTestItem.statements[ predicatePropertyId ][ 1 ];
 					const newSecondStatement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 
 					await newReplaceRequestBuilder( newTestItem.id, originalSecondStatement.id, newSecondStatement )
@@ -144,7 +144,7 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( actualSecondStatement.value.content, newSecondStatement.value.content );
 					assert.notEqual(
 						actualSecondStatement.value.content,
-						originalSecondStatement.mainsnak.datavalue.value
+						originalSecondStatement.value.content
 					);
 				} );
 

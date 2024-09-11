@@ -4,9 +4,8 @@ const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue,
-	createEntity,
-	getLatestEditMetadata
+	getLatestEditMetadata,
+	newStatementWithRandomStringValue, createPropertyWithStatements
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -29,21 +28,12 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 		testStatementPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
 
 		testStatements = [
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId1 ),
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId1 ),
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId2 )
+			newStatementWithRandomStringValue( testStatementPropertyId1 ),
+			newStatementWithRandomStringValue( testStatementPropertyId1 ),
+			newStatementWithRandomStringValue( testStatementPropertyId2 )
 		];
 
-		testStatements.forEach( ( statement ) => {
-			statement.type = 'statement';
-		} );
-
-		const property = await createEntity( 'property', {
-			claims: testStatements,
-			datatype: 'string'
-		} );
-
-		propertyId = property.entity.id;
+		propertyId = ( await createPropertyWithStatements( testStatements ) ).id;
 
 		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
 		testModified = testPropertyCreationMetadata.timestamp;
@@ -57,13 +47,13 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 
 		expect( response ).to.have.status( 200 );
 		assert.exists( response.body[ testStatementPropertyId1 ] );
-		assert.equal(
-			response.body[ testStatementPropertyId1 ][ 0 ].value.content,
-			testStatements[ 0 ].mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body[ testStatementPropertyId1 ][ 0 ].value,
+			testStatements[ 0 ].value
 		);
-		assert.equal(
-			response.body[ testStatementPropertyId1 ][ 1 ].value.content,
-			testStatements[ 1 ].mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body[ testStatementPropertyId1 ][ 1 ].value,
+			testStatements[ 1 ].value
 		);
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );

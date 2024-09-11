@@ -5,9 +5,9 @@ const { expect } = require( '../helpers/chaiHelper' );
 const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	newStatementWithRandomStringValue,
-	createEntityWithStatements,
+	createItemWithStatements,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue
+	createPropertyWithStatements
 } = require( '../helpers/entityHelper' );
 
 describe( 'Redirected statementId requests', () => {
@@ -23,20 +23,18 @@ describe( 'Redirected statementId requests', () => {
 	before( async () => {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 
-		const createItemResponse = await createEntityWithStatements(
-			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
-			'item'
+		const item = await createItemWithStatements(
+			[ newStatementWithRandomStringValue( statementPropertyId ) ]
 		);
-		itemId = createItemResponse.entity.id;
-		itemStatementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		itemId = item.id;
+		itemStatementId = item.statements[ statementPropertyId ][ 0 ].id;
 		lowercaseItemStatementId = itemStatementId.replace( /^Q/, 'q' );
 
-		const createPropertyResponse = await createEntityWithStatements(
-			[ newLegacyStatementWithRandomStringValue( statementPropertyId ) ],
-			'property'
+		const property = await createPropertyWithStatements(
+			[ newStatementWithRandomStringValue( statementPropertyId ) ]
 		);
-		propertyId = createPropertyResponse.entity.id;
-		propertyStatementId = createPropertyResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		propertyId = property.id;
+		propertyStatementId = property.statements[ statementPropertyId ][ 0 ].id;
 		lowercasePropertyStatementId = propertyStatementId.replace( /^P/, 'p' );
 	} );
 

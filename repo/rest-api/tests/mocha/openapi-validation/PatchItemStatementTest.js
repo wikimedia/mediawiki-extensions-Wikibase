@@ -4,7 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
-	newLegacyStatementWithRandomStringValue
+	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const {
 	newPatchItemStatementRequestBuilder,
@@ -19,10 +19,10 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 	before( async function () {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createEntityResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( statementPropertyId )
+			newStatementWithRandomStringValue( statementPropertyId )
 		] );
-		testItemId = createEntityResponse.entity.id;
-		testStatementId = createEntityResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		testItemId = createEntityResponse.id;
+		testStatementId = createEntityResponse.statements[ statementPropertyId ][ 0 ].id;
 	} );
 
 	[

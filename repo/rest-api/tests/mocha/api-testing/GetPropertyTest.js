@@ -5,10 +5,10 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createEntity,
 	createUniqueStringProperty,
-	newLegacyStatementWithRandomStringValue,
-	getLatestEditMetadata
+	getLatestEditMetadata,
+	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const { newGetPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetPropertyRequestBuilder, newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -30,8 +30,6 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		testStatement = newLegacyStatementWithRandomStringValue( testStatementPropertyId );
-
 		const createPropertyResponse = await createEntity( 'property', {
 			datatype: testPropertyDataType,
 			labels: {
@@ -40,10 +38,12 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 			},
 			descriptions: {
 				en: { language: 'en', value: englishDescription }
-			},
-			claims: [ testStatement ]
+			}
 		} );
 		testPropertyId = createPropertyResponse.entity.id;
+		testStatement = newStatementWithRandomStringValue( testStatementPropertyId );
+		await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement ).makeRequest();
+
 		const testPropertyCreationMetadata = await getLatestEditMetadata( testPropertyId );
 		testModified = testPropertyCreationMetadata.timestamp;
 		testRevisionId = testPropertyCreationMetadata.revid;
@@ -65,9 +65,9 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 		assert.deepEqual( response.body.descriptions, { en: englishDescription } );
 
-		assert.strictEqual(
-			response.body.statements[ testStatementPropertyId ][ 0 ].value.content,
-			testStatement.mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body.statements[ testStatementPropertyId ][ 0 ].value,
+			testStatement.value
 		);
 
 		assert.equal( response.header[ 'last-modified' ], testModified );

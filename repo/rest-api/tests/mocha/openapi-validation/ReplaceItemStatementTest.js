@@ -4,8 +4,7 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
 	createItemWithStatements,
-	newStatementWithRandomStringValue,
-	newLegacyStatementWithRandomStringValue
+	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
 const {
 	newReplaceItemStatementRequestBuilder,
@@ -21,10 +20,10 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 	before( async () => {
 		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const createItemResponse = await createItemWithStatements( [
-			newLegacyStatementWithRandomStringValue( statementPropertyId )
+			newStatementWithRandomStringValue( statementPropertyId )
 		] );
-		testItemId = createItemResponse.entity.id;
-		testStatementId = createItemResponse.entity.claims[ statementPropertyId ][ 0 ].id;
+		testItemId = createItemResponse.id;
+		testStatementId = createItemResponse.statements[ statementPropertyId ][ 0 ].id;
 	} );
 
 	[

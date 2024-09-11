@@ -7,7 +7,7 @@ const {
 	createRedirectForItem,
 	createUniqueStringProperty,
 	getLatestEditMetadata,
-	newLegacyStatementWithRandomStringValue,
+	newStatementWithRandomStringValue,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
 const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
@@ -28,12 +28,11 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		testStatementPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
 
 		testStatements = [
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId ),
-			newLegacyStatementWithRandomStringValue( testStatementPropertyId2 )
+			newStatementWithRandomStringValue( testStatementPropertyId ),
+			newStatementWithRandomStringValue( testStatementPropertyId ),
+			newStatementWithRandomStringValue( testStatementPropertyId2 )
 		];
-		const createItemResponse = await createItemWithStatements( testStatements );
-		testItemId = createItemResponse.entity.id;
+		testItemId = ( await createItemWithStatements( testStatements ) ).id;
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
 		testModified = testItemCreationMetadata.timestamp;
@@ -47,13 +46,13 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.exists( response.body[ testStatementPropertyId ] );
-		assert.equal(
-			response.body[ testStatementPropertyId ][ 0 ].value.content,
-			testStatements[ 0 ].mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body[ testStatementPropertyId ][ 0 ].value,
+			testStatements[ 0 ].value
 		);
-		assert.equal(
-			response.body[ testStatementPropertyId ][ 1 ].value.content,
-			testStatements[ 1 ].mainsnak.datavalue.value
+		assert.deepEqual(
+			response.body[ testStatementPropertyId ][ 1 ].value,
+			testStatements[ 1 ].value
 		);
 		assert.equal( response.header[ 'last-modified' ], testModified );
 		assert.equal( response.header.etag, makeEtag( testRevisionId ) );
