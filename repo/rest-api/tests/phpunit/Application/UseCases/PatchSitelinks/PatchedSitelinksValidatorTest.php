@@ -165,7 +165,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $e ) {
-			$this->assertEquals( UseCaseError::newPatchResultResourceNotFound( "/$validSiteId/title", $nonExistingTitle ), $e );
+			$this->assertEquals( UseCaseError::newPatchResultReferencedResourceNotFound( "/$validSiteId/title", $nonExistingTitle ), $e );
 		}
 	}
 

@@ -62,7 +62,10 @@ class PatchedSitelinksValidator {
 				throw UseCaseError::newPatchResultInvalidValue( "/{$siteId()}/badges/$badgeIndex", $badge );
 
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
-				throw UseCaseError::newPatchResultResourceNotFound( '/' . $siteId() . '/title', $serialization[$siteId()][ 'title' ] );
+				throw UseCaseError::newPatchResultReferencedResourceNotFound(
+					'/' . $siteId() . '/title',
+					$serialization[$siteId()][ 'title' ]
+				);
 
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
 				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
