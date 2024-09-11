@@ -86,7 +86,7 @@
 	"wikibase-entity-summary-wbeditentity-update": "ישות שונתה",
 	"wikibase-entity-summary-wbeditentity-override": "ישות נוקתה",
 	"wikibase-entity-summary-wbeditentity-update-languages": "{{WBREPONAME}} נעשה שינוי בתווית, בתיאור, או בכינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}",
-	"wikibase-entity-summary-wbeditentity-update-languages-short": "נעשה שינוי בתווית, בתיאור, או בכינויים בפריטים {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "נעשה שינוי בתווית, בתיאור או בכינויים בפריטים ב־{{#commaseparatedlist: $3}}",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "{{WBREPONAME}} נעשה שינוי בתווית, בתיאור, או בכינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}, ובחלקים אחרים",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "נעשה שינוי בתווית, בתיאור, או הכינויים בפריטים {{#commaseparatedlist: $3}}, ובחלקים אחרים",
 	"wikibase-entity-summary-wbsetreference": "הוגדר מקור",
