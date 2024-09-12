@@ -12,5 +12,7 @@
 	"wikibase-linkitem-selectlink": "Sungula kaaba ne dibeji udi wewa musua kupeta maapeta ne dibeji edi.",
 	"wikibase-linkitem-input-site": "Muakulu",
 	"wikibase-linkitem-input-page": "Dibeji",
-	"wikibase-rc-hide-wikidata-hide": "Kusokoka"
+	"wikibase-rc-hide-wikidata-hide": "Kusokoka",
+	"wikibase-rc-hide-wikidata-show": "Kuleeja",
+	"wikibase-otherprojects": "Mu mabangu makuabu"
 }

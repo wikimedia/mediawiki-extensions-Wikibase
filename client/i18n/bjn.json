@@ -53,6 +53,7 @@
 	"wikibase-watchlist-show-changes-pref": "Tampaiakan babakan {{WBREPONAME}} pada daptar itihan Pian",
 	"unconnectedpages": "Laman nang balum tahubung ka butir",
 	"wikibase-unconnectedpages-submit": "Tampaiakan laman",
+	"wikibase-pageinfo-entity-usage": "Éntitas {{WBREPONAME}} nang dipakai di laman ini",
 	"wikibase-otherprojects": "Dalam rangka gawian lain",
 	"wikibase-otherprojects-beta-message": "Bilah higa rangka-gawi lainnya",
 	"wikibase-otherprojects-beta-description": "Tambahakan bagian \"{{int:wikibase-otherprojects}}\" ka bilah higa nang manyadiaakan tautan ka rangka-gawian Wikimédia lainnya bapandal data {{WBREPONAME}}.",

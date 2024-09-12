@@ -55,6 +55,8 @@
 	"wikibase-time-precision-millennium": "$1. tusenåret",
 	"wikibase-time-precision-century": "$1. hundreåret",
 	"wikibase-time-precision-10annum": "$1-åra",
+	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|milliard|milliardar}} år f.Kr.",
+	"wikibase-time-precision-BCE-Mannum": "$1 millionar år f.Kr.",
 	"wikibase-time-precision-BCE-millennium": "$1. tusenåret f.Kr.",
 	"wikibase-time-precision-BCE-century": "$1. hundreåret f.Kr.",
 	"wikibase-snakformatter-property-not-found": "Fann ikkje eigenskapen $1, kan ikkje avgjera kva datatype som skal nyttast.",

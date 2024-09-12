@@ -4,12 +4,15 @@
 			"Kwekubo",
 			"MinecraftAustralia",
 			"Tem",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Kscanne"
 		]
 	},
 	"wikibase-edit": "cuir in eagar",
 	"wikibase-save": "Sábháil",
 	"wikibase-cancel": "Cealaigh",
+	"wikibase-add": "cuir leis",
+	"wikibase-description-empty": "Níl aon chur síos ann",
 	"wikibase-sitelinks-special": "Suíomhanna eile",
 	"wikibase-itembytitle-lookup-page": "Leathanach:",
 	"wikibase-itembytitle-submit": "Cuardaigh",
