@@ -131,7 +131,6 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '400 error response ', () => {
-
 		it( 'item ID is invalid', async () => {
 			const itemId = 'X123';
 			const response = await newPatchItemRequestBuilder( itemId, [] )
@@ -146,54 +145,6 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		testValidatesPatch( ( patch ) => newPatchItemRequestBuilder( testItemId, patch ) );
-
-		it( 'comment too long', async () => {
-			const response = await newPatchItemRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newPatchItemRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'invalid edit tag type', async () => {
-			const response = await newPatchItemRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/tags' } );
-		} );
-
-		it( 'invalid bot flag', async () => {
-			const response = await newPatchItemRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'bot', 'should be a boolean' )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/bot' } );
-		} );
-
-		it( 'invalid comment type', async () => {
-			const response = await newPatchItemRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/comment' } );
-		} );
 	} );
 
 	describe( '404 error response', () => {

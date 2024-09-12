@@ -157,7 +157,6 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	} );
 
 	describe( '400 error response', () => {
-
 		it( 'invalid property ID', async () => {
 			const response = await newSetPropertyDescriptionRequestBuilder( 'X11', 'en', 'description' )
 				.assertInvalidRequest().makeRequest();
@@ -234,37 +233,6 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			);
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
-
-		it( 'invalid edit tag type', async () => {
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
-				.withJsonBodyParam( 'tags', 'not an array' )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/tags' } );
-		} );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'comment too long', async () => {
-			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, 'en', 'description' )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
 	} );
 
 	describe( '404 error response', () => {

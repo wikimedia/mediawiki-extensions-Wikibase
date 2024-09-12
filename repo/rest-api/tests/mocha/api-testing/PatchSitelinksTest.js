@@ -95,7 +95,6 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '400 error response', () => {
-
 		it( 'invalid item id', async () => {
 			const itemId = testItemId.replace( 'Q', 'P' );
 			const response = await newPatchSitelinksRequestBuilder( itemId, [] )
@@ -110,51 +109,6 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		testValidatesPatch( ( patch ) => newPatchSitelinksRequestBuilder( testItemId, patch ) );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] ).assertValidRequest().makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'invalid edit tag type', async () => {
-			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/tags' } );
-		} );
-
-		it( 'invalid bot flag type', async () => {
-			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/bot' } );
-		} );
-
-		it( 'comment too long', async () => {
-			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
-		it( 'invalid comment type', async () => {
-			const response = await newPatchSitelinksRequestBuilder( testItemId, [] )
-				.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/comment' } );
-		} );
-
 	} );
 
 	describe( '404 error response', () => {

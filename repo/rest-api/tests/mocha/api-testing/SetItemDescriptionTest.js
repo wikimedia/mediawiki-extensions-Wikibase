@@ -156,7 +156,6 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	describe( '400 error response', () => {
-
 		it( 'invalid item ID', async () => {
 			const invalidItemId = 'X11';
 			const response = await newSetItemDescriptionRequestBuilder(
@@ -261,37 +260,6 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 422, 'data-policy-violation', context );
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', 'item description' )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'invalid comment type', async () => {
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', 'description' )
-				.withJsonBodyParam( 'comment', 1234 )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/comment' } );
-		} );
-
-		it( 'comment too long', async () => {
-			const response = await newSetItemDescriptionRequestBuilder( testItemId, 'en', 'item description' )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
 	} );
 
 	describe( '404 error response', () => {
