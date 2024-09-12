@@ -1,0 +1,447 @@
+{
+	"InvalidRetrieveStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidReplaceStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
+					"cannot-modify-read-only-value": {
+						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
+					},
+					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRemoveStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"ItemStatementCreated": {
+		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			},
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URI of the newly created statement"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "../../global/response-parts.json#/StatementResponse"
+				}
+			}
+		}
+	},
+	"ItemStatements": {
+		"description": "The statements of an Item",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "array",
+						"items": { "$ref": "../../global/response-parts.json#/StatementResponse" }
+					}
+				},
+				"example": {
+					"P370": [
+						{
+							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P370",
+								"data_type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					],
+					"P92": [
+						{
+							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P92",
+								"data_type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					]
+				}
+			}
+		}
+	},
+	"InvalidRetrieveItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": {
+						"$ref": "../../global/examples.json#/InvalidPathParameterExample"
+					},
+					"item-statement-id-mismatch": {
+						"$ref": "../../global/examples.json#/ItemStatementIdMismatchExample"
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidReplaceItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"item-statement-id-mismatch": { "$ref": "../../global/examples.json#/ItemStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
+					"cannot-modify-read-only-value": {
+						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
+					},
+					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRemoveItemStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"item-statement-id-mismatch": { "$ref": "../../global/examples.json#/ItemStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidItemStatementPatch": {
+		"description": "The provided JSON Patch is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"item-statement-id-mismatch": { "$ref": "../../global/examples.json#/ItemStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"PropertyStatementCreated": {
+		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			},
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URI of the newly created statement"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"$ref": "../../global/response-parts.json#/StatementResponse"
+				},
+				"example": {
+					"$ref": "../../global/examples.json#/PropertyStatementResponseExample/value"
+				}
+			}
+		}
+	},
+	"PropertyStatements": {
+		"description": "The statements of a Property",
+		"headers": {
+			"Last-Modified": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last modified date"
+			},
+			"ETag": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Last entity revision number"
+			},
+			"X-Authenticated-User": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Optional username of the user making the request"
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "array",
+						"items": { "$ref": "../../global/response-parts.json#/StatementResponse" }
+					}
+				},
+				"example": {
+					"P370": [
+						{
+							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P370",
+								"data_type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					],
+					"P92": [
+						{
+							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+							"rank": "normal",
+							"property": {
+								"id": "P92",
+								"data_type": "string"
+							},
+							"value": {
+								"content": "I am a goat",
+								"type": "value"
+							},
+							"qualifiers": [],
+							"references": []
+						}
+					]
+				}
+			}
+		}
+	},
+	"InvalidRetrievePropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"property-statement-id-mismatch": { "$ref": "../../global/examples.json#/PropertyStatementIdMismatchExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidReplacePropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"property-statement-id-mismatch": { "$ref": "../../global/examples.json#/PropertyStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
+					"cannot-modify-read-only-value": {
+						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
+					},
+					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidRemovePropertyStatementInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"property-statement-id-mismatch": { "$ref": "../../global/examples.json#/PropertyStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
+	"InvalidPropertyStatementPatch": {
+		"description": "The provided JSON Patch is invalid",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"property-statement-id-mismatch": { "$ref": "../../global/examples.json#/PropertyStatementIdMismatchExample" },
+					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
+					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
+					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
+					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	}
+}

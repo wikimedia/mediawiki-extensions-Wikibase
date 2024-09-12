@@ -1,9 +1,7 @@
 {
 	"get": {
 		"operationId": "getPropertyStatement",
-		"tags": [
-			"statements"
-		],
+		"tags": [ "statements" ],
 		"summary": "Retrieve a single Statement from a Property",
 		"description": "This endpoint is also accessible through `/statements/{statement_id}`",
 		"parameters": [
@@ -18,11 +16,10 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRetrievePropertyStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidRetrievePropertyStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
-
 		}
 	},
 	"put": {
@@ -40,7 +37,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
-			"400": { "$ref": "../../global/responses.json#/InvalidReplacePropertyStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidReplacePropertyStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -61,7 +58,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
-			"400": { "$ref": "../../global/responses.json#/InvalidPropertyStatementPatch" },
+			"400": { "$ref": "./responses.json#/InvalidPropertyStatementPatch" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
@@ -84,7 +81,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRemovePropertyStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidRemovePropertyStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
