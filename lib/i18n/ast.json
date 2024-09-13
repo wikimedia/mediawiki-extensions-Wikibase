@@ -3,7 +3,8 @@
 		"authors": [
 			"Fitoschido",
 			"Macofe",
-			"Xuacu"
+			"Xuacu",
+			"YoaR"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -18,6 +19,7 @@
 	"wikibase-error-ui-no-external-page": "Nun pudo alcontrase la páxina «$2» en «$1».",
 	"wikibase-error-ui-edit-conflict": "Editóse'l mesmu valor al tiempu, causando un conflictu d'edición. Recarga la páxina.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (treslliterao)",
+	"wikibase-language-name-for-terms-mul": "por defeutu pa tolos idiomes",
 	"wikibase-quantitydetails-amount": "Cantidá",
 	"wikibase-quantitydetails-upperbound": "Máximu",
 	"wikibase-quantitydetails-lowerbound": "Mínimu",
