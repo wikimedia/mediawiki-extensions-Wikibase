@@ -916,7 +916,7 @@ return [
 			$site->addLocalId( Site::ID_EQUIVALENT, $localId );
 		}
 
-		if ( !in_array( $localId, array_merge( [], ...array_values( $site->getLocalIds() ) ) ) ) {
+		if ( !in_array( $localId, array_merge( ...array_values( $site->getLocalIds() ) ) ) ) {
 			$logger->debug(
 				'WikibaseClient.ServiceWiring.php::WikibaseClient.Site: ' .
 				'The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
