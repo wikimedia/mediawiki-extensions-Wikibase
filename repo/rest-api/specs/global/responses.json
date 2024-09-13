@@ -160,8 +160,8 @@
 				"examples": {
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
 					"statement-group-property-id-mismatch": { "$ref": "./examples.json#/StatementGroupPropertyIdMismatch" },
-					"title-does-not-exist": {
-						"$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
+					"referenced-resource-not-found": {
+						"$ref": "./examples.json#/ReferencedResourceNotFoundExample"
 					},
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
@@ -461,7 +461,7 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"title-does-not-exist": { "$ref": "./examples.json#/TitleDoesNotExistOnGivenSiteExample" }
+					"referenced-resource-not-found": { "$ref": "./examples.json#/ReferencedResourceNotFoundExample" }
 				}
 			}
 		},

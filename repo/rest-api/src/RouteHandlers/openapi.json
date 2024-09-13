@@ -3866,8 +3866,8 @@
               "statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
               },
-              "title-does-not-exist": {
-                "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteWithSiteContextExample"
+              "referenced-resource-not-found": {
+                "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
               },
               "invalid-value": {
                 "$ref": "#/components/examples/InvalidValueExample"
@@ -4325,8 +4325,8 @@
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
               },
-              "title-does-not-exist": {
-                "$ref": "#/components/examples/TitleDoesNotExistOnGivenSiteExample"
+              "referenced-resource-not-found": {
+                "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
               }
             }
           }
@@ -6345,18 +6345,12 @@
           }
         }
       },
-      "TitleDoesNotExistOnGivenSiteExample": {
+      "ReferencedResourceNotFoundExample": {
         "value": {
-          "code": "title-does-not-exist",
-          "message": "Page with title {title} does not exist on the given site"
-        }
-      },
-      "TitleDoesNotExistOnGivenSiteWithSiteContextExample": {
-        "value": {
-          "code": "title-does-not-exist",
-          "message": "Page with title {title} does not exist on the given site",
+          "code": "referenced-resource-not-found",
+          "message": "The referenced resource does not exist",
           "context": {
-            "site": "{site_id}"
+            "path": "{json_pointer}"
           }
         }
       },

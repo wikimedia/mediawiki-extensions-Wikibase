@@ -201,12 +201,7 @@ class ItemSerializationRequestValidatingDeserializer {
 				$badgeIndex = Utils::getIndexOfValueInSerialization( $badge, $serialization[$siteId()][ 'badges' ] );
 				throw UseCaseError::newInvalidValue( "/item/sitelinks/{$siteId()}/badges/$badgeIndex" );
 			case SitelinkValidator::CODE_TITLE_NOT_FOUND:
-				$title = $serialization[$siteId()]['title'];
-				throw new UseCaseError(
-					UseCaseError::SITELINK_TITLE_NOT_FOUND,
-					"Page with title $title does not exist on the given site",
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId() ]
-				);
+				throw UseCaseError::newReferencedResourceNotFound( "/item/sitelinks/{$siteId()}/title" );
 			case SitelinkValidator::CODE_SITELINK_CONFLICT:
 				$conflictingItemId = $context[ SitelinkValidator::CONTEXT_CONFLICTING_ITEM_ID ];
 				throw UseCaseError::newDataPolicyViolation(

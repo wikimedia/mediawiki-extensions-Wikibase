@@ -661,11 +661,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title } }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'title-does-not-exist', { site_id: localWikiId } );
-			assert.strictEqual(
-				response.body.message,
-				`Page with title ${title} does not exist on the given site`
-			);
+			const context = { path: `/item/sitelinks/${localWikiId}/title` };
+			assertValidError( response, 400, 'referenced-resource-not-found', context );
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
 	} );
 

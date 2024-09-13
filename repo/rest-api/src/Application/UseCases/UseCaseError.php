@@ -39,8 +39,8 @@ class UseCaseError extends UseCaseException {
 	public const POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE = 'label-description-same-value';
 	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
+	public const REFERENCED_RESOURCE_NOT_FOUND = 'referenced-resource-not-found';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
-	public const SITELINK_TITLE_NOT_FOUND = 'title-does-not-exist';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 	public const VALUE_TOO_LONG = 'value-too-long';
@@ -98,8 +98,8 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED => [ self::CONTEXT_REASON ],
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
+		self::REFERENCED_RESOURCE_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
-		self::SITELINK_TITLE_NOT_FOUND => [],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
@@ -107,14 +107,6 @@ class UseCaseError extends UseCaseException {
 		],
 		self::UNEXPECTED_ERROR => [],
 		self::VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
-	];
-
-	/**
-	 * Depending on the use case and whether it's operating on a single resource or a list, errors may include path information in the
-	 * context.
-	 */
-	private const ADDITIONAL_PATH_CONTEXT = [
-		self::SITELINK_TITLE_NOT_FOUND => [ self::CONTEXT_SITE_ID ],
 	];
 
 	private string $errorCode;
@@ -134,7 +126,7 @@ class UseCaseError extends UseCaseException {
 		$contextKeys = array_keys( $context );
 		$unexpectedContext = array_values( array_diff(
 			$contextKeys,
-			array_merge( self::EXPECTED_CONTEXT_KEYS[$code], self::ADDITIONAL_PATH_CONTEXT[$code] ?? [] )
+			self::EXPECTED_CONTEXT_KEYS[$code]
 		) );
 		if ( $unexpectedContext ) {
 			throw new LogicException( "Error context for '$code' should not contain keys: " . json_encode( $unexpectedContext ) );
@@ -235,6 +227,14 @@ class UseCaseError extends UseCaseException {
 			self::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
 			'The referenced resource does not exist',
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_VALUE => $value ]
+		);
+	}
+
+	public static function newReferencedResourceNotFound( string $path ): self {
+		return new self(
+			self::REFERENCED_RESOURCE_NOT_FOUND,
+			'The referenced resource does not exist',
+			[ self::CONTEXT_PATH => $path ]
 		);
 	}
 

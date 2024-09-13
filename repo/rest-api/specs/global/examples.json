@@ -69,17 +69,11 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
-	"TitleDoesNotExistOnGivenSiteExample": {
+	"ReferencedResourceNotFoundExample": {
 		"value": {
-			"code": "title-does-not-exist",
-			"message": "Page with title {title} does not exist on the given site"
-		}
-	},
-	"TitleDoesNotExistOnGivenSiteWithSiteContextExample": {
-		"value": {
-			"code": "title-does-not-exist",
-			"message": "Page with title {title} does not exist on the given site",
-			"context": { "site": "{site_id}" }
+			"code": "referenced-resource-not-found",
+			"message": "The referenced resource does not exist",
+			"context": { "path":  "{json_pointer}" }
 		}
 	},
 	"CannotModifyReadOnlyValue": {

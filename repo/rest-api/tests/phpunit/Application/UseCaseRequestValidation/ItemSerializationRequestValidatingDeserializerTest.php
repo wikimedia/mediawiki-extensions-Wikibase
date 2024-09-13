@@ -555,11 +555,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			new ValidationError( SitelinkValidator::CODE_TITLE_NOT_FOUND, [
 				SitelinkValidator::CONTEXT_SITE_ID => $site,
 			] ),
-			new UseCaseError(
-				UseCaseError::SITELINK_TITLE_NOT_FOUND,
-				'Page with title Whatever does not exist on the given site',
-				[ UseCaseError::CONTEXT_SITE_ID => $site ]
-			),
+			UseCaseError::newReferencedResourceNotFound( "/item/sitelinks/$site/title" ),
 			[ 'sitelinks' => [ $site => [ 'title' => 'Whatever' ] ] ],
 		];
 		yield SitelinkValidator::CODE_SITELINK_CONFLICT => [

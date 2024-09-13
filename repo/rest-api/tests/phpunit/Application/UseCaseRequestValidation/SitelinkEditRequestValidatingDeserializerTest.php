@@ -122,10 +122,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		];
 
 		yield 'title not found' => [
-			new UseCaseError(
-				UseCaseError::SITELINK_TITLE_NOT_FOUND,
-				'Page with title Irgendein_titel does not exist on the given site'
-			),
+			UseCaseError::newReferencedResourceNotFound( '/sitelink/title' ),
 			new ValidationError(
 				SitelinkValidator::CODE_TITLE_NOT_FOUND,
 				[ SitelinkValidator::CONTEXT_SITE_ID => 'dewiki' ]

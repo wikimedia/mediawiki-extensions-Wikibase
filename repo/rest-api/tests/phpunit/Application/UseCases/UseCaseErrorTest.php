@@ -39,17 +39,6 @@ class UseCaseErrorTest extends TestCase {
 			"Invalid path parameter: 'property_id'",
 			[ UseCaseError::CONTEXT_PARAMETER => 'property_id' ],
 		];
-
-		yield 'valid error with additional path context' => [
-			UseCaseError::SITELINK_TITLE_NOT_FOUND,
-			'Page with title Test_article does not exist on the given site',
-			[ UseCaseError::CONTEXT_SITE_ID => 'enwiki' ],
-		];
-
-		yield 'valid error without additional path context' => [
-			UseCaseError::SITELINK_TITLE_NOT_FOUND,
-			'Page with title Test_article does not exist on the given site',
-		];
 	}
 
 	/**
@@ -75,8 +64,8 @@ class UseCaseErrorTest extends TestCase {
 		];
 
 		yield 'wrong path context field name' => [
-			UseCaseError::SITELINK_TITLE_NOT_FOUND,
-			'Page with title Test_article does not exist on the given site',
+			UseCaseError::REFERENCED_RESOURCE_NOT_FOUND,
+			'The referenced resource does not exist',
 			[ UseCaseError::CONTEXT_TITLE => 'Test_article' ],
 		];
 	}
