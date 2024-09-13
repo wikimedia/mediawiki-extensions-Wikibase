@@ -6,6 +6,7 @@ use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleValue;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\SiteLink;
 
@@ -311,7 +312,13 @@ class LangLinkHandler {
 			$interwikiCode = $this->getInterwikiCodeFromSite( $targetSite );
 
 			if ( $interwikiCode ) {
-				$link = "$interwikiCode:$page";
+				// Note that interwiki codes can conflict with namespace
+				// prefixes, so be careful to use TitleValue here and not
+				// to attempt to reparse the Title from '$prefix:$title',
+				// since that could lead to the prefix being interpreted
+				// as a namespace not an interwiki prefix (T363538).
+				[ $title, $frag ] = array_pad( explode( '#', $page, 2 ), 2, '' );
+				$link = TitleValue::tryNew( NS_MAIN, $title, $frag, $interwikiCode );
 				$parserOutput->addLanguageLink( $link );
 			} else {
 				wfWarn( "No interlanguage prefix found for $siteId." );
