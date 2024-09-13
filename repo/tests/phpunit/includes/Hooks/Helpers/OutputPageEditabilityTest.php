@@ -23,6 +23,13 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
  */
 class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 
+	protected function setUp(): void {
+		parent::setUp();
+
+		// Disabling to prevent CentralAuth from accessing the DB.
+		$this->clearHook( 'UserGetRights' );
+	}
+
 	/**
 	 * @dataProvider nonEditableOutputPageProvider
 	 */
