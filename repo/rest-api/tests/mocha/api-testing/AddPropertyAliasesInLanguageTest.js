@@ -125,54 +125,6 @@ describe( newRequest().getRouteDescription(), () => {
 			);
 		} );
 
-		it( 'comment too long', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ 'new alias' ] )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ 'new alias' ] )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'invalid edit tag type', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ 'new alias' ] )
-				.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/tags' } );
-		} );
-
-		it( 'invalid bot flag type', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ 'new alias' ] )
-				.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/bot' } );
-		} );
-
-		it( 'invalid comment type', async () => {
-			const response = await newRequest( testPropertyId, 'en', [ 'new alias' ] )
-				.withJsonBodyParam( 'comment', 123 )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/comment' } );
-		} );
-
 		it( 'invalid language code', async () => {
 			const response = await newRequest( testPropertyId, '1e', [ 'new alias' ] )
 				.assertInvalidRequest()

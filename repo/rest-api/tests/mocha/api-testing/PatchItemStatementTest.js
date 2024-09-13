@@ -143,7 +143,6 @@ describe( 'PATCH statement tests', () => {
 			} );
 
 			describe( '400 error response', () => {
-
 				it( 'statement ID contains invalid entity ID', async () => {
 					const response = await newPatchRequestBuilder( testStatementId.replace( 'Q', 'X' ), [] )
 						.assertInvalidRequest().makeRequest();
@@ -169,51 +168,6 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				testValidatesPatch( ( patch ) => newPatchRequestBuilder( testStatementId, patch ) );
-
-				it( 'comment too long', async () => {
-					const response = await newPatchRequestBuilder( testStatementId, [] )
-						.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-						.assertValidRequest()
-						.makeRequest();
-
-					assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-					assert.strictEqual( response.body.message, 'The input value is too long' );
-				} );
-
-				it( 'invalid edit tag', async () => {
-					const response = await newPatchRequestBuilder( testStatementId, [] )
-						.withJsonBodyParam( 'tags', [ 'invalid tag' ] ).assertValidRequest().makeRequest();
-
-					assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-				} );
-
-				it( 'invalid edit tag type', async () => {
-					const response = await newPatchRequestBuilder( testStatementId, [] )
-						.withJsonBodyParam( 'tags', 'not an array' ).assertInvalidRequest().makeRequest();
-
-					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-value' );
-					assert.deepEqual( response.body.context, { path: '/tags' } );
-				} );
-
-				it( 'invalid bot flag type', async () => {
-					const response = await newPatchRequestBuilder( testStatementId, [] )
-						.withJsonBodyParam( 'bot', 'not boolean' ).assertInvalidRequest().makeRequest();
-
-					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-value' );
-					assert.deepEqual( response.body.context, { path: '/bot' } );
-				} );
-
-				it( 'invalid comment type', async () => {
-					const response = await newPatchRequestBuilder( testStatementId, [] )
-						.withJsonBodyParam( 'comment', 1234 ).assertInvalidRequest().makeRequest();
-
-					expect( response ).to.have.status( 400 );
-					assert.strictEqual( response.body.code, 'invalid-value' );
-					assert.deepEqual( response.body.context, { path: '/comment' } );
-				} );
-
 			} );
 
 			describe( '404 statement not found', () => {

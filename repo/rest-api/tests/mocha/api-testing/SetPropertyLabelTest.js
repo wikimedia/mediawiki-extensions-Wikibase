@@ -309,36 +309,6 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 422, 'data-policy-violation', context );
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
-
-		it( 'comment too long', async () => {
-			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, 'en', 'test label' )
-				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'value-too-long', { path: '/comment', limit: 500 } );
-			assert.strictEqual( response.body.message, 'The input value is too long' );
-		} );
-
-		it( 'invalid edit tag', async () => {
-			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, 'en', 'test label' )
-				.withJsonBodyParam( 'tags', [ 'invalid tag' ] )
-				.assertValidRequest()
-				.makeRequest();
-
-			assertValidError( response, 400, 'invalid-value', { path: '/tags/0' } );
-		} );
-
-		it( 'invalid bot flag', async () => {
-			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, 'en', 'test label' )
-				.withJsonBodyParam( 'bot', 'should be a boolean' )
-				.assertInvalidRequest()
-				.makeRequest();
-
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'invalid-value' );
-			assert.deepEqual( response.body.context, { path: '/bot' } );
-		} );
 	} );
 
 	describe( '404 error response', () => {
