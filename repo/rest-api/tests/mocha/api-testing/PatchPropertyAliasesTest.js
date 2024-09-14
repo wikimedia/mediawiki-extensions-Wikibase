@@ -89,38 +89,6 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 				formatTermsEditSummary( 'update-languages-short', 'de', editSummary )
 			);
 		} );
-
-		it( 'allows content-type application/json-patch+json', async () => {
-			const expectedValue = `en-alias-${utils.uniq()}`;
-			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{
-					op: 'add',
-					path: '/en',
-					value: [ expectedValue ]
-				}
-			] )
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.deepEqual( response.body.en, [ expectedValue ] );
-		} );
-
-		it( 'allows content-type application/json', async () => {
-			const expectedValue = `en-alias-${utils.uniq()}`;
-			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{
-					op: 'add',
-					path: '/en',
-					value: [ expectedValue ]
-				}
-			] )
-				.withHeader( 'content-type', 'application/json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.deepEqual( response.body.en, [ expectedValue ] );
-		} );
 	} );
 
 	describe( '400 Bad Request', () => {

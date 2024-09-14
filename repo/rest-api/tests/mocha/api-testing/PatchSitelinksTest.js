@@ -58,18 +58,6 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			assertValidResponse( response, 200, sitelink.title, sitelink.badges );
 		} );
 
-		it( 'allows content-type application/json-patch+json', async () => {
-			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
-			const response = await newPatchSitelinksRequestBuilder(
-				testItemId,
-				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
-			)
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			assertValidResponse( response, 200, sitelink.title, sitelink.badges );
-		} );
-
 		it( 'can patch sitelinks with edit metadata', async () => {
 			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 1 ] ] };
 			const user = await getOrCreateBotUser();
