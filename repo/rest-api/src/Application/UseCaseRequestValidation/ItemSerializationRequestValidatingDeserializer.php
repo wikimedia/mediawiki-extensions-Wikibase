@@ -158,6 +158,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementValidator::CODE_INVALID_FIELD:
 				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 			case StatementValidator::CODE_PROPERTY_NOT_FOUND:
+				throw UseCaseError::newReferencedResourceNotFound( $context[StatementValidator::CONTEXT_PATH] );
 			case StatementValidator::CODE_INVALID_FIELD_TYPE:
 				throw UseCaseError::newInvalidValue( $context[StatementValidator::CONTEXT_PATH] );
 			case StatementValidator::CODE_MISSING_FIELD:

@@ -261,7 +261,7 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 
 		yield 'property does not exist' => [
 			[ 'property' => [ 'id' => 'P9999999' ], 'value' => [ 'type' => 'novalue' ] ],
-			UseCaseError::newInvalidValue( '/statement/property/id' ),
+			UseCaseError::newReferencedResourceNotFound( '/statement/property/id' ),
 		];
 	}
 

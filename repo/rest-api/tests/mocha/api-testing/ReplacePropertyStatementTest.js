@@ -306,6 +306,44 @@ describe( 'PUT statement tests', () => {
 					assert.strictEqual( response.body.message, 'Required field missing' );
 				} );
 
+				it( 'qualifier with non-existent property', async () => {
+					const nonExistentProperty = 'P9999999';
+					const statement = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					statement.qualifiers = [
+						{ property: { id: nonExistentProperty }, value: { type: 'novalue' } }
+					];
+
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statement )
+						.assertValidRequest().makeRequest();
+
+					assertValidError(
+						response,
+						400,
+						'referenced-resource-not-found',
+						{ path: '/statement/qualifiers/0/property/id' }
+					);
+					assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+				} );
+
+				it( 'reference with non-existent property', async () => {
+					const nonExistentProperty = 'P9999999';
+					const statement = entityHelper.newStatementWithRandomStringValue( testStatementPropertyId );
+					statement.references = [];
+					statement.references[ 0 ] = {
+						parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+					};
+
+					const response = await newReplaceRequestBuilder( testPropertyId, testStatementId, statement )
+						.assertValidRequest().makeRequest();
+
+					assertValidError(
+						response,
+						400,
+						'referenced-resource-not-found',
+						{ path: '/statement/references/0/parts/0/property/id' }
+					);
+					assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+				} );
 			} );
 
 			describe( '404 error response', () => {
