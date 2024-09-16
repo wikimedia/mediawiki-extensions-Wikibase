@@ -13,7 +13,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyStatements" },
+			"200": { "$ref": "./responses.json#/PropertyStatements" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementsInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -33,7 +33,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
-			"201": { "$ref": "../../global/responses.json#/PropertyStatementCreated" },
+			"201": { "$ref": "./responses.json#/PropertyStatementCreated" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

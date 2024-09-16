@@ -1,0 +1,20 @@
+{
+	"InvalidPropertyInput": {
+		"description": "The request cannot be processed",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "../../global/response-parts.json#/Error" },
+				"examples": {
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"invalid-query-parameter": { "$ref": "../../global/examples.json#/InvalidQueryParameterExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": { "type": "string" },
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	}
+}

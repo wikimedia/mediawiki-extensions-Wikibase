@@ -38,7 +38,7 @@
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyItemPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
-			"422": { "$ref": "../../global/responses.json#/InvalidPatchedItemSitelinks" },
+			"422": { "$ref": "./responses.json#/InvalidPatchedItemSitelinks" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

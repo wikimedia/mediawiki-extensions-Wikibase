@@ -14,7 +14,7 @@
 		],
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Property" },
-			"400": { "$ref": "../../global/responses.json#/InvalidPropertyInput" },
+			"400": { "$ref": "./responses.json#/InvalidPropertyInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}

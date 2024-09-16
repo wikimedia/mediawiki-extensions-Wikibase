@@ -91,7 +91,45 @@
             "$ref": "#/components/responses/Item"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidNewItemInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "statement-group-property-id-mismatch": {
+                    "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
+                  },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "invalid-key": {
+                    "$ref": "#/components/examples/InvalidKeyExample"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
@@ -143,7 +181,30 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidGetItemInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-query-parameter": {
+                    "$ref": "#/components/examples/InvalidQueryParameterExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -295,7 +356,42 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "$ref": "#/components/responses/InvalidPatchedItemSitelinks"
+            "description": "Applying the provided JSON Patch results in invalid sitelinks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "patch-result-referenced-resource-not-found": {
+                    "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
+                  },
+                  "patch-result-invalid-value": {
+                    "$ref": "#/components/examples/PatchResultInvalidValueExample"
+                  },
+                  "patch-result-missing-field": {
+                    "$ref": "#/components/examples/PatchResultMissingFieldExample"
+                  },
+                  "patch-result-invalid-key": {
+                    "$ref": "#/components/examples/PatchResultInvalidKeyExample"
+                  },
+                  "url-not-modifiable": {
+                    "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
+                  },
+                  "data-policy-violation": {
+                    "$ref": "#/components/examples/DataPolicyViolationExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -344,7 +440,27 @@
             "$ref": "#/components/responses/Moved"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidGetSitelinkInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -399,7 +515,42 @@
             "description": "The newly added Sitelink"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidSetSitelinkInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -452,10 +603,52 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/SitelinkDeleted"
+            "description": "The resource was deleted",
+            "headers": {
+              "Content-Language": {
+                "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sitelink deleted"
+              }
+            }
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemoveSitelinkInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -507,7 +700,30 @@
             "$ref": "#/components/responses/Property"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-query-parameter": {
+                    "$ref": "#/components/examples/InvalidQueryParameterExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1129,7 +1345,74 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemStatements"
+            "description": "The statements of an Item",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last modified date"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last entity revision number"
+              },
+              "X-Authenticated-User": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Optional username of the user making the request"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/responses/Statement/content/application~1json/schema"
+                    }
+                  }
+                },
+                "example": {
+                  "P370": [
+                    {
+                      "id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+                      "rank": "normal",
+                      "property": {
+                        "id": "P370",
+                        "data_type": "string"
+                      },
+                      "value": {
+                        "content": "I am a goat",
+                        "type": "value"
+                      },
+                      "qualifiers": [],
+                      "references": []
+                    }
+                  ],
+                  "P92": [
+                    {
+                      "id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+                      "rank": "normal",
+                      "property": {
+                        "id": "P92",
+                        "data_type": "string"
+                      },
+                      "value": {
+                        "content": "I am a goat",
+                        "type": "value"
+                      },
+                      "qualifiers": [],
+                      "references": []
+                    }
+                  ]
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1176,7 +1459,40 @@
         },
         "responses": {
           "201": {
-            "$ref": "#/components/responses/ItemStatementCreated"
+            "description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last modified date"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last entity revision number"
+              },
+              "X-Authenticated-User": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Optional username of the user making the request"
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The URI of the newly created statement"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/Statement/content/application~1json/schema"
+                }
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/InvalidNewStatementInput"
@@ -1235,7 +1551,30 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRetrieveItemStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "item-statement-id-mismatch": {
+                    "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1280,7 +1619,45 @@
             "$ref": "#/components/responses/ItemStatement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidReplaceItemStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "item-statement-id-mismatch": {
+                    "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "cannot-modify-read-only-value": {
+                    "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1325,7 +1702,42 @@
             "$ref": "#/components/responses/ItemStatement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidItemStatementPatch"
+            "description": "The provided JSON Patch is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "item-statement-id-mismatch": {
+                    "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1376,7 +1788,36 @@
             "$ref": "#/components/responses/StatementDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemoveItemStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "item-statement-id-mismatch": {
+                    "$ref": "#/components/examples/ItemStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2373,7 +2814,74 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyStatements"
+            "description": "The statements of a Property",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last modified date"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last entity revision number"
+              },
+              "X-Authenticated-User": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Optional username of the user making the request"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/responses/Statement/content/application~1json/schema"
+                    }
+                  }
+                },
+                "example": {
+                  "P370": [
+                    {
+                      "id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+                      "rank": "normal",
+                      "property": {
+                        "id": "P370",
+                        "data_type": "string"
+                      },
+                      "value": {
+                        "content": "I am a goat",
+                        "type": "value"
+                      },
+                      "qualifiers": [],
+                      "references": []
+                    }
+                  ],
+                  "P92": [
+                    {
+                      "id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+                      "rank": "normal",
+                      "property": {
+                        "id": "P92",
+                        "data_type": "string"
+                      },
+                      "value": {
+                        "content": "I am a goat",
+                        "type": "value"
+                      },
+                      "qualifiers": [],
+                      "references": []
+                    }
+                  ]
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2417,7 +2925,43 @@
         },
         "responses": {
           "201": {
-            "$ref": "#/components/responses/PropertyStatementCreated"
+            "description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last modified date"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Last entity revision number"
+              },
+              "X-Authenticated-User": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Optional username of the user making the request"
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The URI of the newly created statement"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/Statement/content/application~1json/schema"
+                },
+                "example": {
+                  "$ref": "#/components/examples/PropertyStatementResponseExample/value"
+                }
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/InvalidNewStatementInput"
@@ -2473,7 +3017,30 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRetrievePropertyStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "property-statement-id-mismatch": {
+                    "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2518,7 +3085,45 @@
             "$ref": "#/components/responses/PropertyStatement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidReplacePropertyStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "property-statement-id-mismatch": {
+                    "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "cannot-modify-read-only-value": {
+                    "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2563,7 +3168,42 @@
             "$ref": "#/components/responses/PropertyStatement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidPropertyStatementPatch"
+            "description": "The provided JSON Patch is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "property-statement-id-mismatch": {
+                    "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2614,7 +3254,36 @@
             "$ref": "#/components/responses/StatementDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemovePropertyStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "property-statement-id-mismatch": {
+                    "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2664,7 +3333,27 @@
             "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRetrieveStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2706,7 +3395,42 @@
             "$ref": "#/components/responses/Statement"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidReplaceStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "cannot-modify-read-only-value": {
+                    "$ref": "#/components/examples/CannotModifyReadOnlyValue"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2796,7 +3520,33 @@
             "$ref": "#/components/responses/StatementDeleted"
           },
           "400": {
-            "$ref": "#/components/responses/InvalidRemoveStatementInput"
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "invalid-path-parameter": {
+                    "$ref": "#/components/examples/InvalidPathParameterExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -3738,25 +4488,6 @@
           }
         }
       },
-      "SitelinkDeleted": {
-        "description": "The resource was deleted",
-        "headers": {
-          "Content-Language": {
-            "description": "Language code of the language in which response is provided",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "string"
-            },
-            "example": "Sitelink deleted"
-          }
-        }
-      },
       "ItemRedirected": {
         "description": "The specified Item was redirected",
         "content": {
@@ -3826,99 +4557,6 @@
           }
         }
       },
-      "InvalidGetItemInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-query-parameter": {
-                "$ref": "#/components/examples/InvalidQueryParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidNewItemInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "statement-group-property-id-mismatch": {
-                "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
-              },
-              "referenced-resource-not-found": {
-                "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "invalid-key": {
-                "$ref": "#/components/examples/InvalidKeyExample"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPropertyInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-query-parameter": {
-                "$ref": "#/components/examples/InvalidQueryParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
       "InvalidEntityIdInput": {
         "description": "The request cannot be processed",
         "content": {
@@ -3968,81 +4606,6 @@
           }
         }
       },
-      "InvalidRetrieveStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRetrieveItemStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "item-statement-id-mismatch": {
-                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRetrievePropertyStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "property-statement-id-mismatch": {
-                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
       "InvalidNewStatementInput": {
         "description": "The request cannot be processed",
         "content": {
@@ -4062,286 +4625,6 @@
               },
               "value-too-long": {
                 "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidReplaceStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "cannot-modify-read-only-value": {
-                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidReplaceItemStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "item-statement-id-mismatch": {
-                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "cannot-modify-read-only-value": {
-                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidReplacePropertyStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "property-statement-id-mismatch": {
-                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "cannot-modify-read-only-value": {
-                "$ref": "#/components/examples/CannotModifyReadOnlyValue"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemoveStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemoveItemStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "item-statement-id-mismatch": {
-                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemovePropertyStatementInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "property-statement-id-mismatch": {
-                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidRemoveSitelinkInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidSetSitelinkInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "referenced-resource-not-found": {
-                "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
               },
               "resource-too-large": {
                 "$ref": "#/components/examples/ResourceTooLargeExample"
@@ -4521,29 +4804,6 @@
           }
         }
       },
-      "InvalidGetSitelinkInput": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
       "InvalidTermByLanguageInput": {
         "description": "The request cannot be processed",
         "content": {
@@ -4659,44 +4919,6 @@
               },
               "patch-target-not-found": {
                 "$ref": "#/components/examples/PatchTargetNotFoundExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPatchedItemSitelinks": {
-        "description": "Applying the provided JSON Patch results in invalid sitelinks",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "patch-result-referenced-resource-not-found": {
-                "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
-              },
-              "patch-result-invalid-value": {
-                "$ref": "#/components/examples/PatchResultInvalidValueExample"
-              },
-              "patch-result-missing-field": {
-                "$ref": "#/components/examples/PatchResultMissingFieldExample"
-              },
-              "patch-result-invalid-key": {
-                "$ref": "#/components/examples/PatchResultInvalidKeyExample"
-              },
-              "url-not-modifiable": {
-                "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
-              },
-              "data-policy-violation": {
-                "$ref": "#/components/examples/DataPolicyViolationExample"
               }
             }
           }
@@ -4881,82 +5103,6 @@
               },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidItemStatementPatch": {
-        "description": "The provided JSON Patch is invalid",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "item-statement-id-mismatch": {
-                "$ref": "#/components/examples/ItemStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Language code of the language in which error message is provided"
-          }
-        }
-      },
-      "InvalidPropertyStatementPatch": {
-        "description": "The provided JSON Patch is invalid",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
-            },
-            "examples": {
-              "invalid-path-parameter": {
-                "$ref": "#/components/examples/InvalidPathParameterExample"
-              },
-              "property-statement-id-mismatch": {
-                "$ref": "#/components/examples/PropertyStatementIdMismatchExample"
-              },
-              "invalid-value": {
-                "$ref": "#/components/examples/InvalidValueExample"
-              },
-              "missing-field": {
-                "$ref": "#/components/examples/MissingFieldExample"
-              },
-              "value-too-long": {
-                "$ref": "#/components/examples/ValueTooLongExample"
-              },
-              "resource-too-large": {
-                "$ref": "#/components/examples/ResourceTooLargeExample"
               }
             }
           }
@@ -5700,221 +5846,6 @@
             },
             "example": {
               "$ref": "#/components/examples/PropertyStatementResponseExample/value"
-            }
-          }
-        }
-      },
-      "ItemStatementCreated": {
-        "description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          },
-          "Location": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "The URI of the newly created statement"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/Statement/content/application~1json/schema"
-            }
-          }
-        }
-      },
-      "PropertyStatementCreated": {
-        "description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          },
-          "Location": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "The URI of the newly created statement"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/responses/Statement/content/application~1json/schema"
-            },
-            "example": {
-              "$ref": "#/components/examples/PropertyStatementResponseExample/value"
-            }
-          }
-        }
-      },
-      "ItemStatements": {
-        "description": "The statements of an Item",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/responses/Statement/content/application~1json/schema"
-                }
-              }
-            },
-            "example": {
-              "P370": [
-                {
-                  "id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
-                  "rank": "normal",
-                  "property": {
-                    "id": "P370",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "content": "I am a goat",
-                    "type": "value"
-                  },
-                  "qualifiers": [],
-                  "references": []
-                }
-              ],
-              "P92": [
-                {
-                  "id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
-                  "rank": "normal",
-                  "property": {
-                    "id": "P92",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "content": "I am a goat",
-                    "type": "value"
-                  },
-                  "qualifiers": [],
-                  "references": []
-                }
-              ]
-            }
-          }
-        }
-      },
-      "PropertyStatements": {
-        "description": "The statements of a Property",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/responses/Statement/content/application~1json/schema"
-                }
-              }
-            },
-            "example": {
-              "P370": [
-                {
-                  "id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
-                  "rank": "normal",
-                  "property": {
-                    "id": "P370",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "content": "I am a goat",
-                    "type": "value"
-                  },
-                  "qualifiers": [],
-                  "references": []
-                }
-              ],
-              "P92": [
-                {
-                  "id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
-                  "rank": "normal",
-                  "property": {
-                    "id": "P92",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "content": "I am a goat",
-                    "type": "value"
-                  },
-                  "qualifiers": [],
-                  "references": []
-                }
-              ]
             }
           }
         }

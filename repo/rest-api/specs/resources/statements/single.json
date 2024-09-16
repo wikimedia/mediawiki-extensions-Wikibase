@@ -1,9 +1,7 @@
 {
 	"get": {
 		"operationId": "getStatement",
-		"tags": [
-			"statements"
-		],
+		"tags": [ "statements" ],
 		"summary": "Retrieve a single Statement",
 		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
@@ -17,7 +15,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRetrieveStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidRetrieveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -37,7 +35,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
-			"400": { "$ref": "../../global/responses.json#/InvalidReplaceStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidReplaceStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -79,7 +77,7 @@
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRemoveStatementInput" },
+			"400": { "$ref": "./responses.json#/InvalidRemoveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }

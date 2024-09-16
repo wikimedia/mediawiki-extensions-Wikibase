@@ -16,7 +16,7 @@
 			"200": { "$ref": "../../global/responses.json#/Sitelink" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/Moved" },
-			"400": { "$ref": "../../global/responses.json#/InvalidGetSitelinkInput" },
+			"400": { "$ref": "./responses.json#/InvalidGetSitelinkInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -45,11 +45,11 @@
 				"$ref": "../../global/responses.json#/Sitelink",
 				"description": "The newly added Sitelink"
 			},
-			"400": { "$ref": "../../global/responses.json#/InvalidSetSitelinkInput" },
+			"400": { "$ref": "./responses.json#/InvalidSetSitelinkInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
-			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation"},
+			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -68,8 +68,8 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/SitelinkDeleted" },
-			"400": { "$ref": "../../global/responses.json#/InvalidRemoveSitelinkInput" },
+			"200": { "$ref": "./responses.json#/SitelinkDeleted" },
+			"400": { "$ref": "./responses.json#/InvalidRemoveSitelinkInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
