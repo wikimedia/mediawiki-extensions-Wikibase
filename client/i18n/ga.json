@@ -4,12 +4,19 @@
 			"Kwekubo",
 			"MinecraftAustralia",
 			"Nmacu",
-			"Tem"
+			"Tem",
+			"Kscanne"
 		]
 	},
 	"wikibase-dataitem": "Mír {{WBREPONAME}}",
 	"wikibase-editlinks": "Athraigh naisc",
 	"wikibase-editlinkstitle": "Athraigh na naisc idirtheanga",
+	"wikibase-linkitem-addlinks": "Nasc le teangacha eile",
+	"wikibase-linkitem-title": "Nasc le leathanach",
+	"wikibase-linkitem-linkpage": "Nasc le leathanach",
+	"wikibase-linkitem-selectlink": "Roghnaigh an suíomh agus an leathanach ar an suíomh sin ar mhaith leat nasc a dhéanamh leis.",
+	"wikibase-linkitem-input-site": "Teanga:",
+	"wikibase-linkitem-input-page": "Leathanach:",
 	"wikibase-rc-hide-wikidata-hide": "Folaigh",
 	"wikibase-rc-hide-wikidata-show": "Taispeáin",
 	"wikibase-rc-wikibase-edit-letter": "D",
