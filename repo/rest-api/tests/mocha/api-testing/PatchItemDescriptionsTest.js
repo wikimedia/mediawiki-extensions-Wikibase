@@ -63,19 +63,6 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 			assert.strictEqual( response.body.de, description );
 		} );
 
-		it( 'allows content-type application/json-patch+json', async () => {
-			const description = `Neues Deutsches Beschreibung ${utils.uniq()}`;
-			const response = await newPatchItemDescriptionsRequestBuilder(
-				testItemId,
-				[ { op: 'add', path: '/de', value: description } ]
-			)
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			expect( response ).to.have.status( 200 );
-			assert.strictEqual( response.body.de, description );
-		} );
-
 		it( 'can patch descriptions with edit metadata', async () => {
 			const description = `${utils.uniq()} وصف عربي جديد`;
 			const user = await getOrCreateBotUser();

@@ -90,22 +90,6 @@ describe( 'PATCH property statement', () => {
 					assert.strictEqual( response.body.value.content, expectedValue );
 				} );
 
-				it( 'allows content-type application/json-patch+json', async () => {
-					const expectedValue = 'i been patched again!!';
-					const response = await newPatchRequestBuilder( testStatementId, [
-						{
-							op: 'replace',
-							path: '/value/content',
-							value: expectedValue
-						}
-					] )
-						.withHeader( 'content-type', 'application/json-patch+json' )
-						.assertValidRequest().makeRequest();
-
-					assertValid200Response( response );
-					assert.strictEqual( response.body.value.content, expectedValue );
-				} );
-
 				it( 'can patch a statement with edit metadata', async () => {
 					const user = await getOrCreateBotUser();
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );

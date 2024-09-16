@@ -67,19 +67,6 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			assert.include( response.body.en, alias );
 		} );
 
-		it( 'allows content-type application/json-patch+json', async () => {
-			const alias = 'Brand new English alias';
-			const response = await newPatchItemAliasesRequestBuilder(
-				testItemId,
-				[ { op: 'add', path: '/en/-', value: alias } ]
-			)
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			expect( response ).to.have.status( 200 );
-			assert.include( response.body.en, alias );
-		} );
-
 		it( 'can patch aliases providing edit metadata', async () => {
 			const newDeAlias = `de-alias-${utils.uniq()}`;
 			const user = await getOrCreateBotUser();

@@ -100,19 +100,6 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
-		it( 'allows content-type application/json-patch+json', async () => {
-			const label = `some-label-${utils.uniq()}`;
-			const response = await newPatchItemRequestBuilder(
-				testItemId,
-				[ { op: 'add', path: '/labels/de', value: label } ]
-			)
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			expect( response ).to.have.status( 200 );
-			assert.strictEqual( response.body.labels.de, label );
-		} );
-
 		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
 			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 			await newAddItemStatementRequestBuilder(

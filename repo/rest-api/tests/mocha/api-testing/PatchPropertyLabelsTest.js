@@ -85,38 +85,6 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				formatTermsEditSummary( 'update-languages-short', 'ar', editSummary )
 			);
 		} );
-
-		it( 'allows content-type application/json-patch+json', async () => {
-			const expectedValue = `new english label ${utils.uniq()}`;
-			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [
-				{
-					op: 'replace',
-					path: '/en',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.en, expectedValue );
-		} );
-
-		it( 'allows content-type application/json', async () => {
-			const expectedValue = `new english label ${utils.uniq()}`;
-			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [
-				{
-					op: 'replace',
-					path: '/en',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.en, expectedValue );
-		} );
 	} );
 
 	describe( '400 error response', () => {

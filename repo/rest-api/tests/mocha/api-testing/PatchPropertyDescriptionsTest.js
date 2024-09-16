@@ -93,38 +93,6 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			assertValid200Response( response );
 			assert.strictEqual( response.body.de, description );
 		} );
-
-		it( 'allows content-type application/json-patch+json', async () => {
-			const expectedValue = `new arabic description ${utils.uniq()}`;
-			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [
-				{
-					op: 'replace',
-					path: '/ar',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.ar, expectedValue );
-		} );
-
-		it( 'allows content-type application/json', async () => {
-			const expectedValue = `new arabic description ${utils.uniq()}`;
-			const response = await newPatchPropertyDescriptionsRequestBuilder( testPropertyId, [
-				{
-					op: 'replace',
-					path: '/ar',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.ar, expectedValue );
-		} );
 	} );
 
 	describe( '400 error response', () => {

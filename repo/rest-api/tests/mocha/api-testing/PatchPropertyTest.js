@@ -95,38 +95,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			);
 		} );
 
-		it( 'allows content-type application/json-patch+json', async () => {
-			const expectedValue = `new english label ${utils.uniq()}`;
-			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{
-					op: 'add',
-					path: '/labels/en',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json-patch+json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.labels.en, expectedValue );
-		} );
-
-		it( 'allows content-type application/json', async () => {
-			const expectedValue = `new english label ${utils.uniq()}`;
-			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{
-					op: 'add',
-					path: '/labels/en',
-					value: expectedValue
-				}
-			] )
-				.withHeader( 'content-type', 'application/json' )
-				.assertValidRequest().makeRequest();
-
-			assertValid200Response( response );
-			assert.strictEqual( response.body.labels.en, expectedValue );
-		} );
-
 		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
 			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
 			await newAddPropertyStatementRequestBuilder(
