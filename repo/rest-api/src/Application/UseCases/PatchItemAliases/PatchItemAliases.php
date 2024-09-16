@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -18,6 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchItemAliases {
+
+	use UpdateExceptionHandler;
 
 	private PatchItemAliasesValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
@@ -74,14 +77,14 @@ class PatchItemAliases {
 		$originalAliases = $item->getAliasGroups();
 		$item->getFingerprint()->setAliasGroups( $modifiedAliases );
 
-		$revision = $this->itemUpdater->update(
+		$revision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
 				$editMetadata->getTags(),
 				$editMetadata->isBot(),
 				AliasesEditSummary::newPatchSummary( $editMetadata->getComment(), $originalAliases, $modifiedAliases )
 			)
-		);
+		) );
 
 		return new PatchItemAliasesResponse(
 			$revision->getItem()->getAliases(),

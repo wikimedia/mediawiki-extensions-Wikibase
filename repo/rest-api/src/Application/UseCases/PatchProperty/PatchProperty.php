@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
@@ -18,6 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchProperty {
+
+	use UpdateExceptionHandler;
 
 	private PatchPropertyValidator $validator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -77,15 +80,15 @@ class PatchProperty {
 			$originalSerialization
 		);
 
-		$propertyRevision = $this->propertyUpdater->update(
+		$propertyRevision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$patchedProperty,
 			new EditMetadata(
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-				PropertyEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalProperty, $patchedProperty )
+					PropertyEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalProperty, $patchedProperty )
 			)
-		);
+		) );
 
 		return new PatchPropertyResponse(
 			$propertyRevision->getProperty(),

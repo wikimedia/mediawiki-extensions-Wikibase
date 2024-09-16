@@ -21,6 +21,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::MISSING_FIELD => 400,
 		UseCaseError::PROPERTY_STATEMENT_ID_MISMATCH => 400,
 		UseCaseError::REFERENCED_RESOURCE_NOT_FOUND => 400,
+		UseCaseError::RESOURCE_TOO_LARGE => 400,
 		UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => 400,
 		UseCaseError::VALUE_TOO_LONG => 400,
 

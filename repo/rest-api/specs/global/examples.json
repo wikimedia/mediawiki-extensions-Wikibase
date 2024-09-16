@@ -69,6 +69,13 @@
 			"context": { "parameter": "{path_parameter}" }
 		}
 	},
+	"ResourceTooLargeExample": {
+		"value": {
+			"code": "resource-too-large",
+			"message": "Edit resulted in a resource that exceeds the size limit of {configured_limit}",
+			"context": { "limit": "configured_limit_as_int" }
+		}
+	},
 	"ReferencedResourceNotFoundExample": {
 		"value": {
 			"code": "referenced-resource-not-found",

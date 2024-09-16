@@ -29,6 +29,7 @@ use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
@@ -203,6 +204,25 @@ class EntityUpdaterTest extends TestCase {
 		$this->expectExceptionObject( new EntityUpdateFailed( (string)$errorStatus ) );
 
 		$this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
+	 * @dataProvider provideEntity
+	 */
+	public function testGivenResourceTooLarge_throwsCorrespondingException( EntityDocument $entity ): void {
+		$maxSizeAsBytes = 1024;
+		$maxSizeAsKiloBytes = 1;
+
+		$errorStatus = EditEntityStatus::newFatal( 'wikibase-error-entity-too-big', [ 'size' => $maxSizeAsBytes ] );
+
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$this->expectExceptionObject( new ResourceTooLargeException( $maxSizeAsKiloBytes ) );
+		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
 	}
 
 	/**

@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
@@ -16,6 +17,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchItemDescriptions {
+
+	use UpdateExceptionHandler;
 
 	private PatchItemDescriptionsValidator $requestValidator;
 	private AssertItemExists $assertItemExists;
@@ -82,8 +85,10 @@ class PatchItemDescriptions {
 			)
 		);
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$revision = $this->itemUpdater->update( $item, $editMetadata );
+		$revision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$editMetadata
+		) );
 
 		return new PatchItemDescriptionsResponse(
 			$revision->getItem()->getDescriptions(),

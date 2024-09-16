@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
@@ -18,6 +19,9 @@ use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchSitelinks {
+
+	use UpdateExceptionHandler;
+
 	private PatchSitelinksValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -82,8 +86,10 @@ class PatchSitelinks {
 			SitelinksEditSummary::newPatchSummary( $deserializedRequest->getEditMetadata()->getComment() )
 		);
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$revision = $this->itemUpdater->update( $item, $editMetadata );
+		$revision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$editMetadata
+		) );
 
 		return new PatchSitelinksResponse(
 			$revision->getItem()->getSitelinks(),
@@ -91,4 +97,5 @@ class PatchSitelinks {
 			$revision->getRevisionId()
 		);
 	}
+
 }

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
@@ -15,6 +16,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class SetSitelink {
+
+	use UpdateExceptionHandler;
 
 	private SetSitelinkValidator $validator;
 	private AssertItemExists $assertItemExists;
@@ -58,10 +61,10 @@ class SetSitelink {
 
 		$item->getSiteLinkList()->setSiteLink( $sitelink );
 
-		$newRevision = $this->itemUpdater->update(
+		$newRevision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( [], false, $editSummary )
-		);
+		) );
 
 		return new SetSitelinkResponse(
 			$newRevision->getItem()->getSitelinks()[ $siteId ],

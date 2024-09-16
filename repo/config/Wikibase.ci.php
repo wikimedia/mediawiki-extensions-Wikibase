@@ -72,3 +72,10 @@ $wgAutoCreateTempUser = array_merge(
 );
 
 $wgWBRepoSettings['tmpEnableMulLanguageCode'] = boolval( getallheaders()[ 'X-Wikibase-Ci-Enable-Mul' ] ?? false );
+
+$originalMaxSize = $wgWBRepoSettings['maxSerializedEntitySize'] ?? $GLOBALS['wgMaxArticleSize'];
+
+$request = RequestContext::getMain()->getRequest();
+$headerMaxSize = $request->getHeader( 'X-Wikibase-CI-MAX-ENTITY-SIZE', WebRequest::GETHEADER_LIST );
+
+$wgWBRepoSettings['maxSerializedEntitySize'] = (int)( $headerMaxSize ?: $originalMaxSize );

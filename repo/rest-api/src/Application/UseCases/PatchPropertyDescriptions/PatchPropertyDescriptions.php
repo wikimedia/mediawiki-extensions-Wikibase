@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -17,6 +18,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchPropertyDescriptions {
+
+	use UpdateExceptionHandler;
 
 	private PatchPropertyDescriptionsValidator $useCaseValidator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -89,8 +92,10 @@ class PatchPropertyDescriptions {
 			)
 		);
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$revision = $this->propertyUpdater->update( $property, $editMetadata );
+		$revision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
+			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
+			$editMetadata
+		) );
 
 		return new PatchPropertyDescriptionsResponse(
 			$revision->getProperty()->getDescriptions(),

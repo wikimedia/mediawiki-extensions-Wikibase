@@ -7,6 +7,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -18,6 +19,8 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchItemLabels {
+
+	use UpdateExceptionHandler;
 
 	private AssertItemExists $assertItemExists;
 	private ItemLabelsRetriever $labelsRetriever;
@@ -85,11 +88,10 @@ class PatchItemLabels {
 			LabelsEditSummary::newPatchSummary( $deserializedRequest->getEditMetadata()->getComment(), $originalLabels, $modifiedLabels )
 		);
 
-		$revision = $this->itemUpdater->update(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-			$item,
+		$revision = $this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
+			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			$editMetadata
-		);
+		) );
 
 		return new PatchItemLabelsResponse( $revision->getItem()->getLabels(), $revision->getLastModified(), $revision->getRevisionId() );
 	}

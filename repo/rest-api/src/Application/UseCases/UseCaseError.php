@@ -41,6 +41,7 @@ class UseCaseError extends UseCaseException {
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const REFERENCED_RESOURCE_NOT_FOUND = 'referenced-resource-not-found';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
+	public const RESOURCE_TOO_LARGE = 'resource-too-large';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
 	public const UNEXPECTED_ERROR = 'unexpected-error';
 	public const VALUE_TOO_LONG = 'value-too-long';
@@ -100,6 +101,7 @@ class UseCaseError extends UseCaseException {
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::REFERENCED_RESOURCE_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
+		self::RESOURCE_TOO_LARGE => [ self::CONTEXT_LIMIT ],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -14,6 +15,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class SetPropertyDescription {
+
+	use UpdateExceptionHandler;
 
 	private SetPropertyDescriptionValidator $validator;
 	private PropertyWriteModelRetriever $propertyRetriever;
@@ -56,10 +59,10 @@ class SetPropertyDescription {
 			? DescriptionEditSummary::newReplaceSummary( $editMetadata->getComment(), $description )
 			: DescriptionEditSummary::newAddSummary( $editMetadata->getComment(), $description );
 
-		$revision = $this->propertyUpdater->update(
+		$revision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( $editMetadata->getTags(), $editMetadata->isBot(), $editSummary )
-		);
+		) );
 
 		return new SetPropertyDescriptionResponse(
 			$revision->getProperty()->getDescriptions()[$description->getLanguageCode()],

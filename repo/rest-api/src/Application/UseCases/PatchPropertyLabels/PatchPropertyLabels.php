@@ -6,6 +6,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
@@ -17,6 +18,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class PatchPropertyLabels {
+
+	use UpdateExceptionHandler;
 
 	private PropertyLabelsRetriever $labelsRetriever;
 	private LabelsSerializer $labelsSerializer;
@@ -92,10 +95,10 @@ class PatchPropertyLabels {
 			)
 		);
 
-		$revision = $this->propertyUpdater->update(
+		$revision = $this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			$editMetadata
-		);
+		) );
 
 		return new PatchPropertyLabelsResponse(
 			$revision->getProperty()->getLabels(),
