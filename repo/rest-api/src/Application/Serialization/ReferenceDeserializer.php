@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\Serialization;
 use Wikibase\DataModel\Reference;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,6 +21,7 @@ class ReferenceDeserializer {
 	/**
 	 * @throws MissingFieldException
 	 * @throws InvalidFieldException
+	 * @throws PropertyNotFoundException
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Reference {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {

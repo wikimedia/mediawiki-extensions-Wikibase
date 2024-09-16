@@ -5002,6 +5002,9 @@
               "patch-result-invalid-value": {
                 "$ref": "#/components/examples/PatchResultInvalidValueExample"
               },
+              "patch-result-referenced-resource-not-found": {
+                "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
+              },
               "patch-result-value-too-long": {
                 "$ref": "#/components/examples/PatchResultValueTooLongExample"
               },
@@ -5158,6 +5161,9 @@
               },
               "patch-result-modified-read-only-value": {
                 "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
+              },
+              "patch-result-referenced-resource-not-found": {
+                "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
               }
             }
           }

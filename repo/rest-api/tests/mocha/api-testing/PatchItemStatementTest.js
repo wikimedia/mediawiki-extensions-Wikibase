@@ -319,6 +319,44 @@ describe( 'PATCH statement tests', () => {
 				} );
 			} );
 
+			it( 'rejects qualifier with non-existent property', async () => {
+				const nonExistentProperty = 'P9999999';
+				const patch = [ {
+					op: 'add',
+					path: '/qualifiers',
+					value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+				} ];
+				const response = await newPatchRequestBuilder( testStatementId, patch )
+					.assertValidRequest().makeRequest();
+
+				assertValidError(
+					response,
+					422,
+					'patch-result-referenced-resource-not-found',
+					{ path: '/qualifiers/0/property/id', value: nonExistentProperty }
+				);
+				assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+			} );
+
+			it( 'rejects reference with non-existent property', async () => {
+				const nonExistentProperty = 'P9999999';
+				const patch = [ {
+					op: 'add',
+					path: '/references/0',
+					value: { parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ] }
+				} ];
+				const response = await newPatchRequestBuilder( testStatementId, patch )
+					.assertValidRequest().makeRequest();
+
+				assertValidError(
+					response,
+					422,
+					'patch-result-referenced-resource-not-found',
+					{ path: '/references/0/parts/0/property/id', value: nonExistentProperty }
+				);
+				assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+			} );
+
 		} );
 
 	} );

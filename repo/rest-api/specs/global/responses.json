@@ -389,6 +389,7 @@
 					},
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
+					"patch-result-referenced-resource-not-found": { "$ref": "./examples.json#/PatchResultResourceNotFoundExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
 					"patch-result-modified-read-only-value": {
 						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
@@ -493,7 +494,8 @@
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-modified-read-only-value": {
 						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
-					}
+					},
+					"patch-result-referenced-resource-not-found": { "$ref": "./examples.json#/PatchResultResourceNotFoundExample" }
 				}
 			}
 		},

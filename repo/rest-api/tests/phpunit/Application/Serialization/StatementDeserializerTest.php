@@ -13,6 +13,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -246,6 +247,15 @@ class StatementDeserializerTest extends TestCase {
 		yield "missing 'value/content' field" => [
 			new MissingFieldException( 'content', '/statement/value' ),
 			[ 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_IDS[0] ], 'value' => [ 'type' => 'value' ] ],
+			'/statement',
+		];
+
+		yield 'property does not exist' => [
+			new PropertyNotFoundException( 'P9999999', '/statement/property/id' ),
+			[
+				'property' => [ 'id' => 'P9999999' ],
+				'value' => [ 'type' => 'somevalue' ],
+			],
 			'/statement',
 		];
 	}

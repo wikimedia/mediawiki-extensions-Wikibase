@@ -118,6 +118,19 @@ class PatchedStatementValidatorTest extends TestCase {
 				UseCaseError::CONTEXT_VALUE => 'not-a-valid-rank',
 			],
 		];
+
+		yield 'from invalid patched statement (property not found)' => [
+			new ValidationError( StatementValidator::CODE_PROPERTY_NOT_FOUND, [
+				StatementValidator::CONTEXT_PATH => '/some-path-to-property-id',
+				StatementValidator::CONTEXT_VALUE => 'P9999999',
+			] ),
+			UseCaseError::PATCH_RESULT_REFERENCED_RESOURCE_NOT_FOUND,
+			'The referenced resource does not exist',
+			[
+				UseCaseError::CONTEXT_PATH => '/some-path-to-property-id',
+				UseCaseError::CONTEXT_VALUE => 'P9999999',
+			],
+		];
 	}
 
 }

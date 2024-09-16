@@ -482,6 +482,17 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			),
 			UseCaseError::newInvalidValue( '/item/statements/P1/0/value' ),
 		];
+
+		yield 'property does not exist' => [
+			new ValidationError(
+				StatementValidator::CODE_PROPERTY_NOT_FOUND,
+				[
+					StatementValidator::CONTEXT_PATH => '/some-path-to-non-existing-property',
+					StatementValidator::CONTEXT_VALUE => 'non-existing-property-id',
+				]
+			),
+			UseCaseError::newInvalidValue( '/some-path-to-non-existing-property' ),
+		];
 	}
 
 	public static function sitelinksValidationErrorProvider(): Generator {

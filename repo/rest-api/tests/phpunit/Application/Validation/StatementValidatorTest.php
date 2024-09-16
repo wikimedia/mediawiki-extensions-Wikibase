@@ -9,6 +9,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
@@ -71,6 +72,15 @@ class StatementValidatorTest extends TestCase {
 			[
 				StatementValidator::CONTEXT_PATH => '/path/to/some-field',
 				StatementValidator::CONTEXT_VALUE => 'some-value',
+			],
+		];
+
+		yield 'non-existent property' => [
+			new PropertyNotFoundException( 'P9999999', '/path/to/non-existing-property' ),
+			StatementValidator::CODE_PROPERTY_NOT_FOUND,
+			[
+				StatementValidator::CONTEXT_PATH => '/path/to/non-existing-property',
+				StatementValidator::CONTEXT_VALUE => 'P9999999',
 			],
 		];
 	}

@@ -8,6 +8,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,6 +30,7 @@ class StatementDeserializer {
 	 * @throws InvalidFieldTypeException
 	 * @throws InvalidFieldException
 	 * @throws MissingFieldException
+	 * @throws PropertyNotFoundException
 	 */
 	public function deserialize( array $serialization, string $basePath = '' ): Statement {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
