@@ -60,7 +60,7 @@ class FakeLBFactory extends LBFactory {
 		return [];
 	}
 
-	public function getLocalDomainID() {
+	public function getLocalDomainID(): string {
 		return $this->lb->getLocalDomainID();
 	}
 
