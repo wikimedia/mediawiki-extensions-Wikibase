@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\View;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiLangTestCase;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 
@@ -15,24 +14,6 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$services = MediaWikiServices::getInstance();
-		$services->resetServiceForTesting( 'TitleFormatter' );
-		$services->resetServiceForTesting( 'TitleParser' );
-		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		$services = MediaWikiServices::getInstance();
-		$services->resetServiceForTesting( 'TitleFormatter' );
-		$services->resetServiceForTesting( 'TitleParser' );
-		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
-	}
 
 	/**
 	 * @dataProvider getLinkProvider

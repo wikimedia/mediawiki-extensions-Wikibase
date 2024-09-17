@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use DataValues\TimeValue;
 use Language;
 use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -21,10 +21,9 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  *
  * @license GPL-2.0-or-later
  */
-class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
+class MwTimeIsoParserTest extends MediaWikiIntegrationTestCase {
 
-	/** @var LanguageFactory */
-	private $oldLangFactory;
+	private LanguageFactory $oldLangFactory;
 
 	/**
 	 * @see ValueParserTestBase::getInstance
@@ -41,31 +40,15 @@ class MwTimeIsoParserTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$services = MediaWikiServices::getInstance();
-		$this->oldLangFactory = $services->getLanguageFactory();
+		// Store the real language factory to allow calling it from the stub callback
+		$this->oldLangFactory = $this->getServiceContainer()->getLanguageFactory();
 		$stub = $this->createMock( LanguageFactory::class );
 		$stub->method( 'getLanguage' )->willReturnCallback( function ( $code ) {
 			return $code === 'es'
 				? $this->getLanguage()
 				: $this->oldLangFactory->getLanguage( $code );
 		} );
-		$services->disableService( 'LanguageFactory' );
-		$services->redefineService( 'LanguageFactory',
-			function () use ( $stub ) {
-				return $stub;
-			}
-		);
-	}
-
-	protected function tearDown(): void {
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
-		MediaWikiServices::getInstance()->redefineService(
-			'LanguageFactory',
-			function () {
-				return $this->oldLangFactory;
-			}
-		);
-		parent::tearDown();
+		$this->setService( 'LanguageFactory', $stub );
 	}
 
 	private function getLanguage() {
