@@ -309,7 +309,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'url-not-modifiable', { site_id: siteId } );
-			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
+			assert.equal( response.body.message, 'URL of Sitelink cannot be modified' );
 		} );
 
 	} );

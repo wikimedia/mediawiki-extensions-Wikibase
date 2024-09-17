@@ -740,7 +740,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 			[ self::EXISTING_STRING_PROPERTY_IDS[0] => [ [ 'property' => [ 'id' => 'P122' ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
-				"Statement's Property ID does not match the statement group key",
+				"Statement's Property ID does not match the Statement group key",
 				[
 					UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[0] . '/0/property/id',
 					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => self::EXISTING_STRING_PROPERTY_IDS[0],

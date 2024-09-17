@@ -20,7 +20,7 @@ class PropertyStatementIdRequestValidator {
 		if ( !$this->assertPropertyIdEqualToStatementSubjectId( $propertyId, $statementId ) ) {
 			throw new UseCaseError(
 				UseCaseError::PROPERTY_STATEMENT_ID_MISMATCH,
-				'IDs of the property and the statement do not match',
+				'IDs of the Property and the Statement do not match',
 				[ UseCaseError::CONTEXT_PROPERTY_ID => $propertyId, UseCaseError::CONTEXT_STATEMENT_ID => $statementId ]
 			);
 		}

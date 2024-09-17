@@ -592,7 +592,10 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				statement_property_id: predicatePropertyId
 			};
 			assertValidError( response, 422, 'patched-statement-group-property-id-mismatch', context );
-			assert.strictEqual( response.body.message, "Statement's Property ID does not match the statement group key" );
+			assert.strictEqual(
+				response.body.message,
+				"Statement's Property ID does not match the Statement group key"
+			);
 		} );
 
 		it( 'statement IDs cannot be created or modified', async () => {
@@ -668,7 +671,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patched-invalid-sitelink-type', { site_id: siteId } );
-			assert.strictEqual( response.body.message, 'Not a valid sitelink type in patched sitelinks' );
+			assert.strictEqual( response.body.message, 'Not a valid Sitelink type in patched Sitelinks' );
 		} );
 
 		it( 'sitelinks not an object', async () => {
@@ -823,7 +826,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'url-not-modifiable', { site_id: siteId } );
-			assert.equal( response.body.message, 'URL of sitelink cannot be modified' );
+			assert.equal( response.body.message, 'URL of Sitelink cannot be modified' );
 		} );
 
 		it( 'rejects statement with non-existent property', async () => {

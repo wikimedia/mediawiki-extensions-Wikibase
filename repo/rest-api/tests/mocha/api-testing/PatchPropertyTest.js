@@ -600,7 +600,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assertValidError( response, 422, 'patched-statement-group-property-id-mismatch', context );
 			assert.strictEqual(
 				response.body.message,
-				"Statement's Property ID does not match the statement group key"
+				"Statement's Property ID does not match the Statement group key"
 			);
 		} );
 
