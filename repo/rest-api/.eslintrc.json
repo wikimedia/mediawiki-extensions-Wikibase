@@ -13,6 +13,7 @@
 		"no-unused-expressions": "off",
 		"prefer-arrow-callback": "off",
 		"template-curly-spacing": "off",
-		"camelcase": "off"
+		"camelcase": "off",
+		"no-implicit-coercion": [ "error", { "disallowTemplateShorthand": true } ]
 	}
 }
