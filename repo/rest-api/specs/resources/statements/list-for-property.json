@@ -35,6 +35,7 @@
 		"responses": {
 			"201": { "$ref": "./responses.json#/PropertyStatementCreated" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }

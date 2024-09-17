@@ -38,6 +38,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/ItemDescriptions" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyItemPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

@@ -36,6 +36,7 @@
 		"responses": {
 			"201": { "$ref": "./responses.json#/ItemStatementCreated" },
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

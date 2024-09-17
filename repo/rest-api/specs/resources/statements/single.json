@@ -36,6 +36,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"400": { "$ref": "./responses.json#/InvalidReplaceStatementInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
@@ -56,6 +57,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Statement" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
@@ -78,6 +80,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
 			"400": { "$ref": "./responses.json#/InvalidRemoveStatementInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
