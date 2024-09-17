@@ -4,8 +4,6 @@
 .travis.yml export-ignore
 composer.json export-ignore
 docs export-ignore
-phpcs.xml export-ignore
-.phpcs.xml export-ignore
 phpmd.xml export-ignore
 phpunit.xml.dist export-ignore
 tests export-ignore
