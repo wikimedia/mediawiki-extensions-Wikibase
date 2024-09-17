@@ -473,6 +473,68 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.equal( response.body.message, "Statement's Property ID does not match the statement group key" );
 		} );
 
+		it( 'non-existent statement property id', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue( nonExistentProperty );
+
+			const response = await newCreateItemRequestBuilder( {
+				statements: { [ nonExistentProperty ]: [ statement ] }
+			} ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: `/item/statements/${nonExistentProperty}/0/property/id` }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'statement qualifier with non-existent property', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue(
+				predicatePropertyId
+			);
+			statement.qualifiers = [
+				{ property: { id: nonExistentProperty }, value: { type: 'novalue' } }
+			];
+
+			const response = await newCreateItemRequestBuilder( {
+				statements: { [ predicatePropertyId ]: [ statement ] }
+			} ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: `/item/statements/${predicatePropertyId}/0/qualifiers/0/property/id` }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'statement reference with non-existent property', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue(
+				predicatePropertyId
+			);
+			statement.references = [];
+			statement.references[ 0 ] = {
+				parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+			};
+
+			const response = await newCreateItemRequestBuilder( {
+				statements: { [ predicatePropertyId ]: [ statement ] }
+			} ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: `/item/statements/${predicatePropertyId}/0/references/0/parts/0/property/id` }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
 		it( 'invalid site ID', async () => {
 			const invalidSiteId = 'not-a-valid-site-id';
 			const response = await newCreateItemRequestBuilder( {

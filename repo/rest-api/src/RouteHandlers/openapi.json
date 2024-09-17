@@ -1644,6 +1644,9 @@
                   "cannot-modify-read-only-value": {
                     "$ref": "#/components/examples/CannotModifyReadOnlyValue"
                   },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+                  },
                   "resource-too-large": {
                     "$ref": "#/components/examples/ResourceTooLargeExample"
                   }
@@ -3110,6 +3113,9 @@
                   "cannot-modify-read-only-value": {
                     "$ref": "#/components/examples/CannotModifyReadOnlyValue"
                   },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+                  },
                   "resource-too-large": {
                     "$ref": "#/components/examples/ResourceTooLargeExample"
                   }
@@ -3419,6 +3425,9 @@
                   },
                   "resource-too-large": {
                     "$ref": "#/components/examples/ResourceTooLargeExample"
+                  },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
                   }
                 }
               }
@@ -4628,6 +4637,9 @@
               },
               "resource-too-large": {
                 "$ref": "#/components/examples/ResourceTooLargeExample"
+              },
+              "referenced-resource-not-found": {
+                "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
               }
             }
           }

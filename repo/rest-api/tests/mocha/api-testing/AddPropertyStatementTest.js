@@ -223,6 +223,65 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 
 			assertValidError( response, 400, 'invalid-value', { path: '/statement' } );
 		} );
+
+		it( 'non-existent statement property id', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue( nonExistentProperty );
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: '/statement/property/id' }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'qualifier with non-existent property', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue(
+				( await entityHelper.createUniqueStringProperty() ).entity.id
+			);
+			statement.qualifiers = [
+				{ property: { id: nonExistentProperty }, value: { type: 'novalue' } }
+			];
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: '/statement/qualifiers/0/property/id' }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
+		it( 'reference with non-existent property', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue(
+				( await entityHelper.createUniqueStringProperty() ).entity.id
+			);
+			statement.references = [];
+			statement.references[ 0 ] = {
+				parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
+			};
+
+			const response = await newAddPropertyStatementRequestBuilder( testPropertyId, statement )
+				.assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: '/statement/references/0/parts/0/property/id' }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
 	} );
 
 	describe( '404 error response', () => {

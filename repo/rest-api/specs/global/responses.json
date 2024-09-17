@@ -160,7 +160,8 @@
 					"invalid-value": { "$ref": "./examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "./examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "./examples.json#/ValueTooLongExample" },
-					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" }
+					"resource-too-large": { "$ref": "./examples.json#/ResourceTooLargeExample" },
+					"referenced-resource-not-found": { "$ref": "./examples.json#/ReferencedResourceNotFoundExample" }
 				}
 			}
 		},

@@ -491,7 +491,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 					StatementValidator::CONTEXT_VALUE => 'non-existing-property-id',
 				]
 			),
-			UseCaseError::newInvalidValue( '/some-path-to-non-existing-property' ),
+			UseCaseError::newReferencedResourceNotFound( '/some-path-to-non-existing-property' ),
 		];
 	}
 
