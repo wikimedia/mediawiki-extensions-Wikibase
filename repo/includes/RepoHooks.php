@@ -709,6 +709,7 @@ final class RepoHooks {
 	 * @param bool $local shall links be generated locally or globally
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local ) {
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgTitle
 		global $wgLang, $wgTitle;
 
 		// If it is possible to avoid loading the whole page then the code will be lighter on the server.

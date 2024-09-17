@@ -77,9 +77,6 @@
 	<rule ref="Generic.Files.OneObjectStructurePerFile">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
 	</rule>
-	<rule ref="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgTitle">
-		<exclude-pattern>RepoHooks\.php</exclude-pattern>
-	</rule>
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
 	</rule>
