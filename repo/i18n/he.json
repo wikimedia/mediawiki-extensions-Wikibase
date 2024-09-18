@@ -16,7 +16,8 @@
 			"ערן",
 			"פוילישער",
 			"שמזן",
-			"נדב ס"
+			"נדב ס",
+			"מקף"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובְנים",
@@ -525,7 +526,7 @@
 	"special-setaliases-parameterized": "הגדרת כינויים עבור $1",
 	"special-setlabel-parameterized": "הגדרת תווית עבור $1",
 	"special-setdescription-parameterized": "הגדרת תיאור עבור $1",
-	"special-setlabeldescriptionaliases-parameterized": "הגדרת תווית, תיאור, וכינויים עבור $1",
+	"special-setlabeldescriptionaliases-parameterized": "הגדרת תווית, תיאור וכינויים עבור $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "אין לך אפשרות לתקשר עם מאפיינים בפדרציה באמצעות ה־API הזה.",
 	"wikibase-federated-properties-failed-request-api-error-message": "הבקשה נכשלה בשל בקשה כושלת לוויקי המקור של הפדרציה."
 }
