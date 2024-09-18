@@ -255,7 +255,7 @@
 							"example": "replace"
 						},
 						"path": {
-							"description": "A JSON Pointer for the property to manipulate",
+							"description": "A JSON Pointer for the Property to manipulate",
 							"type": "string"
 						},
 						"value": {

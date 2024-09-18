@@ -31,10 +31,10 @@
 		"get": {
 			"operationId": "getPropertyDataTypes",
 			"tags": [ "Property data types" ],
-			"summary": "Retrieve the map of property data types to value types",
+			"summary": "Retrieve the map of Property data types to value types",
 			"responses": {
 				"200": {
-					"description": "The map of property data types to value types",
+					"description": "The map of Property data types to value types",
 					"content": {
 						"application/json": {
 							"schema": {

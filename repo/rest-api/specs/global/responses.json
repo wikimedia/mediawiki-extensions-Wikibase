@@ -349,7 +349,7 @@
 		}
 	},
 	"InvalidPatchedItem": {
-		"description": "Applying the provided JSON Patch results in an invalid property",
+		"description": "Applying the provided JSON Patch results in an invalid Property",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
@@ -379,7 +379,7 @@
 		}
 	},
 	"InvalidPatchedProperty": {
-		"description": "Applying the provided JSON Patch results in an invalid property",
+		"description": "Applying the provided JSON Patch results in an invalid Property",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
@@ -484,7 +484,7 @@
 		}
 	},
 	"InvalidPatchedStatement": {
-		"description": "Applying the provided JSON Patch results in an invalid statement",
+		"description": "Applying the provided JSON Patch results in an invalid Statement",
 		"content": {
 			"application/json": {
 				"schema": {
@@ -561,7 +561,7 @@
 		}
 	},
 	"Sitelinks": {
-		"description": "A list of sitelinks by item id",
+		"description": "A list of Sitelinks by Item id",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -591,7 +591,7 @@
 		}
 	},
 	"Sitelink": {
-		"description": "A sitelink by item id",
+		"description": "A Sitelink by Item id",
 		"headers": {
 			"Last-Modified": {
 				"schema": {

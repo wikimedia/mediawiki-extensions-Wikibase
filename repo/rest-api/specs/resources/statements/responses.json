@@ -85,7 +85,7 @@
 				"schema": {
 					"type": "string"
 				},
-				"description": "The URI of the newly created statement"
+				"description": "The URI of the newly created Statement"
 			}
 		},
 		"content": {
@@ -97,7 +97,7 @@
 		}
 	},
 	"ItemStatements": {
-		"description": "The statements of an Item",
+		"description": "The Statements of an Item",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -279,7 +279,7 @@
 				"schema": {
 					"type": "string"
 				},
-				"description": "The URI of the newly created statement"
+				"description": "The URI of the newly created Statement"
 			}
 		},
 		"content": {
@@ -294,7 +294,7 @@
 		}
 	},
 	"PropertyStatements": {
-		"description": "The statements of a Property",
+		"description": "The Statements of a Property",
 		"headers": {
 			"Last-Modified": {
 				"schema": {

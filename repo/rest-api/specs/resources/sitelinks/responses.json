@@ -1,6 +1,6 @@
 {
 	"InvalidPatchedItemSitelinks": {
-		"description": "Applying the provided JSON Patch results in invalid sitelinks",
+		"description": "Applying the provided JSON Patch results in invalid Sitelinks",
 		"content": {
 			"application/json": {
 				"schema": { "$ref": "../../global/response-parts.json#/Error" },

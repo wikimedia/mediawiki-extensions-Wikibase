@@ -2,7 +2,7 @@
 	"get": {
 		"operationId": "getSitelinks",
 		"tags": [ "sitelinks" ],
-		"summary": "Retrieve an Item's sitelinks",
+		"summary": "Retrieve an Item's Sitelinks",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
@@ -24,7 +24,7 @@
 	"patch": {
 		"operationId": "patchSitelinks",
 		"tags": [ "sitelinks" ],
-		"summary": "Change an Item's sitelinks",
+		"summary": "Change an Item's Sitelinks",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/IfMatch" },
