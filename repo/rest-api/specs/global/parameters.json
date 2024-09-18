@@ -126,7 +126,7 @@
 	"PropertyFilter": {
 		"in": "query",
 		"name": "property",
-		"description": "Single property ID to filter statements by.",
+		"description": "Single Property ID to filter Statements by.",
 		"required": false,
 		"schema": {
 			"type": "string",

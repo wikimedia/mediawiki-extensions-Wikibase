@@ -50,10 +50,10 @@
         "tags": [
           "Property data types"
         ],
-        "summary": "Retrieve the map of property data types to value types",
+        "summary": "Retrieve the map of Property data types to value types",
         "responses": {
           "200": {
-            "description": "The map of property data types to value types",
+            "description": "The map of Property data types to value types",
             "content": {
               "application/json": {
                 "schema": {
@@ -271,7 +271,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "Retrieve an Item's sitelinks",
+        "summary": "Retrieve an Item's Sitelinks",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -321,7 +321,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "Change an Item's sitelinks",
+        "summary": "Change an Item's Sitelinks",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -356,7 +356,7 @@
             "$ref": "#/components/responses/PreconditionFailedError"
           },
           "422": {
-            "description": "Applying the provided JSON Patch results in invalid sitelinks",
+            "description": "Applying the provided JSON Patch results in invalid Sitelinks",
             "content": {
               "application/json": {
                 "schema": {
@@ -405,7 +405,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "Retrieve an Item's sitelink",
+        "summary": "Retrieve an Item's Sitelink",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -478,7 +478,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "Add / Replace an item's sitelink",
+        "summary": "Add / Replace an Item's Sitelink",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -574,7 +574,7 @@
         "tags": [
           "sitelinks"
         ],
-        "summary": "Delete an Item's sitelink",
+        "summary": "Delete an Item's Sitelink",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -1345,7 +1345,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The statements of an Item",
+            "description": "The Statements of an Item",
             "headers": {
               "Last-Modified": {
                 "schema": {
@@ -1483,7 +1483,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The URI of the newly created statement"
+                "description": "The URI of the newly created Statement"
               }
             },
             "content": {
@@ -2817,7 +2817,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The statements of a Property",
+            "description": "The Statements of a Property",
             "headers": {
               "Last-Modified": {
                 "schema": {
@@ -2952,7 +2952,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The URI of the newly created statement"
+                "description": "The URI of the newly created Statement"
               }
             },
             "content": {
@@ -3721,7 +3721,7 @@
       "PropertyFilter": {
         "in": "query",
         "name": "property",
-        "description": "Single property ID to filter statements by.",
+        "description": "Single Property ID to filter Statements by.",
         "required": false,
         "schema": {
           "type": "string",
@@ -3932,7 +3932,7 @@
                             "example": "replace"
                           },
                           "path": {
-                            "description": "A JSON Pointer for the property to manipulate",
+                            "description": "A JSON Pointer for the Property to manipulate",
                             "type": "string"
                           },
                           "value": {
@@ -4945,7 +4945,7 @@
         }
       },
       "InvalidPatchedItem": {
-        "description": "Applying the provided JSON Patch results in an invalid property",
+        "description": "Applying the provided JSON Patch results in an invalid Property",
         "content": {
           "application/json": {
             "schema": {
@@ -4995,7 +4995,7 @@
         }
       },
       "InvalidPatchedProperty": {
-        "description": "Applying the provided JSON Patch results in an invalid property",
+        "description": "Applying the provided JSON Patch results in an invalid Property",
         "content": {
           "application/json": {
             "schema": {
@@ -5158,7 +5158,7 @@
         }
       },
       "InvalidPatchedStatement": {
-        "description": "Applying the provided JSON Patch results in an invalid statement",
+        "description": "Applying the provided JSON Patch results in an invalid Statement",
         "content": {
           "application/json": {
             "schema": {
@@ -5278,7 +5278,7 @@
         }
       },
       "Sitelinks": {
-        "description": "A list of sitelinks by item id",
+        "description": "A list of Sitelinks by Item id",
         "headers": {
           "Last-Modified": {
             "schema": {
@@ -5308,7 +5308,7 @@
         }
       },
       "Sitelink": {
-        "description": "A sitelink by item id",
+        "description": "A Sitelink by Item id",
         "headers": {
           "Last-Modified": {
             "schema": {
