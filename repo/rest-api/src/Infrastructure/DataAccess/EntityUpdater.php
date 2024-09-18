@@ -7,6 +7,7 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;
+use MessageSpecifier;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -98,8 +99,9 @@ class EntityUpdater {
 		);
 
 		if ( !$status->isOK() ) {
-			if ( $status->getMessages()[0]->getKey() === 'wikibase-error-entity-too-big' ) {
-				$maxSizeInKiloBytes = $status->getMessages()[0]->getParams()[0]['size'] / 1024;
+			$entityTooBigError = $this->findErrorInStatus( $status, 'wikibase-error-entity-too-big' );
+			if ( $entityTooBigError ) {
+				$maxSizeInKiloBytes = $entityTooBigError->getParams()[0]['size'] / 1024;
 				throw new ResourceTooLargeException( $maxSizeInKiloBytes );
 			}
 
@@ -116,11 +118,20 @@ class EntityUpdater {
 	}
 
 	private function isPreventedEdit( Status $status ): bool {
-		$errorCode = $status->getMessages()[0]->getKey();
+		return $this->findErrorInStatus( $status, 'actionthrottledtext' )
+			|| $this->findErrorInStatus( $status, 'spam-blacklisted' )
+			|| $this->findErrorInStatus( $status, 'abusefilter' );
+	}
 
-		return $errorCode === 'actionthrottledtext'
-			|| strpos( $errorCode, 'spam-blacklisted' ) === 0
-			|| strpos( $errorCode, 'abusefilter' ) === 0;
+	private function findErrorInStatus( Status $status, string $errorCode ): ?MessageSpecifier {
+		foreach ( $status->getMessages() as $message ) {
+			// prefix comparison to cover different kinds of spam-blacklisted or abusefilter errors
+			if ( strpos( $message->getKey(), $errorCode ) === 0 ) {
+				return $message;
+			}
+		}
+
+		return null;
 	}
 
 	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
