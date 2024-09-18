@@ -183,7 +183,7 @@ class UseCaseError extends UseCaseException {
 	public static function newInvalidKey( string $path, string $key ): self {
 		return new self(
 			self::INVALID_KEY,
-			"Invalid key '{$key}' in '{$path}'",
+			"Invalid key '$key' in '$path'",
 			[ self::CONTEXT_PATH => $path, self::CONTEXT_KEY => $key ]
 		);
 	}
