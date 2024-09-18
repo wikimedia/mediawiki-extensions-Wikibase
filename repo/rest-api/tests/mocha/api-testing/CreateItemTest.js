@@ -470,7 +470,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 					statement_property_id: predicatePropertyId
 				}
 			);
-			assert.equal( response.body.message, "Statement's Property ID does not match the statement group key" );
+			assert.equal( response.body.message, "Statement's Property ID does not match the Statement group key" );
 		} );
 
 		it( 'non-existent statement property id', async () => {

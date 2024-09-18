@@ -169,7 +169,7 @@ class ItemSerializationRequestValidatingDeserializer {
 			case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
 				throw new UseCaseError(
 					UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
-					"Statement's Property ID does not match the statement group key",
+					"Statement's Property ID does not match the Statement group key",
 					[
 						UseCaseError::CONTEXT_PATH => $context[StatementsValidator::CONTEXT_PATH],
 						UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => $context[StatementsValidator::CONTEXT_PROPERTY_ID_KEY],

@@ -20,7 +20,7 @@ class ItemStatementIdRequestValidator {
 		if ( !$this->assertItemIdEqualToStatementSubjectId( $itemId, $statementId ) ) {
 			throw new UseCaseError(
 				UseCaseError::ITEM_STATEMENT_ID_MISMATCH,
-				'IDs of the item and the statement do not match',
+				'IDs of the Item and the Statement do not match',
 				[ UseCaseError::CONTEXT_ITEM_ID => $itemId, UseCaseError::CONTEXT_STATEMENT_ID => $statementId ]
 			);
 		}

@@ -768,7 +768,7 @@ class PatchedItemValidatorTest extends TestCase {
 			[ $propertyIdKey => [ [ 'property' => [ 'id' => $propertyIdValue ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
 			new UseCaseError(
 				UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
-				"Statement's Property ID does not match the statement group key",
+				"Statement's Property ID does not match the Statement group key",
 				[
 					UseCaseError::CONTEXT_PATH => "$propertyIdKey/0/property/id",
 					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => $propertyIdKey,
@@ -829,7 +829,7 @@ class PatchedItemValidatorTest extends TestCase {
 			[ $validSiteId => 'invalid-sitelink' ],
 			new UseCaseError(
 				UseCaseError::PATCHED_INVALID_SITELINK_TYPE,
-				'Not a valid sitelink type in patched sitelinks',
+				'Not a valid Sitelink type in patched Sitelinks',
 				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
 			),
 		];
@@ -1058,7 +1058,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		$expectedError = new UseCaseError(
 			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
-			'URL of sitelink cannot be modified',
+			'URL of Sitelink cannot be modified',
 			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
 		);
 

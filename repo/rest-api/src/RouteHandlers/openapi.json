@@ -6406,7 +6406,7 @@
       "PatchedInvalidSitelinkTypeExample": {
         "value": {
           "code": "patched-invalid-sitelink-type'",
-          "message": "Not a valid sitelink type in patched sitelinks",
+          "message": "Not a valid Sitelink type in patched Sitelinks",
           "context": {
             "site_id": "{site_id}"
           }
@@ -6425,7 +6425,7 @@
       "SitelinkUrlNotModifiableExample": {
         "value": {
           "code": "url-not-modifiable",
-          "message": "URL of sitelink cannot be modified",
+          "message": "URL of Sitelink cannot be modified",
           "context": {
             "site_id": "{site_id}"
           }
@@ -6464,7 +6464,7 @@
       "PatchedStatementGroupPropertyIdMismatchExample": {
         "value": {
           "code": "patched-statement-group-property-id-mismatch",
-          "message": "Statement's Property ID does not match the statement group key",
+          "message": "Statement's Property ID does not match the Statement group key",
           "context": {
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",
@@ -6475,7 +6475,7 @@
       "ItemStatementIdMismatchExample": {
         "value": {
           "code": "item-statement-id-mismatch",
-          "message": "IDs of the item and the statement do not match",
+          "message": "IDs of the Item and the Statement do not match",
           "context": {
             "item_id": "{item_id}",
             "statement_id": "{statement_id}"
@@ -6485,7 +6485,7 @@
       "PropertyStatementIdMismatchExample": {
         "value": {
           "code": "property-statement-id-mismatch",
-          "message": "IDs of the property and the statement do not match",
+          "message": "IDs of the Property and the Statement do not match",
           "context": {
             "property_id": "{property_id}",
             "statement_id": "{statement_id}"
@@ -6533,7 +6533,7 @@
       "StatementGroupPropertyIdMismatch": {
         "value": {
           "code": "statement-group-property-id-mismatch",
-          "message": "Statement's Property ID does not match the statement group key",
+          "message": "Statement's Property ID does not match the Statement group key",
           "context": {
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",

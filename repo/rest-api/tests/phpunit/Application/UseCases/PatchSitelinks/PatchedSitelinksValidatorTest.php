@@ -204,7 +204,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 		$expectedError = new UseCaseError(
 			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
-			'URL of sitelink cannot be modified',
+			'URL of Sitelink cannot be modified',
 			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
 		);
 
