@@ -269,5 +269,15 @@
 				"statement_property_id": "{property_id_value}"
 			}
 		}
+	},
+	"PermissionDeniedExample": {
+		"value": {
+			"code": "permission-denied",
+			"message": "Access to resource is denied",
+			"context": {
+				"denial_reason": "{reason_code}",
+				"denial_context": "{additional_context}"
+			}
+		}
 	}
 }

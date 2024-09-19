@@ -46,6 +46,7 @@
 				"description": "The newly added Sitelink"
 			},
 			"400": { "$ref": "./responses.json#/InvalidSetSitelinkInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
@@ -70,6 +71,7 @@
 		"responses": {
 			"200": { "$ref": "./responses.json#/SitelinkDeleted" },
 			"400": { "$ref": "./responses.json#/InvalidRemoveSitelinkInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

@@ -94,6 +94,25 @@
 			}
 		}
 	},
+	"PermissionDenied": {
+		"description": "The access to resource was denied",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"permission-denied": { "$ref": "./examples.json#/PermissionDeniedExample" }
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ResourceNotFound": {
 		"description": "The specified resource was not found",
 		"content": {

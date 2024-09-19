@@ -131,6 +131,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
@@ -247,6 +250,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -345,6 +351,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -552,6 +561,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -649,6 +661,9 @@
                 "description": "Language code of the language in which error message is provided"
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -763,6 +778,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -863,6 +881,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -959,6 +980,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1079,6 +1103,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -1134,6 +1161,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1248,6 +1278,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidSetDescriptionInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -1300,6 +1333,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1497,6 +1533,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidNewStatementInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -1662,6 +1701,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -1742,6 +1784,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -1821,6 +1866,9 @@
                 "description": "Language code of the language in which error message is provided"
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -1914,6 +1962,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2010,6 +2061,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2130,6 +2184,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidSetLabelInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -2185,6 +2242,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2299,6 +2359,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidSetLabelInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -2351,6 +2414,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2444,6 +2510,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2540,6 +2609,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2660,6 +2732,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidAddAliasesInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -2772,6 +2847,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidAddAliasesInput"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -2969,6 +3047,9 @@
           "400": {
             "$ref": "#/components/responses/InvalidNewStatementInput"
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -3131,6 +3212,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -3211,6 +3295,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -3290,6 +3377,9 @@
                 "description": "Language code of the language in which error message is provided"
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -3441,6 +3531,9 @@
               }
             }
           },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
           },
@@ -3482,6 +3575,9 @@
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -3556,6 +3652,9 @@
                 "description": "Language code of the language in which error message is provided"
               }
             }
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
           },
           "404": {
             "$ref": "#/components/responses/ResourceNotFound"
@@ -4530,6 +4629,29 @@
             "examples": {
               "data-policy-violation": {
                 "$ref": "#/components/examples/DataPolicyViolationExample"
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the language in which error message is provided"
+          }
+        }
+      },
+      "PermissionDenied": {
+        "description": "The access to resource was denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+            },
+            "examples": {
+              "permission-denied": {
+                "$ref": "#/components/examples/PermissionDeniedExample"
               }
             }
           }
@@ -6538,6 +6660,16 @@
             "path": "{property_id_key}/{index}/property/id",
             "statement_group_property_id": "{property_id_key}",
             "statement_property_id": "{property_id_value}"
+          }
+        }
+      },
+      "PermissionDeniedExample": {
+        "value": {
+          "code": "permission-denied",
+          "message": "Access to resource is denied",
+          "context": {
+            "denial_reason": "{reason_code}",
+            "denial_context": "{additional_context}"
           }
         }
       }
