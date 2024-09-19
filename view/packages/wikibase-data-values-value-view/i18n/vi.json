@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Leducthn",
+			"NguyenHung",
 			"Phjtieudoc",
 			"Vinhtantran"
 		]
@@ -9,9 +10,36 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Chưa hỗ trợ các giá trị dữ liệu “$1”.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.",
 	"valueview-expert-emptyvalue-empty": "trống",
+	"valueview-expert-globecoordinateinput-precision": "Độ chính xác:",
+	"valueview-expert-globecoordinateinput-nullprecision": "không rõ",
+	"valueview-expert-globecoordinateinput-customprecision": "đặc biệt ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "đúng phút góc",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "đúng giây góc",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "đúng 1/10 giây góc",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "đúng 1/100 giây góc",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "đúng 1/1000 giây góc",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Công lịch",
 	"valueview-expert-timevalue-calendar-julian": "Lịch Julius",
 	"valueview-expert-timeinput-precision": "Độ chính xác:",
+	"valueview-expert-timeinput-precision-year1g": "tỷ năm",
+	"valueview-expert-timeinput-precision-year100m": "trăm triệu năm",
+	"valueview-expert-timeinput-precision-year10m": "mười triệu năm",
+	"valueview-expert-timeinput-precision-year1m": "triệu năm",
+	"valueview-expert-timeinput-precision-year100k": "100.000 năm",
+	"valueview-expert-timeinput-precision-year10k": "10.000 năm",
+	"valueview-expert-timeinput-precision-year1k": "thiên niên kỷ",
+	"valueview-expert-timeinput-precision-year100": "thế kỷ",
+	"valueview-expert-timeinput-precision-year10": "thập niên",
+	"valueview-expert-timeinput-precision-year": "năm",
+	"valueview-expert-timeinput-precision-month": "tháng",
+	"valueview-expert-timeinput-precision-day": "ngày",
+	"valueview-expert-timeinput-precision-hour": "giờ",
+	"valueview-expert-timeinput-precision-minute": "phút",
+	"valueview-expert-timeinput-precision-second": "giây",
 	"valueview-expert-timeinput-calendar": "Lịch:",
-	"valueview-expertextender-languageselector-label": "Ngôn ngữ (bắt buộc):"
+	"valueview-expertextender-languageselector-label": "Ngôn ngữ (bắt buộc):",
+	"valueview-expertextender-unitsuggester-label": "Đơn vị (tùy chọn):",
+	"valueview-preview-label": "sẽ hiển thị là:",
+	"valueview-listrotator-manually": "thiết lập thủ công"
 }
