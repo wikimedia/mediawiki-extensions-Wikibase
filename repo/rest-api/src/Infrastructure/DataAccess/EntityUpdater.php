@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
@@ -70,6 +71,7 @@ class EntityUpdater {
 	/**
 	 * @throws EntityUpdateFailed
 	 * @throws ResourceTooLargeException
+	 * @throws AbuseFilterException
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -105,6 +107,12 @@ class EntityUpdater {
 				throw new ResourceTooLargeException( $maxSizeInKiloBytes );
 			}
 
+			$abuseFilterError = $this->findErrorInStatus( $status, 'abusefilter' );
+			if ( $abuseFilterError ) {
+				[ $filterDescription, $filterId ] = $abuseFilterError->getParams();
+				throw new AbuseFilterException( (int)$filterId, $filterDescription );
+			}
+
 			if ( $this->isPreventedEdit( $status ) ) {
 				throw new EntityUpdatePrevented( (string)$status );
 			}
@@ -119,8 +127,7 @@ class EntityUpdater {
 
 	private function isPreventedEdit( Status $status ): bool {
 		return $this->findErrorInStatus( $status, 'actionthrottledtext' )
-			|| $this->findErrorInStatus( $status, 'spam-blacklisted' )
-			|| $this->findErrorInStatus( $status, 'abusefilter' );
+			|| $this->findErrorInStatus( $status, 'spam-blacklisted' );
 	}
 
 	private function findErrorInStatus( Status $status, string $errorCode ): ?MessageSpecifier {

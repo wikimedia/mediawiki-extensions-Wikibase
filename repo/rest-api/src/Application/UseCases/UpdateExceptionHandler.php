@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 
 /**
@@ -24,6 +25,11 @@ trait UpdateExceptionHandler {
 				"Edit resulted in a resource that exceeds the size limit of $maxSizeInKb kB",
 				[ UseCaseError::CONTEXT_LIMIT => $maxSizeInKb ]
 			);
+		} catch ( AbuseFilterException $e ) {
+			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_ABUSE_FILTER, [
+				'filter_id' => $e->getFilterId(),
+				'filter_description' => $e->getFilterDescription(),
+			] );
 		}
 	}
 

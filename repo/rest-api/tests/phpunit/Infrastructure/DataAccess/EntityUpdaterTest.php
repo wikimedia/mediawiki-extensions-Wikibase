@@ -29,6 +29,7 @@ use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
@@ -226,6 +227,25 @@ class EntityUpdaterTest extends TestCase {
 	}
 
 	/**
+	 * @dataProvider provideEntity
+	 */
+	public function testGivenAbuseFilterMatch_throwsCorrespondingException( EntityDocument $entity ): void {
+		$filterId = 777;
+		$filterDescription = 'bad word rejecting filter';
+
+		$errorStatus = EditEntityStatus::newFatal( 'abusefilter-disallowed', $filterDescription, $filterId );
+
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$this->expectExceptionObject( new AbuseFilterException( $filterId, $filterDescription ) );
+		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
 	 * @dataProvider provideEntityAndErrorStatus
 	 */
 	public function testGivenEditPrevented_throwsCorrespondingException(
@@ -266,7 +286,6 @@ class EntityUpdaterTest extends TestCase {
 		$errorStatuses = [
 			"basic 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( 'actionthrottledtext' ) ],
 			"wfMessage 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( wfMessage( 'actionthrottledtext' ) ) ],
-			"'abusefilter-disallowed' error" => [ EditEntityStatus::newFatal( 'abusefilter-disallowed' ) ],
 			"'spam-blacklisted-link' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-link' ) ],
 			"'spam-blacklisted-email' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-email' ) ],
 		];
