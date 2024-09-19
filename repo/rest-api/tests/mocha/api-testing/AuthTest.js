@@ -72,7 +72,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
 						403,
 						'permission-denied',
-						{ reason: 'unauthorized-bot-edit' }
+						{ denial_reason: 'unauthorized-bot-edit' }
 					);
 				} );
 			}
@@ -101,7 +101,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 							await newRequestBuilder().withUser( user ).makeRequest(),
 							403,
 							'permission-denied',
-							{ reason: 'blocked-user' }
+							{ denial_reason: 'blocked-user' }
 						);
 					} );
 				} );
@@ -128,7 +128,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 						await newRequestBuilder().makeRequest(),
 						403,
 						'permission-denied',
-						{ reason: 'resource-protected' }
+						{ denial_reason: 'resource-protected' }
 					);
 				} );
 			} );
