@@ -60,6 +60,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
 	public const CONTEXT_DENIAL_REASON = 'denial_reason';
+	public const CONTEXT_DENIAL_CONTEXT = 'denial_context';
 	public const CONTEXT_REDIRECT_TARGET = 'redirect_target';
 	public const CONTEXT_RESOURCE_TYPE = 'resource_type';
 	public const CONTEXT_SITE_ID = 'site_id';
@@ -212,8 +213,13 @@ class UseCaseError extends UseCaseException {
 		);
 	}
 
-	public static function newPermissionDenied( string $reason ): self {
-		return new self( self::PERMISSION_DENIED, 'Access to resource is denied', [ self::CONTEXT_DENIAL_REASON => $reason ] );
+	public static function newPermissionDenied( string $reason, array $denialContext = [] ): self {
+		$error = new self( self::PERMISSION_DENIED, 'Access to resource is denied', [ self::CONTEXT_DENIAL_REASON => $reason ] );
+		if ( $denialContext ) {
+			$error->errorContext[self::CONTEXT_DENIAL_CONTEXT] = $denialContext;
+		}
+
+		return $error;
 	}
 
 	public static function newResourceNotFound( string $resourceType ): self {

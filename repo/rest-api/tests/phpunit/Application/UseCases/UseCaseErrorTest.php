@@ -70,4 +70,26 @@ class UseCaseErrorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider permissionDeniedContextProvider
+	 */
+	public function testNewPermissionDenied( UseCaseError $error, array $expectedContext ): void {
+		$this->assertEquals( $expectedContext, $error->getErrorContext() );
+	}
+
+	public function permissionDeniedContextProvider(): Generator {
+		yield 'no additional context' => [
+			UseCaseError::newPermissionDenied( 'some-reason' ),
+			[ UseCaseError::CONTEXT_DENIAL_REASON => 'some-reason' ],
+		];
+
+		yield 'with additional context' => [
+			UseCaseError::newPermissionDenied( 'some-other-reason', [ 'some' => 'context' ] ),
+			[
+				UseCaseError::CONTEXT_DENIAL_REASON => 'some-other-reason',
+				UseCaseError::CONTEXT_DENIAL_CONTEXT => [ 'some' => 'context' ],
+			],
+		];
+	}
+
 }
