@@ -22,9 +22,9 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
@@ -89,6 +89,7 @@ class EntityUpdater {
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws SpamBlacklistException
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -139,8 +140,10 @@ class EntityUpdater {
 				throw new TempAccountCreationLimitReached();
 			}
 
-			if ( $this->isPreventedEdit( $status ) ) {
-				throw new EntityUpdatePrevented( (string)$status );
+			$spamBlacklistError = $this->findErrorInStatus( $status, 'spam-blacklisted' );
+			if ( $spamBlacklistError ) {
+				$blockedText = $spamBlacklistError->getParams()[0]['list'];
+				throw new SpamBlacklistException( $blockedText[0] );
 			}
 
 			throw new EntityUpdateFailed( (string)$status );
@@ -151,13 +154,9 @@ class EntityUpdater {
 		return $status->getRevision();
 	}
 
-	private function isPreventedEdit( Status $status ): bool {
-		return $this->findErrorInStatus( $status, 'spam-blacklisted' ) !== null;
-	}
-
 	private function findErrorInStatus( Status $status, string $errorCode ): ?MessageSpecifier {
 		foreach ( $status->getMessages() as $message ) {
-			// prefix comparison to cover different kinds of spam-blacklisted or abusefilter errors
+			// prefix comparison to cover different kinds of errors
 			if ( strpos( $message->getKey(), $errorCode ) === 0 ) {
 				return $message;
 			}
