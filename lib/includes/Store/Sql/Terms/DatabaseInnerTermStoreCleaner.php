@@ -303,7 +303,7 @@ class DatabaseInnerTermStoreCleaner {
 		string $selectedVar,
 		string $primaryKeyVar,
 		array $primaryKeyValues,
-		string $fname = __METHOD__
+		string $fname
 	): array {
 		$values = $this->dbr->newSelectQueryBuilder()
 			->select( $selectedVar )
