@@ -41,6 +41,7 @@
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -65,6 +66,7 @@
 			"409": { "$ref": "../../global/responses.json#/CannotApplyStatementPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedStatement" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -87,6 +89,7 @@
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

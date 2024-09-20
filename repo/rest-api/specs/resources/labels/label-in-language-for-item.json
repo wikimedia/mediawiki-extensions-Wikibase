@@ -52,6 +52,7 @@
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	},
@@ -76,6 +77,7 @@
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"409": { "$ref": "../../global/responses.json#/ItemRedirected" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

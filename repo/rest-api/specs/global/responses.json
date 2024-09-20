@@ -113,6 +113,31 @@
 			}
 		}
 	},
+	"RequestLimitReached": {
+		"description": "Too many requests",
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "./response-parts.json#/Error" },
+				"examples": {
+					"request-limit-reached": {
+						"value": {
+							"code": "request-limit-reached",
+							"message": "Exceeded the limit of actions that can be performed in a given span of time",
+							"context": { "reason": "{reason_code}" }
+						}
+					}
+				}
+			}
+		},
+		"headers": {
+			"Content-Language": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "Language code of the language in which error message is provided"
+			}
+		}
+	},
 	"ResourceNotFound": {
 		"description": "The specified resource was not found",
 		"content": {
