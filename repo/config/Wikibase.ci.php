@@ -79,3 +79,7 @@ $request = RequestContext::getMain()->getRequest();
 $headerMaxSize = $request->getHeader( 'X-Wikibase-CI-MAX-ENTITY-SIZE', WebRequest::GETHEADER_LIST );
 
 $wgWBRepoSettings['maxSerializedEntitySize'] = (int)( $headerMaxSize ?: $originalMaxSize );
+
+if ( $request->getHeader( 'X-Wikibase-CI-Anon-Rate-Limit-Zero', WebRequest::GETHEADER_LIST ) ) {
+	$wgRateLimits = [ 'edit' => [ 'anon' => [ 0, 60 ] ] ];
+}

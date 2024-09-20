@@ -31,6 +31,7 @@ use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
@@ -260,6 +261,20 @@ class EntityUpdaterTest extends TestCase {
 	}
 
 	/**
+	 * @dataProvider provideEntity
+	 */
+	public function testGivenRateLimitedRequest_throwsCorrespondingException( EntityDocument $entity ): void {
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( EditEntityStatus::newFatal( 'actionthrottledtext' ) );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$this->expectExceptionObject( new RateLimitReached() );
+		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
 	 * @dataProvider provideEntityAndErrorStatus
 	 */
 	public function testGivenEditPrevented_throwsCorrespondingException(
@@ -298,8 +313,6 @@ class EntityUpdaterTest extends TestCase {
 
 	public function provideEntityAndErrorStatus(): array {
 		$errorStatuses = [
-			"basic 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( 'actionthrottledtext' ) ],
-			"wfMessage 'actionthrottledtext' error" => [ EditEntityStatus::newFatal( wfMessage( 'actionthrottledtext' ) ) ],
 			"'spam-blacklisted-link' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-link' ) ],
 			"'spam-blacklisted-email' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-email' ) ],
 		];

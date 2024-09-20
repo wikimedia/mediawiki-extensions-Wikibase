@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemovePropertyLabel;
 use OutOfBoundsException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class RemovePropertyLabel {
+	use UpdateExceptionHandler;
 
 	private RemovePropertyLabelValidator $requestValidator;
 	private AssertPropertyExists $assertPropertyExists;
@@ -60,10 +62,10 @@ class RemovePropertyLabel {
 
 		$summary = LabelEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $label );
 
-		$this->propertyUpdater->update(
+		$this->executeWithExceptionHandling( fn() => $this->propertyUpdater->update(
 			$property, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( $providedEditMetadata->getTags(), $providedEditMetadata->isBot(), $summary )
-		);
+		) );
 	}
 
 }

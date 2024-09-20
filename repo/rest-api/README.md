@@ -116,6 +116,7 @@ The following needs to be correctly set up in order for all the tests to pass:
   - `X-Wikibase-CI-Badges`
   - `X-Wikibase-CI-Redirect-Badges`
   - `X-Wikibase-Ci-Tempuser-Config`
+  - `X-Wikibase-CI-Anon-Rate-Limit-Zero`
 
 
 [1]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests

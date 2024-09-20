@@ -41,6 +41,8 @@ class UseCaseError extends UseCaseException {
 	public const POLICY_VIOLATION_SITELINK_CONFLICT = 'sitelink-conflict';
 	public const PROPERTY_STATEMENT_ID_MISMATCH = 'property-statement-id-mismatch';
 	public const REFERENCED_RESOURCE_NOT_FOUND = 'referenced-resource-not-found';
+	public const REQUEST_LIMIT_REACHED = 'request-limit-reached';
+	public const REQUEST_LIMIT_REASON_RATE_LIMIT = 'rate-limit-reached';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
 	public const RESOURCE_TOO_LARGE = 'resource-too-large';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
@@ -50,6 +52,8 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_ACTUAL_VALUE = 'actual_value';
 	public const CONTEXT_CONFLICTING_ITEM_ID = 'conflicting_item_id';
 	public const CONTEXT_CONFLICTING_PROPERTY_ID = 'conflicting_property_id';
+	public const CONTEXT_DENIAL_REASON = 'denial_reason';
+	public const CONTEXT_DENIAL_CONTEXT = 'denial_context';
 	public const CONTEXT_DESCRIPTION = 'description';
 	public const CONTEXT_FIELD = 'field';
 	public const CONTEXT_ITEM_ID = 'item_id';
@@ -60,8 +64,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_PARAMETER = 'parameter';
 	public const CONTEXT_PATH = 'path';
 	public const CONTEXT_PROPERTY_ID = 'property_id';
-	public const CONTEXT_DENIAL_REASON = 'denial_reason';
-	public const CONTEXT_DENIAL_CONTEXT = 'denial_context';
+	public const CONTEXT_REASON = 'reason';
 	public const CONTEXT_REDIRECT_TARGET = 'redirect_target';
 	public const CONTEXT_RESOURCE_TYPE = 'resource_type';
 	public const CONTEXT_SITE_ID = 'site_id';
@@ -102,6 +105,7 @@ class UseCaseError extends UseCaseException {
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
 		self::REFERENCED_RESOURCE_NOT_FOUND => [ self::CONTEXT_PATH ],
+		self::REQUEST_LIMIT_REACHED => [ self::CONTEXT_REASON ],
 		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
 		self::RESOURCE_TOO_LARGE => [ self::CONTEXT_LIMIT ],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
@@ -221,6 +225,14 @@ class UseCaseError extends UseCaseException {
 		}
 
 		return $error;
+	}
+
+	public static function newRateLimitReached( string $reason ): self {
+		return new self(
+			self::REQUEST_LIMIT_REACHED,
+			'Exceeded the limit of actions that can be performed in a given span of time',
+			[ self::CONTEXT_REASON => $reason ]
+		);
 	}
 
 	public static function newResourceNotFound( string $resourceType ): self {

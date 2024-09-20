@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class RemoveStatement {
+	use UpdateExceptionHandler;
 
 	private RemoveStatementValidator $validator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
@@ -61,7 +63,9 @@ class RemoveStatement {
 			StatementEditSummary::newRemoveSummary( $deserializedRequest->getEditMetadata()->getComment(), $statementToRemove )
 		);
 
-		$this->statementRemover->remove( $deserializedRequest->getStatementId(), $editMetadata );
+		$this->executeWithExceptionHandling(
+			fn() => $this->statementRemover->remove( $deserializedRequest->getStatementId(), $editMetadata )
+		);
 	}
 
 }

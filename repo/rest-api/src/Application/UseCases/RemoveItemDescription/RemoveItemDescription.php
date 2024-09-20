@@ -6,6 +6,7 @@ use OutOfBoundsException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -16,6 +17,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class RemoveItemDescription {
+	use UpdateExceptionHandler;
 
 	private RemoveItemDescriptionValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
@@ -64,7 +66,7 @@ class RemoveItemDescription {
 			DescriptionEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $description )
 		);
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-		$this->itemUpdater->update( $item, $editMetadata );
+		$this->executeWithExceptionHandling( fn() => $this->itemUpdater->update( $item, $editMetadata ) );
 	}
 
 }

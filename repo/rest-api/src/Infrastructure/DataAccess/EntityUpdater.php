@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
@@ -61,6 +62,9 @@ class EntityUpdater {
 
 	/**
 	 * @throws EntityUpdateFailed
+	 * @throws ResourceTooLargeException
+	 * @throws AbuseFilterException
+	 * @throws RateLimitReached
 	 */
 	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
@@ -68,6 +72,9 @@ class EntityUpdater {
 
 	/**
 	 * @throws EntityUpdateFailed
+	 * @throws ResourceTooLargeException
+	 * @throws AbuseFilterException
+	 * @throws RateLimitReached
 	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
@@ -77,6 +84,7 @@ class EntityUpdater {
 	 * @throws EntityUpdateFailed
 	 * @throws ResourceTooLargeException
 	 * @throws AbuseFilterException
+	 * @throws RateLimitReached
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -119,6 +127,10 @@ class EntityUpdater {
 				);
 			}
 
+			if ( $this->findErrorInStatus( $status, 'actionthrottledtext' ) ) {
+				throw new RateLimitReached();
+			}
+
 			if ( $this->isPreventedEdit( $status ) ) {
 				throw new EntityUpdatePrevented( (string)$status );
 			}
@@ -132,8 +144,7 @@ class EntityUpdater {
 	}
 
 	private function isPreventedEdit( Status $status ): bool {
-		return $this->findErrorInStatus( $status, 'actionthrottledtext' )
-			|| $this->findErrorInStatus( $status, 'spam-blacklisted' );
+		return $this->findErrorInStatus( $status, 'spam-blacklisted' ) !== null;
 	}
 
 	private function findErrorInStatus( Status $status, string $errorCode ): ?MessageSpecifier {

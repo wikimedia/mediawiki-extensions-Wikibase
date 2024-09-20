@@ -48,6 +48,9 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE => 422,
 		UseCaseError::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => 422,
 
+		// 429 errors:
+		UseCaseError::REQUEST_LIMIT_REACHED => 429,
+
 		// 500 errors:
 		UseCaseError::UNEXPECTED_ERROR => 500,
 	];
