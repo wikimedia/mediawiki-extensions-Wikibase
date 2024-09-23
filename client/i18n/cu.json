@@ -1,12 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"ОйЛ"
+			"ОйЛ",
+			"Некто участник"
 		]
 	},
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} вєщь",
 	"wikibase-editlinks": "исправи съвѧꙁи",
 	"wikibase-editlinkstitle": "мєждоуѩꙁꙑчьнъ съвѧꙁии исправлѥниѥ",
+	"wikibase-linkitem-addlinks": "множае съвѧꙁиѥ сътворити",
+	"wikibase-linkitem-title": "съвѧꙁь съ страницої",
+	"wikibase-linkitem-linkpage": "съвѧꙁь съ страницої",
 	"wikibase-linkitem-input-site": "ѩꙁꙑкъ :",
 	"wikibase-linkitem-input-page": "страница :",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

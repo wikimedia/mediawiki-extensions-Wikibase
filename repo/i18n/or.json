@@ -54,5 +54,6 @@
 	"wikibase-sitelinks-special": "ଅନ୍ୟ ସାଇଟ",
 	"wikibase-remove": "ବାହାର କରିବା",
 	"wikibase-statementview-rank-normal": "ସାଧାରଣ ପଦ",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}",
+	"wikibase-shortcopyrightwarning": "\"$1\"ରେ କ୍ଲିକ କରି ଆପଣ [[$2|ବ୍ୟବହାର ସର୍ତ୍ତାବଳୀ] ସହ ଏକମତ ଏବଂ ନିଜ ଲେଖା [$3 $4] ଅଧୀନରେ ପ୍ରକାଶ କରିବାକୁ ରାଜିହେଲେ ।"
 }
