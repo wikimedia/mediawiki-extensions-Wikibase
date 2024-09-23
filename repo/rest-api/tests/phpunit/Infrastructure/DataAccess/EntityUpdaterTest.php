@@ -230,10 +230,22 @@ class EntityUpdaterTest extends TestCase {
 	 * @dataProvider provideEntity
 	 */
 	public function testGivenAbuseFilterMatch_throwsCorrespondingException( EntityDocument $entity ): void {
-		$filterId = 777;
+		$filterId = '777';
 		$filterDescription = 'bad word rejecting filter';
 
-		$errorStatus = EditEntityStatus::newFatal( 'abusefilter-disallowed', $filterDescription, $filterId );
+		$errorStatus = EditEntityStatus::newFatal(
+			\ApiMessage::create(
+				[ 'abusefilter-disallowed', $filterDescription, $filterId ],
+				'abusefilter-disallowed',
+				[
+					'abusefilter' => [
+						'id' => $filterId,
+						'description' => $filterDescription,
+						'actions' => 'disallow',
+					],
+				]
+			)
+		);
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );

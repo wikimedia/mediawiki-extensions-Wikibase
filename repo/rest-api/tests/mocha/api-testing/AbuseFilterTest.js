@@ -20,7 +20,7 @@ const config = require( 'api-testing/lib/config' )();
  *
  * @param {string} description
  * @param {string} rules
- * @return {Promise<number>} the filter ID
+ * @return {Promise<string>} the filter ID
  */
 async function createAbuseFilter( description, rules ) {
 	const rootClient = await action.root();
@@ -49,7 +49,7 @@ async function createAbuseFilter( description, rules ) {
 		wpFilterTags: ''
 	} );
 
-	return parseInt( new URL( createFilterResponse.headers.location ).searchParams.get( 'changedfilter' ) );
+	return new URL( createFilterResponse.headers.location ).searchParams.get( 'changedfilter' );
 }
 
 describe( 'Abuse Filter', () => {

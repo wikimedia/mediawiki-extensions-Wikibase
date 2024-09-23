@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
+use IApiMessage;
 use LogicException;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
@@ -107,10 +108,12 @@ class EntityUpdater {
 				throw new ResourceTooLargeException( $maxSizeInKiloBytes );
 			}
 
-			$abuseFilterError = $this->findErrorInStatus( $status, 'abusefilter' );
+			$abuseFilterError = $this->findAbuseFilterError( $status->getMessages() );
 			if ( $abuseFilterError ) {
-				[ $filterDescription, $filterId ] = $abuseFilterError->getParams();
-				throw new AbuseFilterException( (int)$filterId, $filterDescription );
+				throw new AbuseFilterException(
+					$abuseFilterError->getApiData()['abusefilter']['id'],
+					$abuseFilterError->getApiData()['abusefilter']['description']
+				);
 			}
 
 			if ( $this->isPreventedEdit( $status ) ) {
@@ -134,6 +137,17 @@ class EntityUpdater {
 		foreach ( $status->getMessages() as $message ) {
 			// prefix comparison to cover different kinds of spam-blacklisted or abusefilter errors
 			if ( strpos( $message->getKey(), $errorCode ) === 0 ) {
+				return $message;
+			}
+		}
+
+		return null;
+	}
+
+	private function findAbuseFilterError( array $messages ): ?IApiMessage {
+		foreach ( $messages as $message ) {
+			if ( $message instanceof IApiMessage &&
+				in_array( $message->getApiCode(), [ 'abusefilter-warning', 'abusefilter-disallowed' ] ) ) {
 				return $message;
 			}
 		}
