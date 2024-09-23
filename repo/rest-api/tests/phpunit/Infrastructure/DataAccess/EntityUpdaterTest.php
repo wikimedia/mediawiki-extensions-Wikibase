@@ -33,6 +33,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
@@ -258,6 +259,23 @@ class EntityUpdaterTest extends TestCase {
 
 		$this->expectExceptionObject( new AbuseFilterException( $filterId, $filterDescription ) );
 		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
+	 * @dataProvider provideEntity
+	 */
+	public function testGivenAcctCreationThrottleHit_throwsTempAccountCreationLimitReached( EntityDocument $entityToUpdate ): void {
+		$errorStatus = EditEntityStatus::newFatal( 'acct_creation_throttle_hit' );
+
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$this->expectException( TempAccountCreationLimitReached::class );
+
+		$this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
 	}
 
 	/**

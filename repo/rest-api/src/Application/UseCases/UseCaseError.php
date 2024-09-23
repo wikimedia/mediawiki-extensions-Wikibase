@@ -43,6 +43,7 @@ class UseCaseError extends UseCaseException {
 	public const REFERENCED_RESOURCE_NOT_FOUND = 'referenced-resource-not-found';
 	public const REQUEST_LIMIT_REACHED = 'request-limit-reached';
 	public const REQUEST_LIMIT_REASON_RATE_LIMIT = 'rate-limit-reached';
+	public const REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT = 'temp-account-creation-limit-reached';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
 	public const RESOURCE_TOO_LARGE = 'resource-too-large';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';

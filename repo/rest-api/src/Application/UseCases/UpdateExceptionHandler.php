@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 
 /**
  * @license GPL-2.0-or-later
@@ -33,6 +34,8 @@ trait UpdateExceptionHandler {
 			] );
 		} catch ( RateLimitReached $e ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_RATE_LIMIT );
+		} catch ( TempAccountCreationLimitReached $e ) {
+			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT );
 		}
 	}
 
