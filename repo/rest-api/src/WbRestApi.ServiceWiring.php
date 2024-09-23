@@ -504,7 +504,8 @@ return [
 			),
 			$services->getPermissionManager(),
 			WikibaseRepo::getEntityStore( $services ),
-			new GuidGenerator()
+			new GuidGenerator(),
+			WikibaseRepo::getSettings( $services )
 		);
 	},
 

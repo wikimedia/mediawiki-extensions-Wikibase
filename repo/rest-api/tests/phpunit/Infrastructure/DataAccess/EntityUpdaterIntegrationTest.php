@@ -18,6 +18,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -166,7 +167,8 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 			$this->createStub( EditSummaryFormatter::class ),
 			$permissionManager,
 			WikibaseRepo::getEntityStore(),
-			new GuidGenerator()
+			new GuidGenerator(),
+			new SettingsArray()
 		);
 	}
 
