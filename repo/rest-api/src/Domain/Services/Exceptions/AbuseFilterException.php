@@ -10,11 +10,11 @@ use Throwable;
  */
 class AbuseFilterException extends Exception {
 
-	private int $filterId;
+	private string $filterId;
 	private string $filterDescription;
 
 	public function __construct(
-		int $filterId,
+		string $filterId,
 		string $filterDescription,
 		string $message = '',
 		int $code = 0,
@@ -25,7 +25,7 @@ class AbuseFilterException extends Exception {
 		$this->filterDescription = $filterDescription;
 	}
 
-	public function getFilterId(): int {
+	public function getFilterId(): string {
 		return $this->filterId;
 	}
 
