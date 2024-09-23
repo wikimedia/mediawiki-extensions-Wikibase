@@ -61,7 +61,7 @@ describe( 'Abuse Filter', () => {
 	let testPropertyId;
 
 	before( async function () {
-		await requireExtensions( [ 'AbuseFilter' ] ).call( this );
+		await requireExtensions( [ 'Abuse Filter' ] ).call( this );
 
 		filterId = await createAbuseFilter( filterDescription, `"${filterTriggerWord}" in new_wikitext` );
 		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
