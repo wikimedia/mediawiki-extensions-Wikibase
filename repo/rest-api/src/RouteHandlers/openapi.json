@@ -137,6 +137,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -264,6 +267,9 @@
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedItem"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -401,6 +407,9 @@
                 "description": "Language code of the language in which error message is provided"
               }
             }
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -576,6 +585,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -673,6 +685,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -793,6 +808,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedProperty"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -896,6 +914,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedDescriptions"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -995,6 +1016,9 @@
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedDescriptions"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1118,6 +1142,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1173,6 +1200,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1290,6 +1320,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1342,6 +1375,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1545,6 +1581,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1710,6 +1749,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1799,6 +1841,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -1875,6 +1920,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -1978,6 +2026,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedLabels"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2076,6 +2127,9 @@
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedLabels"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2199,6 +2253,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2254,6 +2311,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2371,6 +2431,9 @@
           "422": {
             "$ref": "#/components/responses/DataPolicyViolation"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2423,6 +2486,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2526,6 +2592,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedAliases"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2624,6 +2693,9 @@
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedAliases"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -2744,6 +2816,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -2856,6 +2931,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -3056,6 +3134,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -3221,6 +3302,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -3310,6 +3394,9 @@
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -3386,6 +3473,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -3540,6 +3630,9 @@
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
           },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
           }
@@ -3590,6 +3683,9 @@
           },
           "422": {
             "$ref": "#/components/responses/InvalidPatchedStatement"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -3661,6 +3757,9 @@
           },
           "412": {
             "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
           },
           "500": {
             "$ref": "#/components/responses/UnexpectedError"
@@ -4652,6 +4751,35 @@
             "examples": {
               "permission-denied": {
                 "$ref": "#/components/examples/PermissionDeniedExample"
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Language code of the language in which error message is provided"
+          }
+        }
+      },
+      "RequestLimitReached": {
+        "description": "Too many requests",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+            },
+            "examples": {
+              "request-limit-reached": {
+                "value": {
+                  "code": "request-limit-reached",
+                  "message": "Exceeded the limit of actions that can be performed in a given span of time",
+                  "context": {
+                    "reason": "{reason_code}"
+                  }
+                }
               }
             }
           }

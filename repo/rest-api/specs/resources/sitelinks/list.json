@@ -40,6 +40,7 @@
 			"409": { "$ref": "../../global/responses.json#/CannotApplyItemPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "./responses.json#/InvalidPatchedItemSitelinks" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

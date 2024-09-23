@@ -12,6 +12,7 @@
 			"400": { "$ref": "./responses.json#/InvalidNewItemInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}

@@ -39,6 +39,7 @@
 			"409": { "$ref": "../../global/responses.json#/CannotApplyPropertyPatch" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },
 			"422": { "$ref": "../../global/responses.json#/InvalidPatchedAliases" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
 			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
 		}
 	}
