@@ -53,6 +53,7 @@
 	"wikibase-description-edit-placeholder-not-applicable": "non applicabile",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Non es possibile configurar un description predefinite pro tote le linguas",
 	"wikibase-item-description-edit-not-supported": "Descriptiones non es supportate pro iste lingua. Per favor forni un description in un altere lingua un vice le elemento create.",
+	"wikibase-property-description-edit-not-supported": "Descriptiones non es supportate pro iste lingua. Per favor forni un description in un altere lingua un vice le proprietate create.",
 	"wikibase-description-not-applicable-title": "Non es possibile configurar un description predefinite pro tote le linguas",
 	"wikibase-aliases-edit-placeholder": "insere alcun aliases",
 	"wikibase-aliases-edit-placeholder-language-aware": "insere alcun aliases in $1",
