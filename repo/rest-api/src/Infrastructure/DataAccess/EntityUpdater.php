@@ -14,6 +14,7 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -36,6 +37,7 @@ class EntityUpdater {
 	private PermissionManager $permissionManager;
 	private EntityStore $entityStore;
 	private GuidGenerator $statementIdGenerator;
+	private SettingsArray $repoSettings;
 
 	public function __construct(
 		IContextSource $context,
@@ -44,7 +46,8 @@ class EntityUpdater {
 		EditSummaryFormatter $summaryFormatter,
 		PermissionManager $permissionManager,
 		EntityStore $entityStore,
-		GuidGenerator $statementIdGenerator
+		GuidGenerator $statementIdGenerator,
+		SettingsArray $repoSettings
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
@@ -53,6 +56,7 @@ class EntityUpdater {
 		$this->permissionManager = $permissionManager;
 		$this->entityStore = $entityStore;
 		$this->statementIdGenerator = $statementIdGenerator;
+		$this->repoSettings = $repoSettings;
 	}
 
 	/**
@@ -104,8 +108,7 @@ class EntityUpdater {
 		if ( !$status->isOK() ) {
 			$entityTooBigError = $this->findErrorInStatus( $status, 'wikibase-error-entity-too-big' );
 			if ( $entityTooBigError ) {
-				$maxSizeInKiloBytes = $entityTooBigError->getParams()[0]['size'] / 1024;
-				throw new ResourceTooLargeException( $maxSizeInKiloBytes );
+				throw new ResourceTooLargeException( $this->repoSettings->getSetting( 'maxSerializedEntitySize' ) );
 			}
 
 			$abuseFilterError = $this->findAbuseFilterError( $status->getMessages() );

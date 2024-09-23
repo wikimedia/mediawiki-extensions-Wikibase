@@ -22,6 +22,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\EditEntity;
@@ -44,6 +45,8 @@ use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
  * @license GPL-2.0-or-later
  */
 class EntityUpdaterTest extends TestCase {
+
+	private const MAX_ENTITY_SIZE = 1;
 
 	private IContextSource $context;
 	private MediaWikiEditEntityFactory $editEntityFactory;
@@ -211,10 +214,9 @@ class EntityUpdaterTest extends TestCase {
 	 * @dataProvider provideEntity
 	 */
 	public function testGivenResourceTooLarge_throwsCorrespondingException( EntityDocument $entity ): void {
-		$maxSizeAsBytes = 1024;
-		$maxSizeAsKiloBytes = 1;
+		$maxSizeAsBytes = self::MAX_ENTITY_SIZE * 1024;
 
-		$errorStatus = EditEntityStatus::newFatal( 'wikibase-error-entity-too-big', [ 'size' => $maxSizeAsBytes ] );
+		$errorStatus = EditEntityStatus::newFatal( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $maxSizeAsBytes ) );
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
@@ -222,7 +224,7 @@ class EntityUpdaterTest extends TestCase {
 		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
-		$this->expectExceptionObject( new ResourceTooLargeException( $maxSizeAsKiloBytes ) );
+		$this->expectExceptionObject( new ResourceTooLargeException( $maxSizeAsBytes ) );
 		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
 	}
 
@@ -364,7 +366,8 @@ class EntityUpdaterTest extends TestCase {
 			$this->summaryFormatter,
 			$this->permissionManager,
 			$this->entityStore,
-			new GuidGenerator()
+			new GuidGenerator(),
+			new SettingsArray( [ 'maxSerializedEntitySize' => self::MAX_ENTITY_SIZE ] )
 		);
 	}
 
