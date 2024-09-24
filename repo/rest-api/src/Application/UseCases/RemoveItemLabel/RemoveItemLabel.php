@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel;
 use OutOfBoundsException;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class RemoveItemLabel {
+	use UpdateExceptionHandler;
 
 	private RemoveItemLabelValidator $useCaseValidator;
 	private AssertItemExists $assertItemExists;
@@ -58,10 +60,10 @@ class RemoveItemLabel {
 
 		$summary = LabelEditSummary::newRemoveSummary( $providedEditMetadata->getComment(), $label );
 
-		$this->itemUpdater->update(
+		$this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata( $providedEditMetadata->getTags(), $providedEditMetadata->isBot(), $summary )
-		);
+		) );
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
 
 /**
@@ -30,6 +31,8 @@ trait UpdateExceptionHandler {
 				'filter_id' => $e->getFilterId(),
 				'filter_description' => $e->getFilterDescription(),
 			] );
+		} catch ( RateLimitReached $e ) {
+			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_RATE_LIMIT );
 		}
 	}
 

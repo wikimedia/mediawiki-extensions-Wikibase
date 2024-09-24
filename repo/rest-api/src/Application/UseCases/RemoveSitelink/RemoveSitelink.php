@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveSitelink;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
@@ -15,6 +16,7 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
  * @license GPL-2.0-or-later
  */
 class RemoveSitelink {
+	use UpdateExceptionHandler;
 
 	private ItemWriteModelRetriever $itemRetriever;
 	private ItemUpdater $itemUpdater;
@@ -57,14 +59,14 @@ class RemoveSitelink {
 
 		$removedSitelink = $item->getSiteLink( $siteId );
 		$item->removeSiteLink( $siteId );
-		$this->itemUpdater->update(
+		$this->executeWithExceptionHandling( fn() => $this->itemUpdater->update(
 			$item, // @phan-suppress-current-line PhanTypeMismatchArgumentNullable
 			new EditMetadata(
 				$editMetadata->getTags(),
 				$editMetadata->isBot(),
 				SitelinkEditSummary::newRemoveSummary( $editMetadata->getComment(), $removedSitelink )
 			)
-		);
+		) );
 	}
 
 }
