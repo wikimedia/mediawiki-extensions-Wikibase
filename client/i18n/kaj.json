@@ -1,8 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kambai Akau"
+			"Kambai Akau",
+			"Kuzayet"
 		]
 	},
-	"wikibase-linkitem-input-site": "Diryem:"
+	"wikibase-editlinks": "Shang na̱wwai ka̱mon",
+	"wikibase-linkitem-addlinks": "mbrang na̱wwai ka̱mon",
+	"wikibase-linkitem-title": "Mon bu̱ kazzu̱ ka",
+	"wikibase-linkitem-linkpage": "Mon ka̱zzu kani",
+	"wikibase-linkitem-selectlink": "Sakut tssa amantei bu̱ a ka̱zzu̱ an yyi nu á̱ chat mon na á ka̱zzu̱ ka ni ni.",
+	"wikibase-linkitem-input-site": "Diryem:",
+	"wikibase-linkitem-input-page": "Ka̱zzu̱"
 }
