@@ -84,6 +84,7 @@ class ItemChangeTest extends EntityChangeTest {
 			] );
 
 			// make sure we got the right key for sitelinks
+			// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.assert
 			assert( $diff->getSiteLinkDiff() !== null );
 
 			//NOTE: ItemChange's constructor may or may not already fix the bad diff.
