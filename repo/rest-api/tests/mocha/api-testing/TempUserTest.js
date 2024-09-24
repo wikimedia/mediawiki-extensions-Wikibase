@@ -16,18 +16,22 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 		return newRequestBuilder().withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( config ) );
 	}
 
-	const editRequests = [
+	const createItemRequest = getItemCreateRequest( itemRequestInputs );
+	const requests = [
+		createItemRequest,
 		...getItemEditRequests( itemRequestInputs ),
 		...getPropertyEditRequests( propertyRequestInputs )
 	];
 
-	describeEachRouteWithReset( editRequests, ( newRequestBuilder, requestInputs ) => {
+	describeEachRouteWithReset( requests, ( newRequestBuilder, requestInputs ) => {
 		it( 'makes an edit as an IP user with tempUser disabled', async () => {
 			const response = await withTempUserConfig( newRequestBuilder, { enabled: false } )
 				.makeRequest();
 
 			expect( response ).status.to.be.within( 200, 299 );
-			const { user } = await entityHelper.getLatestEditMetadata( requestInputs.mainTestSubject );
+			const { user } = await entityHelper.getLatestEditMetadata(
+				newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
+			);
 			assert.match( user, /^\d+\.\d+\.\d+\.\d+$/ );
 		} );
 
@@ -39,7 +43,9 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 			).makeRequest();
 
 			expect( response ).status.to.be.within( 200, 299 );
-			const { user } = await entityHelper.getLatestEditMetadata( requestInputs.mainTestSubject );
+			const { user } = await entityHelper.getLatestEditMetadata(
+				newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
+			);
 			assert.include( user, tempUserPrefix );
 		} );
 
@@ -62,30 +68,6 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 				'request-limit-reached',
 				{ reason: 'temp-account-creation-limit-reached' }
 			);
-		} );
-	} );
-
-	// checking the latest metadata for the newly created item
-	describeEachRouteWithReset( [ getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
-		it( 'makes an item create as an IP user with tempUser disabled', async () => {
-			const response = await withTempUserConfig( newRequestBuilder, { enabled: false } )
-				.makeRequest();
-
-			expect( response ).status.to.be.within( 200, 299 );
-			const { user } = await entityHelper.getLatestEditMetadata( response.body.id );
-			assert.match( user, /^\d+\.\d+\.\d+\.\d+$/ );
-		} );
-
-		it( 'makes an item create as a temp user with tempUser enabled', async () => {
-			const tempUserPrefix = 'TempUserTest';
-			const response = await withTempUserConfig(
-				newRequestBuilder,
-				{ enabled: true, genPattern: `${tempUserPrefix} $1` }
-			).makeRequest();
-
-			expect( response ).status.to.be.within( 200, 299 );
-			const { user } = await entityHelper.getLatestEditMetadata( response.body.id );
-			assert.include( user, tempUserPrefix );
 		} );
 	} );
 } );
