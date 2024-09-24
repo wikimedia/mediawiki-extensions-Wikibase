@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.
  *
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -21,7 +21,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class WikibaseLibraryInProcessEntityCacheTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';

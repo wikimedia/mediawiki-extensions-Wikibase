@@ -7,8 +7,8 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Integration test for statsd tracking.
  *
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -19,7 +19,7 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class WikibaseStatsTest extends WikibaseLibraryTestCase {
 
 	/** @var bool */
 	private $oldTrackLuaFunctionCallsPerWiki;

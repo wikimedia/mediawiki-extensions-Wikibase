@@ -7,7 +7,7 @@ use MediaWiki\Title\Title;
 /**
  * Tests for pages that are not connected to any Item.
  *
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -18,7 +18,7 @@ use MediaWiki\Title\Title;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryNoLinkedEntityTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class WikibaseLibraryNoLinkedEntityTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryNoLinkedEntityTests';

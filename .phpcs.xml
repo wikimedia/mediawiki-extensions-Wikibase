@@ -67,7 +67,7 @@
 	</rule>
 
 	<rule ref="Generic.Classes.DuplicateClassName">
-		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
+		<exclude-pattern>WikibaseLibraryTestCase</exclude-pattern>
 	</rule>
 	<!-- NOTE: We purposely decided against additional Generic.CodeAnalysis.… sniffs, because they
 		all have possible exceptions, and are not meant to block patches from being merged. -->
@@ -75,16 +75,13 @@
 		<exclude-pattern>WikibaseClient\.example\.php</exclude-pattern>
 	</rule>
 	<rule ref="Generic.Files.OneObjectStructurePerFile">
-		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
+		<exclude-pattern>WikibaseLibraryTestCase</exclude-pattern>
 	</rule>
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
-		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
-	</rule>
-	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
-		<exclude-pattern>Scribunto_LuaWikibase*</exclude-pattern>
+		<exclude-pattern>WikibaseLibraryTestCase</exclude-pattern>
 	</rule>
 	<rule ref="MediaWiki.Commenting.LicenseComment.LicenseTagNonFileComment">
-		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase\.php</exclude-pattern>
+		<exclude-pattern>WikibaseLibraryTestCase\.php</exclude-pattern>
 		<exclude-pattern>DispatchingQueryBuilderTest\.php</exclude-pattern>
 	</rule>
 	<rule ref="MediaWiki.Commenting.PhpunitAnnotations.NotClassTrait">
