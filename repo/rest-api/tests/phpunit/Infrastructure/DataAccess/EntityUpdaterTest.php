@@ -181,20 +181,11 @@ class EntityUpdaterTest extends TestCase {
 		$this->assertSame( $expectedRevisionTimestamp, $entityRevision->getTimestamp() );
 	}
 
-	public function provideEntityAndEditMetadata(): array {
-		$editMetadata = [
-			'bot edit' => [ new EditMetadata( [], true, $this->createStub( EditSummary::class ) ) ],
-			'user edit' => [ new EditMetadata( [], false, $this->createStub( EditSummary::class ) ) ],
-		];
-
-		$dataSet = [];
-		foreach ( $this->provideEntity() as $entityType => $entity ) {
-			foreach ( $editMetadata as $metadataType => $metadata ) {
-				$dataSet["$entityType with $metadataType"] = array_merge( $entity, $metadata );
-			}
+	public function provideEntityAndEditMetadata(): Generator {
+		foreach ( $this->provideEntity() as $entityType => [ $entity ] ) {
+			yield "$entityType with bot edit" => [ $entity, new EditMetadata( [], true, $this->createStub( EditSummary::class ) ) ];
+			yield "$entityType with user edit" => [ $entity, new EditMetadata( [], false, $this->createStub( EditSummary::class ) ) ];
 		}
-
-		return $dataSet;
 	}
 
 	/**
@@ -323,9 +314,6 @@ class EntityUpdaterTest extends TestCase {
 		$this->newEntityUpdater()->create( $entity, $this->createStub( EditMetadata::class ) );
 	}
 
-	/**
-	 * @dataProvider provideEntityAndErrorStatus
-	 */
 	public function provideEntity(): Generator {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
