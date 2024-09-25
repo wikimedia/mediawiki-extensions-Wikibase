@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
@@ -100,7 +101,12 @@ class EntityUpdater {
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
 		if ( $newOrUpdateFlag === EDIT_NEW ) {
-			$this->entityStore->assignFreshId( $entity );
+			try {
+				$this->entityStore->assignFreshId( $entity );
+			} catch ( StorageException $e ) {
+				$this->throwIfRateLimitReached( $e->getStatus() );
+				throw $e; // It wasn't a rate limit error, so we rethrow as an unexpected exception.
+			}
 		}
 		if ( $entity->getId() === null ) {
 			throw new LogicException( 'The entity to be saved should have an ID at this point' );
@@ -132,9 +138,7 @@ class EntityUpdater {
 				);
 			}
 
-			if ( $this->findErrorInStatus( $status, 'actionthrottledtext' ) ) {
-				throw new RateLimitReached();
-			}
+			$this->throwIfRateLimitReached( $status );
 
 			if ( $this->findErrorInStatus( $status, 'acct_creation_throttle_hit' ) ) {
 				throw new TempAccountCreationLimitReached();
@@ -188,6 +192,15 @@ class EntityUpdater {
 			if ( $statement->getGuid() === null ) {
 				$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
 			}
+		}
+	}
+
+	/**
+	 * @throws RateLimitReached
+	 */
+	private function throwIfRateLimitReached( Status $status ): void {
+		if ( $this->findErrorInStatus( $status, 'actionthrottledtext' ) ) {
+			throw new RateLimitReached();
 		}
 	}
 

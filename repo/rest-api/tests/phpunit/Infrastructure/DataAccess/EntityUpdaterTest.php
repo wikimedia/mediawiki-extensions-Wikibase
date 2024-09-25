@@ -25,6 +25,7 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -299,7 +300,7 @@ class EntityUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideEntity
 	 */
-	public function testGivenRateLimitedRequest_throwsCorrespondingException( EntityDocument $entity ): void {
+	public function testGivenRateLimitedEditRequest_throwsCorrespondingException( EntityDocument $entity ): void {
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( EditEntityStatus::newFatal( 'actionthrottledtext' ) );
 
@@ -308,6 +309,18 @@ class EntityUpdaterTest extends TestCase {
 
 		$this->expectExceptionObject( new RateLimitReached() );
 		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
+	 * @dataProvider provideEntity
+	 */
+	public function testGivenRateLimitedCreateRequest_throwsCorrespondingException( EntityDocument $entity ): void {
+		$this->entityStore = $this->createStub( EntityStore::class );
+		$this->entityStore->method( 'assignFreshId' )
+			->willThrowException( new StorageException( EditEntityStatus::newFatal( 'actionthrottledtext' ) ) );
+
+		$this->expectException( RateLimitReached::class );
+		$this->newEntityUpdater()->create( $entity, $this->createStub( EditMetadata::class ) );
 	}
 
 	/**
