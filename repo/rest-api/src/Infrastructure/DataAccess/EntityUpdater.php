@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
@@ -65,6 +66,7 @@ class EntityUpdater {
 	 * @throws ResourceTooLargeException
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
+	 * @throws TempAccountCreationLimitReached
 	 */
 	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
@@ -75,6 +77,7 @@ class EntityUpdater {
 	 * @throws ResourceTooLargeException
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
+	 * @throws TempAccountCreationLimitReached
 	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
@@ -85,6 +88,7 @@ class EntityUpdater {
 	 * @throws ResourceTooLargeException
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
+	 * @throws TempAccountCreationLimitReached
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -129,6 +133,10 @@ class EntityUpdater {
 
 			if ( $this->findErrorInStatus( $status, 'actionthrottledtext' ) ) {
 				throw new RateLimitReached();
+			}
+
+			if ( $this->findErrorInStatus( $status, 'acct_creation_throttle_hit' ) ) {
+				throw new TempAccountCreationLimitReached();
 			}
 
 			if ( $this->isPreventedEdit( $status ) ) {

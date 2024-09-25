@@ -83,3 +83,7 @@ $wgWBRepoSettings['maxSerializedEntitySize'] = (int)( $headerMaxSize ?: $origina
 if ( $request->getHeader( 'X-Wikibase-CI-Anon-Rate-Limit-Zero', WebRequest::GETHEADER_LIST ) ) {
 	$wgRateLimits = [ 'edit' => [ 'anon' => [ 0, 60 ] ] ];
 }
+
+if ( $request->getHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', WebRequest::GETHEADER_LIST ) ) {
+	$wgTempAccountCreationThrottle = [ [ 'count' => 1, 'seconds' => 86400 ] ];
+}

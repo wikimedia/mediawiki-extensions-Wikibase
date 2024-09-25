@@ -106,7 +106,7 @@ Descriptions of the different kinds of tests can be found in the @ref restApiTes
 
 #### e2e and schema tests
 
-These tests can be run with the command `npm run api-testing`. 
+These tests can be run with the command `npm run api-testing`.
 
 The following needs to be correctly set up in order for all the tests to pass:
 * the targeted wiki to act as both [client and repo], so that Items can have sitelinks to pages on the same wiki
@@ -117,6 +117,7 @@ The following needs to be correctly set up in order for all the tests to pass:
   - `X-Wikibase-CI-Redirect-Badges`
   - `X-Wikibase-Ci-Tempuser-Config`
   - `X-Wikibase-CI-Anon-Rate-Limit-Zero`
+  - `X-Wikibase-CI-Temp-Account-Limit-One`
 
 
 [1]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests

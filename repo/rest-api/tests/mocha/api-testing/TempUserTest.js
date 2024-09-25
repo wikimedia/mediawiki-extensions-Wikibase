@@ -9,6 +9,7 @@ const {
 	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const entityHelper = require( '../helpers/entityHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	function withTempUserConfig( newRequestBuilder, config ) {
@@ -40,6 +41,27 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 			expect( response ).status.to.be.within( 200, 299 );
 			const { user } = await entityHelper.getLatestEditMetadata( requestInputs.mainTestSubject );
 			assert.include( user, tempUserPrefix );
+		} );
+
+		// Note: If this test fails, it might be due to the throttler relying on caching.
+		// Ensure caching is enabled for the wiki under test, as the throttler won't work without it.
+		it( 'responds 429 when the temp user creation limit is reached', async () => {
+			await newRequestBuilder()
+				.withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( { enabled: true } ) )
+				.withHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', true )
+				.makeRequest();
+
+			const response = await newRequestBuilder()
+				.withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( { enabled: true } ) )
+				.withHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', true )
+				.makeRequest();
+
+			assertValidError(
+				response,
+				429,
+				'request-limit-reached',
+				{ reason: 'temp-account-creation-limit-reached' }
+			);
 		} );
 	} );
 
