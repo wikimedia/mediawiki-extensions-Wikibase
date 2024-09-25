@@ -5,6 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 
 /**
@@ -36,6 +37,11 @@ trait UpdateExceptionHandler {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_RATE_LIMIT );
 		} catch ( TempAccountCreationLimitReached $e ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT );
+		} catch ( SpamBlacklistException $e ) {
+			throw UseCaseError::newPermissionDenied(
+				UseCaseError::PERMISSION_DENIED_REASON_SPAM_BLACKLIST,
+				[ 'blocked_text' => $e->getBlockedText() ]
+			);
 		}
 	}
 

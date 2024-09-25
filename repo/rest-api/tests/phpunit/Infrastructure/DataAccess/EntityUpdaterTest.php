@@ -33,10 +33,10 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
@@ -264,6 +264,24 @@ class EntityUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideEntity
 	 */
+	public function testGivenSpamBlacklistedMatch_throwsCorrespondingException( EntityDocument $entity ): void {
+		$blockedText = 'example.com';
+
+		$errorStatus = EditEntityStatus::newFatal( 'spam-blacklisted-link', [ 'list' => $blockedText ] );
+
+		$editEntity = $this->createStub( EditEntity::class );
+		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+
+		$this->expectExceptionObject( new SpamBlacklistException( $blockedText ) );
+		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+	}
+
+	/**
+	 * @dataProvider provideEntity
+	 */
 	public function testGivenAcctCreationThrottleHit_throwsTempAccountCreationLimitReached( EntityDocument $entityToUpdate ): void {
 		$errorStatus = EditEntityStatus::newFatal( 'acct_creation_throttle_hit' );
 
@@ -295,20 +313,6 @@ class EntityUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityAndErrorStatus
 	 */
-	public function testGivenEditPrevented_throwsCorrespondingException(
-		EntityDocument $entityToUpdate,
-		EditEntityStatus $errorStatus
-	): void {
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$this->expectExceptionObject( new EntityUpdatePrevented( (string)$errorStatus ) );
-
-		$this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
-	}
-
 	public function provideEntity(): Generator {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
@@ -327,22 +331,6 @@ class EntityUpdaterTest extends TestCase {
 		$property->setId( $propertyId );
 		$property->setStatements( new StatementList( $statement ) );
 		yield 'property' => [ $property ];
-	}
-
-	public function provideEntityAndErrorStatus(): array {
-		$errorStatuses = [
-			"'spam-blacklisted-link' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-link' ) ],
-			"'spam-blacklisted-email' error" => [ EditEntityStatus::newFatal( 'spam-blacklisted-email' ) ],
-		];
-
-		$dataSet = [];
-		foreach ( $this->provideEntity() as $entityType => $entity ) {
-			foreach ( $errorStatuses as $errorStatusType => $errorStatus ) {
-				$dataSet["$entityType with $errorStatusType"] = array_merge( $entity, $errorStatus );
-			}
-		}
-
-		return $dataSet;
 	}
 
 	public function testGivenSavingSucceedsWithErrors_logsErrors(): void {
