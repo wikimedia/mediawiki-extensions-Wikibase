@@ -7,13 +7,10 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use RuntimeException;
 use Throwable;
 use TypeError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdatePrevented;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 
@@ -27,13 +24,11 @@ use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
 class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
 	private ErrorReporter $errorReporter;
-	private LoggerInterface $logger;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->errorReporter = $this->createStub( ErrorReporter::class );
-		$this->logger = new NullLogger();
 	}
 
 	/**
@@ -91,31 +86,10 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		yield [ new RuntimeException() ];
 	}
 
-	public function testGivenEditPrevented_logsWarning(): void {
-		$routeHandler = $this->createStub( Handler::class );
-		$exception = new EntityUpdatePrevented( 'bad things happened' );
-
-		$this->logger = $this->createMock( LoggerInterface::class );
-		$this->logger->expects( $this->once() )
-			->method( 'warning' )
-			->with(
-				$exception->getMessage(),
-				[ 'exception' => $exception ]
-			);
-
-		$this->newMiddleware()->run(
-			$routeHandler,
-			function () use ( $exception ): void {
-				throw $exception;
-			}
-		);
-	}
-
 	private function newMiddleware(): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
 			new ResponseFactory(),
-			$this->errorReporter,
-			$this->logger
+			$this->errorReporter
 		);
 	}
 
