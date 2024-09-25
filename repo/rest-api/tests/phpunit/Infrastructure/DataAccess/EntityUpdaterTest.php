@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use ApiMessage;
+use Exception;
 use Generator;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Message\Message;
@@ -191,123 +192,87 @@ class EntityUpdaterTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideEntity
+	 * @dataProvider errorStatusProvider
 	 */
-	public function testGivenSavingFails_throwsGenericException( EntityDocument $entityToUpdate ): void {
-		$errorStatus = EditEntityStatus::newFatal( 'failed to save. sad times.' );
-
+	public function testGivenSaveReturnsErrorStatus_throwsCorrespondingException(
+		EntityDocument $entity,
+		Status $status,
+		Exception $expectedException
+	): void {
 		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+		$editEntity->method( 'attemptSave' )->willReturn( $status );
+
 		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
-		$this->expectExceptionObject( new EntityUpdateFailed( (string)$errorStatus ) );
-
-		$this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
+		try {
+			$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( Exception $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
 	}
 
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenResourceTooLarge_throwsCorrespondingException( EntityDocument $entity ): void {
-		$maxSizeAsBytes = self::MAX_ENTITY_SIZE * 1024;
+	public function errorStatusProvider(): Generator {
+		foreach ( $this->provideEntity() as $entityType => [ $entity ] ) {
+			yield "rate limit reached ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal( 'actionthrottledtext' ),
+				new RateLimitReached(),
+			];
 
-		$errorStatus = EditEntityStatus::newFatal( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $maxSizeAsBytes ) );
+			yield "temp user creation limit reached ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal( 'acct_creation_throttle_hit' ),
+				new TempAccountCreationLimitReached(),
+			];
 
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
+			$blockedText = 'example.com';
+			yield "spam blacklist ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal( new ApiMessage(
+					wfMessage( 'spam-blacklisted-link', Message::listParam( [ $blockedText ] ) ),
+					'spamblacklist',
+					[
+						'spamblacklist' => [ 'matches' => [ $blockedText ] ],
+					]
+				) ),
+				new SpamBlacklistException( $blockedText ),
+			];
 
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
+			$filterId = '777';
+			$filterDescription = 'bad word rejecting filter';
+			yield "abuse filter ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal(
+					\ApiMessage::create(
+						[ 'abusefilter-disallowed', $filterDescription, $filterId ],
+						'abusefilter-disallowed',
+						[
+							'abusefilter' => [
+								'id' => $filterId,
+								'description' => $filterDescription,
+								'actions' => 'disallow',
+							],
+						]
+					)
+				),
+				new AbuseFilterException( $filterId, $filterDescription ),
+			];
 
-		$this->expectExceptionObject( new ResourceTooLargeException( $maxSizeAsBytes ) );
-		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
-	}
+			yield "resource too large ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( self::MAX_ENTITY_SIZE * 1024 ) ),
+				new ResourceTooLargeException( self::MAX_ENTITY_SIZE ),
+			];
 
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenAbuseFilterMatch_throwsCorrespondingException( EntityDocument $entity ): void {
-		$filterId = '777';
-		$filterDescription = 'bad word rejecting filter';
-
-		$errorStatus = EditEntityStatus::newFatal(
-			\ApiMessage::create(
-				[ 'abusefilter-disallowed', $filterDescription, $filterId ],
-				'abusefilter-disallowed',
-				[
-					'abusefilter' => [
-						'id' => $filterId,
-						'description' => $filterDescription,
-						'actions' => 'disallow',
-					],
-				]
-			)
-		);
-
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
-
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$this->expectExceptionObject( new AbuseFilterException( $filterId, $filterDescription ) );
-		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
-	}
-
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenSpamBlacklistedMatch_throwsCorrespondingException( EntityDocument $entity ): void {
-		$blockedText = 'example.com';
-
-		$errorStatus = EditEntityStatus::newFatal( new ApiMessage(
-			wfMessage( 'spam-blacklisted-link', Message::listParam( [ $blockedText ] ) ),
-			'spamblacklist',
-			[
-				'spamblacklist' => [ 'matches' => [ $blockedText ] ],
-			]
-		) );
-
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
-
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$this->expectExceptionObject( new SpamBlacklistException( $blockedText ) );
-		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
-	}
-
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenAcctCreationThrottleHit_throwsTempAccountCreationLimitReached( EntityDocument $entityToUpdate ): void {
-		$errorStatus = EditEntityStatus::newFatal( 'acct_creation_throttle_hit' );
-
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );
-
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$this->expectException( TempAccountCreationLimitReached::class );
-
-		$this->newEntityUpdater()->update( $entityToUpdate, $this->createStub( EditMetadata::class ) );
-	}
-
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenRateLimitedEditRequest_throwsCorrespondingException( EntityDocument $entity ): void {
-		$editEntity = $this->createStub( EditEntity::class );
-		$editEntity->method( 'attemptSave' )->willReturn( EditEntityStatus::newFatal( 'actionthrottledtext' ) );
-
-		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
-		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
-
-		$this->expectExceptionObject( new RateLimitReached() );
-		$this->newEntityUpdater()->update( $entity, $this->createStub( EditMetadata::class ) );
+			$status = EditEntityStatus::newFatal( 'failed to save. sad times.' );
+			yield "unknown failure ($entityType)" => [
+				$entity,
+				$status,
+				new EntityUpdateFailed( (string)$status ),
+			];
+		}
 	}
 
 	/**
