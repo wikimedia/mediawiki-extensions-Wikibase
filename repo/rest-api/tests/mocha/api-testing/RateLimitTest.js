@@ -3,15 +3,16 @@
 const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 const {
 	getItemEditRequests,
-	getPropertyEditRequests
+	getPropertyEditRequests,
+	getItemCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 describeWithTestData( 'Rate Limiting', ( itemRequestInputs, propertyRequestInputs ) => {
 
 	[
 		...getItemEditRequests( itemRequestInputs ),
-		...getPropertyEditRequests( propertyRequestInputs )
-		// TODO createItem is special and will be handled in a follow-up
+		...getPropertyEditRequests( propertyRequestInputs ),
+		getItemCreateRequest( itemRequestInputs )
 	].forEach( ( { newRequestBuilder } ) => {
 		it( `${newRequestBuilder().getRouteDescription()} responds 429 when the edit rate limit is reached`, async () => {
 			const response = await newRequestBuilder()
