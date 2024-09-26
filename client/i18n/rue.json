@@ -4,7 +4,8 @@
 			"Dicto23456",
 			"Gramo6",
 			"KHMELNYTSKYIA",
-			"Tkalyn"
+			"Tkalyn",
+			"Constraque"
 		]
 	},
 	"tooltip-t-wikibase": "Посилання на пов’язаний елемент сховища даних",
@@ -29,6 +30,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "Едітованя Вікіданых",
 	"wikibase-rcfilters-hide-wikibase-description": "Едітованя, якы походять з Вікіданых.",
 	"wikibase-replicationnote": "Усвідомте собі, же може то тырвати дакілько минут, покы зміны набудуть чінности на вшыткых вікі.",
+	"wikibase-pageinfo-entity-id": "Ідентіфікатор елемента у {{WBREPONAME}}",
 	"wikibase-otherprojects": "У другых проєктох",
 	"wikibase-sitelinks-sitename-columnheading": "Язык",
 	"wikibase-sitelinks-link-columnheading": "Звязана сторінка"
