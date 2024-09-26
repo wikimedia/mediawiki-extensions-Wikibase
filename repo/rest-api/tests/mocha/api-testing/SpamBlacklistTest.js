@@ -25,7 +25,7 @@ describe( 'Spam blacklist', () => {
 		propertyWithUrlDataType = ( await entityHelper.createEntity( 'property', { datatype: 'url' } ) ).entity.id;
 	} );
 
-	it( 'should return a 403 Bad Request when the property contains blacklisted content', async () => {
+	it( 'should respond 403 Forbidden when the statement value contains blacklisted content', async () => {
 		const operation = {
 			op: 'add',
 			path: '/statements',
