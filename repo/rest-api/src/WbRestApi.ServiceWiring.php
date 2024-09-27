@@ -159,6 +159,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementRemover;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
@@ -579,7 +580,10 @@ return [
 	'WbRestApi.GetItemLabelWithFallback' => function( MediaWikiServices $services ): GetItemLabelWithFallback {
 		return new GetItemLabelWithFallback(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
+			new FallbackLookupFactoryTermsRetriever(
+				$services->getLanguageFactory(),
+				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
+			),
 			WbRestApi::getValidatingRequestDeserializer( $services )
 		);
 	},

@@ -15,7 +15,7 @@
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Label" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"308": { "$ref": "../../global/responses.json#/Moved" },
+			"308": { "$ref": "../../global/responses.json#/MovedPermanently" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

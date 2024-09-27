@@ -1113,8 +1113,19 @@
 			}
 		}
 	},
-	"Moved": {
+	"MovedPermanently": {
 		"description": "The specified resource has permanently moved to the indicated location",
+		"headers": {
+			"Location": {
+				"schema": {
+					"type": "string"
+				},
+				"description": "The URL to which the requested resource has been moved"
+			}
+		}
+	},
+	"MovedTemporarily": {
+		"description": "The specified resource has temporarily moved to the indicated location",
 		"headers": {
 			"Location": {
 				"schema": {

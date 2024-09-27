@@ -184,7 +184,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "description": "The request cannot be processed",
@@ -312,7 +312,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidEntityIdInput"
@@ -455,7 +455,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "description": "The request cannot be processed",
@@ -852,7 +852,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidEntityIdInput"
@@ -1064,7 +1064,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
@@ -1490,7 +1490,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidRetrieveStatementsInput"
@@ -1965,7 +1965,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidEntityIdInput"
@@ -2175,7 +2175,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
@@ -2359,8 +2359,11 @@
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
+          "307": {
+            "$ref": "#/components/responses/MovedTemporarily"
+          },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
@@ -2587,7 +2590,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidEntityIdInput"
@@ -2797,7 +2800,7 @@
             "$ref": "#/components/responses/NotModified"
           },
           "308": {
-            "$ref": "#/components/responses/Moved"
+            "$ref": "#/components/responses/MovedPermanently"
           },
           "400": {
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
@@ -6185,8 +6188,19 @@
           }
         }
       },
-      "Moved": {
+      "MovedPermanently": {
         "description": "The specified resource has permanently moved to the indicated location",
+        "headers": {
+          "Location": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "The URL to which the requested resource has been moved"
+          }
+        }
+      },
+      "MovedTemporarily": {
+        "description": "The specified resource has temporarily moved to the indicated location",
         "headers": {
           "Location": {
             "schema": {

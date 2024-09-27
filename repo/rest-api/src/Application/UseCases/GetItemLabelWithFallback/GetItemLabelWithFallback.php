@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemLabelWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,12 +13,12 @@ use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
 class GetItemLabelWithFallback {
 
 	private GetLatestItemRevisionMetadata $getLatestRevisionMetadata;
-	private ItemLabelRetriever $itemLabelRetriever;
+	private ItemLabelWithFallbackRetriever $itemLabelRetriever;
 	private GetItemLabelWithFallbackValidator $validator;
 
 	public function __construct(
 		GetLatestItemRevisionMetadata $getLatestRevisionMetadata,
-		ItemLabelRetriever $itemLabelRetriever,
+		ItemLabelWithFallbackRetriever $itemLabelRetriever,
 		GetItemLabelWithFallbackValidator $validator
 	) {
 		$this->getLatestRevisionMetadata = $getLatestRevisionMetadata;
