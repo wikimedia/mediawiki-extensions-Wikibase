@@ -54,6 +54,8 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 		$context = $this->createMock( RL\Context::class );
 		$context->method( 'getLanguage' )
 			->willReturn( 'en' );
+		$context->method( 'getResourceLoader' )
+			->willReturn( new RL\ResourceLoader( new HashConfig() ) );
 		return $context;
 	}
 
