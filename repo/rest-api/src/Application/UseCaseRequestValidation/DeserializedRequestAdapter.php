@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\DeserializedGe
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\DeserializedGetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\DeserializedGetItemLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\DeserializedGetItemLabelWithFallbackRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\DeserializedGetItemStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\DeserializedGetItemStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\DeserializedGetPropertyRequest;
@@ -74,6 +75,7 @@ class DeserializedRequestAdapter implements
 	DeserializedGetSitelinkRequest,
 	DeserializedGetItemLabelsRequest,
 	DeserializedGetItemLabelRequest,
+	DeserializedGetItemLabelWithFallbackRequest,
 	DeserializedGetItemDescriptionsRequest,
 	DeserializedGetItemDescriptionRequest,
 	DeserializedGetItemAliasesRequest,

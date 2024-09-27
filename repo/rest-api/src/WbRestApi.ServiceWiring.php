@@ -70,6 +70,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -569,6 +570,14 @@ return [
 
 	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
+			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.GetItemLabelWithFallback' => function( MediaWikiServices $services ): GetItemLabelWithFallback {
+		return new GetItemLabelWithFallback(
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )

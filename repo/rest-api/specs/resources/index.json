@@ -94,6 +94,9 @@
 	"/entities/items/{item_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language-for-item.json"
 	},
+	"/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
+		"$ref": "./labels/label-with-fallback-for-item.json"
+	},
 	"/entities/properties/{property_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language-for-property.json"
 	},
