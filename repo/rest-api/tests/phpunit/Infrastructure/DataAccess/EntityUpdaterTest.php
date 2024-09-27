@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use ApiMessage;
 use Generator;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Message\Message;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;
@@ -259,7 +261,13 @@ class EntityUpdaterTest extends TestCase {
 	public function testGivenSpamBlacklistedMatch_throwsCorrespondingException( EntityDocument $entity ): void {
 		$blockedText = 'example.com';
 
-		$errorStatus = EditEntityStatus::newFatal( 'spam-blacklisted-link', [ 'list' => $blockedText ] );
+		$errorStatus = EditEntityStatus::newFatal( new ApiMessage(
+			wfMessage( 'spam-blacklisted-link', Message::listParam( [ $blockedText ] ) ),
+			'spamblacklist',
+			[
+				'spamblacklist' => [ 'matches' => [ $blockedText ] ],
+			]
+		) );
 
 		$editEntity = $this->createStub( EditEntity::class );
 		$editEntity->method( 'attemptSave' )->willReturn( $errorStatus );

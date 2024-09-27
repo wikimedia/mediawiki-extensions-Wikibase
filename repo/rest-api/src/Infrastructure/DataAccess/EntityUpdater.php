@@ -144,10 +144,9 @@ class EntityUpdater {
 				throw new TempAccountCreationLimitReached();
 			}
 
-			$spamBlacklistError = $this->findErrorInStatus( $status, 'spam-blacklisted' );
+			$spamBlacklistError = $this->findSpamBlacklistError( $status->getMessages() );
 			if ( $spamBlacklistError ) {
-				$blockedText = $spamBlacklistError->getParams()[0]['list'];
-				throw new SpamBlacklistException( $blockedText[0] );
+				throw new SpamBlacklistException( $spamBlacklistError->getApiData()['spamblacklist']['matches'][0] );
 			}
 
 			throw new EntityUpdateFailed( (string)$status );
@@ -173,6 +172,16 @@ class EntityUpdater {
 		foreach ( $messages as $message ) {
 			if ( $message instanceof IApiMessage &&
 				in_array( $message->getApiCode(), [ 'abusefilter-warning', 'abusefilter-disallowed' ] ) ) {
+				return $message;
+			}
+		}
+
+		return null;
+	}
+
+	private function findSpamBlacklistError( array $messages ): ?IApiMessage {
+		foreach ( $messages as $message ) {
+			if ( $message instanceof IApiMessage && $message->getApiCode() === 'spamblacklist' ) {
 				return $message;
 			}
 		}
