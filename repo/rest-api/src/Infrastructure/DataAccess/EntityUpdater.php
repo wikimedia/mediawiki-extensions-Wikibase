@@ -67,6 +67,7 @@ class EntityUpdater {
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws SpamBlacklistException
 	 */
 	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
@@ -78,6 +79,7 @@ class EntityUpdater {
 	 * @throws AbuseFilterException
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws SpamBlacklistException
 	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
