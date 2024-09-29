@@ -33,6 +33,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\Deserializ
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\DeserializedGetPropertyDescriptionsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\DeserializedGetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\DeserializedGetPropertyLabelsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\DeserializedGetPropertyLabelWithFallbackRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\DeserializedGetPropertyStatementRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\DeserializedGetPropertyStatementsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\DeserializedGetSitelinkRequest;
@@ -106,6 +107,7 @@ class DeserializedRequestAdapter implements
 	DeserializedSetItemLabelRequest,
 	DeserializedSetItemDescriptionRequest,
 	DeserializedGetPropertyLabelRequest,
+	DeserializedGetPropertyLabelWithFallbackRequest,
 	DeserializedGetPropertyDescriptionRequest,
 	DeserializedSetPropertyDescriptionRequest,
 	DeserializedPatchPropertyRequest,

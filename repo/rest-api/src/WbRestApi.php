@@ -36,6 +36,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelink;
@@ -423,6 +424,11 @@ class WbRestApi {
 	public static function getGetPropertyLabel( ContainerInterface $services = null ): GetPropertyLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyLabel' );
+	}
+
+	public static function getGetPropertyLabelWithFallback( ContainerInterface $services = null ): GetPropertyLabelWithFallback {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyLabelWithFallback' );
 	}
 
 	public static function getGetPropertyLabels( ContainerInterface $services = null ): GetPropertyLabels {

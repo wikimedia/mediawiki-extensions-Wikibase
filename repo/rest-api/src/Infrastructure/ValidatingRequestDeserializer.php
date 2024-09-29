@@ -50,6 +50,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallbackValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetSitelink\GetSitelinkValidator;
@@ -132,6 +133,7 @@ class ValidatingRequestDeserializer	implements
 	SetItemLabelValidator,
 	SetItemDescriptionValidator,
 	GetPropertyLabelValidator,
+	GetPropertyLabelWithFallbackValidator,
 	GetPropertyDescriptionValidator,
 	SetPropertyDescriptionValidator,
 	PatchPropertyLabelsValidator,
