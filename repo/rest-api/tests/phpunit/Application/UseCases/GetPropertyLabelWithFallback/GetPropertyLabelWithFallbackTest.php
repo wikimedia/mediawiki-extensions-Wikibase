@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetP
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
@@ -22,14 +22,14 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
  */
 class GetPropertyLabelWithFallbackTest extends TestCase {
 
-	private PropertyLabelRetriever $labelRetriever;
+	private PropertyLabelWithFallbackRetriever $labelRetriever;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
-		$this->labelRetriever = $this->createStub( PropertyLabelRetriever::class );
+		$this->labelRetriever = $this->createStub( PropertyLabelWithFallbackRetriever::class );
 	}
 
 	public function testSuccess(): void {
@@ -38,7 +38,7 @@ class GetPropertyLabelWithFallbackTest extends TestCase {
 		$lastModified = '20230922070707';
 		$revisionId = 432;
 
-		$this->labelRetriever = $this->createMock( PropertyLabelRetriever::class );
+		$this->labelRetriever = $this->createMock( PropertyLabelWithFallbackRetriever::class );
 		$this->labelRetriever->expects( $this->once() )
 			->method( 'getLabel' )
 			->with( $propertyId, 'en' )
@@ -49,6 +49,31 @@ class GetPropertyLabelWithFallbackTest extends TestCase {
 
 		$response = $this->newUseCase()->execute(
 			new GetPropertyLabelWithFallbackRequest( "$propertyId", 'en' )
+		);
+
+		$this->assertEquals(
+			new GetPropertyLabelWithFallbackResponse( $label, $lastModified, $revisionId ),
+			$response
+		);
+	}
+
+	public function testSuccessWithFallback(): void {
+		$label = new Label( 'en', 'instance of' );
+		$propertyId = new NumericPropertyId( 'P31' );
+		$lastModified = '20230922070707';
+		$revisionId = 432;
+
+		$this->labelRetriever = $this->createMock( PropertyLabelWithFallbackRetriever::class );
+		$this->labelRetriever->expects( $this->once() )
+			->method( 'getLabel' )
+			->with( $propertyId, 'en-ca' )
+			->willReturn( $label );
+
+		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
+		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
+
+		$response = $this->newUseCase()->execute(
+			new GetPropertyLabelWithFallbackRequest( "$propertyId", 'en-ca' )
 		);
 
 		$this->assertEquals(

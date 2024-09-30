@@ -8,11 +8,12 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelWithFallbackRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
-class FallbackLookupFactoryTermsRetriever implements ItemLabelWithFallbackRetriever {
+class FallbackLookupFactoryTermsRetriever implements ItemLabelWithFallbackRetriever, PropertyLabelWithFallbackRetriever {
 
 	private FallbackLabelDescriptionLookupFactory $lookupFactory;
 	private LanguageFactory $languageFactory;

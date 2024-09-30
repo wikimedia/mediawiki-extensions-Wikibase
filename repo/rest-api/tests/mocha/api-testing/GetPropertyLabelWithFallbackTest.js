@@ -9,10 +9,11 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
 	const propertyEnLabel = `en-label-${utils.uniq()}`;
+	const fallbackLanguageWithExistingLabel = 'en';
 
 	before( async () => {
 		const testProperty = await createEntity( 'property', {
-			labels: [ { language: 'en', value: propertyEnLabel } ],
+			labels: [ { language: fallbackLanguageWithExistingLabel, value: propertyEnLabel } ],
 			datatype: 'string'
 		} );
 		propertyId = testProperty.entity.id;
@@ -41,14 +42,33 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 	} );
 
-	it( 'responds 404 if the label does not exist', async () => {
-		const languageCodeWithNoDefinedLabel = 'ko';
-		const response = await newGetPropertyLabelWithFallbackRequestBuilder( propertyId, languageCodeWithNoDefinedLabel )
-			.assertValidRequest()
-			.makeRequest();
+	it( 'responds 404 if the label does not exist in the requested or any fallback languages', async () => {
+		const propertyWithoutFallback = await createEntity( 'property', {
+			labels: { de: { language: 'de', value: `de-label-${utils.uniq()}` } },
+			datatype: 'string'
+		} );
+
+		const response = await newGetPropertyLabelWithFallbackRequestBuilder(
+			propertyWithoutFallback.entity.id,
+			'ko'
+		).assertValidRequest().makeRequest();
 
 		assertValidError( response, 404, 'resource-not-found', { resource_type: 'label' } );
 		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
+	} );
+
+	it( '307 - language fallback redirect', async () => {
+		const languageCodeWithFallback = 'en-ca';
+
+		const response = await newGetPropertyLabelWithFallbackRequestBuilder( propertyId, languageCodeWithFallback )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 307 );
+
+		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
+			`rest.php/wikibase/v0/entities/properties/${propertyId}/labels/${fallbackLanguageWithExistingLabel}`
+		) );
 	} );
 
 	it( '400 - invalid property ID', async () => {
