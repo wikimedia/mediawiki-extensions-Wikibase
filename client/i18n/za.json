@@ -7,5 +7,7 @@
 	"wikibase-linkitem-input-site": "Vah:",
 	"wikibase-linkitem-input-page": "Yieb:",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Cangz"
+	"wikibase-rc-hide-wikidata-hide": "Cangz",
+	"wikibase-rc-wikibase-edit-letter": "S",
+	"wikibase-client-data-bridge-references-heading": "Canhgauj swhliu"
 }

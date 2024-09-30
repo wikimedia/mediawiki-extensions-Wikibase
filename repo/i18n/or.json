@@ -43,7 +43,7 @@
 	"wikibase-diffview-label": "ନାମ",
 	"wikibase-diffview-alias": "ଭିନ୍ନନାମସବୁ",
 	"wikibase-diffview-description": "ବର୍ଣ୍ଣନା",
-	"wikibase-diffview-link": "ଲିଙ୍କମାନ",
+	"wikibase-diffview-link": "ଲିଙ୍କସବୁ",
 	"wikibase-diffview-link-name": "ନାମ",
 	"wikibase-diffview-link-badges": "ଫଳକସବୁ",
 	"wikibase-sitelink-site-edit-placeholder": "ଉଇକି",
@@ -55,5 +55,6 @@
 	"wikibase-remove": "ବାହାର କରିବା",
 	"wikibase-statementview-rank-normal": "ସାଧାରଣ ପଦ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}",
-	"wikibase-shortcopyrightwarning": "\"$1\"ରେ କ୍ଲିକ କରି ଆପଣ [[$2|ବ୍ୟବହାର ସର୍ତ୍ତାବଳୀ] ସହ ଏକମତ ଏବଂ ନିଜ ଲେଖା [$3 $4] ଅଧୀନରେ ପ୍ରକାଶ କରିବାକୁ ରାଜିହେଲେ ।"
+	"wikibase-shortcopyrightwarning": "\"$1\"ରେ କ୍ଲିକ କରି ଆପଣ [[$2|ବ୍ୟବହାର ସର୍ତ୍ତାବଳୀ] ସହ ଏକମତ ଏବଂ ନିଜ ଲେଖା [$3 $4] ଅଧୀନରେ ପ୍ରକାଶ କରିବାକୁ ରାଜିହେଲେ ।",
+	"wikibase-setaliases-label": "ଭିନ୍ନନାମସବୁ"
 }
