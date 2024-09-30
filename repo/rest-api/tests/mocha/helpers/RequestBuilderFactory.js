@@ -171,6 +171,13 @@ module.exports = {
 			.withPathParam( 'language_code', languageCode );
 	},
 
+	newGetItemLabelWithFallbackRequestBuilder( itemId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/labels_with_language_fallback/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newGetPropertyLabelRequestBuilder( propertyId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/properties/{property_id}/labels/{language_code}' )

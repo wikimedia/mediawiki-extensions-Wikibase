@@ -40,6 +40,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallbackValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatementValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyValidator;
@@ -95,6 +96,7 @@ class ValidatingRequestDeserializer	implements
 	GetSitelinkValidator,
 	GetItemLabelsValidator,
 	GetItemLabelValidator,
+	GetItemLabelWithFallbackValidator,
 	GetItemDescriptionsValidator,
 	GetItemDescriptionValidator,
 	GetItemAliasesValidator,

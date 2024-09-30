@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
@@ -118,6 +119,11 @@ class WbRestApi {
 	public static function getGetItemLabel( ContainerInterface $services = null ): GetItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemLabel' );
+	}
+
+	public static function getGetItemLabelWithFallback( ContainerInterface $services = null ): GetItemLabelWithFallback {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemLabelWithFallback' );
 	}
 
 	public static function getGetItemDescriptions( ContainerInterface $services = null ): GetItemDescriptions {
