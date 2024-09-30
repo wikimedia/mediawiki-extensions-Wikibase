@@ -6,7 +6,6 @@ use IApiMessage;
 use LogicException;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
-use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use MessageSpecifier;
 use Psr\Log\LoggerInterface;
@@ -104,7 +103,9 @@ class EntityUpdater {
 			try {
 				$this->entityStore->assignFreshId( $entity );
 			} catch ( StorageException $e ) {
-				$this->throwIfRateLimitReached( $e->getStatus() );
+				if ( $e->getStatus()->hasMessage( 'actionthrottledtext' ) ) {
+					throw new RateLimitReached();
+				}
 				throw $e; // It wasn't a rate limit error, so we rethrow as an unexpected exception.
 			}
 		}
@@ -125,28 +126,17 @@ class EntityUpdater {
 		);
 
 		if ( !$status->isOK() ) {
-			$entityTooBigError = $this->findErrorInStatus( $status, 'wikibase-error-entity-too-big' );
-			if ( $entityTooBigError ) {
+			if ( $status->hasMessage( 'wikibase-error-entity-too-big' ) ) {
 				throw new ResourceTooLargeException( $this->repoSettings->getSetting( 'maxSerializedEntitySize' ) );
-			}
-
-			$abuseFilterError = $this->findAbuseFilterError( $status->getMessages() );
-			if ( $abuseFilterError ) {
-				throw new AbuseFilterException(
-					$abuseFilterError->getApiData()['abusefilter']['id'],
-					$abuseFilterError->getApiData()['abusefilter']['description']
-				);
-			}
-
-			$this->throwIfRateLimitReached( $status );
-
-			if ( $this->findErrorInStatus( $status, 'acct_creation_throttle_hit' ) ) {
+			} elseif ( $status->hasMessage( 'acct_creation_throttle_hit' ) ) {
 				throw new TempAccountCreationLimitReached();
+			} elseif ( $status->hasMessage( 'actionthrottledtext' ) ) {
+				throw new RateLimitReached();
 			}
 
-			$spamBlacklistError = $this->findSpamBlacklistError( $status->getMessages() );
-			if ( $spamBlacklistError ) {
-				throw new SpamBlacklistException( $spamBlacklistError->getApiData()['spamblacklist']['matches'][0] );
+			foreach ( $status->getMessages() as $message ) {
+				$this->throwIfAbuseFilterError( $message );
+				$this->throwIfSpamBlacklistError( $message );
 			}
 
 			throw new EntityUpdateFailed( (string)$status );
@@ -157,36 +147,26 @@ class EntityUpdater {
 		return $status->getRevision();
 	}
 
-	private function findErrorInStatus( Status $status, string $errorCode ): ?MessageSpecifier {
-		foreach ( $status->getMessages() as $message ) {
-			// prefix comparison to cover different kinds of errors
-			if ( strpos( $message->getKey(), $errorCode ) === 0 ) {
-				return $message;
-			}
+	/**
+	 * @throws AbuseFilterException
+	 */
+	private function throwIfAbuseFilterError( MessageSpecifier $message ): void {
+		if ( $message instanceof IApiMessage &&
+			in_array( $message->getApiCode(), [ 'abusefilter-warning', 'abusefilter-disallowed' ] ) ) {
+			throw new AbuseFilterException(
+				$message->getApiData()['abusefilter']['id'],
+				$message->getApiData()['abusefilter']['description']
+			);
 		}
-
-		return null;
 	}
 
-	private function findAbuseFilterError( array $messages ): ?IApiMessage {
-		foreach ( $messages as $message ) {
-			if ( $message instanceof IApiMessage &&
-				in_array( $message->getApiCode(), [ 'abusefilter-warning', 'abusefilter-disallowed' ] ) ) {
-				return $message;
-			}
+	/**
+	 * @throws SpamBlacklistException
+	 */
+	private function throwIfSpamBlacklistError( MessageSpecifier $message ): void {
+		if ( $message instanceof IApiMessage && $message->getApiCode() === 'spamblacklist' ) {
+			throw new SpamBlacklistException( $message->getApiData()['spamblacklist']['matches'][0] );
 		}
-
-		return null;
-	}
-
-	private function findSpamBlacklistError( array $messages ): ?IApiMessage {
-		foreach ( $messages as $message ) {
-			if ( $message instanceof IApiMessage && $message->getApiCode() === 'spamblacklist' ) {
-				return $message;
-			}
-		}
-
-		return null;
 	}
 
 	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
@@ -201,15 +181,6 @@ class EntityUpdater {
 			if ( $statement->getGuid() === null ) {
 				$statement->setGuid( $this->statementIdGenerator->newGuid( $entity->getId() ) );
 			}
-		}
-	}
-
-	/**
-	 * @throws RateLimitReached
-	 */
-	private function throwIfRateLimitReached( Status $status ): void {
-		if ( $this->findErrorInStatus( $status, 'actionthrottledtext' ) ) {
-			throw new RateLimitReached();
 		}
 	}
 
