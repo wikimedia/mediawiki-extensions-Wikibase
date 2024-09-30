@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Bbeshir",
-			"IdrisSeid"
+			"IdrisSeid",
+			"Kassala"
 		]
 	},
 	"wikibase-edit": "አሳነዮት",
-	"wikibase-add": "ወስኽ",
+	"wikibase-add": "ወስክ",
+	"wikibase-label-empty": "ስሜት ኢትወሰከት",
+	"wikibase-description-empty": "ወስፍ አለቡ",
 	"wikibase-sitelinks-special": "አካናይ ብዕድ"
 }
