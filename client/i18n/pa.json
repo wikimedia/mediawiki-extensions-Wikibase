@@ -39,7 +39,7 @@
 	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "$1 ਪ੍ਰਾਪਰਟੀ ਨਹੀਂ ਮਿਲੀ।",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "ਲੁਕਾਉ",
+	"wikibase-rc-hide-wikidata-hide": "ਲੁਕਾਓ",
 	"wikibase-rc-hide-wikidata-show": "ਵਿਖਾਓ",
 	"wikibase-rc-wikibase-edit-letter": "ਡਾ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ਸੋਧ",
