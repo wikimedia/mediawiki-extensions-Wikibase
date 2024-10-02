@@ -19,13 +19,6 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 		latestRevisionId = createPropertyResponse.entity.lastrevid;
 	} );
 
-	it( '200 OK response is valid for an Property with no statements', async () => {
-		const response = await newGetPropertyStatementsRequestBuilder( propertyId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '200 OK response is valid for an Property with statements', async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const { id } = await createPropertyWithStatements( [

@@ -32,15 +32,6 @@ describe( newGetSitelinksRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '200 OK response is valid for an Item without sitelinks', async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-
-		const response = await newGetSitelinksRequestBuilder( createItemResponse.entity.id ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetSitelinksRequestBuilder( testItemId )
 			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )

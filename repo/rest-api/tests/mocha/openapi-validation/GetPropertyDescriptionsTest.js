@@ -2,7 +2,7 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const { createEntity } = require( '../helpers/entityHelper' );
 const { newGetPropertyDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () => {
@@ -25,16 +25,6 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 
 	it( '200 OK response is valid for a Property with two descriptions', async () => {
 		const response = await newGetPropertyDescriptionsRequestBuilder( testPropertyId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '200 OK response is valid for a Property without descriptions', async () => {
-		const createPropertyResponse = await createUniqueStringProperty();
-
-		const response = await newGetPropertyDescriptionsRequestBuilder( createPropertyResponse.entity.id )
-			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;

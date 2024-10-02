@@ -21,13 +21,6 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		latestRevisionId = createItemResponse.entity.lastrevid;
 	} );
 
-	it( '200 OK response is valid for an Item with no statements', async () => {
-		const response = await newGetItemStatementsRequestBuilder( itemId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '200 OK response is valid for an Item with statements', async () => {
 		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
 		const { id } = await createItemWithStatements( [

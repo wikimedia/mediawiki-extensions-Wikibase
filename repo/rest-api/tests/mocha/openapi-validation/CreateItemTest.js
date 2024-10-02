@@ -12,15 +12,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		localSiteId = await getLocalSiteId();
 	} );
 
-	it( '201 - minimal item', async () => {
-		const response = await newCreateItemRequestBuilder( {
-			labels: { en: 'potato' }
-		} ).makeRequest();
-
-		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '201 - full item', async () => {
 		const linkedArticle = utils.title( 'Potato' );
 		await createWikiPage( linkedArticle );

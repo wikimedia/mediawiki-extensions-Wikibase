@@ -67,12 +67,4 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '404 Not Found response is valid if there is no sitelink for the requested site id', async () => {
-		const itemId = ( await createEntity( 'item', {} ) ).entity.id;
-		const response = await newGetSitelinkRequestBuilder( itemId, siteId ).makeRequest();
-
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 } );

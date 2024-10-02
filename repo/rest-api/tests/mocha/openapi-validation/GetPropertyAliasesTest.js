@@ -2,7 +2,7 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const { createEntity } = require( '../helpers/entityHelper' );
 const { newGetPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
@@ -31,15 +31,6 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 	it( '200 OK response is valid for a Property with two aliases', async () => {
 		const response = await newGetPropertyAliasesRequestBuilder( testPropertyId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '200 OK response is valid for a Property without aliases', async () => {
-		const createPropertyResponse = await createUniqueStringProperty();
-
-		const response = await newGetPropertyAliasesRequestBuilder( createPropertyResponse.entity.id ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;

@@ -12,12 +12,11 @@ function makeUnique( text ) {
 describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 
 	let existingPropertyId;
-	const languageWithExistingAlias = 'en';
 
 	before( async () => {
 		const createPropertyResponse = await createEntity( 'property', {
 			aliases: [ {
-				language: languageWithExistingAlias,
+				language: 'en',
 				value: makeUnique( 'en-alias' )
 			} ],
 			datatype: 'string'

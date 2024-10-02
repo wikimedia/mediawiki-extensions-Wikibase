@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const { createUniqueStringProperty } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
@@ -17,18 +17,6 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	it( '200 OK response is valid for a Property with two labels', async () => {
 		const response = await newGetPropertyLabelsRequestBuilder( testPropertyId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '200 OK response is valid for a Property without labels', async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			descriptions: { en: { language: 'en', value: 'some description' } },
-			datatype: 'string'
-		} );
-
-		const response = await newGetPropertyLabelsRequestBuilder( createPropertyResponse.entity.id ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;

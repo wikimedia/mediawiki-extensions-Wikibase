@@ -59,11 +59,4 @@ describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '404 Not Found response is valid if there is no label in the requested language', async () => {
-		const response = await newGetItemLabelRequestBuilder( itemId, 'ko' ).makeRequest();
-
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 } );

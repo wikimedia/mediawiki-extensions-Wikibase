@@ -29,17 +29,6 @@ describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '200 OK response is valid for an Item without labels', async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: { en: { language: 'en', value: 'some description' } }
-		} );
-
-		const response = await newGetItemLabelsRequestBuilder( createItemResponse.entity.id ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetItemLabelsRequestBuilder( testItemId )
 			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )

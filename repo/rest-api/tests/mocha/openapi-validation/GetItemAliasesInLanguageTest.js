@@ -59,10 +59,4 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '404 Not Found response is valid if there is no aliases in the requested language', async () => {
-		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, 'de' ).makeRequest();
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 } );

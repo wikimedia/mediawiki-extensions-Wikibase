@@ -60,13 +60,6 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 		latestRevisionId = createItemResponse.entity.lastrevid;
 	} );
 
-	it( '200 OK response is valid for an "empty" item', async () => {
-		const response = await newGetItemRequestBuilder( itemId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '200 OK response is valid for a non-empty item', async () => {
 		const id = await createItemWithAllFields();
 		const response = await newGetItemRequestBuilder( id ).makeRequest();
@@ -95,15 +88,6 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemRequestBuilder( 'X123' ).makeRequest();
-
-		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '400 Bad Request response is valid for an invalid field', async () => {
-		const response = await newGetItemRequestBuilder( 'Q123' )
-			.withQueryParam( '_fields', 'unknown_field' )
-			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;

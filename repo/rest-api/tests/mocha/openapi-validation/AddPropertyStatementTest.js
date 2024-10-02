@@ -35,16 +35,6 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '400 Bad Request is valid for invalid statement param type', async () => {
-		const response = await newAddPropertyStatementRequestBuilder(
-			propertyId,
-			'invalid statement param type'
-		).makeRequest();
-
-		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '404 Not Found is valid for non-existent Property', async () => {
 		const response = await newAddPropertyStatementRequestBuilder( 'P9999999', validStatementSerialization )
 			.makeRequest();

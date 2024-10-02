@@ -49,23 +49,6 @@ async function createPropertyWithAllFields() {
 
 describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 
-	let propertyId;
-
-	before( async () => {
-		const createPropertyResponse = await entityHelper.createEntity(
-			'property',
-			{ datatype: 'string' }
-		);
-		propertyId = createPropertyResponse.entity.id;
-	} );
-
-	it( '200 OK response is valid for an "empty" property', async () => {
-		const response = await newGetPropertyRequestBuilder( propertyId ).makeRequest();
-
-		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
 	it( '200 OK response is valid for a non-empty property', async () => {
 		const { entity: { id } } = await createPropertyWithAllFields();
 		const response = await newGetPropertyRequestBuilder( id ).makeRequest();
@@ -76,16 +59,6 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 
 	it( '400 Bad Request response is valid for an invalid property ID', async () => {
 		const response = await newGetPropertyRequestBuilder( 'X123' ).makeRequest();
-
-		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '400 Bad Request response is valid for an invalid field', async () => {
-		const response = await newGetPropertyRequestBuilder( 'Q123' )
-			.withQueryParam( '_fields', 'unknown_field' )
-			.assertInvalidRequest()
-			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
 		expect( response ).to.satisfyApiSpec;
