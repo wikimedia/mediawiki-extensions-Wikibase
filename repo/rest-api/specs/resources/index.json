@@ -100,6 +100,9 @@
 	"/entities/properties/{property_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language-for-property.json"
 	},
+	"/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
+		"$ref": "./labels/label-with-fallback-for-property.json"
+	},
 	"/entities/items/{item_id}/aliases": {
 		"$ref": "./aliases/list-for-item.json"
 	},
