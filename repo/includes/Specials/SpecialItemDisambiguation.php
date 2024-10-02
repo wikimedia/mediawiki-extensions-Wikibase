@@ -84,16 +84,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	}
 
 	private function extractLanguageCode( WebRequest $request, array $subPageParts ): string {
-		$languageCode = $request->getRawVal(
-			'language',
-			$subPageParts[0] ?? ''
-		);
+		$languageCode = $request->getRawVal( 'language' ) ?? $subPageParts[0] ?? '';
 
 		if ( $languageCode === '' ) {
 			$languageCode = $this->getLanguage()->getCode();
 		}
 
-		// @phan-suppress-next-line PhanTypeMismatchReturnNullable False positive getRawVal not return null here
 		return $languageCode;
 	}
 

@@ -339,7 +339,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$request = $this->getRequest();
 
 		$parts = $subPage ? explode( '/', $subPage, 2 ) : [];
-		$this->languageCode = $request->getRawVal( 'language', $parts[1] ?? '' );
+		$this->languageCode = $request->getRawVal( 'language' ) ?? $parts[1] ?? '';
 
 		$label = $request->getVal( 'label', '' );
 		$this->label = $this->stringNormalizer->trimToNFC( $label );
