@@ -68,6 +68,13 @@ module.exports = {
 			.withPathParam( 'language_code', languageCode );
 	},
 
+	newGetItemDescriptionWithFallbackRequestBuilder( itemId, languageCode ) {
+		return new RequestBuilder()
+			.withRoute( 'GET', '/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}' )
+			.withPathParam( 'item_id', itemId )
+			.withPathParam( 'language_code', languageCode );
+	},
+
 	newGetPropertyDescriptionRequestBuilder( propertyId, languageCode ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/properties/{property_id}/descriptions/{language_code}' )

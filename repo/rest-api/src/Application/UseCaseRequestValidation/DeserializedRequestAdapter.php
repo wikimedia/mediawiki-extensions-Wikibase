@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\DeserializedGetIte
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\DeserializedGetItemAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\DeserializedGetItemDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\DeserializedGetItemDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallback\DeserializedGetItemDescriptionWithFallbackRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\DeserializedGetItemLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\DeserializedGetItemLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\DeserializedGetItemLabelWithFallbackRequest;
@@ -79,6 +80,7 @@ class DeserializedRequestAdapter implements
 	DeserializedGetItemLabelWithFallbackRequest,
 	DeserializedGetItemDescriptionsRequest,
 	DeserializedGetItemDescriptionRequest,
+	DeserializedGetItemDescriptionWithFallbackRequest,
 	DeserializedGetItemAliasesRequest,
 	DeserializedGetItemAliasesInLanguageRequest,
 	DeserializedGetItemStatementRequest,

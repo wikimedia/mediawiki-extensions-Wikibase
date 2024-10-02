@@ -76,6 +76,9 @@
 	"/entities/items/{item_id}/descriptions/{language_code}": {
 		"$ref": "./descriptions/description-in-language-for-item.json"
 	},
+	"/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+		"$ref": "./descriptions/description-with-fallback-for-item.json"
+	},
 	"/entities/properties/{property_id}/descriptions/{language_code}": {
 		"$ref": "./descriptions/description-in-language-for-property.json"
 	},

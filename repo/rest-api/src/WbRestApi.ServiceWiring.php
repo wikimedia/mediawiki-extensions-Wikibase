@@ -68,6 +68,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallback\GetItemDescriptionWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallback;
@@ -559,6 +560,14 @@ return [
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.GetItemDescriptionWithFallback' => function( MediaWikiServices $services ): GetItemDescriptionWithFallback {
+		return new GetItemDescriptionWithFallback(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services )
 		);
 	},
 
