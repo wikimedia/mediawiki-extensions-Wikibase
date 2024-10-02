@@ -36,6 +36,14 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '307 Temporary Redirect response is valid for a label with language fallback', async () => {
+		const languageCodeWithFallback = 'en-ca';
+		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, languageCodeWithFallback ).makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
 		const redirectSourceId = await createRedirectForItem( itemId );
 
@@ -54,13 +62,6 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemLabelWithFallbackRequestBuilder( 'Q99999', languageCode ).makeRequest();
-
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
-
-	it( '404 Not Found response is valid if there is no label in the requested language', async () => {
-		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, 'ko' ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;

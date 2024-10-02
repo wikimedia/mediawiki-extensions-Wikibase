@@ -1,22 +1,20 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemLabelWithFallbackRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { newCreateItemRequestBuilder, newGetItemLabelWithFallbackRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let itemId;
+	const itemLabel = `potato-${utils.uniq()}`;
+	const fallbackLanguageWithExistingLabel = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: {
-				en: { language: 'en', value: 'potato' }
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
+		itemId = ( await newCreateItemRequestBuilder(
+			{ labels: { [ fallbackLanguageWithExistingLabel ]: itemLabel } }
+		).makeRequest() ).body.id;
 	} );
 
 	it( 'can get a language specific label of an item', async () => {
@@ -27,7 +25,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.deepEqual( response.body, 'potato' );
+		assert.deepEqual( response.body, itemLabel );
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
@@ -42,14 +40,28 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 	} );
 
-	it( 'responds 404 in case the item has no label in the requested language', async () => {
-		const languageCode = 'ko';
-		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, languageCode )
+	it( 'responds 404 in case the item has no label in the requested or any fallback languages', async () => {
+		const itemIdWithoutFallback =
+			( await newCreateItemRequestBuilder( { labels: { de: `kartoffel-${utils.uniq()}` } } ).makeRequest() ).body.id;
+
+		const response = await newGetItemLabelWithFallbackRequestBuilder( itemIdWithoutFallback, 'ko' )
 			.assertValidRequest()
 			.makeRequest();
 
 		assertValidError( response, 404, 'resource-not-found', { resource_type: 'label' } );
 		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
+	} );
+
+	it( '307 - language fallback redirect', async () => {
+		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, 'en-ca' )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `rest.php/wikibase/v0/entities/items/${itemId}/labels/${fallbackLanguageWithExistingLabel}` )
+		);
 	} );
 
 	it( '308 - item redirected', async () => {

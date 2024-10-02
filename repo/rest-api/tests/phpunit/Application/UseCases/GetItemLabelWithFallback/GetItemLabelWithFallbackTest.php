@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemLabelWithFallbackRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
@@ -24,13 +24,13 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 class GetItemLabelWithFallbackTest extends TestCase {
 
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private ItemLabelRetriever $labelRetriever;
+	private ItemLabelWithFallbackRetriever $labelRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
-		$this->labelRetriever = $this->createStub( ItemLabelRetriever::class );
+		$this->labelRetriever = $this->createStub( ItemLabelWithFallbackRetriever::class );
 	}
 
 	public function testSuccess(): void {
@@ -43,7 +43,7 @@ class GetItemLabelWithFallbackTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
-		$this->labelRetriever = $this->createMock( ItemLabelRetriever::class );
+		$this->labelRetriever = $this->createMock( ItemLabelWithFallbackRetriever::class );
 		$this->labelRetriever->expects( $this->once() )
 			->method( 'getLabel' )
 			->with( $itemId, 'en' )
@@ -80,7 +80,7 @@ class GetItemLabelWithFallbackTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 2, '20201111070707' ] );
 
-		$this->labelRetriever = $this->createStub( ItemLabelRetriever::class );
+		$this->labelRetriever = $this->createStub( ItemLabelWithFallbackRetriever::class );
 
 		try {
 			$this->newUseCase()->execute(
