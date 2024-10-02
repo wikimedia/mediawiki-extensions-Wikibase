@@ -36,6 +36,7 @@ describe( 'the Tainted icon', () => {
 	} );
 
 	// Skipped because of frequent failures, see T266706
+	// Skipped on 2023-12-15 in 983473 because of T266706
 	it.skip( 'should appear and disappear correctly', async () => {
 		await ItemPage.open( itemId );
 
