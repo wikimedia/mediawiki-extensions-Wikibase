@@ -70,14 +70,18 @@ describe( 'item', () => {
 		await expect( $( `#${propertyId}` ) ).toExist();
 	} );
 
-	// Skipped on 2022-09-05 in 372fb1 because it was flaky - T376286 tracks re-enabling this test
-	it.skip( 'old revisions do not have an edit link', async () => {
+	it( 'old revisions do not have an edit link', async () => {
 		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T95406-' ) );
 		const item = await WikibaseApi.getEntity( itemId );
 
 		await EntityPage.open( itemId );
 		await ItemPage.editItemDescription( 'revision 1' );
 		await ItemPage.editButton.waitForExist();
+
+		// wait for the edit to be saved before loading the previous revision page
+		await browser.waitUntil(
+			async () => ( await WikibaseApi.getEntity( itemId ) ).lastrevid !== item.lastrevid
+		);
 
 		await ( new Page() ).openTitle( `Special:EntityPage/${itemId}`, { oldid: item.lastrevid } );
 
