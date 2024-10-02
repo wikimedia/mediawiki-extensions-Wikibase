@@ -35,6 +35,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAli
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\GetPropertyDescriptionWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallback;
@@ -450,6 +451,13 @@ class WbRestApi {
 	public static function getGetPropertyDescriptions( ContainerInterface $services = null ): GetPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetPropertyDescriptions' );
+	}
+
+	public static function getGetPropertyDescriptionWithFallback(
+		ContainerInterface $services = null
+	): GetPropertyDescriptionWithFallback {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetPropertyDescriptionWithFallback' );
 	}
 
 	public static function getGetPropertyAliasesInLanguage( ContainerInterface $services = null ): GetPropertyAliasesInLanguage {

@@ -82,6 +82,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAli
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\GetPropertyDescriptionWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallback;
@@ -677,6 +678,14 @@ return [
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
 			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
 			WbRestApi::getValidatingRequestDeserializer( $services )
+		);
+	},
+
+	'WbRestApi.GetPropertyDescriptionWithFallback' => function( MediaWikiServices $services ): GetPropertyDescriptionWithFallback {
+		return new GetPropertyDescriptionWithFallback(
+			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbRestApi::getTermLookupEntityTermsRetriever( $services )
 		);
 	},
 

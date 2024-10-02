@@ -32,6 +32,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\DeserializedGe
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage\DeserializedGetPropertyAliasesInLanguageRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\DeserializedGetPropertyDescriptionRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\DeserializedGetPropertyDescriptionsRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\DeserializedGetPropertyDescriptionWithFallbackRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\DeserializedGetPropertyLabelRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\DeserializedGetPropertyLabelsRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\DeserializedGetPropertyLabelWithFallbackRequest;
@@ -88,6 +89,7 @@ class DeserializedRequestAdapter implements
 	DeserializedGetPropertyRequest,
 	DeserializedGetPropertyLabelsRequest,
 	DeserializedGetPropertyDescriptionsRequest,
+	DeserializedGetPropertyDescriptionWithFallbackRequest,
 	DeserializedGetPropertyAliasesRequest,
 	DeserializedGetPropertyAliasesInLanguageRequest,
 	DeserializedGetPropertyStatementRequest,
