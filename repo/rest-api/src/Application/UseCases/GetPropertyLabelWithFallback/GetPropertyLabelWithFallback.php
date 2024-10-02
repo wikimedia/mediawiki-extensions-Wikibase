@@ -4,21 +4,21 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallbac
 
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class GetPropertyLabelWithFallback {
 
-	private PropertyLabelRetriever $labelRetriever;
+	private PropertyLabelWithFallbackRetriever $labelRetriever;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
 	private GetPropertyLabelWithFallbackValidator $validator;
 
 	public function __construct(
 		GetPropertyLabelWithFallbackValidator $validator,
 		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
-		PropertyLabelRetriever $labelRetriever
+		PropertyLabelWithFallbackRetriever $labelRetriever
 	) {
 		$this->labelRetriever = $labelRetriever;
 		$this->getRevisionMetadata = $getRevisionMetadata;

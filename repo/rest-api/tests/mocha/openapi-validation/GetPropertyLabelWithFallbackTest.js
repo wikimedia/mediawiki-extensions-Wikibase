@@ -38,6 +38,17 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '307 Temporary Redirect response is valid for a label with language fallback', async () => {
+		const languageCodeWithFallback = 'en-ca';
+		const response = await newGetPropertyLabelWithFallbackRequestBuilder(
+			propertyId,
+			languageCodeWithFallback
+		).makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '400 Bad Request response is valid for an invalid property ID', async () => {
 		const response = await newGetPropertyLabelWithFallbackRequestBuilder( 'X123', languageCode )
 			.makeRequest();
@@ -46,20 +57,22 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		expect( response ).to.satisfyApiSpec;
 	} );
 
-	it( '404 Not Found response is valid for a non-existing property', async () => {
-		const response = await newGetPropertyLabelWithFallbackRequestBuilder( 'P99999', languageCode )
-			.makeRequest();
+	it(
+		'404 Not Found response is valid if there is no label in the requested or any fallback language',
+		async () => {
+			const propertyWithoutFallback = await createEntity( 'property', {
+				labels: { de: { language: 'de', value: `de-label-${utils.uniq()}` } },
+				datatype: 'string'
+			} );
 
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			const response = await newGetPropertyLabelWithFallbackRequestBuilder(
+				propertyWithoutFallback.entity.id,
+				'ko'
+			).makeRequest();
 
-	it( '404 Not Found response is valid if there is no label in the requested language', async () => {
-		const response = await newGetPropertyLabelWithFallbackRequestBuilder( propertyId, 'ko' )
-			.makeRequest();
-
-		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
-	} );
+			expect( response ).to.have.status( 404 );
+			expect( response ).to.satisfyApiSpec;
+		}
+	);
 
 } );

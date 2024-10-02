@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
+use Generator;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
@@ -22,8 +24,10 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\FallbackLookupFactoryTermsRe
  */
 class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 
-	public function testLabelsLookupThrowsLookupException_returnsNull(): void {
-		$entityId = $this->createStub( EntityId::class );
+	/**
+	 * @dataProvider entityIdGenerator
+	 */
+	public function testLabelsLookupThrowsLookupException_returnsNull( EntityId $entityId ): void {
 		$languageCode = 'en';
 
 		$lookup = $this->createStub( FallbackLabelDescriptionLookup::class );
@@ -33,8 +37,10 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 		$this->assertNull( $this->newTermsRetriever( $lookup )->getLabel( $entityId, $languageCode ) );
 	}
 
-	public function testGetLabel(): void {
-		$entityId = $this->createStub( EntityId::class );
+	/**
+	 * @dataProvider entityIdGenerator
+	 */
+	public function testGetLabel( EntityId $entityId ): void {
 		$languageCode = 'en';
 		$labelText = 'some label';
 
@@ -70,11 +76,19 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 		);
 	}
 
-	public function testGivenNoLabelInRequestedLanguage_getLabelReturnsNull(): void {
+	/**
+	 * @dataProvider entityIdGenerator
+	 */
+	public function testGivenNoLabelInRequestedLanguage_getLabelReturnsNull( EntityId $entityId ): void {
 		$this->assertNull(
 			( $this->newTermsRetriever( $this->createStub( FallbackLabelDescriptionLookup::class ) ) )
-				->getLabel( new ItemId( 'Q321' ), 'ko' )
+				->getLabel( $entityId, 'ko' )
 		);
+	}
+
+	public function entityIdGenerator(): Generator {
+		yield 'item_id' => [ new ItemId( 'Q321' ) ];
+		yield 'property_id' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
 	private function newTermsRetriever( FallbackLabelDescriptionLookup $lookup ): FallbackLookupFactoryTermsRetriever {
