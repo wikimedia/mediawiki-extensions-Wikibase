@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bbeshir",
-			"IdrisSeid"
+			"IdrisSeid",
+			"Kassala"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ሓጀት",
@@ -14,5 +15,6 @@
 	"wikibase-linkitem-input-site": "ሉቃት",
 	"wikibase-linkitem-input-page": "ገጽ:",
 	"wikibase-rc-hide-wikidata-hide": "ሕብዖ",
-	"wikibase-rc-hide-wikidata-show": "ኣርአ"
+	"wikibase-rc-hide-wikidata-show": "ኣርኤ",
+	"wikibase-otherprojects": "ዲብ ብዕድ መሻርዕ"
 }
