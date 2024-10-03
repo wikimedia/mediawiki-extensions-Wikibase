@@ -21,6 +21,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallback\GetItemDescriptionWithFallback;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallback;
@@ -135,6 +136,11 @@ class WbRestApi {
 	public static function getGetItemDescription( ContainerInterface $services = null ): GetItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetItemDescription' );
+	}
+
+	public static function getGetItemDescriptionWithFallback( ContainerInterface $services = null ): GetItemDescriptionWithFallback {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.GetItemDescriptionWithFallback' );
 	}
 
 	public static function getGetItemAliases( ContainerInterface $services = null ): GetItemAliases {

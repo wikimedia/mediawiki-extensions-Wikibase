@@ -1210,6 +1210,62 @@
         }
       }
     },
+    "/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+      "get": {
+        "operationId": "getItemDescriptionWithFallback",
+        "tags": [
+          "descriptions"
+        ],
+        "summary": "[WIP] Retrieve an Item's description in a specific language, with language fallback",
+        "description": "This endpoint is currently in development and is not recommended for production use",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ItemId"
+          },
+          {
+            "$ref": "#/components/parameters/LanguageCode"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfModifiedSince"
+          },
+          {
+            "$ref": "#/components/parameters/IfMatch"
+          },
+          {
+            "$ref": "#/components/parameters/IfUnmodifiedSince"
+          },
+          {
+            "$ref": "#/components/parameters/Authorization"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Description"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "308": {
+            "$ref": "#/components/responses/MovedPermanently"
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidTermByLanguageInput"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFound"
+          },
+          "412": {
+            "$ref": "#/components/responses/PreconditionFailedError"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedError"
+          }
+        }
+      }
+    },
     "/entities/properties/{property_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getPropertyDescription",
