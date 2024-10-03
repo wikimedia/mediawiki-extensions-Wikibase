@@ -3,6 +3,7 @@
 		"authors": [
 			"Jerrykim306",
 			"Kwj2772",
+			"YeBoy371",
 			"Ykhwong",
 			"아라"
 		]
@@ -13,6 +14,11 @@
 	"valueview-expert-globecoordinateinput-precision": "정밀도:",
 	"valueview-expert-globecoordinateinput-nullprecision": "지정되지 않음",
 	"valueview-expert-globecoordinateinput-customprecision": "특수 ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "분 단위까지",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "초 단위까지",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "1/10초 단위까지",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "1/100초 단위까지",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "1/1000초 단위까지",
 	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "그레고리력",
 	"valueview-expert-timevalue-calendar-julian": "율리우스력",
