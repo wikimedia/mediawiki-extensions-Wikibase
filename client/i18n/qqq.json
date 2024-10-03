@@ -85,7 +85,7 @@
 	"wikibase-error-serialize-error": "Generic error for when entity data failed to serialize or cannot be handled.",
 	"wikibase-error-invalid-entity-id": "Generic error message when an invalid entity ID was entered. Parameters:\n* $1 unused\n* $2 - the entered but invalid ID",
 	"wikibase-error-exceeded-entity-access-limit": "Error message shown in rendered page output when too many entities are accessed on the page. The limit on the number of full entities that can be loaded on any given page, via Scribunto and/or the property parser function, is controlled by the <tt>entityAccessLimit</tt> configuration setting.",
-	"wikibase-error-exceeded-referenced-entity-id-limit": "{{doc-important|Do not translate \"mw.wikibase.getReferencedEntityId\"}}\n\nError message shown in rendered page output when too many \"mw.wikibase.getReferencedEntityId\" calls are on a page. The limit on the number of function calls per page is controlled by the <tt>referencedEntityIdAccessLimit</tt> configuration setting.",
+	"wikibase-error-exceeded-referenced-entity-id-limit": "{{doc-important|Do not translate \"mw.wikibase.getReferencedEntityId\"}}\n\nError message shown in rendered page output when too many \"mw.wikibase.getReferencedEntityId\" calls are on a page. The limit on the number of function calls per page is controlled by the <code>referencedEntityIdAccessLimit</code> configuration setting.",
 	"unconnectedpages": "{{doc-special|UnconnectedPages}}",
 	"unconnectedpages-summary": "Introductory text used on Special:UnconnectedPages.",
 	"wikibase-unconnectedpages-submit": "Label for the button that activates the action",

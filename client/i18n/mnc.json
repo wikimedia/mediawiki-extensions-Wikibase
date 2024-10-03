@@ -5,24 +5,25 @@
 			"ChoiChong",
 			"Chulsu463",
 			"Foavi33",
-			"Moon0319"
+			"Moon0319",
+			"MiiCii"
 		]
 	},
 	"tooltip-t-wikibase": "Data de holbobure namun i jaka",
 	"wikibase-comment-update": "{{WBREPONAME}} jaka kūbulihebi",
-	"wikibase-dataitem": "{{WBREPONAME}} jaka",
-	"wikibase-editlinks": "Banjibusi links",
+	"wikibase-dataitem": "{{WBREPONAME}} -i jaka",
+	"wikibase-editlinks": "Banjibure holboro futa (link)",
 	"wikibase-editlinkstitle": "Geren gisun i asu be halambi",
 	"wikibase-linkitem-addlinks": "Asu be nonggimbi",
-	"wikibase-linkitem-title": "fiyelen i link",
-	"wikibase-linkitem-linkpage": "fiyelen i link",
-	"wikibase-linkitem-selectlink": "sini link ojoki sere site embixi justan be sonjo.",
-	"wikibase-linkitem-input-site": "gisun:",
-	"wikibase-linkitem-input-page": "fiyelen:",
+	"wikibase-linkitem-title": "Afaha de holboro",
+	"wikibase-linkitem-linkpage": "Afaha de holboro",
+	"wikibase-linkitem-selectlink": "Bairengge ere afaha de holbobuha asui tatan jai afaha be sonjoki.",
+	"wikibase-linkitem-input-site": "Gisun:",
+	"wikibase-linkitem-input-page": "Afaha:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Somire",
+	"wikibase-rc-hide-wikidata-hide": "Somibure",
 	"wikibase-rc-hide-wikidata-show": "Iletulere",
-	"wikibase-rc-wikibase-edit-letter": "T",
+	"wikibase-rc-wikibase-edit-letter": "Ton",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} banjibusi",
-	"wikibase-otherprojects": "Encu arga de"
+	"wikibase-otherprojects": "Gūwa bodomin de"
 }
