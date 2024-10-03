@@ -85,6 +85,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$entity = $entityRevision->getEntity();
 
 		$parserOutput = new ParserOutput();
+		$parserOutput->resetParseStartTime();
 
 		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
 		$updaterCollection->updateParserOutput( $entity );

@@ -810,6 +810,8 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	protected function getParserOutputForRedirect( EntityContent $content, bool $generateHtml ) {
 		$parserOutput = new ParserOutput();
+		$parserOutput->resetParseStartTime();
+
 		$target = $content->getRedirectTarget();
 
 		// Make sure to include the redirect link in pagelinks
