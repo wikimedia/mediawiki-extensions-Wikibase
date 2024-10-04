@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
+use MediaWiki\User\UserIdentityUtils;
 use MediaWiki\User\UserIdentityValue;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
@@ -18,11 +19,12 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
  */
 class AuthenticationMiddlewareTest extends TestCase {
 
-	public function testGivenUnregisteredUser_doesNothing(): void {
-		$middleware = new AuthenticationMiddleware();
+	public function testGivenUnnamed_doesNothing(): void {
+		$userIdentityUtils = $this->createMock( UserIdentityUtils::class );
+		$userIdentityUtils->method( 'isNamed' )->willReturn( false );
 
-		$response = $middleware->run(
-			$this->newRouteHandlerWithUser( UserIdentityValue::newAnonymous( 'im anonymous' ) ),
+		$response = ( new AuthenticationMiddleware( $userIdentityUtils ) )->run(
+			$this->newRouteHandlerWithUser( $this->createStub( UserIdentityValue::class ) ),
 			fn() => new Response()
 		);
 
@@ -31,7 +33,10 @@ class AuthenticationMiddlewareTest extends TestCase {
 
 	public function testGivenRegisteredUser_addsResponseHeader(): void {
 		$username = 'Potato';
-		$middleware = new AuthenticationMiddleware();
+
+		$userIdentityUtils = $this->createMock( UserIdentityUtils::class );
+		$userIdentityUtils->method( 'isNamed' )->willReturn( true );
+		$middleware = new AuthenticationMiddleware( $userIdentityUtils );
 
 		$response = $middleware->run(
 			$this->newRouteHandlerWithUser( UserIdentityValue::newRegistered( 123, $username ) ),
