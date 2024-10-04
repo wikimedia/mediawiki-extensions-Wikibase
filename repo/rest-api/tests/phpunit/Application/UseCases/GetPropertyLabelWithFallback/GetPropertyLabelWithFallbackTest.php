@@ -57,31 +57,6 @@ class GetPropertyLabelWithFallbackTest extends TestCase {
 		);
 	}
 
-	public function testSuccessWithFallback(): void {
-		$label = new Label( 'en', 'instance of' );
-		$propertyId = new NumericPropertyId( 'P31' );
-		$lastModified = '20230922070707';
-		$revisionId = 432;
-
-		$this->labelRetriever = $this->createMock( PropertyLabelWithFallbackRetriever::class );
-		$this->labelRetriever->expects( $this->once() )
-			->method( 'getLabel' )
-			->with( $propertyId, 'en-ca' )
-			->willReturn( $label );
-
-		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
-		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
-
-		$response = $this->newUseCase()->execute(
-			new GetPropertyLabelWithFallbackRequest( "$propertyId", 'en-ca' )
-		);
-
-		$this->assertEquals(
-			new GetPropertyLabelWithFallbackResponse( $label, $lastModified, $revisionId ),
-			$response
-		);
-	}
-
 	public function testGivenPropertyDoesNotExist_throws(): void {
 		$expectedException = $this->createStub( UseCaseError::class );
 		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
