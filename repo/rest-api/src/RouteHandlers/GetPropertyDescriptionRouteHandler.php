@@ -25,6 +25,8 @@ class GetPropertyDescriptionRouteHandler extends SimpleHandler {
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
 
+	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}';
+
 	private GetPropertyDescription $useCase;
 	private MiddlewareHandler $middlewareHandler;
 	private ResponseFactory $responseFactory;

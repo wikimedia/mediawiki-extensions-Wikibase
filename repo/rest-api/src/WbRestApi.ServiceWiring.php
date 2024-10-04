@@ -685,7 +685,10 @@ return [
 		return new GetPropertyDescriptionWithFallback(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+			new FallbackLookupFactoryTermsRetriever(
+				$services->getLanguageFactory(),
+				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
+			)
 		);
 	},
 

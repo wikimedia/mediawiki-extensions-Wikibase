@@ -9,11 +9,11 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 
 	let propertyId;
 	let lastRevisionId;
-	const languageCode = 'en';
+	const languageCode = 'de';
 
 	before( async () => {
 		const createPropertyResponse = await createEntity( 'property', {
-			descriptions: [ { language: languageCode, value: 'an-English-description-' + utils.uniq() } ],
+			descriptions: [ { language: languageCode, value: 'a-German-description-' + utils.uniq() } ],
 			datatype: 'string'
 		} );
 
@@ -34,6 +34,17 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
+	it( '307 Temporary Redirect response is valid for a description with language fallback', async () => {
+		const languageCodeWithFallback = 'bar';
+		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder(
+			propertyId,
+			languageCodeWithFallback
+		).makeRequest();
+
+		expect( response ).to.have.status( 307 );
 		expect( response ).to.satisfyApiSpec;
 	} );
 

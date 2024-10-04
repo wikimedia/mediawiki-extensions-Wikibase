@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
+use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever;
 
@@ -83,6 +84,61 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 		$this->assertNull(
 			( $this->newTermsRetriever( $this->createStub( FallbackLabelDescriptionLookup::class ) ) )
 				->getLabel( $entityId, 'ko' )
+		);
+	}
+
+	public function testDescriptionLookupThrowsLookupException_returnsNull(): void {
+		$propertyId = new NumericPropertyId( 'P31' );
+		$languageCode = 'en';
+
+		$lookup = $this->createStub( FallbackLabelDescriptionLookup::class );
+		$lookup->method( 'getDescription' )
+			->willThrowException( new LabelDescriptionLookupException( $propertyId, [] ) );
+
+		$this->assertNull( $this->newTermsRetriever( $lookup )->getDescription( $propertyId, $languageCode ) );
+	}
+
+	public function testGetDescription(): void {
+		$propertyId = new NumericPropertyId( 'P31' );
+		$languageCode = 'en';
+		$descriptionText = 'some description';
+
+		$descriptionFallback = new TermFallback( $languageCode, $descriptionText, $languageCode, null );
+		$lookup = $this->createStub( FallbackLabelDescriptionLookup::class );
+		$lookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->with( $propertyId )
+			->willReturn( $descriptionFallback );
+
+		$this->assertEquals(
+			new Description( $languageCode, $descriptionText ),
+			( $this->newTermsRetriever( $lookup ) )->getDescription( $propertyId, $languageCode )
+		);
+	}
+
+	public function testGetDescriptionWithFallbackLanguage(): void {
+		$propertyId = new NumericPropertyId( 'P31' );
+		$languageCode = 'en';
+		$fallbackLanguageCode = 'mul';
+		$descriptionText = 'some description';
+
+		$descriptionFallback = new TermFallback( $languageCode, $descriptionText, $fallbackLanguageCode, null );
+		$lookup = $this->createStub( FallbackLabelDescriptionLookup::class );
+		$lookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->with( $propertyId )
+			->willReturn( $descriptionFallback );
+
+		$this->assertEquals(
+			new Description( $fallbackLanguageCode, $descriptionText ),
+			( $this->newTermsRetriever( $lookup ) )->getDescription( $propertyId, $languageCode )
+		);
+	}
+
+	public function testGivenNoDescriptionInRequestedLanguage_getDescriptionReturnsNull(): void {
+		$this->assertNull(
+			( $this->newTermsRetriever( $this->createStub( FallbackLabelDescriptionLookup::class ) ) )
+				->getDescription( new NumericPropertyId( 'P31' ), 'ko' )
 		);
 	}
 

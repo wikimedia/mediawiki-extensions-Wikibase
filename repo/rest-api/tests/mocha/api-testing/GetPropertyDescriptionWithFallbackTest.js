@@ -9,33 +9,46 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
-	const propertyEnDescription = `string-property-description-${utils.uniq()}`;
+	const fallbackLanguageWithDescription = 'de';
+	const propertyDeDescription = `string-property-description-${utils.uniq()}`;
 
 	before( async () => {
 		const testProperty = await createEntity( 'property', {
 			labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
-			descriptions: {
-				en: { language: 'en', value: propertyEnDescription }
-			},
+			descriptions: [ { language: fallbackLanguageWithDescription, value: propertyDeDescription } ],
 			datatype: 'string'
 		} );
 
 		propertyId = testProperty.entity.id;
 	} );
 
-	it( 'can get a language specific description of a property', async () => {
+	it( '200 - can get a language specific description of a property', async () => {
 		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
-		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( propertyId, 'en' )
+		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( propertyId, 'de' )
 			.assertValidRequest().makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.strictEqual( response.body, propertyEnDescription );
+		assert.strictEqual( response.body, propertyDeDescription );
 		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
+	it( '307 - language fallback redirect', async () => {
+		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( propertyId, 'bar' )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith(
+					`rest.php/wikibase/v0/entities/properties/${propertyId}/descriptions/${fallbackLanguageWithDescription}`
+				)
+		);
+	} );
+
 	it( '400 - invalid property ID', async () => {
-		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( 'X123', 'en' )
+		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( 'X123', 'de' )
 			.assertInvalidRequest()
 			.makeRequest();
 
@@ -60,9 +73,9 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 		);
 	} );
 
-	it( 'responds 404 in case the property does not exist', async () => {
+	it( '404 - in case the property does not exist', async () => {
 		const nonExistentProperty = 'P99999999';
-		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( nonExistentProperty, 'en' )
+		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( nonExistentProperty, 'de' )
 			.assertValidRequest()
 			.makeRequest();
 
@@ -70,7 +83,7 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 		assert.strictEqual( response.body.message, 'The requested resource does not exist' );
 	} );
 
-	it( 'responds 404 in case the property has no description in the requested language', async () => {
+	it( '404 - in case the property has no description in the requested language', async () => {
 		const languageCode = 'ko';
 		const response = await newGetPropertyDescriptionWithFallbackRequestBuilder( propertyId, languageCode )
 			.assertValidRequest()
