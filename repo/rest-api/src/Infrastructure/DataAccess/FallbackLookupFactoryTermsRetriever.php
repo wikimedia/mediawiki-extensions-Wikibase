@@ -4,11 +4,11 @@ namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use MediaWiki\Languages\LanguageFactory;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionWithFallbackRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\ItemLabelWithFallbackRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionWithFallbackRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
@@ -19,6 +19,7 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
 class FallbackLookupFactoryTermsRetriever implements
 	ItemLabelWithFallbackRetriever,
 	PropertyLabelWithFallbackRetriever,
+	ItemDescriptionWithFallbackRetriever,
 	PropertyDescriptionWithFallbackRetriever
 {
 
@@ -48,11 +49,11 @@ class FallbackLookupFactoryTermsRetriever implements
 			null;
 	}
 
-	public function getDescription( PropertyId $propertyId, string $languageCode ): ?Description {
+	public function getDescription( EntityId $entityId, string $languageCode ): ?Description {
 		try {
 			$descriptionFallback = $this->lookupFactory
 				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
-				->getDescription( $propertyId );
+				->getDescription( $entityId );
 		} catch ( LabelDescriptionLookupException $e ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;

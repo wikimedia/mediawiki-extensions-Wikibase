@@ -11,7 +11,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionWithFallbackRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
@@ -24,14 +24,14 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 class GetItemDescriptionWithFallbackTest extends TestCase {
 
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private ItemDescriptionRetriever $descriptionRetriever;
+	private ItemDescriptionWithFallbackRetriever $descriptionRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestItemRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ 42, '20201111070707' ] );
-		$this->descriptionRetriever = $this->createStub( ItemDescriptionRetriever::class );
+		$this->descriptionRetriever = $this->createStub( ItemDescriptionWithFallbackRetriever::class );
 	}
 
 	public function testSuccess(): void {
@@ -48,7 +48,7 @@ class GetItemDescriptionWithFallbackTest extends TestCase {
 			->with( $itemId )
 			->willReturn( [ $revisionId, $lastModified ] );
 
-		$this->descriptionRetriever = $this->createMock( ItemDescriptionRetriever::class );
+		$this->descriptionRetriever = $this->createMock( ItemDescriptionWithFallbackRetriever::class );
 		$this->descriptionRetriever->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( $itemId, $languageCode )
@@ -77,7 +77,7 @@ class GetItemDescriptionWithFallbackTest extends TestCase {
 	public function testGivenDescriptionNotDefined_throws(): void {
 		$itemId = new ItemId( 'Q2' );
 
-		$this->descriptionRetriever = $this->createStub( ItemDescriptionRetriever::class );
+		$this->descriptionRetriever = $this->createStub( ItemDescriptionWithFallbackRetriever::class );
 
 		try {
 			$this->newUseCase()->execute(

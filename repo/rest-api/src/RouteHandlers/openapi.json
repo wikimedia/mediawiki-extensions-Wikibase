@@ -1248,6 +1248,9 @@
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
+          "307": {
+            "$ref": "#/components/responses/MovedTemporarily"
+          },
           "308": {
             "$ref": "#/components/responses/MovedPermanently"
           },

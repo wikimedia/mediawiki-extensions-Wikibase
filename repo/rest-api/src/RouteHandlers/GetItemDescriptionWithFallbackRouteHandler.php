@@ -68,9 +68,11 @@ class GetItemDescriptionWithFallbackRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
 		try {
-			return $this->newSuccessHttpResponse(
-				$this->useCase->execute( new GetItemDescriptionWithFallbackRequest( $itemId, $languageCode ) )
-			);
+			$response = $this->useCase->execute( new GetItemDescriptionWithFallbackRequest( $itemId, $languageCode ) );
+
+			return $response->getDescription()->getLanguageCode() === $languageCode
+				? $this->newSuccessHttpResponse( $response )
+				: $this->newLanguageFallbackResponse( $itemId, $response->getDescription()->getLanguageCode() );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		} catch ( ItemRedirect $redirect ) {
@@ -101,6 +103,23 @@ class GetItemDescriptionWithFallbackRouteHandler extends SimpleHandler {
 		$httpResponse->setBody(
 			new StringStream( json_encode( $useCaseResponse->getDescription()->getText() ) )
 		);
+
+		return $httpResponse;
+	}
+
+	private function newLanguageFallbackResponse( string $itemId, string $fallbackLanguageCode ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouter()->getRouteUrl(
+				GetItemDescriptionRouteHandler::ROUTE,
+				[
+					self::ITEM_ID_PATH_PARAM => $itemId,
+					self::LANGUAGE_CODE_PATH_PARAM => $fallbackLanguageCode,
+				]
+			)
+		);
+		$httpResponse->setStatus( 307 );
 
 		return $httpResponse;
 	}

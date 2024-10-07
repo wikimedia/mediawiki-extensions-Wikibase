@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
 const {
@@ -11,26 +11,40 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let itemId;
+	const languageWithDescription = 'de';
+	const itemDeDescription = `item-description-${utils.uniq()}`;
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
-			descriptions: { en: 'English science fiction writer and humorist' }
+			descriptions: { [ languageWithDescription ]: itemDeDescription }
 		} ).assertValidRequest().makeRequest();
-
+		expect( createItemResponse ).to.have.status( 201 );
 		itemId = createItemResponse.body.id;
 	} );
 
 	it( '200 - can get a language specific description of an item', async () => {
 		const testItemCreationMetadata = await getLatestEditMetadata( itemId );
 
-		const response = await newGetItemDescriptionWithFallbackRequestBuilder( itemId, 'en' )
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder( itemId, languageWithDescription )
 			.assertValidRequest()
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.deepEqual( response.body, 'English science fiction writer and humorist' );
+		assert.deepEqual( response.body, itemDeDescription );
 		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
+	} );
+
+	it( '307 - language fallback redirect', async () => {
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder( itemId, 'bar' )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		assert.isTrue(
+			new URL( response.headers.location ).pathname
+				.endsWith( `entities/items/${itemId}/descriptions/${languageWithDescription}` )
+		);
 	} );
 
 	it( '308 - item redirected', async () => {
@@ -49,7 +63,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 
 	it( '400 - bad request, invalid item ID', async () => {
 		const invalidItemId = 'X123';
-		const response = await newGetItemDescriptionWithFallbackRequestBuilder( invalidItemId, 'en' )
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder( invalidItemId, languageWithDescription )
 			.assertInvalidRequest()
 			.makeRequest();
 
@@ -66,7 +80,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 
 	it( '404 - item does not exist', async () => {
 		const nonExistentItem = 'Q99999999';
-		const response = await newGetItemDescriptionWithFallbackRequestBuilder( nonExistentItem, 'en' )
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder( nonExistentItem, languageWithDescription )
 			.assertValidRequest()
 			.makeRequest();
 

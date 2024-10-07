@@ -9,11 +9,11 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 
 	let itemId;
 	let lastRevisionId;
-	const languageCode = 'en';
+	const languageCode = 'de';
 
 	before( async () => {
 		const createItemResponse = await createEntity( 'item', {
-			descriptions: [ { language: languageCode, value: 'an-English-description-' + utils.uniq() } ]
+			descriptions: [ { language: languageCode, value: 'a-German-description-' + utils.uniq() } ]
 		} );
 
 		itemId = createItemResponse.entity.id;
@@ -34,6 +34,17 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 		expect( response ).to.satisfyApiSpec;
 	} );
 
+	it( '307 Temporary Redirect response is valid for a description with language fallback', async () => {
+		const languageCodeWithFallback = 'bar';
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder(
+			itemId,
+			languageCodeWithFallback
+		).makeRequest();
+
+		expect( response ).to.have.status( 307 );
+		expect( response ).to.satisfyApiSpec;
+	} );
+
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
 		const redirectSourceId = await createRedirectForItem( itemId );
 		const response = await newGetItemDescriptionWithFallbackRequestBuilder( redirectSourceId, languageCode ).makeRequest();
@@ -48,7 +59,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 	} );
 
 	it( '404 Not Found response is valid if there is no description in the requested language', async () => {
-		const response = await newGetItemDescriptionWithFallbackRequestBuilder( itemId, 'de' ).makeRequest();
+		const response = await newGetItemDescriptionWithFallbackRequestBuilder( itemId, 'ko' ).makeRequest();
 		expect( response ).to.have.status( 404 );
 		expect( response ).to.satisfyApiSpec;
 	} );
