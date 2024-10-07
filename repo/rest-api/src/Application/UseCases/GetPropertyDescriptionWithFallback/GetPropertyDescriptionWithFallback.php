@@ -4,7 +4,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithF
 
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,12 +13,12 @@ class GetPropertyDescriptionWithFallback {
 
 	private GetPropertyDescriptionWithFallbackValidator $validator;
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
-	private PropertyDescriptionRetriever $descriptionRetriever;
+	private PropertyDescriptionWithFallbackRetriever $descriptionRetriever;
 
 	public function __construct(
 		GetPropertyDescriptionWithFallbackValidator $validator,
 		GetLatestPropertyRevisionMetadata $getRevisionMetadata,
-		PropertyDescriptionRetriever $descriptionRetriever
+		PropertyDescriptionWithFallbackRetriever $descriptionRetriever
 	) {
 		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;

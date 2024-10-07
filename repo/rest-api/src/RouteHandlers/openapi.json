@@ -1479,6 +1479,9 @@
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
+          "307": {
+            "$ref": "#/components/responses/MovedTemporarily"
+          },
           "400": {
             "$ref": "#/components/responses/InvalidTermByLanguageInput"
           },

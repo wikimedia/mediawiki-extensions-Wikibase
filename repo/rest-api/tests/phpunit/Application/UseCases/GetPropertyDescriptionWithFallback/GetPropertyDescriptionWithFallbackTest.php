@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallbac
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\GetPropertyDescriptionWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionWithFallbackRetriever;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
@@ -23,13 +23,13 @@ use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidat
 class GetPropertyDescriptionWithFallbackTest extends TestCase {
 
 	private GetLatestPropertyRevisionMetadata $getRevisionMetadata;
-	private PropertyDescriptionRetriever $descriptionRetriever;
+	private PropertyDescriptionWithFallbackRetriever $descriptionRetriever;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
-		$this->descriptionRetriever = $this->createStub( PropertyDescriptionRetriever::class );
+		$this->descriptionRetriever = $this->createStub( PropertyDescriptionWithFallbackRetriever::class );
 	}
 
 	public function testSuccess(): void {
@@ -43,7 +43,7 @@ class GetPropertyDescriptionWithFallbackTest extends TestCase {
 		$this->getRevisionMetadata = $this->createStub( GetLatestPropertyRevisionMetadata::class );
 		$this->getRevisionMetadata->method( 'execute' )->willReturn( [ $revisionId, $lastModified ] );
 
-		$this->descriptionRetriever = $this->createMock( PropertyDescriptionRetriever::class );
+		$this->descriptionRetriever = $this->createMock( PropertyDescriptionWithFallbackRetriever::class );
 		$this->descriptionRetriever->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( $propertyId, $languageCode )

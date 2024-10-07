@@ -67,9 +67,11 @@ class GetPropertyDescriptionWithFallbackRouteHandler extends SimpleHandler {
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
 		try {
-			return $this->newSuccessHttpResponse(
-				$this->useCase->execute( new GetPropertyDescriptionWithFallbackRequest( $propertyId, $languageCode ) )
-			);
+			$response = $this->useCase->execute( new GetPropertyDescriptionWithFallbackRequest( $propertyId, $languageCode ) );
+
+			return $response->getDescription()->getLanguageCode() === $languageCode
+				? $this->newSuccessHttpResponse( $response )
+				: $this->newLanguageFallbackResponse( $propertyId, $response->getDescription()->getLanguageCode() );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
 		}
@@ -109,6 +111,23 @@ class GetPropertyDescriptionWithFallbackRouteHandler extends SimpleHandler {
 	 */
 	public function checkPreconditions(): ?ResponseInterface {
 		return null;
+	}
+
+	private function newLanguageFallbackResponse( string $propertyId, string $fallbackLanguageCode ): Response {
+		$httpResponse = $this->getResponseFactory()->create();
+		$httpResponse->setHeader(
+			'Location',
+			$this->getRouter()->getRouteUrl(
+				GetPropertyDescriptionRouteHandler::ROUTE,
+				[
+					self::PROPERTY_ID_PATH_PARAM => $propertyId,
+					self::LANGUAGE_CODE_PATH_PARAM => $fallbackLanguageCode,
+				]
+			)
+		);
+		$httpResponse->setStatus( 307 );
+
+		return $httpResponse;
 	}
 
 }
