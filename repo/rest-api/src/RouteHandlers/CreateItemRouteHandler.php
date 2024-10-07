@@ -23,6 +23,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -73,6 +74,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+				new TempUserCreationResponseHeaderMiddleware(),
 			] )
 		);
 	}
@@ -154,6 +156,7 @@ class CreateItemRouteHandler extends SimpleHandler {
 				[ GetItemRouteHandler::ITEM_ID_PATH_PARAM => $item->getId() ]
 			)
 		);
+
 		$response->setBody( new StringStream( json_encode(
 			$this->itemSerializer->serialize( new ItemParts(
 				$item->getId(),
