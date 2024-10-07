@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -64,7 +65,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
-				new TempUserCreationResponseHeaderMiddleware(),
+				new TempUserCreationResponseHeaderMiddleware( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) ),
 			] ),
 			$responseFactory
 		);
@@ -103,6 +104,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 		$httpResponse->setStatus( 200 );
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
 		$httpResponse->setHeader( 'Content-Language', 'en' );
+
 		$httpResponse->setBody( new StringStream( '"Description deleted"' ) );
 
 		return $httpResponse;

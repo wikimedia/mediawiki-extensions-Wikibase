@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -69,7 +70,7 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 					self::STATEMENT_ID_PATH_PARAM,
 					self::ITEM_ID_PATH_PARAM
 				),
-				new TempUserCreationResponseHeaderMiddleware(),
+				new TempUserCreationResponseHeaderMiddleware( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) ),
 			] )
 		);
 	}

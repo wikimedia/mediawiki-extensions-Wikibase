@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
@@ -62,7 +63,7 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
-				new TempUserCreationResponseHeaderMiddleware(),
+				new TempUserCreationResponseHeaderMiddleware( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) ),
 			] )
 		);
 	}

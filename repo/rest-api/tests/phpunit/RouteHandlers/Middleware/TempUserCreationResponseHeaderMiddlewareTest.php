@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
 
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -19,7 +20,7 @@ use Wikibase\Repo\RestApi\RouteHandlers\Middleware\TempUserCreationResponseHeade
  */
 class TempUserCreationResponseHeaderMiddlewareTest extends TestCase {
 
-	public function testAddsHeaderWhenNewTempUserIsCreatedAndDifferentFromAuthorityUser(): void {
+	public function testAddsHeadersWhenNewTempUserIsCreatedAndDifferentFromAuthorityUser(): void {
 		$user = $this->createMock( User::class );
 		$user->method( 'isTemp' )->willReturn( true );
 		$user->method( 'getName' )->willReturn( 'tempUser123' );
@@ -34,14 +35,58 @@ class TempUserCreationResponseHeaderMiddlewareTest extends TestCase {
 		$routeHandler->method( 'getSession' )->willReturn( $session );
 		$routeHandler->method( 'getAuthority' )->willReturn( $authority );
 
+		$hookRunner = $this->createMock( HookRunner::class );
+		$hookRunner->method( 'onTempUserCreatedRedirect' )->willReturnCallback(
+			function( $session, $user, $returnTo, $returnToQuery, $returnToAnchor, &$redirectUrl ): void {
+				$redirectUrl = 'https://en.wikipedia.org/wiki/Test';
+			}
+		);
+
 		$expectedResponse = new Response();
-		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware() )->run(
+		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware( $hookRunner ) )->run(
 			$routeHandler,
 			fn() => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $middlewareResponse );
 		$this->assertSame( 'tempUser123', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Created' ) );
+		$this->assertSame(
+			'https://en.wikipedia.org/wiki/Test',
+			$middlewareResponse->getHeaderLine( 'X-Temporary-User-Redirect' )
+		);
+	}
+
+	public function testAddsHeaderWhenNewTempUserIsCreatedWithoutRedirectUrl(): void {
+		$user = $this->createMock( User::class );
+		$user->method( 'isTemp' )->willReturn( true );
+		$user->method( 'getName' )->willReturn( 'tempUserWithoutRedirect' );
+
+		$authority = $this->createMock( Authority::class );
+		$authority->method( 'getUser' )->willReturn( new User() );
+
+		$session = $this->createMock( Session::class );
+		$session->method( 'getUser' )->willReturn( $user );
+
+		$routeHandler = $this->createMock( SimpleHandler::class );
+		$routeHandler->method( 'getSession' )->willReturn( $session );
+		$routeHandler->method( 'getAuthority' )->willReturn( $authority );
+
+		$hookRunner = $this->createMock( HookRunner::class );
+		$hookRunner->method( 'onTempUserCreatedRedirect' )->willReturnCallback(
+			function( $session, $user, $returnTo, $returnToQuery, $returnToAnchor, &$redirectUrl ): void {
+				$redirectUrl = '';
+			}
+		);
+
+		$expectedResponse = new Response();
+		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware( $hookRunner ) )->run(
+			$routeHandler,
+			fn() => $expectedResponse
+		);
+
+		$this->assertSame( $expectedResponse, $middlewareResponse );
+		$this->assertSame( 'tempUserWithoutRedirect', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Created' ) );
+		$this->assertSame( '', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Redirect' ) );
 	}
 
 	public function testDoesNotAddHeaderWhenUserEqualsAuthorityUser(): void {
@@ -58,14 +103,17 @@ class TempUserCreationResponseHeaderMiddlewareTest extends TestCase {
 		$routeHandler->method( 'getSession' )->willReturn( $session );
 		$routeHandler->method( 'getAuthority' )->willReturn( $authority );
 
+		$hookRunner = $this->createMock( HookRunner::class );
+
 		$expectedResponse = new Response();
-		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware() )->run(
+		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware( $hookRunner ) )->run(
 			$routeHandler,
 			fn() => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $middlewareResponse );
 		$this->assertSame( '', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Created' ) );
+		$this->assertSame( '', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Redirect' ) );
 	}
 
 	public function testDoesNotAddHeaderWhenUserIsNotTemporary(): void {
@@ -82,13 +130,16 @@ class TempUserCreationResponseHeaderMiddlewareTest extends TestCase {
 		$routeHandler->method( 'getSession' )->willReturn( $session );
 		$routeHandler->method( 'getAuthority' )->willReturn( $authority );
 
+		$hookRunner = $this->createMock( HookRunner::class );
+
 		$expectedResponse = new Response();
-		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware() )->run(
+		$middlewareResponse = ( new TempUserCreationResponseHeaderMiddleware( $hookRunner ) )->run(
 			$routeHandler,
 			fn() => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $middlewareResponse );
 		$this->assertSame( '', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Created' ) );
+		$this->assertSame( '', $middlewareResponse->getHeaderLine( 'X-Temporary-User-Redirect' ) );
 	}
 }
