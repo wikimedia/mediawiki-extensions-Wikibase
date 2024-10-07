@@ -4,13 +4,14 @@
 			"ChoiChong",
 			"Chulsu463",
 			"Foavi33",
-			"Amire80"
+			"Amire80",
+			"MiiCii"
 		]
 	},
-	"wikibase-edit": "banjibume arara",
-	"wikibase-add": "nonggimbi",
-	"wikibase-label-empty": "Toktobuhe lature afahari akū",
-	"wikibase-description-empty": "Suhe gisun akv",
-	"wikibase-sitelinks-special": "Gvwa jan",
+	"wikibase-edit": "Banjibume arara",
+	"wikibase-add": "Nonggire",
+	"wikibase-label-empty": "Toktobuha temgetu afahari akū",
+	"wikibase-description-empty": "Toktobure jurgan akū nirure fisembun",
+	"wikibase-sitelinks-special": "Gūwa asui tatan",
 	"wikibase-statementview-rank-normal": "An i tangkan"
 }
