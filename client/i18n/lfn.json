@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Cgboeree",
+			"Elefentiste",
 			"Katxis",
 			"Mafcadio",
 			"Robin van der Vliet"
@@ -12,7 +13,9 @@
 	"wikibase-dataitem": "Dato de {{WBREPONAME}}",
 	"wikibase-editlinks": "Edita lias",
 	"wikibase-editlinkstitle": "Edita lias interlingual",
+	"wikibase-linkitem-addlinks": "Ajunta lias",
 	"wikibase-linkitem-input-site": "Lingua:",
+	"wikibase-linkitem-input-page": "Paje:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Asconde",
 	"wikibase-rc-hide-wikidata-show": "Mostra",
