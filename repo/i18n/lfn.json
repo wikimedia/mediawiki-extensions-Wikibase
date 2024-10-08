@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Cgboeree",
+			"Elefentiste",
 			"Katxis",
 			"Mafcadio",
 			"Robin van der Vliet"
@@ -16,7 +17,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Descrive",
 	"wikibase-entitytermsforlanguagelistview-label": "Eticeta",
 	"wikibase-entitytermsforlanguagelistview-language": "Lingua",
-	"wikibase-label-empty": "No eticeta definada",
+	"wikibase-label-empty": "No eticeta definida",
 	"wikibase-description-empty": "No descrive es definada",
 	"wikibase-content-language-edit-label": "Lingua:",
 	"wikibase-diffview-reference": "refere",
