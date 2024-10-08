@@ -314,7 +314,8 @@
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
-		"connected-redirect-category"
+		"connected-redirect-category",
+		"exceeded-entity-limit-category"
 	],
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/",

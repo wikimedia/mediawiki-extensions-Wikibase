@@ -110,6 +110,8 @@
 	"wikibase-sitelinks-link-columnheading": "Linked page",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connection|Connections}} with {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notify me when someone connects a page {{GENDER:|I created}} to a {{WBREPONAME}} item.",
+	"exceeded-entity-limit-category": "Pages with too many {{WBREPONAME}} entities accessed",
+	"exceeded-entity-limit-category-desc": "This category lists pages with too many {{WBREPONAME}} entities accessed.",
 	"notification-header-page-connection": "The page <strong>$3</strong> was {{GENDER:$2|connected}} to {{PLURAL:$4|-1=a {{WBREPONAME}} item|the {{WBREPONAME}} item $4}}, where data relevant to the topic can be collected.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> and {{PLURAL:$4|one other page|$4 other pages|100=99+ other pages}} were {{GENDER:$2|connected}} to {{WBREPONAME}} items, where data relevant to the topics can be collected.",
 	"notification-link-text-view-item": "{{GENDER:$1|View}} item",

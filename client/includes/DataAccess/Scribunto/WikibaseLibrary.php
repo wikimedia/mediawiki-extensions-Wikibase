@@ -474,6 +474,9 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 		try {
 			$statements = $this->getEntityAccessor()->getEntityStatements( $prefixedEntityId, $propertyId, $rank );
 		} catch ( EntityAccessLimitException $ex ) {
+			$parser = $this->getEngine()->getParser();
+			$parser->addTrackingCategory( 'exceeded-entity-limit-category' );
+
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( EntityIdParsingException $ex ) {
 			throw new ScribuntoException(
