@@ -5,7 +5,7 @@ namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallb
 use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,12 +14,12 @@ class GetItemDescriptionWithFallback {
 
 	private GetItemDescriptionWithFallbackValidator $validator;
 	private GetLatestItemRevisionMetadata $getRevisionMetadata;
-	private ItemDescriptionRetriever $itemDescriptionRetriever;
+	private ItemDescriptionWithFallbackRetriever $itemDescriptionRetriever;
 
 	public function __construct(
 		GetItemDescriptionWithFallbackValidator $validator,
 		GetLatestItemRevisionMetadata $getRevisionMetadata,
-		ItemDescriptionRetriever $itemDescriptionRetriever
+		ItemDescriptionWithFallbackRetriever $itemDescriptionRetriever
 	) {
 		$this->validator = $validator;
 		$this->getRevisionMetadata = $getRevisionMetadata;

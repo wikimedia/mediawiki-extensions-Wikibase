@@ -568,7 +568,10 @@ return [
 		return new GetItemDescriptionWithFallback(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+			new FallbackLookupFactoryTermsRetriever(
+				$services->getLanguageFactory(),
+				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
+			)
 		);
 	},
 
