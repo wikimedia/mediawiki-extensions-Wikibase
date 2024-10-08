@@ -70,7 +70,7 @@ describe( 'item', () => {
 		await expect( $( `#${propertyId}` ) ).toExist();
 	} );
 
-	// Skipped on 2023-08-16 in 949508 because of T343886
+	// Skipped on 2022-09-05 in 372fb1 because it was flaky - T376286 tracks re-enabling this test
 	it.skip( 'old revisions do not have an edit link', async () => {
 		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T95406-' ) );
 		const item = await WikibaseApi.getEntity( itemId );
