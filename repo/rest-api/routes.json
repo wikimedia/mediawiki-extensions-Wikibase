@@ -120,9 +120,19 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/items/{item_id}/labels_with_language_fallback/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelWithFallbackRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/labels_with_language_fallback/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelWithFallbackRouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
@@ -175,9 +185,19 @@
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
 	},
 	{
+		"path": "/wikibase/v0/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionWithFallbackRouteHandler::factory"
+	},
+	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionWithFallbackRouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",

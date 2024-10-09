@@ -1,7 +1,12 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
-## Version TBD
+## Version 0.5
 
+* Added label/description endpoints with language fallback ([T371605](https://phabricator.wikimedia.org/T371605))
+  * `GET /entities/items/{item_id}/labels_with_language_fallback/{language_code}`
+  * `GET /entities/items/{item_id}/descriptions_with_language_fallback/{language_code}`
+  * `GET /entities/properties/{property_id}/labels_with_language_fallback/{language_code}`
+  * `GET /entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}`
 * Added `request-limit-reached` error for when a client makes too many edit requests ([T366594](https://phabricator.wikimedia.org/T366594))
 * Added `permission-denied` error for unauthorized or prevented edits ([T366581](https://phabricator.wikimedia.org/T366581), [T330914](https://phabricator.wikimedia.org/T330914))
 * Added `resource-too-large` error for edits that make a resource larger than the configured limit ([T330739](https://phabricator.wikimedia.org/T330739))

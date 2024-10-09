@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "0.4",
+    "version": "0.5",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Product Platform Team",
@@ -1216,8 +1216,7 @@
         "tags": [
           "descriptions"
         ],
-        "summary": "[WIP] Retrieve an Item's description in a specific language, with language fallback",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Retrieve an Item's description in a specific language, with language fallback",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -1450,8 +1449,7 @@
         "tags": [
           "descriptions"
         ],
-        "summary": "[WIP] Retrieve a Property's description in a specific language, with language fallback",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Retrieve a Property's description in a specific language, with language fallback",
         "parameters": [
           {
             "$ref": "#/components/parameters/PropertyId"
@@ -2442,8 +2440,7 @@
         "tags": [
           "labels"
         ],
-        "summary": "[WIP] Retrieve an Item's label in a specific language, with language fallback",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Retrieve an Item's label in a specific language, with language fallback",
         "parameters": [
           {
             "$ref": "#/components/parameters/ItemId"
@@ -2676,8 +2673,7 @@
         "tags": [
           "labels"
         ],
-        "summary": "[WIP] Retrieve a Property's label in a specific language, with language fallback",
-        "description": "This endpoint is currently in development and is not recommended for production use",
+        "summary": "Retrieve a Property's label in a specific language, with language fallback",
         "parameters": [
           {
             "$ref": "#/components/parameters/PropertyId"
