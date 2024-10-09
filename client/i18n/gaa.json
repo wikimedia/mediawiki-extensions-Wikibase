@@ -6,7 +6,8 @@
 			"Jwale2",
 			"Mybluberet",
 			"Owula kpakpo",
-			"Zimosa"
+			"Zimosa",
+			"NanaYawBotar"
 		]
 	},
 	"tooltip-t-wikibase": "Gbɛtsɔɔmɔ kɛboteɔ saji atoohe",
@@ -15,6 +16,9 @@
 	"wikibase-editlinks": "Tsakemɔ tsalɔi",
 	"wikibase-editlinkstitle": "Tsakemɔ wiemɔisrɔtoi agbɛtsɔɔmɔ",
 	"wikibase-linkitem-addlinks": "Kɛ tsalɔi afata he",
+	"wikibase-linkitem-title": "Kɛ etsa baafai lɛ",
+	"wikibase-linkitem-linkpage": "Kɛ tsa baafa nɛ",
+	"wikibase-linkitem-selectlink": "Ofainɛ halamɔ saiti kɛ baafa ni osumɔɔ ni okɛ baafa nɛɛ abɔ he.",
 	"wikibase-linkitem-input-site": "Wiemɔ:",
 	"wikibase-linkitem-input-page": "Baafa:",
 	"wikibase-rc-hide-wikidata-hide": "Kɛto",
