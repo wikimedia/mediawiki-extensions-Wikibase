@@ -220,7 +220,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				$summary = $this->modifyEntity( $updatedEntity );
 
 				if ( $summary ) {
-					$token = $this->getRequest()->getRawVal( 'wpEditToken' );
+					$token = $this->getRequest()->getRawVal( 'wpEditToken' ) ?? '';
 					$status = $this->saveEntity( $updatedEntity, $summary, $token );
 
 					$this->handleStatus( $status, $updatedEntity );

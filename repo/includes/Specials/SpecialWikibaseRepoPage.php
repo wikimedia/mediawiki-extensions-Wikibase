@@ -173,7 +173,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 *
 	 * @param EntityDocument $entity
 	 * @param FormatableSummary $summary
-	 * @param string $token
+	 * @param string $token Edit token to check. An empty string is guaranteed to be invalid.
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @return EditEntityStatus
