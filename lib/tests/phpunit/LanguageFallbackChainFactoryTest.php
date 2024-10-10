@@ -309,12 +309,6 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $languageFallbackChain instanceof TermLanguageFallbackChain );
 	}
 
-	public function testNewFromContextAndLanguageCode() {
-		$factory = $this->getLanguageFallbackChainFactory();
-		$languageFallbackChain = $factory->newFromContextAndLanguageCode( RequestContext::getMain(), 'en' );
-		$this->assertTrue( $languageFallbackChain instanceof TermLanguageFallbackChain );
-	}
-
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
