@@ -5,6 +5,7 @@
 			"Claw eg",
 			"Hubaishan",
 			"Mido",
+			"Mohammed Qays",
 			"ديفيد"
 		]
 	},
@@ -14,6 +15,7 @@
 	"valueview-expert-globecoordinateinput-precision": "الدقة:",
 	"valueview-expert-globecoordinateinput-nullprecision": "غير محدد",
 	"valueview-expert-globecoordinateinput-customprecision": "خاص ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "غريغوري",
 	"valueview-expert-timevalue-calendar-julian": "يولياني",
 	"valueview-expert-timeinput-precision": "الدقة:",
