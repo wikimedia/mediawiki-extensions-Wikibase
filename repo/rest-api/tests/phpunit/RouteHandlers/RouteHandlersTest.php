@@ -40,10 +40,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescrip
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptions\GetItemDescriptionsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallback\GetItemDescriptionWithFallback;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescriptionWithFallback\GetItemDescriptionWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabels\GetItemLabelsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallback;
+use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabelWithFallback\GetItemLabelWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement\GetItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemStatements\GetItemStatementsResponse;
@@ -57,10 +61,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropert
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescription\GetPropertyDescriptionResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptions;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptions\GetPropertyDescriptionsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\GetPropertyDescriptionWithFallback;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyDescriptionWithFallback\GetPropertyDescriptionWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabels;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabels\GetPropertyLabelsResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallback;
+use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabelWithFallback\GetPropertyLabelWithFallbackResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatements;
 use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements\GetPropertyStatementsResponse;
@@ -313,6 +321,22 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
 			],
 		] ];
+		yield 'GetItemDescriptionWithFallback' => [ [
+			'useCase' => GetItemDescriptionWithFallback::class,
+			'useCaseResponse' => new GetItemDescriptionWithFallbackResponse(
+				new Description( 'en', 'root vegetable' ),
+				$lastModified,
+				123
+			),
+			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
+		] ];
 		yield 'GetItemDescriptions' => [ [
 			'useCase' => GetItemDescriptions::class,
 			'useCaseResponse' => new GetItemDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
@@ -328,6 +352,22 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		yield 'GetItemLabel' => [ [
 			'useCase' => GetItemLabel::class,
 			'useCaseResponse' => new GetItemLabelResponse(
+				new Label( 'en', 'potato' ),
+				$lastModified,
+				123
+			),
+			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [
+				[
+					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
+					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
+				],
+				[ new ItemRedirect( 'Q123' ), $hasHttpStatus( 308 ) ],
+			],
+		] ];
+		yield 'GetItemLabelWithFallback' => [ [
+			'useCase' => GetItemLabelWithFallback::class,
+			'useCaseResponse' => new GetItemLabelWithFallbackResponse(
 				new Label( 'en', 'potato' ),
 				$lastModified,
 				123
@@ -454,6 +494,19 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 			] ],
 		] ];
+		yield 'GetPropertyDescriptionWithFallback' => [ [
+			'useCase' => GetPropertyDescriptionWithFallback::class,
+			'useCaseResponse' => new GetPropertyDescriptionWithFallbackResponse(
+				new Description( 'en', 'property description' ),
+				$lastModified,
+				123
+			),
+			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [ [
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
+			] ],
+		] ];
 		yield 'GetPropertyDescriptions' => [ [
 			'useCase' => GetPropertyDescriptions::class,
 			'useCaseResponse' => new GetPropertyDescriptionsResponse( new Descriptions(), $lastModified, 123 ),
@@ -466,6 +519,15 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		yield 'GetPropertyLabel' => [ [
 			'useCase' => GetPropertyLabel::class,
 			'useCaseResponse' => new GetPropertyLabelResponse( new Label( 'en', 'instance of' ), $lastModified, 123 ),
+			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
+			'expectedExceptions' => [ [
+				UseCaseError::newResourceNotFound( 'property' ),
+				$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
+			] ],
+		] ];
+		yield 'GetPropertyLabelWithFallback' => [ [
+			'useCase' => GetPropertyLabelWithFallback::class,
+			'useCaseResponse' => new GetPropertyLabelWithFallbackResponse( new Label( 'en', 'instance of' ), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'language_code' => 'en' ] ],
 			'expectedExceptions' => [ [
 				UseCaseError::newResourceNotFound( 'property' ),
