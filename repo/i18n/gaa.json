@@ -3,11 +3,13 @@
 		"authors": [
 			"Cnii",
 			"Flixtey",
-			"Mybluberet"
+			"Mybluberet",
+			"NanaYawBotar"
 		]
 	},
 	"wikibase-edit": "tsakemɔ",
 	"wikibase-add": "Kɛfata he",
+	"wikibase-label-empty": "Okadi ko bɛ",
 	"wikibase-description-empty": "Ahako su",
 	"wikibase-sitelinks-special": "Hei krokomɛi",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Kaa ekoŋŋ"
