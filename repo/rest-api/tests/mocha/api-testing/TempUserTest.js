@@ -39,6 +39,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 			const { user } = await entityHelper.getLatestEditMetadata(
 				newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
 			);
+
 			assert.match( user, /^\d+\.\d+\.\d+\.\d+$/ );
 		} );
 
@@ -51,6 +52,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 					newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
 				);
 				assert.include( user, tempUserPrefix );
+				assert.header( response, 'X-Temporary-User-Created', user );
 			} );
 
 			// Note: If this test fails, it might be due to the throttler relying on caching.
@@ -101,6 +103,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 				assert.include( user, tempUserPrefix );
 				assert.strictEqual( user, existingTempUserName );
 				assert.header( response, 'X-Authenticated-User', undefined );
+				assert.header( response, 'X-Temporary-User-Created', undefined );
 			} );
 		} );
 	} );
