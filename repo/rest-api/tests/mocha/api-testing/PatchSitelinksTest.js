@@ -308,8 +308,9 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'url-not-modifiable', { site_id: siteId } );
-			assert.equal( response.body.message, 'URL of Sitelink cannot be modified' );
+			const path = `/${siteId}/url`;
+			assertValidError( response, 422, 'patch-result-modified-read-only-value', { path } );
+			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
 
 	} );

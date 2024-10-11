@@ -202,12 +202,6 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$title = 'test_title';
 
-		$expectedError = new UseCaseError(
-			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
-			'URL of Sitelink cannot be modified',
-			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-		);
-
 		try {
 			$this->newValidator( new SameTitleSitelinkTargetResolver() )->validateAndDeserialize(
 				self::SITELINK_ITEM_ID,
@@ -217,7 +211,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertEquals( $expectedError, $error );
+			$this->assertEquals( UseCaseError::newPatchResultModifiedReadOnlyValue( "/$validSiteId/url" ), $error );
 		}
 	}
 

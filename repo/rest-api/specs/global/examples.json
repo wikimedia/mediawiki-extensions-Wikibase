@@ -157,15 +157,6 @@
 			}
 		}
 	},
-	"SitelinkUrlNotModifiableExample": {
-		"value": {
-			"code": "url-not-modifiable",
-			"message": "URL of Sitelink cannot be modified",
-			"context": {
-				"site_id": "{site_id}"
-			}
-		}
-	},
 	"PatchResultInvalidKeyExample": {
 		"value": {
 			"code": "patch-result-invalid-key",

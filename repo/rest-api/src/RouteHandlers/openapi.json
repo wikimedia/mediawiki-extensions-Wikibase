@@ -390,8 +390,8 @@
                   "patch-result-invalid-key": {
                     "$ref": "#/components/examples/PatchResultInvalidKeyExample"
                   },
-                  "url-not-modifiable": {
-                    "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
+                  "patch-result-modified-read-only-value": {
+                    "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
                   },
                   "data-policy-violation": {
                     "$ref": "#/components/examples/DataPolicyViolationExample"
@@ -5452,9 +5452,6 @@
               "patch-result-modified-read-only-value": {
                 "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue"
               },
-              "url-not-modifiable": {
-                "$ref": "#/components/examples/SitelinkUrlNotModifiableExample"
-              },
               "data-policy-violation": {
                 "$ref": "#/components/examples/DataPolicyViolationExample"
               }
@@ -6906,15 +6903,6 @@
           "context": {
             "path": "{json_pointer_to_missing_resource_in_patch_result}",
             "value": "{value}"
-          }
-        }
-      },
-      "SitelinkUrlNotModifiableExample": {
-        "value": {
-          "code": "url-not-modifiable",
-          "message": "URL of Sitelink cannot be modified",
-          "context": {
-            "site_id": "{site_id}"
           }
         }
       },
