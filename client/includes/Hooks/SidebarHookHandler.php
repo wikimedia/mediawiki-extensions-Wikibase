@@ -131,21 +131,23 @@ class SidebarHookHandler implements
 		// Add 'Wikidata item' to the toolbox
 		$wikidataItemLink = ClientHooks::buildWikidataItemLink( $skin );
 
-		if ( $wikidataItemLink !== null ) {
-			$wikidataInOtherProjects = $this->clientSettings->getSetting( 'moveConnectedItemLinkToOtherProjects' );
-
-			if ( $wikidataInOtherProjects ) {
-				$wikidataItemLink['class'] = 'wb-otherproject-link wb-otherproject-wikibase-dataitem';
-				// This automatically appends the wikidata item link to the end of the Other Projects
-				$sidebar['wikibase-otherprojects'][] = $wikidataItemLink;
-			} else {
-				$sidebar['TOOLBOX']['wikibase'] = $wikidataItemLink;
-			}
-		}
-
 		if ( $wikidataItemLink !== null || $otherProjectsSidebar !== null ) {
 			$outputPage = $skin->getContext()->getOutput();
 			$outputPage->addModules( 'wikibase.sidebar.tracking' );
+		}
+
+		if ( $wikidataItemLink === null ) {
+			return;
+		}
+
+		$wikidataInOtherProjects = $this->clientSettings->getSetting( 'moveConnectedItemLinkToOtherProjects' );
+
+		if ( $wikidataInOtherProjects && $skin->getSkinName() !== 'minerva' ) {
+			$wikidataItemLink['class'] = 'wb-otherproject-link wb-otherproject-wikibase-dataitem';
+			// This automatically appends the wikidata item link to the end of the Other Projects
+			$sidebar['wikibase-otherprojects'][] = $wikidataItemLink;
+		} else {
+			$sidebar['TOOLBOX']['wikibase'] = $wikidataItemLink;
 		}
 	}
 
