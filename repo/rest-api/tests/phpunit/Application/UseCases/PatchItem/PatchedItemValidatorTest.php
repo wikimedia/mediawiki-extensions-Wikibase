@@ -827,11 +827,7 @@ class PatchedItemValidatorTest extends TestCase {
 
 		yield 'invalid sitelink type' => [
 			[ $validSiteId => 'invalid-sitelink' ],
-			new UseCaseError(
-				UseCaseError::PATCHED_INVALID_SITELINK_TYPE,
-				'Not a valid Sitelink type in patched Sitelinks',
-				[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-			),
+			UseCaseError::newPatchResultInvalidValue( "/sitelinks/$validSiteId", 'invalid-sitelink' ),
 		];
 
 		$invalidSitelinks = [ 'invalid-sitelinks' ];

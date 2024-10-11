@@ -670,8 +670,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: invalidSitelinkType } } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 422, 'patched-invalid-sitelink-type', { site_id: siteId } );
-			assert.strictEqual( response.body.message, 'Not a valid Sitelink type in patched Sitelinks' );
+			const context = { path: `/sitelinks/${siteId}`, value: invalidSitelinkType };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
 
 		it( 'sitelinks not an object', async () => {

@@ -26,7 +26,6 @@ class UseCaseError extends UseCaseException {
 	public const PATCH_RESULT_VALUE_TOO_LONG = 'patch-result-value-too-long';
 	public const PATCH_TARGET_NOT_FOUND = 'patch-target-not-found';
 	public const PATCH_TEST_FAILED = 'patch-test-failed';
-	public const PATCHED_INVALID_SITELINK_TYPE = 'patched-invalid-sitelink-type';
 	public const PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'patched-statement-group-property-id-mismatch';
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT = 'unauthorized-bot-edit';
@@ -95,7 +94,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
-		self::PATCHED_INVALID_SITELINK_TYPE => [ self::CONTEXT_SITE_ID ],
 		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,
 			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
