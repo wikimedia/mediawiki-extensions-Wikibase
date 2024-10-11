@@ -2,6 +2,21 @@
 
 ## Version TBD
 
+* Added `request-limit-reached` error for when a client makes too many edit requests ([T366594](https://phabricator.wikimedia.org/T366594))
+* Added `permission-denied` error for unauthorized or prevented edits ([T366581](https://phabricator.wikimedia.org/T366581), [T330914](https://phabricator.wikimedia.org/T330914))
+* Added `resource-too-large` error for edits that make a resource larger than the configured limit ([T330739](https://phabricator.wikimedia.org/T330739))
+* Generalized several errors into a single `patch-result-referenced-resource-not-found` error ([T366257](https://phabricator.wikimedia.org/T366257))
+* Generalized several errors into a single `referenced-resource-not-found` error ([T366247](https://phabricator.wikimedia.org/T366247))
+* Generalized several errors into a single `resource-not-found` error ([T366258](https://phabricator.wikimedia.org/T366258))
+* Removed `patched-duplicate-alias` and `duplicate-alias` errors - duplicate aliases are now ignored ([T366902](https://phabricator.wikimedia.org/T366902))
+* Removed `unexpected-field`, `patched-property-unexpected-field` and `patched-item-unexpected-field` errors - unexpected fields are now ignored ([T370623](https://phabricator.wikimedia.org/T370623))
+* Generalized several errors into a single `patch-result-modified-read-only-value` error ([T366255](https://phabricator.wikimedia.org/T366255))
+* Generalized several errors into a single `patch-result-invalid-value` error ([T370626](https://phabricator.wikimedia.org/T370626))
+* Replaced kebab case keys with snake case in requests and responses ([T368130](https://phabricator.wikimedia.org/T368130))
+* Generalized several errors into a single `data-policy-violation` error ([T366908](https://phabricator.wikimedia.org/T366908))
+* Generalized several errors into a single `patch-result-value-too-long` error ([T366252](https://phabricator.wikimedia.org/T366252))
+* Generalized several errors into a single `value-too-long` error ([T366238](https://phabricator.wikimedia.org/T366238))
+* Generalized several errors into a single `invalid-key` error ([T370781](https://phabricator.wikimedia.org/T370781))
 * Generalized several errors into a single `cannot-modify-read-only-value` error ([T366239](https://phabricator.wikimedia.org/T366239))
 * Generalized several errors into a single `invalid-value` error ([T366181](https://phabricator.wikimedia.org/T366181))
 * Generalized several errors into a single `missing-field` error ([T366177](https://phabricator.wikimedia.org/T366177))
