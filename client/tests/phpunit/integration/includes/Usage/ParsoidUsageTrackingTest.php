@@ -203,7 +203,7 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 	 * well as calling `resetOutput`. `resetOutput` is called every time a new parse
 	 * begins.
 	 *
-	 * What this means for the `Scribunto_LuaWikibaseEntityLibrary` is that it incorrectly
+	 * What this means for the `WikibaseEntityLibrary` is that it incorrectly
 	 * retains a reference to an old `ParserOutput` when two parses are consecutively in
 	 * the context of the same page.
 	 */

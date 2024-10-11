@@ -36,7 +36,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  *
  * @license GPL-2.0-or-later
  */
-class Scribunto_LuaWikibaseLibrary extends LibraryBase implements ParserOutputProvider {
+class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLanguageIndependentLuaBindings|null
@@ -766,3 +766,6 @@ class Scribunto_LuaWikibaseLibrary extends LibraryBase implements ParserOutputPr
 		return $this->getParser()->getOutput();
 	}
 }
+
+/** @deprecated class alias since 1.43 */
+class_alias( WikibaseLibrary::class, 'Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibrary' );

@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.
  *
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -16,7 +16,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class WikibaseLibraryNoArbitraryAccessTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
 	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';

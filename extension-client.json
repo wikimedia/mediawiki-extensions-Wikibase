@@ -343,6 +343,16 @@
 		"Tests\\Integration\\Wikibase\\InternalSerialization\\": "lib/packages/wikibase/internal-serialization/tests/integration/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
 	},
+	"AutoloadClasses": {
+		"Wikibase\\Client\\DataAccess\\Scribunto\\WikibaseEntityLibrary": "client/includes/DataAccess/Scribunto/WikibaseEntityLibrary.php",
+		"Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseEntityLibrary": "client/includes/DataAccess/Scribunto/WikibaseEntityLibrary.php",
+		"Wikibase\\Client\\DataAccess\\Scribunto\\WikibaseLibrary": "client/includes/DataAccess/Scribunto/WikibaseLibrary.php",
+		"Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibrary": "client/includes/DataAccess/Scribunto/WikibaseLibrary.php"
+	},
+	"TestAutoloadClasses": {
+		"Wikibase\\Client\\Tests\\Integration\\DataAccess\\Scribunto\\WikibaseLibraryTestCase": "client/tests/phpunit/integration/includes/DataAccess/Scribunto/WikibaseLibraryTestCase.php",
+		"Wikibase\\Client\\Tests\\Integration\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibraryTestCase": "client/tests/phpunit/integration/includes/DataAccess/Scribunto/WikibaseLibraryTestCase.php"
+	},
 	"JobClasses": {
 		"wikibase-addUsagesForPage": "\\Wikibase\\Client\\Store\\AddUsagesForPageJob",
 		"EntityChangeNotification": "\\Wikibase\\Client\\EntityChangeNotificationJob::newFromGlobalState",

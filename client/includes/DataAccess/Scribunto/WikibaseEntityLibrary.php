@@ -26,7 +26,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  * @author Andrew Hall
  */
-class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider {
+class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider {
 
 	/**
 	 * @var WikibaseLuaEntityBindings|null
@@ -313,3 +313,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends LibraryBase implements ParserOu
 		return $this->getParser()->getOutput();
 	}
 }
+
+/** @deprecated class alias since 1.43 */
+class_alias( WikibaseEntityLibrary::class, 'Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseEntityLibrary' );

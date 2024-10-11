@@ -21,7 +21,7 @@ if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	 * @license GPL-2.0-or-later
 	 * @author Marius Hoch < hoo@online.de >
 	 */
-	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
+	abstract class WikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
 
 		protected function setUp(): void {
 			$this->markTestSkipped( 'Scribunto is not available' );
@@ -49,7 +49,7 @@ if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
  * @author Marius Hoch < hoo@online.de >
  * @author Daniel Kinzler
  */
-abstract class Scribunto_LuaWikibaseLibraryTestCase extends LuaEngineTestBase {
+abstract class WikibaseLibraryTestCase extends LuaEngineTestBase {
 
 	/**
 	 * @var bool|null
@@ -193,3 +193,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends LuaEngineTestBase {
 	}
 
 }
+
+/** @deprecated class alias since 1.43 */
+class_alias( WikibaseLibraryTestCase::class,
+	'Wikibase\\Client\\Tests\\Integration\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibraryTestCase' );

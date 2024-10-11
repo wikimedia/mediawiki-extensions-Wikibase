@@ -7,8 +7,8 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Skin;
-use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
-use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -45,8 +45,8 @@ final class ClientHooks {
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		$allowDataTransclusion = WikibaseClient::getSettings()->getSetting( 'allowDataTransclusion' );
 		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
-			$extraLibraries['mw.wikibase'] = Scribunto_LuaWikibaseLibrary::class;
-			$extraLibraries['mw.wikibase.entity'] = Scribunto_LuaWikibaseEntityLibrary::class;
+			$extraLibraries['mw.wikibase'] = WikibaseLibrary::class;
+			$extraLibraries['mw.wikibase.entity'] = WikibaseEntityLibrary::class;
 		}
 	}
 

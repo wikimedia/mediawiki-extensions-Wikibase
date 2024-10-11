@@ -8,13 +8,13 @@ use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaEngine;
 use MediaWiki\Extension\Scribunto\Engines\LuaStandalone\LuaStandaloneInterpreterFunction;
 use ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
-use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -25,7 +25,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 
 	/**
 	 * @var bool
@@ -65,8 +65,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 	public function testConstructor() {
 		$engine = $this->getEngine();
-		$luaWikibaseLibrary = new Scribunto_LuaWikibaseEntityLibrary( $engine );
-		$this->assertInstanceOf( Scribunto_LuaWikibaseEntityLibrary::class, $luaWikibaseLibrary );
+		$luaWikibaseLibrary = new WikibaseEntityLibrary( $engine );
+		$this->assertInstanceOf( WikibaseEntityLibrary::class, $luaWikibaseLibrary );
 	}
 
 	public function testRegister() {
@@ -285,7 +285,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
 	 *
-	 * @return Scribunto_LuaWikibaseEntityLibrary
+	 * @return WikibaseEntityLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
 		/** @var $engine LuaEngine */
@@ -307,7 +307,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 			}
 		);
 
-		return new Scribunto_LuaWikibaseEntityLibrary( $engine );
+		return new WikibaseEntityLibrary( $engine );
 	}
 
 	private function setAllowDataAccessInUserLanguage( bool $value ) {
