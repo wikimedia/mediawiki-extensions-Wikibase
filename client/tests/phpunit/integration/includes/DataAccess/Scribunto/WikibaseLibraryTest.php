@@ -36,13 +36,13 @@ use Wikimedia\TestingAccessWrapper;
 class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseLibraryTests';
+	protected static $moduleName = 'WikibaseLibraryTests';
 
 	private ?bool $oldAllowDataAccessInUserLanguage;
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseLibraryTests' => __DIR__ . '/LuaWikibaseLibraryTests.lua',
+			'WikibaseLibraryTests' => __DIR__ . '/WikibaseLibraryTests.lua',
 		];
 	}
 
@@ -84,7 +84,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testRegister() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$package = $luaWikibaseLibrary->register();
 
 		$this->assertIsArray( $package );
@@ -108,7 +108,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit );
 		$entity = $luaWikibaseLibrary->getEntity( 'Q888' );
 		$this->assertEquals( [ null ], $entity );
 
@@ -118,7 +118,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	public function testGetEntity_hasLanguageFallback() {
 		$this->setContentLang( 'ku-arab' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588' );
 
 		$expected = [
@@ -157,7 +157,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 
 	public function testGetEntityInvalidEntityId() {
 		$this->expectException( ScribuntoException::class );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
@@ -167,7 +167,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testParserOutputChangeResetsUsageAccumulator() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$libraryWithMemberAccess = TestingAccessWrapper::newFromObject( $luaWikibaseLibrary );
 		$parserOutput = $libraryWithMemberAccess->getParser()->getOutput();
 		$usageAccumulator = $libraryWithMemberAccess->getUsageAccumulator();
@@ -199,7 +199,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	 * @dataProvider entityExistsProvider
 	 */
 	public function testEntityExists( $expected, $entityIdSerialization ) {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->assertSame(
 			[ $expected ],
@@ -210,7 +210,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	public function testGetEntity_entityAccessLimitExceeded() {
 		$this->expectException( ScribuntoException::class );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$luaWikibaseLibrary->getEntity( 'Q32487' );
 		$luaWikibaseLibrary->getEntity( 'Q32488' );
@@ -221,7 +221,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		// Cache is not split, even if "allowDataAccessInUserLanguage" is true.
 		$this->setAllowDataAccessInUserLanguage( true );
 		$cacheSplit = false;
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit );
 
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
 		$this->assertEquals( [ null ], $entityId );
@@ -240,7 +240,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	 */
 	public function testGetEntityUrl( array $expected, $entityIdSerialization ) {
 		$cacheSplit = false;
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit );
 		$luaWikibaseLibrary->setRepoLinker( $this->getRepoLinker() );
 		$result = $luaWikibaseLibrary->getEntityUrl( $entityIdSerialization );
 
@@ -267,7 +267,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary(
+		$luaWikibaseLibrary = $this->newWikibaseLibrary(
 			$cacheSplit,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' )
 		);
@@ -289,14 +289,14 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testGetBadges() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$badges = $luaWikibaseLibrary->getBadges( 'Q32487', 'fooSiteId' );
 
 		$this->assertSame( [ [ 1 => 'Q10001', 2 => 'Q10002' ] ], $badges );
 	}
 
 	public function testGetBadges_empty() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$badges = $luaWikibaseLibrary->getBadges( 'Q32487', 'nosuchwiki' );
 
 		$this->assertSame( [ [] ], $badges );
@@ -317,7 +317,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	public function testIsValidEntityId( $expected, $entityIdSerialization ) {
 		$this->assertSame(
 			[ $expected ],
-			$this->newScribuntoLuaWikibaseLibrary()->isValidEntityId( $entityIdSerialization )
+			$this->newWikibaseLibrary()->isValidEntityId( $entityIdSerialization )
 		);
 	}
 
@@ -329,7 +329,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$cacheSplit = false;
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
 
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
@@ -356,7 +356,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$cacheSplit = false;
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'ku' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
 
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
@@ -373,14 +373,14 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testRenderSnak_invalidSerialization() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnak( [ 'a' => 'b' ] );
 	}
 
 	public function testFormatValue() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
 		$this->assertSame(
@@ -401,7 +401,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$cacheSplit = false;
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
@@ -417,14 +417,14 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testRenderSnaks_invalidSerialization() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnaks( [ 'a' => 'b' ] );
 	}
 
 	public function testFormatValues() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
 		$this->assertSame(
@@ -439,7 +439,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		}
 
 		$cacheSplit = false;
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseLibrary( $cacheSplit );
 
 		$this->assertSame(
 			[ 'P342' ],
@@ -449,7 +449,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testResolvePropertyId_propertyIdGiven() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->assertSame(
 			[ 'P342' ],
@@ -462,7 +462,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->assertSame(
 			[ null ],
@@ -508,7 +508,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	 * @dataProvider provideOrderProperties
 	 */
 	public function testOrderProperties( array $propertyIds, array $providedPropertyOrder, array $expected ) {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$luaWikibaseLibrary->setPropertyOrderProvider(
 			$this->getPropertyOrderProvider( $providedPropertyOrder )
@@ -522,7 +522,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	 * @dataProvider provideGetPropertyOrder
 	 */
 	public function testGetPropertyOrder( array $providedPropertyOrder, array $expected ) {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$luaWikibaseLibrary->setPropertyOrderProvider(
 			$this->getPropertyOrderProvider( $providedPropertyOrder )
@@ -536,7 +536,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$settings = WikibaseClient::getSettings();
 		$settings->setSetting( 'referencedEntityIdAccessLimit', 2 );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->assertSame(
 			[ null ],
@@ -552,7 +552,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testGetReferencedEntityId_propertyIdWrongType() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseLibrary();
 
 		$this->assertSame(
 			[ null ],
@@ -562,7 +562,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 
 	public function testGetLuaFunctionCallTracker() {
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
-			$this->newScribuntoLuaWikibaseLibrary()
+			$this->newWikibaseLibrary()
 		);
 
 		$this->assertInstanceOf(
@@ -578,7 +578,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 			->with( 'a-key.suffix' );
 
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
-			$this->newScribuntoLuaWikibaseLibrary()
+			$this->newWikibaseLibrary()
 		);
 		$luaWikibaseLibrary->luaFunctionCallTracker = $luaFunctionCallTracker;
 		$luaWikibaseLibrary->incrementStatsKey( 'a-key.suffix' );
@@ -600,7 +600,7 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
 	 */
-	private function newScribuntoLuaWikibaseLibrary(
+	private function newWikibaseLibrary(
 		bool &$cacheSplit = false,
 		?Language $userLang = null
 	): WikibaseLibrary {

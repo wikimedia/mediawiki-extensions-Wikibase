@@ -33,11 +33,11 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	private $oldAllowDataAccessInUserLanguage;
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
+	protected static $moduleName = 'WikibaseEntityLibraryTests';
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseEntityLibraryTests' => __DIR__ . '/LuaWikibaseEntityLibraryTests.lua',
+			'WikibaseEntityLibraryTests' => __DIR__ . '/WikibaseEntityLibraryTests.lua',
 		];
 	}
 
@@ -70,7 +70,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testRegister() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$package = $luaWikibaseLibrary->register();
 
 		$this->assertIsArray( $package );
@@ -94,7 +94,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary( $cacheSplit );
 
 		$this->assertSame(
 			[ '' ],
@@ -109,7 +109,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 
 		$this->assertSame(
 			[ '' ],
@@ -125,7 +125,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
 			[ 'Q885588' ],
@@ -151,7 +151,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary( $cacheSplit );
 
 		$this->assertSame(
 			[ '' ],
@@ -166,7 +166,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 
 		$this->assertSame(
 			[ '' ],
@@ -182,7 +182,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'es' );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
 			[ '<span><span>Q885588</span></span>' ],
@@ -203,7 +203,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testAddLabelUsage() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addLabelUsage( 'Q32488', 'he' );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
@@ -211,7 +211,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testAddLabelUsageWithoutLanguage(): void {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addLabelUsage( 'Q32488', null );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
@@ -219,7 +219,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testAddDescriptionUsage() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addDescriptionUsage( 'Q32488', 'he' );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
@@ -227,7 +227,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testAddDescriptionUsageWithoutLanguage() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addDescriptionUsage( 'Q32488', null );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
@@ -243,7 +243,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	 * @dataProvider addTitleOrSitelinksUsageProvider
 	 */
 	public function testAddTitleOrSitelinksUsage( ?string $requestedSiteId, string $aspectTracked ) {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addTitleOrSiteLinksUsage( 'Q32488', $requestedSiteId );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
@@ -251,7 +251,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	}
 
 	public function testAddOtherUsage() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary = $this->newWikibaseEntityLibrary();
 		$luaWikibaseLibrary->addOtherUsage( 'Q32488' );
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 		$this->assertArrayHasKey( 'Q32488#O', $usages );
@@ -259,7 +259,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 
 	public function testGetLuaFunctionCallTracker() {
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
-			$this->newScribuntoLuaWikibaseLibrary()
+			$this->newWikibaseEntityLibrary()
 		);
 
 		$this->assertInstanceOf(
@@ -275,7 +275,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 			->with( 'a-key.suffix' );
 
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
-			$this->newScribuntoLuaWikibaseLibrary()
+			$this->newWikibaseEntityLibrary()
 		);
 		$luaWikibaseLibrary->luaFunctionCallTracker = $luaFunctionCallTracker;
 		$luaWikibaseLibrary->incrementStatsKey( 'a-key.suffix' );
@@ -284,10 +284,11 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 	/**
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 * @param Language|null $userLang The user's language
-	 *
-	 * @return WikibaseEntityLibrary
 	 */
-	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
+	private function newWikibaseEntityLibrary(
+		bool &$cacheSplit = false,
+		?Language $userLang = null
+	): WikibaseEntityLibrary {
 		/** @var $engine LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();

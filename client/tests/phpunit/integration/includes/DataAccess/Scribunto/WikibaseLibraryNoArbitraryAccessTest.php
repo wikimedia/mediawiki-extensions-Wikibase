@@ -19,11 +19,11 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 class WikibaseLibraryNoArbitraryAccessTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseLibraryNoArbitraryAccessTests';
+	protected static $moduleName = 'WikibaseLibraryNoArbitraryAccessTests';
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseLibraryNoArbitraryAccessTests' => __DIR__ . '/LuaWikibaseLibraryNoArbitraryAccessTests.lua',
+			'WikibaseLibraryNoArbitraryAccessTests' => __DIR__ . '/WikibaseLibraryNoArbitraryAccessTests.lua',
 		];
 	}
 

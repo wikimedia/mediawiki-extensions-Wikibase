@@ -24,7 +24,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 class WikibaseLibraryInProcessEntityCacheTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';
+	protected static $moduleName = 'WikibaseLibraryInProcessEntityCacheTests';
 
 	public function provideLuaData() {
 		if ( ( new ReflectionClass( parent::class ) )->hasMethod( 'provideLuaData' ) ) {
@@ -56,7 +56,7 @@ class WikibaseLibraryInProcessEntityCacheTest extends WikibaseLibraryTestCase {
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseLibraryInProcessEntityCacheTests' => __DIR__ . '/LuaWikibaseLibraryInProcessEntityCacheTests.lua',
+			'WikibaseLibraryInProcessEntityCacheTests' => __DIR__ . '/WikibaseLibraryInProcessEntityCacheTests.lua',
 		];
 	}
 
