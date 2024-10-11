@@ -171,6 +171,32 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			value: newSitelink
 		} );
 
+		it( 'sitelink is not an object', async () => {
+			const invalidSitelinkType = 'not-valid-sitelink-type';
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: `/${siteId}`, value: invalidSitelinkType } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: `/${siteId}`, value: invalidSitelinkType };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
+		it( 'sitelinks not an object', async () => {
+			const invalidSitelinks = [ { title: linkedArticle } ];
+
+			const response = await newPatchSitelinksRequestBuilder(
+				testItemId,
+				[ { op: 'add', path: '', value: invalidSitelinks } ]
+			).assertValidRequest().makeRequest();
+
+			const context = { path: '', value: invalidSitelinks };
+			assertValidError( response, 422, 'patch-result-invalid-value', context );
+			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
+		} );
+
 		it( 'invalid site id', async () => {
 			const invalidSiteId = 'not-valid-site-id';
 			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
