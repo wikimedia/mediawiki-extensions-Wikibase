@@ -29,11 +29,11 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 	private $oldTrackLuaFunctionCallsSampleRate;
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseStatsTest';
+	protected static $moduleName = 'WikibaseStatsTest';
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseStatsTest' => __DIR__ . '/LuaWikibaseStatsTests.lua',
+			'WikibaseStatsTest' => __DIR__ . '/WikibaseStatsTests.lua',
 		];
 	}
 

@@ -21,11 +21,11 @@ use MediaWiki\Title\Title;
 class WikibaseLibraryNoLinkedEntityTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
-	protected static $moduleName = 'LuaWikibaseLibraryNoLinkedEntityTests';
+	protected static $moduleName = 'WikibaseLibraryNoLinkedEntityTests';
 
 	protected function getTestModules() {
 		return parent::getTestModules() + [
-			'LuaWikibaseLibraryNoLinkedEntityTests' => __DIR__ . '/LuaWikibaseLibraryNoLinkedEntityTests.lua',
+			'WikibaseLibraryNoLinkedEntityTests' => __DIR__ . '/WikibaseLibraryNoLinkedEntityTests.lua',
 		];
 	}
 
