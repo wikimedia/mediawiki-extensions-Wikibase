@@ -402,7 +402,6 @@
 					"patched-statement-group-property-id-mismatch": {
 						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
 					},
-					"patched-invalid-sitelink-type": { "$ref": "./examples.json#/PatchedInvalidSitelinkTypeExample"},
 					"patch-result-referenced-resource-not-found": { "$ref": "./examples.json#/PatchResultResourceNotFoundExample" },
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },

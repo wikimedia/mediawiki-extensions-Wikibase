@@ -5434,9 +5434,6 @@
               "patched-statement-group-property-id-mismatch": {
                 "$ref": "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
               },
-              "patched-invalid-sitelink-type": {
-                "$ref": "#/components/examples/PatchedInvalidSitelinkTypeExample"
-              },
               "patch-result-referenced-resource-not-found": {
                 "$ref": "#/components/examples/PatchResultResourceNotFoundExample"
               },
@@ -6884,15 +6881,6 @@
           "message": "The requested resource does not exist",
           "context": {
             "resource_type": "{resource_type}"
-          }
-        }
-      },
-      "PatchedInvalidSitelinkTypeExample": {
-        "value": {
-          "code": "patched-invalid-sitelink-type'",
-          "message": "Not a valid Sitelink type in patched Sitelinks",
-          "context": {
-            "site_id": "{site_id}"
           }
         }
       },

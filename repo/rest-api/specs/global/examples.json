@@ -138,15 +138,6 @@
 			}
 		}
 	},
-	"PatchedInvalidSitelinkTypeExample": {
-		"value": {
-			"code": "patched-invalid-sitelink-type'",
-			"message": "Not a valid Sitelink type in patched Sitelinks",
-			"context": {
-				"site_id": "{site_id}"
-			}
-		}
-	},
 	"PatchResultResourceNotFoundExample": {
 		"value": {
 			"code": "patch-result-referenced-resource-not-found",

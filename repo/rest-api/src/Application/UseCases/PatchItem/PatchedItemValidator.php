@@ -301,10 +301,9 @@ class PatchedItemValidator {
 		$siteId = fn() => $context[ SitelinkValidator::CONTEXT_SITE_ID ];
 		switch ( $validationError->getCode() ) {
 			case SitelinksValidator::CODE_INVALID_SITELINK:
-				throw new UseCaseError(
-					UseCaseError::PATCHED_INVALID_SITELINK_TYPE,
-					'Not a valid Sitelink type in patched Sitelinks',
-					[ UseCaseError::CONTEXT_SITE_ID => $context[ SitelinksValidator::CONTEXT_SITE_ID ] ]
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/sitelinks/{$context[SitelinksValidator::CONTEXT_SITE_ID]}",
+					$sitelinksSerialization[$context[SitelinksValidator::CONTEXT_SITE_ID]]
 				);
 			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newPatchResultInvalidValue( '/sitelinks', $sitelinksSerialization );
