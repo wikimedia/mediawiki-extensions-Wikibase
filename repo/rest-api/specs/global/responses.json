@@ -410,7 +410,6 @@
 					"patch-result-modified-read-only-value": {
 						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
 					},
-					"url-not-modifiable": { "$ref": "./examples.json#/SitelinkUrlNotModifiableExample" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}

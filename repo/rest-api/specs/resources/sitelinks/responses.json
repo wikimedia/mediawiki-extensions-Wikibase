@@ -9,7 +9,9 @@
 					"patch-result-invalid-value": { "$ref": "../../global/examples.json#/PatchResultInvalidValueExample" },
 					"patch-result-missing-field": { "$ref": "../../global/examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "../../global/examples.json#/PatchResultInvalidKeyExample" },
-					"url-not-modifiable": { "$ref": "../../global/examples.json#/SitelinkUrlNotModifiableExample" },
+					"patch-result-modified-read-only-value": {
+						"$ref": "../../global/examples.json#/PatchResultModifiedReadOnlyValue"
+					},
 					"data-policy-violation": { "$ref": "../../global/examples.json#/DataPolicyViolationExample" }
 				}
 			}

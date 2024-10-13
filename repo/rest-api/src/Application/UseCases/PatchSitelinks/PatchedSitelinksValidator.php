@@ -98,11 +98,7 @@ class PatchedSitelinksValidator {
 				isset( $originalSitelinksSerialization[ $siteId ] ) &&
 				$originalSitelinksSerialization[ $siteId ][ 'url' ] !== $sitelink[ 'url' ]
 			) {
-				throw new UseCaseError(
-					UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
-					'URL of Sitelink cannot be modified',
-					[ UseCaseError::CONTEXT_SITE_ID => $siteId ]
-				);
+				throw UseCaseError::newPatchResultModifiedReadOnlyValue( "/$siteId/url" );
 			}
 		}
 	}

@@ -1056,12 +1056,6 @@ class PatchedItemValidatorTest extends TestCase {
 			'sitelinks' => [ $validSiteId => [ 'title' => $title, 'url' => 'https://en.wikipedia.org/wiki/.example' ] ],
 		];
 
-		$expectedError = new UseCaseError(
-			UseCaseError::PATCHED_SITELINK_URL_NOT_MODIFIABLE,
-			'URL of Sitelink cannot be modified',
-			[ UseCaseError::CONTEXT_SITE_ID => $validSiteId ]
-		);
-
 		try {
 			$this->newValidator()->validateAndDeserialize(
 				$item,
@@ -1071,7 +1065,7 @@ class PatchedItemValidatorTest extends TestCase {
 			);
 			$this->fail( 'this should not be reached' );
 		} catch ( UseCaseError $error ) {
-			$this->assertEquals( $expectedError, $error );
+			$this->assertEquals( UseCaseError::newPatchResultModifiedReadOnlyValue( "/sitelinks/$validSiteId/url" ), $error );
 		}
 	}
 
