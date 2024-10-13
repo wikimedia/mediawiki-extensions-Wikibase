@@ -766,6 +766,3 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 		return $this->getParser()->getOutput();
 	}
 }
-
-/** @deprecated class alias since 1.43 */
-class_alias( WikibaseLibrary::class, 'Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibrary' );
