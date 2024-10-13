@@ -43,6 +43,13 @@ class PatchedSitelinksValidator {
 		$context = $validationError->getContext();
 		$siteId = fn() => $context[SitelinkValidator::CONTEXT_SITE_ID];
 		switch ( $validationError->getCode() ) {
+			case SitelinksValidator::CODE_INVALID_SITELINK:
+				throw UseCaseError::newPatchResultInvalidValue(
+					"/{$context[SitelinksValidator::CONTEXT_SITE_ID]}",
+					$serialization[$context[SitelinksValidator::CONTEXT_SITE_ID]]
+				);
+			case SitelinksValidator::CODE_SITELINKS_NOT_ASSOCIATIVE:
+				throw UseCaseError::newPatchResultInvalidValue( '', $serialization );
 			case SiteIdValidator::CODE_INVALID_SITE_ID:
 				throw UseCaseError::newPatchResultInvalidKey( '', $context[SiteIdValidator::CONTEXT_SITE_ID_VALUE] );
 			case SitelinkValidator::CODE_TITLE_MISSING:

@@ -108,6 +108,17 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		$validSiteId = TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0];
 		$badgeItemId = new ItemId( self::ALLOWED_BADGES[ 0 ] );
 
+		$invalidSitelinks = [ 'invalid-sitelinks' ];
+		yield 'sitelinks not associative' => [
+			$invalidSitelinks,
+			UseCaseError::newPatchResultInvalidValue( '', $invalidSitelinks ),
+		];
+
+		yield 'invalid sitelink type' => [
+			[ $validSiteId => 'invalid-sitelink' ],
+			UseCaseError::newPatchResultInvalidValue( "/$validSiteId", 'invalid-sitelink' ),
+		];
+
 		yield 'invalid site id' => [
 			[ 'bad-site-id' => [ 'title' => 'test_title' ] ],
 			UseCaseError::newPatchResultInvalidKey( '', 'bad-site-id' ),
