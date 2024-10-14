@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestInterface;
@@ -73,7 +74,7 @@ class PatchStatementRouteHandler extends SimpleHandler {
 				WbRestApi::getStatementRedirectMiddlewareFactory()->newStatementRedirectMiddleware(
 					self::STATEMENT_ID_PATH_PARAM
 				),
-				new TempUserCreationResponseHeaderMiddleware(),
+				new TempUserCreationResponseHeaderMiddleware( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) ),
 			] ),
 			WbRestApi::getStatementSerializer(),
 			$responseFactory
