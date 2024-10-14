@@ -4,45 +4,16 @@
 		"properties": {
 			"id": {
 				"type": "string",
-				"example": "Q42"
+				"readOnly": true
 			},
 			"type": {
 				"type": "string",
-				"example": "item"
+				"enum": [ "item" ],
+				"readOnly": true
 			},
-			"labels": {
-				"allOf": [
-					{ "$ref": "#/Labels" },
-					{ "example": { "en": "Douglas Adams", "fr": "Douglas Adams" } }
-				]
-			},
-			"descriptions": {
-				"allOf": [
-					{ "$ref": "#/Descriptions" },
-					{
-						"example": {
-							"en": "English science fiction writer and humourist",
-							"fr": "écrivain de science-fiction et humoriste anglais"
-						}
-					}
-				]
-			},
-			"aliases": {
-				"allOf": [
-					{ "$ref": "#/Aliases" },
-					{
-						"example": {
-							"en": [
-								"Douglas Noel Adams",
-								"Douglas Noël Adams"
-							],
-							"fr": [
-								"Douglas Noel Adams"
-							]
-						}
-					}
-				]
-			},
+			"labels": { "$ref": "#/Labels" },
+			"descriptions": { "$ref": "#/Descriptions" },
+			"aliases": { "$ref": "#/Aliases" },
 			"sitelinks": {
 				"$ref": "./schema-parts.json#/Sitelinks"
 			},
@@ -51,24 +22,6 @@
 				"additionalProperties": {
 					"type": "array",
 					"items": { "$ref": "#/Statement" }
-				},
-				"example": {
-					"P92": [
-						{
-							"id": "Q42$97B777F7-238B-465E-909B-64B0AB4B4DFD",
-							"rank": "normal",
-							"qualifiers": [],
-							"references": [],
-							"property": {
-								"id": "P92",
-								"data_type": "string"
-							},
-							"value": {
-								"type": "value",
-								"content": "I am a goat"
-							}
-						}
-					]
 				}
 			}
 		}
@@ -78,72 +31,24 @@
 		"properties": {
 			"id": {
 				"type": "string",
-				"example": "P31"
+				"readOnly": true
 			},
 			"type": {
 				"type": "string",
-				"example": "property"
+				"enum": [ "property" ],
+				"readOnly": true
 			},
 			"data_type": {
-				"type": "string",
-				"example": "wikibase-item"
+				"type": "string"
 			},
-			"labels": {
-				"allOf": [
-					{ "$ref": "#/Labels" },
-					{ "example": { "en": "Instance of", "fr": "nature de l'élément" } }
-				]
-			},
-			"descriptions": {
-				"allOf": [
-					{ "$ref": "#/Descriptions" },
-					{
-						"example": {
-							"en": "that class of which this subject is a particular example and member; different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain (and an instance of volcanic landform)",
-							"fr": "cet élément est un exemple spécifique de cette classe qui en précise la nature. Ne pas confondre avec la propriété P279 (sous-classe de)"
-						}
-					}
-				]
-			},
-			"aliases": {
-				"allOf": [
-					{ "$ref": "#/Aliases" },
-					{
-						"example": {
-							"en": [
-								"is a",
-								"is an"
-							],
-							"fr": [
-								"est un"
-							]
-						}
-					}
-				]
-			},
+			"labels": { "$ref": "#/Labels" },
+			"descriptions": { "$ref": "#/Descriptions" },
+			"aliases": { "$ref": "#/Aliases" },
 			"statements": {
 				"type": "object",
 				"additionalProperties": {
 					"type": "array",
 					"items": { "$ref": "#/Statement" }
-				},
-				"example": {
-					"P92": [
-						{
-							"id": "P31$97B777F7-238B-465E-909B-64B0AB4B4DFD",
-							"rank": "normal",
-							"qualifiers": [ ],
-							"references": [ ],
-							"property": {
-								"id": "P92",
-								"data_type": "string"
-							},
-							"value": {
-								"type": "value",
-								"content": "I am a goat"
-							}
-						}
-					]
 				}
 			}
 		}
@@ -152,20 +57,11 @@
 		"type": "object",
 		"additionalProperties": {
 			"type": "string"
-		},
-		"example": {
-			"en": "en-label",
-			"fr": "fr-label"
 		}
-	},
-	"Descriptions": {
+	},	"Descriptions": {
 		"type": "object",
 		"additionalProperties": {
 			"type": "string"
-		},
-		"example": {
-			"en": "en-description",
-			"fr": "fr-description"
 		}
 	},
 	"Aliases": {
@@ -173,9 +69,6 @@
 		"additionalProperties": {
 			"type": "array",
 			"items": { "type": "string" }
-		},
-		"example": {
-			"en": [ "en-alias1", "en-alias2" ], "fr": [ "fr-alias1", "fr-alias2" ]
 		}
 	},
 	"Sitelink": {
@@ -189,14 +82,11 @@
 				"items": { "type": "string" }
 			},
 			"url": {
-				"type": "string"
+				"type": "string",
+				"readOnly": true
 			}
 		},
-		"example": {
-			"title": "Douglas Adams",
-			"badges": [ ],
-			"url": "https://de.wikipedia.org/wiki/Douglas_Adams"
-		}
+		"required": [ "title" ]
 	},
 	"Statement": {
 		"allOf": [
@@ -206,8 +96,7 @@
 					"id": {
 						"description": "The globally unique identifier for this Statement",
 						"type": "string",
-						"readOnly": true,
-						"example": "Q11$6403c562-401a-2b26-85cc-8327801145e1"
+						"readOnly": true
 					},
 					"rank": {
 						"description": "The rank of the Statement",
@@ -244,8 +133,7 @@
 			"hash": {
 				"description": "Hash of the Reference",
 				"type": "string",
-				"readOnly": true,
-				"example": "455481eeac76e6a8af71a6b493c073d54788e7e9"
+				"readOnly": true
 			},
 			"parts": {
 				"type": "array",

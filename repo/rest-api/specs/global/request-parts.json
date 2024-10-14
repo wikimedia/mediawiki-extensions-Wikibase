@@ -1,69 +1,45 @@
 {
-	"ItemPatchRequest": {
+	"PatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },
-			{
-				"properties": {
-					"patch": {
-						"items": {
-							"properties": {
-								"path": {
-									"example": "/labels/en"
-								},
-								"value": {
-									"example": "Douglas Adams"
-								}
-							}
-						}
-					}
-				}
-			},
 			{ "$ref": "#/MediawikiEdit" }
 		]
 	},
-	"PropertyPatchRequest": {
-		"allOf": [
-			{ "$ref": "#/PatchDocument" },
-			{
-				"properties": {
-					"patch": {
-						"items": {
-							"properties": {
-								"path": {
-									"example": "/labels/en"
-								},
-								"value": {
-									"example": "Instance of"
-								}
-							}
-						}
-					}
-				}
-			},
-			{ "$ref": "#/MediawikiEdit" }
-		]
+	"PatchItemExample": {
+		"value": {
+			"patch": [
+				{ "op": "replace", "path": "/labels/en", "value": "Jane Doe" }
+			],
+			"tags": [],
+			"bot": false,
+			"comment": "Update the English label"
+		}
 	},
-	"SitelinksPatchRequest": {
-		"allOf": [
-			{ "$ref": "#/PatchDocument" },
-			{
-				"properties": {
-					"patch": {
-						"items": {
-							"properties": {
-								"path": {
-									"example": "/afwiki/title"
-								},
-								"value": {
-									"example": "Douglas Adams"
-								}
-							}
-						}
-					}
-				}
-			},
-			{ "$ref": "#/MediawikiEdit" }
-		]
+	"PatchPropertyExample": {
+		"patch": [
+			{ "op": "add", "path": "/aliases/en/-", "value": "is an" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "add 'is an' as an English alias"
+	},
+	"PatchSitelinksExample": {
+		"value": {
+			"patch": [
+				{ "op": "add", "path": "/ruwiki/title", "value": "Джейн Доу" }
+			],
+			"tags": [],
+			"bot": false,
+			"comment": "Add sitelink to ruwiki"
+		}
+	},
+	"PatchItemLabelsExample": {
+		"patch": [
+			{ "op": "replace", "path": "/en", "value": "Jane Doe" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "replace English label"
 	},
 	"LabelsPatchRequest": {
 		"allOf": [
@@ -219,17 +195,13 @@
 			"tags": {
 				"type": "array",
 				"items": { "type": "string" },
-				"default": [ ],
-				"example": [ "mobile edit", "external tool edit" ]
+				"default": [ ]
 			},
 			"bot": {
 				"type": "boolean",
 				"default": false
 			},
-			"comment": {
-				"type": "string",
-				"example": "API edit fixing the modelling as discussed in ..."
-			}
+			"comment": { "type": "string" }
 		}
 	},
 	"PatchDocument": {
@@ -251,11 +223,14 @@
 								"remove",
 								"replace",
 								"test"
-							],
-							"example": "replace"
+							]
 						},
 						"path": {
-							"description": "A JSON Pointer for the Property to manipulate",
+							"description": "A JSON Pointer",
+							"type": "string"
+						},
+						"from": {
+							"description": "A JSON Pointer",
 							"type": "string"
 						},
 						"value": {

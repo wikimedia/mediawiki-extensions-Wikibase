@@ -784,7 +784,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/PropertyPatch"
+          "$ref": "#/components/requestBodies/PatchProperty"
         },
         "responses": {
           "200": {
@@ -4005,12 +4005,7 @@
           "type": "string",
           "pattern": "^Q[1-9]\\d{0,9}$"
         },
-        "examples": {
-          "item": {
-            "summary": "Example of Item ID",
-            "value": "Q42"
-          }
-        }
+        "example": "Q24"
       },
       "PropertyId": {
         "in": "path",
@@ -4021,12 +4016,7 @@
           "type": "string",
           "pattern": "^P[1-9]\\d{0,9}$"
         },
-        "examples": {
-          "item": {
-            "summary": "Example of Property ID",
-            "value": "P31"
-          }
-        }
+        "example": "P694"
       },
       "StatementId": {
         "in": "path",
@@ -4091,12 +4081,7 @@
         "schema": {
           "type": "string"
         },
-        "examples": {
-          "item": {
-            "summary": "Example of Site ID",
-            "value": "dewiki"
-          }
-        }
+        "example": "enwiki"
       },
       "ItemFields": {
         "in": "query",
@@ -4165,21 +4150,9 @@
             "pattern": "^(?:\".+\"|\\*)$"
           }
         },
-        "examples": {
-          "strong-etag": {
-            "summary": "Single ETag",
-            "value": [
-              "\"1276705620\""
-            ]
-          },
-          "multiple-etags": {
-            "summary": "Multiple ETags",
-            "value": [
-              "\"1276703231\"",
-              "\"1276705620\""
-            ]
-          }
-        }
+        "example": [
+          "\"1276705620\""
+        ]
       },
       "IfModifiedSince": {
         "name": "If-Modified-Since",
@@ -4202,21 +4175,9 @@
             "pattern": "^(?:\".+\"|\\*)$"
           }
         },
-        "examples": {
-          "strong-etag": {
-            "summary": "Single ETag",
-            "value": [
-              "\"1276705620\""
-            ]
-          },
-          "multiple-etags": {
-            "summary": "Multiple ETags",
-            "value": [
-              "\"1276703231\"",
-              "\"1276705620\""
-            ]
-          }
-        }
+        "example": [
+          "\"1276705620\""
+        ]
       },
       "IfUnmodifiedSince": {
         "name": "If-Unmodified-Since",
@@ -4250,64 +4211,7 @@
                   "type": "object",
                   "properties": {
                     "item": {
-                      "type": "object",
-                      "properties": {
-                        "labels": {
-                          "$ref": "#/components/schemas/Labels"
-                        },
-                        "descriptions": {
-                          "$ref": "#/components/schemas/Descriptions"
-                        },
-                        "aliases": {
-                          "$ref": "#/components/schemas/Aliases"
-                        },
-                        "sitelinks": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "object",
-                            "items": {
-                              "$ref": "#/components/schemas/Sitelink"
-                            }
-                          },
-                          "example": {
-                            "afwiki": {
-                              "title": "Douglas Adams",
-                              "badges": [
-                                "Q17437798"
-                              ]
-                            },
-                            "arwiki": {
-                              "title": "دوغلاس آدمز",
-                              "badges": []
-                            }
-                          }
-                        },
-                        "statements": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Statement"
-                            }
-                          },
-                          "example": {
-                            "P92": [
-                              {
-                                "rank": "normal",
-                                "property": {
-                                  "id": "P92"
-                                },
-                                "value": {
-                                  "content": "I am a goat",
-                                  "type": "value"
-                                },
-                                "qualifiers": [],
-                                "references": []
-                              }
-                            ]
-                          }
-                        }
-                      }
+                      "$ref": "#/components/schemas/Item"
                     }
                   },
                   "required": [
@@ -4318,6 +4222,105 @@
                   "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
                 }
               ]
+            },
+            "example": {
+              "item": {
+                "labels": {
+                  "en": "Jane Doe",
+                  "ru": "Джейн Доу"
+                },
+                "descriptions": {
+                  "en": "famous person",
+                  "ru": "известная личность"
+                },
+                "aliases": {
+                  "en": [
+                    "Jane M. Doe",
+                    "JD"
+                  ],
+                  "ru": [
+                    "Джейн М. Доу"
+                  ]
+                },
+                "statements": {
+                  "P694": [
+                    {
+                      "property": {
+                        "id": "P694"
+                      },
+                      "value": {
+                        "type": "value",
+                        "content": "Q626683"
+                      }
+                    }
+                  ],
+                  "P476": [
+                    {
+                      "property": {
+                        "id": "P476"
+                      },
+                      "value": {
+                        "type": "value",
+                        "content": {
+                          "time": "+1986-01-27T00:00:00Z",
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        }
+                      }
+                    }
+                  ],
+                  "P17": [
+                    {
+                      "property": {
+                        "id": "P17"
+                      },
+                      "value": {
+                        "type": "value",
+                        "content": "Senior Team Supervisor"
+                      },
+                      "qualifiers": [
+                        {
+                          "property": {
+                            "id": "P706"
+                          },
+                          "value": {
+                            "type": "value",
+                            "content": {
+                              "time": "+2023-06-13T00:00:00Z",
+                              "precision": 11,
+                              "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                            }
+                          }
+                        }
+                      ],
+                      "references": [
+                        {
+                          "parts": [
+                            {
+                              "property": {
+                                "id": "P709"
+                              },
+                              "value": {
+                                "type": "value",
+                                "content": "http://www.example.org"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "sitelinks": {
+                  "enwiki": {
+                    "title": "Jane Doe"
+                  },
+                  "ruwiki": {
+                    "title": "Джейн Доу"
+                  }
+                }
+              },
+              "comment": "Create an Item for Jane Doe"
             }
           }
         }
@@ -4328,6 +4331,9 @@
           "application/json-patch+json": {
             "schema": {
               "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            },
+            "example": {
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/example"
             }
           },
           "application/json": {
@@ -4352,11 +4358,14 @@
                               "remove",
                               "replace",
                               "test"
-                            ],
-                            "example": "replace"
+                            ]
                           },
                           "path": {
-                            "description": "A JSON Pointer for the Property to manipulate",
+                            "description": "A JSON Pointer",
+                            "type": "string"
+                          },
+                          "from": {
+                            "description": "A JSON Pointer",
                             "type": "string"
                           },
                           "value": {
@@ -4375,63 +4384,53 @@
                   ]
                 },
                 {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/labels/en"
-                          },
-                          "value": {
-                            "example": "Douglas Adams"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
                   "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
                 }
               ]
+            },
+            "example": {
+              "value": {
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/labels/en",
+                    "value": "Jane Doe"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Update the English label"
+              }
             }
           }
         }
       },
-      "PropertyPatch": {
+      "PatchProperty": {
         "required": true,
         "content": {
           "application/json-patch+json": {
             "schema": {
-              "$ref": "#/components/requestBodies/PropertyPatch/content/application~1json/schema"
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            },
+            "example": {
+              "$ref": "#/components/requestBodies/PatchProperty/content/application~1json/example"
             }
           },
           "application/json": {
             "schema": {
-              "allOf": [
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            },
+            "example": {
+              "patch": [
                 {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
-                },
-                {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/labels/en"
-                          },
-                          "value": {
-                            "example": "Instance of"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "op": "add",
+                  "path": "/aliases/en/-",
+                  "value": "is an"
                 }
-              ]
+              ],
+              "tags": [],
+              "bot": false,
+              "comment": "add 'is an' as an English alias"
             }
           }
         }
@@ -4761,23 +4760,7 @@
                   "type": "object",
                   "properties": {
                     "sitelink": {
-                      "type": "object",
-                      "properties": {
-                        "title": {
-                          "type": "string",
-                          "example": "Douglas Adams"
-                        },
-                        "badges": {
-                          "type": "array",
-                          "example": [],
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "required": [
-                        "title"
-                      ]
+                      "$ref": "#/components/schemas/Sitelink"
                     }
                   },
                   "required": [
@@ -4788,6 +4771,15 @@
                   "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
                 }
               ]
+            },
+            "example": {
+              "sitelink": {
+                "title": "Jane Doe",
+                "badges": []
+              },
+              "tags": [],
+              "bot": false,
+              "comment": "API edit fixing the modelling as discussed in ..."
             }
           }
         }
@@ -4797,35 +4789,29 @@
         "content": {
           "application/json-patch+json": {
             "schema": {
-              "$ref": "#/components/requestBodies/SitelinksPatch/content/application~1json/schema"
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            },
+            "example": {
+              "$ref": "#/components/requestBodies/SitelinksPatch/content/application~1json/example"
             }
           },
           "application/json": {
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
-                },
-                {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/afwiki/title"
-                          },
-                          "value": {
-                            "example": "Douglas Adams"
-                          }
-                        }
-                      }
-                    }
+              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+            },
+            "example": {
+              "value": {
+                "patch": [
+                  {
+                    "op": "add",
+                    "path": "/ruwiki/title",
+                    "value": "Джейн Доу"
                   }
-                },
-                {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
-                }
-              ]
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add sitelink to ruwiki"
+              }
             }
           }
         }
@@ -4843,21 +4829,21 @@
                   "items": {
                     "type": "string"
                   },
-                  "default": [],
-                  "example": [
-                    "mobile edit",
-                    "external tool edit"
-                  ]
+                  "default": []
                 },
                 "bot": {
                   "type": "boolean",
                   "default": false
                 },
                 "comment": {
-                  "type": "string",
-                  "example": "API edit fixing the modelling as discussed in ..."
+                  "type": "string"
                 }
               }
+            },
+            "example": {
+              "tags": [],
+              "bot": false,
+              "comment": "API edit fixing the modelling as discussed in ..."
             }
           }
         }
@@ -5743,6 +5729,124 @@
                   }
                 }
               ]
+            },
+            "example": {
+              "id": "Q24",
+              "type": "item",
+              "labels": {
+                "en": "Jane Doe",
+                "ru": "Джейн Доу"
+              },
+              "descriptions": {
+                "en": "famous person",
+                "ru": "известная личность"
+              },
+              "aliases": {
+                "en": [
+                  "Jane M. Doe",
+                  "JD"
+                ],
+                "ru": [
+                  "Джейн М. Доу"
+                ]
+              },
+              "statements": {
+                "P694": [
+                  {
+                    "id": "Q24$BB728546-A400-4116-A772-16D54B62AC2B",
+                    "rank": "normal",
+                    "qualifiers": [],
+                    "references": [],
+                    "property": {
+                      "id": "P694",
+                      "data_type": "wikibase-item"
+                    },
+                    "value": {
+                      "type": "value",
+                      "content": "Q626683"
+                    }
+                  }
+                ],
+                "P476": [
+                  {
+                    "id": "Q24$F3B2F956-B6AB-4984-8D89-BEE0FFFA3385",
+                    "rank": "normal",
+                    "qualifiers": [],
+                    "references": [],
+                    "property": {
+                      "id": "P476",
+                      "data_type": "time"
+                    },
+                    "value": {
+                      "type": "value",
+                      "content": {
+                        "time": "+1986-01-27T00:00:00Z",
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      }
+                    }
+                  }
+                ],
+                "P17": [
+                  {
+                    "id": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA",
+                    "rank": "normal",
+                    "qualifiers": [
+                      {
+                        "property": {
+                          "id": "P706",
+                          "data_type": "time"
+                        },
+                        "value": {
+                          "type": "value",
+                          "content": {
+                            "time": "+2023-06-13T00:00:00Z",
+                            "precision": 11,
+                            "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                          }
+                        }
+                      }
+                    ],
+                    "references": [
+                      {
+                        "hash": "7ccd777f870b71a4c5056c7fd2a83a22cc39be6d",
+                        "parts": [
+                          {
+                            "property": {
+                              "id": "P709",
+                              "data_type": "url"
+                            },
+                            "value": {
+                              "type": "value",
+                              "content": "https://news.example.org"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "property": {
+                      "id": "P17",
+                      "data_type": "string"
+                    },
+                    "value": {
+                      "type": "value",
+                      "content": "Senior Team Supervisor"
+                    }
+                  }
+                ]
+              },
+              "sitelinks": {
+                "enwiki": {
+                  "title": "Jane Doe",
+                  "badges": [],
+                  "url": "https://enwiki.example.org/wiki/Jane_Doe"
+                },
+                "ruwiki": {
+                  "title": "Джейн Доу",
+                  "badges": [],
+                  "url": "https://ruwiki.example.org/wiki/Джейн_Доу"
+                }
+              }
             }
           }
         }
@@ -5773,6 +5877,20 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Item/properties/sitelinks"
+            },
+            "example": {
+              "sitelinks": {
+                "enwiki": {
+                  "title": "Jane Doe",
+                  "badges": [],
+                  "url": "https://enwiki.example.org/wiki/Jane_Doe"
+                },
+                "ruwiki": {
+                  "title": "Джейн Доу",
+                  "badges": [],
+                  "url": "https://ruwiki.example.org/wiki/Джейн_Доу"
+                }
+              }
             }
           }
         }
@@ -5803,6 +5921,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Sitelink"
+            },
+            "example": {
+              "title": "Jane Doe",
+              "badges": [],
+              "url": "https://enwiki.example.org/wiki/Jane_Doe"
             }
           }
         }
@@ -5984,6 +6107,30 @@
                   }
                 }
               ]
+            },
+            "example": {
+              "id": "P694",
+              "type": "property",
+              "data_type": "wikibase-item",
+              "labels": {
+                "en": "instance of",
+                "ru": "это частный случай понятия"
+              },
+              "descriptions": {
+                "en": "this item is a concrete object (instance) of this class, category or object group",
+                "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории."
+              },
+              "aliases": {
+                "en": [
+                  "is a",
+                  "is an"
+                ],
+                "ru": [
+                  "представляет собой",
+                  "является"
+                ]
+              },
+              "statements": {}
             }
           }
         }
@@ -6378,74 +6525,28 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "Q42"
+            "readOnly": true
           },
           "type": {
             "type": "string",
-            "example": "item"
+            "enum": [
+              "item"
+            ],
+            "readOnly": true
           },
           "labels": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Labels"
-              },
-              {
-                "example": {
-                  "en": "Douglas Adams",
-                  "fr": "Douglas Adams"
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Labels"
           },
           "descriptions": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Descriptions"
-              },
-              {
-                "example": {
-                  "en": "English science fiction writer and humourist",
-                  "fr": "écrivain de science-fiction et humoriste anglais"
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Descriptions"
           },
           "aliases": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Aliases"
-              },
-              {
-                "example": {
-                  "en": [
-                    "Douglas Noel Adams",
-                    "Douglas Noël Adams"
-                  ],
-                  "fr": [
-                    "Douglas Noel Adams"
-                  ]
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Aliases"
           },
           "sitelinks": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/Sitelink"
-            },
-            "example": {
-              "afwiki": {
-                "title": "Douglas Adams",
-                "badges": [
-                  "Q17437798"
-                ],
-                "url": "https://af.wikipedia.org/wiki/Douglas_Adams"
-              },
-              "arwiki": {
-                "title": "دوغلاس آدمز",
-                "badges": [],
-                "url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2"
-              }
             }
           },
           "statements": {
@@ -6455,24 +6556,6 @@
               "items": {
                 "$ref": "#/components/schemas/Statement"
               }
-            },
-            "example": {
-              "P92": [
-                {
-                  "id": "Q42$97B777F7-238B-465E-909B-64B0AB4B4DFD",
-                  "rank": "normal",
-                  "qualifiers": [],
-                  "references": [],
-                  "property": {
-                    "id": "P92",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "type": "value",
-                    "content": "I am a goat"
-                  }
-                }
-              ]
             }
           }
         }
@@ -6482,59 +6565,26 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "P31"
+            "readOnly": true
           },
           "type": {
             "type": "string",
-            "example": "property"
+            "enum": [
+              "property"
+            ],
+            "readOnly": true
           },
           "data_type": {
-            "type": "string",
-            "example": "wikibase-item"
+            "type": "string"
           },
           "labels": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Labels"
-              },
-              {
-                "example": {
-                  "en": "Instance of",
-                  "fr": "nature de l'élément"
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Labels"
           },
           "descriptions": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Descriptions"
-              },
-              {
-                "example": {
-                  "en": "that class of which this subject is a particular example and member; different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain (and an instance of volcanic landform)",
-                  "fr": "cet élément est un exemple spécifique de cette classe qui en précise la nature. Ne pas confondre avec la propriété P279 (sous-classe de)"
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Descriptions"
           },
           "aliases": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Aliases"
-              },
-              {
-                "example": {
-                  "en": [
-                    "is a",
-                    "is an"
-                  ],
-                  "fr": [
-                    "est un"
-                  ]
-                }
-              }
-            ]
+            "$ref": "#/components/schemas/Aliases"
           },
           "statements": {
             "type": "object",
@@ -6543,24 +6593,6 @@
               "items": {
                 "$ref": "#/components/schemas/Statement"
               }
-            },
-            "example": {
-              "P92": [
-                {
-                  "id": "P31$97B777F7-238B-465E-909B-64B0AB4B4DFD",
-                  "rank": "normal",
-                  "qualifiers": [],
-                  "references": [],
-                  "property": {
-                    "id": "P92",
-                    "data_type": "string"
-                  },
-                  "value": {
-                    "type": "value",
-                    "content": "I am a goat"
-                  }
-                }
-              ]
             }
           }
         }
@@ -6569,20 +6601,12 @@
         "type": "object",
         "additionalProperties": {
           "type": "string"
-        },
-        "example": {
-          "en": "en-label",
-          "fr": "fr-label"
         }
       },
       "Descriptions": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
-        },
-        "example": {
-          "en": "en-description",
-          "fr": "fr-description"
         }
       },
       "Aliases": {
@@ -6592,16 +6616,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "example": {
-          "en": [
-            "en-alias1",
-            "en-alias2"
-          ],
-          "fr": [
-            "fr-alias1",
-            "fr-alias2"
-          ]
         }
       },
       "Sitelink": {
@@ -6617,14 +6631,13 @@
             }
           },
           "url": {
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           }
         },
-        "example": {
-          "title": "Douglas Adams",
-          "badges": [],
-          "url": "https://de.wikipedia.org/wiki/Douglas_Adams"
-        }
+        "required": [
+          "title"
+        ]
       },
       "Statement": {
         "allOf": [
@@ -6634,8 +6647,7 @@
               "id": {
                 "description": "The globally unique identifier for this Statement",
                 "type": "string",
-                "readOnly": true,
-                "example": "Q11$6403c562-401a-2b26-85cc-8327801145e1"
+                "readOnly": true
               },
               "rank": {
                 "description": "The rank of the Statement",
@@ -6681,15 +6693,13 @@
             "properties": {
               "id": {
                 "description": "The ID of the Property",
-                "type": "string",
-                "example": "P92"
+                "type": "string"
               },
               "data_type": {
                 "description": "The data type of the Property",
                 "type": "string",
                 "readOnly": true,
-                "nullable": true,
-                "example": "string"
+                "nullable": true
               }
             }
           },
@@ -6697,8 +6707,7 @@
             "type": "object",
             "properties": {
               "content": {
-                "description": "The value, if type == \"value\", otherwise omitted",
-                "example": "I am a goat"
+                "description": "The value, if type == \"value\", otherwise omitted"
               },
               "type": {
                 "description": "The value type",
@@ -6719,8 +6728,7 @@
           "hash": {
             "description": "Hash of the Reference",
             "type": "string",
-            "readOnly": true,
-            "example": "455481eeac76e6a8af71a6b493c073d54788e7e9"
+            "readOnly": true
           },
           "parts": {
             "type": "array",

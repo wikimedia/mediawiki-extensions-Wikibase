@@ -8,12 +8,7 @@
 			"type": "string",
 			"pattern": "^Q[1-9]\\d{0,9}$"
 		},
-		"examples": {
-			"item": {
-				"summary": "Example of Item ID",
-				"value": "Q42"
-			}
-		}
+		"example": "Q24"
 	},
 	"PropertyId": {
 		"in": "path",
@@ -24,12 +19,7 @@
 			"type": "string",
 			"pattern": "^P[1-9]\\d{0,9}$"
 		},
-		"examples": {
-			"item": {
-				"summary": "Example of Property ID",
-				"value": "P31"
-			}
-		}
+		"example": "P694"
 	},
 	"StatementId": {
 		"in": "path",
@@ -86,12 +76,7 @@
 		"schema": {
 			"type": "string"
 		},
-		"examples": {
-			"item": {
-				"summary": "Example of Site ID",
-				"value": "dewiki"
-			}
-		}
+		"example": "enwiki"
 	},
 	"ItemFields": {
 		"in": "query",
@@ -146,16 +131,7 @@
 				"pattern": "^(?:\".+\"|\\*)$"
 			}
 		},
-		"examples": {
-			"strong-etag": {
-				"summary": "Single ETag",
-				"value": [ "\"1276705620\"" ]
-			},
-			"multiple-etags": {
-				"summary": "Multiple ETags",
-				"value": [ "\"1276703231\"", "\"1276705620\"" ]
-			}
-		}
+		"example": [ "\"1276705620\"" ]
 	},
 	"IfModifiedSince": {
 		"name": "If-Modified-Since",
@@ -178,16 +154,7 @@
 				"pattern": "^(?:\".+\"|\\*)$"
 			}
 		},
-		"examples": {
-			"strong-etag": {
-				"summary": "Single ETag",
-				"value": [ "\"1276705620\"" ]
-			},
-			"multiple-etags": {
-				"summary": "Multiple ETags",
-				"value": [ "\"1276703231\"", "\"1276705620\"" ]
-			}
-		}
+		"example": [ "\"1276705620\"" ]
 	},
 	"IfUnmodifiedSince": {
 		"name": "If-Unmodified-Since",

@@ -29,7 +29,7 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/PropertyPatch" },
+		"requestBody": { "$ref": "../../global/requests.json#/PatchProperty" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Property" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },

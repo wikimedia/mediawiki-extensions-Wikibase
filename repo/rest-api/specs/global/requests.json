@@ -9,65 +9,83 @@
 						{
 							"type": "object",
 							"properties": {
-								"item": {
-									"type": "object",
-									"properties": {
-										"labels": {
-											"$ref": "./schemas.json#/Labels"
-										},
-										"descriptions": {
-											"$ref": "./schemas.json#/Descriptions"
-										},
-										"aliases": {
-											"$ref": "./schemas.json#/Aliases"
-										},
-										"sitelinks": {
-											"type": "object",
-											"additionalProperties": {
-												"type": "object",
-												"items": { "$ref": "./schemas.json#/Sitelink" }
-											},
-											"example": {
-												"afwiki": {
-													"title": "Douglas Adams",
-													"badges": [ "Q17437798" ]
-												},
-												"arwiki": {
-													"title": "دوغلاس آدمز",
-													"badges": [ ]
-												}
-											}
-										},
-										"statements": {
-											"type": "object",
-											"additionalProperties": {
-												"type": "array",
-												"items": { "$ref": "./schemas.json#/Statement" }
-											},
-											"example": {
-												"P92": [
-													{
-														"rank": "normal",
-														"property": {
-															"id": "P92"
-														},
-														"value": {
-															"content": "I am a goat",
-															"type": "value"
-														},
-														"qualifiers": [],
-														"references": []
-													}
-												]
-											}
-										}
-									}
-								}
+								"item": { "$ref": "./schemas.json#/Item" }
 							},
 							"required": [ "item" ]
 						},
 						{ "$ref": "./request-parts.json#/MediawikiEdit" }
 					]
+				},
+				"example": {
+					"item": {
+						"labels": {
+							"en": "Jane Doe",
+							"ru": "Джейн Доу"
+						},
+						"descriptions": {
+							"en": "famous person",
+							"ru": "известная личность"
+						},
+						"aliases": {
+							"en": [ "Jane M. Doe", "JD" ],
+							"ru": [ "Джейн М. Доу" ]
+						},
+						"statements": {
+							"P694": [
+								{
+									"property": { "id": "P694" },
+									"value": { "type": "value", "content": "Q626683" }
+								}
+							],
+							"P476": [
+								{
+									"property": { "id": "P476" },
+									"value": {
+										"type": "value",
+										"content": {
+											"time": "+1986-01-27T00:00:00Z",
+											"precision": 11,
+											"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+										}
+									}
+								}
+							],
+							"P17": [
+								{
+									"property": { "id": "P17" },
+									"value": { "type": "value", "content": "Senior Team Supervisor" },
+									"qualifiers": [
+										{
+											"property": { "id": "P706" },
+											"value": {
+												"type": "value",
+												"content": {
+													"time": "+2023-06-13T00:00:00Z",
+													"precision": 11,
+													"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+												}
+											}
+										}
+									],
+									"references": [
+										{
+											"parts": [
+												{
+													"property": { "id": "P709" },
+													"value": { "type": "value", "content": "http://www.example.org" }
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						"sitelinks": {
+							"enwiki": { "title": "Jane Doe" },
+							"ruwiki": { "title": "Джейн Доу" }
+						}
+					},
+					"comment": "Create an Item for Jane Doe"
 				}
 			}
 		}
@@ -76,29 +94,25 @@
 		"required": true,
 		"content": {
 			"application/json-patch+json": {
-				"schema": {
-					"$ref": "./request-parts.json#/ItemPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchItemExample" }
 			},
 			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/ItemPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchItemExample" }
 			}
 		}
 	},
-	"PropertyPatch": {
+	"PatchProperty": {
 		"required": true,
 		"content": {
 			"application/json-patch+json": {
-				"schema": {
-					"$ref": "./request-parts.json#/PropertyPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchPropertyExample" }
 			},
 			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/PropertyPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchPropertyExample" }
 			}
 		}
 	},
@@ -251,25 +265,7 @@
 						{
 							"type": "object",
 							"properties": {
-								"sitelink": {
-									"type": "object",
-									"properties": {
-										"title": {
-											"type": "string",
-											"example": "Douglas Adams"
-										},
-										"badges": {
-											"type": "array",
-											"example": [],
-											"items": {
-												"type": "string"
-											}
-										}
-									},
-									"required": [
-										"title"
-									]
-								}
+								"sitelink": { "$ref": "./schemas.json#/Sitelink" }
 							},
 							"required": [
 								"sitelink"
@@ -279,6 +275,15 @@
 							"$ref": "./request-parts.json#/MediawikiEdit"
 						}
 					]
+				},
+				"example": {
+					"sitelink": {
+						"title": "Jane Doe",
+						"badges": []
+					},
+					"tags": [],
+					"bot": false,
+					"comment": "API edit fixing the modelling as discussed in ..."
 				}
 			}
 		}
@@ -287,14 +292,12 @@
 		"required": true,
 		"content": {
 			"application/json-patch+json": {
-				"schema": {
-					"$ref": "./request-parts.json#/SitelinksPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchSitelinksExample" }
 			},
 			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/SitelinksPatchRequest"
-				}
+				"schema": { "$ref": "./request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./request-parts.json#/PatchSitelinksExample" }
 			}
 		}
 	},
@@ -303,8 +306,11 @@
 		"required": false,
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/MediawikiEdit"
+				"schema": { "$ref": "./request-parts.json#/MediawikiEdit" },
+				"example": {
+					"tags": [],
+					"bot": false,
+					"comment": "API edit fixing the modelling as discussed in ..."
 				}
 			}
 		}
