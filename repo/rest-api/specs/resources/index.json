@@ -64,6 +64,9 @@
 	"/entities/items/{item_id}/sitelinks/{site_id}": {
 		"$ref": "./sitelinks/single.json"
 	},
+	"/entities/properties": {
+		"$ref": "./properties/list.json"
+	},
 	"/entities/properties/{property_id}": {
 		"$ref": "./properties/single.json"
 	},

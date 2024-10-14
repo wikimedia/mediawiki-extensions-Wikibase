@@ -695,6 +695,82 @@
         }
       }
     },
+    "/entities/properties": {
+      "post": {
+        "operationId": "addProperty",
+        "tags": [
+          "properties"
+        ],
+        "summary": "[WIP] Create a Wikibase Property",
+        "description": "This endpoint is currently in development and is not recommended for production use",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Authorization"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Property"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Property"
+          },
+          "400": {
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/responses/InvalidPatch/content/application~1json/schema"
+                },
+                "examples": {
+                  "value-too-long": {
+                    "$ref": "#/components/examples/ValueTooLongExample"
+                  },
+                  "statement-group-property-id-mismatch": {
+                    "$ref": "#/components/examples/StatementGroupPropertyIdMismatch"
+                  },
+                  "referenced-resource-not-found": {
+                    "$ref": "#/components/examples/ReferencedResourceNotFoundExample"
+                  },
+                  "invalid-value": {
+                    "$ref": "#/components/examples/InvalidValueExample"
+                  },
+                  "missing-field": {
+                    "$ref": "#/components/examples/MissingFieldExample"
+                  },
+                  "invalid-key": {
+                    "$ref": "#/components/examples/InvalidKeyExample"
+                  },
+                  "resource-too-large": {
+                    "$ref": "#/components/examples/ResourceTooLargeExample"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Language code of the language in which error message is provided"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/PermissionDenied"
+          },
+          "422": {
+            "$ref": "#/components/responses/DataPolicyViolation"
+          },
+          "429": {
+            "$ref": "#/components/responses/RequestLimitReached"
+          },
+          "500": {
+            "$ref": "#/components/responses/UnexpectedError"
+          }
+        }
+      }
+    },
     "/entities/properties/{property_id}": {
       "get": {
         "operationId": "getProperty",
@@ -4405,6 +4481,56 @@
           }
         }
       },
+      "Property": {
+        "description": "Payload containing a Wikibase Property and edit metadata",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "$ref": "#/components/schemas/Property"
+                    }
+                  },
+                  "required": [
+                    "property"
+                  ]
+                },
+                {
+                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                }
+              ]
+            },
+            "example": {
+              "property": {
+                "data_type": "wikibase-item",
+                "labels": {
+                  "en": "instance of",
+                  "ru": "это частный случай понятия"
+                },
+                "descriptions": {
+                  "en": "this item is a concrete object (instance) of this class, category or object group",
+                  "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории."
+                },
+                "aliases": {
+                  "en": [
+                    "is a",
+                    "is an"
+                  ],
+                  "ru": [
+                    "представляет собой",
+                    "является"
+                  ]
+                },
+                "statements": {}
+              }
+            }
+          }
+        }
+      },
       "PatchProperty": {
         "required": true,
         "content": {
@@ -6595,7 +6721,10 @@
               }
             }
           }
-        }
+        },
+        "required": [
+          "data_type"
+        ]
       },
       "Labels": {
         "type": "object",

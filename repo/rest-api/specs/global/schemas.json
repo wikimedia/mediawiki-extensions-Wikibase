@@ -51,7 +51,8 @@
 					"items": { "$ref": "#/Statement" }
 				}
 			}
-		}
+		},
+		"required": [ "data_type" ]
 	},
 	"Labels": {
 		"type": "object",
