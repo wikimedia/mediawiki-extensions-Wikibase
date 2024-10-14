@@ -111,7 +111,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Σύνδεση|Συνδέσεις}} με {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Να ειδοποιούμαι όταν κάποιος συνδέει μια σελίδα που {{GENDER:|δημιούργησα}} με ένα αντικείμενο  {{WBREPONAME}}.",
 	"notification-header-page-connection": "Η σελίδα <strong>$3</strong> {{GENDER:$2|συνδέθηκε}} με το {{PLURAL:$4|-1=ένα αντικείμενο {{WBREPONAME}}|το αντικείμενο {{WBREPONAME}} $4}}, όπου δεδομένα σχετικά με το θέμα μπορούν να συλλέγονται.",
-	"notification-bundle-header-page-connection": "Η <strong>$3</strong> και {{PLURAL:$4|one other page|$4 ακόμη σελίδες|100=99+ other pages}} ήταν {{GENDER:$2|connected}} με αντικείμενα {{WBREPONAME}},όπου μπορούν να συλλεχθούν δεδομένα σχετικά με τα θέματα",
+	"notification-bundle-header-page-connection": "Η <strong>$3</strong> και {{PLURAL:$4|one other page|$4 ακόμη σελίδες|100=99+ other pages}} {{GENDER:$2|συνδέθηκαν}} με αντικείμενα {{WBREPONAME}}, όπου μπορούν να συλλεχθούν δεδομένα σχετικά με τα θέματα",
 	"notification-link-text-view-item": "{{GENDER:$1|Προβολή}} αντικειμένου",
 	"notification-subject-page-connection": "Μια σελίδα που {{GENDER:$3|δημιουργήσατε}} στη {{SITENAME}} {{GENDER:$2|συνδέθηκε}} με ένα αντικείμενο {{WBREPONAME}}",
 	"unresolved-property-category": "Σελίδες με ανεπίλυτες ιδιότητες",
