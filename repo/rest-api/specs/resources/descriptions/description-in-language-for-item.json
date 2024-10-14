@@ -69,7 +69,7 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
+		"requestBody": { "$ref": "../../global/requests.json#/Delete" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/DescriptionDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveDescriptionInput" },
