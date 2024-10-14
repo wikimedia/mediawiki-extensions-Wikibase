@@ -160,45 +160,6 @@
 			}
 		}
 	},
-	"Label": {
-		"description": "Payload containing a Wikibase label in the specified language and edit metadata",
-		"required": true,
-		"content": {
-			"application/json": {
-				"schema": {
-					"allOf": [
-						{
-							"type": "object",
-							"properties": {
-								"label": {
-									"type": "string",
-									"example": "an example label"
-								}
-							},
-							"required": [ "label" ]
-						},
-						{ "$ref": "./request-parts.json#/MediawikiEdit" }
-					]
-				}
-			}
-		}
-	},
-	"LabelsPatch": {
-		"description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
-		"required": true,
-		"content": {
-			"application/json-patch+json": {
-				"schema": {
-					"$ref": "./request-parts.json#/LabelsPatchRequest"
-				}
-			},
-			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/LabelsPatchRequest"
-				}
-			}
-		}
-	},
 	"Aliases": {
 		"description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
 		"required": true,
@@ -311,13 +272,9 @@
 							"properties": {
 								"sitelink": { "$ref": "./schemas.json#/Sitelink" }
 							},
-							"required": [
-								"sitelink"
-							]
+							"required": [ "sitelink" ]
 						},
-						{
-							"$ref": "./request-parts.json#/MediawikiEdit"
-						}
+						{ "$ref": "./request-parts.json#/MediawikiEdit" }
 					]
 				},
 				"example": {

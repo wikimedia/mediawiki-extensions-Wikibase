@@ -13,7 +13,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Label" },
+			"200": { "$ref": "./responses.json#/ItemLabel" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/MovedPermanently" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
@@ -35,14 +35,14 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Label" },
+		"requestBody": { "$ref": "./requests.json#/ItemLabel" },
 		"responses": {
 			"200": {
-				"$ref": "../../global/responses.json#/Label",
+				"$ref": "./responses.json#/ItemLabel",
 				"description": "The updated Label in a specific language"
 			},
 			"201": {
-				"$ref": "../../global/responses.json#/Label",
+				"$ref": "./responses.json#/ItemLabel",
 				"description": "The newly added Label in a specific language"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
@@ -71,7 +71,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/LabelDeleted" },
+			"200": { "$ref": "./responses.json#/LabelDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveLabelInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
