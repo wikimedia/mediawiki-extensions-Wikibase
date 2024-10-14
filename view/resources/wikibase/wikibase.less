@@ -4,6 +4,7 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
 
 /* No point in always displaying the notification right under the search box since notifications
 are also triggered down the document */
@@ -27,7 +28,7 @@ h1 .wikibase-title-id {
 	/* 0.8 (.wb-language-fallback-indicator) * 0.875 (.mw-body-content) / 1.875 (.mw-body h1) */
 	font-size: 0.3888em;
 	font-family: sans-serif;
-	color: #202122;
+	color: @color-base;
 }
 
 h1 .wikibase-title-id::before {
@@ -49,7 +50,7 @@ h1 .wikibase-title-id::before {
 /* Overwrite colour for element that are in edit mode although their container element is not */
 .wb-entitypage .ui-state-disabled .wb-edit input:not( .ui-state-disabled ),
 .wb-entitypage .ui-state-disabled .wb-edit textarea {
-	background-color: #fff;
+	background-color: @background-color-base;
 	color: inherit;
 }
 
@@ -59,15 +60,15 @@ h1 .wikibase-title-id::before {
 }
 
 .ui-closeable {
-	background-color: #fff;
-	border-bottom: 1px solid #c8ccd1;
-	border-top: 1px solid #c8ccd1;
+	background-color: @background-color-base;
+	border-bottom: 1px solid @border-color-subtle;
+	border-top: 1px solid @border-color-subtle;
 	padding: 0.2em 10px;
 	font-size: 0.9em;
 }
 
 .ui-closeable.wb-edit {
-	background-color: #eaf3ff;
+	background-color: @background-color-progressive-subtle;
 }
 
 .ui-closeable.wb-error {
@@ -105,7 +106,7 @@ h2.wb-section-heading {
 
 .wikibase-entityview input {
 	/* prevent browsers from applying their default styles */
-	border: 1px solid #a2a9b1;
+	border: 1px solid @border-color-base;
 	border-radius: 0;
 	box-sizing: border-box;
 }
@@ -135,7 +136,7 @@ h2.wb-section-heading {
 }
 
 .wb-empty {
-	color: #a2a9b1;
+	color: @border-color-base;
 }
 
 .wb-entity-undefinedinfo {
@@ -171,11 +172,11 @@ div.wikibase-statementview textarea {
 
 	.wikibase-statementlistview {
 		position: relative;
-		background-color: #fff;
+		background-color: @background-color-base;
 		float: left;
 		margin-left: 15em;
 		width: ~'calc( 100% - 15em - @{highlight-outline-width} )';
-		border: 1px solid #c8ccd1;
+		border: 1px solid @border-color-subtle;
 	}
 
 	/* Highlight target statement groups, e.g. https://www.wikidata.org/wiki/Q42#P735 */
@@ -192,7 +193,7 @@ div.wikibase-statementview textarea {
 	/* Container for the section title */
 	.wikibase-statementgroupview-property {
 		width: 15em;
-		background: #eaecf0;
+		background: @background-color-neutral;
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -276,7 +277,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	background-color: #eaecf0;
+	background: @background-color-neutral;
 	display: block;
 	float: left;
 	position: relative;
@@ -311,7 +312,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
 .wikibase-statementgroupview-property.wb-edit + .wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	background-color: #b6c8ec;
+	background-color: @background-color-progressive-subtle--active;
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error {
@@ -329,7 +330,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wikibase-statementlistview.wb-new .wikibase-statementview {
-	border: 1px solid #c8ccd1;
+	border: 1px solid @border-color-subtle;
 	width: 100%;
 	margin-bottom: 1em;
 }
@@ -468,7 +469,7 @@ span.wikibase-snakview-variation-novaluesnak {
 
 /* Container for a single statement */
 .wikibase-statementview {
-	border-bottom: 1px solid #eaecf0;
+	border-bottom: 1px solid @background-color-neutral;
 	float: left;
 	width: 100%;
 	position: relative;
@@ -513,7 +514,7 @@ span.wikibase-snakview-variation-novaluesnak {
 .wikibase-statementview div.thumb audio,
 .wikibase-statementview div.thumb video,
 .wikibase-statementview div a.mw-kartographer-map {
-	border: 1px solid #c8ccd1;
+	border: 1px solid @border-color-subtle;
 }
 
 /***** REFERENCES *****/
@@ -538,7 +539,7 @@ span.wikibase-snakview-variation-novaluesnak {
 
 .wikibase-referenceview {
 	position: relative;
-	background: #f8f9fa;
+	background: @background-color-neutral-subtle;
 	overflow: hidden;
 	margin-bottom: 0.5em;
 }
@@ -550,7 +551,7 @@ span.wikibase-snakview-variation-novaluesnak {
 .wikibase-referenceview .wikibase-referenceview-heading {
 	min-height: 1.5em;
 	padding: 5px;
-	background-color: #eaecf0;
+	background-color: @background-color-neutral;
 	display: none;
 }
 
@@ -559,11 +560,11 @@ span.wikibase-snakview-variation-novaluesnak {
 }
 
 .wikibase-referenceview.wb-edit {
-	background-color: #eaf3ff;
+	background-color: @background-color-progressive-subtle;
 }
 
 .wikibase-referenceview.wb-edit > .wikibase-referenceview-heading {
-	background-color: #b6c8ec;
+	background-color: @background-color-progressive-subtle--active;
 	display: block;
 }
 
@@ -688,7 +689,7 @@ div.listview-item.wikibase-referenceview-tabs.ui-tabs.ui-widget.ui-widget-conten
 
 	/* Tab link style */
 	.ui-state-default > .ui-tabs-anchor {
-		color: #000;
+		color: @color-base;
 	}
 
 	/* Active tab link text style */
@@ -710,12 +711,12 @@ div.listview-item.wikibase-referenceview-tabs.ui-tabs.ui-widget.ui-widget-conten
 	/* Style for tabs */
 	li.ui-state-default {
 		border: 0;
-		background-color: #b6c8ec;
+		background-color: @background-color-progressive-subtle--active;
 		background-image: none;
 
 		/* Style for active tab */
 		&.ui-tabs-active.ui-state-active {
-			background-color: #eaf3ff;
+			background-color: @background-color-progressive-subtle;
 		}
 	}
 }
@@ -749,8 +750,8 @@ div.listview-item.wikibase-referenceview-tabs.ui-tabs.ui-widget.ui-widget-conten
 /********** PROPERTY PAGE **********/
 
 .wb-propertypage .wikibase-propertyview-datatype {
-	background-color: #f8f9fa;
-	border: 1px solid #c8ccd1;
+	background-color: @background-color-neutral-subtle;
+	border: 1px solid @border-color-subtle;
 	border-collapse: separate;
 	float: left;
 	width: 100%;
@@ -792,7 +793,7 @@ table.diff table.wb-details td {
 
 .wikibase-pageImage {
 	display: none;
-	border: 1px solid #c8ccd1;
+	border: 1px solid @border-color-subtle;
 	position: relative;
 	width: 100%;
 	margin: 0 2em 2em 0;

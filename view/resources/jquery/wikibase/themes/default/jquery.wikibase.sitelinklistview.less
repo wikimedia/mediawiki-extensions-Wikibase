@@ -2,6 +2,7 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
 
 .wikibase-sitelinklistview .wikibase-sitelinklistview-listview {
 	line-height: 1;
@@ -24,8 +25,8 @@
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container {
-	background: #eaecf0;
-	border: 1px solid #c8ccd1;
+	background: @background-color-neutral;
+	border: 1px solid @border-color-subtle;
 	display: table-cell;
 	line-height: 1.5;
 	padding-left: 0.2em;
@@ -84,7 +85,7 @@
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-removetoolbar-container {
-	background: #fff;
+	background: @background-color-base;
 	line-height: 1.5;
 	margin-left: 0;
 	padding: 0 0.2em;

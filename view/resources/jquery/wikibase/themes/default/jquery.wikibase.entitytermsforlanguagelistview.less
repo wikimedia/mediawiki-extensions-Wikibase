@@ -2,9 +2,11 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
+
 .wikibase-entitytermsforlanguagelistview {
-	background: #fff;
-	border: 1px solid #c8ccd1;
+	background: @background-color-base;
+	border: 1px solid @border-color-subtle;
 	border-spacing: 0;
 	display: table;
 	padding-bottom: 1em;
@@ -24,8 +26,8 @@
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell {
-	background-color: #eaecf0;
-	border-right: 1px solid #fff;
+	background-color: @background-color-neutral;
+	border-right: 1px solid @background-color-base;
 	padding-left: 0.4em;
 	position: sticky;
 	top: 0;
@@ -36,7 +38,8 @@
 }
 
 .wikibase-entitytermsforlanguagelistview.wb-edit .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell {
-	background: #eaf3ff;
+	background-color: @background-color-progressive-subtle;
+	color: @color-base-fixed;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-language {
@@ -93,7 +96,7 @@
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-description textarea {
 	background: none;
 	border: 0;
-	border-bottom: 1px solid #c8ccd1;
+	border-bottom: 1px solid @border-color-subtle;
 	outline: 0;
 }
 
@@ -134,7 +137,7 @@
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-aliases input {
-	border-bottom: 1px solid #c8ccd1;
+	border-bottom: 1px solid @border-color-subtle;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-aliases input:focus {

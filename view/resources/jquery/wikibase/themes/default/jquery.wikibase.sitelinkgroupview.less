@@ -2,8 +2,10 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
+
 .wikibase-sitelinkgroupview {
-	border: 1px solid #c8ccd1;
+	border: 1px solid @border-color-subtle;
 	float: left;
 	margin: 0 2em 2em 0;
 	max-width: 30em;
@@ -28,11 +30,11 @@
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container {
-	background-color: #fff;
+	background-color: @background-color-base;
 }
 
 .wikibase-sitelinkgroupview.wb-edit .wikibase-sitelinkgroupview-heading-container {
-	background-color: #eaf3ff;
+	background-color: @background-color-progressive-subtle;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section h3 {

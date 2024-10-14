@@ -2,6 +2,8 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
+
 .wikibase-entitytermsview {
 	float: left;
 	margin-bottom: 1em;
@@ -10,7 +12,7 @@
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul {
-	color: #72777d;
+	color: @color-subtle;
 	margin: 0;
 	word-wrap: break-word;
 }
@@ -88,7 +90,7 @@
 .wikibase-entitytermsview .wikibase-toolbar-container .wikibase-toolbar-container {
 	position: sticky;
 	z-index: 2;
-	background-color: #fff;
+	background-color: @background-color-base;
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-heading-container > .wikibase-toolbar-container {

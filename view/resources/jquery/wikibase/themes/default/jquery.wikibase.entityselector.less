@@ -2,6 +2,7 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
 
 .ui-entityselector-list {
 	overflow-x: hidden;
@@ -12,7 +13,7 @@
 
 .ui-entityselector-list li,
 .ui-entityselector-list li.ui-state-hover {
-	border-top: 1px dotted #c8ccd1;
+	border-top: 1px dotted @border-color-subtle;
 }
 
 .ui-entityselector-list li:first-child {
@@ -53,7 +54,7 @@
 
 .ui-entityselector-list .ui-entityselector-notfound.ui-state-hover a,
 .ui-entityselector-list .ui-entityselector-error.ui-state-hover a {
-	color: #000;
+	color: @color-base;
 }
 
 .ui-entityselector-list .ui-entityselector-more {
@@ -73,7 +74,7 @@
 
 /* Specificity must be a little higher because of a valueview selector */
 .ui-suggester-input.ui-entityselector-input.ui-entityselector-input-recognized {
-	border-color: #14866d;
+	border-color: @border-color-success;
 }
 
 .ui-suggester-input.ui-entityselector-input.ui-entityselector-input-unrecognized {
