@@ -4,6 +4,7 @@
 			"Leducthn",
 			"NguyenHung",
 			"Phjtieudoc",
+			"SongNgu.xyz",
 			"Vinhtantran"
 		]
 	},
@@ -41,5 +42,6 @@
 	"valueview-expertextender-languageselector-label": "Ngôn ngữ (bắt buộc):",
 	"valueview-expertextender-unitsuggester-label": "Đơn vị (tùy chọn):",
 	"valueview-preview-label": "sẽ hiển thị là:",
+	"valueview-preview-novalue": "không có giá trị hợp lệ được công nhận",
 	"valueview-listrotator-manually": "thiết lập thủ công"
 }
