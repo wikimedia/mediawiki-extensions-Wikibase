@@ -108,6 +108,8 @@
 	"wikibase-sitelinks-link-columnheading": "Verlinkte Seite",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Verbindung|Verbindungen}} mit {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Benachrichtige mich, wenn jemand eine Seite, die {{GENDER:|ich}} erstellt habe, mit einem {{WBREPONAME}}-Objekt verbindet.",
+	"exceeded-entity-limit-category": "Seiten mit zu vielen aufgerufenen {{WBREPONAME}}-Objekten",
+	"exceeded-entity-limit-category-desc": "Diese Kategorie listet Seiten auf, auf die zu viele {{WBREPONAME}}-Objekte zugegriffen haben.",
 	"notification-header-page-connection": "Die Seite <strong>$3</strong> wurde {{GENDER:$2|mit}} {{PLURAL:$4|-1=einem {{WBREPONAME}}-Objekt|dem {{WBREPONAME}}-Objekt $4}} verbunden, wo themenrelevante Daten gesammelt werden können.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> und {{PLURAL:$4|eine weitere Seite|$4 weitere Seiten|100=mehr als 99 weitere Seiten}} wurden {{GENDER:$2|mit}} {{WBREPONAME}}-Objekten verbunden, in denen zum Thema passende Daten gesammelt werden.",
 	"notification-link-text-view-item": "Objekt {{GENDER:$1|ansehen}}",
