@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use ChangeTags;
 use DataValues\StringValue;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\MediaWikiServices;
@@ -450,7 +449,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$tokenType = 'csrf'
 	) {
 		$dummyTag = __METHOD__ . '-dummy-tag';
-		ChangeTags::defineTag( $dummyTag );
+		$changeTagsStore = $this->getServiceContainer()->getChangeTagsStore();
+
+		$changeTagsStore->defineTag( $dummyTag );
 
 		$params[ 'tags' ] = $dummyTag;
 
@@ -467,7 +468,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		$this->assertContains( $dummyTag,
-			ChangeTags::getTags( $this->db, null, $lastRevid ) );
+			$changeTagsStore->getTags( $this->db, null, $lastRevid ) );
 	}
 
 	private function getLastRevIdFromResult( array $result ) {

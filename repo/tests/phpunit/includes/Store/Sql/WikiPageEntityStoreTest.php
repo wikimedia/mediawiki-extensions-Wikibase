@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use ChangeTags;
 use Exception;
 use InvalidArgumentException;
 use MediaWiki\Language\RawMessage;
@@ -223,7 +222,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
 
 		// check that the tags were applied
-		$r2tags = ChangeTags::getTags( $this->getDb(), null, $r2->getRevisionId() );
+		$r2tags = $this->getServiceContainer()->getChangeTagsStore()->getTags( $this->getDb(), null, $r2->getRevisionId() );
 		$this->assertContains( 'mw-replace', $r2tags );
 
 		// check that the term storage got updated (via a DataUpdate).
@@ -414,7 +413,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the tags were applied
-		$redirectRevTags = ChangeTags::getTags( $this->getDb(), null, $redirectRevId );
+		$redirectRevTags = $this->getServiceContainer()->getChangeTagsStore()->getTags( $this->getDb(), null, $redirectRevId );
 		$this->assertContains( 'mw-replace', $redirectRevTags );
 
 		// check that the term storage got updated (via a DataUpdate).

@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiUsageException;
-use ChangeTags;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
@@ -327,7 +326,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	): void {
 		// -- set up params ---------------------------------
 		$tag = __METHOD__ . '-tag';
-		ChangeTags::defineTag( $tag );
+		$this->getServiceContainer()->getChangeTagsStore()->defineTag( $tag );
 		$params = [
 			'action' => 'wbmergeitems',
 			'fromid' => 'Q1',

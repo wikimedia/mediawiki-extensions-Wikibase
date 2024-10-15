@@ -101,7 +101,7 @@ class ItemMergeInteractor {
 	 * @param bool $bot Mark the edit as bot edit
 	 * @param string[] $tags Change tags to add to the edit.
 	 * Callers are responsible for permission checks
-	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
+	 * (typically using {@link ChangeTagsStore::canAddTagsAccompanyingChange}).
 	 *
 	 * @return ItemMergeStatus Note that the status is only returned
 	 * to wrap the created revisions, context and saved temp user in a strongly typed container.

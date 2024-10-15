@@ -272,14 +272,15 @@ return [
 			);
 		},
 
-	VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER => function (): EditMetadataRequestValidatingDeserializer {
-		return new EditMetadataRequestValidatingDeserializer(
-			new EditMetadataValidator(
-				CommentStore::COMMENT_CHARACTER_LIMIT,
-				ChangeTags::listExplicitlyDefinedTags()
-			)
-		);
-	},
+	VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): EditMetadataRequestValidatingDeserializer {
+			return new EditMetadataRequestValidatingDeserializer(
+				new EditMetadataValidator(
+					CommentStore::COMMENT_CHARACTER_LIMIT,
+					$services->getChangeTagsStore()->listExplicitlyDefinedTags()
+				)
+			);
+		},
 
 	VRD::PATCH_REQUEST_VALIDATING_DESERIALIZER => function (): PatchRequestValidatingDeserializer {
 		return new PatchRequestValidatingDeserializer( new JsonDiffJsonPatchValidator() );

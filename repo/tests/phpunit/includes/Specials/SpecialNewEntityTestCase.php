@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use ChangeTags;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Context\RequestContext;
@@ -54,7 +53,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $entityId );
-		$tags = ChangeTags::getTags( $this->db, null, $title->getLatestRevID() );
+		$tags = $this->getServiceContainer()->getChangeTagsStore()->getTags( $this->db, null, $title->getLatestRevID() );
 		$this->assertArrayEquals( self::TAGS, $tags );
 
 		$entity = WikibaseRepo::getEntityLookup()->getEntity( $entityId );

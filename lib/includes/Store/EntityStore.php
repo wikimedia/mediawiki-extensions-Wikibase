@@ -57,7 +57,7 @@ interface EntityStore {
 	 * $baseRevId is no longer the current revision.
 	 * @param string[] $tags Change tags to add to the edit.
 	 * Callers are responsible for permission checks
-	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
+	 * (typically using {@link ChangeTagsStore::canAddTagsAccompanyingChange}).
 	 *
 	 * @see WikiPage::doEditContent
 	 *
@@ -78,7 +78,7 @@ interface EntityStore {
 	 * $baseRevId is no longer the current revision.
 	 * @param string[] $tags Change tags to add to the edit.
 	 * Callers are responsible for permission checks
-	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
+	 * (typically using {@link ChangeTagsStore::canAddTagsAccompanyingChange}).
 	 *
 	 * @see WikiPage::doEditContent
 	 *
