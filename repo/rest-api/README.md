@@ -112,13 +112,7 @@ The following needs to be correctly set up in order for all the tests to pass:
 * the targeted wiki to act as both [client and repo], so that Items can have sitelinks to pages on the same wiki
 * a `.api-testing.config` file in `repo/rest-api` (next to this README.md file) - see the [MediaWiki API integration tests] docs
 * the [OAuth extension] is installed and configured
-* the following special request headers are enabled by copying the relevant config hacks from [Wikibase.ci.php] to your `LocalSettings.php`:
-  - `X-Wikibase-CI-Badges`
-  - `X-Wikibase-CI-Redirect-Badges`
-  - `X-Wikibase-Ci-Tempuser-Config`
-  - `X-Wikibase-CI-Anon-Rate-Limit-Zero`
-  - `X-Wikibase-CI-Temp-Account-Limit-One`
-
+* copy the `X-Config-Override` hack from [Wikibase.ci.php] to your `LocalSettings.php`. Do NOT do this on any sort of production wiki.
 
 [1]: https://www.mediawiki.org/wiki/MediaWiki_API_integration_tests
 [client and repo]: @ref docs_topics_repo-client-relationship

@@ -173,7 +173,9 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		[ 'xyz', 'mul' ].forEach( ( invalidLanguage ) => {
 			it( `invalid language code: "${invalidLanguage}"`, async () => {
 				const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
-					.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
+					.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+					.assertValidRequest()
+					.makeRequest();
 
 				assertValidError(
 					response,

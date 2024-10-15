@@ -15,12 +15,11 @@ const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFac
 describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	const tempUserPrefix = 'TempUserTest';
 
-	function withTempUserConfig( requestBuilder, config ) {
-		return requestBuilder.withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( config ) );
-	}
-
 	function withTempUsersEnabled( requestBuilder ) {
-		return withTempUserConfig( requestBuilder, { enabled: true, genPattern: `${tempUserPrefix} $1` } );
+		return requestBuilder.withConfigOverride( 'wgAutoCreateTempUser', {
+			enabled: true,
+			genPattern: `${tempUserPrefix} $1`
+		} );
 	}
 
 	const createItemRequest = getItemCreateRequest( itemRequestInputs );
@@ -32,7 +31,8 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 
 	describeEachRouteWithReset( requests, ( newRequestBuilder, requestInputs ) => {
 		it( 'makes an edit as an IP user with tempUser disabled', async () => {
-			const response = await withTempUserConfig( newRequestBuilder(), { enabled: false } )
+			const response = await newRequestBuilder()
+				.withConfigOverride( 'wgAutoCreateTempUser', { enabled: false } )
 				.makeRequest();
 
 			expect( response ).status.to.be.within( 200, 299 );
@@ -59,7 +59,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 			// Ensure caching is enabled for the wiki under test, as the throttler won't work without it.
 			it( 'responds 429 when the temp user creation limit is reached', async () => {
 				const requestBuilder = withTempUsersEnabled( newRequestBuilder() )
-					.withHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', true );
+					.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] );
 
 				await requestBuilder.makeRequest();
 				const response = await requestBuilder.makeRequest();

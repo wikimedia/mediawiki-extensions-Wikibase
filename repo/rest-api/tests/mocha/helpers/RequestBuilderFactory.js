@@ -3,6 +3,13 @@
 const { RequestBuilder } = require( './RequestBuilder' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
 
+async function badgesConfig() {
+	// eslint-disable-next-line es-x/no-object-fromentries
+	return { badgeItems: Object.fromEntries( // TODO fix eslint config to allow this
+		( await getAllowedBadges() ).map( ( badge ) => [ badge, '' ] )
+	) };
+}
+
 module.exports = {
 	newGetItemRequestBuilder( itemId ) {
 		return new RequestBuilder()
@@ -118,7 +125,7 @@ module.exports = {
 			.withRoute( 'PATCH', '/entities/items/{item_id}' )
 			.withPathParam( 'item_id', itemId )
 			.withJsonBodyParam( 'patch', patch )
-			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
+			.withConfigOverride( 'wgWBRepoSettings', badgesConfig );
 	},
 
 	newPatchItemLabelsRequestBuilder( itemId, patch ) {
@@ -175,7 +182,7 @@ module.exports = {
 			.withRoute( 'PATCH', '/entities/items/{item_id}/sitelinks' )
 			.withPathParam( 'item_id', itemId )
 			.withJsonBodyParam( 'patch', patch )
-			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
+			.withConfigOverride( 'wgWBRepoSettings', badgesConfig );
 	},
 
 	newGetItemLabelRequestBuilder( itemId, languageCode ) {
@@ -215,7 +222,7 @@ module.exports = {
 			.withPathParam( 'item_id', itemId )
 			.withPathParam( 'site_id', siteId )
 			.withJsonBodyParam( 'sitelink', sitelink )
-			.withHeader( 'X-Wikibase-CI-Badges', async () => ( await getAllowedBadges() ).join( ',' ) );
+			.withConfigOverride( 'wgWBRepoSettings', badgesConfig );
 	},
 
 	newSetItemLabelRequestBuilder( itemId, languageCode, label ) {

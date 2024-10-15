@@ -269,7 +269,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				const response = await newPatchItemDescriptionsRequestBuilder(
 					testItemId,
 					[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
-				).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
+				).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).assertValidRequest().makeRequest();
 
 				assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 			} );

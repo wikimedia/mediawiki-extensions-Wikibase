@@ -106,7 +106,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: label } ]
-			).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).makeRequest();
+			).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.mul, label );
