@@ -31,7 +31,7 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/SitelinksPatch" },
+		"requestBody": { "$ref": "./requests.json#/PatchSitelinks" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Sitelinks" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },

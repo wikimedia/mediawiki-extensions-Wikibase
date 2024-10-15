@@ -32,7 +32,7 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/ItemPatch" },
+		"requestBody": { "$ref": "./requests.json#/PatchItem" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/Item" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },

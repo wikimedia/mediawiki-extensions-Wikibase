@@ -84,7 +84,129 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Item"
+          "description": "Payload containing a Wikibase Item and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "item": {
+                        "$ref": "#/components/schemas/Item"
+                      }
+                    },
+                    "required": [
+                      "item"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "item": {
+                  "labels": {
+                    "en": "Jane Doe",
+                    "ru": "Джейн Доу"
+                  },
+                  "descriptions": {
+                    "en": "famous person",
+                    "ru": "известная личность"
+                  },
+                  "aliases": {
+                    "en": [
+                      "Jane M. Doe",
+                      "JD"
+                    ],
+                    "ru": [
+                      "Джейн М. Доу"
+                    ]
+                  },
+                  "statements": {
+                    "P694": [
+                      {
+                        "property": {
+                          "id": "P694"
+                        },
+                        "value": {
+                          "type": "value",
+                          "content": "Q626683"
+                        }
+                      }
+                    ],
+                    "P476": [
+                      {
+                        "property": {
+                          "id": "P476"
+                        },
+                        "value": {
+                          "type": "value",
+                          "content": {
+                            "time": "+1986-01-27T00:00:00Z",
+                            "precision": 11,
+                            "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                          }
+                        }
+                      }
+                    ],
+                    "P17": [
+                      {
+                        "property": {
+                          "id": "P17"
+                        },
+                        "value": {
+                          "type": "value",
+                          "content": "Senior Team Supervisor"
+                        },
+                        "qualifiers": [
+                          {
+                            "property": {
+                              "id": "P706"
+                            },
+                            "value": {
+                              "type": "value",
+                              "content": {
+                                "time": "+2023-06-13T00:00:00Z",
+                                "precision": 11,
+                                "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                              }
+                            }
+                          }
+                        ],
+                        "references": [
+                          {
+                            "parts": [
+                              {
+                                "property": {
+                                  "id": "P709"
+                                },
+                                "value": {
+                                  "type": "value",
+                                  "content": "http://www.example.org"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "sitelinks": {
+                    "enwiki": {
+                      "title": "Jane Doe"
+                    },
+                    "ruwiki": {
+                      "title": "Джейн Доу"
+                    }
+                  }
+                },
+                "comment": "Create an Item for Jane Doe"
+              }
+            }
+          }
         },
         "responses": {
           "201": {
@@ -244,7 +366,84 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/ItemPatch"
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "patch": {
+                        "description": "A JSON Patch document as defined by RFC 6902",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "op": {
+                              "description": "The operation to perform",
+                              "type": "string",
+                              "enum": [
+                                "add",
+                                "copy",
+                                "move",
+                                "remove",
+                                "replace",
+                                "test"
+                              ]
+                            },
+                            "path": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "from": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "value": {
+                              "description": "The value to be used within the operation"
+                            }
+                          },
+                          "required": [
+                            "op",
+                            "path"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "patch"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "value": {
+                  "patch": [
+                    {
+                      "op": "replace",
+                      "path": "/labels/en",
+                      "value": "Jane Doe"
+                    }
+                  ],
+                  "tags": [],
+                  "bot": false,
+                  "comment": "Update the English label"
+                }
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -349,7 +548,36 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/SitelinksPatch"
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1sitelinks/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "value": {
+                  "patch": [
+                    {
+                      "op": "add",
+                      "path": "/ruwiki/title",
+                      "value": "Джейн Доу"
+                    }
+                  ],
+                  "tags": [],
+                  "bot": false,
+                  "comment": "Add sitelink to ruwiki"
+                }
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -521,7 +749,39 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Sitelink"
+          "description": "Payload containing a Wikibase Sitelink object and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "sitelink": {
+                        "$ref": "#/components/schemas/Sitelink"
+                      }
+                    },
+                    "required": [
+                      "sitelink"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "sitelink": {
+                  "title": "Jane Doe",
+                  "badges": []
+                },
+                "tags": [],
+                "bot": false,
+                "comment": "Add enwiki sitelink"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -709,7 +969,54 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Property"
+          "description": "Payload containing a Wikibase Property and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "property": {
+                        "$ref": "#/components/schemas/Property"
+                      }
+                    },
+                    "required": [
+                      "property"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "property": {
+                  "data_type": "wikibase-item",
+                  "labels": {
+                    "en": "instance of",
+                    "ru": "это частный случай понятия"
+                  },
+                  "descriptions": {
+                    "en": "this item is a concrete object (instance) of this class, category or object group",
+                    "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
+                  },
+                  "aliases": {
+                    "en": [
+                      "is a",
+                      "is an"
+                    ],
+                    "ru": [
+                      "представляет собой",
+                      "является"
+                    ]
+                  },
+                  "statements": {}
+                }
+              }
+            }
+          }
         },
         "responses": {
           "201": {
@@ -860,7 +1167,34 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/PatchProperty"
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "add",
+                    "path": "/aliases/en/-",
+                    "value": "is an"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "add 'is an' as an English alias"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -2227,7 +2561,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2235,7 +2569,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -2388,7 +2722,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2396,7 +2730,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -4524,291 +4858,6 @@
       }
     },
     "requestBodies": {
-      "Item": {
-        "description": "Payload containing a Wikibase Item and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "item": {
-                      "$ref": "#/components/schemas/Item"
-                    }
-                  },
-                  "required": [
-                    "item"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            },
-            "example": {
-              "item": {
-                "labels": {
-                  "en": "Jane Doe",
-                  "ru": "Джейн Доу"
-                },
-                "descriptions": {
-                  "en": "famous person",
-                  "ru": "известная личность"
-                },
-                "aliases": {
-                  "en": [
-                    "Jane M. Doe",
-                    "JD"
-                  ],
-                  "ru": [
-                    "Джейн М. Доу"
-                  ]
-                },
-                "statements": {
-                  "P694": [
-                    {
-                      "property": {
-                        "id": "P694"
-                      },
-                      "value": {
-                        "type": "value",
-                        "content": "Q626683"
-                      }
-                    }
-                  ],
-                  "P476": [
-                    {
-                      "property": {
-                        "id": "P476"
-                      },
-                      "value": {
-                        "type": "value",
-                        "content": {
-                          "time": "+1986-01-27T00:00:00Z",
-                          "precision": 11,
-                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
-                        }
-                      }
-                    }
-                  ],
-                  "P17": [
-                    {
-                      "property": {
-                        "id": "P17"
-                      },
-                      "value": {
-                        "type": "value",
-                        "content": "Senior Team Supervisor"
-                      },
-                      "qualifiers": [
-                        {
-                          "property": {
-                            "id": "P706"
-                          },
-                          "value": {
-                            "type": "value",
-                            "content": {
-                              "time": "+2023-06-13T00:00:00Z",
-                              "precision": 11,
-                              "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
-                            }
-                          }
-                        }
-                      ],
-                      "references": [
-                        {
-                          "parts": [
-                            {
-                              "property": {
-                                "id": "P709"
-                              },
-                              "value": {
-                                "type": "value",
-                                "content": "http://www.example.org"
-                              }
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "sitelinks": {
-                  "enwiki": {
-                    "title": "Jane Doe"
-                  },
-                  "ruwiki": {
-                    "title": "Джейн Доу"
-                  }
-                }
-              },
-              "comment": "Create an Item for Jane Doe"
-            }
-          }
-        }
-      },
-      "ItemPatch": {
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
-            },
-            "example": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/example"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "patch": {
-                      "description": "A JSON Patch document as defined by RFC 6902",
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "op": {
-                            "description": "The operation to perform",
-                            "type": "string",
-                            "enum": [
-                              "add",
-                              "copy",
-                              "move",
-                              "remove",
-                              "replace",
-                              "test"
-                            ]
-                          },
-                          "path": {
-                            "description": "A JSON Pointer",
-                            "type": "string"
-                          },
-                          "from": {
-                            "description": "A JSON Pointer",
-                            "type": "string"
-                          },
-                          "value": {
-                            "description": "The value to be used within the operation"
-                          }
-                        },
-                        "required": [
-                          "op",
-                          "path"
-                        ]
-                      }
-                    }
-                  },
-                  "required": [
-                    "patch"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            },
-            "example": {
-              "value": {
-                "patch": [
-                  {
-                    "op": "replace",
-                    "path": "/labels/en",
-                    "value": "Jane Doe"
-                  }
-                ],
-                "tags": [],
-                "bot": false,
-                "comment": "Update the English label"
-              }
-            }
-          }
-        }
-      },
-      "Property": {
-        "description": "Payload containing a Wikibase Property and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "property": {
-                      "$ref": "#/components/schemas/Property"
-                    }
-                  },
-                  "required": [
-                    "property"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            },
-            "example": {
-              "property": {
-                "data_type": "wikibase-item",
-                "labels": {
-                  "en": "instance of",
-                  "ru": "это частный случай понятия"
-                },
-                "descriptions": {
-                  "en": "this item is a concrete object (instance) of this class, category or object group",
-                  "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории."
-                },
-                "aliases": {
-                  "en": [
-                    "is a",
-                    "is an"
-                  ],
-                  "ru": [
-                    "представляет собой",
-                    "является"
-                  ]
-                },
-                "statements": {}
-              }
-            }
-          }
-        }
-      },
-      "PatchProperty": {
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
-            },
-            "example": {
-              "$ref": "#/components/requestBodies/PatchProperty/content/application~1json/example"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
-            },
-            "example": {
-              "patch": [
-                {
-                  "op": "add",
-                  "path": "/aliases/en/-",
-                  "value": "is an"
-                }
-              ],
-              "tags": [],
-              "bot": false,
-              "comment": "add 'is an' as an English alias"
-            }
-          }
-        }
-      },
       "Aliases": {
         "description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
         "required": true,
@@ -5053,73 +5102,6 @@
                   "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
-            }
-          }
-        }
-      },
-      "Sitelink": {
-        "description": "Payload containing a Wikibase Sitelink object and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "sitelink": {
-                      "$ref": "#/components/schemas/Sitelink"
-                    }
-                  },
-                  "required": [
-                    "sitelink"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            },
-            "example": {
-              "sitelink": {
-                "title": "Jane Doe",
-                "badges": []
-              },
-              "tags": [],
-              "bot": false,
-              "comment": "API edit fixing the modelling as discussed in ..."
-            }
-          }
-        }
-      },
-      "SitelinksPatch": {
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
-            },
-            "example": {
-              "$ref": "#/components/requestBodies/SitelinksPatch/content/application~1json/example"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
-            },
-            "example": {
-              "value": {
-                "patch": [
-                  {
-                    "op": "add",
-                    "path": "/ruwiki/title",
-                    "value": "Джейн Доу"
-                  }
-                ],
-                "tags": [],
-                "bot": false,
-                "comment": "Add sitelink to ruwiki"
-              }
             }
           }
         }

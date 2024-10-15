@@ -7,7 +7,7 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Property" },
+		"requestBody": { "$ref": "./requests.json#/Property" },
 		"responses": {
 			"201": { "$ref": "../../global/responses.json#/Property" },
 			"400": { "$ref": "./responses.json#/InvalidNewPropertyInput" },
