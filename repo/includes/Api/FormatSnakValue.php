@@ -290,6 +290,11 @@ class FormatSnakValue extends ApiBase {
 					);
 				}
 				break;
+			default:
+				$this->errorReporter->dieWithError(
+					[ 'wikibase-api-invalid-formatter-options-unknown-option', $value ],
+					'param-illegal'
+				);
 		}
 		$options->setOption( $option, $value );
 	}

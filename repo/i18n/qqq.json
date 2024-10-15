@@ -487,6 +487,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "API error message indicating that the passed formatter option \"applyRounding\" is invalid.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "API error message indicating that the passed formatter option \"applyUnit\" is invalid.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "API error message indicating that the passed formatter option \"showcalendar\" is invalid.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "API error message indicating that the passed formatter options are unknown.\n* $1 - name of the unsupported option",
 	"wikibase-self-conflict-patched": "Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.",
 	"wikibase-conflict-patched": "Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.",
 	"wikibase-save-unresolved-redirect": "Error shown when an unresolved redirect was encountered while trying to save a change to an entity. Parameters:\n* $1 - the source id\n* $2 - the target id",

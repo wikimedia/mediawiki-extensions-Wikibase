@@ -472,4 +472,18 @@ class FormatSnakValueTest extends ApiTestCase {
 		yield [ 12 ];
 	}
 
+	public function testApiRequest_unknownOption(): void {
+		$this->expectException(
+			ApiUsageException::class,
+			[ 'wikibase-api-invalid-formatter-options-unknown-option', 'foo' ]
+		);
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'time',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ 'foo' => 'bar' ] ),
+		] );
+	}
+
 }
