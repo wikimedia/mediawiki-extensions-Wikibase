@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\Request\WebRequest;
-
 /**
  * CI configuration for the Wikibase Repo extension.
  *
@@ -45,25 +43,6 @@ $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta
 
 // make sitelinks to the current wiki work
 $wgWBRepoSettings['siteLinkGroups'][] = 'CI';
-
-$originalBadgeItems = $wgWBRepoSettings['badgeItems'] ?? [];
-$originalRedirectBadgeItems = $wgWBRepoSettings['redirectBadgeItems'] ?? [];
-$wgWBRepoSettings['badgeItems'] = static function () use ( $originalBadgeItems ) {
-	global $wgRequest;
-
-	$badges = $wgRequest->getHeader( 'X-Wikibase-CI-Badges', WebRequest::GETHEADER_LIST ) ?: [];
-	return $originalBadgeItems + array_fill_keys( $badges, 'CI-badge-class' );
-};
-$wgWBRepoSettings['redirectBadgeItems'] = static function () use ( $originalRedirectBadgeItems ) {
-	global $wgRequest;
-
-	return array_merge(
-		$originalRedirectBadgeItems,
-		$wgRequest->getHeader( 'X-Wikibase-CI-Redirect-Badges', WebRequest::GETHEADER_LIST ) ?: []
-	);
-};
-unset( $originalBadgeItems );
-unset( $originalRedirectBadgeItems );
 
 // This is a dangerous hack that should never ever be done on any production wiki. It enables e2e tests for config-dependent behavior.
 $configOverrides = json_decode( RequestContext::getMain()->getRequest()->getHeader( 'X-Config-Override' ) ?: '{}', true );
