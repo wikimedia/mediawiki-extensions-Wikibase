@@ -370,7 +370,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/example"
@@ -378,55 +378,7 @@
             },
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "patch": {
-                        "description": "A JSON Patch document as defined by RFC 6902",
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "op": {
-                              "description": "The operation to perform",
-                              "type": "string",
-                              "enum": [
-                                "add",
-                                "copy",
-                                "move",
-                                "remove",
-                                "replace",
-                                "test"
-                              ]
-                            },
-                            "path": {
-                              "description": "A JSON Pointer",
-                              "type": "string"
-                            },
-                            "from": {
-                              "description": "A JSON Pointer",
-                              "type": "string"
-                            },
-                            "value": {
-                              "description": "The value to be used within the operation"
-                            }
-                          },
-                          "required": [
-                            "op",
-                            "path"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "patch"
-                    ]
-                  },
-                  {
-                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                  }
-                ]
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "value": {
@@ -552,7 +504,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1sitelinks/patch/requestBody/content/application~1json/example"
@@ -560,7 +512,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "value": {
@@ -1171,7 +1123,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D/patch/requestBody/content/application~1json/example"
@@ -1179,7 +1131,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -1256,7 +1208,38 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemDescriptions"
+            "description": "Item's descriptions by language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Descriptions"
+                },
+                "example": {
+                  "en": "famous person",
+                  "ru": "известная личность"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1299,12 +1282,87 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/DescriptionsPatch",
-          "description": "Payload containing a JSON Patch document to be applied to an Item's descriptions and, optionally, edit metadata"
+          "description": "Payload containing a JSON Patch document to be applied to an Item's descriptions and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "patch": {
+                        "description": "A JSON Patch document as defined by RFC 6902",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "op": {
+                              "description": "The operation to perform",
+                              "type": "string",
+                              "enum": [
+                                "add",
+                                "copy",
+                                "move",
+                                "remove",
+                                "replace",
+                                "test"
+                              ]
+                            },
+                            "path": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "from": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "value": {
+                              "description": "The value to be used within the operation"
+                            }
+                          },
+                          "required": [
+                            "op",
+                            "path"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "patch"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/en",
+                    "value": "famous person"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "update English description"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemDescriptions"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -1362,7 +1420,38 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyDescriptions"
+            "description": "Property's descriptions by language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Descriptions"
+                },
+                "example": {
+                  "en": "this item is a concrete object (instance) of this class, category or object group",
+                  "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1402,12 +1491,39 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/DescriptionsPatch",
-          "description": "Payload containing a JSON Patch document to be applied to a Property's descriptions and, optionally, edit metadata"
+          "description": "Payload containing a JSON Patch document to be applied to a Property's descriptions and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/en",
+                    "value": "this item is a concrete object (instance) of this class, category or object group"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "update English description"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyDescriptions"
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -1468,7 +1584,35 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description"
+            "description": "Item's description in a specific language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "famous person"
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1520,16 +1664,45 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Description"
+          "description": "Payload containing Item description in the specified language and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "description"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "description": "famous person",
+                "tags": [],
+                "bot": false,
+                "comment": "set English description"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description",
-            "description": "The updated Description in a specific language"
+            "description": "The updated description",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "201": {
-            "$ref": "#/components/responses/Description",
-            "description": "The newly added Description in a specific language"
+            "description": "The newly added description",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1594,7 +1767,23 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/DescriptionDeleted"
+            "description": "The description was deleted",
+            "headers": {
+              "Content-Language": {
+                "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Description deleted"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
@@ -1652,7 +1841,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1710,7 +1899,35 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description"
+            "description": "Property's description in a specific language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "this item is a concrete object (instance) of this class, category or object group"
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1730,7 +1947,7 @@
         }
       },
       "put": {
-        "operationId": "replacePropertyDescription",
+        "operationId": "setPropertyDescription",
         "tags": [
           "descriptions"
         ],
@@ -1759,16 +1976,29 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Description"
+          "description": "Payload containing Property description in the specified language and edit metadata",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/put/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "description": "this item is a concrete object (instance) of this class, category or object group",
+                "tags": [],
+                "bot": false,
+                "comment": "set English description"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description",
-            "description": "The updated Description in a specific language"
+            "description": "The updated description",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "201": {
-            "$ref": "#/components/responses/Description",
-            "description": "The newly added Description in a specific language"
+            "description": "The newly added description",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1830,7 +2060,7 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/DescriptionDeleted"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/delete/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveDescriptionInput"
@@ -1885,7 +2115,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Description"
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2561,7 +2791,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2569,7 +2799,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -2722,7 +2952,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2730,7 +2960,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -4901,7 +5131,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -4913,71 +5143,6 @@
                           },
                           "value": {
                             "example": "en-alias1"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "Description": {
-        "description": "Payload containing a Wikibase description in the specified language and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "description": {
-                      "type": "string",
-                      "example": "an example description"
-                    }
-                  },
-                  "required": [
-                    "description"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "DescriptionsPatch": {
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/DescriptionsPatch/content/application~1json/schema"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
-                },
-                {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/en"
-                          },
-                          "value": {
-                            "example": "en-description"
                           }
                         }
                       }
@@ -5080,7 +5245,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -5140,25 +5305,6 @@
       }
     },
     "responses": {
-      "DescriptionDeleted": {
-        "description": "The resource was deleted",
-        "headers": {
-          "Content-Language": {
-            "description": "Language code of the language in which response is provided",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "string"
-            },
-            "example": "Description deleted"
-          }
-        }
-      },
       "StatementDeleted": {
         "description": "The resource was deleted",
         "headers": {
@@ -6201,36 +6347,6 @@
           }
         }
       },
-      "ItemDescriptions": {
-        "description": "Item's descriptions by language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Descriptions"
-            }
-          }
-        }
-      },
       "ItemAliases": {
         "description": "Item's aliases by language",
         "headers": {
@@ -6372,67 +6488,6 @@
                 ]
               },
               "statements": {}
-            }
-          }
-        }
-      },
-      "PropertyDescriptions": {
-        "description": "Property's descriptions by language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Descriptions"
-            }
-          }
-        }
-      },
-      "Description": {
-        "description": "A description in a specific language",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "string",
-              "example": "an example description"
             }
           }
         }

@@ -34,44 +34,6 @@
 			}
 		}
 	},
-	"Description": {
-		"description": "Payload containing a Wikibase description in the specified language and edit metadata",
-		"required": true,
-		"content": {
-			"application/json": {
-				"schema": {
-					"allOf": [
-						{
-							"type": "object",
-							"properties": {
-								"description": {
-									"type": "string",
-									"example": "an example description"
-								}
-							},
-							"required": [ "description" ]
-						},
-						{ "$ref": "./request-parts.json#/MediawikiEdit" }
-					]
-				}
-			}
-		}
-	},
-	"DescriptionsPatch": {
-		"required": true,
-		"content": {
-			"application/json-patch+json": {
-				"schema": {
-					"$ref": "./request-parts.json#/DescriptionsPatchRequest"
-				}
-			},
-			"application/json": {
-				"schema": {
-					"$ref": "./request-parts.json#/DescriptionsPatchRequest"
-				}
-			}
-		}
-	},
 	"Statement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,
@@ -106,7 +68,7 @@
 			"application/json": {
 				"schema": { "$ref": "./request-parts.json#/MediawikiEdit" },
 				"example": {
-					"tags": [],
+					"tags": [ ],
 					"bot": false,
 					"comment": "API edit fixing the modelling as discussed in ..."
 				}
