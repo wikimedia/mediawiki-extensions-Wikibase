@@ -13,7 +13,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Description" },
+			"200": { "$ref": "./responses.json#/PropertyDescription" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -22,7 +22,7 @@
 		}
 	},
 	"put": {
-		"operationId": "replacePropertyDescription",
+		"operationId": "setPropertyDescription",
 		"tags": [ "descriptions" ],
 		"summary": "Add / Replace a Property's description in a specific language",
 		"parameters": [
@@ -34,15 +34,28 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Description" },
+		"requestBody": {
+			"description": "Payload containing Property description in the specified language and edit metadata",
+			"content": {
+				"application/json": {
+					"schema": { "$ref": "./requests.json#/SetDescriptionInLanguage" },
+					"example": {
+						"description": "this item is a concrete object (instance) of this class, category or object group",
+						"tags": [],
+						"bot": false,
+						"comment": "set English description"
+					}
+				}
+			}
+		},
 		"responses": {
 			"200": {
-				"$ref": "../../global/responses.json#/Description",
-				"description": "The updated Description in a specific language"
+				"description": "The updated description",
+				"$ref": "./responses.json#/PropertyDescription"
 			},
 			"201": {
-				"$ref": "../../global/responses.json#/Description",
-				"description": "The newly added Description in a specific language"
+				"description": "The newly added description",
+				"$ref": "./responses.json#/PropertyDescription"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidSetDescriptionInput" },
@@ -69,7 +82,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Delete" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/DescriptionDeleted" },
+			"200": { "$ref": "./responses.json#/DescriptionDeleted" },
 			"400": { "$ref": "../../global/responses.json#/InvalidRemoveDescriptionInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

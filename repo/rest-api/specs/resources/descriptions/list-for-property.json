@@ -12,7 +12,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyDescriptions" },
+			"200": { "$ref": "./responses.json#/PropertyDescriptions" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidEntityIdInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -31,11 +31,21 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
 		"requestBody": {
-			"$ref": "../../global/requests.json#/DescriptionsPatch",
-			"description": "Payload containing a JSON Patch document to be applied to a Property's descriptions and, optionally, edit metadata"
+			"description": "Payload containing a JSON Patch document to be applied to a Property's descriptions and edit metadata",
+			"required": true,
+			"content": {
+				"application/json-patch+json": {
+					"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+					"example": { "$ref": "./examples.json#/PatchPropertyDescriptions" }
+				},
+				"application/json": {
+					"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+					"example": { "$ref": "./examples.json#/PatchPropertyDescriptions" }
+				}
+			}
 		},
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyDescriptions" },
+			"200": { "$ref": "./responses.json#/PropertyDescriptions" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

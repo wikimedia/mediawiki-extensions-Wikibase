@@ -5,28 +5,6 @@
 			{ "$ref": "#/MediawikiEdit" }
 		]
 	},
-	"DescriptionsPatchRequest": {
-		"allOf": [
-			{ "$ref": "#/PatchDocument" },
-			{
-				"properties": {
-					"patch": {
-						"items": {
-							"properties": {
-								"path": {
-									"example": "/en"
-								},
-								"value": {
-									"example": "en-description"
-								}
-							}
-						}
-					}
-				}
-			},
-			{ "$ref": "#/MediawikiEdit" }
-		]
-	},
 	"AliasesPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },

@@ -1,23 +1,4 @@
 {
-	"DescriptionDeleted": {
-		"description": "The resource was deleted",
-		"headers": {
-			"Content-Language": {
-				"description": "Language code of the language in which response is provided",
-				"schema": {
-					"type": "string"
-				}
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"type": "string"
-				},
-				"example": "Description deleted"
-			}
-		}
-	},
 	"StatementDeleted": {
 		"description": "The resource was deleted",
 		"headers": {
@@ -778,36 +759,6 @@
 			}
 		}
 	},
-	"ItemDescriptions": {
-		"description": "Item's descriptions by language",
-		"headers": {
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"$ref": "./schemas.json#/Descriptions"
-				}
-			}
-		}
-	},
 	"ItemAliases": {
 		"description": "Item's aliases by language",
 		"headers": {
@@ -923,67 +874,6 @@
 						]
 					},
 					"statements": {}
-				}
-			}
-		}
-	},
-	"PropertyDescriptions": {
-		"description": "Property's descriptions by language",
-		"headers": {
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"$ref": "./schemas.json#/Descriptions"
-				}
-			}
-		}
-	},
-	"Description": {
-		"description": "A description in a specific language",
-		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"type": "string",
-					"example": "an example description"
 				}
 			}
 		}
