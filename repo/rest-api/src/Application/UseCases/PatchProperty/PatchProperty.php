@@ -10,7 +10,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
 use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
@@ -86,7 +86,7 @@ class PatchProperty {
 				$providedMetadata->getTags(),
 				$providedMetadata->isBot(),
 				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-					PropertyEditSummary::newPatchSummary( $providedMetadata->getComment(), $originalProperty, $patchedProperty )
+					PatchPropertyEditSummary::newSummary( $providedMetadata->getComment(), $originalProperty, $patchedProperty )
 			)
 		) );
 

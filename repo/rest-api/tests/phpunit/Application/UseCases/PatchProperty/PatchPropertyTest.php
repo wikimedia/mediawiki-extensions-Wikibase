@@ -42,7 +42,7 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
@@ -150,7 +150,7 @@ class PatchPropertyTest extends TestCase {
 			new EditMetadata(
 				$editTags,
 				$isBot,
-				PropertyEditSummary::newPatchSummary(
+				PatchPropertyEditSummary::newSummary(
 					$comment,
 					$originalProperty,
 					$propertyRepo->getPropertyWriteModel( $propertyId )

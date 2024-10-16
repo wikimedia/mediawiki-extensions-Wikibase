@@ -7,22 +7,22 @@ use Wikibase\DataModel\Entity\Property;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyEditSummary implements EditSummary {
+class PatchPropertyEditSummary implements EditSummary {
 
 	private string $editAction;
 	private ?string $userComment;
 	private Property $patchedProperty;
 	private Property $originalProperty;
 
-	public function __construct( string $editAction, ?string $userComment, Property $originalProperty, Property $patchedProperty ) {
-		$this->editAction = $editAction;
+	public function __construct( ?string $userComment, Property $originalProperty, Property $patchedProperty ) {
+		$this->editAction = self::PATCH_ACTION;
 		$this->userComment = $userComment;
 		$this->originalProperty = $originalProperty;
 		$this->patchedProperty = $patchedProperty;
 	}
 
-	public static function newPatchSummary( ?string $userComment, Property $originalProperty, Property $patchedProperty ): self {
-		return new self( self::PATCH_ACTION, $userComment, $originalProperty, $patchedProperty );
+	public static function newSummary( ?string $userComment, Property $originalProperty, Property $patchedProperty ): self {
+		return new self( $userComment, $originalProperty, $patchedProperty );
 	}
 
 	public function getEditAction(): string {
