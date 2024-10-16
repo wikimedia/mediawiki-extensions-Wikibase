@@ -1,0 +1,20 @@
+{
+	"post": {
+		"operationId": "addProperty",
+		"tags": [ "properties" ],
+		"summary": "[WIP] Create a Wikibase Property",
+		"description": "This endpoint is currently in development and is not recommended for production use",
+		"parameters": [
+			{ "$ref": "../../global/parameters.json#/Authorization" }
+		],
+		"requestBody": { "$ref": "../../global/requests.json#/Property" },
+		"responses": {
+			"201": { "$ref": "../../global/responses.json#/Property" },
+			"400": { "$ref": "./responses.json#/InvalidNewPropertyInput" },
+			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
+			"422": { "$ref": "../../global/responses.json#/DataPolicyViolation" },
+			"429": { "$ref": "../../global/responses.json#/RequestLimitReached" },
+			"500": { "$ref": "../../global/responses.json#/UnexpectedError" }
+		}
+	}
+}
