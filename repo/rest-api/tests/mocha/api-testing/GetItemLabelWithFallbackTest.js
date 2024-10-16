@@ -15,8 +15,9 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 	const fallbackLanguageWithExistingLabel = 'ar';
 
 	async function makeRequestWithMulHeader( requestBuilder ) {
-
-		return requestBuilder.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).assertValidRequest().makeRequest();
+		return requestBuilder.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+			.assertValidRequest()
+			.makeRequest();
 	}
 
 	before( async () => {

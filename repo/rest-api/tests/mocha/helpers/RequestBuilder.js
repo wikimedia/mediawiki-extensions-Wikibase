@@ -27,8 +27,8 @@ class RequestBuilder {
 		this.queryParams = {};
 		this.jsonBodyParams = {};
 		this.headers = { 'user-agent': 'e2e tests' };
-		this.headerCallbacks = {};
 		this.user = null;
+		this.configOverrides = {};
 		this.validate = false;
 		this.assertValid = false;
 	}
@@ -70,17 +70,8 @@ class RequestBuilder {
 		return this;
 	}
 
-	/**
-	 * @param {string} name
-	 * @param {string|Function} value - function arguments will be evaluated when makeRequest() is called
-	 * @return {this}
-	 */
 	withHeader( name, value ) {
-		if ( value instanceof Function ) {
-			this.headerCallbacks[ name.toLowerCase() ] = value;
-		} else {
-			this.headers[ name.toLowerCase() ] = value;
-		}
+		this.headers[ name.toLowerCase() ] = value;
 		return this;
 	}
 
@@ -90,6 +81,16 @@ class RequestBuilder {
 	 */
 	withUser( user ) {
 		this.user = user;
+		return this;
+	}
+
+	/**
+	 * @param {string} setting
+	 * @param {*|Function} value - function arguments will be evaluated when makeRequest() is called
+	 * @return {this}
+	 */
+	withConfigOverride( setting, value ) {
+		this.configOverrides[ setting ] = value;
 		return this;
 	}
 
@@ -111,11 +112,6 @@ class RequestBuilder {
 			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
 		}
 
-		( await Promise.all(
-			Object.entries( this.headerCallbacks )
-				.map( async ( [ name, fn ] ) => [ name, await fn() ] )
-		) ).forEach( ( [ name, value ] ) => this.withHeader( name, value ) );
-
 		const spec = await getOrLoadSpec();
 		this.validateRouteAndMethod( spec );
 		if ( this.validate ) {
@@ -132,6 +128,13 @@ class RequestBuilder {
 				body = this.jsonBodyParams;
 				break;
 		}
+
+		for ( const setting in this.configOverrides ) {
+			this.configOverrides[ setting ] = this.configOverrides[ setting ] instanceof Function ?
+				await this.configOverrides[ setting ]() :
+				this.configOverrides[ setting ];
+		}
+		this.headers[ 'x-config-override' ] = JSON.stringify( this.configOverrides );
 
 		const rest = clientFactory.getRESTClient( basePath, this.user );
 

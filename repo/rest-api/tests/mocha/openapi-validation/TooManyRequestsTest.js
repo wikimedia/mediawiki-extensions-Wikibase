@@ -14,8 +14,8 @@ describe( 'Too Many Requests', () => {
 	before( async () => {
 		// ensure one temp user is created
 		await newCreateItemRequestBuilder( { labels: { en: `en-label-${utils.uniq()}` } } )
-			.withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( { enabled: true } ) )
-			.withHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', true )
+			.withConfigOverride( 'wgAutoCreateTempUser', { enabled: true } )
+			.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] )
 			.makeRequest();
 	} );
 
@@ -27,8 +27,8 @@ describe( 'Too Many Requests', () => {
 		].forEach( ( { newRequestBuilder } ) => {
 			it( `${newRequestBuilder().getRouteDescription()} responds with a valid 429 response`, async () => {
 				const response = await newRequestBuilder()
-					.withHeader( 'X-Wikibase-Ci-Tempuser-Config', JSON.stringify( { enabled: true } ) )
-					.withHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', true )
+					.withConfigOverride( 'wgAutoCreateTempUser', { enabled: true } )
+					.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] )
 					.makeRequest();
 
 				expect( response ).to.have.status( 429 );

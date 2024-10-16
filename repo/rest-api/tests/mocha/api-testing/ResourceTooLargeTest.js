@@ -45,7 +45,7 @@ describeWithTestData( 'Resource too large tests', ( itemRequestInputs, propertyR
 				itemRequestInputs.itemId,
 				[ { op: 'add', path: `/statements/${predicatePropertyId}`, value: fiveThousandStatements } ]
 			)
-				.withHeader( 'X-Wikibase-CI-MAX-ENTITY-SIZE', maxSizeInKb.toString() )
+				.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -57,7 +57,7 @@ describeWithTestData( 'Resource too large tests', ( itemRequestInputs, propertyR
 				propertyRequestInputs.propertyId,
 				[ { op: 'add', path: `/statements/${predicatePropertyId}`, value: fiveThousandStatements } ]
 			)
-				.withHeader( 'X-Wikibase-CI-MAX-ENTITY-SIZE', maxSizeInKb.toString() )
+				.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
 				.assertValidRequest()
 				.makeRequest();
 

@@ -65,25 +65,8 @@ $wgWBRepoSettings['redirectBadgeItems'] = static function () use ( $originalRedi
 unset( $originalBadgeItems );
 unset( $originalRedirectBadgeItems );
 
-global $wgAutoCreateTempUser;
-$wgAutoCreateTempUser = array_merge(
-	$wgAutoCreateTempUser,
-	json_decode( getallheaders()[ 'X-Wikibase-Ci-Tempuser-Config' ] ?? '{}', true )
-);
-
-$wgWBRepoSettings['tmpEnableMulLanguageCode'] = boolval( getallheaders()[ 'X-Wikibase-Ci-Enable-Mul' ] ?? false );
-
-$originalMaxSize = $wgWBRepoSettings['maxSerializedEntitySize'] ?? $GLOBALS['wgMaxArticleSize'];
-
-$request = RequestContext::getMain()->getRequest();
-$headerMaxSize = $request->getHeader( 'X-Wikibase-CI-MAX-ENTITY-SIZE', WebRequest::GETHEADER_LIST );
-
-$wgWBRepoSettings['maxSerializedEntitySize'] = (int)( $headerMaxSize ?: $originalMaxSize );
-
-if ( $request->getHeader( 'X-Wikibase-CI-Anon-Rate-Limit-Zero', WebRequest::GETHEADER_LIST ) ) {
-	$wgRateLimits = [ 'edit' => [ 'anon' => [ 0, 60 ] ] ];
-}
-
-if ( $request->getHeader( 'X-Wikibase-CI-Temp-Account-Limit-One', WebRequest::GETHEADER_LIST ) ) {
-	$wgTempAccountCreationThrottle = [ [ 'count' => 1, 'seconds' => 86400 ] ];
+// This is a dangerous hack that should never ever be done on any production wiki. It enables e2e tests for config-dependent behavior.
+$configOverrides = json_decode( RequestContext::getMain()->getRequest()->getHeader( 'X-Config-Override' ) ?: '{}', true );
+foreach ( $configOverrides as $name => $value ) {
+	$GLOBALS[$name] = is_array( $value ) ? array_merge( $GLOBALS[$name] ?? [], $value ) : $value;
 }

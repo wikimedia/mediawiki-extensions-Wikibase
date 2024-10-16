@@ -100,7 +100,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: [ alias ] } ]
-			).withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' ).makeRequest();
+			).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.deepEqual( response.body.mul, [ alias ] );

@@ -98,7 +98,7 @@ describe( newRequest().getRouteDescription(), () => {
 
 		it( 'can add a "mul" alias', async () => {
 			const response = await newRequest( testItemId, 'mul', [ 'mul alias' ] )
-				.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' )
+				.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
 				.assertValidRequest()
 				.makeRequest();
 

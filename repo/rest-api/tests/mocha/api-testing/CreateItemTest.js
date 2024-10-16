@@ -658,7 +658,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ badge ] } }
 			} )
-				.withHeader( 'X-Wikibase-CI-Badges', badge )
+				.withConfigOverride( 'wgWBRepoSettings', { badgeItems: { [ badge ]: '' } } )
 				.makeRequest();
 
 			const path = `/item/sitelinks/${localWikiId}/badges/0`;

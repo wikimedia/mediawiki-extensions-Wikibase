@@ -196,7 +196,10 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 					siteId,
 					{ title: redirectTitle, badges: [ redirectBadge ] }
 				)
-					.withHeader( 'X-Wikibase-CI-Redirect-Badges', redirectBadge )
+					.withConfigOverride( 'wgWBRepoSettings', {
+						badgeItems: { [ redirectBadge ]: '' },
+						redirectBadgeItems: [ redirectBadge ]
+					} )
 					.assertValidRequest()
 					.makeRequest();
 
@@ -318,7 +321,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			const badge = 'Q99999999';
 			const sitelink = { title: testTitle1, badges: [ badge ] };
 			const response = await newSetSitelinkRequestBuilder( testItemId, siteId, sitelink )
-				.withHeader( 'X-Wikibase-CI-Badges', badge )
+				.withConfigOverride( 'wgWBRepoSettings', { badgeItems: { [ badge ]: '' } } )
 				.makeRequest();
 
 			const path = '/sitelink/badges/0';

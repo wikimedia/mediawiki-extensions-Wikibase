@@ -16,7 +16,7 @@ describeWithTestData( 'Rate Limiting', ( itemRequestInputs, propertyRequestInput
 	].forEach( ( { newRequestBuilder } ) => {
 		it( `${newRequestBuilder().getRouteDescription()} responds 429 when the edit rate limit is reached`, async () => {
 			const response = await newRequestBuilder()
-				.withHeader( 'X-Wikibase-CI-Anon-Rate-Limit-Zero', true )
+				.withConfigOverride( 'wgRateLimits', { edit: { anon: [ 0, 60 ] } } )
 				.makeRequest();
 
 			assertValidError(

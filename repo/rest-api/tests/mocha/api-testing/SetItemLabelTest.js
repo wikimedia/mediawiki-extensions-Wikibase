@@ -116,7 +116,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			const languageCode = 'mul';
 			const newLabel = `new mul label ${utils.uniq()}`;
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
-				.withHeader( 'X-Wikibase-Ci-Enable-Mul', 'true' )
+				.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
 				.assertValidRequest()
 				.makeRequest();
 
