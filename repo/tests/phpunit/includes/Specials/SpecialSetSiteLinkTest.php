@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use ChangeTags;
 use Hamcrest\Matcher;
 use HamcrestPHPUnitIntegration;
 use MediaWiki\MediaWikiServices;
@@ -292,7 +291,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		);
 
 		$title = WikibaseRepo::getEntityTitleStoreLookup()->getTitleForId( $item->getId() );
-		$tags = ChangeTags::getTags( $this->getDb(), null, $title->getLatestRevID() );
+		$tags = $this->getServiceContainer()->getChangeTagsStore()->getTags( $this->getDb(), null, $title->getLatestRevID() );
 		$this->assertArrayEquals( self::TAGS, $tags );
 	}
 

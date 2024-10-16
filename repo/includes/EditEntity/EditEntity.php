@@ -152,7 +152,7 @@ interface EditEntity {
 	 *                                Set to null to apply default according to getWatchDefault().
 	 * @param string[] $tags Change tags to add to the edit.
 	 * Callers are responsible for checking that the user is permitted to add these tags
-	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
+	 * (typically using {@link ChangeTagsStore::canAddTagsAccompanyingChange}).
 	 *
 	 * @return EditEntityStatus
 	 *
