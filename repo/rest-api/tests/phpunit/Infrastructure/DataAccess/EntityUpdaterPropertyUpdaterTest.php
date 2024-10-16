@@ -46,6 +46,29 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 		$this->entityUpdater = $this->createStub( EntityUpdater::class );
 	}
 
+	public function testCreate(): void {
+		$expectedRevisionId = 234;
+		$expectedRevisionTimestamp = '20221111070707';
+		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
+		[ $propertyToCreate, $expectedResultingProperty ] = $this->newEquivalentWriteAndReadModelProperty();
+		$propertyToCreate->setId( null );
+
+		$this->entityUpdater = $this->createMock( EntityUpdater::class );
+		$this->entityUpdater->expects( $this->once() )
+			->method( 'create' )
+			->with( $propertyToCreate, $editMetaData )
+			->willReturnCallback( function () use ( $propertyToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) {
+				$propertyToCreate->setId( new NumericPropertyId( 'P123' ) );
+				return new EntityRevision( $propertyToCreate, $expectedRevisionId, $expectedRevisionTimestamp );
+			} );
+
+		$propertyRevision = $this->newPropertyUpdater()->create( $propertyToCreate, $editMetaData );
+
+		$this->assertEquals( $expectedResultingProperty, $propertyRevision->getProperty() );
+		$this->assertSame( $expectedRevisionId, $propertyRevision->getRevisionId() );
+		$this->assertSame( $expectedRevisionTimestamp, $propertyRevision->getLastModified() );
+	}
+
 	public function testUpdate(): void {
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
@@ -62,10 +85,7 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 				$expectedRevisionTimestamp
 			) );
 
-		$propertyRevision = $this->newPropertyUpdater()->update(
-			$propertyToUpdate,
-			$editMetaData
-		);
+		$propertyRevision = $this->newPropertyUpdater()->update( $propertyToUpdate, $editMetaData );
 
 		$this->assertEquals( $expectedResultingProperty, $propertyRevision->getProperty() );
 		$this->assertSame( $expectedRevisionId, $propertyRevision->getRevisionId() );

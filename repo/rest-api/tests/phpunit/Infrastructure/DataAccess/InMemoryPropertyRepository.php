@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
 use LogicException;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -13,6 +14,7 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
@@ -28,7 +30,8 @@ class InMemoryPropertyRepository implements
 	PropertyLabelsRetriever,
 	PropertyDescriptionsRetriever,
 	PropertyAliasesRetriever,
-	PropertyUpdater
+	PropertyUpdater,
+	PropertyCreator
 {
 
 	use StatementReadModelHelper;
@@ -74,6 +77,12 @@ class InMemoryPropertyRepository implements
 
 	public function getAliases( PropertyId $propertyId ): ?Aliases {
 		return $this->properties["$propertyId"] ? $this->convertToReadModel( $this->properties["$propertyId"] )->getAliases() : null;
+	}
+
+	public function create( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
+		$property->setId( new NumericPropertyId( 'P' . rand( 1, 9999 ) ) );
+
+		return $this->update( $property, $editMetadata );
 	}
 
 	public function update( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {

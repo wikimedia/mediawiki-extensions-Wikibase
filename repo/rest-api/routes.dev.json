@@ -1,1 +1,7 @@
-[]
+[
+	{
+		"path": "/wikibase/v0/entities/properties",
+		"method": "POST",
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\CreatePropertyRouteHandler::factory"
+	}
+]
