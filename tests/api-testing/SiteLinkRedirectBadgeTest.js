@@ -53,13 +53,15 @@ describe( 'sitelink redirect behavior with badges', () => {
 		sitelinkToRedirectBadgeId = await createItem( 'sitelink to redirect' );
 		intentionalSitelinkToRedirectBadgeId = await createItem( 'intentional sitelink to redirect' );
 
-		// set request headers for all requests; see repo/config/Wikibase.ci.php
-		alice.req.set( 'X-Wikibase-CI-Badges',
-			[ goodArticleBadgeId, sitelinkToRedirectBadgeId, intentionalSitelinkToRedirectBadgeId ]
-				.join( ', ' ) );
-		alice.req.set( 'X-Wikibase-CI-Redirect-Badges',
-			[ sitelinkToRedirectBadgeId, intentionalSitelinkToRedirectBadgeId ]
-				.join( ', ' ) );
+		// set request header for all requests; see repo/config/Wikibase.ci.php
+		alice.req.set( 'X-Config-Override', JSON.stringify( { wgWBRepoSettings: {
+			badgeItems: {
+				[ goodArticleBadgeId ]: 'CI-badge-class',
+				[ sitelinkToRedirectBadgeId ]: 'CI-badge-class',
+				[ intentionalSitelinkToRedirectBadgeId ]: 'CI-badge-class',
+			},
+			redirectBadgeItems: [ sitelinkToRedirectBadgeId, intentionalSitelinkToRedirectBadgeId ],
+		} } ) );
 	} );
 
 	/**
