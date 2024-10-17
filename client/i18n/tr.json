@@ -123,6 +123,8 @@
 	"wikibase-sitelinks-link-columnheading": "Bağlantılı sayfa",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile ilgili {{PLURAL:$1|bağlantı|bağlantılar}}",
 	"echo-pref-tooltip-wikibase-action": "Birisi bir {{WBREPONAME}} ögesine {{GENDER:|yarattığım}} bir sayfayı bağladığında bana bildir.",
+	"exceeded-entity-limit-category": "Çok fazla {{WBREPONAME}} varlığına erişilen sayfalar",
+	"exceeded-entity-limit-category-desc": "Bu kategori, çok fazla {{WBREPONAME}} varlığına erişilen sayfaları listeler.",
 	"notification-header-page-connection": "<strong>$3</strong> sayfası, konuyla ilgili verileri içeren {{PLURAL:$4|-1=bir {{WBREPONAME}} ögesine|$4 numaralı {{WBREPONAME}}}} ögesine {{GENDER:$2|bağlandı}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ve {{PLURAL:$4|bir diğer sayfa|$4 diğer sayfa|100=99+ diğer sayfa}}, konularla ilgili verilerin toplanabileceği yerler olan {{WBREPONAME}} ögelerine {{GENDER:$2|bağlandı}}.",
 	"notification-link-text-view-item": "Ögeyi {{GENDER:$1|görüntüle}}",

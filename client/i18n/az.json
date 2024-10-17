@@ -107,6 +107,8 @@
 	"wikibase-sitelinks-link-columnheading": "Keçid verilmiş səhifə",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ilə {{PLURAL:$1|əlaqələndirmə|əlaqələndirmələr}}",
 	"echo-pref-tooltip-wikibase-action": "Yaratdığım səhifəni kimsə {{WBREPONAME}} elementi ilə əlaqələndirdikdə mənə bildiriş göndər.",
+	"exceeded-entity-limit-category": "Həddindən artıq {{WBREPONAME}} elementinə giriş edən səhifələr",
+	"exceeded-entity-limit-category-desc": "Bu kateqoriya həddən çox {{WBREPONAME}} elementinə girişi olan səhifələri göstərir.",
 	"notification-header-page-connection": "<strong>$3</strong> səhifəsi əlaqəli məlumatların toplandığı {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 nömrəli {{WBREPONAME}} elementi}} ilə {{GENDER:$2|əlaqələndirildi}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> və {{PLURAL:$4|başqa bir səhifə|$4 digər səhifə|100=99+ digər səhifə}} əlaqəli dataların toplandığı {{WBREPONAME}} elementinə {{GENDER:$2|birləşdirildi}}.",
 	"notification-link-text-view-item": "Elementə {{GENDER:$1|bax}}",

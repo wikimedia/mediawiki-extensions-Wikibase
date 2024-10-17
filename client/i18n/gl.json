@@ -103,6 +103,8 @@
 	"wikibase-sitelinks-link-columnheading": "Páxina ligada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexión|Conexións}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificádeme cando alguén conecte unha páxina que {{GENDER:|eu creei}} a un elemento de {{WBREPONAME}}.",
+	"exceeded-entity-limit-category": "Páxinas con demasiados accesos a entidades de {{WBREPONAME}}",
+	"exceeded-entity-limit-category-desc": "Esta categoría lista as páxinas con demasiados accesos a entidades de {{WBREPONAME}}.",
 	"notification-header-page-connection": "A páxina \"<strong>$3</strong>\" {{GENDER:$2|conectouse}} {{PLURAL:$4|-1=a un elemento|ao elemento $4}} de {{WBREPONAME}}, onde se poden recoller datos relevantes do tema.",
 	"notification-bundle-header-page-connection": "\"<strong>$3</strong>\" e {{PLURAL:$4|outra páxina|outras $4 páxinas|100=máis de 99 páxinas}} {{GENDER:$2|conectáronse}} a elementos de {{WBREPONAME}}, onde se poden recoller datos relevantes dos temas.",
 	"notification-link-text-view-item": "{{GENDER:$1|Amosar}} o elemento",

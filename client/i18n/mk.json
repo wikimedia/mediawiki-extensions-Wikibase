@@ -101,6 +101,8 @@
 	"wikibase-sitelinks-link-columnheading": "Сврзана страница",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Поврзување|Поврзувања}} со {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Извести ме кога некој ќе поврзе страница што {{GENDER:|ја имам создадено}} со предмет на {{WBREPONAME}}.",
+	"exceeded-entity-limit-category": "Страници со премногу посетени единици на {{WBREPONAME}}",
+	"exceeded-entity-limit-category-desc": "Во оваа категорија се заведени страници со премногу посетени единици на {{WBREPONAME}}.",
 	"notification-header-page-connection": "Страницата <strong>$3</strong> е {{GENDER:$2|поврзана}} со {{PLURAL:$4|-1=предмет од {{WBREPONAME}}|предметот $4 од {{WBREPONAME}}}}, каде се собираат податоци релевантни на темата.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|уште една страница|уште $4 страници|100=преку 99 други страници}} се {{GENDER:$2|поврзани}} со предмет на {{WBREPONAME}}, кадешто можат да се собираат податоци што се однесуваат на расправите.",
 	"notification-link-text-view-item": "{{GENDER:$1|Погл.}} предмет",
