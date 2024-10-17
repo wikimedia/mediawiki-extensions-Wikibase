@@ -52,5 +52,12 @@ module.exports = {
 	output: {
 		filename: '[name].bundle.js',
 		path: outputPath
-	}
+	},
+	devServer: {
+		static: {
+			directory: __dirname,
+		},
+		compress: true,
+		port: 9000,
+	},
 };

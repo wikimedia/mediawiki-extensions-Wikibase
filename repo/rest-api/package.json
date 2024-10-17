@@ -15,6 +15,7 @@
 		"fix:eslint": "eslint --config .eslintrc.json --fix .",
 		"build": "run-s build:docs build:spec",
 		"build:docs": "webpack --config docs/webpack.config.js",
+		"serve:docs": "webpack serve --config docs/webpack.config.js --mode development",
 		"build:spec": "swagger-cli bundle specs/openapi.json -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
 	},
 	"engines": {
