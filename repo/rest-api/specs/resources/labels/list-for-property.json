@@ -12,7 +12,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyLabels" },
+			"200": { "$ref": "./responses.json#/PropertyLabels" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidEntityIdInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -30,9 +30,9 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/LabelsPatch" },
+		"requestBody": { "$ref": "./requests.json#/PatchPropertyLabels" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyLabels" },
+			"200": { "$ref": "./responses.json#/PropertyLabels" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

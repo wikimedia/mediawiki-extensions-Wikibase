@@ -33,36 +33,6 @@
 			"comment": "Add sitelink to ruwiki"
 		}
 	},
-	"PatchItemLabelsExample": {
-		"patch": [
-			{ "op": "replace", "path": "/en", "value": "Jane Doe" }
-		],
-		"tags": [],
-		"bot": false,
-		"comment": "replace English label"
-	},
-	"LabelsPatchRequest": {
-		"allOf": [
-			{ "$ref": "#/PatchDocument" },
-			{
-				"properties": {
-					"patch": {
-						"items": {
-							"properties": {
-								"path": {
-									"example": "/en"
-								},
-								"value": {
-									"example": "en-label"
-								}
-							}
-						}
-					}
-				}
-			},
-			{ "$ref": "#/MediawikiEdit" }
-		]
-	},
 	"DescriptionsPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },

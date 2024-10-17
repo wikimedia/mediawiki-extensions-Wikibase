@@ -2148,7 +2148,38 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemLabels"
+            "description": "Item's labels by language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Labels"
+                },
+                "example": {
+                  "en": "Jane Doe",
+                  "ru": "Джейн Доу"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2191,11 +2222,39 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/LabelsPatch"
+          "description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/en",
+                    "value": "Jane Doe"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "replace English label"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemLabels"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -2253,7 +2312,38 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyLabels"
+            "description": "Property's labels by language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Labels"
+                },
+                "example": {
+                  "en": "instance of",
+                  "ru": "это частный случай понятия"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2293,11 +2383,39 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/LabelsPatch"
+          "description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/en",
+                    "value": "instance of"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "replace English label"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyLabels"
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -2358,7 +2476,35 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label"
+            "description": "A label in a specific language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Jane Doe"
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2410,15 +2556,44 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Label"
+          "description": "Payload containing an Item label in the specified language and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "label": "Jane Doe",
+                "tags": [],
+                "bot": false,
+                "comment": "Update the English label"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200",
             "description": "The updated Label in a specific language"
           },
           "201": {
-            "$ref": "#/components/responses/Label",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200",
             "description": "The newly added Label in a specific language"
           },
           "304": {
@@ -2484,7 +2659,23 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/LabelDeleted"
+            "description": "The resource was deleted",
+            "headers": {
+              "Content-Language": {
+                "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Label deleted"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
@@ -2542,7 +2733,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2600,7 +2791,35 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label"
+            "description": "A label in a specific language",
+            "headers": {
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "instance of"
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2649,15 +2868,44 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Label"
+          "description": "Payload containing a Property label in the specified language and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "label": "instance of",
+                "tags": [],
+                "bot": false,
+                "comment": "Update the English label"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200",
             "description": "The updated Label in a specific language"
           },
           "201": {
-            "$ref": "#/components/responses/Label",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200",
             "description": "The newly added Label in a specific language"
           },
           "304": {
@@ -2720,7 +2968,7 @@
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/LabelDeleted"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels~1%7Blanguage_code%7D/delete/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidRemoveLabelInput"
@@ -2775,7 +3023,7 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/Label"
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -4561,72 +4809,6 @@
           }
         }
       },
-      "Label": {
-        "description": "Payload containing a Wikibase label in the specified language and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "example": "an example label"
-                    }
-                  },
-                  "required": [
-                    "label"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "LabelsPatch": {
-        "description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/LabelsPatch/content/application~1json/schema"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/schema/allOf/0"
-                },
-                {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/en"
-                          },
-                          "value": {
-                            "example": "en-label"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
       "Aliases": {
         "description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
         "required": true,
@@ -4976,25 +5158,6 @@
       }
     },
     "responses": {
-      "LabelDeleted": {
-        "description": "The resource was deleted",
-        "headers": {
-          "Content-Language": {
-            "description": "Language code of the language in which response is provided",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "string"
-            },
-            "example": "Label deleted"
-          }
-        }
-      },
       "DescriptionDeleted": {
         "description": "The resource was deleted",
         "headers": {
@@ -6056,36 +6219,6 @@
           }
         }
       },
-      "ItemLabels": {
-        "description": "Item's labels by language",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Labels"
-            }
-          }
-        }
-      },
       "ItemDescriptions": {
         "description": "Item's descriptions by language",
         "headers": {
@@ -6257,67 +6390,6 @@
                 ]
               },
               "statements": {}
-            }
-          }
-        }
-      },
-      "PropertyLabels": {
-        "description": "Property's labels by language",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Labels"
-            }
-          }
-        }
-      },
-      "Label": {
-        "description": "A label in a specific language",
-        "headers": {
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "string",
-              "example": "an example label"
             }
           }
         }

@@ -1,0 +1,82 @@
+{
+	"PatchItemLabels": {
+		"description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchItemLabelsExample" }
+			},
+			"application/json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchItemLabelsExample" }
+			}
+		}
+	},
+	"PatchPropertyLabels": {
+		"description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchPropertyLabelsExample" }
+			},
+			"application/json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchPropertyLabelsExample" }
+			}
+		}
+	},
+	"ItemLabel": {
+		"description": "Payload containing an Item label in the specified language and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"label": { "type": "string" }
+							},
+							"required": [ "label" ]
+						},
+						{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+					]
+				},
+				"example": {
+					"label": "Jane Doe",
+					"tags": [],
+					"bot": false,
+					"comment": "Update the English label"
+				}
+			}
+		}
+	},
+	"PropertyLabel": {
+		"description": "Payload containing a Property label in the specified language and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"label": { "type": "string" }
+							},
+							"required": [ "label" ]
+						},
+						{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+					]
+				},
+				"example": {
+					"label": "instance of",
+					"tags": [],
+					"bot": false,
+					"comment": "Update the English label"
+				}
+			}
+		}
+	}
+}
