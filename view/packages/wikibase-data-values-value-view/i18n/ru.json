@@ -19,7 +19,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "в 1/10 угловых секунд",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "в 1/100 угловых секунд",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "в 1/1000 угловых секунд",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Григорианский",
 	"valueview-expert-timevalue-calendar-julian": "Юлианский",
 	"valueview-expert-timeinput-precision": "Точность:",

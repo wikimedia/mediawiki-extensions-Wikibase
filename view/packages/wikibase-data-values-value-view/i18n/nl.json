@@ -20,7 +20,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "tot 1/10 boogseconde",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "tot 1/100 boogseconde",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "tot 1/1000 boogseconde",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriaanse",
 	"valueview-expert-timevalue-calendar-julian": "Juliaanse",
 	"valueview-expert-timeinput-precision": "Precisie:",

@@ -15,7 +15,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "a 1/10 de 'n'archeseconde",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "a 1/100 de 'n'archeseconde",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "a 1/1000 de 'n'archeseconde",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriane",
 	"valueview-expert-timevalue-calendar-julian": "Giuliane",
 	"valueview-expert-timeinput-precision": "Precisione:",

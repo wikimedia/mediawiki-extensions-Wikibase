@@ -19,7 +19,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "đúng 1/10 giây góc",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "đúng 1/100 giây góc",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "đúng 1/1000 giây góc",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Công lịch",
 	"valueview-expert-timevalue-calendar-julian": "Lịch Julius",
 	"valueview-expert-timeinput-precision": "Độ chính xác:",

@@ -20,7 +20,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "до 1/10 дугової секунди",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "до 1/100 дугової секунди",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "до 1/1000 дугової секунди",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Григоріанський",
 	"valueview-expert-timevalue-calendar-julian": "Юліанський",
 	"valueview-expert-timeinput-precision": "Точність:",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Nuclear",
 			"Pikne"
 		]
 	},
@@ -13,6 +14,13 @@
 	"valueview-expert-timevalue-calendar-gregorian": "uue kalendri järgi",
 	"valueview-expert-timevalue-calendar-julian": "vana kalendri järgi",
 	"valueview-expert-timeinput-precision": "Esitustäpsus:",
+	"valueview-expert-timeinput-precision-year100": "sajand",
+	"valueview-expert-timeinput-precision-year10": "aastakümme",
+	"valueview-expert-timeinput-precision-year": "aasta",
+	"valueview-expert-timeinput-precision-month": "kuu",
+	"valueview-expert-timeinput-precision-hour": "tund",
+	"valueview-expert-timeinput-precision-minute": "minut",
+	"valueview-expert-timeinput-precision-second": "sekund",
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-languageselector-label": "Keel (nõutav):",
 	"valueview-expertextender-unitsuggester-label": "Ühik (valikuline):",

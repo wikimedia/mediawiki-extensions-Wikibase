@@ -17,7 +17,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "auf 1/10 einer Bogensekunde",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "auf 1/100 einer Bogensekunde",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "auf 1/1000 einer Bogensekunde",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorianisch",
 	"valueview-expert-timevalue-calendar-julian": "Julianisch",
 	"valueview-expert-timeinput-precision": "Genauigkeit:",

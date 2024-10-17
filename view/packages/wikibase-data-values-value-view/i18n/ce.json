@@ -16,7 +16,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "1/10 дуган секунд",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "1/100 дуган секунд",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "1/1000 дуган секунд",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Григорианан",
 	"valueview-expert-timevalue-calendar-julian": "Юлианан",
 	"valueview-expert-timeinput-precision": "Нийсалла:",

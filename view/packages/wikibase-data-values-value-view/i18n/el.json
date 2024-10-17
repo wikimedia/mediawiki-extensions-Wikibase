@@ -22,7 +22,6 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "σε 1/10 δευτερολέπτου της μοίρας",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "σε 1/100 δευτερολέπτου της μοίρας",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "σε 1/1000 δευτερολέπτου της μοίρας",
-	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Γρηγοριανό",
 	"valueview-expert-timevalue-calendar-julian": "Ιουλιανό",
 	"valueview-expert-timeinput-precision": "Ακρίβεια:",

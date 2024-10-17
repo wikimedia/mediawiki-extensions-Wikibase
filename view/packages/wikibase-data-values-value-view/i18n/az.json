@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nemoralis",
+			"Toghrul Rahimli",
+			"Əkrəm Cəfər"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "boş",
+	"valueview-expert-globecoordinateinput-precision": "Dəqiqlik:",
+	"valueview-expert-timevalue-calendar-gregorian": "Qriqori təqvimi",
+	"valueview-expert-timevalue-calendar-julian": "Yuli təqvimi",
+	"valueview-expert-timeinput-precision": "Dəqiqlik:",
+	"valueview-expert-timeinput-precision-year1g": "milyard il",
+	"valueview-expert-timeinput-precision-year100m": "yüz milyon il",
+	"valueview-expert-timeinput-precision-year10m": "on milyon il",
+	"valueview-expert-timeinput-precision-year1m": "milyon il",
+	"valueview-expert-timeinput-precision-year100k": "yüz min il",
+	"valueview-expert-timeinput-precision-year10k": "10 min il",
+	"valueview-expert-timeinput-precision-year1k": "minillik",
+	"valueview-expert-timeinput-precision-year100": "əsr",
+	"valueview-expert-timeinput-precision-year10": "onillik",
+	"valueview-expert-timeinput-precision-year": "il",
+	"valueview-expert-timeinput-precision-month": "ay",
+	"valueview-expert-timeinput-precision-day": "gün",
+	"valueview-expert-timeinput-precision-hour": "saat",
+	"valueview-expert-timeinput-precision-minute": "dəqiqə",
+	"valueview-expert-timeinput-precision-second": "saniyə",
+	"valueview-expert-timeinput-calendar": "Təqvim:",
+	"valueview-expertextender-languageselector-label": "Dil (məcburidir):",
+	"valueview-expertextender-unitsuggester-label": "Vahid (məcburi deyil):",
+	"valueview-preview-label": "belə görünəcək:",
+	"valueview-listrotator-manually": "əl ilə təyin et"
+}
