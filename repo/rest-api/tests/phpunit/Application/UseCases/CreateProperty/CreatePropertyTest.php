@@ -15,8 +15,10 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
@@ -33,11 +35,13 @@ use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyReposi
 class CreatePropertyTest extends TestCase {
 
 	private PropertyCreator $propertyCreator;
+	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->propertyCreator = new InMemoryPropertyRepository();
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
 	}
 
 	public function testHappyPath(): void {
@@ -75,6 +79,19 @@ class CreatePropertyTest extends TestCase {
 		);
 	}
 
+	public function testGivenUserUnauthorized_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->assertUserIsAuthorized->method( 'checkCreatePropertyPermissions' )->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase()->execute( new CreatePropertyRequest( [ 'data_type' => 'string' ], [], false, null, null ) );
+			$this->fail( 'expected exception not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
 	private function newUseCase(): CreateProperty {
 		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
 		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
@@ -88,7 +105,8 @@ class CreatePropertyTest extends TestCase {
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 			),
-			$this->propertyCreator
+			$this->propertyCreator,
+			$this->assertUserIsAuthorized
 		);
 	}
 

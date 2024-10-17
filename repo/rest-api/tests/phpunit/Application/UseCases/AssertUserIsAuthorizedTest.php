@@ -69,6 +69,52 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		];
 	}
 
+	public function testGivenUserIsAuthorizedToCreateProperty(): void {
+		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$permissionChecker->expects( $this->once() )
+			->method( 'canCreateProperty' )
+			->with( User::newAnonymous() )
+			->willReturn( PermissionCheckResult::newAllowed() );
+
+		$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreatePropertyPermissions( User::newAnonymous() );
+	}
+
+	/**
+	 * @dataProvider propertyCreationDeniedProvider
+	 */
+	public function testGivenUserIsUnauthorizedToCreateProperty_throwsUseCaseError(
+		PermissionCheckResult $checkResult,
+		UseCaseError $expectedError
+	): void {
+		$permissionChecker = $this->createMock( WikibaseEntityPermissionChecker::class );
+		$permissionChecker->expects( $this->once() )
+			->method( 'canCreateProperty' )
+			->with( User::newAnonymous() )
+			->willReturn( $checkResult );
+
+		try {
+			$this->newAssertUserIsAuthorized( $permissionChecker )->checkCreatePropertyPermissions( User::newAnonymous() );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function propertyCreationDeniedProvider(): Generator {
+		yield 'unknown reason' => [
+			PermissionCheckResult::newDenialForUnknownReason(),
+			new UseCaseError(
+				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+				'You have no permission to create a property'
+			),
+		];
+
+		yield 'user blocked' => [
+			PermissionCheckResult::newUserBlocked(),
+			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
+		];
+	}
+
 	/**
 	 * @dataProvider provideEntityId
 	 */
