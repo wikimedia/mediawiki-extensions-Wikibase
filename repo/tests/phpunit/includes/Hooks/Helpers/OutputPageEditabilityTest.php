@@ -101,7 +101,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
-		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
+		$title->method( 'getNamespace' )->willReturn( NS_PROJECT );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
@@ -133,7 +133,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
-		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
+		$title->method( 'getNamespace' )->willReturn( NS_PROJECT );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( true );
@@ -162,7 +162,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$performer = new UltimateAuthority( $user );
 
 		$title = $this->createMock( Title::class );
-		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
+		$title->method( 'getNamespace' )->willReturn( NS_PROJECT );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->willReturn( false );
