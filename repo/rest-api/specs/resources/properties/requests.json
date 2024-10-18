@@ -1,0 +1,59 @@
+{
+	"Property": {
+		"description": "Payload containing a Wikibase Property and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"property": { "$ref": "../../global/schemas.json#/Property" }
+							},
+							"required": [ "property" ]
+						},
+						{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+					]
+				},
+				"example": {
+					"property": {
+						"data_type": "wikibase-item",
+						"labels": {
+							"en": "instance of",
+							"ru": "это частный случай понятия"
+						},
+						"descriptions": {
+							"en": "this item is a concrete object (instance) of this class, category or object group",
+							"ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
+						},
+						"aliases": {
+							"en": [
+								"is a",
+								"is an"
+							],
+							"ru": [
+								"представляет собой",
+								"является"
+							]
+						},
+						"statements": { }
+					}
+				}
+			}
+		}
+	},
+	"PatchProperty": {
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchPropertyExample" }
+			},
+			"application/json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchPropertyExample" }
+			}
+		}
+	}
+}

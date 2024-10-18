@@ -35,7 +35,7 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Sitelink" },
+		"requestBody": { "$ref": "./requests.json#/Sitelink" },
 		"responses": {
 			"200": {
 				"$ref": "../../global/responses.json#/Sitelink",

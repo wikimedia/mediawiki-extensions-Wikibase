@@ -1,0 +1,44 @@
+{
+	"PatchSitelinks": {
+		"required": true,
+		"content": {
+			"application/json-patch+json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchSitelinksExample" }
+			},
+			"application/json": {
+				"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+				"example": { "$ref": "./examples.json#/PatchSitelinksExample" }
+			}
+		}
+	},
+	"Sitelink": {
+		"description": "Payload containing a Wikibase Sitelink object and edit metadata",
+		"required": true,
+		"content": {
+			"application/json": {
+				"schema": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"sitelink": { "$ref": "../../openapi.json#/components/schemas/Sitelink" }
+							},
+							"required": [ "sitelink" ]
+						},
+						{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+					]
+				},
+				"example": {
+					"sitelink": {
+						"title": "Jane Doe",
+						"badges": []
+					},
+					"tags": [],
+					"bot": false,
+					"comment": "Add enwiki sitelink"
+				}
+			}
+		}
+	}
+}

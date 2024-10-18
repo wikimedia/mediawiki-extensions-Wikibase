@@ -5,34 +5,6 @@
 			{ "$ref": "#/MediawikiEdit" }
 		]
 	},
-	"PatchItemExample": {
-		"value": {
-			"patch": [
-				{ "op": "replace", "path": "/labels/en", "value": "Jane Doe" }
-			],
-			"tags": [],
-			"bot": false,
-			"comment": "Update the English label"
-		}
-	},
-	"PatchPropertyExample": {
-		"patch": [
-			{ "op": "add", "path": "/aliases/en/-", "value": "is an" }
-		],
-		"tags": [],
-		"bot": false,
-		"comment": "add 'is an' as an English alias"
-	},
-	"PatchSitelinksExample": {
-		"value": {
-			"patch": [
-				{ "op": "add", "path": "/ruwiki/title", "value": "Джейн Доу" }
-			],
-			"tags": [],
-			"bot": false,
-			"comment": "Add sitelink to ruwiki"
-		}
-	},
 	"DescriptionsPatchRequest": {
 		"allOf": [
 			{ "$ref": "#/PatchDocument" },

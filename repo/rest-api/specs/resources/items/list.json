@@ -6,7 +6,7 @@
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Item" },
+		"requestBody": { "$ref": "./requests.json#/Item" },
 		"responses": {
 			"201": { "$ref": "../../global/responses.json#/Item" },
 			"400": { "$ref": "./responses.json#/InvalidNewItemInput" },
