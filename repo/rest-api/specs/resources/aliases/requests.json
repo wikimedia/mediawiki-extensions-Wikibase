@@ -1,0 +1,17 @@
+{
+	"AddAliasesInLanguage":{
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"aliases": {
+						"type": "array",
+						"items": { "type": "string" }
+					}
+				},
+				"required": [ "aliases" ]
+			},
+			{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+		]
+	}
+}
