@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -14,27 +13,29 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
  */
 class CreateProperty {
 
-	private PropertyDeserializer $propertyDeserializer;
+	private CreatePropertyValidator $validator;
 	private PropertyCreator $propertyCreator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
 
 	public function __construct(
-		PropertyDeserializer $propertyDeserializer,
+		CreatePropertyValidator $validator,
 		PropertyCreator $propertyCreator,
 		AssertUserIsAuthorized $assertUserIsAuthorized
 	) {
-		$this->propertyDeserializer = $propertyDeserializer;
+		$this->validator = $validator;
 		$this->propertyCreator = $propertyCreator;
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
 	public function execute( CreatePropertyRequest $request ): CreatePropertyResponse {
+		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+
 		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable $request->getUsername() is checked
 		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		$this->assertUserIsAuthorized->checkCreatePropertyPermissions( $user );
 
 		$revision = $this->propertyCreator->create(
-			$this->propertyDeserializer->deserialize( $request->getProperty() ),
+			$deserializedRequest->getProperty(),
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),

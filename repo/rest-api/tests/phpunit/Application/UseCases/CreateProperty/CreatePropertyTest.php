@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -99,12 +100,12 @@ class CreatePropertyTest extends TestCase {
 		);
 
 		return new CreateProperty(
-			new PropertyDeserializer(
+			new CreatePropertyValidator( new PropertyDeserializer(
 				new LabelsDeserializer(),
 				new DescriptionsDeserializer(),
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-			),
+			) ),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized
 		);

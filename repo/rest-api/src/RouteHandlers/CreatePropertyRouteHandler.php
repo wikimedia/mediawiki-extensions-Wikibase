@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
@@ -62,12 +63,12 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 
 		return new self(
 			new CreateProperty(
-				new PropertyDeserializer(
+				new CreatePropertyValidator( new PropertyDeserializer(
 					new LabelsDeserializer(),
 					new DescriptionsDeserializer(),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 					WbRestApi::getStatementDeserializer()
-				),
+				) ),
 				WbRestApi::getPropertyUpdater(),
 				WbRestApi::getAssertUserIsAuthorized()
 			),
