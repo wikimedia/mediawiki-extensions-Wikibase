@@ -623,7 +623,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -1256,7 +1256,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -1492,7 +1492,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -2063,7 +2063,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -2574,7 +2574,7 @@
                     ]
                   },
                   {
-                    "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                   }
                 ]
               },
@@ -2655,7 +2655,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -2886,7 +2886,7 @@
                     ]
                   },
                   {
-                    "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                   }
                 ]
               },
@@ -2964,7 +2964,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -3977,7 +3977,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -4264,7 +4264,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Edit"
+          "$ref": "#/components/requestBodies/Delete"
         },
         "responses": {
           "200": {
@@ -4543,7 +4543,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             },
@@ -4708,7 +4708,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             },
@@ -4748,7 +4748,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             },
@@ -4832,7 +4832,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -4871,7 +4871,7 @@
                   }
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -4898,7 +4898,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -4936,7 +4936,7 @@
                   }
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -5011,7 +5011,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -5050,7 +5050,7 @@
                   }
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             }
@@ -5076,7 +5076,7 @@
                   ]
                 },
                 {
-                  "$ref": "#/components/requestBodies/Edit/content/application~1json/schema"
+                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
                 }
               ]
             },
@@ -5124,7 +5124,7 @@
           }
         }
       },
-      "Edit": {
+      "Delete": {
         "description": "Edit payload containing edit metadata",
         "required": false,
         "content": {

@@ -302,7 +302,7 @@
 			}
 		}
 	},
-	"Edit": {
+	"Delete": {
 		"description": "Edit payload containing edit metadata",
 		"required": false,
 		"content": {

@@ -82,7 +82,7 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Edit" },
+		"requestBody": { "$ref": "../../global/requests.json#/Delete" },
 		"responses": {
 			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
 			"400": { "$ref": "./responses.json#/InvalidRemoveItemStatementInput" },
