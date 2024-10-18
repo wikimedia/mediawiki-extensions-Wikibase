@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rebelagent"
+			"Rebelagent",
+			"Rosy Cleopatra"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} Selo",
 	"wikibase-editlinks": "Fetola dikgolaganyo",
+	"wikibase-addlinkstitle": "Tsenya dikgokagano tsa dipuo tse di farologaneng",
 	"wikibase-linkitem-addlinks": "Tsenya dikgolaganyo",
 	"wikibase-linkitem-title": "Golaganya le tsebe",
 	"wikibase-linkitem-linkpage": "Golaganya le tsebe",
