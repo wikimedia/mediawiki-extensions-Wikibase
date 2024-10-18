@@ -193,7 +193,3 @@ abstract class WikibaseLibraryTestCase extends LuaEngineTestBase {
 	}
 
 }
-
-/** @deprecated class alias since 1.43 */
-class_alias( WikibaseLibraryTestCase::class,
-	'Wikibase\\Client\\Tests\\Integration\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibraryTestCase' );
