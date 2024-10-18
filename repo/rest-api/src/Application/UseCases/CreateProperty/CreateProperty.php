@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\User;
@@ -27,6 +28,9 @@ class CreateProperty {
 		$this->assertUserIsAuthorized = $assertUserIsAuthorized;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( CreatePropertyRequest $request ): CreatePropertyResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
 

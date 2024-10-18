@@ -2,11 +2,13 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\CreateProperty;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator
@@ -37,6 +39,47 @@ class CreatePropertyValidatorTest extends TestCase {
 			->willReturn( $expectedProperty );
 
 		$this->assertSame( $expectedProperty, $this->newValidator()->validateAndDeserialize( $request )->getProperty() );
+	}
+
+	/**
+	 * @dataProvider invalidPropertyProvider
+	 */
+	public function testGivenInvalidPropertySerialization_throws( array $serialization, UseCaseError $expectedError ): void {
+		$request = new CreatePropertyRequest( $serialization, [], false, null, null );
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public static function invalidPropertyProvider(): Generator {
+		yield 'missing data type' => [
+			[],
+			UseCaseError::newMissingField( '/property', 'data_type' ),
+		];
+		yield 'invalid data_type field type' => [
+			[ 'data_type' => 123 ],
+			UseCaseError::newInvalidValue( '/property/data_type' ),
+		];
+		yield 'invalid labels field type' => [
+			[ 'data_type' => 'string', 'labels' => 'not an array' ],
+			UseCaseError::newInvalidValue( '/property/labels' ),
+		];
+		yield 'invalid descriptions field type' => [
+			[ 'data_type' => 'string', 'descriptions' => 'not an array' ],
+			UseCaseError::newInvalidValue( '/property/descriptions' ),
+		];
+		yield 'invalid aliases field type' => [
+			[ 'data_type' => 'string', 'aliases' => 'not an array' ],
+			UseCaseError::newInvalidValue( '/property/aliases' ),
+		];
+		yield 'invalid statements field type' => [
+			[ 'data_type' => 'string', 'statements' => 'not an array' ],
+			UseCaseError::newInvalidValue( '/property/statements' ),
+		];
 	}
 
 	private function newValidator(): CreatePropertyValidator {

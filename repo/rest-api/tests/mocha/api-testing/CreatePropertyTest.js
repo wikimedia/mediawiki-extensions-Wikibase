@@ -6,6 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 
@@ -78,6 +79,48 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				`/* wbeditentity-create-property:0| */ ${editSummary}`
 			);
 			assert.strictEqual( editMetadata.user, user.username );
+		} );
+	} );
+
+	describe( '400', () => {
+		it( 'responds with missing-field error without a data type', async () => {
+			const response = await newCreatePropertyRequestBuilder( {} ).assertInvalidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: '/property', field: 'data_type' }
+			);
+		} );
+
+		Object.entries( {
+			'invalid data_type field type': {
+				property: { data_type: 123 },
+				invalidFieldPath: '/property/data_type'
+			},
+			'invalid labels field type': {
+				property: { data_type: 'string', labels: 'not an object' },
+				invalidFieldPath: '/property/labels'
+			},
+			'invalid descriptions field type': {
+				property: { data_type: 'string', descriptions: 'not an object' },
+				invalidFieldPath: '/property/descriptions'
+			},
+			'invalid aliases field type': {
+				property: { data_type: 'string', aliases: 'not an object' },
+				invalidFieldPath: '/property/aliases'
+			},
+			'invalid statements field type': {
+				property: { data_type: 'string', statements: 'not an object' },
+				invalidFieldPath: '/property/statements'
+			}
+		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
+			it( `invalid value: ${reason}`, async () => {
+				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
+
+				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath } );
+			} );
 		} );
 	} );
 } );
