@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -27,7 +27,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 	/**
 	 * @dataProvider propertyEditSummaryProvider
 	 */
-	public function testPatchPropertyEditSummary( PropertyEditSummary $editSummary, Summary $expectedSummary ): void {
+	public function testPatchPropertyEditSummary( PatchPropertyEditSummary $editSummary, Summary $expectedSummary ): void {
 		$editSummaryFormatter = new WholeEntityEditSummaryToFormattableSummaryConverter();
 		$this->assertEquals( $expectedSummary, $editSummaryFormatter->newSummaryForPropertyPatch( $editSummary ) );
 	}
@@ -38,7 +38,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		$originalProperty = new Property( $propertyId, new Fingerprint(), 'string', null );
 
 		yield 'patch property with labels and user comment' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				$userComment,
 				$originalProperty,
 				new Property(
@@ -52,7 +52,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		];
 
 		yield 'patch property with just statement and no user comment' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				null,
 				$originalProperty,
 				new Property(
@@ -66,7 +66,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		];
 
 		yield 'patch property with statement, labels, descriptions, and user comment' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				$userComment,
 				$originalProperty,
 				new Property(
@@ -83,7 +83,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		];
 
 		yield 'patch property with different languages of labels and descriptions ' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				$userComment,
 				$originalProperty,
 				new Property(
@@ -103,7 +103,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		];
 
 		yield 'patch property with long labels list, statement, and no user comment' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				null,
 				$originalProperty,
 				new Property(
@@ -121,7 +121,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		];
 
 		yield 'patch property with long labels list and user comment' => [
-			PropertyEditSummary::newPatchSummary(
+			PatchPropertyEditSummary::newSummary(
 				$userComment,
 				$originalProperty,
 				new Property(

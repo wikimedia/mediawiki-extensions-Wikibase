@@ -15,7 +15,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -48,7 +48,7 @@ class EditSummaryFormatter {
 
 	// phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	private function convertToFormattableSummary( EditSummary $editSummary ): FormatableSummary {
-		if ( $editSummary instanceof PropertyEditSummary ) {
+		if ( $editSummary instanceof PatchPropertyEditSummary ) {
 			return $this->wholeEntityEditSummaryConverter->newSummaryForPropertyPatch( $editSummary );
 		} elseif ( $editSummary instanceof LabelsEditSummary ) {
 			return $this->termsEditSummaryConverter->convertLabelsEditSummary( $editSummary );

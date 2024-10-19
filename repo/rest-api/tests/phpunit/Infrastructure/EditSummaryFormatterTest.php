@@ -18,7 +18,7 @@ use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
@@ -249,7 +249,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	public function testPropertyEditSummary_usesEditSummaryConverter(): void {
-		$propertyEditSummary = $this->createStub( PropertyEditSummary::class );
+		$propertyEditSummary = $this->createStub( PatchPropertyEditSummary::class );
 		$converter = $this->createStub( TermsEditSummaryToFormattableSummaryConverter::class );
 
 		$editSummaryConverter = $this->createMock( WholeEntityEditSummaryToFormattableSummaryConverter::class );

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PropertyEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
 
 /**
  * @license GPL-2.0-or-later
@@ -16,7 +16,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverter {
 
 	use ModifiedLanguageCodes;
 
-	public function newSummaryForPropertyPatch( PropertyEditSummary $editSummary ): Summary {
+	public function newSummaryForPropertyPatch( PatchPropertyEditSummary $editSummary ): Summary {
 		$originalProperty = $editSummary->getOriginalProperty();
 		$patchedProperty = $editSummary->getPatchedProperty();
 		$hasStatementsChanged = !$patchedProperty->getStatements()->equals( $originalProperty->getStatements() );
