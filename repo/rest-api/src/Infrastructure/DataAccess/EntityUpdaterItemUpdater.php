@@ -56,13 +56,13 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 		'@phan-var ItemWriteModel $savedItem';
 
 		return new ItemRevision(
-			$this->convertItemItemWriteModelToReadModel( $savedItem ),
+			$this->convertItemWriteModelToReadModel( $savedItem ),
 			$entityRevision->getTimestamp(),
 			$entityRevision->getRevisionId()
 		);
 	}
 
-	private function convertItemItemWriteModelToReadModel( ItemWriteModel $item ): Item {
+	private function convertItemWriteModelToReadModel( ItemWriteModel $item ): Item {
 		return new Item(
 			$item->getId(),
 			Labels::fromTermList( $item->getLabels() ),
