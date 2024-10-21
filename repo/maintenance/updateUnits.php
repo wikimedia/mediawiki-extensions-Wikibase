@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use DataValues\DecimalMath;
 use DataValues\DecimalValue;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Sparql\SparqlClient;
 use Wikibase\Lib\WikibaseSettings;

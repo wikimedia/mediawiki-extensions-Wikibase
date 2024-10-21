@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Store;
 
-use BagOStuff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * Short-term sitelink conflict lookup using a BagOStuff (e.g. memcached).

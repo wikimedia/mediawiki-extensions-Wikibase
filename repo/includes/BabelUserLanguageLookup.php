@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo;
 
-use ExtensionRegistry;
 use MediaWiki\Babel\Babel;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\User\User;
 use Wikibase\Lib\UserLanguageLookup;
 

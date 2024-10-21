@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiUsageException;
 use LogicException;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\TitleFactory;
 use Wikibase\DataModel\Entity\EntityDocument;

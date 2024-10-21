@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Diff;
 
 use DifferenceEngine;
-use Language;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionRecord;

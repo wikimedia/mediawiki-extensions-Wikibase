@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Hooks\Formatters;
 
 use HtmlArmor;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleTextLookup;

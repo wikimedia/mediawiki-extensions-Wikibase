@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Rdf;
 
 use DataValues\DataValue;
 use InvalidArgumentException;
+use MediaWiki\Language\LanguageCode;
 use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
@@ -478,7 +479,7 @@ class RdfVocabulary {
 			return $this->canonicalLanguageCodes[$languageCode];
 		}
 
-		self::$canonicalLanguageCodeCache[$languageCode] = \LanguageCode::bcp47( $languageCode );
+		self::$canonicalLanguageCodeCache[$languageCode] = LanguageCode::bcp47( $languageCode );
 		return self::$canonicalLanguageCodeCache[$languageCode];
 	}
 

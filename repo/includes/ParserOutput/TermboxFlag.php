@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ParserOutput;
 
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use MobileContext;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\WikibaseRepo;

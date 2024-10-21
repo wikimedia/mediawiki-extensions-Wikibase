@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiQuery;
-use ApiQueryBase;
-use ApiResult;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryBase;
+use MediaWiki\Api\ApiResult;
 use Wikibase\Lib\SettingsArray;
 
 /**

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Parsers;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;

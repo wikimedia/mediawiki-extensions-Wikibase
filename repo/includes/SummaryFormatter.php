@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use DataValues\DataValue;
 use Exception;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

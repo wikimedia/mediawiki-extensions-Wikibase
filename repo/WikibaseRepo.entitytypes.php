@@ -18,6 +18,7 @@
  */
 
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Site\SiteLookup;
@@ -75,6 +76,7 @@ use Wikibase\Repo\Rdf\TruthyStatementRdfBuilderFactory;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
+use Wikimedia\ObjectCache\EmptyBagOStuff;
 use Wikimedia\Purtle\RdfWriter;
 
 return [

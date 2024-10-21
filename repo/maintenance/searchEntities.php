@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Maintenance;
 
 use InvalidArgumentException;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Maintenance\OrderedStreamingForkController;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;

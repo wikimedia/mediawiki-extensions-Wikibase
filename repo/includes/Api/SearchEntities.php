@@ -4,10 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
-use ApiResult;
 use InvalidArgumentException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiResult;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
@@ -149,7 +150,7 @@ class SearchEntities extends ApiBase {
 	 * @param array $params
 	 *
 	 * @return TermSearchResult[]
-	 * @throws \ApiUsageException
+	 * @throws ApiUsageException
 	 */
 	private function getSearchResults( array $params ): array {
 		try {
@@ -307,7 +308,7 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @throws \ApiUsageException
+	 * @throws ApiUsageException
 	 * @throws EntitySearchException
 	 */
 	public function executeInternal(): void {

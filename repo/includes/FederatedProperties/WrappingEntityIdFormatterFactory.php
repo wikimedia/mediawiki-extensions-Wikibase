@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\FederatedProperties;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**

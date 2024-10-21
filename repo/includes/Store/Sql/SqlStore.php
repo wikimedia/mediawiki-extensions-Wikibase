@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use EmptyBagOStuff;
-use HashBagOStuff;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
 use ObjectCacheFactory;
@@ -46,6 +44,8 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ObjectCache\EmptyBagOStuff;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
