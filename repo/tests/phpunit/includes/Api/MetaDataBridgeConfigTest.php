@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
-use ApiQuery;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiQuery;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;

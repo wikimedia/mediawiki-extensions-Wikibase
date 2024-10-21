@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use MobileContext;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ParserOutput\TermboxFlag;

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;

@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use BagOStuff;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use ObjectCacheFactory;
@@ -23,6 +22,7 @@ use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * @coversNothing

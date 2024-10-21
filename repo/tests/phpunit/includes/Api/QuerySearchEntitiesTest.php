@@ -4,10 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiContinuationManager;
-use ApiMain;
-use ApiPageSet;
-use ApiQuery;
+use MediaWiki\Api\ApiContinuationManager;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
@@ -254,7 +255,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		try {
 			$this->callApi( [ 'wbssearch' => 'Foo' ], [], null, $errorStatus );
 			$this->fail( "Exception must be thrown" );
-		} catch ( \ApiUsageException $aue ) {
+		} catch ( ApiUsageException $aue ) {
 			$this->assertSame( $errorStatus, $aue->getStatusValue() );
 		}
 	}
@@ -286,7 +287,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		try {
 			$this->callApi( [ 'wbssearch' => 'Foo' ], [], $mock, $errorStatus );
 			$this->fail( "Exception must be thrown" );
-		} catch ( \ApiUsageException $aue ) {
+		} catch ( ApiUsageException $aue ) {
 			$this->assertSame( $errorStatus, $aue->getStatusValue() );
 		}
 	}

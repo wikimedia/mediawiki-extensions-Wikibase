@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
-use Language;
 use LogicException;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

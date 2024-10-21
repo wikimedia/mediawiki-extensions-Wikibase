@@ -4,20 +4,20 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests;
 
-use ApiMain;
-use ApiQuerySiteinfo;
 use Exception;
 use ImportStringSource;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleValue;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use ParserOptions;
 use RuntimeException;
 use SkinTemplate;
 use Wikibase\Lib\SettingsArray;

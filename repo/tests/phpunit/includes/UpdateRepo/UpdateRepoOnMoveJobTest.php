@@ -11,7 +11,6 @@ use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -30,6 +29,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob

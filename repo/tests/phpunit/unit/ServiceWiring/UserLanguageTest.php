@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Language;
+use MediaWiki\Language\Language;
 use RuntimeException;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 

@@ -3,9 +3,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use ExtensionRegistry;
 use MediaWiki\Parser\Parser;
-use ParserFactory;
+use MediaWiki\Parser\ParserFactory;
+use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;

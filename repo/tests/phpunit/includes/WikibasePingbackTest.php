@@ -3,10 +3,10 @@
 declare( strict_types=1 );
 namespace Wikibase\Repo\Tests;
 
-use ExtensionRegistry;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SiteStats\SiteStats;
 use MediaWiki\SiteStats\SiteStatsInit;
 use MediaWiki\Utils\MWTimestamp;

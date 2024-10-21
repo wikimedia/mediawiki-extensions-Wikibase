@@ -17,7 +17,6 @@ use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use NullStatsdDataFactory;
 use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use SpecialPageTestBase;
@@ -37,6 +36,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialMergeItems

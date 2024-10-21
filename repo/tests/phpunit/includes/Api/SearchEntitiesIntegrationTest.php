@@ -4,7 +4,7 @@ declare( strict_types  = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;

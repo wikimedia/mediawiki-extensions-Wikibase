@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
@@ -11,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
-use WikitextContent;
 
 /**
  * Tests prevention of moving pages in and out of the data NS.

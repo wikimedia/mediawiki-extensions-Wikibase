@@ -4,11 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use DataValues\NumberValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use FormatJson;
+use MediaWiki\Api\ApiMessage;
+use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Json\FormatJson;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -461,7 +462,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			}
 		} catch ( ApiUsageException $ex ) {
 			if ( $error ) {
-				/** @var \ApiMessage $msg */
+				/** @var ApiMessage $msg */
 				$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
 				$this->assertEquals( $error, $msg->getApiCode(), 'Wrong error code: ' . $msg->plain() );
 			} else {

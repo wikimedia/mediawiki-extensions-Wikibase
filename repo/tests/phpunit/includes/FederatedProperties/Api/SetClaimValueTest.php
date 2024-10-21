@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use DataValues\StringValue;
-use FormatJson;
+use MediaWiki\Json\FormatJson;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementList;

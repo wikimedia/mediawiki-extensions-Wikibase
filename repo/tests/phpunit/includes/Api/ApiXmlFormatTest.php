@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
 use DOMDocument;
 use DOMXPath;
+use MediaWiki\Api\ApiBase;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Tests\Site\TestSites;
 use Wikibase\Lib\Tests\FakeCache;

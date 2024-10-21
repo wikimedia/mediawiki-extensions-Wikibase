@@ -2,8 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
-use HashBagOStuff;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -14,6 +13,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Api\FormatEntities;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\TestingAccessWrapper;
 
 /**

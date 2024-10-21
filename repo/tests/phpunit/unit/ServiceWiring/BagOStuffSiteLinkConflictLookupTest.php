@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use BagOStuff;
 use ObjectCacheFactory;
 use Wikibase\Repo\Store\BagOStuffSiteLinkConflictLookup;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * @coversNothing

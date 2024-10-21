@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use FormatJson;
+use MediaWiki\Json\FormatJson;
 
 /**
  * Tests for permission handling in the Wikibase API.

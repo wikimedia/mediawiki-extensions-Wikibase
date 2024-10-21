@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;

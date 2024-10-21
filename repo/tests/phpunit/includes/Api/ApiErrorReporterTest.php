@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiErrorFormatter;
-use ApiMain;
-use ApiUsageException;
 use DataValues\IllegalValueException;
+use MediaWiki\Api\ApiErrorFormatter;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Status\Status;
 use MediaWikiIntegrationTestCase;
 use ValueParsers\ParseException;
