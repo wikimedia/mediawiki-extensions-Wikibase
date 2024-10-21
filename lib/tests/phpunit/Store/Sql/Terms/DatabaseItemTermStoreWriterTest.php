@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
-use WANObjectCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -20,6 +19,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter

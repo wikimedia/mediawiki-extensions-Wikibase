@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use HashBagOStuff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Store\CachingSiteLinkLookup

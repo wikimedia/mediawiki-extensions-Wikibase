@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
-use LanguageCode;
+use MediaWiki\Language\LanguageCode;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 

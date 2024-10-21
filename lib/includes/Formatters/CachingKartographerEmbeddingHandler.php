@@ -3,16 +3,16 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
-use FormatJson;
 use InvalidArgumentException;
-use Language;
 use MapCacheLRU;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
+use MediaWiki\Json\FormatJson;
+use MediaWiki\Language\Language;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
-use ParserOptions;
 
 /**
  * Service for embedding Kartographer mapframes for GlobeCoordinateValues.

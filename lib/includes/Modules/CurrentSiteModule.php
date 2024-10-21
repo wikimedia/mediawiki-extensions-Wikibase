@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Modules;
 
-use BagOStuff;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
@@ -14,6 +13,7 @@ use MessageLocalizer;
 use RuntimeException;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * @license GPL-2.0-or-later

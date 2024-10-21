@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver

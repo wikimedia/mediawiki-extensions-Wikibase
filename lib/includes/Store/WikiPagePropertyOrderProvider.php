@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Content\TextContent;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Title\Title;
-use TextContent;
 
 /**
  * Provides a list of ordered Property numbers

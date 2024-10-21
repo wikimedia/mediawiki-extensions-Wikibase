@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 

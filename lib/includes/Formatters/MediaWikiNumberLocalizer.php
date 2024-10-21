@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use ValueFormatters\NumberLocalizer;
 
 /**

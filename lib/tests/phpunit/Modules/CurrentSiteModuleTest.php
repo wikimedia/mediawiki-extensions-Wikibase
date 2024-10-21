@@ -4,8 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use BagOStuff;
-use HashBagOStuff;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
@@ -16,6 +14,8 @@ use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\Modules\CurrentSiteModule;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Modules\CurrentSiteModule

@@ -3,7 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 
 /**

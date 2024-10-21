@@ -7,7 +7,6 @@ use LogicException;
 use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use WANObjectCache;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
@@ -15,6 +14,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\StringNormalizer;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory

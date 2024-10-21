@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use ExtensionRegistry;
 use MediaWiki\Hook\ExtensionTypesHook;
 use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
 

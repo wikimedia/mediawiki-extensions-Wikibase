@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use HashBagOStuff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionCache;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Store\EntityRevisionCache

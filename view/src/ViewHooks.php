@@ -2,10 +2,10 @@
 
 namespace Wikibase\View;
 
-use ExtensionRegistry;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;

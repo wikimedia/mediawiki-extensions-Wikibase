@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use LanguageCode;
+use MediaWiki\Language\LanguageCode;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteList;
