@@ -17,6 +17,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 201 );
+			assert.header( response, 'Location', `${response.request.url}/${response.body.id}` );
 			assert.deepEqual( response.body.data_type, property.data_type );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( response.body.id );
