@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Title\Title;
 use MediaWiki\User\CentralId\CentralIdLookup;

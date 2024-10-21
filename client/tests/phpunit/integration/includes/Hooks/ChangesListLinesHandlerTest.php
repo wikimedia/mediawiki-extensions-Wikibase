@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use EnhancedChangesList;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use OldChangesList;

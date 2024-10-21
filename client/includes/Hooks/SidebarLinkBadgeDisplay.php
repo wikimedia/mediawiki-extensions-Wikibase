@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Parser\Sanitizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;

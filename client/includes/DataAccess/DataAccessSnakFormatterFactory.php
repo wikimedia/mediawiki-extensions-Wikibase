@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataAccess;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;

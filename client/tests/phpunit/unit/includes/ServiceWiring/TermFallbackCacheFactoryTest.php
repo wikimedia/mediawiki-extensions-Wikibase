@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
-use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\TermFallbackCacheFactory;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @coversNothing

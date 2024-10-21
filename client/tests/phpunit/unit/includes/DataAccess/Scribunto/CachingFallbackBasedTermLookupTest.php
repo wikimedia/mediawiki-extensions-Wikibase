@@ -3,7 +3,7 @@
 declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;

@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\ParserOutput;
 
-use Content;
 use InvalidArgumentException;
+use MediaWiki\Content\Content;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;

@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use ChangesListBooleanFilter;
-use ExtensionRegistry;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SpecialPage\ChangesListSpecialPage;
 use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
 use MediaWiki\User\Options\UserOptionsLookup;

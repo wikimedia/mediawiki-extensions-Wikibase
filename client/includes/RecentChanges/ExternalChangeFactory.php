@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\User\ExternalUserNames;
 use RecentChange;
 use UnexpectedValueException;

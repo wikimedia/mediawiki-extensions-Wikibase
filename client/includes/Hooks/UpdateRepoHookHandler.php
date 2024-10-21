@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Content;
 use JobQueueError;
+use MediaWiki\Content\Content;
 use MediaWiki\Hook\PageMoveCompleteHook;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Linker\LinkTarget;

@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use ArrayIterator;
-use Language;
 use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Language\Language;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use PHPUnit\Framework\TestCase;

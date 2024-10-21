@@ -3,8 +3,8 @@
 namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use MediaWiki\Parser\Parser;
-use PPFrame;
-use PPNode;
+use MediaWiki\Parser\PPFrame;
+use MediaWiki\Parser\PPNode;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;

@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use EnhancedChangesList;
-use Language;
 use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
 use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;
 use MediaWiki\Hook\OldChangesListRecentChangesLineHook;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserNameUtils;
 use OldChangesList;
