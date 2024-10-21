@@ -228,8 +228,8 @@ return call_user_func( function() {
 				],
 			],
 			'styles' => [
-				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css',
-				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
+				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.less',
+				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.less',
 			],
 			'dependencies' => [
 				'mediawiki.api',
