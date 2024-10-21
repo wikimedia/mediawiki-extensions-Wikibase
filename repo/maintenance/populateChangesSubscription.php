@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use LoggedUpdateMaintenance;
+use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;

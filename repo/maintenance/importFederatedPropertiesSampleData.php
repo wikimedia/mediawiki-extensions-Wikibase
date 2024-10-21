@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityStore;

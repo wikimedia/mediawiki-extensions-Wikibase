@@ -3,7 +3,7 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;

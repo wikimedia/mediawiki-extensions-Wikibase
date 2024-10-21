@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
+use MediaWiki\Api\ApiBase;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Site\SiteLookup;

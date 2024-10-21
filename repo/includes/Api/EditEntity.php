@@ -4,9 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiMain;
-use ApiUsageException;
-use IBufferingStatsdDataFactory;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Title\Title;
 use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\Entity\ClearableEntity;
@@ -29,6 +28,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of

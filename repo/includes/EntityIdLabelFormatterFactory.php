@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;

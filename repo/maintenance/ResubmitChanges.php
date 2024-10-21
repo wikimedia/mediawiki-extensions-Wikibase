@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Maintenance;
 
 use IJobSpecification;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\WikibaseSettings;

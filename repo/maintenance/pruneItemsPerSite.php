@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\WikibaseSettings;

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiUsageException;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;

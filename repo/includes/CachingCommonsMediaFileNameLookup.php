@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo;
 
-use BagOStuff;
 use InvalidArgumentException;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use Wikimedia\Assert\Assert;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * Caching service that looks up normalized file names from Wikimedia Commons.

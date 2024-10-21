@@ -2,18 +2,18 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiErrorFormatter;
-use ApiErrorFormatter_BackCompat;
-use ApiMessage;
-use ApiResult;
-use ApiUsageException;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use MessageSpecifier;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiErrorFormatter;
+use MediaWiki\Api\ApiErrorFormatter_BackCompat;
+use MediaWiki\Api\ApiMessage;
+use MediaWiki\Api\ApiResult;
+use MediaWiki\Api\ApiUsageException;
 use StatusValue;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikimedia\Message\MessageSpecifier;
 
 /**
  * ApiErrorReporter is a component for API modules that handles

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Maintenance;
 
 use InvalidArgumentException;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;

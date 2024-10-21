@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiUsageException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use Profiler;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use Language;
+use MediaWiki\Language\Language;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\TermLanguageFallbackChain;

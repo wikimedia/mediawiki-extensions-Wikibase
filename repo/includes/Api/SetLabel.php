@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\EntityFactory;

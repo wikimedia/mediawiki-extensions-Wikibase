@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Content;
 
-use AbstractContent;
-use Content;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use LogicException;
+use MediaWiki\Content\AbstractContent;
+use MediaWiki\Content\Content;
 use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use Serializers\Exceptions\SerializationException;

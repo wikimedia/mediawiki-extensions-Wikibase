@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
-use IBufferingStatsdDataFactory;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -19,6 +19,7 @@ use Wikimedia\RemexHtml\Serializer\SerializerNode;
 use Wikimedia\RemexHtml\Tokenizer\Tokenizer;
 use Wikimedia\RemexHtml\TreeBuilder\Dispatcher;
 use Wikimedia\RemexHtml\TreeBuilder\TreeBuilder;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * API module for formatting a set of entity IDs.
@@ -192,7 +193,7 @@ class FormatEntities extends ApiBase {
 				=> 'apihelp-wbformatentities-example-2',
 		];
 
-		if ( \ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLexeme' ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLexeme' ) ) {
 			$exampleMessages = array_merge( $exampleMessages, [
 				'action=wbformatentities&ids=Q2|P2|L2'
 					=> 'apihelp-wbformatentities-example-3',

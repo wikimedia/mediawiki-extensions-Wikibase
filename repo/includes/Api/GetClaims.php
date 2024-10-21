@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

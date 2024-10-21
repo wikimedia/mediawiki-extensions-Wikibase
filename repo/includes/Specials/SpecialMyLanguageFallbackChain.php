@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Specials;
 
-use ExtensionRegistry;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Message\Message;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
