@@ -116,6 +116,7 @@
 	"wikibase-sitelinks-link-columnheading": "Página enlazada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexión|Conexiones}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificarme cuando alguien conecta una página que {{GENDER:|he creado}} a un elemento de {{WBREPONAME}}.",
+	"exceeded-entity-limit-category": "Páginas con demasiadas entidades {{WBREPONAME}} accedidas",
 	"notification-header-page-connection": "La página <strong>$3</strong> se {{GENDER:$2|conectó}} {{PLURAL:$4|-1=a un elemento de {{WBREPONAME}}|al elemento $4 de {{WBREPONAME}}}}, donde se pueden obtener datos relevantes para el tema.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra página|otras $4 páginas|100=otras 99 o más páginas}} fueron {{GENDER:$2|conectadas}} a elementos de {{WBREPONAME}}, donde se pueden obtener datos relevantes para los temas.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",

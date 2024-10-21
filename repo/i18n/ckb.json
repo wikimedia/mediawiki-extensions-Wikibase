@@ -149,7 +149,7 @@
 	"wikibase-api-no-such-reference": "نەتوانرا وەھا سەرچاوەیەک بدۆزرێتەوە.",
 	"wikibase-api-no-such-site": "نەتوانرا وەھا پێگەیەک بدۆزرێتەوە.",
 	"wikibase-restoreold": "گەڕاندنەوە",
-	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی $3 لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی [[Special:Permalink/$3|$3]] لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-noentity-createone": "ھەروەھا دەتوانی [[$1|یەکی نوێ دروست بکەی]].",
 	"wikibase-listdatatypes-wikibase-item-head": "بەند",
 	"wikibase-listdatatypes-commonsmedia-head": "میدیای کامنز",

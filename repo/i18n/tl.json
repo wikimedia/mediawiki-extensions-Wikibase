@@ -84,6 +84,6 @@
 	"wikibase-api-not-recognized-string": "Isang bagting ang inaasahan subalit hindi natagpuan.",
 	"wikibase-api-wrong-class": "Hindi tama ang uri ng nilalaman na nasa ibabaw ng natagpuang pahina.",
 	"wikibase-restoreold": "itakdang muli",
-	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong [[Special:Permalink/$3|$3]] ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-save-error-heading": "May pagkakamali"
 }

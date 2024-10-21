@@ -94,7 +94,7 @@
 	"wikibase-api-failed-save": "သိမ်းဆည်းမှု မအောင်မြင်ပါ။",
 	"wikibase-api-no-external-page": "ပြင်ပ ခလိုင်းယင့်ဆိုဒ် \"$1\" သည် စာမျက်နှာ \"$2\" အတွက် စာမျက်နှာအချက်အလက်ကို မထောက်ပံ့ခဲ့ပါ။",
 	"wikibase-api-permissiondenied": "ဤဆောင်ရွက်ချက်ကိုပြုလုပ်ရန် ခွင့်ပြုချက် မရှိပါ။",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု [[Special:Permalink/$3|$3]] ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်",
 	"wikibase-listdatatypes-commonsmedia-head": "ကွန်မွန်းစ် မီဒီယာ",
 	"wikibase-entity-save-error-heading": "တစ်ခုခု မှားယွင်းသွားခဲ့ပါသည်",
 	"wikibase-entity-save-error-message": "သင်၏ပြောင်းလဲချက်ကို မသိမ်းဆည်းနိုင်ပါ။ လွှင့်တင်ရန်ခလုတ်ကိုနှိပ်၍ ထပ်မံကြိုးစားနိုင်ပါသည်။",

@@ -152,7 +152,7 @@
 	"special-itemswithoutsitelinks": "ელემენტები საიტის ბმულების გარეშე",
 	"wikibase-redirectentity-submit": "გადამისამართება",
 	"wikibase-restoreold": "აღდგენა",
-	"wikibase-entity-summary-restore": "მომხმარებელმა [[Special:Contributions/$4|{{GENDER:$4|$4}}]] აღადგინა ვერსია $3",
+	"wikibase-entity-summary-restore": "მომხმარებელმა [[Special:Contributions/$4|{{GENDER:$4|$4}}]] აღადგინა ვერსია [[Special:Permalink/$3|$3]]",
 	"wikibase-noentity": "მონაცემებთა მსგავსი ნაკრები არ არსებობს. თქვენ შეგიძლიათ\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} მოძებნოთ შესაბამისი ჩანაწერები ჟურნალში]</span>რათა გაიგოთ სად წავიდა ის.",
 	"wikibase-noentity-createone": "თქვენ აგრეთვე შეგიძლიათ [[$1|შექმნათ ის]].",
 	"wikibase-listdatatypes-wikibase-item-head": "ელემენტი",

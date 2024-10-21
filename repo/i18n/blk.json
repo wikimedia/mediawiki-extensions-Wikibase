@@ -103,7 +103,7 @@
 	"wikibase-api-failed-save": "သိမ်ꩻထူႏမုꩻ အောင်ႏတဝ်း။",
 	"wikibase-api-no-external-page": "ကလုဲင်းယဲက် သုဲက်အထန်ႏ \"$1\" နဝ်ꩻ စွဲးကမ်းခါꩻဗာႏတဝ်း လိတ်မဲ့ငါ \"$2\" တာႏ လိတ်မဲ့ငါအချက်လက်နဝ်ꩻသွူ။",
 	"wikibase-api-permissiondenied": "အီႏခွုမ်မာꩻယိုတာႏ ဖေႏခွင်ꩻချက် အဝ်ႏတဝ်းသွူ။",
-	"wikibase-entity-summary-restore": "အဝ်ႏ [[Special:Contributions/$4|{{GENDER:$4|$4}}]] မွဉ်းဖျင်မုꩻ $3 နဝ်ꩻ တွိုႏလွေꩻချာအီလဲဉ်း မူလအခေႏနေႏထျꩻနဝ်ꩻသွူ။",
+	"wikibase-entity-summary-restore": "အဝ်ႏ [[Special:Contributions/$4|{{GENDER:$4|$4}}]] မွဉ်းဖျင်မုꩻ [[Special:Permalink/$3|$3]] နဝ်ꩻ တွိုႏလွေꩻချာအီလဲဉ်း မူလအခေႏနေႏထျꩻနဝ်ꩻသွူ။",
 	"wikibase-listdatatypes-commonsmedia-head": "ကောင်မွဉ်း မီဒီယာ",
 	"wikibase-entity-save-error-heading": "အမာႏထွာထိုꩻ တဗာႏဗာႏသွူ",
 	"wikibase-entity-save-error-message": "သိမ်ꩻနွောင်ꩻတဝ်း နာꩻပြောင်ꩻလုဲင်ႏမုꩻယိုသွူ။ နျꩻထဲင်းယင်း ဒင်ႏထင်ႏခလိုတ်နဝ်ꩻတဲင် ကျိုꩻစာꩻထဲင်းနွောင်ꩻဒျာႏသွူ။",

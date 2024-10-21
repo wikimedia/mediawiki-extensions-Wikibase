@@ -33,7 +33,7 @@
 	"wikibase-itemdisambiguation-submit": "Sykje",
 	"wikibase-newentity-submit": "Oanmeitsje",
 	"wikibase-modifyterm-language": "Taalkoade:",
-	"wikibase-entity-summary-undo": "Weromsetten fan ferzje $3 fan [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|oerlis]])",
+	"wikibase-entity-summary-undo": "Weromsetten fan ferzje [[Special:Diff/$3|$3]] fan [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|oerlis]])",
 	"wikibase-listdatatypes-wikibase-property-head": "Eigenskip",
 	"wikibase-listdatatypes-time-head": "Tiid",
 	"wikibase-listdatatypes-url-head": "URL",

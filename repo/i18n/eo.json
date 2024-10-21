@@ -251,7 +251,7 @@
 	"wikibase-redirect-target-is-redirect": "Ento $1 estas alidirektilo",
 	"wikibase-redirect-permissiondenied": "Malpermesata",
 	"wikibase-restoreold": "restarigi",
-	"wikibase-entity-summary-restore": "Restarigi version $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Restarigi version [[Special:Permalink/$3|$3]] de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Rekta redakto estas malebligita en nomspaco $1",
 	"wikibase-noentity": "Ĉi tiu datumaro ne ekzistas. Vi povas\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} priserĉi la rilatajn protokolojn]</span>\npor trovi de kie ĝi venis.",
 	"wikibase-noentity-createone": "vi ankaŭ povas [[$1|krei iun novan]].",

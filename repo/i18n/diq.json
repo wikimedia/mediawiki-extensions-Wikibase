@@ -114,7 +114,7 @@
 	"wikibase-redirectentity-toid": "Kamiya ke wa bıkırışiyo",
 	"wikibase-redirectentity-submit": "Serşıkıtış",
 	"wikibase-restoreold": "reset kerê",
-	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]i ([[User talk:$4|werênayış]]) vurnayışê $3i peyser gırewt",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]i ([[User talk:$4|werênayış]]) vurnayışê [[Special:Diff/$3|$3]]i peyser gırewt",
 	"wikibase-listdatatypes-wikibase-item-head": "obje",
 	"wikibase-listdatatypes-wikibase-property-head": "Xısusiyet",
 	"wikibase-listdatatypes-tabular-data-head": "Tabloy data",

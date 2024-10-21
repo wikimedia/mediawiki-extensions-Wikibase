@@ -198,7 +198,7 @@
 	"wikibase-api-no-external-page": "Na klijentu \"$1\" nema informacija o stranici \"$2\".",
 	"wikibase-api-no-such-sitelink": "Prilikom uređivanja znački nije moguće pronaći poveznice na »$1«.",
 	"wikibase-restoreold": "vrati",
-	"wikibase-entity-summary-undo": "Uklonjena izmjena $3 [[Special:Contributions/$4|{{GENDER:$4|suradnika $4|suradnice $4}}]] ([[User talk:$4|razgovor]])",
+	"wikibase-entity-summary-undo": "Uklonjena izmjena [[Special:Diff/$3|$3]] [[Special:Contributions/$4|{{GENDER:$4|suradnika $4|suradnice $4}}]] ([[User talk:$4|razgovor]])",
 	"wikibase-noentity": "Ova jedinica ne postoji. Ako je želite pronaći, možete [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pretražiti vezane evidencije].",
 	"wikibase-special-mergeitems-error-prefix": "Stavke nisu spojene. Pogreška:",
 	"wikibase-listdatatypes-wikibase-item-head": "Stavka",

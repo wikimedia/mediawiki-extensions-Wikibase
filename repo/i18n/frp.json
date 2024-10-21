@@ -80,7 +80,7 @@
 	"wikibase-entitydata-unsupported-format": "Lo format de donâs $1 est pas recognu per cet’entèrface.",
 	"wikibase-entitydata-title": "Donâs d’entitât",
 	"wikibase-restoreold": "refâre",
-	"wikibase-entity-summary-restore": "Rèstoracion de la vèrsion $3 per [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Rèstoracion de la vèrsion [[Special:Permalink/$3|$3]] per [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Lo changement drêt est dèsactivâ dedens l’èspâço de noms $1",
 	"wikibase-noentity-createone": "Vos en pouede asse-ben [[$1|fâre na novèla]].",
 	"content-model-wikibase-item": "Piéce de Wikibase",

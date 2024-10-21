@@ -261,7 +261,7 @@
 	"wikibase-self-conflict-patched": "mikawaway-kalumyiti nu misu pasanga’ satu baluhayay a baziyong, mitahpu liyad a sumad nu namasumad isu.",
 	"wikibase-conflict-patched": "mikawaway-kalumyiti nu misu malisimet tu sabaluhay a baziyong.",
 	"wikibase-restoreold": "patiku",
-	"wikibase-entity-summary-restore": "patiku [[Special:Contributions/$4|{{GENDER:$4|$4}}]] a sumad $3",
+	"wikibase-entity-summary-restore": "patiku [[Special:Contributions/$4|{{GENDER:$4|$4}}]] a sumad [[Special:Permalink/$3|$3]]",
 	"wikibase-no-direct-editing": "pangangananay a salaedan $1 mapasatezep kakelul mikawaway-kalumyiti",
 	"wikibase-noentity": "tina masaheciay inayi’, kapah kisu <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} mikilim mahizaay nasulitan nazipa’an]</span> amipalalitemuh tu kawaw kya kasacacay patayzaan.",
 	"wikibase-noentity-createone": "kapah tu kisu [[$1|micunus cacay]].",

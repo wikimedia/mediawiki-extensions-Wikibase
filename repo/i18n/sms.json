@@ -76,7 +76,7 @@
 	"wikibase-api-failed-save": "Ruõkkmõš ij oʹnnstam.",
 	"wikibase-api-invalid-list": "Vââǥǥlaž listt.",
 	"wikibase-restoreold": "maaccât",
-	"wikibase-entity-summary-undo": "Õõʹnni [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|saǥstõõllmõš]]) muuttâs $3 lij kååʹmtum",
+	"wikibase-entity-summary-undo": "Õõʹnni [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|saǥstõõllmõš]]) muuttâs [[Special:Diff/$3|$3]] lij kååʹmtum",
 	"wikibase-listdatatypes-monolingualtext-head": "Õõutǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-multilingualtext-head": "Määŋgǩiõllsaž teʹkstt",
 	"wikibase-listdatatypes-string-head": "Miârkkräidd",

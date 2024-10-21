@@ -345,7 +345,7 @@
 	"wikibase-self-conflict-patched": "Хьан хийцам тӀаьххьарчу верси чу дӀатоьхна, цу йуккъехь хьайн цхьаболу хийцамаш дӀа а бохуш.",
 	"wikibase-conflict-patched": "Хьан хийцам нисбина тӀаьххьарчу версица.",
 	"wikibase-restoreold": "меттахӀоттайе",
-	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} $3 верси  [[Special:Contributions/$4|$4]]",
+	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} [[Special:Permalink/$3|$3]] верси  [[Special:Contributions/$4|$4]]",
 	"wikibase-no-direct-editing": "«$1» цӀерийн меттигехь нийсса хийцамаш бар дӀадайина ду",
 	"wikibase-noentity": "Иштта хӀума йац. Хьан йиш йу [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} журналаш чохь дӀайаздарш лаха], цуьнах хилларг хаархьама.",
 	"wikibase-noentity-createone": "Иштта [[$1|кхолла]] йиш йу хьан.",

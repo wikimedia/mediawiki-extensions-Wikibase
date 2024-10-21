@@ -134,8 +134,8 @@
 	"wikibase-api-failed-save": "محفوظ ہونے میں ناکام۔",
 	"wikibase-api-permissiondenied": "آپ اس کام کو سر انجام دینے کے لیے ضروری اختیارات کے حامل نہیں۔",
 	"wikibase-restoreold": "بحال",
-	"wikibase-entity-summary-restore": "نے [[Special:Contributions/$4|{{GENDER:$4|$4}}]] کی جانب سے کی گئی ترامیم نسخہ $3 کی جانب واپس پھیر دیا۔",
-	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|تبادلۂ خیال]]) کی جانب سے کی گئی $3 ترمیم رد کر دی گئی ہے",
+	"wikibase-entity-summary-restore": "نے [[Special:Contributions/$4|{{GENDER:$4|$4}}]] کی جانب سے کی گئی ترامیم نسخہ [[Special:Permalink/$3|$3]] کی جانب واپس پھیر دیا۔",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|تبادلۂ خیال]]) کی جانب سے کی گئی [[Special:Diff/$3|$3]] ترمیم رد کر دی گئی ہے",
 	"wikibase-concept-uri": "تصور یو آر آئی",
 	"action-item-merge": "آئٹموں کو ضم کریں",
 	"right-item-merge": "آئٹموں کو ضم کریں"

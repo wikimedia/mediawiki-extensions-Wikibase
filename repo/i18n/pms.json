@@ -188,7 +188,7 @@
 	"wikibase-self-conflict-patched": "Soa modìfica a l'é stàita anserìa ant l'ùltima version, coatand quaidun dij sò cambi antërmedi.",
 	"wikibase-conflict-patched": "Soa modìfica a l'é stàita anserìa ant l'ùltima version.",
 	"wikibase-restoreold": "buté 'me ch'a l'era",
-	"wikibase-entity-summary-restore": "Riprìstin ëd la revision $3 da part ëd [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Riprìstin ëd la revision [[Special:Permalink/$3|$3]] da part ëd [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La modìfica direta a l'é disabilità ant lë spassi nominal $1",
 	"wikibase-noentity": "St'ansem ëd dat a esist nen. A peul <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} sërché ij registr relativ]</span> për trové anté ch'a l'é finì.",
 	"wikibase-noentity-createone": "It peule ëdcò [[$1|creene un neuv]].",
