@@ -9,6 +9,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
+use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
@@ -50,6 +51,11 @@ class EditSummaryFormatter {
 		switch ( true ) {
 			case $editSummary instanceof PatchPropertyEditSummary:
 				return $this->wholeEntityEditSummaryConverter->newSummaryForPropertyPatch( $editSummary );
+
+			case $editSummary instanceof CreatePropertyEditSummary:
+				$summary = new Summary( 'wbeditentity', 'create-property' );
+				$summary->setUserSummary( $editSummary->getUserComment() );
+				return $summary;
 
 			case $editSummary instanceof LabelsEditSummary:
 				return $this->termsEditSummaryConverter->convertLabelsEditSummary( $editSummary );

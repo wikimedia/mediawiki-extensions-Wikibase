@@ -75,7 +75,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\SetSitelink\SetSitelink;
 use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
@@ -83,6 +82,7 @@ use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupProperty
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
+use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
@@ -284,7 +284,7 @@ class WbRestApi {
 			->get( 'WbRestApi.ItemUpdater' );
 	}
 
-	public static function getPropertyUpdater( ContainerInterface $services = null ): PropertyUpdater {
+	public static function getPropertyUpdater( ContainerInterface $services = null ): EntityUpdaterPropertyUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.PropertyUpdater' );
 	}

@@ -29,6 +29,12 @@ module.exports = {
 			.withPathParam( 'property_id', propertyId );
 	},
 
+	newCreatePropertyRequestBuilder( property ) {
+		return new RequestBuilder()
+			.withRoute( 'POST', '/entities/properties' )
+			.withJsonBodyParam( 'property', property );
+	},
+
 	newGetSitelinksRequestBuilder( itemId ) {
 		return new RequestBuilder()
 			.withRoute( 'GET', '/entities/items/{item_id}/sitelinks' )

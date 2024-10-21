@@ -150,7 +150,6 @@ use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
 use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
@@ -1100,7 +1099,7 @@ return [
 		);
 	},
 
-	'WbRestApi.PropertyUpdater' => function( MediaWikiServices $services ): PropertyUpdater {
+	'WbRestApi.PropertyUpdater' => function( MediaWikiServices $services ): EntityUpdaterPropertyUpdater {
 		return new EntityUpdaterPropertyUpdater(
 			WbRestApi::getEntityUpdater( $services ),
 			new StatementReadModelConverter(

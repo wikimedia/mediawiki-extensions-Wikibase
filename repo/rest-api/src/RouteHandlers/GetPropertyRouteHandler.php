@@ -29,7 +29,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  * @license GPL-2.0-or-later
  */
 class GetPropertyRouteHandler extends SimpleHandler {
-	private const PROPERTY_ID_PATH_PARAM = 'property_id';
+
+	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}';
+	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const FIELDS_QUERY_PARAM = '_fields';
 
 	private GetProperty $useCase;

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
@@ -10,13 +11,14 @@ use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
 use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyRevision;
 use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityUpdaterPropertyUpdater implements PropertyUpdater {
+class EntityUpdaterPropertyUpdater implements PropertyUpdater, PropertyCreator {
 
 	private EntityUpdater $entityUpdater;
 	private StatementReadModelConverter $statementReadModelConverter;
@@ -26,9 +28,15 @@ class EntityUpdaterPropertyUpdater implements PropertyUpdater {
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
-	public function update( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
-		$entityRevision = $this->entityUpdater->update( $property, $editMetadata );
+	public function create( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
+		return $this->convertToPropertyRevision( $this->entityUpdater->create( $property, $editMetadata ) );
+	}
 
+	public function update( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
+		return $this->convertToPropertyRevision( $this->entityUpdater->update( $property, $editMetadata ) );
+	}
+
+	private function convertToPropertyRevision( EntityRevision $entityRevision ): PropertyRevision {
 		/** @var PropertyWriteModel $savedProperty */
 		$savedProperty = $entityRevision->getEntity();
 		'@phan-var PropertyWriteModel $savedProperty';
