@@ -3,7 +3,7 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;

@@ -6,7 +6,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;

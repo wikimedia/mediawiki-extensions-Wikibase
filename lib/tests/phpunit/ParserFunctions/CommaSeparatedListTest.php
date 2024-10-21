@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\ParserFunctions;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Parser\Parser;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 

@@ -3,10 +3,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\WikiPageItemOrderProvider;
-use WikitextContent;
 
 /**
  * @covers \Wikibase\Lib\Store\WikiPageItemOrderProvider

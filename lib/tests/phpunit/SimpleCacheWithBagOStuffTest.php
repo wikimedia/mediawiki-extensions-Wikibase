@@ -3,10 +3,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests;
 
-use HashBagOStuff;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @group Wikibase

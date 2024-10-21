@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use WANObjectCache;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,6 +12,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Trait for code reuse between DatabaseItemTermStoreWriterTest and DatabasePropertyTermStoreWriterTest

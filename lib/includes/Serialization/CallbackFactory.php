@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Serialization;
 
-use ApiResult;
+use MediaWiki\Api\ApiResult;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;

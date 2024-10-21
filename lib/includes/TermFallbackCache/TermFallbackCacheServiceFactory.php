@@ -4,13 +4,13 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\TermFallbackCache;
 
-use BagOStuff;
-use CachedBagOStuff;
-use IBufferingStatsdDataFactory;
 use ObjectCacheFactory;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\CachedBagOStuff;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * @license GPL-2.0-or-later

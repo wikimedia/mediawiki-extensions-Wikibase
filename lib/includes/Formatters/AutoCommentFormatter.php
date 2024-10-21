@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 
 /**
