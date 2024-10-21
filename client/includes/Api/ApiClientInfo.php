@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Api;
 
-use ApiBase;
-use ApiQuery;
-use ApiQueryBase;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryBase;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\ParamValidator\ParamValidator;
 

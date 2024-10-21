@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
-use Language;
 use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LibraryBase;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOutput;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;

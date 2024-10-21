@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Unit\DataAccess;
 
 use DataValues\StringValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;

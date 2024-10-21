@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Usage;
 
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Usage\EntityUsage;
@@ -11,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\WikibaseSettings;
-use WikitextContent;
 
 /**
  * @group Wikibase

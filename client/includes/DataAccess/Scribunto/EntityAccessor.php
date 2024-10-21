@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Serializers\Serializer;

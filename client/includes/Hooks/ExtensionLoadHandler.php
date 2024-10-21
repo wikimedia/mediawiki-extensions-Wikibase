@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Hooks;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\MediaWikiServices;
-use ParserFactory;
+use MediaWiki\Parser\ParserFactory;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;

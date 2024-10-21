@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Deserializers\Deserializer;
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Formatters\SnakFormatter;

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Content;
+use MediaWiki\Content\Content;
 use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
