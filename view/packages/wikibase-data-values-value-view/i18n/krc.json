@@ -15,6 +15,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "арксекунду 1/10 дери",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "арксекунду 1/100 дери",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "арксекунду 1/1000 дери",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Григориан",
 	"valueview-expert-timevalue-calendar-julian": "Юлиан",
 	"valueview-expert-timeinput-precision": "Кескинлик:",
