@@ -3,6 +3,7 @@
 const { clientFactory, action, utils } = require( 'api-testing' );
 const {
 	newCreateItemRequestBuilder,
+	newCreatePropertyRequestBuilder,
 	newSetItemLabelRequestBuilder,
 	newSetPropertyLabelRequestBuilder,
 	newAddItemStatementRequestBuilder,
@@ -70,6 +71,10 @@ describe( 'Abuse Filter', () => {
 
 	[
 		() => newCreateItemRequestBuilder( { labels: { en: filterTriggerWord } } ),
+		() => newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { en: filterTriggerWord }
+		} ),
 		() => newSetItemLabelRequestBuilder( testItemId, 'en', filterTriggerWord ),
 		() => newSetPropertyLabelRequestBuilder( testPropertyId, 'en', filterTriggerWord ),
 		() => newAddItemStatementRequestBuilder(

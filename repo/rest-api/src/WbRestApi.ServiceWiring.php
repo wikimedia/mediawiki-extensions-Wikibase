@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
@@ -63,6 +64,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -487,6 +490,21 @@ return [
 		return new CreateItem(
 			WbRestApi::getValidatingRequestDeserializer( $services ),
 			WbRestApi::getItemUpdater( $services ),
+			WbRestApi::getAssertUserIsAuthorized( $services )
+		);
+	},
+
+	'WbRestApi.CreateProperty' => function( MediaWikiServices $services ): CreateProperty {
+		return new CreateProperty(
+			new CreatePropertyValidator(
+				new PropertyDeserializer(
+					new LabelsDeserializer(),
+					new DescriptionsDeserializer(),
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
+					WbRestApi::getStatementDeserializer( $services )
+				)
+			),
+			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
 		);
 	},

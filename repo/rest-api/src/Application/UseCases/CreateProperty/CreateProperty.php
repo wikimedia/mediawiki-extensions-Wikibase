@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
@@ -13,6 +14,8 @@ use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
  * @license GPL-2.0-or-later
  */
 class CreateProperty {
+
+	use UpdateExceptionHandler;
 
 	private CreatePropertyValidator $validator;
 	private PropertyCreator $propertyCreator;
@@ -38,14 +41,14 @@ class CreateProperty {
 		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
 		$this->assertUserIsAuthorized->checkCreatePropertyPermissions( $user );
 
-		$revision = $this->propertyCreator->create(
+		$revision = $this->executeWithExceptionHandling( fn() => $this->propertyCreator->create(
 			$deserializedRequest->getProperty(),
 			new EditMetadata(
 				$request->getEditTags(),
 				$request->isBot(),
 				CreatePropertyEditSummary::newSummary( $request->getComment() )
 			)
-		);
+		) );
 
 		return new CreatePropertyResponse( $revision->getProperty(), $revision->getLastModified(), $revision->getRevisionId() );
 	}
