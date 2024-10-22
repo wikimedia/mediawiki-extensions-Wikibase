@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
@@ -26,7 +27,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 class WikibaseEntityPermissionCheckerTest extends TestCase {
 
 	/**
-	 * @dataProvider providePermissionStatusForCreatingAnItem
+	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
 	public function testCanCreateAnItemAsRegisteredUser( Status $permissionStatus, PermissionCheckResult $result ): void {
 		$user = User::withUsername( 'user123' );
@@ -50,7 +51,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider providePermissionStatusForCreatingAnItem
+	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
 	public function testCanCreateAnItemAsAnonymousUser( Status $permissionStatus, PermissionCheckResult $result ): void {
 		$mwUser = $this->createStub( MediaWikiUser::class );
@@ -68,6 +69,51 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		$permissionChecker = new WikibaseEntityPermissionChecker( $wbPermissionChecker, $userFactory );
 
 		$this->assertEquals( $result, $permissionChecker->canCreateItem( User::newAnonymous() ) );
+	}
+
+	/**
+	 * @dataProvider providePermissionStatusForCreatingAnEntity
+	 */
+	public function testCanCreatePropertyAsRegisteredUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+		$user = User::withUsername( 'user123' );
+
+		$mwUser = $this->createStub( MediaWikiUser::class );
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->expects( $this->once() )
+			->method( 'newFromName' )
+			->with( $user->getUsername() )
+			->willReturn( $mwUser );
+
+		$wbPermissionChecker = $this->createMock( EntityPermissionChecker::class );
+		$wbPermissionChecker->expects( $this->once() )
+			->method( 'getPermissionStatusForEntity' )
+			->with( $mwUser, EntityPermissionChecker::ACTION_EDIT, new Property( null, null, 'string' ) )
+			->willReturn( $permissionStatus );
+
+		$permissionChecker = new WikibaseEntityPermissionChecker( $wbPermissionChecker, $userFactory );
+
+		$this->assertEquals( $result, $permissionChecker->canCreateProperty( $user ) );
+	}
+
+	/**
+	 * @dataProvider providePermissionStatusForCreatingAnEntity
+	 */
+	public function testCanCreatePropertyAsAnonymousUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+		$mwUser = $this->createStub( MediaWikiUser::class );
+		$userFactory = $this->createMock( UserFactory::class );
+		$userFactory->expects( $this->once() )
+			->method( 'newAnonymous' )
+			->willReturn( $mwUser );
+
+		$wbPermissionChecker = $this->createMock( EntityPermissionChecker::class );
+		$wbPermissionChecker->expects( $this->once() )
+			->method( 'getPermissionStatusForEntity' )
+			->with( $mwUser, EntityPermissionChecker::ACTION_EDIT, new Property( null, null, 'string' ) )
+			->willReturn( $permissionStatus );
+
+		$permissionChecker = new WikibaseEntityPermissionChecker( $wbPermissionChecker, $userFactory );
+
+		$this->assertEquals( $result, $permissionChecker->canCreateProperty( User::newAnonymous() ) );
 	}
 
 	/**
@@ -147,7 +193,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		return $dataSet;
 	}
 
-	public function providePermissionStatusForCreatingAnItem(): Generator {
+	public function providePermissionStatusForCreatingAnEntity(): Generator {
 		yield [ Status::newFatal( 'insufficient permissions' ), PermissionCheckResult::newDenialForUnknownReason() ];
 
 		yield [ Status::newGood(), PermissionCheckResult::newAllowed() ];

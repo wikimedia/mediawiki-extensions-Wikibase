@@ -13,6 +13,8 @@ interface PermissionChecker {
 
 	public function canCreateItem( User $user ): PermissionCheckResult;
 
+	public function canCreateProperty( User $user ): PermissionCheckResult;
+
 	public function canEdit( User $user, EntityId $id ): PermissionCheckResult;
 
 }

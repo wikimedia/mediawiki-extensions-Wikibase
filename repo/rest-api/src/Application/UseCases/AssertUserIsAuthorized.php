@@ -48,4 +48,18 @@ class AssertUserIsAuthorized {
 		);
 	}
 
+	public function checkCreatePropertyPermissions( User $user ): void {
+		$permissionCheckResult = $this->permissionChecker->canCreateProperty( $user );
+		if ( !$permissionCheckResult->isDenied() ) {
+			return;
+		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
+			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
+		}
+
+		throw new UseCaseError(
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+			'You have no permission to create a property'
+		);
+	}
+
 }

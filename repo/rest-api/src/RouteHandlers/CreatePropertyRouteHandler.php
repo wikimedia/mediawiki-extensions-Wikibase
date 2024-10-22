@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\RestApi\RouteHandlers;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -18,7 +19,12 @@ use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -36,13 +42,24 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 
 	private CreateProperty $useCase;
 	private PropertyPartsSerializer $propertySerializer;
+	private ResponseFactory $responseFactory;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( CreateProperty $useCase, PropertyPartsSerializer $serializer ) {
+	public function __construct(
+		CreateProperty $useCase,
+		PropertyPartsSerializer $serializer,
+		ResponseFactory $responseFactory,
+		MiddlewareHandler $middlewareHandler
+	) {
 		$this->useCase = $useCase;
 		$this->propertySerializer = $serializer;
+		$this->responseFactory = $responseFactory;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
+		$responseFactory = new ResponseFactory();
+
 		return new self(
 			new CreateProperty(
 				new PropertyDeserializer(
@@ -51,7 +68,8 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 					WbRestApi::getStatementDeserializer()
 				),
-				WbRestApi::getPropertyUpdater()
+				WbRestApi::getPropertyUpdater(),
+				WbRestApi::getAssertUserIsAuthorized()
 			),
 			new PropertyPartsSerializer(
 				new LabelsSerializer(),
@@ -59,54 +77,40 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 				new AliasesSerializer(),
 				new StatementListSerializer( WbRestApi::getStatementSerializer() )
 			),
+			$responseFactory,
+			new MiddlewareHandler( [
+				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
+				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
+			] )
 		);
 	}
 
-	public function run(): Response {
+	/**
+	 * @param mixed ...$args
+	 */
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase(): Response {
 		$jsonBody = $this->getValidatedBody();
 		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
 
-		$useCaseResponse = $this->useCase->execute(
-			new CreatePropertyRequest(
-				$jsonBody[self::PROPERTY_BODY_PARAM],
-				$jsonBody[self::TAGS_BODY_PARAM] ?? [],
-				$jsonBody[self::BOT_BODY_PARAM] ?? false,
-				$jsonBody[self::COMMENT_BODY_PARAM] ?? null,
-				$this->getUsername()
-			)
-		);
-
-		$response = $this->getResponseFactory()->create();
-		$response->setStatus( 201 );
-		$response->setHeader( 'Content-Type', 'application/json' );
-		$response->setHeader(
-			'Last-Modified',
-			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
-		);
-		$response->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
-
-		$property = $useCaseResponse->getProperty();
-		$response->setHeader(
-			'Location',
-			$this->getRouter()->getRouteUrl(
-				GetPropertyRouteHandler::ROUTE,
-				[ GetPropertyRouteHandler::PROPERTY_ID_PATH_PARAM => $property->getId() ]
-			)
-		);
-
-		$response->setBody( new StringStream( json_encode(
-			$this->propertySerializer->serialize( new PropertyParts(
-				$property->getId(),
-				PropertyParts::VALID_FIELDS,
-				$property->getDataType(),
-				$property->getLabels(),
-				$property->getDescriptions(),
-				$property->getAliases(),
-				$property->getStatements(),
-			) )
-		) ) );
-
-		return $response;
+		try {
+			return $this->newSuccessHttpResponse(
+				$this->useCase->execute(
+					new CreatePropertyRequest(
+						$jsonBody[self::PROPERTY_BODY_PARAM],
+						$jsonBody[self::TAGS_BODY_PARAM] ?? [],
+						$jsonBody[self::BOT_BODY_PARAM] ?? false,
+						$jsonBody[self::COMMENT_BODY_PARAM] ?? null,
+						$this->getUsername()
+					)
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newErrorResponseFromException( $e );
+		}
 	}
 
 	/**
@@ -137,6 +141,46 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 		];
+	}
+
+	private function newSuccessHttpResponse( CreatePropertyResponse $useCaseResponse ): Response {
+		$response = $this->getResponseFactory()->create();
+		$response->setStatus( 201 );
+		$response->setHeader( 'Content-Type', 'application/json' );
+		$response->setHeader(
+			'Last-Modified',
+			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+		);
+		$response->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
+
+		$property = $useCaseResponse->getProperty();
+		$response->setHeader(
+			'Location',
+			$this->getRouter()->getRouteUrl(
+				GetPropertyRouteHandler::ROUTE,
+				[ GetPropertyRouteHandler::PROPERTY_ID_PATH_PARAM => $property->getId() ]
+			)
+		);
+
+		$response->setBody(
+			new StringStream(
+				json_encode(
+					$this->propertySerializer->serialize(
+						new PropertyParts(
+							$property->getId(),
+							PropertyParts::VALID_FIELDS,
+							$property->getDataType(),
+							$property->getLabels(),
+							$property->getDescriptions(),
+							$property->getAliases(),
+							$property->getStatements(),
+						)
+					)
+				)
+			)
+		);
+
+		return $response;
 	}
 
 	private function getUsername(): ?string {

@@ -7,6 +7,7 @@ use MediaWiki\User\UserFactory;
 use MessageSpecifier;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
 use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
@@ -51,6 +52,21 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 				$mwUser,
 				EntityPermissionChecker::ACTION_EDIT,
 				new Item()
+			)
+		);
+	}
+
+	public function canCreateProperty( User $user ): PermissionCheckResult {
+		$mwUser = $user->isAnonymous() ?
+			$this->userFactory->newAnonymous() :
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable isAnonymous checks for null
+			$this->userFactory->newFromName( $user->getUsername() );
+
+		return $this->newPermissionCheckResultFromStatus(
+			$this->entityPermissionChecker->getPermissionStatusForEntity(
+				$mwUser,
+				EntityPermissionChecker::ACTION_EDIT,
+				new Property( null, null, 'string' )
 			)
 		);
 	}

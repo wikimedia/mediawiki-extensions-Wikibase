@@ -190,3 +190,8 @@ module.exports.getItemCreateRequest = ( requestInput ) => ( {
 	newRequestBuilder: () => rbf.newCreateItemRequestBuilder( { labels: { en: 'new Item' } } ),
 	requestInput
 } );
+
+module.exports.getPropertyCreateRequest = ( requestInput ) => ( {
+	newRequestBuilder: () => rbf.newCreatePropertyRequestBuilder( { data_type: 'string' } ),
+	requestInput
+} );

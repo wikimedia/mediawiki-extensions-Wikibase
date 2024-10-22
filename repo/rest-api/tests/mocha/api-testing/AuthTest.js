@@ -12,10 +12,12 @@ const {
 	getPropertyGetRequests,
 	getItemEditRequests,
 	getPropertyEditRequests,
-	getItemCreateRequest
+	getItemCreateRequest,
+	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { getOrCreateAuthTestUser } = require( '../helpers/testUsers' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -36,7 +38,8 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		...editRequests,
 		...getItemGetRequests( itemRequestInputs ),
 		...getPropertyGetRequests( propertyRequestInputs ),
-		getItemCreateRequest( itemRequestInputs )
+		getItemCreateRequest( itemRequestInputs ),
+		getPropertyCreateRequest( propertyRequestInputs )
 	];
 
 	describe( 'Authentication', () => {
@@ -66,7 +69,12 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	describe( 'Authorization', () => {
 
 		describeEachRouteWithReset(
-			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
+			[
+				...editRequests,
+				getItemCreateRequest( itemRequestInputs ),
+				getPropertyCreateRequest( propertyRequestInputs )
+			],
+			( newRequestBuilder ) => {
 				it( 'Unauthorized bot edit', async () => {
 					assertValidError(
 						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
@@ -79,7 +87,12 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		);
 
 		describeEachRouteWithReset(
-			[ ...editRequests, getItemCreateRequest( itemRequestInputs ) ], ( newRequestBuilder ) => {
+			[
+				...editRequests,
+				getItemCreateRequest( itemRequestInputs ),
+				getPropertyCreateRequest( propertyRequestInputs )
+			],
+			( newRequestBuilder ) => {
 				describe( 'Blocked user', () => {
 					before( async () => {
 						await root.action( 'block', {
@@ -132,6 +145,18 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 					);
 				} );
 			} );
+		} );
+
+		it( 'cannot create a property without the property-create permission', async () => {
+			const response = await newCreatePropertyRequestBuilder( { data_type: 'string' } )
+				.withUser( user )
+				.withConfigOverride(
+					'wgGroupPermissions',
+					{ '*': { read: true, edit: true, createpage: true, 'property-create': false } }
+				)
+				.makeRequest();
+
+			expect( response ).to.have.status( 403 );
 		} );
 	} );
 } );
