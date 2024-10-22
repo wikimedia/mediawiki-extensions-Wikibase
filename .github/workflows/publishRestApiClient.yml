@@ -1,0 +1,27 @@
+name: Publish REST API Client
+on:
+    push:
+        branches: [ master ]
+jobs:
+    build-and-publish-api-client:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '20.x'
+            - name: Dereference OpenAPI doc
+              run: npx json-dereference-cli json-dereference -s repo/rest-api/src/RouteHandlers/openapi.json -o openapi-dereferenced.json
+            - name: Build the API client
+              uses: addnab/docker-run-action@v3
+              with:
+                  image: openapitools/openapi-generator-cli
+                  options: -v ${{ github.workspace }}:/local -w /local
+                  run: |
+                      /usr/local/bin/docker-entrypoint.sh generate \
+                          -i openapi-dereferenced.json \
+                          -g javascript \
+                          -o api-client \
+                          --additional-properties=usePromises=true
+            - name: test
+              run: echo "$(ls -l api-client/)"
