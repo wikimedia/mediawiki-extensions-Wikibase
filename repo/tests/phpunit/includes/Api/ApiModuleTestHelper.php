@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
-use ApiMain;
-use ApiUsageException;
 use Exception;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\User\User;
 use PHPUnit\Framework\Assert;

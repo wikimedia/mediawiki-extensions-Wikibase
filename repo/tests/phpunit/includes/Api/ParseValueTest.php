@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
-use ApiUsageException;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiTestCaseTrait;
 use ValueParsers\NullParser;

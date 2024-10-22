@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
 use DataValues\StringValue;
+use MediaWiki\Api\ApiMain;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use ValueValidators\Result;

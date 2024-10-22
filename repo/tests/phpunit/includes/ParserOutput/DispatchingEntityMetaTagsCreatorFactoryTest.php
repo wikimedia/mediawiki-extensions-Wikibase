@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
-use Language;
 use LogicException;
+use MediaWiki\Language\Language;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\View\DefaultMetaTagsCreator;

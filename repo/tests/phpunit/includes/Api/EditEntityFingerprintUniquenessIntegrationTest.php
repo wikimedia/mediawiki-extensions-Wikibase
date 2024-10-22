@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
+use MediaWiki\Api\ApiUsageException;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity

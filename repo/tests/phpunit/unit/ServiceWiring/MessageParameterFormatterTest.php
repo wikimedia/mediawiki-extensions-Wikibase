@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Language;
+use MediaWiki\Language\Language;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use DataValues\Serializers\DataValueSerializer;
-use FormatJson;
+use MediaWiki\Json\FormatJson;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\SerializerFactory;

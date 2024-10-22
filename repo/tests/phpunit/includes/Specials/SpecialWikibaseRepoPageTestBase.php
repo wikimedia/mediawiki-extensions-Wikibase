@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\DataValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;

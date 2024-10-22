@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
-use IDBAccessObject;
 use InvalidArgumentException;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
@@ -20,6 +19,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
  * @covers \Wikibase\Repo\Content\EntityContent

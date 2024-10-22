@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
+use MediaWiki\Api\ApiUsageException;
 
 /**
  * Test case for language attributes API modules.

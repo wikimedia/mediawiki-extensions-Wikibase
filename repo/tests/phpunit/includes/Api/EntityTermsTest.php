@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
-use ApiPageSet;
-use ApiQuery;
-use ApiUsageException;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;

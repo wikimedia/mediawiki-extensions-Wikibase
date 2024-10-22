@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityTitleTextLookup;

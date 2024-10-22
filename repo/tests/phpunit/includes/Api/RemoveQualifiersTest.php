@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use DataValues\StringValue;
+use MediaWiki\Api\ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

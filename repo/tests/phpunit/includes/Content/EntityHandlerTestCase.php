@@ -4,13 +4,14 @@ namespace Wikibase\Repo\Tests\Content;
 
 use Action;
 use Article;
-use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Content\ContentHandler;
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
@@ -38,7 +39,6 @@ use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
-use WikitextContent;
 
 /**
  * @covers \Wikibase\Repo\Content\EntityHandler

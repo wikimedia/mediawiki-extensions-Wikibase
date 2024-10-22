@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
 use HamcrestPHPUnitIntegration;
 use HtmlArmor;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;

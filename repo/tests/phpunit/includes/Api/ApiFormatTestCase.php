@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Tests\Api\ApiTestContext;

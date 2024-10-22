@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use ContentHandler;
+use MediaWiki\Content\ContentHandler;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;

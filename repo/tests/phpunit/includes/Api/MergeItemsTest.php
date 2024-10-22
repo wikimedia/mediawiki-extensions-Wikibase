@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
-use ApiUsageException;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\Request\FauxRequest;
@@ -17,7 +17,6 @@ use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use NullStatsdDataFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
@@ -45,6 +44,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @covers \Wikibase\Repo\Api\MergeItems

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use LogicException;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Debug\DeprecatablePropertyArray;
 use MediaWiki\MediaWikiServices;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\ItemId;

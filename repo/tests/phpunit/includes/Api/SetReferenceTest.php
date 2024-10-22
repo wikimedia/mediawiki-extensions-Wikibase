@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use MediaWiki\Api\ApiUsageException;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

@@ -10,7 +10,6 @@ use MediaWiki\Session\Session;
 use MediaWiki\Status\Status;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\User\UserIdentity;
-use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -30,6 +29,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
+use Wikimedia\Stats\NullStatsdDataFactory;
 use WMDE\HamcrestHtml\HtmlMatcher;
 
 /**

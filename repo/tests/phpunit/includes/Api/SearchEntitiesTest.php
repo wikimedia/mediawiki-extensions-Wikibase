@@ -4,7 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
@@ -503,7 +504,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			];
 			$this->callApiModule( $params, $entitySearchHelper );
 			$this->fail( "Exception must be thrown" );
-		} catch ( \ApiUsageException $aue ) {
+		} catch ( ApiUsageException $aue ) {
 			$this->assertSame( $errorValue, $aue->getStatusValue() );
 		}
 	}

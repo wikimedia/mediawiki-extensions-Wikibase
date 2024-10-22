@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
+use MediaWiki\Api\ApiBase;
 use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\SetLabel;
 

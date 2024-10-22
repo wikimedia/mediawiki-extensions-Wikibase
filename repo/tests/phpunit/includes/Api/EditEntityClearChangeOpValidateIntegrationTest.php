@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use ReflectionClass;
@@ -24,6 +25,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -119,9 +121,9 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 		$request = new FauxRequest( $params );
 
 		return new EditEntity(
-			new \ApiMain( $request ),
+			new ApiMain( $request ),
 			'test',
-			new \NullStatsdDataFactory(),
+			new NullStatsdDataFactory(),
 			WikibaseRepo::getStore()
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityIdParser(),

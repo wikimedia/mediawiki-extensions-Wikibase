@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests;
 
-use HashBagOStuff;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Repo\CachingCommonsMediaFileNameLookup

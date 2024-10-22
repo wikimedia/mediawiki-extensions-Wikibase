@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
-use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
-use WANObjectCache;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -14,6 +12,8 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ObjectCache\HashBagOStuff;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Integration tests for both CacheAwarePropertyInfoStore and CachingPropertyInfoLookup.

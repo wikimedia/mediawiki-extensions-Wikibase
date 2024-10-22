@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiUsageException;
 use DataValues\StringValue;
-use FormatJson;
+use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\Revision\RevisionRecord;
 use PHPUnit\Framework\Constraint\Constraint;
 use ValueFormatters\FormatterOptions;

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use ApiBase;
-use ApiUsageException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\DataValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWikiIntegrationTestCase;
 use ValueParsers\ParserOptions;
