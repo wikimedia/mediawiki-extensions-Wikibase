@@ -1,0 +1,14 @@
+{
+	"SetDescriptionInLanguage": {
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"description": { "type": "string" }
+				},
+				"required": [ "description" ]
+			},
+			{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+		]
+	}
+}
