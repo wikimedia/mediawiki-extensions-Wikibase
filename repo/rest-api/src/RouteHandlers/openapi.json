@@ -370,7 +370,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/application~1json/example"
@@ -378,7 +378,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "value": {
@@ -504,7 +504,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1sitelinks/patch/requestBody/content/application~1json/example"
@@ -512,7 +512,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "value": {
@@ -1123,7 +1123,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D/patch/requestBody/content/application~1json/example"
@@ -1131,7 +1131,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -1287,7 +1287,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/example"
@@ -1295,55 +1295,7 @@
             },
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "patch": {
-                        "description": "A JSON Patch document as defined by RFC 6902",
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "op": {
-                              "description": "The operation to perform",
-                              "type": "string",
-                              "enum": [
-                                "add",
-                                "copy",
-                                "move",
-                                "remove",
-                                "replace",
-                                "test"
-                              ]
-                            },
-                            "path": {
-                              "description": "A JSON Pointer",
-                              "type": "string"
-                            },
-                            "from": {
-                              "description": "A JSON Pointer",
-                              "type": "string"
-                            },
-                            "value": {
-                              "description": "The value to be used within the operation"
-                            }
-                          },
-                          "required": [
-                            "op",
-                            "path"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "patch"
-                    ]
-                  },
-                  {
-                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                  }
-                ]
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -1496,7 +1448,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1descriptions/patch/requestBody/content/application~1json/example"
@@ -1504,7 +1456,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -2791,7 +2743,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2799,7 +2751,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -2952,7 +2904,7 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1labels/patch/requestBody/content/application~1json/example"
@@ -2960,7 +2912,7 @@
             },
             "application/json": {
               "schema": {
-                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema"
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
                 "patch": [
@@ -3639,7 +3591,43 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemAliases"
+            "description": "Item's aliases by language",
+            "headers": {
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Aliases"
+                },
+                "example": {
+                  "en": [
+                    "Jane M. Doe",
+                    "JD"
+                  ],
+                  "ru": [
+                    "Джейн М. Доу"
+                  ]
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3682,11 +3670,87 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/AliasesPatch"
+          "description": "Payload containing a JSON Patch document to be applied to an Item's aliases and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "patch": {
+                        "description": "A JSON Patch document as defined by RFC 6902",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "op": {
+                              "description": "The operation to perform",
+                              "type": "string",
+                              "enum": [
+                                "add",
+                                "copy",
+                                "move",
+                                "remove",
+                                "replace",
+                                "test"
+                              ]
+                            },
+                            "path": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "from": {
+                              "description": "A JSON Pointer",
+                              "type": "string"
+                            },
+                            "value": {
+                              "description": "The value to be used within the operation"
+                            }
+                          },
+                          "required": [
+                            "op",
+                            "path"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "patch"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "add",
+                    "path": "/en/-",
+                    "value": "JD"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add English alias"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemAliases"
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -3744,7 +3808,44 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyAliases"
+            "description": "Property's aliases by language",
+            "headers": {
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Aliases"
+                },
+                "example": {
+                  "en": [
+                    "is a",
+                    "is an"
+                  ],
+                  "ru": [
+                    "представляет собой",
+                    "является"
+                  ]
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3784,11 +3885,39 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/AliasesPatch"
+          "description": "Payload containing a JSON Patch document to be applied to a Property's aliases and edit metadata",
+          "required": true,
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1aliases/patch/requestBody/content/application~1json/example"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "patch": [
+                  {
+                    "op": "add",
+                    "path": "/en/-",
+                    "value": "is an"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add English alias"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyAliases"
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1aliases/get/responses/200"
           },
           "400": {
             "$ref": "#/components/responses/InvalidPatch"
@@ -3849,7 +3978,41 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemAliasesInLanguage"
+            "description": "Item's aliases in a specific language",
+            "headers": {
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  "Jane M. Doe",
+                  "JD"
+                ]
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3901,16 +4064,50 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Aliases"
+          "description": "Payload containing a list of Item aliases in the specified language and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "aliases": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "aliases"
+                    ]
+                  },
+                  {
+                    "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
+                  }
+                ]
+              },
+              "example": {
+                "aliases": [
+                  "JD"
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add English alias"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ItemAliasesInLanguage",
-            "description": "The updated list of Aliases in a specific language"
+            "description": "The updated list of aliases in a specific language",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases~1%7Blanguage_code%7D/get/responses/200"
           },
           "201": {
-            "$ref": "#/components/responses/ItemAliasesInLanguage",
-            "description": "The newly created List of Aliases in a specific language"
+            "description": "The newly created list of aliases in a specific language",
+            "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3971,7 +4168,41 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyAliasesInLanguage"
+            "description": "Property's aliases in a specific language",
+            "headers": {
+              "ETag": {
+                "description": "Last entity revision number",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "example": [
+                  "is a",
+                  "is an"
+                ]
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -4020,16 +4251,32 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Aliases"
+          "description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases~1%7Blanguage_code%7D/post/requestBody/content/application~1json/schema"
+              },
+              "example": {
+                "aliases": [
+                  "is an"
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add English alias"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/PropertyAliasesInLanguage",
-            "description": "The updated list of Aliases in a specific language"
+            "description": "The updated list of aliases in a specific language",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1aliases~1%7Blanguage_code%7D/get/responses/200"
           },
           "201": {
-            "$ref": "#/components/responses/PropertyAliasesInLanguage",
-            "description": "The newly created List of Aliases in a specific language"
+            "description": "The newly created list of aliases in a specific language",
+            "$ref": "#/paths/~1entities~1properties~1%7Bproperty_id%7D~1aliases~1%7Blanguage_code%7D/get/responses/200"
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -5088,75 +5335,6 @@
       }
     },
     "requestBodies": {
-      "Aliases": {
-        "description": "Payload containing a list of Wikibase aliases in the specified language and edit metadata",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "aliases": {
-                      "type": "array",
-                      "example": [
-                        "alias-1",
-                        "alias-2"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "aliases"
-                  ]
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "AliasesPatch": {
-        "description": "Payload containing a JSON Patch document to be applied to an Item's aliases and edit metadata",
-        "required": true,
-        "content": {
-          "application/json-patch+json": {
-            "schema": {
-              "$ref": "#/components/requestBodies/AliasesPatch/content/application~1json/schema"
-            }
-          },
-          "application/json": {
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema/allOf/0"
-                },
-                {
-                  "properties": {
-                    "patch": {
-                      "items": {
-                        "properties": {
-                          "path": {
-                            "example": "/en/0"
-                          },
-                          "value": {
-                            "example": "en-alias1"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "$ref": "#/components/requestBodies/Delete/content/application~1json/schema"
-                }
-              ]
-            }
-          }
-        }
-      },
       "Statement": {
         "description": "Payload containing a Wikibase Statement object and edit metadata",
         "required": true,
@@ -5245,7 +5423,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions/patch/requestBody/content/application~1json/schema/allOf/0"
+                  "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema/allOf/0"
                 },
                 {
                   "properties": {
@@ -6347,73 +6525,6 @@
           }
         }
       },
-      "ItemAliases": {
-        "description": "Item's aliases by language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Aliases"
-            }
-          }
-        }
-      },
-      "ItemAliasesInLanguage": {
-        "description": "Item's aliases in a specific language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": [
-                "Douglas Noel Adams",
-                "Douglas Noël Adams"
-              ]
-            }
-          }
-        }
-      },
       "Property": {
         "description": "A single Wikibase Property",
         "headers": {
@@ -6488,73 +6599,6 @@
                 ]
               },
               "statements": {}
-            }
-          }
-        }
-      },
-      "PropertyAliases": {
-        "description": "Property's aliases by language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Aliases"
-            }
-          }
-        }
-      },
-      "PropertyAliasesInLanguage": {
-        "description": "Property's aliases in a specific language",
-        "headers": {
-          "ETag": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last entity revision number"
-          },
-          "Last-Modified": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Last modified date"
-          },
-          "X-Authenticated-User": {
-            "schema": {
-              "type": "string"
-            },
-            "description": "Optional username of the user making the request"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": [
-                "is a",
-                "example of"
-              ]
             }
           }
         }
