@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Hooks;
 use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\Content\Content;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use MediaWiki\Title\Title;
@@ -86,7 +87,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	 * @param User $user
 	 * @param string $reason
 	 * @param int $id
-	 * @param \Content|null $content
+	 * @param Content|null $content
 	 * @param \ManualLogEntry $logEntry
 	 * @param int $archivedRevisionCount
 	 * @return bool|void

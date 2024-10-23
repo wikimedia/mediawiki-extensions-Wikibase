@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use Wikibase\View\LocalizedTextProvider;
 

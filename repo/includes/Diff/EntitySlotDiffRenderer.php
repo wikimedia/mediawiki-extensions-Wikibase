@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Diff;
 
-use Content;
+use MediaWiki\Content\Content;
 use MediaWiki\Output\OutputPage;
 use SlotDiffRenderer;
 use Wikibase\Repo\Content\EntityContent;

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\LinkedData;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\DerivativeRequest;

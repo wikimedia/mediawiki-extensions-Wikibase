@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Localizer;
 
 use DataValues\DataValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Site\SiteLookup;
 use ValueFormatters\FormattingException;
 use ValueFormatters\NumberLocalizer;

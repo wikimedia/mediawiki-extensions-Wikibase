@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;

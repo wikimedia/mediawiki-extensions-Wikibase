@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks\Formatters;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikimedia\Assert\Assert;

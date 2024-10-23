@@ -4,9 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiMain;
-use ApiUsageException;
-use IBufferingStatsdDataFactory;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\EntityFactory;
@@ -18,6 +17,7 @@ use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * API module to set the aliases for a Wikibase entity.

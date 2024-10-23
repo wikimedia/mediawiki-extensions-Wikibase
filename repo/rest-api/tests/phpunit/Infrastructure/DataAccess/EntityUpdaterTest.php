@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
 
-use ApiMessage;
 use Exception;
 use Generator;
+use MediaWiki\Api\ApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Message\Message;
 use MediaWiki\Permissions\PermissionManager;
@@ -245,7 +245,7 @@ class EntityUpdaterTest extends TestCase {
 			yield "abuse filter ($entityType)" => [
 				$entity,
 				EditEntityStatus::newFatal(
-					\ApiMessage::create(
+					ApiMessage::create(
 						[ 'abusefilter-disallowed', $filterDescription, $filterId ],
 						'abusefilter-disallowed',
 						[

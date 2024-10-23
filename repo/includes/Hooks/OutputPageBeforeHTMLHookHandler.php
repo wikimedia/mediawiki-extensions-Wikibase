@@ -4,9 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use IBufferingStatsdDataFactory;
-use Language;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Language\Language;
 use MediaWiki\Output\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\User\Options\UserOptionsLookup;
@@ -42,6 +41,7 @@ use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\ToolbarEditSectionGenerator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.

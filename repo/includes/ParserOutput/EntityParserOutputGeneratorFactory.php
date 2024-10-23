@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use ExtensionRegistry;
-use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Language\Language;
+use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;
 use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;

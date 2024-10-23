@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use LoggedUpdateMaintenance;
+use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;

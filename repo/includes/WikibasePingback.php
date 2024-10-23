@@ -3,14 +3,14 @@
 declare( strict_types=1 );
 namespace Wikibase\Repo;
 
-use ExtensionRegistry;
-use FormatJson;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SiteStats\SiteStats;
 use MediaWiki\Utils\MWTimestamp;
 use MWCryptRand;

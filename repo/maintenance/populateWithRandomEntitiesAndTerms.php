@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Maintenance;
 
 use Generator;
-use Maintenance;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

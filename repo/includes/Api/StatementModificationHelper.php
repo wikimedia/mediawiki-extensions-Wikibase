@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiUsageException;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiUsageException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

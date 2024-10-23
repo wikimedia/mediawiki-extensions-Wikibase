@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\LinkedData;
 
-use ApiFormatBase;
-use ApiMain;
-use ApiResult;
 use InvalidArgumentException;
+use MediaWiki\Api\ApiFormatBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\DerivativeRequest;
