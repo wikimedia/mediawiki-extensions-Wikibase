@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"IJzeren Jan"
+			"IJzeren Jan",
+			"Polda18"
 		]
 	},
 	"wikibase-dataitem": "Element Vikidanyh",
 	"wikibase-editlinks": "Praviti linky",
+	"wikibase-addlinkstitle": "Dodati medžujezyčne linky",
 	"wikibase-linkitem-addlinks": "Dodati linky",
 	"wikibase-linkitem-title": "Povezati s straniceju",
 	"wikibase-linkitem-linkpage": "Povezati s straniceju",
