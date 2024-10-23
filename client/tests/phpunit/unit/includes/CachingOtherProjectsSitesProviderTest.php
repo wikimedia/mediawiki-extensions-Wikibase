@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
-use HashBagOStuff;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\OtherProjectsSitesProvider;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Client\CachingOtherProjectsSitesProvider

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
-use ApiUsageException;
-use FormatJson;
+use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\Message\Message;
 use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\Client\WikibaseClient;

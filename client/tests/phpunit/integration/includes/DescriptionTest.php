@@ -2,7 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\Api;
 
-use ApiMain;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -298,11 +300,11 @@ class DescriptionTest extends MediaWikiIntegrationTestCase {
 		$main->method( 'canApiHighLimits' )
 			->willReturn( false );
 
-		$pageSet = $this->createMock( \ApiPageSet::class );
+		$pageSet = $this->createMock( ApiPageSet::class );
 		$pageSet->method( 'getGoodPages' )
 			->willReturn( $this->makeTitles( $requestedPageIds ) );
 
-		$result = $this->createMock( \ApiResult::class );
+		$result = $this->createMock( ApiResult::class );
 		$result->method( 'addValue' )
 			->willReturnCallback( function ( $path, $name, $value ) use ( $fitLimit ) {
 				static $fitCount = 0;

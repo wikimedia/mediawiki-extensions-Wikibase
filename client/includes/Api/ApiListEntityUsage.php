@@ -4,11 +4,11 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Api;
 
-use ApiBase;
-use ApiPageSet;
-use ApiQuery;
-use ApiQueryGeneratorBase;
-use ApiResult;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryGeneratorBase;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;

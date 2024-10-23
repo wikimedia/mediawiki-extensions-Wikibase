@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
-use ApiMain;
-use ApiPageSet;
-use ApiQuery;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;

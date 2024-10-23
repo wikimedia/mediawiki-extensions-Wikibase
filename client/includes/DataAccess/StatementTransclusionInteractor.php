@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;

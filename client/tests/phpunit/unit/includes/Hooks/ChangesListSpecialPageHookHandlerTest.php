@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use ChangesListBooleanFilter;
-use ExtensionRegistry;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Specials\SpecialRecentChanges;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\User;

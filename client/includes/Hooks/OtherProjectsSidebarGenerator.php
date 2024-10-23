@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use LanguageCode;
+use MediaWiki\Language\LanguageCode;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;

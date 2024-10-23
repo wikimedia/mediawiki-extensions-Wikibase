@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\WikibaseClient;

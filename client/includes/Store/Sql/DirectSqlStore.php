@@ -4,8 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Store\Sql;
 
-use EmptyBagOStuff;
-use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
@@ -34,6 +32,8 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikimedia\ObjectCache\EmptyBagOStuff;
+use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**

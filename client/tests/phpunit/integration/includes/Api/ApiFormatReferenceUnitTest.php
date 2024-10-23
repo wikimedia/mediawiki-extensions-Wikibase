@@ -2,15 +2,15 @@
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
-use ApiMain;
-use ApiUsageException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\ParserFactory;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
-use ParserFactory;
 use Wikibase\Client\Api\ApiFormatReference;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\DataModel\Reference;

@@ -7,7 +7,7 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;

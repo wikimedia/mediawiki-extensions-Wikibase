@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use ContentHandler;
+use MediaWiki\Content\ContentHandler;
 use MediaWiki\Content\Hook\SearchDataForIndexHook;
 use MediaWiki\Hook\AbortEmailNotificationHook;
 use MediaWiki\Hook\MaintenanceShellStartHook;

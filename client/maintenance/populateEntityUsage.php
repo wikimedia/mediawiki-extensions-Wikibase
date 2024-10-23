@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase;
 
-use LoggedUpdateMaintenance;
+use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;

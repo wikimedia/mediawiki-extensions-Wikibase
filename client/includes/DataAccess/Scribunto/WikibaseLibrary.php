@@ -6,10 +6,10 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
-use Language;
 use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LibraryBase;
 use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaError;
 use MediaWiki\Extension\Scribunto\ScribuntoException;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOutput;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
