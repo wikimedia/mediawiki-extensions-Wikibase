@@ -16,6 +16,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliasesInLanguage\GetItemAliasesInLanguage;
@@ -399,6 +400,11 @@ class WbRestApi {
 	public static function getGetProperty( ContainerInterface $services = null ): GetProperty {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.GetProperty' );
+	}
+
+	public static function getCreateProperty( ContainerInterface $services = null ): CreateProperty {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbRestApi.CreateProperty' );
 	}
 
 	public static function getPropertyDataRetriever( ContainerInterface $services = null ): EntityRevisionLookupPropertyDataRetriever {

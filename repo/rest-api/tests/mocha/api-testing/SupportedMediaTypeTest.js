@@ -4,7 +4,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	getItemEditRequests,
 	getPropertyEditRequests,
-	getItemCreateRequest
+	getItemCreateRequest,
+	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 
@@ -14,7 +15,8 @@ describeWithTestData(
 		const requestsToTest = [
 			...getItemEditRequests( itemRequestInputs ),
 			...getPropertyEditRequests( propertyRequestInputs ),
-			getItemCreateRequest( itemRequestInputs )
+			getItemCreateRequest( itemRequestInputs ),
+			getPropertyCreateRequest( propertyRequestInputs )
 		];
 		describeEachRouteWithReset( requestsToTest, ( newRequestBuilder ) => {
 			// We implicitly check that edit routes support application/json

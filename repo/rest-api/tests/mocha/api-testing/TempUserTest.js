@@ -6,7 +6,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	getItemEditRequests,
 	getPropertyEditRequests,
-	getItemCreateRequest
+	getItemCreateRequest,
+	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -14,6 +15,15 @@ const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFac
 
 describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	const tempUserPrefix = 'TempUserTest';
+	const createItemRequest = getItemCreateRequest( itemRequestInputs );
+	const createPropertyRequest = getPropertyCreateRequest( propertyRequestInputs );
+
+	const requests = [
+		createItemRequest,
+		createPropertyRequest,
+		...getItemEditRequests( itemRequestInputs ),
+		...getPropertyEditRequests( propertyRequestInputs )
+	];
 
 	function withTempUsersEnabled( requestBuilder ) {
 		return requestBuilder.withConfigOverride( 'wgAutoCreateTempUser', {
@@ -22,12 +32,10 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 		} );
 	}
 
-	const createItemRequest = getItemCreateRequest( itemRequestInputs );
-	const requests = [
-		createItemRequest,
-		...getItemEditRequests( itemRequestInputs ),
-		...getPropertyEditRequests( propertyRequestInputs )
-	];
+	function isNewlyCreatedEntity( requestBuilder ) {
+		return requestBuilder === createItemRequest.newRequestBuilder ||
+			requestBuilder === createPropertyRequest.newRequestBuilder;
+	}
 
 	describeEachRouteWithReset( requests, ( newRequestBuilder, requestInputs ) => {
 		it( 'makes an edit as an IP user with tempUser disabled', async () => {
@@ -37,7 +45,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 
 			expect( response ).status.to.be.within( 200, 299 );
 			const { user } = await entityHelper.getLatestEditMetadata(
-				newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
+				isNewlyCreatedEntity( newRequestBuilder ) ? response.body.id : requestInputs.mainTestSubject
 			);
 
 			assert.match( user, /^\d+\.\d+\.\d+\.\d+$/ );
@@ -49,7 +57,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 
 				expect( response ).status.to.be.within( 200, 299 );
 				const { user } = await entityHelper.getLatestEditMetadata(
-					newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
+					isNewlyCreatedEntity( newRequestBuilder ) ? response.body.id : requestInputs.mainTestSubject
 				);
 				assert.include( user, tempUserPrefix );
 				assert.header( response, 'X-Temporary-User-Created', user );
@@ -98,7 +106,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 
 				expect( response ).status.to.be.within( 200, 299 );
 				const { user } = await entityHelper.getLatestEditMetadata(
-					newRequestBuilder === createItemRequest.newRequestBuilder ? response.body.id : requestInputs.mainTestSubject
+					isNewlyCreatedEntity( newRequestBuilder ) ? response.body.id : requestInputs.mainTestSubject
 				);
 				assert.include( user, tempUserPrefix );
 				assert.strictEqual( user, existingTempUserName );
