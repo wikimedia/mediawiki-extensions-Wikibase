@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use HashBagOStuff;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Store\CachingPropertyOrderProvider

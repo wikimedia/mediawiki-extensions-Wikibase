@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use HashBagOStuff;
 use MediaWikiIntegrationTestCase;
-use WANObjectCache;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\ObjectCache\HashBagOStuff;
+use Wikimedia\ObjectCache\WANObjectCache;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**

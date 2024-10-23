@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
-use WANObjectCache;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,6 +20,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\MatchingTermsLookupFactory

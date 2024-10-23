@@ -9,7 +9,7 @@ use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageFactory;
-use ParserOptions;
+use MediaWiki\Parser\ParserOptions;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;

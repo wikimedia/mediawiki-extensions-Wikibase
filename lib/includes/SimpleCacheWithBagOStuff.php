@@ -3,12 +3,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib;
 
-use BagOStuff;
 use DateInterval;
 use DateTime;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * @license GPL-2.0-or-later

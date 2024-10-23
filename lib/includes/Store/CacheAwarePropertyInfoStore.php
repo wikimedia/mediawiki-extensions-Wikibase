@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use WANObjectCache;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Implementation of PropertyInfoStore wrapping the instance modifying the local

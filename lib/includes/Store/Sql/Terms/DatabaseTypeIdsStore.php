@@ -6,8 +6,8 @@ use MediaWiki\Storage\NameTableAccessException;
 use MediaWiki\Storage\NameTableStore;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use WANObjectCache;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * An acquirer and resolver for term type IDs implemented using a NameTableStore for wbt_type.

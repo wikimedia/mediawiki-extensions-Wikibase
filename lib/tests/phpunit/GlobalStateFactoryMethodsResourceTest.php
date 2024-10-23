@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ObjectCacheFactory;
@@ -14,6 +13,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * Test to assert that factory methods of hook service classes (and similar services)

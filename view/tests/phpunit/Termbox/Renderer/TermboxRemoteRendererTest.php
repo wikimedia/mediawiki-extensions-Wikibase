@@ -7,7 +7,6 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MWHttpRequest;
-use NullStatsdDataFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -19,6 +18,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\View\Termbox\Renderer\TermboxNoRemoteRendererException;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * @covers \Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer

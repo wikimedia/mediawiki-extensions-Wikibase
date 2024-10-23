@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * PropertyOrderProvider implementation, that caches the information

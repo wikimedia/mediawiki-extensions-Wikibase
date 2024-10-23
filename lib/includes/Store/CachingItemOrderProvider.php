@@ -3,7 +3,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * ItemOrderProvider implementation, that caches the information

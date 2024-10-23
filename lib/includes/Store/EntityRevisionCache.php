@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * Service for caching the latest EntityRevision of an Entity.

@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**

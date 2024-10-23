@@ -4,8 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Modules;
 
-use BagOStuff;
-// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Site\MediaWikiSite;
@@ -14,6 +12,9 @@ use MediaWiki\Site\SiteLookup;
 use MessageLocalizer;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\ObjectCache\BagOStuff;
+
+// phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 
 /**
  * @license GPL-2.0-or-later

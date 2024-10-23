@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use ExtensionRegistry;
 use LogicException;
+use MediaWiki\Registration\ExtensionRegistry;
 
 /**
  * WikibaseSettings is a static access point to Wikibase settings defined as global state

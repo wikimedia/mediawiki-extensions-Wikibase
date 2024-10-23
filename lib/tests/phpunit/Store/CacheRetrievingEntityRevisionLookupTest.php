@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use HashBagOStuff;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,6 +13,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 /**
  * @covers \Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup
