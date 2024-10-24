@@ -79,7 +79,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 			"'$input' in $languageCode became $parsed instead of $expected" );
 	}
 
-	public function validInputProvider() {
+	public static function validInputProvider() {
 		$dateFormatPreferences = [
 			'mdy' => TimeValue::PRECISION_MINUTE,
 			'dmy' => TimeValue::PRECISION_MINUTE,
@@ -93,12 +93,12 @@ class MwDateFormatParserFactoryTest extends TestCase {
 		];
 
 		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
-		foreach ( $this->getLanguageCodes() as $languageCode ) {
+		foreach ( self::getLanguageCodes() as $languageCode ) {
 			$language = $languageFactory->getLanguage( $languageCode );
 
 			foreach ( $dateFormatPreferences as $dateFormatPreference => $maximumPrecision ) {
 				foreach ( $dateFormatTypes as $dateFormatType => $precision ) {
-					$mwTimestamp = $this->generateMwTimestamp();
+					$mwTimestamp = self::generateMwTimestamp();
 
 					$dateFormat = $language->getDateFormatString( $dateFormatType, $dateFormatPreference );
 					$input = $language->sprintfDate( $dateFormat, $mwTimestamp );
@@ -110,7 +110,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 						? TimeValue::CALENDAR_JULIAN
 						: TimeValue::CALENDAR_GREGORIAN;
 					$expected = new TimeValue(
-						$this->getIsoTimestamp( $mwTimestamp, $precision ),
+						self::getIsoTimestamp( $mwTimestamp, $precision ),
 						0, 0, 0,
 						$precision,
 						$calendarModel
@@ -128,7 +128,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 		}
 	}
 
-	private function getLanguageCodes() {
+	private static function getLanguageCodes() {
 		// Focus on a critical subset of languages. Enable the following MediaWiki dependency to
 		// test the full set of all 400+ supported languages. This may take several minutes.
 		// return array_keys( MediaWikiServices::getInstance()->getLanguageNameUtils()->getLanguageNames() );
@@ -160,7 +160,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	/**
 	 * @return string
 	 */
-	private function generateMwTimestamp() {
+	private static function generateMwTimestamp() {
 		static $mwTimestamps;
 
 		if ( $mwTimestamps === null ) {
@@ -190,7 +190,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	 *
 	 * @return string
 	 */
-	private function getIsoTimestamp( $mwTimestamp, $precision ) {
+	private static function getIsoTimestamp( $mwTimestamp, $precision ) {
 		if ( $precision <= TimeValue::PRECISION_YEAR ) {
 			$mwTimestamp = substr( $mwTimestamp, 0, 4 ) . '0000000000';
 		} elseif ( $precision === TimeValue::PRECISION_MONTH ) {

@@ -68,11 +68,11 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		return $title;
 	}
 
-	protected function newContext( string $title = 'Special:Recentchanges' ): RequestContext {
+	protected static function newContext( string $title = 'Special:Recentchanges' ): RequestContext {
 		return RequestContext::newExtraneousContext( Title::newFromTextThrow( $title ) );
 	}
 
-	protected function getLinkRenderer(): LinkRenderer {
+	protected static function getLinkRenderer(): LinkRenderer {
 		$linkRenderer = MediaWikiServices::getInstance()
 			->getLinkRendererFactory()->create( [ 'renderForComment' => true ] );
 		return $linkRenderer;
@@ -219,7 +219,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		return $termLookup;
 	}
 
-	final protected function getEntityNamespaceLookup() {
+	final protected static function getEntityNamespaceLookup() {
 		$entityNamespaces = [
 			'item' => 0,
 			'property' => 122,
@@ -240,19 +240,19 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		return $lookup;
 	}
 
-	public function validLinkRendererAndContextProvider() {
-		$commentLinkRenderer = $this->getLinkRenderer();
+	public static function validLinkRendererAndContextProvider() {
+		$commentLinkRenderer = self::getLinkRenderer();
 		$nonCommentLinkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$specialPageContext = $this->newContext();
+		$specialPageContext = self::newContext();
 
-		$historyContext = $this->newContext( 'Foo' );
+		$historyContext = self::newContext( 'Foo' );
 		$historyContext->getRequest()->setVal( 'action', 'history' );
 
-		$diffContext = $this->newContext( 'Foo' );
+		$diffContext = self::newContext( 'Foo' );
 		$diffContext->getRequest()->setVal( 'diff', 123 );
 
-		$viewContext = $this->newContext( 'Foo' );
+		$viewContext = self::newContext( 'Foo' );
 
 		return [
 			'normal link, special page' => [ $nonCommentLinkRenderer, $specialPageContext ],
@@ -263,15 +263,15 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 		];
 	}
 
-	public function invalidLinkRendererAndContextProvider() {
+	public static function invalidLinkRendererAndContextProvider() {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$viewContext = $this->newContext( 'Foo' );
+		$viewContext = self::newContext( 'Foo' );
 
-		$diffContext = $this->newContext( 'Foo' );
+		$diffContext = self::newContext( 'Foo' );
 		$diffContext->getRequest()->setVal( 'diff', 123 );
 
-		$specialBadTitleContext = $this->newContext( 'Special:Badtitle' );
+		$specialBadTitleContext = self::newContext( 'Special:Badtitle' );
 
 		return [
 			'normal link, normal view' => [ $linkRenderer, $viewContext ],

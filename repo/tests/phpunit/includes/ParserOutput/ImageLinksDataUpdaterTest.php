@@ -55,7 +55,7 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $string
 	 * @param int $propertyId
 	 */
-	private function addStatement( StatementList $statements, $string, $propertyId = 1 ) {
+	private static function addStatement( StatementList $statements, $string, $propertyId = 1 ) {
 		$statements->addNewStatement(
 			new PropertyValueSnak( $propertyId, new StringValue( $string ) )
 		);
@@ -81,19 +81,19 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expectedFileSearchOptions, $parserOutput->getFileSearchOptions() );
 	}
 
-	public function imageLinksProvider() {
+	public static function imageLinksProvider() {
 		$set1 = new StatementList();
-		$this->addStatement( $set1, '1.jpg' );
-		$this->addStatement( $set1, '' );
-		$this->addStatement( $set1, 'no image property', 2 );
+		self::addStatement( $set1, '1.jpg' );
+		self::addStatement( $set1, '' );
+		self::addStatement( $set1, 'no image property', 2 );
 
 		$set2 = new StatementList();
-		$this->addStatement( $set2, '2a.jpg' );
-		$this->addStatement( $set2, '2b.jpg' );
+		self::addStatement( $set2, '2a.jpg' );
+		self::addStatement( $set2, '2b.jpg' );
 
 		$set3 = new StatementList();
-		$this->addStatement( $set3, '2a.jpg' );
-		$this->addStatement( $set3, 'Exists.png' );
+		self::addStatement( $set3, '2a.jpg' );
+		self::addStatement( $set3, 'Exists.png' );
 
 		return [
 			[ new StatementList(), [], [] ],

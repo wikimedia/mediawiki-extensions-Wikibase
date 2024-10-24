@@ -27,7 +27,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public function getBuilderFlags() {
+	public static function getBuilderFlags() {
 		return [
 			[ 0 ], // simple values
 			[ RdfProducer::PRODUCE_FULL_VALUES ], // complex values

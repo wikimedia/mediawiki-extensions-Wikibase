@@ -39,10 +39,10 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		$this->entityViewFactory = $this->mockEntityViewFactory( false );
 	}
 
-	public function provideTestGetParserOutput() {
+	public static function provideTestGetParserOutput() {
 		return [
 			[
-				$this->newItem(),
+				self::newItem(),
 				'kitten item',
 				[ 'http://an.url.com', 'https://another.url.org' ],
 				[ 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ],

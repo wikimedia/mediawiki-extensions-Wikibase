@@ -70,9 +70,9 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertEquals( [], $customAttribs );
 	}
 
-	public function overrideSpecialNewEntityLinkProvider(): iterable {
+	public static function overrideSpecialNewEntityLinkProvider(): iterable {
 		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
-		$namespaceLookup = $this->getEntityNamespaceLookup();
+		$namespaceLookup = self::getEntityNamespaceLookup();
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
 			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );
@@ -113,8 +113,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
 	}
 
-	public function noOverrideSpecialNewEntityLinkProvider(): iterable {
-		$lookup = $this->getEntityNamespaceLookup();
+	public static function noOverrideSpecialNewEntityLinkProvider(): iterable {
+		$lookup = self::getEntityNamespaceLookup();
 		$itemNs = $lookup->getEntityNamespace( 'item' );
 		$propertyNs = $lookup->getEntityNamespace( 'property' );
 		return [

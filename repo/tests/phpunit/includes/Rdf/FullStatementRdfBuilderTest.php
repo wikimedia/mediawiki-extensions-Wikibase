@@ -122,7 +122,7 @@ class FullStatementRdfBuilderTest extends \MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( $dataSetNames, $actual );
 	}
 
-	public function provideAddEntity() {
+	public static function provideAddEntity() {
 		$props = array_map(
 			function ( $data ) {
 				/** @var PropertyId $propertyId */
@@ -172,7 +172,7 @@ class FullStatementRdfBuilderTest extends \MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
 	}
 
-	public function provideAddEntityTestCasesWhenPropertiesFromOtherWikibase() {
+	public static function provideAddEntityTestCasesWhenPropertiesFromOtherWikibase() {
 		$props = array_map(
 			function ( $data ) {
 				/** @var PropertyId $propertyId */

@@ -37,7 +37,7 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $string
 	 * @param int $rank
 	 */
-	private function addStatement(
+	private static function addStatement(
 		StatementList $statements,
 		$propertyId,
 		$string,
@@ -95,30 +95,30 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance->updateParserOutput( $parserOutput );
 	}
 
-	public function bestImageProvider() {
+	public static function bestImageProvider() {
 		$statements = new StatementList();
 
-		$this->addStatement( $statements, 1, '1.jpg' );
+		self::addStatement( $statements, 1, '1.jpg' );
 
 		$statements->addNewStatement( new PropertyNoValueSnak( 2 ) );
 		$statements->addNewStatement( new PropertySomeValueSnak( 2 ) );
 		$statements->addNewStatement( new PropertyValueSnak( 2, new BooleanValue( true ) ) );
-		$this->addStatement( $statements, 2, '' );
-		$this->addStatement( $statements, 2, '2.jpg', Statement::RANK_DEPRECATED );
+		self::addStatement( $statements, 2, '' );
+		self::addStatement( $statements, 2, '2.jpg', Statement::RANK_DEPRECATED );
 
 		$statements->addNewStatement( new PropertySomeValueSnak( 3 ) );
-		$this->addStatement( $statements, 3, '3a.jpg' );
-		$this->addStatement( $statements, 3, '3b.jpg' );
+		self::addStatement( $statements, 3, '3a.jpg' );
+		self::addStatement( $statements, 3, '3b.jpg' );
 
-		$this->addStatement( $statements, 4, 'Four 1.jpg', Statement::RANK_DEPRECATED );
-		$this->addStatement( $statements, 4, 'Four 2.jpg' );
-		$this->addStatement( $statements, 4, 'Four 3.jpg' );
+		self::addStatement( $statements, 4, 'Four 1.jpg', Statement::RANK_DEPRECATED );
+		self::addStatement( $statements, 4, 'Four 2.jpg' );
+		self::addStatement( $statements, 4, 'Four 3.jpg' );
 
-		$this->addStatement( $statements, 5, '5a.jpg' );
-		$this->addStatement( $statements, 4, '5b.jpg', Statement::RANK_DEPRECATED );
-		$this->addStatement( $statements, 5, '5c.jpg', Statement::RANK_PREFERRED );
-		$this->addStatement( $statements, 5, '5d.jpg' );
-		$this->addStatement( $statements, 5, '5e.jpg', Statement::RANK_PREFERRED );
+		self::addStatement( $statements, 5, '5a.jpg' );
+		self::addStatement( $statements, 4, '5b.jpg', Statement::RANK_DEPRECATED );
+		self::addStatement( $statements, 5, '5c.jpg', Statement::RANK_PREFERRED );
+		self::addStatement( $statements, 5, '5d.jpg' );
+		self::addStatement( $statements, 5, '5e.jpg', Statement::RANK_PREFERRED );
 
 		return [
 			// Find nothing for various reasons.

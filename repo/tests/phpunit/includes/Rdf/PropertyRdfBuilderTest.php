@@ -73,12 +73,12 @@ class PropertyRdfBuilderTest extends TestCase {
 		$builder->addEntity( $property );
 	}
 
-	public function provideAddEntity(): array {
+	public static function provideAddEntity(): array {
 		return [
-			"No flavors selected" => [ 0, $this->getTestProperty() ],
-			"Just truthy statements requested" => [ RdfProducer::PRODUCE_TRUTHY_STATEMENTS, $this->getTestProperty(), true ],
-			"Full statements requested" => [ RdfProducer::PRODUCE_ALL_STATEMENTS, $this->getTestProperty(), false, true ],
-			"All statements requested" => [ RdfProducer::PRODUCE_ALL, $this->getTestProperty(), true, true ],
+			"No flavors selected" => [ 0, self::getTestProperty() ],
+			"Just truthy statements requested" => [ RdfProducer::PRODUCE_TRUTHY_STATEMENTS, self::getTestProperty(), true ],
+			"Full statements requested" => [ RdfProducer::PRODUCE_ALL_STATEMENTS, self::getTestProperty(), false, true ],
+			"All statements requested" => [ RdfProducer::PRODUCE_ALL, self::getTestProperty(), true, true ],
 		];
 	}
 
@@ -92,7 +92,7 @@ class PropertyRdfBuilderTest extends TestCase {
 		);
 	}
 
-	private function getTestProperty(): Property {
+	private static function getTestProperty(): Property {
 		return new Property( null,
 			null,
 			'footype' );

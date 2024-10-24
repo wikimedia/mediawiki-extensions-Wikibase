@@ -38,7 +38,7 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $string
 	 * @param int $propertyId
 	 */
-	private function addStatement( StatementList $statements, $string, $propertyId = 1 ) {
+	private static function addStatement( StatementList $statements, $string, $propertyId = 1 ) {
 		$statements->addNewStatement(
 			new PropertyValueSnak( $propertyId, new StringValue( $string ) )
 		);
@@ -67,15 +67,15 @@ class ExternalLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
-	public function externalLinksProvider() {
+	public static function externalLinksProvider() {
 		$set1 = new StatementList();
-		$this->addStatement( $set1, 'http://1.de' );
-		$this->addStatement( $set1, '' );
-		$this->addStatement( $set1, 'no url property', 2 );
+		self::addStatement( $set1, 'http://1.de' );
+		self::addStatement( $set1, '' );
+		self::addStatement( $set1, 'no url property', 2 );
 
 		$set2 = new StatementList();
-		$this->addStatement( $set2, 'http://2a.de' );
-		$this->addStatement( $set2, 'http://2b.de' );
+		self::addStatement( $set2, 'http://2a.de' );
+		self::addStatement( $set2, 'http://2b.de' );
 
 		return [
 			[ new StatementList(), [] ],
