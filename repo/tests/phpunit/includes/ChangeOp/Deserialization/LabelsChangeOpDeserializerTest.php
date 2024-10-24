@@ -76,7 +76,7 @@ class LabelsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return $this->newLabelsChangeOpDeserializer( $this->getTermChangeOpValidator() );
 	}
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Item();
 	}
 

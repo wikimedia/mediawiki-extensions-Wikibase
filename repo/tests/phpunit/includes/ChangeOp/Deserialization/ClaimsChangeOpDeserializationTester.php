@@ -35,11 +35,11 @@ trait ClaimsChangeOpDeserializationTester {
 		);
 	}
 
-	public function setStatementProvider() {
+	public static function setStatementProvider() {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
-		$statementSerialization = $this->getStatementSerializer()->serialize( $statement );
-		$entity = $this->getEntity();
+		$statementSerialization = self::getStatementSerializer()->serialize( $statement );
+		$entity = self::getEntity();
 
 		return [
 			'numeric index format' => [ [ 'claims' => [ $statementSerialization ] ], $entity, $property ],
@@ -57,11 +57,11 @@ trait ClaimsChangeOpDeserializationTester {
 		$this->assertTrue( $entity->getStatements()->getByPropertyId( $property )->isEmpty() );
 	}
 
-	public function deleteStatementProvider() {
+	public static function deleteStatementProvider() {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statement->setGuid( 'test-guid' );
-		$entity = $this->getEntity();
+		$entity = self::getEntity();
 		$entity->setStatements( new StatementList( $statement ) );
 
 		return [
@@ -99,13 +99,13 @@ trait ClaimsChangeOpDeserializationTester {
 		);
 	}
 
-	public function editStatementProvider() {
+	public static function editStatementProvider() {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyValueSnak( $property, new StringValue( 'foo' ) ) );
-		$entity = $this->getEntity();
+		$entity = self::getEntity();
 		$statement->setGuid( ( new GuidGenerator() )->newGuid( $entity->getId() ) );
 		$entity->setStatements( new StatementList( $statement ) );
-		$statementSerialization = $this->getStatementSerializer()->serialize( $statement );
+		$statementSerialization = self::getStatementSerializer()->serialize( $statement );
 		$statementSerialization['mainsnak']['datavalue']['value'] = 'bar';
 
 		return [
@@ -120,14 +120,14 @@ trait ClaimsChangeOpDeserializationTester {
 		];
 	}
 
-	private function getStatementSerializer() {
+	private static function getStatementSerializer() {
 		return WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
 	 * @return StatementListProvider|EntityDocument
 	 */
-	abstract protected function getEntity();
+	abstract protected static function getEntity();
 
 	/**
 	 * @return ChangeOpDeserializer

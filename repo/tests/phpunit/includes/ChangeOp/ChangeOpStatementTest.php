@@ -96,9 +96,9 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	public function provideTestApply() {
-		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
-		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
+	public static function provideTestApply() {
+		$item777 = self::makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
+		$item666 = self::makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
 
 		$item777Statements = $item777->getStatements()->toArray();
 		$item666Statements = $item666->getStatements()->toArray();
@@ -243,7 +243,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$changeOpStatement->apply( $item );
 	}
 
-	public function applyInvalidThrowsExceptionProvider() {
+	public static function applyInvalidThrowsExceptionProvider() {
 		$itemEmpty = new Item( new ItemId( 'Q888' ) );
 		$noValueSnak = new PropertyNoValueSnak( new NumericPropertyId( 'P45' ) );
 		$someValueSnak = new PropertySomeValueSnak( new NumericPropertyId( 'P44' ) );
@@ -251,8 +251,8 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$statementWithInvalidGuid = new Statement( $noValueSnak );
 		$statementWithInvalidGuid->setGuid( 'Q0$' );
 
-		$item777 = $this->makeNewItemWithStatement( 'Q777', $noValueSnak );
-		$item666 = $this->makeNewItemWithStatement( 'Q666', $someValueSnak );
+		$item777 = self::makeNewItemWithStatement( 'Q777', $noValueSnak );
+		$item666 = self::makeNewItemWithStatement( 'Q666', $someValueSnak );
 
 		$item777Statements = $item777->getStatements()->toArray();
 		$item666Statements = $item666->getStatements()->toArray();
@@ -335,7 +335,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return Item
 	 */
-	private function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
+	private static function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
 		$id = new ItemId( $idString );
 
 		$statement = new Statement( $mainSnak );

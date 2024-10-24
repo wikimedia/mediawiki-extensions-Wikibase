@@ -76,7 +76,7 @@ class DescriptionsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return $this->newDescriptionsChangeOpDeserializer( $this->getTermChangeOpValidator() );
 	}
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Item();
 	}
 

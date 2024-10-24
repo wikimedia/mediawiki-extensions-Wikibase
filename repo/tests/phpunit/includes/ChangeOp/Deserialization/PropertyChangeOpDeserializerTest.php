@@ -32,7 +32,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	use DescriptionsChangeOpDeserializationTester;
 	use LabelsChangeOpDeserializationTester;
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Property( new NumericPropertyId( 'P100' ), null, 'foo' );
 	}
 
