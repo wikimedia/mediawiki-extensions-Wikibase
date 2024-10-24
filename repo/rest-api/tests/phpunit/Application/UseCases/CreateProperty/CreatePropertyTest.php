@@ -23,7 +23,9 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
+use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
@@ -100,12 +102,16 @@ class CreatePropertyTest extends TestCase {
 		);
 
 		return new CreateProperty(
-			new CreatePropertyValidator( new PropertyDeserializer(
-				new LabelsDeserializer(),
-				new DescriptionsDeserializer(),
-				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
-				new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-			) ),
+			new CreatePropertyValidator(
+				new PropertyDeserializer(
+					new LabelsDeserializer(),
+					new DescriptionsDeserializer(),
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
+					new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
+				),
+				( new TestValidatingRequestDeserializerServiceContainer() )
+					->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER )
+			),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized
 		);

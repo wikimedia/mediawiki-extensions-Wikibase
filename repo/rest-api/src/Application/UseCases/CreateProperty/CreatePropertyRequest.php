@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
+
 /**
  * @license GPL-2.0-or-later
  */
-class CreatePropertyRequest {
+class CreatePropertyRequest implements EditMetadataRequest {
 
 	private array $property;
 	private array $editTags;
