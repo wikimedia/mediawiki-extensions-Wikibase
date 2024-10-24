@@ -31,20 +31,20 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 	 */
 	private static $mwTimestamp;
 
-	public function parameterProvider(): array {
+	public static function parameterProvider(): array {
 		$repoRevision24IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
-			$this->getMwTimestamp(),
+			self::getMwTimestamp(),
 			12
 		) )->toArray();
 		$repoRevision25IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
-			$this->getMwTimestamp(),
+			self::getMwTimestamp(),
 			13
 		) )->toArray();
 		$repoRevision26IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q1042',
-			$this->getMwTimestamp(),
+			self::getMwTimestamp(),
 			14
 		) )->toArray();
 		$visibilityChangeMap = [
@@ -211,7 +211,7 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 	/**
 	 * @return string
 	 */
-	private function getMwTimestamp(): string {
+	private static function getMwTimestamp(): string {
 		if ( !self::$mwTimestamp ) {
 			self::$mwTimestamp = wfTimestampNow();
 		}

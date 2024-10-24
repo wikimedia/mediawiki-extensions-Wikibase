@@ -128,14 +128,14 @@ abstract class ServiceWiringTestCase extends TestCase {
 			->willReturn( $hookContainer );
 	}
 
-	public function provideWiring(): Generator {
-		$wiring = $this->loadWiring();
+	public static function provideWiring(): Generator {
+		$wiring = self::loadWiring();
 		foreach ( $wiring as $name => $definition ) {
 			yield $name => [ $name, $definition ];
 		}
 	}
 
-	private function loadWiring(): array {
+	private static function loadWiring(): array {
 		return require __DIR__ . '/../../../WikibaseRepo.ServiceWiring.php';
 	}
 

@@ -61,7 +61,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	 * - Redirect Q222333 -> Q23
 	 * - Property P5 (item reference)
 	 */
-	private function getMockRepository(): MockRepository {
+	private static function getMockRepository(): MockRepository {
 		$mockRepo = new MockRepository();
 
 		$p5 = new Property( new NumericPropertyId( 'P5' ), null, 'wikibase-item' );
@@ -160,8 +160,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideGetSerializedData(): iterable {
-		$mockRepo = $this->getMockRepository();
+	public static function provideGetSerializedData(): iterable {
+		$mockRepo = self::getMockRepository();
 		$entityRevQ42 = $mockRepo->getEntityRevision( new ItemId( 'Q42' ) );
 		$entityRevQ23 = $mockRepo->getEntityRevision( new ItemId( 'Q23' ) );
 		$entityRedirQ2233 = new RedirectRevision(

@@ -24,7 +24,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	use HttpResponseMockerTrait;
 
 	/** @var string[] */
-	private $responseDataFiles = [
+	private static $responseDataFiles = [
 		'q42-en' => 'api-prefetching-term-lookup-test-data-q42-en.json',
 		'p18-en' => 'api-prefetching-term-lookup-test-data-p18-en.json',
 		'p18-de' => 'api-prefetching-term-lookup-test-data-p18-de.json',
@@ -52,7 +52,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 		parent::setUp();
 		// Load data files once at the start of tests rather than for each test case
-		foreach ( $this->responseDataFiles as $key => $file ) {
+		foreach ( self::$responseDataFiles as $key => $file ) {
 			$content = file_get_contents( __DIR__ . '/../../data/federatedProperties/' . $file );
 			$this->data[$file] = json_decode( $content );
 		}
@@ -61,30 +61,30 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	/**
 	 * @return array [ entityIdString, languages, responseDataFile, expectedLabels[] ]
 	 */
-	public function entityIdsWithLanguagesAndExpectedLabelsProvider() {
+	public static function entityIdsWithLanguagesAndExpectedLabelsProvider() {
 		return [
 			'p18-en' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en' ],
-				$this->responseDataFiles[ 'p18-en' ],
+				self::$responseDataFiles[ 'p18-en' ],
 				[ 'en' => 'image' ],
 			],
 			'p18-en-de' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 				[ 'en', 'de' ],
-				$this->responseDataFiles[ 'p18-en-de' ],
+				self::$responseDataFiles[ 'p18-en-de' ],
 				[ 'en' => 'image', 'de' => 'Bild' ],
 			],
 			'p31-en' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en' ],
-				$this->responseDataFiles[ 'p31-en' ],
+				self::$responseDataFiles[ 'p31-en' ],
 				[ 'en' => 'instance of' ],
 			],
 			'p31-en-de' => [
 				new FederatedPropertyId( 'http://wikidata.org/entity/P31', 'P31' ),
 				[ 'en', 'de' ],
-				$this->responseDataFiles[ 'p31-en-de' ],
+				self::$responseDataFiles[ 'p31-en-de' ],
 				[ 'en' => 'instance of', 'de' => 'ist ein(e)' ],
 			],
 		];
@@ -119,17 +119,17 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		);
 	}
 
-	public function descriptionsTestProvider() {
+	public static function descriptionsTestProvider() {
 		yield 'en description' => [
 			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en' ],
-			$this->responseDataFiles[ 'p18-en-de' ],
+			self::$responseDataFiles[ 'p18-en-de' ],
 			[ 'en' => 'image of relevant illustration of the subject' ],
 		];
 		yield 'en and de descriptions' => [
 			new FederatedPropertyId( 'http://wikidata.org/entity/P18', 'P18' ),
 			[ 'en', 'de' ],
-			$this->responseDataFiles[ 'p18-en-de' ],
+			self::$responseDataFiles[ 'p18-en-de' ],
 			[ 'en' => 'image of relevant illustration of the subject', 'de' => 'Foto, Grafik etc. des Objekts' ],
 		];
 	}
@@ -148,7 +148,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testPrefetchTermsAndGetPrefetchedTerm() {
 		$api = $this->newMockApi(
 			[ 'P18', 'P31' ],
-			$this->responseDataFiles[ 'p18-p31-en' ]
+			self::$responseDataFiles[ 'p18-p31-en' ]
 		);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
@@ -168,11 +168,11 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$expectedReturnMap = [
 			[
 				$this->getRequestParameters( [ 'P18' ] ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ self::$responseDataFiles[ 'p18-en' ] ] ), 200 ),
 			],
 			[
 				$this->getRequestParameters( [ 'P31' ] ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ self::$responseDataFiles[ 'p31-en' ] ] ), 200 ),
 			],
 		];
 		$api->expects( $this->exactly( 2 ) )
@@ -202,12 +202,12 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$expectedReturnMap = [
 			[
 				$this->getRequestParameters( [ 'P18' ] ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ self::$responseDataFiles[ 'p18-en' ] ] ), 200 ),
 			],
 			// the second request will NOT ask for P18, that has already been fetched
 			[
 				$this->getRequestParameters( [ 'P31' ] ),
-				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ self::$responseDataFiles[ 'p31-en' ] ] ), 200 ),
 			],
 		];
 		$api->expects( $this->exactly( 2 ) )
@@ -237,7 +237,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testConsecutivePrefetch_newLanguage() {
 		$api = $this->newMockApi(
 			[ 'P18' ],
-			$this->responseDataFiles[ 'p18-en-de' ]
+			self::$responseDataFiles[ 'p18-en-de' ]
 		);
 
 		$apiLookup = new ApiPrefetchingTermLookup(
@@ -272,7 +272,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		// en and de are requested, but only return en (pretend neither entity has a de label)
 		$api = $this->newMockApi(
 			[ 'P18', 'P31' ],
-			$this->responseDataFiles[ 'p18-p31-en' ]
+			self::$responseDataFiles[ 'p18-p31-en' ]
 		);
 
 		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
@@ -288,7 +288,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testPrefetchTerms_sameTermsTwice() {
 		$api = $this->newMockApi(
 			[ 'P18' ],
-			$this->responseDataFiles[ 'p18-en' ]
+			self::$responseDataFiles[ 'p18-en' ]
 		);
 		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 

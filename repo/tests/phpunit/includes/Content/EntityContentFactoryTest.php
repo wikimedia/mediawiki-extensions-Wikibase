@@ -215,7 +215,7 @@ class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotNull( $content->getRedirectTarget() );
 	}
 
-	public function newFromRedirectProvider_unsupported() {
+	public static function newFromRedirectProvider_unsupported() {
 		$p1 = new NumericPropertyId( 'P1' );
 		$p2 = new NumericPropertyId( 'P2' );
 

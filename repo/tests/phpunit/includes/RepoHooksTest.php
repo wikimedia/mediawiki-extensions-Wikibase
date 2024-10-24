@@ -69,7 +69,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		return WikibaseRepo::getSettings();
 	}
 
-	public function onBeforePageDisplayProvider() {
+	public static function onBeforePageDisplayProvider(): iterable {
 		$wikibaseMobileNewTermbox = [ 'wikibase.mobile', 'wikibase.termbox' ];
 		$wikibaseMobileNewTermboxStyles = [ 'wikibase.termbox.styles' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];

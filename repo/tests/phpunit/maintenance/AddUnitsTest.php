@@ -56,7 +56,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		);
 	}
 
-	public function getUnitsData() {
+	public static function getUnitsData() {
 		$qConverted =
 			new QuantityValue( new DecimalValue( '+1234.5' ), 'Q2', new DecimalValue( '+1235.0' ),
 				new DecimalValue( '+1233.9' ) );
