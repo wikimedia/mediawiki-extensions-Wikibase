@@ -80,7 +80,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function provideLinkTitleExceptions(): iterable {
+	public static function provideLinkTitleExceptions(): iterable {
 		return [
 			'notoken' => [
 				'p' => [
@@ -91,9 +91,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'notoken' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'notoken' ),
+						self::equalTo( 'missingparam' )
 					),
 					'message' => 'The "token" parameter must be set',
 				] ],
@@ -159,9 +159,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'nototitle' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'nototitle' ),
+						self::equalTo( 'missingparam' )
 					),
 				] ],
 			],
@@ -174,9 +174,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_tosite' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_tosite' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ],
 			],
@@ -189,9 +189,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_fromsite' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_fromsite' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ],
 			],
@@ -204,9 +204,9 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_fromsite' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_fromsite' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ],
 			],

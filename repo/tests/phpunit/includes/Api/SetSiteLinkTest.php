@@ -262,7 +262,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		];
 	}
 
-	public function provideExceptionData() {
+	public static function provideExceptionData() {
 		return [
 			'missing token' => [
 				'p' => [
@@ -273,9 +273,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'notoken' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'notoken' ),
+						self::equalTo( 'missingparam' )
 					),
 					'message' => 'The "token" parameter must be set',
 				] ],

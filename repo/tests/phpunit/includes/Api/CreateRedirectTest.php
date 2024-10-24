@@ -179,7 +179,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 1, $result['success'] );
 	}
 
-	public function setRedirectProvider_success(): iterable {
+	public static function setRedirectProvider_success(): iterable {
 		return [
 			'redirect empty entity' => [ 'Q11', 'Q12' ],
 			'update redirect' => [ 'Q22', 'Q11' ],
@@ -196,7 +196,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$this->assertSuccess( $result );
 	}
 
-	public function setRedirectProvider_failure(): iterable {
+	public static function setRedirectProvider_failure(): iterable {
 		return [
 			'bad source id' => [ 'xyz', 'Q12', 'invalid-entity-id' ],
 			'bad target id' => [ 'Q11', 'xyz', 'invalid-entity-id' ],

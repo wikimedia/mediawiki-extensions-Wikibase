@@ -202,7 +202,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		}
 	}
 
-	public function provideExceptionData() {
+	public static function provideExceptionData() {
 		return [
 			// p => params, e => expected
 
@@ -211,9 +211,9 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'language' => 'xx', 'add' => 'Foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_language' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_language' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ],
 			],
@@ -228,9 +228,9 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'language' => 'pt', 'remove' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'notoken' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'notoken' ),
+						self::equalTo( 'missingparam' )
 					),
 					'message' => 'The "token" parameter must be set',
 				] ],
@@ -257,9 +257,9 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_site' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_site' ),
+						self::equalTo( 'badvalue' )
 					),
 					'message' => 'Unrecognized value for parameter "site"',
 				] ],

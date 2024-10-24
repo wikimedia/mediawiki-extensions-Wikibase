@@ -33,7 +33,7 @@ class PermissionsTest extends PermissionsTestCase {
 		];
 	}
 
-	public function provideEditPermissions() {
+	public static function provideEditPermissions() {
 		yield from self::provideReadPermissions();
 
 		yield [
@@ -65,8 +65,8 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
-	public function provideCreateEntityPermissions() {
-		yield from $this->provideEditPermissions();
+	public static function provideCreateEntityPermissions() {
+		yield from self::provideEditPermissions();
 
 		yield [
 			'permissions' => [
@@ -94,8 +94,8 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
-	public function provideCreatePropertyPermissions() {
-		yield from $this->provideEditPermissions();
+	public static function provideCreatePropertyPermissions() {
+		yield from self::provideEditPermissions();
 
 		yield [
 			'permissions' => [
@@ -124,8 +124,8 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
-	public function provideItemTermPermissions() {
-		yield from $this->provideEditPermissions();
+	public static function provideItemTermPermissions() {
+		yield from self::provideEditPermissions();
 
 		yield [
 			'permissions' => [
@@ -164,8 +164,8 @@ class PermissionsTest extends PermissionsTestCase {
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
-	public function provideMergeItemsPermissions() {
-		yield from $this->provideEditPermissions();
+	public static function provideMergeItemsPermissions() {
+		yield from self::provideEditPermissions();
 
 		yield [
 			'permissions' => [
