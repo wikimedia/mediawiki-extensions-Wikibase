@@ -964,7 +964,19 @@
                       "является"
                     ]
                   },
-                  "statements": {}
+                  "statements": {
+                    "P1628": [
+                      {
+                        "property": {
+                          "id": "P1628"
+                        },
+                        "value": {
+                          "type": "value",
+                          "content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -6598,7 +6610,24 @@
                   "является"
                 ]
               },
-              "statements": {}
+              "statements": {
+                "P1628": [
+                  {
+                    "id": "P694$b4c349a2-c504-4fc5-b7d5-8b781c719d71",
+                    "rank": "normal",
+                    "property": {
+                      "id": "P1628",
+                      "data_type": "url"
+                    },
+                    "value": {
+                      "type": "value",
+                      "content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                    },
+                    "qualifiers": [],
+                    "references": []
+                  }
+                ]
+              }
             }
           }
         }
