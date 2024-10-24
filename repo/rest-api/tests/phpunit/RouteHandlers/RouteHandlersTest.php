@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
 
 use Generator;
 use LogicException;
+use MediaWiki\ChangeTags\ChangeTagsStore;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
@@ -187,6 +188,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->stubPreconditionMiddlewareFactory();
 		$this->stubStatementRedirectMiddlewareFactory();
 		$this->stubSiteLinkGlobalIdentifiersProvider();
+		$this->stubChangeTagsStore();
 	}
 
 	/**
@@ -1250,6 +1252,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$sitelinkGlobalIdentifiersProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
 		$sitelinkGlobalIdentifiersProvider->method( 'getList' )->willReturn( [] );
 		$this->setService( 'WikibaseRepo.SiteLinkGlobalIdentifiersProvider', $sitelinkGlobalIdentifiersProvider );
+	}
+
+	private function stubChangeTagsStore(): void {
+		$changeTagsStore = $this->createStub( ChangeTagsStore::class );
+		$changeTagsStore->method( 'listExplicitlyDefinedTags' )->willReturn( [] );
+		$this->setService( 'ChangeTagsStore', $changeTagsStore );
 	}
 
 }

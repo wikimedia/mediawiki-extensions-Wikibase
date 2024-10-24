@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage\AddPropertyAliasesInLanguage;
@@ -514,6 +515,13 @@ class WbRestApi {
 	public static function getAliasLanguageCodeValidator( ContainerInterface $services = null ): AliasLanguageCodeValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbRestApi.AliasLanguageCodeValidator' );
+	}
+
+	public static function getEditMetadataRequestValidatingDeserializer(
+		ContainerInterface $services = null
+	): EditMetadataRequestValidatingDeserializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER );
 	}
 
 }

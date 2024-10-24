@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
@@ -20,11 +21,13 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 class CreatePropertyValidatorTest extends TestCase {
 
 	private PropertyDeserializer $propertyDeserializer;
+	private EditMetadataRequestValidatingDeserializer $editMetadataValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
+		$this->editMetadataValidator = $this->createStub( EditMetadataRequestValidatingDeserializer::class );
 	}
 
 	public function testGivenValidRequest_returnsDeserializedRequest(): void {
@@ -82,7 +85,25 @@ class CreatePropertyValidatorTest extends TestCase {
 		];
 	}
 
+	public function testGivenInvalidEditMetadata_throws(): void {
+		$expectedException = $this->createStub( UseCaseError::class );
+		$request = new CreatePropertyRequest( [ 'data_type' => 'string' ], [ 'tag1', 'tag2' ], false, 'edit comment', 'SomeUser' );
+
+		$this->editMetadataValidator = $this->createMock( EditMetadataRequestValidatingDeserializer::class );
+		$this->editMetadataValidator->expects( $this->once() )
+			->method( 'validateAndDeserialize' )
+			->with( $request )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $request );
+			$this->fail( 'expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedException, $e );
+		}
+	}
+
 	private function newValidator(): CreatePropertyValidator {
-		return new CreatePropertyValidator( $this->propertyDeserializer );
+		return new CreatePropertyValidator( $this->propertyDeserializer, $this->editMetadataValidator );
 	}
 }

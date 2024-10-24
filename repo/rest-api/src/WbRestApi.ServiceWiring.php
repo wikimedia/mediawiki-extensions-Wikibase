@@ -502,7 +502,8 @@ return [
 					new DescriptionsDeserializer(),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 					WbRestApi::getStatementDeserializer( $services )
-				)
+				),
+				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services )
 			),
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
