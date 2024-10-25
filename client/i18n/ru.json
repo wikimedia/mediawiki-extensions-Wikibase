@@ -124,7 +124,7 @@
 	"wikibase-sitelinks-link-columnheading": "Связанная страница",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Соединение|Соединения}} с элементом {{grammar:genitive|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Уведомлять меня, когда кто-то соединяет {{GENDER:|созданную мной}} страницу к элементу {{grammar:genitive|{{WBREPONAME}}}}.",
-	"exceeded-entity-limit-category": "Страницы со слишком большим количеством {{WBREPONAME}} сущностей, к которым получен доступ",
+	"exceeded-entity-limit-category": "Страницы, на которых превышено число использованных сущностей {{GRAMMAR:genitive|{{WBREPONAME}}}}",
 	"notification-header-page-connection": "Страница <strong>$3</strong> была {{GENDER:$2|присоединена}} к {{PLURAL:$4|-1=элементу {{grammar:genitive|{{WBREPONAME}}}}|элементу {{grammar:genitive|{{WBREPONAME}}}} $4}}, который содержит данные, относящиеся к её теме.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|ещё $4 страница|ещё $4 страницы|ещё $4 страниц|1=ещё одна страница|100=ещё 99+ страниц}} были {{GENDER:$2|привязаны}} к  элементам {{GRAMMAR:genitive|{{WBREPONAME}}}}, где могли быть собраны данные, относящиеся к этим темам.",
 	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
