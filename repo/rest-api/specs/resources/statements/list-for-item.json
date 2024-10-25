@@ -32,9 +32,35 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
+		"requestBody": { "$ref": "./requests.json#/ItemStatement" },
 		"responses": {
-			"201": { "$ref": "./responses.json#/ItemStatementCreated" },
+			"201": {
+				"description": "The newly created Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
+				"headers": {
+					"ETag": {
+						"description": "Last entity revision number",
+						"schema": { "type": "string" }
+					},
+					"Last-Modified": {
+						"description": "Last modified date",
+						"schema": { "type": "string" }
+					},
+					"X-Authenticated-User": {
+						"description": "Optional username of the user making the request",
+						"schema": { "type": "string" }
+					},
+					"Location": {
+						"description": "The URI of the newly created Statement",
+						"schema": { "type": "string" }
+					}
+				},
+				"content": {
+					"application/json": {
+						"schema": { "$ref": "./responses.json#/StatementSchema" },
+						"example": { "$ref": "./examples.json#/ItemStatementResponse" }
+					}
+				}
+			},
 			"400": { "$ref": "../../global/responses.json#/InvalidNewStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

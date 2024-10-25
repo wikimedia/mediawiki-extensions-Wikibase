@@ -43,12 +43,6 @@
 		},
 		"required": [ "code", "message" ]
 	},
-	"StatementResponse": {
-		"allOf": [
-			{ "$ref": "./schemas.json#/Statement" },
-			{ "$ref": "#/StatementResponseRequired" }
-		]
-	},
 	"StatementResponseRequired": {
 		"allOf": [
 			{ "$ref": "#/PropertyValueResponseRequired" },

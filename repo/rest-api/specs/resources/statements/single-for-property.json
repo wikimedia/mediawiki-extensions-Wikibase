@@ -14,7 +14,10 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
+			"200": {
+				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID.",
+				"$ref": "./responses.json#/PropertyStatement"
+			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "./responses.json#/InvalidRetrievePropertyStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -34,9 +37,9 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
+		"requestBody": { "$ref": "./requests.json#/PropertyStatement" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
+			"200": { "$ref": "./responses.json#/PropertyStatement" },
 			"400": { "$ref": "./responses.json#/InvalidReplacePropertyStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -57,9 +60,9 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
+		"requestBody": { "$ref": "./requests.json#/PatchPropertyStatement" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyStatement" },
+			"200": { "$ref": "./responses.json#/PropertyStatement" },
 			"400": { "$ref": "./responses.json#/InvalidPropertyStatementPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -84,7 +87,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Delete" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
+			"200": { "$ref": "./responses.json#/StatementDeleted" },
 			"400": { "$ref": "./responses.json#/InvalidRemovePropertyStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

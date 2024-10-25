@@ -60,8 +60,8 @@
 			}
 		}
 	},
-	"ItemStatementCreated": {
-		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+	"ItemStatement": {
+		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -80,19 +80,12 @@
 					"type": "string"
 				},
 				"description": "Optional username of the user making the request"
-			},
-			"Location": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "The URI of the newly created Statement"
 			}
 		},
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "../../global/response-parts.json#/StatementResponse"
-				}
+				"schema": { "$ref": "#/StatementSchema" },
+				"example": { "$ref": "./examples.json#/ItemStatementResponse" }
 			}
 		}
 	},
@@ -124,40 +117,91 @@
 					"type": "object",
 					"additionalProperties": {
 						"type": "array",
-						"items": { "$ref": "../../global/response-parts.json#/StatementResponse" }
+						"items": { "$ref": "#/StatementSchema" }
 					}
 				},
 				"example": {
-					"P370": [
+					"P694": [
 						{
-							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"id": "Q24$BB728546-A400-4116-A772-16D54B62AC2B",
 							"rank": "normal",
 							"property": {
-								"id": "P370",
-								"data_type": "string"
+								"id": "P694",
+								"data_type": "wikibase-item"
 							},
 							"value": {
-								"content": "I am a goat",
-								"type": "value"
+								"type": "value",
+								"content": "Q626683"
 							},
 							"qualifiers": [],
 							"references": []
 						}
 					],
-					"P92": [
+					"P476": [
 						{
-							"id": "Q11$6403c562-401a-2b26-85cc-8327801145e1",
+							"id": "Q24$F3B2F956-B6AB-4984-8D89-BEE0FFFA3385",
 							"rank": "normal",
 							"property": {
-								"id": "P92",
-								"data_type": "string"
+								"id": "P476",
+								"data_type": "time"
 							},
 							"value": {
-								"content": "I am a goat",
-								"type": "value"
+								"type": "value",
+								"content": {
+									"time": "+1986-01-27T00:00:00Z",
+									"precision": 11,
+									"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+								}
 							},
 							"qualifiers": [],
 							"references": []
+						}
+					],
+					"P17": [
+						{
+							"id": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA",
+							"rank": "normal",
+							"property": {
+								"id": "P17",
+								"data_type": "string"
+							},
+							"value": {
+								"type": "value",
+								"content": "Senior Team Supervisor"
+							},
+							"qualifiers": [
+								{
+									"property": {
+										"id": "P706",
+										"data_type": "time"
+									},
+									"value": {
+										"type": "value",
+										"content": {
+											"time": "+2023-06-13T00:00:00Z",
+											"precision": 11,
+											"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+										}
+									}
+								}
+							],
+							"references": [
+								{
+									"hash": "7ccd777f870b71a4c5056c7fd2a83a22cc39be6d",
+									"parts": [
+										{
+											"property": {
+												"id": "P709",
+												"data_type": "url"
+											},
+											"value": {
+												"type": "value",
+												"content": "https://news.example.org"
+											}
+										}
+									]
+								}
+							]
 						}
 					]
 				}
@@ -254,8 +298,8 @@
 			}
 		}
 	},
-	"PropertyStatementCreated": {
-		"description": "A single newly created Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
+	"PropertyStatement": {
+		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID.",
 		"headers": {
 			"Last-Modified": {
 				"schema": {
@@ -274,22 +318,12 @@
 					"type": "string"
 				},
 				"description": "Optional username of the user making the request"
-			},
-			"Location": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "The URI of the newly created Statement"
 			}
 		},
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "../../global/response-parts.json#/StatementResponse"
-				},
-				"example": {
-					"$ref": "../../global/examples.json#/PropertyStatementResponseExample/value"
-				}
+				"schema": { "$ref": "#/StatementSchema" },
+				"example": { "$ref": "./examples.json#/PropertyStatementResponse" }
 			}
 		}
 	},
@@ -321,37 +355,21 @@
 					"type": "object",
 					"additionalProperties": {
 						"type": "array",
-						"items": { "$ref": "../../global/response-parts.json#/StatementResponse" }
+						"items": { "$ref": "#/StatementSchema" }
 					}
 				},
 				"example": {
-					"P370": [
+					"P1628": [
 						{
-							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
+							"id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
 							"rank": "normal",
 							"property": {
-								"id": "P370",
-								"data_type": "string"
+								"id":"P1628",
+								"data_type": "url"
 							},
 							"value": {
-								"content": "I am a goat",
-								"type": "value"
-							},
-							"qualifiers": [],
-							"references": []
-						}
-					],
-					"P92": [
-						{
-							"id": "P11$6403c562-401a-2b26-85cc-8327801145e1",
-							"rank": "normal",
-							"property": {
-								"id": "P92",
-								"data_type": "string"
-							},
-							"value": {
-								"content": "I am a goat",
-								"type": "value"
+								"type": "value",
+								"content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 							},
 							"qualifiers": [],
 							"references": []
@@ -446,5 +464,59 @@
 				"description": "Language code of the language in which error message is provided"
 			}
 		}
+	},
+	"StatementDeleted": {
+		"description": "The requested Statement was deleted",
+		"headers": {
+			"Content-Language": {
+				"description": "Language code of the language in which response is provided",
+				"schema": { "type": "string" }
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": { "type": "string" },
+				"example": "Statement deleted"
+			}
+		}
+	},
+
+	"StatementSchema": {
+		"allOf": [
+			{ "$ref": "../../global/schemas.json#/Statement" },
+			{ "$ref": "#/StatementSchemaRequired" }
+		]
+	},
+	"StatementSchemaRequired": {
+		"allOf": [
+			{ "$ref": "#/PropertyValueSchemaRequired" },
+			{
+				"properties": {
+					"qualifiers": {
+						"items": { "$ref": "#/PropertyValueSchemaRequired" }
+					},
+					"references": {
+						"properties": {
+							"parts": {
+								"items": { "$ref": "#/PropertyValueSchemaRequired" }
+							}
+						},
+						"required": [ "hash", "parts" ]
+					}
+				},
+				"required": [ "id", "rank", "qualifiers", "references" ]
+			}
+		]
+	},
+	"PropertyValueSchemaRequired": {
+		"properties": {
+			"property": {
+				"required": [ "id", "data_type" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		},
+		"required": [ "property", "value" ]
 	}
 }
