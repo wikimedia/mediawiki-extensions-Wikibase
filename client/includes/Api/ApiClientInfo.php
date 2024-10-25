@@ -19,17 +19,13 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ApiClientInfo extends ApiQueryBase {
 
-	/**
-	 * @var SettingsArray
-	 */
-	private $settings;
+	private SettingsArray $settings;
 
-	/**
-	 * @param ApiQuery $apiQuery
-	 * @param string $moduleName
-	 * @param SettingsArray $settings
-	 */
-	public function __construct( ApiQuery $apiQuery, $moduleName, SettingsArray $settings ) {
+	public function __construct(
+		ApiQuery $apiQuery,
+		string $moduleName,
+		SettingsArray $settings
+	) {
 		parent::__construct( $apiQuery, $moduleName, 'wb' );
 
 		$this->settings = $settings;
