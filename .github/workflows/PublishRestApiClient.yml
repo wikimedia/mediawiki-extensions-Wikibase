@@ -15,7 +15,11 @@ jobs:
             - name: Dereference OpenAPI doc
               run: npx json-dereference-cli json-dereference -s repo/rest-api/src/RouteHandlers/openapi.json -o openapi-dereferenced.json
             - name: Define next package version
-              run: echo "VERSION=$(npx semver $(npm view @wmde/wikibase-rest-api version 2> /dev/null || echo 0.0.0) --increment minor)" >> $GITHUB_ENV
+              run: |
+                  NEXT_PATCH_VERSION=$(npx semver $(npm view @wmde/wikibase-rest-api version) --increment patch)
+                  CURRENT_OAS_DOC_INTERFACE_VERSION=$(npx semver --coerce $(jq -r .info.version repo/rest-api/src/RouteHandlers/openapi.json))
+                  NEXT_VERSION=$(printf "$NEXT_PATCH_VERSION\n$CURRENT_OAS_DOC_INTERFACE_VERSION" | sort -V | tail -1)
+                  echo "VERSION=$NEXT_VERSION" >> $GITHUB_ENV
             - name: Build the API client
               uses: addnab/docker-run-action@v3
               with:
