@@ -13,7 +13,10 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"200": {
+				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID.",
+				"$ref": "./responses.json#/ItemStatement"
+			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "./responses.json#/InvalidRetrieveStatementInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -32,9 +35,12 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Statement" },
+		"requestBody": { "$ref": "./requests.json#/ItemStatement" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"200": {
+				"description": "A Wikibase Statement. Please note that the value of the ETag header field refers to the subject's revision ID.",
+				"$ref": "./responses.json#/ItemStatement"
+			},
 			"400": { "$ref": "./responses.json#/InvalidReplaceStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -54,9 +60,12 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/StatementPatch" },
+		"requestBody": { "$ref": "./requests.json#/PatchItemStatement" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/Statement" },
+			"200": {
+				"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID.",
+				"$ref": "./responses.json#/ItemStatement"
+			},
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -80,7 +89,7 @@
 		],
 		"requestBody": { "$ref": "../../global/requests.json#/Delete" },
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/StatementDeleted" },
+			"200": { "$ref": "./responses.json#/StatementDeleted" },
 			"400": { "$ref": "./responses.json#/InvalidRemoveStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },

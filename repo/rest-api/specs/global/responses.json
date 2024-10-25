@@ -1,23 +1,4 @@
 {
-	"StatementDeleted": {
-		"description": "The resource was deleted",
-		"headers": {
-			"Content-Language": {
-				"description": "Language code of the language in which response is provided",
-				"schema": {
-					"type": "string"
-				}
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"type": "string"
-				},
-				"example": "Statement deleted"
-			}
-		}
-	},
 	"ItemRedirected": {
 		"description": "The specified Item was redirected",
 		"content": {
@@ -586,8 +567,6 @@
 							{
 								"id": "Q24$BB728546-A400-4116-A772-16D54B62AC2B",
 								"rank": "normal",
-								"qualifiers": [],
-								"references": [],
 								"property": {
 									"id": "P694",
 									"data_type": "wikibase-item"
@@ -595,15 +574,15 @@
 								"value": {
 									"type": "value",
 									"content": "Q626683"
-								}
+								},
+								"qualifiers": [],
+								"references": []
 							}
 						],
 						"P476": [
 							{
 								"id": "Q24$F3B2F956-B6AB-4984-8D89-BEE0FFFA3385",
 								"rank": "normal",
-								"qualifiers": [],
-								"references": [],
 								"property": {
 									"id": "P476",
 									"data_type": "time"
@@ -615,13 +594,23 @@
 										"precision": 11,
 										"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
 									}
-								}
+								},
+								"qualifiers": [],
+								"references": []
 							}
 						],
 						"P17": [
 							{
 								"id": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA",
 								"rank": "normal",
+								"property": {
+									"id": "P17",
+									"data_type": "string"
+								},
+								"value": {
+									"type": "value",
+									"content": "Senior Team Supervisor"
+								},
 								"qualifiers": [
 									{
 										"property": {
@@ -654,15 +643,7 @@
 											}
 										]
 									}
-								],
-								"property": {
-									"id": "P17",
-									"data_type": "string"
-								},
-								"value": {
-									"type": "value",
-									"content": "Senior Team Supervisor"
-								}
+								]
 							}
 						]
 					},
@@ -811,7 +792,7 @@
 					"statements": {
 						"P1628": [
 							{
-								"id": "P694$b4c349a2-c504-4fc5-b7d5-8b781c719d71",
+								"id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
 								"rank": "normal",
 								"property": {
 									"id":"P1628",
@@ -827,102 +808,6 @@
 						]
 					}
 				}
-			}
-		}
-	},
-	"Statement": {
-		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the entity's revision ID.",
-		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/StatementResponse"
-				},
-				"examples": {
-					"Statement on an Item": { "$ref": "./examples.json#/ItemStatementResponseExample" },
-					"Statement on a Property": { "$ref": "./examples.json#/PropertyStatementResponseExample" }
-				}
-			}
-		}
-	},
-	"ItemStatement": {
-		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
-		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/StatementResponse"
-				},
-				"example": { "$ref": "./examples.json#/ItemStatementResponseExample/value" }
-			}
-		}
-	},
-	"PropertyStatement": {
-		"description": "A single Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's Revision ID.",
-		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
-			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
-			},
-			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/StatementResponse"
-				},
-				"example": { "$ref": "./examples.json#/PropertyStatementResponseExample/value" }
 			}
 		}
 	},
