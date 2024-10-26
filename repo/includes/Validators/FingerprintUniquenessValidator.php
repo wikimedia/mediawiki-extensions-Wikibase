@@ -156,7 +156,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 	}
 
 	/**
-	 * In order to check label and decsription uniqueness, this validator need to know both the label and the description
+	 * In order to check label and description uniqueness, this validator need to know both the label and the description
 	 * in a language, where one or both of them are going to change.
 	 *
 	 * This method purpose is take those terms that are about to change ($newTerms) and make sure to yield pairs
