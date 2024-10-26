@@ -6,7 +6,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	getItemEditRequests,
 	getPropertyEditRequests,
-	getItemCreateRequest
+	getItemCreateRequest,
+	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -18,7 +19,8 @@ describeWithTestData( 'Edit metadata requests', (
 	const allRoutes = [
 		...getItemEditRequests( itemRequestInputs ),
 		...getPropertyEditRequests( propertyRequestInputs ),
-		getItemCreateRequest( itemRequestInputs )
+		getItemCreateRequest( itemRequestInputs ),
+		getPropertyCreateRequest( propertyRequestInputs )
 	];
 	describeEachRouteWithReset( allRoutes, ( newRequestBuilder ) => {
 		it( 'comment too long', async () => {

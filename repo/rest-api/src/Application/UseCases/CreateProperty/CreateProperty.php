@@ -7,7 +7,6 @@ use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\User;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
 
 /**
@@ -36,16 +35,15 @@ class CreateProperty {
 	 */
 	public function execute( CreatePropertyRequest $request ): CreatePropertyResponse {
 		$deserializedRequest = $this->validator->validateAndDeserialize( $request );
+		$editMetadata = $deserializedRequest->getEditMetadata();
 
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable $request->getUsername() is checked
-		$user = $request->getUsername() ? User::withUsername( $request->getUsername() ) : User::newAnonymous();
-		$this->assertUserIsAuthorized->checkCreatePropertyPermissions( $user );
+		$this->assertUserIsAuthorized->checkCreatePropertyPermissions( $editMetadata->getUser() );
 
 		$revision = $this->executeWithExceptionHandling( fn() => $this->propertyCreator->create(
 			$deserializedRequest->getProperty(),
 			new EditMetadata(
-				$request->getEditTags(),
-				$request->isBot(),
+				$editMetadata->getTags(),
+				$editMetadata->isBot(),
 				CreatePropertyEditSummary::newSummary( $request->getComment() )
 			)
 		) );

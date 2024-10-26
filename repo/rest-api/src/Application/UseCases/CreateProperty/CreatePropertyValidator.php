@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 
 /**
@@ -11,9 +12,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 class CreatePropertyValidator {
 
 	private PropertyDeserializer $propertyDeserializer;
+	private EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer;
 
-	public function __construct( PropertyDeserializer $propertyDeserializer	) {
+	public function __construct(
+		PropertyDeserializer $propertyDeserializer,
+		EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer
+	) {
 		$this->propertyDeserializer = $propertyDeserializer;
+		$this->editMetadataRequestValidatingDeserializer = $editMetadataRequestValidatingDeserializer;
 	}
 
 	/**
@@ -27,7 +33,10 @@ class CreatePropertyValidator {
 
 		$this->validateTopLevelFields( $propertySerialization );
 
-		return new DeserializedCreatePropertyRequest( $this->propertyDeserializer->deserialize( $request->getProperty() ) );
+		return new DeserializedCreatePropertyRequest(
+			$this->propertyDeserializer->deserialize( $request->getProperty() ),
+			$this->editMetadataRequestValidatingDeserializer->validateAndDeserialize( $request )
+		);
 	}
 
 	/**
