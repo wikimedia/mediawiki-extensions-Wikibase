@@ -57,7 +57,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 				break;
 			}
 
-			if ( isset( $currentPageId ) && $row->eu_page_id !== $currentPageId ) {
+			if ( $currentPageId !== null && $row->eu_page_id !== $currentPageId ) {
 				// Flush out everything we built
 				$fit = $this->addPageSubItems( $currentPageId, $entry );
 				if ( !$fit ) {
