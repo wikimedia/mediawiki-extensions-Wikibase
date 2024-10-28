@@ -150,7 +150,7 @@ class RepoLinker {
 			$uri = $source->getConceptBaseUri();
 		}
 
-		if ( !isset( $uri ) ) {
+		if ( $uri === null ) {
 			throw new LogicException(
 				'No base URI for for concept URI for entity source: ' . $source->getSourceName()
 			);

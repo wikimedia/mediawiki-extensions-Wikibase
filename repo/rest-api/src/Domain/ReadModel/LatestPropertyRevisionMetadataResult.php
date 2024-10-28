@@ -47,7 +47,7 @@ final class LatestPropertyRevisionMetadataResult {
 	}
 
 	public function propertyExists(): bool {
-		return isset( $this->revisionId );
+		return $this->revisionId !== null;
 	}
 
 }
