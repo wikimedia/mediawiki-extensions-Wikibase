@@ -22,14 +22,16 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ሓጀት",
 	"wikibase-rcfilters-hide-wikibase-label": "ኣርትዖታት {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "ገጻት ኣርአ",
+	"wikibase-pageswithbadges-submit": "ገጻት ኣርአ",
 	"wikibase-entityusage-submit": "ገጻት ኣርአ",
 	"wikibase-pageinfo-entity-id-none": "ሴማ",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "ተስምየት: $1",
-	"wikibase-pageinfo-entity-usage-D-with-modifier": "ወስፍ:",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "ወስፍ:$1",
 	"wikibase-pageinfo-entity-usage-T": "ኣርእስ",
 	"wikibase-otherprojects": "ዲብ ብዕድ መሻርዕ",
 	"wikibase-sitelinks-sitename-columnheading": "ሉቀት",
 	"wikibase-client-data-bridge-permissions-error-info": "ዥያዳ ተፋሲል",
+	"wikibase-client-data-bridge-references-heading": "መራጄዕ",
 	"wikibase-client-data-bridge-error-reload-bridge": "ኻልእ ዶል ጸዓን",
 	"wikibase-client-data-bridge-error-go-back": "ግጽ ገራ ኣቅብል"
 }
