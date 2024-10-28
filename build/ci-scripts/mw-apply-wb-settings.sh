@@ -17,7 +17,7 @@ function apply_repo_settings {
 }
 
 function apply_common_before_settings {
-  echo 'error_reporting(E_ALL| E_STRICT);' >> LocalSettings.php
+  echo 'error_reporting(E_ALL);' >> LocalSettings.php
   echo 'ini_set("display_errors", 1);' >> LocalSettings.php
   # For re-using the Wikimedia CI settings, pretend we're running in quibble
   echo 'if ( !defined( "MW_QUIBBLE_CI" ) ) define( "MW_QUIBBLE_CI", true );' >> LocalSettings.php
