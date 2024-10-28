@@ -13,13 +13,16 @@ class CreatePropertyValidator {
 
 	private PropertyDeserializer $propertyDeserializer;
 	private EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer;
+	private array $dataTypesArray;
 
 	public function __construct(
 		PropertyDeserializer $propertyDeserializer,
-		EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer
+		EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer,
+		array $dataTypesArray
 	) {
 		$this->propertyDeserializer = $propertyDeserializer;
 		$this->editMetadataRequestValidatingDeserializer = $editMetadataRequestValidatingDeserializer;
+		$this->dataTypesArray = $dataTypesArray;
 	}
 
 	/**
@@ -43,7 +46,10 @@ class CreatePropertyValidator {
 	 * @throws UseCaseError
 	 */
 	private function validateTopLevelFields( array $property ): void {
-		if ( !is_string( $property['data_type'] ) ) {
+		if (
+			!is_string( $property['data_type'] ) ||
+			!in_array( $property['data_type'], $this->dataTypesArray )
+		) {
 			throw UseCaseError::newInvalidValue( '/property/data_type' );
 		}
 
