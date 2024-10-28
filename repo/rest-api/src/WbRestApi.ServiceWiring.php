@@ -505,6 +505,23 @@ return [
 				),
 				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services ),
 				WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
+				new LabelsSyntaxValidator(
+					new LabelsDeserializer(),
+					WbRestApi::getLabelLanguageCodeValidator( $services )
+				),
+				new PropertyLabelsContentsValidator(
+					new TermValidatorFactoryPropertyLabelValidator(
+						WikibaseRepo::getTermValidatorFactory( $services ),
+						WikibaseRepo::getPropertyTermsCollisionDetector( $services )
+					)
+				),
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+				),
+				new PropertyDescriptionsContentsValidator(
+					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
+				),
 			),
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )

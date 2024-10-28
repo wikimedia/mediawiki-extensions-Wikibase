@@ -10,6 +10,9 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 
+	const maxLabelLength = 250;
+	const valueTooLong = 'x'.repeat( maxLabelLength + 1 );
+
 	describe( '201 success response ', () => {
 		it( 'can create a minimal property', async () => {
 			const property = { data_type: 'string' };
@@ -95,8 +98,47 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		Object.entries( {
+			label: {
+				property: { data_type: 'string', labels: { en: valueTooLong } },
+				invalidFieldPath: '/property/labels/en'
+			},
+			description: {
+				property: { data_type: 'string', descriptions: { en: valueTooLong } },
+				invalidFieldPath: '/property/descriptions/en'
+			}
+		} ).forEach( ( [ field, { property, invalidFieldPath } ] ) => {
+			it( `value too long: ${field}`, async () => {
+				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
+
+				assertValidError( response, 400, 'value-too-long', { path: invalidFieldPath, limit: maxLabelLength } );
+				assert.strictEqual( response.body.message, 'The input value is too long' );
+			} );
+		} );
+
+		Object.entries( {
+			'invalid label language code': {
+				property: { data_type: 'string', labels: { invalidLanguageCode: 'label' } },
+				invalidFieldPath: '/property/labels'
+			},
+			'invalid description language code': {
+				property: { data_type: 'string', descriptions: { invalidLanguageCode: 'description' } },
+				invalidFieldPath: '/property/descriptions'
+			}
+		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
+			it( `invalid-key: ${reason}`, async () => {
+				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
+
+				assertValidError( response, 400, 'invalid-key', { path: invalidFieldPath, key: 'invalidLanguageCode' } );
+			} );
+		} );
+
+		Object.entries( {
 			'invalid data_type field type': {
 				property: { data_type: 123 },
+				invalidFieldPath: '/property/data_type'
+			},
+			'invalid data_type field': {
+				property: { data_type: 'invalid-type' },
 				invalidFieldPath: '/property/data_type'
 			},
 			'invalid labels field type': {
@@ -114,6 +156,38 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			'invalid statements field type': {
 				property: { data_type: 'string', statements: 'not an object' },
 				invalidFieldPath: '/property/statements'
+			},
+			'invalid labels': {
+				property: { data_type: 'string', labels: [ 'not an associative array' ] },
+				invalidFieldPath: '/property/labels'
+			},
+			'empty label': {
+				property: { data_type: 'string', labels: { en: '' } },
+				invalidFieldPath: '/property/labels/en'
+			},
+			'invalid label type': {
+				property: { data_type: 'string', labels: { en: [ 'invalid', 'label', 'type' ] } },
+				invalidFieldPath: '/property/labels/en'
+			},
+			'invalid label': {
+				property: { data_type: 'string', labels: { en: 'tab characters \t not allowed' } },
+				invalidFieldPath: '/property/labels/en'
+			},
+			'invalid descriptions': {
+				property: { data_type: 'string', descriptions: [ 'not a valid descriptions array' ] },
+				invalidFieldPath: '/property/descriptions'
+			},
+			'empty description': {
+				property: { data_type: 'string', descriptions: { en: '' } },
+				invalidFieldPath: '/property/descriptions/en'
+			},
+			'invalid description type': {
+				property: { data_type: 'string', descriptions: { en: 22 } },
+				invalidFieldPath: '/property/descriptions/en'
+			},
+			'invalid description': {
+				property: { data_type: 'string', descriptions: { en: 'tab characters \t not allowed' } },
+				invalidFieldPath: '/property/descriptions/en'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
 			it( `invalid value: ${reason}`, async () => {
@@ -121,6 +195,48 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 
 				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath } );
 			} );
+		} );
+	} );
+
+	describe( '422', () => {
+		it( 'responds with data-policy-violation error when label and description with the same value', async () => {
+			const languageCode = 'en';
+			const sameValueForLabelAndDescription = 'a random value';
+
+			const propertyToCreate = {
+				data_type: 'string',
+				labels: { [ languageCode ]: sameValueForLabelAndDescription },
+				descriptions: { [ languageCode ]: sameValueForLabelAndDescription }
+			};
+
+			const response = await newCreatePropertyRequestBuilder( propertyToCreate ).makeRequest();
+
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'label-description-same-value', violation_context: { language: languageCode } }
+			);
+		} );
+
+		it( 'responds with data-policy-violation error when property with the same label already exists', async () => {
+			const languageCode = 'en';
+			const label = `test-label-${utils.uniq()}`;
+
+			const property = { data_type: 'string', labels: { [ languageCode ]: label } };
+
+			const existingEntityResponse = await newCreatePropertyRequestBuilder( property ).assertValidRequest().makeRequest();
+			const existingPropertyId = existingEntityResponse.body.id;
+
+			const response = await newCreatePropertyRequestBuilder( property ).assertValidRequest().makeRequest();
+
+			const context = { language: languageCode, conflicting_property_id: existingPropertyId };
+			assertValidError(
+				response,
+				422,
+				'data-policy-violation',
+				{ violation: 'property-label-duplicate', violation_context: context }
+			);
 		} );
 	} );
 } );
