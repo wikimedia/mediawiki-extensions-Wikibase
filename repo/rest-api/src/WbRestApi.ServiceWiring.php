@@ -503,7 +503,8 @@ return [
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 					WbRestApi::getStatementDeserializer( $services )
 				),
-				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services )
+				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services ),
+				WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 			),
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )

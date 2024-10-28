@@ -39,12 +39,14 @@ class CreatePropertyTest extends TestCase {
 
 	private PropertyCreator $propertyCreator;
 	private AssertUserIsAuthorized $assertUserIsAuthorized;
+	private array $dataTypesArray;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->propertyCreator = new InMemoryPropertyRepository();
 		$this->assertUserIsAuthorized = $this->createStub( AssertUserIsAuthorized::class );
+		$this->dataTypesArray = [ 'wikibase-item', 'wikibase-property', 'string' ];
 	}
 
 	public function testHappyPath(): void {
@@ -110,7 +112,8 @@ class CreatePropertyTest extends TestCase {
 					new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 				),
 				( new TestValidatingRequestDeserializerServiceContainer() )
-					->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER )
+					->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER ),
+				$this->dataTypesArray
 			),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized
