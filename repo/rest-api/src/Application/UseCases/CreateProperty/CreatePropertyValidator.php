@@ -6,6 +6,8 @@ use LogicException;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -27,6 +29,7 @@ class CreatePropertyValidator {
 	private PropertyLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
+	private AliasesValidator $aliasesValidator;
 
 	public function __construct(
 		PropertyDeserializer $propertyDeserializer,
@@ -35,7 +38,8 @@ class CreatePropertyValidator {
 		LabelsSyntaxValidator $labelsSyntaxValidator,
 		PropertyLabelsContentsValidator $labelsContentsValidator,
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
-		PropertyDescriptionsContentsValidator $descriptionsContentsValidator
+		PropertyDescriptionsContentsValidator $descriptionsContentsValidator,
+		AliasesValidator $aliasesValidator
 	) {
 		$this->propertyDeserializer = $propertyDeserializer;
 		$this->editMetadataRequestValidatingDeserializer = $editMetadataRequestValidatingDeserializer;
@@ -44,6 +48,7 @@ class CreatePropertyValidator {
 		$this->labelsContentsValidator = $labelsContentsValidator;
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
+		$this->aliasesValidator = $aliasesValidator;
 	}
 
 	/**
@@ -57,6 +62,7 @@ class CreatePropertyValidator {
 
 		$this->validateTopLevelFields( $propertySerialization );
 		$this->validateLabelsAndDescriptions( $propertySerialization, '/property' );
+		$this->validateAliases( $propertySerialization, '/property' );
 
 		return new DeserializedCreatePropertyRequest(
 			$this->propertyDeserializer->deserialize( $request->getProperty() ),
@@ -152,6 +158,7 @@ class CreatePropertyValidator {
 
 	private function handleDescriptionsValidationError( ValidationError $validationError ): void {
 		$context = $validationError->getContext();
+
 		switch ( $validationError->getCode() ) {
 			case DescriptionsSyntaxValidator::CODE_DESCRIPTIONS_NOT_ASSOCIATIVE:
 				throw UseCaseError::newInvalidValue( '/property/descriptions' );
@@ -175,6 +182,29 @@ class CreatePropertyValidator {
 					UseCaseError::POLICY_VIOLATION_LABEL_DESCRIPTION_SAME_VALUE,
 					[ UseCaseError::CONTEXT_LANGUAGE => $context[PropertyDescriptionValidator::CONTEXT_LANGUAGE] ]
 				);
+		}
+	}
+
+	private function validateAliases( array $property, string $basePath ): void {
+		$aliases = $property['aliases'] ?? [];
+		$validationError = $this->aliasesValidator->validate( $aliases, "$basePath/aliases" );
+
+		if ( $validationError ) {
+			$context = $validationError->getContext();
+			switch ( $validationError->getCode() ) {
+				case LanguageCodeValidator::CODE_INVALID_LANGUAGE_CODE:
+					throw UseCaseError::newInvalidKey( '/property/aliases', $context[LanguageCodeValidator::CONTEXT_LANGUAGE_CODE] );
+				case AliasesValidator::CODE_INVALID_VALUE:
+					throw UseCaseError::newInvalidValue( $context[AliasesValidator::CONTEXT_PATH] );
+				case AliasesInLanguageValidator::CODE_INVALID:
+					throw UseCaseError::newInvalidValue( $context[AliasesInLanguageValidator::CONTEXT_PATH] );
+				case AliasesInLanguageValidator::CODE_TOO_LONG:
+					$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
+					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
+					throw UseCaseError::newValueTooLong( $path, $limit );
+				default:
+					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
+			}
 		}
 	}
 
