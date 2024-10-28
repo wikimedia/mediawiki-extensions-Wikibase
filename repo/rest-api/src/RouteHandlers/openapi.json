@@ -951,7 +951,7 @@
                     "ru": "это частный случай понятия"
                   },
                   "descriptions": {
-                    "en": "this item is a concrete object (instance) of this class, category or object group",
+                    "en": "the subject is a concrete object (instance) of this class, category, or object group",
                     "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
                   },
                   "aliases": {
@@ -1411,7 +1411,7 @@
                   "$ref": "#/components/schemas/Descriptions"
                 },
                 "example": {
-                  "en": "this item is a concrete object (instance) of this class, category or object group",
+                  "en": "the subject is a concrete object (instance) of this class, category, or object group",
                   "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
                 }
               }
@@ -1475,7 +1475,7 @@
                   {
                     "op": "replace",
                     "path": "/en",
-                    "value": "this item is a concrete object (instance) of this class, category or object group"
+                    "value": "the subject is a concrete object (instance) of this class, category, or object group"
                   }
                 ],
                 "tags": [],
@@ -1889,7 +1889,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "example": "this item is a concrete object (instance) of this class, category or object group"
+                "example": "the subject is a concrete object (instance) of this class, category, or object group"
               }
             }
           },
@@ -1947,7 +1947,7 @@
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1descriptions~1%7Blanguage_code%7D/put/requestBody/content/application~1json/schema"
               },
               "example": {
-                "description": "this item is a concrete object (instance) of this class, category or object group",
+                "description": "the subject is a concrete object (instance) of this class, category, or object group",
                 "tags": [],
                 "bot": false,
                 "comment": "set English description"
@@ -6940,7 +6940,7 @@
                 "ru": "это частный случай понятия"
               },
               "descriptions": {
-                "en": "this item is a concrete object (instance) of this class, category or object group",
+                "en": "the subject is a concrete object (instance) of this class, category, or object group",
                 "ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории."
               },
               "aliases": {
