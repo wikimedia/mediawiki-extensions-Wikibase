@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\CreateProperty;
 
+use Exception;
 use Generator;
+use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
@@ -12,6 +17,7 @@ use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataReque
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
@@ -20,8 +26,12 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator
@@ -41,6 +51,7 @@ class CreatePropertyValidatorTest extends TestCase {
 	private PropertyLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
+	private AliasesValidator $aliasesValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -376,7 +387,80 @@ class CreatePropertyValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider aliasesValidationErrorProvider
+	 */
+	public function testAliasesValidation( array $aliases, Exception $expectedError ): void {
+		$request = new CreatePropertyRequest(
+			[ 'data_type' => 'string', 'aliases' => $aliases ],
+			[ 'tag1', 'tag2' ],
+			false,
+			'edit comment',
+			'SomeUser'
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function aliasesValidationErrorProvider(): Generator {
+		yield 'invalid aliases - sequential array' => [
+			[ 'not', 'an', 'associative', 'array' ],
+			UseCaseError::newInvalidValue( '/property/aliases' ),
+		];
+		yield 'invalid language code - int' => [
+			[ 3248 => [ 'alias' ] ],
+			UseCaseError::newInvalidKey( '/property/aliases', '3248' ),
+		];
+		yield 'invalid language code - xyz' => [
+			[ 'xyz' => [ 'alias' ] ],
+			UseCaseError::newInvalidKey( '/property/aliases', 'xyz' ),
+		];
+		yield 'invalid language code - empty string' => [
+			[ '' => [ 'alias' ] ],
+			UseCaseError::newInvalidKey( '/property/aliases', '' ),
+		];
+		yield "invalid 'aliases in language' list - string" => [
+			[ 'en' => 'not a list of aliases in a language' ],
+			UseCaseError::newInvalidValue( '/property/aliases/en' ),
+		];
+		yield "invalid 'aliases in language' list - associative array" => [
+			[ 'en' => [ 'not' => 'a', 'sequential' => 'array' ] ],
+			UseCaseError::newInvalidValue( '/property/aliases/en' ),
+		];
+		yield "invalid 'aliases in language' list - empty array" => [
+			[ 'en' => [] ],
+			UseCaseError::newInvalidValue( '/property/aliases/en' ),
+		];
+		yield 'invalid alias - int' => [
+			[ 'en' => [ 3146, 'second alias' ] ],
+			UseCaseError::newInvalidValue( '/property/aliases/en/0' ),
+		];
+		yield 'invalid alias - empty string' => [
+			[ 'de' => [ '' ] ],
+			UseCaseError::newInvalidValue( '/property/aliases/de/0' ),
+		];
+		yield 'invalid alias - only white space' => [
+			[ 'de' => [ " \t " ] ],
+			UseCaseError::newInvalidValue( '/property/aliases/de/0' ),
+		];
+		yield 'alias too long' => [
+			[ 'en' => [ 'this alias is too long for the configured limit which is 50 char' ] ],
+			UseCaseError::newValueTooLong( '/property/aliases/en/0', self::MAX_LENGTH ),
+		];
+		yield 'alias contains invalid character' => [
+			[ 'en' => [ 'valid alias', "tabs \t not \t allowed" ] ],
+			UseCaseError::newInvalidValue( '/property/aliases/en/1' ),
+		];
+	}
+
 	private function newValidator(): CreatePropertyValidator {
+		$allowedLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
+
 		return new CreatePropertyValidator(
 			$this->propertyDeserializer,
 			$this->editMetadataValidator,
@@ -385,6 +469,20 @@ class CreatePropertyValidatorTest extends TestCase {
 			$this->labelsContentsValidator,
 			$this->descriptionsSyntaxValidator,
 			$this->descriptionsContentsValidator,
+			new AliasesValidator(
+				new TermValidatorFactoryAliasesInLanguageValidator(
+					new TermValidatorFactory(
+						self::MAX_LENGTH,
+						$allowedLanguageCodes,
+						$this->createStub( EntityIdParser::class ),
+						$this->createStub( TermsCollisionDetectorFactory::class ),
+						WikibaseRepo::getTermLookup(),
+						$this->createStub( LanguageNameUtils::class )
+					)
+				),
+				new ValueValidatorLanguageCodeValidator( new MembershipValidator( $allowedLanguageCodes ) ),
+				new AliasesDeserializer( new AliasesInLanguageDeserializer() )
+			)
 		);
 	}
 }
