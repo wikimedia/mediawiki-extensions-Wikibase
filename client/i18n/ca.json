@@ -19,12 +19,13 @@
 			"Toniher",
 			"Townie",
 			"Vriullop",
-			"Àlex"
+			"Àlex",
+			"Leptictidium"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
 	"tooltip-t-wikibase": "Enllaç a l'element del repositori de dades connectat",
-	"wikibase-after-page-move": "El reanomenament s'hauria de reflectir en l'enllaç de llengua [$1 de l'element de {{WBREPONAME}}]. Us demanem que comproveu que així hagi passat.",
+	"wikibase-after-page-move": "El reanomenament s'hauria de reflectir en l'enllaç de llengua [$1 de l'element de {{WBREPONAME}}]. Comproveu-ho, si us plau.",
 	"wikibase-after-page-delete": "L'enllaç a la pàgina hauria d'haver-se suprimit de l'[$1 l'element associat de {{WBREPONAME}}]. Us demanem que comproveu si ha passat.",
 	"wikibase-after-page-delete-queued": "L'[$1 element de {{WBREPONAME}}] associat amb aquesta pàgina s'actualitzarà automàticament. Tingueu en compte que potser no passi al moment.",
 	"wikibase-comment-add": "S’ha creat un element a {{WBREPONAME}}.",

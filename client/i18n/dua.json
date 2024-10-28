@@ -9,11 +9,11 @@
 	"wikibase-editlinks": "Tukwa la ɓeɓolan ɓá tiŋgamɛ",
 	"wikibase-linkitem-addlinks": "Ɓáta lá matiŋgamɛ",
 	"wikibase-linkitem-title": "Kwélanɛ ná dipapá",
-	"wikibase-linkitem-linkpage": "mukwélan na dipapa",
+	"wikibase-linkitem-linkpage": "Mukwélan na dipapa",
 	"wikibase-linkitem-selectlink": "Pɔsɔ mulomba ná dipapá wá pulanɔ́ o sɔ́psan ná dín dipapá",
-	"wikibase-linkitem-input-site": "Bwambo",
-	"wikibase-linkitem-input-page": "Dipapa",
+	"wikibase-linkitem-input-site": "Bwambo:",
+	"wikibase-linkitem-input-page": "Dipapa:",
 	"wikibase-rc-hide-wikidata-hide": "Wuta",
 	"wikibase-rc-hide-wikidata-show": "Léɛ",
-	"wikibase-otherprojects": "ó mwíno mipɛpɛ"
+	"wikibase-otherprojects": "Ó mwíno mipɛpɛ"
 }

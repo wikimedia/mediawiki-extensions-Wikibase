@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
-			"RebecaRwanda"
+			"RebecaRwanda",
+			"RebeccaRwanda"
 		]
 	},
 	"wikibase-edit": "hindura",
-	"wikibase-add": "ongeraho"
+	"wikibase-add": "ongeraho",
+	"wikibase-label-empty": "Nta kirango cyashyizweho",
+	"wikibase-description-empty": "Nta bisobanuro byatanzwe",
+	"wikibase-sitelinks-special": "Izindi mbuga"
 }
