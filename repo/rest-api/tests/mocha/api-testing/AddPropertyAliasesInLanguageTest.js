@@ -146,7 +146,7 @@ describe( newRequest().getRouteDescription(), () => {
 
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'missing-field' );
-			assert.deepEqual( response.body.context, { path: '/', field: 'aliases' } );
+			assert.deepEqual( response.body.context, { path: '', field: 'aliases' } );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 

@@ -21,7 +21,7 @@ trait AssertValidTopLevelFields {
 			if ( isset( $body[$fieldName] ) ) {
 				$this->assertType( $fieldSettings[ParamValidator::PARAM_TYPE], $fieldName, $body[$fieldName] );
 			} elseif ( $fieldSettings[ParamValidator::PARAM_REQUIRED] === true ) {
-				throw $this->convertUseCaseErrorToHttpException( UseCaseError::newMissingField( '/', $fieldName ) );
+				throw $this->convertUseCaseErrorToHttpException( UseCaseError::newMissingField( '', $fieldName ) );
 			}
 		}
 	}
