@@ -42,16 +42,11 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		return $mockProvider->getMockTermValidatorFactory();
 	}
 
-	/**
-	 * @return ChangeOp[]
-	 */
-	public function changeOpProvider() {
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpProvider(): iterable {
 		$ops = [];
-		$ops[] = [ new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) ];
-		$ops[] = [ new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) ];
-		$ops[] = [ new ChangeOpLabel( 'en', null, $validatorFactory ) ];
+		$ops[] = [ ChangeOpLabel::class, [ 'en', 'myNewLabel' ] ];
+		$ops[] = [ ChangeOpDescription::class, [ 'de', 'myNewDescription' ] ];
+		$ops[] = [ ChangeOpLabel::class, [ 'en', null ] ];
 
 		return $ops;
 	}
@@ -59,21 +54,22 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider changeOpProvider
 	 */
-	public function testAdd( ChangeOp $changeOp ) {
+	public function testAdd( string $changeOpClassName, array $changeOpParams ) {
+		$changeOpParams[] = $this->getTermValidatorFactory();
+		$changeOp = new $changeOpClassName( ...$changeOpParams );
+
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOp );
 		$this->assertEquals( [ $changeOp ], $changeOps->getChangeOps() );
 	}
 
-	public function changeOpArrayProvider() {
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpArrayProvider(): iterable {
 		$ops = [];
 		$ops[] = [
 					[
-						new ChangeOpLabel( 'en', 'enLabel', $validatorFactory ),
-						new ChangeOpLabel( 'de', 'deLabel', $validatorFactory ),
-						new ChangeOpDescription( 'en', 'enDescr', $validatorFactory ),
+						[ ChangeOpLabel::class, [ 'en', 'enLabel' ] ],
+						[ ChangeOpLabel::class, [ 'de', 'deLabel' ] ],
+						[ ChangeOpDescription::class, [ 'en', 'enDescr' ] ],
 					],
 				];
 
@@ -83,7 +79,12 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider changeOpArrayProvider
 	 */
-	public function testAddArray( array $changeOpArray ) {
+	public function testAddArray( array $changeOpParamsArray ) {
+		$changeOpArray = array_map( function ( $changeOpParams ) {
+			$changeOpParams[1][] = $this->getTermValidatorFactory();
+			return new $changeOpParams[0]( ...$changeOpParams[1] );
+		}, $changeOpParamsArray );
+
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOpArray );
 		$this->assertEquals( $changeOpArray, $changeOps->getChangeOps() );

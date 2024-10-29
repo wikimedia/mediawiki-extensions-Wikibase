@@ -45,7 +45,8 @@ class StatementsMergerTest extends TestCase {
 	/**
 	 * @dataProvider nonEntityDocumentProvider
 	 */
-	public function testGivenNotAnEntity_mergeThrowsException( $source, $target ) {
+	public function testGivenNotAnEntity_mergeThrowsException( callable $sourceAndTargetProvider ) {
+		[ $source, $target ] = $sourceAndTargetProvider( $this );
 		$this->expectException( InvalidArgumentException::class );
 		$this->newStatementsMerger()->merge( $source, $target );
 	}
@@ -76,7 +77,7 @@ class StatementsMergerTest extends TestCase {
 		);
 	}
 
-	public static function statementsProvider() {
+	public static function statementsProvider(): iterable {
 		yield 'no statements' => [
 			[],
 			[],
@@ -140,22 +141,20 @@ class StatementsMergerTest extends TestCase {
 		return $statement;
 	}
 
-	public function nonEntityDocumentProvider() {
-		$nonEntity = $this->createMock( StatementListProvider::class );
-
+	public static function nonEntityDocumentProvider(): iterable {
 		yield 'source not an entity' => [
-			$nonEntity,
-			new Item(),
+			fn ( self $self ) =>  [ $self->createMock( StatementListProvider::class ), new Item() ],
 		];
 
 		yield 'target not an entity' => [
-			new Item(),
-			$nonEntity,
+			fn ( self $self ) => [ new Item(), $self->createMock( StatementListProvider::class ) ],
 		];
 
 		yield 'source and target both not entities' => [
-			$nonEntity,
-			clone $nonEntity,
+			function ( self $self ) {
+				$nonEntity = $self->createMock( StatementListProvider::class );
+				return [ $nonEntity, clone $nonEntity ];
+			},
 		];
 	}
 

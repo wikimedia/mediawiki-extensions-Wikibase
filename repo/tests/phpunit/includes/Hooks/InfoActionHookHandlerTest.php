@@ -32,21 +32,20 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testHandle(
 		array $expected,
-		IContextSource $context,
 		array $subscriptions
 	) {
+		$context = $this->getContext();
 		$hookHandler = $this->newHookHandler( $subscriptions, $context );
 		$pageInfo = $hookHandler->handle( $context, [ 'header-basic' => [] ] );
 
 		$this->assertEquals( $expected, $pageInfo );
 	}
 
-	public function handleProvider() {
+	public static function handleProvider(): iterable {
 		$url = 'https://en.wikipedia.org/wiki/Special%3AEntityUsage%2F';
 		$elementDewiki = Html::element( 'a', [ 'href' => $url ], 'dewiki' );
 		$elementEnwiki = Html::element( 'a', [ 'href' => $url ], 'enwiki' );
 		$elementElwiki = Html::element( 'a', [ 'href' => $url ], 'elwiki' );
-		$context = $this->getContext();
 
 		return [
 			'dewiki and enwiki' => [
@@ -62,7 +61,6 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
-				$context,
 				[ 'dewiki', 'enwiki' ],
 			],
 			'elwiki' => [
@@ -78,7 +76,6 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
-				$context,
 				[ 'elwiki' ],
 			],
 			'no subscription' => [
@@ -94,7 +91,6 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 						[ '(wikibase-pageinfo-wb-identifiers)', '4' ],
 					],
 				],
-				$context,
 				[],
 			],
 		];

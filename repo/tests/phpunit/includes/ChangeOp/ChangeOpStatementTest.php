@@ -293,9 +293,9 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideInvalidApply() {
+	public static function provideInvalidApply(): iterable {
 		$snak = new PropertyNoValueSnak( 67573284 );
-		$item = $this->makeNewItemWithStatement( 'Q777', $snak );
+		$item = self::makeNewItemWithStatement( 'Q777', $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -307,15 +307,13 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
-		$args['wrong entity'] = [ $wrongItem, $this->newChangeOpStatement( $newStatement ) ];
+		$args['wrong entity'] = [ $wrongItem, $newStatement ];
 
 		// update an existing statement with wrong main snak property
 		$newSnak = new PropertyNoValueSnak( 23452345 );
 		$newStatement->setMainSnak( $newSnak );
 
-		$changeOp = $this->newChangeOpStatement( $newStatement );
-
-		$args['wrong main snak property'] = [ $item, $changeOp ];
+		$args['wrong main snak property'] = [ $item, $newStatement ];
 
 		return $args;
 	}
@@ -323,19 +321,14 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( EntityDocument $item, ChangeOpStatement $changeOp ) {
+	public function testInvalidApply( EntityDocument $item, Statement $statement ) {
 		$this->expectException( ChangeOpException::class );
 
+		$changeOp = $this->newChangeOpStatement( $statement );
 		$changeOp->apply( $item );
 	}
 
-	/**
-	 * @param string $idString
-	 * @param Snak $mainSnak
-	 *
-	 * @return Item
-	 */
-	private static function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
+	private static function makeNewItemWithStatement( string $idString, Snak $mainSnak ): Item {
 		$id = new ItemId( $idString );
 
 		$statement = new Statement( $mainSnak );

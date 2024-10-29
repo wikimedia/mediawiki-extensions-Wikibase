@@ -690,17 +690,17 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		return $rec;
 	}
 
-	public function provideAdjustFlagsForMCR() {
+	public static function provideAdjustFlagsForMCR() {
 		yield 'No flags, results in no adjustments' => [
 			0,
 			0,
-			null,
+			fn () => null,
 			SlotRecord::MAIN,
 		];
 		yield 'UPDATE, with no parent revision, throws exception' => [
 			EDIT_UPDATE,
 			new StorageException( 'Can\'t perform an update with no parent revision' ),
-			null,
+			fn () => null,
 			SlotRecord::MAIN,
 		];
 		yield 'UPDATE, with no slot to update, throws exception' => [
@@ -708,31 +708,31 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 			new StorageException(
 				'Can\'t perform an update when the parent revision doesn\'t have expected slot: main'
 			),
-			$this->getMockRevisionRecord( [ SlotRecord::MAIN => false ] ),
+			fn ( self $self ) => $self->getMockRevisionRecord( [ SlotRecord::MAIN => false ] ),
 			SlotRecord::MAIN,
 		];
 		yield 'NEW, with no parent revision, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
-			null,
+			fn () => null,
 			SlotRecord::MAIN,
 		];
 		yield 'NEW, with parent revision on main slot, no adjustments' => [
 			EDIT_NEW,
 			EDIT_NEW,
-			$this->getMockRevisionRecord(),
+			fn ( $self ) => $self->getMockRevisionRecord(),
 			SlotRecord::MAIN,
 		];
 		yield 'NEW, with parent revision on non existing extra slot, switch to update' => [
 			EDIT_NEW,
 			EDIT_UPDATE,
-			$this->getMockRevisionRecord( [ 'extra' => false ] ),
+			fn ( self $self ) => $self->getMockRevisionRecord( [ 'extra' => false ] ),
 			'extra',
 		];
 		yield 'NEW, with parent revision on existing extra slot, throw exception' => [
 			EDIT_NEW,
 			new StorageException( 'Can\'t create slot, it already exists: extra' ),
-			$this->getMockRevisionRecord( [ 'extra' => true ] ),
+			fn ( self $self ) => $self->getMockRevisionRecord( [ 'extra' => true ] ),
 			'extra',
 		];
 	}
@@ -741,10 +741,12 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideAdjustFlagsForMCR
 	 * @param int $flagsIn
 	 * @param int|Exception $expected
-	 * @param RevisionRecord $parentRevision
+	 * @param callable $parentRevisionFactory function that returns RevisionRecord or null
 	 * @param string $slotRole
 	 */
-	public function testAdjustFlagsForMCR( $flagsIn, $expected, $parentRevision, $slotRole ) {
+	public function testAdjustFlagsForMCR( $flagsIn, $expected, callable $parentRevisionFactory, $slotRole ) {
+		$parentRevision = $parentRevisionFactory( $this );
+
 		$services = $this->getServiceContainer();
 		$store = new WikiPageEntityStore(
 			$this->createMock( EntityContentFactory::class ),
@@ -858,22 +860,28 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideCanCreateWithCustomId() {
-		return [
-			'no custom id allowed' => [ new ItemId( 'Q7' ), false ],
-			'custom id allowed' => [ $this->newCustomEntityId( 'F7' ), true ],
-		];
-	}
-
 	/**
-	 * @dataProvider provideCanCreateWithCustomId
 	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
 	 */
-	public function testCanCreateWithCustomId( EntityId $id, $expected ) {
+	public function testCanCreateWithCustomId_CustomIdNotAllowed() {
+		$id = new ItemId( 'Q7' );
+
 		/** @var WikiPageEntityStore $store */
 		$store = $this->createStoreForCustomEntitySource();
 
-		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
+		$this->assertSame( false, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
+	}
+
+	/**
+	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
+	 */
+	public function testCanCreateWithCustomId_CustomIdAllowed() {
+		$id = $this->newCustomEntityId( 'F7' );
+
+		/** @var WikiPageEntityStore $store */
+		$store = $this->createStoreForCustomEntitySource();
+
+		$this->assertSame( true, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
 	}
 
 	public function testGivenIdOfTypeNotFromTheSource_canCreateWithCustomIdReturnsFalse() {

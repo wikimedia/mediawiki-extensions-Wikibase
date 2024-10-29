@@ -41,7 +41,9 @@ class DispatchingEntityTypeStatementGrouperTest extends \PHPUnit\Framework\TestC
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
-	public function testInvalidConstructorArgument( array $groupers ) {
+	public function testInvalidConstructorArgument( callable $groupersFactory ) {
+		$groupers = $groupersFactory( $this );
+
 		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityTypeStatementGrouper(
 			$this->getStatementGuidParser(),
@@ -49,10 +51,10 @@ class DispatchingEntityTypeStatementGrouperTest extends \PHPUnit\Framework\TestC
 		);
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public static function invalidConstructorArgumentProvider(): iterable {
 		return [
-			[ [ $this->newGrouper( 0 ) ] ],
-			[ [ 'item' => 'invalid' ] ],
+			[ fn ( self $self ) => [ $self->newGrouper( 0 ) ] ],
+			[ fn () => [ 'item' => 'invalid' ] ],
 		];
 	}
 

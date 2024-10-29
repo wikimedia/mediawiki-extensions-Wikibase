@@ -66,21 +66,21 @@ class PropertyContentTest extends EntityContentTestCase {
 	/**
 	 * @return NumericPropertyId
 	 */
-	protected function getDummyId() {
+	protected static function getDummyId() {
 		return new NumericPropertyId( 'P100' );
 	}
 
 	/**
 	 * @return string
 	 */
-	protected function getEntityType() {
+	protected static function getEntityType() {
 		return Property::ENTITY_TYPE;
 	}
 
 	/**
 	 * @return PropertyContent
 	 */
-	protected function newEmpty() {
+	protected static function newEmpty() {
 		return new PropertyContent();
 	}
 
@@ -90,7 +90,7 @@ class PropertyContentTest extends EntityContentTestCase {
 	 * @throws InvalidArgumentException
 	 * @return PropertyContent
 	 */
-	protected function newBlank( EntityId $propertyId = null ) {
+	protected static function newBlank( EntityId $propertyId = null ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );
 		return new PropertyContent( new EntityInstanceHolder( $property ) );
@@ -104,7 +104,7 @@ class PropertyContentTest extends EntityContentTestCase {
 		];
 	}
 
-	public function provideContentObjectsWithoutId() {
+	public static function provideContentObjectsWithoutId() {
 		return [
 			'no holder' => [ new PropertyContent() ],
 			'no ID' => [ new PropertyContent( new EntityInstanceHolder( Property::newFromType( 'string' ) ) ) ],

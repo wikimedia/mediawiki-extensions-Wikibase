@@ -126,21 +126,21 @@ class ItemContentTest extends EntityContentTestCase {
 	/**
 	 * @return ItemId
 	 */
-	protected function getDummyId() {
+	protected static function getDummyId() {
 		return new ItemId( 'Q100' );
 	}
 
 	/**
 	 * @return string
 	 */
-	protected function getEntityType() {
+	protected static function getEntityType() {
 		return Item::ENTITY_TYPE;
 	}
 
 	/**
 	 * @return ItemContent
 	 */
-	protected function newEmpty() {
+	protected static function newEmpty() {
 		return new ItemContent();
 	}
 
@@ -150,7 +150,7 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @throws InvalidArgumentException
 	 * @return ItemContent
 	 */
-	protected function newBlank( EntityId $itemId = null ) {
+	protected static function newBlank( EntityId $itemId = null ) {
 		return new ItemContent( new EntityInstanceHolder( new Item( $itemId ) ) );
 	}
 
@@ -184,8 +184,8 @@ class ItemContentTest extends EntityContentTestCase {
 		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
 	}
 
-	public function getTextForSearchIndexProvider() {
-		$itemContent = $this->newBlank();
+	public static function getTextForSearchIndexProvider() {
+		$itemContent = self::newBlank();
 		$itemContent->getItem()->setLabel( 'en', 'cake' );
 		$itemContent->getItem()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
@@ -328,9 +328,9 @@ class ItemContentTest extends EntityContentTestCase {
 		$cases = parent::diffProvider();
 
 		$q10 = new ItemId( 'Q10' );
-		$empty = $this->newBlank( $q10 );
+		$empty = self::newBlank( $q10 );
 
-		$spam = $this->newBlank( $q10 );
+		$spam = self::newBlank( $q10 );
 		$spam->getItem()->setLabel( 'en', 'Spam' );
 
 		$redir = $this->newRedirect( $q10, new ItemId( 'Q17' ) );
@@ -341,7 +341,7 @@ class ItemContentTest extends EntityContentTestCase {
 			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
 			], true ),
-			$this->getEntityType()
+			self::getEntityType()
 		);
 
 		$spamToRedirDiff = new EntityContentDiff(
@@ -353,7 +353,7 @@ class ItemContentTest extends EntityContentTestCase {
 			new Diff( [
 				'redirect' => new DiffOpAdd( $redirTarget ),
 			], true ),
-			$this->getEntityType()
+			self::getEntityType()
 		);
 
 		$redirToSpamDiff = new EntityContentDiff(
@@ -365,13 +365,13 @@ class ItemContentTest extends EntityContentTestCase {
 			new Diff( [
 				'redirect' => new DiffOpRemove( $redirTarget ),
 			], true ),
-			$this->getEntityType()
+			self::getEntityType()
 		);
 
 		$cases['same redir'] = [ $redir, $redir, new EntityContentDiff(
 			new EntityDiff(),
 			new Diff(),
-			$this->getEntityType()
+			self::getEntityType()
 		) ];
 		$cases['empty to redir'] = [ $empty, $redir, $emptyToRedirDiff ];
 		$cases['entity to redir'] = [ $spam, $redir, $spamToRedirDiff ];
@@ -468,7 +468,7 @@ class ItemContentTest extends EntityContentTestCase {
 		return $cases;
 	}
 
-	public function provideContentObjectsWithoutId() {
+	public static function provideContentObjectsWithoutId() {
 		return [
 			'no holder' => [ new ItemContent() ],
 			'no ID' => [ new ItemContent( new EntityInstanceHolder( new Item() ) ) ],
