@@ -45,7 +45,8 @@ describe( 'Spam blacklist', () => {
 			403,
 			'permission-denied',
 			{
-				denial_reason: 'spam-blacklist', denial_context: { blocked_text: 'spam.com/' }
+				denial_reason: 'spamblacklist',
+				denial_context: { spamblacklist: { matches: [ 'spam.com/' ] } }
 			}
 		);
 	} );

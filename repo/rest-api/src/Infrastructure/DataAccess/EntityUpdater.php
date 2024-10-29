@@ -6,6 +6,7 @@ use LogicException;
 use MediaWiki\Api\IApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
@@ -18,14 +19,12 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikimedia\Message\MessageSpecifier;
 
 /**
  * @license GPL-2.0-or-later
@@ -64,10 +63,9 @@ class EntityUpdater {
 	/**
 	 * @throws EntityUpdateFailed
 	 * @throws ResourceTooLargeException
-	 * @throws AbuseFilterException
+	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
-	 * @throws SpamBlacklistException
 	 */
 	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
@@ -76,10 +74,9 @@ class EntityUpdater {
 	/**
 	 * @throws EntityUpdateFailed
 	 * @throws ResourceTooLargeException
-	 * @throws AbuseFilterException
+	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
-	 * @throws SpamBlacklistException
 	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
@@ -88,10 +85,9 @@ class EntityUpdater {
 	/**
 	 * @throws EntityUpdateFailed
 	 * @throws ResourceTooLargeException
-	 * @throws AbuseFilterException
+	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
-	 * @throws SpamBlacklistException
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -136,10 +132,7 @@ class EntityUpdater {
 				throw new RateLimitReached();
 			}
 
-			foreach ( $status->getMessages() as $message ) {
-				$this->throwIfAbuseFilterError( $message );
-				$this->throwIfSpamBlacklistError( $message );
-			}
+			$this->throwIfPreventedEdit( $status );
 
 			throw new EntityUpdateFailed( (string)$status );
 		} elseif ( !$status->isGood() ) {
@@ -150,24 +143,13 @@ class EntityUpdater {
 	}
 
 	/**
-	 * @throws AbuseFilterException
+	 * @throws EditPrevented
 	 */
-	private function throwIfAbuseFilterError( MessageSpecifier $message ): void {
-		if ( $message instanceof IApiMessage &&
-			in_array( $message->getApiCode(), [ 'abusefilter-warning', 'abusefilter-disallowed' ] ) ) {
-			throw new AbuseFilterException(
-				$message->getApiData()['abusefilter']['id'],
-				$message->getApiData()['abusefilter']['description']
-			);
-		}
-	}
-
-	/**
-	 * @throws SpamBlacklistException
-	 */
-	private function throwIfSpamBlacklistError( MessageSpecifier $message ): void {
-		if ( $message instanceof IApiMessage && $message->getApiCode() === 'spamblacklist' ) {
-			throw new SpamBlacklistException( $message->getApiData()['spamblacklist']['matches'][0] );
+	private function throwIfPreventedEdit( Status $status ): void {
+		foreach ( $status->getMessages() as $message ) {
+			if ( $message instanceof IApiMessage ) {
+				throw new EditPrevented( $message->getApiCode(), $message->getApiData() );
+			}
 		}
 	}
 
