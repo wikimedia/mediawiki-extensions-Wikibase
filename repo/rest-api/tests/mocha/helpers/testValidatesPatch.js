@@ -23,7 +23,7 @@ module.exports = function testValidatesPatch( newRequestBuilder ) {
 
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'missing-field' );
-			assert.deepEqual( response.body.context, { path: '/', field: 'patch' } );
+			assert.deepEqual( response.body.context, { path: '', field: 'patch' } );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 

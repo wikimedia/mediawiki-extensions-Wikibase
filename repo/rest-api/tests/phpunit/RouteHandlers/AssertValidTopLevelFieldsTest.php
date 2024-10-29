@@ -94,7 +94,7 @@ class AssertValidTopLevelFieldsTest extends TestCase {
 				[
 					'code' => 'missing-field',
 					'context' => [
-						'path' => '/',
+						'path' => '',
 						'field' => 'patch',
 					],
 				]
