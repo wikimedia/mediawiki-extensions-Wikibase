@@ -71,7 +71,6 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 	 */
 	public function doSkinAfterPortlet( Skin $skin ): ?string {
 		$out = $skin->getOutput();
-		$title = $skin->getTitle();
 
 		$languageUrls = $skin->getLanguages();
 		$prefixedId = $out->getProperty( 'wikibase_item' );
@@ -79,7 +78,7 @@ class SkinAfterPortletHandler implements SkinAfterPortletHook {
 		$noExternalLangLinks = $out->getProperty( 'noexternallanglinks' );
 		$hasLangLinks = (bool)$languageUrls;
 
-		$itemLink = $this->repoItemLinkGenerator->getLink( $title, $action,
+		$itemLink = $this->repoItemLinkGenerator->getLink( $skin->getContext(), $action,
 			$hasLangLinks, $noExternalLangLinks, $prefixedId
 		);
 

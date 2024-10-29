@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client;
 
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -61,7 +62,7 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @param Title $title
+	 * @param IContextSource $context
 	 * @param string $action
 	 * @param bool $hasLangLinks
 	 * @param string[]|null $noExternalLangLinks
@@ -69,8 +70,8 @@ class RepoItemLinkGenerator {
 	 *
 	 * @return string|null HTML or null for no link
 	 */
-	public function getLink( Title $title, $action, $hasLangLinks, ?array $noExternalLangLinks, $prefixedId ) {
-		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) ) {
+	public function getLink( IContextSource $context, $action, $hasLangLinks, ?array $noExternalLangLinks, $prefixedId ) {
+		if ( $this->canHaveLink( $context->getTitle(), $action, $noExternalLangLinks ) ) {
 			$entityId = null;
 
 			if ( is_string( $prefixedId ) ) {
@@ -78,10 +79,10 @@ class RepoItemLinkGenerator {
 			}
 
 			if ( $entityId && $hasLangLinks ) {
-				return $this->getEditLinksLink( $entityId );
+				return $this->getEditLinksLink( $context, $entityId );
 			}
 
-			return $this->getAddLinksLink( $title, $entityId );
+			return $this->getAddLinksLink( $context, $entityId );
 		}
 
 		return null;
@@ -119,18 +120,19 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
+	 * @param IContextSource $context
 	 * @param EntityId $entityId
 	 *
 	 * @return string HTML
 	 */
-	private function getEditLinksLink( EntityId $entityId ) {
+	private function getEditLinksLink( IContextSource $context, EntityId $entityId ) {
 		$link = [
 			'href' => $this->getEntityUrl( $entityId ),
-			'title' => wfMessage( 'wikibase-editlinkstitle' )->text(),
+			'title' => $context->msg( 'wikibase-editlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
 		];
 
-		$text = wfMessage( 'wikibase-editlinks' )->text();
+		$text = $context->msg( 'wikibase-editlinks' )->text();
 		return $this->formatLink( $link, 'edit', $text );
 	}
 
@@ -138,25 +140,25 @@ class RepoItemLinkGenerator {
 	 * Links to the item or Special:NewItem on the repo. The link might get
 	 * overwritten by the JavaScript add links widget.
 	 *
-	 * @param Title $title
+	 * @param IContextSource $context
 	 * @param EntityId|null $entityId Entity which $title is linked to
 	 *
 	 * @return string HTML
 	 */
-	private function getAddLinksLink( Title $title, EntityId $entityId = null ) {
+	private function getAddLinksLink( IContextSource $context, EntityId $entityId = null ) {
 		if ( $entityId ) {
 			$href = $this->getEntityUrl( $entityId );
 		} else {
-			$href = $this->getNewItemUrl( $title );
+			$href = $this->getNewItemUrl( $context->getTitle() );
 		}
 
 		$link = [
 			'href' => $href,
-			'title' => wfMessage( 'wikibase-addlinkstitle' )->text(),
+			'title' => $context->msg( 'wikibase-addlinkstitle' )->text(),
 			'class' => 'wbc-editpage',
 		];
 
-		$text = wfMessage( 'wikibase-linkitem-addlinks' )->text();
+		$text = $context->msg( 'wikibase-linkitem-addlinks' )->text();
 		return $this->formatLink( $link, 'add', $text );
 	}
 
