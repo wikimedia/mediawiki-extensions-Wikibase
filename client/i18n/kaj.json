@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jjnzamah",
 			"Kambai Akau",
 			"Kuzayet"
 		]
 	},
 	"wikibase-dataitem": "Kyang",
 	"wikibase-editlinks": "Shang na̱wwai ka̱mon",
+	"wikibase-addlinkstitle": "Nbrang natarwak pfwok nwap",
 	"wikibase-linkitem-addlinks": "Mbrang na̱wwai ka̱mon",
 	"wikibase-linkitem-title": "Mon bu̱ kazzu̱ ka",
 	"wikibase-linkitem-linkpage": "Mon ka̱zzu kani",

@@ -123,7 +123,7 @@
 	"wikibase-sitelinks-link-columnheading": "Gekoppelde pagina",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koppeling|Koppelingen}} met {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Meld mij wanneer iemand een pagina die {{GENDER:|ik heb aangemaakt}}, koppelt aan een {{WBREPONAME}}-item.",
-	"exceeded-entity-limit-category": "Er zijn pagina’s met te veel {{WBREPONAME}}-entiteiten geopend",
+	"exceeded-entity-limit-category": "Pagina’s met te veel opgevraagde {{WBREPONAME}}-entiteiten",
 	"exceeded-entity-limit-category-desc": "In deze categorie worden pagina’s weergegeven met te veel {{WBREPONAME}}-entiteiten die zijn geopend.",
 	"notification-header-page-connection": "De pagina <strong>$3</strong> is {{GENDER:$2|verbonden}} met {{PLURAL:$4|-1=een {{WBREPONAME}}-item|het {{WBREPONAME}}-item $4}}, waar de voor het onderwerp relevante gegevens kunnen worden verzameld.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> en {{PLURAL:$4|nog een pagina|$4 andere pagina’s|100=meer dan 99 andere pagina’s}} zijn {{GENDER:$2|verbonden}} aan items op {{WBREPONAME}}, waar gegevens die relevant zijn voor de onderwerpen kunnen worden verzameld.",
