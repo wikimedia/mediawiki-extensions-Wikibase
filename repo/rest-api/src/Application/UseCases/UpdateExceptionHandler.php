@@ -2,10 +2,9 @@
 
 namespace Wikibase\Repo\RestApi\Application\UseCases;
 
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 
 /**
@@ -28,20 +27,12 @@ trait UpdateExceptionHandler {
 				"Edit resulted in a resource that exceeds the size limit of $maxSizeInKb kB",
 				[ UseCaseError::CONTEXT_LIMIT => $maxSizeInKb ]
 			);
-		} catch ( AbuseFilterException $e ) {
-			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_ABUSE_FILTER, [
-				'filter_id' => $e->getFilterId(),
-				'filter_description' => $e->getFilterDescription(),
-			] );
+		} catch ( EditPrevented $e ) {
+			throw UseCaseError::newPermissionDenied( $e->getReason(), $e->getContext() );
 		} catch ( RateLimitReached $e ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_RATE_LIMIT );
 		} catch ( TempAccountCreationLimitReached $e ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT );
-		} catch ( SpamBlacklistException $e ) {
-			throw UseCaseError::newPermissionDenied(
-				UseCaseError::PERMISSION_DENIED_REASON_SPAM_BLACKLIST,
-				[ 'blocked_text' => $e->getBlockedText() ]
-			);
 		}
 	}
 

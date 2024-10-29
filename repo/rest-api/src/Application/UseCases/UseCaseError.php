@@ -30,9 +30,7 @@ class UseCaseError extends UseCaseException {
 	public const PERMISSION_DENIED = 'permission-denied';
 	public const PERMISSION_DENIED_REASON_UNAUTHORIZED_BOT_EDIT = 'unauthorized-bot-edit';
 	public const PERMISSION_DENIED_REASON_PAGE_PROTECTED = 'resource-protected';
-	public const PERMISSION_DENIED_REASON_SPAM_BLACKLIST = 'spam-blacklist';
 	public const PERMISSION_DENIED_REASON_USER_BLOCKED = 'blocked-user';
-	public const PERMISSION_DENIED_REASON_ABUSE_FILTER = 'abuse-filter';
 	public const PERMISSION_DENIED_UNKNOWN_REASON = 'permission-denied-unknown-reason';
 	public const POLICY_VIOLATION_ITEM_LABEL_DESCRIPTION_DUPLICATE = 'item-label-description-duplicate';
 	public const POLICY_VIOLATION_PROPERTY_LABEL_DUPLICATE = 'property-label-duplicate';
