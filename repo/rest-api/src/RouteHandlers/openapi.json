@@ -846,6 +846,12 @@
                 "schema": {
                   "type": "string"
                 }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1735,6 +1741,12 @@
             "headers": {
               "Content-Language": {
                 "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
                 "schema": {
                   "type": "string"
                 }
@@ -3373,6 +3385,12 @@
             "headers": {
               "Content-Language": {
                 "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
                 "schema": {
                   "type": "string"
                 }
@@ -5514,6 +5532,12 @@
             "headers": {
               "Content-Language": {
                 "description": "Language code of the language in which response is provided",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Authenticated-User": {
+                "description": "Optional username of the user making the request",
                 "schema": {
                   "type": "string"
                 }
