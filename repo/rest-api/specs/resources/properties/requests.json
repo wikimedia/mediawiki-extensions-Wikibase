@@ -24,7 +24,7 @@
 							"ru": "это частный случай понятия"
 						},
 						"descriptions": {
-							"en": "this item is a concrete object (instance) of this class, category or object group",
+							"en": "the subject is a concrete object (instance) of this class, category, or object group",
 							"ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
 						},
 						"aliases": {

@@ -40,7 +40,7 @@
 				"application/json": {
 					"schema": { "$ref": "./requests.json#/SetDescriptionInLanguage" },
 					"example": {
-						"description": "this item is a concrete object (instance) of this class, category or object group",
+						"description": "the subject is a concrete object (instance) of this class, category, or object group",
 						"tags": [],
 						"bot": false,
 						"comment": "set English description"
