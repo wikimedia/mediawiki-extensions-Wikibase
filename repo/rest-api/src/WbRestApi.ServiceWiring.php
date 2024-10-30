@@ -18,7 +18,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ItemSerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
@@ -497,12 +496,6 @@ return [
 	'WbRestApi.CreateProperty' => function( MediaWikiServices $services ): CreateProperty {
 		return new CreateProperty(
 			new CreatePropertyValidator(
-				new PropertyDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
-					WbRestApi::getStatementDeserializer( $services )
-				),
 				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services ),
 				WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 				new LabelsSyntaxValidator(
@@ -527,6 +520,7 @@ return [
 					WbRestApi::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
+				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) )
 			),
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )

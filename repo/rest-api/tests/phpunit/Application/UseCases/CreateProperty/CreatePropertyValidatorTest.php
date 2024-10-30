@@ -12,7 +12,8 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
@@ -25,10 +26,13 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -43,20 +47,18 @@ use Wikibase\Repo\WikibaseRepo;
 class CreatePropertyValidatorTest extends TestCase {
 
 	public const MAX_LENGTH = 50;
+	private const EXISTING_STRING_PROPERTY_IDS = [ 'P3685', 'P3177', 'P6920', 'P4877' ];
 
-	private PropertyDeserializer $propertyDeserializer;
 	private EditMetadataRequestValidatingDeserializer $editMetadataValidator;
 	private array $dataTypesArray;
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
 	private PropertyLabelsContentsValidator $labelsContentsValidator;
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
-	private AliasesValidator $aliasesValidator;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
 		$this->editMetadataValidator = $this->createStub( EditMetadataRequestValidatingDeserializer::class );
 		$this->dataTypesArray = [ 'wikibase-item', 'wikibase-property', 'string' ];
 		$this->labelsSyntaxValidator = new LabelsSyntaxValidator(
@@ -79,14 +81,9 @@ class CreatePropertyValidatorTest extends TestCase {
 		$propertySerialization = [ 'data_type' => 'string' ];
 		$request = new CreatePropertyRequest( $propertySerialization, [], false, null, null );
 
-		$expectedProperty = $this->createStub( Property::class );
-		$this->propertyDeserializer = $this->createMock( PropertyDeserializer::class );
-		$this->propertyDeserializer->expects( $this->once() )
-			->method( 'deserialize' )
-			->with( $propertySerialization )
-			->willReturn( $expectedProperty );
+		$expectedProperty = new Property( null, null, 'string' );
 
-		$this->assertSame( $expectedProperty, $this->newValidator()->validateAndDeserialize( $request )->getProperty() );
+		$this->assertEquals( $expectedProperty, $this->newValidator()->validateAndDeserialize( $request )->getProperty() );
 	}
 
 	/**
@@ -204,7 +201,6 @@ class CreatePropertyValidatorTest extends TestCase {
 			),
 			UseCaseError::newInvalidValue( '/property/labels/en' ),
 		];
-
 		yield 'label too long' => [
 			$mockContentsValidator,
 			new ValidationError(
@@ -217,7 +213,6 @@ class CreatePropertyValidatorTest extends TestCase {
 			),
 			UseCaseError::newValueTooLong( '/property/labels/en', self::MAX_LENGTH ),
 		];
-
 		yield 'invalid label type' => [
 			$mockSyntaxValidator,
 			new ValidationError(
@@ -229,7 +224,6 @@ class CreatePropertyValidatorTest extends TestCase {
 			),
 			UseCaseError::newInvalidValue( '/property/labels/en' ),
 		];
-
 		yield 'invalid label' => [
 			$mockContentsValidator,
 			new ValidationError(
@@ -241,7 +235,6 @@ class CreatePropertyValidatorTest extends TestCase {
 			),
 			UseCaseError::newInvalidValue( '/property/labels/en' ),
 		];
-
 		yield 'invalid label language code' => [
 			$mockSyntaxValidator,
 			new ValidationError(
@@ -253,7 +246,6 @@ class CreatePropertyValidatorTest extends TestCase {
 			),
 			UseCaseError::newInvalidKey( '/property/labels', 'e2' ),
 		];
-
 		yield 'same value for label and description' => [
 			$mockContentsValidator,
 			new ValidationError(
@@ -265,7 +257,6 @@ class CreatePropertyValidatorTest extends TestCase {
 				[ UseCaseError::CONTEXT_LANGUAGE => 'en' ]
 			),
 		];
-
 		yield 'label duplication' => [
 			$mockContentsValidator,
 			new ValidationError(
@@ -458,11 +449,91 @@ class CreatePropertyValidatorTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider statementsValidationErrorProvider
+	 */
+	public function testStatementsValidation( array $statements, Exception $expectedError ): void {
+		$request = new CreatePropertyRequest(
+			[ 'data_type' => 'string', 'statements' => $statements ],
+			[ 'tag1', 'tag2' ],
+			false,
+			'edit comment',
+			'SomeUser'
+		);
+
+		try {
+			$this->newValidator()->validateAndDeserialize( $request );
+			$this->fail( 'this should not be reached' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public function statementsValidationErrorProvider(): Generator {
+		$invalidStatements = [ 'not valid statements' ];
+		yield 'statements not associative' => [
+			$invalidStatements,
+			UseCaseError::newInvalidValue( '/property/statements' ),
+		];
+
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[0];
+		$invalidStatementGroup = [ 'property' => [ 'id' => $propertyId ] ];
+		yield 'statement group not sequential' => [
+			[ $propertyId => $invalidStatementGroup ],
+			UseCaseError::newInvalidValue( "/property/statements/$propertyId" ),
+		];
+
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[1];
+		yield 'invalid statement type: statement not an array' => [
+			[ $propertyId => [ 'not a valid statement' ] ],
+			UseCaseError::newInvalidValue( "/property/statements/$propertyId/0" ),
+		];
+
+		yield 'Invalid statement type: statement not an associative array' =>
+		[
+			[ $propertyId => [ [ 'not a valid statement' ] ] ],
+			UseCaseError::newInvalidValue( "/property/statements/$propertyId/0" ),
+		];
+
+		$propertyId = self::EXISTING_STRING_PROPERTY_IDS[2];
+		yield 'Invalid statement field' =>
+		[
+			[ $propertyId => [ [ 'rank' => 'bad rank' ] ] ],
+			UseCaseError::newInvalidValue( "/property/statements/$propertyId/0/rank" ),
+		];
+
+		yield 'missing statement field' => [
+			[ $propertyId => [ [ 'property' => [ 'id' => $propertyId ] ] ] ],
+			UseCaseError::newMissingField( "/property/statements/$propertyId/0", 'value' ),
+		];
+
+		$nonExistingPropertyId = 'P9999999';
+		yield 'property does not exist' => [
+			[ $nonExistingPropertyId => [ [ 'property' => [ 'id' => $nonExistingPropertyId ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			UseCaseError::newReferencedResourceNotFound( "/property/statements/$nonExistingPropertyId/0/property/id" ),
+		];
+
+		yield 'Property id mismatch' =>
+		[
+			[ self::EXISTING_STRING_PROPERTY_IDS[0] => [ [ 'property' => [ 'id' => 'P122' ], 'value' => [ 'type' => 'somevalue' ] ] ] ],
+			new UseCaseError(
+				UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+				"Statement's Property ID does not match the Statement group key",
+				[
+					UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[0] . '/0/property/id',
+					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => self::EXISTING_STRING_PROPERTY_IDS[0],
+					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P122',
+				]
+			),
+		];
+	}
+
 	private function newValidator(): CreatePropertyValidator {
+		$deserializerFactory = new TestPropertyValuePairDeserializerFactory();
+		$deserializerFactory->setDataTypeForProperties( array_fill_keys( self::EXISTING_STRING_PROPERTY_IDS, 'string' ) );
 		$allowedLanguageCodes = [ 'ar', 'de', 'en', 'fr' ];
 
 		return new CreatePropertyValidator(
-			$this->propertyDeserializer,
 			$this->editMetadataValidator,
 			$this->dataTypesArray,
 			$this->labelsSyntaxValidator,
@@ -482,6 +553,14 @@ class CreatePropertyValidatorTest extends TestCase {
 				),
 				new ValueValidatorLanguageCodeValidator( new MembershipValidator( $allowedLanguageCodes ) ),
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() )
+			),
+			new StatementsValidator(
+				new StatementValidator(
+					new StatementDeserializer(
+						$deserializerFactory->createPropertyValuePairDeserializer(),
+						$this->createStub( ReferenceDeserializer::class )
+					)
+				)
 			)
 		);
 	}

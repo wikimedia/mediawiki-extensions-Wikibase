@@ -11,7 +11,6 @@ use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
@@ -29,6 +28,8 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
@@ -118,12 +119,6 @@ class CreatePropertyTest extends TestCase {
 
 		return new CreateProperty(
 			new CreatePropertyValidator(
-				new PropertyDeserializer(
-					new LabelsDeserializer(),
-					new DescriptionsDeserializer(),
-					new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
-					new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
-				),
 				( new TestValidatingRequestDeserializerServiceContainer() )
 					->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER ),
 				$this->dataTypesArray,
@@ -139,9 +134,21 @@ class CreatePropertyTest extends TestCase {
 					new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'en-gb' ] ) ),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
+				new StatementsValidator( $this->newStatementValidator() )
 			),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized
+		);
+	}
+
+	private function newStatementValidator(): StatementValidator {
+		$propValPairDeserializer = $this->createStub( PropertyValuePairDeserializer::class );
+		$propValPairDeserializer->method( 'deserialize' )->willReturnCallback(
+			fn( array $p ) => new PropertySomeValueSnak( new NumericPropertyId( $p[ 'property' ][ 'id' ] ) )
+		);
+
+		return new StatementValidator(
+			new StatementDeserializer( $propValPairDeserializer, $this->createStub( ReferenceDeserializer::class ) )
 		);
 	}
 
