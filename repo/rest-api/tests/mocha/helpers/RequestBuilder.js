@@ -6,7 +6,7 @@ const SwaggerParser = require( '@apidevtools/swagger-parser' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
-const basePath = 'rest.php/wikibase/v0';
+const basePath = 'rest.php/wikibase/v1';
 const builtSpec = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
 
 // "static" because it can be shared across requests, and we don't want to dereference it every time

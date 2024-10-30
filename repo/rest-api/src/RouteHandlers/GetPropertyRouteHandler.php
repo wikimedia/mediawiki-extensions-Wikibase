@@ -30,7 +30,7 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetPropertyRouteHandler extends SimpleHandler {
 
-	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}';
+	public const ROUTE = '/wikibase/v1/entities/properties/{property_id}';
 	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const FIELDS_QUERY_PARAM = '_fields';
 

@@ -42,7 +42,7 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith(
-					`rest.php/wikibase/v0/entities/properties/${propertyId}/descriptions/${fallbackLanguageWithDescription}`
+					`rest.php/wikibase/v1/entities/properties/${propertyId}/descriptions/${fallbackLanguageWithDescription}`
 				)
 		);
 	} );
