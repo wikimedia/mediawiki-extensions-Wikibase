@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use ChangesListBooleanFilter;
 use ExtensionRegistry;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Specials\SpecialRecentChanges;
@@ -60,11 +61,13 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	protected function tearDown(): void {
 		parent::tearDown();
 
+		RequestContext::resetMain();
 		$this->extensionRegistry->loaded = $this->oldExtensionRegistryLoaded;
 	}
 
 	public function testAddFilter() {
 		$user = $this->createMock( User::class );
+		$user->method( 'getName' )->willReturn( 'page hook test user' );
 
 		/** @var SpecialRecentChanges $specialPage */
 		$specialPage = MediaWikiServices::getInstance()->getSpecialPageFactory()
