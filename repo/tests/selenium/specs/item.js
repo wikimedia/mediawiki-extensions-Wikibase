@@ -88,8 +88,7 @@ describe( 'item', () => {
 		await expect( ItemPage.editButton ).not.toExist();
 	} );
 
-	// TODO investigate and re-enable T378581
-	it.skip( 'has its label not rendered when linked on a Wikipage', async () => {
+	it( 'has its label not rendered when linked on a Wikipage', async () => {
 		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T111346-' ) );
 		await EntityPage.open( itemId );
 
@@ -114,6 +113,6 @@ describe( 'item', () => {
 		await browser.keys( 'typing some letters so the action=stashedit API request can finish' );
 
 		await $( '#wpSave' ).click();
-		await expect( $( '#mw-content-text' ) ).toHaveText( itemTitle );
+		await expect( $( '#mw-content-text .mw-content-ltr p' ) ).toHaveText( itemTitle );
 	} );
 } );
