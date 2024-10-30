@@ -20,6 +20,14 @@ use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
+use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
@@ -113,7 +121,14 @@ class CreatePropertyTest extends TestCase {
 				),
 				( new TestValidatingRequestDeserializerServiceContainer() )
 					->get( ValidatingRequestDeserializer::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER ),
-				$this->dataTypesArray
+				$this->dataTypesArray,
+				new LabelsSyntaxValidator( new LabelsDeserializer(), $this->createStub( LabelLanguageCodeValidator::class ) ),
+				new PropertyLabelsContentsValidator( $this->createStub( PropertyLabelValidator::class ) ),
+				new DescriptionsSyntaxValidator(
+					new DescriptionsDeserializer(),
+					$this->createStub( DescriptionLanguageCodeValidator::class )
+				),
+				new PropertyDescriptionsContentsValidator( $this->createStub( PropertyDescriptionValidator::class ) ),
 			),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized
