@@ -147,6 +147,7 @@
 	"wikibase-client-data-bridge-saving-error-heading": "Није могуће сачувати промене",
 	"wikibase-client-data-bridge-saving-error-message": "Дошло је до грешке при чувању измена. Молимо покушајте поново.",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Дошло је до сукоба измена",
+	"wikibase-client-data-bridge-edit-conflict-error-message": "Други корисник је управо уредио ову вредност и објавио је пре вас. Ваше измене нису примењене. Освежите страницу да би добили нове вредности.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Дошло је до грешке",
 	"wikibase-client-data-bridge-error-reload-bridge": "Поново учитај",
 	"wikibase-client-data-bridge-error-reload-page": "Поново учитај страницу",

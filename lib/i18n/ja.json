@@ -75,7 +75,6 @@
 	"wikibase-time-precision-BCE-millennium": "紀元前$1千年紀",
 	"wikibase-time-precision-BCE-century": "紀元前$1世紀",
 	"wikibase-time-precision-BCE-10annum": "紀元前$1年代",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "値の型「$1」がプロパティの型「$2」と一致しません。",
 	"wikibase-snakformatter-property-not-found": "プロパティ「$1」が見つからないため、使用すべきデータ型が決定できません。",
 	"wikibase-snakformatter-formatting-exception": "書式の誤り：$1",

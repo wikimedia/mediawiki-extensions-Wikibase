@@ -3,7 +3,8 @@
 		"authors": [
 			"Fitoschido",
 			"Macofe",
-			"Xuacu"
+			"Xuacu",
+			"YoaR"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -53,7 +54,6 @@
 	"datatypes-type-geo-shape": "Forma xeográfica",
 	"datatypes-type-tabular-data": "Datos tabulares",
 	"datatypes-type-external-id": "Identificador esternu",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorianu",
 	"wikibase-time-calendar-julian": "Xulianu",
 	"wikibase-time-precision-Gannum": "$1 miles de millones d'años dC",

@@ -58,7 +58,6 @@
 	"datatypes-type-geo-shape": "צורה גאוגרפית",
 	"datatypes-type-tabular-data": "נתונים טבלאיים",
 	"datatypes-type-external-id": "מזהה חיצוני",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "גרגוריאני",
 	"wikibase-time-calendar-julian": "יוליאני",
 	"wikibase-time-precision-CE": "$1 לספירה",

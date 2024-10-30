@@ -55,7 +55,6 @@
 	"datatypes-type-geo-shape": "Hình dạng địa lý",
 	"datatypes-type-tabular-data": "Dữ liệu bảng",
 	"datatypes-type-external-id": "Định danh bên ngoài",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Tây lịch",
 	"wikibase-time-calendar-julian": "Lịch Juliêng",
 	"wikibase-time-precision-Gannum": "$1 tỷ năm SCN",

@@ -67,7 +67,6 @@
 	"datatypes-type-geo-shape": "Maantieteellinen muoto",
 	"datatypes-type-tabular-data": "Taulukkodata",
 	"datatypes-type-external-id": "Ulkoinen tunniste",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriaaninen",
 	"wikibase-time-calendar-julian": "Juliaaninen",
 	"wikibase-time-precision-CE": "$1 jaa.",

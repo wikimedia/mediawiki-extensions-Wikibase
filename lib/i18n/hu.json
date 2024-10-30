@@ -58,7 +58,6 @@
 	"datatypes-type-geo-shape": "Földrajzi forma",
 	"datatypes-type-tabular-data": "Táblázatos adat",
 	"datatypes-type-external-id": "Külső azonosító",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gergely",
 	"wikibase-time-calendar-julian": "Juliánus",
 	"wikibase-time-precision-CE": "i.&nbsp;sz.&nbsp;$1",

@@ -8,12 +8,11 @@
 			"Pierpao",
 			"Reedy",
 			"Robin Owain",
-			"Shirayuki"
+			"Shirayuki",
+			"Samthecrazyman"
 		]
 	},
-	"wikibase-linkitem-close": "Close dialogue and reload page",
-	"wikibase-rc-wikibase-edit-letter": "WD",
 	"wikibase-error-deserialize-error": "Failed to deserialise data.",
-	"wikibase-error-serialize-error": "Failed to serialise data",
+	"wikibase-error-serialize-error": "Failed to serialise data.",
 	"wikibase-client-data-bridge-license-heading": "Usage and licence"
 }

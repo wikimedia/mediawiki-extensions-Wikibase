@@ -52,7 +52,6 @@
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-wikibase-property": "Eigenskap",
 	"datatypes-type-commonsMedia": "Mediefil frå Commons",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-millennium": "$1. tusenåret",
 	"wikibase-time-precision-century": "$1. hundreåret",
 	"wikibase-time-precision-10annum": "$1-åra",

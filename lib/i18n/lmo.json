@@ -52,7 +52,6 @@
 	"datatypes-type-geo-shape": "Forma geografega",
 	"datatypes-type-tabular-data": "Dati tabulad",
 	"datatypes-type-external-id": "Reconossidor defoeura",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregorian",
 	"wikibase-time-calendar-julian": "Sgiulian",
 	"wikibase-time-precision-CE": "$1 CE",

@@ -34,7 +34,6 @@
 	"datatypes-type-commonsMedia": "kasasimel katahkalan nu kalisiw myiti tangan",
 	"datatypes-type-geo-shape": "hekal nu lala’-liwliw",
 	"datatypes-type-external-id": "ihekalay mapulitaay a kodo",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 cacay bataan ku yi a mihca CE",
 	"wikibase-time-precision-Mannum": "$1 cacay lasubu a mang ku mihcan CE",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 a mihca}} CE",

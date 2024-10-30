@@ -39,7 +39,6 @@
 	"datatypes-type-globe-coordinate": "Geografic coordinates",
 	"datatypes-type-time": "Pynt in time",
 	"datatypes-type-external-id": "Freemit identifier",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "in $1 billion year",
 	"wikibase-time-precision-Mannum": "in $1 million year",
 	"wikibase-time-precision-annum": "in $1 year",
