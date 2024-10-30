@@ -522,6 +522,11 @@ return [
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				),
+				new AliasesValidator(
+					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+					WbRestApi::getAliasLanguageCodeValidator( $services ),
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
+				),
 			),
 			WbRestApi::getPropertyUpdater( $services ),
 			WbRestApi::getAssertUserIsAuthorized( $services )
