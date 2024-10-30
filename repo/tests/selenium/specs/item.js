@@ -101,7 +101,7 @@ describe( 'item', () => {
 			// eslint-disable-next-line no-undef
 			() => window.mw.config.get( [ 'wgPageName', 'wgFormattedNamespaces', 'wgNamespaceNumber' ] )
 		);
-		const talkPageTitle = wgFormattedNamespaces[ wgNamespaceNumber + 1 ] + ':' + itemTitle;
+		const talkPageTitle = wgFormattedNamespaces[ wgNamespaceNumber + 1 ] + ':' + itemId;
 
 		await ( new Page() ).openTitle( talkPageTitle, { action: 'submit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
 
