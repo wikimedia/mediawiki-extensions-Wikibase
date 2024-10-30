@@ -114,6 +114,6 @@ describe( 'item', () => {
 		await browser.keys( 'typing some letters so the action=stashedit API request can finish' );
 
 		await $( '#wpSave' ).click();
-		await expect( $( '#mw-content-text' ) ).toHaveText( itemTitle );
+		await expect( $( '#mw-content-text .mw-content-ltr p' ) ).toHaveText( itemTitle );
 	} );
 } );
