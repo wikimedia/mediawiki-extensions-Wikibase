@@ -2,8 +2,7 @@
 	"post": {
 		"operationId": "addProperty",
 		"tags": [ "properties" ],
-		"summary": "[WIP] Create a Wikibase Property",
-		"description": "This endpoint is currently in development and is not recommended for production use",
+		"summary": "Create a Wikibase Property",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
