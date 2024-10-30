@@ -20,7 +20,7 @@ module.exports = function ( _ ) {
 
 			done( null, JSON.stringify( {
 				...spec,
-				servers: [ { url: baseUrl + '/wikibase/v0'} ]
+				servers: [ { url: baseUrl + '/wikibase/v1' } ]
 			} ) )
 		} )
 		.catch( ( { message } ) => done( message ) );

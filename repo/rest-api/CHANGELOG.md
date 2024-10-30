@@ -1,5 +1,9 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
+## Version 1.0
+
+* Wikibase REST API v1 released
+
 ## Version 0.5
 
 * Added label/description endpoints with language fallback ([T371605](https://phabricator.wikimedia.org/T371605))

@@ -1,6 +1,7 @@
 # 7) Wikibase REST API work-in-progress endpoints {#rest_adr_0007}
 
 Date: 2023-02-01
+Updated: 2024-11-01
 
 ## Status
 
@@ -34,6 +35,10 @@ How to manage new features or changes to existing endpoints are outside the scop
 - All Wikibase instances that have enabled the REST API via the `Wikibase/repo/rest-api/routes.json` file will have the same routes available. Wikibase admins will have limited control over what routes are enabled and when. This is good for consistency across the Wikibase ecosystem.
 - Wikibase admins that create their own route file risk broken routes if our factories change.
 - We will be able to add new routes to the OpenAPI definition before they are ready, while still indicating the status of each route.
+
+## November 2024 Changes
+
+* With the REST API v1 release, all production ready endpoints are now defined in the `extension-repo.json` file and enabled when the Wikibase repo extension is loaded. Therefore, once the v0 endpoints are deprecated, there will be no need for the `routes.json` file. In development endpoints will still be defined in the `route.dev.json` file. 
 
 [doc.wikimedia.org]: https://doc.wikimedia.org
 [`extension-repo.json`]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/758065e4967fcb9575a06302a80a84ccb762d373/extension-repo.json

@@ -51,7 +51,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v0/entities/properties/${propertyId}/labels/de`
+			`rest.php/wikibase/v1/entities/properties/${propertyId}/labels/de`
 		) );
 	} );
 
@@ -63,7 +63,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v0/entities/properties/${propertyId}/labels/mul`
+			`rest.php/wikibase/v1/entities/properties/${propertyId}/labels/mul`
 		) );
 	} );
 
