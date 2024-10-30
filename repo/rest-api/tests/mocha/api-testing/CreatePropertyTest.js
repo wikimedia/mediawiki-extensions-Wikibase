@@ -12,6 +12,15 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 
 	const maxLabelLength = 250;
 	const valueTooLong = 'x'.repeat( maxLabelLength + 1 );
+	let predicatePropertyId;
+
+	before( async () => {
+		const predicateProperty = await newCreatePropertyRequestBuilder( { data_type: 'string' } )
+			.assertValidRequest()
+			.makeRequest();
+		predicatePropertyId = predicateProperty.body.id;
+
+	} );
 
 	describe( '201 success response ', () => {
 		it( 'can create a minimal property', async () => {
@@ -94,6 +103,18 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				400,
 				'missing-field',
 				{ path: '/property', field: 'data_type' }
+			);
+		} );
+
+		it( 'responds with missing-field error when statement is missing a mandatory field ', async () => {
+			const statements = { [ predicatePropertyId ]: [ { property: { id: predicatePropertyId } } ] };
+			const response = await newCreatePropertyRequestBuilder( { data_type: 'string', statements } ).makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'missing-field',
+				{ path: `/property/statements/${predicatePropertyId}/0`, field: 'value' }
 			);
 		} );
 
@@ -228,6 +249,84 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath } );
 			} );
 		} );
+
+		Object.entries( {
+			'invalid statement group type': {
+				property: () => ( {
+					data_type: 'string',
+					statements: { [ predicatePropertyId ]: { 1: {
+						property: { id: predicatePropertyId },
+						value: { type: 'value', content: 'some-value' }
+					} } }
+				} ),
+				invalidFieldPath: () => `/property/statements/${predicatePropertyId}`
+			},
+			'invalid statement type': {
+				property: () => ( {
+					data_type: 'string',
+					statements: { [ predicatePropertyId ]: [ 'invalid-statement-type' ] }
+				} ),
+				invalidFieldPath: () => `/property/statements/${predicatePropertyId}/0`
+			},
+			'invalid statement field': {
+				property: () => ( {
+					data_type: 'string',
+					statements: { [ predicatePropertyId ]: [ {
+						property: { id: predicatePropertyId },
+						value: { type: 123, content: 'some value' }
+					} ] }
+				} ),
+				invalidFieldPath: () => '/property/statements/' + predicatePropertyId + '/0/value/type'
+			}
+		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
+			it( `invalid value: ${reason}`, async () => {
+				const response = await newCreatePropertyRequestBuilder( property() ).makeRequest();
+
+				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath() } );
+			} );
+		} );
+
+		it( 'responds with statement-group-property-id-mismatch when statement property id mismatch', async () => {
+			const propertyIdKey = 'P123';
+			const validStatement = {
+				property: { id: predicatePropertyId },
+				value: { type: 'value', content: 'some-value' }
+			};
+			const property = { data_type: 'string', statements: { [ propertyIdKey ]: [ validStatement ] } };
+
+			const response = await newCreatePropertyRequestBuilder( property ).assertValidRequest().makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'statement-group-property-id-mismatch',
+				{
+					path: `${propertyIdKey}/0/property/id`,
+					statement_group_property_id: propertyIdKey,
+					statement_property_id: predicatePropertyId
+				}
+			);
+			assert.equal( response.body.message, "Statement's Property ID does not match the Statement group key" );
+		} );
+
+		it( 'responds with referenced-resource-not-found error when statement property id does not exist', async () => {
+			const nonExistentProperty = 'P9999999';
+			const statement = entityHelper.newStatementWithRandomStringValue( nonExistentProperty );
+
+			const response = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				statements: { [ nonExistentProperty ]: [ statement ] }
+			} ).makeRequest();
+
+			assertValidError(
+				response,
+				400,
+				'referenced-resource-not-found',
+				{ path: `/property/statements/${nonExistentProperty}/0/property/id` }
+			);
+			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
+		} );
+
 	} );
 
 	describe( '422', () => {
