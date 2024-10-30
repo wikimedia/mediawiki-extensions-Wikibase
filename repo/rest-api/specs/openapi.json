@@ -2,7 +2,7 @@
 	"openapi": "3.1.0",
 	"info": {
 		"title": "Wikibase REST API",
-		"version": "1.0",
+		"version": "1.1",
 		"description": "OpenAPI definition of Wikibase REST API",
 		"contact": {
 			"name": "Wikimedia Deutschland - Wikibase Product Platform Team",
