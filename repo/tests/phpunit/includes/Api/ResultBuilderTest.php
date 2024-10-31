@@ -106,13 +106,13 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return array
 	 */
-	private function removeMetaData( array $array ) {
+	private static function removeMetaData( array $array ) {
 		foreach ( $array as $key => &$value ) {
 			if ( substr( (string)$key, 0, 1 ) === '_' ) {
 				unset( $array[$key] );
 			} else {
 				if ( is_array( $value ) ) {
-					$value = $this->removeMetaData( $value );
+					$value = self::removeMetaData( $value );
 				}
 			}
 		}
@@ -167,7 +167,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		return [ [ 3 ], [ -1 ] ];
 	}
 
-	public function provideTestAddEntityRevision() {
+	public static function provideTestAddEntityRevision() {
 		$expected = [
 			'entities' => [
 				'Q1230000' => [
@@ -346,7 +346,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
@@ -420,7 +420,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertArrayHasKey( 'FOO', $data['entities'] );
 	}
 
-	public function provideTestAddEntityRevisionFallback() {
+	public static function provideTestAddEntityRevisionFallback() {
 		$expected = [
 			'entities' => [
 				'Q123101' => [
@@ -481,7 +481,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
@@ -802,7 +802,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideAddAliasGroupList() {
+	public static function provideAddAliasGroupList() {
 		$expected = [
 			'entities' => [
 				'Q1' => [
@@ -838,7 +838,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
@@ -869,7 +869,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function provideAddSiteLinkList() {
+	public static function provideAddSiteLinkList() {
 		$expected = [
 			'entities' => [
 				'Q1' => [
@@ -894,7 +894,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
@@ -1119,7 +1119,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function statementSerializationProvider() {
+	public static function statementSerializationProvider() {
 		$statement = new Statement(
 			new PropertyValueSnak( new NumericPropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
 			new SnakList( [
@@ -1197,7 +1197,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 
 		return [
 			[ $statement, false, $expectedNoMetaData ],
@@ -1205,7 +1205,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function provideAddReference() {
+	public static function provideAddReference() {
 		$expected = [
 			'reference' => [
 				'hash' => '27ff8ea8cc011639f959481465c175fe7f07ecbd',
@@ -1234,7 +1234,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 
@@ -1655,7 +1655,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder->appendValue( $path, $key, $value, $tag );
 	}
 
-	public function provideTestEmptyListsMetaData() {
+	public static function provideTestEmptyListsMetaData() {
 		$expected = [
 			'entities' => [
 				'Q123000' => [
@@ -1703,7 +1703,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			'_type' => 'assoc',
 		];
 
-		$expectedNoMetaData = $this->removeMetaData( $expected );
+		$expectedNoMetaData = self::removeMetaData( $expected );
 		// The api always starts with this
 		$expectedNoMetaData['_type'] = 'assoc';
 

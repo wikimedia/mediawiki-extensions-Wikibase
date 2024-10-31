@@ -125,7 +125,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		}
 	}
 
-	public function provideExceptionData() {
+	public static function provideExceptionData() {
 		return [
 			// p => params, e => expected
 
@@ -134,9 +134,9 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'language' => 'xx', 'value' => 'Foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_language' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_language' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ],
 			],
@@ -151,9 +151,9 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'notoken' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'notoken' ),
+						self::equalTo( 'missingparam' )
 					),
 					'message' => 'The "token" parameter must be set',
 				] ],
@@ -180,9 +180,9 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_site' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_site' ),
+						self::equalTo( 'badvalue' )
 					),
 					'message' => 'Unrecognized value for parameter "site"',
 				] ],

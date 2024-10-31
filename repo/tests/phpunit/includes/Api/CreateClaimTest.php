@@ -115,7 +115,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		$this->assertSame( 'A STRING', $response['claim']['mainsnak']['datavalue']['value'] );
 	}
 
-	public function invalidRequestProvider(): iterable {
+	public static function invalidRequestProvider(): iterable {
 		$argLists = [];
 
 		//0
@@ -167,9 +167,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'value' => '"Foo"',
 		];
 		$argLists[] = [
-			$this->logicalOr(
-				$this->equalTo( 'unknown_snaktype' ),
-				$this->equalTo( 'badvalue' )
+			self::logicalOr(
+				self::equalTo( 'unknown_snaktype' ),
+				self::equalTo( 'badvalue' )
 			),
 			$params,
 		];
@@ -187,9 +187,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			unset( $params[$requiredParam] );
 
 			$argLists[] = [
-				$this->logicalOr(
-					$this->equalTo( 'no' . $requiredParam ),
-					$this->equalTo( 'missingparam' )
+				self::logicalOr(
+					self::equalTo( 'no' . $requiredParam ),
+					self::equalTo( 'missingparam' )
 				),
 				$params,
 			];

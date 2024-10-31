@@ -631,7 +631,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function provideItemIdParamsAndExpectedSummaryPatternForEditEntity() {
+	public static function provideItemIdParamsAndExpectedSummaryPatternForEditEntity() {
 		return [
 			'no languages changed' => [
 				[
@@ -697,7 +697,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => json_encode( [
 						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
 						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => $this->generateLanguageValuePairs( 50 ),
+						'aliases' => self::generateLanguageValuePairs( 50 ),
 					] ),
 				],
 				preg_quote( '/* wbeditentity-update-languages:0||52 */' ),
@@ -708,7 +708,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'data' => json_encode( [
 						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
 						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => $this->generateLanguageValuePairs( 50 ),
+						'aliases' => self::generateLanguageValuePairs( 50 ),
 						'sitelinks' => [
 							[
 								'site' => 'dewiki',
@@ -741,7 +741,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		);
 	}
 
-	private function generateLanguageValuePairs( $langCount ) {
+	private static function generateLanguageValuePairs( $langCount ) {
 		$result = [];
 		$langCodes = WikibaseRepo::getTermsLanguages()->getLanguages();
 
@@ -763,7 +763,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * Provide data for requests that will fail with a set exception, code and message
 	 */
-	public function provideExceptionData() {
+	public static function provideExceptionData() {
 		return [
 			'no entity id given' => [
 				'p' => [ 'data' => '{}' ],
@@ -824,27 +824,27 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'nodata' ),
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'nodata' ),
+						self::equalTo( 'missingparam' )
 					),
 				] ] ],
 			'bad site' => [
 				'p' => [ 'site' => 'abcde', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'unknown_site' ),
-						$this->equalTo( 'badvalue' )
+					'code' => self::logicalOr(
+						self::equalTo( 'unknown_site' ),
+						self::equalTo( 'badvalue' )
 					),
 				] ] ],
 			'no data provided' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'nodata' ), // see 'no$1' in ApiBase::$messageMap
-						$this->equalTo( 'missingparam' )
+					'code' => self::logicalOr(
+						self::equalTo( 'nodata' ), // see 'no$1' in ApiBase::$messageMap
+						self::equalTo( 'missingparam' )
 					),
 				] ],
 			],
@@ -1169,9 +1169,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'tags-apply-not-allowed-one' ),
-						$this->equalTo( 'badtags' )
+					'code' => self::logicalOr(
+						self::equalTo( 'tags-apply-not-allowed-one' ),
+						self::equalTo( 'badtags' )
 					),
 				] ],
 			],
@@ -1186,9 +1186,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => $this->logicalOr(
-						$this->equalTo( 'tags-apply-not-allowed-multi' ),
-						$this->equalTo( 'badtags' )
+					'code' => self::logicalOr(
+						self::equalTo( 'tags-apply-not-allowed-multi' ),
+						self::equalTo( 'badtags' )
 					),
 				] ],
 			],
