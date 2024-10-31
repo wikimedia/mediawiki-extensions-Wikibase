@@ -493,6 +493,26 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 			),
 			UseCaseError::newReferencedResourceNotFound( '/some-path-to-non-existing-property' ),
 		];
+
+		yield 'property id mismatch' => [
+			new ValidationError(
+				StatementsValidator::CODE_PROPERTY_ID_MISMATCH,
+				[
+					StatementsValidator::CONTEXT_PATH => '/item/statements/P123/0/property/id',
+					StatementsValidator::CONTEXT_PROPERTY_ID_KEY => 'P123',
+					StatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'P567',
+				]
+			),
+			new UseCaseError(
+				UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+				"Statement's Property ID does not match the Statement group key",
+				[
+					UseCaseError::CONTEXT_PATH => '/item/statements/P123/0/property/id',
+					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => 'P123',
+					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P567',
+				]
+			),
+		];
 	}
 
 	public static function sitelinksValidationErrorProvider(): Generator {
