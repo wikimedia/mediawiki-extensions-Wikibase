@@ -76,7 +76,7 @@ class StatementsMergerTest extends TestCase {
 		);
 	}
 
-	public function statementsProvider() {
+	public static function statementsProvider() {
 		yield 'no statements' => [
 			[],
 			[],
@@ -125,13 +125,13 @@ class StatementsMergerTest extends TestCase {
 		$reference1 = new PropertyValueSnak( new NumericPropertyId( 'P345' ), new StringValue( 'hi' ) );
 		$reference2 = new PropertyValueSnak( new NumericPropertyId( 'P456' ), new StringValue( 'hello' ) );
 		yield 'given equivalent statements with references, references are merged' => [
-			[ $this->newStatementWithReferences( $statementBuilder, [ $reference1 ] ) ],
-			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2 ] ) ],
-			[ $this->newStatementWithReferences( $statementBuilder, [ $reference2, $reference1 ] ) ],
+			[ self::newStatementWithReferences( $statementBuilder, [ $reference1 ] ) ],
+			[ self::newStatementWithReferences( $statementBuilder, [ $reference2 ] ) ],
+			[ self::newStatementWithReferences( $statementBuilder, [ $reference2, $reference1 ] ) ],
 		];
 	}
 
-	private function newStatementWithReferences( NewStatement $statementBuilder, array $references ) {
+	private static function newStatementWithReferences( NewStatement $statementBuilder, array $references ) {
 		$statement = $statementBuilder->withSomeGuid()->build();
 		foreach ( $references as $reference ) {
 			$statement->addNewReference( $reference );

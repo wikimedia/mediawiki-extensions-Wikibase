@@ -31,7 +31,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 		$this->script->silent = true;
 	}
 
-	public function getUnitCases() {
+	public static function getUnitCases() {
 		return [
 			'derived SI unit' => [
 				[

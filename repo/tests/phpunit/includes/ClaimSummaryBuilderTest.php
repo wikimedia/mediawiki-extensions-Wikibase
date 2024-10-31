@@ -43,14 +43,14 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Statement[]
 	 */
-	protected function statementProvider() {
+	protected static function statementProvider() {
 		$statements = [];
 
 		$mainSnak = new PropertyValueSnak( 112358, new StringValue( "don't panic" ) );
 		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
-		foreach ( $this->snakProvider() as $snak ) {
+		foreach ( self::snakProvider() as $snak ) {
 			$statement = clone $statement;
 			$snaks = new SnakList( [ $snak ] );
 			$statement->getReferences()->addReference( new Reference( $snaks ) );
@@ -58,7 +58,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$statement = clone $statement;
-		$snaks = new SnakList( $this->snakProvider() );
+		$snaks = new SnakList( self::snakProvider() );
 		$statement->getReferences()->addReference( new Reference( $snaks ) );
 		$statements[] = $statement;
 
@@ -78,10 +78,10 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $statements;
 	}
 
-	public function buildUpdateClaimSummaryProvider() {
+	public static function buildUpdateClaimSummaryProvider() {
 		$arguments = [];
 
-		foreach ( $this->statementProvider() as $statement ) {
+		foreach ( self::statementProvider() as $statement ) {
 			$testCaseArgs = [];
 
 			//change mainsnak
@@ -96,7 +96,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 
 			//change qualifiers
 			$modifiedStatement = clone $statement;
-			$modifiedStatement->setQualifiers( new SnakList( $this->snakProvider() ) );
+			$modifiedStatement->setQualifiers( new SnakList( self::snakProvider() ) );
 			$testCaseArgs[] = $statement;
 			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update-qualifiers';
@@ -115,7 +115,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 			$modifiedStatement->setMainSnak(
 				new PropertyValueSnak( 112358, new StringValue( "let's panic!!!" ) )
 			);
-			$modifiedStatement->setQualifiers( new SnakList( $this->snakProvider() ) );
+			$modifiedStatement->setQualifiers( new SnakList( self::snakProvider() ) );
 			$testCaseArgs[] = $statement;
 			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update-rank';

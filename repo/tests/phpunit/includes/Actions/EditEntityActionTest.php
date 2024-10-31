@@ -104,7 +104,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$params[ $key ] = $rev->getId();
 	}
 
-	public function provideUndoForm() {
+	public static function provideUndoForm() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		yield 'edit, no parameters' => [
@@ -278,7 +278,7 @@ class EditEntityActionTest extends ActionTestCase {
 		// -- bad page -----------------------------------
 		yield 'non-existing page' => [
 			'edit', // action
-			Title::newFromTextThrow( 'XXX', $this->getItemNamespace() ),
+			Title::newFromTextThrow( 'XXX', self::getItemNamespace() ),
 			[ // params
 				'restore' => [ 'London', 0 ], // ok revision
 			],
@@ -448,7 +448,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
 
-	public function provideUndoSubmit() {
+	public static function provideUndoSubmit() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 		yield "submit with legal undo, but don't post" => [
 			'submit', // action
@@ -658,7 +658,7 @@ class EditEntityActionTest extends ActionTestCase {
 		// -- bad page -----------------------------------
 		yield 'non-existing page' => [
 			'submit', // action
-			Title::newFromTextThrow( 'XXX', $this->getItemNamespace() ),
+			Title::newFromTextThrow( 'XXX', self::getItemNamespace() ),
 			[ // params
 				'wpSave' => 1,
 				'wpEditToken' => true, // automatic token
@@ -1241,7 +1241,7 @@ class EditEntityActionTest extends ActionTestCase {
 		self::resetTestItem( $handle );
 	}
 
-	private function getItemNamespace(): int {
+	private static function getItemNamespace(): int {
 		 $entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( 'item' );
 	}

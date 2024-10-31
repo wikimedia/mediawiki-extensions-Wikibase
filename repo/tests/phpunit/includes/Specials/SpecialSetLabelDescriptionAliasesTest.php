@@ -167,11 +167,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 *
 	 * @return Fingerprint
 	 */
-	private function makeFingerprint(
+	private static function makeFingerprint(
 		array $labels = [],
 		array $descriptions = [],
 		array $aliases = []
-	) {
+	): Fingerprint {
 		$fingerprint = new Fingerprint();
 
 		foreach ( $labels as $lang => $text ) {
@@ -189,8 +189,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		return $fingerprint;
 	}
 
-	public function executeProvider() {
-		$fooFingerprint = $this->makeFingerprint(
+	public static function executeProvider(): iterable {
+		$fooFingerprint = self::makeFingerprint(
 			[ 'de' => 'foo' ]
 		);
 
@@ -202,7 +202,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					'label' => "FOO\xE2\x80\x82",
 					'aliases' => "\xE2\x80\x82",
 				], true ),
-				$this->makeFingerprint(
+				self::makeFingerprint(
 					[ 'de' => 'foo', 'en' => 'FOO' ]
 				),
 			],
@@ -210,7 +210,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			'replace label' => [
 				$fooFingerprint,
 				new FauxRequest( [ 'language' => 'de', 'label' => 'FOO' ], true ),
-				$this->makeFingerprint(
+				self::makeFingerprint(
 					[ 'de' => 'FOO' ]
 				),
 			],
@@ -218,7 +218,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			'add description, keep label' => [
 				$fooFingerprint,
 				new FauxRequest( [ 'language' => 'de', 'description' => 'Lorem Ipsum' ], true ),
-				$this->makeFingerprint(
+				self::makeFingerprint(
 					[ 'de' => 'foo' ],
 					[ 'de' => 'Lorem Ipsum' ]
 				),
@@ -230,7 +230,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					'language' => 'de',
 					'aliases' => "foo\xE2\x80\x82|bar",
 				], true ),
-				$this->makeFingerprint(
+				self::makeFingerprint(
 					[ 'de' => 'foo' ],
 					[],
 					[ 'de' => [ 'foo', 'bar' ] ]

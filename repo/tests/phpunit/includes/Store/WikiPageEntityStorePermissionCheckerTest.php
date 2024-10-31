@@ -43,10 +43,10 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_EDIT, $existingEntity );
 	}
 
-	public function provideExistingEntities() {
+	public static function provideExistingEntities(): iterable {
 		return [
-			'existing item' => [ $this->getExistingItem() ],
-			'existing property' => [ $this->getExistingProperty() ],
+			'existing item' => [ self::getExistingItem() ],
+			'existing property' => [ self::getExistingProperty() ],
 		];
 	}
 
@@ -62,12 +62,12 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_EDIT, $existingEntity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatDisallowEdit() {
+	public static function provideExistingEntitiesAndPermissionsThatDisallowEdit(): iterable {
 		return [
-			'existing item, no edit permission' => [ $this->getExistingItem(), [ 'edit' => false ] ],
-			'existing item, no read permission' => [ $this->getExistingItem(), [ 'read' => false, 'edit' => true ] ],
-			'existing property, no edit permission' => [ $this->getExistingProperty(), [ 'edit' => false ] ],
-			'existing property, no read permission' => [ $this->getExistingProperty(), [ 'read' => false, 'edit' => true ] ],
+			'existing item, no edit permission' => [ self::getExistingItem(), [ 'edit' => false ] ],
+			'existing item, no read permission' => [ self::getExistingItem(), [ 'read' => false, 'edit' => true ] ],
+			'existing property, no edit permission' => [ self::getExistingProperty(), [ 'edit' => false ] ],
+			'existing property, no read permission' => [ self::getExistingProperty(), [ 'read' => false, 'edit' => true ] ],
 		];
 	}
 
@@ -95,70 +95,70 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_EDIT, $nonExistingentity );
 	}
 
-	public function provideNonExistingEntitiesAndPermissionsThatDisallowEdit() {
+	public static function provideNonExistingEntitiesAndPermissionsThatDisallowEdit(): iterable {
 		return [
 			'non-existing item, no createpage permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'createpage' => false ],
 			],
 			'non-existing item, no edit permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'edit' => false, 'createpage' => true ],
 			],
 			'non-existing item, no read permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'read' => false, 'edit' => true, 'createpage' => true ],
 			],
 			'non-existing item (null ID), no createpage permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'createpage' => false ],
 			],
 			'non-existing item (null ID), no edit permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'edit' => false, 'createpage' => true ],
 			],
 			'non-existing item (null ID), no read permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'read' => false, 'edit' => true, 'createpage' => true ],
 			],
 			'non-existing property, no property-create permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => true, 'property-create' => false ],
 			],
 			'non-existing property, no createpage permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => false, 'property-create' => true ],
 			],
 			'non-existing property, no createpage nor property-create permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => false, 'property-create' => false ],
 			],
 			'non-existing property, no edit permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'edit' => false, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property, no read permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'read' => false, 'edit' => true, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => true, 'property-create' => false ],
 			],
 			'non-existing property (null ID), no createpage permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => false, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no createpage nor property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => false, 'property-create' => false ],
 			],
 			'non-existing property (null ID), no edit permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'edit' => false, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no read permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'read' => false, 'edit' => true, 'createpage' => true, 'property-create' => true ],
 			],
 		];
@@ -182,14 +182,14 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_READ, $entity );
 	}
 
-	public function provideAllEntities() {
+	public static function provideAllEntities(): iterable {
 		return [
-			'existing item' => [ $this->getExistingItem() ],
-			'existing property' => [ $this->getExistingProperty() ],
-			'non-existing item' => [ $this->getNonExistingItem() ],
-			'non-existing item (null ID)' => [ $this->getNonExistingItemWithNullId() ],
-			'non-existing property' => [ $this->getNonExistingProperty() ],
-			'non-existing property (null ID)' => [ $this->getNonExistingPropertyWithNullId() ],
+			'existing item' => [ self::getExistingItem() ],
+			'existing property' => [ self::getExistingProperty() ],
+			'non-existing item' => [ self::getNonExistingItem() ],
+			'non-existing item (null ID)' => [ self::getNonExistingItemWithNullId() ],
+			'non-existing property' => [ self::getNonExistingProperty() ],
+			'non-existing property (null ID)' => [ self::getNonExistingPropertyWithNullId() ],
 		];
 	}
 
@@ -202,19 +202,19 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_MERGE, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatAllowMerge() {
+	public static function provideExistingEntitiesAndPermissionsThatAllowMerge(): iterable {
 		return [
 			'existing item, edit and item-merge permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-merge' => true ],
 			],
 			// TODO: should this be even tested? Or should it return false/throw exception for properties?
 			'existing property, edit permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true ],
 			],
 			'existing property, item-merge permission is irrelevant' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true, 'item-merge' => false ],
 			],
 		];
@@ -229,31 +229,31 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_MERGE, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatDisallowMerge() {
+	public static function provideExistingEntitiesAndPermissionsThatDisallowMerge(): iterable {
 		return [
 			'existing item, no item-merge permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-merge' => false ],
 			],
 			'existing item, no edit permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-merge' => true ],
 			],
 			'existing item, no edit nor item-merge permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-merge' => false ],
 			],
 			'existing item, no read permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'read' => false, 'edit' => true, 'item-merge' => true ],
 			],
 			// TODO: should this be even tested? Or should it return false/throw exception for properties?
 			'existing property, no edit permissions' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => false ],
 			],
 			'existing property, no read permissions' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'read' => false, 'edit' => true ],
 			],
 		];
@@ -268,19 +268,19 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_REDIRECT, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatAllowRedirect() {
+	public static function provideExistingEntitiesAndPermissionsThatAllowRedirect(): iterable {
 		return [
 			'existing item, edit and item-redirect permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-redirect' => true ],
 			],
 			// TODO: should this be even tested? Or should it return false/throw exception for properties?
 			'existing property, edit permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true ],
 			],
 			'existing property, item-redirect permission is irrelevant' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true, 'item-redirect' => false ],
 			],
 		];
@@ -298,31 +298,31 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_REDIRECT, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatDisallowRedirect() {
+	public static function provideExistingEntitiesAndPermissionsThatDisallowRedirect(): iterable {
 		return [
 			'existing item, no item-redirect permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-redirect' => false ],
 			],
 			'existing item, no edit permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-redirect' => true ],
 			],
 			'existing item, no edit nor item-redirect permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-redirect' => false ],
 			],
 			'existing item, no read permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'read' => false, 'edit' => true, 'item-redirect' => true ],
 			],
 			// TODO: should this be even tested? Or should it return false/throw exception for properties?
 			'existing property, no edit permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => false ],
 			],
 			'existing property, no read permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'read' => false, 'edit' => true ],
 			],
 		];
@@ -337,14 +337,14 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatAllowEditingTerms() {
+	public static function provideExistingEntitiesAndPermissionsThatAllowEditingTerms(): iterable {
 		return [
 			'existing item, edit and item-term permissions' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-term' => true ],
 			],
 			'existing property, edit and property-term permissions' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true, 'property-term' => true ],
 			],
 		];
@@ -359,38 +359,38 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $entity );
 	}
 
-	public function provideExistingEntitiesAndPermissionsThatDisallowEditingTerms() {
+	public static function provideExistingEntitiesAndPermissionsThatDisallowEditingTerms(): iterable {
 		return [
 			'existing item, no item-term permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => true, 'item-term' => false ],
 			],
 			'existing item, no edit permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-term' => true ],
 			],
 			'existing item, no edit nor item-term permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'edit' => false, 'item-term' => false ],
 			],
 			'existing item, no read permission' => [
-				$this->getExistingItem(),
+				self::getExistingItem(),
 				[ 'read' => false, 'edit' => true, 'item-term' => true ],
 			],
 			'existing property, no property-term permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => true, 'property-term' => false ],
 			],
 			'existing property, no edit permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => false, 'property-term' => true ],
 			],
 			'existing property, no edit nor property-term permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'edit' => false, 'property-term' => false ],
 			],
 			'existing property, no read permission' => [
-				$this->getExistingProperty(),
+				self::getExistingProperty(),
 				[ 'read' => false, 'edit' => true, 'property-term' => true ],
 			],
 		];
@@ -408,22 +408,22 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertUserIsAllowedTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $nonExistingEntity );
 	}
 
-	public function provideNonExistingEntitiesAndPermissionsThatAllowEditingTerms() {
+	public static function provideNonExistingEntitiesAndPermissionsThatAllowEditingTerms(): iterable {
 		return [
 			'non-existing item, createpage permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'createpage' => true ],
 			],
 			'non-existing item (null ID), createpage permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'createpage' => true ],
 			],
 			'non-existing property, createpage and property-create permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), createpage and property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => true, 'property-create' => true ],
 			],
 		];
@@ -441,86 +441,86 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->assertItIsForbiddenForUserTo( EntityPermissionChecker::ACTION_EDIT_TERMS, $nonExistingEntity );
 	}
 
-	public function provideNonExistingEntitiesAndPermissionsThatDisallowEditingTerms() {
+	public static function provideNonExistingEntitiesAndPermissionsThatDisallowEditingTerms(): iterable {
 		return [
 			'non-existing item, no createpage permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'createpage' => false ],
 			],
 			'non-existing item, no item-term permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'item-term' => false, 'createpage' => true ],
 			],
 			'non-existing item, no edit permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'edit' => false, 'item-term' => true, 'createpage' => true ],
 			],
 			'non-existing item, no read permission' => [
-				$this->getNonExistingItem(),
+				self::getNonExistingItem(),
 				[ 'read' => false, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			],
 			'non-existing item (null ID), no createpage permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'createpage' => false ],
 			],
 			'non-existing item (null ID), no item-term permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'item-term' => false, 'createpage' => true ],
 			],
 			'non-existing item (null ID), no edit permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'edit' => false, 'item-term' => true, 'createpage' => true ],
 			],
 			'non-existing item (null ID), no read permission' => [
-				$this->getNonExistingItemWithNullId(),
+				self::getNonExistingItemWithNullId(),
 				[ 'read' => false, 'edit' => true, 'item-term' => true, 'createpage' => true ],
 			],
 			'non-existing property, no property-create permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => true, 'property-create' => false ],
 			],
 			'non-existing property, no createpage permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => false, 'property-create' => true ],
 			],
 			'non-existing property, no createpage nor property-create permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'createpage' => false, 'property-create' => false ],
 			],
 			'non-existing property, no property-term permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'property-term' => false, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property, no edit permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'edit' => false, 'property-term' => true, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property, no read permission' => [
-				$this->getNonExistingProperty(),
+				self::getNonExistingProperty(),
 				[ 'read' => false, 'edit' => true, 'property-term' => true, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => true, 'property-create' => false ],
 			],
 			'non-existing property (null ID), no createpage permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => false, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no createpage nor property-create permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'createpage' => false, 'property-create' => false ],
 			],
 			'non-existing property (null ID), no property-term permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'property-term' => false, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no edit permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'edit' => false, 'property-term' => true, 'createpage' => true, 'property-create' => true ],
 			],
 			'non-existing property (null ID), no read permission' => [
-				$this->getNonExistingPropertyWithNullId(),
+				self::getNonExistingPropertyWithNullId(),
 				[ 'read' => false, 'edit' => true, 'property-term' => true, 'createpage' => true, 'property-create' => true ],
 			],
 		];
@@ -611,27 +611,27 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => $permissions ] );
 	}
 
-	private function getExistingItem() {
+	private static function getExistingItem(): Item {
 		return new Item( new ItemId( self::EXISTING_ITEM_ID ) );
 	}
 
-	private function getNonExistingItem() {
+	private static function getNonExistingItem(): Item {
 		return new Item( new ItemId( self::NON_EXISTING_ITEM_ID ) );
 	}
 
-	private function getNonExistingItemWithNullId() {
+	private static function getNonExistingItemWithNullId(): Item {
 		return new Item( null );
 	}
 
-	private function getExistingProperty() {
+	private static function getExistingProperty(): Property {
 		return new Property( new NumericPropertyId( self::EXISTING_PROPERTY_ID ), null, 'test' );
 	}
 
-	private function getNonExistingProperty() {
+	private static function getNonExistingProperty(): Property {
 		return new Property( new NumericPropertyId( self::NON_EXISTING_PROPERTY_ID ), null, 'test' );
 	}
 
-	private function getNonExistingPropertyWithNullId() {
+	private static function getNonExistingPropertyWithNullId(): Property {
 		return new Property( null, null, 'test' );
 	}
 
