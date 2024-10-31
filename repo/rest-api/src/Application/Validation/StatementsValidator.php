@@ -71,7 +71,7 @@ class StatementsValidator {
 				$statementPropertyId = $statement['property']['id'] ?? null;
 				if ( $statementPropertyId && $statementPropertyId !== (string)$propertyId ) {
 					return new ValidationError( self::CODE_PROPERTY_ID_MISMATCH, [
-						self::CONTEXT_PATH => "$propertyId/$groupIndex/property/id",
+						self::CONTEXT_PATH => "$basePath/$propertyId/$groupIndex/property/id",
 						self::CONTEXT_PROPERTY_ID_KEY => $propertyId,
 						self::CONTEXT_PROPERTY_ID_VALUE => $statementPropertyId,
 					] );
