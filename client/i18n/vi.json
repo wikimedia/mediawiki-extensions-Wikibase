@@ -18,7 +18,6 @@
 	"tooltip-t-wikibase": "Liên kết đến khoản mục kết nối trong kho dữ liệu",
 	"wikibase-after-page-move": "Tác vụ di chuyển của bạn đã [$1 được cập nhật tại liên kết ngôn ngữ của khoản mục {{WBREPONAME}}]. Vui lòng xác nhận điều này.",
 	"wikibase-after-page-delete": "Liên kết đến trang này đã được loại bỏ từ [$1 khoản mục {{WBREPONAME}} liên kết]. Xin hãy kiểm tra rằng điều này đã xảy ra.",
-	"wikibase-after-page-delete-queued": "Chẳng bao lâu [$1 khoản mục {{WBREPONAME}}] ứng với trang này sẽ được tự động cập nhật. Xin lưu ý rằng nó có thể không được cập nhật ngay.",
 	"wikibase-comment-add": "Một khoản mục {{WBREPONAME}} đã được tạo ra.",
 	"wikibase-comment-remove": "Đã xóa khoản mục liên kết {{WBREPONAME}}. Đã loại bỏ các liên kết ngôn ngữ.",
 	"wikibase-comment-linked": "Một khoản mục {{WBREPONAME}} đã được liên kết đến trang này.",

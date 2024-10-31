@@ -17,7 +17,6 @@
 	"tooltip-t-wikibase": "Nuoroda į susietą duomenų saugyklos įrašą",
 	"wikibase-after-page-move": "Jūs taip pat galite [$1 atnaujinti] susijusį {{WBREPONAME}} įrašą, kad perkelto puslapio nuorodos toliau funkcionuotų.",
 	"wikibase-after-page-delete": "Jūs taip pat galite pašalinti nuorodą į šį puslapį iš susijusio [$1 {{WBREPONAME}} įrašo], kad būtų palaikomos kalbos nuorodos.",
-	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} įrašas], susijęs su šiuo puslapiu, bus automatiškai atnaujintas. Prašome atkreipti dėmesį, kad tai gali neįvykti automatiškai.",
 	"wikibase-comment-add": "{{WBREPONAME}} įrašas sukurtas.",
 	"wikibase-comment-remove": "Susietas {{WBREPONAME}} įrašas panaikintas. Kalbos nuorodos pašalintos.",
 	"wikibase-comment-linked": "{{WBREPONAME}} įrašas buvo susietas su šiuo puslapiu.",

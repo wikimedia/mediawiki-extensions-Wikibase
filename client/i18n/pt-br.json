@@ -24,7 +24,6 @@
 	"tooltip-t-wikibase": "Link para o item do repositório de dados conectado",
 	"wikibase-after-page-move": "Sua movimentação deve agora ser [$1 refletida no link do item {{WBREPONAME}}]. Pedimos que você verifique se isso ocorreu.",
 	"wikibase-after-page-delete": "O link para esta página deveria ter sido removido de [$1 o item {{WBREPONAME}} associado]. Pedimos que você verifique se isso ocorreu.",
-	"wikibase-after-page-delete-queued": "O [$1 item {{WBREPONAME}}] associado a esta página será atualizado automaticamente em breve. Por favor, note que isso pode não acontecer instantaneamente.",
 	"wikibase-comment-add": "Um item do {{WBREPONAME}} foi criado.",
 	"wikibase-comment-remove": "O item {{WBREPONAME}} associado foi excluído. Os links de idiomas foram removidos.",
 	"wikibase-comment-linked": "Um item {{WBREPONAME}} foi associado a esta página.",

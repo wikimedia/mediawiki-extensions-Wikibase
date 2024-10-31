@@ -14,7 +14,6 @@
 	"tooltip-t-wikibase": "Lidhje për te objekt depoje të dhënash i lidhur",
 	"wikibase-after-page-move": "Lëvizja juaj do të duhej të qe pasqyruar te lidhje gjuhe [$1 objekti {{WBREPONAME}}]. Ju kërkojmë të kontrolloni nëse ka ndodhur.",
 	"wikibase-after-page-delete": "Lidhja për te kjo faqe duhet të jetë hequr prej [objektit {{WBREPONAME}} $1 të përshoqëruar]. Ju kërkojmë të kontrolloni nëse ka ndodhur.",
-	"wikibase-after-page-delete-queued": "[$1 Objekti {{WBREPONAME}}] përshoqëruar kësaj faqeje do të përditësohet automatikisht. Ju lutemi, kini parasysh që kjo mund të mos ndodhë menjëherë.",
 	"wikibase-comment-add": "U krijua një objekt {{WBREPONAME}}.",
 	"wikibase-comment-remove": "U fshi objekt {{WBREPONAME}} i përshoqëruar. Lidhjet për gjuhët u hoqën.",
 	"wikibase-comment-linked": "Te kjo faqe është lidhur një objekt {{WBREPONAME}}.",

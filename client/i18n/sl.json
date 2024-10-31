@@ -12,7 +12,6 @@
 	"tooltip-t-wikibase": "Povezava na ustrezni predmet v podatkovni shrambi",
 	"wikibase-after-page-move": "Vaša prestavitev bi se morala odraziti tudi s spremembo [$1 jezikovne povezave v projektu {{WBREPONAME}}]. Prosimo, preverite, ali se je to res zgodilo.",
 	"wikibase-after-page-delete": "Povezava do te strani bi morala biti odstranjena iz [$1 povezanega predmeta {{GRAMMAR:genitive|{{WBREPONAME}}}}]. Prosimo vas, da preverite, ali se je to zgodilo.",
-	"wikibase-after-page-delete-queued": "[$1 Predmet {{GRAMMAR:genitive|{{WBREPONAME}}}}], povezan s to stranjo, bo samodejno posodobljen. Upoštevajte, da se to morda ne bo zgodilo takoj.",
 	"wikibase-comment-add": "Ustvarjen je bil predmet v shrambi {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Povezani predmet v shrambi {{WBREPONAME}} izbrisan. Jezikovne povezave odstranjene.",
 	"wikibase-comment-linked": "Predmet v shrambi {{WBREPONAME}} je povezan s to stranjo.",

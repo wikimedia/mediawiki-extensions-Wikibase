@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bangsa Manusia"
+		]
+	},
+	"wikibase-editlinks": "Umbayan i manga link",
+	"wikibase-addlinkstitle": "Muman sa manga link sa kaped a basa",
+	"wikibase-linkitem-addlinks": "Muman sa manga link",
+	"wikibase-linkitem-title": "Link a aden salekat",
+	"wikibase-linkitem-linkpage": "Link a aden salaket",
+	"wikibase-linkitem-selectlink": "Mamili sa sayt endu salekat a kiyugan nengka ipasumpat sa inia salekat.",
+	"wikibase-linkitem-input-site": "Basa:",
+	"wikibase-linkitem-input-page": "Salekat:",
+	"wikibase-rc-hide-wikidata-hide": "Ipagena",
+	"wikibase-rc-hide-wikidata-show": "Ipailay",
+	"wikibase-otherprojects": "Sa kaped pan a manga prajik"
+}

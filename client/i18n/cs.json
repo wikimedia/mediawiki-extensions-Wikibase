@@ -17,7 +17,6 @@
 	"tooltip-t-wikibase": "Odkaz na propojenou položku datového úložiště",
 	"wikibase-after-page-move": "Vaše přejmenování by nyní mělo změnit mezijazykový odkaz [$1 v související položce {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",
 	"wikibase-after-page-delete": "Odkaz na tuto stránku by měl být odstraněn [$1 ze související položky {{grammar:2sg|{{WBREPONAME}}}}]. Prosíme, zkontrolujte, zda k tomu došlo.",
-	"wikibase-after-page-delete-queued": "Související [$1 položka {{grammar:2sg|{{WBREPONAME}}}}] bude automaticky aktualizována. Upozorňujeme, že se to nemusí stát okamžitě.",
 	"wikibase-comment-add": "Byla vytvořena položka na {{grammar:6sg|{{WBREPONAME}}}}.",
 	"wikibase-comment-remove": "Související položka {{grammar:2sg|{{WBREPONAME}}}} odstraněna. Mezijazykové odkazy odstraněny.",
 	"wikibase-comment-linked": "S touto stránkou byla na {{grammar:6sg|{{WBREPONAME}}}} propojena položka.",

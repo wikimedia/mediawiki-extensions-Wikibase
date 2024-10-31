@@ -13,7 +13,6 @@
 	"tooltip-t-wikibase": "Haɗaɗɗun bayanan abunda aka ajiye",
 	"wikibase-after-page-move": "Yanzu motsawar ka ya zama [$1 ya bayyana a cikin haɗin harshe na {{WBREPONAME}} ]. Muna rokon Ku duba wannan ko ya faru.",
 	"wikibase-after-page-delete": "Ya kamata a cire mahaɗar wannan shafin daga [$1 abunda ya cuɗanya {{WBREPONAME}} item]. Zamuce Ku duba ko wannan ya faru",
-	"wikibase-after-page-delete-queued": "Da [$1 {{WBREPONAME}} abu] mai alaƙa da wannan shafin za a sabunta shi ta atomatik. Lura cewa wannan bazai faru nan take ba",
 	"wikibase-comment-add": "An ƙirƙiri wani abu {{WBREPONAME}}",
 	"wikibase-comment-remove": "An goge abin da aka haɗa {{WBREPONAME}}. An cire hanyoyin haɗin harshe.",
 	"wikibase-comment-linked": "An haɗa wani abu {{WBREPONAME}} zuwa wannan shafin.",

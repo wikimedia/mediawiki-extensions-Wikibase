@@ -10,7 +10,6 @@
 	"tooltip-t-wikibase": "Pranala menyang wiji répositori kang kagayut",
 	"wikibase-after-page-move": "Panjenengan uga kudu nganyari [$1 wiji {{WBREPONAME}} magepokan] saperlu ngemunah pranala basa ing kaca lih-lihan.",
 	"wikibase-after-page-delete": "Panjenengan uga kudu mbusak pranala nyang kaca iki saka [$1 wiji {{WBREPONAME}} magepokan] saperlu ngemunah pranala basa.",
-	"wikibase-after-page-delete-queued": "[$1 Wiji {{WBREPONAME}}] gegayutan kaca iki bakal otomatis kaanyari. Catheta yèn iki bokmenawa ora dumadi kanthi instan.",
 	"wikibase-comment-add": "Wiji {{WBREPONAME}} wis digawé.",
 	"wikibase-comment-remove": "Wiji {{WBREPONAME}} magepokan wis digawé. Pranala basa dibusak.",
 	"wikibase-comment-linked": "Wiji {{WBREPONAME}} wis kagayut karo kaca iki.",

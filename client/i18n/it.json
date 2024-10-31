@@ -23,14 +23,14 @@
 			"Sakretsu",
 			"Sannita",
 			"Titore",
-			"Una giornata uggiosa '94"
+			"Una giornata uggiosa '94",
+			"Valepert"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
 	"tooltip-t-wikibase": "Collegamento all'elemento connesso dell'archivio dati",
 	"wikibase-after-page-move": "Verifica che [$1 l'elemento {{WBREPONAME}} associato] sia stato aggiornato automaticamente per mantenere i collegamenti linguistici sulla pagina.",
 	"wikibase-after-page-delete": "I collegamenti a questa pagina dovrebbero essere stati rimossi [$1 dall'elemento {{WBREPONAME}} associato]. Ti chiediamo di verificare che ciò sia avvenuto.",
-	"wikibase-after-page-delete-queued": "L'[$1 elemento {{WBREPONAME}}] associato con questa pagina sarà aggiornato automaticamente. Nota che questo potrebbe non accadere istantaneamente.",
 	"wikibase-comment-add": "Un elemento di {{WBREPONAME}} è stato creato.",
 	"wikibase-comment-remove": "L'elemento di {{WBREPONAME}} associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
 	"wikibase-comment-linked": "Un elemento di {{WBREPONAME}} è stato collegato a questa pagina.",

@@ -44,7 +44,6 @@
 	"tooltip-t-wikibase": "Lien vers l’élément dans le dépôt de données connecté",
 	"wikibase-after-page-move": "Votre renommage doit maintenant être [$1 reconduit dans le lien interlangue {{WBREPONAME}}]. Veuillez vérifier que c’est bien le cas.",
 	"wikibase-after-page-delete": "Le lien vers cette page devrait avoir été supprimé de [$1 {{WBREPONAME}} l’élément associé]. Nous vous demandons de vérifier que c’est bien le cas.",
-	"wikibase-after-page-delete-queued": "L’[$1 élément {{WBREPONAME}}] associé avec cette page sera automatiquement mis à jour. Veuillez noter que cela peut ne pas être instantané.",
 	"wikibase-comment-add": "Un élément {{WBREPONAME}} a été créé.",
 	"wikibase-comment-remove": "Élément associé de {{WBREPONAME}} supprimé. Liens de langue supprimés.",
 	"wikibase-comment-linked": "Un élément de {{WBREPONAME}} a été lié à cette page.",

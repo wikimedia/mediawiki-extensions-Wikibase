@@ -15,7 +15,6 @@
 	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikipodatci",
 	"wikibase-after-page-move": "Također biste trebali ažurirati [$1 pridruženu stavku na projektu {{WBREPONAME}}] radi održavanja jezičnih međuwikipoveznica na premještenoj stranici. Molimo Vas, provjerite jeste li to učinili.",
 	"wikibase-after-page-delete": "Poveznica na ovu stranicu trebala bi biti uklonjena iz stavke [$1 na projektu {{WBREPONAME}}]. Molimo provjerite.",
-	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom će biti automatski ažurirana. Imajte u vidu da se možda neće dogoditi trenutačno.",
 	"wikibase-comment-add": "Stvorena je stavka na projektu {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Pridružena stavka na projektu {{WBREPONAME}} izbrisana je. Jezične poveznice su uklonjene.",
 	"wikibase-comment-linked": "Stavka na projektu {{WBREPONAME}} povezana je s ovom stranicom.",

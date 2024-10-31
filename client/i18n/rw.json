@@ -1,17 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80",
 			"Eric Mukiza",
 			"RebecaRwanda",
-			"Rodrigue"
+			"Rodrigue",
+			"RebeccaRwanda"
 		]
 	},
 	"wikibase-client-desc": "Umukiriya wo kwagura Wikibase",
 	"tooltip-t-wikibase": "Ihuza kubintu byabitse",
 	"wikibase-after-page-move": "Kwimuka kwawe kugomba kuba[$1 kugaragarira muri {{WBREPONAME}} ingingo] ihuza ururimi. Turagusaba ko ugenzura ko ibi byabaye.",
 	"wikibase-after-page-delete": "Ihuza nuru rupapuro yagombye kuba yarakuwe kubintu bifitanye isano[$1{{WBREPONAME}}]. Turagusaba ko wagenzura ko ibi byabaye.",
-	"wikibase-after-page-delete-queued": "Ikintu [$1 {{WBREPONAME}}] kijyanye nuru rubuga kizahita kivugururwa. Nyamuneka menyako ibi bidashobora gubita bibaho.",
 	"wikibase-comment-add": "Ikintu cya{{WBREPONAME}} cyakozwe.",
 	"wikibase-comment-remove": "Akintu bihuje cyasibye {{WBREPONAME}}. Guhuza ururimi byavanyweho.",
 	"wikibase-comment-linked": "Ikintu cya{{WBREPONAME}} cyahujwe nuru rupapuro.",

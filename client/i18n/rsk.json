@@ -98,5 +98,10 @@
 	"wikibase-sitelinks-sitename-columnheading": "Язик",
 	"wikibase-sitelinks-link-columnheading": "Линковани бок",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Повязованє|Повязованя}} з Википодатками",
-	"echo-pref-tooltip-wikibase-action": "Обвисцує вас кед дахто повяже бок хтори сце направели на елемент Википодаткох."
+	"echo-pref-tooltip-wikibase-action": "Обвисцує вас кед дахто повяже бок хтори сце направели на елемент Википодаткох.",
+	"notification-header-page-connection": "{{GENDER:$2|Хаснователь|Хаснователька}} $2 {{GENDER:$2|повязял|повязала}} бок <strong>$3</strong> на елемент {{PLURAL:$4|$4}} на Википодатох.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|єден други бок {{GENDER:$2|повязани}}|$4 други боки {{GENDER:$2|повязани}}|$4 других бокох {{GENDER:$2|повязаних}}}} зоз елементом на {{WBREPONAME}}, дзе мож позберац податки релевантни за теме.",
+	"notification-link-text-view-item": "{{GENDER:$1|Опатри}} елемент",
+	"notification-subject-page-connection": "{{GENDER:$2|Хаснователь|Хаснователька|Хаснователь}} $2 бок <strong>$3</strong> хтори Ви {{GENDER:$3|направели}} на проєкту {{SITENAME}} {{GENDER:$2|повязал|повязала|повязал}} на елемент на Википодаткох",
+	"unresolved-property-category": "Боки зоз  нєрозяшнєтима свойствами"
 }

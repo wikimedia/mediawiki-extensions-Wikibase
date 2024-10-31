@@ -21,7 +21,6 @@
 	"tooltip-t-wikibase": "Länk till anslutet databasobjekt",
 	"wikibase-after-page-move": "Din flyttning bör nu [$1 återspeglas i {{WBREPONAME}}-objektets] språklänk. Vi ber dig att kontrollera att detta genomfördes.",
 	"wikibase-after-page-delete": "Länken till denna sida skulle ha tagits bort från [$1 det tillhörande objektet på {{WBREPONAME}}]. Vi ber dig att kontrollera att det har åtgärdats.",
-	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-objektet] associerat med denna sida kommer att uppdateras automatiskt. Notera att detta kanske inte sker omedelbart.",
 	"wikibase-comment-add": "Ett {{WBREPONAME}}objekt har skapats.",
 	"wikibase-comment-remove": "Tillhörande {{WBREPONAME}}objekt togs bort. Språklänkar togs bort.",
 	"wikibase-comment-linked": "Ett {{WBREPONAME}}objekt har länkats till den här sidan.",

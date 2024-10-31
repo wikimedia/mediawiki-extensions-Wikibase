@@ -14,7 +14,6 @@
 	"tooltip-t-wikibase": "Veza ka stavci na spremištu podataka",
 	"wikibase-after-page-move": "Vaše premeštanje se sada treba [$1 odraziti na jezičnu vezu stavke na Vikipodacima]. Proverite da li se to dogodilo.",
 	"wikibase-after-page-delete": "Veza ka ovoj stranici treba da bude uklonjena iz [$1 povezane stavke na Vikipodacima]. Proverite da li se to dogodilo.",
-	"wikibase-after-page-delete-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se automatski ažurirati. Napominjemo da se ovo ne može desiti odmah.",
 	"wikibase-comment-add": "Stavka na Vikipodacima je napravljena.",
 	"wikibase-comment-remove": "Pridružena stavka na Vikipodacima je izbrisana. Jezičke veze uklonjene.",
 	"wikibase-comment-linked": "Stavka na Vikipodacima je povezana sa ovom stranicom.",
