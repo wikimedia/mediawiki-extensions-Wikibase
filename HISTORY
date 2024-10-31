@@ -1,4 +1,107 @@
-Change notes from older releases. For current info, see RELEASE-NOTES-1.43.
+Change notes from older releases. For current info, see RELEASE-NOTES-1.44.
+
+= Wikibase 1.42 =
+
+== Upgrading notes for 1.42 ==
+
+Don't forget to always back up your database before upgrading!
+Some specific notes for Wikibase 1.42 upgrades are below:
+
+...
+
+For a general manual to upgrade MediaWiki see:
+
+https://www.mediawiki.org/wiki/Manual:Upgrading
+
+=== Configuration changes for system administrators in 1.42 ===
+
+==== New configuration ====
+
+* ...
+
+==== Changed configuration ====
+
+* ...
+
+==== Removed configuration ====
+
+* ...
+
+=== New user-facing features in 1.42 ===
+
+* (repo) (T251480) Data values are automatically normalized on save.
+  Built-in normalizations are defined for the commonsMedia data type and the string value type.
+  Custom data and value types can register normalization using the normalizer-factory-callback definition key.
+* ...
+
+=== External library changes in 1.42 ===
+
+==== New external libraries ====
+
+* ...
+
+==== Changed external libraries ====
+
+* ...
+
+==== Removed external libraries ====
+
+* (T12345) ...
+
+=== Bug fixes in 1.42 ===
+
+* (T12345) ...
+
+=== Action API changes in 1.42 ===
+
+* (T12345) ...
+
+=== Languages updated in 1.42 ===
+
+Wikibase supports over 300 languages. Many localisations are updated regularly.
+Below only new and removed languages are listed, as well as changes to languages
+because of Phabricator reports.
+New monolingual support:
+
+* (T12345) ...
+
+Monolingual entries removed as they are now natively supported by MediaWiki:
+
+* (T12345) ...
+
+=== Breaking changes in 1.42 ===
+
+* (T263427) The RDF URIs will now always use the the unlocalized name Special:EntityData,
+  not a localized name like e.g. Spezial:Objektdaten.
+  This only affects wikis with a $wgLanguageCode other than "en".
+
+* (T12345) ...
+
+=== Deprecations in 1.42 ===
+
+* (T12345) ...
+
+=== Other changes in 1.42 ===
+
+* (T12345) ...
+
+== Online documentation ==
+
+Installation instructions and FAQ
+		https://www.mediawiki.org/wiki/Wikibase
+
+Developer documentation of Wikibase 1.42
+		https://doc.wikimedia.org/Wikibase/REL1_42/
+
+== Mailing list ==
+
+Discussion regarding the development of Wikidata
+		https://lists.wikimedia.org/mailman/listinfo/wikidata-tech
+
+== IRC help ==
+
+Questions related to wikibase and wikidata can be asked in #wikidata on irc.libera.chat.
+
 
 = Wikibase 1.41 =
 
