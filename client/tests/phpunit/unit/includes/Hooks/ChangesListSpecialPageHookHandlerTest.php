@@ -61,7 +61,6 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	protected function tearDown(): void {
 		parent::tearDown();
 
-		RequestContext::resetMain();
 		$this->extensionRegistry->loaded = $this->oldExtensionRegistryLoaded;
 	}
 
@@ -84,7 +83,9 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 			MediaWikiServices::getInstance()->getUserOptionsLookup()
 		) );
 
-		$specialPage->getContext()->setUser( $user );
+		$context = new RequestContext();
+		$context->setUser( $user );
+		$specialPage->setContext( $context );
 
 		// Register built-in filters, since the Wikidata one uses its group
 		$wrappedSpecialPage->registerFiltersFromDefinitions(
