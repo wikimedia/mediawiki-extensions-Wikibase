@@ -520,7 +520,7 @@ class CreatePropertyValidatorTest extends TestCase {
 				UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
 				"Statement's Property ID does not match the Statement group key",
 				[
-					UseCaseError::CONTEXT_PATH => self::EXISTING_STRING_PROPERTY_IDS[0] . '/0/property/id',
+					UseCaseError::CONTEXT_PATH => '/property/statements/' . self::EXISTING_STRING_PROPERTY_IDS[0] . '/0/property/id',
 					UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => self::EXISTING_STRING_PROPERTY_IDS[0],
 					UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => 'P122',
 				]

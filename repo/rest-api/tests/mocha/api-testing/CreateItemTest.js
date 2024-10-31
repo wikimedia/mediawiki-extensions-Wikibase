@@ -465,7 +465,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				400,
 				'statement-group-property-id-mismatch',
 				{
-					path: `${propertyIdKey}/0/property/id`,
+					path: `/item/statements/${propertyIdKey}/0/property/id`,
 					statement_group_property_id: propertyIdKey,
 					statement_property_id: predicatePropertyId
 				}
