@@ -689,17 +689,15 @@
 			"application/json": {
 				"schema": { "$ref": "./schema-parts.json#/Sitelinks" },
 				"example": {
-					"sitelinks": {
-						"enwiki": {
-							"title": "Jane Doe",
-							"badges": [],
-							"url": "https://enwiki.example.org/wiki/Jane_Doe"
-						},
-						"ruwiki": {
-							"title": "Джейн Доу",
-							"badges": [],
-							"url": "https://ruwiki.example.org/wiki/Джейн_Доу"
-						}
+					"enwiki": {
+						"title": "Jane Doe",
+						"badges": [],
+						"url": "https://enwiki.example.org/wiki/Jane_Doe"
+					},
+					"ruwiki": {
+						"title": "Джейн Доу",
+						"badges": [],
+						"url": "https://ruwiki.example.org/wiki/Джейн_Доу"
 					}
 				}
 			}
