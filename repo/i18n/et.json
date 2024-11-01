@@ -364,7 +364,7 @@
 	"wikibase-self-conflict-patched": "Sinu muudatus paigati viimasesse versiooni, mõned sinu vahepealsed muudatused kirjutati üle.",
 	"wikibase-conflict-patched": "Sinu muudatus paigati viimasesse versiooni.",
 	"wikibase-restoreold": "ennista",
-	"wikibase-entity-summary-restore": "Kasutaja [[Special:Contributions/$4|{{GENDER:$4|$4}}]] redaktsioon [[Special:Permalink/$3|$3]] taastatud.",
+	"wikibase-entity-summary-restore": "Kasutaja [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|arutelu]]) redaktsioon [[Special:Permalink/$3|$3]] taastatud",
 	"wikibase-entity-summary-undo": "Eemaldatud muudatus [[Special:Diff/$3|$3]], mille tegi [[Special:Contributions/$4|$4]] ([[User talk:$4|arutelu]])",
 	"wikibase-no-direct-editing": "Otseredigeerimine nimeruumis $1 on keelatud",
 	"wikibase-noentity": "Üksust pole olemas. Saad <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} otsida seotud logidest]</span>, kuhu see kadus.",
