@@ -26,7 +26,7 @@ class GetItemLabelRouteHandler extends SimpleHandler {
 
 	private const ITEM_ID_PATH_PARAM = 'item_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
-	public const ROUTE = '/wikibase/v0/entities/items/{item_id}/labels/{language_code}';
+	public const ROUTE = '/wikibase/v1/entities/items/{item_id}/labels/{language_code}';
 
 	private GetItemLabel $useCase;
 	private MiddlewareHandler $middlewareHandler;

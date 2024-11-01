@@ -14,7 +14,7 @@ exports.mochaHooks = {
 	beforeAll: [
 		async function () {
 			const spec = await SwaggerParser.dereference( './specs/openapi.json' );
-			spec.servers = [ { url: new REST().req.app + 'rest.php/wikibase/v0' } ];
+			spec.servers = [ { url: new REST().req.app + 'rest.php/wikibase/v1' } ];
 			chai.use( chaiResponseValidator( spec ) );
 		}
 	]

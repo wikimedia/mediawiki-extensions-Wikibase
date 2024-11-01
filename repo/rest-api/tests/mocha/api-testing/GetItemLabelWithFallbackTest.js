@@ -45,7 +45,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 307 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v0/entities/items/${itemId}/labels/ar` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${itemId}/labels/ar` )
 		);
 	} );
 
@@ -55,7 +55,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v0/entities/items/${itemId}/labels/mul`
+			`rest.php/wikibase/v1/entities/items/${itemId}/labels/mul`
 		) );
 	} );
 
@@ -70,7 +70,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v0/entities/items/${redirectTarget}/labels_with_language_fallback/en` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/labels_with_language_fallback/en` )
 		);
 	} );
 

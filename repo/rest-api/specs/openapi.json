@@ -92,6 +92,6 @@
 		}
 	],
 	"servers": [
-		{ "url": "https://wikibase.example/w/rest.php/wikibase/v0" }
+		{ "url": "https://wikibase.example/w/rest.php/wikibase/v1" }
 	]
 }
