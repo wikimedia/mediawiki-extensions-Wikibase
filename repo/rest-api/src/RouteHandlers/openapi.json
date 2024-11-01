@@ -381,18 +381,16 @@
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
-                "value": {
-                  "patch": [
-                    {
-                      "op": "replace",
-                      "path": "/labels/en",
-                      "value": "Jane Doe"
-                    }
-                  ],
-                  "tags": [],
-                  "bot": false,
-                  "comment": "Update the English label"
-                }
+                "patch": [
+                  {
+                    "op": "replace",
+                    "path": "/labels/en",
+                    "value": "Jane Doe"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Update the English label"
               }
             }
           }
@@ -515,18 +513,16 @@
                 "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1aliases/patch/requestBody/content/application~1json/schema"
               },
               "example": {
-                "value": {
-                  "patch": [
-                    {
-                      "op": "add",
-                      "path": "/ruwiki/title",
-                      "value": "Джейн Доу"
-                    }
-                  ],
-                  "tags": [],
-                  "bot": false,
-                  "comment": "Add sitelink to ruwiki"
-                }
+                "patch": [
+                  {
+                    "op": "add",
+                    "path": "/ruwiki/title",
+                    "value": "Джейн Доу"
+                  }
+                ],
+                "tags": [],
+                "bot": false,
+                "comment": "Add sitelink to ruwiki"
               }
             }
           }
@@ -4696,20 +4692,18 @@
                   "$ref": "#/paths/~1entities~1items~1%7Bitem_id%7D~1statements/post/responses/201/content/application~1json/schema"
                 },
                 "example": {
+                  "id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
+                  "rank": "normal",
+                  "property": {
+                    "id": "P1628",
+                    "data_type": "url"
+                  },
                   "value": {
-                    "id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
-                    "rank": "normal",
-                    "property": {
-                      "id": "P1628",
-                      "data_type": "url"
-                    },
-                    "value": {
-                      "type": "value",
-                      "content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-                    },
-                    "qualifiers": [],
-                    "references": []
-                  }
+                    "type": "value",
+                    "content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                  },
+                  "qualifiers": [],
+                  "references": []
                 }
               }
             }
@@ -4976,7 +4970,7 @@
               "example": {
                 "patch": [
                   {
-                    "op": "update",
+                    "op": "replace",
                     "path": "/value/content",
                     "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
                   }
@@ -6853,17 +6847,15 @@
               "$ref": "#/components/schemas/Item/properties/sitelinks"
             },
             "example": {
-              "sitelinks": {
-                "enwiki": {
-                  "title": "Jane Doe",
-                  "badges": [],
-                  "url": "https://enwiki.example.org/wiki/Jane_Doe"
-                },
-                "ruwiki": {
-                  "title": "Джейн Доу",
-                  "badges": [],
-                  "url": "https://ruwiki.example.org/wiki/Джейн_Доу"
-                }
+              "enwiki": {
+                "title": "Jane Doe",
+                "badges": [],
+                "url": "https://enwiki.example.org/wiki/Jane_Doe"
+              },
+              "ruwiki": {
+                "title": "Джейн Доу",
+                "badges": [],
+                "url": "https://ruwiki.example.org/wiki/Джейн_Доу"
               }
             }
           }
