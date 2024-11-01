@@ -34,7 +34,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 
-	private function willSkipTests() {
+	private static function willSkipTests() {
 		return !ExtensionRegistry::getInstance()->isLoaded( 'GeoData' );
 	}
 
@@ -63,13 +63,13 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $updater->coordinates, $message );
 	}
 
-	public function processStatementProvider() {
-		if ( $this->willSkipTests() ) {
+	public static function processStatementProvider() {
+		if ( self::willSkipTests() ) {
 			return [ [ [], [], 'dummy test will be skipped' ] ];
 		}
 
-		$statements = $this->getStatements();
-		$coords = $this->getCoords();
+		$statements = self::getStatements();
+		$coords = self::getCoords();
 
 		return [
 			[
@@ -267,90 +267,90 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getStatements() {
+	private static function getStatements() {
 		$statements = [];
 
-		$statements['P42-string'] = $this->newStatement(
+		$statements['P42-string'] = self::newStatement(
 			new NumericPropertyId( 'P42' ),
 			new StringValue( 'kittens!' )
 		);
 
-		$statements['P625-geo'] = $this->newStatement(
+		$statements['P625-geo'] = self::newStatement(
 			new NumericPropertyId( 'P625' ),
-			$this->newGlobeCoordinateValue( 19.7, 306.8, 'Q111' )
+			self::newGlobeCoordinateValue( 19.7, 306.8, 'Q111' )
 		);
 
-		$statements['P10-geo-A'] = $this->newStatement(
+		$statements['P10-geo-A'] = self::newStatement(
 			new NumericPropertyId( 'P10' ),
-			$this->newGlobeCoordinateValue( 40.748433, -73.985655 )
+			self::newGlobeCoordinateValue( 40.748433, -73.985655 )
 		);
 
-		$statements['P10-geo-B'] = $this->newStatement(
+		$statements['P10-geo-B'] = self::newStatement(
 			new NumericPropertyId( 'P10' ),
-			$this->newGlobeCoordinateValue( 44.264464, 52.643666 )
+			self::newGlobeCoordinateValue( 44.264464, 52.643666 )
 		);
 
-		$statements['P10-geo-preferred-A'] = $this->newStatementWithRank(
+		$statements['P10-geo-preferred-A'] = self::newStatementWithRank(
 			new NumericPropertyId( 'P10' ),
-			$this->newGlobeCoordinateValue( 50.02440, 41.50202 ),
+			self::newGlobeCoordinateValue( 50.02440, 41.50202 ),
 			Statement::RANK_PREFERRED
 		);
 
-		$statements['P10-geo-preferred-B'] = $this->newStatementWithRank(
+		$statements['P10-geo-preferred-B'] = self::newStatementWithRank(
 			new NumericPropertyId( 'P10' ),
-			$this->newGlobeCoordinateValue( 70.0144, 30.0015 ),
+			self::newGlobeCoordinateValue( 70.0144, 30.0015 ),
 			Statement::RANK_PREFERRED
 		);
 
-		$statements['P9000-geo-A'] = $this->newStatement(
+		$statements['P9000-geo-A'] = self::newStatement(
 			new NumericPropertyId( 'P9000' ),
-			$this->newGlobeCoordinateValue( 33.643664, 20.464222 )
+			self::newGlobeCoordinateValue( 33.643664, 20.464222 )
 		);
 
-		$statements['P9000-geo-B'] = $this->newStatementWithQualifier(
+		$statements['P9000-geo-B'] = self::newStatementWithQualifier(
 			new NumericPropertyId( 'P9000' ),
-			$this->newGlobeCoordinateValue( 11.1234, 12.5678 ),
+			self::newGlobeCoordinateValue( 11.1234, 12.5678 ),
 			new SnakList( [
 				new PropertyValueSnak(
 					new NumericPropertyId( 'P625' ),
-					$this->newGlobeCoordinateValue( 30.0987, 20.1234 )
+					self::newGlobeCoordinateValue( 30.0987, 20.1234 )
 				),
 			] )
 		);
 
-		$statements['P9000-geo-preferred'] = $this->newStatementWithRank(
+		$statements['P9000-geo-preferred'] = self::newStatementWithRank(
 			new NumericPropertyId( 'P9000' ),
-			$this->newGlobeCoordinateValue( 77.7777, 33.3333 ),
+			self::newGlobeCoordinateValue( 77.7777, 33.3333 ),
 			Statement::RANK_PREFERRED
 		);
 
-		$statements['P17-geo-deprecated'] = $this->newStatementWithRank(
+		$statements['P17-geo-deprecated'] = self::newStatementWithRank(
 			new NumericPropertyId( 'P17' ),
-			$this->newGlobeCoordinateValue( 10.0234, 11.52352 ),
+			self::newGlobeCoordinateValue( 10.0234, 11.52352 ),
 			Statement::RANK_DEPRECATED
 		);
 
-		$statements['P20-some-value'] = $this->newStatement( new NumericPropertyId( 'P20' ) );
+		$statements['P20-some-value'] = self::newStatement( new NumericPropertyId( 'P20' ) );
 
-		$statements['P10-mismatch'] = $this->newStatement(
+		$statements['P10-mismatch'] = self::newStatement(
 			new NumericPropertyId( 'P10' ),
 			new StringValue( 'omg! wrong value type' )
 		);
 
-		$statements['P404-unknown-property'] = $this->newStatement(
+		$statements['P404-unknown-property'] = self::newStatement(
 			new NumericPropertyId( 'P404' ),
-			$this->newGlobeCoordinateValue( 40.733643, -72.352153 )
+			self::newGlobeCoordinateValue( 40.733643, -72.352153 )
 		);
 
-		$statements['P9002-unknown-globe'] = $this->newStatement(
+		$statements['P9002-unknown-globe'] = self::newStatement(
 			new NumericPropertyId( 'P9002' ),
-			$this->newGlobeCoordinateValue( 9.017, 14.0987, 'Q147' )
+			self::newGlobeCoordinateValue( 9.017, 14.0987, 'Q147' )
 		);
 
 		return $statements;
 	}
 
-	private function getCoords() {
+	private static function getCoords() {
 		return [
 			'P625-geo' => new Coord( 19.7, 306.8, 'mars' ),
 			'P10-geo-A' => new Coord( 40.748433, -73.985655 ),
@@ -363,7 +363,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function newStatement( NumericPropertyId $propertyId, DataValue $dataValue = null ) {
+	private static function newStatement( NumericPropertyId $propertyId, DataValue $dataValue = null ) {
 		$guidGenerator = new GuidGenerator();
 
 		if ( $dataValue === null ) {
@@ -377,29 +377,29 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		return new Statement( $snak, null, null, $guid );
 	}
 
-	private function newStatementWithRank(
+	private static function newStatementWithRank(
 		NumericPropertyId $propertyId,
 		DataValue $dataValue,
 		$rank
 	 ) {
-		$rankedStatement = $this->newStatement( $propertyId, $dataValue );
+		$rankedStatement = self::newStatement( $propertyId, $dataValue );
 		$rankedStatement->setRank( $rank );
 
 		return $rankedStatement;
 	}
 
-	private function newStatementWithQualifier(
+	private static function newStatementWithQualifier(
 		NumericPropertyId $propertyId,
 		DataValue $dataValue,
 		SnakList $qualifiers
 	) {
-		$statement = $this->newStatement( $propertyId, $dataValue );
+		$statement = self::newStatement( $propertyId, $dataValue );
 		$statement->setQualifiers( $qualifiers );
 
 		return $statement;
 	}
 
-	private function newGlobeCoordinateValue( $lat, $lon, $globeId = 'Q2' ) {
+	private static function newGlobeCoordinateValue( $lat, $lon, $globeId = 'Q2' ) {
 		$latLongValue = new LatLongValue( $lat, $lon );
 
 		// default globe is 'Q2' (earth)

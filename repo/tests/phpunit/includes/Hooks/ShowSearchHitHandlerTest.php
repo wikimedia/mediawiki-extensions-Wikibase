@@ -210,7 +210,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		return $entityContentFactory;
 	}
 
-	public function getPlainSearches() {
+	public static function getPlainSearches() {
 		return [
 			"simple" => [
 				'Q1',

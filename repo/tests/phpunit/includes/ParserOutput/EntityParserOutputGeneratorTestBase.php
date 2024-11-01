@@ -67,7 +67,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 		return $fallbackChain;
 	}
 
-	protected function newItem() {
+	protected static function newItem() {
 		$item = new Item( new ItemId( 'Q7799929' ) );
 
 		$item->setLabel( 'en', 'kitten item' );

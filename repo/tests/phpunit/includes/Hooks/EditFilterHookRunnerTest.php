@@ -76,7 +76,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStatusGood( $status );
 	}
 
-	public function runData() {
+	public static function runData() {
 		return [
 			'good existing item' => [
 				Status::newGood(),
