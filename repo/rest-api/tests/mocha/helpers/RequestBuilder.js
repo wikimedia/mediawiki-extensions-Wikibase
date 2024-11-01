@@ -2,7 +2,7 @@
 
 const { readFileSync } = require( 'fs' );
 const { assert, clientFactory } = require( 'api-testing' );
-const SwaggerParser = require( '@apidevtools/swagger-parser' );
+const { bundle, loadConfig } = require( '@redocly/openapi-core' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
@@ -10,12 +10,14 @@ const basePath = 'rest.php/wikibase/v1';
 const builtSpec = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
 
 // "static" because it can be shared across requests, and we don't want to dereference it every time
-let openApiSpec = null;
+let openApiSchema = null;
 
-async function getOrLoadSpec() {
-	openApiSpec = openApiSpec || await SwaggerParser.dereference( './specs/openapi.json' );
+async function getOrLoadSchema() {
+	const config = await loadConfig( { configPath: 'redocly.yaml' } );
+	openApiSchema = openApiSchema ||
+		( await bundle( { ref: './specs/openapi.json', config, dereference: true } ) ).bundle.parsed;
 
-	return openApiSpec;
+	return openApiSchema;
 }
 
 class RequestBuilder {
@@ -112,10 +114,10 @@ class RequestBuilder {
 			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
 		}
 
-		const spec = await getOrLoadSpec();
-		this.validateRouteAndMethod( spec );
+		const schema = await getOrLoadSchema();
+		this.validateRouteAndMethod( schema );
 		if ( this.validate ) {
-			this.validateRequest( spec );
+			this.validateRequest( schema );
 		}
 
 		let body = null;

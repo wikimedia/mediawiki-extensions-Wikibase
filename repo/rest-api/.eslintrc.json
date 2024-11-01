@@ -6,7 +6,8 @@
 		"node_modules/",
 		"vendor",
 		"dist/",
-		"docs/"
+		"docs/",
+		".redocly.lint-ignore.yaml"
 	],
 	"rules": {
 		"max-len": [ "warn", { "code":  130 } ],
