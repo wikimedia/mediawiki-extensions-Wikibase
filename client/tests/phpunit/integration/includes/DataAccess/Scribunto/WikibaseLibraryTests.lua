@@ -44,6 +44,15 @@ local function testGetAllStatementsFormat()
 	return directBestAccess ~= directAccess and directAccess == entityAccess
 end
 
+local function testGetAllStatementsTableIsCloned()
+	local statements = mw.wikibase.getAllStatements( 'Q32487', 'P342' )
+	table.remove(statements)
+
+	-- We should get a freshly cloned table here, so the changes above won't persist
+	local newStatements = mw.wikibase.getAllStatements( 'Q32487', 'P342' )
+	return #statements == #newStatements -1
+end
+
 local function testGetEntityObjectIsCloned()
 	mw.wikibase.getEntityObject( 'Q199024' ).id = 'a'
 
@@ -170,6 +179,9 @@ local tests = {
 	{ name = 'mw.wikibase.getAllStatements (format)', func = testGetAllStatementsFormat,
 	  expect = { true }
 	},
+	{ name = 'mw.wikibase.getAllStatements (is cloned)', func = testGetAllStatementsTableIsCloned,
+      expect = { true }
+  	},
 	{ name = 'mw.wikibase.getEntityObject (is cloned)', func = testGetEntityObjectIsCloned, type='ToString',
 	  expect = { 'Q199024' }
 	},
