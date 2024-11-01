@@ -69,7 +69,7 @@ trait DescriptionsChangeOpDeserializationTester {
 	/**
 	 * @return DescriptionsProvider|EntityDocument
 	 */
-	abstract protected function getEntity();
+	abstract protected static function getEntity();
 
 	/**
 	 * @return ChangeOpDeserializer

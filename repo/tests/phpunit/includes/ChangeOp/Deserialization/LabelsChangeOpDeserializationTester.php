@@ -67,7 +67,7 @@ trait LabelsChangeOpDeserializationTester {
 	/**
 	 * @return LabelsProvider|EntityDocument
 	 */
-	abstract protected function getEntity();
+	abstract protected static function getEntity();
 
 	/**
 	 * @return ChangeOpDeserializer

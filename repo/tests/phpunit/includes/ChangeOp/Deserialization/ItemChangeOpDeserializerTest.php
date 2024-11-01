@@ -123,7 +123,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return $this->newItemChangeOpDeserializer();
 	}
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Item( new ItemId( 'Q23' ) );
 	}
 

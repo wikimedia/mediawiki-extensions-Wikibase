@@ -44,11 +44,11 @@ class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $guid, $changeop->getGuid() );
 	}
 
-	public function changeOpProvider() {
+	public static function changeOpProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = [];
 
-		$item = $this->newItemWithClaim( 'q345', $snak );
+		$item = self::newItemWithClaim( 'q345', $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -71,7 +71,7 @@ class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	private function newItemWithClaim( $itemIdString, $snak ) {
+	private static function newItemWithClaim( $itemIdString, $snak ) {
 		$item = new Item( new ItemId( $itemIdString ) );
 
 		$item->getStatements()->addNewStatement(

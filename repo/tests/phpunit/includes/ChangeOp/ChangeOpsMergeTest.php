@@ -126,9 +126,9 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( ChangeOpsMerge::class, $changeOps );
 	}
 
-	public function provideValidConstruction() {
-		$from = $this->newItemWithId( 'Q111' );
-		$to = $this->newItemWithId( 'Q222' );
+	public static function provideValidConstruction() {
+		$from = self::newItemWithId( 'Q111' );
+		$to = self::newItemWithId( 'Q222' );
 		return [
 			[ $from, $to, [] ],
 			[ $from, $to, [ 'sitelink' ] ],
@@ -150,9 +150,9 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideInvalidConstruction() {
-		$from = $this->newItemWithId( 'Q111' );
-		$to = $this->newItemWithId( 'Q222' );
+	public static function provideInvalidConstruction() {
+		$from = self::newItemWithId( 'Q111' );
+		$to = self::newItemWithId( 'Q222' );
 		return [
 			[ $from, $to, [ 'label' ] ],
 			[ $from, $to, [ 'foo' ] ],
@@ -160,7 +160,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function newItemWithId( $idString ) {
+	private static function newItemWithId( $idString ) {
 		return NewItem::withId( $idString )
 			->build();
 	}

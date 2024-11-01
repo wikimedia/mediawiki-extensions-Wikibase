@@ -98,7 +98,7 @@ class AliasesChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return $this->newAliasesChangeOpDeserializer( $this->getTermChangeOpValidator() );
 	}
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Item();
 	}
 

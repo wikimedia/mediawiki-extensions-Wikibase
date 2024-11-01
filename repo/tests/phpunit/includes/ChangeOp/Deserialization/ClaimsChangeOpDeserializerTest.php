@@ -61,7 +61,7 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return $this->newClaimsChangeOpDeserializer();
 	}
 
-	public function getEntity() {
+	public static function getEntity() {
 		return new Item( new ItemId( 'Q123' ) );
 	}
 

@@ -88,7 +88,7 @@ trait AliasChangeOpDeserializationTester {
 	/**
 	 * @return AliasesProvider|EntityDocument
 	 */
-	abstract protected function getEntity();
+	abstract protected static function getEntity();
 
 	/**
 	 * @return ChangeOpDeserializer
