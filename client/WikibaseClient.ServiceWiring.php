@@ -718,7 +718,7 @@ return [
 
 	'WikibaseClient.PropertyLabelResolver' => function ( MediaWikiServices $services ): PropertyLabelResolver {
 		// Required services
-		$languageCode = $services->getContentLanguage()->getCode();
+		$languageCode = $services->getContentLanguageCode()->toString();
 
 		$settings = WikibaseClient::getSettings( $services );
 		$cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
