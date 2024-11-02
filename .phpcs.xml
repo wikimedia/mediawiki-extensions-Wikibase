@@ -6,6 +6,7 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag" />
 		<exclude name="MediaWiki.Usage.StaticClosure.StaticClosure" />
+		<exclude name="MediaWiki.Usage.NullableType.ExplicitNullableTypes" />
 	</rule>
 
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.
