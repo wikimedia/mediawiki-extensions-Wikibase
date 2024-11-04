@@ -6,8 +6,12 @@
 			"Əkrəm Cəfər"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" dəyərləri hələ dəstəklənmir.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" data tipi hələ dəstəklənmir.",
 	"valueview-expert-emptyvalue-empty": "boş",
 	"valueview-expert-globecoordinateinput-precision": "Dəqiqlik:",
+	"valueview-expert-globecoordinateinput-nullprecision": "təyin edilməyib",
+	"valueview-expert-globecoordinateinput-customprecision": "xüsusi ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Qriqori təqvimi",
 	"valueview-expert-timevalue-calendar-julian": "Yuli təqvimi",
 	"valueview-expert-timeinput-precision": "Dəqiqlik:",
