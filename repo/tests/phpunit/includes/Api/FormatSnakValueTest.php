@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Formatters\ShowCalendarModelDecider;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -453,4 +454,22 @@ class FormatSnakValueTest extends ApiTestCase {
 			'options' => json_encode( [ QuantityFormatter::OPT_APPLY_UNIT => 'invalid' ] ),
 		] );
 	}
+
+	/** @dataProvider provideInvalidShowcalendar */
+	public function testApiRequest_invalidShowcalendarInOptions( $showcalendar ): void {
+		$this->expectException( ApiUsageException::class, 'wikibase-api-invalid-formatter-options-showcalendar' );
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'time',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ ShowCalendarModelDecider::OPT_SHOW_CALENDAR => $showcalendar ] ),
+		] );
+	}
+
+	public static function provideInvalidShowcalendar(): iterable {
+		yield [ 'invalid' ];
+		yield [ 12 ];
+	}
+
 }

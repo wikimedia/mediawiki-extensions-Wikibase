@@ -282,6 +282,14 @@ class FormatSnakValue extends ApiBase {
 					);
 				}
 				break;
+			case ShowCalendarModelDecider::OPT_SHOW_CALENDAR:
+				if ( !is_bool( $value ) && $value !== 'auto' ) {
+					$this->errorReporter->dieWithError(
+						'wikibase-api-invalid-formatter-options-showcalendar',
+						'param-illegal'
+					);
+				}
+				break;
 		}
 		$options->setOption( $option, $value );
 	}
