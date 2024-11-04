@@ -6,7 +6,8 @@ const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newRemoveItemLabelRequestBuilder,
 	newSetItemLabelRequestBuilder,
-	newGetItemLabelRequestBuilder
+	newGetItemLabelRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -17,7 +18,7 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 	let testItemId;
 
 	before( async () => {
-		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 	} );
 
 	describe( '200 success response', () => {

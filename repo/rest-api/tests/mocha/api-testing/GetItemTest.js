@@ -34,7 +34,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	before( async () => {
 		siteId = await getLocalSiteId();
 
-		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		testStatement = newStatementWithRandomStringValue( testStatementPropertyId );
 
 		const createItemResponse = await newCreateItemRequestBuilder( {

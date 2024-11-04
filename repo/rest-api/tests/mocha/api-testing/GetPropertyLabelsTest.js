@@ -12,8 +12,8 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const testProperty = await createUniqueStringProperty();
-		propertyId = testProperty.entity.id;
-		propertyEnLabel = testProperty.entity.labels.en.value;
+		propertyId = testProperty.body.id;
+		propertyEnLabel = testProperty.body.labels.en;
 	} );
 
 	it( 'can get the labels of a property', async () => {

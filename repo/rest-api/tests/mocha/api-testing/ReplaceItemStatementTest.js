@@ -7,7 +7,9 @@ const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries'
 const {
 	newReplaceItemStatementRequestBuilder,
 	newReplaceStatementRequestBuilder,
-	newGetItemStatementsRequestBuilder
+	newGetItemStatementsRequestBuilder,
+	newCreatePropertyRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -21,7 +23,7 @@ describe( 'PUT statement tests', () => {
 	let originalRevisionId;
 
 	before( async () => {
-		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const createItemResponse = await entityHelper.createItemWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( predicatePropertyId )
 		] );
@@ -192,10 +194,9 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid operation - new statement has a different Property ID', async () => {
-					const differentPropertyId = ( await entityHelper.createEntity(
-						'property',
-						{ datatype: 'string' }
-					) ).entity.id;
+					const differentPropertyId = ( await newCreatePropertyRequestBuilder(
+						{ data_type: 'string' }
+					).makeRequest() ).body.id;
 					const statement = entityHelper.newStatementWithRandomStringValue( differentPropertyId );
 					const response = await newReplaceRequestBuilder( testItemId, testStatementId, statement )
 						.assertValidRequest().makeRequest();
@@ -368,7 +369,7 @@ describe( 'PUT statement tests', () => {
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {
-			const itemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 			const response = await newReplaceItemStatementRequestBuilder( itemId, testStatementId )
 				.withJsonBodyParam( 'statement', statement )

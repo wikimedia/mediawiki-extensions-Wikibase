@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyAliasesRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
@@ -11,22 +14,16 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let lastRevisionId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
 			aliases: {
-				de: [
-					{ language: 'de', value: 'a-German-alias-' + utils.uniq() },
-					{ language: 'de', value: 'another-German-alias-' + utils.uniq() }
-				],
-				en: [
-					{ language: 'en', value: 'an-English-alias-' + utils.uniq() },
-					{ language: 'en', value: 'another-English-alias-' + utils.uniq() }
-				]
-			},
-			datatype: 'string'
-		} );
+				de: [ 'a-German-alias-' + utils.uniq(), 'another-German-alias-' + utils.uniq() ],
+				en: [ 'an-English-alias-' + utils.uniq(), 'another-English-alias-' + utils.uniq() ]
+			}
+		} ).makeRequest();
 
-		testPropertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		testPropertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testPropertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for a Property with two aliases', async () => {

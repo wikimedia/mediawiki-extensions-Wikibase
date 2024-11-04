@@ -3,14 +3,16 @@
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	createUniqueStringProperty,
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
 	createItemWithStatements
 } = require( '../helpers/entityHelper' );
-const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetItemStatementsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -24,8 +26,8 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 	let testStatements;
 
 	before( async () => {
-		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		testStatementPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId2 = ( await createUniqueStringProperty() ).body.id;
 
 		testStatements = [
 			newStatementWithRandomStringValue( testStatementPropertyId ),
@@ -70,10 +72,9 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( 'can GET empty statements list', async () => {
-		const createItemResponse = await createEntity( 'item',
-			{ labels: { en: { language: 'en', value: 'item without statements' } } }
-		);
-		const response = await newGetItemStatementsRequestBuilder( createItemResponse.entity.id )
+		const createItemResponse = await newCreateItemRequestBuilder( { labels: { en: 'item without statements' } }
+		).makeRequest();
+		const response = await newGetItemStatementsRequestBuilder( createItemResponse.body.id )
 			.assertValidRequest()
 			.makeRequest();
 

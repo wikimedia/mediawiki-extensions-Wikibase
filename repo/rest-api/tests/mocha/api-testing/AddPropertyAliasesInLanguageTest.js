@@ -3,7 +3,10 @@
 const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newAddPropertyAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newAddPropertyAliasesInLanguageRequestBuilder: newRequest,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -33,14 +36,11 @@ describe( newRequest().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createEntityResponse = await entityHelper.createEntity( 'property', {
-			datatype: 'string',
-			aliases: {
-				en: [ { language: 'en', value: existingEnglishAlias } ],
-				fr: [ { language: 'fr', value: existingFrenchAlias } ]
-			}
-		} );
-		testPropertyId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			aliases: { en: [ existingEnglishAlias ], fr: [ existingFrenchAlias ] }
+		} ).makeRequest();
+		testPropertyId = createEntityResponse.body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );

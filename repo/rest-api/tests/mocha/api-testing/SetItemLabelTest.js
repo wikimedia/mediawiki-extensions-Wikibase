@@ -3,7 +3,7 @@
 const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newSetItemLabelRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -34,16 +34,11 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		testEnDescription = `english description ${utils.uniq()}`;
-		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			labels: {
-				en: { language: 'en', value: `english label ${utils.uniq()}` },
-				fr: { language: 'fr', value: `étiquette française ${utils.uniq()}` }
-			},
-			descriptions: {
-				en: { language: 'en', value: testEnDescription }
-			}
-		} );
-		testItemId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreateItemRequestBuilder( {
+			labels: { en: `english label ${utils.uniq()}`, fr: `étiquette française ${utils.uniq()}` },
+			descriptions: { en: testEnDescription } }
+		).makeRequest();
+		testItemId = createEntityResponse.body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -223,11 +218,11 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		it( 'label equals description', async () => {
 			const language = 'en';
 			const description = `some-description-${utils.uniq()}`;
-			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: language, value: `some-label-${utils.uniq()}` } ],
-				descriptions: [ { language: language, value: description } ]
-			} );
-			testItemId = createEntityResponse.entity.id;
+			const createEntityResponse = await newCreateItemRequestBuilder( {
+				labels: { [ language ]: `some-label-${utils.uniq()}` },
+				descriptions: { [ language ]: description }
+			} ).makeRequest();
+			testItemId = createEntityResponse.body.id;
 
 			const comment = 'Label equals description';
 			const response = await newSetItemLabelRequestBuilder( testItemId, language, description )
@@ -244,35 +239,33 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 
-		it( 'item with same label and description already exists', async () => {
-			const language = 'en';
-			const label = `test-label-${utils.uniq()}`;
-			const description = `test-description-${utils.uniq()}`;
-			const existingEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: language, value: label } ],
-				descriptions: [ { language: language, value: description } ]
-			} );
-			const existingItemId = existingEntityResponse.entity.id;
-			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: language, value: `label-to-be-replaced-${utils.uniq()}` } ],
-				descriptions: [ { language: language, value: description } ]
-			} );
-			testItemId = createEntityResponse.entity.id;
+	} );
+	it( 'item with same label and description already exists', async () => {
+		const language = 'en';
+		const label = `test-label-${utils.uniq()}`;
+		const description = `test-description-${utils.uniq()}`;
+		const existingEntityResponse = await newCreateItemRequestBuilder( {
+			labels: { [ language ]: label }, descriptions: { [ language ]: description } }
+		).makeRequest();
+		const existingItemId = existingEntityResponse.body.id;
+		const createEntityResponse = await newCreateItemRequestBuilder(
+			{ labels: { [ language ]: `label-to-be-replaced-${utils.uniq()}` }, descriptions: { [ language ]: description } }
+		).makeRequest();
+		testItemId = createEntityResponse.body.id;
 
-			const response = await newSetItemLabelRequestBuilder( testItemId, language, label )
-				.assertValidRequest().makeRequest();
+		const response = await newSetItemLabelRequestBuilder( testItemId, language, label )
+			.assertValidRequest().makeRequest();
 
-			const context = {
-				violation: 'item-label-description-duplicate',
-				violation_context: {
-					language: language,
-					conflicting_item_id: existingItemId
-				}
-			};
+		const context = {
+			violation: 'item-label-description-duplicate',
+			violation_context: {
+				language: language,
+				conflicting_item_id: existingItemId
+			}
+		};
 
-			assertValidError( response, 422, 'data-policy-violation', context );
-			assert.strictEqual( response.body.message, 'Edit violates data policy' );
-		} );
+		assertValidError( response, 422, 'data-policy-violation', context );
+		assert.strictEqual( response.body.message, 'Edit violates data policy' );
 	} );
 
 	describe( '404 error response', () => {

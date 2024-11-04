@@ -9,7 +9,8 @@ const {
 	newPatchStatementRequestBuilder,
 	newPatchPropertyStatementRequestBuilder,
 	newReplaceStatementRequestBuilder,
-	newAddPropertyStatementRequestBuilder
+	newAddPropertyStatementRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -22,8 +23,8 @@ describe( 'PATCH property statement', () => {
 	let previousEtag;
 
 	before( async function () {
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const addStatementResponse = await newAddPropertyStatementRequestBuilder(
 			testPropertyId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
@@ -275,15 +276,15 @@ describe( 'PATCH property statement', () => {
 				} );
 
 				it( 'rejects Property ID change', async () => {
-					const otherStringPropertyId = ( await entityHelper.createEntity(
-						'property',
-						{ datatype: 'string' }
-					) ).entity.id;
+					const otherStringPropertyId = ( await newCreatePropertyRequestBuilder(
+						{ data_type: 'string' }
+					).makeRequest() ).body.id;
 					const patch = [ {
 						op: 'replace',
 						path: '/property/id',
 						value: otherStringPropertyId
 					} ];
+
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();
 
@@ -363,7 +364,7 @@ describe( 'PATCH property statement', () => {
 		} );
 
 		it( 'responds 400 if property and statement do not match', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const response = await newPatchPropertyStatementRequestBuilder( requestedPropertyId, testStatementId, [] )
 				.assertValidRequest()
 				.makeRequest();

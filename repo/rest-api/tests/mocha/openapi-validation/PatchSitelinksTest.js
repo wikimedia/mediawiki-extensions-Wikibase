@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
-const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
+const {
+	newPatchSitelinksRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
@@ -22,8 +25,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		testItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();

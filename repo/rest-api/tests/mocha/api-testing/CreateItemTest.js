@@ -18,7 +18,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		localWikiId = await entityHelper.getLocalSiteId();
 		testWikiPage = utils.title( 'Sitelink test page' );
 		await entityHelper.createWikiPage( testWikiPage );
-		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 	} );
 
 	describe( '201 success response ', () => {
@@ -38,7 +38,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const descriptions = { en: `root vegetable ${utils.uniq()}` };
 			const aliases = { en: [ 'spud', 'tater', 'spud' ] };
 
-			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const statementValue = 'Solanum tuberosum';
 			const statements = {
 				[ statementPropertyId ]: [ {
@@ -263,11 +263,11 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const label = `test-label-${utils.uniq()}`;
 			const description = `test-description-${utils.uniq()}`;
 
-			const existingEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: languageCode, value: label } ],
-				descriptions: [ { language: languageCode, value: description } ]
-			} );
-			const existingItemId = existingEntityResponse.entity.id;
+			const existingEntityResponse = await newCreateItemRequestBuilder( {
+				labels: { [ languageCode ]: label },
+				descriptions: { [ languageCode ]: description }
+			} ).makeRequest();
+			const existingItemId = existingEntityResponse.body.id;
 
 			const itemToCreate = {};
 			itemToCreate.labels = {};
@@ -641,7 +641,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'provided item is not an allowed badge', async () => {
-			const badge = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const badge = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const response = await newCreateItemRequestBuilder( {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ badge ] } }

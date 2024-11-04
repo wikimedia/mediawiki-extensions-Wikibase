@@ -2,10 +2,11 @@
 
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const {
 	newGetPropertyLabelWithFallbackRequestBuilder,
-	newSetPropertyLabelRequestBuilder
+	newSetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -21,11 +22,10 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 	}
 
 	before( async () => {
-		const testProperty = await createEntity( 'property', {
-			labels: [ { language: fallbackLanguageWithExistingLabel, value: propertyDeLabel } ],
-			datatype: 'string'
-		} );
-		propertyId = testProperty.entity.id;
+		const testProperty = await newCreatePropertyRequestBuilder(
+			{ data_type: 'string', labels: { [ fallbackLanguageWithExistingLabel ]: propertyDeLabel } }
+		).makeRequest();
+		propertyId = testProperty.body.id;
 	} );
 
 	it( '200 - can get a label of a property', async () => {
@@ -105,10 +105,9 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 	} );
 
 	it( '404 - in case label does not exist in the requested or any fallback languages', async () => {
-		const propertyWithoutMulFallbackId = ( await createEntity( 'property', {
-			labels: [ { language: 'ar', value: `ar-label-${utils.uniq()}` } ],
-			datatype: 'string'
-		} ) ).entity.id;
+		const propertyWithoutMulFallbackId = ( await newCreatePropertyRequestBuilder(
+			{ data_type: 'string', labels: { ar: `ar-label-${utils.uniq()}` } }
+		).makeRequest() ).body.id;
 
 		const response = await makeRequestWithMulHeader(
 			newGetPropertyLabelWithFallbackRequestBuilder( propertyWithoutMulFallbackId, 'en' )

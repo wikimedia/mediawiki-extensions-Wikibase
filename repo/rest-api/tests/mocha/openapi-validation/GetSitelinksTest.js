@@ -3,12 +3,11 @@
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	createLocalSitelink,
 	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
-const { newGetSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetSitelinksRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetSitelinksRequestBuilder().getRouteDescription(), () => {
 
@@ -18,7 +17,8 @@ describe( newGetSitelinksRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		testItemId = ( await createEntity( 'item', {} ) ).entity.id;
+		const item = ( await newCreateItemRequestBuilder( {} ).makeRequest() );
+		testItemId = item.body.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 
 		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );

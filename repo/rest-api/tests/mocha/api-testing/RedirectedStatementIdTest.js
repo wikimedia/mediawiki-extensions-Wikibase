@@ -21,7 +21,7 @@ describe( 'Redirected statementId requests', () => {
 	let lowercasePropertyStatementId;
 
 	before( async () => {
-		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 
 		const item = await createItemWithStatements(
 			[ newStatementWithRandomStringValue( statementPropertyId ) ]

@@ -34,7 +34,7 @@ describeWithTestData( 'Resource too large tests', ( itemRequestInputs, propertyR
 		const maxSizeInKb = 1;
 
 		before( async () => {
-			predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			for ( let i = 0; i < 5000; i++ ) {
 				fiveThousandStatements.push( newStatementWithRandomStringValue( predicatePropertyId ) );
 			}

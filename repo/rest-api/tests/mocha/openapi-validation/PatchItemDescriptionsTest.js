@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchItemDescriptionsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -19,14 +21,10 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	}
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: [ {
-				language: langWithExistingDescription,
-				value: `test-description-${utils.uniq()}`
-			} ]
-		} );
-
-		itemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			descriptions: { [ langWithExistingDescription ]: `test-description-${utils.uniq()}` }
+		} ).makeRequest();
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( '200 OK', async () => {

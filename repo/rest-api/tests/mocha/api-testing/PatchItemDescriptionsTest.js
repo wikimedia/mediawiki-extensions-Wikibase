@@ -4,7 +4,10 @@ const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
-const { newPatchItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchItemDescriptionsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -22,10 +25,9 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	before( async function () {
 		testLabel = `English Label ${utils.uniq()}`;
 		testDescription = `English Description ${utils.uniq()}`;
-		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: testLanguage, value: testLabel } ],
-			descriptions: [ { language: testLanguage, value: testDescription } ]
-		} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder(
+			{ labels: { [ testLanguage ]: testLabel }, descriptions: { [ testLanguage ]: testDescription } }
+		).makeRequest() ).body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -278,14 +280,14 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		it( 'patched label and description already exists in a different item', async () => {
 			const label = `test-label-${utils.uniq()}`;
 			const description = `test-description-${utils.uniq()}`;
-			const existingItemId = ( await entityHelper.createEntity( 'item', {
-				labels: [ { language: testLanguage, value: label } ],
-				descriptions: [ { language: testLanguage, value: description } ]
-			} ) ).entity.id;
-			const itemIdToBePatched = ( await entityHelper.createEntity( 'item', {
-				labels: [ { language: testLanguage, value: label } ],
-				descriptions: [ { language: testLanguage, value: `description-to-be-replaced-${utils.uniq()}` } ]
-			} ) ).entity.id;
+			const existingItemId = ( await newCreateItemRequestBuilder( {
+				labels: { [ testLanguage ]: label },
+				descriptions: { [ testLanguage ]: description }
+			} ).makeRequest() ).body.id;
+			const itemIdToBePatched = ( await newCreateItemRequestBuilder( {
+				labels: { [ testLanguage ]: label },
+				descriptions: { [ testLanguage ]: `description-to-be-replaced-${utils.uniq()}` }
+			} ).makeRequest() ).body.id;
 
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				itemIdToBePatched,

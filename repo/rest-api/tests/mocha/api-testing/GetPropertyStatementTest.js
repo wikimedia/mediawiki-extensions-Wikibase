@@ -29,11 +29,11 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 
 		// creating the statement with the to be deleted property first, so that creating the "happy path" property
 		// hopefully invalidates any caches that could claim that this property still exists (T369702)
-		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		testStatementWithDeletedProperty = ( await newAddPropertyStatementRequestBuilder(
 			testPropertyId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyIdToDelete )
@@ -41,7 +41,7 @@ describe( 'GET statement', () => {
 		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 		await runAllJobs(); // wait for secondary data to catch up after deletion
 
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		testStatement = ( await newAddPropertyStatementRequestBuilder(
 			testPropertyId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
@@ -158,7 +158,7 @@ describe( 'GET statement', () => {
 		} );
 
 		it( 'responds statement not found if property and subject prefix exist but statement does not', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const statementId = `${requestedPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, statementId )
 				.assertValidRequest()
@@ -169,7 +169,7 @@ describe( 'GET statement', () => {
 		} );
 
 		it( 'responds property-statement-id-mismatch if property and statement do not match', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, testStatement.id )
 				.assertValidRequest()
 				.makeRequest();

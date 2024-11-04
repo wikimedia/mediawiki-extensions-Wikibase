@@ -3,12 +3,11 @@
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createLocalSitelink,
 	getLocalSiteId,
 	createRedirectForItem, createWikiPage
 } = require( '../helpers/entityHelper' );
-const { newSetSitelinkRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newSetSitelinkRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 
 function makeSitelinkTitle() {
@@ -23,8 +22,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	const sitelink = { title: linkedArticle };
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		testItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
@@ -44,10 +43,10 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	it( '201 - sitelink created', async () => {
 		const articleTitle = makeSitelinkTitle();
 		await createWikiPage( articleTitle, 'wiki page test' );
-		const createItemResponse = await createEntity( 'item', {} );
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
 
 		const response = await newSetSitelinkRequestBuilder(
-			createItemResponse.entity.id,
+			createItemResponse.body.id,
 			siteId,
 			{ title: articleTitle }
 		).makeRequest();
@@ -99,10 +98,10 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	it( '422 - sitelink conflict', async () => {
 		const articleTitle = makeSitelinkTitle();
 		await createWikiPage( articleTitle, 'wiki page test' );
-		const createItemResponse = await createEntity( 'item', {} );
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
 
 		await newSetSitelinkRequestBuilder(
-			createItemResponse.entity.id,
+			createItemResponse.body.id,
 			siteId,
 			{ title: articleTitle }
 		).makeRequest();

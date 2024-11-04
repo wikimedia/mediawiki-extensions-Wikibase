@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
 	getLatestEditMetadata,
-	newStatementWithRandomStringValue, createPropertyWithStatements
+	newStatementWithRandomStringValue,
+	createPropertyWithStatements
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -24,8 +25,8 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 	let testRevisionId;
 
 	before( async () => {
-		testStatementPropertyId1 = ( await createUniqueStringProperty() ).entity.id;
-		testStatementPropertyId2 = ( await createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId1 = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId2 = ( await createUniqueStringProperty() ).body.id;
 
 		testStatements = [
 			newStatementWithRandomStringValue( testStatementPropertyId1 ),
@@ -73,7 +74,7 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 
 	it( 'can GET empty statements list', async () => {
 		const createPropertyResponse = await createUniqueStringProperty();
-		const response = await newGetPropertyStatementsRequestBuilder( createPropertyResponse.entity.id )
+		const response = await newGetPropertyStatementsRequestBuilder( createPropertyResponse.body.id )
 			.assertValidRequest()
 			.makeRequest();
 

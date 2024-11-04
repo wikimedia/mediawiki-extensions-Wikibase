@@ -5,11 +5,14 @@ const {
 	createLocalSitelink,
 	createWikiPage,
 	createUniqueStringProperty,
-	createEntity,
 	getLocalSiteId, newStatementWithRandomStringValue
 } = require( './entityHelper' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
-const { newPatchItemRequestBuilder, newPatchPropertyRequestBuilder } = require( './RequestBuilderFactory' );
+const {
+	newPatchItemRequestBuilder,
+	newPatchPropertyRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( './RequestBuilderFactory' );
 
 function describeWithTestData( testName, runAllTests ) {
 	const itemRequestInputs = {};
@@ -60,9 +63,9 @@ function describeWithTestData( testName, runAllTests ) {
 	describe( testName, () => {
 		before( async () => {
 			await createWikiPage( newLinkedArticle, 'sitelink test' );
-			const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+			const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 
-			const itemId = ( await createEntity( 'item', {} ) ).entity.id;
+			const itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
 			itemRequestInputs.mainTestSubject = itemId;
 			itemRequestInputs.itemId = itemId;
@@ -71,7 +74,7 @@ function describeWithTestData( testName, runAllTests ) {
 			itemRequestInputs.siteId = await getLocalSiteId();
 			itemRequestInputs.linkedArticle = newLinkedArticle;
 
-			const propertyId = ( await createUniqueStringProperty() ).entity.id;
+			const propertyId = ( await createUniqueStringProperty() ).body.id;
 			const property = await resetEntityTestData( propertyId, statementPropertyId );
 			propertyRequestInputs.mainTestSubject = propertyId;
 			propertyRequestInputs.propertyId = propertyId;

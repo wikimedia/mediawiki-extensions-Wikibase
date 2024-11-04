@@ -66,7 +66,7 @@ describe( 'Abuse Filter', () => {
 
 		filterId = await createAbuseFilter( filterDescription, `"${filterTriggerWord}" in new_wikitext` );
 		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
-		testPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		testPropertyId = ( await createUniqueStringProperty() ).body.id;
 	} );
 
 	[

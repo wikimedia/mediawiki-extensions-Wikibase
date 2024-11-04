@@ -3,7 +3,10 @@
 const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newAddItemAliasesInLanguageRequestBuilder: newRequest } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newAddItemAliasesInLanguageRequestBuilder: newRequest,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -33,13 +36,10 @@ describe( newRequest().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			aliases: {
-				en: [ { language: 'en', value: existingEnglishAlias } ],
-				fr: [ { language: 'fr', value: existingFrenchAlias } ]
-			}
-		} );
-		testItemId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreateItemRequestBuilder(
+			{ aliases: { en: [ existingEnglishAlias ], fr: [ existingFrenchAlias ] } }
+		).makeRequest();
+		testItemId = createEntityResponse.body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );

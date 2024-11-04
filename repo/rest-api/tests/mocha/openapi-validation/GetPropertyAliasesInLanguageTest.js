@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyAliasesInLanguageRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 
@@ -12,18 +15,12 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 	const languageCode = 'en';
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			aliases: {
-				en: [
-					{ language: 'en', value: 'an-English-alias-' + utils.uniq() },
-					{ language: 'en', value: 'another-English-alias-' + utils.uniq() }
-				]
-			},
-			datatype: 'string'
-		} );
-
-		propertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			aliases: { en: [ 'an-English-alias-' + utils.uniq(), 'another-English-alias-' + utils.uniq() ] }
+		} ).makeRequest();
+		propertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( propertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

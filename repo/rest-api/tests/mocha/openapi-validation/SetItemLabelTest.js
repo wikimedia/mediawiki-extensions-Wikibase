@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newSetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newSetItemLabelRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeLabel( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -15,14 +18,11 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	const langWithExistingLabel = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: [ {
-				language: langWithExistingLabel,
-				value: makeLabel( 'en-label' )
-			} ]
-		} );
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			labels: { [ langWithExistingLabel ]: makeLabel( 'en-label' ) }
+		} ).makeRequest();
 
-		itemId = createItemResponse.entity.id;
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( '200 - label replaced', async () => {

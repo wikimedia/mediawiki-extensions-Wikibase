@@ -19,7 +19,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const createPropertyResponse = await createUniqueStringProperty();
-		propertyId = createPropertyResponse.entity.id;
+		propertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 OK', async () => {

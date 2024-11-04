@@ -4,23 +4,24 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createUniqueStringProperty,
 	createPropertyWithStatements,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let propertyId;
-	let latestRevisionId;
+	let lastRevisionId;
 
 	before( async () => {
 		const createPropertyResponse = await createUniqueStringProperty();
-		propertyId = createPropertyResponse.entity.id;
-		latestRevisionId = createPropertyResponse.entity.lastrevid;
+		propertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( propertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Property with statements', async () => {
-		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		const { id } = await createPropertyWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId ),
 			newStatementWithRandomStringValue( statementPropertyId )
@@ -33,7 +34,7 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetPropertyStatementsRequestBuilder( propertyId )
-			.withHeader( 'If-None-Match', `"${latestRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );

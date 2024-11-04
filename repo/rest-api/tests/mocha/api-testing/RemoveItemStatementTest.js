@@ -8,7 +8,8 @@ const {
 	newAddItemStatementRequestBuilder,
 	newRemoveItemStatementRequestBuilder,
 	newRemoveStatementRequestBuilder,
-	newGetStatementRequestBuilder
+	newGetStatementRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -19,8 +20,8 @@ describe( 'DELETE statement', () => {
 	let testStatementPropertyId;
 
 	before( async () => {
-		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
-		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 	} );
 
 	[

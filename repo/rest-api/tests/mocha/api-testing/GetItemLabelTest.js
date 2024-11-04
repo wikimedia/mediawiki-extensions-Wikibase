@@ -2,21 +2,16 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { newGetItemLabelRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemLabelRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: {
-				en: { language: 'en', value: 'potato' }
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( { labels: { en: 'potato' } } ).makeRequest();
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( 'can get a language specific label of an item', async () => {
