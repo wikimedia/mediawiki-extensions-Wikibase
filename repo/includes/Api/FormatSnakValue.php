@@ -14,6 +14,7 @@ use LogicException;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Languages\LanguageNameUtils;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
@@ -50,6 +51,7 @@ class FormatSnakValue extends ApiBase {
 	private DataTypeFactory $dataTypeFactory;
 	private DataValueFactory $dataValueFactory;
 	private ApiErrorReporter $errorReporter;
+	private LanguageNameUtils $languageNameUtils;
 	private IBufferingStatsdDataFactory $stats;
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
@@ -66,6 +68,7 @@ class FormatSnakValue extends ApiBase {
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter,
+		LanguageNameUtils $languageNameUtils,
 		?IBufferingStatsdDataFactory $stats,
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
@@ -78,6 +81,7 @@ class FormatSnakValue extends ApiBase {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
+		$this->languageNameUtils = $languageNameUtils;
 		$this->stats = $stats ?: new NullStatsdDataFactory();
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
@@ -87,6 +91,7 @@ class FormatSnakValue extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		LanguageNameUtils $languageNameUtils,
 		IBufferingStatsdDataFactory $stats,
 		ApiHelperFactory $apiHelperFactory,
 		DataTypeFactory $dataTypeFactory,
@@ -105,6 +110,7 @@ class FormatSnakValue extends ApiBase {
 			$dataTypeFactory,
 			$dataValueFactory,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$languageNameUtils,
 			$stats,
 			$entityIdParser,
 			$dataTypeLookup,
@@ -229,7 +235,7 @@ class FormatSnakValue extends ApiBase {
 
 	private function getOptionsObject( ?string $optionsParam ): FormatterOptions {
 		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getLanguage()->getCode() );
+		$this->setValidOption( $formatterOptions, ValueFormatter::OPT_LANG, $this->getLanguage()->getCode() );
 
 		if ( is_string( $optionsParam ) && $optionsParam !== '' ) {
 			$options = json_decode( $optionsParam, true );
@@ -237,12 +243,30 @@ class FormatSnakValue extends ApiBase {
 			if ( is_array( $options ) ) {
 				foreach ( $options as $name => $value ) {
 					$this->stats->increment( "wikibase.repo.api.formatvalue.options.$name" );
-					$formatterOptions->setOption( $name, $value );
+					$this->setValidOption( $formatterOptions, $name, $value );
 				}
 			}
 		}
 
 		return $formatterOptions;
+	}
+
+	private function setValidOption( FormatterOptions $options, string $option, $value ): void {
+		switch ( $option ) {
+			case ValueFormatter::OPT_LANG:
+				if ( !is_string( $value ) ) {
+					$this->errorReporter->dieWithError(
+						'wikibase-api-invalid-formatter-options-lang',
+						'param-illegal'
+					);
+				}
+				if ( !$this->languageNameUtils->isValidBuiltInCode( $value ) ) {
+					// silently ignore invalid strings, like most of Wikibase / MediaWiki
+					$value = 'und';
+				}
+				break;
+		}
+		$options->setOption( $option, $value );
 	}
 
 	/**

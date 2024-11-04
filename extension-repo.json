@@ -66,6 +66,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\FormatSnakValue",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
 			"services": [
+				"LanguageNameUtils",
 				"StatsdDataFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.DataTypeFactory",

@@ -483,6 +483,7 @@
 	"wikibase-api-target-is-redirect": "API error message indicating that the target entity of a redirect is already a redirect.",
 	"wikibase-api-target-is-incompatible": "API error message indicating that the target entity of a redirect has the wrong type.",
 	"wikibase-api-cant-redirect": "API error message indicating that the redirect couldn't be created (possibly because the present type of entity does not support redirects).",
+	"wikibase-api-invalid-formatter-options-lang": "API error message indicating that the passed formatter option \"lang\" is invalid.",
 	"wikibase-self-conflict-patched": "Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.",
 	"wikibase-conflict-patched": "Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.",
 	"wikibase-save-unresolved-redirect": "Error shown when an unresolved redirect was encountered while trying to save a change to an entity. Parameters:\n* $1 - the source id\n* $2 - the target id",
