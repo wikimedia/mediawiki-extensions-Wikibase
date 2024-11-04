@@ -45,20 +45,18 @@
 			]
 	},
 	"PropertyStatementResponse": {
+		"id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
+		"rank": "normal",
+		"property": {
+			"id": "P1628",
+			"data_type": "url"
+		},
 		"value": {
-			"id": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71",
-			"rank": "normal",
-			"property": {
-				"id": "P1628",
-				"data_type": "url"
-			},
-			"value": {
-				"type": "value",
-				"content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-			},
-			"qualifiers": [],
-			"references": []
-		}
+			"type": "value",
+			"content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+		},
+		"qualifiers": [],
+		"references": []
 	},
 	"PatchItemStatementRequest": {
 		"patch": [
@@ -85,7 +83,7 @@
 	"PatchPropertyStatementRequest": {
 		"patch": [
 			{
-				"op": "update",
+				"op": "replace",
 				"path": "/value/content",
 				"value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 			}
