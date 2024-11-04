@@ -2,8 +2,11 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { newGetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetPropertyDescriptionRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { utils } = require( 'api-testing' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -12,15 +15,12 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	const propertyEnDescription = `string-property-description-${utils.uniq()}`;
 
 	before( async () => {
-		const testProperty = await createEntity( 'property', {
-			labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
-			descriptions: {
-				en: { language: 'en', value: propertyEnDescription }
-			},
-			datatype: 'string'
-		} );
-
-		propertyId = testProperty.entity.id;
+		const testProperty = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { en: `string-property-${utils.uniq()}` },
+			descriptions: { en: propertyEnDescription }
+		} ).makeRequest();
+		propertyId = testProperty.body.id;
 	} );
 
 	it( 'can get a language specific description of a property', async () => {

@@ -2,25 +2,21 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { newGetPropertyAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetPropertyAliasesInLanguageRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			aliases: {
-				en: [
-					{ language: 'en', value: 'example of' },
-					{ language: 'en', value: 'is a' }
-				]
-			},
-			datatype: 'string'
-		} );
-
-		propertyId = createPropertyResponse.entity.id;
+		const createPropertyResponse = await newCreatePropertyRequestBuilder(
+			{ data_type: 'string', aliases: { en: [ 'example of', 'is a' ] } }
+		).makeRequest();
+		propertyId = createPropertyResponse.body.id;
 	} );
 
 	it( 'can get language specific aliases of a property', async () => {

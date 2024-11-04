@@ -2,21 +2,19 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newGetItemLabelsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: {
-				en: { language: 'en', value: 'potato' }
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( { labels: { en: 'potato' } } ).makeRequest();
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( 'can get the labels of an item', async () => {

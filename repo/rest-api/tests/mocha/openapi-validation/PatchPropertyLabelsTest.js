@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newPatchPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyLabelsRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
@@ -19,15 +21,12 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			labels: [ {
-				language: langWithExistingLabel,
-				value: `test-label-${utils.uniq()}`
-			} ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ langWithExistingLabel ]: `test-label-${utils.uniq()}` }
+		} ).makeRequest();
 
-		propertyId = createPropertyResponse.entity.id;
+		propertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 OK', async () => {

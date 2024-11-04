@@ -18,7 +18,7 @@ describe( 'validate PUT endpoints for property statements against OpenAPI defini
 	let statementPropertyId;
 
 	before( async () => {
-		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		const property = await createPropertyWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId )
 		] );

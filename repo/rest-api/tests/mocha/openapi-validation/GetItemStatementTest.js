@@ -14,7 +14,7 @@ describe( 'validate GET item statement responses', () => {
 	let lastRevId;
 
 	before( async () => {
-		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const item = await entityHelper.createItemWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 		] );

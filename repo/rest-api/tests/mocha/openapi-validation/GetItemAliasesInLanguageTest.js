@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetItemAliasesInLanguageRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () => {
 
@@ -12,17 +15,11 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 	const languageCode = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			aliases: {
-				en: [
-					{ language: 'en', value: 'an-English-alias-' + utils.uniq() },
-					{ language: 'en', value: 'another-English-alias-' + utils.uniq() }
-				]
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			aliases: { en: [ 'an-English-alias-' + utils.uniq(), 'another-English-alias-' + utils.uniq() ] }
+		} ).makeRequest();
+		itemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( itemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

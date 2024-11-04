@@ -3,12 +3,14 @@
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	createLocalSitelink,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
-const { newRemoveSitelinkRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newRemoveSitelinkRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
@@ -17,7 +19,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'article-linked-to-test-item' );
 
 	before( async () => {
-		itemId = ( await createEntity( 'item', {} ) ).entity.id;
+		itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 		await createLocalSitelink( itemId, linkedArticle );
 		localSiteId = await getLocalSiteId();
 	} );

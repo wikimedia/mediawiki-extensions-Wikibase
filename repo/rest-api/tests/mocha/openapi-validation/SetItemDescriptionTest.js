@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newSetItemDescriptionRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -14,14 +17,11 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let existingItemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: [ {
-				language: 'en',
-				value: makeUnique( 'unique description' )
-			} ]
-		} );
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			descriptions: { en: makeUnique( 'unique description' ) }
+		} ).makeRequest();
 
-		existingItemId = createItemResponse.entity.id;
+		existingItemId = createItemResponse.body.id;
 	} );
 
 	it( '200 - description replaced', async () => {

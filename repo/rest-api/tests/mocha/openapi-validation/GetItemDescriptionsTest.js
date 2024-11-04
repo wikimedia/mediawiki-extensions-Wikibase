@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetItemDescriptionsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -11,15 +14,14 @@ describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 	let lastRevisionId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
+		const createItemResponse = await newCreateItemRequestBuilder( {
 			descriptions: {
-				de: { language: 'de', value: 'a-German-description-' + utils.uniq() },
-				en: { language: 'en', value: 'an-English-description-' + utils.uniq() }
+				de: 'a-German-description-' + utils.uniq(),
+				en: 'an-English-description-' + utils.uniq()
 			}
-		} );
-
-		testItemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		} ).makeRequest();
+		testItemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testItemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Item with two descriptions', async () => {

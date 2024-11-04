@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyLabelWithFallbackRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyLabelWithFallbackRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 
@@ -12,13 +15,13 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 	const languageCode = 'en';
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			labels: [ { language: languageCode, value: 'an-English-label-' + utils.uniq() } ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ languageCode ]: 'an-English-label-' + utils.uniq() }
+		} ).makeRequest();
 
-		propertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		propertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( propertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {
@@ -60,13 +63,13 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 	it(
 		'404 Not Found response is valid if there is no label in the requested or any fallback language',
 		async () => {
-			const propertyWithoutFallback = await createEntity( 'property', {
-				labels: { de: { language: 'de', value: `de-label-${utils.uniq()}` } },
-				datatype: 'string'
-			} );
+			const propertyWithoutFallback = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				labels: { de: `de-label-${utils.uniq()}` }
+			} ).makeRequest();
 
 			const response = await newGetPropertyLabelWithFallbackRequestBuilder(
-				propertyWithoutFallback.entity.id,
+				propertyWithoutFallback.body.id,
 				'ko'
 			).makeRequest();
 

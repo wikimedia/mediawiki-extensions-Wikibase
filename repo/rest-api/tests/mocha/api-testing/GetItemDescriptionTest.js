@@ -2,24 +2,21 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newGetItemDescriptionRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: {
-				en: {
-					language: 'en',
-					value: 'English science fiction writer and humourist'
-				}
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder(
+			{ descriptions: { en: 'English science fiction writer and humourist' } }
+		).makeRequest();
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( 'can get a language specific description of an item', async () => {

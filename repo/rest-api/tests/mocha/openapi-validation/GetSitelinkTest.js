@@ -3,13 +3,12 @@
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	createLocalSitelink,
 	getLatestEditMetadata,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
-const { newGetSitelinkRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetSitelinkRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 
@@ -20,12 +19,10 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		testItemId = ( await createEntity( 'item', {} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
-
-		const testItemCreationMetadata = await getLatestEditMetadata( testItemId );
-		lastRevisionId = testItemCreationMetadata.revid;
+		lastRevisionId = ( await getLatestEditMetadata( testItemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Item with the requested sitelink', async () => {

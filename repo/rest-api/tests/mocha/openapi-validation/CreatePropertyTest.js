@@ -7,7 +7,7 @@ const { newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderF
 
 describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 	it( '201 - full property', async () => {
-		const statementProperty = ( await createUniqueStringProperty() ).entity.id;
+		const statementProperty = ( await createUniqueStringProperty() ).body.id;
 		const response = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
 			labels: { en: utils.title( 'property label' ) },

@@ -3,7 +3,10 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newSetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newSetPropertyDescriptionRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -17,12 +20,12 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 	before( async () => {
 		testEnLabel = `some-label-${utils.uniq()}`;
-		const createEntityResponse = await entityHelper.createEntity( 'property', {
-			labels: [ { language: 'en', value: testEnLabel } ],
-			descriptions: [ { language: 'en', value: `some-description-${utils.uniq()}` } ],
-			datatype: 'string'
-		} );
-		testPropertyId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { en: testEnLabel },
+			descriptions: { en: `some-description-${utils.uniq()}` }
+		} ).makeRequest();
+		testPropertyId = createEntityResponse.body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );

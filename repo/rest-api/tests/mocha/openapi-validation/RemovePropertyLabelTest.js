@@ -2,10 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
 const {
 	newRemovePropertyLabelRequestBuilder,
-	newSetPropertyLabelRequestBuilder
+	newSetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
@@ -17,12 +17,12 @@ describe( newRemovePropertyLabelRequestBuilder().getRouteDescription(), () => {
 	let existingPropertyId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			labels: [ { language: 'en', value: makeUnique( 'unique label' ) } ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { en: makeUnique( 'unique label' ) }
+		} ).makeRequest();
 
-		existingPropertyId = createPropertyResponse.entity.id;
+		existingPropertyId = createPropertyResponse.body.id;
 	} );
 
 	describe( '200 OK', () => {

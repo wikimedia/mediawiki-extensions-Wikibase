@@ -44,7 +44,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			const aliases = { en: [ 'is a', 'type' ] };
 			const data_type = 'string';
 
-			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const statementValue = '99 Bottles of Milk';
 			const statements = {
 				[ statementPropertyId ]: [ {

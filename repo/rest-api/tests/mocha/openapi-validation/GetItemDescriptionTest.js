@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetItemDescriptionRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
@@ -12,12 +15,11 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	const languageCode = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: [ { language: languageCode, value: 'an-English-description-' + utils.uniq() } ]
-		} );
-
-		itemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		const createItemResponse = await newCreateItemRequestBuilder(
+			{ descriptions: { [ languageCode ]: 'an-English-description-' + utils.uniq() } }
+		).makeRequest();
+		itemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( itemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

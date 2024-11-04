@@ -10,7 +10,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 	let validStatementSerialization;
 
 	before( async () => {
-		propertyId = ( await createUniqueStringProperty() ).entity.id;
+		propertyId = ( await createUniqueStringProperty() ).body.id;
 		validStatementSerialization = {
 			value: { type: 'novalue' },
 			property: { id: propertyId }

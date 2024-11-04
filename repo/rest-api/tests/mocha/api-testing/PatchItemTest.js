@@ -2,14 +2,18 @@
 
 const { expect } = require( '../helpers/chaiHelper' );
 const { assert, utils } = require( 'api-testing' );
-const { newPatchItemRequestBuilder, newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchItemRequestBuilder,
+	newAddItemStatementRequestBuilder,
+	newCreateItemRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
-	createEntity,
 	createLocalSitelink,
 	getLocalSiteId
 } = require( '../helpers/entityHelper' );
@@ -31,11 +35,11 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async function () {
-		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: languageWithExistingLabel, value: testEnglishLabel } ],
-			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
-			aliases: [ { language: 'en', value: existingEnAlias }, { language: 'fr', value: 'croissant' } ]
-		} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {
+			labels: { [ languageWithExistingLabel ]: testEnglishLabel },
+			descriptions: { [ languageWithExistingDescription ]: `some-description-${utils.uniq()}` },
+			aliases: { en: [ existingEnAlias ], fr: [ 'croissant' ] }
+		} ).makeRequest() ).body.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
 		allowedBadges = await getAllowedBadges();
@@ -44,7 +48,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
 		originalRevisionId = testItemCreationMetadata.revid;
 
-		predicatePropertyId = ( await entityHelper.createEntity( 'property', { datatype: 'string' } ) ).entity.id;
+		predicatePropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } ).makeRequest() ).body.id;
 
 		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
@@ -101,7 +105,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
-			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			await newAddItemStatementRequestBuilder(
 				testItemId,
 				{ property: { id: propertyToDelete }, value: { type: 'novalue' } }
@@ -399,12 +403,12 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			const label = `test-label-${utils.uniq()}`;
 			const description = `test-description-${utils.uniq()}`;
 
-			const existingEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language: languageWithExistingLabel, value: label } ],
-				descriptions: [ { language: languageWithExistingDescription, value: description } ]
-			} );
+			const existingEntityResponse = await newCreateItemRequestBuilder( {
+				labels: { [ languageWithExistingLabel ]: label },
+				descriptions: { [ languageWithExistingDescription ]: description }
+			} ).makeRequest();
+			const existingItemId = existingEntityResponse.body.id;
 
-			const existingItemId = existingEntityResponse.entity.id;
 			const response = await newPatchItemRequestBuilder(
 				testItemId,
 				[
@@ -636,7 +640,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'property IDs modified', async () => {
-			const newPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const newPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const existingStatementId = ( await newAddItemStatementRequestBuilder( testItemId, {
 				property: { id: predicatePropertyId },
 				value: { type: 'novalue' }
@@ -798,9 +802,9 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: { title: linkedArticle } } } ]
 			).assertValidRequest().makeRequest();
 
-			const newItem = await createEntity( 'item', {} );
+			const newItem = await newCreateItemRequestBuilder( {} ).makeRequest();
 			const response = await newPatchItemRequestBuilder(
-				newItem.entity.id,
+				newItem.body.id,
 				[ { op: 'add', path: '/sitelinks', value: { [ siteId ]: { title: linkedArticle } } } ]
 			).assertValidRequest().makeRequest();
 

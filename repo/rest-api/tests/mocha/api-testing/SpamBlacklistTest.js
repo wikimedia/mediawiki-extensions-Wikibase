@@ -2,9 +2,11 @@
 
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { action, utils } = require( 'api-testing' );
-const entityHelper = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
-const { newPatchPropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'Spam blacklist', () => {
 	let user;
@@ -17,12 +19,12 @@ describe( 'Spam blacklist', () => {
 		user = await action.root();
 		await user.edit( 'MediaWiki:Spam-blacklist', { text: '.*spam.com.*' } );
 
-		testPropertyId = ( await entityHelper.createEntity( 'property', {
-			datatype: 'string',
-			labels: [ { language: 'en', value: `some-label-${utils.uniq()}` } ]
-		} ) ).entity.id;
+		testPropertyId = ( await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { en: `some-label-${utils.uniq()}` }
+		} ).makeRequest() ).body.id;
 
-		propertyWithUrlDataType = ( await entityHelper.createEntity( 'property', { datatype: 'url' } ) ).entity.id;
+		propertyWithUrlDataType = ( await newCreatePropertyRequestBuilder( { data_type: 'url' } ).makeRequest() ).body.id;
 	} );
 
 	it( 'should respond 403 Forbidden when the statement value contains blacklisted content', async () => {

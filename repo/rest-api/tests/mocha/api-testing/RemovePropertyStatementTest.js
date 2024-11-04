@@ -19,8 +19,8 @@ describe( 'DELETE statement', () => {
 	let testStatementPropertyId;
 
 	before( async () => {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 	} );
 
 	[
@@ -165,7 +165,7 @@ describe( 'DELETE statement', () => {
 		} );
 
 		it( 'responds 400 if property and statement do not match', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const statementId = testStatementPropertyId + '$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response = await newRemovePropertyStatementRequestBuilder( requestedPropertyId, statementId )
 				.assertValidRequest()

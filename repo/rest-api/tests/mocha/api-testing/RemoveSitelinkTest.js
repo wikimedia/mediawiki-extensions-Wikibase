@@ -2,10 +2,11 @@
 
 const {
 	newRemoveSitelinkRequestBuilder,
-	newGetSitelinksRequestBuilder
+	newGetSitelinksRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { action, utils, assert } = require( 'api-testing' );
-const { createEntity, getLocalSiteId, createLocalSitelink } = require( '../helpers/entityHelper' );
+const { getLocalSiteId, createLocalSitelink } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -20,8 +21,8 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 	before( async () => {
 		siteId = await getLocalSiteId();
 
-		const createItemResponse = await createEntity( 'item', {} );
-		testItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 
 		await createLocalSitelink( testItemId, linkedArticle );
 	} );
@@ -70,7 +71,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
 	describe( '404', () => {
 		it( 'responds 404 if there is no sitelink for the requested site', async () => {
-			const itemWithNoSitelink = ( await createEntity( 'item', {} ) ).entity.id;
+			const itemWithNoSitelink = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const response = await newRemoveSitelinkRequestBuilder( itemWithNoSitelink, siteId )
 				.assertValidRequest()
 				.makeRequest();

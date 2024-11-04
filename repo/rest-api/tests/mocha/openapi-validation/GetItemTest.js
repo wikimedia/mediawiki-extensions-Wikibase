@@ -3,46 +3,40 @@
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newGetItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetItemRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createItemWithAllFields() {
-	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-	const itemId = ( await entityHelper.createEntity( 'item', {
-		labels: { en: { language: 'en', value: `non-empty-item-${utils.uniq()}` } },
-		descriptions: { en: { language: 'en', value: 'non-empty-item-description' } },
-		aliases: { en: [ { language: 'en', value: 'non-empty-item-alias' } ] },
-		claims: [
-			{ // with value, without qualifiers or references
-				mainsnak: {
-					snaktype: 'value',
-					property: statementPropertyId,
-					datavalue: { value: 'im a statement value', type: 'string' }
-				}, type: 'statement', rank: 'normal'
-			},
-			{ // no value, with qualifier and reference
-				mainsnak: {
-					snaktype: 'novalue',
-					property: statementPropertyId
+	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+	const itemId = ( await newCreateItemRequestBuilder( {
+		labels: { en: `non-empty-item-${utils.uniq()}` },
+		descriptions: { en: 'non-empty-item-description' },
+		aliases: { en: [ 'non-empty-item-alias' ] },
+		statements: {
+			[ statementPropertyId ]: [
+				{ // with value, without qualifiers or references
+					property: { id: statementPropertyId },
+					value: { type: 'value', content: 'im a statement value' },
+					rank: 'normal'
 				},
-				type: 'statement',
-				rank: 'normal',
-				qualifiers: [
-					{
-						snaktype: 'value',
-						property: statementPropertyId,
-						datavalue: { value: 'im a qualifier value', type: 'string' }
-					}
-				],
-				references: [ {
-					snaks: [ {
-						snaktype: 'value',
-						property: statementPropertyId,
-						datavalue: { value: 'im a reference value', type: 'string' }
+				{ // no value, with qualifier and reference
+					property: { id: statementPropertyId },
+					value: { type: 'novalue' },
+					rank: 'normal',
+					qualifiers: [
+						{
+							property: { id: statementPropertyId },
+							value: { type: 'value', content: 'im a qualifier value' }
+						}
+					],
+					references: [ {
+						parts: [ {
+							property: { id: statementPropertyId },
+							value: { type: 'value', content: 'im a reference value' }
+						} ]
 					} ]
-				} ]
-			}
-		]
-	} ) ).entity.id;
+				}
+			] }
+	} ).makeRequest() ).body.id;
 
 	await entityHelper.createLocalSitelink( itemId, utils.title( 'Sitelink Test' ) );
 
@@ -55,9 +49,9 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	let latestRevisionId;
 
 	before( async () => {
-		const createItemResponse = await entityHelper.createEntity( 'item', {} );
-		itemId = createItemResponse.entity.id;
-		latestRevisionId = createItemResponse.entity.lastrevid;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		itemId = createItemResponse.body.id;
+		latestRevisionId = ( await entityHelper.getLatestEditMetadata( itemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for a non-empty item', async () => {

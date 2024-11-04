@@ -2,8 +2,11 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { newGetPropertyAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetPropertyAliasesRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
@@ -11,16 +14,10 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
 
 	before( async () => {
-		const testProperty = await createEntity( 'property', {
-			aliases: {
-				en: [
-					{ language: 'en', value: 'en-alias1' },
-					{ language: 'en', value: 'en-alias2' }
-				]
-			},
-			datatype: 'string'
-		} );
-		propertyId = testProperty.entity.id;
+		const testProperty = await newCreatePropertyRequestBuilder(
+			{ data_type: 'string', aliases: { en: [ 'en-alias1', 'en-alias2' ] } }
+		).makeRequest();
+		propertyId = testProperty.body.id;
 	} );
 
 	it( 'can get the aliases of a property', async () => {

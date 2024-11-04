@@ -2,24 +2,21 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata, createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newGetItemDescriptionsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemDescriptionsRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			descriptions: {
-				en: {
-					language: 'en',
-					value: 'English science fiction writer and humorist'
-				}
-			}
-		} );
-
-		itemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder(
+			{ descriptions: { en: 'English science fiction writer and humorist' } }
+		).makeRequest();
+		itemId = createItemResponse.body.id;
 	} );
 
 	it( 'can get the descriptions of an item', async () => {

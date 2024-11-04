@@ -1,25 +1,22 @@
 'use strict';
 
-const { utils, action } = require( 'api-testing' );
+const { RequestBuilder } = require( './RequestBuilder' );
 
 let allowedBadges;
 async function getAllowedBadges() {
 	allowedBadges = allowedBadges || [
-		( await newBadgeItem( 'badge1-' ) ).entity.id,
-		( await newBadgeItem( 'badge2-' ) ).entity.id
+		( await newBadgeItem( 'badge1-' ) ).body.id,
+		( await newBadgeItem( 'badge2-' ) ).body.id
 	];
 
 	return allowedBadges;
 }
 
-function newBadgeItem( labelPrefix ) {
-	return action.getAnon().action( 'wbeditentity', {
-		token: '+\\',
-		new: 'item',
-		data: JSON.stringify( {
-			labels: [ { language: 'en', value: utils.title( labelPrefix ) } ]
-		} )
-	}, 'POST' );
+async function newBadgeItem( labelPrefix ) {
+	return new RequestBuilder()
+		.withRoute( 'POST', '/entities/items' )
+		.withJsonBodyParam( 'item', { labels: { en: labelPrefix } } )
+		.makeRequest();
 }
 
 module.exports = { getAllowedBadges };

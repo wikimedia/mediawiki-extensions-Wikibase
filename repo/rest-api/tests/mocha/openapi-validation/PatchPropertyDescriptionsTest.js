@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newPatchPropertyDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyDescriptionsRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -19,15 +21,12 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 	}
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			datatype: 'string',
-			descriptions: [ {
-				language: langWithExistingDescription,
-				value: `test-description-${utils.uniq()}`
-			} ]
-		} );
-
-		propertyId = createPropertyResponse.entity.id;
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			descriptions: { [ langWithExistingDescription ]: `test-description-${utils.uniq()}`
+			}
+		} ).makeRequest();
+		propertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 OK', async () => {

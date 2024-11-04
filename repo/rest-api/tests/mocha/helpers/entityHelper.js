@@ -5,24 +5,9 @@ const {
 	newSetSitelinkRequestBuilder,
 	newCreateItemRequestBuilder,
 	newAddPropertyStatementRequestBuilder,
-	newGetPropertyRequestBuilder
+	newGetPropertyRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( './RequestBuilderFactory' );
-
-async function makeEditEntityRequest( params, entity ) {
-	return action.getAnon().action( 'wbeditentity', {
-		token: '+\\',
-		data: JSON.stringify( entity ),
-		...params
-	}, 'POST' );
-}
-
-async function createEntity( type, entity ) {
-	return makeEditEntityRequest( { new: type }, entity );
-}
-
-async function editEntity( id, entityData, clear = false ) {
-	return makeEditEntityRequest( { id, clear }, entityData );
-}
 
 async function deleteProperty( propertyId ) {
 	const admin = await action.root();
@@ -33,10 +18,10 @@ async function deleteProperty( propertyId ) {
 }
 
 async function createUniqueStringProperty() {
-	return await createEntity( 'property', {
-		labels: { en: { language: 'en', value: `string-property-${utils.uniq()}` } },
-		datatype: 'string'
-	} );
+	return await newCreatePropertyRequestBuilder( {
+		data_type: 'string',
+		labels: { en: `string-property-${utils.uniq()}` }
+	} ).makeRequest();
 }
 
 /**
@@ -64,7 +49,7 @@ function statementListToStatementGroups( statementList ) {
  * @return {Object}
  */
 async function createPropertyWithStatements( statements ) {
-	const propertyId = ( await createUniqueStringProperty() ).entity.id;
+	const propertyId = ( await createUniqueStringProperty() ).body.id;
 	for ( const statement of statements ) {
 		await newAddPropertyStatementRequestBuilder( propertyId, statement ).makeRequest();
 	}
@@ -77,7 +62,7 @@ async function createPropertyWithStatements( statements ) {
  * @return {Promise<string>} - the id of the item to redirect from (source)
  */
 async function createRedirectForItem( redirectTarget ) {
-	const redirectSource = ( await createEntity( 'item', {} ) ).entity.id;
+	const redirectSource = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 	await action.getAnon().action( 'wbcreateredirect', {
 		from: redirectSource,
 		to: redirectTarget,
@@ -151,8 +136,6 @@ async function createWikiPage( articleTitle, text ) {
 }
 
 module.exports = {
-	createEntity,
-	editEntity,
 	deleteProperty,
 	createItemWithStatements,
 	createPropertyWithStatements,
