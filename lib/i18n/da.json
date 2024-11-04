@@ -56,7 +56,6 @@
 	"datatypes-type-wikibase-item": "Emne",
 	"datatypes-type-wikibase-property": "Egenskab",
 	"datatypes-type-commonsMedia": "Commons media-fil",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregoriansk",
 	"wikibase-time-calendar-julian": "juliansk",
 	"wikibase-time-precision-Gannum": "$1 milliarder år",

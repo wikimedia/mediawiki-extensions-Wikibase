@@ -1,8 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rakeshonwiki",
-			"Amire80"
+			"Rakeshonwiki"
 		]
 	},
 	"apihelp-query+wbentityusage-param-entities": "இந்த உருப்படியை பயன்படுத்தும் பக்கத்தை மட்டும் பெறு.",

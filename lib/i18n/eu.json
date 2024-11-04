@@ -38,7 +38,6 @@
 	"datatypes-type-wikibase-item": "Elementua",
 	"datatypes-type-wikibase-property": "Propietatea",
 	"datatypes-type-commonsMedia": "Commons multimedia fitxategia",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "egutegi gregorianoa",
 	"wikibase-time-calendar-julian": "juliotar egutegia",
 	"wikibase-time-precision-Gannum": "$1 mila milioi urte K.o.",

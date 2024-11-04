@@ -57,7 +57,6 @@
 	"datatypes-type-geo-shape": "Forma xeográfica",
 	"datatypes-type-tabular-data": "Datos tabulares",
 	"datatypes-type-external-id": "Identificador externo",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriano",
 	"wikibase-time-calendar-julian": "Xuliano",
 	"wikibase-time-precision-CE": "$1 e. c.",

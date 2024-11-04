@@ -72,7 +72,6 @@
 	"wikibase-time-precision-BCE-millennium": "$1. илјадалетие п.н.е.",
 	"wikibase-time-precision-BCE-century": "$1. век п.н.е.",
 	"wikibase-time-precision-BCE-10annum": "$1-ти п.н.е.",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "Типит на вредноста („$1“) не одговара на типот на својството („$2“).",
 	"wikibase-snakformatter-property-not-found": "Не го најдов својството $1. Не можам да го одредам податочниот тип што треба да се користи.",
 	"wikibase-snakformatter-formatting-exception": "Грешка во форматирањето: $1.",

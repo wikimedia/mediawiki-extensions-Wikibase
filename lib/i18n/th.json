@@ -72,7 +72,6 @@
 	"wikibase-time-precision-BCE-millennium": "สหัสวรรษที่ $1 ก่อนคริสตกาล",
 	"wikibase-time-precision-BCE-century": "ศตวรรษที่ $1 ก่อนคริสตกาล",
 	"wikibase-time-precision-BCE-10annum": "ทศวรรษที่ $1 ก่อนคริสตกาล",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "ชนิดของค่า \"$1\" กับชนิดของคุณลักษณะ \"$2\" ไม่เข้ากัน",
 	"wikibase-snakformatter-property-not-found": "ไม่พบคุณลักษณะ $1 จึงไม่สามารถระบุชนิดของข้อมูลที่จะใช้",
 	"wikibase-snakformatter-formatting-exception": "รูปแบบผิดพลาด: $1",
@@ -144,7 +143,6 @@
 	"wikibase-property-summary-wbeditentity-update": "เปลี่ยนแปลงข้อมูลในคุณลักษณะหนึ่ง",
 	"wikibase-property-summary-wbeditentity-override": "ล้างข้อมูลในคุณลักษณะหนึ่ง",
 	"wikibase-property-summary-special-create-property": "สร้างคุณลักษณะหนึ่ง [$2] พร้อมด้วย{{PLURAL:$1|ค่าๆ หนึ่ง|ค่าต่างๆ}}",
-	"wikibase-reference-formatter-snak-separator": ".&#32;",
 	"wikibase-reference-formatter-snak-terminator": ".",
 	"wikibase-reference-formatter-snak-retrieved": "เข้าถึงเมื่อ $1"
 }

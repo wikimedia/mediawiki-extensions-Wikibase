@@ -32,7 +32,7 @@
 	"wikibase-linkitem-failed-modify": "Бетле байланалмадыла: {{WBREPONAME}} юсюндеги келишген элементле бирлешдирилмедиле.",
 	"wikibase-linkitem-title": "Бет бла байлам",
 	"wikibase-linkitem-linkpage": "Бет бла байла",
-	"wikibase-linkitem-selectlink": "Былайдан аннга джибериу салыргъа излеген сайтны эм  бетни айырыгъыз",
+	"wikibase-linkitem-selectlink": "Былайдан аннга джибериу салыргъа излеген сайтны эм  бетни айырыгъыз.",
 	"wikibase-linkitem-input-site": "Тил:",
 	"wikibase-linkitem-input-page": "Бет:",
 	"wikibase-linkitem-confirmitem-text": "Сиз сайлагъан бет [$1 билгилени ара репозиторийини элементи] бла алгъадан байламлыды. Тюбюнде кёргюзюлген {{PLURAL:$2|бетлени}} ичинде сиз аннга джибериу салыргъа излеген {{PLURAL:$2|бетле}} болгъанын бегитигиз.",

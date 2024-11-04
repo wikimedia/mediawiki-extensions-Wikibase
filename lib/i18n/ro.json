@@ -50,7 +50,6 @@
 	"datatypes-type-time": "Moment de timp",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Fișier multimedia de la Commons",
-	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Tipul valorii „$1” nu corespunde tipului proprietății „$2”.",
 	"wikibase-snakformatter-property-not-found": "Proprietatea $1 nu a fost găsită; imposibil de identificat tipul de date pentru utilizare.",
 	"wikibase-entity-summary-wbsetitem": "A creat un element nou",

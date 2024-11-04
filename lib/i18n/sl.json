@@ -58,7 +58,6 @@
 	"datatypes-type-tabular-data": "Tabelarni podatki",
 	"datatypes-type-external-id": "Zunanji identifikator",
 	"datatypes-type-entity-schema": "Shema entitet",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregorijanski",
 	"wikibase-time-calendar-julian": "julijanski",
 	"wikibase-time-precision-CE": "$1 n. št.",
@@ -75,7 +74,6 @@
 	"wikibase-time-precision-BCE-millennium": "$1. tisočletje pr. n. št.",
 	"wikibase-time-precision-BCE-century": "$1. stoletje pr. n. št.",
 	"wikibase-time-precision-BCE-10annum": "$1. leta pr. n. št.",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrednosti »$1« se ne ujema z vrsto lastnosti »$2«.",
 	"wikibase-snakformatter-property-not-found": "Lastnosti $1 ni bilo mogoče najti, ni mogoče določiti vrste podatkov za uporabo.",
 	"wikibase-snakformatter-formatting-exception": "Napaka oblikovanja: $1.",
@@ -150,7 +148,6 @@
 	"wikibase-property-summary-wbeditentity-update": "sprememba lastnosti",
 	"wikibase-property-summary-wbeditentity-override": "izbris lastnosti",
 	"wikibase-property-summary-special-create-property": "ustvaritev lastnosti [$2] z {{PLURAL:$1|vrednostjo|vrednostima|vrednostmi}}",
-	"wikibase-reference-formatter-snak-separator": ".&#32;",
 	"wikibase-reference-formatter-snak-terminator": ".",
 	"wikibase-reference-formatter-snak-retrieved": "Pridobljeno: $1"
 }

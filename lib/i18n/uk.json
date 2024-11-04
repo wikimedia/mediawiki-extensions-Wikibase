@@ -16,7 +16,8 @@
 			"Steve.rusyn",
 			"SteveR",
 			"Vlad5250",
-			"Ата"
+			"Ата",
+			"Renamerr"
 		]
 	},
 	"specialpages-group-wikibase": "Вікібаза",
@@ -85,7 +86,6 @@
 	"wikibase-time-precision-BCE-millennium": "$1 тисячоліття до н. е.",
 	"wikibase-time-precision-BCE-century": "$1 століття до н. е.",
 	"wikibase-time-precision-BCE-10annum": "$1-ті до н.е.",
-	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значення «$1», не відповідає типу властивості «$2».",
 	"wikibase-snakformatter-property-not-found": "Властивість $1 не знайдено, не вдалося визначити тип даних для використання.",
 	"wikibase-snakformatter-formatting-exception": "Помилка форматування: $1.",
@@ -160,7 +160,6 @@
 	"wikibase-property-summary-wbeditentity-update": "Властивість змінено",
 	"wikibase-property-summary-wbeditentity-override": "Очищено властивість",
 	"wikibase-property-summary-special-create-property": "Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}",
-	"wikibase-reference-formatter-snak-separator": ".&#32;",
 	"wikibase-reference-formatter-snak-terminator": ".",
 	"wikibase-reference-formatter-snak-retrieved": "Отримано $1"
 }

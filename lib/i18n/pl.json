@@ -68,7 +68,6 @@
 	"datatypes-type-geo-shape": "Kształt geograficzny",
 	"datatypes-type-tabular-data": "Dane tabelaryczne",
 	"datatypes-type-external-id": "Identyfikator zewnętrzny",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "gregoriański",
 	"wikibase-time-calendar-julian": "juliański",
 	"wikibase-time-precision-CE": "$1 n.e.",

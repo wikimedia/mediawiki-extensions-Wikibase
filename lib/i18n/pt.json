@@ -18,7 +18,9 @@
 			"Sarilho1",
 			"Vitorvicentevalente",
 			"Waldir",
-			"Waldyrious"
+			"Waldyrious",
+			"B3rnas",
+			"Caiofernandes"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -70,7 +72,6 @@
 	"datatypes-type-tabular-data": "Dados tabulares",
 	"datatypes-type-external-id": "Identificador externo",
 	"datatypes-type-entity-schema": "Esquema de entidade",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Gregoriano",
 	"wikibase-time-calendar-julian": "Juliano",
 	"wikibase-time-precision-CE": "$1 d.C. (EC)",

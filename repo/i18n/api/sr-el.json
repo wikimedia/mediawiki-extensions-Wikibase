@@ -10,7 +10,6 @@
 	"apihelp-wbmergeitems-param-fromid": "Identifikator za spajanje od",
 	"apihelp-wbmergeitems-param-toid": "Identifikator za spajanje sa",
 	"apihelp-wbsearchentities-param-search": "Pretraga za ovaj tekst.",
-	"apihelp-wbsearchentities-param-language": "Pretraga na ovom jeziku.",
 	"apihelp-wbsearchentities-param-limit": "Maksimalni broj rezultata",
 	"apihelp-query+wbcontentlanguages-param-context": "Kontekst u kojem jezici sadržaja treba da važe.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Pojmovi (oznaka, opis, pseudonimi) entiteta.",
