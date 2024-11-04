@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Title\Title;
 use MediaWikiTestCaseTrait;
 use Wikibase\Client\NamespaceChecker;
@@ -142,6 +143,8 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$prefixedId,
 		$hasLangLinks
 	) {
+		$context = new RequestContext();
+		$context->setTitle( $title );
 		$repoItemLinkGenerator = new RepoItemLinkGenerator(
 			new NamespaceChecker( [] ),
 			$this->getRepoLinker(),
@@ -151,7 +154,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$link = $repoItemLinkGenerator->getLink(
-			$title, $action, $hasLangLinks, $noExternalLangLinks, $prefixedId
+			$context, $action, $hasLangLinks, $noExternalLangLinks, $prefixedId
 		);
 
 		if ( $expected === null ) {
