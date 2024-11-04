@@ -17,6 +17,7 @@ use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Languages\LanguageNameUtils;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
+use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -263,6 +264,22 @@ class FormatSnakValue extends ApiBase {
 				if ( !$this->languageNameUtils->isValidBuiltInCode( $value ) ) {
 					// silently ignore invalid strings, like most of Wikibase / MediaWiki
 					$value = 'und';
+				}
+				break;
+			case QuantityFormatter::OPT_APPLY_ROUNDING:
+				if ( !is_bool( $value ) && !is_int( $value ) ) {
+					$this->errorReporter->dieWithError(
+						'wikibase-api-invalid-formatter-options-apply-rounding',
+						'param-illegal'
+					);
+				}
+				break;
+			case QuantityFormatter::OPT_APPLY_UNIT:
+				if ( !is_bool( $value ) ) {
+					$this->errorReporter->dieWithError(
+						'wikibase-api-invalid-formatter-options-apply-unit',
+						'param-illegal'
+					);
 				}
 				break;
 		}

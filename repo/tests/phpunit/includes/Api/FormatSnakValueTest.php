@@ -9,6 +9,7 @@ use DataValues\UnboundedQuantityValue;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Tests\Api\ApiTestCase;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -431,4 +432,25 @@ class FormatSnakValueTest extends ApiTestCase {
 		yield 'array' => [ [] ];
 	}
 
+	public function testApiRequest_invalidApplyRoundingInOptions(): void {
+		$this->expectException( ApiUsageException::class, 'wikibase-api-invalid-formatter-options-apply-rounding' );
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'quantity',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ QuantityFormatter::OPT_APPLY_ROUNDING => 'invalid' ] ),
+		] );
+	}
+
+	public function testApiRequest_invalidApplyUnitInOptions(): void {
+		$this->expectException( ApiUsageException::class, 'wikibase-api-invalid-formatter-options-apply-unit' );
+
+		$this->doApiRequest( [
+			'action' => 'wbformatvalue',
+			'datatype' => 'quantity',
+			'datavalue' => json_encode( ( new StringValue( 'string' ) )->toArray() ),
+			'options' => json_encode( [ QuantityFormatter::OPT_APPLY_UNIT => 'invalid' ] ),
+		] );
+	}
 }
