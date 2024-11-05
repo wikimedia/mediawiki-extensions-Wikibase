@@ -29,7 +29,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetSitelinkRequestBuilder( testItemId, siteId ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
@@ -38,7 +38,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
@@ -47,21 +47,21 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetSitelinkRequestBuilder( redirectSourceId, siteId ).makeRequest();
 
 		expect( response ).to.have.status( 308 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetSitelinkRequestBuilder( 'X123', siteId ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetSitelinkRequestBuilder( 'Q99999', siteId ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

@@ -40,7 +40,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 						.makeRequest();
 
 					expect( response ).to.have.status( 200 );
-					expect( response ).to.satisfyApiSpec;
+					expect( response ).to.satisfyApiSchema;
 				} );
 
 				it( '412 Precondition Failed is valid for outdated revision id', async () => {
@@ -49,7 +49,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 						.makeRequest();
 
 					expect( response ).to.have.status( 412 );
-					expect( response ).to.satisfyApiSpec;
+					expect( response ).to.satisfyApiSchema;
 				} );
 			} );
 
@@ -59,7 +59,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 					.makeRequest();
 
 				expect( response ).to.have.status( 400 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '404 Not Found response is valid for a non-existing statement', async () => {
@@ -69,7 +69,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 					.makeRequest();
 
 				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 		} );
 	} );

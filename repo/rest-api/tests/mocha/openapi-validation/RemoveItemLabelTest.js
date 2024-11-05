@@ -35,7 +35,7 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 		it( 'label removed', async () => {
 			const response = await newRemoveItemLabelRequestBuilder( existingItemId, 'en' ).makeRequest();
 			expect( response ).to.have.status( 200 );
-			expect( response ).to.satisfyApiSpec;
+			expect( response ).to.satisfyApiSchema;
 		} );
 	} );
 
@@ -43,14 +43,14 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 		const response = await newRemoveItemLabelRequestBuilder( existingItemId, 'xyz' ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
 		const response = await newRemoveItemLabelRequestBuilder( 'Q9999999', 'en' ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -58,7 +58,7 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 		const response = await newRemoveItemLabelRequestBuilder( redirectSource, 'en' ).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -67,6 +67,6 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 			.withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

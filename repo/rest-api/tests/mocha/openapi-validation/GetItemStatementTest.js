@@ -33,7 +33,7 @@ describe( 'validate GET item statement responses', () => {
 					.makeRequest();
 
 				expect( response ).to.have.status( 200 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '304 Not Modified response is valid', async () => {
@@ -42,7 +42,7 @@ describe( 'validate GET item statement responses', () => {
 					.makeRequest();
 
 				expect( response ).to.have.status( 304 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '400 Bad Request for invalid Statement ID', async () => {
@@ -51,7 +51,7 @@ describe( 'validate GET item statement responses', () => {
 					.makeRequest();
 
 				expect( response ).to.have.status( 400 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '404 Not Found response is valid for a non-existing statement', async () => {
@@ -61,7 +61,7 @@ describe( 'validate GET item statement responses', () => {
 					.makeRequest();
 
 				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 		} );
 	} );

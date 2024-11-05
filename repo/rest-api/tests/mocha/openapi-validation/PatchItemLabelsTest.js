@@ -34,7 +34,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ makeReplaceExistingLabelOp() ]
 		).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid patch', async () => {
@@ -43,7 +43,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ { invalid: 'patch' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item not found', async () => {
@@ -52,7 +52,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ makeReplaceExistingLabelOp() ]
 		).makeRequest();
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - patch test failed', async () => {
@@ -61,7 +61,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ { op: 'test', path: '/en', value: 'unexpected label!' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -71,7 +71,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ makeReplaceExistingLabelOp() ]
 		).withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '422 - empty label', async () => {
@@ -80,7 +80,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			[ { op: 'replace', path: `/${langWithExistingLabel}`, value: '' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 422 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

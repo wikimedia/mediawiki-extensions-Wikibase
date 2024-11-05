@@ -31,7 +31,7 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 		).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '201 - added alias where there were no existing ones', async () => {
@@ -41,7 +41,7 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			[ makeUnique( 'first-de-alias' ) ]
 		).makeRequest();
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid alias', async () => {
@@ -52,7 +52,7 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 		).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - property does not exist', async () => {
@@ -63,7 +63,7 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 		).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -77,6 +77,6 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );
