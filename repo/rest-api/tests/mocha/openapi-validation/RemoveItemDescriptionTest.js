@@ -28,7 +28,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 	it( '200 - description removed', async () => {
 		const response = await newRemoveItemDescriptionRequestBuilder( existingItemId, 'en' ).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 
 		// replace removed statement
 		await newSetItemDescriptionRequestBuilder( existingItemId, 'en', makeUnique( 'updated description' ) )
@@ -39,14 +39,14 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 		const response = await newRemoveItemDescriptionRequestBuilder( existingItemId, 'xyz' ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
 		const response = await newRemoveItemDescriptionRequestBuilder( 'Q9999999', 'en' ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -54,7 +54,7 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 		const response = await newRemoveItemDescriptionRequestBuilder( redirectSource, 'en' ).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -63,6 +63,6 @@ describe( newRemoveItemDescriptionRequestBuilder().getRouteDescription(), () => 
 			.withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

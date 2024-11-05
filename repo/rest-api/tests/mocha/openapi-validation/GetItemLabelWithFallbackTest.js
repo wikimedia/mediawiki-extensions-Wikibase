@@ -26,7 +26,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
@@ -35,7 +35,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '307 Temporary Redirect response is valid for a label with language fallback', async () => {
@@ -43,7 +43,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		const response = await newGetItemLabelWithFallbackRequestBuilder( itemId, languageCodeWithFallback ).makeRequest();
 
 		expect( response ).to.have.status( 307 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
@@ -52,21 +52,21 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		const response = await newGetItemLabelWithFallbackRequestBuilder( redirectSourceId, languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 308 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemLabelWithFallbackRequestBuilder( 'X123', languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemLabelWithFallbackRequestBuilder( 'Q99999', languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

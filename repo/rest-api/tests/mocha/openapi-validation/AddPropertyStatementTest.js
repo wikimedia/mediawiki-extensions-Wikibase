@@ -22,7 +22,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request is valid for invalid statement', async () => {
@@ -32,7 +32,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 Not Found is valid for non-existent Property', async () => {
@@ -40,7 +40,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -50,6 +50,6 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

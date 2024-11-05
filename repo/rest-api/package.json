@@ -5,7 +5,7 @@
 	"scripts": {
 		"test": "npm run lint",
 		"api-testing:e2e": "npm run mocha -- --require tests/mocha/api-testing/fixtures.cjs tests/mocha/api-testing",
-		"api-testing:spec": "npm run mocha -- --require tests/mocha/openapi-validation/hooks.js tests/mocha/openapi-validation",
+		"api-testing:spec": "npm run mocha -- tests/mocha/openapi-validation",
 		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel lint:*",
@@ -25,7 +25,6 @@
 		"@redocly/cli": "^1.25.11",
 		"ajv": "^8.17.1",
 		"api-testing": "^1.7.0",
-		"chai-openapi-response-validator": "^0.14.2",
 		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "^10.2.4",
 		"css-loader": "^6.7.1",

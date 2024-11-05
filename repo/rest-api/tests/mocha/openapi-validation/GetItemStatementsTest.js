@@ -33,7 +33,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetItemStatementsRequestBuilder( id ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
@@ -42,7 +42,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '308 Permanent Redirect response is valid for a redirected item', async () => {
@@ -51,21 +51,21 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		const response = await newGetItemStatementsRequestBuilder( redirectSourceId ).makeRequest();
 
 		expect( response ).to.have.status( 308 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid item ID', async () => {
 		const response = await newGetItemStatementsRequestBuilder( 'X123' ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing item', async () => {
 		const response = await newGetItemStatementsRequestBuilder( 'Q99999' ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

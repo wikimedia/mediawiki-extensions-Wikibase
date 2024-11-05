@@ -19,7 +19,7 @@ describeWithTestData( '403 for all edit routes', ( itemRequestInputs, propertyRe
 				.makeRequest();
 
 			expect( response ).to.have.status( 403 );
-			expect( response ).to.satisfyApiSpec;
+			expect( response ).to.satisfyApiSchema;
 		} );
 	} );
 } );

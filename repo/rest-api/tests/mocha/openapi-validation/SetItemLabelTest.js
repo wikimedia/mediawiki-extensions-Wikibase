@@ -32,7 +32,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			makeLabel( 'updated label' )
 		).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '201 - label created', async () => {
@@ -42,14 +42,14 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			makeLabel( 'neue Beschreibung' )
 		).makeRequest();
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid (empty) label', async () => {
 		const response = await newSetItemLabelRequestBuilder( itemId, 'de', '' )
 			.makeRequest();
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
@@ -60,7 +60,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -72,7 +72,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -86,6 +86,6 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

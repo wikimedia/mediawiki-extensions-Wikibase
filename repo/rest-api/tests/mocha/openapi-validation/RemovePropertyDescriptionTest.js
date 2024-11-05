@@ -39,7 +39,7 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 		it( 'description removed', async () => {
 			const response = await newRemovePropertyDescriptionRequestBuilder( existingPropertyId, 'en' ).makeRequest();
 			expect( response ).to.have.status( 200 );
-			expect( response ).to.satisfyApiSpec;
+			expect( response ).to.satisfyApiSchema;
 		} );
 	} );
 
@@ -47,14 +47,14 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 		const response = await newRemovePropertyDescriptionRequestBuilder( existingPropertyId, 'xyz' ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - property does not exist', async () => {
 		const response = await newRemovePropertyDescriptionRequestBuilder( 'P9999999', 'en' ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -63,6 +63,6 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 			.withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

@@ -31,7 +31,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			makeUnique( 'updated description' )
 		).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '201 - description created', async () => {
@@ -41,7 +41,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			makeUnique( 'neue Beschreibung' )
 		).makeRequest();
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid description', async () => {
@@ -52,7 +52,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - property does not exist', async () => {
@@ -63,7 +63,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -77,6 +77,6 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

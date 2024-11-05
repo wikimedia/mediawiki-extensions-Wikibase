@@ -34,7 +34,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid patch', async () => {
@@ -44,7 +44,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item not found', async () => {
@@ -54,7 +54,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - patch test failed', async () => {
@@ -64,7 +64,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -75,7 +75,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '422 - empty description', async () => {
@@ -85,7 +85,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

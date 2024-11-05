@@ -32,7 +32,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 		it( 'sitelink removed', async () => {
 			const response = await newRemoveSitelinkRequestBuilder( itemId, localSiteId ).makeRequest();
 			expect( response ).to.have.status( 200 );
-			expect( response ).to.satisfyApiSpec;
+			expect( response ).to.satisfyApiSchema;
 		} );
 	} );
 
@@ -40,14 +40,14 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 		const response = await newRemoveSitelinkRequestBuilder( itemId, 'not-a-valid-site' ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
 		const response = await newRemoveSitelinkRequestBuilder( 'Q9999999', localSiteId ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -55,7 +55,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 		const response = await newRemoveSitelinkRequestBuilder( redirectSource, localSiteId ).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -64,6 +64,6 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 			.withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

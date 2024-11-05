@@ -11,6 +11,6 @@ describe( 'GET /property-data-types', () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );
