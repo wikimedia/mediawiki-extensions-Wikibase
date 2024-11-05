@@ -73,7 +73,7 @@
 	"apihelp-wbformatvalue-param-generate": "The desired output format to generate.",
 	"apihelp-wbformatvalue-param-datatype": "The value's data type. This is distinct from the value's type",
 	"apihelp-wbformatvalue-param-datavalue": "The data to format. This has to be the JSON serialization of a DataValue object.",
-	"apihelp-wbformatvalue-param-options": "The options the formatter should use. Provided as a JSON object.",
+	"apihelp-wbformatvalue-param-options": "The options the formatter should use. Provided as a JSON object.\n\nThe supported options are:\n; $1: The language in which the value should be formatted (a MediaWiki language code).\n; $2: Whether to apply rounding to the number. Can be a boolean (automatic / no rounding) or an integer (exponent of the last significant decimal digits). Only useful for quantity values.\n; $3: Whether to include the unit in the output (a boolean). Only useful for quantity values.\n; $4: Whether to show the calendar model. Can be a boolean (always / never show) or the string <code>\"auto\"</code> (automatically determine whether to show). Only useful for time values.",
 	"apihelp-wbformatvalue-param-property": "Property ID the data value belongs to, should be used instead of the <var>datatype</var> parameter.",
 	"apihelp-wbformatvalue-example-1": "Format a simple string value.",
 	"apihelp-wbformatvalue-example-2": "Format a string value as a URL in HTML.",

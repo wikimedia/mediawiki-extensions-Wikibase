@@ -96,7 +96,7 @@
 	"apihelp-wbformatvalue-param-generate": "{{doc-apihelp-param|wbformatvalue|generate}}",
 	"apihelp-wbformatvalue-param-datatype": "{{doc-apihelp-param|wbformatvalue|datatype}}",
 	"apihelp-wbformatvalue-param-datavalue": "{{doc-apihelp-param|wbformatvalue|datavalue}}",
-	"apihelp-wbformatvalue-param-options": "{{doc-apihelp-param|wbformatvalue|options}}",
+	"apihelp-wbformatvalue-param-options": "{{doc-apihelp-param|wbformatvalue|options|params=* $1, $2, $3, $4 - The names of the four supported options|paramstart=5}}",
 	"apihelp-wbformatvalue-param-property": "{{doc-apihelp-param|wbformatvalue|property}}",
 	"apihelp-wbformatvalue-example-1": "{{doc-apihelp-example|wbformatvalue}}",
 	"apihelp-wbformatvalue-example-2": "{{doc-apihelp-example|wbformatvalue}}",
