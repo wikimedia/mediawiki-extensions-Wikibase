@@ -362,6 +362,13 @@ class FormatSnakValue extends ApiBase {
 			'options' => [
 				ParamValidator::PARAM_TYPE => 'text',
 				ParamValidator::PARAM_REQUIRED => false,
+				ApiBase::PARAM_HELP_MSG => [
+					'apihelp-wbformatvalue-param-options',
+					ValueFormatter::OPT_LANG,
+					QuantityFormatter::OPT_APPLY_ROUNDING,
+					QuantityFormatter::OPT_APPLY_UNIT,
+					ShowCalendarModelDecider::OPT_SHOW_CALENDAR,
+				],
 			],
 		];
 	}
