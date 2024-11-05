@@ -4,7 +4,10 @@
 			"Christian Yakubu"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} boni",
 	"wikibase-linkitem-input-site": "Bulli",
 	"wikibase-linkitem-input-page": "Yaɣli:",
+	"wikibase-rc-hide-wikidata-hide": "Zaŋ suaɣ",
+	"wikibase-rc-hide-wikidata-show": "Wulsima",
 	"wikibase-otherprojects": "Tuum shesi ni"
 }

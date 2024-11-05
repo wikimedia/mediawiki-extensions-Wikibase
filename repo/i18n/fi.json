@@ -358,6 +358,8 @@
 	"special-entitypage": "Entiteettisivu",
 	"wikibase-entitypage-title": "Entiteettisivu",
 	"wikibase-entitypage-bad-id": "Virheellinen tunniste: $1.",
+	"wikibase-error-entity-not-local": "Entiteettityyppiä $1 ei voi muokata tästä wikistä.",
+	"wikibase-error-entity-too-big": "Entiteetti on liian suuri. Suurin sallittu entiteetin koko on $1.",
 	"wikibase-parse-error": "Virheellinen arvo.",
 	"wikibase-parse-error-coordinate": "Koordinaattiarvo on väärin muotoiltu.",
 	"wikibase-parse-error-entity-id": "Entiteetin tunniste on väärin muotoiltu.",
