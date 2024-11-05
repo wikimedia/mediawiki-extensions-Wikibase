@@ -18,8 +18,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -28,7 +29,8 @@
 		"headers": {
 			"Content-Language": {
 				"description": "Language code of the language in which response is provided",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
@@ -58,8 +60,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -80,8 +83,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -97,8 +101,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	}
