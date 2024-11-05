@@ -17,8 +17,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -35,8 +36,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	}

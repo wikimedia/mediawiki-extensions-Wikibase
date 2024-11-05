@@ -11,10 +11,9 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -30,10 +29,9 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -49,10 +47,9 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -74,10 +71,9 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -95,10 +91,9 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -114,8 +109,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -132,8 +128,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -154,8 +151,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -175,8 +173,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -196,8 +195,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -215,8 +215,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -234,8 +235,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -255,8 +257,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -272,8 +275,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -293,8 +297,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -312,8 +317,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -330,8 +336,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -358,8 +365,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -386,8 +394,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -406,8 +415,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -426,8 +436,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -445,8 +456,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -463,8 +475,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -487,8 +500,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -508,33 +522,28 @@
 		},
 		"headers": {
 			"Content-Language": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Language code of the language in which error message is provided"
+				"description": "Language code of the language in which error message is provided",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
 	"Item": {
 		"description": "A single Wikibase Item",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -666,23 +675,19 @@
 	"Sitelinks": {
 		"description": "A list of Sitelinks by Item id",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -706,23 +711,19 @@
 	"Sitelink": {
 		"description": "A Sitelink by Item id",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -741,23 +742,19 @@
 	"Property": {
 		"description": "A single Wikibase Property",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -813,10 +810,9 @@
 		"description": "The specified resource has not been modified since last provided revision number or date",
 		"headers": {
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -824,10 +820,9 @@
 		"description": "The specified resource has permanently moved to the indicated location",
 		"headers": {
 			"Location": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "The URL to which the requested resource has been moved"
+				"description": "The URL to which the requested resource has been moved",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	},
@@ -835,10 +830,9 @@
 		"description": "The specified resource has temporarily moved to the indicated location",
 		"headers": {
 			"Location": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "The URL to which the requested resource has been moved"
+				"description": "The URL to which the requested resource has been moved",
+				"schema": { "type": "string" },
+				"required": true
 			}
 		}
 	}

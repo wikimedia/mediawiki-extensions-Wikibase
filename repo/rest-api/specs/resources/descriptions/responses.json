@@ -2,13 +2,15 @@
 	"ItemDescriptions": {
 		"description": "Item's descriptions by language",
 		"headers": {
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" }
-			},
 			"ETag": {
 				"description": "Last entity revision number",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
@@ -28,13 +30,15 @@
 	"PropertyDescriptions": {
 		"description": "Property's descriptions by language",
 		"headers": {
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" }
-			},
 			"ETag": {
 				"description": "Last entity revision number",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
@@ -54,13 +58,15 @@
 	"ItemDescription": {
 		"description": "Item's description in a specific language",
 		"headers": {
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" }
-			},
 			"ETag": {
 				"description": "Last entity revision number",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
@@ -77,13 +83,15 @@
 	"PropertyDescription": {
 		"description": "Property's description in a specific language",
 		"headers": {
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" }
-			},
 			"ETag": {
 				"description": "Last entity revision number",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
@@ -102,7 +110,8 @@
 		"headers": {
 			"Content-Language": {
 				"description": "Language code of the language in which response is provided",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
