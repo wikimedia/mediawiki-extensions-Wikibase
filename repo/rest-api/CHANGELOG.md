@@ -1,5 +1,10 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
+
+## Version 1.1
+
+* Added endpoint `POST /wikibase/v1/entities/properties` ([T342992](https://phabricator.wikimedia.org/T342992))
+
 ## Version 1.0
 
 * Wikibase REST API v1 released

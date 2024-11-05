@@ -355,6 +355,11 @@
 			"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyRouteHandler::factory"
 		},
 		{
+			"path": "/wikibase/v1/entities/properties",
+			"method": "POST",
+			"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\CreatePropertyRouteHandler::factory"
+		},
+		{
 			"path": "/wikibase/v1/entities/properties/{property_id}",
 			"method": "PATCH",
 			"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyRouteHandler::factory"
