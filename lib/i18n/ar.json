@@ -38,7 +38,7 @@
 	"wikibase-error-ui-no-external-page": "الصفحة \"$2\" لم يمكن إيجادها على \"$1\".",
 	"wikibase-error-ui-edit-conflict": "نفس القيمة تم تعديلها في ذلك الوقت، مما تسبب في حدوث تضارب في التحرير. من فضلك أعد تحميل الصفحة.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (مترجم)",
-	"wikibase-language-name-for-terms-mul": "قيم افتراضية لجميع اللغات",
+	"wikibase-language-name-for-terms-mul": "افتراضيا لجميع اللغات",
 	"wikibase-quantitydetails-amount": "الكمية",
 	"wikibase-quantitydetails-upperbound": "الحد الأعلى",
 	"wikibase-quantitydetails-lowerbound": "الحد الأدنى",
