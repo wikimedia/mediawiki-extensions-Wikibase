@@ -152,9 +152,8 @@ class RemoveSitelinkRouteHandler extends SimpleHandler {
 	private function newSuccessResponse(): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setBody(
-			new StringStream( '"Sitelink deleted"' )
-		);
+		$httpResponse->setHeader( 'Content-Language', 'en' );
+		$httpResponse->setBody( new StringStream( '"Sitelink deleted"' ) );
 
 		return $httpResponse;
 	}
