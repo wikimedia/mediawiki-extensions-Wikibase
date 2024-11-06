@@ -17,7 +17,7 @@
 					},
 					"data_type": {
 						"description": "The data type of the Property",
-						"type": "string",
+						"type": [ "string", "null" ],
 						"readOnly": true
 					}
 				}
