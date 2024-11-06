@@ -171,9 +171,7 @@
                           },
                           "type": {
                             "type": "string",
-                            "enum": [
-                              "item"
-                            ],
+                            "const": "item",
                             "readOnly": true
                           },
                           "labels": {
@@ -259,7 +257,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -300,7 +301,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -350,7 +354,10 @@
                                                       },
                                                       "data_type": {
                                                         "description": "The data type of the Property",
-                                                        "type": "string",
+                                                        "type": [
+                                                          "string",
+                                                          "null"
+                                                        ],
                                                         "readOnly": true
                                                       }
                                                     }
@@ -553,9 +560,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "item"
-                          ],
+                          "const": "item",
                           "readOnly": true
                         },
                         "labels": {
@@ -641,7 +646,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -682,7 +690,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -732,7 +743,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -1426,9 +1440,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "item"
-                          ],
+                          "const": "item",
                           "readOnly": true
                         },
                         "labels": {
@@ -1514,7 +1526,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -1555,7 +1570,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -1605,7 +1623,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -2306,9 +2327,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "item"
-                          ],
+                          "const": "item",
                           "readOnly": true
                         },
                         "labels": {
@@ -2394,7 +2413,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -2435,7 +2457,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -2485,7 +2510,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -5626,9 +5654,7 @@
                           },
                           "type": {
                             "type": "string",
-                            "enum": [
-                              "property"
-                            ],
+                            "const": "property",
                             "readOnly": true
                           },
                           "data_type": {
@@ -5693,7 +5719,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -5734,7 +5763,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -5784,7 +5816,10 @@
                                                       },
                                                       "data_type": {
                                                         "description": "The data type of the Property",
-                                                        "type": "string",
+                                                        "type": [
+                                                          "string",
+                                                          "null"
+                                                        ],
                                                         "readOnly": true
                                                       }
                                                     }
@@ -5927,9 +5962,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "property"
-                          ],
+                          "const": "property",
                           "readOnly": true
                         },
                         "data_type": {
@@ -5994,7 +6027,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -6035,7 +6071,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -6085,7 +6124,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -6696,9 +6738,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "property"
-                          ],
+                          "const": "property",
                           "readOnly": true
                         },
                         "data_type": {
@@ -6763,7 +6803,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -6804,7 +6847,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -6854,7 +6900,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -7445,9 +7494,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "property"
-                          ],
+                          "const": "property",
                           "readOnly": true
                         },
                         "data_type": {
@@ -7512,7 +7559,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -7553,7 +7603,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -7603,7 +7656,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -13311,7 +13367,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -13352,7 +13411,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -13402,7 +13464,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -13881,7 +13946,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -13922,7 +13990,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -13972,7 +14043,10 @@
                                                   },
                                                   "data_type": {
                                                     "description": "The data type of the Property",
-                                                    "type": "string",
+                                                    "type": [
+                                                      "string",
+                                                      "null"
+                                                    ],
                                                     "readOnly": true
                                                   }
                                                 }
@@ -14225,7 +14299,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -14266,7 +14343,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -14316,7 +14396,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -14953,7 +15036,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -14994,7 +15080,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -15044,7 +15133,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -15482,7 +15574,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -15523,7 +15618,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -15573,7 +15671,10 @@
                                                   },
                                                   "data_type": {
                                                     "description": "The data type of the Property",
-                                                    "type": "string",
+                                                    "type": [
+                                                      "string",
+                                                      "null"
+                                                    ],
                                                     "readOnly": true
                                                   }
                                                 }
@@ -15819,7 +15920,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -15860,7 +15964,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -15910,7 +16017,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -16692,7 +16802,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -16733,7 +16846,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -16783,7 +16899,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -26304,7 +26423,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -26345,7 +26467,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -26395,7 +26520,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -26795,7 +26923,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -26836,7 +26967,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -26886,7 +27020,10 @@
                                                   },
                                                   "data_type": {
                                                     "description": "The data type of the Property",
-                                                    "type": "string",
+                                                    "type": [
+                                                      "string",
+                                                      "null"
+                                                    ],
                                                     "readOnly": true
                                                   }
                                                 }
@@ -27109,7 +27246,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -27150,7 +27290,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -27200,7 +27343,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -27761,7 +27907,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -27802,7 +27951,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -27852,7 +28004,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -28259,7 +28414,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -28300,7 +28458,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -28350,7 +28511,10 @@
                                                   },
                                                   "data_type": {
                                                     "description": "The data type of the Property",
-                                                    "type": "string",
+                                                    "type": [
+                                                      "string",
+                                                      "null"
+                                                    ],
                                                     "readOnly": true
                                                   }
                                                 }
@@ -28566,7 +28730,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -28607,7 +28774,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -28657,7 +28827,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -29384,7 +29557,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -29425,7 +29601,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -29475,7 +29654,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -30539,7 +30721,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -30580,7 +30765,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -30630,7 +30818,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -31047,7 +31238,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -31088,7 +31282,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -31138,7 +31335,10 @@
                                                   },
                                                   "data_type": {
                                                     "description": "The data type of the Property",
-                                                    "type": "string",
+                                                    "type": [
+                                                      "string",
+                                                      "null"
+                                                    ],
                                                     "readOnly": true
                                                   }
                                                 }
@@ -31384,7 +31584,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -31425,7 +31628,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -31475,7 +31681,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -32236,7 +32445,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -32277,7 +32489,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -32327,7 +32542,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -33463,9 +33681,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "item"
-                          ],
+                          "const": "item",
                           "readOnly": true
                         },
                         "labels": {
@@ -33551,7 +33767,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -33592,7 +33811,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -33642,7 +33864,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -34261,9 +34486,7 @@
                         },
                         "type": {
                           "type": "string",
-                          "enum": [
-                            "property"
-                          ],
+                          "const": "property",
                           "readOnly": true
                         },
                         "data_type": {
@@ -34328,7 +34551,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -34369,7 +34595,10 @@
                                               },
                                               "data_type": {
                                                 "description": "The data type of the Property",
-                                                "type": "string",
+                                                "type": [
+                                                  "string",
+                                                  "null"
+                                                ],
                                                 "readOnly": true
                                               }
                                             }
@@ -34419,7 +34648,10 @@
                                                     },
                                                     "data_type": {
                                                       "description": "The data type of the Property",
-                                                      "type": "string",
+                                                      "type": [
+                                                        "string",
+                                                        "null"
+                                                      ],
                                                       "readOnly": true
                                                     }
                                                   }
@@ -34737,7 +34969,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -34778,7 +35013,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -34828,7 +35066,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -35681,7 +35922,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -35722,7 +35966,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -35772,7 +36019,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -36132,9 +36382,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": [
-                        "item"
-                      ],
+                      "const": "item",
                       "readOnly": true
                     },
                     "labels": {
@@ -36220,7 +36468,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -36261,7 +36512,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -36311,7 +36565,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -37825,9 +38082,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": [
-                        "property"
-                      ],
+                      "const": "property",
                       "readOnly": true
                     },
                     "data_type": {
@@ -37892,7 +38147,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -37933,7 +38191,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -37983,7 +38244,10 @@
                                                 },
                                                 "data_type": {
                                                   "description": "The data type of the Property",
-                                                  "type": "string",
+                                                  "type": [
+                                                    "string",
+                                                    "null"
+                                                  ],
                                                   "readOnly": true
                                                 }
                                               }
@@ -39020,7 +39284,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -39061,7 +39328,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -39111,7 +39381,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -39527,7 +39800,10 @@
                             },
                             "data_type": {
                               "description": "The data type of the Property",
-                              "type": "string",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
                               "readOnly": true
                             }
                           }
@@ -39568,7 +39844,10 @@
                                   },
                                   "data_type": {
                                     "description": "The data type of the Property",
-                                    "type": "string",
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "readOnly": true
                                   }
                                 }
@@ -39618,7 +39897,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -41056,7 +41338,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -41097,7 +41382,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -41147,7 +41435,10 @@
                                             },
                                             "data_type": {
                                               "description": "The data type of the Property",
-                                              "type": "string",
+                                              "type": [
+                                                "string",
+                                                "null"
+                                              ],
                                               "readOnly": true
                                             }
                                           }
@@ -41350,7 +41641,10 @@
                             },
                             "data_type": {
                               "description": "The data type of the Property",
-                              "type": "string",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
                               "readOnly": true
                             }
                           }
@@ -41391,7 +41685,10 @@
                                   },
                                   "data_type": {
                                     "description": "The data type of the Property",
-                                    "type": "string",
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "readOnly": true
                                   }
                                 }
@@ -41441,7 +41738,10 @@
                                         },
                                         "data_type": {
                                           "description": "The data type of the Property",
-                                          "type": "string",
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
                                           "readOnly": true
                                         }
                                       }
@@ -42199,7 +42499,10 @@
               },
               "data_type": {
                 "description": "The data type of the Property",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "readOnly": true
               }
             }
@@ -42245,7 +42548,10 @@
                     },
                     "data_type": {
                       "description": "The data type of the Property",
-                      "type": "string",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "readOnly": true
                     }
                   }
@@ -42306,7 +42612,10 @@
                   },
                   "data_type": {
                     "description": "The data type of the Property",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "readOnly": true
                   }
                 }
@@ -42347,7 +42656,10 @@
                         },
                         "data_type": {
                           "description": "The data type of the Property",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "readOnly": true
                         }
                       }
@@ -42397,7 +42709,10 @@
                               },
                               "data_type": {
                                 "description": "The data type of the Property",
-                                "type": "string",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "readOnly": true
                               }
                             }
@@ -42439,9 +42754,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "item"
-            ],
+            "const": "item",
             "readOnly": true
           },
           "labels": {
@@ -42527,7 +42840,10 @@
                           },
                           "data_type": {
                             "description": "The data type of the Property",
-                            "type": "string",
+                            "type": [
+                              "string",
+                              "null"
+                            ],
                             "readOnly": true
                           }
                         }
@@ -42568,7 +42884,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -42618,7 +42937,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -42818,9 +43140,7 @@
               },
               "type": {
                 "type": "string",
-                "enum": [
-                  "item"
-                ],
+                "const": "item",
                 "readOnly": true
               },
               "labels": {
@@ -42906,7 +43226,10 @@
                               },
                               "data_type": {
                                 "description": "The data type of the Property",
-                                "type": "string",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "readOnly": true
                               }
                             }
@@ -42947,7 +43270,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -42997,7 +43323,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -43285,9 +43614,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "property"
-            ],
+            "const": "property",
             "readOnly": true
           },
           "data_type": {
@@ -43352,7 +43679,10 @@
                           },
                           "data_type": {
                             "description": "The data type of the Property",
-                            "type": "string",
+                            "type": [
+                              "string",
+                              "null"
+                            ],
                             "readOnly": true
                           }
                         }
@@ -43393,7 +43723,10 @@
                                 },
                                 "data_type": {
                                   "description": "The data type of the Property",
-                                  "type": "string",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
                                   "readOnly": true
                                 }
                               }
@@ -43443,7 +43776,10 @@
                                       },
                                       "data_type": {
                                         "description": "The data type of the Property",
-                                        "type": "string",
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ],
                                         "readOnly": true
                                       }
                                     }
@@ -43494,9 +43830,7 @@
               },
               "type": {
                 "type": "string",
-                "enum": [
-                  "property"
-                ],
+                "const": "property",
                 "readOnly": true
               },
               "data_type": {
@@ -43561,7 +43895,10 @@
                               },
                               "data_type": {
                                 "description": "The data type of the Property",
-                                "type": "string",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "readOnly": true
                               }
                             }
@@ -43602,7 +43939,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -43652,7 +43992,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -43968,7 +44311,10 @@
                       },
                       "data_type": {
                         "description": "The data type of the Property",
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "readOnly": true
                       }
                     }
@@ -44009,7 +44355,10 @@
                             },
                             "data_type": {
                               "description": "The data type of the Property",
-                              "type": "string",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
                               "readOnly": true
                             }
                           }
@@ -44059,7 +44408,10 @@
                                   },
                                   "data_type": {
                                     "description": "The data type of the Property",
-                                    "type": "string",
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "readOnly": true
                                   }
                                 }
@@ -44311,7 +44663,10 @@
                               },
                               "data_type": {
                                 "description": "The data type of the Property",
-                                "type": "string",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "readOnly": true
                               }
                             }
@@ -44352,7 +44707,10 @@
                                     },
                                     "data_type": {
                                       "description": "The data type of the Property",
-                                      "type": "string",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "readOnly": true
                                     }
                                   }
@@ -44402,7 +44760,10 @@
                                           },
                                           "data_type": {
                                             "description": "The data type of the Property",
-                                            "type": "string",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
                                             "readOnly": true
                                           }
                                         }
@@ -44587,7 +44948,10 @@
               },
               "data_type": {
                 "description": "The data type of the Property",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "readOnly": true
               }
             }
