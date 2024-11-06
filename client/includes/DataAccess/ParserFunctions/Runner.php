@@ -10,7 +10,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -36,9 +36,9 @@ class Runner {
 	private $entityIdParser;
 
 	/**
-	 * @var RestrictedEntityLookup
+	 * @var RestrictedEntityLookupFactory
 	 */
-	private $restrictedEntityLookup;
+	private $restrictedEntityLookupFactory;
 
 	/**
 	 * @var string
@@ -54,7 +54,7 @@ class Runner {
 	 * @param StatementGroupRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityIdParser $entityIdParser
-	 * @param RestrictedEntityLookup $restrictedEntityLookup
+	 * @param RestrictedEntityLookupFactory $restrictedEntityLookupFactory
 	 * @param string $siteId
 	 * @param bool $allowArbitraryDataAccess
 	 */
@@ -62,14 +62,14 @@ class Runner {
 		StatementGroupRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		EntityIdParser $entityIdParser,
-		RestrictedEntityLookup $restrictedEntityLookup,
+		RestrictedEntityLookupFactory $restrictedEntityLookupFactory,
 		$siteId,
 		$allowArbitraryDataAccess
 	) {
 		$this->rendererFactory = $rendererFactory;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->restrictedEntityLookup = $restrictedEntityLookup;
+		$this->restrictedEntityLookupFactory = $restrictedEntityLookupFactory;
 		$this->siteId = $siteId;
 		$this->allowArbitraryDataAccess = $allowArbitraryDataAccess;
 	}
@@ -141,7 +141,7 @@ class Runner {
 
 		// Getting a foreign item is expensive (unless we already loaded it and it's cached)
 		if (
-			!$this->restrictedEntityLookup->entityHasBeenAccessed( $entityId ) &&
+			!$this->restrictedEntityLookupFactory->getRestrictedEntityLookup( $parser )->entityHasBeenAccessed( $entityId ) &&
 			!$parser->incrementExpensiveFunctionCount()
 		) {
 			// Just do nothing, that's what parser functions do when the limit has been

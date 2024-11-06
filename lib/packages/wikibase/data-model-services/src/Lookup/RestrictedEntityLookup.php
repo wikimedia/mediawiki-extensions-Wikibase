@@ -20,25 +20,13 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class RestrictedEntityLookup implements EntityLookup {
 
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
+	private EntityLookup $entityLookup;
 
-	/**
-	 * @var int
-	 */
-	private $entityAccessLimit;
+	private int $entityAccessLimit;
 
-	/**
-	 * @var bool[] Entity id serialization => bool
-	 */
-	private $entitiesAccessed = [];
+	private array $entitiesAccessed = [];
 
-	/**
-	 * @var int
-	 */
-	private $entityAccessCount = 0;
+	private int $entityAccessCount = 0;
 
 	/**
 	 * @param EntityLookup $entityLookup
@@ -46,8 +34,8 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityLookup $entityLookup, $entityAccessLimit ) {
-		if ( !is_int( $entityAccessLimit ) || $entityAccessLimit < 1 ) {
+	public function __construct( EntityLookup $entityLookup, int $entityAccessLimit ) {
+		if ( $entityAccessLimit < 1 ) {
 			throw new InvalidArgumentException( '$entityAccessLimit must be a positive integer' );
 		}
 
@@ -89,7 +77,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 * @return bool
 	 * @throws EntityLookupException
 	 */
-	public function hasEntity( EntityId $entityId ) {
+	public function hasEntity( EntityId $entityId ): bool {
 		return $this->entityLookup->hasEntity( $entityId );
 	}
 
@@ -100,7 +88,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @return int
 	 */
-	public function getEntityAccessCount() {
+	public function getEntityAccessCount(): int {
 		return $this->entityAccessCount;
 	}
 
@@ -123,7 +111,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @return bool
 	 */
-	public function entityHasBeenAccessed( EntityId $entityId ) {
+	public function entityHasBeenAccessed( EntityId $entityId ): bool {
 		$entityIdSerialization = $entityId->getSerialization();
 
 		return array_key_exists( $entityIdSerialization, $this->entitiesAccessed );

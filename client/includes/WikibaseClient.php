@@ -39,7 +39,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -446,9 +446,9 @@ final class WikibaseClient {
 			->get( 'WikibaseClient.TermsLanguages' );
 	}
 
-	public static function getRestrictedEntityLookup( ContainerInterface $services = null ): RestrictedEntityLookup {
+	public static function getRestrictedEntityLookupFactory( ContainerInterface $services = null ): RestrictedEntityLookupFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseClient.RestrictedEntityLookup' );
+			->get( 'WikibaseClient.RestrictedEntityLookupFactory' );
 	}
 
 	public static function getPropertyOrderProvider( ContainerInterface $services = null ): PropertyOrderProvider {

@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -42,7 +42,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', $type ),
 			$this->getSiteLinkLookup( $itemId ),
 			new ItemIdParser(),
-			$this->getRestrictedEntityLookup(),
+			$this->getRestrictedEntityLookupFactory(),
 			'enwiki',
 			true
 		);
@@ -75,7 +75,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
-			$this->getRestrictedEntityLookup(),
+			$this->getRestrictedEntityLookupFactory(),
 			'enwiki',
 			true
 		);
@@ -102,20 +102,22 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	public function testRunPropertyParserFunction_onlyExpensiveOnce() {
 		$itemId = new ItemId( 'Q42' );
 
-		// Our entity has already been loaded.
-		$restrictedEntityLookup = $this->getRestrictedEntityLookup();
+		$parser = $this->getParser();
+		$restrictedEntityLookupFactory = $this->getRestrictedEntityLookupFactory();
+
+		// Our entity has already been loaded
+		$restrictedEntityLookup = $restrictedEntityLookupFactory->getRestrictedEntityLookup( $parser );
 		$restrictedEntityLookup->getEntity( $itemId );
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
-			$restrictedEntityLookup,
+			$restrictedEntityLookupFactory,
 			'enwiki',
 			true
 		);
 
-		$parser = $this->getParser();
 		$frame = $this->getFromFrame( $itemId->getSerialization() );
 		$runner->runPropertyParserFunction(
 			$parser,
@@ -134,7 +136,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
-			$this->getRestrictedEntityLookup(),
+			$this->getRestrictedEntityLookupFactory(),
 			'enwiki',
 			true
 		);
@@ -166,7 +168,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 			$rendererFactory,
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
-			$this->getRestrictedEntityLookup(),
+			$this->getRestrictedEntityLookupFactory(),
 			'enwiki',
 			true
 		);
@@ -190,10 +192,10 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return RestrictedEntityLookup
+	 * @return RestrictedEntityLookupFactory
 	 */
-	private function getRestrictedEntityLookup() {
-		return new RestrictedEntityLookup( $this->createMock( EntityLookup::class ), 200 );
+	private function getRestrictedEntityLookupFactory(): RestrictedEntityLookupFactory {
+		return new RestrictedEntityLookupFactory( $this->createMock( EntityLookup::class ), 200 );
 	}
 
 	/**

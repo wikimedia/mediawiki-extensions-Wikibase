@@ -34,12 +34,14 @@ class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testStateCleared() {
 		$title = Title::newMainPage();
-		$restrictedEntityLookup = WikibaseClient::getRestrictedEntityLookup();
+		$restrictedEntityLookupFactory = WikibaseClient::getRestrictedEntityLookupFactory();
 
 		$popt = new ParserOptions( User::newFromId( 0 ), $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 
 		$parser = $this->getServiceContainer()->getParserFactory()->create();
 		$parser->parse( '{{#property:P1234|from=Q1}}', $title, $popt );
+
+		$restrictedEntityLookup = $restrictedEntityLookupFactory->getRestrictedEntityLookup( $parser );
 
 		$this->assertSame( 1, $restrictedEntityLookup->getEntityAccessCount() );
 

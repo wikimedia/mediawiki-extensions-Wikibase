@@ -31,6 +31,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -203,7 +204,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new StatementGroupRendererFactory(
 			$labelResolver,
 			new SnaksFinder(),
-			$this->createMock( EntityLookup::class ),
+			$this->getRestrictedEntityLookupFactory(),
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
 				$formatterFactory,
@@ -232,7 +233,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new StatementGroupRendererFactory(
 			$labelResolver,
 			$this->getSnaksFinder(),
-			$this->getEntityLookup(),
+			$this->getRestrictedEntityLookupFactory(),
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
 				$this->getSnakFormatterFactory(),
@@ -290,7 +291,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $snakFormatterFactory;
 	}
 
-	private function getEntityLookup(): EntityLookup {
+	private function getRestrictedEntityLookupFactory(): RestrictedEntityLookupFactory {
 		$entityLookup = $this->createMock( EntityLookup::class );
 
 		$entityLookup->method( 'getEntity' )
@@ -301,7 +302,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup->method( 'hasEntity' )
 			->willReturn( true );
 
-		return $entityLookup;
+		return new RestrictedEntityLookupFactory( $entityLookup, 200 );
 	}
 
 	private function getParser(

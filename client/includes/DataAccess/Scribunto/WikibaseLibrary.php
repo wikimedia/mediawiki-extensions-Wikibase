@@ -209,9 +209,11 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 	}
 
 	private function newEntityAccessor(): EntityAccessor {
+		$parser = $this->getParser();
+
 		return new EntityAccessor(
 			$this->getEntityIdParser(),
-			WikibaseClient::getRestrictedEntityLookup(),
+			WikibaseClient::getRestrictedEntityLookupFactory()->getRestrictedEntityLookup( $parser ),
 			$this->getUsageAccumulator(),
 			WikibaseClient::getCompactEntitySerializer(),
 			WikibaseClient::getCompactBaseDataModelSerializerFactory()

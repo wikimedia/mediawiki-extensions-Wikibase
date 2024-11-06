@@ -75,7 +75,7 @@ use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -781,7 +781,7 @@ return [
 			WikibaseClient::getStatementGroupRendererFactory( $services ),
 			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
 			WikibaseClient::getEntityIdParser( $services ),
-			WikibaseClient::getRestrictedEntityLookup( $services ),
+			WikibaseClient::getRestrictedEntityLookupFactory( $services ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'allowArbitraryDataAccess' )
 		);
@@ -868,13 +868,13 @@ return [
 		);
 	},
 
-	'WikibaseClient.RestrictedEntityLookup' => function ( MediaWikiServices $services ): RestrictedEntityLookup {
+	'WikibaseClient.RestrictedEntityLookupFactory' => function ( MediaWikiServices $services ): RestrictedEntityLookupFactory {
 		$settings = WikibaseClient::getSettings( $services );
 		$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
 			WikibaseClient::getEntityLookup( $services ),
 			$settings->getSetting( 'disabledAccessEntityTypes' )
 		);
-		return new RestrictedEntityLookup(
+		return new RestrictedEntityLookupFactory(
 			$disabledEntityTypesEntityLookup,
 			$settings->getSetting( 'entityAccessLimit' )
 		);
@@ -969,7 +969,7 @@ return [
 		return new StatementGroupRendererFactory(
 			WikibaseClient::getPropertyLabelResolver( $services ),
 			new SnaksFinder(),
-			WikibaseClient::getRestrictedEntityLookup( $services ),
+			WikibaseClient::getRestrictedEntityLookupFactory( $services ),
 			WikibaseClient::getDataAccessSnakFormatterFactory( $services ),
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$services->getLanguageConverterFactory(),

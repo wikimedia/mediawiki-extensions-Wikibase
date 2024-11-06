@@ -9,7 +9,7 @@ use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 
@@ -38,9 +38,8 @@ class PropertyParserFunctionRunnerTest extends ServiceWiringTestCase {
 			$store );
 		$this->mockService( 'WikibaseClient.EntityIdParser',
 			new ItemIdParser() );
-		$this->mockService( 'WikibaseClient.RestrictedEntityLookup',
-			$this->createMock( RestrictedEntityLookup::class ) );
-
+		$this->mockService( 'WikibaseClient.RestrictedEntityLookupFactory',
+			$this->createMock( RestrictedEntityLookupFactory::class ) );
 		$this->assertInstanceOf(
 			Runner::class,
 			$this->getService( 'WikibaseClient.PropertyParserFunctionRunner' )
