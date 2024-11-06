@@ -30,7 +30,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} ).makeRequest();
 
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid field', async () => {

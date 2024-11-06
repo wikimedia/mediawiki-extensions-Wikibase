@@ -226,4 +226,4 @@ class RequestBuilder {
 
 }
 
-module.exports = { RequestBuilder };
+module.exports = { RequestBuilder, getOrLoadSchema };
