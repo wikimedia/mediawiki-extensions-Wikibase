@@ -38,6 +38,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			expect( response ).to.have.status( 200 );
 			assert.equal( response.body, 'Sitelink deleted' );
+			assert.header( response, 'Content-Language', 'en' );
 
 			const sitelinks = ( await newGetSitelinksRequestBuilder( testItemId ).makeRequest() ).body;
 			assert.notProperty( sitelinks, siteId );
@@ -57,6 +58,8 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 200 );
+			assert.equal( response.body, 'Sitelink deleted' );
+			assert.header( response, 'Content-Language', 'en' );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 			assert.include( editMetadata.tags, tag );
