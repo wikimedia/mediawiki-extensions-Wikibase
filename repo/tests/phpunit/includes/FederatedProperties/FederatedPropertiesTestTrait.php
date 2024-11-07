@@ -121,10 +121,9 @@ trait FederatedPropertiesTestTrait {
 	 */
 	private function setWbSettingInGlobalIfMwIntegrationTest( string $name, $value ) {
 		if ( method_exists( $this, 'setMwGlobals' ) ) {
-			global $wgWBRepoSettings;
-			$newRepoSettings = $wgWBRepoSettings;
+			$newRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 			$newRepoSettings[$name] = $value;
-			$this->setMwGlobals( 'wgWBRepoSettings', $newRepoSettings );
+			$this->overrideConfigValue( 'WBRepoSettings', $newRepoSettings );
 		}
 	}
 

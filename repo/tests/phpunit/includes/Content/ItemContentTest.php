@@ -10,6 +10,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -610,7 +611,7 @@ class ItemContentTest extends EntityContentTestCase {
 	}
 
 	private function setLanguageCodeEnglish() {
-		$this->setMwGlobals( 'wgLanguageCode', 'en' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'en' );
 	}
 
 	public function testGetSummaryText() {

@@ -64,7 +64,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$this->store = $store;
 
 		$this->setContentLang( 'de' );
-		$this->setMwGlobals( 'wgKartographerMapServer', 'http://192.0.2.0' );
+		$this->overrideConfigValue( 'KartographerMapServer', 'http://192.0.2.0' );
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();

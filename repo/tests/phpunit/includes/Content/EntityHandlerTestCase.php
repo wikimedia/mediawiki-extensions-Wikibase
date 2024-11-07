@@ -12,6 +12,7 @@ use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Content\ContentHandler;
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\WikiPage;
@@ -242,7 +243,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		// test nl
 		$this->setUserLang( 'nl' );
 		$frCode = 'fr';
-		$this->setMwGlobals( 'wgLanguageCode', $frCode );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, $frCode );
 		$handler = $this->getHandler();
 		$this->assertEquals( $frCode, $handler->getPageLanguage( $title )->getCode() );
 	}

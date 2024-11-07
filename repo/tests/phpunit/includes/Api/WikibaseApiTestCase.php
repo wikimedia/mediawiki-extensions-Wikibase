@@ -67,11 +67,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	private function setupSites() {
-		global $wgWBRepoSettings;
-
-		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
-		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		$this->overrideConfigValue( 'WBRepoSettings', $customRepoSettings );
 
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );

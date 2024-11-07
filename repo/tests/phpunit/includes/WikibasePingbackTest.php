@@ -35,12 +35,10 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		global $wgWBRepoSettings;
-
-		$settings = $wgWBRepoSettings;
+		$settings = $this->getConfVar( 'WBRepoSettings' );
 		$settings['wikibasePingback'] = true;
 		$settings['pingbackHost'] = 'http://localhost/event/beacon';
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 		SiteStatsInit::doPlaceholderInit();
 	}
 

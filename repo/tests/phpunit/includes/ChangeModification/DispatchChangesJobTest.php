@@ -29,10 +29,9 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		global $wgWBRepoSettings;
-		$newRepoSettings = $wgWBRepoSettings;
+		$newRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 		$newRepoSettings['localClientDatabases'] = [ $wiki => $wiki ];
-		$this->setMwGlobals( 'wgWBRepoSettings', $newRepoSettings );
+		$this->overrideConfigValue( 'WBRepoSettings', $newRepoSettings );
 	}
 
 	public function testDispatchJobForSingleChangeToSingleWiki(): void {

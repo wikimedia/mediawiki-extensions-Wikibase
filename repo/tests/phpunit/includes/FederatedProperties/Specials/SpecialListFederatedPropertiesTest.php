@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Specials;
 
+use MediaWiki\MainConfigNames;
 use SpecialPageTestBase;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 
@@ -21,7 +22,7 @@ class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->clearHooks();
-		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
 	}
 
 	protected function newSpecialPage() {

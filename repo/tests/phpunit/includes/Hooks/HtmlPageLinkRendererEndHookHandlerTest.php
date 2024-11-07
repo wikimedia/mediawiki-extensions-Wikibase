@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 use HtmlArmor;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MainConfigNames;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -471,7 +472,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 			->caller( __METHOD__ )
 			->execute();
 
-		$this->setMwGlobals( 'wgExtraInterlanguageLinkPrefixes', [ 'madeuplanguage' ] );
+		$this->overrideConfigValue( MainConfigNames::ExtraInterlanguageLinkPrefixes, [ 'madeuplanguage' ] );
 		$linkTarget = $namespace !== null ?
 			Title::makeTitle( $namespace, $linkTargetText ) :
 			Title::newFromTextThrow( $linkTargetText );

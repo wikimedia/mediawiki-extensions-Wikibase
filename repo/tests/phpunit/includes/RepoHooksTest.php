@@ -452,10 +452,9 @@ XML
 	}
 
 	public function testOnMediaWikiServices() {
+		global $wgNamespaceContentModels, $wgContentHandlers;
 
-		global $wgWBRepoSettings, $wgNamespaceContentModels, $wgContentHandlers;
-
-		$settings = $wgWBRepoSettings;
+		$settings = $this->getConfVar( 'WBRepoSettings' );
 
 		$settings['entitySources'] = [
 			'local' => [
@@ -472,8 +471,8 @@ XML
 		];
 		$settings['localEntitySourceName'] = 'local';
 
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 		$this->setMwGlobals( [
-			'wgWBRepoSettings' => $settings,
 			'wgNamespaceContentModels' => [],
 			'wgContentHandlers' => [],
 		] );
@@ -501,7 +500,7 @@ XML
 
 		$settings['localEntitySourceName'] = 'items';
 
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 
 		$canBeMoved = true;
 
@@ -518,7 +517,7 @@ XML
 
 		$settings['localEntitySourceName'] = 'items';
 
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 
 		$canBeMoved = true;
 
@@ -535,7 +534,7 @@ XML
 
 		$settings['localEntitySourceName'] = 'props';
 
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 
 		$canBeMoved = true;
 
@@ -553,7 +552,7 @@ XML
 
 		$settings['localEntitySourceName'] = 'items';
 
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 
 		$canBeMoved = true;
 
@@ -570,7 +569,7 @@ XML
 		$settings = $this->newEntitySourceSettings( $itemNamespace, $propertyNamespace );
 		$settings['localEntitySourceName'] = 'items';
 
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		$this->overrideConfigValue( 'WBRepoSettings', $settings );
 
 		$canBeMoved = true;
 
@@ -580,9 +579,7 @@ XML
 	}
 
 	private function newEntitySourceSettings( $itemNamespace, $propertyNamespace ) {
-		global $wgWBRepoSettings;
-
-		$settings = $wgWBRepoSettings;
+		$settings = $this->getConfVar( 'WBRepoSettings' );
 
 		$settings['entitySources'] = [
 			'items' => [

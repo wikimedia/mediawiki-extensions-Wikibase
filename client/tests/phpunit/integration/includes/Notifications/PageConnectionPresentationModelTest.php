@@ -56,14 +56,17 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testPresentationModel() {
-		global $wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons;
+		global $wgEchoNotifications;
+
+		$notificationCategories = $this->getConfVar( 'EchoNotificationCategories' );
+		$icons = $this->getConfVar( 'EchoNotificationIcons' );
 
 		$handlers = new EchoSetupHookHandler(
 			true,
 			false
 		);
 		$handlers->onBeforeCreateEchoEvent(
-			$wgEchoNotifications, $wgEchoNotificationCategories, $wgEchoNotificationIcons
+			$wgEchoNotifications, $notificationCategories, $icons
 		);
 
 		$title = Title::makeTitle( NS_MAIN, 'Connected_page' );
@@ -93,7 +96,7 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertArrayHasKey(
 			$model->getIconType(),
-			$wgEchoNotificationIcons,
+			$icons,
 			"Failed asserting that our presentation model returns an existing icon type"
 		);
 
@@ -111,8 +114,6 @@ class PageConnectionPresentationModelTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( Message::class, $model->getSubjectMessage() );
 
 		unset( $wgEchoNotifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] );
-		unset( $wgEchoNotificationCategories['wikibase-action'] );
-		unset( $wgEchoNotificationIcons[EchoNotificationsHandlers::NOTIFICATION_TYPE] );
 	}
 
 }

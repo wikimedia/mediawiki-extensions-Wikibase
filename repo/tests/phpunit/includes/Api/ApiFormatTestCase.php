@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiMain;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Tests\Api\ApiTestContext;
@@ -59,7 +60,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 	 * @return ApiMain
 	 */
 	protected function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
-		global $wgAPIModules;
+		$apiModules = $this->getConfVar( MainConfigNames::APIModules );
 
 		if ( $needsToken ) {
 			$params['token'] = $this->user->getEditToken();
@@ -69,7 +70,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 		$ctx = $ctx->newTestContext( $request, $this->user );
 		$main = new ApiMain( $ctx, true );
 
-		return ObjectFactory::getObjectFromSpec( $wgAPIModules[$moduleName], [
+		return ObjectFactory::getObjectFromSpec( $apiModules[$moduleName], [
 			'assertClass' => $moduleClass,
 			'extraArgs' => [ $main, $moduleName ],
 			'serviceContainer' => MediaWikiServices::getInstance(),

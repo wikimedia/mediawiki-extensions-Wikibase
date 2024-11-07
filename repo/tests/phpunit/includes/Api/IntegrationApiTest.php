@@ -34,11 +34,9 @@ class IntegrationApiTest extends ApiTestCase {
 	}
 
 	private function setupSitelinkGroups() {
-		global $wgWBRepoSettings;
-
-		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
-		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		$this->overrideConfigValue( 'WBRepoSettings', $customRepoSettings );
 	}
 
 	public static function apiRequestProvider() {
