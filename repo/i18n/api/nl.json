@@ -59,7 +59,7 @@
 	"apihelp-wbformatvalue-param-generate": "Het gewenste te genereren uitvoerformaat.",
 	"apihelp-wbformatvalue-param-datatype": "Het gegevenstype van de waarde. Dit staat los van het type van de waarde",
 	"apihelp-wbformatvalue-param-datavalue": "De te formatteren gegevens. Dit moet de JSON-serialisatie van een DataValue-object zijn.",
-	"apihelp-wbformatvalue-param-options": "De opties die de formatteerder moet gebruiken. Geleverd als een JSON-object.",
+	"apihelp-wbformatvalue-param-options": "De opties die de formatteerder moet gebruiken. Geleverd als een JSON-object.\n\nDe ondersteunde opties zijn:\n; $1: De taal waarin de waarde moet worden opgemaakt (een MediaWiki-taalcode).\n; $2: Of er afronding op het getal moet worden toegepast. Kan een Booleaanse waarde zijn (automatisch/geen afronding) of een geheel getal (exponent van de laatste significante decimale cijfers). Alleen nuttig voor kwantiteitswaarden.\n; $3: Of de eenheid in de uitvoer moet worden opgenomen (een Booleaanse waarde). Alleen nuttig voor kwantiteitswaarden.\n; $4: Of het kalendermodel moet worden weergegeven. Kan een Booleaanse waarde zijn (altijd/nooit weergeven) of de tekenreeks <code>\"auto\"</code> (automatisch bepalen of er moet worden weergegeven). Alleen nuttig voor tijdswaarden.",
 	"apihelp-wbformatvalue-param-property": "Eigenschap-ID waar de gegevenswaarde toe behoort, moet worden gebruikt in plaats van de <var>datatype</var> parameter.",
 	"apihelp-wbformatvalue-example-1": "Formatteer een eenvoudige string-waarde.",
 	"apihelp-wbformatvalue-example-2": "Formatteer een string-waarde als een URL in HTML.",
