@@ -51,9 +51,6 @@ class WikibasePingback {
 	/** @var string Randomly-generated identifier for this wiki */
 	protected $id;
 
-	/**
-	 * @var int
-	 */
 	public const HEARTBEAT_TIMEOUT = 60 * 60 * 24 * 30;
 
 	/**

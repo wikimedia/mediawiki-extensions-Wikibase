@@ -18,7 +18,6 @@ use Wikibase\Client\WikibaseClient;
 class NoLangLinkHandler {
 	/**
 	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
-	 * @var string
 	 */
 	public const EXTENSION_DATA_KEY = 'wikibase-noexternallanglinks';
 

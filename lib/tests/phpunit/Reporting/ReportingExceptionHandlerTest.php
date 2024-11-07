@@ -22,7 +22,6 @@ class ReportingExceptionHandlerTest extends \PHPUnit\Framework\TestCase {
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 
-		/** @var MessageReporter $reporter */
 		$handler = new ReportingExceptionHandler( $reporter );
 		$handler->handleException( new RuntimeException(), "test", "Just a test!" );
 	}

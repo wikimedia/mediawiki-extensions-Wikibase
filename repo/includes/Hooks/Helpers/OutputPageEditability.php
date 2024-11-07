@@ -13,11 +13,7 @@ use MediaWiki\Output\OutputPage;
  */
 class OutputPageEditability {
 
-	/**
-	 * @param OutputPage $out
-	 * @return bool
-	 */
-	public function validate( OutputPage $out ) {
+	public function validate( OutputPage $out ): bool {
 		return $out->getAuthority()->probablyCan( 'edit', $out->getTitle() )
 			&& $this->isEditView( $out );
 	}
@@ -25,22 +21,18 @@ class OutputPageEditability {
 	/**
 	 * This is mostly a duplicate of
 	 * @see \Wikibase\Repo\Actions\ViewEntityAction::isEditable()
-	 *
-	 * @param OutputPage $out
-	 *
-	 * @return bool
 	 */
-	private function isEditView( OutputPage $out ) {
+	private function isEditView( OutputPage $out ): bool {
 		return $this->isLatestRevision( $out )
 			&& !$this->isDiff( $out )
 			&& !$out->isPrintable();
 	}
 
-	private function isDiff( OutputPage $out ) {
+	private function isDiff( OutputPage $out ): bool {
 		return $out->getRequest()->getCheck( 'diff' );
 	}
 
-	private function isLatestRevision( OutputPage $out ) {
+	private function isLatestRevision( OutputPage $out ): bool {
 		return !$out->getRevisionId() // the revision id can be null on a ParserCache hit, but only for the latest revision
 			|| $out->getRevisionId() === $out->getTitle()->getLatestRevID();
 	}

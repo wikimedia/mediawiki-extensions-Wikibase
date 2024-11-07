@@ -7,7 +7,6 @@ namespace Wikibase\Repo\Api;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -129,7 +128,6 @@ class GetClaims extends ApiBase {
 			$this->errorReporter->dieException( $e, 'param-invalid' );
 		}
 
-		/** @var EntityId $entityId */
 		$entity = $this->entityLoadingHelper->loadEntity( $params, $entityId );
 
 		$statements = $this->getStatements( $entity, $guid );

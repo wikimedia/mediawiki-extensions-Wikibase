@@ -19,7 +19,6 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 
 	/**
 	 * Key used to store data in ParserOutput.  Exported for use by unit tests.
-	 * @var string
 	 */
 	public const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
 
