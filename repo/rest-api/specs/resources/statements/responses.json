@@ -11,8 +11,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -36,8 +37,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -55,31 +57,28 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
 	"ItemStatement": {
 		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -92,23 +91,19 @@
 	"ItemStatements": {
 		"description": "The Statements of an Item",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -225,8 +220,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -251,8 +247,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -271,8 +268,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -293,31 +291,28 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
 	"PropertyStatement": {
 		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID.",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -330,23 +325,19 @@
 	"PropertyStatements": {
 		"description": "The Statements of a Property",
 		"headers": {
-			"Last-Modified": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last modified date"
-			},
 			"ETag": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Last entity revision number"
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
-				"schema": {
-					"type": "string"
-				},
-				"description": "Optional username of the user making the request"
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
 			}
 		},
 		"content": {
@@ -392,8 +383,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -418,8 +410,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -438,8 +431,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -460,8 +454,9 @@
 		},
 		"headers": {
 			"Content-Language": {
+				"description": "Language code of the language in which error message is provided",
 				"schema": { "type": "string" },
-				"description": "Language code of the language in which error message is provided"
+				"required": true
 			}
 		}
 	},
@@ -470,7 +465,8 @@
 		"headers": {
 			"Content-Language": {
 				"description": "Language code of the language in which response is provided",
-				"schema": { "type": "string" }
+				"schema": { "type": "string" },
+				"required": true
 			},
 			"X-Authenticated-User": {
 				"description": "Optional username of the user making the request",
