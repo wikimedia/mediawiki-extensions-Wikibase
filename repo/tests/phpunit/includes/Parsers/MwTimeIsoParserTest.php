@@ -304,9 +304,7 @@ class MwTimeIsoParserTest extends MediaWikiIntegrationTestCase {
 	 * @param ValueParser|null $parser
 	 */
 	public function testParseWithValidInputs( $value, $expected, ValueParser $parser = null ) {
-		if ( $parser === null ) {
-			$parser = $this->getInstance();
-		}
+		$parser ??= $this->getInstance();
 
 		$this->assertSmartEquals( $expected, $parser->parse( $value ) );
 	}
@@ -339,9 +337,7 @@ class MwTimeIsoParserTest extends MediaWikiIntegrationTestCase {
 	 * @param ValueParser|null $parser
 	 */
 	public function testParseWithInvalidInputs( $value, ValueParser $parser = null ) {
-		if ( $parser === null ) {
-			$parser = $this->getInstance();
-		}
+		$parser ??= $this->getInstance();
 
 		$this->expectException( ParseException::class );
 		$parser->parse( $value );

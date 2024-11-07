@@ -108,12 +108,8 @@ class MergeItems extends ApiBase {
 			$fromId = $this->getItemIdParam( $params, 'fromid' );
 			$toId = $this->getItemIdParam( $params, 'toid' );
 
-			$ignoreConflicts = $params['ignoreconflicts'];
+			$ignoreConflicts = $params['ignoreconflicts'] ?? [];
 			$summary = $params['summary'];
-
-			if ( $ignoreConflicts === null ) {
-				$ignoreConflicts = [];
-			}
 
 			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'], $params['tags'] ?: [], $params );
 		} catch ( EntityIdParsingException $ex ) {

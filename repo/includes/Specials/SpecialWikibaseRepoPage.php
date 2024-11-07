@@ -229,10 +229,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @return string HTML
 	 */
 	protected function getCopyrightHTML( $saveMessageKey = null ) {
-		if ( $saveMessageKey === null ) {
-			$saveMessageKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
-		}
-
+		$saveMessageKey ??= 'wikibase-' . strtolower( $this->getName() ) . '-submit';
 		return $this->copyrightView->getHtml( $this->getLanguage(), $saveMessageKey );
 	}
 

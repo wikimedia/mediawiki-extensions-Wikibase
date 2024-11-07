@@ -103,9 +103,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 					$dateFormat = $language->getDateFormatString( $dateFormatType, $dateFormatPreference );
 					$input = $language->sprintfDate( $dateFormat, $mwTimestamp );
 
-					if ( $precision === null ) {
-						$precision = $maximumPrecision;
-					}
+					$precision ??= $maximumPrecision;
 					$calendarModel = intval( substr( $mwTimestamp, 0, 4 ) ) <= 1582
 						? TimeValue::CALENDAR_JULIAN
 						: TimeValue::CALENDAR_GREGORIAN;

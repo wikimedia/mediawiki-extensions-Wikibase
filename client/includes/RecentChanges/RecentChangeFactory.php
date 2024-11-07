@@ -96,9 +96,7 @@ class RecentChangeFactory {
 	 * @return RecentChange
 	 */
 	public function newRecentChange( EntityChange $change, Title $target, array $preparedAttribs = null ) {
-		if ( $preparedAttribs === null ) {
-			$preparedAttribs = $this->prepareChangeAttributes( $change );
-		}
+		$preparedAttribs ??= $this->prepareChangeAttributes( $change );
 
 		$targetSpecificAttributes = $this->buildTargetSpecificAttributes( $change, $target );
 		$attribs = array_merge( $preparedAttribs, $targetSpecificAttributes );

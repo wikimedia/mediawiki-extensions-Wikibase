@@ -87,9 +87,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getWikiPageEntityMetaDataLookup( $namespaceLookup = null ): WikiPageEntityMetaDataLookup {
-		if ( $namespaceLookup === null ) {
-			$namespaceLookup = $this->getEntityNamespaceLookup();
-		}
+		$namespaceLookup ??= $this->getEntityNamespaceLookup();
 
 		return new WikiPageEntityMetaDataLookup(
 			$namespaceLookup,

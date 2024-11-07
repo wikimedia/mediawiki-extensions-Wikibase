@@ -144,12 +144,8 @@ class EntityLoadingHelper {
 		$revId = 0,
 		$mode = null
 	) {
-		if ( $revId === null ) {
-			$revId = 0;
-		}
-		if ( $mode === null ) {
-			$mode = $this->defaultRetrievalMode;
-		}
+		$revId ??= 0;
+		$mode ??= $this->defaultRetrievalMode;
 
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId, $mode );

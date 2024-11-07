@@ -170,11 +170,7 @@ class NTriplesRdfTestHelper {
 		$testData = $this->getTestData();
 
 		$dataSetNames = (array)$dataSetNames;
-		$prettyName = implode( '+', $dataSetNames );
-
-		if ( $message === null ) {
-			$message = "Data set $prettyName";
-		}
+		$message ??= 'Data set ' . implode( '+', $dataSetNames );
 
 		$expected = $testData->getNTriples( ...$dataSetNames );
 		$this->assertNTriplesEquals( $expected, $actual, $message );

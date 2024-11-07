@@ -65,9 +65,7 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 		PrefetchingTermLookup $prefetchingTermLookup = null,
 		bool $federatedPropertiesEnabled = false
 	) {
-		if ( $prefetchingTermLookup == null ) {
-			$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );
-		}
+		$prefetchingTermLookup ??= $this->createMock( PrefetchingTermLookup::class );
 
 		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->atLeastOnce() )

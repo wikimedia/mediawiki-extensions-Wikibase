@@ -81,13 +81,8 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
 
-		$entityRevision = $this->cacheRetrievingLookup->getEntityRevisionFromCache( $entityId, $revisionId, $mode );
-
-		if ( $entityRevision === null ) {
-			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId, $mode );
-		}
-
-		return $entityRevision;
+		return $this->cacheRetrievingLookup->getEntityRevisionFromCache( $entityId, $revisionId, $mode ) ??
+			$this->fetchEntityRevision( $entityId, $revisionId, $mode );
 	}
 
 	/**

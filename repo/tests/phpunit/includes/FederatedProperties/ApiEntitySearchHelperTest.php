@@ -55,13 +55,9 @@ class ApiEntitySearchHelperTest extends TestCase {
 	}
 
 	private function getNewApiSearchHelper( $api, $dataTypes = null ) {
-		if ( $dataTypes === null ) {
-			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getTypeIds();
-		}
-
 		return new ApiEntitySearchHelper(
 			$api,
-			$dataTypes,
+			$dataTypes ?? WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 			new ApiEntitySource( 'feddy prop source', [ 'property' ], self::CONCEPT_BASE_URI, '', '', '' )
 		);
 	}

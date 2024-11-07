@@ -74,9 +74,7 @@ class EntityDiffVisualizerFactory {
 	}
 
 	public function newEntityDiffVisualizer( ?string $type = null, ?IContextSource $context = null ): EntityDiffVisualizer {
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
+		$context ??= RequestContext::getMain();
 		$langCode = $context->getLanguage()->getCode();
 		$options = new FormatterOptions( [
 			//TODO: fallback chain

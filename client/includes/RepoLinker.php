@@ -84,19 +84,14 @@ class RepoLinker {
 	 * @return string (html)
 	 */
 	public function buildEntityLink( EntityId $entityId, array $classes = [], string $text = null ): string {
-		if ( $text === null ) {
-			$text = $entityId->getSerialization();
-		}
-
 		$class = 'wb-entity-link';
-
 		if ( $classes !== [] ) {
 			$class .= ' ' . implode( ' ', $classes );
 		}
 
 		return $this->formatLink(
 			$this->getEntityUrl( $entityId ),
-			$text,
+			$text ?? $entityId->getSerialization(),
 			[ 'class' => $class ]
 		);
 	}

@@ -70,9 +70,7 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 		array $ignoreConflicts = [],
 		$siteLookup = null
 	) {
-		if ( $siteLookup === null ) {
-			$siteLookup = new HashSiteStore( TestSites::getSites() );
-		}
+		$siteLookup ??= new HashSiteStore( TestSites::getSites() );
 		// A validator which makes sure that no site link is for page 'DUPE'
 		$siteLinkUniquenessValidator = $this->createMock( EntityValidator::class );
 		$siteLinkUniquenessValidator->method( 'validateEntity' )

@@ -71,9 +71,7 @@ class FullStatementRdfBuilderTest extends \MediaWikiIntegrationTestCase {
 		?RdfVocabulary $vocabulary = null,
 		DedupeBag $dedupe = null
 	) {
-		if ( $vocabulary === null ) {
-			$vocabulary = $this->getTestData()->getVocabulary();
-		}
+		$vocabulary ??= $this->getTestData()->getVocabulary();
 
 		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->method( 'propertyMentioned' )

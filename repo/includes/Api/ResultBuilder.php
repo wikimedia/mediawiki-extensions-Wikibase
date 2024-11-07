@@ -312,9 +312,7 @@ class ResultBuilder {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 
-		if ( $sourceEntityIdSerialization === null ) {
-			$sourceEntityIdSerialization = $entityId->getSerialization();
-		}
+		$sourceEntityIdSerialization ??= $entityId->getSerialization();
 
 		$record = [];
 
@@ -1022,9 +1020,7 @@ class ResultBuilder {
 			$key = $missingDetails['id'];
 		}
 
-		if ( $key === null ) {
-			$key = $this->missingEntityCounter;
-		}
+		$key ??= $this->missingEntityCounter;
 
 		$this->appendValue(
 			'entities',

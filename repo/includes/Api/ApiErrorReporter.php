@@ -275,9 +275,7 @@ class ApiErrorReporter {
 	 * @throws InvalidArgumentException
 	 */
 	private function addMessageToResult( MessageSpecifier $message, &$data ) {
-		if ( $data === null ) {
-			$data = [];
-		}
+		$data ??= [];
 
 		if ( !is_array( $data ) ) {
 			throw new InvalidArgumentException( '$data must be an array' );

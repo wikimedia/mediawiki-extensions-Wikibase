@@ -82,7 +82,7 @@ class WellKnownReferenceProperties {
 	 * @return WellKnownReferenceProperties
 	 */
 	public static function newFromArray( array $wellKnownPropertyIds, ?LoggerInterface $logger = null ): self {
-		$logger = $logger ?: new NullLogger();
+		$logger ??= new NullLogger();
 
 		$referenceUrlPropertyId = self::parseWellKnownProperty( $wellKnownPropertyIds, 'referenceUrl', $logger );
 		$titlePropertyId = self::parseWellKnownProperty( $wellKnownPropertyIds, 'title', $logger );
