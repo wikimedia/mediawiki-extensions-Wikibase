@@ -10,6 +10,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
@@ -54,7 +55,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 			new RepoRevisionIdentifier( "Q303", $timestamp, $revisionRecordId ),
 		];
 
-		$logger = $this->createMock( LoggerInterface::class );
+		$logger = new NullLogger();
 		$factory = $this->newJobQueueGroupFactory( $expectedRevIdentifiers );
 		$job = $this->getJobAndInitialize( $pageTitle, $params, $logger, $factory );
 

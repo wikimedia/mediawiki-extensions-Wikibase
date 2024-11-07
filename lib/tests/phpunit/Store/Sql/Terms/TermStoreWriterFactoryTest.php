@@ -6,7 +6,7 @@ use JobQueueGroup;
 use LogicException;
 use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
@@ -53,7 +53,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 			$this->newStubRepoDb(),
 			$this->createMock( WANObjectCache::class ),
 			$this->createMock( JobQueueGroup::class ),
-			$this->createMock( LoggerInterface::class )
+			new NullLogger()
 		);
 
 		if ( !$expected ) {
