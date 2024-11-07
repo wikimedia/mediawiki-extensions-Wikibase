@@ -41,7 +41,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
-				return Title::newFromTextThrow( $id->getSerialization(), NS_MAIN );
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 			} );
 
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
