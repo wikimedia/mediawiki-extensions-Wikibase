@@ -163,7 +163,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "أقبل هذه الشروط لتعديلاتي القادمة. لا تظهر لي هذه الرسالة بعد الآن.",
 	"wikibase-entityselector-more": "المزيد",
 	"wikibase-entityselector-notfound": "لم يُعثر على تطابق",
-	"wikibase-anonymouseditwarning": "تحذير: أنت لست مسجل الدخول. [https://ar.wikipedia.org/wiki/عنوان_بروتوكول_الإنترنت عنوان الأيبي] الخاص بك سيعرض بشكل علني لو قمت بأي تعديلات. لو <strong>[[Special:UserLogin|سجلت الدخول]]</strong> أو <strong>[[Special:CreateAccount|أنشأت حسابا]]</strong>، فتعديلاتك ستكون منسوبة لاسم مستخدم، من ضمن فوائد أخرى.",
+	"wikibase-anonymouseditwarning": "تحذير: أنت لست مدخل عنوان IP الخاص بك سيكون مرئيًا للجمهور إذا قمت بإجراء أي تحرير. إذا قمت [$1 بالدخول] أو [$2 بإنشاء حساب] ، سيتم إصدار تحريراتك إلى اسم مستخدم ، من بين المزايا الأخرى.",
 	"wikibase-anonymouseditwarning-heading": "لم تسجل الدخول.",
 	"wikibase-anonymouseditwarning-message": "حاليا، سيكون عنوان الآيبي الخاص بك مرئيا بشكل عام إذا أجريت أية تعديلات، إذا قمت بتسجيل الدخول أو إنشاء حساب، فستُنسَب تعديلاتك إلى اسم المستخدم الخاص بك، من بين مزايا أخرى.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "حذرني عندما لا أحرر من غير تسجيل الدخول",
