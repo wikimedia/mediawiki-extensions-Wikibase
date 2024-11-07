@@ -21,19 +21,11 @@ use Wikibase\DataModel\Entity\EntityId;
 class RestrictedEntityLookup implements EntityLookup {
 
 	private EntityLookup $entityLookup;
-
 	private int $entityAccessLimit;
 
+	/** @var array<string,true> Entity id serialization => true */
 	private array $entitiesAccessed = [];
 
-	private int $entityAccessCount = 0;
-
-	/**
-	 * @param EntityLookup $entityLookup
-	 * @param int $entityAccessLimit
-	 *
-	 * @throws InvalidArgumentException
-	 */
 	public function __construct( EntityLookup $entityLookup, int $entityAccessLimit ) {
 		if ( $entityAccessLimit < 1 ) {
 			throw new InvalidArgumentException( '$entityAccessLimit must be a positive integer' );
@@ -55,15 +47,14 @@ class RestrictedEntityLookup implements EntityLookup {
 		$entityIdSerialization = $entityId->getSerialization();
 
 		if ( !array_key_exists( $entityIdSerialization, $this->entitiesAccessed ) ) {
-			$this->entityAccessCount++;
 			$this->entitiesAccessed[$entityIdSerialization] = true;
-		}
 
-		if ( $this->entityAccessCount > $this->entityAccessLimit ) {
-			throw new EntityAccessLimitException(
-				$entityId,
-				'To many entities loaded, must not load more than ' . $this->entityAccessLimit . ' entities.'
-			);
+			if ( count( $this->entitiesAccessed ) > $this->entityAccessLimit ) {
+				throw new EntityAccessLimitException(
+					$entityId,
+					'Too many entities loaded, must not load more than ' . $this->entityAccessLimit . ' entities.'
+				);
+			}
 		}
 
 		return $this->entityLookup->getEntity( $entityId );
@@ -72,9 +63,6 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * @see EntityLookup::hasEntity
 	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return bool
 	 * @throws EntityLookupException
 	 */
 	public function hasEntity( EntityId $entityId ): bool {
@@ -85,11 +73,9 @@ class RestrictedEntityLookup implements EntityLookup {
 	 * Returns the number of entities already loaded via this object.
 	 *
 	 * @since 2.0
-	 *
-	 * @return int
 	 */
 	public function getEntityAccessCount(): int {
-		return $this->entityAccessCount;
+		return count( $this->entitiesAccessed );
 	}
 
 	/**
@@ -97,8 +83,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @since 3.4
 	 */
-	public function reset() {
-		$this->entityAccessCount = 0;
+	public function reset(): void {
 		$this->entitiesAccessed = [];
 	}
 
@@ -106,10 +91,6 @@ class RestrictedEntityLookup implements EntityLookup {
 	 * Whether an entity has been accessed before via this RestrictedEntityLookup.
 	 *
 	 * @since 2.0
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return bool
 	 */
 	public function entityHasBeenAccessed( EntityId $entityId ): bool {
 		$entityIdSerialization = $entityId->getSerialization();
