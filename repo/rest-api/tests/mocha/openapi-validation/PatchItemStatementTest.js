@@ -17,7 +17,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 	let statementPropertyId;
 
 	before( async function () {
-		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		const createEntityResponse = await createItemWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId )
 		] );

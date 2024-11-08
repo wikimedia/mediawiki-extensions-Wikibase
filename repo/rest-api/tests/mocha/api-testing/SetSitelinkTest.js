@@ -5,11 +5,11 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newSetSitelinkRequestBuilder,
-	newRemoveSitelinkRequestBuilder
+	newRemoveSitelinkRequestBuilder, newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatSitelinkEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
-const { createEntity, getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
+const { getLocalSiteId, createWikiPage } = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -34,8 +34,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		testItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 
 		siteId = await getLocalSiteId();
 		allowedBadges = await getAllowedBadges();
@@ -371,8 +371,8 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const newItem = await createEntity( 'item', {} );
-			const response = await newSetSitelinkRequestBuilder( newItem.entity.id, siteId, { title: testTitle1 } )
+			const newItem = await newCreateItemRequestBuilder( {} ).makeRequest();
+			const response = await newSetSitelinkRequestBuilder( newItem.body.id, siteId, { title: testTitle1 } )
 				.assertValidRequest()
 				.makeRequest();
 

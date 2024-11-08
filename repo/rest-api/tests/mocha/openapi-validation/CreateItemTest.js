@@ -15,7 +15,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 	it( '201 - full item', async () => {
 		const linkedArticle = utils.title( 'Potato' );
 		await createWikiPage( linkedArticle );
-		const statementProperty = ( await createUniqueStringProperty() ).entity.id;
+		const statementProperty = ( await createUniqueStringProperty() ).body.id;
 		const response = await newCreateItemRequestBuilder( {
 			labels: { en: utils.title( 'potato' ) },
 			descriptions: { en: 'root vegetable' },

@@ -2,27 +2,30 @@
 
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createRedirectForItem,
 	createItemWithStatements,
 	createUniqueStringProperty,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	getLatestEditMetadata
 } = require( '../helpers/entityHelper' );
-const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetItemStatementsRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 	let itemId;
-	let latestRevisionId;
+	let lastRevisionId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		itemId = createItemResponse.entity.id;
-		latestRevisionId = createItemResponse.entity.lastrevid;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		itemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( itemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Item with statements', async () => {
-		const statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		const { id } = await createItemWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId ),
 			newStatementWithRandomStringValue( statementPropertyId )
@@ -35,7 +38,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetItemStatementsRequestBuilder( itemId )
-			.withHeader( 'If-None-Match', `"${latestRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );

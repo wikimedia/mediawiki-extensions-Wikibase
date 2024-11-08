@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyDescriptionRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 
@@ -12,13 +15,13 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	const languageCode = 'en';
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			descriptions: [ { language: languageCode, value: 'an-English-description-' + utils.uniq() } ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			descriptions: { [ languageCode ]: 'an-English-description-' + utils.uniq() }
+		} ).makeRequest();
 
-		propertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		propertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( propertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

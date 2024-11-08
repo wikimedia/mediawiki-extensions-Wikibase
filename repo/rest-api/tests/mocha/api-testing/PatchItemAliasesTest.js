@@ -3,7 +3,10 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchItemAliasesRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -21,11 +24,11 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 	before( async function () {
 		testAlias = 'English Alias';
 
-		testItemId = ( await entityHelper.createEntity( 'item', {
-			labels: [ { language: testLanguage, value: `English Label ${utils.uniq()}` } ],
-			descriptions: [ { language: testLanguage, value: `English Description ${utils.uniq()}` } ],
-			aliases: { en: [ { language: testLanguage, value: testAlias } ] }
-		} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {
+			labels: { [ testLanguage ]: `English Label ${utils.uniq()}` },
+			descriptions: { [ testLanguage ]: `English Description ${utils.uniq()}` },
+			aliases: { en: [ testAlias ] }
+		} ).makeRequest() ).body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );

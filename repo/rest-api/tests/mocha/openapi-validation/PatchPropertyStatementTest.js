@@ -17,7 +17,7 @@ describe( 'validate PATCH endpoints for property statements against OpenAPI defi
 	let statementPropertyId;
 
 	before( async function () {
-		statementPropertyId = ( await createUniqueStringProperty() ).entity.id;
+		statementPropertyId = ( await createUniqueStringProperty() ).body.id;
 		const property = await createPropertyWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId )
 		] );

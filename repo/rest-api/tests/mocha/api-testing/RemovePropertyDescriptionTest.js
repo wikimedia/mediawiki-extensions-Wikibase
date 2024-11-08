@@ -6,7 +6,8 @@ const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newRemovePropertyDescriptionRequestBuilder,
 	newSetPropertyDescriptionRequestBuilder,
-	newGetPropertyDescriptionRequestBuilder
+	newGetPropertyDescriptionRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -17,7 +18,7 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 	let testPropertyId;
 
 	before( async () => {
-		testPropertyId = ( await entityHelper.createEntity( 'property', { datatype: 'string' } ) ).entity.id;
+		testPropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } ).makeRequest() ).body.id;
 	} );
 
 	describe( '200 success response', () => {

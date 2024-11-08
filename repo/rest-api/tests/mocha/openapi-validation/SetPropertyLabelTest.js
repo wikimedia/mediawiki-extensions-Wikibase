@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newSetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newSetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeLabel( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -15,15 +17,12 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	const langWithExistingLabel = 'en';
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			labels: [ {
-				language: langWithExistingLabel,
-				value: makeLabel( 'en-label' )
-			} ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ langWithExistingLabel ]: makeLabel( 'en-label' ) }
+		} ).makeRequest();
 
-		propertyId = createPropertyResponse.entity.id;
+		propertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 - label replaced', async () => {

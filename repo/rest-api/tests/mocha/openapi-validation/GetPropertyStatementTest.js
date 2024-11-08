@@ -15,7 +15,7 @@ describe( 'validate GET property statement responses', () => {
 	let lastRevId;
 
 	before( async () => {
-		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const property = await entityHelper.createPropertyWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 		] );

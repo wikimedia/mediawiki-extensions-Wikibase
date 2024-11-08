@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newPatchPropertyAliasesRequestBuilder,
-	newGetPropertyAliasesInLanguageRequestBuilder
+	newGetPropertyAliasesInLanguageRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -29,11 +30,8 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const aliases = {};
-		aliases[ languageWithExistingAlias ] = [ { language: languageWithExistingAlias, value: existingEnAlias } ];
-		testPropertyId = ( await entityHelper.createEntity( 'property', {
-			datatype: 'string',
-			aliases
-		} ) ).entity.id;
+		aliases[ languageWithExistingAlias ] = [ existingEnAlias ];
+		testPropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string', aliases } ).makeRequest() ).body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );

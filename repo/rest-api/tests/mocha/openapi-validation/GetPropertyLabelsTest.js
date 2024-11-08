@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require( '../helpers/chaiHelper' );
-const { createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const { createUniqueStringProperty, getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
@@ -11,8 +11,8 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const createPropertyResponse = await createUniqueStringProperty();
-		testPropertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		testPropertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testPropertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for a Property with two labels', async () => {

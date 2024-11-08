@@ -13,8 +13,8 @@ describe( 'validate DELETE endpoints for property statements against OpenAPI def
 	let statementPropertyId;
 
 	before( async () => {
-		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
-		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 	} );
 
 	[
