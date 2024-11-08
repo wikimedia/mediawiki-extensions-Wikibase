@@ -20,7 +20,7 @@
 		}
 	};
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -28,19 +28,19 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'save performs correct API call', function ( assert ) {
+	QUnit.test( 'save performs correct API call', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( API_RESPONSE ).promise();
-			} )
+			setSitelink: sinon.spy( () => $.Deferred().resolve( API_RESPONSE ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -48,72 +48,72 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
-		).always( function () {
+		).always( () => {
 			assert.true( api.setSitelink.calledOnce );
 			done();
 		} );
 
 	} );
 
-	QUnit.test( 'save correctly handles API response', function ( assert ) {
+	QUnit.test( 'save correctly handles API response', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( API_RESPONSE ).promise();
-			} )
+			setSitelink: sinon.spy( () => $.Deferred().resolve( API_RESPONSE ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( valueChangeResult ) {
+		).done( ( valueChangeResult ) => {
 			assert.true( valueChangeResult.getSavedValue() instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
-	QUnit.test( 'save correctly passes badges', function ( assert ) {
+	QUnit.test( 'save correctly passes badges', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						sitelinks: {
-							siteId: {
-								title: 'pageName',
-								badges: [ 'Q2' ]
-							},
-							lastrevid: 'lastrevid'
-						}
+			setSitelink: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					sitelinks: {
+						siteId: {
+							title: 'pageName',
+							badges: [ 'Q2' ]
+						},
+						lastrevid: 'lastrevid'
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( valueChangeResult ) {
+		).done( ( valueChangeResult ) => {
 			assert.deepEqual( valueChangeResult.getSavedValue().getItemByKey( 'siteId' ).getBadges(), [ 'Q2' ] );
 		} );
 	} );
 
-	QUnit.test( 'save correctly handles API failures', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setSitelink: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -122,26 +122,26 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] ),
 			new datamodel.SiteLinkSet()
-		).done( function ( _valueChangeResult ) {
+		).done( ( _valueChangeResult ) => {
 			assert.true( false, 'save should have failed' );
 			done();
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'save performs correct API call for removal', function ( assert ) {
+	QUnit.test( 'save performs correct API call for removal', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( API_RESPONSE ).promise();
-			} )
+			setSitelink: sinon.spy( () => $.Deferred().resolve( API_RESPONSE ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -149,79 +149,79 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).always( function () {
+		).always( () => {
 			assert.true( api.setSitelink.calledOnce );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'save correctly handles API response for removal', function ( assert ) {
+	QUnit.test( 'save correctly handles API response for removal', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						sitelinks: {
-							siteId: {
-								removed: ''
-							},
-							lastrevid: 'lastrevid'
-						}
+			setSitelink: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					sitelinks: {
+						siteId: {
+							removed: ''
+						},
+						lastrevid: 'lastrevid'
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( valueChangeResult ) {
+		).done( ( valueChangeResult ) => {
 			assert.true( valueChangeResult.getSavedValue() instanceof datamodel.SiteLinkSet );
 		} );
 	} );
 
-	QUnit.test( 'save correctly passes badges for removal', function ( assert ) {
+	QUnit.test( 'save correctly passes badges for removal', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						sitelinks: {
-							siteId: {
-								removed: ''
-							},
-							lastrevid: 'lastrevid'
-						}
+			setSitelink: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					sitelinks: {
+						siteId: {
+							removed: ''
+						},
+						lastrevid: 'lastrevid'
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) ] )
-		).done( function ( valueChangeResult ) {
+		).done( ( valueChangeResult ) => {
 			assert.strictEqual( valueChangeResult.getSavedValue().getItemByKey( 'siteId' ), null );
 		} );
 	} );
 
-	QUnit.test( 'save correctly handles API failures for removal', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures for removal', ( assert ) => {
 		var api = {
-			setSitelink: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setSitelink: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var siteLinksChanger = new SUBJECT(
 			api,
-			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
+			{ getSitelinksRevision: function () {
+				return 0;
+			}, setSitelinksRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -230,11 +230,11 @@
 		siteLinksChanger.save(
 			new datamodel.SiteLinkSet(),
 			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'siteId', 'pageName' ) ] )
-		).done( function ( _valueChangeResult ) {
+		).done( ( _valueChangeResult ) => {
 			assert.true( false, 'save should have failed' );
 			done();
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			done();

@@ -67,7 +67,7 @@ describe( 'item', () => {
 		await browser.keys( [ 'Enter' ] );
 		await ItemPage.valueInputField.waitForExist( { reverse: true } );
 
-		await expect( $( `#${propertyId}` ) ).toExist();
+		await expect( $( `#${ propertyId }` ) ).toExist();
 	} );
 
 	it( 'old revisions do not have an edit link', async () => {
@@ -83,7 +83,7 @@ describe( 'item', () => {
 			async () => ( await WikibaseApi.getEntity( itemId ) ).lastrevid !== item.lastrevid
 		);
 
-		await ( new Page() ).openTitle( `Special:EntityPage/${itemId}`, { oldid: item.lastrevid } );
+		await ( new Page() ).openTitle( `Special:EntityPage/${ itemId }`, { oldid: item.lastrevid } );
 
 		await expect( ItemPage.editButton ).not.toExist();
 	} );
@@ -106,7 +106,7 @@ describe( 'item', () => {
 
 		const wpTextbox1 = $( '#wpTextbox1' );
 		await wpTextbox1.waitForExist();
-		await wpTextbox1.setValue( `[[${itemTitle}]]` );
+		await wpTextbox1.setValue( `[[${ itemTitle }]]` );
 
 		// Now the actual action happens: an api request with action=stashedit that caused T111346
 		await $( '#wpSummary' ).click();

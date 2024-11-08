@@ -3,7 +3,7 @@
 const { requireExtensions } = require( './utils' );
 const { action, utils, assert } = require( 'api-testing' );
 
-describe( 'Label Rendering in Comments', function () {
+describe( 'Label Rendering in Comments', () => {
 	let testUser;
 	let testItemId;
 	let stringPropertyId;
@@ -36,7 +36,7 @@ describe( 'Label Rendering in Comments', function () {
 		stringPropertyLabel = stringProperty.labels.en.value;
 	} );
 
-	it( 'renders entity labels in parsed edit summaries in API requests', async function () {
+	it( 'renders entity labels in parsed edit summaries in API requests', async () => {
 		const changeResponse = await testUser.action( 'wbcreateclaim', {
 			entity: testItemId,
 			snaktype: 'value',

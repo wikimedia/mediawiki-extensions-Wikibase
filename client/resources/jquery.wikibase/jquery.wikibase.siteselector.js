@@ -48,10 +48,10 @@
 			$.ui.suggester.prototype._create.apply( this, arguments );
 
 			this.element
-			.on( 'keydown.' + this.widgetName, function ( event ) {
+			.on( 'keydown.' + this.widgetName, ( event ) => {
 				if ( event.keyCode === $.ui.keyCode.TAB ) {
 					$( self.options.menu )
-					.one( 'selected', function ( ev, item ) {
+					.one( 'selected', ( ev, item ) => {
 						self.element.val( item.getValue() );
 					} );
 				} else if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
@@ -76,14 +76,14 @@
 					}
 				}
 			} )
-			.on( 'eachchange.' + this.widgetName, function ( event, previousValue ) {
+			.on( 'eachchange.' + this.widgetName, ( event, previousValue ) => {
 				self._selectedSite = null;
 				self._term = self.element.val();
 
 				clearTimeout( self._searching );
-				self._searching = setTimeout( function () {
+				self._searching = setTimeout( () => {
 					self.search()
-					.done( function ( suggestions ) {
+					.done( ( suggestions ) => {
 						// TODO: Store visibility in model
 						// eslint-disable-next-line no-jquery/no-sizzle
 						if ( self.options.menu.element.is( ':visible' ) ) {
@@ -94,7 +94,7 @@
 					} );
 				}, self.options.delay );
 			} )
-			.on( 'siteselectoropen.' + this.widgetName, function () {
+			.on( 'siteselectoropen.' + this.widgetName, () => {
 				self._selectFirstSite();
 			} );
 		},
@@ -143,14 +143,14 @@
 			this.options.menu.element.addClass( 'wikibase-siteselector-list' );
 
 			$( this.options.menu )
-			.on( 'selected.siteselector', function ( event, item ) {
+			.on( 'selected.siteselector', ( event, item ) => {
 				if ( item instanceof $.wikibase.siteselector.Item ) {
 					self._selectedSite = item.getSite();
 					self.element.val( self._createItemValue( self._selectedSite ) );
 					self._trigger( 'selected', null, [ self._selectedSite.getId() ] );
 				}
 			} )
-			.on( 'blur.siteselector', function () {
+			.on( 'blur.siteselector', () => {
 				if ( self._selectedSite ) {
 					self.element.val( self._createItemValue( self._selectedSite ) );
 				} else if ( self.element.val() !== '' ) {
@@ -159,7 +159,7 @@
 			} );
 
 			this.options.menu.element
-			.on( 'mouseleave', function () {
+			.on( 'mouseleave', () => {
 				// TODO: Store visibility in model
 				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( self.options.menu.element.is( ':visible' ) ) {
@@ -219,15 +219,13 @@
 				return deferred.resolve( [], term ).promise();
 			}
 
-			var suggestedSites = source.filter( function ( site ) {
-				return self._considerSuggestion( site );
-			} );
+			var suggestedSites = source.filter( ( site ) => self._considerSuggestion( site ) );
 
 			if ( suggestedSites.length === 0 ) {
 				var subDomain = this._grepSubDomainFromTerm();
 
 				if ( subDomain ) {
-					suggestedSites = source.filter( function ( site ) {
+					suggestedSites = source.filter( ( site ) => {
 						var url = site.getUrlTo( '' ),
 							index = url.indexOf( '//' ) + 2;
 

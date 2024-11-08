@@ -5,7 +5,7 @@
 	const EntityLoadedHookEntityRepository = require(
 		'../../../../resources/wikibase/termbox/EntityLoadedHookEntityRepository.js' );
 	QUnit.module( 'wikibase.termbox.EntityLoadedHookEntityRepository' );
-	QUnit.test( "returns the entityLoaded hook's entity", function ( assert ) {
+	QUnit.test( "returns the entityLoaded hook's entity", ( assert ) => {
 		const expectedEntity = {
 			id: 'Q42',
 			labels: {

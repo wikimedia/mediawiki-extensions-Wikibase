@@ -109,7 +109,7 @@
 			.on(
 				this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 				this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
-				function ( event, lang ) {
+				( event, lang ) => {
 					var firstLanguage = self.options.userLanguages[ 0 ];
 
 					var fingerprint = self.value(),
@@ -141,7 +141,7 @@
 							self.element.find( '.wikibase-entitytermsview-heading-aliases' ).append( $ul );
 						}
 						$ul.empty();
-						aliases.getTexts().forEach( function ( text ) {
+						aliases.getTexts().forEach( ( text ) => {
 							$ul.append( mw.wbTemplate(
 								'wikibase-entitytermsview-aliases-alias',
 								text,
@@ -308,7 +308,7 @@
 					duration: 'fast',
 					visible: this._languageListViewInitialStateIsVisible( optionKey )
 				} )
-				.on( 'toggleranimation.' + this.widgetName, function ( event, params ) {
+				.on( 'toggleranimation.' + this.widgetName, ( event, params ) => {
 					if ( !mw.user.isNamed() ) {
 						mw.cookie.set(
 							optionKey,
@@ -320,7 +320,7 @@
 							optionKey,
 							params.visible ? '1' : '0'
 						)
-						.done( function () {
+						.done( () => {
 							mw.user.options.set(
 								optionKey,
 								params.visible ? '1' : '0'
@@ -357,7 +357,7 @@
 				prefix = $.wikibase.entitytermsforlanguagelistview.prototype.widgetEventPrefix;
 
 			this.$entitytermsforlanguagelistview
-			.on( prefix + 'change.' + this.widgetName, function ( event, lang ) {
+			.on( prefix + 'change.' + this.widgetName, ( event, lang ) => {
 				event.stopPropagation();
 				// Event handlers for this are in the entitytermsview toolbar controller (for enabling
 				// the save button), in entityViewInit (for updating the title) and in this file (for
@@ -371,7 +371,7 @@
 					prefix + 'afterstopediting.' + this.widgetName,
 					prefix + 'disable.' + this.widgetName
 				].join( ' ' ),
-				function ( event ) {
+				( event ) => {
 					event.stopPropagation();
 				}
 			)
@@ -395,7 +395,7 @@
 		_stopEditing: function ( dropValue ) {
 			this.draw();
 			var self = this;
-			return this._getEntitytermsforlanguagelistview().stopEditing( dropValue ).done( function () {
+			return this._getEntitytermsforlanguagelistview().stopEditing( dropValue ).done( () => {
 				self.notification();
 			} );
 		},

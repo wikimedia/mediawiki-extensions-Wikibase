@@ -53,7 +53,7 @@
 		 */
 		destroy: function () {
 			// Remove toolbar items managed by the widget:
-			this._getItems().forEach( function ( item ) {
+			this._getItems().forEach( ( item ) => {
 				item.destroy();
 				item.element.remove();
 			} );
@@ -145,7 +145,7 @@
 			this.getContainer()
 				.toggleClass( this.widgetFullName + '-disabled ui-state-disabled', !!disable )
 				.attr( 'aria-disabled', disable );
-			this._getItems().forEach( function ( item ) {
+			this._getItems().forEach( ( item ) => {
 				item[ disable ? 'disable' : 'enable' ]();
 			} );
 		},

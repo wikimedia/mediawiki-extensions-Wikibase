@@ -125,7 +125,7 @@
 			var self = this,
 				propertyId = this.options.value.getKey();
 
-			this.options.entityIdHtmlFormatter.format( propertyId ).done( function ( title ) {
+			this.options.entityIdHtmlFormatter.format( propertyId ).done( ( title ) => {
 				self.$propertyLabel.append( title );
 			} );
 		},
@@ -150,17 +150,17 @@
 			prefix = this.statementlistview.widgetEventPrefix;
 
 			$statementlistview
-			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
+			.on( prefix + 'toggleerror.' + this.widgetName, ( event, error ) => {
 				self.$property.toggleClass( 'wb-error', Boolean( error ) );
 			} )
-			.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
+			.on( prefix + 'afterstopediting.' + this.widgetName, ( event, dropValue ) => {
 				self.$property.removeClass( 'wb-error wb-edit' );
 				self._trigger( 'afterstopediting', null, [ dropValue ] );
 			} )
-			.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
+			.on( prefix + 'afterstartediting.' + this.widgetName, ( event ) => {
 				self.$property.addClass( 'wb-edit' );
 			} )
-			.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
+			.on( prefix + 'afterremove.' + this.widgetName, ( event ) => {
 				self.$property.removeClass( 'wb-error wb-edit' );
 				self._trigger( 'afterremove' );
 			} );

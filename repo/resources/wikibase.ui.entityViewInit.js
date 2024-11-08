@@ -131,12 +131,12 @@
 		var hookResults = [];
 		mw.hook( 'wikibase.entityPage.entityView.viewFactoryFactory.required' ).fire(
 			entityNamespace,
-			function ( promise ) {
+			( promise ) => {
 				hookResults.push( promise );
 			}
 		);
 
-		return $.when.apply( $, hookResults ).then( function () {
+		return $.when.apply( $, hookResults ).then( () => {
 			ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
 				&& wb[ entityNamespace ].view.ViewFactoryFactory
 				|| DefaultViewFactoryFactory;
@@ -160,7 +160,7 @@
 			return;
 		}
 
-		$entityview.on( viewName + 'afterstartediting', function () {
+		$entityview.on( viewName + 'afterstartediting', () => {
 			if ( !$.find( '.mw-notification-content' ).length
 				&& !mw.cookie.get( 'wikibase-no-anonymouseditwarning' )
 			) {
@@ -206,16 +206,16 @@
 				prop: 'info',
 				inprop: 'watched',
 				pageids: mw.config.get( 'wgArticleId' )
-			} ).done( function ( data ) {
+			} ).done( ( data ) => {
 				var watched = data.query && data.query.pages[ 0 ]
 					&& data.query.pages[ 0 ].watched;
 				update( $link, watched ? 'unwatch' : 'watch' );
-			} ).fail( function () {
+			} ).fail( () => {
 				update( $link, 'watch' );
 			} );
 		}
 
-		$entityview.on( viewName + 'afterstopediting', function ( event, dropValue ) {
+		$entityview.on( viewName + 'afterstopediting', ( event, dropValue ) => {
 			if ( !dropValue ) {
 				updateWatchLink();
 			}
@@ -263,7 +263,7 @@
 		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
-			$hideMessage.on( 'click', function ( event ) {
+			$hideMessage.on( 'click', ( event ) => {
 				event.preventDefault();
 				editableTemplatedWidget.notification();
 				if ( mw.user.isAnon() ) {
@@ -304,11 +304,11 @@
 		var eventNamespace = '.wbCopyrightTooltip' + Math.random().toString( 36 ).slice( 2 );
 
 		// Remove the no longer needed tooltip anchor
-		$messageAnchor.one( 'wbtooltipafterhide', function () {
+		$messageAnchor.one( 'wbtooltipafterhide', () => {
 			$tooltipAnchor.remove();
 		} );
 
-		$hideMessage.on( 'click', function ( event ) {
+		$hideMessage.on( 'click', ( event ) => {
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( eventNamespace );
@@ -326,8 +326,8 @@
 		var initialToolbarOffset = $edittoolbarContainer.offset().top;
 		// Destroy tooltip after edit mode gets closed again or if the position of the toolbar changed.
 		$entityview.on(
-			`${viewName}afterstopediting${eventNamespace} ${viewName}afterstartediting${eventNamespace}`,
-			function ( event, origin ) {
+			`${ viewName }afterstopediting${ eventNamespace } ${ viewName }afterstartediting${ eventNamespace }`,
+			( event, origin ) => {
 				var tooltip = $messageAnchor.data( 'wbtooltip' );
 				// Don't close this copyright notice if we're still in edit mode (another widget left edit mode)
 				// and the position of the toolbar is unchanged (we don't bother re-positioning the tooltip).
@@ -343,8 +343,8 @@
 		);
 
 		$( window ).one(
-			`scroll${eventNamespace} touchmove${eventNamespace} resize${eventNamespace}`,
-			function () {
+			`scroll${ eventNamespace } touchmove${ eventNamespace } resize${ eventNamespace }`,
+			() => {
 				var tooltip = $messageAnchor.data( 'wbtooltip' );
 				if ( tooltip ) {
 					$messageAnchor.data( 'wbtooltip' ).hide();
@@ -374,7 +374,7 @@
 		}
 		$entityview.on(
 			startEditingEvents.join( ' ' ),
-			function ( event ) {
+			( event ) => {
 				var $target = $( event.target ),
 					gravity = 'sw';
 
@@ -389,14 +389,14 @@
 
 				// Break out of stack to make sure this runs only after the editing toolbar is fully initialized.
 				// This is needed as showCopyrightTooltip manipulates the toolbar's DOM.
-				setTimeout( function () {
+				setTimeout( () => {
 					showCopyrightTooltip( $entityview, $target, gravity, viewName );
 				}, 0 );
 			}
 		);
 	}
 
-	mw.hook( 'wikipage.content' ).add( function () {
+	mw.hook( 'wikipage.content' ).add( () => {
 		// This is copied from startup.js in MediaWiki core.
 		var mwPerformance = window.performance && performance.mark ? performance : {
 			mark: function () {}
@@ -406,9 +406,9 @@
 		var $entityview = $( '.wikibase-entityview' );
 		var canEdit = isEditable();
 
-		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().then( function ( entity ) {
+		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().then( ( entity ) => {
 			var viewNamePromise = createEntityView( entity, $entityview.first() );
-			return viewNamePromise.then( function ( viewName ) {
+			return viewNamePromise.then( ( viewName ) => {
 				if ( canEdit ) {
 					attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
 					attachWatchLinkUpdater( $entityview, viewName );
@@ -423,7 +423,7 @@
 
 		if ( canEdit ) {
 			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event, lang ) {
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', ( event, lang ) => {
 				var userLanguage = mw.config.get( 'wgUserLanguage' );
 
 				var $entitytermsview = $( event.target ),

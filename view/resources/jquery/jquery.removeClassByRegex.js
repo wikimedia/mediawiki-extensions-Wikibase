@@ -12,17 +12,15 @@
 	 * @return {jQuery}
 	 */
 	$.fn.removeClassByRegex = function ( classNameRegex ) {
-		this.attr( 'class', function ( index, classes ) {
+		this.attr( 'class', ( index, classes ) => {
 			if ( !classes ) {
 				// If nothing is returned the current value is not changed.
 				return;
 			}
 			return classes
 				.split( /\s+/ )
-				.filter( function ( className ) {
-					// Check for each class whether it matches the regexp.
-					return !classNameRegex.test( className );
-				} )
+				// Check for each class whether it matches the regexp.
+				.filter( ( className ) => !classNameRegex.test( className ) )
 				.join( ' ' );
 		} );
 

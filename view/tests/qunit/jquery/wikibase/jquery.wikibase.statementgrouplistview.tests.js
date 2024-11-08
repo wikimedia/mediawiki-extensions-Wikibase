@@ -52,7 +52,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -82,7 +82,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem', function ( assert ) {
+	QUnit.test( 'enterNewItem', ( assert ) => {
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -101,7 +101,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem & save', function ( assert ) {
+	QUnit.test( 'enterNewItem & save', ( assert ) => {
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 

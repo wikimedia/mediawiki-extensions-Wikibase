@@ -113,7 +113,7 @@
 				'statementviewafterstartediting.' + this.widgetName,
 				'referenceviewafterstartediting.' + this.widgetName
 			].join( ' ' ),
-			function ( event ) {
+			( event ) => {
 				self._trigger( 'afterstartediting' );
 			} );
 
@@ -124,7 +124,7 @@
 				'statementviewafterremove.' + this.widgetName,
 				'referenceviewafterstopediting.' + this.widgetName
 			].join( ' ' ),
-			function ( event, dropValue ) {
+			( event, dropValue ) => {
 				self._trigger( 'afterstopediting', null, [ dropValue ] );
 			} );
 		},

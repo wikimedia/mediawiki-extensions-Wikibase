@@ -167,15 +167,13 @@
 	$.wikibase.entityview.TYPES = [];
 
 	$.expr.pseudos[ $.wikibase.entityview.prototype.widgetFullName ]
-		= $.expr.createPseudo( function ( fullName ) {
-			return function ( elem ) {
-				for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-					if ( $.data( elem, $.wikibase.entityview.TYPES[ i ] ) ) {
-						return true;
-					}
+		= $.expr.createPseudo( ( fullName ) => function ( elem ) {
+			for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
+				if ( $.data( elem, $.wikibase.entityview.TYPES[ i ] ) ) {
+					return true;
 				}
-				return false;
-			};
+			}
+			return false;
 		} );
 
 }() );

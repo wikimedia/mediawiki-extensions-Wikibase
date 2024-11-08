@@ -127,12 +127,8 @@
 		_createListView: function () {
 			var self = this,
 				listItemAdapter = this.options.getListItemAdapter(
-					function () {
-						return self._getUnusedAllowedSiteIds().map( function ( siteId ) {
-							return wb.sites.getSite( siteId );
-						} );
-					},
-					function ( sitelinkview ) {
+					() => self._getUnusedAllowedSiteIds().map( ( siteId ) => wb.sites.getSite( siteId ) ),
+					( sitelinkview ) => {
 						self.$listview.data( 'listview' ).removeItem( sitelinkview.element );
 						self._refreshCounter();
 						self._trigger( 'change' );
@@ -147,7 +143,7 @@
 				listItemNodeName: 'LI',
 				encapsulate: true
 			} )
-			.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
+			.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), ( event ) => {
 				event.stopPropagation();
 				if ( self.options.autoInput ) {
 					self._updateAutoInput();
@@ -155,7 +151,7 @@
 				}
 				self._trigger( 'change' );
 			} )
-			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function ( event, error ) {
+			.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), ( event, error ) => {
 				event.stopPropagation();
 			} )
 			.on( 'keydown.' + this.widgetName, function ( event ) {
@@ -175,7 +171,7 @@
 					listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
 					listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
 				].join( ' ' ),
-				function ( event ) {
+				( event ) => {
 					event.stopPropagation();
 				}
 			);
@@ -241,13 +237,9 @@
 		 * @return {string[]}
 		 */
 		_getUnusedAllowedSiteIds: function () {
-			var representedSiteIds = this.value().map( function ( siteLink ) {
-				return siteLink.getSiteId();
-			} );
+			var representedSiteIds = this.value().map( ( siteLink ) => siteLink.getSiteId() );
 
-			return this.option( 'allowedSiteIds' ).filter( function ( siteId ) {
-				return representedSiteIds.indexOf( siteId ) === -1;
-			} );
+			return this.option( 'allowedSiteIds' ).filter( ( siteId ) => representedSiteIds.indexOf( siteId ) === -1 );
 		},
 
 		/**
@@ -305,7 +297,7 @@
 				this,
 				window,
 				namespaceEventNames( 'scroll touchmove resize', this.widgetName ),
-				function ( event, self2 ) {
+				( event, self2 ) => {
 					// It's possible an event is triggered with the widget not being initialized.
 					if ( self2.$listview ) {
 						self2._startEditingInViewport();
@@ -342,7 +334,7 @@
 				lia = listview.listItemAdapter(),
 				foundOne = false;
 
-			listview.value().forEach( function ( sitelinkview ) {
+			listview.value().forEach( ( sitelinkview ) => {
 				if ( touchesViewport( sitelinkview.element[ 0 ] ) ) {
 					sitelinkview.startEditing();
 					foundOne = true;
@@ -426,7 +418,7 @@
 			$items = findFirstInViewPort( $items );
 
 			if ( $items.length ) {
-				setTimeout( function () {
+				setTimeout( () => {
 					lia.liInstance( $items ).focus();
 				}, 10 );
 			}
@@ -490,7 +482,7 @@
 				listview = this.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter();
 
-			return listview.enterNewItem().done( function ( $sitelinkview ) {
+			return listview.enterNewItem().done( ( $sitelinkview ) => {
 				var sitelinkview = lia.liInstance( $sitelinkview );
 
 				$sitelinkview.addClass( 'wb-new' );

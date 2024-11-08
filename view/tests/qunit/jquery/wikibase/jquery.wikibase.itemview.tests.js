@@ -44,9 +44,9 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				createItemview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'

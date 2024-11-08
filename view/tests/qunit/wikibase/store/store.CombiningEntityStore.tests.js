@@ -10,12 +10,12 @@
 
 	QUnit.module( 'wikibase.store.CombiningEntityStore' );
 
-	QUnit.test( 'Initialize', function ( assert ) {
+	QUnit.test( 'Initialize', ( assert ) => {
 		var entityStore = new CombiningEntityStore();
 		assert.true( entityStore.get instanceof Function, 'Entity store has get() method.' );
 	} );
 
-	QUnit.test( 'get() returns a jQuery promise', function ( assert ) {
+	QUnit.test( 'get() returns a jQuery promise', ( assert ) => {
 		var entityStore = new CombiningEntityStore( [] ),
 			promise = entityStore.get( 'id' );
 
@@ -24,7 +24,7 @@
 
 	QUnit.test(
 		'Promise is resolved asynchronously, even if the entity is cached',
-		function ( assert ) {
+		( assert ) => {
 			var store = new EntityStore();
 			store.get = function ( entityId ) {
 				return $.Deferred().resolve();
@@ -34,7 +34,7 @@
 			var promise = entityStore.get( 'id' );
 			assert.strictEqual( promise.state(), 'pending', 'Promise is pending.' );
 
-			return promise.done( function ( entity ) {
+			return promise.done( ( entity ) => {
 				assert.true( true, 'Resolved promise.' );
 			} );
 		}

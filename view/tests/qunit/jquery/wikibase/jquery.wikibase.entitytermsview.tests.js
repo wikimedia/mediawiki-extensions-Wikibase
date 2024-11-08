@@ -58,7 +58,7 @@
 	}
 
 	function restoreStubs( stubs ) {
-		stubs.forEach( function ( stub ) {
+		stubs.forEach( ( stub ) => {
 			stub.restore();
 		} );
 	}
@@ -78,9 +78,9 @@
 		}
 	} ) );
 
-	QUnit.skip( 'Create & destroy', function ( assert ) {
+	QUnit.skip( 'Create & destroy', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				createEntitytermsview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -103,7 +103,7 @@
 	} );
 
 	QUnit.test( 'Initial state of listlanguageview is visible by default for logged-out users',
-		function ( assert ) {
+		( assert ) => {
 			const stubs = stubOptions( null, null );
 
 			var $entitytermsview = createEntitytermsview();
@@ -117,7 +117,7 @@
 		}
 	);
 
-	QUnit.test( 'Initial state of listlanguageview is visible if cookie is set and option is null', function ( assert ) {
+	QUnit.test( 'Initial state of listlanguageview is visible if cookie is set and option is null', ( assert ) => {
 		const stubs = stubOptions( 'true', null );
 
 		var $entitytermsview = createEntitytermsview();
@@ -129,7 +129,7 @@
 		restoreStubs( stubs );
 	} );
 
-	QUnit.test( 'Initial state of listlanguageview respects option above cookie', function ( assert ) {
+	QUnit.test( 'Initial state of listlanguageview respects option above cookie', ( assert ) => {
 		const stubs = stubOptions( 'true', '0' );
 
 		var $entitytermsview = createEntitytermsview();
@@ -141,7 +141,7 @@
 		restoreStubs( stubs );
 	} );
 
-	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is not set and option is 0', function ( assert ) {
+	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is not set and option is 0', ( assert ) => {
 		const stubs = stubOptions( null, '0' );
 
 		var $entitytermsview = createEntitytermsview();
@@ -153,7 +153,7 @@
 		restoreStubs( stubs );
 	} );
 
-	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is set to false', function ( assert ) {
+	QUnit.test( 'Initial state of listlanguageview is not visible if cookie is set to false', ( assert ) => {
 		const stubs = stubOptions( 'false', null );
 
 		var $entitytermsview = createEntitytermsview();
@@ -165,7 +165,7 @@
 		restoreStubs( stubs );
 	} );
 
-	QUnit.test( 'Initial state of listlanguageview is visible if option is set', function ( assert ) {
+	QUnit.test( 'Initial state of listlanguageview is visible if option is set', ( assert ) => {
 		const stubs = stubOptions( null, '1' );
 
 		var $entitytermsview = createEntitytermsview();
@@ -178,12 +178,12 @@
 		restoreStubs( stubs );
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
 		$entitytermsview
-		.on( 'entitytermsviewtoggleerror', function ( event, error ) {
+		.on( 'entitytermsviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
@@ -193,7 +193,7 @@
 		entitytermsview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
@@ -203,7 +203,7 @@
 		);
 
 		assert.throws(
-			function () {
+			() => {
 				entitytermsview.value( [] );
 			},
 			'Throwing error when trying to set a new value.'

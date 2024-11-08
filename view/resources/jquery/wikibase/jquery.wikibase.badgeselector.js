@@ -103,7 +103,7 @@
 			var self = this;
 
 			this.element
-			.on( 'click.' + this.widgetName, function ( event ) {
+			.on( 'click.' + this.widgetName, ( event ) => {
 				if ( !self.isInEditMode() || self.option( 'disabled' ) ) {
 					return;
 				}
@@ -116,7 +116,7 @@
 				}
 
 				self._initMenu()
-					.done( function () {
+					.done( () => {
 						// eslint-disable-next-line no-jquery/no-sizzle
 						if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
 							$menu.hide();
@@ -152,12 +152,12 @@
 			$( document ).on( 'mouseup.' + this.widgetName, degrade );
 			$( window ).on(
 				'resize.' + this.widgetName,
-				function ( event ) {
+				( event ) => {
 					self.repositionMenu();
 				}
 			);
 
-			$menu.on( 'click.' + this.widgetName, function ( event ) {
+			$menu.on( 'click.' + this.widgetName, ( event ) => {
 				var $li = $( event.target ).closest( 'li' ),
 					badge = $li.data( self.widgetName + '-menuitem-badge' );
 
@@ -218,7 +218,7 @@
 			self.repositionMenu();
 
 			this._fillMenu()
-			.done( function () {
+			.done( () => {
 				$m.children( 'li' ).each( function () {
 					var $li = $( this ),
 						badgeId = $li.data( self.widgetName + '-menuitem-badge' );
@@ -232,7 +232,7 @@
 
 				deferred.resolve();
 			} )
-			.fail( function () {
+			.fail( () => {
 				deferred.reject();
 			} );
 
@@ -250,20 +250,16 @@
 			var self = this,
 				deferred = $.Deferred(),
 				// eslint-disable-next-line no-jquery/no-map-util
-				badgeIds = $.map( this.options.badges, function ( cssClasses, itemId ) {
-					return itemId;
-				} );
+				badgeIds = $.map( this.options.badges, ( cssClasses, itemId ) => itemId );
 
-			$.when.apply( $, badgeIds.map( function ( badgeId ) {
-				return self.options.entityIdPlainFormatter.format( badgeId );
-			} ) ).done( function ( /* … */ ) {
+			$.when.apply( $, badgeIds.map( ( badgeId ) => self.options.entityIdPlainFormatter.format( badgeId ) ) ).done( function ( /* … */ ) {
 				var badgeLabels = arguments;
 				$menu.empty();
 
-				badgeIds.forEach( function ( itemId, index ) {
+				badgeIds.forEach( ( itemId, index ) => {
 					var badgeLabel = badgeLabels[ index ];
 					var $item = $( '<a>' )
-						.on( 'click.' + self.widgetName, function ( event ) {
+						.on( 'click.' + self.widgetName, ( event ) => {
 							event.preventDefault();
 						} )
 						.text( badgeLabel );
@@ -283,7 +279,7 @@
 
 				deferred.resolve();
 			} )
-			.fail( function () {
+			.fail( () => {
 				// TODO: Display error message.
 				deferred.reject();
 			} );
@@ -309,7 +305,7 @@
 
 		_addBadges: function () {
 			var self = this;
-			this.options.value.forEach( function ( badgeId ) {
+			this.options.value.forEach( ( badgeId ) => {
 				self._addBadge( badgeId );
 			} );
 		},
@@ -342,7 +338,7 @@
 			// First add a placeholder without a nice label
 			addBadgeDom( badgeId );
 
-			this.options.entityIdPlainFormatter.format( badgeId ).done( function ( badgeLabel ) {
+			this.options.entityIdPlainFormatter.format( badgeId ).done( ( badgeLabel ) => {
 				// Now add a badge with the right label
 				addBadgeDom( badgeLabel );
 			} );

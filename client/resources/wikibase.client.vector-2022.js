@@ -18,7 +18,7 @@
 		'mw.config.values.wbCurrentSiteDetails',
 		'ext.uls.interface',
 		'oojs-ui.styles.icons-editing-core'
-	], function () {
+	], () => {
 		var repoConfig = mw.config.get( 'wbRepo' );
 		var clientConfig = mw.config.get( 'wbCurrentSiteDetails' );
 		var itemUrl = repoConfig.url
@@ -33,7 +33,7 @@
 			text: mw.msg( 'wikibase-editlinkstitle' ),
 			href: itemUrl
 		} );
-	}, function ( e ) {
+	}, ( e ) => {
 		// eslint-disable-next-line no-console
 		console.error( e );
 	} );

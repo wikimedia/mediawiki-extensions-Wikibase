@@ -81,7 +81,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create and destroy', function ( assert ) {
+	QUnit.test( 'Create and destroy', ( assert ) => {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -99,7 +99,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
+	QUnit.test( 'Create and destroy with initial value', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -120,18 +120,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function ( event ) {
+		.on( 'sitelinkviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -158,7 +158,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'startEditing(), stopEditing() with initial value', function ( assert ) {
+	QUnit.test( 'startEditing(), stopEditing() with initial value', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -166,13 +166,13 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function ( event ) {
+		.on( 'sitelinkviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -200,7 +200,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -224,7 +224,7 @@
 		);
 	} );
 
-	QUnit.test( 'isEmpty()', function ( assert ) {
+	QUnit.test( 'isEmpty()', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -283,13 +283,13 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
 		.addClass( 'wb-error' )
-		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
+		.on( 'sitelinkviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered toggleerror event.'

@@ -54,7 +54,7 @@
 				siteLink.getPageName(),
 				siteLink.getBadges()
 			)
-			.done( function ( result ) {
+			.done( ( result ) => {
 				var siteId = siteLink.getSiteId(),
 					resultData = result.entity.sitelinks[ siteId ];
 
@@ -78,7 +78,7 @@
 						)
 				);
 			} )
-			.fail( function ( errorCode, error ) {
+			.fail( ( errorCode, error ) => {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse(
 					error,
 					siteLink.getPageName() === '' ? 'remove' : 'save' )

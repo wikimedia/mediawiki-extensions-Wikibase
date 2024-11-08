@@ -186,13 +186,13 @@
 			}
 
 			$item
-		.on( 'mouseenter.ooMenu', function () {
+		.on( 'mouseenter.ooMenu', () => {
 			self.activate( item );
 		} )
-		.on( 'mouseleave.ooMenu', function () {
+		.on( 'mouseleave.ooMenu', () => {
 			self.deactivate();
 		} )
-		.on( 'mousedown.ooMenu', function ( e ) {
+		.on( 'mousedown.ooMenu', ( e ) => {
 			if ( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
 				self.select( e );
 			}

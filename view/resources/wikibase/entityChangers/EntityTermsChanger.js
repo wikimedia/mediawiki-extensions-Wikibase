@@ -9,9 +9,7 @@
 		datamodel = require( 'wikibase.datamodel' );
 
 	function chain( tasks ) {
-		return tasks.reduce( function ( promise, task ) {
-			return promise.then( task );
-		}, $.Deferred().resolve().promise() );
+		return tasks.reduce( ( promise, task ) => promise.then( task ), $.Deferred().resolve().promise() );
 	}
 
 	/**
@@ -68,35 +66,31 @@
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getLabels(),
 				oldFingerprint.getLabels(),
-				function ( newTerm ) {
-					return function () {
-						return labelsChanger.setLabel( newTerm, tempUserWatcher ).done( function ( savedLabel ) {
-							if ( savedLabel === null ) {
-								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
-							} else {
-								resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
-							}
-						} ).fail( function ( error ) {
-							error.context = { type: 'label', value: newTerm };
-						} );
-					};
+				( newTerm ) => function () {
+					return labelsChanger.setLabel( newTerm, tempUserWatcher ).done( ( savedLabel ) => {
+						if ( savedLabel === null ) {
+							resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
+						} else {
+							resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
+						}
+					} ).fail( ( error ) => {
+						error.context = { type: 'label', value: newTerm };
+					} );
 				}
 			) );
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getDescriptions(),
 				oldFingerprint.getDescriptions(),
-				function ( newTerm ) {
-					return function () {
-						return descriptionsChanger.setDescription( newTerm, tempUserWatcher ).done( function ( savedDescription ) {
-							if ( savedDescription === null ) {
-								resultFingerprint.removeDescriptionFor( newTerm.getLanguageCode() );
-							} else {
-								resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
-							}
-						} ).fail( function ( error ) {
-							error.context = { type: 'description', value: newTerm };
-						} );
-					};
+				( newTerm ) => function () {
+					return descriptionsChanger.setDescription( newTerm, tempUserWatcher ).done( ( savedDescription ) => {
+						if ( savedDescription === null ) {
+							resultFingerprint.removeDescriptionFor( newTerm.getLanguageCode() );
+						} else {
+							resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
+						}
+					} ).fail( ( error ) => {
+						error.context = { type: 'description', value: newTerm };
+					} );
 				}
 			) );
 
@@ -104,23 +98,19 @@
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getAliases(),
 				oldFingerprint.getAliases(),
-				function ( newMultiTerm ) {
-					return function () {
-						return aliasesChanger.setAliases( newMultiTerm, tempUserWatcher ).done( function ( savedAliases ) {
-							resultFingerprint.setAliases( newMultiTerm.getLanguageCode(), savedAliases );
-						} ).fail( function ( error ) {
-							error.context = { type: 'aliases', value: newMultiTerm };
-						} );
-					};
+				( newMultiTerm ) => function () {
+					return aliasesChanger.setAliases( newMultiTerm, tempUserWatcher ).done( ( savedAliases ) => {
+						resultFingerprint.setAliases( newMultiTerm.getLanguageCode(), savedAliases );
+					} ).fail( ( error ) => {
+						error.context = { type: 'aliases', value: newMultiTerm };
+					} );
 				}
 			) );
 
 			// TODO: These changes should not need to be queued.
 			// However, the back-end produces edit conflicts when issuing multiple requests at once.
 			// Remove queueing as soon as the back-end is fixed; see bug T74020.
-			return chain( changes ).then( function () {
-				return new MODULE.ValueChangeResult( resultFingerprint, tempUserWatcher );
-			} );
+			return chain( changes ).then( () => new MODULE.ValueChangeResult( resultFingerprint, tempUserWatcher ) );
 		},
 
 		/**
@@ -133,7 +123,7 @@
 		_getTermsChanges: function ( newTerms, oldTerms, getChange ) {
 			var changes = [];
 
-			newTerms.each( function ( languageCode, newTerm ) {
+			newTerms.each( ( languageCode, newTerm ) => {
 				var oldTerm = oldTerms.getItemByKey( languageCode );
 
 				if ( !newTerm.equals( oldTerm ) ) {
@@ -141,7 +131,7 @@
 				}
 			} );
 
-			oldTerms.each( function ( languageCode, oldTerm ) {
+			oldTerms.each( ( languageCode, oldTerm ) => {
 				var isTerm = oldTerm instanceof datamodel.Term;
 
 				if ( !newTerms.hasItemForKey( languageCode )

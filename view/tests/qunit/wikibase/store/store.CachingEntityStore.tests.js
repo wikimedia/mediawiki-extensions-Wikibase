@@ -10,12 +10,12 @@
 
 	QUnit.module( 'wikibase.store.CachingEntityStore' );
 
-	QUnit.test( 'Initialize', function ( assert ) {
+	QUnit.test( 'Initialize', ( assert ) => {
 		var entityStore = new CachingEntityStore();
 		assert.true( entityStore.get instanceof Function, 'Entity store has get() method.' );
 	} );
 
-	QUnit.test( 'get() returns a jQuery promise', function ( assert ) {
+	QUnit.test( 'get() returns a jQuery promise', ( assert ) => {
 		var store = new EntityStore();
 		store.get = function ( entityId ) {
 			return $.Deferred().resolve();
@@ -26,42 +26,36 @@
 		assert.true( promise.done instanceof Function, 'done() method exists.' );
 	} );
 
-	QUnit.test( 'upstream store is called', function ( assert ) {
+	QUnit.test( 'upstream store is called', ( assert ) => {
 		var store = new EntityStore();
-		store.get = sinon.spy( function ( entityId ) {
-			return $.Deferred().resolve();
-		} );
+		store.get = sinon.spy( ( entityId ) => $.Deferred().resolve() );
 		var entityStore = new CachingEntityStore( store );
 
 		var promise = entityStore.get( 'id' );
 
-		return promise.done( function ( entity ) {
+		return promise.done( ( entity ) => {
 			sinon.assert.calledOnce( store.get );
 			sinon.assert.calledWith( store.get, 'id' );
 		} );
 	} );
 
-	QUnit.test( 'upstream store is called once', function ( assert ) {
+	QUnit.test( 'upstream store is called once', ( assert ) => {
 		var store = new EntityStore();
-		store.get = sinon.spy( function ( entityId ) {
-			return $.Deferred().resolve();
-		} );
+		store.get = sinon.spy( ( entityId ) => $.Deferred().resolve() );
 		var entityStore = new CachingEntityStore( store );
 
 		var promise = entityStore.get( 'id' );
 
-		return promise.done( function ( entity ) {
-			return entityStore.get( 'id' ).done( function () {
-				sinon.assert.calledOnce( store.get );
-			} );
-		} );
+		return promise.done( ( entity ) => entityStore.get( 'id' ).done( () => {
+			sinon.assert.calledOnce( store.get );
+		} ) );
 	} );
 
-	QUnit.test( 'upstream store is called once for parallel calls', function ( assert ) {
+	QUnit.test( 'upstream store is called once for parallel calls', ( assert ) => {
 		var store = new EntityStore();
-		store.get = sinon.spy( function ( entityId ) {
+		store.get = sinon.spy( ( entityId ) => {
 			var deferred = $.Deferred();
-			setTimeout( function () {
+			setTimeout( () => {
 				deferred.resolve();
 			}, 0 );
 			return deferred.promise();
@@ -71,7 +65,7 @@
 		var promise1 = entityStore.get( 'id' );
 		var promise2 = entityStore.get( 'id' );
 
-		return $.when( promise1, promise2 ).done( function () {
+		return $.when( promise1, promise2 ).done( () => {
 			sinon.assert.calledOnce( store.get );
 		} );
 	} );

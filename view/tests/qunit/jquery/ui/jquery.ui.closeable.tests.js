@@ -30,7 +30,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' );
 
@@ -48,7 +48,7 @@
 		);
 	} );
 
-	QUnit.test( 'Close when clicking "close" anchor', function ( assert ) {
+	QUnit.test( 'Close when clicking "close" anchor', ( assert ) => {
 		var $closeable = createCloseable( {
 				$content: $( '<span>' ).text( 'test' )
 			} ),
@@ -68,12 +68,12 @@
 		);
 	} );
 
-	QUnit.test( 'setContent()', function ( assert ) {
+	QUnit.test( 'setContent()', ( assert ) => {
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' ),
 			$content = $( '<span>' ).text( 'test' );
 
-		$closeable.on( 'closeableupdate', function () {
+		$closeable.on( 'closeableupdate', () => {
 			assert.true(
 				true,
 				'Triggered "update" event.'

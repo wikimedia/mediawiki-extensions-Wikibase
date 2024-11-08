@@ -34,7 +34,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
@@ -53,7 +53,7 @@
 		);
 	} );
 
-	QUnit.test( 'Widget interaction', function ( assert ) {
+	QUnit.test( 'Widget interaction', ( assert ) => {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
@@ -97,12 +97,12 @@
 		);
 	} );
 
-	QUnit.test( 'removeTag()', function ( assert ) {
+	QUnit.test( 'removeTag()', ( assert ) => {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' ),
 			done = assert.async( 2 );
 
-		$tagadata.one( 'tagadatatagremoved', function () {
+		$tagadata.one( 'tagadatatagremoved', () => {
 			assert.true(
 				true,
 				'Removed tag.'
@@ -122,7 +122,7 @@
 		done();
 	} );
 
-	QUnit.test( 'disable(), enable()', function ( assert ) {
+	QUnit.test( 'disable(), enable()', ( assert ) => {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
@@ -143,7 +143,7 @@
 		);
 	} );
 
-	QUnit.test( 'hasConflict()', function ( assert ) {
+	QUnit.test( 'hasConflict()', ( assert ) => {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 

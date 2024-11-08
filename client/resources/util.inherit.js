@@ -31,7 +31,9 @@
 	 */
 	function createFunction( originalFn ) {
 		return originalFn
-			? function () { originalFn.apply( this, arguments ); }
+			? function () {
+				originalFn.apply( this, arguments );
+			}
 			: function () {};
 	}
 

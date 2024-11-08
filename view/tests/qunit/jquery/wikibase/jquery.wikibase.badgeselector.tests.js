@@ -43,7 +43,7 @@
 		return $badgeselector;
 	}
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
@@ -62,18 +62,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
 		$badgeselector
-		.on( 'badgeselectorafterstartediting', function ( event ) {
+		.on( 'badgeselectorafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'badgeselectorafterstopediting', function ( event, dropValue ) {
+		.on( 'badgeselectorafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -86,7 +86,7 @@
 		badgeselector.stopEditing(); // should not trigger event
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
@@ -105,7 +105,7 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing and stopEditing add and remove an empty badge', function ( assert ) {
+	QUnit.test( 'startEditing and stopEditing add and remove an empty badge', ( assert ) => {
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 

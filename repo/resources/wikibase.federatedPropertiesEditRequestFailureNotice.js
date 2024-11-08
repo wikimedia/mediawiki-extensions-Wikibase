@@ -1,7 +1,7 @@
 /**
  * Popup notification for failed edit due to failed request to the source wiki
  */
-$( function () {
+$( () => {
 	'use strict';
 
 	var isOpen = false;
@@ -34,7 +34,7 @@ $( function () {
 			],
 			classes: [ 'wb-failed-request-notice-try-again' ]
 		} );
-		tryAgainButton.on( 'click', function () {
+		tryAgainButton.on( 'click', () => {
 			dialog.close();
 			isOpen = false;
 		} );
@@ -58,7 +58,7 @@ $( function () {
 		return FailedEditErrorDialog.super.prototype.getActionProcess.call( this, action );
 	};
 
-	$( document ).on( 'ajaxError', function ( event, xhr, settings ) {
+	$( document ).on( 'ajaxError', ( event, xhr, settings ) => {
 		if ( xhr.responseJSON && xhr.responseJSON.errors ) {
 			var shouldOpen = false;
 

@@ -10,7 +10,7 @@
 
 	QUnit.module( 'wikibase.dataTypes.DataTypeStore' );
 
-	QUnit.test( 'Test initializing a DataType object', function ( assert ) {
+	QUnit.test( 'Test initializing a DataType object', ( assert ) => {
 		var dataTypeStore = new DataTypeStore(),
 			testDataType = new DataType( 'foo', 'fooDataValueType' ),
 			testDataTypeId = testDataType.getId();

@@ -9,7 +9,7 @@
 
 	var TempUserWatcher = wb.entityChangers.TempUserWatcher;
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof TempUserWatcher,
 			'function',
@@ -17,11 +17,11 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new TempUserWatcher() instanceof TempUserWatcher );
 	} );
 
-	QUnit.test( 'sets redirect Url if present', function ( assert ) {
+	QUnit.test( 'sets redirect Url if present', ( assert ) => {
 		const target = 'https://wiki.example/';
 		const tempUserWatcher = new TempUserWatcher();
 		tempUserWatcher.processApiResult( {

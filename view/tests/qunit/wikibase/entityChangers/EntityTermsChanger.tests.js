@@ -23,7 +23,7 @@
 
 	var REVISION_ID = 9;
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof EntityTermsChanger,
 			'function',
@@ -31,11 +31,11 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new EntityTermsChanger() instanceof EntityTermsChanger );
 	} );
 
-	QUnit.test( 'save performs correct API calls for new label', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for new label', ( assert ) => {
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy(
@@ -52,7 +52,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withLabel( 'some-lang', 'some label' ),
 			currentFingerprint().empty()
-		).then( function () {
+		).then( () => {
 			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith(
 				api.setLabel,
@@ -66,7 +66,7 @@
 			.always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for changed label', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for changed label', ( assert ) => {
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID )
@@ -81,7 +81,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withLabel( 'some-lang', 'new label' ),
 			currentFingerprint().withLabel( 'some-lang', 'old label' )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, 'new label', 'some-lang' );
 		} )
@@ -89,22 +89,20 @@
 			.always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for removed label', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for removed label', ( assert ) => {
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						lastrevid: REVISION_ID,
-						labels: {
-							langCode: {
-								language: 'langCode',
-								removed: ''
-							}
+			setLabel: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					lastrevid: REVISION_ID,
+					labels: {
+						langCode: {
+							language: 'langCode',
+							removed: ''
 						}
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -115,13 +113,13 @@
 		entityTermsChanger.save(
 			newFingerprint().empty(),
 			currentFingerprint().withLabel( 'langCode', 'old label' )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setLabel.calledOnce );
 			sinon.assert.calledWith( api.setLabel, 'Q1', REVISION_ID, '', 'langCode' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save correctly handles API response for labels', function ( assert ) {
+	QUnit.test( 'save correctly handles API response for labels', ( assert ) => {
 		var api = {
 			setLabel: sinon.spy(
 				functionReturningSuccessfulResponse( 'lastrevid' )
@@ -137,7 +135,7 @@
 		return entityTermsChanger.save(
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
-		).done( function ( entityTermChangeResult ) {
+		).done( ( entityTermChangeResult ) => {
 			assert.strictEqual(
 				entityTermChangeResult.getSavedValue().getLabelFor( 'language' ).getText(),
 				'normalized label'
@@ -145,12 +143,10 @@
 		} );
 	} );
 
-	QUnit.test( 'save correctly handles API failures for labels', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures for labels', ( assert ) => {
 		var done = assert.async();
 		var api = {
-			setLabel: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setLabel: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -161,10 +157,10 @@
 		entityTermsChanger.save(
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
+		).done( ( savedFingerprint ) => {
 			assert.true( false, 'save should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'label' );
@@ -173,7 +169,7 @@
 		.always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for new description', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for new description', ( assert ) => {
 		var done = assert.async();
 		var revisionId = 9;
 		var api = {
@@ -191,7 +187,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'some-lang', 'description' ),
 			currentFingerprint().empty()
-		).then( function () {
+		).then( () => {
 			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
 				api.setDescription,
@@ -203,7 +199,7 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for changed description', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for changed description', ( assert ) => {
 		var done = assert.async();
 
 		var api = {
@@ -221,7 +217,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'some-lang', 'new description' ),
 			currentFingerprint().withDescription( 'some-lang', 'old description' )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith(
 				api.setDescription,
@@ -233,21 +229,19 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for removed description', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for removed description', ( assert ) => {
 		var done = assert.async();
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						descriptions: {
-							langCode: {
-								language: 'langCode',
-								removed: ''
-							}
+			setDescription: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					descriptions: {
+						langCode: {
+							language: 'langCode',
+							removed: ''
 						}
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -258,13 +252,13 @@
 		entityTermsChanger.save(
 			newFingerprint().empty(),
 			currentFingerprint().withDescription( 'langCode', 'old description' )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setDescription.calledOnce );
 			sinon.assert.calledWith( api.setDescription, 'Q1', REVISION_ID, '', 'langCode' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save correctly handles API response for descriptions', function ( assert ) {
+	QUnit.test( 'save correctly handles API response for descriptions', ( assert ) => {
 		var api = {
 			setDescription: sinon.spy(
 				functionReturningSuccessfulResponse( 'lastrevid' )
@@ -282,7 +276,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
-		).done( function ( entityTermChangeResult ) {
+		).done( ( entityTermChangeResult ) => {
 			assert.strictEqual(
 				entityTermChangeResult.getSavedValue().getDescriptionFor( 'language' ).getText(),
 				'normalized description'
@@ -290,11 +284,9 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save correctly handles API failures for descriptions', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures for descriptions', ( assert ) => {
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setDescription: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -307,10 +299,10 @@
 		entityTermsChanger.save(
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
+		).done( ( savedFingerprint ) => {
 			assert.true( false, 'save should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'description' );
@@ -318,7 +310,7 @@
 		} ).always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for new aliases', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for new aliases', ( assert ) => {
 		var revisionId = REVISION_ID;
 		var done = assert.async();
 		var api = {
@@ -336,13 +328,13 @@
 		entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
-		).then( function () {
+		).then( () => {
 			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith( api.setAliases, 'Q1', revisionId, [ 'alias' ], [], 'language' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for changed aliases', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for changed aliases', ( assert ) => {
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy(
@@ -359,7 +351,7 @@
 		entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'new alias' ] ),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
 				api.setAliases,
@@ -372,7 +364,7 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save performs correct API calls for removed aliases', function ( assert ) {
+	QUnit.test( 'save performs correct API calls for removed aliases', ( assert ) => {
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID ) )
@@ -386,7 +378,7 @@
 		entityTermsChanger.save(
 			newFingerprint().empty(),
 			currentFingerprint().withAliases( 'language', [ 'old alias' ] )
-		).then( function () {
+		).then( () => {
 			assert.true( api.setAliases.calledOnce );
 			sinon.assert.calledWith(
 				api.setAliases,
@@ -399,7 +391,7 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save correctly handles API response for aliases', function ( assert ) {
+	QUnit.test( 'save correctly handles API response for aliases', ( assert ) => {
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy(
@@ -416,7 +408,7 @@
 		return entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
-		).done( function ( entityTermChangeResult ) {
+		).done( ( entityTermChangeResult ) => {
 			assert.deepEqual(
 				entityTermChangeResult.getSavedValue().getAliasesFor( 'language' ).getTexts(),
 				[ 'normalized alias' ]
@@ -424,11 +416,9 @@
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
-	QUnit.test( 'save correctly handles API failures for aliases', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures for aliases', ( assert ) => {
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setAliases: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -441,10 +431,10 @@
 		entityTermsChanger.save(
 			newFingerprint().withAliases( 'language', [ 'alias' ] ),
 			currentFingerprint().empty()
-		).done( function ( savedFingerprint ) {
+		).done( ( savedFingerprint ) => {
 			assert.true( false, 'save should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'aliases' );
@@ -452,24 +442,22 @@
 		} ).always( done );
 	} );
 
-	QUnit.test( 'save tracks temp user redirect url if supplied', function ( assert ) {
+	QUnit.test( 'save tracks temp user redirect url if supplied', ( assert ) => {
 		const target = 'https://wiki.example';
 		var done = assert.async();
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						descriptions: {
-							langCode: {
-								language: 'langCode',
-								removed: ''
-							}
+			setDescription: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					descriptions: {
+						langCode: {
+							language: 'langCode',
+							removed: ''
 						}
-					},
-					tempusercreated: 'SomeUser',
-					tempuserredirect: target
-				} ).promise();
-			} )
+					}
+				},
+				tempusercreated: 'SomeUser',
+				tempuserredirect: target
+			} ).promise() )
 		};
 		var entityTermsChanger = new EntityTermsChanger(
 			api,
@@ -480,7 +468,7 @@
 		return entityTermsChanger.save(
 			newFingerprint().empty(),
 			currentFingerprint().withDescription( 'langCode', 'old description' )
-		).done( function ( entityTermChangeResult ) {
+		).done( ( entityTermChangeResult ) => {
 			assert.true( true, 'save succeeded' );
 			assert.strictEqual(
 				target,
@@ -543,9 +531,7 @@
 			if ( !this.entity.aliases ) {
 				this.entity.aliases = {};
 			}
-			this.entity.aliases[ language ] = aliases.map( function ( alias ) {
-				return { value: alias };
-			} );
+			this.entity.aliases[ language ] = aliases.map( ( alias ) => ( { value: alias } ) );
 			return this;
 		};
 

@@ -174,7 +174,7 @@
 				var propertyId = this._viewState.propertyId();
 				this._propertyDataTypeStore
 				.getDataTypeForProperty( propertyId )
-				.done( function ( dataTypeId ) {
+				.done( ( dataTypeId ) => {
 					if ( self.isDestroyed() ) {
 						return;
 					}
@@ -266,7 +266,7 @@
 
 			this._valueView.element.one(
 				this._valueView.widgetEventPrefix + 'afterstartediting',
-				function () {
+				() => {
 					$( self ).triggerHandler( 'afterstartediting' );
 				}
 			);
@@ -299,10 +299,10 @@
 			this._removeEventHandlers();
 
 			this._valueView.element
-			.on( 'valueviewparse.' + this.variationBaseClass, function ( event ) {
+			.on( 'valueviewparse.' + this.variationBaseClass, ( event ) => {
 				self._viewState.notify( 'invalid' );
 			} )
-			.on( 'valueviewchange.' + this.variationBaseClass, function ( event ) {
+			.on( 'valueviewchange.' + this.variationBaseClass, ( event ) => {
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} );
 		},

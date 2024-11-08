@@ -11,7 +11,7 @@
 		TempUserWatcher = wikibase.entityChangers.TempUserWatcher,
 		datamodel = require( 'wikibase.datamodel' );
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -19,19 +19,19 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'setDescription performs correct API call', function ( assert ) {
+	QUnit.test( 'setDescription performs correct API call', ( assert ) => {
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().promise();
-			} )
+			setDescription: sinon.spy( () => $.Deferred().promise() )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function () { return 0; } },
+			{ getDescriptionRevision: function () {
+				return 0;
+			} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -40,86 +40,86 @@
 		assert.true( api.setDescription.calledOnce );
 	} );
 
-	QUnit.test( 'setDescription correctly handles API response', function ( assert ) {
+	QUnit.test( 'setDescription correctly handles API response', ( assert ) => {
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						descriptions: {
-							language: {
-								value: 'description'
-							},
-							lastrevid: 'lastrevid'
-						}
+			setDescription: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					descriptions: {
+						language: {
+							value: 'description'
+						},
+						lastrevid: 'lastrevid'
 					}
-				} ).promise();
-			} )
+				}
+			} ).promise() )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
+			{ getDescriptionRevision: function () {
+				return 0;
+			}, setDescriptionRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ), new TempUserWatcher() )
-		.done( function ( savedDescription ) {
+		.done( ( savedDescription ) => {
 			assert.strictEqual( savedDescription.getText(), 'description' );
 		} );
 	} );
 
-	QUnit.test( 'setDescription correctly handles API failures', function ( assert ) {
+	QUnit.test( 'setDescription correctly handles API failures', ( assert ) => {
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
-			} )
+			setDescription: sinon.spy( () => $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise() )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
+			{ getDescriptionRevision: function () {
+				return 0;
+			}, setDescriptionRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		var done = assert.async();
 
 		descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ), new TempUserWatcher() )
-		.done( function ( savedDescription ) {
+		.done( ( savedDescription ) => {
 			assert.true( false, 'setDescription should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );
 
-	QUnit.test( 'sets redirect Url if present', function ( assert ) {
+	QUnit.test( 'sets redirect Url if present', ( assert ) => {
 		const target = 'https://wiki.example/';
 		const tempUserWatcher = new TempUserWatcher();
 
 		var api = {
-			setDescription: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {
-						descriptions: {
-							language: {
-								value: 'description'
-							},
-							lastrevid: 'lastrevid'
-						}
-					},
-					tempusercreated: 'SomeUser',
-					tempuserredirect: target
-				} ).promise();
-			} )
+			setDescription: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					descriptions: {
+						language: {
+							value: 'description'
+						},
+						lastrevid: 'lastrevid'
+					}
+				},
+				tempusercreated: 'SomeUser',
+				tempuserredirect: target
+			} ).promise() )
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
+			{ getDescriptionRevision: function () {
+				return 0;
+			}, setDescriptionRevision: function () {} },
 			new datamodel.Item( 'Q1' )
 		);
 
 		return descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ), tempUserWatcher )
-			.done( function ( _savedDescription ) {
+			.done( ( _savedDescription ) => {
 				assert.true( true, 'setDescription succeeded' );
 				assert.strictEqual( target, tempUserWatcher.getRedirectUrl(), 'it should set the URL' );
 			} );

@@ -24,7 +24,7 @@
 
 	QUnit.module( 'jquery.wikibase.statementview.RankSelector', QUnit.newMwEnvironment( {
 		afterEach: function () {
-			$( '.test_rankselector' ).each( function ( i, node ) {
+			$( '.test_rankselector' ).each( ( i, node ) => {
 				var $node = $( node );
 				$node.data( 'test_rankselector' ).destroy();
 				$node.remove();
@@ -32,7 +32,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Instantiation', function ( assert ) {
+	QUnit.test( 'Instantiation', ( assert ) => {
 		var rankSelector = createTestRankSelector( { value: datamodel.Statement.RANK.DEPRECATED } );
 
 		assert.strictEqual(
@@ -42,7 +42,7 @@
 		);
 	} );
 
-	QUnit.test( 'Set and get rank via value()', function ( assert ) {
+	QUnit.test( 'Set and get rank via value()', ( assert ) => {
 		var rankSelector = createTestRankSelector();
 
 		rankSelector.value( datamodel.Statement.RANK.DEPRECATED );
@@ -70,7 +70,7 @@
 		);
 	} );
 
-	QUnit.test( 'Set and get rank via option()', function ( assert ) {
+	QUnit.test( 'Set and get rank via option()', ( assert ) => {
 		var rankSelector = createTestRankSelector();
 
 		rankSelector.option( 'value', datamodel.Statement.RANK.DEPRECATED );
@@ -98,7 +98,7 @@
 		);
 	} );
 
-	QUnit.test( 'Multiple rank selectors', function ( assert ) {
+	QUnit.test( 'Multiple rank selectors', ( assert ) => {
 		var rankSelector1 = createTestRankSelector( { value: datamodel.Statement.RANK.DEPRECATED } );
 
 		assert.strictEqual(

@@ -182,13 +182,13 @@
 
 			this.element
 			.off( 'blur' )
-			.on( 'eachchange.' + this.widgetName, function ( event ) {
+			.on( 'eachchange.' + this.widgetName, ( event ) => {
 				self._search( event );
 			} )
-			.on( 'focusout', function () {
+			.on( 'focusout', () => {
 				self._indicateRecognizedInput();
 			} )
-			.on( 'focusin', function () {
+			.on( 'focusin', () => {
 				self._inEditMode();
 				self._showDefaultSuggestions();
 			} );
@@ -236,7 +236,7 @@
 			this._select( null );
 
 			clearTimeout( this._searching );
-			this._searching = setTimeout( function () {
+			this._searching = setTimeout( () => {
 				self.search( event );
 			}, this.options.delay );
 		},
@@ -301,7 +301,7 @@
 					dataType: 'json',
 					data: self._getSearchApiParameters( term )
 				} )
-				.done( function ( response, statusText, jqXHR ) {
+				.done( ( response, statusText, jqXHR ) => {
 					// T141955
 					if ( response.error ) {
 						deferred.reject( response.error.info );
@@ -320,7 +320,7 @@
 							return;
 						}
 					}
-					self._combineResults( hookResults, response.search ).then( function ( results ) {
+					self._combineResults( hookResults, response.search ).then( ( results ) => {
 						deferred.resolve(
 							results,
 							term,
@@ -329,7 +329,7 @@
 						);
 					} );
 				} )
-				.fail( function ( jqXHR, textStatus ) {
+				.fail( ( jqXHR, textStatus ) => {
 					deferred.reject( textStatus );
 				} );
 
@@ -396,7 +396,7 @@
 			$.when.apply( $, hookResults ).then( function () {
 
 				var args = Array.prototype.slice.call( arguments );
-				args.forEach( function ( data ) {
+				args.forEach( ( data ) => {
 					result = data.concat( result );
 				} );
 
@@ -414,7 +414,7 @@
 		 */
 		_stableSort: function stableSort( items, compareFn ) {
 			var indices = Object.keys( items ).map( Number );
-			indices.sort( function ( index1, index2 ) {
+			indices.sort( ( index1, index2 ) => {
 				var compare = compareFn( items[ index1 ], items[ index2 ] );
 				if ( compare !== 0 ) {
 					return compare;
@@ -428,9 +428,7 @@
 				}
 				return 0;
 			} );
-			var sorted = indices.map( function ( index ) {
-				return items[ index ];
-			} );
+			var sorted = indices.map( ( index ) => items[ index ] );
 			return sorted;
 		},
 
@@ -446,7 +444,7 @@
 				term = this.element.val(),
 				promises = this._fireSearchHook( term );
 
-			this._combineResults( promises, [] ).then( function ( suggestions ) {
+			this._combineResults( promises, [] ).then( ( suggestions ) => {
 				if ( suggestions.length > 0 ) {
 					self._updateMenu( suggestions );
 				}
@@ -551,7 +549,7 @@
 
 			$( this.options.menu )
 			.off( 'selected.suggester' )
-			.on( 'selected.entityselector', function ( event, item ) {
+			.on( 'selected.entityselector', ( event, item ) => {
 				if ( item.getEntityStub ) {
 					if ( !self.options.caseSensitive
 						&& item.getValue().toLowerCase() === self._term.toLowerCase()
@@ -576,30 +574,24 @@
 
 			customItems.unshift( new $.ui.ooMenu.CustomItem(
 				this.options.messages.more,
-				function () {
-					return self._cache.term === self._term && self._cache.nextSuggestionOffset;
-				},
-				function () {
+				( () => self._cache.term === self._term && self._cache.nextSuggestionOffset ),
+				( () => {
 					self.search( $.Event( 'programmatic' ) );
-				},
+				} ),
 				'ui-entityselector-more'
 			) );
 
 			customItems.unshift( new $.ui.ooMenu.CustomItem(
 				this.options.messages.notfound,
-				function () {
-					return !self._error && self._cache.suggestions && !self._cache.suggestions.length
-						&& self.element.val().trim() !== '';
-				},
+				( () => !self._error && self._cache.suggestions && !self._cache.suggestions.length
+						&& self.element.val().trim() !== '' ),
 				null,
 				'ui-entityselector-notfound'
 			) );
 
 			customItems.unshift( new $.ui.ooMenu.CustomItem(
 				this.options.messages.error,
-				function () {
-					return self._error !== null;
-				},
+				( () => self._error !== null ),
 				null,
 				'ui-entityselector-error'
 			) );
@@ -625,7 +617,7 @@
 			var self = this;
 
 			return $.ui.suggester.prototype._getSuggestions.apply( this, arguments )
-			.then( function ( suggestions, searchTerm, nextSuggestionOffset, searchId ) {
+			.then( ( suggestions, searchTerm, nextSuggestionOffset, searchId ) => {
 				var deferred = $.Deferred();
 
 				if ( self._cache.term === searchTerm && self._cache.nextSuggestionOffset ) {
@@ -655,10 +647,10 @@
 		 */
 		_getSuggestionsFromArray: function ( term, source ) {
 			var deferred = $.Deferred(),
-				// eslint-disable-next-line security/detect-non-literal-regexp
+
 				matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
-			deferred.resolve( source.filter( function ( item ) {
+			deferred.resolve( source.filter( ( item ) => {
 				// TODO use match instead of aliases
 				if ( item.aliases ) {
 					for ( var i = 0; i < item.aliases.length; i++ ) {

@@ -19,7 +19,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'no fallback, same language', function ( assert ) {
+	QUnit.test( 'no fallback, same language', ( assert ) => {
 		var term = new datamodel.Term( 'de', 'de term' );
 		var requestedLanguage = 'de';
 
@@ -28,7 +28,7 @@
 		assert.strictEqual( html, '' );
 	} );
 
-	QUnit.test( 'fallback to same base language', function ( assert ) {
+	QUnit.test( 'fallback to same base language', ( assert ) => {
 		var term = new datamodel.Term( 'de', 'de term' );
 		var requestedLanguage = 'de-at';
 
@@ -37,7 +37,7 @@
 		assert.strictEqual( html, '' );
 	} );
 
-	QUnit.test( 'fallback to mul', function ( assert ) {
+	QUnit.test( 'fallback to mul', ( assert ) => {
 		var term = new datamodel.Term( 'mul', 'mul term' );
 		var requestedLanguage = 'de';
 
@@ -46,7 +46,7 @@
 		assert.strictEqual( html, '' );
 	} );
 
-	QUnit.test( 'fallback to other language', function ( assert ) {
+	QUnit.test( 'fallback to other language', ( assert ) => {
 		var term = new datamodel.Term( 'en', 'en term' );
 		var requestedLanguage = 'de';
 

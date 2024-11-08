@@ -44,9 +44,9 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				createAliasesview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -69,11 +69,11 @@
 		);
 	} );
 
-	QUnit.test( 'Instantiating tagadata widget on startEditing()', function ( assert ) {
+	QUnit.test( 'Instantiating tagadata widget on startEditing()', ( assert ) => {
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
-		return aliasesview.startEditing().done( function () {
+		return aliasesview.startEditing().done( () => {
 			assert.notStrictEqual(
 				aliasesview.$list.data( 'tagadata' ),
 				undefined,
@@ -82,19 +82,19 @@
 		} );
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' ),
 			done = assert.async();
 
 		$aliasesview
-		.on( 'aliasesviewafterstartediting', function ( event ) {
+		.on( 'aliasesviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'aliasesviewafterstopediting', function ( event, dropValue ) {
+		.on( 'aliasesviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -115,11 +115,11 @@
 			}
 
 			$aliasesview
-			.one( 'aliasesviewafterstartediting.aliasesviewtest', function ( event ) {
+			.one( 'aliasesviewafterstartediting.aliasesviewtest', ( event ) => {
 				$aliasesview.off( '.aliasesviewtest' );
 				deferred.resolve();
 			} )
-			.one( 'aliasesviewafterstopediting.aliasesviewtest', function ( event, dropValue ) {
+			.one( 'aliasesviewafterstopediting.aliasesviewtest', ( event, dropValue ) => {
 				$aliasesview.off( '.aliasesviewtest' );
 				deferred.resolve();
 			} );
@@ -139,49 +139,49 @@
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
-			$queue.queue( 'tests', function ( next ) {
+			$queue.queue( 'tests', ( next ) => {
 				var changeDone = assert.async();
-				testEditModeChange( func, expectingEvent ).always( function () {
+				testEditModeChange( func, expectingEvent ).always( () => {
 					next();
 					changeDone();
 				} );
 			} );
 		}
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.startEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.stopEditing( true );
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.stopEditing( true );
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.stopEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.$list.data( 'tagadata' ).getTags().first().find( 'input' ).val( 'b' );
 			aliasesview.stopEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			aliasesview.$list.data( 'tagadata' ).getTags().first()
 				.removeClass( 'tagadata-choice-equal' ).find( 'input' ).val( 'd' );
 			aliasesview.stopEditing();
@@ -192,12 +192,12 @@
 		done();
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
 		$aliasesview
-		.on( 'aliasesviewtoggleerror', function ( event, error ) {
+		.on( 'aliasesviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
@@ -207,13 +207,13 @@
 		aliasesview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' ),
 			newValue = null;
 
 		assert.throws(
-			function () {
+			() => {
 				aliasesview.value( newValue );
 			},
 			'Trying to set no value fails.'

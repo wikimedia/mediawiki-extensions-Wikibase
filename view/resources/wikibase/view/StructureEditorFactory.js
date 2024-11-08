@@ -18,7 +18,7 @@
 		$dom = this._toolbarFactory.getToolbarContainer( $dom );
 		$dom.on(
 			'addtoolbaradd.addtoolbar',
-			function ( event ) {
+			( event ) => {
 				if ( event.target !== $dom.get( 0 ) ) {
 					// This is a different toolbar than we thought
 					return;

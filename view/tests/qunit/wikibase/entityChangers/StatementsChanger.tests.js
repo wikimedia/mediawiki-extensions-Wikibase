@@ -22,7 +22,7 @@
 		) );
 	}
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -30,19 +30,19 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'remove performs correct API call', function ( assert ) {
+	QUnit.test( 'remove performs correct API call', ( assert ) => {
 		var api = {
-			removeClaim: sinon.spy( function () {
-				return $.Deferred().promise();
-			} )
+			removeClaim: sinon.spy( () => $.Deferred().promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; } },
+			{ getClaimRevision: function () {
+				return 0;
+			} },
 			statementsChangerState
 		);
 
@@ -51,71 +51,71 @@
 		assert.true( api.removeClaim.calledOnce );
 	} );
 
-	QUnit.test( 'remove correctly handles API response', function ( assert ) {
+	QUnit.test( 'remove correctly handles API response', ( assert ) => {
 		var api = {
-			removeClaim: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					claims: [],
-					pageinfo: {}
-				} ).promise();
-			} )
+			removeClaim: sinon.spy( () => $.Deferred().resolve( {
+				claims: [],
+				pageinfo: {}
+			} ).promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
 			{
-				getClaimRevision: function () { return 0; },
+				getClaimRevision: function () {
+					return 0;
+				},
 				setClaimRevision: function () {}
 			},
 			statementsChangerState
 		);
 
 		return statementsChanger.remove( newNoValueSnakStatement() )
-		.done( function () {
+		.done( () => {
 			assert.true( true, 'remove succeeded' );
 		} );
 	} );
 
-	QUnit.test( 'remove correctly handles temp user info if present in API response', function ( assert ) {
+	QUnit.test( 'remove correctly handles temp user info if present in API response', ( assert ) => {
 		const targetUrl = 'http://wiki.example/target';
 		var api = {
-			removeClaim: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					claims: [],
-					pageinfo: {},
-					tempusercreated: 'someone',
-					tempuserredirect: targetUrl
-				} ).promise();
-			} )
+			removeClaim: sinon.spy( () => $.Deferred().resolve( {
+				claims: [],
+				pageinfo: {},
+				tempusercreated: 'someone',
+				tempuserredirect: targetUrl
+			} ).promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
 			{
-				getClaimRevision: function () { return 0; },
+				getClaimRevision: function () {
+					return 0;
+				},
 				setClaimRevision: function () {}
 			},
 			statementsChangerState
 		);
 
 		return statementsChanger.remove( newNoValueSnakStatement() )
-			.done( function ( valueChangeResult ) {
+			.done( ( valueChangeResult ) => {
 				var tempUserWatcher = valueChangeResult.getTempUserWatcher();
 				assert.true( true, 'remove succeeded' );
 				assert.strictEqual( targetUrl, tempUserWatcher.getRedirectUrl() );
 			} );
 	} );
 
-	QUnit.test( 'remove correctly handles API failures', function ( assert ) {
+	QUnit.test( 'remove correctly handles API failures', ( assert ) => {
 		var api = {
-			removeClaim: sinon.spy( function () {
-				return $.Deferred()
+			removeClaim: sinon.spy( () => $.Deferred()
 					.reject( 'errorCode', { error: { code: 'errorCode' } } )
-					.promise();
-			} )
+					.promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
 			{
-				getClaimRevision: function () { return 0; },
+				getClaimRevision: function () {
+					return 0;
+				},
 				setClaimRevision: function () {}
 			},
 			statementsChangerState
@@ -124,10 +124,10 @@
 		var done = assert.async();
 
 		statementsChanger.remove( newNoValueSnakStatement() )
-		.done( function () {
+		.done( () => {
 			assert.true( false, 'remove should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'remove did not fail with a RepoApiError'
@@ -138,17 +138,17 @@
 		.always( done );
 	} );
 
-	QUnit.test( 'remove fires correct hook', function ( assert ) {
+	QUnit.test( 'remove fires correct hook', ( assert ) => {
 		var deferred = $.Deferred();
 		var api = {
-			removeClaim: sinon.spy( function () {
-				return deferred.promise();
-			} )
+			removeClaim: sinon.spy( () => deferred.promise() )
 		};
 		var fireHook = sinon.spy();
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			{ getClaimRevision: function () {
+				return 0;
+			}, setClaimRevision: function () {} },
 			statementsChangerState,
 			new serialization.StatementSerializer(),
 			new serialization.StatementDeserializer(),
@@ -166,7 +166,7 @@
 		assert.true( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
 	} );
 
-	QUnit.test( 'remove properly updates StatementsChangerState', function ( assert ) {
+	QUnit.test( 'remove properly updates StatementsChangerState', ( assert ) => {
 		var deferred = $.Deferred();
 		var api = {
 			removeClaim: function () {
@@ -187,7 +187,9 @@
 		var statementsChangerStatements = statementsChangerState1.getStatements();
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			{ getClaimRevision: function () {
+				return 0;
+			}, setClaimRevision: function () {} },
 			statementsChangerState1
 		);
 
@@ -212,15 +214,15 @@
 		);
 	} );
 
-	QUnit.test( 'save performs correct API call', function ( assert ) {
+	QUnit.test( 'save performs correct API call', ( assert ) => {
 		var api = {
-			setClaim: sinon.spy( function () {
-				return $.Deferred().promise();
-			} )
+			setClaim: sinon.spy( () => $.Deferred().promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; } },
+			{ getClaimRevision: function () {
+				return 0;
+			} },
 			statementsChangerState,
 			new serialization.StatementSerializer()
 		);
@@ -230,28 +232,28 @@
 		assert.true( api.setClaim.calledOnce );
 	} );
 
-	QUnit.test( 'save correctly handles API response', function ( assert ) {
+	QUnit.test( 'save correctly handles API response', ( assert ) => {
 		var api = {
-			setClaim: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					claim: {
-						mainsnak: { snaktype: 'novalue', property: 'P1' },
-						rank: 'normal'
-					},
-					pageinfo: {}
-				} ).promise();
-			} )
+			setClaim: sinon.spy( () => $.Deferred().resolve( {
+				claim: {
+					mainsnak: { snaktype: 'novalue', property: 'P1' },
+					rank: 'normal'
+				},
+				pageinfo: {}
+			} ).promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			{ getClaimRevision: function () {
+				return 0;
+			}, setClaimRevision: function () {} },
 			statementsChangerState,
 			new serialization.StatementSerializer(),
 			new serialization.StatementDeserializer()
 		);
 
 		return statementsChanger.save( newNoValueSnakStatement() )
-		.done( function ( valueChangeResult ) {
+		.done( ( valueChangeResult ) => {
 			assert.true(
 				valueChangeResult.getSavedValue() instanceof datamodel.Statement,
 				'save did not resolve with a Statement'
@@ -259,18 +261,18 @@
 		} );
 	} );
 
-	QUnit.test( 'save correctly handles API failures', function ( assert ) {
+	QUnit.test( 'save correctly handles API failures', ( assert ) => {
 		var api = {
-			setClaim: sinon.spy( function () {
-				return $.Deferred()
+			setClaim: sinon.spy( () => $.Deferred()
 					.reject( 'errorCode', { error: { code: 'errorCode' } } )
-					.promise();
-			} )
+					.promise() )
 		};
 		var statementsChanger = new SUBJECT(
 			api,
 			{
-				getClaimRevision: function () { return 0; },
+				getClaimRevision: function () {
+					return 0;
+				},
 				setClaimRevision: function () {}
 			},
 			statementsChangerState,
@@ -281,10 +283,10 @@
 		var done = assert.async();
 
 		statementsChanger.save( newNoValueSnakStatement() )
-		.done( function ( savedStatement ) {
+		.done( ( savedStatement ) => {
 			assert.true( false, 'save should have failed' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'save failed with a RepoApiError'
@@ -295,17 +297,17 @@
 		.always( done );
 	} );
 
-	QUnit.test( 'save fires correct hook', function ( assert ) {
+	QUnit.test( 'save fires correct hook', ( assert ) => {
 		var deferred = $.Deferred();
 		var api = {
-			setClaim: sinon.spy( function () {
-				return deferred.promise();
-			} )
+			setClaim: sinon.spy( () => deferred.promise() )
 		};
 		var fireHook = sinon.spy();
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			{ getClaimRevision: function () {
+				return 0;
+			}, setClaimRevision: function () {} },
 			statementsChangerState,
 			new serialization.StatementSerializer(),
 			new serialization.StatementDeserializer(),
@@ -340,7 +342,7 @@
 		);
 	} );
 
-	QUnit.test( 'save properly updates StatementsChangerState', function ( assert ) {
+	QUnit.test( 'save properly updates StatementsChangerState', ( assert ) => {
 		var deferred;
 		var api = {
 			setClaim: function () {
@@ -357,7 +359,9 @@
 		var statementsChangerStatements = statementsChangerState1.getStatements();
 		var statementsChanger = new SUBJECT(
 			api,
-			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			{ getClaimRevision: function () {
+				return 0;
+			}, setClaimRevision: function () {} },
 			statementsChangerState1,
 			new serialization.StatementSerializer(),
 			new serialization.StatementDeserializer()

@@ -7,7 +7,7 @@
 
 	QUnit.module( 'wikibase.termbox.RepoApiWritingEntityRepository' );
 
-	QUnit.test( 'success', function ( assert ) {
+	QUnit.test( 'success', ( assert ) => {
 		const revisionId = 1234;
 		const testEntity = {
 			id: 'Q42',
@@ -36,7 +36,7 @@
 
 	} );
 
-	QUnit.test( 'success with tempuser redirect', function ( assert ) {
+	QUnit.test( 'success with tempuser redirect', ( assert ) => {
 		const targetUrl = 'https://wiki.example';
 		const revisionId = 1234;
 		const testEntity = {
@@ -74,7 +74,7 @@
 
 	} );
 
-	QUnit.test( 'request failed', function ( assert ) {
+	QUnit.test( 'request failed', ( assert ) => {
 		const done = assert.async();
 		const repoApiError = 'some-error-code';
 		const stubRepoApi = {
@@ -85,7 +85,9 @@
 
 		new RepoApiWritingEntityRepository( stubRepoApi )
 			.saveEntity( { }, 1234 )
-			.then( () => { assert.true( false ); } )
+			.then( () => {
+				assert.true( false );
+			} )
 			.catch( ( e ) => {
 				assert.strictEqual( e.message, repoApiError );
 				assert.true( e.getContext() !== null );
@@ -93,7 +95,7 @@
 			} );
 	} );
 
-	QUnit.test( 'invalid RepoApi response', function ( assert ) {
+	QUnit.test( 'invalid RepoApi response', ( assert ) => {
 		const done = assert.async();
 		const stubRepoApi = {
 			editEntity( id, baseRevId, data ) {
@@ -103,7 +105,9 @@
 
 		new RepoApiWritingEntityRepository( stubRepoApi )
 			.saveEntity( { }, 1234 )
-			.then( () => { assert.true( false ); } )
+			.then( () => {
+				assert.true( false );
+			} )
 			.catch( ( e ) => {
 				assert.strictEqual( e.message, 'Error: invalid entity serialization' );
 				assert.true( e.getContext() !== null );

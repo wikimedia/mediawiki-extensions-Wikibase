@@ -7,7 +7,7 @@
 
 	QUnit.module( 'jquery.util.getDirectionality' );
 
-	QUnit.test( 'Basic tests', function ( assert ) {
+	QUnit.test( 'Basic tests', ( assert ) => {
 		if ( $.uls && $.uls.data ) {
 			assert.strictEqual(
 				$.util.getDirectionality( 'fa' ),

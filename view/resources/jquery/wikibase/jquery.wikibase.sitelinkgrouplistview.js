@@ -62,7 +62,7 @@
 	function orderSiteLinksByGroup( siteLinkSet ) {
 		var value = [];
 
-		siteLinkSet.each( function ( siteId, siteLink ) {
+		siteLinkSet.each( ( siteId, siteLink ) => {
 			var site = wb.sites.getSite( siteId ),
 				found = false;
 
@@ -160,7 +160,7 @@
 				value: value,
 				encapsulate: true
 			} )
-			.on( this.options.listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ), function ( event ) {
+			.on( this.options.listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ), ( event ) => {
 				event.stopPropagation();
 			} );
 		},

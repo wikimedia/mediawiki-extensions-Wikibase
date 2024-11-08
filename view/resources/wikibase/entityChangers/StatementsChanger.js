@@ -81,7 +81,7 @@
 				guid = statement.getClaim().getGuid();
 
 			this._api.removeClaim( guid, this._revisionStore.getClaimRevision( guid ) )
-			.done( function ( response ) {
+			.done( ( response ) => {
 				var propertyId = statement.getClaim().getMainSnak().getPropertyId();
 
 				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
@@ -99,7 +99,7 @@
 
 				self._updateChangerStateOnRemoval( propertyId, guid );
 			} )
-			.fail( function ( errorCode, error ) {
+			.fail( ( errorCode, error ) => {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
 			} );
 
@@ -150,7 +150,7 @@
 				this._statementSerializer.serialize( statement ),
 				this._revisionStore.getClaimRevision( statement.getClaim().getGuid() )
 			)
-			.done( function ( result ) {
+			.done( ( result ) => {
 				var savedStatement = self._statementDeserializer.deserialize( result.claim ),
 					guid = savedStatement.getClaim().getGuid(),
 					propertyId = statement.getClaim().getMainSnak().getPropertyId(),
@@ -189,7 +189,7 @@
 
 				self._updateChangerStateOnSetClaim( savedStatement, propertyId, guid );
 			} )
-			.fail( function ( errorCode, error ) {
+			.fail( ( errorCode, error ) => {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 			} );
 

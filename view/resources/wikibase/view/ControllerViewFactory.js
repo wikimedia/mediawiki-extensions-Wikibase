@@ -54,7 +54,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		var view = ViewFactory.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
 		var $container = this._toolbarFactory.getToolbarContainer( view.element );
 
-		view.element.on( 'entitytermsviewafterstartediting', function () {
+		view.element.on( 'entitytermsviewafterstartediting', () => {
 			// eslint-disable-next-line no-jquery/no-sizzle
 			if ( !view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
 				// TODO: Use CSS animation
@@ -73,7 +73,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 			view.focus();
 		} );
 
-		view.element.on( 'entitytermsviewafterstopediting', function () {
+		view.element.on( 'entitytermsviewafterstopediting', () => {
 			var showEntitytermslistviewValue = mw.user.isAnon()
 				? mw.cookie.get( 'wikibase-entitytermsview-showEntitytermslistview' )
 				: mw.user.options.get( 'wikibase-entitytermsview-showEntitytermslistview' );
@@ -131,7 +131,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		}
 
 		// Always focus the statementview that switched to edit mode last
-		statementview.element.on( 'statementviewafterstartediting', function () {
+		statementview.element.on( 'statementviewafterstartediting', () => {
 			statementview.focus();
 		} );
 
@@ -169,7 +169,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		edittoolbar.setController( controller );
 		controller.setValue( value );
 
-		view.element.on( 'keydown.edittoolbar', function ( event ) {
+		view.element.on( 'keydown.edittoolbar', ( event ) => {
 			if ( view.option( 'disabled' ) ) {
 				return;
 			}
@@ -205,7 +205,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 	// and the dependency can’t be in resources.php because then TR’s es6-ness “infects” regular Wikibase (T298001);
 	// however, don’t load TR during QUnit tests, we don’t need it there and it causes problems (T330293)
 	if ( !window.QUnit ) {
-		mw.loader.using( 'wikibase.tainted-ref' ).catch( function () {
+		mw.loader.using( 'wikibase.tainted-ref' ).catch( () => {
 			// ignore errors (but avoid unhandled promise rejection)
 		} );
 	}

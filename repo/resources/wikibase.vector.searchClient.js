@@ -30,24 +30,22 @@
 			return '';
 		}
 
-		const searchResponsePromise = getJson.then( ( res ) => {
-			return {
-				query: q,
-				results: res.search.map( ( { id, label, url, match, description, display = {} } ) => ( {
-					value: id,
-					label,
-					match: getMatchText( match, display.label && display.label.value ),
-					description,
-					url,
-					language: {
-						label: display.label ? display.label.language : undefined,
-						// eslint-disable-next-line es-x/no-array-prototype-includes
-						match: [ 'alias', 'label' ].includes( match.type ) ? match.language : undefined,
-						description: display.description ? display.description.language : undefined
-					}
-				} ) )
-			};
-		} );
+		const searchResponsePromise = getJson.then( ( res ) => ( {
+			query: q,
+			results: res.search.map( ( { id, label, url, match, description, display = {} } ) => ( {
+				value: id,
+				label,
+				match: getMatchText( match, display.label && display.label.value ),
+				description,
+				url,
+				language: {
+					label: display.label ? display.label.language : undefined,
+					// eslint-disable-next-line es-x/no-array-prototype-includes
+					match: [ 'alias', 'label' ].includes( match.type ) ? match.language : undefined,
+					description: display.description ? display.description.language : undefined
+				}
+			} ) )
+		} ) );
 
 		return {
 			fetch: searchResponsePromise,
@@ -58,12 +56,8 @@
 	}
 
 	const vectorSearchClient = {
-		fetchByTitle: ( q, limit = 10, _showDescription = true ) => {
-			return fetchResults( q, limit );
-		},
-		loadMore: ( q, offset, limit = 10, _showDescription = true ) => {
-			return fetchResults( q, limit, offset );
-		}
+		fetchByTitle: ( q, limit = 10, _showDescription = true ) => fetchResults( q, limit ),
+		loadMore: ( q, offset, limit = 10, _showDescription = true ) => fetchResults( q, limit, offset )
 	};
 
 	mw.config.set( 'wgVectorSearchClient', vectorSearchClient );

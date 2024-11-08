@@ -8,7 +8,7 @@
 
 	QUnit.module( 'wikibase.getLanguageNameByCode' );
 
-	QUnit.test( 'getLanguageNameByCode( de )', function ( assert ) {
+	QUnit.test( 'getLanguageNameByCode( de )', ( assert ) => {
 		// this test relies on a bunch of global state :/
 
 		var allowedLanguageNames = [
@@ -24,7 +24,7 @@
 			languageName + ' should be one of ' + allowedLanguageNames.join( ', ' ) );
 	} );
 
-	QUnit.test( 'getLanguageNameByCode( nonexistantlanguagecode )', function ( assert ) {
+	QUnit.test( 'getLanguageNameByCode( nonexistantlanguagecode )', ( assert ) => {
 		assert.strictEqual(
 			wb.getLanguageNameByCode( 'nonexistantlanguagecode' ),
 			'nonexistantlanguagecode',
@@ -32,7 +32,7 @@
 		);
 	} );
 
-	QUnit.test( 'getLanguageNameByCodeForTerms( de )', function ( assert ) {
+	QUnit.test( 'getLanguageNameByCodeForTerms( de )', ( assert ) => {
 		// this test relies on a bunch of global state :/
 
 		var allowedLanguageNames = [
@@ -48,7 +48,7 @@
 			languageName + ' should be one of ' + allowedLanguageNames.join( ', ' ) );
 	} );
 
-	QUnit.test( 'getLanguageNameByCodeForTerms( mul )', function ( assert ) {
+	QUnit.test( 'getLanguageNameByCodeForTerms( mul )', ( assert ) => {
 		// this test relies on a bunch of global state :/
 
 		var languageName = wb.getLanguageNameByCodeForTerms( 'mul' );

@@ -108,17 +108,17 @@
 
 			this.element
 			.addClass( this.widgetFullName )
-			.on( 'mouseover.' + this.widgetName, function ( event ) {
+			.on( 'mouseover.' + this.widgetName, ( event ) => {
 				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.addClass( 'ui-state-hover' );
 				}
 			} )
-			.on( 'mouseout.' + this.widgetName, function ( event ) {
+			.on( 'mouseout.' + this.widgetName, ( event ) => {
 				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.removeClass( 'ui-state-hover' );
 				}
 			} )
-			.on( 'click.' + this.widgetName, function ( event ) {
+			.on( 'click.' + this.widgetName, ( event ) => {
 				// TODO: Store visibility in model
 				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
@@ -146,7 +146,7 @@
 				$( document ).on( 'mouseup.' + self.widgetName, degrade );
 				$( window ).on(
 					'resize.' + self.widgetName,
-					function ( ev ) {
+					( ev ) => {
 						self.repositionMenu();
 					}
 				);
@@ -209,7 +209,7 @@
 				$m = $( '<ul>' ).addClass( this.widgetFullName + '-menu' );
 
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( datamodel.Statement.RANK, function ( rankName, rank ) {
+			$.each( datamodel.Statement.RANK, ( rankName, rank ) => {
 				rankName = rankName.toLowerCase();
 
 				$m.append(
@@ -228,7 +228,7 @@
 							// * wikibase-statementview-rank-tooltip-normal
 							// * wikibase-statementview-rank-tooltip-deprecated
 							.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
-							.on( 'click.' + self.widgetName, function ( event ) {
+							.on( 'click.' + self.widgetName, ( event ) => {
 								event.preventDefault();
 							} )
 					)

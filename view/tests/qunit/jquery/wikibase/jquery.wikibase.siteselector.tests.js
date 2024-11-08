@@ -100,7 +100,7 @@
 
 	QUnit.module( 'jquery.wikibase.siteselector', QUnit.newMwEnvironment( {
 		afterEach: function () {
-			$( '.test-siteselector' ).each( function ( j, node ) {
+			$( '.test-siteselector' ).each( ( j, node ) => {
 				var $node = $( node );
 				if ( $node.data( 'siteselector' ) ) {
 					$node.data( 'siteselector' ).destroy();
@@ -110,7 +110,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'getSelectedSite()', function ( assert ) {
+	QUnit.test( 'getSelectedSite()', ( assert ) => {
 		var $siteSelector = newTestSiteSelector(),
 			siteSelector = $siteSelector.data( 'siteselector' );
 
@@ -146,7 +146,7 @@
 
 			var done = assert.async();
 
-			$siteSelector.one( 'siteselectorselected', function ( event, siteId ) {
+			$siteSelector.one( 'siteselectorselected', ( event, siteId ) => {
 				assert.strictEqual(
 					siteId,
 					expectedSiteId,
@@ -154,10 +154,10 @@
 				);
 			} );
 
-			$siteSelector.one( 'siteselectoropen', function () {
+			$siteSelector.one( 'siteselectoropen', () => {
 				// siteselector sets the selected site on the "siteselector" open. So, defer
 				// checking selected site:
-				setTimeout( function () {
+				setTimeout( () => {
 					assert.strictEqual(
 						siteSelector.getSelectedSite(),
 						expectedSiteId ? getSite( expectedSiteId ) : null,
@@ -172,7 +172,7 @@
 			} );
 
 			siteSelector.search()
-			.done( function ( suggestions ) {
+			.done( ( suggestions ) => {
 				assert.strictEqual(
 					suggestions.length > 0 ? suggestions[ 0 ] : null,
 					expectedSiteId ? getSite( expectedSiteId ) : null,
@@ -185,7 +185,7 @@
 					next();
 				}
 			} )
-			.fail( function () {
+			.fail( () => {
 				QUnit.ok(
 					false,
 					'Search failed.'
@@ -201,7 +201,7 @@
 		 * @param {Array} testSet
 		 */
 		function addToQueue( testSet ) {
-			$queue.queue( 'tests', function ( next ) {
+			$queue.queue( 'tests', ( next ) => {
 				testString( testSet[ 0 ], testSet[ 1 ], next );
 			} );
 		}
@@ -211,18 +211,18 @@
 		}
 
 		// Reset selected site by clearing input:
-		$queue.queue( 'tests', function ( next ) {
+		$queue.queue( 'tests', ( next ) => {
 			testString( '', null, next );
 		} );
 
-		$queue.queue( 'tests', function ( next ) {
+		$queue.queue( 'tests', ( next ) => {
 			testString( 'doesnotexist', null, next );
 		} );
 
 		$queue.dequeue( 'tests' );
 	} );
 
-	QUnit.test( 'Create passing a source function', function ( assert ) {
+	QUnit.test( 'Create passing a source function', ( assert ) => {
 		var $siteSelector = newTestSiteSelector( {
 				source: function () {
 					return sites.slice( 0, 2 );
@@ -235,31 +235,31 @@
 		$siteSelector.val( 'en' );
 
 		siteSelector.search()
-		.done( function ( suggestions ) {
+		.done( ( suggestions ) => {
 			assert.strictEqual(
 				suggestions[ 0 ].getId(),
 				'enwiki',
 				'Returned expected first suggestion "enwiki".'
 			);
 		} )
-		.fail( function () {
+		.fail( () => {
 			QUnit.ok(
 				false,
 				'Search failed.'
 			);
 		} )
-		.always( function () {
+		.always( () => {
 			$siteSelector.val( 'frr' );
 
 			siteSelector.search()
-			.done( function ( suggestions ) {
+			.done( ( suggestions ) => {
 				assert.strictEqual(
 					suggestions.length,
 					0,
 					'Did not return unexpected suggestions.'
 				);
 			} )
-			.fail( function () {
+			.fail( () => {
 				QUnit.ok(
 					false,
 					'Search failed.'
@@ -269,7 +269,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Item constructor', function ( assert ) {
+	QUnit.test( 'Item constructor', ( assert ) => {
 		var item = new $.wikibase.siteselector.Item( 'label', 'value', sites[ 0 ] );
 
 		assert.true(
@@ -278,7 +278,7 @@
 		);
 
 		assert.throws(
-			function () {
+			() => {
 				item = new $.wikibase.siteselector.Item( 'label', 'value' );
 			},
 			'Throwing error when omitting site on instantiation.'

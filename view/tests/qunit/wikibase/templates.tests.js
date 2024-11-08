@@ -12,7 +12,7 @@
 
 	QUnit.module( 'wikibase.templates', QUnit.newMwEnvironment() );
 
-	QUnit.test( 'mw.wbTemplate()', function ( assert ) {
+	QUnit.test( 'mw.wbTemplate()', ( assert ) => {
 		assert.strictEqual(
 			typeof mw.wbTemplates,
 			'object',
@@ -182,7 +182,7 @@
 			mw.wbTemplates.store.set( key, template );
 
 			var paramMessage = '';
-			params.forEach( function ( param, i ) {
+			params.forEach( ( param, i ) => {
 				if ( i > 0 ) {
 					paramMessage += ', ';
 				}
@@ -195,7 +195,9 @@
 
 			if ( expected === '' ) {
 				assert.throws(
-					function () { $( '<div>' ).append( mw.wbTemplate( key, params ) ).html(); },
+					() => {
+						$( '<div>' ).append( mw.wbTemplate( key, params ) ).html();
+					},
 					'Triggered error when trying to create invalid HTML filling single param template "' + template + '" with "' + paramMessage + '"'
 				);
 			} else {
@@ -209,10 +211,10 @@
 		};
 
 		// Loop through testsData and params to run the tests
-		testsData.forEach( function ( testData, numberOfParams ) {
+		testsData.forEach( ( testData, numberOfParams ) => {
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( testData, function ( template, expectedResults ) {
-				baseParams[ numberOfParams ].forEach( function ( params, i ) {
+			$.each( testData, ( template, expectedResults ) => {
+				baseParams[ numberOfParams ].forEach( ( params, i ) => {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );
@@ -222,7 +224,7 @@
 
 	var templateName = 'wikibase-some-test-template';
 
-	QUnit.test( '$element.applyTemplate() adds classes from the template', function ( assert ) {
+	QUnit.test( '$element.applyTemplate() adds classes from the template', ( assert ) => {
 		mw.wbTemplates.store.set( templateName, '<div class="class-from-template"></div>' );
 
 		var $div = $( '<div>' ).addClass( 'my-class' );
@@ -234,7 +236,7 @@
 
 	QUnit.test(
 		'$element.applyTemplate() copies all attributes from the template',
-		function ( assert ) {
+		( assert ) => {
 			mw.wbTemplates.store.set( templateName, '<div attr1="val1" attr2="val2"></div>' );
 
 			var $div = $( '<div>' );
@@ -247,7 +249,7 @@
 
 	QUnit.test(
 		'$element.applyTemplate() replaces contents from the template',
-		function ( assert ) {
+		( assert ) => {
 			mw.wbTemplates.store.set( templateName, '<div>template contents</div>' );
 
 			var $div = $( '<div>' ).text( 'some contents' );

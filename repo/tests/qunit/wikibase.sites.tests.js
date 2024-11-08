@@ -60,7 +60,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'basic', function ( assert ) {
+	QUnit.test( 'basic', ( assert ) => {
 		assert.true(
 			wb.sites instanceof Object,
 			'initiated wikibase object'
@@ -86,7 +86,7 @@
 
 		var allSiteInstances = true;
 		// eslint-disable-next-line no-jquery/no-each-util
-		$.each( sites, function ( i, site ) {
+		$.each( sites, ( i, site ) => {
 			allSiteInstances = allSiteInstances && ( site instanceof Site );
 		} );
 
@@ -96,7 +96,7 @@
 		);
 	}
 
-	QUnit.test( 'wikibase.sites.getSites()', function ( assert ) {
+	QUnit.test( 'wikibase.sites.getSites()', ( assert ) => {
 		var sites = wb.sites.getSites();
 		siteSetTest( assert, 'getSites', sites );
 
@@ -107,14 +107,14 @@
 		);
 	} );
 
-	QUnit.test( 'wikibase.sites.getSitesOfGroup()', function ( assert ) {
-		TEST_SITE_GROUPS.forEach( function ( group ) {
+	QUnit.test( 'wikibase.sites.getSitesOfGroup()', ( assert ) => {
+		TEST_SITE_GROUPS.forEach( ( group ) => {
 			var sites = wb.sites.getSitesOfGroup( group );
 			siteSetTest( assert, 'getSitesOfGroup', sites );
 
 			var allFromRightGroup = true;
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( sites, function ( i, site ) {
+			$.each( sites, ( i, site ) => {
 				allFromRightGroup = allFromRightGroup && ( site.getGroup() === group );
 			} );
 
@@ -125,7 +125,7 @@
 		} );
 	} );
 
-	QUnit.test( 'wikibase.sites.getSite()', function ( assert ) {
+	QUnit.test( 'wikibase.sites.getSite()', ( assert ) => {
 		assert.true(
 			wb.sites.getSite( 'nnwiki' ) instanceof Site,
 			'trying to get a known site by its ID returns a site object'

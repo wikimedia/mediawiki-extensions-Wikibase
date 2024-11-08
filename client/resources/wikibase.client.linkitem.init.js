@@ -21,7 +21,7 @@
 				'mediawiki.Title',
 				'mw.config.values.wbRepo'
 			],
-			function () {
+			() => {
 				$spinner.remove();
 
 				var repoConfig = mw.config.get( 'wbRepo' ),
@@ -44,21 +44,21 @@
 				var widgetName = $linkItemLink.data( 'linkitem' ).widgetName;
 
 				$linkItemLink
-				.on( 'linkitemdialogclose.' + widgetName, function ( event ) {
+				.on( 'linkitemdialogclose.' + widgetName, ( event ) => {
 					$linkItemLink
 					.off( '.' + widgetName )
 					.data( 'linkitem' ).destroy();
 				} )
-				.on( 'linkitemsuccess.' + widgetName, function ( event ) {
+				.on( 'linkitemsuccess.' + widgetName, ( event ) => {
 					// Don't reshow the "Add links" link but reload the page on dialog close:
 					$linkItemLink
 					.off( '.' + widgetName )
-					.on( 'linkitemdialogclose.' + widgetName, function () {
+					.on( 'linkitemdialogclose.' + widgetName, () => {
 						window.location.reload( true );
 					} );
 				} );
 			},
-			function ( error ) {
+			( error ) => {
 				// Loading failed, log an error to the console and tell the user.
 				/* eslint-disable-next-line no-console */
 				console.error( error );
@@ -73,7 +73,7 @@
 	/**
 	 * Displays the link which opens the dialog (using jquery.wikibase.linkitem)
 	 */
-	$( function () {
+	$( () => {
 		// TODO: $.support is deprecated
 		// eslint-disable-next-line no-jquery/no-support
 		if ( !$.support.cors ) {

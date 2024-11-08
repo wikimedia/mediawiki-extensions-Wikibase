@@ -33,7 +33,7 @@
 			PARENT.prototype._create.call( this );
 
 			this.element
-			.on( 'eachchange.' + this.widgetName, function () {
+			.on( 'eachchange.' + this.widgetName, () => {
 				var menu = self.options.menu;
 				if (
 					self.options.suggestionsPlaceholder
@@ -95,7 +95,7 @@
 
 			$( ooMenu )
 			.off( 'selected' )
-			.on( 'selected.entitysearch', function ( event, item ) {
+			.on( 'selected.entitysearch', ( event, item ) => {
 				if ( event.originalEvent
 					&& /^key/.test( event.originalEvent.type )
 					&& !( item instanceof $.ui.ooMenu.CustomItem )
@@ -126,7 +126,7 @@
 			var self = this,
 				promise = PARENT.prototype._getSuggestions.call( this, term );
 
-			return promise.done( function ( suggestions, searchTerm ) {
+			return promise.done( ( suggestions, searchTerm ) => {
 				if ( self.options.suggestionsPlaceholder ) {
 					self.options.suggestionsPlaceholder.setVisibility( false );
 				}

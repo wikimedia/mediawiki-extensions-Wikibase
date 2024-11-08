@@ -38,7 +38,7 @@
 			$.ui.suggester.prototype._create.call( this );
 
 			this.element
-			.on( this.widgetEventPrefix + 'change.' + this.widgetName, function ( event ) {
+			.on( this.widgetEventPrefix + 'change.' + this.widgetName, ( event ) => {
 				var value = self.element.val().trim();
 				if ( value !== self.option( 'pageName' ) ) {
 					self.option( 'pageName', value );
@@ -99,10 +99,10 @@
 					},
 					timeout: 8000
 				} )
-				.done( function ( response ) {
+				.done( ( response ) => {
 					deferred.resolve( response[ 1 ], response[ 0 ] );
 				} )
-				.fail( function ( jqXHR, textStatus ) {
+				.fail( ( jqXHR, textStatus ) => {
 					// Since this is a JSONP request, this will always fail with a timeout...
 					deferred.reject( textStatus );
 				} );

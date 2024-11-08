@@ -69,7 +69,7 @@
 
 			this._getEntityForPage( this._secondSiteId, this._secondPageName )
 			.fail( deferred.reject )
-			.done( function ( data ) {
+			.done( ( data ) => {
 				var entity, siteLinkCount;
 
 				if ( data.entities[ '-1' ] ) {
@@ -151,7 +151,7 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( self._firstSiteId, self._firstPageName )
-			.done( function ( data ) {
+			.done( ( data ) => {
 				// Use the normalized title from now on (e.g. for creating a new item with proper
 				// titles).
 				if ( data.normalized ) {
@@ -190,7 +190,7 @@
 				deferred = new $.Deferred();
 
 			this._getEntityForPage( self._secondSiteId, self._secondPageName )
-			.done( function ( data ) {
+			.done( ( data ) => {
 				if ( data.normalized ) {
 					// Use the normalized title from now on (e.g. for creating a new item with proper
 					// titles).
@@ -226,7 +226,7 @@
 
 			this._getEntityForPage( self._secondSiteId, self._secondPageName )
 			.fail( deferred.reject )
-			.done( function ( data ) {
+			.done( ( data ) => {
 				// Use the normalized title from now on (e.g. for creating a new item with proper
 				// titles).
 				if ( data.normalized ) {

@@ -30,7 +30,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $button = createTestButton(),
 			button = $button.data( 'toolbarbutton' );
 

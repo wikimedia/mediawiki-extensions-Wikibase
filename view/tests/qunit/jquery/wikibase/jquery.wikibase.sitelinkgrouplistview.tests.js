@@ -15,7 +15,7 @@
 		options = $.extend( {
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'sitelinkgroupview',
-				function () {
+				() => {
 				}
 			)
 		}, options );
@@ -77,7 +77,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var value = new datamodel.SiteLinkSet( [
 			new datamodel.SiteLink( 'aawiki', 'page1' ),
 			new datamodel.SiteLink( 'dewiki', 'page1' ),
@@ -104,7 +104,7 @@
 		);
 
 		assert.throws(
-			function () {
+			() => {
 				$sitelinkgrouplistview = createSitelinkgrouplistview();
 			},
 			'Widget does not accept an empty value.'

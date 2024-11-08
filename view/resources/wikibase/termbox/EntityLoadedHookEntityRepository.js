@@ -18,7 +18,7 @@ class EntityLoadedHookEntityRepository {
 	 */
 	getFingerprintableEntity() {
 		return new Promise( ( resolve ) => {
-			this._entityLoadedHook.add( function ( entity ) {
+			this._entityLoadedHook.add( ( entity ) => {
 				resolve( JSON.parse( JSON.stringify( entity ) ) );
 			} );
 		} );

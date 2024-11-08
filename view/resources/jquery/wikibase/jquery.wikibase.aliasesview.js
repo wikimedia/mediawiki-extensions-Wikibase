@@ -96,7 +96,7 @@
 
 				this.$list.empty();
 
-				this.options.value.getTexts().forEach( function ( text ) {
+				this.options.value.getTexts().forEach( ( text ) => {
 					self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', text ) );
 				} );
 			}
@@ -119,7 +119,7 @@
 			.on(
 				'tagadatatagremoved.' + this.widgetName
 				+ ' tagadatatagchanged.' + this.widgetName
-				+ ' tagadatatagremoved.' + this.widgetName, function ( event ) {
+				+ ' tagadatatagremoved.' + this.widgetName, ( event ) => {
 					self._trigger( 'change' );
 				}
 			);
@@ -154,7 +154,7 @@
 				.find( 'input' ).inputautoexpand( expansionOptions );
 
 			// also make sure that new helper tags will calculate size correctly:
-			this.$list.on( 'tagadatahelpertagadded.' + this.widgetName, function ( event, tag ) {
+			this.$list.on( 'tagadatahelpertagadded.' + this.widgetName, ( event, tag ) => {
 				$( tag ).find( 'input' ).inputautoexpand( expansionOptions );
 			} );
 		},
@@ -211,9 +211,7 @@
 				this.options.value.getLanguageCode(),
 				// tagadata.getTags() returns a jquery object of html nodes
 				// eslint-disable-next-line no-jquery/no-map-util
-				$.map( tagadata.getTags(), function ( tag ) {
-					return tagadata.getTagLabel( $( tag ) );
-				} )
+				$.map( tagadata.getTags(), ( tag ) => tagadata.getTagLabel( $( tag ) ) )
 			);
 		},
 

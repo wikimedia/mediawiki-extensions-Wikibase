@@ -15,7 +15,7 @@
 	function getSiteIdsOfGroup( group ) {
 		var siteIds = [];
 		// eslint-disable-next-line no-jquery/no-each-util
-		$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
+		$.each( wb.sites.getSitesOfGroup( group ), ( siteId, site ) => {
 			siteIds.push( siteId );
 		} );
 		return siteIds;
@@ -148,10 +148,10 @@
 
 			var self = this;
 			this.$sitelinklistview
-			.on( prefix + 'change.' + this.widgetName, function ( event ) {
+			.on( prefix + 'change.' + this.widgetName, ( event ) => {
 				self._trigger( 'change' );
 			} )
-			.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
+			.on( prefix + 'toggleerror.' + this.widgetName, ( event, error ) => {
 				self.setError( error );
 			} );
 		},
@@ -167,7 +167,7 @@
 				return result;
 			}
 
-			this.options.value.each( function ( siteId, siteLink ) {
+			this.options.value.each( ( siteId, siteLink ) => {
 				if ( self._siteIdsOfGroup.indexOf( siteId ) !== -1 ) {
 					result.push( siteLink );
 				}
@@ -197,7 +197,7 @@
 		_stopEditing: function ( dropValue ) {
 			var self = this;
 			return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
-			.done( function () {
+			.done( () => {
 				self.notification();
 			} );
 		},
@@ -226,7 +226,7 @@
 		_getSiteLinksArray: function () {
 			var res = [];
 			// FIXME: Replace with Set.toArray (requires DataModel JavaScript 3.0).
-			this.options.value.each( function ( siteId, siteLink ) {
+			this.options.value.each( ( siteId, siteLink ) => {
 				res.push( siteLink );
 			} );
 			return res;

@@ -63,7 +63,7 @@
 				lia = listview.listItemAdapter();
 
 			this.element
-			.on( lia.prefixedEvent( 'afterremove.' + this.widgetName ), function ( event ) {
+			.on( lia.prefixedEvent( 'afterremove.' + this.widgetName ), ( event ) => {
 				var $statementgroupview = $( event.target ),
 					statementgroupview = lia.liInstance( $statementgroupview );
 
@@ -116,9 +116,7 @@
 		 * @return {datamodel.StatementGroup[]}
 		 */
 		_statementGroupSetToStatementGroups: function ( statementGroupSet ) {
-			return statementGroupSet.getKeys().map( function ( propertyId ) {
-				return statementGroupSet.getItemByKey( propertyId );
-			} );
+			return statementGroupSet.getKeys().map( ( propertyId ) => statementGroupSet.getItemByKey( propertyId ) );
 		},
 
 		/**
@@ -138,12 +136,12 @@
 				lia = this.listview.listItemAdapter();
 
 			return this.listview.enterNewItem()
-				.done( function ( $statementgroupview ) {
+				.done( ( $statementgroupview ) => {
 					$statementgroupview
 					.addClass( 'wb-new' )
 					.one(
 						lia.prefixedEvent( 'afterstopediting.' + self.widgetName ),
-						function ( event, dropValue ) {
+						( event, dropValue ) => {
 							var $view = $( event.target ),
 								statementGroup = lia.liInstance( $view ).value();
 

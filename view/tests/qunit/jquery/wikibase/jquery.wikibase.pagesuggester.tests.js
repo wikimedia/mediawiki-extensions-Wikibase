@@ -29,7 +29,7 @@
 		}
 	} );
 
-	QUnit.test( 'Create', function ( assert ) {
+	QUnit.test( 'Create', ( assert ) => {
 		var $pageSuggester = newTestPageSuggester();
 
 		assert.true(
@@ -38,20 +38,20 @@
 		);
 	} );
 
-	QUnit.test( 'Try searching for suggestions without a site', function ( assert ) {
+	QUnit.test( 'Try searching for suggestions without a site', ( assert ) => {
 		var $pageSuggester = newTestPageSuggester(),
 			pageSuggester = $pageSuggester.data( 'pagesuggester' );
 
 		var done = assert.async();
 
 		pageSuggester.search()
-		.done( function () {
+		.done( () => {
 			assert.true(
 				false,
 				'Searching successful although supposed to fail.'
 			);
 		} )
-		.fail( function () {
+		.fail( () => {
 			assert.true(
 				true,
 				'Searching failed as expected.'

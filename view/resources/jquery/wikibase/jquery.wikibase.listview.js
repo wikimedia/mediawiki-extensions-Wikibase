@@ -325,9 +325,7 @@
 		 *         - {Error}
 		 */
 		startEditing: function () {
-			return $.when.apply( $, this.value().map( function ( listitem ) {
-				return listitem.startEditing();
-			} ) );
+			return $.when.apply( $, this.value().map( ( listitem ) => listitem.startEditing() ) );
 		},
 
 		/**
@@ -340,9 +338,7 @@
 		 *         - {Error}
 		 */
 		stopEditing: function ( dropValue ) {
-			return $.when.apply( $, this.value().map( function ( listitem ) {
-				return listitem.stopEditing( dropValue );
-			} ) );
+			return $.when.apply( $, this.value().map( ( listitem ) => listitem.stopEditing( dropValue ) ) );
 		}
 
 	} );

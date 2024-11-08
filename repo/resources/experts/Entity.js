@@ -48,7 +48,7 @@
 			.on( 'eachchange.' + this.uiBaseClass, function ( e ) {
 				$( this ).data( 'entityselector' ).repositionMenu();
 			} )
-			.on( 'entityselectorselected.' + this.uiBaseClass, function ( e ) {
+			.on( 'entityselectorselected.' + this.uiBaseClass, ( e ) => {
 				self._resizeInput();
 				notifier.notify( 'change' );
 			} );

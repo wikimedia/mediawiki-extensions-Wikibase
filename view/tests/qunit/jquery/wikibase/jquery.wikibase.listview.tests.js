@@ -45,7 +45,7 @@
 			} );
 		},
 		afterEach: function () {
-			$( '.test_listview' ).each( function ( i, node ) {
+			$( '.test_listview' ).each( ( i, node ) => {
 				var $node = $( node ),
 					listview = $node.data( 'listview' );
 
@@ -60,7 +60,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function ( assert ) {
+	QUnit.test( 'Initialize and destroy', ( assert ) => {
 		/**
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
 		 * with the values passed.
@@ -118,7 +118,7 @@
 		testInitAndDestroy( [ 'a', 'b' ] );
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [
@@ -157,7 +157,7 @@
 		);
 	} );
 
-	QUnit.test( 'addItem() and removeItem()', function ( assert ) {
+	QUnit.test( 'addItem() and removeItem()', ( assert ) => {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [ 'a', 'b', 'c' ],
@@ -206,7 +206,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem()', function ( assert ) {
+	QUnit.test( 'enterNewItem()', ( assert ) => {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [ 'a', 'b', 'c' ];
@@ -282,7 +282,7 @@
 		);
 	} );
 
-	QUnit.test( 'listItemNodeName option', function ( assert ) {
+	QUnit.test( 'listItemNodeName option', ( assert ) => {
 		var $node = createListview( [ 'a', 'b', 'c' ], { listItemNodeName: 'SPAN' } ),
 			listview = $node.data( 'listview' );
 
@@ -302,7 +302,7 @@
 		);
 	} );
 
-	QUnit.test( 'indexOf()', function ( assert ) {
+	QUnit.test( 'indexOf()', ( assert ) => {
 		var $node = createListview( [ 'a', 'b', 'c' ] ),
 			listview = $node.data( 'listview' );
 
@@ -315,7 +315,7 @@
 		}
 	} );
 
-	QUnit.test( 'startEditing', function ( assert ) {
+	QUnit.test( 'startEditing', ( assert ) => {
 		var listItemAdapter = wb.tests.getMockListItemAdapter(
 			'test',
 			function () {
@@ -334,12 +334,12 @@
 
 		var result = listview.startEditing();
 		assert.strictEqual( result.state(), 'pending' );
-		return result.done( function () {
+		return result.done( () => {
 			assert.strictEqual( result.state(), 'resolved' );
 		} );
 	} );
 
-	QUnit.test( 'reuse items', function ( assert ) {
+	QUnit.test( 'reuse items', ( assert ) => {
 		var $node = $( document.createElement( 'span' ) );
 		$node.append( document.createElement( 'span' ) ).append( document.createElement( 'span' ) );
 		var listview = $node.listview( {
@@ -372,14 +372,14 @@
 
 			assert.deepEqual( instance, prototype );
 		}
-		getInstances.forEach( function ( getInstance ) {
-			QUnit.test( 'destroy', function ( assert ) {
+		getInstances.forEach( ( getInstance ) => {
+			QUnit.test( 'destroy', ( assert ) => {
 				var instance = getInstance();
 				tryDestroy( instance, assert );
 			} );
-			QUnit.test( 'destroy after startEditing', function ( assert ) {
+			QUnit.test( 'destroy after startEditing', ( assert ) => {
 				var instance = getInstance();
-				return instance.startEditing().done( function () {
+				return instance.startEditing().done( () => {
 					tryDestroy( instance, assert );
 				} );
 			} );

@@ -9,7 +9,7 @@
 
 	var EventSingletonManager = require( '../../../resources/jquery/jquery.util.EventSingletonManager.js' );
 
-	QUnit.test( 'register() & unregister() (single source)', function ( assert ) {
+	QUnit.test( 'register() & unregister() (single source)', ( assert ) => {
 		var manager = new EventSingletonManager(),
 			$source = $( '<div>' ),
 			$target = $( '<div>' ),
@@ -19,7 +19,7 @@
 			$source.get( 0 ),
 			$target.get( 0 ),
 			'custom.namespace',
-			function ( ev, source ) {
+			( ev, source ) => {
 				assert.true(
 					true,
 					'Triggered event "' + ev.type + '.'
@@ -40,7 +40,7 @@
 		$target.trigger( event );
 	} );
 
-	QUnit.test( 'register() & unregister() (multiple sources)', function ( assert ) {
+	QUnit.test( 'register() & unregister() (multiple sources)', ( assert ) => {
 		var manager = new EventSingletonManager(),
 			$sources = $( '<div>' ).add( $( '<div>' ) ),
 			$target = $( '<div>' ),
@@ -86,7 +86,7 @@
 		manager.unregister( $sources.get( 0 ), $target.get( 0 ), '.namespace' );
 	} );
 
-	QUnit.test( 'unregister() & unregister() (multiple events)', function ( assert ) {
+	QUnit.test( 'unregister() & unregister() (multiple events)', ( assert ) => {
 		var manager = new EventSingletonManager(),
 			$source = $( '<div>' ),
 			$target = $( '<div>' ),
@@ -99,7 +99,7 @@
 			$source.get( 0 ),
 			$target.get( 0 ),
 			'custom1.namespace custom2.namespace custom3.namespace custom4.othernamespace',
-			function ( event, source ) {
+			( event, source ) => {
 				assert.true(
 					true,
 					'Triggered event "' + event.type + '".'

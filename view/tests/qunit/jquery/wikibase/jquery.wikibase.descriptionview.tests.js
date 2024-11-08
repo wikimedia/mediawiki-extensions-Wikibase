@@ -41,9 +41,9 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				createDescriptionview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -66,18 +66,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewafterstartediting', function ( event ) {
+		.on( 'descriptionviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'descriptionviewafterstopediting', function ( event, dropValue ) {
+		.on( 'descriptionviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -114,7 +114,7 @@
 		descriptionview.stopEditing();
 	} );
 
-	QUnit.test( 'read only mode with accessibility label', function ( assert ) {
+	QUnit.test( 'read only mode with accessibility label', ( assert ) => {
 		var accessibilityLabel = 'a11y-label-text',
 			$descriptionview = createDescriptionview( {
 				readOnly: true,
@@ -142,12 +142,12 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' );
 
 		$descriptionview
-		.on( 'descriptionviewtoggleerror', function ( event, error ) {
+		.on( 'descriptionviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
@@ -157,13 +157,13 @@
 		descriptionview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $descriptionview = createDescriptionview(),
 			descriptionview = $descriptionview.data( 'descriptionview' ),
 			newValue = null;
 
 		assert.throws(
-			function () {
+			() => {
 				descriptionview.value( newValue );
 			},
 			'Trying to set no value fails.'
@@ -190,7 +190,7 @@
 		);
 	} );
 
-	QUnit.test( 'shows N/A placeholder for mul', function ( assert ) {
+	QUnit.test( 'shows N/A placeholder for mul', ( assert ) => {
 		var $descriptionview = createDescriptionview( {
 				value: new datamodel.Term( 'mul', '' )
 			} ),

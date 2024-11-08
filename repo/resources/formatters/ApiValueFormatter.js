@@ -75,10 +75,10 @@
 				this._formatValueCaller.formatValue(
 					dataValue, this._dataTypeId, this._outputType, this._propertyId, this._options
 				)
-				.done( function ( formattedValue ) {
+				.done( ( formattedValue ) => {
 					deferred.resolve( formattedValue, dataValue );
 				} )
-				.fail( function ( error ) {
+				.fail( ( error ) => {
 					deferred.reject( error.detailedMessage || error.code );
 				} );
 

@@ -200,7 +200,7 @@
 
 			this.element
 		.addClass( 'ui-suggester-input' )
-		.on( 'blur.' + this.widgetName, function () {
+		.on( 'blur.' + this.widgetName, () => {
 			if ( !self.options.menu.element.is( ':focus' ) ) {
 				self._close();
 			}
@@ -283,7 +283,7 @@
 		.appendTo( 'body' );
 
 			$( ooMenu )
-		.on( 'selected.suggester', function ( event, item ) {
+		.on( 'selected.suggester', ( event, item ) => {
 			if ( item instanceof $.ui.ooMenu.Item && !( item instanceof $.ui.ooMenu.CustomItem ) ) {
 				self._term = item.getValue();
 				self.element.val( item.getValue() );
@@ -291,7 +291,7 @@
 				self._trigger( 'change' );
 
 				if ( !event.originalEvent || !/^key/.test( event.originalEvent.type ) ) {
-					setTimeout( function () {
+					setTimeout( () => {
 						// Run refocusing out of the execution chain to allow redrawing in IE.
 						self.element.trigger( 'focus' );
 					}, 0 );
@@ -312,12 +312,12 @@
 				suppressKeyPress = false;
 
 			this.element
-		.on( 'click.suggester', function ( event ) {
+		.on( 'click.suggester', ( event ) => {
 			if ( !self.isSearching() ) {
 				self._updateMenuVisibility();
 			}
 		} )
-		.on( 'keydown.suggester', function ( event ) {
+		.on( 'keydown.suggester', ( event ) => {
 			var isDisabled = self.element.hasClass( 'ui-state-disabled' );
 
 			if ( isDisabled || self.element.prop( 'readOnly' ) ) {
@@ -384,7 +384,7 @@
 
 			self._trigger( 'change' );
 		} )
-		.on( 'keypress.suggester', function ( event ) {
+		.on( 'keypress.suggester', ( event ) => {
 			if ( suppressKeyPress ) {
 				suppressKeyPress = false;
 				event.preventDefault();
@@ -402,16 +402,16 @@
 
 			$( window )
 		.off( '.' + this.widgetBaseClass )
-		.on( 'resize.' + this.widgetBaseClass, function () {
-			$( ':' + self.widgetBaseClass ).each( function ( i, node ) {
+		.on( 'resize.' + this.widgetBaseClass, () => {
+			$( ':' + self.widgetBaseClass ).each( ( i, node ) => {
 				var suggester = $( node ).data( self.widgetName );
 				suggester.repositionMenu();
 				suggester.options.menu.scale();
 			} );
 		} )
-		.on( 'click.' + this.widgetBaseClass, function ( event ) {
+		.on( 'click.' + this.widgetBaseClass, ( event ) => {
 			var $target = $( event.target );
-			$( ':' + self.widgetBaseClass ).each( function ( i, node ) {
+			$( ':' + self.widgetBaseClass ).each( ( i, node ) => {
 				var suggester = $( node ).data( self.widgetName );
 				// Close suggester if not clicked on suggester or corresponding list:
 				if ( $target.closest( suggester.element ).length === 0
@@ -431,11 +431,11 @@
 
 			this._clearTimeout();
 
-			this._searching = setTimeout( function () {
+			this._searching = setTimeout( () => {
 			// Only search if the value has changed:
 				if ( self._term !== self.element.val() ) {
 					self.search()
-				.done( function () {
+				.done( () => {
 					// Widget might have been destroyed in the meantime.
 					if ( self.element.data( self.widgetName ) ) {
 						self._trigger( 'change' );
@@ -497,7 +497,7 @@
 			if ( isFirst && direction === 'previous' || isLast && direction === 'next' ) {
 				this._moveOffEdge( direction );
 			} else {
-				$( this.options.menu ).one( 'focus.suggester', function ( event, item ) {
+				$( this.options.menu ).one( 'focus.suggester', ( event, item ) => {
 					var isCustomMenuItem = item instanceof $.ui.ooMenu.CustomItem;
 
 					if ( item instanceof $.ui.ooMenu.Item && !isCustomMenuItem ) {
@@ -550,7 +550,7 @@
 			this._pending++;
 
 			return this._getSuggestions( this._term )
-		.done( function ( suggestions, requestTerm ) {
+		.done( ( suggestions, requestTerm ) => {
 			self._searching = false;
 
 			if ( typeof requestTerm === 'string' && requestTerm !== self._term ) {
@@ -562,11 +562,11 @@
 				self._updateMenu( suggestions, requestTerm );
 			}
 		} )
-		.fail( function ( message ) {
+		.fail( ( message ) => {
 			self.element.addClass( 'ui-suggester-error' );
 			self._trigger( 'error', null, [ message ] );
 		} )
-		.always( function () {
+		.always( () => {
 			if ( --self._pending === 0 ) {
 				self.element.removeClass( 'ui-suggester-loading' );
 			}
@@ -679,13 +679,10 @@
 		_getSuggestionsFromArray: function ( term, source ) {
 			var deferred = $.Deferred();
 
-			// eslint-disable-next-line security/detect-non-literal-regexp
 			var matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
 			// eslint-disable-next-line no-jquery/no-grep
-			deferred.resolve( $.grep( source, function ( item ) {
-				return matcher.test( item );
-			} ), term );
+			deferred.resolve( $.grep( source, ( item ) => matcher.test( item ) ), term );
 
 			return deferred.promise();
 		},
