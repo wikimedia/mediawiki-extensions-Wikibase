@@ -2,7 +2,6 @@
 
 const { Assertion, expect, util: utils } = require( 'chai' );
 const util = require( 'util' );
-// const { getOrLoadSpec } = require( './RequestBuilder' );
 const Ajv = require( 'ajv' );
 const { readFileSync } = require( 'fs' );
 
@@ -75,9 +74,7 @@ Assertion.addChainableMethod(
 Assertion.addProperty(
 	'satisfyApiSchema',
 	function () {
-		// TODO: can't use `getOrLoadSpec()` as it's async - is there way round that?
 		const openApiSchema = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
-		// const openApiSchema = await getOrLoadSpec();
 
 		const ajv = new Ajv( { strictTypes: false } );
 
