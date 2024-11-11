@@ -33,7 +33,7 @@
 		"monolog/monolog": "^2.0.0",
 		"diff/diff": "^3.2.0",
 		"wikimedia/at-ease": "^2.0.0 || ^3.0.0",
-		"wikimedia/purtle": "^1.0.7",
+		"wikimedia/purtle": "^2.0.0",
 		"wikimedia/timestamp": "^4.1.0",
 		"psr/simple-cache": "^1.0.1",
 		"psr/log": "^1.1.3",
