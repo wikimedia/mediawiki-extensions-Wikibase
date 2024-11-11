@@ -12,6 +12,12 @@
 	"valueview-expert-globecoordinateinput-precision": "Dəqiqlik:",
 	"valueview-expert-globecoordinateinput-nullprecision": "təyin edilməyib",
 	"valueview-expert-globecoordinateinput-customprecision": "xüsusi ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "bir dəqiqəyə qədər",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "bir saniyəyə qədər",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "1/10 saniyəyə qədər",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "1/100 saniyəyə qədər",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "1/1000 saniyəyə qədər",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000 saniyəyə qədər",
 	"valueview-expert-timevalue-calendar-gregorian": "Qriqori təqvimi",
 	"valueview-expert-timevalue-calendar-julian": "Yuli təqvimi",
 	"valueview-expert-timeinput-precision": "Dəqiqlik:",
@@ -34,5 +40,6 @@
 	"valueview-expertextender-languageselector-label": "Dil (məcburidir):",
 	"valueview-expertextender-unitsuggester-label": "Vahid (məcburi deyil):",
 	"valueview-preview-label": "belə görünəcək:",
+	"valueview-preview-novalue": "tanınmış etibarlı dəyər yoxdur",
 	"valueview-listrotator-manually": "əl ilə təyin et"
 }
