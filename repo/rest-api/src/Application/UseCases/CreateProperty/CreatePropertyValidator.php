@@ -3,7 +3,8 @@
 namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
 
 use LogicException;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyDeserializer;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
 use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
@@ -15,6 +16,8 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsVal
 use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
+use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
 use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
 
 /**
@@ -22,7 +25,6 @@ use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
  */
 class CreatePropertyValidator {
 
-	private PropertyDeserializer $propertyDeserializer;
 	private EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer;
 	private array $dataTypesArray;
 	private LabelsSyntaxValidator $labelsSyntaxValidator;
@@ -30,18 +32,18 @@ class CreatePropertyValidator {
 	private DescriptionsSyntaxValidator $descriptionsSyntaxValidator;
 	private PropertyDescriptionsContentsValidator $descriptionsContentsValidator;
 	private AliasesValidator $aliasesValidator;
+	private StatementsValidator $statementsValidator;
 
 	public function __construct(
-		PropertyDeserializer $propertyDeserializer,
 		EditMetadataRequestValidatingDeserializer $editMetadataRequestValidatingDeserializer,
 		array $dataTypesArray,
 		LabelsSyntaxValidator $labelsSyntaxValidator,
 		PropertyLabelsContentsValidator $labelsContentsValidator,
 		DescriptionsSyntaxValidator $descriptionsSyntaxValidator,
 		PropertyDescriptionsContentsValidator $descriptionsContentsValidator,
-		AliasesValidator $aliasesValidator
+		AliasesValidator $aliasesValidator,
+		StatementsValidator $statementsValidator
 	) {
-		$this->propertyDeserializer = $propertyDeserializer;
 		$this->editMetadataRequestValidatingDeserializer = $editMetadataRequestValidatingDeserializer;
 		$this->dataTypesArray = $dataTypesArray;
 		$this->labelsSyntaxValidator = $labelsSyntaxValidator;
@@ -49,6 +51,7 @@ class CreatePropertyValidator {
 		$this->descriptionsSyntaxValidator = $descriptionsSyntaxValidator;
 		$this->descriptionsContentsValidator = $descriptionsContentsValidator;
 		$this->aliasesValidator = $aliasesValidator;
+		$this->statementsValidator = $statementsValidator;
 	}
 
 	/**
@@ -63,9 +66,19 @@ class CreatePropertyValidator {
 		$this->validateTopLevelFields( $propertySerialization );
 		$this->validateLabelsAndDescriptions( $propertySerialization, '/property' );
 		$this->validateAliases( $propertySerialization, '/property' );
+		$this->validateStatements( $propertySerialization, '/property' );
 
 		return new DeserializedCreatePropertyRequest(
-			$this->propertyDeserializer->deserialize( $request->getProperty() ),
+			new Property(
+				null,
+				new Fingerprint(
+					$this->labelsContentsValidator->getValidatedLabels(),
+					$this->descriptionsContentsValidator->getValidatedDescriptions(),
+					$this->aliasesValidator->getValidatedAliases()
+				),
+				$propertySerialization[ 'data_type' ],
+				$this->statementsValidator->getValidatedStatements()
+			),
 			$this->editMetadataRequestValidatingDeserializer->validateAndDeserialize( $request )
 		);
 	}
@@ -202,6 +215,43 @@ class CreatePropertyValidator {
 					$path = $context[AliasesInLanguageValidator::CONTEXT_PATH];
 					$limit = $context[AliasesInLanguageValidator::CONTEXT_LIMIT];
 					throw UseCaseError::newValueTooLong( $path, $limit );
+				default:
+					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
+			}
+		}
+	}
+
+	private function validateStatements( array $property, string $basePath ): void {
+		$statements = $property[ 'statements' ] ?? [];
+		$validationError = $this->statementsValidator->validate( $statements, "$basePath/statements" );
+
+		if ( $validationError ) {
+			$context = $validationError->getContext();
+			switch ( $validationError->getCode() ) {
+				case StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE:
+				case StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL:
+				case StatementsValidator::CODE_STATEMENT_NOT_ARRAY:
+					throw UseCaseError::newInvalidValue( $context[ StatementsValidator::CONTEXT_PATH ] );
+				case StatementValidator::CODE_INVALID_FIELD:
+				case StatementValidator::CODE_INVALID_FIELD_TYPE:
+					throw UseCaseError::newInvalidValue( $context[ StatementValidator::CONTEXT_PATH ] );
+				case StatementValidator::CODE_PROPERTY_NOT_FOUND:
+					throw UseCaseError::newReferencedResourceNotFound( $context[ StatementValidator::CONTEXT_PATH ] );
+				case StatementValidator::CODE_MISSING_FIELD:
+					throw UseCaseError::newMissingField(
+						$context[ StatementValidator::CONTEXT_PATH ],
+						$context[ StatementValidator::CONTEXT_FIELD ]
+					);
+				case StatementsValidator::CODE_PROPERTY_ID_MISMATCH:
+					throw new UseCaseError(
+						UseCaseError::STATEMENT_GROUP_PROPERTY_ID_MISMATCH,
+						"Statement's Property ID does not match the Statement group key",
+						[
+							UseCaseError::CONTEXT_PATH => $context[ StatementsValidator::CONTEXT_PATH ],
+							UseCaseError::CONTEXT_STATEMENT_GROUP_PROPERTY_ID => $context[ StatementsValidator::CONTEXT_PROPERTY_ID_KEY ],
+							UseCaseError::CONTEXT_STATEMENT_PROPERTY_ID => $context[ StatementsValidator::CONTEXT_PROPERTY_ID_VALUE ],
+						]
+					);
 				default:
 					throw new LogicException( "Unexpected validation error code: {$validationError->getCode()}" );
 			}
