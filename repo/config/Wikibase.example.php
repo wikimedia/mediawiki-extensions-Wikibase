@@ -25,7 +25,3 @@ call_user_func( function() {
 	define( 'WB_NS_PROPERTY', $baseNs + 2 );
 	define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
 } );
-
-// Tell Wikibase to register these namespaces (later)
-global $wgWBRepoSettings;
-$wgWBRepoSettings['defaultEntityNamespaces'] = true;

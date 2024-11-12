@@ -340,7 +340,7 @@ return [
 
 	'entityTypesWithoutRdfOutput' => [],
 
-	'defaultEntityNamespaces' => false,
+	'defaultEntityNamespaces' => true,
 
 	'entitySources' => function ( SettingsArray $settings ) {
 		if ( $settings->getSetting( 'defaultEntityNamespaces' ) ) {
