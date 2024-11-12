@@ -26,7 +26,7 @@ class GetPropertyLabelRouteHandler extends SimpleHandler {
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const LANGUAGE_CODE_PATH_PARAM = 'language_code';
-	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}/labels/{language_code}';
+	public const ROUTE = '/wikibase/v1/entities/properties/{property_id}/labels/{language_code}';
 
 	private GetPropertyLabel $useCase;
 	private MiddlewareHandler $middlewareHandler;

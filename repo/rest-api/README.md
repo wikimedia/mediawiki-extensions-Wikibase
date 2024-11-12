@@ -4,7 +4,9 @@
 
 ### Enable the REST API
 
-To enable the production-ready routes, add the following line to your `LocalSettings.php` file:
+**As of REL1_44, the Wikibase REST API is enabled when the Wikibase repo extension is loaded**
+
+To enable the production-ready routes, in versions prior to REL1_44, add the following line to your `LocalSettings.php` file:
 
 ```php
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';

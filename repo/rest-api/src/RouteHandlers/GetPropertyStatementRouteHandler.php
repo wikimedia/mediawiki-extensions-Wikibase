@@ -27,7 +27,7 @@ class GetPropertyStatementRouteHandler extends SimpleHandler {
 
 	public const PROPERTY_ID_PATH_PARAM = 'property_id';
 	public const STATEMENT_ID_PATH_PARAM = 'statement_id';
-	public const ROUTE = '/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}';
+	public const ROUTE = '/wikibase/v1/entities/properties/{property_id}/statements/{statement_id}';
 
 	private GetPropertyStatement $getStatement;
 	private StatementSerializer $statementSerializer;

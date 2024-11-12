@@ -159,7 +159,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 			expect( response ).to.have.status( 308 );
 
 			const redirectLocation = new URL( response.headers.location );
-			assert.isTrue( redirectLocation.pathname.endsWith( `rest.php/wikibase/v0/entities/items/${testItemId}` ) );
+			assert.isTrue( redirectLocation.pathname.endsWith( `rest.php/wikibase/v1/entities/items/${testItemId}` ) );
 			assert.empty( redirectLocation.search );
 		} );
 

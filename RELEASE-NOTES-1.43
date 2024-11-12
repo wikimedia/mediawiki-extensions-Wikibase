@@ -21,7 +21,7 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Changed configuration ====
 
-* (T12345) ...
+* (T378175) The REST API is now enabled when the Wikibase repo extension is loaded
 
 ==== Removed configuration ====
 
@@ -55,7 +55,7 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 === REST API changes in 1.43 ===
 
-* (T12345) ...
+* (T378455) Wikibase REST API v1.0 has been released
 
 === Languages updated in 1.43 ===
 
