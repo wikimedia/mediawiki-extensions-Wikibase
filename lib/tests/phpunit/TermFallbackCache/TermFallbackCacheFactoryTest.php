@@ -3,9 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\TermFallbackCache;
 
-use BagOStuff;
-use CachedBagOStuff;
-use IBufferingStatsdDataFactory;
 use Iterator;
 use ObjectCacheFactory;
 use PHPUnit\Framework\TestCase;
@@ -14,6 +11,9 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\CachedBagOStuff;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * @covers \Wikibase\Lib\TermFallbackCacheFactory

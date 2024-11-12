@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
-use IDBAccessObject;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
@@ -21,6 +20,7 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable

@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * SiteLinkLookup implementation that caches the obtained data (except for data obtained

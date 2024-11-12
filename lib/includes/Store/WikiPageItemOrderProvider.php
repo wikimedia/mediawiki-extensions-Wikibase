@@ -3,9 +3,9 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Content\TextContent;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Title\Title;
-use TextContent;
 
 /**
  * Base class for ItemOrderProviders, that parse the item order from a

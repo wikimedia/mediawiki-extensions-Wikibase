@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Changes;
 
-use IDBAccessObject;
 use LogicException;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
+use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
  * Assumes a central system with only two repositories, a repo wiki and a client.

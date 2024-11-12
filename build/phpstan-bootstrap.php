@@ -4,6 +4,8 @@
  * This is a modified copy of an old version of [core]/tests/phpunit/bootstrap.php which includes only the code required for autoloading.
  */
 
+use MediaWiki\Registration\ExtensionProcessor;
+
 require_once __DIR__ . '/../../../tests/phpunit/bootstrap.common.php';
 $IP = $GLOBALS['IP'];
 

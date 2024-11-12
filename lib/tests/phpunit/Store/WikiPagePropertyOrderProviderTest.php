@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
-use WikitextContent;
 
 /**
  * @covers \Wikibase\Lib\Store\WikiPagePropertyOrderProvider

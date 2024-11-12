@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;

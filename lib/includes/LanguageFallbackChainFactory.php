@@ -2,16 +2,16 @@
 
 namespace Wikibase\Lib;
 
-use ExtensionRegistry;
 use InvalidArgumentException;
-use Language;
-use LanguageConverter;
 use MediaWiki\Babel\Babel;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Language\Language;
+use MediaWiki\Language\LanguageConverter;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\User\User;
 
 /**

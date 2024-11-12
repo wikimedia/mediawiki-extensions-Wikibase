@@ -6,7 +6,6 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use JobQueueGroup;
 use LogicException;
 use Psr\Log\LoggerInterface;
-use WANObjectCache;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -14,6 +13,7 @@ use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\StringNormalizer;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Factory for creating writer objects relating to the 2019 SQL based terms storage.

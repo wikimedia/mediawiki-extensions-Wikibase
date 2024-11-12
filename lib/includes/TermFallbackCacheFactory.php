@@ -3,12 +3,12 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib;
 
-use CachedBagOStuff;
-use IBufferingStatsdDataFactory;
 use ObjectCacheFactory;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
+use Wikimedia\ObjectCache\CachedBagOStuff;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * Factory for accessing the shared cache

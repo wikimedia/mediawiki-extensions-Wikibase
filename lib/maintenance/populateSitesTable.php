@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 use Wikibase\Lib\Sites\SitesBuilder;

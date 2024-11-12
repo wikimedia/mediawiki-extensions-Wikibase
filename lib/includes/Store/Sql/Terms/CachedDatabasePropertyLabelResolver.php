@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use BagOStuff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * Resolves and caches property labels (which are unique per language) into entity IDs

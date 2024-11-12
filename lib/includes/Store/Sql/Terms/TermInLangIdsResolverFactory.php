@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
-use WANObjectCache;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @license GPL-2.0-or-later
