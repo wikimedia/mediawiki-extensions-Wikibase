@@ -22,12 +22,14 @@ class CreatePropertyValidatorTest extends TestCase {
 
 	private PropertyDeserializer $propertyDeserializer;
 	private EditMetadataRequestValidatingDeserializer $editMetadataValidator;
+	private array $dataTypesArray;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->propertyDeserializer = $this->createStub( PropertyDeserializer::class );
 		$this->editMetadataValidator = $this->createStub( EditMetadataRequestValidatingDeserializer::class );
+		$this->dataTypesArray = [ 'wikibase-item', 'wikibase-property', 'string' ];
 	}
 
 	public function testGivenValidRequest_returnsDeserializedRequest(): void {
@@ -83,6 +85,10 @@ class CreatePropertyValidatorTest extends TestCase {
 			[ 'data_type' => 'string', 'statements' => 'not an array' ],
 			UseCaseError::newInvalidValue( '/property/statements' ),
 		];
+		yield 'invalid data_type field' => [
+			[ 'data_type' => 'invalid_type' ],
+			UseCaseError::newInvalidValue( '/property/data_type' ),
+		];
 	}
 
 	public function testGivenInvalidEditMetadata_throws(): void {
@@ -104,6 +110,10 @@ class CreatePropertyValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): CreatePropertyValidator {
-		return new CreatePropertyValidator( $this->propertyDeserializer, $this->editMetadataValidator );
+		return new CreatePropertyValidator(
+			$this->propertyDeserializer,
+			$this->editMetadataValidator,
+			$this->dataTypesArray
+		);
 	}
 }
