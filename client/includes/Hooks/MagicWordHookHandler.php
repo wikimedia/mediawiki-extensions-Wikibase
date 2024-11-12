@@ -2,15 +2,15 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Language;
 use MediaWiki\Hook\MagicWordwgVariableIDsHook;
 use MediaWiki\Hook\ParserGetVariableValueSwitchHook;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\PPFrame;
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderJqueryMsgModuleMagicWordsHook;
-use PPFrame;
 use Wikibase\Lib\SettingsArray;
 
 /**

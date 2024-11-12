@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
-use Language;
 use LuaSandboxFunction;
 use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LuaEngine;
 use MediaWiki\Extension\Scribunto\Engines\LuaStandalone\LuaStandaloneInterpreterFunction;
-use ParserOptions;
+use MediaWiki\Language\Language;
+use MediaWiki\Parser\ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;

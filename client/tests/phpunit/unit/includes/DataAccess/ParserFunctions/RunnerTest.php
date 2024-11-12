@@ -4,10 +4,10 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
+use MediaWiki\Parser\ParserOptions;
+use MediaWiki\Parser\PPFrame;
+use MediaWiki\Parser\PPNode;
 use MediaWiki\Title\Title;
-use ParserOptions;
-use PPFrame;
-use PPNode;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;

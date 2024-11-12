@@ -3,8 +3,8 @@
 declare( strict_types=1 );
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Language;
 use LogicException;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\DataModel\Entity\EntityId;

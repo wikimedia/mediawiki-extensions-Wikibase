@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Language;
+use MediaWiki\Language\Language;
 use RuntimeException;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 

@@ -4,20 +4,20 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use Content;
-use ExtensionRegistry;
 use InvalidArgumentException;
 use JobQueueGroup;
+use MediaWiki\Content\Content;
 use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserCacheSaveCompleteHook;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Parser\ParserCache;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use ParserCache;
-use ParserOptions;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;

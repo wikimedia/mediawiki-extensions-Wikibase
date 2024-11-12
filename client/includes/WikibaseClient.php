@@ -3,7 +3,7 @@
 namespace Wikibase\Client;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\Site;
 use MediaWiki\User\ExternalUserNames;

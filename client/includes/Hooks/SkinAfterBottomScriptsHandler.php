@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Hooks;
 
-use ExtensionRegistry;
 use File;
 use MediaWiki\Html\Html;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;

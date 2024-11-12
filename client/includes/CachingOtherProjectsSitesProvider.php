@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client;
 
-use BagOStuff;
+use Wikimedia\ObjectCache\BagOStuff;
 
 /**
  * Get a list of sites that should be displayed in the "Other projects" sidebar

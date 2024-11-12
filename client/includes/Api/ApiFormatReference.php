@@ -2,15 +2,15 @@
 
 namespace Wikibase\Client\Api;
 
-use ApiBase;
-use ApiMain;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use FormatJson;
 use LogicException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Json\FormatJson;
+use MediaWiki\Parser\ParserFactory;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Title\Title;
-use ParserFactory;
-use ParserOptions;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Reference;

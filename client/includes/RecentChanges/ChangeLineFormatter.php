@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\RecentChanges;
 
-use Language;
 use MediaWiki\CommentFormatter\CommentFormatter;
+use MediaWiki\Language\Language;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;

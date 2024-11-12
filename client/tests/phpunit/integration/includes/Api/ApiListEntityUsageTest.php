@@ -4,9 +4,9 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\Api;
 
-use ApiContinuationManager;
-use ApiMain;
-use ApiPageSet;
+use MediaWiki\Api\ApiContinuationManager;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiPageSet;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;

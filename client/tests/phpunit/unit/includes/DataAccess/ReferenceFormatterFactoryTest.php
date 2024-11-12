@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\DataAccess;
 
-use Language;
+use MediaWiki\Language\Language;
 use MessageLocalizer;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;

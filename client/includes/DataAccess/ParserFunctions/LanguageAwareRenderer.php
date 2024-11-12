@@ -6,7 +6,7 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Exception;
 use InvalidArgumentException;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Message\Message;
 use MediaWiki\Parser\ParserOutput;

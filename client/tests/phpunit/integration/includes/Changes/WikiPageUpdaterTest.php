@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Integration\Changes;
 
 use HTMLCacheUpdateJob;
-use IBufferingStatsdDataFactory;
 use Job;
 use JobQueueGroup;
 use MediaWiki\Title\Title;
@@ -14,6 +13,7 @@ use RefreshLinksJob;
 use UDPTransport;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 use Wikimedia\Stats\OutputFormats;
 use Wikimedia\Stats\StatsCache;
 use Wikimedia\Stats\StatsFactory;

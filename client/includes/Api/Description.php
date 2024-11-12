@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Api;
 
-use ApiQuery;
-use ApiQueryBase;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryBase;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Lib\SettingsArray;
