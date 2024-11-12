@@ -34,10 +34,9 @@ use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\AbuseFilterException;
+use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
@@ -233,31 +232,30 @@ class EntityUpdaterTest extends TestCase {
 				EditEntityStatus::newFatal( new ApiMessage(
 					wfMessage( 'spam-blacklisted-link', Message::listParam( [ $blockedText ] ) ),
 					'spamblacklist',
-					[
-						'spamblacklist' => [ 'matches' => [ $blockedText ] ],
-					]
+					[ 'spamblacklist' => [ 'matches' => [ $blockedText ] ] ]
 				) ),
-				new SpamBlacklistException( $blockedText ),
+				new EditPrevented( 'spamblacklist', [ 'spamblacklist' => [ 'matches' => [ $blockedText ] ] ] ),
 			];
 
 			$filterId = '777';
 			$filterDescription = 'bad word rejecting filter';
+			$abuseFilterData = [
+				'abusefilter' => [
+					'id' => $filterId,
+					'description' => $filterDescription,
+					'actions' => 'disallow',
+				],
+			];
 			yield "abuse filter ($entityType)" => [
 				$entity,
 				EditEntityStatus::newFatal(
 					ApiMessage::create(
 						[ 'abusefilter-disallowed', $filterDescription, $filterId ],
 						'abusefilter-disallowed',
-						[
-							'abusefilter' => [
-								'id' => $filterId,
-								'description' => $filterDescription,
-								'actions' => 'disallow',
-							],
-						]
+						$abuseFilterData
 					)
 				),
-				new AbuseFilterException( $filterId, $filterDescription ),
+				new EditPrevented( 'abusefilter-disallowed', $abuseFilterData ),
 			];
 
 			yield "resource too large ($entityType)" => [

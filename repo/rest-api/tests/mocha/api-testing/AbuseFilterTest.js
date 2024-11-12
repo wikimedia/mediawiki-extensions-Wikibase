@@ -90,8 +90,12 @@ describe( 'Abuse Filter', () => {
 			const response = await newRequestBuilder().makeRequest();
 
 			assertValidError( response, 403, 'permission-denied', {
-				denial_reason: 'abuse-filter',
-				denial_context: { filter_id: filterId, filter_description: filterDescription }
+				denial_reason: 'abusefilter-disallowed',
+				denial_context: { abusefilter: {
+					id: filterId,
+					description: filterDescription,
+					actions: [ 'disallow' ]
+				} }
 			} );
 		} );
 	} );
