@@ -13,7 +13,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/ItemAliasesInLanguage" },
+			"200": { "$ref": "./responses.json#/ItemAliasesInLanguage" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"308": { "$ref": "../../global/responses.json#/MovedPermanently" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
@@ -35,15 +35,29 @@
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" },
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/Aliases" },
+		"requestBody": {
+			"description": "Payload containing a list of Item aliases in the specified language and edit metadata",
+			"required": true,
+			"content": {
+				"application/json": {
+					"schema": { "$ref": "./requests.json#/AddAliasesInLanguage" },
+					"example": {
+						"aliases": [ "JD" ],
+						"tags": [],
+						"bot": false,
+						"comment": "Add English alias"
+					}
+				}
+			}
+		},
 		"responses": {
 			"200": {
-				"$ref": "../../global/responses.json#/ItemAliasesInLanguage",
-				"description": "The updated list of Aliases in a specific language"
+				"description": "The updated list of aliases in a specific language",
+				"$ref": "./responses.json#/ItemAliasesInLanguage"
 			},
 			"201": {
-				"$ref": "../../global/responses.json#/ItemAliasesInLanguage",
-				"description": "The newly created List of Aliases in a specific language"
+				"description": "The newly created list of aliases in a specific language",
+				"$ref": "./responses.json#/ItemAliasesInLanguage"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidAddAliasesInput" },

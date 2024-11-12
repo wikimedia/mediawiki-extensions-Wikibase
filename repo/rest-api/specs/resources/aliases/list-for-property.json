@@ -12,7 +12,7 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyAliases" },
+			"200": { "$ref": "./responses.json#/PropertyAliases" },
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "../../global/responses.json#/InvalidEntityIdInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
@@ -30,9 +30,22 @@
 			{ "$ref": "../../global/parameters.json#/IfNoneMatch" },
 			{ "$ref": "../../global/parameters.json#/IfUnmodifiedSince" }
 		],
-		"requestBody": { "$ref": "../../global/requests.json#/AliasesPatch" },
+		"requestBody": {
+			"description": "Payload containing a JSON Patch document to be applied to a Property's aliases and edit metadata",
+			"required": true,
+			"content": {
+				"application/json-patch+json": {
+					"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+					"example": { "$ref": "./examples.json#/PatchPropertyAliases" }
+				},
+				"application/json": {
+					"schema": { "$ref": "../../global/request-parts.json#/PatchRequest" },
+					"example": { "$ref": "./examples.json#/PatchPropertyAliases" }
+				}
+			}
+		},
 		"responses": {
-			"200": { "$ref": "../../global/responses.json#/PropertyAliases" },
+			"200": { "$ref": "./responses.json#/PropertyAliases" },
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
