@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\Item;

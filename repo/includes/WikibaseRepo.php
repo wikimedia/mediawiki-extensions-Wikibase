@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;

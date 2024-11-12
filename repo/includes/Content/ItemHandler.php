@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Content;
 
 use Article;
-use Content;
+use MediaWiki\Content\Content;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Revision\SlotRenderingProvider;
 use MediaWiki\Title\Title;
-use ParserOptions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

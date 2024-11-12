@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use ExtensionRegistry;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionRegistry;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;

@@ -15,6 +15,8 @@
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\Context\RequestContext;
+
 require_once __DIR__ . '/Wikibase.example.php';
 
 // Wikibase Cirrus search should not be used in browser tests

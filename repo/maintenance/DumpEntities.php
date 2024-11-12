@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Maintenance;
 
-use ExtensionRegistry;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Settings\SettingsBuilder;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;

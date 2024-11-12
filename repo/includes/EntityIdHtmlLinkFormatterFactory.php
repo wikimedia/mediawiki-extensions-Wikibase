@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;

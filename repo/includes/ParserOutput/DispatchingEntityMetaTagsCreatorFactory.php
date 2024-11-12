@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use Language;
+use MediaWiki\Language\Language;
 use Wikibase\View\DefaultMetaTagsCreator;
 use Wikibase\View\EntityMetaTagsCreator;
 use Wikimedia\Assert\Assert;

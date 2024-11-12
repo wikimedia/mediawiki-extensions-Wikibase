@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\RawMessageParameter;

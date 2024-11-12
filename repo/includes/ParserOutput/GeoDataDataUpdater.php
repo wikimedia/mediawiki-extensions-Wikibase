@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
-use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Registration\ExtensionRegistry;
 use RuntimeException;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

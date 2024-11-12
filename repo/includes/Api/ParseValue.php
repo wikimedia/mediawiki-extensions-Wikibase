@@ -4,16 +4,14 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
-use ApiResult;
 use DataValues\DataValue;
 use Exception;
-use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Status\Status;
-use NullStatsdDataFactory;
 use OutOfBoundsException;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
@@ -30,6 +28,8 @@ use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * API module for using value parsers.

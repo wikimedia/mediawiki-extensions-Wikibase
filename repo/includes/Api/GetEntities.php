@@ -4,9 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
-use IBufferingStatsdDataFactory;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
 use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -22,6 +21,7 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
 
 /**
  * API module to get the data for one or more Wikibase entities.

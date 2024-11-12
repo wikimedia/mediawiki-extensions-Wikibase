@@ -4,9 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiPageSet;
-use ApiQuery;
-use ApiQueryGeneratorBase;
+use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQueryGeneratorBase;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -143,7 +144,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @param array $params
 	 *
 	 * @return TermSearchResult[]
-	 * @throws \ApiUsageException
+	 * @throws ApiUsageException
 	 */
 	private function getSearchResults( array $params ): array {
 		try {

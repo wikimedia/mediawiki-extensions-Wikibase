@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Parsers;
 
-use Language;
+use MediaWiki\Language\Language;
 use ValueParsers\BasicNumberUnlocalizer;
 
 /**

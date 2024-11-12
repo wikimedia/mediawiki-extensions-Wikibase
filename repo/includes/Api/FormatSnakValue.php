@@ -4,18 +4,16 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
-use ApiMain;
-use ApiUsageException;
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
-use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
-use NullStatsdDataFactory;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiUsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
@@ -34,6 +32,8 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\NullStatsdDataFactory;
 
 /**
  * API module for using value formatters.

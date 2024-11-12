@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiResult;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserIdentity;

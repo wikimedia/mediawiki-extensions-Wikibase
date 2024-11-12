@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use ValueParsers\CalendarModelParser;

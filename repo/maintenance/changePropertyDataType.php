@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use Exception;
 use InvalidArgumentException;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;

@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
 
-use IApiMessage;
 use LogicException;
+use MediaWiki\Api\IApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\User\User;
-use MessageSpecifier;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -26,6 +25,7 @@ use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SpamBlacklistException;
 use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
+use Wikimedia\Message\MessageSpecifier;
 
 /**
  * @license GPL-2.0-or-later

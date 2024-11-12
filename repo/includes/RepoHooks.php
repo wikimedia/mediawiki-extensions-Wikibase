@@ -2,16 +2,14 @@
 
 namespace Wikibase\Repo;
 
-use ApiBase;
-use ApiEditPage;
-use ApiMain;
-use ApiModuleManager;
-use ApiQuery;
-use ApiQuerySiteinfo;
-use Content;
-use ExtensionRegistry;
-use IDBAccessObject;
 use LogEntry;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiEditPage;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiModuleManager;
+use MediaWiki\Api\ApiQuery;
+use MediaWiki\Api\ApiQuerySiteinfo;
+use MediaWiki\Content\Content;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
@@ -19,6 +17,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Pager\HistoryPager;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
@@ -57,6 +56,7 @@ use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
 use WikiImporter;
+use Wikimedia\Rdbms\IDBAccessObject;
 use WikiPage;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use Wikimedia\Assert\Assert;
