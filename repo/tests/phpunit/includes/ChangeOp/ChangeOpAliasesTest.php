@@ -45,7 +45,6 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $action
 	 */
 	public function testInvalidConstruct( $language, array $aliases, $action ) {
-		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$this->expectException( InvalidArgumentException::class );
@@ -210,7 +209,6 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		array $changeOpAliasesParams,
 		ChangeOpAliasesResult $expectedChangeOpAliasesResult
 	) {
-		// "INVALID" is invalid
 		$changeOpAliasesParams[] = $this->getTermValidatorFactory();
 
 		$changeOpAliases = new ChangeOpAliases( ...$changeOpAliasesParams );

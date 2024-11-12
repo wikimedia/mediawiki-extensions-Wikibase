@@ -29,7 +29,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testInvalidConstruct() {
-		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$this->expectException( InvalidArgumentException::class );
@@ -52,7 +51,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$entity = $this->provideNewEntity();
 		$entity->setDescription( 'en', 'INVALID' );
 
-		// "INVALID" is invalid
 		$changeOpDescriptionParams[] = $this->getTermValidatorFactory();
 
 		$changeOpDescription = new ChangeOpDescription( ...$changeOpDescriptionParams );
@@ -107,7 +105,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		array $changeOpLabelParams,
 		ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
 	) {
-		// "INVALID" is invalid
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 
 		$changeOpLabel = new ChangeOpDescription( ...$changeOpLabelParams );
@@ -124,7 +121,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		array $changeOpLabelParams,
 		ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
 	) {
-		// "INVALID" is invalid
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 
 		$changeOpLabel = new ChangeOpDescription( ...$changeOpLabelParams );
@@ -153,7 +149,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 
 		$oldDescriptions = $entity->getDescriptions()->toTextArray();
 
-		// "INVALID" is invalid
 		$changeOpParams[] = $this->getTermValidatorFactory();
 
 		$changeOp = new ChangeOpDescription( ...$changeOpParams );
@@ -205,7 +200,6 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$summary = new Summary();
 
-		// "INVALID" is invalid
 		$changeOpParams[] = $this->getTermValidatorFactory();
 
 		$changeOp = new ChangeOpDescription( ...$changeOpParams );
