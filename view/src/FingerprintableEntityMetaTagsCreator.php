@@ -37,7 +37,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 		];
 
 		$description = $this->getDescriptionText( $entity );
-		if ( isset( $description ) ) {
+		if ( $description !== null ) {
 			$metaTags['description'] = $description;
 		}
 

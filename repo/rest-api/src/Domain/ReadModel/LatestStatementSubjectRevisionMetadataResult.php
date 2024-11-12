@@ -70,6 +70,6 @@ final class LatestStatementSubjectRevisionMetadataResult {
 	}
 
 	public function isRedirect(): bool {
-		return isset( $this->redirectTarget );
+		return $this->redirectTarget !== null;
 	}
 }
