@@ -298,7 +298,7 @@
 	"wikibase-api-not-recognized": "কিছু একটা চেনা যায়নি।",
 	"wikibase-conflict-patched": "আপনার সম্পাদনা সর্বশেষ সংস্করণে প্রবেশ করানো হয়েছে।",
 	"wikibase-restoreold": "পুনরুদ্ধার",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] কর্তৃক [[Special:Permalink/$3|$3]] নং সংশোধনটি পুনরুদ্ধার করা হয়েছে",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|আলাপ]]) কর্তৃক [[Special:Permalink/$3|$3]] নং সংশোধনটি পুনরুদ্ধার করা হয়েছে",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|আলাপ]])-এর করা [[Special:Diff/$3|$3]] নম্বর সংশোধনটি বাতিল করা হয়েছে",
 	"wikibase-no-direct-editing": "$1 নামস্থানে সরাসরি সম্পাদনা নিষ্ক্রিয় করা হয়েছে",
 	"wikibase-noentity": "এই ভুক্তি বিদ্যমান নয়। আপনি এ সম্পর্কিত  [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} প্রাসঙ্গিক লগ খুঁজে বের] করতে অনুসন্ধান করতে পারেন।",

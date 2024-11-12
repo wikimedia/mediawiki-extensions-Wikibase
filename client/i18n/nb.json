@@ -108,6 +108,8 @@
 	"wikibase-sitelinks-link-columnheading": "Lenket side",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tilkobling|Tilkoblinger}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Gi meg et varsel når noen kobler en side {{GENDER:|jeg}} opprettet til et {{WBREPONAME}}-element.",
+	"exceeded-entity-limit-category": "Sider som henter for mange {{WBREPONAME}}-entiteter",
+	"exceeded-entity-limit-category-desc": "Denne kategorien lister opp sider som henter for mange {{WBREPONAME}}-entiteter.",
 	"notification-header-page-connection": "Siden <strong>$3</strong> ble {{GENDER:$2|koblet}} til {{PLURAL:$4|-1=et {{WBREPONAME}}-element|{{WBREPONAME}}-elementet $4}}, der relevant data om emnet kan samles.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|én annen side|$4 andre sider|100=99+ andre sider}} ble {{GENDER:$2|koblet}} til {{WBREPONAME}}-elementer, der relevante data kan hentes.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vis}} element",

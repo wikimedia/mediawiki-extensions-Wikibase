@@ -29,7 +29,7 @@
 	"wikibase-linkitem-failed-modify": "Злучованє бокох ше нє удало: нє удало ше злучованє одвитуюцих елементох на {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Вяза зоз боком",
 	"wikibase-linkitem-linkpage": "Повяж зоз боком",
-	"wikibase-linkitem-selectlink": "Виберце сайт и бок зоз хторим жадаце повязац тот ту бок",
+	"wikibase-linkitem-selectlink": "Виберце сайт и бок зоз хторим жадаце повязац тот ту бок.",
 	"wikibase-linkitem-input-site": "Язик:",
 	"wikibase-linkitem-input-page": "Бок:",
 	"wikibase-linkitem-confirmitem-text": "Бок хтори сце вибрали уж придружена [$1 елементу на нашей  централней бази податкох]. Модлїме вас потвердзце же {{PLURAL:$2|бок|боки}} нїжей {{PLURAL:$2|приказани}} {{PLURAL:$2|гевтот хтори|гевти хтори}} жадаце повязац зоз тим боком.",
@@ -99,5 +99,11 @@
 	"wikibase-sitelinks-link-columnheading": "Линковани бок",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Повязованє|Повязованя}} з Википодатками",
 	"echo-pref-tooltip-wikibase-action": "Обвисцує вас кед дахто повяже бок хтори сце направели на елемент Википодаткох.",
-	"exceeded-entity-limit-category": "Приступене ґу боком за барз велїма {{WBREPONAME}} ентитетами"
+	"exceeded-entity-limit-category": "Приступене ґу боком за барз велїма {{WBREPONAME}} ентитетами",
+	"exceeded-entity-limit-category-desc": "Тота катеґория наводзи боки з превельо {{WBREPONAME}} ентитетами ґу хторим ше приступело.",
+	"notification-header-page-connection": "{{GENDER:$2|Хаснователь|Хаснователька}} $2 {{GENDER:$2|повязял|повязала}} бок <strong>$3</strong> на елемент {{PLURAL:$4|$4}} на Википодатох.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|єден други бок {{GENDER:$2|повязани}}|$4 други боки {{GENDER:$2|повязани}}|$4 других бокох {{GENDER:$2|повязаних}}}} зоз елементом на {{WBREPONAME}}, дзе мож позберац податки релевантни за теме.",
+	"notification-link-text-view-item": "{{GENDER:$1|Опатри}} елемент",
+	"notification-subject-page-connection": "{{GENDER:$2|Хаснователь|Хаснователька|Хаснователь}} $2 бок <strong>$3</strong> хтори Ви {{GENDER:$3|направели}} на проєкту {{SITENAME}} {{GENDER:$2|повязал|повязала|повязал}} на елемент на Википодаткох",
+	"unresolved-property-category": "Боки зоз  нєрозяшнєтима свойствами"
 }

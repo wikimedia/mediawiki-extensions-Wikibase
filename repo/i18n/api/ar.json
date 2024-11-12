@@ -2,7 +2,6 @@
 	"@metadata": {
 		"authors": [
 			"Abanima",
-			"Amire80",
 			"BAB ZAA",
 			"Hubaishan",
 			"Maroen1990",
@@ -163,7 +162,7 @@
 	"apihelp-wbsearchentities-paramvalue-profile-default": "ملف التعريف الافتراضي ، مناسب لمعظم الأغراض.",
 	"apihelp-wbsearchentities-example-1": "ابحث عن \"abc\" باللغة الإنجليزية، مع القيم الافتراضية للنوع والحد",
 	"apihelp-wbsearchentities-example-2": "ابحث عن \"abc\" باللغة الإنجليزية مع حد 50",
-	"apihelp-wbsearchentities-example-3": "ابحث عن \"alphabet\" باللغة الإنجليزية لخاصية نوع",
+	"apihelp-wbsearchentities-example-3": "ابحث فقط عن خصائص \"alphabet\" باللغة الإنجليزية",
 	"apihelp-wbsearchentities-example-4": "ابحث عن \"abc\" باللغة الإنجليزية مع حد 2 وإزاحة 2",
 	"apihelp-wbsearchentities-example-5": "ابحث عن \"alphabet\" باللغة الإنجليزية مع حذف معامل المسار",
 	"apihelp-wbsearchentities-example-6": "ابحث عن \"Q1234\" بالإنجليزية; لمطابقة معرّف الكيان.",
@@ -194,7 +193,7 @@
 	"apihelp-query+wbsearch-paramvalue-profile-default": "ملف التعريف الافتراضي ، مناسب لمعظم الأغراض.",
 	"apihelp-query+wbsearch-example-1": "ابحث عن \"abc\" باللغة الإنجليزية، مع القيم الافتراضية للنوع والحد",
 	"apihelp-query+wbsearch-example-2": "ابحث عن \"abc\" باللغة الإنجليزية مع حد 50",
-	"apihelp-query+wbsearch-example-3": "ابحث عن \"alphabet\" باللغة الإنجليزية لخاصية نوع",
+	"apihelp-query+wbsearch-example-3": "ابحث فقط عن خصائص \"alphabet\" باللغة الإنجليزية",
 	"apihelp-query+wbsearch-example-4": "ابحث عن \"الأبجدية\" بالإنجليزية كمولد",
 	"apihelp-query+wbsubscribers-summary": "الحصول على اشتراكات للكيانات المعطاة.",
 	"apihelp-query+wbsubscribers-param-entities": "الكيانات للحصول على اشتراكات لها",

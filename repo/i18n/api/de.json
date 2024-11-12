@@ -125,6 +125,7 @@
 	"apihelp-wbsearchentities-param-props": "Gibt diese Eigenschaften für jedes Objekt zurück.",
 	"apihelp-wbsearchentities-param-limit": "Maximale Anzahl der Ergebnisse",
 	"apihelp-wbsearchentities-param-continue": "Versatz, wo eine Suche weitergeführt werden soll.",
+	"apihelp-wbsearchentities-param-profile": "Zu verwendendes Suchprofil.",
 	"apihelp-wbsearchentities-example-1": "Sucht nach „abc“ auf Englisch, mit Standards für type und limit.",
 	"apihelp-wbsearchentities-example-2": "Sucht nach „abc“ in englischer Sprache mit maximal 50",
 	"apihelp-wbsearchentities-example-3": "Sucht nur Eigenschaften für „alphabet“ in englischer Sprache",

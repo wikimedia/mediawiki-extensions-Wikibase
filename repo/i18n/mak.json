@@ -6,6 +6,7 @@
 	},
 	"wikibase-edit": "pakabajiki",
 	"wikibase-add": "tamba",
+	"wikibase-label-empty": "Taena ''label''",
 	"wikibase-description-empty": "Tena passinngarrangna",
 	"wikibase-sitelinks-special": "Situsuk maraenga"
 }

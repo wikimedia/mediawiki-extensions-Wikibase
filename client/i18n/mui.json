@@ -5,15 +5,22 @@
 			"Masjawad99"
 		]
 	},
-	"tooltip-t-wikibase": "Gentolan buat ngubungke objek di jero pangking penyetoran data.",
+	"tooltip-t-wikibase": "Géntolan ke biji data seberoyot di jerû pangkalan.",
 	"wikibase-comment-update": "Item {{WBREPONAME}} berobah",
-	"wikibase-dataitem": "Item di {{WBREPONAME}}",
-	"wikibase-editlinks": "Robah géntolan",
+	"wikibase-dataitem": "Biji {{WBREPONAME}}",
+	"wikibase-editlinks": "Dandani géntolan",
 	"wikibase-editlinkstitle": "Robah géntolan interwiki",
+	"wikibase-addlinkstitle": "Tambake géntolan anterowiki",
+	"wikibase-linkitem-addlinks": "Tambake géntolan",
+	"wikibase-linkitem-title": "Géntolke ke laman",
+	"wikibase-linkitem-linkpage": "Géntolke ke laman",
+	"wikibase-linkitem-selectlink": "Diaturi mîlî situs samo laman yang na' Dulur géntolke ke laman siko' ni.",
+	"wikibase-linkitem-input-site": "Baso:",
+	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Singitke",
-	"wikibase-rc-hide-wikidata-show": "Jingokke",
+	"wikibase-rc-hide-wikidata-show": "Jingo'ke",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Robahan {{WBREPONAME}}",
-	"wikibase-otherprojects": "Dalem gawéan laén"
+	"wikibase-otherprojects": "Di peroyék laén"
 }
