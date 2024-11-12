@@ -1,7 +1,7 @@
 # Documentation
 
  - Published at: https://doc.wikimedia.org/Wikibase/master/php/
- - Generated with Doxygen ([manual](http://www.doxygen.nl/manual))
+ - Generated with Doxygen ([manual](https://www.doxygen.nl/manual))
  - Configuration: `Doxyfile` (in the root of this repo)
 
 [docs/index.md](index.md) is the main entry point to the generated documentation site.
@@ -79,13 +79,13 @@ Doxygen allows you to incorporate multiple types of diagrams in your docs.
 The ones we currently use are listed below:
 
 **dot**
- - Command docs: http://www.doxygen.nl/manual/commands.html#cmddot
+ - Command docs: https://www.doxygen.nl/manual/commands.html#cmddot
  - Spec docs: https://graphviz.gitlab.io/_pages/pdf/dotguide.pdf
  - Visual tool: http://viz-js.com/
  - Example: @ref docs_storage_terms
 
 **msc**
- - Command docs: http://www.doxygen.nl/manual/commands.html#cmdmsc
+ - Command docs: https://www.doxygen.nl/manual/commands.html#cmdmsc
  - Spec docs: http://www.mcternan.me.uk/mscgen/
  - Visual tool: https://mscgen.js.org/
  - Example: @ref docs_topics_change-propagation
