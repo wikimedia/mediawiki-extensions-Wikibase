@@ -20,6 +20,7 @@ use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
 use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
 use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
 use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
@@ -31,10 +32,14 @@ use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
 use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
 use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
+use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
 use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
+use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
+use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty
@@ -129,6 +134,11 @@ class CreatePropertyTest extends TestCase {
 					$this->createStub( DescriptionLanguageCodeValidator::class )
 				),
 				new PropertyDescriptionsContentsValidator( $this->createStub( PropertyDescriptionValidator::class ) ),
+				new AliasesValidator(
+					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory() ),
+					new ValueValidatorLanguageCodeValidator( new MembershipValidator( [ 'ar', 'de', 'en', 'en-gb' ] ) ),
+					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
+				),
 			),
 			$this->propertyCreator,
 			$this->assertUserIsAuthorized

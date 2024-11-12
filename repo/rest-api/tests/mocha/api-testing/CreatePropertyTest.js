@@ -105,6 +105,10 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			description: {
 				property: { data_type: 'string', descriptions: { en: valueTooLong } },
 				invalidFieldPath: '/property/descriptions/en'
+			},
+			alias: {
+				property: { data_type: 'string', aliases: { en: [ valueTooLong ] } },
+				invalidFieldPath: '/property/aliases/en/0'
 			}
 		} ).forEach( ( [ field, { property, invalidFieldPath } ] ) => {
 			it( `value too long: ${field}`, async () => {
@@ -123,6 +127,10 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			'invalid description language code': {
 				property: { data_type: 'string', descriptions: { invalidLanguageCode: 'description' } },
 				invalidFieldPath: '/property/descriptions'
+			},
+			'invalid alias language code': {
+				property: { data_type: 'string', aliases: { invalidLanguageCode: [ 'label' ] } },
+				invalidFieldPath: '/property/aliases'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
 			it( `invalid-key: ${reason}`, async () => {
@@ -188,6 +196,30 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			'invalid description': {
 				property: { data_type: 'string', descriptions: { en: 'tab characters \t not allowed' } },
 				invalidFieldPath: '/property/descriptions/en'
+			},
+			'invalid aliases': {
+				property: { data_type: 'string', aliases: [ 'not a valid aliases array' ] },
+				invalidFieldPath: '/property/aliases'
+			},
+			'invalid aliases in language type': {
+				property: { data_type: 'string', aliases: { en: 'not a list of aliases in a language' } },
+				invalidFieldPath: '/property/aliases/en'
+			},
+			'empty aliases in language': {
+				property: { data_type: 'string', aliases: { en: [] } },
+				invalidFieldPath: '/property/aliases/en'
+			},
+			'invalid alias type': {
+				property: { data_type: 'string', aliases: { en: [ 123, 'second alias' ] } },
+				invalidFieldPath: '/property/aliases/en/0'
+			},
+			'invalid alias': {
+				property: { data_type: 'string', aliases: { en: [ 'valid alias', 'tabs \t not \t allowed' ] } },
+				invalidFieldPath: '/property/aliases/en/1'
+			},
+			'empty alias': {
+				property: { data_type: 'string', aliases: { en: [ 'alias', '' ] } },
+				invalidFieldPath: '/property/aliases/en/1'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
 			it( `invalid value: ${reason}`, async () => {
