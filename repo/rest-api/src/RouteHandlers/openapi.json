@@ -4656,7 +4656,7 @@
                 },
                 "tags": [],
                 "bot": false,
-                "comment": "API edit fixing the modelling as discussed in ..."
+                "comment": "Example edit using the Wikibase REST API"
               }
             }
           }
@@ -5339,7 +5339,7 @@
                 },
                 "tags": [],
                 "bot": false,
-                "comment": "API edit fixing the modelling as discussed in ..."
+                "comment": "Example edit using the Wikibase REST API"
               }
             }
           }
@@ -5824,7 +5824,7 @@
             "example": {
               "tags": [],
               "bot": false,
-              "comment": "API edit fixing the modelling as discussed in ..."
+              "comment": "Example edit using the Wikibase REST API"
             }
           }
         }
