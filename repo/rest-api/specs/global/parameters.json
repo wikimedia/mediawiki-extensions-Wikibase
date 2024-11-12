@@ -24,38 +24,35 @@
 	"StatementId": {
 		"in": "path",
 		"name": "statement_id",
-		"description": "The ID of the required Statement",
+		"description": "The ID of a Statement",
 		"required": true,
 		"schema": {
 			"type": "string",
 			"pattern": "^(Q|q|P|p)[1-9]\\d{0,9}\\$.+$"
 		},
-		"examples": {
-			"Statement on an Item": { "$ref": "./examples.json#/ItemStatementIdExample" },
-			"Statement on a Property": { "$ref": "./examples.json#/PropertyStatementIdExample" }
-		}
+		"example": { "$ref": "#/ItemStatementId/example" }
 	},
 	"ItemStatementId": {
 		"in": "path",
 		"name": "statement_id",
-		"description": "The ID of the required Item Statement",
+		"description": "The ID of a Statement on an Item",
 		"required": true,
 		"schema": {
 			"type": "string",
 			"pattern": "^(Q|q)[1-9]\\d{0,9}\\$.+$"
 		},
-		"example": { "$ref": "./examples.json#/ItemStatementIdExample/value" }
+		"example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
 	},
 	"PropertyStatementId": {
 		"in": "path",
 		"name": "statement_id",
-		"description": "The ID of the required Property Statement",
+		"description": "The ID of a Statement on a Property",
 		"required": true,
 		"schema": {
 			"type": "string",
 			"pattern": "^(P|p)[1-9]\\d{0,9}\\$.+$"
 		},
-		"example": { "$ref": "./examples.json#/PropertyStatementIdExample/value" }
+		"example": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71"
 	},
 	"LanguageCode": {
 		"in": "path",
@@ -118,7 +115,7 @@
 			"pattern": "^P[1-9]\\d{0,9}$"
 		},
 		"style": "form",
-		"example": "P31"
+		"example": "P1628"
 	},
 	"IfNoneMatch": {
 		"name": "If-None-Match",

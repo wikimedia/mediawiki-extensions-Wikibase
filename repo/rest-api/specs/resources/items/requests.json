@@ -72,7 +72,7 @@
 											"parts": [
 												{
 													"property": { "id": "P709" },
-													"value": { "type": "value", "content": "http://www.example.org" }
+													"value": { "type": "value", "content": "https://news.example.org" }
 												}
 											]
 										}
