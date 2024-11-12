@@ -9,21 +9,20 @@
 		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel lint:*",
-		"lint:openapi": "swagger-cli validate specs/openapi.json",
+		"lint:openapi": "redocly lint specs/openapi.json",
 		"lint:eslint": "eslint . --config .eslintrc.json --max-warnings 0",
 		"fix": "npm-run-all --parallel fix:*",
 		"fix:eslint": "eslint --config .eslintrc.json --fix .",
 		"build": "run-s build:docs build:spec",
 		"build:docs": "webpack --config docs/webpack.config.js",
 		"serve:docs": "webpack serve --config docs/webpack.config.js --mode development",
-		"build:spec": "swagger-cli bundle specs/openapi.json -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
+		"build:spec": "redocly bundle specs/openapi.json --dereferenced -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
 	},
 	"engines": {
 		"node": ">=18"
 	},
 	"devDependencies": {
-		"@apidevtools/swagger-cli": "^4.0.4",
-		"@apidevtools/swagger-parser": "^10.1.0",
+		"@redocly/cli": "^1.25.11",
 		"api-testing": "^1.7.0",
 		"chai-openapi-response-validator": "^0.14.2",
 		"clean-webpack-plugin": "^4.0.0",

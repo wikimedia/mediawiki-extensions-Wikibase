@@ -1,0 +1,5 @@
+extends:
+  - recommended
+
+rules:
+  security-defined: off
