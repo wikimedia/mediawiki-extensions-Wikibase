@@ -5,6 +5,36 @@ const util = require( 'util' );
 const Ajv = require( 'ajv' );
 const { readFileSync } = require( 'fs' );
 
+function compileSchemaAndValidator() {
+	const openApiSchema = JSON.parse(
+		readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` )
+	);
+
+	const schemaValidator = new Ajv( { strictTypes: false } );
+
+	Object.entries( openApiSchema.paths ).forEach( ( [ path, pathData ] ) => {
+		Object.entries( pathData ).forEach( ( [ method, methodData ] ) => {
+			Object.entries( methodData.responses ).forEach( ( [ status, responseData ] ) => {
+				if ( responseData.content ) {
+					Object.entries( responseData.content ).forEach( ( [ contentType, content ] ) => {
+						schemaValidator.addSchema( content.schema, `${path}|${method}|${status}|${contentType}` );
+					} );
+				}
+				if ( responseData.headers ) {
+					Object.entries( responseData.headers ).forEach( ( [ header, headerData ] ) => {
+						schemaValidator.addSchema(
+							headerData.schema,
+							`${path}|${method}|${status}|header|${header.toLowerCase()}`
+						);
+					} );
+				}
+			} );
+		} );
+	} );
+
+	return { openApiSchema, schemaValidator };
+}
+
 function purple( str ) {
 	return `\x1b[38;5;99m${str}`;
 }
@@ -71,29 +101,27 @@ Assertion.addChainableMethod(
 	}
 );
 
-Assertion.addProperty(
-	'satisfyApiSchema',
-	function () {
-		const openApiSchema = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
-
-		const ajv = new Ajv( { strictTypes: false } );
-
+function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
+	return function () {
 		const response = utils.flag( this, 'response' ) || utils.flag( this, 'object' );
 		utils.flag( this, 'response', response );
 		const request = response.request;
 
 		const requestUrl = request.url.split( 'wikibase/v1' )[ 1 ];
 		const requestPath = getMatchingSchemaPath( requestUrl, Object.keys( openApiSchema.paths ) );
-
-		// TODO: add better handling in case keys don't exist (might not be needed if we compile the whole schema)
-		const openApiResponse = openApiSchema.paths[ requestPath ][ request.method.toLowerCase() ].responses[ response.status ];
+		const requestMethod = request.method.toLowerCase();
+		const responseStatus = response.status;
+		const openApiResponse = openApiSchema.paths[ requestPath ][ requestMethod ].responses[ responseStatus ];
 
 		if ( Object.keys( response.body ).length > 0 ) {
-			// TODO: add better handling in case keys don't exist (might not be needed if we compile the whole schema)
-			const responseBodySchema = openApiResponse.content[ response.headers[ 'content-type' ] ].schema;
-			// TODO: compile whole OpenAPI schema and then get the bit we want using `ajv.getSchema()`?
-			// TODO: make reusable so we don't repeatedly compile the schema for each test?
-			const validateBody = ajv.compile( responseBodySchema );
+			const contentType = response.headers[ 'content-type' ];
+			const schemaKey = `${requestPath}|${requestMethod}|${responseStatus}|${contentType}`;
+
+			const validateBody = schemaValidator.getSchema( schemaKey );
+			if ( !validateBody ) {
+				throw new Error( `Schema not found for ${schemaKey} in OpenAPI schema.` );
+			}
+
 			if ( !validateBody( response.body ) ) {
 				const error = validateBody.errors[ 0 ];
 				this.assert( false, `${error.message} at '${error.instancePath}'` );
@@ -102,22 +130,29 @@ Assertion.addProperty(
 
 		if ( 'headers' in openApiResponse ) {
 			for ( const [ header, openApiHeader ] of Object.entries( openApiResponse.headers ) ) {
-				const schema = openApiHeader.schema;
+				const headerKey = `${requestPath}|${requestMethod}|${responseStatus}|header|${header.toLowerCase()}`;
+
+				const validateHeader = schemaValidator.getSchema( headerKey );
+				if ( !validateHeader ) {
+					throw new Error( `Schema not found for header '${header}' in OpenAPI schema.` );
+				}
+
 				if ( header.toLowerCase() in response.headers ) {
-					// TODO: compile whole OpenAPI schema and then get the bit we want using `ajv.getSchema()`?
-					// TODO: make reusable so don't need to compile for each test?
-					const validateHeader = ajv.compile( schema );
 					if ( !validateHeader( response.headers[ header.toLowerCase() ] ) ) {
 						const error = validateHeader.errors[ 0 ];
-						this.assert( false, `'${header.toLowerCase()}' header doesn't match schema: ${error.message}` );
+						this.assert(
+							false,
+							`'${header.toLowerCase()}' header doesn't match schema: ${error.message}`
+						);
 					}
 				} else if ( openApiHeader.required ) {
 					this.assert( false, `response does not contain required header '${header}'` );
 				}
 			}
 		}
+	};
+}
 
-	}
-);
+Assertion.addProperty( 'satisfyApiSchema', buildSatisfyApiSchema( compileSchemaAndValidator() ) );
 
 module.exports = { expect };
