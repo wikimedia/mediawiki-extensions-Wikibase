@@ -45,7 +45,7 @@
 			"application/json": {
 				"schema": { "$ref": "../../global/schemas.json#/Descriptions" },
 				"example": {
-					"en": "this item is a concrete object (instance) of this class, category or object group",
+					"en": "the subject is a concrete object (instance) of this class, category, or object group",
 					"ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
 				}
 			}
@@ -93,7 +93,7 @@
 		"content": {
 			"application/json": {
 				"schema": { "type": "string" },
-				"example": "this item is a concrete object (instance) of this class, category or object group"
+				"example": "the subject is a concrete object (instance) of this class, category, or object group"
 			}
 		}
 	},
