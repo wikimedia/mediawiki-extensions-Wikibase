@@ -245,7 +245,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'missing-field' );
-			assert.deepEqual( response.body.context, { path: '/', field: 'sitelink' } );
+			assert.deepEqual( response.body.context, { path: '', field: 'sitelink' } );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
 
