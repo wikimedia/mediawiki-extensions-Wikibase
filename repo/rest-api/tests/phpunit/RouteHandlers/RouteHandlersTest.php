@@ -30,6 +30,8 @@ use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyS
 use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
 use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemResponse;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreateProperty;
+use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
 use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
@@ -1044,6 +1046,35 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 						UseCaseError::INVALID_VALUE,
 						"Invalid value at '/item/labels/en'",
 						[ UseCaseError::CONTEXT_PATH => '/item/labels/en' ]
+					),
+					$hasErrorCode ( UseCaseError::INVALID_VALUE ),
+				],
+			],
+		] ];
+		yield 'CreateProperty' => [ [
+			'useCase' => CreateProperty::class,
+			'useCaseResponse' => new CreatePropertyResponse(
+				new Property(
+					new NumericPropertyId( 'P123' ),
+					'string',
+					new Labels(),
+					new Descriptions(),
+					new Aliases(),
+					new StatementList()
+				),
+				$lastModified,
+				123
+			),
+			'validRequest' => [
+				'pathParams' => [],
+				'bodyContents' => [ 'property' => [ 'data_type' => 'string' ] ],
+			],
+			'expectedExceptions' => [
+				[
+					new UseCaseError(
+						UseCaseError::INVALID_VALUE,
+						"Invalid value at '/property/labels'",
+						[ UseCaseError::CONTEXT_PATH => '/item/labels' ]
 					),
 					$hasErrorCode ( UseCaseError::INVALID_VALUE ),
 				],

@@ -8,7 +8,8 @@ const {
 	getPropertyGetRequests,
 	getItemEditRequests,
 	getPropertyEditRequests,
-	getItemCreateRequest
+	getItemCreateRequest,
+	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 
 function assertValid400Response( response ) {
@@ -27,7 +28,8 @@ describeWithTestData( 'User-Agent requests', (
 		...getPropertyEditRequests( propertyRequestInputs ),
 		...getItemGetRequests( itemRequestInputs ),
 		...getPropertyGetRequests( propertyRequestInputs ),
-		getItemCreateRequest( itemRequestInputs )
+		getItemCreateRequest( itemRequestInputs ),
+		getPropertyCreateRequest( propertyRequestInputs )
 	];
 	describeEachRouteWithReset( allRoutes, ( newRequestBuilder ) => {
 		it( 'No User-Agent header provided', async () => {
