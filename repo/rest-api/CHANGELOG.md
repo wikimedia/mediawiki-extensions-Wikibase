@@ -1,9 +1,9 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
-
 ## Version 1.1
 
 * Added endpoint `POST /wikibase/v1/entities/properties` ([T342992](https://phabricator.wikimedia.org/T342992))
+* Added missing `Content-Language` header to `DELETE /entities/items/{item_id}/sitelinks/{site_id}` responses
 
 ## Version 1.0
 
