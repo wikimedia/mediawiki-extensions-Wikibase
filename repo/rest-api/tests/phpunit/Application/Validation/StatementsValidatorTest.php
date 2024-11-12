@@ -88,18 +88,23 @@ class StatementsValidatorTest extends TestCase {
 	/**
 	 * @dataProvider provideInvalidStatements
 	 */
-	public function testInvalidStatements_returnsValidationError( array $invalidStatements, ValidationError $expectedError ): void {
-		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidStatements ) );
+	public function testInvalidStatements_returnsValidationError(
+		string $basePath,
+		array $invalidStatements,
+		ValidationError $expectedError
+	): void {
+		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidStatements, $basePath ) );
 	}
 
 	public function provideInvalidStatements(): Generator {
 		$invalidStatements = [ 'not a valid statements array' ];
 		yield 'statements field is not an associative array' => [
+			'/statements',
 			$invalidStatements,
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
 				[
-					StatementsValidator::CONTEXT_PATH => '',
+					StatementsValidator::CONTEXT_PATH => '/statements',
 					StatementsValidator::CONTEXT_VALUE => $invalidStatements,
 				]
 			),
@@ -107,6 +112,7 @@ class StatementsValidatorTest extends TestCase {
 
 		$invalidStatementGroup = $this->newSomeValueSerialization( 'P123' );
 		yield 'statement group is not a sequential array (list)' => [
+			'',
 			[ 'P123' => $invalidStatementGroup ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_GROUP_NOT_SEQUENTIAL,
@@ -119,11 +125,12 @@ class StatementsValidatorTest extends TestCase {
 
 		$invalidStatement = 'somevalue';
 		yield 'statement in statement group is not an array' => [
+			'/property/statements',
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementsValidator::CODE_STATEMENT_NOT_ARRAY,
 				[
-					StatementsValidator::CONTEXT_PATH => '/P123/0',
+					StatementsValidator::CONTEXT_PATH => '/property/statements/P123/0',
 					StatementsValidator::CONTEXT_VALUE => $invalidStatement,
 				]
 			),
@@ -131,11 +138,12 @@ class StatementsValidatorTest extends TestCase {
 
 		$invalidStatement = [ 'statement not an associate array' ];
 		yield 'statement in statement group is not an associative array' => [
+			'/item/statements',
 			[ 'P123' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementValidator::CODE_INVALID_FIELD_TYPE,
 				[
-					StatementValidator::CONTEXT_PATH => '/P123/0',
+					StatementValidator::CONTEXT_PATH => '/item/statements/P123/0',
 					StatementValidator::CONTEXT_VALUE => $invalidStatement,
 				]
 			),
@@ -147,6 +155,7 @@ class StatementsValidatorTest extends TestCase {
 			'rank' => 'not-a-valid-rank',
 		];
 		yield 'rank field in a statement is incorrect' => [
+			'',
 			[ 'P567' => [ $invalidStatement ] ],
 			new ValidationError(
 				StatementValidator::CODE_INVALID_FIELD,
@@ -159,13 +168,14 @@ class StatementsValidatorTest extends TestCase {
 		];
 
 		yield 'property id mismatch' => [
+			'/statements',
 			[
 				'P123' => [ $this->newSomeValueSerialization( 'P567' ) ],
 			],
 			new ValidationError(
 				StatementsValidator::CODE_PROPERTY_ID_MISMATCH,
 				[
-					StatementsValidator::CONTEXT_PATH => 'P123/0/property/id',
+					StatementsValidator::CONTEXT_PATH => '/statements/P123/0/property/id',
 					StatementsValidator::CONTEXT_PROPERTY_ID_KEY => 'P123',
 					StatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'P567',
 				]

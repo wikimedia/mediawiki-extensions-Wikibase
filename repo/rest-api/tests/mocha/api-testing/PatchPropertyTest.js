@@ -593,7 +593,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest().makeRequest();
 
 			const context = {
-				path: `${propertyIdKey}/0/property/id`,
+				path: `/statements/${propertyIdKey}/0/property/id`,
 				statement_group_property_id: propertyIdKey,
 				statement_property_id: predicatePropertyId
 			};
