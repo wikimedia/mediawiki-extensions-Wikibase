@@ -58,9 +58,9 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	/**
 	 * @inheritDoc
 	 */
-	public function contentProvider() {
+	public static function contentProvider(): array {
 		/** @var ItemContent $content */
-		$content = $this->newEntityContent();
+		$content = self::newEntityContent();
 		$content->getItem()->setAliases( 'en', [ 'foo' ] );
 		$content->getItem()->setDescription( 'de', 'foobar' );
 		$content->getItem()->setDescription( 'en', 'baz' );
@@ -71,30 +71,30 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$withSiteLink->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
 
 		return [
-			[ $this->newEntityContent() ],
+			[ self::newEntityContent() ],
 			[ $content ],
 			[ $withSiteLink ],
 		];
 	}
 
-	public function provideGetUndoContent() {
+	public static function provideGetUndoContent(): iterable {
 		$cases = parent::provideGetUndoContent();
 
-		$item1 = $this->newEntity();
+		$item1 = self::newEntity();
 		$item1->setLabel( 'en', 'Foo' );
 
-		$item2 = $this->newEntity();
+		$item2 = self::newEntity();
 		$item2->setLabel( 'en', 'Bar' );
 
-		$itemContent1 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q112' ) );
-		$itemContent2 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q113' ) );
+		$itemContent1 = self::newRedirectContent( $item1->getId(), new ItemId( 'Q112' ) );
+		$itemContent2 = self::newRedirectContent( $item1->getId(), new ItemId( 'Q113' ) );
 
-		$content1 = $this->newEntityContent( $item1 );
+		$content1 = self::newEntityContent( $item1 );
 		$content2 = $itemContent1;
 		$content3 = $itemContent2;
-		$content4 = $this->newEntityContent( $item2 );
+		$content4 = self::newEntityContent( $item2 );
 
-		$cases[] = [ $content2, $content2, $content1, $this->newEntityContent( $item1 ), "undo redirect" ];
+		$cases[] = [ $content2, $content2, $content1, self::newEntityContent( $item1 ), "undo redirect" ];
 		$cases[] = [ $content3, $content3, $content2, $itemContent1, "undo redirect change" ];
 		$cases[] = [ $content3, $content2, $content1, null, "undo redirect conflict" ];
 		$cases[] = [ $content4, $content4, $content3, $itemContent2, "redo redirect" ];
@@ -105,7 +105,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	/**
 	 * @return ItemContent
 	 */
-	protected function newEmptyContent() {
+	protected static function newEmptyContent() {
 		return new ItemContent();
 	}
 
@@ -114,7 +114,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
+	protected static function newEntityContent( EntityDocument $entity = null ): EntityContent {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}
@@ -122,7 +122,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		return new ItemContent( new EntityInstanceHolder( $entity ) );
 	}
 
-	protected function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
+	protected static function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
 		$redirect = new EntityRedirect( $id, $target );
 
 		$title = Title::makeTitle( 100, $target->getSerialization() );
@@ -150,13 +150,13 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$content->getEntity();
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		return [
 			[ 'Q7' ],
 		];
 	}
 
-	protected function newEntity( EntityId $id = null ) {
+	protected static function newEntity( EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new ItemId( 'Q7' );
 		}
@@ -204,10 +204,10 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		return [];
 	}
 
-	public function providePageProperties() {
+	public static function providePageProperties() {
 		yield from parent::providePageProperties();
 
-		$contentLinkStub = $this->newEntityContent();
+		$contentLinkStub = self::newEntityContent();
 		$contentLinkStub->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		yield 'sitelinks' => [
@@ -215,7 +215,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 			[ 'wb-claims' => 0, 'wb-sitelinks' => 1 ],
 		];
 
-		$contentWithClaim = $this->newEntityContent();
+		$contentWithClaim = self::newEntityContent();
 		$snak = new PropertyNoValueSnak( 83 );
 		$guid = '$testing$';
 		$contentWithClaim->getItem()->getStatements()->addNewStatement( $snak, null, null, $guid );

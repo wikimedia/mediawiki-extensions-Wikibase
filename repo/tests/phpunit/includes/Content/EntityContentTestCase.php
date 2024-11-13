@@ -144,12 +144,13 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
 	}
 
-	abstract public function provideGetEntityId();
+	abstract public static function provideGetEntityId();
 
 	/**
 	 * @dataProvider provideGetEntityId
 	 */
-	public function testGetEntityId( EntityContent $content, $expected ) {
+	public function testGetEntityId( callable $contentAndExpectedFactory ) {
+		[ $content, $expected ] = $contentAndExpectedFactory( $this );
 		$actual = $content->getEntityId();
 
 		$this->assertEquals( $expected, $actual );
@@ -165,21 +166,20 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$content->getEntityId();
 	}
 
-	public function provideGetEntityPageProperties() {
-		$empty = $this->newBlank();
-
-		$labeledEntityContent = $this->newBlank();
-		$this->setLabel( $labeledEntityContent->getEntity(), 'de', 'xyz' );
-
+	public static function provideGetEntityPageProperties() {
 		return [
 			'empty' => [
-				$empty,
+				fn ( self $self ) => $self->newBlank(),
 				[
 					'wb-claims' => 0,
 				],
 			],
 			'labels' => [
-				$labeledEntityContent,
+				function ( self $self ) {
+					$labeledEntityContent = $self->newBlank();
+					$self->setLabel( $labeledEntityContent->getEntity(), 'de', 'xyz' );
+					return $labeledEntityContent;
+				},
 				[
 					'wb-claims' => 0,
 				],
@@ -190,7 +190,8 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideGetEntityPageProperties
 	 */
-	public function testGetEntityPageProperties( EntityContent $content, array $pageProps ) {
+	public function testGetEntityPageProperties( callable $contentFactory, array $pageProps ) {
+		$content = $contentFactory( $this );
 		$actual = $content->getEntityPageProperties();
 
 		foreach ( $pageProps as $key => $value ) {
@@ -201,7 +202,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertArrayEquals( array_keys( $pageProps ), array_keys( $actual ) );
 	}
 
-	public function diffProvider() {
+	public static function diffProvider() {
 		$entityType = static::getEntityType();
 
 		$empty = static::newEmpty();
@@ -228,33 +229,27 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		return [
 			'empty' => [
-				$empty,
-				$empty,
+				fn () => [ $empty, $empty ],
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'blank' => [
-				$blank,
-				$blank,
+				fn () => [ $blank, $blank ],
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'same' => [
-				$ham,
-				$ham,
+				fn () => [ $ham, $ham ],
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
 			],
 			'empty to ham' => [
-				$empty,
-				$ham,
+				fn () => [ $empty, $ham ],
 				new EntityContentDiff( $emptyToHamDiff, new Diff(), $entityType ),
 			],
 			'blank to ham' => [
-				$blank,
-				$ham,
+				fn () => [ $blank, $ham ],
 				new EntityContentDiff( $blankToHamDiff, new Diff(), $entityType ),
 			],
 			'spam to ham' => [
-				$spam,
-				$ham,
+				fn () => [ $spam, $ham ],
 				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
 			],
 		];
@@ -263,7 +258,8 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider diffProvider
 	 */
-	public function testGetDiff( EntityContent $a, EntityContent $b, EntityContentDiff $expected ) {
+	public function testGetDiff( callable $entityContentFactory, EntityContentDiff $expected ) {
+		[ $a, $b ] = $entityContentFactory( $this );
 		$actual = $a->getDiff( $b );
 
 		$this->assertInstanceOf( EntityContentDiff::class, $actual );
@@ -289,13 +285,13 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertArrayEquals( $expectedRedirectOps, $actualRedirectOps, false, true );
 	}
 
-	public function patchedCopyProvider() {
-		$spam = $this->newBlank( $this->getDummyId() );
-		$entityType = $this->getEntityType();
-		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
+	public static function patchedCopyProvider() {
+		$spam = static::newBlank( static::getDummyId() );
+		$entityType = static::getEntityType();
+		static::setLabel( $spam->getEntity(), 'en', 'Spam' );
 
-		$ham = $this->newBlank( $this->getDummyId() );
-		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
+		$ham = static::newBlank( static::getDummyId() );
+		static::setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHamDiff = new EntityDiff( [
 			'label' => new Diff( [ 'en' => new DiffOpChange( 'Spam', 'Ham' ) ] ),
@@ -303,14 +299,18 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		return [
 			'empty' => [
-				$spam,
-				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
-				$spam,
+				fn () => [
+					$spam,
+					new EntityContentDiff( new EntityDiff(), new Diff(), $entityType ),
+					$spam,
+				],
 			],
 			'spam to ham' => [
-				$spam,
-				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
-				$ham,
+				fn () => [
+					$spam,
+					new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType ),
+					$ham,
+				],
 			],
 		];
 	}
@@ -318,7 +318,9 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider patchedCopyProvider
 	 */
-	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
+	public function testGetPatchedCopy( callable $contentFactory ) {
+		[ $base, $patch, $expected ] = $contentFactory( $this );
+
 		if ( $expected === null ) {
 			$this->expectException( PatcherException::class );
 		}
@@ -332,48 +334,50 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function copyProvider() {
-		$labels = $this->newBlank();
-		$this->setLabel( $labels->getEntity(), 'en', 'Foo' );
+	public static function copyProvider() {
+		$labels = static::newBlank();
+		static::setLabel( $labels->getEntity(), 'en', 'Foo' );
 
 		return [
-			'no entity' => [ $this->newEmpty() ],
-			'empty entity' => [ $this->newBlank() ],
-			'labels' => [ $labels ],
+			'no entity' => [ fn ( self $self ) => $self->newEmpty() ],
+			'empty entity' => [ fn ( self $self ) => $self->newBlank() ],
+			'labels' => [ fn () => $labels ],
 		];
 	}
 
 	/**
 	 * @dataProvider copyProvider
 	 */
-	public function testCopy( EntityContent $content ) {
+	public function testCopy( callable $contentFactory ) {
+		$content = $contentFactory( $this );
 		$copy = $content->copy();
 		$this->assertTrue( $content->equals( $copy ), 'Copy must be equal to the original.' );
 		$this->assertSame( get_class( $content ), get_class( $copy ), 'Copy must have the same type.' );
 	}
 
-	public function equalsProvider() {
-		$empty = $this->newEmpty();
+	public static function equalsProvider() {
+		$empty = static::newEmpty();
 
-		$labels1 = $this->newBlank();
-		$this->setLabel( $labels1->getEntity(), 'en', 'Foo' );
+		$labels1 = static::newBlank();
+		static::setLabel( $labels1->getEntity(), 'en', 'Foo' );
 
-		$labels2 = $this->newBlank();
-		$this->setLabel( $labels2->getEntity(), 'de', 'Foo' );
+		$labels2 = static::newBlank();
+		static::setLabel( $labels2->getEntity(), 'de', 'Foo' );
 
 		return [
-			'empty' => [ $empty, $empty, true ],
-			'same labels' => [ $labels1, $labels1, true ],
-			'different labels' => [ $labels1, $labels2, false ],
-			'empty and not empty' => [ $empty, $labels1, false ],
-			'not empty and empty' => [ $labels1, $empty, false ],
+			'empty' => [ fn () => [ $empty, $empty ], true ],
+			'same labels' => [ fn () => [ $labels1, $labels1 ], true ],
+			'different labels' => [ fn () => [ $labels1, $labels2 ], false ],
+			'empty and not empty' => [ fn () => [ $empty, $labels1 ], false ],
+			'not empty and empty' => [ fn () => [ $labels1, $empty ], false ],
 		];
 	}
 
 	/**
 	 * @dataProvider equalsProvider
 	 */
-	public function testEquals( EntityContent $a, EntityContent $b, $expected ) {
+	public function testEquals( callable $contentFactory, $expected ) {
+		[ $a, $b ] = $contentFactory( $this );
 		$this->assertSame( $expected, $a->equals( $b ) );
 		$this->assertSame( $expected, $b->equals( $a ) );
 	}
@@ -398,16 +402,20 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		return $title;
 	}
 
-	public function entityRedirectProvider() {
+	public static function entityRedirectProvider() {
 		return [
-			'empty' => [ $this->newEmpty(), null ],
+			'empty' => [
+				fn ( self $self ) => $self->newEmpty(),
+				null,
+			],
 		];
 	}
 
 	/**
 	 * @dataProvider entityRedirectProvider
 	 */
-	public function testGetEntityRedirect( EntityContent $content, EntityRedirect $redirect = null ) {
+	public function testGetEntityRedirect( callable $contentProvider, EntityRedirect $redirect = null ) {
+		$content = $contentProvider( $this );
 		$this->assertEquals( $content->getEntityRedirect(), $redirect );
 
 		if ( $redirect === null ) {

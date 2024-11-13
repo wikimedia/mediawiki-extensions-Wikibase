@@ -96,11 +96,11 @@ class PropertyContentTest extends EntityContentTestCase {
 		return new PropertyContent( new EntityInstanceHolder( $property ) );
 	}
 
-	public function provideGetEntityId() {
+	public static function provideGetEntityId() {
 		$p11 = new NumericPropertyId( 'P11' );
 
 		return [
-			'property id' => [ $this->newBlank( $p11 ), $p11 ],
+			'property id' => [ fn () => [ self::newBlank( $p11 ), $p11 ] ],
 		];
 	}
 

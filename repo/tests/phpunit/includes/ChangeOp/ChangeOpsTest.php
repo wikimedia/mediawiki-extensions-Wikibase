@@ -90,43 +90,48 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $changeOpArray, $changeOps->getChangeOps() );
 	}
 
-	public function invalidChangeOpProvider() {
-		$validatorFactory = $this->getTermValidatorFactory();
-
-		$ops = [];
-		$ops[] = [ 1234 ];
-		$ops[] = [ [ new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ] ];
-
-		return $ops;
+	public static function invalidChangeOpProvider() {
+		yield [ fn () => 1234 ];
+		yield [
+			fn ( self $self ) => [
+				new ChangeOpLabel( 'en', 'test', $self->getTermValidatorFactory() ),
+				123,
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider invalidChangeOpProvider
 	 */
-	public function testInvalidAdd( $invalidChangeOp ) {
+	public function testInvalidAdd( $invalidChangeOpFactory ) {
+		$invalidChangeOp = $invalidChangeOpFactory( $this );
 		$changeOps = new ChangeOps();
 		$this->expectException( InvalidArgumentException::class );
 		$changeOps->add( $invalidChangeOp );
 	}
 
-	public function changeOpsProvider() {
-		$validatorFactory = $this->getTermValidatorFactory();
-
-		$args = [];
-
+	public static function changeOpsProvider() {
 		$language = 'en';
-		$changeOps = new ChangeOps();
-		$changeOps->add( new ChangeOpLabel( $language, 'newLabel', $validatorFactory ) );
-		$changeOps->add( new ChangeOpDescription( $language, 'newDescription', $validatorFactory ) );
-		$args[] = [ $changeOps, $language, 'newLabel', 'newDescription' ];
+		$newLabel = 'newLabel';
+		$newDescription = 'newDescription';
 
-		return $args;
+		$changeOpsFactory = function ( self $self ) use ( $language, $newLabel, $newDescription ): ChangeOps {
+			$validatorFactory = $self->getTermValidatorFactory();
+			$changeOps = new ChangeOps();
+			$changeOps->add( new ChangeOpLabel( $language, $newLabel, $validatorFactory ) );
+			$changeOps->add( new ChangeOpDescription( $language, $newDescription, $validatorFactory ) );
+
+			return $changeOps;
+		};
+
+		yield [ $changeOpsFactory, $language, $newLabel, $newDescription ];
 	}
 
 	/**
 	 * @dataProvider changeOpsProvider
 	 */
-	public function testApply( ChangeOps $changeOps, $language, $expectedLabel, $expectedDescription ) {
+	public function testApply( callable $changeOpsFactory, $language, $expectedLabel, $expectedDescription ) {
+		$changeOps = $changeOpsFactory( $this );
 		$entity = new Item();
 
 		$changeOps->apply( $entity );

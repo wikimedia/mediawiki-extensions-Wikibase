@@ -135,7 +135,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->assertHtmlContainsInputWithNameAndValue( $html, SpecialNewItem::FIELD_DESCRIPTION, $subPagePart2 );
 	}
 
-	public function provideValidEntityCreationRequests() {
+	public static function provideValidEntityCreationRequests() {
 		return [
 			'only label is set' => [
 				[
@@ -204,7 +204,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 	}
 
-	public function provideInvalidEntityCreationRequests() {
+	public static function provideInvalidEntityCreationRequests() {
 		return [
 			'unknown language' => [
 				[
