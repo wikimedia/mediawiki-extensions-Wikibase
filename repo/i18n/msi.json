@@ -6,5 +6,7 @@
 	},
 	"wikibase-edit": "idit",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Ndada label dikasih tatap",
+	"wikibase-description-empty": "Ndada katarangan dikasih tatap",
 	"wikibase-sitelinks-special": "Tapak lain"
 }

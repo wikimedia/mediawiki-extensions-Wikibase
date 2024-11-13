@@ -42,5 +42,5 @@
 	"apihelp-query+description-example-central": "احصل على وصف لصفحة 'لندن'، مفضلا الوصف المركزي إذا كان موجودًا.",
 	"apihelp-query+wikibase-summary": "الحصول على معلومات حول عميل ويكي بيز ومستودع ويكي بيز المصاحب.",
 	"apihelp-query+wikibase-example": "الحصول على المسار والمعلومات الأخرى حول عميل ومستودع Wikibase.",
-	"apihelp-query+wikibase-param-prop": "ما هي الخواص للحصول عليها:\n;<kbd>url</kbd>: المسار الأساسي، مسار السكريبتات ومسار المقالات لمستودع Wikibase.\n;<kbd>siteid</kbd>: رقم الموقع لهذا الموقع."
+	"apihelp-query+wikibase-param-prop": "ما هي الخصائص التي يجب الحصول عليها:"
 }

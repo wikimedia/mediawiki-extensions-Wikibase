@@ -29,7 +29,7 @@
 	"wikibase-linkitem-failed-modify": "Злучованє бокох ше нє удало: нє удало ше злучованє одвитуюцих елементох на {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Вяза зоз боком",
 	"wikibase-linkitem-linkpage": "Повяж зоз боком",
-	"wikibase-linkitem-selectlink": "Виберце сайт и бок зоз хторим жадаце повязац тот ту бок",
+	"wikibase-linkitem-selectlink": "Виберце сайт и бок зоз хторим жадаце повязац тот ту бок.",
 	"wikibase-linkitem-input-site": "Язик:",
 	"wikibase-linkitem-input-page": "Бок:",
 	"wikibase-linkitem-confirmitem-text": "Бок хтори сце вибрали уж придружена [$1 елементу на нашей  централней бази податкох]. Модлїме вас потвердзце же {{PLURAL:$2|бок|боки}} нїжей {{PLURAL:$2|приказани}} {{PLURAL:$2|гевтот хтори|гевти хтори}} жадаце повязац зоз тим боком.",
