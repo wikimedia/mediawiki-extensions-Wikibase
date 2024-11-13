@@ -43,7 +43,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 		$this->getSubjectResult( new DummyChangeOpResult() );
 	}
 
-	public function itemUniquenessValidationProvider() {
+	public static function itemUniquenessValidationProvider(): iterable {
 		$entityId = new ItemId( 'Q123' );
 		$collidingEntityId = new ItemId( 'Q321' );
 
@@ -52,18 +52,15 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				'getLabelMock' => null,
 				'getDescriptionMock' => null,
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'new label', $label );
-					$this->assertEquals( 'old description', $description );
+					self::assertEquals( 'en', $lang );
+					self::assertEquals( 'new label', $label );
+					self::assertEquals( 'old description', $description );
 					return null;
 				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
-						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
+				'changeOpsResult' => new ChangeOpsResult( $entityId, [
+					new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
+					new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
+				] ),
 				'expectedResult' => Result::newSuccess(),
 			],
 
@@ -73,17 +70,14 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				},
 				'getDescriptionMock' => null,
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'old label', $label );
-					$this->assertEquals( 'new description', $description );
+					self::assertEquals( 'en', $lang );
+					self::assertEquals( 'old label', $label );
+					self::assertEquals( 'new description', $description );
 					return null;
 				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpDescriptionResult( $entityId, 'en', '', 'new description', true ),
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
+				'changeOpsResult' => new ChangeOpsResult( $entityId, [
+					new ChangeOpDescriptionResult( $entityId, 'en', '', 'new description', true ),
+				] ),
 				'expectedResult' => Result::newSuccess(),
 			],
 
@@ -93,17 +87,14 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 					return 'old description';
 				},
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'new label', $label );
-					$this->assertEquals( 'old description', $description );
+					self::assertEquals( 'en', $lang );
+					self::assertEquals( 'new label', $label );
+					self::assertEquals( 'old description', $description );
 					return null;
 				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
+				'changeOpsResult' => new ChangeOpsResult( $entityId, [
+					new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
+				] ),
 				'expectedResult' => Result::newSuccess(),
 			],
 
@@ -111,18 +102,15 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				'getLabelMock' => null,
 				'getDescriptionMock' => null,
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) use ( $collidingEntityId ) {
-					$this->assertEquals( 'en', $lang );
-					$this->assertEquals( 'new label', $label );
-					$this->assertEquals( 'old description', $description );
+					self::assertEquals( 'en', $lang );
+					self::assertEquals( 'new label', $label );
+					self::assertEquals( 'old description', $description );
 					return $collidingEntityId;
 				},
-				'valueToValidate' => new ChangeOpFingerprintResult(
-					new ChangeOpsResult( $entityId, [
-						new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
-						new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
-					] ),
-					$this->createMock( TermValidatorFactory::class )
-				),
+				'changeOpsResult' => new ChangeOpsResult( $entityId, [
+					new ChangeOpLabelResult( $entityId, 'en', '', 'new label', true ),
+					new ChangeOpDescriptionResult( $entityId, 'en', 'old description', '', false ),
+				] ),
 				'expectedResult' => Result::newError( [
 					new UniquenessViolation(
 						$collidingEntityId,
@@ -146,7 +134,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 		?callable $getLabelMock,
 		?callable $getDescriptionMock,
 		?callable $detectLabelAndDescriptionCollisionMock,
-		$valueToValidate,
+		ChangeOpsResult $changeOpsResult,
 		Result $expectedResult
 	) {
 		if ( $getLabelMock ) {
@@ -160,6 +148,10 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 				->willReturnCallback( $detectLabelAndDescriptionCollisionMock );
 		}
 
+		$valueToValidate = new ChangeOpFingerprintResult(
+			$changeOpsResult,
+			$this->createMock( TermValidatorFactory::class )
+		);
 		$actualResult = $this->getSubjectResult( $valueToValidate );
 
 		$this->assertEquals( $expectedResult, $actualResult );

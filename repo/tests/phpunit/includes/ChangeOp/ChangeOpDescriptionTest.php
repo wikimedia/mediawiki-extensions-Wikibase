@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\ChangeOpDescriptionResult;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -37,28 +36,26 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		new ChangeOpDescription( 42, 'myNew', $validatorFactory );
 	}
 
-	public function changeOpDescriptionProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpDescriptionProvider(): iterable {
 		$args = [];
-		$args['update'] = [ new ChangeOpDescription( 'en', 'myNew', $validatorFactory ), 'myNew' ];
-		$args['set to null'] = [ new ChangeOpDescription( 'en', null, $validatorFactory ), '' ];
-		$args['noop'] = [ new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ), 'DUPE' ];
+		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
+		$args['set to null'] = [ [ 'en', null ], '' ];
+		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
 
 		return $args;
 	}
 
 	/**
 	 * @dataProvider changeOpDescriptionProvider
-	 *
-	 * @param ChangeOp $changeOpDescription
-	 * @param string $expectedDescription
 	 */
-	public function testApply( ChangeOp $changeOpDescription, $expectedDescription ) {
+	public function testApply( array $changeOpDescriptionParams, string $expectedDescription ) {
 		$entity = $this->provideNewEntity();
 		$entity->setDescription( 'en', 'INVALID' );
 
+		// "INVALID" is invalid
+		$changeOpDescriptionParams[] = $this->getTermValidatorFactory();
+
+		$changeOpDescription = new ChangeOpDescription( ...$changeOpDescriptionParams );
 		$changeOpDescription->apply( $entity );
 
 		if ( $expectedDescription === '' ) {
@@ -68,94 +65,98 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function changeOpDescriptionAndResultProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpDescriptionAndResultProvider(): iterable {
 		$item = new Item( new ItemId( 'Q23' ) );
-		$args = [
+		return [
 			'set Description is a change' => [
 				$item,
-				new ChangeOpDescription( 'en', 'myNew', $validatorFactory ),
+				[ 'en', 'myNew' ],
 				new ChangeOpDescriptionResult( $item->getId(), 'en', null, 'myNew', true ),
 			],
 			'update Description is a change' => [
 				$item,
-				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
+				[ 'en', 'DUPE' ],
 				new ChangeOpDescriptionResult( $item->getId(), 'en', 'myNew', 'DUPE', true ),
 			],
 			'update to existing Description is a no change' => [
 				$item,
-				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
+				[ 'en', 'DUPE' ],
 				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', 'DUPE', false ),
 
 			],
 			'set to null is a change' => [
 				$item,
-				new ChangeOpDescription( 'en', null, $validatorFactory ),
+				[ 'en', null ],
 				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', null, true ),
 
 			],
 			'set null to null is a no change' => [
 				$item,
-				new ChangeOpDescription( 'en', null, $validatorFactory ),
+				[ 'en', null ],
 				new ChangeOpDescriptionResult( $item->getId(), 'en', null, null, false ),
 
 			],
 		];
-		return $args;
 	}
 
 	/**
-	 * @param Item $item
-	 * @param ChangeOpDescription $changeOpLabel
-	 * @param ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
 	 * @dataProvider changeOpDescriptionAndResultProvider
 	 */
-	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpDescriptionResult ) {
+	public function testApplySetsIsEntityChangedCorrectlyOnResult(
+		Item $item,
+		array $changeOpLabelParams,
+		ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
+	) {
+		// "INVALID" is invalid
+		$changeOpLabelParams[] = $this->getTermValidatorFactory();
+
+		$changeOpLabel = new ChangeOpDescription( ...$changeOpLabelParams );
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpDescriptionResult->isEntityChanged(), $changeOpResult->isEntityChanged() );
 	}
 
 	/**
-	 * @param Item $item
-	 * @param ChangeOpDescription $changeOpLabel
-	 * @param ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
 	 * @dataProvider changeOpDescriptionAndResultProvider
 	 */
-	public function testApplySetsDescriptionsCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpDescriptionResult ) {
+	public function testApplySetsDescriptionsCorrectlyOnResult(
+		Item $item,
+		array $changeOpLabelParams,
+		ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
+	) {
+		// "INVALID" is invalid
+		$changeOpLabelParams[] = $this->getTermValidatorFactory();
+
+		$changeOpLabel = new ChangeOpDescription( ...$changeOpLabelParams );
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpDescriptionResult->getNewDescription(), $changeOpResult->getNewDescription() );
 		$this->assertEquals( $expectedChangeOpDescriptionResult->getOldDescription(), $changeOpResult->getOldDescription() );
 	}
 
-	public function validateProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function validateProvider(): iterable {
 		$args = [];
-		$args['valid description'] = [ new ChangeOpDescription( 'fr', 'valid', $validatorFactory ), true ];
-		$args['invalid description'] = [ new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ), false ];
-		$args['duplicate description'] = [ new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ), false ];
-		$args['invalid language'] = [ new ChangeOpDescription( 'INVALID', 'valid', $validatorFactory ), false ];
-		$args['set bad language to null'] = [ new ChangeOpDescription( 'INVALID', null, $validatorFactory ), false ];
+		$args['valid description'] = [ [ 'fr', 'valid' ], true ];
+		$args['invalid description'] = [ [ 'fr', 'INVALID' ], false ];
+		$args['duplicate description'] = [ [ 'fr', 'DUPE' ], false ];
+		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
+		$args['set bad language to null'] = [ [ 'INVALID', null ], false ];
 
 		return $args;
 	}
 
 	/**
 	 * @dataProvider validateProvider
-	 *
-	 * @param ChangeOp $changeOp
-	 * @param bool $valid
 	 */
-	public function testValidate( ChangeOp $changeOp, $valid ) {
+	public function testValidate( array $changeOpParams, bool $valid ) {
 		$entity = $this->provideNewEntity();
 
 		$oldDescriptions = $entity->getDescriptions()->toTextArray();
 
+		// "INVALID" is invalid
+		$changeOpParams[] = $this->getTermValidatorFactory();
+
+		$changeOp = new ChangeOpDescription( ...$changeOpParams );
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
@@ -176,22 +177,19 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	public function changeOpSummaryProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpSummaryProvider() {
 		$args = [];
 
-		$entity = $this->provideNewEntity();
+		$entity = self::provideNewEntity();
 		$entity->setDescription( 'de', 'Test' );
-		$args[] = [ $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' ];
+		$args[] = [ $entity, [ 'de', 'Zusammenfassung' ], 'set', 'de' ];
 
-		$entity = $this->provideNewEntity();
+		$entity = self::provideNewEntity();
 		$entity->setDescription( 'de', 'Test' );
-		$args[] = [ $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' ];
+		$args[] = [ $entity, [ 'de', null ], 'remove', 'de' ];
 
-		$entity = $this->provideNewEntity();
-		$args[] = [ $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'add', 'de' ];
+		$entity = self::provideNewEntity();
+		$args[] = [ $entity, [ 'de', 'Zusammenfassung' ], 'add', 'de' ];
 
 		return $args;
 	}
@@ -201,12 +199,16 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testUpdateSummary(
 		EntityDocument $entity,
-		ChangeOp $changeOp,
+		array $changeOpParams,
 		$summaryExpectedAction,
 		$summaryExpectedLanguage
 	) {
 		$summary = new Summary();
 
+		// "INVALID" is invalid
+		$changeOpParams[] = $this->getTermValidatorFactory();
+
+		$changeOp = new ChangeOpDescription( ...$changeOpParams );
 		$changeOp->apply( $entity, $summary );
 
 		$this->assertSame( $summaryExpectedAction, $summary->getMessageKey() );

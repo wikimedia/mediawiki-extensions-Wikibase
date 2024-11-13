@@ -73,11 +73,11 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->newFactory( $instantiators );
 	}
 
-	public function provideInvalidConstructorArgs() {
+	public static function provideInvalidConstructorArgs(): iterable {
 		return [
 			[ 'non-string key' => [
 				123 => function () {
-					return $this->createMock( EntityDiffVisualizer::class );
+					throw new \Exception( 'this should never be called' );
 				},
 			] ],
 			[ 'not a callable' => [ 'item' => 'WOOO' ] ],

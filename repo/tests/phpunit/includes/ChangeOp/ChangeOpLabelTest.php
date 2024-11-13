@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\Repo\ChangeOp\ChangeOpLabelResult;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -37,28 +36,25 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		new ChangeOpLabel( 42, 'myNew', $validatorFactory );
 	}
 
-	public function changeOpLabelProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpLabelProvider(): iterable {
 		$args = [];
-		$args['update'] = [ new ChangeOpLabel( 'en', 'myNew', $validatorFactory ), 'myNew' ];
-		$args['set to null'] = [ new ChangeOpLabel( 'en', null, $validatorFactory ), '' ];
-		$args['noop'] = [ new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ), 'DUPE' ];
+		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
+		$args['set to null'] = [ [ 'en', null ], '' ];
+		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
 
 		return $args;
 	}
 
 	/**
 	 * @dataProvider changeOpLabelProvider
-	 *
-	 * @param ChangeOp $changeOpLabel
-	 * @param string $expectedLabel
 	 */
-	public function testApply( ChangeOp $changeOpLabel, $expectedLabel ) {
+	public function testApply( array $changeOpLabelParams, string $expectedLabel ) {
 		$entity = $this->provideNewEntity();
 		$entity->setLabel( 'en', 'INVALID' );
 
+		// "INVALID" is invalid
+		$changeOpLabelParams[] = $this->getTermValidatorFactory();
+		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
 		$changeOpLabel->apply( $entity );
 
 		if ( $expectedLabel === '' ) {
@@ -68,95 +64,98 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function changeOpLabelAndResultProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function changeOpLabelAndResultProvider() {
 		$item = new Item( new ItemId( 'Q23' ) );
 
-		$args = [
+		return [
 			'add Label is a change' => [
 				$item,
-				new ChangeOpLabel( 'en', 'myNew', $validatorFactory ),
+				[ 'en', 'myNew' ],
 				new ChangeOpLabelResult( $item->getId(), 'en', null, 'myNew', true ),
 			],
 			'update Label is a change' => [
 				$item,
-				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
+				[ 'en', 'DUPE' ],
 				new ChangeOpLabelResult( $item->getId(), 'en', 'myNew', 'DUPE', true ),
 
 			],
 			'add existing label is a no change' => [
 				$item,
-				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
+				[ 'en', 'DUPE' ],
 				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', 'DUPE', false ),
 
 			],
 			'set Label to null is a change' => [
 				$item,
-				new ChangeOpLabel( 'en', null, $validatorFactory ),
+				[ 'en', null ],
 				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', null, true ),
 			],
 			'set null Label to null is a no change' => [
 				$item,
-				new ChangeOpLabel( 'en', null, $validatorFactory ),
+				[ 'en', null ],
 				new ChangeOpLabelResult( $item->getId(), 'en', null, null, false ),
 			],
 		];
-
-		return $args;
 	}
 
 	/**
-	 * @param Item $item
-	 * @param ChangeOpLabel $changeOpLabel
-	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
 	 * @dataProvider changeOpLabelAndResultProvider
 	 */
-	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpLabelResult ) {
+	public function testApplySetsIsEntityChangedCorrectlyOnResult(
+		Item $item,
+		array $changeOpLabelParams,
+		ChangeOpLabelResult $expectedChangeOpLabelResult
+	) {
+		// "INVALID" is invalid
+		$changeOpLabelParams[] = $this->getTermValidatorFactory();
+
+		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpLabelResult->isEntityChanged(), $changeOpResult->isEntityChanged() );
 	}
 
 	/**
-	 * @param Item $item
-	 * @param ChangeOpLabel $changeOpLabel
-	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
 	 * @dataProvider changeOpLabelAndResultProvider
 	 */
-	public function testApplySetsLabelsCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpLabelResult ) {
+	public function testApplySetsLabelsCorrectlyOnResult(
+		Item $item,
+		array $changeOpLabelParams,
+		ChangeOpLabelResult $expectedChangeOpLabelResult
+	) {
+		// "INVALID" is invalid
+		$changeOpLabelParams[] = $this->getTermValidatorFactory();
+
+		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpLabelResult->getNewLabel(), $changeOpResult->getNewLabel() );
 		$this->assertEquals( $expectedChangeOpLabelResult->getOldLabel(), $changeOpResult->getOldLabel() );
 	}
 
-	public function validateProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
+	public static function validateProvider(): iterable {
 		$args = [];
-		$args['valid label'] = [ new ChangeOpLabel( 'fr', 'valid', $validatorFactory ), true ];
-		$args['invalid label'] = [ new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ), false ];
-		$args['duplicate label'] = [ new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ), false ];
-		$args['invalid language'] = [ new ChangeOpLabel( 'INVALID', 'valid', $validatorFactory ), false ];
-		$args['set bad language to null'] = [ new ChangeOpLabel( 'INVALID', null, $validatorFactory ), false ];
+		$args['valid label'] = [ [ 'fr', 'valid' ], true ];
+		$args['invalid label'] = [ [ 'fr', 'INVALID' ], false ];
+		$args['duplicate label'] = [ [ 'fr', 'DUPE' ], false ];
+		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
+		$args['set bad language to null'] = [ [ 'INVALID', null ], false ];
 
 		return $args;
 	}
 
 	/**
 	 * @dataProvider validateProvider
-	 *
-	 * @param ChangeOp $changeOp
-	 * @param bool $valid
 	 */
-	public function testValidate( ChangeOp $changeOp, $valid ) {
+	public function testValidate( array $changeOpParams, bool $valid ) {
 		$entity = $this->provideNewEntity();
 
 		$oldLabels = $entity->getLabels()->toTextArray();
 
+		// "INVALID" is invalid
+		$changeOpParams[] = $this->getTermValidatorFactory();
+
+		$changeOp = new ChangeOpLabel( ...$changeOpParams );
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
@@ -177,26 +176,18 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	public function changeOpSummaryProvider() {
-		// "INVALID" is invalid
-		$validatorFactory = $this->getTermValidatorFactory();
-
-		$args = [];
-
-		$entity = $this->provideNewEntity();
+	public static function changeOpSummaryProvider(): iterable {
+		$entity = self::provideNewEntity();
 		$entity->setLabel( 'de', 'Test' );
-		$args[] = [ $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' ];
+		yield [ $entity, [ 'de', 'Zusammenfassung' ], 'set', 'de' ];
 
-		$entity = $this->provideNewEntity();
+		$entity = self::provideNewEntity();
 		$entity->setLabel( 'de', 'Test' );
-		$args[] = [ $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' ];
+		yield [ $entity, [ 'de', null ], 'remove', 'de' ];
 
-		$entity = $this->provideNewEntity();
+		$entity = self::provideNewEntity();
 		$entity->getLabels()->removeByLanguage( 'de' );
-		$args[] = [ $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
-		), 'add', 'de' ];
-
-		return $args;
+		yield [ $entity, [ 'de', 'Zusammenfassung' ], 'add', 'de' ];
 	}
 
 	/**
@@ -204,12 +195,16 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testUpdateSummary(
 		EntityDocument $entity,
-		ChangeOp $changeOp,
+		array $changeOpParams,
 		$summaryExpectedAction,
 		$summaryExpectedLanguage
 	) {
 		$summary = new Summary();
 
+		// "INVALID" is invalid
+		$changeOpParams[] = $this->getTermValidatorFactory();
+
+		$changeOp = new ChangeOpLabel( ...$changeOpParams );
 		$changeOp->apply( $entity, $summary );
 
 		$this->assertSame( $summaryExpectedAction, $summary->getMessageKey() );

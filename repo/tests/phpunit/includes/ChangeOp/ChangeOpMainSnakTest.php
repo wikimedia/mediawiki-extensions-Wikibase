@@ -15,7 +15,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -86,35 +85,31 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function provideChangeOps() {
-		$snak = $this->makeSnak( 'P5', 'test' );
-		$args = [];
+	public static function provideChangeOps(): iterable {
+		$snak = self::makeSnak( 'P5', 'test' );
 
 		// add a new claim
-		$item = $this->makeNewItemWithClaim( 'Q123', $snak );
-		$newSnak = $this->makeSnak( 'P8', 'newSnak' );
+		$item = self::makeNewItemWithClaim( 'Q123', $snak );
+		$newSnak = self::makeSnak( 'P8', 'newSnak' );
 		$guid = '';
-		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['add new claim'] = [ $item, $changeOp, $expected ];
+		yield 'add new claim' => [ $item, [ $guid, $newSnak ], $expected ];
 
 		// update an existing claim with a new main snak value
-		$item = $this->makeNewItemWithClaim( 'Q234', $snak );
-		$newSnak = $this->makeSnak( 'P5', 'changedSnak' );
+		$item = self::makeNewItemWithClaim( 'Q234', $snak );
+		$newSnak = self::makeSnak( 'P5', 'changedSnak' );
 		$statements = $item->getStatements()->toArray();
 
 		$guid = $statements[0]->getGuid();
-		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['update claim by guid'] = [ $item, $changeOp, $expected ];
-
-		return $args;
+		yield 'update claim by guid' => [ $item, [ $guid, $newSnak ], $expected ];
 	}
 
 	/**
 	 * @dataProvider provideChangeOps
 	 */
-	public function testApply( Item $item, ChangeOpMainSnak $changeOp, DataValue $expected = null ) {
+	public function testApply( Item $item, array $changeOpParams, DataValue $expected = null ) {
+		$changeOp = $this->newChangeOpMainSnak( ...$changeOpParams );
 		$changeOpResult = $changeOp->apply( $item );
 		$this->assertNotEmpty( $changeOp->getStatementGuid() );
 		$statements = $item->getStatements();
@@ -128,9 +123,9 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	public function provideInvalidApply() {
-		$snak = $this->makeSnak( 'P11', 'test' );
-		$item = $this->makeNewItemWithClaim( 'Q777', $snak );
+	public static function provideInvalidApply(): iterable {
+		$snak = self::makeSnak( 'P11', 'test' );
+		$item = self::makeNewItemWithClaim( 'Q777', $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -138,31 +133,30 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
-		$newSnak = $this->makeSnak( 'P12', 'newww' );
-		$args['wrong entity'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) ];
+		$newSnak = self::makeSnak( 'P12', 'newww' );
+		$args['wrong entity'] = [ $wrongItem, [ $guid, $newSnak ] ];
 
 		// apply change to an unknown claim
 		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
-		$args['unknown claim'] = [ $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) ];
+		$args['unknown claim'] = [ $item, [ $wrongClaimId, $newSnak ] ];
 
 		// update an existing claim with wrong main snak property
-		$newSnak = $this->makeSnak( 'P13', 'changedSnak' );
+		$newSnak = self::makeSnak( 'P13', 'changedSnak' );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 
 		$guid = $statement->getGuid();
-		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
-		$args['wrong main snak property'] = [ $item, $changeOp ];
+		$args['wrong main snak property'] = [ $item, [ $guid, $newSnak ] ];
 
 		// apply invalid main snak
-		$badSnak = $this->makeSnak( 'P12', new NumberValue( 5 ) );
-		$args['bad value type'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) ];
+		$badSnak = self::makeSnak( 'P12', new NumberValue( 5 ) );
+		$args['bad value type'] = [ $wrongItem, [ $guid, $badSnak ] ];
 
 		// apply invalid main snak
 		// NOTE: the mock validator considers "INVALID" to be invalid.
-		$badSnak = $this->makeSnak( 'P12', 'INVALID' );
-		$args['invalid value'] = [ $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) ];
+		$badSnak = self::makeSnak( 'P12', 'INVALID' );
+		$args['invalid value'] = [ $wrongItem, [ $guid, $badSnak ] ];
 
 		return $args;
 	}
@@ -170,13 +164,14 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( EntityDocument $item, ChangeOp $changeOp ) {
+	public function testInvalidApply( EntityDocument $item, array $changeOpParams ) {
 		$this->expectException( ChangeOpException::class );
 
+		$changeOp = $this->newChangeOpMainSnak( ...$changeOpParams );
 		$changeOp->apply( $item );
 	}
 
-	private function makeNewItemWithClaim( $itemIdString, $snak ) {
+	private static function makeNewItemWithClaim( $itemIdString, $snak ): Item {
 		$item = new Item( new ItemId( $itemIdString ) );
 
 		$item->getStatements()->addNewStatement( $snak, null, null, 'GUID' );
@@ -184,7 +179,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	private function makeSnak( $propertyId, $value ) {
+	private static function makeSnak( $propertyId, $value ) {
 		if ( is_string( $propertyId ) ) {
 			$propertyId = new NumericPropertyId( $propertyId );
 		}

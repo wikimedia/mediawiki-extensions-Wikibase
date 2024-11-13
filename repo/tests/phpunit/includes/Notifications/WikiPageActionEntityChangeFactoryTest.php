@@ -138,36 +138,36 @@ class WikiPageActionEntityChangeFactoryTest extends \MediaWikiIntegrationTestCas
 	 * @dataProvider redirectContentsWithActionProvider
 	 */
 	public function testNewForPageModified_determinesChangeAction(
-		EntityContent $currentRevisionContent,
-		EntityContent $parentRevisionContent,
+		callable $currentRevisionContentFunction,
+		callable $parentRevisionContentFunction,
 		string $expectedAction
 	) {
 		$change = $this->newFactory()->newForPageModified(
-			$this->newMinimalRevisionRecordWithContent( $currentRevisionContent ),
-			$parentRevisionContent
+			$this->newMinimalRevisionRecordWithContent( $currentRevisionContentFunction( $this ) ),
+			$parentRevisionContentFunction( $this )
 		);
 
 		$this->assertChangeAction( $expectedAction, $change );
 	}
 
-	public function redirectContentsWithActionProvider() {
+	public static function redirectContentsWithActionProvider(): iterable {
 		$itemId = new ItemId( 'Q321' );
 
 		yield 'newer version is a redirect -> deletion' => [
-			'currentRevisionContent' => $this->newItemRedirect(),
-			'parentRevisionContent' => $this->newItemContent( $itemId ),
+			'currentRevisionContent' => fn ( self $self ) => $self->newItemRedirect(),
+			'parentRevisionContent' => fn ( self $self ) => $self->newItemContent( $itemId ),
 			'expectedEntityAction' => EntityChange::REMOVE,
 		];
 
 		yield 'older version is a redirect -> restore' => [
-			'currentRevisionContent' => $this->newItemContent( $itemId ),
-			'parentRevisionContent' => $this->newItemRedirect(),
+			'currentRevisionContent' => fn ( self $self ) => $self->newItemContent( $itemId ),
+			'parentRevisionContent' => fn ( self $self ) => $self->newItemRedirect(),
 			'expectedEntityAction' => EntityChange::RESTORE,
 		];
 
 		yield 'neither are redirects -> update' => [
-			'currentRevisionContent' => $this->newItemContent( $itemId ),
-			'parentRevisionContent' => $this->newItemContent( $itemId ),
+			'currentRevisionContent' => fn ( self $self ) => $self->newItemContent( $itemId ),
+			'parentRevisionContent' => fn ( self $self ) => $self->newItemContent( $itemId ),
 			'expectedEntityAction' => EntityChange::UPDATE,
 		];
 	}

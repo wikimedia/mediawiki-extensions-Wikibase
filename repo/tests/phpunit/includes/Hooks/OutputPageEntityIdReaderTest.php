@@ -23,7 +23,9 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider getEntityIdFromOutputPageProvider
 	 */
-	public function testGetEntityIdFromOutputPage( $expected, OutputPage $out, bool $hasEntityView ) {
+	public function testGetEntityIdFromOutputPage( $expected, callable $outputPageFactory, bool $hasEntityView ) {
+		$out = $outputPageFactory( $this );
+
 		$entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
 		$entityViewChecker->expects( $this->once() )
 			->method( 'hasEntityView' )
@@ -40,28 +42,33 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function getEntityIdFromOutputPageProvider() {
+	public static function getEntityIdFromOutputPageProvider(): iterable {
 		yield 'Entity id set' => [
 			new ItemId( 'Q42' ),
-			$this->newOutputPageWithJsConfigVars( [ 'wbEntityId' => 'Q42' ] ),
+			fn ( self $self ) => $self->newOutputPageWithJsConfigVars( [ 'wbEntityId' => 'Q42' ] ),
 			true,
 		];
 		yield 'page with entity view, but no entity id set' => [
 			null,
-			$this->newOutputPageWithJsConfigVars( [] ),
+			fn ( self $self ) => $self->newOutputPageWithJsConfigVars( [] ),
 			true,
 		];
 
-		$out = $this->createMock( OutputPage::class );
-		$out->expects( $this->never() )->method( $this->anything() );
 		yield 'no entity view page, should abort early' => [
 			null,
-			$out,
+			fn ( self $self ) => $self->newOutputPageMockExpectingNothing(),
 			false,
 		];
 	}
 
-	private function newOutputPageWithJsConfigVars( array $config ) {
+	private function newOutputPageMockExpectingNothing(): OutputPage {
+		$out = $this->createMock( OutputPage::class );
+		$out->expects( $this->never() )->method( $this->anything() );
+
+		return $out;
+	}
+
+	private function newOutputPageWithJsConfigVars( array $config ): OutputPage {
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getRequest' )
 			->willReturn( RequestContext::getMain()->getRequest() );

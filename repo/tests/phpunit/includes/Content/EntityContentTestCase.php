@@ -62,24 +62,24 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityId
 	 */
-	abstract protected function getDummyId();
+	abstract protected static function getDummyId();
 
 	/**
 	 * @return string
 	 */
-	abstract protected function getEntityType();
+	abstract protected static function getEntityType();
 
 	/**
 	 * @return EntityContent An entirely empty content object with no EntityHolder and no entity.
 	 */
-	abstract protected function newEmpty();
+	abstract protected static function newEmpty();
 
 	/**
 	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityContent A content object that contains an entity that is empty.
 	 */
-	abstract protected function newBlank( EntityId $entityId = null );
+	abstract protected static function newBlank( EntityId $entityId = null );
 
 	public function testIsEmpty() {
 		$this->assertTrue( $this->newEmpty()->isEmpty(), 'empty' );
@@ -93,7 +93,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $entityContent->getTextForSearchIndex() );
 	}
 
-	private function setLabel( EntityDocument $entity, $languageCode, $text ) {
+	private static function setLabel( EntityDocument $entity, $languageCode, $text ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
@@ -101,9 +101,9 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$entity->getLabels()->setTextForLanguage( $languageCode, $text );
 	}
 
-	public function getTextForSearchIndexProvider() {
-		$entityContent = $this->newBlank();
-		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
+	public static function getTextForSearchIndexProvider() {
+		$entityContent = static::newBlank();
+		self::setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return [
 			[ $entityContent, 'cake' ],
@@ -155,7 +155,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	abstract public function provideContentObjectsWithoutId();
+	abstract public static function provideContentObjectsWithoutId();
 
 	/**
 	 * @dataProvider provideContentObjectsWithoutId
@@ -202,17 +202,17 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	public function diffProvider() {
-		$entityType = $this->getEntityType();
+		$entityType = static::getEntityType();
 
-		$empty = $this->newEmpty();
+		$empty = static::newEmpty();
 
-		$blank = $this->newBlank( $this->getDummyId() );
+		$blank = static::newBlank( static::getDummyId() );
 
-		$spam = $this->newBlank( $this->getDummyId() );
-		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
+		$spam = static::newBlank( static::getDummyId() );
+		static::setLabel( $spam->getEntity(), 'en', 'Spam' );
 
-		$ham = $this->newBlank( $this->getDummyId() );
-		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
+		$ham = static::newBlank( static::getDummyId() );
+		static::setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$emptyToHamDiff = new EntityDiff( [
 			'label' => new Diff( [ 'en' => new DiffOpAdd( 'Ham' ) ] ),

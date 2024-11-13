@@ -20,22 +20,14 @@ use Wikibase\Repo\Validators\EntityValidator;
  */
 class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	public function validEntityProvider() {
+	public static function validEntityProvider() {
 		$success = Result::newSuccess();
 		$failure = Result::newError( [ Error::newError( 'Foo!' ) ] );
 
-		$good = $this->createMock( EntityValidator::class );
-		$good->method( 'validateEntity' )
-			->willReturn( $success );
-
-		$bad = $this->createMock( EntityValidator::class );
-		$bad->method( 'validateEntity' )
-			->willReturn( $failure );
-
 		return [
-			[ [ $good, $bad ], false ],
-			[ [ $bad, $good ], false ],
-			[ [ $good, $good ], true ],
+			[ [ $success, $failure ], false ],
+			[ [ $failure, $success ], false ],
+			[ [ $success, $success ], true ],
 			[ [], true ],
 		];
 	}
@@ -43,7 +35,14 @@ class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider validEntityProvider
 	 */
-	public function testValidateEntity( $validators, $expected ) {
+	public function testValidateEntity( $validatorReturns, $expected ) {
+		$validators = array_map( function ( $validatorReturn ) {
+			$validator = $this->createMock( EntityValidator::class );
+			$validator->method( 'validateEntity' )
+				->willReturn( $validatorReturn );
+			return $validator;
+		}, $validatorReturns );
+
 		$entity = new Item();
 
 		$validator = new CompositeEntityValidator( $validators );

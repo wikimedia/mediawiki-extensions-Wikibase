@@ -33,7 +33,8 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	/**
 	 * @dataProvider rowDataProvider
 	 */
-	public function testParsesAndPrefetchesComments( array $rows, array $expectedProperties ) {
+	public function testParsesAndPrefetchesComments( callable $rowsFactory, array $expectedProperties ) {
+		$rows = $rowsFactory( $this );
 		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
 
 		$expectedPropertyIds = [];
@@ -71,7 +72,8 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	/**
 	 * @dataProvider rowDataProvider
 	 */
-	public function testShouldExtractProperties( array $rows, array $expectedProperties ) {
+	public function testShouldExtractProperties( callable $rowsFactory, array $expectedProperties ) {
+		$rows = $rowsFactory( $this );
 		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
 		$actualOutput = $helper->extractSummaryProperties( $rows );
 
@@ -84,18 +86,21 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 		$this->assertSame( sort( $expectedProperties ), sort( $stringOutput ) );
 	}
 
-	public function rowDataProvider() {
+	public static function rowDataProvider() {
 		return [
-			'Property:P1' => [ [ (object)[ 'rev_comment_text' => '[[Property:P31]]' ] ], [ 'P31' ] ],
+			'Property:P1' => [
+				fn () => [ (object)[ 'rev_comment_text' => '[[Property:P31]]' ] ],
+				[ 'P31' ],
+			],
 			'wdbeta:Special:EntityPage/P123' => [
-				[
+				fn () => [
 					(object)[ 'rev_comment_text' => '[[wdbeta:Special:EntityPage/P123]]' ],
 					(object)[ 'rev_comment_text' => '[[Property:P1234]]' ],
 				],
 				[ 'P123', 'P1234' ],
 			],
 			'Some other comment not parsed as link' => [
-				[
+				fn () => [
 					(object)[ 'rev_comment_text' => 'Great update /P14 stockholm' ],
 					(object)[ 'rc_comment_text' => '[[P31]]' ],
 					(object)[ 'rc_comment_text' => 'P31]]' ],
@@ -103,10 +108,19 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 				],
 				[],
 			],
-			'Recentchanges object' => [ [ (object)[ 'rc_comment_text' => '[[Property:P31]]' ] ], [ 'P31' ] ],
-			'RevisionRecord match' => [ [ $this->mockRevisionRecord( 'something [[Property:P31]]' ) ], [ 'P31' ] ],
-			'RevisionRecord no match' => [ [ $this->mockRevisionRecord( 'something [[P31]]' ) ], [] ],
-			'null' => [ [ (object)[ 'rc_comment_text' => null ] ], [] ],
+			'Recentchanges object' => [
+				fn () => [ (object)[ 'rc_comment_text' => '[[Property:P31]]' ] ],
+				[ 'P31' ],
+			],
+			'RevisionRecord match' => [
+				fn ( self $self ) => [ $self->mockRevisionRecord( 'something [[Property:P31]]' ) ],
+				[ 'P31' ],
+			],
+			'RevisionRecord no match' => [
+				fn ( self $self ) => [ $self->mockRevisionRecord( 'something [[P31]]' ) ],
+				[],
+			],
+			'null' => [ fn () => [ (object)[ 'rc_comment_text' => null ] ], [] ],
 		];
 	}
 

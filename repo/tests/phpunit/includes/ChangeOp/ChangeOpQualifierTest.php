@@ -31,10 +31,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @var ChangeOpTestMockProvider
-	 */
-	private $mockProvider;
+	private ChangeOpTestMockProvider $mockProvider;
 
 	/**
 	 * @param string|null $name
@@ -47,7 +44,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	public static function invalidArgumentProvider() {
+	public static function invalidArgumentProvider(): iterable {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new GuidGenerator();
@@ -75,31 +72,30 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function changeOpAddProvider() {
+	public static function changeOpAddProvider(): iterable {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 
-		$item = $this->newItem( $snak );
+		$item = self::newItem( $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$changeOp = new ChangeOpQualifier(
+		$changeOpParams = [
 			$statement->getGuid(),
 			$newQualifier,
 			'',
-			$this->mockProvider->getMockSnakValidator()
-		);
+		];
 		$snakHash = $newQualifier->getHash();
 
 		return [
-			[ $item, $changeOp, $snakHash ],
+			[ $item, $changeOpParams, $snakHash ],
 		];
 	}
 
-	public function changeOpSetProvider() {
+	public static function changeOpSetProvider(): iterable {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 
-		$item = $this->newItem( $snak );
+		$item = self::newItem( $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -107,15 +103,14 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
 		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
-		$changeOp = new ChangeOpQualifier(
+		$changeOpParams = [
 			$statement->getGuid(),
 			$changedQualifier,
 			$snakHash,
-			$this->mockProvider->getMockSnakValidator()
-		);
+		];
 
 		return [
-			[ $item, $changeOp, $changedQualifier->getHash() ],
+			[ $item, $changeOpParams, $changedQualifier->getHash() ],
 		];
 	}
 
@@ -123,7 +118,10 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpAddProvider
 	 * @dataProvider changeOpSetProvider
 	 */
-	public function testApplySetQualifier( Item $item, ChangeOpQualifier $changeOp, $snakHash ) {
+	public function testApplySetQualifier( Item $item, $changeOpParams, $snakHash ) {
+		$changeOpParams[] = $this->mockProvider->getMockSnakValidator();
+		$changeOp = new ChangeOpQualifier( ...$changeOpParams );
+
 		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
@@ -138,7 +136,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return Item
 	 */
-	private function newItem( Snak $snak ) {
+	private static function newItem( Snak $snak ) {
 		$item = new Item( new ItemId( 'Q123' ) );
 
 		$item->getStatements()->addNewStatement(

@@ -34,59 +34,47 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class StoreTest extends MediaWikiIntegrationTestCase {
 
-	public function instanceProvider() {
-		$instances = [
-			new SqlStore(
-				WikibaseRepo::getEntityChangeFactory(),
-				WikibaseRepo::getEntityIdParser(),
-				WikibaseRepo::getEntityIdComposer(),
-				$this->createMock( EntityIdLookup::class ),
-				$this->createMock( EntityTitleStoreLookup::class ),
-				new EntityNamespaceLookup( [] ),
-				$this->createMock( IdGenerator::class ),
-				$this->createMock( WikibaseServices::class ),
-				$this->createMock( HookContainer::class ),
-				new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
-				new SettingsArray( [
-					'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
-					'sharedCacheKeyGroup' => 'testdb',
-					'sharedCacheType' => CACHE_NONE,
-					'sharedCacheDuration' => 60 * 60,
-				] ),
-				WikibaseRepo::getPropertyInfoLookup(),
-				$this->createMock( ObjectCacheFactory::class )
-			),
-		];
+	private Store $store;
 
-		return [ $instances ];
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->store = new SqlStore(
+			WikibaseRepo::getEntityChangeFactory(),
+			WikibaseRepo::getEntityIdParser(),
+			WikibaseRepo::getEntityIdComposer(),
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( EntityTitleStoreLookup::class ),
+			new EntityNamespaceLookup( [] ),
+			$this->createMock( IdGenerator::class ),
+			$this->createMock( WikibaseServices::class ),
+			$this->createMock( HookContainer::class ),
+			new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
+			new SettingsArray( [
+				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
+				'sharedCacheKeyGroup' => 'testdb',
+				'sharedCacheType' => CACHE_NONE,
+				'sharedCacheDuration' => 60 * 60,
+			] ),
+			WikibaseRepo::getPropertyInfoLookup(),
+			$this->createMock( ObjectCacheFactory::class )
+		);
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testNewSiteLinkStore( Store $store ) {
-		$this->assertInstanceOf( SiteLinkLookup::class, $store->newSiteLinkStore() );
+	public function testNewSiteLinkStore() {
+		$this->assertInstanceOf( SiteLinkLookup::class, $this->store->newSiteLinkStore() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testItemsWithoutSitelinksFinder( Store $store ) {
-		$this->assertInstanceOf( ItemsWithoutSitelinksFinder::class, $store->newItemsWithoutSitelinksFinder() );
+	public function testItemsWithoutSitelinksFinder() {
+		$this->assertInstanceOf( ItemsWithoutSitelinksFinder::class, $this->store->newItemsWithoutSitelinksFinder() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetEntityChangeLookup( Store $store ) {
-		$this->assertInstanceOf( EntityChangeLookup::class, $store->getEntityChangeLookup() );
+	public function testGetEntityChangeLookup() {
+		$this->assertInstanceOf( EntityChangeLookup::class, $this->store->getEntityChangeLookup() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetChangeStore( Store $store ) {
-		$this->assertInstanceOf( ChangeStore::class, $store->getChangeStore() );
+	public function testGetChangeStore() {
+		$this->assertInstanceOf( ChangeStore::class, $this->store->getChangeStore() );
 	}
 
 	public function testLookupCacheConstantsHaveDistinctValues() {

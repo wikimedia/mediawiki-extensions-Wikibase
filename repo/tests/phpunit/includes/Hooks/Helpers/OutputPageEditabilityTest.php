@@ -33,68 +33,87 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider nonEditableOutputPageProvider
 	 */
-	public function testGivenPageIsNotEditable_returnsFalse( OutputPage $outputPage ) {
+	public function testGivenPageIsNotEditable_returnsFalse( callable $outputPageFactory ) {
+		$outputPage = $outputPageFactory( $this );
 		$editability = new OutputPageEditability();
 		$this->assertFalse( $editability->validate( $outputPage ) );
 	}
 
-	public function nonEditableOutputPageProvider() {
+	public static function nonEditableOutputPageProvider(): iterable {
 		$user = new UserIdentityValue( 1, __METHOD__ );
-		$out = $this->newOutputPage();
-		$noRightsPerformer = new SimpleAuthority( $user, [] );
-		$noRightsUserContext = new RequestContext();
-		$noRightsUserContext->setAuthority( $noRightsPerformer );
-		$out->setContext( $noRightsUserContext );
-		$out->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
-		yield 'user does not have edit permission' => [ $out ];
+		$outputPageFactory = function() use ( $user ) {
+			$out = self::newOutputPage();
+			$noRightsPerformer = new SimpleAuthority( $user, [] );
+			$noRightsUserContext = new RequestContext();
+			$noRightsUserContext->setAuthority( $noRightsPerformer );
+			$out->setContext( $noRightsUserContext );
+			$out->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
 
-		$request = $this->createMock( WebRequest::class );
-		$request->expects( $this->once() )
-			->method( 'getCheck' )
-			->with( 'diff' )
-			->willReturn( true );
-		$request->method( 'response' )
-			->willReturn( new FauxResponse );
+			return $out;
+		};
+		yield 'user does not have edit permission' => [ $outputPageFactory ];
+
 		$context = new RequestContext();
 		$context->setAuthority( new UltimateAuthority( $user ) );
-		$context->setRequest( $request );
 		$context->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
-		yield 'diff page' => [ new OutputPage( $context ) ];
+		$outputPageFactory = function ( self $self ) use ( $context ): OutputPage {
+			$request = $self->createMock( WebRequest::class );
+			$request->expects( self::once() )
+				->method( 'getCheck' )
+				->with( 'diff' )
+				->willReturn( true );
+			$request->method( 'response' )
+				->willReturn( new FauxResponse );
+			$context->setRequest( $request );
 
-		$out = $this->newOutputPage();
-		$out->setRevisionId( 123 );
-		$title = $this->createMock( Title::class );
-		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
-		$title->expects( $this->once() )
-			->method( 'getLatestRevID' )
-			->willReturn( 321 );
-		$out->setTitle( $title );
-		yield 'not latest revision' => [ $out ];
+			return new OutputPage( $context );
+		};
+		yield 'diff page' => [ $outputPageFactory ];
 
-		$out = $this->newOutputPage();
-		$context = new RequestContext();
-		$context->setAuthority( new UltimateAuthority( $user ) );
-		$context->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
-		$out->setContext( $context );
-		$out->setPrintable();
-		yield 'print view' => [ $out ];
+		$outputPageFactory = function ( self $self ) use ( $user ): OutputPage {
+			$out = self::newOutputPage();
+			$out->setRevisionId( 123 );
+			$title = $self->createMock( Title::class );
+			$title->method( 'getNamespace' )->willReturn( NS_MAIN );
+			$title->expects( self::once() )
+				->method( 'getLatestRevID' )
+				->willReturn( 321 );
+			$out->setTitle( $title );
+
+			return $out;
+		};
+		yield 'not latest revision' => [ $outputPageFactory ];
+
+		$outputPageFactory = function() use ( $user ): OutputPage {
+			$out = self::newOutputPage();
+			$context = new RequestContext();
+			$context->setAuthority( new UltimateAuthority( $user ) );
+			$context->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
+			$out->setContext( $context );
+			$out->setPrintable();
+
+			return $out;
+		};
+		yield 'print view' => [ $outputPageFactory ];
 	}
 
 	/**
 	 * @dataProvider editableOutputPageProvider
 	 */
-	public function testGivenPageIsEditable_returnsTrue( OutputPage $outputPage ) {
+	public function testGivenPageIsEditable_returnsTrue( callable $outputPageFactory ) {
+		$outputPage = $outputPageFactory( $this );
+
 		$editability = new OutputPageEditability();
 		$this->assertTrue( $editability->validate( $outputPage ) );
 	}
 
-	public function editableOutputPageProvider() {
-		yield [ $this->getDefaultEditableOutputPage() ];
-		yield [ $this->getNullRevisionEditableOutputPage() ];
-		yield [ $this->getNonExistingTitleEditableOutputPage() ];
+	public static function editableOutputPageProvider(): iterable {
+		yield [ fn ( self $self ) => $self->getDefaultEditableOutputPage() ];
+		yield [ fn ( self $self ) => $self->getNullRevisionEditableOutputPage() ];
+		yield [ fn ( self $self ) => $self->getNonExistingTitleEditableOutputPage() ];
 	}
 
-	private function getDefaultEditableOutputPage() {
+	private function getDefaultEditableOutputPage(): OutputPage {
 		$outputPage = $this->newOutputPage();
 
 		$user = new UserIdentityValue( 1, __METHOD__ );
@@ -115,6 +134,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$context->setAuthority( $performer );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
+		$outputPage->setContext( $context );
 
 		$outputPage->setRevisionId( 123 );
 		$title->expects( $this->once() )
@@ -126,7 +146,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		return $outputPage;
 	}
 
-	private function getNullRevisionEditableOutputPage() {
+	private function getNullRevisionEditableOutputPage(): OutputPage {
 		$outputPage = $this->newOutputPage();
 
 		$user = new UserIdentityValue( 1, __METHOD__ );
@@ -147,6 +167,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$context->setAuthority( $performer );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
+		$outputPage->setContext( $context );
 
 		$outputPage->setRevisionId( null );
 
@@ -155,7 +176,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		return $outputPage;
 	}
 
-	private function getNonExistingTitleEditableOutputPage() {
+	private function getNonExistingTitleEditableOutputPage(): OutputPage {
 		$outputPage = $this->newOutputPage();
 
 		$user = new UserIdentityValue( 1, __METHOD__ );
@@ -178,6 +199,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		$context->setRequest( $request );
 		$context->setTitle( $title );
 		$context->setAuthority( $performer );
+		$outputPage->setContext( $context );
 
 		$outputPage->setRevisionId( 123 );
 		$title->expects( $this->once() )
@@ -189,10 +211,7 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 		return $outputPage;
 	}
 
-	/**
-	 * @return OutputPage
-	 */
-	private function newOutputPage() {
+	private static function newOutputPage(): OutputPage {
 		$outputPage = new OutputPage( new RequestContext() );
 		$outputPage->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
 
