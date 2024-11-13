@@ -40,7 +40,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				).makeRequest();
 
 				expect( response ).to.have.status( 200 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '400 - invalid patch provided', async () => {
@@ -50,7 +50,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				).makeRequest();
 
 				expect( response ).to.have.status( 400 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '404 - statement does not exist', async () => {
@@ -62,7 +62,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				).makeRequest();
 
 				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '409 - cannot apply patch', async () => {
@@ -74,7 +74,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				).makeRequest();
 
 				expect( response ).to.have.status( 409 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '412 - precondition failed', async () => {
@@ -89,7 +89,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 					.makeRequest();
 
 				expect( response ).to.have.status( 412 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '422 - patch results in an invalid statement', async () => {
@@ -105,7 +105,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 				).makeRequest();
 
 				expect( response ).to.have.status( 422 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 		} );

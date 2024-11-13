@@ -28,7 +28,7 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		const response = await newGetPropertyDescriptionRequestBuilder( propertyId, languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
@@ -37,21 +37,21 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid property ID', async () => {
 		const response = await newGetPropertyDescriptionRequestBuilder( 'X123', languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 Not Found response is valid for a non-existing property', async () => {
 		const response = await newGetPropertyDescriptionRequestBuilder( 'P99999', languageCode ).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

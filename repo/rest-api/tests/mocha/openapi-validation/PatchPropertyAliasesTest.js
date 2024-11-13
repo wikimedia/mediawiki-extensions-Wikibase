@@ -28,7 +28,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ makeAddNewAliasOp() ]
 		).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid patch', async () => {
@@ -37,7 +37,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ { invalid: 'patch' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - property not found', async () => {
@@ -46,7 +46,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ makeAddNewAliasOp() ]
 		).makeRequest();
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - patch test failed', async () => {
@@ -55,7 +55,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ { op: 'test', path: '/en', value: [ 'unexpected', 'list', 'of', 'aliases' ] } ]
 		).makeRequest();
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -65,7 +65,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ makeAddNewAliasOp() ]
 		).withHeader( 'If-Unmodified-Since', yesterday ).makeRequest();
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '422 - empty alias', async () => {
@@ -74,7 +74,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			[ { op: 'add', path: '/en', value: [ '' ] } ]
 		).makeRequest();
 		expect( response ).to.have.status( 422 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 } );

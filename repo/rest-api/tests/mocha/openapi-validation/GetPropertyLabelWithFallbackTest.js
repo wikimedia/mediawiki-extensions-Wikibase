@@ -29,7 +29,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '304 Not Modified response is valid', async () => {
@@ -38,7 +38,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '307 Temporary Redirect response is valid for a label with language fallback', async () => {
@@ -49,7 +49,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		).makeRequest();
 
 		expect( response ).to.have.status( 307 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 Bad Request response is valid for an invalid property ID', async () => {
@@ -57,7 +57,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it(
@@ -74,7 +74,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 			).makeRequest();
 
 			expect( response ).to.have.status( 404 );
-			expect( response ).to.satisfyApiSpec;
+			expect( response ).to.satisfyApiSchema;
 		}
 	);
 

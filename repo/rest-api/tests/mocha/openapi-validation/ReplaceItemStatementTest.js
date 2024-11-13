@@ -39,7 +39,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 				).makeRequest();
 
 				expect( response ).to.have.status( 200 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '400 - invalid statement serialization', async () => {
@@ -49,7 +49,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 				).makeRequest();
 
 				expect( response ).to.have.status( 400 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '404 - statement does not exist', async () => {
@@ -59,7 +59,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 				).makeRequest();
 
 				expect( response ).to.have.status( 404 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 			it( '412 - precondition failed', async () => {
@@ -72,7 +72,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 					.makeRequest();
 
 				expect( response ).to.have.status( 412 );
-				expect( response ).to.satisfyApiSpec;
+				expect( response ).to.satisfyApiSchema;
 			} );
 
 		} );

@@ -37,7 +37,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '201 - sitelink created', async () => {
@@ -52,7 +52,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid item id', async () => {
@@ -60,7 +60,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
@@ -70,7 +70,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -82,7 +82,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -92,7 +92,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '422 - sitelink conflict', async () => {
@@ -113,6 +113,6 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );

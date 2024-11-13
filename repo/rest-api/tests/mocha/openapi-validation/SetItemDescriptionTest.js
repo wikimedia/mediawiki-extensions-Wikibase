@@ -31,7 +31,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			makeUnique( 'updated description' )
 		).makeRequest();
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '201 - description created', async () => {
@@ -41,7 +41,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			makeUnique( 'neue Beschreibung' )
 		).makeRequest();
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '400 - invalid description', async () => {
@@ -52,7 +52,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '404 - item does not exist', async () => {
@@ -63,7 +63,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 404 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '409 - item redirected', async () => {
@@ -75,7 +75,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		).makeRequest();
 
 		expect( response ).to.have.status( 409 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 
 	it( '412 - precondition failed', async () => {
@@ -89,6 +89,6 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 412 );
-		expect( response ).to.satisfyApiSpec;
+		expect( response ).to.satisfyApiSchema;
 	} );
 } );
