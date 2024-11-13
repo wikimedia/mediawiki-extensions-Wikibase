@@ -9,6 +9,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -35,11 +36,6 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $namespaceChecker;
 
-	/**
-	 * @var UserOptionsManager
-	 */
-	private $userOptionsManager;
-
 	protected function setUp(): void {
 		parent::setUp();
 		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
@@ -53,127 +49,116 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->namespaceChecker
 			->method( 'isWikibaseEnabled' )
 			->willReturn( true );
-
-		$this->userOptionsManager = $this->createMock( UserOptionsManager::class );
 	}
 
-	/**
-	 * @param SettingsArray $settings
-	 *
-	 * @return EchoNotificationsHandlers
-	 */
-	private function getHandlers( SettingsArray $settings ) {
+	private function getHandlers( SettingsArray $settings ): EchoNotificationsHandlers {
 		return new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
 			$this->getServiceContainer()->getRedirectLookup(),
-			$this->userOptionsManager,
+			$this->createMock( UserOptionsManager::class ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			'repoSiteName'
 		);
 	}
 
-	public function testWikibaseHandleChange() {
-		/** @var ChangeRow[] $changes */
-		$changes = TestChanges::getChanges();
-
-		$settings = new SettingsArray();
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-		$settings->setSetting( 'sendEchoNotification', true );
-		$settings->setSetting( 'echoIcon', false );
-
+	public function testWikibaseHandleChange_unrelatedChanges() {
+		$settings = new SettingsArray( [
+			'siteGlobalID' => 'enwiki',
+			'sendEchoNotification' => true,
+		] );
 		$handlers = $this->getHandlers( $settings );
 
-		$special = [
-			'change-dewiki-sitelink',
-			'change-enwiki-sitelink',
-			'set-enwiki-sitelink',
-		];
+		/** @var ChangeRow[] $changes */
+		$changes = array_diff_key(
+			TestChanges::getChanges(),
+			[
+				'change-dewiki-sitelink' => true,
+				'change-enwiki-sitelink' => true,
+				'set-enwiki-sitelink' => true,
+			]
+		);
 		foreach ( $changes as $key => $change ) {
-			if ( in_array( $key, $special ) ) {
-				continue;
-			}
 			$this->assertFalse(
 				$handlers->doWikibaseHandleChange( $change ),
 				"Failed asserting that '$key' does not create an event"
 			);
 		}
+	}
 
-		$setEn = $changes['set-enwiki-sitelink'];
-		$changeEn = $changes['change-enwiki-sitelink'];
+	public static function provideWikibaseHandleChange() {
+		return [
+			// add 'Emmy' as enwiki sitelink
+			[ true, 'set-enwiki-sitelink', true, 'enwiki', [ 'Emmy' ] ],
+			[ false, 'set-enwiki-sitelink', true, 'enwiki' ],
+			[ false, 'set-enwiki-sitelink', false, 'enwiki', [ 'Emmy' ] ],
+			[ false, 'set-enwiki-sitelink', true, 'dewiki', [ 'Emmy' ] ],
 
-		Title::newFromTextThrow( 'Emmy' )->resetArticleID( 0 );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $setEn ),
-			"Failed asserting that non-existing 'Emmy' does not create an event"
-		);
+			// change enwiki sitelink from 'Emmy' to 'Emmy2'
+			[ true, 'change-enwiki-sitelink', true, 'enwiki', [ 'Emmy', 'Emmy2' ] ],
+			[ false, 'change-enwiki-sitelink', true, 'enwiki', [ 'Emmy' ] ],
+			[ false, 'change-enwiki-sitelink', true, 'enwiki', [ 'Emmy2' ] ],
 
-		$this->insertPage( 'Emmy' );
-		$this->assertTrue(
-			$handlers->doWikibaseHandleChange( $setEn ),
-			"Failed asserting that 'Emmy' creates an event"
-		);
+			// change dewiki sitelink from 'Duummy' to 'Duummy2'
+			[
+				true,
+				'change-dewiki-sitelink',
+				true,
+				'dewiki',
+				[ 'Duummy', 'Duummy2' ],
+			],
+			[
+				false,
+				'change-dewiki-sitelink',
+				true,
+				'dewiki',
+				[
+					'Duummy' => '#REDIRECT [[Duummy2]]',
+					'Duummy2',
+				],
+			],
+		];
+	}
 
-		$settings->setSetting( 'siteGlobalID', 'dewiki' );
+	/**
+	 * @dataProvider provideWikibaseHandleChange
+	 */
+	public function testWikibaseHandleChange(
+		bool $expected,
+		string $key,
+		bool $sendEchoNotification,
+		string $siteGlobalID,
+		array $createPages = []
+	) {
+		$settings = clone WikibaseClient::getSettings();
+		$settings->setSetting( 'siteGlobalID', $siteGlobalID );
+		$settings->setSetting( 'sendEchoNotification', $sendEchoNotification );
+		$settings->setSetting( 'propagateChangesToRepo', false );
+		$this->setService( 'WikibaseClient.Settings', $settings );
+
 		$handlers = $this->getHandlers( $settings );
 
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $setEn ),
-			"Failed asserting that 'dewiki' sitelink does not create an event"
-		);
+		/** @var ChangeRow[] $changes */
+		$changes = TestChanges::getChanges();
+		$change = $changes[$key];
 
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-		$handlers = $this->getHandlers( $settings );
-
-		Title::newFromTextThrow( 'Emmy2' )->resetArticleID( 0 );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $changeEn ),
-			"Failed asserting that non-existing 'Emmy2' does not create an event"
-		);
-
-		$this->insertPage( 'Emmy2' );
-		$this->assertTrue(
-			$handlers->doWikibaseHandleChange( $changeEn ),
-			"Failed asserting that 'Emmy2' creates an event"
-		);
-
-		$settings->setSetting( 'sendEchoNotification', false );
-		$handlers = $this->getHandlers( $settings );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $setEn ),
-			"Failed asserting that configuration suppresses creating an event"
-		);
-
-		$changeDe = $changes['change-dewiki-sitelink'];
-
-		$settings->setSetting( 'siteGlobalID', 'dewiki' );
-		$settings->setSetting( 'sendEchoNotification', true );
-		$handlers = $this->getHandlers( $settings );
-
-		Title::newFromTextThrow( 'Duummy2' )->resetArticleID( 0 );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Duummy' does not create an event"
-		);
-
-		$this->insertPage( 'Duummy2' );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Duummy2' does not create an event"
-		);
-
-		$this->insertPage( 'Duummy', '#REDIRECT [[Duummy2]]' );
-		$this->assertFalse(
-			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Duummy2' redirected to by 'Duummy' does not create an event"
-		);
-
-		$this->insertPage( 'Duummy' );
-		$this->assertTrue(
-			$handlers->doWikibaseHandleChange( $changeDe ),
-			"Failed asserting that 'Duummy2' creates an event"
-		);
+		$pages = [];
+		foreach ( $createPages as $key => $value ) {
+			if ( is_int( $key ) ) {
+				[ 'title' => $title ] = $this->insertPage( $value, 'This page is not a redirect' );
+				$pages[] = $this->getExistingTestPage( $title );
+			} else {
+				[ 'title' => $title ] = $this->insertPage( $key, $value );
+				$pages[] = $this->getExistingTestPage( $title );
+			}
+		}
+		$this->assertSame( $expected, $handlers->doWikibaseHandleChange( $change ) );
+		foreach ( $pages as $page ) {
+			$this->deletePage( $page );
+			$page->getTitle()->resetArticleID( false );
+		}
+		Title::clearCaches();
 	}
 
 	public static function localUserCreatedProvider() {
@@ -207,14 +192,15 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 	public function testLocalUserCreated( $enabled, $times, $auto ) {
 		$user = $this->createMock( User::class );
 
-		$this->userOptionsManager->expects( $this->exactly( $times ) )
+		$userOptionsManager = $this->createMock( UserOptionsManager::class );
+		$userOptionsManager->expects( $this->exactly( $times ) )
 			->method( 'setOption' );
 
 		$handlers = new EchoNotificationsHandlers(
 			$this->repoLinker,
 			$this->namespaceChecker,
 			$this->getServiceContainer()->getRedirectLookup(),
-			$this->userOptionsManager,
+			$userOptionsManager,
 			'enwiki',
 			$enabled,
 			'repoSiteName'
