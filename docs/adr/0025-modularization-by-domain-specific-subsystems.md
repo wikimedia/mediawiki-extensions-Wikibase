@@ -1,4 +1,4 @@
-# 25) Modularization by Domain-Specific Subsystems
+# 25) Modularization by Domain-Specific Subsystems {#adr_0025}
 
 Date: 2024-09-19
 

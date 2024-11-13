@@ -1,4 +1,4 @@
-# 26) Wikibase Frontend Technical Strategy {#adr_nnnn}
+# 26) Wikibase Frontend Technical Strategy {#adr_0026}
 
 Date: 2024-11-13
 
