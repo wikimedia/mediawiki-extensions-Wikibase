@@ -12,11 +12,14 @@ use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
+use MediaWiki\User\UserIdentityLookup;
+use MediaWiki\User\UserIdentityValue;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikimedia\IPUtils;
 
 /**
  * Handlers for client Echo notifications
@@ -44,6 +47,8 @@ class EchoNotificationsHandlers {
 	/** @var RedirectLookup */
 	private $redirectLookup;
 
+	private UserIdentityLookup $userIdentityLookup;
+
 	/**
 	 * @var UserOptionsManager
 	 */
@@ -68,6 +73,7 @@ class EchoNotificationsHandlers {
 	 * @param RepoLinker $repoLinker
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param RedirectLookup $redirectLookup
+	 * @param UserIdentityLookup $userIdentityLookup
 	 * @param UserOptionsManager $userOptionsManager
 	 * @param string $siteId
 	 * @param bool $sendEchoNotification
@@ -77,6 +83,7 @@ class EchoNotificationsHandlers {
 		RepoLinker $repoLinker,
 		NamespaceChecker $namespaceChecker,
 		RedirectLookup $redirectLookup,
+		UserIdentityLookup $userIdentityLookup,
 		UserOptionsManager $userOptionsManager,
 		$siteId,
 		$sendEchoNotification,
@@ -85,6 +92,7 @@ class EchoNotificationsHandlers {
 		$this->repoLinker = $repoLinker;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->redirectLookup = $redirectLookup;
+		$this->userIdentityLookup = $userIdentityLookup;
 		$this->userOptionsManager = $userOptionsManager;
 		$this->siteId = $siteId;
 		$this->sendEchoNotification = $sendEchoNotification;
@@ -103,6 +111,7 @@ class EchoNotificationsHandlers {
 			WikibaseClient::getRepoLinker( $services ),
 			WikibaseClient::getNamespaceChecker( $services ),
 			$services->getRedirectLookup(),
+			$services->getUserIdentityLookup(),
 			$services->getUserOptionsManager(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
@@ -195,7 +204,11 @@ class EchoNotificationsHandlers {
 		if ( $title !== false ) {
 			$metadata = $change->getMetadata();
 			$entityId = $change->getEntityId();
-			$agent = User::newFromName( $metadata['user_text'], false );
+			$userName = $metadata['user_text'];
+			$agent = $this->userIdentityLookup->getUserIdentityByName( $userName );
+			if ( $agent === null && IPUtils::isValid( $userName ) ) {
+				$agent = UserIdentityValue::newAnonymous( $userName );
+			}
 			Event::create( [
 				'agent' => $agent,
 				'extra' => [
