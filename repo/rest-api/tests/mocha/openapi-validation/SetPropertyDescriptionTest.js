@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newSetPropertyDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newSetPropertyDescriptionRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -14,15 +16,12 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	let existingPropertyId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			descriptions: [ {
-				language: 'en',
-				value: makeUnique( 'unique description' )
-			} ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			descriptions: { en: makeUnique( 'unique description' ) }
+		} ).makeRequest();
 
-		existingPropertyId = createPropertyResponse.entity.id;
+		existingPropertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 - description replaced', async () => {

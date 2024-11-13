@@ -3,7 +3,10 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newSetItemDescriptionRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newSetItemDescriptionRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -17,11 +20,11 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		testEnLabel = `some-label-${utils.uniq()}`;
-		const createEntityResponse = await entityHelper.createEntity( 'item', {
-			labels: [ { language: 'en', value: testEnLabel } ],
-			descriptions: [ { language: 'en', value: `some-description-${utils.uniq()}` } ]
-		} );
-		testItemId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreateItemRequestBuilder( {
+			labels: { en: testEnLabel },
+			descriptions: { en: `some-description-${utils.uniq()}` }
+		} ).makeRequest();
+		testItemId = createEntityResponse.body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
@@ -242,11 +245,11 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		it( 'item with same label and description already exists', async () => {
 			const language = 'en';
 			const description = `some-description-${utils.uniq()}`;
-			const createEntityResponse = await entityHelper.createEntity( 'item', {
-				labels: [ { language, value: testEnLabel } ],
-				descriptions: [ { language, value: description } ]
-			} );
-			const conflictingItemId = createEntityResponse.entity.id;
+			const createEntityResponse = await newCreateItemRequestBuilder( {
+				labels: { [ language ]: testEnLabel },
+				descriptions: { [ language ]: description }
+			} ).makeRequest();
+			const conflictingItemId = createEntityResponse.body.id;
 
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, language, description )
 				.assertValidRequest().makeRequest();
@@ -292,10 +295,9 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 			const redirectTarget = testItemId;
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
 			const description = `some-description-${utils.uniq()}`;
-			await entityHelper.createEntity( 'item', {
-				labels: [ { language: 'en', value: testEnLabel } ],
-				descriptions: [ { language: 'en', value: description } ]
-			} );
+			await newCreateItemRequestBuilder(
+				{ labels: { en: testEnLabel }, descriptions: { en: description } }
+			).makeRequest();
 
 			const response = await newSetItemDescriptionRequestBuilder( redirectSource, 'en', description )
 				.assertValidRequest().makeRequest();

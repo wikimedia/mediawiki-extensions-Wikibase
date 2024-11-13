@@ -2,8 +2,8 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { newGetItemLabelsRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 
@@ -11,15 +11,14 @@ describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 	let lastRevisionId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
+		const createItemResponse = await newCreateItemRequestBuilder( {
 			labels: {
-				de: { language: 'de', value: 'a-German-label-' + utils.uniq() },
-				en: { language: 'en', value: 'an-English-label-' + utils.uniq() }
+				de: 'a-German-label-' + utils.uniq(),
+				en: 'an-English-label-' + utils.uniq()
 			}
-		} );
-
-		testItemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		} ).makeRequest();
+		testItemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testItemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Item with two labels', async () => {

@@ -2,8 +2,10 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newAddPropertyAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newAddPropertyAliasesInLanguageRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -14,15 +16,11 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 	let existingPropertyId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			aliases: [ {
-				language: 'en',
-				value: makeUnique( 'en-alias' )
-			} ],
-			datatype: 'string'
-		} );
-
-		existingPropertyId = createPropertyResponse.entity.id;
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			aliases: { en: [ makeUnique( 'en-alias' ) ] }
+		} ).makeRequest();
+		existingPropertyId = createPropertyResponse.body.id;
 	} );
 
 	it( '200 - added alias to existing ones', async () => {
@@ -31,6 +29,7 @@ describe( newAddPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 			'en',
 			[ makeUnique( 'added-en-alias' ) ]
 		).makeRequest();
+
 		expect( response ).to.have.status( 200 );
 		expect( response ).to.satisfyApiSpec;
 	} );

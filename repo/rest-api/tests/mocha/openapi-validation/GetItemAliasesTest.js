@@ -2,8 +2,8 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemAliasesRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { newGetItemAliasesRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 
@@ -11,21 +11,14 @@ describe( newGetItemAliasesRequestBuilder().getRouteDescription(), () => {
 	let lastRevisionId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
+		const createItemResponse = await newCreateItemRequestBuilder( {
 			aliases: {
-				de: [
-					{ language: 'de', value: 'a-German-alias-' + utils.uniq() },
-					{ language: 'de', value: 'another-German-alias-' + utils.uniq() }
-				],
-				en: [
-					{ language: 'en', value: 'an-English-alias-' + utils.uniq() },
-					{ language: 'en', value: 'another-English-alias-' + utils.uniq() }
-				]
+				de: [ 'a-German-alias-' + utils.uniq(), 'another-German-alias-' + utils.uniq() ],
+				en: [ 'an-English-alias-' + utils.uniq(), 'another-English-alias-' + utils.uniq() ]
 			}
-		} );
-
-		testItemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		} ).makeRequest();
+		testItemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testItemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for an Item with two aliases', async () => {

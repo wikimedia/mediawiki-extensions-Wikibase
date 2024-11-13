@@ -1,9 +1,8 @@
 'use strict';
 
-const { newGetSitelinkRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { newGetSitelinkRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { utils, assert } = require( 'api-testing' );
 const {
-	createEntity,
 	getLocalSiteId,
 	createLocalSitelink,
 	createRedirectForItem
@@ -20,8 +19,8 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {} );
-		testItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createItemResponse.body.id;
 		badgeItemId = ( await getAllowedBadges() )[ 0 ];
 
 		await createLocalSitelink( testItemId, linkedArticle, [ badgeItemId ] );
@@ -80,8 +79,8 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'item has no sitelink with the requested site id', async () => {
-			const item = await createEntity( 'item', {} );
-			const response = await newGetSitelinkRequestBuilder( item.entity.id, siteId )
+			const item = await newCreateItemRequestBuilder( {} ).makeRequest();
+			const response = await newGetSitelinkRequestBuilder( item.body.id, siteId )
 				.assertValidRequest()
 				.makeRequest();
 

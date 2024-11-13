@@ -7,7 +7,8 @@ const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries'
 const {
 	newReplaceStatementRequestBuilder,
 	newGetPropertyStatementsRequestBuilder,
-	newReplacePropertyStatementRequestBuilder
+	newReplacePropertyStatementRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -21,7 +22,7 @@ describe( 'PUT statement tests', () => {
 	let originalRevisionId;
 
 	before( async () => {
-		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const createPropertyResponse = await entityHelper.createPropertyWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
 		] );
@@ -236,10 +237,10 @@ describe( 'PUT statement tests', () => {
 				} );
 
 				it( 'invalid operation - new statement has a different Property ID', async () => {
-					const differentPropertyId = ( await entityHelper.createEntity(
-						'property',
-						{ datatype: 'string' }
-					) ).entity.id;
+					const differentPropertyId = ( await newCreatePropertyRequestBuilder(
+						{ data_type: 'string' }
+					).makeRequest() ).body.id;
+
 					const response = await newReplaceRequestBuilder(
 						testPropertyId,
 						testStatementId,
@@ -386,7 +387,7 @@ describe( 'PUT statement tests', () => {
 		} );
 
 		it( 'responds 400 if property and statement do not match', async () => {
-			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const statementSerialization = entityHelper.newStatementWithRandomStringValue(
 				testStatementPropertyId
 			);

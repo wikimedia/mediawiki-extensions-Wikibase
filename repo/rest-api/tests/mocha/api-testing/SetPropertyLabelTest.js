@@ -3,7 +3,10 @@
 const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newSetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newSetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { formatTermEditSummary } = require( '../helpers/formatEditSummaries' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -32,11 +35,10 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createEntityResponse = await entityHelper.createEntity( 'property', {
-			labels: { en: { language: 'en', value: `english label ${utils.uniq()}` } },
-			datatype: 'string'
-		} );
-		testPropertyId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string', labels: { en: `english label ${utils.uniq()}` } }
+		).makeRequest();
+		testPropertyId = createEntityResponse.body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
@@ -257,15 +259,41 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( response.body.message, 'The input value is too long' );
 		} );
 
+		it( 'property with same label already exists', async () => {
+			const languageCode = 'en';
+			const label = `test-label-${utils.uniq()}`;
+			const existingEntityResponse = await newCreatePropertyRequestBuilder(
+				{ data_type: 'string', labels: { [ languageCode ]: label } }
+			).makeRequest();
+			const existingPropertyId = existingEntityResponse.body.id;
+			const createEntityResponse = await newCreatePropertyRequestBuilder(
+				{ data_type: 'string', labels: { [ languageCode ]: `label-to-be-replaced-${utils.uniq()}` } }
+			).makeRequest();
+			testPropertyId = createEntityResponse.body.id;
+
+			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
+				.assertValidRequest().makeRequest();
+
+			const context = {
+				violation: 'property-label-duplicate',
+				violation_context: {
+					language: languageCode,
+					conflicting_property_id: existingPropertyId
+				}
+			};
+			assertValidError( response, 422, 'data-policy-violation', context );
+			assert.strictEqual( response.body.message, 'Edit violates data policy' );
+		} );
+
 		it( 'label equals description', async () => {
 			const language = 'en';
 			const description = `some-description-${utils.uniq()}`;
-			const createEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: language, value: `some-label-${utils.uniq()}` } ],
-				descriptions: [ { language: language, value: description } ],
-				datatype: 'string'
-			} );
-			testPropertyId = createEntityResponse.entity.id;
+			const createEntityResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				labels: { [ language ]: `some-label-${utils.uniq()}` },
+				descriptions: { [ language ]: description }
+			} ).makeRequest();
+			testPropertyId = createEntityResponse.body.id;
 
 			const comment = 'Label equals description';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, language, description )
@@ -279,34 +307,6 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 				'data-policy-violation',
 				{ violation: 'label-description-same-value', violation_context: { language } }
 			);
-			assert.strictEqual( response.body.message, 'Edit violates data policy' );
-		} );
-
-		it( 'property with same label already exists', async () => {
-			const languageCode = 'en';
-			const label = `test-label-${utils.uniq()}`;
-			const existingEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: languageCode, value: label } ],
-				datatype: 'string'
-			} );
-			const existingPropertyId = existingEntityResponse.entity.id;
-			const createEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: languageCode, value: `label-to-be-replaced-${utils.uniq()}` } ],
-				datatype: 'string'
-			} );
-			testPropertyId = createEntityResponse.entity.id;
-
-			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, label )
-				.assertValidRequest().makeRequest();
-
-			const context = {
-				violation: 'property-label-duplicate',
-				violation_context: {
-					language: languageCode,
-					conflicting_property_id: existingPropertyId
-				}
-			};
-			assertValidError( response, 422, 'data-policy-violation', context );
 			assert.strictEqual( response.body.message, 'Edit violates data policy' );
 		} );
 	} );

@@ -6,7 +6,8 @@ const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
 	newGetStatementRequestBuilder,
-	newAddItemStatementRequestBuilder
+	newAddItemStatementRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -29,11 +30,11 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 
 		// creating the statement with the to be deleted property first, so that creating the "happy path" property
 		// hopefully invalidates any caches that could claim that this property still exists (T369702)
-		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		testStatementWithDeletedProperty = ( await newAddItemStatementRequestBuilder(
 			testItemId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyIdToDelete )
@@ -41,7 +42,7 @@ describe( 'GET statement', () => {
 		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 		await runAllJobs(); // wait for secondary data to catch up after deletion
 
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		testStatement = ( await newAddItemStatementRequestBuilder(
 			testItemId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )
@@ -148,7 +149,7 @@ describe( 'GET statement', () => {
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const requestedItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const response = await newGetItemStatementRequestBuilder(
 				requestedItemId,
 				testStatement.id
@@ -181,7 +182,7 @@ describe( 'GET statement', () => {
 		} );
 
 		it( 'responds statement not found if item and subject prefix exist but statement does not', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const requestedItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
 				.assertValidRequest()

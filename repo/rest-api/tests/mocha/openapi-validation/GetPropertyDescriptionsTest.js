@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyDescriptionsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyDescriptionsRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () => {
 
@@ -11,16 +14,16 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 	let lastRevisionId;
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
 			descriptions: {
-				en: { language: 'en', value: `english-property-description-${utils.uniq()}` },
-				de: { language: 'de', value: `german-property-description-${utils.uniq()}` }
-			},
-			datatype: 'string'
-		} );
+				en: `english-property-description-${utils.uniq()}`,
+				de: `german-property-description-${utils.uniq()}`
+			}
+		} ).makeRequest();
 
-		testPropertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		testPropertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( testPropertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid for a Property with two descriptions', async () => {

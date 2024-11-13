@@ -3,8 +3,8 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchSitelinksRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { createLocalSitelink, getLocalSiteId, createEntity } = require( '../helpers/entityHelper' );
+const { newPatchSitelinksRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -32,7 +32,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async function () {
-		testItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 		await createLocalSitelink( testItemId, linkedArticle );
 		siteId = await getLocalSiteId();
 		allowedBadges = await getAllowedBadges();
@@ -307,9 +307,9 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
-			const newItem = await createEntity( 'item', {} );
+			const newItem = await newCreateItemRequestBuilder( {} ).makeRequest();
 			const response = await newPatchSitelinksRequestBuilder(
-				newItem.entity.id,
+				newItem.body.id,
 				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 

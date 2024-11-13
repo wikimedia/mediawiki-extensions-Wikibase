@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newAddItemAliasesInLanguageRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem } = require( '../helpers/entityHelper' );
+const {
+	newAddItemAliasesInLanguageRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
 	return `${text}-${utils.uniq()}`;
@@ -15,14 +18,10 @@ describe( newAddItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 	const languageWithExistingAlias = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			aliases: [ {
-				language: languageWithExistingAlias,
-				value: makeUnique( 'en-alias' )
-			} ]
-		} );
-
-		existingItemId = createItemResponse.entity.id;
+		const createItemResponse = await newCreateItemRequestBuilder(
+			{ aliases: { [ languageWithExistingAlias ]: [ makeUnique( 'en-alias' ) ] } }
+		).makeRequest();
+		existingItemId = createItemResponse.body.id;
 	} );
 
 	it( '200 - added alias to existing ones', async () => {

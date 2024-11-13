@@ -5,7 +5,8 @@ const { assert, utils } = require( 'api-testing' );
 const {
 	newPatchPropertyRequestBuilder,
 	newAddPropertyStatementRequestBuilder,
-	newGetPropertyLabelRequestBuilder
+	newGetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -33,18 +34,18 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async function () {
-		testPropertyId = ( await entityHelper.createEntity( 'property', {
-			datatype: 'string',
-			labels: [ { language: languageWithExistingLabel, value: `some-label-${utils.uniq()}` } ],
-			descriptions: [ { language: languageWithExistingDescription, value: `some-description-${utils.uniq()}` } ],
-			aliases: [ { language: 'en', value: existingEnAlias }, { language: 'fr', value: 'croissant' } ]
-		} ) ).entity.id;
+		testPropertyId = ( await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ languageWithExistingLabel ]: `some-label-${utils.uniq()}` },
+			descriptions: { [ languageWithExistingDescription ]: `some-description-${utils.uniq()}` },
+			aliases: { en: [ existingEnAlias ], fr: [ 'croissant' ] }
+		} ).makeRequest() ).body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
 		originalRevisionId = testPropertyCreationMetadata.revid;
 
-		predicatePropertyId = ( await entityHelper.createEntity( 'property', { datatype: 'string' } ) ).entity.id;
+		predicatePropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } ).makeRequest() ).body.id;
 
 		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {
@@ -58,6 +59,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const updatedDescription = `changed description ${utils.uniq()}`;
 			const newStatementValue = 'new statement';
 			const editSummary = 'I made a patch';
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[
@@ -96,7 +98,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch other fields even if there is a statement using a deleted property', async () => {
-			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const propertyToDelete = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			await newAddPropertyStatementRequestBuilder(
 				testPropertyId,
 				{ property: { id: propertyToDelete }, value: { type: 'novalue' } }
@@ -106,6 +108,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			await runAllJobs(); // wait for secondary data to catch up after deletion
 
 			const label = `some-label-${utils.uniq()}`;
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ { op: 'add', path: '/labels/de', value: label } ]
@@ -136,6 +139,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	describe( '404 error response', () => {
 		it( 'property not found', async () => {
 			const propertyId = 'P99999';
+
 			const response = await newPatchPropertyRequestBuilder( propertyId, [] )
 				.assertValidRequest().makeRequest();
 
@@ -208,6 +212,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'missing mandatory field', async () => {
 			const patch = [ { op: 'remove', path: '/data_type' } ];
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
@@ -223,6 +228,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid labels type', async () => {
 			const invalidLabels = [ 'not', 'an', 'object' ];
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ { op: 'replace', path: '/labels', value: invalidLabels } ]
@@ -235,6 +241,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid label', async () => {
 			const invalidLabel = 'tab characters \t not allowed';
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
@@ -247,6 +254,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid label type', async () => {
 			const invalidLabel = { object: 'not allowed' };
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
@@ -271,6 +279,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingLabelPatchOp( 'x'.repeat( maxLength + 1 ) ) ]
@@ -283,6 +292,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid label language code', async () => {
 			const invalidLanguage = 'invalid-language-code';
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ {
@@ -298,11 +308,11 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		it( 'property with same label already exists', async () => {
 			const label = `test-label-${utils.uniq()}`;
 
-			const existingEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: languageWithExistingLabel, value: label } ],
-				datatype: 'string'
-			} );
-			const existingPropertyId = existingEntityResponse.entity.id;
+			const existingEntityResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'string', labels: { [ languageWithExistingLabel ]: label } }
+			).makeRequest();
+			const existingPropertyId = existingEntityResponse.body.id;
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingLabelPatchOp( label ) ]
@@ -327,6 +337,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid descriptions type', async () => {
 			const invalidDescriptions = [ 'not', 'an', 'object' ];
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ { op: 'replace', path: '/descriptions', value: invalidDescriptions } ]
@@ -339,6 +350,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid description', async () => {
 			const invalidDescription = 'tab characters \t not allowed';
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
@@ -351,6 +363,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid description type', async () => {
 			const invalidDescription = { object: 'not allowed' };
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
@@ -389,6 +402,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ makeReplaceExistingDescriptionPatchOperation( 'x'.repeat( maxLength + 1 ) ) ]
@@ -401,6 +415,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid description language code', async () => {
 			const invalidLanguage = 'invalid-language-code';
+
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
 				[ { op: 'add', path: `/descriptions/${invalidLanguage}`, value: 'potato' } ]
@@ -432,6 +447,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'empty alias', async () => {
 			const language = 'de';
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: `/aliases/${language}`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
@@ -446,6 +462,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			// this assumes the default value of 250 from Wikibase.default.php is in place and
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: `/aliases/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
@@ -458,6 +475,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		it( 'aliases in language not a list', async () => {
 			const language = 'en';
 			const invalidAliasesValue = { 'aliases in language': 'not a list' };
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: `/aliases/${language}`, value: invalidAliasesValue }
 			] ).assertValidRequest().makeRequest();
@@ -472,6 +490,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'aliases is not an object', async () => {
 			const invalidAliases = [ 'not', 'an', 'object' ];
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: '/aliases', value: invalidAliases }
 			] ).assertValidRequest().makeRequest();
@@ -483,6 +502,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		it( 'alias contains invalid characters', async () => {
 			const language = 'en';
 			const invalidAlias = 'tab\t tab\t tab';
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: `/aliases/${language}`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
@@ -497,6 +517,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'invalid aliases language code', async () => {
 			const invalidLanguage = 'not-a-valid-language';
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
 				{ op: 'add', path: `/aliases/${invalidLanguage}`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
@@ -518,7 +539,6 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				value: { type: 'value', content: 'some-value' }
 			};
 			const invalidStatementGroupType = { [ predicatePropertyId ]: validStatement };
-
 			const patch = [ { op: 'add', path: '/statements', value: invalidStatementGroupType } ];
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
@@ -572,6 +592,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'missing statement field', async () => {
 			const invalidStatement = { value: { type: 'somevalue', content: 'some-content' } };
+
 			const patch = makeStatementPatchOperation( predicatePropertyId, invalidStatement );
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
@@ -642,7 +663,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'property IDs modified', async () => {
-			const newPropertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+			const newPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 			const existingStatementsId = ( await newAddPropertyStatementRequestBuilder( testPropertyId, {
 				property: { id: predicatePropertyId },
 				value: { type: 'novalue' }
@@ -670,6 +691,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				path: `/statements/${nonExistentProperty}`,
 				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
 			} ];
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
@@ -694,6 +716,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				path: `/statements/${predicatePropertyId}/0/qualifiers`,
 				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
 			} ];
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
@@ -718,6 +741,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				path: `/statements/${predicatePropertyId}/0/references/0`,
 				value: { parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ] }
 			} ];
+
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 

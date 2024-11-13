@@ -8,7 +8,9 @@ const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries'
 const {
 	newPatchItemStatementRequestBuilder,
 	newPatchStatementRequestBuilder,
-	newReplaceStatementRequestBuilder
+	newReplaceStatementRequestBuilder,
+	newCreateItemRequestBuilder,
+	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -22,7 +24,7 @@ describe( 'PATCH statement tests', () => {
 	let previousEtag;
 
 	before( async function () {
-		const propertyId = ( await entityHelper.createUniqueStringProperty() ).entity.id;
+		const propertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const item = await entityHelper.createItemWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( propertyId )
 		] );
@@ -273,10 +275,8 @@ describe( 'PATCH statement tests', () => {
 				} );
 
 				it( 'rejects Property ID change', async () => {
-					const otherStringPropertyId = ( await entityHelper.createEntity(
-						'property',
-						{ datatype: 'string' }
-					) ).entity.id;
+					const otherStringPropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } )
+						.makeRequest() ).body.id;
 					const patch = [ {
 						op: 'replace',
 						path: '/property/id',
@@ -362,7 +362,7 @@ describe( 'PATCH statement tests', () => {
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {
-			const requestedItemId = ( await entityHelper.createEntity( 'item', {} ) ).entity.id;
+			const requestedItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const response = await newPatchItemStatementRequestBuilder( requestedItemId, testStatement.id, [] )
 				.assertValidRequest()
 				.makeRequest();

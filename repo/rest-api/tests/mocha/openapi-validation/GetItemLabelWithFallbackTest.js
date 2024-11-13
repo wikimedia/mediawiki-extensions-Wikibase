@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
-const { newGetItemLabelWithFallbackRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetItemLabelWithFallbackRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 
@@ -12,12 +15,11 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 	const languageCode = 'en';
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: [ { language: languageCode, value: 'an-English-label-' + utils.uniq() } ]
-		} );
-
-		itemId = createItemResponse.entity.id;
-		lastRevisionId = createItemResponse.entity.lastrevid;
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			labels: { [ languageCode ]: 'an-English-label-' + utils.uniq() }
+		} ).makeRequest();
+		itemId = createItemResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( itemId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

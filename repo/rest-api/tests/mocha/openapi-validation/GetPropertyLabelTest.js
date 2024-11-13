@@ -2,8 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity } = require( '../helpers/entityHelper' );
-const { newGetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
@@ -12,13 +15,13 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	const languageCode = 'en';
 
 	before( async () => {
-		const createPropertyResponse = await createEntity( 'property', {
-			labels: [ { language: languageCode, value: 'an-English-label-' + utils.uniq() } ],
-			datatype: 'string'
-		} );
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ languageCode ]: 'an-English-label-' + utils.uniq() }
+		} ).makeRequest();
 
-		propertyId = createPropertyResponse.entity.id;
-		lastRevisionId = createPropertyResponse.entity.lastrevid;
+		propertyId = createPropertyResponse.body.id;
+		lastRevisionId = ( await getLatestEditMetadata( propertyId ) ).revid;
 	} );
 
 	it( '200 OK response is valid', async () => {

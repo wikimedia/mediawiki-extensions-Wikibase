@@ -3,7 +3,11 @@
 const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
-const { newPatchPropertyLabelsRequestBuilder, newGetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newPatchPropertyLabelsRequestBuilder,
+	newGetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatTermsEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -25,10 +29,10 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async function () {
-		testPropertyId = ( await entityHelper.createEntity( 'property', {
-			datatype: 'string',
-			labels: [ { language: languageWithExistingLabel, value: `some-label-${utils.uniq()}` } ]
-		} ) ).entity.id;
+		testPropertyId = ( await newCreatePropertyRequestBuilder( {
+			data_type: 'string',
+			labels: { [ languageWithExistingLabel ]: `some-label-${utils.uniq()}` }
+		} ).makeRequest() ).body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
@@ -270,12 +274,12 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 			const language = languageWithExistingLabel;
 			const descriptionText = `description-text-${utils.uniq()}`;
 
-			const createEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: language, value: `label-text-${utils.uniq()}` } ],
-				descriptions: [ { language: language, value: descriptionText } ],
-				datatype: 'string'
-			} );
-			testPropertyId = createEntityResponse.entity.id;
+			const createEntityResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				labels: { [ language ]: `label-text-${utils.uniq()}` },
+				descriptions: { [ language ]: descriptionText }
+			} ).makeRequest();
+			testPropertyId = createEntityResponse.body.id;
 
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,
@@ -296,17 +300,17 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		it( 'property with same label already exists', async () => {
 			const label = `test-label-${utils.uniq()}`;
 
-			const existingEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: languageWithExistingLabel, value: label } ],
-				datatype: 'string'
-			} );
-			const existingPropertyId = existingEntityResponse.entity.id;
+			const existingEntityResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				labels: { [ languageWithExistingLabel ]: label }
+			} ).makeRequest();
+			const existingPropertyId = existingEntityResponse.body.id;
 
-			const createEntityResponse = await entityHelper.createEntity( 'property', {
-				labels: [ { language: languageWithExistingLabel, value: `label-to-be-replaced-${utils.uniq()}` } ],
-				datatype: 'string'
-			} );
-			testPropertyId = createEntityResponse.entity.id;
+			const createEntityResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'string',
+				labels: { [ languageWithExistingLabel ]: `label-to-be-replaced-${utils.uniq()}` }
+			} ).makeRequest();
+			testPropertyId = createEntityResponse.body.id;
 
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,

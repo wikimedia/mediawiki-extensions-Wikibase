@@ -2,8 +2,11 @@
 
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, getLatestEditMetadata } = require( '../helpers/entityHelper' );
-const { newGetPropertyLabelRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const {
+	newGetPropertyLabelRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
@@ -11,11 +14,10 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	const propertyEnLabel = `en-label-${utils.uniq()}`;
 
 	before( async () => {
-		const testProperty = await createEntity( 'property', {
-			labels: [ { language: 'en', value: propertyEnLabel } ],
-			datatype: 'string'
-		} );
-		propertyId = testProperty.entity.id;
+		const testProperty = await newCreatePropertyRequestBuilder(
+			{ data_type: 'string', labels: { en: propertyEnLabel } }
+		).makeRequest();
+		propertyId = testProperty.body.id;
 	} );
 
 	it( 'can get a label of a property', async () => {

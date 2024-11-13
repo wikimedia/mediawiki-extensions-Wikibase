@@ -2,10 +2,11 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createEntity, createRedirectForItem } = require( '../helpers/entityHelper' );
+const { createRedirectForItem } = require( '../helpers/entityHelper' );
 const {
 	newRemoveItemLabelRequestBuilder,
-	newSetItemLabelRequestBuilder
+	newSetItemLabelRequestBuilder,
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
@@ -17,11 +18,11 @@ describe( newRemoveItemLabelRequestBuilder().getRouteDescription(), () => {
 	let existingItemId;
 
 	before( async () => {
-		const createItemResponse = await createEntity( 'item', {
-			labels: [ { language: 'en', value: makeUnique( 'unique label' ) } ]
-		} );
+		const createItemResponse = await newCreateItemRequestBuilder( {
+			labels: { en: makeUnique( 'unique label' ) }
+		} ).makeRequest();
 
-		existingItemId = createItemResponse.entity.id;
+		existingItemId = createItemResponse.body.id;
 	} );
 
 	describe( '200 OK', () => {

@@ -3,12 +3,15 @@
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createEntity,
 	createUniqueStringProperty,
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue
 } = require( '../helpers/entityHelper' );
-const { newGetPropertyRequestBuilder, newAddPropertyStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newGetPropertyRequestBuilder,
+	newAddPropertyStatementRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 
@@ -29,18 +32,13 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		testStatementPropertyId = ( await createUniqueStringProperty() ).entity.id;
-		const createPropertyResponse = await createEntity( 'property', {
-			datatype: testPropertyDataType,
-			labels: {
-				de: { language: 'de', value: germanLabel },
-				en: { language: 'en', value: englishLabel }
-			},
-			descriptions: {
-				en: { language: 'en', value: englishDescription }
-			}
-		} );
-		testPropertyId = createPropertyResponse.entity.id;
+		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+			data_type: testPropertyDataType,
+			labels: { de: germanLabel, en: englishLabel },
+			descriptions: { en: englishDescription }
+		} ).makeRequest();
+		testPropertyId = createPropertyResponse.body.id;
 		testStatement = newStatementWithRandomStringValue( testStatementPropertyId );
 		await newAddPropertyStatementRequestBuilder( testPropertyId, testStatement ).makeRequest();
 

@@ -4,7 +4,11 @@ const { assert, action, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
-const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const {
+	newAddItemStatementRequestBuilder,
+	newCreateItemRequestBuilder,
+	newCreatePropertyRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { getOrCreateBotUser } = require( '../helpers/testUsers' );
@@ -26,15 +30,15 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createEntityResponse = await entityHelper.createEntity( 'item', {} );
-		testItemId = createEntityResponse.entity.id;
+		const createEntityResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
+		testItemId = createEntityResponse.body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
 		originalRevisionId = testItemCreationMetadata.revid;
 
 		testStatement = entityHelper.newStatementWithRandomStringValue(
-			( await entityHelper.createUniqueStringProperty() ).entity.id
+			( await entityHelper.createUniqueStringProperty() ).body.id
 		);
 
 		// wait 1s before next test to ensure the last-modified timestamps are different
@@ -92,11 +96,11 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
 		it( 'can add a statement with a globecoordinate value in new format', async () => {
-			const createPropertyResponse = await entityHelper.createEntity( 'property', {
-				labels: { en: { language: 'en', value: `globe-coordinate-property-${utils.uniq()}` } },
-				datatype: 'globe-coordinate'
-			} );
-			const propertyId = createPropertyResponse.entity.id;
+			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'globe-coordinate',
+				labels: { en: `globe-coordinate-property-${utils.uniq()}` }
+			} ).makeRequest();
+			const propertyId = createPropertyResponse.body.id;
 			const globecoordinate = {
 				latitude: 100,
 				longitude: 100,
@@ -115,11 +119,11 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 			assertValid201Response( response, propertyId, globecoordinate );
 		} );
 		it( 'can add a statement with a time value in new format', async () => {
-			const createPropertyResponse = await entityHelper.createEntity( 'property', {
-				labels: { en: { language: 'en', value: `time-property-${utils.uniq()}` } },
-				datatype: 'time'
-			} );
-			const propertyId = createPropertyResponse.entity.id;
+			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'time',
+				labels: { en: `time-property-${utils.uniq()}` }
+			} ).makeRequest();
+			const propertyId = createPropertyResponse.body.id;
 			const time = {
 				time: '+0001-00-00T00:00:00Z',
 				precision: 9,
@@ -137,11 +141,11 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 			assertValid201Response( response, propertyId, time );
 		} );
 		it( 'can add a statement with a wikibase-entityid value in new format', async () => {
-			const createPropertyResponse = await entityHelper.createEntity( 'property', {
-				labels: { en: { language: 'en', value: `wikibase-item-property-${utils.uniq()}` } },
-				datatype: 'wikibase-item'
-			} );
-			const propertyId = createPropertyResponse.entity.id;
+			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
+				data_type: 'wikibase-item',
+				labels: { en: `wikibase-item-property-${utils.uniq()}` }
+			} ).makeRequest();
+			const propertyId = createPropertyResponse.body.id;
 			const statement = {
 				property: { id: propertyId },
 				value: { type: 'value', content: testItemId }
@@ -244,7 +248,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'qualifier with non-existent property', async () => {
 			const nonExistentProperty = 'P9999999';
 			const statement = entityHelper.newStatementWithRandomStringValue(
-				( await entityHelper.createUniqueStringProperty() ).entity.id
+				( await entityHelper.createUniqueStringProperty() ).body.id
 			);
 			statement.qualifiers = [
 				{ property: { id: nonExistentProperty }, value: { type: 'novalue' } }
@@ -265,7 +269,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'reference with non-existent property', async () => {
 			const nonExistentProperty = 'P9999999';
 			const statement = entityHelper.newStatementWithRandomStringValue(
-				( await entityHelper.createUniqueStringProperty() ).entity.id
+				( await entityHelper.createUniqueStringProperty() ).body.id
 			);
 			statement.references = [];
 			statement.references[ 0 ] = {
