@@ -29,7 +29,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testInvalidConstruct() {
-		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$this->expectException( InvalidArgumentException::class );
@@ -52,7 +51,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		$entity = $this->provideNewEntity();
 		$entity->setLabel( 'en', 'INVALID' );
 
-		// "INVALID" is invalid
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
 		$changeOpLabel->apply( $entity );
@@ -106,7 +104,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		array $changeOpLabelParams,
 		ChangeOpLabelResult $expectedChangeOpLabelResult
 	) {
-		// "INVALID" is invalid
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 
 		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
@@ -123,7 +120,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		array $changeOpLabelParams,
 		ChangeOpLabelResult $expectedChangeOpLabelResult
 	) {
-		// "INVALID" is invalid
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 
 		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
@@ -152,7 +148,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 
 		$oldLabels = $entity->getLabels()->toTextArray();
 
-		// "INVALID" is invalid
 		$changeOpParams[] = $this->getTermValidatorFactory();
 
 		$changeOp = new ChangeOpLabel( ...$changeOpParams );
@@ -201,7 +196,6 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$summary = new Summary();
 
-		// "INVALID" is invalid
 		$changeOpParams[] = $this->getTermValidatorFactory();
 
 		$changeOp = new ChangeOpLabel( ...$changeOpParams );
