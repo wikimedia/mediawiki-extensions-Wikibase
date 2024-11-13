@@ -94,10 +94,10 @@ describe( 'Change dispatching', () => {
 
 	before( 'create test page', async () => {
 		await mindy.edit( testPageTitle, {
-			text: `{{#statements:${testPropertyId}|from=${testItemId}}`,
+			text: `{{#statements:${ testPropertyId }|from=${ testItemId }}`,
 			createonly: '1',
 			contentmodel: 'wikitext',
-			summary: `Create page using ${testItemId} for ChangeDispatchTest.js`,
+			summary: `Create page using ${ testItemId } for ChangeDispatchTest.js`,
 		} );
 	} );
 
@@ -135,7 +135,7 @@ describe( 'Change dispatching', () => {
 
 		assert.deepNestedPropertyVal(
 			pages,
-			`${testPageTitle}.wbentityusage.${testItemId}.aspects`,
+			`${ testPageTitle }.wbentityusage.${ testItemId }.aspects`,
 			[ 'S' ],
 			'test page should (only) have sitelink usage for test item',
 		);
@@ -146,7 +146,7 @@ describe( 'Change dispatching', () => {
 
 		assert.deepNestedPropertyVal(
 			pages,
-			`${testPageTitle}.pageprops.wikibase_item`,
+			`${ testPageTitle }.pageprops.wikibase_item`,
 			testItemId,
 			'wikibase_item page prop should be set to linked item',
 		);

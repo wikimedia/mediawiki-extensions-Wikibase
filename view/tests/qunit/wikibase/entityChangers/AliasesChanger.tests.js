@@ -12,7 +12,7 @@
 	var SUBJECT = wikibase.entityChangers.AliasesChanger;
 	var TempUserWatcher = wikibase.entityChangers.TempUserWatcher;
 
-	QUnit.test( 'is a function', function ( assert ) {
+	QUnit.test( 'is a function', ( assert ) => {
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -20,19 +20,19 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function ( assert ) {
+	QUnit.test( 'is a constructor', ( assert ) => {
 		assert.true( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'setAliases performs correct API call', function ( assert ) {
+	QUnit.test( 'setAliases performs correct API call', ( assert ) => {
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred().promise();
-			} )
+			setAliases: sinon.spy( () => $.Deferred().promise() )
 		};
 		var aliasesChanger = new SUBJECT(
 			api,
-			{ getAliasesRevision: function () { return 0; } },
+			{ getAliasesRevision: function () {
+				return 0;
+			} },
 			new datamodel.Item( 'Q1' )
 		);
 
@@ -41,41 +41,41 @@
 		assert.true( api.setAliases.calledOnce );
 	} );
 
-	QUnit.test( 'setAliases correctly handles API response', function ( assert ) {
+	QUnit.test( 'setAliases correctly handles API response', ( assert ) => {
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {}
-				} ).promise();
-			} )
+			setAliases: sinon.spy( () => $.Deferred().resolve( {
+				entity: {}
+			} ).promise() )
 		};
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function () { return 0; },
+				getAliasesRevision: function () {
+					return 0;
+				},
 				setAliasesRevision: function () {}
 			},
 			new datamodel.Item( 'Q1' )
 		);
 
 		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
-		.done( function ( savedAliases ) {
+		.done( ( savedAliases ) => {
 			assert.true( true, 'setAliases succeeded' );
 		} );
 	} );
 
-	QUnit.test( 'setAliases correctly handles API failure', function ( assert ) {
+	QUnit.test( 'setAliases correctly handles API failure', ( assert ) => {
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred()
+			setAliases: sinon.spy( () => $.Deferred()
 					.reject( 'errorCode', { error: { code: 'errorCode' } } )
-					.promise();
-			} )
+					.promise() )
 		};
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function () { return 0; },
+				getAliasesRevision: function () {
+					return 0;
+				},
 				setAliasesRevision: function () {}
 			},
 			new datamodel.Item( 'Q1' )
@@ -84,10 +84,10 @@
 		var done = assert.async();
 
 		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
-		.done( function ( savedAliases ) {
+		.done( ( savedAliases ) => {
 			assert.true( false, 'setAliases succeeded' );
 		} )
-		.fail( function ( error ) {
+		.fail( ( error ) => {
 			assert.true(
 				error instanceof wb.api.RepoApiError,
 				'setAliases failed with a RepoApiError'
@@ -98,13 +98,11 @@
 		.always( done );
 	} );
 
-	QUnit.test( 'setAliases correctly removes aliases', function ( assert ) {
+	QUnit.test( 'setAliases correctly removes aliases', ( assert ) => {
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {}
-				} ).promise();
-			} )
+			setAliases: sinon.spy( () => $.Deferred().resolve( {
+				entity: {}
+			} ).promise() )
 		};
 
 		var item = new datamodel.Item( 'Q1', new datamodel.Fingerprint(
@@ -118,14 +116,16 @@
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function () { return 0; },
+				getAliasesRevision: function () {
+					return 0;
+				},
 				setAliasesRevision: function () {}
 			},
 			item
 		);
 
 		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), new TempUserWatcher() )
-		.done( function () {
+		.done( () => {
 			assert.true( true, 'setAliases succeeded' );
 
 			assert.true(
@@ -145,30 +145,30 @@
 		} );
 	} );
 
-	QUnit.test( 'sets redirect Url if present', function ( assert ) {
+	QUnit.test( 'sets redirect Url if present', ( assert ) => {
 		const target = 'https://wiki.example/';
 		const tempUserWatcher = new TempUserWatcher();
 
 		var api = {
-			setAliases: sinon.spy( function () {
-				return $.Deferred().resolve( {
-					entity: {},
-					tempusercreated: 'SomeUser',
-					tempuserredirect: target
-				} ).promise();
-			} )
+			setAliases: sinon.spy( () => $.Deferred().resolve( {
+				entity: {},
+				tempusercreated: 'SomeUser',
+				tempuserredirect: target
+			} ).promise() )
 		};
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function () { return 0; },
+				getAliasesRevision: function () {
+					return 0;
+				},
 				setAliasesRevision: function () {}
 			},
 			new datamodel.Item( 'Q1' )
 		);
 
 		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ), tempUserWatcher )
-			.done( function ( _savedAliases ) {
+			.done( ( _savedAliases ) => {
 				assert.strictEqual( target, tempUserWatcher.getRedirectUrl(), 'it should set the URL' );
 				assert.true( true, 'setAliases succeeded' );
 			} );

@@ -36,7 +36,7 @@
 		);
 	}
 
-	QUnit.test( 'is constructable', function ( assert ) {
+	QUnit.test( 'is constructable', ( assert ) => {
 		assert.true( newViewFactory() instanceof ViewFactory );
 	} );
 
@@ -48,14 +48,12 @@
 		};
 	}
 
-	QUnit.test( 'getEntityView constructs correct views', function ( assert ) {
+	QUnit.test( 'getEntityView constructs correct views', ( assert ) => {
 		var viewFactory = newViewFactory(),
 			fooView = {},
 			$dom = $( '<div>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
-		$dom.data = sinon.spy( function () {
-			return fooView;
-		} );
+		$dom.data = sinon.spy( () => fooView );
 
 		var res = viewFactory.getEntityView( null, getEntityStub( 'foo' ), $dom );
 
@@ -63,18 +61,18 @@
 		sinon.assert.calledOnce( FooView );
 	} );
 
-	QUnit.test( 'getEntityView throws on incorrect views', function ( assert ) {
+	QUnit.test( 'getEntityView throws on incorrect views', ( assert ) => {
 		var viewFactory = newViewFactory();
 
 		assert.throws(
-			function () {
+			() => {
 				viewFactory.getEntityView( null, getEntityStub( 'unknown' ) );
 			},
 			new Error( 'View unknownview does not exist' )
 		);
 	} );
 
-	QUnit.test( 'getEntityView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getEntityView passes correct options to views', ( assert ) => {
 		var entity = getEntityStub( 'foo' ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' ),
@@ -90,7 +88,7 @@
 		} ) );
 	} );
 
-	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getSitelinkGroupListView passes correct options to views', ( assert ) => {
 		var sitelinkSet = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' );
@@ -107,7 +105,7 @@
 		$.wikibase.sitelinkgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getSitelinkGroupView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getSitelinkGroupView passes correct options to views', ( assert ) => {
 		var groupName = 'groupid',
 			siteLinks = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
@@ -127,7 +125,7 @@
 		$.wikibase.sitelinkgroupview.restore();
 	} );
 
-	QUnit.test( 'getSiteLinkListView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getSiteLinkListView passes correct options to views', ( assert ) => {
 		var siteLinks = [],
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' );
@@ -144,7 +142,7 @@
 		$.wikibase.sitelinklistview.restore();
 	} );
 
-	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getStatementGroupListView passes correct options to views', ( assert ) => {
 		var entity = new datamodel.Item( 'Q1' ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' );
@@ -160,7 +158,7 @@
 		$.wikibase.statementgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', ( assert ) => {
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
 			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
@@ -195,7 +193,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getStatementListView passes correct options to views', ( assert ) => {
 		var value = new datamodel.StatementList( [
 				new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
@@ -206,7 +204,7 @@
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getStatementListView( null, entityId, null, function () {}, value, $dom );
+		viewFactory.getStatementListView( null, entityId, null, () => {}, value, $dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -224,7 +222,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView passes null for an empty StatementList', function ( assert ) {
+	QUnit.test( 'getStatementListView passes null for an empty StatementList', ( assert ) => {
 		var value = new datamodel.StatementList(),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
@@ -233,7 +231,7 @@
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		$dom.statementlistview = sinon.stub( $.wikibase, 'statementlistview' );
 
-		viewFactory.getStatementListView( null, entityId, null, function () {}, value, $dom );
+		viewFactory.getStatementListView( null, entityId, null, () => {}, value, $dom );
 
 		sinon.assert.calledWith(
 			$.wikibase.statementlistview,
@@ -246,17 +244,17 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView: given property id, passes id to list adapter', function ( assert ) {
+	QUnit.test( 'getStatementListView: given property id, passes id to list adapter', ( assert ) => {
 		var factory = newViewFactory(),
 			value = new datamodel.StatementList(),
 			expectedPropertyId = 'P123',
 			$dom = $( '<div>' );
 
 		sinon.stub( factory, 'getAdderWithStartEditing' );
-		factory.getAdderWithStartEditing.returns( function () {} );
+		factory.getAdderWithStartEditing.returns( () => {} );
 
 		sinon.spy( factory, 'getListItemAdapterForStatementView' );
-		factory.getStatementListView( null, null, expectedPropertyId, function () {}, value, $dom );
+		factory.getStatementListView( null, null, expectedPropertyId, () => {}, value, $dom );
 
 		sinon.assert.calledWith( factory.getListItemAdapterForStatementView,
 			sinon.match.any,
@@ -267,7 +265,7 @@
 		);
 	} );
 
-	QUnit.test( 'getStatementListView: given no property id, gets id from parent data attribute', function ( assert ) {
+	QUnit.test( 'getStatementListView: given no property id, gets id from parent data attribute', ( assert ) => {
 		var factory = newViewFactory(),
 			value = new datamodel.StatementList(),
 			$parent = $( '<div>' ).addClass( 'wikibase-statementgroupview' ),
@@ -275,13 +273,13 @@
 			$dom = $( '<div>' );
 
 		sinon.stub( factory, 'getAdderWithStartEditing' );
-		factory.getAdderWithStartEditing.returns( function () {} );
+		factory.getAdderWithStartEditing.returns( () => {} );
 
 		$parent.data( 'property-id', expectedPropertyId );
 		$parent.append( $dom );
 
 		sinon.spy( factory, 'getListItemAdapterForStatementView' );
-		factory.getStatementListView( null, null, null, function () {}, value, $dom );
+		factory.getStatementListView( null, null, null, () => {}, value, $dom );
 
 		sinon.assert.calledWith( factory.getListItemAdapterForStatementView,
 			sinon.match.any,
@@ -292,7 +290,7 @@
 		);
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', ( assert ) => {
 		var entityId = 'Q1',
 			value = null,
 			entityIdPlainFormatter = {},
@@ -312,9 +310,7 @@
 		viewFactory.getListItemAdapterForStatementView(
 			null,
 			entityId,
-			function () {
-				return statement;
-			}
+			() => statement
 		);
 
 		sinon.assert.calledWith(
@@ -356,7 +352,7 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', ( assert ) => {
 		var entityId = 'Q1',
 			propertyId = 'propertyId',
 			value = null,
@@ -366,7 +362,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( null, entityId, function () {}, propertyId );
+		viewFactory.getListItemAdapterForStatementView( null, entityId, () => {}, propertyId );
 
 		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
 
@@ -384,7 +380,7 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', ( assert ) => {
 		var propertyId = 'P1',
 			value = new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			viewFactory = newViewFactory(),
@@ -393,7 +389,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( null, 'Q1', function () {}, null );
+		viewFactory.getListItemAdapterForStatementView( null, 'Q1', () => {}, null );
 
 		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
 
@@ -411,7 +407,7 @@
 		viewFactory._getView.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
 			removeCallback = function () {},
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
@@ -429,7 +425,7 @@
 		ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getReferenceView passes correct options to view', function ( assert ) {
+	QUnit.test( 'getReferenceView passes correct options to view', ( assert ) => {
 		var value = null,
 			viewFactory = newViewFactory(),
 			removeCallback = function () {},
@@ -452,7 +448,7 @@
 		referenceview.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -469,7 +465,7 @@
 		ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getSnakListView passes correct options to view', function ( assert ) {
+	QUnit.test( 'getSnakListView passes correct options to view', ( assert ) => {
 		var value = null,
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' ),
@@ -489,7 +485,7 @@
 		stub.restore();
 	} );
 
-	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function ( assert ) {
+	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -506,7 +502,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getSnakView passes correct options to view', function ( assert ) {
+	QUnit.test( 'getSnakView passes correct options to view', ( assert ) => {
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
@@ -554,10 +550,12 @@
 		$.wikibase.snakview.restore();
 	} );
 
-	QUnit.test( 'getEntityTermsView passes correct options to views', function ( assert ) {
+	QUnit.test( 'getEntityTermsView passes correct options to views', ( assert ) => {
 		var fingerprint = new datamodel.Fingerprint(),
 			message = 'message',
-			messageProvider = { getMessage: function () { return message; } },
+			messageProvider = { getMessage: function () {
+				return message;
+			} },
 			userLanguages = [],
 			viewFactory = newViewFactory(
 				null,

@@ -103,7 +103,7 @@
 				'referenceviewafterstartediting.' + this.widgetName,
 				'sitelinkgroupviewafterstartediting.' + this.widgetName
 			].join( ' ' ),
-			function ( event ) {
+			( event ) => {
 				self._trigger( 'afterstartediting' );
 			} );
 
@@ -115,7 +115,7 @@
 				'referenceviewafterstopediting.' + this.widgetName,
 				'sitelinkgroupviewafterstopediting.' + this.widgetName
 			].join( ' ' ),
-			function ( event, dropValue ) {
+			( event, dropValue ) => {
 				self._trigger( 'afterstopediting', null, [ dropValue ] );
 			} );
 		},

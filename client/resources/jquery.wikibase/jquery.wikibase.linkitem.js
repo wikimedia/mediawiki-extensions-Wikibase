@@ -112,7 +112,7 @@
 				action: 'query',
 				meta: 'userinfo'
 			} )
-			.done( function ( data ) {
+			.done( ( data ) => {
 				$dialogSpinner.remove();
 
 				if ( data.query.userinfo.anon !== undefined ) {
@@ -124,7 +124,7 @@
 				self._createDialog();
 				$( '#wbclient-linkItem-site' ).trigger( 'focus' );
 			} )
-			.fail( function ( errorCode, errorInfo ) {
+			.fail( ( errorCode, errorInfo ) => {
 				$dialogSpinner.remove();
 				self.element.show();
 
@@ -135,7 +135,7 @@
 				} );
 
 				self.element.data( 'wbtooltip' ).show();
-				self.element.one( 'click.' + self.widgetName, function () {
+				self.element.one( 'click.' + self.widgetName, () => {
 					// Remove the tooltip by the time the user clicks the link again.
 					self.element.data( 'wbtooltip' ).destroy();
 				} );
@@ -156,7 +156,7 @@
 				height: 200,
 				resizable: true
 			} )
-			.on( 'dialogclose', function () {
+			.on( 'dialogclose', () => {
 				self._trigger( 'dialogclose' );
 			} )
 			.append(
@@ -187,10 +187,10 @@
 				} )
 				// Use .on instead of passing this to dialog() as close as we want to be able to remove
 				// it later:
-				.on( 'dialogclose', function () {
+				.on( 'dialogclose', () => {
 					this.element.show();
 					this._trigger( 'dialogclose' );
-				}.bind( this ) )
+				} )
 				.append( $( '<p>' ).text( mw.msg( 'wikibase-linkitem-selectlink' ) ) )
 				.append( this._createSiteLinkForm() );
 
@@ -319,10 +319,10 @@
 						},
 						timeout: 8000
 					} )
-					.done( function ( response ) {
+					.done( ( response ) => {
 						deferred.resolve( response[ 1 ], response[ 0 ] );
 					} )
-					.fail( function ( jqXHR, textStatus ) {
+					.fail( ( jqXHR, textStatus ) => {
 						deferred.reject( textStatus );
 					} );
 
@@ -354,7 +354,7 @@
 					// Enable the button if the field has a value
 					self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
 				} )
-				.on( 'keydown', function ( e ) {
+				.on( 'keydown', ( e ) => {
 					if ( !self.$goButton.prop( 'disabled' ) && e.which === 13 ) {
 						// Enter should submit
 						self.$goButton.trigger( 'click' );
@@ -487,7 +487,7 @@
 			this.$goButton
 				.off( 'click' )
 				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-confirmitem-button' ) )
-				.on( 'click', function () {
+				.on( 'click', () => {
 					// The user confirmed that this is the right item...
 					self._showSpinner();
 					self._pageConnector.linkPages()
@@ -584,10 +584,10 @@
 			// Replace the button with one asking to close the dialog and reload the current page
 			this.$goButton
 				.off( 'click' )
-				.on( 'click', function () {
+				.on( 'click', () => {
 					this._showSpinner();
 					window.location.reload( true );
-				}.bind( this ) )
+				} )
 				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-close' ) );
 
 			// Purge this page in the background... we shouldn't confuse the user with the newly added
@@ -631,7 +631,7 @@
 
 			// Remove the tooltip if the user clicks onto the dialog trying to correct the input
 			// Also remove the tooltip in case the dialog is getting closed
-			this.$dialog.one( 'dialogclose click', function () {
+			this.$dialog.one( 'dialogclose click', () => {
 				if ( $elem.data( 'wbtooltip' ) ) {
 					$elem.data( 'wbtooltip' ).destroy();
 				}

@@ -14,7 +14,7 @@
 		}
 	} );
 
-	QUnit.test( 'returns ControllerViewFactory when editable', function ( assert ) {
+	QUnit.test( 'returns ControllerViewFactory when editable', ( assert ) => {
 		var factory = new ViewFactoryFactory(),
 			result = factory.getViewFactory( true, [] );
 
@@ -22,7 +22,7 @@
 		assert.true( result instanceof wb.view.ControllerViewFactory );
 	} );
 
-	QUnit.test( 'returns ReadModeViewFactory when not editable', function ( assert ) {
+	QUnit.test( 'returns ReadModeViewFactory when not editable', ( assert ) => {
 		var factory = new ViewFactoryFactory(),
 			result = factory.getViewFactory( false, [] );
 
@@ -30,7 +30,7 @@
 		assert.true( result instanceof wb.view.ReadModeViewFactory );
 	} );
 
-	QUnit.test( 'ControllerViewFactory is called with correct arguments', function ( assert ) {
+	QUnit.test( 'ControllerViewFactory is called with correct arguments', ( assert ) => {
 		var factory = new ViewFactoryFactory();
 
 		factory.getViewFactory( true, [ 1, 2, 3 ] );
@@ -38,7 +38,7 @@
 		assert.true( wb.view.ControllerViewFactory.calledWith( 1, 2, 3 ) );
 	} );
 
-	QUnit.test( 'ReadModeViewFactory is called with correct arguments', function ( assert ) {
+	QUnit.test( 'ReadModeViewFactory is called with correct arguments', ( assert ) => {
 		var factory = new ViewFactoryFactory();
 
 		factory.getViewFactory( false, [ 1, 2, 3 ] );

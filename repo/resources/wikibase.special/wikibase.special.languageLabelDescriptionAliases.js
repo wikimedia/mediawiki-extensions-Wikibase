@@ -32,7 +32,7 @@
 		];
 
 		fieldCount = 0;
-		fields.forEach( function ( field ) {
+		fields.forEach( ( field ) => {
 			field.$element = $( document.getElementsByName( field.name ) )
 				.closest( '.oo-ui-inputWidget' );
 			fieldCount += field.$element.length;
@@ -43,7 +43,7 @@
 		}
 
 		langWidget = OO.ui.infuse( $lang );
-		fields.forEach( function ( field ) {
+		fields.forEach( ( field ) => {
 			field.fieldLayoutWidget = OO.ui.infuse( field.$element.closest( '.oo-ui-fieldLayout' ) );
 			field.widget = OO.ui.infuse( field.$element );
 		} );
@@ -52,7 +52,7 @@
 			var languageName = getLanguageNameByCodeForTerms( languageCode ),
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
-			fields.forEach( function ( field ) {
+			fields.forEach( ( field ) => {
 				var $input = field.widget.$input;
 				var placeholderText;
 				if ( languageCode === 'mul' ) {
@@ -89,7 +89,7 @@
 				messageKey = 'wikibase-item-description-edit-not-supported';
 			}
 
-			fields.forEach( function ( field ) {
+			fields.forEach( ( field ) => {
 				if ( field.name !== 'description' ) {
 					return;
 				}

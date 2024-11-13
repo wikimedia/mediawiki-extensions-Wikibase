@@ -38,7 +38,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 		if ( !data.labels ) {
 			data.labels = {};
 		}
-		data.labels.en = { language: 'en', value: `${enLabel}-${utils.uniq()}` };
+		data.labels.en = { language: 'en', value: `${ enLabel }-${ utils.uniq() }` };
 
 		const response = await alice.action( 'wbeditentity', {
 			new: 'item',
@@ -73,7 +73,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 	 * @return {Promise<string>} The full title.
 	 */
 	async function createRedirectTarget( title ) {
-		const fullTitle = `User:${alice.username}/${title}-${utils.uniq()}`;
+		const fullTitle = `User:${ alice.username }/${ title }-${ utils.uniq() }`;
 		const response = await alice.edit( fullTitle, {
 			text: 'Redirect target for SiteLinkRedirectBadgeTest',
 			createonly: '1',
@@ -88,13 +88,13 @@ describe( 'sitelink redirect behavior with badges', () => {
 	 * A unique suffix is automatically appended,
 	 * and the page is always a subpage of the Alice user page.
 	 * @param {string} target The full title of the target page,
-	 * typically returned by {@link createRedirectTarget}.
+	 * typically returned by `createRedirectTarget`.
 	 * @return {Promise<string>} The full title.
 	 */
 	async function createRedirect( title, target ) {
-		const fullTitle = `User:${alice.username}/${title}-${utils.uniq()}`;
+		const fullTitle = `User:${ alice.username }/${ title }-${ utils.uniq() }`;
 		const response = await alice.edit( fullTitle, {
-			text: `#REDIRECT [[${target}]]`,
+			text: `#REDIRECT [[${ target }]]`,
 			createonly: '1',
 		} );
 		return response.title;
@@ -102,15 +102,13 @@ describe( 'sitelink redirect behavior with badges', () => {
 
 	const wbSetSiteLinkAction = {
 		name: 'wbsetsitelink',
-		expectActionSuccess: async ( itemId, redirectTargetTitle, badges ) => {
-			return alice.action( 'wbsetsitelink', {
-				id: itemId,
-				linksite: siteId,
-				linktitle: redirectTargetTitle,
-				badges: badges,
-				token: await alice.token( 'csrf' ),
-			}, 'POST' );
-		},
+		expectActionSuccess: async ( itemId, redirectTargetTitle, badges ) => alice.action( 'wbsetsitelink', {
+			id: itemId,
+			linksite: siteId,
+			linktitle: redirectTargetTitle,
+			badges: badges,
+			token: await alice.token( 'csrf' ),
+		}, 'POST' ),
 		expectActionError: async ( itemId, redirectTargetTitle, badges ) => {
 			const params = {
 				id: itemId,
@@ -194,8 +192,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 			);
 
 			assert.strictEqual( error.code, 'failed-save' );
-			const sitelinkConflict = error.messages.find( ( message ) =>
-				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
+			const sitelinkConflict = error.messages.find( ( message ) => message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );
@@ -230,7 +227,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 				} );
 
 			await alice.edit( redirect, {
-				text: `#REDIRECT [[${redirectTarget}]]`,
+				text: `#REDIRECT [[${ redirectTarget }]]`,
 			} );
 
 			const response = await setSiteLinkEndpoint.expectActionSuccess(
@@ -270,8 +267,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 			const error = await setSiteLinkEndpoint.expectActionError( item, redirect, [] );
 
 			assert.strictEqual( error.code, 'failed-save' );
-			const sitelinkConflict = error.messages.find( ( message ) =>
-				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
+			const sitelinkConflict = error.messages.find( ( message ) => message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );
@@ -331,8 +327,7 @@ describe( 'sitelink redirect behavior with badges', () => {
 				goodArticleBadgeId,
 			);
 			assert.strictEqual( error.code, 'failed-save' );
-			const sitelinkConflict = error.messages.find( ( message ) =>
-				message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
+			const sitelinkConflict = error.messages.find( ( message ) => message.name === 'wikibase-validator-sitelink-conflict-redirects-supported' );
 			assert.isNotNull( sitelinkConflict );
 			assert.include( sitelinkConflict.parameters[ 1 ], itemLinkedToTarget );
 		} );

@@ -10,7 +10,7 @@
 		}
 	} );
 
-	QUnit.test( 'constructor validates parameter', function ( assert ) {
+	QUnit.test( 'constructor validates parameter', ( assert ) => {
 		try {
 			new EntityInitializer(); // eslint-disable-line no-new
 			assert.fail( 'Expected exception' );
@@ -19,12 +19,12 @@
 		}
 	} );
 
-	QUnit.test( 'can create instance from entity loaded hook', function ( assert ) {
+	QUnit.test( 'can create instance from entity loaded hook', ( assert ) => {
 		var initializer = EntityInitializer.newFromEntityLoadedHook();
 		assert.true( initializer instanceof EntityInitializer );
 	} );
 
-	QUnit.test( 'uses entity returned from hook', function ( assert ) {
+	QUnit.test( 'uses entity returned from hook', ( assert ) => {
 		var done = assert.async(),
 			entity = { id: 'Q123' },
 			hookStub = sandbox.stub( mw, 'hook' ).returns( {
@@ -39,7 +39,7 @@
 
 		var initializer = EntityInitializer.newFromEntityLoadedHook();
 
-		initializer.getEntity().then( function () {
+		initializer.getEntity().then( () => {
 			assert.true( hookStub.calledWith( 'wikibase.entityPage.entityLoaded' ) );
 			assert.true( mockDeserializer.deserialize.calledWith( entity ) );
 			done();

@@ -46,7 +46,7 @@
 				var deferred = $.Deferred();
 
 				apiValueParser.parseValues( this.API_VALUE_PARSER_ID, [ rawValue ], this._options )
-					.done( function ( results ) {
+					.done( ( results ) => {
 						var result;
 
 						if ( results.length === 0 ) {
@@ -61,7 +61,7 @@
 							deferred.reject( error.message );
 						}
 					} )
-					.fail( function ( error ) {
+					.fail( ( error ) => {
 						deferred.reject( error.detailedMessage || error.code );
 					} );
 

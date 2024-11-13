@@ -2,7 +2,6 @@
  * Modal for notifying the user of leaving the current Wikibase instance
  *
  * @license GPL-2.0-or-later
- *
  */
 ( function () {
 	'use strict';
@@ -23,7 +22,7 @@
 
 	var hostWikibaseLocation = require( './federatedPropertiesHostWikibase.json' );
 
-	$( function () {
+	$( () => {
 		function LeavingSiteNoticeDialog( config ) {
 			LeavingSiteNoticeDialog.super.call( this, config );
 		}
@@ -51,7 +50,7 @@
 					align: 'inline'
 				}
 			);
-			inputCheckbox.on( 'change', function ( selected ) {
+			inputCheckbox.on( 'change', ( selected ) => {
 				selected = selected || null;
 				cachedCheckBoxValue = selected;
 
@@ -67,7 +66,7 @@
 				label: mw.msg( 'wikibase-federated-properties-leaving-site-notice-cancel' ),
 				classes: [ 'wb-leaving-site-notice-cancel' ]
 			} );
-			cancelButton.on( 'click', function () {
+			cancelButton.on( 'click', () => {
 				dialog.close();
 			} );
 			var continueButton = new OO.ui.ButtonWidget( {
@@ -106,7 +105,7 @@
 		LeavingSiteNoticeDialog.prototype.getActionProcess = function ( action ) {
 			var dialog = this;
 			if ( action ) {
-				return new OO.ui.Process( function () {
+				return new OO.ui.Process( () => {
 					dialog.close( {
 						action: action
 					} );
@@ -131,7 +130,7 @@
 			windowManager.openWindow( processDialog );
 		};
 
-		mw.hook( 'wikibase.entityPage.entityView.rendered' ).add( function () {
+		mw.hook( 'wikibase.entityPage.entityView.rendered' ).add( () => {
 			$( '.wikibase-statementgroupview-property-label a' ).on( 'click', function ( e ) {
 				if ( dismissLeavingSiteNotice() ) {
 					return;

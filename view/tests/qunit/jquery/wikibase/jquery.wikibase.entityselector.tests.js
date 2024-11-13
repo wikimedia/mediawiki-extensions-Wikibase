@@ -62,7 +62,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create', function ( assert ) {
+	QUnit.test( 'Create', ( assert ) => {
 		var $entitySelector = newTestEntitySelector();
 
 		assert.true(
@@ -71,7 +71,7 @@
 		);
 	} );
 
-	QUnit.test( 'Test request parameters that must be sent to the API', function ( assert ) {
+	QUnit.test( 'Test request parameters that must be sent to the API', ( assert ) => {
 		var mockTerm = 'someTerm',
 			mockLanguage = 'someLanguage',
 			$entitySelector = newTestEntitySelector( { language: mockLanguage } ),
@@ -89,7 +89,7 @@
 		assert.deepEqual( entitySelector._getSearchApiParameters( mockTerm ), expectedParameters );
 	} );
 
-	QUnit.test( 'Indicate unrecognized input', function ( assert ) {
+	QUnit.test( 'Indicate unrecognized input', ( assert ) => {
 		var $entitySelector = newTestEntitySelector();
 		$entitySelector.data( 'entityselector' );
 
@@ -100,7 +100,7 @@
 		assert.true( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
 	} );
 
-	QUnit.test( 'Indicate recognized input', function ( assert ) {
+	QUnit.test( 'Indicate recognized input', ( assert ) => {
 		var $entitySelector = newTestEntitySelector();
 
 		var entitySelector = $entitySelector.data( 'entityselector' );
@@ -112,7 +112,7 @@
 		assert.true( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
 	} );
 
-	QUnit.test( 'Item constructor', function ( assert ) {
+	QUnit.test( 'Item constructor', ( assert ) => {
 		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[ 0 ] );
 
 		assert.true(
@@ -121,14 +121,14 @@
 		);
 
 		assert.throws(
-			function () {
+			() => {
 				item = new $.wikibase.entityselector.Item( 'label', 'value' );
 			},
 			'Throwing error when omitting entity stub on instantiation.'
 		);
 	} );
 
-	QUnit.test( 'Cache invalidation of small (not continued) search results', function ( assert ) {
+	QUnit.test( 'Cache invalidation of small (not continued) search results', ( assert ) => {
 		var $entitySelector = newTestEntitySelector( {
 				source: function () {
 					return $.Deferred().resolve( [ 'Alpha' ] ).promise();
@@ -136,16 +136,16 @@
 			} ),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		return entitySelector._getSuggestions().then( function ( suggestions ) {
+		return entitySelector._getSuggestions().then( ( suggestions ) => {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should cache' );
 
 			return entitySelector._getSuggestions();
-		} ).then( function ( suggestions, term ) {
+		} ).then( ( suggestions, term ) => {
 			assert.deepEqual( suggestions, [ 'Alpha' ], 'should not concat on existing cache' );
 		} );
 	} );
 
-	QUnit.test( 'When fireSearchHook is called with term', function ( assert ) {
+	QUnit.test( 'When fireSearchHook is called with term', ( assert ) => {
 		var hookStub = sinon.stub( mw, 'hook' ),
 			fireSpy = sinon.spy(),
 			hook = 'HOOK_NAME',
@@ -161,7 +161,7 @@
 		hookStub.restore();
 	} );
 
-	QUnit.test( 'When fireSearchHook is called and a promise is added to the list', function ( assert ) {
+	QUnit.test( 'When fireSearchHook is called and a promise is added to the list', ( assert ) => {
 		var hookStub = sinon.stub( mw, 'hook' ),
 			hook = 'HOOK_NAME',
 			promise = '[PROMISE]',
@@ -179,13 +179,13 @@
 		hookStub.restore();
 	} );
 
-	QUnit.test( 'When combineResults is called with promised item list', function ( assert ) {
+	QUnit.test( 'When combineResults is called with promised item list', ( assert ) => {
 		var done = assert.async(),
 			itemList = [ { id: '[ID]' } ],
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ $.Deferred().resolve( itemList ).promise() ] ).then( function ( list ) {
+		entitySelector._combineResults( [ $.Deferred().resolve( itemList ).promise() ] ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				itemList,
@@ -195,7 +195,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When combineResults is called with multiple promised item lists', function ( assert ) {
+	QUnit.test( 'When combineResults is called with multiple promised item lists', ( assert ) => {
 		var done = assert.async(),
 			itemList = [ { id: '[ID]' } ],
 			itemList1 = [ { id: '[ID1]' } ],
@@ -207,7 +207,7 @@
 			$.Deferred().resolve( itemList1 ).promise(),
 			$.Deferred().resolve( itemList2 ).promise()
 		],
-		itemList ).then( function ( list ) {
+		itemList ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				itemList2.concat( itemList1 ).concat( itemList ),
@@ -217,7 +217,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When promised item list contains ID that is already in the list', function ( assert ) {
+	QUnit.test( 'When promised item list contains ID that is already in the list', ( assert ) => {
 		var done = assert.async(),
 			itemList = [ { id: '[ID]', data: '[OLD]' } ],
 			itemListConsumer = [ { id: '[ID]', data: '[NEW]' } ],
@@ -227,7 +227,7 @@
 		entitySelector._combineResults( [
 			$.Deferred().resolve( itemListConsumer ).promise() ],
 		itemList
-		).then( function ( list ) {
+		).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				itemListConsumer,
@@ -237,7 +237,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When showDefaultSuggestions() is called and value is empty', function ( assert ) {
+	QUnit.test( 'When showDefaultSuggestions() is called and value is empty', ( assert ) => {
 		var done = assert.async(),
 			hookStub = sinon.stub( mw, 'hook' ),
 			hook = 'HOOK_NAME',
@@ -275,7 +275,7 @@
 		done();
 	} );
 
-	QUnit.test( 'When showDefaultSuggestions() is called and value is NOT empty', function ( assert ) {
+	QUnit.test( 'When showDefaultSuggestions() is called and value is NOT empty', ( assert ) => {
 		var hookStub = sinon.stub( mw, 'hook' ),
 			fireSpy = sinon.spy(),
 			hook = 'HOOK_NAME',
@@ -292,7 +292,7 @@
 		hookStub.restore();
 	} );
 
-	QUnit.test( 'When _combineResults() is called and all items have a rating', function ( assert ) {
+	QUnit.test( 'When _combineResults() is called and all items have a rating', ( assert ) => {
 		var done = assert.async(),
 			itemList1 = [ { id: '[ID4]', rating: 4 }, { id: '[ID1]', rating: 1 } ],
 			itemList2 = [ { id: '[ID5]', rating: 5 }, { id: '[ID3]', rating: 3 }, { id: '[ID2]', rating: 2 } ],
@@ -303,7 +303,7 @@
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ promise1, promise2 ] ).then( function ( list ) {
+		entitySelector._combineResults( [ promise1, promise2 ] ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				sortedItemList,
@@ -313,7 +313,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When _combineResults() is called and all items have the same rating', function ( assert ) {
+	QUnit.test( 'When _combineResults() is called and all items have the same rating', ( assert ) => {
 		// note: this test assumes that Array.sort() is stable,
 		// which is currently the case in all major browsers, but not guaranteed by the spec
 		var done = assert.async(),
@@ -322,7 +322,7 @@
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ promise ] ).then( function ( list ) {
+		entitySelector._combineResults( [ promise ] ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				itemList,
@@ -332,7 +332,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When _combineResults() is called and all items are missing a rating', function ( assert ) {
+	QUnit.test( 'When _combineResults() is called and all items are missing a rating', ( assert ) => {
 		// note: this test assumes that Array.sort() is stable,
 		// which is currently the case in all major browsers, but not guaranteed by the spec
 		var done = assert.async(),
@@ -341,7 +341,7 @@
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ promise ] ).then( function ( list ) {
+		entitySelector._combineResults( [ promise ] ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				itemList,
@@ -351,7 +351,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When _combineResults() is called and some items have an equal rating or none', function ( assert ) {
+	QUnit.test( 'When _combineResults() is called and some items have an equal rating or none', ( assert ) => {
 		var done = assert.async(),
 			itemList1 = [ { id: '[ID4]', rating: 4 }, { id: '[ID1]' } ],
 			itemList2 = [ { id: '[ID5]', rating: 5 }, { id: '[ID3]', rating: 2.5 }, { id: '[ID2]', rating: 2.5 } ],
@@ -362,7 +362,7 @@
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ promise1, promise2 ] ).then( function ( list ) {
+		entitySelector._combineResults( [ promise1, promise2 ] ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				sortedItemList,
@@ -372,7 +372,7 @@
 		} );
 	} );
 
-	QUnit.test( 'When _combineResults() is called with hook results and default results', function ( assert ) {
+	QUnit.test( 'When _combineResults() is called with hook results and default results', ( assert ) => {
 		var done = assert.async(),
 			itemList = [ { id: '[ID1]' }, { id: '[ID2]' }, { id: '[ID3]' } ],
 			defaultList = [ { id: '[IDX]', rating: 5 } ],
@@ -381,7 +381,7 @@
 			$entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' );
 
-		entitySelector._combineResults( [ promise ], defaultList ).then( function ( list ) {
+		entitySelector._combineResults( [ promise ], defaultList ).then( ( list ) => {
 			assert.deepEqual(
 				list,
 				expectedList,
@@ -391,7 +391,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Applies api parameter overrides from hook', function ( assert ) {
+	QUnit.test( 'Applies api parameter overrides from hook', ( assert ) => {
 		var result,
 			hookStub = sinon.stub( mw, 'hook' ),
 			fireSpy = sinon.spy(),
@@ -407,7 +407,7 @@
 		hookStub.restore();
 	} );
 
-	QUnit.test( 'Error message defaults to parsing by function', function ( assert ) {
+	QUnit.test( 'Error message defaults to parsing by function', ( assert ) => {
 		var $entitySelector = newTestEntitySelector();
 
 		assert.strictEqual(
@@ -417,7 +417,7 @@
 		);
 	} );
 
-	QUnit.test( 'Error parser gets exception message from exception object', function ( assert ) {
+	QUnit.test( 'Error parser gets exception message from exception object', ( assert ) => {
 		var $entitySelector = newTestEntitySelector();
 
 		$entitySelector.data( 'entityselector' )._error = {

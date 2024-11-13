@@ -138,7 +138,7 @@
 			this.getContainer().off( '.' + this.widgetName );
 
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( this._buttons, function ( buttonName, $button ) {
+			$.each( this._buttons, ( buttonName, $button ) => {
 				$button.off( '.' + self.widgetName );
 				var buttonWbtooltip = $button.data( 'wbtooltip' );
 				if ( buttonWbtooltip ) {
@@ -159,7 +159,7 @@
 		checkRequiredMethods: function () {
 			var self = this,
 				missingMethods = [];
-			this._requiredMethods.forEach( function ( methodName ) {
+			this._requiredMethods.forEach( ( methodName ) => {
 				if ( typeof self._controller[ methodName ] !== 'function' ) {
 					missingMethods.push( methodName );
 				}
@@ -198,7 +198,7 @@
 			$subToolbar.children( '.wikibase-toolbar-button' ).each( function () {
 				var $button = $( this );
 				// eslint-disable-next-line no-jquery/no-each-util
-				$.each( self.options.buttonLabels, function ( buttonName, label ) {
+				$.each( self.options.buttonLabels, ( buttonName, label ) => {
 					if ( $button.text() === label ) {
 						self._buttons[ buttonName ] = $button.toolbarbutton( {
 							$label: self.options.buttonLabels[ buttonName ]
@@ -212,7 +212,7 @@
 			var self = this;
 
 			this.getContainer()
-			.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
+			.on( 'toolbarbuttonaction.' + this.widgetName, ( event ) => {
 				if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
 					self._controller.startEditing();
 				} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
@@ -393,7 +393,7 @@
 				content: error,
 				permanent: true
 			} )
-			.one( 'wbtooltipafterhide.' + this.widgetName, function () {
+			.one( 'wbtooltipafterhide.' + this.widgetName, () => {
 				self._controller.setError();
 				var wbtooltip = $anchor.data( 'wbtooltip' );
 				if ( wbtooltip ) {

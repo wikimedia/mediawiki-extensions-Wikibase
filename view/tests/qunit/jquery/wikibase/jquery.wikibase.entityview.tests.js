@@ -9,9 +9,9 @@
 
 	QUnit.module( 'jquery.wikibase.entityview' );
 
-	QUnit.test( 'Direct initialization fails', function ( assert ) {
+	QUnit.test( 'Direct initialization fails', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				$( '<div>' ).entityview( $.extend( {
 					value: new datamodel.Property( 'P1', 'someDataType' ),
 					languages: 'en'

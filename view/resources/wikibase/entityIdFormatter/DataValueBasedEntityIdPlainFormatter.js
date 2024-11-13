@@ -22,13 +22,11 @@
 			format: function ( entityId ) {
 				var deferred = $.Deferred(),
 					self = this;
-				this._parser.parse( entityId ).done( function ( parsed ) {
-					return self._formatter.format( parsed ).done( function ( response ) {
-						deferred.resolve( response );
-					} ).fail( function () {
-						deferred.resolve( entityId );
-					} );
-				} ).fail( function () {
+				this._parser.parse( entityId ).done( ( parsed ) => self._formatter.format( parsed ).done( ( response ) => {
+					deferred.resolve( response );
+				} ).fail( () => {
+					deferred.resolve( entityId );
+				} ) ).fail( () => {
 					deferred.resolve( entityId );
 				} );
 

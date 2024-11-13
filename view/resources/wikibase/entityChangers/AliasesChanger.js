@@ -58,7 +58,7 @@
 				this._getRemovedAliasesTexts( aliases, initialAliases ),
 				language
 			)
-			.done( function ( response ) {
+			.done( ( response ) => {
 				self._revisionStore.setAliasesRevision( response.entity.lastrevid );
 
 				self._entity.getFingerprint().setAliases( language, aliases );
@@ -68,13 +68,11 @@
 
 				var texts = [];
 				if ( response.entity.aliases && response.entity.aliases[ language ] ) {
-					texts = response.entity.aliases[ language ].map( function ( value ) {
-						return value.value;
-					} );
+					texts = response.entity.aliases[ language ].map( ( value ) => value.value );
 				}
 				deferred.resolve( new datamodel.MultiTerm( language, texts ) );
 			} )
-			.fail( function ( errorCode, errorObject ) {
+			.fail( ( errorCode, errorObject ) => {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );
 			} );
 

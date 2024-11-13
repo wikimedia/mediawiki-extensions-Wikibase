@@ -8,7 +8,7 @@ const bot = new MWBot( {
 	apiUrl: browser.config.baseUrl + '/api.php'
 } );
 
-describe( 'blocked user cannot use', function () {
+describe( 'blocked user cannot use', () => {
 
 	before( async () => {
 		await bot.loginGetEditToken( {
@@ -56,14 +56,14 @@ describe( 'blocked user cannot use', function () {
 
 	for ( const test of tests ) {
 		// eslint-disable-next-line mocha/no-setup-in-describe
-		const title = `Special:${test.name}`;
+		const title = `Special:${ test.name }`;
 		it( title, async () => {
 			await ( new Page() ).openTitle( title );
 
 			await assertIsUserBlockedError();
 
 			for ( const id of test.ids ) {
-				await expect( $( `#${id}` ) ).not.toExist();
+				await expect( $( `#${ id }` ) ).not.toExist();
 			}
 		} );
 	}

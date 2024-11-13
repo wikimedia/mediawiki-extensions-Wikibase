@@ -341,12 +341,8 @@
 						entityIdPlainFormatter: self._entityIdPlainFormatter,
 						getSiteLinkRemover: function ( $dom, title ) {
 							return self._structureEditorFactory.getRemover(
-								function () {
-									return startEditingCallback()
-										.then( function () {
-											return removeCallback( view );
-										} );
-								},
+								() => startEditingCallback()
+										.then( () => removeCallback( view ) ),
 								$dom,
 								title
 							);
@@ -465,7 +461,7 @@
 					this,
 					startEditingCallback,
 					entityId,
-					function ( dom ) {
+					( dom ) => {
 						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
 						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
 					},
@@ -562,9 +558,7 @@
 				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function ( $dom2 ) {
-					return structureEditorFactory.getRemover( function () {
-						return startEditingCallback().then( doRemove );
-					}, $dom2 );
+					return structureEditorFactory.getRemover( () => startEditingCallback().then( doRemove ), $dom2 );
 				},
 				removeCallback: doRemove
 			}
@@ -663,12 +657,8 @@
 				valueViewBuilder: this._getValueViewBuilder(),
 				drawProperty: drawProperty,
 				getSnakRemover: removeCallback ? function ( $dom ) {
-					return structureEditorFactory.getRemover( function () {
-						return startEditingCallback()
-							.then( function () {
-								return removeCallback( view );
-							} );
-					}, $dom );
+					return structureEditorFactory.getRemover( () => startEditingCallback()
+							.then( () => removeCallback( view ) ), $dom );
 				} : null
 			}
 		);

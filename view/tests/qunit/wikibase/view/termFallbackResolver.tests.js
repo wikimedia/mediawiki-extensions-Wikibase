@@ -22,7 +22,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'term in language', function ( assert ) {
+	QUnit.test( 'term in language', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			de: new datamodel.Term( 'de', 'de term' ),
 			en: new datamodel.Term( 'en', 'en term' )
@@ -34,7 +34,7 @@
 		assert.strictEqual( term.getText(), 'de term' );
 	} );
 
-	QUnit.test( 'term in first fallback language', function ( assert ) {
+	QUnit.test( 'term in first fallback language', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			de: new datamodel.Term( 'de', 'de term' ),
 			en: new datamodel.Term( 'en', 'en term' )
@@ -46,7 +46,7 @@
 		assert.strictEqual( term.getText(), 'de term' );
 	} );
 
-	QUnit.test( 'de falls back to mul before en', function ( assert ) {
+	QUnit.test( 'de falls back to mul before en', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			en: new datamodel.Term( 'en', 'en term' ),
 			mul: new datamodel.Term( 'mul', 'mul term' )
@@ -58,7 +58,7 @@
 		assert.strictEqual( term.getText(), 'mul term' );
 	} );
 
-	QUnit.test( 'en-gb falls back to en before mul', function ( assert ) {
+	QUnit.test( 'en-gb falls back to en before mul', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			en: new datamodel.Term( 'en', 'en term' ),
 			mul: new datamodel.Term( 'mul', 'mul term' )
@@ -70,7 +70,7 @@
 		assert.strictEqual( term.getText(), 'en term' );
 	} );
 
-	QUnit.test( 'unknown language falls back to mul', function ( assert ) {
+	QUnit.test( 'unknown language falls back to mul', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			en: new datamodel.Term( 'en', 'en term' ),
 			mul: new datamodel.Term( 'mul', 'mul term' )
@@ -82,7 +82,7 @@
 		assert.strictEqual( term.getText(), 'mul term' );
 	} );
 
-	QUnit.test( 'unknown language falls back to en if mul missing', function ( assert ) {
+	QUnit.test( 'unknown language falls back to en if mul missing', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			en: new datamodel.Term( 'en', 'en term' )
 		} );
@@ -93,7 +93,7 @@
 		assert.strictEqual( term.getText(), 'en term' );
 	} );
 
-	QUnit.test( 'no fallback to random language', function ( assert ) {
+	QUnit.test( 'no fallback to random language', ( assert ) => {
 		var terms = new datamodel.TermMap( {
 			de: new datamodel.Term( 'de', 'de term' )
 		} );
@@ -103,7 +103,7 @@
 		assert.strictEqual( term, null );
 	} );
 
-	QUnit.test( 'empty terms', function ( assert ) {
+	QUnit.test( 'empty terms', ( assert ) => {
 		var terms = new datamodel.TermMap();
 
 		var term = wb.view.termFallbackResolver.getTerm( terms, 'en' );

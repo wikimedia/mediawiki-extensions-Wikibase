@@ -101,7 +101,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create and destroy', function ( assert ) {
+	QUnit.test( 'Create and destroy', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -119,7 +119,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
+	QUnit.test( 'Create and destroy with initial value', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinklistview = createSitelinklistview( {
 				value: [ siteLink ]
@@ -140,7 +140,7 @@
 		);
 	} );
 
-	QUnit.test( 'isFull()', function ( assert ) {
+	QUnit.test( 'isFull()', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -165,7 +165,7 @@
 		);
 	} );
 
-	QUnit.test( 'value() with invalid sitelinkview', function ( assert ) {
+	QUnit.test( 'value() with invalid sitelinkview', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview( {
 				value: []
 			} ),
@@ -180,20 +180,20 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview( {
 				value: [ new datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 			} ),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
-		.on( 'sitelinklistviewafterstartediting', function ( event ) {
+		.on( 'sitelinklistviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinklistviewafterstopediting', function ( event, dropValue ) {
+		.on( 'sitelinklistviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -214,13 +214,13 @@
 			}
 
 			$sitelinklistview
-			.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', function ( event ) {
+			.one( 'sitelinklistviewafterstartediting.sitelinklistviewtest', ( event ) => {
 				$sitelinklistview.off( '.sitelinklistviewtest' );
 				deferred.resolve();
 			} )
 			.one(
 				'sitelinklistviewafterstopediting.sitelinklistviewtest',
-				function ( event, dropValue ) {
+				( event, dropValue ) => {
 					$sitelinklistview.off( '.sitelinklistviewtest' );
 					deferred.resolve();
 				}
@@ -241,40 +241,40 @@
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
-			$queue.queue( 'tests', function ( next ) {
+			$queue.queue( 'tests', ( next ) => {
 				var done = assert.async();
-				testEditModeChange( func, expectingEvent ).always( function () {
+				testEditModeChange( func, expectingEvent ).always( () => {
 					next();
 					done();
 				} );
 			} );
 		}
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.startEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.stopEditing( true );
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.stopEditing( true );
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.stopEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinklistview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			// Mock adding a new item:
 			var listview = sitelinklistview.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
@@ -286,13 +286,13 @@
 		$queue.dequeue( 'tests' );
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
 		.addClass( 'wb-error' )
-		.on( 'sitelinklistviewtoggleerror', function ( event, error ) {
+		.on( 'sitelinklistviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered toggleerror event.'
@@ -302,7 +302,7 @@
 		sitelinklistview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var value = [ new datamodel.SiteLink( 'enwiki', 'Main Page' ) ],
 			$sitelinklistview = createSitelinklistview( {
 				value: value
@@ -329,12 +329,12 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem()', function ( assert ) {
+	QUnit.test( 'enterNewItem()', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		$sitelinklistview
-		.on( 'sitelinklistviewafterstartediting', function () {
+		.on( 'sitelinklistviewafterstartediting', () => {
 			assert.true(
 				true,
 				'Started sitelinklistview edit mode.'
@@ -344,7 +344,7 @@
 		sitelinklistview.enterNewItem();
 	} );
 
-	QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
+	QUnit.test( 'remove empty sitelinkview when hitting backspace', ( assert ) => {
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 

@@ -62,7 +62,7 @@
 				.on(
 					'descriptionviewafterstartediting.' + this.widgetName
 					+ ' eachchange.' + this.widgetName,
-					function ( event ) {
+					( event ) => {
 						if ( self.value().getText() === '' ) {
 							// Since the widget shall not be in view mode when there is no value, triggering
 							// the event without a proper value is only done when creating the widget. Disabling
@@ -90,7 +90,7 @@
 			if ( this.isInEditMode() ) {
 				var self = this;
 
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', ( event ) => {
 					PARENT.prototype.destroy.call( self );
 				} );
 
@@ -154,12 +154,12 @@
 			) )
 			.attr( 'lang', languageCode )
 			.attr( 'dir', $.util.getDirectionality( languageCode ) )
-			.on( 'keydown.' + this.widgetName, function ( event ) {
+			.on( 'keydown.' + this.widgetName, ( event ) => {
 				if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					event.preventDefault();
 				}
 			} )
-			.on( 'eachchange.' + this.widgetName, function ( event ) {
+			.on( 'eachchange.' + this.widgetName, ( event ) => {
 				self._trigger( 'change' );
 			} );
 

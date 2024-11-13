@@ -68,7 +68,7 @@
 		// interference in Firefox which re-converts &lt; and &gt; back to < and > when parsing by
 		// setting through $.html().
 		// Additionally, rip off any XML notation since jQuery will parse to HTML.
-		// eslint-disable-next-line security/detect-unsafe-regex -- TODO review
+
 		return string.replace( /(<\w+)\b(?:[^"'>]+|"[^"]*"|'[^']*')*>/g, '$1>' );
 	}
 
@@ -93,9 +93,7 @@
 		// and jQuery does not escape quotes in text nodes
 		var strippedTemplateWithUnescapedQuotes = strippedTemplate.replace(
 			/&quot;|&#039;/g,
-			function ( escapedQuote ) {
-				return escapedQuote === '&quot;' ? '"' : "'";
-			}
+			( escapedQuote ) => escapedQuote === '&quot;' ? '"' : "'"
 		);
 
 		// Nodes or text got lost while being parsed which indicates that the generated HTML would

@@ -17,7 +17,7 @@
 			ApiBasedValueParser = getApiBasedValueParserConstructor( apiCaller ),
 			parserStore = new vp.ValueParserStore( vp.NullParser );
 
-		dataTypes.forEach( function ( parserId ) {
+		dataTypes.forEach( ( parserId ) => {
 			var Parser = util.inherit(
 				ApiBasedValueParser,
 				{ API_VALUE_PARSER_ID: parserId }
@@ -25,7 +25,7 @@
 
 			parserStore.registerDataTypeParser( Parser, parserId );
 		} );
-		valueTypes.forEach( function ( parserId ) {
+		valueTypes.forEach( ( parserId ) => {
 			var Parser = util.inherit(
 				ApiBasedValueParser,
 				{ API_VALUE_PARSER_ID: parserId }

@@ -98,10 +98,10 @@
 			if ( !this.options.permanent ) {
 				this.element
 				.off( '.' + this.widgetName )
-				.on( 'mouseenter.' + this.widgetName, function ( event ) {
+				.on( 'mouseenter.' + this.widgetName, ( event ) => {
 					self.show();
 				} )
-				.on( 'mouseleave.' + this.widgetName, function ( event ) {
+				.on( 'mouseleave.' + this.widgetName, ( event ) => {
 					self.hide();
 				} );
 			}
@@ -109,8 +109,8 @@
 			// Reposition tooltip when resizing the browser window:
 			$( window )
 			.off( '.' + this.widgetName ) // Never need that event more than once.
-			.on( 'resize.' + this.widgetName, function ( event ) {
-				$( ':' + self.widgetFullName ).each( function ( i, node ) {
+			.on( 'resize.' + this.widgetName, ( event ) => {
+				$( ':' + self.widgetFullName ).each( ( i, node ) => {
 					var tooltip = $( node ).data( self.widgetName );
 
 					if ( tooltip
@@ -155,7 +155,7 @@
 		degrade: function ( remove ) {
 			var self = this;
 
-			this.element.one( 'wbtooltipafterhide', function ( event ) {
+			this.element.one( 'wbtooltipafterhide', ( event ) => {
 				self.destroy();
 				if ( remove ) {
 					self.element.remove();
@@ -233,11 +233,11 @@
 			if ( this.options.permanent ) {
 				// Hide error tooltip when clicking outside of it by suppressing clicks on the $tip from
 				// bubbling:
-				this._tipsy.tip().on( 'mousedown.' + this.widgetName, function ( event ) {
+				this._tipsy.tip().on( 'mousedown.' + this.widgetName, ( event ) => {
 					event.stopPropagation();
 				} );
 
-				$( window ).one( 'mousedown.' + this.widgetName, function ( event ) {
+				$( window ).one( 'mousedown.' + this.widgetName, ( event ) => {
 					// Tipsy might be destroyed already.
 					if ( self._tipsy ) {
 						self.hide();

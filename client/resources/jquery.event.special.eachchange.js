@@ -80,7 +80,7 @@
 
 			if ( !eventData ) {
 				eventData = { handlers: [], prevVal: getValue( $elem ) };
-				$( document ).on( eventNameString, function ( event ) {
+				$( document ).on( eventNameString, ( event ) => {
 					eventData = $.data( $elem[ 0 ], eventId );
 					eventData.prevVal = getValue( $elem );
 					$.data( $elem[ 0 ], eventId, eventData );
@@ -123,7 +123,7 @@
 				prevVal = getValue( $( this ) );
 
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( $.data( this ), function ( eventId, eventData ) {
+			$.each( $.data( this ), ( eventId, eventData ) => {
 				if ( eventId.indexOf( EVENT_ID ) === 0 ) {
 					eventData.prevVal = prevVal;
 					$.data( self, eventId, eventData );
@@ -145,7 +145,7 @@
 				var self = this;
 
 				// eslint-disable-next-line no-jquery/no-each-util
-				$.each( $.data( this ), function ( eventId, d ) {
+				$.each( $.data( this ), ( eventId, d ) => {
 					if ( eventId.indexOf( EVENT_ID ) !== 0 ) {
 						// Event is not an eachchange event.
 						return true;

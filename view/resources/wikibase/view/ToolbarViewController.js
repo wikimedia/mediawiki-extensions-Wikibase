@@ -148,7 +148,7 @@ module.exports = ( function ( wb ) {
 				? 'wikibase-publish-inprogress'
 				: 'wikibase-save-inprogress'
 		) );
-		this._model.save( this._view.value(), this._value ).done( function ( valueChangeResult ) {
+		this._model.save( this._view.value(), this._value ).done( ( valueChangeResult ) => {
 			self.setValue( valueChangeResult.getSavedValue() );
 			self._view.value( valueChangeResult.getSavedValue() );
 			self._toolbar.toggleActionMessage();
@@ -156,7 +156,7 @@ module.exports = ( function ( wb ) {
 			if ( valueChangeResult.getTempUserWatcher().getRedirectUrl() ) {
 				window.location.href = valueChangeResult.getTempUserWatcher().getRedirectUrl();
 			}
-		} ).fail( function ( error ) {
+		} ).fail( ( error ) => {
 			self._view.enable();
 			self.setError( error );
 		} );
@@ -185,14 +185,14 @@ module.exports = ( function ( wb ) {
 			);
 			promise = $.Deferred().resolve( emptyValueChangeResult ).promise();
 		}
-		return promise.done( function ( valueChangeResult ) {
+		return promise.done( ( valueChangeResult ) => {
 			self._value = null;
 			self._toolbar.toggleActionMessage();
 			self._leaveEditMode( true );
 			if ( valueChangeResult.getTempUserWatcher().getRedirectUrl() ) {
 				window.location.href = valueChangeResult.getTempUserWatcher().getRedirectUrl();
 			}
-		} ).fail( function ( error ) {
+		} ).fail( ( error ) => {
 			self._view.enable();
 			self.setError( error );
 		} );
@@ -212,7 +212,7 @@ module.exports = ( function ( wb ) {
 			this._toolbar.enable();
 			var self = this;
 			// FIXME: The toolbar has a race condition
-			window.setTimeout( function () {
+			window.setTimeout( () => {
 				self._toolbar.toNonEditMode();
 			}, 0 );
 		}

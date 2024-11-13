@@ -42,7 +42,7 @@
 
 			return this._getDataTypeFromExistingStatements( id )
 				.catch( this._getDataTypeFromEntityStore.bind( this, id ) )
-				.always( function ( dataType ) {
+				.always( ( dataType ) => {
 					self.setDataTypeForProperty( id, dataType );
 				} );
 		},
@@ -51,7 +51,7 @@
 			var dataTypePromise = $.Deferred(),
 				self = this;
 
-			this._entityLoadedHook.add( function ( entity ) {
+			this._entityLoadedHook.add( ( entity ) => {
 				var dataType = self._findDataTypeInEntity( entity, propertyId );
 				if ( dataType ) {
 					dataTypePromise.resolve( dataType );
@@ -100,7 +100,7 @@
 		},
 
 		_getDataTypeFromEntityStore: function ( propertyId ) {
-			return this._entityStore.get( propertyId ).then( function ( property ) {
+			return this._entityStore.get( propertyId ).then( ( property ) => {
 				if ( !property ) {
 					return null;
 				}

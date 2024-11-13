@@ -113,7 +113,7 @@
 			}
 
 			if ( this.isInEditMode() ) {
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', ( event ) => {
 					degrade();
 				} );
 
@@ -129,7 +129,7 @@
 		_createWidgets: function () {
 			var self = this;
 
-			[ 'label', 'description', 'aliases' ].forEach( function ( subjectName ) {
+			[ 'label', 'description', 'aliases' ].forEach( ( subjectName ) => {
 				var widgetName = subjectName + 'view';
 
 				self[ '$' + widgetName ] = self[ '$' + subjectName ].children( '.wikibase-' + widgetName );
@@ -140,12 +140,12 @@
 
 				// Fully encapsulate child widgets by suppressing their events:
 				self[ '$' + widgetName ]
-				.on( widgetName + 'change', function ( event ) {
+				.on( widgetName + 'change', ( event ) => {
 					event.stopPropagation();
 					// The only event handler for this is in entitytermsforlanguagelistview.
 					self._trigger( 'change', null, [ self.options.value.language ] );
 				} )
-				.on( widgetName + 'toggleerror.' + self.widgetName, function ( event, error ) {
+				.on( widgetName + 'toggleerror.' + self.widgetName, ( event, error ) => {
 					event.stopPropagation();
 					self.setError( error );
 				} )
@@ -156,7 +156,7 @@
 						widgetName + 'afterstopediting.' + self.widgetName,
 						widgetName + 'disable.' + self.widgetName
 					].join( ' ' ),
-					function ( event ) {
+					( event ) => {
 						event.stopPropagation();
 					}
 				);

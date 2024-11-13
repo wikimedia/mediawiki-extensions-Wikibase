@@ -4,7 +4,7 @@
 
 	QUnit.test(
 		'module has correct dependencies and every registered property type exports expert',
-		function ( assert ) {
+		( assert ) => {
 			var modules = require( 'wikibase.experts.modules' );
 
 			for ( var propertyType in modules ) {

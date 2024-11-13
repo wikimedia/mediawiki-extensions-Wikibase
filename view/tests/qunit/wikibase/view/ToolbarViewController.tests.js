@@ -41,7 +41,7 @@
 				stopEditing: function () {},
 				value: function () {}
 			},
-			function () {}
+			( () => {} )
 		);
 
 		return controller;

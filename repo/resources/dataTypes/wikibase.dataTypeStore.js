@@ -12,7 +12,7 @@ wikibase.dataTypeStore = ( function () {
 		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {};
 
 	// eslint-disable-next-line no-jquery/no-each-util
-	$.each( dataTypeDefinitions, function ( dtTypeId, dtDefinition ) {
+	$.each( dataTypeDefinitions, ( dtTypeId, dtDefinition ) => {
 		dataTypeStore.registerDataType( DataType.newFromJSON( dtTypeId, dtDefinition ) );
 	} );
 

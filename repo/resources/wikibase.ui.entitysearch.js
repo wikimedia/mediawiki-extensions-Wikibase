@@ -8,7 +8,7 @@
 	'use strict';
 	require( './jquery.wikibase/jquery.wikibase.entitysearch.js' );
 
-	$( function () {
+	$( () => {
 		var $searchForm = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
 			// Both inputs must be named "search" to support Firefox' smart keyword feature (T60467)
@@ -24,7 +24,7 @@
 
 			href += href.indexOf( '?' ) === -1 ? '?' : '&';
 
-			$form.serializeArray().forEach( function ( param ) {
+			$form.serializeArray().forEach( ( param ) => {
 				params[ param.name ] = param.value;
 			} );
 
@@ -77,10 +77,10 @@
 					.addClass( 'special-query' )
 			);
 
-		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function () {
+		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, ( () => {
 			mw.track( 'counter.MediaWiki.wikibase.repo.searchbox.footer.submit' );
 			$searchForm.trigger( 'submit' );
-		}, 'wb-entitysearch-suggestions' );
+		} ), 'wb-entitysearch-suggestions' );
 
 		var $searchMenu = $( '<ul>' ).ooMenu( {
 			customItems: [ searchContaining ]
@@ -104,14 +104,14 @@
 			confineMinWidthTo: $searchForm,
 			suggestionsPlaceholder: suggestionsPlaceholder
 		} )
-		.on( 'entityselectoropen', function ( event ) {
+		.on( 'entityselectoropen', ( event ) => {
 			updateSuggestionSpecial( searchContaining );
 		} )
-		.on( 'eachchange', function ( event, oldVal ) {
+		.on( 'eachchange', ( event, oldVal ) => {
 			$hiddenInput.val( '' );
 			updateSuggestionSpecial( searchContaining );
 		} )
-		.on( 'entityselectorselected', function ( event, entityId ) {
+		.on( 'entityselectorselected', ( event, entityId ) => {
 			$hiddenInput.val( entityId );
 		} );
 
@@ -119,7 +119,7 @@
 		// before. However, this will require triggering the entity selector's API call and waiting
 		// for its response.
 
-		$( '#searchButton' ).on( 'click keydown', function ( event ) {
+		$( '#searchButton' ).on( 'click keydown', ( event ) => {
 			if ( !$input.data( 'entityselector' ) ) {
 				return;
 			}

@@ -100,12 +100,12 @@
 				toggleErrorEvent = lia.prefixedEvent( 'toggleerror.' + this.widgetName );
 
 			this.element
-			.on( afterStartEditingEvent, function ( event ) {
+			.on( afterStartEditingEvent, ( event ) => {
 				// Forward "afterstartediting" event for higher components (e.g. statementgrouplistview)
 				// to recognize that edit mode has been started.
 				self._trigger( 'afterstartediting' );
 			} )
-			.on( afterStopEditingEvent, function ( event, dropValue ) {
+			.on( afterStopEditingEvent, ( event, dropValue ) => {
 				var $statementview = $( event.target ),
 					statementview = lia.liInstance( $statementview );
 
@@ -115,7 +115,7 @@
 					self._trigger( 'afterstopediting', null, [ dropValue ] );
 				}
 			} )
-			.on( toggleErrorEvent, function ( event, error ) {
+			.on( toggleErrorEvent, ( event, error ) => {
 				self._trigger( 'toggleerror', null, [ error ] );
 			} );
 

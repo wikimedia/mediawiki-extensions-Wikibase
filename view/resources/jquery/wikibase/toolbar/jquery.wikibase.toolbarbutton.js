@@ -64,7 +64,7 @@
 			}
 
 			this.$link
-			.on( 'click.toolbarbutton keydown.toolbarbutton', function ( event ) {
+			.on( 'click.toolbarbutton keydown.toolbarbutton', ( event ) => {
 				if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
 					event.preventDefault();
 

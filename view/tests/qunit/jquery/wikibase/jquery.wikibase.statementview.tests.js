@@ -93,7 +93,7 @@
 			.statementview( options );
 	};
 
-	QUnit.test( 'Create & destroy without value', function ( assert ) {
+	QUnit.test( 'Create & destroy without value', ( assert ) => {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
@@ -111,7 +111,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create & destroy with value', function ( assert ) {
+	QUnit.test( 'Create & destroy with value', ( assert ) => {
 		var $statementview = createStatementview( {
 				value: new datamodel.Statement(
 					new datamodel.Claim(
@@ -139,7 +139,7 @@
 		);
 	} );
 
-	QUnit.test( 'value after startEditing with value', function ( assert ) {
+	QUnit.test( 'value after startEditing with value', ( assert ) => {
 		var $statementview = createStatementview( {
 				value: new datamodel.Statement(
 					new datamodel.Claim(
@@ -152,12 +152,12 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
+		return statementview.startEditing().done( () => {
 			assert.notStrictEqual( statementview.value(), undefined, 'value() should return a value' );
 		} );
 	} );
 
-	QUnit.test( 'value after startEditing on new statementview', function ( assert ) {
+	QUnit.test( 'value after startEditing on new statementview', ( assert ) => {
 		var $statementview = createStatementview( {
 				guidGenerator: {
 					newGuid: function () {
@@ -167,23 +167,23 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
+		return statementview.startEditing().done( () => {
 			assert.strictEqual( statementview.value(), null, 'value should return null' );
 		} );
 	} );
 
-	QUnit.test( 'Using the generic tooltip for new claims', function ( assert ) {
+	QUnit.test( 'Using the generic tooltip for new claims', ( assert ) => {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
 		var done = assert.async();
-		statementview.getHelpMessage().done( function ( helpMessage ) {
+		statementview.getHelpMessage().done( ( helpMessage ) => {
 			assert.strictEqual( mw.msg( 'wikibase-claimview-snak-new-tooltip' ), helpMessage );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'Using tooltip specific for existing claims', function ( assert ) {
+	QUnit.test( 'Using tooltip specific for existing claims', ( assert ) => {
 		var $statementview = createStatementview( {
 			value: new datamodel.Statement( new datamodel.Claim(
 				new datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )
@@ -193,13 +193,13 @@
 		var statementview = $statementview.data( 'statementview' );
 		var done = assert.async();
 
-		statementview.getHelpMessage().done( function ( helpMessage ) {
+		statementview.getHelpMessage().done( ( helpMessage ) => {
 			assert.strictEqual( mw.msg( 'wikibase-claimview-snak-tooltip', 'P1' ), helpMessage );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'value with empty reference', function ( assert ) {
+	QUnit.test( 'value with empty reference', ( assert ) => {
 		var $statementview = createStatementview( {
 				value: new datamodel.Statement(
 					new datamodel.Claim(
@@ -212,13 +212,13 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
+		return statementview.startEditing().done( () => {
 			statementview._referencesListview.enterNewItem();
 			assert.strictEqual( statementview.value(), null, 'value should not return a value' );
 		} );
 	} );
 
-	QUnit.test( 'wb-new', function ( assert ) {
+	QUnit.test( 'wb-new', ( assert ) => {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
@@ -236,7 +236,7 @@
 		assert.false( $statementview.hasClass( 'wb-new' ) );
 	} );
 
-	QUnit.test( 'wb-rank class', function ( assert ) {
+	QUnit.test( 'wb-rank class', ( assert ) => {
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
@@ -256,7 +256,7 @@
 		assert.false( $statementview.hasClass( 'wb-normal' ), 'wb-normal class removed' );
 	} );
 
-	QUnit.test( 'fires fireStartEditingHook when starting editing', function ( assert ) {
+	QUnit.test( 'fires fireStartEditingHook when starting editing', ( assert ) => {
 		var fireSpy = sinon.spy(),
 			$statementview = createStatementview( {
 				value: new datamodel.Statement(
@@ -271,7 +271,7 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
+		return statementview.startEditing().done( () => {
 			assert.strictEqual(
 				fireSpy.getCall( 0 ).args[ 0 ],
 				'guid-123',
@@ -280,7 +280,7 @@
 		} );
 	} );
 
-	QUnit.test( 'fires fireStopEditingHook when cancelling the edit', function ( assert ) {
+	QUnit.test( 'fires fireStopEditingHook when cancelling the edit', ( assert ) => {
 		var fireSpy = sinon.spy(),
 			$statementview = createStatementview( {
 				value: new datamodel.Statement(
@@ -295,8 +295,8 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
-			statementview.stopEditing().done( function () {
+		return statementview.startEditing().done( () => {
+			statementview.stopEditing().done( () => {
 				assert.strictEqual(
 					fireSpy.getCall( 0 ).args[ 0 ],
 					'guid-123',
@@ -306,7 +306,7 @@
 		} );
 	} );
 
-	QUnit.test( 'does not fire start/stop editting hooks when creating new statement', function ( assert ) {
+	QUnit.test( 'does not fire start/stop editting hooks when creating new statement', ( assert ) => {
 		var fireSpy = sinon.spy(),
 			$statementview = createStatementview( {
 				value: null,
@@ -315,8 +315,8 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		return statementview.startEditing().done( function () {
-			statementview.stopEditing().done( function () {
+		return statementview.startEditing().done( () => {
+			statementview.stopEditing().done( () => {
 				assert.true( fireSpy.notCalled );
 			} );
 		} );

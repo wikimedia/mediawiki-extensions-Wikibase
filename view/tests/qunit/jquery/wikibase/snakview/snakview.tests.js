@@ -62,7 +62,7 @@
 			.snakview( options );
 	};
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 
@@ -118,7 +118,7 @@
 		);
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 
@@ -182,7 +182,7 @@
 		);
 	} );
 
-	QUnit.test( 'snak()', function ( assert ) {
+	QUnit.test( 'snak()', ( assert ) => {
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 
@@ -222,7 +222,7 @@
 		);
 	} );
 
-	QUnit.test( 'propertyId()', function ( assert ) {
+	QUnit.test( 'propertyId()', ( assert ) => {
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 
@@ -264,7 +264,7 @@
 		);
 	} );
 
-	QUnit.test( 'snakType()', function ( assert ) {
+	QUnit.test( 'snakType()', ( assert ) => {
 		var $snakview = createSnakview(),
 			snakview = $snakview.data( 'snakview' );
 

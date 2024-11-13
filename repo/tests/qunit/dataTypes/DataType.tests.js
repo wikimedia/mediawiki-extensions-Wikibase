@@ -9,7 +9,7 @@
 
 	QUnit.module( 'wikibase.dataTypes.DataType' );
 
-	QUnit.test( 'constructor', function ( assert ) {
+	QUnit.test( 'constructor', ( assert ) => {
 		var dataType = new DataType( 'foo', 'string' );
 
 		assert.true(
@@ -18,7 +18,7 @@
 		);
 	} );
 
-	QUnit.test( 'getId', function ( assert ) {
+	QUnit.test( 'getId', ( assert ) => {
 		var dataType = new DataType( 'foo', 'string' );
 
 		assert.strictEqual(
@@ -28,7 +28,7 @@
 		);
 	} );
 
-	QUnit.test( 'getDataValueType', function ( assert ) {
+	QUnit.test( 'getDataValueType', ( assert ) => {
 		var dataType = new DataType( 'foo', 'string' ),
 			dvType = dataType.getDataValueType();
 
@@ -64,7 +64,7 @@
 		}
 	];
 
-	QUnit.test( 'invalid constructor arguments', function ( assert ) {
+	QUnit.test( 'invalid constructor arguments', ( assert ) => {
 		function instantiateObject( testArguments ) {
 			return function () {
 				var args = testArguments.constructorParams;

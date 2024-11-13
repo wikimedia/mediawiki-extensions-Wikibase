@@ -15,7 +15,7 @@ describe( 'namespaces', () => {
 	];
 	for ( const [ namespace, contentmodel ] of testCases ) {
 
-		it( `${namespace} has defaultcontentmodel ${contentmodel}`, async () => {
+		it( `${ namespace } has defaultcontentmodel ${ contentmodel }`, async () => {
 			const namespaces = await action.getAnon().meta(
 				'siteinfo',
 				{ siprop: 'namespaces' },

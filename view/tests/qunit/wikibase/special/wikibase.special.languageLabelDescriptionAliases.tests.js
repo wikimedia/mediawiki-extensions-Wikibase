@@ -53,10 +53,10 @@
 		assert.strictEqual( $fixture.find( 'input[name="lang"]' ).val(), languageCode );
 	};
 
-	QUnit.test( 'Expect placeholders to be overridden on hydrate for English', function ( assert ) {
+	QUnit.test( 'Expect placeholders to be overridden on hydrate for English', ( assert ) => {
 		var $fixture = createFakeFormForLang( 'en' );
 		verifyAndHydrateFakeForm( assert, $fixture, 'en' );
-		[ 'label', 'description', 'aliases' ].forEach( function ( inputName ) {
+		[ 'label', 'description', 'aliases' ].forEach( ( inputName ) => {
 			var expectedPlaceholder = '(wikibase-' + inputName + '-edit-placeholder-language-aware: English)';
 			assert.strictEqual(
 				$fixture.find( 'input[name="' + inputName + '"]' ).attr( 'placeholder' ),
@@ -66,7 +66,7 @@
 		$fixture.remove();
 	} );
 
-	QUnit.test( 'Expect placeholders not to be overridden for mul', function ( assert ) {
+	QUnit.test( 'Expect placeholders not to be overridden for mul', ( assert ) => {
 		mw.config.set( 'wgCanonicalSpecialPageName', 'NewItem' );
 		var $fixture = createFakeFormForLang( 'mul' );
 		verifyAndHydrateFakeForm( assert, $fixture, 'mul' );
@@ -74,7 +74,7 @@
 			$fixture.find( 'input[name="description"]' ).attr( 'placeholder' ),
 			''
 		);
-		[ 'label', 'aliases' ].forEach( function ( inputName ) {
+		[ 'label', 'aliases' ].forEach( ( inputName ) => {
 			var expectedPlaceholder = '(wikibase-' + inputName + '-edit-placeholder-mul)';
 			assert.strictEqual(
 				$fixture.find( 'input[name="' + inputName + '"]' ).attr( 'placeholder' ),
@@ -84,7 +84,7 @@
 		$fixture.remove();
 	} );
 
-	QUnit.test( 'Expect description field to be disabled for mul', function ( assert ) {
+	QUnit.test( 'Expect description field to be disabled for mul', ( assert ) => {
 		mw.config.set( 'wgCanonicalSpecialPageName', 'NewItem' );
 		var $fixture = createFakeFormForLang( 'mul' );
 		verifyAndHydrateFakeForm( assert, $fixture, 'mul' );
@@ -94,11 +94,11 @@
 		$fixture.remove();
 	} );
 
-	QUnit.test( 'Expect the description disabled notice matches the page', function ( assert ) {
+	QUnit.test( 'Expect the description disabled notice matches the page', ( assert ) => {
 		[
 			[ 'NewItem', 'wikibase-item-description-edit-not-supported' ],
 			[ 'NewProperty', 'wikibase-property-description-edit-not-supported' ]
-		].forEach( function ( testCase ) {
+		].forEach( ( testCase ) => {
 			var pageName = testCase[ 0 ];
 			var messageKey = testCase[ 1 ];
 			mw.config.set( 'wgCanonicalSpecialPageName', pageName );

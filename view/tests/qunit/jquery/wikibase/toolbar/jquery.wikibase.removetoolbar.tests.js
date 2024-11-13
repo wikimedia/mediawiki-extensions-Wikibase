@@ -30,7 +30,7 @@
 			.removetoolbar( options || {} );
 	}
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $removetoolbar = createRemovetoolbar(),
 			removetoolbar = $removetoolbar.data( 'removetoolbar' );
 

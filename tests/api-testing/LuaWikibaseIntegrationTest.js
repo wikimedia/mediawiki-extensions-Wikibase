@@ -99,36 +99,36 @@ describe( 'Lua Wikibase integration', () => {
 
 	before( 'create test module', async () => {
 		module = utils.title( 'LuaWikibaseIntegrationTest-' );
-		await mindy.edit( `Module:${module}`, {
+		await mindy.edit( `Module:${ module }`, {
 			text: `
 				local p = {}
 				p.getLabel = function( frame ) return mw.wikibase.getLabel( frame.args[ 1 ] ) end
 				p.getLabelByLang = function( frame ) return mw.wikibase.getLabelByLang( frame.args[ 1 ], 'en' ) end
 				p.getEntity_claims = function( frame )
-					local claims = mw.wikibase.getEntity( '${testItemId}' ).claims[ frame.args[ 1 ] ]
+					local claims = mw.wikibase.getEntity( '${ testItemId }' ).claims[ frame.args[ 1 ] ]
 					if claims == nil then
 						return claims
 					end
 					return claims[1].mainsnak.datavalue.value
 				end
-				p.getEntity_aliases = function() return mw.wikibase.getEntity( '${testItemId}' ).aliases.en[1].value end
-				p.getEntity_labels = function() return mw.wikibase.getEntity( '${testItemId}' ).labels.de.value end
-				p.getEntityLabelWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[nil] end
-				p.getEntityLabelWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[{}] end
-				p.getEntityLabelWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels[2] end
-				p.getEntityLabelWithInvalidLang = function() return mw.wikibase.getEntity( '${testItemId}' ).labels.INVALID end
-				p.getEntityDescriptionWithNilLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[nil] end
-				p.getEntityDescriptionWithObjectLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[{}] end
-				p.getEntityDescriptionWithIntegerLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions[2] end
-				p.getEntityDescriptionWithInvalidLang = function() return mw.wikibase.getEntity( '${testItemId}' ).descriptions.INVALID end
-				p.getDescription = function() return mw.wikibase.getDescription( '${testItemId}' ) end
+				p.getEntity_aliases = function() return mw.wikibase.getEntity( '${ testItemId }' ).aliases.en[1].value end
+				p.getEntity_labels = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels.de.value end
+				p.getEntityLabelWithNilLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels[nil] end
+				p.getEntityLabelWithObjectLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels[{}] end
+				p.getEntityLabelWithIntegerLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels[2] end
+				p.getEntityLabelWithInvalidLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels.INVALID end
+				p.getEntityDescriptionWithNilLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).descriptions[nil] end
+				p.getEntityDescriptionWithObjectLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).descriptions[{}] end
+				p.getEntityDescriptionWithIntegerLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).descriptions[2] end
+				p.getEntityDescriptionWithInvalidLang = function() return mw.wikibase.getEntity( '${ testItemId }' ).descriptions.INVALID end
+				p.getDescription = function() return mw.wikibase.getDescription( '${ testItemId }' ) end
 				p.formatItemIdValue = function( frame )
 					local dataValue = { type = 'wikibase-entityid', value = { ['entity-type'] = 'item', id = frame.args[1] } }
 					local snak = { datatype = 'wikibase-item', property = 'P435739845', snaktype = 'value', datavalue = dataValue }
 					return mw.wikibase.formatValue( snak )
 				end
 				p.getLabelAfterReassignedEntityId = function()
-					local entity = mw.wikibase.getEntity( '${testItemId}' )
+					local entity = mw.wikibase.getEntity( '${ testItemId }' )
 					entity.id = 'Q2147483647'
 					return entity.labels.en.value
 				end
@@ -141,7 +141,7 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'getLabel can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabel|${ testItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
 		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
@@ -150,14 +150,14 @@ describe( 'Lua Wikibase integration', () => {
 		for ( const usageAspect of usageAspects ) {
 			assert.isOk(
 				usageAspect === 'L' || usageAspect.startsWith( 'L.' ),
-				`Usage aspect '${usageAspect}' should be 'L' or start with 'L.'`,
+				`Usage aspect '${ usageAspect }' should be 'L' or start with 'L.'`,
 			);
 		}
 	} );
 
 	it( 'getLabel returns the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabel|${ redirectedItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
 		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
@@ -169,15 +169,15 @@ describe( 'Lua Wikibase integration', () => {
 	// otherwise it still passes but doesn’t test anything in particular
 	it( 'getLabel can be invoked correctly with strange uselang query param', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabel}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabel}}`, pageTitle );
 		await parsePage( pageTitle, { uselang: '⧼Lang⧽' } ); // should not throw
 	} );
 
 	it( 'getLabelByLang can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelByLang|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelByLang|${ testItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${englishLabel}\n</p>` );
+		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.en' );
 	} );
@@ -196,7 +196,7 @@ describe( 'Lua Wikibase integration', () => {
 		].forEach( ( [ testLabel, luaTestMethod, expectedAspect ] ) => {
 			it( testLabel, async () => {
 				const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-				await writeTextToPage( mindy, `{{#invoke:${module}|${luaTestMethod}}}`, pageTitle );
+				await writeTextToPage( mindy, `{{#invoke:${ module }|${ luaTestMethod }}}`, pageTitle );
 				const pageText = await parsePage( pageTitle );
 				assert.equal( pageText, '' );
 				const usageAspects = await getUsageAspects( pageTitle, testItemId );
@@ -208,74 +208,74 @@ describe( 'Lua Wikibase integration', () => {
 
 	it( 'reassigning entity ID has no impact on usage tracking', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelAfterReassignedEntityId }}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelAfterReassignedEntityId }}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${englishLabel}\n</p>` );
+		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.en' );
 	} );
 
 	it( 'getLabelByLang returns the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getLabelByLang|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelByLang|${ redirectedItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${englishLabel}\n</p>` );
+		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
 	} );
 
 	it( 'getEntity_claims can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_claims|${testPropertyId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${examplePropertyValue}\n</p>` );
+		assert.equal( pageText, `<p>${ examplePropertyValue }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
-		assert.equal( usageAspects, `C.${testPropertyId}` );
+		assert.equal( usageAspects, `C.${ testPropertyId }` );
 	} );
 
 	it( 'getEntity_claims can be invoked not yet existing property', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_claims|${testPropertyId + '1'}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims|${ testPropertyId + '1' }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
 		assert.equal( pageText, '' );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
-		assert.equal( usageAspects, `C.${testPropertyId + '1'}` );
+		assert.equal( usageAspects, `C.${ testPropertyId + '1' }` );
 	} );
 
 	it( 'getEntity_aliases can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_aliases}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_aliases}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${englishLabel + '-redirected'}\n</p>` );
+		assert.equal( pageText, `<p>${ englishLabel + '-redirected' }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'O' );
 	} );
 
 	it( 'getEntity_labels can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getEntity_labels}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_labels}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${germanLabel}\n</p>` );
+		assert.equal( pageText, `<p>${ germanLabel }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.de' );
 	} );
 
 	it( 'getDescription can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|getDescription}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getDescription}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${englishDescription}\n</p>` );
+		assert.equal( pageText, `<p>${ englishDescription }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.isNotEmpty( usageAspects );
 		for ( const usageAspect of usageAspects ) {
 			assert.isOk(
 				usageAspect === 'D' || usageAspect.startsWith( 'D.' ),
-				`Usage aspect '${usageAspect}' should be 'D' or start with 'D.'`,
+				`Usage aspect '${ usageAspect }' should be 'D' or start with 'D.'`,
 			);
 		}
 	} );
 
 	it( 'formatValue can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${testItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|formatItemIdValue|${ testItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
 		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );
@@ -286,14 +286,14 @@ describe( 'Lua Wikibase integration', () => {
 		for ( const usageAspect of otherUsageAspects ) {
 			assert.isOk(
 				usageAspect === 'L' || usageAspect.startsWith( 'L.' ),
-				`Usage aspect '${usageAspect}' should be 'L' or start with 'L.'`,
+				`Usage aspect '${ usageAspect }' should be 'L' or start with 'L.'`,
 			);
 		}
 	} );
 
 	it( 'formatValue uses the label of the redirect target for a redirected item', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
-		await writeTextToPage( mindy, `{{#invoke:${module}|formatItemIdValue|${redirectedItemId}}}`, pageTitle );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|formatItemIdValue|${ redirectedItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
 		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
 		assert.match( pageText, new RegExp( englishLabel + '|' + germanLabel ) );

@@ -34,18 +34,18 @@
 			$toggler.addClass( 'mw-editfooter-toggler-collapsed' );
 		}
 
-		$list.on( 'beforeExpand.mw-collapsible', function () {
+		$list.on( 'beforeExpand.mw-collapsible', () => {
 			$toggler.removeClass( 'mw-editfooter-toggler-collapsed' );
 			mw.storage.set( storeKey, expandedVal );
 		} );
 
-		$list.on( 'beforeCollapse.mw-collapsible', function () {
+		$list.on( 'beforeCollapse.mw-collapsible', () => {
 			$toggler.addClass( 'mw-editfooter-toggler-collapsed' );
 			mw.storage.set( storeKey, collapsedVal );
 		} );
 	};
 
-	mw.hook( 'wikipage.editform' ).add( function ( $editForm ) {
+	mw.hook( 'wikipage.editform' ).add( ( $editForm ) => {
 		var i;
 		for ( i = 0; i < collapsibleLists.length; i++ ) {
 			// Pass to a function for iteration-local variables

@@ -7,7 +7,7 @@
 
 	QUnit.module( 'jquery.removeClassByRegex' );
 
-	QUnit.test( 'Basics', function ( assert ) {
+	QUnit.test( 'Basics', ( assert ) => {
 		var classes = [ 'a11a', 'bbb', 'c333', 'dddd', 'e', '6', '7' ];
 		var $subject = $( '<div>' ).addClass( classes.join( '   ' ) ); // should also work with more than one space
 
@@ -47,7 +47,7 @@
 		);
 	} );
 
-	QUnit.test( 'Multiple elements', function ( assert ) {
+	QUnit.test( 'Multiple elements', ( assert ) => {
 		var $subject = $( '<div>' ).addClass( 'A B C 1 2 3' )
 			.add( $( '<div>' ).addClass( 'AA  BB  CC  11  22  33' ) )
 			.add( $( '<div>' ).addClass( 'AAA BBB CCC 111 222 333' ) );

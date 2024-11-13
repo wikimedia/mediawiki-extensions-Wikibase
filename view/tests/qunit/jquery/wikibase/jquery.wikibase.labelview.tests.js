@@ -41,9 +41,9 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		assert.throws(
-			function () {
+			() => {
 				createLabelview( { value: null } );
 			},
 			'Throwing error when trying to initialize widget without a value.'
@@ -66,18 +66,18 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
 
 		$labelview
-		.on( 'labelviewafterstartediting', function ( event ) {
+		.on( 'labelviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'labelviewafterstopediting', function ( event, dropValue ) {
+		.on( 'labelviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -123,7 +123,7 @@
 		return new datamodel.Set( TestItem, 'getKey', items );
 	};
 
-	QUnit.test( 'empty label message is set when no label is supplied', function ( assert ) {
+	QUnit.test( 'empty label message is set when no label is supplied', ( assert ) => {
 
 		var $labelview = createLabelview( {
 			value: new datamodel.Term( 'en', '' ),
@@ -137,7 +137,7 @@
 		);
 	} );
 
-	QUnit.test( 'placeholder message is set when no label is supplied and item is in edit mode', function ( assert ) {
+	QUnit.test( 'placeholder message is set when no label is supplied and item is in edit mode', ( assert ) => {
 
 		var $labelview = createLabelview( {
 			value: new datamodel.Term( 'en', '' ),
@@ -153,7 +153,7 @@
 		);
 	} );
 
-	QUnit.test( 'special placeholder message is used for edits with language code mul', function ( assert ) {
+	QUnit.test( 'special placeholder message is used for edits with language code mul', ( assert ) => {
 
 		var $labelview = createLabelview( {
 			value: new datamodel.Term( 'mul', '' ),
@@ -169,12 +169,12 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
 
 		$labelview
-		.on( 'labelviewtoggleerror', function ( event, error ) {
+		.on( 'labelviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered "toggleerror" event.'
@@ -184,13 +184,13 @@
 		labelview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' ),
 			newValue = null;
 
 		assert.throws(
-			function () {
+			() => {
 				labelview.value( newValue );
 			},
 			'Trying to set no value fails.'

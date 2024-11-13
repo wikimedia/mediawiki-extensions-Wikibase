@@ -3,9 +3,7 @@
 
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' ),
-		rankClasses = Object.keys( datamodel.Statement.RANK ).map( function ( rankName ) {
-			return 'wb-' + rankName.toLowerCase();
-		} ),
+		rankClasses = Object.keys( datamodel.Statement.RANK ).map( ( rankName ) => 'wb-' + rankName.toLowerCase() ),
 		buildCounter = require( '../../wikibase/utilities/wikibase.utilities.ui.js' );
 
 	/**
@@ -201,7 +199,7 @@
 			var self = this,
 				changeEvent = ( this._rankSelector.widgetEventPrefix + 'change' ).toLowerCase();
 
-			this.$rankSelector.on( changeEvent + '.' + this.widgetName, function ( event ) {
+			this.$rankSelector.on( changeEvent + '.' + this.widgetName, ( event ) => {
 				if ( self.value() ) {
 					self._trigger( 'change' );
 				}
@@ -239,7 +237,7 @@
 			var self = this;
 
 			this.$mainSnak
-			.on( 'snakviewchange.' + this.widgetName, function ( event, status ) {
+			.on( 'snakviewchange.' + this.widgetName, ( event, status ) => {
 				event.stopPropagation();
 				self._trigger( 'change' );
 			} );
@@ -279,13 +277,13 @@
 				$qualifiers = $( '<div>' ).prependTo( this.$qualifiers );
 			}
 			$qualifiers.listview( {
-				listItemAdapter: this.options.getQualifiersListItemAdapter( function ( snaklistview ) {
+				listItemAdapter: this.options.getQualifiersListItemAdapter( ( snaklistview ) => {
 					self._qualifiers.removeItem( snaklistview.element );
 				} ),
 				value: groupedQualifierSnaks
 			} )
 			.on( 'snaklistviewchange.' + this.widgetName,
-				function ( event ) {
+				( event ) => {
 					event.stopPropagation();
 					self._trigger( 'change' );
 				}
@@ -310,7 +308,7 @@
 			}
 
 			var lia = this.options.getReferenceListItemAdapter(
-				function ( referenceview ) {
+				( referenceview ) => {
 					self._referencesListview.removeItem( referenceview.element );
 					self._drawReferencesCounter();
 					self._trigger( 'change' );
@@ -325,7 +323,7 @@
 			this._referencesListview = $listview.data( 'listview' );
 
 			$listview
-			.on( lia.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
+			.on( lia.prefixedEvent( 'change.' + this.widgetName ), ( event ) => {
 				event.stopPropagation();
 				self._drawReferencesCounter();
 				self._trigger( 'change' );
@@ -379,7 +377,7 @@
 					: this.options.predefined.mainSnak.property;
 
 				if ( property ) {
-					this.options.entityIdPlainFormatter.format( property ).done( function ( formattedEntityId ) {
+					this.options.entityIdPlainFormatter.format( property ).done( ( formattedEntityId ) => {
 						deferred.resolve( mw.msg( 'wikibase-claimview-snak-tooltip', formattedEntityId ) );
 					} );
 				} else {
@@ -512,7 +510,7 @@
 			var listview = this._referencesListview,
 				lia = listview.listItemAdapter();
 
-			listview.enterNewItem().done( function ( $referenceview ) {
+			listview.enterNewItem().done( ( $referenceview ) => {
 				var referenceview = lia.liInstance( $referenceview );
 
 				// Enter first item into the referenceview.
@@ -554,7 +552,7 @@
 		_getReferences: function () {
 			var references = [];
 
-			if ( !this._referencesListview.value().every( function ( referenceview ) {
+			if ( !this._referencesListview.value().every( ( referenceview ) => {
 				var value = referenceview.value();
 				references.push( value );
 				return value;
@@ -611,12 +609,12 @@
 				this.options.fireStartEditingHook( this.options.value.getClaim().getGuid() );
 			}
 			this._qualifierAdder = this.options.getAdder(
-				function () {
+				() => {
 					var listview = self._qualifiers;
 					listview.enterNewItem();
 
 					var snaklistview = listview.value()[ listview.value().length - 1 ];
-					snaklistview.enterNewItem().done( function () {
+					snaklistview.enterNewItem().done( () => {
 						snaklistview.focus();
 					} );
 				},

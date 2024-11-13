@@ -12,7 +12,7 @@
 		entityId = new datamodel.EntityId( 'Q1' ),
 		statements = new datamodel.StatementGroupSet();
 
-	QUnit.test( 'get EntityId', function ( assert ) {
+	QUnit.test( 'get EntityId', ( assert ) => {
 		var state = new SUBJECT( entityId, statements );
 		assert.strictEqual(
 			state.getEntityId(),
@@ -21,7 +21,7 @@
 		);
 	} );
 
-	QUnit.test( 'get StatementGroupSet', function ( assert ) {
+	QUnit.test( 'get StatementGroupSet', ( assert ) => {
 		var state = new SUBJECT( entityId, statements );
 		assert.strictEqual(
 			state.getStatements(),

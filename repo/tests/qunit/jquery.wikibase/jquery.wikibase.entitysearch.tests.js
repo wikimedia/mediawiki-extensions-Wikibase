@@ -46,7 +46,7 @@
 			.entitysearch( options );
 	};
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $entitysearch = newEntitysearch();
 
 		assert.true(

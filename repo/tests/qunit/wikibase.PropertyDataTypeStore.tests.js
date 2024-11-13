@@ -14,19 +14,19 @@
 		);
 	}
 
-	QUnit.test( 'set/getDataTypeForProperty', function ( assert ) {
+	QUnit.test( 'set/getDataTypeForProperty', ( assert ) => {
 		var done = assert.async(),
 			dataTypeStore = newPropertyDataTypeStore();
 
 		dataTypeStore.setDataTypeForProperty( 'P123', 'string' );
 
-		dataTypeStore.getDataTypeForProperty( 'P123' ).done( function ( dataType ) {
+		dataTypeStore.getDataTypeForProperty( 'P123' ).done( ( dataType ) => {
 			assert.strictEqual( dataType, 'string' );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'Checks existing statements for the requested property\'s data type', function ( assert ) {
+	QUnit.test( 'Checks existing statements for the requested property\'s data type', ( assert ) => {
 		var testData = [
 				{
 					message: 'getting the data type from a main snak',
@@ -94,18 +94,18 @@
 			],
 			done = assert.async( testData.length );
 
-		testData.forEach( function ( test ) {
+		testData.forEach( ( test ) => {
 			var entityLoadedHook = { add: sinon.stub().yields( test.entity ) },
 				dataTypeStore = newPropertyDataTypeStore( { entityLoadedHook: entityLoadedHook } );
 
-			dataTypeStore.getDataTypeForProperty( test.property ).done( function ( dataType ) {
+			dataTypeStore.getDataTypeForProperty( test.property ).done( ( dataType ) => {
 				assert.strictEqual( dataType, test.expected, test.message );
 				done();
 			} );
 		} );
 	} );
 
-	QUnit.test( 'Given data type not set and no existing statement for the property, uses entity store', function ( assert ) {
+	QUnit.test( 'Given data type not set and no existing statement for the property, uses entity store', ( assert ) => {
 		var done = assert.async(),
 			expectedType = 'quantity',
 			propertyId = 'P666',
@@ -118,7 +118,7 @@
 			},
 			dataTypeStore = newPropertyDataTypeStore( { entityStore: entityStore } );
 
-		dataTypeStore.getDataTypeForProperty( propertyId ).done( function ( dataType ) {
+		dataTypeStore.getDataTypeForProperty( propertyId ).done( ( dataType ) => {
 			assert.strictEqual( dataType, expectedType );
 			sinon.assert.calledWith( entityStore.get, propertyId );
 
@@ -126,20 +126,20 @@
 		} );
 	} );
 
-	QUnit.test( 'Given data type cannot be found, returns null', function ( assert ) {
+	QUnit.test( 'Given data type cannot be found, returns null', ( assert ) => {
 		var done = assert.async(),
 			entityStore = {
 				get: sinon.stub().returns( $.Deferred().resolve( null ) )
 			},
 			dataTypeStore = newPropertyDataTypeStore( { entityStore: entityStore } );
 
-		dataTypeStore.getDataTypeForProperty( 'P777' ).done( function ( dataType ) {
+		dataTypeStore.getDataTypeForProperty( 'P777' ).done( ( dataType ) => {
 			assert.strictEqual( dataType, null );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'Given previous successful entity JSON lookup, it remembers the result', function ( assert ) {
+	QUnit.test( 'Given previous successful entity JSON lookup, it remembers the result', ( assert ) => {
 		var done = assert.async(),
 			expectedType = 'string',
 			propertyId = 'P123',
@@ -153,10 +153,10 @@
 			entityLoadedHook = { add: sinon.stub().yields( entity ) },
 			dataTypeStore = newPropertyDataTypeStore( { entityLoadedHook: entityLoadedHook } );
 
-		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+		dataTypeStore.getDataTypeForProperty( propertyId ).then( ( dataType ) => {
 			assert.strictEqual( dataType, expectedType );
 
-			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType2 ) {
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( ( dataType2 ) => {
 				assert.strictEqual( dataType2, expectedType );
 				sinon.assert.calledOnce( entityLoadedHook.add );
 
@@ -165,7 +165,7 @@
 		} );
 	} );
 
-	QUnit.test( 'Given previous successful entity entityStore lookup, it remembers the result', function ( assert ) {
+	QUnit.test( 'Given previous successful entity entityStore lookup, it remembers the result', ( assert ) => {
 		var done = assert.async(),
 			expectedType = 'quantity',
 			propertyId = 'P666',
@@ -178,10 +178,10 @@
 			},
 			dataTypeStore = newPropertyDataTypeStore( { entityStore: entityStore } );
 
-		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+		dataTypeStore.getDataTypeForProperty( propertyId ).then( ( dataType ) => {
 			assert.strictEqual( dataType, expectedType );
 
-			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType2 ) {
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( ( dataType2 ) => {
 				assert.strictEqual( dataType2, expectedType );
 				sinon.assert.calledOnce( entityStore.get );
 

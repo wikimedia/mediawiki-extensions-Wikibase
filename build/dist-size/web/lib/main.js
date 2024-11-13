@@ -69,8 +69,8 @@ function buildSizeDeltaAnnotation( revision ) {
 		y: revision[ FIELDS.SIZE ],
 		xref: 'x',
 		yref: 'y',
-		text: `∆${sizeDeltaPercent}%`,
-		hovertext: `<sub>${revision[ FIELDS.SHA ]}</sub><br>${revision[ FIELDS.SUBJECT ]}`,
+		text: `∆${ sizeDeltaPercent }%`,
+		hovertext: `<sub>${ revision[ FIELDS.SHA ] }</sub><br>${ revision[ FIELDS.SUBJECT ] }`,
 		font: {
 			color: sizeDeltaPercent > 0 ? 'red' : 'green',
 			size: Math.max( 5, // minimum size
@@ -97,9 +97,9 @@ function buildScatterTrace( fileName, fileHistory ) {
 		y: unpack( fileHistory, FIELDS.SIZE ),
 		customdata: fileHistory,
 		hovertemplate:
-			`%{y} = ∆%{customdata.${CUSTOM_FIELDS.SIZE_DELTA_PERCENT}}%<br>` +
-			`<sup>%{customdata.${FIELDS.SHA}}</sup><br>` +
-			`%{customdata.${FIELDS.SUBJECT}}`,
+			`%{y} = ∆%{customdata.${ CUSTOM_FIELDS.SIZE_DELTA_PERCENT }}%<br>` +
+			`<sup>%{customdata.${ FIELDS.SHA }}</sup><br>` +
+			`%{customdata.${ FIELDS.SUBJECT }}`,
 		marker: { size: 4 },
 	};
 }
@@ -140,14 +140,14 @@ function plot( el, historyData ) {
 		},
 	);
 
-	el.on( 'plotly_click', function ( data ) {
+	el.on( 'plotly_click', ( data ) => {
 		if ( !data.event.ctrlKey ) {
 			return;
 		}
 
 		showRevisionInformation( data.points[ 0 ].customdata );
 	} );
-	el.on( 'plotly_clickannotation', function ( data ) {
+	el.on( 'plotly_clickannotation', ( data ) => {
 		showRevisionInformation( data.annotation.customdata );
 	} );
 }

@@ -122,7 +122,7 @@
 			}
 
 			this.$listview.listview( {
-				listItemAdapter: this.options.getListItemAdapter( function ( snakview ) {
+				listItemAdapter: this.options.getListItemAdapter( ( snakview ) => {
 					self._listview.removeItem( snakview.element );
 					if ( self.value().length === 0 ) {
 						self.options.removeCallback();
@@ -147,7 +147,7 @@
 				this._lia.prefixedEvent( 'change.' ) + this.widgetName
 				// FIXME: Remove all itemremoved events, see https://gerrit.wikimedia.org/r/298766.
 				+ ' listviewitemremoved.' + this.widgetName,
-				function ( event ) {
+				( event ) => {
 					// Forward the "change" event to external components (e.g. the edit toolbar).
 					self._trigger( 'change' );
 				}
@@ -162,7 +162,7 @@
 		 */
 		_updatePropertyLabels: function () {
 			if ( this.options.singleProperty ) {
-				this._listview.value().forEach( function ( snakview, index ) {
+				this._listview.value().forEach( ( snakview, index ) => {
 					var operation = index ? 'hidePropertyLabel' : 'showPropertyLabel';
 					snakview[ operation ]();
 				} );
@@ -196,7 +196,7 @@
 				// editing:
 				this._createListView();
 			} else {
-				this._listview.value().forEach( function ( snakview ) {
+				this._listview.value().forEach( ( snakview ) => {
 					snakview.stopEditing( dropValue );
 
 					// After saving, the property should not be editable anymore.
@@ -220,7 +220,7 @@
 
 			var snaks = [];
 
-			if ( !this._listview.value().every( function ( snakview ) {
+			if ( !this._listview.value().every( ( snakview ) => {
 				var snak = snakview.snak();
 				snaks.push( snak );
 				return snak;
@@ -242,7 +242,7 @@
 		 */
 		enterNewItem: function () {
 			var self = this;
-			return this._listview.enterNewItem().done( function () {
+			return this._listview.enterNewItem().done( () => {
 				self.startEditing();
 			} );
 		},

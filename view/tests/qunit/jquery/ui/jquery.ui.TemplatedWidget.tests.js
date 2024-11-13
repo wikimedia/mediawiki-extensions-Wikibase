@@ -7,7 +7,7 @@
 
 	QUnit.module( 'jquery.ui.TemplatedWidget' );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var testSets = [
 			[
 				'<div><span>$1</span></div>',
@@ -26,7 +26,7 @@
 		 */
 		function checkShortCuts( templateShortCuts, $subj ) {
 			// eslint-disable-next-line no-jquery/no-each-util
-			$.each( templateShortCuts, function ( key, selector ) {
+			$.each( templateShortCuts, ( key, selector ) => {
 				assert.true(
 					$subj.data( 'TemplatedWidget' )[ key ] instanceof $,
 					'Assigned templateShortCut: ' + key + '.'

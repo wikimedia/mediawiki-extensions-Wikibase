@@ -9,27 +9,27 @@
 		}
 	} );
 
-	QUnit.test( 'constructor', function ( assert ) {
-		assert.throws( function () {
+	QUnit.test( 'constructor', ( assert ) => {
+		assert.throws( () => {
 			new wb.WikibaseContentLanguages(); // eslint-disable-line no-new
 		}, 'instantiated without a language list' );
 
-		assert.throws( function () {
+		assert.throws( () => {
 			new wb.WikibaseContentLanguages( [ 'en' ] ); // eslint-disable-line no-new
 		}, 'instantiated without a getName function' );
 	} );
 
-	QUnit.test( 'getAll', function ( assert ) {
+	QUnit.test( 'getAll', ( assert ) => {
 		var expectedLanguages = [ 'ar', 'de', 'en', 'ko' ],
 			getName = sandbox.stub().throws( 'should not be called in this test' ),
 			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages, getName ) ).getAll();
 
-		expectedLanguages.forEach( function ( languageCode ) {
+		expectedLanguages.forEach( ( languageCode ) => {
 			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
 		} );
 	} );
 
-	QUnit.test( 'getName', function ( assert ) {
+	QUnit.test( 'getName', ( assert ) => {
 		var getName = sandbox.stub().withArgs( 'eo' ).returns( 'Esperanto' );
 
 		assert.strictEqual(
@@ -38,7 +38,7 @@
 		);
 	} );
 
-	QUnit.test( 'getLanguageNameMap', function ( assert ) {
+	QUnit.test( 'getLanguageNameMap', ( assert ) => {
 		var getName = sandbox.stub();
 		getName.withArgs( 'en' ).returns( 'English' );
 		getName.withArgs( 'eo' ).returns( 'Esperanto' );
@@ -50,18 +50,18 @@
 		);
 	} );
 
-	QUnit.test( 'getMonolingualTextLanguages', function ( assert ) {
+	QUnit.test( 'getMonolingualTextLanguages', ( assert ) => {
 		var allLanguages = ( wb.WikibaseContentLanguages.getMonolingualTextLanguages() ).getAll();
 
-		[ 'abe', 'de', 'en', 'ko' ].forEach( function ( languageCode ) {
+		[ 'abe', 'de', 'en', 'ko' ].forEach( ( languageCode ) => {
 			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
 		} );
 	} );
 
-	QUnit.test( 'getTermLanguages', function ( assert ) {
+	QUnit.test( 'getTermLanguages', ( assert ) => {
 		var allLanguages = ( wb.WikibaseContentLanguages.getTermLanguages() ).getAll();
 
-		[ 'bag', 'de', 'en', 'ko' ].forEach( function ( languageCode ) {
+		[ 'bag', 'de', 'en', 'ko' ].forEach( ( languageCode ) => {
 			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
 		} );
 	} );

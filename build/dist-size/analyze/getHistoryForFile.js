@@ -30,7 +30,7 @@ module.exports = async function ( client, repoOwner, repoName, filePath ) {
 			.then( ( result ) => result.data.repository );
 
 		fileHistory.forEach( ( value, index ) => {
-			const sizeInfo = byteSizes[ `commit${index}` ];
+			const sizeInfo = byteSizes[ `commit${ index }` ];
 			history.push( {
 				sha: value.oid,
 				date: value.committedDate,

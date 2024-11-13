@@ -29,7 +29,7 @@
 
 	QUnit.module( 'jquery.wikibase.wbtooltip', QUnit.newMwEnvironment( {
 		afterEach: function () {
-			$( '.test_tooltip' ).each( function ( i, node ) {
+			$( '.test_tooltip' ).each( ( i, node ) => {
 				var $node = $( node ),
 					tooltip = $node.data( 'wbtooltip' );
 
@@ -42,7 +42,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy.', function ( assert ) {
+	QUnit.test( 'Initialize and destroy.', ( assert ) => {
 		var $node = createTestTooltip( { content: 'Text' } ),
 			tooltip = $node.data( 'wbtooltip' ),
 			$tip;
@@ -74,7 +74,7 @@
 		);
 	} );
 
-	QUnit.test( 'Show and hide basic tooltip.', function ( assert ) {
+	QUnit.test( 'Show and hide basic tooltip.', ( assert ) => {
 		var $node = createTestTooltip( { content: 'Text' } ),
 			tooltip = $node.data( 'wbtooltip' );
 
@@ -106,7 +106,7 @@
 		);
 	} );
 
-	QUnit.test( 'Permanent tooltip interaction.', function ( assert ) {
+	QUnit.test( 'Permanent tooltip interaction.', ( assert ) => {
 		var $node = createTestTooltip( { content: 'Text', permanent: true } ),
 			tooltip = $node.data( 'wbtooltip' );
 
@@ -137,7 +137,7 @@
 		);
 	} );
 
-	QUnit.test( 'Show and hide by triggering events.', function ( assert ) {
+	QUnit.test( 'Show and hide by triggering events.', ( assert ) => {
 		var $node = createTestTooltip( { content: 'Text' } ),
 			tooltip = $node.data( 'wbtooltip' );
 
@@ -172,7 +172,7 @@
 		);
 	} );
 
-	QUnit.test( 'Show and hide error tooltip.', function ( assert ) {
+	QUnit.test( 'Show and hide error tooltip.', ( assert ) => {
 		var error = new wb.api.RepoApiError( 'error-code', 'detailed message' ),
 			$node = createTestTooltip( { content: error } ),
 			tooltip = $node.data( 'wbtooltip' );

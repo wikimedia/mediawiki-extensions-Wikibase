@@ -69,7 +69,7 @@
 			var map = {},
 				self = this;
 
-			this._languageCodes.forEach( function ( languageCode ) {
+			this._languageCodes.forEach( ( languageCode ) => {
 				map[ languageCode ] = self.getName( languageCode );
 			} );
 

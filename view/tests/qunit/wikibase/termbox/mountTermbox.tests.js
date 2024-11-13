@@ -16,7 +16,7 @@
 		}
 	} );
 
-	QUnit.test( 'mount the app on an existing wrapper element', function ( assert ) {
+	QUnit.test( 'mount the app on an existing wrapper element', ( assert ) => {
 		// tree: outer > wrapper > root; outer > unrelated
 		const outerElement = document.createElement( 'div' );
 		outerElement.classList.add( 'wikibase-entityview-main' );
@@ -39,7 +39,7 @@
 		assert.strictEqual( unrelatedElement.parentElement, outerElement );
 	} );
 
-	QUnit.test( 'mount the app on a newly created wrapper element', function ( assert ) {
+	QUnit.test( 'mount the app on a newly created wrapper element', ( assert ) => {
 		// tree: outer > root; outer > unrelated
 		const outerElement = document.createElement( 'div' );
 		outerElement.classList.add( 'wikibase-entityview-main' );
@@ -66,7 +66,7 @@
 		assert.strictEqual( rootElement.childElementCount, 0 );
 	} );
 
-	QUnit.test( 'does not mount without root element', function ( assert ) {
+	QUnit.test( 'does not mount without root element', ( assert ) => {
 		const app = { mount: sinon.spy() };
 
 		mountTermbox( app );

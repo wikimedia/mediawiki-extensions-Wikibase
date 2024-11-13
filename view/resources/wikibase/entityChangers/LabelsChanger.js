@@ -55,7 +55,7 @@
 				label.getText(),
 				language
 			)
-			.done( function ( result ) {
+			.done( ( result ) => {
 				var savedText = result.entity.labels[ language ].value,
 					savedTerm = savedText ? new datamodel.Term( language, savedText ) : null;
 
@@ -70,7 +70,7 @@
 
 				deferred.resolve( savedTerm );
 			} )
-			.fail( function ( errorCode, error ) {
+			.fail( ( errorCode, error ) => {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 			} );
 

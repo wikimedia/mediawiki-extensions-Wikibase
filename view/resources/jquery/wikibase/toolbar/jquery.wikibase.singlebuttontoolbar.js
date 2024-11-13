@@ -69,7 +69,7 @@
 				title: this.options.title,
 				cssClassSuffix: this.options.buttonCssClassSuffix
 			} )
-			.on( 'toolbarbuttonaction.' + this.widgetName, function ( event ) {
+			.on( 'toolbarbuttonaction.' + this.widgetName, ( event ) => {
 				self._trigger( self.options.eventName );
 			} );
 		},

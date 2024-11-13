@@ -80,7 +80,7 @@
 			var self = this;
 			var listview;
 			this.$listview.listview( {
-				listItemAdapter: this.options.getListItemAdapter( function ( snaklistview ) {
+				listItemAdapter: this.options.getListItemAdapter( ( snaklistview ) => {
 					listview.removeItem( snaklistview.element );
 					if ( listview.items().length === 0 ) {
 						self.options.removeCallback();
@@ -122,7 +122,7 @@
 			this.element.tabs();
 
 			// Sets manual mode when user selects it after selecting another tab
-			$manualLink.on( 'click', function () {
+			$manualLink.on( 'click', () => {
 				new mw.Api().saveOption( 'wb-reftabs-mode', 'manual' ); // for future page views
 				mw.user.options.set( 'wb-reftabs-mode', 'manual' ); // for this page view
 			} );
@@ -150,7 +150,7 @@
 			];
 
 			this.$listview
-			.on( changeEvents.join( ' ' ), function ( event ) {
+			.on( changeEvents.join( ' ' ), ( event ) => {
 				// Propagate "change" event.
 				self._trigger( 'change' );
 			} );
@@ -185,7 +185,6 @@
 			this.element.removeClassByRegex( /wb-reference-.+/ );
 			this.element.addClass( 'wb-reference-' + refHash );
 
-			// eslint-disable-next-line security/detect-non-literal-regexp
 			this.element.removeClassByRegex( new RegExp( this.widgetBaseClass + '-.+' ) );
 			this.element.addClass( this.widgetBaseClass + '-' + refHash );
 		},
@@ -208,7 +207,7 @@
 
 			var snakList = new datamodel.SnakList();
 
-			if ( !this.$listview.data( 'listview' ).value().every( function ( snaklistview ) {
+			if ( !this.$listview.data( 'listview' ).value().every( ( snaklistview ) => {
 				var value = snaklistview.value();
 				snakList.merge( value );
 				return value;
@@ -301,9 +300,9 @@
 
 			this.startEditing();
 
-			return listview.enterNewItem().done( function ( $snaklistview ) {
+			return listview.enterNewItem().done( ( $snaklistview ) => {
 				lia.liInstance( $snaklistview ).enterNewItem()
-				.done( function ( $snakview ) {
+				.done( ( $snakview ) => {
 					// Since the new snakview will be initialized empty which invalidates the
 					// snaklistview, external components using the snaklistview will be noticed via
 					// the "change" event.

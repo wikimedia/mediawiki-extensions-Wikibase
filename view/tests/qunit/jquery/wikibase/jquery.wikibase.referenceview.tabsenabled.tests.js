@@ -59,7 +59,7 @@
 	QUnit.module( 'jquery.wikibase.referenceview.tabsenabled', window.QUnit.newMwEnvironment( {
 		config: { wbRefTabsEnabled: true },
 		afterEach: function () {
-			$( '.test_referenceview' ).each( function ( i, node ) {
+			$( '.test_referenceview' ).each( ( i, node ) => {
 				var $node = $( node ),
 					referenceview = $node.data( 'referenceview' );
 
@@ -72,7 +72,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function ( assert ) {
+	QUnit.test( 'Initialize and destroy', ( assert ) => {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -109,7 +109,7 @@
 		);
 	} );
 
-	QUnit.test( 'is initialized with a value', function ( assert ) {
+	QUnit.test( 'is initialized with a value', ( assert ) => {
 		var $node = createReferenceview( {
 				value: new datamodel.Reference( new datamodel.SnakList( [
 					new datamodel.PropertyNoValueSnak( 'P1' )
@@ -124,7 +124,7 @@
 		);
 	} );
 
-	QUnit.test( 'allows entering new item', function ( assert ) {
+	QUnit.test( 'allows entering new item', ( assert ) => {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -144,7 +144,7 @@
 
 	} );
 
-	QUnit.test( 'allows stopping editing', function ( assert ) {
+	QUnit.test( 'allows stopping editing', ( assert ) => {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 

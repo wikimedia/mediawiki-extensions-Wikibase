@@ -62,7 +62,9 @@
 				$link: '.wikibase-sitelinkview-link'
 			},
 			value: null,
-			getAllowedSites: function () { return []; },
+			getAllowedSites: function () {
+				return [];
+			},
 			entityIdPlainFormatter: null
 		},
 
@@ -126,7 +128,7 @@
 			if ( this.isInEditMode() ) {
 				var self = this;
 
-				this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
+				this.element.one( this.widgetEventPrefix + 'afterstopediting', ( event ) => {
 					PARENT.prototype.destroy.call( self );
 				} );
 
@@ -158,7 +160,7 @@
 				},
 				encapsulate: true
 			} )
-			.on( 'badgeselectorchange', function ( event ) {
+			.on( 'badgeselectorchange', ( event ) => {
 				// Adding/removing badges decreases/increases available space:
 				self.updatePageNameInputAutoExpand();
 				self._trigger( 'change' );
@@ -226,7 +228,7 @@
 			var pagesuggester = $pageNameInput.data( 'pagesuggester' );
 
 			$pageNameInput
-			.on( 'pagesuggesterchange.' + this.widgetName, function ( event ) {
+			.on( 'pagesuggesterchange.' + this.widgetName, ( event ) => {
 				if ( !pagesuggester.isSearching() ) {
 					self.setError();
 					self._trigger( 'change' );
@@ -268,7 +270,7 @@
 			}
 
 			$siteIdInput
-			.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
+			.on( 'siteselectorselected.' + this.widgetName, ( event, siteId ) => {
 				var selectedSite = wb.sites.getSite( siteId );
 
 				if ( selectedSite ) {
@@ -292,7 +294,7 @@
 			} )
 			.on(
 				'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
-				function ( event, siteId ) {
+				( event, siteId ) => {
 					var inputautoexpand = $siteIdInput.data( 'inputautoexpand' );
 
 					if ( inputautoexpand ) {
@@ -314,7 +316,7 @@
 			this.updatePageNameInputAutoExpand();
 
 			$pageNameInput
-			.on( 'keydown.' + this.widgetName, function ( event ) {
+			.on( 'keydown.' + this.widgetName, ( event ) => {
 				if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
 					event.stopPropagation();
 					$siteIdInput.val( '' ).trigger( 'focus' );

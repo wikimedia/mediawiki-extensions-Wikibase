@@ -101,7 +101,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create and destroy', function ( assert ) {
+	QUnit.test( 'Create and destroy', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
@@ -124,14 +124,14 @@
 		);
 
 		assert.throws(
-			function () {
+			() => {
 				$sitelinkgroupview = createSitelinkgroupview();
 			},
 			'Widget does not accept an empty value.'
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', ( assert ) => {
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ] )
@@ -139,13 +139,13 @@
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
 		$sitelinkgroupview
-		.on( 'sitelinkgroupviewafterstartediting', function ( event ) {
+		.on( 'sitelinkgroupviewafterstartediting', ( event ) => {
 			assert.true(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkgroupviewafterstopediting', function ( event, dropValue ) {
+		.on( 'sitelinkgroupviewafterstopediting', ( event, dropValue ) => {
 			assert.true(
 				true,
 				'Stopped edit mode.'
@@ -166,13 +166,13 @@
 			}
 
 			$sitelinkgroupview
-			.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', function ( event ) {
+			.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', ( event ) => {
 				$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
 				deferred.resolve();
 			} )
 			.one(
 				'sitelinkgroupviewafterstopediting.sitelinkgroupviewtest',
-				function ( event, dropValue ) {
+				( event, dropValue ) => {
 					$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
 					deferred.resolve();
 				}
@@ -193,43 +193,43 @@
 			if ( expectingEvent === undefined ) {
 				expectingEvent = true;
 			}
-			$queue.queue( 'tests', function ( next ) {
+			$queue.queue( 'tests', ( next ) => {
 				var done = assert.async();
-				testEditModeChange( func, expectingEvent ).always( function () {
+				testEditModeChange( func, expectingEvent ).always( () => {
 					next();
 					done();
 				} );
 			} );
 		}
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.startEditing();
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.startEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.stopEditing( true );
 		} );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.stopEditing( true );
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.stopEditing();
 		}, false );
 
-		addToQueue( function () {
+		addToQueue( () => {
 			sitelinkgroupview.startEditing();
 		} );
 
 		$queue.dequeue( 'tests' );
 	} );
 
-	QUnit.test( 'setError()', function ( assert ) {
+	QUnit.test( 'setError()', ( assert ) => {
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: new datamodel.SiteLinkSet( [] )
@@ -238,7 +238,7 @@
 
 		$sitelinkgroupview
 		.addClass( 'wb-error' )
-		.on( 'sitelinkgroupviewtoggleerror', function ( event, error ) {
+		.on( 'sitelinkgroupviewtoggleerror', ( event, error ) => {
 			assert.true(
 				true,
 				'Triggered toggleerror event.'
@@ -248,7 +248,7 @@
 		sitelinkgroupview.setError();
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			siteLinks = new datamodel.SiteLinkSet( [ siteLink ] ),
 			$sitelinkgroupview = createSitelinkgroupview( {

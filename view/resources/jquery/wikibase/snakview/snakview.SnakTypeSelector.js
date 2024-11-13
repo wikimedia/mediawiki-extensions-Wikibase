@@ -63,7 +63,7 @@
 
 			this.element
 			.addClass( 'ui-state-default ' + this.widgetBaseClass )
-			.on( 'click.' + widgetName, function ( event ) {
+			.on( 'click.' + widgetName, ( event ) => {
 				// don't show menu if selector is disabled!
 				// otherwise, simply toggle menu's visibility
 				// TODO: Store visibility in model
@@ -107,7 +107,7 @@
 				.appendTo( this.element );
 
 			// listen to clicks; after click on a menu item, select its type as active:
-			$menu.on( 'click', function ( event ) {
+			$menu.on( 'click', ( event ) => {
 				var $li = $( event.target ).closest( 'li' ),
 					type = $li.data( 'snaktypeselector-menuitem-type' );
 
@@ -163,7 +163,7 @@
 				$menu = $( '<ul>' ).addClass( this.widgetBaseClass + '-menu' ),
 				snakTypes = variations.getCoveredSnakTypes();
 
-			snakTypes.forEach( function ( type ) {
+			snakTypes.forEach( ( type ) => {
 				$menu.append(
 					$( '<li>' )
 					.addClass( classPrefix + type ) // type should only be lower case string anyhow!
@@ -174,7 +174,7 @@
 							// * wikibase-snakview-snaktypeselector-somevalue
 							// * wikibase-snakview-snaktypeselector-novalue
 							.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
-							.on( 'click', function ( event ) {
+							.on( 'click', ( event ) => {
 								event.preventDefault();
 							} )
 					)

@@ -37,8 +37,8 @@
 	};
 
 	EntityInitializer.newFromEntityLoadedHook = function () {
-		var entityPromise = $.Deferred( function ( deferred ) {
-			mw.hook( 'wikibase.entityPage.entityLoaded' ).add( function ( entity ) {
+		var entityPromise = $.Deferred( ( deferred ) => {
+			mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( entity ) => {
 				deferred.resolve( entity );
 			} );
 		} ).promise();
@@ -64,11 +64,7 @@
 		getEntity: function () {
 			var self = this;
 
-			return this._entityPromise.then( function ( entity ) {
-				return self._getDeserializer().then( function ( entityDeserializer ) {
-					return entityDeserializer.deserialize( entity );
-				} );
-			} );
+			return this._entityPromise.then( ( entity ) => self._getDeserializer().then( ( entityDeserializer ) => entityDeserializer.deserialize( entity ) ) );
 		},
 
 		/**
@@ -84,15 +80,15 @@
 			var entityTypes = config.entityTypes;
 			var modules = [];
 			var typeNames = [];
-			entityTypes.types.forEach( function ( type ) {
+			entityTypes.types.forEach( ( type ) => {
 				var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
 				if ( deserializerFactoryFunction ) {
 					modules.push( deserializerFactoryFunction );
 					typeNames.push( type );
 				}
 			} );
-			mw.loader.using( modules, function ( require ) {
-				modules.forEach( function ( module, index ) {
+			mw.loader.using( modules, ( require ) => {
+				modules.forEach( ( module, index ) => {
 					entityDeserializer.registerStrategy(
 						// eslint-disable-next-line security/detect-non-literal-require
 						require( module )(),
@@ -120,8 +116,8 @@
 	 *         No rejected parameters.
 	 */
 	function getFromConfig( configVarName ) {
-		return $.Deferred( function ( deferred ) {
-			mw.hook( 'wikipage.content' ).add( function () {
+		return $.Deferred( ( deferred ) => {
+			mw.hook( 'wikipage.content' ).add( () => {
 				var serializedEntity = mw.config.get( configVarName );
 
 				if ( serializedEntity === null ) {

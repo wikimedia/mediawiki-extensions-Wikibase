@@ -60,7 +60,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create & destroy', function ( assert ) {
+	QUnit.test( 'Create & destroy', ( assert ) => {
 		var $statementlistview = createStatementlistview(),
 			statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -92,7 +92,7 @@
 		);
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
+	QUnit.test( 'value()', ( assert ) => {
 		var statementList1 = new datamodel.StatementList( [ new datamodel.Statement(
 				new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 			) ] ),
@@ -140,7 +140,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem', function ( assert ) {
+	QUnit.test( 'enterNewItem', ( assert ) => {
 		var $statementlistview = createStatementlistview(),
 			statementlistview = $statementlistview.data( 'statementlistview' );
 

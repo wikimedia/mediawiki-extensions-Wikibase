@@ -19,7 +19,7 @@
 
 	QUnit.module( 'wikibase' );
 
-	QUnit.test( 'basic', function ( assert ) {
+	QUnit.test( 'basic', ( assert ) => {
 		assert.true(
 			wb instanceof Object,
 			'initiated wikibase object'

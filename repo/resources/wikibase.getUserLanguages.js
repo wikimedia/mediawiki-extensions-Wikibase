@@ -7,9 +7,7 @@
 	var termLanguages = require( './termLanguages.json' );
 
 	function filterInvalidTermsLanguages( languages ) {
-		return languages.filter( function ( language ) {
-			return termLanguages.indexOf( language ) !== -1;
-		} );
+		return languages.filter( ( language ) => termLanguages.indexOf( language ) !== -1 );
 	}
 
 	/**
