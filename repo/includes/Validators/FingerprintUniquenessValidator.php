@@ -96,7 +96,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 
 	/**
 	 * @return Generator yielding entries of the shape
-	 *  [ language code => [ 'label' => label text, 'descripition' => description text ] ]
+	 *  [ language code => [ 'label' => label text, 'description' => description text ] ]
 	 */
 	private function getChangedLabelsAndDescriptionsPerLanguage( ChangeOpFingerprintResult $changeOpsResult ): Generator {
 		[ $newTerms, $oldTerms ] = $this->collectNewAndOldTerms( $changeOpsResult );
@@ -164,7 +164,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 	 * term store directly.
 	 *
 	 * @return Generator yielding entries of the shape
-	 *  [ language code => [ 'label' => label text, 'descripition' => description text ] ]
+	 *  [ language code => [ 'label' => label text, 'description' => description text ] ]
 	 */
 	private function generateLabelDescriptionPairs( array $newTerms, array $oldTerms, EntityId $entityId ) {
 		foreach ( $newTerms as $lang => $terms ) {

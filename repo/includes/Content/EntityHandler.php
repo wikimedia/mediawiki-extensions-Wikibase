@@ -278,7 +278,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::makeRedirectContent
 	 *
-	 * @warning This always throws an exception, since an EntityRedirects needs to know it's own
+	 * @warning This always throws an exception, since an EntityRedirect needs to know its own
 	 * ID in addition to the target ID. We have no way to guess that in makeRedirectContent().
 	 * Use makeEntityRedirectContent() instead.
 	 *

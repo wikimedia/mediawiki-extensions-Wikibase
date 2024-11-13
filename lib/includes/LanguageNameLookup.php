@@ -29,7 +29,7 @@ class LanguageNameLookup {
 	 * @param LanguageNameUtils $languageNameUtils
 	 * @param MessageInLanguageProvider $messageInLanguageProvider
 	 * @param string|null $inLanguage Language code of the language in which to return the language
-	 *  names. Use LanguageNameUtils::AUTONYMS for autonyms (returns each language name in it's own language).
+	 *  names. Use LanguageNameUtils::AUTONYMS for autonyms (returns each language name in its own language).
 	 */
 	public function __construct(
 		LanguageNameUtils $languageNameUtils,
