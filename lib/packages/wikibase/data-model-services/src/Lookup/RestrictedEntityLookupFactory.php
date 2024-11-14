@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Lookup;
 
 use MediaWiki\Parser\Parser;
+use WeakMap;
 
 /**
  * Factory class for creating RestrictedEntityLookup instances
@@ -12,9 +13,6 @@ use MediaWiki\Parser\Parser;
  *
  * This factory maintains a separate RestrictedEntityLookup instance
  * for each Parser, tracking entity access counts independently.
- *
- * Note: WeakMap should be used once we drop PHP 7.4 support. An
- * array implementation is used as of now.
  *
  * @license GPL-2.0-or-later
  * @author Sean Leong < sean.leong@wikimedia.de >
@@ -26,21 +24,19 @@ class RestrictedEntityLookupFactory {
 	private int $entityAccessLimit;
 
 	/**
-	 * @var array<string, EntityLookup>
+	 * @var WeakMap<Parser, EntityLookup>
 	 */
-	private array $restrictedEntityLookupArray = [];
+	private WeakMap $restrictedEntityLookupMap;
 
 	public function __construct( EntityLookup $entityLookup, int $entityAccessLimit ) {
 		$this->entityLookup = $entityLookup;
 		$this->entityAccessLimit = $entityAccessLimit;
+		$this->restrictedEntityLookupMap = new WeakMap();
 	}
 
 	public function getRestrictedEntityLookup( Parser $parser ): RestrictedEntityLookup {
-		$id = spl_object_hash( $parser );
-		if ( !isset( $this->restrictedEntityLookupArray[$id] ) ) {
-			$this->restrictedEntityLookupArray[ $id ] = new RestrictedEntityLookup( $this->entityLookup, $this->entityAccessLimit );
-		}
+		$this->restrictedEntityLookupMap[$parser] ??= new RestrictedEntityLookup( $this->entityLookup, $this->entityAccessLimit );
 
-		return $this->restrictedEntityLookupArray[ $id ];
+		return $this->restrictedEntityLookupMap[$parser];
 	}
 }
