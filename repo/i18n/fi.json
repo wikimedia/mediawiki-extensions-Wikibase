@@ -422,6 +422,7 @@
 	"right-property-create": "Luoda ominaisuuksia",
 	"wikibase-pageinfo-wb-claims": "Esitysten määrä tässä entiteetissä",
 	"wikibase-pageinfo-wb-identifiers": "Ulkoisten tunnisteiden määrä tässä entiteetissä",
+	"wikibase-search-bad-entity-type": "Virheellinen entiteettityyppi: $1",
 	"wikibase-entity-save-error-heading": "Jotain meni vikaan",
 	"wikibase-entity-save-error-message": "Muutostasi ei pystytty julkaisemaan. Voit kokeilla painaa julkaisupainiketta uudelleen.",
 	"wikibase-tainted-ref-popper-text": "Tämän esityksen arvoa muutettiin, mutta lähde pysyi samana. Voit poistaa tämän varoituksen, jos lähde pitää edelleen paikkaansa.",
