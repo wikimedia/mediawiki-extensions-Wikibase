@@ -46,7 +46,7 @@ class NonExistingEntityIdHtmlBrokenLinkFormatter extends NonExistingEntityIdHtml
 		$attributes = [
 			'title' => wfMessage(
 				'red-link-title',
-				$this->entityTitleTextLookup->getPrefixedText( $entityId )
+				$this->entityTitleTextLookup->getPrefixedText( $entityId ) ?? $entityId
 			)->text(),
 			'href' => $this->entityUrlLookup->getLinkUrl( $entityId ),
 			'class' => 'new',
