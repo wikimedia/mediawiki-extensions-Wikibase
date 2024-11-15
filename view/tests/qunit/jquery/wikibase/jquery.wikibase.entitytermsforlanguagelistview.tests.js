@@ -177,7 +177,7 @@
 
 		assert.deepEqual(
 			entitytermsforlanguagelistview._defaultLanguages,
-			[ 'de', 'en', 'mul' ],
+			[ 'mul', 'de', 'en' ],
 			'Default languages if a "mul" term is present.'
 		);
 	} );
@@ -194,7 +194,7 @@
 
 		assert.deepEqual(
 			entitytermsforlanguagelistview._defaultLanguages,
-			[ 'de', 'en', 'mul' ],
+			[ 'mul', 'de', 'en' ],
 			'"mul" should always be added to the default languages, even if it has no term.'
 		);
 	} );

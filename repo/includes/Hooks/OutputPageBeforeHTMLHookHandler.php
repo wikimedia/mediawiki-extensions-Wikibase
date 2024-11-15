@@ -268,7 +268,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' )
 			&& $this->repoSettings->getSetting( 'tmpAlwaysShowMulLanguageCode' )
 		) {
-			return array_merge( $userPreferredTermsLanguages, [ 'mul' ] );
+			return array_merge( [ 'mul' ], $userPreferredTermsLanguages );
 		}
 
 		// Check both the html snippets and the (possibly empty) entity for a "mul" term.
@@ -281,8 +281,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 
 		if ( $hasMulTerm ) {
-			// There is a "mul" term present, show as last entry in the term box.
-			return array_merge( $userPreferredTermsLanguages, [ 'mul' ] );
+			// There is a "mul" term present, show as first entry in the term box.
+			return array_merge( [ 'mul' ], $userPreferredTermsLanguages );
 		}
 		return $userPreferredTermsLanguages;
 	}
