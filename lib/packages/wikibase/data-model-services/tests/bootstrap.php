@@ -11,7 +11,7 @@ if ( PHP_SAPI !== 'cli' ) {
 	die( 'Not an entry point' );
 }
 
-error_reporting( E_ALL | E_STRICT );
+error_reporting( E_ALL );
 ini_set( 'display_errors', 1 );
 
 if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
