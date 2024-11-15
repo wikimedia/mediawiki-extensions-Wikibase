@@ -222,7 +222,7 @@ class EntityDataRequestHandler {
 		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
-			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
+			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ?? '' ) );
 		}
 
 		try {
