@@ -112,7 +112,6 @@
 		<exclude-pattern>client/</exclude-pattern>
 		<exclude-pattern>lib/</exclude-pattern>
 		<exclude-pattern>repo/</exclude-pattern>
-		<exclude-pattern>view/</exclude-pattern>
 	</rule>
 
 	<file>.</file>

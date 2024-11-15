@@ -53,7 +53,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		}
 	}
 
-	public function getSiteLinksEditSection( EntityId $entityId = null ) {
+	public function getSiteLinksEditSection( ?EntityId $entityId = null ) {
 		$specialPageUrlParams = [];
 
 		if ( $entityId !== null ) {
@@ -71,7 +71,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 *
 	 * @return string
 	 */
-	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null ) {
+	public function getLabelDescriptionAliasesEditSection( $languageCode, ?EntityId $entityId ) {
 		$specialPageUrlParams = [];
 
 		if ( $entityId !== null ) {
@@ -145,7 +145,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		);
 	}
 
-	public function getAddStatementToGroupSection( PropertyId $propertyId, EntityId $entityId = null ) {
+	public function getAddStatementToGroupSection( PropertyId $propertyId, ?EntityId $entityId = null ) {
 		// This is just an empty toolbar wrapper. It's used as a marker to the JavaScript so that it places
 		// the toolbar at the right position in the DOM. Without this, the JavaScript would just append the
 		// toolbar to the end of the element.

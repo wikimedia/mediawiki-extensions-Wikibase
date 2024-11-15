@@ -35,7 +35,7 @@ use Wikibase\View\TermsListView;
 class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 	use HamcrestPHPUnitIntegration;
 
-	private function getEntityTermsView( $editSectionCalls = 0, TermsListView $termsListView = null ) {
+	private function getEntityTermsView( $editSectionCalls = 0, ?TermsListView $termsListView = null ) {
 		$editSectionGenerator = $this->createMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )

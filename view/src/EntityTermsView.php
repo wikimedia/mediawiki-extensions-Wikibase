@@ -30,8 +30,8 @@ interface EntityTermsView {
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
-		EntityId $entityId = null
+		?AliasGroupList $aliasGroups = null,
+		?EntityId $entityId = null
 	);
 
 	/**
@@ -39,6 +39,6 @@ interface EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	public function getTitleHtml( EntityId $entityId = null );
+	public function getTitleHtml( ?EntityId $entityId );
 
 }

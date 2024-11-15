@@ -77,8 +77,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
-		EntityId $entityId = null
+		?AliasGroupList $aliasGroups = null,
+		?EntityId $entityId = null
 	) {
 		return $this->templateFactory->render(
 			'wikibase-entitytermsview',
@@ -101,8 +101,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 
 	protected function getHeadingHtml(
 		$languageCode,
-		EntityId $entityId = null,
-		AliasGroupList $aliasGroups = null
+		?EntityId $entityId,
+		?AliasGroupList $aliasGroups
 	) {
 		$headingPartsHtml = '';
 
@@ -150,7 +150,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null
+		?AliasGroupList $aliasGroups
 	) {
 		$allLanguages = [ $mainLanguageCode ];
 
@@ -174,7 +174,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	public function getTitleHtml( EntityId $entityId = null ) {
+	public function getTitleHtml( ?EntityId $entityId ) {
 		$isEmpty = true;
 		$labelHtml = '';
 		$idInParenthesesHtml = '';
@@ -208,7 +208,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( Term $description = null ) {
+	private function getDescriptionHtml( ?Term $description ) {
 		if ( $description === null ) {
 			return $this->textProvider->getEscaped( 'wikibase-description-empty' );
 		}
@@ -245,7 +245,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	protected function getHtmlForLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null ) {
+	protected function getHtmlForLabelDescriptionAliasesEditSection( $languageCode, ?EntityId $entityId ) {
 		return $this->sectionEditLinkGenerator->getLabelDescriptionAliasesEditSection(
 			$languageCode,
 			$entityId

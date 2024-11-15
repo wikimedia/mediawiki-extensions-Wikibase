@@ -20,7 +20,7 @@ interface EditSectionGenerator {
 	 * @param EntityId|null $entityId
 	 * @return string HTML
 	 */
-	public function getSiteLinksEditSection( EntityId $entityId = null );
+	public function getSiteLinksEditSection( ?EntityId $entityId = null );
 
 	/**
 	 * Returns HTML allowing to edit label, description and aliases.
@@ -30,7 +30,7 @@ interface EditSectionGenerator {
 	 *
 	 * @return string HTML
 	 */
-	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null );
+	public function getLabelDescriptionAliasesEditSection( $languageCode, ?EntityId $entityId );
 
 	/**
 	 * Returns HTML allowing to edit a statement
@@ -48,6 +48,6 @@ interface EditSectionGenerator {
 	 *
 	 * @return string HTML
 	 */
-	public function getAddStatementToGroupSection( PropertyId $propertyId, EntityId $entityId = null );
+	public function getAddStatementToGroupSection( PropertyId $propertyId, ?EntityId $entityId = null );
 
 }

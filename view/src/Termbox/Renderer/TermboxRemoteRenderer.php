@@ -87,7 +87,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function reportFailureOfRequest( $message, Exception $exception = null ) {
+	private function reportFailureOfRequest( $message, ?Exception $exception = null ) {
 		$context = [
 			'errormessage' => $message,
 			'class' => __CLASS__,
