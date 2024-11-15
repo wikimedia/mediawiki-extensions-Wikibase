@@ -55,7 +55,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 	 * @note These defaults do not strictly obey the definitions of the interface
 	 * but instead are similar to the FakePrefetchingTermLookup
 	 */
-	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+	public function prefetchTerms( array $entityIds, ?array $termTypes = null, ?array $languageCodes = null ) {
 		if ( $termTypes === null ) {
 			$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 		}
