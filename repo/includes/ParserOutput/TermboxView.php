@@ -58,13 +58,13 @@ class TermboxView implements CacheableEntityTermsView {
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
-		EntityId $entityId = null
+		?AliasGroupList $aliasGroups = null,
+		?EntityId $entityId = null
 	) {
 		return $this->textInjector->newMarker( self::TERMBOX_PLACEHOLDER );
 	}
 
-	public function getTitleHtml( EntityId $entityId = null ) {
+	public function getTitleHtml( ?EntityId $entityId ) {
 		return $this->textProvider->getEscaped( 'parentheses', [ $entityId->getSerialization() ] );
 	}
 

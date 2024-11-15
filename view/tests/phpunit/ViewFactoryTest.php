@@ -58,8 +58,8 @@ use Wikibase\View\ViewFactory;
 class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newViewFactory(
-		EntityIdFormatterFactory $htmlFactory = null,
-		EntityIdFormatterFactory $plainFactory = null
+		?EntityIdFormatterFactory $htmlFactory = null,
+		?EntityIdFormatterFactory $plainFactory = null
 	) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( [] ) );
 

@@ -33,8 +33,8 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 
 	private function getTermsListView(
 		$languageNameCalls = 0,
-		LocalizedTextProvider $textProvider = null,
-		LanguageFallbackChainFactory $languageFallbackChainFactory = null,
+		?LocalizedTextProvider $textProvider = null,
+		?LanguageFallbackChainFactory $languageFallbackChainFactory = null,
 		$mulEnabled = false
 	) {
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );

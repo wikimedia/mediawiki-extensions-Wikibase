@@ -87,8 +87,8 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
-		EntityId $entityId = null
+		?AliasGroupList $aliasGroups = null,
+		?EntityId $entityId = null
 	) {
 		$cssClasses = $this->textInjector->newMarker(
 			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
