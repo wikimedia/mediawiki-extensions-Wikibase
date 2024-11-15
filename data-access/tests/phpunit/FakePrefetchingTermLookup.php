@@ -20,16 +20,10 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 
 	/**
 	 * @param array $entityIds
-	 * @param array|null $termTypes if null, defaults to labels and descriptions only
-	 * @param array|null $languageCodes if null, defaults to de and en
+	 * @param array $termTypes
+	 * @param array $languageCodes
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ) {
-		if ( $termTypes === null ) {
-			$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
-		}
-		if ( $languageCodes === null ) {
-			$languageCodes = [ 'de', 'en' ];
-		}
 		$this->bufferFakeTermsForEntities( $entityIds, $termTypes, $languageCodes );
 	}
 

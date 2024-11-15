@@ -50,18 +50,10 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 
 	/**
 	 * @param array $entityIds
-	 * @param array|null $termTypes if null, defaults to labels and descriptions only
-	 * @param array|null $languageCodes if null, defaults to nothing
-	 * @note These defaults do not strictly obey the definitions of the interface
-	 * but instead are similar to the FakePrefetchingTermLookup
+	 * @param array $termTypes
+	 * @param array $languageCodes
 	 */
-	public function prefetchTerms( array $entityIds, ?array $termTypes = null, ?array $languageCodes = null ) {
-		if ( $termTypes === null ) {
-			$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
-		}
-		if ( $languageCodes === null ) {
-			$languageCodes = [];
-		}
+	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ) {
 		$this->bufferStubTermsForEntities( $entityIds, $termTypes, $languageCodes );
 	}
 
