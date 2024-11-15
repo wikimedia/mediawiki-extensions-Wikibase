@@ -58,7 +58,8 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 			$lang
 		);
 
-		$entityLookup = WikibaseClient::getRestrictedEntityLookup();
+		$parser = $this->getParser();
+		$entityLookup = WikibaseClient::getRestrictedEntityLookupFactory()->getRestrictedEntityLookup( $parser );
 
 		$propertyIdResolver = new PropertyIdResolver(
 			$entityLookup,

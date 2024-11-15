@@ -8,6 +8,7 @@ use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use Wikibase\Client\Hooks\ParserHookHandler;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserHookHandler
@@ -28,14 +29,22 @@ class ParserHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getEntityAccessCount' )
 			->willReturn( 42 );
 
+		$restrictedEntityLookupFactory = $this->createMock( RestrictedEntityLookupFactory::class );
+		$parser = $this->createMock( Parser::class );
+
+		$restrictedEntityLookupFactory->expects( $this->once() )
+			->method( 'getRestrictedEntityLookup' )
+			->with( $parser )
+			->willReturn( $restrictedEntityLookup );
+
 		$handler = new ParserHookHandler(
-			$restrictedEntityLookup,
+			$restrictedEntityLookupFactory,
 			1234
 		);
 
 		$parserOutput = new ParserOutput();
 
-		$handler->onParserLimitReportPrepare( $this->createMock( Parser::class ), $parserOutput );
+		$handler->onParserLimitReportPrepare( $parser, $parserOutput );
 
 		$limitReportData = $parserOutput->getLimitReportData();
 

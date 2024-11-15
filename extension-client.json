@@ -198,7 +198,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::factory",
 			"services": [
-				"WikibaseClient.RestrictedEntityLookup",
+				"WikibaseClient.RestrictedEntityLookupFactory",
 				"WikibaseClient.Settings"
 			]
 		},
