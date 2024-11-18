@@ -71,7 +71,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		$this->assertEquals( Descriptions::fromTermList( $property->getDescriptions() ), $propertyParts->getDescriptions() );
 		$this->assertEquals( Aliases::fromAliasGroupList( $property->getAliasGroups() ), $propertyParts->getAliases() );
 		$this->assertEquals(
-			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
+			new StatementList( self::newStatementReadModelConverter()->convert( $expectedStatement ) ),
 			$propertyParts->getStatements()
 		);
 	}
@@ -101,7 +101,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		);
 	}
 
-	public function propertyPartsWithFieldsProvider(): Generator {
+	public static function propertyPartsWithFieldsProvider(): Generator {
 		$statement = NewStatement::someValueFor( 'P123' )
 			->withGuid( 'P666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
@@ -133,7 +133,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 			$property,
 			[ PropertyParts::FIELD_STATEMENTS ],
 			( new PropertyPartsBuilder( $property->getId(), [ PropertyParts::FIELD_STATEMENTS ] ) )
-				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
+				->setStatements( new StatementList( self::newStatementReadModelConverter()->convert( $statement ) ) )
 				->build(),
 		];
 
@@ -145,7 +145,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 				->setLabels( Labels::fromTermList( $property->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $property->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $property->getAliasGroups() ) )
-				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
+				->setStatements( new StatementList( self::newStatementReadModelConverter()->convert( $statement ) ) )
 				->build(),
 		];
 	}
@@ -224,8 +224,8 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 
 		$this->assertEquals(
 			new StatementList(
-				$this->newStatementReadModelConverter()->convert( $statement1 ),
-				$this->newStatementReadModelConverter()->convert( $statement2 )
+				self::newStatementReadModelConverter()->convert( $statement1 ),
+				self::newStatementReadModelConverter()->convert( $statement2 )
 			),
 			$this->newRetriever()->getStatements( $property->getId() )
 		);
@@ -255,7 +255,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $property->getId(), $property );
 
 		$this->assertEquals(
-			new StatementList( $this->newStatementReadModelConverter()->convert( $statement1 ) ),
+			new StatementList( self::newStatementReadModelConverter()->convert( $statement1 ) ),
 			$this->newRetriever()->getStatements( $property->getId(), new NumericPropertyId( 'P123' ) )
 		);
 	}
@@ -270,7 +270,7 @@ class EntityRevisionLookupPropertyDataRetrieverTest extends TestCase {
 	private function newRetriever(): EntityRevisionLookupPropertyDataRetriever {
 		return new EntityRevisionLookupPropertyDataRetriever(
 			$this->entityRevisionLookup,
-			$this->newStatementReadModelConverter()
+			self::newStatementReadModelConverter()
 		);
 	}
 

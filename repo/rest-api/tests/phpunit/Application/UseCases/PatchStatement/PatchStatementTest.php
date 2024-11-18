@@ -331,7 +331,7 @@ class PatchStatementTest extends TestCase {
 		}
 	}
 
-	public function provideSubjectId(): Generator {
+	public static function provideSubjectId(): Generator {
 		yield 'item id' => [ new ItemId( 'Q123' ) ];
 		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}

@@ -70,7 +70,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return EntityChange
 	 */
-	private function newEntityChange( $action, EntityId $entityId, Diff $diff, array $fields ) {
+	private static function newEntityChange( $action, EntityId $entityId, Diff $diff, array $fields ) {
 		/** @var EntityChange $instance */
 		$instance = new ItemChange( $fields );
 
@@ -123,8 +123,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $title;
 	}
 
-	public function provideNewRecentChange() {
-		$target = $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest', 7, 77, 210 );
+	public static function provideNewRecentChange() {
 
 		$fields = [
 			'id' => '13',
@@ -140,7 +139,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$emptyDiff = new ItemDiff();
-		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
+		$change = self::newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
 		$change->setMetadata( $metadata );
 
 		$itemDiffer = new ItemDiffer();
@@ -152,10 +151,10 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$newItem->addSiteLink( new SiteLink( 'testwiki', 'Bar' ) );
 
 		$siteLinkDiff = $itemDiffer->diffItems( $oldItem, $newItem );
-		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
+		$siteLinkChange = self::newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
 		$siteLinkChange->setMetadata( $metadata );
 
-		$targetAttr = [
+		$getTargetAttr = fn ( $target ) => [
 			'rc_namespace' => $target->getNamespace(),
 			'rc_title' => $target->getDBkey(),
 			'rc_old_len' => $target->getLength(),
@@ -214,38 +213,40 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'rc_deleted' => false,
 		];
 
-		$siteLinkChangeExpected_currentPage = array_merge( $preparedAttr, $targetAttr );
-		$siteLinkChangeExpected_currentPage['rc_comment'] = '(wikibase-comment-unlink)';
-
-		$siteLinkChangeExpected_otherPage = array_merge( $preparedAttr, $targetAttr );
-		$siteLinkChangeExpected_otherPage['rc_title'] = 'RecentChangeFactoryTest-OtherPage';
-
 		return [
 			'no prepared' => [
-				array_merge( $changeAttr, $targetAttr ),
+				fn ( $target ) => array_merge( $changeAttr, $getTargetAttr( $target ) ),
 				$change,
-				$target,
+				false,
 				null,
 			],
 
 			'use prepared' => [
-				array_merge( $preparedAttr, $targetAttr ),
+				fn ( $target ) => array_merge( $preparedAttr, $getTargetAttr( $target ) ),
 				$change,
-				$target,
+				false,
 				$preparedAttr,
 			],
 
 			'sitelink change, affects current page' => [
-				$siteLinkChangeExpected_currentPage,
+				fn ( $target ) => array_merge(
+					$preparedAttr,
+					$getTargetAttr( $target ),
+					[ 'rc_comment' => '(wikibase-comment-unlink)' ]
+				),
 				$siteLinkChange,
-				$target,
+				false,
 				$preparedAttr,
 			],
 
 			'sitelink change, does not affect current page' => [
-				$siteLinkChangeExpected_otherPage,
+				fn ( $target ) => array_merge(
+					$preparedAttr,
+					$getTargetAttr( $target ),
+					[ 'rc_title' => 'RecentChangeFactoryTest-OtherPage' ],
+				),
 				$siteLinkChange,
-				$this->newTitle( NS_MAIN, 'RecentChangeFactoryTest-OtherPage', 7, 77, 210 ),
+				true,
 				$preparedAttr,
 			],
 
@@ -256,7 +257,19 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideNewRecentChange
 	 */
-	public function testNewRecentChange( array $expected, EntityChange $change, Title $target, array $preparedAttribs = null ) {
+	public function testNewRecentChange(
+		callable $expectedFactory,
+		EntityChange $change,
+		bool $otherPageAsTarget,
+		array $preparedAttribs = null
+	) {
+		$defaultPage = $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest', 7, 77, 210 );
+		$target = $otherPageAsTarget
+			? $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest-OtherPage', 7, 77, 210 )
+			: $defaultPage;
+
+		$expected = $expectedFactory( $defaultPage );
+
 		$factory = $this->newRecentChangeFactory();
 
 		$rc = $factory->newRecentChange( $change, $target, $preparedAttribs );
@@ -328,7 +341,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			}
 		}
 
-		$change = $this->newEntityChange( $action, new ItemId( 'Q17' ), $diff, $fields );
+		$change = self::newEntityChange( $action, new ItemId( 'Q17' ), $diff, $fields );
 		$change->setMetadata( $metadata );
 
 		return $change;
@@ -356,7 +369,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedComment, $rc->getAttribute( 'rc_comment' ) );
 	}
 
-	private function makeItemDiff( array $from, array $to ) {
+	private static function makeItemDiff( array $from, array $to ) {
 		$differ = new MapDiffer( true );
 		$diffOps = $differ->doDiff(
 			$from,
@@ -366,7 +379,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new ItemDiff( $diffOps );
 	}
 
-	public function provideNewRecentChange_summary() {
+	public static function provideNewRecentChange_summary() {
 		$emptyDiff = new ItemDiff();
 
 		// TODO: special cases:
@@ -405,7 +418,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'sitelink update' => [
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
-				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
+				self::makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
@@ -414,7 +427,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'sitelink added' => [
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
-				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
+				self::makeItemDiff( $linksEmpty, $linksDewikiBummy ),
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
@@ -423,7 +436,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			'sitelink removed' => [
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
-				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
+				self::makeItemDiff( $linksDewikiDummy, $linksEmpty ),
 				[ 'user_id' => 1 ],
 				[
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
@@ -488,7 +501,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$recentChangeFactory = $this->newRecentChangeFactoryHelper( $entitySourceDefinitions, $clientDomainDb, $centralIdLookup );
 
-		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), new ItemDiff(), [] );
+		$change = self::newEntityChange( 'change', new ItemId( 'Q17' ), new ItemDiff(), [] );
 		$change->setMetadata( $metadata );
 		$change->setField( 'user_id', $repoUserId );
 

@@ -23,14 +23,14 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/** @var array */
-	private $propertiesAndTypes = [
+	private static $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',
 		'P1337' => 'percentage',
 		'P9001' => 'positive whole number',
 	];
 
-	public function getDataTypeForPropertyProvider() {
+	public static function getDataTypeForPropertyProvider() {
 		$argLists = [];
 
 		$emptyInfoLookup = new MockPropertyInfoLookup();
@@ -39,7 +39,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup = new MockRepository();
 		$propertyDataTypeLookup = new EntityRetrievingDataTypeLookup( $entityLookup );
 
-		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
+		foreach ( self::$propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$id = new NumericPropertyId( $propertyId );
 
 			// register property info

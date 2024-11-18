@@ -248,7 +248,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 		);
 	}
 
-	public function modifiedSitelinksProvider(): Generator {
+	public static function modifiedSitelinksProvider(): Generator {
 		$originalSitelinks = [
 			TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0] => [ 'title' => 'Potato', 'badges' => [] ],
 			TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[1] => [ 'title' => 'Kartoffel', 'badges' => [] ],

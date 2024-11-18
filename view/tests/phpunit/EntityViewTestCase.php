@@ -6,7 +6,6 @@ use MediaWikiTestCaseTrait;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\View\EntityView;
 
 /**
  * @covers \Wikibase\View\EntityView
@@ -27,7 +26,7 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return EntityDocument
 	 */
-	abstract protected function makeEntity( EntityId $id, array $statements = [] );
+	abstract protected static function makeEntity( EntityId $id, array $statements = [] );
 
 	/**
 	 * Generates a prefixed entity ID based on a numeric ID.
@@ -36,18 +35,18 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return EntityId
 	 */
-	abstract protected function makeEntityId( $numericId );
+	abstract protected static function makeEntityId( $numericId );
 
 	/**
 	 * @param Statement[] $statements
 	 *
 	 * @return EntityDocument
 	 */
-	protected function newEntityForStatements( array $statements ) {
+	protected static function newEntityForStatements( array $statements ) {
 		static $revId = 1234;
 		$revId++;
 
-		$entity = $this->makeEntity( $this->makeEntityId( $revId ), $statements );
+		$entity = static::makeEntity( static::makeEntityId( $revId ), $statements );
 
 		return $entity;
 	}
@@ -56,11 +55,12 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideTestGetHtml
 	 */
 	public function testGetHtml(
-		EntityView $view,
+		callable $viewFactory,
 		EntityDocument $entity,
 		$regexp,
 		$revision = null
 	) {
+		$view = $viewFactory( $this );
 		$output = $view->getContent( $entity, $revision );
 
 		$this->assertSame( [], $output->getPlaceholders() );
@@ -73,6 +73,6 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( '<div id="toc"></div>', $html );
 	}
 
-	abstract public function provideTestGetHtml();
+	abstract public static function provideTestGetHtml();
 
 }

@@ -80,7 +80,7 @@ class PropertySerializerTest extends DispatchableSerializerTestCase {
 		);
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		return [
 			[
 				Property::newFromType( 'string' ),
@@ -88,7 +88,7 @@ class PropertySerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -102,7 +102,7 @@ class PropertySerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		$property = Property::newFromType( 'string' );
 
 		$provider = [

@@ -57,7 +57,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		return $db;
 	}
 
-	private function getTestItems() {
+	private static function getTestItems() {
 		$item0 = new Item( new ItemId( 'Q10' ) );
 		$item0->setLabel( 'en', 'kittens' );
 
@@ -74,8 +74,8 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/** @see testGetMatchingTerms */
-	public function provideGetMatchingTerms() {
-		[ $item0, $item1, $item2 ] = $this->getTestItems();
+	public static function provideGetMatchingTerms() {
+		[ $item0, $item1, $item2 ] = self::getTestItems();
 
 		yield 'EXACT MATCH not prefix, case sensitive' => [
 			'entities' => [ $item0, $item1, $item2 ],

@@ -62,7 +62,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public function sitelinkValidationErrorProvider(): \Generator {
+	public static function sitelinkValidationErrorProvider(): \Generator {
 		yield 'missing title' => [
 			UseCaseError::newMissingField( '/sitelink', 'title' ),
 			new ValidationError(

@@ -172,7 +172,7 @@ class RemoveStatementTest extends TestCase {
 		}
 	}
 
-	public function provideSubjectIds(): Generator {
+	public static function provideSubjectIds(): Generator {
 		yield 'item id' => [ new ItemId( 'Q123' ) ];
 		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}

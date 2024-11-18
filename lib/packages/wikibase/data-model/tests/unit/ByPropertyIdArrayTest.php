@@ -34,7 +34,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenNull_constructorAssumesEmptyArray() {
 		$indexedArray = new ByPropertyIdArray( null );
 
-		$this->assertSame( 0, $indexedArray->count() );
+		self::assertSame( 0, $indexedArray->count() );
 	}
 
 	public function testGivenNonTraversableObject_constructorDoesNotCastObjectToArray() {
@@ -59,7 +59,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		// constructed from an object." This test makes sure it was not constructed from an object.
 		$byPropertyIdArray->append( $statement2 );
 
-		$this->assertCount( 2, $byPropertyIdArray );
+		self::assertCount( 2, $byPropertyIdArray );
 	}
 
 	/**
@@ -142,7 +142,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 
 		$indexedArray->buildIndex();
 
-		$this->assertEquals(
+		self::assertEquals(
 			array_values( $expected ),
 			array_values( $indexedArray->getPropertyIds() )
 		);
@@ -170,11 +170,11 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		foreach ( $ids as $id ) {
 			foreach ( $indexedArray->getByPropertyId( $id ) as $obtainedObject ) {
 				$allObtainedObjects[] = $obtainedObject;
-				$this->assertEquals( $id, $obtainedObject->getPropertyId() );
+				self::assertEquals( $id, $obtainedObject->getPropertyId() );
 			}
 		}
 
-		$this->assertEquals(
+		self::assertEquals(
 			array_values( $objects ),
 			array_values( $allObtainedObjects )
 		);
@@ -194,15 +194,15 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$removeObject->invokeArgs( $indexedArray, [ $objects[0] ] );
 		$removeObject->invokeArgs( $indexedArray, [ $objects[$lastIndex] ] );
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$objects[0], $indexedArray->getByPropertyId( $objects[0]->getPropertyId() )
 		);
 
-		$this->assertNotContains( $objects[$lastIndex],
+		self::assertNotContains( $objects[$lastIndex],
 			$indexedArray->getByPropertyId( $objects[1]->getPropertyId() ) );
 
-		$this->assertNotContains( $objects[0], $indexedArray->toFlatArray() );
-		$this->assertNotContains( $objects[$lastIndex], $indexedArray->toFlatArray() );
+		self::assertNotContains( $objects[0], $indexedArray->toFlatArray() );
+		self::assertNotContains( $objects[$lastIndex], $indexedArray->toFlatArray() );
 	}
 
 	public function testGetByNotSetIdThrowsException() {
@@ -244,7 +244,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 			$indicesDestination[$indexedArray->getFlatArrayIndexOfObject( $object )] = $object;
 		}
 
-		$this->assertEquals( $indicesSource, $indicesDestination );
+		self::assertEquals( $indicesSource, $indicesDestination );
 	}
 
 	/**
@@ -254,11 +254,11 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$indexedArray = new ByPropertyIdArray( $objects );
 		$indexedArray->buildIndex();
 
-		$this->assertEquals( $objects, $indexedArray->toFlatArray() );
+		self::assertEquals( $objects, $indexedArray->toFlatArray() );
 	}
 
-	public function moveProvider() {
-		$c = $this->statementsProvider();
+	public static function moveProvider() {
+		$c = self::statementsProvider();
 		$argLists = [];
 
 		$argLists[] = [ $c, $c[0], 0, $c ];
@@ -333,11 +333,11 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 			$reindexedArray[] = $o;
 		}
 
-		$this->assertEquals( $objectsDestination, $reindexedArray );
+		self::assertEquals( $objectsDestination, $reindexedArray );
 	}
 
 	public function testMoveThrowingOutOfBoundsExceptionIfObjectNotPresent() {
-		$statements = $this->statementsProvider();
+		$statements = self::statementsProvider();
 		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
@@ -350,7 +350,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testMoveThrowingOutOfBoundsExceptionOnInvalidIndex() {
-		$statements = $this->statementsProvider();
+		$statements = self::statementsProvider();
 		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
@@ -359,8 +359,8 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$indexedArray->moveObjectToIndex( $statements[0], 9999 );
 	}
 
-	public function addProvider() {
-		$c = $this->statementsProvider();
+	public static function addProvider() {
+		$c = self::statementsProvider();
 
 		$argLists = [];
 
@@ -404,7 +404,7 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 
 		$indexedArray->addObjectAtIndex( $object, $index );
 
-		$this->assertEquals( $objectsDestination, $indexedArray->toFlatArray() );
+		self::assertEquals( $objectsDestination, $indexedArray->toFlatArray() );
 	}
 
 }

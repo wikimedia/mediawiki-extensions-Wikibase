@@ -58,7 +58,7 @@ class CurrentSiteModuleTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( 'mw.config.set({"wbCurrentSiteDetails":' . $expected . '});', $result );
 	}
 
-	public function provideScriptDetails() {
+	public static function provideScriptDetails() {
 		$site1 = new MediaWikiSite();
 		$site1->setGlobalId( 'testSiteID' );
 		$site1->setGroup( 'theSiteGroup' );
@@ -124,7 +124,7 @@ class CurrentSiteModuleTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( $expected, $script );
 	}
 
-	public function provideSettingsPairs() {
+	public static function provideSettingsPairs() {
 		yield 'Repo only' => [
 			null,
 			new SettingsArray( [

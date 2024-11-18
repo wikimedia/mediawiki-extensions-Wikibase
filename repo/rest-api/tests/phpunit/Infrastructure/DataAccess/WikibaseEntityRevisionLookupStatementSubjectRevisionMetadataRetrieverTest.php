@@ -75,7 +75,7 @@ class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetrieverTest 
 		$this->assertFalse( $result->subjectExists() );
 	}
 
-	public function provideStatementId(): Generator {
+	public static function provideStatementId(): Generator {
 		$guidPart = 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		yield 'statement on an item' => [ new StatementGuid( new ItemId( 'Q123' ), $guidPart ) ];
 		yield 'statement on a property' => [ new StatementGuid( new NumericPropertyId( 'P123' ), $guidPart ) ];

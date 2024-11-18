@@ -204,7 +204,7 @@ class PatchedItemValidatorTest extends TestCase {
 		}
 	}
 
-	public function topLevelValidationProvider(): Generator {
+	public static function topLevelValidationProvider(): Generator {
 
 		yield 'invalid field' => [
 			[
@@ -341,13 +341,13 @@ class PatchedItemValidatorTest extends TestCase {
 		}
 	}
 
-	public function labelsValidationErrorProvider(): Generator {
+	public static function labelsValidationErrorProvider(): Generator {
 		$mockSyntaxValidator = function( self $test ) {
-			$test->labelsSyntaxValidator = $this->createMock( LabelsSyntaxValidator::class );
+			$test->labelsSyntaxValidator = $test->createMock( LabelsSyntaxValidator::class );
 			return $test->labelsSyntaxValidator;
 		};
 		$mockContentsValidator = function( self $test ) {
-			$test->labelsContentsValidator = $this->createMock( ItemLabelsContentsValidator::class );
+			$test->labelsContentsValidator = $test->createMock( ItemLabelsContentsValidator::class );
 			return $test->labelsContentsValidator;
 		};
 
@@ -458,13 +458,13 @@ class PatchedItemValidatorTest extends TestCase {
 		];
 	}
 
-	public function descriptionsValidationErrorProvider(): Generator {
+	public static function descriptionsValidationErrorProvider(): Generator {
 		$mockSyntaxValidator = function ( self $test ) {
-			$test->descriptionsSyntaxValidator = $this->createMock( DescriptionsSyntaxValidator::class );
+			$test->descriptionsSyntaxValidator = $test->createMock( DescriptionsSyntaxValidator::class );
 			return $test->descriptionsSyntaxValidator;
 		};
 		$mockContentsValidator = function ( self $test ) {
-			$test->descriptionsContentsValidator = $this->createMock( ItemDescriptionsContentsValidator::class );
+			$test->descriptionsContentsValidator = $test->createMock( ItemDescriptionsContentsValidator::class );
 			return $test->descriptionsContentsValidator;
 		};
 
@@ -601,7 +601,7 @@ class PatchedItemValidatorTest extends TestCase {
 		}
 	}
 
-	public function aliasesValidationErrorProvider(): Generator {
+	public static function aliasesValidationErrorProvider(): Generator {
 		yield 'invalid aliases - sequential array' => [
 			[ 'not', 'an', 'associative', 'array' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
@@ -688,7 +688,7 @@ class PatchedItemValidatorTest extends TestCase {
 		}
 	}
 
-	public function providePatchInvalidStatements(): Generator {
+	public static function providePatchInvalidStatements(): Generator {
 
 		yield 'statements not an associative array' => [
 			[ 1, 2, 3 ],
@@ -915,7 +915,7 @@ class PatchedItemValidatorTest extends TestCase {
 		) );
 	}
 
-	public function modifiedSitelinksProvider(): Generator {
+	public static function modifiedSitelinksProvider(): Generator {
 		$originalSitelinks = new Sitelinks(
 			new SitelinkReadModel(
 				TestValidatingRequestDeserializer::ALLOWED_SITE_IDS[0],

@@ -58,7 +58,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTestCase {
 		);
 	}
 
-	public function deserializableProvider() {
+	public static function deserializableProvider() {
 		return [
 			[
 				[
@@ -82,7 +82,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -100,7 +100,7 @@ class StatementDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		$serializations = [];
 
 		$serializations[] = [

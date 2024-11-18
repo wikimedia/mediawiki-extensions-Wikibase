@@ -121,7 +121,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return TermIndexEntry
 	 */
-	private function newInstance( array $extraFields = [] ) {
+	private static function newInstance( array $extraFields = [] ) {
 		return new TermIndexEntry( $extraFields + [
 				'entityId' => new ItemId( 'Q23' ),
 				'termType' => TermIndexEntry::TYPE_LABEL,
@@ -130,8 +130,8 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 			] );
 	}
 
-	public function provideCompare() {
-		$term = $this->newInstance();
+	public static function provideCompare() {
+		$term = self::newInstance();
 
 		return [
 			'the same object' => [
@@ -146,22 +146,22 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 			],
 			'other text' => [
 				$term,
-				$this->newInstance( [ 'termText' => 'bar' ] ),
+				self::newInstance( [ 'termText' => 'bar' ] ),
 				false,
 			],
 			'other entity id' => [
 				$term,
-				$this->newInstance( [ 'entityId' => new NumericPropertyId( 'P11' ) ] ),
+				self::newInstance( [ 'entityId' => new NumericPropertyId( 'P11' ) ] ),
 				false,
 			],
 			'other language' => [
 				$term,
-				$this->newInstance( [ 'termLanguage' => 'fr' ] ),
+				self::newInstance( [ 'termLanguage' => 'fr' ] ),
 				false,
 			],
 			'other term type' => [
 				$term,
-				$this->newInstance( [ 'termType' => TermIndexEntry::TYPE_DESCRIPTION ] ),
+				self::newInstance( [ 'termType' => TermIndexEntry::TYPE_DESCRIPTION ] ),
 				false,
 			],
 		];

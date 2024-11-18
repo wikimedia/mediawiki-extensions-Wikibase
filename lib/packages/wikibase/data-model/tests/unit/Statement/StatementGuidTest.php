@@ -70,10 +70,10 @@ class StatementGuidTest extends TestCase {
 		];
 	}
 
-	public function provideStatementGuids(): array {
+	public static function provideStatementGuids(): array {
 		$argLists = [];
 
-		foreach ( $this->provideValidConstructionData() as $data ) {
+		foreach ( self::provideValidConstructionData() as $data ) {
 			$argLists[] = [ new StatementGuid( ...$data ) ];
 		}
 

@@ -20,25 +20,25 @@ use Wikimedia\Assert\PostconditionException;
  */
 class ServiceBySourceAndTypeDispatcherTest extends TestCase {
 
-	public function provideTestConstruction() {
+	public static function provideTestConstruction() {
 		yield [ LogicException::class,
 			stdClass::class,
 			[] ];
 		yield [ false,
 			stdClass::class,
-			[ 'fooSource' => [ 'barType' => $this->getSomeServiceReturningCallback() ] ] ];
+			[ 'fooSource' => [ 'barType' => self::getSomeServiceReturningCallback() ] ] ];
 		yield [ AssertionException::class,
 			stdClass::class,
-			[ $this->getSomeServiceReturningCallback() ] ];
+			[ self::getSomeServiceReturningCallback() ] ];
 		yield [ AssertionException::class,
 			stdClass::class,
-			[ 'fooSource' => $this->getSomeServiceReturningCallback() ] ];
+			[ 'fooSource' => self::getSomeServiceReturningCallback() ] ];
 		yield [ AssertionException::class,
 			stdClass::class,
 			[ null ] ];
 	}
 
-	private function getSomeServiceReturningCallback( $fakeServiceToReturn = null ) {
+	private static function getSomeServiceReturningCallback( $fakeServiceToReturn = null ) {
 		return function () use ( $fakeServiceToReturn ) {
 			return $fakeServiceToReturn ?? new stdClass();
 		};
@@ -60,7 +60,7 @@ class ServiceBySourceAndTypeDispatcherTest extends TestCase {
 		$typeService = new stdClass();
 
 		$dispatcher = new ServiceBySourceAndTypeDispatcher(
-			stdClass::class, [ 'sooSource' => [ 'fooType' => $this->getSomeServiceReturningCallback( $typeService ) ] ]
+			stdClass::class, [ 'sooSource' => [ 'fooType' => self::getSomeServiceReturningCallback( $typeService ) ] ]
 		);
 
 		$dispatchedService = $dispatcher->getServiceForSourceAndType( 'sooSource', 'fooType' );
@@ -70,7 +70,7 @@ class ServiceBySourceAndTypeDispatcherTest extends TestCase {
 	public function testServiceCachesInstances() {
 		$dispatcher = new ServiceBySourceAndTypeDispatcher(
 			stdClass::class,
-			[ 'sooSource' => [ 'fooType' => $this->getSomeServiceReturningCallback() ] ]
+			[ 'sooSource' => [ 'fooType' => self::getSomeServiceReturningCallback() ] ]
 		);
 
 		$dispatchedServiceOne = $dispatcher->getServiceForSourceAndType( 'sooSource', 'fooType' );
@@ -81,7 +81,7 @@ class ServiceBySourceAndTypeDispatcherTest extends TestCase {
 	public function testValidatesTypeAfterDispatch() {
 		$dispatcher = new ServiceBySourceAndTypeDispatcher(
 			EntityUrlLookup::class,
-			[ 'catSource' => [ 'fooType' => $this->getSomeServiceReturningCallback() ] ]
+			[ 'catSource' => [ 'fooType' => self::getSomeServiceReturningCallback() ] ]
 		);
 
 		$this->expectException( PostconditionException::class );

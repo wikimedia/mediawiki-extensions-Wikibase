@@ -32,7 +32,7 @@ use Wikibase\Lib\Tests\MockRepository;
 class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 
 	private function getChangeRunCoalescer() {
-		$entityRevisionLookup = $this->getEntityRevisionLookup();
+		$entityRevisionLookup = self::getEntityRevisionLookup();
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		$coalescer = new ChangeRunCoalescer(
@@ -48,7 +48,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityRevisionLookup
 	 */
-	private function getEntityRevisionLookup() {
+	private static function getEntityRevisionLookup() {
 		$repo = new MockRepository();
 
 		$offsets = [ 'Q1' => 1100, 'Q2' => 1200 ];
@@ -92,7 +92,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityChange
 	 */
-	private function makeChange( array $values ) {
+	private static function makeChange( array $values ) {
 		if ( !isset( $values['info'] ) ) {
 			$values['info'] = [];
 		}
@@ -125,7 +125,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 			$values['info']['metadata']['comment'] = str_replace( '~', '-', $values['type'] );
 		}
 
-		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
+		$diff = self::makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
 		$values['info'] = json_encode( $values['info'] );
 
 		if ( $values['type'] === 'wikibase-item~add' || $values['type'] === 'wikibase-item~update' ) {
@@ -141,11 +141,11 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		return $change;
 	}
 
-	private function combineChanges( EntityChange $first, EntityChange $last ) {
+	private static function combineChanges( EntityChange $first, EntityChange $last ) {
 		$firstmeta = $first->getMetadata();
 		$lastmeta = $last->getMetadata();
 
-		return $this->makeChange( [
+		return self::makeChange( [
 			'id' => null,
 			'type' => $first->getField( 'type' ), // because the first change has no parent
 			'time' => $last->getField( 'time' ), // last change's timestamp
@@ -162,8 +162,8 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	private function makeDiff( $objectId, $revA, $revB ) {
-		$lookup = $this->getEntityRevisionLookup();
+	private static function makeDiff( $objectId, $revA, $revB ) {
+		$lookup = self::getEntityRevisionLookup();
 
 		$itemId = new ItemId( $objectId );
 
@@ -201,11 +201,11 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideCoalesceChanges() {
+	public static function provideCoalesceChanges() {
 		$id = 0;
 
 		// create with a label and site link set
-		$create11 = $this->makeChange( [
+		$create11 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~add',
 			'time' => '20130101010101',
@@ -215,7 +215,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// set a label
-		$update11 = $this->makeChange( [
+		$update11 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020202',
@@ -226,7 +226,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// set another label
-		$anotherUpdate11 = $this->makeChange( [
+		$anotherUpdate11 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020203',
@@ -237,7 +237,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// set another label, by another user
-		$anotherUpdate21 = $this->makeChange( [
+		$anotherUpdate21 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020203',
@@ -248,7 +248,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// change link to other wiki
-		$update11XLink = $this->makeChange( [
+		$update11XLink = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130101020304',
@@ -259,7 +259,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// change link to other wiki
-		$update11Badge = $this->makeChange( [
+		$update11Badge = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130101020305',
@@ -270,7 +270,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// change link to local wiki
-		$update11Link = $this->makeChange( [
+		$update11Link = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102030407',
@@ -281,7 +281,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// delete
-		$delete11 = $this->makeChange( [
+		$delete11 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~remove',
 			'time' => '20130102030409',
@@ -292,7 +292,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// set a label
-		$update12 = $this->makeChange( [
+		$update12 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020102',
@@ -303,7 +303,7 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		// set another label
-		$anotherUpdate12 = $this->makeChange( [
+		$anotherUpdate12 = self::makeChange( [
 			'id' => ++$id,
 			'type' => 'wikibase-item~update',
 			'time' => '20130102020303',
@@ -326,12 +326,12 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 
 			'simple run' => [
 				[ $update11, $anotherUpdate11 ], // $changes
-				[ $this->combineChanges( $update11, $anotherUpdate11 ) ], // $expected
+				[ self::combineChanges( $update11, $anotherUpdate11 ) ], // $expected
 			],
 
 			'long run' => [ // create counts as update, delete doesn't
 				[ $create11, $update11, $anotherUpdate11 ], // $changes
-				[ $this->combineChanges( $create11, $anotherUpdate11 ) ], // $expected
+				[ self::combineChanges( $create11, $anotherUpdate11 ) ], // $expected
 			],
 
 			'different items' => [
@@ -352,8 +352,8 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 			'mingled' => [
 				[ $update12, $update11, $anotherUpdate11, $anotherUpdate12 ], // $changes
 				[ // result is sorted by timestamp
-					$this->combineChanges( $update11, $anotherUpdate11 ),
-					$this->combineChanges( $update12, $anotherUpdate12 ),
+					self::combineChanges( $update11, $anotherUpdate11 ),
+					self::combineChanges( $update12, $anotherUpdate12 ),
 				], // $expected
 			],
 
@@ -369,12 +369,12 @@ class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 
 			'local link badge change' => [
 				[ $update11, $update11Badge ], // $changes
-				[ $this->combineChanges( $update11, $update11Badge ) ], // $expected
+				[ self::combineChanges( $update11, $update11Badge ) ], // $expected
 			],
 
 			'other link merges' => [
 				[ $update11, $update11XLink ], // $changes
-				[ $this->combineChanges( $update11, $update11XLink ) ], // $expected
+				[ self::combineChanges( $update11, $update11XLink ) ], // $expected
 			],
 		];
 	}

@@ -30,7 +30,7 @@ class SnakListSerializerTest extends DispatchableSerializerTestCase {
 		return new SnakListSerializer( $snakSerializerMock, $useObjectsForEmptyMaps );
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		return [
 			[
 				new SnakList(),
@@ -43,7 +43,7 @@ class SnakListSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -57,7 +57,7 @@ class SnakListSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		return [
 			[
 				[],

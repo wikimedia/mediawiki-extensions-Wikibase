@@ -23,7 +23,7 @@ class ConvertArrayObjectToArrayTest extends TestCase {
 		$this->assertSame( $expectedOutput, ( new ConvertArrayObjectsToArray() )->execute( $serialization ) );
 	}
 
-	public function provideSerializationAndExpectedOutput(): Generator {
+	public static function provideSerializationAndExpectedOutput(): Generator {
 		yield 'empty ArrayObject' => [ new ArrayObject(), [] ];
 		yield 'empty array' => [ [], [] ];
 		yield 'sequential ArrayObject' => [ new ArrayObject( [ 'a', 'b', 'c' ] ), [ 'a', 'b', 'c' ] ];

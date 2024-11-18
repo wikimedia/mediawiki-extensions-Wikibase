@@ -56,7 +56,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		);
 	}
 
-	public function deserializableProvider(): array {
+	public static function deserializableProvider(): array {
 		return [
 			[
 				[
@@ -83,7 +83,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function nonDeserializableProvider(): array {
+	public static function nonDeserializableProvider(): array {
 		return [
 			[
 				42,
@@ -104,7 +104,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function deserializationProvider(): array {
+	public static function deserializationProvider(): array {
 		return [
 			[
 				new PropertyNoValueSnak( 42 ),
@@ -123,7 +123,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 			],
 			[
 				new PropertyValueSnak( 42, new StringValue( 'hax' ) ),
-				$this->newStringValueSnakSerialization( self::STRING_PROPERTY_ID, 'hax' ),
+				self::newStringValueSnakSerialization( self::STRING_PROPERTY_ID, 'hax' ),
 			],
 			[
 				new PropertyNoValueSnak( 42 ),
@@ -292,7 +292,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTestCase {
 		);
 	}
 
-	private function newStringValueSnakSerialization( string $propertyId, string $value ): array {
+	private static function newStringValueSnakSerialization( string $propertyId, string $value ): array {
 		return [
 			'snaktype' => 'value',
 			'property' => $propertyId,

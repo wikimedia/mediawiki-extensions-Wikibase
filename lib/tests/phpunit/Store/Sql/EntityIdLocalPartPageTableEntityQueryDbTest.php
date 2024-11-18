@@ -98,24 +98,24 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 		return $id;
 	}
 
-	public function provideSelectRows() {
+	public static function provideSelectRows() {
 		return [
 			[
 				[],
 				null,
-				[ $this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
+				fn ( self $self ) => [ $self->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
 				[ 'LocalPartOne' => (object)[ 'page_title' => 'LocalPartOne' ] ],
 			],
 			[
 				[],
 				null,
-				[ $this->getMockEntityId( 'entityTypeOne', 'localPartNone' ) ],
+				fn ( self $self ) => [ $self->getMockEntityId( 'entityTypeOne', 'localPartNone' ) ],
 				[],
 			],
 			[
 				[ 'page_namespace' ],
 				null,
-				[ $this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
+				fn ( self $self ) => [ $self->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ) ],
 				[
 					'LocalPartOne' => (object)[
 						'page_title' => 'LocalPartOne',
@@ -126,7 +126,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				[ 'page_namespace' ],
 				null,
-				[ $this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ) ],
+				fn ( self $self ) => [ $self->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ) ],
 				[
 					'localPartTwo' => (object)[
 						'page_title' => 'localPartTwo',
@@ -137,9 +137,9 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				[ 'page_namespace' ],
 				null,
-				[
-					$this->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ),
-					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
+				fn ( self $self ) => [
+					$self->getMockEntityId( 'entityTypeOne', 'LocalPartOne' ),
+					$self->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
 				],
 				[
 					'LocalPartOne' => (object)[
@@ -155,8 +155,8 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 			[
 				[ 'page_namespace' ],
 				[ 'rev_page=page_id', 'rev_id' => 220 ],
-				[
-					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
+				fn ( self $self ) => [
+					$self->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
 				],
 				[],
 			],
@@ -166,7 +166,8 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	/**
 	 * @dataProvider provideSelectRows
 	 */
-	public function testSelectRows( $fields, $revisionJoinConds, $entityIds, $expected ) {
+	public function testSelectRows( $fields, $revisionJoinConds, callable $entityIdsFactory, $expected ) {
+		$entityIds = $entityIdsFactory( $this );
 		$query = $this->getQuery();
 		$rows = $query->selectRows(
 			$fields,

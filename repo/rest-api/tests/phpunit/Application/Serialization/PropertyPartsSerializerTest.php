@@ -113,17 +113,17 @@ class PropertyPartsSerializerTest extends TestCase {
 		$this->assertEqualsCanonicalizing( $fields, $serializationFields );
 	}
 
-	public function propertyPartsFieldsProvider(): Generator {
+	public static function propertyPartsFieldsProvider(): Generator {
 		yield [
-			$this->newPropertyPartsBuilderWithSomeId( [] )->build(),
+			self::newPropertyPartsBuilderWithSomeId( [] )->build(),
 			[ 'id' ],
 		];
 		yield [
-			$this->newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_TYPE ] )->build(),
+			self::newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_TYPE ] )->build(),
 			[ 'id', 'type' ],
 		];
 		yield [
-			$this->newPropertyPartsBuilderWithSomeId(
+			self::newPropertyPartsBuilderWithSomeId(
 				[ PropertyParts::FIELD_LABELS, PropertyParts::FIELD_DESCRIPTIONS, PropertyParts::FIELD_ALIASES ]
 			)
 				->setLabels( new Labels() )
@@ -133,13 +133,13 @@ class PropertyPartsSerializerTest extends TestCase {
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
 		yield [
-			$this->newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_STATEMENTS ] )
+			self::newPropertyPartsBuilderWithSomeId( [ PropertyParts::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
 			[ 'id', 'statements' ],
 		];
 		yield [
-			$this->newPropertyPartsBuilderWithSomeId( PropertyParts::VALID_FIELDS )
+			self::newPropertyPartsBuilderWithSomeId( PropertyParts::VALID_FIELDS )
 				->setDataType( 'string' )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
@@ -159,7 +159,7 @@ class PropertyPartsSerializerTest extends TestCase {
 		);
 	}
 
-	private function newPropertyPartsBuilderWithSomeId( array $requestedFields ): PropertyPartsBuilder {
+	private static function newPropertyPartsBuilderWithSomeId( array $requestedFields ): PropertyPartsBuilder {
 		return new PropertyPartsBuilder( new NumericPropertyId( 'P666' ), $requestedFields );
 	}
 }

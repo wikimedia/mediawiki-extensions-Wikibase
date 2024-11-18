@@ -20,7 +20,7 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 	/**
 	 * @var string[]
 	 */
-	private $propertiesAndTypes = [
+	private static $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',
 		'P1337' => 'percentage',
@@ -30,10 +30,10 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 	/**
 	 * @return EntityLookup
 	 */
-	private function newEntityLookup() {
+	private static function newEntityLookup() {
 		$lookup = new InMemoryEntityLookup();
 
-		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
+		foreach ( self::$propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$property = Property::newFromType( $dataTypeId );
 			$property->setId( new NumericPropertyId( $propertyId ) );
 
@@ -43,10 +43,10 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 		return $lookup;
 	}
 
-	public function getDataTypeForPropertyProvider() {
+	public static function getDataTypeForPropertyProvider() {
 		$argLists = [];
 
-		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
+		foreach ( self::$propertiesAndTypes as $propertyId => $dataTypeId ) {
 			$argLists[] = [
 				new NumericPropertyId( $propertyId ),
 				$dataTypeId,
@@ -63,11 +63,11 @@ class EntityRetrievingDataTypeLookupTest extends TestCase {
 	 * @param string $expectedDataType
 	 */
 	public function testGetDataTypeForProperty( NumericPropertyId $propertyId, $expectedDataType ) {
-		$lookup = new EntityRetrievingDataTypeLookup( $this->newEntityLookup() );
+		$lookup = new EntityRetrievingDataTypeLookup( self::newEntityLookup() );
 
 		$actualDataType = $lookup->getDataTypeIdForProperty( $propertyId );
 
-		$this->assertSame( $expectedDataType, $actualDataType );
+		self::assertSame( $expectedDataType, $actualDataType );
 	}
 
 	// TODO: tests for not found

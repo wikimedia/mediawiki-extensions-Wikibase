@@ -141,7 +141,9 @@ class EntityUpdaterTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityAndEditMetadata
 	 */
-	public function testUpdate( EntityDocument $entityToUpdate, EditMetadata $editMetadata ): void {
+	public function testUpdate( EntityDocument $entityToUpdate, callable $editMetadataFactory ): void {
+		$editMetadata = $editMetadataFactory( $this );
+
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
 		$expectedRevisionEntity = $entityToUpdate->copy();
@@ -183,10 +185,16 @@ class EntityUpdaterTest extends TestCase {
 		$this->assertSame( $expectedRevisionTimestamp, $entityRevision->getTimestamp() );
 	}
 
-	public function provideEntityAndEditMetadata(): Generator {
-		foreach ( $this->provideEntity() as $entityType => [ $entity ] ) {
-			yield "$entityType with bot edit" => [ $entity, new EditMetadata( [], true, $this->createStub( EditSummary::class ) ) ];
-			yield "$entityType with user edit" => [ $entity, new EditMetadata( [], false, $this->createStub( EditSummary::class ) ) ];
+	public static function provideEntityAndEditMetadata(): Generator {
+		foreach ( self::provideEntity() as $entityType => [ $entity ] ) {
+			yield "$entityType with bot edit" => [
+				$entity,
+				fn( self $self ) => new EditMetadata( [], true, $self->createStub( EditSummary::class ) ),
+			];
+			yield "$entityType with user edit" => [
+				$entity,
+				fn( self $self ) => new EditMetadata( [], false, $self->createStub( EditSummary::class ) ),
+			];
 		}
 	}
 
@@ -212,8 +220,8 @@ class EntityUpdaterTest extends TestCase {
 		}
 	}
 
-	public function errorStatusProvider(): Generator {
-		foreach ( $this->provideEntity() as $entityType => [ $entity ] ) {
+	public static function errorStatusProvider(): Generator {
+		foreach ( self::provideEntity() as $entityType => [ $entity ] ) {
 			yield "rate limit reached ($entityType)" => [
 				$entity,
 				EditEntityStatus::newFatal( 'actionthrottledtext' ),
@@ -285,7 +293,7 @@ class EntityUpdaterTest extends TestCase {
 		$this->newEntityUpdater()->create( $entity, $this->createStub( EditMetadata::class ) );
 	}
 
-	public function provideEntity(): Generator {
+	public static function provideEntity(): Generator {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$item = NewItem::withId( $itemId )

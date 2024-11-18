@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -34,18 +33,12 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider validatorProvider
-	 *
-	 * @param MockObject $singleTermValidator
-	 * @param mixed $validator
-	 * @param string $partialResultClass
-	 * @param callable $getValidationResult
 	 */
 	public function testValid(
-		MockObject $singleTermValidator,
-		$validator,
-		string $partialResultClass,
-		callable $getValidationResult
+		callable $dataFactory
 	): void {
+		[ $singleTermValidator, $validator, $partialResultClass, $getValidationResult ] = $dataFactory( $this );
+
 		$termsToValidate = new $partialResultClass( [
 			new Term( 'de', 'de term' ),
 			new Term( 'en', 'en term' ),
@@ -74,18 +67,12 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 
 	/**
 	 * @dataProvider validatorProvider
-	 *
-	 * @param MockObject $singleTermValidator
-	 * @param mixed $validator
-	 * @param string $partialResultClass
-	 * @param callable $getValidationResult
 	 */
 	public function testValidateSpecificLanguages(
-		MockObject $singleTermValidator,
-		$validator,
-		string $partialResultClass,
-		callable $getValidationResult
+		callable $dataFactory
 	): void {
+		[ $singleTermValidator, $validator, $partialResultClass, $getValidationResult ] = $dataFactory( $this );
+
 		$languagesToValidate = [ 'ar', 'en' ];
 		$inputTerms = new $partialResultClass( [
 			new Term( 'ar', 'ar term' ),
@@ -117,16 +104,13 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 	/**
 	 * @dataProvider validatorProvider
 	 *
-	 * @param MockObject $singleTermValidator
-	 * @param mixed $validator
-	 * @param string $partialResultClass
 	 * @throws Exception
 	 */
 	public function testInvalid(
-		MockObject $singleTermValidator,
-		$validator,
-		string $partialResultClass
+		callable $dataFactory
 	): void {
+		[ $singleTermValidator, $validator, $partialResultClass ] = $dataFactory( $this );
+
 		$termsToValidate = new $partialResultClass( [ new Term( 'de', 'de term' ) ] );
 		$termsToCompareWith = new TermList();
 
@@ -136,41 +120,57 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 		$this->assertSame( $expectedValidationError, $validator->validate( $termsToValidate, $termsToCompareWith ) );
 	}
 
-	public function validatorProvider(): Generator {
-		$propertyLabelValidator = $this->createMock( PropertyLabelValidator::class );
-		$propertyLabelsContentsValidator = new PropertyLabelsContentsValidator( $propertyLabelValidator );
+	public static function validatorProvider(): Generator {
 		yield PropertyLabelsContentsValidator::class => [
-			$propertyLabelValidator,
-			$propertyLabelsContentsValidator,
-			PartiallyValidatedLabels::class,
-			fn() => $propertyLabelsContentsValidator->getValidatedLabels(),
+			function ( self $self ) {
+				$propertyLabelValidator = $self->createMock( PropertyLabelValidator::class );
+				$propertyLabelsContentsValidator = new PropertyLabelsContentsValidator( $propertyLabelValidator );
+				return [
+					$propertyLabelValidator,
+					$propertyLabelsContentsValidator,
+					PartiallyValidatedLabels::class,
+					fn() => $propertyLabelsContentsValidator->getValidatedLabels(),
+				];
+			},
 		];
 
-		$propertyDescriptionValidator = $this->createMock( PropertyDescriptionValidator::class );
-		$propertyDescriptionsContentsValidator = new PropertyDescriptionsContentsValidator( $propertyDescriptionValidator );
 		yield PropertyDescriptionsContentsValidator::class => [
-			$propertyDescriptionValidator,
-			$propertyDescriptionsContentsValidator,
-			PartiallyValidatedDescriptions::class,
-			fn() => $propertyDescriptionsContentsValidator->getValidatedDescriptions(),
+			function ( self $self ) {
+				$propertyDescriptionValidator = $self->createMock( PropertyDescriptionValidator::class );
+				$propertyDescriptionsContentsValidator = new PropertyDescriptionsContentsValidator( $propertyDescriptionValidator );
+				return [
+					$propertyDescriptionValidator,
+					$propertyDescriptionsContentsValidator,
+					PartiallyValidatedDescriptions::class,
+					fn() => $propertyDescriptionsContentsValidator->getValidatedDescriptions(),
+				];
+			},
 		];
 
-		$itemLabelValidator = $this->createMock( ItemLabelValidator::class );
-		$itemLabelsContentsValidator = new ItemLabelsContentsValidator( $itemLabelValidator );
 		yield ItemLabelsContentsValidator::class => [
-			$itemLabelValidator,
-			$itemLabelsContentsValidator,
-			PartiallyValidatedLabels::class,
-			fn() => $itemLabelsContentsValidator->getValidatedLabels(),
+			function ( self $self ) {
+				$itemLabelValidator = $self->createMock( ItemLabelValidator::class );
+				$itemLabelsContentsValidator = new ItemLabelsContentsValidator( $itemLabelValidator );
+				return [
+					$itemLabelValidator,
+					$itemLabelsContentsValidator,
+					PartiallyValidatedLabels::class,
+					fn() => $itemLabelsContentsValidator->getValidatedLabels(),
+				];
+			},
 		];
 
-		$itemDescriptionValidator = $this->createMock( ItemDescriptionValidator::class );
-		$itemDescriptionsContentsValidator = new ItemDescriptionsContentsValidator( $itemDescriptionValidator );
 		yield ItemDescriptionsContentsValidator::class => [
-			$itemDescriptionValidator,
-			$itemDescriptionsContentsValidator,
-			PartiallyValidatedDescriptions::class,
-			fn() => $itemDescriptionsContentsValidator->getValidatedDescriptions(),
+			function ( self $self ) {
+				$itemDescriptionValidator = $self->createMock( ItemDescriptionValidator::class );
+				$itemDescriptionsContentsValidator = new ItemDescriptionsContentsValidator( $itemDescriptionValidator );
+				return [
+					$itemDescriptionValidator,
+					$itemDescriptionsContentsValidator,
+					PartiallyValidatedDescriptions::class,
+					fn() => $itemDescriptionsContentsValidator->getValidatedDescriptions(),
+				];
+			},
 		];
 	}
 

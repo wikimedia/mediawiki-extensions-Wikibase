@@ -24,8 +24,8 @@ use Wikibase\DataModel\SiteLink;
  */
 class ItemDiffTest extends EntityDiffOldTestCase {
 
-	public function provideApplyData() {
-		$originalTests = $this->generateApplyData( Item::ENTITY_TYPE );
+	public static function provideApplyData() {
+		$originalTests = self::generateApplyData( Item::ENTITY_TYPE );
 		$tests = [];
 
 		// add link ------------------------------

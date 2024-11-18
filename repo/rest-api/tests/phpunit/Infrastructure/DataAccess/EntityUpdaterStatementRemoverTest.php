@@ -74,7 +74,7 @@ class EntityUpdaterStatementRemoverTest extends TestCase {
 		$this->newStatementRemover()->remove( $statementId, $editMetaData );
 	}
 
-	public function provideStatementIdAndEntityWithStatement(): Generator {
+	public static function provideStatementIdAndEntityWithStatement(): Generator {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$statement = NewStatement::forProperty( 'P321' )
 			->withGuid( $statementId )

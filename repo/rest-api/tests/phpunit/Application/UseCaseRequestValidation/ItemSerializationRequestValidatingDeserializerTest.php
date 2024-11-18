@@ -77,7 +77,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidAliases(): Generator {
+	public static function provideInvalidAliases(): Generator {
 		yield 'invalid serialization - string' => [
 			UseCaseError::newInvalidValue( '/item/aliases' ),
 			[ 'aliases' => 'not an array' ],
@@ -196,7 +196,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public function itemValidationErrorProvider(): Generator {
+	public static function itemValidationErrorProvider(): Generator {
 		yield 'invalid field' => [
 			new ValidationError(
 				ItemValidator::CODE_INVALID_FIELD,
@@ -215,7 +215,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 	}
 
-	public function itemLabelsValidationErrorProvider(): Generator {
+	public static function itemLabelsValidationErrorProvider(): Generator {
 		$invalidLabels = [ 'not an associative array' ];
 		yield 'invalid labels' => [
 			new ValidationError(
@@ -317,7 +317,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 	}
 
-	public function itemDescriptionsValidationErrorProvider(): Generator {
+	public static function itemDescriptionsValidationErrorProvider(): Generator {
 		$invalidDescriptions = [ 'not a valid descriptions array' ];
 		yield 'invalid descriptions' => [
 			new ValidationError(
@@ -423,7 +423,7 @@ class ItemSerializationRequestValidatingDeserializerTest extends TestCase {
 		];
 	}
 
-	public function itemStatementsValidationErrorProvider(): Generator {
+	public static function itemStatementsValidationErrorProvider(): Generator {
 		$invalidStatements = [ 'not valid statements' ];
 		yield 'invalid statements array' => [
 			new ValidationError(

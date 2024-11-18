@@ -26,13 +26,13 @@ use Wikimedia\ObjectCache\WANObjectCache;
  */
 class TermStoreWriterFactoryTest extends TestCase {
 
-	public function provideTestCreateWriters() {
-		yield [ $this->getEntitySourceWithNoEntities(), 'newItemTermStoreWriter', false ];
-		yield [ $this->getEntitySourceWithNoEntities(), 'newPropertyTermStoreWriter', false ];
-		yield [ $this->getEntitySourceWithTypes( [ 'item' ] ), 'newItemTermStoreWriter', ItemTermStoreWriter::class ];
-		yield [ $this->getEntitySourceWithTypes( [ 'item' ] ), 'newPropertyTermStoreWriter', false ];
-		yield [ $this->getEntitySourceWithTypes( [ 'property' ] ), 'newItemTermStoreWriter', false ];
-		yield [ $this->getEntitySourceWithTypes( [ 'property' ] ), 'newPropertyTermStoreWriter', PropertyTermStoreWriter::class ];
+	public static function provideTestCreateWriters() {
+		yield [ self::getEntitySourceWithNoEntities(), 'newItemTermStoreWriter', false ];
+		yield [ self::getEntitySourceWithNoEntities(), 'newPropertyTermStoreWriter', false ];
+		yield [ self::getEntitySourceWithTypes( [ 'item' ] ), 'newItemTermStoreWriter', ItemTermStoreWriter::class ];
+		yield [ self::getEntitySourceWithTypes( [ 'item' ] ), 'newPropertyTermStoreWriter', false ];
+		yield [ self::getEntitySourceWithTypes( [ 'property' ] ), 'newItemTermStoreWriter', false ];
+		yield [ self::getEntitySourceWithTypes( [ 'property' ] ), 'newPropertyTermStoreWriter', PropertyTermStoreWriter::class ];
 	}
 
 	/**
@@ -65,11 +65,11 @@ class TermStoreWriterFactoryTest extends TestCase {
 		$this->assertInstanceOf( $expected, $result );
 	}
 
-	private function getEntitySourceWithNoEntities() {
+	private static function getEntitySourceWithNoEntities() {
 		return new DatabaseEntitySource( 'empty', false, [], '', '', '', '' );
 	}
 
-	private function getEntitySourceWithTypes( array $types ) {
+	private static function getEntitySourceWithTypes( array $types ) {
 		$entityTypeData = [];
 		foreach ( $types as $typeName ) {
 			$entityTypeData[$typeName] = [ 'namespaceId' => 1, 'slot' => SlotRecord::MAIN ];

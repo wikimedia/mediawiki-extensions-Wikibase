@@ -21,7 +21,7 @@ class SiteLinkSerializerTest extends DispatchableSerializerTestCase {
 		return new SiteLinkSerializer();
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		return [
 			[
 				new SiteLink( 'enwiki', 'Nyan Cat' ),
@@ -34,7 +34,7 @@ class SiteLinkSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -48,7 +48,7 @@ class SiteLinkSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		return [
 			[
 				[

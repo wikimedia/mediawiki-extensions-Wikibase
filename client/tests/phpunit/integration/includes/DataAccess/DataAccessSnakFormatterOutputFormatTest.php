@@ -105,7 +105,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$mockRepository->putEntity( $item );
 	}
 
-	private function getGlobalConceptBaseUriForUnits(): string {
+	private static function getGlobalConceptBaseUriForUnits(): string {
 		$itemSource = WikibaseClient::getItemSource();
 		return $itemSource->getConceptBaseUri();
 	}
@@ -116,8 +116,8 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 	 *
 	 * @return array[]
 	 */
-	private function getGenericSnaks() {
-		$conceptBaseUriForUnits = $this->getGlobalConceptBaseUriForUnits();
+	private static function getGenericSnaks() {
+		$conceptBaseUriForUnits = self::getGlobalConceptBaseUriForUnits();
 
 		$p4 = new NumericPropertyId( 'P4' );
 		$sampleUrl = 'https://www.wikidata.org/w/index.php?title=Q2013&action=history';
@@ -243,8 +243,8 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public function richWikitextSnakProvider() {
-		$genericSnaks = $this->getGenericSnaks();
+	public static function richWikitextSnakProvider() {
+		$genericSnaks = self::getGenericSnaks();
 		$namespacedFileName = Title::makeTitle( NS_FILE, 'A_file name.jpg' )->getPrefixedText();
 
 		$cases = [
@@ -315,7 +315,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public function escapedPlainTextSnakProvider() {
+	public static function escapedPlainTextSnakProvider() {
 		$cases = [
 			'monolingualtext' => [
 				'a &#91;&#91;b&#93;&#93; c',
@@ -361,7 +361,7 @@ class DataAccessSnakFormatterOutputFormatTest extends MediaWikiIntegrationTestCa
 			],
 		];
 
-		return $cases + $this->getGenericSnaks();
+		return $cases + self::getGenericSnaks();
 	}
 
 }

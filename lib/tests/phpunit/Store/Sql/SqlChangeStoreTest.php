@@ -43,8 +43,8 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		return new SqlChangeStore( $this->getRepoDomainDb() );
 	}
 
-	public function saveChangeInsertProvider() {
-		$factory = $this->getEntityChangeFactory();
+	public static function saveChangeInsertProvider() {
+		$factory = self::getEntityChangeFactory();
 
 		$time = wfTimestamp( TS_MW );
 
@@ -146,7 +146,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testSaveChange_update() {
-		$factory = $this->getEntityChangeFactory();
+		$factory = self::getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestampNow() );
 
@@ -178,7 +178,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDeleteChangesByChangeIds(): void {
-		$factory = $this->getEntityChangeFactory();
+		$factory = self::getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$store = $this->newSqlChangeStore();
 		$store->saveChange( $change );
@@ -191,7 +191,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 0, $rows, 'row count' );
 	}
 
-	private function getEntityChangeFactory() {
+	private static function getEntityChangeFactory() {
 		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
 			// Other types of entities will use EntityChange

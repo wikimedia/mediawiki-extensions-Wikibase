@@ -32,12 +32,10 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider handleProvider
-	 * @param string HTML $expected
-	 * @param IContextSource $context
-	 * @param EntityId|null $entityId
-	 * @param string $message
 	 */
-	public function testHandle( $expected, IContextSource $context, ?EntityId $entityId, $message ) {
+	public function testHandle( callable $expectedFactory, ?EntityId $entityId, string $message ) {
+		$context = $this->getContext();
+		$expected = $expectedFactory( $context );
 		$out = new OutputPage( $context );
 		$hookHandler = $this->newHookHandler( $entityId );
 		$editor = $this->getEditPage();
@@ -48,32 +46,36 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertContains( 'wikibase.client.action.edit.collapsibleFooter', $out->getModules() );
 	}
 
-	public function handleProvider() {
-		$context = $this->getContext();
-		$labeledLink = '<a href="https://www.wikidata.org/wiki/Q4" class="external">Berlin</a>';
-		$q5Link = '<a href="https://www.wikidata.org/wiki/Q5" class="external">Q5</a>';
-		$explanation = $context->msg( 'wikibase-pageinfo-entity-usage' )->escaped();
-		$header = '<div class="wikibase-entity-usage"><div class="wikibase-entityusage-explanation">';
-		$header .= "<p>$explanation\n</p></div>";
+	public static function handleProvider() {
+		$expectedEditFormText = function ( IContextSource $context, string $link ) {
+			$explanation = $context->msg( 'wikibase-pageinfo-entity-usage' )->escaped();
+			$header = '<div class="wikibase-entity-usage"><div class="wikibase-entityusage-explanation">';
+			$header .= "<p>$explanation\n</p></div>";
+			return "$header\n<ul><li>$link: Sitelink</li></ul></div>";
+		};
+
 		$cases = [];
 
 		$cases[] = [
-			"$header\n<ul><li>$labeledLink: Sitelink</li></ul></div>",
-			$context,
+			fn ( IContextSource $context ) => $expectedEditFormText(
+				$context,
+				'<a href="https://www.wikidata.org/wiki/Q4" class="external">Berlin</a>',
+			),
 			new ItemId( 'Q4' ),
 			'item id link',
 		];
 
 		$cases[] = [
-			'',
-			$context,
+			fn () => '',
 			null,
 			'page is not connected to an item',
 		];
 
 		$cases[] = [
-			"$header\n<ul><li>$q5Link: Sitelink</li></ul></div>",
-			$context,
+			fn ( IContextSource $context ) => $expectedEditFormText(
+				$context,
+				'<a href="https://www.wikidata.org/wiki/Q5" class="external">Q5</a>',
+			),
 			new ItemId( 'Q5' ),
 			'No label for Q5',
 		];

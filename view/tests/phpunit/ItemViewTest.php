@@ -37,7 +37,7 @@ class ItemViewTest extends EntityViewTestCase {
 	 *
 	 * @return Item
 	 */
-	protected function makeEntity( EntityId $id, array $statements = [] ) {
+	protected static function makeEntity( EntityId $id, array $statements = [] ) {
 		$item = new Item( $id );
 
 		$item->setLabel( 'en', "label:$id" );
@@ -55,17 +55,15 @@ class ItemViewTest extends EntityViewTestCase {
 	 *
 	 * @return ItemId
 	 */
-	protected function makeEntityId( $n ) {
+	protected static function makeEntityId( $n ) {
 		return new ItemId( "Q$n" );
 	}
 
-	public function provideTestGetHtml() {
-		$itemView = $this->newItemView();
-
+	public static function provideTestGetHtml() {
 		return [
 			[
-				$itemView,
-				$this->newEntityForStatements( [] ),
+				fn ( self $self ) => $self->newItemView(),
+				self::newEntityForStatements( [] ),
 				'/wb-item/',
 			],
 		];
@@ -75,7 +73,7 @@ class ItemViewTest extends EntityViewTestCase {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newItemView( $placeholders );
 
-		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ), 4711 );
+		$view = $itemView->getContent( self::makeEntity( self::makeEntityId( 42 ) ), 4711 );
 
 		$this->assertSame( $placeholders, $view->getPlaceholders() );
 	}

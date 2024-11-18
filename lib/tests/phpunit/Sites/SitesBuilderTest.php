@@ -34,9 +34,9 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedSiteList, $store->getSites() );
 	}
 
-	public function buildSitesProvider() {
-		$sitesData = $this->getSitesData();
-		$sites = $this->getSites( $sitesData );
+	public static function buildSitesProvider() {
+		$sitesData = self::getSitesData();
+		$sites = self::getSites( $sitesData );
 		$expectedSites = $sites;
 
 		foreach ( $expectedSites as $site ) {
@@ -74,7 +74,7 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $data;
 	}
 
-	private function getSitesData() {
+	private static function getSitesData() {
 		$sitesData = [
 			[
 				'siteid' => 'enwiki',
@@ -128,7 +128,7 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return MediaWikiSite[]
 	 */
-	private function getSites( array $sitesData ) {
+	private static function getSites( array $sitesData ) {
 		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {

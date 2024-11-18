@@ -79,7 +79,7 @@ class StatementSubjectRetrieverTest extends TestCase {
 		$this->assertNull( $this->newStatementSubjectRetriever()->getStatementSubject( $itemId ) );
 	}
 
-	public function provideSubjectAndSubjectId(): Generator {
+	public static function provideSubjectAndSubjectId(): Generator {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'c48c32c3-42b5-498f-9586-84608b88747c' );
 		$statement = NewStatement::forProperty( 'P123' )
@@ -102,7 +102,7 @@ class StatementSubjectRetrieverTest extends TestCase {
 		];
 	}
 
-	public function provideSubjectId(): Generator {
+	public static function provideSubjectId(): Generator {
 		yield 'Item ID' => [ new ItemId( 'Q123' ) ];
 		yield 'Property ID' => [ new NumericPropertyId( 'P123' ) ];
 	}

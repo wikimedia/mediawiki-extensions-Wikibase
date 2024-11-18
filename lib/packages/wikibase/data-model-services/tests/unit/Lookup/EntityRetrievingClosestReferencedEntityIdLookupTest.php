@@ -70,7 +70,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	 *
 	 * @return StatementList
 	 */
-	private function newReferencingStatementList( NumericPropertyId $via, array $to ) {
+	private static function newReferencingStatementList( NumericPropertyId $via, array $to ) {
 		$statementList = new StatementList();
 
 		foreach ( $to as $toId ) {
@@ -85,7 +85,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	/**
 	 * @return EntityLookup
 	 */
-	private function newReferencingEntityStructure() {
+	private static function newReferencingEntityStructure() {
 		// This returns the following entity structure (all entities linked by P599)
 		// Q1 -> Q5 -> Q599 -> Q1234
 		//   \             \
@@ -106,19 +106,19 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$lookup = new InMemoryEntityLookup();
 
 		$lookup->addEntity(
-			new Item( $q1, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q5, $q90 ] ) )
+			new Item( $q1, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q5, $q90 ] ) )
 		);
 		$lookup->addEntity(
-			new Item( $q5, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q599 ] ) )
+			new Item( $q5, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q599 ] ) )
 		);
 		$lookup->addEntity(
-			new Item( $q599, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q12, $q1234 ] ) )
+			new Item( $q599, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q12, $q1234 ] ) )
 		);
 		$lookup->addEntity(
-			new Item( $q12, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q404 ] ) )
+			new Item( $q12, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q404 ] ) )
 		);
 		$lookup->addEntity(
-			new Item( $q90, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q3 ] ) )
+			new Item( $q90, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q3 ] ) )
 		);
 		$lookup->addEntity( new Item( $q1234, null, null, null ) );
 		$lookup->addEntity( new Item( $q3, null, null, null ) );
@@ -129,7 +129,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	/**
 	 * @return EntityLookup
 	 */
-	private function newCircularReferencingEntityStructure() {
+	private static function newCircularReferencingEntityStructure() {
 		// This returns the following entity structure (all entities linked by P599)
 		// Q1 -> Q5 -> Q1 -> Q5 -> …
 		//   \           \
@@ -143,10 +143,10 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$lookup = new InMemoryEntityLookup();
 
 		$lookup->addEntity(
-			new Item( $q1, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q5, $q90 ] ) )
+			new Item( $q1, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q5, $q90 ] ) )
 		);
 		$lookup->addEntity(
-			new Item( $q5, null, null, $this->newReferencingStatementList( $pSubclassOf, [ $q1 ] ) )
+			new Item( $q5, null, null, self::newReferencingStatementList( $pSubclassOf, [ $q1 ] ) )
 		);
 		$lookup->addEntity(
 			new Item( $q90, null, null, null )
@@ -155,7 +155,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		return $lookup;
 	}
 
-	public function provideGetReferencedEntityIdNoError() {
+	public static function provideGetReferencedEntityIdNoError() {
 		$pSubclassOf = new NumericPropertyId( 'P599' );
 		$q1 = new ItemId( 'Q1' );
 		$q3 = new ItemId( 'Q3' );
@@ -163,8 +163,8 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$q12 = new ItemId( 'Q12' );
 		$q403 = new ItemId( 'Q403' );
 		$q404 = new ItemId( 'Q404' );
-		$referencingEntityStructureLookup = $this->newReferencingEntityStructure();
-		$circularReferencingEntityStructure = $this->newCircularReferencingEntityStructure();
+		$referencingEntityStructureLookup = self::newReferencingEntityStructure();
+		$circularReferencingEntityStructure = self::newCircularReferencingEntityStructure();
 
 		return [
 			'empty list of target ids' => [
@@ -301,8 +301,8 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		);
 	}
 
-	public function provideGetReferencedEntityIdMaxDepthExceeded() {
-		$cases = $this->provideGetReferencedEntityIdNoError();
+	public static function provideGetReferencedEntityIdMaxDepthExceeded() {
+		$cases = self::provideGetReferencedEntityIdNoError();
 
 		foreach ( $cases as $caseName => $case ) {
 			if ( end( $case ) === [] ) {
@@ -347,8 +347,8 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 		$this->fail( 'No exception thrown!' );
 	}
 
-	public function provideGetReferencedEntityIdMaxEntityVisitsExceeded() {
-		$cases = $this->provideGetReferencedEntityIdNoError();
+	public static function provideGetReferencedEntityIdMaxEntityVisitsExceeded() {
+		$cases = self::provideGetReferencedEntityIdNoError();
 
 		foreach ( $cases as $caseName => $case ) {
 			if ( end( $case ) === [] ) {

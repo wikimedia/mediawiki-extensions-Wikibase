@@ -37,10 +37,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $comment );
 	}
 
-	public function getEditCommentProvider() {
+	public static function getEditCommentProvider() {
 		$changes = [];
 
-		$updates = $this->getUpdates();
+		$updates = self::getUpdates();
 
 		foreach ( $updates as $update ) {
 			$changes[] = [
@@ -51,13 +51,13 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$changes[] = [
-			$this->getDeleteDiff(),
+			self::getDeleteDiff(),
 			EntityChange::REMOVE,
 			'(wikibase-comment-remove)',
 		];
 
 		$changes[] = [
-			$this->getRestoreDiff(),
+			self::getRestoreDiff(),
 			EntityChange::RESTORE,
 			'(wikibase-comment-restore)',
 		];
@@ -68,7 +68,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider needsTargetSpecificSummaryProvider
 	 */
-	public function testNeedsTargetSpecificSummary( $expected, Diff $siteLinkDiff, Title $title ) {
+	public function testNeedsTargetSpecificSummary( $expected, Diff $siteLinkDiff, string $titleText ) {
+		$title = $this->getTitle( $titleText );
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );
 		$commentCreator = new SiteLinkCommentCreator( $lang, $siteStore, 'enwiki' );
@@ -77,35 +78,35 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $res );
 	}
 
-	public function needsTargetSpecificSummaryProvider() {
-		$foo = $this->getTitle( 'Foo' );
-		$bar = $this->getTitle( 'Bar' );
-		$japan = $this->getTitle( 'Japan' );
+	public static function needsTargetSpecificSummaryProvider() {
+		$foo = 'Foo';
+		$bar = 'Bar';
+		$japan = 'Japan';
 
 		return [
 			'Sitelink change that does affect the current page' => [
 				true,
-				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
+				self::getChangeLinkDiff( 'Foo', 'Foo1' ),
 				$foo,
 			],
 			'Sitelink change that does not affect current page' => [
 				false,
-				$this->getChangeLinkDiff( 'Foo', 'Foo1' ),
+				self::getChangeLinkDiff( 'Foo', 'Foo1' ),
 				$bar,
 			],
 			'Badge changes are not target specific' => [
 				false,
-				$this->getBadgeChangeDiff(),
+				self::getBadgeChangeDiff(),
 				$japan,
 			],
 			'Remove link changes are not target specific' => [
 				false,
-				$this->getRemoveLinkDiff(),
+				self::getRemoveLinkDiff(),
 				$japan,
 			],
 			'Add link changes are not target specific' => [
 				false,
-				$this->getAddLinkDiff(),
+				self::getAddLinkDiff(),
 				$japan,
 			],
 		];
@@ -125,40 +126,40 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		return $title;
 	}
 
-	protected function getNewItem() {
+	protected static function getNewItem() {
 		return new Item( new ItemId( 'Q1' ) );
 	}
 
-	protected function getConnectDiff() {
-		$item = $this->getNewItem();
+	protected static function getConnectDiff() {
+		$item = self::getNewItem();
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getUnlinkDiff() {
-		$item = $this->getNewItem();
+	protected static function getUnlinkDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getLinkChangeDiff() {
-		$item = $this->getNewItem();
+	protected static function getLinkChangeDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Tokyo' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getOldLinkChangeDiff() {
+	protected static function getOldLinkChangeDiff() {
 		$diff = new Diff( [
 			'enwiki' => new DiffOpChange( 'Japan', 'Tokyo' ),
 		] );
@@ -166,82 +167,82 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		return $diff;
 	}
 
-	protected function getBadgeChangeDiff() {
-		$item = $this->getNewItem();
+	protected static function getBadgeChangeDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan', [ new ItemId( 'Q17' ) ] );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getAddLinkDiff() {
-		$item = $this->getNewItem();
+	protected static function getAddLinkDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	private function getAddSisterProjectLinkDiff() {
-		$item = $this->getNewItem();
+	private static function getAddSisterProjectLinkDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiktionary', 'Japan' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	private function getAddMultipleLinksDiff() {
-		$item = $this->getNewItem();
+	private static function getAddMultipleLinksDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'frwiki', 'Japan' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	private function getRemoveLinkDiff() {
-		$item = $this->getNewItem();
+	private static function getRemoveLinkDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	private function getChangeLinkDiff( $oldName = 'Japan', $newName = 'Japan' ) {
-		$item = $this->getNewItem();
+	private static function getChangeLinkDiff( $oldName = 'Japan', $newName = 'Japan' ) {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', $oldName );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 
-		$item2 = $this->getNewItem();
+		$item2 = self::getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', $newName );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Tokyo' );
 
-		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+		return self::getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	private function getSiteLinkDiffForUpdate( Item $item, Item $item2 ) {
+	private static function getSiteLinkDiffForUpdate( Item $item, Item $item2 ) {
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$change = $changeFactory->newFromUpdate( EntityChange::UPDATE, $item, $item2 );
 
 		return $change->getSiteLinkDiff();
 	}
 
-	private function getDeleteDiff() {
-		$item = $this->getNewItem();
+	private static function getDeleteDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
@@ -250,8 +251,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
-	private function getRestoreDiff() {
-		$item = $this->getNewItem();
+	private static function getRestoreDiff() {
+		$item = self::getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
@@ -260,66 +261,66 @@ class SiteLinkCommentCreatorTest extends \PHPUnit\Framework\TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
-	private function getUpdates() {
+	private static function getUpdates() {
 		$updates = [];
 
 		$updates[] = [
-			$this->getConnectDiff(),
+			self::getConnectDiff(),
 			'(wikibase-comment-linked)',
 		];
 
 		$updates[] = [
-			$this->getUnlinkDiff(),
+			self::getUnlinkDiff(),
 			'(wikibase-comment-unlink)',
 		];
 
 		$updates[] = [
-			$this->getLinkChangeDiff(),
+			self::getLinkChangeDiff(),
 			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
 		];
 
 		$updates[] = [
-			$this->getOldLinkChangeDiff(),
+			self::getOldLinkChangeDiff(),
 			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
 		];
 
 		$updates[] = [
-			$this->getBadgeChangeDiff(),
+			self::getBadgeChangeDiff(),
 			null, // changes to badges do not get a special message
 		];
 
 		$updates[] = [
-			$this->getAddLinkDiff(),
+			self::getAddLinkDiff(),
 			'(wikibase-comment-sitelink-add: [[:de:Japan]])',
 		];
 
 		$updates[] = [
-			$this->getAddSisterProjectLinkDiff(),
+			self::getAddSisterProjectLinkDiff(),
 			'(wikibase-comment-sitelink-add: enwiktionary:Japan)',
 		];
 
 		$updates[] = [
-			$this->getAddMultipleLinksDiff(),
+			self::getAddMultipleLinksDiff(),
 			null, // currently multi-link diffs are not supported
 		];
 
 		$updates[] = [
-			$this->getRemoveLinkDiff(),
+			self::getRemoveLinkDiff(),
 			'(wikibase-comment-sitelink-remove: [[:de:Japan]])',
 		];
 
 		$updates[] = [
-			$this->getChangeLinkDiff(),
+			self::getChangeLinkDiff(),
 			'(wikibase-comment-sitelink-change: [[:de:Japan]], [[:de:Tokyo]])',
 		];
 
 		$updates['Current page gets linked via link change'] = [
-			$this->getChangeLinkDiff( 'Japan', 'A fancy page' ),
+			self::getChangeLinkDiff( 'Japan', 'A fancy page' ),
 			'(wikibase-comment-linked)',
 		];
 
 		$updates['Current page gets unlinked via link change'] = [
-			$this->getChangeLinkDiff( 'A fancy page', 'Japan' ),
+			self::getChangeLinkDiff( 'A fancy page', 'Japan' ),
 			'(wikibase-comment-unlink)',
 		];
 

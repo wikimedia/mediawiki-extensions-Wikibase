@@ -22,10 +22,10 @@ class TitleLookupBasedEntityRedirectCheckerTest extends TestCase {
 	/**
 	 * @dataProvider titleProvider
 	 */
-	public function testIsRedirect( $title, bool $isRedirect ) {
+	public function testIsRedirect( callable $titleFactory, bool $isRedirect ) {
 		$entityId = new ItemId( 'Q666' );
 
-		$redirectChecker = new TitleLookupBasedEntityRedirectChecker( $this->newMockTitleLookup( $entityId, $title ) );
+		$redirectChecker = new TitleLookupBasedEntityRedirectChecker( $this->newMockTitleLookup( $entityId, $titleFactory( $this ) ) );
 
 		$this->assertSame( $isRedirect, $redirectChecker->isRedirect( $entityId ) );
 	}
@@ -40,18 +40,18 @@ class TitleLookupBasedEntityRedirectCheckerTest extends TestCase {
 		return $titleLookup;
 	}
 
-	public function titleProvider() {
+	public static function titleProvider() {
 		yield 'title not found' => [
-			null, false,
+			fn () => null, false,
 		];
 		yield 'title is not local' => [
-			$this->newMockTitle( false, true ), false,
+			fn ( self $self ) => $self->newMockTitle( false, true ), false,
 		];
 		yield 'local title is not a redirect' => [
-			$this->newMockTitle( true, false ), false,
+			fn ( self $self ) => $self->newMockTitle( true, false ), false,
 		];
 		yield 'title is a redirect' => [
-			$this->newMockTitle( true, true ), true,
+			fn ( self $self ) => $self->newMockTitle( true, true ), true,
 		];
 	}
 

@@ -26,7 +26,7 @@ class ItemChangeTest extends EntityChangeTest {
 	/**
 	 * @return string
 	 */
-	protected function getRowClass() {
+	protected static function getRowClass() {
 		return ItemChange::class;
 	}
 

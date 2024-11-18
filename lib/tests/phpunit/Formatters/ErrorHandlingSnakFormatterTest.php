@@ -74,10 +74,8 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( 'SNAK', $text );
 	}
 
-	public function provideFormatSnak_error() {
+	public static function provideFormatSnak_error() {
 		$p1 = new NumericPropertyId( 'P1' );
-
-		$valueFormatter = $this->getValueFormatter();
 
 		return [
 			'MismatchingDataValueTypeException' => [
@@ -89,7 +87,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 				'VALUE <span class="error wb-format-error">(wikibase-snakformatter-valuetype-mismatch: string, number)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new MismatchingDataValueTypeException( 'number', 'string' ),
-				$valueFormatter,
+				true,
 			],
 			'MismatchingDataValueTypeException+UnDeserializableValue' => [
 				'<span class="error wb-format-error">(wikibase-undeserializable-value)</span>',
@@ -100,7 +98,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 				'VALUE <span class="error wb-format-error">(wikibase-undeserializable-value)</span>',
 				new PropertyValueSnak( $p1, new UnDeserializableValue( 'string', 'XYZ', 'test' ) ),
 				new MismatchingDataValueTypeException( 'number', UnDeserializableValue::getType() ),
-				$valueFormatter,
+				true,
 			],
 			'PropertyDataTypeLookupException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
@@ -112,7 +110,7 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 				'VALUE <span class="error wb-format-error">(wikibase-snakformatter-property-not-found: P1)</span>',
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new PropertyDataTypeLookupException( new NumericPropertyId( 'P1' ) ),
-				$valueFormatter,
+				true,
 			],
 			'FormattingException' => [
 				'<span class="error wb-format-error">(wikibase-snakformatter-formatting-exception: TEST)</span>',
@@ -129,8 +127,9 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$expected,
 		PropertyValueSnak $snak,
 		Exception $ex,
-		ValueFormatter $fallbackFormatter = null
+		bool $useFallbackFormatter = false
 	) {
+		$fallbackFormatter = $useFallbackFormatter ? $this->getValueFormatter() : null;
 		$formatter = new ErrorHandlingSnakFormatter(
 			$this->getSnakFormatter( $ex ),
 			$fallbackFormatter,

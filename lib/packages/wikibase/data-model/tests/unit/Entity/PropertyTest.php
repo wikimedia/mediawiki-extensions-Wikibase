@@ -29,7 +29,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Property
 	 */
-	private function getNewEmpty() {
+	private static function getNewEmpty() {
 		return Property::newFromType( 'string' );
 	}
 
@@ -112,13 +112,13 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	public function testSetAndGetStatements() {
 		$property = Property::newFromType( 'string' );
 
-		$statementList = $this->newNonEmptyStatementList();
+		$statementList = self::newNonEmptyStatementList();
 		$property->setStatements( $statementList );
 
 		$this->assertEquals( $statementList, $property->getStatements() );
 	}
 
-	private function newNonEmptyStatementList() {
+	private static function newNonEmptyStatementList() {
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyNoValueSnak( 42 ) );
 		$statementList->addNewStatement( new PropertyNoValueSnak( 1337 ) );
@@ -126,12 +126,12 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		return $statementList;
 	}
 
-	public function equalsProvider() {
+	public static function equalsProvider() {
 		$firstProperty = Property::newFromType( 'string' );
-		$firstProperty->setStatements( $this->newNonEmptyStatementList() );
+		$firstProperty->setStatements( self::newNonEmptyStatementList() );
 
 		$secondProperty = Property::newFromType( 'string' );
-		$secondProperty->setStatements( $this->newNonEmptyStatementList() );
+		$secondProperty->setStatements( self::newNonEmptyStatementList() );
 
 		$secondPropertyWithId = $secondProperty->copy();
 		$secondPropertyWithId->setId( new NumericPropertyId( 'P42' ) );
@@ -155,32 +155,32 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $secondProperty->equals( $firstProperty ) );
 	}
 
-	private function getBaseProperty() {
+	private static function getBaseProperty() {
 		$property = Property::newFromType( 'string' );
 
 		$property->setId( new NumericPropertyId( 'P42' ) );
 		$property->setLabel( 'en', 'Same' );
 		$property->setDescription( 'en', 'Same' );
 		$property->setAliases( 'en', [ 'Same' ] );
-		$property->setStatements( $this->newNonEmptyStatementList() );
+		$property->setStatements( self::newNonEmptyStatementList() );
 
 		return $property;
 	}
 
-	public function notEqualsProvider() {
-		$differentLabel = $this->getBaseProperty();
+	public static function notEqualsProvider() {
+		$differentLabel = self::getBaseProperty();
 		$differentLabel->setLabel( 'en', 'Different' );
 
-		$differentDescription = $this->getBaseProperty();
+		$differentDescription = self::getBaseProperty();
 		$differentDescription->setDescription( 'en', 'Different' );
 
-		$differentAlias = $this->getBaseProperty();
+		$differentAlias = self::getBaseProperty();
 		$differentAlias->setAliases( 'en', [ 'Different' ] );
 
-		$differentStatement = $this->getBaseProperty();
+		$differentStatement = self::getBaseProperty();
 		$differentStatement->setStatements( new StatementList() );
 
-		$property = $this->getBaseProperty();
+		$property = self::getBaseProperty();
 
 		return [
 			'empty' => [ $property, Property::newFromType( 'string' ) ],
@@ -202,7 +202,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testPropertyWithStatementsIsNotEmpty() {
 		$property = Property::newFromType( 'string' );
-		$property->setStatements( $this->newNonEmptyStatementList() );
+		$property->setStatements( self::newNonEmptyStatementList() );
 
 		$this->assertFalse( $property->isEmpty() );
 	}
@@ -280,7 +280,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $moarText
 	 */
 	public function testSetLabel( $languageCode, $labelText, $moarText = 'ohi there' ) {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$entity->setLabel( $languageCode, $labelText );
 
@@ -298,7 +298,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $moarText
 	 */
 	public function testSetDescription( $languageCode, $description, $moarText = 'ohi there' ) {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$entity->setDescription( $languageCode, $description );
 
@@ -338,7 +338,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider aliasesProvider
 	 */
 	public function testSetAliases( array $aliasesLists ) {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
 			foreach ( $aliasesList as $aliases ) {
@@ -366,11 +366,11 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $property->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 	}
 
-	public function instanceProvider() {
+	public static function instanceProvider() {
 		$entities = [];
 
 		// empty
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 		$entities[] = $entity;
 
 		// ID only
@@ -380,7 +380,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$entities[] = $entity;
 
 		// with labels and stuff
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 		$entity->setAliases( 'en', [ 'o', 'noez' ] );
 		$entity->setLabel( 'de', 'spam' );
 		$entity->setDescription( 'en', 'foo bar baz' );
@@ -444,7 +444,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testWhenNoStuffIsSet_getFingerprintReturnsEmptyFingerprint() {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$this->assertEquals(
 			new Fingerprint(),
@@ -453,7 +453,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testWhenLabelsAreSet_getFingerprintReturnsFingerprintWithLabels() {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setLabel( 'de', 'bar' );
@@ -470,7 +470,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testWhenTermsAreSet_getFingerprintReturnsFingerprintWithTerms() {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setDescription( 'en', 'foo bar' );
@@ -493,14 +493,14 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenEmptyFingerprint_noTermsAreSet() {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 		$entity->setFingerprint( new Fingerprint() );
 
 		$this->assertTrue( $entity->getFingerprint()->isEmpty() );
 	}
 
 	public function testGivenEmptyFingerprint_existingTermsAreRemoved() {
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 
 		$entity->setLabel( 'en', 'foo' );
 		$entity->setDescription( 'en', 'foo bar' );
@@ -524,7 +524,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 			] )
 		);
 
-		$entity = $this->getNewEmpty();
+		$entity = static::getNewEmpty();
 		$entity->setFingerprint( $fingerprint );
 		$newFingerprint = $entity->getFingerprint();
 
@@ -615,7 +615,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $property->isEmpty(), 'cleared Property should be empty' );
 	}
 
-	public function clearableProvider() {
+	public static function clearableProvider() {
 		return [
 			'empty' => [
 				new Property( new NumericPropertyId( 'P123' ), null, 'string' ),
@@ -632,7 +632,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 					new NumericPropertyId( 'P234' ),
 					null,
 					'wikibase-entityid',
-					$this->newNonEmptyStatementList()
+					self::newNonEmptyStatementList()
 				),
 			],
 		];

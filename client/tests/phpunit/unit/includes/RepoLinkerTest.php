@@ -22,7 +22,7 @@ use Wikibase\Lib\SubEntityTypesMapper;
  */
 class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
-	private function getRepoSettings() {
+	private static function getRepoSettings() {
 		$defaultTestEntitySource = [
 			'repoDatabase' => 'testdb',
 			'entityNamespaces' => [ 'item' => 123 ],
@@ -93,10 +93,10 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getEntityTitle( $entityId ) );
 	}
 
-	public function getEntityTitleProvider() {
+	public static function getEntityTitleProvider() {
 		$itemId = new ItemId( 'Q388' );
 		$propertyId = new NumericPropertyId( 'P472' );
-		$settings = $this->getRepoSettings();
+		$settings = self::getRepoSettings();
 
 		return [
 			[ 'Special:EntityPage/Q388', $settings[0], $itemId ],
@@ -113,8 +113,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getPageUrl( $page ) );
 	}
 
-	public function getPageUrlProvider() {
-		$settings = $this->getRepoSettings();
+	public static function getPageUrlProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[ '//www.example.com/wiki/Cat', $settings[0], 'Cat' ],
@@ -135,8 +135,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->formatLink( $url, $text, $attribs ) );
 	}
 
-	public function formatLinkProvider() {
-		$settings = $this->getRepoSettings();
+	public static function formatLinkProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -168,8 +168,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->buildEntityLink( $entityId, $classes ) );
 	}
 
-	public function buildEntityLinkProvider() {
-		$settings = $this->getRepoSettings();
+	public static function buildEntityLinkProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -202,8 +202,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getEntityUrl( $entityId ) );
 	}
 
-	public function getEntityUrlProvider() {
-		$settings = $this->getRepoSettings();
+	public static function getEntityUrlProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -228,8 +228,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getEntityConceptUri( $entityId ) );
 	}
 
-	public function getEntityConceptUri() {
-		$settings = $this->getRepoSettings();
+	public static function getEntityConceptUri() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -288,8 +288,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getBaseUrl() );
 	}
 
-	public function getBaseUrlProvider() {
-		$settings = $this->getRepoSettings();
+	public static function getBaseUrlProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -312,8 +312,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getApiUrl() );
 	}
 
-	public function getApiUrlProvider() {
-		$settings = $this->getRepoSettings();
+	public static function getApiUrlProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -332,8 +332,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getIndexUrl() );
 	}
 
-	public function getIndexUrlProvider() {
-		$settings = $this->getRepoSettings();
+	public static function getIndexUrlProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[
@@ -352,8 +352,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->addQueryParams( $url, $params ) );
 	}
 
-	public function addQueryParamsProvider() {
-		$settings = $this->getRepoSettings();
+	public static function addQueryParamsProvider() {
+		$settings = self::getRepoSettings();
 
 		return [
 			[

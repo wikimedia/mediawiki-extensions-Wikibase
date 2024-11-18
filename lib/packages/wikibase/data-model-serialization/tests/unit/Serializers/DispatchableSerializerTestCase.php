@@ -31,7 +31,7 @@ abstract class DispatchableSerializerTestCase extends TestCase {
 	/**
 	 * @return array[] things that are serialized by the serializer
 	 */
-	abstract public function serializableProvider(): array;
+	abstract public static function serializableProvider(): array;
 
 	/**
 	 * @dataProvider nonSerializableProvider
@@ -51,7 +51,7 @@ abstract class DispatchableSerializerTestCase extends TestCase {
 	/**
 	 * @return array[] things that aren't serialized by the serializer
 	 */
-	abstract public function nonSerializableProvider(): array;
+	abstract public static function nonSerializableProvider(): array;
 
 	/**
 	 * @dataProvider serializationProvider
@@ -63,6 +63,6 @@ abstract class DispatchableSerializerTestCase extends TestCase {
 	/**
 	 * @return array[] an array of array( serialization, object to serialize)
 	 */
-	abstract public function serializationProvider(): array;
+	abstract public static function serializationProvider(): array;
 
 }

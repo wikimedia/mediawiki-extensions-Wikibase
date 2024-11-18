@@ -26,7 +26,7 @@ class SnakSerializerTest extends DispatchableSerializerTestCase {
 		return new SnakSerializer( new DataValueSerializer(), $serializeWithHash );
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		return [
 			[
 				new PropertyNoValueSnak( 42 ),
@@ -40,7 +40,7 @@ class SnakSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -54,7 +54,7 @@ class SnakSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		return [
 			[
 				[

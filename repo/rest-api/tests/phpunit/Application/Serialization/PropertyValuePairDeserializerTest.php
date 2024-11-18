@@ -44,7 +44,7 @@ class PropertyValuePairDeserializerTest extends TestCase {
 		$this->assertEquals( $expectedSnak, $this->newDeserializer()->deserialize( $serialization ) );
 	}
 
-	public function validSerializationProvider(): Generator {
+	public static function validSerializationProvider(): Generator {
 		yield 'no value for string property' => [
 			new PropertyNoValueSnak( new NumericPropertyId( self::EXISTING_PROPERTIES_BY_DATA_TYPE[ 'string' ] ) ),
 			[

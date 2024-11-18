@@ -23,36 +23,39 @@ use Wikimedia\Assert\ParameterTypeException;
  */
 class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideFormatSnak() {
-		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
+	public static function provideFormatSnak() {
+		$formatterUrlExpanderFactory = function ( self $self ) {
+			$expander = $self->createMock( SnakUrlExpander::class );
+			$expander->method( 'expandUrl' )
+				->willReturnCallback( function ( PropertyValueSnak $snak ) {
+					$value = $snak->getDataValue()->getValue();
 
-		$formatterUrlExpander->method( 'expandUrl' )
-			->willReturnCallback( function( PropertyValueSnak $snak ) {
-				$value = $snak->getDataValue()->getValue();
+					switch ( $snak->getPropertyId()->getSerialization() ) {
+						case 'P1':
+							return 'http://acme.test/stuff/' . wfUrlencode( $value );
+						case 'P2':
+							return 'http://acme.test/[other stuff]/<' . wfUrlencode( $value ) . '>';
+						default:
+							return null;
+					}
+				} );
 
-				switch ( $snak->getPropertyId()->getSerialization() ) {
-					case 'P1':
-						return 'http://acme.test/stuff/' . wfUrlencode( $value );
-					case 'P2':
-						return 'http://acme.test/[other stuff]/<' . wfUrlencode( $value ) . '>';
-					default:
-						return null;
-				}
-			} );
+			return $expander;
+		};
 
 		return [
 			'formatter URL' => [
-				$formatterUrlExpander,
+				$formatterUrlExpanderFactory,
 				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'abc\'\'123' ) ),
 				'[http://acme.test/stuff/abc%27%27123 abc&#39;&#39;123]',
 			],
 			'formatter URL with escaping' => [
-				$formatterUrlExpander,
+				$formatterUrlExpanderFactory,
 				new PropertyValueSnak( new NumericPropertyId( 'P2' ), new StringValue( 'abc\'\'123' ) ),
 				'[http://acme.test/%5Bother%20stuff%5D/%3Cabc%27%27123%3E abc&#39;&#39;123]',
 			],
 			'unknown property' => [
-				$formatterUrlExpander,
+				$formatterUrlExpanderFactory,
 				new PropertyValueSnak( new NumericPropertyId( 'P345' ), new StringValue( 'abc\'\'123' ) ),
 				'abc&#39;&#39;123',
 			],
@@ -63,11 +66,11 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	 * @dataProvider provideFormatSnak
 	 */
 	public function testFormatSnak(
-		SnakUrlExpander $urlExpander,
+		callable $urlExpanderFactory,
 		PropertyValueSnak $snak,
 		$expected
 	) {
-		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
+		$formatter = new WikitextExternalIdentifierFormatter( $urlExpanderFactory( $this ) );
 		$text = $formatter->formatSnak( $snak );
 		$this->assertEquals( $expected, $text );
 	}

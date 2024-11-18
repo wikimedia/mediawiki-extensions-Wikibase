@@ -26,7 +26,8 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider createSchemaProvider
 	 */
-	public function testCreateSchema( $revisionTimestamp, $image, $description, $expected ) {
+	public function testCreateSchema( $revisionTimestamp, callable $imageFactory, $description, $expected ) {
+		$image = $imageFactory( $this );
 		$repoLinker = new RepoLinker(
 			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 			'https://www.wikidata.org',
@@ -58,7 +59,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function createSchemaProvider() {
+	public static function createSchemaProvider() {
 		$nullExpected = [
 			"@context" => "https://schema.org",
 			"@type" => "Article",
@@ -76,9 +77,6 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			"datePublished" => "2002-05-27T18:26:23Z",
 		];
 
-		$image = $this->mockFile(
-			'https://upload.wikimedia.org/wikipedia/commons/c/c0/Douglas_adams_portrait_cropped.jpg'
-		);
 		$nonNullExpected = [
 			"@context" => "https://schema.org",
 			"@type" => "Article",
@@ -100,8 +98,15 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		return [
-			[ null, null, null, $nullExpected ],
-			[ '1538165772', $image, 'British author and humorist (1952–2001)', $nonNullExpected ],
+			[ null, fn () => null, null, $nullExpected ],
+			[
+				'1538165772',
+				fn ( self $self ) => $self->mockFile(
+					'https://upload.wikimedia.org/wikipedia/commons/c/c0/Douglas_adams_portrait_cropped.jpg'
+				),
+				'British author and humorist (1952–2001)',
+				$nonNullExpected,
+			],
 		];
 	}
 

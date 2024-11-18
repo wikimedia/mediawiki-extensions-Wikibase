@@ -119,7 +119,7 @@ class PrefetchingTermLookupAliasesRetrieverTest extends TestCase {
 		);
 	}
 
-	public function provideEntityId(): Generator {
+	public static function provideEntityId(): Generator {
 		yield 'item id' => [ new ItemId( self::ITEM_ID ) ];
 		yield 'property id' => [ new NumericPropertyId( self::PROPERTY_ID ) ];
 	}

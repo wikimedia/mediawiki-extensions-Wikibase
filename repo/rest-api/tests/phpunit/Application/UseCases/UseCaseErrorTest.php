@@ -27,7 +27,7 @@ class UseCaseErrorTest extends TestCase {
 		$this->assertSame( $errorContext, $useCaseError->getErrorContext() );
 	}
 
-	public function provideValidUseCaseErrorData(): Generator {
+	public static function provideValidUseCaseErrorData(): Generator {
 		yield 'valid error without context' => [
 			UseCaseError::RESOURCE_NOT_FOUND,
 			'The requested resource does not exist',
@@ -49,7 +49,7 @@ class UseCaseErrorTest extends TestCase {
 		new UseCaseError( $errorCode, $errorMessage, $errorContext );
 	}
 
-	public function provideInvalidUseCaseErrorData(): Generator {
+	public static function provideInvalidUseCaseErrorData(): Generator {
 		yield 'error code not defined' => [ 'not-a-valid-error-code', 'not a valid error code' ];
 
 		yield 'error context contains incorrect key' => [
@@ -77,7 +77,7 @@ class UseCaseErrorTest extends TestCase {
 		$this->assertEquals( $expectedContext, $error->getErrorContext() );
 	}
 
-	public function permissionDeniedContextProvider(): Generator {
+	public static function permissionDeniedContextProvider(): Generator {
 		yield 'no additional context' => [
 			UseCaseError::newPermissionDenied( 'some-reason' ),
 			[ UseCaseError::CONTEXT_DENIAL_REASON => 'some-reason' ],

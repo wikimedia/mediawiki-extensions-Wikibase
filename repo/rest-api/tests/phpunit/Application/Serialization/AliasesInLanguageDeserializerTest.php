@@ -57,7 +57,7 @@ class AliasesInLanguageDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidAliases(): Generator {
+	public static function provideInvalidAliases(): Generator {
 		yield 'invalid serialization - associative array' => [
 			new InvalidFieldException( 'aliases', [ 'not' => 'a', 'sequential' => 'array' ], '/aliases' ),
 			[ 'not' => 'a', 'sequential' => 'array' ],

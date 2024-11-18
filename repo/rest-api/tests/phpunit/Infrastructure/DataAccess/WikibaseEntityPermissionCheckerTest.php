@@ -161,7 +161,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		$this->assertEquals( $result, $permissionChecker->canEdit( User::newAnonymous(), $entityIdToEdit ) );
 	}
 
-	public function provideEntityIdAndPermissionStatus(): array {
+	public static function provideEntityIdAndPermissionStatus(): array {
 		$entityIds = [
 			'item id' => [ new ItemId( 'Q123' ) ],
 			'property id' => [ new NumericPropertyId( 'P123' ) ],
@@ -193,7 +193,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 		return $dataSet;
 	}
 
-	public function providePermissionStatusForCreatingAnEntity(): Generator {
+	public static function providePermissionStatusForCreatingAnEntity(): Generator {
 		yield [ Status::newFatal( 'insufficient permissions' ), PermissionCheckResult::newDenialForUnknownReason() ];
 
 		yield [ Status::newGood(), PermissionCheckResult::newAllowed() ];

@@ -21,7 +21,7 @@ use Wikimedia\ObjectFactory\ObjectFactory;
  */
 class UnitStorageTest extends MediaWikiIntegrationTestCase {
 
-	public function storageModels() {
+	public static function storageModels() {
 		return [
 			[ JsonUnitStorage::class, [ __DIR__ . '/testunits.json' ] ],
 			[ CSVUnitStorage::class, [ __DIR__ . '/testunits.csv' ] ],
@@ -69,7 +69,7 @@ class UnitStorageTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $storage->getConversion( 'Q5' ) );
 	}
 
-	public function badStorageModels() {
+	public static function badStorageModels() {
 		return [
 			[ JsonUnitStorage::class, [ 'nosuchfile' ] ],
 			[ CSVUnitStorage::class, [ 'nosuchfile' ] ],
