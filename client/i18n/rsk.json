@@ -105,5 +105,12 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|єден други бок {{GENDER:$2|повязани}}|$4 други боки {{GENDER:$2|повязани}}|$4 других бокох {{GENDER:$2|повязаних}}}} зоз елементом на {{WBREPONAME}}, дзе мож позберац податки релевантни за теме.",
 	"notification-link-text-view-item": "{{GENDER:$1|Опатри}} елемент",
 	"notification-subject-page-connection": "{{GENDER:$2|Хаснователь|Хаснователька|Хаснователь}} $2 бок <strong>$3</strong> хтори Ви {{GENDER:$3|направели}} на проєкту {{SITENAME}} {{GENDER:$2|повязал|повязала|повязал}} на елемент на Википодаткох",
-	"unresolved-property-category": "Боки зоз  нєрозяшнєтима свойствами"
+	"unresolved-property-category": "Боки зоз  нєрозяшнєтима свойствами",
+	"unresolved-property-category-desc": "Тота катеґория вилистує боки хтори упутюю на прикмети {{WBREPONAME}} хтори нє мож найсц анї по идентификатору ID, анї по мену.",
+	"connected-redirect-category": "Преунапряменя хтори повязани на Википодаткох",
+	"connected-redirect-category-desc": "Тота катеґория указує преунапряменя хтори повязяни на Википодатки.",
+	"wikibase-client-data-bridge-dialog-title": "Ушорйованє $1",
+	"wikibase-client-data-bridge-permissions-error": "Ви нє маце допущенє ушорйовац тоту вредносц пре {{PLURAL:$1|шлїдуюцу|шлїдуюци}} причини:",
+	"wikibase-client-data-bridge-permissions-error-info": "Детальнєйше",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Тота вредносц тераз [$1 у подполносци защицена] на сайту {{WBREPONAME}}, и ю можу редаґовац лєм [$2 администраторе].</strong>"
 }
