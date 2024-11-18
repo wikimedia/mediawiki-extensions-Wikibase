@@ -14,7 +14,7 @@ use Wikibase\Lib\Tests\NoBadUsageTestBase;
  */
 class ClientNoBadUsageTest extends NoBadUsageTestBase {
 
-	protected function getBadPatternsWithAllowedUsages(): array {
+	protected static function getBadPatternsWithAllowedUsages(): array {
 		return [
 			// don’t reference repo in client
 			'WikibaseRepo::' => [
@@ -43,11 +43,11 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 		];
 	}
 
-	protected function getBaseDir(): string {
+	protected static function getBaseDir(): string {
 		return __DIR__ . '/../../../../';
 	}
 
-	protected function getThisFile(): string {
+	protected static function getThisFile(): string {
 		return __FILE__;
 	}
 

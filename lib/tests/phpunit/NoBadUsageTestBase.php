@@ -38,20 +38,20 @@ abstract class NoBadUsageTestBase extends TestCase {
 	 * or `true` to allow any number of matches.
 	 * (For directory paths, only `true` is supported.)
 	 */
-	abstract protected function getBadPatternsWithAllowedUsages(): array;
+	abstract protected static function getBadPatternsWithAllowedUsages(): array;
 
 	/**
 	 * Get the base directory for the test.
 	 * All .php files below this directory will be searched and matched
 	 * against the {@link #getBadPatternsWithAllowedUsages patterns}.
 	 */
-	abstract protected function getBaseDir(): string;
+	abstract protected static function getBaseDir(): string;
 
 	/**
 	 * The path to the current test file. Return __FILE__.
 	 * (Pattern occurrences in this file are not counted.)
 	 */
-	abstract protected function getThisFile(): string;
+	abstract protected static function getThisFile(): string;
 
 	/**
 	 * Split the given pattern => path => allowed mappings
@@ -63,7 +63,7 @@ abstract class NoBadUsageTestBase extends TestCase {
 	 * @param array $patterns
 	 * @return array( array $dirPaths, array $filePaths )
 	 */
-	private function splitPatterns( array $patterns ): array {
+	private static function splitPatterns( array $patterns ): array {
 		$dirPatterns = [];
 		$filePatterns = [];
 
@@ -81,7 +81,7 @@ abstract class NoBadUsageTestBase extends TestCase {
 		return [ $dirPatterns, $filePatterns ];
 	}
 
-	private function removeComments( string $text ): string {
+	private static function removeComments( string $text ): string {
 		// remove block comments
 		$text = preg_replace( '@/\*.*?\*/@s', '', $text );
 		// remove line comments
@@ -100,8 +100,8 @@ abstract class NoBadUsageTestBase extends TestCase {
 	 * One with the real usages for each file that matched a pattern,
 	 * one with the expected usages (i.e. $patterns, but only the non-directory paths).
 	 */
-	private function countUsages( array $patterns, string $baseDir, string $thisFile ): array {
-		[ $dirPatterns, $filePatterns ] = $this->splitPatterns( $patterns );
+	private static function countUsages( array $patterns, string $baseDir, string $thisFile ): array {
+		[ $dirPatterns, $filePatterns ] = self::splitPatterns( $patterns );
 		$baseDir = realpath( $baseDir );
 		$directoryIterator = new RecursiveDirectoryIterator( $baseDir );
 
@@ -122,12 +122,12 @@ abstract class NoBadUsageTestBase extends TestCase {
 			$relativePath = substr( $absolutePath, strlen( $baseDir ) + 1 ); // + 1 for /
 
 			$text = file_get_contents( $absolutePath );
-			$text = $this->removeComments( $text );
+			$text = self::removeComments( $text );
 
 			foreach ( $dirPatterns as $pattern => $dirs ) {
 				foreach ( $dirs as $dir => $allowed ) {
 					if ( strpos( $relativePath, $dir ) === 0 ) {
-						$this->assertTrue( $allowed,
+						self::assertTrue( $allowed,
 							'Only allowed value for directories is `true`' );
 						continue 2; // next pattern
 					}
@@ -148,11 +148,11 @@ abstract class NoBadUsageTestBase extends TestCase {
 		return [ $usages, $filePatterns ];
 	}
 
-	public function provideBadUsages(): iterable {
-		[ $usages, $filePatterns ] = $this->countUsages(
-			$this->getBadPatternsWithAllowedUsages(),
-			$this->getBaseDir(),
-			$this->getThisFile()
+	public static function provideBadUsages(): iterable {
+		[ $usages, $filePatterns ] = self::countUsages(
+			static::getBadPatternsWithAllowedUsages(),
+			static::getBaseDir(),
+			static::getThisFile()
 		);
 
 		foreach ( $usages as $pattern => $files ) {

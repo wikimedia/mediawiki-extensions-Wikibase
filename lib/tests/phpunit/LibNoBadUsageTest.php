@@ -12,7 +12,7 @@ namespace Wikibase\Lib\Tests;
  */
 class LibNoBadUsageTest extends NoBadUsageTestBase {
 
-	protected function getBadPatternsWithAllowedUsages(): array {
+	protected static function getBadPatternsWithAllowedUsages(): array {
 		return [
 			// don’t reference repo or client in lib
 			'WikibaseRepo::' => [
@@ -62,11 +62,11 @@ class LibNoBadUsageTest extends NoBadUsageTestBase {
 		];
 	}
 
-	protected function getBaseDir(): string {
+	protected static function getBaseDir(): string {
 		return __DIR__ . '/../../';
 	}
 
-	protected function getThisFile(): string {
+	protected static function getThisFile(): string {
 		return __FILE__;
 	}
 
