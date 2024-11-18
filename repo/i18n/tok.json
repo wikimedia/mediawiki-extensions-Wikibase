@@ -3,12 +3,15 @@
 		"authors": [
 			"Robin van der Vliet",
 			"שוקו מוקה",
-			"Frzzl"
+			"Frzzl",
+			"Tamzin"
 		]
 	},
 	"wikibase-edit": "o ante",
 	"wikibase-add": "o pana",
 	"wikibase-entitytermsforlanguagelistview-language": "toki",
+	"wikibase-label-empty": "nimi li weka",
+	"wikibase-description-empty": "sona li weka",
 	"wikibase-content-language-edit-label": "toki:",
 	"wikibase-sitelinks-special": "lipu ante",
 	"wikibase-newentity-language": "toki:"
