@@ -86,7 +86,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 	 *
 	 * @return array[]
 	 */
-	abstract public function provideValidEntityCreationRequests();
+	abstract public static function provideValidEntityCreationRequests();
 
 	/**
 	 * @param string $url
@@ -127,6 +127,6 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 	 *
 	 * @return array[]
 	 */
-	abstract public function provideInvalidEntityCreationRequests();
+	abstract public static function provideInvalidEntityCreationRequests();
 
 }

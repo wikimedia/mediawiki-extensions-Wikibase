@@ -112,7 +112,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
 	}
 
-	public function provideValidEntityCreationRequests() {
+	public static function provideValidEntityCreationRequests() {
 		$labelIndex = 1;
 
 		return [
@@ -187,7 +187,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 	 *
 	 * @return array[]
 	 */
-	public function provideInvalidEntityCreationRequests() {
+	public static function provideInvalidEntityCreationRequests() {
 		return [
 			'unknown language' => [
 				[

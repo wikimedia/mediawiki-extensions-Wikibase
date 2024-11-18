@@ -109,7 +109,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * (i.e. inherit the wikibase entity types) unless you are sure of what you are doing.
 	 * Mind that in the real world this is done by the WikibaseRepoEntityTypes hook.
 	 */
-	protected function getEntityTypeDefinitionsConfiguration(): array {
+	protected static function getEntityTypeDefinitionsConfiguration(): array {
 		return wfArrayPlus2d(
 			require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php',
 			require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php'
@@ -119,9 +119,9 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * Get the EntityTypeDefinitions configured in getEntityTypeDefinitionsConfiguration()
 	 */
-	final protected function getEntityTypeDefinitions(): EntityTypeDefinitions {
+	final protected static function getEntityTypeDefinitions(): EntityTypeDefinitions {
 		return new EntityTypeDefinitions(
-			$this->getEntityTypeDefinitionsConfiguration()
+			static::getEntityTypeDefinitionsConfiguration()
 		);
 	}
 
@@ -142,7 +142,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	abstract protected function newEntityContent( EntityDocument $entity = null ): EntityContent;
+	abstract protected static function newEntityContent( EntityDocument $entity = null ): EntityContent;
 
 	/**
 	 * Create a new entity redirect content from the given IDs, if possible.
@@ -155,21 +155,21 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityContent|null
 	 */
-	abstract protected function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent;
+	abstract protected static function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent;
 
 	/**
 	 * @param EntityId|null $id
 	 *
 	 * @return EntityDocument
 	 */
-	abstract protected function newEntity( EntityId $id = null );
+	abstract protected static function newEntity( EntityId $id = null );
 
 	/**
 	 * Returns EntityContents that can be serialized by the EntityHandler deriving class.
 	 *
 	 * @return array[]
 	 */
-	abstract public function contentProvider();
+	abstract public static function contentProvider(): array;
 
 	public function testGetSpecialPageForCreation() {
 		$specialPageName = $this->getHandler()->getSpecialPageForCreation();
@@ -276,7 +276,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertNotEquals( $this->getModelId(), $name, "localization of model name" );
 	}
 
-	public function provideGetUndoContent() {
+	public static function provideGetUndoContent(): iterable {
 		/** @var LabelsProvider $e2 */
 		/** @var LabelsProvider $e3 */
 		/** @var LabelsProvider $e4 */
@@ -284,47 +284,47 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		/** @var LabelsProvider $e5u4 */
 		/** @var LabelsProvider $e5u4u3 */
 
-		if ( !$this->newEntity() instanceof LabelsProvider ) {
-			$this->markTestSkipped( 'provideGetUndoContent only works for entities that have labels field' );
+		if ( !static::newEntity() instanceof LabelsProvider ) {
+			self::markTestSkipped( 'provideGetUndoContent only works for entities that have labels field' );
 		}
 
-		$e1 = $this->newEntity();
-		$c1 = $this->newEntityContent( $e1 );
+		$e1 = static::newEntity();
+		$c1 = static::newEntityContent( $e1 );
 
-		$e2 = $this->newEntity();
+		$e2 = static::newEntity();
 		$e2->getLabels()->setTextForLanguage( 'en', 'Foo' );
-		$c2 = $this->newEntityContent( $e2 );
+		$c2 = static::newEntityContent( $e2 );
 
-		$e3 = $this->newEntity();
+		$e3 = static::newEntity();
 		$e3->getLabels()->setTextForLanguage( 'en', 'Foo' );
 		$e3->getLabels()->setTextForLanguage( 'de', 'Fuh' );
-		$c3 = $this->newEntityContent( $e3 );
+		$c3 = static::newEntityContent( $e3 );
 
-		$e4 = $this->newEntity();
+		$e4 = static::newEntity();
 		$e4->getLabels()->setTextForLanguage( 'en', 'Foo' );
 		$e4->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 		$e4->getLabels()->setTextForLanguage( 'fr', 'Fu' );
-		$c4 = $this->newEntityContent( $e4 );
+		$c4 = static::newEntityContent( $e4 );
 
-		$e5 = $this->newEntity();
+		$e5 = static::newEntity();
 		$e5->getLabels()->setTextForLanguage( 'en', 'F00' );
 		$e5->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 		$e5->getLabels()->setTextForLanguage( 'fr', 'Fu' );
-		$c5 = $this->newEntityContent( $e5 );
+		$c5 = static::newEntityContent( $e5 );
 
-		$e5u4 = $this->newEntity();
+		$e5u4 = static::newEntity();
 		$e5u4->getLabels()->setTextForLanguage( 'en', 'F00' );
 		$e5u4->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 
-		$e5u4u3 = $this->newEntity();
+		$e5u4u3 = static::newEntity();
 		$e5u4u3->getLabels()->setTextForLanguage( 'en', 'F00' );
 
 		return [
-			[ $c5, $c5, $c4, $this->newEntityContent( $e4 ), "undo last edit" ],
-			[ $c5, $c4, $c3, $this->newEntityContent( $e5u4 ), "undo previous edit" ],
+			[ $c5, $c5, $c4, static::newEntityContent( $e4 ), "undo last edit" ],
+			[ $c5, $c4, $c3, static::newEntityContent( $e5u4 ), "undo previous edit" ],
 
-			[ $c5, $c5, $c3, $this->newEntityContent( $e3 ), "undo last two edits" ],
-			[ $c5, $c4, $c2, $this->newEntityContent( $e5u4u3 ), "undo past two edits" ],
+			[ $c5, $c5, $c3, static::newEntityContent( $e3 ), "undo last two edits" ],
+			[ $c5, $c4, $c2, static::newEntityContent( $e5u4u3 ), "undo past two edits" ],
 
 			[ $c5, $c2, $c1, null, "undo conflicting edit" ],
 			[ $c5, $c3, $c1, null, "undo two edits with conflict" ],
@@ -405,7 +405,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $handler->getEntityType(), $entity->getType(), 'entity type' );
 	}
 
-	abstract public function entityIdProvider();
+	abstract public static function entityIdProvider();
 
 	/**
 	 * @dataProvider entityIdProvider
@@ -419,16 +419,17 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
+	 * TODO: figure out why making this static breaks Lexeme test
 	 * @return Serializer
 	 */
-	protected function getEntitySerializer() {
+	protected static function getEntitySerializer() {
 		$newSerializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$newSerializer = $newSerializerFactory->newEntitySerializer();
 		return $newSerializer;
 	}
 
-	public function exportTransformProvider() {
-		$entity = $this->newEntity();
+	public static function exportTransformProvider() {
+		$entity = static::newEntity();
 
 		$internalSerializer = WikibaseRepo::getStorageEntitySerializer();
 		$oldBlob = json_encode( $internalSerializer->serialize( $entity ) );
@@ -455,7 +456,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		}
 
 		// make new style blob
-		$newSerializer = $this->getEntitySerializer();
+		$newSerializer = self::getEntitySerializer();
 		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
 		return [
@@ -702,25 +703,25 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityContent An entirely empty content object with no EntityHolder and no entity.
 	 */
-	abstract protected function newEmptyContent();
+	abstract protected static function newEmptyContent();
 
-	public function providePageProperties() {
+	public static function providePageProperties() {
 		yield 'empty' => [
-			$this->newEmptyContent(),
+			static::newEmptyContent(),
 			[ 'wb-claims' => null ],
 		];
 
-		$blankContent = $this->newEntityContent();
+		$blankContent = static::newEntityContent();
 		yield 'blank' => [
 			$blankContent,
 			[ 'wb-claims' => 0 ],
 		];
 
-		$contentWithLabel = $this->newEntityContent();
+		$contentWithLabel = static::newEntityContent();
 		// Entity that didn't extend LabelsProvider to set/get a labels
 		// should be ingnored in this test case.
 		if ( $contentWithLabel->getEntity() instanceof LabelsProvider ) {
-			$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
+			self::setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
 
 			yield 'labels' => [
 				$contentWithLabel,
@@ -753,7 +754,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function setLabel( EntityDocument $entity, $languageCode, $text ) {
+	private static function setLabel( EntityDocument $entity, $languageCode, $text ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
