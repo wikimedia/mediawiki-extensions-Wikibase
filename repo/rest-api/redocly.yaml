@@ -3,3 +3,9 @@ extends:
 
 rules:
   security-defined: off
+
+plugins:
+  - ./redocly/plugin-filter-schemas.js
+
+decorators:
+  filterSchemas/filterSchemas: on

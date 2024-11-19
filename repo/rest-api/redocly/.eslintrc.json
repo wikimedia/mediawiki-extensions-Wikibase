@@ -1,0 +1,7 @@
+{
+	"extends": "wikimedia/server",
+	"rules": {
+		"max-len": [ "error", 120 ],
+		"no-console": "error"
+	}
+}
