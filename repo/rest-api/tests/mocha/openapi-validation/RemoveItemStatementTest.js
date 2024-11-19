@@ -16,7 +16,6 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 	before( async () => {
 		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
-
 	} );
 
 	[
