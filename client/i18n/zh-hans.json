@@ -32,7 +32,8 @@
 			"乌拉跨氪",
 			"予弦",
 			"神樂坂秀吉",
-			"铁桶"
+			"铁桶",
+			"沈澄心"
 		]
 	},
 	"wikibase-client-desc": "Wikibase扩展的客户端",
@@ -130,6 +131,8 @@
 	"wikibase-sitelinks-link-columnheading": "链接的页面",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|连接}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "当有人将我{{GENDER:|创建}}的页面连接到{{WBREPONAME}}项目时通知我。",
+	"exceeded-entity-limit-category": "访问过多{{WBREPONAME}}实体的页面",
+	"exceeded-entity-limit-category-desc": "此类别列出了访问了过多{{WBREPONAME}}实体的页面。",
 	"notification-header-page-connection": "页面<strong>$3</strong>已{{GENDER:$2|连接}}到{{PLURAL:$4|-1=一个{{WBREPONAME}}项目|{{WBREPONAME}}项目$4}}中，在那可收集与主题相关的数据。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>和{{PLURAL:$4|$4个|100=超过99个}}其他页面已{{GENDER:$2|连接}}到{{WBREPONAME}}项目中，可收集相关主题的数据。",
 	"notification-link-text-view-item": "{{GENDER:$1|查看}}项目",

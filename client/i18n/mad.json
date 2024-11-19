@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Boesenbergia",
-			"NoiX180"
+			"NoiX180",
+			"Munajad.MH"
 		]
 	},
 	"tooltip-t-wikibase": "Pranala ghâbây manyambhung butèr dâ' lombhung data",
@@ -10,6 +11,7 @@
 	"wikibase-dataitem": "Butèr è {{WBREPONAME}}",
 	"wikibase-editlinks": "Beccè' interwiki",
 	"wikibase-editlinkstitle": "Beccè' pranala interwiki",
+	"wikibase-addlinkstitle": "Tambâi pranala interwiki",
 	"wikibase-linkitem-addlinks": "Tambâ interwiki",
 	"wikibase-linkitem-title": "Panyambhung bi' kaca",
 	"wikibase-linkitem-linkpage": "Panyambhung bi' kaca",
