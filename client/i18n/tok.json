@@ -4,11 +4,14 @@
 			"Frzzl",
 			"Keenan Pepper",
 			"LesVisages",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			".hecko",
+			"Tamzin"
 		]
 	},
-	"wikibase-dataitem": "ijo lon {{WBREPONAME}}",
+	"wikibase-dataitem": "ni lon lipu {{WBREPONAME}}",
 	"wikibase-editlinks": "o ante e linja",
+	"wikibase-addlinkstitle": "o linja e lipu sama pi toki ante",
 	"wikibase-linkitem-addlinks": "o pana e linja",
 	"wikibase-linkitem-title": "o linja e lipu ante",
 	"wikibase-linkitem-linkpage": "o linja e lipu ante",
@@ -17,5 +20,6 @@
 	"wikibase-linkitem-input-page": "lipu:",
 	"wikibase-rc-hide-wikidata-hide": "o weka",
 	"wikibase-rc-hide-wikidata-show": "o suli",
+	"wikibase-otherprojects": "lipu suli ante",
 	"wikibase-sitelinks-sitename-columnheading": "toki"
 }

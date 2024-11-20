@@ -47,7 +47,7 @@
 	"wikibase-label-empty": "ЦӀе йац",
 	"wikibase-label-edit-placeholder": "йазйе цӀе",
 	"wikibase-label-edit-placeholder-language-aware": "йазйе цӀе $1 маттахь",
-	"wikibase-description-empty": "Цуьнах лаьцна йаздина дац.",
+	"wikibase-description-empty": "Цунах лаьцна йаздина дац.",
 	"wikibase-description-edit-placeholder": "дӀайазде цуьнах лаьцна",
 	"wikibase-description-edit-placeholder-language-aware": "йазде цуьнах лаьцна ($1)",
 	"wikibase-description-edit-placeholder-not-applicable": "хӀоттадойла дац",
