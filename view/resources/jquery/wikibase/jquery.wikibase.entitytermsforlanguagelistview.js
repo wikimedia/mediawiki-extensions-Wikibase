@@ -93,7 +93,7 @@
 			}
 
 			PARENT.prototype._create.call( this );
-			this._defaultLanguages = this.options.userLanguages;
+			this._defaultLanguages = this.options.userLanguages.slice();
 
 			this._amendDefaultLanguages();
 
@@ -119,7 +119,7 @@
 				}
 			}
 
-			this._defaultLanguages.push( 'mul' );
+			this._defaultLanguages.unshift( 'mul' );
 		},
 
 		/**
@@ -162,8 +162,8 @@
 					.match( /(?:^|\s)wikibase-entitytermsforlanguageview-(\S+)/ );
 				if ( match && match[ 1 ] !== languages[ i ] ) {
 					if ( match[ 1 ] !== 'mul' ) {
-						// "mul" might be included in the existing term box, but we want it to be after
-						// everything else, thus discarding it is expected.
+						// "mul" might be included in the existing term box, but we want it to be the
+						// first entry, thus discarding it is expected.
 						mw.log.warn( 'Existing entitytermsforlanguagelistview DOM does not match configured languages' );
 					}
 					mismatchAt = i;
