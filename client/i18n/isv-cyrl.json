@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Danvintius Bookix",
 			"Qiorly"
 		]
 	},
 	"wikibase-dataitem": "Елемент Викиданых",
 	"wikibase-editlinks": "Правити линкы",
+	"wikibase-addlinkstitle": "Додати меджуjезычне линкы",
 	"wikibase-linkitem-addlinks": "Додати линкы",
 	"wikibase-linkitem-title": "Линковати с страницеју",
 	"wikibase-linkitem-linkpage": "Повезати с страницеју",
