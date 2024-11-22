@@ -27,10 +27,10 @@ class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param string[]|null $termTypes
-	 * @param string[]|null $languageCodes
+	 * @param string[] $termTypes
+	 * @param string[] $languageCodes
 	 */
-	public function prefetchTerms( array $entityIds, ?array $termTypes = null, ?array $languageCodes = null ) {
+	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ) {
 		$entityIdsGroupedBySourceAndType = $this->groupEntityIdsBySourceAndType( $entityIds );
 
 		foreach ( $entityIdsGroupedBySourceAndType as $entityIdsGroupedByType ) {
