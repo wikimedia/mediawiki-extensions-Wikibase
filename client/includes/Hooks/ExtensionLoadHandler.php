@@ -45,14 +45,9 @@ class ExtensionLoadHandler {
 		global $wgWBClientSettings, $wgAPIModules;
 
 		$handler = self::factory();
-
 		$handler->registerHooks();
 
-		if ( $wgWBClientSettings === null ) {
-			$wgWBClientSettings = [];
-		}
-
-		$apiFormatReferenceSpec = $handler->getApiFormatReferenceSpec( $wgWBClientSettings );
+		$apiFormatReferenceSpec = $handler->getApiFormatReferenceSpec( $wgWBClientSettings ?? [] );
 		if ( $apiFormatReferenceSpec !== null ) {
 			$wgAPIModules['wbformatreference'] = $apiFormatReferenceSpec;
 		}

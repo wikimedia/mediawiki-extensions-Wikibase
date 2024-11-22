@@ -70,9 +70,7 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	private function getEntityTypesDocumentation(): string {
 		static $documentation = null;
-		if ( $documentation === null ) {
-			$documentation = file_get_contents( __DIR__ . '/../../../docs/topics/entitytypes.md' );
-		}
+		$documentation ??= file_get_contents( __DIR__ . '/../../../docs/topics/entitytypes.md' );
 		return $documentation;
 	}
 

@@ -52,9 +52,7 @@ class WikibaseContentLanguages {
 		HookContainer $hookContainer = null,
 		LanguageNameUtils $languageNameUtils = null
 	) {
-		if ( $hookContainer === null ) {
-			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
-		}
+		$hookContainer ??= MediaWikiServices::getInstance()->getHookContainer();
 
 		$contentLanguages = [];
 		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages( $languageNameUtils );

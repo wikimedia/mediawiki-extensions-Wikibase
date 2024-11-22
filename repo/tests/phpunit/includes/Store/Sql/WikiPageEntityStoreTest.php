@@ -609,9 +609,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$flags = 0,
 		$baseRevId = false
 	) {
-		if ( $user === null ) {
-			$user = $this->getTestUser()->getUser();
-		}
+		$user ??= $this->getTestUser()->getUser();
 
 		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		try {

@@ -255,9 +255,7 @@ class SnakList extends ArrayObject {
 			return;
 		}
 
-		if ( $index === null ) {
-			$index = $this->getNewOffset();
-		}
+		$index ??= $this->getNewOffset();
 
 		$hash = $value->getHash();
 		$this->offsetHashes[$hash] = $index;

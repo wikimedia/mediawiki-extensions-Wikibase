@@ -453,11 +453,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 * Resolve user specific default default for watch state, if $watch is null.
 	 */
 	private function getDesiredWatchState( ?bool $watch ): bool {
-		if ( $watch === null ) {
-			$watch = $this->getWatchDefault();
-		}
-
-		return $watch;
+		return $watch ?? $this->getWatchDefault();
 	}
 
 	/**

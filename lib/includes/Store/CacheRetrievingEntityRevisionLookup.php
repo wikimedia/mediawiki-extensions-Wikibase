@@ -69,13 +69,8 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
 
-		$entityRevision = $this->getEntityRevisionFromCache( $entityId, $revisionId, $mode );
-
-		if ( $entityRevision === null ) {
-			$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId, $mode );
-		}
-
-		return $entityRevision;
+		return $this->getEntityRevisionFromCache( $entityId, $revisionId, $mode ) ??
+			$this->lookup->getEntityRevision( $entityId, $revisionId, $mode );
 	}
 
 	/**

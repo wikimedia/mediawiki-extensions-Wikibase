@@ -35,13 +35,8 @@ class FallbackPropertyOrderProvider implements PropertyOrderProvider {
 	 * @return int[]|null
 	 */
 	public function getPropertyOrder() {
-		$propertyOrder = $this->primaryProvider->getPropertyOrder();
-
-		if ( $propertyOrder === null ) {
-			$propertyOrder = $this->secondaryProvider->getPropertyOrder();
-		}
-
-		return $propertyOrder;
+		return $this->primaryProvider->getPropertyOrder() ??
+			$this->secondaryProvider->getPropertyOrder();
 	}
 
 }

@@ -44,9 +44,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 			try {
 				$propertyTermStoreWriter->storeTerms( $propertyId, $terms );
 			} catch ( Exception $exception ) {
-				if ( $firstException === null ) {
-					$firstException = $exception;
-				}
+				$firstException ??= $exception;
 			}
 		}
 		if ( $firstException !== null ) {
@@ -60,9 +58,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 			try {
 				$propertyTermStoreWriter->deleteTerms( $propertyId );
 			} catch ( Exception $exception ) {
-				if ( $firstException === null ) {
-					$firstException = $exception;
-				}
+				$firstException ??= $exception;
 			}
 		}
 		if ( $firstException !== null ) {

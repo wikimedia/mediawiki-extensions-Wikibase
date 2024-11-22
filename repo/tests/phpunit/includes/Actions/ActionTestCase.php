@@ -161,9 +161,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	protected function createAction( string $actionName, WikiPage $page, array $params = null, $wasPosted = false ) {
 		global $wgLang;
 
-		if ( $params == null ) {
-			$params = [];
-		}
+		$params ??= [];
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, $wasPosted ) );

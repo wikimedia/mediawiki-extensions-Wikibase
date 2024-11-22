@@ -374,7 +374,7 @@ class WikibasePingback {
 	}
 
 	public static function doSchedule( WikibasePingback $instance = null ) {
-		$instance = $instance ?: new WikibasePingback;
+		$instance ??= new WikibasePingback();
 		if ( $instance->shouldSend() ) {
 			$instance->sendPingback();
 		}

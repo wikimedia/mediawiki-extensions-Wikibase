@@ -220,9 +220,7 @@ class SiteLinkDiffView implements DiffView {
 		$attrs = [
 			'dir' => 'auto',
 		];
-		if ( $html === null ) {
-			$html = htmlspecialchars( $pageName );
-		}
+		$html ??= htmlspecialchars( $pageName );
 
 		if ( $site instanceof Site ) {
 			// Otherwise it may have been deleted from the sites table

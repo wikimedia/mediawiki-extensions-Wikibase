@@ -566,23 +566,13 @@ return [
 	},
 
 	'WikibaseClient.LangLinkSiteGroup' => function ( MediaWikiServices $services ): string {
-		$group = WikibaseClient::getSettings( $services )
-			->getSetting( 'languageLinkSiteGroup' );
-
-		if ( $group === null ) {
-			$group = WikibaseClient::getSiteGroup( $services );
-		}
-
-		return $group;
+		return WikibaseClient::getSettings( $services )->getSetting( 'languageLinkSiteGroup' ) ??
+			WikibaseClient::getSiteGroup( $services );
 	},
 
 	'WikibaseClient.LangLinkSiteGroups' => function ( MediaWikiServices $services ): array {
-		$groups = WikibaseClient::getSettings( $services )->getSetting( 'languageLinkAllowedSiteGroups' );
-		if ( $groups === null ) {
-			$groups = [ WikibaseClient::getLangLinkSiteGroup( $services ) ];
-		}
-
-		return $groups;
+		return WikibaseClient::getSettings( $services )->getSetting( 'languageLinkAllowedSiteGroups' ) ??
+			[ WikibaseClient::getLangLinkSiteGroup( $services ) ];
 	},
 
 	'WikibaseClient.LanguageFallbackChainFactory' => function ( MediaWikiServices $services ): LanguageFallbackChainFactory {

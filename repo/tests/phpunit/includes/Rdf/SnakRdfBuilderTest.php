@@ -78,9 +78,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				->method( 'addValue' );
 		}
 
-		if ( $vocabulary === null ) {
-			$vocabulary = $this->getTestData()->getVocabulary();
-		}
+		$vocabulary ??= $this->getTestData()->getVocabulary();
 
 		$builder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
 		$builder->setEntityMentionListener( $mentionTracker );
