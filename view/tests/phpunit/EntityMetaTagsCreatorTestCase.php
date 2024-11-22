@@ -3,8 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\View\EntityMetaTagsCreator;
 
 /**
  * @group Wikibase
@@ -14,16 +12,19 @@ use Wikibase\View\EntityMetaTagsCreator;
  */
 abstract class EntityMetaTagsCreatorTestCase extends TestCase {
 
-	abstract public function provideTestGetMetaTags();
+	abstract public static function provideTestGetMetaTags();
 
 	/**
 	 * @dataProvider provideTestGetMetaTags
 	 */
 	public function testGetMetaTags(
-		EntityMetaTagsCreator $entityMetaTags,
-		EntityDocument $entity,
+		callable $entityMetaTagsFactory,
+		callable $entityFactory,
 		array $expectedTags
 	) {
+		$entityMetaTags = $entityMetaTagsFactory( $this );
+		$entity = $entityFactory( $this );
+
 		$outputTags = $entityMetaTags->getMetaTags( $entity );
 		$this->assertEquals( $expectedTags, $outputTags );
 	}

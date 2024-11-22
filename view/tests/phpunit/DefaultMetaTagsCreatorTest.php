@@ -14,19 +14,19 @@ use Wikibase\View\DefaultMetaTagsCreator;
  */
 class DefaultMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
 
-	public function provideTestGetMetaTags() {
+	public static function provideTestGetMetaTags() {
 
 		$defaultMetaTagsCreator = new DefaultMetaTagsCreator();
 
 		yield 'entity meta tags created with Entity that has no id' => [
-			$defaultMetaTagsCreator,
-			$this->createMock( EntityDocument::class ),
+			fn () => $defaultMetaTagsCreator,
+			fn ( self $self ) => $self->createMock( EntityDocument::class ),
 			[],
 		];
 
 		yield 'entity meta tags created with Entity that has an id' => [
-			$defaultMetaTagsCreator,
-			$this->getMockEntityWithId(),
+			fn () => $defaultMetaTagsCreator,
+			fn ( self $self ) => $self->getMockEntityWithId(),
 			[
 				'title' => 'EntityID12345',
 			],

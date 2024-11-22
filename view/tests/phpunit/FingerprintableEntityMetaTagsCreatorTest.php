@@ -18,28 +18,31 @@ use Wikibase\View\FingerprintableEntityMetaTagsCreator;
  */
 class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
 
-	public function provideTestGetMetaTags() {
-		$mock = $this->createMock( TermLanguageFallbackChain::class );
-		$mock->method( 'extractPreferredValue' )
-			->willReturnCallback( function( $input ) {
-				$langString = $input['en'] ?? null;
-				if ( $langString !== null ) {
-					return [ 'value' => $langString ];
-				}
-				return null;
-			} );
+	public static function provideTestGetMetaTags() {
 
-		$fingerprintableEntityMetaTags = new FingerprintableEntityMetaTagsCreator( $mock );
+		$fingerprintableEntityMetaTagsFactory = function ( self $self ) {
+			$mock = $self->createMock( TermLanguageFallbackChain::class );
+			$mock->method( 'extractPreferredValue' )
+				->willReturnCallback( function( $input ) {
+					$langString = $input['en'] ?? null;
+					if ( $langString !== null ) {
+						return [ 'value' => $langString ];
+					}
+					return null;
+				} );
+
+			return new FingerprintableEntityMetaTagsCreator( $mock );
+		};
 
 		yield 'entity meta tags created with Item that has no label or description' => [
-			$fingerprintableEntityMetaTags,
-			new Item( new ItemId( 'Q365287' ) ),
+			$fingerprintableEntityMetaTagsFactory,
+			fn () => new Item( new ItemId( 'Q365287' ) ),
 			[ 'title' => 'Q365287' ],
 		];
 
 		yield 'entity meta tags created with Item that has both label and description' => [
-			$fingerprintableEntityMetaTags,
-			new Item( new ItemId( 'Q538250' ), $this->getEnglishFingerprint( 'foo', 'bar' ) ),
+			$fingerprintableEntityMetaTagsFactory,
+			fn () => new Item( new ItemId( 'Q538250' ), self::getEnglishFingerprint( 'foo', 'bar' ) ),
 			[
 				'title' => 'foo',
 				'description' => 'bar',
@@ -47,7 +50,7 @@ class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTest
 		];
 	}
 
-	private function getEnglishFingerprint( $title, $description ) {
+	private static function getEnglishFingerprint( $title, $description ) {
 		return new Fingerprint(
 			new TermList(
 				[ new Term( 'en', $title ) ]
