@@ -444,6 +444,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "Illegal \"options\" given: \"applyRounding\" needs to be a bool or a string.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "Illegal \"options\" given: \"applyUnit\" needs to be a bool.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "Illegal \"options\" given: \"showcalendar\" needs to be a bool or \"auto\".",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Unsupported \"options\" given: Unknown option \"$1\" passed.",
 	"wikibase-self-conflict-patched": "Your edit was patched into the latest version, overriding some of your own intermediate changes.",
 	"wikibase-conflict-patched": "Your edit was patched into the latest version.",
 	"wikibase-save-unresolved-redirect": "Encountered an unresolved redirect from $1 to $2 while attempting to save a change.",
