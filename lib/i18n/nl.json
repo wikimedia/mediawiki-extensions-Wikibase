@@ -138,7 +138,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Eén kwalificatie|$4 kwalificaties}} van {{PLURAL:$3|één verklaring|$3 verklaringen}} gewijzigd",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Eén bron|$4 bronnen}} van {{PLURAL:$3|één verklaring|$3 verklaringen}} gewijzigd",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Volgorde van {{PLURAL:$3|één verklaring|$3 verklaringen}} gewijzigd",
-	"wikibase-entity-summary-clientsitelink-update": "Pagina hernoemd van [$3] naar [$4]",
+	"wikibase-entity-summary-clientsitelink-update": "Pagina hernoemd van [$3] tot [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "Pagina op [$3] verwijderd",
 	"wikibase-entity-summary-wbsetqualifier-add": "Kwalificatie{{PLURAL:$1||s}} toegevoegd",
 	"wikibase-entity-summary-wbsetqualifier-update": "Kwalificatie{{PLURAL:$1||s}} gewijzigd",

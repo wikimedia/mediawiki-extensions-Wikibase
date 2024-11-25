@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"FunLater"
+			"FunLater",
+			"HitomiAkane"
 		]
 	},
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الروابط",
+	"wikibase-addlinkstitle": "إضافة وصلات بين اللغات",
 	"wikibase-linkitem-addlinks": "زيد روابط",
 	"wikibase-linkitem-title": "روبط مع الصفحة",
 	"wikibase-linkitem-linkpage": "ربوط بالصفحة",

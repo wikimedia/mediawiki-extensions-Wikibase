@@ -75,7 +75,7 @@
 	"wikibase-snakformat-propertynotfound": "ਪ੍ਰਾਪਰਟੀ ਨਹੀਂ ਮਿਲੀ।",
 	"wikibase-entityselector-more": "ਹੋਰ",
 	"wikibase-entityselector-notfound": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ",
-	"wikibase-anonymouseditwarning-heading": "ਤੁਸੀਂ ਲਾਗਇਨ ਨਹੀਂ ਹੋ",
+	"wikibase-anonymouseditwarning-heading": "ਤੁਸੀਂ ਦਾਖ਼ਲ ਨਹੀਂ ਹੋ",
 	"wikibase-anonymouseditwarning-dismiss-button": "ਲੌਗਇਨ ਕੀਤੇ ਬਿਨਾਂ ਸੰਪਾਦਿਤ ਕਰੋ",
 	"wikibase-validator-label-too-long": "ਲੇਬਲ {{PLURAL:$1|ਇੱਕ ਅੱਖਰ|$1 ਅੱਖਰਾਂ}} ਤੋਂ ਲੰਬਾ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ",
 	"wikibase-validator-label-too-short": "ਲੇਬਲ ਘੱਟੋ ਘੱਟ {{PLURAL:$1|1 ਅੱਖਰ|$1 ਅੱਖਰਾਂ}} ਦਾ ਹੋਣਾ ਲਾਜ਼ਮੀ ਹੈ",
