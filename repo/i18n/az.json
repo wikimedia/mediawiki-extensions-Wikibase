@@ -57,6 +57,7 @@
 	"wikibase-remove": "sil",
 	"wikibase-claimview-snak-tooltip": "\"$1\" adlı parametrə uyğun dəyər əlavə edin. Əgər parametrin təyin olunmuş dəyəri yoxdursa və ya faktiki dəyəri bilinmirsə, qutunun sol tərəfindəki işarəni klikləməklə alternativ dəyər tipi seçin.",
 	"wikibase-claimview-snak-new-tooltip": "Parametri müəyyən etdikdən sonra ona uyğun olan dəyəri əlavə edə bilərsiniz. Əgər parametrin təyin edilmiş dəyəri yoxdursa və ya bilinmirsə, daxiletmə qutusunun sol tərəfindəki simvolu klikləməklə alternativ dəyərləri seçə bilərsiniz.",
+	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-preferred": "Üstün dərəcə",
 	"wikibase-statementview-rank-tooltip-preferred": "Əsaslı və aktual dəyər",
 	"wikibase-statementview-rank-normal": "Normal dərəcə",

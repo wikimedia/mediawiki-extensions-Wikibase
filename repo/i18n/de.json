@@ -453,6 +453,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "Ungültige „options“ angegeben: „applyRounding“ muss ein boolscher Wert oder ein String sein.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "Ungültige „options“ angegeben: „applyUnit“ muss ein boolschert Wert sein.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "Ungültige „options“ angegeben: „showcalendar“ muss ein boolscher Wert oder ein String sein.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Nicht unterstützte „options“ angegeben: Unbekannte Option „$1“ übergeben.",
 	"wikibase-self-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.",
 	"wikibase-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht.",
 	"wikibase-save-unresolved-redirect": "Beim Versuch, eine Änderung zu speichern, ist eine ungelöste Weiterleitung von $1 nach $2 aufgetreten.",

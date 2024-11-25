@@ -452,6 +452,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "İzin verilmeyen \"seçenek\" verildi: \"applyRounding\" bir boole ya da dize olmalıdır.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "İzin verilmeyen \"seçenek\" verildi: \"applyUnit\" boole olmalıdır.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "İzin verilmeyen \"seçenek\" verildi: \"showcalendar\" boole ya da \"auto\" olmalıdır.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Desteklenmeyen \"seçenek\" verildi: Bilinmeyen \"$1\" seçeneği verildi.",
 	"wikibase-self-conflict-patched": "Yaptığınız düzenleme son sürüme eklendi ve bu varsa bazı ara düzenlemelerinizi geçersiz kılacaktır.",
 	"wikibase-conflict-patched": "Yaptığınız düzenleme en son sürüme eklendi.",
 	"wikibase-save-unresolved-redirect": "Bir değişikliği kaydetmeye çalışırken $1 olarak $2 çözülmemiş bir yönlendirme ile karşılaşıldı.",

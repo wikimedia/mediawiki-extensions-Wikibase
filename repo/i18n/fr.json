@@ -489,6 +489,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "« Option » illégale fournie : « applyRounding » doit être un booléen ou une chaîne.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "« Option » illégale fournie : « applyUnit » doit être un booléen.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "« Option » illégale fournie  : « showcalendar » doit être un booléen ou « auto ».",
+	"wikibase-api-invalid-formatter-options-unknown-option": "« Option » non prise en charge : option transmise « $1 » inconnue.",
 	"wikibase-self-conflict-patched": "Votre modification a été intégrée dans la dernière version, écrasant certaines de vos propres modifications intermédiaires.",
 	"wikibase-conflict-patched": "Votre modification a été intégrée dans la dernière version.",
 	"wikibase-save-unresolved-redirect": "Redirection non résolue rencontrée de $1 vers $2 en essayant d’enregistrer une modification.",

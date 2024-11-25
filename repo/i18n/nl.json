@@ -454,6 +454,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "Er zijn ongeldige “options” opgegeven: “applyRounding” moet een Booleaanse waarde of een tekenreeks zijn.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "Er zijn ongeldige “options” opgegeven: “applyUnit” moet een Booleaanse waarde zijn.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "Er zijn ongeldige “options” opgegeven: “showcalendar” moet een Booleaanse waarde of “auto” zijn.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Niet-ondersteunde “options” gegeven: Onbekende optie “$1” doorgegeven.",
 	"wikibase-self-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.",
 	"wikibase-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie.",
 	"wikibase-save-unresolved-redirect": "Bij een poging een wijziging op te slaan is er een onopgeloste doorverwijzing van $1 naar $2 gevonden.",

@@ -437,6 +437,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "ניתן פרמטר \"options\" בלתי־תקין: \"applyRounding\" חייב להיות בוליאני או מחרוזת.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "ניתן פרמטר \"options\" בלתי־תקין: \"applyUnit\" חייב להיות בוליאני.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "ניתן פרמטר \"options\" בלתי־תקין: \"showcalendar\" חייב להיות בוליאני או \"auto\".",
+	"wikibase-api-invalid-formatter-options-unknown-option": "ניתן \"options\" בלתי־תקין: הועברה אפשרות לא ידועה \"$1\"",
 	"wikibase-self-conflict-patched": "העריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה ודרסה כמה ששינויי־הביניים שעשית.",
 	"wikibase-conflict-patched": "עריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה.",
 	"wikibase-save-unresolved-redirect": "נמצאה הפניה בלתי־פתורה מ־$1 ל־$2 בזמן הניסוי לשמור שינוי.",
