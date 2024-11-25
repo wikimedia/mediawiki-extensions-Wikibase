@@ -63,14 +63,18 @@
 		"$ref": "#/PropertyValueResponseRequired"
 	},
 	"ReferenceResponseRequired": {
-		"required": [ "hash", "parts" ],
-		"properties": {
-			"parts": {
-				"items": {
-					"$ref": "#/PropertyValueResponseRequired"
+		"allOf" : [
+			{
+				"required": [ "hash", "parts" ],
+				"properties": {
+					"parts": {
+						"items": {
+							"$ref": "#/PropertyValueResponseRequired"
+						}
+					}
 				}
 			}
-		}
+		]
 	},
 	"PropertyValueResponseRequired": {
 		"required": [ "property", "value" ],
