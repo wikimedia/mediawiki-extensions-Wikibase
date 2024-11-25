@@ -21,17 +21,17 @@ class TitleLookupBasedEntityUrlLookupTest extends TestCase {
 
 	private const Q123_URL = 'http://some-wikibase/wiki/Item:Q123';
 
-	public function provideExpectedAndTitleOrNullForFullURL() {
-		yield [ self::Q123_URL, $this->getMockTitle( 'getFullURL', self::Q123_URL ) ];
-		yield [ null, null ];
+	public static function provideExpectedAndTitleOrNullForFullURL() {
+		yield [ self::Q123_URL, fn ( self $self ) => $self->getMockTitle( 'getFullURL', self::Q123_URL ) ];
+		yield [ null, fn () => null ];
 	}
 
 	/**
 	 * @dataProvider provideExpectedAndTitleOrNullForFullURL
 	 */
-	public function testGetFullUrl( $expected, $titleOrNull ) {
+	public function testGetFullUrl( $expected, callable $titleOrNullFactory ) {
 		$entityId = new ItemId( 'Q123' );
-		$titleLookup = $this->getMockTitleLookup( $entityId, $titleOrNull );
+		$titleLookup = $this->getMockTitleLookup( $entityId, $titleOrNullFactory( $this ) );
 
 		$this->assertSame(
 			$expected,
@@ -40,17 +40,17 @@ class TitleLookupBasedEntityUrlLookupTest extends TestCase {
 		);
 	}
 
-	public function provideExpectedAndTitleOrNullForLinkURL() {
-		yield [ self::Q123_URL, $this->getMockTitle( 'getLinkURL', self::Q123_URL ) ];
-		yield [ null, null ];
+	public static function provideExpectedAndTitleOrNullForLinkURL() {
+		yield [ self::Q123_URL, fn ( self $self ) => $self->getMockTitle( 'getLinkURL', self::Q123_URL ) ];
+		yield [ null, fn () => null ];
 	}
 
 	/**
 	 * @dataProvider provideExpectedAndTitleOrNullForLinkURL
 	 */
-	public function testGetLinkUrl( $expected, $titleOrNull ) {
+	public function testGetLinkUrl( $expected, $titleOrNullFactory ) {
 		$entityId = new ItemId( 'Q123' );
-		$titleLookup = $this->getMockTitleLookup( $entityId, $titleOrNull );
+		$titleLookup = $this->getMockTitleLookup( $entityId, $titleOrNullFactory( $this ) );
 
 		$this->assertSame(
 			$expected,

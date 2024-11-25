@@ -312,7 +312,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		}
 	}
 
-	public function invalidRequestProvider(): Generator {
+	public static function invalidRequestProvider(): Generator {
 		yield [
 			ItemIdUseCaseRequest::class,
 			ValidatingRequestDeserializer::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER,

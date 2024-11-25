@@ -38,7 +38,7 @@ class StatementListSerializerTest extends DispatchableSerializerTestCase {
 		return new StatementListSerializer( $statementSerializerMock, $useObjectsForEmptyMaps );
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
@@ -48,7 +48,7 @@ class StatementListSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -62,7 +62,7 @@ class StatementListSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 

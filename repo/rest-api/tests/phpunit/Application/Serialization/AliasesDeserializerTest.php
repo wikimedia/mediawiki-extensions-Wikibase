@@ -81,7 +81,7 @@ class AliasesDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidAliases(): Generator {
+	public static function provideInvalidAliases(): Generator {
 		yield "invalid 'aliases' - sequential array" => [
 			new InvalidFieldException( 'path', [ 'not', 'an', 'associative', 'array' ], '/base/path' ),
 			[ 'not', 'an', 'associative', 'array' ],

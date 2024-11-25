@@ -30,7 +30,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTestCase {
 		return new ReferenceDeserializer( $snaksDeserializerMock );
 	}
 
-	public function deserializableProvider() {
+	public static function deserializableProvider() {
 		return [
 			[
 				[
@@ -41,7 +41,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				42,
@@ -52,7 +52,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		return [
 			[
 				new Reference(),

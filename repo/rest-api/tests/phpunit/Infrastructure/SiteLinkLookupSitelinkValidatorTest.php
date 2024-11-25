@@ -60,7 +60,7 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		$this->assertEquals( $context, $validationError->getContext() );
 	}
 
-	public function provideInvalidSitelink(): \Generator {
+	public static function provideInvalidSitelink(): \Generator {
 		yield 'missing title' => [
 			new MissingFieldException( 'title' ),
 			SitelinkValidator::CODE_TITLE_MISSING,

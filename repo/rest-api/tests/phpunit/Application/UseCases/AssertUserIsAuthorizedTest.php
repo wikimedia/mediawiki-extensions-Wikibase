@@ -54,7 +54,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		}
 	}
 
-	public function itemCreationDeniedProvider(): Generator {
+	public static function itemCreationDeniedProvider(): Generator {
 		yield 'unknown reason' => [
 			PermissionCheckResult::newDenialForUnknownReason(),
 			new UseCaseError(
@@ -100,7 +100,7 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		}
 	}
 
-	public function propertyCreationDeniedProvider(): Generator {
+	public static function propertyCreationDeniedProvider(): Generator {
 		yield 'unknown reason' => [
 			PermissionCheckResult::newDenialForUnknownReason(),
 			new UseCaseError(
@@ -150,13 +150,13 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		}
 	}
 
-	public function provideEntityId(): Generator {
+	public static function provideEntityId(): Generator {
 		yield 'item id' => [ new ItemId( 'Q123' ) ];
 		yield 'property id' => [ new NumericPropertyId( 'P123' ) ];
 	}
 
-	public function editPermissionDeniedProvider(): Generator {
-		foreach ( $this->provideEntityId() as [ $id ] ) {
+	public static function editPermissionDeniedProvider(): Generator {
+		foreach ( self::provideEntityId() as [ $id ] ) {
 			yield "{$id->getEntityType()} - permission denied, unknown reason" => [
 				$id,
 				PermissionCheckResult::newDenialForUnknownReason(),

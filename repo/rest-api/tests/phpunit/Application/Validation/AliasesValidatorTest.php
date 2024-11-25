@@ -65,7 +65,7 @@ class AliasesValidatorTest extends TestCase {
 		$this->assertEquals( $expectedError, $validationError );
 	}
 
-	public function provideInvalidAliases(): Generator {
+	public static function provideInvalidAliases(): Generator {
 		yield 'invalid aliases - sequential array' => [
 			new ValidationError(
 				AliasesValidator::CODE_INVALID_VALUE,

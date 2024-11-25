@@ -108,7 +108,7 @@ class DeserializedRequestAdapterTest extends TestCase {
 		$this->assertSame( $languageCode, $requestAdapter->getLanguageCode() );
 	}
 
-	public function languageCodeRequestProvider(): Generator {
+	public static function languageCodeRequestProvider(): Generator {
 		yield [ LabelLanguageCodeRequest::class ];
 		yield [ DescriptionLanguageCodeRequest::class ];
 		yield [ AliasLanguageCodeRequest::class ];

@@ -129,7 +129,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		);
 	}
 
-	private function getTermFallback( $term, $requestLanguageCode, $actualLanguageCode = null ): ?TermFallback {
+	private static function getTermFallback( $term, $requestLanguageCode, $actualLanguageCode = null ): ?TermFallback {
 		if ( $term === null ) {
 			return null;
 		}
@@ -142,11 +142,11 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		);
 	}
 
-	public function nonCachingLookupProvider() {
+	public static function nonCachingLookupProvider() {
 		$englishLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 
-		$englishCat = $this->getTermFallback( 'cat', 'en' );
-		$swedishEnglishCat = $this->getTermFallback( 'katt', 'en', 'sv' );
+		$englishCat = self::getTermFallback( 'cat', 'en' );
+		$swedishEnglishCat = self::getTermFallback( 'katt', 'en', 'sv' );
 
 		$dataset = [
 			[ // 'finds term in requested language, caches it and returns it'
@@ -245,8 +245,8 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$itemTwoId = new ItemId( 'Q2' );
 
 		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
-		$termFallbackOne = $this->getTermFallback( 'cat', 'en' );
-		$termFallbackTwo = $this->getTermFallback( 'hat', 'en' );
+		$termFallbackOne = self::getTermFallback( 'cat', 'en' );
+		$termFallbackTwo = self::getTermFallback( 'hat', 'en' );
 
 		$this->mockHasContentLanguage( true );
 
@@ -289,7 +289,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$getMultiple = $termType === TermTypes::TYPE_LABEL ? 'getLabels' : 'getDescriptions';
 
 		$itemId = new ItemId( 'Q1' );
-		$enTerm = $this->getTermFallback( 'cat', 'en' );
+		$enTerm = self::getTermFallback( 'cat', 'en' );
 
 		$this->contentLanguages->method( 'hasLanguage' )
 			->willReturnCallback( function ( $languageCode ) {

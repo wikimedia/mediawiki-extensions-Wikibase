@@ -23,27 +23,30 @@ use Wikimedia\Assert\ParameterTypeException;
  */
 class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideFormatSnak() {
-		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
+	public static function provideFormatSnak() {
+		$formatterUrlExpanderFactory = function ( self $self ) {
+			$formatterUrlExpander = $self->createMock( SnakUrlExpander::class );
 
-		$formatterUrlExpander->method( 'expandUrl' )
-			->willReturnCallback( function( PropertyValueSnak $snak ) {
-				if ( $snak->getPropertyId()->getSerialization() === 'P1' ) {
-					$value = $snak->getDataValue()->getValue();
-					return 'http://acme.test/stuff/' . wfUrlencode( $value );
-				}
+			$formatterUrlExpander->method( 'expandUrl' )
+				->willReturnCallback( function( PropertyValueSnak $snak ) {
+					if ( $snak->getPropertyId()->getSerialization() === 'P1' ) {
+						$value = $snak->getDataValue()->getValue();
+						return 'http://acme.test/stuff/' . wfUrlencode( $value );
+					}
 
-				return null;
-			} );
+					return null;
+				} );
+			return $formatterUrlExpander;
+		};
 
 		return [
 			'formatter URL' => [
-				$formatterUrlExpander,
+				$formatterUrlExpanderFactory,
 				new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'abc&123' ) ),
 				'<a class="wb-external-id external" href="http://acme.test/stuff/abc%26123" rel="nofollow">abc&amp;123</a>',
 			],
 			'unknown property' => [
-				$formatterUrlExpander,
+				$formatterUrlExpanderFactory,
 				new PropertyValueSnak( new NumericPropertyId( 'P2' ), new StringValue( 'abc&123' ) ),
 				'<span class="wb-external-id">abc&amp;123</span>',
 			],
@@ -54,11 +57,11 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideFormatSnak
 	 */
 	public function testFormatSnak(
-		SnakUrlExpander $urlExpander,
+		callable $urlExpanderFactory,
 		PropertyValueSnak $snak,
 		$expected
 	) {
-		$formatter = new HtmlExternalIdentifierFormatter( $urlExpander );
+		$formatter = new HtmlExternalIdentifierFormatter( $urlExpanderFactory( $this ) );
 		$text = $formatter->formatSnak( $snak );
 		$this->assertEquals( $expected, $text );
 	}

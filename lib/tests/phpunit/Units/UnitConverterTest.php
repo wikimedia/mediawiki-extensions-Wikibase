@@ -18,7 +18,7 @@ use Wikibase\Lib\Units\UnitStorage;
 class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	public function getConverterPairs() {
+	public static function getConverterPairs() {
 		return [
 			[ 'Q1', '+16', 'http://acme.test/Q2', '+1975.2' ],
 			[ 'Q1', '-16', 'http://acme.test/Q2', '-1975.2' ],
@@ -93,7 +93,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 			'Wrong lower bound' );
 	}
 
-	public function getBadConversions() {
+	public static function getBadConversions() {
 		return [
 			[ null, true ],
 			[ [ '1', 'Q123' ], false ],

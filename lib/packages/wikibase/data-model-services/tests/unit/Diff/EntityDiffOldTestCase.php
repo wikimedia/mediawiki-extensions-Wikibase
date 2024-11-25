@@ -30,7 +30,7 @@ abstract class EntityDiffOldTestCase extends TestCase {
 		}
 	}
 
-	protected function generateApplyData( $entityType ) {
+	protected static function generateApplyData( $entityType ) {
 		$tests = [];
 
 		// #0: add label

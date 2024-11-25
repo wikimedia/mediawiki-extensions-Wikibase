@@ -23,17 +23,18 @@ class ByPropertyIdGrouperTest extends TestCase {
 	/**
 	 * @dataProvider validConstructorArgumentProvider
 	 */
-	public function testConstructor( $argument ) {
+	public function testConstructor( callable $argumentFactory ) {
+		$argument = $argumentFactory( $this );
 		$instance = new ByPropertyIdGrouper( $argument );
 		$this->assertSameSize( $argument, $instance->getPropertyIds() );
 	}
 
-	public function validConstructorArgumentProvider() {
+	public static function validConstructorArgumentProvider() {
 		return [
-			[ [] ],
-			[ [ $this->getPropertyIdProviderMock( 'P1' ) ] ],
-			[ new ArrayObject() ],
-			[ new ArrayObject( [ $this->getPropertyIdProviderMock( 'P1' ) ] ) ],
+			[ fn () => [] ],
+			[ fn ( self $self ) => [ $self->getPropertyIdProviderMock( 'P1' ) ] ],
+			[ fn () => new ArrayObject() ],
+			[ fn ( self $self ) => new ArrayObject( [ $self->getPropertyIdProviderMock( 'P1' ) ] ) ],
 		];
 	}
 
@@ -56,18 +57,18 @@ class ByPropertyIdGrouperTest extends TestCase {
 		];
 	}
 
-	public function provideGetPropertyIds() {
+	public static function provideGetPropertyIds() {
 		$cases = [];
 
 		$cases['empty list'] = [
-			[],
+			fn () => [],
 			[],
 		];
 
 		$cases['some property ids'] = [
-			[
-				$this->getPropertyIdProviderMock( 'P42' ),
-				$this->getPropertyIdProviderMock( 'P23' ),
+			fn ( self $self ) => [
+				$self->getPropertyIdProviderMock( 'P42' ),
+				$self->getPropertyIdProviderMock( 'P23' ),
 			],
 			[
 				new NumericPropertyId( 'P42' ),
@@ -76,7 +77,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 		];
 
 		$cases['duplicate property ids'] = [
-			$this->getPropertyIdProviders(),
+			fn ( self $self ) => $self->getPropertyIdProviders(),
 			[
 				new NumericPropertyId( 'P42' ),
 				new NumericPropertyId( 'P23' ),
@@ -90,26 +91,26 @@ class ByPropertyIdGrouperTest extends TestCase {
 
 	/**
 	 * @dataProvider provideGetPropertyIds
-	 * @param PropertyIdProvider[] $propertyIdProviders
+	 * @param callable $propertyIdProvidersFactory
 	 * @param NumericPropertyId[] $expectedPropertyIds
 	 */
-	public function testGetPropertyIds( array $propertyIdProviders, array $expectedPropertyIds ) {
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
+	public function testGetPropertyIds( callable $propertyIdProvidersFactory, array $expectedPropertyIds ) {
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProvidersFactory( $this ) );
 		$propertyIds = $byPropertyIdGrouper->getPropertyIds();
 		$this->assertEquals( $expectedPropertyIds, $propertyIds );
 	}
 
-	public function provideGetByPropertyId() {
+	public static function provideGetByPropertyId() {
 		$cases = [];
 
 		$cases[] = [
-			$this->getPropertyIdProviders(),
+			fn ( self $self ) => $self->getPropertyIdProviders(),
 			'P42',
 			[ 'abc', 'jkl' ],
 		];
 
 		$cases[] = [
-			$this->getPropertyIdProviders(),
+			fn ( self $self ) => $self->getPropertyIdProviders(),
 			'P23',
 			[ 'def' ],
 		];
@@ -120,8 +121,8 @@ class ByPropertyIdGrouperTest extends TestCase {
 	/**
 	 * @dataProvider provideGetByPropertyId
 	 */
-	public function testGetByPropertyId( array $propertyIdProviders, $propertyId, array $expectedValues ) {
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
+	public function testGetByPropertyId( callable $propertyIdProvidersFactory, $propertyId, array $expectedValues ) {
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProvidersFactory( $this ) );
 		$values = $byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( $propertyId ) );
 		array_walk( $values, static function( Snak &$value ) {
 			$value = $value->getType();
@@ -135,14 +136,14 @@ class ByPropertyIdGrouperTest extends TestCase {
 		$byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( 'P11' ) );
 	}
 
-	public function provideHasPropertyId() {
+	public static function provideHasPropertyId() {
 		$cases = [];
 
-		$cases[] = [ $this->getPropertyIdProviders(), 'P42', true ];
-		$cases[] = [ $this->getPropertyIdProviders(), 'P23', true ];
-		$cases[] = [ $this->getPropertyIdProviders(), 'P15', true ];
-		$cases[] = [ $this->getPropertyIdProviders(), 'P10', true ];
-		$cases[] = [ $this->getPropertyIdProviders(), 'P11', false ];
+		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P42', true ];
+		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P23', true ];
+		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P15', true ];
+		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P10', true ];
+		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P11', false ];
 
 		return $cases;
 	}
@@ -150,8 +151,8 @@ class ByPropertyIdGrouperTest extends TestCase {
 	/**
 	 * @dataProvider provideHasPropertyId
 	 */
-	public function testHasPropertyId( array $propertyIdProviders, $propertyId, $expectedValue ) {
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
+	public function testHasPropertyId( callable $propertyIdProvidersFactory, $propertyId, $expectedValue ) {
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProvidersFactory( $this ) );
 		$this->assertEquals( $expectedValue, $byPropertyIdGrouper->hasPropertyId( new NumericPropertyId( $propertyId ) ) );
 	}
 

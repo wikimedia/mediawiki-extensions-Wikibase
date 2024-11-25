@@ -32,7 +32,7 @@ abstract class DispatchableDeserializerTestCase extends TestCase {
 	/**
 	 * @return array[] things that are deserialized by the deserializer
 	 */
-	abstract public function deserializableProvider();
+	abstract public static function deserializableProvider();
 
 	/**
 	 * @dataProvider nonDeserializableProvider
@@ -54,7 +54,7 @@ abstract class DispatchableDeserializerTestCase extends TestCase {
 	/**
 	 * @return array[] things that aren't deserialized by the deserializer
 	 */
-	abstract public function nonDeserializableProvider();
+	abstract public static function nonDeserializableProvider();
 
 	/**
 	 * @dataProvider deserializationProvider
@@ -66,6 +66,6 @@ abstract class DispatchableDeserializerTestCase extends TestCase {
 	/**
 	 * @return array[] an array of array( object deserialized, serialization )
 	 */
-	abstract public function deserializationProvider();
+	abstract public static function deserializationProvider();
 
 }

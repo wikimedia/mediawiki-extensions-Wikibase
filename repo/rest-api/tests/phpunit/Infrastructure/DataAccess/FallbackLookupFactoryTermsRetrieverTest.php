@@ -149,7 +149,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 		);
 	}
 
-	public function entityIdGenerator(): Generator {
+	public static function entityIdGenerator(): Generator {
 		yield 'item_id' => [ new ItemId( 'Q321' ) ];
 		yield 'property_id' => [ new NumericPropertyId( 'P123' ) ];
 	}

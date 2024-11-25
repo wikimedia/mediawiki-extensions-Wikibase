@@ -57,7 +57,7 @@ class ItemPartsSerializerTest extends TestCase {
 	}
 
 	public function testSerializeType(): void {
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build();
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build();
 
 		$serialization = $this->newSerializer()->serialize( $itemParts );
 
@@ -75,7 +75,7 @@ class ItemPartsSerializerTest extends TestCase {
 			->method( 'serialize' )
 			->willReturn( $expectedSerialization );
 
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_LABELS ] )
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_LABELS ] )
 			->setLabels( new Labels(
 				new Label( 'en', $enLabel ),
 				new Label( 'ko', $koLabel ),
@@ -99,7 +99,7 @@ class ItemPartsSerializerTest extends TestCase {
 			->method( 'serialize' )
 			->willReturn( $expectedSerialization );
 
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_DESCRIPTIONS ] )
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_DESCRIPTIONS ] )
 			->setDescriptions( new Descriptions(
 				new Description( 'en', $enDescription ),
 				new Description( 'de', $deDescription ),
@@ -114,7 +114,7 @@ class ItemPartsSerializerTest extends TestCase {
 	public function testSerializeAliases(): void {
 		$enAliases = [ 'spud', 'tater' ];
 		$deAliases = [ 'Erdapfel' ];
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_ALIASES ] )
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_ALIASES ] )
 			->setAliases( new Aliases(
 				new AliasesInLanguage( 'en', $enAliases ),
 				new AliasesInLanguage( 'de', $deAliases ),
@@ -134,7 +134,7 @@ class ItemPartsSerializerTest extends TestCase {
 		$statements = $this->createStub( StatementList::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
 			->setStatements( $statements )
 			->build();
 
@@ -153,7 +153,7 @@ class ItemPartsSerializerTest extends TestCase {
 		$sitelinks = $this->createStub( Sitelinks::class );
 		$expectedSerialization = new ArrayObject( [ 'some' => 'serialization' ] );
 
-		$itemParts = $this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
+		$itemParts = self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_SITELINKS ] )
 			->setSitelinks( $sitelinks )
 			->build();
 
@@ -178,17 +178,17 @@ class ItemPartsSerializerTest extends TestCase {
 		$this->assertEqualsCanonicalizing( $fields, $serializationFields );
 	}
 
-	public function itemPartsFieldsProvider(): Generator {
+	public static function itemPartsFieldsProvider(): Generator {
 		yield [
-			$this->newItemPartsBuilderWithSomeId( [] )->build(),
+			self::newItemPartsBuilderWithSomeId( [] )->build(),
 			[ 'id' ],
 		];
 		yield [
-			$this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build(),
+			self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_TYPE ] )->build(),
 			[ 'id', 'type' ],
 		];
 		yield [
-			$this->newItemPartsBuilderWithSomeId(
+			self::newItemPartsBuilderWithSomeId(
 				[ ItemParts::FIELD_LABELS, ItemParts::FIELD_DESCRIPTIONS, ItemParts::FIELD_ALIASES ]
 			)
 				->setLabels( new Labels() )
@@ -198,13 +198,13 @@ class ItemPartsSerializerTest extends TestCase {
 			[ 'id', 'labels', 'descriptions', 'aliases' ],
 		];
 		yield [
-			$this->newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
+			self::newItemPartsBuilderWithSomeId( [ ItemParts::FIELD_STATEMENTS ] )
 				->setStatements( new StatementList() )
 				->build(),
 			[ 'id', 'statements' ],
 		];
 		yield [
-			$this->newItemPartsBuilderWithSomeId( ItemParts::VALID_FIELDS )
+			self::newItemPartsBuilderWithSomeId( ItemParts::VALID_FIELDS )
 				->setLabels( new Labels() )
 				->setDescriptions( new Descriptions() )
 				->setAliases( new Aliases() )
@@ -225,7 +225,7 @@ class ItemPartsSerializerTest extends TestCase {
 		);
 	}
 
-	private function newItemPartsBuilderWithSomeId( array $requestedFields ): ItemPartsBuilder {
+	private static function newItemPartsBuilderWithSomeId( array $requestedFields ): ItemPartsBuilder {
 		return new ItemPartsBuilder( new ItemId( 'Q666' ), $requestedFields );
 	}
 

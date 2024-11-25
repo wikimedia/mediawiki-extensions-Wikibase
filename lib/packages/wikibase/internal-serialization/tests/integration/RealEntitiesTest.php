@@ -39,11 +39,11 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function itemLegacySerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/legacy/' );
+	public static function itemLegacySerializationProvider() {
+		return self::getEntitySerializationsFromDir( __DIR__ . '/../data/items/legacy/' );
 	}
 
-	private function getEntitySerializationsFromDir( $dir ) {
+	private static function getEntitySerializationsFromDir( $dir ) {
 		$argumentLists = [];
 
 		/**
@@ -61,8 +61,8 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 		return $argumentLists;
 	}
 
-	public function propertyLegacySerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/legacy/' );
+	public static function propertyLegacySerializationProvider() {
+		return self::getEntitySerializationsFromDir( __DIR__ . '/../data/properties/legacy/' );
 	}
 
 	/**
@@ -93,8 +93,8 @@ class RealEntitiesTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function currentEntitySerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/current/' );
+	public static function currentEntitySerializationProvider() {
+		return self::getEntitySerializationsFromDir( __DIR__ . '/../data/items/current/' );
 	}
 
 }

@@ -36,7 +36,7 @@ class StatementIdRequestValidatingDeserializerTest extends TestCase {
 		);
 	}
 
-	public function statementIdProvider(): Generator {
+	public static function statementIdProvider(): Generator {
 		yield [ new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ) ];
 		yield [ new StatementGuid( new NumericPropertyId( 'P123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ) ];
 	}
@@ -58,7 +58,7 @@ class StatementIdRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public function invalidStatementIdProvider(): Generator {
+	public static function invalidStatementIdProvider(): Generator {
 		yield 'invalid id format' => [ 'Q123$invalid' ];
 		yield 'unsupported entity type' => [ 'L123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ];
 	}

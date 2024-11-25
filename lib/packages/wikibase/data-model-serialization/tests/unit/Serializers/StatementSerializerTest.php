@@ -61,7 +61,7 @@ class StatementSerializerTest extends DispatchableSerializerTestCase {
 		);
 	}
 
-	public function serializableProvider(): array {
+	public static function serializableProvider(): array {
 		return [
 			[
 				new Statement( new PropertyNoValueSnak( 42 ) ),
@@ -69,7 +69,7 @@ class StatementSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function nonSerializableProvider(): array {
+	public static function nonSerializableProvider(): array {
 		return [
 			[
 				5,
@@ -83,7 +83,7 @@ class StatementSerializerTest extends DispatchableSerializerTestCase {
 		];
 	}
 
-	public function serializationProvider(): array {
+	public static function serializationProvider(): array {
 		$serializations = [];
 
 		$serializations[] = [

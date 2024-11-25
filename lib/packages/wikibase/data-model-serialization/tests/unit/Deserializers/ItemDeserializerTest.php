@@ -93,7 +93,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTestCase {
 		);
 	}
 
-	public function deserializableProvider() {
+	public static function deserializableProvider() {
 		return [
 			[
 				[
@@ -103,7 +103,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function nonDeserializableProvider() {
+	public static function nonDeserializableProvider() {
 		return [
 			[
 				5,
@@ -119,7 +119,7 @@ class ItemDeserializerTest extends DispatchableDeserializerTestCase {
 		];
 	}
 
-	public function deserializationProvider() {
+	public static function deserializationProvider() {
 		$provider = [
 			[
 				new Item(),

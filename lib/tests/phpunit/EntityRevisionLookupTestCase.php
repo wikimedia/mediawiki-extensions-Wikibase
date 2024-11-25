@@ -51,7 +51,7 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 	/**
 	 * @return EntityRedirect[]
 	 */
-	protected function getTestRedirects() {
+	protected static function getTestRedirects() {
 		return [
 			new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) ),
 		];
@@ -135,8 +135,8 @@ abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase
 		}
 	}
 
-	public function provideGetEntityRevision_redirect() {
-		foreach ( $this->getTestRedirects() as $redirect ) {
+	public static function provideGetEntityRevision_redirect() {
+		foreach ( self::getTestRedirects() as $redirect ) {
 			yield [ $redirect->getEntityId(), $redirect->getTargetId() ];
 		}
 	}

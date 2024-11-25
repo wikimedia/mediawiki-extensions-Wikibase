@@ -45,7 +45,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return TimeValue
 	 */
-	private function getTimeValue( $timestamp, $precision, $calendarModel ) {
+	private static function getTimeValue( $timestamp, $precision, $calendarModel ) {
 		$value = new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $calendarModel );
 
 		$class = new \ReflectionClass( TimeValue::class );
@@ -69,7 +69,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $expected, $formatter->format( $value ) );
 	}
 
-	public function timeFormatProvider() {
+	public static function timeFormatProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
@@ -112,7 +112,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 			[ $timestamp, $precision, $calendarModel, $pattern ] = $data;
 
 			$testCases[$name] = [
-				$this->getTimeValue( $timestamp, $precision, $calendarModel ),
+				self::getTimeValue( $timestamp, $precision, $calendarModel ),
 				$pattern,
 			];
 		}
@@ -125,7 +125,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( '<script>' );
 		$formatter = new HtmlTimeFormatter( null, $dateTimeFormatter, new ShowCalendarModelDecider() );
 
-		$value = $this->getTimeValue( 'MOCKTIME', TimeValue::PRECISION_DAY, 'calendar' );
+		$value = self::getTimeValue( 'MOCKTIME', TimeValue::PRECISION_DAY, 'calendar' );
 		$this->assertSame( '&lt;script&gt;<sup class="wb-calendar-name">calendar</sup>',
 			$formatter->format( $value ) );
 	}

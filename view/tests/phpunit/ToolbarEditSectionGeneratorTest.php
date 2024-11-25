@@ -96,7 +96,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function getStatementEditSection() {
+	public static function getStatementEditSection() {
 		return [
 			[ new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ) ) ],
 		];

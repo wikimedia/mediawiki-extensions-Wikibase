@@ -37,9 +37,9 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testBuildProjectLinkSidebar(
 		array $siteIdsToOutput,
-		array $result,
-		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+		array $result
 	) {
+		$sidebarLinkBadgeDisplay = $this->getSidebarLinkBadgeDisplay();
 		$targetTitle = Title::makeTitle( NS_MAIN, 'Nyan Cat' );
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
@@ -60,9 +60,9 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testBuildProjectLinksSidebarFromItemId(
 		array $siteIdsToOutput,
-		array $result,
-		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+		array $result
 	) {
+		$sidebarLinkBadgeDisplay = $this->getSidebarLinkBadgeDisplay();
 		$itemId = new ItemId( 'Q1' );
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
@@ -78,7 +78,7 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function projectLinkSidebarProvider() {
+	public static function projectLinkSidebarProvider() {
 		$wiktionaryLink = [
 			'msg' => 'wikibase-otherprojects-wiktionary',
 			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
@@ -104,28 +104,23 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 			[
 				[],
 				[],
-				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'spam', 'spam2' ],
 				[],
-				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'enwiktionary' ],
 				[ $wiktionaryLink ],
-				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				[ 'enwiki' ],
 				[ $wikipediaLink ],
-				$this->getSidebarLinkBadgeDisplay(),
 			],
 			[
 				// Make sure results are sorted alphabetically by their group names
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
 				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
-				$this->getSidebarLinkBadgeDisplay(),
 			],
 		];
 	}

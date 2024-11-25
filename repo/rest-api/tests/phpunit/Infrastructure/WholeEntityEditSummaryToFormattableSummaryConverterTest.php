@@ -32,7 +32,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		$this->assertEquals( $expectedSummary, $editSummaryFormatter->newSummaryForPropertyPatch( $editSummary ) );
 	}
 
-	public function propertyEditSummaryProvider(): Generator {
+	public static function propertyEditSummaryProvider(): Generator {
 		$userComment = 'user comment';
 		$propertyId = new NumericPropertyId( 'P123' );
 		$originalProperty = new Property( $propertyId, new Fingerprint(), 'string', null );
@@ -48,7 +48,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 					null
 				)
 			),
-			$this->constructSummary( 'update-languages-short', [ 'de, en' ], 'user comment' ),
+			self::constructSummary( 'update-languages-short', [ 'de, en' ], 'user comment' ),
 		];
 
 		yield 'patch property with just statement and no user comment' => [
@@ -62,7 +62,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 					new StatementList( NewStatement::noValueFor( 'P123' )->build() )
 				)
 			),
-			$this->constructSummary( 'update', [], null ),
+			self::constructSummary( 'update', [], null ),
 		];
 
 		yield 'patch property with statement, labels, descriptions, and user comment' => [
@@ -79,7 +79,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 					new StatementList( NewStatement::noValueFor( 'P123' )->build() )
 				)
 			),
-			$this->constructSummary( 'update-languages-and-other-short', [ 'ar, en' ], 'user comment' ),
+			self::constructSummary( 'update-languages-and-other-short', [ 'ar, en' ], 'user comment' ),
 		];
 
 		yield 'patch property with different languages of labels and descriptions ' => [
@@ -99,7 +99,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 					'string',
 				)
 			),
-			$this->constructSummary( 'update-languages-short', [ 'ar, de, en' ], 'user comment' ),
+			self::constructSummary( 'update-languages-short', [ 'ar, de, en' ], 'user comment' ),
 		];
 
 		yield 'patch property with long labels list, statement, and no user comment' => [
@@ -108,14 +108,14 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 				$originalProperty,
 				new Property(
 					$propertyId,
-					new Fingerprint( new TermList( $this->getLongTermsList() ) ),
+					new Fingerprint( new TermList( self::getLongTermsList() ) ),
 					'string',
 					new StatementList( NewStatement::noValueFor( 'P123' )->build() )
 				)
 			),
-			$this->constructSummary(
+			self::constructSummary(
 				'update-languages-and-other',
-				[ (string)count( $this->getLongTermsList() ) ],
+				[ (string)count( self::getLongTermsList() ) ],
 				null
 			),
 		];
@@ -127,27 +127,27 @@ class WholeEntityEditSummaryToFormattableSummaryConverterTest extends TestCase {
 				new Property(
 					$propertyId,
 					new Fingerprint(
-						new TermList( $this->getLongTermsList() )
+						new TermList( self::getLongTermsList() )
 					),
 					'string',
 					null
 				)
 			),
-			$this->constructSummary(
+			self::constructSummary(
 				'update-languages',
-				[ (string)count( $this->getLongTermsList() ) ],
+				[ (string)count( self::getLongTermsList() ) ],
 				'user comment'
 			),
 		];
 	}
 
-	private function constructSummary( string $actionName, array $autoCommentArgs, ?string $userComment ): Summary {
+	private static function constructSummary( string $actionName, array $autoCommentArgs, ?string $userComment ): Summary {
 		$summary = new Summary( 'wbeditentity', $actionName, null, $autoCommentArgs );
 		$summary->setUserSummary( $userComment );
 		return $summary;
 	}
 
-	private function getLongTermsList(): array {
+	private static function getLongTermsList(): array {
 		$longLabelsList = [];
 		$languages = WikibaseRepo::getTermsLanguages()->getLanguages();
 

@@ -64,11 +64,11 @@ class EntityDeserializationCompatibilityTest extends TestCase {
 		);
 	}
 
-	public function entityProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/' );
+	public static function entityProvider() {
+		return self::getEntitySerializationsFromDir( __DIR__ . '/../data/' );
 	}
 
-	private function getEntitySerializationsFromDir( $dir ) {
+	private static function getEntitySerializationsFromDir( $dir ) {
 		$argumentLists = [];
 
 		/**

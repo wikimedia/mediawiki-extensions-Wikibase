@@ -333,8 +333,8 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testEquals() {
-		$statement = $this->newStatement();
-		$target = $this->newStatement();
+		$statement = self::newStatement();
+		$target = self::newStatement();
 
 		$this->assertTrue( $statement->equals( $target ) );
 	}
@@ -349,19 +349,19 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array array of arrays: [ [ Statement $statement, Statement $target ], ... ]
 	 */
-	public function provideNonEqualStatements(): array {
-		$statement = $this->newStatement();
+	public static function provideNonEqualStatements(): array {
+		$statement = self::newStatement();
 
-		$statementWithoutQualifiers = $this->newStatement();
+		$statementWithoutQualifiers = self::newStatement();
 		$statementWithoutQualifiers->setQualifiers( new SnakList() );
 
-		$statementWithoutReferences = $this->newStatement();
+		$statementWithoutReferences = self::newStatement();
 		$statementWithoutReferences->setReferences( new ReferenceList() );
 
-		$statementWithPreferredRank = $this->newStatement();
+		$statementWithPreferredRank = self::newStatement();
 		$statementWithPreferredRank->setRank( Statement::RANK_PREFERRED );
 
-		$statementMainSnakNotEqual = $this->newStatement();
+		$statementMainSnakNotEqual = self::newStatement();
 		$statementMainSnakNotEqual->setMainSnak( new PropertyNoValueSnak( 9000 ) );
 
 		return [
@@ -372,7 +372,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private function newStatement(): Statement {
+	private static function newStatement(): Statement {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
 			new SnakList( [ new PropertyNoValueSnak( 23 ) ] ),

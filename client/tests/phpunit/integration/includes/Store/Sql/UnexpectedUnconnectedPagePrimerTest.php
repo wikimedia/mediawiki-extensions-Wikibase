@@ -44,9 +44,7 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function insertPagePropProvider(): array {
-		$namespaceString = strval( -$this->getDefaultWikitextNS() );
-		$namespaceFloat = -$this->getDefaultWikitextNS() + 0.0;
+	public static function insertPagePropProvider(): array {
 		$convertToLegacy = function( $row ) {
 			if ( $row[1] === 'unexpectedUnconnectedPage' ) {
 				// The value doesn't matter and to make sure we actually need a change,
@@ -56,7 +54,7 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			return $row;
 		};
 
-		$nothingToDo = [
+		$nothingToDo = fn () => [
 			[ '1', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '2', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '2', 'unrelated-page-prop', '', 0.0 ],
@@ -65,14 +63,14 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			[ '101', 'expectedUnconnectedPage', '', 0.0 ],
 		];
 
-		$oneUnconnectedPrior = [
+		$oneUnconnectedPrior = fn () => [
 			[ '1', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '3', 'unrelated-page-prop', '1', 1.0 ],
 			[ '3', 'wikibase_item', 'Q12', 0.0 ],
 			[ '4', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '101', 'expectedUnconnectedPage', '', 0.0 ],
 		];
-		$oneUnconnectedExpected = [
+		$oneUnconnectedExpected = fn ( $namespaceString, $namespaceFloat ) => [
 			[ '1', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '2', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 			[ '3', 'unrelated-page-prop', '1', 1.0 ],
@@ -81,11 +79,11 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			[ '101', 'expectedUnconnectedPage', '', 0.0 ],
 		];
 
-		$manyUnconnectedPrior = [
+		$manyUnconnectedPrior = fn () => [
 			[ '3', 'expectedUnconnectedPage', '', 0.0 ],
 			[ '4', 'unrelated-page-prop', '', 0.0 ],
 		];
-		$manyUnconnectedExpected = [
+		$manyUnconnectedExpected = fn ( $namespaceString, $namespaceFloat ) => [
 			[ '1', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 			[ '2', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 			[ '3', 'expectedUnconnectedPage', '', 0.0 ],
@@ -121,7 +119,10 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			],
 			'Many unexpectedly unconnected with legacy (positive) sortkey, tiny batch size' => [
 				'expectedPageProps' => $manyUnconnectedExpected,
-				'priorPageProps' => array_map( $convertToLegacy, $manyUnconnectedExpected ),
+				'priorPageProps' => fn ( $namespaceString, $namespaceFloat ) => array_map(
+					$convertToLegacy,
+					$manyUnconnectedExpected( $namespaceString, $namespaceFloat )
+				),
 				'batchSize' => 3,
 			],
 			'Many unexpectedly unconnected, tiny batch size, tiny batch size multiplicator' => [
@@ -132,19 +133,21 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 			],
 			'Many unexpectedly unconnected with legacy (positive) sortkey, tiny batch size, tiny batch size multiplicator' => [
 				'expectedPageProps' => $manyUnconnectedExpected,
-				'priorPageProps' => array_map( $convertToLegacy, $manyUnconnectedExpected ),
+				'priorPageProps' => fn ( $namespaceString, $namespaceFloat ) => array_map(
+					$convertToLegacy, $manyUnconnectedExpected( $namespaceString, $namespaceFloat )
+				),
 				'batchSize' => 2,
 				'batchSizeSelectMultiplicator' => 2,
 			],
 			'All unexpectedly unconnected, tiny batch size, tiny batch size multiplicator' => [
-				'expectedPageProps' => [
+				'expectedPageProps' => fn ( $namespaceString, $namespaceFloat ) => [
 					[ '1', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 					[ '2', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 					[ '3', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 					[ '4', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 					[ '101', 'unexpectedUnconnectedPage', $namespaceString, $namespaceFloat ],
 				],
-				'priorPageProps' => [],
+				'priorPageProps' => fn () => [],
 				'batchSize' => 1,
 				'batchSizeSelectMultiplicator' => 2,
 			],
@@ -155,11 +158,17 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider insertPagePropProvider
 	 */
 	public function testInsertPageProp(
-		array $expectedPageProps,
-		array $priorPageProps,
+		callable $expectedPagePropsFactory,
+		callable $priorPagePropsFactory,
 		int $batchSize = 1000,
 		int $batchSizeSelectMultiplicator = null
 	): void {
+		$namespaceString = strval( -$this->getDefaultWikitextNS() );
+		$namespaceFloat = -$this->getDefaultWikitextNS() + 0.0;
+
+		$expectedPageProps = $expectedPagePropsFactory( $namespaceString, $namespaceFloat );
+		$priorPageProps = $priorPagePropsFactory( $namespaceString, $namespaceFloat );
+
 		$this->insertPageProps( $priorPageProps );
 
 		$primer = new UnexpectedUnconnectedPagePrimer(

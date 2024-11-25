@@ -73,7 +73,7 @@ class SitelinkDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidSitelinkSerialization(): Generator {
+	public static function provideInvalidSitelinkSerialization(): Generator {
 		yield 'title missing' => [ [ 'badges' => self::ALLOWED_BADGES[ 0 ] ], new MissingFieldException( 'title', '' ) ];
 		yield 'title empty' => [
 			[ 'title' => '', 'badges' => self::ALLOWED_BADGES[ 1 ] ],

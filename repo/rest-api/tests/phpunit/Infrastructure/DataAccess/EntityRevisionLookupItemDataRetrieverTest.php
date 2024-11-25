@@ -63,7 +63,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->assertEquals( Descriptions::fromTermList( $item->getDescriptions() ), $itemParts->getDescriptions() );
 		$this->assertEquals( Aliases::fromAliasGroupList( $item->getAliasGroups() ), $itemParts->getAliases() );
 		$this->assertEquals(
-			new StatementList( $this->newStatementReadModelConverter()->convert( $expectedStatement ) ),
+			new StatementList( self::newStatementReadModelConverter()->convert( $expectedStatement ) ),
 			$itemParts->getStatements()
 		);
 		$this->assertEquals(
@@ -92,8 +92,9 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 	public function testGivenFields_getItemPartsReturnsOnlyRequestFields(
 		ItemWriteModel $item,
 		array $fields,
-		ItemParts $itemParts
+		callable $itemPartsFactory
 	): void {
+		$itemParts = $itemPartsFactory( $this );
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
@@ -102,7 +103,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		);
 	}
 
-	public function itemPartsWithFieldsProvider(): Generator {
+	public static function itemPartsWithFieldsProvider(): Generator {
 		$statement = NewStatement::someValueFor( 'P123' )
 			->withGuid( 'Q666$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();
@@ -119,7 +120,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		yield 'labels, descriptions, aliases' => [
 			$item,
 			$fields,
-			( new ItemPartsBuilder( $item->getId(), $fields ) )
+			fn() => ( new ItemPartsBuilder( $item->getId(), $fields ) )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
@@ -128,19 +129,19 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		yield 'statements only' => [
 			$item,
 			[ ItemParts::FIELD_STATEMENTS ],
-			( new ItemPartsBuilder( $item->getId(), [ ItemParts::FIELD_STATEMENTS ] ) )
-				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
+			fn() => ( new ItemPartsBuilder( $item->getId(), [ ItemParts::FIELD_STATEMENTS ] ) )
+				->setStatements( new StatementList( self::newStatementReadModelConverter()->convert( $statement ) ) )
 				->build(),
 		];
 		yield 'all fields' => [
 			$item,
 			ItemParts::VALID_FIELDS,
-			( new ItemPartsBuilder( $item->getId(), ItemParts::VALID_FIELDS ) )
+			fn( self $self ) => ( new ItemPartsBuilder( $item->getId(), ItemParts::VALID_FIELDS ) )
 				->setLabels( Labels::fromTermList( $item->getLabels() ) )
 				->setDescriptions( Descriptions::fromTermList( $item->getDescriptions() ) )
 				->setAliases( Aliases::fromAliasGroupList( $item->getAliasGroups() ) )
-				->setStatements( new StatementList( $this->newStatementReadModelConverter()->convert( $statement ) ) )
-				->setSitelinks( $this->newSitelinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
+				->setStatements( new StatementList( self::newStatementReadModelConverter()->convert( $statement ) ) )
+				->setSitelinks( $self->newSitelinksReadModelConverter()->convert( $item->getSiteLinkList() ) )
 				->build(),
 		];
 	}
@@ -164,8 +165,8 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 
 		$this->assertEquals(
 			new StatementList(
-				$this->newStatementReadModelConverter()->convert( $statement1 ),
-				$this->newStatementReadModelConverter()->convert( $statement2 )
+				self::newStatementReadModelConverter()->convert( $statement1 ),
+				self::newStatementReadModelConverter()->convert( $statement2 )
 			),
 			$this->newRetriever()->getStatements( $item->getId() )
 		);
@@ -189,7 +190,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 		$this->entityRevisionLookup = $this->newEntityRevisionLookupForIdWithReturnValue( $item->getId(), $item );
 
 		$this->assertEquals(
-			new StatementList( $this->newStatementReadModelConverter()->convert( $statement1 ) ),
+			new StatementList( self::newStatementReadModelConverter()->convert( $statement1 ) ),
 			$this->newRetriever()->getStatements( $item->getId(), new NumericPropertyId( 'P123' ) )
 		);
 	}
@@ -327,7 +328,7 @@ class EntityRevisionLookupItemDataRetrieverTest extends TestCase {
 	private function newRetriever(): EntityRevisionLookupItemDataRetriever {
 		return new EntityRevisionLookupItemDataRetriever(
 			$this->entityRevisionLookup,
-			$this->newStatementReadModelConverter(),
+			self::newStatementReadModelConverter(),
 			$this->newSitelinksReadModelConverter()
 		);
 	}

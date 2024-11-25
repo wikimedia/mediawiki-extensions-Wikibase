@@ -234,7 +234,7 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$this->assertArrayHasKey( 'Q32488#D', $usages );
 	}
 
-	public function addTitleOrSitelinksUsageProvider() {
+	public static function addTitleOrSitelinksUsageProvider() {
 		yield "request for sitelink from current site" => [ null, 'Q32488#T' ];
 		yield "request for sitelink on another site" => [ "ruwiki", 'Q32488#S' ];
 	}

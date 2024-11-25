@@ -39,19 +39,17 @@ class TypedSnakSerializerTest extends TestCase {
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testDataTypeIsAddedToSnakSerialization( TypedSnak $input, array $expected ) {
-		$actualSerialization = $this->serializer->serialize( $input );
+	public function testDataTypeIsAddedToSnakSerialization( callable $inputFactory, array $expected ) {
+		$actualSerialization = $this->serializer->serialize( $inputFactory( $this ) );
 
 		$this->assertEquals( $expected, $actualSerialization );
 	}
 
-	public function serializationProvider() {
+	public static function serializationProvider() {
 		$argLists = [];
 
-		$mockSnak = $this->createMock( Snak::class );
-
 		$argLists[] = [
-			new TypedSnak( $mockSnak, 'string' ),
+			fn ( self $self ) => new TypedSnak( $self->createMock( Snak::class ), 'string' ),
 			[
 				'foo' => 'bar',
 				'baz' => 42,
@@ -60,7 +58,7 @@ class TypedSnakSerializerTest extends TestCase {
 		];
 
 		$argLists[] = [
-			new TypedSnak( $mockSnak, 'kittens' ),
+			fn ( self $self ) => new TypedSnak( $self->createMock( Snak::class ), 'kittens' ),
 			[
 				'foo' => 'bar',
 				'baz' => 42,

@@ -9,7 +9,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
@@ -34,7 +33,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 	/**
 	 * @dataProvider provideGetLabelDescriptionLookup
 	 */
-	public function testGetLabelDescriptionLookup( TermLookup $termLookup, FormatterOptions $options, $expectedLabel ) {
+	public function testGetLabelDescriptionLookup( callable $termLookupFactory, callable $optionsFactory, $expectedLabel ) {
 		$itemId = new ItemId( 'Q1' );
 		$redirectResolvingLatestRevisionLookup = $this->createStub( RedirectResolvingLatestRevisionLookup::class );
 		$redirectResolvingLatestRevisionLookup->method( 'lookupLatestRevisionResolvingRedirect' )
@@ -44,11 +43,11 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 			] );
 
 		$factory = new FormatterLabelDescriptionLookupFactory(
-			$termLookup,
+			$termLookupFactory( $this ),
 			new TermFallbackCacheFacade( new FakeCache(), 9999 ),
 			$redirectResolvingLatestRevisionLookup
 		);
-		$labelDescriptionLookup = $factory->getLabelDescriptionLookup( $options );
+		$labelDescriptionLookup = $factory->getLabelDescriptionLookup( $optionsFactory( $this ) );
 
 		$this->assertInstanceOf( LabelDescriptionLookup::class, $labelDescriptionLookup );
 
@@ -56,48 +55,48 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 		$this->assertEquals( $expectedLabel, $term->getText() );
 	}
 
-	public function provideGetLabelDescriptionLookup() {
-		$termLookup = $this->createMock( TermLookup::class );
+	public static function provideGetLabelDescriptionLookup() {
+		$termLookupFactory = function ( self $self ) {
+			$termLookup = $self->createMock( TermLookup::class );
 
-		$termLookup->method( 'getLabel' )
-			->willReturnCallback( function ( $item, $language ) {
-				if ( $language === 'de' ) {
-					return 'Kätzchen';
-				}
+			$termLookup->method( 'getLabel' )
+				->willReturnCallback( function ( $item, $language ) {
+					if ( $language === 'de' ) {
+						return 'Kätzchen';
+					}
 
-				throw new OutOfBoundsException( 'no bananas' );
-			} );
+					throw new OutOfBoundsException( 'no bananas' );
+				} );
 
-		$termLookup->method( 'getLabels' )
-			->willReturn( [ 'de' => 'Kätzchen' ] );
+			$termLookup->method( 'getLabels' )
+				->willReturn( [ 'de' => 'Kätzchen' ] );
 
-		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, 'de' );
+			return $termLookup;
+		};
 
-		$stubContentLanguages = $this->createStub( ContentLanguages::class );
-		$stubContentLanguages->method( 'hasLanguage' )
-			->willReturn( true );
-		$deChChain = new TermLanguageFallbackChain( [
-			LanguageWithConversion::factory( 'de-ch' ),
-			LanguageWithConversion::factory( 'de' ),
-		], $stubContentLanguages );
-
-		$frChain = new TermLanguageFallbackChain( [
-			LanguageWithConversion::factory( 'fr' ),
-		], $stubContentLanguages );
+		$getDeChChain = function ( self $self ) {
+			$stubContentLanguages = $self->createStub( ContentLanguages::class );
+			$stubContentLanguages->method( 'hasLanguage' )
+				->willReturn( true );
+			return new TermLanguageFallbackChain( [
+				LanguageWithConversion::factory( 'de-ch' ),
+				LanguageWithConversion::factory( 'de' ),
+			], $stubContentLanguages );
+		};
 
 		return [
 			'language' => [
-				$termLookup,
-				new FormatterOptions( [
+				$termLookupFactory,
+				fn () => new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'de',
 				] ),
 				'Kätzchen',
 			],
 			'language and fallback chain' => [
-				$termLookup,
-				new FormatterOptions( [
+				$termLookupFactory,
+				fn ( self $self ) => new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'fr',
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $deChChain,
+					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $getDeChChain( $self ),
 				] ),
 				'Kätzchen',
 			],

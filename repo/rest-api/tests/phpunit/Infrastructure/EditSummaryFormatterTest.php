@@ -161,7 +161,7 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function sitelinkEditSummaryProvider(): Generator {
+	public static function sitelinkEditSummaryProvider(): Generator {
 		$userComment = 'user comment';
 		$siteId = 'enwiki';
 		$article = 'Potato';
@@ -206,21 +206,21 @@ class EditSummaryFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function sitelinksEditSummaryProvider(): Generator {
+	public static function sitelinksEditSummaryProvider(): Generator {
 		yield 'patch sitelinks' => [
 			SitelinksEditSummary::newPatchSummary( 'user comment' ),
 			'/* wbeditentity-update:0| */ user comment',
 		];
 	}
 
-	public function createItemEditSummaryProvider(): Generator {
+	public static function createItemEditSummaryProvider(): Generator {
 		yield 'create item' => [
 			CreateItemEditSummary::newSummary( 'user comment' ),
 			'/* wbeditentity-create-item:0| */ user comment',
 		];
 	}
 
-	public function createPropertyEditSummaryProvider(): Generator {
+	public static function createPropertyEditSummaryProvider(): Generator {
 		yield 'create property' => [
 			CreatePropertyEditSummary::newSummary( 'user comment' ),
 			'/* wbeditentity-create-property:0| */ user comment',

@@ -29,8 +29,8 @@ class TermsEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		$this->assertEquals( $formattedSummary, $editSummaryFormatter->convertLabelsEditSummary( $editSummary ) );
 	}
 
-	public function labelsEditSummaryProvider(): Generator {
-		return $this->termsEditSummaryProvider( 'label', [ LabelsEditSummary::class, 'newPatchSummary' ] );
+	public static function labelsEditSummaryProvider(): Generator {
+		return self::termsEditSummaryProvider( 'label', [ LabelsEditSummary::class, 'newPatchSummary' ] );
 	}
 
 	/**
@@ -41,25 +41,25 @@ class TermsEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		$this->assertEquals( $formattedSummary, $editSummaryFormatter->convertDescriptionsEditSummary( $editSummary ) );
 	}
 
-	public function descriptionsEditSummaryProvider(): Generator {
-		return $this->termsEditSummaryProvider( 'description', [ DescriptionsEditSummary::class, 'newPatchSummary' ] );
+	public static function descriptionsEditSummaryProvider(): Generator {
+		return self::termsEditSummaryProvider( 'description', [ DescriptionsEditSummary::class, 'newPatchSummary' ] );
 	}
 
-	private function termsEditSummaryProvider( string $term, callable $newSummaryMethod ): Generator {
-		$dataSet = $this->termsEditSummaryDataSet();
+	private static function termsEditSummaryProvider( string $term, callable $newSummaryMethod ): Generator {
+		$dataSet = self::termsEditSummaryDataSet();
 		foreach ( $dataSet as $msg => [ $comment, $original, $modified, $expectedSummary ] ) {
 			yield sprintf( $msg, $term ) => [ $newSummaryMethod( $comment, $original, $modified ), $expectedSummary ];
 		}
 	}
 
-	private function termsEditSummaryDataSet(): Generator {
+	private static function termsEditSummaryDataSet(): Generator {
 		yield 'replace many %1$ss' => [
 			'patch user comment',
 			new TermList(),
-			new TermList( $this->getLongTermsList() ),
-			$this->constructSummary(
+			new TermList( self::getLongTermsList() ),
+			self::constructSummary(
 				'update-languages',
-				(string)count( $this->getLongTermsList() ),
+				(string)count( self::getLongTermsList() ),
 				'patch user comment'
 			),
 		];
@@ -68,39 +68,39 @@ class TermsEditSummaryToFormattableSummaryConverterTest extends TestCase {
 			'patch user comment',
 			new TermList(),
 			new TermList( [ new Term( 'en', 'TERM-TEXT' ), new Term( 'de', 'TERM-TEXT-IN-GERMAN' ) ] ),
-			$this->constructSummary( 'update-languages-short', 'de, en', 'patch user comment' ),
+			self::constructSummary( 'update-languages-short', 'de, en', 'patch user comment' ),
 		];
 
 		yield 'add english %1$s' => [
 			null,
 			new TermList(),
 			new TermList( [ new Term( 'en', 'ENGLISH-TERM' ) ] ),
-			$this->constructSummary( 'update-languages-short', 'en', null ),
+			self::constructSummary( 'update-languages-short', 'en', null ),
 		];
 
 		yield 'add a german %1$s with an existing english %1$s' => [
 			null,
 			new TermList( [ new Term( 'en', 'ENGLISH-TERM' ) ] ),
 			new TermList( [ new Term( 'de', 'GERMAN-TERM' ), new Term( 'en', 'ENGLISH-TERM' ) ] ),
-			$this->constructSummary( 'update-languages-short', 'de', null ),
+			self::constructSummary( 'update-languages-short', 'de', null ),
 		];
 
 		yield 'modify english %1$s' => [
 			null,
 			new TermList( [ new Term( 'en', 'ENGLISH-TERM' ) ] ),
 			new TermList( [ new Term( 'en', 'MODIFIED-ENGLISH-TERM' ) ] ),
-			$this->constructSummary( 'update-languages-short', 'en', null ),
+			self::constructSummary( 'update-languages-short', 'en', null ),
 		];
 
 		yield 'delete english %1$s' => [
 			null,
 			new TermList( [ new Term( 'en', 'ENGLISH-TERM' ) ] ),
 			new TermList(),
-			$this->constructSummary( 'update-languages-short', 'en', null ),
+			self::constructSummary( 'update-languages-short', 'en', null ),
 		];
 	}
 
-	private function getLongTermsList(): array {
+	private static function getLongTermsList(): array {
 		$longLabelsList = [];
 		$languages = WikibaseRepo::getTermsLanguages()->getLanguages();
 
@@ -110,7 +110,7 @@ class TermsEditSummaryToFormattableSummaryConverterTest extends TestCase {
 		return $longLabelsList;
 	}
 
-	private function constructSummary( string $actionName, string $autoCommentArgs, ?string $userComment ): Summary {
+	private static function constructSummary( string $actionName, string $autoCommentArgs, ?string $userComment ): Summary {
 		$summary = new Summary( 'wbeditentity', $actionName, null, [ $autoCommentArgs ] );
 		$summary->setUserSummary( $userComment );
 		return $summary;

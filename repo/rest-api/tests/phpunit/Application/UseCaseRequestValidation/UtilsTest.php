@@ -28,7 +28,7 @@ class UtilsTest extends TestCase {
 		$this->assertSame( $index, Utils::getIndexOfValueInSerialization( $value, $serialization ) );
 	}
 
-	public function successProvider(): Generator {
+	public static function successProvider(): Generator {
 		yield 'int' => [
 			1,
 			[ 0, 1, 2, 3 ],
@@ -65,7 +65,7 @@ class UtilsTest extends TestCase {
 		Utils::getIndexOfValueInSerialization( $value, $serialization );
 	}
 
-	public function failureProvider(): Generator {
+	public static function failureProvider(): Generator {
 		yield 'value not in serialization' => [
 			'a',
 			[ 'b' => 'b', 'c' => 'c' ],

@@ -21,7 +21,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
-	private function getRegistry() {
+	private static function getRegistry() {
 		return require __DIR__ . '/../../WikibaseLib.entitytypes.php';
 	}
 
@@ -59,12 +59,12 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		return $deserializerFactory;
 	}
 
-	public function provideEntityTypes() {
+	public static function provideEntityTypes() {
 		return array_map(
 			function( $entityType ) {
 				return [ $entityType ];
 			},
-			array_keys( $this->getRegistry() )
+			array_keys( self::getRegistry() )
 		);
 	}
 
@@ -79,7 +79,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideEntityTypes
 	 */
 	public function testSerializerFactory( $entityType ) {
-		$registry = $this->getRegistry();
+		$registry = self::getRegistry();
 		$serializerFactory = $this->getSerializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );
@@ -99,7 +99,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideEntityTypes
 	 */
 	public function testDeserializerFactory( $entityType ) {
-		$registry = $this->getRegistry();
+		$registry = self::getRegistry();
 		$deserializerFactory = $this->getDeserializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );

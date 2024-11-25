@@ -21,7 +21,7 @@ class EntityTermsSelectQueryBuilderTest extends TestCase {
 	use MediaWikiCoversValidator;
 	use MediaWikiTestCaseTrait;
 
-	public function provideEntityTypeAndExpectedQueryInfo(): iterable {
+	public static function provideEntityTypeAndExpectedQueryInfo(): iterable {
 		yield 'item' => [
 			'entityType' => 'item',
 			'expectedTables' => [

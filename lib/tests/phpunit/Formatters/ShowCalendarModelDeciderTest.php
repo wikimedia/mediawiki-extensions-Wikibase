@@ -40,7 +40,7 @@ class ShowCalendarModelDeciderTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $decider->showCalendarModel( $value, $options ) );
 	}
 
-	public function provideValuesWithDecision(): iterable {
+	public static function provideValuesWithDecision(): iterable {
 		$tests = [
 			'a gregorian day in 1520' => [
 				'+1520-05-01T00:00:00Z',
@@ -208,13 +208,13 @@ class ShowCalendarModelDeciderTest extends MediaWikiIntegrationTestCase {
 			[ $timestamp, $precision, $calendarModel, $decision ] = $data;
 
 			yield $name => [
-				$this->getTimeValue( $timestamp, $precision, $calendarModel ),
+				self::getTimeValue( $timestamp, $precision, $calendarModel ),
 				$decision,
 			];
 		}
 	}
 
-	private function getTimeValue( string $timestamp, int $precision, string $calendarModel ): TimeValue {
+	private static function getTimeValue( string $timestamp, int $precision, string $calendarModel ): TimeValue {
 		$value = new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $calendarModel );
 
 		$wrapper = TestingAccessWrapper::newFromObject( $value );

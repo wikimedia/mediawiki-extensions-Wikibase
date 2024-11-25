@@ -51,7 +51,8 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider formatProvider
 	 */
-	public function testFormat( $value, $formatters, $expected ) {
+	public function testFormat( $value, callable $formattersFactory, string $expected ) {
+		$formatters = $formattersFactory( $this );
 		$formatter = new DispatchingValueFormatter(
 			$formatters
 		);
@@ -59,43 +60,49 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $formatter->format( $value ) );
 	}
 
-	public function formatProvider() {
-		$stringFormatter = $this->createMock( ValueFormatter::class );
-		$stringFormatter->method( 'format' )
-			->willReturn( 'VT:string' );
+	public static function formatProvider() {
+		$formattersFactory = function ( self $self ) {
+			$stringFormatter = $self->createMock( ValueFormatter::class );
+			$stringFormatter->method( 'format' )
+				->willReturn( 'VT:string' );
 
-		$mediaFormatter = $this->createMock( ValueFormatter::class );
-		$mediaFormatter->method( 'format' )
-			->willReturn( 'VT:wikibase-entityid' );
+			$entityIdFormatter = $self->createMock( ValueFormatter::class );
+			$entityIdFormatter->method( 'format' )
+				->willReturn( 'VT:wikibase-entityid' );
 
-		$formatters = [
-			'VT:string' => $stringFormatter,
-			'VT:wikibase-entityid' => $mediaFormatter,
-		];
-		$lazyFormatters = array_map( fn( $formatter ) => fn() => $formatter, $formatters );
+			return [
+				'VT:string' => $stringFormatter,
+				'VT:wikibase-entityid' => $entityIdFormatter,
+			];
+		};
+
+		$lazyFormattersFactory = fn ( self $self ) => array_map(
+			fn( $formatter ) => fn() => $formatter,
+			$formattersFactory( $self ),
+		);
 
 		return [
 			'match PT' => [
 				new EntityIdValue( new ItemId( 'Q13' ) ),
-				$formatters,
+				$formattersFactory,
 				'VT:wikibase-entityid',
 			],
 
 			'match VT' => [
 				new StringValue( 'something' ),
-				$formatters,
+				$formattersFactory,
 				'VT:string',
 			],
 
 			'match PT (lazy)' => [
 				new EntityIdValue( new ItemId( 'Q13' ) ),
-				$lazyFormatters,
+				$lazyFormattersFactory,
 				'VT:wikibase-entityid',
 			],
 
 			'match VT (lazy)' => [
 				new StringValue( 'something' ),
-				$lazyFormatters,
+				$lazyFormattersFactory,
 				'VT:string',
 			],
 		];
@@ -104,55 +111,61 @@ class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider formatValueProvider
 	 */
-	public function testFormatValue( $value, $type, $formatters, $expected ) {
+	public function testFormatValue( $value, string $type, callable $formattersFactory, string $expected ) {
 		$formatter = new DispatchingValueFormatter(
-			$formatters
+			$formattersFactory( $this )
 		);
 
 		$this->assertEquals( $expected, $formatter->formatValue( $value, $type ) );
 	}
 
-	public function formatValueProvider() {
-		$stringFormatter = $this->createMock( ValueFormatter::class );
-		$stringFormatter->method( 'format' )
-			->willReturn( 'VT:string' );
+	public static function formatValueProvider() {
+		$formattersFactory = function ( self $self ) {
+			$stringFormatter = $self->createMock( ValueFormatter::class );
+			$stringFormatter->method( 'format' )
+				->willReturn( 'VT:string' );
 
-		$mediaFormatter = $this->createMock( ValueFormatter::class );
-		$mediaFormatter->method( 'format' )
-			->willReturn( 'PT:commonsMedia' );
+			$mediaFormatter = $self->createMock( ValueFormatter::class );
+			$mediaFormatter->method( 'format' )
+				->willReturn( 'PT:commonsMedia' );
 
-		$formatters = [
-			'VT:string' => $stringFormatter,
-			'PT:commonsMedia' => $mediaFormatter,
-		];
-		$lazyFormatters = array_map( fn( $formatter ) => fn() => $formatter, $formatters );
+			return [
+				'VT:string' => $stringFormatter,
+				'PT:commonsMedia' => $mediaFormatter,
+			];
+		};
+
+		$lazyFormattersFactory = fn ( self $self ) => array_map(
+			fn( $formatter ) => fn() => $formatter,
+			$formattersFactory( $self ),
+		);
 
 		return [
 			'match PT' => [
 				new StringValue( 'Foo.jpg' ),
 				'commonsMedia',
-				$formatters,
+				$formattersFactory,
 				'PT:commonsMedia',
 			],
 
 			'match VT' => [
 				new StringValue( 'something' ),
 				'someStuff',
-				$formatters,
+				$formattersFactory,
 				'VT:string',
 			],
 
 			'match PT (lazy)' => [
 				new StringValue( 'Foo.jpg' ),
 				'commonsMedia',
-				$lazyFormatters,
+				$lazyFormattersFactory,
 				'PT:commonsMedia',
 			],
 
 			'match VT (lazy)' => [
 				new StringValue( 'something' ),
 				'someStuff',
-				$lazyFormatters,
+				$lazyFormattersFactory,
 				'VT:string',
 			],
 		];

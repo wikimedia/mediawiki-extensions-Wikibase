@@ -507,19 +507,19 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 		return $referencedEntityIdLookup;
 	}
 
-	public function provideGetReferencedEntityId() {
+	public static function provideGetReferencedEntityId() {
 		return [
 			'Nothing found' => [
 				null,
-				$this->newReferencedEntityIdLookupMock( null ),
+				fn ( self $self ) => $self->newReferencedEntityIdLookupMock( null ),
 			],
 			'Q2013 found' => [
 				'Q2013',
-				$this->newReferencedEntityIdLookupMock( new ItemId( 'Q2013' ) ),
+				fn ( self $self ) => $self->newReferencedEntityIdLookupMock( new ItemId( 'Q2013' ) ),
 			],
 			'MaxReferenceDepthExhaustedException' => [
 				false,
-				$this->newReferencedEntityIdLookupMock(
+				fn ( self $self ) => $self->newReferencedEntityIdLookupMock(
 					new MaxReferenceDepthExhaustedException(
 						new ItemId( 'Q2013' ),
 						new NumericPropertyId( 'P1366' ),
@@ -530,7 +530,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			],
 			'MaxReferencedEntityVisitsExhaustedException' => [
 				false,
-				$this->newReferencedEntityIdLookupMock(
+				fn ( self $self ) => $self->newReferencedEntityIdLookupMock(
 					new MaxReferencedEntityVisitsExhaustedException(
 						new ItemId( 'Q2013' ),
 						new NumericPropertyId( 'P1366' ),
@@ -541,7 +541,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 			],
 			'ReferencedEntityIdLookupException' => [
 				false,
-				$this->newReferencedEntityIdLookupMock(
+				fn ( self $self ) => $self->newReferencedEntityIdLookupMock(
 					new ReferencedEntityIdLookupException(
 						new ItemId( 'Q2013' ),
 						new NumericPropertyId( 'P1366' ),
@@ -555,7 +555,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends TestCase {
 	/**
 	 * @dataProvider provideGetReferencedEntityId
 	 */
-	public function testGetReferencedEntityId( $expected, ReferencedEntityIdLookup $referencedEntityIdLookup ) {
+	public function testGetReferencedEntityId( $expected, callable $referencedEntityIdLookupFactory ) {
+		$referencedEntityIdLookup = $referencedEntityIdLookupFactory( $this );
 		$this->referencedEntityIdLookup = $referencedEntityIdLookup;
 		$this->assertSame(
 			$expected,

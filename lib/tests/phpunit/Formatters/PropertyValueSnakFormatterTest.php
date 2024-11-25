@@ -105,9 +105,10 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider formatSnakProvider
 	 */
 	public function testFormatSnak(
-		$snak, $dataType, $valueType, $targetFormat, ValueFormatter $formatter,
+		$snak, $dataType, $valueType, $targetFormat, callable $formatterFactory,
 		$expected, $expectedException = null
 	) {
+		$formatter = $formatterFactory( $this );
 		if ( $expectedException !== null ) {
 			$this->expectException( $expectedException );
 		}
@@ -140,14 +141,16 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		return $formatter;
 	}
 
-	public function formatSnakProvider() {
-		$formatters = [
-			'VT:bad' => new UnDeserializableValueFormatter( new FormatterOptions() ),
-			'VT:string' => $this->getMockFormatter( 'VT:string' ),
-			'PT:commonsMedia' => $this->getMockFormatter( 'PT:commonsMedia' ),
-		];
+	public static function formatSnakProvider() {
+		$dispatchingFormatterFactory = function ( self $self ) {
+			$formatters = [
+				'VT:bad' => new UnDeserializableValueFormatter( new FormatterOptions() ),
+				'VT:string' => $self->getMockFormatter( 'VT:string' ),
+				'PT:commonsMedia' => $self->getMockFormatter( 'PT:commonsMedia' ),
+			];
 
-		$dispatchingFormatter = new DispatchingValueFormatter( $formatters );
+			return new DispatchingValueFormatter( $formatters );
+		};
 
 		return [
 			'match PT' => [
@@ -155,7 +158,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'commonsMedia',
 				'string',
 				SnakFormatter::FORMAT_PLAIN,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				'/^PT:commonsMedia$/',
 			],
 
@@ -164,7 +167,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'someStuff',
 				'string',
 				SnakFormatter::FORMAT_WIKI,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				'/^VT:string$/',
 			],
 
@@ -173,7 +176,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'url',
 				'string',
 				SnakFormatter::FORMAT_WIKI,
-				new StringFormatter(),
+				fn () => new StringFormatter(),
 				'/^something$/',
 			],
 
@@ -184,7 +187,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'globe-coordinate',
 				'globecoordinate',
 				SnakFormatter::FORMAT_HTML,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				null,
 				MismatchingDataValueTypeException::class,
 			],
@@ -194,7 +197,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'url',
 				'iri', // url expects an iri, but will get a string
 				SnakFormatter::FORMAT_WIKI,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				null,
 				MismatchingDataValueTypeException::class,
 			],
@@ -204,7 +207,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'', // triggers an exception from the mock DataTypeFactory
 				'', // should not be used
 				SnakFormatter::FORMAT_HTML,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				null,
 				PropertyDataTypeLookupException::class,
 			],
@@ -214,7 +217,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				'url',
 				'', // triggers an exception from the mock DataTypeFactory
 				SnakFormatter::FORMAT_HTML,
-				$dispatchingFormatter,
+				$dispatchingFormatterFactory,
 				null,
 				FormattingException::class,
 			],

@@ -293,7 +293,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		}
 	}
 
-	public function topLevelValidationErrorProvider(): Generator {
+	public static function topLevelValidationErrorProvider(): Generator {
 
 		yield "missing 'data_type' field" => [
 			[
@@ -363,13 +363,13 @@ class PatchedPropertyValidatorTest extends TestCase {
 		}
 	}
 
-	public function labelsValidationErrorProvider(): Generator {
+	public static function labelsValidationErrorProvider(): Generator {
 		$mockSyntaxValidator = function ( self $test ) {
-			$test->labelsSyntaxValidator = $this->createMock( LabelsSyntaxValidator::class );
+			$test->labelsSyntaxValidator = $test->createMock( LabelsSyntaxValidator::class );
 			return $test->labelsSyntaxValidator;
 		};
 		$mockContentsValidator = function ( self $test ) {
-			$test->labelsContentsValidator = $this->createMock( PropertyLabelsContentsValidator::class );
+			$test->labelsContentsValidator = $test->createMock( PropertyLabelsContentsValidator::class );
 			return $test->labelsContentsValidator;
 		};
 
@@ -475,13 +475,13 @@ class PatchedPropertyValidatorTest extends TestCase {
 		];
 	}
 
-	public function descriptionsValidationErrorProvider(): Generator {
+	public static function descriptionsValidationErrorProvider(): Generator {
 		$mockSyntaxValidator = function ( self $test ) {
-			$test->descriptionsSyntaxValidator = $this->createMock( DescriptionsSyntaxValidator::class );
+			$test->descriptionsSyntaxValidator = $test->createMock( DescriptionsSyntaxValidator::class );
 			return $test->descriptionsSyntaxValidator;
 		};
 		$mockContentsValidator = function ( self $test ) {
-			$test->descriptionsContentsValidator = $this->createMock( PropertyDescriptionsContentsValidator::class );
+			$test->descriptionsContentsValidator = $test->createMock( PropertyDescriptionsContentsValidator::class );
 			return $test->descriptionsContentsValidator;
 		};
 
@@ -596,7 +596,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		}
 	}
 
-	public function aliasesValidationErrorProvider(): Generator {
+	public static function aliasesValidationErrorProvider(): Generator {
 		yield 'invalid aliases - sequential array' => [
 			[ 'not', 'an', 'associative', 'array' ],
 			UseCaseError::newPatchResultInvalidValue( '/aliases', [ 'not', 'an', 'associative', 'array' ] ),
@@ -693,7 +693,7 @@ class PatchedPropertyValidatorTest extends TestCase {
 		}
 	}
 
-	public function statementsProvider(): Generator {
+	public static function statementsProvider(): Generator {
 
 		yield 'Statements not associative' => [
 			[ 1, 2, 3 ],

@@ -12,7 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 trait StatementReadModelHelper {
 
-	private function newStatementReadModelConverter(): StatementReadModelConverter {
+	private static function newStatementReadModelConverter(): StatementReadModelConverter {
 		return new StatementReadModelConverter(
 			WikibaseRepo::getStatementGuidParser(),
 			new class implements PropertyDataTypeLookup {

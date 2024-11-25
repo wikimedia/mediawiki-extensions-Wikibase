@@ -65,7 +65,8 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 	/**
 	 * @dataProvider invalidConstructorArgsProvider
 	 */
-	public function testConstructionWithInvalidArgs( array $definitionsByType, array $sources ): void {
+	public function testConstructionWithInvalidArgs( callable $definitionsByTypeFactory, array $sources ): void {
+		$definitionsByType = $definitionsByTypeFactory( $this );
 		$this->expectException( InvalidArgumentException::class );
 
 		new EntitySourceAndTypeDefinitions(
@@ -74,14 +75,16 @@ class EntitySourceAndTypeDefinitionsTest extends TestCase {
 		);
 	}
 
-	public function invalidConstructorArgsProvider() {
+	public static function invalidConstructorArgsProvider() {
 		yield 'sources param contains non-EntitySource object' => [
-			'definitionsByType' => [ DatabaseEntitySource::TYPE => $this->createStub( EntityTypeDefinitions::class ) ],
+			'definitionsByType' => fn ( self $self ) => [
+				DatabaseEntitySource::TYPE => $self->createStub( EntityTypeDefinitions::class ),
+			],
 			'sources' => [ 'i am not an entity source' ],
 		];
 
 		yield 'entityTypeDefinitionsBySourceType array contains non-EntityTypeDefinitions object' => [
-			'definitionsByType' => [ DatabaseEntitySource::TYPE => 'i am not an entity type def object' ],
+			'definitionsByType' => fn () => [ DatabaseEntitySource::TYPE => 'i am not an entity type def object' ],
 			'sources' => [ NewDatabaseEntitySource::create()->build() ],
 		];
 	}

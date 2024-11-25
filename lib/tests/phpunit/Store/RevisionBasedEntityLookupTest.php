@@ -50,14 +50,14 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 		$entity = $entityLookup->getEntity( $id );
 
 		if ( $expected === null ) {
-			$this->assertNull( $entity );
+			self::assertNull( $entity );
 		} else {
-			$this->assertTrue( $expected->equals( $entity->getId() ) );
+			self::assertTrue( $expected->equals( $entity->getId() ) );
 		}
 	}
 
-	public function hasEntityProvider() {
-		$cases = $this->getEntityProvider();
+	public static function hasEntityProvider() {
+		$cases = self::getEntityProvider();
 
 		$cases = array_map( function( $case ) {
 			// true if set an id is expected, false otherwise.
@@ -80,7 +80,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$actual = $entityLookup->hasEntity( $id );
 
-		$this->assertEquals( $exists, $actual );
+		self::assertEquals( $exists, $actual );
 	}
 
 	public function testWhenEntityLookupExceptionIsThrown_getEntityPassesItAlong() {

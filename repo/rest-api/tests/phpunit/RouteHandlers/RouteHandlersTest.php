@@ -203,27 +203,27 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest(
-			$this->getRouteForUseCase( $routeHandler['useCase'] ),
+			self::getRouteForUseCase( $routeHandler['useCase'] ),
 			$routeHandler['validRequest']
 		)->execute();
 
-		$this->assertThat(
+		self::assertThat(
 			$response->getStatusCode(),
-			$this->logicalAnd( $this->greaterThanOrEqual( 200 ), $this->lessThan( 300 ) )
+			self::logicalAnd( self::greaterThanOrEqual( 200 ), self::lessThan( 300 ) )
 		);
-		$this->assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
+		self::assertSame( [ 'application/json' ], $response->getHeader( 'Content-Type' ) );
 	}
 
 	/**
 	 * @dataProvider routeHandlersProvider
 	 */
 	public function testReadWriteAccess( array $routeHandler ): void {
-		$routeData = $this->getRouteForUseCase( $routeHandler['useCase'] );
+		$routeData = self::getRouteForUseCase( $routeHandler['useCase'] );
 
 		$routeHandler = $this->newHandlerWithValidRequest( $routeData, $routeHandler['validRequest'] );
 
-		$this->assertTrue( $routeHandler->needsReadAccess() );
-		$this->assertSame( $routeData['method'] !== 'GET', $routeHandler->needsWriteAccess() );
+		self::assertTrue( $routeHandler->needsReadAccess() );
+		self::assertSame( $routeData['method'] !== 'GET', $routeHandler->needsWriteAccess() );
 	}
 
 	/**
@@ -232,8 +232,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	public function testHandlesUnexpectedErrors( array $routeHandler ): void {
 		$response = $this->getHttpResponseForThrowingUseCase( $routeHandler, new RuntimeException() );
 
-		$this->assertSame( UseCaseError::UNEXPECTED_ERROR, json_decode( $response->getBody()->getContents() )->code );
-		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+		self::assertSame( UseCaseError::UNEXPECTED_ERROR, json_decode( $response->getBody()->getContents() )->code );
+		self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 	}
 
 	/**
@@ -245,21 +245,21 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function routeHandlersProvider(): Generator {
+	public static function routeHandlersProvider(): Generator {
 		$lastModified = '20230731042031';
-		$hasHttpStatus = fn( int $status ) => fn( Response $r ) => $this->assertSame( $status, $r->getStatusCode() );
+		$hasHttpStatus = fn( int $status ) => fn( Response $r ) => self::assertSame( $status, $r->getStatusCode() );
 		$hasErrorCode = fn( string $errorCode ) => function ( Response $response ) use ( $errorCode ): void {
-			$this->assertSame( $errorCode, json_decode( (string)$response->getBody() )->code );
-			$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+			self::assertSame( $errorCode, json_decode( (string)$response->getBody() )->code );
+			self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		}; // phpcs:ignore -- phpcs doesn't like the semicolon here, but it's very much needed.
 
 		// phpcs:disable Generic.Arrays.ArrayIndent.CloseBraceNotNewLine
 		yield 'AddItemStatement' => [ [
 			'useCase' => AddItemStatement::class,
-			'useCaseResponse' => new AddItemStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new AddItemStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1' ],
-				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+				'bodyContents' => [ 'statement' => self::noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [
 				[
@@ -271,10 +271,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'AddPropertyStatement' => [ [
 			'useCase' => AddPropertyStatement::class,
-			'useCaseResponse' => new AddPropertyStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new AddPropertyStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'property_id' => 'P1' ],
-				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+				'bodyContents' => [ 'statement' => self::noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [ [
 				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
@@ -441,7 +441,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'GetItemStatement' => [ [
 			'useCase' => GetItemStatement::class,
-			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new GetStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [
 				[
@@ -562,7 +562,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'GetPropertyStatement' => [ [
 			'useCase' => GetPropertyStatement::class,
-			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new GetStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [ [
 				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
@@ -580,7 +580,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'GetStatement' => [ [
 			'useCase' => GetStatement::class,
-			'useCaseResponse' => new GetStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new GetStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [ 'pathParams' => [ 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ] ],
 			'expectedExceptions' => [
 				[
@@ -637,7 +637,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'PatchItemStatement' => [ [
 			'useCase' => PatchItemStatement::class,
-			'useCaseResponse' => new PatchStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new PatchStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
@@ -652,7 +652,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'PatchPropertyStatement' => [ [
 			'useCase' => PatchPropertyStatement::class,
-			'useCaseResponse' => new PatchStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new PatchStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
@@ -664,7 +664,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'PatchStatement' => [ [
 			'useCase' => PatchStatement::class,
-			'useCaseResponse' => new PatchStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new PatchStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
 				'bodyContents' => [ 'patch' => [ [ 'op' => 'remove', 'path' => '/references' ] ] ],
@@ -779,10 +779,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'ReplaceItemStatement' => [ [
 			'useCase' => ReplaceItemStatement::class,
-			'useCaseResponse' => new ReplaceStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new ReplaceStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'item_id' => 'Q1', 'statement_id' => 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
-				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+				'bodyContents' => [ 'statement' => self::noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [
 				[
@@ -794,10 +794,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'ReplacePropertyStatement' => [ [
 			'useCase' => ReplacePropertyStatement::class,
-			'useCaseResponse' => new ReplaceStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new ReplaceStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'property_id' => 'P1', 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
-				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+				'bodyContents' => [ 'statement' => self::noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [ [
 				new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'statement_id' ] ),
@@ -806,10 +806,10 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		] ];
 		yield 'ReplaceStatement' => [ [
 			'useCase' => ReplaceStatement::class,
-			'useCaseResponse' => new ReplaceStatementResponse( $this->noValueStatementReadModel(), $lastModified, 123 ),
+			'useCaseResponse' => new ReplaceStatementResponse( self::noValueStatementReadModel(), $lastModified, 123 ),
 			'validRequest' => [
 				'pathParams' => [ 'statement_id' => 'P1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' ],
-				'bodyContents' => [ 'statement' => $this->noValueStatementSerialization() ],
+				'bodyContents' => [ 'statement' => self::noValueStatementSerialization() ],
 			],
 			'expectedExceptions' => [
 				[
@@ -1140,11 +1140,11 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	public function testAllProductionRoutesAreCovered(): void {
 		foreach ( self::$prodRoutesData as $route ) {
 			foreach ( $this->routeHandlersProvider() as $routeTestData ) {
-				if ( $route === $this->getRouteForUseCase( $routeTestData[0]['useCase'] ) ) {
+				if ( $route === self::getRouteForUseCase( $routeTestData[0]['useCase'] ) ) {
 					continue 2;
 				}
 			}
-			$this->fail( "Route handler {$route['factory']} is not covered by any tests" );
+			self::fail( "Route handler {$route['factory']} is not covered by any tests" );
 		}
 	}
 
@@ -1156,7 +1156,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		return $this->newHandlerWithValidRequest(
-			$this->getRouteForUseCase( $routeHandler['useCase'] ),
+			self::getRouteForUseCase( $routeHandler['useCase'] ),
 			$routeHandler['validRequest']
 		)->execute();
 	}
@@ -1182,8 +1182,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		return $routeHandler;
 	}
 
-	private function getRouteForUseCase( string $useCaseClass ): array {
-		$useCaseName = $this->getUseCaseName( $useCaseClass );
+	private static function getRouteForUseCase( string $useCaseClass ): array {
+		$useCaseName = self::getUseCaseName( $useCaseClass );
 		foreach ( self::$routesData as $route ) {
 			if ( strpos( $route['factory'], "\\{$useCaseName}RouteHandler" ) ) {
 				return $route;
@@ -1193,12 +1193,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		throw new LogicException( "No route found for use case $useCaseName" );
 	}
 
-	private function getUseCaseName( string $fqn ): string {
+	private static function getUseCaseName( string $fqn ): string {
 		$classNameParts = explode( '\\', $fqn );
 		return $classNameParts[ count( $classNameParts ) - 1 ];
 	}
 
-	private function noValueStatementSerialization(): array {
+	private static function noValueStatementSerialization(): array {
 		return [
 			'property' => [
 				'id' => 'P1',
@@ -1209,7 +1209,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function noValueStatementReadModel(): Statement {
+	private static function noValueStatementReadModel(): Statement {
 		return NewStatementReadModel::noValueFor( 'P1' )
 			->withGuid( 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' )
 			->build();

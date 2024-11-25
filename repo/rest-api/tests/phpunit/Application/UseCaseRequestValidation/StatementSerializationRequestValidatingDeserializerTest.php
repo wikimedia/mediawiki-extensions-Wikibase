@@ -55,7 +55,7 @@ class StatementSerializationRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public function provideInvalidStatementSerialization(): Generator {
+	public static function provideInvalidStatementSerialization(): Generator {
 		yield "invalid 'rank' value" => [
 			[ 'rank' => 'invalid', 'property' => [ 'id' => self::EXISTING_STRING_PROPERTY_ID ], 'value' => [ 'type' => 'novalue' ] ],
 			UseCaseError::newInvalidValue( '/statement/rank' ),

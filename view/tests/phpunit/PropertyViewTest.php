@@ -38,7 +38,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	 *
 	 * @return Property
 	 */
-	protected function makeEntity( EntityId $id, array $statements = [] ) {
+	protected static function makeEntity( EntityId $id, array $statements = [] ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $id );
 
@@ -57,7 +57,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	 *
 	 * @return NumericPropertyId
 	 */
-	protected function makeEntityId( $n ) {
+	protected static function makeEntityId( $n ) {
 		return new NumericPropertyId( "P$n" );
 	}
 
@@ -73,13 +73,11 @@ class PropertyViewTest extends EntityViewTestCase {
 		$entityData['datatype'] = $entity->getDataTypeId();
 	}
 
-	public function provideTestGetHtml() {
-		$propertyView = $this->newPropertyView();
-
+	public static function provideTestGetHtml() {
 		return [
 			[
-				$propertyView,
-				$this->newEntityForStatements( [] ),
+				fn ( self $self ) => $self->newPropertyView(),
+				self::newEntityForStatements( [] ),
 				'/wb-property/',
 			],
 		];
@@ -89,7 +87,7 @@ class PropertyViewTest extends EntityViewTestCase {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newPropertyView( $placeholders );
 
-		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ), 4711 );
+		$view = $itemView->getContent( self::makeEntity( self::makeEntityId( 42 ) ), 4711 );
 
 		$this->assertSame( $placeholders, $view->getPlaceholders() );
 	}

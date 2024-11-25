@@ -35,8 +35,8 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $sites );
 	}
 
-	public function sitesFromJsonProvider() {
-		$siteData = $this->getSiteData();
+	public static function sitesFromJsonProvider() {
+		$siteData = self::getSiteData();
 
 		$data = [];
 
@@ -44,21 +44,21 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 			'/w/$1',
 			'/wiki/$1',
 			false,
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1' ),
+			self::getSites( $siteData, '/w/$1', '/wiki/$1' ),
 		];
 
 		$data['Keep the protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			true,
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' ),
+			self::getSites( $siteData, '/w/$1', '/wiki/$1', 'http:' ),
 		];
 
 		$data['Force a protocol'] = [
 			'/w/$1',
 			'/wiki/$1',
 			'CompuGlobalHyperMegaNet',
-			$this->getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' ),
+			self::getSites( $siteData, '/w/$1', '/wiki/$1', 'CompuGlobalHyperMegaNet:' ),
 		];
 
 		return $data;
@@ -141,7 +141,7 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 		return json_encode( $data );
 	}
 
-	protected function getSiteData() {
+	protected static function getSiteData() {
 		$siteData = [
 			[
 				'siteid' => 'enwiki',
@@ -197,7 +197,7 @@ class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
 		return $siteData;
 	}
 
-	public function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
+	public static function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
 		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {

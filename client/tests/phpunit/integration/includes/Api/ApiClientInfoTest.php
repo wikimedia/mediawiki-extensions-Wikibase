@@ -51,7 +51,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		$apiMain = new ApiMain( $context, true );
 		$apiQuery = $apiMain->getModuleManager()->getModule( 'query' );
 
-		$apiModule = new ApiClientInfo( $apiQuery, 'query', $this->getSettings() );
+		$apiModule = new ApiClientInfo( $apiQuery, 'query', self::getSettings() );
 
 		return $apiModule;
 	}
@@ -68,8 +68,8 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $result['query']['wikibase'] );
 	}
 
-	public function executeProvider() {
-		$settings = $this->getSettings();
+	public static function executeProvider() {
+		$settings = self::getSettings();
 
 		$repo = [ 'repo' => [
 				'url' => [
@@ -85,23 +85,23 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 		return [
 			[
 				[],
-				$this->getApiRequestParams( '' ),
+				self::getApiRequestParams( '' ),
 			],
 			[
 				$repo + $siteid,
-				$this->getApiRequestParams( null ),
+				self::getApiRequestParams( null ),
 			],
 			[
 				$repo + $siteid,
-				$this->getApiRequestParams( 'url|siteid' ),
+				self::getApiRequestParams( 'url|siteid' ),
 			],
 			[
 				$repo,
-				$this->getApiRequestParams( 'url' ),
+				self::getApiRequestParams( 'url' ),
 			],
 			[
 				$siteid,
-				$this->getApiRequestParams( 'siteid' ),
+				self::getApiRequestParams( 'siteid' ),
 			],
 		];
 	}
@@ -111,7 +111,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return array
 	 */
-	private function getApiRequestParams( $wbprop ) {
+	private static function getApiRequestParams( $wbprop ) {
 		$params = [
 			'action' => 'query',
 			'meta' => 'wikibase',
@@ -124,7 +124,7 @@ class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return SettingsArray
 	 */
-	private function getSettings() {
+	private static function getSettings() {
 		return new SettingsArray( [
 			'repoUrl' => 'http://www.example.org',
 			'repoScriptPath' => '/w',

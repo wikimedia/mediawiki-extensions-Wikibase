@@ -50,7 +50,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return TimeValue
 	 */
-	private function getTimeValue(
+	private static function getTimeValue(
 		$timestamp = '<a>time</a>',
 		$timezone = '<a>timezone</a>',
 		$before = '<a>before</a>',
@@ -97,7 +97,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( $pattern, $html );
 	}
 
-	public function quantityFormatProvider() {
+	public static function quantityFormatProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 		$day = TimeValue::PRECISION_DAY;
@@ -126,11 +126,11 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 				'@.*<td[^<>]*isotime">\xE2\x88\x9299999-01-01T00:00:00Z</td>.*@s',
 			],
 			'Optional Z' => [
-				$this->getTimeValue( '-099999-01-01T00:00:00' ),
+				self::getTimeValue( '-099999-01-01T00:00:00' ),
 				'@.*<td[^<>]*isotime">\xE2\x88\x9299999-01-01T00:00:00</td>.*@s',
 			],
 			'Optional sign' => [
-				$this->getTimeValue( '099999-01-01T00:00:00Z' ),
+				self::getTimeValue( '099999-01-01T00:00:00Z' ),
 				'@.*<td[^<>]*isotime">\+99999-01-01T00:00:00Z</td>.*@s',
 			],
 			'Julian' => [
@@ -190,52 +190,52 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenInvalidTimeValue_formatDoesNotThrowException() {
 		$formatter = $this->getFormatter();
-		$value = $this->getTimeValue();
+		$value = self::getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertIsString( $html );
+		self::assertIsString( $html );
 	}
 
 	public function testGivenInvalidTimeValue_formatDoesNotAllowHtmlInjection() {
 		$formatter = $this->getFormatter();
-		$value = $this->getTimeValue();
+		$value = self::getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertStringNotContainsString( '<a>', $html, 'Should not be unescaped' );
-		$this->assertStringContainsString( '&lt;', $html, 'Should be escaped' );
-		$this->assertStringNotContainsString( '&amp;', $html, 'Should not be double escape' );
+		self::assertStringNotContainsString( '<a>', $html, 'Should not be unescaped' );
+		self::assertStringContainsString( '&lt;', $html, 'Should be escaped' );
+		self::assertStringNotContainsString( '&amp;', $html, 'Should not be double escape' );
 	}
 
 	public function testGivenInvalidTimeValue_formatEchoesTimeValueFields() {
 		$formatter = $this->getFormatter();
-		$value = $this->getTimeValue();
+		$value = self::getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertStringContainsString( '>&lt;a&gt;time&lt;/a&gt;<', $html );
-		$this->assertStringContainsString( '>&lt;a&gt;timezone&lt;/a&gt;<', $html );
-		$this->assertStringContainsString( '>&lt;a&gt;before&lt;/a&gt;<', $html );
-		$this->assertStringContainsString( '>&lt;a&gt;after&lt;/a&gt;<', $html );
-		$this->assertStringContainsString( '>&lt;a&gt;precision&lt;/a&gt;<', $html );
-		$this->assertStringContainsString( '>&lt;a&gt;calendarmodel&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;time&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;timezone&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;before&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;after&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;precision&lt;/a&gt;<', $html );
+		self::assertStringContainsString( '>&lt;a&gt;calendarmodel&lt;/a&gt;<', $html );
 	}
 
 	public function testGivenValidTimeValueWithInvalidPrecision_formatEchoesTimeValueFields() {
 		$formatter = $this->getFormatter();
-		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 1, 1, 'precision' );
+		$value = self::getTimeValue( '+2001-01-01T00:00:00Z', 0, 1, 1, 'precision' );
 
 		$html = $formatter->format( $value );
-		$this->assertSame( 1, substr_count( $html, '>precision<' ), 'precision' );
-		$this->assertSame( 2, substr_count( $html, '>1<' ), 'before' );
+		self::assertSame( 1, substr_count( $html, '>precision<' ), 'precision' );
+		self::assertSame( 2, substr_count( $html, '>1<' ), 'before' );
 	}
 
 	public function testGivenValidTimeValueWithInvalidBeforeAndAfter_formatEchoesTimeValueFields() {
 		$formatter = $this->getFormatter();
-		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 'before', 'after', TimeValue::PRECISION_DAY );
+		$value = self::getTimeValue( '+2001-01-01T00:00:00Z', 0, 'before', 'after', TimeValue::PRECISION_DAY );
 
 		$html = $formatter->format( $value );
-		$this->assertSame( 1, substr_count( $html, '>11<' ), 'precision' );
-		$this->assertSame( 1, substr_count( $html, '>before<' ), 'before' );
-		$this->assertSame( 1, substr_count( $html, '>after<' ), 'after' );
+		self::assertSame( 1, substr_count( $html, '>11<' ), 'precision' );
+		self::assertSame( 1, substr_count( $html, '>before<' ), 'before' );
+		self::assertSame( 1, substr_count( $html, '>after<' ), 'after' );
 	}
 
 }

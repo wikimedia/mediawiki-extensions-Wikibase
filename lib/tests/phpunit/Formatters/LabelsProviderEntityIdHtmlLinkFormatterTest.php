@@ -86,7 +86,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 		];
 	}
 
-	public function formatProvider_fallback() {
+	public static function formatProvider_fallback() {
 		$deTerm = new Term( 'de', 'Kätzchen' );
 		$deTermFallback = new TermFallback( 'de', 'Kätzchen', 'de', 'de' );
 		$deAtTerm = new TermFallback( 'de-at', 'Kätzchen', 'de', 'de' );

@@ -28,7 +28,7 @@ class SnakValueDeserializerTest extends TestCase {
 		);
 	}
 
-	public function valueProvider(): Generator {
+	public static function valueProvider(): Generator {
 		yield 'callable builder' => [
 			fn ( $val ) => new StringValue( $val ),
 			[ 'type' => 'string', 'value' => 'potato' ],

@@ -112,7 +112,7 @@ class EntityUpdaterStatementUpdaterTest extends TestCase {
 		$this->newStatementUpdater()->update( $statementToUpdate, $editMetaData );
 	}
 
-	public function provideStatementIdAndEntityWithStatement(): Generator {
+	public static function provideStatementIdAndEntityWithStatement(): Generator {
 		$statementId = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$statement = NewStatement::forProperty( 'P321' )
 			->withGuid( $statementId )

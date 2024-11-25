@@ -40,7 +40,7 @@ class ItemAliasesInLanguageEditRequestValidatingDeserializerTest extends TestCas
 		);
 	}
 
-	public function provideValidAliases(): Generator {
+	public static function provideValidAliases(): Generator {
 		yield 'valid aliases pass validation' => [
 			[ 'first alias', 'second alias' ],
 			[ 'first alias', 'second alias' ],

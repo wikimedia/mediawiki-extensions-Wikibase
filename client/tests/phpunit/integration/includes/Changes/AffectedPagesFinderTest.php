@@ -139,7 +139,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		return $affectedPagesFinder;
 	}
 
-	public function getChangedAspectsProvider() {
+	public static function getChangedAspectsProvider() {
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$cases = [];
 
@@ -151,7 +151,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::ADD,
 				null,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
 			),
 		];
 
@@ -159,7 +159,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
 			),
 		];
@@ -169,7 +169,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
 			),
 		];
 
@@ -177,8 +177,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			),
 		];
 
@@ -186,7 +186,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::REMOVE,
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
 			),
 		];
@@ -195,8 +195,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ EntityUsage::SITELINK_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
-				$this->getItemWithSiteLinks( $q2, [
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				static::getItemWithSiteLinks( $q2, [
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
 				] )
@@ -208,7 +208,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithAliases( $q1, 'de', [ 'EINS' ] )
+				self::getItemWithAliases( $q1, 'de', [ 'EINS' ] )
 			),
 		];
 
@@ -217,7 +217,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithLabel( $q1, 'en', 'ONE' )
+				static::getItemWithLabel( $q1, 'en', 'ONE' )
 			),
 		];
 
@@ -226,16 +226,16 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ EntityUsage::SITELINK_USAGE ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
 		];
 
 		$cases['description only change on Q1'] = [
 			[ EntityUsage::DESCRIPTION_USAGE, EntityUsage::DESCRIPTION_USAGE . '.en' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hello' ] ),
-				$this->getItemWithDescriptions( $q1, [ 'en' => 'Hallo' ] ) ),
+				static::getItemWithDescriptions( $q1, [ 'en' => 'Hello' ] ),
+				static::getItemWithDescriptions( $q1, [ 'en' => 'Hallo' ] ) ),
 		];
 
 		$cases['statement change on Q1'] = [
@@ -243,7 +243,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
+				static::getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
 			),
 		];
 
@@ -263,7 +263,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	public function getAffectedUsagesByPageProvider() {
+	public static function getAffectedUsagesByPageProvider() {
 		$labelUsage = EntityUsage::LABEL_USAGE;
 		$labelUsageDe = EntityUsage::LABEL_USAGE . '.de';
 		$labelUsageEn = EntityUsage::LABEL_USAGE . '.en';
@@ -341,7 +341,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::ADD,
 				null,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] )
 			),
 		];
 
@@ -354,7 +354,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ $page1Q1Usages, $page2Q1Usages ], // "1" was recorded to be linked to Q1 and the local title used on page "2"
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
 				new Item( $q1 )
 			),
 		];
@@ -369,7 +369,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] )
 			),
 		];
 
@@ -382,8 +382,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			),
 		];
 
@@ -396,8 +396,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '2' ] )
 			),
 		];
 
@@ -410,8 +410,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ $page1Q1Usages, $page2Q1Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
-				$this->getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ] ),
+				static::getItemWithSiteLinks( $q1, [ 'enwiki' => '1' ], $badges ) ),
 		];
 
 		$cases['delete linked item Q2'] = [
@@ -423,7 +423,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::REMOVE,
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
 				null
 			),
 		];
@@ -436,8 +436,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[ $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
-				$this->getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
-				$this->getItemWithSiteLinks( $q2, [
+				static::getItemWithSiteLinks( $q2, [ 'enwiki' => '2' ] ),
+				static::getItemWithSiteLinks( $q2, [
 					'enwiki' => '2',
 					'itwiki' => 'DUE',
 				] )
@@ -451,7 +451,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithLabel( $q1, 'de', 'EINS' )
+				static::getItemWithLabel( $q1, 'de', 'EINS' )
 			),
 		];
 
@@ -464,7 +464,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithAliases( $q2, 'fr', [ 'X', 'Y' ] )
+				self::getItemWithAliases( $q2, 'fr', [ 'X', 'Y' ] )
 			),
 		];
 
@@ -478,7 +478,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithLabel( $q2, 'de', 'EINS' )
+				static::getItemWithLabel( $q2, 'de', 'EINS' )
 			),
 		];
 
@@ -491,7 +491,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
-				$this->getItemWithLabel( $q1, 'en', 'ONE' )
+				static::getItemWithLabel( $q1, 'en', 'ONE' )
 			),
 		];
 
@@ -505,7 +505,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithLabel( $q2, 'en', 'TWO' )
+				static::getItemWithLabel( $q2, 'en', 'TWO' )
 			),
 		];
 
@@ -518,7 +518,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithDescriptions( $q2, [ 'en' => 'Wow' ] )
+				static::getItemWithDescriptions( $q2, [ 'en' => 'Wow' ] )
 			),
 		];
 
@@ -531,7 +531,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P1' ), new StringValue( 'Hello' ) )
+				static::getItemWithStatement( $q2, new NumericPropertyId( 'P1' ), new StringValue( 'Hello' ) )
 			),
 		];
 
@@ -542,7 +542,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q2 ),
-				$this->getItemWithStatement( $q2, new NumericPropertyId( 'P2' ), new StringValue( 'Hello' ) )
+				static::getItemWithStatement( $q2, new NumericPropertyId( 'P2' ), new StringValue( 'Hello' ) )
 			),
 		];
 
@@ -581,7 +581,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$change = $changeFactory->newFromUpdate(
 			EntityChange::UPDATE,
-			$this->getItemWithSiteLinks( $itemId, [ 'enwiki' => $pageTitle ] ),
+			static::getItemWithSiteLinks( $itemId, [ 'enwiki' => $pageTitle ] ),
 			new Item( $itemId )
 		);
 
@@ -607,7 +607,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithSiteLinks( ItemId $id, array $links, array $badges = [] ) {
+	private static function getItemWithSiteLinks( ItemId $id, array $links, array $badges = [] ) {
 		$item = new Item( $id );
 
 		foreach ( $links as $siteId => $page ) {
@@ -624,7 +624,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithLabel( ItemId $id, $languageCode, $label ) {
+	private static function getItemWithLabel( ItemId $id, $languageCode, $label ) {
 		$item = new Item( $id );
 		$item->setLabel( $languageCode, $label );
 
@@ -637,7 +637,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithDescriptions( ItemId $id, $descriptions ) {
+	private static function getItemWithDescriptions( ItemId $id, $descriptions ) {
 		$item = new Item( $id );
 		foreach ( $descriptions as $language => $value ) {
 			$item->setDescription( $language, $value );
@@ -653,7 +653,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithAliases( ItemId $id, $languageCode, array $aliases ) {
+	private static function getItemWithAliases( ItemId $id, $languageCode, array $aliases ) {
 		$item = new Item( $id );
 		$item->setAliases( $languageCode, $aliases );
 
@@ -667,7 +667,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithStatement( ItemId $qid, NumericPropertyId $pid, DataValue $value ) {
+	private static function getItemWithStatement( ItemId $qid, NumericPropertyId $pid, DataValue $value ) {
 		$snak = new PropertyValueSnak( $pid, $value );
 
 		$item = new Item( $qid );

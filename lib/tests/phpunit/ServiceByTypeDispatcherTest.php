@@ -18,15 +18,15 @@ use Wikimedia\Assert\PostconditionException;
  */
 class ServiceByTypeDispatcherTest extends TestCase {
 
-	public function provideTestConstruction() {
+	public static function provideTestConstruction() {
 		yield [ true, stdClass::class, [], new stdClass() ];
-		yield [ true, stdClass::class, [ 'type' => $this->getSomeServiceReturningCallback() ], new stdClass() ];
-		yield [ false, stdClass::class, [ $this->getSomeServiceReturningCallback() ], new stdClass() ];
+		yield [ true, stdClass::class, [ 'type' => self::getSomeServiceReturningCallback() ], new stdClass() ];
+		yield [ false, stdClass::class, [ self::getSomeServiceReturningCallback() ], new stdClass() ];
 		yield [ false, stdClass::class, [ null ], new stdClass() ];
 		yield 'default not matching type' => [ false, EntityUrlLookup::class, [], new stdClass() ];
 	}
 
-	private function getSomeServiceReturningCallback( $fakeServiceToReturn = null ) {
+	private static function getSomeServiceReturningCallback( $fakeServiceToReturn = null ) {
 		return function () use ( $fakeServiceToReturn ) {
 			return $fakeServiceToReturn ?? new stdClass();
 		};
@@ -56,7 +56,7 @@ class ServiceByTypeDispatcherTest extends TestCase {
 
 		$dispatcher = new ServiceByTypeDispatcher(
 			stdClass::class,
-			[ 'foo' => $this->getSomeServiceReturningCallback( $typeService ) ],
+			[ 'foo' => self::getSomeServiceReturningCallback( $typeService ) ],
 			$defaultService
 		);
 
@@ -66,7 +66,7 @@ class ServiceByTypeDispatcherTest extends TestCase {
 	}
 
 	public function testServiceDispatchesAndReturnsSameInstance() {
-		$dispatcher = new ServiceByTypeDispatcher( stdClass::class, [ 'foo' => $this->getSomeServiceReturningCallback() ], new stdClass() );
+		$dispatcher = new ServiceByTypeDispatcher( stdClass::class, [ 'foo' => self::getSomeServiceReturningCallback() ], new stdClass() );
 
 		$dispatchedServiceOne = $dispatcher->getServiceForType( 'foo' );
 		$dispatchedServiceTwo = $dispatcher->getServiceForType( 'foo' );
@@ -76,7 +76,7 @@ class ServiceByTypeDispatcherTest extends TestCase {
 	public function testValidatesTypeAfterDispatch() {
 		$dispatcher = new ServiceByTypeDispatcher(
 			EntityUrlLookup::class,
-			[ 'foo' => $this->getSomeServiceReturningCallback() ],
+			[ 'foo' => self::getSomeServiceReturningCallback() ],
 			$this->createMock( EntityUrlLookup::class )
 		);
 

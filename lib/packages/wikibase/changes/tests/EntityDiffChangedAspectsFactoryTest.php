@@ -29,7 +29,7 @@ use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
  */
 class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public function provideNewFromEntityDiff() {
+	public static function provideNewFromEntityDiff() {
 		$emptyDiff = [
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [],
@@ -293,7 +293,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$reverseTests = [];
 		foreach ( $cases as $testDescription => $case ) {
 			$reverseTests[$testDescription . ' (reversed)'] = [
-				$this->reverseDiff( $case[0] ),
+				self::reverseDiff( $case[0] ),
 				$case[2],
 				$case[1],
 			];
@@ -302,11 +302,11 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		return array_merge( $cases, $reverseTests );
 	}
 
-	private function reverseDiff( array $diffs ) {
+	private static function reverseDiff( array $diffs ) {
 		$newDiff = [];
 		foreach ( $diffs as $diffType => $diff ) {
 			if ( $diffType === 'siteLinkChanges' ) {
-				$newDiff[$diffType] = $this->reverseSiteLinkDiff( $diff );
+				$newDiff[$diffType] = self::reverseSiteLinkDiff( $diff );
 				continue;
 			}
 
@@ -316,7 +316,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		return $newDiff;
 	}
 
-	private function reverseSiteLinkDiff( $diff ) {
+	private static function reverseSiteLinkDiff( $diff ) {
 		$newSiteLinkDiff = [];
 		foreach ( $diff as $site => $siteDiff ) {
 			$newSiteLinkDiff[$site] = [ $siteDiff[1], $siteDiff[0], $siteDiff[2] ];

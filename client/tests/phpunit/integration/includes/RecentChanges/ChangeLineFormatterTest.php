@@ -70,7 +70,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider formatProvider
 	 */
-	public function testFormat( array $expectedTags, array $patterns, RecentChange $recentChange ) {
+	public function testFormat( array $expectedTags, array $patterns, callable $recentChangeFactory ) {
+		$recentChange = $recentChangeFactory( $this );
 		$context = $this->getTestContext();
 		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 
@@ -120,7 +121,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider formatProvider
 	 */
-	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
+	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, callable $recentChangeFactory ) {
+		$recentChange = $recentChangeFactory( $this );
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
 			$this->userNameUtils,
@@ -204,7 +206,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider formatProvider
 	 */
-	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
+	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, callable $recentChangeFactory ) {
+		$recentChange = $recentChangeFactory( $this );
 		$formatter = new ChangeLineFormatter(
 			$this->repoLinker,
 			$this->userNameUtils,
@@ -295,30 +298,30 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		return $context;
 	}
 
-	public function formatProvider() {
+	public static function formatProvider() {
 		$commentHtml = '<span><a href="http://acme.test">Linky</a> <script>we can run scripts here</script><span/>';
 
 		return [
 			'edit-change' => [
-				$this->getEditSiteLinkChangeTagMatchers(),
-				$this->getEditSiteLinkPatterns(),
-				$this->getEditSiteLinkRecentChange(
+				self::getEditSiteLinkChangeTagMatchers(),
+				self::getEditSiteLinkPatterns(),
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]'
 				),
 			],
 			'log-change' => [
-				$this->getLogChangeTagMatchers(),
+				self::getLogChangeTagMatchers(),
 				[
 					'/Log Change Comment/',
 				],
-				$this->getLogRecentChange(),
+				fn ( self $self ) => $self->getLogRecentChange(),
 			],
 			'comment-fallback' => [
 				[],
 				[
 					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'',
 					null,
 					[
@@ -332,7 +335,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				[
 					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'<script>evil</script>'
 				),
 			],
@@ -341,7 +344,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				[
 					'/<span class=\"comment\">.*' . preg_quote( $commentHtml, '/' ) . '/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					$commentHtml,
 					[
@@ -357,7 +360,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					// Make sure the user name is not mentioned
 					'/^(?!.*Cat).*$/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					'a',
 					[],
@@ -372,7 +375,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					// Make sure the edit summary is not mentioned
 					'/^(?!.*super-private).*$/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					'super-private',
 					[],
@@ -390,7 +393,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					// Make sure the edit summary is not mentioned
 					'/^(?!.*super-private).*$/',
 				],
-				$this->getEditSiteLinkRecentChange(
+				fn ( self $self ) => $self->getEditSiteLinkRecentChange(
 					'this shall be ignored',
 					'super-private',
 					[],
@@ -401,7 +404,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function getEditSiteLinkPatterns() {
+	public static function getEditSiteLinkPatterns() {
 		return [
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;action=history/',
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;diff=92&amp;oldid=90/',
@@ -412,7 +415,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		];
 	}
 
-	public function getEditSiteLinkChangeTagMatchers() {
+	public static function getEditSiteLinkChangeTagMatchers() {
 		return [
 			'edit-difflink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'diff' ) ),
 			'edit-histlink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'hist' ) ),
@@ -515,7 +518,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		return $this->makeRecentChange( $params, $title, $comment, $visibility );
 	}
 
-	protected function getLogChangeTagMatchers() {
+	protected static function getLogChangeTagMatchers() {
 		return [
 			'delete-deletionlog' => both(
 				tagMatchingOutline( '<a href="http://www.wikidata.org/wiki/Special:Log/delete"/>' )

@@ -46,11 +46,11 @@ class StatementsValidatorTest extends TestCase {
 		$this->assertEquals( $deserializedStatements, $validator->getValidatedStatements() );
 	}
 
-	public function provideValidStatements(): Generator {
+	public static function provideValidStatements(): Generator {
 		yield 'two valid statements' => [
 			[
-				'P567' => [ $this->newSomeValueSerialization( 'P567' ) ],
-				'P789' => [ $this->newSomeValueSerialization( 'P789' ) ],
+				'P567' => [ self::newSomeValueSerialization( 'P567' ) ],
+				'P789' => [ self::newSomeValueSerialization( 'P789' ) ],
 			],
 			new StatementList(
 				NewStatement::someValueFor( 'P567' )->build(),
@@ -96,7 +96,7 @@ class StatementsValidatorTest extends TestCase {
 		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidStatements, $basePath ) );
 	}
 
-	public function provideInvalidStatements(): Generator {
+	public static function provideInvalidStatements(): Generator {
 		$invalidStatements = [ 'not a valid statements array' ];
 		yield 'statements field is not an associative array' => [
 			'/statements',
@@ -110,7 +110,7 @@ class StatementsValidatorTest extends TestCase {
 			),
 		];
 
-		$invalidStatementGroup = $this->newSomeValueSerialization( 'P123' );
+		$invalidStatementGroup = self::newSomeValueSerialization( 'P123' );
 		yield 'statement group is not a sequential array (list)' => [
 			'',
 			[ 'P123' => $invalidStatementGroup ],
@@ -170,7 +170,7 @@ class StatementsValidatorTest extends TestCase {
 		yield 'property id mismatch' => [
 			'/statements',
 			[
-				'P123' => [ $this->newSomeValueSerialization( 'P567' ) ],
+				'P123' => [ self::newSomeValueSerialization( 'P567' ) ],
 			],
 			new ValidationError(
 				StatementsValidator::CODE_PROPERTY_ID_MISMATCH,
@@ -212,9 +212,9 @@ class StatementsValidatorTest extends TestCase {
 		) );
 	}
 
-	public function modifiedStatementsProvider(): Generator {
+	public static function modifiedStatementsProvider(): Generator {
 		$existingStatementId = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$existingStatement = $this->newSomeValueSerialization( 'P123' );
+		$existingStatement = self::newSomeValueSerialization( 'P123' );
 		$existingStatement['id'] = $existingStatementId;
 		$originalSerialization = [ 'P123' => [ $existingStatement ] ];
 		yield 'statements unmodified => nothing validated' => [
@@ -223,7 +223,7 @@ class StatementsValidatorTest extends TestCase {
 			[],
 		];
 
-		$deletedStatement = $this->newSomeValueSerialization( 'P123' );
+		$deletedStatement = self::newSomeValueSerialization( 'P123' );
 		$deletedStatement['id'] = 'Q123$DDDDDD-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 		yield 'only deleted a statement (group index shift) => nothing validated' => [
 			[ 'P123' => [ $deletedStatement, $existingStatement ] ],
@@ -231,18 +231,18 @@ class StatementsValidatorTest extends TestCase {
 			[],
 		];
 
-		$newStatement = $this->newSomeValueSerialization( 'P123' );
+		$newStatement = self::newSomeValueSerialization( 'P123' );
 		yield 'new statement gets validated' => [
 			[],
 			[ 'P123' => [ $newStatement ] ],
 			[ $newStatement ],
 		];
 
-		$unmodifiedStatement = $this->newSomeValueSerialization( 'P321' );
+		$unmodifiedStatement = self::newSomeValueSerialization( 'P321' );
 		$unmodifiedStatement['id'] = 'Q123$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 
 		$modifiedStatementId = 'Q123$ZZZZZZ-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
-		$modifiedStatement = $this->newSomeValueSerialization( 'P123' );
+		$modifiedStatement = self::newSomeValueSerialization( 'P123' );
 		$modifiedStatement['id'] = $modifiedStatementId;
 		yield 'modified statements get validated' => [
 			[
@@ -275,7 +275,7 @@ class StatementsValidatorTest extends TestCase {
 		return new StatementValidator( $this->newStatementDeserializer() );
 	}
 
-	private function newSomeValueSerialization( string $propertyId ): array {
+	private static function newSomeValueSerialization( string $propertyId ): array {
 		return [ 'property' => [ 'id' => $propertyId ], 'value' => [ 'type' => 'somevalue' ] ];
 	}
 
