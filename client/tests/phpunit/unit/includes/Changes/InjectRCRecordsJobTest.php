@@ -63,7 +63,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $changeLookup;
 	}
 
-	private function getEntityChangeFactory(): EntityChangeFactory {
+	private static function getEntityChangeFactory(): EntityChangeFactory {
 		return new EntityChangeFactory(
 			new EntityDiffer(),
 			new BasicEntityIdParser(),
@@ -139,9 +139,8 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $change;
 	}
 
-	public function provideMakeJobSpecification(): array {
-		$title = $this->getTitleMock( 'Foo', 21 );
-		$changeFactory = $this->getEntityChangeFactory();
+	public static function provideMakeJobSpecification(): array {
+		$changeFactory = self::getEntityChangeFactory();
 		$itemId = new ItemId( 'Q7' );
 
 		$child1 = $changeFactory->newFromFieldData( [
@@ -160,8 +159,7 @@ class InjectRCRecordsJobTest extends TestCase {
 
 		return [
 			'mock change' => [
-				[ $title ],
-				$this->getEntityChangeMock(
+				fn ( self $self ) => $self->getEntityChangeMock(
 					17,
 					[
 						'id' => 17,
@@ -173,16 +171,14 @@ class InjectRCRecordsJobTest extends TestCase {
 				),
 			],
 			'simple change with ID' => [
-				[ $title ],
-				$changeFactory->newForEntity(
+				fn () => $changeFactory->newForEntity(
 					'change',
 					new ItemId( 'Q7' ),
 					[ 'id' => 7 ]
 				),
 			],
 			'simple change with data but no ID' => [
-				[ $title ],
-				$changeFactory->newForEntity(
+				fn () => $changeFactory->newForEntity(
 					'change',
 					$itemId,
 					[
@@ -199,8 +195,7 @@ class InjectRCRecordsJobTest extends TestCase {
 				),
 			],
 			'composite change without ID' => [
-				[ $title ],
-				$changeFactory->newForEntity(
+				fn () => $changeFactory->newForEntity(
 					'change',
 					$itemId,
 					[
@@ -220,14 +215,14 @@ class InjectRCRecordsJobTest extends TestCase {
 
 	/**
 	 * @dataProvider provideMakeJobSpecification()
-	 * @param Title[] $titles
-	 * @param EntityChange $change
 	 */
-	public function testMakeJobSpecification( array $titles, EntityChange $change, array $knownChanges = [] ): void {
-		$spec = InjectRCRecordsJob::makeJobSpecification( $titles, $change );
+	public function testMakeJobSpecification( callable $expectedChangeFactory, array $knownChanges = [] ): void {
+		$titles = [ $this->getTitleMock( 'Foo', 21 ) ];
+		$expectedChange = $expectedChangeFactory( $this );
+		$spec = InjectRCRecordsJob::makeJobSpecification( $titles, $expectedChange );
 
 		$changeLookup = $this->getEntityChangeLookupMock( $knownChanges );
-		$changeFactory = $this->getEntityChangeFactory();
+		$changeFactory = self::getEntityChangeFactory();
 		$rcFactory = $this->getRCFactoryMock();
 
 		/** @var InjectRCRecordsJob $job */
@@ -241,8 +236,8 @@ class InjectRCRecordsJobTest extends TestCase {
 
 		$actualChange = $job->getChange();
 
-		$this->assertEquals( $change->getId(), $actualChange->getId(), 'Change ID' );
-		$this->assertEquals( $change->getFields(), $actualChange->getFields(), 'Change Fields' );
+		$this->assertEquals( $expectedChange->getId(), $actualChange->getId(), 'Change ID' );
+		$this->assertEquals( $expectedChange->getFields(), $actualChange->getFields(), 'Change Fields' );
 
 		$actualTitles = $job->getTitles();
 
@@ -260,7 +255,7 @@ class InjectRCRecordsJobTest extends TestCase {
 
 	public function testMakeJobSpecification_rootJobParams(): void {
 		$titles = [ $this->getTitleMock( 'Foo', 21 ) ];
-		$change = $this->getEntityChangeFactory()->newForEntity(
+		$change = self::getEntityChangeFactory()->newForEntity(
 			'change',
 			new ItemId( 'Q7' ),
 			[ 'id' => 7 ]
@@ -274,31 +269,6 @@ class InjectRCRecordsJobTest extends TestCase {
 		$spec = InjectRCRecordsJob::makeJobSpecification( $titles, $change, $rootJobParams );
 
 		$this->assertEquals( $rootJobParams, $spec->getRootJobParams() );
-	}
-
-	public function provideConstruction(): array {
-		$change = $this->getEntityChangeMock(
-			17,
-			[
-				'id' => 17,
-				'object_id' => 'Q7',
-				'type' => 'wikibase-item~change',
-				'Test' => 'Kitten',
-				'info' => [],
-			]
-		);
-		$title = $this->getTitleMock( 'Foo', 21 );
-
-		return [
-			'job spec using change field data' => [
-				[
-					'change' => $change->getFields(),
-					'pages' => $this->getPageSpecData( [ $title ] ),
-				],
-				$change,
-				[ $title ],
-			],
-		];
 	}
 
 	/**
@@ -317,16 +287,24 @@ class InjectRCRecordsJobTest extends TestCase {
 		return $pages;
 	}
 
-	/**
-	 * @dataProvider provideConstruction()
-	 */
-	public function testConstruction(
-		array $params,
-		EntityChange $expectedChange,
-		array $expectedTitles
-	): void {
+	public function testConstruction(): void {
+		$expectedChange = $this->getEntityChangeMock(
+			17,
+			[
+				'id' => 17,
+				'object_id' => 'Q7',
+				'type' => 'wikibase-item~change',
+				'Test' => 'Kitten',
+				'info' => [],
+			]
+		);
+		$expectedTitles = [ $this->getTitleMock( 'Foo', 21 ) ];
+		$params = [
+			'change' => $expectedChange->getFields(),
+			'pages' => $this->getPageSpecData( $expectedTitles ),
+		];
 		$changeLookup = $this->getEntityChangeLookupMock( [ $expectedChange ] );
-		$changeFactory = $this->getEntityChangeFactory();
+		$changeFactory = self::getEntityChangeFactory();
 		$rcFactory = $this->getRCFactoryMock();
 
 		/** @var InjectRCRecordsJob $job */
@@ -369,7 +347,7 @@ class InjectRCRecordsJobTest extends TestCase {
 		$rc = $this->getRecentChangeMock();
 
 		$changeLookup = $this->getEntityChangeLookupMock( [ $change ] );
-		$changeFactory = $this->getEntityChangeFactory();
+		$changeFactory = self::getEntityChangeFactory();
 
 		$rcFactory = $this->getRCFactoryMock();
 
