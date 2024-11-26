@@ -13,7 +13,6 @@ use MediaWiki\Title\Title;
 use Skin;
 use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Lib\SettingsArray;
 
 /**
  * Handler for ParserOutput-related hooks.
@@ -36,19 +35,12 @@ class SidebarHookHandler implements
 	 */
 	private $badgeDisplay;
 
-	/**
-	 * @var SettingsArray
-	 */
-	private $clientSettings;
-
 	public function __construct(
 		LanguageLinkBadgeDisplay $badgeDisplay,
-		NamespaceChecker $namespaceChecker,
-		SettingsArray $clientSettings
+		NamespaceChecker $namespaceChecker
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
-		$this->clientSettings = $clientSettings;
 	}
 
 	/**
@@ -131,18 +123,11 @@ class SidebarHookHandler implements
 		// Add 'Wikidata item' to the toolbox
 		$wikidataItemLink = ClientHooks::buildWikidataItemLink( $skin );
 
-		if ( $wikidataItemLink !== null || $otherProjectsSidebar !== null ) {
-			$outputPage = $skin->getContext()->getOutput();
-			$outputPage->addModules( 'wikibase.sidebar.tracking' );
-		}
-
 		if ( $wikidataItemLink === null ) {
 			return;
 		}
 
-		$wikidataInOtherProjects = $this->clientSettings->getSetting( 'moveConnectedItemLinkToOtherProjects' );
-
-		if ( $wikidataInOtherProjects && $skin->getSkinName() !== 'minerva' ) {
+		if ( $skin->getSkinName() !== 'minerva' ) {
 			$wikidataItemLink['class'] = 'wb-otherproject-link wb-otherproject-wikibase-dataitem';
 			// This automatically appends the wikidata item link to the end of the Other Projects
 			$sidebar['wikibase-otherprojects'][] = $wikidataItemLink;
