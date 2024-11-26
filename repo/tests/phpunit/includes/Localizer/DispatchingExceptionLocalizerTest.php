@@ -62,7 +62,7 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedParams, $message->getParams(), 'Message parameters:' );
 	}
 
-	public function provideGetExceptionMessageThrowsException() {
+	public function testGetExceptionMessageThrowsException() {
 		$localizers = [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
