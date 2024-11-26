@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikimedia\ObjectCache\BagOStuff;
 
 /**
@@ -15,7 +15,7 @@ use Wikimedia\ObjectCache\BagOStuff;
  */
 class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResolver {
 
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	/**
 	 * @var DatabaseTermInLangIdsResolver

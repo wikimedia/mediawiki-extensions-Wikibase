@@ -7,7 +7,7 @@ use JobQueueGroup;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -21,7 +21,7 @@ abstract class DatabaseTermStoreWriterBase {
 
 	use NormalizedTermStorageMappingTrait;
 	use FingerprintableEntityTermStoreTrait;
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	/** @var RepoDomainDb */
 	private $repoDb;
