@@ -65,6 +65,7 @@
 	"apihelp-wbformatvalue-param-property": "رقم الخاصية الذي تنتمي له قيمة البيانات، ينبغي أن يتم استخدامه بدلا من معامل <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "تنسيق قيمة سلسلة بسيطة.",
 	"apihelp-wbformatvalue-example-2": "تنسيق قيمة سلسلة كURL في HTML.",
+	"apihelp-wbformatvalue-example-3": "تنسيق قيمة الوقت كنص عادي، مع إظهار نموذج التقويم تلقائيًّا إذا لزم الأمر.",
 	"apihelp-wbgetclaims-summary": "الحصول على إدعاءات ويكيبيس.",
 	"apihelp-wbgetclaims-param-entity": "رقم الكيان لجلب الادعاءات منه. مطلوب ما لم يكن GUID الادعاء موفر.",
 	"apihelp-wbgetclaims-param-property": "فلتر اختياري لإرجاع فقط الادعاءات بسناك رئيسي له الخاصية المحددة.",
