@@ -857,37 +857,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -1741,37 +1740,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -2632,37 +2630,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -6244,37 +6241,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -7024,37 +7020,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -7784,37 +7779,36 @@
                                     },
                                     "references": {
                                       "items": {
-                                        "allOf": [
-                                          {
-                                            "required": [
-                                              "hash",
-                                              "parts"
-                                            ],
-                                            "properties": {
-                                              "parts": {
-                                                "items": {
+                                        "required": [
+                                          "hash",
+                                          "parts"
+                                        ],
+                                        "properties": {
+                                          "hash": {
+                                            "type": "string"
+                                          },
+                                          "parts": {
+                                            "items": {
+                                              "required": [
+                                                "property",
+                                                "value"
+                                              ],
+                                              "properties": {
+                                                "property": {
                                                   "required": [
-                                                    "property",
-                                                    "value"
-                                                  ],
-                                                  "properties": {
-                                                    "property": {
-                                                      "required": [
-                                                        "id",
-                                                        "data_type"
-                                                      ]
-                                                    },
-                                                    "value": {
-                                                      "required": [
-                                                        "type"
-                                                      ]
-                                                    }
-                                                  }
+                                                    "id",
+                                                    "data_type"
+                                                  ]
+                                                },
+                                                "value": {
+                                                  "required": [
+                                                    "type"
+                                                  ]
                                                 }
                                               }
                                             }
                                           }
-                                        ]
+                                        }
                                       }
                                     }
                                   }
@@ -36703,37 +36697,36 @@
                                 },
                                 "references": {
                                   "items": {
-                                    "allOf": [
-                                      {
-                                        "required": [
-                                          "hash",
-                                          "parts"
-                                        ],
-                                        "properties": {
-                                          "parts": {
-                                            "items": {
+                                    "required": [
+                                      "hash",
+                                      "parts"
+                                    ],
+                                    "properties": {
+                                      "hash": {
+                                        "type": "string"
+                                      },
+                                      "parts": {
+                                        "items": {
+                                          "required": [
+                                            "property",
+                                            "value"
+                                          ],
+                                          "properties": {
+                                            "property": {
                                               "required": [
-                                                "property",
-                                                "value"
-                                              ],
-                                              "properties": {
-                                                "property": {
-                                                  "required": [
-                                                    "id",
-                                                    "data_type"
-                                                  ]
-                                                },
-                                                "value": {
-                                                  "required": [
-                                                    "type"
-                                                  ]
-                                                }
-                                              }
+                                                "id",
+                                                "data_type"
+                                              ]
+                                            },
+                                            "value": {
+                                              "required": [
+                                                "type"
+                                              ]
                                             }
                                           }
                                         }
                                       }
-                                    ]
+                                    }
                                   }
                                 }
                               }
@@ -38380,37 +38373,36 @@
                                 },
                                 "references": {
                                   "items": {
-                                    "allOf": [
-                                      {
-                                        "required": [
-                                          "hash",
-                                          "parts"
-                                        ],
-                                        "properties": {
-                                          "parts": {
-                                            "items": {
+                                    "required": [
+                                      "hash",
+                                      "parts"
+                                    ],
+                                    "properties": {
+                                      "hash": {
+                                        "type": "string"
+                                      },
+                                      "parts": {
+                                        "items": {
+                                          "required": [
+                                            "property",
+                                            "value"
+                                          ],
+                                          "properties": {
+                                            "property": {
                                               "required": [
-                                                "property",
-                                                "value"
-                                              ],
-                                              "properties": {
-                                                "property": {
-                                                  "required": [
-                                                    "id",
-                                                    "data_type"
-                                                  ]
-                                                },
-                                                "value": {
-                                                  "required": [
-                                                    "type"
-                                                  ]
-                                                }
-                                              }
+                                                "id",
+                                                "data_type"
+                                              ]
+                                            },
+                                            "value": {
+                                              "required": [
+                                                "type"
+                                              ]
                                             }
                                           }
                                         }
                                       }
-                                    ]
+                                    }
                                   }
                                 }
                               }
