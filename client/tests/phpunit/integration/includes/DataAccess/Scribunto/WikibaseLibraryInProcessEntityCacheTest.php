@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
-use ReflectionClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -25,13 +24,6 @@ class WikibaseLibraryInProcessEntityCacheTest extends WikibaseLibraryTestCase {
 
 	/** @inheritDoc */
 	protected static $moduleName = 'WikibaseLibraryInProcessEntityCacheTests';
-
-	public function provideLuaData() {
-		if ( ( new ReflectionClass( parent::class ) )->hasMethod( 'provideLuaData' ) ) {
-			return parent::provideLuaData();
-		}
-		return [];
-	}
 
 	/**
 	 * @dataProvider provideLuaData

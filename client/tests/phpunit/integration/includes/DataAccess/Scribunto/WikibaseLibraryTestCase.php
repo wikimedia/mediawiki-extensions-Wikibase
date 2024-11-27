@@ -23,6 +23,10 @@ if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	 */
 	abstract class WikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
 
+		public static function provideLuaData(): iterable {
+			return [];
+		}
+
 		protected function setUp(): void {
 			$this->markTestSkipped( 'Scribunto is not available' );
 		}
