@@ -6,7 +6,6 @@ namespace Wikibase\Lib\Modules;
 
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
-use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -47,7 +46,9 @@ class RepoAccessModule extends RL\Module {
 			];
 		}
 
-		return ResourceLoader::makeConfigSetScript( [ 'wbRepo' => $wbRepo ] );
+		return 'mw.config.set('
+				. $context->encodeJson( [ 'wbRepo' => $wbRepo ] )
+				. ');';
 	}
 
 }

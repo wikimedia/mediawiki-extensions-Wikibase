@@ -2,7 +2,6 @@
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
-use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Module\TemplateModule;
@@ -996,13 +995,15 @@ return call_user_func( function() {
 							$language,
 							$saveMessageKey
 						);
-						return ResourceLoader::makeConfigSetScript( [
-							'wbMultiLingualStringLimit' => $repoSettings->getSetting( 'string-limits' )['multilang']['length'],
-							'wbCopyright' => [
-								'version' => $context->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
-								'messageHtml' => $copyrightMessage->inLanguage( $language )->parse(),
-							],
-						] );
+						return 'mw.config.set('
+								. $context->encodeJson( [
+									'wbMultiLingualStringLimit' => $repoSettings->getSetting( 'string-limits' )['multilang']['length'],
+									'wbCopyright' => [
+									'version' => $context->msg( 'wikibase-shortcopyrightwarning-version' )->parse(),
+									'messageHtml' => $copyrightMessage->inLanguage( $language )->parse(),
+									],
+								] )
+								. ');';
 					},
 				],
 			],
