@@ -25,6 +25,13 @@ $specialPageAliases['arz'] = [
 	'UnconnectedPages' => [ 'صفحات_مش_متوصله', 'من_غير_وصله', 'من_غير_وصلات_موقع' ],
 ];
 
+/** Azerbaijani (Azərbaycanca) */
+$specialPageAliases['az'] = [
+	'EntityUsage' => [ 'Elementİstifadəsi' ],
+	'PagesWithBadges' => [ 'NişanıOlanSəhifələr' ],
+	'UnconnectedPages' => [ 'BağlanmamışSəhifələr' ],
+];
+
 /** Western Balochi (بلوچی رخشانی) */
 $specialPageAliases['bgn'] = [
 	'UnconnectedPages' => [ 'وسل_نه_بوته_ئین_تاکدیمان' ],
