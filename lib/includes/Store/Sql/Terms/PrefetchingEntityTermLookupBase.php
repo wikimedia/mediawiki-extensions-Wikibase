@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 
 /**
  * Base class for a {@link PrefetchingTermLookup} that only supports a single entity type,
@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase implements PrefetchingTermLookup {
 
 	use NormalizedTermStorageMappingTrait;
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	/** @var string a subclass of {@link Int32EntityId} */
 	protected $entityIdClass;

@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IReadableDatabase;
 
@@ -20,7 +20,7 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 class DatabaseInnerTermStoreCleaner {
 
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	/** @var IReadableDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds */
 	private ?IReadableDatabase $dbr = null;

@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
@@ -19,7 +19,7 @@ use Wikimedia\Rdbms\SelectQueryBuilder;
  */
 class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;

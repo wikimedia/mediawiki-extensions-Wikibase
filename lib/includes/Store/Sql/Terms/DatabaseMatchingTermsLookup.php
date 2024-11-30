@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\MatchingTermsLookup;
-use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\FakeResultWrapper;
@@ -28,7 +28,7 @@ use Wikimedia\Rdbms\LikeValue;
  */
 class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
-	use StatsdMonitoring;
+	use StatsMonitoring;
 
 	private RepoDomainDb $repoDb;
 
