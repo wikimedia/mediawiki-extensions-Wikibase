@@ -29,12 +29,11 @@ class ArchitectureTest {
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
 			->classes(
-				Selector::namespace( self::DOMAIN_MODEL ),
-				Selector::namespace( self::DOMAIN_READMODEL )
+				Selector::inNamespace( self::DOMAIN_MODEL ),
+				Selector::inNamespace( self::DOMAIN_READMODEL )
 			)
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedDomainModelDependencies() );
+			->canOnlyDependOn()
+			->classes( ...$this->allowedDomainModelDependencies() );
 	}
 
 	/**
@@ -45,17 +44,16 @@ class ArchitectureTest {
 	private function allowedDomainModelDependencies(): array {
 		return [
 			...$this->dataModelNamespaces(),
-			Selector::namespace( self::DOMAIN_MODEL ),
-			Selector::namespace( self::DOMAIN_READMODEL ),
+			Selector::inNamespace( self::DOMAIN_MODEL ),
+			Selector::inNamespace( self::DOMAIN_READMODEL ),
 		];
 	}
 
 	public function testDomainServices(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::DOMAIN_SERVICES ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedDomainServicesDependencies() );
+			->classes( Selector::inNamespace( self::DOMAIN_SERVICES ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedDomainServicesDependencies() );
 	}
 
 	/**
@@ -67,16 +65,15 @@ class ArchitectureTest {
 	private function allowedDomainServicesDependencies(): array {
 		return array_merge( $this->allowedDomainModelDependencies(), [
 			...$this->allowedDataModelServices(),
-			Selector::namespace( self::DOMAIN_SERVICES ),
+			Selector::inNamespace( self::DOMAIN_SERVICES ),
 		] );
 	}
 
 	public function testSerialization(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::SERIALIZATION ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedSerializationDependencies() );
+			->classes( Selector::inNamespace( self::SERIALIZATION ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedSerializationDependencies() );
 	}
 
 	/**
@@ -87,16 +84,15 @@ class ArchitectureTest {
 	 */
 	private function allowedSerializationDependencies(): array {
 		return array_merge( $this->allowedDomainServicesDependencies(), [
-			Selector::namespace( self::SERIALIZATION ),
+			Selector::inNamespace( self::SERIALIZATION ),
 		] );
 	}
 
 	public function testValidation(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::VALIDATION ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedValidationDependencies() );
+			->classes( Selector::inNamespace( self::VALIDATION ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedValidationDependencies() );
 	}
 
 	/**
@@ -106,16 +102,15 @@ class ArchitectureTest {
 	 */
 	private function allowedValidationDependencies(): array {
 		return array_merge( $this->allowedSerializationDependencies(), [
-			Selector::namespace( self::VALIDATION ),
+			Selector::inNamespace( self::VALIDATION ),
 		] );
 	}
 
 	public function testUseCases(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::USE_CASES ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedUseCasesDependencies() );
+			->classes( Selector::inNamespace( self::USE_CASES ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedUseCasesDependencies() );
 	}
 
 	/**
@@ -126,17 +121,16 @@ class ArchitectureTest {
 	 */
 	private function allowedUseCasesDependencies(): array {
 		return array_merge( $this->allowedValidationDependencies(), [
-			Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ),
-			Selector::namespace( self::USE_CASES ),
+			Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ),
+			Selector::inNamespace( self::USE_CASES ),
 		] );
 	}
 
 	public function testUseCaseRequestValidation(): Rule {
 		return PHPat::rule()
-			->classes( Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ) )
-			->shouldNotDependOn()
-			->classes( Selector::all() )
-			->excluding( ...$this->allowedUseCaseRequestValidationDependencies() );
+			->classes( Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedUseCaseRequestValidationDependencies() );
 	}
 
 	/**
@@ -147,8 +141,8 @@ class ArchitectureTest {
 	 */
 	private function allowedUseCaseRequestValidationDependencies(): array {
 		return array_merge( $this->allowedValidationDependencies(), [
-			Selector::namespace( self::USE_CASES ),
-			Selector::namespace( self::USE_CASE_REQUEST_VALIDATION ),
+			Selector::inNamespace( self::USE_CASES ),
+			Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ),
 		] );
 	}
 
@@ -180,7 +174,7 @@ class ArchitectureTest {
 					'Wikibase\DataModel\Term',
 				]
 			),
-			Selector::namespace( 'DataValues' ),
+			Selector::inNamespace( 'DataValues' ),
 		];
 	}
 
