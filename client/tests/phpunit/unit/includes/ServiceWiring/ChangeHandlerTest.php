@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Hooks\WikibaseClientHookRunner;
@@ -34,7 +34,7 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 
 		$this->mockService(
 			'WikibaseClient.Logger',
-			$this->createMock( LoggerInterface::class )
+			new NullLogger()
 		);
 
 		$this->mockService(

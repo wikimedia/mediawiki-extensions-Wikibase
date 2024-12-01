@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ObjectCacheFactory;
-use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
@@ -67,10 +67,9 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 	 * @dataProvider cacheTypeProvider
 	 */
 	public function testTermFallbackCacheFactory( $sharedCacheType ): void {
-		$logger = $this->createMock( LoggerInterface::class );
 		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
-			$logger,
+			new NullLogger(),
 			$this->createMock( IBufferingStatsdDataFactory::class ),
 			'secret',
 			new TermFallbackCacheServiceFactory(),

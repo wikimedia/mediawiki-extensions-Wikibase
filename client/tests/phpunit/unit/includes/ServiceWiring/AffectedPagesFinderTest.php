@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
@@ -32,7 +32,7 @@ class AffectedPagesFinderTest extends ServiceWiringTestCase {
 		);
 		$this->mockService(
 			'WikibaseClient.Logger',
-			$this->createMock( LoggerInterface::class )
+			new NullLogger()
 		);
 
 		$this->serviceContainer

@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Title\Title;
-use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
@@ -44,7 +44,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
 			$this->createMock( HookContainer::class ),
-			$this->createMock( LoggerInterface::class ),
+			new NullLogger(),
 			'srwiki'
 		);
 
@@ -73,7 +73,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
 			$this->createMock( HookContainer::class ),
-			$this->createMock( LoggerInterface::class ),
+			new NullLogger(),
 			'srwiki'
 		);
 
@@ -128,7 +128,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
 			$hookContainer,
-			$this->createMock( LoggerInterface::class ),
+			new NullLogger(),
 			'srwiki'
 		);
 
