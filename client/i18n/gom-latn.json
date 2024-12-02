@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"QW90",
 			"The Discoverer"
 		]
 	},
@@ -41,6 +42,7 @@
 	"wikibase-otherprojects": "Her prokolpamnim",
 	"wikibase-sitelinks-sitename-columnheading": "Bhas",
 	"wikibase-sitelinks-link-columnheading": "Zodlelem pan",
+	"notification-link-text-view-item": "Nog {{GENDER:$1|polloi}}",
 	"wikibase-client-data-bridge-dialog-title": "$1 bodol",
 	"wikibase-client-data-bridge-references-heading": "Sondorbh",
 	"wikibase-client-data-bridge-error-reload-bridge": "Portun load kor",

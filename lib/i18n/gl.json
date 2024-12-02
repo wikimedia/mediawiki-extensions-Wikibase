@@ -22,7 +22,7 @@
 	"wikibase-error-ui-no-external-page": "Non se puido atopar a páxina \"$2\" en \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Editouse o mesmo valor á vez, provocando un conflito de edición. Recarga a páxina.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
-	"wikibase-language-name-for-terms-mul": "valores predeterminados para todas as linguas",
+	"wikibase-language-name-for-terms-mul": "predeterminado para todas as linguas",
 	"wikibase-quantitydetails-amount": "Cantidade",
 	"wikibase-quantitydetails-upperbound": "Límite superior",
 	"wikibase-quantitydetails-lowerbound": "Límite inferior",
