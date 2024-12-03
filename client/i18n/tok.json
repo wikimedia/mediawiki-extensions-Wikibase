@@ -6,7 +6,8 @@
 			"LesVisages",
 			"Robin van der Vliet",
 			".hecko",
-			"Tamzin"
+			"Tamzin",
+			"Juwan"
 		]
 	},
 	"wikibase-dataitem": "ni lon lipu {{WBREPONAME}}",
@@ -19,7 +20,10 @@
 	"wikibase-linkitem-input-site": "toki:",
 	"wikibase-linkitem-input-page": "lipu:",
 	"wikibase-rc-hide-wikidata-hide": "o weka",
-	"wikibase-rc-hide-wikidata-show": "o suli",
+	"wikibase-rc-hide-wikidata-show": "o pana",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "ante lon lipu {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "ante lon lipu {{WBREPONAME}}",
 	"wikibase-otherprojects": "lipu suli ante",
 	"wikibase-sitelinks-sitename-columnheading": "toki"
 }

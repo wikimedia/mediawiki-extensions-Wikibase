@@ -7,12 +7,20 @@
 	},
 	"tooltip-t-wikibase": "ⲉⲣⲗⲱⲟⲩ ⲉ̀ⲟⲩϩⲱⲃ ⲛ̀ⲁϩⲟⲣ ⲛ̀ⲟⲩⲧⲁⲙⲟ ⲉⲧⲧⲟⲙⲓ",
 	"wikibase-comment-update": "ⲡⲓϩⲱⲃ ⲛ̀{{WBREPONAME}} ⲁⲩⲫⲱⲛϩ",
-	"wikibase-dataitem": "ϩⲱⲃ ⲛ̀ⲧⲉ {{WBREPONAME}}",
-	"wikibase-editlinks": " ϣⲉⲃⲓⲱ ϩⲁⲛⲗⲱⲟⲩ",
+	"wikibase-dataitem": "Ⲡϩⲱⲃ ⲛ̀ⲧⲉ{{WBREPONAME}}",
+	"wikibase-editlinks": "Ϣⲉⲃⲓⲱ̀ ⲛ̀ϩⲁⲛⲗⲱⲟⲩ",
 	"wikibase-editlinkstitle": "ⲫⲱⲛϩ ϩⲁⲛⲗⲱⲟⲩ ⲛ̀ⲟⲩⲧⲉⲁⲥⲡⲓ",
+	"wikibase-addlinkstitle": "Ⲧⲟⲩϩⲟ ⲛϩ̀ⲁⲛⲗⲱⲟⲩ ⲉ̀ⲧⲟⲩⲧⲉⲁⲥⲡⲓ",
+	"wikibase-linkitem-addlinks": "Ⲧⲟⲩϩⲟ ⲛ̀ϩⲁⲛⲗⲱⲟⲩ",
+	"wikibase-linkitem-title": "Ⲉⲣⲗⲱⲟⲩ ⲙ̀ⲙⲟϥ ⲛⲉⲙⲡϩⲟ",
+	"wikibase-linkitem-linkpage": "Ⲉⲣⲗⲱⲟⲩ ⲙ̀ⲙⲟϥ ⲛⲉⲙⲡϩⲟ",
+	"wikibase-linkitem-selectlink": "Ⲁ̀ⲣⲓⲧⲁⲅⲁⲡⲏ ⲉ̀ϭⲓ ⲛ̀ⲟⲩⲙⲁ ⲛ̀ⲛⲁⲧ ⲛⲉⲙⲟⲩϩⲟ ⲉⲧⲉⲧⲉⲛⲟⲩⲱϣ ⲉ̀ⲉⲣⲗⲱⲟⲩ ⲙ̀ⲙⲱⲟⲩ ⲉ̀ⲡⲁⲓϩⲟ.",
+	"wikibase-linkitem-input-site": "Ⲧⲁⲥⲡⲓ:",
+	"wikibase-linkitem-input-page": "Ⲡϩⲟ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ⲕⲱⲡ",
 	"wikibase-rc-hide-wikidata-show": "Ⲟⲩⲱⲛϩ",
 	"wikibase-rc-wikibase-edit-letter": "ⲇ",
-	"wikibase-rc-wikibase-edit-title": "ϫⲓⲛⲫⲱⲛϩ ⲛ̀{{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "ϫⲓⲛⲫⲱⲛϩ ⲛ̀{{WBREPONAME}}",
+	"wikibase-otherprojects": "Ϧⲉⲛϩⲁⲛⲕⲉⲉ̀ⲡⲓⲭⲉⲓⲣⲏⲙⲁ̀"
 }
