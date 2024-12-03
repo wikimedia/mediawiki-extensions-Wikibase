@@ -83,7 +83,7 @@ class ApiFormatReference extends ApiBase {
 				$parserOptions = ParserOptions::newFromContext( $this );
 				$parser = $this->parserFactory->getInstance();
 				$parser->parse( $wikitext, Title::makeTitle( 0, 'API' ), $parserOptions );
-				$html = $parser->getOutput()->getText();
+				$html = $parser->getOutput()->runOutputPipeline( $parserOptions, [] )->getContentHolderText();
 				$this->getResult()->addValue( $this->getModulePath(), 'html', $html );
 				break;
 			default:

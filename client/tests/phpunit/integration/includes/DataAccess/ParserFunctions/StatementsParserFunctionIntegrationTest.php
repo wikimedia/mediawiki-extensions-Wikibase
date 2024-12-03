@@ -123,7 +123,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_byPropertyLabel() {
 		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -135,7 +135,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_byPropertyId() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -147,7 +147,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_arbitraryAccess() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32488}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -161,7 +161,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$this->assertSame(
 			"<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>",
-			$result->getText( [ 'unwrap' => true ] )
+			$result->getRawText()
 		);
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
@@ -174,7 +174,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_arbitraryAccessNotFound() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q1234567}}' );
 
-		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( '', $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -199,7 +199,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$result = $this->parseWikitextToHtml( '{{#statements:P666|from=Q999}}' );
 
-		$this->assertSame( "<p><span><span>X303</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p><span><span>X303</span></span>\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -213,7 +213,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 
 		$this->assertMatchesRegularExpression(
 			'/<p.*class=".*wikibase-error.*">.*P2147483645.*<\/p>/',
-			$result->getText( [ 'unwrap' => true ] )
+			$result->getRawText()
 		);
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
@@ -229,7 +229,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 			'A page not connected to an item'
 		);
 
-		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( '', $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -242,7 +242,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$this->markTestSkippedIfExtensionNotLoaded( 'Kartographer' );
 		$result = $this->parseWikitextToHtml( '{{#statements:P625|from=Q32489}}' );
 
-		$text = $result->getText( [ 'unwrap' => true ] );
+		$text = $result->getRawText();
 		$this->assertStringContainsString( 'class="mw-kartographer-maplink"', $text );
 		$this->assertStringNotContainsString( '&lt;maplink', $text );
 	}

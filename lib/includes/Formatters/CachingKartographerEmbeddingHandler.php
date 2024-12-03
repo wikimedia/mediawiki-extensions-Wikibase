@@ -58,12 +58,14 @@ class CachingKartographerEmbeddingHandler {
 
 		$cacheKey = $this->getCacheKey( $value, $language );
 		if ( !$this->cache->has( $cacheKey ) ) {
+			$parserOptions = $this->getParserOptions( $language );
 			$parserOutput = $this->parser->parse(
 				$this->getWikiText( $value ),
 				RequestContext::getMain()->getTitle() ?? Title::makeTitle( NS_SPECIAL, 'BlankPage' ),
-				$this->getParserOptions( $language )
+				$parserOptions
 			);
-			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->getText() );
+			$this->cache->set( $this->getCacheKey( $value, $language ), $parserOutput->runOutputPipeline( $parserOptions, [] )
+				->getContentHolderText() );
 		}
 		return $this->cache->get( $cacheKey );
 	}
@@ -87,7 +89,7 @@ class CachingKartographerEmbeddingHandler {
 
 		$containerDivId = 'wb-globeCoordinateValue-preview-' . base_convert( (string)mt_rand( 1, PHP_INT_MAX ), 10, 36 );
 
-		$html = '<div id="' . $containerDivId . '">' . $parserOutput->getText() . '</div>';
+		$html = '<div id="' . $containerDivId . '">' . $parserOutput->getContentHolderText() . '</div>';
 		$html .= $this->getMapframeInitJS(
 			$containerDivId,
 			$parserOutput->getModules(),
@@ -98,7 +100,7 @@ class CachingKartographerEmbeddingHandler {
 	}
 
 	/**
-	 * Get a ParserOutput with metadata for all the given GlobeCoordinateValues.
+	 * Get a postprocessed ParserOutput with metadata for all the given GlobeCoordinateValues.
 	 *
 	 * ATTENTION: This ParserOutput will generally only contain useable metadata, for
 	 * getting the html for a certain GlobeCoordinateValue, please use self::getHtml().
@@ -117,11 +119,12 @@ class CachingKartographerEmbeddingHandler {
 			$wikiText .= $this->getWikiText( $value );
 		}
 
+		$parserOptions = $this->getParserOptions( $language );
 		return $this->parser->parse(
 			$wikiText,
 			RequestContext::getMain()->getTitle() ?? Title::makeTitle( NS_SPECIAL, 'BlankPage' ),
-			$this->getParserOptions( $language )
-		);
+			 $parserOptions
+		)->runOutputPipeline( $parserOptions, [] );
 	}
 
 	private function getParserOptions( Language $language ): ParserOptions {

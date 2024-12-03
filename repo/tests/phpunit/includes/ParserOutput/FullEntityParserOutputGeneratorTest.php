@@ -73,7 +73,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entityRevision );
 
 		$this->assertSame( 'EntityParserOutputGeneratorTestBase-TITLE', $parserOutput->getTitleText(), 'title text' );
-		$this->assertSame( 'EntityParserOutputGeneratorTestBase-HTML', $parserOutput->getText(), 'html text' );
+		$this->assertSame( 'EntityParserOutputGeneratorTestBase-HTML', $parserOutput->getRawText(), 'html text' );
 
 		/**
 		 * @see \Wikibase\Repo\Tests\ParserOutput\FullEntityParserOutputGeneratorIntegrationTest

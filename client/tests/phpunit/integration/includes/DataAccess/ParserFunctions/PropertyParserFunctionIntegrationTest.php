@@ -105,7 +105,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_byPropertyLabel() {
 		$result = $this->parseWikitextToHtml( '{{#property:LuaTestStringProperty}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -117,7 +117,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_byPropertyId() {
 		$result = $this->parseWikitextToHtml( '{{#property:P342}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -129,7 +129,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_arbitraryAccess() {
 		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q32488}}' );
 
-		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -141,7 +141,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_multipleValues() {
 		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q32489}}' );
 
-		$this->assertSame( "<p>Lua&#160;:), Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( "<p>Lua&#160;:), Lua&#160;:)\n</p>", $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -153,7 +153,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	public function testPropertyParserFunction_arbitraryAccessNotFound() {
 		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q1234567}}' );
 
-		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( '', $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
@@ -167,7 +167,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 
 		$this->assertMatchesRegularExpression(
 			'/<p.*class=".*wikibase-error.*">.*P2147483647.*<\/p>/',
-			$result->getText( [ 'unwrap' => true ] )
+			$result->getRawText()
 		);
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
@@ -183,7 +183,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 			'A page not connected to an item'
 		);
 
-		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame( '', $result->getRawText() );
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(

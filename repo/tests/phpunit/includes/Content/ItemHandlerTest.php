@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use BadMethodCallException;
 use DataValues\StringValue;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -334,9 +335,10 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$content = $this->newRedirectContent( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
 		$contentRenderer = $this->getServiceContainer()->getContentRenderer();
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
-		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOutput = $contentRenderer->getParserOutput( $content, $title, null, $parserOptions );
 
-		$html = $parserOutput->getText();
+		$html = $parserOutput->runOutputPipeline( $parserOptions, [] )->getRawText();
 
 		$this->assertStringContainsString( '<div class="redirectMsg">', $html, 'redirect message' );
 		$this->assertStringContainsString( '<a href="', $html, 'redirect target link' );
