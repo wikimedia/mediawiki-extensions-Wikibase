@@ -34,7 +34,6 @@ function apply_client_settings {
 // mw-apply-wb-settings.php:
 $wgEnableWikibaseRepo = false;
 $wgEnableWikibaseClient = true;
-$wgEntitySchemaEnableDatatype = true;
 $wgEntitySchemaIsRepo = false;
 PHP
   echo -n '?>' >> LocalSettings.php
@@ -51,7 +50,6 @@ function apply_repo_settings {
 // mw-apply-wb-settings.php:
 $wgEnableWikibaseRepo = true;
 $wgEnableWikibaseClient = true;
-$wgEntitySchemaEnableDatatype = true;
 $wgEntitySchemaIsRepo = true;
 PHP
   echo -n '?>' >> LocalSettings.php
