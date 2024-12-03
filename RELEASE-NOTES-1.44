@@ -7,6 +7,11 @@ This is not a release yet!
 Don't forget to always back up your database before upgrading!
 Some specific notes for Wikibase 1.44 upgrades are below:
 
+* (T291617) Wikis that do not have either of the following (equivalent) lines in their config:
+  require_once "$IP/extensions/Wikibase/repo/config/Wikibase.example.php";
+  require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
+  probably need to change their config, see defaultEntityNamespaces below.
+
 ...
 
 For a general manual to upgrade MediaWiki see:
@@ -21,6 +26,12 @@ https://www.mediawiki.org/wiki/Manual:Upgrading
 
 ==== Changed configuration ====
 
+* (T291617) The defaultEntityNamespaces repo setting now defaults to true.
+  It was previously set to true in the example settings,
+  so for wikis that use the example settings, nothing changes.
+  Wikis that do not use the example settings probably want to set
+  $wgWBRepoSettings['defaultEntityNamespaces'] = false;
+  in their LocalSettings.
 * (T12345) ...
 
 ==== Removed configuration ====
