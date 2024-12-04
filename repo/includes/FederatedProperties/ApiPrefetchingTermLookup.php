@@ -5,6 +5,8 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use InvalidArgumentException;
 use LogicException;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
@@ -31,18 +33,18 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	 */
 	private $termKeys = [];
 
-	/**
-	 * @var ApiEntityLookup
-	 */
-	private $apiEntityLookup;
+	private ApiEntityLookup $apiEntityLookup;
+
+	private LoggerInterface $logger;
 
 	private const SUPPORTED_TERM_TYPES = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 
-	/**
-	 * @param ApiEntityLookup $apiEntityLookup
-	 */
-	public function __construct( ApiEntityLookup $apiEntityLookup ) {
+	public function __construct(
+		ApiEntityLookup $apiEntityLookup,
+		?LoggerInterface $logger = null
+	) {
 		$this->apiEntityLookup = $apiEntityLookup;
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**
@@ -81,12 +83,21 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 			return;
 		}
 
-		$this->apiEntityLookup->fetchEntities( $entityIdsToFetch );
-		foreach ( $entityIdsToFetch as $entityId ) {
-			$this->terms[ $entityId->getSerialization() ] = array_replace_recursive(
-				$this->terms, $this->apiEntityLookup->getResultPartForId( $entityId )
-			);
+		try {
+			$this->apiEntityLookup->fetchEntities( $entityIdsToFetch );
+			foreach ( $entityIdsToFetch as $entityId ) {
+				$this->terms[ $entityId->getSerialization() ] = array_replace_recursive(
+					$this->terms, $this->apiEntityLookup->getResultPartForId( $entityId )
+				);
+			}
+		} catch ( FederatedPropertiesException $ex ) {
+			$this->logger->warning( 'Prefetching failed for federated properties: {resultProperties}', [
+				'resultProperties' => implode( ',', $entityIds ),
+				'exception' => $ex,
+			] );
+			return;
 		}
+
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
 	}
 

@@ -5,10 +5,12 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\Test\TestLogger;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPrefetchingTermLookup;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 use Wikibase\Repo\Tests\HttpResponseMockerTrait;
 
@@ -295,6 +297,29 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$apiLookup->prefetchTerms( [ $this->fp18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$apiLookup->prefetchTerms( [ $this->fp18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$this->assertTrue( true ); // no error
+	}
+
+	public function testGetPrefetchedTerm_shouldNotFatalOnFailedRequests() {
+		$federatedPropertiesException = new FederatedPropertiesException();
+
+		$api = $this->createMock( GenericActionApiClient::class );
+		$api->expects( $this->once() )
+			->method( 'get' )
+			->with( $this->getRequestParameters( [ 'P18' ] ) )
+			->willThrowException( $federatedPropertiesException );
+		$logger = new TestLogger();
+
+		$apiLookup = new ApiPrefetchingTermLookup(
+			new ApiEntityLookup( $api ),
+			$logger
+		);
+		$apiLookup->prefetchTerms(
+			[ $this->fp18 ],
+			[ TermTypes::TYPE_LABEL ],
+			[ 'en', 'de' ]
+		);
+
+		$logger->hasWarningThatContains( 'Prefetching failed for federated properties:' );
 	}
 
 	private function getRequestParameters( $ids ) {

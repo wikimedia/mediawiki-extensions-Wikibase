@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -95,7 +94,7 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 			$termTypes,
 			$fallbackChainFactory,
 			$federatedPropertiesEnabled,
-			new SummaryParsingPrefetchHelper( $prefetchingTermLookup, new NullLogger() )
+			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}
 

@@ -1178,6 +1178,7 @@ return [
 			WikibaseRepo::getContentModelMappings( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
 			$entitySourceDefinition,
+			WikibaseRepo::getLogger( $services ),
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$services->getMainConfig()->get( 'ServerName' )
 		);
