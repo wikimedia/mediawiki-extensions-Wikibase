@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"tooltip-t-wikibase": "Ferbinnen tau 't data repository",
+	"wikibase-comment-update": "{{WBREPONAME}} Dingeräis annert",
+	"wikibase-dataitem": "{{WBREPONAME}} ding",
+	"wikibase-editlinks": "Bīräid ferbinnens",
+	"wikibase-editlinkstitle": "Bīräid intertóólsk ferbinnens",
+	"wikibase-linkitem-addlinks": "Dau links d'r bī",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Wīs",
+	"wikibase-rc-wikibase-edit-letter": "B",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bīräidens"
+}
