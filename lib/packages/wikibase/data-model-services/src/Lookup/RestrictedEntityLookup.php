@@ -79,7 +79,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	}
 
 	/**
-	 * Resets the number and list of entities loaded via this object.
+	 * Resets the list of entities loaded via this object.
 	 *
 	 * @since 3.4
 	 */
