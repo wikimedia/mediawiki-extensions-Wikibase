@@ -67,7 +67,7 @@
 	"wikibase-error-deserialize-error": "Failed to deserialize data.",
 	"wikibase-error-serialize-error": "Failed to serialize data.",
 	"wikibase-error-invalid-entity-id": "The ID \"$2\" is unknown to the system. Please use a valid entity ID.",
-	"wikibase-error-exceeded-entity-access-limit": "Too many {{WBREPONAME}} entities accessed.",
+	"wikibase-error-exceeded-entity-access-limit": "Too many {{WBREPONAME}} entities accessed. Number of entities loaded: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Too many \"mw.wikibase.getReferencedEntityId\" calls, only up to $2 {{PLURAL:$2|allowed}}.",
 	"unconnectedpages": "Pages not connected to items",
 	"unconnectedpages-summary": "This page lists pages with no connected data item (in namespaces that support connected items).",

@@ -400,7 +400,9 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 				[ 'args' => [ $prefixedEntityId ] ]
 			);
 		} catch ( EntityAccessLimitException $ex ) {
-			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
+			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit',
+				[ 'args' => [ $ex->getEntityAccessCount(), $ex->getEntityAccessLimit() ] ]
+			);
 		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
@@ -479,7 +481,9 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			$parser = $this->getEngine()->getParser();
 			$parser->addTrackingCategory( 'exceeded-entity-limit-category' );
 
-			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
+			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit',
+				[ 'args' => [ $ex->getEntityAccessCount(), $ex->getEntityAccessLimit() ] ]
+			);
 		} catch ( EntityIdParsingException $ex ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
