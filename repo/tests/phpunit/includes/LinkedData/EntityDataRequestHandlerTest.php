@@ -83,15 +83,18 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->subEntityTypesMap = [];
 	}
 
-	protected function tearDown(): void {
+	protected function assertPostConditions(): void {
 		$obLevel = ob_get_level();
-
-		while ( ob_get_level() > $this->obLevel ) {
-			ob_end_clean();
-		}
-
 		if ( $obLevel !== $this->obLevel ) {
 			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test." );
+		}
+
+		parent::assertPostConditions();
+	}
+
+	protected function tearDown(): void {
+		while ( ob_get_level() > $this->obLevel ) {
+			ob_end_clean();
 		}
 
 		parent::tearDown();
