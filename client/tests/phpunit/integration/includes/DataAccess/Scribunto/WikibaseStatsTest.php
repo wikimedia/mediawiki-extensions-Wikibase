@@ -60,22 +60,9 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 		$settings->setSetting( 'trackLuaFunctionCallsSampleRate', 1 );
 	}
 
-	protected function tearDown(): void {
+	protected function assertPostConditions(): void {
 		$mwServices = $this->getServiceContainer();
 		$settings = WikibaseClient::getSettings();
-
-		$settings->setSetting(
-			'trackLuaFunctionCallsPerWiki',
-			$this->oldTrackLuaFunctionCallsPerWiki
-		);
-		$settings->setSetting(
-			'trackLuaFunctionCallsPerSiteGroup',
-			$this->oldTrackLuaFunctionCallsPerSiteGroup
-		);
-		$settings->setSetting(
-			'trackLuaFunctionCallsSampleRate',
-			$this->oldTrackLuaFunctionCallsSampleRate
-		);
 
 		$siteId = $settings->getSetting( 'siteGlobalID' );
 		$keyPrefix = "MediaWiki.$siteId.wikibase.client.scribunto.";
@@ -94,6 +81,25 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 		} else {
 			$this->assertSame( 5, $luaTrackingKeyCount );
 		}
+
+		parent::assertPostConditions();
+	}
+
+	protected function tearDown(): void {
+		$settings = WikibaseClient::getSettings();
+
+		$settings->setSetting(
+			'trackLuaFunctionCallsPerWiki',
+			$this->oldTrackLuaFunctionCallsPerWiki
+		);
+		$settings->setSetting(
+			'trackLuaFunctionCallsPerSiteGroup',
+			$this->oldTrackLuaFunctionCallsPerSiteGroup
+		);
+		$settings->setSetting(
+			'trackLuaFunctionCallsSampleRate',
+			$this->oldTrackLuaFunctionCallsSampleRate
+		);
 
 		parent::tearDown();
 	}
