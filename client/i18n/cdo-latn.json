@@ -1,11 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Davidzdh",
-			"GnuDoyng",
-			"唐吉訶德的侍從"
+			"Winston Sung"
 		]
 	},
+	"tooltip-t-wikibase": "lièng-giék gáu ī-gĭng lièng-giék gì cṳ̆-lâiu cṳ̆-còng-kó hâung-mŭk",
 	"wikibase-comment-update": "Ī siŭ-gāi {{WBREPONAME}} hâung-mŭk",
 	"wikibase-dataitem": "{{WBREPONAME}} hâung-mŭk",
 	"wikibase-editlinks": "Siŭ-gāi lièng-giék",
