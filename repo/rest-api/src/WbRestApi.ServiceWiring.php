@@ -197,80 +197,15 @@ use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
-	// phpcs:disable MediaWiki.Arrays.AlphabeticArraySort.Duplicate
-	// The rule is re-enabled further down. The sniff is unable to handle class constant keys properly.
 
-	VRD::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER => function(): ItemIdRequestValidatingDeserializer {
-		return new ItemIdRequestValidatingDeserializer();
-	},
-
-	VRD::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
-		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
-		return new MappedRequestValidatingDeserializer(
-			fn( PropertyIdRequest $r ) => $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyId() )
-		);
-	},
-
-	VRD::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER => function(): StatementIdRequestValidatingDeserializer {
-		$entityIdParser = new BasicEntityIdParser();
-
-		return new StatementIdRequestValidatingDeserializer(
-			new StatementIdValidator( $entityIdParser ),
-			new StatementGuidParser( $entityIdParser )
-		);
-	},
-
-	VRD::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
-		$propertyIdFilterValidatingDeserializer = new PropertyIdFilterValidatingDeserializer( new PropertyIdValidator() );
-		return new MappedRequestValidatingDeserializer(
-			fn( PropertyIdFilterRequest $r ) => $r->getPropertyIdFilter() === null
-				? null
-				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
-				: $propertyIdFilterValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
-		);
-	},
-
-	VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): SiteIdRequestValidatingDeserializer {
-			return new SiteIdRequestValidatingDeserializer(
-				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
-					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
-				) )
-			);
-		},
-
-	VRD::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getLabelLanguageCodeValidator( $services ) );
-		},
-	VRD::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getDescriptionLanguageCodeValidator( $services ) );
-		},
 	VRD::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
 			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getAliasLanguageCodeValidator( $services ) );
 		},
 
-	VRD::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
-		$fieldsValidator = new FieldsFilterValidatingDeserializer( ItemParts::VALID_FIELDS );
-		return new MappedRequestValidatingDeserializer(
-			fn( ItemFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getItemFields() )
-		);
-	},
-
-	VRD::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
-		$fieldsValidator = new FieldsFilterValidatingDeserializer( PropertyParts::VALID_FIELDS );
-		return new MappedRequestValidatingDeserializer(
-			fn( PropertyFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getPropertyFields() )
-		);
-	},
-
-	VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): StatementSerializationRequestValidatingDeserializer {
-			return new StatementSerializationRequestValidatingDeserializer(
-				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) )
-			);
+	VRD::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
+			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getDescriptionLanguageCodeValidator( $services ) );
 		},
 
 	VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER =>
@@ -283,18 +218,11 @@ return [
 			);
 		},
 
-	VRD::PATCH_REQUEST_VALIDATING_DESERIALIZER => function (): PatchRequestValidatingDeserializer {
-		return new PatchRequestValidatingDeserializer( new JsonDiffJsonPatchValidator() );
-	},
-
-	VRD::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): ItemLabelEditRequestValidatingDeserializer {
-			return new ItemLabelEditRequestValidatingDeserializer(
-				new TermValidatorFactoryItemLabelValidator(
-					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getItemTermsCollisionDetector( $services )
-				),
-				WbRestApi::getItemDataRetriever( $services )
+	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
+			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
+				new AliasesInLanguageDeserializer(),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 			);
 		},
 
@@ -309,48 +237,25 @@ return [
 			);
 		},
 
-	VRD::ITEM_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): ItemAliasesInLanguageEditRequestValidatingDeserializer {
-			return new ItemAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesInLanguageDeserializer(),
-				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
-			);
-		},
+	VRD::ITEM_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
+		$fieldsValidator = new FieldsFilterValidatingDeserializer( ItemParts::VALID_FIELDS );
+		return new MappedRequestValidatingDeserializer(
+			fn( ItemFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getItemFields() )
+		);
+	},
 
-	VRD::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): PropertyLabelEditRequestValidatingDeserializer {
-			return new PropertyLabelEditRequestValidatingDeserializer(
-				new TermValidatorFactoryPropertyLabelValidator(
+	VRD::ITEM_ID_REQUEST_VALIDATING_DESERIALIZER => function(): ItemIdRequestValidatingDeserializer {
+		return new ItemIdRequestValidatingDeserializer();
+	},
+
+	VRD::ITEM_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): ItemLabelEditRequestValidatingDeserializer {
+			return new ItemLabelEditRequestValidatingDeserializer(
+				new TermValidatorFactoryItemLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
-					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
+					WikibaseRepo::getItemTermsCollisionDetector( $services )
 				),
-				WbRestApi::getPropertyDataRetriever( $services )
-			);
-		},
-
-	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
-			return new PropertyDescriptionEditRequestValidatingDeserializer(
-				new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				WbRestApi::getPropertyDataRetriever( $services )
-			);
-		},
-
-	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
-			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
-				new AliasesInLanguageDeserializer(),
-				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
-			);
-		},
-
-	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
-		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
-			return new SitelinkEditRequestValidatingDeserializer(
-				new SiteLinkLookupSitelinkValidator(
-					WbRestApi::getSitelinkDeserializer( $services ),
-					WikibaseRepo::getStore( $services )->newSiteLinkStore()
-				)
+				WbRestApi::getItemDataRetriever( $services )
 			);
 		},
 
@@ -401,10 +306,104 @@ return [
 		return new ItemStatementIdRequestValidator();
 	},
 
+	VRD::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
+			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getLabelLanguageCodeValidator( $services ) );
+		},
+
+	VRD::PATCH_REQUEST_VALIDATING_DESERIALIZER => function (): PatchRequestValidatingDeserializer {
+		return new PatchRequestValidatingDeserializer( new JsonDiffJsonPatchValidator() );
+	},
+
+	VRD::PROPERTY_ALIASES_IN_LANGUAGE_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): PropertyAliasesInLanguageEditRequestValidatingDeserializer {
+			return new PropertyAliasesInLanguageEditRequestValidatingDeserializer(
+				new AliasesInLanguageDeserializer(),
+				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
+			);
+		},
+
+	VRD::PROPERTY_DESCRIPTION_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
+			return new PropertyDescriptionEditRequestValidatingDeserializer(
+				new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
+				WbRestApi::getPropertyDataRetriever( $services )
+			);
+		},
+
+	VRD::PROPERTY_FIELDS_REQUEST_VALIDATING_DESERIALIZER => function (): MappedRequestValidatingDeserializer {
+		$fieldsValidator = new FieldsFilterValidatingDeserializer( PropertyParts::VALID_FIELDS );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyFieldsRequest $r ) => $fieldsValidator->validateAndDeserialize( $r->getPropertyFields() )
+		);
+	},
+
+	VRD::PROPERTY_ID_FILTER_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
+		$propertyIdFilterValidatingDeserializer = new PropertyIdFilterValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdFilterRequest $r ) => $r->getPropertyIdFilter() === null
+				? null
+				// @phan-suppress-next-line PhanTypeMismatchArgumentNullable
+				: $propertyIdFilterValidatingDeserializer->validateAndDeserialize( $r->getPropertyIdFilter() )
+		);
+	},
+
+	VRD::PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER => function(): MappedRequestValidatingDeserializer {
+		$propertyIdValidatingDeserializer = new PropertyIdValidatingDeserializer( new PropertyIdValidator() );
+		return new MappedRequestValidatingDeserializer(
+			fn( PropertyIdRequest $r ) => $propertyIdValidatingDeserializer->validateAndDeserialize( $r->getPropertyId() )
+		);
+	},
+
+	VRD::PROPERTY_LABEL_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): PropertyLabelEditRequestValidatingDeserializer {
+			return new PropertyLabelEditRequestValidatingDeserializer(
+				new TermValidatorFactoryPropertyLabelValidator(
+					WikibaseRepo::getTermValidatorFactory( $services ),
+					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
+				),
+				WbRestApi::getPropertyDataRetriever( $services )
+			);
+		},
+
 	VRD::PROPERTY_STATEMENT_ID_REQUEST_VALIDATOR => function (): PropertyStatementIdRequestValidator {
 		return new PropertyStatementIdRequestValidator();
 	},
-	// phpcs:enable
+
+	VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER =>
+		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
+			return new SitelinkEditRequestValidatingDeserializer(
+				new SiteLinkLookupSitelinkValidator(
+					WbRestApi::getSitelinkDeserializer( $services ),
+					WikibaseRepo::getStore( $services )->newSiteLinkStore()
+				)
+			);
+		},
+
+	VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): SiteIdRequestValidatingDeserializer {
+			return new SiteIdRequestValidatingDeserializer(
+				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
+					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
+				) )
+			);
+		},
+
+	VRD::STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER => function(): StatementIdRequestValidatingDeserializer {
+		$entityIdParser = new BasicEntityIdParser();
+
+		return new StatementIdRequestValidatingDeserializer(
+			new StatementIdValidator( $entityIdParser ),
+			new StatementGuidParser( $entityIdParser )
+		);
+	},
+
+	VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
+		function ( MediaWikiServices $services ): StatementSerializationRequestValidatingDeserializer {
+			return new StatementSerializationRequestValidatingDeserializer(
+				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) )
+			);
+		},
 
 	'WbRestApi.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {
 		return new AddItemAliasesInLanguage(

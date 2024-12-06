@@ -74,6 +74,7 @@ class UseCaseError extends UseCaseException {
 	public const CONTEXT_VIOLATION = 'violation';
 	public const CONTEXT_VIOLATION_CONTEXT = 'violation_context';
 
+	/** @phpcs-require-sorted-array */
 	public const EXPECTED_CONTEXT_KEYS = [
 		self::CANNOT_MODIFY_READ_ONLY_VALUE => [ self::CONTEXT_PATH ],
 		self::DATA_POLICY_VIOLATION => [ self::CONTEXT_VIOLATION, self::CONTEXT_VIOLATION_CONTEXT ],
@@ -84,6 +85,11 @@ class UseCaseError extends UseCaseException {
 		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
+		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
+			self::CONTEXT_PATH,
+			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
+			self::CONTEXT_STATEMENT_PROPERTY_ID,
+		],
 		self::PATCH_RESULT_INVALID_KEY => [ self::CONTEXT_PATH, self::CONTEXT_KEY ],
 		self::PATCH_RESULT_INVALID_VALUE => [ self::CONTEXT_PATH, self::CONTEXT_VALUE ],
 		self::PATCH_RESULT_MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
@@ -92,11 +98,6 @@ class UseCaseError extends UseCaseException {
 		self::PATCH_RESULT_VALUE_TOO_LONG => [ self::CONTEXT_PATH, self::CONTEXT_LIMIT ],
 		self::PATCH_TARGET_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::PATCH_TEST_FAILED => [ self::CONTEXT_PATH, self::CONTEXT_ACTUAL_VALUE ],
-		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
-			self::CONTEXT_PATH,
-			self::CONTEXT_STATEMENT_GROUP_PROPERTY_ID,
-			self::CONTEXT_STATEMENT_PROPERTY_ID,
-		],
 		self::PERMISSION_DENIED => [ self::CONTEXT_DENIAL_REASON ],
 		self::PERMISSION_DENIED_UNKNOWN_REASON => [],
 		self::PROPERTY_STATEMENT_ID_MISMATCH => [ self::CONTEXT_PROPERTY_ID, self::CONTEXT_STATEMENT_ID ],
