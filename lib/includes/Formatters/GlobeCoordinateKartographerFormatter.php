@@ -56,8 +56,8 @@ class GlobeCoordinateKartographerFormatter implements ValueFormatter {
 		LanguageFactory $languageFactory,
 		$emitPreviewHtml
 	) {
-		$this->options = $options ?: new FormatterOptions();
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$this->coordinateFormatter = $coordinateFormatter;
 		$this->cachingKartographerEmbeddingHandler = $cachingKartographerEmbeddingHandler;

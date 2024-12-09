@@ -50,9 +50,9 @@ class HtmlTimeFormatter implements ValueFormatter {
 		ValueFormatter $dateTimeFormatter,
 		ShowCalendarModelDecider $decider
 	) {
-		$this->options = $options ?: new FormatterOptions();
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
-		$this->options->defaultOption( ShowCalendarModelDecider::OPT_SHOW_CALENDAR, 'auto' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' )
+			->withDefaultOption( ShowCalendarModelDecider::OPT_SHOW_CALENDAR, 'auto' );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;
 		$this->decider = $decider;

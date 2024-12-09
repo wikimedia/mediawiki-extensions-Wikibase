@@ -89,9 +89,9 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter( $format, FormatterOptions $options ) {
-		$options->defaultOption( SnakFormatter::OPT_ON_ERROR, SnakFormatter::ON_ERROR_WARN );
+		$options = $options->withDefaultOption( SnakFormatter::OPT_ON_ERROR, SnakFormatter::ON_ERROR_WARN );
 
-		$this->valueFormatterFactory->applyLanguageDefaults( $options );
+		$options = $this->valueFormatterFactory->applyLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
 		$noValueSnakFormatter = new MessageSnakFormatter(

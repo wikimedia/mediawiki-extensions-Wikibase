@@ -38,8 +38,8 @@ class TimeDetailsFormatter implements ValueFormatter {
 		?FormatterOptions $options,
 		ValueFormatter $timeFormatter
 	) {
-		$this->options = $options ?: new FormatterOptions();
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$this->timeFormatter = $timeFormatter;
 	}

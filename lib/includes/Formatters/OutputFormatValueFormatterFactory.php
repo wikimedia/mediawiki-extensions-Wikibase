@@ -88,17 +88,19 @@ class OutputFormatValueFormatterFactory {
 
 	/**
 	 * Initializes the options keys ValueFormatter::OPT_LANG and
-	 * FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN if they are not yet set.
+	 * FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN if they are not yet set,
+	 * returning a fresh FormatterOptions object based on the supplied $options.
 	 *
-	 * @param FormatterOptions $options The options to modify.
+	 * @param FormatterOptions $options The options to which the language defaults should be applied
 	 *
 	 * @throws InvalidArgumentException
+	 * @return FormatterOptions A copy of the provided options with the language defaults applied
 	 * @todo  : Sort out how the desired language is specified. We have two language options,
 	 *        each accepting different ways of specifying the language. That's not good.
 	 * @todo this shouldn't be public at all. Perhaps factor it out into a helper class.
 	 */
-	public function applyLanguageDefaults( FormatterOptions $options ) {
-		$options->defaultOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
+	public function applyLanguageDefaults( FormatterOptions $options ): FormatterOptions {
+		$options = $options->withDefaultOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
 
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 		if ( !is_string( $lang ) ) {
@@ -119,6 +121,8 @@ class OutputFormatValueFormatterFactory {
 			throw new InvalidArgumentException( 'The value of OPT_LANGUAGE_FALLBACK_CHAIN must be '
 				. 'an instance of TermLanguageFallbackChain.' );
 		}
+
+		return $options;
 	}
 
 	/**
@@ -132,7 +136,7 @@ class OutputFormatValueFormatterFactory {
 	 * @return DispatchingValueFormatter
 	 */
 	public function getValueFormatter( $format, FormatterOptions $options ) {
-		$this->applyLanguageDefaults( $options );
+		$options = $this->applyLanguageDefaults( $options );
 
 		$formatters = $this->buildDefinedFormatters( $format, $options );
 

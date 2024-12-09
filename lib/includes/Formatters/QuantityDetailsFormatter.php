@@ -48,8 +48,8 @@ class QuantityDetailsFormatter implements ValueFormatter {
 		ValueFormatter $vocabularyUriFormatter,
 		?FormatterOptions $options = null
 	) {
-		$this->options = $options ?: new FormatterOptions();
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
 		$this->vocabularyUriFormatter = $vocabularyUriFormatter;

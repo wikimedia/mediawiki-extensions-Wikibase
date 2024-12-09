@@ -113,7 +113,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 	public function testApplyLanguageDefaults( FormatterOptions $options, $expectedLanguage, $expectedFallback ) {
 		$factory = $this->newOutputFormatValueFormatterFactory();
 
-		$factory->applyLanguageDefaults( $options );
+		$options = $factory->applyLanguageDefaults( $options );
 
 		if ( $expectedLanguage !== null ) {
 			$lang = $options->getOption( ValueFormatter::OPT_LANG );

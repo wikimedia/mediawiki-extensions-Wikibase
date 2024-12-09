@@ -228,8 +228,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			'newQuantityFormatter',
 		];
 
-		$options = new FormatterOptions();
-		$options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+		$options = ( new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		foreach ( $formats as $format ) {
 			foreach ( $functionNames as $function ) {

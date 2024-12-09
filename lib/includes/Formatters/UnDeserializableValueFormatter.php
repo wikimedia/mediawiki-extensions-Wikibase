@@ -25,9 +25,8 @@ class UnDeserializableValueFormatter implements ValueFormatter {
 	private $options;
 
 	public function __construct( ?FormatterOptions $options = null ) {
-		$this->options = $options ?: new FormatterOptions();
-
-		$this->options->defaultOption( self::OPT_MESSAGE_KEY, 'wikibase-undeserializable-value' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( self::OPT_MESSAGE_KEY, 'wikibase-undeserializable-value' );
 	}
 
 	/**
