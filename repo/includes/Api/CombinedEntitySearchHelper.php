@@ -70,7 +70,7 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 		$searchResultEntityIdSerializations = array_keys( $searchResults );
 
 		foreach ( $newSearchResults as $searchResultToAdd ) {
-			$entityIdString = $searchResultToAdd->getEntityId()->getSerialization();
+			$entityIdString = $searchResultToAdd->getEntityIdSerialization();
 
 			if ( !in_array( $entityIdString, $searchResultEntityIdSerializations ) ) {
 				$searchResults[$entityIdString] = $searchResultToAdd;

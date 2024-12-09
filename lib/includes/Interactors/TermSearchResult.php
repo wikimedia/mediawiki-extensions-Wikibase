@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Interactors;
 
+use DomainException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 
@@ -117,6 +118,25 @@ class TermSearchResult {
 	 */
 	public function getMetaData(): array {
 		return $this->metaData;
+	}
+
+	/**
+	 * Return the serialization of the entity ID of the search result,
+	 * either from {@link self::getEntityId()} or {@link self::getMetaData()}.
+	 */
+	public function getEntityIdSerialization(): string {
+		if ( $this->entityId !== null ) {
+			return $this->entityId->getSerialization();
+		} else {
+			$id = $this->metaData['id'] ?? null;
+			if ( is_string( $id ) ) {
+				return $id;
+			} else {
+				throw new DomainException(
+					'TermSearchResult contains neither entityId nor string metaData["id"]'
+				);
+			}
+		}
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
@@ -74,6 +75,31 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$this->assertEquals( [], $termSearchResult->getMetaData() );
+	}
+
+	public static function provideParamsForQ1(): iterable {
+		yield 'EntityId' => [ new ItemId( 'Q1' ), [] ];
+		yield 'string id' => [ null, [ 'id' => 'Q1' ] ];
+	}
+
+	/** @dataProvider provideParamsForQ1 */
+	public function testGetEntityIdSerialization( ?EntityId $entityId, array $metadata ): void {
+		$matchedTerm = new Term( 'en', 'matchedTerm' );
+		$matchedTermType = 'matchedTermType';
+		$displayLabel = null;
+		$displayDescription = null;
+
+		$result = new TermSearchResult(
+			$matchedTerm,
+			$matchedTermType,
+			$entityId,
+			$displayLabel,
+			$displayDescription,
+			$metadata
+		);
+		$entityIdSerialization = $result->getEntityIdSerialization();
+
+		$this->assertSame( 'Q1', $entityIdSerialization );
 	}
 
 }
