@@ -5,7 +5,8 @@
 			"Hedda",
 			"MuratTheTurkish",
 			"Uncitoyen",
-			"Uğurkent"
+			"Uğurkent",
+			"İmmortalance"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" değerlerinin kullanımı henüz desteklenmiyor.",
@@ -19,6 +20,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "bir saniyenin 1/10'a kadar",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "bir saniyenin 1/100'ü kadar",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "bir saniyenin 1/1000'ine kadar",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoryen",
 	"valueview-expert-timevalue-calendar-julian": "Jülyen",
 	"valueview-expert-timeinput-precision": "Kesinlik:",
