@@ -45,16 +45,15 @@ class RestrictedEntityLookup implements EntityLookup {
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$entityIdSerialization = $entityId->getSerialization();
-
 		if ( !array_key_exists( $entityIdSerialization, $this->entitiesAccessed ) ) {
-			$this->entitiesAccessed[$entityIdSerialization] = true;
-
-			if ( count( $this->entitiesAccessed ) > $this->entityAccessLimit ) {
+			if ( count( $this->entitiesAccessed ) >= $this->entityAccessLimit ) {
 				throw new EntityAccessLimitException(
 					$entityId,
 					'Too many entities loaded, must not load more than ' . $this->entityAccessLimit . ' entities.'
 				);
 			}
+
+			$this->entitiesAccessed[$entityIdSerialization] = true;
 		}
 
 		return $this->entityLookup->getEntity( $entityId );
