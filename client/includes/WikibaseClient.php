@@ -94,13 +94,13 @@ final class WikibaseClient {
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	public static function getDefaultValueFormatterBuilders( ContainerInterface $services = null ): WikibaseValueFormatterBuilders {
+	public static function getDefaultValueFormatterBuilders( ?ContainerInterface $services = null ): WikibaseValueFormatterBuilders {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DefaultValueFormatterBuilders' );
 	}
 
 	public static function getKartographerEmbeddingHandler(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): ?CachingKartographerEmbeddingHandler {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.KartographerEmbeddingHandler' );
@@ -110,107 +110,107 @@ final class WikibaseClient {
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use {@link WikibaseClient::getSnakFormatterFactory()} instead!
 	 */
-	public static function getDefaultSnakFormatterBuilders( ContainerInterface $services = null ): WikibaseSnakFormatterBuilders {
+	public static function getDefaultSnakFormatterBuilders( ?ContainerInterface $services = null ): WikibaseSnakFormatterBuilders {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DefaultSnakFormatterBuilders' );
 	}
 
-	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
+	public static function getDataTypeDefinitions( ?ContainerInterface $services = null ): DataTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataTypeDefinitions' );
 	}
 
-	public static function getEntitySourceDefinitions( ContainerInterface $services = null ): EntitySourceDefinitions {
+	public static function getEntitySourceDefinitions( ?ContainerInterface $services = null ): EntitySourceDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntitySourceDefinitions' );
 	}
 
-	public static function getEntityTypeDefinitions( ContainerInterface $services = null ): EntityTypeDefinitions {
+	public static function getEntityTypeDefinitions( ?ContainerInterface $services = null ): EntityTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityTypeDefinitions' );
 	}
 
-	public static function getDataTypeFactory( ContainerInterface $services = null ): DataTypeFactory {
+	public static function getDataTypeFactory( ?ContainerInterface $services = null ): DataTypeFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataTypeFactory' );
 	}
 
-	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
+	public static function getEntityIdParser( ?ContainerInterface $services = null ): EntityIdParser {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityIdParser' );
 	}
 
-	public static function getEntityIdComposer( ContainerInterface $services = null ): EntityIdComposer {
+	public static function getEntityIdComposer( ?ContainerInterface $services = null ): EntityIdComposer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityIdComposer' );
 	}
 
-	public static function getWikibaseServices( ContainerInterface $services = null ): WikibaseServices {
+	public static function getWikibaseServices( ?ContainerInterface $services = null ): WikibaseServices {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.WikibaseServices' );
 	}
 
-	public static function getDataAccessSettings( ContainerInterface $services = null ): DataAccessSettings {
+	public static function getDataAccessSettings( ?ContainerInterface $services = null ): DataAccessSettings {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataAccessSettings' );
 	}
 
-	public static function getEntityLookup( ContainerInterface $services = null ): EntityLookup {
+	public static function getEntityLookup( ?ContainerInterface $services = null ): EntityLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityLookup' );
 	}
 
-	public static function getEntityRevisionLookup( ContainerInterface $services = null ): EntityRevisionLookup {
+	public static function getEntityRevisionLookup( ?ContainerInterface $services = null ): EntityRevisionLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityRevisionLookup' );
 	}
 
-	public static function getTermBuffer( ContainerInterface $services = null ): TermBuffer {
+	public static function getTermBuffer( ?ContainerInterface $services = null ): TermBuffer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermBuffer' );
 	}
 
-	public static function getAliasTermBuffer( ContainerInterface $services = null ): AliasTermBuffer {
+	public static function getAliasTermBuffer( ?ContainerInterface $services = null ): AliasTermBuffer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.AliasTermBuffer' );
 	}
 
-	public static function getTermLookup( ContainerInterface $services = null ): TermLookup {
+	public static function getTermLookup( ?ContainerInterface $services = null ): TermLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermLookup' );
 	}
 
-	public static function getPrefetchingTermLookup( ContainerInterface $services = null ): PrefetchingTermLookup {
+	public static function getPrefetchingTermLookup( ?ContainerInterface $services = null ): PrefetchingTermLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PrefetchingTermLookup' );
 	}
 
-	public static function getPropertyDataTypeLookup( ContainerInterface $services = null ): PropertyDataTypeLookup {
+	public static function getPropertyDataTypeLookup( ?ContainerInterface $services = null ): PropertyDataTypeLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertyDataTypeLookup' );
 	}
 
-	public static function getPropertyInfoLookup( ContainerInterface $services = null ): PropertyInfoLookup {
+	public static function getPropertyInfoLookup( ?ContainerInterface $services = null ): PropertyInfoLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertyInfoLookup' );
 	}
 
-	public static function getStringNormalizer( ContainerInterface $services = null ): StringNormalizer {
+	public static function getStringNormalizer( ?ContainerInterface $services = null ): StringNormalizer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 				->get( 'WikibaseClient.StringNormalizer' );
 	}
 
-	public static function getRepoLinker( ContainerInterface $services = null ): RepoLinker {
+	public static function getRepoLinker( ?ContainerInterface $services = null ): RepoLinker {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RepoLinker' );
 	}
 
-	public static function getLanguageFallbackChainFactory( ContainerInterface $services = null ): LanguageFallbackChainFactory {
+	public static function getLanguageFallbackChainFactory( ?ContainerInterface $services = null ): LanguageFallbackChainFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LanguageFallbackChainFactory' );
 	}
 
-	public static function getStore( ContainerInterface $services = null ): ClientStore {
+	public static function getStore( ?ContainerInterface $services = null ): ClientStore {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Store' );
 	}
@@ -220,17 +220,17 @@ final class WikibaseClient {
 	 * If the service depends on a language, make it part of the parameters when the service is used
 	 * (possibly indirectly, e.g. via an {@link \IContextSource}).
 	 */
-	public static function getUserLanguage( ContainerInterface $services = null ): Language {
+	public static function getUserLanguage( ?ContainerInterface $services = null ): Language {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.UserLanguage' );
 	}
 
-	public static function getSettings( ContainerInterface $services = null ): SettingsArray {
+	public static function getSettings( ?ContainerInterface $services = null ): SettingsArray {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Settings' );
 	}
 
-	public static function getLogger( ContainerInterface $services = null ): LoggerInterface {
+	public static function getLogger( ?ContainerInterface $services = null ): LoggerInterface {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Logger' );
 	}
@@ -244,7 +244,7 @@ final class WikibaseClient {
 	 * If the configured site ID is not found in the sites table, a
 	 * new Site object is constructed from the configured ID.
 	 */
-	public static function getSite( ContainerInterface $services = null ): Site {
+	public static function getSite( ?ContainerInterface $services = null ): Site {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Site' );
 	}
@@ -254,7 +254,7 @@ final class WikibaseClient {
 	 * This is typically the group the client wiki itself belongs to, but
 	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
 	 */
-	public static function getLangLinkSiteGroup( ContainerInterface $services = null ): string {
+	public static function getLangLinkSiteGroup( ?ContainerInterface $services = null ): string {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LangLinkSiteGroup' );
 	}
@@ -265,7 +265,7 @@ final class WikibaseClient {
 	 * can be configured to be otherwise using the languageLinkSiteGroup setting.
 	 * It can also be configured to be more than one group.
 	 */
-	public static function getLangLinkSiteGroups( ContainerInterface $services = null ): array {
+	public static function getLangLinkSiteGroups( ?ContainerInterface $services = null ): array {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LangLinkSiteGroups' );
 	}
@@ -273,7 +273,7 @@ final class WikibaseClient {
 	/**
 	 * Get site group ID
 	 */
-	public static function getSiteGroup( ContainerInterface $services = null ): string {
+	public static function getSiteGroup( ?ContainerInterface $services = null ): string {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.SiteGroup' );
 	}
@@ -282,7 +282,7 @@ final class WikibaseClient {
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
 	 */
-	public static function getSnakFormatterFactory( ContainerInterface $services = null ): OutputFormatSnakFormatterFactory {
+	public static function getSnakFormatterFactory( ?ContainerInterface $services = null ): OutputFormatSnakFormatterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.SnakFormatterFactory' );
 	}
@@ -291,48 +291,48 @@ final class WikibaseClient {
 	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
 	 * for different output formats.
 	 */
-	public static function getValueFormatterFactory( ContainerInterface $services = null ): OutputFormatValueFormatterFactory {
+	public static function getValueFormatterFactory( ?ContainerInterface $services = null ): OutputFormatValueFormatterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ValueFormatterFactory' );
 	}
 
-	public static function getRepoItemUriParser( ContainerInterface $services = null ): EntityIdParser {
+	public static function getRepoItemUriParser( ?ContainerInterface $services = null ): EntityIdParser {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RepoItemUriParser' );
 	}
 
-	public static function getMobileSite( ContainerInterface $services = null ): bool {
+	public static function getMobileSite( ?ContainerInterface $services = null ): bool {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.MobileSite' );
 	}
 
-	public static function getNamespaceChecker( ContainerInterface $services = null ): NamespaceChecker {
+	public static function getNamespaceChecker( ?ContainerInterface $services = null ): NamespaceChecker {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.NamespaceChecker' );
 	}
 
-	public static function getLangLinkHandlerFactory( ContainerInterface $services = null ): LangLinkHandlerFactory {
+	public static function getLangLinkHandlerFactory( ?ContainerInterface $services = null ): LangLinkHandlerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LangLinkHandlerFactory' );
 	}
 
-	public static function getParserOutputDataUpdater( ContainerInterface $services = null ): ClientParserOutputDataUpdater {
+	public static function getParserOutputDataUpdater( ?ContainerInterface $services = null ): ClientParserOutputDataUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ParserOutputDataUpdater' );
 	}
 
-	public static function getSidebarLinkBadgeDisplay( ContainerInterface $service = null ): SidebarLinkBadgeDisplay {
-		return ( $service ?: MediaWikiServices::getInstance() )
+	public static function getSidebarLinkBadgeDisplay( ?ContainerInterface $services = null ): SidebarLinkBadgeDisplay {
+		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.SidebarLinkBadgeDisplay' );
 	}
 
-	public static function getLanguageLinkBadgeDisplay( ContainerInterface $services = null ): LanguageLinkBadgeDisplay {
+	public static function getLanguageLinkBadgeDisplay( ?ContainerInterface $services = null ): LanguageLinkBadgeDisplay {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.LanguageLinkBadgeDisplay' );
 	}
 
 	public static function getBaseDataModelDeserializerFactory(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): DeserializerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.BaseDataModelDeserializerFactory' );
@@ -343,7 +343,7 @@ final class WikibaseClient {
 	 * A factory returned has knowledge about items, properties, and the elements they are made of,
 	 * but no other entity types.
 	 */
-	public static function getCompactBaseDataModelSerializerFactory( ContainerInterface $services = null ): SerializerFactory {
+	public static function getCompactBaseDataModelSerializerFactory( ?ContainerInterface $services = null ): SerializerFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.CompactBaseDataModelSerializerFactory' );
 	}
@@ -351,69 +351,69 @@ final class WikibaseClient {
 	/**
 	 * Returns an entity serializer that generates the most compact serialization.
 	 */
-	public static function getCompactEntitySerializer( ContainerInterface $services = null ): Serializer {
+	public static function getCompactEntitySerializer( ?ContainerInterface $services = null ): Serializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.CompactEntitySerializer' );
 	}
 
-	public static function getDataValueDeserializer( ContainerInterface $services = null ): DataValueDeserializer {
+	public static function getDataValueDeserializer( ?ContainerInterface $services = null ): DataValueDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataValueDeserializer' );
 	}
 
 	public static function getOtherProjectsSidebarGeneratorFactory(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): OtherProjectsSidebarGeneratorFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.OtherProjectsSidebarGeneratorFactory' );
 	}
 
-	public static function getEntityChangeFactory( ContainerInterface $services = null ): EntityChangeFactory {
+	public static function getEntityChangeFactory( ?ContainerInterface $services = null ): EntityChangeFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityChangeFactory' );
 	}
 
-	public static function getEntityChangeLookup( ContainerInterface $services = null ): EntityChangeLookup {
+	public static function getEntityChangeLookup( ?ContainerInterface $services = null ): EntityChangeLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityChangeLookup' );
 	}
 
-	public static function getEntityDiffer( ContainerInterface $services = null ): EntityDiffer {
+	public static function getEntityDiffer( ?ContainerInterface $services = null ): EntityDiffer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityDiffer' );
 	}
 
-	public static function getStatementGroupRendererFactory( ContainerInterface $services = null ): StatementGroupRendererFactory {
+	public static function getStatementGroupRendererFactory( ?ContainerInterface $services = null ): StatementGroupRendererFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.StatementGroupRendererFactory' );
 	}
 
-	public static function getDataAccessSnakFormatterFactory( ContainerInterface $services = null ): DataAccessSnakFormatterFactory {
+	public static function getDataAccessSnakFormatterFactory( ?ContainerInterface $services = null ): DataAccessSnakFormatterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DataAccessSnakFormatterFactory' );
 	}
 
-	public static function getPropertyParserFunctionRunner( ContainerInterface $services = null ): Runner {
+	public static function getPropertyParserFunctionRunner( ?ContainerInterface $services = null ): Runner {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertyParserFunctionRunner' );
 	}
 
-	public static function getOtherProjectsSitesProvider( ContainerInterface $services = null ): OtherProjectsSitesProvider {
+	public static function getOtherProjectsSitesProvider( ?ContainerInterface $services = null ): OtherProjectsSitesProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.OtherProjectsSitesProvider' );
 	}
 
-	public static function getAffectedPagesFinder( ContainerInterface $services = null ): AffectedPagesFinder {
+	public static function getAffectedPagesFinder( ?ContainerInterface $services = null ): AffectedPagesFinder {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.AffectedPagesFinder' );
 	}
 
-	public static function getChangeHandler( ContainerInterface $services = null ): ChangeHandler {
+	public static function getChangeHandler( ?ContainerInterface $services = null ): ChangeHandler {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ChangeHandler' );
 	}
 
-	public static function getRecentChangeFactory( ContainerInterface $services = null ): RecentChangeFactory {
+	public static function getRecentChangeFactory( ?ContainerInterface $services = null ): RecentChangeFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RecentChangeFactory' );
 	}
@@ -423,17 +423,17 @@ final class WikibaseClient {
 	 * {@link getItemAndPropertySource item and property source},
 	 * if an interwiki prefix for that source (and its site) is known.
 	 */
-	public static function getExternalUserNames( ContainerInterface $services = null ): ?ExternalUserNames {
+	public static function getExternalUserNames( ?ContainerInterface $services = null ): ?ExternalUserNames {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ExternalUserNames' );
 	}
 
-	public static function getItemAndPropertySource( ContainerInterface $services = null ): DatabaseEntitySource {
+	public static function getItemAndPropertySource( ?ContainerInterface $services = null ): DatabaseEntitySource {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ItemAndPropertySource' );
 	}
 
-	public static function getWikibaseContentLanguages( ContainerInterface $services = null ): WikibaseContentLanguages {
+	public static function getWikibaseContentLanguages( ?ContainerInterface $services = null ): WikibaseContentLanguages {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.WikibaseContentLanguages' );
 	}
@@ -441,112 +441,112 @@ final class WikibaseClient {
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 */
-	public static function getTermsLanguages( ContainerInterface $services = null ): ContentLanguages {
+	public static function getTermsLanguages( ?ContainerInterface $services = null ): ContentLanguages {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermsLanguages' );
 	}
 
-	public static function getRestrictedEntityLookupFactory( ContainerInterface $services = null ): RestrictedEntityLookupFactory {
+	public static function getRestrictedEntityLookupFactory( ?ContainerInterface $services = null ): RestrictedEntityLookupFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RestrictedEntityLookupFactory' );
 	}
 
-	public static function getPropertyOrderProvider( ContainerInterface $services = null ): PropertyOrderProvider {
+	public static function getPropertyOrderProvider( ?ContainerInterface $services = null ): PropertyOrderProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertyOrderProvider' );
 	}
 
-	public static function getEntityNamespaceLookup( ContainerInterface $services = null ): EntityNamespaceLookup {
+	public static function getEntityNamespaceLookup( ?ContainerInterface $services = null ): EntityNamespaceLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityNamespaceLookup' );
 	}
 
-	public static function getTermFallbackCache( ContainerInterface $services = null ): TermFallbackCacheFacade {
+	public static function getTermFallbackCache( ?ContainerInterface $services = null ): TermFallbackCacheFacade {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermFallbackCache' );
 	}
 
-	public static function getTermFallbackCacheFactory( ContainerInterface $services = null ): TermFallbackCacheFactory {
+	public static function getTermFallbackCacheFactory( ?ContainerInterface $services = null ): TermFallbackCacheFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermFallbackCacheFactory' );
 	}
 
-	public static function getEntityIdLookup( ContainerInterface $services = null ): EntityIdLookup {
+	public static function getEntityIdLookup( ?ContainerInterface $services = null ): EntityIdLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntityIdLookup' );
 	}
 
-	public static function getDescriptionLookup( ContainerInterface $services = null ): DescriptionLookup {
+	public static function getDescriptionLookup( ?ContainerInterface $services = null ): DescriptionLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.DescriptionLookup' );
 	}
 
-	public static function getPropertyLabelResolver( ContainerInterface $services = null ): PropertyLabelResolver {
+	public static function getPropertyLabelResolver( ?ContainerInterface $services = null ): PropertyLabelResolver {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertyLabelResolver' );
 	}
 
-	public static function getReferenceFormatterFactory( ContainerInterface $services = null ): ReferenceFormatterFactory {
+	public static function getReferenceFormatterFactory( ?ContainerInterface $services = null ): ReferenceFormatterFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ReferenceFormatterFactory' );
 	}
 
-	public static function getItemSource( ContainerInterface $services = null ): DatabaseEntitySource {
+	public static function getItemSource( ?ContainerInterface $services = null ): DatabaseEntitySource {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ItemSource' );
 	}
 
-	public static function getPropertySource( ContainerInterface $services = null ): DatabaseEntitySource {
+	public static function getPropertySource( ?ContainerInterface $services = null ): DatabaseEntitySource {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.PropertySource' );
 	}
 
 	public static function getTermInLangIdsResolverFactory(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): TermInLangIdsResolverFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermInLangIdsResolverFactory' );
 	}
 
-	public static function getMessageInLanguageProvider( ContainerInterface $services = null ): MessageInLanguageProvider {
+	public static function getMessageInLanguageProvider( ?ContainerInterface $services = null ): MessageInLanguageProvider {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.MessageInLanguageProvider' );
 	}
 
-	public static function getClientDomainDbFactory( ContainerInterface $services = null ): ClientDomainDbFactory {
+	public static function getClientDomainDbFactory( ?ContainerInterface $services = null ): ClientDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ClientDomainDbFactory' );
 	}
 
-	public static function getRepoDomainDbFactory( ContainerInterface $services = null ): RepoDomainDbFactory {
+	public static function getRepoDomainDbFactory( ?ContainerInterface $services = null ): RepoDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RepoDomainDbFactory' );
 	}
 
-	public static function getEntitySourceAndTypeDefinitions( ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
+	public static function getEntitySourceAndTypeDefinitions( ?ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.EntitySourceAndTypeDefinitions' );
 	}
 
-	public static function getUsageAccumulatorFactory( ContainerInterface $services = null ): UsageAccumulatorFactory {
+	public static function getUsageAccumulatorFactory( ?ContainerInterface $services = null ): UsageAccumulatorFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.UsageAccumulatorFactory' );
 	}
 
-	public static function getHookRunner( ContainerInterface $services = null ): WikibaseClientHookRunner {
+	public static function getHookRunner( ?ContainerInterface $services = null ): WikibaseClientHookRunner {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.HookRunner' );
 	}
 
 	public static function getRedirectResolvingLatestRevisionLookup(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): RedirectResolvingLatestRevisionLookup {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RedirectResolvingLatestRevisionLookup' );
 	}
 
 	public static function getFallbackLabelDescriptionLookupFactory(
-		ContainerInterface $services = null
+		?ContainerInterface $services = null
 	): FallbackLabelDescriptionLookupFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.FallbackLabelDescriptionLookupFactory' );

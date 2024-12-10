@@ -38,7 +38,7 @@ The wiring functions should be sorted in each file, but PHPCBF can take care of 
 Next, add an accessor method to the [WikibaseRepo][] or [WikibaseClient][] class, like this:
 
 ```php
-public static function getServiceName( ContainerInterface $services = null ): ServiceClass {
+public static function getServiceName( ?ContainerInterface $services = null ): ServiceClass {
 	return ( $services ?: MediaWikiServices::getInstance() )
 		->get( 'WikibaseRepo.ServiceName' );
 }
