@@ -14,7 +14,8 @@
 			"Stryn",
 			"Thurs",
 			"Tölvuforritari",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"JohanahoJ"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -113,6 +114,8 @@
 	"wikibase-sitelinks-link-columnheading": "Länkad sida",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Anslutning|Anslutningar}} med {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Meddela mig när någon ansluter en sida som {{GENDER:|jag har skapat}} till ett {{WBREPONAME}}-objekt.",
+	"exceeded-entity-limit-category": "Sidor som anropar för många {{WBREPONAME}}-objekt",
+	"exceeded-entity-limit-category-desc": "Den här kategorin listar sidor med för många åtkomna {{WBREPONAME}}-entiteter.",
 	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till {{PLURAL:$4|-1=ett {{WBREPONAME}}-objekt|{{WBREPONAME}}-objektet $4}}, där data som är relevant till ämnet kan samlas in.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> och {{PLURAL:$4|en till sida|$4 andra sidor|100=99+ andra sidor}} har {{GENDER:$2|anslutits}}, där data som är relevanta till ämnena kan samlas in.",
 	"notification-link-text-view-item": "{{GENDER:$1|Visa}} objekt",
@@ -145,6 +148,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Föregående värde har varit korrekt men är inte det längre",
 	"wikibase-client-data-bridge-references-heading": "Referenser",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Du är inte inloggad",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Du är inte inloggad. Om du <strong>loggar in</strong> eller <strong>skapar ett konto</strong> kommer dina redigeringar tillskrivas ditt användarnamn tillsammans med andra fördelar.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Varning:</strong> Du är inte inloggad. Din IP-adress kommer synas offentligt om du gör redigeringar. Om du <strong>loggar in</strong> eller <strong>skapar ett konto</strong>, kommer dina redigeringar att tillskrivas ditt användarnamn, tillsammans med andra fördelar.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Redigera utan att logga in",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Logga in eller registrera",

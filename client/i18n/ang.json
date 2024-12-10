@@ -3,13 +3,19 @@
 		"authors": [
 			"Gott wisst",
 			"Heahwrita",
-			"JJohnson1701"
+			"JJohnson1701",
+			"Rocioun"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} wiht wæs andwended",
 	"wikibase-dataitem": "{{WBREPONAME}} wiht",
 	"wikibase-editlinks": "Adiht hlencan",
 	"wikibase-editlinkstitle": "Adiht hlencan betweox spræcum",
+	"wikibase-linkitem-addlinks": "Eacnian hlencan",
+	"wikibase-linkitem-title": "Geþiedung to tramete",
+	"wikibase-linkitem-linkpage": "Geþiedan to tramete",
+	"wikibase-linkitem-input-site": "Geþeode:",
+	"wikibase-linkitem-input-page": "Tramet:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Hyd",
 	"wikibase-rc-hide-wikidata-show": "Yw",
