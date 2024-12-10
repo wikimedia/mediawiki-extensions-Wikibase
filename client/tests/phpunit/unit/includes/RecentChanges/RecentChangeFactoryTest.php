@@ -256,7 +256,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideNewRecentChange
 	 */
-	public function testNewRecentChange( array $expected, EntityChange $change, Title $target, array $preparedAttribs = null ) {
+	public function testNewRecentChange( array $expected, EntityChange $change, Title $target, ?array $preparedAttribs = null ) {
 		$factory = $this->newRecentChangeFactory();
 
 		$rc = $factory->newRecentChange( $change, $target, $preparedAttribs );

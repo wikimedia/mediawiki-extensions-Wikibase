@@ -90,7 +90,7 @@ class DataUpdateHookHandler implements
 		JobQueueGroup $jobScheduler,
 		UsageLookup $usageLookup,
 		UsageAccumulatorFactory $usageAccumulatorFactory,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->usageUpdater = $usageUpdater;
 		$this->jobScheduler = $jobScheduler;

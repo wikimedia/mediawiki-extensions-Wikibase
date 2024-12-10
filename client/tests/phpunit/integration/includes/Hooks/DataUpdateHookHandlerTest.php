@@ -45,7 +45,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newUsageUpdater(
 		Title $title,
-		array $expectedUsages = null,
+		?array $expectedUsages = null,
 		bool $prune = true,
 		bool $add = true,
 		bool $replace = false
@@ -91,7 +91,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newJobScheduler(
 		Title $title,
-		array $expectedUsages = null,
+		?array $expectedUsages = null,
 		bool $useJobQueue = false
 	): JobQueueGroup {
 		$jobScheduler = $this->createMock( JobQueueGroup::class );
@@ -130,7 +130,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newUsageLookup(
-		array $currentUsages = null
+		?array $currentUsages = null
 	): UsageLookup {
 		$usageLookup = $this->createMock( UsageLookup::class );
 		$currentUsages = ( $currentUsages == null ) ? [] : $currentUsages;
@@ -150,7 +150,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newDataUpdateHookHandler(
 		Title $title,
-		array $expectedUsages = null,
+		?array $expectedUsages = null,
 		bool $prune = true,
 		bool $asyncAdd = false,
 		bool $replace = false
@@ -178,7 +178,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param EntityUsage[]|null $usages
 	 */
-	private function newParserOutputProvider( array $usages = null ): ScopedParserOutputProvider {
+	private function newParserOutputProvider( ?array $usages = null ): ScopedParserOutputProvider {
 		$parserOutput = new ParserOutput();
 		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 

@@ -73,8 +73,8 @@ class RecentChangeFactory {
 		SiteLinkCommentCreator $siteLinkCommentCreator,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		ClientDomainDb $clientDomainDb,
-		CentralIdLookup $centralIdLookup = null,
-		ExternalUserNames $externalUsernames = null
+		?CentralIdLookup $centralIdLookup = null,
+		?ExternalUserNames $externalUsernames = null
 	) {
 		$this->language = $language;
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
@@ -95,7 +95,7 @@ class RecentChangeFactory {
 	 *
 	 * @return RecentChange
 	 */
-	public function newRecentChange( EntityChange $change, Title $target, array $preparedAttribs = null ) {
+	public function newRecentChange( EntityChange $change, Title $target, ?array $preparedAttribs = null ) {
 		if ( $preparedAttribs === null ) {
 			$preparedAttribs = $this->prepareChangeAttributes( $change );
 		}
@@ -309,7 +309,7 @@ class RecentChangeFactory {
 	 *
 	 * @return string
 	 */
-	private function getEditCommentMulti( EntityChange $change, Title $target = null ) {
+	private function getEditCommentMulti( EntityChange $change, ?Title $target = null ) {
 		$info = $change->getInfo();
 
 		if ( isset( $info['changes'] ) ) {
@@ -345,7 +345,7 @@ class RecentChangeFactory {
 	 *
 	 * @return string
 	 */
-	private function getEditComment( EntityChange $change, Title $target = null ) {
+	private function getEditComment( EntityChange $change, ?Title $target ) {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;

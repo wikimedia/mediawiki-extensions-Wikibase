@@ -61,7 +61,7 @@ class SiteLinkCommentCreator {
 	 * @return string|null A human readable edit summary (limited wikitext),
 	 *         or null if no summary could be created for the sitelink change.
 	 */
-	public function getEditComment( ?Diff $siteLinkDiff, $action, Title $title = null ) {
+	public function getEditComment( ?Diff $siteLinkDiff, $action, ?Title $title ) {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$siteLinkMessage = $this->getSiteLinkMessage( $action, $siteLinkDiff, $title );
 
@@ -126,7 +126,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	private function getSiteLinkMessage( $action, Diff $siteLinkDiff, Title $title = null ) {
+	private function getSiteLinkMessage( $action, Diff $siteLinkDiff, ?Title $title ) {
 		if ( $siteLinkDiff->isEmpty() ) {
 			return null;
 		}
@@ -252,7 +252,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId, Title $title = null ) {
+	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId, ?Title $title ) {
 		$params = [];
 
 		if ( in_array( $action, [ 'remove', 'restore' ] ) ) {

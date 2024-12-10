@@ -36,7 +36,7 @@ class NamespaceChecker {
 	public function __construct(
 		array $excludedNamespaces,
 		array $enabledNamespaces = [],
-		NamespaceInfo $namespaceInfo = null
+		?NamespaceInfo $namespaceInfo = null
 	) {
 		$this->excludedNamespaces = $excludedNamespaces;
 		$this->enabledNamespaces = $enabledNamespaces;

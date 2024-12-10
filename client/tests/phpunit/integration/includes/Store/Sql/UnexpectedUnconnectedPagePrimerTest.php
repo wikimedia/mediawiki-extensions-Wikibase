@@ -158,7 +158,7 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		array $expectedPageProps,
 		array $priorPageProps,
 		int $batchSize = 1000,
-		int $batchSizeSelectMultiplicator = null
+		?int $batchSizeSelectMultiplicator = null
 	): void {
 		$this->insertPageProps( $priorPageProps );
 

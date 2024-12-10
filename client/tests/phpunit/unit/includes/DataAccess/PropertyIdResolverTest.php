@@ -23,7 +23,7 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 
-	private function getPropertyIdResolver( UsageAccumulator $usageAccumulator = null ) {
+	private function getPropertyIdResolver( ?UsageAccumulator $usageAccumulator = null ) {
 		$mockRepository = $this->getMockRepository();
 		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $mockRepository );
 

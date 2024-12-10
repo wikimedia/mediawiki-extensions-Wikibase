@@ -30,7 +30,7 @@ class ReferenceFormatterFactory {
 	public function __construct(
 		DataAccessSnakFormatterFactory $snakFormatterFactory,
 		WellKnownReferenceProperties $properties,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->properties = $properties;

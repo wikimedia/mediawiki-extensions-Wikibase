@@ -83,7 +83,7 @@ class RepoLinker {
 	 *
 	 * @return string (html)
 	 */
-	public function buildEntityLink( EntityId $entityId, array $classes = [], string $text = null ): string {
+	public function buildEntityLink( EntityId $entityId, array $classes = [], ?string $text = null ): string {
 		if ( $text === null ) {
 			$text = $entityId->getSerialization();
 		}

@@ -94,7 +94,7 @@ class RepoItemLinkGenerator {
 	 *
 	 * @return bool
 	 */
-	private function canHaveLink( Title $title, $action, array $noExternalLangLinks = null ) {
+	private function canHaveLink( Title $title, $action, ?array $noExternalLangLinks ) {
 		if ( $action !== 'view' ) {
 			return false;
 		}
@@ -114,7 +114,7 @@ class RepoItemLinkGenerator {
 	 *
 	 * @return bool
 	 */
-	private function isSuppressed( array $noExternalLangLinks = null ) {
+	private function isSuppressed( ?array $noExternalLangLinks ) {
 		return $noExternalLangLinks !== null && in_array( '*', $noExternalLangLinks );
 	}
 
@@ -143,7 +143,7 @@ class RepoItemLinkGenerator {
 	 *
 	 * @return string HTML
 	 */
-	private function getAddLinksLink( Title $title, EntityId $entityId = null ) {
+	private function getAddLinksLink( Title $title, ?EntityId $entityId ) {
 		if ( $entityId ) {
 			$href = $this->getEntityUrl( $entityId );
 		} else {

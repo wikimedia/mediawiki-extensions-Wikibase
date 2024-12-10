@@ -56,7 +56,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return UsageTrackingLanguageFallbackLabelDescriptionLookup
 	 */
-	private function getUsageTrackingLabelDescriptionLookup( EntityId $formatEntity = null ) {
+	private function getUsageTrackingLabelDescriptionLookup( ?EntityId $formatEntity = null ) {
 		$usageTrackingLabelDescriptionLookup = $this->createMock( UsageTrackingLanguageFallbackLabelDescriptionLookup::class );
 
 		$getLabelInvocationMocker = $usageTrackingLabelDescriptionLookup->expects( $this->exactly( $formatEntity ? 1 : 0 ) )
@@ -111,7 +111,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider formatSnakQuantityProvider
 	 */
-	public function testFormatSnak_quantity( $unit, EntityId $formattedEntityId = null ) {
+	public function testFormatSnak_quantity( $unit, ?EntityId $formattedEntityId ) {
 		$p1 = new NumericPropertyId( 'P1' );
 		$itemSnak = new PropertyValueSnak(
 			$p1, UnboundedQuantityValue::newFromNumber( '1', $unit ) );

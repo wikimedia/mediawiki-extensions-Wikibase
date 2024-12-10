@@ -31,7 +31,7 @@ class SnaksFinderTest extends \PHPUnit\Framework\TestCase {
 		array $expected,
 		StatementListProvider $statementListProvider,
 		NumericPropertyId $propertyId,
-		array $acceptableRanks = null
+		?array $acceptableRanks = null
 	) {
 		$snaksFinder = new SnaksFinder();
 

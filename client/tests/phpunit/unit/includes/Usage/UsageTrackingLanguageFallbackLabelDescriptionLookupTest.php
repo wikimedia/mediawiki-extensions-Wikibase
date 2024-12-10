@@ -79,7 +79,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 	public function testGetLabel(
 		array $expectedUsages,
 		array $fetchLanguageCodes,
-		TermFallback $term = null,
+		?TermFallback $term,
 		$trackUsagesInAllLanguages = false
 	) {
 		$q2 = new ItemId( 'Q2' );
@@ -104,7 +104,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 	public function testGetDescription(
 		array $expectedUsages,
 		array $fetchLanguageCodes,
-		TermFallback $term = null,
+		?TermFallback $term,
 		$trackUsagesInAllLanguages = false
 	) {
 		$q2 = new ItemId( 'Q2' );
@@ -161,7 +161,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 	 *
 	 * @return LanguageFallbackLabelDescriptionLookup
 	 */
-	private function getLanguageFallbackLabelDescriptionLookup( $method, ItemId $item, TermFallback $value = null ) {
+	private function getLanguageFallbackLabelDescriptionLookup( $method, ItemId $item, ?TermFallback $value ) {
 		$languageFallbackLabelDescriptionLookup = $this->createMock( LanguageFallbackLabelDescriptionLookup::class );
 
 		$languageFallbackLabelDescriptionLookup->expects( $this->once() )

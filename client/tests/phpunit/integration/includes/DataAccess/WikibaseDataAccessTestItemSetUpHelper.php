@@ -168,7 +168,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	 *
 	 * @return Item
 	 */
-	private function createTestItem( ItemId $id, array $labels, array $statements = null, array $siteLinks = null ) {
+	private function createTestItem( ItemId $id, array $labels, ?array $statements = null, ?array $siteLinks = null ) {
 		$item = new Item( $id );
 		$item->setDescription( 'de', 'Description of ' . $id->getSerialization() );
 

@@ -73,7 +73,7 @@ class ClientParserOutputDataUpdater {
 		EntityLookup $entityLookup,
 		UsageAccumulatorFactory $usageAccumulatorFactory,
 		string $siteId,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->entityLookup = $entityLookup;
