@@ -59,7 +59,7 @@ class UnitConverter {
 			return null;
 		}
 
-		if ( substr( $fromUnit, 0, strlen( $this->prefix ) ) === $this->prefix ) {
+		if ( str_starts_with( $fromUnit, $this->prefix ) ) {
 			// Cut off prefix
 			$fromUnit = substr( $fromUnit, strlen( $this->prefix ) );
 		}
@@ -79,7 +79,7 @@ class UnitConverter {
 			// if target is the same as source, do not touch the value
 			return $value;
 		}
-		if ( substr( $targetUnit, 0, strlen( $this->prefix ) ) !== $this->prefix ) {
+		if ( !str_starts_with( $targetUnit, $this->prefix ) ) {
 			$targetUnit = $this->prefix . $targetUnit;
 		}
 		if ( $targetUnit === $fromUnit ) {

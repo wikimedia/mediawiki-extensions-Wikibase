@@ -60,7 +60,7 @@ class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 		 * @var SplFileInfo $fileInfo
 		 */
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
-			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+			if ( $fileInfo->isFile() && str_ends_with( $fileInfo->getFilename(), 'Test.php' ) ) {
 				$text = file_get_contents( $fileInfo->getPathname() );
 
 				if ( strpos( $text, 'abstract class' ) !== false ) {

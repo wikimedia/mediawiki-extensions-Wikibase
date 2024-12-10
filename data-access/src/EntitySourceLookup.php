@@ -31,7 +31,7 @@ class EntitySourceLookup {
 	public function getEntitySourceById( EntityId $id ): EntitySource {
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
 			if (
-				strpos( $id->getSerialization(), $source->getConceptBaseUri() ) === 0 &&
+				str_starts_with( $id->getSerialization(), $source->getConceptBaseUri() ) &&
 				$source->getType() === ApiEntitySource::TYPE
 			) {
 				return $source;

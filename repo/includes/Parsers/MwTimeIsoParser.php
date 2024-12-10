@@ -229,7 +229,7 @@ class MwTimeIsoParser extends StringValueParser {
 
 		foreach ( $regexes as $regex ) {
 			// If the msg string ends with BCE also check for BC
-			if ( substr_compare( $regex, 'BCE', -3 ) === 0 ) {
+			if ( str_ends_with( $regex, 'BCE' ) ) {
 				$regexes[] = substr( $regex, 0, -1 );
 			}
 		}

@@ -70,7 +70,7 @@ abstract class NoBadUsageTestBase extends TestCase {
 		foreach ( $patterns as $pattern => $paths ) {
 			$dirPatterns[$pattern] = [];
 			foreach ( $paths as $path => $allowed ) {
-				if ( substr( $path, -1 ) === '/' ) {
+				if ( str_ends_with( $path, '/' ) ) {
 					$dirPatterns[$pattern][$path] = $allowed;
 				} else {
 					$filePatterns[$pattern][$path] = $allowed;
