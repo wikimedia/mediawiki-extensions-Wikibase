@@ -22,12 +22,15 @@ use Wikimedia\Rdbms\IResultWrapper;
  */
 class ApiPropsEntityUsage extends ApiQueryBase {
 
-	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
+	use ApiQueryWithContinueTrait;
 
-	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
+	private RepoLinker $repoLinker;
+
+	public function __construct(
+		ApiQuery $query,
+		string $moduleName,
+		RepoLinker $repoLinker
+	) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
 
 		$this->repoLinker = $repoLinker;
@@ -125,15 +128,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		}
 
 		if ( $params['continue'] !== null ) {
-			$db = $this->getDB();
-			[ $pageContinue, $entityContinue, $aspectContinue ] = explode( '|', $params['continue'], 3 );
-			// Filtering out results that have been shown already and
-			// starting the query from where it ended.
-			$this->addWhere( $db->buildComparison( '>=', [
-				'eu_page_id' => (int)$pageContinue,
-				'eu_entity_id' => $entityContinue,
-				'eu_aspect' => $aspectContinue,
-			] ) );
+			$this->addContinue( $params['continue'], $this->getDB() );
 		}
 
 		$orderBy = [ 'eu_page_id', 'eu_entity_id' ];
