@@ -261,7 +261,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		callable $expectedFactory,
 		EntityChange $change,
 		bool $otherPageAsTarget,
-		array $preparedAttribs = null
+		?array $preparedAttribs
 	) {
 		$defaultPage = $this->newTitle( NS_MAIN, 'RecentChangeFactoryTest', 7, 77, 210 );
 		$target = $otherPageAsTarget

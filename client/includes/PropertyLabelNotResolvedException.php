@@ -17,7 +17,7 @@ class PropertyLabelNotResolvedException extends MessageException {
 		string $label,
 		string $languageCode,
 		?string $message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		parent::__construct(
 			'wikibase-property-notfound',

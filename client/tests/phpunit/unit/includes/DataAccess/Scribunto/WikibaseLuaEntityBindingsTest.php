@@ -28,7 +28,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return WikibaseLuaEntityBindings
 	 */
-	private function getWikibaseLuaEntityBindings( HashUsageAccumulator $usageAccumulator = null ) {
+	private function getWikibaseLuaEntityBindings( ?HashUsageAccumulator $usageAccumulator = null ) {
 		$plainTextTransclusionInteractor = $this->createMock( StatementTransclusionInteractor::class );
 
 		$plainTextTransclusionInteractor->method( 'render' )

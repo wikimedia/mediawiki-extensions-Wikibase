@@ -494,7 +494,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 	/**
 	 * Wrapper for getEntityId in WikibaseLanguageIndependentLuaBindings
 	 */
-	public function getEntityId( string $pageTitle, string $globalSiteId = null ): array {
+	public function getEntityId( string $pageTitle, ?string $globalSiteId = null ): array {
 		return [ $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle, $globalSiteId ) ];
 	}
 

@@ -254,7 +254,7 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	 * @throws ScribuntoException
 	 * @return string[]|null[]
 	 */
-	public function formatPropertyValues( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
+	public function formatPropertyValues( string $entityId, string $propertyLabelOrId, ?array $acceptableRanks ): array {
 		try {
 			return [
 				$this->getImplementation()->formatPropertyValues(
@@ -284,7 +284,7 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	 * @throws ScribuntoException
 	 * @return string[]|null[]
 	 */
-	public function formatStatements( string $entityId, string $propertyLabelOrId, array $acceptableRanks = null ): array {
+	public function formatStatements( string $entityId, string $propertyLabelOrId, ?array $acceptableRanks ): array {
 		try {
 			return [
 				$this->getImplementation()->formatStatements(

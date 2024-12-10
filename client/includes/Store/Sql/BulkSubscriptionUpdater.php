@@ -92,7 +92,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @param EntityId|null $startEntity The entity to start with.
 	 */
-	public function updateSubscriptions( EntityId $startEntity = null ) {
+	public function updateSubscriptions( ?EntityId $startEntity = null ) {
 		$this->repoConnectionManager->prepareForUpdates();
 
 		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
@@ -118,7 +118,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @return int The number of subscriptions inserted.
 	 */
-	private function processUpdateBatch( array &$continuation = null ) {
+	private function processUpdateBatch( ?array &$continuation ) {
 		$entityIds = $this->getUpdateBatch( $continuation );
 
 		if ( !$entityIds ) {
@@ -157,7 +157,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @return string[] A list of entity id strings.
 	 */
-	private function getUpdateBatch( array &$continuation = null ) {
+	private function getUpdateBatch( ?array &$continuation ) {
 		$dbr = $this->localConnectionManager->getReadConnection();
 		$queryBuilder = $dbr->newSelectQueryBuilder();
 		$queryBuilder->distinct()
@@ -209,7 +209,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @return string[] A list of entity ids strings.
 	 */
-	private function getEntityIdsFromRows( IResultWrapper $res, $entityIdField, array &$continuation = null ) {
+	private function getEntityIdsFromRows( IResultWrapper $res, $entityIdField, ?array &$continuation ) {
 		$entities = [];
 
 		foreach ( $res as $row ) {
@@ -228,7 +228,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @param EntityId|null $startEntity The entity to start with.
 	 */
-	public function purgeSubscriptions( EntityId $startEntity = null ) {
+	public function purgeSubscriptions( ?EntityId $startEntity = null ) {
 		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
 
 		$this->repoConnectionManager->prepareForUpdates();
@@ -254,7 +254,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @return int The number of subscriptions deleted.
 	 */
-	private function processDeletionBatch( array &$continuation = null ) {
+	private function processDeletionBatch( ?array &$continuation ) {
 		$deletionRange = $this->getDeletionRange( $continuation );
 
 		if ( $deletionRange === false ) {
@@ -274,7 +274,7 @@ class BulkSubscriptionUpdater {
 	 *
 	 * @return array|false list( $minId, $maxId, $count ), or false if there is nothing to delete
 	 */
-	private function getDeletionRange( array &$continuation = null ) {
+	private function getDeletionRange( ?array &$continuation ) {
 		/**
 		 * @note Below, we query and iterate all rows we want to delete in the current batch. That
 		 * is rather ugly, but appears to be the best solution, because:

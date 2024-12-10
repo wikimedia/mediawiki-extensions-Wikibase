@@ -151,7 +151,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 		PropertyIdResolver $propertyIdResolver,
 		array $snaks = [],
 		$format = SnakFormatter::FORMAT_PLAIN,
-		HashUsageAccumulator $usageAccumulator = null
+		?HashUsageAccumulator $usageAccumulator = null
 	) {
 		$targetLanguage = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' );
 

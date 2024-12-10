@@ -319,7 +319,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		array $extensionDataAppend,
 		array $expectedLanguageLinks,
 		array $expectedSisterLinks,
-		array $expectedBadges = null
+		?array $expectedBadges
 	) {
 		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
 		$titleWrapper->mRedirect = false;

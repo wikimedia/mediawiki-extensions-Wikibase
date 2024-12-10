@@ -100,7 +100,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 	 *
 	 * @return string[]|null[]
 	 */
-	private function getTouchedLanguages( TermFallback $termFallback = null ) {
+	private function getTouchedLanguages( ?TermFallback $termFallback ) {
 		if ( $this->trackUsagesInAllLanguages ) {
 			// On multi-lingual wikis where users can request pages in any language, we can not
 			// optimize for one language fallback chain only. Since all possible language fallback

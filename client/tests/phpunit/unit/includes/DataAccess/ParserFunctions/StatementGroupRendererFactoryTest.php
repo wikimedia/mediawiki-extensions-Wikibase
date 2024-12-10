@@ -263,7 +263,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 			->willReturnCallback( function(
 				StatementListProvider $statementListProvider,
 				NumericPropertyId $propertyId,
-				array $acceptableRanks = null
+				?array $acceptableRanks
 			) {
 				return [
 					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) ),

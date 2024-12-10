@@ -97,7 +97,7 @@ class EntityAccessor {
 		TermLanguageFallbackChain $termFallbackChain,
 		Language $language,
 		ContentLanguages $termsLanguages,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;

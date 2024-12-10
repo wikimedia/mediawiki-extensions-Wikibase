@@ -26,13 +26,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  */
 class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * @param Snak|null $expectedSnak
-	 * @param string|null $formattedValue
-	 *
-	 * @return SnakFormatter
-	 */
-	private function newMockSnakFormatter( Snak $expectedSnak = null, $formattedValue = null ): SnakFormatter {
+	private function newMockSnakFormatter( ?Snak $expectedSnak = null, ?string $formattedValue = null ): SnakFormatter {
 		$mockFormatter = $this->createMock( SnakFormatter::class );
 
 		$mockFormatter->expects( $expectedSnak ? $this->once() : $this->never() )

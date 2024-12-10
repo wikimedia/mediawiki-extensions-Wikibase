@@ -47,10 +47,10 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getEntityAccessor(
-		EntityLookup $entityLookup = null,
-		UsageAccumulator $usageAccumulator = null,
-		$langCode = 'en',
-		$logger = null
+		?EntityLookup $entityLookup = null,
+		?UsageAccumulator $usageAccumulator = null,
+		string $langCode = 'en',
+		?LoggerInterface $logger = null
 	) {
 		$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $langCode );
 		$serializerFactory = new SerializerFactory(

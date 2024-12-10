@@ -99,7 +99,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage(
-		NamespaceChecker $namespaceChecker = null
+		?NamespaceChecker $namespaceChecker = null
 	): SpecialUnconnectedPages {
 		$services = $this->getServiceContainer();
 		return new SpecialUnconnectedPages(

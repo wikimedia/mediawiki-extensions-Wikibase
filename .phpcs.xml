@@ -109,7 +109,6 @@
 	</rule>
 
 	<rule ref="MediaWiki.Usage.NullableType.ExplicitNullableTypes">
-		<exclude-pattern>client/</exclude-pattern>
 		<exclude-pattern>lib/</exclude-pattern>
 		<exclude-pattern>repo/</exclude-pattern>
 	</rule>

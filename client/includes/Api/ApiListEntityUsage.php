@@ -48,7 +48,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->run();
 	}
 
-	public function run( ApiPageSet $resultPageSet = null ): void {
+	public function run( ?ApiPageSet $resultPageSet = null ): void {
 		$params = $this->extractRequestParams();
 
 		$res = $this->doQuery( $params, $resultPageSet );
@@ -161,7 +161,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		return 'public';
 	}
 
-	public function doQuery( array $params, ApiPageSet $resultPageSet = null ): ?IResultWrapper {
+	public function doQuery( array $params, ?ApiPageSet $resultPageSet ): ?IResultWrapper {
 		if ( !$params['entities'] ) {
 			return null;
 		}

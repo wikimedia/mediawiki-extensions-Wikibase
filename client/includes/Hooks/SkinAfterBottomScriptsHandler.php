@@ -63,22 +63,13 @@ class SkinAfterBottomScriptsHandler {
 		return $html;
 	}
 
-	/**
-	 * @param Title $title
-	 * @param string|null $revisionTimestamp
-	 * @param string $entityConceptUri
-	 * @param File|null $imageFile
-	 * @param string|null $description
-	 *
-	 * @return array
-	 */
 	public function createSchema(
 		Title $title,
-		$revisionTimestamp,
-		$entityConceptUri,
-		File $imageFile = null,
-		$description = null
-		) {
+		?string $revisionTimestamp,
+		string $entityConceptUri,
+		?File $imageFile,
+		?string $description
+	): array {
 		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
 		$schemaTimestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
 		$schema = [

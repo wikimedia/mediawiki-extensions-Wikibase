@@ -161,7 +161,7 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		callable $expectedPagePropsFactory,
 		callable $priorPagePropsFactory,
 		int $batchSize = 1000,
-		int $batchSizeSelectMultiplicator = null
+		?int $batchSizeSelectMultiplicator = null
 	): void {
 		$namespaceString = strval( -$this->getDefaultWikitextNS() );
 		$namespaceFloat = -$this->getDefaultWikitextNS() + 0.0;

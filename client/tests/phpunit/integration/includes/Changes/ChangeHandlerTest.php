@@ -69,7 +69,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function getChangeHandler(
 		array $pageNamesPerItemId = [],
-		PageUpdater $updater = null,
+		?PageUpdater $updater = null,
 		array $hooks = []
 	) {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );

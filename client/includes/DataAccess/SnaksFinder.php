@@ -25,7 +25,7 @@ class SnaksFinder {
 	public function findSnaks(
 		StatementListProvider $statementListProvider,
 		NumericPropertyId $propertyId,
-		array $acceptableRanks = null
+		?array $acceptableRanks
 	) {
 		$statementList = $this->getStatementsWithPropertyId( $statementListProvider, $propertyId );
 		if ( $acceptableRanks === null ) {
