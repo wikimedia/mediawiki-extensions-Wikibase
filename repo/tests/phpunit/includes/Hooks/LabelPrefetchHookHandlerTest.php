@@ -21,9 +21,9 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 
 	public function testDoChangesListInitRows() {
 		$rows = [
-			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'XYZ' ],
-			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'Q23' ],
-			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'P55' ],
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'XYZ', 'rc_comment_text' => '' ],
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'Q23', 'rc_comment_text' => 'foo' ],
+			(object)[ 'rc_namespace' => NS_MAIN, 'rc_title' => 'P55', 'rc_comment_text' => '' ],
 		];
 
 		$expectedTermTypes = [ 'label', 'description' ];

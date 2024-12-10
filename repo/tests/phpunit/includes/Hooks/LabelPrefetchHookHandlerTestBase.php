@@ -13,8 +13,8 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
+use Wikibase\Repo\Hooks\SummaryParsingPrefetchHelper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandler
@@ -54,15 +54,13 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
 	 * @param PrefetchingTermLookup|null $prefetchingTermLookup
-	 * @param bool $federatedPropertiesEnabled
 	 * @return LabelPrefetchHookHandler
 	 */
 	protected function getLabelPrefetchHookHandlers(
 		$prefetchTerms,
 		array $termTypes,
 		array $languageCodes,
-		PrefetchingTermLookup $prefetchingTermLookup = null,
-		bool $federatedPropertiesEnabled = false
+		PrefetchingTermLookup $prefetchingTermLookup = null
 	) {
 		$prefetchingTermLookup ??= $this->createMock( PrefetchingTermLookup::class );
 
@@ -93,7 +91,6 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 			$titleFactory,
 			$termTypes,
 			$fallbackChainFactory,
-			$federatedPropertiesEnabled,
 			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}

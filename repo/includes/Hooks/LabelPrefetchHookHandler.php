@@ -9,11 +9,9 @@ use MediaWiki\Title\TitleFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
-use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -54,14 +52,9 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @var bool
-	 */
-	private $federatedPropertiesEnabled;
-
-	/**
 	 * @var SummaryParsingPrefetchHelper
 	 */
-	private $federatedPropertiesPrefetchingHelper;
+	private $summaryParsingPrefetchHelper;
 
 	/**
 	 * @return self
@@ -71,7 +64,6 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		PrefetchingTermLookup $prefetchingTermLookup,
-		SettingsArray $repoSettings,
 		TermBuffer $termBuffer
 	): self {
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
@@ -82,7 +74,6 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 			$titleFactory,
 			$termTypes,
 			$languageFallbackChainFactory,
-			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}
@@ -93,7 +84,6 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 	 * @param TitleFactory $titleFactory
 	 * @param string[] $termTypes
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param bool $federatedPropertiesEnabled
 	 * @param SummaryParsingPrefetchHelper $summaryParsingPrefetchHelper
 	 */
 	public function __construct(
@@ -102,7 +92,6 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		TitleFactory $titleFactory,
 		array $termTypes,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		bool $federatedPropertiesEnabled,
 		SummaryParsingPrefetchHelper $summaryParsingPrefetchHelper
 	) {
 		$this->buffer = $buffer;
@@ -110,8 +99,7 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		$this->titleFactory = $titleFactory;
 		$this->termTypes = $termTypes;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
-		$this->federatedPropertiesPrefetchingHelper = $summaryParsingPrefetchHelper;
+		$this->summaryParsingPrefetchHelper = $summaryParsingPrefetchHelper;
 	}
 
 	/**
@@ -126,13 +114,11 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 				->getFetchLanguageCodes();
 			$this->buffer->prefetchTerms( $entityIds, $this->termTypes, $languageCodes );
 
-			if ( $this->federatedPropertiesEnabled ) {
-				$this->federatedPropertiesPrefetchingHelper->prefetchFederatedProperties(
-					$rows,
-					$languageCodes,
-					$this->termTypes
-				);
-			}
+			$this->summaryParsingPrefetchHelper->prefetchTermsForMentionedEntities(
+				$rows,
+				$languageCodes,
+				$this->termTypes
+			);
 
 		} catch ( StorageException $ex ) {
 			wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
