@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Actions;
 use Article;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;
@@ -69,16 +70,15 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getConfig' )
 			->willReturn( new HashConfig( [
-				'UseFileCache' => false,
-				'UseMediaWikiUIEverywhere' => false,
-				'Localtimezone' => 'UTC',
-				'ShowUpdatedMarker' => true,
-				'LogRestrictions' => [],
-				'UserrightsInterwikiDelimiter' => '@',
-				'MiserMode' => true,
-				'ActionFilteredLogs' => [],
-				'MaxExecutionTimeForExpensiveQueries' => 0,
-				'Send404Code' => true,
+				MainConfigNames::UseFileCache => false,
+				MainConfigNames::Localtimezone => 'UTC',
+				MainConfigNames::ShowUpdatedMarker => true,
+				MainConfigNames::LogRestrictions => [],
+				MainConfigNames::UserrightsInterwikiDelimiter => '@',
+				MainConfigNames::MiserMode => true,
+				MainConfigNames::ActionFilteredLogs => [],
+				MainConfigNames::MaxExecutionTimeForExpensiveQueries => 0,
+				MainConfigNames::Send404Code => true,
 			] ) );
 		$context->method( 'getRequest' )
 			->willReturn( new WebRequest() );

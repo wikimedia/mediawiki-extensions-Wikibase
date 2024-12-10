@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -33,9 +34,7 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 		$this->serviceContainer
 			->expects( $this->once() )
 			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( [
-				'ThumbLimits' => [],
-			] ) );
+			->willReturn( new HashConfig( [ MainConfigNames::ThumbLimits => [] ] ) );
 
 		$this->mockService(
 			'WikibaseRepo.Settings',

@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\User\TempUser\TempUserConfig;
 use MediaWikiIntegrationTestCase;
@@ -18,7 +19,7 @@ use Wikibase\Repo\AnonymousEditWarningBuilder;
 class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testBuildAnonymousEditWarningHTML(): void {
-		$this->overrideConfigValue( 'LanguageCode', 'qqx' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
 		$tempUserConfig = $this->createMock( TempUserConfig::class );
 		$tempUserConfig->expects( $this->once() )
 			->method( 'isEnabled' )
@@ -45,7 +46,7 @@ class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testBuildAnonymousEditWarningHTMLTempUsers(): void {
-		$this->overrideConfigValue( 'LanguageCode', 'qqx' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
 		$tempUserConfig = $this->createMock( TempUserConfig::class );
 		$tempUserConfig->expects( $this->once() )
 			->method( 'isEnabled' )

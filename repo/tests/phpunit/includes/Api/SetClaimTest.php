@@ -10,6 +10,7 @@ use DataValues\StringValue;
 use MediaWiki\Api\ApiMessage;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Json\FormatJson;
+use MediaWiki\MainConfigNames;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -118,7 +119,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testAddClaim() {
-		$this->overrideConfigValue( 'RateLimits',
+		$this->overrideConfigValue( MainConfigNames::RateLimits,
 			[ 'wikibase-idgenerator' => [ '&can-bypass' => true, 'user' => [ 1000, 60 ] ] ] );
 		$store = $this->getEntityStore();
 		$guidGenerator = new GuidGenerator();

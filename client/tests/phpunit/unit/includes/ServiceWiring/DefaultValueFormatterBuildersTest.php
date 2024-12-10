@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\NullPrefetchingTermLookup;
@@ -65,9 +66,7 @@ class DefaultValueFormatterBuildersTest extends ServiceWiringTestCase {
 			null );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( [
-				'ThumbLimits' => [],
-			] ) );
+			->willReturn( new HashConfig( [ MainConfigNames::ThumbLimits => [] ] ) );
 
 		$this->assertInstanceOf(
 			WikibaseValueFormatterBuilders::class,

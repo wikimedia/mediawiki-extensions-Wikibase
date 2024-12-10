@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\Property;
@@ -61,9 +62,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 			] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( [
-				'DummyLanguageCodes' => [ 'd1' => 'dummy-1' ],
-			] ) );
+			->willReturn( new HashConfig( [ MainConfigNames::DummyLanguageCodes => [ 'd1' => 'dummy-1' ] ] ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getTitleFactory' );
 
