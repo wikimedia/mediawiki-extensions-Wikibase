@@ -42,7 +42,7 @@ class ReferencedEntityIdLookupException extends RuntimeException {
 		PropertyId $propertyId,
 		array $toIds,
 		$message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		$this->fromId = $fromId;
 		$this->propertyId = $propertyId;

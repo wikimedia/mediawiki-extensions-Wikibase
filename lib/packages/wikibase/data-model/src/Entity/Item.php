@@ -60,17 +60,12 @@ class Item implements
 
 	/**
 	 * @since 1.0
-	 *
-	 * @param ItemId|null $id
-	 * @param Fingerprint|null $fingerprint
-	 * @param SiteLinkList|null $siteLinks
-	 * @param StatementList|null $statements
 	 */
 	public function __construct(
-		ItemId $id = null,
-		Fingerprint $fingerprint = null,
-		SiteLinkList $siteLinks = null,
-		StatementList $statements = null
+		?ItemId $id = null,
+		?Fingerprint $fingerprint = null,
+		?SiteLinkList $siteLinks = null,
+		?StatementList $statements = null
 	) {
 		$this->id = $id;
 		$this->fingerprint = $fingerprint ?: new Fingerprint();

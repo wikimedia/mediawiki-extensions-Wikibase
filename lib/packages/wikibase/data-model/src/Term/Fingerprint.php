@@ -42,15 +42,10 @@ class Fingerprint implements LabelsProvider, DescriptionsProvider, AliasesProvid
 	 */
 	private $aliasGroups;
 
-	/**
-	 * @param TermList|null $labels
-	 * @param TermList|null $descriptions
-	 * @param AliasGroupList|null $aliasGroups
-	 */
 	public function __construct(
-		TermList $labels = null,
-		TermList $descriptions = null,
-		AliasGroupList $aliasGroups = null
+		?TermList $labels = null,
+		?TermList $descriptions = null,
+		?AliasGroupList $aliasGroups = null
 	) {
 		$this->labels = $labels ?: new TermList();
 		$this->descriptions = $descriptions ?: new TermList();

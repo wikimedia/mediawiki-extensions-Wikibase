@@ -33,7 +33,7 @@ class MaxReferenceDepthExhaustedException extends ReferencedEntityIdLookupExcept
 		array $toIds,
 		$maxDepth,
 		$message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		$this->maxDepth = $maxDepth;
 		$message = $message ?: 'Referenced entity id lookup failed: Maximum depth of ' . $maxDepth . ' exhausted.';

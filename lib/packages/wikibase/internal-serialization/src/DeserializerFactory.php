@@ -52,7 +52,7 @@ class DeserializerFactory {
 		Deserializer $dataValueDeserializer,
 		EntityIdParser $idParser,
 		CurrentDeserializerFactory $currentFactory,
-		DispatchableDeserializer $currentEntityDeserializer = null
+		?DispatchableDeserializer $currentEntityDeserializer = null
 	) {
 		$this->legacyFactory = new LegacyDeserializerFactory( $dataValueDeserializer, $idParser );
 		$this->currentFactory = $currentFactory;

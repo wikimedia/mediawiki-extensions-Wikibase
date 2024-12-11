@@ -18,7 +18,7 @@ class ItemLookupException extends EntityLookupException {
 	 * @param string|null $message
 	 * @param Exception|null $previous
 	 */
-	public function __construct( ItemId $itemId, $message = null, Exception $previous = null ) {
+	public function __construct( ItemId $itemId, $message = null, ?Exception $previous = null ) {
 		parent::__construct(
 			$itemId,
 			$message ?: 'Item lookup failed for: ' . $itemId,

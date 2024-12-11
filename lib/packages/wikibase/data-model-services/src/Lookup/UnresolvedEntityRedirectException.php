@@ -31,7 +31,7 @@ class UnresolvedEntityRedirectException extends EntityLookupException {
 		EntityId $entityId,
 		EntityId $redirectTargetId,
 		$message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		$defaultMessage = 'Unresolved redirect from ' . $entityId->getSerialization() . ' to '
 			. $redirectTargetId->getSerialization();

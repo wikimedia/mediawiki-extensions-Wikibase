@@ -24,7 +24,7 @@ class EntityLookupException extends RuntimeException {
 	 * @param string|null $message
 	 * @param Exception|null $previous
 	 */
-	public function __construct( EntityId $entityId, $message = null, Exception $previous = null ) {
+	public function __construct( EntityId $entityId, $message = null, ?Exception $previous = null ) {
 		$this->entityId = $entityId;
 
 		parent::__construct(

@@ -24,7 +24,7 @@ class PropertyDataTypeLookupException extends RuntimeException {
 	 * @param string|null $message
 	 * @param Exception|null $previous
 	 */
-	public function __construct( PropertyId $propertyId, $message = null, Exception $previous = null ) {
+	public function __construct( PropertyId $propertyId, $message = null, ?Exception $previous = null ) {
 		$this->propertyId = $propertyId;
 
 		parent::__construct(
