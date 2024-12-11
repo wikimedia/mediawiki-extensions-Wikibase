@@ -12,15 +12,8 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class ReplicationWaiter {
 
-	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
-
-	/**
-	 * @var string
-	 */
-	private $domainId;
+	private ILBFactory $lbFactory;
+	private string $domainId;
 
 	public function __construct(
 		ILBFactory $lbFactory,

@@ -8,7 +8,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
-use Wikimedia\Assert\ParameterTypeException;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -25,10 +24,7 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $lbFactory;
 
-	/**
-	 * @var string
-	 */
-	private $repoDomainId;
+	private string $repoDomainId;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -63,14 +59,6 @@ class RepoDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 		$db = $this->newFactory()->newForEntitySource( $itemSource );
 
 		$this->assertSame( $expectedDbName, $db->domain() );
-	}
-
-	public function testDomainMustNotBeEmpty() {
-		$this->repoDomainId = false;
-
-		$this->expectException( ParameterTypeException::class );
-
-		$this->newFactory();
 	}
 
 	private function newFactory() {

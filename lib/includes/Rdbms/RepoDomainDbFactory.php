@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Rdbms;
 
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -13,28 +12,19 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class RepoDomainDbFactory {
 
-	/**
-	 * @var string
-	 */
-	private $repoDomain;
-
-	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
+	private string $repoDomain;
+	private ILBFactory $lbFactory;
 
 	/**
 	 * @var string[]
 	 */
-	private $loadGroups;
+	private array $loadGroups;
 
 	public function __construct(
 		ILBFactory $lbFactory,
-		$repoDomain,
+		string $repoDomain,
 		array $loadGroups = []
 	) {
-		// Make sure callers are not passing `false`. Can be replaced with a typehint once all callers have strict_types enabled.
-		Assert::parameterType( 'string', $repoDomain, '$repoDomain' );
 		$this->lbFactory = $lbFactory;
 		$this->repoDomain = $repoDomain;
 		$this->loadGroups = $loadGroups;
