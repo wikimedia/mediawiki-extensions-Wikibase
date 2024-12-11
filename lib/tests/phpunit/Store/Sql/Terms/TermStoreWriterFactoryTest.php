@@ -14,7 +14,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\StringNormalizer;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory
@@ -51,7 +50,6 @@ class TermStoreWriterFactoryTest extends TestCase {
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$this->newStubRepoDb(),
-			$this->createMock( WANObjectCache::class ),
 			$this->createMock( JobQueueGroup::class ),
 			new NullLogger()
 		);

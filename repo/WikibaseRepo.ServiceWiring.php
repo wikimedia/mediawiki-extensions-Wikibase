@@ -1991,7 +1991,6 @@ return [
 			WikibaseRepo::getTypeIdsLookup( $services ),
 			WikibaseRepo::getTypeIdsResolver( $services ),
 			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
-			$services->getMainWANObjectCache(),
 			$services->getJobQueueGroup(),
 			WikibaseRepo::getLogger( $services )
 		);

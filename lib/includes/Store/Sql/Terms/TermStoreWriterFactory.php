@@ -13,7 +13,6 @@ use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\StringNormalizer;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Factory for creating writer objects relating to the 2019 SQL based terms storage.
@@ -48,11 +47,6 @@ class TermStoreWriterFactory {
 	private $repoDb;
 
 	/**
-	 * @var WANObjectCache
-	 */
-	private $wanCache;
-
-	/**
 	 * @var JobQueueGroup
 	 */
 	private $jobQueueGroup;
@@ -69,7 +63,6 @@ class TermStoreWriterFactory {
 		TypeIdsLookup $typeIdsLookup,
 		TypeIdsResolver $typeIdsResolver,
 		RepoDomainDb $repoDb,
-		WANObjectCache $wanCache,
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger
 	) {
@@ -79,7 +72,6 @@ class TermStoreWriterFactory {
 		$this->typeIdsLookup = $typeIdsLookup;
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->repoDb = $repoDb;
-		$this->wanCache = $wanCache;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->logger = $logger;
 	}
