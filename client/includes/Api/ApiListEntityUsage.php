@@ -24,12 +24,15 @@ use Wikimedia\Rdbms\IResultWrapper;
  */
 class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
-	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
+	use ApiQueryWithContinueTrait;
 
-	public function __construct( ApiQuery $query, string $moduleName, RepoLinker $repoLinker ) {
+	private RepoLinker $repoLinker;
+
+	public function __construct(
+		ApiQuery $query,
+		string $moduleName,
+		RepoLinker $repoLinker
+	) {
 		parent::__construct( $query, $moduleName, 'wbleu' );
 
 		$this->repoLinker = $repoLinker;
@@ -186,7 +189,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->addWhereFld( 'eu_entity_id', $params['entities'] );
 
 		if ( $params['continue'] !== null ) {
-			$this->addContinue( $params['continue'] );
+			$this->addContinue( $params['continue'], $this->getDB() );
 		}
 
 		$orderBy = [ 'eu_page_id', 'eu_entity_id' ];
@@ -200,18 +203,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 		$res = $this->select( __METHOD__ );
 		return $res;
-	}
-
-	private function addContinue( string $continueParam ): void {
-		$db = $this->getDB();
-		[ $pageContinue, $entityContinue, $aspectContinue ] = explode( '|', $continueParam, 3 );
-		// Filtering out results that have been shown already and
-		// starting the query from where it ended.
-		$this->addWhere( $db->buildComparison( '>=', [
-			'eu_page_id' => (int)$pageContinue,
-			'eu_entity_id' => $entityContinue,
-			'eu_aspect' => $aspectContinue,
-		] ) );
 	}
 
 	public function getAllowedParams(): array {

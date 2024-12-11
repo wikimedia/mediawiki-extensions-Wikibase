@@ -171,7 +171,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 		$module = new ApiPropsEntityUsage(
 			$this->getQueryModule( $params, $titles ),
 			'entityusage',
-			WikibaseClient::getRepoLinker()
+			WikibaseClient::getRepoLinker(),
 		);
 
 		$module->execute();
@@ -204,6 +204,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 						"Q5" => [ "aspects" => [ "S" ] ],
 					],
 				] ],
+				false,
 			],
 			'by entity' => [
 				[
@@ -223,6 +224,49 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 						"Q5" => [ "aspects" => [ "S" ] ],
 					],
 				] ],
+				false,
+			],
+			'continue' => [
+				[
+					'action' => 'query',
+					'prop' => 'wbentityusage',
+					'titles' => 'Vienna11|Berlin22',
+					'entities' => 'Q3|Q4',
+					'wbeucontinue' => '11|Q3|S',
+				],
+				[ "11" => [
+					"entityusage" => [
+						"Q3" => [ "aspects" => [ "S" ] ],
+					],
+				],
+				"22" => [
+					"entityusage" => [
+						"Q4" => [ "aspects" => [ "S" ] ],
+						"Q5" => [ "aspects" => [ "S" ] ],
+					],
+				] ],
+				false,
+			],
+			'invalidcontinue' => [
+				[
+					'action' => 'query',
+					'prop' => 'wbentityusage',
+					'titles' => 'Vienna11|Berlin22',
+					'entities' => 'Q3|Q4',
+					'wbeucontinue' => '-',
+				],
+				[ "11" => [
+					"entityusage" => [
+						"Q3" => [ "aspects" => [ "O", "S" ] ],
+					],
+				],
+				"22" => [
+					"entityusage" => [
+						"Q4" => [ "aspects" => [ "S" ] ],
+						"Q5" => [ "aspects" => [ "S" ] ],
+					],
+				] ],
+				true,
 			],
 		];
 	}
@@ -230,8 +274,14 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider entityUsageProvider
 	 */
-	public function testEntityUsage( array $params, array $expected ) {
+	public function testEntityUsage( array $params, array $expected, bool $expectWarning ) {
 		$result = $this->callApiModule( $params );
+
+		if ( $expectWarning ) {
+			$this->assertCount( 1, $result['warnings'] );
+		} else {
+			$this->assertArrayNotHasKey( 'warnings', $result );
+		}
 
 		if ( isset( $result['error'] ) ) {
 			$this->fail( 'API error: ' . print_r( $result['error'], true ) );
