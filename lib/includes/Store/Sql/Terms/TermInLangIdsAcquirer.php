@@ -47,6 +47,6 @@ interface TermInLangIdsAcquirer {
 	 * Due to limitations in the underlying store,
 	 * in rare cases the same ID might be returned for different terms.
 	 */
-	public function acquireTermInLangIds( array $termsArray, $callback = null ): array;
+	public function acquireTermInLangIds( array $termsArray, ?callable $callback = null ): array;
 
 }

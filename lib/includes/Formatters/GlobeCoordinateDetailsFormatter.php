@@ -34,13 +34,9 @@ class GlobeCoordinateDetailsFormatter implements ValueFormatter {
 	 */
 	private $options;
 
-	/**
-	 * @param ValueFormatter $vocabularyUriFormatter
-	 * @param FormatterOptions|null $options
-	 */
 	public function __construct(
 		ValueFormatter $vocabularyUriFormatter,
-		FormatterOptions $options = null
+		?FormatterOptions $options = null
 	) {
 		$this->options = $options ?: new FormatterOptions();
 

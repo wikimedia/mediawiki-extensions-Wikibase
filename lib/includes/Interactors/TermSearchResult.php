@@ -54,8 +54,8 @@ class TermSearchResult {
 		Term $matchedTerm,
 		string $matchedTermType,
 		?EntityId $entityId,
-		Term $displayLabel = null,
-		Term $displayDescription = null,
+		?Term $displayLabel = null,
+		?Term $displayDescription = null,
 		array $metaData = []
 	) {
 		$this->matchedTerm = $matchedTerm;

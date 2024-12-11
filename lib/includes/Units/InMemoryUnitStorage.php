@@ -21,7 +21,7 @@ class InMemoryUnitStorage extends BaseUnitStorage {
 	 * a map from unit to an array of the form [ 'factor' => $factor, 'unit' => $unit ].
 	 * 'null' simulates a failure to load data.
 	 */
-	public function __construct( array $data = null ) {
+	public function __construct( ?array $data ) {
 		$this->data = $data;
 	}
 

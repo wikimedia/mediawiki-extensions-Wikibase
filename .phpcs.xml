@@ -109,7 +109,7 @@
 	</rule>
 
 	<rule ref="MediaWiki.Usage.NullableType.ExplicitNullableTypes">
-		<exclude-pattern>lib/</exclude-pattern>
+		<exclude-pattern>lib/packages/</exclude-pattern>
 		<exclude-pattern>repo/</exclude-pattern>
 	</rule>
 

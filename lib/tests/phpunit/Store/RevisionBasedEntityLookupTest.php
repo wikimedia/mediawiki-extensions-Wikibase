@@ -40,12 +40,8 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getEntityProvider
-	 *
-	 * @param EntityRevisionLookup $revisionLookup
-	 * @param EntityId $id
-	 * @param EntityId|null $expected
 	 */
-	public function testGetEntity( EntityRevisionLookup $revisionLookup, EntityId $id, EntityId $expected = null ) {
+	public function testGetEntity( EntityRevisionLookup $revisionLookup, EntityId $id, ?EntityId $expected ) {
 		$entityLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$entity = $entityLookup->getEntity( $id );
 

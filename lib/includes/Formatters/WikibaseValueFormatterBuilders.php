@@ -161,8 +161,8 @@ class WikibaseValueFormatterBuilders {
 		EntityUrlLookup $entityUrlLookup,
 		EntityRedirectChecker $entityRedirectChecker,
 		LanguageFactory $languageFactory,
-		EntityTitleLookup $entityTitleLookup = null,
-		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
+		?EntityTitleLookup $entityTitleLookup = null,
+		?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
 		bool $useKartographerMaplinkInWikitext = false,
 		array $thumbLimits = []
 	) {

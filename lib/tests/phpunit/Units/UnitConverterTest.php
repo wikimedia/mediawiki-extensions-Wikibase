@@ -44,7 +44,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return UnitConverter
 	 */
-	private function getConverter( $fromUnit, array $result = null ) {
+	private function getConverter( $fromUnit, ?array $result ) {
 		if ( $result ) {
 			$result = [ 'factor' => $result[0], 'unit' => $result[1] ];
 		}

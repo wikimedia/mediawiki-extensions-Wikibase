@@ -129,12 +129,12 @@ class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 		$expected,
 		PropertyValueSnak $snak,
 		Exception $ex,
-		ValueFormatter $fallbackFormatter = null
+		?ValueFormatter $fallbackFormatter = null
 	) {
 		$formatter = new ErrorHandlingSnakFormatter(
 			$this->getSnakFormatter( $ex ),
 			$fallbackFormatter,
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' )
+			'qqx'
 		);
 
 		$text = $formatter->formatSnak( $snak );

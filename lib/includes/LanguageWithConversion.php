@@ -45,15 +45,10 @@ class LanguageWithConversion {
 	 */
 	private $translatePool = [];
 
-	/**
-	 * @param string $languageCode
-	 * @param null|string $sourceLanguageCode
-	 * @param null|Language $parentLanguage
-	 */
 	private function __construct(
-		$languageCode,
-		$sourceLanguageCode = null,
-		Language $parentLanguage = null
+		string $languageCode,
+		?string $sourceLanguageCode,
+		?Language $parentLanguage
 	) {
 		$this->languageCode = $languageCode;
 		$this->sourceLanguageCode = $sourceLanguageCode;

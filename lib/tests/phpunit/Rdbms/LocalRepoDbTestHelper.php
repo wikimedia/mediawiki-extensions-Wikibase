@@ -15,7 +15,7 @@ use Wikimedia\Rdbms\LBFactorySingle;
  */
 trait LocalRepoDbTestHelper {
 
-	public function getRepoDomainDb( IDatabase $db = null ): RepoDomainDb {
+	public function getRepoDomainDb( ?IDatabase $db = null ): RepoDomainDb {
 		$lbFactory = LBFactorySingle::newFromConnection( $db ?: $this->db );
 		return new RepoDomainDb(
 			$lbFactory,
@@ -23,7 +23,7 @@ trait LocalRepoDbTestHelper {
 		);
 	}
 
-	public function getRepoDomainDbFactory( IDatabase $db = null ): RepoDomainDbFactory {
+	public function getRepoDomainDbFactory( ?IDatabase $db = null ): RepoDomainDbFactory {
 		$lbFactory = LBFactorySingle::newFromConnection( $db ?: $this->db );
 		$domainId = $lbFactory->getLocalDomainID();
 

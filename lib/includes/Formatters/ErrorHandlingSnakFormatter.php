@@ -38,15 +38,10 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	 */
 	private $language;
 
-	/**
-	 * @param SnakFormatter $snakFormatter
-	 * @param ValueFormatter|null $fallbackFormatter
-	 * @param string|null $language
-	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		ValueFormatter $fallbackFormatter = null,
-		$language = null
+		?ValueFormatter $fallbackFormatter,
+		?string $language
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->fallbackFormatter = $fallbackFormatter;

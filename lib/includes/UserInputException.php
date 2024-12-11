@@ -24,7 +24,7 @@ class UserInputException extends MessageException {
 	 * @param string $message
 	 * @param Exception|null $previous
 	 */
-	public function __construct( $key, array $params, $message, Exception $previous = null ) {
+	public function __construct( $key, array $params, $message, ?Exception $previous = null ) {
 		parent::__construct( $key, array_map( 'wfEscapeWikiText', $params ), $message, $previous );
 	}
 

@@ -50,16 +50,16 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 
 	public function resolveTermInLangIds(
 		array $termInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array {
 		return $this->resolveGroupedTermInLangIds( [ '' => $termInLangIds ], $types, $languages )[''];
 	}
 
 	public function resolveGroupedTermInLangIds(
 		array $groupedTermInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array {
 		$groupedTerms = [];
 
@@ -135,8 +135,8 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		$joinColumn,
 		$groupColumn,
 		array $conditions,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array {
 		$records = $this->newSelectQueryBuilder( $types, $languages )
 			->select( $groupColumn )
@@ -158,8 +158,8 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function newSelectQueryBuilder(
-		array $types = null,
-		array $languages = null
+		?array $types,
+		?array $languages
 	): SelectQueryBuilder {
 		$this->incrementForQuery( 'DatabaseTermIdsResolver_selectTermsViaJoin' ); // old method name kept for b/c
 		$queryBuilder = $this->getDbr()->newSelectQueryBuilder()
