@@ -33,7 +33,7 @@ class MaxReferencedEntityVisitsExhaustedException extends ReferencedEntityIdLook
 		array $toIds,
 		$maxEntityVisits,
 		$message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		$this->maxEntityVisits = $maxEntityVisits;
 		$message = $message ?: 'Referenced entity id lookup failed: Maximum number of entity visits (' .

@@ -29,7 +29,7 @@ class TermLookupException extends RuntimeException {
 		EntityId $entityId,
 		array $languageCodes,
 		$message = null,
-		Exception $previous = null
+		?Exception $previous = null
 	) {
 		$this->entityId = $entityId;
 

@@ -22,7 +22,7 @@ class UnknownForeignRepositoryException extends InvalidArgumentException {
 	 * @param string|null $message
 	 * @param Exception|null $previous
 	 */
-	public function __construct( $repositoryName, $message = null, Exception $previous = null ) {
+	public function __construct( $repositoryName, $message = null, ?Exception $previous = null ) {
 		$this->repositoryName = $repositoryName;
 
 		parent::__construct(

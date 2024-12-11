@@ -32,7 +32,7 @@ class StatementGuid {
 	 * @param string|null $originalStatementId the original, non-normalized, statement id.
 	 * Defaults to `null` for compatability.
 	 */
-	public function __construct( EntityId $entityId, string $guidPart, string $originalStatementId = null ) {
+	public function __construct( EntityId $entityId, string $guidPart, ?string $originalStatementId = null ) {
 		$constructedStatementId = $entityId->getSerialization() . self::SEPARATOR . $guidPart;
 		if ( $originalStatementId !== null
 			 && strtolower( $originalStatementId ) !== strtolower( $constructedStatementId ) ) {
