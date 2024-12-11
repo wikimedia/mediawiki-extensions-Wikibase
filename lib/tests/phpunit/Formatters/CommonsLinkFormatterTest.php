@@ -62,7 +62,7 @@ class CommonsLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider commonsLinkFormatProvider
 	 */
-	public function testFormat( StringValue $value, $pattern, FormatterOptions $options = null ) {
+	public function testFormat( StringValue $value, $pattern, ?FormatterOptions $options = null ) {
 		$formatter = new CommonsLinkFormatter( $options );
 
 		$html = $formatter->format( $value );

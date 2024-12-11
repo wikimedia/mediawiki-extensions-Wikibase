@@ -25,7 +25,7 @@ use Wikibase\Lib\Formatters\QuantityDetailsFormatter;
 class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
+	private function newFormatter( ?NumberLocalizer $numberLocalizer = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->method( 'format' )
 			->willReturnCallback( function( $value ) {

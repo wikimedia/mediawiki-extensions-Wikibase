@@ -22,7 +22,7 @@ class StorageException extends RuntimeException {
 	 * @param int $code
 	 * @param Exception|null $previous
 	 */
-	public function __construct( $status = "", $code = 0, Exception $previous = null ) {
+	public function __construct( $status = "", $code = 0, ?Exception $previous = null ) {
 		if ( $status instanceof Status ) {
 			$message = $status->getWikiText();
 			$this->status = $status;

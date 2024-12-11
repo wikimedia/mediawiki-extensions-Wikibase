@@ -38,7 +38,7 @@ JS;
 		return $js;
 	}
 
-	public function getDependencies( RL\Context $context = null ) {
+	public function getDependencies( ?RL\Context $context = null ) {
 		return array_values( $this->dataTypeDefinitions->getExpertModules() );
 	}
 

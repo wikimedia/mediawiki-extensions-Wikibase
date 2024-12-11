@@ -38,14 +38,14 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	public function __construct(
 		RepoDomainDb $repoDb,
 		TypeIdsAcquirer $typeIdsAcquirer,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->repoDb = $repoDb;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->logger = $logger ?? new NullLogger();
 	}
 
-	public function acquireTermInLangIds( array $termsArray, $callback = null ): array {
+	public function acquireTermInLangIds( array $termsArray, ?callable $callback = null ): array {
 		if ( $termsArray === [] ) {
 			if ( $callback !== null ) {
 				( $callback )( [] );

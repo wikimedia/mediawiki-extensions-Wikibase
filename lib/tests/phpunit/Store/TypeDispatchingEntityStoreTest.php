@@ -327,13 +327,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( 'fromCustomService', $result );
 	}
 
-	/**
-	 * @param string $expectedMethod
-	 * @param array|null $expectedArguments
-	 *
-	 * @return TypeDispatchingEntityStore
-	 */
-	public function newDefaultService( $expectedMethod, array $expectedArguments = null ) {
+	public function newDefaultService( string $expectedMethod, ?array $expectedArguments = null ): EntityStore {
 		$defaultService = $this->createMock( EntityStore::class );
 
 		if ( $expectedArguments ) {
