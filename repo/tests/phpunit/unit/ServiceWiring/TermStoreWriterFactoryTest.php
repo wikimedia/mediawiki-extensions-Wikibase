@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @coversNothing
@@ -40,9 +39,6 @@ class TermStoreWriterFactoryTest extends ServiceWiringTestCase {
 		$dbFactory->method( 'newRepoDb' )
 			->willReturn( $this->createStub( RepoDomainDb::class ) );
 		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory', $dbFactory );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getMainWANObjectCache' )
-			->willReturn( $this->createMock( WANObjectCache::class ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getJobQueueGroup' );
 		$this->mockService( 'WikibaseRepo.Logger',
