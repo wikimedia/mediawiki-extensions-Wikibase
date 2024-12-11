@@ -45,7 +45,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
 		DatabaseEntitySource $entitySource,
 		RepoDomainDb $repoDb,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;

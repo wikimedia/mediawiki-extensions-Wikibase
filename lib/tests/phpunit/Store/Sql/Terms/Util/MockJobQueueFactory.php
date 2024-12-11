@@ -24,7 +24,7 @@ class MockJobQueueFactory {
 	}
 
 	public function getJobQueueGroupMockExpectingTermInLangsIds(
-		array $expectedTermInLangIdsToClean = null
+		?array $expectedTermInLangIdsToClean = null
 	): JobQueueGroup {
 		$jobQueueGroupMock = $this->getMockJobQueue();
 

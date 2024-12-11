@@ -63,8 +63,8 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 		ParserOptions $parserOptions,
 		array $thumbLimits,
 		LanguageFactory $languageFactory,
-		FormatterOptions $options = null,
-		RepoGroup $repoGroup = null
+		?FormatterOptions $options = null,
+		?RepoGroup $repoGroup = null
 	) {
 		$this->options = $options ?: new FormatterOptions();
 

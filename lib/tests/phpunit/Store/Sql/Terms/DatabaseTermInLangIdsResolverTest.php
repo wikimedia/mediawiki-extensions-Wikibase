@@ -180,7 +180,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	/**
 	 * @dataProvider resolveFilteredProvider
 	 */
-	public function testCanResolveFiltered( array $expected, array $types = null, array $languages = null ) {
+	public function testCanResolveFiltered( array $expected, ?array $types, ?array $languages ) {
 		$termInLangIds = [];
 
 		$this->db->newInsertQueryBuilder()

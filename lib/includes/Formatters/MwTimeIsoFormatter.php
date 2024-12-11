@@ -29,13 +29,9 @@ class MwTimeIsoFormatter implements ValueFormatter {
 	 */
 	private $options;
 
-	/**
-	 * @param LanguageFactory $languageFactory
-	 * @param FormatterOptions|null $options
-	 */
 	public function __construct(
 		LanguageFactory $languageFactory,
-		FormatterOptions $options = null
+		?FormatterOptions $options = null
 	) {
 		$this->options = $options ?: new FormatterOptions();
 		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );

@@ -99,13 +99,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 		$this->assertSame( 'fromCustomService', $result );
 	}
 
-	/**
-	 * @param string $expectedMethod
-	 * @param EntityId|null $expectedId
-	 *
-	 * @return EntityRevisionLookup
-	 */
-	public function newDefaultService( $expectedMethod, EntityId $expectedId = null ) {
+	public function newDefaultService( $expectedMethod, ?EntityId $expectedId = null ): EntityRevisionLookup {
 		$defaultService = $this->createMock( EntityRevisionLookup::class );
 
 		if ( $expectedId ) {

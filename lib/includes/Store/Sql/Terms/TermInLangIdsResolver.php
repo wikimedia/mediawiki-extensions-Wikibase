@@ -39,8 +39,8 @@ interface TermInLangIdsResolver {
 	 */
 	public function resolveTermInLangIds(
 		array $termInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array;
 
 	/**
@@ -61,8 +61,8 @@ interface TermInLangIdsResolver {
 	 */
 	public function resolveGroupedTermInLangIds(
 		array $groupedTermInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array;
 
 }

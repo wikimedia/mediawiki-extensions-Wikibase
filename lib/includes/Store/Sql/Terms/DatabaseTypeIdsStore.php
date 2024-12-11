@@ -23,7 +23,7 @@ class DatabaseTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver, TypeIdsL
 	public function __construct(
 		RepoDomainDb $db,
 		WANObjectCache $cache,
-		LoggerInterface $logger = null
+		?LoggerInterface $logger = null
 	) {
 		$this->nameTableStore = new NameTableStore(
 			$db->loadBalancer(),

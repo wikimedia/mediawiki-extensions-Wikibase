@@ -40,7 +40,7 @@ class FallbackLabelDescriptionLookupFactory {
 		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup,
 		TermFallbackCacheFacade $termFallbackCache,
 		TermLookup $termLookup,
-		TermBuffer $termBuffer = null
+		?TermBuffer $termBuffer = null
 	) {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->redirectResolvingRevisionLookup = $redirectResolvingLatestRevisionLookup;

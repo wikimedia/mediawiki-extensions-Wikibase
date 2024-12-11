@@ -23,7 +23,7 @@ use Wikibase\Lib\Formatters\GlobeCoordinateDetailsFormatter;
 class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	private function newFormatter( FormatterOptions $options = null ) {
+	private function newFormatter( ?FormatterOptions $options = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->method( 'format' )
 			->willReturnCallback( function( $value ) {

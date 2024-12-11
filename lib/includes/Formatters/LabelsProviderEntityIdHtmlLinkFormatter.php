@@ -106,13 +106,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		return $html;
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @param Term|null $term
-	 *
-	 * @return array
-	 */
-	private function getAttributes( EntityId $entityId, Term $term = null ) {
+	private function getAttributes( EntityId $entityId, ?Term $term ): array {
 		$attributes = [
 			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
 			'href' => $this->entityUrlLookup->getLinkUrl( $entityId ),

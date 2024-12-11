@@ -25,10 +25,7 @@ class CommonsLinkFormatter implements ValueFormatter {
 	 */
 	private $attributes;
 
-	/**
-	 * @param FormatterOptions|null $options
-	 */
-	public function __construct( FormatterOptions $options = null ) {
+	public function __construct( ?FormatterOptions $options = null ) {
 		// @todo configure from options
 		$this->attributes = [
 			'class' => 'extiw',

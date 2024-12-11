@@ -14,7 +14,7 @@ class InMemoryTermStore implements TermInLangIdsAcquirer, TermInLangIdsResolver,
 	/** @var int */
 	private $lastId = 0;
 
-	public function acquireTermInLangIds( array $termsArray, $callback = null ): array {
+	public function acquireTermInLangIds( array $termsArray, ?callable $callback = null ): array {
 		$ids = [];
 
 		foreach ( $termsArray as $type => $termsOfType ) {
@@ -40,8 +40,8 @@ class InMemoryTermStore implements TermInLangIdsAcquirer, TermInLangIdsResolver,
 
 	public function resolveTermInLangIds(
 		array $termInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array {
 		if ( $termInLangIds === [] || $types === [] || $languages === [] ) {
 			return [];
@@ -71,8 +71,8 @@ class InMemoryTermStore implements TermInLangIdsAcquirer, TermInLangIdsResolver,
 
 	public function resolveGroupedTermInLangIds(
 		array $groupedTermInLangIds,
-		array $types = null,
-		array $languages = null
+		?array $types = null,
+		?array $languages = null
 	): array {
 		return array_map(
 			function ( $termInLangIdGroup ) use ( $types, $languages ) {
