@@ -68,7 +68,7 @@ class Property implements
 		?PropertyId $id,
 		?Fingerprint $fingerprint,
 		$dataTypeId,
-		StatementList $statements = null
+		?StatementList $statements = null
 	) {
 		$this->id = $id;
 		$this->fingerprint = $fingerprint ?: new Fingerprint();

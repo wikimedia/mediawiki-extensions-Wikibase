@@ -141,8 +141,8 @@ class EntityChangeFactory {
 	 */
 	public function newFromUpdate(
 		$action,
-		EntityDocument $oldEntity = null,
-		EntityDocument $newEntity = null
+		?EntityDocument $oldEntity,
+		?EntityDocument $newEntity = null
 	): EntityChange {
 		if ( $oldEntity === null && $newEntity === null ) {
 			throw new InvalidArgumentException( 'Either $oldEntity or $newEntity must be given' );

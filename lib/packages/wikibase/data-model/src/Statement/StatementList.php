@@ -70,7 +70,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addStatement( Statement $statement, int $index = null ): void {
+	public function addStatement( Statement $statement, ?int $index = null ): void {
 		if ( $index === null ) {
 			$this->statements[] = $statement;
 		} elseif ( $index >= 0 ) {
@@ -87,7 +87,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 * @param string|null $guid
 	 */
 	public function addNewStatement(
-		Snak $mainSnak, $qualifiers = null, $references = null, string $guid = null
+		Snak $mainSnak, $qualifiers = null, $references = null, ?string $guid = null
 	): void {
 		$qualifiers = is_array( $qualifiers ) ? new SnakList( $qualifiers ) : $qualifiers;
 		$references = is_array( $references ) ? new ReferenceList( $references ) : $references;
