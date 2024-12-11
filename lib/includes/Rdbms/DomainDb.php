@@ -25,35 +25,17 @@ abstract class DomainDb {
 	public const LOAD_GROUP_FROM_CLIENT = 'from-client';
 	public const LOAD_GROUP_FROM_REPO = 'from-repo';
 
-	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
-
-	/**
-	 * @var string
-	 */
-	private $domainId;
-
-	/**
-	 * @var ReplicationWaiter
-	 */
-	private $replicationWaiter;
+	private ILBFactory $lbFactory;
+	private string $domainId;
+	private ReplicationWaiter $replicationWaiter;
 
 	/**
 	 * @var string[]
 	 */
-	private $loadGroups;
+	private array $loadGroups;
 
-	/**
-	 * @var ?SessionConsistentConnectionManager
-	 */
-	private $sessionConsistentConnectionManager = null;
-
-	/**
-	 * @var ?ConnectionManager
-	 */
-	private $connectionManager = null;
+	private ?SessionConsistentConnectionManager $sessionConsistentConnectionManager = null;
+	private ?ConnectionManager $connectionManager = null;
 
 	public function __construct( ILBFactory $lbFactory, string $domainId, array $loadGroups = [] ) {
 		$this->lbFactory = $lbFactory;
@@ -83,7 +65,7 @@ abstract class DomainDb {
 
 	/**
 	 * WARNING: Do _not_ override the load-groups in individual method calls on ConnectionManager!
-	 * Instead add them to the factory method!
+	 * Instead, add them to the factory method!
 	 */
 	public function connections(): ConnectionManager {
 		if ( $this->connectionManager === null ) {

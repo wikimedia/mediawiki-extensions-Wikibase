@@ -11,15 +11,12 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class ClientDomainDbFactory {
 
-	/**
-	 * @var ILBFactory
-	 */
-	private $lbFactory;
+	private ILBFactory $lbFactory;
 
 	/**
 	 * @var string[]
 	 */
-	private $loadGroups;
+	private array $loadGroups;
 
 	public function __construct( ILBFactory $lbFactory, array $loadGroups = [] ) {
 		$this->lbFactory = $lbFactory;
