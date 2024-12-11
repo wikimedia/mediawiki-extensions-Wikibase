@@ -1134,8 +1134,7 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
-				"WikibaseRepo.PrefetchingTermLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
 		"DeleteDispatcher": {
