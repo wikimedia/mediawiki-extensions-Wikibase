@@ -5,12 +5,9 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Revision\RevisionRecord;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;
-use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 
 /**
@@ -35,7 +32,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	 */
 	public function testParsesAndPrefetchesComments( callable $rowsFactory, array $expectedProperties ) {
 		$rows = $rowsFactory( $this );
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
 
 		$expectedPropertyIds = [];
 		foreach ( $expectedProperties as $propertyString ) {
@@ -53,28 +50,12 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
 	}
 
-	public function testShouldNotFatalOnFailedRequests() {
-		$logger = $this->createMock( LoggerInterface::class );
-		$logger->expects( $this->once() )
-			->method( 'warning' )
-			->with( 'Prefetching failed for federated properties: {resultProperties}', self::containsEqual( 'P31' ) );
-
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, $logger );
-		$rows = [ (object)[ 'rev_comment_text' => '[[Property:P31]]' ] ];
-
-		$this->prefetchingLookup->expects( $this->once() )
-			->method( 'prefetchTerms' )
-			->willThrowException( new ApiRequestException( 'oh no!' ) );
-
-		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
-	}
-
 	/**
 	 * @dataProvider rowDataProvider
 	 */
 	public function testShouldExtractProperties( callable $rowsFactory, array $expectedProperties ) {
 		$rows = $rowsFactory( $this );
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() );
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
 		$actualOutput = $helper->extractSummaryProperties( $rows );
 
 		$this->assertSameSize( $expectedProperties, $actualOutput );

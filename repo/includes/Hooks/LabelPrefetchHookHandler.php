@@ -6,7 +6,6 @@ use ChangesList;
 use MediaWiki\Hook\ChangesListInitRowsHook;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
-use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -71,7 +70,6 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		TitleFactory $titleFactory,
 		EntityIdLookup $entityIdLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		LoggerInterface $logger,
 		PrefetchingTermLookup $prefetchingTermLookup,
 		SettingsArray $repoSettings,
 		TermBuffer $termBuffer
@@ -85,7 +83,7 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 			$termTypes,
 			$languageFallbackChainFactory,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
-			new SummaryParsingPrefetchHelper( $prefetchingTermLookup, $logger )
+			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}
 

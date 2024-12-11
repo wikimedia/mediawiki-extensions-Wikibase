@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use LogicException;
 use MediaWiki\Config\HashConfig;
+use Psr\Log\NullLogger;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\NewDatabaseEntitySource;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -46,6 +47,7 @@ class FederatedPropertiesServiceFactoryTest extends ServiceWiringTestCase {
 		$subEntityTypesMapper = new SubEntityTypesMapper( [] );
 		$entitySourceDefinitions = new EntitySourceDefinitions( [ $source ], $subEntityTypesMapper );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions', $entitySourceDefinitions );
+		$this->mockService( 'WikibaseRepo.Logger', new NullLogger() );
 
 		$this->assertInstanceOf(
 			ApiServiceFactory::class,

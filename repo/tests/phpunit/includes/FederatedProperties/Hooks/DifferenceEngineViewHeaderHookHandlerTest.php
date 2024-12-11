@@ -9,7 +9,6 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -169,7 +168,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 			$federatedProperties,
 			$this->languageFallbackChainFactory,
 			$this->linkTargetEntityIdLookup,
-			new SummaryParsingPrefetchHelper( $this->prefetchingLookup, new NullLogger() )
+			new SummaryParsingPrefetchHelper( $this->prefetchingLookup )
 		);
 	}
 

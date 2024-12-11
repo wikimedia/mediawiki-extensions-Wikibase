@@ -8,7 +8,6 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Pager\HistoryPager;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -107,8 +106,7 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 			$federatedPropertiesEnabled,
 			$this->prefetchingLookup,
 			$this->linkTargetEntityIdLookup,
-			$this->languageFallbackChainFactory,
-			new NullLogger()
+			$this->languageFallbackChainFactory
 		);
 	}
 
