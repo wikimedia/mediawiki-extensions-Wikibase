@@ -21,8 +21,8 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 use Wikibase\Repo\Hooks\DifferenceEngineViewHeaderHookHandler;
+use Wikibase\Repo\Hooks\SummaryParsingPrefetchHelper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\DifferenceEngineViewHeaderHookHandler

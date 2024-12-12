@@ -58,7 +58,6 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 		$itemTwo->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 3 ) ) );
 
 		$itemThreeNotFoundId = new ItemId( 'Q3' );
-		$itemThreeNotFound = null;
 
 		$expectedItemIds = [
 			$itemOneId,
@@ -85,8 +84,7 @@ class LabelPrefetchHookHandlerTest extends LabelPrefetchHookHandlerTestBase {
 			$this->getPrefetchTermsCallback( $expectedItemIds, $expectedTermTypes, $expectedLanguageCodes ),
 			$expectedTermTypes,
 			$expectedLanguageCodes,
-			$prefetchingTermLookup,
-			true
+			$prefetchingTermLookup
 		);
 
 		/** @var ChangesList $changesList */

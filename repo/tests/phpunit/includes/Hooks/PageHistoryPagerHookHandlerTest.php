@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\FederatedProperties\Hooks;
+namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Pager\HistoryPager;
@@ -12,7 +12,6 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -34,9 +33,6 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @author Tobias Andersson
  */
 class PageHistoryPagerHookHandlerTest extends TestCase {
-
-	/** @var EntityLookup */
-	private $entityLookup;
 
 	/** @var PrefetchingTermLookup */
 	private $prefetchingLookup;
@@ -78,7 +74,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
-		$this->entityLookup = $this->createMock( EntityLookup::class );
 		$this->linkTargetEntityIdLookup = $this->createMock( LinkTargetEntityIdLookup::class );
 
 		$stubContentLanguages = $this->createStub( ContentLanguages::class );
@@ -101,29 +96,30 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 			->willReturn( $this->languageFallback );
 	}
 
-	private function getHookHandler( bool $federatedPropertiesEnabled ) {
+	private function getHookHandler() {
 		return new PageHistoryPagerHookHandler(
-			$federatedPropertiesEnabled,
 			$this->prefetchingLookup,
 			$this->linkTargetEntityIdLookup,
 			$this->languageFallbackChainFactory
 		);
 	}
 
-	public function setupResultWithSummaries( StatementList $statementList ) {
+	private function setupResultWithSummaries( StatementList $statementList ) {
 		$availableProperties = array_map( function( $snak ) {
 			return $snak->getPropertyId();
 		}, $statementList->getAllSnaks() );
 
-		$summaries = array_map( function ( $prop ) {
+		$i = 0;
+		$summaries = array_map( function ( $prop ) use ( &$i ) {
+			$i++;
 			$object = (object)[
-				'rev_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:{$prop->getSerialization()}]]: asdfasdasfas",
+				'rev_comment_text' => "/* wbsetclaim-update:1||1 */ [[Property:{$prop->getSerialization()}]]: foo [[Q$i]] bar.",
 			];
 			return $object;
 		}, $availableProperties );
 
 		$valid = [];
-		for ( $i = 1; $i < count( $summaries ); $i++ ) {
+		for ( $i = 0; $i < count( $summaries ); $i++ ) {
 			$valid[] = true;
 		}
 		$valid[] = false;
@@ -154,12 +150,19 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				[ new NumericPropertyId( "P666" ), new NumericPropertyId( "P12345" ) ],
-				[ TermTypes::TYPE_LABEL ],
+				[
+					new NumericPropertyId( "P666" ),
+					new ItemId( 'Q1' ),
+					new NumericPropertyId( "P12345" ),
+					new ItemId( 'Q2' ),
+					new NumericPropertyId( "P12345" ),
+					new ItemId( 'Q3' ),
+				],
+				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ],
 				$this->languageCodes
 			);
 
-		$handler = $this->getHookHandler( true );
+		$handler = $this->getHookHandler();
 
 		$handler->onPageHistoryPager__doBatchLookups( $this->pager, $this->resultWrapper );
 	}
@@ -179,7 +182,7 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->never() )
 			->method( 'prefetchTerms' );
 
-		$handler = $this->getHookHandler( true );
+		$handler = $this->getHookHandler();
 
 		$handler->onPageHistoryPager__doBatchLookups( $this->pager, $this->resultWrapper );
 	}
@@ -197,7 +200,7 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->never() )
 			->method( 'prefetchTerms' );
 
-		$handler = $this->getHookHandler( true );
+		$handler = $this->getHookHandler();
 
 		$handler->onPageHistoryPager__doBatchLookups( $this->pager, $this->resultWrapper );
 	}

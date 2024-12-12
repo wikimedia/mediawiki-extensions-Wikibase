@@ -1183,7 +1183,6 @@
 				"WikibaseRepo.EntityIdLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.PrefetchingTermLookup",
-				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermBuffer"
 			]
 		},
@@ -1226,8 +1225,7 @@
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LinkTargetEntityIdLookup",
-				"WikibaseRepo.PrefetchingTermLookup",
-				"WikibaseRepo.Settings"
+				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
 		"RecentChangeSave": {

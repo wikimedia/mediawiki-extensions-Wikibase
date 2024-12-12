@@ -9,10 +9,9 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
-use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 
 /**
- * Hook for prefetching and handling federated properties before links are rendered.
+ * Hook for prefetching the terms of entities mentioned in edit summaries on diff pages.
  *
  * @license GPL-2.0-or-later
  */
@@ -85,7 +84,7 @@ class DifferenceEngineViewHeaderHookHandler implements DifferenceEngineViewHeade
 			return;
 		}
 
-		$this->summaryParsingPrefetcher->prefetchFederatedProperties(
+		$this->summaryParsingPrefetcher->prefetchTermsForMentionedEntities(
 			[ $differenceEngine->getOldRevision(), $differenceEngine->getNewRevision() ],
 			$this->languageFallbackChainFactory->newFromContext( $differenceEngine->getContext() )->getFetchLanguageCodes(),
 			[ TermTypes::TYPE_LABEL ]
