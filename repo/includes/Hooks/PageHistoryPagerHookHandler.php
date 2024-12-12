@@ -9,7 +9,6 @@ use MediaWiki\Pager\HistoryPager;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikimedia\Rdbms\IResultWrapper;
 
 //phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
@@ -21,30 +20,24 @@ use Wikimedia\Rdbms\IResultWrapper;
  */
 class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHook {
 
-	private LinkTargetEntityIdLookup $linkTargetEntityIdLookup;
-
 	private LanguageFallbackChainFactory $languageFallbackChainFactory;
 
 	private SummaryParsingPrefetchHelper $summaryParsingPrefetchHelper;
 
 	public function __construct(
 		PrefetchingTermLookup $prefetchingLookup,
-		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
-		$this->linkTargetEntityIdLookup = $linkTargetEntityIdLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->summaryParsingPrefetchHelper = new SummaryParsingPrefetchHelper( $prefetchingLookup );
 	}
 
 	public static function factory(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		LinkTargetEntityIdLookup $linkTargetEntityIdLookup,
 		PrefetchingTermLookup $prefetchingTermLookup
 	): self {
 		return new self(
 			$prefetchingTermLookup,
-			$linkTargetEntityIdLookup,
 			$languageFallbackChainFactory,
 		);
 	}
@@ -54,12 +47,6 @@ class PageHistoryPagerHookHandler implements PageHistoryPager__doBatchLookupsHoo
 	 * @param IResultWrapper $result
 	 */
 	public function onPageHistoryPager__doBatchLookups( $pager, $result ) {
-		$entityId = $this->linkTargetEntityIdLookup->getEntityId( $pager->getTitle() );
-		if ( $entityId === null ) {
-			// XXX: This means we only prefetch when showing the edit history of an entity.
-			return;
-		}
-
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromContext( $pager->getContext() );
 
 		$this->summaryParsingPrefetchHelper->prefetchTermsForMentionedEntities(

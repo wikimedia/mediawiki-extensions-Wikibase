@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Pager\HistoryPager;
-use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
@@ -19,7 +18,6 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
-use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Hooks\PageHistoryPagerHookHandler;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -37,9 +35,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 	/** @var PrefetchingTermLookup */
 	private $prefetchingLookup;
 
-	/** @var LinkTargetEntityIdLookup */
-	private $linkTargetEntityIdLookup;
-
 	/** @var LanguageFallbackChainFactory */
 	private $languageFallbackChainFactory;
 
@@ -52,29 +47,20 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 	/** @var HistoryPager|null */
 	private $pager;
 
-	/** @var ItemId */
-	private $entityId;
-
 	/** @var Item */
 	private $entity;
 
 	/** @var IResultWrapper|null */
 	private $resultWrapper;
 
-	/** @var Title */
-	private $title;
-
 	protected function setUp(): void {
-		$this->entityId = new ItemId( 'Q1' );
-		$this->entity = new Item( $this->entityId );
-		$this->title = Title::newFromTextThrow( $this->entityId->getSerialization() );
+		$this->entity = new Item( new ItemId( 'Q1' ) );
 
 		$this->pager = $this->createMock( HistoryPager::class );
 		$this->resultWrapper = $this->createMock( IResultWrapper::class );
 
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
-		$this->linkTargetEntityIdLookup = $this->createMock( LinkTargetEntityIdLookup::class );
 
 		$stubContentLanguages = $this->createStub( ContentLanguages::class );
 		$stubContentLanguages->method( 'hasLanguage' )
@@ -99,7 +85,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 	private function getHookHandler() {
 		return new PageHistoryPagerHookHandler(
 			$this->prefetchingLookup,
-			$this->linkTargetEntityIdLookup,
 			$this->languageFallbackChainFactory
 		);
 	}
@@ -138,15 +123,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 
 		$this->setupResultWithSummaries( $this->entity->getStatements() );
 
-		$this->pager->expects( $this->once() )
-			->method( 'getTitle' )
-			->willReturn( $this->title );
-
-		$this->linkTargetEntityIdLookup->expects( $this->once() )
-			->method( 'getEntityId' )
-			->with( $this->title )
-			->willReturn( $this->entityId );
-
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
@@ -169,33 +145,6 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 
 	public function testDontPrefetchEmptySummary() {
 		$this->setupResultWithSummaries( new StatementList() );
-
-		$this->pager->expects( $this->once() )
-			->method( 'getTitle' )
-			->willReturn( $this->title );
-
-		$this->linkTargetEntityIdLookup->expects( $this->once() )
-			->method( 'getEntityId' )
-			->with( $this->title )
-			->willReturn( $this->entityId );
-
-		$this->prefetchingLookup->expects( $this->never() )
-			->method( 'prefetchTerms' );
-
-		$handler = $this->getHookHandler();
-
-		$handler->onPageHistoryPager__doBatchLookups( $this->pager, $this->resultWrapper );
-	}
-
-	public function testShouldSkipIfNotEntityId() {
-		$this->pager->expects( $this->once() )
-			->method( 'getTitle' )
-			->willReturn( $this->title );
-
-		$this->linkTargetEntityIdLookup->expects( $this->once() )
-			->method( 'getEntityId' )
-			->with( $this->title )
-			->willReturn( null );
 
 		$this->prefetchingLookup->expects( $this->never() )
 			->method( 'prefetchTerms' );

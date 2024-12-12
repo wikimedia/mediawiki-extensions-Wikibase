@@ -1223,7 +1223,6 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory",
 			"services": [
 				"WikibaseRepo.LanguageFallbackChainFactory",
-				"WikibaseRepo.LinkTargetEntityIdLookup",
 				"WikibaseRepo.PrefetchingTermLookup"
 			]
 		},
