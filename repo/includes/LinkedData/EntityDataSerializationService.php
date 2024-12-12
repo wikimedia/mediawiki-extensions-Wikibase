@@ -126,7 +126,7 @@ class EntityDataSerializationService {
 	public function getSerializedData(
 		string $format,
 		EntityRevision $entityRevision,
-		RedirectRevision $followedRedirect = null,
+		?RedirectRevision $followedRedirect = null,
 		array $incomingRedirects = [],
 		?string $flavor = null
 	): array {

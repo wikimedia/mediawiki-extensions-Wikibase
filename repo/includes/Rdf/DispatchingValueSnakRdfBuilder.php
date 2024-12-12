@@ -31,7 +31,7 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param LoggerInterface|null $logger Used to log a warning
 	 * when encountering a value without a builder in $valueBuilders.
 	 */
-	public function __construct( array $valueBuilders, LoggerInterface $logger = null ) {
+	public function __construct( array $valueBuilders, ?LoggerInterface $logger = null ) {
 		Assert::parameterElementType( ValueSnakRdfBuilder::class, $valueBuilders, '$valueBuilders' );
 
 		$this->valueBuilders = $valueBuilders;

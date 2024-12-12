@@ -168,7 +168,7 @@ class StatementModificationHelper {
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
 	 */
-	public function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
+	public function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, ?Summary $summary = null ) {
 		try {
 			$result = $changeOp->validate( $entity );
 

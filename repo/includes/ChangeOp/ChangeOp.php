@@ -55,6 +55,6 @@ interface ChangeOp {
 	 *  same data was edited in the meantime.
 	 * @return ChangeOpResult
 	 */
-	public function apply( EntityDocument $entity, Summary $summary = null );
+	public function apply( EntityDocument $entity, ?Summary $summary = null );
 
 }

@@ -36,7 +36,7 @@ class MwDateFormatParserFactory {
 		$languageCode = 'en',
 		$dateFormatPreference = 'dmy',
 		$dateFormatType = 'date',
-		ParserOptions $options = null
+		?ParserOptions $options = null
 	) {
 		if ( !is_string( $languageCode ) || $languageCode === '' ) {
 			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );

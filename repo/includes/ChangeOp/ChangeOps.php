@@ -63,7 +63,7 @@ class ChangeOps implements ChangeOp {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		$changeOpsResults = [];
 
 		if ( count( $this->changeOps ) === 1 ) {

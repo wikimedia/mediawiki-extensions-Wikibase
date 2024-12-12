@@ -96,7 +96,7 @@ class ChangeOpAliases extends ChangeOpBase {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof AliasesProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a AliasesProvider' );
 		}

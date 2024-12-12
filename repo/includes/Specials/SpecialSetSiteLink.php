@@ -280,7 +280,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return HTMLForm
 	 */
-	protected function getForm( EntityDocument $entity = null ) {
+	protected function getForm( ?EntityDocument $entity ) {
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
@@ -492,7 +492,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	private function setSiteLink( EntityDocument $item, $siteId, $pageName, array $badgeIds, Summary &$summary = null ) {
+	private function setSiteLink( EntityDocument $item, $siteId, $pageName, array $badgeIds, ?Summary &$summary ) {
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entity must be an Item' );
 		}

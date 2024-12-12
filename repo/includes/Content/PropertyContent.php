@@ -34,7 +34,7 @@ class PropertyContent extends EntityContent {
 	 * @param EntityHolder|null $propertyHolder
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityHolder $propertyHolder = null ) {
+	public function __construct( ?EntityHolder $propertyHolder = null ) {
 		parent::__construct( self::CONTENT_MODEL_ID );
 
 		if ( $propertyHolder !== null

@@ -299,7 +299,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return bool
 	 */
-	public function equals( Content $that = null ) {
+	public function equals( ?Content $that = null ) {
 		if ( $that === $this ) {
 			return true;
 		}

@@ -268,8 +268,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string Empty string
 	 */
 	public function getAutosummary(
-		Content $oldContent = null,
-		Content $newContent = null,
+		?Content $oldContent = null,
+		?Content $newContent = null,
 		$flags = 0
 	) {
 		return '';
@@ -333,7 +333,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return EntityContent
 	 */
-	abstract protected function newEntityContent( EntityHolder $entityHolder = null );
+	abstract protected function newEntityContent( ?EntityHolder $entityHolder );
 
 	/**
 	 * Parses the given ID string into an EntityId for the type of entity
@@ -535,7 +535,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return Language The page's language
 	 */
-	public function getPageViewLanguage( Title $title, Content $content = null ) {
+	public function getPageViewLanguage( Title $title, ?Content $content = null ) {
 		global $wgLang;
 
 		return $wgLang;
@@ -558,7 +558,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return Language The page's language
 	 */
-	public function getPageLanguage( Title $title, Content $content = null ) {
+	public function getPageLanguage( Title $title, ?Content $content = null ) {
 		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
@@ -688,7 +688,7 @@ abstract class EntityHandler extends ContentHandler {
 		WikiPage $page,
 		ParserOutput $parserOutput,
 		SearchEngine $engine,
-		RevisionRecord $revision = null
+		?RevisionRecord $revision = null
 	) {
 		$fieldsData = parent::getDataForSearchIndex( $page, $parserOutput, $engine, $revision );
 
@@ -724,7 +724,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @inheritDoc
 	 */
-	public function getParserOutputForIndexing( WikiPage $page, ParserCache $cache = null, RevisionRecord $revision = null ) {
+	public function getParserOutputForIndexing( WikiPage $page, ?ParserCache $cache = null, ?RevisionRecord $revision = null ) {
 		$parserOptions = $page->makeParserOptions( 'canonical' );
 
 		$renderer = MediaWikiServices::getInstance()->getRevisionRenderer();

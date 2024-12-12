@@ -22,7 +22,7 @@ class ItemMergeStatus extends TempUserStatus {
 		EntityRevision $toEntityRevision,
 		?UserIdentity $savedTempUser,
 		IContextSource $context,
-		bool $redirected = null
+		?bool $redirected = null
 	): self {
 		$data = [
 			'fromEntityRevision' => $fromEntityRevision,

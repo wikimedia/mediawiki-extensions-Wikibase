@@ -250,7 +250,7 @@ class ApiErrorReporter {
 	 *
 	 * @return ApiMessage
 	 */
-	private function getMessageForCode( $errorCode, $description, array $extraData = null ) {
+	private function getMessageForCode( $errorCode, $description, ?array $extraData = null ) {
 		$messageKey = "wikibase-api-$errorCode";
 
 		$msg = wfMessage( $messageKey );

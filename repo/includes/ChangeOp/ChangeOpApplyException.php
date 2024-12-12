@@ -28,7 +28,7 @@ class ChangeOpApplyException extends ChangeOpException {
 	 *  sure these parameters are properly escaped.
 	 * @param Exception|null $previous
 	 */
-	public function __construct( $key, array $params = [], Exception $previous = null ) {
+	public function __construct( $key, array $params = [], ?Exception $previous = null ) {
 		parent::__construct( $key, 0, $previous );
 
 		$this->key = $key;

@@ -180,7 +180,7 @@ class EntityLoadingHelper {
 	 *
 	 * @return EntityDocument
 	 */
-	public function loadEntity( array $requestParams, EntityId $entityId = null ) {
+	public function loadEntity( array $requestParams, ?EntityId $entityId = null ) {
 		if ( !$entityId ) {
 			$entityId = $this->getEntityIdFromParams( $requestParams );
 		}

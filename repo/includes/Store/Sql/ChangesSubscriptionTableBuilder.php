@@ -111,7 +111,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @param ItemId|null $startItem The item to start with.
 	 */
-	public function fillSubscriptionTable( ItemId $startItem = null ) {
+	public function fillSubscriptionTable( ?ItemId $startItem = null ) {
 		$continuation = $startItem === null ? null : [ $startItem->getNumericId(), 0 ];
 
 		while ( true ) {

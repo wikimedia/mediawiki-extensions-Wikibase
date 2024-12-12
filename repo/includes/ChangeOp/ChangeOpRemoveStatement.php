@@ -46,7 +46,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}

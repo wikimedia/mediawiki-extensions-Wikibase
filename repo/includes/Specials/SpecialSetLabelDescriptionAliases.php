@@ -206,7 +206,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @return HTMLForm
 	 */
-	protected function getForm( EntityDocument $entity = null ) {
+	protected function getForm( ?EntityDocument $entity ) {
 		if ( $this->isEditFormStep( $entity ) ) {
 
 			$languageName = $this->languageNameUtils->getLanguageName(
@@ -534,7 +534,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @return string submit message key
 	 */
-	protected function getSubmitKey( EntityDocument $entity = null ) {
+	protected function getSubmitKey( ?EntityDocument $entity ) {
 		if ( $this->isEditFormStep( $entity ) ) {
 			return $this->submitButtonMessage;
 		}
@@ -547,11 +547,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @return bool
 	 */
-	protected function showCopyrightNotice( EntityDocument $entity = null ) {
+	protected function showCopyrightNotice( ?EntityDocument $entity ) {
 		return $this->isEditFormStep( $entity );
 	}
 
-	private function isEditFormStep( EntityDocument $entity = null ) {
+	private function isEditFormStep( ?EntityDocument $entity ) {
 		return $entity !== null && $this->languageCode !== null;
 	}
 }

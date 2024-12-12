@@ -207,7 +207,7 @@ class PropertyHandler extends EntityHandler {
 	 *
 	 * @return PropertyContent
 	 */
-	protected function newEntityContent( EntityHolder $entityHolder = null ) {
+	protected function newEntityContent( ?EntityHolder $entityHolder ) {
 		return new PropertyContent( $entityHolder );
 	}
 

@@ -84,7 +84,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param int $baseRev
 	 * @return EditEntity
 	 */
-	protected function prepareEditEntity( EntityId $id = null, $baseRev = 0 ) {
+	protected function prepareEditEntity( ?EntityId $id = null, int $baseRev = 0 ): EditEntity {
 		$this->editEntity = $this->editEntityFactory->newEditEntity(
 			$this->getContext(),
 			$id,
@@ -228,7 +228,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 *
 	 * @return string HTML
 	 */
-	protected function getCopyrightHTML( $saveMessageKey = null ) {
+	protected function getCopyrightHTML( ?string $saveMessageKey = null ) {
 		if ( $saveMessageKey === null ) {
 			$saveMessageKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
 		}

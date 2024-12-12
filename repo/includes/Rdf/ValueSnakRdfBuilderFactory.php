@@ -31,7 +31,7 @@ class ValueSnakRdfBuilderFactory {
 	 *        return a ValueSnakRdfBuilder (or null).
 	 * @param LoggerInterface|null $logger
 	 */
-	public function __construct( array $factoryCallbacks, LoggerInterface $logger = null ) {
+	public function __construct( array $factoryCallbacks, ?LoggerInterface $logger = null ) {
 		Assert::parameterElementType( 'callable', $factoryCallbacks, '$factoryCallbacks' );
 
 		$this->factoryCallbacks = $factoryCallbacks;

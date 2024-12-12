@@ -213,7 +213,7 @@ class SiteLinkDiffView implements DiffView {
 	 *
 	 * @return string
 	 */
-	private function getSiteLinkElement( string $siteId, string $pageName, string $html = null ): string {
+	private function getSiteLinkElement( string $siteId, string $pageName, ?string $html = null ): string {
 		$site = $this->siteLookup->getSite( $siteId );
 
 		$tagName = 'span';

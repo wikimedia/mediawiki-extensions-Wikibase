@@ -50,7 +50,7 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
@@ -77,7 +77,7 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function removeQualifier( SnakList $qualifiers, Summary $summary = null ) {
+	protected function removeQualifier( SnakList $qualifiers, ?Summary $summary ) {
 		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}
