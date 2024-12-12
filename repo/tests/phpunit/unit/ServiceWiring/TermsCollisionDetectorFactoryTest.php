@@ -3,7 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -18,10 +18,10 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class TermsCollisionDetectorFactoryTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$dbFactory = $this->createMock( TermsDomainDbFactory::class );
 		$dbFactory->expects( $this->once() )
-			->method( 'newRepoDb' );
-		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory',
+			->method( 'newTermsDb' );
+		$this->mockService( 'WikibaseRepo.TermsDomainDbFactory',
 			$dbFactory );
 		$this->mockService( 'WikibaseRepo.TypeIdsLookup',
 			$this->createMock( TypeIdsLookup::class ) );

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
 
@@ -11,14 +11,11 @@ use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
  */
 class TermsCollisionDetectorFactory {
 
-	/** @var RepoDomainDb */
-	private $db;
-
-	/** @var TypeIdsLookup */
-	private $typeIdsLookup;
+	private TermsDomainDb $db;
+	private TypeIdsLookup $typeIdsLookup;
 
 	public function __construct(
-		RepoDomainDb $db,
+		TermsDomainDb $db,
 		TypeIdsLookup $typeIdsLookup
 	) {
 		$this->db = $db;

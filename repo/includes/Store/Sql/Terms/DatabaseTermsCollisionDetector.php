@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 
@@ -25,20 +25,20 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 	private string $entityType;
 
-	private RepoDomainDb $db;
+	private TermsDomainDb $db;
 
 	private TypeIdsLookup $typeIdsLookup;
 
 	/**
 	 * @param string $entityType one of the two supported types: Item::ENTITY_TYPE or Property::ENTITY_TYPE
-	 * @param RepoDomainDb $db
+	 * @param TermsDomainDb $db
 	 * @param TypeIdsLookup $typeIdsLookup
 	 *
 	 * @throws InvalidArgumentException when non supported entity type is given
 	 */
 	public function __construct(
 		string $entityType,
-		RepoDomainDb $db,
+		TermsDomainDb $db,
 		TypeIdsLookup $typeIdsLookup
 	) {
 		if ( !in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
@@ -195,10 +195,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	private function newSelectQueryBuilder(): EntityTermsSelectQueryBuilder {
-		return new EntityTermsSelectQueryBuilder(
-			$this->db->connections()->getReadConnection(),
-			$this->entityType
-		);
+		return new EntityTermsSelectQueryBuilder( $this->db, $this->entityType );
 	}
 
 }

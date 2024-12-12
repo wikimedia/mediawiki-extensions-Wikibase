@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaPrimaryAwareRecordIdsAcquirer;
 
 /**
@@ -23,9 +23,9 @@ use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaPrimaryAwareRecordIdsAcquirer;
 class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	/**
-	 * @var RepoDomainDb
+	 * @var TermsDomainDb
 	 */
-	private $repoDb;
+	private $termsDb;
 
 	/**
 	 * @var TypeIdsAcquirer
@@ -36,11 +36,11 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private $logger;
 
 	public function __construct(
-		RepoDomainDb $repoDb,
+		TermsDomainDb $termsDb,
 		TypeIdsAcquirer $typeIdsAcquirer,
 		?LoggerInterface $logger = null
 	) {
-		$this->repoDb = $repoDb;
+		$this->termsDb = $termsDb;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->logger = $logger ?? new NullLogger();
 	}
@@ -375,7 +375,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private function restoreCleanedUpIds( array $termsArray, array $termInLangIds = [] ) {
 		$uniqueTermIds = array_values( array_unique( $termInLangIds ) );
 
-		$dbMaster = $this->repoDb->connections()->getWriteConnection();
+		$dbMaster = $this->termsDb->connections()->getWriteConnection();
 		$persistedTermIds = $dbMaster->newSelectQueryBuilder()
 			->select( 'wbtl_id' )
 			->from( 'wbt_term_in_lang' )
@@ -397,13 +397,13 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		$ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_text', 'wbx_id',
+			$this->termsDb, 'wbt_text', 'wbx_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$textInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_text_in_lang', 'wbxl_id',
+			$this->termsDb, 'wbt_text_in_lang', 'wbxl_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$termInLangIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
-			$this->repoDb, 'wbt_term_in_lang', 'wbtl_id',
+			$this->termsDb, 'wbt_term_in_lang', 'wbtl_id',
 			$ignoreReplica ? ReplicaPrimaryAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );

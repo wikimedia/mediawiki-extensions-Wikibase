@@ -49,25 +49,25 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 
 		parent::setUp();
 
-		$repoDb = $this->getRepoDomainDb();
+		$termsDb = $this->getTermsDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 		$termIdsStore = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$repoDb
+			$termsDb
 		);
 		$this->lookup = new PrefetchingItemTermLookup(
 			$termIdsStore
 		);
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
-			$repoDb,
+			$termsDb,
 			$this->createMock( JobQueueGroup::class ),
 			new DatabaseTermInLangIdsAcquirer(
-				$repoDb,
+				$termsDb,
 				$typeIdsStore
 			),
 			$termIdsStore,

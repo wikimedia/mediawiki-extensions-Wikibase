@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Store;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikimedia\ObjectCache\WANObjectCache;
@@ -23,9 +23,9 @@ class MatchingTermsLookupFactory {
 	private $entityIdComposer;
 
 	/**
-	 * @var RepoDomainDbFactory
+	 * @var TermsDomainDbFactory
 	 */
-	private $repoDomainDbFactory;
+	private $termsDomainDbFactory;
 
 	/**
 	 * @var LoggerInterface
@@ -39,27 +39,27 @@ class MatchingTermsLookupFactory {
 
 	public function __construct(
 		EntityIdComposer $entityIdComposer,
-		RepoDomainDbFactory $repoDomainDbFactory,
+		TermsDomainDbFactory $termsDomainDbFactory,
 		LoggerInterface $logger,
 		WANObjectCache $objectCache
 	) {
 		$this->entityIdComposer = $entityIdComposer;
-		$this->repoDomainDbFactory = $repoDomainDbFactory;
+		$this->termsDomainDbFactory = $termsDomainDbFactory;
 		$this->logger = $logger;
 		$this->objectCache = $objectCache;
 	}
 
 	public function getLookupForSource( DatabaseEntitySource $entitySource ): MatchingTermsLookup {
-		$repoDb = $this->repoDomainDbFactory->newForEntitySource( $entitySource );
+		$termsDb = $this->termsDomainDbFactory->newForEntitySource( $entitySource );
 
 		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			$this->objectCache,
 			$this->logger
 		);
 
 		return new DatabaseMatchingTermsLookup(
-			$repoDb,
+			$termsDb,
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$this->entityIdComposer,

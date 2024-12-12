@@ -92,6 +92,7 @@ use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -465,7 +466,7 @@ return [
 
 	'WikibaseRepo.DatabaseTypeIdsStore' => function ( MediaWikiServices $services ): DatabaseTypeIdsStore {
 		return new DatabaseTypeIdsStore(
-			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
 			$services->getMainWANObjectCache()
 		);
 	},
@@ -1517,7 +1518,7 @@ return [
 	'WikibaseRepo.MatchingTermsLookupFactory' => function ( MediaWikiServices $services ): MatchingTermsLookupFactory {
 		return new MatchingTermsLookupFactory(
 			WikibaseRepo::getEntityIdComposer( $services ),
-			WikibaseRepo::getRepoDomainDbFactory( $services ),
+			WikibaseRepo::getTermsDomainDbFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);
@@ -1962,7 +1963,7 @@ return [
 		MediaWikiServices $services
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
-			WikibaseRepo::getRepoDomainDbFactory( $services ),
+			WikibaseRepo::getTermsDomainDbFactory( $services ),
 			WikibaseRepo::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);
@@ -1974,9 +1975,13 @@ return [
 
 	'WikibaseRepo.TermsCollisionDetectorFactory' => function ( MediaWikiServices $services ): TermsCollisionDetectorFactory {
 		return new TermsCollisionDetectorFactory(
-			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
 			WikibaseRepo::getTypeIdsLookup( $services )
 		);
+	},
+
+	'WikibaseRepo.TermsDomainDbFactory' => function ( MediaWikiServices $services ): TermsDomainDbFactory {
+		return new TermsDomainDbFactory( WikibaseRepo::getRepoDomainDbFactory( $services ) );
 	},
 
 	'WikibaseRepo.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {
@@ -1991,7 +1996,7 @@ return [
 			WikibaseRepo::getTypeIdsAcquirer( $services ),
 			WikibaseRepo::getTypeIdsLookup( $services ),
 			WikibaseRepo::getTypeIdsResolver( $services ),
-			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
+			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
 			$services->getJobQueueGroup(),
 			WikibaseRepo::getLogger( $services )
 		);

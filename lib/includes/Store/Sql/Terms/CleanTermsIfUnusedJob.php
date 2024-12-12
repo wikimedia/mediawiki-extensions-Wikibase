@@ -44,8 +44,8 @@ class CleanTermsIfUnusedJob extends Job {
 
 	public static function getJobSpecificationNoTitle( array $params ): CleanTermsIfUnusedJob {
 		$repoDomainDb = MediaWikiServices::getInstance()
-			->get( 'WikibaseRepo.RepoDomainDbFactory' )
-			->newRepoDb();
+			->get( 'WikibaseRepo.TermsDomainDbFactory' )
+			->newTermsDb();
 
 		$logger = LoggerFactory::getInstance( 'Wikibase' );
 		$innerTermStoreCleaner = new DatabaseInnerTermStoreCleaner( $logger );
