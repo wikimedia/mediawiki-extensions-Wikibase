@@ -14,7 +14,8 @@
 			"Stryn",
 			"Thurs",
 			"Tölvuforritari",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"JohanahoJ"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -145,6 +146,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Föregående värde har varit korrekt men är inte det längre",
 	"wikibase-client-data-bridge-references-heading": "Referenser",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Du är inte inloggad",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Du är inte inloggad. Om du <strong>loggar in</strong> eller <strong>skapar ett konto</strong> kommer dina redigeringar tillskrivas ditt användarnamn tillsammans med andra fördelar.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Varning:</strong> Du är inte inloggad. Din IP-adress kommer synas offentligt om du gör redigeringar. Om du <strong>loggar in</strong> eller <strong>skapar ett konto</strong>, kommer dina redigeringar att tillskrivas ditt användarnamn, tillsammans med andra fördelar.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Redigera utan att logga in",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Logga in eller registrera",
