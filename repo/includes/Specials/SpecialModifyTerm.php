@@ -209,7 +209,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 *
 	 * @return HTMLForm
 	 */
-	protected function getForm( EntityDocument $entity = null ) {
+	protected function getForm( ?EntityDocument $entity ) {
 		if ( $this->languageCode === null ) {
 			$this->languageCode = $this->getLanguage()->getCode();
 		}
@@ -287,7 +287,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			->setHeaderHtml( Html::rawElement( 'p', [], $intro ) );
 	}
 
-	private function setValueIfNull( EntityDocument $entity = null ) {
+	private function setValueIfNull( ?EntityDocument $entity ) {
 		if ( $this->value === null ) {
 			if ( $entity === null ) {
 				$this->value = '';

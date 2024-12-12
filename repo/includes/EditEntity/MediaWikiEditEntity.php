@@ -391,7 +391,7 @@ class MediaWikiEditEntity implements EditEntity {
 	 *
 	 * @return bool
 	 */
-	private function userWasLastToEdit( User $user = null, EntityId $entityId = null, $lastRevId = false ): bool {
+	private function userWasLastToEdit( ?User $user, ?EntityId $entityId, $lastRevId ): bool {
 		if ( $user === null || $entityId === null || $lastRevId === false ) {
 			return false;
 		}
@@ -459,7 +459,7 @@ class MediaWikiEditEntity implements EditEntity {
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	private function checkEntityId( EntityId $id = null ): void {
+	private function checkEntityId( ?EntityId $id ): void {
 		if ( $this->entityId ) {
 			if ( !$this->entityId->equals( $id ) ) {
 				throw new InvalidArgumentException(

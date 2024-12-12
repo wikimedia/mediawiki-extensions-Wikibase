@@ -38,7 +38,7 @@ class ChangeOpRemoveSiteLink extends ChangeOpBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}

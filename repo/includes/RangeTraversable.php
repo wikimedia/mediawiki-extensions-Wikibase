@@ -18,7 +18,7 @@ class RangeTraversable implements \IteratorAggregate {
 	/** @var int|null */
 	private $inclusiveUpperBound;
 
-	public function __construct( int $startingNumber = 1, int $inclusiveUpperBound = null ) {
+	public function __construct( int $startingNumber = 1, ?int $inclusiveUpperBound = null ) {
 		$this->startingNumber = $startingNumber;
 		$this->inclusiveUpperBound = $inclusiveUpperBound;
 	}

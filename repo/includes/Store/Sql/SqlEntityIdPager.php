@@ -82,7 +82,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		RepoDomainDb $repoDomainDb,
 		array $entityTypes = [],
 		$redirectMode = EntityIdPager::NO_REDIRECTS,
-		LinkCache $linkCache = null
+		?LinkCache $linkCache = null
 	) {
 		Assert::parameterElementType( 'string', $entityTypes, '$entityTypes' );
 

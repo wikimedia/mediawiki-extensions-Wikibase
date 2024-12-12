@@ -139,9 +139,9 @@ class ApiHelperFactory {
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
 		TitleFactory $titleFactory,
-		EntityByLinkedTitleLookup $entityByLinkedTitleLookup = null,
-		EntityFactory $entityFactory = null,
-		EntityStore $entityStore = null
+		?EntityByLinkedTitleLookup $entityByLinkedTitleLookup = null,
+		?EntityFactory $entityFactory = null,
+		?EntityStore $entityStore = null
 	) {
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;

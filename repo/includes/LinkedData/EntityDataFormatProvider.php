@@ -46,7 +46,7 @@ class EntityDataFormatProvider {
 	/**
 	 * @param string[]|null $allowedFormats
 	 */
-	public function setAllowedFormats( array $allowedFormats = null ) {
+	public function setAllowedFormats( ?array $allowedFormats ) {
 		$this->allowedFormats = $allowedFormats;
 
 		// force re-init of format maps

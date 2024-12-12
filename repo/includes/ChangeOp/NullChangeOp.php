@@ -23,7 +23,7 @@ class NullChangeOp implements ChangeOp {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		// no op
 
 		return new DummyChangeOpResult( $entity->getId() );

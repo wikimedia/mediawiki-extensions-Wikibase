@@ -42,7 +42,7 @@ class LabelDescriptionNotEqualValidator implements EntityValidator {
 	public function validateLabelAndDescription(
 		TermList $labels,
 		TermList $descriptions,
-		array $languageCodes = null
+		?array $languageCodes = null
 	) {
 		$labels = $labels->toTextArray();
 		$descriptions = $descriptions->toTextArray();

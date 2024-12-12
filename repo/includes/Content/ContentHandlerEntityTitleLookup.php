@@ -38,7 +38,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 	private $localEntitySource;
 
 	/**
-	 * @var InterwikiLookup|null
+	 * @var InterwikiLookup
 	 */
 	private $interwikiLookup;
 
@@ -46,7 +46,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 		EntityContentFactory $entityContentFactory,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		DatabaseEntitySource $localEntitySource,
-		InterwikiLookup $interwikiLookup = null
+		InterwikiLookup $interwikiLookup
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
@@ -82,7 +82,7 @@ class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 		$entitySource = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $id->getEntityType() );
 		if ( $entitySource !== null && $entitySource->getSourceName() !== $this->localEntitySource->getSourceName() ) {
 			$interwiki = $entitySource->getInterwikiPrefix();
-			if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+			if ( $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
 				$pageName = 'EntityPage/' . $id->getSerialization();
 
 				// TODO: use a TitleFactory

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class DummyChangeOpResult extends GenericChangeOpResult {
 
-	public function __construct( EntityId $entityId = null ) {
+	public function __construct( ?EntityId $entityId = null ) {
 		 parent::__construct( $entityId, false );
 	}
 

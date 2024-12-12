@@ -82,7 +82,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 *
 	 * @inheritDoc
 	 */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
@@ -103,7 +103,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @param EntityId $entityId
 	 * @param Summary|null $summary
 	 */
-	private function addStatement( StatementList $statements, EntityId $entityId, Summary $summary = null ) {
+	private function addStatement( StatementList $statements, EntityId $entityId, ?Summary $summary ) {
 		$this->statementGuid = $this->guidGenerator->newGuid( $entityId );
 		$statements->addNewStatement( $this->snak, null, null, $this->statementGuid );
 		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
@@ -115,7 +115,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 *
 	 * @throws ChangeOpException
 	 */
-	private function setStatement( StatementList $statements, Summary $summary = null ) {
+	private function setStatement( StatementList $statements, ?Summary $summary ) {
 		$statement = $statements->getFirstStatementWithGuid( $this->statementGuid );
 
 		if ( $statement === null ) {

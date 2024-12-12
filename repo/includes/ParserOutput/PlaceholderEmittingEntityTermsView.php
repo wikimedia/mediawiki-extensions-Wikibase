@@ -116,7 +116,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		$mainLanguageCode,
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null
+		?AliasGroupList $aliasGroups = null
 	) {
 		$termsListItems = [];
 

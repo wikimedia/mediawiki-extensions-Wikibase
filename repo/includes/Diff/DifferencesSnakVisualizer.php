@@ -78,7 +78,7 @@ class DifferencesSnakVisualizer {
 	 *
 	 * @return string|null HTML
 	 */
-	public function getDetailedValue( Snak $snak = null ) {
+	public function getDetailedValue( ?Snak $snak ) {
 		if ( $snak === null ) {
 			return null;
 		}
@@ -113,7 +113,7 @@ class DifferencesSnakVisualizer {
 	 *
 	 * @return string HTML
 	 */
-	public function getPropertyHeader( Snak $snak = null ) {
+	public function getPropertyHeader( ?Snak $snak ) {
 		$headerText = wfMessage( 'wikibase-entity-property' )
 			->inLanguage( $this->languageCode )->escaped();
 

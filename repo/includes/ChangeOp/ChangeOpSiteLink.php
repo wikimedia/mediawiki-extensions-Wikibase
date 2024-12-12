@@ -42,7 +42,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( string $siteId, string $pageName, array $badges = null ) {
+	public function __construct( string $siteId, string $pageName, ?array $badges = null ) {
 		if ( $pageName === '' ) {
 			throw new InvalidArgumentException( '$linkPage must not be empty. For deletions use ChangeOpRemoveSiteLink' );
 		}
@@ -107,7 +107,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @return ChangeOpResult
 	 */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}

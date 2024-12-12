@@ -273,14 +273,14 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return HTMLForm
 	 */
-	abstract protected function getForm( EntityDocument $entity = null );
+	abstract protected function getForm( ?EntityDocument $entity );
 
 	/**
 	 * Building the HTML form for modifying an entity.
 	 *
 	 * @param EntityDocument|null $entity
 	 */
-	private function setForm( EntityDocument $entity = null ) {
+	private function setForm( ?EntityDocument $entity ) {
 		$submitKey = $this->getSubmitKey( $entity );
 		if ( $this->showCopyrightNotice( $entity ) ) {
 			$this->getOutput()->addHTML( $this->getCopyrightHTML( $submitKey ) );
@@ -309,7 +309,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return array
 	 */
-	protected function getFormElements( EntityDocument $entity = null ) {
+	protected function getFormElements( ?EntityDocument $entity ) {
 		$id = 'wb-modifyentity-id';
 
 		return [
@@ -381,7 +381,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
+	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, ?Summary $summary ) {
 		// NOTE: always validate modification against the current revision!
 		// TODO: this should be re-engineered, see T126231
 		$currentEntityRevision = $this->getLatestRevision();
@@ -399,7 +399,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return string submit message key
 	 */
-	protected function getSubmitKey( EntityDocument $entity = null ) {
+	protected function getSubmitKey( ?EntityDocument $entity ) {
 		return 'wikibase-' . strtolower( $this->getName() ) . '-submit';
 	}
 
@@ -408,7 +408,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return bool
 	 */
-	protected function showCopyrightNotice( EntityDocument $entity = null ) {
+	protected function showCopyrightNotice( ?EntityDocument $entity ) {
 		return true;
 	}
 }

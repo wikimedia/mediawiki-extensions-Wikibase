@@ -103,7 +103,7 @@ class ParseValue extends ApiBase {
 		ValidatorErrorLocalizer $validatorErrorLocalizer,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ApiErrorReporter $errorReporter,
-		IBufferingStatsdDataFactory $stats = null
+		?IBufferingStatsdDataFactory $stats = null
 	) {
 		parent::__construct( $mainModule, $moduleName );
 		$this->dataTypeFactory = $dataTypeFactory;

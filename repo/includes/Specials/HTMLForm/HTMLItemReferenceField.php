@@ -28,7 +28,7 @@ class HTMLItemReferenceField extends HTMLTextField {
 	 *
 	 * @see \HTMLForm There is detailed description of the allowed $params (named $info there).
 	 */
-	public function __construct( array $params, EntityLookup $entityLookup = null ) {
+	public function __construct( array $params, ?EntityLookup $entityLookup = null ) {
 		if ( isset( $params['type'] ) ) {
 			throw new \InvalidArgumentException( "Cannot use `type` for item reference field" );
 		}

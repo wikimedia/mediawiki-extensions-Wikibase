@@ -35,7 +35,7 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$this->bagOStuff = $bagOStuff;
 	}
 
-	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, int $db = null ): array {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, ?int $db = null ): array {
 		$conflicts = [];
 		$siteLinksToClear = [];
 

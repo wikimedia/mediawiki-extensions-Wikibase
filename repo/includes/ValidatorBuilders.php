@@ -138,7 +138,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function getEntityValidators( string $entityType = null ): array {
+	public function getEntityValidators( ?string $entityType = null ): array {
 		$typeValidator = new TypeValidator( EntityIdValue::class );
 		$entityExistsValidator = new EntityExistsValidator( $this->entityLookup, $entityType );
 

@@ -340,8 +340,8 @@ class GetEntities extends ApiBase {
 	 */
 	private function handleEntity(
 		?string $sourceEntityId,
-		EntityRevision $entityRevision = null,
-		array $params = []
+		?EntityRevision $entityRevision,
+		array $params
 	): void {
 		if ( $entityRevision === null ) {
 			$this->resultBuilder->addMissingEntity( $sourceEntityId, [ 'id' => $sourceEntityId ] );

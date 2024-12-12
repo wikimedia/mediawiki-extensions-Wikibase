@@ -97,14 +97,14 @@ class WikibasePingback {
 	 * @param string|null $key
 	 */
 	public function __construct(
-		Config $config = null,
-		LoggerInterface $logger = null,
-		ExtensionRegistry $extensionRegistry = null,
-		SettingsArray $wikibaseRepoSettings = null,
-		HTTPRequestFactory $requestFactory = null,
-		ObjectCacheFactory $objectCacheFactory = null,
-		RepoDomainDb $repoDomainDb = null,
-		string $key = null
+		?Config $config = null,
+		?LoggerInterface $logger = null,
+		?ExtensionRegistry $extensionRegistry = null,
+		?SettingsArray $wikibaseRepoSettings = null,
+		?HTTPRequestFactory $requestFactory = null,
+		?ObjectCacheFactory $objectCacheFactory = null,
+		?RepoDomainDb $repoDomainDb = null,
+		?string $key = null
 	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
@@ -373,7 +373,7 @@ class WikibasePingback {
 		} );
 	}
 
-	public static function doSchedule( WikibasePingback $instance = null ) {
+	public static function doSchedule( ?WikibasePingback $instance = null ) {
 		$instance ??= new WikibasePingback();
 		if ( $instance->shouldSend() ) {
 			$instance->sendPingback();

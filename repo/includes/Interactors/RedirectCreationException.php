@@ -24,7 +24,7 @@ class RedirectCreationException extends MessageException {
 	 * @param array $params Parameters localized error message
 	 * @param Exception|null $previous The previous exception that caused this exception.
 	 */
-	public function __construct( $message, $errorCode = '', array $params = [], Exception $previous = null ) {
+	public function __construct( $message, $errorCode = '', array $params = [], ?Exception $previous = null ) {
 		parent::__construct(
 			'wikibase-redirect-' . $errorCode,
 			$params,

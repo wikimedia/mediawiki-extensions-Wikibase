@@ -41,7 +41,7 @@ class ChangeOpFingerprint extends ChangeOps {
 		return $this->innerChangeOps->getActions();
 	}
 
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		$result = $this->innerChangeOps->apply( $entity, $summary );
 
 		'@phan-var ChangeOpsResult $result';
