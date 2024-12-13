@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Iketsi",
+			"Kxeo",
 			"Nērtiks Jōrgesuns",
 			"Tīgelika"
 		]
@@ -9,6 +10,7 @@
 	"wikibase-dataitem": "dātasōbjaktan",
 	"wikibase-editlinks": "Redigīs autengīnsnans",
 	"wikibase-editlinkstitle": "Redigīs sirzdabilliskans autengīnsnans",
+	"wikibase-addlinkstitle": "Redigīs sirzdabilliskans autengīnsnans",
 	"wikibase-linkitem-addlinks": "Preidāis autengīnsnans",
 	"wikibase-linkitem-title": "Senristun sēn pāusan",
 	"wikibase-linkitem-linkpage": "Senristun sēn pāusan",
