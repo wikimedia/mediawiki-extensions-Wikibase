@@ -109,7 +109,6 @@
 	</rule>
 
 	<rule ref="MediaWiki.Usage.NullableType.ExplicitNullableTypes">
-		<exclude-pattern>repo/rest-api/</exclude-pattern>
 		<exclude-pattern>repo/tests/</exclude-pattern>
 	</rule>
 

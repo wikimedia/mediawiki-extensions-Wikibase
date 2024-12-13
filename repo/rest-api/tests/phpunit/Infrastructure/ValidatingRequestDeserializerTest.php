@@ -395,7 +395,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 		];
 	}
 
-	private function newRequestDeserializer( ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
+	private function newRequestDeserializer( ?ContainerInterface $serviceContainer = null ): ValidatingRequestDeserializer {
 		return new ValidatingRequestDeserializer(
 			$serviceContainer ?? new TestValidatingRequestDeserializerServiceContainer()
 		);

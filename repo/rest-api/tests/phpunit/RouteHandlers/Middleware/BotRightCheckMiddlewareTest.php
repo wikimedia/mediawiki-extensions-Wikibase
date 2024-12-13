@@ -71,7 +71,7 @@ class BotRightCheckMiddlewareTest extends TestCase {
 		);
 	}
 
-	private function newMiddleware( PermissionManager $permissionManager = null ): BotRightCheckMiddleware {
+	private function newMiddleware( ?PermissionManager $permissionManager = null ): BotRightCheckMiddleware {
 		return new BotRightCheckMiddleware(
 			$permissionManager ?? $this->createStub( PermissionManager::class ),
 			new ResponseFactory()

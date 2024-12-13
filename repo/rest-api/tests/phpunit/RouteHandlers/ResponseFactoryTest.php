@@ -41,7 +41,7 @@ class ResponseFactoryTest extends TestCase {
 	/**
 	 * @dataProvider errorCodeToHttpStatusCodeProvider
 	 */
-	public function testNewErrorResponse( string $errorCode, int $httpStatus, array $errorContext = null ): void {
+	public function testNewErrorResponse( string $errorCode, int $httpStatus, ?array $errorContext = null ): void {
 		$errorMessage = 'testNewErrorResponse error message';
 		$jsonErrorContext = json_encode( $errorContext );
 

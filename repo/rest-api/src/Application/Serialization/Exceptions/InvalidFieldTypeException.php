@@ -20,7 +20,7 @@ class InvalidFieldTypeException extends SerializationException {
 	 * @param string $message
 	 * @param Throwable|null $previous
 	 */
-	public function __construct( $value, string $path, string $message = '', Throwable $previous = null ) {
+	public function __construct( $value, string $path, string $message = '', ?Throwable $previous = null ) {
 		$this->path = $path;
 		$this->value = $value;
 		parent::__construct( $message, 0, $previous );
