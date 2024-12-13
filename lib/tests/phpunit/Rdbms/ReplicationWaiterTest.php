@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Lib\Tests\Rdbms;
 
 use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikimedia\Rdbms\LBFactory;

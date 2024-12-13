@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-namespace Wikibase\Lib\Tests;
+namespace Wikibase\Lib\Tests\Rdbms;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\DatabaseEntitySource;
