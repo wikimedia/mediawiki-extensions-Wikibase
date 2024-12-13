@@ -94,7 +94,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 					new NumericPropertyId( "P32456" ),
 					new ItemId( 'Q101' ),
 					new NumericPropertyId( "P12345" ),
-					new ItemId( 'Q102' )
+					new ItemId( 'Q102' ),
 				],
 				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ],
 				[ 'sv', 'de', 'en' ]
