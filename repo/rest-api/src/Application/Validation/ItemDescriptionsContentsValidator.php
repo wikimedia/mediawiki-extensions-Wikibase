@@ -16,7 +16,7 @@ class ItemDescriptionsContentsValidator {
 		$this->descriptionValidator = $descriptionValidator;
 	}
 
-	public function validate( PartiallyValidatedDescriptions $descriptions, TermList $labels, array $languages = null ): ?ValidationError {
+	public function validate( PartiallyValidatedDescriptions $descriptions, TermList $labels, ?array $languages = null ): ?ValidationError {
 		$languages ??= array_keys( $descriptions->toTextArray() );
 		foreach ( $languages as $language ) {
 			$error = $this->descriptionValidator->validate( $language, $descriptions->getByLanguage( $language )->getText(), $labels );

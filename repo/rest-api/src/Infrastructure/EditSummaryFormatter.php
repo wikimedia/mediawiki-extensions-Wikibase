@@ -187,7 +187,7 @@ class EditSummaryFormatter {
 		StatementEditSummary $editSummary,
 		string $moduleName,
 		string $actionName,
-		int $autoCommentArgs = null
+		?int $autoCommentArgs = null
 	): Summary {
 		$statement = $editSummary->getStatement();
 

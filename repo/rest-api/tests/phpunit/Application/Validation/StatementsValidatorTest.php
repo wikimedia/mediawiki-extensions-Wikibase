@@ -267,7 +267,7 @@ class StatementsValidatorTest extends TestCase {
 		$this->newValidator()->getValidatedStatements();
 	}
 
-	private function newValidator( StatementValidator $statementValidator = null ): StatementsValidator {
+	private function newValidator( ?StatementValidator $statementValidator = null ): StatementsValidator {
 		return new StatementsValidator( $statementValidator ?? $this->newStatementValidator() );
 	}
 

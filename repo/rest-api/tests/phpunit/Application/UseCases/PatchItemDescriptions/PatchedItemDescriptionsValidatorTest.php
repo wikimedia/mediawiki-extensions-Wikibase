@@ -100,7 +100,7 @@ class PatchedItemDescriptionsValidatorTest extends TestCase {
 		ValidationError $validationError,
 		string $expectedErrorCode,
 		string $expectedErrorMessage,
-		array $expectedContext = null
+		array $expectedContext
 	): void {
 		$this->descriptionValidator = $this->createStub( ItemDescriptionValidator::class );
 		$this->descriptionValidator->method( 'validate' )->willReturn( $validationError );
