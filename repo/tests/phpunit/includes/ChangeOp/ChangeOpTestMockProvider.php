@@ -241,61 +241,6 @@ class ChangeOpTestMockProvider {
 		return $mock;
 	}
 
-	public function detectLabelConflicts(
-		$entityType,
-		array $labels,
-		array $aliases = null,
-		EntityId $entityId = null
-	) {
-		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
-			// simulated conflicts always conflict with P666, so if these are
-			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = [];
-		}
-
-		foreach ( $labels as $lang => $text ) {
-			if ( $text === 'DUPE' ) {
-				return Result::newError( [
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-conflict',
-						[
-							'label',
-							$lang,
-							$text,
-							'P666',
-						]
-					),
-				] );
-			}
-		}
-
-		if ( $aliases === null ) {
-			return Result::newSuccess();
-		}
-
-		foreach ( $aliases as $lang => $texts ) {
-			if ( in_array( 'DUPE', $texts ) ) {
-				return Result::newError( [
-					Error::newError(
-						'found conflicting terms',
-						'alias',
-						'label-conflict',
-						[
-							'alias',
-							$lang,
-							'DUPE',
-							'P666',
-						]
-					),
-				] );
-			}
-		}
-
-		return Result::newSuccess();
-	}
-
 	/**
 	 * @return SiteLinkConflictLookup
 	 */
