@@ -24,7 +24,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  */
 class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 
-	private function newTimeParserFactory( ParserOptions $options = null ) {
+	private function newTimeParserFactory( ?ParserOptions $options = null ) {
 		$monthNameProvider = $this->createMock( MonthNameProvider::class );
 		$monthNameProvider->method( 'getLocalizedMonthNames' )
 			->willReturn( [

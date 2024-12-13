@@ -437,13 +437,13 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @dataProvider provideUndoForm
 	 */
 	public function testUndoForm(
-		$action,
+		string $action,
 		$page,
 		array $params,
-		$post = false,
-		User $user = null,
-		$htmlPattern = null,
-		array $expectedProps = null
+		bool $post,
+		?User $user,
+		?string $htmlPattern,
+		?array $expectedProps = null
 	) {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
@@ -893,13 +893,13 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @dataProvider provideUndoSubmit
 	 */
 	public function testUndoSubmit(
-		$action,
+		string $action,
 		$page,
 		array $params,
-		$post = false,
-		User $user = null,
-		$htmlPattern = null,
-		array $expectedProps = null
+		bool $post,
+		?User $user,
+		?string $htmlPattern,
+		?array $expectedProps = null
 	) {
 		if ( is_string( $page ) ) {
 			self::resetTestItem( $page );
@@ -918,17 +918,17 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @param array $params
 	 * @param bool $post
 	 * @param User|null $user
-	 * @param string|bool|null $htmlPattern
+	 * @param string|null $htmlPattern
 	 * @param string[]|null $expectedProps
 	 */
 	protected function tryUndoAction(
-		$action,
+		string $action,
 		$page,
 		array $params,
-		$post = false,
-		User $user = null,
-		$htmlPattern = null,
-		array $expectedProps = null
+		bool $post,
+		?User $user,
+		?string $htmlPattern,
+		?array $expectedProps
 	) {
 		if ( $user ) {
 			$this->setUser( $user );
@@ -950,7 +950,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 		$out = $this->callAction( $action, $page, $params, $post );
 
-		if ( $htmlPattern !== null && $htmlPattern !== false ) {
+		if ( $htmlPattern !== null ) {
 			$this->assertMatchesRegularExpression( $htmlPattern, $out->getHTML() );
 		}
 

@@ -114,7 +114,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider getUnitCases
 	 */
-	public function testConvertUnit( array $unit, array $expect = null ) {
+	public function testConvertUnit( array $unit, ?array $expect ) {
 		$usage = [ 'Q1' => 100, 'Q2' => 50, 'Q3' => 10 ];
 		$base = [ 'Q1' => true ];
 		$converted = [ 'Q10' => [] ];

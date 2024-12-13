@@ -245,7 +245,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function callApiModule( array $params, EntityRedirect $expectedRedirect = null ): array {
+	private function callApiModule( array $params, ?EntityRedirect $expectedRedirect = null ): array {
 		$module = $this->newMergeItemsApiModule( $params, $expectedRedirect );
 
 		$module->execute();
@@ -385,7 +385,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedTo, $actualTo );
 	}
 
-	private function assertRedirectCorrect( array $result, EntityRedirect $redirect = null ): void {
+	private function assertRedirectCorrect( array $result, ?EntityRedirect $redirect ): void {
 		$this->assertArrayHasKey( 'redirected', $result );
 
 		if ( $redirect ) {

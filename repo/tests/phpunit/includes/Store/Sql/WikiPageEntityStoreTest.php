@@ -604,9 +604,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	protected function saveEntity(
 		WikiPageEntityStore $store,
 		EntityDocument $entity,
-		$summary = '',
-		User $user = null,
-		$flags = 0,
+		string $summary = '',
+		?User $user = null,
+		int $flags = 0,
 		$baseRevId = false
 	) {
 		if ( $user === null ) {

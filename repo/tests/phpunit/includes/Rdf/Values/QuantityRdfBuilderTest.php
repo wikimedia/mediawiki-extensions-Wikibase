@@ -276,7 +276,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		PropertyValueSnak $snak,
 		$complex,
 		array $expected,
-		array $units = null
+		?array $units = null
 	) {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],

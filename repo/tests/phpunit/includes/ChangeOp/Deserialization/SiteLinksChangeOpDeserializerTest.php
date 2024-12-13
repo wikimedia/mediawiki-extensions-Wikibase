@@ -43,7 +43,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		return new SiteLinkTargetProvider( new HashSiteStore( [ $wiki ] ) );
 	}
 
-	private function newSiteLinksChangeOpDeserializer( Item $item = null ): SiteLinksChangeOpDeserializer {
+	private function newSiteLinksChangeOpDeserializer( ?Item $item = null ): SiteLinksChangeOpDeserializer {
 		$entityLookupMock = $this->createStub( EntityLookup::class );
 		if ( $item !== null ) {
 			$entityLookupMock->method( 'getEntity' )

@@ -61,7 +61,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityPermissionChecker
 	 */
-	private function getEntityPermissionChecker( array $permissions = null ): EntityPermissionChecker {
+	private function getEntityPermissionChecker( ?array $permissions = null ): EntityPermissionChecker {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$checkAction = static function ( $user, $action ) use ( $permissions ) {
@@ -84,7 +84,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getMockEditFitlerHookRunner(
-		Status $status = null,
+		?Status $status = null,
 		$expects = null
 	): EditFilterHookRunner {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
@@ -115,7 +115,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		EntityTitleStoreLookup $titleLookup,
 		User $user,
 		$baseRevId = 0,
-		array $permissions = null,
+		?array $permissions = null,
 		?EditFilterHookRunner $editFilterHookRunner = null,
 		?array $localEntityTypes = null
 	): MediaWikiEditEntity {
@@ -145,7 +145,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getMockRepository( User $user = null, User $otherUser = null ): MockRepository {
+	private function getMockRepository( ?User $user = null, ?User $otherUser = null ): MockRepository {
 		$repo = new MockRepository();
 
 		$user ??= $this->getTestUser()->getUser();
@@ -263,7 +263,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$baseRevisionId,
 		$expectedConflict,
 		$expectedFix,
-		array $expectedData = null
+		?array $expectedData = null
 	) {
 		$user = $this->getTestUser()->getUser();
 		$repo = $this->getMockRepository( $user );

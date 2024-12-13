@@ -92,7 +92,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 	public function testApply(
 		Item $item,
 		ChangeOpAliases $changeOpAliases,
-		array $expectedAliases = null
+		?array $expectedAliases
 	) {
 		$changeOpAliases->apply( $item );
 		$fingerprint = $item->getFingerprint();

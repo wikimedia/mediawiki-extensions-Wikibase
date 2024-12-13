@@ -159,7 +159,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getPingback( HttpRequestFactory $requestFactory = null ): WikibasePingback {
+	private function getPingback( ?HttpRequestFactory $requestFactory = null ): WikibasePingback {
 		$logger = $this->createMock( LoggerInterface::class );
 		$extensions = $this->createMock( ExtensionRegistry::class );
 		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );

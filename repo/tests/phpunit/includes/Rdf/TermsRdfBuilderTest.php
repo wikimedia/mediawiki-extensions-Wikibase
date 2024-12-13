@@ -50,7 +50,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return TermsRdfBuilder
 	 */
-	private function newBuilder( RdfWriter $writer, array $languages = null ) {
+	private function newBuilder( RdfWriter $writer, ?array $languages = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$builder = new TermsRdfBuilder(
@@ -78,7 +78,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( $entityName, $dataSetName, array $languages = null ) {
+	public function testAddEntity( $entityName, $dataSetName, ?array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -104,7 +104,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideAddLabels
 	 */
-	public function testAddLabels( $entityName, $dataSetName, array $languages = null ) {
+	public function testAddLabels( $entityName, $dataSetName, ?array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -129,7 +129,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideAddDescriptions
 	 */
-	public function testAddDescriptions( $entityName, $dataSetName, array $languages = null ) {
+	public function testAddDescriptions( $entityName, $dataSetName, ?array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -153,7 +153,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideAddAliases
 	 */
-	public function testAddAliases( $entityName, $dataSetName, array $languages = null ) {
+	public function testAddAliases( $entityName, $dataSetName, ?array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();

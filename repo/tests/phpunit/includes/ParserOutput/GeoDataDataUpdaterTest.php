@@ -363,7 +363,7 @@ class GeoDataDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function newStatement( NumericPropertyId $propertyId, DataValue $dataValue = null ) {
+	private function newStatement( NumericPropertyId $propertyId, ?DataValue $dataValue = null ) {
 		$guidGenerator = new GuidGenerator();
 
 		if ( $dataValue === null ) {

@@ -130,7 +130,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		);
 	}
 
-	private function executeSpecialEntityRedirect( array $params, User $user = null ): string {
+	private function executeSpecialEntityRedirect( array $params, ?User $user = null ): string {
 		if ( !$user ) {
 			// TODO Matching the token of a non-anonymous user is complicated.
 			$user = new User;

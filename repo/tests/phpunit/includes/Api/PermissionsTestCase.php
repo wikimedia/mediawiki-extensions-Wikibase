@@ -30,7 +30,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	 *
 	 * @todo try to do this without messing with the globals, or at least without hardcoding them.
 	 */
-	protected function applyPermissions( array $permissions = null, array $groups = null ) {
+	protected function applyPermissions( ?array $permissions = null, ?array $groups = null ) {
 		$userGroupManager = $this->getServiceContainer()->getUserGroupManager();
 
 		if ( !$permissions ) {
@@ -66,7 +66,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	protected function doPermissionsTest(
 		$action,
 		array $params,
-		array $permissions = null,
+		?array $permissions = null,
 		$expectedError = null
 	) {
 		$this->applyPermissions( $permissions );

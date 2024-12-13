@@ -72,7 +72,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @throws \Exception
 	 */
-	protected function getWikibaseRepo( SettingsArray $settings = null ) {
+	protected function getWikibaseRepo( ?SettingsArray $settings = null ) {
 		$repoSettings = WikibaseRepo::getSettings()->getArrayCopy();
 
 		if ( $settings ) {
@@ -130,7 +130,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityHandler
 	 */
-	abstract protected function getHandler( SettingsArray $settings = null );
+	abstract protected function getHandler( ?SettingsArray $settings = null );
 
 	/**
 	 * Create a new entity content from the given document.
@@ -142,7 +142,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	abstract protected function newEntityContent( EntityDocument $entity = null ): EntityContent;
+	abstract protected function newEntityContent( ?EntityDocument $entity = null ): EntityContent;
 
 	/**
 	 * Create a new entity redirect content from the given IDs, if possible.
@@ -162,7 +162,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityDocument
 	 */
-	abstract protected function newEntity( EntityId $id = null );
+	abstract protected function newEntity( ?EntityId $id = null );
 
 	/**
 	 * Returns EntityContents that can be serialized by the EntityHandler deriving class.

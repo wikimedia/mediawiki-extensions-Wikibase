@@ -102,7 +102,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	private function newApiModule(
 		array $params,
 		User $user,
-		ItemRedirectCreationInteractor $interactor = null
+		?ItemRedirectCreationInteractor $interactor = null
 	): CreateRedirect {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request, true );
@@ -153,8 +153,8 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 	private function callApiModule(
 		array $params,
-		User $user = null,
-		ItemRedirectCreationInteractor $interactor = null
+		?User $user = null,
+		?ItemRedirectCreationInteractor $interactor = null
 	): array {
 		if ( !$user ) {
 			$user = $this->getTestUser()->getUser();

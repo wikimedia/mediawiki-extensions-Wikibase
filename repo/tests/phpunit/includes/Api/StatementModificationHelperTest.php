@@ -189,7 +189,7 @@ class StatementModificationHelperTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return StatementModificationHelper
 	 */
-	private function getNewInstance( ApiErrorReporter $errorReporter = null ) {
+	private function getNewInstance( ?ApiErrorReporter $errorReporter = null ) {
 		$entityIdParser = new ItemIdParser();
 
 		return new StatementModificationHelper(

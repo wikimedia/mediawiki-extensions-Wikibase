@@ -41,7 +41,7 @@ class ChangeOpSiteLinkTest extends TestCase {
 	/**
 	 * @dataProvider invalidConstructorProvider
 	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ): void {
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage, ?array $badges ): void {
 		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}

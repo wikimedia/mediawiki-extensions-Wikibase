@@ -93,7 +93,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function getMockEditFilterHookRunner(
 		$invokeCount = null,
-		Status $hookReturn = null
+		?Status $hookReturn = null
 	): EditFilterHookRunner {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->onlyMethods( [ 'run' ] )
@@ -114,8 +114,8 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function newInteractor(
 		$efHookCalls = null,
-		Status $efHookStatus = null,
-		TempUserCreator $tempUserCreator = null
+		?Status $efHookStatus = null,
+		?TempUserCreator $tempUserCreator = null
 	): ItemRedirectCreationInteractor {
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter();
 
@@ -152,7 +152,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		return $titleLookup;
 	}
 
-	private function getContext( User $user = null ): IContextSource {
+	private function getContext( ?User $user = null ): IContextSource {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 		$context->setUser( $user ?? $this->createMock( User::class ) );
@@ -254,7 +254,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		EntityId $toId,
 		string $expectedCode,
 		array $messageParams,
-		Status $efStatus = null
+		?Status $efStatus = null
 	): void {
 		$interactor = $this->newInteractor( null, $efStatus );
 

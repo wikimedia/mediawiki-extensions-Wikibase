@@ -71,7 +71,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 	 *
 	 * @return EntityTitleStoreLookup
 	 */
-	public function newDefaultService( EntityId $expectedId = null ) {
+	public function newDefaultService( ?EntityId $expectedId = null ) {
 		$defaultService = $this->createMock( EntityTitleStoreLookup::class );
 
 		if ( $expectedId ) {

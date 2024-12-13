@@ -62,7 +62,7 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 		$prefetchTerms,
 		array $termTypes,
 		array $languageCodes,
-		PrefetchingTermLookup $prefetchingTermLookup = null,
+		?PrefetchingTermLookup $prefetchingTermLookup = null,
 		bool $federatedPropertiesEnabled = false
 	) {
 		if ( $prefetchingTermLookup == null ) {
@@ -104,8 +104,8 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 	protected function getPrefetchTermsCallback( $expectedIds, $expectedTermTypes, $expectedLanguageCodes ) {
 		$prefetchTerms = function (
 			array $entityIds,
-			array $termTypes = null,
-			array $languageCodes = null
+			array $termTypes,
+			array $languageCodes
 		) use (
 			$expectedIds,
 			$expectedTermTypes,

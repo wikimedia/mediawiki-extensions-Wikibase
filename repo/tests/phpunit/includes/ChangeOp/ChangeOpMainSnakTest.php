@@ -114,7 +114,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideChangeOps
 	 */
-	public function testApply( Item $item, ChangeOpMainSnak $changeOp, DataValue $expected = null ) {
+	public function testApply( Item $item, ChangeOpMainSnak $changeOp, ?DataValue $expected ) {
 		$changeOpResult = $changeOp->apply( $item );
 		$this->assertNotEmpty( $changeOp->getStatementGuid() );
 		$statements = $item->getStatements();

@@ -303,7 +303,7 @@ class MwTimeIsoParserTest extends MediaWikiIntegrationTestCase {
 	 * @param mixed $expected
 	 * @param ValueParser|null $parser
 	 */
-	public function testParseWithValidInputs( $value, $expected, ValueParser $parser = null ) {
+	public function testParseWithValidInputs( $value, $expected, ?ValueParser $parser = null ) {
 		if ( $parser === null ) {
 			$parser = $this->getInstance();
 		}
@@ -338,7 +338,7 @@ class MwTimeIsoParserTest extends MediaWikiIntegrationTestCase {
 	 * @param mixed $value
 	 * @param ValueParser|null $parser
 	 */
-	public function testParseWithInvalidInputs( $value, ValueParser $parser = null ) {
+	public function testParseWithInvalidInputs( $value, ?ValueParser $parser = null ) {
 		if ( $parser === null ) {
 			$parser = $this->getInstance();
 		}

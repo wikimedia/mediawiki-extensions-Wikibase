@@ -78,8 +78,8 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 	protected function getPrefetchCallback( $expectedIds ) {
 		return function (
 			array $entityIds,
-			array $termTypes = null,
-			array $languageCodes = null
+			?array $termTypes = null,
+			?array $languageCodes = null
 		) use (
 			$expectedIds
 		) {

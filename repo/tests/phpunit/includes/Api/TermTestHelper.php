@@ -22,7 +22,7 @@ class TermTestHelper {
 	 */
 	public static function makeOverlyLongString(
 		string $text = "Test",
-		int $length = null
+		?int $length = null
 	): string {
 		if ( $length === null ) {
 			$limits = WikibaseRepo::getSettings()

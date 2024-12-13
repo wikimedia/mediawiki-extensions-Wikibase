@@ -58,9 +58,9 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityRevisionLookup|MockObject
 	 */
 	protected function getMockEntityRevisionLookup(
-		EntityId $entityId = null,
-		EntityRevision $entityRevision = null,
-		Exception $exception = null
+		?EntityId $entityId = null,
+		?EntityRevision $entityRevision = null,
+		?Exception $exception = null
 	) {
 		$mock = $this->createMock( EntityRevisionLookup::class );
 

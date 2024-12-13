@@ -108,7 +108,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return array[]
 	 */
-	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ): array {
+	private function callApiModule( array $params, ?EntitySearchHelper $entitySearchHelper = null ): array {
 		$entitySourceDefinitions = new EntitySourceDefinitions( [
 			new DatabaseEntitySource(
 				'items',

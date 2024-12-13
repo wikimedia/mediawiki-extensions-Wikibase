@@ -54,7 +54,7 @@ class ItemStubRdfBuilderIntegrationTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return ItemStubRdfBuilder
 	 */
-	private function newBuilder( RdfWriter $writer, array $languages = null ): ItemStubRdfBuilder {
+	private function newBuilder( RdfWriter $writer, ?array $languages = null ): ItemStubRdfBuilder {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$builder = new ItemStubRdfBuilder(
@@ -83,7 +83,7 @@ class ItemStubRdfBuilderIntegrationTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideAddEntityStub
 	 */
-	public function testAddEntityStub( $entityName, $dataSetName, array $languages = null ) {
+	public function testAddEntityStub( $entityName, $dataSetName, ?array $languages = null ) {
 		$entityId = new ItemId( $entityName );
 
 		$this->termLookup->setData( [

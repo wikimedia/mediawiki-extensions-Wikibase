@@ -566,8 +566,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	public function testLanguageFallback(
 		$handle,
 		array $languages,
-		array $expectedLabels = null,
-		array $expectedDescriptions = null,
+		?array $expectedLabels,
+		?array $expectedDescriptions,
 		array $props = []
 	) {
 		$id = EntityTestHelper::getId( $handle );

@@ -26,7 +26,7 @@ class NTriplesRdfTestHelper {
 	 */
 	private $allBlanksEqual = false;
 
-	public function __construct( RdfBuilderTestData $testData = null ) {
+	public function __construct( ?RdfBuilderTestData $testData = null ) {
 		$this->testData = $testData;
 	}
 
@@ -166,7 +166,7 @@ class NTriplesRdfTestHelper {
 	 * @param string|string[] $actual
 	 * @param string|null $message
 	 */
-	public function assertNTriplesEqualsDataset( $dataSetNames, $actual, $message = null ) {
+	public function assertNTriplesEqualsDataset( $dataSetNames, $actual, ?string $message = null ) {
 		$testData = $this->getTestData();
 
 		$dataSetNames = (array)$dataSetNames;
