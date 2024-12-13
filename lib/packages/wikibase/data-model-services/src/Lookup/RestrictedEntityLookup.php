@@ -52,7 +52,8 @@ class RestrictedEntityLookup implements EntityLookup {
 			if ( count( $this->entitiesAccessed ) > $this->entityAccessLimit ) {
 				throw new EntityAccessLimitException(
 					$entityId,
-					'Too many entities loaded, must not load more than ' . $this->entityAccessLimit . ' entities.'
+					$this->getEntityAccessCount(),
+					$this->entityAccessLimit
 				);
 			}
 		}
