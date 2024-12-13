@@ -54,7 +54,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	private function newTimeParserFactory(
 		$languageCode,
-		MonthNameProvider $monthNameProvider = null
+		?MonthNameProvider $monthNameProvider = null
 	) {
 		$options = new ParserOptions();
 		$options->setOption( ValueParser::OPT_LANG, $languageCode );

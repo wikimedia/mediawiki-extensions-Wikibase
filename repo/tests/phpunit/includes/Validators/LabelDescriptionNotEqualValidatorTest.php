@@ -26,7 +26,7 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 		array $labels,
 		array $descriptions,
 		array $expectedErrors,
-		array $languages = null
+		?array $languages = null
 	) {
 		if ( $languages !== null ) {
 			$this->markTestSkipped( 'No need to test specific languages check' );
@@ -55,7 +55,7 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 		array $labels,
 		array $descriptions,
 		array $expectedErrors,
-		array $languages = null
+		?array $languages = null
 	) {
 		$validator = new LabelDescriptionNotEqualValidator();
 		$labelsTermList = new TermList();

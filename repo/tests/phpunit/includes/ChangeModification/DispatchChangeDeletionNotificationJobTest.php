@@ -147,7 +147,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 		return $revisionIdentifiers;
 	}
 
-	private function countArchive( array $conditions = null ): int {
+	private function countArchive( ?array $conditions = null ): int {
 		$selectQueryBuilder = $this->getDb()->newSelectQueryBuilder();
 		$selectQueryBuilder->table( 'archive' );
 		if ( $conditions !== null ) { // ->where( $conditions ?: IDatabase::ALL_ROWS doesn’t work (T332329)

@@ -116,8 +116,8 @@ class LabelPrefetchHookHandlerTest extends TestCase {
 	protected function getPrefetchTermsCallback( $expectedIds, $expectedTermTypes, $expectedLanguageCodes ) {
 		$prefetchTerms = function (
 			array $entityIds,
-			array $termTypes = null,
-			array $languageCodes = null
+			array $termTypes,
+			array $languageCodes
 		) use (
 			$expectedIds,
 			$expectedTermTypes,

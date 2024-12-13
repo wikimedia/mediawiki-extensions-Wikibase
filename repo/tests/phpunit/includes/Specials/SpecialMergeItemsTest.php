@@ -203,7 +203,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return $titleLookup;
 	}
 
-	private function executeSpecialMergeItems( array $params, User $user = null ): string {
+	private function executeSpecialMergeItems( array $params, ?User $user = null ): string {
 		if ( !$user ) {
 			// TODO Matching the token of a non-anonymous user is complicated.
 			$user = new User;

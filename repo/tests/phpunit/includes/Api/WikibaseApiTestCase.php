@@ -191,8 +191,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected function doTestQueryExceptions(
 		array $params,
 		array $exception,
-		Authority $user = null,
-		$token = true
+		?Authority $user = null,
+		bool $token = true
 	) {
 		try {
 			if ( $token ) {
@@ -444,8 +444,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	protected function assertCanTagSuccessfulRequest(
 		array $params,
-		array $session = null,
-		Authority $user = null,
+		?array $session = null,
+		?Authority $user = null,
 		$tokenType = 'csrf'
 	) {
 		$dummyTag = __METHOD__ . '-dummy-tag';

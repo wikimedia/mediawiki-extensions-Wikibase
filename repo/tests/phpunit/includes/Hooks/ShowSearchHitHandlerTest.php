@@ -143,8 +143,8 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function getShowSearchHitHandler(
 		array $entities = [],
-		EntityLookup $lookup = null,
-		TermLanguageFallbackChain $fallbackChain = null
+		?EntityLookup $lookup = null,
+		?TermLanguageFallbackChain $fallbackChain = null
 	) {
 		return new ShowSearchHitHandler(
 			$this->getEntityContentFactory(),
@@ -154,7 +154,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getFallbackChainFactory( TermLanguageFallbackChain $mockChain = null ): LanguageFallbackChainFactory {
+	private function getFallbackChainFactory( ?TermLanguageFallbackChain $mockChain = null ): LanguageFallbackChainFactory {
 		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		if ( $mockChain !== null ) {
 			$factory->method( 'newFromContext' )->willReturn( $mockChain );
@@ -186,7 +186,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param Item[]|null $entities Map ID -> Entity
 	 * @return EntityLookup
 	 */
-	private function getEntityLookup( array $entities = null ) {
+	private function getEntityLookup( ?array $entities = null ) {
 		$entityLookup = $this->createMock( EntityLookup::class );
 		if ( isset( $entities ) ) {
 			$entityLookup->method( 'getEntity' )

@@ -101,7 +101,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$this->assertEquals( $title->getText(), $id->getSerialization() );
 	}
 
-	protected static function newEntity( EntityId $id = null ) {
+	protected static function newEntity( ?EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new NumericPropertyId( 'P7' );
 		}
@@ -129,12 +129,12 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return PropertyHandler
 	 */
-	protected function getHandler( SettingsArray $settings = null ) {
+	protected function getHandler( ?SettingsArray $settings = null ) {
 		$this->getWikibaseRepo( $settings ); // updates services as needed
 		return WikibaseRepo::getPropertyHandler();
 	}
 
-	protected static function newEntityContent( EntityDocument $entity = null ): EntityContent {
+	protected static function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
 		return new PropertyContent( new EntityInstanceHolder( $entity ?? self::newEntity() ) );
 	}
 

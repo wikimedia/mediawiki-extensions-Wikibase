@@ -69,7 +69,7 @@ class FullStatementRdfBuilderTest extends \MediaWikiIntegrationTestCase {
 		$flavor,
 		array &$mentioned = [],
 		?RdfVocabulary $vocabulary = null,
-		DedupeBag $dedupe = null
+		?DedupeBag $dedupe = null
 	) {
 		$vocabulary ??= $this->getTestData()->getVocabulary();
 

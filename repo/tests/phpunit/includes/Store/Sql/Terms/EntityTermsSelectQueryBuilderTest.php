@@ -121,7 +121,7 @@ class EntityTermsSelectQueryBuilderTest extends TestCase {
 		);
 	}
 
-	public function newTermsDb( MockDatabase $db = null ): TermsDomainDb {
+	public function newTermsDb( ?MockDatabase $db = null ): TermsDomainDb {
 		$db ??= new MockDatabase();
 		$termsDb = $this->createStub( TermsDomainDb::class );
 		$termsDb->method( 'getReadConnection' )->willReturn( $db );

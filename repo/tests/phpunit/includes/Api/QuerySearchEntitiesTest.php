@@ -131,8 +131,8 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 	private function callApi(
 		array $params,
 		array $matches,
-		ApiPageSet $resultPageSet = null,
-		Status $failureStatus = null
+		?ApiPageSet $resultPageSet = null,
+		?Status $failureStatus = null
 	): ?array {
 		// defaults from SearchEntities
 		$params = array_merge( [

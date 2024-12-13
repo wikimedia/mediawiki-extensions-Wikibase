@@ -157,7 +157,7 @@ class MwEraParserTest extends MediaWikiIntegrationTestCase {
 	 * @param mixed $expected
 	 * @param ValueParser|null $parser
 	 */
-	public function testParseWithValidInputs( $value, $expected, ValueParser $parser = null ) {
+	public function testParseWithValidInputs( $value, $expected, ?ValueParser $parser = null ) {
 		$parser ??= $this->getInstance();
 
 		$this->assertSmartEquals( $expected, $parser->parse( $value ) );

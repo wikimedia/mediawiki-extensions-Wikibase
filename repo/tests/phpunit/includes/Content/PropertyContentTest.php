@@ -52,7 +52,7 @@ class PropertyContentTest extends EntityContentTestCase {
 	/**
 	 * @dataProvider provideValidConstructorArguments
 	 */
-	public function testConstructor( EntityHolder $holder = null ) {
+	public function testConstructor( ?EntityHolder $holder ) {
 		$content = new PropertyContent( $holder );
 		$this->assertInstanceOf( PropertyContent::class, $content );
 	}
@@ -90,7 +90,7 @@ class PropertyContentTest extends EntityContentTestCase {
 	 * @throws InvalidArgumentException
 	 * @return PropertyContent
 	 */
-	protected static function newBlank( EntityId $propertyId = null ) {
+	protected static function newBlank( ?EntityId $propertyId = null ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );
 		return new PropertyContent( new EntityInstanceHolder( $property ) );

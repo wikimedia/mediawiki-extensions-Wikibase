@@ -79,7 +79,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityContent A content object that contains an entity that is empty.
 	 */
-	abstract protected static function newBlank( EntityId $entityId = null );
+	abstract protected static function newBlank( ?EntityId $entityId = null );
 
 	public function testIsEmpty() {
 		$this->assertTrue( $this->newEmpty()->isEmpty(), 'empty' );
@@ -414,7 +414,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider entityRedirectProvider
 	 */
-	public function testGetEntityRedirect( callable $contentProvider, EntityRedirect $redirect = null ) {
+	public function testGetEntityRedirect( callable $contentProvider, ?EntityRedirect $redirect ) {
 		$content = $contentProvider( $this );
 		$this->assertEquals( $content->getEntityRedirect(), $redirect );
 

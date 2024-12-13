@@ -21,9 +21,9 @@ class ChangeOpResultStub implements ChangeOpResult {
 	public ?array $validationErrors;
 
 	public function __construct(
-		EntityId $entityId = null,
-		bool $isEntityChanged = false,
-		array $validationErrors = null
+		?EntityId $entityId,
+		bool $isEntityChanged,
+		?array $validationErrors = null
 	) {
 		$this->isEntityChanged = $isEntityChanged;
 		$this->entityId = $entityId;

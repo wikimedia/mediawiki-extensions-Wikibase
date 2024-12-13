@@ -115,7 +115,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	protected static function newEntityContent( EntityDocument $entity = null ): EntityContent {
+	protected static function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}
@@ -157,7 +157,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		];
 	}
 
-	protected static function newEntity( EntityId $id = null ) {
+	protected static function newEntity( ?EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new ItemId( 'Q7' );
 		}
@@ -170,7 +170,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return ItemHandler
 	 */
-	protected function getHandler( SettingsArray $settings = null ) {
+	protected function getHandler( ?SettingsArray $settings = null ) {
 		$this->getWikibaseRepo( $settings ); // updates services as needed
 		return WikibaseRepo::getItemHandler();
 	}

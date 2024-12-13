@@ -43,7 +43,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		$instance->method( 'getDetailedValue' )
-			->willReturnCallback( function( PropertyValueSnak $snak = null ) {
+			->willReturnCallback( function( ?PropertyValueSnak $snak ) {
 				return $snak === null ? null : $snak->getDataValue()->getValue() . ' (DETAILED)';
 			} );
 

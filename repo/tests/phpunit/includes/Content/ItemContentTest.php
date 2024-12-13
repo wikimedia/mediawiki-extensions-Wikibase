@@ -80,8 +80,8 @@ class ItemContentTest extends EntityContentTestCase {
 	 */
 	public function testConstructor(
 		callable $titleFactory,
-		EntityHolder $holder = null,
-		EntityRedirect $redirect = null
+		?EntityHolder $holder,
+		?EntityRedirect $redirect
 	) {
 		$title = $titleFactory( $this );
 		$content = new ItemContent( $holder, $redirect, $title );
@@ -118,9 +118,9 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testConstructorExceptions(
-		EntityHolder $holder = null,
-		EntityRedirect $redirect = null,
-		callable $titleFactory = null
+		?EntityHolder $holder,
+		?EntityRedirect $redirect,
+		?callable $titleFactory
 	) {
 		$title = $titleFactory == null ? null : $titleFactory( $this );
 		$this->expectException( InvalidArgumentException::class );
@@ -154,7 +154,7 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @throws InvalidArgumentException
 	 * @return ItemContent
 	 */
-	protected static function newBlank( EntityId $itemId = null ) {
+	protected static function newBlank( ?EntityId $itemId = null ) {
 		return new ItemContent( new EntityInstanceHolder( new Item( $itemId ) ) );
 	}
 

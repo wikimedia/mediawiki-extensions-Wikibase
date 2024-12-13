@@ -195,8 +195,8 @@ class TermboxViewTest extends TestCase {
 		TermboxRenderer $renderer,
 		LocalizedTextProvider $textProvider,
 		SpecialPageLinker $specialPageLinker,
-		LanguageFallbackChainFactory $fallbackChainFactory = null,
-		TextInjector $textInjector = null
+		?LanguageFallbackChainFactory $fallbackChainFactory = null,
+		?TextInjector $textInjector = null
 	): TermboxView {
 		return new TermboxView(
 			$fallbackChainFactory ?: new LanguageFallbackChainFactory(),

@@ -125,8 +125,8 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 		SummaryFormatter $summaryFormatter,
 		string $normalizedPageName,
 		Item $titleItem,
-		EntityRevisionLookup $editEntityLookup = null,
-		EntityStore $editEntityStore = null,
+		?EntityRevisionLookup $editEntityLookup,
+		?EntityStore $editEntityStore,
 		array $tags = []
 	): UpdateRepoOnMoveJob {
 		if ( !isset( $editEntityLookup ) ) {

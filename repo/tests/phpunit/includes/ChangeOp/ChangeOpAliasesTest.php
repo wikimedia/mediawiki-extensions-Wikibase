@@ -88,7 +88,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 	public function testApply(
 		Item $item,
 		array $changeOpAliasesParams,
-		array $expectedAliases = null
+		?array $expectedAliases
 	) {
 		$changeOpAliasesParams[] = $this->getTermValidatorFactory();
 		$changeOpAliases = new ChangeOpAliases( ...$changeOpAliasesParams );

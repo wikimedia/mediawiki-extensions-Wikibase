@@ -265,8 +265,8 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newRdfBuilder(
 		int $produce,
-		DedupeBag $dedup = null,
-		RdfVocabulary $vocabulary = null
+		?DedupeBag $dedup = null,
+		?RdfVocabulary $vocabulary = null
 	): RdfBuilder {
 		$siteLookup = $this->getTestData()->getSiteLookup();
 

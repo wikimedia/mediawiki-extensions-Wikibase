@@ -129,7 +129,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	private function getContext( User $user = null ): IContextSource {
+	private function getContext( ?User $user = null ): IContextSource {
 		if ( !$user ) {
 			$user = $this->getTestUser()->getUser();
 		}

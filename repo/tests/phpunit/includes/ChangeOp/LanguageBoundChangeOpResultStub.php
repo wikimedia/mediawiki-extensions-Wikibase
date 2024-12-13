@@ -17,10 +17,10 @@ class LanguageBoundChangeOpResultStub extends ChangeOpResultStub implements Lang
 	private $languageCode;
 
 	public function __construct(
-		EntityId $entityId = null,
-		$isEntityChanged = false,
-		$languageCode = '',
-		array $validationErrors = null
+		?EntityId $entityId,
+		bool $isEntityChanged,
+		string $languageCode,
+		?array $validationErrors = null
 	) {
 		parent::__construct( $entityId, $isEntityChanged, $validationErrors );
 		$this->languageCode = $languageCode;

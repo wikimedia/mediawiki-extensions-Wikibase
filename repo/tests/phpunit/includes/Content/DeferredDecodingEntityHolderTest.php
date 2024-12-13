@@ -36,14 +36,11 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 * @param string|null $expectedEntityType
-	 * @param EntityId|null $expectedEntityId
-	 *
-	 * @return EntityHolder
-	 */
-	private function newHolder( EntityDocument $entity, $expectedEntityType = null, EntityId $expectedEntityId = null ) {
+	private function newHolder(
+		EntityDocument $entity,
+		?string $expectedEntityType = null,
+		?EntityId $expectedEntityId = null
+	): EntityHolder {
 		$codec = new EntityContentDataCodec(
 			new ItemIdParser(),
 			WikibaseRepo::getStorageEntitySerializer(),

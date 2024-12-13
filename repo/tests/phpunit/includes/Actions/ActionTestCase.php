@@ -158,7 +158,7 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 *
 	 * @return Action
 	 */
-	protected function createAction( string $actionName, WikiPage $page, array $params = null, $wasPosted = false ) {
+	protected function createAction( string $actionName, WikiPage $page, ?array $params = null, $wasPosted = false ) {
 		global $wgLang;
 
 		$params ??= [];
