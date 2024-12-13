@@ -1,7 +1,7 @@
 <?php
 
 declare( strict_types = 1 );
-namespace Wikibase\Repo\Tests\FederatedProperties\Hooks;
+namespace Wikibase\Repo\Tests\Hooks;
 
 use DifferenceEngine;
 use MediaWiki\CommentStore\CommentStoreComment;
@@ -53,11 +53,6 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 	 */
 	private $languageFallback;
 
-	/**
-	 * @var string[]
-	 */
-	private $languageCodes;
-
 	protected function setUp(): void {
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
@@ -73,14 +68,12 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 			LanguageWithConversion::factory( 'en' ),
 		], $stubContentLanguages );
 
-		$this->languageCodes = $this->languageFallback->getFetchLanguageCodes();
-
 		$this->languageFallbackChainFactory->method( 'newFromContext' )
 			->withAnyParameters()
 			->willReturn( $this->languageFallback );
 	}
 
-	public function testPrefetchesFederatedProperties() {
+	public function testPrefetchesTerms() {
 
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
@@ -97,8 +90,13 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				[ new NumericPropertyId( "P32456" ), new NumericPropertyId( "P12345" ) ],
-				[ TermTypes::TYPE_LABEL ],
+				[
+					new NumericPropertyId( "P32456" ),
+					new ItemId( 'Q101' ),
+					new NumericPropertyId( "P12345" ),
+					new ItemId( 'Q102' )
+				],
+				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ],
 				[ 'sv', 'de', 'en' ]
 			);
 
@@ -109,7 +107,7 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$hook->onDifferenceEngineViewHeader( $diffEngine );
 	}
 
-	public function testPrefetchesFederatedPropertiesEntityIdNotFoundByTitle() {
+	public function testPrefetchesTermsEntityIdNotFoundByTitle() {
 
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
@@ -132,13 +130,12 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$hook->onDifferenceEngineViewHeader( $diffEngine );
 	}
 
-	public function testPrefetchesFederatedPropertiesOldRevisionNotSet() {
+	public function testPrefetchesTermsOldRevisionNotSet() {
 
 		$itemId = new ItemId( "Q1" );
 		$this->entity = new Item( $itemId );
 
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P32456" ) ) ) );
-		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P12345" ) ) ) );
+		$this->entity->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( "P4321" ) ) ) );
 
 		$this->linkTargetEntityIdLookup->expects( $this->once() )
 			->method( 'getEntityId' )
@@ -149,23 +146,23 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
-				[ new NumericPropertyId( "P12345" ) ],
-				[ TermTypes::TYPE_LABEL ],
+				[
+					new NumericPropertyId( "P4321" ),
+					new ItemId( 'Q101' ),
+				],
+				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ],
 				[ 'sv', 'de', 'en' ]
 			);
 
-		$diffEngine = $this->getMockedDiffEngine( null, $rows[1], 'Q1' );
+		$diffEngine = $this->getMockedDiffEngine( null, $rows[0], 'Q1' );
 
 		$hook = $this->getNewHookHandler();
 
 		$hook->onDifferenceEngineViewHeader( $diffEngine );
 	}
 
-	private function getNewHookHandler(
-		bool $federatedProperties = true
-	) {
+	private function getNewHookHandler() {
 		return new DifferenceEngineViewHeaderHookHandler(
-			$federatedProperties,
 			$this->languageFallbackChainFactory,
 			$this->linkTargetEntityIdLookup,
 			new SummaryParsingPrefetchHelper( $this->prefetchingLookup )
@@ -177,11 +174,13 @@ class DifferenceEngineViewHeaderHookHandlerTest extends TestCase {
 			return $snak->getPropertyId();
 		}, $this->entity->getStatements()->getAllSnaks() );
 
-		$rows = array_map( function ( $prop ) {
+		$i = 100;
+		$rows = array_map( function ( $prop ) use ( &$i ) {
+			$i++;
 			$object = new MutableRevisionRecord( Title::newFromTextThrow( $prop->getSerialization() ) );
 			$object->setComment( new CommentStoreComment(
 				null,
-				"[[Property:{$prop->getSerialization()}]]"
+				"[[Property:{$prop->getSerialization()}]] - [[Q$i]]"
 			) );
 			return $object;
 		}, $availableProperties );
