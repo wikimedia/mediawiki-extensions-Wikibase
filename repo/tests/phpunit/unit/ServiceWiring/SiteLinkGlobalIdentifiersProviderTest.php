@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Site\HashSiteStore;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -29,9 +30,7 @@ class SiteLinkGlobalIdentifiersProviderTest extends ServiceWiringTestCase {
 		$this->serviceContainer
 			->expects( $this->once() )
 			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( [
-				'SecretKey' => 'Foo',
-			] ) );
+			->willReturn( new HashConfig( [ MainConfigNames::SecretKey => 'Foo' ] ) );
 
 		$this->assertInstanceOf(
 			SiteLinkGlobalIdentifiersProvider::class,

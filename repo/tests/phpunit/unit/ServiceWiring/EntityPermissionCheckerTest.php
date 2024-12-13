@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
@@ -28,7 +29,7 @@ class EntityPermissionCheckerTest extends ServiceWiringTestCase {
 			->method( 'getPermissionManager' );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
-			->willReturn( new HashConfig( [ 'AvailableRights' => [] ] ) );
+			->willReturn( new HashConfig( [ MainConfigNames::AvailableRights => [] ] ) );
 
 		$this->assertInstanceOf(
 			WikiPageEntityStorePermissionChecker::class,
