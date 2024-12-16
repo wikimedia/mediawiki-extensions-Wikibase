@@ -15,6 +15,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "до 1/10 лачна секунда",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "до 1/100 лачна секунда",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "до 1/1000 лачна секунда",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "грегоријански",
 	"valueview-expert-timevalue-calendar-julian": "јулијански",
 	"valueview-expert-timeinput-precision": "Уточнетост:",

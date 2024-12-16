@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cabal"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ਖ਼ਾਲੀ",
+	"valueview-expert-globecoordinateinput-precision": "ਸ਼ੁੱਧਤਾ (Pricision):",
+	"valueview-expert-globecoordinateinput-customprecision": "ਖ਼ਾਸ ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "ਇੱਕ ਚਾਪ-ਮਿੰਟ ਤੱਕ",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਤੱਕ",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਦੇ 1/10 ਤੱਕ",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਦੇ 1/100 ਤੱਕ",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਦੇ 1/1000 ਤੱਕ",
+	"valueview-expert-timevalue-calendar-gregorian": "ਗ੍ਰੈਗੋਰੀਅਨ",
+	"valueview-expert-timevalue-calendar-julian": "ਜੂਲੀਅਨ",
+	"valueview-expert-timeinput-precision": "ਸ਼ੁੱਧਤਾ (Pricision):",
+	"valueview-expert-timeinput-precision-year1g": "ਅਰਬ ਸਾਲ",
+	"valueview-expert-timeinput-precision-year100m": "ਲੱਖਾਂ ਸਾਲ",
+	"valueview-expert-timeinput-precision-year10m": "10 ਲੱਖ ਸਾਲ",
+	"valueview-expert-timeinput-precision-year1m": "ਲੱਖਾਂ ਸਾਲ",
+	"valueview-expert-timeinput-precision-year100k": "100, 000 ਸਾਲ",
+	"valueview-expert-timeinput-precision-year10k": "10, 000 ਸਾਲ",
+	"valueview-expert-timeinput-precision-year1k": "ਹਜ਼ਾਰ ਸਾਲ",
+	"valueview-expert-timeinput-precision-year100": "ਸਦੀ",
+	"valueview-expert-timeinput-precision-year10": "ਦਹਾਕਾ",
+	"valueview-expert-timeinput-precision-year": "ਸਾਲ",
+	"valueview-expert-timeinput-precision-month": "ਮਹੀਨਾ",
+	"valueview-expert-timeinput-precision-day": "ਦਿਨ",
+	"valueview-expert-timeinput-precision-hour": "ਘੰਟਾ",
+	"valueview-expert-timeinput-precision-minute": "ਮਿੰਟ",
+	"valueview-expert-timeinput-precision-second": "ਸੈਕਿੰਡ",
+	"valueview-expert-timeinput-calendar": "ਕੈਲੰਡਰ",
+	"valueview-expertextender-languageselector-label": "ਭਾਸ਼ਾ (ਲਾਜ਼ਮੀ):",
+	"valueview-expertextender-unitsuggester-label": "ਇਕਾਈ (ਇਖਤਿਆਰੀ):",
+	"valueview-preview-label": "ਇਸ ਤਰ੍ਹਾਂ ਦਿਖਾਈ ਦੇਵੇਗਾ/ਦੇਵੀਗੀ:",
+	"valueview-preview-novalue": "ਕੋਈ ਜਾਇਜ਼ ਮੁੱਲ ਨਹੀਂ ਪਛਾਣਿਆ ਗਿਆ"
+}
