@@ -11,7 +11,6 @@ $IP = $GLOBALS['IP'];
 
 // Faking in lieu of Setup.php
 $GLOBALS['wgAutoloadClasses'] = [];
-$GLOBALS['wgBaseDirectory'] = MW_INSTALL_PATH;
 
 TestSetup::requireOnceInGlobalScope( "$IP/includes/AutoLoader.php" );
 TestSetup::requireOnceInGlobalScope( "$IP/includes/Defines.php" );
