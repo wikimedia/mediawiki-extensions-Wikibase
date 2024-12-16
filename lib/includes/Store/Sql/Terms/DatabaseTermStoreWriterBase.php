@@ -50,7 +50,7 @@ abstract class DatabaseTermStoreWriterBase {
 	}
 
 	private function getDbw(): IDatabase {
-		return $this->termsDb->connections()->getWriteConnection();
+		return $this->termsDb->getWriteConnection();
 	}
 
 	protected function delete( Int32EntityId $entityId ): void {

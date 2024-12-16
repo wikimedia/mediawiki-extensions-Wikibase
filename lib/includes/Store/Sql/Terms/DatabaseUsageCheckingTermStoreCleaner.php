@@ -40,8 +40,8 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 */
 	public function cleanTermInLangIds( array $termInLangIds ): void {
 
-		$dbw = $this->termsDb->connections()->getWriteConnection();
-		$dbr = $this->termsDb->connections()->getReadConnection();
+		$dbw = $this->termsDb->getWriteConnection();
+		$dbr = $this->termsDb->getReadConnection();
 
 		$dbw->startAtomic( __METHOD__ );
 		$unusedTermInLangIds = $this->findActuallyUnusedTermInLangIds( $termInLangIds, $dbw );

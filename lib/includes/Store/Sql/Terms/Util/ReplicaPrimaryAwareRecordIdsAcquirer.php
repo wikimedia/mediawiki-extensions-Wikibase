@@ -169,7 +169,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 				// gets stuck in an infinite loop. To avoid this, we read it with CONN_TRX_AUTOCOMMIT
 				// Surprisingly it's not too rare not to happen in production: T247553
 
-				$dbw = $this->termsDb->connections()->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
+				$dbw = $this->termsDb->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
 
 				$insertedRecords = array_merge(
 					$insertedRecords,
@@ -216,7 +216,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		// If not all needed records exist in replica,
 		// try wait for replication and fetch again from replica
 		if ( $neededRecords ) {
-			$this->termsDb->replication()->waitForAllAffectedClusters( $this->waitForReplicationTimeout );
+			$this->termsDb->waitForReplicationOfAllAffectedClusters( $this->waitForReplicationTimeout );
 
 			$existingRecords = array_merge(
 				$existingRecords,
@@ -230,11 +230,11 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 	}
 
 	private function getDbReplica(): IReadableDatabase {
-		return $this->termsDb->connections()->getReadConnection();
+		return $this->termsDb->getReadConnection();
 	}
 
 	private function getDbPrimary(): IDatabase {
-		return $this->termsDb->connections()->getWriteConnection();
+		return $this->termsDb->getWriteConnection();
 	}
 
 	/**
