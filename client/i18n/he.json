@@ -70,7 +70,7 @@
 	"wikibase-error-deserialize-error": "הוצאת נתונים מהסדרה לא עבדה.",
 	"wikibase-error-serialize-error": "הסדרת הנתונים נכשלה.",
 	"wikibase-error-invalid-entity-id": "המזהה \"$2\" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
-	"wikibase-error-exceeded-entity-access-limit": "נעשתה גישה ליותר מדי ישויות {{WBREPONAME}}.",
+	"wikibase-error-exceeded-entity-access-limit": "נעשתה גישה ליותר מדי ישויות {{WBREPONAME}}. מספר הישויות שנטענו: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "יותר מדי קריאות ל־\"mw.wikibase.getReferencedEntityId\", המספר המרבי המותר הוא {{PLURAL:$2|קריאה אחת|$2 קריאות}}.",
 	"unconnectedpages": "דפים שאינם מקושרים לפריטים",
 	"unconnectedpages-summary": "הדף הזה מציג רשימת דפים שאין פריט נתונים שמקושר אליהם (במרחבי שם שתומכים בפריטים מקושרים).",

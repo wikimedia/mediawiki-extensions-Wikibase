@@ -97,7 +97,7 @@
 	"wikibase-error-deserialize-error": "Échec lors de la désérialisation des données.",
 	"wikibase-error-serialize-error": "Échec lors de la sérialisation des données.",
 	"wikibase-error-invalid-entity-id": "L’identifiant « $2 » est inconnu du système. Veuillez utiliser un identifiant d’entité valide.",
-	"wikibase-error-exceeded-entity-access-limit": "Trop d’entités de {{WBREPONAME}} accédées.",
+	"wikibase-error-exceeded-entity-access-limit": "Accès à trop d’entités {{WBREPONAME}}. Nombre d'entités chargées : $2/$3",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Trop d’appels à « mw.wikibase.getReferencedEntityId », {{PLURAL:$2|$2 seul est autorisé|$2 au plus sont autorisés}}.",
 	"unconnectedpages": "Pages non reliées à un élément",
 	"unconnectedpages-summary": "Cette page répertorie les pages non connectées à un élément de données (dans les espaces de noms qui prennent en charge les éléments connectés).",

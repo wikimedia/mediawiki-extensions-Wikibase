@@ -68,7 +68,7 @@
 	"wikibase-error-deserialize-error": "Daten konnten nicht deserialisiert werden.",
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",
 	"wikibase-error-invalid-entity-id": "Die Kennung „$2“ ist dem System unbekannt. Bitte verwende eine gültige Objektkennung.",
-	"wikibase-error-exceeded-entity-access-limit": "Auf zu viele {{WBREPONAME}}-Objekte zugegriffen.",
+	"wikibase-error-exceeded-entity-access-limit": "Auf zu viele {{WBREPONAME}}-Objekte zugegriffen. Anzahl der geladenen Objekte: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Zu viele Aufrufe von „mw.wikibase.getReferencedEntityId“, nur bis zu $2 {{PLURAL:$2|ist|sind}} erlaubt.",
 	"unconnectedpages": "Seiten, die nicht mit Objekten verbunden sind",
 	"unconnectedpages-summary": "Diese Seite listet Seiten ohne verbundenes Datenobjekt auf (in Namensräumen, die verbundene Objekte unterstützen).",

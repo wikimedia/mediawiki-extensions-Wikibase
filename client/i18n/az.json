@@ -67,7 +67,7 @@
 	"wikibase-error-deserialize-error": "Məlumatları deseriallaşdırmaqda uğursuzluq.",
 	"wikibase-error-serialize-error": "Məlumatları seriallaşdırmaqda uğursuzluq.",
 	"wikibase-error-invalid-entity-id": "\"$2\" identifikatoru sistemə məlum deyil. Zəhmət olmasa etibarlı element ID-sindən istifadə edin.",
-	"wikibase-error-exceeded-entity-access-limit": "Həddindən artıq {{WBREPONAME}} elementinə giriş.",
+	"wikibase-error-exceeded-entity-access-limit": "Həddindən artıq {{WBREPONAME}} obyektinə giriş edilib. Yüklənmiş obyektlərin sayı: $2/$3 .",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Həddindən artıq \"mw.wikibase.getReferencedEntityId\" çağırışları, yalnız $2 ədədinə {{PLURAL:$2|icazə verilir}}.",
 	"unconnectedpages": "Elementlərə bağlı olmayan səhifələr",
 	"unconnectedpages-summary": "Bu səhifə heç bir qoşulu data elementi olmayan səhifələri göstərir (əlaqəli elementləri dəstəkləyən ad fəzalarında).",

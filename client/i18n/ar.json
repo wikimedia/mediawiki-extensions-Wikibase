@@ -88,7 +88,7 @@
 	"wikibase-error-deserialize-error": "فشل إلغاء تسلسل البيانات.",
 	"wikibase-error-serialize-error": "فشل في تسلسل البيانات.",
 	"wikibase-error-invalid-entity-id": "المعرِّف الذي $2 يجهله النظام; يُرجَى إدخال معرِّف كائن صالح.",
-	"wikibase-error-exceeded-entity-access-limit": "الكثير من كيانات {{WBREPONAME}} يتم الوصول لها.",
+	"wikibase-error-exceeded-entity-access-limit": "تم الوصول إلى عدد كبير جدا من كيانات {{WBREPONAME}}. عدد الكيانات المحملة: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "عدد كبير جدا من ادعاءات \"mw.wikibase.getReferencedEntityId\"، فقط ما يصل إلى $2 {{PLURAL:$2|مسموح به}}.",
 	"unconnectedpages": "صفحات غير متصلة بعناصر",
 	"unconnectedpages-summary": "تسرد هذه الصفحة الصفحات التي لا تحتوي على عنصر بيانات متصل (في مساحات الأسماء التي تدعم العناصر المتصلة).",

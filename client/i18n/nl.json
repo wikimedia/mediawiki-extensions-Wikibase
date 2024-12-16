@@ -83,7 +83,7 @@
 	"wikibase-error-deserialize-error": "De gegevens konden niet ge-de-serialiseerd worden.",
 	"wikibase-error-serialize-error": "De gegevens konden niet geserialiseerd worden",
 	"wikibase-error-invalid-entity-id": "Het ID \"$2\" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",
-	"wikibase-error-exceeded-entity-access-limit": "Te veel {{WBREPONAME}}-entiteiten opgevraagd.",
+	"wikibase-error-exceeded-entity-access-limit": "Te veel {{WBREPONAME}}-entiteiten opgevraagd. Aantal geladen entiteiten: $2 van de $3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Te veel aanroepen naar \"mw.wikibase.getReferencedEntityId\", er {{PLURAL:$2|is|zijn}} maar $2 toegestaan.",
 	"unconnectedpages": "Pagina's die niet gekoppeld zijn aan items",
 	"unconnectedpages-summary": "Deze pagina toont de pagina's die niet gekoppeld zijn aan een item op Wikidata (in naamruimten die gekoppelde items toestaan).",
