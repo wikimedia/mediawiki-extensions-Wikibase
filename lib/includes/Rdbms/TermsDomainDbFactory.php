@@ -18,11 +18,11 @@ class TermsDomainDbFactory {
 	}
 
 	public function newTermsDb(): TermsDomainDb {
-		return new TermsDomainDb( $this->repoDomainDbFactory->newRepoDb() );
+		return new RepoDomainTermsDb( $this->repoDomainDbFactory->newRepoDb() );
 	}
 
 	public function newForEntitySource( DatabaseEntitySource $entitySource ): TermsDomainDb {
-		return new TermsDomainDb( $this->repoDomainDbFactory->newForEntitySource( $entitySource ) );
+		return new RepoDomainTermsDb( $this->repoDomainDbFactory->newForEntitySource( $entitySource ) );
 	}
 
 }

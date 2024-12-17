@@ -6,19 +6,19 @@ namespace Wikibase\Lib\Tests\Rdbms;
 
 use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * @covers \Wikibase\Lib\Rdbms\TermsDomainDb
+ * @covers \Wikibase\Lib\Rdbms\RepoDomainTermsDb
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
+class RepoDomainTermsDbTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetReadConnection(): void {
 		$loadGroups = [ 'some group' ];
@@ -36,7 +36,7 @@ class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame(
 			$expected,
-			( new TermsDomainDb( $repoDomainDb ) )->getReadConnection( $loadGroups, $flags )
+			( new RepoDomainTermsDb( $repoDomainDb ) )->getReadConnection( $loadGroups, $flags )
 		);
 	}
 
@@ -55,7 +55,7 @@ class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame(
 			$expected,
-			( new TermsDomainDb( $repoDomainDb ) )->getWriteConnection( $flags )
+			( new RepoDomainTermsDb( $repoDomainDb ) )->getWriteConnection( $flags )
 		);
 	}
 
@@ -69,7 +69,7 @@ class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
 		$repoDomainDb = $this->createStub( RepoDomainDb::class );
 		$repoDomainDb->method( 'replication' )->willReturn( $replicationWaiter );
 
-		( new TermsDomainDb( $repoDomainDb ) )->waitForReplicationOfAllAffectedClusters( $timeout );
+		( new RepoDomainTermsDb( $repoDomainDb ) )->waitForReplicationOfAllAffectedClusters( $timeout );
 	}
 
 	public function testLoadBalancer(): void {
@@ -77,7 +77,7 @@ class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
 		$repoDomainDb = $this->createStub( RepoDomainDb::class );
 		$repoDomainDb->method( 'loadBalancer' )->willReturn( $expected );
 
-		$this->assertSame( $expected, ( new TermsDomainDb( $repoDomainDb ) )->loadBalancer() );
+		$this->assertSame( $expected, ( new RepoDomainTermsDb( $repoDomainDb ) )->loadBalancer() );
 	}
 
 	public function testDomain(): void {
@@ -85,7 +85,7 @@ class TermsDomainDbTest extends \PHPUnit\Framework\TestCase {
 		$repoDomainDb = $this->createStub( RepoDomainDb::class );
 		$repoDomainDb->method( 'domain' )->willReturn( $expected );
 
-		$this->assertSame( $expected, ( new TermsDomainDb( $repoDomainDb ) )->domain() );
+		$this->assertSame( $expected, ( new RepoDomainTermsDb( $repoDomainDb ) )->domain() );
 	}
 
 }
