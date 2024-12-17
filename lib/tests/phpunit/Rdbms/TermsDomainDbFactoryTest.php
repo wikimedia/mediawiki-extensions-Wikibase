@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Tests\Rdbms;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
-use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 
 /**
@@ -26,7 +26,7 @@ class TermsDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $this->createStub( RepoDomainDb::class ) );
 
 		$this->assertInstanceOf(
-			TermsDomainDb::class,
+			RepoDomainTermsDb::class,
 			( new TermsDomainDbFactory( $repoDbFactory ) )->newTermsDb()
 		);
 	}
@@ -40,7 +40,7 @@ class TermsDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $this->createStub( RepoDomainDb::class ) );
 
 		$this->assertInstanceOf(
-			TermsDomainDb::class,
+			RepoDomainTermsDb::class,
 			( new TermsDomainDbFactory( $repoDbFactory ) )->newForEntitySource( $entitySource )
 		);
 	}

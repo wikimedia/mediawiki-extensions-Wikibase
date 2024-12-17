@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Tests\Rdbms;
 
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
-use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactorySingle;
@@ -25,8 +25,8 @@ trait LocalRepoDbTestHelper {
 		);
 	}
 
-	public function getTermsDomainDb( ?IDatabase $db = null ): TermsDomainDb {
-		return new TermsDomainDb( $this->getRepoDomainDb( $db ) );
+	public function getTermsDomainDb( ?IDatabase $db = null ): RepoDomainTermsDb {
+		return new RepoDomainTermsDb( $this->getRepoDomainDb( $db ) );
 	}
 
 	public function getRepoDomainDbFactory( ?IDatabase $db = null ): RepoDomainDbFactory {

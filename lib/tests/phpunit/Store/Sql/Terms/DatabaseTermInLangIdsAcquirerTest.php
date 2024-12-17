@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTypeIdsStore;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -30,7 +30,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	private $db;
 
 	/**
-	 * @var TermsDomainDb
+	 * @var RepoDomainTermsDb
 	 */
 	private $termsDb;
 
@@ -363,7 +363,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$lbFactory = new FakeLBFactory( [
 			'lb' => $loadBalancer,
 		] );
-		$termsDb = new TermsDomainDb( new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ) );
+		$termsDb = new RepoDomainTermsDb( new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ) );
 
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
