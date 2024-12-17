@@ -7,6 +7,7 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\UnknownValue;
 use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiSite;
@@ -103,6 +104,7 @@ use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
+use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -1015,7 +1017,13 @@ return [
 	},
 
 	'WikibaseClient.TermsDomainDbFactory' => function ( MediaWikiServices $services ): TermsDomainDbFactory {
-		return new TermsDomainDbFactory( WikibaseClient::getRepoDomainDbFactory( $services ) );
+		$virtualDomainsMapping = $services->getMainConfig()->get( MainConfigNames::VirtualDomainsMapping );
+
+		return new TermsDomainDbFactory(
+			isset( $virtualDomainsMapping[VirtualTermsDomainDb::VIRTUAL_DOMAIN_ID] ),
+			$services->getDBLoadBalancerFactory(),
+			WikibaseClient::getRepoDomainDbFactory( $services )
+		);
 	},
 
 	'WikibaseClient.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {

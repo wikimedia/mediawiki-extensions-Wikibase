@@ -8,6 +8,7 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -40,7 +41,11 @@ trait LocalRepoDbTestHelper {
 	}
 
 	public function getTermsDomainDbFactory( ?IDatabase $db = null ): TermsDomainDbFactory {
-		return new TermsDomainDbFactory( $this->getRepoDomainDbFactory( $db ) );
+		return new TermsDomainDbFactory(
+			false,
+			new FakeLBFactory( [ 'lb' => null ] ),
+			$this->getRepoDomainDbFactory( $db )
+		);
 	}
 
 }

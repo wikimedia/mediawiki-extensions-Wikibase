@@ -32,7 +32,7 @@ class RepoNoBadUsageTest extends NoBadUsageTestBase {
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],
 			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
-				'WikibaseRepo.ServiceWiring.php' => 1, // RepoDomainDbFactory service wiring
+				'WikibaseRepo.ServiceWiring.php' => 2, // RepoDomainDbFactory+TermsDomainDbFactory service wiring
 				'tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php' => true, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
 			],

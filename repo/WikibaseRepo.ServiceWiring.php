@@ -13,6 +13,7 @@ use Diff\Differ\OrderedListDiffer;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
@@ -93,6 +94,7 @@ use Wikibase\Lib\Normalization\StringValueNormalizer;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
+use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
@@ -1965,7 +1967,13 @@ return [
 	},
 
 	'WikibaseRepo.TermsDomainDbFactory' => function ( MediaWikiServices $services ): TermsDomainDbFactory {
-		return new TermsDomainDbFactory( WikibaseRepo::getRepoDomainDbFactory( $services ) );
+		$virtualDomainsMapping = $services->getMainConfig()->get( MainConfigNames::VirtualDomainsMapping );
+
+		return new TermsDomainDbFactory(
+			isset( $virtualDomainsMapping[VirtualTermsDomainDb::VIRTUAL_DOMAIN_ID] ),
+			$services->getDBLoadBalancerFactory(),
+			WikibaseRepo::getRepoDomainDbFactory( $services )
+		);
 	},
 
 	'WikibaseRepo.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {

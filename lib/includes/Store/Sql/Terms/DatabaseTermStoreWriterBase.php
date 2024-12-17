@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\StringNormalizer;
+use Wikimedia\Rdbms\DBReadOnlyError;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -54,13 +55,23 @@ abstract class DatabaseTermStoreWriterBase {
 	}
 
 	protected function delete( Int32EntityId $entityId ): void {
-		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $entityId );
-		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
+		try {
+			$termInLangIdsToClean = $this->deleteTermsWithoutClean( $entityId );
+			$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
+		} catch ( DBReadOnlyError $e ) {
+			// The terms DB may be different from the repo wiki's main DB, and an external DB's read-only state is not handled as
+			// gracefully. There is nothing to do here, though. The secondary terms storage will fix itself eventually.
+		}
 	}
 
 	protected function store( Int32EntityId $entityId, Fingerprint $fingerprint ): void {
-		$termInLangIdsToClean = $this->acquireAndInsertTerms( $entityId, $fingerprint );
-		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
+		try {
+			$termInLangIdsToClean = $this->acquireAndInsertTerms( $entityId, $fingerprint );
+			$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
+		} catch ( DBReadOnlyError $e ) {
+			// The terms DB may be different from the repo wiki's main DB, and an external DB's read-only state is not handled as
+			// gracefully. There is nothing to do here, though. The secondary terms storage will fix itself eventually.
+		}
 	}
 
 	private function submitJobToCleanTermStorageRowsIfUnused( array $termInLangIdsToClean ): void {
