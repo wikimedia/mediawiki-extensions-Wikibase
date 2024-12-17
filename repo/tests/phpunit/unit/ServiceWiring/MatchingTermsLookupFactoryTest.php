@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -30,8 +30,8 @@ class MatchingTermsLookupFactoryTest extends ServiceWiringTestCase {
 		);
 
 		$this->mockService(
-			'WikibaseRepo.RepoDomainDbFactory',
-			$this->createStub( RepoDomainDbFactory::class )
+			'WikibaseRepo.TermsDomainDbFactory',
+			$this->createStub( TermsDomainDbFactory::class )
 		);
 
 		$this->serviceContainer

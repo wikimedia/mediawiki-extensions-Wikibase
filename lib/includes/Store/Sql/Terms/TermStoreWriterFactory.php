@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\StringNormalizer;
 
 /**
@@ -22,39 +22,14 @@ use Wikibase\Lib\StringNormalizer;
  */
 class TermStoreWriterFactory {
 
-	/**
-	 * @var DatabaseEntitySource
-	 */
-	private $localEntitySource;
-
-	/**
-	 * @var StringNormalizer
-	 */
-	private $stringNormalizer;
-
-	/** @var TypeIdsAcquirer */
-	private $typeIdsAcquirer;
-
-	/** @var TypeIdsLookup */
-	private $typeIdsLookup;
-
-	/** @var TypeIdsResolver */
-	private $typeIdsResolver;
-
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $repoDb;
-
-	/**
-	 * @var JobQueueGroup
-	 */
-	private $jobQueueGroup;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
+	private DatabaseEntitySource $localEntitySource;
+	private StringNormalizer $stringNormalizer;
+	private TypeIdsAcquirer $typeIdsAcquirer;
+	private TypeIdsLookup $typeIdsLookup;
+	private TypeIdsResolver $typeIdsResolver;
+	private TermsDomainDb $termsDb;
+	private JobQueueGroup $jobQueueGroup;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		DatabaseEntitySource $localEntitySource,
@@ -62,7 +37,7 @@ class TermStoreWriterFactory {
 		TypeIdsAcquirer $typeIdsAcquirer,
 		TypeIdsLookup $typeIdsLookup,
 		TypeIdsResolver $typeIdsResolver,
-		RepoDomainDb $repoDb,
+		TermsDomainDb $termsDb,
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger
 	) {
@@ -71,7 +46,7 @@ class TermStoreWriterFactory {
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->typeIdsLookup = $typeIdsLookup;
 		$this->typeIdsResolver = $typeIdsResolver;
-		$this->repoDb = $repoDb;
+		$this->termsDb = $termsDb;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->logger = $logger;
 	}
@@ -82,7 +57,7 @@ class TermStoreWriterFactory {
 		}
 
 		return new DatabaseItemTermStoreWriter(
-			$this->repoDb,
+			$this->termsDb,
 			$this->jobQueueGroup,
 			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
 			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
@@ -96,7 +71,7 @@ class TermStoreWriterFactory {
 		}
 
 		return new DatabasePropertyTermStoreWriter(
-			$this->repoDb,
+			$this->termsDb,
 			$this->jobQueueGroup,
 			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
 			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
@@ -108,14 +83,14 @@ class TermStoreWriterFactory {
 		return new DatabaseTermInLangIdsResolver(
 			$typeResolver,
 			$typeLookup,
-			$this->repoDb,
+			$this->termsDb,
 			$this->logger
 		);
 	}
 
 	private function newTermInLangIdsAcquirer( TypeIdsAcquirer $typeAcquirer ): TermInLangIdsAcquirer {
 		return new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeAcquirer,
 			$this->logger
 		);

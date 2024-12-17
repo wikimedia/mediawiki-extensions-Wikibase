@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\DomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
@@ -39,14 +39,14 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	private $sqliteDb;
 
 	/**
-	 * @var DomainDb
+	 * @var TermsDomainDb
 	 */
-	private $repoDb;
+	private $termsDb;
 
 	protected function setUp(): void {
 		// We can't use the mediawiki integration test since we union temp tables.
 		$this->sqliteDb = $this->setUpNewDb();
-		$this->repoDb = $this->getRepoDomainDb( $this->sqliteDb );
+		$this->termsDb = $this->getTermsDomainDb( $this->sqliteDb );
 	}
 
 	private function setUpNewDb() {
@@ -206,7 +206,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function getMatchingTermsLookup() {
 		$store = new DatabaseTypeIdsStore(
-			$this->repoDb,
+			$this->termsDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
 			new NullLogger()
 		);
@@ -220,7 +220,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 			},
 		] );
 		return new DatabaseMatchingTermsLookup(
-			$this->repoDb,
+			$this->termsDb,
 			$store,
 			$store,
 			$composer,
@@ -231,15 +231,15 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	private function getItemTermStoreWriter() {
 		$logger = new NullLogger();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$this->repoDb,
+			$this->termsDb,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		return new DatabaseItemTermStoreWriter( $this->repoDb,
+		return new DatabaseItemTermStoreWriter( $this->termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $this->repoDb, $typeIdsStore, $logger ),
+			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $typeIdsStore, $logger ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
-				$this->repoDb, $logger ), new StringNormalizer()
+				$this->termsDb, $logger ), new StringNormalizer()
 		);
 	}
 

@@ -58,6 +58,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -521,6 +522,11 @@ final class WikibaseClient {
 	public static function getRepoDomainDbFactory( ?ContainerInterface $services = null ): RepoDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.RepoDomainDbFactory' );
+	}
+
+	public static function getTermsDomainDbFactory( ?ContainerInterface $services = null ): TermsDomainDbFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.TermsDomainDbFactory' );
 	}
 
 	public static function getEntitySourceAndTypeDefinitions( ?ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {

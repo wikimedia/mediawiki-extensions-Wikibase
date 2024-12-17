@@ -9,7 +9,7 @@ use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
@@ -35,7 +35,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 	use LocalRepoDbTestHelper;
 
 	/**
-	 * @var RepoDomainDbFactory
+	 * @var TermsDomainDbFactory
 	 */
 	private $dbFactory;
 
@@ -60,20 +60,20 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
-		$this->dbFactory = $this->getRepoDomainDbFactory();
+		$this->dbFactory = $this->getTermsDomainDbFactory();
 		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-		$repoDb = $this->dbFactory->newRepoDb();
+		$termsDb = $this->dbFactory->newTermsDb();
 
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			$this->objectCache
 		);
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
-			$repoDb,
+			$termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
+			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
 			new StringNormalizer()
 		);
 

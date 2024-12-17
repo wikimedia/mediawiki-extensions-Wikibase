@@ -6,7 +6,7 @@ use MediaWiki\Storage\NameTableAccessException;
 use MediaWiki\Storage\NameTableStore;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
@@ -21,19 +21,19 @@ class DatabaseTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver, TypeIdsL
 	private $nameTableStore;
 
 	public function __construct(
-		RepoDomainDb $db,
+		TermsDomainDb $termsDb,
 		WANObjectCache $cache,
 		?LoggerInterface $logger = null
 	) {
 		$this->nameTableStore = new NameTableStore(
-			$db->loadBalancer(),
+			$termsDb->loadBalancer(),
 			$cache,
 			$logger ?: new NullLogger(),
 			'wbt_type',
 			'wby_id',
 			'wby_name',
 			null,
-			$db->domain()
+			$termsDb->domain()
 		);
 	}
 

@@ -92,7 +92,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveTermInLangIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
 
@@ -235,7 +235,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveTermInLangIds(
 			$termInLangIds,
@@ -250,7 +250,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 
 		$this->assertSame( [], $resolver->resolveTermInLangIds( [] ) );
@@ -303,7 +303,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -329,7 +329,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 
 		$this->assertSame( [], $resolver->resolveGroupedTermInLangIds( [] ) );
@@ -339,7 +339,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 
 		$this->assertSame(
@@ -395,7 +395,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -466,7 +466,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
@@ -572,7 +572,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 
 		$termIds = $resolver->resolveTermsViaJoin(
@@ -653,7 +653,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			$this->getRepoDomainDb()
+			$this->getTermsDomainDb()
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds(
 			[

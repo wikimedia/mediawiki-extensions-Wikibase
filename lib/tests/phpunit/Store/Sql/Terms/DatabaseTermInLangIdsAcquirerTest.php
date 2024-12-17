@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTypeIdsStore;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -29,13 +30,13 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	private $db;
 
 	/**
-	 * @var RepoDomainDb
+	 * @var TermsDomainDb
 	 */
-	private $repoDb;
+	private $termsDb;
 
 	protected function setUp(): void {
 		$this->db = $this->setUpNewDb();
-		$this->repoDb = $this->getRepoDomainDb();
+		$this->termsDb = $this->getTermsDomainDb();
 	}
 
 	private function setUpNewDb() {
@@ -50,7 +51,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -78,7 +79,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		);
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -102,7 +103,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -131,7 +132,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -160,7 +161,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -245,7 +246,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$aliasEnSameTermInLangId = (string)$this->db->insertId();
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -295,7 +296,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -337,7 +338,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	public function testCallsCallbackEvenWhenAcquiringNoTerms() {
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			new InMemoryTypeIdsStore()
 		);
 		$called = false;
@@ -362,7 +363,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		$lbFactory = new FakeLBFactory( [
 			'lb' => $loadBalancer,
 		] );
-		$repoDb = new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() );
+		$termsDb = new TermsDomainDb( new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ) );
 
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
@@ -378,7 +379,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$repoDb,
+			$termsDb,
 			$typeIdsAcquirer
 		);
 
@@ -473,7 +474,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	public function testWithLongTexts() {
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			new InMemoryTypeIdsStore()
 		);
 
@@ -515,7 +516,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	public function testWithLongTexts_doesNotSplitUtf8Bytes() {
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			new InMemoryTypeIdsStore()
 		);
 
@@ -581,7 +582,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsWithEmptyInput() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
-			$this->repoDb,
+			$this->termsDb,
 			$typeIdsAcquirer
 		);
 

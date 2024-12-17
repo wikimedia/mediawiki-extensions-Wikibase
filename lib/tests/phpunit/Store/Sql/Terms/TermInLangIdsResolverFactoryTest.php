@@ -97,7 +97,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 		}, self::MOCK_LANG_LABELS );
 
 		$factory = new TermInLangIdsResolverFactory(
-			$this->getRepoDomainDbFactory(),
+			$this->getTermsDomainDbFactory(),
 			new NullLogger(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);

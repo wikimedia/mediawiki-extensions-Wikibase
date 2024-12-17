@@ -10,7 +10,7 @@ use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\StringNormalizer;
@@ -49,7 +49,7 @@ class TermStoreWriterFactoryTest extends TestCase {
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
-			$this->newStubRepoDb(),
+			$this->createStub( TermsDomainDb::class ),
 			$this->createMock( JobQueueGroup::class ),
 			new NullLogger()
 		);
@@ -73,10 +73,6 @@ class TermStoreWriterFactoryTest extends TestCase {
 			$entityTypeData[$typeName] = [ 'namespaceId' => 1, 'slot' => SlotRecord::MAIN ];
 		}
 		return new DatabaseEntitySource( 'empty', false, $entityTypeData, '', '', '', '' );
-	}
-
-	private function newStubRepoDb() {
-		return $this->createStub( RepoDomainDb::class );
 	}
 
 }

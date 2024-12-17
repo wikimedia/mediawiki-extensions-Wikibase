@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
@@ -15,7 +15,7 @@ use Wikimedia\ObjectCache\WANObjectCache;
 class TermInLangIdsResolverFactory {
 
 	/**
-	 * @var RepoDomainDbFactory
+	 * @var TermsDomainDbFactory
 	 */
 	private $dbFactory;
 
@@ -30,7 +30,7 @@ class TermInLangIdsResolverFactory {
 	private $objectCache;
 
 	public function __construct(
-		RepoDomainDbFactory $dbFactory,
+		TermsDomainDbFactory $dbFactory,
 		LoggerInterface $logger,
 		WANObjectCache $objectCache
 	) {

@@ -9,7 +9,7 @@ use MediaWiki\Storage\NameTableAccessException;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
@@ -30,7 +30,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 	use StatsMonitoring;
 
-	private RepoDomainDb $repoDb;
+	private TermsDomainDb $termsDb;
 
 	private LoggerInterface $logger;
 
@@ -41,13 +41,13 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	private EntityIdComposer $entityIdComposer;
 
 	public function __construct(
-		RepoDomainDb $repoDb,
+		TermsDomainDb $termsDb,
 		TypeIdsAcquirer $typeIdsAcquirer,
 		TypeIdsResolver $typeIdsResolver,
 		EntityIdComposer $entityIdComposer,
 		LoggerInterface $logger
 	) {
-		$this->repoDb = $repoDb;
+		$this->termsDb = $termsDb;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->entityIdComposer = $entityIdComposer;
@@ -246,6 +246,6 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	private function getDbr(): IReadableDatabase {
-		return $this->repoDb->connections()->getReadConnection();
+		return $this->termsDb->connections()->getReadConnection();
 	}
 }

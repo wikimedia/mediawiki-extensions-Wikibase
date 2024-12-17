@@ -33,8 +33,8 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function getCleaner(): DatabaseUsageCheckingTermStoreCleaner {
-		$repoDomainDb = $this->getRepoDomainDb();
-		return new DatabaseUsageCheckingTermStoreCleaner( $repoDomainDb, $this->innerCleaner );
+		$termsDb = $this->getTermsDomainDb();
+		return new DatabaseUsageCheckingTermStoreCleaner( $termsDb, $this->innerCleaner );
 	}
 
 	public function testCleaningUnsharedTermInLangUsesInnerCleaner() {

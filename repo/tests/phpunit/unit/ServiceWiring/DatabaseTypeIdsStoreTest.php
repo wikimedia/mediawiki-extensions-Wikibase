@@ -3,8 +3,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikimedia\ObjectCache\WANObjectCache;
@@ -23,10 +23,10 @@ class DatabaseTypeIdsStoreTest extends ServiceWiringTestCase {
 			->method( 'getMainWANObjectCache' )
 			->willReturn( $this->createMock( WANObjectCache::class ) );
 
-		$dbFactory = $this->createStub( RepoDomainDbFactory::class );
-		$dbFactory->method( 'newRepoDb' )
-			->willReturn( $this->createStub( RepoDomainDb::class ) );
-		$this->mockService( 'WikibaseRepo.RepoDomainDbFactory', $dbFactory );
+		$dbFactory = $this->createStub( TermsDomainDbFactory::class );
+		$dbFactory->method( 'newTermsDb' )
+			->willReturn( $this->createStub( TermsDomainDb::class ) );
+		$this->mockService( 'WikibaseRepo.TermsDomainDbFactory', $dbFactory );
 
 		$databaseTypeIdsStore = $this->getService( 'WikibaseRepo.DatabaseTypeIdsStore' );
 

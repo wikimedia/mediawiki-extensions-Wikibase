@@ -6,8 +6,8 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 
 /**
@@ -32,13 +32,13 @@ class PropertyLabelResolverTest extends ServiceWiringTestCase {
 		$propertySource = $this->createStub( DatabaseEntitySource::class );
 		$this->mockService( 'WikibaseClient.PropertySource', $propertySource );
 
-		$repoDb = $this->createStub( RepoDomainDb::class );
-		$dbFactory = $this->createMock( RepoDomainDbFactory::class );
+		$termsDb = $this->createStub( TermsDomainDb::class );
+		$dbFactory = $this->createMock( TermsDomainDbFactory::class );
 		$dbFactory->expects( $this->once() )
 			->method( 'newForEntitySource' )
 			->with( $propertySource )
-			->willReturn( $repoDb );
-		$this->mockService( 'WikibaseClient.RepoDomainDbFactory', $dbFactory );
+			->willReturn( $termsDb );
+		$this->mockService( 'WikibaseClient.TermsDomainDbFactory', $dbFactory );
 
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getObjectCacheFactory' );

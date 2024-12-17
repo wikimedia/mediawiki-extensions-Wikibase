@@ -79,14 +79,14 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
 		}
 
-		$repoDb = $this->getRepoDomainDb();
+		$termsDb = $this->getTermsDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			WANObjectCache::newEmpty()
 		);
-		return new DatabasePropertyTermStoreWriter( $repoDb, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
+		return new DatabasePropertyTermStoreWriter( $termsDb, $jobQueue,
+			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
 			new StringNormalizer()
 		);
 	}

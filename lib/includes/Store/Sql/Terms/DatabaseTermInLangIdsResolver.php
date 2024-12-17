@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SelectQueryBuilder;
@@ -27,8 +27,8 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	/** @var TypeIdsLookup */
 	private $typeIdsLookup;
 
-	/** @var RepoDomainDb */
-	private $db;
+	/** @var TermsDomainDb */
+	private $termsDb;
 
 	/** @var LoggerInterface */
 	private $logger;
@@ -39,12 +39,12 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
 		TypeIdsLookup $typeIdsLookup,
-		RepoDomainDb $db,
+		TermsDomainDb $termsDb,
 		?LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->typeIdsLookup = $typeIdsLookup;
-		$this->db = $db;
+		$this->termsDb = $termsDb;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -208,7 +208,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function getDbr() {
-		return $this->db->connections()->getReadConnection();
+		return $this->termsDb->connections()->getReadConnection();
 	}
 
 }

@@ -25,15 +25,15 @@ use Wikimedia\ObjectCache\WANObjectCache;
 trait DatabaseTermStoreWriterTestGetTermsTrait {
 
 	private function getTerms( Int32EntityId $entityId, $termsTable, $termInLangField, $idField ): Fingerprint {
-		$repoDb = $this->getRepoDomainDb();
+		$termsDb = $this->getTermsDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			WANObjectCache::newEmpty()
 		);
 		$termInLangIdsResolver = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$repoDb
+			$termsDb
 		);
 
 		$termInLangIds = $this->getDb()->newSelectQueryBuilder()

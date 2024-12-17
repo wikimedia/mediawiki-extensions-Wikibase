@@ -102,6 +102,7 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\ServiceBySourceAndTypeDispatcher;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -718,19 +719,19 @@ return [
 		// Cache key needs to be language specific
 		$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-		$repoDb = WikibaseClient::getRepoDomainDbFactory( $services )
+		$termsDb = WikibaseClient::getTermsDomainDbFactory( $services )
 			->newForEntitySource( WikibaseClient::getPropertySource( $services ) );
 		$wanObjectCache = $services->getMainWANObjectCache();
 
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			$wanObjectCache
 		);
 
 		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
-			$repoDb
+			$termsDb
 		);
 
 		return new CachedDatabasePropertyLabelResolver(
@@ -1014,7 +1015,7 @@ return [
 		MediaWikiServices $services
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
-			WikibaseClient::getRepoDomainDbFactory( $services ),
+			WikibaseClient::getTermsDomainDbFactory( $services ),
 			WikibaseClient::getLogger( $services ),
 			$services->getMainWANObjectCache()
 		);
@@ -1022,6 +1023,10 @@ return [
 
 	'WikibaseClient.TermLookup' => function ( MediaWikiServices $services ): TermLookup {
 		return WikibaseClient::getPrefetchingTermLookup( $services );
+	},
+
+	'WikibaseClient.TermsDomainDbFactory' => function ( MediaWikiServices $services ): TermsDomainDbFactory {
+		return new TermsDomainDbFactory( WikibaseClient::getRepoDomainDbFactory( $services ) );
 	},
 
 	'WikibaseClient.TermsLanguages' => function ( MediaWikiServices $services ): ContentLanguages {

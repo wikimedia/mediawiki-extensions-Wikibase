@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Store\Sql\Terms;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikimedia\Rdbms\IReadableDatabase;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -19,8 +19,8 @@ class EntityTermsSelectQueryBuilder extends SelectQueryBuilder {
 	private string $entityTermsJoinColumn;
 	private string $entityIdColumn;
 
-	public function __construct( IReadableDatabase $db, string $entityType ) {
-		parent::__construct( $db );
+	public function __construct( TermsDomainDb $db, string $entityType ) {
+		parent::__construct( $db->connections()->getReadConnection() );
 
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			$this->entityTermsTable = 'wbt_item_terms';

@@ -6,6 +6,8 @@ namespace Wikibase\Lib\Tests\Rdbms;
 
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -23,6 +25,10 @@ trait LocalRepoDbTestHelper {
 		);
 	}
 
+	public function getTermsDomainDb( ?IDatabase $db = null ): TermsDomainDb {
+		return new TermsDomainDb( $this->getRepoDomainDb( $db ) );
+	}
+
 	public function getRepoDomainDbFactory( ?IDatabase $db = null ): RepoDomainDbFactory {
 		$lbFactory = LBFactorySingle::newFromConnection( $db ?: $this->db );
 		$domainId = $lbFactory->getLocalDomainID();
@@ -31,6 +37,10 @@ trait LocalRepoDbTestHelper {
 			$lbFactory,
 			$domainId
 		);
+	}
+
+	public function getTermsDomainDbFactory( ?IDatabase $db = null ): TermsDomainDbFactory {
+		return new TermsDomainDbFactory( $this->getRepoDomainDbFactory( $db ) );
 	}
 
 }

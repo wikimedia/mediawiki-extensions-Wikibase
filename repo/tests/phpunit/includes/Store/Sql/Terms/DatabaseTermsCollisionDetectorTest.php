@@ -163,7 +163,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private function makeTestSubject( string $entityType ): DatabaseTermsCollisionDetector {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			$this->getRepoDomainDb(),
+			$this->getTermsDomainDb(),
 			$this->typeIdsLookup
 		);
 	}

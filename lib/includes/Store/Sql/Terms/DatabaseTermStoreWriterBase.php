@@ -6,7 +6,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use JobQueueGroup;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
@@ -23,8 +23,8 @@ abstract class DatabaseTermStoreWriterBase {
 	use FingerprintableEntityTermStoreTrait;
 	use StatsMonitoring;
 
-	/** @var RepoDomainDb */
-	private $repoDb;
+	/** @var TermsDomainDb */
+	private $termsDb;
 
 	/** @var TermInLangIdsAcquirer */
 	private $termInLangIdsAcquirer;
@@ -39,10 +39,10 @@ abstract class DatabaseTermStoreWriterBase {
 	private $jobQueueGroup;
 
 	public function __construct(
-		RepoDomainDb $repoDb, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
+		TermsDomainDb $termsDb, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
 		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer
 	) {
-		$this->repoDb = $repoDb;
+		$this->termsDb = $termsDb;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsResolver = $termInLangIdsResolver;
@@ -50,7 +50,7 @@ abstract class DatabaseTermStoreWriterBase {
 	}
 
 	private function getDbw(): IDatabase {
-		return $this->repoDb->connections()->getWriteConnection();
+		return $this->termsDb->connections()->getWriteConnection();
 	}
 
 	protected function delete( Int32EntityId $entityId ): void {

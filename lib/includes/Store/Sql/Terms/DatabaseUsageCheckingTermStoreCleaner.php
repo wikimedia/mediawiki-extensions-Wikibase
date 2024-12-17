@@ -3,7 +3,7 @@
 declare( strict_types=1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikibase\Lib\Rdbms\TermsDomainDb;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,12 +19,12 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	private $innerCleaner;
 
 	/**
-	 * @var RepoDomainDb
+	 * @var TermsDomainDb
 	 */
-	private $repoDomainDb;
+	private $termsDb;
 
-	public function __construct( RepoDomainDb $repoDomainDb, DatabaseInnerTermStoreCleaner $innerCleaner ) {
-		$this->repoDomainDb = $repoDomainDb;
+	public function __construct( TermsDomainDb $termsDb, DatabaseInnerTermStoreCleaner $innerCleaner ) {
+		$this->termsDb = $termsDb;
 		$this->innerCleaner = $innerCleaner;
 	}
 
@@ -40,8 +40,8 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 */
 	public function cleanTermInLangIds( array $termInLangIds ): void {
 
-		$dbw = $this->repoDomainDb->connections()->getWriteConnection();
-		$dbr = $this->repoDomainDb->connections()->getReadConnection();
+		$dbw = $this->termsDb->connections()->getWriteConnection();
+		$dbr = $this->termsDb->connections()->getReadConnection();
 
 		$dbw->startAtomic( __METHOD__ );
 		$unusedTermInLangIds = $this->findActuallyUnusedTermInLangIds( $termInLangIds, $dbw );

@@ -56,6 +56,7 @@ use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
+use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -747,6 +748,11 @@ class WikibaseRepo {
 	public static function getRepoDomainDbFactory( ?ContainerInterface $services = null ): RepoDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.RepoDomainDbFactory' );
+	}
+
+	public static function getTermsDomainDbFactory( ?ContainerInterface $services = null ): TermsDomainDbFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.TermsDomainDbFactory' );
 	}
 
 	/**

@@ -82,15 +82,15 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = $this->getServiceContainer()->getJobQueueGroup();
 		}
 
-		$repoDb = $this->getRepoDomainDb();
+		$termsDb = $this->getTermsDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStoreWriter( $repoDb, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ),
+		return new DatabaseItemTermStoreWriter( $termsDb, $jobQueue,
+			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
 			new StringNormalizer()
 		);
 	}
@@ -299,15 +299,15 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	public function testT237984UnexpectedMissingTextRow() {
 		$itemStoreWriter = $this->getItemTermStoreWriter();
 
-		$repoDb = $this->getRepoDomainDb();
+		$termsDb = $this->getTermsDomainDb();
 		$typeIdsStore = new DatabaseTypeIdsStore(
-			$repoDb,
+			$termsDb,
 			WANObjectCache::newEmpty()
 		);
-		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $repoDb,
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $repoDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $repoDb ), new StringNormalizer()
+			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ), new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter->storeTerms( new NumericPropertyId( 'P12' ), new Fingerprint(
