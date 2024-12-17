@@ -9,7 +9,6 @@ use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
-use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;
@@ -31,30 +30,35 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 
 	/** @var int[] */
 	private array $pageSchemaNamespaces;
+	private ?PageImages $pageImages;
 
 	public function __construct(
 		RevisionLookup $revisionLookup,
 		EntityIdParser $entityIdParser,
 		RepoLinker $repoLinker,
-		array $pageSchemaNamespaces
+		array $pageSchemaNamespaces,
+		?PageImages $pageImages
 	) {
 		$this->revisionLookup = $revisionLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->repoLinker = $repoLinker;
 		$this->pageSchemaNamespaces = $pageSchemaNamespaces;
+		$this->pageImages = $pageImages;
 	}
 
 	public static function factory(
 		RevisionLookup $revisionLookup,
 		EntityIdParser $entityIdParser,
 		RepoLinker $repoLinker,
-		SettingsArray $settings
+		SettingsArray $settings,
+		?PageImages $pageImages
 	): self {
 		return new self(
 			$revisionLookup,
 			$entityIdParser,
 			$repoLinker,
-			$settings->getSetting( 'pageSchemaNamespaces' )
+			$settings->getSetting( 'pageSchemaNamespaces' ),
+			$pageImages
 		);
 	}
 
@@ -149,11 +153,11 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 	 * @return File|null
 	 */
 	private function queryPageImage( Title $title ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
+		if ( !$this->pageImages ) {
 			return null;
 		}
 
-		return PageImages::getPageImage( $title ) ?: null;
+		return $this->pageImages->getImage( $title );
 	}
 
 	/**

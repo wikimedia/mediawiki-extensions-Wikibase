@@ -61,7 +61,8 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$mockRevisionLookup,
 			$this->createMock( EntityIdParser::class ),
 			$repoLinker,
-			[]
+			[],
+			null
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 		$title = $this->stubTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
@@ -90,7 +91,8 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$mockRevisionLookup,
 			$this->createMock( EntityIdParser::class ),
 			$repoLinker,
-			[]
+			[],
+			null
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 		$title = $this->stubTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
@@ -117,7 +119,8 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$this->createMockRevisionLookup(),
 			$this->createMock( EntityIdParser::class ),
 			$repoLinker,
-			[]
+			[],
+			null
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 
@@ -239,7 +242,8 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( RevisionLookup::class ),
 			$this->createMock( EntityIdParser::class ),
 			$this->createMock( RepoLinker::class ),
-			[]
+			[],
+			null
 		);
 		$handler->onOutputPageParserOutput( $outputPage, $parserOutput );
 

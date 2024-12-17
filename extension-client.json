@@ -228,6 +228,9 @@
 				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.RepoLinker",
 				"WikibaseClient.Settings"
+			],
+			"optional_services": [
+				"PageImages.PageImages"
 			]
 		},
 		"LoadExtensionSchemaUpdates": {
