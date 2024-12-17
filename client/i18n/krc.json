@@ -61,7 +61,7 @@
 	"wikibase-error-deserialize-error": "Сериализацияны кери алыу джетишимли болмады.",
 	"wikibase-error-serialize-error": "Сериализация джетишимли болмады.",
 	"wikibase-error-invalid-entity-id": "\"$2\" ID системагъа белгили тюлдю. Болгъан барлыкъ ID хайырланырыгъызны тилейбиз.",
-	"wikibase-error-exceeded-entity-access-limit": "Асыры аслам {{WBREPONAME}}барлыкъгъа джетилди.",
+	"wikibase-error-exceeded-entity-access-limit": "Асыры аслам {{WBREPONAME}} барлыкъгъа джетилди. Джюкленнген барлыкъланы саны: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Асыры аслам \"mw.wikibase.getReferencedEntityId\" чакъырыу, къуру $2 чакълыбир {{PLURAL:$2|эркинлик берилди}}.",
 	"unconnectedpages": "Элементлеге байламлы болмагъан бетле",
 	"unconnectedpages-summary": "Бу бет, (байламлы элементлеге дагъан болгъан ат аланлада) байламлы билги элементи болмагъан бетлени тизмесиди.",

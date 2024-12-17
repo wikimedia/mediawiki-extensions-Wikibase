@@ -128,6 +128,8 @@
 	"wikibase-sitelinks-link-columnheading": "صفحة مرتبطة",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|اتصال|اتصالات}} مع {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "أخطرني عندما يقوم شخص ما بتوصيل صفحة {{GENDER:|أنشأتها}} لعنصر {{WBREPONAME}}.",
+	"exceeded-entity-limit-category": "الصفحات التي تحتوي على عدد كبير جدا من كيانات {{WBREPONAME}}",
+	"exceeded-entity-limit-category-desc": "تحتوي هذه الفئة على الصفحات التي تم الوصول إليها بواسطة عدد كبير جدًا من كيانات {{WBREPONAME}}.",
 	"notification-header-page-connection": "الصفحة <strong>$3</strong> تم {{GENDER:$2|ربطها}} ب{{PLURAL:$4|-1=a {{WBREPONAME}} item|العنصر {{WBREPONAME}} $4}}، حيث يمكن جمع البيانات ذات الصلة بالموضوع.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> و{{PLURAL:$4|صفحة أخرى|$4 صفحات أخرى|100=99+ صفحات أخرى}} تم {{GENDER:$2|ربطها}} بعناصر {{WBREPONAME}}، حيث يمكن جمع البيانات ذات الصلة بالمواضيع.",
 	"notification-link-text-view-item": "{{GENDER:$1|اعرض}} العنصر",
