@@ -11,7 +11,7 @@ class PropertyNotFoundException extends SerializationException {
 	private string $path;
 	private string $value;
 
-	public function __construct( string $value, string $path = '', string $message = '', Throwable $previous = null ) {
+	public function __construct( string $value, string $path = '', string $message = '', ?Throwable $previous = null ) {
 		$this->value = $value;
 		$this->path = $path;
 

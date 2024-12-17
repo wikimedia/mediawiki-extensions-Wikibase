@@ -42,8 +42,8 @@ class TestPropertyValuePairDeserializerFactory {
 	}
 
 	public function createPropertyValuePairDeserializer(
-		EntityIdParser $entityIdParser = null,
-		DataValuesValueDeserializer $dataValuesValueDeserializer = null
+		?EntityIdParser $entityIdParser = null,
+		?DataValuesValueDeserializer $dataValuesValueDeserializer = null
 	): PropertyValuePairDeserializer {
 		return new PropertyValuePairDeserializer(
 			$entityIdParser ?? new BasicEntityIdParser(),

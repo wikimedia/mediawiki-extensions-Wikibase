@@ -169,8 +169,8 @@ class AddItemAliasesInLanguageTest extends TestCase {
 		array $aliases,
 		array $tags = [],
 		bool $isBot = false,
-		string $comment = null,
-		string $username = null
+		?string $comment = null,
+		?string $username = null
 	): AddItemAliasesInLanguageRequest {
 		return new AddItemAliasesInLanguageRequest( $itemId, $languageCode, $aliases, $tags, $isBot, $comment, $username );
 	}

@@ -12,7 +12,7 @@ class BadgeNotAllowed extends SerializationException {
 
 	private ItemId $badge;
 
-	public function __construct( ItemId $badge, string $message = '', Throwable $previous = null ) {
+	public function __construct( ItemId $badge, string $message = '', ?Throwable $previous = null ) {
 		$this->badge = $badge;
 		parent::__construct( $message, 0, $previous );
 	}

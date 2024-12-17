@@ -166,8 +166,8 @@ class AddPropertyAliasesInLanguageTest extends TestCase {
 		array $aliases,
 		array $tags = [],
 		bool $isBot = false,
-		string $comment = null,
-		string $username = null
+		?string $comment = null,
+		?string $username = null
 	): AddPropertyAliasesInLanguageRequest {
 		return new AddPropertyAliasesInLanguageRequest( $propertyId, $languageCode, $aliases, $tags, $isBot, $comment, $username );
 	}

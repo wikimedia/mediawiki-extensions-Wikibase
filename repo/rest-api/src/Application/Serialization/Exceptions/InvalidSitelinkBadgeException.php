@@ -17,7 +17,7 @@ class InvalidSitelinkBadgeException extends SerializationException {
 	 * @param string $message
 	 * @param Throwable|null $previous
 	 */
-	public function __construct( $value, string $message = '', Throwable $previous = null ) {
+	public function __construct( $value, string $message = '', ?Throwable $previous = null ) {
 		$this->value = $value;
 
 		parent::__construct( $message, 0, $previous );

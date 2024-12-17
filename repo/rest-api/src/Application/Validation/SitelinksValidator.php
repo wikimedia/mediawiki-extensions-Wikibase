@@ -32,7 +32,7 @@ class SitelinksValidator {
 	public function validate(
 		?string $itemId,
 		array $serialization,
-		array $sitesToValidate = null,
+		?array $sitesToValidate = null,
 		string $basePath = ''
 	): ?ValidationError {
 		if ( count( $serialization ) && array_is_list( $serialization ) ) {
@@ -61,8 +61,8 @@ class SitelinksValidator {
 	private function validateSitelinks(
 		?string $itemId,
 		array $serialization,
-		array $sitesToValidate = null,
-		string $basePath = ''
+		?array $sitesToValidate,
+		?string $basePath
 	): ?ValidationError {
 		$sitesToValidate ??= array_keys( $serialization );
 		$sitelinks = [];
