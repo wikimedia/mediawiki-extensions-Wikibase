@@ -26,7 +26,7 @@ class EntitySlotDiffRenderer extends SlotDiffRenderer {
 		$this->langCode = $langCode;
 	}
 
-	public function getDiff( Content $oldContent = null, Content $newContent = null ) {
+	public function getDiff( ?Content $oldContent = null, ?Content $newContent = null ) {
 		$this->normalizeContents( $oldContent, $newContent, [ EntityContent::class ] );
 		'@phan-var EntityContent $oldContent'; /** @var EntityContent $oldContent */
 		'@phan-var EntityContent $newContent'; /** @var EntityContent $newContent */

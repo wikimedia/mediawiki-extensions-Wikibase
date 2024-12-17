@@ -34,7 +34,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	public function __construct(
 		DateTimeValueCleaner $dateCleaner,
-		ComplexValueRdfHelper $complexValueHelper = null
+		?ComplexValueRdfHelper $complexValueHelper
 	) {
 		$this->dateCleaner = $dateCleaner;
 		$this->complexValueHelper = $complexValueHelper;

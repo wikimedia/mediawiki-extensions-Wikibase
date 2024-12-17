@@ -48,7 +48,7 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 		RdfVocabulary $vocabulary,
 		RdfWriter $writer,
 		array $labelPredicates = [],
-		array $languages = null
+		?array $languages = null
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;

@@ -189,7 +189,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return ChangeOpResult
 	 */
-	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ): ChangeOpResult {
+	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, ?Summary $summary = null ): ChangeOpResult {
 		try {
 			// NOTE: Always validate modification against the current revision, if it exists!
 			//       Otherwise, we may miss e.g. a combination of language/label/description

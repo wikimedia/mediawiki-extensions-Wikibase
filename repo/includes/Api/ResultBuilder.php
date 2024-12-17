@@ -305,7 +305,7 @@ class ResultBuilder {
 		$sourceEntityIdSerialization,
 		EntityRevision $entityRevision,
 		$props = 'all',
-		array $filterSiteIds = null,
+		?array $filterSiteIds = null,
 		array $filterLangCodes = [],
 		array $termFallbackChains = []
 	) {
@@ -458,7 +458,7 @@ class ResultBuilder {
 
 	private function filterEntitySerializationUsingSiteIds(
 		array $serialization,
-		array $siteIds = null
+		?array $siteIds
 	) {
 		if ( $siteIds && array_key_exists( 'sitelinks', $serialization ) ) {
 			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
@@ -1072,7 +1072,7 @@ class ResultBuilder {
 	 * @param int|null $oldRevId The id of the latest revision of the entity before
 	 *        the last (possibly null) edit
 	 */
-	public function addRevisionIdFromStatusToResult( Status $status, $path, $oldRevId = null ) {
+	public function addRevisionIdFromStatusToResult( Status $status, $path, ?int $oldRevId = null ) {
 		$value = $status->getValue();
 
 		if ( isset( $value['revision'] ) ) {

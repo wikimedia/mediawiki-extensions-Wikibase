@@ -42,8 +42,8 @@ class TimeParserFactory {
 	 * @param MonthNameProvider|null $monthNameProvider
 	 */
 	public function __construct(
-		ParserOptions $options = null,
-		MonthNameProvider $monthNameProvider = null
+		?ParserOptions $options = null,
+		?MonthNameProvider $monthNameProvider = null
 	) {
 		$this->options = $options ?: new ParserOptions();
 		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();

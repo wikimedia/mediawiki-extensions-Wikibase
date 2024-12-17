@@ -355,7 +355,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	 * @param TermFallback|null $term
 	 * @return string[]|null
 	 */
-	private function termFallbackToTermData( TermFallback $term = null ): ?array {
+	private function termFallbackToTermData( ?TermFallback $term ): ?array {
 		if ( $term ) {
 			return [
 				'value' => $term->getText(),

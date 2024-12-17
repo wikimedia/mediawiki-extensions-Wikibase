@@ -44,7 +44,7 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, int $db = null ) {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, ?int $db = null ) {
 		if ( $siteLinkList->isEmpty() ) {
 			return [];
 		}

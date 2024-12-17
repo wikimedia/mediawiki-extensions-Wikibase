@@ -300,7 +300,7 @@ abstract class DumpEntities extends Maintenance {
 	 *
 	 * @return EntityIdReader|SqlEntityIdPager a stream of EntityId objects
 	 */
-	private function makeIdStream( array $entityTypes, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdStream( array $entityTypes, ?ExceptionHandler $exceptionReporter ) {
 		$listFile = $this->getOption( 'list-file' );
 
 		if ( $listFile !== null ) {
@@ -360,7 +360,7 @@ abstract class DumpEntities extends Maintenance {
 	 *
 	 * @return EntityIdReader
 	 */
-	private function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
+	private function makeIdFileStream( $listFile, ?ExceptionHandler $exceptionReporter ) {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {

@@ -260,7 +260,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @throws LogicException
 	 * @return EntityDocument
 	 */
-	private function createEntity( $entityType, EntityId $customId = null, $assignFreshId = self::ASSIGN_FRESH_ID ): EntityDocument {
+	private function createEntity( ?string $entityType, ?EntityId $customId, string $assignFreshId ): EntityDocument {
 		if ( $customId ) {
 			$entityType = $customId->getEntityType();
 		} elseif ( !$entityType ) {

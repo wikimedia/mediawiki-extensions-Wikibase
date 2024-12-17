@@ -46,7 +46,7 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 	 * @param SiteList $siteLookup
 	 * @param string[]|null $sites
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SiteList $siteLookup, array $sites = null ) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SiteList $siteLookup, ?array $sites = null ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
 		$this->siteLookup = $siteLookup;

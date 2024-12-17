@@ -178,7 +178,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	 *
 	 * @throws ChangeOpDeserializationException
 	 */
-	private function validateSiteLinkSerialization( $serialization, $siteCode, SiteList $sites = null ) {
+	private function validateSiteLinkSerialization( $serialization, $siteCode, ?SiteList $sites ) {
 		$this->assertArray( $serialization, 'An array was expected, but not found' );
 
 		if ( !array_key_exists( 'site', $serialization ) ) {

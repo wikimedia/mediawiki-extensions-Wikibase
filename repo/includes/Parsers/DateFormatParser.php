@@ -49,7 +49,7 @@ class DateFormatParser extends StringValueParser {
 	/** @var IsoTimestampParser */
 	private $isoTimestampParser;
 
-	public function __construct( ParserOptions $options = null ) {
+	public function __construct( ?ParserOptions $options = null ) {
 		parent::__construct( $options );
 
 		$this->defaultOption( self::OPT_DATE_FORMAT, 'j F Y' );

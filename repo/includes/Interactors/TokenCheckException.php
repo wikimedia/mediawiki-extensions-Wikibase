@@ -23,7 +23,7 @@ class TokenCheckException extends MessageException {
 	 * @param string $errorCode An error code, for use in the API
 	 * @param Exception|null $previous The previous exception that caused this exception.
 	 */
-	public function __construct( $message, $errorCode = '', Exception $previous = null ) {
+	public function __construct( $message, $errorCode = '', ?Exception $previous = null ) {
 		parent::__construct( 'wikibase-tokencheck-' . $errorCode, [], $message, $previous );
 		$this->errorCode = $errorCode;
 	}

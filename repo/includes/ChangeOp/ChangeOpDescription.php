@@ -79,7 +79,7 @@ class ChangeOpDescription extends ChangeOpBase {
 	 * @param Term|null $newDescription
 	 * @return ChangeOpDescriptionResult
 	 */
-	private function buildResult( EntityId $entityId = null, Term $oldDescription = null, Term $newDescription = null ) {
+	private function buildResult( ?EntityId $entityId, ?Term $oldDescription, ?Term $newDescription ) {
 
 		$isEntityChanged = false;
 		$oldDescriptionText = $oldDescription ? $oldDescription->getText() : '';
@@ -96,7 +96,7 @@ class ChangeOpDescription extends ChangeOpBase {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );
 		}

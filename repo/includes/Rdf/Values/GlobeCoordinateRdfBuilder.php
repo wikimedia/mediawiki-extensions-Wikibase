@@ -25,7 +25,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	/**
 	 * @param ComplexValueRdfHelper|null $complexValueHelper
 	 */
-	public function __construct( ComplexValueRdfHelper $complexValueHelper = null ) {
+	public function __construct( ?ComplexValueRdfHelper $complexValueHelper ) {
 		$this->complexValueHelper = $complexValueHelper;
 	}
 

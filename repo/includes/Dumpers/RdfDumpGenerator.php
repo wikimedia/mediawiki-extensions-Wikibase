@@ -143,7 +143,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		$this->timestamp = $timestamp;
 	}
 
-	private static function getRdfWriter( string $name, BNodeLabeler $labeler = null ) {
+	private static function getRdfWriter( string $name, ?BNodeLabeler $labeler ) {
 		$factory = new RdfWriterFactory();
 		$format = $factory->getFormatName( $name );
 

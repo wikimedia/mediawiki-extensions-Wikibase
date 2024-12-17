@@ -16,7 +16,7 @@ interface EntityLinkFormatter {
 	 *
 	 * @return string HTML code for the link
 	 */
-	public function getHtml( EntityId $entityId, array $labelData = null );
+	public function getHtml( EntityId $entityId, ?array $labelData = null );
 
 	/**
 	 * Get "title" attribute for Wikidata entity link.
@@ -28,8 +28,8 @@ interface EntityLinkFormatter {
 	 */
 	public function getTitleAttribute(
 		EntityId $entityId,
-		array $labelData = null,
-		array $descriptionData = null
+		?array $labelData = null,
+		?array $descriptionData = null
 	);
 
 	/**

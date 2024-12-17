@@ -51,9 +51,9 @@ class ItemContent extends EntityContent {
 	 * @param Title|null $redirectTitle Title of the redirect target.
 	 */
 	public function __construct(
-		EntityHolder $itemHolder = null,
-		EntityRedirect $entityRedirect = null,
-		Title $redirectTitle = null
+		?EntityHolder $itemHolder = null,
+		?EntityRedirect $entityRedirect = null,
+		?Title $redirectTitle = null
 	) {
 		parent::__construct( self::CONTENT_MODEL_ID );
 

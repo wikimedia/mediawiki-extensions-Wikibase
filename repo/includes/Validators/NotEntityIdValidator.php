@@ -41,7 +41,7 @@ class NotEntityIdValidator implements ValueValidator {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, $errorCode, array $forbiddenTypes = null ) {
+	public function __construct( EntityIdParser $idParser, $errorCode, ?array $forbiddenTypes = null ) {
 		if ( !is_string( $errorCode ) ) {
 			throw new InvalidArgumentException( '$errorCode must be a string' );
 		}

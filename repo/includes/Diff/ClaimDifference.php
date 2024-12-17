@@ -42,10 +42,10 @@ class ClaimDifference {
 	 * @param DiffOpChange|null $rankChange
 	 */
 	public function __construct(
-		DiffOpChange $mainSnakChange = null,
-		Diff $qualifierChanges = null,
-		Diff $referenceChanges = null,
-		DiffOpChange $rankChange = null
+		?DiffOpChange $mainSnakChange = null,
+		?Diff $qualifierChanges = null,
+		?Diff $referenceChanges = null,
+		?DiffOpChange $rankChange = null
 	) {
 		$this->mainSnakChange = $mainSnakChange;
 		$this->qualifierChanges = $qualifierChanges;

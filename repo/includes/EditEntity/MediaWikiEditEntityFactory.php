@@ -120,7 +120,7 @@ class MediaWikiEditEntityFactory {
 	 */
 	public function newEditEntity(
 		IContextSource $context,
-		EntityId $entityId = null,
+		?EntityId $entityId = null,
 		int $baseRevId = 0,
 		$allowMasterConnection = true
 	) {

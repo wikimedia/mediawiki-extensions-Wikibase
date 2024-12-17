@@ -248,7 +248,7 @@ class ItemHandler extends EntityHandler {
 	 *
 	 * @return ItemContent
 	 */
-	protected function newEntityContent( EntityHolder $entityHolder = null ) {
+	protected function newEntityContent( ?EntityHolder $entityHolder ) {
 		return new ItemContent( $entityHolder );
 	}
 

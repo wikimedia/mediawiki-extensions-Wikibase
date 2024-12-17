@@ -62,7 +62,7 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 		$blob,
 		$contentFormat,
 		$entityType,
-		EntityId $entityId = null
+		?EntityId $entityId = null
 	) {
 		if ( !is_string( $blob ) ) {
 			throw new InvalidArgumentException( '$blob must be a string' );

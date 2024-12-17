@@ -40,7 +40,7 @@ class SqlEntityIdPagerFactory {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityIdLookup $entityIdLookup,
 		RepoDomainDb $repoDomainDb,
-		LinkCache $linkCache = null
+		?LinkCache $linkCache = null
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->entityIdLookup = $entityIdLookup;

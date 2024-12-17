@@ -22,7 +22,7 @@ class ChangeOpsResult implements ChangeOpResult {
 	 * @param EntityId|null $entityId
 	 * @param ChangeOpResult[] $changeOpResults
 	 */
-	public function __construct( EntityId $entityId = null, array $changeOpResults = [] ) {
+	public function __construct( ?EntityId $entityId, array $changeOpResults = [] ) {
 		$this->entityId = $entityId;
 		$this->changeOpResults = $changeOpResults;
 	}

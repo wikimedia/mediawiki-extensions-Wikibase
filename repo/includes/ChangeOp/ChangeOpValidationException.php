@@ -27,7 +27,7 @@ class ChangeOpValidationException extends ChangeOpException {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Result $result, Exception $previous = null ) {
+	public function __construct( Result $result, ?Exception $previous = null ) {
 		$messages = $this->composeErrorMessage( $result->getErrors() );
 		parent::__construct( 'Validation failed: ' . $messages, 0, $previous );
 

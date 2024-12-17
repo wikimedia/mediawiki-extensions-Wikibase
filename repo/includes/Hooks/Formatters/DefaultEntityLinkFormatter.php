@@ -42,7 +42,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	/**
 	 * @inheritDoc
 	 */
-	public function getHtml( EntityId $entityId, array $labelData = null ) {
+	public function getHtml( EntityId $entityId, ?array $labelData = null ) {
 		/** @var Language $labelLang */
 		[ $labelText, $labelLang ] = $this->extractTextAndLanguage( $labelData );
 
@@ -77,7 +77,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 *
 	 * @return array list( string $text, Language $language )
 	 */
-	private function extractTextAndLanguage( array $termData = null ) {
+	private function extractTextAndLanguage( ?array $termData ) {
 		if ( $termData ) {
 			return [
 				$termData['value'],
@@ -96,8 +96,8 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 */
 	public function getTitleAttribute(
 		EntityId $entityId,
-		array $labelData = null,
-		array $descriptionData = null
+		?array $labelData = null,
+		?array $descriptionData = null
 	) {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */

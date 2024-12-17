@@ -79,7 +79,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @param Term|null $newLabel
 	 * @return ChangeOpLabelResult
 	 */
-	private function buildResult( EntityId $entityId = null, Term $oldLabel = null, Term $newLabel = null ) {
+	private function buildResult( ?EntityId $entityId, ?Term $oldLabel, ?Term $newLabel ) {
 		$isEntityChanged = false;
 		$oldLabelText = $oldLabel ? $oldLabel->getText() : '';
 		$newLabelText = $newLabel ? $newLabel->getText() : '';
@@ -95,7 +95,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	}
 
 	/** @inheritDoc */
-	public function apply( EntityDocument $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, ?Summary $summary = null ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
