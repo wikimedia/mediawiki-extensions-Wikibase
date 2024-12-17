@@ -208,7 +208,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function getDbr() {
-		return $this->termsDb->connections()->getReadConnection();
+		return $this->termsDb->getReadConnection();
 	}
 
 }

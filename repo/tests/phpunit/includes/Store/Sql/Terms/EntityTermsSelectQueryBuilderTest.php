@@ -10,7 +10,6 @@ use MediaWikiTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Repo\Store\Sql\Terms\EntityTermsSelectQueryBuilder;
-use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IExpression;
 
 /**
@@ -124,10 +123,8 @@ class EntityTermsSelectQueryBuilderTest extends TestCase {
 
 	public function newTermsDb( MockDatabase $db = null ): TermsDomainDb {
 		$db ??= new MockDatabase();
-		$connectionManager = $this->createStub( ConnectionManager::class );
-		$connectionManager->method( 'getReadConnection' )->willReturn( $db );
 		$termsDb = $this->createStub( TermsDomainDb::class );
-		$termsDb->method( 'connections' )->willReturn( $connectionManager );
+		$termsDb->method( 'getReadConnection' )->willReturn( $db );
 
 		return $termsDb;
 	}

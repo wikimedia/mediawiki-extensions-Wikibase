@@ -246,6 +246,6 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	private function getDbr(): IReadableDatabase {
-		return $this->termsDb->connections()->getReadConnection();
+		return $this->termsDb->getReadConnection();
 	}
 }

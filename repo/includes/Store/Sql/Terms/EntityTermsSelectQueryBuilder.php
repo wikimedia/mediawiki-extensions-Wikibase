@@ -20,7 +20,7 @@ class EntityTermsSelectQueryBuilder extends SelectQueryBuilder {
 	private string $entityIdColumn;
 
 	public function __construct( TermsDomainDb $db, string $entityType ) {
-		parent::__construct( $db->connections()->getReadConnection() );
+		parent::__construct( $db->getReadConnection() );
 
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			$this->entityTermsTable = 'wbt_item_terms';

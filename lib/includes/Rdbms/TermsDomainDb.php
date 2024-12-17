@@ -4,8 +4,9 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Rdbms;
 
-use Wikimedia\Rdbms\ConnectionManager;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
  * Database abstraction to access terms (labels, descriptions, aliases) database tables created by the WikibaseRepository extension.
@@ -23,12 +24,16 @@ class TermsDomainDb {
 		$this->repoDb = $repoDb;
 	}
 
-	public function connections(): ConnectionManager {
-		return $this->repoDb->connections();
+	public function getWriteConnection( int $flags = 0 ): IDatabase {
+		return $this->repoDb->connections()->getWriteConnection( $flags );
 	}
 
-	public function replication(): ReplicationWaiter {
-		return $this->repoDb->replication();
+	public function getReadConnection( ?array $groups = null, int $flags = 0 ): IReadableDatabase {
+		return $this->repoDb->connections()->getReadConnection( $groups, $flags );
+	}
+
+	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void {
+		$this->repoDb->replication()->waitForAllAffectedClusters( $timeout );
 	}
 
 	/**
