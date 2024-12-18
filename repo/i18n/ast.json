@@ -45,6 +45,7 @@
 	"wikibase-description-empty": "Nun ta definida denguna descripción",
 	"wikibase-description-edit-placeholder": "escriba la descripción",
 	"wikibase-description-edit-placeholder-language-aware": "escriba la descripción en $1",
+	"wikibase-description-edit-placeholder-not-applicable": "non aplicable",
 	"wikibase-aliases-edit-placeholder": "escribe dellos alcuños",
 	"wikibase-aliases-edit-placeholder-language-aware": "escribe dellos alcuños en $1",
 	"wikibase-aliases-edit-label": "Alcuños, separaos por barres verticales:",

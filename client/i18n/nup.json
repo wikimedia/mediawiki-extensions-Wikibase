@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Misbahu umar",
-			"Umar Ahmad2345"
+			"Umar Ahmad2345",
+			"787IYO"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} yangagi",
 	"wikibase-editlinks": "ye ekozhi jin",
+	"wikibase-addlinkstitle": "Be lilagun-zhimin",
 	"wikibase-linkitem-addlinks": "la ekozhi be'u",
 	"wikibase-linkitem-title": "la eko be feregi",
 	"wikibase-linkitem-linkpage": "Bo keba be feregi",
