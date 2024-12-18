@@ -168,6 +168,14 @@
 				"WikibaseClient.Store"
 			]
 		},
+		"LinkedDataSchemaGenerator": {
+			"class": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator",
+			"services": [
+				"ContentLanguage",
+				"WikibaseClient.RepoLinker",
+				"WikibaseClient.TermLookup"
+			]
+		},
 		"LoadExtensionSchemaUpdates": {
 			"class": "\\Wikibase\\Client\\Hooks\\LoadExtensionSchemaUpdatesHookHandler"
 		},
@@ -279,7 +287,7 @@
 		"MagicWordwgVariableIDs": "Magic",
 		"MaintenanceShellStart": "Trivial",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
-		"OutputPageParserOutput": "Sidebar",
+		"OutputPageParserOutput": [ "Sidebar", "LinkedDataSchemaGenerator" ],
 		"ParserCacheSaveComplete": "DataUpdate",
 		"ParserClearState": "Parser",
 		"ParserFirstCallInit": "ParserFunctionRegistrant",

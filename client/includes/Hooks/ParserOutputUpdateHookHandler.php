@@ -92,6 +92,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutputProvider );
 		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $content, $title, $parserOutputProvider );
 		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateFirstRevisionTimestampProperty( $title, $parserOutputProvider );
 		$parserOutputProvider->close();
 	}
 
