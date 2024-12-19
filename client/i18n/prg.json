@@ -3,12 +3,14 @@
 		"authors": [
 			"Iketsi",
 			"Nērtiks Jōrgesuns",
-			"Tīgelika"
+			"Tīgelika",
+			"Kxeo"
 		]
 	},
 	"wikibase-dataitem": "dātasōbjaktan",
 	"wikibase-editlinks": "Redigīs autengīnsnans",
 	"wikibase-editlinkstitle": "Redigīs sirzdabilliskans autengīnsnans",
+	"wikibase-addlinkstitle": "Redigīs sirzdabilliskans autengīnsnans",
 	"wikibase-linkitem-addlinks": "Preidāis autengīnsnans",
 	"wikibase-linkitem-title": "Senristun sēn pāusan",
 	"wikibase-linkitem-linkpage": "Senristun sēn pāusan",
