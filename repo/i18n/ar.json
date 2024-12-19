@@ -173,6 +173,7 @@
 	"wikibase-anonymouseditnotificationtempuser-message": "إذا قمت بتسجيل الدخول أو إنشاء حساب، فسيتم نسب تعديلاتك إلى اسم المستخدم الخاص بك، من بين مزايا أخرى.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "حذرني عندما لا أحرر من غير تسجيل الدخول",
 	"wikibase-anonymouseditwarning-dismiss-button": "تحرير من غير تسجيل الدخول",
+	"wikibase-anonymouseditnotificationtempuser": "إذا قمت <strong>[$1 بتسجيل الدخول]</strong> أو <strong>[$2 بإنشاء حساب]</strong>، فسيتم نسب تعديلاتك إلى اسم المستخدم، من بين مزايا أخرى.",
 	"wikibase-move-error": "لا يمكنك نقل الصفحات الموجودة في نطاق data، ولا يمكنك نقل الصفحات إليه.",
 	"wikibase-validator-invalid": "قيمة غير صالحة",
 	"wikibase-validator-missing-field": "الحقل \"$1\" مطلوب ولكنه فارغ",
