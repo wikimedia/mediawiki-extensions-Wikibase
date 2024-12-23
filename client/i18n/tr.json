@@ -83,7 +83,7 @@
 	"wikibase-error-deserialize-error": "Veriler seri hale getirilemedi.",
 	"wikibase-error-serialize-error": "Veriler seri hale getirilemedi.",
 	"wikibase-error-invalid-entity-id": "\"$2\" kimliği bilinmeyen bir sisteme ait. Lütfen geçerli bir varlık kimliği kullanın.",
-	"wikibase-error-exceeded-entity-access-limit": "Çok fazla {{WBREPONAME}} varlığa erişildi.",
+	"wikibase-error-exceeded-entity-access-limit": "Çok fazla {{WBREPONAME}} varlığına erişildi. Yüklenen varlık sayısı: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Çok fazla \"mw.wikibase.getReferencedEntityId\" araması, yalnızca $2 taneye kadar {{PLURAL:$2|izin verildi}}.",
 	"unconnectedpages": "Ögelere bağlı olmayan sayfalar",
 	"unconnectedpages-summary": "Bu sayfa, (bağlı ögeleri destekleyen ad alanlarında) bağlı veri ögesi içermeyen sayfaları listeler.",
