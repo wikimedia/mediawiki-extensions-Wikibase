@@ -186,6 +186,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "قام مستخدم آخر بتحرير هذه القيمة للتو ونشر تغييراته أولاً. لا يمكن تطبيق التغييرات الخاصة بك. يرجى إعادة تحميل الصفحة لاسترداد القيمة الجديدة.",
 	"wikibase-client-data-bridge-unknown-error-heading": "حدث خطأ ما",
 	"wikibase-client-data-bridge-unknown-error-message": " حدث خطأ ولا يمكن تحرير القيمة المحددة حاليا. من فضلك جرب إعادة التحميل.",
+	"wikibase-client-data-bridge-error-report": "<p>إذا استمر الخطأ، فيرجى [$1 الإبلاغ عن هذه المشكلة] مع وصف إجراءاتك وإدراج المعلومات التالية:</p>\n<ul>\n<li>$2</li>\n<li>$3 من $4</li>\n<li>كود الخطأ: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "إعادة التحميل",
 	"wikibase-client-data-bridge-error-reload-page": "أعد تحميل الصفحة",
 	"wikibase-client-data-bridge-error-go-back": "رجوع",

@@ -81,6 +81,7 @@
 	"wikibase-otherprojects": "På andre prosjekt",
 	"wikibase-sitelinks-sitename-columnheading": "Språk",
 	"wikibase-sitelinks-link-columnheading": "Lenkja side",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tilkopling|Tilkoplingar}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Meld meg når nokon koplar ei side eg {{GENDER:|oppretta}} til eit {{WBREPONAME}}-element.",
 	"notification-header-page-connection": "Sida <strong>$3</strong> vart {{GENDER:$2|knytt}} til {{PLURAL:$4|-1=eit {{WBREPONAME}}-element|{{WBREPONAME}}-elementet $4}}, der data relevant for emnet kan samlast.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|éi anna side|$4 andre sider|100=99+ andre sider}} vart {{GENDER:$2|knytte til}} {{WBREPONAME}}-element.",

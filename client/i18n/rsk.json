@@ -110,5 +110,19 @@
 	"wikibase-client-data-bridge-dialog-title": "Ушорйованє $1",
 	"wikibase-client-data-bridge-permissions-error": "Ви нє маце допущенє ушорйовац тоту вредносц пре {{PLURAL:$1|шлїдуюцу|шлїдуюци}} причини:",
 	"wikibase-client-data-bridge-permissions-error-info": "Детальнєйше",
-	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Тота вредносц тераз [$1 у подполносци защицена] на сайту {{WBREPONAME}}, и ю можу редаґовац лєм [$2 администраторе].</strong>"
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Тота вредносц тераз [$1 у подполносци защицена] на сайту {{WBREPONAME}}, и ю можу редаґовац лєм [$2 администраторе].</strong>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Нєпозната гришка у допущеньох",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Нє можеце ушориц тоту вредносц пре нєпознати причини",
+	"wikibase-client-data-bridge-edit-decision-heading": "Виберце файту пременки хтору сце зробели:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Кориґовал сом</strong> погришну вредносц",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "Предходна вредносц нїґда нє була точна.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ажурирал сом</strong> застарелу вредносц",
+	"wikibase-client-data-bridge-edit-decision-update-description": "Предходна вредносц була добра алє вона тераз застарела.",
+	"wikibase-client-data-bridge-references-heading": "Референци",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Ви нє приявени",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Ушор без приявйованя до системи",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Приява/Реґистрованє",
+	"wikibase-client-data-bridge-license-heading": "Хаснованє и лиценца",
+	"wikibase-client-data-bridge-bailout-heading": "Место того, зробце шлїдуюце:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Ушор вредносц на проєкту {{WBREPONAME}}"
 }
