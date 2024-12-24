@@ -31,6 +31,18 @@ module.exports = function ( config ) {
 		port: 9876,
 
 		logLevel: config.LOG_INFO,
-		browsers: [ 'PhantomJS' ]
+		browsers: [ 'ChromeHeadless' ],
+		customLaunchers: {
+			ChromeHeadless: {
+				base: 'Chrome',
+				flags: [
+					'--no-sandbox',
+					'--headless',
+					'--disable-gpu',
+					'--disable-dev-shm-usage',
+					'--disable-software-rasterizer'
+				]
+			}
+		}
 	} );
 };
