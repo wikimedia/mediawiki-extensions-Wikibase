@@ -27,6 +27,18 @@ module.exports = function ( config ) {
 
 		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
 		logLevel: config.LOG_INFO,
-		browsers: [ 'PhantomJS' ]
+		browsers: [ 'ChromeHeadless' ],
+		customLaunchers: {
+			ChromeHeadless: {
+				base: 'Chrome',
+				flags: [
+					'--no-sandbox',
+					'--headless',
+					'--disable-gpu',
+					'--disable-dev-shm-usage',
+					'--disable-software-rasterizer'
+				]
+			}
+		}
 	} );
 };
