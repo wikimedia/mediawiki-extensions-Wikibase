@@ -7,7 +7,7 @@
 		]
 	},
 	"wikibase-edit": "မႄးထတ်း",
-	"wikibase-cancel": "ယုၵ်ႉလိူၵ်ႈ",
+	"wikibase-cancel": "ယႃႉၶိုၼ်း",
 	"wikibase-add": "ထႅမ်သႂ်ႇ",
 	"wikibase-entitytermsforlanguagelistview-description": "ၶေႃႈသပ်းလႅင်း",
 	"wikibase-label-empty": "ပႆႇလႆႈမၵ်းမၼ်ႈဝႆႉၸိုဝ်ႈ",
@@ -23,5 +23,5 @@
 	"wikibase-newentity-description": "ၶေႃႈသပ်းလႅင်း:",
 	"wikibase-setdescription-submit": "သႂ်ႇ ၶေႃႈသပ်းလႅင်း",
 	"wikibase-setlabeldescriptionaliases-description-label": "ၶေႃႈသပ်းလႅင်း:",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "ယုၵ်ႉလိူၵ်ႈ"
+	"wikibase-federated-properties-leaving-site-notice-cancel": "ယႃႉၶိုၼ်း"
 }
