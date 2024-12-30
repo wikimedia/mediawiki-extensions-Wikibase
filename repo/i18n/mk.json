@@ -426,6 +426,7 @@
 	"wikibase-api-invalid-formatter-options-apply-rounding": "Укажан недозволен „options“: „applyRounding“ треба да биде Булово или низа.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "Укажан недозволен „options“: „applyUnit“ треба да биде Булово.",
 	"wikibase-api-invalid-formatter-options-showcalendar": "Укажан недозволен „options“: „showcalendar“ треба да биде Булово или „auto“.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Укажани се неподдржани „options“: Предадена е непознатата можност „$1“.",
 	"wikibase-self-conflict-patched": "Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.",
 	"wikibase-conflict-patched": "Вашето уредување е прикрпено на последната верзија.",
 	"wikibase-save-unresolved-redirect": "Наидов на нерешено пренасочување од $1 кон $2 без обид да се зачува промената.",
