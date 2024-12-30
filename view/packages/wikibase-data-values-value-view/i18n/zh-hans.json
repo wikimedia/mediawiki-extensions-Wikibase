@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			")8",
+			"Chimes",
 			"HighSierra0820",
 			"Li3939108",
 			"Linforest",
@@ -22,6 +23,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "精确到1/10秒",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "精确到1/100秒",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "精确到1/1000秒",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "格里历",
 	"valueview-expert-timevalue-calendar-julian": "儒略历",
 	"valueview-expert-timeinput-precision": "精度：",
