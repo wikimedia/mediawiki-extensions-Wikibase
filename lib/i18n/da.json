@@ -27,6 +27,7 @@
 	"wikibase-error-remove-timeout": "Vi oplever tekniske problemer og derfor kunne dit ønske om at fjerne ikke gennemføres.",
 	"wikibase-error-ui-no-external-page": "Den angivne artikel blev ikke fundet på det tilsvarende websted.",
 	"wikibase-error-ui-edit-conflict": "Der er en redigeringskonflikt. Genindlæs og gem igen.",
+	"wikibase-language-name-for-terms-mul": "standard for alle sprog",
 	"wikibase-quantitydetails-amount": "Mængde",
 	"wikibase-quantitydetails-upperbound": "Øvre grænse",
 	"wikibase-quantitydetails-lowerbound": "Nedre grænse",
