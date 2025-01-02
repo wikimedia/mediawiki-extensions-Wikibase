@@ -77,7 +77,7 @@
 	"apihelp-query+entityterms-summary": "Получить термины (метки, описания и синонимы) сущности на этой странице.",
 	"apihelp-query+entityterms-param-language": "Код языка, на котором надо получить термины. Если не указан, используется язык участника.",
 	"apihelp-query+entityterms-param-terms": "Типы терминов, которые нужно получить, например, 'description', каждый из которых возвращается как массив строк, ключ к которым задан их типом, например {\"description\": [\"foo\"]}. Если это не указано, возвращаются все типы.",
-	"apihelp-query+entityterms-example-item": "Получить обозначения и псевдонимы элемента Q84.",
+	"apihelp-query+entityterms-example-item": "Получить обозначения и синонимы элемента Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Возвращает информацию о языках содержания, которые Wikibase принимает в различных контекстах.",
 	"apihelp-query+wbcontentlanguages-param-context": "Контекст, в котором языки содержания должны быть действительными.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Термины (метка, описание, синонимы) сущности.",
