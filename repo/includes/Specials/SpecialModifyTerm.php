@@ -228,7 +228,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$languageName = $this->languageNameUtils
 			->getLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
-		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
+		if ( $entity !== null && $languageName !== '' ) {
 			// Messages:
 			// wikibase-setlabel-introfull
 			// wikibase-setdescription-introfull
