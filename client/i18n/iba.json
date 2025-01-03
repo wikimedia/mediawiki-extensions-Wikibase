@@ -59,7 +59,7 @@
 	"wikibase-error-deserialize-error": "Gagal nginsil data serial.",
 	"wikibase-error-serialize-error": "Gagal ngaga data serial.",
 	"wikibase-error-invalid-entity-id": "ID \"$2\" enda ditemu sistem. Minta kita ngena ID entiti ti sah.",
-	"wikibase-error-exceeded-entity-access-limit": "Kelalu mayuh entiti {{WBREPONAME}} ti diakses.",
+	"wikibase-error-exceeded-entity-access-limit": "Kelalu mayuh entiti {{WBREPONAME}} ti diakses. Lumur entiti dimuat: $2/$3",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Kelalu mayuh kangau \"mw.wikibase.getReferencedEntityId\", semina nyentuk ngagai $2 {{PLURAL:$2|dikemendarka}}.",
 	"unconnectedpages": "Lambar ke bedau disambung ngagai item",
 	"unconnectedpages-summary": "Lambar tu ngerintaika lambar ti nadai item data ti besambung (dalam ruai nama ti nyukung item ti besambung).",
