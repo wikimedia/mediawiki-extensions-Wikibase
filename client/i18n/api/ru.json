@@ -31,8 +31,10 @@
 	"apihelp-query+wblistentityusage-example-simple": "Получить страницы, использующие сущность <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Получить страницы, использующие сущность <kbd>Q2</kbd> с учетом включения URL",
 	"apihelp-query+wblistentityusage-example-aspect": "Получить страницы, использующие сущность <kbd>Q2</kbd> и ссылку на сайт или утверждение в качестве аспекта.",
-	"apihelp-query+pageterms-summary": "Получить термины {{WBREPONAME}} (обычно метки, описания и синонимы), связанные со страницей, через ссылку на сайт.",
-	"apihelp-query+pageterms-example-simple": "Получить все термины, связанные со страницей «London», на языке пользователя.",
+	"apihelp-query+pageterms-summary": "Получить термы {{WBREPONAME}} (обычно метки, описания и синонимы), связанные со страницей, через ссылку на сайт.",
+	"apihelp-query+pageterms-example-simple": "Получить все термы, связанные со страницей «London», на языке пользователя.",
 	"apihelp-query+pageterms-example-label-en": "Получить метки и синонимы, связанные с английской страницей «London»",
+	"apihelp-query+pageterms-param-language": "Код языка, на котором надо получить термы. Если не указан, используется язык участника.",
+	"apihelp-query+pageterms-param-terms": "Типы термов, которые нужно получить, например, 'description', каждый из которых возвращается как массив строк, ключ к которым задан их типом, например {\"description\": [\"foo\"]}. Если это не указано, возвращаются все типы.",
 	"apihelp-query+wikibase-description": "Получить сведения о клиенте Wikibase и связанном хранилище Wikibase."
 }
