@@ -5,7 +5,8 @@ const {
 	createUniqueStringProperty,
 	createPropertyWithStatements,
 	newStatementWithRandomStringValue,
-	getLatestEditMetadata
+	getLatestEditMetadata,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
@@ -21,7 +22,7 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 	} );
 
 	it( '200 OK response is valid for an Property with statements', async () => {
-		const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		const statementPropertyId = await getStringPropertyId();
 		const { id } = await createPropertyWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId ),
 			newStatementWithRandomStringValue( statementPropertyId )

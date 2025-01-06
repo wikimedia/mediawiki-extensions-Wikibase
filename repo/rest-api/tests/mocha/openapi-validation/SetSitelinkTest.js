@@ -5,7 +5,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createLocalSitelink,
 	getLocalSiteId,
-	createRedirectForItem, createWikiPage
+	createRedirectForItem,
+	createWikiPage
 } = require( '../helpers/entityHelper' );
 const { newSetSitelinkRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );

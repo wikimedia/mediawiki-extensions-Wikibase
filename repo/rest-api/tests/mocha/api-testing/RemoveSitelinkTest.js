@@ -6,7 +6,6 @@ const {
 	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { action, utils, assert } = require( 'api-testing' );
-const { getLocalSiteId, createLocalSitelink } = require( '../helpers/entityHelper' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -19,17 +18,17 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 	const linkedArticle = utils.title( 'Article-linked-to-test-item' );
 
 	before( async () => {
-		siteId = await getLocalSiteId();
+		siteId = await entityHelper.getLocalSiteId();
 
 		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
 		testItemId = createItemResponse.body.id;
 
-		await createLocalSitelink( testItemId, linkedArticle );
+		await entityHelper.createLocalSitelink( testItemId, linkedArticle );
 	} );
 
 	describe( '200', () => {
 		afterEach( async () => {
-			await createLocalSitelink( testItemId, linkedArticle );
+			await entityHelper.createLocalSitelink( testItemId, linkedArticle );
 		} );
 
 		it( 'can DELETE a single sitelink of an item', async () => {

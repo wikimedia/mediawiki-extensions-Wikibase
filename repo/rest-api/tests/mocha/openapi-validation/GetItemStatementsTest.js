@@ -4,9 +4,9 @@ const { expect } = require( '../helpers/chaiHelper' );
 const {
 	createRedirectForItem,
 	createItemWithStatements,
-	createUniqueStringProperty,
 	newStatementWithRandomStringValue,
-	getLatestEditMetadata
+	getLatestEditMetadata,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementsRequestBuilder,
@@ -25,7 +25,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 	} );
 
 	it( '200 OK response is valid for an Item with statements', async () => {
-		const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		const statementPropertyId = await getStringPropertyId();
 		const { id } = await createItemWithStatements( [
 			newStatementWithRandomStringValue( statementPropertyId ),
 			newStatementWithRandomStringValue( statementPropertyId )

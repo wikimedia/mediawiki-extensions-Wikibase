@@ -2,9 +2,7 @@
 
 const { assert } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const {
-	getLatestEditMetadata
-} = require( '../helpers/entityHelper' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const {
 	getItemGetRequests,

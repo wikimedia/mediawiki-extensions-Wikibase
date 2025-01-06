@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createItemWithAllFields() {
-	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+	const statementPropertyId = await entityHelper.getStringPropertyId();
 	const itemId = ( await newCreateItemRequestBuilder( {
 		labels: { en: `non-empty-item-${utils.uniq()}` },
 		descriptions: { en: 'non-empty-item-description' },

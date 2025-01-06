@@ -42,7 +42,7 @@ describe( 'GET statement', () => {
 		await entityHelper.deleteProperty( testStatementPropertyIdToDelete );
 		await runAllJobs(); // wait for secondary data to catch up after deletion
 
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		const testStatementPropertyId = await entityHelper.getStringPropertyId();
 		testStatement = ( await newAddItemStatementRequestBuilder(
 			testItemId,
 			entityHelper.newStatementWithRandomStringValue( testStatementPropertyId )

@@ -5,18 +5,13 @@ const { assert, utils } = require( 'api-testing' );
 const {
 	newPatchItemRequestBuilder,
 	newAddItemStatementRequestBuilder,
-	newCreateItemRequestBuilder,
-	newCreatePropertyRequestBuilder
+	newCreateItemRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
 const { formatWholeEntityEditSummary } = require( '../helpers/formatEditSummaries' );
-const {
-	createLocalSitelink,
-	getLocalSiteId
-} = require( '../helpers/entityHelper' );
 const { getAllowedBadges } = require( '../helpers/getAllowedBadges' );
 const { runAllJobs } = require( 'api-testing/lib/wiki' );
 
@@ -40,15 +35,15 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 			descriptions: { [ languageWithExistingDescription ]: `some-description-${utils.uniq()}` },
 			aliases: { en: [ existingEnAlias ], fr: [ 'croissant' ] }
 		} ).makeRequest() ).body.id;
-		await createLocalSitelink( testItemId, linkedArticle );
-		siteId = await getLocalSiteId();
+		await entityHelper.createLocalSitelink( testItemId, linkedArticle );
+		siteId = await entityHelper.getLocalSiteId();
 		allowedBadges = await getAllowedBadges();
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );
 		originalRevisionId = testItemCreationMetadata.revid;
 
-		predicatePropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } ).makeRequest() ).body.id;
+		predicatePropertyId = await entityHelper.getStringPropertyId();
 
 		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {

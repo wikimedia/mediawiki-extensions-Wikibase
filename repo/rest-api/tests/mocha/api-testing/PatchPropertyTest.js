@@ -45,7 +45,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		originalLastModified = new Date( testPropertyCreationMetadata.timestamp );
 		originalRevisionId = testPropertyCreationMetadata.revid;
 
-		predicatePropertyId = ( await newCreatePropertyRequestBuilder( { data_type: 'string' } ).makeRequest() ).body.id;
+		predicatePropertyId = await entityHelper.getStringPropertyId();
 
 		// wait 1s before next test to ensure the last-modified timestamps are different
 		await new Promise( ( resolve ) => {

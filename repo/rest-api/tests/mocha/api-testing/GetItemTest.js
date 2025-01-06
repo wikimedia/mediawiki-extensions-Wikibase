@@ -6,9 +6,9 @@ const {
 	createRedirectForItem,
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
-	createUniqueStringProperty,
 	getLocalSiteId,
-	createLocalSitelink
+	createLocalSitelink,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const { newGetItemRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -34,7 +34,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 	before( async () => {
 		siteId = await getLocalSiteId();
 
-		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId = await getStringPropertyId();
 		testStatement = newStatementWithRandomStringValue( testStatementPropertyId );
 
 		const createItemResponse = await newCreateItemRequestBuilder( {

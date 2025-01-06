@@ -15,10 +15,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 	let predicatePropertyId;
 
 	before( async () => {
-		const predicateProperty = await newCreatePropertyRequestBuilder( { data_type: 'string' } )
-			.assertValidRequest()
-			.makeRequest();
-		predicatePropertyId = predicateProperty.body.id;
+		predicatePropertyId = await entityHelper.getStringPropertyId();
 
 	} );
 
@@ -44,7 +41,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			const aliases = { en: [ 'is a', 'type' ] };
 			const data_type = 'string';
 
-			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+			const statementPropertyId = await entityHelper.getStringPropertyId();
 			const statementValue = '99 Bottles of Milk';
 			const statements = {
 				[ statementPropertyId ]: [ {

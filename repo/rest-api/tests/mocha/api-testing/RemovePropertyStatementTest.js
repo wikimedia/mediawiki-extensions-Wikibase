@@ -20,7 +20,7 @@ describe( 'DELETE statement', () => {
 
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
-		testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		testStatementPropertyId = await entityHelper.getStringPropertyId();
 	} );
 
 	[

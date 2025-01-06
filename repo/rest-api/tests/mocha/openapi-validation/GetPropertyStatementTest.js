@@ -6,7 +6,6 @@ const {
 	newGetPropertyStatementRequestBuilder,
 	newGetStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
-const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describe( 'validate GET property statement responses', () => {
 
@@ -15,13 +14,13 @@ describe( 'validate GET property statement responses', () => {
 	let lastRevId;
 
 	before( async () => {
-		const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		const statementPropertyId = await entityHelper.getStringPropertyId();
 		const property = await entityHelper.createPropertyWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
 		] );
 		testPropertyId = property.id;
 		testStatementId = property.statements[ statementPropertyId ][ 0 ].id;
-		lastRevId = ( await getLatestEditMetadata( testPropertyId ) ).revid;
+		lastRevId = ( await entityHelper.getLatestEditMetadata( testPropertyId ) ).revid;
 	} );
 
 	[

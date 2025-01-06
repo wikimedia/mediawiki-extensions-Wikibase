@@ -7,7 +7,8 @@ const {
 	createUniqueStringProperty,
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
-	createItemWithStatements
+	createItemWithStatements,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementsRequestBuilder,
@@ -26,7 +27,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 	let testStatements;
 
 	before( async () => {
-		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId = await getStringPropertyId();
 		testStatementPropertyId2 = ( await createUniqueStringProperty() ).body.id;
 
 		testStatements = [

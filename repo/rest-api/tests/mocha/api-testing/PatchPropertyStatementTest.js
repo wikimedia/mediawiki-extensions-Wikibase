@@ -23,7 +23,7 @@ describe( 'PATCH property statement', () => {
 	let previousEtag;
 
 	before( async function () {
-		const testStatementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		const testStatementPropertyId = await entityHelper.getStringPropertyId();
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 		const addStatementResponse = await newAddPropertyStatementRequestBuilder(
 			testPropertyId,

@@ -2,7 +2,7 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createUniqueStringProperty, createWikiPage, getLocalSiteId } = require( '../helpers/entityHelper' );
+const { createWikiPage, getLocalSiteId, getStringPropertyId } = require( '../helpers/entityHelper' );
 const { newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
@@ -15,7 +15,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 	it( '201 - full item', async () => {
 		const linkedArticle = utils.title( 'Potato' );
 		await createWikiPage( linkedArticle );
-		const statementProperty = ( await createUniqueStringProperty() ).body.id;
+		const statementProperty = await getStringPropertyId();
 		const response = await newCreateItemRequestBuilder( {
 			labels: { en: utils.title( 'potato' ) },
 			descriptions: { en: 'root vegetable' },
