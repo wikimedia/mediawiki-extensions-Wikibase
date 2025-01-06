@@ -51,7 +51,7 @@
 	"apihelp-wbformatvalue-param-generate": "Le formato de sortita desirate a generar.",
 	"apihelp-wbformatvalue-param-datatype": "Le typo de datos del valor. Isto es distincte del typo del valor",
 	"apihelp-wbformatvalue-param-datavalue": "Le datos a formatar. Isto debe esser le serialisation JSON de un objecto DataValue.",
-	"apihelp-wbformatvalue-param-options": "Le optiones que le formatator debe usar. Fornite como objecto JSON.",
+	"apihelp-wbformatvalue-param-options": "Le optiones que le formatator debe usar. Fornite como objecto JSON.\n\nLe optiones supportate es:\n; $1: Le lingua in le qual le valor debe esser formatate (un codice de lingua de MediaWiki).\n; $2: Si le numero debe esser arrotundate. Pote esser un valor boolean (automatic / sin arrotundamento) o un numero integre (exponente del ultime digitos decimal significante). Solmente utile pro valores de quantitate.\n; $3: Si le unitate debe esser includite in le sortita (un valor boolean). Solmente utile pro valores de quantitate.\n; $4: Si le modello del calendario debe esser monstrate. Pote esser un valor boolean (sempre / nunquam monstrar lo) o le catena de characteres <code>\"auto\"</code> (determinar automaticamente si monstrar lo). Solmente utile pro valores temporal.",
 	"apihelp-wbformatvalue-param-property": "Le ID del proprietate al qual pertine le valor de datos. Debe esser usate in loco del parametro <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "Formatar un valor de catena simple.",
 	"apihelp-wbformatvalue-example-2": "Formatar un valor de catena como URL in HTML.",
