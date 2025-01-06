@@ -5,6 +5,7 @@
 			"Cigaryno",
 			"Claw eg",
 			"Hubaishan",
+			"Meno25",
 			"Mido",
 			"Mohammed Qays",
 			"ديفيد"
@@ -21,6 +22,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "إلى 1/10 من ثانية قوسية",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "إلى 1/100 من ثانية قوسية",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "إلى 1/1000 من ثانية قوسية",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000 ثانية قوس",
 	"valueview-expert-timevalue-calendar-gregorian": "غريغوري",
 	"valueview-expert-timevalue-calendar-julian": "يولياني",
 	"valueview-expert-timeinput-precision": "الدقة:",
