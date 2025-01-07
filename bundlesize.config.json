@@ -1,0 +1,18 @@
+[
+	{
+		"resourceModule": "wikibase.client.data-bridge.externalModifiers",
+		"maxSize": null
+	},
+	{
+		"resourceModule": "wikibase.client.data-bridge.init",
+		"maxSize": null
+	},
+	{
+		"resourceModule": "wikibase.client.init",
+		"maxSize": null
+	},
+	{
+		"resourceModule": "wikibase.vector.searchClient",
+		"maxSize": null
+	}
+]
