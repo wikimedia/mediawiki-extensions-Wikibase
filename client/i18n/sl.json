@@ -28,7 +28,7 @@
 	"wikibase-addlinkstitle": "Dodaj medjezikovne povezave",
 	"wikibase-linkitem-addlinks": "Dodaj povezave",
 	"wikibase-linkitem-alreadylinked": "Stran, na katero ste želeli ustvariti povezavo, je že povezana s [$1 predmetom] v centralni podatkovni shrambi, ki se povezuje s stranjo/člankom [[$2]] v tem projektu. Predmeti se lahko povezujejo samo z eno stranjo na posamezen projekt. Za povezavo izberite drugo stran.",
-	"wikibase-linkitem-close": "Zaprite obvestilo in znova naložite stran",
+	"wikibase-linkitem-close": "Zapri obvestilo in znova naloži stran",
 	"wikibase-linkitem-failure": "Med povezovanjem s stranjo je prišlo do neznane napake.",
 	"wikibase-linkitem-failed-modify": "Strani ni bilo mogoče povezati: združitev ustreznih predmetov v shrambi {{GRAMMAR:dative|{{WBREPONAME}}}} ni uspela.",
 	"wikibase-linkitem-title": "Poveži s stranjo",
