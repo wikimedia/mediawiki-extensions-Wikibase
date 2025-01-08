@@ -1,0 +1,38 @@
+name: Lint and Test
+
+on: [push, pull_request]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [10, 12, 14]
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Setup Chrome
+              uses: browser-actions/setup-chrome@latest
+              with:
+                  chrome-version: stable
+
+            - name: Configure Chrome Sandbox
+              run: |
+                  sudo chown root:root /opt/hostedtoolcache/setup-chrome/chromium/stable/x64/chrome-sandbox
+                  sudo chmod 4755 /opt/hostedtoolcache/setup-chrome/chromium/stable/x64/chrome-sandbox
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run ESLint and tests
+              run: npm test
+              env:
+                  CHROME_BIN: chrome
+                  CHROME_FLAGS: --no-sandbox --headless --disable-gpu

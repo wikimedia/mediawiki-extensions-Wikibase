@@ -37,7 +37,7 @@
 		"eslint-config-wikimedia": "0.4.0",
 		"karma": "^6.1.0",
 		"karma-cli": "^1.0.1",
-		"karma-phantomjs-launcher": "^1.0.4",
+		"karma-chrome-launcher": "^3.1.0",
 		"karma-qunit": "^4.1.2",
 		"qunit": "^2.14.0"
 	},
