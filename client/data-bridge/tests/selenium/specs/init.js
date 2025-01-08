@@ -328,7 +328,7 @@ describe( 'init', () => {
 		} );
 
 		it( 'is not shown when logged in', () => {
-			LoginPage.loginAdmin();
+			await LoginPage.loginAdmin();
 
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );

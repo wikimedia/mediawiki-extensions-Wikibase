@@ -110,7 +110,7 @@ describe( 'permission checks', () => {
 		} );
 
 		it( 'show a permission error when opening bridge', () => {
-			LoginPage.loginAdmin();
+			await LoginPage.loginAdmin();
 			DataBridgePage.openAppOnPage( title );
 			DataBridgePage.error.waitForDisplayed();
 

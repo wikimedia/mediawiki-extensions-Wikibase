@@ -121,7 +121,7 @@ class DataBridgePage extends Page {
 	}
 
 	open( title ) {
-		super.openTitle( title );
+		await super.openTitle( title );
 		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', browser.config.waitforTimeout );
 	}
 
