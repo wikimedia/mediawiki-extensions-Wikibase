@@ -22,7 +22,7 @@ describe( 'GET /property-data-types', () => {
 		};
 
 		const response = await new RequestBuilder()
-			.withRoute( 'GET', '/property-data-types' )
+			.withRoute( 'GET', '/v1/property-data-types' )
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );

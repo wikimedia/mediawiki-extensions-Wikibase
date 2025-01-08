@@ -14,7 +14,7 @@ async function getAllowedBadges() {
 
 async function newBadgeItem( labelPrefix ) {
 	return new RequestBuilder()
-		.withRoute( 'POST', '/entities/items' )
+		.withRoute( 'POST', '/v1/entities/items' )
 		.withJsonBodyParam( 'item', { labels: { en: labelPrefix } } )
 		.makeRequest();
 }

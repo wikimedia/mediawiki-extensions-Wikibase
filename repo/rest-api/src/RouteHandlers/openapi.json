@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://wikibase.example/w/rest.php/wikibase/v1"
+      "url": "https://wikibase.example/w/rest.php/wikibase"
     }
   ],
   "tags": [
@@ -77,7 +77,7 @@
     }
   ],
   "paths": {
-    "/openapi.json": {
+    "/v1/openapi.json": {
       "get": {
         "operationId": "getOpenApiDoc",
         "tags": [
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/property-data-types": {
+    "/v1/property-data-types": {
       "get": {
         "operationId": "getPropertyDataTypes",
         "tags": [
@@ -134,7 +134,7 @@
         }
       }
     },
-    "/entities/items": {
+    "/v1/entities/items": {
       "post": {
         "operationId": "addItem",
         "tags": [
@@ -1304,7 +1304,7 @@
         }
       }
     },
-    "/entities/items/{item_id}": {
+    "/v1/entities/items/{item_id}": {
       "get": {
         "operationId": "getItem",
         "tags": [
@@ -3238,7 +3238,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/sitelinks": {
+    "/v1/entities/items/{item_id}/sitelinks": {
       "get": {
         "operationId": "getSitelinks",
         "tags": [
@@ -4256,7 +4256,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/sitelinks/{site_id}": {
+    "/v1/entities/items/{item_id}/sitelinks/{site_id}": {
       "get": {
         "operationId": "getSitelink",
         "tags": [
@@ -5626,7 +5626,7 @@
         }
       }
     },
-    "/entities/properties": {
+    "/v1/entities/properties": {
       "post": {
         "operationId": "addProperty",
         "tags": [
@@ -6611,7 +6611,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}": {
+    "/v1/entities/properties/{property_id}": {
       "get": {
         "operationId": "getProperty",
         "tags": [
@@ -8301,7 +8301,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/descriptions": {
+    "/v1/entities/items/{item_id}/descriptions": {
       "get": {
         "operationId": "getItemDescriptions",
         "tags": [
@@ -9249,7 +9249,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/descriptions": {
+    "/v1/entities/properties/{property_id}/descriptions": {
       "get": {
         "operationId": "getPropertyDescriptions",
         "tags": [
@@ -10176,7 +10176,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/descriptions/{language_code}": {
+    "/v1/entities/items/{item_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getItemDescription",
         "tags": [
@@ -11465,7 +11465,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+    "/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getItemDescriptionWithFallback",
         "tags": [
@@ -11759,7 +11759,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/descriptions/{language_code}": {
+    "/v1/entities/properties/{property_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getPropertyDescription",
         "tags": [
@@ -12945,7 +12945,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
+    "/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getPropertyDescriptionWithFallback",
         "tags": [
@@ -13227,7 +13227,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/statements": {
+    "/v1/entities/items/{item_id}/statements": {
       "get": {
         "operationId": "getItemStatements",
         "tags": [
@@ -14900,7 +14900,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/statements/{statement_id}": {
+    "/v1/entities/items/{item_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getItemStatement",
         "tags": [
@@ -17872,7 +17872,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/labels": {
+    "/v1/entities/items/{item_id}/labels": {
       "get": {
         "operationId": "getItemLabels",
         "tags": [
@@ -18820,7 +18820,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/labels": {
+    "/v1/entities/properties/{property_id}/labels": {
       "get": {
         "operationId": "getPropertyLabels",
         "tags": [
@@ -19747,7 +19747,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/labels/{language_code}": {
+    "/v1/entities/items/{item_id}/labels/{language_code}": {
       "get": {
         "operationId": "getItemLabel",
         "tags": [
@@ -21036,7 +21036,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
+    "/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getItemLabelWithFallback",
         "tags": [
@@ -21330,7 +21330,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/labels/{language_code}": {
+    "/v1/entities/properties/{property_id}/labels/{language_code}": {
       "get": {
         "operationId": "getPropertyLabel",
         "tags": [
@@ -22517,7 +22517,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
+    "/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getPropertyLabelWithFallback",
         "tags": [
@@ -22799,7 +22799,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/aliases": {
+    "/v1/entities/items/{item_id}/aliases": {
       "get": {
         "operationId": "getItemAliases",
         "tags": [
@@ -23751,7 +23751,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/aliases": {
+    "/v1/entities/properties/{property_id}/aliases": {
       "get": {
         "operationId": "getPropertyAliases",
         "tags": [
@@ -24684,7 +24684,7 @@
         }
       }
     },
-    "/entities/items/{item_id}/aliases/{language_code}": {
+    "/v1/entities/items/{item_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getItemAliasesInLanguage",
         "tags": [
@@ -25512,7 +25512,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/aliases/{language_code}": {
+    "/v1/entities/properties/{property_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getPropertyAliasesInLanguage",
         "tags": [
@@ -26283,7 +26283,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/statements": {
+    "/v1/entities/properties/{property_id}/statements": {
       "get": {
         "operationId": "getPropertyStatements",
         "tags": [
@@ -27771,7 +27771,7 @@
         }
       }
     },
-    "/entities/properties/{property_id}/statements/{statement_id}": {
+    "/v1/entities/properties/{property_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getPropertyStatement",
         "tags": [
@@ -30596,7 +30596,7 @@
         }
       }
     },
-    "/statements/{statement_id}": {
+    "/v1/statements/{statement_id}": {
       "get": {
         "operationId": "getStatement",
         "tags": [
