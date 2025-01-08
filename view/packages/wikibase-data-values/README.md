@@ -9,7 +9,7 @@ mirrors most of the PHP implementations of DataValue classes as specified in the
 [Number](https://github.com/DataValues/Number), and
 [Time](https://github.com/DataValues/Time) libraries).
 
-[![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavaScript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavaScript)
+[![Build Status](https://github.com/wmde/DataValuesJavaScript/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/wmde/DataValuesJavaScript/actions/workflows/ci.yaml)
 
 ## Release notes
 ### 0.11.0 (dev)
