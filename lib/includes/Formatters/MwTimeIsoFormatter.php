@@ -33,8 +33,8 @@ class MwTimeIsoFormatter implements ValueFormatter {
 		LanguageFactory $languageFactory,
 		?FormatterOptions $options = null
 	) {
-		$this->options = $options ?: new FormatterOptions();
-		$this->options->defaultOption( ValueFormatter::OPT_LANG, 'en' );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( ValueFormatter::OPT_LANG, 'en' );
 
 		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$this->language = $languageFactory->getLanguage( $languageCode );

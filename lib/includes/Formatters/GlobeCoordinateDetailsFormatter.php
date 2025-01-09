@@ -38,10 +38,9 @@ class GlobeCoordinateDetailsFormatter implements ValueFormatter {
 		ValueFormatter $vocabularyUriFormatter,
 		?FormatterOptions $options = null
 	) {
-		$this->options = $options ?: new FormatterOptions();
-
 		// TODO: What's a good default? Should this be locale dependant? Configurable?
-		$this->options->defaultOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
+		$this->options = ( $options ?: new FormatterOptions() )
+			->withDefaultOption( LatLongFormatter::OPT_FORMAT, LatLongFormatter::TYPE_DMS );
 
 		$this->coordinateFormatter = new GlobeCoordinateFormatter( $this->options );
 

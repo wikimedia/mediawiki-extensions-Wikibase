@@ -27,11 +27,17 @@ class PlaintextTimeFormatterTest extends MediaWikiIntegrationTestCase {
 			->method( 'format' )
 			->with( $value )
 			->willReturn( '22 November 2022' );
-		$options = new FormatterOptions( [ ValueFormatter::OPT_LANG => 'qqx' ] );
+		$options = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+		] );
+		$expectedOptionsForCall = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+			ShowCalendarModelDecider::OPT_SHOW_CALENDAR => false,
+		] );
 		$decider = $this->createMock( ShowCalendarModelDecider::class );
 		$decider->expects( $this->once() )
 			->method( 'showCalendarModel' )
-			->with( $value, $options )
+			->with( $value, $expectedOptionsForCall )
 			->willReturn( false );
 
 		$formatter = new PlaintextTimeFormatter( $options, $dateTimeFormatter, $decider );
@@ -47,11 +53,17 @@ class PlaintextTimeFormatterTest extends MediaWikiIntegrationTestCase {
 			->method( 'format' )
 			->with( $value )
 			->willReturn( '22 November 2022' );
-		$options = new FormatterOptions( [ ValueFormatter::OPT_LANG => 'qqx' ] );
+		$options = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+		] );
+		$expectedOptionsForCall = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+			ShowCalendarModelDecider::OPT_SHOW_CALENDAR => false,
+		] );
 		$decider = $this->createMock( ShowCalendarModelDecider::class );
 		$decider->expects( $this->once() )
 			->method( 'showCalendarModel' )
-			->with( $value, $options )
+			->with( $value, $expectedOptionsForCall )
 			->willReturn( true );
 
 		$formatter = new PlaintextTimeFormatter( $options, $dateTimeFormatter, $decider );
@@ -68,11 +80,17 @@ class PlaintextTimeFormatterTest extends MediaWikiIntegrationTestCase {
 			->method( 'format' )
 			->with( $value )
 			->willReturn( '22 November 2022' );
-		$options = new FormatterOptions( [ ValueFormatter::OPT_LANG => 'qqx' ] );
+		$options = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+		] );
+		$expectedOptionsForCall = new FormatterOptions( [
+			ValueFormatter::OPT_LANG => 'qqx',
+			ShowCalendarModelDecider::OPT_SHOW_CALENDAR => false,
+		] );
 		$decider = $this->createMock( ShowCalendarModelDecider::class );
 		$decider->expects( $this->once() )
 			->method( 'showCalendarModel' )
-			->with( $value, $options )
+			->with( $value, $expectedOptionsForCall )
 			->willReturn( true );
 
 		$formatter = new PlaintextTimeFormatter( $options, $dateTimeFormatter, $decider );

@@ -50,13 +50,13 @@ class DateFormatParser extends StringValueParser {
 	private $isoTimestampParser;
 
 	public function __construct( ?ParserOptions $options = null ) {
-		parent::__construct( $options );
-
-		$this->defaultOption( self::OPT_DATE_FORMAT, 'j F Y' );
-		// FIXME: Should not be an option. Options should be trivial, never arrays or objects!
-		$this->defaultOption( self::OPT_DIGIT_TRANSFORM_TABLE, null );
-		$this->defaultOption( self::OPT_MONTH_NAMES, null );
-		$this->defaultOption( self::OPT_PRECISION, null );
+		parent::__construct( ( $options ?? new ParserOptions() )
+			->withDefaultOption( self::OPT_DATE_FORMAT, 'j F Y' )
+			// FIXME: Should not be an option. Options should be trivial, never arrays or objects!
+			->withDefaultOption( self::OPT_DIGIT_TRANSFORM_TABLE, null )
+			->withDefaultOption( self::OPT_MONTH_NAMES, null )
+			->withDefaultOption( self::OPT_PRECISION, null )
+		);
 
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
