@@ -333,11 +333,6 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 					return $recordsToInsert;
 				}
 
-				// @todo Remove temporary monitoring for T233414 soon
-				MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-					'wikibase.repo.term_store.tmp.ids_needing_to_reinsert'
-				);
-
 				if ( count( $idsToRestore ) !== count( $recordsToInsert ) ) {
 					// This means the ids are not the same, this can happen due to duplicate entries
 					// or a record that exist in another language and as the result doesn't get to be in $recordsToInsert
