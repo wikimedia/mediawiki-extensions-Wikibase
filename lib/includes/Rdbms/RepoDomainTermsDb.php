@@ -21,8 +21,12 @@ class RepoDomainTermsDb implements TermsDomainDb {
 		$this->repoDb = $repoDb;
 	}
 
-	public function getWriteConnection( int $flags = 0 ): IDatabase {
-		return $this->repoDb->connections()->getWriteConnection( $flags );
+	public function getWriteConnection(): IDatabase {
+		return $this->repoDb->connections()->getWriteConnection();
+	}
+
+	public function getAutoCommitPrimaryConnection(): IDatabase {
+		return $this->repoDb->getAutoCommitPrimaryConnection();
 	}
 
 	public function getReadConnection( ?array $groups = null ): IReadableDatabase {

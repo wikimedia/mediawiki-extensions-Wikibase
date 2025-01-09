@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Rdbms;
 
 use Wikimedia\Rdbms\ConnectionManager;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
@@ -76,6 +77,10 @@ abstract class DomainDb {
 			);
 		}
 		return $this->connectionManager;
+	}
+
+	public function getAutoCommitPrimaryConnection(): IDatabase {
+		return $this->lbFactory->getAutoCommitPrimaryConnection( $this->domainId );
 	}
 
 	public function replication(): ReplicationWaiter {

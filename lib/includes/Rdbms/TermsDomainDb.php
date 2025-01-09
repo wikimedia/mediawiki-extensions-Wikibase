@@ -18,7 +18,9 @@ use Wikimedia\Rdbms\IReadableDatabase;
  */
 interface TermsDomainDb {
 
-	public function getWriteConnection( int $flags = 0 ): IDatabase;
+	public function getWriteConnection(): IDatabase;
+
+	public function getAutoCommitPrimaryConnection(): IDatabase;
 
 	public function getReadConnection( ?array $groups = null ): IReadableDatabase;
 

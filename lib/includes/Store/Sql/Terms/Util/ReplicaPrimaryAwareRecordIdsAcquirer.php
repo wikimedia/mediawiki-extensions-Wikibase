@@ -7,7 +7,6 @@ namespace Wikibase\Lib\Store\Sql\Terms\Util;
 use LogicException;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
@@ -169,7 +168,7 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 				// gets stuck in an infinite loop. To avoid this, we read it with CONN_TRX_AUTOCOMMIT
 				// Surprisingly it's not too rare not to happen in production: T247553
 
-				$dbw = $this->termsDb->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
+				$dbw = $this->termsDb->getAutoCommitPrimaryConnection();
 
 				$insertedRecords = array_merge(
 					$insertedRecords,
