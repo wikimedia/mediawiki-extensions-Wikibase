@@ -29,7 +29,7 @@
     "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
+    "eslint": "^5.16.0",
     "eslint-config-wikimedia": "0.4.0",
     "eslint-plugin-mediawiki": "^0.2.1",
     "karma": "^1.7.0",
