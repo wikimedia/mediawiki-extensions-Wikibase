@@ -1,11 +1,13 @@
 'use strict';
 
-const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 const { assert } = require( 'api-testing' );
 const { assertValidError } = require( '../helpers/responseValidator' );
-const { newStatementWithRandomStringValue } = require( '../helpers/entityHelper' );
-const { newPatchPropertyRequestBuilder, newPatchItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const entityHelper = require( '../helpers/entityHelper' );
+const { newStatementWithRandomStringValue, createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const {
+	newPatchPropertyRequestBuilder,
+	newPatchItemRequestBuilder,
+	newCreateItemRequestBuilder
+} = require( '../helpers/RequestBuilderFactory' );
 
 function assertResourceTooLargeResponse( response, maxSizeInKb ) {
 	assertValidError(
@@ -27,41 +29,41 @@ function assertResourceTooLargeResponse( response, maxSizeInKb ) {
 // Note: If we need to check whether a resource (entity) is too large, we can use the
 // action API to get the entity size. Here's a helpful link for that:
 // https://www.wikidata.org/w/api.php?action=query&format=json&prop=info&titles={entity_id}&formatversion=2
-describeWithTestData( 'Resource too large tests', ( itemRequestInputs, propertyRequestInputs ) => {
-	describe( 'resource too large', () => {
-		let predicatePropertyId;
-		const fiveThousandStatements = [];
-		const maxSizeInKb = 1;
+describe( 'resource too large', () => {
+	let propertyId;
+	let itemId;
+	const fiveThousandStatements = [];
+	const maxSizeInKb = 1;
 
-		before( async () => {
-			predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
-			for ( let i = 0; i < 5000; i++ ) {
-				fiveThousandStatements.push( newStatementWithRandomStringValue( predicatePropertyId ) );
-			}
-		} );
+	before( async () => {
+		itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+		propertyId = ( await createUniqueStringProperty() ).body.id;
+		for ( let i = 0; i < 5000; i++ ) {
+			fiveThousandStatements.push( newStatementWithRandomStringValue( propertyId ) );
+		}
+	} );
 
-		it( 'resource (item) is too large', async () => {
-			const response = await newPatchItemRequestBuilder(
-				itemRequestInputs.itemId,
-				[ { op: 'add', path: `/statements/${predicatePropertyId}`, value: fiveThousandStatements } ]
-			)
-				.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
-				.assertValidRequest()
-				.makeRequest();
+	it( 'resource (item) is too large', async () => {
+		const response = await newPatchItemRequestBuilder(
+			itemId,
+			[ { op: 'add', path: `/statements/${propertyId}`, value: fiveThousandStatements } ]
+		)
+			.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
+			.assertValidRequest()
+			.makeRequest();
 
-			assertResourceTooLargeResponse( response, maxSizeInKb );
-		} );
+		assertResourceTooLargeResponse( response, maxSizeInKb );
+	} );
 
-		it( 'resource (property) is too large', async () => {
-			const response = await newPatchPropertyRequestBuilder(
-				propertyRequestInputs.propertyId,
-				[ { op: 'add', path: `/statements/${predicatePropertyId}`, value: fiveThousandStatements } ]
-			)
-				.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
-				.assertValidRequest()
-				.makeRequest();
+	it( 'resource (property) is too large', async () => {
+		const response = await newPatchPropertyRequestBuilder(
+			propertyId,
+			[ { op: 'add', path: `/statements/${propertyId}`, value: fiveThousandStatements } ]
+		)
+			.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
+			.assertValidRequest()
+			.makeRequest();
 
-			assertResourceTooLargeResponse( response, maxSizeInKb );
-		} );
+		assertResourceTooLargeResponse( response, maxSizeInKb );
 	} );
 } );
