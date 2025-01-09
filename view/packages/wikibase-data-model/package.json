@@ -34,7 +34,7 @@
     "eslint-plugin-mediawiki": "^0.2.1",
     "karma": "^1.7.0",
     "karma-cli": "^1.0.1",
-    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-chrome-launcher": "^3.1.0",
     "karma-qunit": "^1.2.1",
     "karma-webpack": "^4.0.2",
     "qunitjs": "^2.3.2",
