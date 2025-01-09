@@ -20,7 +20,7 @@ interface TermsDomainDb {
 
 	public function getWriteConnection( int $flags = 0 ): IDatabase;
 
-	public function getReadConnection( ?array $groups = null, int $flags = 0 ): IReadableDatabase;
+	public function getReadConnection( ?array $groups = null ): IReadableDatabase;
 
 	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void;
 

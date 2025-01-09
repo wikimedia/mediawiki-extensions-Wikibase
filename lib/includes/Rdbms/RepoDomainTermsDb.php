@@ -25,8 +25,8 @@ class RepoDomainTermsDb implements TermsDomainDb {
 		return $this->repoDb->connections()->getWriteConnection( $flags );
 	}
 
-	public function getReadConnection( ?array $groups = null, int $flags = 0 ): IReadableDatabase {
-		return $this->repoDb->connections()->getReadConnection( $groups, $flags );
+	public function getReadConnection( ?array $groups = null ): IReadableDatabase {
+		return $this->repoDb->connections()->getReadConnection( $groups );
 	}
 
 	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void {

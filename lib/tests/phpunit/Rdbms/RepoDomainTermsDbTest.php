@@ -22,13 +22,12 @@ class RepoDomainTermsDbTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetReadConnection(): void {
 		$loadGroups = [ 'some group' ];
-		$flags = 123;
 		$expected = $this->createStub( IDatabase::class );
 
 		$connectionManager = $this->createMock( ConnectionManager::class );
 		$connectionManager->expects( $this->once() )
 			->method( 'getReadConnection' )
-			->with( $loadGroups, $flags )
+			->with( $loadGroups )
 			->willReturn( $expected );
 
 		$repoDomainDb = $this->createStub( RepoDomainDb::class );
@@ -36,18 +35,16 @@ class RepoDomainTermsDbTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame(
 			$expected,
-			( new RepoDomainTermsDb( $repoDomainDb ) )->getReadConnection( $loadGroups, $flags )
+			( new RepoDomainTermsDb( $repoDomainDb ) )->getReadConnection( $loadGroups )
 		);
 	}
 
 	public function testGetWriteConnection(): void {
-		$flags = 321;
 		$expected = $this->createStub( IDatabase::class );
 
 		$connectionManager = $this->createMock( ConnectionManager::class );
 		$connectionManager->expects( $this->once() )
 			->method( 'getWriteConnection' )
-			->with( $flags )
 			->willReturn( $expected );
 
 		$repoDomainDb = $this->createStub( RepoDomainDb::class );
@@ -55,7 +52,7 @@ class RepoDomainTermsDbTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame(
 			$expected,
-			( new RepoDomainTermsDb( $repoDomainDb ) )->getWriteConnection( $flags )
+			( new RepoDomainTermsDb( $repoDomainDb ) )->getWriteConnection()
 		);
 	}
 
