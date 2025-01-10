@@ -17,6 +17,7 @@ use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @license GPL-2.0-or-later
@@ -104,6 +105,8 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		$updater->dropExtensionTable( 'wb_changes_dispatch' );
+
+		$this->sanitizeTermTypeIds( $updater );
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
@@ -312,6 +315,69 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$primer->setProgressReporter( $reporter );
 
 		$primer->fillSubscriptionTable();
+	}
+
+	private function sanitizeTermTypeIds( DatabaseUpdater $updater ): void {
+		$db = $updater->getDB();
+		if ( !$db->tableExists( 'wbt_type', __METHOD__ ) ) {
+			return;
+		}
+
+		$sanitizedTypeIds = [ 'label' => 1, 'description' => 2, 'alias' => 3 ];
+		$currentTypeIds = $this->getCurrentTermTypeIds( $db );
+		if ( $currentTypeIds == $sanitizedTypeIds ) {
+			return;
+		}
+
+		$updater->output( "...sanitizing Wikibase term type IDs.\n" );
+
+		// setting temporary IDs so that they don't get mixed up
+		$tmpTypeIds = [ 'label' => 101, 'description' => 102, 'alias' => 103 ];
+		foreach ( $currentTypeIds as $type => $currentId ) {
+			if ( $currentId !== $sanitizedTypeIds[$type] ) {
+				$updater->output( "...setting temporary Wikibase $type IDs.\n" );
+				$this->updateTermTypeId( $db, $currentId, $tmpTypeIds[$type] );
+			}
+		}
+
+		// update to final type IDs
+		foreach ( [ 'label', 'description', 'alias' ] as $type ) {
+			$updater->output( "...setting final Wikibase $type IDs.\n" );
+			$this->updateTermTypeId( $db, $tmpTypeIds[$type], $sanitizedTypeIds[$type] );
+		}
+
+		// update the wbt_type table itself accordingly
+		$db->truncateTable( 'wbt_type', __METHOD__ );
+		$db->newInsertQueryBuilder()
+			->insertInto( 'wbt_type' )
+			->rows( [
+				[ 'wby_name' => 'label', 'wby_id' => $sanitizedTypeIds['label'] ],
+				[ 'wby_name' => 'description', 'wby_id' => $sanitizedTypeIds['description'] ],
+				[ 'wby_name' => 'alias', 'wby_id' => $sanitizedTypeIds['alias'] ],
+			] )
+			->caller( __METHOD__ )->execute();
+	}
+
+	private function getCurrentTermTypeIds( IMaintainableDatabase $db ): array {
+		$currentTypes = [];
+		$termTypeRows = $db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'wbt_type' )
+			->caller( __METHOD__ )->fetchResultSet();
+
+		foreach ( $termTypeRows as $row ) {
+			$currentTypes[$row->wby_name] = (int)$row->wby_id;
+		}
+
+		return $currentTypes;
+	}
+
+	private function updateTermTypeId( IMaintainableDatabase $db, int $currentId, int $newId ): void {
+		$db->newUpdateQueryBuilder()
+			->update( 'wbt_term_in_lang' )
+			->set( [ 'wbtl_type_id' => $newId ] )
+			->where( [ 'wbtl_type_id' => $currentId ] )
+			->caller( __METHOD__ )->execute();
 	}
 
 }
