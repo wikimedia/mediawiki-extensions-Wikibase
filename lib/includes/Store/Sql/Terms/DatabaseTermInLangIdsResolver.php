@@ -8,7 +8,6 @@ use Psr\Log\NullLogger;
 use stdClass;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
-use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -21,29 +20,16 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 
 	use StatsMonitoring;
 
-	/** @var TypeIdsResolver */
-	private $typeIdsResolver;
-
-	/** @var TypeIdsLookup */
-	private $typeIdsLookup;
-
 	/** @var TermsDomainDb */
 	private $termsDb;
 
 	/** @var LoggerInterface */
 	private $logger;
 
-	/** @var string[] stash of data returned from the {@link TypeIdsResolver} */
-	private $typeNames = [];
-
 	public function __construct(
-		TypeIdsResolver $typeIdsResolver,
-		TypeIdsLookup $typeIdsLookup,
 		TermsDomainDb $termsDb,
 		?LoggerInterface $logger = null
 	) {
-		$this->typeIdsResolver = $typeIdsResolver;
-		$this->typeIdsLookup = $typeIdsLookup;
 		$this->termsDb = $termsDb;
 		$this->logger = $logger ?: new NullLogger();
 	}
@@ -87,7 +73,6 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		$result = $this->newSelectQueryBuilder( $types, $languages )
 			->where( [ 'wbtl_id' => $allTermInLangIds ] )
 			->caller( __METHOD__ )->fetchResultSet();
-		$this->preloadTypes( $result );
 
 		foreach ( $result as $row ) {
 			foreach ( $groupNamesByTermInLangIds[$row->wbtl_id] as $groupName ) {
@@ -144,8 +129,6 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 			->where( $conditions )
 			->caller( __METHOD__ )->fetchResultSet();
 
-		$this->preloadTypes( $records );
-
 		$termsByKeyColumn = [];
 		foreach ( $records as $record ) {
 			if ( !isset( $termsByKeyColumn[$record->$groupColumn] ) ) {
@@ -176,17 +159,6 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		return $queryBuilder;
 	}
 
-	private function preloadTypes( IResultWrapper $result ) {
-		$typeIds = [];
-		foreach ( $result as $row ) {
-			$typeId = $row->wbtl_type_id;
-			if ( !array_key_exists( $typeId, $this->typeNames ) ) {
-				$typeIds[$typeId] = true;
-			}
-		}
-		$this->typeNames += $this->typeIdsResolver->resolveTypeIds( array_keys( $typeIds ) );
-	}
-
 	private function addResultTerms( array &$terms, stdClass $row ) {
 		$type = $this->lookupTypeName( $row->wbtl_type_id );
 		$lang = $row->wbxl_language;
@@ -195,16 +167,15 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function lookupTypeName( $typeId ) {
-		$typeName = $this->typeNames[$typeId] ?? null;
+		$typeName = array_flip( TermTypeIds::TYPE_IDS )[$typeId] ?? null;
 		if ( $typeName === null ) {
-			throw new InvalidArgumentException(
-				'Type ID ' . $typeId . ' was requested but not preloaded!' );
+			throw new InvalidArgumentException( 'Unknown type ID: ' . $typeId );
 		}
 		return $typeName;
 	}
 
 	private function lookupTypeIds( array $typeNames ) {
-		return $this->typeIdsLookup->lookupTypeIds( $typeNames );
+		return array_intersect_key( TermTypeIds::TYPE_IDS, array_flip( $typeNames ) );
 	}
 
 	private function getDbr() {

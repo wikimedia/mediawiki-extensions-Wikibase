@@ -27,21 +27,14 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 */
 	private $termsDb;
 
-	/**
-	 * @var TypeIdsAcquirer
-	 */
-	private $typeIdsAcquirer;
-
 	/** @var LoggerInterface */
 	private $logger;
 
 	public function __construct(
 		TermsDomainDb $termsDb,
-		TypeIdsAcquirer $typeIdsAcquirer,
 		?LoggerInterface $logger = null
 	) {
 		$this->termsDb = $termsDb;
-		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->logger = $logger ?? new NullLogger();
 	}
 
@@ -83,7 +76,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	 *	]
 	 */
 	private function mapToTypeIds( array $termsArray ) {
-		$typeIds = $this->typeIdsAcquirer->acquireTypeIds( array_keys( $termsArray ) );
+		$typeIds = array_intersect_key( TermTypeIds::TYPE_IDS, $termsArray );
 
 		$termsArrayByTypeId = [];
 		foreach ( $typeIds as $type => $typeId ) {

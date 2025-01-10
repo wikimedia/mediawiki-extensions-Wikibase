@@ -34,10 +34,6 @@ class MatchingTermsLookupFactoryTest extends ServiceWiringTestCase {
 			$this->createStub( TermsDomainDbFactory::class )
 		);
 
-		$this->serviceContainer
-			->expects( $this->once() )
-			->method( 'getMainWANObjectCache' );
-
 		$this->assertInstanceOf(
 			MatchingTermsLookupFactory::class,
 			$this->getService( 'WikibaseRepo.MatchingTermsLookupFactory' )

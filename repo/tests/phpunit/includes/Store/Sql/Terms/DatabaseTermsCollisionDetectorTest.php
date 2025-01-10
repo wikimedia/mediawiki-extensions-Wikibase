@@ -9,8 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
+use Wikibase\Lib\Store\Sql\Terms\TermTypeIds;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
 
@@ -25,11 +24,6 @@ use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
 class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
-
-	private const TYPE_LABEL = 1;
-	private const TYPE_DESCRIPTION = 2;
-
-	private TypeIdsLookup $typeIdsLookup;
 
 	/**
 	 * Following *TermInLangId are ids of records in
@@ -54,10 +48,6 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->typeIdsLookup = new StaticTypeIdsStore( [
-			'label' => self::TYPE_LABEL,
-			'description' => self::TYPE_DESCRIPTION,
-		] );
 		$this->setUpTerms();
 	}
 
@@ -110,25 +100,25 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		// label term_in_lang records
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $enFooTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::LABEL_TYPE_ID, 'wbtl_text_in_lang_id' => $enFooTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->enFooLabelTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $enBarTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::LABEL_TYPE_ID, 'wbtl_text_in_lang_id' => $enBarTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->enBarLabelTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $deFooTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::LABEL_TYPE_ID, 'wbtl_text_in_lang_id' => $deFooTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->deFooLabelTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $deBarTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::LABEL_TYPE_ID, 'wbtl_text_in_lang_id' => $deBarTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->deBarLabelTermInLangId = $this->getDb()->insertId();
@@ -136,25 +126,25 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 		// description term_in_lang records
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $enFooTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::DESCRIPTION_TYPE_ID, 'wbtl_text_in_lang_id' => $enFooTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->enFooDescriptionTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $enBarTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::DESCRIPTION_TYPE_ID, 'wbtl_text_in_lang_id' => $enBarTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->enBarDescriptionTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $deFooTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::DESCRIPTION_TYPE_ID, 'wbtl_text_in_lang_id' => $deFooTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->deFooDescriptionTermInLangId = $this->getDb()->insertId();
 		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbt_term_in_lang' )
-			->row( [ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $deBarTextInLangId ] )
+			->row( [ 'wbtl_type_id' => TermTypeIds::DESCRIPTION_TYPE_ID, 'wbtl_text_in_lang_id' => $deBarTextInLangId ] )
 			->caller( __METHOD__ )
 			->execute();
 		$this->deBarDescriptionTermInLangId = $this->getDb()->insertId();
@@ -163,8 +153,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private function makeTestSubject( string $entityType ): DatabaseTermsCollisionDetector {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			$this->getTermsDomainDb(),
-			$this->typeIdsLookup
+			$this->getTermsDomainDb()
 		);
 	}
 

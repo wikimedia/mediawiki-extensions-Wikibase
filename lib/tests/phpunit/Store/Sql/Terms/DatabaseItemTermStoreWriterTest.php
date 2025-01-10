@@ -14,12 +14,10 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter
@@ -83,14 +81,10 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$termsDb = $this->getTermsDomainDb();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			WANObjectCache::newEmpty()
-		);
 
 		return new DatabaseItemTermStoreWriter( $termsDb, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
+			new DatabaseTermInLangIdsAcquirer( $termsDb ),
+			new DatabaseTermInLangIdsResolver( $termsDb ),
 			new StringNormalizer()
 		);
 	}
@@ -300,14 +294,10 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		$itemStoreWriter = $this->getItemTermStoreWriter();
 
 		$termsDb = $this->getTermsDomainDb();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			WANObjectCache::newEmpty()
-		);
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ), new StringNormalizer()
+			new DatabaseTermInLangIdsAcquirer( $termsDb ),
+			new DatabaseTermInLangIdsResolver( $termsDb ), new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter->storeTerms( new NumericPropertyId( 'P12' ), new Fingerprint(

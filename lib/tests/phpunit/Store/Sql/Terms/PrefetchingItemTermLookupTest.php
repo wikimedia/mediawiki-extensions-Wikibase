@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use JobQueueGroup;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -15,7 +14,6 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -50,15 +48,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 
 		$termsDb = $this->getTermsDomainDb();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
-		);
-		$termIdsStore = new DatabaseTermInLangIdsResolver(
-			$typeIdsStore,
-			$typeIdsStore,
-			$termsDb
-		);
+		$termIdsStore = new DatabaseTermInLangIdsResolver( $termsDb );
 		$this->lookup = new PrefetchingItemTermLookup(
 			$termIdsStore
 		);
@@ -66,10 +56,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$termsDb,
 			$this->createMock( JobQueueGroup::class ),
-			new DatabaseTermInLangIdsAcquirer(
-				$termsDb,
-				$typeIdsStore
-			),
+			new DatabaseTermInLangIdsAcquirer( $termsDb ),
 			$termIdsStore,
 			new StringNormalizer()
 		);

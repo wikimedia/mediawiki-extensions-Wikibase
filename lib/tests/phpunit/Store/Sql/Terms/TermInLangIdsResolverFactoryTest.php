@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -98,8 +97,7 @@ class TermInLangIdsResolverFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$factory = new TermInLangIdsResolverFactory(
 			$this->getTermsDomainDbFactory(),
-			new NullLogger(),
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
+			new NullLogger()
 		);
 
 		$entitySource = $this->createStub( DatabaseEntitySource::class );

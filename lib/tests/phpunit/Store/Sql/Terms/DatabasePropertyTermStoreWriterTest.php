@@ -11,12 +11,10 @@ use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter
@@ -80,13 +78,9 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$termsDb = $this->getTermsDomainDb();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			WANObjectCache::newEmpty()
-		);
 		return new DatabasePropertyTermStoreWriter( $termsDb, $jobQueue,
-			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
+			new DatabaseTermInLangIdsAcquirer( $termsDb ),
+			new DatabaseTermInLangIdsResolver( $termsDb ),
 			new StringNormalizer()
 		);
 	}

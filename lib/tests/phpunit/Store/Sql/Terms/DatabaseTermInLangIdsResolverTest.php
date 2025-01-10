@@ -4,8 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
@@ -25,9 +23,6 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	private const TYPE_DESCRIPTION = 2;
 	private const TYPE_ALIAS = 3;
 
-	/** @var TypeIdsResolver */
-	private $typeIdsResolver;
-
 	/** @var IDatabase */
 	private $db;
 
@@ -36,11 +31,6 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	protected function setUp(): void {
-		$this->typeIdsResolver = new StaticTypeIdsStore( [
-			'label' => self::TYPE_LABEL,
-			'description' => self::TYPE_DESCRIPTION,
-			'alias' => self::TYPE_ALIAS,
-		] );
 		$this->db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
 		$this->db->sourceFile( $this->getSqlFileAbsolutePath() );
 	}
@@ -89,11 +79,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveTermInLangIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
 
 		$this->assertSame( [
@@ -232,11 +218,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLangIds[] = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveTermInLangIds(
 			$termInLangIds,
 			$types,
@@ -247,11 +229,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testCanResolveEmptyList() {
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 
 		$this->assertSame( [], $resolver->resolveTermInLangIds( [] ) );
 	}
@@ -300,11 +278,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
 			'Q2' => [ $termInLang3Id ],
@@ -326,21 +300,13 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped_CanResolveEmptyList() {
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 
 		$this->assertSame( [], $resolver->resolveGroupedTermInLangIds( [] ) );
 	}
 
 	public function testGrouped_CanResolveListOfEmptyLists() {
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 
 		$this->assertSame(
 			[ 'x' => [], 'y' => [] ],
@@ -392,11 +358,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
 			'Q2' => [ $termInLang3Id ],
@@ -463,11 +425,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
 			'Q2' => [ $termInLang1Id, $termInLang2Id ],
@@ -569,11 +527,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->caller( __METHOD__ )
 			->execute();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 
 		$termIds = $resolver->resolveTermsViaJoin(
 			'wbt_property_terms',
@@ -650,11 +604,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			->execute();
 		$termInLang4Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermInLangIdsResolver(
-			$this->typeIdsResolver,
-			$this->typeIdsResolver,
-			$this->getTermsDomainDb()
-		);
+		$resolver = new DatabaseTermInLangIdsResolver( $this->getTermsDomainDb() );
 		$terms = $resolver->resolveGroupedTermInLangIds(
 			[
 				'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],

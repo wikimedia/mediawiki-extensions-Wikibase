@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -14,13 +13,11 @@ use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * @covers \Wikibase\Lib\Store\MatchingTermsLookupFactory
@@ -39,11 +36,6 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $dbFactory;
 
-	/**
-	 * @var WANObjectCache
-	 */
-	private $objectCache;
-
 	private const MOCK_ITEM_LABELS = [
 		'Q100' => 'Hello',
 		'Q200' => 'Goodbye',
@@ -61,19 +53,13 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$this->dbFactory = $this->getTermsDomainDbFactory();
-		$this->objectCache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$termsDb = $this->dbFactory->newTermsDb();
-
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			$this->objectCache
-		);
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $termsDb, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $termsDb ),
+			new DatabaseTermInLangIdsAcquirer( $termsDb ),
+			new DatabaseTermInLangIdsResolver( $termsDb ),
 			new StringNormalizer()
 		);
 
@@ -96,8 +82,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 				},
 			] ),
 			$this->dbFactory,
-			new NullLogger(),
-			$this->objectCache
+			new NullLogger()
 		);
 
 		$itemSource = $this->createMock( DatabaseEntitySource::class );

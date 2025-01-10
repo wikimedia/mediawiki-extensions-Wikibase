@@ -77,12 +77,8 @@ use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -753,32 +749,6 @@ class WikibaseRepo {
 	public static function getTermsDomainDbFactory( ?ContainerInterface $services = null ): TermsDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.TermsDomainDbFactory' );
-	}
-
-	/**
-	 * Do not use this service directly. Instead, use the service(s) for the interface(s) you need:
-	 * * {@link getTypeIdsAcquirer} for {@link TypeIdsAcquirer}
-	 * * {@link getTypeIdsLookup} for {@link TypeIdsLookup}
-	 * * {@link getTypeIdsResolver} for {@link TypeIdsResolver}
-	 */
-	public static function getDatabaseTypeIdsStore( ?ContainerInterface $services = null ): DatabaseTypeIdsStore {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.DatabaseTypeIdsStore' );
-	}
-
-	public static function getTypeIdsAcquirer( ?ContainerInterface $services = null ): TypeIdsAcquirer {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.TypeIdsAcquirer' );
-	}
-
-	public static function getTypeIdsLookup( ?ContainerInterface $services = null ): TypeIdsLookup {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.TypeIdsLookup' );
-	}
-
-	public static function getTypeIdsResolver( ?ContainerInterface $services = null ): TypeIdsResolver {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.TypeIdsResolver' );
 	}
 
 	public static function getFieldDefinitionsFactory( ?ContainerInterface $services = null ): FieldDefinitionsFactory {

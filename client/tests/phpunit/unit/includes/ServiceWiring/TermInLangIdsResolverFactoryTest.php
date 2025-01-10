@@ -28,10 +28,6 @@ class TermInLangIdsResolverFactoryTest extends ServiceWiringTestCase {
 			$this->createStub( TermsDomainDbFactory::class )
 		);
 
-		$this->serviceContainer
-			->expects( $this->once() )
-			->method( 'getMainWANObjectCache' );
-
 		$this->assertInstanceOf(
 			TermInLangIdsResolverFactory::class,
 			$this->getService( 'WikibaseClient.TermInLangIdsResolverFactory' )

@@ -24,9 +24,6 @@ class TermStoreWriterFactory {
 
 	private DatabaseEntitySource $localEntitySource;
 	private StringNormalizer $stringNormalizer;
-	private TypeIdsAcquirer $typeIdsAcquirer;
-	private TypeIdsLookup $typeIdsLookup;
-	private TypeIdsResolver $typeIdsResolver;
 	private TermsDomainDb $termsDb;
 	private JobQueueGroup $jobQueueGroup;
 	private LoggerInterface $logger;
@@ -34,18 +31,12 @@ class TermStoreWriterFactory {
 	public function __construct(
 		DatabaseEntitySource $localEntitySource,
 		StringNormalizer $stringNormalizer,
-		TypeIdsAcquirer $typeIdsAcquirer,
-		TypeIdsLookup $typeIdsLookup,
-		TypeIdsResolver $typeIdsResolver,
 		TermsDomainDb $termsDb,
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger
 	) {
 		$this->localEntitySource = $localEntitySource;
 		$this->stringNormalizer = $stringNormalizer;
-		$this->typeIdsAcquirer = $typeIdsAcquirer;
-		$this->typeIdsLookup = $typeIdsLookup;
-		$this->typeIdsResolver = $typeIdsResolver;
 		$this->termsDb = $termsDb;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->logger = $logger;
@@ -59,8 +50,8 @@ class TermStoreWriterFactory {
 		return new DatabaseItemTermStoreWriter(
 			$this->termsDb,
 			$this->jobQueueGroup,
-			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
-			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
+			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $this->logger ),
+			new DatabaseTermInLangIdsResolver( $this->termsDb, $this->logger ),
 			$this->stringNormalizer
 		);
 	}
@@ -73,26 +64,9 @@ class TermStoreWriterFactory {
 		return new DatabasePropertyTermStoreWriter(
 			$this->termsDb,
 			$this->jobQueueGroup,
-			$this->newTermInLangIdsAcquirer( $this->typeIdsAcquirer ),
-			$this->newTermInLangIdsResolver( $this->typeIdsResolver, $this->typeIdsLookup ),
+			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $this->logger ),
+			new DatabaseTermInLangIdsResolver( $this->termsDb, $this->logger ),
 			$this->stringNormalizer
-		);
-	}
-
-	private function newTermInLangIdsResolver( TypeIdsResolver $typeResolver, TypeIdsLookup $typeLookup ): TermInLangIdsResolver {
-		return new DatabaseTermInLangIdsResolver(
-			$typeResolver,
-			$typeLookup,
-			$this->termsDb,
-			$this->logger
-		);
-	}
-
-	private function newTermInLangIdsAcquirer( TypeIdsAcquirer $typeAcquirer ): TermInLangIdsAcquirer {
-		return new DatabaseTermInLangIdsAcquirer(
-			$this->termsDb,
-			$typeAcquirer,
-			$this->logger
 		);
 	}
 

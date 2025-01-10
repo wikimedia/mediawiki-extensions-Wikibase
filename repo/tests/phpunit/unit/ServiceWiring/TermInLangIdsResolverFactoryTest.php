@@ -23,10 +23,6 @@ class TermInLangIdsResolverFactoryTest extends ServiceWiringTestCase {
 			new NullLogger()
 		);
 
-		$this->serviceContainer
-			->expects( $this->once() )
-			->method( 'getMainWANObjectCache' );
-
 		$this->mockService(
 			'WikibaseRepo.TermsDomainDbFactory',
 			$this->createStub( TermsDomainDbFactory::class )

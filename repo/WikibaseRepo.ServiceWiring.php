@@ -131,12 +131,8 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
-use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -461,13 +457,6 @@ return [
 	'WikibaseRepo.DataAccessSettings' => function ( MediaWikiServices $services ): DataAccessSettings {
 		return new DataAccessSettings(
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' )
-		);
-	},
-
-	'WikibaseRepo.DatabaseTypeIdsStore' => function ( MediaWikiServices $services ): DatabaseTypeIdsStore {
-		return new DatabaseTypeIdsStore(
-			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
-			$services->getMainWANObjectCache()
 		);
 	},
 
@@ -1519,8 +1508,7 @@ return [
 		return new MatchingTermsLookupFactory(
 			WikibaseRepo::getEntityIdComposer( $services ),
 			WikibaseRepo::getTermsDomainDbFactory( $services ),
-			WikibaseRepo::getLogger( $services ),
-			$services->getMainWANObjectCache()
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 
@@ -1964,8 +1952,7 @@ return [
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
 			WikibaseRepo::getTermsDomainDbFactory( $services ),
-			WikibaseRepo::getLogger( $services ),
-			$services->getMainWANObjectCache()
+			WikibaseRepo::getLogger( $services )
 		);
 	},
 
@@ -1974,10 +1961,7 @@ return [
 	},
 
 	'WikibaseRepo.TermsCollisionDetectorFactory' => function ( MediaWikiServices $services ): TermsCollisionDetectorFactory {
-		return new TermsCollisionDetectorFactory(
-			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
-			WikibaseRepo::getTypeIdsLookup( $services )
-		);
+		return new TermsCollisionDetectorFactory( WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb() );
 	},
 
 	'WikibaseRepo.TermsDomainDbFactory' => function ( MediaWikiServices $services ): TermsDomainDbFactory {
@@ -1993,9 +1977,6 @@ return [
 		return new TermStoreWriterFactory(
 			WikibaseRepo::getLocalEntitySource( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),
-			WikibaseRepo::getTypeIdsAcquirer( $services ),
-			WikibaseRepo::getTypeIdsLookup( $services ),
-			WikibaseRepo::getTypeIdsResolver( $services ),
 			WikibaseRepo::getTermsDomainDbFactory( $services )->newTermsDb(),
 			$services->getJobQueueGroup(),
 			WikibaseRepo::getLogger( $services )
@@ -2028,18 +2009,6 @@ return [
 
 	'WikibaseRepo.TokenCheckInteractor' => function ( MediaWikiServices $services ): TokenCheckInteractor {
 		return new TokenCheckInteractor();
-	},
-
-	'WikibaseRepo.TypeIdsAcquirer' => function ( MediaWikiServices $services ): TypeIdsAcquirer {
-		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
-	},
-
-	'WikibaseRepo.TypeIdsLookup' => function ( MediaWikiServices $services ): TypeIdsLookup {
-		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
-	},
-
-	'WikibaseRepo.TypeIdsResolver' => function ( MediaWikiServices $services ): TypeIdsResolver {
-		return WikibaseRepo::getDatabaseTypeIdsStore( $services );
 	},
 
 	'WikibaseRepo.UnitConverter' => function ( MediaWikiServices $services ): ?UnitConverter {

@@ -120,7 +120,6 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TermInLangIdsResolverFactory;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
@@ -722,18 +721,8 @@ return [
 
 		$termsDb = WikibaseClient::getTermsDomainDbFactory( $services )
 			->newForEntitySource( WikibaseClient::getPropertySource( $services ) );
-		$wanObjectCache = $services->getMainWANObjectCache();
 
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			$wanObjectCache
-		);
-
-		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
-			$typeIdsStore,
-			$typeIdsStore,
-			$termsDb
-		);
+		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver( $termsDb );
 
 		return new CachedDatabasePropertyLabelResolver(
 			$languageCode,
@@ -1017,8 +1006,7 @@ return [
 	): TermInLangIdsResolverFactory {
 		return new TermInLangIdsResolverFactory(
 			WikibaseClient::getTermsDomainDbFactory( $services ),
-			WikibaseClient::getLogger( $services ),
-			$services->getMainWANObjectCache()
+			WikibaseClient::getLogger( $services )
 		);
 	},
 

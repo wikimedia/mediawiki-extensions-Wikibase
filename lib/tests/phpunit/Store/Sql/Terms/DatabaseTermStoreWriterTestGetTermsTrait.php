@@ -11,8 +11,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
-use Wikimedia\ObjectCache\WANObjectCache;
 
 /**
  * Trait for code reuse between DatabaseItemTermStoreWriterTest and DatabasePropertyTermStoreWriterTest
@@ -26,15 +24,7 @@ trait DatabaseTermStoreWriterTestGetTermsTrait {
 
 	private function getTerms( Int32EntityId $entityId, $termsTable, $termInLangField, $idField ): Fingerprint {
 		$termsDb = $this->getTermsDomainDb();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$termsDb,
-			WANObjectCache::newEmpty()
-		);
-		$termInLangIdsResolver = new DatabaseTermInLangIdsResolver(
-			$typeIdsStore,
-			$typeIdsStore,
-			$termsDb
-		);
+		$termInLangIdsResolver = new DatabaseTermInLangIdsResolver( $termsDb );
 
 		$termInLangIds = $this->getDb()->newSelectQueryBuilder()
 			->select( $termInLangField )

@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use MediaWiki\Storage\NameTableAccessException;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -14,7 +13,6 @@ use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
-use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -34,22 +32,14 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 	private LoggerInterface $logger;
 
-	private TypeIdsAcquirer $typeIdsAcquirer;
-
-	private TypeIdsResolver $typeIdsResolver;
-
 	private EntityIdComposer $entityIdComposer;
 
 	public function __construct(
 		TermsDomainDb $termsDb,
-		TypeIdsAcquirer $typeIdsAcquirer,
-		TypeIdsResolver $typeIdsResolver,
 		EntityIdComposer $entityIdComposer,
 		LoggerInterface $logger
 	) {
 		$this->termsDb = $termsDb;
-		$this->typeIdsAcquirer = $typeIdsAcquirer;
-		$this->typeIdsResolver = $typeIdsResolver;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->logger = $logger;
 	}
@@ -179,15 +169,9 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$termType = $mask->getTermType();
 		}
 		if ( $termType !== null ) {
-			try {
-				$queryBuilder->where( [
-					'wbtl_type_id' => $this->typeIdsAcquirer->acquireTypeIds( [ $termType ] )[$termType],
-				] );
-			} catch ( NameTableAccessException $e ) {
-				// Edge case: attempting to do a term lookup before the first insert of the respective term type. Unlikely to happen in
-				// production, but annoying/confusing if it happens in tests.
-				return new FakeResultWrapper( [] );
-			}
+			$queryBuilder->where( [
+				'wbtl_type_id' => TermTypeIds::TYPE_IDS[$termType],
+			] );
 		}
 
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
@@ -217,7 +201,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 				$typeId = (int)$obtainedTerm->wbtl_type_id;
 				$matchingTerms[] = new TermIndexEntry( [
 					'entityId' => $this->getEntityId( $obtainedTerm ),
-					'termType' => $this->typeIdsResolver->resolveTypeIds( [ $typeId ] )[$typeId],
+					'termType' => array_flip( TermTypeIds::TYPE_IDS )[$typeId],
 					'termLanguage' => $obtainedTerm->wbxl_language,
 					'termText' => $obtainedTerm->wbx_text,
 				] );

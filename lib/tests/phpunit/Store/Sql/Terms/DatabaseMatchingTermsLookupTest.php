@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
@@ -14,7 +13,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
@@ -205,12 +203,6 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getMatchingTermsLookup() {
-		$store = new DatabaseTypeIdsStore(
-			$this->termsDb,
-			MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			new NullLogger()
-		);
-
 		$composer = new EntityIdComposer( [
 			'item' => function ( $uniquePart ) {
 				return new ItemId( 'Q' . $uniquePart );
@@ -221,8 +213,6 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		] );
 		return new DatabaseMatchingTermsLookup(
 			$this->termsDb,
-			$store,
-			$store,
 			$composer,
 			new NullLogger()
 		);
@@ -230,16 +220,13 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 
 	private function getItemTermStoreWriter() {
 		$logger = new NullLogger();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$this->termsDb,
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
-		);
 
-		return new DatabaseItemTermStoreWriter( $this->termsDb,
+		return new DatabaseItemTermStoreWriter(
+			$this->termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
-			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $typeIdsStore, $logger ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
-				$this->termsDb, $logger ), new StringNormalizer()
+			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $logger ),
+			new DatabaseTermInLangIdsResolver( $this->termsDb, $logger ),
+			new StringNormalizer()
 		);
 	}
 
