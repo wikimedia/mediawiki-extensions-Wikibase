@@ -3,17 +3,18 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use File;
+use MediaWiki\Language\Language;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
-use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
+use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
 
 /**
- * @covers \Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler
+ * @covers \Wikibase\Client\Hooks\LinkedDataSchemaGenerator
  *
  * @group WikibaseClient
  * @group WikibaseHooks
@@ -34,16 +35,18 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			'/wiki/$1',
 			'/w'
 		);
-		$handler = new SkinAfterBottomScriptsHandler(
-			'en',
+		$generator = new LinkedDataSchemaGenerator(
+			$this->createMock( Language::class ),
 			$repoLinker,
 			WikibaseClient::getTermLookup(),
 			$this->createMockRevisionLookup( '1022523983' )
 		);
 
 		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
-		$actual = $handler->createSchema(
-			$title, $revisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
+		$firstRevisionTimestamp = "2002-05-27T18:26:23Z";
+
+		$actual = $generator->createSchema(
+			$title, $revisionTimestamp, $firstRevisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
 		);
 		$this->assertSchemaSubset( $expected, $actual );
 	}

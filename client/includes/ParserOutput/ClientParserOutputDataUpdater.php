@@ -7,6 +7,7 @@ namespace Wikibase\Client\ParserOutput;
 use InvalidArgumentException;
 use MediaWiki\Content\Content;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -56,6 +57,9 @@ class ClientParserOutputDataUpdater {
 	 */
 	private $logger;
 
+	/** @var RevisionLookup */
+	private $revisionLookup;
+
 	/**
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 *            Use the factory here to defer initialization of things like Site objects.
@@ -63,6 +67,7 @@ class ClientParserOutputDataUpdater {
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulatorFactory $usageAccumulatorFactory
 	 * @param string $siteId The global site ID for the local wiki
+	 * @param RevisionLookup $revisionLookup
 	 * @param LoggerInterface|null $logger
 	 *
 	 * @throws InvalidArgumentException
@@ -73,6 +78,7 @@ class ClientParserOutputDataUpdater {
 		EntityLookup $entityLookup,
 		UsageAccumulatorFactory $usageAccumulatorFactory,
 		string $siteId,
+		RevisionLookup $revisionLookup,
 		?LoggerInterface $logger = null
 	) {
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
@@ -81,6 +87,7 @@ class ClientParserOutputDataUpdater {
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->siteId = $siteId;
 		$this->logger = $logger ?: new NullLogger();
+		$this->revisionLookup = $revisionLookup;
 	}
 
 	/**
@@ -199,6 +206,15 @@ class ClientParserOutputDataUpdater {
 				'wikibase-badge-' . $badge->getSerialization()
 			);
 		}
+	}
+
+	public function updateFirstRevisionTimestampProperty( $title, $parserOutputProvider ): void {
+		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
+		$timestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
+
+		$parserOutputProvider->getParserOutput()->setExtensionData(
+			'first_revision_timestamp', $timestamp
+		);
 	}
 
 	private function getItemIdForTitle( Title $title ): ?ItemId {

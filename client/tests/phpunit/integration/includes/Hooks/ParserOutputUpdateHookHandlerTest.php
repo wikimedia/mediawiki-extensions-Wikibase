@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 use MediaWiki\Content\Content;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
@@ -478,7 +479,8 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->newUsageAccumulatorFactory(),
-			$settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$this->createMock( RevisionLookup::class )
 		);
 	}
 

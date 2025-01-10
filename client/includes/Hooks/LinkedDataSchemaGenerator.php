@@ -4,8 +4,11 @@ namespace Wikibase\Client\Hooks;
 
 use File;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\Language;
+use MediaWiki\Output\Hook\OutputPageParserOutputHook;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Registration\ExtensionRegistry;
-use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;
 use Wikibase\Client\RepoLinker;
@@ -16,26 +19,22 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
 /**
  * @license GPL-2.0-or-later
  */
-class SkinAfterBottomScriptsHandler {
+class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 	/** @var string */
 	private $langCode;
 	/** @var RepoLinker */
 	private $repoLinker;
 	/** @var TermLookup */
 	private $termLookup;
-	/** @var RevisionLookup */
-	private $revisionLookup;
 
 	public function __construct(
-		string $langCode,
+		Language $language,
 		RepoLinker $repoLinker,
-		TermLookup $termLookup,
-		RevisionLookup $revisionLookup
+		TermLookup $termLookup
 	) {
-		$this->langCode = $langCode;
+		$this->langCode = $language->getCode();
 		$this->repoLinker = $repoLinker;
 		$this->termLookup = $termLookup;
-		$this->revisionLookup = $revisionLookup;
 	}
 
 	/**
@@ -47,14 +46,15 @@ class SkinAfterBottomScriptsHandler {
 	 */
 	public function createSchemaElement(
 		Title $title,
-		$revisionTimestamp,
+		?string $revisionTimestamp,
+		?string $firstRevisionTimestamp,
 		EntityId $entityId
-	) {
+	): string {
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
 		$imageFile = $this->queryPageImage( $title );
 		$description = $this->getDescription( $entityId );
 		$schema = $this->createSchema(
-			$title, $revisionTimestamp, $entityConceptUri, $imageFile, $description
+			$title, $revisionTimestamp, $firstRevisionTimestamp, $entityConceptUri, $imageFile, $description
 		);
 
 		$html = Html::openElement( 'script', [ 'type' => 'application/ld+json' ] );
@@ -66,12 +66,11 @@ class SkinAfterBottomScriptsHandler {
 	public function createSchema(
 		Title $title,
 		?string $revisionTimestamp,
+		?string $firstRevisionTimestamp,
 		string $entityConceptUri,
 		?File $imageFile,
 		?string $description
 	): array {
-		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
-		$schemaTimestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
 		$schema = [
 			'@context' => 'https://schema.org',
 			'@type' => 'Article',
@@ -91,8 +90,11 @@ class SkinAfterBottomScriptsHandler {
 					'url' => wfMessage( 'wikibase-page-schema-publisher-logo-url' )->text(),
 				],
 			],
-			'datePublished' => wfTimestamp( TS_ISO_8601, $schemaTimestamp ),
 		];
+
+		if ( $firstRevisionTimestamp ) {
+			$schema['datePublished'] = wfTimestamp( TS_ISO_8601, $firstRevisionTimestamp );
+		}
 
 		if ( $revisionTimestamp ) {
 			$schema['dateModified'] = wfTimestamp( TS_ISO_8601, $revisionTimestamp );
@@ -134,4 +136,16 @@ class SkinAfterBottomScriptsHandler {
 		return $description ?: '';
 	}
 
+	/**
+	 * Add output page properties to be consumed in the LinkedDataSchemaGenerator
+	 *
+	 * @param OutputPage $outputPage
+	 * @param ParserOutput $parserOutput
+	 */
+	public function onOutputPageParserOutput( $outputPage, $parserOutput ): void {
+		$firstRevisionTimestamp = $parserOutput->getExtensionData( 'first_revision_timestamp' );
+		if ( $firstRevisionTimestamp !== null ) {
+			$outputPage->setProperty( 'first_revision_timestamp', $firstRevisionTimestamp );
+		}
+	}
 }

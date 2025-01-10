@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit;
 
 use MediaWiki\Content\Content;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use Psr\Log\LogLevel;
 use TestLogger;
@@ -86,7 +87,8 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->mockRepo,
 			$this->mockRepo,
 			$this->newUsageAccumulatorFactory(),
-			'srwiki'
+			'srwiki',
+			$this->createMock( RevisionLookup::class )
 		);
 	}
 
@@ -284,6 +286,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$mockRepoNoSiteLinks,
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
+			$this->createMock( RevisionLookup::class ),
 			$logger
 		);
 
@@ -314,6 +317,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			new MockRepository(),
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
+			$this->createMock( RevisionLookup::class ),
 			$logger
 		);
 

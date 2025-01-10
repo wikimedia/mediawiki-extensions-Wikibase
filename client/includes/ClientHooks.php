@@ -9,7 +9,7 @@ use MediaWiki\User\User;
 use Skin;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary;
-use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
+use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\ContentLanguages;
@@ -187,6 +187,12 @@ final class ClientHooks {
 		$enabledNamespaces = WikibaseClient::getSettings( $services )
 			->getSetting( 'pageSchemaNamespaces' );
 
+		$generator = new LinkedDataSchemaGenerator(
+			$services->getContentLanguage(),
+			WikibaseClient::getRepoLinker( $services ),
+			WikibaseClient::getTermLookup( $services ),
+		);
+
 		$out = $skin->getOutput();
 		$entityId = self::parseEntityId( $out->getProperty( 'wikibase_item' ) );
 		$title = $out->getTitle();
@@ -199,16 +205,13 @@ final class ClientHooks {
 			return true;
 		}
 
-		$handler = new SkinAfterBottomScriptsHandler(
-			$services->getContentLanguage()->getCode(),
-			WikibaseClient::getRepoLinker( $services ),
-			WikibaseClient::getTermLookup( $services ),
-			$services->getRevisionLookup()
-		);
 		$revisionTimestamp = $out->getRevisionTimestamp();
-		$html .= $handler->createSchemaElement(
+		$firstRevisionTimestamp = $out->getProperty( 'first_revision_timestamp' );
+
+		$html .= $generator->createSchemaElement(
 			$title,
 			$revisionTimestamp,
+			$firstRevisionTimestamp,
 			$entityId
 		);
 
