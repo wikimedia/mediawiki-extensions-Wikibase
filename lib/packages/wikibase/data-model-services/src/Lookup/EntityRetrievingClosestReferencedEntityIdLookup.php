@@ -21,6 +21,8 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class EntityRetrievingClosestReferencedEntityIdLookup implements ReferencedEntityIdLookup {
 

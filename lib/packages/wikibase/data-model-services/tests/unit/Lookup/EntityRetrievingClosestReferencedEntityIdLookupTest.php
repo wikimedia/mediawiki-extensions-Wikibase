@@ -29,6 +29,8 @@ use Wikibase\DataModel\Statement\StatementList;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 

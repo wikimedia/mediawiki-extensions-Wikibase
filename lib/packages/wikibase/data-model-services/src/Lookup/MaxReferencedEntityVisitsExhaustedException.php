@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class MaxReferencedEntityVisitsExhaustedException extends ReferencedEntityIdLookupException {
 
