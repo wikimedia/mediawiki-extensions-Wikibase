@@ -24,7 +24,7 @@
 		"irc": "irc://irc.libera.chat/wikidata"
 	},
 	"require": {
-		"php": ">=7.2",
+		"php": ">=7.4",
 		"wikibase/data-model": "~9.0|~8.0",
 		"data-values/data-values": "^3.1.0",
 		"diff/diff": "~3.2",
