@@ -1,6 +1,6 @@
 # Wikibase DataModel Services
 
-[![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModelServices.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModelServices)
+[![Build Status](https://github.com/wmde/WikibaseDataModelServices/actions/workflows/lint-and-test.yaml/badge.svg?branch=master)](https://github.com/wmde/WikibaseDataModelServices/actions/workflows/lint-and-test.yaml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
 [![Download count](https://poser.pugx.org/wikibase/data-model-services/d/total.png)](https://packagist.org/packages/wikibase/data-model-services)
@@ -63,7 +63,6 @@ run style checks use `composer cs`.
 ## Links
 
 * [Wikibase DataModel Services on Packagist](https://packagist.org/packages/wikibase/data-model-services)
-* [Wikibase DataModel Services on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelServices)
 * [Wikibase DataModel Services on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices)
  
 ## See also
