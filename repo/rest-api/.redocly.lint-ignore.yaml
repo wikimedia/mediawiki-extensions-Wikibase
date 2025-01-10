@@ -3,5 +3,5 @@
 
 specs/resources/index.json:
   operation-4xx-response: # Excluded as these endpoints have no 4XX error responses.
-    - '#/~1openapi.json/get/responses'
-    - '#/~1property-data-types/get/responses'
+    - '#/~1v1~1openapi.json/get/responses'
+    - '#/~1v1~1property-data-types/get/responses'

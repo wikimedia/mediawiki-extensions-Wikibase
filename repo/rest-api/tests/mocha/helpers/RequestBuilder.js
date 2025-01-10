@@ -5,7 +5,7 @@ const { assert, clientFactory } = require( 'api-testing' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
-const basePath = 'rest.php/wikibase/v1';
+const basePath = 'rest.php/wikibase';
 const openapiSchema = JSON.parse( readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` ) );
 
 class RequestBuilder {
@@ -25,7 +25,7 @@ class RequestBuilder {
 
 	/**
 	 * @param {string} method HTTP method to use for the request
-	 * @param {string} route the route as it appears in the spec, e.g. '/entities/items/{item_id}'
+	 * @param {string} route the route as it appears in the spec, e.g. '/v1/entities/items/{item_id}'
 	 * @return {this}
 	 */
 	withRoute( method, route ) {
@@ -35,7 +35,7 @@ class RequestBuilder {
 	}
 
 	/**
-	 * @param {string} name path param name, e.g. 'item_id' for /entities/items/{item_id}
+	 * @param {string} name path param name, e.g. 'item_id' for /v1/entities/items/{item_id}
 	 * @param {string} value
 	 * @return {this}
 	 */

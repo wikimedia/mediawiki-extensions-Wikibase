@@ -1,5 +1,5 @@
 {
-	"/openapi.json": {
+	"/v1/openapi.json": {
 		"get": {
 			"operationId": "getOpenApiDoc",
 			"tags": [ "OpenAPI document" ],
@@ -27,7 +27,7 @@
 			}
 		}
 	},
-	"/property-data-types": {
+	"/v1/property-data-types": {
 		"get": {
 			"operationId": "getPropertyDataTypes",
 			"tags": [ "Property data types" ],
@@ -52,85 +52,85 @@
 			}
 		}
 	},
-	"/entities/items": {
+	"/v1/entities/items": {
 		"$ref": "./items/list.json"
 	},
-	"/entities/items/{item_id}": {
+	"/v1/entities/items/{item_id}": {
 		"$ref": "./items/single.json"
 	},
-	"/entities/items/{item_id}/sitelinks": {
+	"/v1/entities/items/{item_id}/sitelinks": {
 		"$ref": "./sitelinks/list.json"
 	},
-	"/entities/items/{item_id}/sitelinks/{site_id}": {
+	"/v1/entities/items/{item_id}/sitelinks/{site_id}": {
 		"$ref": "./sitelinks/single.json"
 	},
-	"/entities/properties": {
+	"/v1/entities/properties": {
 		"$ref": "./properties/list.json"
 	},
-	"/entities/properties/{property_id}": {
+	"/v1/entities/properties/{property_id}": {
 		"$ref": "./properties/single.json"
 	},
-	"/entities/items/{item_id}/descriptions": {
+	"/v1/entities/items/{item_id}/descriptions": {
 		"$ref": "./descriptions/list-for-item.json"
 	},
-	"/entities/properties/{property_id}/descriptions": {
+	"/v1/entities/properties/{property_id}/descriptions": {
 		"$ref": "./descriptions/list-for-property.json"
 	},
-	"/entities/items/{item_id}/descriptions/{language_code}": {
+	"/v1/entities/items/{item_id}/descriptions/{language_code}": {
 		"$ref": "./descriptions/description-in-language-for-item.json"
 	},
-	"/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+	"/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
 		"$ref": "./descriptions/description-with-fallback-for-item.json"
 	},
-	"/entities/properties/{property_id}/descriptions/{language_code}": {
+	"/v1/entities/properties/{property_id}/descriptions/{language_code}": {
 		"$ref": "./descriptions/description-in-language-for-property.json"
 	},
-	"/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
+	"/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
 		"$ref": "./descriptions/description-with-fallback-for-property.json"
 	},
-	"/entities/items/{item_id}/statements": {
+	"/v1/entities/items/{item_id}/statements": {
 		"$ref": "./statements/list-for-item.json"
 	},
-	"/entities/items/{item_id}/statements/{statement_id}": {
+	"/v1/entities/items/{item_id}/statements/{statement_id}": {
 		"$ref": "./statements/single-for-item.json"
 	},
-	"/entities/items/{item_id}/labels": {
+	"/v1/entities/items/{item_id}/labels": {
 		"$ref": "./labels/list-for-item.json"
 	},
-	"/entities/properties/{property_id}/labels": {
+	"/v1/entities/properties/{property_id}/labels": {
 		"$ref": "./labels/list-for-property.json"
 	},
-	"/entities/items/{item_id}/labels/{language_code}": {
+	"/v1/entities/items/{item_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language-for-item.json"
 	},
-	"/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
+	"/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
 		"$ref": "./labels/label-with-fallback-for-item.json"
 	},
-	"/entities/properties/{property_id}/labels/{language_code}": {
+	"/v1/entities/properties/{property_id}/labels/{language_code}": {
 		"$ref": "./labels/label-in-language-for-property.json"
 	},
-	"/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
+	"/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
 		"$ref": "./labels/label-with-fallback-for-property.json"
 	},
-	"/entities/items/{item_id}/aliases": {
+	"/v1/entities/items/{item_id}/aliases": {
 		"$ref": "./aliases/list-for-item.json"
 	},
-	"/entities/properties/{property_id}/aliases": {
+	"/v1/entities/properties/{property_id}/aliases": {
 		"$ref": "./aliases/list-for-property.json"
 	},
-	"/entities/items/{item_id}/aliases/{language_code}": {
+	"/v1/entities/items/{item_id}/aliases/{language_code}": {
 		"$ref": "./aliases/aliases-in-language-for-item.json"
 	},
-	"/entities/properties/{property_id}/aliases/{language_code}": {
+	"/v1/entities/properties/{property_id}/aliases/{language_code}": {
 		"$ref": "./aliases/aliases-in-language-for-property.json"
 	},
-	"/entities/properties/{property_id}/statements": {
+	"/v1/entities/properties/{property_id}/statements": {
 		"$ref": "./statements/list-for-property.json"
 	},
-	"/entities/properties/{property_id}/statements/{statement_id}": {
+	"/v1/entities/properties/{property_id}/statements/{statement_id}": {
 		"$ref": "./statements/single-for-property.json"
 	},
-	"/statements/{statement_id}": {
+	"/v1/statements/{statement_id}": {
 		"$ref": "./statements/single.json"
 	}
 }
