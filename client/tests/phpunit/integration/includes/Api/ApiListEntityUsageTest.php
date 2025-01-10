@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Integration\Api;
 use MediaWiki\Api\ApiContinuationManager;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiPageSet;
+use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
@@ -159,7 +160,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 						],
 					],
 				],
-				false,
 			],
 			'two entities in two pages' => [
 				[
@@ -183,7 +183,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 						],
 					],
 				],
-				false,
 			],
 			'continue' => [
 				[
@@ -208,32 +207,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 						],
 					],
 				],
-				false,
-			],
-			'invalidcontinue' => [
-				[
-					'wbleuentities' => 'Q3|Q5',
-					'wbleucontinue' => '-',
-				],
-				[
-					[
-						"ns" => 0,
-						"title" => "Vienna",
-						"pageid" => 11,
-						"entityusage" => [
-							"Q3" => [ "aspects" => [ "O", "S" ] ],
-						],
-					],
-					[
-						"ns" => 0,
-						"title" => "Berlin",
-						"pageid" => 22,
-						"entityusage" => [
-							"Q5" => [ "aspects" => [ "S" ] ],
-						],
-					],
-				],
-				true,
 			],
 			'correctly finish pageination step between two pages' => [
 				[
@@ -253,7 +226,6 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 						],
 					],
 				],
-				false,
 			],
 		];
 	}
@@ -263,15 +235,10 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	 */
 	public function testEntityUsage(
 		array $params,
-		array $expected,
-		bool $expectWarning = false
+		array $expected
 	): void {
 		$result = $this->callApiModule( $params );
-		if ( $expectWarning ) {
-			$this->assertCount( 1, $result['warnings'] );
-		} else {
-			$this->assertArrayNotHasKey( 'warnings', $result );
-		}
+		$this->assertArrayNotHasKey( 'warnings', $result );
 
 		if ( isset( $result['error'] ) ) {
 			$this->fail( 'API error: ' . print_r( $result['error'], true ) );
@@ -285,15 +252,10 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 	/** @dataProvider entityUsageProvider */
 	public function testEntityUsageAsGenerator(
 		array $params,
-		array $expected,
-		bool $expectWarning
+		array $expected
 	): void {
 		[ $pageSet, $result ] = $this->callApiModuleAsGenerator( $params );
-		if ( $expectWarning ) {
-			$this->assertCount( 1, $result['warnings'] );
-		} else {
-			$this->assertArrayNotHasKey( 'warnings', $result );
-		}
+		$this->assertArrayNotHasKey( 'warnings', $result );
 
 		$pages = $pageSet->getGoodPages();
 		$this->assertSameSize( $expected, $pages );
@@ -306,6 +268,14 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			$this->assertSame( $expectedPage['ns'], $page->getNamespace() );
 			$this->assertSame( $expectedPage['title'], $page->getDBkey() );
 		}
+	}
+
+	public function testEntityUsageInvalidContinue(): void {
+		$this->expectException( ApiUsageException::class );
+		$this->callApiModule( [
+			'wbleuentities' => 'Q3|Q5',
+			'wbleucontinue' => '-',
+		] );
 	}
 
 }
