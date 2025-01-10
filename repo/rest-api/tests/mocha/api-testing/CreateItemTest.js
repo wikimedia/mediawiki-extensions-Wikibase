@@ -18,7 +18,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		localWikiId = await entityHelper.getLocalSiteId();
 		testWikiPage = utils.title( 'Sitelink test page' );
 		await entityHelper.createWikiPage( testWikiPage );
-		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		predicatePropertyId = await entityHelper.getStringPropertyId();
 	} );
 
 	describe( '201 success response ', () => {

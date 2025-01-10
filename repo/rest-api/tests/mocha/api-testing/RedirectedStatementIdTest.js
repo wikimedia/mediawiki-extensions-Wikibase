@@ -6,8 +6,8 @@ const rbf = require( '../helpers/RequestBuilderFactory' );
 const {
 	newStatementWithRandomStringValue,
 	createItemWithStatements,
-	createUniqueStringProperty,
-	createPropertyWithStatements
+	createPropertyWithStatements,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 
 describe( 'Redirected statementId requests', () => {
@@ -21,7 +21,7 @@ describe( 'Redirected statementId requests', () => {
 	let lowercasePropertyStatementId;
 
 	before( async () => {
-		statementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		statementPropertyId = await getStringPropertyId();
 
 		const item = await createItemWithStatements(
 			[ newStatementWithRandomStringValue( statementPropertyId ) ]

@@ -244,7 +244,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'qualifier with non-existent property', async () => {
 			const nonExistentProperty = 'P9999999';
 			const statement = entityHelper.newStatementWithRandomStringValue(
-				( await entityHelper.createUniqueStringProperty() ).body.id
+				await entityHelper.getStringPropertyId()
 			);
 			statement.qualifiers = [
 				{ property: { id: nonExistentProperty }, value: { type: 'novalue' } }
@@ -265,7 +265,7 @@ describe( newAddPropertyStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'reference with non-existent property', async () => {
 			const nonExistentProperty = 'P9999999';
 			const statement = entityHelper.newStatementWithRandomStringValue(
-				( await entityHelper.createUniqueStringProperty() ).body.id
+				await entityHelper.getStringPropertyId()
 			);
 			statement.references = [];
 			statement.references[ 0 ] = {

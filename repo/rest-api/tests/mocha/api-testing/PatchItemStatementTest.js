@@ -24,7 +24,7 @@ describe( 'PATCH statement tests', () => {
 	let previousEtag;
 
 	before( async function () {
-		const propertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		const propertyId = await entityHelper.getStringPropertyId();
 		const item = await entityHelper.createItemWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( propertyId )
 		] );

@@ -4,7 +4,6 @@ const { assert, utils, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const { newPatchSitelinksRequestBuilder, newCreateItemRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
-const { createLocalSitelink, getLocalSiteId } = require( '../helpers/entityHelper' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { formatSitelinksEditSummary } = require( '../helpers/formatEditSummaries' );
 const testValidatesPatch = require( '../helpers/testValidatesPatch' );
@@ -33,8 +32,8 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 	before( async function () {
 		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
-		await createLocalSitelink( testItemId, linkedArticle );
-		siteId = await getLocalSiteId();
+		await entityHelper.createLocalSitelink( testItemId, linkedArticle );
+		siteId = await entityHelper.getLocalSiteId();
 		allowedBadges = await getAllowedBadges();
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );

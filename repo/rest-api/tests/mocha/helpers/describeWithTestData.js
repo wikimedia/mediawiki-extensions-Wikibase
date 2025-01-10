@@ -5,7 +5,9 @@ const {
 	createLocalSitelink,
 	createWikiPage,
 	createUniqueStringProperty,
-	getLocalSiteId, newStatementWithRandomStringValue
+	getLocalSiteId,
+	newStatementWithRandomStringValue,
+	getStringPropertyId
 } = require( './entityHelper' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
 const {
@@ -79,7 +81,7 @@ function describeWithTestData( testName, runAllTests ) {
 	describe( testName, () => {
 		before( async () => {
 			await createWikiPage( newLinkedArticle, 'sitelink test' );
-			const statementPropertyId = ( await createUniqueStringProperty() ).body.id;
+			const statementPropertyId = await getStringPropertyId();
 
 			const itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );

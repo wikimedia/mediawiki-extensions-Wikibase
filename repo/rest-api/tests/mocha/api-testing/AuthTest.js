@@ -3,9 +3,7 @@
 const { describeWithTestData } = require( '../helpers/describeWithTestData' );
 const { assert, action } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const {
-	changeEntityProtectionStatus
-} = require( '../helpers/entityHelper' );
+const { changeEntityProtectionStatus } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../tests/api-testing/utils' );
 const {
 	getItemGetRequests,

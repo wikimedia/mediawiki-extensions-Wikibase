@@ -23,7 +23,7 @@ describe( 'PUT statement tests', () => {
 	let originalRevisionId;
 
 	before( async () => {
-		predicatePropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		predicatePropertyId = await entityHelper.getStringPropertyId();
 		const createItemResponse = await entityHelper.createItemWithStatements( [
 			entityHelper.newStatementWithRandomStringValue( predicatePropertyId )
 		] );

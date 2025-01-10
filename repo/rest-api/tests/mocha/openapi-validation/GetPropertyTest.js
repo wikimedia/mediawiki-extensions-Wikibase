@@ -6,7 +6,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { newGetPropertyRequestBuilder, newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 async function createPropertyWithAllFields() {
-	const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+	const statementPropertyId = await entityHelper.getStringPropertyId();
 
 	return ( await newCreatePropertyRequestBuilder( {
 		data_type: 'string',

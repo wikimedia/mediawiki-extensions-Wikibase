@@ -14,7 +14,7 @@ describe( 'validate DELETE endpoints for property statements against OpenAPI def
 
 	before( async () => {
 		testPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
-		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
+		statementPropertyId = await entityHelper.getStringPropertyId();
 	} );
 
 	[

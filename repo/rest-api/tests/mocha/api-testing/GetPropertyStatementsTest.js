@@ -6,7 +6,8 @@ const {
 	createUniqueStringProperty,
 	getLatestEditMetadata,
 	newStatementWithRandomStringValue,
-	createPropertyWithStatements
+	createPropertyWithStatements,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const { newGetPropertyStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -26,7 +27,7 @@ describe( newGetPropertyStatementsRequestBuilder().getRouteDescription(), () => 
 
 	before( async () => {
 		testStatementPropertyId1 = ( await createUniqueStringProperty() ).body.id;
-		testStatementPropertyId2 = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId2 = await getStringPropertyId();
 
 		testStatements = [
 			newStatementWithRandomStringValue( testStatementPropertyId1 ),

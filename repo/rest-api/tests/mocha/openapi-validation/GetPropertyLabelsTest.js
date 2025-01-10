@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require( '../helpers/chaiHelper' );
-const { createUniqueStringProperty, getLatestEditMetadata } = require( '../helpers/entityHelper' );
+const { getLatestEditMetadata, createUniqueStringProperty } = require( '../helpers/entityHelper' );
 const { newGetPropertyLabelsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
@@ -11,6 +11,7 @@ describe( newGetPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const createPropertyResponse = await createUniqueStringProperty();
+
 		testPropertyId = createPropertyResponse.body.id;
 		lastRevisionId = ( await getLatestEditMetadata( testPropertyId ) ).revid;
 	} );

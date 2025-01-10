@@ -2,12 +2,12 @@
 
 const { utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
-const { createUniqueStringProperty } = require( '../helpers/entityHelper' );
+const { getStringPropertyId } = require( '../helpers/entityHelper' );
 const { newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 	it( '201 - full property', async () => {
-		const statementProperty = ( await createUniqueStringProperty() ).body.id;
+		const statementProperty = await getStringPropertyId();
 		const response = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
 			labels: { en: utils.title( 'property label' ) },

@@ -9,6 +9,19 @@ const {
 	newCreatePropertyRequestBuilder
 } = require( './RequestBuilderFactory' );
 
+let stringPropertyId;
+
+/**
+ * Creates a reusable property on the first call and returns it on subsequent calls.
+ * Use this only when the existing property data does not matter.
+ */
+
+async function getStringPropertyId() {
+	stringPropertyId = stringPropertyId || ( await createUniqueStringProperty() ).body.id;
+
+	return stringPropertyId;
+}
+
 async function deleteProperty( propertyId ) {
 	const admin = await action.root();
 	return admin.action( 'delete', {
@@ -136,6 +149,7 @@ async function createWikiPage( articleTitle, text ) {
 }
 
 module.exports = {
+	getStringPropertyId,
 	deleteProperty,
 	createItemWithStatements,
 	createPropertyWithStatements,

@@ -3,9 +3,9 @@
 const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createUniqueStringProperty,
 	getLatestEditMetadata,
-	newStatementWithRandomStringValue
+	newStatementWithRandomStringValue,
+	getStringPropertyId
 } = require( '../helpers/entityHelper' );
 const {
 	newGetPropertyRequestBuilder,
@@ -32,7 +32,7 @@ describe( newGetPropertyRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		testStatementPropertyId = ( await createUniqueStringProperty() ).body.id;
+		testStatementPropertyId = await getStringPropertyId();
 		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 			data_type: testPropertyDataType,
 			labels: { de: germanLabel, en: englishLabel },
