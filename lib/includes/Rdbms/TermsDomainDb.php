@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Rdbms;
 
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IReadableDatabase;
 
 /**
@@ -25,15 +24,5 @@ interface TermsDomainDb {
 	public function getReadConnection( ?array $groups = null ): IReadableDatabase;
 
 	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void;
-
-	/**
-	 * @deprecated Don't use this unless it needs to be passed to a service we don't control
-	 */
-	public function loadBalancer(): ILoadBalancer;
-
-	/**
-	 * @deprecated Don't use this unless it needs to be passed to a service we don't control
-	 */
-	public function domain(): string;
 
 }

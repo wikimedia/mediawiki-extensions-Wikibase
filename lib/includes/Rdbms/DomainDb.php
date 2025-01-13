@@ -7,7 +7,6 @@ namespace Wikibase\Lib\Rdbms;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -118,13 +117,6 @@ abstract class DomainDb {
 	 */
 	public function autoReconfigure(): void {
 		$this->lbFactory->autoReconfigure();
-	}
-
-	/**
-	 * @deprecated Don't use this unless it needs to be passed to a service we don't control
-	 */
-	public function loadBalancer(): ILoadBalancer {
-		return $this->lbFactory->getMainLB( $this->domainId );
 	}
 
 	/**

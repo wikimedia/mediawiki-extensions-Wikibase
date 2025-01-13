@@ -5,6 +5,7 @@ declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\Rdbms;
 
 use Wikibase\Lib\Rdbms\RepoDomainDb;
+use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -24,7 +25,7 @@ class RepoDomainDbTest extends \PHPUnit\Framework\TestCase {
 		$db = new RepoDomainDb( $this->newLbFactoryForDomain( $domain, $mainLb ), $domain );
 
 		$this->assertSame( $domain, $db->domain() );
-		$this->assertSame( $mainLb, $db->loadBalancer() );
+		$this->assertInstanceOf( ConnectionManager::class, $db->connections() );
 	}
 
 	private function newLbFactoryForDomain( string $domain, ILoadBalancer $mainLb ): ILBFactory {
