@@ -23,7 +23,6 @@ The tables were created by [term_store.sql] which includes some documentation.
 * [wbt_property_terms]
 * [wbt_term_in_lang]
 * [wbt_text_in_lang]
-* [wbt_type]
 * [wbt_text]
 
 The relations are shown below:
@@ -35,7 +34,6 @@ digraph models_diagram{
   wbt_term_in_lang -> wbt_item_terms [arrowhead="crow"]
   wbt_term_in_lang -> wbt_property_terms [arrowhead="crow"]
   wbt_text_in_lang -> wbt_term_in_lang [arrowhead="crow"]
-  wbt_type -> wbt_term_in_lang [arrowhead="crow"]
   wbt_text -> wbt_text_in_lang [arrowhead="crow"]
 
 }
@@ -55,12 +53,11 @@ The below query selects all terms in the tables for item Q123 and can be used as
 ```sql
 SELECT
   wbit_item_id as id,
-  wby_name as type,
+  wbtl_type_id as type_id,
   wbxl_language as language,
   wbx_text as text
 FROM wbt_item_terms
 LEFT JOIN wbt_term_in_lang ON wbit_term_in_lang_id = wbtl_id
-LEFT JOIN wbt_type ON wbtl_type_id = wby_id
 LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
 LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
 WHERE wbit_item_id = 123;
@@ -71,12 +68,11 @@ For properties you can do something like:
 ```sql
 SELECT
   wbpt_property_id as id,
-  wby_name as type,
+  wbtl_type_id as type_id,
   wbxl_language as language,
   wbx_text as text
 FROM wbt_property_terms
 LEFT JOIN wbt_term_in_lang ON wbpt_term_in_lang_id = wbtl_id
-LEFT JOIN wbt_type ON wbtl_type_id = wby_id
 LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
 LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
 WHERE wbpt_property_id = 10;
@@ -94,10 +90,9 @@ SELECT
   wbx_text as text
 FROM wbt_item_terms
 LEFT JOIN wbt_term_in_lang ON wbit_term_in_lang_id = wbtl_id
-LEFT JOIN wbt_type ON wbtl_type_id = wby_id
 LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
 LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
-WHERE wby_name = 'label'
+WHERE wbtl_type_id = 1 -- label
 AND wbxl_language = 'en'
 AND wbx_text = 'Berlin';
 ```
@@ -112,10 +107,9 @@ SELECT
   wbx_text as text
 FROM wbt_property_terms
 LEFT JOIN wbt_term_in_lang ON wbpt_term_in_lang_id = wbtl_id
-LEFT JOIN wbt_type ON wbtl_type_id = wby_id
 LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
 LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
-WHERE wby_name = 'label'
+WHERE wbtl_type_id = 1 -- label
 AND wbxl_language = 'en'
 AND wbx_text = 'instance of';
 ```
@@ -141,7 +135,6 @@ This is important for cases such as Wikidata that has publicly accessible databa
 [wbt_term_in_lang]: @ref docs_sql_wbt_term_in_lang
 [wbt_text_in_lang]: @ref docs_sql_wbt_text_in_lang
 [wbt_text]: @ref docs_sql_wbt_text
-[wbt_type]: @ref docs_sql_wbt_type
 [ItemHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::ItemHandler::getSecondaryDataUpdates()
 [PropertyHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::PropertyHandler::getSecondaryDataUpdates()
 [EntityTermStoreWriter]: @ref Wikibase::Lib::Store::EntityTermStoreWriter

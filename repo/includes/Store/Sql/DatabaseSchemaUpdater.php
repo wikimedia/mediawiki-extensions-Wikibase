@@ -107,6 +107,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$updater->dropExtensionTable( 'wb_changes_dispatch' );
 
 		$this->sanitizeTermTypeIds( $updater );
+		$updater->dropExtensionTable( 'wbt_type' );
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
@@ -345,17 +346,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$updater->output( "...setting final Wikibase $type IDs.\n" );
 			$this->updateTermTypeId( $db, $tmpTypeIds[$type], $sanitizedTypeIds[$type] );
 		}
-
-		// update the wbt_type table itself accordingly
-		$db->truncateTable( 'wbt_type', __METHOD__ );
-		$db->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->rows( [
-				[ 'wby_name' => 'label', 'wby_id' => $sanitizedTypeIds['label'] ],
-				[ 'wby_name' => 'description', 'wby_id' => $sanitizedTypeIds['description'] ],
-				[ 'wby_name' => 'alias', 'wby_id' => $sanitizedTypeIds['alias'] ],
-			] )
-			->caller( __METHOD__ )->execute();
 	}
 
 	private function getCurrentTermTypeIds( IMaintainableDatabase $db ): array {

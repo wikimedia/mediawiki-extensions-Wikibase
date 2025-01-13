@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\TermTypeIds;
 use Wikibase\Lib\WikibaseSettings;
 
 /**
@@ -30,16 +31,12 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupEverything() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeId = $this->getDb()->insertId();
-
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
 		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLang( [ $text1Id => 'en', $text2Id => 'de' ] );
-		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermsInLang( [ $textInLang1Id => $typeId, $textInLang2Id => $typeId ] );
+		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermsInLang( [
+			$textInLang1Id => TermTypeIds::LABEL_TYPE_ID,
+			$textInLang2Id => TermTypeIds::LABEL_TYPE_ID,
+		] );
 
 		$this->getCleaner()->cleanTermInLangIds( $this->getDb(), $this->getDb(), [ $termInLang1Id, $termInLang2Id ] );
 
@@ -55,27 +52,9 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			->select( 'wbtl_id' )
 			->from( 'wbt_term_in_lang' )
 			->assertEmptyResult();
-		$this->newSelectQueryBuilder()
-			->select( 'wby_name' )
-			->from( 'wbt_type' )
-			->assertFieldValue( 'label' );
 	}
 
 	public function testCleanupTermInLangButNoTextInLang() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$type1Id = $this->getDb()->insertId();
-
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'description' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$type2Id = $this->getDb()->insertId();
-
 		// insert two texts into wbt_text
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'some text', 'etwas Text' ] );
 
@@ -85,8 +64,8 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		// both texts are label & description in wbt_term_in_lang
 		[ $termInLang1Id, $termInLang2Id, $termInLang3Id, $termInLang4Id ] = $this->insertTermsInLang(
 			[
-				$textInLang1Id => [ $type1Id, $type2Id ],
-				$textInLang2Id => [ $type1Id, $type2Id ],
+				$textInLang1Id => [ TermTypeIds::LABEL_TYPE_ID, TermTypeIds::DESCRIPTION_TYPE_ID ],
+				$textInLang2Id => [ TermTypeIds::LABEL_TYPE_ID, TermTypeIds::DESCRIPTION_TYPE_ID ],
 			]
 		);
 
@@ -102,13 +81,6 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupOneTextInLangButNoText() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeId = $this->getDb()->insertId();
-
 		// insert two texts into wbt_text
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'text', 'Text' ] );
 
@@ -120,9 +92,9 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		// all terms are the same type
 		[ $termInLang1Id, $termInLang2Id, $termInLang3Id ] = $this->insertTermsInLang(
 			[
-				$textInLang1Id => $typeId,
-				$textInLang2Id => $typeId,
-				$textInLang3Id => $typeId,
+				$textInLang1Id => TermTypeIds::LABEL_TYPE_ID,
+				$textInLang2Id => TermTypeIds::LABEL_TYPE_ID,
+				$textInLang3Id => TermTypeIds::LABEL_TYPE_ID,
 			]
 		);
 
@@ -138,19 +110,15 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupOneText() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeId = $this->getDb()->insertId();
-
 		// insert two texts into wbt_text
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'text', 'Text' ] );
 
 		// insert into wbt_text_in_lang and term_in_lang
 		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLang( [ $text1Id => 'en', $text2Id => 'de' ] );
-		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermsInLang( [ $textInLang1Id => $typeId, $textInLang2Id => $typeId ] );
+		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermsInLang( [
+			$textInLang1Id => TermTypeIds::LABEL_TYPE_ID,
+			$textInLang2Id => TermTypeIds::LABEL_TYPE_ID,
+		] );
 
 		$this->getCleaner()->cleanTermInLangIds( $this->getDb(), $this->getDb(), [ $termInLang1Id ] );
 
@@ -161,16 +129,9 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupLeavesUnrelatedTextsUntouched() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeId = $this->getDb()->insertId();
-
 		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
 		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLang( [ $text1Id => 'en', $text2Id => 'de' ] );
-		[ $termInLang1Id ] = $this->insertTermsInLang( [ $textInLang1Id => $typeId ] );
+		[ $termInLang1Id ] = $this->insertTermsInLang( [ $textInLang1Id => TermTypeIds::LABEL_TYPE_ID ] );
 
 		// remove the first
 		$this->getCleaner()->cleanTermInLangIds( $this->getDb(), $this->getDb(), [ $termInLang1Id ] );
@@ -183,20 +144,6 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testT237984_sharedTextInLangIdsAreNotDeleted() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeIdLabel = $this->getDb()->insertId();
-
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'description' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeIdDescription = $this->getDb()->insertId();
-
 		[ $textId ] = $this->insertTexts( [ 'someText' ] );
 
 		[ $textInLangIdSingleUse1 ] = $this->insertTextsInLang( [ $textId => 'en' ] );
@@ -205,9 +152,9 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 
 		[ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3, $termInLangIdToRemain ] = $this->insertTermsInLang(
 			[
-				$textInLangIdSingleUse1 => $typeIdLabel,
-				$textInLangIdSingleUse2 => $typeIdLabel,
-				$textInLangIdShared => [ $typeIdLabel, $typeIdDescription ],
+				$textInLangIdSingleUse1 => TermTypeIds::LABEL_TYPE_ID,
+				$textInLangIdSingleUse2 => TermTypeIds::LABEL_TYPE_ID,
+				$textInLangIdShared => [ TermTypeIds::LABEL_TYPE_ID, TermTypeIds::DESCRIPTION_TYPE_ID ],
 			]
 		);
 
@@ -224,13 +171,6 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testT237984_sharedTextIdsAreNotDeleted() {
-		$this->getDb()->newInsertQueryBuilder()
-			->insertInto( 'wbt_type' )
-			->row( [ 'wby_name' => 'label' ] )
-			->caller( __METHOD__ )
-			->execute();
-		$typeIdLabel = $this->getDb()->insertId();
-
 		[ $textIdSingleUse, $textIdShared ] = $this->insertTexts( [ 'someText1', 'someText2' ] );
 
 		// insert a language for each, and one additional for the shared
@@ -244,9 +184,9 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 
 		[ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToRemain3 ] = $this->insertTermsInLang(
 			[
-				$textInLangIdToDelete1 => $typeIdLabel,
-				$textInLangIdToDelete2 => $typeIdLabel,
-				$textInLangIdToRemain3 => $typeIdLabel,
+				$textInLangIdToDelete1 => TermTypeIds::LABEL_TYPE_ID,
+				$textInLangIdToDelete2 => TermTypeIds::LABEL_TYPE_ID,
+				$textInLangIdToRemain3 => TermTypeIds::LABEL_TYPE_ID,
 			]
 		);
 

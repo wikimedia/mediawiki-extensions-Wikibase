@@ -158,29 +158,5 @@
 			}
 		],
 		"pk": [ "wbx_id" ]
-	},
-	{
-		"name": "wbt_type",
-		"comment": "Normalized term type names",
-		"columns": [
-			{
-				"name": "wby_id",
-				"type": "integer",
-				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
-			},
-			{
-				"name": "wby_name",
-				"type": "binary",
-				"options": { "length": 45, "notnull": true }
-			}
-		],
-		"indexes": [
-			{
-				"name": "wbt_type_name",
-				"columns": [ "wby_name" ],
-				"unique": true
-			}
-		],
-		"pk": [ "wby_id" ]
 	}
 ]

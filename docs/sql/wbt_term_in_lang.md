@@ -7,7 +7,7 @@ Part of the @ref docs_storage_terms storage system.
 **Fields:**
 
 -   wbtl_id - an auto increment field
--   wbtl_type_id - reference to the [wbt_type] table
+-   wbtl_type_id - term type ID (`1` for a label, `2` for a description, `3` for an alias)
 -   wbtl_text_in_lang_id - reference to the [wbt_text_in_lang] table
 
 ```
@@ -24,5 +24,4 @@ Part of the @ref docs_storage_terms storage system.
  - UNIQUE wbtl_text_in_lang_id, wbtl_type_id
  - wbtl_type_id
 
-[wbt_type]: @ref docs_sql_wbt_type
 [wbt_text_in_lang]: @ref docs_sql_wbt_text_in_lang

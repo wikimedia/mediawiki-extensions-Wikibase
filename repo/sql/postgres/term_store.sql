@@ -63,12 +63,3 @@ CREATE TABLE wbt_text (
 );
 
 CREATE UNIQUE INDEX wbt_text_text ON wbt_text (wbx_text);
-
-
-CREATE TABLE wbt_type (
-  wby_id SERIAL NOT NULL,
-  wby_name TEXT NOT NULL,
-  PRIMARY KEY(wby_id)
-);
-
-CREATE UNIQUE INDEX wbt_type_name ON wbt_type (wby_name);
