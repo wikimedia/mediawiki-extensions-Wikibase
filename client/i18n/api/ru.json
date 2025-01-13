@@ -10,6 +10,7 @@
 			"Amire80"
 		]
 	},
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "Используются ссылки на сайт из сущности",
 	"apihelp-query+wbentityusage-paramvalue-aspect-L": "Используется метка сущности",
 	"apihelp-query+wbentityusage-paramvalue-aspect-D": "Используется описание сущности",
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Используется заголовок локальной страницы, соответствующей сущности",
