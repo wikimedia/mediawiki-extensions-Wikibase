@@ -2,301 +2,301 @@
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\CreateItemRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddItemStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddPropertyStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyStatementsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplaceStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplaceItemStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\ReplacePropertyStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyStatementRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemLabelWithFallbackRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyLabelWithFallbackRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetItemLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemLabelsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyLabelsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyLabelRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemDescriptionsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyDescriptionsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemDescriptionWithFallbackRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionWithFallbackRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetItemDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetPropertyDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveItemDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemovePropertyDescriptionRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDescriptionsRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchItemAliasesRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchPropertyAliasesRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetItemAliasesInLanguageRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyAliasesInLanguageRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddItemAliasesInLanguageRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\AddPropertyAliasesInLanguageRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetSitelinksRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\PatchSitelinksRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetSitelinkRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\RemoveSitelinkRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\SetSitelinkRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/openapi.json",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetOpenApiDocRouteHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/property-data-types",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\GetPropertyDataTypesHandler::factory"
+		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
 	}
 ]

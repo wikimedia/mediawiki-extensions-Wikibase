@@ -21,6 +21,7 @@ class RequestBuilder {
 		this.configOverrides = {};
 		this.validate = false;
 		this.assertValid = false;
+		this.validateRoute = true;
 	}
 
 	/**
@@ -31,6 +32,14 @@ class RequestBuilder {
 	withRoute( method, route ) {
 		this.method = method.toUpperCase();
 		this.route = route;
+		return this;
+	}
+
+	/**
+	 * @return {this}
+	 */
+	skipRouteValidation() {
+		this.validateRoute = false;
 		return this;
 	}
 
@@ -102,7 +111,9 @@ class RequestBuilder {
 			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
 		}
 
-		this.validateRouteAndMethod( openapiSchema );
+		if ( this.routeValidation ) {
+			this.validateRouteAndMethod( openapiSchema );
+		}
 		if ( this.validate ) {
 			this.validateRequest( openapiSchema );
 		}
