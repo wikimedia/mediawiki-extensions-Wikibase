@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"DedeKurnn"
+		]
+	},
+	"wikibase-dataitem": "Butigh di {{WBREPONAME}}",
+	"wikibase-editlinks": "Dandani kawikan",
+	"wikibase-addlinkstitle": "Tambahko kawikan interwiki",
+	"wikibase-linkitem-addlinks": "Tambahko kawikan",
+	"wikibase-linkitem-title": "Kawikko jama halaman",
+	"wikibase-linkitem-linkpage": "Kawikko jama halaman",
+	"wikibase-linkitem-selectlink": "Payu pilih situs ghik halaman say haga tikawikko mit halaman sinji",
+	"wikibase-linkitem-input-site": "Bahasa:",
+	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-rc-hide-wikidata-hide": "Segokko",
+	"wikibase-rc-hide-wikidata-show": "Jajakko",
+	"wikibase-otherprojects": "Dilom proyék baghih"
+}
