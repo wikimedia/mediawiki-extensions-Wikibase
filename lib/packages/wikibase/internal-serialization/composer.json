@@ -27,18 +27,19 @@
 		"irc": "irc://irc.libera.chat/wikidata"
 	},
 	"require": {
-		"php": "^7.0|^8.0",
-		"wikibase/data-model": "~9.0|~8.0",
-		"wikibase/data-model-serialization": "~2.0",
+		"php": "^7.4|^8.0",
+		"wikibase/data-model": "dev-master",
+		"wikibase/data-model-serialization": "dev-master",
 		"serialization/serialization": "~4.0|~3.2"
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~8.0",
-		"data-values/common": ">=0.1 <0.5",
-		"data-values/geo": ">=1.0 <4.0",
-		"data-values/number": ">=0.1 <0.10",
-		"data-values/time": ">=0.1 <0.9"
+		"wikibase/data-model-services": "dev-master",
+		"data-values/common": "~1.2",
+		"data-values/geo": "^4.5.1",
+		"data-values/number": "~0.13",
+		"data-values/time": "~1.2"
 	},
 	"autoload": {
 		"psr-4": {
