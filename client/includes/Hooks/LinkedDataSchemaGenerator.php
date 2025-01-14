@@ -40,6 +40,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 	/**
 	 * @param Title $title
 	 * @param string|null $revisionTimestamp
+	 * @param string|null $firstRevisionTimestamp
 	 * @param EntityId $entityId
 	 *
 	 * @return string
