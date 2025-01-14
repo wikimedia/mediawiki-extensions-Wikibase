@@ -7,14 +7,15 @@ const {
 	createUniqueStringProperty,
 	getLocalSiteId,
 	newStatementWithRandomStringValue,
-	getStringPropertyId
+	getStringPropertyId,
+	getItemId
 } = require( './entityHelper' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
 const {
 	newPatchItemRequestBuilder,
-	newPatchPropertyRequestBuilder,
-	newCreateItemRequestBuilder
+	newPatchPropertyRequestBuilder
 } = require( './RequestBuilderFactory' );
+const { expect } = require( './chaiHelper' );
 
 /**
  * `describeWithTestData` is intended for testing behaviors across multiple related route categories
@@ -51,6 +52,8 @@ function describeWithTestData( testName, runAllTests ) {
 				value: [ newStatementWithRandomStringValue( statementPropertyId ) ]
 			}
 		] ).makeRequest();
+		expect( editEntityResponse ).to.have.status( 200 );
+
 		if ( isItem ) {
 			await createLocalSitelink( id, originalLinkedArticle, [ ( await getAllowedBadges() )[ 0 ] ] );
 		}
@@ -83,7 +86,7 @@ function describeWithTestData( testName, runAllTests ) {
 			await createWikiPage( newLinkedArticle, 'sitelink test' );
 			const statementPropertyId = await getStringPropertyId();
 
-			const itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+			const itemId = await getItemId();
 			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
 			itemRequestInputs.mainTestSubject = itemId;
 			itemRequestInputs.itemId = itemId;

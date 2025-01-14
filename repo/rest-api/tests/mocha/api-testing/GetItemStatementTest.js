@@ -30,8 +30,7 @@ describe( 'GET statement', () => {
 	}
 
 	before( async () => {
-		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
-
+		testItemId = await entityHelper.getItemId();
 		// creating the statement with the to be deleted property first, so that creating the "happy path" property
 		// hopefully invalidates any caches that could claim that this property still exists (T369702)
 		const testStatementPropertyIdToDelete = ( await entityHelper.createUniqueStringProperty() ).body.id;
@@ -182,7 +181,7 @@ describe( 'GET statement', () => {
 		} );
 
 		it( 'responds statement not found if item and subject prefix exist but statement does not', async () => {
-			const requestedItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+			const requestedItemId = await entityHelper.getItemId();
 			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
 				.assertValidRequest()

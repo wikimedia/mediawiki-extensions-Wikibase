@@ -9,7 +9,8 @@ const {
 	newReplaceStatementRequestBuilder,
 	newGetItemStatementsRequestBuilder,
 	newCreatePropertyRequestBuilder,
-	newCreateItemRequestBuilder
+	newCreateItemRequestBuilder,
+	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -24,11 +25,11 @@ describe( 'PUT statement tests', () => {
 
 	before( async () => {
 		predicatePropertyId = await entityHelper.getStringPropertyId();
-		const createItemResponse = await entityHelper.createItemWithStatements( [
+		testItemId = await entityHelper.getItemId();
+		testStatementId = ( await newAddItemStatementRequestBuilder(
+			testItemId,
 			entityHelper.newStatementWithRandomStringValue( predicatePropertyId )
-		] );
-		testItemId = createItemResponse.id;
-		testStatementId = createItemResponse.statements[ predicatePropertyId ][ 0 ].id;
+		).makeRequest() ).body.id;
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );

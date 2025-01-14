@@ -6,12 +6,10 @@ const {
 	createItemWithStatements,
 	newStatementWithRandomStringValue,
 	getLatestEditMetadata,
-	getStringPropertyId
+	getStringPropertyId,
+	getItemId
 } = require( '../helpers/entityHelper' );
-const {
-	newGetItemStatementsRequestBuilder,
-	newCreateItemRequestBuilder
-} = require( '../helpers/RequestBuilderFactory' );
+const { newGetItemStatementsRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 
@@ -19,8 +17,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 	let lastRevisionId;
 
 	before( async () => {
-		const createItemResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
-		itemId = createItemResponse.body.id;
+		itemId = await getItemId();
 		lastRevisionId = ( await getLatestEditMetadata( itemId ) ).revid;
 	} );
 

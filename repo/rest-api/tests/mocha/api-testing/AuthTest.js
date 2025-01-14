@@ -16,6 +16,7 @@ const {
 const { getOrCreateAuthTestUser } = require( '../helpers/testUsers' );
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { newCreatePropertyRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
+const { runAllJobs } = require( 'api-testing/lib/wiki' );
 
 describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset ) => {
 	let user;
@@ -129,6 +130,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 
 				after( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'all' ); // unprotect
+					await runAllJobs();
 				} );
 
 				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async function () {

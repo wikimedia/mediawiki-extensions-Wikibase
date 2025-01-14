@@ -2,13 +2,14 @@
 
 const { expect } = require( '../helpers/chaiHelper' );
 const {
-	createItemWithStatements,
 	newStatementWithRandomStringValue,
-	getStringPropertyId
+	getStringPropertyId,
+	getItemId
 } = require( '../helpers/entityHelper' );
 const {
 	newReplaceItemStatementRequestBuilder,
-	newReplaceStatementRequestBuilder
+	newReplaceStatementRequestBuilder,
+	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'validate PUT endpoints for item statements against OpenAPI definition', () => {
@@ -19,11 +20,11 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 
 	before( async () => {
 		statementPropertyId = await getStringPropertyId();
-		const createItemResponse = await createItemWithStatements( [
+		testItemId = await getItemId();
+		testStatementId = ( await newAddItemStatementRequestBuilder(
+			testItemId,
 			newStatementWithRandomStringValue( statementPropertyId )
-		] );
-		testItemId = createItemResponse.id;
-		testStatementId = createItemResponse.statements[ statementPropertyId ][ 0 ].id;
+		).makeRequest() ).body.id;
 	} );
 
 	[
