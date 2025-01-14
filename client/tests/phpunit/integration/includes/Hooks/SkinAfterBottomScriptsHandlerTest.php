@@ -4,8 +4,6 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use File;
 use MediaWiki\Language\Language;
-use MediaWiki\Revision\RevisionLookup;
-use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\Client\RepoLinker;
@@ -38,8 +36,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$generator = new LinkedDataSchemaGenerator(
 			$this->createMock( Language::class ),
 			$repoLinker,
-			WikibaseClient::getTermLookup(),
-			$this->createMockRevisionLookup( '1022523983' )
+			WikibaseClient::getTermLookup()
 		);
 
 		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
@@ -138,20 +135,6 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$mock->method( 'getText' )
 			->willReturn( $titleText );
 		return $mock;
-	}
-
-	/**
-	 * @param string|null $timestamp
-	 * @return RevisionLookup
-	 */
-	private function createMockRevisionLookup( $timestamp ) {
-		$revisionRecord = $this->createMock( RevisionRecord::class );
-		$revisionRecord->method( 'getTimestamp' )
-			->willReturn( $timestamp );
-		$mockRevLookup = $this->createMock( RevisionLookup::class );
-		$mockRevLookup->method( 'getFirstRevision' )
-			->willReturn( $revisionRecord );
-		return $mockRevLookup;
 	}
 
 }
