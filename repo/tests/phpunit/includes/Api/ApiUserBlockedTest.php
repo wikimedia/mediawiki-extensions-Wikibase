@@ -32,13 +32,9 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			'reason' => 'testing in ' . __CLASS__,
 			'by' => $testuser,
 		] );
-		$this->block->insert();
+		$this->getServiceContainer()->getDatabaseBlockStore()
+			->insertBlock( $this->block );
 		$this->initTestEntities( [ 'StringProp', 'Berlin', 'Oslo' ] );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-		$this->block->delete();
 	}
 
 	public function blockCases() {
