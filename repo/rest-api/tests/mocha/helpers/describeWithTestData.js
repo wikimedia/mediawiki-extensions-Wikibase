@@ -42,7 +42,7 @@ function describeWithTestData( testName, runAllTests ) {
 	async function resetEntityTestData( id, statementPropertyId ) {
 		const isItem = id.startsWith( 'Q' );
 		const patchEntity = isItem ? newPatchItemRequestBuilder : newPatchPropertyRequestBuilder;
-		const editEntityResponse = await patchEntity( id, [
+		const patchEntityResponse = await patchEntity( id, [
 			{ op: 'add', path: '/labels/en', value: `entity-with-statements-${utils.uniq()}` },
 			{ op: 'add', path: '/descriptions/en', value: `entity-with-statements-${utils.uniq()}` },
 			{ op: 'add', path: '/aliases/en', value: [ 'entity', 'thing' ] },
@@ -52,13 +52,13 @@ function describeWithTestData( testName, runAllTests ) {
 				value: [ newStatementWithRandomStringValue( statementPropertyId ) ]
 			}
 		] ).makeRequest();
-		expect( editEntityResponse ).to.have.status( 200 );
+		expect( patchEntityResponse ).to.have.status( 200 );
 
 		if ( isItem ) {
 			await createLocalSitelink( id, originalLinkedArticle, [ ( await getAllowedBadges() )[ 0 ] ] );
 		}
 
-		return editEntityResponse.body;
+		return patchEntityResponse.body;
 	}
 
 	function describeEachRouteWithReset( routes, runForEachRoute ) {
