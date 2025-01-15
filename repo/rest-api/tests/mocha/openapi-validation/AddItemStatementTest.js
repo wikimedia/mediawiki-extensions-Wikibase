@@ -1,11 +1,8 @@
 'use strict';
 
 const { expect } = require( '../helpers/chaiHelper' );
-const { createRedirectForItem, getStringPropertyId } = require( '../helpers/entityHelper' );
-const {
-	newAddItemStatementRequestBuilder,
-	newCreateItemRequestBuilder
-} = require( '../helpers/RequestBuilderFactory' );
+const { createRedirectForItem, getStringPropertyId, getItemId } = require( '../helpers/entityHelper' );
+const { newAddItemStatementRequestBuilder } = require( '../helpers/RequestBuilderFactory' );
 
 describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 
@@ -13,7 +10,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 
 	before( async () => {
-		itemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+		itemId = await getItemId();
 		const propertyId = await getStringPropertyId();
 		validStatementSerialization = {
 			value: { type: 'novalue' },

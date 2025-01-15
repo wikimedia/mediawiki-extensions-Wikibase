@@ -4,7 +4,8 @@ const { expect } = require( '../helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newGetItemStatementRequestBuilder,
-	newGetStatementRequestBuilder
+	newGetStatementRequestBuilder,
+	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'validate GET item statement responses', () => {
@@ -15,11 +16,12 @@ describe( 'validate GET item statement responses', () => {
 
 	before( async () => {
 		const statementPropertyId = await entityHelper.getStringPropertyId();
-		const item = await entityHelper.createItemWithStatements( [
+		testItemId = await entityHelper.getItemId();
+		testStatementId = ( await newAddItemStatementRequestBuilder(
+			testItemId,
 			entityHelper.newStatementWithRandomStringValue( statementPropertyId )
-		] );
-		testItemId = item.id;
-		testStatementId = item.statements[ statementPropertyId ][ 0 ].id;
+		).makeRequest() ).body.id;
+
 		lastRevId = ( await entityHelper.getLatestEditMetadata( testItemId ) ).revid;
 	} );
 

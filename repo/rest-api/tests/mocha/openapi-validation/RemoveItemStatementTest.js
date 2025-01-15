@@ -5,8 +5,7 @@ const entityHelper = require( '../helpers/entityHelper' );
 const {
 	newRemoveItemStatementRequestBuilder,
 	newRemoveStatementRequestBuilder,
-	newAddItemStatementRequestBuilder,
-	newCreateItemRequestBuilder
+	newAddItemStatementRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 
 describe( 'validate DELETE endpoints for item statements against OpenAPI definition', () => {
@@ -14,7 +13,7 @@ describe( 'validate DELETE endpoints for item statements against OpenAPI definit
 	let statementPropertyId;
 
 	before( async () => {
-		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+		testItemId = await entityHelper.getItemId();
 		statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
 	} );
 

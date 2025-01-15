@@ -6,7 +6,6 @@ const entityHelper = require( '../helpers/entityHelper' );
 const { formatStatementEditSummary } = require( '../helpers/formatEditSummaries' );
 const {
 	newAddItemStatementRequestBuilder,
-	newCreateItemRequestBuilder,
 	newCreatePropertyRequestBuilder
 } = require( '../helpers/RequestBuilderFactory' );
 const { makeEtag } = require( '../helpers/httpHelper' );
@@ -30,8 +29,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		const createEntityResponse = await newCreateItemRequestBuilder( {} ).makeRequest();
-		testItemId = createEntityResponse.body.id;
+		testItemId = await entityHelper.getItemId();
 
 		const testItemCreationMetadata = await entityHelper.getLatestEditMetadata( testItemId );
 		originalLastModified = new Date( testItemCreationMetadata.timestamp );

@@ -10,6 +10,7 @@ const {
 } = require( './RequestBuilderFactory' );
 
 let stringPropertyId;
+let testItemId;
 
 /**
  * Creates a reusable property on the first call and returns it on subsequent calls.
@@ -20,6 +21,17 @@ async function getStringPropertyId() {
 	stringPropertyId = stringPropertyId || ( await createUniqueStringProperty() ).body.id;
 
 	return stringPropertyId;
+}
+
+/**
+ * Creates a reusable item on the first call and returns it on subsequent calls.
+ * Use this only when the existing item data does not matter.
+ */
+
+async function getItemId() {
+	testItemId = testItemId || ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
+
+	return testItemId;
 }
 
 async function deleteProperty( propertyId ) {
@@ -150,6 +162,7 @@ async function createWikiPage( articleTitle, text ) {
 
 module.exports = {
 	getStringPropertyId,
+	getItemId,
 	deleteProperty,
 	createItemWithStatements,
 	createPropertyWithStatements,
