@@ -166,7 +166,7 @@ describe( 'DELETE statement', () => {
 		} );
 
 		it( 'responds 400 if item and statement do not match', async () => {
-			const statementId = 'Q1$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
+			const statementId = 'Q99999$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE';
 			const response =
 				await newRemoveItemStatementRequestBuilder( testItemId, statementId )
 					.assertValidRequest()
