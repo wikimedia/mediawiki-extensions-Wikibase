@@ -20,7 +20,7 @@
 	"wikibase-linkitem-input-page": "Барак:",
 	"wikibase-linkitem-confirmitem-button": "Ырастоо",
 	"wikibase-linkitem-not-loggedin-title": "Киришиңиз керек",
-	"wikibase-linkitem-success-link": "Барактар бири-бирине байланыштырылды. Шилтемелерди камтыган элементти биздин [$1 борбордук маалымат сактагычынан] таба аласыз.",
+	"wikibase-linkitem-success-link": "Барактар бири-бирине байланыштырылды. Шилтемелерди камтыган элементти [$1 борбордук маалымат сактагычыбыздан] таба аласыз.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
