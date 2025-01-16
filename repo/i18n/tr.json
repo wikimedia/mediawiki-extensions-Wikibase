@@ -32,7 +32,8 @@
 			"Vesely35",
 			"Violetanka",
 			"Vito Genovese",
-			"Ömer Berkay"
+			"Ömer Berkay",
+			"Sadrettin"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -261,9 +262,9 @@
 	"wikibase-newproperty-invalid-datatype": "Geçersiz veri türü belirtildi.",
 	"wikibase-newproperty-insufficient-data": "En az bir etiket, tanım ya da diğer ad eklemeniz gereklidir.",
 	"wikibase-newproperty-pick-data-type": "(bir veri türü seçin)",
-	"special-newitem": "Yeni bir öge oluştur",
+	"special-newitem": "Yeni bir öğe oluştur",
 	"wikibase-newitem-summary": "[[Special:Search|Ögenin bulunup bulunmadığını]] kontrol edin!<br />Tüm yeni ögeler için {{int:Wikibase-label-helppage|etiket}} ve {{int:Wikibase-description-helppage|açıklama}} eklenmelidir.",
-	"wikibase-newitem-fieldset": "Yeni bir öge oluştur",
+	"wikibase-newitem-fieldset": "Yeni bir öğe oluştur",
 	"wikibase-newitem-site": "İlk bağlanan sayfanın sitesi",
 	"wikibase-newitem-page": "İlk bağlanan sayfanın adı",
 	"wikibase-newitem-no-external-page": "\"$1\" sitesinde \"$2\" sayfası bulunamadı.",
