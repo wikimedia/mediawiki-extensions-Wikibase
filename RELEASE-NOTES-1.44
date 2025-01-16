@@ -11,6 +11,9 @@ Some specific notes for Wikibase 1.44 upgrades are below:
   require_once "$IP/extensions/Wikibase/repo/config/Wikibase.example.php";
   require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
   probably need to change their config, see defaultEntityNamespaces below.
+* Entries in the `wbt_term_in_lang` table will be sanitized so that the `wbtl_type_id` column
+  always contains `1` as the value for labels, `2` for descriptions and `3` for aliases. This
+  migration may take a while when running `update.php`.
 
 ...
 
