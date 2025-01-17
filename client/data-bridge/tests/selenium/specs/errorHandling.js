@@ -188,7 +188,7 @@ describe( 'App', () => {
 	describe( 'when assertuser fails', () => {
 		beforeEach( 'login, run bridge, logout, trigger error', () => {
 			// log in
-			LoginPage.loginAdmin();
+			await LoginPage.loginAdmin();
 
 			// prepare Bridge for saving
 			const title = DataBridgePage.getDummyTitle();
