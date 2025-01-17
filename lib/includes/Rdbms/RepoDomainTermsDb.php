@@ -28,8 +28,8 @@ class RepoDomainTermsDb implements TermsDomainDb {
 		return $this->repoDb->getAutoCommitPrimaryConnection();
 	}
 
-	public function getReadConnection( ?array $groups = null ): IReadableDatabase {
-		return $this->repoDb->connections()->getReadConnection( $groups );
+	public function getReadConnection(): IReadableDatabase {
+		return $this->repoDb->connections()->getReadConnection();
 	}
 
 	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void {

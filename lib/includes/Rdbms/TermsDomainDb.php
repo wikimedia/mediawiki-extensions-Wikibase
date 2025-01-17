@@ -21,7 +21,7 @@ interface TermsDomainDb {
 
 	public function getAutoCommitPrimaryConnection(): IDatabase;
 
-	public function getReadConnection( ?array $groups = null ): IReadableDatabase;
+	public function getReadConnection(): IReadableDatabase;
 
 	public function waitForReplicationOfAllAffectedClusters( ?int $timeout = null ): void;
 
