@@ -87,7 +87,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function reportFailureOfRequest( $message, ?Exception $exception = null ) {
+	private function reportFailureOfRequest( string $message, ?Exception $exception = null ) {
 		$context = [
 			'errormessage' => $message,
 			'class' => __CLASS__,
@@ -99,7 +99,13 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.requestError' );
 	}
 
-	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
+	private function formatUrl(
+		EntityId $entityId,
+		int $revision,
+		string $language,
+		string $editLink,
+		TermLanguageFallbackChain $preferredLanguages
+	): string {
 		if ( !$this->ssrServerUrl ) {
 			throw new TermboxNoRemoteRendererException( 'Termbox SSR server URL not configured' );
 		}
@@ -109,11 +115,11 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private function getRequestParams(
 		EntityId $entityId,
-		$revision,
-		$language,
-		$editLink,
+		int $revision,
+		string $language,
+		string $editLink,
 		TermLanguageFallbackChain $preferredLanguages
-	) {
+	): array {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'revision' => $revision,
@@ -123,7 +129,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		];
 	}
 
-	private function getLanguageCodes( TermLanguageFallbackChain $preferredLanguages ) {
+	private function getLanguageCodes( TermLanguageFallbackChain $preferredLanguages ): array {
 		return array_map( function ( LanguageWithConversion $language ) {
 			return $language->getLanguageCode();
 		}, $preferredLanguages->getFallbackChain() );

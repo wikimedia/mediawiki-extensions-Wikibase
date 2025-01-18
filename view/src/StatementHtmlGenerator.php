@@ -136,7 +136,7 @@ class StatementHtmlGenerator {
 		return $this->wrapInListview( $referencesHtml );
 	}
 
-	private function wrapInListview( $listviewContent ) {
+	private function wrapInListview( string $listviewContent ): string {
 		if ( $listviewContent !== '' ) {
 			return $this->templateFactory->render( 'wikibase-listview', $listviewContent );
 		} else {

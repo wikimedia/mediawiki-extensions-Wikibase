@@ -41,11 +41,11 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 		}
 	}
 
-	private function bufferNonAliasTerm( EntityId $id, $type, $lang ) {
+	private function bufferNonAliasTerm( EntityId $id, string $type, string $lang ) {
 		$this->buffer[$id->getSerialization()][$type][$lang] = $this->generateFakeTerm( $id, $type, $lang );
 	}
 
-	private function bufferAliasTerms( EntityId $id, $type, $lang ) {
+	private function bufferAliasTerms( EntityId $id, string $type, string $lang ) {
 		$this->buffer[$id->getSerialization()][$type][$lang] = [];
 		$this->buffer[$id->getSerialization()][$type][$lang][] = $this->generateFakeTerm( $id, $type, $lang, 1 );
 		$this->buffer[$id->getSerialization()][$type][$lang][] = $this->generateFakeTerm( $id, $type, $lang, 2 );

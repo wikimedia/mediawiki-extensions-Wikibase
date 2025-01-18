@@ -186,7 +186,7 @@ class TermsListView {
 		);
 	}
 
-	private function getMulDescriptionView() {
+	private function getMulDescriptionView(): string {
 		return $this->templateFactory->render(
 			'wikibase-descriptionview-mul',
 			htmlspecialchars( $this->textProvider->get( 'wikibase-description-not-applicable' ), ENT_QUOTES ),

@@ -71,11 +71,11 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		}
 	}
 
-	private function bufferNonAliasTerm( EntityId $id, $type, $lang ) {
+	private function bufferNonAliasTerm( EntityId $id, string $type, string $lang ) {
 		$this->buffer[$id->getSerialization()][$type][$lang] = $this->getFromEntityData( $id, $type, $lang );
 	}
 
-	private function getFromEntityData( EntityId $id, $type, $lang ): ?string {
+	private function getFromEntityData( EntityId $id, string $type, string $lang ): ?string {
 		if ( !array_key_exists( $id->getSerialization(), $this->entityData ) ) {
 			return null;
 		}
