@@ -70,7 +70,7 @@ class ApiServiceFactory {
 		$this->serverName = $serverName;
 	}
 
-	private function getUrlForScriptFile( $scriptFile ): string {
+	private function getUrlForScriptFile( string $scriptFile ): string {
 		return $this->federatedPropertiesSourceScriptUrl . $scriptFile;
 	}
 

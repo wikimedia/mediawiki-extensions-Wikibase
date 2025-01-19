@@ -175,9 +175,9 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		User $user,
 		array $actions,
 		Title $title,
-		$entityType,
-		$rigor = PermissionManager::RIGOR_SECURE
-	) {
+		string $entityType,
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): Status {
 		$status = Status::newGood();
 
 		$mediaWikiPermissions = [];
@@ -200,7 +200,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		return $status;
 	}
 
-	private function getMediaWikiPermissionsToCheck( $action, $entityType ) {
+	private function getMediaWikiPermissionsToCheck( string $action, string $entityType ): array {
 		if ( $action === self::ACTION_MW_CREATE ) {
 			$entityTypeSpecificCreatePermission = $entityType . '-create';
 
@@ -254,7 +254,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		throw new InvalidArgumentException( 'Unknown action to check permissions for: ' . $action );
 	}
 
-	private function mediawikiPermissionExists( $permission ) {
+	private function mediawikiPermissionExists( string $permission ): bool {
 		return in_array( $permission, $this->availableRights );
 	}
 

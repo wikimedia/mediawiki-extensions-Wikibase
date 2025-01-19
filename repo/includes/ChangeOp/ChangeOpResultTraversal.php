@@ -20,7 +20,7 @@ trait ChangeOpResultTraversal {
 		yield from $this->yieldFrom( $changeOpResult );
 	}
 
-	private function yieldFrom( ChangeOpResult $changeOpResult ) {
+	private function yieldFrom( ChangeOpResult $changeOpResult ): iterable {
 		yield $changeOpResult;
 
 		if ( $changeOpResult instanceof ChangeOpsResult ) {

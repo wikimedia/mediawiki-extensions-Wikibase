@@ -79,7 +79,7 @@ class GetClaimsStatementFilter implements StatementFilter {
 		return true;
 	}
 
-	private function propertyMatchesFilter( EntityId $propertyId ) {
+	private function propertyMatchesFilter( EntityId $propertyId ): bool {
 		if ( isset( $this->requestParams['property'] ) ) {
 			try {
 				$parsedProperty = $this->idParser->parse( $this->requestParams['property'] );

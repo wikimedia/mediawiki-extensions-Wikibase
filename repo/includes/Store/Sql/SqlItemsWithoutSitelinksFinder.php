@@ -63,7 +63,7 @@ class SqlItemsWithoutSitelinksFinder implements ItemsWithoutSitelinksFinder {
 		return $this->getItemIdsFromSerializations( $itemIdSerializations );
 	}
 
-	private function getItemIdsFromSerializations( array $itemIdSerializations ) {
+	private function getItemIdsFromSerializations( array $itemIdSerializations ): array {
 		$itemIds = [];
 
 		foreach ( $itemIdSerializations as $itemIdSerialization ) {

@@ -209,7 +209,7 @@ class SetSiteLink extends ModifyEntity {
 		}
 	}
 
-	private function getLinkTitleFromExistingSiteLink( EntityDocument $entity, string $linksite ) {
+	private function getLinkTitleFromExistingSiteLink( EntityDocument $entity, string $linksite ): string {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieWithError( "The given entity is not an item", "not-item" );
 		}

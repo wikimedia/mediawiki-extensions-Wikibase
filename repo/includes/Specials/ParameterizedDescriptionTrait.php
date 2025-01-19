@@ -42,7 +42,7 @@ trait ParameterizedDescriptionTrait {
 		);
 	}
 
-	private function getDescriptionParameters() {
+	private function getDescriptionParameters(): string {
 		if ( $this->descriptionParameters === null ) {
 
 			if ( $this->editableEntities === null ) {

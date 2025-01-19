@@ -87,7 +87,7 @@ class ItemTermsRebuilder {
 		}
 	}
 
-	private function getIdBatches() {
+	private function getIdBatches(): iterable {
 		$idsInBatch = [];
 
 		foreach ( $this->itemIds as $itemId ) {

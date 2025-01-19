@@ -89,7 +89,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 		return $id;
 	}
 
-	private function idIsReserved( $type, $id ) {
+	private function idIsReserved( string $type, int $id ): bool {
 		return array_key_exists( $type, $this->reservedIds ) && in_array( $id, $this->reservedIds[$type] );
 	}
 

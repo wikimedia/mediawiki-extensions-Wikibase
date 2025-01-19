@@ -276,11 +276,11 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 	}
 
-	private function getUpdateScriptPath( $name, $type ) {
+	private function getUpdateScriptPath( string $name, string $type ): string {
 		return $this->getScriptPath( 'archives/' . $name, $type );
 	}
 
-	private function getScriptPath( $name, $type ) {
+	private function getScriptPath( string $name, string $type ): string {
 		$types = [
 			$type,
 			'mysql',

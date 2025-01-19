@@ -30,7 +30,7 @@ class SiteLinkBadgeItemReferenceExtractor implements EntityReferenceExtractor {
 		return $this->extractItemIdsFromSiteLinks( $item->getSiteLinkList() );
 	}
 
-	private function extractBadgeIds( SiteLink $siteLink ) {
+	private function extractBadgeIds( SiteLink $siteLink ): array {
 		$ids = [];
 
 		foreach ( $siteLink->getBadges() as $badge ) {
@@ -40,7 +40,7 @@ class SiteLinkBadgeItemReferenceExtractor implements EntityReferenceExtractor {
 		return $ids;
 	}
 
-	private function extractItemIdsFromSiteLinks( SiteLinkList $siteLinks ) {
+	private function extractItemIdsFromSiteLinks( SiteLinkList $siteLinks ): array {
 		$ids = [];
 
 		foreach ( $siteLinks as $siteLink ) {

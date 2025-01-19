@@ -112,7 +112,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		return $this->composeEntityId( $numericEntityId );
 	}
 
-	private function composeEntityId( $numericEntityId ) {
+	private function composeEntityId( string $numericEntityId ): EntityId {
 		if ( $this->entityType === Item::ENTITY_TYPE ) {
 			return ItemId::newFromNumber( $numericEntityId );
 		} elseif ( $this->entityType === Property::ENTITY_TYPE ) {

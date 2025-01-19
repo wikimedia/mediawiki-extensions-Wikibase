@@ -262,7 +262,7 @@ class EntityParserOutputGeneratorFactory {
 		);
 	}
 
-	private function newGeoDataDataUpdater( $propertyDataTypeMatcher ): StatementDataUpdater {
+	private function newGeoDataDataUpdater( PropertyDataTypeMatcher $propertyDataTypeMatcher ): StatementDataUpdater {
 		return new GeoDataDataUpdater(
 			$propertyDataTypeMatcher,
 			$this->preferredGeoDataProperties,

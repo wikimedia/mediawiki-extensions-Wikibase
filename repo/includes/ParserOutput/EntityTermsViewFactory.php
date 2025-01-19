@@ -46,7 +46,7 @@ class EntityTermsViewFactory {
 		EntityDocument $entity,
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain
-	) {
+	): PlaceholderEmittingEntityTermsView {
 		$services = MediaWikiServices::getInstance();
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$templateFactory = TemplateFactory::getDefaultInstance();

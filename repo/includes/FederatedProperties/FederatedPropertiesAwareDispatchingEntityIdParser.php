@@ -69,7 +69,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 		return ( filter_var( $idSerialization, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) !== false );
 	}
 
-	private function getEntitySourceForConceptURI( $idSerialization ): ?ApiEntitySource {
+	private function getEntitySourceForConceptURI( string $idSerialization ): ?ApiEntitySource {
 		$baseUri = $this->baseUriExtractor->getBaseUriFromSerialization( $idSerialization );
 		$conceptBaseURIsToSources = array_flip( $this->entitySourceDefinitions->getConceptBaseUris() );
 
@@ -86,7 +86,7 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 		return null;
 	}
 
-	private function getSerializationWithoutConceptBaseURI( string $idSerialization, ApiEntitySource $entitySource ) {
+	private function getSerializationWithoutConceptBaseURI( string $idSerialization, ApiEntitySource $entitySource ): string {
 		return substr( $idSerialization, strlen( $entitySource->getConceptBaseUri() ) );
 	}
 

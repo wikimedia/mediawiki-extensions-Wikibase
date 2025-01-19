@@ -290,7 +290,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		}
 	}
 
-	private function getDefaultLanguages() {
+	private function getDefaultLanguages(): array {
 		return [ 'de', 'en', 'fr', 'zh', 'es', 'ru', 'eo' ];
 	}
 
