@@ -28,6 +28,9 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertStructureIsValid( $serialization ) {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'SiteLink list serializations should be arrays' );
@@ -39,12 +42,18 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param string $key
+	 */
 	private function assertKeyIsValid( $key ) {
 		if ( !is_string( $key ) ) {
 			throw new DeserializationException( 'All array keys should be strings' );
 		}
 	}
 
+	/**
+	 * @param string $arrayElement
+	 */
 	private function assertElementIsValid( $arrayElement ) {
 		if ( !is_string( $arrayElement ) && !is_array( $arrayElement ) ) {
 			throw new DeserializationException( 'All array elements should be of type string or array' );

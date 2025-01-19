@@ -59,6 +59,9 @@ class ServiceByTypeDispatcher {
 		return $this->services[$entityType] ?? $this->createService( $entityType, $callbackArgs );
 	}
 
+	/**
+	 * @return mixed
+	 */
 	private function createService( string $entityType, array $args = [] ) {
 		$this->services[$entityType] = $this->callbacks[$entityType]( ...$args );
 

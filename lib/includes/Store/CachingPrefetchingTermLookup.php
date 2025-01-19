@@ -240,6 +240,9 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $terms;
 	}
 
+	/**
+	 * @return string|string[]|false|null
+	 */
 	private function getTermFromLookup( EntityId $entity, string $termType, string $language ) {
 		if ( $termType === TermTypes::TYPE_LABEL || $termType === TermTypes::TYPE_DESCRIPTION ) {
 			return $this->lookup->getPrefetchedTerm( $entity, $termType, $language );
@@ -308,6 +311,9 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->buildCacheKey( $resolutionResult[1], $resolutionResult[0], $language, $termType );
 	}
 
+	/**
+	 * @return string|false|null
+	 */
 	private function getBufferedOrCachedEntry( EntityId $entityId, string $termType, string $languageCode ) {
 		// Check if it's prefetched already.
 		$prefetchedTerm = $this->getPrefetchedTerm( $entityId, $termType, $languageCode );

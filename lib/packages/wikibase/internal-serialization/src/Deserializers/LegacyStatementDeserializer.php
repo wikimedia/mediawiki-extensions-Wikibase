@@ -54,6 +54,11 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 		return $this->newStatement( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 * @param string $key
+	 * @param string $message
+	 */
 	private function assertHasKey( array $serialization, $key, $message ) {
 		if ( !array_key_exists( $key, $serialization ) ) {
 			throw new MissingAttributeException( $key, $message );

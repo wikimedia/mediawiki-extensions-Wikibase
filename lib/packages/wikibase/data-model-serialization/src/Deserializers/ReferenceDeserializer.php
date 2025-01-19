@@ -37,6 +37,9 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 		return $this->isValidSerialization( $serialization );
 	}
 
+	/**
+	 * @param mixed $serialization
+	 */
 	private function isValidSerialization( $serialization ): bool {
 		return is_array( $serialization ) && array_key_exists( 'snaks', $serialization );
 	}

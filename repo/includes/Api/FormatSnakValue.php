@@ -252,6 +252,11 @@ class FormatSnakValue extends ApiBase {
 		return $formatterOptions;
 	}
 
+	/**
+	 * @param FormatterOptions $options
+	 * @param string $option
+	 * @param mixed $value
+	 */
 	private function setValidOption( FormatterOptions $options, string $option, $value ): void {
 		switch ( $option ) {
 			case ValueFormatter::OPT_LANG:

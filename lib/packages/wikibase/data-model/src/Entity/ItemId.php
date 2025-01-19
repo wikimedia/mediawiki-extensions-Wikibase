@@ -26,6 +26,9 @@ class ItemId extends SerializableEntityId implements Int32EntityId {
 		parent::__construct( strtoupper( $idSerialization ) );
 	}
 
+	/**
+	 * @param string $idSerialization
+	 */
 	private function assertValidIdFormat( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
 			throw new InvalidArgumentException( '$idSerialization must be a string' );

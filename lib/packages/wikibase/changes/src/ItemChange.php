@@ -49,6 +49,9 @@ class ItemChange extends EntityChange {
 		}
 	}
 
+	/**
+	 * @param mixed $obj
+	 */
 	private function logWarning( $obj ) {
 		// This shouldn't happen, but we should be robust against corrupt, incomplete
 		// or obsolete instances in the database, etc.

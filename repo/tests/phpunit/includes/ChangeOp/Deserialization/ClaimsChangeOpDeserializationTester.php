@@ -120,6 +120,9 @@ trait ClaimsChangeOpDeserializationTester {
 		];
 	}
 
+	/**
+	 * @return StatementListProvider|EntityDocument
+	 */
 	private static function getStatementSerializer() {
 		return WikibaseRepo::getBaseDataModelSerializerFactory()->newStatementSerializer();
 	}

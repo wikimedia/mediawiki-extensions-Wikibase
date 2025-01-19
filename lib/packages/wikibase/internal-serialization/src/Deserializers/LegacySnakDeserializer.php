@@ -69,6 +69,9 @@ class LegacySnakDeserializer implements Deserializer {
 		return new PropertyValueSnak( $serialization[1], $dataValue );
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertStructureIsValid( $serialization ) {
 		if ( !is_array( $serialization ) || $serialization === [] ) {
 			throw new DeserializationException( 'Serialization should be a non-empty array' );
@@ -99,6 +102,9 @@ class LegacySnakDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param int $idSerialization
+	 */
 	private function assertIsPropertyId( $idSerialization ) {
 		if ( !is_int( $idSerialization ) || $idSerialization < 1 ) {
 			throw new DeserializationException( 'Property id needs to be an int bigger than 0' );

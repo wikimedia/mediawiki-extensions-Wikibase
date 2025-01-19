@@ -126,6 +126,10 @@ class EntitySourceDefinitionsConfigParser {
 		}
 	}
 
+	/**
+	 * @param int|string $namespaceAndSlot
+	 * @return array{0:int,1:string}
+	 */
 	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {
 		if ( is_int( $namespaceAndSlot ) ) {
 			return [ $namespaceAndSlot, SlotRecord::MAIN ];

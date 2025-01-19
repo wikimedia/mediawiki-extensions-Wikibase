@@ -58,11 +58,19 @@ trait FederatedPropertiesTestTrait {
 		return 'http://wikidata.beta.wmflabs.org/entity/';
 	}
 
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
 	private function setWbSetting( string $name, $value ) {
 		$this->setWbSettingInGlobalIfMwIntegrationTest( $name, $value );
 		$this->setWbSettingInSettings( $name, $value );
 	}
 
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
 	private function setWbSettingInSettings( string $name, $value ) {
 		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( $name, $value );

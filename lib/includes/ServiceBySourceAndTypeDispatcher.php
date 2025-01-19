@@ -40,6 +40,9 @@ class ServiceBySourceAndTypeDispatcher {
 		$this->serviceType = $type;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	private function createService( string $sourceName, string $entityType, array $args = [] ) {
 		if ( isset( $this->callbacks[$sourceName][$entityType] ) ) {
 			$this->services[$sourceName][$entityType] = $this->callbacks[$sourceName][$entityType]( ...$args );

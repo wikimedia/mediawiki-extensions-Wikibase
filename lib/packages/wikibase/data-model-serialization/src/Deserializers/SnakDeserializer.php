@@ -137,6 +137,9 @@ class SnakDeserializer implements DispatchableDeserializer {
 		}
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertValidDataValue( $serialization ): void {
 		if ( !is_array( $serialization ) || !array_key_exists( DataValueDeserializer::TYPE_KEY, $serialization ) ) {
 			throw new MissingTypeException( 'Not an array or missing the key "' . DataValueDeserializer::TYPE_KEY . '"' );
@@ -184,6 +187,9 @@ class SnakDeserializer implements DispatchableDeserializer {
 		);
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertCanDeserialize( $serialization ): void {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'The snak serialization should be an array' );

@@ -65,6 +65,9 @@ class FederatedPropertiesAwareDispatchingEntityIdParser implements EntityIdParse
 		return $this->parser->parse( $idSerialization );
 	}
 
+	/**
+	 * @param string $idSerialization
+	 */
 	private function looksLikeURI( $idSerialization ): bool {
 		return ( filter_var( $idSerialization, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) !== false );
 	}

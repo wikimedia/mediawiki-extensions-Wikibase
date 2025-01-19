@@ -55,6 +55,10 @@ class TermDeserializer implements Deserializer {
 		$this->assertAttributeIsString( $serialization, 'value' );
 	}
 
+	/**
+	 * @param array $array
+	 * @param string $attributeName
+	 */
 	private function assertAttributeIsString( array $array, $attributeName ) {
 		if ( !is_string( $array[$attributeName] ) ) {
 			throw new InvalidAttributeException(
