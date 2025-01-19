@@ -45,7 +45,7 @@
 		"mocha": "^10.2.0",
 		"npm-run-all": "^4.1.5",
 		"stylelint-config-wikimedia": "0.17.2",
-		"wdio-mediawiki": "^2.2.0",
+		"wdio-mediawiki": "2.6.0",
 		"wdio-wikibase": "^6.0.3"
 	},
 	"eslintIgnore": [
