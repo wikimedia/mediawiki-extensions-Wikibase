@@ -83,7 +83,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getAliasesDiff() {
-		return isset( $this['aliases'] ) ? $this['aliases'] : new Diff( [], true );
+		return $this['aliases'] ?? new Diff( [], true );
 	}
 
 	/**
@@ -94,7 +94,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getLabelsDiff() {
-		return isset( $this['label'] ) ? $this['label'] : new Diff( [], true );
+		return $this['label'] ?? new Diff( [], true );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getDescriptionsDiff() {
-		return isset( $this['description'] ) ? $this['description'] : new Diff( [], true );
+		return $this['description'] ?? new Diff( [], true );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class EntityDiff extends Diff {
 	 * @return Diff
 	 */
 	public function getClaimsDiff() {
-		return isset( $this['claim'] ) ? $this['claim'] : new Diff( [], true );
+		return $this['claim'] ?? new Diff( [], true );
 	}
 
 	/**
