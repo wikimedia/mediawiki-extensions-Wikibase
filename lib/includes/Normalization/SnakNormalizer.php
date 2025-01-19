@@ -64,7 +64,7 @@ class SnakNormalizer {
 		);
 	}
 
-	private function getNormalizer( PropertyId $propertyId, string $valueType ) {
+	private function getNormalizer( PropertyId $propertyId, string $valueType ): DataValueNormalizer {
 		$propertyIdSerialization = $propertyId->getSerialization();
 		if ( !array_key_exists( $propertyIdSerialization, $this->normalizers ) ) {
 			$this->normalizers[$propertyIdSerialization] = $this->makeNormalizer( $propertyId, $valueType );

@@ -8,6 +8,7 @@ use Psr\Log\NullLogger;
 use stdClass;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -166,7 +167,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		$terms[$type][$lang][] = $text;
 	}
 
-	private function lookupTypeName( $typeId ) {
+	private function lookupTypeName( string $typeId ): string {
 		$typeName = array_flip( TermTypeIds::TYPE_IDS )[$typeId] ?? null;
 		if ( $typeName === null ) {
 			throw new InvalidArgumentException( 'Unknown type ID: ' . $typeId );
@@ -174,11 +175,11 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		return $typeName;
 	}
 
-	private function lookupTypeIds( array $typeNames ) {
+	private function lookupTypeIds( array $typeNames ): array {
 		return array_intersect_key( TermTypeIds::TYPE_IDS, array_flip( $typeNames ) );
 	}
 
-	private function getDbr() {
+	private function getDbr(): IReadableDatabase {
 		return $this->termsDb->getReadConnection();
 	}
 

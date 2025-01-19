@@ -73,7 +73,7 @@ class PropertySerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Property $property ) {
+	private function getSerialized( Property $property ): array {
 		$serialization = [
 			'type' => $property->getType(),
 			'datatype' => $property->getDataTypeId(),

@@ -51,7 +51,7 @@ class LegacySnakDeserializer implements Deserializer {
 		// @codeCoverageIgnoreEnd
 	}
 
-	private function deserializeValueSnak( array $serialization ) {
+	private function deserializeValueSnak( array $serialization ): PropertyValueSnak {
 		try {
 			$dataValue = $this->dataValueDeserializer->deserialize(
 				[

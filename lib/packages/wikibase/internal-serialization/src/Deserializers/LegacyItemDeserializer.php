@@ -132,7 +132,7 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 		}
 	}
 
-	private function normalizeLegacyClaimKeys( array $serialization ) {
+	private function normalizeLegacyClaimKeys( array $serialization ): array {
 		// Compatibility with DataModel 0.2 and 0.3 ItemObjects.
 		// (statements key got renamed to claims)
 		if ( array_key_exists( 'statements', $serialization ) ) {
@@ -143,7 +143,7 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 		return $serialization;
 	}
 
-	private function normalizeStatementSerialization( array $seralization ) {
+	private function normalizeStatementSerialization( array $seralization ): array {
 		if ( !isset( $seralization['rank'] ) ) {
 			$seralization['rank'] = Statement::RANK_NORMAL;
 		}
@@ -155,7 +155,7 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 		return $seralization;
 	}
 
-	private function getArrayFromKey( $key, array $serialization ) {
+	private function getArrayFromKey( string $key, array $serialization ): array {
 		if ( !array_key_exists( $key, $serialization ) ) {
 			return [];
 		}

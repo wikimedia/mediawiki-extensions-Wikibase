@@ -153,7 +153,7 @@ class TermIndexEntry {
 		return 0;
 	}
 
-	private static function getFieldValuesForCompare( self $entry ) {
+	private static function getFieldValuesForCompare( self $entry ): array {
 		return [
 			self::FIELD_ENTITY => $entry->getEntityId()->getSerialization(),
 			self::FIELD_TYPE => $entry->getTermType(),

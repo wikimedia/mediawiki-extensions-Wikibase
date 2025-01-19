@@ -77,7 +77,7 @@ class ItemDeserializer extends TypedObjectDeserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
-	private function getDeserialized( array $serialization ) {
+	private function getDeserialized( array $serialization ): Item {
 		$item = new Item();
 
 		$this->setIdFromSerialization( $serialization, $item );

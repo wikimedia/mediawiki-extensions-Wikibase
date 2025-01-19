@@ -268,7 +268,7 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 		);
 	}
 
-	private function getTermIndexOptions() {
+	private function getTermIndexOptions(): array {
 		return [
 			'caseSensitive' => $this->termSearchOptions->getIsCaseSensitive(),
 			'prefixSearch' => $this->termSearchOptions->getIsPrefixSearch(),

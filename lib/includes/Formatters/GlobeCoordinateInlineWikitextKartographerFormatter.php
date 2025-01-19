@@ -47,7 +47,7 @@ class GlobeCoordinateInlineWikitextKartographerFormatter implements ValueFormatt
 		return wfEscapeWikiText( $this->coordinateFormatter->format( $value ) );
 	}
 
-	private function formatEarthCoordinate( GlobeCoordinateValue $value ) {
+	private function formatEarthCoordinate( GlobeCoordinateValue $value ): string {
 		return Html::rawElement( 'maplink', [
 			'latitude' => $value->getLatitude(),
 			'longitude' => $value->getLongitude(),

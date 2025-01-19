@@ -116,7 +116,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 		return $this->wrapThumb( $title, $thumb->toHtml() ) . $this->getCaptionHtml( $title, $file );
 	}
 
-	private function getThumbWidth( $thumbSize ) {
+	private function getThumbWidth( int $thumbSize ): int {
 		return $this->thumbLimits[$thumbSize] ?? self::FALLBACK_THUMBNAIL_WIDTH;
 	}
 

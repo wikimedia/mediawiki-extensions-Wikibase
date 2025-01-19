@@ -60,7 +60,7 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 		}
 	}
 
-	private function newStatement( array $serialization ) {
+	private function newStatement( array $serialization ): Statement {
 		/* @var Snak $snak */
 		$snak = $this->snakDeserializer->deserialize( $serialization['m'] );
 		/* @var SnakList $snakList */
@@ -79,7 +79,7 @@ class LegacyStatementDeserializer implements DispatchableDeserializer {
 		return $statement;
 	}
 
-	private function getReferences( array $refs ) {
+	private function getReferences( array $refs ): ReferenceList {
 		$references = [];
 
 		foreach ( $refs as $serialization ) {

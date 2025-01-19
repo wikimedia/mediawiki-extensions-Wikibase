@@ -46,7 +46,7 @@ class SiteLinkSerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( SiteLink $siteLink ) {
+	private function getSerialized( SiteLink $siteLink ): array {
 		return [
 			'site' => $siteLink->getSiteId(),
 			'title' => $siteLink->getPageName(),

@@ -228,7 +228,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private function acquireTextInLangIds(
 		array $langTextIds,
 		ReplicaPrimaryAwareRecordIdsAcquirer $textInLangIdsAcquirer
-	) {
+	): array {
 		$textInLangRecords = [];
 		foreach ( $langTextIds as $lang => $textIds ) {
 			foreach ( $textIds as $textId ) {
@@ -306,7 +306,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		array $typeTextInLangIds,
 		ReplicaPrimaryAwareRecordIdsAcquirer $termInLangIdsAcquirer,
 		array $idsToRestore = []
-	) {
+	): array {
 		$termInLangRecords = [];
 		foreach ( $typeTextInLangIds as $typeId => $textInLangIds ) {
 			foreach ( $textInLangIds as $textInLangId ) {
@@ -382,7 +382,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 	private function mapTermsArrayToTermIds(
 		array $termsArray,
 		array $termInLangIdsToRestore = [],
-		$ignoreReplica = false
+		bool $ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaPrimaryAwareRecordIdsAcquirer(
 			$this->termsDb, 'wbt_text', 'wbx_id',
@@ -401,12 +401,12 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 		return $this->mapToTermInLangIds( $termsArray, $termInLangIdsAcquirer, $termInLangIdsToRestore );
 	}
 
-	private function calcRecordHash( array $record ) {
+	private function calcRecordHash( array $record ): string {
 		ksort( $record );
 		return md5( serialize( $record ) );
 	}
 
-	private function filterUniqueRecords( array $records ) {
+	private function filterUniqueRecords( array $records ): array {
 		$uniqueRecords = [];
 		foreach ( $records as $record ) {
 			$recordHash = $this->calcRecordHash( $record );

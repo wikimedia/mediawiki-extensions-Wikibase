@@ -40,7 +40,7 @@ class StatementListDiffer {
 		return new MapDiffer( false, null, new ComparableComparer() );
 	}
 
-	private function toDiffArray( StatementList $statementList ) {
+	private function toDiffArray( StatementList $statementList ): array {
 		$statementArray = [];
 
 		/**

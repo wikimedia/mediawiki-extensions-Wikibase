@@ -13,6 +13,7 @@ use MediaWiki\Languages\LanguageFallback;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\User\User;
+use MediaWiki\User\UserIdentity;
 
 /**
  * Object creating TermLanguageFallbackChain objects in Wikibase.
@@ -256,7 +257,7 @@ class LanguageFallbackChainFactory {
 		return $languageFallbackChain;
 	}
 
-	private function getBabel( $languageCode, $user ) {
+	private function getBabel( string $languageCode, UserIdentity $user ): array {
 		$babel = [];
 
 		$babelCategoryNames = $this->getBabelCategoryNames();
@@ -282,7 +283,7 @@ class LanguageFallbackChainFactory {
 		return $babel;
 	}
 
-	private function getBabelCategoryNames() {
+	private function getBabelCategoryNames(): array {
 		global $wgBabelCategoryNames;
 
 		$babelCategoryNames = array_filter(
