@@ -9,7 +9,6 @@ use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainTermsDb;
 use Wikimedia\Rdbms\ConnectionManager;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @covers \Wikibase\Lib\Rdbms\RepoDomainTermsDb
@@ -67,22 +66,6 @@ class RepoDomainTermsDbTest extends \PHPUnit\Framework\TestCase {
 		$repoDomainDb->method( 'replication' )->willReturn( $replicationWaiter );
 
 		( new RepoDomainTermsDb( $repoDomainDb ) )->waitForReplicationOfAllAffectedClusters( $timeout );
-	}
-
-	public function testLoadBalancer(): void {
-		$expected = $this->createStub( ILoadBalancer::class );
-		$repoDomainDb = $this->createStub( RepoDomainDb::class );
-		$repoDomainDb->method( 'loadBalancer' )->willReturn( $expected );
-
-		$this->assertSame( $expected, ( new RepoDomainTermsDb( $repoDomainDb ) )->loadBalancer() );
-	}
-
-	public function testDomain(): void {
-		$expected = 'wikidatawiki';
-		$repoDomainDb = $this->createStub( RepoDomainDb::class );
-		$repoDomainDb->method( 'domain' )->willReturn( $expected );
-
-		$this->assertSame( $expected, ( new RepoDomainTermsDb( $repoDomainDb ) )->domain() );
 	}
 
 }
