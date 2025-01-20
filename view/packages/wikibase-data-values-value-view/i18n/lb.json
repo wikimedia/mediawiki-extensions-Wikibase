@@ -10,6 +10,8 @@
 	"valueview-expert-globecoordinateinput-precision": "Prezisioun:",
 	"valueview-expert-globecoordinateinput-nullprecision": "net uginn",
 	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "op eng Bousekonn genee",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "op 1/1000 vun enger Bousekonn genee",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
 	"valueview-expert-timevalue-calendar-julian": "Julianesch",
 	"valueview-expert-timeinput-precision": "Prezisioun:",
