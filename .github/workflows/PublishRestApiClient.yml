@@ -18,14 +18,16 @@ jobs:
                   CURRENT_OAS_DOC_INTERFACE_VERSION=$(npx semver --coerce $(jq -r .info.version repo/rest-api/src/RouteHandlers/openapi.json))
                   NEXT_VERSION=$(printf "$NEXT_PATCH_VERSION\n$CURRENT_OAS_DOC_INTERFACE_VERSION" | sort -V | tail -1)
                   echo "VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+            - name: Copy OpenApi spec file
+              run: cp repo/rest-api/src/RouteHandlers/openapi.json openapi.json
             - name: Build the API client
               uses: addnab/docker-run-action@v3
               with:
-                  image: openapitools/openapi-generator-cli
+                  image: openapitools/openapi-generator-cli:v7.10.0
                   options: -v ${{ github.workspace }}:/local -w /local
                   run: |
                       /usr/local/bin/docker-entrypoint.sh generate \
-                          -i openapi-dereferenced.json \
+                          -i openapi.json \
                           -g javascript \
                           -o api-client \
                           --additional-properties=usePromises=true \
