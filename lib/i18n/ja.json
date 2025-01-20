@@ -25,6 +25,7 @@
 	"wikibase-error-ui-no-external-page": "ページ「$2」は「$1」内で見つかりませんでした。",
 	"wikibase-error-ui-edit-conflict": "編集が競合しました。ページを再読込してください。",
 	"wikibase-language-fallback-transliteration-hint": "$1 (翻字済)",
+	"wikibase-language-name-for-terms-mul": "全言語の既定値",
 	"wikibase-quantitydetails-amount": "量",
 	"wikibase-quantitydetails-upperbound": "上限値",
 	"wikibase-quantitydetails-lowerbound": "下限値",
