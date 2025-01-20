@@ -4,6 +4,8 @@ on:
         branches: [ master ]
         paths:
             - repo/rest-api/src/RouteHandlers/openapi.json
+            - .github/workflows/publishRestApiClient.yml
+            - .github/workflows/publishRestApiClient/**
 jobs:
     build-and-publish-api-client:
         runs-on: ubuntu-latest
