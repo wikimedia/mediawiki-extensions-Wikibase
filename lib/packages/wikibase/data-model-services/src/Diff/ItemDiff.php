@@ -30,7 +30,7 @@ class ItemDiff extends EntityDiff {
 	 * @return Diff
 	 */
 	public function getSiteLinkDiff() {
-		return isset( $this['links'] ) ? $this['links'] : new Diff( [], true );
+		return $this['links'] ?? new Diff( [], true );
 	}
 
 	/**
