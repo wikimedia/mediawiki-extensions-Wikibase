@@ -9,7 +9,7 @@ This snippet shows a basic usage example, including how to set the `User-Agent` 
 ```js
 import { ApiClient, LabelsApi } from '@wmde/wikibase-rest-api';
 
-const apiClient = new ApiClient( 'https://www.wikidata.org/w/rest.php/wikibase/v0' );
+const apiClient = new ApiClient( 'https://www.wikidata.org/w/rest.php/wikibase' );
 apiClient.defaultHeaders[ 'User-Agent' ] = '[custom user agent]';
 
 console.log( await new LabelsApi( apiClient ).getItemLabel( 'Q1', 'en' ) );
