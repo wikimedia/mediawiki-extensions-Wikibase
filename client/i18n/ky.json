@@ -20,7 +20,7 @@
 	"wikibase-linkitem-input-page": "Барак:",
 	"wikibase-linkitem-confirmitem-button": "Ырастоо",
 	"wikibase-linkitem-not-loggedin-title": "Киришиңиз керек",
-	"wikibase-linkitem-success-link": "Барактар бири-бирине байланыштырылды. Шилтемелерди камтыган элементти биздин [$1 борбордук маалымат сактагычынан] таба аласыз.",
+	"wikibase-linkitem-success-link": "Барактар бири-бирине байланыштырылды. Шилтемелерди камтыган элементти [$1 борбордук маалымат сактагычыбыздан] таба аласыз.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
 	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
@@ -50,7 +50,7 @@
 	"wikibase-client-data-bridge-error-reload-bridge": "Кайра жүктөө",
 	"wikibase-client-data-bridge-error-reload-page": "Баракты кайра жүктөө",
 	"wikibase-client-data-bridge-error-go-back": "Кайтуу",
-	"wikibase-client-data-bridge-thank-you-head": "Түзөткөнүңүз үчүн рахмат !",
+	"wikibase-client-data-bridge-thank-you-head": "Түзөткөнүңүз үчүн рахмат!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Кирген жоксуз",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Кирбестен жарыялоо",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Кирбестен сактоо"

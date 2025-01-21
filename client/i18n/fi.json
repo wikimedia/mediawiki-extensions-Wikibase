@@ -108,6 +108,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Linkitys|Linkitykset}} {{GRAMMAR:illative|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää {{GENDER:|luomani}} sivun {{WBREPONAME}}-kohteeseen.",
 	"exceeded-entity-limit-category": "Sivut, jotka hakevat liian monta {{WBREPONAME}}-entiteettiä",
+	"exceeded-entity-limit-category-desc": "Tämä luokka listaa sivut, jotka hakevat liian monta {{WBREPONAME}}-entiteettiä.",
 	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, johon voidaan kerätä kyseiseen aiheeseen liittyvää tietoa.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin, joihin voidaan kerätä kyseisiin aiheisiin liittyvää tietoa.",
 	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
