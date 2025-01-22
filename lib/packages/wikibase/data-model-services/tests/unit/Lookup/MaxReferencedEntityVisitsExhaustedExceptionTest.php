@@ -13,6 +13,8 @@ use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedExcepti
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class MaxReferencedEntityVisitsExhaustedExceptionTest extends TestCase {
 

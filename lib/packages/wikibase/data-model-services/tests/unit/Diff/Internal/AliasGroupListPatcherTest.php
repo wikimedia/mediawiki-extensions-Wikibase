@@ -16,6 +16,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
 class AliasGroupListPatcherTest extends TestCase {
 
