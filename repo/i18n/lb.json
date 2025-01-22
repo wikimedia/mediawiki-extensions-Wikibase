@@ -145,7 +145,7 @@
 	"wikibase-validator-sitelink-conflict": "De Link $1 gëtt scho vum Element $2 benotzt. Dir kënnt e bei $2 ewechhuelen, wann en net dohi gehéiert, oder déi zwee Elementer fusionéieren, wa si iwwer genee dee selwechte Sujet sinn.",
 	"wikibase-validator-sitelink-conflict-redirects-supported": "De Link $1 gëtt scho vum Element $2 benotzt. Dir kënnt e bei $2 ewechhuelen, wann en net dohi gehéiert, oder déi zwee Elementer fusionéieren, wa si iwwer genee dee selwechte Sujet sinn. Wann d'Situatioun méi komplex ass, kuckt wgl. [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "De Link $1 gëtt och vun engem aneren Element benotzt, dat elo grad gespäichert gëtt.",
-	"wikibase-validator-label-conflict": "D'Eegeschaft $3 huet schonn d'Etikett „$1“ associéiert mam Sproochcode $2.",
+	"wikibase-validator-label-conflict": "D'Eegenschaft $3 huet schonn d'Etikett „$1“ associéiert mam Sproochcode $2.",
 	"wikibase-validator-label-with-description-conflict": "D'Element $3 huet schonn d'Etikett „$1“ associéiert mam Sproochecode $2 a mam selwechten Text fir d'Beschreiwung.",
 	"wikibase-validator-label-equals-description": "D'Etikett an d'Beschreiwung fir de Sproochcode $1 däerfen net de selwechte Wäert hunn.",
 	"wikibase-validator-label-no-entityid": "D'Etikett däerf keng gülteg Objets-ID sinn.",
