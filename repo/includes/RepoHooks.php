@@ -199,6 +199,7 @@ final class RepoHooks {
 	public static function registerUnitTests( array &$paths ) {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../rest-api/tests/phpunit/';
+		$paths[] = __DIR__ . '/../domains/search/tests/phpunit/';
 	}
 
 	/**
