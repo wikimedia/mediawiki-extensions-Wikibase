@@ -14,6 +14,7 @@ Some specific notes for Wikibase 1.44 upgrades are below:
 * Entries in the `wbt_term_in_lang` table will be sanitized so that the `wbtl_type_id` column
   always contains `1` as the value for labels, `2` for descriptions and `3` for aliases. This
   migration may take a while when running `update.php`.
+* The wbt_type database table was dropped.
 
 ...
 

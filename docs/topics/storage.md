@@ -27,7 +27,6 @@
   * @subpage docs_sql_wbt_property_terms
   * @subpage docs_sql_wbt_term_in_lang
   * @subpage docs_sql_wbt_text_in_lang
-  * @subpage docs_sql_wbt_type
   * @subpage docs_sql_wbt_text
 
 **Client**

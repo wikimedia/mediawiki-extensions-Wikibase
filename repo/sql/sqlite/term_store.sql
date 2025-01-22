@@ -57,11 +57,3 @@ CREATE TABLE /*_*/wbt_text (
 );
 
 CREATE UNIQUE INDEX wbt_text_text ON /*_*/wbt_text (wbx_text);
-
-
-CREATE TABLE /*_*/wbt_type (
-  wby_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  wby_name BLOB NOT NULL
-);
-
-CREATE UNIQUE INDEX wbt_type_name ON /*_*/wbt_type (wby_name);

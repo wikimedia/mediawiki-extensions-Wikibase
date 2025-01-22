@@ -54,11 +54,3 @@ CREATE TABLE /*_*/wbt_text (
   UNIQUE INDEX wbt_text_text (wbx_text),
   PRIMARY KEY(wbx_id)
 ) /*$wgDBTableOptions*/;
-
-
-CREATE TABLE /*_*/wbt_type (
-  wby_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  wby_name VARBINARY(45) NOT NULL,
-  UNIQUE INDEX wbt_type_name (wby_name),
-  PRIMARY KEY(wby_id)
-) /*$wgDBTableOptions*/;

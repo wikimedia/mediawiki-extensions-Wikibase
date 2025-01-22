@@ -59,7 +59,7 @@ class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	/**
 	 * replace root keys containing type names in termsArray
-	 * with their respective ids in wbt_type table
+	 * with their respective ids in {@link TermTypeIds}
 	 *
 	 * @param array $termsArray terms per type per language:
 	 *	[
