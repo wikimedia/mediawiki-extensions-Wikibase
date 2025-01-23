@@ -23,10 +23,11 @@
 			"列维劳德",
 			"夢蝶葬花",
 			"沈澄心",
-			"Midleading"
+			"Midleading",
+			"Winston Sung"
 		]
 	},
-	"specialpages-group-wikibase": "维基数据库",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "删除项",
 	"wikibase-deletedentity-property": "删除属性",
 	"wikibase-deletedentity-query": "删除查询",

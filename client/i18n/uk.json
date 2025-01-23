@@ -152,6 +152,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Попереднє значення колись було правильним, але тепер є застарілим.",
 	"wikibase-client-data-bridge-references-heading": "Примітки",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Ви не ввійшли в систему",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Ви не ввійшли в систему. Якщо ви <strong>увійдете</strong> або <strong>створите обліковий запис</strong>, ваші зміни будуть підписані вашим іменем користувача, а також ви отримаєте інші переваги.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Увага:</strong> ви не авторизовані. Ваша IP-адреса буде публічно видима, якщо ви зробите якісь редагування. Якщо ви <strong>авторизуєтеся</strong> чи <strong>створите обліковий запис</strong>, ваші редагування позначатимуться вашим іменем користувача і ви отримаєте інші переваги.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редагувати без автентифікації",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Увійти або зареєструватися",

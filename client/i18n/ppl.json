@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"TimumachtikanNawat"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} datka",
+	"wikibase-editlinks": "Shikpata ilpika",
+	"wikibase-addlinkstitle": "Shiktali ilpika inwan tajtaketzalis",
+	"wikibase-linkitem-addlinks": "Shiktali ilpika",
+	"wikibase-linkitem-title": "Ilpika ka amat",
+	"wikibase-linkitem-linkpage": "Ilpika ka amat",
+	"wikibase-linkitem-selectlink": "Shikwi se amat wan se iswat su tikneki tikilpia iwan ini amat.",
+	"wikibase-linkitem-input-site": "Tajtaketzalis",
+	"wikibase-linkitem-input-page": "Amat"
+}
