@@ -104,7 +104,7 @@ class SiteLinksForDisplayLookup {
 		return $this->getSiteLinksForItem( $item );
 	}
 
-	private function getSiteLinksForItem( Item $item ) {
+	private function getSiteLinksForItem( Item $item ): array {
 		$siteLinks = $item->getSiteLinkList()->toArray();
 
 		$this->hookContainer->run( 'WikibaseClientSiteLinksForItem', [

@@ -324,7 +324,7 @@ class ChangeLineFormatter {
 		);
 	}
 
-	private function buildDiffLinkHTML( EntityId $entityId, RevisionData $rev, $count ): string {
+	private function buildDiffLinkHTML( EntityId $entityId, RevisionData $rev, int $count ): string {
 		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),

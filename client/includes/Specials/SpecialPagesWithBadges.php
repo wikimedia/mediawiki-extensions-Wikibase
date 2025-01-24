@@ -87,7 +87,7 @@ class SpecialPagesWithBadges extends QueryPage {
 		}
 	}
 
-	private function prepareParams( $subPage ) {
+	private function prepareParams( ?string $subPage ) {
 		$badge = $this->getRequest()->getText( 'badge', $subPage ?: '' );
 
 		try {
@@ -141,7 +141,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			->getHTML( '' );
 	}
 
-	private function getOptionsArray() {
+	private function getOptionsArray(): array {
 		/** @var ItemId[] $badgeItemIds */
 		$badgeItemIds = array_map(
 			function( $badgeId ) {

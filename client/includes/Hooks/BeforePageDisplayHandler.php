@@ -80,7 +80,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 		}
 	}
 
-	private function addJsModules( OutputPage $outputPage, Title $title, $actionName, Skin $skin ): void {
+	private function addJsModules( OutputPage $outputPage, Title $title, string $actionName, Skin $skin ): void {
 		$user = $outputPage->getUser();
 
 		if ( $this->hasLinkItemWidget( $user, $outputPage, $title, $actionName ) ) {
