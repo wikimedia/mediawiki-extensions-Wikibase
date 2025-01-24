@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
+namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\SimpleItemSearch;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
