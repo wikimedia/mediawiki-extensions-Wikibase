@@ -8,6 +8,7 @@ use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;
 use Wikibase\Client\RepoLinker;
@@ -17,12 +18,16 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL-2.0-or-later
  */
 class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
+	/** @var RevisionLookup */
+	private $revisionLookup;
 	/** @var RepoLinker */
 	private $repoLinker;
 
 	public function __construct(
+		RevisionLookup $revisionLookup,
 		RepoLinker $repoLinker
 	) {
+		$this->revisionLookup = $revisionLookup;
 		$this->repoLinker = $repoLinker;
 	}
 
@@ -42,6 +47,12 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 		EntityId $entityId,
 		?string $description
 	): string {
+		if ( !$firstRevisionTimestamp ) {
+			// Revision may not be found during page move, in which case we can look up again from revisionLookup
+			$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
+			$firstRevisionTimestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
+		}
+
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
 		$imageFile = $this->queryPageImage( $title );
 		$schema = $this->createSchema(
