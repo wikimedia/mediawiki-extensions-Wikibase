@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceItemStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 
 /**
  * @license GPL-2.0-or-later

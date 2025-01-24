@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Model;
+namespace Wikibase\Repo\Domains\Crud\Domain\Model;
 
 /**
  * @license GPL-2.0-or-later

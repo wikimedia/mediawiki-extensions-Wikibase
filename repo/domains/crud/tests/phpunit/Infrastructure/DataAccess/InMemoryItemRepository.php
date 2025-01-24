@@ -1,30 +1,30 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use LogicException;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemCreator;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemDescriptionsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinksRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
  * @license GPL-2.0-or-later

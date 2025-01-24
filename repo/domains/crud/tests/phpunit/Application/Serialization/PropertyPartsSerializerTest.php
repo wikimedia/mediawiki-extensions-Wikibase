@@ -1,25 +1,25 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyPartsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyPartsSerializer
  *
  * @group Wikibase
  *

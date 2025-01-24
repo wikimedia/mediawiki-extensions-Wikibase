@@ -1,22 +1,22 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchItemStatement;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemStatement\PatchItemStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemStatement\PatchItemStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemStatement\PatchItemStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemStatement\PatchItemStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemStatement\PatchItemStatement
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
@@ -8,10 +8,10 @@ use DataValues\TimeValue;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Deserializers\SnakValueDeserializer;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\ValueDeserializer;
-use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ValueDeserializer;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ValueTypeLookup;
 
 /**
  * @license GPL-2.0-or-later

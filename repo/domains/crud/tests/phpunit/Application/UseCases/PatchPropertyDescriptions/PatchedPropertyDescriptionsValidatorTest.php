@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyDescriptions;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchPropertyDescriptions;
 
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
@@ -9,19 +9,19 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryPropertyDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyDescriptions\PatchedPropertyDescriptionsValidator
  *
  * @group Wikibase
  *

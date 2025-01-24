@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
 
 /**
  * @license GPL-2.0-or-later

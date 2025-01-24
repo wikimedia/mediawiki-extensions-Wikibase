@@ -1,23 +1,23 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyStatementsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyPartsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyStatementsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Architecture;
+namespace Wikibase\Repo\Tests\Domains\Crud\Architecture;
 
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
@@ -18,13 +18,13 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  */
 class ArchitectureTest {
 
-	private const DOMAIN_MODEL = 'Wikibase\Repo\RestApi\Domain\Model';
-	private const DOMAIN_READMODEL = 'Wikibase\Repo\RestApi\Domain\ReadModel';
-	private const DOMAIN_SERVICES = 'Wikibase\Repo\RestApi\Domain\Services';
-	private const SERIALIZATION = 'Wikibase\Repo\RestApi\Application\Serialization';
-	private const VALIDATION = 'Wikibase\Repo\RestApi\Application\Validation';
-	private const USE_CASES = 'Wikibase\Repo\RestApi\Application\UseCases';
-	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\RestApi\Application\UseCaseRequestValidation';
+	private const DOMAIN_MODEL = 'Wikibase\Repo\Domains\Crud\Domain\Model';
+	private const DOMAIN_READMODEL = 'Wikibase\Repo\Domains\Crud\Domain\ReadModel';
+	private const DOMAIN_SERVICES = 'Wikibase\Repo\Domains\Crud\Domain\Services';
+	private const SERIALIZATION = 'Wikibase\Repo\Domains\Crud\Application\Serialization';
+	private const VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\Validation';
+	private const USE_CASES = 'Wikibase\Repo\Domains\Crud\Application\UseCases';
+	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()

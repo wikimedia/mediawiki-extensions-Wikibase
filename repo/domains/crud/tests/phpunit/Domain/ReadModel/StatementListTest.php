@@ -1,21 +1,21 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
-use Wikibase\Repo\RestApi\Domain\ReadModel\References;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Qualifiers;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Rank;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\References;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\StatementList
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList
  *
  * @group Wikibase
  *

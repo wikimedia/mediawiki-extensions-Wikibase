@@ -1,29 +1,29 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedDescriptions;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedLabels;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator
- * @covers \Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator
- * @covers \Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator
- * @covers \Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionsContentsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelsContentsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsContentsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchSitelinks;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchSitelinks;
 
 use Generator;
 use Monolog\Test\TestCase;
@@ -8,20 +8,20 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks\PatchedSitelinksValidator
  *
  * @group Wikibase
  *

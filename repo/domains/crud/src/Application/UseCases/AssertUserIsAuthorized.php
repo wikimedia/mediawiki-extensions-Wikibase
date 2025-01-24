@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PermissionCheckResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later

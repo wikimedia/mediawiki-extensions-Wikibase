@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\Context\RequestContext;
@@ -19,14 +19,14 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\Domains\Crud\WbRestApi;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater
  *
  * @group Wikibase
  * @group Database

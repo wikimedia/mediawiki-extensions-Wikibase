@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Hook\TempUserCreatedRedirectHook;
 use MediaWiki\Rest\Handler;

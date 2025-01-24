@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetPropertyLabel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\SetPropertyLabel;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\SetPropertyLabel\SetPropertyLabelRequest
  * @group Wikibase
  * @license GPL-2.0-or-later
  */

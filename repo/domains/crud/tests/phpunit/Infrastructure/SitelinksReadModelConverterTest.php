@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink as SitelinkWriteModel;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter
  *
  * @group Wikibase
  *

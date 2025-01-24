@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Validation;
+namespace Wikibase\Repo\Domains\Crud\Application\Validation;
 
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidDescriptionException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\EmptyDescriptionException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidDescriptionException;
 
 /**
  * @license GPL-2.0-or-later

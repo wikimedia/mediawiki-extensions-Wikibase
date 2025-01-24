@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
-use Wikibase\Repo\RestApi\Domain\Services\PermissionChecker;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PermissionCheckResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\Message\MessageSpecifier;
 

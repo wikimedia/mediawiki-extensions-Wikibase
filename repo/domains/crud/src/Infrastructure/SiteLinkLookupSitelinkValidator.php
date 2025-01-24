@@ -1,21 +1,21 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\BadgeNotAllowed;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptySitelinkException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidSitelinkBadgeException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\BadgeNotAllowed;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\EmptySitelinkException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldTypeException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidSitelinkBadgeException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\SitelinkTargetNotFound;
 
 /**
  * @license GPL-2.0-or-later

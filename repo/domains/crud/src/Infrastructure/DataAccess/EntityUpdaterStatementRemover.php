@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
 
 /**
  * @license GPL-2.0-or-later

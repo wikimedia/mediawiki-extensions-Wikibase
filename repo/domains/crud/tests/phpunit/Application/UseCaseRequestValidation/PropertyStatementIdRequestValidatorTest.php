@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyStatementIdRequestValidator
  *
  * @group Wikibase
  *

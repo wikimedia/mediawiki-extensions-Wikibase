@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchSitelinks;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks;
 
 use LogicException;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\Utils;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinkValidator;
 
 /**
  * @license GPL-2.0-or-later

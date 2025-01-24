@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\SetSitelink;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\SetSitelink;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
 
 /**
  * @license GPL-2.0-or-later

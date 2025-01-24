@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Services;
+namespace Wikibase\Repo\Domains\Crud\Domain\Services;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Reference as ReferenceWriteModel;
@@ -12,14 +12,14 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Qualifiers;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Rank;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
-use Wikibase\Repo\RestApi\Domain\ReadModel\References;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Qualifiers;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Rank;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\References;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\PreconditionMiddleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddleware
  *
  * @group Wikibase
  *

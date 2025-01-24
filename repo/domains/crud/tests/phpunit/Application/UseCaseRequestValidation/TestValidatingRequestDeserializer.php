@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
-use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer;
 
 /**
  * @license GPL-2.0-or-later

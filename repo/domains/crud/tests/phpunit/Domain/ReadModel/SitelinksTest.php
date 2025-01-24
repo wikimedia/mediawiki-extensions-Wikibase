@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks
  *
  * @group Wikibase
  *

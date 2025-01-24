@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchStatement;
 
 use Exception;
 use Generator;
@@ -11,33 +11,33 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertStatementSubjectExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchedStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryStatementRepository;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatement
  *
  * @group Wikibase
  *

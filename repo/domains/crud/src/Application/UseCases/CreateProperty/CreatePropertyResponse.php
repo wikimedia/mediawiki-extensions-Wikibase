@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\CreateProperty;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
 
 /**
  * @license GPL-2.0-or-later

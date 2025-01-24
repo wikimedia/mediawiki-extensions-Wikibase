@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Swaggest\JsonDiff\Exception;
 use Swaggest\JsonDiff\InvalidFieldTypeException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\MissingFieldException;
 use Swaggest\JsonDiff\UnknownOperationException;
-use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\JsonPatchValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later

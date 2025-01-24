@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
 
 /**
  * @license GPL-2.0-or-later

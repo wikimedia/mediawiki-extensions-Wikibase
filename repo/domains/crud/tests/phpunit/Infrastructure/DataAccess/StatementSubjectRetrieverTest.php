@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use LogicException;
@@ -21,10 +21,10 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever
  *
  * @group Wikibase
  *

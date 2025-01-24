@@ -1,10 +1,10 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliases;
 
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyAliasesRetriever;
 
 /**
  * @license GPL-2.0-or-later

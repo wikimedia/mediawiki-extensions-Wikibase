@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
-use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkTargetTitleResolver;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Services;
+namespace Wikibase\Repo\Domains\Crud\Domain\Services;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemRevision;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemRevision;
 
 /**
  * @license GPL-2.0-or-later

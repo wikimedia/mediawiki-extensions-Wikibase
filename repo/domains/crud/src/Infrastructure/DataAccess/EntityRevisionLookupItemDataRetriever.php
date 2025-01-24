@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
@@ -8,23 +8,23 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementList as StatementListWriteModel;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemStatementsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinkRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemPartsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinksRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later

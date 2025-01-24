@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatements;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatements;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -8,16 +8,16 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Reference as ReferenceWriteModel;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer
  *
  * @group Wikibase
  *

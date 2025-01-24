@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use LogicException;
@@ -15,16 +15,16 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterStatementUpdater
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementUpdater
  *
  * @group Wikibase
  *

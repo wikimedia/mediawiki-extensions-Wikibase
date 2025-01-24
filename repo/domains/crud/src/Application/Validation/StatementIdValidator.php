@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Validation;
+namespace Wikibase\Repo\Domains\Crud\Application\Validation;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;

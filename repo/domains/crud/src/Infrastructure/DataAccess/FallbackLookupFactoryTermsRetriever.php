@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use MediaWiki\Languages\LanguageFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionWithFallbackRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelWithFallbackRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionWithFallbackRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelWithFallbackRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemDescriptionWithFallbackRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelWithFallbackRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyDescriptionWithFallbackRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyLabelWithFallbackRetriever;
 
 /**
  * @license GPL-2.0-or-later

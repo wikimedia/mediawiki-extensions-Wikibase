@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\ErrorResponseToHttpStatus
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\ErrorResponseToHttpStatus
  *
  * @group Wikibase
  *

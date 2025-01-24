@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
-use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertStatementSubjectExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UpdateExceptionHandler;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later

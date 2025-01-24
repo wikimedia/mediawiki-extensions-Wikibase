@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later

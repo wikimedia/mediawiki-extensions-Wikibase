@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Repo\RestApi\Domain\Services\ValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ValueTypeLookup;
 
 /**
  * @license GPL-2.0-or-later

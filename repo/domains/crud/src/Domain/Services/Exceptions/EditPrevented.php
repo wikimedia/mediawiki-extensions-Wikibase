@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Services\Exceptions;
+namespace Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions;
 
 use Exception;
 use Throwable;

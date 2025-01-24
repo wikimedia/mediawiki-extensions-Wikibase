@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\Status\Status;
@@ -12,13 +12,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PermissionCheckResult;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PermissionCheckResult;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\WikibaseEntityPermissionChecker;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\WikibaseEntityPermissionChecker
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\WikibaseEntityPermissionChecker
  *
  * @group Wikibase
  *

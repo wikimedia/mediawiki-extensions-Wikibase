@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetProperty;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetProperty;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyPartsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetProperty;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetPropertyRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyPartsRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetProperty
  *
  * @group Wikibase
  *

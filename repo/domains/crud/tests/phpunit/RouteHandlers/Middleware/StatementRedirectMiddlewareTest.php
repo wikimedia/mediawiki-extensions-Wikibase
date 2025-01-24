@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
@@ -11,12 +11,12 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddleware;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\StatementRedirectMiddleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddleware
  *
  * @group Wikibase
  *

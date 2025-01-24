@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Helpers;
+namespace Wikibase\Repo\Tests\Domains\Crud\Helpers;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -8,9 +8,9 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

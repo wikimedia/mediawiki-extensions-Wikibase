@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyAliases;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
 
 /**
  * @license GPL-2.0-or-later

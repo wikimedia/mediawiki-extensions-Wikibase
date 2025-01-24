@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchStatement;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchedStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchedStatementValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchedStatementValidator
  *
  * @group Wikibase
  *

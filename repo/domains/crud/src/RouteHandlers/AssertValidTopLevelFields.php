@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use InvalidArgumentException;
 use MediaWiki\Rest\HttpException;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikimedia\Assert\Assert;
 use Wikimedia\ParamValidator\ParamValidator;
 

@@ -1,6 +1,6 @@
 services:
     -
-        class: Wikibase\Repo\Tests\RestApi\Architecture\ArchitectureTest
+        class: Wikibase\Repo\Tests\Domains\Crud\Architecture\ArchitectureTest
         tags:
             - phpat.test
 
