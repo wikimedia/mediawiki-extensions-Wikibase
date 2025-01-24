@@ -7,7 +7,7 @@ const { readFileSync } = require( 'fs' );
 
 function compileSchemaAndValidator() {
 	const openApiSchema = JSON.parse(
-		readFileSync( `${__dirname}/../../../src/RouteHandlers/openapi.json` )
+		readFileSync( `${__dirname}/../../../../domains/crud/src/RouteHandlers/openapi.json` )
 	);
 
 	const schemaValidator = new Ajv( { strictTypes: false } );

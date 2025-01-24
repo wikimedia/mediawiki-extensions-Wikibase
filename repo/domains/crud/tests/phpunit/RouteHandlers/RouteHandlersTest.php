@@ -171,13 +171,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		parent::setUpBeforeClass();
 		$notExcluded = fn( array $route ) => !in_array( $route['path'], self::EXCLUDED_ROUTES );
 		self::$prodRoutesData = array_filter(
-			json_decode( file_get_contents( __DIR__ . '/../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
+			json_decode( file_get_contents( __DIR__ . '/../../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
 			$notExcluded
 		);
 		self::$routesData = array_merge(
 			self::$prodRoutesData,
 			array_filter(
-				json_decode( file_get_contents( __DIR__ . '/../../../routes.dev.json' ), true ),
+				json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/routes.dev.json' ), true ),
 				$notExcluded
 			)
 		);

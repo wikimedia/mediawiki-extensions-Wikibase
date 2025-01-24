@@ -40,7 +40,7 @@ class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 			[ 'data-access' ],
 			[ 'lib' ],
 			[ 'repo' ],
-			[ 'repo/rest-api' ],
+			[ 'repo/domains/crud' ],
 			[ 'repo/domains/search' ],
 			[ 'view' ],
 		];

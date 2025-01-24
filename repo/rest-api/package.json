@@ -16,7 +16,7 @@
 		"build": "run-s build:docs build:spec",
 		"build:docs": "webpack --config docs/webpack.config.js",
 		"serve:docs": "webpack serve --config docs/webpack.config.js --mode development",
-		"build:spec": "redocly bundle specs/openapi.json --dereferenced -o src/RouteHandlers/openapi.json && cp src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
+		"build:spec": "redocly bundle specs/openapi.json --dereferenced -o ../domains/crud/src/RouteHandlers/openapi.json && cp ../domains/crud/src/RouteHandlers/openapi.json ../../docs/rest-api/openapi.json"
 	},
 	"engines": {
 		"node": ">=18"

@@ -57,12 +57,12 @@
 	"scripts": {
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git --exclude lib/packages/*/*/vendor",
 		"phpcs": "phpcs -p -s --cache",
-		"phpcs:rest-api": "phpcs -p -s --standard=./repo/rest-api/ruleset.xml repo/rest-api/",
+		"phpcs:rest-api": "phpcs -p -s --standard=./repo/domains/crud/ruleset.xml repo/domains/crud/",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
 		"fix": [
 			"minus-x fix .",
-			"phpcbf --standard=./repo/rest-api/ruleset.xml repo/rest-api/",
+			"phpcbf --standard=./repo/domains/crud/ruleset.xml repo/domains/crud/",
 			"phpcbf"
 		],
 		"fix-modified": "bash build/phpcbfGitModified.sh",
