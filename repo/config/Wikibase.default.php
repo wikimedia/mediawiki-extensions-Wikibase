@@ -477,4 +477,13 @@ return [
 	 * @see https://phabricator.wikimedia.org/T384344
 	 */
 	'tmpFixRdfSomevalueHash' => false,
+
+	/**
+	 * Feature flag for the soft rollout of fixing the s:, ref: and v: prefixes (-> wds:, wdref:, wdv:).
+	 *
+	 * Added in https://phabricator.wikimedia.org/T384344, to be removed in Iadb3f55587
+	 * @var bool Whether to correctly use the rdfNodeNamespacePrefix (true)
+	 * or incorrectly use the rdfPredicateNamespacePrefix (false)
+	 */
+	'tmpFixRdfNodeNamespacePrefix' => false,
 ];
