@@ -11,6 +11,8 @@ use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
+use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Lib\Store\Sql\Terms\TermTypeIds;
 use Wikibase\Repo\RangeTraversable;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
@@ -324,27 +326,26 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			return;
 		}
 
-		$sanitizedTypeIds = [ 'label' => 1, 'description' => 2, 'alias' => 3 ];
 		$currentTypeIds = $this->getCurrentTermTypeIds( $db );
-		if ( $currentTypeIds == $sanitizedTypeIds ) {
+		if ( $currentTypeIds == TermTypeIds::TYPE_IDS ) {
 			return;
 		}
 
 		$updater->output( "...sanitizing Wikibase term type IDs.\n" );
 
 		// setting temporary IDs so that they don't get mixed up
-		$tmpTypeIds = [ 'label' => 101, 'description' => 102, 'alias' => 103 ];
+		$tmpTypeIds = [ TermTypes::TYPE_LABEL => 101, TermTypes::TYPE_DESCRIPTION => 102, TermTypes::TYPE_ALIAS => 103 ];
 		foreach ( $currentTypeIds as $type => $currentId ) {
-			if ( $currentId !== $sanitizedTypeIds[$type] ) {
+			if ( $currentId !== TermTypeIds::TYPE_IDS[$type] ) {
 				$updater->output( "...setting temporary Wikibase $type IDs.\n" );
 				$this->updateTermTypeId( $db, $currentId, $tmpTypeIds[$type] );
 			}
 		}
 
 		// update to final type IDs
-		foreach ( [ 'label', 'description', 'alias' ] as $type ) {
+		foreach ( array_keys( TermTypeIds::TYPE_IDS ) as $type ) {
 			$updater->output( "...setting final Wikibase $type IDs.\n" );
-			$this->updateTermTypeId( $db, $tmpTypeIds[$type], $sanitizedTypeIds[$type] );
+			$this->updateTermTypeId( $db, $tmpTypeIds[$type], TermTypeIds::TYPE_IDS[$type] );
 		}
 	}
 
