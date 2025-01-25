@@ -22,7 +22,7 @@
 						{
 							"type": "object",
 							"properties": {
-								"sitelink": { "$ref": "../../openapi.json#/components/schemas/Sitelink" }
+								"sitelink": { "$ref": "../../global/schemas.json#/Sitelink" }
 							},
 							"required": [ "sitelink" ]
 						},

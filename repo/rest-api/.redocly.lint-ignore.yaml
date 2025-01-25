@@ -1,7 +1,7 @@
 # This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
 # See https://redocly.com/docs/cli/ for more information.
 
-specs/resources/index.json:
+../domains/crud/specs/resources/index.json:
   operation-4xx-response: # Excluded as these endpoints have no 4XX error responses.
     - '#/~1v1~1openapi.json/get/responses'
     - '#/~1v1~1property-data-types/get/responses'
