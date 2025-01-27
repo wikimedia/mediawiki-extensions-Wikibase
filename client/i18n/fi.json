@@ -53,7 +53,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Sinun täytyy olla sisäänkirjautuneena",
 	"wikibase-linkitem-not-loggedin": "Sinun täytyy olla kirjautuneena tässä wikissä ja [$1 keskustietovarastossa] käyttääksesi tätä toimintoa.",
 	"wikibase-linkitem-success-link": "Sivut on linkitetty. Linkit sisältävä kohde on [$1 keskustietovarastossa].",
-	"limitreport-entityaccesscount": "Ladattujen Wikibase-aiheiden määrä",
+	"limitreport-entityaccesscount": "Ladattujen Wikibase-entiteettien määrä",
 	"wikibase-property-notfound": "Ominaisuutta $1 ei löydy.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Piilota",
