@@ -15,6 +15,11 @@
 	"apihelp-query+wbentityusage-param-aspect": "فقط أرجع أرقام الكيانات المستخدمة في هذا الجانب.",
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "وصلات الكيان مستعملة",
 	"apihelp-query+wbentityusage-paramvalue-aspect-L": "تسمية الكيان مستعملة",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "يتم استخدام وصف الكيان",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "يتم استخدام عنوان الصفحة المحلية المقابلة للكيان",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "يتم استخدام البيانات من الكيان",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "يتم استخدام جميع جوانب الكيان أو قد يتم استخدامها",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "يتم استخدام شيء آخر يتعلق بالكيان. وهذا يعني حاليًا استخدام اسم مستعار وفحوصات صريحة لوجود الكيان.",
 	"apihelp-query+wbentityusage-param-prop": "الخواص للإضافة للنتيجة.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "لو مفعلة مسار الكيان ستتم إضافته",
 	"apihelp-query+wbentityusage-param-entities": "فقط أرجع الصفحة التي تستخدم هذه الكيانات.",
@@ -46,5 +51,13 @@
 	"apihelp-query+wikibase-description": "الحصول على المعلومات حول عميل Wikibase ومستودع Wikibase المصاحب.",
 	"apihelp-query+wikibase-summary": "الحصول على معلومات حول عميل ويكي بيز ومستودع ويكي بيز المصاحب.",
 	"apihelp-query+wikibase-example": "الحصول على المسار والمعلومات الأخرى حول عميل ومستودع Wikibase.",
-	"apihelp-query+wikibase-param-prop": "ما هي الخواص للحصول عليها:\n;<kbd>url</kbd>: المسار الأساسي، مسار السكريبتات ومسار المقالات لمستودع Wikibase.\n;<kbd>siteid</kbd>: رقم الموقع لهذا الموقع."
+	"apihelp-query+wikibase-param-prop": "ما هي الخواص للحصول عليها:\n;<kbd>url</kbd>: المسار الأساسي، مسار السكريبتات ومسار المقالات لمستودع Wikibase.\n;<kbd>siteid</kbd>: رقم الموقع لهذا الموقع.",
+	"apihelp-wbformatreference-summary": "تنسيق مرجع للعرض للمستخدمين.",
+	"apihelp-wbformatreference-example-1": "تنسيق مرجع فارغ باستخدام نمط جسر البيانات إلى HTML.",
+	"apihelp-wbformatreference-example-2": "تنسيق مرجع يحتوي على سلسلة واحدة باستخدام نمط جسر البيانات إلى HTML.",
+	"apihelp-wbformatreference-param-reference": "المرجع ككائن JSON.",
+	"apihelp-wbformatreference-param-style": "النمط الذي يتم به تنسيق المرجع.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "النمط المستخدم بواسطة [[mw:Special:MyLanguage/Wikidata Bridge|جسر البيانات]]. غير مخصص للاستخدام العام.",
+	"apihelp-wbformatreference-param-outputformat": "التنسيق الذي ينبغي أن يتم إرجاع النتيجة به.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "ترميز HTML."
 }
