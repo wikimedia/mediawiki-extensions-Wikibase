@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Content\Content;
-use MediaWiki\Content\ContentHandler;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionLookup;
@@ -36,7 +35,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -326,7 +324,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	) {
 		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
 		$titleWrapper->mRedirect = false;
-		$content = $this->mockContent();
+		$content = $this->createMock( Content::class );
 		$parserOutput = $this->newParserOutput( $extensionDataAppend, [] );
 		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
@@ -356,7 +354,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDoContentAlterParserOutput_sitelinkOfNoItem() {
-		$content = $this->mockContent();
+		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_MAIN, 'Plutonium' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
@@ -424,7 +422,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->newUsageAccumulatorFactory()
 		);
 
-		$content = $this->mockContent();
+		$content = $this->createMock( Content::class );
 		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
 		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
 		$titleWrapper->mRedirect = false;
@@ -482,8 +480,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$this->newUsageAccumulatorFactory(),
 			$settings->getSetting( 'siteGlobalID' ),
-			$this->createMock( RevisionLookup::class ),
-			$this->createMock( TermLookup::class )
+			$this->createMock( RevisionLookup::class )
 		);
 	}
 
@@ -501,18 +498,6 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkAllowedSiteGroups' )
 		);
-	}
-
-	private function mockContent() {
-		$contentHandler = $this->createMock( ContentHandler::class );
-		$contentHandler->method( 'getPageLanguage' )
-			->willReturn( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
-
-		$content = $this->createMock( Content::class );
-		$content->method( 'getContentHandler' )
-			->willReturn( $contentHandler );
-
-		return $content;
 	}
 
 }

@@ -182,18 +182,20 @@ final class ClientHooks {
 	 *
 	 * @return bool Always true.
 	 */
-	public static function onSkinAfterBottomScripts( Skin $skin, string &$html ) {
+	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
 		$services = MediaWikiServices::getInstance();
 		$enabledNamespaces = WikibaseClient::getSettings( $services )
 			->getSetting( 'pageSchemaNamespaces' );
 
 		$generator = new LinkedDataSchemaGenerator(
+			$services->getContentLanguage(),
 			WikibaseClient::getRepoLinker( $services ),
+			WikibaseClient::getTermLookup( $services ),
 		);
 
-		$outputPage = $skin->getOutput();
-		$entityId = self::parseEntityId( $outputPage->getProperty( 'wikibase_item' ) );
-		$title = $outputPage->getTitle();
+		$out = $skin->getOutput();
+		$entityId = self::parseEntityId( $out->getProperty( 'wikibase_item' ) );
+		$title = $out->getTitle();
 		if (
 			!$entityId ||
 			!$title ||
@@ -203,15 +205,14 @@ final class ClientHooks {
 			return true;
 		}
 
-		$revisionTimestamp = $outputPage->getRevisionTimestamp();
-		$firstRevisionTimestamp = $outputPage->getProperty( 'first_revision_timestamp' );
-		$description = $outputPage->getProperty( 'wikibase_item_description' );
+		$revisionTimestamp = $out->getRevisionTimestamp();
+		$firstRevisionTimestamp = $out->getProperty( 'first_revision_timestamp' );
+
 		$html .= $generator->createSchemaElement(
 			$title,
 			$revisionTimestamp,
 			$firstRevisionTimestamp,
-			$entityId,
-			$description
+			$entityId
 		);
 
 		return true;

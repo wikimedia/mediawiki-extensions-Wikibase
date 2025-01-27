@@ -23,7 +23,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -89,8 +88,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->mockRepo,
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
-			$this->createMock( RevisionLookup::class ),
-			$this->createMock( TermLookup::class )
+			$this->createMock( RevisionLookup::class )
 		);
 	}
 
@@ -289,7 +287,6 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			$this->createMock( RevisionLookup::class ),
-			$this->createMock( TermLookup::class ),
 			$logger
 		);
 
@@ -321,7 +318,6 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->newUsageAccumulatorFactory(),
 			'srwiki',
 			$this->createMock( RevisionLookup::class ),
-			$this->createMock( TermLookup::class ),
 			$logger
 		);
 

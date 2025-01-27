@@ -11,7 +11,6 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 
@@ -43,7 +42,6 @@ class ParserOutputDataUpdaterTest extends ServiceWiringTestCase {
 			new NullLogger() );
 		$this->mockService( 'WikibaseClient.UsageAccumulatorFactory', $this->createMock( UsageAccumulatorFactory::class ) );
 
-		$this->mockService( 'WikibaseClient.TermLookup', $this->createMock( TermLookup::class ) );
 		$this->assertInstanceOf(
 			ClientParserOutputDataUpdater::class,
 			$this->getService( 'WikibaseClient.ParserOutputDataUpdater' )

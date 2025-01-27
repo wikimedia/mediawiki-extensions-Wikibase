@@ -656,8 +656,7 @@ return [
 			WikibaseClient::getUsageAccumulatorFactory( $services ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$services->getRevisionLookup(),
-			WikibaseClient::getTermLookup( $services ),
-			WikibaseClient::getLogger( $services ),
+			WikibaseClient::getLogger( $services )
 		);
 	},
 

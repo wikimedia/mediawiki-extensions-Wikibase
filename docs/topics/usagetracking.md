@@ -89,7 +89,6 @@ based on the old and new title in the sitelink, so that both get updated.
 not directly related to any change to the entity.
 [ImplicitDescriptionUsageLookup] adds implicit usages on the descriptions of items linked to local pages,
 so that description edits are added to the recent changes even if the descriptions are not used directly.
-This also keeps SEO features like the cached schema built in [LinkedDataSchemaGenerator] up-to-date.
 
 ### Repo side usage tracking
 
