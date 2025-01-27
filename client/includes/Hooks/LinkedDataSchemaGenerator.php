@@ -4,7 +4,6 @@ namespace Wikibase\Client\Hooks;
 
 use File;
 use MediaWiki\Html\Html;
-use MediaWiki\Language\Language;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
@@ -13,28 +12,18 @@ use MediaWiki\Title\Title;
 use PageImages\PageImages;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
  * @license GPL-2.0-or-later
  */
 class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
-	/** @var string */
-	private $langCode;
 	/** @var RepoLinker */
 	private $repoLinker;
-	/** @var TermLookup */
-	private $termLookup;
 
 	public function __construct(
-		Language $language,
-		RepoLinker $repoLinker,
-		TermLookup $termLookup
+		RepoLinker $repoLinker
 	) {
-		$this->langCode = $language->getCode();
 		$this->repoLinker = $repoLinker;
-		$this->termLookup = $termLookup;
 	}
 
 	/**
@@ -42,6 +31,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 	 * @param string|null $revisionTimestamp
 	 * @param string|null $firstRevisionTimestamp
 	 * @param EntityId $entityId
+	 * @param string $description
 	 *
 	 * @return string
 	 */
@@ -49,11 +39,11 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 		Title $title,
 		?string $revisionTimestamp,
 		?string $firstRevisionTimestamp,
-		EntityId $entityId
+		EntityId $entityId,
+		string $description
 	): string {
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
 		$imageFile = $this->queryPageImage( $title );
-		$description = $this->getDescription( $entityId );
 		$schema = $this->createSchema(
 			$title, $revisionTimestamp, $firstRevisionTimestamp, $entityConceptUri, $imageFile, $description
 		);
@@ -64,7 +54,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 		return $html;
 	}
 
-	public function createSchema(
+	private function createSchema(
 		Title $title,
 		?string $revisionTimestamp,
 		?string $firstRevisionTimestamp,
@@ -127,16 +117,6 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 		return PageImages::getPageImage( $title ) ?: null;
 	}
 
-	private function getDescription( EntityId $entityId ): string {
-		try {
-			$description = $this->termLookup->getDescription( $entityId, $this->langCode );
-		} catch ( TermLookupException $exception ) {
-			return '';
-		}
-
-		return $description ?: '';
-	}
-
 	/**
 	 * Add output page properties to be consumed in the LinkedDataSchemaGenerator
 	 *
@@ -147,6 +127,11 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 		$firstRevisionTimestamp = $parserOutput->getExtensionData( 'first_revision_timestamp' );
 		if ( $firstRevisionTimestamp !== null ) {
 			$outputPage->setProperty( 'first_revision_timestamp', $firstRevisionTimestamp );
+		}
+
+		$description = $parserOutput->getExtensionData( 'wikibase_item_description' );
+		if ( $description !== null ) {
+			$outputPage->setProperty( 'wikibase_item_description', $description );
 		}
 	}
 }
