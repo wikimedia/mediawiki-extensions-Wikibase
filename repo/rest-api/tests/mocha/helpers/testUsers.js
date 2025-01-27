@@ -28,9 +28,10 @@ async function createUser( purpose, groups ) {
 		} )
 	);
 
-	await root.login( name, password ); // root is now the new user
+	const user = action.getAnon();
+	await user.login( name, password );
 
-	return root;
+	return user;
 }
 
 async function getOrCreateBotUser() {
