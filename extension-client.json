@@ -171,9 +171,7 @@
 		"LinkedDataSchemaGenerator": {
 			"class": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator",
 			"services": [
-				"ContentLanguage",
-				"WikibaseClient.RepoLinker",
-				"WikibaseClient.TermLookup"
+				"WikibaseClient.RepoLinker"
 			]
 		},
 		"LoadExtensionSchemaUpdates": {

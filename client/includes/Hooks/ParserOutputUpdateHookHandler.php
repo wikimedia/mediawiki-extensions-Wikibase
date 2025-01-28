@@ -81,6 +81,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$usageAccumulator = $this->usageAccumulatorFactory->newFromParserOutputProvider( $parserOutputProvider );
 		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler( $usageAccumulator );
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
+		$langCode = $content->getContentHandler()->getPageLanguage( $title )->getCode();
 
 		if ( $useRepoLinks ) {
 			// add links
@@ -93,6 +94,7 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 		$this->parserOutputDataUpdater->updateUnconnectedPageProperty( $content, $title, $parserOutputProvider );
 		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutputProvider );
 		$this->parserOutputDataUpdater->updateFirstRevisionTimestampProperty( $title, $parserOutputProvider );
+		$this->parserOutputDataUpdater->updateWikibaseItemDescriptionProperty( $title, $parserOutputProvider, $langCode );
 		$parserOutputProvider->close();
 	}
 
