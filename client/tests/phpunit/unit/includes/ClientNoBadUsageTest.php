@@ -32,7 +32,7 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
 			],
 			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
-				'WikibaseClient.ServiceWiring.php' => 2, // RepoDomainDbFactory+ClientDomainDbFactory service wiring
+				'WikibaseClient.ServiceWiring.php' => 3, // RepoDomainDbFactory+ClientDomainDbFactory+TermsDomainDbFactory service wiring
 				'tests/phpunit/integration/includes/RecentChanges/RecentChangesFinderTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlSubscriptionManagerTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => true, // TODO migrate?

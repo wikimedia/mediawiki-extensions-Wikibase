@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\TermTypeIds;
 use Wikibase\Repo\RangeTraversable;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
@@ -63,10 +64,14 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$updater->dropExtensionTable( 'wb_entity_per_page' );
 		}
 
-		$updater->addExtensionTable(
+		$updater->addExtensionUpdateOnVirtualDomain( [
+			VirtualTermsDomainDb::VIRTUAL_DOMAIN_ID,
+			'addTable',
 			'wbt_text',
-			$this->getScriptPath( 'term_store', $db->getType() )
-		);
+			$this->getScriptPath( 'term_store', $db->getType() ),
+			true,
+		] );
+
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
 			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'rebuildPropertyTerms' ],
