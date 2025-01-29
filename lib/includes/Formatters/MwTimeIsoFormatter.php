@@ -150,7 +150,7 @@ class MwTimeIsoFormatter implements ValueFormatter {
 	 *
 	 * @return string A date format for the month that roundtrips the Wikibase TimeParsers.
 	 */
-	private function getMonthFormat( $dateFormat ) {
+	private function getMonthFormat( ?string $dateFormat ): string {
 		if ( $dateFormat && preg_match( '/(?:[FMn]|(?<!x)m|xg)[.,]?/', $dateFormat, $matches ) ) {
 			return $matches[0];
 		}
