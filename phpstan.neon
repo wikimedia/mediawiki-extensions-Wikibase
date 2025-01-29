@@ -9,8 +9,8 @@ parameters:
 	phpat:
 		ignore_built_in_classes: true
 	paths:
-		- ./repo/rest-api/src/
-		- ./repo/rest-api/tests/architecture/
+		- ./repo/domains/crud/src/
+		- ./repo/domains/crud/tests/architecture/
 
 includes:
     - vendor/phpat/phpat/extension.neon

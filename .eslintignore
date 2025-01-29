@@ -5,6 +5,7 @@
 /lib/resources/wikibase-api/
 /lib/packages/wikibase/*/tests/**/*.json
 /repo/rest-api/
+/repo/domains/crud/
 
 # Build tooling
 /docs/

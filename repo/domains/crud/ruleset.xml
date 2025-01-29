@@ -25,9 +25,9 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="repo/rest-api/src" value="Wikibase\Repo\RestApi"/>
-				<element key="repo/rest-api/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
-				<element key="repo/rest-api/tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
+				<element key="repo/domains/crud/src" value="Wikibase\Repo\RestApi"/>
+				<element key="repo/domains/crud/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
+				<element key="repo/domains/crud/tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
 			</property>
 		</properties>
 	</rule>
