@@ -27,7 +27,8 @@
 			"Themasterriot",
 			"Vivaelcelta",
 			"Yupik",
-			"Rodney Araujo"
+			"Rodney Araujo",
+			"Aleator"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -140,6 +141,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Acceder o registrarse",
 	"wikibase-client-data-bridge-license-heading": "Utilización y licencia",
 	"wikibase-client-data-bridge-license-body": "<p>Cambiar este valor también lo modificará en {{WBREPONAME}} y, a su vez, en wikis en otras lenguas.</p>\n<p>Al pulsar en «{{int:$1}}», aceptas acatar los [$2 términos de uso] y liberas tu contribución en virtud de [$3 $4].</p>",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modificar el valor en {{WBREPONAME}}",
 	"wikibase-client-data-bridge-saving-error-heading": "No se pudieron guardar los cambios",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Se detectó un conflicto de edición",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Otro usuario acaba de editar este valor y publicó sus cambios primero. No se pudieron aplicar sus cambios. Vuelva a cargar la página para recuperar el nuevo valor.",

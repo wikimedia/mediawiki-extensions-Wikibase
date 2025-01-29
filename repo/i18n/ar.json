@@ -38,7 +38,8 @@
 			"محمد أحمد عبد الفتاح",
 			"مشعل الحربي",
 			"Hubaishan",
-			"Lolekek"
+			"Lolekek",
+			"XIDME"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -55,7 +56,7 @@
 	"wikibase-edit": "عدِّل",
 	"wikibase-save": "احفظ",
 	"wikibase-publish": "انشر",
-	"wikibase-cancel": "ألغِ",
+	"wikibase-cancel": "إلغاء",
 	"wikibase-add": "أضِف",
 	"wikibase-addqualifier": "أضِف تصفيةً",
 	"wikibase-addreference": "أضِف مرجعاً",
@@ -532,7 +533,7 @@
 	"wikibase-federated-properties-source-wiki-api-error-message": "البيانات حول هذا العنصر غير متاحة مؤقتًا بسبب فشل طلب wiki مصدر الاتحاد. يرجى تحديث الصفحة.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "تستخدم قاعدة ويكي المعلومات هذه الخصائص الموحدة من مصدر خارجي. يمكنك الوصول إلى $1 .",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 قائمة الخواص في $2]",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "ألغِ",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "إلغاء",
 	"wikibase-federated-properties-leaving-site-notice-continue": "اذهب إلى ويكي مصدر",
 	"wikibase-federated-properties-leaving-site-notice-notice": "هذه ملكية موحدة. ستتم إعادة توجيهك إلى $1 لعرض تفاصيله.",
 	"wikibase-federated-properties-leaving-site-notice-header": "مغادرة قاعدة ويكي المحلية",
