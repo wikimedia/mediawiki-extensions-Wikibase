@@ -10,6 +10,9 @@ On [Packagist](https://packagist.org/packages/wikibase/internal-serialization):
 [![Latest Stable Version](https://poser.pugx.org/wikibase/internal-serialization/version.png)](https://packagist.org/packages/wikibase/internal-serialization)
 [![Download count](https://poser.pugx.org/wikibase/internal-serialization/d/total.png)](https://packagist.org/packages/wikibase/internal-serialization)
 
+Note that this repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/internal-serialization/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
+
 ## Installation
 
 The recommended way to use this library is via [Composer](http://getcomposer.org/).
@@ -96,6 +99,11 @@ new format.
 This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
 tests using the PHPUnit configuration file found in the root directory. The tests can also be run
 via TravisCI, as a TravisCI configuration file is also provided in the root directory.
+
+## Contributing
+
+This repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/internal-serialization/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
 
 ## Authors
 

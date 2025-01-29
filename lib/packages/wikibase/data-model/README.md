@@ -18,6 +18,9 @@ has no dependencies whatsoever on these or on MediaWiki itself.
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
+Note that this repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
+
 ## Installation
 
 You can use [Composer](http://getcomposer.org/) to download and install
@@ -59,6 +62,11 @@ style checks by PHPCS and PHPMD are supported. The configuration for all 3 these
 in the root directory. You can use the tools in their standard manner, though can run all checks
 required by our CI by executing `composer ci`. To just run tests use `composer test`, and to just
 run style checks use `composer cs`.
+
+## Contributing
+
+This repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
 
 ## Credits
 

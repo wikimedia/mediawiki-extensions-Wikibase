@@ -16,6 +16,9 @@ It is part of the [Wikibase software](http://wikiba.se/).
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
+Note that this repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model-services/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
+
 ## Library contents
 
 In order to be allowed in this package, code needs to:
@@ -59,6 +62,11 @@ style checks by PHPCS and PHPMD are supported. The configuration for all 3 these
 in the root directory. You can use the tools in their standard manner, though can run all checks
 required by our CI by executing `composer ci`. To just run tests use `composer test`, and to just
 run style checks use `composer cs`.
+
+## Contributing
+
+This repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model-services/) on gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
 
 ## Links
 

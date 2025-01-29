@@ -18,6 +18,9 @@ Repo data access layer, belongs in other components.
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
+Note that this repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model-serialization/) on gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
+
 ## Installation
 
 The recommended way to use this library is via [Composer](http://getcomposer.org/).
@@ -105,6 +108,10 @@ For a full CI run
 
 	composer ci
 
+## Contributing
+
+This repository is a mirror of part of the upstream [Wikibase project](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/refs/heads/master/lib/packages/wikibase/data-model-serialization/) on Gerrit.
+Contributions should be made to the directories there using MediaWiki's [Gerrit process](https://www.mediawiki.org/wiki/Gerrit).
 
 ## Authors
 
