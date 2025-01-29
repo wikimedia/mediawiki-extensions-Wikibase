@@ -150,12 +150,12 @@ class MwTimeIsoFormatter implements ValueFormatter {
 	/**
 	 * @see Language::sprintfDate
 	 *
-	 * @param string $dateFormat
+	 * @param string|null $dateFormat
 	 *
 	 * @return string A date format for the month that roundtrips the Wikibase TimeParsers.
 	 */
 	private function getMonthFormat( $dateFormat ) {
-		if ( preg_match( '/(?:[FMn]|(?<!x)m|xg)[.,]?/', $dateFormat, $matches ) ) {
+		if ( $dateFormat && preg_match( '/(?:[FMn]|(?<!x)m|xg)[.,]?/', $dateFormat, $matches ) ) {
 			return $matches[0];
 		}
 
