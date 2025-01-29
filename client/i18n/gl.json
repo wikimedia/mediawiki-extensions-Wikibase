@@ -63,7 +63,7 @@
 	"wikibase-error-deserialize-error": "Erro ao deseriar os datos.",
 	"wikibase-error-serialize-error": "Erro ao seriar os datos.",
 	"wikibase-error-invalid-entity-id": "O sistema descoñece o identificador \"$2\". Utiliza un identificador de entidade válido.",
-	"wikibase-error-exceeded-entity-access-limit": "Accedeuse a demasiadas entidades de {{WBREPONAME}}.",
+	"wikibase-error-exceeded-entity-access-limit": "Accedeuse a demasiadas entidades de {{WBREPONAME}}. Número de entidades cargadas: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Demasiadas chamadas a \"mw.wikibase.getReferencedEntityId\"; só se {{PLURAL:$2|permite|permiten}} $2.",
 	"unconnectedpages": "Páxinas non conectadas a elementos",
 	"unconnectedpages-summary": "Esta páxina amosa as páxinas non conectadas a ningún elemento de datos (nos espazos de nomes que admiten elementos conectados).",
