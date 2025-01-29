@@ -60,7 +60,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->siteStore = new HashSiteStore();
 
 		$settings = clone WikibaseRepo::getSettings();
-		$settings->setSetting( 'tmpEnableMulLanguageCode', true );
+		$settings->setSetting( 'enableMulLanguageCode', true );
 		$settings->setSetting( 'badgeItems', [
 			self::BADGE_GOOD_ARTICLE => 'good-article',
 			self::BADGE_SITELINK_TO_REDIRECT => 'sitelink-to-redirect',

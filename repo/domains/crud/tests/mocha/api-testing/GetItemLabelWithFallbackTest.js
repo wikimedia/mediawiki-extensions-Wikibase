@@ -15,7 +15,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 	const fallbackLanguageWithExistingLabel = 'ar';
 
 	async function makeRequestWithMulHeader( requestBuilder ) {
-		return requestBuilder.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+		return requestBuilder.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 			.assertValidRequest()
 			.makeRequest();
 	}

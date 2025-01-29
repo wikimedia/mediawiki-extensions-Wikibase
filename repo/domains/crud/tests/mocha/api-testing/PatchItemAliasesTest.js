@@ -103,7 +103,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: [ alias ] } ]
-			).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).makeRequest();
+			).withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } ).makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.deepEqual( response.body.mul, [ alias ] );

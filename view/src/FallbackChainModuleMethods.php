@@ -14,7 +14,7 @@ class FallbackChainModuleMethods {
 
 	public static function buildFallbackChains(): array {
 		$services = MediaWikiServices::getInstance();
-		if ( !WikibaseRepo::getSettings( $services )->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+		if ( !WikibaseRepo::getSettings( $services )->getSetting( 'enableMulLanguageCode' ) ) {
 			return [];
 		}
 		$localCache = $services->getLocalServerObjectCache();

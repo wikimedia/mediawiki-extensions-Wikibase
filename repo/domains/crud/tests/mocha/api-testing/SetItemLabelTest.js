@@ -111,7 +111,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 			const languageCode = 'mul';
 			const newLabel = `new mul label ${utils.uniq()}`;
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
-				.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+				.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 				.assertValidRequest()
 				.makeRequest();
 
