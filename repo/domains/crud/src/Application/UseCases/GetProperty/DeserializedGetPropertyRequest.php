@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetProperty;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPropertyFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DeserializedPropertyIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\DeserializedPropertyFieldsRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\DeserializedPropertyIdRequest;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetPropertyStatement;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatement\GetPropertyStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatement\GetPropertyStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatement\GetPropertyStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement\GetPropertyStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatement\GetPropertyStatement
  *
  * @group Wikibase
  *

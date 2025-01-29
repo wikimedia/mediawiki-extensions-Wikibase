@@ -1,23 +1,23 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyLabels;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchPropertyLabels;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyLabels\PatchedPropertyLabelsValidator
  *
  * @group Wikibase
  *

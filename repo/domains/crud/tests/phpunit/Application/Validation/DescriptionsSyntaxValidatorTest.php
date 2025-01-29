@@ -1,20 +1,20 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedDescriptions;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator
  *
  * @group Wikibase
  *

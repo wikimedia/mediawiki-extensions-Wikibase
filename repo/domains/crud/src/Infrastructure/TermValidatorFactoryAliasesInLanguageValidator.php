@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**

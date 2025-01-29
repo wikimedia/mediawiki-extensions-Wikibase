@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Services;
+namespace Wikibase\Repo\Domains\Crud\Domain\Services;
 
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementRevision;
 
 /**
  * @license GPL-2.0-or-later

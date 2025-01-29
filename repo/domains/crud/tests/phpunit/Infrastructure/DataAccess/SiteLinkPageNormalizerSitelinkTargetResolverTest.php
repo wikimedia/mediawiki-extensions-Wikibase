@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
 use Wikibase\Repo\SiteLinkPageNormalizer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver
  *
  * @group Wikibase
  *

@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchJson
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson
  *
  * @group Wikibase
  *

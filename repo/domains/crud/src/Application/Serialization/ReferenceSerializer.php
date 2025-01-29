@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
 
 /**
  * @license GPL-2.0-or-later

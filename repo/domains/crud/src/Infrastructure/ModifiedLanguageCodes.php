@@ -1,6 +1,6 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;

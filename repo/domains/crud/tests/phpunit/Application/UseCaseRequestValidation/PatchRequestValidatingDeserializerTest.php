@@ -1,18 +1,18 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\JsonPatchValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatchValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PatchRequestValidatingDeserializer
  *
  * @group Wikibase
  *

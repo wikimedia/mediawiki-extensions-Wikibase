@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult as MetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestPropertyRevisionMetadataResult as MetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyRevisionMetadataRetriever;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchStatement\PatchStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement\PatchStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

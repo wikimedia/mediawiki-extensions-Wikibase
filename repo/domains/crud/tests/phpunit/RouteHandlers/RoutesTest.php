@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItemLabels;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchItemLabels;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -8,36 +8,36 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemLabels\PatchedItemLabelsValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemLabels\PatchItemLabels;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemLabels\PatchItemLabelsRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemLabels\PatchItemLabelsValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItemLabels\PatchItemLabels
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemLabels\PatchItemLabels
  *
  * @group Wikibase
  *

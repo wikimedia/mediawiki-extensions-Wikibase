@@ -1,18 +1,18 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\EmptyDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidDescriptionException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\EmptyDescriptionException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidDescriptionException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\SerializationException;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer
  *
  * @group Wikibase
  *

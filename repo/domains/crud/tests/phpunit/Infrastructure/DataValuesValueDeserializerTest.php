@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use DataValues\DataValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -14,15 +14,15 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\SerializationException;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataValuesValueDeserializer
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions;
 
 use Exception;
 

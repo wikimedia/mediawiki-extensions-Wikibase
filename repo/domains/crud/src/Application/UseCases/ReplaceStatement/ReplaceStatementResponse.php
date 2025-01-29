@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\ReplaceStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,20 +1,20 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyLabel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetPropertyLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabel;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabelRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyLabelRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyLabel\GetPropertyLabel
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabel
  *
  * @group Wikibase
  *

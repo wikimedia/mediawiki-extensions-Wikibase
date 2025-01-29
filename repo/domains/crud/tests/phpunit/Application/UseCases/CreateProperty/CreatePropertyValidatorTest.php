@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\CreateProperty;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\CreateProperty;
 
 use Exception;
 use Generator;
@@ -8,37 +8,37 @@ use MediaWiki\Languages\LanguageNameUtils;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesInLanguageDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\CreateProperty\CreatePropertyRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\CreateProperty\CreatePropertyValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateProperty\CreatePropertyValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\CreateProperty\CreatePropertyValidator
  *
  * @group Wikibase
  *

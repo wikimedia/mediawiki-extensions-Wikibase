@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
@@ -9,23 +9,23 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ItemPartsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ItemPartsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItem;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItemResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**

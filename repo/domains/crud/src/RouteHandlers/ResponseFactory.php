@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use HttpStatus;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use ValueValidators\ValueValidator;
-use Wikibase\Repo\RestApi\Application\Validation\AliasLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelLanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later

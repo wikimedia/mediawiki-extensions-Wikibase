@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
 
 /**
  * @license GPL-2.0-or-later

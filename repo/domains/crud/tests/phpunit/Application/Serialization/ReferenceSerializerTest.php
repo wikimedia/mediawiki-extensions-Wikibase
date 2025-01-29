@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Reference;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\ReferenceSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer
  *
  * @group Wikibase
  *

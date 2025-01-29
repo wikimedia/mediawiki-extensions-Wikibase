@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use LogicException;
 use MediaWiki\Api\IApiMessage;
@@ -17,14 +17,14 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\TempAccountCreationLimitReached;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later

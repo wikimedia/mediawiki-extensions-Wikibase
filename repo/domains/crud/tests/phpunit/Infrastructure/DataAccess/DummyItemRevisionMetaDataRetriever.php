@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
  * Use this only as a filler when all that matters is that the requested Item exists.

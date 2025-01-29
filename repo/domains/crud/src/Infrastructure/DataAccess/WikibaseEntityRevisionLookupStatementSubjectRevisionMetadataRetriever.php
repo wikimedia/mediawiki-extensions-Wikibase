@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestStatementSubjectRevisionMetadataResult as MetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\StatementSubjectRevisionMetaDataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestStatementSubjectRevisionMetadataResult as MetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementSubjectRevisionMetaDataRetriever;
 
 /**
  * @license GPL-2.0-or-later

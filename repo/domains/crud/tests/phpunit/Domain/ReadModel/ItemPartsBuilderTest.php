@@ -1,24 +1,24 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts
  *
  * @group Wikibase
  *

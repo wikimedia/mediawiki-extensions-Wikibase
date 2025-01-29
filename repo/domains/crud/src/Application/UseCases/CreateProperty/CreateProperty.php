@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\CreateProperty;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\CreateProperty;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyCreator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UpdateExceptionHandler;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreatePropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyCreator;
 
 /**
  * @license GPL-2.0-or-later

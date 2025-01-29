@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetItem;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem;
 
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemPartsRetriever;
 
 /**
  * @license GPL-2.0-or-later

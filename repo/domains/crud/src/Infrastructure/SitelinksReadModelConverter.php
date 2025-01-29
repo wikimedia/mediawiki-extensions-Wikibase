@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\SiteLink as SitelinkWriteModel;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
 
 /**
  * @license GPL-2.0-or-later

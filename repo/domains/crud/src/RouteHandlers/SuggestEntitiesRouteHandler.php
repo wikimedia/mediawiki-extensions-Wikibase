@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Rest\Handler;

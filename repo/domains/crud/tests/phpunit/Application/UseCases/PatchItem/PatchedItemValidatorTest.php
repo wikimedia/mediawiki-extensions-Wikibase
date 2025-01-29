@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchItem;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchItem;
 
 use Exception;
 use Generator;
@@ -20,53 +20,53 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedDescriptions;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item as ItemReadModel;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink as SitelinkReadModel;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList as Statements;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinkTargetTitleResolver;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesInLanguageDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItem\PatchedItemValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedDescriptions;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedLabels;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item as ItemReadModel;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink as SitelinkReadModel;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList as Statements;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkTargetTitleResolver;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchItem\PatchedItemValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItem\PatchedItemValidator
  *
  * @group Wikibase
  *

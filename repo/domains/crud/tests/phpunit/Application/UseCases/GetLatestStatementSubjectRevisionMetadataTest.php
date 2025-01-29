@@ -1,20 +1,20 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestStatementSubjectRevisionMetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\StatementSubjectRevisionMetaDataRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestStatementSubjectRevisionMetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementSubjectRevisionMetaDataRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestStatementSubjectRevisionMetadata
  *
  * @group Wikibase
  *

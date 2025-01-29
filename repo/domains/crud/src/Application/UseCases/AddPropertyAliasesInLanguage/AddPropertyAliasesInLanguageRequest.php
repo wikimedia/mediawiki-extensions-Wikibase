@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\AddPropertyAliasesInLanguage;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\AddPropertyAliasesInLanguage;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyAliasesInLanguageEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

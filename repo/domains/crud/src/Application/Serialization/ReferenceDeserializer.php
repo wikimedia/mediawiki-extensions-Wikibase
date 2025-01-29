@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use Wikibase\DataModel\Reference;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
 
 /**
  * @license GPL-2.0-or-later

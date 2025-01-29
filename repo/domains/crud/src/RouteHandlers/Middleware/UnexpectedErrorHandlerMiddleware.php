@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use Throwable;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 
 /**
  * @license GPL-2.0-or-later

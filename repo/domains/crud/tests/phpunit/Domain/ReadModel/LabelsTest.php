@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\Labels
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels
  *
  * @group Wikibase
  *

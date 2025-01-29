@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Exception;
 use InvalidArgumentException;
 use Swaggest\JsonDiff\JsonPatch;
 use Swaggest\JsonDiff\PatchTestOperationFailedException;
 use Swaggest\JsonDiff\PathException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Domain\Services\JsonPatcher;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\JsonPatcher;
 
 /**
  * @license GPL-2.0-or-later

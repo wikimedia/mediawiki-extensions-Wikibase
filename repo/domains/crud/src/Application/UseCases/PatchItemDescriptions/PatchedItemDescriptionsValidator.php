@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemDescriptions;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemDescriptions;
 
 use LogicException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
  * @license GPL-2.0-or-later

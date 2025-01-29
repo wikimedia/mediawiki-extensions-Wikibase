@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkSerializer
  *
  * @group Wikibase
  *

@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\Value
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value
  *
  * @group Wikibase
  *

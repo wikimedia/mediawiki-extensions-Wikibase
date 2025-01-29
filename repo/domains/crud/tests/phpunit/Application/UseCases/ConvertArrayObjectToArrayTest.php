@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases;
 
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ConvertArrayObjectsToArray;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\ConvertArrayObjectsToArray
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\ConvertArrayObjectsToArray
  *
  * @group Wikibase
  *

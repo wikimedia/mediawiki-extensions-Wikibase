@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Model;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\Model;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestPropertyRevisionMetadataResult
  *
  * @group Wikibase
  *

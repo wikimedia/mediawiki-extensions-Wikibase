@@ -1,22 +1,22 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetPropertyAliases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetPropertyAliases;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliasesResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliases\GetPropertyAliases;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliases\GetPropertyAliasesRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliases\GetPropertyAliasesResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliases\GetPropertyAliases
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliases\GetPropertyAliases
  *
  * @group Wikibase
  *

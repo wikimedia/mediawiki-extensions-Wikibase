@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

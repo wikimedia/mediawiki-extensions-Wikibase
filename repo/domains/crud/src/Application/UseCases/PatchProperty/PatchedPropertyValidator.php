@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchProperty;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchProperty;
 
 use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -10,19 +10,19 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 // disable because it forces comments for switch-cases that look like fall-throughs but aren't
 // phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment

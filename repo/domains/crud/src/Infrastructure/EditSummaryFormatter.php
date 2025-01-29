@@ -1,25 +1,25 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreateItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreatePropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchPropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\SitelinkEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\SitelinksEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\SummaryFormatter;
 
 /**

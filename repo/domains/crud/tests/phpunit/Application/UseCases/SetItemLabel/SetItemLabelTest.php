@@ -1,29 +1,29 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\SetItemLabel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\SetItemLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\SetItemLabel\SetItemLabel;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\SetItemLabel\SetItemLabelRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\SetItemLabel\SetItemLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\SetItemLabel\SetItemLabel
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\SetItemLabel\SetItemLabel
  *
  * @group Wikibase
  *

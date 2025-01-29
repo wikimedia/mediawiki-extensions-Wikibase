@@ -1,20 +1,20 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\PartiallyValidatedLabels;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedLabels;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator
  *
  * @group Wikibase
  *

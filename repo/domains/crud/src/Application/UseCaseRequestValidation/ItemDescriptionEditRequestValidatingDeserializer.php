@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later

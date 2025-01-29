@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer
  *
  * @group Wikibase
  *

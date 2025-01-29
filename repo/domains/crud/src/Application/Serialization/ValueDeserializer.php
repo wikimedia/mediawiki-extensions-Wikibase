@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use DataValues\DataValue;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
 
 /**
  * @license GPL-2.0-or-later

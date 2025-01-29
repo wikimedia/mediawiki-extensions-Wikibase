@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Permissions\PermissionManager;
@@ -8,11 +8,11 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\User\UserIdentity;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\ResponseFactory;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware
  *
  * @group Wikibase
  *

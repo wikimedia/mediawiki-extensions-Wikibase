@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Exception;
 use Generator;
@@ -29,21 +29,21 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\TempAccountCreationLimitReached;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
+use Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
-use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater
  *
  * @group Wikibase
  *

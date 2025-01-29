@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers;
 
 use Generator;
 use MediaWiki\Rest\HttpException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\RouteHandlers\AssertValidTopLevelFields;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\AssertValidTopLevelFields;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\AssertValidTopLevelFields
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\AssertValidTopLevelFields
  *
  * @group Wikibase
  *

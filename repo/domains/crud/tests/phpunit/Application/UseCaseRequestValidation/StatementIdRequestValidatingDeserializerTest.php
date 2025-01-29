@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -9,13 +9,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementIdValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer
  *
  * @group Wikibase
  *

@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

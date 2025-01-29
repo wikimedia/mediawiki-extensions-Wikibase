@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\TermsEditSummaryToFormattableSummaryConverter
  *
  * @group Wikibase
  *

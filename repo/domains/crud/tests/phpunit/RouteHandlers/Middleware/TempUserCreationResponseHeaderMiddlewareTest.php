@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\Permissions\Authority;
@@ -9,10 +9,10 @@ use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Session\Session;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware
  *
  * @group Wikibase
  *

@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
  * @license GPL-2.0-or-later

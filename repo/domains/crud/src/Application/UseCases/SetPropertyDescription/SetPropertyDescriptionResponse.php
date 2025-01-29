@@ -1,8 +1,8 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyDescription;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\SetPropertyDescription;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
 
 /**
  * @license GPL-2.0-or-later

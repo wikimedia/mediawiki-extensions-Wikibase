@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\JsonPatchValidator;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\JsonPatchValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatchValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatchValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatchValidator
  *
  * @group Wikibase
  *

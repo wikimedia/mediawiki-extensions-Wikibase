@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\MediaWikiServices;
@@ -12,12 +12,12 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever
  *
  * @group Wikibase
  *

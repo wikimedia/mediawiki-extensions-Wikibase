@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\DataTypeFactory;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataTypeFactoryValueTypeLookup;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataTypeFactoryValueTypeLookup
  *
  * @group Wikibase
  *

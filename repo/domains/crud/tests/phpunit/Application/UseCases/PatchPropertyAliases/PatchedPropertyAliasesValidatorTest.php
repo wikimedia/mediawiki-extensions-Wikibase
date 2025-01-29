@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\PatchPropertyAliases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchPropertyAliases;
 
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
@@ -9,18 +9,18 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesInLanguageDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\PatchPropertyAliases\PatchedPropertyAliasesValidator
  *
  * @group Wikibase
  *

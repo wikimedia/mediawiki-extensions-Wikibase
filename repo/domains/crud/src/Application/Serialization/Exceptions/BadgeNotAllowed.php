@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\Serialization\Exceptions;
+namespace Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions;
 
 use Throwable;
 use Wikibase\DataModel\Entity\ItemId;

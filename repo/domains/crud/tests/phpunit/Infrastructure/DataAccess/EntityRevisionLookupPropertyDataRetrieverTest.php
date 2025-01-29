@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -16,17 +16,17 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever
  *
  * @group Wikibase
  *

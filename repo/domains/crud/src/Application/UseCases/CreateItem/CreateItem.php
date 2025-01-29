@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\CreateItem;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UpdateExceptionHandler;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreateItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemCreator;
 
 /**
  * @license GPL-2.0-or-later

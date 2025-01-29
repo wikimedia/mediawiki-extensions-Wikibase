@@ -1,13 +1,13 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
-use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchPropertyEditSummary;
 
 /**
  * @license GPL-2.0-or-later

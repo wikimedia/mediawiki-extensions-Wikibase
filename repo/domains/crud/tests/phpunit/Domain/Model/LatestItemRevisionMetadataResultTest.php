@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\Model;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\Model;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestItemRevisionMetadataResult;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\LatestItemRevisionMetadataResult
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestItemRevisionMetadataResult
  *
  * @group Wikibase
  *

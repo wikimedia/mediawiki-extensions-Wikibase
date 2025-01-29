@@ -1,13 +1,13 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer
  *
  * @group Wikibase
  *

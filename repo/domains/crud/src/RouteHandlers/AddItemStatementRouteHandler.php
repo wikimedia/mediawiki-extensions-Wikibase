@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use Exception;
 use MediaWiki\HookContainer\HookRunner;
@@ -12,18 +12,18 @@ use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
 use MediaWiki\Rest\Validator\Validator;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\AddItemStatement\AddItemStatementResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\BotRightCheckMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemStatement\AddItemStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemStatement\AddItemStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemStatement\AddItemStatementResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**

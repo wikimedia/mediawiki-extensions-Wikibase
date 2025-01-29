@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\EditMetadataValidator
  *
  * @group Wikibase
  *

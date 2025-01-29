@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -11,22 +11,22 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Property;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\StatementReadModelConverter;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdater;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater
  *
  * @group Wikibase
  *

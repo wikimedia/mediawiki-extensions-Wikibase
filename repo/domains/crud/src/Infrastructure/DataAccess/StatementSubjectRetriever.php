@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use LogicException;
 use Wikibase\DataModel\Entity\EntityId;

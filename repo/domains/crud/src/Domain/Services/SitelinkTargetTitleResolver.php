@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Domain\Services;
+namespace Wikibase\Repo\Domains\Crud\Domain\Services;
 
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\SitelinkTargetNotFound;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\SitelinkTargetNotFound;
 
 /**
  * @license GPL-2.0-or-later

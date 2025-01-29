@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemLabel;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveItemLabel;
 
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

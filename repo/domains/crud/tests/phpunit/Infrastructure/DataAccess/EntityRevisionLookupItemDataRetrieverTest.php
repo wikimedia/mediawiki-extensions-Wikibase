@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\Site\Site;
@@ -16,19 +16,19 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Item;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
-use Wikibase\Repo\RestApi\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever
  *
  * @group Wikibase
  *

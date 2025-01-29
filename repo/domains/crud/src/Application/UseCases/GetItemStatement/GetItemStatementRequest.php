@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetItemStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatementRequest;
 
 /**
  * @license GPL-2.0-or-later

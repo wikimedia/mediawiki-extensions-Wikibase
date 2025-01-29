@@ -1,21 +1,21 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\CreateItem;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\CreateItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem;
-use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemCreator;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryItemRepository;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem\CreateItem;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem\CreateItemRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreateItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemCreator;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepository;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItem
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem\CreateItem
  *
  * @group Wikibase
  *

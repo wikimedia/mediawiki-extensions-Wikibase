@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement\RemoveStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
  * @license GPL-2.0-or-later

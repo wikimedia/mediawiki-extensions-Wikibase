@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
@@ -8,15 +8,15 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryPropertyLabelValidator;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryPropertyLabelValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryPropertyLabelValidator
  *
  * @group Wikibase
  *

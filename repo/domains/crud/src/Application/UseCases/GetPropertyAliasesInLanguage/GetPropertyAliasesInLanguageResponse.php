@@ -1,8 +1,8 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\GetPropertyAliasesInLanguage;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliasesInLanguage;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\AliasesInLanguage;
 
 /**
  * @license GPL-2.0-or-later

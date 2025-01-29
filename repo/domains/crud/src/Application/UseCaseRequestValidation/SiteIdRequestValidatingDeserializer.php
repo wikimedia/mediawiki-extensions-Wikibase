@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation;
 
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 
 /**
  * @license GPL-2.0-or-later

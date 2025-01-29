@@ -1,23 +1,23 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Descriptions;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyDescriptionsRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyLabelsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemDescriptionRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemDescriptionsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyDescriptionRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyDescriptionsRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyLabelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyLabelsRetriever;
 
 /**
  * @license GPL-2.0-or-later

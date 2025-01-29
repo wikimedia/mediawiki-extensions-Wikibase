@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
-use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesInLanguageRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesInLanguageRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemAliasesInLanguageRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyAliasesInLanguageRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyAliasesRetriever;
 
 /**
  * @license GPL-2.0-or-later

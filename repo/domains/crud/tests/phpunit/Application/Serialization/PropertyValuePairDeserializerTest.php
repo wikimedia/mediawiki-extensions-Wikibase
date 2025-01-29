@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
@@ -13,15 +13,15 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\SerializationException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer
  *
  * @group Wikibase
  *

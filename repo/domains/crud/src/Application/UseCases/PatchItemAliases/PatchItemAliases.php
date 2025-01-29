@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchItemAliases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchItemAliases;
 
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertItemExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Services\ItemAliasesRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\ItemUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\ItemWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertItemExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UpdateExceptionHandler;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,25 +1,25 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItem;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetItem;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItemResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemParts;
-use Wikibase\Repo\RestApi\Domain\ReadModel\ItemPartsBuilder;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Labels;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementList;
-use Wikibase\Repo\RestApi\Domain\Services\ItemPartsRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItem;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItemRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItemResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemPartsRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItem\GetItem
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetItem\GetItem
  *
  * @group Wikibase
  *

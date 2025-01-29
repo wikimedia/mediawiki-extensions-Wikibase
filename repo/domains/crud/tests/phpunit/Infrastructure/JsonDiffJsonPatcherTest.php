@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchPathException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\PatchTestConditionFailedException;
-use Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\PatchPathException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\PatchTestConditionFailedException;
+use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\JsonDiffJsonPatcher
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher
  *
  * @group Wikibase
  *

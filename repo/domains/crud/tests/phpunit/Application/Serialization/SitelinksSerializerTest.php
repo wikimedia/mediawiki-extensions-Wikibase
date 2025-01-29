@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinksSerializer;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\SitelinksSerializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinksSerializer
  *
  * @group Wikibase
  *

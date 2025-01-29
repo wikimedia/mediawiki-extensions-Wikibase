@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases;
 
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyRevisionMetadataRetriever;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use Generator;
 use MediaWiki\Rest\ConditionalHeaderUtil;
@@ -10,14 +10,14 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheck
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\RequestPreconditionCheckResult
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult
  *
  * @group Wikibase
  *

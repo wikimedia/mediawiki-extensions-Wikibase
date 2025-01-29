@@ -1,28 +1,28 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\AddPropertyStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\AddPropertyStatement;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property as PropertyWriteModel;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertPropertyExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyWriteModelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryPropertyRepository;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddPropertyStatement\AddPropertyStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddPropertyStatement\AddPropertyStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AddPropertyStatement\AddPropertyStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertPropertyExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyWriteModelRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryPropertyRepository;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\AddPropertyStatement\AddPropertyStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\AddPropertyStatement\AddPropertyStatement
  *
  * @group Wikibase
  *

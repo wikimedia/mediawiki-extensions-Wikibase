@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -12,37 +12,37 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyFieldsRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Model\UserProvidedEditMetadata;
-use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\AliasLanguageCodeRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\DescriptionLanguageCodeRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemDescriptionEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemFieldsRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemLabelEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\LabelLanguageCodeRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyDescriptionEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyFieldsRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyIdFilterRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyLabelEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PropertyStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SitelinkEditRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\UseCaseRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\Model\UserProvidedEditMetadata;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer
  *
  * @group Wikibase
  *

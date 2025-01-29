@@ -1,22 +1,22 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetStatement;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatementValidator;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Domain\ReadModel\NewStatementReadModel;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestStatementSubjectRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetStatement\GetStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetStatement\GetStatement
  *
  * @group Wikibase
  *

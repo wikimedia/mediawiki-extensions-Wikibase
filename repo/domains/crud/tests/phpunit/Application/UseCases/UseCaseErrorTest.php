@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\UseCaseError
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError
  *
  * @group Wikibase
  *

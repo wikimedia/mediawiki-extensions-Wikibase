@@ -1,19 +1,19 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement;
 
 use Wikibase\DataModel\Exception\PropertyChangedException;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\PatchJson;
-use Wikibase\Repo\RestApi\Application\UseCases\UpdateExceptionHandler;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertStatementSubjectExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchJson;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UpdateExceptionHandler;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
 
 /**
  * @license GPL-2.0-or-later

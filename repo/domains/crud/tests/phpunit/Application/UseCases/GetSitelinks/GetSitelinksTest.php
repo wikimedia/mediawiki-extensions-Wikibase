@@ -1,21 +1,21 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetSitelinks;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetSitelinks;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks;
-use Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinksRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelink;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\RestApi\Domain\Services\SitelinksRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetSitelinks\GetSitelinks;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetSitelinks\GetSitelinksRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinksRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetSitelinks\GetSitelinks
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetSitelinks\GetSitelinks
  *
  * @group Wikibase
  *

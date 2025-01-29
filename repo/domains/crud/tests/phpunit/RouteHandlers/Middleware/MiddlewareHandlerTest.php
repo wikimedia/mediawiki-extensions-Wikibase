@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use InvalidArgumentException;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
 
 /**
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler
- * @covers \Wikibase\Repo\RestApi\RouteHandlers\Middleware\Middleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\Middleware
  *
  * @group Wikibase
  *

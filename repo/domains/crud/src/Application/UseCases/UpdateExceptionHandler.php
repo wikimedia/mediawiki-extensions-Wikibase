@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases;
 
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\EditPrevented;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\RateLimitReached;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\ResourceTooLargeException;
-use Wikibase\Repo\RestApi\Domain\Services\Exceptions\TempAccountCreationLimitReached;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\ResourceTooLargeException;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\TempAccountCreationLimitReached;
 
 /**
  * @license GPL-2.0-or-later

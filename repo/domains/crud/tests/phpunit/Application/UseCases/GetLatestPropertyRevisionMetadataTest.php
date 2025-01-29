@@ -1,16 +1,16 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
-use Wikibase\Repo\RestApi\Domain\Services\PropertyRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\LatestPropertyRevisionMetadataResult;
+use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyRevisionMetadataRetriever;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetLatestPropertyRevisionMetadata
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestPropertyRevisionMetadata
  *
  * @group Wikibase
  *

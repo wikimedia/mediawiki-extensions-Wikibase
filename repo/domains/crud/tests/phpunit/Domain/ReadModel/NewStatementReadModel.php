@@ -1,10 +1,10 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\StatementReadModelHelper;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**
  * @license GPL-2.0-or-later

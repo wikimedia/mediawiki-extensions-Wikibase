@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\PatchStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\PatchRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\UseCaseRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\PatchRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\UseCaseRequest;
 
 /**
  * @license GPL-2.0-or-later

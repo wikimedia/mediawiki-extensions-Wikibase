@@ -1,8 +1,8 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\SetPropertyLabel;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\SetPropertyLabel;
 
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 
 /**
  * @license GPL-2.0-or-later

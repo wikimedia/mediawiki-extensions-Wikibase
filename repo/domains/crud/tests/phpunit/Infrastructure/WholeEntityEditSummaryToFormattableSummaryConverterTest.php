@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -12,12 +12,12 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
-use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchPropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter
  *
  * @group Wikibase
  *

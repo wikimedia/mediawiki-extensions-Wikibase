@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Generator;
 use MediaWikiLangTestCase;
@@ -10,26 +10,26 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\RestApi\Domain\Model\AliasesInLanguageEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\CreateItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\CreatePropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\DescriptionsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\EditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\LabelsEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchItemEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\PatchPropertyEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\SitelinkEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\SitelinksEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\RestApi\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
-use Wikibase\Repo\RestApi\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesInLanguageEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreateItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\CreatePropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchItemEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\PatchPropertyEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\SitelinkEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\SitelinksEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermsEditSummaryToFormattableSummaryConverter;
+use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Infrastructure\EditSummaryFormatter
+ * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter
  *
  * @group Wikibase
  *

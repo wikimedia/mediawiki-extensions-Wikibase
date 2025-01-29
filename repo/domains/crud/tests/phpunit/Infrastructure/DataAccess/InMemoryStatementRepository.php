@@ -1,17 +1,17 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess;
+namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Statement;
-use Wikibase\Repo\RestApi\Domain\ReadModel\StatementRevision;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRetriever;
-use Wikibase\Repo\RestApi\Domain\Services\StatementUpdater;
-use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementRevision;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementWriteModelRetriever;
 
 /**
  * @license GPL-2.0-or-later

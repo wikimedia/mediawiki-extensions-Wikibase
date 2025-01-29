@@ -1,22 +1,22 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldTypeException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldTypeException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\SerializationException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\StatementValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator
  *
  * @group Wikibase
  *

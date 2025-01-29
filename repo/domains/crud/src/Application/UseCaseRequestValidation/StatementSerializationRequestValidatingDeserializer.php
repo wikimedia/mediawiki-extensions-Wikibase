@@ -1,11 +1,11 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation;
 
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later

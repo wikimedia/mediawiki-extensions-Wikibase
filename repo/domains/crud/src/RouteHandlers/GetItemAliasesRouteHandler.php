@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\RequestInterface;
@@ -8,16 +8,16 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliases;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemAliases\GetItemAliasesResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\ItemRedirect;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemAliases\GetItemAliases;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemAliases\GetItemAliasesRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemAliases\GetItemAliasesResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**

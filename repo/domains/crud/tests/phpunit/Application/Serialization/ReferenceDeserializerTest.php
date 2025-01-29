@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Serialization;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Serialization;
 
 use Exception;
 use Generator;
@@ -11,18 +11,18 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\PropertyNotFoundException;
-use Wikibase\Repo\RestApi\Application\Serialization\Exceptions\SerializationException;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Infrastructure\DataTypeFactoryValueTypeLookup;
-use Wikibase\Repo\RestApi\Infrastructure\DataValuesValueDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\SerializationException;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataTypeFactoryValueTypeLookup;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataValuesValueDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer
  *
  * @group Wikibase
  *

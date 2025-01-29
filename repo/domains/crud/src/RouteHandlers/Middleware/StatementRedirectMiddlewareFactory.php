@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Repo\RestApi\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
 
 /**
  * @license GPL-2.0-or-later

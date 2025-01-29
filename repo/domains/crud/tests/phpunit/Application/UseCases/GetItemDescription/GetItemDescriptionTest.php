@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemDescription;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetItemDescription;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescriptionResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Description;
-use Wikibase\Repo\RestApi\Domain\Services\ItemDescriptionRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemDescription\GetItemDescription;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemDescription\GetItemDescriptionRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemDescription\GetItemDescriptionResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemDescriptionRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemDescription\GetItemDescription
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemDescription\GetItemDescription
  *
  * @group Wikibase
  *

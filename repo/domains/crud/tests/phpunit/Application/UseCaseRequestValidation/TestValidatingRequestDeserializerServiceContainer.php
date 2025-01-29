@@ -1,26 +1,26 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Lib\Store\HashSiteLinkStore;
-use Wikibase\Repo\RestApi\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\EditMetadataValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Infrastructure\SiteLinkLookupSitelinkValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValidatingRequestDeserializer as VRD;
-use Wikibase\Repo\Tests\RestApi\Helpers\TestPropertyValuePairDeserializerFactory;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\EditMetadataValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer as VRD;
+use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
  * @license GPL-2.0-or-later

@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases\RemoveItemStatement;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveItemStatement;
 
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemStatementIdRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemStatementIdRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement\RemoveStatementRequest;
 
 /**
  * @license GPL-2.0-or-later

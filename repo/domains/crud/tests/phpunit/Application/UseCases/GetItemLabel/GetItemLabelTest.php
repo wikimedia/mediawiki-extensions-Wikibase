@@ -1,21 +1,21 @@
 <?php declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\GetItemLabel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\GetItemLabel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabelResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\GetLatestItemRevisionMetadata;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Label;
-use Wikibase\Repo\RestApi\Domain\Services\ItemLabelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemLabel\GetItemLabel;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemLabel\GetItemLabelRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemLabel\GetItemLabelResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemLabelRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\GetItemLabel\GetItemLabel
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemLabel\GetItemLabel
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use Generator;
 use MediaWiki\Languages\LanguageNameUtils;
@@ -8,35 +8,35 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Tests\NewItem;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequest;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
-use Wikibase\Repo\RestApi\Application\UseCases\CreateItem\CreateItemRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\DescriptionsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemDescriptionValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelsContentsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemLabelValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ItemValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LabelsSyntaxValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SiteIdValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\RestApi\Application\Validation\SitelinkValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementsValidator;
-use Wikibase\Repo\RestApi\Application\Validation\StatementValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesInLanguageDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemSerializationRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\CreateItem\CreateItemRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemDescriptionValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelsContentsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemLabelValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ItemValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinkValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryAliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemSerializationRequestValidatingDeserializer
  *
  * @group Wikibase
  *

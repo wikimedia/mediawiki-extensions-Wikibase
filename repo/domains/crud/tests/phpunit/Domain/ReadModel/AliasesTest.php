@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Domain\ReadModel;
+namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Domain\ReadModel\Aliases;
-use Wikibase\Repo\RestApi\Domain\ReadModel\AliasesInLanguage;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\AliasesInLanguage;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Domain\ReadModel\Aliases
+ * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases
  *
  * @group Wikibase
  *

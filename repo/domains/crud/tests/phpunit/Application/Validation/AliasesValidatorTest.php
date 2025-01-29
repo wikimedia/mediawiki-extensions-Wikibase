@@ -1,23 +1,23 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesDeserializer;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesInLanguageDeserializer;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesInLanguageValidator;
-use Wikibase\Repo\RestApi\Application\Validation\AliasesValidator;
-use Wikibase\Repo\RestApi\Application\Validation\LanguageCodeValidator;
-use Wikibase\Repo\RestApi\Application\Validation\ValidationError;
-use Wikibase\Repo\RestApi\Infrastructure\ValueValidatorLanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesInLanguageDeserializer;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesInLanguageValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\AliasesValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\AliasesValidator
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\RouteHandlers;
+namespace Wikibase\Repo\Domains\Crud\RouteHandlers;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
@@ -9,20 +9,20 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseInterface;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
-use Wikibase\Repo\RestApi\Application\Serialization\AliasesSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\DescriptionsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\LabelsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\PropertyPartsSerializer;
-use Wikibase\Repo\RestApi\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetProperty;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\GetProperty\GetPropertyResponse;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\RouteHandlers\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\RestApi\WbRestApi;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyPartsSerializer;
+use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetProperty;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetPropertyRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\GetProperty\GetPropertyResponse;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\Domains\Crud\WbRestApi;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**

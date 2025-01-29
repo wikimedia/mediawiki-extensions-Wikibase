@@ -1,9 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\RestApi\Application\UseCases;
+namespace Wikibase\Repo\Domains\Crud\Application\UseCases;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\RestApi\Domain\Services\ItemRevisionMetadataRetriever;
+use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRevisionMetadataRetriever;
 
 /**
  * @license GPL-2.0-or-later

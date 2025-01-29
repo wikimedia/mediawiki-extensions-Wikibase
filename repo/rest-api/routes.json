@@ -2,301 +2,301 @@
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/statements/{statement_id}",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/labels/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/labels/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/descriptions/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions/{language_code}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/descriptions",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/aliases/{language_code}",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/properties/{property_id}/aliases/{language_code}",
 		"method": "POST",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks",
 		"method": "PATCH",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "DELETE",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/entities/items/{item_id}/sitelinks/{site_id}",
 		"method": "PUT",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/openapi.json",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	},
 	{
 		"path": "/wikibase/v0/property-data-types",
 		"method": "GET",
-		"factory": "Wikibase\\Repo\\RestApi\\RouteHandlers\\V0RouteHandler::factory"
+		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\V0RouteHandler::factory"
 	}
 ]

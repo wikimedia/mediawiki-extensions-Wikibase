@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils;
+use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\Utils;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCaseRequestValidation\Utils
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\Utils
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\UseCases\RemoveStatement;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\RemoveStatement;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -9,22 +9,22 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertStatementSubjectExists;
-use Wikibase\Repo\RestApi\Application\UseCases\AssertUserIsAuthorized;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement;
-use Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatementRequest;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Application\UseCases\UseCaseException;
-use Wikibase\Repo\RestApi\Domain\Model\EditMetadata;
-use Wikibase\Repo\RestApi\Domain\Model\StatementEditSummary;
-use Wikibase\Repo\RestApi\Domain\Model\User;
-use Wikibase\Repo\RestApi\Domain\Services\StatementRemover;
-use Wikibase\Repo\RestApi\Domain\Services\StatementWriteModelRetriever;
-use Wikibase\Repo\Tests\RestApi\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
-use Wikibase\Repo\Tests\RestApi\Infrastructure\DataAccess\InMemoryStatementRepository;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertStatementSubjectExists;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement\RemoveStatement;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement\RemoveStatementRequest;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
+use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Model\User;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
+use Wikibase\Repo\Domains\Crud\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryStatementRepository;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\UseCases\RemoveStatement\RemoveStatement
+ * @covers \Wikibase\Repo\Domains\Crud\Application\UseCases\RemoveStatement\RemoveStatement
  *
  * @group Wikibase
  *

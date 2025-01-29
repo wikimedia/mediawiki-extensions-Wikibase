@@ -1,12 +1,12 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\RestApi\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator;
+use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyIdValidator;
 
 /**
- * @covers \Wikibase\Repo\RestApi\Application\Validation\PropertyIdValidator
+ * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\PropertyIdValidator
  *
  * @group Wikibase
  *
