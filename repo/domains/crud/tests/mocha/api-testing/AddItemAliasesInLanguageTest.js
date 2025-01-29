@@ -98,7 +98,7 @@ describe( newRequest().getRouteDescription(), () => {
 
 		it( 'can add a "mul" alias', async () => {
 			const response = await newRequest( testItemId, 'mul', [ 'mul alias' ] )
-				.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+				.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 				.assertValidRequest()
 				.makeRequest();
 

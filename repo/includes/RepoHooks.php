@@ -1165,7 +1165,7 @@ final class RepoHooks {
 
 	/** @param ContentLanguages[] &$contentLanguages */
 	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
-		if ( !WikibaseRepo::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+		if ( !WikibaseRepo::getSettings()->getSetting( 'enableMulLanguageCode' ) ) {
 			return;
 		}
 

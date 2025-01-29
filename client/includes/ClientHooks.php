@@ -263,7 +263,7 @@ final class ClientHooks {
 
 	/** @param ContentLanguages[] &$contentLanguages */
 	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
-		if ( !WikibaseClient::getSettings()->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+		if ( !WikibaseClient::getSettings()->getSetting( 'enableMulLanguageCode' ) ) {
 			return;
 		}
 

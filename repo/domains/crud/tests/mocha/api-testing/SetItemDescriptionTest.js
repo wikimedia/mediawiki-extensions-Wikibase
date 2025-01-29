@@ -176,7 +176,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		[ 'xyz', 'mul' ].forEach( ( invalidLanguage ) => {
 			it( `invalid language code: "${invalidLanguage}"`, async () => {
 				const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
-					.withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } )
+					.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 					.assertValidRequest()
 					.makeRequest();
 

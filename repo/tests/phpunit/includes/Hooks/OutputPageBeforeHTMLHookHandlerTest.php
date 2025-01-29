@@ -79,7 +79,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'ssrServerUrl' => null,
 			'ssrServerTimeout' => 3,
 			'termboxUserSpecificSsrEnabled' => true,
-			'tmpEnableMulLanguageCode' => false,
+			'enableMulLanguageCode' => false,
 		] );
 
 		$this->preferredLanguageLookup = $this->createMock( UserPreferredContentLanguagesLookup::class );

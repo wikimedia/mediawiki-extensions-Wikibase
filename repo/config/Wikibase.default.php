@@ -449,14 +449,11 @@ return [
 	'specialPageTags' => [],
 
 	/**
-	 * @note This config options is primarily added for Wikidata transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
 	 * @var bool Whether to enable the 'mul' language code,
 	 * adding it to the term language codes and falling back to it before the implicit 'en' fallback
-	 * @see https://phabricator.wikimedia.org/T297393
+	 * @see https://phabricator.wikimedia.org/T312097
 	 */
-	'tmpEnableMulLanguageCode' => false,
+	'enableMulLanguageCode' => false,
 
 	/**
 	 * @note This config option is primarily added for the Wikidata transition use-case

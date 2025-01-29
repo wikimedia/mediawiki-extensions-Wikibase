@@ -109,7 +109,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: label } ]
-			).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).makeRequest();
+			).withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } ).makeRequest();
 
 			expect( response ).to.have.status( 200 );
 			assert.strictEqual( response.body.mul, label );

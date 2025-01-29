@@ -271,7 +271,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				const response = await newPatchItemDescriptionsRequestBuilder(
 					testItemId,
 					[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
-				).withConfigOverride( 'wgWBRepoSettings', { tmpEnableMulLanguageCode: true } ).assertValidRequest().makeRequest();
+				).withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } ).assertValidRequest().makeRequest();
 
 				assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
 			} );

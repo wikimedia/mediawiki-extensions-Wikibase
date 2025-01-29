@@ -246,7 +246,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->userOptionsLookup,
 			$this->languageFallbackChainFactory,
-			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' ),
+			$this->repoSettings->getSetting( 'enableMulLanguageCode' ),
 			$entityTermsListHtml
 		);
 	}
@@ -264,7 +264,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			return $userPreferredTermsLanguages;
 		}
 
-		if ( $this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' ) ) {
+		if ( $this->repoSettings->getSetting( 'enableMulLanguageCode' ) ) {
 			return array_merge( [ 'mul' ], $userPreferredTermsLanguages );
 		}
 
