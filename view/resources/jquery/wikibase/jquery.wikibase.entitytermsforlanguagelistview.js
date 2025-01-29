@@ -112,13 +112,6 @@
 				return;
 			}
 
-			if ( mw.config.get( 'wbTmpAlwaysShowMulLanguageCode' ) === false ) {
-				// temporarily show "mul" only if it has a label or alias, see T330217 for removing this block
-				if ( !( 'mul' in this._getMoreLanguages() ) ) {
-					return;
-				}
-			}
-
 			this._defaultLanguages.unshift( 'mul' );
 		},
 

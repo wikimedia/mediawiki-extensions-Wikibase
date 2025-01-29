@@ -264,10 +264,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			return $userPreferredTermsLanguages;
 		}
 
-		if (
-			$this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' )
-			&& $this->repoSettings->getSetting( 'tmpAlwaysShowMulLanguageCode' )
-		) {
+		if ( $this->repoSettings->getSetting( 'tmpEnableMulLanguageCode' ) ) {
 			return array_merge( [ 'mul' ], $userPreferredTermsLanguages );
 		}
 

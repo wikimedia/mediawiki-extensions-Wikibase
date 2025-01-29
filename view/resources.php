@@ -326,7 +326,6 @@ return call_user_func( function() {
 				'mediawiki.util',
 				'mw.config.values.wbRefTabsEnabled',
 				'mw.config.values.wbEnableMulLanguageCode',
-				'mw.config.values.wbTmpAlwaysShowMulLanguageCode',
 				'mw.config.values.wbRepo',
 				'oojs-ui',
 				'util.highlightSubstring',
