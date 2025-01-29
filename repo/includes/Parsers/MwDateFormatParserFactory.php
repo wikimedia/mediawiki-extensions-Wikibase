@@ -58,7 +58,9 @@ class MwDateFormatParserFactory {
 		if ( $options === null ) {
 			$options = new ParserOptions();
 		}
-		$options->setOption( DateFormatParser::OPT_DATE_FORMAT, $dateFormat );
+		if ( $dateFormat !== null ) { // Language::getDateFormatString() sometimes returns null even though it shouldn’t (T384963)
+			$options->setOption( DateFormatParser::OPT_DATE_FORMAT, $dateFormat );
+		}
 		$options->setOption( DateFormatParser::OPT_DIGIT_TRANSFORM_TABLE, $digitTransformTable );
 		$options->setOption( DateFormatParser::OPT_MONTH_NAMES, $monthNames );
 		return new DateFormatParser( $options );
