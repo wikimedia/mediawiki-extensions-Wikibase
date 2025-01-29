@@ -523,6 +523,13 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 				'16 ene 2017',
 				'es'
 			],
+
+			// Missing monthonly format
+			[
+				'+2017-01-16T00:00:00Z', TimeValue::PRECISION_MONTH,
+				'1月 2017',
+				'ja',
+			],
 		];
 
 		foreach ( $tests as $args ) {
