@@ -632,7 +632,7 @@
 		{
 			"path": "/wikibase/v1/openapi.json",
 			"method": "GET",
-			"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetOpenApiDocRouteHandler::factory"
+			"factory": "Wikibase\\Repo\\RestApi\\GetOpenApiDocRouteHandler::factory"
 		},
 		{
 			"path": "/wikibase/v1/property-data-types",
@@ -911,6 +911,7 @@
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Repo\\Domains\\Search\\": "repo/domains/search/src/",
 		"Wikibase\\Repo\\Domains\\Crud\\": "repo/domains/crud/src/",
+		"Wikibase\\Repo\\RestApi\\": "repo/rest-api/src/",
 		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\Lib\\FederatedProperties\\": "lib/packages/wikibase/federated-properties/src/",
 		"Wikibase\\Lib\\Changes\\": "lib/packages/wikibase/changes/src/",
