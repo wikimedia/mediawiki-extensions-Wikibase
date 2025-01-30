@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\SetItemDescription;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Tests\NewItem;
@@ -28,7 +29,7 @@ use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepos
  *
  * @license GPL-2.0-or-later
  */
-class SetItemDescriptionTest extends \PHPUnit\Framework\TestCase {
+class SetItemDescriptionTest extends TestCase {
 
 	private SetItemDescriptionValidator $validator;
 	private AssertItemExists $assertItemExists;
