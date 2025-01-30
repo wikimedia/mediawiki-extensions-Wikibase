@@ -9,7 +9,8 @@
 			"Shirayuki",
 			"Sujiniku",
 			"Yusuke1109",
-			"ネイ"
+			"ネイ",
+			"Kokage si"
 		]
 	},
 	"specialpages-group-wikibase": "ウィキベース",
@@ -63,12 +64,14 @@
 	"version-wikibase": "ウィキベース",
 	"wikibase-time-calendar-gregorian": "グレゴリオ暦",
 	"wikibase-time-calendar-julian": "ユリウス暦",
+	"wikibase-time-precision-CE": "西暦 $1",
 	"wikibase-time-precision-Gannum": "西暦$1十億年",
 	"wikibase-time-precision-Mannum": "西暦$1百万年",
 	"wikibase-time-precision-annum": "西暦{{PLURAL:$1|$1年}}",
 	"wikibase-time-precision-millennium": "$1千年紀",
 	"wikibase-time-precision-century": "$1世紀",
 	"wikibase-time-precision-10annum": "$1年代",
+	"wikibase-time-precision-BCE": "紀元前 $1",
 	"wikibase-time-precision-BCE-Gannum": "紀元前$1十億年",
 	"wikibase-time-precision-BCE-Mannum": "紀元前$1百万年",
 	"wikibase-time-precision-BCE-annum": "紀元前{{PLURAL:$1|$1年}}",
@@ -86,6 +89,9 @@
 	"wikibase-entity-summary-wbeditentity-update": "エンティティを変更",
 	"wikibase-entity-summary-wbeditentity-override": "エンティティをクリア",
 	"wikibase-entity-summary-wbeditentity-update-languages": "$3{{PLURAL:$3|言語}}のラベル、説明、別名を変更",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "{{#commaseparatedlist: $3}} のラベル、説明および/または別名を変更",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|言語}}のラベル、説明および/または別名、およびその他の部分を変更",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "{{#commaseparatedlist: $3}} のラベル、説明および/または別名、およびその他の部分を変更",
 	"wikibase-entity-summary-wbsetreference": "情報源を設定",
 	"wikibase-entity-summary-wbsetreference-add": "主張に情報源を追加",
 	"wikibase-entity-summary-wbsetreference-set": "主張の情報源を変更",
@@ -129,7 +135,9 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|修飾子}}を追加",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|修飾子}}を変更",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|修飾子}}を除去",
+	"wikibase-entity-summary-wbremovequalifiers-update": "{{PLURAL:$1|修飾子}}を除去",
 	"wikibase-entity-summary-wbremovereferences-remove": "主張から{{PLURAL:$3|情報源}}を除去",
+	"wikibase-entity-summary-wbremovereferences-update": "主張から{{PLURAL:$3|情報源}}を除去",
 	"wikibase-entity-summary-wbmergeitems-from": "項目に $3 を統合しました",
 	"wikibase-entity-summary-wbmergeitems-to": "項目を $3 に統合しました",
 	"wikibase-item-summary-wbcreate-new": "項目を新規作成",
@@ -146,5 +154,6 @@
 	"wikibase-property-summary-wbeditentity-update": "プロパティを変更",
 	"wikibase-property-summary-wbeditentity-override": "プロパティを消去",
 	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成",
-	"wikibase-reference-formatter-snak-terminator": "．"
+	"wikibase-reference-formatter-snak-terminator": "．",
+	"wikibase-reference-formatter-snak-retrieved": "$1 に取得"
 }
