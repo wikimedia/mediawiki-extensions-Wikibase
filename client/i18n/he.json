@@ -170,7 +170,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "עורך אחר ערך זה עתה את הערך הזה ופרסם את השינויים שלו קודם. לא היה אפשר להחיל את השינויים שלך. נא לרענן את הדף כדי לאחזר את הערך החדש.",
 	"wikibase-client-data-bridge-unknown-error-heading": "משהו השתבש",
 	"wikibase-client-data-bridge-unknown-error-message": "אירעה שגיאה ולא ניתן לערוך את הערכים שנבחרו כרגע. נא לנסות לרענן.",
-	"wikibase-client-data-bridge-error-report": "<p>אם השגיאה נמשכת, נא [$1 לדווח את הבעיה הזאת] ולתאר את הפעולות שלך ולכלול את המידע הבא:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>קוד שגיאה: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>אם השגיאה נמשכת, נא [$1 לדווח את הבעיה הזאת] ולתאר את הפעולות שלך ולכלול את המידע הבא:</p>\n<ul>\n<li>$2</li>\n<li>מאפיין $3 של פריט $4</li>\n<li>קוד שגיאה: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "רענון",
 	"wikibase-client-data-bridge-error-reload-page": "רענון הדף",
 	"wikibase-client-data-bridge-error-go-back": "חזרה",
