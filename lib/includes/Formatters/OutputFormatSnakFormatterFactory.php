@@ -158,7 +158,7 @@ class OutputFormatSnakFormatterFactory {
 		$formatters = [];
 
 		foreach ( $this->snakFormatterConstructorCallbacks as $key => $callback ) {
-			$instance = call_user_func( $callback, $format, $options );
+			$instance = $callback( $format, $options );
 
 			Assert::postcondition(
 				$instance instanceof SnakFormatter,

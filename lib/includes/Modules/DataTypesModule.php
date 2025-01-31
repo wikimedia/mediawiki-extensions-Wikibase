@@ -85,7 +85,7 @@ class DataTypesModule extends RL\Module {
 		$dataTypeFactory = $resourceDefinition['datatypefactory'] ?? null;
 
 		if ( is_callable( $dataTypeFactory ) ) {
-			$dataTypeFactory = call_user_func( $dataTypeFactory );
+			$dataTypeFactory = $dataTypeFactory();
 		}
 
 		if ( !( $dataTypeFactory instanceof DataTypeFactory ) ) {

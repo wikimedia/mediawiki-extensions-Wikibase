@@ -53,7 +53,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	 */
 	public function formatSnak( Snak $snak ) {
 		$text = $this->formatter->formatSnak( $snak );
-		$escaped = call_user_func( $this->escapeCallback, $text );
+		$escaped = ( $this->escapeCallback )( $text );
 		return $escaped;
 	}
 

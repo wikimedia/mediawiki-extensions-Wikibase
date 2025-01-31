@@ -48,7 +48,7 @@ class EscapingValueFormatter implements ValueFormatter {
 	 */
 	public function format( $value ) {
 		$text = $this->formatter->format( $value );
-		$escaped = call_user_func( $this->escapeCallback, $text );
+		$escaped = ( $this->escapeCallback )( $text );
 		return $escaped;
 	}
 

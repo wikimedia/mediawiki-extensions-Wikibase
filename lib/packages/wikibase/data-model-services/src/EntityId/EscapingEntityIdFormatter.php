@@ -50,7 +50,7 @@ class EscapingEntityIdFormatter implements EntityIdFormatter {
 	 */
 	public function formatEntityId( EntityId $value ) {
 		$text = $this->formatter->formatEntityId( $value );
-		$escaped = call_user_func( $this->escapeCallback, $text );
+		$escaped = ( $this->escapeCallback )( $text );
 		return $escaped;
 	}
 

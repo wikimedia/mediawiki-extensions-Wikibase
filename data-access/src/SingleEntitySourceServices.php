@@ -222,7 +222,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private function getEntityDeserializer(): Deserializer {
 		$deserializers = [];
 		foreach ( $this->deserializerFactoryCallbacks as $callback ) {
-			$deserializers[] = call_user_func( $callback, $this->deserializerFactory );
+			$deserializers[] = $callback( $this->deserializerFactory );
 		}
 
 		$internalDeserializerFactory = new InternalDeserializerFactory(

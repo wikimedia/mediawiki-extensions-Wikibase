@@ -91,7 +91,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInstanceOf(
 			Serializer::class,
-			call_user_func( $callback, $serializerFactory )
+			$callback( $serializerFactory )
 		);
 	}
 
@@ -111,7 +111,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInstanceOf(
 			Deserializer::class,
-			call_user_func( $callback, $deserializerFactory )
+			$callback( $deserializerFactory )
 		);
 	}
 

@@ -78,7 +78,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 */
 	private function buildId( $idBuilder, $idSerialization ) {
 		try {
-			return call_user_func( $idBuilder, $idSerialization );
+			return $idBuilder( $idSerialization );
 		} catch ( InvalidArgumentException $ex ) {
 			// Should not happen, but if it does, re-throw the original message
 			throw new EntityIdParsingException( $ex->getMessage(), 0, $ex );
