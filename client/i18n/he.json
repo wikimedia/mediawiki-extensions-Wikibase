@@ -113,7 +113,7 @@
 	"exceeded-entity-limit-category": "דפים שניגשים ליותר מדי ישויות {{WBREPONAME}}",
 	"exceeded-entity-limit-category-desc": "הקטגוריה הזאת מפרטת דפים שניגשים ליותר מדי ישויות {{WBREPONAME}}",
 	"notification-header-page-connection": "הדף <strong>$3</strong> {{GENDER:$2|חובר}} {{PLURAL:$4|-1=לפריט {{WBREPONAME}}|לפריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} $4}}, שאפשר לאסוף בו נתונים רלוונטיים לנושא.",
-	"notification-bundle-header-page-connection": "הדף <strong>$3</strong> ועוד {{PLURAL:$4|דף אחד|$4 דפים|100=99+ דפים}} {{GENDER:$2|חוברו}} לפריטי {{WBREPONAME}}, שאפשר לאסוף בו נתונים רלוונטיים לנושאים האלה.",
+	"notification-bundle-header-page-connection": "הדף <strong>$3</strong> ועוד {{PLURAL:$4|דף אחד|$4 דפים|100=99+ דפים}} {{GENDER:$2|חוברו}} לפריטי {{WBREPONAME}}, שאפשר לאסוף בהם נתונים רלוונטיים לנושאים האלה.",
 	"notification-link-text-view-item": "{{GENDER:$1|הצגת}} פריט",
 	"notification-subject-page-connection": "דף {{GENDER:$3|שיצרת}} באתר {{SITENAME}} {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}",
 	"unresolved-property-category": "דפים עם מאפיינים בלתי־פתורים",

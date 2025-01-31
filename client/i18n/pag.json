@@ -1,9 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"Exec8",
 			"Lam-ang"
 		]
 	},
+	"wikibase-editlinks": "I-edit iray link",
+	"wikibase-addlinkstitle": "Mangiyan na saray link ed nanduruman lenguahe",
+	"wikibase-linkitem-addlinks": "Mangiyan na saray link",
+	"wikibase-linkitem-title": "Link ed pahina",
+	"wikibase-linkitem-linkpage": "Link ed pahina",
+	"wikibase-linkitem-selectlink": "Manpili kay site tan pahina ya labay mon i-link ed sayan pahina.",
+	"wikibase-linkitem-input-site": "Lenguahe:",
+	"wikibase-linkitem-input-page": "Say pahina:",
 	"wikibase-rc-hide-wikidata-hide": "Iyamot",
 	"wikibase-rc-hide-wikidata-show": "Ipanengneng",
 	"wikibase-rc-wikibase-edit-letter": "D"
