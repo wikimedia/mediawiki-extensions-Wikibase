@@ -96,7 +96,7 @@ class EntitySourceDefinitionsConfigParser {
 		}
 	}
 
-	private function validateDatabaseSourceConfigFields( $sourceData, $sourceName ) {
+	private function validateDatabaseSourceConfigFields( array $sourceData, string $sourceName ) {
 		if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
 			throw new InvalidArgumentException(
 				'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'

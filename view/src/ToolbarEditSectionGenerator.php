@@ -102,7 +102,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		);
 	}
 
-	private function getToolbarContainer( $content ) {
+	private function getToolbarContainer( string $content ): string {
 		return '<wb:sectionedit>'
 			. $this->templateFactory->render( 'wikibase-toolbar-container', $content )
 			. '</wb:sectionedit>';
