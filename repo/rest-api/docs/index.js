@@ -1,7 +1,7 @@
 import SwaggerUI from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
 
-import spec from '../../domains/crud/src/RouteHandlers/openapi.json';
+import spec from '../src/openapi.json';
 
 const ui = SwaggerUI( {
 	spec,

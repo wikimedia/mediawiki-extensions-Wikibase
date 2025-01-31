@@ -6,7 +6,7 @@ const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
 const basePath = 'rest.php/wikibase';
-const openapiSchema = JSON.parse( readFileSync( `${__dirname}/../../../../domains/crud/src/RouteHandlers/openapi.json` ) );
+const openapiSchema = JSON.parse( readFileSync( `${__dirname}/../../../src/openapi.json` ) );
 
 class RequestBuilder {
 
