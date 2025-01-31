@@ -457,4 +457,14 @@ return [
 	 * @see https://phabricator.wikimedia.org/T297393
 	 */
 	'tmpEnableMulLanguageCode' => false,
+
+	/**
+	 * @note This config option is primarily added for the Wikidata transition use-case
+	 * and must be considered temporary. It will be removed in the future with no warning.
+	 *
+	 * @var bool Whether to enable the "scoped type-ahead search" component,
+	 * replacing the standard search bar in Vector 2022.
+	 * @see https://phabricator.wikimedia.org/T338483
+	 */
+	'tmpEnableScopedTypeaheadSearch' => false,
 ];
