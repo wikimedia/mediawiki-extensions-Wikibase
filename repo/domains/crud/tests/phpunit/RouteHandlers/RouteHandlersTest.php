@@ -1162,7 +1162,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newHandlerWithValidRequest( array $routeData, array $validRequest ): Handler {
-		$routeHandler = call_user_func( $routeData['factory'] );
+		$routeHandler = $routeData['factory']();
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [

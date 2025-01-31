@@ -307,7 +307,7 @@ abstract class EntityHandler extends ContentHandler {
 			return $blob;
 		}
 
-		$needsTransform = call_user_func( $this->legacyExportFormatDetector, $blob, $format );
+		$needsTransform = ( $this->legacyExportFormatDetector )( $blob, $format );
 
 		if ( $needsTransform ) {
 			$format = ( $format === null ) ? $this->getDefaultFormat() : $format;

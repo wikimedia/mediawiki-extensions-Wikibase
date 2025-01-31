@@ -53,8 +53,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertIsCallable( $callback );
 
-		$entityView = call_user_func(
-			$callback,
+		$entityView = $callback(
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			new Item( new ItemId( 'Q123' ) )
@@ -88,7 +87,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertIsCallable( $callback );
 
 		/** @var EntityHandler $entityHandler */
-		$entityHandler = call_user_func( $callback );
+		$entityHandler = $callback();
 
 		$this->assertInstanceOf( EntityHandler::class, $entityHandler );
 		$this->assertSame( $entityType, $entityHandler->getEntityType() );

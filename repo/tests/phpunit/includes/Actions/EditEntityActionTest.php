@@ -957,7 +957,7 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( $expectedProps ) {
 			foreach ( $expectedProps as $p => $pattern ) {
 				$func = 'get' . ucfirst( $p );
-				$act = call_user_func( [ $out, $func ] );
+				$act = $out->$func();
 
 				if ( $pattern === true ) {
 					$this->assertNotSame( '', $act, $p );
