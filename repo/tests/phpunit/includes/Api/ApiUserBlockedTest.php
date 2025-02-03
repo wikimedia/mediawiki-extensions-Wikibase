@@ -99,7 +99,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremoveclaims',
 			[
-				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
@@ -107,8 +107,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremovequalifiers',
 			[
-				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
-				'qualifiers' => [ [ self::class, 'getEntityClaimQualifierHash' ], 'Berlin' ],
+				'claim' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
+				'qualifiers' => [ [ $this, 'getEntityClaimQualifierHash' ], 'Berlin' ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
@@ -116,8 +116,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbremovereferences',
 			[
-				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
-				'references' => [ [ self::class, 'getEntityClaimReferenceHash' ], 'Berlin' ],
+				'statement' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
+				'references' => [ [ $this, 'getEntityClaimReferenceHash' ], 'Berlin' ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
@@ -145,7 +145,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetclaim',
 			[
-				'claim' => [ [ self::class, 'buildTestClaimJSON' ], 'Oslo' ],
+				'claim' => [ [ $this, 'buildTestClaimJSON' ], 'Oslo' ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
@@ -153,7 +153,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetclaimvalue',
 			[
-				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
 				'value' => '"foobar"',
 				'snaktype' => 'value',
 			],
@@ -183,7 +183,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetqualifier',
 			[
-				'claim' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
+				'claim' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
 				'property' => [ [ EntityTestHelper::class, 'getId' ], 'StringProp' ],
 				'snaktype' => 'value',
 				'value' => '"baz"',
@@ -194,8 +194,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		yield [
 			'wbsetreference',
 			[
-				'statement' => [ [ self::class, 'getEntityClaimGUID' ], 'Berlin' ],
-				'snaks' => [ [ self::class, 'buildTestReferenceSnakJSON' ] ],
+				'statement' => [ [ $this, 'getEntityClaimGUID' ], 'Berlin' ],
+				'snaks' => [ [ $this, 'buildTestReferenceSnakJSON' ] ],
 			],
 			[ 'failed-save', 'blocked' ],
 		];
