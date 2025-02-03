@@ -200,8 +200,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 			$this->getTitleLookup()
 		);
 
-		$factory = [ $builders, $functionName ];
-		$formatter = call_user_func( $factory, $format, $options );
+		$formatter = $builders->$functionName( $format, $options );
 
 		$this->assertInstanceOf( ValueFormatter::class, $formatter );
 		return $formatter;

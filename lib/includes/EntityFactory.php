@@ -40,7 +40,7 @@ class EntityFactory {
 			throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
 		}
 
-		$entity = call_user_func( $this->instantiators[$entityType] );
+		$entity = $this->instantiators[$entityType]();
 
 		Assert::postcondition(
 			$entity instanceof EntityDocument,
