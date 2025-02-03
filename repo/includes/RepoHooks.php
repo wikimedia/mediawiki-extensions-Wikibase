@@ -85,7 +85,11 @@ final class RepoHooks {
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$skinName = $skin->getSkinName();
 			if ( $skinName === 'vector-2022' ) {
-				$out->addModules( 'wikibase.vector.searchClient' );
+				if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
+					$out->addModules( 'wikibase.vector.scopedTypeaheadSearch' );
+				} else {
+					$out->addModules( 'wikibase.vector.searchClient' );
+				}
 			} elseif ( $skinName !== 'minerva' ) {
 				// Minerva uses its own search widget.
 				$out->addModules( 'wikibase.ui.entitysearch' );
@@ -981,6 +985,18 @@ final class RepoHooks {
 		if ( $isUlsLoaded ) {
 			$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
 			$modules['wikibase.special.languageLabelDescriptionAliases']['dependencies'][] = 'ext.uls.mediawiki';
+		}
+
+		// temporarily register this RL module only if the feature flag is enabled,
+		// so that wikis without the feature flag don’t even pay the small cost of loading the module *definition*
+		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T385446)
+		$settings = WikibaseRepo::getSettings();
+		if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
+			$modules['wikibase.vector.scopedTypeaheadSearch'] = $moduleTemplate + [
+				'packageFiles' => [
+					'resources/wikibase.vector.scopedTypeaheadSearch.js',
+				],
+			];
 		}
 
 		$resourceLoader->register( $modules );
