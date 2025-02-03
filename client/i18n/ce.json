@@ -38,7 +38,7 @@
 	"wikibase-linkitem-confirmitem-button": "Бакъдан",
 	"wikibase-linkitem-not-loggedin-title": "Ахьа авторизаци йан йеза",
 	"wikibase-linkitem-not-loggedin": "И функци лелайан ахьа авторизаци йан йеза хӀокху вики чохь а, [$1 центран хаамийн репозиторехь а].",
-	"wikibase-linkitem-success-link": "АгӀонаш вовшаштесина. Хьан аьтту бу зӀе йолу элемент каро, [$1 йуккъера хаамийн лармехь].",
+	"wikibase-linkitem-success-link": "АгӀонаш вовшахтесина. Уьйраш чулоцуш йолу элемент карор йу хьуна тхан [$1 йуккъерчу хаамийн ларми чохь].",
 	"limitreport-entityaccesscount": "Чуйаьхна Викибазан хӀумнийн дукхалла",
 	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Билгало «$1» ца карайо",
