@@ -47,6 +47,41 @@ class PropertyValueSnak extends SnakObject {
 	}
 
 	/**
+	 * The serialization to use for hashing, for compatibility reasons this is
+	 * equivalent to the old (pre 7.4) PHP serialization.
+	 *
+	 * @return string
+	 */
+	public function getSerializationForHash(): string {
+		$propertyIdSerialization = $this->propertyId->getSerialization();
+		$innerSerialization = 'a:2:{i:0;s:' . strlen( $propertyIdSerialization ) . ':"' .
+			$propertyIdSerialization . '";i:1;' . $this->getDataValueSerializationForHash() . '}';
+
+		return 'C:' . strlen( static::class ) . ':"' . static::class .
+			'":' . strlen( $innerSerialization ) . ':{' . $innerSerialization . '}';
+	}
+
+	/**
+	 * The serialization to use for hashing, for compatibility reasons this is
+	 * equivalent to the old (pre 7.4) PHP serialization.
+	 *
+	 * @return string
+	 */
+	private function getDataValueSerializationForHash(): string {
+		if ( method_exists( $this->dataValue, 'getSerializationForHash' ) ) {
+			// If our DataValue provides/ needs a special serialization for
+			// hashing, use it (currently only EntityIdValue).
+			return $this->dataValue->getSerializationForHash();
+		} else {
+			$innerSerialization = $this->dataValue->serialize();
+		}
+		$className = get_class( $this->dataValue );
+
+		return 'C:' . strlen( $className ) . ':"' . $className .
+			'":' . strlen( $innerSerialization ) . ':{' . $innerSerialization . '}';
+	}
+
+	/**
 	 * @see Serializable::serialize
 	 *
 	 * @since 7.0 serialization format changed in an incompatible way
@@ -54,7 +89,7 @@ class PropertyValueSnak extends SnakObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( [ $this->propertyId->getSerialization(), $this->dataValue ] );
+		return serialize( $this->__serialize() );
 	}
 
 	/**
@@ -65,7 +100,15 @@ class PropertyValueSnak extends SnakObject {
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		list( $propertyId, $this->dataValue ) = unserialize( $serialized );
+		$this->__unserialize( unserialize( $serialized ) );
+	}
+
+	public function __serialize(): array {
+		return [ $this->propertyId->getSerialization(), $this->dataValue ];
+	}
+
+	public function __unserialize( array $serialized ): void {
+		list( $propertyId, $this->dataValue ) = $serialized;
 
 		if ( is_string( $propertyId ) ) {
 			$this->propertyId = new NumericPropertyId( $propertyId );

@@ -400,7 +400,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 	/**
 	 * @dataProvider linkTargetProvider
 	 */
-	public function testExtractForeignIdString( ?int $namespace, ?string $linkTargetText, $expectedOutput ) {
+	public function testExtractForeignIdString( ?int $namespace, string $linkTargetText, $expectedOutput ) {
 		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
 		$this->db->insert(
 			'interwiki',
@@ -426,8 +426,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHook
 
 	public function linkTargetProvider() {
 		return [
-			'NS=MAIN, title=null' => [ NS_MAIN, null, null ], // T260853
-			'NS=SPECIAL, title=null' => [ NS_SPECIAL, null, null ],
+			'NS=MAIN, title=null' => [ NS_MAIN, 'ignored', null ], // T260853
+			'NS=SPECIAL, title=null' => [ NS_SPECIAL, 'ignored', null ],
 			'NS=SPECIAL, title=EntityPage/Q123' => [ null, 'Special:EntityPage/Q123', 'Q123' ],
 			// One of the defaults from MediaWiki's maintenance/interwiki.list (but not Wikidata, as this might be the local test wiki name)
 			'NS=MAIN, title=Special:EntityPage/Q123' => [ null, 'metawikimedia:Special:EntityPage/Q123', 'Q123' ],

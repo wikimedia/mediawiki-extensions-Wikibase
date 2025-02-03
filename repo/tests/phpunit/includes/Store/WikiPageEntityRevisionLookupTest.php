@@ -326,7 +326,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->method( 'getId' )
 			->willReturn( $oldEntityId );
 		$revId = 4711;
-		$revTimestamp = 20160114180301;
+		$revTimestamp = '20160114180301';
 		$lookupMode = LookupConstants::LATEST_FROM_REPLICA;
 
 		$slotRecord = $this->createMock( SlotRecord::class );

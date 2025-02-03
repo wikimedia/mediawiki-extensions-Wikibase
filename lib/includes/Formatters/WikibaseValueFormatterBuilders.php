@@ -211,7 +211,9 @@ class WikibaseValueFormatterBuilders {
 	private function escapeValueFormatter( $format, ValueFormatter $formatter ) {
 		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new EscapingValueFormatter( $formatter, 'htmlspecialchars' );
+				return new EscapingValueFormatter( $formatter, static function ( string $string ): string {
+					return htmlspecialchars( $string, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 );
+				} );
 			case SnakFormatter::FORMAT_WIKI:
 				return new EscapingValueFormatter( $formatter, 'wfEscapeWikiText' );
 			default:

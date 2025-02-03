@@ -22,8 +22,11 @@ class LogWarningExceptionHandler implements ExceptionHandler {
 	 * @param string $explanation
 	 */
 	public function handleException( Exception $exception, $errorCode, $explanation ) {
+		$class = get_class( $exception );
+		$file = $exception->getFile();
+		$line = $exception->getLine();
 		$msg = $exception->getMessage();
-		$msg = '[' . $errorCode . ']: ' . $explanation . ' (' . $msg . ')';
+		$msg = "[$errorCode]: $explanation ($class at $file:$line: $msg)";
 
 		wfLogWarning( $msg, 2 );
 	}

@@ -24,6 +24,32 @@ class EntityIdValue extends DataValueObject {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getHash(): string {
+		return md5( $this->getSerializationForHash() );
+	}
+
+	/**
+	 * The serialization to use for hashing, for compatibility reasons this is
+	 * equivalent to the old (pre 7.4) PHP serialization.
+	 *
+	 * @return string
+	 */
+	public function getSerializationForHash(): string {
+		$data = $this->entityId->serialize();
+		$innerSerialization = 'C:' . strlen( get_class( $this->entityId ) ) . ':"' . get_class( $this->entityId ) .
+		'":' . strlen( $data ) . ':{' . $data . '}';
+
+		return 'C:' . strlen( static::class ) . ':"' . static::class .
+			'":' . strlen( $innerSerialization ) . ':{' . $innerSerialization . '}';
+	}
+
+	public function __serialize(): array {
+		return [ 'entityId' => $this->entityId ];
+	}
+
+	/**
 	 * @see Serializable::serialize
 	 *
 	 * @since 7.0 serialization format changed in an incompatible way
@@ -34,6 +60,10 @@ class EntityIdValue extends DataValueObject {
 	 */
 	public function serialize() {
 		return serialize( $this->entityId );
+	}
+
+	public function __unserialize( array $data ): void {
+		$this->__construct( $data['entityId'] );
 	}
 
 	/**
@@ -47,7 +77,7 @@ class EntityIdValue extends DataValueObject {
 		$array = json_decode( $serialized );
 
 		if ( !is_array( $array ) ) {
-			$this->entityId = unserialize( $serialized );
+			$this->__construct( unserialize( $serialized ) );
 			return;
 		}
 

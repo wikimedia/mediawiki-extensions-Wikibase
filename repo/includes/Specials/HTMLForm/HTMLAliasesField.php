@@ -59,13 +59,13 @@ class HTMLAliasesField extends HTMLTextField {
 	}
 
 	/**
-	 * @param string $value
+	 * @param ?string $value
 	 * @param array $alldata
 	 *
 	 * @return array
 	 */
 	public function filter( $value, $alldata ) {
-		$aliases = explode( self::DELIMITER, $value );
+		$aliases = explode( self::DELIMITER, $value ?: '' );
 		$aliases = array_map( [ $this->stringNormalizer, 'trimToNFC' ], $aliases );
 
 		return array_values( array_filter( $aliases ) );

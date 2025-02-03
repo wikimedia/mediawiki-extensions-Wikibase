@@ -35,8 +35,12 @@ class RedirectRevision {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityRedirect $redirect, $revisionId = 0, $mwTimestamp = '' ) {
-		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
+	public function __construct(
+		EntityRedirect $redirect,
+		int $revisionId = 0,
+		string $mwTimestamp = ''
+	) {
+		if ( $revisionId < 0 ) {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}
 

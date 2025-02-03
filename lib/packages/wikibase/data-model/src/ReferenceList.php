@@ -307,7 +307,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 *
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return count( $this->references );
 	}
 
@@ -318,7 +318,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 *
 	 * @return Iterator|Reference[]
 	 */
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( array_values( $this->references ) );
 	}
 
