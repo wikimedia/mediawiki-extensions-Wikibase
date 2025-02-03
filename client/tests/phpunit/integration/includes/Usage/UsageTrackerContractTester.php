@@ -49,7 +49,7 @@ class UsageTrackerContractTester {
 	 * @return EntityUsage[]
 	 */
 	private function getUsages( $pageId ) {
-		return call_user_func( $this->getUsagesCallback, $pageId );
+		return ( $this->getUsagesCallback )( $pageId );
 	}
 
 	private function getTestUsages(): array {
