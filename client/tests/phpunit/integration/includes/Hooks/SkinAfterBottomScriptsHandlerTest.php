@@ -3,13 +3,12 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use File;
-use MediaWiki\Language\Language;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SubEntityTypesMapper;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\LinkedDataSchemaGenerator
@@ -34,15 +33,14 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			'/w'
 		);
 		$generator = new LinkedDataSchemaGenerator(
-			$this->createMock( Language::class ),
 			$repoLinker,
-			WikibaseClient::getTermLookup()
 		);
+		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 
 		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
 		$firstRevisionTimestamp = "2002-05-27T18:26:23Z";
 
-		$actual = $generator->createSchema(
+		$actual = $generatorWrapper->createSchema(
 			$title, $revisionTimestamp, $firstRevisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
 		);
 		$this->assertSchemaSubset( $expected, $actual );
@@ -136,5 +134,4 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $titleText );
 		return $mock;
 	}
-
 }
