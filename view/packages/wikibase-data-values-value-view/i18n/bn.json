@@ -6,6 +6,7 @@
 			"Aishik Rehman",
 			"AnonQuester",
 			"Bellayet",
+			"Bodhisattwa",
 			"আফতাবুজ্জামান"
 		]
 	},
@@ -31,6 +32,7 @@
 	"valueview-expert-timeinput-precision-year10": "দশক",
 	"valueview-expert-timeinput-precision-year": "বছর",
 	"valueview-expert-timeinput-precision-month": "মাস",
+	"valueview-expert-timeinput-precision-day": "দিন",
 	"valueview-expert-timeinput-precision-hour": "ঘণ্টা",
 	"valueview-expert-timeinput-precision-minute": "মিনিট",
 	"valueview-expert-timeinput-precision-second": "সেকেন্ড",
