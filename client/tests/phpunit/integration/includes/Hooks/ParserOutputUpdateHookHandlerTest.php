@@ -9,6 +9,7 @@ use MediaWiki\Content\ContentHandler;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
@@ -391,6 +392,113 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase_badges' ) );
+	}
+
+	public function testFirstRevisionTimestampInParserOutput() {
+		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
+
+		$namespaceChecker = $this->newNamespaceChecker();
+
+		$mockRepo = new MockRepository();
+
+		$content = $this->mockContent();
+
+		$parserOutput = $this->newParserOutput( [], [] );
+		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo );
+		$settings = $this->newSettings();
+
+		$firstRevision = $this->createMock( RevisionRecord::class );
+		$firstRevision->method( 'getTimestamp' )->willReturn( '946782245' ); // 2000-01-02T03:04:05Z
+		$revisionLookup = $this->createMock( RevisionLookup::class );
+		$revisionLookup->method( 'getFirstRevision' )->with( $title )->willReturn( $firstRevision );
+
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $this->getTestSiteLinkData() ),
+			$mockRepo,
+			$mockRepo,
+			$this->newUsageAccumulatorFactory(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$revisionLookup,
+			$this->createMock( TermLookup::class )
+		);
+
+		$handler = new ParserOutputUpdateHookHandler(
+			$langLinkHandlerFactory,
+			$namespaceChecker,
+			$parserOutputDataUpdater,
+			$this->newUsageAccumulatorFactory()
+		);
+
+		$this->assertNull( $parserOutput->getExtensionData( 'first_revision_timestamp' ) );
+
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
+		$this->assertSame( '946782245', $parserOutput->getExtensionData( 'first_revision_timestamp' ) );
+	}
+
+	private function testWikibaseItemDescriptionInParserOutput( ?string $wikibaseItemId, ?string $wikibaseItemDescription ): ParserOutput {
+		$pageTitle = 'Foobarium';
+		$title = Title::makeTitle( NS_MAIN, $pageTitle );
+		$titleWrapper = TestingAccessWrapper::newFromObject( $title );
+		$titleWrapper->mRedirect = false;
+
+		$namespaceChecker = $this->newNamespaceChecker();
+
+		$mockRepo = new MockRepository();
+		if ( $wikibaseItemId ) {
+			$siteLink = new SiteLink( 'enwiki', $pageTitle );
+			$item = new Item(
+				new ItemId( $wikibaseItemId ),
+				null,
+				new SiteLinkList( [ $siteLink ] ),
+				new StatementList()
+			);
+			$mockRepo->putEntity( $item );
+		}
+
+		$content = $this->mockContent();
+
+		$parserOutput = $this->newParserOutput( [], [] );
+		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo );
+		$settings = $this->newSettings();
+
+		$termLookup = $this->createMock( TermLookup::class );
+		$termLookup->method( 'getDescription' )->willReturn( $wikibaseItemDescription );
+
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory(
+				$settings, $mockRepo, $wikibaseItemId ? [ $wikibaseItemId => [ $siteLink ] ] : []
+			),
+			$mockRepo,
+			$mockRepo,
+			$this->newUsageAccumulatorFactory(),
+			$settings->getSetting( 'siteGlobalID' ),
+			$this->createMock( RevisionLookup::class ),
+			$termLookup
+		);
+
+		$handler = new ParserOutputUpdateHookHandler(
+			$langLinkHandlerFactory,
+			$namespaceChecker,
+			$parserOutputDataUpdater,
+			$this->newUsageAccumulatorFactory()
+		);
+
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase_item_description' ) );
+
+		$handler->doContentAlterParserOutput( $content, $title, $parserOutput );
+
+		return $parserOutput;
+	}
+
+	public function testWikibaseItemDescriptionInParserOutput_withWbItem() {
+		$wikibaseItemDescription = "This is Foobarium description";
+		$parserOutput = $this->testWikibaseItemDescriptionInParserOutput( 'Q555', $wikibaseItemDescription );
+		$this->assertEquals( $wikibaseItemDescription, $parserOutput->getExtensionData( 'wikibase_item_description' ) );
+	}
+
+	public function testWikibaseItemDescriptionInParserOutput_withoutWbItem() {
+		$parserOutput = $this->testWikibaseItemDescriptionInParserOutput( null, null );
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase_item_description' ) );
 	}
 
 	public function testGivenSitelinkHasStatementWithUnknownEntityType_linkDataIsAddedNormally() {
