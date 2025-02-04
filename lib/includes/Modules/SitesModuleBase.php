@@ -133,8 +133,8 @@ abstract class SitesModuleBase extends RL\Module {
 	}
 
 	/**
-	 * @param MessageLocalizer $localizer
+	 * @param RL\Context $context
 	 * @return string JavaScript Code
 	 */
-	abstract protected function makeScript( MessageLocalizer $localizer ): string;
+	abstract protected function makeScript( RL\Context $context ): string;
 }

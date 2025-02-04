@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\ResourceLoader\Context;
+use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Lib\Modules\RepoAccessModule;
 
 /**
@@ -17,7 +19,8 @@ class RepoAccessModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetScript() {
 		$module = new RepoAccessModule();
-		$script = $module->getScript( $this->createMock( Context::class ) );
+		$context = new Context( $this->createMock( ResourceLoader::class ), new FauxRequest() );
+		$script = $module->getScript( $context );
 		$this->assertStringStartsWith( 'mw.config.set({"wbRepo":', $script );
 		$this->assertStringEndsWith( '});', $script );
 	}

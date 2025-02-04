@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Modules;
 
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\ResourceLoader as RL;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
@@ -22,10 +23,7 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetScript_returnsJavaScript() {
-		$context = $this->createMock( RL\Context::class );
-		$context->expects( $this->never() )
-			->method( $this->anything() );
-
+		$context = new RL\Context( $this->createMock( RL\ResourceLoader::class ), new FauxRequest() );
 		$script = $this->newInstance()->getScript( $context );
 		$this->assertStringStartsWith( 'mw.config.set({', $script );
 		$this->assertStringContainsString( 'dummyKey', $script );

@@ -6,10 +6,8 @@ namespace Wikibase\Lib\Modules;
 
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
-use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\SiteLookup;
-use MessageLocalizer;
 use RuntimeException;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
@@ -81,10 +79,10 @@ class CurrentSiteModule extends SitesModuleBase {
 	}
 
 	/**
-	 * @param MessageLocalizer $localizer
+	 * @param RL\Context $context
 	 * @return string JavaScript Code
 	 */
-	protected function makeScript( MessageLocalizer $localizer ): string {
+	protected function makeScript( RL\Context $context ): string {
 
 		$globalId = $this->getSetting( 'siteGlobalID' );
 
@@ -102,10 +100,12 @@ class CurrentSiteModule extends SitesModuleBase {
 			$currentSiteDetails = $this->computeSiteDetails(
 				$site,
 				$specialGroups,
-				$localizer,
+				$context,
 			);
 		}
-		return ResourceLoader::makeConfigSetScript( [ 'wbCurrentSiteDetails' => $currentSiteDetails ] );
+		return 'mw.config.set('
+				. $context->encodeJson( [ 'wbCurrentSiteDetails' => $currentSiteDetails ] )
+				. ');';
 	}
 
 }

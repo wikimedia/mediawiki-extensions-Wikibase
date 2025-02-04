@@ -5,11 +5,9 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Modules;
 
 use MediaWiki\ResourceLoader as RL;
-use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
-use MessageLocalizer;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\ObjectCache\BagOStuff;
@@ -83,10 +81,10 @@ class SitesModule extends SitesModuleBase {
 	}
 
 	/**
-	 * @param MessageLocalizer $localizer
+	 * @param RL\Context $context
 	 * @return string JavaScript Code
 	 */
-	protected function makeScript( MessageLocalizer $localizer ): string {
+	protected function makeScript( RL\Context $context ): string {
 		$groups = $this->getSetting( 'siteLinkGroups' );
 		$specialGroups = $this->getSetting( 'specialSiteLinkGroups' );
 		$specialPos = array_search( 'special', $groups );
@@ -104,12 +102,14 @@ class SitesModule extends SitesModuleBase {
 				$siteDetails[$site->getGlobalId()] = $this->computeSiteDetails(
 					$site,
 					$specialGroups,
-					$localizer,
+					$context,
 				);
 			}
 		}
 
-		return ResourceLoader::makeConfigSetScript( [ 'wbSiteDetails' => $siteDetails ] );
+		return 'mw.config.set('
+				. $context->encodeJson( [ 'wbSiteDetails' => $siteDetails ] )
+				. ');';
 	}
 
 	/**

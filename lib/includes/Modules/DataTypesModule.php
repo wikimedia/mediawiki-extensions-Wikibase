@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Modules;
 
 // phpcs:disable MediaWiki.Classes.FullQualifiedClassName -- T308814
 use MediaWiki\ResourceLoader as RL;
-use MediaWiki\ResourceLoader\ResourceLoader;
 use RuntimeException;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
@@ -140,7 +139,9 @@ class DataTypesModule extends RL\Module {
 			$typesJson[ $dataType->getId() ] = $dataType->toArray();
 		}
 
-		return ResourceLoader::makeConfigSetScript( [ $configVarName => $typesJson ] );
+		return 'mw.config.set('
+				. $context->encodeJson( [ $configVarName => $typesJson ] )
+				. ');';
 	}
 
 	/**
