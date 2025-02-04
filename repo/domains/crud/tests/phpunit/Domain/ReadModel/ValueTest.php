@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Generator;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
 
@@ -34,7 +35,7 @@ class ValueTest extends TestCase {
 		string $valueType,
 		?DataValue $content = null
 	): void {
-		$this->expectException( \InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$v = new Value( $valueType, $content );
 	}
 

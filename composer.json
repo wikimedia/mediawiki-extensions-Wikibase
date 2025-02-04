@@ -57,14 +57,12 @@
 	"scripts": {
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git --exclude lib/packages/*/*/vendor",
 		"phpcs": "phpcs -p -s --cache",
-		"phpcs:rest-api": "phpcs -p -s --standard=./repo/domains/crud/ruleset.xml repo/domains/crud/",
-		"phpcs:search": "phpcs -p -s --standard=./repo/domains/search/ruleset.xml repo/domains/search/",
+		"phpcs:prpl": "phpcs -p -s --cache --standard=prpl-ruleset.xml",
 		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"phpcs-committed": "bash build/phpcsGitCommitted.sh",
 		"fix": [
 			"minus-x fix .",
-			"phpcbf --standard=./repo/domains/crud/ruleset.xml repo/domains/crud/",
-			"phpcbf --standard=./repo/domains/search/ruleset.xml repo/domains/search/",
+			"phpcbf --standard=prpl-ruleset.xml",
 			"phpcbf"
 		],
 		"fix-modified": "bash build/phpcbfGitModified.sh",
@@ -75,8 +73,7 @@
 			"composer validate --no-interaction",
 			"composer lint",
 			"composer phpcs",
-			"composer phpcs:rest-api",
-			"composer phpcs:search",
+			"composer phpcs:prpl",
 			"composer phpstan",
 			"minus-x check ."
 		],

@@ -11,6 +11,7 @@ use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
+use SearchEngineFactory;
 use SearchResult;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -38,14 +39,14 @@ class SearchEntitiesRouteHandler extends SimpleHandler {
 	];
 	private const RESULTS_LIMIT = 5;
 
-	private \SearchEngineFactory $searchEngineFactory;
+	private SearchEngineFactory $searchEngineFactory;
 	private EntityNamespaceLookup $entityNamespaceLookup;
 	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
 	private LanguageFactory $languageFactory;
 	private EntityIdParser $entityIdParser;
 
 	public function __construct(
-		\SearchEngineFactory $searchEngineFactory,
+		SearchEngineFactory $searchEngineFactory,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageFactory $languageFactory,

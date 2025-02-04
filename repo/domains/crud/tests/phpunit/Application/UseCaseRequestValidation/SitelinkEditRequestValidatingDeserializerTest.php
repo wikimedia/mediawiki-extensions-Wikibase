@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SitelinkEditRequest;
@@ -62,7 +63,7 @@ class SitelinkEditRequestValidatingDeserializerTest extends TestCase {
 		}
 	}
 
-	public static function sitelinkValidationErrorProvider(): \Generator {
+	public static function sitelinkValidationErrorProvider(): Generator {
 		yield 'missing title' => [
 			UseCaseError::newMissingField( '/sitelink', 'title' ),
 			new ValidationError(

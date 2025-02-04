@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure;
 
 use Exception;
+use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -60,7 +61,7 @@ class SiteLinkLookupSitelinkValidatorTest extends TestCase {
 		$this->assertEquals( $context, $validationError->getContext() );
 	}
 
-	public static function provideInvalidSitelink(): \Generator {
+	public static function provideInvalidSitelink(): Generator {
 		yield 'missing title' => [
 			new MissingFieldException( 'title' ),
 			SitelinkValidator::CODE_TITLE_MISSING,
