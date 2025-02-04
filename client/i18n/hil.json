@@ -4,12 +4,14 @@
 			"Kai theos en ho logos",
 			"Pare Mo",
 			"Redhotchili23",
-			"Xerxesbcd"
+			"Xerxesbcd",
+			"Exec8"
 		]
 	},
 	"wikibase-comment-update": "Nabag·o ang {{WBREPONAME}}",
 	"wikibase-dataitem": "{{WBREPONAME}} butáng",
 	"wikibase-editlinks": "Liwaton ang mga enlase",
+	"wikibase-addlinkstitle": "Magdugang sang mga sumpay sa tunga sang mga lenguahe",
 	"wikibase-linkitem-addlinks": "Dugang mga káw-id",
 	"wikibase-linkitem-title": "I-káwad sa panid",
 	"wikibase-linkitem-linkpage": "I-sugpon sa panid",

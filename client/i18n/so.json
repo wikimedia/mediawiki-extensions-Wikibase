@@ -7,7 +7,7 @@
 	},
 	"tooltip-t-wikibase": "kula xiriiri shayga kaydka xogta ku xiran",
 	"wikibase-comment-update": "{{WBREPONAME}} shay ayaa la badalay",
-	"wikibase-dataitem": "shay",
+	"wikibase-dataitem": "Shay {{WBREPONAME}}",
 	"wikibase-editlinks": "Bedel linkiga",
 	"wikibase-editlinkstitle": "Wax ka badal linkyada luuqadaha",
 	"wikibase-linkitem-addlinks": "Ku dar linkiyada",

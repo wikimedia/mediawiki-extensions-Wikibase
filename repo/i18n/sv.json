@@ -439,7 +439,7 @@
 	"wikibase-conflict-patched": "Din redigering lappades i den senaste versionen.",
 	"wikibase-save-unresolved-redirect": "Stötte på en olöst omdirigering från $1 till $2 när en ändring försökte sparas.",
 	"wikibase-restoreold": "återställ",
-	"wikibase-entity-summary-restore": "Återställ versionen [[Special:Permalink/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Återställ versionen [[Special:Permalink/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskussion]])",
 	"wikibase-entity-summary-undo": "Gör version [[Special:Diff/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskussion]]) ogjord",
 	"wikibase-no-direct-editing": "Direkt redigering har inaktiverats i namnområdet $1",
 	"wikibase-noentity": "Denna entitet finns inte. Du kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} söka i de relaterade loggarna] för att ta reda på var den tog vägen.",

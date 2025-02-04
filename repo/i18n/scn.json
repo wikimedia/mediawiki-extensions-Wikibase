@@ -7,7 +7,8 @@
 			"Macofe",
 			"Pippinu",
 			"S4b1nuz E.656",
-			"Sarvaturi"
+			"Sarvaturi",
+			"GianAntonucci"
 		]
 	},
 	"wikibase-desc": "Dipòsitu di dati strutturati",
@@ -227,7 +228,7 @@
 	"wikibase-tokencheck-badtoken": "Token di canciamentu nun bonu (forsi la tò sissioni scadìu).",
 	"special-dispatchstats": "Statìstichi supra â prupagazzioni dî canciamenti",
 	"wikibase-dispatchstats-intro": "Sta pàggina furnisci statìstichi a prupòsitu dâ prupagazzioni dî canciamenti versu li client.\nNa wiki client havi nutizzia dûn canciamentu supra a {{SITENAME}} sulu dopu chi lu canciamentu fu prupagatu unni dda wiki, e la cuda dî prucessi nta dda wiki havi elabburatu dda nutìfica.\n* {{int:wikibase-dispatchstats-changes}} ammustra lu nùmmiru e la data dî vuci cchiù vecchî e cchiù novi chi sunnu comu a ora ntâ cuda.\n* {{int:wikibase-dispatchstats-stats}} furnisci nfurmazzioni riguardu la wiki client chi sta arristannu cchiù n arreri e chidda chi sta arristannu menu n arreri, e una minzana tra dî dui. P'ogni wiki, vèninu furnuti li nfurmazzioni siguenti:\n** \"{{int:wikibase-dispatchstats-site-id}}\" è l'ID nterna dâ wiki client.\n** \"{{int:wikibase-dispatchstats-pos}}\" è l'ID di l'ùrtimu canciamentu chi fu prupagatu a dda wiki.\n** \"{{int:wikibase-dispatchstats-lag-num}}\" è lu nùmmiru di canciamenti c'ancora nun hannu statu prupagati a dda wiki.\n** \"{{int:wikibase-dispatchstats-lag-time}}\" è lu tempu chi passau tra l'ùrtimu canciamentu prupagatu a dda wiki e l'ùrtimu canciamentu fattu supra a {{SITENAME}}.\n** \"{{int:wikibase-dispatchstats-touched}}\" è l'ura quannu l'ùrtima nfurnata di canciamenti fu prupagata a dda wiki.",
-	"special-listdatatypes": "Elencu di tutti li tipi di dati dispunìbbili",
+	"special-listdatatypes": "Lista di tutti i tipi di dati dispunìbbili",
 	"wikibase-listdatatypes-intro": "Chista è na lista di tutti li tipi di dati dispunìbbili nta sta stallazzioni:",
 	"wikibase-listdatatypes-listproperties": "Lista dî prupietà cu stu tipu di datu",
 	"wikibase-history-title-with-label": "Crunuluggìa dî canciamenti di \"$2\" ($1)",
@@ -244,7 +245,7 @@
 	"wikibase-entitydata-not-acceptable": "Nun fu attruvatu nuḍḍu furmatu currispunnenti. Tipi MIME suppurtati: $1",
 	"wikibase-entitydata-bad-revision": "Nun si pò ammustrari la virsioni $2 dâ ntità $1.",
 	"wikibase-entitydata-bad-id": "ID nun vàlidu: $1.",
-	"wikibase-entitydata-unsupported-format": "Lu furmatu di dati $1 nun è suppurtatu di sta ntirfaccia.",
+	"wikibase-entitydata-unsupported-format": "Sta ntirfacci nun accetta lu furmatu dî dati $1.",
 	"wikibase-entitydata-storage-error": "Nun s'arriniscìu a carricari la ntità $1.",
 	"wikibase-entitydata-title": "Dati dû suggettu",
 	"wikibase-entitydata-text": "Sta pàggina custituisci na nterfaccia a dati culligati versu li valuri di na ntità. S'havi a spicificari l'ID dâ ntità nta l'URL, adupirannu la sintassi dî suttapàggini.\n* Veni applicata la niguzziazzioni dû cuntinutu a secunna dâ ntistazzioni Accept spicificata dû tò client. Voli diri chi li dati dâ ntità sunnu furnuti ntô furmatu prifirutu dû tò client. Ntô casu dûn browser web, stu furmatu è l'HTML, dunca lu tò browser è rimannatu versu la pàggina nurmali dâ ntità.\n* Poi addumannari esplicitamenti nu furmatu di dati spicìficu agghiuncennu na stinzioni apprupriata a l'ID dâ ntità: Q23.json torna dati ntô furmatu JSON, Q23.ttl li torna ntô furmatu RDF/Turtle, e accussì via.",
