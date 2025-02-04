@@ -37,7 +37,7 @@ class ApiModuleTestHelper {
 		if ( is_string( $instantiator ) && class_exists( $instantiator ) ) {
 			$module = new $instantiator( $main, $name );
 		} else {
-			$module = call_user_func( $instantiator, $main, $name );
+			$module = $instantiator( $main, $name );
 		}
 
 		return $module;

@@ -269,7 +269,7 @@ return [
 		$baseDeserializerFactory = WikibaseRepo::getBaseDataModelDeserializerFactory( $services );
 		$deserializers = [];
 		foreach ( $deserializerFactoryCallbacks as $callback ) {
-			$deserializers[] = call_user_func( $callback, $baseDeserializerFactory );
+			$deserializers[] = $callback( $baseDeserializerFactory );
 		}
 		return new DispatchingDeserializer( $deserializers );
 	},

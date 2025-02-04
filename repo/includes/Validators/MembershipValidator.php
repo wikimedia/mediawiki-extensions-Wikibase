@@ -61,7 +61,7 @@ class MembershipValidator implements ValueValidator {
 	 */
 	public function validate( $value ) {
 		if ( $this->normalizer !== null ) {
-			$value = call_user_func( $this->normalizer, $value );
+			$value = ( $this->normalizer )( $value );
 		}
 
 		if ( !in_array( $value, $this->allowed, true ) ) {

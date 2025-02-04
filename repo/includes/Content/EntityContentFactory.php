@@ -115,7 +115,7 @@ class EntityContentFactory {
 		}
 
 		if ( !isset( $this->entityHandlers[$entityType] ) ) {
-			$entityHandler = call_user_func( $this->entityHandlerFactoryCallbacks[$entityType] );
+			$entityHandler = $this->entityHandlerFactoryCallbacks[$entityType]();
 
 			Assert::postcondition(
 				$entityHandler instanceof EntityHandler,

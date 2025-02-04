@@ -77,8 +77,7 @@ class EntityRdfBuilderFactory {
 		$builders = [];
 
 		foreach ( $this->factoryCallbacks as $key => $callback ) {
-			$builders[$key] = call_user_func(
-				$callback,
+			$builders[$key] = $callback(
 				$flavorFlags,
 				$vocabulary,
 				$writer,

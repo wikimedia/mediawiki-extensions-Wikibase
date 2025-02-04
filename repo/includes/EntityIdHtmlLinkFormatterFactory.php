@@ -75,7 +75,7 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 		$formatters = [];
 
 		foreach ( $this->formatterCallbacks as $type => $func ) {
-			$formatters[ $type ] = call_user_func( $func, $language );
+			$formatters[ $type ] = $func( $language );
 		}
 
 		return $formatters;

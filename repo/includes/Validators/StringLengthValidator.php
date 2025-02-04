@@ -70,7 +70,7 @@ class StringLengthValidator implements ValueValidator {
 		// wikibase-validator-description-too-short, wikibase-validator-description-too-long,
 		// wikibase-validator-alias-too-short, wikibase-validator-alias-too-long
 
-		$length = call_user_func( $this->measure, $value );
+		$length = ( $this->measure )( $value );
 
 		if ( $length < $this->minLength ) {
 			// XXX: having to provide an array is quite inconvenient
@@ -121,7 +121,7 @@ class StringLengthValidator implements ValueValidator {
 	 * @return string
 	 */
 	private function truncateValue( $value, $truncateAt = 32 ) {
-		$length = call_user_func( $this->measure, $value );
+		$length = ( $this->measure )( $value );
 
 		if ( $length > $truncateAt ) {
 			$value = substr( $value, 0, max( 1, $truncateAt - 3 ) ) . '...';

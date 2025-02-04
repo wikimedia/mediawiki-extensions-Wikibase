@@ -562,7 +562,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'wikibase-property' => [ $builders, 'buildPropertyValidators' ],
 		];
 
-		$validators = call_user_func( $validatorMap[$typeId] );
+		$validators = $validatorMap[$typeId]();
 
 		$this->assertValidation( $expected, $validators, $value );
 	}

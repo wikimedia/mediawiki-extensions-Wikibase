@@ -16,7 +16,7 @@ class ChangeOpDeserializationAssert {
 	 */
 	public static function assertThrowsChangeOpDeserializationException( callable $callback, $errorCode ) {
 		try {
-			call_user_func( $callback );
+			$callback();
 		} catch ( ChangeOpDeserializationException $ex ) {
 			Assert::assertSame( $errorCode, $ex->getErrorCode() );
 			return;

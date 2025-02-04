@@ -223,7 +223,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				if ( !is_array( $value ) ) {
 					continue;
 				}
-				$value = call_user_func( ...$value );
+				$callable = array_shift( $value );
+				$value = $callable( ...$value );
 			}
 			unset( $value );
 

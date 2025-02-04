@@ -36,7 +36,7 @@ class DispatchingEntityMetaTagsCreatorFactory {
 			return new DefaultMetaTagsCreator();
 		}
 
-		$entityMetaTags = call_user_func( $this->entityMetaTagsFactoryCallbacks[$entityType], $userLanguage );
+		$entityMetaTags = $this->entityMetaTagsFactoryCallbacks[$entityType]( $userLanguage );
 
 		Assert::postcondition(
 			$entityMetaTags instanceof EntityMetaTagsCreator,

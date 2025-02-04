@@ -82,7 +82,7 @@ class ValueParserFactory {
 	 * @return ValueParser
 	 */
 	private function instantiateParser( $builder, ParserOptions $options ) {
-		$parser = call_user_func( $builder, $options );
+		$parser = $builder( $options );
 
 		if ( !( $parser instanceof ValueParser ) ) {
 			throw new LogicException( "Invalid parser builder, did not create an instance of ValueParser." );

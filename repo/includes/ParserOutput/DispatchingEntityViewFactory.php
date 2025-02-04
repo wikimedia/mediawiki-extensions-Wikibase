@@ -51,8 +51,7 @@ class DispatchingEntityViewFactory {
 			throw new OutOfBoundsException( "No EntityDocumentView is registered for entity type '$entityType'" );
 		}
 
-		$entityView = call_user_func(
-			$this->entityViewFactoryCallbacks[$entityType],
+		$entityView = $this->entityViewFactoryCallbacks[$entityType](
 			$language,
 			$termFallbackChain,
 			$entity

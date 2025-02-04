@@ -40,9 +40,7 @@ class BuilderBasedDataTypeValidatorFactory implements DataTypeValidatorFactory {
 			throw new OutOfBoundsException( 'No validators known for data type ' . $dataTypeId );
 		}
 
-		$validators = call_user_func(
-			$this->validatorBuilders[ $dataTypeId ]
-		);
+		$validators = $this->validatorBuilders[ $dataTypeId ]();
 
 		Assert::postcondition(
 			is_array( $validators ),

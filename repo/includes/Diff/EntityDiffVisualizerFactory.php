@@ -97,8 +97,7 @@ class EntityDiffVisualizerFactory {
 			);
 		}
 
-		$visualizer = call_user_func(
-			$this->entityDiffVisualizerInstantiators[$type],
+		$visualizer = $this->entityDiffVisualizerInstantiators[$type](
 			$context,
 			$this->claimDiffer,
 			$claimDiffView,
