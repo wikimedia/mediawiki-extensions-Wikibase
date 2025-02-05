@@ -2,11 +2,6 @@
   "name": "data-bridge",
   "version": "0.1.0",
   "private": true,
-  "config": {
-    "remoteVersion": {
-      "vue": "https://raw.githubusercontent.com/wikimedia/mediawiki/#{ZUUL_BRANCH}/resources/lib/vue/vue.common.prod.js"
-    }
-  },
   "scripts": {
     "serve": "WEBPACK_TARGET=dev vue-cli-service serve src/dev-entry.ts --skip-plugins eslint",
     "prepare": "node build/wikimedia-ui-base.js",
@@ -18,7 +13,6 @@
     "test:integration": "jest -c ./jest.config.integration.js",
     "test:e2e": "jest -c ./jest.config.e2e.js",
     "test:distnodiff": "npm run build -- --dest /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/css/data-bridge.app.css /tmp/dist/css/data-bridge.app.css && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js && diff -q ./dist/data-bridge.chunk-vendors.js /tmp/dist/data-bridge.chunk-vendors.js",
-    "test:mwlibs": "echo 'disabled (T297381)' # ZUUL_BRANCH=${ZUUL_BRANCH:-master} lib-version-check",
     "test-unit-coverage": "jest -c ./jest.config.unit.js --coverage && sed -i 's|SF:/src/client/data-bridge/|SF:|g' coverage/lcov.info",
     "selenium-test": "wdio tests/selenium/wdio.conf.js"
   },
@@ -55,7 +49,6 @@
     "@wdio/mocha-framework": "^7.16.13",
     "@wdio/spec-reporter": "^7.16.13",
     "@wmde/eslint-config-wikimedia-typescript": "^0.2.1",
-    "@wmde/lib-version-check": "^0.1.0",
     "@wmde/vuex-helpers": "^0.1.2",
     "@wmde/wikibase-datamodel-types": "^0.2.0",
     "babel-core": "7.0.0-bridge.0",
