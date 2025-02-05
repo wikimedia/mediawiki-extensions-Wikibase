@@ -560,7 +560,7 @@
 	"special-setaliases-parameterized": "أضِف أسماء $1 المستعارة",
 	"special-setlabel-parameterized": "أضِف تسمية $1",
 	"special-setdescription-parameterized": "أضِف وصفاً $1",
-	"special-setlabeldescriptionaliases-parameterized": "حدِّد تسمية ووصف وأسماء أخرى لـ $1.",
+	"special-setlabeldescriptionaliases-parameterized": "أضِف تسمية $1 ووصفه وأسماءه المُستعارة.",
 	"wikibase-federated-properties-federated-property-api-error-message": "لا يمكنك التفاعل مع الخصائص المتحدة باستخدام واجهة برمجة التطبيقات هذه.",
 	"wikibase-federated-properties-failed-request-api-error-message": "فشل الطلب بسبب فشل طلب wiki مصدر الاتحاد."
 }
