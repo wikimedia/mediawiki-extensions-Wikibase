@@ -1,0 +1,35 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "Wikibase Search Domain REST API",
+		"version": "0.1",
+		"description": "OpenAPI fragment of the Wikibase Search domain REST API"
+	},
+	"paths": {
+		"/v0/search/items": {
+			"get": {
+				"operationId": "searchItem",
+				"tags": [ "item search" ],
+				"summary": "Simple Item search by label",
+				"responses": {
+					"200": {
+						"description": "A list of search results",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "item search",
+			"description": "Simple item search"
+		}
+	]
+}

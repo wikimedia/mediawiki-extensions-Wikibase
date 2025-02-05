@@ -20,6 +20,9 @@ tests/browser/config/config.yml
 .api-testing.config.json
 repo/domains/crud/tests/mocha/helpers/.test-user-credentials.json
 
+# Generated
+repo/rest-api/specs/openapi-joined.json
+
 # Doxygen
 docs/php
 docs/*.tmp
