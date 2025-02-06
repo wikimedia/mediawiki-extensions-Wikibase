@@ -10,14 +10,55 @@
 			"get": {
 				"operationId": "searchItem",
 				"tags": [ "item search" ],
-				"summary": "Simple Item search by label",
+				"summary": "[WIP] Simple Item search by label",
+				"description": "This endpoint is currently in development and is not recommended for production use",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "q",
+						"description": "The term to search item labels by",
+						"required": true,
+						"schema": { "type": "string" },
+						"example": "potato"
+					},
+					{
+						"in": "query",
+						"name": "language",
+						"description": "The language to search item labels in",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"pattern": "^[a-z]{2}[a-z0-9-]*$"
+						},
+						"example": "en"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "A list of search results",
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object"
+									"type": "object",
+									"properties": {
+										"results": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": { "type": "string", "pattern": "^Q[1-9]\\d{0,9}$" },
+													"label": { "type": "string" },
+													"description": { "type": "string" }
+												}
+											}
+										}
+									}
+								},
+								"example": {
+									"results": [
+										{ "id": "Q123", "label": "potato", "description": "staple food" },
+										{ "id": "Q234", "label": "potato", "description": "species of plant" }
+									]
 								}
 							}
 						}
