@@ -25,6 +25,7 @@
 	"wikibase-error-ui-no-external-page": "No s'ha trobat la pàgina «$2» a «$1».",
 	"wikibase-error-ui-edit-conflict": "S’ha produït un conflicte d’edició perquè el mateix valor s’ha modificat mentrestant. Recarregueu la pàgina.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterat)",
+	"wikibase-language-name-for-terms-mul": "Per defecte en totes les llengües",
 	"wikibase-quantitydetails-amount": "Quantitat",
 	"wikibase-quantitydetails-upperbound": "Límit superior",
 	"wikibase-quantitydetails-lowerbound": "Límit inferior",
