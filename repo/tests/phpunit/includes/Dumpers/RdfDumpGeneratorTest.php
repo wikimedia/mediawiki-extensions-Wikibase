@@ -316,7 +316,8 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				], new SubEntityTypesMapper( [] ) ),
 				[ 'test' => 'wd', 'foreign' => 'foreign' ],
 				[ 'test' => '', 'foreign' => 'foreign' ],
-				[ 'test' => 'en-x-test' ]
+				[ 'test' => 'en-x-test' ],
+				[], [], 'http://creativecommons.org/publicdomain/zero/1.0/', true
 			),
 			$entityRdfBuilderFactory,
 			$this->createMock( EntityContentFactory::class ),

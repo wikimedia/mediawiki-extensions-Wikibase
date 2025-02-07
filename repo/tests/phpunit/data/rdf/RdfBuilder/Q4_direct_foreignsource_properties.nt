@@ -5,7 +5,7 @@
 <http://acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://foreign.test/prop/novalue/P3> .
 <http://acme.test/Q4> <http://foreign.test/prop/direct/P4> "Point(67.25 12.125)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/Q4> <http://foreign.test/prop/direct/P5> "\u043F\u0440\u0435\u0432\u0435\u0434"@ru .
-<http://acme.test/Q4> <http://foreign.test/prop/direct/P5> _:0af6e48acdab4e5422b4ab4436a2683f .
+<http://acme.test/Q4> <http://foreign.test/prop/direct/P5> _:d8b90808c42bd201b67a782eff2fce71 .
 <http://acme.test/Q4> <http://foreign.test/prop/direct/P6> "+19.768000000000000682121026329696178436279296875"^^<http://www.w3.org/2001/XMLSchema#decimal> .
 <http://acme.test/Q4> <http://foreign.test/prop/direct/P7> "simplestring" .
 <http://acme.test/Q4> <http://foreign.test/prop/direct/P8> "-0199-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
