@@ -192,9 +192,7 @@ class RdfBuilderTestData {
 			[],
 			[],
 			[],
-			'http://creativecommons.org/publicdomain/zero/1.0/',
-			true,
-			true
+			'http://creativecommons.org/publicdomain/zero/1.0/'
 		);
 	}
 
@@ -235,9 +233,7 @@ class RdfBuilderTestData {
 			[],
 			[],
 			[],
-			'http://creativecommons.org/publicdomain/zero/1.0/',
-			true,
-			true
+			'http://creativecommons.org/publicdomain/zero/1.0/'
 		);
 	}
 

@@ -464,23 +464,4 @@ return [
 	 * @see https://phabricator.wikimedia.org/T338483
 	 */
 	'tmpEnableScopedTypeaheadSearch' => false,
-
-	/**
-	 * @note This config option is primarily added for the Wikidata transition use-case
-	 * and must be considered temporary. It will be removed in the future with no warning.
-	 *
-	 * @var bool Whether to use the prefix URI, rather than the prefix name,
-	 * for the hash that forms the stable label of a somevalue snak blank node.
-	 * @see https://phabricator.wikimedia.org/T384344
-	 */
-	'tmpFixRdfSomevalueHash' => false,
-
-	/**
-	 * Feature flag for the soft rollout of fixing the s:, ref: and v: prefixes (-> wds:, wdref:, wdv:).
-	 *
-	 * Added in https://phabricator.wikimedia.org/T384344, to be removed in Iadb3f55587
-	 * @var bool Whether to correctly use the rdfNodeNamespacePrefix (true)
-	 * or incorrectly use the rdfPredicateNamespacePrefix (false)
-	 */
-	'tmpFixRdfNodeNamespacePrefix' => false,
 ];
