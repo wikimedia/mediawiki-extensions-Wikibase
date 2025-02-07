@@ -1696,7 +1696,8 @@ return [
 			$languageCodes,
 			WikibaseRepo::getDataTypeDefinitions( $services )->getRdfTypeUris(),
 			$repoSettings->getSetting( 'pagePropertiesRdf' ) ?: [],
-			$repoSettings->getSetting( 'rdfDataRightsUrl' )
+			$repoSettings->getSetting( 'rdfDataRightsUrl' ),
+			$repoSettings->getSetting( 'tmpFixRdfSomevalueHash' )
 		);
 	},
 
