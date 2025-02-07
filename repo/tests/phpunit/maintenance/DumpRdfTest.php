@@ -171,7 +171,7 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 					new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
 					[ '' => '' ],
 					[ '' => '' ],
-					[], [], [], 'http://creativecommons.org/publicdomain/zero/1.0/', true
+					[], [], [], 'http://creativecommons.org/publicdomain/zero/1.0/', true, true
 				),
 				WikibaseRepo::getEntityRdfBuilderFactory(),
 				WikibaseRepo::getEntityContentFactory(),

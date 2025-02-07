@@ -51,7 +51,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 				'pagePropertiesRdf' => $pagePropertyDefs,
 				'rdfDataRightsUrl' => 'https://license.test/cc0',
 				'tmpFixRdfSomevalueHash' => true,
-				'tmpFixRdfNodeNamespacePrefix' => false,
+				'tmpFixRdfNodeNamespacePrefix' => true,
 			] ) );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [
@@ -79,7 +79,7 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 		$this->assertSame( 'https://license.test/cc0', $rdfVocabulary->getLicenseUrl() );
 		$this->assertSame( 'https://local.test/', $rdfVocabulary->getNamespaceURI( 'tl' ) );
 		$this->assertSame( 'https://local.test/prop/statement/', $rdfVocabulary->getNamespaceURI( 'lps' ) );
-		$this->assertSame( 'https://other.test/reference/', $rdfVocabulary->getNamespaceURI( 'oref' ) );
+		$this->assertSame( 'https://other.test/reference/', $rdfVocabulary->getNamespaceURI( 'toref' ) );
 		$testProperty = new Property( null, null, 'test' );
 		$testType = $testProperty->getDataTypeId();
 		$this->assertSame( 'https://rdf.test/Datatype', $rdfVocabulary->getDataTypeURI( $testType ) );
