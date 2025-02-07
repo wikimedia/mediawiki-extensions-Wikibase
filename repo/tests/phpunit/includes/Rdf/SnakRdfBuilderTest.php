@@ -192,7 +192,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$expectedTriples = [
-			'<http://acme.test/Q11> <http://acme.test/prop/direct/P2> _:621074cf8aeac27a6155ea12e2718d52 .',
+			'<http://acme.test/Q11> <http://acme.test/prop/direct/P2> _:320c2141062ae317c02a2f98b5086959 .',
 		];
 
 		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );

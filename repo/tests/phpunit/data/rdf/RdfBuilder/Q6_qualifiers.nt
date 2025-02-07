@@ -4,7 +4,7 @@
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P4> "Point(67.25 12.125)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P5> "\u0431\u0440\u0435\u0434"@ru .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P5> "\u043F\u0440\u0435\u0432\u0435\u0434"@ru .
-<http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P5> _:9774dd3d7c32ac26581ace70a891ba86 .
+<http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P5> _:4054b71b276e3ca16c734a75d2598bcf .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P6> "+19.768000000000000682121026329696178436279296875"^^<http://www.w3.org/2001/XMLSchema#decimal> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P7> "simplestring" .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/prop/qualifier/P8> "-0199-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .

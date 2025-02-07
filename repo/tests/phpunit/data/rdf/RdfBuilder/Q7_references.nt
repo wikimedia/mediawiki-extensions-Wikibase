@@ -5,7 +5,7 @@
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P4> "Point(67.25 12.125)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P5> "\u0431\u0440\u0435\u0434"@ru .
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P5> "\u043F\u0440\u0435\u0432\u0435\u0434"@ru .
-<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P5> _:d7e08f55b0efaea6a4513214bd370003 .
+<http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P5> _:f03954229325f69a42a070c934d5dd9a .
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P6> "+19.768000000000000682121026329696178436279296875"^^<http://www.w3.org/2001/XMLSchema#decimal> .
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P7> "simplestring" .
 <http://acme.test/reference/d2412760c57cacd8c8f24d9afde3b20c87161cca> <http://acme.test/prop/reference/P8> "-0199-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
