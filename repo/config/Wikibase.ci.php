@@ -46,9 +46,6 @@ $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta
 // make sitelinks to the current wiki work
 $wgWBRepoSettings['siteLinkGroups'][] = 'CI';
 
-$wgWBRepoSettings['tmpFixRdfSomevalueHash'] = true; // T384344
-$wgWBRepoSettings['tmpFixRdfNodeNamespacePrefix'] = true; // T384344
-
 // This is a dangerous hack that should never ever be done on any production wiki. It enables e2e tests for config-dependent behavior.
 $configOverrides = json_decode( RequestContext::getMain()->getRequest()->getHeader( 'X-Config-Override' ) ?: '{}', true );
 foreach ( $configOverrides as $name => $value ) {

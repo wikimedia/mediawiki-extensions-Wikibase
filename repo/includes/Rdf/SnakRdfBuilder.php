@@ -90,12 +90,8 @@ class SnakRdfBuilder {
 
 				$stableBNodeLabel = md5( implode( '-', [
 					$parentLName,
-					$this->vocabulary->tmpFixRdfSomevalueHash
-						? $this->vocabulary->getNamespaceURI( $propertyNamespace )
-						: $propertyNamespace,
-					$this->vocabulary->tmpFixRdfSomevalueHash
-						? $this->vocabulary->getNamespaceURI( $snakNamespace )
-						: $snakNamespace,
+					$this->vocabulary->getNamespaceURI( $propertyNamespace ),
+					$this->vocabulary->getNamespaceURI( $snakNamespace ),
 					$snak->getHash(),
 				] ) );
 				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank( $stableBNodeLabel ) );

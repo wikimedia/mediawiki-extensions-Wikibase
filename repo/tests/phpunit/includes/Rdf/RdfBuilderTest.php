@@ -661,9 +661,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[],
 			[],
 			$props,
-			'http://creativecommons.org/publicdomain/zero/1.0/',
-			true,
-			true
+			'http://creativecommons.org/publicdomain/zero/1.0/'
 		);
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
 
@@ -690,9 +688,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			[],
 			[],
 			$props,
-			'http://creativecommons.org/publicdomain/zero/1.0/',
-			true,
-			true
+			'http://creativecommons.org/publicdomain/zero/1.0/'
 		);
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
 
