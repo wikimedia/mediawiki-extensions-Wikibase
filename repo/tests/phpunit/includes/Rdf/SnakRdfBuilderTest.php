@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\Rdf\EntityMentionListener;
@@ -170,6 +171,28 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$expectedTriples = [
 			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://foreign.test/prop/novalue/P2> .',
+		];
+
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );
+
+		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
+	}
+
+	public function testAddSnakValue_somevalue() {
+		$propertyId = new NumericPropertyId( 'P2' );
+		$snak = new PropertySomeValueSnak( $propertyId );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
+
+		$builder = $this->newBuilder(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$propertyId->getSerialization(),
+			'wikibase-item'
+		);
+
+		$expectedTriples = [
+			'<http://acme.test/Q11> <http://acme.test/prop/direct/P2> _:621074cf8aeac27a6155ea12e2718d52 .',
 		];
 
 		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );

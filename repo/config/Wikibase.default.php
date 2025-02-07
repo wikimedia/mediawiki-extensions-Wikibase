@@ -467,4 +467,14 @@ return [
 	 * @see https://phabricator.wikimedia.org/T338483
 	 */
 	'tmpEnableScopedTypeaheadSearch' => false,
+
+	/**
+	 * @note This config option is primarily added for the Wikidata transition use-case
+	 * and must be considered temporary. It will be removed in the future with no warning.
+	 *
+	 * @var bool Whether to use the prefix URI, rather than the prefix name,
+	 * for the hash that forms the stable label of a somevalue snak blank node.
+	 * @see https://phabricator.wikimedia.org/T384344
+	 */
+	'tmpFixRdfSomevalueHash' => false,
 ];
