@@ -54,5 +54,13 @@
 			"description": "Wikibase Data Model - Statements",
 			"url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements"
 		}
+	},
+	{
+		"name": "Property data types",
+		"description": "Wikibase Property Data Types",
+		"externalDocs": {
+			"description": "Wikibase Dataytpes",
+			"url": "https://doc.wikimedia.org/Wikibase/master/php/docs_topics_datatypes.html"
+		}
 	}
 ]

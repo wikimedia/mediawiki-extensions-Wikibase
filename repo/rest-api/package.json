@@ -7,18 +7,20 @@
 		"api-testing:e2e-crud": "npm run mocha -- --require ../domains/crud/tests/mocha/api-testing/fixtures.cjs ../domains/crud/tests/mocha/api-testing",
 		"api-testing:e2e-rest": "npm run mocha -- tests/mocha/",
 		"api-testing:spec-crud": "npm run mocha -- ../domains/crud/tests/mocha/openapi-validation",
-		"api-testing": "npm-run-all api-testing:*",
+		"api-testing": "npm-run-all build:spec api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel lint:*",
-		"lint:openapi": "redocly lint specs/openapi.json",
+		"lint:openapi": "npm run spec:join && redocly lint specs/openapi-joined.json",
 		"lint:eslint": "eslint . --config .eslintrc.json --max-warnings 0",
 		"lint:eslint-crud": "eslint ../domains/crud/tests/mocha --config ../domains/crud/tests/mocha/.eslintrc.json --max-warnings 0",
 		"fix": "npm-run-all --parallel fix:*",
 		"fix:eslint": "eslint --config .eslintrc.json --fix .",
-		"build": "run-s build:docs build:spec",
+		"build": "run-s build:spec build:docs",
 		"build:docs": "webpack --config docs/webpack.config.js",
 		"serve:docs": "webpack serve --config docs/webpack.config.js --mode development",
-		"build:spec": "redocly bundle specs/openapi.json --dereferenced -o src/openapi.json && cp src/openapi.json ../../docs/rest-api/openapi.json"
+		"build:spec": "run-s spec:join spec:bundle",
+		"spec:join": "redocly join --without-x-tag-groups specs/openapi.json ../domains/crud/specs/index.fragment.json ../domains/search/specs/index.fragment.json -o specs/openapi-joined.json",
+		"spec:bundle": "redocly bundle specs/openapi-joined.json --dereferenced -o src/openapi.json"
 	},
 	"engines": {
 		"node": ">=18"

@@ -8,7 +8,7 @@ describe( 'GET /openapi.json', () => {
 
 	it( 'can GET the latest version of the OpenAPI document', async () => {
 		const config = await loadConfig( { configPath: 'redocly.yaml' } );
-		const schema = ( await bundle( { ref: './specs/openapi.json', config, dereference: true } ) ).bundle.parsed;
+		const schema = ( await bundle( { ref: './specs/openapi-joined.json', config, dereference: true } ) ).bundle.parsed;
 		const response = await new RequestBuilder()
 			.withRoute( 'GET', '/v1/openapi.json' )
 			.makeRequest();

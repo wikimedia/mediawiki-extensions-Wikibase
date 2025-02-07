@@ -20,12 +20,22 @@
   ],
   "tags": [
     {
+      "name": "OpenAPI document",
+      "description": "OpenAPI document",
+      "externalDocs": {
+        "description": "Wikibase REST API",
+        "url": "https://doc.wikimedia.org/Wikibase/master/php/repo_rest-api_README.html"
+      },
+      "x-displayName": "OpenAPI document"
+    },
+    {
       "name": "items",
       "description": "Wikibase Items",
       "externalDocs": {
         "description": "Wikibase Data Model - Items",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Items"
-      }
+      },
+      "x-displayName": "items"
     },
     {
       "name": "sitelinks",
@@ -33,7 +43,8 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Sitelinks",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Sitelinks"
-      }
+      },
+      "x-displayName": "sitelinks"
     },
     {
       "name": "properties",
@@ -41,7 +52,8 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Properties",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Properties"
-      }
+      },
+      "x-displayName": "properties"
     },
     {
       "name": "labels",
@@ -49,7 +61,8 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Terms",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties"
-      }
+      },
+      "x-displayName": "labels"
     },
     {
       "name": "descriptions",
@@ -57,7 +70,8 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Terms",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties"
-      }
+      },
+      "x-displayName": "descriptions"
     },
     {
       "name": "aliases",
@@ -65,7 +79,8 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Terms",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties"
-      }
+      },
+      "x-displayName": "aliases"
     },
     {
       "name": "statements",
@@ -73,7 +88,22 @@
       "externalDocs": {
         "description": "Wikibase Data Model - Statements",
         "url": "https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements"
-      }
+      },
+      "x-displayName": "statements"
+    },
+    {
+      "name": "Property data types",
+      "description": "Wikibase Property Data Types",
+      "externalDocs": {
+        "description": "Wikibase Dataytpes",
+        "url": "https://doc.wikimedia.org/Wikibase/master/php/docs_topics_datatypes.html"
+      },
+      "x-displayName": "Property data types"
+    },
+    {
+      "name": "item search",
+      "description": "Simple item search",
+      "x-displayName": "item search"
     }
   ],
   "paths": {
@@ -33483,6 +33513,27 @@
           }
         }
       }
+    },
+    "/v0/search/items": {
+      "get": {
+        "operationId": "searchItem",
+        "tags": [
+          "item search"
+        ],
+        "summary": "Simple Item search by label",
+        "responses": {
+          "200": {
+            "description": "A list of search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -42487,6 +42538,69 @@
           "title"
         ]
       },
+      "Sitelinks": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "badges": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "url": {
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "title"
+          ]
+        }
+      },
+      "PropertyValuePair": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "The ID of the Property",
+                "type": "string"
+              },
+              "data_type": {
+                "description": "The data type of the Property",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "readOnly": true
+              }
+            }
+          },
+          "value": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "description": "The value, if type == \"value\", otherwise omitted"
+              },
+              "type": {
+                "description": "The value type",
+                "type": "string",
+                "enum": [
+                  "value",
+                  "somevalue",
+                  "novalue"
+                ]
+              }
+            }
+          }
+        }
+      },
       "Reference": {
         "type": "object",
         "properties": {
@@ -42938,6 +43052,643 @@
           }
         }
       },
+      "MediawikiEdit": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "bot": {
+            "type": "boolean",
+            "default": false
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "PropertyValueResponseRequired": {
+        "required": [
+          "property",
+          "value"
+        ],
+        "properties": {
+          "property": {
+            "required": [
+              "id",
+              "data_type"
+            ]
+          },
+          "value": {
+            "required": [
+              "type"
+            ]
+          }
+        }
+      },
+      "ReferenceResponseRequired": {
+        "required": [
+          "hash",
+          "parts"
+        ],
+        "properties": {
+          "hash": {
+            "type": "string"
+          },
+          "parts": {
+            "items": {
+              "required": [
+                "property",
+                "value"
+              ],
+              "properties": {
+                "property": {
+                  "required": [
+                    "id",
+                    "data_type"
+                  ]
+                },
+                "value": {
+                  "required": [
+                    "type"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "StatementResponseRequired": {
+        "allOf": [
+          {
+            "required": [
+              "property",
+              "value"
+            ],
+            "properties": {
+              "property": {
+                "required": [
+                  "id",
+                  "data_type"
+                ]
+              },
+              "value": {
+                "required": [
+                  "type"
+                ]
+              }
+            }
+          },
+          {
+            "required": [
+              "id",
+              "rank",
+              "qualifiers",
+              "references"
+            ],
+            "properties": {
+              "qualifiers": {
+                "items": {
+                  "required": [
+                    "property",
+                    "value"
+                  ],
+                  "properties": {
+                    "property": {
+                      "required": [
+                        "id",
+                        "data_type"
+                      ]
+                    },
+                    "value": {
+                      "required": [
+                        "type"
+                      ]
+                    }
+                  }
+                }
+              },
+              "references": {
+                "items": {
+                  "required": [
+                    "hash",
+                    "parts"
+                  ],
+                  "properties": {
+                    "hash": {
+                      "type": "string"
+                    },
+                    "parts": {
+                      "items": {
+                        "required": [
+                          "property",
+                          "value"
+                        ],
+                        "properties": {
+                          "property": {
+                            "required": [
+                              "id",
+                              "data_type"
+                            ]
+                          },
+                          "value": {
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ItemResponse": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "readOnly": true
+              },
+              "type": {
+                "type": "string",
+                "const": "item",
+                "readOnly": true
+              },
+              "labels": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "descriptions": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "aliases": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "sitelinks": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "badges": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "url": {
+                      "type": "string",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "title"
+                  ]
+                }
+              },
+              "statements": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "The globally unique identifier for this Statement",
+                            "type": "string",
+                            "readOnly": true
+                          },
+                          "rank": {
+                            "description": "The rank of the Statement",
+                            "type": "string",
+                            "enum": [
+                              "deprecated",
+                              "normal",
+                              "preferred"
+                            ],
+                            "default": "normal"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "property": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "The ID of the Property",
+                                "type": "string"
+                              },
+                              "data_type": {
+                                "description": "The data type of the Property",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "content": {
+                                "description": "The value, if type == \"value\", otherwise omitted"
+                              },
+                              "type": {
+                                "description": "The value type",
+                                "type": "string",
+                                "enum": [
+                                  "value",
+                                  "somevalue",
+                                  "novalue"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "qualifiers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "property": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the Property",
+                                      "type": "string"
+                                    },
+                                    "data_type": {
+                                      "description": "The data type of the Property",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "readOnly": true
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "content": {
+                                      "description": "The value, if type == \"value\", otherwise omitted"
+                                    },
+                                    "type": {
+                                      "description": "The value type",
+                                      "type": "string",
+                                      "enum": [
+                                        "value",
+                                        "somevalue",
+                                        "novalue"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          },
+                          "references": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "description": "Hash of the Reference",
+                                  "type": "string",
+                                  "readOnly": true
+                                },
+                                "parts": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "property": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "description": "The ID of the Property",
+                                            "type": "string"
+                                          },
+                                          "data_type": {
+                                            "description": "The data type of the Property",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
+                                            "readOnly": true
+                                          }
+                                        }
+                                      },
+                                      "value": {
+                                        "type": "object",
+                                        "properties": {
+                                          "content": {
+                                            "description": "The value, if type == \"value\", otherwise omitted"
+                                          },
+                                          "type": {
+                                            "description": "The value type",
+                                            "type": "string",
+                                            "enum": [
+                                              "value",
+                                              "somevalue",
+                                              "novalue"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "required": [
+              "id",
+              "type",
+              "labels",
+              "descriptions",
+              "aliases",
+              "statements",
+              "sitelinks"
+            ],
+            "properties": {
+              "sitelinks": {
+                "additionalProperties": {
+                  "required": [
+                    "title",
+                    "badges",
+                    "url"
+                  ]
+                }
+              },
+              "statements": {
+                "additionalProperties": {
+                  "items": {
+                    "allOf": [
+                      {
+                        "required": [
+                          "property",
+                          "value"
+                        ],
+                        "properties": {
+                          "property": {
+                            "required": [
+                              "id",
+                              "data_type"
+                            ]
+                          },
+                          "value": {
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "rank",
+                          "qualifiers",
+                          "references"
+                        ],
+                        "properties": {
+                          "qualifiers": {
+                            "items": {
+                              "required": [
+                                "property",
+                                "value"
+                              ],
+                              "properties": {
+                                "property": {
+                                  "required": [
+                                    "id",
+                                    "data_type"
+                                  ]
+                                },
+                                "value": {
+                                  "required": [
+                                    "type"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "references": {
+                            "items": {
+                              "required": [
+                                "hash",
+                                "parts"
+                              ],
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                },
+                                "parts": {
+                                  "items": {
+                                    "required": [
+                                      "property",
+                                      "value"
+                                    ],
+                                    "properties": {
+                                      "property": {
+                                        "required": [
+                                          "id",
+                                          "data_type"
+                                        ]
+                                      },
+                                      "value": {
+                                        "required": [
+                                          "type"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "context": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "PatchDocument": {
+        "type": "object",
+        "properties": {
+          "patch": {
+            "description": "A JSON Patch document as defined by RFC 6902",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "description": "The operation to perform",
+                  "type": "string",
+                  "enum": [
+                    "add",
+                    "copy",
+                    "move",
+                    "remove",
+                    "replace",
+                    "test"
+                  ]
+                },
+                "path": {
+                  "description": "A JSON Pointer",
+                  "type": "string"
+                },
+                "from": {
+                  "description": "A JSON Pointer",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "The value to be used within the operation"
+                }
+              },
+              "required": [
+                "op",
+                "path"
+              ]
+            }
+          }
+        },
+        "required": [
+          "patch"
+        ]
+      },
+      "PatchRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "patch": {
+                "description": "A JSON Patch document as defined by RFC 6902",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "description": "The operation to perform",
+                      "type": "string",
+                      "enum": [
+                        "add",
+                        "copy",
+                        "move",
+                        "remove",
+                        "replace",
+                        "test"
+                      ]
+                    },
+                    "path": {
+                      "description": "A JSON Pointer",
+                      "type": "string"
+                    },
+                    "from": {
+                      "description": "A JSON Pointer",
+                      "type": "string"
+                    },
+                    "value": {
+                      "description": "The value to be used within the operation"
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "path"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "patch"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "bot": {
+                "type": "boolean",
+                "default": false
+              },
+              "comment": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
       "Property": {
         "type": "object",
         "properties": {
@@ -43150,6 +43901,1126 @@
         },
         "required": [
           "data_type"
+        ]
+      },
+      "PropertyResponse": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "readOnly": true
+              },
+              "type": {
+                "type": "string",
+                "const": "property",
+                "readOnly": true
+              },
+              "data_type": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "descriptions": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "aliases": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "statements": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "The globally unique identifier for this Statement",
+                            "type": "string",
+                            "readOnly": true
+                          },
+                          "rank": {
+                            "description": "The rank of the Statement",
+                            "type": "string",
+                            "enum": [
+                              "deprecated",
+                              "normal",
+                              "preferred"
+                            ],
+                            "default": "normal"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "property": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "The ID of the Property",
+                                "type": "string"
+                              },
+                              "data_type": {
+                                "description": "The data type of the Property",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "content": {
+                                "description": "The value, if type == \"value\", otherwise omitted"
+                              },
+                              "type": {
+                                "description": "The value type",
+                                "type": "string",
+                                "enum": [
+                                  "value",
+                                  "somevalue",
+                                  "novalue"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "qualifiers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "property": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the Property",
+                                      "type": "string"
+                                    },
+                                    "data_type": {
+                                      "description": "The data type of the Property",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "readOnly": true
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "content": {
+                                      "description": "The value, if type == \"value\", otherwise omitted"
+                                    },
+                                    "type": {
+                                      "description": "The value type",
+                                      "type": "string",
+                                      "enum": [
+                                        "value",
+                                        "somevalue",
+                                        "novalue"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          },
+                          "references": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "description": "Hash of the Reference",
+                                  "type": "string",
+                                  "readOnly": true
+                                },
+                                "parts": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "property": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "description": "The ID of the Property",
+                                            "type": "string"
+                                          },
+                                          "data_type": {
+                                            "description": "The data type of the Property",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
+                                            "readOnly": true
+                                          }
+                                        }
+                                      },
+                                      "value": {
+                                        "type": "object",
+                                        "properties": {
+                                          "content": {
+                                            "description": "The value, if type == \"value\", otherwise omitted"
+                                          },
+                                          "type": {
+                                            "description": "The value type",
+                                            "type": "string",
+                                            "enum": [
+                                              "value",
+                                              "somevalue",
+                                              "novalue"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "data_type"
+            ]
+          },
+          {
+            "required": [
+              "id",
+              "type",
+              "data_type",
+              "labels",
+              "descriptions",
+              "aliases",
+              "statements"
+            ],
+            "properties": {
+              "statements": {
+                "additionalProperties": {
+                  "items": {
+                    "allOf": [
+                      {
+                        "required": [
+                          "property",
+                          "value"
+                        ],
+                        "properties": {
+                          "property": {
+                            "required": [
+                              "id",
+                              "data_type"
+                            ]
+                          },
+                          "value": {
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "rank",
+                          "qualifiers",
+                          "references"
+                        ],
+                        "properties": {
+                          "qualifiers": {
+                            "items": {
+                              "required": [
+                                "property",
+                                "value"
+                              ],
+                              "properties": {
+                                "property": {
+                                  "required": [
+                                    "id",
+                                    "data_type"
+                                  ]
+                                },
+                                "value": {
+                                  "required": [
+                                    "type"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "references": {
+                            "items": {
+                              "required": [
+                                "hash",
+                                "parts"
+                              ],
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                },
+                                "parts": {
+                                  "items": {
+                                    "required": [
+                                      "property",
+                                      "value"
+                                    ],
+                                    "properties": {
+                                      "property": {
+                                        "required": [
+                                          "id",
+                                          "data_type"
+                                        ]
+                                      },
+                                      "value": {
+                                        "required": [
+                                          "type"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "SetDescriptionInLanguage": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "description"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "bot": {
+                "type": "boolean",
+                "default": false
+              },
+              "comment": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "PropertyValueSchemaRequired": {
+        "properties": {
+          "property": {
+            "required": [
+              "id",
+              "data_type"
+            ]
+          },
+          "value": {
+            "required": [
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "property",
+          "value"
+        ]
+      },
+      "StatementSchemaRequired": {
+        "allOf": [
+          {
+            "properties": {
+              "property": {
+                "required": [
+                  "id",
+                  "data_type"
+                ]
+              },
+              "value": {
+                "required": [
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "property",
+              "value"
+            ]
+          },
+          {
+            "properties": {
+              "qualifiers": {
+                "items": {
+                  "properties": {
+                    "property": {
+                      "required": [
+                        "id",
+                        "data_type"
+                      ]
+                    },
+                    "value": {
+                      "required": [
+                        "type"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "property",
+                    "value"
+                  ]
+                }
+              },
+              "references": {
+                "properties": {
+                  "parts": {
+                    "items": {
+                      "properties": {
+                        "property": {
+                          "required": [
+                            "id",
+                            "data_type"
+                          ]
+                        },
+                        "value": {
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "property",
+                        "value"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "hash",
+                  "parts"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "rank",
+              "qualifiers",
+              "references"
+            ]
+          }
+        ]
+      },
+      "StatementSchema": {
+        "allOf": [
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The globally unique identifier for this Statement",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "rank": {
+                    "description": "The rank of the Statement",
+                    "type": "string",
+                    "enum": [
+                      "deprecated",
+                      "normal",
+                      "preferred"
+                    ],
+                    "default": "normal"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "property": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "The ID of the Property",
+                        "type": "string"
+                      },
+                      "data_type": {
+                        "description": "The data type of the Property",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "readOnly": true
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "description": "The value, if type == \"value\", otherwise omitted"
+                      },
+                      "type": {
+                        "description": "The value type",
+                        "type": "string",
+                        "enum": [
+                          "value",
+                          "somevalue",
+                          "novalue"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "qualifiers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "property": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The ID of the Property",
+                              "type": "string"
+                            },
+                            "data_type": {
+                              "description": "The data type of the Property",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        "value": {
+                          "type": "object",
+                          "properties": {
+                            "content": {
+                              "description": "The value, if type == \"value\", otherwise omitted"
+                            },
+                            "type": {
+                              "description": "The value type",
+                              "type": "string",
+                              "enum": [
+                                "value",
+                                "somevalue",
+                                "novalue"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "default": []
+                  },
+                  "references": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "hash": {
+                          "description": "Hash of the Reference",
+                          "type": "string",
+                          "readOnly": true
+                        },
+                        "parts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "property": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "description": "The ID of the Property",
+                                    "type": "string"
+                                  },
+                                  "data_type": {
+                                    "description": "The data type of the Property",
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "readOnly": true
+                                  }
+                                }
+                              },
+                              "value": {
+                                "type": "object",
+                                "properties": {
+                                  "content": {
+                                    "description": "The value, if type == \"value\", otherwise omitted"
+                                  },
+                                  "type": {
+                                    "description": "The value type",
+                                    "type": "string",
+                                    "enum": [
+                                      "value",
+                                      "somevalue",
+                                      "novalue"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "default": []
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "property": {
+                    "required": [
+                      "id",
+                      "data_type"
+                    ]
+                  },
+                  "value": {
+                    "required": [
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "property",
+                  "value"
+                ]
+              },
+              {
+                "properties": {
+                  "qualifiers": {
+                    "items": {
+                      "properties": {
+                        "property": {
+                          "required": [
+                            "id",
+                            "data_type"
+                          ]
+                        },
+                        "value": {
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "property",
+                        "value"
+                      ]
+                    }
+                  },
+                  "references": {
+                    "properties": {
+                      "parts": {
+                        "items": {
+                          "properties": {
+                            "property": {
+                              "required": [
+                                "id",
+                                "data_type"
+                              ]
+                            },
+                            "value": {
+                              "required": [
+                                "type"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "property",
+                            "value"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "hash",
+                      "parts"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "rank",
+                  "qualifiers",
+                  "references"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "PropertyValuePairRequestRequired": {
+        "properties": {
+          "property": {
+            "required": [
+              "id"
+            ]
+          },
+          "value": {
+            "required": [
+              "type"
+            ]
+          }
+        },
+        "required": [
+          "property",
+          "value"
+        ]
+      },
+      "StatementRequestRequired": {
+        "allOf": [
+          {
+            "properties": {
+              "property": {
+                "required": [
+                  "id"
+                ]
+              },
+              "value": {
+                "required": [
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "property",
+              "value"
+            ]
+          },
+          {
+            "properties": {
+              "qualifiers": {
+                "items": {
+                  "properties": {
+                    "property": {
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    "value": {
+                      "required": [
+                        "type"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "property",
+                    "value"
+                  ]
+                }
+              },
+              "references": {
+                "items": {
+                  "properties": {
+                    "parts": {
+                      "items": {
+                        "properties": {
+                          "property": {
+                            "required": [
+                              "id"
+                            ]
+                          },
+                          "value": {
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "property",
+                          "value"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "parts"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "StatementRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "statement": {
+                "allOf": [
+                  {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "The globally unique identifier for this Statement",
+                            "type": "string",
+                            "readOnly": true
+                          },
+                          "rank": {
+                            "description": "The rank of the Statement",
+                            "type": "string",
+                            "enum": [
+                              "deprecated",
+                              "normal",
+                              "preferred"
+                            ],
+                            "default": "normal"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "property": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "The ID of the Property",
+                                "type": "string"
+                              },
+                              "data_type": {
+                                "description": "The data type of the Property",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "content": {
+                                "description": "The value, if type == \"value\", otherwise omitted"
+                              },
+                              "type": {
+                                "description": "The value type",
+                                "type": "string",
+                                "enum": [
+                                  "value",
+                                  "somevalue",
+                                  "novalue"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "qualifiers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "property": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "The ID of the Property",
+                                      "type": "string"
+                                    },
+                                    "data_type": {
+                                      "description": "The data type of the Property",
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "readOnly": true
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "content": {
+                                      "description": "The value, if type == \"value\", otherwise omitted"
+                                    },
+                                    "type": {
+                                      "description": "The value type",
+                                      "type": "string",
+                                      "enum": [
+                                        "value",
+                                        "somevalue",
+                                        "novalue"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          },
+                          "references": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "description": "Hash of the Reference",
+                                  "type": "string",
+                                  "readOnly": true
+                                },
+                                "parts": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "property": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "description": "The ID of the Property",
+                                            "type": "string"
+                                          },
+                                          "data_type": {
+                                            "description": "The data type of the Property",
+                                            "type": [
+                                              "string",
+                                              "null"
+                                            ],
+                                            "readOnly": true
+                                          }
+                                        }
+                                      },
+                                      "value": {
+                                        "type": "object",
+                                        "properties": {
+                                          "content": {
+                                            "description": "The value, if type == \"value\", otherwise omitted"
+                                          },
+                                          "type": {
+                                            "description": "The value type",
+                                            "type": "string",
+                                            "enum": [
+                                              "value",
+                                              "somevalue",
+                                              "novalue"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "default": []
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "property": {
+                            "required": [
+                              "id"
+                            ]
+                          },
+                          "value": {
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "property",
+                          "value"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "qualifiers": {
+                            "items": {
+                              "properties": {
+                                "property": {
+                                  "required": [
+                                    "id"
+                                  ]
+                                },
+                                "value": {
+                                  "required": [
+                                    "type"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "property",
+                                "value"
+                              ]
+                            }
+                          },
+                          "references": {
+                            "items": {
+                              "properties": {
+                                "parts": {
+                                  "items": {
+                                    "properties": {
+                                      "property": {
+                                        "required": [
+                                          "id"
+                                        ]
+                                      },
+                                      "value": {
+                                        "required": [
+                                          "type"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "property",
+                                      "value"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "parts"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "required": [
+              "statement"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "bot": {
+                "type": "boolean",
+                "default": false
+              },
+              "comment": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "AddAliasesInLanguage": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "aliases": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "aliases"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              },
+              "bot": {
+                "type": "boolean",
+                "default": false
+              },
+              "comment": {
+                "type": "string"
+              }
+            }
+          }
         ]
       },
       "Qualifier": {

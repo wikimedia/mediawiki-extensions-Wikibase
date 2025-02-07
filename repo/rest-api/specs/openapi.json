@@ -14,28 +14,46 @@
 		}
 	},
 	"paths": {
-		"$ref": "../../domains/crud/specs/resources/index.json"
-	},
-	"components": {
-		"parameters": {
-			"$ref": "../../domains/crud/specs/global/parameters.json"
-		},
-		"requestBodies": {
-			"$ref": "../../domains/crud/specs/global/requests.json"
-		},
-		"responses": {
-			"$ref": "../../domains/crud/specs/global/responses.json"
-		},
-		"schemas": {
-			"$ref": "../../domains/crud/specs/global/schemas.json"
-		},
-		"examples": {
-			"$ref": "../../domains/crud/specs/global/examples.json"
+		"/v1/openapi.json": {
+			"get": {
+				"operationId": "getOpenApiDoc",
+				"tags": [ "OpenAPI document" ],
+				"summary": "Retrieve the OpenAPI document",
+				"responses": {
+					"200": {
+						"description": "OpenAPI document",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								},
+								"example": {
+									"openapi": "...",
+									"info": {
+										"title": "Wikibase REST API",
+										"version": "...",
+										"description": "OpenAPI definition of Wikibase REST API"
+									},
+									"paths": "..."
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
-	"tags": {
-		"$ref": "../../domains/crud/specs/global/tags.json"
-	},
+	"components": {	},
+	"tags": [
+		{
+			"name": "OpenAPI document",
+			"description": "OpenAPI document",
+			"externalDocs": {
+				"description": "Wikibase REST API",
+				"url": "https://doc.wikimedia.org/Wikibase/master/php/repo_rest-api_README.html"
+			}
+		}
+	],
 	"servers": [
 		{ "url": "https://wikibase.example/w/rest.php/wikibase" }
 	]
