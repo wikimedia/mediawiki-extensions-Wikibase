@@ -47,7 +47,7 @@ class InterWikiLinkExistsValidator implements ValueValidator {
 	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
-		Assert::parameterType( 'string|DataValues\StringValue', $value, '$value' );
+		Assert::parameterType( [ 'string', StringValue::class ], $value, '$value' );
 
 		if ( $value instanceof StringValue ) {
 			$value = $value->getValue();

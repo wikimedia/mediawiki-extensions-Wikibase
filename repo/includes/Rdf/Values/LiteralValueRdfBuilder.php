@@ -32,8 +32,8 @@ class LiteralValueRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string|null $typeLocal
 	 */
 	public function __construct( $typeBase, $typeLocal ) {
-		Assert::parameterType( 'string|null', $typeBase, '$typeBase' );
-		Assert::parameterType( 'string|null', $typeLocal, '$typeLocal' );
+		Assert::parameterType( [ 'string', 'null' ], $typeBase, '$typeBase' );
+		Assert::parameterType( [ 'string', 'null' ], $typeLocal, '$typeLocal' );
 
 		$this->typeBase = $typeBase;
 		$this->typeLocal = $typeLocal;
