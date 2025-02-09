@@ -36,7 +36,7 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 		HookContainer $hookContainer
 	) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
-		Assert::parameterElementType( 'string', array_keys( $entityContentModels ), 'keys of $entityContentModels' );
+		Assert::parameterKeyType( 'string', $entityContentModels, '$entityContentModels' );
 
 		$this->entityContentModels = $entityContentModels;
 		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityIdLookup::class, $lookups, $defaultLookup );
