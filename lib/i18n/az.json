@@ -64,6 +64,8 @@
 	"wikibase-time-precision-century": "$1. əsr",
 	"wikibase-time-precision-BCE": "e.ə. $1",
 	"wikibase-time-precision-BCE-Mannum": "e.ə. $1 milyonuncu il",
+	"wikibase-time-precision-BCE-annum": "e.ə. $1 minillik",
+	"wikibase-time-precision-BCE-millennium": "e.ə. $1 minillik",
 	"wikibase-time-precision-BCE-century": "e.ə. $1. əsr",
 	"wikibase-time-precision-BCE-10annum": "e.ə. $1 illər",
 	"wikibase-entity-summary-wbsetitem": "Yeni müddəa yaradıldı",
