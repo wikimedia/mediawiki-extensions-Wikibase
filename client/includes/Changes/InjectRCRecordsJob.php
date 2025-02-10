@@ -134,7 +134,7 @@ class InjectRCRecordsJob extends Job {
 		);
 		// TODO: disallow integer once T172394 has been deployed and old jobs have cleared the queue.
 		Assert::parameterType(
-			'integer|array',
+			[ 'integer', 'array' ],
 			$params['change'],
 			'$params[\'change\']'
 		);

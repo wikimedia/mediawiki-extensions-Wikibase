@@ -56,7 +56,7 @@ class TypeDispatchingWikiPageEntityMetaDataAccessor implements WikiPageEntityMet
 		$repositoryName
 	) {
 		Assert::parameterElementType(
-			'callable|' . WikiPageEntityMetaDataAccessor::class,
+			[ 'callable', WikiPageEntityMetaDataAccessor::class ],
 			$instansiators,
 			'$instansiators'
 		);
