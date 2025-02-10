@@ -18,7 +18,7 @@ class ByTypeDispatchingEntityPrefetcher implements EntityPrefetcher {
 
 	public function __construct( array $prefetchers ) {
 		Assert::parameterElementType( EntityPrefetcher::class, $prefetchers, '$prefetchers' );
-		Assert::parameterElementType( 'string', array_keys( $prefetchers ), 'keys of $prefetchers' );
+		Assert::parameterKeyType( 'string', $prefetchers, '$prefetchers' );
 
 		$this->prefetchers = $prefetchers;
 	}

@@ -78,7 +78,7 @@ class EntityDiffChangedAspects implements Serializable {
 		Assert::parameterElementType( 'string', $labelChanges, '$labelChanges' );
 		Assert::parameterElementType( 'string', $descriptionChanges, '$descriptionChanges' );
 		Assert::parameterElementType( 'string', $statementChanges, '$statementChanges' );
-		Assert::parameterElementType( 'string', array_keys( $siteLinkChanges ), 'array_keys( $siteLinkChanges )' );
+		Assert::parameterKeyType( 'string', $siteLinkChanges, '$siteLinkChanges' );
 		Assert::parameterElementType( 'array', $siteLinkChanges, '$siteLinkChanges' );
 		Assert::parameterType( 'boolean', $otherChanges, '$otherChanges' );
 

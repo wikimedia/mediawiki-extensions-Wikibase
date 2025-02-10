@@ -29,11 +29,7 @@ class EntityChangeOpProvider {
 	 */
 	public function __construct( array $changeOpDeserializerInstantiators ) {
 		Assert::parameterElementType( 'callable', $changeOpDeserializerInstantiators, '$changeOpDeserializerInstantiators' );
-		Assert::parameterElementType(
-			'string',
-			array_keys( $changeOpDeserializerInstantiators ),
-			'array_keys( $changeOpDeserializerInstantiators )'
-		);
+		Assert::parameterKeyType( 'string', $changeOpDeserializerInstantiators, '$changeOpDeserializerInstantiators' );
 
 		$this->changeOpDeserializerInstantiators = $changeOpDeserializerInstantiators;
 	}

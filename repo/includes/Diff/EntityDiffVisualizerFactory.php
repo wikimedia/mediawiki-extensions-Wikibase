@@ -60,11 +60,7 @@ class EntityDiffVisualizerFactory {
 		OutputFormatSnakFormatterFactory $snakFormatterFactory
 	) {
 		Assert::parameterElementType( 'callable', $entityDiffVisualizerInstantiators, '$entityDiffVisualizerInstantiators' );
-		Assert::parameterElementType(
-			'string',
-			array_keys( $entityDiffVisualizerInstantiators ),
-			'array_keys( $entityDiffVisualizerInstantiators )'
-		);
+		Assert::parameterKeyType( 'string', $entityDiffVisualizerInstantiators, '$entityDiffVisualizerInstantiators' );
 
 		$this->entityDiffVisualizerInstantiators = $entityDiffVisualizerInstantiators;
 		$this->claimDiffer = $claimDiffer;
