@@ -88,7 +88,16 @@ class SnakRdfBuilder {
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$stableBNodeLabel = md5( implode( '-', [ $parentLName, $propertyNamespace, $snakNamespace, $snak->getHash() ] ) );
+				$stableBNodeLabel = md5( implode( '-', [
+					$parentLName,
+					$this->vocabulary->tmpFixRdfSomevalueHash
+						? $this->vocabulary->getNamespaceURI( $propertyNamespace )
+						: $propertyNamespace,
+					$this->vocabulary->tmpFixRdfSomevalueHash
+						? $this->vocabulary->getNamespaceURI( $snakNamespace )
+						: $snakNamespace,
+					$snak->getHash(),
+				] ) );
 				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank( $stableBNodeLabel ) );
 				break;
 			case 'novalue':

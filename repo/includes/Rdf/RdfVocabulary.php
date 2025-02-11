@@ -136,6 +136,8 @@ class RdfVocabulary {
 	/** @var string[] */
 	private $sourceNameByEntityType;
 
+	public bool $tmpFixRdfSomevalueHash;
+
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
 	 * @param string[] $dataUris Associative array mapping source/repository names to base URIs for entity description URIs.
@@ -149,6 +151,7 @@ class RdfVocabulary {
 	 *                 pageProp => [ 'name' => wikibase predicate, 'type' => integer ]
 	 *                 All predicates will be prefixed with wikibase:
 	 * @param string $licenseUrl
+	 * @param bool $tmpFixRdfSomevalueHash Temporary feature flag.
 	 */
 	public function __construct(
 		array $conceptUris,
@@ -159,7 +162,8 @@ class RdfVocabulary {
 		array $canonicalLanguageCodes = [],
 		array $dataTypeUris = [],
 		array $pagePropertyDefs = [],
-		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
+		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/',
+		bool $tmpFixRdfSomevalueHash = false
 	) {
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
@@ -173,6 +177,7 @@ class RdfVocabulary {
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
 		$this->pagePropertyDefs = $pagePropertyDefs;
+		$this->tmpFixRdfSomevalueHash = $tmpFixRdfSomevalueHash;
 
 		$this->namespaces = [
 			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
