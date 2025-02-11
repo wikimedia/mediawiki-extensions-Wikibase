@@ -86,7 +86,9 @@ final class RepoHooks {
 			$skinName = $skin->getSkinName();
 			if ( $skinName === 'vector-2022' ) {
 				if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
+					$out->addModules( 'vue' );
 					$out->addModules( 'wikibase.vector.scopedTypeaheadSearch' );
+					$out->addModuleStyles( 'wikibase.vector.scopedTypeaheadSearchStyles' );
 				} else {
 					$out->addModules( 'wikibase.vector.searchClient' );
 				}
@@ -995,8 +997,22 @@ final class RepoHooks {
 		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
 			$modules['wikibase.vector.scopedTypeaheadSearch'] = $moduleTemplate + [
+				'class' => "MediaWiki\ResourceLoader\\CodexModule",
 				'packageFiles' => [
-					'resources/wikibase.vector.scopedTypeaheadSearch.js',
+					'resources/wikibase.vector.scopedtypeaheadsearch/init.js',
+					'resources/wikibase.vector.scopedtypeaheadsearch/ScopedTypeaheadSearch.vue',
+				],
+				"codexComponents" => [
+					"CdxSelect",
+					"CdxTypeaheadSearch",
+				],
+				'dependencies' => [
+					'vue',
+				],
+			];
+			$modules['wikibase.vector.scopedTypeaheadSearchStyles'] = $moduleTemplate + [
+				"styles" => [
+					'resources/wikibase.vector.scopedTypeaheadSearch.less',
 				],
 			];
 		}
