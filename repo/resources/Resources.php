@@ -117,7 +117,7 @@ return call_user_func( function() {
 				return new SettingsValueProvider(
 					WikibaseRepo::getSettings(),
 					'wbEnableMulLanguageCode',
-					'tmpEnableMulLanguageCode'
+					'enableMulLanguageCode'
 				);
 			},
 		],

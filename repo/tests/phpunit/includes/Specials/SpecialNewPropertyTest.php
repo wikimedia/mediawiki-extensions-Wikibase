@@ -39,7 +39,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 
-		WikibaseRepo::getSettings()->setSetting( 'tmpEnableMulLanguageCode', true );
+		WikibaseRepo::getSettings()->setSetting( 'enableMulLanguageCode', true );
 	}
 
 	protected function newSpecialPage() {
