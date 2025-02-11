@@ -68,7 +68,13 @@ class AddUnitConversions extends Maintenance {
 	private $normMap;
 
 	/**
-	 * Value URI prefix
+	 * Namespace name / prefix for values, e.g. "wdv"
+	 * @var string
+	 */
+	private $valueNs;
+
+	/**
+	 * Value URI prefix, e.g. "http://www.wikidata.org/value/"
 	 * @var string
 	 */
 	private $valueURI;
@@ -170,7 +176,8 @@ class AddUnitConversions extends Maintenance {
 		$this->rdfWriter = $this->createRdfWriter( $format );
 
 		$ns = $this->rdfVocabulary->getNamespaces();
-		$this->valueURI = $ns[RdfVocabulary::NS_VALUE];
+		$this->valueNs = $this->rdfVocabulary->statementNamespaceNames[''][RdfVocabulary::NS_VALUE];
+		$this->valueURI = $ns[$this->valueNs];
 		foreach ( $this->rdfVocabulary->claimToValueNormalized as $value => $norm ) {
 			$this->normMap[$ns[$this->rdfVocabulary->claimToValue[$value]]] = $norm;
 			$this->normalizedNames[$ns[$norm]] = true;
@@ -221,9 +228,9 @@ QUERY;
 			}
 			$id = str_replace( $this->valueURI, '', $value['v'] );
 			$map[$id] = $this->getNormalized( $id, $unit, $value );
-			$this->rdfWriter->about( RdfVocabulary::NS_VALUE, $id )
+			$this->rdfWriter->about( $this->valueNs, $id )
 				->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-				->is( RdfVocabulary::NS_VALUE, $map[$id] );
+				->is( $this->valueNs, $map[$id] );
 
 		}
 		$this->writeOut();
@@ -255,14 +262,14 @@ QUERY;
 		} else {
 			$normLName = $qNorm->getHash();
 
-			$this->rdfWriter->about( RdfVocabulary::NS_VALUE, $normLName )
+			$this->rdfWriter->about( $this->valueNs, $normLName )
 				->a( RdfVocabulary::NS_ONTOLOGY, $this->rdfVocabulary->getValueTypeName( $qNorm ) );
 
 			$this->builder->writeQuantityValue( $qNorm );
 
-			$this->rdfWriter->about( RdfVocabulary::NS_VALUE, $normLName )
+			$this->rdfWriter->about( $this->valueNs, $normLName )
 				->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-				->is( RdfVocabulary::NS_VALUE, $normLName );
+				->is( $this->valueNs, $normLName );
 
 			return $normLName;
 		}
@@ -312,7 +319,7 @@ QUERY;
 			$v = str_replace( $this->valueURI, '', $statement['v'] );
 			$this->rdfWriter->about( $statement['s'] )
 				->say( $this->normMap[$prefix], $name )
-				->is( RdfVocabulary::NS_VALUE, $map[$v] );
+				->is( $this->valueNs, $map[$v] );
 		}
 		$this->output( '.' );
 	}
