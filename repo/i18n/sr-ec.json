@@ -361,7 +361,7 @@
 	"wikibase-listdatatypes-globe-coordinate-head": "географске координате",
 	"wikibase-listdatatypes-geo-shape-head": "географске контуре",
 	"wikibase-listdatatypes-tabular-data-head": "табеларни подаци",
-	"wikibase-listdatatypes-tabular-data-body": "Веза до табеларних података спремљених на Викимедијиној Остави (или другом конфигурисаном Викију). Погледајте „https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Tabular_Data” за још документације око табеларних података.",
+	"wikibase-listdatatypes-tabular-data-body": "Веза до табеларних података спремљених на Викимедијиној остави (или другом конфигурисаном Викију). Погледајте „https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Tabular_Data” за још документације око табеларних података.",
 	"wikibase-listdatatypes-quantity-head": "количина",
 	"wikibase-listdatatypes-quantity-body": "Дословно поље података за количину која се односи на неку врсту прецизно дефинисане јединице. Стварна јединица иде у вредности података који се уписују.\n* вредност - имплицитни део ниске (мапирање префикса јединице је нејасно)\n* јединица - имплицитно део ниске (мапирање стандардизационог телу је нејасно)\n* тачност (опционално) - експлицитна вредност податка, има исту јединицу као вредност",
 	"wikibase-listdatatypes-monolingualtext-head": "једнојезички текст",
