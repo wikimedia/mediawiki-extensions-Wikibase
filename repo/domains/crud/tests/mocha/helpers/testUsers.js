@@ -34,24 +34,39 @@ async function createUser( purpose, groups ) {
 	return user;
 }
 
-async function getOrCreateBotUser() {
-	const botUser = getExistingCredentials()[ PURPOSE_BOT ];
-	if ( !botUser ) {
-		return createUser( PURPOSE_BOT, [ 'bot' ] );
+async function getOrCreateUser( purpose, groups = [] ) {
+	const user = getExistingCredentials()[ purpose ];
+	if ( !user ) {
+		return createUser( purpose, groups );
 	}
 
-	return action.getAnon().account( botUser.name, botUser.password );
+	try {
+		return await action.getAnon().account( user.name, user.password );
+	} catch ( e ) {
+		if ( e.message && e.message.includes( 'Incorrect username or password entered' ) ) {
+			fs.unlink( CREDENTIALS_FILE, ( error ) => {
+				if ( error ) {
+					throw error;
+				}
+			} );
+			throw new Error(
+				`Failed to log in the "${purpose}" user, likely due to outdated credentials.` +
+				' The credentials file was now deleted, which should fix the issue. Please try again.'
+			);
+		}
+
+		throw e; // The credentials weren't the problem, rethrow.
+	}
+}
+
+function getOrCreateBotUser() {
+	return getOrCreateUser( PURPOSE_BOT, [ 'bot' ] );
 }
 
 // This user should only be used in AuthTest.js so that it can be blocked without interfering with other tests that run
 // in parallel.
-async function getOrCreateAuthTestUser() {
-	const authTestUser = getExistingCredentials()[ PURPOSE_AUTH_TEST ];
-	if ( !authTestUser ) {
-		return createUser( PURPOSE_AUTH_TEST, [] );
-	}
-
-	return action.getAnon().account( authTestUser.name, authTestUser.password );
+function getOrCreateAuthTestUser() {
+	return getOrCreateUser( PURPOSE_AUTH_TEST );
 }
 
 module.exports = { getOrCreateBotUser, getOrCreateAuthTestUser };
