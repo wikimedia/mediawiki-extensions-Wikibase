@@ -58,7 +58,7 @@
 	"wikibase-error-deserialize-error": "N'eus ket bet gallet distiriadenniñ ar roadennoù.",
 	"wikibase-error-serialize-error": "N'eus ket bet gallet stiriadenniñ ar roadennoù.",
 	"wikibase-error-invalid-entity-id": "Ne oar ket ar reizhiad diouzh an ID \"$2$. Grit gant un ID reizh.",
-	"wikibase-error-exceeded-entity-access-limit": "Aet oc'h war re a {{WBREPONAME}}.",
+	"wikibase-error-exceeded-entity-access-limit": "Aet oc'h war re a {{WBREPONAME}}. Niver a hennadoù kargetː $2/$3.",
 	"unconnectedpages": "Pajennoù n’int ket liammet ouzh elfenn ebet",
 	"unconnectedpages-summary": "Rollañ a ra ar bajenn-mañ ar pajennoù n'int ket stag ouzh un elfenn roadennoù liammet (en esaouennnoù anv a skor elfennoù liammet).",
 	"wikibase-unconnectedpages-submit": "Diskouez ar pajennoù",
