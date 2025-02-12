@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"MysticVoyager"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ᑎᑎᕋᖅᓯᒪᔪᖅ",
+	"wikibase-editlinks": "ᑐᕌᕈᑎᒃ ᐱᓐᓇᖅᑕᐅᕈᑎᑦ",
+	"wikibase-addlinkstitle": "ᐃᓚᓕᐅᑎᓗᒋᑦ ᐅᖃᐅᓯᐅᖃᑎᒌᑦ ᐊᑕᓂᖏᑦ",
+	"wikibase-linkitem-addlinks": "ᐃᓚᓕᐅᑎᓗᒋᑦ ᖃᕆᑕᐅᔭᒃᑯᑦ ᑐᕌᕈᑎᖏᑦ",
+	"wikibase-linkitem-title": "ᑐᕌᕈᑎᒥᐅᑦ ᓴᐅᒃᓴᒐᖅᑐᖅᓗ",
+	"wikibase-linkitem-linkpage": "ᑐᕌᕈᑎᒥᐅᑦ ᓴᐅᒃᓴᒐᖅᑐᖅᓗ",
+	"wikibase-linkitem-selectlink": "ᑐᑭᓯᔾᔪᑎᒋᐊᖅᑎᓪᓗᒍ ᐅᖃᖅᑎᓪᓗᒍ ᐊᑕᓂᖏᑦ ᑲᓱᖅᓯᒪᖅᑐᑦ ᓴᐅᒃᓴᒐᖅᑐᒥ.",
+	"wikibase-linkitem-input-site": "ᐅᖃᐅᓯᖅ:",
+	"wikibase-linkitem-input-page": "ᒪᒃᐱᒐᖅ:",
+	"wikibase-rc-hide-wikidata-hide": "ᐃᔨᖅᐳᖅ",
+	"wikibase-rc-hide-wikidata-show": "ᐊᓚᒃᑲᑎᖅᐹ",
+	"wikibase-otherprojects": "ᐊᓯᖏᓐᓂᑦ ᐱᓕᕆᐊᓂᑦ"
+}
