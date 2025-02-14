@@ -63,10 +63,10 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 				assert.header( response, 'X-Temporary-User-Created', user );
 			} );
 
-			// Note: If this test fails, it might be due to the throttler relying on caching.
-			// Ensure caching is enabled for the wiki under test, as the throttler won't work without it.
 			it( 'responds 429 when the temp user creation limit is reached', async () => {
 				const requestBuilder = withTempUsersEnabled( newRequestBuilder() )
+					// -1 means CACHE_ANYTHING. This is needed because the throttler relies on the cache.
+					.withConfigOverride( 'wgMainCacheType', -1 )
 					.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] );
 
 				await requestBuilder.makeRequest();
