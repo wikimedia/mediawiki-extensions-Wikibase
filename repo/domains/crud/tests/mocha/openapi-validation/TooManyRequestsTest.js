@@ -27,6 +27,8 @@ describe( 'Too Many Requests', () => {
 		].forEach( ( { newRequestBuilder } ) => {
 			it( `${newRequestBuilder().getRouteDescription()} responds with a valid 429 response`, async () => {
 				const response = await newRequestBuilder()
+					// -1 means CACHE_ANYTHING. This is needed because the throttler relies on the cache.
+					.withConfigOverride( 'wgMainCacheType', -1 )
 					.withConfigOverride( 'wgAutoCreateTempUser', { enabled: true } )
 					.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] )
 					.makeRequest();
