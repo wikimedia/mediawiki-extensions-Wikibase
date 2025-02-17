@@ -1,10 +1,5 @@
 [
 	{
-		"path": "/wikibase/v0/search/{entity_type}",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SearchEntitiesRouteHandler::factory"
-	},
-	{
 		"path": "/wikibase/v0/suggest/{entity_type}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SuggestEntitiesRouteHandler::factory"
