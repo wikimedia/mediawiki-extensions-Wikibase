@@ -47,7 +47,8 @@
 			"Ядерный Трамвай",
 			"Winston Sung",
 			"Butko",
-			"Dirruw'o"
+			"Dirruw'o",
+			"Cabadeck"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -382,6 +383,7 @@
 	"wikibase-api-no-such-entity": "Не удалось найти сущность с идентификатором «$1».",
 	"wikibase-api-no-such-entity-link": "Не удалось найти элемент, содержащий ссылку на указанный сайт и название страницы.",
 	"wikibase-api-no-such-sitelink": "При попытке отредактировать значки не удалось найти ссылку на сайт на «$1».",
+	"wikibase-api-not-statement": "Не утверждение.",
 	"wikibase-api-target-not-empty": "Перенаправление может быть создано только на месте пустой или удалённой сущности.",
 	"wikibase-api-target-is-redirect": "Целью перенаправления не должно быть другое перенаправление.",
 	"wikibase-api-target-is-incompatible": "Попытка перенаправить на сущность другого типа.",
