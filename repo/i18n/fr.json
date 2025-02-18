@@ -64,7 +64,8 @@
 			"Wladek92",
 			"Wyz",
 			"Yasten",
-			"Zolo"
+			"Zolo",
+			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -515,7 +516,7 @@
 	"wikibase-listdatatypes-quantity-head": "Quantité",
 	"wikibase-listdatatypes-quantity-body": "Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées :\n\n* montant — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair) ;\n* unité — partie implicite de la chaîne, « 1 » par défaut (sans correspondance claire à une unité définie par un corps ou une agence de normalisation) ;\n* majorant — majorant de la quantité (valeur maximale d’une estimation ou mesure)\n* minorant — minorant de la quantité (valeur minimale d’une estimation ou mesure)\n.",
 	"wikibase-listdatatypes-monolingualtext-head": "Texte monolingue",
-	"wikibase-listdatatypes-monolingualtext-body": "Champ de donnée littéral pour une chaîne qui n’est pas traduite dans d’autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. L’utilisation typique est pour un nom géographique tel qu’écrit dans la langue locale (nom parfois composé en plusieurs langues locales juxtaposées), un identifiant de type quelconque, une formule chimique, un nom de référence unique dans une norme internationale, un nom scientifique latin, ou encore une marque déposée pour un usage international :\n\n* langue — valeur explicite pour identifier la langue de la partie texte ;\n* valeur — valeur explicite pour la chaîne dans la variante spécifique de la langue.",
+	"wikibase-listdatatypes-monolingualtext-body": "Champ de données littérales pour une chaîne qui n'est pas traduite dans d'autres langues. Ce type de chaîne est défini une fois et réutilisé dans toutes les langues. Les utilisations typiques sont les noms géographiques écrits dans la langue locale, les identifiants de divers types, les formules chimiques et les noms scientifiques latins.\n* langue – valeur explicite pour identifier la langue de la partie texte\n* valeur – valeur explicite pour la chaîne variante spécifique à la langue",
 	"wikibase-listdatatypes-multilingualtext-head": "Texte multilingue",
 	"wikibase-listdatatypes-multilingualtext-body": "Champ de donnée littéral pour une chaîne qui doit être traduite en d’autres langues. Une utilisation typique concerne un nom d’entité d’intérêt global qui a des formes écrites non locales. Elles peuvent différer à la fois dans les langues, leurs systèmes d’écriture et leur variantes lexicales selon les conventions dialectales, orthographiques, grammaticales ou contextuelles utilisées :\n\n* langue — valeur explicite pour identifier la langue de la partie texte ;\n* valeur — valeur explicite pour la chaîne dans la variante spécifique de la langue.",
 	"wikibase-listdatatypes-string-head": "Chaîne",
