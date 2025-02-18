@@ -188,6 +188,7 @@ final class ClientHooks {
 			->getSetting( 'pageSchemaNamespaces' );
 
 		$generator = new LinkedDataSchemaGenerator(
+			$services->getRevisionLookup(),
 			WikibaseClient::getRepoLinker( $services ),
 		);
 

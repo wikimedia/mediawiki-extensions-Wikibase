@@ -171,6 +171,7 @@
 		"LinkedDataSchemaGenerator": {
 			"class": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator",
 			"services": [
+				"RevisionLookup",
 				"WikibaseClient.RepoLinker"
 			]
 		},
