@@ -452,7 +452,7 @@ XML
 		$this->assertSame( 'someSlot', $nsLookup->getEntitySlotRole( $type ) );
 	}
 
-	public function testOnSetupAfterCache() {
+	public function testOnMediaWikiServices() {
 
 		global $wgWBRepoSettings, $wgNamespaceContentModels, $wgContentHandlers;
 
@@ -488,7 +488,7 @@ XML
 			$contentModelMappings
 		);
 
-		RepoHooks::onSetupAfterCache();
+		RepoHooks::onMediaWikiServices( $this->getServiceContainer() );
 
 		$this->assertSame( [ WB_NS_ITEM => 'wikibase-item' ], $wgNamespaceContentModels );
 		$this->assertSame( array_values( $contentModelMappings ), array_keys( $wgContentHandlers ) );

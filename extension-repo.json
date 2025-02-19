@@ -1282,6 +1282,7 @@
 		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
 		"MaintenanceShellStart": "\\Wikibase\\Repo\\RepoHooks::onMaintenanceShellStart",
 		"MakeGlobalVariablesScript": "MakeGlobalVariablesScript",
+		"MediaWikiServices": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiServices",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
 		"OutputPageBeforeHTML": "OutputPageBeforeHTML",
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
@@ -1297,7 +1298,6 @@
 			"ViewHooks"
 		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
-		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
 		"ShowSearchHit": "ShowSearchHit",
 		"ShowSearchHitTitle": "ShowSearchHit",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
