@@ -112,7 +112,7 @@
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Аса нисдина</strong> нийса доцу маьӀна",
 	"wikibase-client-data-bridge-references-heading": "Билгалдахарш",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Системин чугӀо",
-	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Системин чу ца гӀош тайе",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Системи чу а ца волуш тайан",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ЧугӀо йа аккаунт кхолла",
 	"wikibase-client-data-bridge-license-heading": "Лелор а, лицензи а",
 	"wikibase-client-data-bridge-license-body": "<p>И маьӀна хийцаро иза хийцалур ду {{WBREPONAME}} чохь а, мега кхечу меттанийн викишкахь а хийцадала.</p>\n<p>\"{{int:$1}}\" тӀетаӀорца, хьо реза хуьйла [$2 лелоран билламашна], бехкам боцуш хьан къинхьегам арахеца реза хуьйла хьо [$3 $4] бух тӀехь.</p>",
@@ -126,7 +126,7 @@
 	"wikibase-client-data-bridge-thank-you-head": "Нисдарна баркалла хьуна!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "{{WBREPONAME}} тӀехь хьажорг хийца",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Ахьа авторизаци йина йац",
-	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Системин чу ца гӀош дӀайазйе",
-	"wikibase-client-data-bridge-saving-error-assertuser-save": "Системин чу ца гӀош Ӏалашйе",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Системи чу а ца волуш зорба тоха",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Системи чу а ца волуш дӀаӀалашйан",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Кхин дӀа тайе"
 }
