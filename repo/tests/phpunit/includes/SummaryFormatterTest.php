@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use DataValues\DataValue;
+use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -440,8 +441,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 *
 	 * @dataProvider providerOnFormat
 	 */
-	public function testOnFormat( $type, $root, $pre, $auto, $post, $title, $local, $expected ) {
-		$itemTitle = $this->createMock( $title );
+	public function testOnFormat( $type, $root, $pre, $auto, $post, $local, $expected ) {
+		$itemTitle = $this->createMock( Title::class );
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
 			->willReturn(
@@ -466,7 +467,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, '', false,
-				'\MediaWiki\Title\Title',
 				false,
 				null,
 			],
@@ -474,7 +474,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, '', false,
-				'\MediaWiki\Title\Title',
 				false,
 				null,
 			],
@@ -482,7 +481,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				true, 'wbeditentity', true,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!',
 			],
@@ -490,7 +488,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				true, 'wbsetlabel-set:1|en', true,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!',
 			],
@@ -498,7 +495,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|<>', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!',
 			],
@@ -506,7 +502,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&lt;&gt;', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#60;&#62;\].*?</span></span>!',
 			],
@@ -514,7 +509,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!',
 			],
@@ -522,7 +516,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&amp;', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#38;\].*?</span></span>!',
 			],
@@ -530,7 +523,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|…', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>!',
 			],
@@ -538,7 +530,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|\'""\'', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!',
 			],
@@ -546,7 +537,6 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&#039;&quot;&quot;&#039;', false,
-				'\MediaWiki\Title\Title',
 				false,
 				'!<span dir="auto"><span class="autocomment">.*?\[&#39;&#34;&#34;&#39;\].*?</span></span>!',
 			],
