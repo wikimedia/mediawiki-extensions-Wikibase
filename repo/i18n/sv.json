@@ -248,7 +248,7 @@
 	"wikibase-newproperty-insufficient-data": "Du måste åtminstone fylla i antingen etikett, beskrivning eller alias.",
 	"wikibase-newproperty-pick-data-type": "(välj en datatyp)",
 	"special-newitem": "Skapa ett nytt objekt",
-	"wikibase-newitem-summary": "Set till att [[Special:Search|detta objekt inte redan existerar]]!<br />Du borde skapa en {{int:Wikibase-label-helppage|etikett}} och en {{int:Wikibase-description-helppage|beskrivning}} för alla nya objekt.",
+	"wikibase-newitem-summary": "Kontrollera att [[Special:Search|detta objekt inte redan existerar]]!<br />Du borde skapa en {{int:Wikibase-label-helppage|etikett}} och en {{int:Wikibase-description-helppage|beskrivning}} för alla nya objekt.",
 	"wikibase-newitem-fieldset": "Skapa ett nytt objekt",
 	"wikibase-newitem-site": "Webbplatsen till den första länkade sidan",
 	"wikibase-newitem-page": "Namnet på den första länkade sidan",

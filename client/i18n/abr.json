@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Obed554"
+			"Obed554",
+			"Yaw tuba"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} adeɛ",
@@ -11,5 +12,8 @@
 	"wikibase-linkitem-linkpage": "Ma ɔne simpie nya twaka",
 	"wikibase-linkitem-selectlink": "Yɛsrɛ paw simpie ne page a wopɛ sɛ woma ɔne page wei nya twaka",
 	"wikibase-linkitem-input-site": "Kasa:",
-	"wikibase-linkitem-input-page": "Simpie:"
+	"wikibase-linkitem-input-page": "Simpie:",
+	"wikibase-rc-hide-wikidata-hide": "Sie",
+	"wikibase-rc-hide-wikidata-show": "Kyereɛ",
+	"wikibase-otherprojects": "Wɔ dwumadi fofooɔ mu no"
 }
