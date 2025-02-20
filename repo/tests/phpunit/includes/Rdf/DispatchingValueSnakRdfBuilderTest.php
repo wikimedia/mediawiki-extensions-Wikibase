@@ -9,6 +9,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\Purtle\TurtleRdfWriter;
 
 /**
  * @covers \Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder
@@ -49,7 +50,8 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddValue_unknownType() {
-		$writer = $this->createMock( RdfWriter::class );
+		$writer = new TurtleRdfWriter();
+		$writer->start();
 		$namespace = 'xx';
 		$lname = 'yy';
 
@@ -59,9 +61,11 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$logger = new TestLogger();
 		$dispatchingBuilder = new DispatchingValueSnakRdfBuilder( [], $logger );
 
+		$writer->about( 'subject' );
 		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );
 
 		$this->assertTrue( $logger->hasWarningRecords() );
+		$writer->finish(); // assert writer is in a finishable state, not with the subject left hanging
 	}
 
 }
