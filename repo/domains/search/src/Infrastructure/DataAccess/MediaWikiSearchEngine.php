@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 
 use ISearchResultSet;
+use MediaWiki\Context\MutableContext;
 use MediaWiki\Status\Status;
 use SearchEngine;
 use SearchResult;
@@ -21,13 +22,21 @@ class MediaWikiSearchEngine implements ItemSearchEngine {
 
 	private SearchEngine $searchEngine;
 	private EntityNamespaceLookup $namespaceLookup;
+	private MutableContext $requestContext;
 
-	public function __construct( SearchEngine $searchEngine, EntityNamespaceLookup $namespaceLookup ) {
+	public function __construct(
+		SearchEngine $searchEngine,
+		EntityNamespaceLookup $namespaceLookup,
+		MutableContext $requestContext
+	) {
 		$this->searchEngine = $searchEngine;
 		$this->namespaceLookup = $namespaceLookup;
+		$this->requestContext = $requestContext;
 	}
 
 	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
+		$this->requestContext->setLanguage( $languageCode );
+
 		$this->searchEngine->setNamespaces( [ $this->getItemNamespace() ] );
 		$this->searchEngine->setLimitOffset( self::RESULTS_LIMIT );
 
