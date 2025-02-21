@@ -192,7 +192,7 @@ describe( 'ErrorPermission', () => {
 			'http://localhost/wiki/Project:Page_protection_policy',
 			'http://localhost/wiki/Project:Edit_warring',
 			`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
-			`http://localhost/wiki/Talk:${entityTitle}`,
+			`http://localhost/wiki/Special:TalkPage/${entityTitle}`,
 		];
 		const messageGet = jest.fn( ( key ) => key );
 		const repoRouterGetPageUrl = jest.fn();
@@ -202,7 +202,7 @@ describe( 'ErrorPermission', () => {
 			.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Project:Edit_warring' )
 			.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
-			.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
+			.mockReturnValueOnce( `http://localhost/wiki/Special:TalkPage/${entityTitle}` );
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterGetPageUrl,
 		};
@@ -246,7 +246,7 @@ describe( 'ErrorPermission', () => {
 		const body = MessageKeys.PERMISSIONS_SEMI_PROTECTED_BODY;
 		const bodyParams = [
 			`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
-			`http://localhost/wiki/Talk:${entityTitle}`,
+			`http://localhost/wiki/Special:TalkPage/${entityTitle}`,
 		];
 		const messageGet = jest.fn( ( key ) => key );
 		const repoRouterGetPageUrl = jest.fn();
@@ -254,7 +254,7 @@ describe( 'ErrorPermission', () => {
 			.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Project:Autoconfirmed_users' )
 			.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
-			.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
+			.mockReturnValueOnce( `http://localhost/wiki/Special:TalkPage/${entityTitle}` );
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterGetPageUrl,
 		};
@@ -534,7 +534,7 @@ describe( 'ErrorPermission', () => {
 			protectionPolicyUrl = 'Project:Page_protection_policy',
 			autoconfirmedUsers = 'Autoconfirmed_users',
 			entityTitle = 'Property:P18',
-			propertyTalkUrl = 'http://localhost/wiki/Property_talk:P18',
+			propertyTalkUrl = 'http://localhost/wiki/Special:TalkPage/Property:P18',
 			logUrl = `http://localhost/wiki/Special:Log/protect?page=${entityTitle}`;
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: jest.fn()

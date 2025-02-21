@@ -97,17 +97,6 @@ export default defineComponent( {
 				...this.messageBodyParameters( permissionError ),
 			);
 		},
-		/** A poor (wo)man's implementation of constructing a correct
-		talk page title due to lack of a redirect functionality.
-		This can be removed once T242346 is resolved.
-		 */
-		buildTalkPageNamespace(): string {
-			if ( this.entityTitle.includes( ':' ) ) {
-				const entityTitleParts: string[] = this.entityTitle.split( ':', 2 );
-				return `${entityTitleParts[ 0 ]}_talk:${entityTitleParts[ 1 ]}`;
-			}
-			return `Talk:${this.entityTitle}`;
-		},
 		messageHeaderKey( permissionError: MissingPermissionsError ): ( keyof typeof MessageKeys ) {
 			return permissionTypeRenderers[ permissionError.type ].header;
 		},
@@ -207,13 +196,13 @@ export default defineComponent( {
 						this.$repoRouter.getPageUrl( 'Project:Page_protection_policy' ),
 						this.$repoRouter.getPageUrl( 'Project:Project:Edit_warring' ),
 						this.$repoRouter.getPageUrl( 'Special:Log/protect', { page: this.entityTitle } ),
-						this.$repoRouter.getPageUrl( this.buildTalkPageNamespace() ),
+						this.$repoRouter.getPageUrl( `Special:TalkPage/${this.entityTitle}` ),
 					);
 					break;
 				case PageNotEditable.ITEM_SEMI_PROTECTED:
 					params.push(
 						this.$repoRouter.getPageUrl( 'Special:Log/protect', { page: this.entityTitle } ),
-						this.$repoRouter.getPageUrl( this.buildTalkPageNamespace() ),
+						this.$repoRouter.getPageUrl( `Special:TalkPage/${this.entityTitle}` ),
 					);
 					break;
 				case PageNotEditable.ITEM_CASCADE_PROTECTED:
