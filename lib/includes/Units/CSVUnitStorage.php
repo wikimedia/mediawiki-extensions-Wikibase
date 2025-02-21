@@ -39,7 +39,7 @@ class CSVUnitStorage extends BaseUnitStorage {
 			return null;
 		}
 		$data = [];
-		for ( $row = fgetcsv( $f ); $row !== false; $row = fgetcsv( $f ) ) {
+		for ( $row = fgetcsv( $f, 0, ',', '"', "\\" ); $row !== false; $row = fgetcsv( $f, 0, ',', '"', "\\" ) ) {
 			// @phan-suppress-next-line PhanTypeMismatchDimAssignment False positive
 			$data[$row[0]] = array_slice( $row, 1 );
 		}
