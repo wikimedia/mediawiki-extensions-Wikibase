@@ -3,5 +3,10 @@
 		"path": "/wikibase/v0/suggest/{entity_type}",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SuggestEntitiesRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/search/items",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
 	}
 ]
