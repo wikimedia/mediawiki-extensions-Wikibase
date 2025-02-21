@@ -61,7 +61,7 @@ class GenericActionApiClient {
 		$this->userAgentServerName = $userAgentServerName;
 	}
 
-	private function getUrlFromParams( array $params ) {
+	private function getUrlFromParams( array $params ): string {
 		return wfAppendQuery( $this->repoActionApiUrl, $params );
 	}
 

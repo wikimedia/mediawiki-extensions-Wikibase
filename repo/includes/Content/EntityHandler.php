@@ -871,7 +871,7 @@ abstract class EntityHandler extends ContentHandler {
 		return $parserOutput;
 	}
 
-	private function getValidUserLanguage( Language $language ) {
+	private function getValidUserLanguage( Language $language ): Language {
 		$services = MediaWikiServices::getInstance();
 		if ( !$services->getLanguageNameUtils()->isValidBuiltInCode( $language->getCode() ) ) {
 			return $services->getLanguageFactory()->getLanguage( 'und' ); // T204791

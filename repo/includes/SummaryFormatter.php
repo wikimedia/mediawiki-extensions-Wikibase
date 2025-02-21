@@ -225,7 +225,7 @@ class SummaryFormatter {
 		return $list;
 	}
 
-	private function formatIfEntityId( $value ) {
+	private function formatIfEntityId( string $value ): string {
 		try {
 			return $this->idFormatter->formatEntityId( $this->idParser->parse( $value ) );
 		} catch ( EntityIdParsingException $ex ) {

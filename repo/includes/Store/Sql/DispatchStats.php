@@ -43,7 +43,7 @@ class DispatchStats {
 		return $this->buildExactNumberOfChangesStats( $limitedNumberOfChanges, $numberOfEntities, $changeTimesStats );
 	}
 
-	private function loadLimitedNumberOfChanges( IReadableDatabase $db, $limit ): int {
+	private function loadLimitedNumberOfChanges( IReadableDatabase $db, int $limit ): int {
 		return $db->newSelectQueryBuilder()
 			->select( '*' )
 			->from( 'wb_changes' )

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Validators;
 
 use Generator;
 use InvalidArgumentException;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
@@ -186,7 +187,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		}
 	}
 
-	private function getEntityTerm( EntityId $entityId, $lang, $termType ): string {
+	private function getEntityTerm( EntityId $entityId, string $lang, string $termType ): string {
 		if ( $termType === 'label' ) {
 			return $this->termLookup->getLabel( $entityId, $lang ) ?? '';
 		} elseif ( $termType === 'description' ) {
@@ -196,7 +197,7 @@ class FingerprintUniquenessValidator implements ValueValidator {
 		throw new InvalidArgumentException( "\$termType can only be 'label' or 'property'. '{$termType}' was given" );
 	}
 
-	private function collisionToError( $code, $collidingEntityId, $lang, $label ) {
+	private function collisionToError( string $code, EntityId $collidingEntityId, string $lang, string $label ): Error {
 		return new UniquenessViolation(
 			$collidingEntityId,
 			'found conflicting terms',

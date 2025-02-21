@@ -170,7 +170,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$this->cutoffPosition = $cutoffPosition;
 	}
 
-	private function getEntityNamespaces( array $entityTypes ) {
+	private function getEntityNamespaces( array $entityTypes ): array {
 		if ( !$entityTypes ) {
 			return $this->entityNamespaceLookup->getEntityNamespaces();
 		}

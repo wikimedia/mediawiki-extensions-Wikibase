@@ -358,7 +358,7 @@ class ResultBuilder {
 		return $record;
 	}
 
-	private function addEntityRedirectInfoToRecord( array $record, $sourceEntityIdSerialization, EntityId $entityId ): array {
+	private function addEntityRedirectInfoToRecord( array $record, string $sourceEntityIdSerialization, EntityId $entityId ): array {
 		$record['redirects'] = [
 			'from' => $sourceEntityIdSerialization,
 			'to' => $entityId->getSerialization(),
@@ -442,14 +442,14 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function injectEntitySerializationWithSiteLinkUrls( array $serialization ) {
+	private function injectEntitySerializationWithSiteLinkUrls( array $serialization ): array {
 		if ( isset( $serialization['sitelinks'] ) ) {
 			$serialization['sitelinks'] = $this->getSiteLinkListArrayWithUrls( $serialization['sitelinks'] );
 		}
 		return $serialization;
 	}
 
-	private function sortEntitySerializationSiteLinks( array $serialization ) {
+	private function sortEntitySerializationSiteLinks( array $serialization ): array {
 		if ( isset( $serialization['sitelinks'] ) ) {
 			ksort( $serialization['sitelinks'] );
 		}
@@ -459,7 +459,7 @@ class ResultBuilder {
 	private function filterEntitySerializationUsingSiteIds(
 		array $serialization,
 		?array $siteIds
-	) {
+	): array {
 		if ( $siteIds && array_key_exists( 'sitelinks', $serialization ) ) {
 			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
 				if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
@@ -479,7 +479,7 @@ class ResultBuilder {
 	private function addEntitySerializationFallbackInfo(
 		array $serialization,
 		array $termFallbackChains
-	) {
+	): array {
 		if ( isset( $serialization['labels'] ) ) {
 			$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
 				$serialization['labels'],
@@ -562,7 +562,7 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function getEntitySerializationWithMetaData( array $serialization ) {
+	private function getEntitySerializationWithMetaData( array $serialization ): array {
 		$serializeEmptyListsAsObjects = WikibaseRepo::getSettings()->getSetting( 'tmpSerializeEmptyListsAsObjects' );
 		$modifications = [];
 
@@ -781,7 +781,7 @@ class ResultBuilder {
 		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
 	}
 
-	private function getSiteLinkListArrayWithUrls( array $array ) {
+	private function getSiteLinkListArrayWithUrls( array $array ): array {
 		$siteLookup = $this->siteLookup;
 		$addUrlCallback = function( $array ) use ( $siteLookup ) {
 			$site = $siteLookup->getSite( $array['site'] );
@@ -793,7 +793,7 @@ class ResultBuilder {
 		return $this->modifier->modifyUsingCallbacks( $array, [ '*' => $addUrlCallback ] );
 	}
 
-	private function getSiteLinkListArrayWithMetaData( array $array ) {
+	private function getSiteLinkListArrayWithMetaData( array $array ): array {
 		$array[ApiResult::META_KVP_MERGE] = true;
 		return $this->modifier->modifyUsingCallbacks(
 			$array,
@@ -987,7 +987,7 @@ class ResultBuilder {
 		$this->setValue( null, 'reference', $value );
 	}
 
-	private function getReferenceArrayWithMetaData( array $array ) {
+	private function getReferenceArrayWithMetaData( array $array ): array {
 		return $this->modifier->modifyUsingCallbacks( $array, [
 			'snaks-order' => function ( $array ) {
 				ApiResult::setIndexedTagName( $array, 'property' );

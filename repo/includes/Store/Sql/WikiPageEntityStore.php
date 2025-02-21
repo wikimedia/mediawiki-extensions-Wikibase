@@ -201,7 +201,7 @@ class WikiPageEntityStore implements EntityStore {
 		return $handler->canCreateWithCustomId( $id );
 	}
 
-	private function entityIdFromKnownSource( EntityId $id ) {
+	private function entityIdFromKnownSource( EntityId $id ): bool {
 		return in_array( $id->getEntityType(), $this->entitySource->getEntityTypes() );
 	}
 

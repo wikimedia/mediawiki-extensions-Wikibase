@@ -104,7 +104,7 @@ class RecentChangeSaveHookHandler {
 		);
 	}
 
-	private function changeNeedsDispatching( EntityChange $change ) {
+	private function changeNeedsDispatching( EntityChange $change ): bool {
 		return $this->subscriptionLookup->getSubscribers( $change->getEntityId() ) ||
 			( $change instanceof ItemChange && $change->getSiteLinkDiff()->getOperations() );
 	}

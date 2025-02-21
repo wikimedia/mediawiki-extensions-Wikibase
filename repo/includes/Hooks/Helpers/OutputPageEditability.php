@@ -36,11 +36,11 @@ class OutputPageEditability {
 			&& !$out->isPrintable();
 	}
 
-	private function isDiff( OutputPage $out ) {
+	private function isDiff( OutputPage $out ): bool {
 		return $out->getRequest()->getCheck( 'diff' );
 	}
 
-	private function isLatestRevision( OutputPage $out ) {
+	private function isLatestRevision( OutputPage $out ): bool {
 		return !$out->getRevisionId() // the revision id can be null on a ParserCache hit, but only for the latest revision
 			|| $out->getRevisionId() === $out->getTitle()->getLatestRevID();
 	}

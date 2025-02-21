@@ -54,14 +54,14 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 		$this->addLicenseInfoToResult( $result, $path );
 	}
 
-	private function addLicenseInfoToResult( ApiResult $result, $path ) {
+	private function addLicenseInfoToResult( ApiResult $result, array $path ) {
 		$result->addValue( $path, 'dataRightsUrl', $this->repoSettings->getSetting( 'dataRightsUrl' ) );
 		$result->addValue( $path, 'dataRightsText', $this->repoSettings->getSetting( 'dataRightsText' ) );
 		$termsOfUseTitlePage = $this->msg( 'copyrightpage' )->inContentLanguage()->text();
 		$result->addValue( $path, 'termsOfUseUrl', ( $this->resolveTitleStringToUrl )( $termsOfUseTitlePage ) );
 	}
 
-	private function addStringMaxLengthToResult( ApiResult $result, $path ) {
+	private function addStringMaxLengthToResult( ApiResult $result, array $path ) {
 		$dataTypeLimitsPath = array_merge( $path, [ 'dataTypeLimits' ] );
 
 		// adapted from WikibaseRepo.datatypes.php > VT:string > validator-factory-callback

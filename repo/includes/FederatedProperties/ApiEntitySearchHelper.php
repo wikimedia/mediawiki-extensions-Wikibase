@@ -194,7 +194,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		return $jsonResult;
 	}
 
-	private function getMatchedTerm( array $match ) {
+	private function getMatchedTerm( array $match ): Term {
 
 		if ( $match['type'] === 'entityId' ) {
 			return new Term( 'qid', $match['text'] );

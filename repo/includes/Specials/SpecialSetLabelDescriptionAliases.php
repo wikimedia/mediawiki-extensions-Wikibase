@@ -551,7 +551,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		return $this->isEditFormStep( $entity );
 	}
 
-	private function isEditFormStep( ?EntityDocument $entity ) {
+	private function isEditFormStep( ?EntityDocument $entity ): bool {
 		return $entity !== null && $this->languageCode !== null;
 	}
 }

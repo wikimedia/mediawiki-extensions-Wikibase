@@ -61,7 +61,7 @@ class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 		return $result;
 	}
 
-	private function getIdsByType( array $ids ) {
+	private function getIdsByType( array $ids ): array {
 		$byType = [];
 		foreach ( $ids as $id ) {
 			$byType[$id->getEntityType()][] = $id;

@@ -107,7 +107,7 @@ class RebuildItemTerms extends Maintenance {
 		$this->output( "Done.\n" );
 	}
 
-	private function newItemIdIteratorFromFile( $file ): \Iterator {
+	private function newItemIdIteratorFromFile( string $file ): \Iterator {
 		$itemIds = file_get_contents( $file );
 		$itemIds = explode( "\n", $itemIds );
 

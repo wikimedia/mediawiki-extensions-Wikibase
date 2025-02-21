@@ -222,7 +222,7 @@ final class RepoHooks {
 		}
 	}
 
-	private static function isNamespaceUsedByLocalEntities( $namespace ) {
+	private static function isNamespaceUsedByLocalEntities( int $namespace ): bool {
 		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		// TODO: this logic seems badly misplaced, probably WikibaseRepo should be asked and be

@@ -19,6 +19,7 @@ use Wikibase\Repo\Rdf\RdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikimedia\Purtle\BNodeLabeler;
+use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
@@ -143,7 +144,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		$this->timestamp = $timestamp;
 	}
 
-	private static function getRdfWriter( string $name, ?BNodeLabeler $labeler ) {
+	private static function getRdfWriter( string $name, ?BNodeLabeler $labeler ): ?RdfWriter {
 		$factory = new RdfWriterFactory();
 		$format = $factory->getFormatName( $name );
 
