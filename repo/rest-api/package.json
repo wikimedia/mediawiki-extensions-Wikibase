@@ -18,6 +18,8 @@
 		"lint:eslint-search": "eslint ../domains/search/tests/mocha --config ../domains/search/tests/mocha/.eslintrc.json --max-warnings 0",
 		"fix": "npm-run-all --parallel fix:*",
 		"fix:eslint": "eslint --config .eslintrc.json --fix .",
+		"fix:crud": "eslint ../domains/crud/tests/mocha --config ../domains/crud/tests/mocha/.eslintrc.json --fix",
+		"fix:search": "eslint ../domains/search/tests/mocha --config ../domains/search/tests/mocha/.eslintrc.json --fix",
 		"build": "run-s build:spec build:docs",
 		"build:docs": "webpack --config docs/webpack.config.js",
 		"serve:docs": "webpack serve --config docs/webpack.config.js --mode development",
