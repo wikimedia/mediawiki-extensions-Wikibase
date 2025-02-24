@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Chrisdanielkazadi"
+			"Chrisdanielkazadi",
+			"Shayi ngolu"
 		]
 	},
 	"wikibase-dataitem": "Mufundu{{WBREPONAME}}",
 	"wikibase-editlinks": "Kushitulula bidi bu bela pamua",
+	"wikibase-addlinkstitle": "Ku kumbaja bidi bilunga miakulu ya bukwamatunga",
 	"wikibase-linkitem-addlinks": "Kukumbaja links",
 	"wikibase-linkitem-title": "Maapeta ne dibeji",
 	"wikibase-linkitem-linkpage": "Diela pamua ne dibeji",

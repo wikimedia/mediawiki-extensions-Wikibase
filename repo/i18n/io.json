@@ -51,6 +51,7 @@
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|refero|referi}}",
 	"wikibase-snakview-property-input-placeholder": "Proprajo",
+	"wikibase-snakview-variations-somevalue-label": "nekonocata datumo",
 	"wikibase-shortcopyrightwarning": "Kliktanta \"$1\", vu taceme konsentas pri la [[$2|uzo-termini]], e vu nerevokeble konsentas pri liberigar vua kontributado sub la termini [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Me aceptas ca termini por futura redakturi. Ne montrez itere ca mesajo.",
 	"wikibase-copyrighttooltip-acknowledge": "Me aceptas ca termini por futura redakturi. Ne montrez ca mesajo pluse.",

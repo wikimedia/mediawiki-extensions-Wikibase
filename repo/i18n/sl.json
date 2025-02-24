@@ -472,7 +472,7 @@
 	"wikibase-pageinfo-subscription": "Vikiji, naročeni na to entiteto",
 	"wikibase-pageinfo-subscription-none": "Noben",
 	"wikibase-pageinfo-wb-claims": "Število izjav v tej entiteti",
-	"wikibase-pageinfo-wb-identifiers": "Število zunanjih identifikatorskih izjav pri tej entiteti",
+	"wikibase-pageinfo-wb-identifiers": "Število izjav o zunanjih identifikatorjih pri tej entiteti",
 	"wikibase-search-bad-entity-type": "Slaba vrsta entitete: $1",
 	"wikibase-search-bad-profile-name": "Slabo ime iskalnega profila: $1",
 	"wikibase-search-namespace-mix": "Mešanje imenskih prostorov entitet in člankov pri iskanju trenutno ni podprto. Preiskani bodo samo imenski prostori entitet.",
