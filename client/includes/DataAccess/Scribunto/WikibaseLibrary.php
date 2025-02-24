@@ -681,7 +681,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 		try {
 			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId(
 				$propertyLabelOrId,
-				MediaWikiServices::getInstance()->getContentLanguage()->getCode()
+				MediaWikiServices::getInstance()->getContentLanguageCode()->toString()
 			);
 			$ret = [ $propertyId->getSerialization() ];
 			return $ret;
