@@ -107,15 +107,15 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 		utils.flag( this, 'response', response );
 		const request = response.request;
 
-		const requestUrl = request.url.split( 'wikibase' )[ 1 ];
-		const requestPath = getMatchingSchemaPath( requestUrl, Object.keys( openApiSchema.paths ) );
+		const requestPath = new URL( request.url ).pathname.split( 'wikibase' )[ 1 ];
+		const pathInSchema = getMatchingSchemaPath( requestPath, Object.keys( openApiSchema.paths ) );
 		const requestMethod = request.method.toLowerCase();
 		const responseStatus = response.status;
-		const openApiResponse = openApiSchema.paths[ requestPath ][ requestMethod ].responses[ responseStatus ];
+		const openApiResponse = openApiSchema.paths[ pathInSchema ][ requestMethod ].responses[ responseStatus ];
 
 		if ( Object.keys( response.body ).length > 0 ) {
 			const contentType = response.headers[ 'content-type' ];
-			const schemaKey = `${requestPath}|${requestMethod}|${responseStatus}|${contentType}`;
+			const schemaKey = `${pathInSchema}|${requestMethod}|${responseStatus}|${contentType}`;
 
 			const validateBody = schemaValidator.getSchema( schemaKey );
 			if ( !validateBody ) {
@@ -130,7 +130,7 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 
 		if ( 'headers' in openApiResponse ) {
 			for ( const [ header, openApiHeader ] of Object.entries( openApiResponse.headers ) ) {
-				const headerKey = `${requestPath}|${requestMethod}|${responseStatus}|header|${header.toLowerCase()}`;
+				const headerKey = `${pathInSchema}|${requestMethod}|${responseStatus}|header|${header.toLowerCase()}`;
 
 				const validateHeader = schemaValidator.getSchema( headerKey );
 				if ( !validateHeader ) {
