@@ -46,9 +46,24 @@
 											"items": {
 												"type": "object",
 												"properties": {
-													"id": { "type": "string", "pattern": "^Q[1-9]\\d{0,9}$" },
-													"label": { "type": "string" },
-													"description": { "type": "string" }
+													"id": {
+														"type": "string",
+														"pattern": "^Q[1-9]\\d{0,9}$"
+													},
+													"label": {
+														"type": "object",
+														"properties": {
+															"language": { "type": "string" },
+															"value": { "type": "string" }
+														}
+													},
+													"description": {
+														"type": "object",
+														"properties": {
+															"language": { "type": "string" },
+															"value": { "type": "string" }
+														}
+													}
 												}
 											}
 										}
@@ -56,8 +71,16 @@
 								},
 								"example": {
 									"results": [
-										{ "id": "Q123", "label": "potato", "description": "staple food" },
-										{ "id": "Q234", "label": "potato", "description": "species of plant" }
+										{
+											"id": "Q123",
+											"label": { "language": "en", "value": "potato" },
+											"description": { "language": "en", "value": "staple food" }
+										},
+										{
+											"id": "Q234",
+											"label": { "language": "en", "value": "potato" },
+											"description": { "language": "en", "value": "species of plant" }
+										}
 									]
 								}
 							}

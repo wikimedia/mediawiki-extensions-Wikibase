@@ -33563,10 +33563,26 @@
                             "pattern": "^Q[1-9]\\d{0,9}$"
                           },
                           "label": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "description": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            }
                           }
                         }
                       }
@@ -33577,13 +33593,25 @@
                   "results": [
                     {
                       "id": "Q123",
-                      "label": "potato",
-                      "description": "staple food"
+                      "label": {
+                        "language": "en",
+                        "value": "potato"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "staple food"
+                      }
                     },
                     {
                       "id": "Q234",
-                      "label": "potato",
-                      "description": "species of plant"
+                      "label": {
+                        "language": "en",
+                        "value": "potato"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "species of plant"
+                      }
                     }
                   ]
                 }

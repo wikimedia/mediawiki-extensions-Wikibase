@@ -9,8 +9,10 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
 /**
@@ -31,11 +33,14 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 
 	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
 		return new ItemSearchResults( ...array_map(
-			fn( TermIndexEntry $entry ) => new ItemSearchResult(
-				new ItemId( (string)$entry->getEntityId() ),
-				$entry->getTerm()->getText(),
-				$this->termLookup->getDescription( $entry->getEntityId(), $languageCode ) ?? ''
-			),
+			function ( TermIndexEntry $entry ) use ( $languageCode ) {
+				$description = $this->termLookup->getDescription( $entry->getEntityId(), $languageCode );
+				return new ItemSearchResult(
+					new ItemId( (string)$entry->getEntityId() ),
+					new Label( $entry->getLanguage(), $entry->getText() ),
+					$description ? new Description( $languageCode, $description ) : null
+				);
+			},
 			$this->matchingTermsLookup->getMatchingTerms(
 				[ new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchTerm ] ) ],
 				TermTypes::TYPE_LABEL,
