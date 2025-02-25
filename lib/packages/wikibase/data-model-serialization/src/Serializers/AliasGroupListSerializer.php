@@ -26,7 +26,7 @@ class AliasGroupListSerializer extends MapSerializer implements Serializer {
 
 	/**
 	 * @param AliasGroupList $object
-	 * @return array|::stdClass
+	 * @return array|\stdClass
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
