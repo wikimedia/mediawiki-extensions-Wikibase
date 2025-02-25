@@ -66,7 +66,6 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	} );
 
 	describe( 'Authorization', () => {
-
 		describeEachRouteWithReset(
 			[
 				...editRequests,
@@ -159,4 +158,4 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			expect( response ).to.have.status( 403 );
 		} );
 	} );
-} );
+}, true ); // create a new Item for the Auth tests

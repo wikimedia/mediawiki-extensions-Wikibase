@@ -12,6 +12,7 @@ const {
 } = require( './entityHelper' );
 const { getAllowedBadges } = require( './getAllowedBadges' );
 const {
+	newCreateItemRequestBuilder,
 	newPatchItemRequestBuilder,
 	newPatchPropertyRequestBuilder
 } = require( './RequestBuilderFactory' );
@@ -31,9 +32,10 @@ const { expect } = require( '../../../../../rest-api/tests/mocha/helpers/chaiHel
  *
  * @param {string} testName
  * @param {Function} runAllTests
+ * @param {boolean} createNewItem
  * @return {void}
  */
-function describeWithTestData( testName, runAllTests ) {
+function describeWithTestData( testName, runAllTests, createNewItem = false ) {
 	const itemRequestInputs = {};
 	const propertyRequestInputs = {};
 	const originalLinkedArticle = utils.title( 'Original-article-linked-to-test-item' );
@@ -86,7 +88,8 @@ function describeWithTestData( testName, runAllTests ) {
 			await createWikiPage( newLinkedArticle, 'sitelink test' );
 			const statementPropertyId = await getStringPropertyId();
 
-			const itemId = await getItemId();
+			const itemId = createNewItem ?
+				( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id : await getItemId();
 			const item = await resetEntityTestData( itemId, statementPropertyId, originalLinkedArticle );
 			itemRequestInputs.mainTestSubject = itemId;
 			itemRequestInputs.itemId = itemId;
@@ -101,7 +104,6 @@ function describeWithTestData( testName, runAllTests ) {
 			propertyRequestInputs.propertyId = propertyId;
 			propertyRequestInputs.statementId = property.statements[ statementPropertyId ][ 0 ].id;
 			propertyRequestInputs.statementPropertyId = statementPropertyId;
-
 		} );
 
 		runAllTests( itemRequestInputs, propertyRequestInputs, describeEachRouteWithReset );
