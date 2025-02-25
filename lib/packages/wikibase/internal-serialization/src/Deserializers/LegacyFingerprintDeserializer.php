@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -23,7 +22,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @return Item
+	 * @return Fingerprint
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

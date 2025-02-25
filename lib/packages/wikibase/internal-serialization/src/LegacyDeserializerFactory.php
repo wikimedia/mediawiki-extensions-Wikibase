@@ -51,7 +51,7 @@ class LegacyDeserializerFactory {
 	}
 
 	/**
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	private function newItemDeserializer() {
 		return new LegacyItemDeserializer(
@@ -63,7 +63,7 @@ class LegacyDeserializerFactory {
 	}
 
 	/**
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	private function newPropertyDeserializer() {
 		return new LegacyPropertyDeserializer(
