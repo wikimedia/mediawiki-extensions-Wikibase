@@ -4,9 +4,12 @@ namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 
 use Elastica\Result;
 use Generator;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Status\Status;
 use MockSearchResultSet;
+use MutableContext;
 use PHPUnit\Framework\TestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\ItemId;
@@ -34,6 +37,7 @@ class MediaWikiSearchEngineTest extends TestCase {
 	private const RESULT2_LABEL = 'Label two';
 	private const RESULT2_DESCRIPTION = 'Description two';
 	private SearchEngine $searchEngine;
+	private MutableContext $requestContext;
 
 	public static function setUpBeforeClass(): void {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
@@ -44,6 +48,7 @@ class MediaWikiSearchEngineTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->searchEngine = $this->createStub( SearchEngine::class );
+		$this->requestContext = new DerivativeContext( RequestContext::getMain() );
 	}
 
 	/**
@@ -53,18 +58,25 @@ class MediaWikiSearchEngineTest extends TestCase {
 	 */
 	public function testSearchItemByLabel( $result ): void {
 		$searchTerm = 'Label';
+		$languageCode = 'en';
+
 		$this->searchEngine = $this->createMock( SearchEngine::class );
 		$this->searchEngine->expects( $this->once() )
 			->method( 'searchText' )
 			->with( $searchTerm )
 			->willReturn( $result );
 
+		$this->requestContext = $this->createMock( MutableContext::class );
+		$this->requestContext->expects( $this->once() )
+			->method( 'setLanguage' )
+			->with( $languageCode );
+
 		$this->assertEquals(
 			new ItemSearchResults(
 				new ItemSearchResult( new ItemId( self::RESULT1_ITEM_ID ), self::RESULT1_LABEL, self::RESULT1_DESCRIPTION ),
 				new ItemSearchResult( new ItemId( self::RESULT2_ITEM_ID ), self::RESULT2_LABEL, self::RESULT2_DESCRIPTION ),
 			),
-			$this->newEngine()->searchItemByLabel( $searchTerm, 'en' )
+			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
 		);
 	}
 
@@ -101,7 +113,11 @@ class MediaWikiSearchEngineTest extends TestCase {
 	private function newEngine(): MediaWikiSearchEngine {
 		$namespaceLoookup = $this->createStub( EntityNamespaceLookup::class );
 		$namespaceLoookup->method( 'getEntityNamespace' )->willReturn( 0 );
-		return new MediaWikiSearchEngine( $this->searchEngine, $namespaceLoookup );
+		return new MediaWikiSearchEngine(
+			$this->searchEngine,
+			$namespaceLoookup,
+			$this->requestContext
+		);
 	}
 
 	private function fakeEntityResult( string $itemId, string $enLabel, string $enDescription ): EntityResult {

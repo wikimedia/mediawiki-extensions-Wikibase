@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
 use Exception;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
@@ -38,7 +39,8 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		$searchEngine = $wgSearchType === 'CirrusSearch'
 			? new MediaWikiSearchEngine(
 				MediaWikiServices::getInstance()->getSearchEngineFactory()->create(),
-				WikibaseRepo::getEntityNamespaceLookup()
+				WikibaseRepo::getEntityNamespaceLookup(),
+				RequestContext::getMain()
 			)
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory()
