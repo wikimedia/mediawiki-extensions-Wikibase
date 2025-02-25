@@ -65,7 +65,6 @@ if ( is_dir( 'vendor' ) ) {
 $cfg['exclude_analysis_directory_list'] = array_merge(
 	$cfg['exclude_analysis_directory_list'],
 	[
-		'lib/packages/wikibase/data-model/src/',
 		'lib/packages/wikibase/data-model-serialization/src/',
 		'lib/packages/wikibase/data-model-services/src/',
 		'lib/packages/wikibase/internal-serialization/src/',

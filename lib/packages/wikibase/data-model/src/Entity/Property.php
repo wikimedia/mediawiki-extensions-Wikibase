@@ -90,7 +90,7 @@ class Property implements
 	/**
 	 * @since 0.5, can be null since 1.0
 	 *
-	 * @param PropertyId|null $id
+	 * @param EntityId|null $id
 	 *
 	 * @throws InvalidArgumentException
 	 */

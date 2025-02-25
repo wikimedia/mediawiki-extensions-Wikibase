@@ -45,11 +45,12 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 * @param Statement $statement
 	 */
 	public function addStatement( Statement $statement ) {
-		if ( $statement->getGuid() === null ) {
+		$index = $statement->getGuid();
+		if ( $index === null ) {
 			throw new InvalidArgumentException( 'Can only add statements that have a non-null GUID' );
 		}
 
-		$this->statements[$statement->getGuid()] = $statement;
+		$this->statements[$index] = $statement;
 	}
 
 	/**
@@ -107,7 +108,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 * The iterator has the GUIDs of the statements as keys.
 	 *
 	 * @see IteratorAggregate::getIterator
-	 * @return Iterator|Statement[]
+	 * @return Traversable<Statement>
 	 */
 	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->statements );

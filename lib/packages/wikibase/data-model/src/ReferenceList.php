@@ -269,7 +269,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 * @return bool
 	 */
 	public function isEmpty() {
-		return empty( $this->references );
+		return $this->references === [];
 	}
 
 	/**
@@ -316,7 +316,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 *
 	 * @since 5.0
 	 *
-	 * @return Iterator|Reference[]
+	 * @return Traversable<Reference>
 	 */
 	public function getIterator(): Traversable {
 		return new ArrayIterator( array_values( $this->references ) );

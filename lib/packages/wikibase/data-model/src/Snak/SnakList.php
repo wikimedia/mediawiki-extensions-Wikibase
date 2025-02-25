@@ -241,7 +241,10 @@ class SnakList extends ArrayObject {
 	 * all common code needed for set operations, including
 	 * type checking and offset resolving.
 	 *
-	 * @param int|string $index
+	 * If null is supplied as an index, the next new offset
+	 * will be assigned.
+	 *
+	 * @param int|string|null $index
 	 * @param Snak $value
 	 *
 	 * @throws InvalidArgumentException

@@ -72,14 +72,14 @@ class PropertyValueSnak extends SnakObject {
 		if ( method_exists( $this->dataValue, 'getSerializationForHash' ) ) {
 			// If our DataValue provides/ needs a special serialization for
 			// hashing, use it (currently only EntityIdValue).
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			return $this->dataValue->getSerializationForHash();
-		} else {
-			$innerSerialization = $this->dataValue->serialize();
 		}
+		$innerSerialization = $this->dataValue->serialize();
 		$className = get_class( $this->dataValue );
 
 		return 'C:' . strlen( $className ) . ':"' . $className .
-			'":' . strlen( $innerSerialization ) . ':{' . $innerSerialization . '}';
+			'":' . strlen( $innerSerialization ?? '' ) . ':{' . $innerSerialization . '}';
 	}
 
 	/**
