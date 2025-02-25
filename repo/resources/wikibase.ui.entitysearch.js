@@ -79,6 +79,7 @@
 
 		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, ( () => {
 			mw.track( 'counter.MediaWiki.wikibase.repo.searchbox.footer.submit' );
+			mw.track( 'stats.mediawiki_wikibase_repo_searchbox_footer_submit_total' );
 			$searchForm.trigger( 'submit' );
 		} ), 'wb-entitysearch-suggestions' );
 
