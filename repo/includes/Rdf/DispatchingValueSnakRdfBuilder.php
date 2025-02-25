@@ -63,7 +63,10 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 			$builder->addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snakNamespace, $snak );
 		} else {
 			// emit a fake predicate+object just to ensure the writer stays in a sane state when we return (T384625)
-			$writer->a( RdfVocabulary::NS_ONTOLOGY, 'BrokenSnak' );
+			$writer->say( 'rdfs', 'comment' )->text(
+				"broken $propertyValueNamespace:$propertyValueLName triple, please ignore",
+				'en'
+			);
 		}
 	}
 
@@ -88,7 +91,7 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 			$this->logger->warning(
 				__METHOD__ . ': No RDF builder defined for data type ' .
 				'{dataTypeId} nor for value type {dataValueType} ' .
-				'(for predicate {$propertyValueNamespace}:{propertyValueLName}).',
+				'(for predicate {propertyValueNamespace}:{propertyValueLName}).',
 				[
 					'dataTypeId' => $dataTypeId,
 					'dataValueType' => $dataValueType,
@@ -100,7 +103,7 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 		} else {
 			$this->logger->warning(
 				__METHOD__ . ': No RDF builder defined for value type {dataValueType} ' .
-				'(for predicate {$propertyValueNamespace}:{propertyValueLName}).',
+				'(for predicate {propertyValueNamespace}:{propertyValueLName}).',
 				[
 					'dataValueType' => $dataValueType,
 					'propertyValueNamespace' => $propertyValueNamespace,
