@@ -11,6 +11,7 @@ const {
 
 let stringPropertyId;
 let testItemId;
+let localSiteId;
 
 /**
  * Creates a reusable property on the first call and returns it on subsequent calls.
@@ -140,10 +141,12 @@ function newStatementWithRandomStringValue( propertyId ) {
 }
 
 async function getLocalSiteId() {
-	return ( await action.getAnon().meta(
+	localSiteId = localSiteId || ( await action.getAnon().meta(
 		'wikibase',
 		{ wbprop: 'siteid' }
 	) ).siteid;
+
+	return localSiteId;
 }
 
 async function createLocalSitelink( itemId, title, badges = [] ) {
