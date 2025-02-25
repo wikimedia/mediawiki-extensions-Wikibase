@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Fanjiayi",
+			"Lisyeng",
 			"Mithridates",
 			"OIS",
 			"Renan",
@@ -13,6 +14,7 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Redacter ligamentes",
 	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",
+	"wikibase-addlinkstitle": "Adjunter interlingual ligamentes",
 	"wikibase-linkitem-addlinks": "Addir ligamentes",
 	"wikibase-linkitem-title": "Ligar che págine",
 	"wikibase-linkitem-linkpage": "Ligar che págine",
