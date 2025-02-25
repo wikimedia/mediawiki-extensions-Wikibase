@@ -53,15 +53,16 @@ class ItemPatcher implements EntityPatcherStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
-		$this->assertIsItem( $entity );
+		$item = $this->assertIsItemAndCast( $entity );
 
-		$this->patchItem( $entity, $patch );
+		$this->patchItem( $item, $patch );
 	}
 
-	private function assertIsItem( EntityDocument $item ) {
+	private function assertIsItemAndCast( EntityDocument $item ): Item {
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$item must be an instance of Item' );
 		}
+		return $item;
 	}
 
 	private function patchItem( Item $item, EntityDiff $patch ) {

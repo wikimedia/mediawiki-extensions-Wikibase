@@ -49,16 +49,17 @@ class ItemDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
-		$this->assertIsItem( $from );
-		$this->assertIsItem( $to );
+		$fromItem = $this->assertIsItemAndCast( $from );
+		$toItem = $this->assertIsItemAndCast( $to );
 
-		return $this->diffItems( $from, $to );
+		return $this->diffItems( $fromItem, $toItem );
 	}
 
-	private function assertIsItem( EntityDocument $item ) {
+	private function assertIsItemAndCast( EntityDocument $item ): Item {
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$item must be an instance of Item' );
 		}
+		return $item;
 	}
 
 	public function diffItems( Item $from, Item $to ) {
@@ -108,8 +109,8 @@ class ItemDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function getConstructionDiff( EntityDocument $entity ) {
-		$this->assertIsItem( $entity );
-		return $this->diffEntities( new Item(), $entity );
+		$item = $this->assertIsItemAndCast( $entity );
+		return $this->diffEntities( new Item(), $item );
 	}
 
 	/**
@@ -119,8 +120,8 @@ class ItemDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function getDestructionDiff( EntityDocument $entity ) {
-		$this->assertIsItem( $entity );
-		return $this->diffEntities( $entity, new Item() );
+		$item = $this->assertIsItemAndCast( $entity );
+		return $this->diffEntities( $item, new Item() );
 	}
 
 }

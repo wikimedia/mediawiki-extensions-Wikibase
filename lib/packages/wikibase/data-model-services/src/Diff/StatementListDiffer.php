@@ -47,7 +47,12 @@ class StatementListDiffer {
 		 * @var Statement $statement
 		 */
 		foreach ( $statementList as $statement ) {
-			$statementArray[$statement->getGuid()] = $statement;
+			$guid = $statement->getGuid();
+			if ( $guid === null ) {
+				$statementArray[] = $statement;
+			} else {
+				$statementArray[$guid] = $statement;
+			}
 		}
 
 		return $statementArray;

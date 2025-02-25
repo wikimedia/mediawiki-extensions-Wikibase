@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Lookup;
 
 use Exception;
+use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -30,7 +31,12 @@ class ItemLookupException extends EntityLookupException {
 	 * @return ItemId
 	 */
 	public function getItemId() {
-		return $this->getEntityId();
+		$itemId = $this->getEntityId();
+		if ( !( $itemId instanceof ItemId ) ) {
+			throw new LogicException( 'expected $itemId to be of type ItemId' );
+		}
+
+		return $itemId;
 	}
 
 }
