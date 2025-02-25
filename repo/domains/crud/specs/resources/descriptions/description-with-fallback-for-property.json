@@ -2,7 +2,7 @@
 	"get": {
 		"operationId": "getPropertyDescriptionWithFallback",
 		"tags": [ "descriptions" ],
-		"summary": "Retrieve a Property's description in a specific language, with language fallback",
+		"summary": "Retrieve a Property's description in a specific language, with language fallback. If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },
@@ -13,9 +13,12 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "./responses.json#/PropertyDescription" },
+			"200": {
+				"description": "Property's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location",
+				"$ref": "./responses.json#/PropertyDescription"
+			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"307": { "$ref": "../../global/responses.json#/MovedTemporarily" },
+			"307": { "$ref": "./responses.json#/DescriptionMovedTemporarily" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
 			"412": { "$ref": "../../global/responses.json#/PreconditionFailedError" },

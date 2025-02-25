@@ -825,15 +825,5 @@
 				"required": true
 			}
 		}
-	},
-	"MovedTemporarily": {
-		"description": "The specified resource has temporarily moved to the indicated location",
-		"headers": {
-			"Location": {
-				"description": "The URL to which the requested resource has been moved",
-				"schema": { "type": "string" },
-				"required": true
-			}
-		}
 	}
 }
