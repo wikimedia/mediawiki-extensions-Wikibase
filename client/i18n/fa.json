@@ -153,7 +153,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "بارگیری دوبارهٔ صفحه",
 	"wikibase-client-data-bridge-error-go-back": "برگرد",
 	"wikibase-client-data-bridge-error-retry-save": "ذخیرهٔ دوباره",
-	"wikibase-client-data-bridge-reference-note": "ویرایش‌کردن ارجاعات در {{WBREPONAME}} بعد از ذخیره‌کردن امکان‌پذیر خواهد بود",
+	"wikibase-client-data-bridge-reference-note": "ویرایش کردن ارجاعات در {{WBREPONAME}} بعد از ذخیره کردن امکان‌پذیر خواهد بود",
 	"wikibase-client-data-bridge-thank-you-head": "بابت ویرایش‌تان از شما سپاسگزاریم!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "با کلیک‌کردن دکمهٔ زیر می‌توانید ارجاعات برای این ویژگی را در {{WBREPONAME}} ویرایش کنید.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "ویرایش ارجاع در {{WBREPONAME}}",
