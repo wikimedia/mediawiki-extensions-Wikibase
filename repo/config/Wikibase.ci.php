@@ -34,8 +34,7 @@ $wgWBRepoSettings['dataBridgeEnabled'] = true;
 // enable tainted-refs
 $wgWBRepoSettings['taintedReferencesEnabled'] = true;
 
-// enable Wikibase REST API (both the production-ready and work-in-progress routes)
-$wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.json';
+// enable Wikibase REST API work-in-progress routes
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.dev.json';
 
 // enable Federated Properties. With only local (= db) Entity Sources, this should have no effect.
