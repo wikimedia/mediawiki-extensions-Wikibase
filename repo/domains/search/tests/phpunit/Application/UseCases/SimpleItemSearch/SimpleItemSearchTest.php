@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\SimpleItemSear
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
@@ -17,10 +18,12 @@ use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
  */
 class SimpleItemSearchTest extends TestCase {
 
+	private SimpleItemSearchValidator $validator;
 	private ItemSearchEngine $searchEngine;
 
 	protected function setUp(): void {
 		parent::setUp();
+		$this->validator = $this->createStub( SimpleItemSearchValidator::class );
 		$this->searchEngine = $this->createStub( ItemSearchEngine::class );
 	}
 
@@ -48,6 +51,6 @@ class SimpleItemSearchTest extends TestCase {
 	}
 
 	private function newUseCase(): SimpleItemSearch {
-		return new SimpleItemSearch( $this->searchEngine );
+		return new SimpleItemSearch( $this->validator, $this->searchEngine );
 	}
 }

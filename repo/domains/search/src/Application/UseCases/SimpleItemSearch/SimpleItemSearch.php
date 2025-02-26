@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch;
 
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
 /**
@@ -9,13 +10,23 @@ use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
  */
 class SimpleItemSearch {
 
+	private SimpleItemSearchValidator $validator;
 	private ItemSearchEngine $searchEngine;
 
-	public function __construct( ItemSearchEngine $searchEngine ) {
+	public function __construct(
+		SimpleItemSearchValidator $validator,
+		ItemSearchEngine $searchEngine
+	) {
 		$this->searchEngine = $searchEngine;
+		$this->validator = $validator;
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( SimpleItemSearchRequest $itemRequest ): SimpleItemSearchResponse {
+		$this->validator->validate( $itemRequest );
+
 		$searchTerm = $itemRequest->getQuery();
 		$language = $itemRequest->getLanguage();
 

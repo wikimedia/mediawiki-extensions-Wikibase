@@ -85,6 +85,39 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "The request cannot be processed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"code": { "type": "string" },
+										"message": { "type": "string" },
+										"context": { "type": "object" }
+									},
+									"required": [ "code", "message" ],
+									"additionalProperties": false
+								},
+								"examples": {
+									"invalid-query-parameter": {
+										"value": {
+											"code": "invalid-query-parameter",
+											"message": "Invalid query parameter: 'language'",
+											"context": { "parameter": "language" }
+										}
+									}
+								}
+							}
+						},
+						"headers": {
+							"Content-Language": {
+								"description": "Language code of the language in which error message is provided",
+								"schema": { "type": "string" },
+								"required": true
+							}
+						}
 					}
 				}
 			}

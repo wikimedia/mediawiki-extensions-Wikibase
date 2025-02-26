@@ -49,4 +49,13 @@ describe( 'Simple item search', () => {
 		assert.lengthOf( response.body.results, 0 );
 		expect( response ).to.satisfyApiSchema;
 	} );
+
+	it( '400 - invalid language code', async () => {
+		const response = await newSearchRequest( 'not_a_valid_language', utils.uniq( 40 ) )
+			.assertInvalidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 400 );
+		expect( response ).to.satisfyApiSchema;
+	} );
 } );
