@@ -36,14 +36,6 @@ class RequestBuilder {
 	}
 
 	/**
-	 * @return {this}
-	 */
-	skipRouteValidation() {
-		this.validateRoute = false;
-		return this;
-	}
-
-	/**
 	 * @param {string} name path param name, e.g. 'item_id' for /v1/entities/items/{item_id}
 	 * @param {string} value
 	 * @return {this}
