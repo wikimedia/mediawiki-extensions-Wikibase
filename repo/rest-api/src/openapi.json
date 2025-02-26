@@ -11501,7 +11501,7 @@
         "tags": [
           "descriptions"
         ],
-        "summary": "Retrieve an Item's description in a specific language, with language fallback",
+        "summary": "Retrieve an Item's description in a specific language, with language fallback. If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description",
         "parameters": [
           {
             "in": "path",
@@ -11587,7 +11587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Item's description in a specific language",
+            "description": "Item's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location",
             "headers": {
               "ETag": {
                 "description": "Last entity revision number",
@@ -11632,7 +11632,7 @@
             }
           },
           "307": {
-            "description": "The specified resource has temporarily moved to the indicated location",
+            "description": "A description in a fallback language exists in the indicated location",
             "headers": {
               "Location": {
                 "description": "The URL to which the requested resource has been moved",
@@ -12981,7 +12981,7 @@
         "tags": [
           "descriptions"
         ],
-        "summary": "Retrieve a Property's description in a specific language, with language fallback",
+        "summary": "Retrieve a Property's description in a specific language, with language fallback. If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description",
         "parameters": [
           {
             "in": "path",
@@ -13067,7 +13067,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Property's description in a specific language",
+            "description": "Property's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location",
             "headers": {
               "ETag": {
                 "description": "Last entity revision number",
@@ -13112,7 +13112,7 @@
             }
           },
           "307": {
-            "description": "The specified resource has temporarily moved to the indicated location",
+            "description": "A description in a fallback language exists in the indicated location",
             "headers": {
               "Location": {
                 "description": "The URL to which the requested resource has been moved",
@@ -21072,7 +21072,7 @@
         "tags": [
           "labels"
         ],
-        "summary": "Retrieve an Item's label in a specific language, with language fallback",
+        "summary": "Retrieve an Item's label in a specific language, with language fallback. If a label is defined in the requested language, the API responds with a 200 status code and includes the label in the response payload. If a label only exists in a fallback language, the API returns a 307 status code and provides the location of the label",
         "parameters": [
           {
             "in": "path",
@@ -21158,7 +21158,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A label in a specific language",
+            "description": "Item's label in a specific language. If a label only exists in a fallback language, the API returns a 307 status code and provides its location",
             "headers": {
               "ETag": {
                 "description": "Last entity revision number",
@@ -21203,7 +21203,7 @@
             }
           },
           "307": {
-            "description": "The specified resource has temporarily moved to the indicated location",
+            "description": "A label in a fallback language exists in the indicated location",
             "headers": {
               "Location": {
                 "description": "The URL to which the requested resource has been moved",
@@ -22553,7 +22553,7 @@
         "tags": [
           "labels"
         ],
-        "summary": "Retrieve a Property's label in a specific language, with language fallback",
+        "summary": "Retrieve a Property's label in a specific language, with language fallback. If a label is defined in the requested language, the API responds with a 200 status code and includes the label in the response payload. If a label only exists in a fallback language, the API returns a 307 status code and provides the location of the label",
         "parameters": [
           {
             "in": "path",
@@ -22639,7 +22639,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A label in a specific language",
+            "description": "Property's label in a specific language. If a label only exists in a fallback language, the API returns a 307 status code and provides its location",
             "headers": {
               "ETag": {
                 "description": "Last entity revision number",
@@ -22684,7 +22684,7 @@
             }
           },
           "307": {
-            "description": "The specified resource has temporarily moved to the indicated location",
+            "description": "A label in a fallback language exists in the indicated location",
             "headers": {
               "Location": {
                 "description": "The URL to which the requested resource has been moved",
@@ -39306,8 +39306,8 @@
           }
         }
       },
-      "MovedTemporarily": {
-        "description": "The specified resource has temporarily moved to the indicated location",
+      "DescriptionMovedTemporarily": {
+        "description": "A description in a fallback language exists in the indicated location",
         "headers": {
           "Location": {
             "description": "The URL to which the requested resource has been moved",
@@ -41043,6 +41043,18 @@
         "headers": {
           "Content-Language": {
             "description": "Language code of the language in which error message is provided",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        }
+      },
+      "LabelMovedTemporarily": {
+        "description": "A label in a fallback language exists in the indicated location",
+        "headers": {
+          "Location": {
+            "description": "The URL to which the requested resource has been moved",
             "schema": {
               "type": "string"
             },

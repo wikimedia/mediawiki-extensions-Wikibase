@@ -124,5 +124,15 @@
 				"example": "Label deleted"
 			}
 		}
+	},
+	"LabelMovedTemporarily": {
+		"description": "A label in a fallback language exists in the indicated location",
+		"headers": {
+			"Location": {
+				"description": "The URL to which the requested resource has been moved",
+				"schema": { "type": "string" },
+				"required": true
+			}
+		}
 	}
 }

@@ -2,7 +2,7 @@
 	"get": {
 		"operationId": "getItemDescriptionWithFallback",
 		"tags": [ "descriptions" ],
-		"summary": "Retrieve an Item's description in a specific language, with language fallback",
+		"summary": "Retrieve an Item's description in a specific language, with language fallback. If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/ItemId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },
@@ -13,9 +13,12 @@
 			{ "$ref": "../../global/parameters.json#/Authorization" }
 		],
 		"responses": {
-			"200": { "$ref": "./responses.json#/ItemDescription" },
+			"200": {
+				"description":"Item's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location",
+				"$ref": "./responses.json#/ItemDescription"
+			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
-			"307": { "$ref": "../../global/responses.json#/MovedTemporarily" },
+			"307": { "$ref": "./responses.json#/DescriptionMovedTemporarily" },
 			"308": { "$ref": "../../global/responses.json#/MovedPermanently" },
 			"400": { "$ref": "../../global/responses.json#/InvalidTermByLanguageInput" },
 			"404": { "$ref": "../../global/responses.json#/ResourceNotFound" },
