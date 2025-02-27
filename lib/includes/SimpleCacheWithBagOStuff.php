@@ -419,6 +419,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * and {@link self::validate() validated}.
 	 * Even then, we only support unserializing `stdClass`, no other classes.
 	 *
+	 * @param string $decodedData
+	 * @param mixed $default
+	 * @param array $loggingContext
 	 * @return mixed
 	 */
 	private function safelyUnserialize( string $decodedData, $default, array $loggingContext ) {

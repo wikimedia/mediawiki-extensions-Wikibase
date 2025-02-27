@@ -98,6 +98,7 @@ class TypeDispatchingEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param int $flags
 	 * @param int|bool $baseRevId
+	 * @param array $tags
 	 *
 	 * @throws StorageException
 	 * @throws PermissionsError

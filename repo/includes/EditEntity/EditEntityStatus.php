@@ -7,6 +7,7 @@ namespace Wikibase\Repo\EditEntity;
 use ArrayAccess;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
+use StatusValue;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\TempUserStatus;
 use Wikimedia\Assert\Assert;
@@ -28,7 +29,10 @@ class EditEntityStatus extends TempUserStatus {
 		], $savedTempUser, $context );
 	}
 
-	/** @return static */
+	/**
+	 * @param StatusValue $sv
+	 * @return static
+	 */
 	public static function wrap( $sv ) {
 		// This implementation only exists to change the declared return type,
 		// from Status to static (i.e. EditEntityStatus);

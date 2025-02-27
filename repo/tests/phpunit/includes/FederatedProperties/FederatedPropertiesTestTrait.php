@@ -115,6 +115,9 @@ trait FederatedPropertiesTestTrait {
 	/**
 	 * Only set the global value if this trait is being used in a MediaWiki integration test.
 	 * These tests will automatically reset the global at the end of processing a test.
+	 *
+	 * @param string $name
+	 * @param mixed $value
 	 */
 	private function setWbSettingInGlobalIfMwIntegrationTest( string $name, $value ) {
 		if ( method_exists( $this, 'setMwGlobals' ) ) {

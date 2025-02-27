@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Actions;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
+use StatusValue;
 use Wikibase\Repo\TempUserStatus;
 
 /**
@@ -27,7 +28,10 @@ class SubmitEntityStatus extends TempUserStatus {
 		);
 	}
 
-	/** @return static */
+	/**
+	 * @param StatusValue $sv
+	 * @return static
+	 */
 	public static function wrap( $sv ) {
 		// This implementation only exists to change the declared return type,
 		// from Status to static (i.e. EditEntityStatus);

@@ -14,6 +14,8 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Message\MessageParam;
+use Wikimedia\Message\MessageSpecifier;
 
 /**
  * @license GPL-2.0-or-later
@@ -380,6 +382,7 @@ class RecentChangeFactory {
 
 	/**
 	 * @param string $key
+	 * @param MessageParam|MessageSpecifier|string|int|float|list<MessageParam|MessageSpecifier|string|int|float> ...$params
 	 *
 	 * @return Message
 	 */

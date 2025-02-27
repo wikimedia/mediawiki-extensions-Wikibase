@@ -46,6 +46,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
+	 * @param bool $isMobileView
 	 */
 	public function __construct(
 		$name,

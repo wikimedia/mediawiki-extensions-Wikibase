@@ -58,6 +58,7 @@ class PatchedPropertyDescriptionsValidatorTest extends TestCase {
 	 * @dataProvider invalidDescriptionsProvider
 	 *
 	 * @param mixed $serialization
+	 * @param UseCaseError $expectedError
 	 */
 	public function testWithInvalidDescriptions( $serialization, UseCaseError $expectedError ): void {
 		try {

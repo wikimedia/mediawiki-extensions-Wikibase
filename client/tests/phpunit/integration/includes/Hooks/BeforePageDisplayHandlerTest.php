@@ -260,6 +260,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param bool $loggedIn
+	 * @param bool $tempUser
 	 *
 	 * @return User
 	 */

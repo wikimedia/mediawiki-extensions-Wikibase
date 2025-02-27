@@ -183,6 +183,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @see getValidationErrorLocalizer()
 	 *
 	 * @param bool $forCreation Whether the entity is created (true) or updated (false).
+	 * @param EntityId $entityId
 	 *
 	 * @return EntityValidator[]
 	 */

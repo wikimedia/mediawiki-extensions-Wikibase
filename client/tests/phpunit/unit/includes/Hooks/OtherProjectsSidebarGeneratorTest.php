@@ -142,6 +142,8 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * @param string $expectedMethod
+	 * @param mixed $expectedArgument
 	 * @return SiteLinksForDisplayLookup
 	 */
 	private function getSiteLinkForDisplayLookup( string $expectedMethod, $expectedArgument ) {

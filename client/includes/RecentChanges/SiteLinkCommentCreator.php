@@ -11,6 +11,8 @@ use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
+use Wikimedia\Message\MessageParam;
+use Wikimedia\Message\MessageSpecifier;
 
 /**
  * Creates an array structure with comment information for storing
@@ -316,6 +318,7 @@ class SiteLinkCommentCreator {
 
 	/**
 	 * @param string $key
+	 * @param MessageParam|MessageSpecifier|string|int|float|list<MessageParam|MessageSpecifier|string|int|float> ...$params
 	 *
 	 * @return Message
 	 */

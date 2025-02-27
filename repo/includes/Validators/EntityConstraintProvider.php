@@ -69,6 +69,8 @@ class EntityConstraintProvider {
 	 * respective ChangeOps, so not all such (potentially expensive) validators are applied
 	 * for all updates.
 	 *
+	 * @param string $entityType
+	 * @param EntityId $entityId
 	 * @return EntityValidator[]
 	 */
 	public function getCreationValidators( $entityType, EntityId $entityId ): array {

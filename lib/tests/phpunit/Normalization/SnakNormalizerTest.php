@@ -59,7 +59,11 @@ class SnakNormalizerTest extends TestCase {
 		return $normalizer;
 	}
 
-	/** Return a function which will always return the given constant value. */
+	/**
+	 * Return a function which will always return the given constant value.
+	 *
+	 * @param mixed $return
+	 */
 	private static function constantCallable( $return ): callable {
 		return static function () use ( $return ) {
 			return $return;

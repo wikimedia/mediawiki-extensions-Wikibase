@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable MediaWiki.Commenting.FunctionComment.MissingParamTag -- Test trait, no param tag for test functions
+
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
 use DataValues\StringValue;

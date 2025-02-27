@@ -11,6 +11,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikimedia\Message\MessageParam;
+use Wikimedia\Message\MessageSpecifier;
 
 /**
  * Decorator for SnakFormatter that handles PropertyDataTypeLookupException and
@@ -97,6 +99,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 
 	/**
 	 * @param string $key
+	 * @param MessageParam|MessageSpecifier|string|int|float|list<MessageParam|MessageSpecifier|string|int|float> ...$args
 	 *
 	 * @return string Formatted warning, in the format specified by getFormat()
 	 */

@@ -49,6 +49,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
+	 * @param AnonymousEditWarningBuilder $anonymousEditWarningBuilder
 	 */
 	public function __construct(
 		$title,
