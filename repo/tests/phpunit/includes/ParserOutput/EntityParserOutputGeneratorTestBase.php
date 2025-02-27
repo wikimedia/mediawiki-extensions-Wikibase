@@ -130,7 +130,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return DispatchingEntityMetaTagsCreatorFactory
 	 */
-	protected function getEntityMetaTagsFactory( $title = null, $description = null ) {
+	protected function getEntityMetaTagsFactory( ?string $title = null, ?string $description = null ) {
 		$entityMetaTagsCreatorFactory = $this->createMock( DispatchingEntityMetaTagsCreatorFactory::class );
 
 		$entityMetaTagsCreatorFactory
@@ -143,7 +143,7 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityMetaTags
 	 */
-	protected function getMetaTags( $title, $description ) {
+	protected function getMetaTags( ?string $title, ?string $description ) {
 		$entityMetaTagsCreator = $this->getMockBuilder( EntityMetaTagsCreator::class )
 			->onlyMethods( [
 				'getMetaTags',

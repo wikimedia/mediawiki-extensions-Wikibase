@@ -100,7 +100,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 	/**
 	 * Make sure rows for titles that are in $expectedRedactedTitles correctly got changed.
 	 */
-	private function assertTitlesRedacted( array $expectedRedactedTitles, $visibilityBitFlag ) {
+	private function assertTitlesRedacted( array $expectedRedactedTitles, int $visibilityBitFlag ) {
 		if ( !$expectedRedactedTitles ) {
 			$this->assertTrue( (bool)"Nothing to do" );
 			return;

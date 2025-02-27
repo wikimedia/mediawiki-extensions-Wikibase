@@ -342,7 +342,7 @@ class TermboxRemoteRendererTest extends TestCase {
 	/**
 	 * @return TermLanguageFallbackChain
 	 */
-	private function newLanguageFallbackChain( $languages = [] ) {
+	private function newLanguageFallbackChain( array $languages = [] ) {
 		$stubContentLanguages = $this->createStub( ContentLanguages::class );
 		$stubContentLanguages->method( 'hasLanguage' )
 			->willReturn( true );

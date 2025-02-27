@@ -95,7 +95,7 @@ class UserPreferredContentLanguagesLookupTest extends TestCase {
 	/**
 	 * @return UserPreferredContentLanguagesLookup
 	 */
-	private function newUserPreferredTermsLanguagesLookup( $wikiDefaultLanguage = 'en' ) {
+	private function newUserPreferredTermsLanguagesLookup( string $wikiDefaultLanguage = 'en' ) {
 		return new UserPreferredContentLanguagesLookup(
 			$this->contentLanguages, $this->userLanguageLookup, $wikiDefaultLanguage
 		);

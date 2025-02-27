@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\Diff;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
+use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\ExternalUserNames;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
@@ -39,7 +40,11 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return RecentChangeFactory
 	 */
-	private function newRecentChangeFactoryHelper( $entitySourceDefinitions, $clientDomainDb, $centralIdLookup ) {
+	private function newRecentChangeFactoryHelper(
+		EntitySourceDefinitions $entitySourceDefinitions,
+		ClientDomainDb $clientDomainDb,
+		?CentralIdLookup $centralIdLookup
+	) {
 		$siteLookup = $this->createMock( SiteLookup::class );
 
 		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'qqx' );

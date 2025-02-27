@@ -88,7 +88,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return HTMLItemReferenceField
 	 */
-	protected function createField( $params = [] ) {
+	protected function createField( array $params = [] ) {
 		$htmlFormMock = $this->createMock( HTMLForm::class );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		$htmlFormMock->method( 'getLanguage' )->willReturn( $language );

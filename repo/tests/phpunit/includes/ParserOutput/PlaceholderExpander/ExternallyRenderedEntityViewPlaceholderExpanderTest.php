@@ -7,6 +7,7 @@ use MediaWiki\Output\OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
@@ -226,7 +227,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	/**
 	 * @return MockObject|OutputPageEntityIdReader
 	 */
-	protected function newEntityIdReaderReturningEntityId( $id ) {
+	protected function newEntityIdReaderReturningEntityId( ?EntityId $id ) {
 		$entityIdReader = $this->createMock( OutputPageEntityIdReader::class );
 		$entityIdReader->method( 'getEntityIdFromOutputPage' )
 			->willReturn( $id );
@@ -248,7 +249,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	/**
 	 * @return MockObject|OutputPageRevisionIdReader
 	 */
-	protected function newOutputPageRevisionIdReader( $revisionId = EntityRevision::UNSAVED_REVISION ) {
+	protected function newOutputPageRevisionIdReader( int $revisionId = EntityRevision::UNSAVED_REVISION ) {
 		$reader = $this->createMock( OutputPageRevisionIdReader::class );
 		$reader
 			->method( 'getRevisionFromOutputPage' )

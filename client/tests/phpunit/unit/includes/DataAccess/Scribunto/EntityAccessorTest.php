@@ -247,7 +247,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return Item
 	 */
-	private function getItemWithStatements( $statementDeprecated = false ) {
+	private function getItemWithStatements( bool $statementDeprecated = false ) {
 		$p65 = new NumericPropertyId( 'P65' );
 		$p68 = new NumericPropertyId( 'P68' );
 

@@ -68,7 +68,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	private function getOutputFormatSnakFormatterFactory( $expectedFormat ) {
+	private function getOutputFormatSnakFormatterFactory( string $expectedFormat ) {
 		$factory = $this->createMock( OutputFormatSnakFormatterFactory::class );
 
 		$snakFormatter = $this->createMock( SnakFormatter::class );
