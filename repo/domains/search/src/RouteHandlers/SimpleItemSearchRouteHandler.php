@@ -36,9 +36,14 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		global $wgSearchType;
 
-		$searchEngine = $wgSearchType === 'CirrusSearch'
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$isWikibaseCirrusSearchEnabled = $mediaWikiServices->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
+		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch';
+		$useMediaWikiSearchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
+
+		$searchEngine = $useMediaWikiSearchEngine
 			? new MediaWikiSearchEngine(
-				MediaWikiServices::getInstance()->getSearchEngineFactory()->create(),
+				$mediaWikiServices->getSearchEngineFactory()->create(),
 				WikibaseRepo::getEntityNamespaceLookup(),
 				RequestContext::getMain()
 			)
