@@ -11,13 +11,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 
 /**
- * @covers \Wikibase\Lib\Store\TitleBasedEntityExistenceChecker
+ * @covers \Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider existenceProvider

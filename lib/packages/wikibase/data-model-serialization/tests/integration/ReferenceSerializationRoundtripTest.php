@@ -15,13 +15,14 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\DeserializerFactory
+ * @covers \Wikibase\DataModel\Deserializers\DeserializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
 class ReferenceSerializationRoundtripTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider referenceProvider

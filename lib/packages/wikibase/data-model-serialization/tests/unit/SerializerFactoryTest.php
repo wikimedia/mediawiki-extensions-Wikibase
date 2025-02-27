@@ -25,13 +25,14 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\SerializerFactory
+ * @covers \Wikibase\DataModel\Serializers\SerializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SerializerFactoryTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	private function buildSerializerFactory(): SerializerFactory {
 		return new SerializerFactory( new DataValueSerializer() );

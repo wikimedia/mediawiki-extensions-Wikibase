@@ -8,7 +8,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Modules\DataTypesModule;
 
 /**
- * @covers \WikibaseRepo\Modules\DataTypesModule
+ * @covers \Wikibase\Lib\Modules\DataTypesModule
  *
  * @group Wikibase
  *
@@ -17,6 +17,7 @@ use Wikibase\Lib\Modules\DataTypesModule;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
+	use \MediaWikiCoversValidator;
 
 	public static function provideDataTypesModuleAndResourceDefinition() {
 		$validResourceDefinitions = [

@@ -10,13 +10,14 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 
 /**
- * @covers Wikibase\DataModel\DeserializerFactory
+ * @covers \Wikibase\DataModel\Deserializers\DeserializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DeserializerFactoryTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	private function buildDeserializerFactory() {
 		return new DeserializerFactory(
