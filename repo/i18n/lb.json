@@ -313,6 +313,7 @@
 	"wikibase-api-failed-save": "D'Späicheren huet net geklappt.",
 	"wikibase-api-inconsistent-language": "Inkonsistent Sprooch „$1“ entdeckt („$2“ erwaart).",
 	"wikibase-api-inconsistent-site": "Inkonsistent Websäit entdeckt.",
+	"wikibase-api-no-external-page": "Déi extern Websäit „$1“ huet keng Informatioune fir d'Säit „$2“ geliwwert.",
 	"wikibase-api-not-statement": "Keng Ausso.",
 	"wikibase-api-not-item": "Keen Element.",
 	"wikibase-api-not-recognized-datatype": "Et gouf een Datentyp erwaart, mee e feelt oder gouf net erkannt.",
