@@ -76,8 +76,14 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		return array_map(
 			fn( ItemSearchResult $result ) => [
 				'id' => $result->getItemId()->getSerialization(),
-				'label' => $result->getLabel(),
-				'description' => $result->getDescription(),
+				'label' => $result->getLabel() ? [
+					'language' => $result->getLabel()->getLanguageCode(),
+					'value' => $result->getLabel()->getText(),
+				] : null,
+				'description' => $result->getDescription() ? [
+					'language' => $result->getDescription()->getLanguageCode(),
+					'value' => $result->getDescription()->getText(),
+				] : null,
 			],
 			iterator_to_array( $results )
 		);

@@ -10,8 +10,10 @@ use SearchResult;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
 /**
@@ -71,12 +73,15 @@ class MediaWikiSearchEngine implements ItemSearchEngine {
 		return new ItemSearchResults(
 			...array_map(
 				function ( SearchResult $result ) {
+					// @phan-suppress-next-line PhanUndeclaredMethod - phan does not know about WikibaseCirrusSearch
+					$labelData = $result->getLabelData();
+					// @phan-suppress-next-line PhanUndeclaredMethod - phan does not know about WikibaseCirrusSearch
+					$descriptionData = $result->getDescriptionData();
+
 					return new ItemSearchResult(
 						new ItemId( $result->getTitle()->getText() ),
-						// @phan-suppress-next-line PhanUndeclaredMethod - phan does not know about WikibaseCirrusSearch
-						$result->getLabelData()['value'],
-						// @phan-suppress-next-line PhanUndeclaredMethod - phan does not know about WikibaseCirrusSearch
-						$result->getDescriptionData()['value']
+						$labelData ? new Label( $labelData['language'], $labelData['value'] ) : null,
+						$descriptionData ? new Description( $descriptionData['language'], $descriptionData['value'] ) : null
 					);
 				},
 				$results

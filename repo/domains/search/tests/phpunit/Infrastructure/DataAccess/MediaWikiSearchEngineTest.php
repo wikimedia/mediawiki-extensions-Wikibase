@@ -16,8 +16,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\MediaWikiSearchEngine;
 use Wikibase\Search\Elastic\EntityResult;
 
@@ -73,8 +75,16 @@ class MediaWikiSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemSearchResults(
-				new ItemSearchResult( new ItemId( self::RESULT1_ITEM_ID ), self::RESULT1_LABEL, self::RESULT1_DESCRIPTION ),
-				new ItemSearchResult( new ItemId( self::RESULT2_ITEM_ID ), self::RESULT2_LABEL, self::RESULT2_DESCRIPTION ),
+				new ItemSearchResult(
+					new ItemId( self::RESULT1_ITEM_ID ),
+					new Label( 'en', self::RESULT1_LABEL ),
+					new Description( 'en', self::RESULT1_DESCRIPTION )
+				),
+				new ItemSearchResult(
+					new ItemId( self::RESULT2_ITEM_ID ),
+					new Label( 'en', self::RESULT2_LABEL ),
+					new Description( 'en', self::RESULT2_DESCRIPTION )
+				),
 			),
 			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
 		);

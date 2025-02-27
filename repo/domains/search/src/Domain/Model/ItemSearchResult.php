@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\ItemId;
 class ItemSearchResult {
 
 	private ItemId $itemId;
-	private string $label;
-	private string $description;
+	private ?Label $label;
+	private ?Description $description;
 
-	public function __construct( ItemId $itemId, string $label, string $description ) {
+	public function __construct( ItemId $itemId, ?Label $label, ?Description $description ) {
 		$this->itemId = $itemId;
 		$this->label = $label;
 		$this->description = $description;
@@ -23,11 +23,11 @@ class ItemSearchResult {
 		return $this->itemId;
 	}
 
-	public function getLabel(): string {
+	public function getLabel(): ?Label {
 		return $this->label;
 	}
 
-	public function getDescription(): string {
+	public function getDescription(): ?Description {
 		return $this->description;
 	}
 }

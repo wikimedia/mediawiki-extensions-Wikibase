@@ -51,7 +51,8 @@ describe( 'Simple item search', () => {
 	} );
 
 	it( 'finds items matching the search term', async () => {
-		const response = await newSearchRequest( 'en', englishTermMatchingTwoItems )
+		const language = 'en';
+		const response = await newSearchRequest( language, englishTermMatchingTwoItems )
 			.assertValidRequest()
 			.makeRequest();
 
@@ -61,22 +62,32 @@ describe( 'Simple item search', () => {
 		assert.lengthOf( results, 2 );
 
 		const item1Result = results.find( ( { id } ) => id === item1.id );
-		assert.deepEqual( item1Result, { id: item1.id, label: item1Label, description: item1Description } );
+		assert.deepEqual( item1Result, {
+			id: item1.id,
+			label: { language, value: item1Label },
+			description: { language, value: item1Description }
+		} );
 
 		const item2Result = results.find( ( { id } ) => id === item2.id );
-		assert.deepEqual( item2Result, { id: item2.id, label: item2Label, description: item2Description } );
+		assert.deepEqual( item2Result, {
+			id: item2.id,
+			label: { language, value: item2Label },
+			description: { language, value: item2Description }
+		} );
 	} );
 
 	it( 'finds items matching the search term in another language', async () => {
-		const response = await newSearchRequest( 'de', item1GermanLabel )
+		const language = 'de';
+		const response = await newSearchRequest( language, item1GermanLabel )
 			.assertValidRequest()
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		assert.deepEqual(
-			response.body.results,
-			[ { id: item1.id, label: item1GermanLabel, description: item1GermanDescription } ]
-		);
+		assert.deepEqual( response.body.results, [ {
+			id: item1.id,
+			label: { language, value: item1GermanLabel },
+			description: { language, value: item1GermanDescription }
+		} ] );
 	} );
 
 	it( 'finds nothing if no items match', async () => {
