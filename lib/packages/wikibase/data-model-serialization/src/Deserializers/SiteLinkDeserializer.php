@@ -53,7 +53,7 @@ class SiteLinkDeserializer implements Deserializer {
 		);
 	}
 
-	private function getDeserializeBadges( array $serialization ) {
+	private function getDeserializeBadges( array $serialization ): array {
 		if ( !array_key_exists( 'badges', $serialization ) ) {
 			return [];
 		}
@@ -66,7 +66,7 @@ class SiteLinkDeserializer implements Deserializer {
 		return $badges;
 	}
 
-	private function deserializeItemId( $serialization ) {
+	private function deserializeItemId( $serialization ): ItemId {
 		$itemId = $this->entityIdDeserializer->deserialize( $serialization );
 
 		if ( !( $itemId instanceof ItemId ) ) {

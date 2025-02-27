@@ -105,7 +105,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 		return $label;
 	}
 
-	private function getTerm( EntityId $entityId, $languageCode, $termName = self::LABEL ) {
+	private function getTerm( EntityId $entityId, string $languageCode, string $termName = self::LABEL ): ?TermFallback {
 		$resolutionResult = $this->redirectResolvingRevisionLookup->lookupLatestRevisionResolvingRedirect( $entityId );
 		if ( $resolutionResult === null ) {
 			return null;

@@ -71,7 +71,7 @@ class SiteLinkListPatcher {
 		);
 	}
 
-	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
+	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ): array {
 		$linksInDiffFormat = [];
 
 		foreach ( $siteLinks->toArray() as $siteLink ) {

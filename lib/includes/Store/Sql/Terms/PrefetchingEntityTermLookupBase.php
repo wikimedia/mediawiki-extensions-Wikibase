@@ -133,7 +133,7 @@ abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase impl
 		return $this->getFromBuffer( $entityId, TermTypes::TYPE_ALIAS, $languageCode ) ?? false;
 	}
 
-	private function getFromBuffer( EntityId $entityId, $termType, $languageCode ) {
+	private function getFromBuffer( EntityId $entityId, string $termType, string $languageCode ): ?array {
 		if ( !( $entityId instanceof Int32EntityId ) ) {
 			throw new InvalidArgumentException( "Not an Int32EntityId: " . $entityId->getSerialization() );
 		}

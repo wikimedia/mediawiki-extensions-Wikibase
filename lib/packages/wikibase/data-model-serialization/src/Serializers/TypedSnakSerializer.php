@@ -47,7 +47,7 @@ class TypedSnakSerializer implements Serializer {
 		}
 	}
 
-	private function getSerialized( TypedSnak $typedSnak ) {
+	private function getSerialized( TypedSnak $typedSnak ): array {
 		$serialization = $this->snakSerializer->serialize( $typedSnak->getSnak() );
 
 		$serialization['datatype'] = $typedSnak->getDataTypeId();

@@ -42,7 +42,7 @@ final class TestChanges {
 		return $factory;
 	}
 
-	private static function getInstances() {
+	private static function getInstances(): array {
 		/** @var EntityChange[] $changes */
 		static $changes = [];
 

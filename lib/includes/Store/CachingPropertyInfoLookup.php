@@ -183,14 +183,14 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		return $this->propertyInfo;
 	}
 
-	private function getFullTableCacheKey() {
+	private function getFullTableCacheKey(): string {
 		return $this->cache->makeGlobalKey(
 			CacheAwarePropertyInfoStore::CACHE_CLASS,
 			$this->cacheKeyGroup
 		);
 	}
 
-	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+	private function getSinglePropertyCacheKey( PropertyId $propertyId ): string {
 		return $this->cache->makeGlobalKey(
 			CacheAwarePropertyInfoStore::CACHE_CLASS,
 			$this->cacheKeyGroup,

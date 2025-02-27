@@ -72,7 +72,7 @@ class ItemDiffer implements EntityDifferStrategy {
 		return new ItemDiff( $diffOps );
 	}
 
-	private function toDiffArray( Item $item ) {
+	private function toDiffArray( Item $item ): array {
 		$array = [];
 
 		$array['aliases'] = $item->getAliasGroups()->toTextArray();
@@ -83,7 +83,7 @@ class ItemDiffer implements EntityDifferStrategy {
 		return $array;
 	}
 
-	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
+	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ): array {
 		$linksInDiffFormat = [];
 
 		foreach ( $siteLinks->toArray() as $siteLink ) {

@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
  */
 trait DatabaseTermStoreWriterTestGetTermsTrait {
 
-	private function getTerms( Int32EntityId $entityId, $termsTable, $termInLangField, $idField ): Fingerprint {
+	private function getTerms( Int32EntityId $entityId, string $termsTable, string $termInLangField, string $idField ): Fingerprint {
 		$termsDb = $this->getTermsDomainDb();
 		$termInLangIdsResolver = new DatabaseTermInLangIdsResolver( $termsDb );
 

@@ -28,7 +28,7 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 		$this->urlExpander = $urlExpander;
 	}
 
-	private function escapeWikitextInUrl( $url ) {
+	private function escapeWikitextInUrl( string $url ): string {
 		return str_replace( [
 			'[', ']', '<', '>', '\'', ' ', "\r", "\n", "\t",
 		], [

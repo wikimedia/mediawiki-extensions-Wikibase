@@ -146,14 +146,14 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		return true;
 	}
 
-	private function getFullTableCacheKey() {
+	private function getFullTableCacheKey(): string {
 		return $this->cache->makeGlobalKey(
 			self::CACHE_CLASS,
 			$this->cacheKeyGroup
 		);
 	}
 
-	private function getSinglePropertyCacheKey( NumericPropertyId $propertyId ) {
+	private function getSinglePropertyCacheKey( NumericPropertyId $propertyId ): string {
 		return $this->cache->makeGlobalKey(
 			self::CACHE_CLASS,
 			$this->cacheKeyGroup,

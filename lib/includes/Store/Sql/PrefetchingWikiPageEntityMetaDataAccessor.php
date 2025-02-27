@@ -258,7 +258,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 		return $revisionIds;
 	}
 
-	private function doFetch( $mode ) {
+	private function doFetch( string $mode ) {
 		if ( !$this->toFetch ) {
 			return;
 		}

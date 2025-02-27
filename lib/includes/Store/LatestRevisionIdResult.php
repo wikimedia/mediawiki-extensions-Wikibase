@@ -99,7 +99,7 @@ final class LatestRevisionIdResult {
 		return $result;
 	}
 
-	private function __construct( $type ) {
+	private function __construct( string $type ) {
 		$this->type = $type;
 	}
 

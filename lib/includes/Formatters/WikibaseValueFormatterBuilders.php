@@ -186,7 +186,7 @@ class WikibaseValueFormatterBuilders {
 		$this->languageFactory = $languageFactory;
 	}
 
-	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
+	private function newPlainEntityIdFormatter( FormatterOptions $options ): EntityIdValueFormatter {
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new EntityIdValueFormatter(
 			new EntityIdLabelFormatter( $labelDescriptionLookup )
@@ -270,14 +270,14 @@ class WikibaseValueFormatterBuilders {
 		);
 	}
 
-	private function getNonCachingLookup( FormatterOptions $options ) {
+	private function getNonCachingLookup( FormatterOptions $options ): LanguageFallbackLabelDescriptionLookup {
 		return new LanguageFallbackLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
 	}
 
-	private function getLabelDescriptionLookup( FormatterOptions $options ) {
+	private function getLabelDescriptionLookup( FormatterOptions $options ): CachingFallbackLabelDescriptionLookup {
 		return new CachingFallbackLabelDescriptionLookup(
 			$this->cache,
 			$this->redirectResolvingLatestRevisionLookup,

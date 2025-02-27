@@ -74,7 +74,7 @@ class FormatterLabelDescriptionLookupFactory {
 		}
 	}
 
-	private function newLanguageFallbackLabelDescriptionLookup( FormatterOptions $options ) {
+	private function newLanguageFallbackLabelDescriptionLookup( FormatterOptions $options ): CachingFallbackLabelDescriptionLookup {
 		$fallbackChain = $options->getOption( self::OPT_LANGUAGE_FALLBACK_CHAIN );
 
 		if ( !( $fallbackChain instanceof TermLanguageFallbackChain ) ) {
@@ -90,7 +90,7 @@ class FormatterLabelDescriptionLookupFactory {
 		);
 	}
 
-	private function newLanguageLabelDescriptionLookup( FormatterOptions $options ) {
+	private function newLanguageLabelDescriptionLookup( FormatterOptions $options ): LanguageLabelDescriptionLookup {
 		$languageCode = $options->getOption( ValueFormatter::OPT_LANG );
 
 		if ( !is_string( $languageCode ) ) {

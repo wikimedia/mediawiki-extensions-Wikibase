@@ -224,7 +224,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		return $result !== false;
 	}
 
-	private function assertKeysAreValid( $keys ): void {
+	private function assertKeysAreValid( array $keys ): void {
 		foreach ( $keys as $key ) {
 			$this->assertKeyIsValid( $key );
 		}

@@ -57,7 +57,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Reference $reference ) {
+	private function getSerialized( Reference $reference ): array {
 		return [
 			'hash' => $reference->getHash(),
 			'snaks' => $this->snaksSerializer->serialize( $reference->getSnaks() ),
@@ -65,7 +65,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 		];
 	}
 
-	private function buildSnakListOrderList( SnakList $snaks ) {
+	private function buildSnakListOrderList( SnakList $snaks ): array {
 		$list = [];
 
 		/**
