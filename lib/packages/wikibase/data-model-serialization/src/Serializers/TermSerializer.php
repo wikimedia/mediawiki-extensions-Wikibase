@@ -25,6 +25,9 @@ class TermSerializer implements Serializer {
 		return $this->getSerialized( $object );
 	}
 
+	/**
+	 * @param Term $object
+	 */
 	private function assertIsSerializerFor( $object ) {
 		if ( !( $object instanceof Term ) ) {
 			throw new UnsupportedObjectException(

@@ -126,6 +126,9 @@ class LegacyItemDeserializer implements DispatchableDeserializer {
 		return $this->statementDeserializer->deserialize( $statementSerialization );
 	}
 
+	/**
+	 * @param array $value
+	 */
 	private function assertClaimValueIsArray( $value ) {
 		if ( !is_array( $value ) ) {
 			throw new DeserializationException( 'Claim serialization must be an array.' );

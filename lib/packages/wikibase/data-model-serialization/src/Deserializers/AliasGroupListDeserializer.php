@@ -71,6 +71,10 @@ class AliasGroupListDeserializer implements Deserializer {
 		return new AliasGroup( (string)$languageCode, $aliases );
 	}
 
+	/**
+	 * @param array $serialization
+	 * @param string $requestedLanguage
+	 */
 	private function assertIsValidAliasSerialization( $serialization, $requestedLanguage ) {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'Term serializations must be arrays' );
@@ -86,6 +90,10 @@ class AliasGroupListDeserializer implements Deserializer {
 		$this->assertRequestedAndActualLanguageMatch( $serialization, $requestedLanguage );
 	}
 
+	/**
+	 * @param array $array
+	 * @param string $attributeName
+	 */
 	private function requireAttribute( array $array, $attributeName ) {
 		if ( !array_key_exists( $attributeName, $array ) ) {
 			throw new MissingAttributeException(
@@ -94,6 +102,10 @@ class AliasGroupListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $array
+	 * @param string $key
+	 */
 	private function assertNotAttribute( array $array, $key ) {
 		if ( array_key_exists( $key, $array ) ) {
 			throw new InvalidAttributeException(
@@ -104,6 +116,10 @@ class AliasGroupListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $serialization
+	 * @param string $requestedLanguage
+	 */
 	private function assertRequestedAndActualLanguageMatch(
 		array $serialization,
 		$requestedLanguage
@@ -117,10 +133,19 @@ class AliasGroupListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $array
+	 * @param string $attributeName
+	 */
 	private function assertAttributeIsArray( array $array, $attributeName ) {
 		$this->assertAttributeInternalType( $array, $attributeName, 'array' );
 	}
 
+	/**
+	 * @param array $array
+	 * @param string $attributeName
+	 * @param string $internalType
+	 */
 	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
 		if ( gettype( $array[$attributeName] ) !== $internalType ) {
 			throw new InvalidAttributeException(

@@ -61,6 +61,9 @@ class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase
 		)->getPrefetchedTerm( $entityId, $termType, $languageCode );
 	}
 
+	/**
+	 * @return PrefetchingTermLookup
+	 */
 	private function getLookupForEntitySourceAndType( EntitySource $source, string $type ) {
 		return $this->dispatcher->getServiceForSourceAndType( $source->getSourceName(), $type, [ $source ] );
 	}

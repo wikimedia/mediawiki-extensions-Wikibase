@@ -64,6 +64,9 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 		return array_key_exists( $statementGuid, $this->statements );
 	}
 
+	/**
+	 * @param string $statementGuid
+	 */
 	private function assertIsStatementGuid( $statementGuid ) {
 		if ( !is_string( $statementGuid ) ) {
 			throw new InvalidArgumentException( '$statementGuid needs to be a string' );

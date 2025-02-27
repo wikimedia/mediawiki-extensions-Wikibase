@@ -231,6 +231,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	}
 
 	/**
+	 * @param string $key
 	 * @throws CacheInvalidArgumentException
 	 */
 	private function assertKeyIsValid( $key ): void {
@@ -314,6 +315,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		throw new CacheInvalidArgumentException( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 	}
 
+	/**
+	 * @param mixed $value
+	 * @return string|false
+	 */
 	private function serialize( $value ) {
 		$dataToStore = serialize( $value );
 

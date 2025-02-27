@@ -66,6 +66,9 @@ class SiteLinkDeserializer implements Deserializer {
 		return $badges;
 	}
 
+	/**
+	 * @param string $serialization
+	 */
 	private function deserializeItemId( $serialization ): ItemId {
 		$itemId = $this->entityIdDeserializer->deserialize( $serialization );
 
@@ -80,6 +83,9 @@ class SiteLinkDeserializer implements Deserializer {
 		return $itemId;
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertBadgesIsArray( $serialization ) {
 		if ( !is_array( $serialization['badges'] ) ) {
 			throw new InvalidAttributeException(
@@ -90,11 +96,18 @@ class SiteLinkDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function assertCanDeserialize( $serialization ) {
 		$this->requireAttribute( $serialization, 'site' );
 		$this->requireAttribute( $serialization, 'title' );
 	}
 
+	/**
+	 * @param array $serialization
+	 * @param string $attribute
+	 */
 	private function requireAttribute( $serialization, $attribute ) {
 		if ( !is_array( $serialization ) || !array_key_exists( $attribute, $serialization ) ) {
 			throw new MissingAttributeException( $attribute );

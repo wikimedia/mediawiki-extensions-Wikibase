@@ -27,6 +27,9 @@ class AliasGroupSerializer implements Serializer {
 		return $this->getSerialized( $object );
 	}
 
+	/**
+	 * @param AliasGroup $object
+	 */
 	private function assertIsSerializerFor( $object ) {
 		if ( !( $object instanceof AliasGroup ) ) {
 			throw new UnsupportedObjectException(

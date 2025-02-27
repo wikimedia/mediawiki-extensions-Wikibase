@@ -41,6 +41,9 @@ class LegacyEntityIdDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $serialization
+	 */
 	private function isLegacyFormat( $serialization ): bool {
 		return is_array( $serialization ) && count( $serialization ) == 2
 			&& array_key_exists( 0, $serialization ) && array_key_exists( 1, $serialization );

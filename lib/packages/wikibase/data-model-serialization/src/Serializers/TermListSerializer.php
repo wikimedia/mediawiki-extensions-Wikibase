@@ -37,6 +37,9 @@ class TermListSerializer extends MapSerializer implements Serializer {
 		return $this->serializeMap( $this->generateSerializedArrayRepresentation( $object ) );
 	}
 
+	/**
+	 * @param TermList $object
+	 */
 	private function assertIsSerializerFor( $object ) {
 		if ( !( $object instanceof TermList ) ) {
 			throw new UnsupportedObjectException(
