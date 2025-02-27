@@ -21,8 +21,7 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
  */
 class TermboxRequestInspectorTest extends TestCase {
 
-	/** @var ContentLanguages */
-	private $stubContentLanguages;
+	private ContentLanguages $stubContentLanguages;
 
 	protected function setUp(): void {
 		$this->stubContentLanguages = $this->createStub( ContentLanguages::class );

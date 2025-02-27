@@ -14,10 +14,9 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 
-	/** @var string */
-	private $termInLangId;
-	/** @var array */
-	private $params;
+	private string $termInLangId;
+	/** @var string[] */
+	private array $params;
 
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {

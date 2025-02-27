@@ -21,12 +21,9 @@ use Wikibase\Client\WikibaseClient;
  */
 class WikibaseStatsTest extends WikibaseLibraryTestCase {
 
-	/** @var bool */
-	private $oldTrackLuaFunctionCallsPerWiki;
-	/** @var bool */
-	private $oldTrackLuaFunctionCallsPerSiteGroup;
-	/** @var int */
-	private $oldTrackLuaFunctionCallsSampleRate;
+	private bool $oldTrackLuaFunctionCallsPerWiki;
+	private bool $oldTrackLuaFunctionCallsPerSiteGroup;
+	private bool $oldTrackLuaFunctionCallsSampleRate;
 
 	/** @inheritDoc */
 	protected static $moduleName = 'WikibaseStatsTest';

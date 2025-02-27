@@ -22,14 +22,11 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class ItemStubRdfBuilderTest extends TestCase {
 
-	/** @var RdfWriter */
-	private $writer;
-	/** @var RdfVocabulary */
-	private $vocab;
-	/** @var PrefetchingItemTermLookup */
-	private $termLookup;
+	private RdfWriter $writer;
+	private RdfVocabulary $vocab;
+	private PrefetchingItemTermLookup $termLookup;
 	/** @var string[] */
-	private $languages;
+	private array $languages;
 
 	protected function setUp(): void {
 		$this->termLookup = $this->createMock( PrefetchingItemTermLookup::class );

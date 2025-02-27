@@ -52,8 +52,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	/** @var OutputPageRevisionIdReader|MockObject */
 	private $revisionIdReader;
 
-	/** @var bool */
-	private $enableUserSpecificSSR;
+	private bool $enableUserSpecificSSR;
 
 	protected function setUp(): void {
 		parent::setUp();

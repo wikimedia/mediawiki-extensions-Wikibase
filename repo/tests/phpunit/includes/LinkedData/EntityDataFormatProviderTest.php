@@ -18,26 +18,22 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  */
 class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 
-	/** @var array */
-	private static $apiMimeTypes = [
+	private static array $apiMimeTypes = [
 		'application/vnd.php.serialized',
 		'application/json',
 	];
 
-	/** @var array */
-	private static $apiExtensions = [
+	private static array $apiExtensions = [
 		'php',
 		'json',
 	];
 
-	/** @var array */
-	private static $apiFormats = [
+	private static array $apiFormats = [
 		'php',
 		'json',
 	];
 
-	/** @var array */
-	private static $rdfMimeTypes = [
+	private static array $rdfMimeTypes = [
 		'application/rdf+xml',
 		'text/n3',
 		'text/rdf+n3',
@@ -48,8 +44,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'application/ld+json',
 	];
 
-	/** @var array */
-	private static $rdfExtensions = [
+	private static array $rdfExtensions = [
 		'rdf',
 		'n3',
 		'ttl',
@@ -57,8 +52,7 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'jsonld',
 	];
 
-	/** @var array */
-	private static $rdfFormats = [
+	private static array $rdfFormats = [
 		'rdfxml',
 		'n3',
 		'turtle',
@@ -66,29 +60,25 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 		'jsonld',
 	];
 
-	/** @var array */
-	private static $badMimeTypes = [
+	private static array $badMimeTypes = [
 		'text/html',
 		'text/text',
 		// 'text/plain', // ntriples presents as text/plain!
 	];
 
-	/** @var array */
-	private static $badExtensions = [
+	private static array $badExtensions = [
 		'html',
 		'text',
 		'txt',
 	];
 
-	/** @var array */
-	private static $badFormats = [
+	private static array $badFormats = [
 		'html',
 		'text',
 		'xml',
 	];
 
-	/** @var array */
-	private static $formatMappings = [
+	private static array $formatMappings = [
 		'json' => 'json', // should be api json
 		'application/json' => 'json', // should be api json
 		'application/rdf+xml' => 'rdfxml', // should be rdfxml

@@ -20,7 +20,7 @@ use Wikimedia\Assert\Assert;
 class ContentHandlerEntityTitleLookup implements EntityTitleStoreLookup {
 
 	/** @var Title[] */
-	private $titleForIdCache;
+	private array $titleForIdCache;
 
 	/**
 	 * @var EntityContentFactory

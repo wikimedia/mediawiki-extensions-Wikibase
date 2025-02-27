@@ -34,8 +34,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	/** @var RedirectResolvingLatestRevisionLookup|MockObject */
 	private $redirectResolvingRevisionLookup;
-	/** @var StaticContentLanguages */
-	private $termLanguages;
+	private StaticContentLanguages $termLanguages;
 
 	/** @var MockObject|PrefetchingTermLookup */
 	private $lookup;

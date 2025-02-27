@@ -46,8 +46,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 
 	private const FAKE_NS_ID = 4557;
 
-	/** @var bool */
-	private $saveAllowImport = false;
+	private bool $saveAllowImport = false;
 
 	protected function setUp(): void {
 		parent::setUp();

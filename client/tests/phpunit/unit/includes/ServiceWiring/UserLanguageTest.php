@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Language\Language;
+use MediaWiki\StubObject\StubUserLang;
 use RuntimeException;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 
@@ -17,7 +18,7 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
  */
 class UserLanguageTest extends ServiceWiringTestCase {
 
-	/** @var Language */
+	/** @var Language|StubUserLang */
 	private $cachedLang;
 
 	protected function setUp(): void {

@@ -94,8 +94,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/** @var array */
-	private static $DEFAULT_LABELS = [
+	private static array $DEFAULT_LABELS = [
 		[ 'rdfs', 'label' ],
 		[ RdfVocabulary::NS_SKOS, 'prefLabel' ],
 		[ RdfVocabulary::NS_SCHEMA_ORG, 'name' ],

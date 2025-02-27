@@ -20,8 +20,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 
 	use LocalRepoDbTestHelper;
 
-	/** @var DatabaseInnerTermStoreCleaner */
-	private $innerCleaner;
+	private DatabaseInnerTermStoreCleaner $innerCleaner;
 
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {

@@ -22,26 +22,21 @@ class ApiEntityLookupTest extends TestCase {
 
 	use HttpResponseMockerTrait;
 
-	/** @var array */
-	private $responseDataFiles = [
+	private array $responseDataFiles = [
 		'p18-en' => 'api-prefetching-term-lookup-test-data-p18-en.json',
 		'p31-en-de' => 'api-prefetching-term-lookup-test-data-p31-en-de.json',
 		'p1-missing' => 'wbgetentities-p1-missing.json',
 	];
 
 	/** @var string[] */
-	private $data = [];
+	private array $data = [];
 
 	private const CONCEPT_BASE_URI = 'http://wikidata.org/entity/';
 
-	/** @var FederatedPropertyId */
-	private $fp1;
-	/** @var FederatedPropertyId */
-	private $fp11;
-	/** @var FederatedPropertyId */
-	private $fp18;
-	/** @var FederatedPropertyId */
-	private $fp31;
+	private FederatedPropertyId $fp1;
+	private FederatedPropertyId $fp11;
+	private FederatedPropertyId $fp18;
+	private FederatedPropertyId $fp31;
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -24,16 +24,11 @@ use Wikibase\Repo\Rdf\TruthyStatementRdfBuilderFactory;
  */
 class PropertyRdfBuilderTest extends TestCase {
 
-	/** @var SiteLinksRdfBuilder */
-	private $siteLinksRdfBuilder;
-	/** @var TermsRdfBuilder */
-	private $termsRdfBuilder;
-	/** @var TruthyStatementRdfBuilderFactory */
-	private $truthyStatementRdfBuilderFactory;
-	/** @var FullStatementRdfBuilderFactory */
-	private $fullStatementRdfBuilderFactory;
-	/** @var PropertySpecificComponentsRdfBuilder */
-	private $propertySpecificComponentsRdfBuilder;
+	private SiteLinksRdfBuilder $siteLinksRdfBuilder;
+	private TermsRdfBuilder $termsRdfBuilder;
+	private TruthyStatementRdfBuilderFactory $truthyStatementRdfBuilderFactory;
+	private FullStatementRdfBuilderFactory $fullStatementRdfBuilderFactory;
+	private PropertySpecificComponentsRdfBuilder $propertySpecificComponentsRdfBuilder;
 
 	protected function setUp(): void {
 		parent::setUp();
