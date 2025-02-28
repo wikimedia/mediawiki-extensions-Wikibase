@@ -58,16 +58,6 @@ Parameters:
 * &$map
   * An associative array mapping Entity types to namespace ids.
 
-#### WikibaseRebuildData (DEPRECATED)
-Parameters:
-* $report
-  * A closure that can be called with a string to report that messages.
-
-#### WikibaseDeleteData (DEPRECATED)
-Parameters:
-* $report
-  * A closure that can be called with a string to report that messages.
-
 #### WikibaseChangeNotification {#WikibaseChangeNotification}
 Triggered from ChangeNotifier via a [HookChangeTransmitter] to notify any listeners of changes to entities.
 
