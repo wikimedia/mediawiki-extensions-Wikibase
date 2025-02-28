@@ -119,12 +119,16 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 
 			const validateBody = schemaValidator.getSchema( schemaKey );
 			if ( !validateBody ) {
-				throw new Error( `Schema not found for ${schemaKey} in OpenAPI schema.` );
+				throw new Error( `Schema not found for ${schemaKey} in OpenAPI document.` );
 			}
 
 			if ( !validateBody( response.body ) ) {
 				const error = validateBody.errors[ 0 ];
-				this.assert( false, `${error.message} at '${error.instancePath}'` );
+				const formattedResponseBody = saveAndRestoreColor(
+					`${purple( 'Response body:' )} ${format( response.body )}`
+				);
+				const schemaPath = `${schemaKey}${error.schemaPath}`;
+				this.assert( false, `${schemaPath} ${error.message} at '${error.instancePath}'\n${formattedResponseBody}` );
 			}
 		}
 
@@ -134,7 +138,7 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 
 				const validateHeader = schemaValidator.getSchema( headerKey );
 				if ( !validateHeader ) {
-					throw new Error( `Schema not found for header '${header}' in OpenAPI schema.` );
+					throw new Error( `Schema not found for ${headerKey} in OpenAPI document.` );
 				}
 
 				if ( header.toLowerCase() in response.headers ) {
