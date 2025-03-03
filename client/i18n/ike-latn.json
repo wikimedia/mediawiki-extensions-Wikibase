@@ -4,6 +4,15 @@
 			"MysticVoyager"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} titiraqsimajuq",
+	"wikibase-editlinks": "turaarutinut pijunnautit",
+	"wikibase-addlinkstitle": "ilaliutilugit atausiunngittunut uqausirnut kasuutisimaniujut",
+	"wikibase-linkitem-addlinks": "ilaliutilugit qaritaujakkut turaarutingit",
+	"wikibase-linkitem-title": "turaarutinga ammalu titirarvinga",
+	"wikibase-linkitem-linkpage": "turaarutinga ammalu titirarvinga",
+	"wikibase-linkitem-selectlink": "tukisigiarutiksanik tunisijaraangat uqaqsimajunik kasuqsimaninginnik titiraqsimajuni.",
 	"wikibase-linkitem-input-site": "uqausiq:",
-	"wikibase-rc-hide-wikidata-hide": "amirainga"
+	"wikibase-linkitem-input-page": "makpigaq:",
+	"wikibase-rc-hide-wikidata-hide": "amirainga",
+	"wikibase-rc-hide-wikidata-show": "taimailauqpaa"
 }

@@ -14,7 +14,8 @@
 			"O andarilho",
 			"Opraco",
 			"TheEduGobi",
-			555
+			555,
+			"Stanglavine"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -51,7 +52,7 @@
 	"wikibase-undeserializable-value": "O valor é inválido e não pode ser exibido.",
 	"datatypes-type-string": "String",
 	"datatypes-type-quantity": "Quantidade",
-	"datatypes-type-monolingualtext": "Texto multilíngue",
+	"datatypes-type-monolingualtext": "Texto monolíngue",
 	"datatypes-type-multilingualtext": "Texto multilíngue",
 	"datatypes-type-number": "Número",
 	"datatypes-type-mediawiki-title": "Título do MediaWiki",
