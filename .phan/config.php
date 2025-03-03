@@ -65,7 +65,6 @@ if ( is_dir( 'vendor' ) ) {
 $cfg['exclude_analysis_directory_list'] = array_merge(
 	$cfg['exclude_analysis_directory_list'],
 	[
-		'lib/packages/wikibase/internal-serialization/src/',
 		'../../extensions/Babel/',
 		'../../extensions/CirrusSearch/',
 		'../../extensions/Echo/',

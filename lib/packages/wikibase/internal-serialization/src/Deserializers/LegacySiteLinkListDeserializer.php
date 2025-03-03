@@ -19,7 +19,7 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @return SiteLink[]
+	 * @return SiteLinkList
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
