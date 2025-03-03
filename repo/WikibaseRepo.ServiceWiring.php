@@ -447,11 +447,20 @@ return [
 	},
 
 	'WikibaseRepo.ContentModelMappings' => function ( MediaWikiServices $services ): array {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 * see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$map = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::CONTENT_MODEL_ID );
 
-		$services->getHookContainer()
-			->run( 'WikibaseContentModelMapping', [ &$map ] );
+		$services->getHookContainer()->run(
+			'WikibaseContentModelMapping',
+			[ &$map ],
+			[ 'noServices' => true ] // early initialization
+		);
 
 		return $map;
 	},
@@ -862,6 +871,12 @@ return [
 	},
 
 	'WikibaseRepo.EntityNamespaceLookup' => function ( MediaWikiServices $services ): EntityNamespaceLookup {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$entitySources = array_filter(
 			WikibaseRepo::getEntitySourceDefinitions( $services )->getSources(),
 			function ( EntitySource $entitySource ) {
@@ -996,7 +1011,11 @@ return [
 			$baseEntityTypes
 		);
 
-		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
+		$services->getHookContainer()->run(
+			'WikibaseRepoEntityTypes',
+			[ &$entityTypes ],
+			[ 'noServices' => true ] // to match WikibaseRepo.EntityTypeDefinitions below
+		);
 
 		$entityTypeDefinitionsBySourceType = [ DatabaseEntitySource::TYPE => new EntityTypeDefinitions( $entityTypes ) ];
 
@@ -1013,6 +1032,12 @@ return [
 	},
 
 	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$settings = WikibaseRepo::getSettings( $services );
 		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
@@ -1084,6 +1109,12 @@ return [
 	},
 
 	'WikibaseRepo.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
 
@@ -1092,7 +1123,11 @@ return [
 			$baseEntityTypes
 		);
 
-		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
+		$services->getHookContainer()->run(
+			'WikibaseRepoEntityTypes',
+			[ &$entityTypes ],
+			[ 'noServices' => true ] // early initialization
+		);
 
 		return new EntityTypeDefinitions( $entityTypes );
 	},
@@ -1436,6 +1471,12 @@ return [
 	},
 
 	'WikibaseRepo.LocalEntitySource' => function ( MediaWikiServices $services ): EntitySource {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$localEntitySourceName = WikibaseRepo::getSettings( $services )->getSetting( 'localEntitySourceName' );
 		$sources = WikibaseRepo::getEntitySourceDefinitions( $services )->getSources();
 		foreach ( $sources as $source ) {
@@ -1723,6 +1764,12 @@ return [
 	},
 
 	'WikibaseRepo.Settings' => function ( MediaWikiServices $services ): SettingsArray {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		return WikibaseSettings::getRepoSettings();
 	},
 
@@ -1864,6 +1911,12 @@ return [
 	},
 
 	'WikibaseRepo.SubEntityTypesMapper' => function ( MediaWikiServices $services ): SubEntityTypesMapper {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		return new SubEntityTypesMapper( WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 	},

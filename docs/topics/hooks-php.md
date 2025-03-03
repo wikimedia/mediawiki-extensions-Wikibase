@@ -29,6 +29,10 @@ See also the [WikibaseClientEntityTypes](#WikibaseClientEntityTypes) hook.
 Hook handlers may add additional definitions.
 See [entitytypes documentation] for details.
 
+This hook runs during early initialization;
+its handlers must obey the [MediaWikiServicesHook rules](https://doc.wikimedia.org/mediawiki-core/master/php/interfaceMediaWiki_1_1Hook_1_1MediaWikiServicesHook.html),
+i.e. not declare any service dependencies nor access any unsafe services dynamically.
+
 Parameters:
 * &$entityTypeDefinitions
   * the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
@@ -45,6 +49,10 @@ Parameters:
 
 #### WikibaseContentModelMapping {#WikibaseContentModelMapping}
 Called by [WikibaseRepo::getContentModelMappings()] to allow additional mappings between Entity types and content model identifiers to be defined.
+
+This hook runs during early initialization;
+its handlers must obey the [MediaWikiServicesHook rules](https://doc.wikimedia.org/mediawiki-core/master/php/interfaceMediaWiki_1_1Hook_1_1MediaWikiServicesHook.html),
+i.e. not declare any service dependencies nor access any unsafe services dynamically.
 
 Parameters:
 * &$map

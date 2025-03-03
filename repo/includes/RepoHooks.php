@@ -116,26 +116,28 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Handler for the SetupAfterCache hook, completing the content and namespace setup.
+	 * Handler for the MediaWikiServices hook, completing the content and namespace setup.
 	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
 	 * according to information provided by entity type definitions and the entityNamespaces
 	 * setting for the local entity source.
+	 * Note that we must not access any MediaWiki core services here (except for the hook container);
+	 * see the warning in {@link \MediaWiki\Hook\MediaWikiServicesHook::onMediaWikiServices()}.
 	 */
-	public static function onSetupAfterCache() {
+	public static function onMediaWikiServices( MediaWikiServices $services ) {
 		global $wgContentHandlers,
 			$wgNamespaceContentModels;
 
-		if ( WikibaseRepo::getSettings()->getSetting( 'defaultEntityNamespaces' ) ) {
+		if ( WikibaseRepo::getSettings( $services )->getSetting( 'defaultEntityNamespaces' ) ) {
 			self::defaultEntityNamespaces();
 		}
 
-		$namespaces = WikibaseRepo::getLocalEntitySource()->getEntityNamespaceIds();
-		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
+		$namespaces = WikibaseRepo::getLocalEntitySource( $services )->getEntityNamespaceIds();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup( $services );
 
 		// Register entity namespaces.
 		// Note that $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this
 		// point and should no longer be touched.
-		$contentModelIds = WikibaseRepo::getContentModelMappings();
+		$contentModelIds = WikibaseRepo::getContentModelMappings( $services );
 
 		foreach ( $namespaces as $entityType => $namespace ) {
 			// TODO: once there is a mechanism for registering the default content model for
@@ -151,8 +153,8 @@ final class RepoHooks {
 
 		// Register callbacks for instantiating ContentHandlers for EntityContent.
 		foreach ( $contentModelIds as $entityType => $model ) {
-			$wgContentHandlers[$model] = function () use ( $entityType ) {
-				$entityContentFactory = WikibaseRepo::getEntityContentFactory();
+			$wgContentHandlers[$model] = function () use ( $services, $entityType ) {
+				$entityContentFactory = WikibaseRepo::getEntityContentFactory( $services );
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
 		}
