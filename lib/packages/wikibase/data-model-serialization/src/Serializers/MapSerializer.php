@@ -31,7 +31,7 @@ abstract class MapSerializer {
 	 * @return array|\stdClass
 	 */
 	protected function serializeMap( array $serialization ) {
-		if ( $this->useObjectsForEmptyMaps && empty( $serialization ) ) {
+		if ( $this->useObjectsForEmptyMaps && $serialization === [] ) {
 			$serialization = (object)$serialization;
 		}
 

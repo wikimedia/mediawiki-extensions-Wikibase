@@ -159,7 +159,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 			array_keys( $this->dataTypeToValueTypeMap, $valueType, true )
 		);
 
-		return !empty( array_intersect( $possibleDataTypeKeys, array_keys( $this->deserializerBuilders ) ) );
+		return array_intersect( $possibleDataTypeKeys, array_keys( $this->deserializerBuilders ) ) !== [];
 	}
 
 	/**
