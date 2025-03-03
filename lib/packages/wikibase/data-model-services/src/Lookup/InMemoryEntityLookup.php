@@ -72,7 +72,7 @@ class InMemoryEntityLookup implements EntityLookup, ItemLookup, PropertyLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @throws EntityLookupException
-	 * @return EntityDocument
+	 * @return ?EntityDocument
 	 */
 	public function getEntity( EntityId $entityId ) {
 		$this->throwExceptionIfNeeded( $entityId );

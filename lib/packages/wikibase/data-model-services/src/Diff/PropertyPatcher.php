@@ -46,15 +46,16 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
-		$this->assertIsProperty( $entity );
+		$property = $this->assertIsPropertyAndCast( $entity );
 
-		$this->patchProperty( $entity, $patch );
+		$this->patchProperty( $property, $patch );
 	}
 
-	private function assertIsProperty( EntityDocument $property ) {
+	private function assertIsPropertyAndCast( EntityDocument $property ): Property {
 		if ( !( $property instanceof Property ) ) {
 			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
+		return $property;
 	}
 
 	private function patchProperty( Property $property, EntityDiff $patch ) {

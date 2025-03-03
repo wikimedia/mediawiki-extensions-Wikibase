@@ -49,16 +49,17 @@ class PropertyDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
-		$this->assertIsProperty( $from );
-		$this->assertIsProperty( $to );
+		$fromProperty = $this->assertIsPropertyAndCast( $from );
+		$toProperty = $this->assertIsPropertyAndCast( $to );
 
-		return $this->diffProperties( $from, $to );
+		return $this->diffProperties( $fromProperty, $toProperty );
 	}
 
-	private function assertIsProperty( EntityDocument $property ) {
+	private function assertIsPropertyAndCast( EntityDocument $property ): Property {
 		if ( !( $property instanceof Property ) ) {
 			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
+		return $property;
 	}
 
 	public function diffProperties( Property $from, Property $to ) {
@@ -104,11 +105,10 @@ class PropertyDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function getConstructionDiff( EntityDocument $entity ) {
-		$this->assertIsProperty( $entity );
+		$property = $this->assertIsPropertyAndCast( $entity );
 
-		/** @var Property $entity */
-		$diffOps = $this->diffPropertyArrays( [], $this->toDiffArray( $entity ) );
-		$diffOps['claim'] = $this->statementListDiffer->getDiff( new StatementList(), $entity->getStatements() );
+		$diffOps = $this->diffPropertyArrays( [], $this->toDiffArray( $property ) );
+		$diffOps['claim'] = $this->statementListDiffer->getDiff( new StatementList(), $property->getStatements() );
 
 		return new EntityDiff( $diffOps );
 	}
@@ -120,11 +120,10 @@ class PropertyDiffer implements EntityDifferStrategy {
 	 * @throws InvalidArgumentException
 	 */
 	public function getDestructionDiff( EntityDocument $entity ) {
-		$this->assertIsProperty( $entity );
+		$property = $this->assertIsPropertyAndCast( $entity );
 
-		/** @var Property $entity */
-		$diffOps = $this->diffPropertyArrays( $this->toDiffArray( $entity ), [] );
-		$diffOps['claim'] = $this->statementListDiffer->getDiff( $entity->getStatements(), new StatementList() );
+		$diffOps = $this->diffPropertyArrays( $this->toDiffArray( $property ), [] );
+		$diffOps['claim'] = $this->statementListDiffer->getDiff( $property->getStatements(), new StatementList() );
 
 		return new EntityDiff( $diffOps );
 	}

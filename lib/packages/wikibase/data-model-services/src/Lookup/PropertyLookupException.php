@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Lookup;
 
 use Exception;
+use LogicException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -30,7 +31,11 @@ class PropertyLookupException extends EntityLookupException {
 	 * @return PropertyId
 	 */
 	public function getPropertyId() {
-		return $this->getEntityId();
+		$propertyId = $this->getEntityId();
+		if ( !( $propertyId instanceof PropertyId ) ) {
+			throw new LogicException( 'expected $propertyId to be of type PropertyId' );
+		}
+		return $propertyId;
 	}
 
 }

@@ -59,7 +59,7 @@ class SiteLinkListPatcher {
 	 * @return ItemId[]|null
 	 */
 	private function getBadgesFromSiteLinkData( array $siteLinkData ) {
-		if ( !array_key_exists( 'badges', $siteLinkData ) ) {
+		if ( !array_key_exists( 'badges', $siteLinkData ) || !is_array( $siteLinkData['badges'] ) ) {
 			return null;
 		}
 
