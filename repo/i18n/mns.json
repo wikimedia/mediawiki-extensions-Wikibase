@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ewithu",
 			"Köpleres"
 		]
 	},
-	"wikibase-edit": "сё̄питап"
+	"wikibase-edit": "сё̄питап",
+	"wikibase-add": "нё̄тумта̄нтыл",
+	"wikibase-sitelinks-special": "Мо̄т викитт"
 }
