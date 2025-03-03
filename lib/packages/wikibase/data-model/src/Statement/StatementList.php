@@ -5,8 +5,8 @@ namespace Wikibase\DataModel\Statement;
 use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
-use Iterator;
 use IteratorAggregate;
+use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Exception\PropertyChangedException;
 use Wikibase\DataModel\Exception\StatementGuidChangedException;
@@ -254,9 +254,9 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 * @return Iterator|Statement[]
+	 * @return Traversable<Statement>
 	 */
-	public function getIterator(): ArrayIterator {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->statements );
 	}
 
@@ -314,7 +314,7 @@ class StatementList implements IteratorAggregate, Countable {
 	 * @return bool
 	 */
 	public function isEmpty(): bool {
-		return empty( $this->statements );
+		return $this->statements === [];
 	}
 
 	/**
@@ -328,6 +328,9 @@ class StatementList implements IteratorAggregate, Countable {
 	 */
 	public function getFirstStatementWithGuid( ?string $statementGuid ): ?Statement {
 		$index = $this->getIndexOfFirstStatementWithGuid( $statementGuid );
+		if ( $index === null ) {
+			return null;
+		}
 		return $this->statements[$index] ?? null;
 	}
 

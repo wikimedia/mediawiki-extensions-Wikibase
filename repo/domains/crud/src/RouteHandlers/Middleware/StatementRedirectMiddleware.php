@@ -43,12 +43,15 @@ class StatementRedirectMiddleware implements Middleware {
 		$requestedStatementId = $routeHandler->getRequest()->getPathParam( $this->statementIdPathParameter );
 		$statementSubject = $this->getStatementSubject( $requestedSubjectId, $requestedStatementId );
 
-		if ( $statementSubject === null ) {
+		if ( $statementSubject === null || $requestedStatementId === null ) {
 			return $response;
 		}
 
 		foreach ( $statementSubject->getStatements() as $statement ) {
 			$statementId = $statement->getGuid();
+			if ( $statementId === null ) {
+				continue;
+			}
 			if ( strtolower( $statementId ) === strtolower( $requestedStatementId ) ) {
 				$response = $routeHandler->getResponseFactory()->create();
 				$response->setStatus( 308 );

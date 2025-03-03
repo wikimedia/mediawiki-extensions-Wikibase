@@ -5,10 +5,8 @@ namespace Wikibase\DataModel\Term;
 use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
-use Iterator;
 use IteratorAggregate;
 use OutOfBoundsException;
-use Traversable;
 
 /**
  * Unordered list of Term objects.
@@ -60,9 +58,9 @@ class TermList implements Countable, IteratorAggregate {
 
 	/**
 	 * @see IteratorAggregate::getIterator
-	 * @return Iterator|Term[]
+	 * @return ArrayIterator<Term>
 	 */
-	public function getIterator(): Traversable {
+	public function getIterator(): ArrayIterator {
 		return new ArrayIterator( $this->terms );
 	}
 
@@ -164,7 +162,7 @@ class TermList implements Countable, IteratorAggregate {
 	 * @return bool
 	 */
 	public function isEmpty() {
-		return empty( $this->terms );
+		return $this->terms === [];
 	}
 
 	/**

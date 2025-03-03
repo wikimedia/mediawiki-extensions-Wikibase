@@ -205,6 +205,9 @@ class RemoveClaims extends ApiBase {
 		/** @var Statement $statement */
 		foreach ( $statements as $statement ) {
 			$guid = $statement->getGuid();
+			if ( $guid === null ) {
+				continue;
+			}
 			// This array is used as a HashSet where only the keys are used.
 			$existingGuids[$guid] = null;
 		}

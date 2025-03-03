@@ -307,6 +307,9 @@ class ByPropertyIdArray extends ArrayObject {
 
 		$oldIndex = $this->getPropertyGroupIndex( $propertyId );
 		$byIdClone = $this->byId;
+		if ( $byIdClone === null ) {
+			throw new RuntimeException( 'LogicError - index should have been built' );
+		}
 
 		// Remove "property group" to calculate the groups new index:
 		unset( $this->byId[$propertyId->getSerialization()] );
@@ -432,7 +435,7 @@ class ByPropertyIdArray extends ArrayObject {
 		if ( count( $this ) === 0 ) {
 			// Array is empty, just append object.
 			$this->append( $object );
-		} elseif ( empty( $validIndices ) ) {
+		} elseif ( $validIndices === [] ) {
 			// No objects featuring that property exist. The object may be inserted at a place
 			// between existing "property groups".
 			$this->append( $object );
@@ -461,7 +464,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$propertyId = $object->getPropertyId();
 		$validIndices = $this->getFlatArrayIndices( $propertyId );
 
-		if ( empty( $validIndices ) ) {
+		if ( $validIndices === [] ) {
 			throw new OutOfBoundsException( 'No objects featuring the object\'s property exist' );
 		}
 
@@ -471,6 +474,10 @@ class ByPropertyIdArray extends ArrayObject {
 		if ( $index === null ) {
 			// If index is null, append object to "property group".
 			$index = end( $validIndices );
+		}
+
+		if ( $this->byId === null ) {
+			throw new RuntimeException( 'LogicError - index should have been built' );
 		}
 
 		if ( in_array( $index, $validIndices ) ) {

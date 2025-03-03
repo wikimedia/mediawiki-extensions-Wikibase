@@ -87,7 +87,7 @@ class Item implements
 	/**
 	 * @since 0.5, can be null since 1.0
 	 *
-	 * @param ItemId|null $id
+	 * @param EntityId|null $id
 	 *
 	 * @throws InvalidArgumentException
 	 */

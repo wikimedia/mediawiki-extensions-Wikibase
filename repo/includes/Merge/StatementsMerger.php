@@ -127,7 +127,11 @@ class StatementsMerger {
 		$changeOps = new ChangeOps();
 
 		foreach ( $source->getStatements() as $statement ) {
-			$changeOps->add( $this->changeOpFactory->newRemoveStatementOp( $statement->getGuid() ) );
+			$guid = $statement->getGuid();
+			if ( $guid === null ) {
+				continue;
+			}
+			$changeOps->add( $this->changeOpFactory->newRemoveStatementOp( $guid ) );
 		}
 
 		return $changeOps;
