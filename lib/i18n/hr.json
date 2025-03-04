@@ -20,6 +20,7 @@
 	"wikibase-error-save-timeout": "Trenutačno imamo tehničkih smetnji. Molimo Vas, pokušajte ponovo.",
 	"wikibase-error-remove-timeout": "Trenutačno imamo tehničkih smetnji. Molimo Vas, pokušajte ponovo.",
 	"wikibase-error-ui-no-external-page": "Stranica \"$2\" nije pronađena na \"$1\".",
+	"wikibase-language-name-for-terms-mul": "zadano za sve jezike",
 	"wikibase-quantitydetails-amount": "Iznos",
 	"wikibase-quantitydetails-upperbound": "Gornja granica",
 	"wikibase-quantitydetails-lowerbound": "Donja granica",

@@ -301,7 +301,7 @@
 	"wikibase-mergeitems-fromid": "O identificador desde o que fusionar",
 	"wikibase-mergeitems-toid": "O identificador co que fusionar",
 	"wikibase-mergeitems-submit": "Fusionar os elementos",
-	"wikibase-mergeitems-success": "$1 fusionouse en $3 e redirixida.",
+	"wikibase-mergeitems-success": "$1 fusionouse con $3 e redirixiuse a el.",
 	"wikibase-itemmerge-redirect": "Estes elementos poderían estar xa fusionados.",
 	"wikibase-itemmerge-missing-parameter": "Entrada incompleta.",
 	"wikibase-itemmerge-not-item": "A entidade especificada non é un elemento.",

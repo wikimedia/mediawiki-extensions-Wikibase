@@ -14,7 +14,8 @@
 			"Macofe",
 			"O andarilho",
 			"Opraco",
-			"TheEduGobi"
+			"TheEduGobi",
+			"Stanglavine"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -30,6 +31,7 @@
 	"wikibase-error-ui-no-external-page": "Uma página \"$2\" não pôde ser encontrada em \"$1\".",
 	"wikibase-error-ui-edit-conflict": "O mesmo valor foi editado enquanto isso, causando um conflito de edição. Por favor, recarregue a página.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
+	"wikibase-language-name-for-terms-mul": "padrão para todos os idiomas",
 	"wikibase-quantitydetails-amount": "Quantia",
 	"wikibase-quantitydetails-upperbound": "Limite máximo",
 	"wikibase-quantitydetails-lowerbound": "Limite mínimo",
@@ -51,7 +53,7 @@
 	"wikibase-undeserializable-value": "O valor é inválido e não pode ser exibido.",
 	"datatypes-type-string": "String",
 	"datatypes-type-quantity": "Quantidade",
-	"datatypes-type-monolingualtext": "Texto multilíngue",
+	"datatypes-type-monolingualtext": "Texto monolíngue",
 	"datatypes-type-multilingualtext": "Texto multilíngue",
 	"datatypes-type-number": "Número",
 	"datatypes-type-mediawiki-title": "Título do MediaWiki",
