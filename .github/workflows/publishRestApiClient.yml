@@ -23,7 +23,7 @@ jobs:
             - name: Build the API client
               uses: addnab/docker-run-action@v3
               with:
-                  image: openapitools/openapi-generator-cli:v7.10.0
+                  image: openapitools/openapi-generator-cli:v7.12.0
                   options: -v ${{ github.workspace }}:/local -w /local
                   run: |
                       /usr/local/bin/docker-entrypoint.sh generate \
@@ -31,6 +31,7 @@ jobs:
                           -g javascript \
                           -o api-client \
                           --additional-properties=usePromises=true \
+                          --additional-properties=skipDefaultUserAgent=true \
                           --additional-properties=projectName=@wmde/wikibase-rest-api \
                           --additional-properties=projectDescription="Wikibase REST API Client" \
                           --additional-properties=licenseName="BSD-3-Clause license" \
