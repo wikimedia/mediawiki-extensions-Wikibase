@@ -1,6 +1,4 @@
-( function ( mw ) {
-	'use strict';
-
+( function () {
 	/* eslint-disable no-console */
 
 	let searchInputWrapper = document.getElementById( 'simpleSearch' );
@@ -15,7 +13,8 @@
 			return;
 		}
 	}
-	searchInputWrapper.replaceWith( 'ScopedTypeaheadSearch will go here (T338483)' );
 
-	/* eslint-enable */
-}( mw ) );
+	const Vue = require( 'vue' );
+	const App = require( './ScopedTypeaheadSearch.vue' );
+	Vue.createMwApp( App ).mount( searchInputWrapper );
+}() );
