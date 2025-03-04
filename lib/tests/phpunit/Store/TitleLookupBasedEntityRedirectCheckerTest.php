@@ -11,13 +11,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 
 /**
- * @covers \Wikibase\Lib\Store\TitleBasedEntityRedirectChecker
+ * @covers \Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class TitleLookupBasedEntityRedirectCheckerTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider titleProvider

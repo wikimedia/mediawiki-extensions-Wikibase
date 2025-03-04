@@ -10,13 +10,14 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 
 /**
- * @covers \Wikibase\Lib\DispatchingEntityIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	/**
 	 * @var EntityIdFormatter|MockObject

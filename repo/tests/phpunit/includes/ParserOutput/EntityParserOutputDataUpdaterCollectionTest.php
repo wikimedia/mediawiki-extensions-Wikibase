@@ -9,7 +9,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection;
 use Wikibase\Repo\ParserOutput\EntityParserOutputUpdater;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputUpdater
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection
  *
  * @group Wikibase
  *
@@ -17,6 +17,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputUpdater;
  * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\TestCase {
+	use \MediaWikiCoversValidator;
 
 	public function testUpdateParserOutput() {
 		$entity = new Item();

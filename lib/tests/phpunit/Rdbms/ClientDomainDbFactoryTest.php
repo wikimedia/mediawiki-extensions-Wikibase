@@ -11,13 +11,14 @@ use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * @covers \Wikibase\Lib\Rdbms\DomainDbFactory
+ * @covers \Wikibase\Lib\Rdbms\ClientDomainDbFactory
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class ClientDomainDbFactoryTest extends \PHPUnit\Framework\TestCase {
+	use \MediaWikiCoversValidator;
 
 	private const CLIENT_DOMAIN = 'localClientDomain';
 

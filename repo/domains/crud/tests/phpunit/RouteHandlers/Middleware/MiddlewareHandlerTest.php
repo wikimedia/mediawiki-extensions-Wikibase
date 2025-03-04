@@ -10,13 +10,14 @@ use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\Middleware
+ * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\ResponseHeaderCountingTestMiddleware
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class MiddlewareHandlerTest extends TestCase {
+	use \MediaWikiCoversValidator;
 
 	public function testConstructorErrorsForNoMiddlewares(): void {
 		$this->expectException( InvalidArgumentException::class );

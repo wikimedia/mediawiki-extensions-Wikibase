@@ -7,7 +7,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpResultTraversal;
 use Wikibase\Repo\ChangeOp\ChangeOpsResult;
 
 /**
- * @covers \Wikibase\Repo\ChangeOp\ChangeOpResultsTraverser
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpResultTraversal
  *
  * @group Wikibase
  * @group ChangeOp
@@ -16,6 +16,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsResult;
 class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 
 	use ChangeOpResultTraversal;
+	use \MediaWikiCoversValidator;
 
 	public static function changeOpResultTreesProvider() {
 		// visual view of the constructed tree below (numeric suffixes used):

@@ -16,7 +16,7 @@ use Wikibase\Repo\Api\EntityByTitleHelper;
 use Wikibase\Repo\Api\ResultBuilder;
 
 /**
- * @covers \Wikibase\Repo\Api\ItemByTitleHelper
+ * @covers \Wikibase\Repo\Api\EntityByTitleHelper
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -26,6 +26,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  * @author Addshore
  */
 class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
+	use \MediaWikiCoversValidator;
 
 	/**
 	 * @return SiteLookup
