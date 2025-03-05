@@ -23,13 +23,13 @@ class ApiEntityNamespaceInfoLookupTest extends TestCase {
 	use HttpResponseMockerTrait;
 
 	/** @var string[] */
-	private $dataFiles = [
+	private array $dataFiles = [
 		'query-siteinfo-namespaces-wikidata.json',
 		'query-siteinfo-namespaces-wikibase.json',
 	];
 
 	/** @var string[] */
-	private $data = [];
+	private array $data = [];
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -30,7 +30,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	private const CONCEPT_BASE_URI = 'https://wikidata.beta.wmflabs.org/entity/';
 
 	/** @var string[] */
-	private $responseDataFiles = [
+	private array $responseDataFiles = [
 		'api-entity-search-helper-test-data-emptyResponse.json',
 		'api-entity-search-helper-test-data-oneResponse.json',
 		'api-entity-search-helper-test-data-twoResponse.json',
@@ -42,7 +42,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	];
 
 	/** @var string[] */
-	private $data = [];
+	private array $data = [];
 
 	protected function setUp(): void {
 

@@ -22,10 +22,8 @@ use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 class DefaultEntityLinkFormatterTest extends TestCase {
 	use HamcrestPHPUnitIntegration;
 
-	/** @var Language */
-	private $language;
-	/** @var EntityTitleTextLookup */
-	private $titleTextLookup;
+	private Language $language;
+	private EntityTitleTextLookup $titleTextLookup;
 
 	protected function setUp(): void {
 		parent::setUp();

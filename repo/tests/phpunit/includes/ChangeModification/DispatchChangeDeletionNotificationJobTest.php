@@ -30,7 +30,7 @@ use WikiPage;
 class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTestCase {
 
 	/** @var string[] */
-	private $expectedLocalClientWikis;
+	private array $expectedLocalClientWikis;
 
 	protected function setUp(): void {
 		parent::setUp();

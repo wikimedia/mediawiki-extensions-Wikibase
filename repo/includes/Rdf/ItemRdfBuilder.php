@@ -10,20 +10,10 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * @license GPL-2.0-or-later
  */
 class ItemRdfBuilder implements EntityRdfBuilder {
-	/** @var SiteLinksRdfBuilder */
-	private $siteLinksRdfBuilder;
-	/**
-	 * @var TruthyStatementRdfBuilder
-	 */
-	private $truthyStatementRdfBuilder;
-	/**
-	 * @var TermsRdfBuilder
-	 */
-	private $termsRdfBuilder;
-	/**
-	 * @var FullStatementRdfBuilder
-	 */
-	private $fullStatementRdfBuilder;
+	private ?SiteLinksRdfBuilder $siteLinksRdfBuilder;
+	private ?TruthyStatementRdfBuilder $truthyStatementRdfBuilder;
+	private TermsRdfBuilder $termsRdfBuilder;
+	private ?FullStatementRdfBuilder $fullStatementRdfBuilder;
 
 	public function __construct(
 		int $flavorFlags,
@@ -32,14 +22,14 @@ class ItemRdfBuilder implements EntityRdfBuilder {
 		TruthyStatementRdfBuilderFactory $truthyStatementRdfBuilderFactory,
 		FullStatementRdfBuilderFactory $fullStatementRdfBuilderFactory
 	) {
-		if ( $flavorFlags & RdfProducer::PRODUCE_SITELINKS ) {
-			$this->siteLinksRdfBuilder = $siteLinksRdfBuilder;
-		}
+		$this->siteLinksRdfBuilder = $flavorFlags & RdfProducer::PRODUCE_SITELINKS ? $siteLinksRdfBuilder : null;
 
 		if ( $flavorFlags & RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) {
 			$this->truthyStatementRdfBuilder = $truthyStatementRdfBuilderFactory->getTruthyStatementRdfBuilder(
 				$flavorFlags
 			);
+		} else {
+			$this->truthyStatementRdfBuilder = null;
 		}
 
 		if ( $flavorFlags & RdfProducer::PRODUCE_ALL_STATEMENTS ) {
@@ -47,6 +37,8 @@ class ItemRdfBuilder implements EntityRdfBuilder {
 				$flavorFlags
 			);
 			$this->fullStatementRdfBuilder = $fullStatementRdfBuilder;
+		} else {
+			$this->fullStatementRdfBuilder = null;
 		}
 
 		$this->termsRdfBuilder = $termsRdfBuilder;

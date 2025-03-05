@@ -22,7 +22,7 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
 class MetaDataBridgeConfigTest extends MediaWikiIntegrationTestCase {
 
 	/** @var string[] */
-	private $titleCallbackCalls = [];
+	private array $titleCallbackCalls = [];
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -23,7 +23,7 @@ use MediaWiki\Title\Title;
 class GetEntitiesTest extends WikibaseApiTestCase {
 
 	/** @var string[] */
-	private static $usedHandles = [ 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' ];
+	private static array $usedHandles = [ 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' ];
 
 	public function addDBDataOnce() {
 		$this->initTestEntities( self::$usedHandles );

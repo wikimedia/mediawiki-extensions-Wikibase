@@ -16,8 +16,7 @@ use Wikibase\DataModel\Reference;
  */
 class MapValueHasher {
 
-	/** @var bool */
-	private $isOrdered;
+	private bool $isOrdered;
 
 	public function __construct( $holdOrderIntoAccount = false ) {
 		$this->isOrdered = $holdOrderIntoAccount;

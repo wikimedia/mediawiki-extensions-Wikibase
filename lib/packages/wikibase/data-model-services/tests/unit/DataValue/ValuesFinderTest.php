@@ -22,8 +22,7 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class ValuesFinderTest extends TestCase {
 
-	/** @var array */
-	private static $propertyDataTypes = [
+	private static array $propertyDataTypes = [
 		'P23' => 'string',
 		'P42' => 'url',
 		'P44' => 'boolean',

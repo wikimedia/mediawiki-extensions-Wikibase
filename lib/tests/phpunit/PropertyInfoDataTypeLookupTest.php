@@ -22,8 +22,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  */
 class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 
-	/** @var array */
-	private static $propertiesAndTypes = [
+	private static array $propertiesAndTypes = [
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',
 		'P1337' => 'percentage',

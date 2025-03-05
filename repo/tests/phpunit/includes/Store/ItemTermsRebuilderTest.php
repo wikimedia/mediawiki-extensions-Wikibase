@@ -45,7 +45,7 @@ class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 	private $progressReporter;
 
 	/** @var ItemId[] */
-	private $itemIds;
+	private array $itemIds;
 
 	protected function setUp(): void {
 		parent::setUp();

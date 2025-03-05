@@ -9,6 +9,7 @@ use MediaWiki\Api\ApiUsageException;
 use MediaWiki\MainConfigNames;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -34,8 +35,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveClaimsTest extends WikibaseApiTestCase {
 
-	/** @var PropertyId */
-	private static $propertyId;
+	private static PropertyId $propertyId;
 
 	private function addStatementsAndSave( Item $item ): Item {
 		$store = $this->getEntityStore();

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -41,11 +42,9 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
-	/** @var MockJobQueueFactory */
-	private $mockJobQueueFactory;
+	private MockJobQueueFactory $mockJobQueueFactory;
 
-	/** @var JobQueueGroup */
-	private $jobQueueMock;
+	private JobQueueGroup $jobQueueMock;
 
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {

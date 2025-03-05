@@ -56,7 +56,7 @@ class PropertyStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 	private $dataTypes;
 
 	/** @var EntityId[] */
-	private $idsToPrefetch = [];
+	private array $idsToPrefetch = [];
 
 	public function __construct(
 		PrefetchingTermLookup $prefetchingLookup,

@@ -33,16 +33,11 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 	public const ITEM_Q1_REVISION = 1;
 
-	/** @var TermFallbackCacheFacade */
-	private $termFallbackCache;
-	/** @var RedirectResolvingLatestRevisionLookup */
-	private $revisionLookup;
-	/** @var LanguageFallbackChainFactory */
-	private $languageFallbackChainFactory;
-	/** @var TermLookup */
-	private $termLookup;
-	/** @var LanguageFallbackLabelDescriptionLookup */
-	private $factoryReturnLookup;
+	private TermFallbackCacheFacade $termFallbackCache;
+	private RedirectResolvingLatestRevisionLookup $revisionLookup;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private TermLookup $termLookup;
+	private LanguageFallbackLabelDescriptionLookup $factoryReturnLookup;
 	/**
 	 * @var LanguageFactory|\PHPUnit\Framework\MockObject\MockObject
 	 */
