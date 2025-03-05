@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"TimumachtikanNawat"
+			"TimumachtikanNawat",
+			"Canjura"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} datka",
@@ -12,5 +13,6 @@
 	"wikibase-linkitem-linkpage": "Ilpika ka amat",
 	"wikibase-linkitem-selectlink": "Shikwi se amat wan se iswat su tikneki tikilpia iwan ini amat.",
 	"wikibase-linkitem-input-site": "Tajtaketzalis",
-	"wikibase-linkitem-input-page": "Amat"
+	"wikibase-linkitem-input-page": "Amat",
+	"wikibase-rc-hide-wikidata-hide": "Shikinaya"
 }
