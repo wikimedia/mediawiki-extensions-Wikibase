@@ -5,7 +5,8 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
 			"Amjad Khan",
 			"Baloch Khan",
-			"Ladsgroup"
+			"Ladsgroup",
+			"شاه زمان پټان"
 		]
 	},
 	"wikibase-entity-item": "توکی",
@@ -31,7 +32,7 @@
 	"wikibase-label-empty": "کوم لېبل نه دی څرگند شوی",
 	"wikibase-label-edit-placeholder": "ليلا ورګډ کړي",
 	"wikibase-label-edit-placeholder-language-aware": "ليبل په $1 ورګډ کړي",
-	"wikibase-description-empty": "کوم تعريف نه دی څرگند شوی",
+	"wikibase-description-empty": "سپيناوي لپاره هيڅ څرگنداوی نه دی شوی",
 	"wikibase-description-edit-placeholder": "څرګندونه ورګډه کړئ",
 	"wikibase-description-edit-placeholder-language-aware": "څرګندونه په $1 کي ورګډه کړئ",
 	"wikibase-content-language-edit-label": "ژبه:",
