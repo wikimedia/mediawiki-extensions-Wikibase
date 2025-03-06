@@ -1,23 +1,23 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use InvalidArgumentException;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
+use MediaWikiCoversValidator;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\ResponseHeaderCountingTestMiddleware
+ * @covers \Wikibase\Repo\RestApi\Middleware\MiddlewareHandler
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class MiddlewareHandlerTest extends TestCase {
-	use \MediaWikiCoversValidator;
+	use MediaWikiCoversValidator;
 
 	public function testConstructorErrorsForNoMiddlewares(): void {
 		$this->expectException( InvalidArgumentException::class );

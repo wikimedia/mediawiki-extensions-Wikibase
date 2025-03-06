@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
@@ -8,10 +8,10 @@ use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware
+ * @covers \Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware
  *
  * @group Wikibase
  *

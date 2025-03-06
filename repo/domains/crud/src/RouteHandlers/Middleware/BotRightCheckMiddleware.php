@@ -7,6 +7,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
+use Wikibase\Repo\RestApi\Middleware\Middleware;
 
 /**
  * This middleware errors for bot edit requests given the user doesn't have the 'bot' right.

@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use Generator;
 use MediaWiki\Rest\Handler;
@@ -11,11 +11,11 @@ use RuntimeException;
 use Throwable;
 use TypeError;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware
+ * @covers \Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware
  *
  * @group Wikibase
  *

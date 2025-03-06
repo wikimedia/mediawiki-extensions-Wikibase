@@ -190,9 +190,9 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidato
 use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
