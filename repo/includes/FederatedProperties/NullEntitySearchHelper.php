@@ -11,6 +11,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  */
 class NullEntitySearchHelper implements EntitySearchHelper {
 
+	/** @inheritDoc */
 	public function getRankedSearchResults(
 		$text,
 		$languageCode,

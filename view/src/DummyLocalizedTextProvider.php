@@ -20,6 +20,7 @@ class DummyLocalizedTextProvider implements LocalizedTextProvider {
 		return "($key" . ( $params !== [] ? ": " . implode( ", ", $params ) : "" ) . ")";
 	}
 
+	/** @inheritDoc */
 	public function getEscaped( $key, array $params = [] ) {
 		return $this->get(
 			htmlspecialchars( $key ),

@@ -46,6 +46,7 @@ class PropertyContent extends EntityContent {
 		$this->propertyHolder = $propertyHolder;
 	}
 
+	/** @inheritDoc */
 	protected function getIgnoreKeysForFilters() {
 		// FIXME: Refine this after https://phabricator.wikimedia.org/T205254 is complete
 		return [

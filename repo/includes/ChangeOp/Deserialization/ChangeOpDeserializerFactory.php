@@ -120,7 +120,7 @@ class ChangeOpDeserializerFactory {
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
-	public function getFingerprintChangeOpDeserializer() {
+	public function getFingerprintChangeOpDeserializer(): FingerprintChangeOpDeserializer {
 		return new FingerprintChangeOpDeserializer(
 			$this->getLabelsChangeOpDeserializer(),
 			$this->getDescriptionsChangeOpDeserializer(),
@@ -129,7 +129,7 @@ class ChangeOpDeserializerFactory {
 		);
 	}
 
-	public function getLabelsChangeOpDeserializer() {
+	public function getLabelsChangeOpDeserializer(): LabelsChangeOpDeserializer {
 		return new LabelsChangeOpDeserializer(
 			$this->fingerprintChangeOpFactory,
 			$this->stringNormalizer,
@@ -137,7 +137,7 @@ class ChangeOpDeserializerFactory {
 		);
 	}
 
-	public function getDescriptionsChangeOpDeserializer() {
+	public function getDescriptionsChangeOpDeserializer(): DescriptionsChangeOpDeserializer {
 		return new DescriptionsChangeOpDeserializer(
 			$this->fingerprintChangeOpFactory,
 			$this->stringNormalizer,
@@ -145,7 +145,7 @@ class ChangeOpDeserializerFactory {
 		);
 	}
 
-	public function getAliasesChangeOpDeserializer() {
+	public function getAliasesChangeOpDeserializer(): AliasesChangeOpDeserializer {
 		return new AliasesChangeOpDeserializer(
 			$this->fingerprintChangeOpFactory,
 			$this->stringNormalizer,
@@ -153,14 +153,14 @@ class ChangeOpDeserializerFactory {
 		);
 	}
 
-	public function getClaimsChangeOpDeserializer() {
+	public function getClaimsChangeOpDeserializer(): ClaimsChangeOpDeserializer {
 		return new ClaimsChangeOpDeserializer(
 			$this->statementDeserializer,
 			$this->statementChangeOpFactory
 		);
 	}
 
-	public function getSiteLinksChangeOpDeserializer() {
+	public function getSiteLinksChangeOpDeserializer(): SiteLinksChangeOpDeserializer {
 		return new SiteLinksChangeOpDeserializer(
 			$this->badgeChangeOpSerializationValidator,
 			$this->siteLinkChangeOpFactory,

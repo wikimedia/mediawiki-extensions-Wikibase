@@ -58,14 +58,17 @@ class FederatedPropertyId implements PropertyId {
 		return $this->remoteId;
 	}
 
+	/** @inheritDoc */
 	public function getSerialization() {
 		return $this->serialization;
 	}
 
+	/** @inheritDoc */
 	public function __toString() {
 		return $this->getSerialization();
 	}
 
+	/** @inheritDoc */
 	public function equals( $target ) {
 		return $target instanceof FederatedPropertyId &&
 			$target->getSerialization() === $this->serialization;

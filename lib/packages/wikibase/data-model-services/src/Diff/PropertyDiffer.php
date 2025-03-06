@@ -62,7 +62,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 		return $property;
 	}
 
-	public function diffProperties( Property $from, Property $to ) {
+	public function diffProperties( Property $from, Property $to ): EntityDiff {
 		$diffOps = $this->diffPropertyArrays(
 			$this->toDiffArray( $from ),
 			$this->toDiffArray( $to )

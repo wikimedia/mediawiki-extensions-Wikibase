@@ -16,15 +16,17 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 	/** @var bool */
 	private $usePublish;
 
-	public function __construct( SettingsArray $settings, $usePublish ) {
+	public function __construct( SettingsArray $settings, bool $usePublish ) {
 		$this->settings = $settings;
 		$this->usePublish = $usePublish;
 	}
 
+	/** @inheritDoc */
 	public function getKey() {
 		return 'wbDataBridgeConfig';
 	}
 
+	/** @inheritDoc */
 	public function getValue() {
 		if ( $this->settings->hasSetting( 'dataBridgeHrefRegExp' ) ) {
 			$hrefRegExp = $this->settings->getSetting( 'dataBridgeHrefRegExp' );

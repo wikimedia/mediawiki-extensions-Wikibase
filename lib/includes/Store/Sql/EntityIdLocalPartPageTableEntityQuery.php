@@ -23,10 +23,12 @@ class EntityIdLocalPartPageTableEntityQuery extends PageTableEntityQueryBase {
 		return [ 'page_title' => $entityId->getSerialization() ];
 	}
 
+	/** @inheritDoc */
 	protected function getEntityIdStringFromRow( stdClass $row ) {
 		return $row->page_title;
 	}
 
+	/** @inheritDoc */
 	protected function getFieldsNeededForMapping() {
 		return [ 'page_title' ];
 	}

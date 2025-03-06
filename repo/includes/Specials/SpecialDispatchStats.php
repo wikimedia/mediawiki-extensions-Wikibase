@@ -23,6 +23,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		$this->dispatchStats = $dispatchStats;
 	}
 
+	/** @inheritDoc */
 	public function execute( $subPage ): void {
 		parent::execute( $subPage );
 

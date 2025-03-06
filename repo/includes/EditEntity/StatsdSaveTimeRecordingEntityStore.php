@@ -37,10 +37,16 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		$this->timingPrefix = $timingPrefix;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		return $this->entityStore->assignFreshId( $entity );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function saveEntity(
 		EntityDocument $entity,
 		$summary,
@@ -61,6 +67,9 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		return $result;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function saveRedirect(
 		EntityRedirect $redirect,
 		$summary,
@@ -72,22 +81,37 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		return $this->entityStore->saveRedirect( $redirect, $summary, $user, $flags, $baseRevId, $tags );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
 		return $this->entityStore->deleteEntity( $entityId, $reason, $user );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
 		return $this->entityStore->userWasLastToEdit( $user, $id, $lastRevId );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
 		$this->entityStore->updateWatchlist( $user, $id, $watch );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function isWatching( User $user, EntityId $id ) {
 		return $this->entityStore->isWatching( $user, $id );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function canCreateWithCustomId( EntityId $id ) {
 		return $this->entityStore->canCreateWithCustomId( $id );
 	}

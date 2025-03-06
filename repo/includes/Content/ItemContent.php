@@ -110,6 +110,9 @@ class ItemContent extends EntityContent {
 		return new static( null, $redirect, $redirectTitle );
 	}
 
+	/**
+	 * @return string[] Keys to ignore
+	 */
 	protected function getIgnoreKeysForFilters() {
 		// FIXME: Refine this after https://phabricator.wikimedia.org/T205254 is complete
 		return [

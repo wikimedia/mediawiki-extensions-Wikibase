@@ -46,7 +46,7 @@ class ImportFederatedPropertiesSampleData extends Maintenance {
 		$this->output( 'Created new Items from data file:' . $dataFile . "\n" );
 	}
 
-	public function storeNewItemWithTermData( array $data, EntityStore $entityStore, User $user ) {
+	public function storeNewItemWithTermData( array $data, EntityStore $entityStore, User $user ): Item {
 		$item = new Item();
 		$item->setLabel( 'en', $data[0] );
 		$item->setDescription( 'en', $data[1] );
@@ -56,7 +56,7 @@ class ImportFederatedPropertiesSampleData extends Maintenance {
 		return $item;
 	}
 
-	public function getDataToImport( $dataFileLocation ) {
+	public function getDataToImport( string $dataFileLocation ): array {
 		$data = file_get_contents( $dataFileLocation );
 		if ( $data === '' ) {
 			$this->fatalError( 'Error: ' . $dataFileLocation . ' is an empty file' . "\n" );

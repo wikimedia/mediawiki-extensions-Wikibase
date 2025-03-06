@@ -68,11 +68,14 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		$this->getOutput()->addHTML( Html::closeElement( 'dl' ) );
 	}
 
-	protected function getDataTypeIdsAndValues() {
+	/**
+	 * @return string[]
+	 */
+	protected function getDataTypeIdsAndValues(): array {
 		return $this->dataTypeDefinitions->getValueTypes();
 	}
 
-	protected function getHtmlForDataTypeId( $dataTypeId, $valueType ) {
+	protected function getHtmlForDataTypeId( string $dataTypeId, string $valueType ): string {
 		$dataTypeBaseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
 		$valueTypeBaseKey = 'wikibase-listdatavaluetypes-';
 

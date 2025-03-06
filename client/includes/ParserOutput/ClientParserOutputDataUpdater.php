@@ -216,7 +216,7 @@ class ClientParserOutputDataUpdater {
 		}
 	}
 
-	public function updateFirstRevisionTimestampProperty( $title, $parserOutputProvider ): void {
+	public function updateFirstRevisionTimestampProperty( Title $title, ParserOutputProvider $parserOutputProvider ): void {
 		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
 		$timestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
 

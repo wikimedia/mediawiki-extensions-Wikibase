@@ -171,6 +171,7 @@ abstract class EntityHandler extends ContentHandler {
 		return EntityContentDiffView::class;
 	}
 
+	/** @inheritDoc */
 	protected function getSlotDiffRendererWithOptions( IContextSource $context, $options = [] ) {
 		$entityDiffVisualizerFactory = WikibaseRepo::getEntityDiffVisualizerFactory();
 		$diffVisualizer = new DispatchingEntityDiffVisualizer( $entityDiffVisualizerFactory, $context );

@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Store;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Status\Status;
+use RuntimeException;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -29,6 +30,14 @@ class RateLimitingIdGenerator implements IdGenerator {
 		$this->contextSource = $contextSource;
 	}
 
+	/**
+	 * @param string $type
+	 *
+	 * @return int
+	 *
+	 * @throws StorageException
+	 * @throws RuntimeException
+	 */
 	public function getNewId( $type ) {
 		if ( $this->contextSource->getUser()->pingLimiter( self::RATELIMIT_NAME ) ) {
 			throw new StorageException( Status::newFatal( 'actionthrottledtext' ) );

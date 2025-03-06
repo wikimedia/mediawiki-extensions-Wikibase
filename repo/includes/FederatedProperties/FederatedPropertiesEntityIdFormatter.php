@@ -21,6 +21,10 @@ class FederatedPropertiesEntityIdFormatter implements EntityIdFormatter {
 		$this->innerFormatter = $innerFormatter;
 	}
 
+	/**
+	 * @param EntityId $entityId
+	 * @return string
+	 */
 	public function formatEntityId( EntityId $entityId ) {
 		try {
 			return $this->innerFormatter->formatEntityId( $entityId );

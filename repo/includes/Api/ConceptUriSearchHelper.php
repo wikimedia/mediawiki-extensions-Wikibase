@@ -32,6 +32,9 @@ class ConceptUriSearchHelper implements EntitySearchHelper {
 		$this->entitySourceLookup = $entitySourceLookup;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getRankedSearchResults(
 		$text,
 		$languageCode,

@@ -69,6 +69,7 @@ class HTMLContentLanguageField extends HTMLComboboxField {
 		return $languageOptions;
 	}
 
+	/** @inheritDoc */
 	public function validate( $value, $alldata ) {
 		$options = $this->getOptions();
 		if ( !in_array( $value, $options, true ) ) {

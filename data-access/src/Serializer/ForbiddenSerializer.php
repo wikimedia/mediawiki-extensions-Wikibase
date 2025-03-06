@@ -18,7 +18,7 @@ class ForbiddenSerializer implements Serializer {
 	 */
 	private $message;
 
-	public function __construct( $message ) {
+	public function __construct( string $message ) {
 		$this->message = $message;
 	}
 

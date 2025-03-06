@@ -78,10 +78,12 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 		$this->contentLanguages = $contentLanguages;
 	}
 
+	/** @inheritDoc */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		return $this->getTerm( $entityId, $languageCode, TermTypes::TYPE_LABEL );
 	}
 
+	/** @inheritDoc */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		return $this->getTerm( $entityId, $languageCode, TermTypes::TYPE_DESCRIPTION );
 	}
@@ -131,6 +133,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 		return null;
 	}
 
+	/** @inheritDoc */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		$labels = [];
 
@@ -144,6 +147,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 		return $labels;
 	}
 
+	/** @inheritDoc */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		$descriptions = [];
 

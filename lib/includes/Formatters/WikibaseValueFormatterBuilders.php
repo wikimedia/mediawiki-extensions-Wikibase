@@ -248,7 +248,7 @@ class WikibaseValueFormatterBuilders {
 		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
-	public function newPropertyIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newPropertyIdHtmlLinkFormatter( FormatterOptions $options ): ItemPropertyIdHtmlLinkFormatter {
 		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( $options ),
 			$this->entityTitleLookup,
@@ -261,7 +261,7 @@ class WikibaseValueFormatterBuilders {
 		);
 	}
 
-	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ): ItemPropertyIdHtmlLinkFormatter {
 		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( $options ),
 			$this->entityTitleLookup,
@@ -520,7 +520,7 @@ class WikibaseValueFormatterBuilders {
 		}
 	}
 
-	public function newLabelsProviderEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newLabelsProviderEntityIdHtmlLinkFormatter( FormatterOptions $options ): LabelsProviderEntityIdHtmlLinkFormatter {
 		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new LabelsProviderEntityIdHtmlLinkFormatter(
 			$lookup,

@@ -100,10 +100,10 @@ class SimpleEntityTermsView implements EntityTermsView {
 	}
 
 	protected function getHeadingHtml(
-		$languageCode,
+		string $languageCode,
 		?EntityId $entityId,
 		?AliasGroupList $aliasGroups
-	) {
+	): string {
 		$headingPartsHtml = '';
 
 		$description = null;

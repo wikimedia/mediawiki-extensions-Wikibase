@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
+use Elastica\Status;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
 use StatusValue;
@@ -29,7 +30,7 @@ class SubmitEntityStatus extends TempUserStatus {
 	}
 
 	/**
-	 * @param StatusValue $sv
+	 * @param StatusValue|Status $sv
 	 * @return static
 	 */
 	public static function wrap( $sv ) {

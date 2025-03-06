@@ -88,6 +88,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		$this->prefetchAndCache( $uncachedIds, $uncachedTermTypes, $uncachedLanguageCodes );
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		if ( isset( $this->prefetchedTerms[$entityId->getSerialization()][$termType][$languageCode] ) ) {
 			return $this->prefetchedTerms[$entityId->getSerialization()][$termType][$languageCode];
@@ -95,6 +96,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->lookup->getPrefetchedTerm( $entityId, $termType, $languageCode );
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		if ( isset( $this->prefetchedTerms[$entityId->getSerialization()][TermTypes::TYPE_ALIAS][$languageCode] ) ) {
 			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
@@ -103,6 +105,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->lookup->getPrefetchedAliases( $entityId, $languageCode );
 	}
 
+	/** @inheritDoc */
 	public function getLabel( EntityId $entityId, $languageCode ): ?string {
 		if ( !$this->termLanguages->hasLanguage( $languageCode ) ) {
 			return null;
@@ -111,6 +114,7 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->getTerm( $entityId, $languageCode, TermTypes::TYPE_LABEL );
 	}
 
+	/** @inheritDoc */
 	public function getDescription( EntityId $entityId, $languageCode ): ?string {
 		if ( !$this->termLanguages->hasLanguage( $languageCode ) ) {
 			return null;
@@ -140,11 +144,13 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $freshTerm;
 	}
 
+	/** @inheritDoc */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		$validTermLanguageCodes = $this->filterValidTermLanguages( $languageCodes );
 		return $this->getMultipleTermsByLanguage( $entityId, TermTypes::TYPE_LABEL, $validTermLanguageCodes );
 	}
 
+	/** @inheritDoc */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		$validTermLanguageCodes = $this->filterValidTermLanguages( $languageCodes );
 		return $this->getMultipleTermsByLanguage( $entityId, TermTypes::TYPE_DESCRIPTION, $validTermLanguageCodes );

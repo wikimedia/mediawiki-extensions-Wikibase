@@ -67,9 +67,14 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		$this->enableUserSpecificSSR = $enableUserSpecificSSR;
 	}
 
-	public function getHtmlForPlaceholder( $name ): string {
-		if ( $name !== TermboxView::TERMBOX_PLACEHOLDER ) {
-			throw new \RuntimeException( "Unknown placeholder: $name" );
+	/**
+	 * @param string $placeholderName
+	 *
+	 * @return string html
+	 */
+	public function getHtmlForPlaceholder( $placeholderName ): string {
+		if ( $placeholderName !== TermboxView::TERMBOX_PLACEHOLDER ) {
+			throw new \RuntimeException( "Unknown placeholder: $placeholderName" );
 		}
 
 		return $this->getHtml() ?: self::FALLBACK_HTML;

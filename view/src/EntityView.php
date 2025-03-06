@@ -44,7 +44,7 @@ abstract class EntityView implements EntityDocumentView {
 		$this->templateFactory = $templateFactory;
 	}
 
-	protected function renderEntityView( EntityDocument $entity ) {
+	protected function renderEntityView( EntityDocument $entity ): string {
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
 		return $this->templateFactory->render(

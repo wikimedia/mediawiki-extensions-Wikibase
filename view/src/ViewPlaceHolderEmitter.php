@@ -18,6 +18,12 @@ interface ViewPlaceHolderEmitter {
 
 	public const ERRONEOUS_PLACEHOLDER_VALUE = null;
 
+	/**
+	 * @param EntityDocument $entity
+	 * @param int $revisionId
+	 * @param string $languageCode
+	 * @return array
+	 */
 	public function getPlaceholders(
 		EntityDocument $entity,
 		$revisionId,

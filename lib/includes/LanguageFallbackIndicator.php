@@ -27,7 +27,7 @@ class LanguageFallbackIndicator {
 		$this->languageNameLookup = $languageNameLookup;
 	}
 
-	public function getHtml( TermFallback $term ) {
+	public function getHtml( TermFallback $term ): string {
 		$requestedLanguage = $term->getLanguageCode();
 		$actualLanguage = $term->getActualLanguageCode();
 		$sourceLanguage = $term->getSourceLanguageCode();

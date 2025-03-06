@@ -54,6 +54,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase
 		return $entityIdsGroupedBySourceAndType;
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		return $this->getLookupForEntitySourceAndType(
 			$this->sourceLookup->getEntitySourceById( $entityId ),
@@ -68,6 +69,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase
 		return $this->dispatcher->getServiceForSourceAndType( $source->getSourceName(), $type, [ $source ] );
 	}
 
+	/** @inheritDoc */
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {
 		$this->prefetchTerms( [ $entityId ], [ $termType ], $languageCodes );
 
@@ -79,6 +81,7 @@ class SourceAndTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase
 		return array_filter( $terms, 'is_string' );
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		return $this->getLookupForEntitySourceAndType(
 			$this->sourceLookup->getEntitySourceById( $entityId ),

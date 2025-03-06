@@ -507,6 +507,9 @@ class MediaWikiEditEntity implements EditEntity {
 		return in_array( $entity->getType(), $this->localEntityTypes );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function attemptSave( EntityDocument $newEntity, string $summary, $flags, $token, $watch = null, array $tags = [] ) {
 		$this->checkReadOnly( $newEntity ); // throws, exception formatted by MediaWiki (cf. MWExceptionRenderer::getExceptionTitle)
 		$this->checkEntityId( $newEntity->getId() ); // throws internal error (unexpected condition)

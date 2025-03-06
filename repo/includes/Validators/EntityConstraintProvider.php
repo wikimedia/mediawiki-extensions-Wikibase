@@ -71,9 +71,10 @@ class EntityConstraintProvider {
 	 *
 	 * @param string $entityType
 	 * @param EntityId $entityId
+	 *
 	 * @return EntityValidator[]
 	 */
-	public function getCreationValidators( $entityType, EntityId $entityId ): array {
+	public function getCreationValidators( string $entityType, EntityId $entityId ): array {
 		return $this->getUpdateValidators( $entityType );
 	}
 

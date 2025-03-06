@@ -13,7 +13,7 @@ namespace Wikibase\Lib\Changes;
  */
 interface ChangeStore {
 
-	public function saveChange( Change $change );
+	public function saveChange( Change $change ): void;
 
 	public function deleteChangesByChangeIds( array $changeIds ): void;
 

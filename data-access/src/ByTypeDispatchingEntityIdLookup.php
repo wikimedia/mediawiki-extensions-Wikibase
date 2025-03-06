@@ -43,6 +43,7 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 		$this->hookContainer = $hookContainer;
 	}
 
+	/** @inheritDoc */
 	public function getEntityIds( array $titles ) {
 		$pageIds = [];
 		$contentModels = [];
@@ -65,6 +66,7 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 		} );
 	}
 
+	/** @inheritDoc */
 	public function getEntityIdForTitle( Title $title ) {
 		$contentModel = $this->getContentModelForTitle( $title );
 		$lookup = $this->getLookupForContentModel( $contentModel );

@@ -62,7 +62,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		SiteLinkLookup $siteLinkLookup,
-		$siteId,
+		string $siteId,
 		UsageLookup $usageLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		DescriptionLookup $descriptionLookup

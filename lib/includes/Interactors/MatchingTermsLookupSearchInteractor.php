@@ -73,7 +73,7 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 		$this->termSearchOptions = new TermSearchOptions();
 	}
 
-	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {
+	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ): void {
 		$this->termSearchOptions = $termSearchOptions;
 	}
 

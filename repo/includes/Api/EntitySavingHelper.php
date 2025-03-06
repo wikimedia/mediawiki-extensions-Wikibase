@@ -103,7 +103,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 	public function __construct(
 		bool $isWriteMode,
-		$needsToken,
+		bool $needsToken,
 		RevisionLookup $revisionLookup,
 		TitleFactory $titleFactory,
 		EntityIdParser $idParser,

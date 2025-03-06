@@ -30,6 +30,11 @@ class WikiPageEntityDataLoader {
 	/** @var string|false */
 	private $wikiId;
 
+	/**
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param BlobStore $blobStore
+	 * @param string|false $wikiId
+	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
 		BlobStore $blobStore,

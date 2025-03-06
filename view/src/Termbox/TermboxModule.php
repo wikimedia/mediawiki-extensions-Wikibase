@@ -21,6 +21,7 @@ class TermboxModule extends RL\FileModule {
 	}
 
 	/**
+	 * @param string $file
 	 * @return string[][]|null
 	 */
 	private function readJsonFile( string $file ) {

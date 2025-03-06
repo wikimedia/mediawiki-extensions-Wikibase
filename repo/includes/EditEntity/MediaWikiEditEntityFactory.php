@@ -89,7 +89,7 @@ class MediaWikiEditEntityFactory {
 		StatsdDataFactoryInterface $statsdDataFactory,
 		UserOptionsLookup $userOptionsLookup,
 		TempUserCreator $tempUserCreator,
-		$maxSerializedEntitySize,
+		int $maxSerializedEntitySize,
 		array $localEntityTypes
 	) {
 		$this->titleLookup = $titleLookup;

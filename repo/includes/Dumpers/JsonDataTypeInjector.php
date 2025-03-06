@@ -39,7 +39,7 @@ class JsonDataTypeInjector {
 		$this->entityIdParser = $entityIdParser;
 	}
 
-	public function injectEntitySerializationWithDataTypes( array $serialization ) {
+	public function injectEntitySerializationWithDataTypes( array $serialization ): array {
 		$callback = $this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup, $this->entityIdParser );
 		$groupedCallback = $this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty(
 			$this->dataTypeLookup,

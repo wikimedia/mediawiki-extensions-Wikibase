@@ -25,6 +25,9 @@ class EntityReferenceExtractorCollection implements EntityReferenceExtractor {
 		$this->referenceExtractors = $referenceExtractors;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function extractEntityIds( EntityDocument $entity ) {
 		$ids = [];
 

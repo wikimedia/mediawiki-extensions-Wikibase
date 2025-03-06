@@ -5,10 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Context\IContextSource;
-use MediaWiki\EditPage\EditPage;
 use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
 use MediaWiki\Html\Html;
-use MediaWiki\Output\OutputPage;
 use MessageLocalizer;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\ClientStore;
@@ -61,11 +59,10 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	/**
-	 * @param EditPage $editor
-	 * @param OutputPage $out
-	 * @param int $tabindex
+	 * phpcs:ignore MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+	 *
+	 * @inheritDoc
 	 */
-	// phpcs:ignore MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 	public function onEditPage__showStandardInputs_options( $editor, $out, &$tabindex ): void {
 		if ( $editor->section ) {
 			// Shorten out, like template transclusion in core

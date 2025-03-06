@@ -43,6 +43,9 @@ class ApiFormatReference extends ApiBase {
 		$this->referenceDeserializer = $referenceDeserializer;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isInternal() {
 		// for now, this API is internal; remove this method once we stabilize it
 		return true;
@@ -91,6 +94,9 @@ class ApiFormatReference extends ApiBase {
 		}
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getAllowedParams() {
 		return [
 			'reference' => [
@@ -114,6 +120,9 @@ class ApiFormatReference extends ApiBase {
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function getExamplesMessages() {
 		$stringReference = FormatJson::encode( [
 			'snaks' => [

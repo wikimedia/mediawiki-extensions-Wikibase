@@ -10,6 +10,7 @@ use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
  */
 class UnmappedEntityIdValueFormatter implements ValueFormatter {
 
+	/** @inheritDoc */
 	public function format( $value ) {
 		/** @var UnmappedEntityIdValue $value */
 		return $value->getValue();

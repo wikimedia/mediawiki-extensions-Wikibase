@@ -16,6 +16,7 @@ class InconsistentRedirectException extends BadRevisionException {
 	/** @var string */
 	private $slot;
 
+	/** @inheritDoc */
 	public function __construct( int $revisionId, string $slot, $status = '', $code = 0, ?Exception $previous = null ) {
 		$this->revisionId = $revisionId;
 		$this->slot = $slot;
