@@ -15,6 +15,11 @@ Some specific notes for Wikibase 1.44 upgrades are below:
   always contains `1` as the value for labels, `2` for descriptions and `3` for aliases. This
   migration may take a while when running `update.php`.
 * The wbt_type database table was dropped.
+* (T384344) The RDF output has changed slightly:
+  three prefixes have changed, by default from s:/ref:/v: to wds:/wdref:/wdv:,
+  and hashes of somevalue (unknown value) snak blank nodes have also changed.
+  If you use the WDQS Streaming Updater, you should do a full data reload.
+  (If you don’t know what that means, you can safely ignore it.)
 
 ...
 

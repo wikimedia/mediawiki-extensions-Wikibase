@@ -50,8 +50,6 @@ class RdfVocabularyTest extends ServiceWiringTestCase {
 				'canonicalLanguageCodes' => [ 't1' => 'test-1' ],
 				'pagePropertiesRdf' => $pagePropertyDefs,
 				'rdfDataRightsUrl' => 'https://license.test/cc0',
-				'tmpFixRdfSomevalueHash' => true,
-				'tmpFixRdfNodeNamespacePrefix' => true,
 			] ) );
 		$this->mockService( 'WikibaseRepo.EntitySourceDefinitions',
 			new EntitySourceDefinitions( [

@@ -136,10 +136,6 @@ class RdfVocabulary {
 	/** @var string[] */
 	private $sourceNameByEntityType;
 
-	public bool $tmpFixRdfSomevalueHash;
-
-	private bool $tmpFixRdfNodeNamespacePrefix;
-
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
 	 * @param string[] $dataUris Associative array mapping source/repository names to base URIs for entity description URIs.
@@ -153,8 +149,6 @@ class RdfVocabulary {
 	 *                 pageProp => [ 'name' => wikibase predicate, 'type' => integer ]
 	 *                 All predicates will be prefixed with wikibase:
 	 * @param string $licenseUrl
-	 * @param bool $tmpFixRdfSomevalueHash Temporary feature flag.
-	 * @param bool $tmpFixRdfNodeNamespacePrefix Temporary feature flag.
 	 */
 	public function __construct(
 		array $conceptUris,
@@ -165,9 +159,7 @@ class RdfVocabulary {
 		array $canonicalLanguageCodes = [],
 		array $dataTypeUris = [],
 		array $pagePropertyDefs = [],
-		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/',
-		bool $tmpFixRdfSomevalueHash = false,
-		bool $tmpFixRdfNodeNamespacePrefix = false
+		string $licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
 	) {
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
@@ -181,8 +173,6 @@ class RdfVocabulary {
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
 		$this->pagePropertyDefs = $pagePropertyDefs;
-		$this->tmpFixRdfSomevalueHash = $tmpFixRdfSomevalueHash;
-		$this->tmpFixRdfNodeNamespacePrefix = $tmpFixRdfNodeNamespacePrefix;
 
 		$this->namespaces = [
 			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -220,14 +210,13 @@ class RdfVocabulary {
 		foreach ( $conceptUris as $repositoryOrSourceName => $baseUri ) {
 			$nodeNamespacePrefix = $rdfTurtleNodePrefixes[$repositoryOrSourceName];
 			$predicateNamespacePrefix = $rdfTurtlePredicatePrefixes[$repositoryOrSourceName];
-			$buggyNodeNamespacePrefix = $tmpFixRdfNodeNamespacePrefix ? $nodeNamespacePrefix : $predicateNamespacePrefix;
 
 			$this->entityNamespaceNames[$repositoryOrSourceName] = $nodeNamespacePrefix . self::NS_ENTITY;
 			$this->dataNamespaceNames[$repositoryOrSourceName] = $predicateNamespacePrefix . self::NS_DATA;
 			$this->statementNamespaceNames[$repositoryOrSourceName] = [
-				self::NS_STATEMENT => $buggyNodeNamespacePrefix . self::NS_STATEMENT,
-				self::NS_REFERENCE => $buggyNodeNamespacePrefix . self::NS_REFERENCE,
-				self::NS_VALUE => $buggyNodeNamespacePrefix . self::NS_VALUE,
+				self::NS_STATEMENT => $nodeNamespacePrefix . self::NS_STATEMENT,
+				self::NS_REFERENCE => $nodeNamespacePrefix . self::NS_REFERENCE,
+				self::NS_VALUE => $nodeNamespacePrefix . self::NS_VALUE,
 			];
 
 			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
@@ -301,8 +290,6 @@ class RdfVocabulary {
 	 * @return string[]
 	 */
 	private function getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri, $dataUri ) {
-		$buggyNodeNamespacePrefix = $this->tmpFixRdfNodeNamespacePrefix ? $nodeNamespacePrefix : $predicateNamespacePrefix;
-
 		$topUri = $this->getConceptUriBase( $baseUri );
 
 		$propUri = $topUri . 'prop/';
@@ -310,9 +297,9 @@ class RdfVocabulary {
 		return [
 			$nodeNamespacePrefix . self::NS_ENTITY => $baseUri,
 			$predicateNamespacePrefix . self::NS_DATA => $dataUri,
-			$buggyNodeNamespacePrefix . self::NS_STATEMENT => $baseUri . 'statement/',
-			$buggyNodeNamespacePrefix . self::NS_REFERENCE => $topUri . 'reference/',
-			$buggyNodeNamespacePrefix . self::NS_VALUE => $topUri . 'value/',
+			$nodeNamespacePrefix . self::NS_STATEMENT => $baseUri . 'statement/',
+			$nodeNamespacePrefix . self::NS_REFERENCE => $topUri . 'reference/',
+			$nodeNamespacePrefix . self::NS_VALUE => $topUri . 'value/',
 			// predicates
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
