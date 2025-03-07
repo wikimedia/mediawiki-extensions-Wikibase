@@ -21,6 +21,9 @@ use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\MediaWikiSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Search\WbSearch;
+use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NotMulValidator;
@@ -37,9 +40,11 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 	private const LANGUAGE_QUERY_PARAM = 'language';
 
 	private SimpleItemSearch $useCase;
+	private MiddlewareHandler $middlewareHandler;
 
-	public function __construct( SimpleItemSearch $useCase ) {
+	public function __construct( SimpleItemSearch $useCase, MiddlewareHandler $middlewareHandler ) {
 		$this->useCase = $useCase;
+		$this->middlewareHandler = $middlewareHandler;
 	}
 
 	public static function factory(): Handler {
@@ -47,7 +52,11 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 			new SimpleItemSearch(
 				self::newUseCaseValidator(),
 				self::newSearchEngine()
-			)
+			),
+			new MiddlewareHandler( [
+				WbSearch::getUnexpectedErrorHandlerMiddleware(),
+				new UserAgentCheckMiddleware(),
+			] )
 		);
 	}
 
@@ -86,9 +95,13 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 	}
 
 	/**
-	 * @throws HttpException
+	 * @param mixed ...$args
 	 */
-	public function run(): Response {
+	public function run( ...$args ): Response {
+		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	}
+
+	public function runUseCase(): Response {
 		try {
 			$useCaseResponse = $this->useCase->execute( new SimpleItemSearchRequest(
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],

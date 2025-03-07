@@ -963,7 +963,8 @@
 	},
 	"ServiceWiringFiles": [
 		"repo/WikibaseRepo.ServiceWiring.php",
-		"repo/domains/crud/src/WbRestApi.ServiceWiring.php"
+		"repo/domains/crud/src/WbRestApi.ServiceWiring.php",
+		"repo/domains/search/src/WbSearch.ServiceWiring.php"
 	],
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase",
