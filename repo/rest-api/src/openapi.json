@@ -33589,8 +33589,23 @@
                                 "type": "string"
                               }
                             }
+                          },
+                          "match": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "language": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            }
                           }
-                        }
+                        },
+                        "additionalProperties": false
                       }
                     }
                   }
@@ -33606,6 +33621,11 @@
                       "description": {
                         "language": "en",
                         "value": "staple food"
+                      },
+                      "match": {
+                        "type": "label",
+                        "language": "en",
+                        "text": "potato"
                       }
                     },
                     {
@@ -33617,6 +33637,11 @@
                       "description": {
                         "language": "en",
                         "value": "species of plant"
+                      },
+                      "match": {
+                        "type": "label",
+                        "language": "en",
+                        "text": "potato"
                       }
                     }
                   ]

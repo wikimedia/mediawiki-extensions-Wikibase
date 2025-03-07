@@ -11,6 +11,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
+use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 
@@ -40,6 +41,7 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new ItemId( 'Q123' ),
 			new Label( 'en', 'potato' ),
 			new Description( 'en', 'staple food' ),
+			new MatchedData( TermTypes::TYPE_LABEL, 'en', 'potato' )
 		);
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
@@ -79,7 +81,8 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$expectedSearchResult = new ItemSearchResult(
 			new ItemId( 'Q123' ),
 			new Label( 'en', 'potato' ),
-			new Description( 'en', 'staple food' )
+			new Description( 'en', 'staple food' ),
+			new MatchedData( TermTypes::TYPE_ALIAS, 'en', 'spud' )
 		);
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );

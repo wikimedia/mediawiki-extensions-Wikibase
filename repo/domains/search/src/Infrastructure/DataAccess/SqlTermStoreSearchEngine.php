@@ -11,6 +11,7 @@ use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
+use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
 /**
@@ -44,7 +45,8 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 				return new ItemSearchResult(
 					new ItemId( (string)$entry->getEntityId() ),
 					$label,
-					$this->termRetriever->getDescription( $entry->getEntityId(), $languageCode )
+					$this->termRetriever->getDescription( $entry->getEntityId(), $languageCode ),
+					new MatchedData( $entry->getTermType(), $entry->getLanguage(), $entry->getText() )
 				);
 			},
 			$this->findMatchingLabelsAndAliases( $searchTerm, $languageCode )

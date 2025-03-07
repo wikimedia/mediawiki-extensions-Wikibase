@@ -63,8 +63,17 @@
 															"language": { "type": "string" },
 															"value": { "type": "string" }
 														}
+													},
+													"match": {
+														"type": "object",
+														"properties": {
+															"type": { "type": "string" },
+															"language": { "type": "string" },
+															"text": { "type": "string" }
+														}
 													}
-												}
+												},
+												"additionalProperties": false
 											}
 										}
 									}
@@ -74,12 +83,14 @@
 										{
 											"id": "Q123",
 											"label": { "language": "en", "value": "potato" },
-											"description": { "language": "en", "value": "staple food" }
+											"description": { "language": "en", "value": "staple food" },
+											"match": { "type": "label", "language": "en", "text": "potato" }
 										},
 										{
 											"id": "Q234",
 											"label": { "language": "en", "value": "potato" },
-											"description": { "language": "en", "value": "species of plant" }
+											"description": { "language": "en", "value": "species of plant" },
+											"match": { "type": "label", "language": "en", "text": "potato" }
 										}
 									]
 								}
