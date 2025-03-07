@@ -247,6 +247,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -1758,6 +1759,14 @@ return [
 			$lbFactory,
 			$lbFactory->getLocalDomainID(),
 			[ DomainDb::LOAD_GROUP_FROM_REPO ]
+		);
+	},
+
+	'WikibaseRepo.ScopedTypeaheadSearchConfig' => function( MediaWikiServices $services ): ScopedTypeaheadSearchConfig {
+		return new ScopedTypeaheadSearchConfig(
+			$services->getHookContainer(),
+			WikibaseRepo::getLocalEntityNamespaceLookup( $services ),
+			WikibaseRepo::getEnabledEntityTypesForSearch( $services )
 		);
 	},
 

@@ -130,6 +130,7 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
@@ -626,6 +627,11 @@ class WikibaseRepo {
 	public static function getLocalEntityTypes( ?ContainerInterface $services = null ): array {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.LocalEntityTypes' );
+	}
+
+	public static function getScopedTypeaheadSearchConfig( ?ContainerInterface $services = null ): ScopedTypeaheadSearchConfig {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ScopedTypeaheadSearchConfig' );
 	}
 
 	public static function getEntityContentDataCodec( ?ContainerInterface $services = null ): EntityContentDataCodec {

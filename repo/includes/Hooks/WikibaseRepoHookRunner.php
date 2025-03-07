@@ -12,7 +12,7 @@ use MediaWiki\HookContainer\HookContainer;
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoHookRunner implements WikibaseRepoSearchableEntityScopesMessagesHook {
+class WikibaseRepoHookRunner implements WikibaseRepoSearchableEntityScopesMessagesHook, WikibaseRepoSearchableEntityScopesHook {
 
 	private HookContainer $hookContainer;
 
@@ -26,6 +26,14 @@ class WikibaseRepoHookRunner implements WikibaseRepoSearchableEntityScopesMessag
 			'WikibaseRepoSearchableEntityScopesMessages',
 			[ &$messages ],
 			[ 'abortable' => false ]
+		);
+	}
+
+	/** @inheritDoc */
+	public function onWikibaseRepoSearchableEntityScopes( array &$searchableEntityScopes ): void {
+		$this->hookContainer->run(
+			'WikibaseRepoSearchableEntityScopes',
+			[ &$searchableEntityScopes ]
 		);
 	}
 
