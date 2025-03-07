@@ -927,6 +927,7 @@
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
 		"Wikibase\\Repo\\Tests\\Unit\\": "repo/tests/phpunit/unit/",
+		"Wikibase\\Repo\\Tests\\RestApi\\": "repo/rest-api/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Search\\": "repo/domains/search/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\": "repo/domains/crud/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\Architecture\\": "repo/domains/crud/tests/architecture/",

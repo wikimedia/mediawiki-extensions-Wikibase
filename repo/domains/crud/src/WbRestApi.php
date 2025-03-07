@@ -89,7 +89,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\TermLookupEntityTermsRe
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
  * @license GPL-2.0-or-later

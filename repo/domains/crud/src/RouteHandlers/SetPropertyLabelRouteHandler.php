@@ -17,10 +17,10 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\SetPropertyLabel\SetProperty
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\MiddlewareHandler;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
