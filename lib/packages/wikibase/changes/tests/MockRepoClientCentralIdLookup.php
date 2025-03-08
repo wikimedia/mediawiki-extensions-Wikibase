@@ -43,16 +43,19 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 		}
 	}
 
+	/** @inheritDoc */
 	public function isAttached( UserIdentity $user, $wikiId = null ): bool {
 		return true;
 	}
 
+	/** @inheritDoc */
 	public function lookupCentralIds(
 		array $idToName, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): array {
 		throw new LogicException( 'Not implemented' );
 	}
 
+	/** @inheritDoc */
 	public function lookupUserNames(
 		array $nameToId, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): array {
@@ -74,6 +77,7 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 		throw new LogicException( 'Not implemented' );
 	}
 
+	/** @inheritDoc */
 	public function localUserFromCentralId(
 		$id, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): ?UserIdentity {
@@ -87,6 +91,7 @@ class MockRepoClientCentralIdLookup extends CentralIdLookup {
 		return User::newFromId( $localUserId );
 	}
 
+	/** @inheritDoc */
 	public function centralIdFromLocalUser(
 		UserIdentity $user, $audience = self::AUDIENCE_PUBLIC, $flags = IDBAccessObject::READ_NORMAL
 	): int {

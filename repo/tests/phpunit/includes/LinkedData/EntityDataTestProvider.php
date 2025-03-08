@@ -47,7 +47,7 @@ class EntityDataTestProvider {
 		return [ $redirect ];
 	}
 
-	public static function getMockRepository() {
+	public static function getMockRepository(): MockRepository {
 		$mockRepository = new MockRepository();
 
 		foreach ( self::getEntityRevisions() as $entityRev ) {

@@ -340,7 +340,7 @@ class RdfBuilderTestData {
 		return $termLookup;
 	}
 
-	public function getMockEntityRevsionLookup() {
+	public function getMockEntityRevsionLookup(): MockEntityRevisionLookup {
 		$revisionNumber = 1;
 		$q42string = 'Q42';
 		$q4242 = 'Q4242';

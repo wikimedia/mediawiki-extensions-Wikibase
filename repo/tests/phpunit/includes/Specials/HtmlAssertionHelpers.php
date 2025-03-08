@@ -99,7 +99,7 @@ trait HtmlAssertionHelpers {
 		);
 	}
 
-	protected function assertHtmlContainsErrorMessage( $html, $messageText ) {
+	protected function assertHtmlContainsErrorMessage( string $html, string $messageText ) {
 		$formErrorMessage = tagMatchingOutline( '<div class="error"/>' );
 		$ooUiErrorMessage = tagMatchingOutline( '<div class="oo-ui-flaggedElement-error"/>' );
 

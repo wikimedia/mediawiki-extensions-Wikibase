@@ -41,6 +41,7 @@ class MockAddUnits extends AddUnitConversions {
 		$this->output .= $data;
 	}
 
+	/** @inheritDoc */
 	protected function output( $out, $channel = null ) {
 	}
 

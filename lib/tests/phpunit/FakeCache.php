@@ -17,26 +17,32 @@ class FakeCache implements CacheInterface {
 	/** @var array */
 	private $contents = [];
 
+	/** @inheritDoc */
 	public function get( $key, $default = null ) {
 		return $this->contents[$key] ?? $default;
 	}
 
+	/** @inheritDoc */
 	public function set( $key, $value, $ttl = null ) {
 		$this->contents[$key] = $value;
 	}
 
+	/** @inheritDoc */
 	public function delete( $key ) {
 		unset( $this->contents[$key] );
 	}
 
+	/** @inheritDoc */
 	public function clear() {
 		$this->contents = [];
 	}
 
+	/** @inheritDoc */
 	public function has( $key ) {
 		return isset( $this->contents[$key] );
 	}
 
+	/** @inheritDoc */
 	public function getMultiple( $keys, $default = null ) {
 		$entries = [];
 		foreach ( $keys as $key ) {
@@ -46,12 +52,14 @@ class FakeCache implements CacheInterface {
 		return $entries;
 	}
 
+	/** @inheritDoc */
 	public function setMultiple( $values, $ttl = null ) {
 		foreach ( $values as $key => $value ) {
 			$this->set( $key, $value );
 		}
 	}
 
+	/** @inheritDoc */
 	public function deleteMultiple( $keys ) {
 		throw new Exception( 'not yet implemented by test class ' );
 	}

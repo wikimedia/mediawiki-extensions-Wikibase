@@ -28,6 +28,7 @@ class FakeLoadBalancer extends LoadBalancer {
 		$this->dbw = $params['dbw'] ?? $this->dbr;
 	}
 
+	/** @inheritDoc */
 	public function getConnectionInternal( $i, $groups = [], $domain = false, $flags = 0 ): IDatabase {
 		switch ( $i ) {
 			case ILoadBalancer::DB_REPLICA:
@@ -43,6 +44,7 @@ class FakeLoadBalancer extends LoadBalancer {
 		return $this->dbw->getDomainID();
 	}
 
+	/** @inheritDoc */
 	public function resolveDomainID( $domain ): string {
 		return ( $domain === false ) ? $this->getLocalDomainID() : (string)$domain;
 	}

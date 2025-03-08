@@ -100,6 +100,7 @@ class MockRepository implements
 		return $revision === null ? null : $revision->getEntity()->copy();
 	}
 
+	/** @inheritDoc */
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
@@ -369,6 +370,7 @@ class MockRepository implements
 		throw new PropertyDataTypeLookupException( $propertyId );
 	}
 
+	/** @inheritDoc */
 	public function getLatestRevisionId(
 		EntityId $entityId,
 		$mode = LookupConstants::LATEST_FROM_REPLICA
@@ -439,6 +441,7 @@ class MockRepository implements
 		return $revision;
 	}
 
+	/** @inheritDoc */
 	public function saveRedirect(
 		EntityRedirect $redirect,
 		$summary,
@@ -459,10 +462,12 @@ class MockRepository implements
 		return $revisionId;
 	}
 
+	/** @inheritDoc */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ): void {
 		$this->removeEntity( $entityId );
 	}
 
+	/** @inheritDoc */
 	public function userWasLastToEdit( User $user, EntityId $entityId, $lastRevisionId ): bool {
 		$key = $entityId->getSerialization();
 		if ( !isset( $this->entities[$key] ) ) {
@@ -481,6 +486,7 @@ class MockRepository implements
 		return true;
 	}
 
+	/** @inheritDoc */
 	public function updateWatchlist( User $user, EntityId $entityId, $watch ): void {
 		if ( $watch ) {
 			$this->watchlist[ $user->getName() ][ $entityId->getSerialization() ] = true;
@@ -606,6 +612,7 @@ class MockRepository implements
 		return $redirects;
 	}
 
+	/** @inheritDoc */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ): ?EntityId {
 		$key = $entityId->getSerialization();
 

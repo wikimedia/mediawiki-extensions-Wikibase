@@ -13,6 +13,7 @@ use Wikimedia\Purtle\BNodeLabeler;
  */
 class NoopBNodeLabeler extends BNodeLabeler {
 
+	/** @inheritDoc */
 	public function getLabel( $label = null ) {
 		if ( $label === null ) {
 			throw new InvalidArgumentException( 'Must explicitly assign blank node labels!' );
