@@ -11,8 +11,8 @@ use RuntimeException;
 use Throwable;
 use TypeError;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
+use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
  * @covers \Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware
