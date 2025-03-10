@@ -597,7 +597,7 @@ return [
 			WikibaseRepo::getEntityDiffer( $services ),
 			WikibaseRepo::getEntityPatcher( $services ),
 			WikibaseRepo::getEditFilterHookRunner( $services ),
-			$services->getStatsdDataFactory(),
+			$services->getStatsFactory(),
 			$services->getUserOptionsLookup(),
 			$services->getTempUserCreator(),
 			WikibaseRepo::getSettings( $services )->getSetting( 'maxSerializedEntitySize' ),
@@ -917,7 +917,7 @@ return [
 				)
 			),
 			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
-			$services->getStatsdDataFactory(),
+			$services->getStatsFactory(),
 			$services->getRepoGroup(),
 			$services->getLinkBatchFactory(),
 			WikibaseRepo::getHookRunner( $services ),
@@ -2005,7 +2005,7 @@ return [
 		return new TermFallbackCacheFactory(
 			$settings->getSetting( 'sharedCacheType' ),
 			WikibaseRepo::getLogger( $services ),
-			$services->getStatsdDataFactory(),
+			$services->getStatsFactory()->withComponent( 'WikibaseRepo' ),
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' ),

@@ -28,7 +28,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
@@ -101,7 +101,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getHookHandler(): OutputPageBeforeHTMLHookHandler {
 		return new OutputPageBeforeHTMLHookHandler(
 			new NullHttpRequestFactory(),
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			$this->settings,
 			TemplateFactory::getDefaultInstance(),
 			$this->entityRevisionLookup,

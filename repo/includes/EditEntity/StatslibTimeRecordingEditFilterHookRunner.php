@@ -2,39 +2,55 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Repo\Content\EntityContent;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * EditFilterHookRunning that collects stats for edits.
  * @license GPL-2.0-or-later
  */
-class StatsdTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
+class StatslibTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 
-	/** @var EditFilterHookRunner */
+	/**
+	 * @var EditFilterHookRunner
+	 */
 	private $hookRunner;
-	/** @var StatsdDataFactoryInterface */
-	private $stats;
-	/** @var string */
-	private $timingPrefix;
+
+	/**
+	 * @var StatsFactory
+	 */
+	private $statsFactory;
+
+	/**
+	 * @var string
+	 */
+	private $statsdTimingPrefix;
+
+	/**
+	 * @var string
+	 */
+	private $statsTimingPrefix;
 
 	/**
 	 * @param EditFilterHookRunner $hookRunner
-	 * @param StatsdDataFactoryInterface $stats
-	 * @param string $timingPrefix Resulting metric will be: $timingPrefix.run.<entitytype>
+	 * @param StatsFactory $statsFactory
+	 * @param string $statsdTimingPrefix Resulting metric will be: $statsdTimingPrefix.saveEntity.<entitytype>
+	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EditFilterHookRunner $hookRunner,
-		StatsdDataFactoryInterface $stats,
-		string $timingPrefix
+		StatsFactory $statsFactory,
+		string $statsdTimingPrefix,
+		string $statsTimingPrefix
 	) {
 		$this->hookRunner = $hookRunner;
-		$this->stats = $stats;
-		$this->timingPrefix = $timingPrefix;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
+		$this->statsdTimingPrefix = $statsdTimingPrefix;
+		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
 	/**
@@ -58,10 +74,12 @@ class StatsdTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 			} else {
 				$entityType = 'UNKNOWN';
 			}
-			$this->stats->timing(
-				"{$this->timingPrefix}.run.{$entityType}",
-				( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000
-			);
+
+			$this->statsFactory
+			->getTiming( "{$this->statsTimingPrefix}_run_duration_seconds" )
+			->setLabel( 'type', $entityType )
+			->copyToStatsdAt( "{$this->statsdTimingPrefix}.run.{$entityType}" )
+			->observe( ( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000 );
 		}
 
 		return $hookStatus;

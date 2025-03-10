@@ -25,7 +25,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -123,7 +123,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 		return new EditEntity(
 			new ApiMain( $request ),
 			'test',
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			WikibaseRepo::getStore()
 				->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityIdParser(),

@@ -17,7 +17,7 @@ use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Tests\FederatedProperties\FederatedPropertiesTestCase;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
@@ -47,7 +47,7 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			new InMemoryDataTypeLookup(),
 			$this->createMock( EntityReferenceExtractorDelegator::class ),
 			$this->createMock( CachingKartographerEmbeddingHandler::class ),
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			$this->createMock( RepoGroup::class ),
 			$this->createMock( LinkBatchFactory::class ),
 			$this->createMock( WikibaseRepoOnParserOutputUpdaterConstructionHook::class ),

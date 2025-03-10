@@ -34,8 +34,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * API module for using value formatters.
@@ -53,7 +52,7 @@ class FormatSnakValue extends ApiBase {
 	private DataValueFactory $dataValueFactory;
 	private ApiErrorReporter $errorReporter;
 	private LanguageNameUtils $languageNameUtils;
-	private IBufferingStatsdDataFactory $stats;
+	private StatsFactory $statsFactory;
 	private EntityIdParser $entityIdParser;
 	private PropertyDataTypeLookup $dataTypeLookup;
 	private SnakValueDeserializer $snakValueDeserializer;
@@ -70,7 +69,7 @@ class FormatSnakValue extends ApiBase {
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter,
 		LanguageNameUtils $languageNameUtils,
-		?IBufferingStatsdDataFactory $stats,
+		?StatsFactory $statsFactory,
 		EntityIdParser $entityIdParser,
 		PropertyDataTypeLookup $dataTypeLookup,
 		SnakValueDeserializer $snakValueDeserializer
@@ -83,7 +82,9 @@ class FormatSnakValue extends ApiBase {
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
 		$this->languageNameUtils = $languageNameUtils;
-		$this->stats = $stats ?: new NullStatsdDataFactory();
+		$this->statsFactory = ( $statsFactory ?: StatsFactory::newNull() )
+						->withComponent( 'WikibaseRepo' );
+
 		$this->entityIdParser = $entityIdParser;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->snakValueDeserializer = $snakValueDeserializer;
@@ -93,7 +94,7 @@ class FormatSnakValue extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		LanguageNameUtils $languageNameUtils,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		ApiHelperFactory $apiHelperFactory,
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
@@ -112,7 +113,7 @@ class FormatSnakValue extends ApiBase {
 			$dataValueFactory,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$languageNameUtils,
-			$stats,
+			$statsFactory,
 			$entityIdParser,
 			$dataTypeLookup,
 			$snakValueDeserializer
@@ -243,7 +244,9 @@ class FormatSnakValue extends ApiBase {
 
 			if ( is_array( $options ) ) {
 				foreach ( $options as $name => $value ) {
-					$this->stats->increment( "wikibase.repo.api.formatvalue.options.$name" );
+					$metric = $this->statsFactory->getCounter( "formatvalue_options" )
+						->setLabel( "name", $name );
+					$metric->copyToStatsdAt( "wikibase.repo.api.formatvalue.options.$name" )->increment();
 					$this->setValidOption( $formatterOptions, $name, $value );
 				}
 			}

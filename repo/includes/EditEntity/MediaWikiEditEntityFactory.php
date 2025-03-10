@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\TempUser\TempUserCreator;
@@ -13,6 +12,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -56,9 +56,9 @@ class MediaWikiEditEntityFactory {
 	private $editFilterHookRunner;
 
 	/**
-	 * @var StatsdDataFactoryInterface
+	 * @var StatsFactory
 	 */
-	private $stats;
+	private $statsFactory;
 
 	/**
 	 * @var UserOptionsLookup
@@ -86,7 +86,7 @@ class MediaWikiEditEntityFactory {
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
 		EditFilterHookRunner $editFilterHookRunner,
-		StatsdDataFactoryInterface $statsdDataFactory,
+		StatsFactory $statsFactory,
 		UserOptionsLookup $userOptionsLookup,
 		TempUserCreator $tempUserCreator,
 		int $maxSerializedEntitySize,
@@ -99,7 +99,7 @@ class MediaWikiEditEntityFactory {
 		$this->entityDiffer = $entityDiffer;
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
-		$this->stats = $statsdDataFactory;
+		$this->statsFactory = $statsFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->tempUserCreator = $tempUserCreator;
 		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
@@ -124,24 +124,26 @@ class MediaWikiEditEntityFactory {
 		int $baseRevId = 0,
 		$allowMasterConnection = true
 	) {
-		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
-		return new StatsdSaveTimeRecordingEditEntity(
+		$statsdTimingPrefix = "wikibase.repo.EditEntity.timing";
+		return new StatslibSaveTimeRecordingEditEntity(
 			new MediaWikiEditEntity( $this->titleLookup,
 				$this->entityRevisionLookup,
-				new StatsdSaveTimeRecordingEntityStore(
+				new StatslibSaveTimeRecordingEntityStore(
 					$this->entityStore,
-					$this->stats,
-					$statsTimingPrefix . '.EntityStore'
+					$this->statsFactory,
+					$statsdTimingPrefix . '.EntityStore',
+					'EditEntity_EntityStore'
 				),
 				$this->permissionChecker,
 				$this->entityDiffer,
 				$this->entityPatcher,
 				$entityId,
 				$context,
-				new StatsdTimeRecordingEditFilterHookRunner(
+				new StatslibTimeRecordingEditFilterHookRunner(
 					$this->editFilterHookRunner,
-					$this->stats,
-					$statsTimingPrefix . '.EditFilterHookRunner'
+					$this->statsFactory,
+					$statsdTimingPrefix . '.EditFilterHookRunner',
+					'EditEntity_EditFilterHookRunner'
 				),
 				$this->userOptionsLookup,
 				$this->tempUserCreator,
@@ -150,8 +152,9 @@ class MediaWikiEditEntityFactory {
 				$baseRevId,
 				$allowMasterConnection
 			),
-			$this->stats,
-			$statsTimingPrefix . '.EditEntity'
+			$this->statsFactory,
+			$statsdTimingPrefix . '.EditEntity',
+			'EditEntity'
 		);
 	}
 

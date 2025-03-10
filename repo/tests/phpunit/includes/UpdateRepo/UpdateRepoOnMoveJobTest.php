@@ -29,7 +29,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob
@@ -152,7 +152,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory(),
+				StatsFactory::newNull(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
 				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,

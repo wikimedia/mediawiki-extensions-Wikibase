@@ -19,7 +19,7 @@ use Wikimedia\RemexHtml\Serializer\SerializerNode;
 use Wikimedia\RemexHtml\Tokenizer\Tokenizer;
 use Wikimedia\RemexHtml\TreeBuilder\Dispatcher;
 use Wikimedia\RemexHtml\TreeBuilder\TreeBuilder;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * API module for formatting a set of entity IDs.
@@ -49,9 +49,9 @@ class FormatEntities extends ApiBase {
 	private $errorReporter;
 
 	/**
-	 * @var IBufferingStatsdDataFactory
+	 * @var StatsFactory
 	 */
-	private $dataFactory;
+	private $statsFactory;
 
 	public function __construct(
 		ApiMain $mainModule,
@@ -60,7 +60,7 @@ class FormatEntities extends ApiBase {
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		ResultBuilder $resultBuilder,
 		ApiErrorReporter $errorReporter,
-		IBufferingStatsdDataFactory $dataFactory
+		StatsFactory $statsFactory
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -68,13 +68,13 @@ class FormatEntities extends ApiBase {
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->resultBuilder = $resultBuilder;
 		$this->errorReporter = $errorReporter;
-		$this->dataFactory = $dataFactory;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 	}
 
 	public static function factory(
 		ApiMain $apiMain,
 		string $moduleName,
-		IBufferingStatsdDataFactory $dataFactory,
+		StatsFactory $statsFactory,
 		ApiHelperFactory $apiHelperFactory,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		EntityIdParser $entityIdParser
@@ -86,7 +86,7 @@ class FormatEntities extends ApiBase {
 			$entityIdFormatterFactory,
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
-			$dataFactory
+			$statsFactory
 		);
 	}
 
@@ -99,10 +99,10 @@ class FormatEntities extends ApiBase {
 		$params = $this->extractRequestParams();
 		$entityIds = $this->getEntityIdsFromIdParam( $params );
 
-		$this->dataFactory->updateCount(
-			'wikibase.repo.api.formatentities.entities',
-			count( $entityIds )
-		);
+		$metric = $this->statsFactory->getCounter( 'formatentities_entities_total' );
+		$metric->copyToStatsdAt(
+			'wikibase.repo.api.formatentities.entities'
+		)->incrementBy( count( $entityIds ) );
 
 		foreach ( $entityIds as $entityId ) {
 			$formatted = $entityIdFormatter->formatEntityId( $entityId );
