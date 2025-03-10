@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @coversNothing
@@ -29,8 +29,8 @@ class TermFallbackCacheFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.Logger',
 			new NullLogger() );
 		$this->serviceContainer->expects( $this->once() )
-			->method( 'getStatsdDataFactory' )
-			->willReturn( new NullStatsdDataFactory() );
+			->method( 'getStatsFactory' )
+			->willReturn( StatsFactory::newNull() );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getMainConfig' )
 			->willReturn( new HashConfig( [ MainConfigNames::SecretKey => 'not so secret' ] ) );

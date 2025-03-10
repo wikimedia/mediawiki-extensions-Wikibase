@@ -3,51 +3,54 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Exception;
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
 class TermboxRemoteRenderer implements TermboxRenderer {
 
+	public const HTTP_STATUS_OK = 200;
+
 	/** @var HttpRequestFactory */
 	private $requestFactory;
+
 	/** @var string|null */
 	private $ssrServerUrl;
-	/** @var LoggerInterface */
-	private $logger;
-	/** @var StatsdDataFactoryInterface */
-	private $stats;
 
 	/** @var int|float */
 	private $ssrServerTimeout;
-	public const HTTP_STATUS_OK = 200;
+
+	/** @var LoggerInterface */
+	private $logger;
+
+	/** @var StatsFactory */
+	private $statsFactory;
 
 	/**
 	 * @param HttpRequestFactory $requestFactory
 	 * @param string|null $ssrServerUrl
 	 * @param int|float $ssrServerTimeout
 	 * @param LoggerInterface $logger
-	 * @param StatsdDataFactoryInterface $stats
+	 * @param StatsFactory $statsFactory
 	 */
 	public function __construct(
 		HttpRequestFactory $requestFactory,
 		?string $ssrServerUrl,
 		$ssrServerTimeout,
 		LoggerInterface $logger,
-		StatsdDataFactoryInterface $stats
-
+		StatsFactory $statsFactory
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
 		$this->ssrServerTimeout = $ssrServerTimeout;
 		$this->logger = $logger;
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 	}
 
 	/**
@@ -85,7 +88,9 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 						'headers' => $request->getResponseHeaders(),
 					]
 				);
-				$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' );
+				$this->statsFactory->getCounter( 'termbox_remote_renderer_unsuccessful_response_total' )
+					->copyToStatsdAt( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' )
+					->increment();
 			}
 
 			throw new TermboxRenderingException( 'Encountered bad response: ' . $status );
@@ -103,7 +108,9 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			$context[ 'exception' ] = $exception;
 		}
 		$this->logger->error( '{class}: Problem requesting from the remote server', $context );
-		$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.requestError' );
+		$this->statsFactory->getCounter( 'termbox_remote_renderer_request_error_total' )
+			->copyToStatsdAt( 'wikibase.view.TermboxRemoteRenderer.requestError' )
+			->increment();
 	}
 
 	private function formatUrl(

@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikimedia\ObjectCache\CachedBagOStuff;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Factory for accessing the shared cache
@@ -33,9 +33,9 @@ class TermFallbackCacheFactory {
 	private $cacheSecret;
 
 	/**
-	 * @var IBufferingStatsdDataFactory
+	 * @var StatsFactory
 	 */
-	private $statsdDataFactory;
+	private $statsFactory;
 
 	/**
 	 * @var TermFallbackCacheServiceFactory
@@ -55,7 +55,7 @@ class TermFallbackCacheFactory {
 	/**
 	 * @param int|string $cacheType
 	 * @param LoggerInterface $logger
-	 * @param IBufferingStatsdDataFactory $statsdDataFactory
+	 * @param StatsFactory $statsFactory
 	 * @param string $cacheSecret
 	 * @param TermFallbackCacheServiceFactory $serviceFactory
 	 * @param int|null $cacheVersion
@@ -64,7 +64,7 @@ class TermFallbackCacheFactory {
 	public function __construct(
 		$cacheType,
 		LoggerInterface $logger,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		string $cacheSecret,
 		TermFallbackCacheServiceFactory $serviceFactory,
 		?int $cacheVersion,
@@ -72,7 +72,7 @@ class TermFallbackCacheFactory {
 	) {
 		$this->termFallbackCacheType = $cacheType;
 		$this->logger = $logger;
-		$this->statsdDataFactory = $statsdDataFactory;
+		$this->statsFactory = $statsFactory;
 		$this->cacheSecret = $cacheSecret;
 		$this->serviceFactory = $serviceFactory;
 		$this->cacheVersion = $cacheVersion;
@@ -98,13 +98,14 @@ class TermFallbackCacheFactory {
 
 		$cache->setLogger( $this->logger );
 
-		return $this->serviceFactory->newStatsdRecordingCache(
+		return $this->serviceFactory->newStatslibRecordingCache(
 			$cache,
-			$this->statsdDataFactory,
+			$this->statsFactory,
 			[
 				'miss' => 'wikibase.repo.formatterCache.miss',
 				'hit' => 'wikibase.repo.formatterCache.hit',
-			]
+			],
+			'formatterCache_total'
 		);
 	}
 }

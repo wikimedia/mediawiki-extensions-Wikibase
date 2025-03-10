@@ -7,10 +7,10 @@ namespace Wikibase\Lib\TermFallbackCache;
 use ObjectCacheFactory;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\StatslibRecordingSimpleCache;
 use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ObjectCache\CachedBagOStuff;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -36,11 +36,12 @@ class TermFallbackCacheServiceFactory {
 		return new SimpleCacheWithBagOStuff( $bagOStuff, $prefix, $secret );
 	}
 
-	public function newStatsdRecordingCache(
+	public function newStatslibRecordingCache(
 		CacheInterface $inner,
-		IBufferingStatsdDataFactory $statsdDataFactory,
-		array $statsKeys
-	): StatsdRecordingSimpleCache {
-		return new StatsdRecordingSimpleCache( $inner, $statsdDataFactory, $statsKeys );
+		StatsFactory $statsFactory,
+		array $statsdKeys,
+		string $statsKey
+	): StatslibRecordingSimpleCache {
+		return new StatslibRecordingSimpleCache( $inner, $statsFactory, $statsdKeys, $statsKey );
 	}
 }

@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob
@@ -154,7 +154,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory(),
+				StatsFactory::newNull(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
 				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,

@@ -2,12 +2,13 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\StatslibRecordingSimpleCache;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
- * @covers \Wikibase\Lib\StatsdRecordingSimpleCache
+ * @covers \Wikibase\Lib\StatslibRecordingSimpleCache
  *
  * @todo This test needs to be rewritten to use a better way to assert stastd updateCount.
  *
@@ -16,12 +17,16 @@ use Wikibase\Lib\StatsdRecordingSimpleCache;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
+class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetIncrementsMetric() {
 		// Stats expects to be incremented once
-		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
-		$stats->expects( $this->once() )
+		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory->withStatsdDataFactory( $dataFactory );
+
+		$dataFactory->expects( $this->once() )
 			->method( 'updateCount' )
 			->with( 'statsKey', 1 );
 
@@ -35,18 +40,23 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		$statsKeys = [ 'miss' => 'statsKey', 'hit' => 'statsHit' ];
-		$sot = new StatsdRecordingSimpleCache( $innerCache, $stats, $statsKeys );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
 		$result = $sot->get( 'nonexistingkey', 'my default' );
 		$this->assertEquals( 'my default', $result );
 	}
 
 	public function testGetMultipleIncrementsMetric() {
-		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
+		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory->withStatsdDataFactory( $dataFactory );
+
 		$expectedArgs = [
-			[ 'statsKeyMiss', 2 ],
-			[ 'statsKeyHit', 1 ],
+			[ 'statsKeyMiss', 2.0 ],
+			[ 'statsKeyHit', 1.0 ],
 		];
-		$stats->expects( $this->atLeast( 2 ) )
+
+		$dataFactory->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
 			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
 				if ( !$expectedArgs ) {
@@ -67,15 +77,18 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatsdRecordingSimpleCache( $innerCache, $stats, $statsKeys );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
 		$result = $sot->getMultiple( [ 'key', 'key1', 'key2' ], 'd1' );
 		$this->assertEquals( [ 'key1' => 'd1', 'key2' => 'd1', 'key' => 'cachedValue' ], $result );
 	}
 
 	public function testGetDoesNotIncrementsMetric() {
-		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
+		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory->withStatsdDataFactory( $dataFactory );
 
-		$stats->expects( $this->once() )
+		$dataFactory->expects( $this->once() )
 			->method( 'updateCount' )
 			->with( 'statsKeyHit', 1 );
 
@@ -87,18 +100,23 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( 'cached value' );
 
 		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatsdRecordingSimpleCache( $innerCache, $stats, $statsKeys );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
 		$result = $sot->get( 'key', 'default value' );
 		$this->assertEquals( 'cached value', $result );
 	}
 
 	public function testGetMultipleDoesNotIncrementMetrics() {
-		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
+		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory->withStatsdDataFactory( $dataFactory );
+
 		$expectedArgs = [
-			[ 'statsKeyMiss', 1 ],
-			[ 'statsKeyHit', 1 ],
+			[ 'statsKeyMiss', 1.0 ],
+			[ 'statsKeyHit', 1.0 ],
 		];
-		$stats->expects( $this->atLeast( 2 ) )
+
+		$dataFactory->expects( $this->atLeast( 2 ) )
 			->method( 'updateCount' )
 			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
 				if ( !$expectedArgs ) {
@@ -119,9 +137,8 @@ class StatsdRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			} );
 
 		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatsdRecordingSimpleCache( $innerCache, $stats, $statsKeys );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
 		$result = $sot->getMultiple( [ 'key1', 'key2' ], 'd1' );
 		$this->assertEquals( [ 'key1' => 'cachehit', 'key2' => 'd1' ], $result );
 	}
-
 }

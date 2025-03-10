@@ -174,7 +174,7 @@ class InjectRCRecordsJob extends Job {
 
 		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
 		$job->setStatsFactory(
-			$mwServices->getStatsFactory(),
+			$mwServices->getStatsFactory()->withComponent( 'WikibaseClient' ),
 			$mwServices->getMainConfig()->get( MainConfigNames::DBname )
 		);
 
@@ -276,14 +276,14 @@ class InjectRCRecordsJob extends Job {
 		}
 
 		if ( $this->statsFactory !== null ) {
-			$this->statsFactory->withComponent( 'WikibaseClient' )
+			$this->statsFactory
 				->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
 				->setLabel( 'DBname', $this->dbName )
 				->copyToStatsdAt( [
 					'wikibase.client.pageupdates.InjectRCRecords.run.titles',
 				] )
 				->incrementBy( count( $titles ) );
-			$this->statsFactory->withComponent( 'WikibaseClient' )
+			$this->statsFactory
 				->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
 				->setLabel( 'DBname', $this->dbName )
 				->copyToStatsdAt( [

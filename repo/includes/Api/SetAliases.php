@@ -17,7 +17,7 @@ use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * API module to set the aliases for a Wikibase entity.
@@ -32,8 +32,8 @@ class SetAliases extends ModifyEntity {
 	 */
 	private $termChangeOpFactory;
 
-	/** @var IBufferingStatsdDataFactory */
-	private $stats;
+	/** @var StatsFactory */
+	private $statsFactory;
 
 	/** @var EntityFactory */
 	private $entityFactory;
@@ -47,14 +47,14 @@ class SetAliases extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		bool $federatedPropertiesEnabled,
 		EntityFactory $entityFactory,
 		array $sandboxEntityIds
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 		$this->termChangeOpFactory = $termChangeOpFactory;
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 		$this->entityFactory = $entityFactory;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
@@ -62,7 +62,7 @@ class SetAliases extends ModifyEntity {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityFactory $entityFactory,
 		SettingsArray $repoSettings
@@ -72,7 +72,7 @@ class SetAliases extends ModifyEntity {
 			$moduleName,
 			$changeOpFactoryProvider
 				->getFingerprintChangeOpFactory(),
-			$stats,
+			$statsFactory,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$entityFactory,
 			$repoSettings->getSetting( 'sandboxEntityIds' )
@@ -144,9 +144,11 @@ class SetAliases extends ModifyEntity {
 		// FIXME: if we have ADD and REMOVE operations in the same call,
 		// we will also have two ChangeOps updating the same edit summary.
 		// This will cause the edit summary to be overwritten by the last ChangeOp being applied.
-		$this->stats->increment( 'wikibase.repo.api.wbsetaliases.total' );
+		$metric = $this->statsFactory->getCounter( 'wbsetaliases_total' );
+		$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetaliases.total' )->increment();
 		if ( !empty( $preparedParameters['add'] ) && !empty( $preparedParameters['remove'] ) ) {
-			$this->stats->increment( 'wikibase.repo.api.wbsetaliases.addremove' );
+			$metric = $this->statsFactory->getCounter( 'wbsetaliases_addremove' );
+			$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetaliases.addremove' )->increment();
 		}
 
 		$summary = $this->createSummary( $preparedParameters );

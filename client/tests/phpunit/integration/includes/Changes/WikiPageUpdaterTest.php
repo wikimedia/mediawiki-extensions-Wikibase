@@ -114,7 +114,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
-		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
 		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
 			'WebCache.jobs' => 2, // 2 batches (batch size 2, 3 titles)
 			'WebCache.titles' => 3,
@@ -172,7 +172,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
-		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
 		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
 			'RefreshLinks.jobs' => 3, // no batching
 			'RefreshLinks.titles' => 3,
@@ -237,7 +237,7 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 			);
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
-		$statsFactory = $statsHelper->getStatsFactory();
+		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
 		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
 			// FIXME: Because of the hot fix for T177707 we expect only the first batch.
 			'InjectRCRecords.jobs' => 1,

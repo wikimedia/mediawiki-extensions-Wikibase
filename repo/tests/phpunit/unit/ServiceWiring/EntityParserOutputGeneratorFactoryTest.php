@@ -56,7 +56,7 @@ class EntityParserOutputGeneratorFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.KartographerEmbeddingHandler',
 			$this->createMock( CachingKartographerEmbeddingHandler::class ) );
 		$this->serviceContainer->expects( $this->once() )
-			->method( 'getStatsdDataFactory' );
+			->method( 'getStatsFactory' );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getRepoGroup' );
 		$this->serviceContainer->expects( $this->once() )

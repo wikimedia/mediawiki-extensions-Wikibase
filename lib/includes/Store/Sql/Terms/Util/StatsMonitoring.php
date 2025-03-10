@@ -11,20 +11,23 @@ use Wikibase\Lib\WikibaseSettings;
  */
 trait StatsMonitoring {
 	public function incrementForQuery( string $queryType ): void {
-		MediaWikiServices::getInstance()->getStatsFactory()
-			->getCounter( 'wikibase_repo_term_store_total' )
-			->setLabel( 'query_type', $queryType )
-			->copyToStatsdAt( "wikibase.repo.term_store.$queryType" )
-			->increment();
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$queryContext = 'repo';
 		} else {
 			$queryContext = 'client';
 		}
+
 		MediaWikiServices::getInstance()->getStatsFactory()
-			->getCounter( 'wikibase_query_contexts_term_store_total' )
-			->setLabel( 'query_context', $queryContext )
-			->setLabel( 'query_type', $queryType )
+			->withComponent( 'WikibaseLib' )
+			->getCounter( 'termStore_total' )
+			->setLabels( [ 'query_type' => $queryType, 'query_context' => $queryContext ] )
+			->copyToStatsdAt( "wikibase.repo.term_store.$queryType" )
+			->increment();
+
+		MediaWikiServices::getInstance()->getStatsFactory()
+			->withComponent( 'WikibaseLib' )
+			->getCounter( 'termStore_queryContexts_total' )
+			->setLabels( [ 'query_type' => $queryType, 'query_context' => $queryContext ] )
 			->copyToStatsdAt( "wikibase.query_contexts.$queryContext.term_store.$queryType" )
 			->increment();
 	}

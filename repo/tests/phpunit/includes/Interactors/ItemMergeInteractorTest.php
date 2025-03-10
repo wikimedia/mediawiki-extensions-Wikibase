@@ -34,7 +34,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\Interactors\ItemMergeInteractor
@@ -164,7 +164,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 			new EntityDiffer(),
 			new EntityPatcher(),
 			$editFilterHookRunner,
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			$services->getUserOptionsLookup(),
 			$tempUserCreator,
 			1024 * 1024,

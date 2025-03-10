@@ -35,7 +35,7 @@ use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\StatslibRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
@@ -490,13 +490,14 @@ return [
 				'wikibase.prefetchingPropertyTermLookup.',
 				$cacheSecret
 			);
-			$cache = new StatsdRecordingSimpleCache(
+			$cache = new StatslibRecordingSimpleCache(
 				$cache,
-				$mwServices->getStatsdDataFactory(),
+				$mwServices->getStatsFactory()->withComponent( 'WikibaseRepo' ),
 				[
 					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
 					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit',
-				]
+				],
+				"prefetchingPropertyTermLookupCache_total"
 			);
 
 			return new CachingPrefetchingTermLookup(

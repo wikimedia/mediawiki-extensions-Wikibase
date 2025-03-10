@@ -106,7 +106,7 @@ class EntityTermsViewFactory {
 				$repoSettings->getSetting( 'ssrServerUrl' ),
 				$repoSettings->getSetting( 'ssrServerTimeout' ),
 				WikibaseRepo::getLogger( $services ),
-				$services->getStatsdDataFactory()
+				$services->getStatsFactory()
 			),
 			$textProvider,
 			new RepoSpecialPageLinker(),

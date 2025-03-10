@@ -31,7 +31,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\SnakFactory;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -81,8 +81,8 @@ class SetClaim extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/** @var IBufferingStatsdDataFactory */
-	private $stats;
+	/** @var StatsFactory */
+	private $statsFactory;
 
 	/**
 	 * @var string[]
@@ -99,7 +99,7 @@ class SetClaim extends ApiBase {
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		bool $federatedPropertiesEnabled,
 		array $sandboxEntityIds
 	) {
@@ -112,7 +112,7 @@ class SetClaim extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
@@ -120,7 +120,7 @@ class SetClaim extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		ApiHelperFactory $apiHelperFactory,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
 		EntityIdParser $entityIdParser,
@@ -151,7 +151,7 @@ class SetClaim extends ApiBase {
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
 			},
-			$stats,
+			$statsFactory,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
@@ -221,9 +221,11 @@ class SetClaim extends ApiBase {
 		$this->resultBuilder->addStatement( $statement );
 		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 
-		$this->stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
+		$metric = $this->statsFactory->getCounter( 'wbsetclaim_total' );
+		$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetclaim.total' )->increment();
 		if ( $index !== null ) {
-			$this->stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
+			$metric = $this->statsFactory->getCounter( 'wbsetclaim_index' );
+			$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetclaim.index' )->increment();
 		}
 	}
 
