@@ -145,6 +145,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriev
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
+use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
@@ -232,7 +233,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	public function testHandlesUnexpectedErrors( array $routeHandler ): void {
 		$response = $this->getHttpResponseForThrowingUseCase( $routeHandler, new RuntimeException() );
 
-		self::assertSame( UseCaseError::UNEXPECTED_ERROR, json_decode( $response->getBody()->getContents() )->code );
+		self::assertSame( UnexpectedErrorHandlerMiddleware::ERROR_CODE, json_decode( $response->getBody()->getContents() )->code );
 		self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 	}
 
