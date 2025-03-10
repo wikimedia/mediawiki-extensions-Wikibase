@@ -8,14 +8,6 @@
 	    <severity>0</severity>
 	</rule>
 
-	<rule ref="MediaWiki.Commenting.FunctionComment">
-		<exclude-pattern>/tests/</exclude-pattern>
-	</rule>
-
-	<rule ref="MediaWiki.Commenting.PropertyDocumentation">
-		<exclude-pattern>/tests/</exclude-pattern>
-	</rule>
-
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.
 		The code is not guaranteed to be easier to read if this is disallowed. -->
 	<rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace">

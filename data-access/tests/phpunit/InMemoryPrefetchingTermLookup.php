@@ -90,7 +90,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return null;
 	}
 
-	public function getPrefetchedTerms() {
+	public function getPrefetchedTerms(): array {
 		$terms = [];
 
 		foreach ( $this->buffer as $entityTerms ) {
@@ -104,11 +104,13 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $terms;
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		$id = $entityId->getSerialization();
 		return $this->buffer[$id][$termType][$languageCode] ?? null;
 	}
 
+	/** @inheritDoc */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		if ( $this->loadEntitiesIfNotPrefetched ) {
 			return $this->getFromEntityData( $entityId, TermTypes::TYPE_LABEL, $languageCode );
@@ -116,6 +118,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->getPrefetchedTerm( $entityId, TermTypes::TYPE_LABEL, $languageCode );
 	}
 
+	/** @inheritDoc */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		$labels = [];
 
@@ -141,6 +144,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $labels;
 	}
 
+	/** @inheritDoc */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		if ( $this->loadEntitiesIfNotPrefetched ) {
 			return $this->getFromEntityData( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
@@ -148,6 +152,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $this->getPrefetchedTerm( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
 	}
 
+	/** @inheritDoc */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		$descriptions = [];
 
@@ -164,6 +169,7 @@ class InMemoryPrefetchingTermLookup implements PrefetchingTermLookup {
 		return $descriptions;
 	}
 
+	/** @inheritDoc */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		throw new RuntimeException( 'Not Implemented' );
 	}

@@ -28,34 +28,42 @@ class StatementListProviderDummy implements EntityDocument, StatementListProvide
 		$this->statements = new StatementList();
 	}
 
+	/** @inheritDoc */
 	public function getType() {
 		return 'item';
 	}
 
+	/** @inheritDoc */
 	public function getId() {
 		return $this->id;
 	}
 
+	/** @inheritDoc */
 	public function setId( $id ) {
 		$this->id = $id;
 	}
 
+	/** @inheritDoc */
 	public function isEmpty() {
 		return true;
 	}
 
+	/** @inheritDoc */
 	public function equals( $target ) {
 		return true;
 	}
 
+	/** @inheritDoc */
 	public function copy() {
 		return $this;
 	}
 
+	/** @inheritDoc */
 	public function getStatements() {
 		return $this->statements;
 	}
 
+	/** @inheritDoc */
 	public function clear() {
 	}
 

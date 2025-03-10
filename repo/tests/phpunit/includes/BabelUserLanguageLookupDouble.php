@@ -15,6 +15,7 @@ use Wikibase\Repo\BabelUserLanguageLookup;
  */
 class BabelUserLanguageLookupDouble extends BabelUserLanguageLookup {
 
+	/** @inheritDoc */
 	protected function getBabelLanguages( User $user ) {
 		// Not a real option, just to manipulate the double class
 		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();

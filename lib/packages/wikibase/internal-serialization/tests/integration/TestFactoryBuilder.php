@@ -20,7 +20,7 @@ use Wikibase\InternalSerialization\SerializerFactory;
  */
 class TestFactoryBuilder {
 
-	public static function newLegacyDeserializerFactory( TestCase $testCase ) {
+	public static function newLegacyDeserializerFactory( TestCase $testCase ): LegacyDeserializerFactory {
 		return new LegacyDeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
@@ -43,7 +43,7 @@ class TestFactoryBuilder {
 		return $dataValueDeserializer;
 	}
 
-	public static function newDeserializerFactory( TestCase $testCase ) {
+	public static function newDeserializerFactory( TestCase $testCase ): DeserializerFactory {
 		return new DeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser(),
@@ -51,14 +51,14 @@ class TestFactoryBuilder {
 		);
 	}
 
-	public static function newLegacyDeserializerFactoryWithDataValueSupport() {
+	public static function newLegacyDeserializerFactoryWithDataValueSupport(): LegacyDeserializerFactory {
 		return new LegacyDeserializerFactory(
 			self::newRealDataValueDeserializer(),
 			new BasicEntityIdParser()
 		);
 	}
 
-	public static function newDeserializerFactoryWithDataValueSupport() {
+	public static function newDeserializerFactoryWithDataValueSupport(): DeserializerFactory {
 		return new DeserializerFactory(
 			self::newRealDataValueDeserializer(),
 			new BasicEntityIdParser(),
@@ -66,7 +66,7 @@ class TestFactoryBuilder {
 		);
 	}
 
-	private static function newRealDataValueDeserializer() {
+	private static function newRealDataValueDeserializer(): DataValueDeserializer {
 		$dataValueClasses = [
 			'boolean' => 'DataValues\BooleanValue',
 			'number' => 'DataValues\NumberValue',
@@ -83,11 +83,11 @@ class TestFactoryBuilder {
 		return new DataValueDeserializer( $dataValueClasses );
 	}
 
-	public static function newSerializerFactory() {
+	public static function newSerializerFactory(): SerializerFactory {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 
-	public static function newCurrentDeserializerFactory() {
+	public static function newCurrentDeserializerFactory(): DataModelDeserializerFactory {
 		return new DataModelDeserializerFactory(
 			self::newRealDataValueDeserializer(),
 			new BasicEntityIdParser(),
