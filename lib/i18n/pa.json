@@ -6,7 +6,7 @@
 			"Kuldeepburjbhalaike"
 		]
 	},
-	"specialpages-group-wikibase": "ਵਿਕੀਬੇਸ",
+	"specialpages-group-wikibase": "ਵਿਕੀਅਧਾਰ",
 	"wikibase-deletedentity-item": "ਮਿਟਾਈ ਗਈ ਆਈਟਮ",
 	"wikibase-deletedentity-property": "ਮਿਟਾਈ ਗਈ ਪ੍ਰਾਪਰਟੀ",
 	"wikibase-deletedentity-query": "ਮਿਟਾਈ ਗਈ ਪੁੱਛਗਿੱਛ",
@@ -42,7 +42,7 @@
 	"datatypes-type-boolean": "ਬੁਲੀਅਨ",
 	"datatypes-type-globe-coordinate": "ਭੂਗੋਲਿਕ ਗੁਣਕ",
 	"datatypes-type-wikibase-item": "ਚੀਜ਼ਾਂ",
-	"datatypes-type-wikibase-property": "ਪ੍ਰਾਪਰਟੀ",
+	"datatypes-type-wikibase-property": "ਜਾਇਦਾਦ",
 	"datatypes-type-commonsMedia": "ਕਾਮਨਜ਼ ਮੀਡੀਆ ਫਾਈਲ",
 	"datatypes-type-geo-shape": "ਭੂਗੋਲਿਕ ਸ਼ਕਲ",
 	"wikibase-time-calendar-gregorian": "ਗ੍ਰੈਗੋਰੀਅਨ",
@@ -57,7 +57,7 @@
 	"wikibase-entity-summary-wbeditentity-update-languages-short": "{{#commaseparatedlist: $3}} ਵਿੱਚਲੇਬਲ, ਵਰਣਨ ਅਤੇ/ਜਾਂ ਉਪਨਾਮ ਬਦਲੇ ਗਏ",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|ਭਾਸ਼ਾ|ਭਾਸ਼ਾਵਾਂ}}, ਅਤੇ ਹੋਰ ਹਿੱਸਿਆਂ ਵਿੱਚ ਲੇਬਲ, ਵਰਣਨ ਅਤੇ/ਜਾਂ ਉਪਨਾਮ ਬਦਲੇ ਗਏ",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "{{#commaseparatedlist: $3}}, ਅਤੇ ਹੋਰ ਹਿੱਸਿਆਂ ਵਿੱਚ ਲੇਬਲ, ਵਰਣਨ ਅਤੇ/ਜਾਂ ਉਪਨਾਮ ਬਦਲੇ ਗਏ",
-	"wikibase-entity-summary-wbsetreference": "ਇੱਕ ਹਵਾਲਾ ਸੈੱਟ ਕਰੋ",
+	"wikibase-entity-summary-wbsetreference": "ਇੱਕ ਹਵਾਲਾ ਕਾਇਮ ਕਰੋ",
 	"wikibase-entity-summary-wbsetreference-add": "ਦਾਅਵੇ ਦਾ ਹਵਾਲਾ ਜੋੜਿਆ ਗਿਆ",
 	"wikibase-entity-summary-wbsetreference-set": "ਦਾਅਵੇ ਦਾ ਹਵਾਲਾ ਬਦਲਿਆ ਗਿਆ",
 	"wikibase-entity-summary-wbsetlabel-add": "[$2] ਲੇਬਲ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ",
@@ -66,7 +66,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": "[$2] ਵਰਣਨ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ",
 	"wikibase-entity-summary-wbsetdescription-set": "[$2] ਵਰਣਨ ਬਦਲਿਆ ਗਿਆ",
 	"wikibase-entity-summary-wbsetdescription-remove": "[$2] ਵਰਣਨ ਹਟਾਇਆ ਗਿਆ",
-	"wikibase-entity-summary-wbsetaliases-set": "[$2] {{PLURAL:$1|ਉਪਨਾਮ}} ਸੈੱਟ ਕਰੋ",
+	"wikibase-entity-summary-wbsetaliases-set": "[$2] {{PLURAL:$1|ਉਪਨਾਮ}} ਕਾਇਮ ਕਰੋ",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "[$2] {{PLURAL:$1|ਉਪਨਾਮ ਜੋੜਿਆ ਅਤੇ ਹਟਾਇਆ|ਉਪਨਾਮ ਜੋੜੇ ਅਤੇ ਹਟਾਏ}}",
 	"wikibase-entity-summary-wbsetaliases-add": "[$2] {{PLURAL:$1|ਉਪਨਾਮ ਜੋੜਿਆ|ਉਪਨਾਮ ਜੋੜੇ}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "[$2] {{PLURAL:$1|ਉਪਨਾਮ ਹਟਾਇਆ ਗਿਆ|ਉਪਨਾਮ ਹਟਾਏ ਗਏ}}",
@@ -82,9 +82,9 @@
 	"wikibase-item-summary-wbeditentity-override": "ਇੱਕ ਆਈਟਮ ਸਾਫ਼ ਕੀਤੀ",
 	"wikibase-item-summary-wblinktitles-create": "ਸਫ਼ਿਆਂ ਨੂੰ ਜੋੜਨ ਲਈ ਇਸ ਮਜ਼ਮੂਨ ਨੂੰ ਬਣਾਇਆ",
 	"wikibase-item-summary-wblinktitles-connect": "ਸਫ਼ਿਆਂ ਨੂੰ ਜੋੜਨ ਲਈ ਇੱਕ ਭਾਸ਼ਾ ਕੜੀ ਜੋੜੀ ਗਈ",
-	"wikibase-property-summary-wbcreate-new": "ਇੱਕ ਨਵੀਂ ਪ੍ਰਾਪਰਟੀ ਬਣਾਈ ਗਈ",
-	"wikibase-property-summary-wbeditentity-create": "ਇੱਕ ਨਵੀਂ ਪ੍ਰਾਪਰਟੀ ਬਣਾਈ ਗਈ",
-	"wikibase-property-summary-wbeditentity-create-property": "ਇੱਕ ਨਵੀਂ ਪ੍ਰਾਪਰਟੀ ਬਣਾਈ ਗਈ",
-	"wikibase-property-summary-wbeditentity-update": "ਇੱਕ ਪ੍ਰਾਪਰਟੀ ਨੂੰ ਬਦਲਿਆ ਗਿਆ",
-	"wikibase-property-summary-wbeditentity-override": "ਇੱਕ ਪ੍ਰਾਪਰਟੀ ਨੂੰ ਸਾਫ਼ ਕੀਤਾ ਗਿਆ"
+	"wikibase-property-summary-wbcreate-new": "ਇੱਕ ਨਵੀਂ ਜਾਇਦਾਦ ਬਣਾਈ",
+	"wikibase-property-summary-wbeditentity-create": "ਇੱਕ ਨਵੀਂ ਜਾਇਦਾਦ ਬਣਾਈ",
+	"wikibase-property-summary-wbeditentity-create-property": "ਇੱਕ ਨਵੀਂ ਜਾਇਦਾਦ ਬਣਾਈ",
+	"wikibase-property-summary-wbeditentity-update": "ਇੱਕ ਜਾਇਦਾਦ ਬਦਲੀ",
+	"wikibase-property-summary-wbeditentity-override": "ਇੱਕ ਜਾਇਦਾਦ ਸਾਫ਼ ਕੀਤੀ"
 }
