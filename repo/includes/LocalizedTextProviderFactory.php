@@ -17,9 +17,6 @@ class LocalizedTextProviderFactory {
 	 */
 	private $languageFactory;
 
-	/**
-	 * @param LanguageFactory $languageFactory
-	 */
 	public function __construct(
 		LanguageFactory $languageFactory
 	) {

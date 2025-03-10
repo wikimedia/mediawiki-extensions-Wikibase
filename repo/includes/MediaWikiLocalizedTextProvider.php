@@ -20,9 +20,6 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 	 */
 	private $language;
 
-	/**
-	 * @param Language $language
-	 */
 	public function __construct( Language $language ) {
 		$this->language = $language;
 	}

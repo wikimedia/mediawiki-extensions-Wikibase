@@ -67,8 +67,6 @@ class UnexpectedUnconnectedPagePrimer {
 	/**
 	 * Set the batch size multiplicator used to determine the number of page ids to
 	 * probe when selecting for a batch.
-	 *
-	 * @param int $batchSizeSelectMultiplicator
 	 */
 	public function setBatchSizeSelectMultiplicator( int $batchSizeSelectMultiplicator ): void {
 		$this->batchSizeSelectMultiplicator = $batchSizeSelectMultiplicator;

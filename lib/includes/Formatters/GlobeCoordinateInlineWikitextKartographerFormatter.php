@@ -18,9 +18,6 @@ class GlobeCoordinateInlineWikitextKartographerFormatter implements ValueFormatt
 	 */
 	private $coordinateFormatter;
 
-	/**
-	 * @param ValueFormatter $globeCoordinateFormatter
-	 */
 	public function __construct(
 		ValueFormatter $globeCoordinateFormatter
 	) {

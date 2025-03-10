@@ -36,9 +36,6 @@ class CachingKartographerEmbeddingHandler {
 	 */
 	private $cache;
 
-	/**
-	 * @param Parser $parser
-	 */
 	public function __construct( Parser $parser ) {
 		$this->parser = $parser;
 		$this->cache = new MapCacheLRU( 100 );

@@ -154,9 +154,6 @@ class SetClaimValue extends ApiBase {
 		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 	}
 
-	/**
-	 * @param array $params
-	 */
 	private function validateParameters( array $params ): void {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
 			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );

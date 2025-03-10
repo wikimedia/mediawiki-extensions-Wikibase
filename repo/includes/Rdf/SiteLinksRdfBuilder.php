@@ -71,8 +71,6 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 
 	/**
 	 * Adds the site links of the given item to the RDF graph.
-	 *
-	 * @param Item $item
 	 */
 	public function addSiteLinks( Item $item ) {
 		$id = $item->getId();

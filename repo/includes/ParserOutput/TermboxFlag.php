@@ -39,8 +39,6 @@ class TermboxFlag {
 
 	/**
 	 * Determines whether the Termbox should be rendered
-	 *
-	 * @return bool
 	 */
 	public function shouldRenderTermbox(): bool {
 		return $this->settings->getSetting( self::TERMBOX_FLAG )

@@ -107,8 +107,6 @@ class TermList implements Countable, IteratorAggregate {
 
 	/**
 	 * Replaces non-empty or removes empty terms.
-	 *
-	 * @param Term $term
 	 */
 	public function setTerm( Term $term ) {
 		if ( $term->getText() === '' ) {

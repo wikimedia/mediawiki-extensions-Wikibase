@@ -873,8 +873,6 @@ class ResultBuilder {
 
 	/**
 	 * Get serialized claim and add it to result
-	 *
-	 * @param Statement $statement
 	 */
 	public function addStatement( Statement $statement ) {
 		$serializer = $this->serializerFactory->newStatementSerializer();
@@ -961,8 +959,6 @@ class ResultBuilder {
 
 	/**
 	 * Get serialized reference and add it to result
-	 *
-	 * @param Reference $reference
 	 */
 	public function addReference( Reference $reference ) {
 		$serializer = $this->serializerFactory->newReferenceSerializer();

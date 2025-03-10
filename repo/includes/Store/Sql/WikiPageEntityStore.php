@@ -208,8 +208,6 @@ class WikiPageEntityStore implements EntityStore {
 	/**
 	 * Registers a watcher that will be notified whenever an entity is
 	 * updated or deleted.
-	 *
-	 * @param EntityStoreWatcher $watcher
 	 */
 	public function registerWatcher( EntityStoreWatcher $watcher ) {
 		$this->dispatcher->registerWatcher( $watcher );

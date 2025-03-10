@@ -266,10 +266,6 @@ class ItemHandler extends EntityHandler {
 		return new ItemId( $id );
 	}
 
-	/**
-	 * @param StatementList $statementList
-	 * @return int
-	 */
 	public function getIdentifiersCount( StatementList $statementList ): int {
 		$identifiers = 0;
 		foreach ( $statementList as $statement ) {

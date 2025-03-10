@@ -366,8 +366,6 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Sort all sub-arrays (but leave the array itself alone).
-	 *
-	 * @param array &$arr
 	 */
 	private function sortSubArrays( array &$arr ) {
 		foreach ( $arr as &$subArr ) {

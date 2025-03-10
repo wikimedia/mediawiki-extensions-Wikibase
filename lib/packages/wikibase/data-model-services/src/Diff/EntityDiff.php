@@ -121,8 +121,6 @@ class EntityDiff extends Diff {
 
 	/**
 	 * Returns if there are any changes (equivalent to: any differences between the entities).
-	 *
-	 * @return bool
 	 */
 	public function isEmpty(): bool {
 		return $this->getLabelsDiff()->isEmpty()

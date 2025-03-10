@@ -115,9 +115,6 @@ class RevisionData {
 		return intval( $this->changeParams['parent_id'] );
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getVisibility(): int {
 		return $this->visibility;
 	}

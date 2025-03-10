@@ -20,9 +20,6 @@ class WikibaseStringValueNormalizer implements ValueParsersStringNormalizer {
 	 */
 	private $normalizer;
 
-	/**
-	 * @param WikibaseLibStringNormalizer $normalizer
-	 */
 	public function __construct( WikibaseLibStringNormalizer $normalizer ) {
 		$this->normalizer = $normalizer;
 	}

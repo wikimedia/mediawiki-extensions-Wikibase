@@ -169,9 +169,6 @@ class EntityDiffChangedAspects implements Serializable {
 		$this->otherChanges = $data['otherChanges'];
 	}
 
-	/**
-	 * @return array
-	 */
 	public function toArray(): array {
 		return [
 			'arrayFormatVersion' => self::ARRAYFORMATVERSION,

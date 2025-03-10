@@ -98,8 +98,6 @@ class ViewEntityAction extends ViewAction {
 
 	/**
 	 * Add alternate links to the HTTP response.
-	 *
-	 * @param OutputPage $outputPage
 	 */
 	private function addLinkHeaders( OutputPage $outputPage ) {
 		if ( !$this->isEditable() ) {
@@ -132,8 +130,6 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * This will be the label, if available, or else the entity id (e.g. 'Q42').
 	 * This is passed via parser output and output page to save overhead on view actions.
-	 *
-	 * @param OutputPage $outputPage
 	 */
 	private function overridePageMetaTags( OutputPage $outputPage ) {
 		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );

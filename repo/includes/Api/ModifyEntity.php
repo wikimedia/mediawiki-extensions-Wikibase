@@ -242,10 +242,6 @@ abstract class ModifyEntity extends ApiBase {
 		}
 	}
 
-	/**
-	 * @param array $params
-	 * @return array
-	 */
 	protected function prepareParameters( array $params ): array {
 		return $params;
 	}
@@ -259,8 +255,6 @@ abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
-	 *
-	 * @param array $params
 	 */
 	protected function validateParameters( array $params ): void {
 		$entityReferenceBySiteLinkGiven = isset( $params['site'] ) && isset( $params['title'] );
@@ -490,8 +484,6 @@ abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * Get allowed params for the entity in general
-	 *
-	 * @return array
 	 */
 	private function getAllowedParamsForEntity(): array {
 		return [

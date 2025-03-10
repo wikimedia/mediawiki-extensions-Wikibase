@@ -73,8 +73,6 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Extract globe-coordinate DataValues for storing in ParserOutput for GeoData.
-	 *
-	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {
 		$propertyId = $statement->getPropertyId();

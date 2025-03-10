@@ -36,10 +36,6 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 		return $entityId->getSerialization() . $this->getUndefinedInfoMessage( $entityId );
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @return string
-	 */
 	protected function getUndefinedInfoMessage( EntityId $entityId ): string {
 		$attributes = [ 'class' => 'wb-entity-undefinedinfo' ];
 

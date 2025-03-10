@@ -616,10 +616,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	/**
-	 * @param EntityHandler $handler
-	 * @return Article
-	 */
 	protected function getMockArticle(
 		EntityHandler $handler
 	): Article {
@@ -636,10 +632,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		return $article;
 	}
 
-	/**
-	 * @param EntityHandler $handler
-	 * @return WikiPage
-	 */
 	protected function getMockWikiPage(
 		EntityHandler $handler
 	): WikiPage {

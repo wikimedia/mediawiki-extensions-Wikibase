@@ -50,8 +50,6 @@ class PropertyValueSnak extends SnakObject {
 	/**
 	 * The serialization to use for hashing, for compatibility reasons this is
 	 * equivalent to the old (pre 7.4) PHP serialization.
-	 *
-	 * @return string
 	 */
 	public function getSerializationForHash(): string {
 		$propertyIdSerialization = $this->propertyId->getSerialization();
@@ -65,8 +63,6 @@ class PropertyValueSnak extends SnakObject {
 	/**
 	 * The serialization to use for hashing, for compatibility reasons this is
 	 * equivalent to the old (pre 7.4) PHP serialization.
-	 *
-	 * @return string
 	 */
 	private function getDataValueSerializationForHash(): string {
 		if ( method_exists( $this->dataValue, 'getSerializationForHash' ) ) {

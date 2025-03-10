@@ -49,9 +49,6 @@ class TestValidator implements ValueValidator {
 		}
 	}
 
-	/**
-	 * @param array $options
-	 */
 	public function setOptions( array $options ) {
 		// noop
 	}

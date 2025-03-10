@@ -156,8 +156,6 @@ class ChangeNotifier {
 
 	/**
 	 * Transmit changes via all registered transmitters
-	 *
-	 * @param EntityChange $change
 	 */
 	private function transmitChange( EntityChange $change ) {
 		foreach ( $this->changeTransmitters as $transmitter ) {

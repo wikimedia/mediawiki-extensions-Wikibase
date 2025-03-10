@@ -24,8 +24,6 @@ interface EntityPrefetcher {
 
 	/**
 	 * Purges prefetched data about a given entity.
-	 *
-	 * @param EntityId $entityId
 	 */
 	public function purge( EntityId $entityId );
 

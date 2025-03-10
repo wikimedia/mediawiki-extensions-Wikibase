@@ -54,10 +54,6 @@ class AddUsagesForPageJob extends Job {
 		);
 	}
 
-	/**
-	 * @param Title $title
-	 * @param array $params
-	 */
 	public function __construct( Title $title, array $params ) {
 		parent::__construct( 'wikibase-addUsagesForPage', $title, $params );
 

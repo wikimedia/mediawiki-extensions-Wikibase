@@ -23,9 +23,6 @@ class EntityIdValue extends DataValueObject {
 		$this->entityId = $entityId;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getHash(): string {
 		return md5( $this->getSerializationForHash() );
 	}
@@ -33,8 +30,6 @@ class EntityIdValue extends DataValueObject {
 	/**
 	 * The serialization to use for hashing, for compatibility reasons this is
 	 * equivalent to the old (pre 7.4) PHP serialization.
-	 *
-	 * @return string
 	 */
 	public function getSerializationForHash(): string {
 		$data = $this->entityId->getSerialization();

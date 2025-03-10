@@ -37,9 +37,6 @@ class StatementList implements IteratorAggregate, Countable {
 	 */
 	private $statements;
 
-	/**
-	 * @param Statement ...$statements
-	 */
 	public function __construct( Statement ...$statements ) {
 		$this->statements = $statements;
 	}
@@ -310,9 +307,6 @@ class StatementList implements IteratorAggregate, Countable {
 		return true;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function isEmpty(): bool {
 		return $this->statements === [];
 	}

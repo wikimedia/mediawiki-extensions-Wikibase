@@ -35,10 +35,6 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	/** @see \LanguageQqx */
 	private const DUMMY_LANGUAGE = 'qqx';
 
-	/**
-	 * @param Title $title
-	 * @return WikiPage
-	 */
 	private function getWikiPage( Title $title ): WikiPage {
 		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getTitle' )
@@ -47,9 +43,6 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		return $wikiPage;
 	}
 
-	/**
-	 * @return Article
-	 */
 	private function getArticle(): Article {
 		$title = Title::makeTitle( NS_MAIN, 'Page title' );
 		$article = $this->createMock( Article::class );

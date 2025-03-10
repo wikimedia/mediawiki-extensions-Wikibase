@@ -249,8 +249,6 @@ class PropertySpecificComponentsRdfBuilder {
 
 	/**
 	 * Map a property to the RDF graph
-	 *
-	 * @param EntityDocument $entity
 	 */
 	public function addEntity( EntityDocument $entity ) {
 		if ( !$entity instanceof Property ) {

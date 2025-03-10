@@ -278,9 +278,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		);
 	}
 
-	/**
-	 * @param array $entity
-	 */
 	private function assertEntityPropsInfo( array $entity ) {
 		$this->assertArrayHasKey( 'pageid', $entity, 'An entity is missing the pageid value' );
 		$this->assertIsInt( $entity['pageid'] );
@@ -309,9 +306,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'type', $entity, 'An entity is missing the type value' );
 	}
 
-	/**
-	 * @param array $entity
-	 */
 	private function assertEntityPropsSitelinksUrls( array $entity ) {
 		foreach ( $entity['sitelinks'] as $siteLink ) {
 			$this->assertArrayHasKey( 'url', $siteLink );
@@ -319,9 +313,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	/**
-	 * @param array $entity
-	 */
 	private function assertEntityPropsSitelinksBadges( array $entity ) {
 		foreach ( $entity['sitelinks'] as $siteLink ) {
 			$this->assertArrayHasKey( 'badges', $siteLink );

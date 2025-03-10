@@ -20,9 +20,6 @@ class ApiPropertyDataTypeLookup implements PropertyDataTypeLookup {
 	 */
 	private $apiEntityLookup;
 
-	/**
-	 * @param ApiEntityLookup $apiEntityLookup
-	 */
 	public function __construct( ApiEntityLookup $apiEntityLookup ) {
 		$this->apiEntityLookup = $apiEntityLookup;
 	}

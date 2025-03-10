@@ -42,9 +42,6 @@ abstract class PrefetchingEntityTermLookupBase extends EntityTermLookupBase impl
 	 */
 	private $termKeys = [];
 
-	/**
-	 * @param DatabaseTermInLangIdsResolver $termInlangIdsResolver
-	 */
 	public function __construct(
 		DatabaseTermInLangIdsResolver $termInlangIdsResolver
 	) {

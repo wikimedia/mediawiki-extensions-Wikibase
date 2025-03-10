@@ -38,11 +38,6 @@ class SourceDispatchingPropertyDataTypeLookup implements PropertyDataTypeLookup 
 		$this->lookupsCallbacks = $lookupsCallbacks;
 	}
 
-	/**
-	 * @param PropertyId $propertyId
-	 *
-	 * @return string
-	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ): string {
 		$entitySource = $this->entitySourceLookup->getEntitySourceById( $propertyId );
 		$sourceName = $entitySource->getSourceName();

@@ -449,10 +449,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		return new ItemId( $matches[0] );
 	}
 
-	/**
-	 * @param array $form
-	 * @param EntityDocument $entity
-	 */
 	protected function assertEntityMatchesFormData( array $form, EntityDocument $entity ) {
 		$this->assertInstanceOf( Item::class, $entity );
 		/** @var Item $entity */

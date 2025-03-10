@@ -96,9 +96,6 @@ class SqlStore implements Store {
 	 */
 	private $entityStoreWatcher = null;
 
-	/**
-	 * @var PropertyInfoLookup
-	 */
 	private PropertyInfoLookup $propertyInfoLookup;
 
 	/**

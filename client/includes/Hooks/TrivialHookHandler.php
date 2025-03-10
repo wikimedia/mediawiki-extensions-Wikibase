@@ -100,10 +100,6 @@ class TrivialHookHandler implements
 		$this->doSearchDataForIndex( $fields, $output );
 	}
 
-	/**
-	 * @param array &$fields
-	 * @param ParserOutput $parserOutput
-	 */
 	private function doSearchDataForIndex( array &$fields, ParserOutput $parserOutput ): void {
 		$wikibaseItem = $parserOutput->getPageProperty( 'wikibase_item' );
 		if ( $wikibaseItem ) {
