@@ -8,11 +8,10 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
-use SearchEngine;
-use SearchEngineFactory;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelItemSearchEngine;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SimpleItemSearchRouteHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -33,18 +32,18 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' );
 		$this->setService( 'ExtensionRegistry', $extensionRegistry );
 
-		$searchEngineFactory = $this->createMock( SearchEngineFactory::class );
-		$searchEngineFactory->expects( $this->once() )
-			->method( 'create' )
-			->willReturn( $this->createStub( SearchEngine::class ) );
-		$this->setService( 'SearchEngineFactory', $searchEngineFactory );
+		$usingCirrusBasedSearch = false;
+		$this->setService( 'WbSearch.InLabelItemSearchEngine', function() use ( &$usingCirrusBasedSearch ) {
+			$usingCirrusBasedSearch = true;
+			return $this->createStub( InLabelItemSearchEngine::class );
+		} );
 
 		$matchingTermsLookupFactory = $this->createMock( MatchingTermsLookupFactory::class );
-		$matchingTermsLookupFactory->expects( $this->never() )
-			->method( 'getLookupForSource' );
+		$matchingTermsLookupFactory->expects( $this->never() )->method( $this->anything() );
 		$this->setService( 'WikibaseRepo.MatchingTermsLookupFactory', $matchingTermsLookupFactory );
 
 		$this->assertInstanceOf( SimpleItemSearchRouteHandler::class, SimpleItemSearchRouteHandler::factory() );
+		$this->assertTrue( $usingCirrusBasedSearch );
 	}
 
 	public function testUsesSqlTermStoreSearchEngine(): void {
@@ -60,10 +59,9 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $this->createStub( MatchingTermsLookup::class ) );
 		$this->setService( 'WikibaseRepo.MatchingTermsLookupFactory', $matchingTermsLookupFactory );
 
-		$searchEngineFactory = $this->createMock( SearchEngineFactory::class );
-		$searchEngineFactory->expects( $this->never() )
-			->method( 'create' );
-		$this->setService( 'SearchEngineFactory', $searchEngineFactory );
+		$this->setService( 'WbSearch.InLabelItemSearchEngine', function(): void {
+			$this->fail( 'WbSearch.InLabelItemSearchEngine was not expected to be called.' );
+		} );
 
 		$this->assertInstanceOf( SimpleItemSearchRouteHandler::class, SimpleItemSearchRouteHandler::factory() );
 	}

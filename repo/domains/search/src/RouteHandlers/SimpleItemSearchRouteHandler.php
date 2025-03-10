@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
 use Exception;
-use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
@@ -18,7 +17,6 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\MediaWikiSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
@@ -83,11 +81,7 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		$useMediaWikiSearchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
 
 		return $useMediaWikiSearchEngine
-			? new MediaWikiSearchEngine(
-				$mediaWikiServices->getSearchEngineFactory()->create(),
-				WikibaseRepo::getEntityNamespaceLookup(),
-				RequestContext::getMain()
-			)
+			? WbSearch::getInLabelItemSearchEngine()
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory()
 					->getLookupForSource( WikibaseRepo::getLocalEntitySource() ),
