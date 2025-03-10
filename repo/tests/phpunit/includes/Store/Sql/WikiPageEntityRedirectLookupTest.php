@@ -57,17 +57,17 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 		$entityStore = WikibaseRepo::getEntityStore();
 
 		$item = new Item();
-		$entityStore->saveEntity( $item, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
+		$entityStore->saveEntity( $item, __CLASS__, $user, EDIT_NEW );
 
 		$redirectItem1 = new Item();
 		$entityStore->assignFreshId( $redirectItem1 );
 		$redirect = new EntityRedirect( $redirectItem1->getId(), $item->getId() );
-		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
+		$entityStore->saveRedirect( $redirect, __CLASS__, $user, EDIT_NEW );
 
 		$redirectItem2 = new Item();
 		$entityStore->assignFreshId( $redirectItem2 );
 		$redirect = new EntityRedirect( $redirectItem2->getId(), $item->getId() );
-		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
+		$entityStore->saveRedirect( $redirect, __CLASS__, $user, EDIT_NEW );
 
 		$this->itemId = $item->getId();
 		$this->redirectItemIds = [ $redirectItem1->getId(), $redirectItem2->getId() ];
