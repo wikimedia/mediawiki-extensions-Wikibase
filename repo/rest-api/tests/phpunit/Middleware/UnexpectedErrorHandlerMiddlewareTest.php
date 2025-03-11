@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
 use TypeError;
-use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\ResponseFactory;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -45,7 +43,7 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
 		$responseBody = json_decode( $response->getBody()->getContents() );
 		$this->assertSame(
-			UseCaseError::UNEXPECTED_ERROR,
+			UnexpectedErrorHandlerMiddleware::ERROR_CODE,
 			$responseBody->code
 		);
 	}
@@ -88,7 +86,6 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
 	private function newMiddleware(): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
-			new ResponseFactory(),
 			$this->errorReporter
 		);
 	}

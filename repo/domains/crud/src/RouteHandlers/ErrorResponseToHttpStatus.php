@@ -48,9 +48,6 @@ class ErrorResponseToHttpStatus {
 
 		// 429 errors:
 		UseCaseError::REQUEST_LIMIT_REACHED => 429,
-
-		// 500 errors:
-		UseCaseError::UNEXPECTED_ERROR => 500,
 	];
 
 	public static function lookup( string $errorCode ): int {
