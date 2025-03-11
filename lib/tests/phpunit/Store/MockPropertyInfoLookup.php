@@ -72,10 +72,6 @@ class MockPropertyInfoLookup implements PropertyInfoLookup {
 		return $this->propertyInfo;
 	}
 
-	/**
-	 * @param NumericPropertyId $propertyId
-	 * @param array $info
-	 */
 	public function addPropertyInfo( NumericPropertyId $propertyId, array $info ) {
 		$id = $propertyId->getSerialization();
 		$this->propertyInfo[$id] = $info;

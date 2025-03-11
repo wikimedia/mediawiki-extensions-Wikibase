@@ -115,11 +115,6 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 		return $jobQueueGroupMock;
 	}
 
-	/**
-	 * Verify a created job
-	 *
-	 * @param JobSpecification $job
-	 */
 	public function verifyJob( JobSpecification $job ) {
 		$itemId = new ItemId( 'Q123' );
 

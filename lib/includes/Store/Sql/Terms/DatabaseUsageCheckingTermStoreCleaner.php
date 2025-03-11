@@ -36,8 +36,6 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 * Those that do actually exist and are unused are passed to an inner cleaner.
 	 *
 	 * These steps are all wrapped in a transaction.
-	 *
-	 * @param array $termInLangIds
 	 */
 	public function cleanTermInLangIds( array $termInLangIds ): void {
 		$dbw = $this->termsDb->getWriteConnection();

@@ -208,9 +208,6 @@ class DispatchChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTe
 		}
 	}
 
-	/**
-	 * @return string
-	 */
 	private static function getMwTimestamp(): string {
 		if ( !self::$mwTimestamp ) {
 			self::$mwTimestamp = wfTimestampNow();

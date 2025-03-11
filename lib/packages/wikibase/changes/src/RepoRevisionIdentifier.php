@@ -52,8 +52,6 @@ class RepoRevisionIdentifier implements Serializable {
 
 	/**
 	 * Serialization of the entity id changed.
-	 *
-	 * @return string
 	 */
 	public function getEntityIdSerialization(): string {
 		return $this->entityIdSerialization;
@@ -61,16 +59,11 @@ class RepoRevisionIdentifier implements Serializable {
 
 	/**
 	 * MediaWiki style timestamp of the revision.
-	 *
-	 * @return string
 	 */
 	public function getRevisionTimestamp(): string {
 		return $this->revisionTimestamp;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getRevisionId(): int {
 		return $this->revisionId;
 	}
@@ -107,9 +100,6 @@ class RepoRevisionIdentifier implements Serializable {
 		$this->revisionId = $data['revisionId'];
 	}
 
-	/**
-	 * @return array
-	 */
 	public function toArray(): array {
 		return [
 			'arrayFormatVersion' => self::ARRAYFORMATVERSION,

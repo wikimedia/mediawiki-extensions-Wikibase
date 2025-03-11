@@ -28,7 +28,6 @@ class EntitySearchException extends \Exception {
 
 	/**
 	 * Error status as returned by the backend driver
-	 * @return Status
 	 */
 	public function getStatus(): Status {
 		return $this->status;

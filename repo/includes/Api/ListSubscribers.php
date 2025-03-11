@@ -130,9 +130,6 @@ class ListSubscribers extends ApiQueryBase {
 		return $this->select( __METHOD__ );
 	}
 
-	/**
-	 * @param string $continueParam
-	 */
 	private function addContinue( string $continueParam ): void {
 		$db = $this->getDB();
 		$continueParams = explode( '|', $continueParam );
@@ -196,9 +193,6 @@ class ListSubscribers extends ApiQueryBase {
 		}
 	}
 
-	/**
-	 * @param stdClass $row
-	 */
 	private function setContinueFromRow( stdClass $row ): void {
 		$this->setContinueEnumParameter(
 			'continue',

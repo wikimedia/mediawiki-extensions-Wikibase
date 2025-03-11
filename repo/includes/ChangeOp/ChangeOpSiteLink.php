@@ -56,11 +56,6 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		$this->badges = $badges;
 	}
 
-	/**
-	 * @param SiteLinkList $siteLinks
-	 *
-	 * @return bool
-	 */
 	private function badgesAreEmptyAndUnchanged( SiteLinkList $siteLinks ): bool {
 		return ( !$siteLinks->hasLinkWithSiteId( $this->siteId )
 			|| $siteLinks->getBySiteId( $this->siteId )->getBadges() === [] )

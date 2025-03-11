@@ -30,10 +30,6 @@ class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescription
 	 */
 	private $termLanguageFallbackChain;
 
-	/**
-	 * @param TermLookup $termLookup
-	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
-	 */
 	public function __construct(
 		TermLookup $termLookup,
 		TermLanguageFallbackChain $termLanguageFallbackChain

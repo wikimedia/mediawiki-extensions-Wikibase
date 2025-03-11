@@ -241,8 +241,6 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	/**
 	 * Returns an EntityIdFormatter like the one that should be used internally for generating
 	 * summaries.
-	 *
-	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter(): EntityIdFormatter {
 		if ( !$this->entityIdFormatter ) {
@@ -256,8 +254,6 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	/**
 	 * Returns a ValueFormatter like the one that should be used internally for generating
 	 * summaries.
-	 *
-	 * @return ValueFormatter
 	 */
 	private function getPropertyValueFormatter(): ValueFormatter {
 		if ( !$this->propertyValueFormatter ) {

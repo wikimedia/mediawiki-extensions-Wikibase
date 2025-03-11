@@ -16,8 +16,6 @@ interface EntityStoreWatcher {
 	/**
 	 * Called when an entity is updated, created, or replaces a redirect.
 	 * This is not called when an entity is deleted or replaced by a redirect.
-	 *
-	 * @param EntityRevision $entityRevision
 	 */
 	public function entityUpdated( EntityRevision $entityRevision );
 
@@ -33,8 +31,6 @@ interface EntityStoreWatcher {
 	/**
 	 * Called when an entity or redirect is deleted.
 	 * This is not called when an entity is replaced by a redirect or vice versa.
-	 *
-	 * @param EntityId $entityId
 	 */
 	public function entityDeleted( EntityId $entityId );
 

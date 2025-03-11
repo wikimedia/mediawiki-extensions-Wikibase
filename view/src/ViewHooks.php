@@ -32,8 +32,6 @@ final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModule
 
 	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
-	 *
-	 * @param ResourceLoader $rl
 	 */
 	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
 		$moduleTemplate = [

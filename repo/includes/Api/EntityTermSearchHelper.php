@@ -20,9 +20,6 @@ class EntityTermSearchHelper implements EntitySearchHelper {
 	 */
 	private $termSearchInteractor;
 
-	/**
-	 * @param ConfigurableTermSearchInteractor $termSearchInteractor
-	 */
 	public function __construct(
 		ConfigurableTermSearchInteractor $termSearchInteractor
 	) {

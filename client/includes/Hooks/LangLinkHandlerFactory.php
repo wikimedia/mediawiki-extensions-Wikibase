@@ -94,11 +94,6 @@ class LangLinkHandlerFactory {
 		$this->siteGroups = $siteGroups;
 	}
 
-	/**
-	 * @param UsageAccumulator $usageAccumulator
-	 *
-	 * @return LangLinkHandler
-	 */
 	public function getLangLinkHandler( UsageAccumulator $usageAccumulator ): LangLinkHandler {
 		return new LangLinkHandler(
 			$this->badgeDisplay,

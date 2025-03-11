@@ -926,8 +926,6 @@ final class RepoHooks {
 
 	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
-	 *
-	 * @param ResourceLoader $resourceLoader
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
@@ -1115,8 +1113,6 @@ final class RepoHooks {
 
 	/**
 	 * Register the parser functions.
-	 *
-	 * @param Parser $parser
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setFunctionHook(

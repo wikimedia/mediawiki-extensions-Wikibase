@@ -21,10 +21,6 @@ class SiteLinkGlobalIdentifiersProvider {
 	 */
 	private $cache;
 
-	/**
-	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
-	 * @param CacheInterface $cache
-	 */
 	public function __construct( SiteLinkTargetProvider $siteLinkTargetProvider, CacheInterface $cache ) {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->cache = $cache;

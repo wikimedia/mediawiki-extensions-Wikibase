@@ -14,9 +14,6 @@ class AddPageInfo {
 	 */
 	private $entityTitleStoreLookup;
 
-	/**
-	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
-	 */
 	public function __construct( EntityTitleStoreLookup $entityTitleStoreLookup ) {
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 	}

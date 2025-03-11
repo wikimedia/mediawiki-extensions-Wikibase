@@ -14,8 +14,6 @@ interface StatementDataUpdater {
 	/**
 	 * Update extension data, properties or other data in ParserOutput.
 	 * These updates are invoked when EntityContent::getParserOutput is called.
-	 *
-	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput );
 
@@ -24,8 +22,6 @@ interface StatementDataUpdater {
 	 *
 	 * This method is normally invoked when processing a StatementList
 	 * for all Statements on a StatementListProvider (e.g. an Item).
-	 *
-	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement );
 

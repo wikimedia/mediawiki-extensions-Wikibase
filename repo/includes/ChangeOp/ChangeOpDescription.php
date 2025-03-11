@@ -62,8 +62,6 @@ class ChangeOpDescription extends ChangeOpBase {
 
 	/**
 	 * Applies the change to the descriptions
-	 *
-	 * @param TermList $descriptions
 	 */
 	private function updateDescriptions( TermList $descriptions ) {
 		if ( $this->description === null ) {

@@ -95,7 +95,6 @@ class ApiServiceFactory {
 
 	/**
 	 * Returns the singleton instance of ApiEntityNamespaceInfoLookup
-	 * @return ApiEntityNamespaceInfoLookup
 	 */
 	private function getApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
 		if ( $this->apiEntityNamespaceInfoLookup === null ) {
@@ -135,7 +134,6 @@ class ApiServiceFactory {
 
 	/**
 	 * Returns the singleton instance of ApiEntityLookup
-	 * @return ApiEntityLookup
 	 */
 	public function getApiEntityLookup(): ApiEntityLookup {
 		if ( $this->apiEntityLookupInstance === null ) {

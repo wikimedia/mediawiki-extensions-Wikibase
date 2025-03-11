@@ -45,8 +45,6 @@ class ApiModuleTestHelper {
 
 	/**
 	 * Asserts that the given API response represents a successful call.
-	 *
-	 * @param array $response
 	 */
 	public function assertResultSuccess( array $response ) {
 		Assert::assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );

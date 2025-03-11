@@ -191,9 +191,6 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
-	/**
-	 * @return RestrictedEntityLookupFactory
-	 */
 	private function getRestrictedEntityLookupFactory(): RestrictedEntityLookupFactory {
 		return new RestrictedEntityLookupFactory( $this->createMock( EntityLookup::class ), 200 );
 	}

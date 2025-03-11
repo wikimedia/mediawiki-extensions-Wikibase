@@ -21,23 +21,17 @@ interface EntityMentionListener {
 
 	/**
 	 * Should be called when an entity reference (an EntityIdValue object) is encountered.
-	 *
-	 * @param EntityId $id
 	 */
 	public function entityReferenceMentioned( EntityId $id );
 
 	/**
 	 * Should be called when a property is used in a PropertySnak.
-	 *
-	 * @param PropertyId $id
 	 */
 	public function propertyMentioned( PropertyId $id );
 
 	/**
 	 * Should be called when a sub entity is encountered.
 	 * For example, in WikibaseLexeme, when a Form or a Sense is encountered when serializing a Lexeme.
-	 *
-	 * @param EntityDocument $entity
 	 */
 	public function subEntityMentioned( EntityDocument $entity );
 

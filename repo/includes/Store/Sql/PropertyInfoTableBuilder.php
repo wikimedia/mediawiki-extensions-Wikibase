@@ -86,8 +86,6 @@ class PropertyInfoTableBuilder {
 
 	/**
 	 * Sets the reporter to use for reporting progress.
-	 *
-	 * @param MessageReporter $reporter
 	 */
 	public function setReporter( MessageReporter $reporter ) {
 		$this->reporter = $reporter;

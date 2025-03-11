@@ -49,8 +49,6 @@ class ApiErrorReporter {
 	/**
 	 * Reports any warnings in the StatusValue object on the warnings section
 	 * of the result.
-	 *
-	 * @param StatusValue $status
 	 */
 	public function reportStatusWarnings( StatusValue $status ) {
 		$formatter = $this->apiModule->getErrorFormatter();

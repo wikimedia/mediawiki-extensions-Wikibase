@@ -94,9 +94,6 @@ class MockClientStore implements ClientStore {
 		return self::$entityLookup ?? $this->getMockRepository();
 	}
 
-	/**
-	 * @param EntityLookup|null $entityLookup
-	 */
 	public function setEntityLookup( ?EntityLookup $entityLookup ) {
 		self::$entityLookup = $entityLookup;
 	}

@@ -376,8 +376,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	/**
 	 * Asserts that the given API response represents a successful call.
-	 *
-	 * @param array $response
 	 */
 	protected function assertResultSuccess( array $response ) {
 		$this->assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
@@ -386,8 +384,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	/**
 	 * Asserts that the given API response has a valid entity type if the result contains an entity
-	 *
-	 * @param array $response
 	 */
 	protected function assertResultHasEntityType( array $response ) {
 		if ( isset( $response['entity'] ) ) {

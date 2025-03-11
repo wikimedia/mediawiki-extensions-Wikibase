@@ -46,8 +46,6 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Add DataValue to list of used images if Snak property data type is commonsMedia.
-	 *
-	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {
 		foreach ( $statement->getAllSnaks() as $snak ) {
@@ -74,8 +72,6 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Treat CommonsMedia values as file transclusions
-	 *
-	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		foreach ( $this->fileNames as $fileName => $null ) {

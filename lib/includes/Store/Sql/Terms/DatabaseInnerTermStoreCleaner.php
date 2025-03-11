@@ -259,8 +259,6 @@ class DatabaseInnerTermStoreCleaner {
 
 	/**
 	 * Delete the specified text rows from the database.
-	 *
-	 * @param array $textIds
 	 */
 	private function cleanTextIds( array $textIds ): void {
 		if ( $textIds === [] ) {

@@ -21,17 +21,10 @@ class MockAddUnits extends AddUnitConversions {
 	 */
 	public $output;
 
-	/**
-	 * Set SPARQL client.
-	 * @param SparqlClient $client
-	 */
 	public function setClient( SparqlClient $client ) {
 		$this->client = $client;
 	}
 
-	/**
-	 * @param UnitConverter $uc
-	 */
 	public function setUnitConverter( UnitConverter $uc ) {
 		$this->unitConverter = $uc;
 	}

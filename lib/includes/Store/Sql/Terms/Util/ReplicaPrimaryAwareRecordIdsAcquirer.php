@@ -270,9 +270,6 @@ class ReplicaPrimaryAwareRecordIdsAcquirer {
 		return $existingRecords;
 	}
 
-	/**
-	 * @param array $neededRecords
-	 */
 	private function insertNonExistingRecordsIntoPrimary( array $neededRecords ): void {
 		$this->getDbPrimary()->newInsertQueryBuilder()
 			->insertInto( $this->table )

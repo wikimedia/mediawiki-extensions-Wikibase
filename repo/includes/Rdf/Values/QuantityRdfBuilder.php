@@ -163,8 +163,6 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * Write data for the value.
 	 * This expects the current subject of the RDF writer to be the value node.
 	 * No instance-of statement is written about the value.
-	 *
-	 * @param UnboundedQuantityValue $value
 	 */
 	public function writeQuantityValue( UnboundedQuantityValue $value ) {
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();

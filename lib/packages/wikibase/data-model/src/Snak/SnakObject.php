@@ -67,9 +67,6 @@ abstract class SnakObject implements Snak {
 		return $this->propertyId;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getHash(): string {
 		return sha1( $this->getSerializationForHash() );
 	}
@@ -77,8 +74,6 @@ abstract class SnakObject implements Snak {
 	/**
 	 * The serialization to use for hashing, for compatibility reasons this is
 	 * equivalent to the old (pre 7.4) PHP serialization.
-	 *
-	 * @return string
 	 */
 	public function getSerializationForHash(): string {
 		$data = $this->serialize();

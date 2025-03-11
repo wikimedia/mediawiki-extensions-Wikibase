@@ -113,10 +113,6 @@ class EntityNamespaceLookup {
 		return array_search( $ns, $this->entityNamespaces, true ) ?: null;
 	}
 
-	/**
-	 * @param EntityNamespaceLookup $nsLookup
-	 * @return EntityNamespaceLookup
-	 */
 	public function merge( EntityNamespaceLookup $nsLookup ): EntityNamespaceLookup {
 		return new self(
 			array_merge( $this->entityNamespaces, $nsLookup->getEntityNamespaces() ),

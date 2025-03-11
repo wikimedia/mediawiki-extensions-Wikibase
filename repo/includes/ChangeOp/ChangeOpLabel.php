@@ -62,8 +62,6 @@ class ChangeOpLabel extends ChangeOpBase {
 
 	/**
 	 * Applies the change to the labels
-	 *
-	 * @param TermList $labels
 	 */
 	private function updateLabels( TermList $labels ) {
 		if ( $this->label === null ) {

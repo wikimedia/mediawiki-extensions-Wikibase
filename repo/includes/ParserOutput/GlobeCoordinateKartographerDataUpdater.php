@@ -32,9 +32,6 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 		$this->kartographerHandler = $kartographerHandler;
 	}
 
-	/**
-	 * @param Statement $statement
-	 */
 	public function processStatement( Statement $statement ) {
 		foreach ( $statement->getAllSnaks() as $snak ) {
 			$this->processSnak( $snak );
@@ -53,8 +50,6 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Add data for the discovered GlobeCoordinateValues to the ParserOutput.
-	 *
-	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		if ( $this->globeCoordinateValues === [] ) {

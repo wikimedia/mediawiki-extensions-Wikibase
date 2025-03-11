@@ -82,8 +82,6 @@ class EntityRevisionCache {
 
 	/**
 	 * Place the latest EntityRevision in the cache.
-	 *
-	 * @param EntityRevision $entityRevision
 	 */
 	public function set( EntityRevision $entityRevision ) {
 		$key = $this->getCacheKey( $entityRevision->getEntity()->getId() );
@@ -92,8 +90,6 @@ class EntityRevisionCache {
 
 	/**
 	 * Removes an Entity's EntityRevision from the cache.
-	 *
-	 * @param EntityId $entityId
 	 */
 	public function delete( EntityId $entityId ) {
 		$key = $this->getCacheKey( $entityId );

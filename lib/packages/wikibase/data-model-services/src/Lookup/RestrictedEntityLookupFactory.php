@@ -30,10 +30,6 @@ class RestrictedEntityLookupFactory {
 	 */
 	private array $restrictedEntityLookupArray = [];
 
-	/**
-	 * @param EntityLookup $entityLookup
-	 * @param int $entityAccessLimit
-	 */
 	public function __construct( EntityLookup $entityLookup, int $entityAccessLimit ) {
 		$this->entityLookup = $entityLookup;
 		$this->entityAccessLimit = $entityAccessLimit;
