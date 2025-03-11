@@ -115,4 +115,5 @@
 	<exclude-pattern>.phan/stubs</exclude-pattern>
 	<exclude-pattern>repo/tests/browser</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<exclude-pattern>node_modules/</exclude-pattern>
 </ruleset>

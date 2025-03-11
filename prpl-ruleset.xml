@@ -27,6 +27,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
+				<element key="repo/rest-api/src" value="Wikibase\Repo\RestApi"/>
+				<element key="repo/rest-api/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
 				<element key="repo/domains/search/src" value="Wikibase\Repo\Domains\Search"/>
 				<element key="repo/domains/search/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Search"/>
 				<element key="repo/domains/crud/src" value="Wikibase\Repo\Domains\Crud"/>
@@ -49,9 +51,10 @@
 		</properties>
 	</rule>
 
+	<file>repo/rest-api</file>
 	<file>repo/domains/crud</file>
 	<file>repo/domains/search</file>
 	<arg name="tab-width" value="4" />
 	<arg name="extensions" value="php" />
-	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>node_modules/</exclude-pattern>
 </ruleset>
