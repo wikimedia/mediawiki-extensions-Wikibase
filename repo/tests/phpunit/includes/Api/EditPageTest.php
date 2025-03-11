@@ -31,10 +31,10 @@ class EditPageTest extends WikibaseApiTestCase {
 		$store = $this->getEntityStore();
 
 		$item = new Item(); //@todo: do this with all kinds of entities.
-		$item->setLabel( "en", "EditPageTest" );
+		$item->setLabel( 'en', __CLASS__ );
 		$store->saveEntity( $item, 'testing', $this->user, EDIT_NEW );
 
-		$item->setLabel( "de", "EditPageTest" );
+		$item->setLabel( 'de', __CLASS__ );
 
 		$data = WikibaseRepo::getStorageEntitySerializer()->serialize( $item );
 		$text = json_encode( $data );
