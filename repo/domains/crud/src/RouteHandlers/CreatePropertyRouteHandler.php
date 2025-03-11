@@ -22,7 +22,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -60,16 +60,16 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 		$responseFactory = new ResponseFactory();
 
 		return new self(
-			WbRestApi::getCreateProperty(),
+			WbCrud::getCreateProperty(),
 			new PropertyPartsSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
-				new StatementListSerializer( WbRestApi::getStatementSerializer() )
+				new StatementListSerializer( WbCrud::getStatementSerializer() )
 			),
 			$responseFactory,
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),

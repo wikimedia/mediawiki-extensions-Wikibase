@@ -14,7 +14,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemAliasesInLanguage\Get
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -43,12 +43,12 @@ class GetItemAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public static function factory(): self {
 		return new self(
-			WbRestApi::getGetItemAliasesInLanguage(),
+			WbCrud::getGetItemAliasesInLanguage(),
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
-				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
 			] ),

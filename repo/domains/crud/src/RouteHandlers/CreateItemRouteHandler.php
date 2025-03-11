@@ -24,7 +24,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -61,17 +61,17 @@ class CreateItemRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getCreateItem(),
+			WbCrud::getCreateItem(),
 			new ItemPartsSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
-				new StatementListSerializer( WbRestApi::getStatementSerializer() ),
+				new StatementListSerializer( WbCrud::getStatementSerializer() ),
 				new SitelinksSerializer( new SitelinkSerializer() )
 			),
 			$responseFactory,
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
