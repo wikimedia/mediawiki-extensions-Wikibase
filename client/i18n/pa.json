@@ -11,7 +11,7 @@
 			"Tow"
 		]
 	},
-	"wikibase-client-desc": "ਵਿਕੀਬੇਸ ਐਕਸਟੈਂਸ਼ਨ ਲਈ ਕਲਾਇੰਟ",
+	"wikibase-client-desc": "ਵਿਕੀਅਧਾਰ ਵਿਸਤਾਰ ਲਈ ਗਾਹਕ",
 	"tooltip-t-wikibase": "ਡਾਟਾ ਭੰਡਾਰ ਦੀ ਸਮੱਗਰੀ ਨਾਲ ਕੜੀ ਜੋੜੋ",
 	"wikibase-after-page-move": "ਤੁਹਾਡੀ ਥਾਂ-ਬਦਲੀ ਹੁਣ [$1 {{WBREPONAME}} ਮਜ਼ਮੂਨ] ਭਾਸ਼ਾ ਦੀ ਕੜੀ ਵਿੱਚ ਦਿੱਖਣੀ ਚਾਹੀਦੀ ਹੈ। ਅਸੀਂ ਤੁਹਾਨੂੰ ਇਹ ਜਾਂਚ ਕਰਨ ਲਈ ਕਹਿੰਦੇ ਹਾਂ ਕਿ ਇਹ ਵਾਪਰਿਆ ਹੈ।",
 	"wikibase-comment-add": "ਇੱਕ {{WBREPONAME}} ਆਈਟਮ ਬਣਾਈ ਗਈ।",
@@ -37,7 +37,7 @@
 	"wikibase-linkitem-confirmitem-button": "ਤਸਦੀਕ ਕਰੋ",
 	"wikibase-linkitem-not-loggedin-title": "ਤੁਹਾਨੂੰ ਦਾਖ਼ਲ ਹੋਨ ਦੀ ਲੋੜ ਹੈ",
 	"limitreport-entityaccesscount-value": "$1/$2",
-	"wikibase-property-notfound": "$1 ਪ੍ਰਾਪਰਟੀ ਨਹੀਂ ਮਿਲੀ।",
+	"wikibase-property-notfound": "$1 ਦੀ ਜਾਇਦਾਦ ਨਹੀਂ ਮਿਲੀ।",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ਲੁਕਾਓ",
 	"wikibase-rc-hide-wikidata-show": "ਵਿਖਾਓ",

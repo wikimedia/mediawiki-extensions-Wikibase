@@ -5,7 +5,8 @@
 			"Macofe",
 			"Pippinu",
 			"SaldırganSincap",
-			"Sarvaturi"
+			"Sarvaturi",
+			"GianAntonucci"
 		]
 	},
 	"apihelp-wbavailablebadges-example-1": "Ntèrruga tutti l'elimenti distintivi dispunìbbili",
@@ -30,9 +31,9 @@
 	"apihelp-wbeditentity-param-data": "L'oggettu sirializzatu chi veni adupiratu comu surgenti dî dati.\nA na ntità chi veni criata nova veni assignata n' 'id'.",
 	"apihelp-wbeditentity-param-clear": "Si mpustatu, la ntità veni svacantata cumpletamenti avanti di prucèdiri.\nLa ntità nun veni sarvata avanti d'èssiri jincuta cu \"data\", e certi parti ponnu èssiri esclusi.",
 	"apihelp-wbeditentity-param-new": "Siḍḍu è mpustatu, è criata na ntità nova.\nMpustàrilu ô tipu dâ ntità chi si voli criari.\nNun si pò mpustari stu paràmitru quannu si mposta macari <var>id</var>.",
-	"apihelp-wbeditentity-example-1": "Crea nu suggettu novu vacanti, arritorna la struttura cumpleta di la ntità",
+	"apihelp-wbeditentity-example-1": "Criari n'elimentu novu vacanti, rènniri la struttura cumpleta dâ ntità",
 	"apihelp-wbeditentity-example-2": "Crea nu suggettu novu e mposta l'etichetti pi de e en",
-	"apihelp-wbeditentity-example-3": "Crea na prupità nova ca cunteni li dati json, arritorna stinnutu câ struttura dû suggettu",
+	"apihelp-wbeditentity-example-3": "Criari na prupità nova chi cunteni li dati json, rènniri la struttura cumpleta dâ ntità",
 	"apihelp-wbeditentity-example-4": "Cancella tutti li dati dâ ntità cu ID <samp>$1</samp>",
 	"apihelp-wbeditentity-example-5": "Cancella tutti li dati dâ ntità cu ID <samp>$1</samp> e mposta n'etichetta pi <var>en</var>",
 	"apihelp-wbeditentity-example-6": "Mposta lu culligamentu pi nowiki, suprascrivènnulu si già esisti",

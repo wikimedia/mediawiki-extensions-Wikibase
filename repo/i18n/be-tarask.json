@@ -370,7 +370,7 @@
 	"wikibase-conflict-patched": "Вашая праўка ўвайшла ў апошнюю вэрсію.",
 	"wikibase-save-unresolved-redirect": "Знойдзенае неразьвязанае перанакіраваньне з $1 на $2 пры спробе захаваць зьмену.",
 	"wikibase-restoreold": "аднавіць",
-	"wikibase-entity-summary-restore": "Адноўленая вэрсія [[Special:Permalink/$3|$3]] аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Адноўленая вэрсія [[Special:Permalink/$3|$3]] аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|гутаркі]])",
 	"wikibase-entity-summary-undo": "Скасаваньне вэрсіі [[Special:Diff/$3|$3]] аўтарства [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|гутаркі]])",
 	"wikibase-no-direct-editing": "Простае рэдагаваньне ў прасторы назваў «$1» адключанае",
 	"wikibase-noentity": "Гэты элемэнт не існуе. Вы можаце [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць у журналах падзеяў], каб даведацца, куды ён зьнік.",
