@@ -20,6 +20,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\MediaWikiSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
@@ -90,7 +91,7 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory()
 					->getLookupForSource( WikibaseRepo::getLocalEntitySource() ),
-				WikibaseRepo::getTermLookup()
+				new TermRetriever( WikibaseRepo::getTermLookup() )
 			);
 	}
 

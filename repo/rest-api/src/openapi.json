@@ -33563,7 +33563,10 @@
                             "pattern": "^Q[1-9]\\d{0,9}$"
                           },
                           "label": {
-                            "type": "object",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
                             "properties": {
                               "language": {
                                 "type": "string"
@@ -33574,7 +33577,10 @@
                             }
                           },
                           "description": {
-                            "type": "object",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
                             "properties": {
                               "language": {
                                 "type": "string"
