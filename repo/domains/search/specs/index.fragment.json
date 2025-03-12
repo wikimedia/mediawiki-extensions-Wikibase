@@ -14,24 +14,10 @@
 				"description": "This endpoint is currently in development and is not recommended for production use",
 				"parameters": [
 					{
-						"in": "query",
-						"name": "q",
-						"description": "The term to search item labels by",
-						"required": true,
-						"schema": { "type": "string" },
+						"$ref": "./global/parameters.json#/SearchQuery",
 						"example": "potato"
 					},
-					{
-						"in": "query",
-						"name": "language",
-						"description": "The language to search item labels in",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"pattern": "^[a-z]{2}[a-z0-9-]*$"
-						},
-						"example": "en"
-					}
+					{ "$ref": "./global/parameters.json#/SearchLanguage" }
 				],
 				"responses": {
 					"200": {
@@ -150,24 +136,10 @@
 				"description": "This endpoint is currently in development and is not recommended for production use",
 				"parameters": [
 					{
-						"in": "query",
-						"name": "q",
-						"description": "The term to search property labels by",
-						"required": true,
-						"schema": { "type": "string" },
+						"$ref": "./global/parameters.json#/SearchQuery",
 						"example": "taxon"
 					},
-					{
-						"in": "query",
-						"name": "language",
-						"description": "The language to search property labels in",
-						"required": true,
-						"schema": {
-							"type": "string",
-							"pattern": "^[a-z]{2}[a-z0-9-]*$"
-						},
-						"example": "en"
-					}
+					{ "$ref": "./global/parameters.json#/SearchLanguage" }
 				],
 				"responses": {
 					"200": {

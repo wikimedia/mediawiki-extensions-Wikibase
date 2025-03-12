@@ -33529,19 +33529,19 @@
         "description": "This endpoint is currently in development and is not recommended for production use",
         "parameters": [
           {
+            "example": "potato",
             "in": "query",
             "name": "q",
-            "description": "The term to search item labels by",
+            "description": "The term to search labels by",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "example": "potato"
+            }
           },
           {
             "in": "query",
             "name": "language",
-            "description": "The language to search item labels in",
+            "description": "The language to search labels in",
             "required": true,
             "schema": {
               "type": "string",
@@ -33739,19 +33739,19 @@
         "description": "This endpoint is currently in development and is not recommended for production use",
         "parameters": [
           {
+            "example": "taxon",
             "in": "query",
             "name": "q",
-            "description": "The term to search property labels by",
+            "description": "The term to search labels by",
             "required": true,
             "schema": {
               "type": "string"
-            },
-            "example": "taxon"
+            }
           },
           {
             "in": "query",
             "name": "language",
-            "description": "The language to search property labels in",
+            "description": "The language to search labels in",
             "required": true,
             "schema": {
               "type": "string",
@@ -34132,6 +34132,26 @@
           "pattern": "^(Q|q|P|p)[1-9]\\d{0,9}\\$.+$"
         },
         "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
+      },
+      "SearchQuery": {
+        "in": "query",
+        "name": "q",
+        "description": "The term to search labels by",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "SearchLanguage": {
+        "in": "query",
+        "name": "language",
+        "description": "The language to search labels in",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "^[a-z]{2}[a-z0-9-]*$"
+        },
+        "example": "en"
       }
     },
     "requestBodies": {
