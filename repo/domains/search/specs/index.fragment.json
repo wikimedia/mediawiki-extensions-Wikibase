@@ -20,65 +20,8 @@
 					{ "$ref": "./global/parameters.json#/SearchLanguage" }
 				],
 				"responses": {
-					"200": {
-						"description": "A list of search results",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "./global/schema-parts.json#/SearchItemResultList"
-								},
-								"example": {
-									"results": [
-										{
-											"id": "Q123",
-											"label": { "language": "en", "value": "potato" },
-											"description": { "language": "en", "value": "staple food" },
-											"match": { "type": "label", "language": "en", "text": "potato" }
-										},
-										{
-											"id": "Q234",
-											"label": { "language": "en", "value": "potato" },
-											"description": { "language": "en", "value": "species of plant" },
-											"match": { "type": "label", "language": "en", "text": "potato" }
-										}
-									]
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "The request cannot be processed",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"code": { "type": "string" },
-										"message": { "type": "string" },
-										"context": { "type": "object" }
-									},
-									"required": [ "code", "message" ],
-									"additionalProperties": false
-								},
-								"examples": {
-									"invalid-query-parameter": {
-										"value": {
-											"code": "invalid-query-parameter",
-											"message": "Invalid query parameter: 'language'",
-											"context": { "parameter": "language" }
-										}
-									}
-								}
-							}
-						},
-						"headers": {
-							"Content-Language": {
-								"description": "Language code of the language in which error message is provided",
-								"schema": { "type": "string" },
-								"required": true
-							}
-						}
-					}
+					"200": { "$ref": "./global/responses.json#/SearchItemSuccess" },
+					"400": { "$ref": "./global/responses.json#/BadRequest" }
 				}
 			}
 		},
@@ -96,65 +39,8 @@
 					{ "$ref": "./global/parameters.json#/SearchLanguage" }
 				],
 				"responses": {
-					"200": {
-						"description": "A list of search results",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "./global/schema-parts.json#/SearchPropertyResultList"
-								},
-								"example": {
-									"results": [
-										{
-											"id": "P123",
-											"label": { "language": "en", "value": "taxon name" },
-											"description": { "language": "en", "value": "scientific name of a taxon" },
-											"match": { "type": "label", "language": "en", "text": "taxon" }
-										},
-										{
-											"id": "P234",
-											"label": { "language": "en", "value": "taxon rank" },
-											"description": { "language": "en", "value": "level in a taxonomic hierarchy" },
-											"match": { "type": "label", "language": "en", "text": "taxon" }
-										}
-									]
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "The request cannot be processed",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "object",
-									"properties": {
-										"code": { "type": "string" },
-										"message": { "type": "string" },
-										"context": { "type": "object" }
-									},
-									"required": [ "code", "message" ],
-									"additionalProperties": false
-								},
-								"examples": {
-									"invalid-query-parameter": {
-										"value": {
-											"code": "invalid-query-parameter",
-											"message": "Invalid query parameter: 'language'",
-											"context": { "parameter": "language" }
-										}
-									}
-								}
-							}
-						},
-						"headers": {
-							"Content-Language": {
-								"description": "Language code of the language in which error message is provided",
-								"schema": { "type": "string" },
-								"required": true
-							}
-						}
-					}
+					"200": { "$ref": "./global/responses.json#/SearchPropertySuccess" },
+					"400": { "$ref": "./global/responses.json#/BadRequest" }
 				}
 			}
 		}
