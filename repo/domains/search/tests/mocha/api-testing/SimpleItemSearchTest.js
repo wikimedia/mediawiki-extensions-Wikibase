@@ -115,6 +115,15 @@ describe( 'Simple item search', () => {
 			assert.strictEqual( response.body.code, 'invalid-query-parameter' );
 			assert.deepStrictEqual( response.body.context, { parameter: 'language' } );
 		} );
+
+		it( 'User-Agent empty', async () => {
+			const response = await newSearchRequest( 'en', 'search term' )
+				.withHeader( 'user-agent', '' )
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-user-agent' );
+		} );
 	} );
 
 } );
