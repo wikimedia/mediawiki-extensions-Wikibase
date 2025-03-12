@@ -2,7 +2,8 @@
 	"get": {
 		"operationId": "getPropertyLabelWithFallback",
 		"tags": [ "labels" ],
-		"summary": "Retrieve a Property's label in a specific language, with language fallback. If a label is defined in the requested language, the API responds with a 200 status code and includes the label in the response payload. If a label only exists in a fallback language, the API returns a 307 status code and provides the location of the label",
+		"summary": "Retrieve a Property's label in a specific language, with language fallback",
+		"description": "If a label is defined in the requested language, the API responds with a 200 status code and includes the label in the response payload. If a label only exists in a fallback language, the API returns a 307 status code and provides the location of the label.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },
@@ -14,7 +15,7 @@
 		],
 		"responses": {
 			"200": {
-				"description": "Property's label in a specific language. If a label only exists in a fallback language, the API returns a 307 status code and provides its location",
+				"description": "Property's label in a specific language. If a label only exists in a fallback language, the API returns a 307 status code and provides its location.",
 				"$ref": "./responses.json#/PropertyLabel"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
