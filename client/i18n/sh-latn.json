@@ -8,6 +8,7 @@
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
 	"tooltip-t-wikibase": "Pogledajte povezanu stavku u skladištu podataka",
 	"wikibase-after-page-move": "Premještanje se sada treba odraziti na jezičku vezu u [$1 stavci na Wikipodacima]. Provjerite da li se to dogodilo.",
+	"wikibase-after-page-delete": "Trebalo bi da je veza do stranice uklonjena iz [$1 povezane stavke na {{GRAMMAR:lokativ|{{WBREPONAME}}}}]. Provjerite da li se to dogodilo.",
 	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
 	"wikibase-dataitem": "Stavka na Wikipodacima",
 	"wikibase-editlinks": "Uredi veze",
