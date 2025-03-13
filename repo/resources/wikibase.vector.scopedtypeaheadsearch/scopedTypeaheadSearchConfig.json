@@ -1,0 +1,7 @@
+{
+	"//": "This file only exists for the Jest tests. The real file is generated at runtime based on the ScopedTypeaheadSearchConfig class.",
+	"item": {
+		"namespace": 0,
+		"message": "item-message"
+	}
+}
