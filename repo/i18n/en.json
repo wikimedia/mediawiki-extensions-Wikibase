@@ -548,5 +548,7 @@
 	"special-setlabeldescriptionaliases-parameterized": "Set $1 label, description and aliases",
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-federated-property-api-error-message": "You cannot interact with Federated Properties using this API.",
-	"wikibase-federated-properties-failed-request-api-error-message": "The request failed due to a failed request to the federation source wiki."
+	"wikibase-federated-properties-failed-request-api-error-message": "The request failed due to a failed request to the federation source wiki.",
+	"wikibase-scoped-search-item-scope-name": "Items",
+	"wikibase-scoped-search-property-scope-name": "Properties"
 }

@@ -45,6 +45,7 @@
 <script>
 const { defineComponent, ref, watch } = require( 'vue' );
 const { CdxSelect, CdxTypeaheadSearch } = require( '../../codex.js' );
+const scopedTypeaheadSearchConfig = require( './scopedTypeaheadSearchConfig.json' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -59,28 +60,24 @@ module.exports = exports = defineComponent( {
 		const searchNamespace = ref( 'ns0' );
 		const languageCode = ref( 'en' );
 
+		const menuItemData = Object.keys( scopedTypeaheadSearchConfig ).map( ( entityType ) => ( {
+			// Messages that can be used here:
+			// * wikibase-scoped-search-item-scope-name
+			// * wikibase-scoped-search-property-scope-name
+			// * ... and possibly other messages for additional hook-registered scopes
+			value: entityType, label: mw.msg( scopedTypeaheadSearchConfig[ entityType ].message )
+		} ) );
 		const menuItems = [
 			{
 				label: 'Search entities',
 				description: 'Find different types of Wikidata entries',
-				items: [
-					{ label: 'Items', value: 'item' },
-					{ label: 'Properties', value: 'property' },
-					{ label: 'Lexemes', value: 'lexeme' },
-					{ label: 'Entity schemas', value: 'entity-schema' }
-				]
+				items: menuItemData
 			}
 		];
 		const prefixToSelection = {
 			'P:': 'property',
 			'L:': 'lexeme',
 			'E:': 'entity-schema'
-		};
-		const selectionToNamespace = {
-			item: 'ns0',
-			property: 'ns120',
-			lexeme: 'ns146',
-			'entity-schema': 'ns640'
 		};
 
 		watch( prefix, ( newPrefix ) => {
@@ -89,7 +86,7 @@ module.exports = exports = defineComponent( {
 			}
 		} );
 		watch( selection, ( newSelection ) => {
-			searchNamespace.value = selectionToNamespace[ newSelection ];
+			searchNamespace.value = 'ns' + scopedTypeaheadSearchConfig[ newSelection ].namespace;
 
 			// Clear prefix if it doesn't match
 			// This happens if the user changes the selection after typing a prefix.
