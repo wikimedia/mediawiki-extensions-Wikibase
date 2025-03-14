@@ -80,8 +80,10 @@ class MediaWikiSearchEngine implements ItemSearchEngine {
 
 					return new ItemSearchResult(
 						new ItemId( $result->getTitle()->getText() ),
-						$labelData ? new Label( $labelData['language'], $labelData['value'] ) : null,
-						$descriptionData ? new Description( $descriptionData['language'], $descriptionData['value'] ) : null
+						$labelData && $labelData['value'] ?
+							new Label( $labelData['language'], $labelData['value'] ) : null,
+						$descriptionData && $descriptionData['value'] ?
+							new Description( $descriptionData['language'], $descriptionData['value'] ) : null
 					);
 				},
 				$results

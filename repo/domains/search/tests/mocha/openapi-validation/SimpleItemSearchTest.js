@@ -22,7 +22,7 @@ describe( 'Simple item search', () => {
 	const itemEnLabel = utils.title( 'english-label' );
 
 	before( async () => {
-		await createItem( { labels: { en: itemEnLabel }, descriptions: { en: 'some description' } } );
+		await createItem( { labels: { en: itemEnLabel } } );
 
 		await wiki.runAllJobs();
 		await new Promise( ( resolve ) => {
