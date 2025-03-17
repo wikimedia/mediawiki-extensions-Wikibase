@@ -27,6 +27,7 @@
 			"Hello71",
 			"Ilona Tobelem",
 			"Immortal",
+			"JLTRY",
 			"Jean-Frédéric",
 			"Jhammock",
 			"Jitrixis",
@@ -594,5 +595,7 @@
 	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, la description et les alias de $1",
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-federated-property-api-error-message": "Vous ne pouvez pas interagir avec les propriétés fédérées en utilisant cette API.",
-	"wikibase-federated-properties-failed-request-api-error-message": "La requête a échoué en raison de l’échec d’une requête au wiki source fédéré."
+	"wikibase-federated-properties-failed-request-api-error-message": "La requête a échoué en raison de l’échec d’une requête au wiki source fédéré.",
+	"wikibase-scoped-search-item-scope-name": "Éléments",
+	"wikibase-scoped-search-property-scope-name": "Propriétés"
 }

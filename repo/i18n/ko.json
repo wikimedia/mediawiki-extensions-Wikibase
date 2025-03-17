@@ -427,5 +427,7 @@
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "이 메시지를 더 이상 보지 않습니다",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "다시 시도",
 	"wikibase-federated-properties-edit-request-failed-notice-header": "편집 실패",
-	"wikibase-federated-properties-federated-property-api-error-message": "이 API를 사용하여 Federated Properties와 통신할 수 없습니다."
+	"wikibase-federated-properties-federated-property-api-error-message": "이 API를 사용하여 Federated Properties와 통신할 수 없습니다.",
+	"wikibase-scoped-search-item-scope-name": "항목",
+	"wikibase-scoped-search-property-scope-name": "속성"
 }

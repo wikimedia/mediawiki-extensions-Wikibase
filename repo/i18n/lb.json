@@ -370,5 +370,7 @@
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Nach eng Kéier probéieren",
 	"special-setaliases-parameterized": "Aliase fir $1 festleeën",
 	"special-setlabel-parameterized": "Etikett fir $1 festleeën",
-	"special-setdescription-parameterized": "Beschreiwung fir $1 festleeën"
+	"special-setdescription-parameterized": "Beschreiwung fir $1 festleeën",
+	"wikibase-scoped-search-item-scope-name": "Elementer",
+	"wikibase-scoped-search-property-scope-name": "Eegenschaften"
 }

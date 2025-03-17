@@ -33,7 +33,7 @@
 	"apihelp-query+pageterms-param-language": "Le codice del lingua in le qual obtener terminos. Si non specificate, le lingua del usator es usate.",
 	"apihelp-query+pageterms-param-terms": "Le typos del terminos a obtener, p.ex. 'description', cata un restituite como matrice de catenas con claves secundo lor typo, p.ex. {\"description\": [\"foo\"]}. Si non es specificate, tote le typos se restitue.",
 	"apihelp-query+description-summary": "Obtener un curte description, alias subtitulo, que explica le subjecto del pagina de destination.",
-	"apihelp-query+description-extended-description": "Le description es in texto simple, sur un sol linea, ma pro le resto es arbitrari (pote includer etiquettas HTML crude, le quales tamben deberea esser interpretate como texto simple). Non debe esser usate in HTML sin escappar!",
+	"apihelp-query+description-extended-description": "Le description es in texto simple, sur un sol linea, ma pro le resto es arbitrari (pote includer etiquettas HTML brute, le quales tamben deberea esser interpretate como texto simple). Non debe esser usate in HTML sin escappar!",
 	"apihelp-query+description-param-prefersource": "Qual fonte de descriptiones preferer si presente:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Descriptiones local via le function del analysator syntactic <code><nowiki>{{SHORTDESC:...}}</nowiki></code> in le wikitexto del pagina.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descriptiones central del elemento associate de {{WBREPONAME}}.",

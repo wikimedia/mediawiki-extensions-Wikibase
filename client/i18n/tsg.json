@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Zetareyy"
+		]
+	},
+	"wikibase-dataitem": "item {{WBREPONAME}}",
+	"wikibase-editlinks": "Ba'guhun in manga link",
+	"wikibase-addlinkstitle": "Dugangun in manga link ha bahasa dugaing",
+	"wikibase-linkitem-addlinks": "Magdugang sin link",
+	"wikibase-linkitem-title": "Link'un ha gikap",
+	"wikibase-linkitem-linkpage": "Link'un ha gikap",
+	"wikibase-linkitem-selectlink": "Pīꞌ ba sin site iban gikap amu in kabayaan niyu link'un ha gikap ini.",
+	"wikibase-linkitem-input-site": "Bahasa:",
+	"wikibase-linkitem-input-page": "Pahina:"
+}

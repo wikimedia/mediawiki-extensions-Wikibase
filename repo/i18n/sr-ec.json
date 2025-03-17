@@ -411,5 +411,7 @@
 	"special-setaliases-parameterized": "Постави псеудониме $1",
 	"special-setlabel-parameterized": "Постави назив $1",
 	"special-setdescription-parameterized": "Постави опис $1",
-	"special-setlabeldescriptionaliases-parameterized": "Постави назив, опис и псеудоним за $1"
+	"special-setlabeldescriptionaliases-parameterized": "Постави назив, опис и псеудоним за $1",
+	"wikibase-scoped-search-item-scope-name": "Ставке",
+	"wikibase-scoped-search-property-scope-name": "Својства"
 }

@@ -556,5 +556,7 @@
 	"special-setdescription-parameterized": "Beschreibung für $1 festlegen",
 	"special-setlabeldescriptionaliases-parameterized": "Bezeichnung, Beschreibung und Aliasse für $1 festlegen",
 	"wikibase-federated-properties-federated-property-api-error-message": "Du kannst mit dieser API nicht mit föderierten Eigenschaften interagieren.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Die Anfrage ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen."
+	"wikibase-federated-properties-failed-request-api-error-message": "Die Anfrage ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen.",
+	"wikibase-scoped-search-item-scope-name": "Objekte",
+	"wikibase-scoped-search-property-scope-name": "Eigenschaften"
 }
