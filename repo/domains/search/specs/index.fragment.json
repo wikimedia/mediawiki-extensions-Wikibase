@@ -10,7 +10,7 @@
 			"get": {
 				"operationId": "simpleItemSearch",
 				"tags": [ "item search" ],
-				"summary": "[WIP] Simple Item search by label",
+				"summary": "[WIP] Simple Item search by label and aliases",
 				"description": "This endpoint is currently in development and is not recommended for production use",
 				"parameters": [
 					{
@@ -83,7 +83,9 @@
 												"required": [ "id", "label", "description", "match" ]
 											}
 										}
-									}
+									},
+									"additionalProperties": false,
+									"required": [ "results" ]
 								},
 								"example": {
 									"results": [
