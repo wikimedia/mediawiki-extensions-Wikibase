@@ -13,7 +13,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliasesInLanguage
 use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyAliasesInLanguage\GetPropertyAliasesInLanguageResponse;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -42,12 +42,12 @@ class GetPropertyAliasesInLanguageRouteHandler extends SimpleHandler {
 
 	public static function factory(): self {
 		return new self(
-			WbRestApi::getGetPropertyAliasesInLanguage(),
+			WbCrud::getGetPropertyAliasesInLanguage(),
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
-				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
 			] ),

@@ -200,7 +200,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		if ( $routeHandler['useCaseResponse'] ) { // "Remove" use cases don't return anything
 			$useCase->method( 'execute' )->willReturn( $routeHandler['useCaseResponse'] );
 		}
-		$this->setService( "WbRestApi.{$this->getUseCaseName( $routeHandler['useCase'] )}", $useCase );
+		$this->setService( "WbCrud.{$this->getUseCaseName( $routeHandler['useCase'] )}", $useCase );
 
 		/** @var Response $response */
 		$response = $this->newHandlerWithValidRequest(
@@ -1153,8 +1153,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$useCase = $this->createStub( $routeHandler['useCase'] );
 		$useCase->method( 'execute' )->willThrowException( $error );
 
-		$this->setService( "WbRestApi.{$this->getUseCaseName( $routeHandler['useCase'] )}", $useCase );
-		$this->setService( 'WbRestApi.ErrorReporter', $this->createStub( ErrorReporter::class ) );
+		$this->setService( "WbCrud.{$this->getUseCaseName( $routeHandler['useCase'] )}", $useCase );
+		$this->setService( 'WbCrud.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		return $this->newHandlerWithValidRequest(
 			self::getRouteForUseCase( $routeHandler['useCase'] ),
@@ -1227,7 +1227,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			new BasicEntityIdParser(),
 			new ConditionalHeaderUtil()
 		);
-		$this->setService( 'WbRestApi.PreconditionMiddlewareFactory', $preconditionMiddlewareFactory );
+		$this->setService( 'WbCrud.PreconditionMiddlewareFactory', $preconditionMiddlewareFactory );
 	}
 
 	private function stubStatementRedirectMiddlewareFactory(): void {
@@ -1246,7 +1246,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 		$factory = $this->createStub( StatementRedirectMiddlewareFactory::class );
 		$factory->method( 'newStatementRedirectMiddleware' )->willReturn( $middleware );
-		$this->setService( 'WbRestApi.StatementRedirectMiddlewareFactory', $factory );
+		$this->setService( 'WbCrud.StatementRedirectMiddlewareFactory', $factory );
 	}
 
 	private function stubSiteLinkGlobalIdentifiersProvider(): void {

@@ -151,7 +151,7 @@ class ValidatingRequestDeserializer	implements
 	PatchSitelinksValidator,
 	CreateItemValidator
 {
-	private const PREFIX = 'WbRestApi.RequestValidation.';
+	private const PREFIX = 'WbCrud.RequestValidation.';
 	public const ITEM_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'ItemIdRequestValidatingDeserializer';
 	public const PROPERTY_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'PropertyIdRequestValidatingDeserializer';
 	public const STATEMENT_ID_REQUEST_VALIDATING_DESERIALIZER = self::PREFIX . 'StatementIdRequestValidatingDeserializer';

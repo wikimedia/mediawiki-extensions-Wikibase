@@ -94,427 +94,427 @@ use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 /**
  * @license GPL-2.0-or-later
  */
-class WbRestApi {
+class WbCrud {
 
 	public static function getGetItem( ?ContainerInterface $services = null ): GetItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItem' );
+			->get( 'WbCrud.GetItem' );
 	}
 
 	public static function getCreateItem( ?ContainerInterface $services = null ): CreateItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.CreateItem' );
+			->get( 'WbCrud.CreateItem' );
 	}
 
 	public static function getGetSitelinks( ?ContainerInterface $services = null ): GetSitelinks {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetSitelinks' );
+			->get( 'WbCrud.GetSitelinks' );
 	}
 
 	public static function getGetSitelink( ?ContainerInterface $services = null ): GetSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetSitelink' );
+			->get( 'WbCrud.GetSitelink' );
 	}
 
 	public static function getGetItemLabels( ?ContainerInterface $services = null ): GetItemLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemLabels' );
+			->get( 'WbCrud.GetItemLabels' );
 	}
 
 	public static function getGetItemLabel( ?ContainerInterface $services = null ): GetItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemLabel' );
+			->get( 'WbCrud.GetItemLabel' );
 	}
 
 	public static function getGetItemLabelWithFallback( ?ContainerInterface $services = null ): GetItemLabelWithFallback {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemLabelWithFallback' );
+			->get( 'WbCrud.GetItemLabelWithFallback' );
 	}
 
 	public static function getGetItemDescriptions( ?ContainerInterface $services = null ): GetItemDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemDescriptions' );
+			->get( 'WbCrud.GetItemDescriptions' );
 	}
 
 	public static function getGetItemDescription( ?ContainerInterface $services = null ): GetItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemDescription' );
+			->get( 'WbCrud.GetItemDescription' );
 	}
 
 	public static function getGetItemDescriptionWithFallback( ?ContainerInterface $services = null ): GetItemDescriptionWithFallback {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemDescriptionWithFallback' );
+			->get( 'WbCrud.GetItemDescriptionWithFallback' );
 	}
 
 	public static function getGetItemAliases( ?ContainerInterface $services = null ): GetItemAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemAliases' );
+			->get( 'WbCrud.GetItemAliases' );
 	}
 
 	public static function getGetItemAliasesInLanguage( ?ContainerInterface $services = null ): GetItemAliasesInLanguage {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemAliasesInLanguage' );
+			->get( 'WbCrud.GetItemAliasesInLanguage' );
 	}
 
 	public static function getSetItemLabel( ?ContainerInterface $services = null ): SetItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetItemLabel' );
+			->get( 'WbCrud.SetItemLabel' );
 	}
 
 	public static function getSetPropertyLabel( ?ContainerInterface $services = null ): SetPropertyLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetPropertyLabel' );
+			->get( 'WbCrud.SetPropertyLabel' );
 	}
 
 	public static function getSetItemDescription( ?ContainerInterface $services = null ): SetItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetItemDescription' );
+			->get( 'WbCrud.SetItemDescription' );
 	}
 
 	public static function getSetPropertyDescription( ?ContainerInterface $services = null ): SetPropertyDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetPropertyDescription' );
+			->get( 'WbCrud.SetPropertyDescription' );
 	}
 
 	public static function getGetItemStatements( ?ContainerInterface $services = null ): GetItemStatements {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetItemStatements' );
+			->get( 'WbCrud.GetItemStatements' );
 	}
 
 	public static function getGetItemStatement( ?ContainerInterface $services = null ): GetItemStatement {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.GetItemStatement' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.GetItemStatement' );
 	}
 
 	public static function getGetStatement( ?ContainerInterface $services = null ): GetStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetStatement' );
+			->get( 'WbCrud.GetStatement' );
 	}
 
 	public static function getAddItemStatement( ?ContainerInterface $services = null ): AddItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AddItemStatement' );
+			->get( 'WbCrud.AddItemStatement' );
 	}
 
 	public static function getAddPropertyStatement( ?ContainerInterface $services = null ): AddPropertyStatement {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyStatement' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.AddPropertyStatement' );
 	}
 
 	public static function getReplaceItemStatement( ?ContainerInterface $services = null ): ReplaceItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ReplaceItemStatement' );
+			->get( 'WbCrud.ReplaceItemStatement' );
 	}
 
 	public static function getReplacePropertyStatement( ?ContainerInterface $services = null ): ReplacePropertyStatement {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ReplacePropertyStatement' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.ReplacePropertyStatement' );
 	}
 
 	public static function getReplaceStatement( ?ContainerInterface $services = null ): ReplaceStatement {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ReplaceStatement' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.ReplaceStatement' );
 	}
 
 	public static function getRemoveItemLabel( ?ContainerInterface $services = null ): RemoveItemLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemoveItemLabel' );
+			->get( 'WbCrud.RemoveItemLabel' );
 	}
 
 	public static function getRemovePropertyLabel( ?ContainerInterface $services = null ): RemovePropertyLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemovePropertyLabel' );
+			->get( 'WbCrud.RemovePropertyLabel' );
 	}
 
 	public static function getRemoveItemDescription( ?ContainerInterface $services = null ): RemoveItemDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemoveItemDescription' );
+			->get( 'WbCrud.RemoveItemDescription' );
 	}
 
 	public static function getRemovePropertyDescription( ?ContainerInterface $services = null ): RemovePropertyDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemovePropertyDescription' );
+			->get( 'WbCrud.RemovePropertyDescription' );
 	}
 
 	public static function getRemoveItemStatement( ?ContainerInterface $services = null ): RemoveItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemoveItemStatement' );
+			->get( 'WbCrud.RemoveItemStatement' );
 	}
 
 	public static function getRemovePropertyStatement( ?ContainerInterface $services = null ): RemovePropertyStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemovePropertyStatement' );
+			->get( 'WbCrud.RemovePropertyStatement' );
 	}
 
 	public static function getRemoveStatement( ?ContainerInterface $services = null ): RemoveStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.RemoveStatement' );
+			->get( 'WbCrud.RemoveStatement' );
 	}
 
 	public static function getPreconditionMiddlewareFactory( ?ContainerInterface $services = null ): PreconditionMiddlewareFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PreconditionMiddlewareFactory' );
+			->get( 'WbCrud.PreconditionMiddlewareFactory' );
 	}
 
 	public static function getPatchStatement( ?ContainerInterface $services = null ): PatchStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchStatement' );
+			->get( 'WbCrud.PatchStatement' );
 	}
 
 	public static function getPatchItemStatement( ?ContainerInterface $services = null ): PatchItemStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchItemStatement' );
+			->get( 'WbCrud.PatchItemStatement' );
 	}
 
 	public static function getPatchPropertyStatement( ?ContainerInterface $services = null ): PatchPropertyStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchPropertyStatement' );
+			->get( 'WbCrud.PatchPropertyStatement' );
 	}
 
 	public static function getPatchPropertyLabels( ?ContainerInterface $services = null ): PatchPropertyLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchPropertyLabels' );
+			->get( 'WbCrud.PatchPropertyLabels' );
 	}
 
 	public static function getPatchPropertyDescriptions( ?ContainerInterface $services = null ): PatchPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchPropertyDescriptions' );
+			->get( 'WbCrud.PatchPropertyDescriptions' );
 	}
 
 	public static function getEntityUpdater( ?ContainerInterface $services = null ): EntityUpdater {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.EntityUpdater' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.EntityUpdater' );
 	}
 
 	public static function getItemUpdater( ?ContainerInterface $services = null ): EntityUpdaterItemUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ItemUpdater' );
+			->get( 'WbCrud.ItemUpdater' );
 	}
 
 	public static function getPropertyUpdater( ?ContainerInterface $services = null ): EntityUpdaterPropertyUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PropertyUpdater' );
+			->get( 'WbCrud.PropertyUpdater' );
 	}
 
 	public static function getStatementUpdater( ?ContainerInterface $services = null ): StatementUpdater {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementUpdater' );
+			->get( 'WbCrud.StatementUpdater' );
 	}
 
 	public static function getStatementRemover( ?ContainerInterface $services = null ): StatementRemover {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementRemover' );
+			->get( 'WbCrud.StatementRemover' );
 	}
 
 	public static function getItemDataRetriever( ?ContainerInterface $services = null ): EntityRevisionLookupItemDataRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.ItemDataRetriever' );
+			->get( 'WbCrud.ItemDataRetriever' );
 	}
 
 	public static function getSitelinkDeserializer( ?ContainerInterface $services = null ): SitelinkDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SitelinkDeserializer' );
+			->get( 'WbCrud.SitelinkDeserializer' );
 	}
 
 	public static function getStatementRetriever( ?ContainerInterface $services = null ): EntityRevisionLookupStatementRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementRetriever' );
+			->get( 'WbCrud.StatementRetriever' );
 	}
 
 	public static function getStatementSerializer( ?ContainerInterface $services = null ): StatementSerializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementSerializer' );
+			->get( 'WbCrud.StatementSerializer' );
 	}
 
 	public static function getStatementDeserializer( ?ContainerInterface $services = null ): StatementDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementDeserializer' );
+			->get( 'WbCrud.StatementDeserializer' );
 	}
 
 	public static function getStatementRedirectMiddlewareFactory(
 		?ContainerInterface $services = null
 	): StatementRedirectMiddlewareFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.StatementRedirectMiddlewareFactory' );
+			->get( 'WbCrud.StatementRedirectMiddlewareFactory' );
 	}
 
 	public static function getUnexpectedErrorHandlerMiddleware( ?ContainerInterface $services = null ): UnexpectedErrorHandlerMiddleware {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.UnexpectedErrorHandlerMiddleware' );
+			->get( 'WbCrud.UnexpectedErrorHandlerMiddleware' );
 	}
 
 	public static function getPatchItem( ?ContainerInterface $services = null ): PatchItem {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchItem' );
+			->get( 'WbCrud.PatchItem' );
 	}
 
 	public static function getPatchItemLabels( ?ContainerInterface $services = null ): PatchItemLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchItemLabels' );
+			->get( 'WbCrud.PatchItemLabels' );
 	}
 
 	public static function getPatchItemDescriptions( ?ContainerInterface $services = null ): PatchItemDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchItemDescriptions' );
+			->get( 'WbCrud.PatchItemDescriptions' );
 	}
 
 	public static function getPatchItemAliases( ?ContainerInterface $services = null ): PatchItemAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchItemAliases' );
+			->get( 'WbCrud.PatchItemAliases' );
 	}
 
 	public static function getPatchProperty( ?ContainerInterface $services = null ): PatchProperty {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchProperty' );
+			->get( 'WbCrud.PatchProperty' );
 	}
 
 	public static function getPatchPropertyAliases( ?ContainerInterface $services = null ): PatchPropertyAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchPropertyAliases' );
+			->get( 'WbCrud.PatchPropertyAliases' );
 	}
 
 	public static function getPatchSitelinks( ?ContainerInterface $services = null ): PatchSitelinks {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PatchSitelinks' );
+			->get( 'WbCrud.PatchSitelinks' );
 	}
 
 	public static function getAssertUserIsAuthorized( ?ContainerInterface $services = null ): AssertUserIsAuthorized {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AssertUserIsAuthorized' );
+			->get( 'WbCrud.AssertUserIsAuthorized' );
 	}
 
 	public static function getGetLatestItemRevisionMetadata( ?ContainerInterface $services = null ): GetLatestItemRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetLatestItemRevisionMetadata' );
+			->get( 'WbCrud.GetLatestItemRevisionMetadata' );
 	}
 
 	public static function getAssertItemExists( ?ContainerInterface $services = null ): AssertItemExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AssertItemExists' );
+			->get( 'WbCrud.AssertItemExists' );
 	}
 
 	public static function getAssertPropertyExists( ?ContainerInterface $services = null ): AssertPropertyExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AssertPropertyExists' );
+			->get( 'WbCrud.AssertPropertyExists' );
 	}
 
 	public static function getAssertStatementSubjectExists( ?ContainerInterface $services = null ): AssertStatementSubjectExists {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AssertStatementSubjectExists' );
+			->get( 'WbCrud.AssertStatementSubjectExists' );
 	}
 
 	public static function getGetProperty( ?ContainerInterface $services = null ): GetProperty {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetProperty' );
+			->get( 'WbCrud.GetProperty' );
 	}
 
 	public static function getCreateProperty( ?ContainerInterface $services = null ): CreateProperty {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.CreateProperty' );
+			->get( 'WbCrud.CreateProperty' );
 	}
 
 	public static function getPropertyDataRetriever( ?ContainerInterface $services = null ): EntityRevisionLookupPropertyDataRetriever {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.PropertyDataRetriever' );
+			->get( 'WbCrud.PropertyDataRetriever' );
 	}
 
 	public static function getGetLatestPropertyRevisionMetadata( ?ContainerInterface $services = null ): GetLatestPropertyRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetLatestPropertyRevisionMetadata' );
+			->get( 'WbCrud.GetLatestPropertyRevisionMetadata' );
 	}
 
 	public static function getGetLatestStatementSubjectRevisionMetadata(
 		?ContainerInterface $services = null
 	): GetLatestStatementSubjectRevisionMetadata {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetLatestStatementSubjectRevisionMetadata' );
+			->get( 'WbCrud.GetLatestStatementSubjectRevisionMetadata' );
 	}
 
 	public static function getGetPropertyStatement( ?ContainerInterface $services = null ): GetPropertyStatement {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyStatement' );
+			->get( 'WbCrud.GetPropertyStatement' );
 	}
 
 	public static function getGetPropertyStatements( ?ContainerInterface $services = null ): GetPropertyStatements {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyStatements' );
+			->get( 'WbCrud.GetPropertyStatements' );
 	}
 
 	public static function getGetPropertyLabel( ?ContainerInterface $services = null ): GetPropertyLabel {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyLabel' );
+			->get( 'WbCrud.GetPropertyLabel' );
 	}
 
 	public static function getGetPropertyLabelWithFallback( ?ContainerInterface $services = null ): GetPropertyLabelWithFallback {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyLabelWithFallback' );
+			->get( 'WbCrud.GetPropertyLabelWithFallback' );
 	}
 
 	public static function getGetPropertyLabels( ?ContainerInterface $services = null ): GetPropertyLabels {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyLabels' );
+			->get( 'WbCrud.GetPropertyLabels' );
 	}
 
 	public static function getGetPropertyDescription( ?ContainerInterface $services = null ): GetPropertyDescription {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyDescription' );
+			->get( 'WbCrud.GetPropertyDescription' );
 	}
 
 	public static function getGetPropertyDescriptions( ?ContainerInterface $services = null ): GetPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyDescriptions' );
+			->get( 'WbCrud.GetPropertyDescriptions' );
 	}
 
 	public static function getGetPropertyDescriptionWithFallback(
 		?ContainerInterface $services = null
 	): GetPropertyDescriptionWithFallback {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyDescriptionWithFallback' );
+			->get( 'WbCrud.GetPropertyDescriptionWithFallback' );
 	}
 
 	public static function getGetPropertyAliasesInLanguage( ?ContainerInterface $services = null ): GetPropertyAliasesInLanguage {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyAliasesInLanguage' );
+			->get( 'WbCrud.GetPropertyAliasesInLanguage' );
 	}
 
 	public static function getGetPropertyAliases( ?ContainerInterface $services = null ): GetPropertyAliases {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.GetPropertyAliases' );
+			->get( 'WbCrud.GetPropertyAliases' );
 	}
 
 	public static function getValidatingRequestDeserializer( ?ContainerInterface $services = null ): ValidatingRequestDeserializer {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.ValidatingRequestDeserializer' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.ValidatingRequestDeserializer' );
 	}
 
 	public static function getTermLookupEntityTermsRetriever( ?ContainerInterface $services = null ): TermLookupEntityTermsRetriever {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.TermLookupEntityTermsRetriever' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.TermLookupEntityTermsRetriever' );
 	}
 
 	public static function getAddItemAliasesInLanguage( ?ContainerInterface $services = null ): AddItemAliasesInLanguage {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddItemAliasesInLanguage' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.AddItemAliasesInLanguage' );
 	}
 
 	public static function getAddPropertyAliasesInLanguage( ?ContainerInterface $services = null ): AddPropertyAliasesInLanguage {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.AddPropertyAliasesInLanguage' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.AddPropertyAliasesInLanguage' );
 	}
 
 	public static function getRemoveSitelink( ?ContainerInterface $services = null ): RemoveSitelink {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbRestApi.RemoveSitelink' );
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.RemoveSitelink' );
 	}
 
 	public static function getSetSitelink( ?ContainerInterface $services = null ): SetSitelink {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.SetSitelink' );
+			->get( 'WbCrud.SetSitelink' );
 	}
 
 	public static function getLabelLanguageCodeValidator( ?ContainerInterface $services = null ): LabelLanguageCodeValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.LabelLanguageCodeValidator' );
+			->get( 'WbCrud.LabelLanguageCodeValidator' );
 	}
 
 	public static function getDescriptionLanguageCodeValidator( ?ContainerInterface $services = null ): DescriptionLanguageCodeValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.DescriptionLanguageCodeValidator' );
+			->get( 'WbCrud.DescriptionLanguageCodeValidator' );
 	}
 
 	public static function getAliasLanguageCodeValidator( ?ContainerInterface $services = null ): AliasLanguageCodeValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbRestApi.AliasLanguageCodeValidator' );
+			->get( 'WbCrud.AliasLanguageCodeValidator' );
 	}
 
 	public static function getEditMetadataRequestValidatingDeserializer(

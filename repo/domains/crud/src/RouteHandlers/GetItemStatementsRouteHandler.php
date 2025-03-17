@@ -16,7 +16,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemStatements\GetItemSta
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -52,14 +52,14 @@ class GetItemStatementsRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getGetItemStatements(),
-			new StatementListSerializer( WbRestApi::getStatementSerializer() ),
+			WbCrud::getGetItemStatements(),
+			new StatementListSerializer( WbCrud::getStatementSerializer() ),
 			$responseFactory,
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
-				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),
 			] )

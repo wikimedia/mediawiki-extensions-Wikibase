@@ -22,7 +22,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\EditSummaryFormatter;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -46,7 +46,7 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals(
 			$newRevision->getEntity(),
-			WbRestApi::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
+			WbCrud::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
 		);
 	}
 
@@ -69,7 +69,7 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEquals(
 			$newRevision->getEntity(),
-			WbRestApi::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
+			WbCrud::getItemDataRetriever()->getItemWriteModel( $createdItem->getId() ),
 		);
 	}
 

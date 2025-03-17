@@ -19,7 +19,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -57,15 +57,15 @@ class PatchPropertyLabelsRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		$responseFactory = new ResponseFactory();
 		return new self(
-			WbRestApi::getPatchPropertyLabels(),
+			WbCrud::getPatchPropertyLabels(),
 			new LabelsSerializer(),
 			$responseFactory,
 			new MiddlewareHandler( [
-				WbRestApi::getUnexpectedErrorHandlerMiddleware(),
+				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
-				WbRestApi::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
+				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::PROPERTY_ID_PATH_PARAM )
 				),
 				new TempUserCreationResponseHeaderMiddleware( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) ),

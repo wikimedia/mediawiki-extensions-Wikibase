@@ -190,7 +190,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidato
 use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
-use Wikibase\Repo\Domains\Crud\WbRestApi;
+use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -199,12 +199,12 @@ return [
 
 	VRD::ALIAS_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getAliasLanguageCodeValidator( $services ) );
+			return new LanguageCodeRequestValidatingDeserializer( WbCrud::getAliasLanguageCodeValidator( $services ) );
 		},
 
 	VRD::DESCRIPTION_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getDescriptionLanguageCodeValidator( $services ) );
+			return new LanguageCodeRequestValidatingDeserializer( WbCrud::getDescriptionLanguageCodeValidator( $services ) );
 		},
 
 	VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER =>
@@ -232,7 +232,7 @@ return [
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services )
 				),
-				WbRestApi::getItemDataRetriever( $services )
+				WbCrud::getItemDataRetriever( $services )
 			);
 		},
 
@@ -254,7 +254,7 @@ return [
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services )
 				),
-				WbRestApi::getItemDataRetriever( $services )
+				WbCrud::getItemDataRetriever( $services )
 			);
 		},
 
@@ -264,7 +264,7 @@ return [
 				new ItemValidator(
 					new LabelsSyntaxValidator(
 						new LabelsDeserializer(),
-						WbRestApi::getLabelLanguageCodeValidator( $services )
+						WbCrud::getLabelLanguageCodeValidator( $services )
 					),
 					new ItemLabelsContentsValidator(
 						new TermValidatorFactoryItemLabelValidator(
@@ -274,7 +274,7 @@ return [
 					),
 					new DescriptionsSyntaxValidator(
 						new DescriptionsDeserializer(),
-						WbRestApi::getDescriptionLanguageCodeValidator( $services )
+						WbCrud::getDescriptionLanguageCodeValidator( $services )
 					),
 					new ItemDescriptionsContentsValidator(
 						new TermValidatorFactoryItemDescriptionValidator(
@@ -284,16 +284,16 @@ return [
 					),
 					new AliasesValidator(
 						new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-						WbRestApi::getAliasLanguageCodeValidator( $services ),
+						WbCrud::getAliasLanguageCodeValidator( $services ),
 						new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 					),
-					new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
+					new StatementsValidator( new StatementValidator( WbCrud::getStatementDeserializer( $services ) ) ),
 					new SitelinksValidator(
 						new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 							WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 						) ),
 						new SiteLinkLookupSitelinkValidator(
-							WbRestApi::getSitelinkDeserializer( $services ),
+							WbCrud::getSitelinkDeserializer( $services ),
 							WikibaseRepo::getStore( $services )->newSiteLinkStore()
 						),
 					)
@@ -307,7 +307,7 @@ return [
 
 	VRD::LABEL_LANGUAGE_CODE_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): LanguageCodeRequestValidatingDeserializer {
-			return new LanguageCodeRequestValidatingDeserializer( WbRestApi::getLabelLanguageCodeValidator( $services ) );
+			return new LanguageCodeRequestValidatingDeserializer( WbCrud::getLabelLanguageCodeValidator( $services ) );
 		},
 
 	VRD::PATCH_REQUEST_VALIDATING_DESERIALIZER => function (): PatchRequestValidatingDeserializer {
@@ -326,7 +326,7 @@ return [
 		function ( MediaWikiServices $services ): PropertyDescriptionEditRequestValidatingDeserializer {
 			return new PropertyDescriptionEditRequestValidatingDeserializer(
 				new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				WbRestApi::getPropertyDataRetriever( $services )
+				WbCrud::getPropertyDataRetriever( $services )
 			);
 		},
 
@@ -361,7 +361,7 @@ return [
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
 				),
-				WbRestApi::getPropertyDataRetriever( $services )
+				WbCrud::getPropertyDataRetriever( $services )
 			);
 		},
 
@@ -373,7 +373,7 @@ return [
 		function( MediaWikiServices $services ): SitelinkEditRequestValidatingDeserializer {
 			return new SitelinkEditRequestValidatingDeserializer(
 				new SiteLinkLookupSitelinkValidator(
-					WbRestApi::getSitelinkDeserializer( $services ),
+					WbCrud::getSitelinkDeserializer( $services ),
 					WikibaseRepo::getStore( $services )->newSiteLinkStore()
 				)
 			);
@@ -400,55 +400,55 @@ return [
 	VRD::STATEMENT_SERIALIZATION_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): StatementSerializationRequestValidatingDeserializer {
 			return new StatementSerializationRequestValidatingDeserializer(
-				new StatementValidator( WbRestApi::getStatementDeserializer( $services ) )
+				new StatementValidator( WbCrud::getStatementDeserializer( $services ) )
 			);
 		},
 
-	'WbRestApi.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {
+	'WbCrud.AddItemAliasesInLanguage' => function( MediaWikiServices $services ): AddItemAliasesInLanguage {
 		return new AddItemAliasesInLanguage(
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
+	'WbCrud.AddItemStatement' => function( MediaWikiServices $services ): AddItemStatement {
 		return new AddItemStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services ),
 			new GuidGenerator(),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.AddPropertyAliasesInLanguage' => function( MediaWikiServices $services ): AddPropertyAliasesInLanguage {
+	'WbCrud.AddPropertyAliasesInLanguage' => function( MediaWikiServices $services ): AddPropertyAliasesInLanguage {
 		return new AddPropertyAliasesInLanguage(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services ),
 		);
 	},
 
-	'WbRestApi.AddPropertyStatement' => function( MediaWikiServices $services ): AddPropertyStatement {
+	'WbCrud.AddPropertyStatement' => function( MediaWikiServices $services ): AddPropertyStatement {
 		$statementReadModelConverter = new StatementReadModelConverter(
 			WikibaseRepo::getStatementGuidParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services )
 		);
 		return new AddPropertyStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
 			new EntityRevisionLookupPropertyDataRetriever(
 				WikibaseRepo::getEntityRevisionLookup( $services ),
 				$statementReadModelConverter
 			),
 			new GuidGenerator(),
-			WbRestApi::getPropertyUpdater( $services ),
+			WbCrud::getPropertyUpdater( $services ),
 			new AssertUserIsAuthorized(
 				new WikibaseEntityPermissionChecker(
 					WikibaseRepo::getEntityPermissionChecker( $services ),
@@ -458,23 +458,23 @@ return [
 		);
 	},
 
-	'WbRestApi.AliasLanguageCodeValidator' => function( MediaWikiServices $services ): AliasLanguageCodeValidator {
+	'WbCrud.AliasLanguageCodeValidator' => function( MediaWikiServices $services ): AliasLanguageCodeValidator {
 		return new ValueValidatorLanguageCodeValidator( WikibaseRepo::getTermValidatorFactory( $services )->getAliasLanguageValidator() );
 	},
 
-	'WbRestApi.AssertItemExists' => function( MediaWikiServices $services ): AssertItemExists {
-		return new AssertItemExists( WbRestApi::getGetLatestItemRevisionMetadata( $services ) );
+	'WbCrud.AssertItemExists' => function( MediaWikiServices $services ): AssertItemExists {
+		return new AssertItemExists( WbCrud::getGetLatestItemRevisionMetadata( $services ) );
 	},
 
-	'WbRestApi.AssertPropertyExists' => function( MediaWikiServices $services ): AssertPropertyExists {
-		return new AssertPropertyExists( WbRestApi::getGetLatestPropertyRevisionMetadata( $services ) );
+	'WbCrud.AssertPropertyExists' => function( MediaWikiServices $services ): AssertPropertyExists {
+		return new AssertPropertyExists( WbCrud::getGetLatestPropertyRevisionMetadata( $services ) );
 	},
 
-	'WbRestApi.AssertStatementSubjectExists' => function( MediaWikiServices $services ): AssertStatementSubjectExists {
-		return new AssertStatementSubjectExists( WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services ) );
+	'WbCrud.AssertStatementSubjectExists' => function( MediaWikiServices $services ): AssertStatementSubjectExists {
+		return new AssertStatementSubjectExists( WbCrud::getGetLatestStatementSubjectRevisionMetadata( $services ) );
 	},
 
-	'WbRestApi.AssertUserIsAuthorized' => function( MediaWikiServices $services ): AssertUserIsAuthorized {
+	'WbCrud.AssertUserIsAuthorized' => function( MediaWikiServices $services ): AssertUserIsAuthorized {
 		return new AssertUserIsAuthorized(
 			new WikibaseEntityPermissionChecker(
 				WikibaseRepo::getEntityPermissionChecker( $services ),
@@ -483,22 +483,22 @@ return [
 		);
 	},
 
-	'WbRestApi.CreateItem' => function( MediaWikiServices $services ): CreateItem {
+	'WbCrud.CreateItem' => function( MediaWikiServices $services ): CreateItem {
 		return new CreateItem(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.CreateProperty' => function( MediaWikiServices $services ): CreateProperty {
+	'WbCrud.CreateProperty' => function( MediaWikiServices $services ): CreateProperty {
 		return new CreateProperty(
 			new CreatePropertyValidator(
-				WbRestApi::getEditMetadataRequestValidatingDeserializer( $services ),
+				WbCrud::getEditMetadataRequestValidatingDeserializer( $services ),
 				WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					WbRestApi::getLabelLanguageCodeValidator( $services )
+					WbCrud::getLabelLanguageCodeValidator( $services )
 				),
 				new PropertyLabelsContentsValidator(
 					new TermValidatorFactoryPropertyLabelValidator(
@@ -508,30 +508,30 @@ return [
 				),
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+					WbCrud::getDescriptionLanguageCodeValidator( $services )
 				),
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					WbRestApi::getAliasLanguageCodeValidator( $services ),
+					WbCrud::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
-				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) )
+				new StatementsValidator( new StatementValidator( WbCrud::getStatementDeserializer() ) )
 			),
-			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getPropertyUpdater( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.DescriptionLanguageCodeValidator' => function( MediaWikiServices $services ): DescriptionLanguageCodeValidator {
+	'WbCrud.DescriptionLanguageCodeValidator' => function( MediaWikiServices $services ): DescriptionLanguageCodeValidator {
 		return new ValueValidatorLanguageCodeValidator(
 			WikibaseRepo::getTermValidatorFactory( $services )->getDescriptionLanguageValidator()
 		);
 	},
 
-	'WbRestApi.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
+	'WbCrud.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
 		return new EntityUpdater(
 			RequestContext::getMain(),
 			WikibaseRepo::getEditEntityFactory( $services ),
@@ -548,60 +548,60 @@ return [
 		);
 	},
 
-	'WbRestApi.ErrorReporter' => function( MediaWikiServices $services ): ErrorReporter {
+	'WbCrud.ErrorReporter' => function( MediaWikiServices $services ): ErrorReporter {
 		return new MWErrorReporter();
 	},
 
-	'WbRestApi.GetItem' => function( MediaWikiServices $services ): GetItem {
+	'WbCrud.GetItem' => function( MediaWikiServices $services ): GetItem {
 		return new GetItem(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemAliases' => function( MediaWikiServices $services ): GetItemAliases {
+	'WbCrud.GetItemAliases' => function( MediaWikiServices $services ): GetItemAliases {
 		return new GetItemAliases(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemAliasesInLanguage' => function( MediaWikiServices $services ): GetItemAliasesInLanguage {
+	'WbCrud.GetItemAliasesInLanguage' => function( MediaWikiServices $services ): GetItemAliasesInLanguage {
 		return new GetItemAliasesInLanguage(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemDescription' => function( MediaWikiServices $services ): GetItemDescription {
+	'WbCrud.GetItemDescription' => function( MediaWikiServices $services ): GetItemDescription {
 		return new GetItemDescription(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
+	'WbCrud.GetItemDescriptions' => function( MediaWikiServices $services ): GetItemDescriptions {
 		return new GetItemDescriptions(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemDescriptionWithFallback' => function( MediaWikiServices $services ): GetItemDescriptionWithFallback {
+	'WbCrud.GetItemDescriptionWithFallback' => function( MediaWikiServices $services ): GetItemDescriptionWithFallback {
 		return new GetItemDescriptionWithFallback(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
 			new FallbackLookupFactoryTermsRetriever(
 				$services->getLanguageFactory(),
 				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
@@ -609,62 +609,62 @@ return [
 		);
 	},
 
-	'WbRestApi.GetItemLabel' => function( MediaWikiServices $services ): GetItemLabel {
+	'WbCrud.GetItemLabel' => function( MediaWikiServices $services ): GetItemLabel {
 		return new GetItemLabel(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
+	'WbCrud.GetItemLabels' => function( MediaWikiServices $services ): GetItemLabels {
 		return new GetItemLabels(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemLabelWithFallback' => function( MediaWikiServices $services ): GetItemLabelWithFallback {
+	'WbCrud.GetItemLabelWithFallback' => function( MediaWikiServices $services ): GetItemLabelWithFallback {
 		return new GetItemLabelWithFallback(
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
 			new FallbackLookupFactoryTermsRetriever(
 				$services->getLanguageFactory(),
 				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
 			),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
+	'WbCrud.GetItemStatement' => function( MediaWikiServices $services ): GetItemStatement {
 		return new GetItemStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getGetStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getGetStatement( $services )
 		);
 	},
 
-	'WbRestApi.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
+	'WbCrud.GetItemStatements' => function( MediaWikiServices $services ): GetItemStatements {
 		return new GetItemStatements(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services )
 		);
 	},
 
-	'WbRestApi.GetLatestItemRevisionMetadata' => function( MediaWikiServices $services ): GetLatestItemRevisionMetadata {
+	'WbCrud.GetLatestItemRevisionMetadata' => function( MediaWikiServices $services ): GetLatestItemRevisionMetadata {
 		return new GetLatestItemRevisionMetadata( new WikibaseEntityRevisionLookupItemRevisionMetadataRetriever(
 			WikibaseRepo::getEntityRevisionLookup( $services )
 		) );
 	},
 
-	'WbRestApi.GetLatestPropertyRevisionMetadata' => function( MediaWikiServices $services ): GetLatestPropertyRevisionMetadata {
+	'WbCrud.GetLatestPropertyRevisionMetadata' => function( MediaWikiServices $services ): GetLatestPropertyRevisionMetadata {
 		return new GetLatestPropertyRevisionMetadata( new WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever(
 			WikibaseRepo::getEntityRevisionLookup( $services )
 		) );
 	},
 
-	'WbRestApi.GetLatestStatementSubjectRevisionMetadata' => function(
+	'WbCrud.GetLatestStatementSubjectRevisionMetadata' => function(
 		MediaWikiServices $services
 	): GetLatestStatementSubjectRevisionMetadata {
 		return new GetLatestStatementSubjectRevisionMetadata( new WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever(
@@ -672,29 +672,29 @@ return [
 		) );
 	},
 
-	'WbRestApi.GetProperty' => function( MediaWikiServices $services ): GetProperty {
+	'WbCrud.GetProperty' => function( MediaWikiServices $services ): GetProperty {
 		return new GetProperty(
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyAliases' => function( MediaWikiServices $services ): GetPropertyAliases {
+	'WbCrud.GetPropertyAliases' => function( MediaWikiServices $services ): GetPropertyAliases {
 		return new GetPropertyAliases(
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyAliasesInLanguage' => function( MediaWikiServices $services ): GetPropertyAliasesInLanguage {
+	'WbCrud.GetPropertyAliasesInLanguage' => function( MediaWikiServices $services ): GetPropertyAliasesInLanguage {
 		return new GetPropertyAliasesInLanguage(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -702,26 +702,26 @@ return [
 		);
 	},
 
-	'WbRestApi.GetPropertyDescription' => function( MediaWikiServices $services ): GetPropertyDescription {
+	'WbCrud.GetPropertyDescription' => function( MediaWikiServices $services ): GetPropertyDescription {
 		return new GetPropertyDescription(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {
+	'WbCrud.GetPropertyDescriptions' => function( MediaWikiServices $services ): GetPropertyDescriptions {
 		return new GetPropertyDescriptions(
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyDescriptionWithFallback' => function( MediaWikiServices $services ): GetPropertyDescriptionWithFallback {
+	'WbCrud.GetPropertyDescriptionWithFallback' => function( MediaWikiServices $services ): GetPropertyDescriptionWithFallback {
 		return new GetPropertyDescriptionWithFallback(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
 			new FallbackLookupFactoryTermsRetriever(
 				$services->getLanguageFactory(),
 				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
@@ -729,26 +729,26 @@ return [
 		);
 	},
 
-	'WbRestApi.GetPropertyLabel' => function( MediaWikiServices $services ): GetPropertyLabel {
+	'WbCrud.GetPropertyLabel' => function( MediaWikiServices $services ): GetPropertyLabel {
 		return new GetPropertyLabel(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyLabels' => function( MediaWikiServices $services ): GetPropertyLabels {
+	'WbCrud.GetPropertyLabels' => function( MediaWikiServices $services ): GetPropertyLabels {
 		return new GetPropertyLabels(
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyLabelWithFallback' => function( MediaWikiServices $services ): GetPropertyLabelWithFallback {
+	'WbCrud.GetPropertyLabelWithFallback' => function( MediaWikiServices $services ): GetPropertyLabelWithFallback {
 		return new GetPropertyLabelWithFallback(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services ),
 			new FallbackLookupFactoryTermsRetriever(
 				$services->getLanguageFactory(),
 				WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
@@ -756,47 +756,47 @@ return [
 		);
 	},
 
-	'WbRestApi.GetPropertyStatement' => function( MediaWikiServices $services ): GetPropertyStatement {
+	'WbCrud.GetPropertyStatement' => function( MediaWikiServices $services ): GetPropertyStatement {
 		return new GetPropertyStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getGetStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getGetStatement( $services )
 		);
 	},
 
-	'WbRestApi.GetPropertyStatements' => function( MediaWikiServices $services ): GetPropertyStatements {
+	'WbCrud.GetPropertyStatements' => function( MediaWikiServices $services ): GetPropertyStatements {
 		return new GetPropertyStatements(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getGetLatestPropertyRevisionMetadata( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getGetLatestPropertyRevisionMetadata( $services )
 		);
 	},
 
-	'WbRestApi.GetSitelink' => function( MediaWikiServices $services ): GetSitelink {
+	'WbCrud.GetSitelink' => function( MediaWikiServices $services ): GetSitelink {
 		return new GetSitelink(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getItemDataRetriever( $services ),
 		);
 	},
 
-	'WbRestApi.GetSitelinks' => function( MediaWikiServices $services ): GetSitelinks {
+	'WbCrud.GetSitelinks' => function( MediaWikiServices $services ): GetSitelinks {
 		return new GetSitelinks(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getGetLatestItemRevisionMetadata( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getGetLatestItemRevisionMetadata( $services ),
+			WbCrud::getItemDataRetriever( $services ),
 		);
 	},
 
-	'WbRestApi.GetStatement' => function( MediaWikiServices $services ): GetStatement {
+	'WbCrud.GetStatement' => function( MediaWikiServices $services ): GetStatement {
 		return new GetStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getStatementRetriever( $services ),
-			WbRestApi::getGetLatestStatementSubjectRevisionMetadata( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getStatementRetriever( $services ),
+			WbCrud::getGetLatestStatementSubjectRevisionMetadata( $services )
 		);
 	},
 
-	'WbRestApi.ItemDataRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupItemDataRetriever {
+	'WbCrud.ItemDataRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupItemDataRetriever {
 		return new EntityRevisionLookupItemDataRetriever(
 			WikibaseRepo::getEntityRevisionLookup( $services ),
 			new StatementReadModelConverter(
@@ -807,9 +807,9 @@ return [
 		);
 	},
 
-	'WbRestApi.ItemUpdater' => function( MediaWikiServices $services ): EntityUpdaterItemUpdater {
+	'WbCrud.ItemUpdater' => function( MediaWikiServices $services ): EntityUpdaterItemUpdater {
 		return new EntityUpdaterItemUpdater(
-			WbRestApi::getEntityUpdater( $services ),
+			WbCrud::getEntityUpdater( $services ),
 			new SitelinksReadModelConverter( $services->getSiteLookup() ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
@@ -818,28 +818,28 @@ return [
 		);
 	},
 
-	'WbRestApi.LabelLanguageCodeValidator' => function( MediaWikiServices $services ): LabelLanguageCodeValidator {
+	'WbCrud.LabelLanguageCodeValidator' => function( MediaWikiServices $services ): LabelLanguageCodeValidator {
 		return new ValueValidatorLanguageCodeValidator( WikibaseRepo::getTermValidatorFactory( $services )->getLabelLanguageValidator() );
 	},
 
-	'WbRestApi.PatchItem' => function( MediaWikiServices $services ): PatchItem {
+	'WbCrud.PatchItem' => function( MediaWikiServices $services ): PatchItem {
 		return new PatchItem(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists(),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemDataRetriever(),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists(),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemDataRetriever(),
 			new ItemSerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
-				new StatementListSerializer( WbRestApi::getStatementSerializer( $services ) ),
+				new StatementListSerializer( WbCrud::getStatementSerializer( $services ) ),
 				new SitelinksSerializer( new SitelinkSerializer() )
 			),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					WbRestApi::getLabelLanguageCodeValidator( $services )
+					WbCrud::getLabelLanguageCodeValidator( $services )
 				),
 				new ItemLabelsContentsValidator(
 					new TermValidatorFactoryItemLabelValidator(
@@ -849,7 +849,7 @@ return [
 				),
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+					WbCrud::getDescriptionLanguageCodeValidator( $services )
 				),
 				new ItemDescriptionsContentsValidator(
 					new TermValidatorFactoryItemDescriptionValidator(
@@ -859,7 +859,7 @@ return [
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					WbRestApi::getAliasLanguageCodeValidator( $services ),
+					WbCrud::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
 				new SitelinksValidator(
@@ -867,22 +867,22 @@ return [
 						WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 					) ),
 					new SiteLinkLookupSitelinkValidator(
-						WbRestApi::getSitelinkDeserializer( $services ),
+						WbCrud::getSitelinkDeserializer( $services ),
 						WikibaseRepo::getStore( $services )->newSiteLinkStore()
 					),
 				),
-				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer() ) )
+				new StatementsValidator( new StatementValidator( WbCrud::getStatementDeserializer() ) )
 			),
-			WbRestApi::getItemDataRetriever(),
-			WbRestApi::getItemUpdater()
+			WbCrud::getItemDataRetriever(),
+			WbCrud::getItemUpdater()
 		);
 	},
 
-	'WbRestApi.PatchItemAliases' => function( MediaWikiServices $services ): PatchItemAliases {
+	'WbCrud.PatchItemAliases' => function( MediaWikiServices $services ): PatchItemAliases {
 		return new PatchItemAliases(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
@@ -892,46 +892,46 @@ return [
 			new PatchedItemAliasesValidator(
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				WbRestApi::getAliasLanguageCodeValidator( $services )
+				WbCrud::getAliasLanguageCodeValidator( $services )
 			),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.PatchItemDescriptions' => function( MediaWikiServices $services ): PatchItemDescriptions {
+	'WbCrud.PatchItemDescriptions' => function( MediaWikiServices $services ): PatchItemDescriptions {
 		return new PatchItemDescriptions(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbCrud::getItemDataRetriever( $services ),
 			new PatchedItemDescriptionsValidator(
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+					WbCrud::getDescriptionLanguageCodeValidator( $services )
 				),
 				new ItemDescriptionsContentsValidator( new TermValidatorFactoryItemDescriptionValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getItemTermsCollisionDetector( $services )
 				) )
 			),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
+	'WbCrud.PatchItemLabels' => function( MediaWikiServices $services ): PatchItemLabels {
 		return new PatchItemLabels(
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getTermLookupEntityTermsRetriever( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getTermLookupEntityTermsRetriever( $services ),
 			new LabelsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			new PatchedItemLabelsValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					WbRestApi::getLabelLanguageCodeValidator( $services )
+					WbCrud::getLabelLanguageCodeValidator( $services )
 				),
 				new ItemLabelsContentsValidator(
 					new TermValidatorFactoryItemLabelValidator(
@@ -940,40 +940,40 @@ return [
 					)
 				)
 			),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
+	'WbCrud.PatchItemStatement' => function( MediaWikiServices $services ): PatchItemStatement {
 		return new PatchItemStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getPatchStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getPatchStatement( $services )
 		);
 	},
 
-	'WbRestApi.PatchProperty' => function( MediaWikiServices $services ): PatchProperty {
+	'WbCrud.PatchProperty' => function( MediaWikiServices $services ): PatchProperty {
 		return new PatchProperty(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
 			new PropertySerializer(
 				new LabelsSerializer(),
 				new DescriptionsSerializer(),
 				new AliasesSerializer(),
-				new StatementListSerializer( WbRestApi::getStatementSerializer( $services ) )
+				new StatementListSerializer( WbCrud::getStatementSerializer( $services ) )
 			),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
 			new PatchedPropertyValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					WbRestApi::getLabelLanguageCodeValidator( $services )
+					WbCrud::getLabelLanguageCodeValidator( $services )
 				),
 				new PropertyLabelsContentsValidator(
 					new TermValidatorFactoryPropertyLabelValidator(
@@ -983,28 +983,28 @@ return [
 				),
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+					WbCrud::getDescriptionLanguageCodeValidator( $services )
 				),
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				),
 				new AliasesValidator(
 					new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-					WbRestApi::getAliasLanguageCodeValidator( $services ),
+					WbCrud::getAliasLanguageCodeValidator( $services ),
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
-				new StatementsValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) )
+				new StatementsValidator( new StatementValidator( WbCrud::getStatementDeserializer( $services ) ) )
 			)
 		);
 	},
 
-	'WbRestApi.PatchPropertyAliases' => function( MediaWikiServices $services ): PatchPropertyAliases {
+	'WbCrud.PatchPropertyAliases' => function( MediaWikiServices $services ): PatchPropertyAliases {
 		$termLanguages = WikibaseRepo::getTermsLanguages( $services );
 
 		return new PatchPropertyAliases(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
 			new PrefetchingTermLookupAliasesRetriever(
 				WikibaseRepo::getPrefetchingTermLookup( $services ),
 				$termLanguages
@@ -1014,39 +1014,39 @@ return [
 			new PatchedPropertyAliasesValidator(
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 				new TermValidatorFactoryAliasesInLanguageValidator( WikibaseRepo::getTermValidatorFactory( $services ) ),
-				WbRestApi::getAliasLanguageCodeValidator( $services )
+				WbCrud::getAliasLanguageCodeValidator( $services )
 			),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services )
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services )
 		);
 	},
 
-	'WbRestApi.PatchPropertyDescriptions' => function( MediaWikiServices $services ): PatchPropertyDescriptions {
+	'WbCrud.PatchPropertyDescriptions' => function( MediaWikiServices $services ): PatchPropertyDescriptions {
 		return new PatchPropertyDescriptions(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
 			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
 				WikibaseRepo::getTermsLanguages( $services )
 			),
 			new DescriptionsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
 			new PatchedPropertyDescriptionsValidator(
 				new DescriptionsSyntaxValidator(
 					new DescriptionsDeserializer(),
-					WbRestApi::getDescriptionLanguageCodeValidator( $services )
+					WbCrud::getDescriptionLanguageCodeValidator( $services )
 				),
 				new PropertyDescriptionsContentsValidator(
 					new TermValidatorFactoryPropertyDescriptionValidator( WikibaseRepo::getTermValidatorFactory( $services ) )
 				)
 			),
-			WbRestApi::getPropertyUpdater( $services )
+			WbCrud::getPropertyUpdater( $services )
 		);
 	},
 
-	'WbRestApi.PatchPropertyLabels' => function( MediaWikiServices $services ): PatchPropertyLabels {
+	'WbCrud.PatchPropertyLabels' => function( MediaWikiServices $services ): PatchPropertyLabels {
 		return new PatchPropertyLabels(
 			new TermLookupEntityTermsRetriever(
 				WikibaseRepo::getTermLookup( $services ),
@@ -1054,68 +1054,68 @@ return [
 			),
 			new LabelsSerializer(),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
 			new PatchedPropertyLabelsValidator(
 				new LabelsSyntaxValidator(
 					new LabelsDeserializer(),
-					WbRestApi::getLabelLanguageCodeValidator( $services )
+					WbCrud::getLabelLanguageCodeValidator( $services )
 				),
 				new PropertyLabelsContentsValidator( new TermValidatorFactoryPropertyLabelValidator(
 					WikibaseRepo::getTermValidatorFactory( $services ),
 					WikibaseRepo::getPropertyTermsCollisionDetector( $services )
 				) )
 			),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.PatchPropertyStatement' => function( MediaWikiServices $services ): PatchPropertyStatement {
+	'WbCrud.PatchPropertyStatement' => function( MediaWikiServices $services ): PatchPropertyStatement {
 		return new PatchPropertyStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getPatchStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getPatchStatement( $services )
 		);
 	},
 
-	'WbRestApi.PatchSitelinks' => function( MediaWikiServices $services ): PatchSitelinks {
+	'WbCrud.PatchSitelinks' => function( MediaWikiServices $services ): PatchSitelinks {
 		return new PatchSitelinks(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemDataRetriever( $services ),
 			new SitelinksSerializer( new SitelinkSerializer() ),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getItemDataRetriever( $services ),
+			WbCrud::getItemDataRetriever( $services ),
 			new PatchedSitelinksValidator( new SitelinksValidator(
 				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
 					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
 				) ),
 				new SiteLinkLookupSitelinkValidator(
-					WbRestApi::getSitelinkDeserializer( $services ),
+					WbCrud::getSitelinkDeserializer( $services ),
 					WikibaseRepo::getStore( $services )->newSiteLinkStore()
 				),
 			) ),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
+	'WbCrud.PatchStatement' => function( MediaWikiServices $services ): PatchStatement {
 		return new PatchStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			new PatchedStatementValidator( new StatementValidator( WbRestApi::getStatementDeserializer( $services ) ) ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			new PatchedStatementValidator( new StatementValidator( WbCrud::getStatementDeserializer( $services ) ) ),
 			new PatchJson( new JsonDiffJsonPatcher() ),
-			WbRestApi::getStatementSerializer( $services ),
-			WbRestApi::getAssertStatementSubjectExists( $services ),
-			WbRestApi::getStatementRetriever( $services ),
-			WbRestApi::getStatementUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getStatementSerializer( $services ),
+			WbCrud::getAssertStatementSubjectExists( $services ),
+			WbCrud::getStatementRetriever( $services ),
+			WbCrud::getStatementUpdater( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.PreconditionMiddlewareFactory' => function( MediaWikiServices $services ): PreconditionMiddlewareFactory {
+	'WbCrud.PreconditionMiddlewareFactory' => function( MediaWikiServices $services ): PreconditionMiddlewareFactory {
 		return new PreconditionMiddlewareFactory(
 			WikibaseRepo::getEntityRevisionLookup( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
@@ -1123,7 +1123,7 @@ return [
 		);
 	},
 
-	'WbRestApi.PropertyDataRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupPropertyDataRetriever {
+	'WbCrud.PropertyDataRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupPropertyDataRetriever {
 		return new EntityRevisionLookupPropertyDataRetriever(
 			WikibaseRepo::getEntityRevisionLookup( $services ),
 			new StatementReadModelConverter(
@@ -1133,9 +1133,9 @@ return [
 		);
 	},
 
-	'WbRestApi.PropertyUpdater' => function( MediaWikiServices $services ): EntityUpdaterPropertyUpdater {
+	'WbCrud.PropertyUpdater' => function( MediaWikiServices $services ): EntityUpdaterPropertyUpdater {
 		return new EntityUpdaterPropertyUpdater(
-			WbRestApi::getEntityUpdater( $services ),
+			WbCrud::getEntityUpdater( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
@@ -1143,158 +1143,158 @@ return [
 		);
 	},
 
-	'WbRestApi.RemoveItemDescription' => function( MediaWikiServices $services ): RemoveItemDescription {
+	'WbCrud.RemoveItemDescription' => function( MediaWikiServices $services ): RemoveItemDescription {
 		return new RemoveItemDescription(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.RemoveItemLabel' => function( MediaWikiServices $services ): RemoveItemLabel {
+	'WbCrud.RemoveItemLabel' => function( MediaWikiServices $services ): RemoveItemLabel {
 		return new RemoveItemLabel(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
+	'WbCrud.RemoveItemStatement' => function( MediaWikiServices $services ): RemoveItemStatement {
 		return new RemoveItemStatement(
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getRemoveStatement( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getRemoveStatement( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.RemovePropertyDescription' => function( MediaWikiServices $services ): RemovePropertyDescription {
+	'WbCrud.RemovePropertyDescription' => function( MediaWikiServices $services ): RemovePropertyDescription {
 		return new RemovePropertyDescription(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services )
 		);
 	},
 
-	'WbRestApi.RemovePropertyLabel' => function( MediaWikiServices $services ): RemovePropertyLabel {
+	'WbCrud.RemovePropertyLabel' => function( MediaWikiServices $services ): RemovePropertyLabel {
 		return new RemovePropertyLabel(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services )
 		);
 	},
 
-	'WbRestApi.RemovePropertyStatement' => function( MediaWikiServices $services ): RemovePropertyStatement {
+	'WbCrud.RemovePropertyStatement' => function( MediaWikiServices $services ): RemovePropertyStatement {
 		return new RemovePropertyStatement(
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getRemoveStatement( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services )
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getRemoveStatement( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services )
 		);
 	},
 
-	'WbRestApi.RemoveSitelink' => function( MediaWikiServices $services ): RemoveSitelink {
+	'WbCrud.RemoveSitelink' => function( MediaWikiServices $services ): RemoveSitelink {
 		return new RemoveSitelink(
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
+	'WbCrud.RemoveStatement' => function( MediaWikiServices $services ): RemoveStatement {
 		return new RemoveStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getAssertStatementSubjectExists( $services ),
-			WbRestApi::getStatementRetriever( $services ),
-			WbRestApi::getStatementRemover( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getAssertStatementSubjectExists( $services ),
+			WbCrud::getStatementRetriever( $services ),
+			WbCrud::getStatementRemover( $services )
 		);
 	},
 
-	'WbRestApi.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
+	'WbCrud.ReplaceItemStatement' => function( MediaWikiServices $services ): ReplaceItemStatement {
 		return new ReplaceItemStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getReplaceStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getReplaceStatement( $services )
 		);
 	},
 
-	'WbRestApi.ReplacePropertyStatement' => function( MediaWikiServices $services ): ReplacePropertyStatement {
+	'WbCrud.ReplacePropertyStatement' => function( MediaWikiServices $services ): ReplacePropertyStatement {
 		return new ReplacePropertyStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getReplaceStatement( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getReplaceStatement( $services )
 		);
 	},
 
-	'WbRestApi.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
+	'WbCrud.ReplaceStatement' => function( MediaWikiServices $services ): ReplaceStatement {
 		return new ReplaceStatement(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertStatementSubjectExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getStatementUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertStatementSubjectExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getStatementUpdater( $services )
 		);
 	},
 
-	'WbRestApi.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
+	'WbCrud.SetItemDescription' => function( MediaWikiServices $services ): SetItemDescription {
 		return new SetItemDescription(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
+	'WbCrud.SetItemLabel' => function( MediaWikiServices $services ): SetItemLabel {
 		return new SetItemLabel(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.SetPropertyDescription' => function( MediaWikiServices $services ): SetPropertyDescription {
+	'WbCrud.SetPropertyDescription' => function( MediaWikiServices $services ): SetPropertyDescription {
 		return new SetPropertyDescription(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.SetPropertyLabel' => function( MediaWikiServices $services ): SetPropertyLabel {
+	'WbCrud.SetPropertyLabel' => function( MediaWikiServices $services ): SetPropertyLabel {
 		return new SetPropertyLabel(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getPropertyDataRetriever( $services ),
-			WbRestApi::getPropertyUpdater( $services ),
-			WbRestApi::getAssertPropertyExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getPropertyDataRetriever( $services ),
+			WbCrud::getPropertyUpdater( $services ),
+			WbCrud::getAssertPropertyExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services )
 		);
 	},
 
-	'WbRestApi.SetSitelink' => function( MediaWikiServices $services ): SetSitelink {
+	'WbCrud.SetSitelink' => function( MediaWikiServices $services ): SetSitelink {
 		return new SetSitelink(
-			WbRestApi::getValidatingRequestDeserializer( $services ),
-			WbRestApi::getAssertItemExists( $services ),
-			WbRestApi::getAssertUserIsAuthorized( $services ),
-			WbRestApi::getItemDataRetriever( $services ),
-			WbRestApi::getItemUpdater( $services )
+			WbCrud::getValidatingRequestDeserializer( $services ),
+			WbCrud::getAssertItemExists( $services ),
+			WbCrud::getAssertUserIsAuthorized( $services ),
+			WbCrud::getItemDataRetriever( $services ),
+			WbCrud::getItemUpdater( $services )
 		);
 	},
 
-	'WbRestApi.SitelinkDeserializer' => function( MediaWikiServices $services ): SitelinkDeserializer {
+	'WbCrud.SitelinkDeserializer' => function( MediaWikiServices $services ): SitelinkDeserializer {
 		return new SitelinkDeserializer(
 			MediaWikiTitleCodec::getTitleInvalidRegex(),
 			array_keys( WikibaseRepo::getSettings( $services )->getSetting( 'badgeItems' ) ),
@@ -1306,7 +1306,7 @@ return [
 		);
 	},
 
-	'WbRestApi.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
+	'WbCrud.StatementDeserializer' => function( MediaWikiServices $services ): StatementDeserializer {
 		$propertyValuePairDeserializer = new PropertyValuePairDeserializer(
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
@@ -1322,21 +1322,21 @@ return [
 		);
 	},
 
-	'WbRestApi.StatementRedirectMiddlewareFactory' => function( MediaWikiServices $services ): StatementRedirectMiddlewareFactory {
+	'WbCrud.StatementRedirectMiddlewareFactory' => function( MediaWikiServices $services ): StatementRedirectMiddlewareFactory {
 		return new StatementRedirectMiddlewareFactory(
 			WikibaseRepo::getEntityIdParser( $services ),
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) )
 		);
 	},
 
-	'WbRestApi.StatementRemover' => function( MediaWikiServices $services ): StatementRemover {
+	'WbCrud.StatementRemover' => function( MediaWikiServices $services ): StatementRemover {
 		return new EntityUpdaterStatementRemover(
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
-			WbRestApi::getEntityUpdater( $services ),
+			WbCrud::getEntityUpdater( $services ),
 		);
 	},
 
-	'WbRestApi.StatementRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupStatementRetriever {
+	'WbCrud.StatementRetriever' => function( MediaWikiServices $services ): EntityRevisionLookupStatementRetriever {
 		return new EntityRevisionLookupStatementRetriever(
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
 			new StatementReadModelConverter(
@@ -1346,17 +1346,17 @@ return [
 		);
 	},
 
-	'WbRestApi.StatementSerializer' => function( MediaWikiServices $services ): StatementSerializer {
+	'WbCrud.StatementSerializer' => function( MediaWikiServices $services ): StatementSerializer {
 		$propertyValuePairSerializer = new PropertyValuePairSerializer();
 		$referenceSerializer = new ReferenceSerializer( $propertyValuePairSerializer );
 		return new StatementSerializer( $propertyValuePairSerializer, $referenceSerializer );
 	},
 
-	'WbRestApi.StatementUpdater' => function( MediaWikiServices $services ): StatementUpdater {
+	'WbCrud.StatementUpdater' => function( MediaWikiServices $services ): StatementUpdater {
 		return new EntityUpdaterStatementUpdater(
 			WikibaseRepo::getStatementGuidParser( $services ),
 			new StatementSubjectRetriever( WikibaseRepo::getEntityRevisionLookup( $services ) ),
-			WbRestApi::getEntityUpdater( $services ),
+			WbCrud::getEntityUpdater( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )
@@ -1364,20 +1364,20 @@ return [
 		);
 	},
 
-	'WbRestApi.TermLookupEntityTermsRetriever' => function( MediaWikiServices $services ): TermLookupEntityTermsRetriever {
+	'WbCrud.TermLookupEntityTermsRetriever' => function( MediaWikiServices $services ): TermLookupEntityTermsRetriever {
 		return new TermLookupEntityTermsRetriever(
 			WikibaseRepo::getTermLookup( $services ),
 			WikibaseRepo::getTermsLanguages( $services )
 		);
 	},
 
-	'WbRestApi.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
+	'WbCrud.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware(
-			$services->get( 'WbRestApi.ErrorReporter' )
+			$services->get( 'WbCrud.ErrorReporter' )
 		);
 	},
 
-	'WbRestApi.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): VRD {
+	'WbCrud.ValidatingRequestDeserializer' => function( MediaWikiServices $services ): VRD {
 		return new VRD( $services );
 	},
 
