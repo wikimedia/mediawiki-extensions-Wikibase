@@ -261,7 +261,7 @@
 	"wikibase-redirectentity-submit": "Rimanna",
 	"special-mylanguagefallbackchain": "La mè catina di ripiegu dî lingui",
 	"wikibase-mylanguagefallbackchain-text": "Ccassutta è ammustrata la catina di ripiegu dî lingui chi vèninu adupirati pi fàriti vìdiri l'etichetti dâ ntità.",
-	"wikibase-mylanguagefallbackchain-babel": "La poi canciari mittennu <nowiki>{{#babel: }}</nowiki> supra â {{GENDER:$1|tò}} [[Special:MyPage|pàggina d'utenti]].",
+	"wikibase-mylanguagefallbackchain-babel": "La poi canciari mittennu <nowiki>{{#babel: }}</nowiki> supra â {{GENDER:$1|to}} [[Special:MyPage|pàggina di l'utenti]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, cunvirtutu dû $3 - $4",
 	"wikibase-api-unresolved-redirect": "L'ID di ntità spicificata s'arrifirisci ôn rimannu, chi nun è suppurtatu nta stu cuntestu.",
 	"wikibase-api-no-such-sitelink": "Nun s'arriniscìu a attruvari nu culligamentu ô situ '$1' ntô mentri chi si canciàvanu li distintivi.",
