@@ -25,53 +25,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"results": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"id": {
-														"type": "string",
-														"pattern": "^Q[1-9]\\d{0,9}$"
-													},
-													"label": {
-														"type": [ "object", "null" ],
-														"properties": {
-															"language": { "type": "string" },
-															"value": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "language", "value" ]
-													},
-													"description": {
-														"type": [ "object", "null" ],
-														"properties": {
-															"language": { "type": "string" },
-															"value": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "language", "value" ]
-													},
-													"match": {
-														"type": "object",
-														"properties": {
-															"type": { "type": "string" },
-															"language": { "type": "string" },
-															"text": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "type", "language", "text" ]
-													}
-												},
-												"additionalProperties": false,
-												"required": [ "id", "label", "description", "match" ]
-											}
-										}
-									},
-									"additionalProperties": false,
-									"required": [ "results" ]
+									"$ref": "./global/schema-parts.json#/SearchItemResultList"
 								},
 								"example": {
 									"results": [
@@ -147,53 +101,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "object",
-									"properties": {
-										"results": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"id": {
-														"type": "string",
-														"pattern": "^P[1-9]\\d{0,9}$"
-													},
-													"label": {
-														"type": [ "object", "null" ],
-														"properties": {
-															"language": { "type": "string" },
-															"value": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "language", "value" ]
-													},
-													"description": {
-														"type": [ "object", "null" ],
-														"properties": {
-															"language": { "type": "string" },
-															"value": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "language", "value" ]
-													},
-													"match": {
-														"type": "object",
-														"properties": {
-															"type": { "type": "string" },
-															"language": { "type": "string" },
-															"text": { "type": "string" }
-														},
-														"additionalProperties": false,
-														"required": [ "type", "language", "text" ]
-													}
-												},
-												"additionalProperties": false,
-												"required": [ "id", "label", "description", "match" ]
-											}
-										}
-									},
-									"additionalProperties": false,
-									"required": [ "results" ]
+									"$ref": "./global/schema-parts.json#/SearchPropertyResultList"
 								},
 								"example": {
 									"results": [
