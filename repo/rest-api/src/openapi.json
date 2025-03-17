@@ -104,6 +104,11 @@
       "name": "item search",
       "description": "Simple item search",
       "x-displayName": "item search"
+    },
+    {
+      "name": "property search",
+      "description": "Simple property search",
+      "x-displayName": "property search"
     }
   ],
   "paths": {
@@ -33664,6 +33669,216 @@
                         "type": "label",
                         "language": "en",
                         "text": "potato"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "invalid-query-parameter": {
+                    "value": {
+                      "code": "invalid-query-parameter",
+                      "message": "Invalid query parameter: 'language'",
+                      "context": {
+                        "parameter": "language"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "description": "Language code of the language in which error message is provided",
+                "schema": {
+                  "type": "string"
+                },
+                "required": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/search/properties": {
+      "get": {
+        "operationId": "simplePropertySearch",
+        "tags": [
+          "property search"
+        ],
+        "summary": "[WIP] Simple Property search by label and aliases",
+        "description": "This endpoint is currently in development and is not recommended for production use",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "The term to search property labels by",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "taxon"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The language to search property labels in",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2}[a-z0-9-]*$"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "^P[1-9]\\d{0,9}$"
+                          },
+                          "label": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
+                          },
+                          "description": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
+                          },
+                          "match": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "language": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "type",
+                              "language",
+                              "text"
+                            ]
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "label",
+                          "description",
+                          "match"
+                        ]
+                      }
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "results"
+                  ]
+                },
+                "example": {
+                  "results": [
+                    {
+                      "id": "P123",
+                      "label": {
+                        "language": "en",
+                        "value": "taxon name"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "scientific name of a taxon"
+                      },
+                      "match": {
+                        "type": "label",
+                        "language": "en",
+                        "text": "taxon"
+                      }
+                    },
+                    {
+                      "id": "P234",
+                      "label": {
+                        "language": "en",
+                        "value": "taxon rank"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "level in a taxonomic hierarchy"
+                      },
+                      "match": {
+                        "type": "label",
+                        "language": "en",
+                        "text": "taxon"
                       }
                     }
                   ]
