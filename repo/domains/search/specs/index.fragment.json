@@ -8,7 +8,7 @@
 	"paths": {
 		"/v0/search/items": {
 			"get": {
-				"operationId": "searchItem",
+				"operationId": "simpleItemSearch",
 				"tags": [ "item search" ],
 				"summary": "[WIP] Simple Item search by label",
 				"description": "This endpoint is currently in development and is not recommended for production use",
@@ -55,14 +55,18 @@
 														"properties": {
 															"language": { "type": "string" },
 															"value": { "type": "string" }
-														}
+														},
+														"additionalProperties": false,
+														"required": [ "language", "value" ]
 													},
 													"description": {
 														"type": [ "object", "null" ],
 														"properties": {
 															"language": { "type": "string" },
 															"value": { "type": "string" }
-														}
+														},
+														"additionalProperties": false,
+														"required": [ "language", "value" ]
 													},
 													"match": {
 														"type": "object",
@@ -70,10 +74,13 @@
 															"type": { "type": "string" },
 															"language": { "type": "string" },
 															"text": { "type": "string" }
-														}
+														},
+														"additionalProperties": false,
+														"required": [ "type", "language", "text" ]
 													}
 												},
-												"additionalProperties": false
+												"additionalProperties": false,
+												"required": [ "id", "label", "description", "match" ]
 											}
 										}
 									}

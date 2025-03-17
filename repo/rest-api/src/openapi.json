@@ -33516,7 +33516,7 @@
     },
     "/v0/search/items": {
       "get": {
-        "operationId": "searchItem",
+        "operationId": "simpleItemSearch",
         "tags": [
           "item search"
         ],
@@ -33574,7 +33574,12 @@
                               "value": {
                                 "type": "string"
                               }
-                            }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
                           },
                           "description": {
                             "type": [
@@ -33588,7 +33593,12 @@
                               "value": {
                                 "type": "string"
                               }
-                            }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
                           },
                           "match": {
                             "type": "object",
@@ -33602,10 +33612,22 @@
                               "text": {
                                 "type": "string"
                               }
-                            }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "type",
+                              "language",
+                              "text"
+                            ]
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "label",
+                          "description",
+                          "match"
+                        ]
                       }
                     }
                   }
