@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
+use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
 /**
@@ -83,7 +84,8 @@ class MediaWikiSearchEngine implements ItemSearchEngine {
 						$labelData && $labelData['value'] ?
 							new Label( $labelData['language'], $labelData['value'] ) : null,
 						$descriptionData && $descriptionData['value'] ?
-							new Description( $descriptionData['language'], $descriptionData['value'] ) : null
+							new Description( $descriptionData['language'], $descriptionData['value'] ) : null,
+						new MatchedData( 'TODO', 'TODO', 'TODO' ) // TODO: T387954
 					);
 				},
 				$results

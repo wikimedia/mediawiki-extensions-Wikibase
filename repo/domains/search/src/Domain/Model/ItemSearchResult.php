@@ -12,11 +12,18 @@ class ItemSearchResult {
 	private ItemId $itemId;
 	private ?Label $label;
 	private ?Description $description;
+	private MatchedData $matchedData;
 
-	public function __construct( ItemId $itemId, ?Label $label, ?Description $description ) {
+	public function __construct(
+		ItemId $itemId,
+		?Label $label,
+		?Description $description,
+		MatchedData $matchedData
+	) {
 		$this->itemId = $itemId;
 		$this->label = $label;
 		$this->description = $description;
+		$this->matchedData = $matchedData;
 	}
 
 	public function getItemId(): ItemId {
@@ -29,5 +36,9 @@ class ItemSearchResult {
 
 	public function getDescription(): ?Description {
 		return $this->description;
+	}
+
+	public function getMatchedData(): MatchedData {
+		return $this->matchedData;
 	}
 }

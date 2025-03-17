@@ -31,25 +31,19 @@ describe( 'Simple item search', () => {
 
 	const item2Label = englishTermMatchingAllItems;
 
-	const itemWithoutLabelDescription = 'item without label';
-	const itemWithoutLabelAlias = englishTermMatchingAllItems;
+	const item3Description = 'item without label';
+	const item3Alias = englishTermMatchingAllItems;
 
 	before( async () => {
 		item1 = await createItem( {
-			labels: {
-				en: item1Label,
-				de: item1GermanLabel
-			},
-			descriptions: {
-				en: item1Description,
-				de: item1GermanDescription
-			}
+			labels: { en: item1Label, de: item1GermanLabel },
+			descriptions: { en: item1Description, de: item1GermanDescription }
 		} );
 		itemWithoutDescription = await createItem( { labels: { en: item2Label } } );
 
 		itemWithoutLabel = await createItem( {
-			descriptions: { en: itemWithoutLabelDescription },
-			aliases: { en: [ itemWithoutLabelAlias ] }
+			descriptions: { en: item3Description },
+			aliases: { en: [ item3Alias ] }
 		} );
 
 		await wiki.runAllJobs();
@@ -74,14 +68,16 @@ describe( 'Simple item search', () => {
 			assert.deepEqual( item1Result, {
 				id: item1.id,
 				label: { language, value: item1Label },
-				description: { language, value: item1Description }
+				description: { language, value: item1Description },
+				match: { type: 'label', language, text: item1Label }
 			} );
 
 			const item2Result = results.find( ( { id } ) => id === itemWithoutDescription.id );
 			assert.deepEqual( item2Result, {
 				id: itemWithoutDescription.id,
 				label: { language, value: item2Label },
-				description: null
+				description: null,
+				match: { type: 'label', language, text: item2Label }
 			} );
 		} );
 
@@ -95,7 +91,8 @@ describe( 'Simple item search', () => {
 			assert.deepEqual( response.body.results, [ {
 				id: item1.id,
 				label: { language, value: item1GermanLabel },
-				description: { language, value: item1GermanDescription }
+				description: { language, value: item1GermanDescription },
+				match: { type: 'label', language, text: item1GermanLabel }
 			} ] );
 		} );
 
@@ -114,7 +111,8 @@ describe( 'Simple item search', () => {
 			assert.deepEqual( itemResult, {
 				id: itemWithoutLabel.id,
 				label: null,
-				description: { language, value: itemWithoutLabelDescription }
+				description: { language, value: item3Description },
+				match: { type: 'alias', language, text: item3Alias }
 			} );
 		} );
 

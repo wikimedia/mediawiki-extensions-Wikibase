@@ -20,6 +20,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
+use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\MediaWikiSearchEngine;
 use Wikibase\Search\Elastic\EntityResult;
 
@@ -78,12 +79,14 @@ class MediaWikiSearchEngineTest extends TestCase {
 				new ItemSearchResult(
 					new ItemId( self::RESULT1_ITEM_ID ),
 					new Label( 'en', self::RESULT1_LABEL ),
-					new Description( 'en', self::RESULT1_DESCRIPTION )
+					new Description( 'en', self::RESULT1_DESCRIPTION ),
+					new MatchedData( 'TODO', 'TODO', 'TODO' ) // TODO: T387954
 				),
 				new ItemSearchResult(
 					new ItemId( self::RESULT2_ITEM_ID ),
 					new Label( 'en', self::RESULT2_LABEL ),
-					new Description( 'en', self::RESULT2_DESCRIPTION )
+					new Description( 'en', self::RESULT2_DESCRIPTION ),
+					new MatchedData( 'TODO', 'TODO', 'TODO' ) // TODO: T387954
 				),
 			),
 			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
