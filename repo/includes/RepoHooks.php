@@ -49,7 +49,6 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
-use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -1003,23 +1002,7 @@ final class RepoHooks {
 					[
 						'name' => 'resources/wikibase.vector.scopedtypeaheadsearch/scopedTypeaheadSearchConfig.json',
 						'callback' => function() {
-							$typesForSearch = WikibaseRepo::getEnabledEntityTypesForSearch();
-							$namespaceLookup = WikibaseRepo::getLocalEntityNamespaceLookup();
-							$messages = [
-								'item' => 'wikibase-scoped-search-item-scope-name',
-								'property' => 'wikibase-scoped-search-property-scope-name',
-							];
-							( new WikibaseRepoHookRunner( MediaWikiServices::getInstance()->getHookContainer() ) )->
-								onWikibaseRepoSearchableEntityScopesMessages( $messages );
-							$configuration = [];
-							foreach ( $typesForSearch as $entityType ) {
-								$namespaceId = $namespaceLookup->getEntityNamespace( $entityType );
-								if ( $namespaceId === null ) {
-									continue;
-								}
-								$configuration[$entityType] = [ 'namespace' => $namespaceId, 'message' => $messages[$entityType] ];
-							}
-							return $configuration;
+							return WikibaseRepo::getScopedTypeaheadSearchConfig()->getConfiguration();
 						},
 					],
 				],
