@@ -58,11 +58,8 @@ class GetPropertyLabelRouteHandler extends SimpleHandler {
 		);
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run( string $propertyId, string $languageCode ): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase( $propertyId, $languageCode ) );
 	}
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {

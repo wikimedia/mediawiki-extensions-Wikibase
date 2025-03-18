@@ -79,11 +79,8 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 		return null;
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run( string $propertyId ): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase( $propertyId ) );
 	}
 
 	public function runUseCase( string $propertyId ): Response {
