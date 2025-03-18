@@ -2,6 +2,7 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
+@import 'mediawiki.skin.variables.less';
 
 .wikibase-toolbarbutton-disabled a {
 	cursor: default;
@@ -42,6 +43,9 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 1rem 1rem;
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-size: 1rem 1rem;
 	display: inline-block;
 	width: 1.25rem;
 	height: 1.25rem;
@@ -58,26 +62,66 @@
 }
 
 .wikibase-toolbar-button-edit .wb-icon {
-	/* @embed */
-	background-image: url( images/icons/ooui/edit.svg );
+	@supports not ( ( -webkit-mask-image: none ) or ( mask-image: none ) ) {
+		background-image: url( images/icons/ooui/edit.svg );
+	}
+
+	@supports ( -webkit-mask-image: none ) or ( mask-image: none ) {
+		background: @color-base;
+		-webkit-mask-image: url( images/icons/ooui/edit.svg );
+		/* @embed */
+		mask-image: url( images/icons/ooui/edit.svg );
+	}
 }
 
 .wikibase-toolbar-button-save .wb-icon {
-	/* @embed */
-	background-image: url( images/icons/ooui/check.svg );
+	@supports not ( ( -webkit-mask-image: none ) or ( mask-image: none ) ) {
+		background-image: url( images/icons/ooui/check.svg );
+	}
+
+	@supports ( -webkit-mask-image: none ) or ( mask-image: none ) {
+		background: @color-base;
+		-webkit-mask-image: url( images/icons/ooui/check.svg );
+		/* @embed */
+		mask-image: url( images/icons/ooui/check.svg );
+	}
 }
 
 .wikibase-toolbar-button-remove .wb-icon {
-	/* @embed */
-	background-image: url( images/icons/ooui/trash.svg );
+	@supports not ( ( -webkit-mask-image: none ) or ( mask-image: none ) ) {
+		background-image: url( images/icons/ooui/trash.svg );
+	}
+
+	@supports ( -webkit-mask-image: none ) or ( mask-image: none ) {
+		background: @color-base;
+		-webkit-mask-image: url( images/icons/ooui/trash.svg );
+		/* @embed */
+		mask-image: url( images/icons/ooui/trash.svg );
+	}
 }
 
 .wikibase-toolbar-button-cancel .wb-icon {
-	/* @embed */
-	background-image: url( images/icons/ooui/close.svg );
+	@supports not ( ( -webkit-mask-image: none ) or ( mask-image: none ) ) {
+		background-image: url( images/icons/ooui/close.svg );
+	}
+
+	@supports ( -webkit-mask-image: none ) or ( mask-image: none ) {
+		background: @color-base;
+		-webkit-mask-image: url( images/icons/ooui/close.svg );
+		/* @embed */
+		mask-image: url( images/icons/ooui/close.svg );
+	}
 }
 
 .wikibase-toolbar-button-add .wb-icon {
-	/* @embed */
-	background-image: url( images/icons/ooui/add.svg );
+	@supports not ( ( -webkit-mask-image: none ) or ( mask-image: none ) ) {
+		background-image: url( images/icons/ooui/add.svg );
+	}
+
+	@supports ( -webkit-mask-image: none ) or ( mask-image: none ) {
+		background: @color-base;
+		-webkit-mask-image: url( images/icons/ooui/add.svg );
+		/* @embed */
+		mask-image: url( images/icons/ooui/add.svg );
+	}
 }
