@@ -1,0 +1,80 @@
+{
+	"Label": {
+		"type": [ "object", "null" ],
+		"properties": {
+			"language": { "type": "string" },
+			"value": { "type": "string" }
+		},
+		"additionalProperties": false,
+		"required": [ "language", "value" ]
+	},
+	"Description": {
+		"type": [ "object", "null" ],
+		"properties": {
+			"language": { "type": "string" },
+			"value": { "type": "string" }
+		},
+		"additionalProperties": false,
+		"required": [ "language", "value" ]
+	},
+	"Match": {
+		"type": "object",
+		"properties": {
+			"type": { "type": "string" },
+			"language": { "type": "string" },
+			"text": { "type": "string" }
+		},
+		"additionalProperties": false,
+		"required": [ "type", "language", "text" ]
+	},
+	"SearchItemResult": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string",
+				"pattern": "^Q[1-9]\\d{0,9}$"
+			},
+			"label": { "$ref": "#/Label" },
+			"description": { "$ref": "#/Description" },
+			"match": { "$ref": "#/Match" }
+		},
+		"additionalProperties": false,
+		"required": [ "id", "label", "description", "match" ]
+	},
+	"SearchPropertyResult": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string",
+				"pattern": "^P[1-9]\\d{0,9}$"
+			},
+			"label": { "$ref": "#/Label" },
+			"description": { "$ref": "#/Description" },
+			"match": { "$ref": "#/Match" }
+		},
+		"additionalProperties": false,
+		"required": [ "id", "label", "description", "match" ]
+	},
+	"SearchItemResultList": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": { "$ref": "#/SearchItemResult" }
+			}
+		},
+		"additionalProperties": false,
+		"required": [ "results" ]
+	},
+	"SearchPropertyResultList": {
+		"type": "object",
+		"properties": {
+			"results": {
+				"type": "array",
+				"items": { "$ref": "#/SearchPropertyResult" }
+			}
+		},
+		"additionalProperties": false,
+		"required": [ "results" ]
+	}
+}
