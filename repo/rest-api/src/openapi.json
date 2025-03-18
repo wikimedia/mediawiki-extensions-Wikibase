@@ -33597,14 +33597,14 @@
         "summary": "Simple Item search by label and aliases",
         "parameters": [
           {
-            "example": "potato",
             "in": "query",
             "name": "q",
             "description": "The term to search labels by",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "potato"
           },
           {
             "in": "query",
@@ -33830,14 +33830,14 @@
         "summary": "Simple Property search by label and aliases",
         "parameters": [
           {
-            "example": "taxon",
             "in": "query",
             "name": "q",
             "description": "The term to search labels by",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "taxon"
           },
           {
             "in": "query",
@@ -43090,6 +43090,52 @@
           }
         }
       },
+      "BadRequest": {
+        "description": "The request cannot be processed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "context": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": false
+            },
+            "examples": {
+              "invalid-query-parameter": {
+                "value": {
+                  "code": "invalid-query-parameter",
+                  "message": "Invalid query parameter: '{query_parameter}'",
+                  "context": {
+                    "parameter": "{query_parameter}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "headers": {
+          "Content-Language": {
+            "description": "Language code of the language in which error message is provided",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        }
+      },
       "SearchItemSuccess": {
         "description": "A list of search results",
         "content": {
@@ -43215,52 +43261,6 @@
                 }
               ]
             }
-          }
-        }
-      },
-      "BadRequest": {
-        "description": "The request cannot be processed",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "context": {
-                  "type": "object"
-                }
-              },
-              "required": [
-                "code",
-                "message"
-              ],
-              "additionalProperties": false
-            },
-            "examples": {
-              "invalid-query-parameter": {
-                "value": {
-                  "code": "invalid-query-parameter",
-                  "message": "Invalid query parameter: '{query_parameter}'",
-                  "context": {
-                    "parameter": "{query_parameter}"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "headers": {
-          "Content-Language": {
-            "description": "Language code of the language in which error message is provided",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
           }
         }
       },

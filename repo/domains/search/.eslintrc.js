@@ -17,11 +17,13 @@ module.exports = {
 		"max-len": [ "warn", { code: 130 } ],
 		"no-implicit-coercion": [ "error", { disallowTemplateShorthand: true } ],
 		"no-console": "error",
-		"template-curly-spacing": 'off',
+		"template-curly-spacing": "off",
 	},
 	overrides: [
 		{
 			files: [ "*.json" ],
+			parser: "eslint-plugin-json-es",
+			extends: "plugin:eslint-plugin-json-es/recommended",
 			rules: {
 				"max-len": "off",
 			}

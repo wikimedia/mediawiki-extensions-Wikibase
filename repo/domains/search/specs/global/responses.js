@@ -1,4 +1,8 @@
-{
+'use strict';
+
+const schemaParts = require( './schema-parts' );
+
+module.exports = {
 	"BadRequest": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -36,7 +40,7 @@
 		"description": "A list of search results",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schema-parts.json#/SearchItemResultList" },
+				"schema": schemaParts.SearchItemResultList,
 				"example": {
 					"results": [
 						{
@@ -60,7 +64,7 @@
 		"description": "A list of search results",
 		"content": {
 			"application/json": {
-				"schema": { "$ref": "./schema-parts.json#/SearchPropertyResultList" },
+				"schema": schemaParts.SearchPropertyResultList,
 				"example": {
 					"results": [
 						{
@@ -80,4 +84,4 @@
 			}
 		}
 	}
-}
+};

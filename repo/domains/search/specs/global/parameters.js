@@ -1,4 +1,6 @@
-{
+'use strict';
+
+module.exports = {
 	"SearchQuery": {
 		"in": "query",
 		"name": "q",
@@ -42,4 +44,4 @@
 		},
 		"example": 4
 	}
-}
+};
