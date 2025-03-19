@@ -23,11 +23,6 @@ return call_user_func( function() {
 </div>
 HTML;
 
-	$templates['wb-entity-header-separator'] =
-<<<HTML
-<hr class="wb-hr" />
-HTML;
-
 	$templates['wikibase-title'] =
 <<<HTML
 <span class="wikibase-title $1">
