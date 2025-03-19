@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
@@ -24,13 +25,16 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 
 	private MatchingTermsLookup $matchingTermsLookup;
 	private TermRetriever $termRetriever;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
 
 	public function __construct(
 		MatchingTermsLookup $matchingTermsLookup,
-		TermRetriever $termRetriever
+		TermRetriever $termRetriever,
+		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		$this->matchingTermsLookup = $matchingTermsLookup;
 		$this->termRetriever = $termRetriever;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
@@ -57,15 +61,20 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 	 * @return TermIndexEntry[]
 	 */
 	private function findMatchingLabelsAndAliases( string $searchTerm, string $languageCode ): array {
+		$searchCriteria = array_map(
+			fn( string $lang ) => new TermIndexSearchCriteria( [ 'termLanguage' => $lang, 'termText' => $searchTerm ] ),
+			$this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes()
+		);
+
 		return array_merge(
 			$this->matchingTermsLookup->getMatchingTerms(
-				[ new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchTerm ] ) ],
+				$searchCriteria,
 				TermTypes::TYPE_LABEL,
 				Item::ENTITY_TYPE,
 				[ 'LIMIT' => self::RESULTS_LIMIT ]
 			),
 			$this->matchingTermsLookup->getMatchingTerms(
-				[ new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchTerm ] ) ],
+				$searchCriteria,
 				TermTypes::TYPE_ALIAS,
 				Item::ENTITY_TYPE,
 				[ 'LIMIT' => self::RESULTS_LIMIT ]

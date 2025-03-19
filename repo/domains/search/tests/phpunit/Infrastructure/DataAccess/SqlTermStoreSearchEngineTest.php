@@ -5,8 +5,11 @@ namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
@@ -138,9 +141,15 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 	}
 
 	private function newEngine(): SqlTermStoreSearchEngine {
+		$languageFallbackChainFactory = $this->createStub( LanguageFallbackChainFactory::class );
+		$languageFallbackChainFactory
+			->method( 'newFromLanguageCode' )
+			->willReturn( new TermLanguageFallbackChain( [], new StaticContentLanguages( [] ) ) );
+
 		return new SqlTermStoreSearchEngine(
 			$this->matchingTermsLookup,
-			$this->termRetriever
+			$this->termRetriever,
+			$languageFallbackChainFactory
 		);
 	}
 }

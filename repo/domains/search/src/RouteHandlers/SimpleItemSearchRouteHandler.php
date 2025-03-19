@@ -85,7 +85,8 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory()
 					->getLookupForSource( WikibaseRepo::getLocalEntitySource() ),
-				new TermRetriever( WikibaseRepo::getTermLookup() )
+				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory(), $mediaWikiServices->getLanguageFactory() ),
+				WikibaseRepo::getLanguageFallbackChainFactory()
 			);
 	}
 
