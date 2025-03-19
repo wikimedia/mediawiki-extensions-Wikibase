@@ -10,7 +10,7 @@ use ArrayIterator;
 class ItemSearchResults extends ArrayIterator {
 
 	public function __construct( ItemSearchResult ...$results ) {
-		parent::__construct( $results );
+		parent::__construct( array_values( $results ) );
 	}
 
 }
