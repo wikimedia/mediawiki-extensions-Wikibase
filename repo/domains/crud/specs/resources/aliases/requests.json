@@ -1,5 +1,5 @@
 {
-	"AddAliasesInLanguage":{
+	"AddAliasesInLanguage": {
 		"allOf": [
 			{
 				"type": "object",

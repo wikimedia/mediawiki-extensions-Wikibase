@@ -40,7 +40,7 @@
 						"statements": {
 							"P1628": [
 								{
-									"property": { "id":"P1628" },
+									"property": { "id": "P1628" },
 									"value": {
 										"type": "value",
 										"content": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
