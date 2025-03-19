@@ -1013,6 +1013,10 @@ final class RepoHooks {
 				'dependencies' => [
 					'vue',
 				],
+				'messages' => [
+					'searchsuggest-search',
+					'vector-searchsuggest-containing',
+				],
 			];
 			$modules['wikibase.vector.scopedTypeaheadSearchStyles'] = $moduleTemplate + [
 				"styles" => [

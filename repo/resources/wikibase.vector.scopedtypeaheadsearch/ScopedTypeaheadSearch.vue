@@ -7,12 +7,12 @@
 	</div>
 	<cdx-typeahead-search
 		id="typeahead-search-wikidata"
-		form-action="https://wikidata.org/w/index.php"
+		:form-action="baseUrl"
 		:search-results="searchResults"
 		:search-footer-url="searchFooterUrl"
 		:highlight-query="true"
 		:visible-item-limit="5"
-		placeholder="Search Wikidata"
+		:placeholder="$i18n( 'searchsuggest-search' ).text()"
 		@input="onInput"
 		@load-more="onLoadMore"
 	>
@@ -34,10 +34,7 @@
 			>
 		</template>
 		<template #search-footer-text="{ searchQuery }">
-			Search Wikidata for pages containing
-			<strong class="cdx-typeahead-search__search-footer__query">
-				{{ searchQuery }}
-			</strong>
+			<span v-i18n-html:vector-searchsuggest-containing="[ searchQuery ]"></span>
 		</template>
 	</cdx-typeahead-search>
 </template>
@@ -52,6 +49,9 @@ module.exports = exports = defineComponent( {
 	name: 'ScopedTypeaheadSearch',
 	components: { CdxTypeaheadSearch, CdxSelect },
 	setup() {
+		const api = new mw.Api();
+		const baseUrl = mw.config.get( 'wgScript' );
+
 		const prefix = ref( '' );
 		const selection = ref( 'item' );
 		const searchResults = ref( [] );
@@ -104,30 +104,26 @@ module.exports = exports = defineComponent( {
 		watch( [ prefix, currentSearchTerm, searchNamespace ], () => {
 			const valueToSearch = currentSearchTerm.value.slice( prefix.value.length );
 
-			searchFooterUrl.value = `https://www.wikidata.org/w/index.php?language=${ languageCode.value }&search=${ encodeURIComponent( valueToSearch ) }&title=Special%3ASearch&fulltext=1&${ searchNamespace.value }=1`;
+			searchFooterUrl.value = `${ baseUrl }?language=${ languageCode.value }&search=${ encodeURIComponent( valueToSearch ) }&title=Special%3ASearch&fulltext=1&${ searchNamespace.value }=1`;
 		} );
 
 		function fetchResults( offset ) {
 			// If a prefix is active, omit it from what we actually search for (if the length is 0, this has no effect)
-			const valueToSearch = currentSearchTerm.value.slice( prefix.value.length );
+			const valueToSearch = currentSearchTerm.value.slice( prefix.value.length ).trim();
 
-			const params = new URLSearchParams( {
-				origin: '*',
+			const params = {
 				action: 'wbsearchentities',
-				format: 'json',
 				limit: '10',
-				props: 'url',
 				language: languageCode.value,
 				uselang: languageCode.value,
 				type: selection.value,
 				search: valueToSearch
-			} );
+			};
 			if ( offset ) {
-				params.set( 'continue', `${ offset }` );
+				params.continue = offset;
 			}
 
-			return fetch( `https://www.wikidata.org/w/api.php?${ params.toString() }` )
-          .then( ( response ) => response.json() );
+			return api.get( params );
 		}
 
 		/**
@@ -156,6 +152,7 @@ module.exports = exports = defineComponent( {
 			if ( !value || value === '' ) {
 				searchResults.value = [];
 				searchFooterUrl.value = '';
+				prefix.value = '';
 				return;
 			} else if ( value.length === 2 ) {
 				if ( prefixToSelection[ value ] ) {
@@ -164,6 +161,8 @@ module.exports = exports = defineComponent( {
 					searchFooterUrl.value = '';
 					return;
 				}
+			} else if ( prefix.value && !( value.startsWith( prefix.value ) ) ) {
+				prefix.value = '';
 			}
 
 			fetchResults().then( ( data ) => {
@@ -204,6 +203,7 @@ module.exports = exports = defineComponent( {
 		}
 
 		return {
+			baseUrl,
 			selection,
 			searchResults,
 			searchFooterUrl,
