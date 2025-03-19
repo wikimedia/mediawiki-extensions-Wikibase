@@ -2,7 +2,8 @@
 	"get": {
 		"operationId": "getPropertyDescriptionWithFallback",
 		"tags": [ "descriptions" ],
-		"summary": "Retrieve a Property's description in a specific language, with language fallback. If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description",
+		"summary": "Retrieve a Property's description in a specific language, with language fallback",
+		"description": "If a description is defined in the requested language, the API responds with a 200 status code and includes the description in the response payload. If a description only exists in a fallback language, the API returns a 307 status code and provides the location of the description.",
 		"parameters": [
 			{ "$ref": "../../global/parameters.json#/PropertyId" },
 			{ "$ref": "../../global/parameters.json#/LanguageCode" },
@@ -14,7 +15,7 @@
 		],
 		"responses": {
 			"200": {
-				"description": "Property's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location",
+				"description": "Property's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location.",
 				"$ref": "./responses.json#/PropertyDescription"
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },

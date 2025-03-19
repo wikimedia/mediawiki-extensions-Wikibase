@@ -126,7 +126,7 @@
 		}
 	},
 	"LabelMovedTemporarily": {
-		"description": "A label in a fallback language exists in the indicated location",
+		"description": "A label in a fallback language exists at the indicated location",
 		"headers": {
 			"Location": {
 				"description": "The URL to which the requested resource has been moved",
