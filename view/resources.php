@@ -281,7 +281,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.less',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.labelview.less',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.descriptionview.less',
-				'resources/jquery/ui/jquery.ui.tagadata.css',
+				'resources/jquery/ui/jquery.ui.tagadata.less',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.aliasesview.less',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.less',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.less',
