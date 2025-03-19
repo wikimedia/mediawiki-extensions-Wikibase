@@ -7,7 +7,7 @@
 .ui-toggler.ui-state-default {
 	background: none;
 	border: 0;
-	color: #0645ad; /* Reset jQuery UI theme color "back" to MediaWiki's standard link color */
+	color: var( --color-progressive, #0645ad ); /* Reset jQuery UI theme color to appropriate codex token */
 	display: block;
 	margin-top: .5em;
 	white-space: nowrap;
