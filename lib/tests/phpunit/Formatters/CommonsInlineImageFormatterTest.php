@@ -4,10 +4,13 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use File;
 use InvalidArgumentException;
+use MediaTransformOutput;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use ParserOptions;
+use RepoGroup;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
@@ -93,6 +96,29 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 
 		// fallback to using CommonsInLineImageFormatter::FALLBACK_THUMBNAIL_WIDTH
 		$this->assertMatchesRegularExpression( '/320px-Example\.jpg/', $html );
+	}
+
+	public function testFormat_unsafe_getDimensionsString(): void {
+		$file = $this->createConfiguredMock( File::class, [
+			'transform' => $this->createMock( MediaTransformOutput::class ),
+			'getDimensionsString' => '<script>alert("T389369")</script>',
+			'getSize' => 0,
+		] );
+		$repoGroup = $this->createConfiguredMock( RepoGroup::class, [
+			'findFile' => $file,
+		] );
+
+		$formatter = new CommonsInlineImageFormatter(
+			ParserOptions::newFromAnon(),
+			[ 120 ],
+			$this->getServiceContainer()->getLanguageFactory(),
+			$this->newFormatterOptions(),
+			$repoGroup
+		);
+		$html = $formatter->format( new StringValue( 'Example.jpg' ) );
+
+		$this->assertStringNotContainsString( '<script>', $html );
+		$this->assertStringContainsString( 'T389369', $html );
 	}
 
 	private function newSubjectInstance(
