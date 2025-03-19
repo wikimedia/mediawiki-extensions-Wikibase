@@ -6,5 +6,6 @@
 	},
 	"wikibase-edit": "revisa",
 	"wikibase-add": "omenta",
-	"wikibase-description-empty": "No hay pa detalles ya declara"
+	"wikibase-description-empty": "No hay pa detalles ya declara",
+	"wikibase-sitelinks-special": "Maga otro sitio"
 }
