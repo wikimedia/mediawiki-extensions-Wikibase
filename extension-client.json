@@ -168,6 +168,18 @@
 				"WikibaseClient.Store"
 			]
 		},
+		"LinkerMakeExternal": {
+			"class": "\\Wikibase\\Client\\Hooks\\LinkerMakeExternalLinkHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\LinkerMakeExternalLinkHookHandler::factory",
+			"services": [
+				"ContentLanguage",
+				"WikibaseClient.ClientEntityLinkFormatter",
+				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.EntityNamespaceLookup",
+				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
+				"WikibaseClient.Settings"
+			]
+		},
 		"LinkedDataSchemaGenerator": {
 			"class": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator",
 			"services": [
@@ -276,6 +288,7 @@
 		"GetDoubleUnderscoreIDs": "ParserFunctionRegistrant",
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoAction",
+		"LinkerMakeExternalLink": "LinkerMakeExternal",
 		"LinksUpdateComplete": "DataUpdate",
 		"LoadExtensionSchemaUpdates": [
 			"LoadExtensionSchemaUpdates",
