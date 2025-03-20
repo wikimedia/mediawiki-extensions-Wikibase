@@ -1,0 +1,24 @@
+/************************************************************************************
+IN __WIDE__ MODE ALWAYS SHOW ITEMS IN TWO COLUMNS
+Workaround for T316797
+Limits the size of the main interface when both menus are pinned AND the limited width
+is set to WIDE so that the display of languages appears on side
+*************************************************************************************/
+
+@media ( min-width: 1800px ) {
+	/* When 2 menus are pinned on either side */
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-page-tools-pinned-enabled .wikibase-entityview-main,
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-appearance-pinned-clientpref-1 .wikibase-entityview-main {
+		max-width: 65%;
+	}
+
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-page-tools-pinned-enabled .wikibase-entityview-side,
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-appearance-pinned-clientpref-1 .wikibase-entityview-side {
+		max-width: 30%;
+	}
+
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-page-tools-pinned-enabled .wikibase-statementgroupview,
+	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-appearance-pinned-clientpref-1 .wikibase-statementgroupview {
+		grid-template-columns: 10em auto;
+	}
+}
