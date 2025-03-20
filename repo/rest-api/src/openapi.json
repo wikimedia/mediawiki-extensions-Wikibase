@@ -33636,7 +33636,7 @@
                             "type": "string",
                             "pattern": "^Q[1-9]\\d{0,9}$"
                           },
-                          "label": {
+                          "display-label": {
                             "type": [
                               "object",
                               "null"
@@ -33698,7 +33698,7 @@
                         "additionalProperties": false,
                         "required": [
                           "id",
-                          "label",
+                          "display-label",
                           "description",
                           "match"
                         ]
@@ -33714,7 +33714,7 @@
                   "results": [
                     {
                       "id": "Q123",
-                      "label": {
+                      "display-label": {
                         "language": "en",
                         "value": "potato"
                       },
@@ -33730,7 +33730,7 @@
                     },
                     {
                       "id": "Q234",
-                      "label": {
+                      "display-label": {
                         "language": "en",
                         "value": "potato"
                       },
@@ -33846,7 +33846,7 @@
                             "type": "string",
                             "pattern": "^P[1-9]\\d{0,9}$"
                           },
-                          "label": {
+                          "display-label": {
                             "type": [
                               "object",
                               "null"
@@ -33908,7 +33908,7 @@
                         "additionalProperties": false,
                         "required": [
                           "id",
-                          "label",
+                          "display-label",
                           "description",
                           "match"
                         ]
@@ -33924,7 +33924,7 @@
                   "results": [
                     {
                       "id": "P123",
-                      "label": {
+                      "display-label": {
                         "language": "en",
                         "value": "taxon name"
                       },
@@ -33940,7 +33940,7 @@
                     },
                     {
                       "id": "P234",
-                      "label": {
+                      "display-label": {
                         "language": "en",
                         "value": "taxon rank"
                       },
@@ -43035,7 +43035,7 @@
                         "type": "string",
                         "pattern": "^Q[1-9]\\d{0,9}$"
                       },
-                      "label": {
+                      "display-label": {
                         "type": [
                           "object",
                           "null"
@@ -43097,7 +43097,7 @@
                     "additionalProperties": false,
                     "required": [
                       "id",
-                      "label",
+                      "display-label",
                       "description",
                       "match"
                     ]
@@ -43113,7 +43113,7 @@
               "results": [
                 {
                   "id": "Q123",
-                  "label": {
+                  "display-label": {
                     "language": "en",
                     "value": "potato"
                   },
@@ -43129,7 +43129,7 @@
                 },
                 {
                   "id": "Q234",
-                  "label": {
+                  "display-label": {
                     "language": "en",
                     "value": "potato"
                   },
@@ -43210,7 +43210,7 @@
                         "type": "string",
                         "pattern": "^P[1-9]\\d{0,9}$"
                       },
-                      "label": {
+                      "display-label": {
                         "type": [
                           "object",
                           "null"
@@ -43272,7 +43272,7 @@
                     "additionalProperties": false,
                     "required": [
                       "id",
-                      "label",
+                      "display-label",
                       "description",
                       "match"
                     ]
@@ -43288,7 +43288,7 @@
               "results": [
                 {
                   "id": "P123",
-                  "label": {
+                  "display-label": {
                     "language": "en",
                     "value": "taxon name"
                   },
@@ -43304,7 +43304,7 @@
                 },
                 {
                   "id": "P234",
-                  "label": {
+                  "display-label": {
                     "language": "en",
                     "value": "taxon rank"
                   },

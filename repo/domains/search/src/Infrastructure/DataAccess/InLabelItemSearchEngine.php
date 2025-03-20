@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
@@ -34,10 +33,7 @@ class InLabelItemSearchEngine implements ItemSearchEngine {
 				fn( TermSearchResult $result ) => new ItemSearchResult(
 					new ItemId( $result->getEntityId()->getSerialization() ),
 
-					$result->getDisplayLabel() &&
-						// if an alias was matched and there is no label, don't use the alias as the label
-						( $result->getMatchedTermType() !== TermTypes::TYPE_ALIAS ||
-							!$result->getMatchedTerm()->equals( $result->getDisplayLabel() ) )
+					$result->getDisplayLabel()
 						? new Label( $result->getDisplayLabel()->getLanguageCode(), $result->getDisplayLabel()->getText() )
 						: null,
 					$result->getDisplayDescription() ?

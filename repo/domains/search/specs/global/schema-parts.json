@@ -1,5 +1,5 @@
 {
-	"Label": {
+	"DisplayLabel": {
 		"type": [ "object", "null" ],
 		"properties": {
 			"language": { "type": "string" },
@@ -34,12 +34,12 @@
 				"type": "string",
 				"pattern": "^Q[1-9]\\d{0,9}$"
 			},
-			"label": { "$ref": "#/Label" },
+			"display-label": { "$ref": "#/DisplayLabel" },
 			"description": { "$ref": "#/Description" },
 			"match": { "$ref": "#/Match" }
 		},
 		"additionalProperties": false,
-		"required": [ "id", "label", "description", "match" ]
+		"required": [ "id", "display-label", "description", "match" ]
 	},
 	"SearchPropertyResult": {
 		"type": "object",
@@ -48,12 +48,12 @@
 				"type": "string",
 				"pattern": "^P[1-9]\\d{0,9}$"
 			},
-			"label": { "$ref": "#/Label" },
+			"display-label": { "$ref": "#/DisplayLabel" },
 			"description": { "$ref": "#/Description" },
 			"match": { "$ref": "#/Match" }
 		},
 		"additionalProperties": false,
-		"required": [ "id", "label", "description", "match" ]
+		"required": [ "id", "display-label", "description", "match" ]
 	},
 	"SearchItemResultList": {
 		"type": "object",

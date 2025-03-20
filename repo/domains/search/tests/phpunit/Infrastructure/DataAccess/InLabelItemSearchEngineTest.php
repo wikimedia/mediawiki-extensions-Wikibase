@@ -84,7 +84,7 @@ class InLabelItemSearchEngineTest extends TestCase {
 				)
 			),
 		];
-		yield 'should not use alias as display label' => [
+		yield 'alias as display label' => [
 			[
 				new TermSearchResult(
 					new Term( 'en', 'spud' ),
@@ -97,7 +97,7 @@ class InLabelItemSearchEngineTest extends TestCase {
 			new ItemSearchResults(
 				new ItemSearchResult(
 					new ItemId( 'Q123' ),
-					null,
+					new Label( 'en', 'spud' ),
 					new Description( 'en', 'root vegetable' ),
 					new MatchedData( 'alias', 'en', 'spud' )
 				)
