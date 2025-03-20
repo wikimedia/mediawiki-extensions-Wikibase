@@ -7,7 +7,7 @@ const path = require( 'path' );
 function findSchemasFiles() {
 	const domainsPath = path.join( __dirname, '../../domains' );
 	if ( !fs.existsSync( domainsPath ) ) {
-		throw new Error( `Domains directory not found at: ${ domainsPath}` );
+		throw new Error( `Domains directory not found at: ${domainsPath}` );
 	}
 
 	const schemaFiles = [];

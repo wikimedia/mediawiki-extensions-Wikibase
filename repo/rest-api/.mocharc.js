@@ -1,4 +1,4 @@
-/* eslint no-undef:0 */ // it's confused about "module" and "process" because .eslintrc doesn't extend wikimedia/server
+'use strict';
 
 module.exports = {
 	parallel: true,

@@ -59,7 +59,8 @@
 		"additionalProperties": {
 			"type": "string"
 		}
-	},	"Descriptions": {
+	},
+	"Descriptions": {
 		"type": "object",
 		"additionalProperties": {
 			"type": "string"

@@ -33,11 +33,11 @@
 			}
 		}
 	},
-	"DataPolicyViolationExample":  {
+	"DataPolicyViolationExample": {
 		"value": {
-			"code":"data-policy-violation",
-			"message":"Edit violates data policy",
-			"context":{
+			"code": "data-policy-violation",
+			"message": "Edit violates data policy",
+			"context": {
 				"violation": "{violation_code}",
 				"violation_context": {
 					"some": "context"
@@ -80,7 +80,7 @@
 		"value": {
 			"code": "referenced-resource-not-found",
 			"message": "The referenced resource does not exist",
-			"context": { "path":  "{json_pointer}" }
+			"context": { "path": "{json_pointer}" }
 		}
 	},
 	"CannotModifyReadOnlyValue": {
@@ -106,7 +106,7 @@
 			"code": "patch-test-failed",
 			"message": "Test operation in the provided patch failed",
 			"context": {
-				"path": "{json_pointer_to_patch_operation}" ,
+				"path": "{json_pointer_to_patch_operation}",
 				"actual_value": "actual value"
 			}
 		}

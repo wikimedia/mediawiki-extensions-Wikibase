@@ -4,7 +4,6 @@ const { RequestBuilder } = require( '../../../../../rest-api/tests/mocha/helpers
 const { getAllowedBadges } = require( './getAllowedBadges' );
 
 async function badgesConfig() {
-	// eslint-disable-next-line es-x/no-object-fromentries
 	return { badgeItems: Object.fromEntries( // TODO fix eslint config to allow this
 		( await getAllowedBadges() ).map( ( badge ) => [ badge, '' ] )
 	) };
