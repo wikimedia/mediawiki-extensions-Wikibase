@@ -557,5 +557,7 @@
 	"special-setdescription-parameterized": "Beschrijving voor $1 instellen",
 	"special-setlabeldescriptionaliases-parameterized": "Label, beschrijving en aliassen voor $1 instellen",
 	"wikibase-federated-properties-federated-property-api-error-message": "Via deze API kunt u niet met federatieve eigenschappen werken.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Het verzoek is mislukt vanwege een mislukt verzoek aan de federatiebronwiki."
+	"wikibase-federated-properties-failed-request-api-error-message": "Het verzoek is mislukt vanwege een mislukt verzoek aan de federatiebronwiki.",
+	"wikibase-scoped-search-item-scope-name": "Items",
+	"wikibase-scoped-search-property-scope-name": "Eigenschappen"
 }

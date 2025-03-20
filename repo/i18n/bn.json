@@ -352,5 +352,7 @@
 	"special-setaliases-parameterized": "$1 উপনাম নির্ধারণ করুন",
 	"special-setlabel-parameterized": "$1 লেবেল নির্ধারণ করুন",
 	"special-setdescription-parameterized": "$1 বিবরণ নির্ধারণ করুন",
-	"special-setlabeldescriptionaliases-parameterized": "$1 লেবেল, বিবরণ ও উপনাম নির্ধারণ করুন"
+	"special-setlabeldescriptionaliases-parameterized": "$1 লেবেল, বিবরণ ও উপনাম নির্ধারণ করুন",
+	"wikibase-scoped-search-item-scope-name": "আইটেম",
+	"wikibase-scoped-search-property-scope-name": "বৈশিষ্ট্য"
 }
