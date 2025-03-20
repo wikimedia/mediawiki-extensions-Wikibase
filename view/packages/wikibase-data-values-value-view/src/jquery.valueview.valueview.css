@@ -29,8 +29,16 @@
 }
 
 .valueview-ineditmode .valueview-input {
-	border-color: gray;
-	background-color: white;
+	border-color: var( --border-color-interactive, grey );
+	background-color: var( --background-color-base, white );
+}
+
+.valueview-ineditmode .valueview-input:focus {
+	border-width: 2px;
+	border-style: solid;
+	border-color: var( --border-color-progressive--focus, #36c );
+	border-radius: 3px;
+	outline: none;
 }
 
 .valueview-ineditmode.linkedsingleinputvalueview a,
