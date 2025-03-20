@@ -116,6 +116,22 @@ describe( 'Simple item search', () => {
 			} );
 		} );
 
+		it( 'finds an item by a label in a fallback language', async () => {
+			const language = 'de-ch';
+			const expectedFallbackLanguage = 'de';
+			const response = await newSearchRequest( language, item1GermanLabel )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.deepEqual( response.body.results, [ {
+				id: item1.id,
+				label: { language: expectedFallbackLanguage, value: item1GermanLabel },
+				description: { language: expectedFallbackLanguage, value: item1GermanDescription },
+				match: { type: 'label', language: expectedFallbackLanguage, text: item1GermanLabel }
+			} ] );
+		} );
+
 		it( 'finds nothing if no items match', async () => {
 			const response = await newSearchRequest( 'en', utils.uniq( 40 ) )
 				.assertValidRequest()

@@ -2,9 +2,10 @@
 
 namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 
+use MediaWiki\Languages\LanguageFactory;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 
@@ -13,31 +14,38 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Label;
  */
 class TermRetriever {
 
-	private TermLookup $termLookup;
+	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
+	private LanguageFactory $languageFactory;
 
-	public function __construct( TermLookup $termLookup ) {
-		$this->termLookup = $termLookup;
+	public function __construct( FallbackLabelDescriptionLookupFactory $lookupFactory, LanguageFactory $languageFactory ) {
+		$this->labelDescriptionLookupFactory = $lookupFactory;
+		$this->languageFactory = $languageFactory;
 	}
 
 	public function getLabel( EntityId $entityId, string $languageCode ): ?Label {
 		try {
-			$labelText = $this->termLookup->getLabel( $entityId, $languageCode );
+			$label = $this->labelDescriptionLookupFactory
+				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
+				->getLabel( $entityId );
 		} catch ( TermLookupException $e ) {
 			// this probably means that the entity does not exist
 			return null;
 		}
 
-		return $labelText !== null ? new Label( $languageCode, $labelText ) : null;
+		return $label !== null ? new Label( $label->getActualLanguageCode(), $label->getText() ) : null;
 	}
 
 	public function getDescription( EntityId $entityId, string $languageCode ): ?Description {
 		try {
-			$descriptionText = $this->termLookup->getDescription( $entityId, $languageCode );
+			$description = $this->labelDescriptionLookupFactory
+				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
+				->getDescription( $entityId );
 		} catch ( TermLookupException $e ) {
 			// this probably means that the entity does not exist
 			return null;
 		}
-		return $descriptionText !== null ? new Description( $languageCode, $descriptionText ) : null;
+
+		return $description !== null ? new Description( $description->getActualLanguageCode(), $description->getText() ) : null;
 	}
 
 }
