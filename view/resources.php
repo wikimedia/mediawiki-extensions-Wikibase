@@ -123,28 +123,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// deprecated: this is effectively wikibase.alltargets + wikibase.desktop, use those instead
-		'wikibase.common' => $moduleTemplate + [
-			'styles' => [
-				// Order must be hierarchical, do not order alphabetically
-				'wikibase/wikibase.less',
-				'wikibase/wikibase.itemlink.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.labelview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.less',
-				'wikibase/wikibase.badgedisplay.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.less',
-				'jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.less',
-			],
-		],
-
 		// end of common styles independent from JavaScript being enabled or disabled
 
 		'wikibase.templates' => $moduleTemplate + [
