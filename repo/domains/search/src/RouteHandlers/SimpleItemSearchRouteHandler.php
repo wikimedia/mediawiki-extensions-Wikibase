@@ -81,7 +81,7 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		$useMediaWikiSearchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
 
 		return $useMediaWikiSearchEngine
-			? WbSearch::getInLabelItemSearchEngine()
+			? WbSearch::getInLabelSearchEngine()
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory()
 					->getLookupForSource( WikibaseRepo::getLocalEntitySource() ),
