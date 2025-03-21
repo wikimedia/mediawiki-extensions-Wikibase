@@ -61,7 +61,7 @@
 	"wikibase-error-deserialize-error": "Не успеав да ги децентрализирам податоците",
 	"wikibase-error-serialize-error": "Не успеав да ги серијализирам податоците",
 	"wikibase-error-invalid-entity-id": "Назнаката „$2“ не му е позната на системот. Внесете важечка назнака.",
-	"wikibase-error-exceeded-entity-access-limit": "Пристапени се премногу единици на {{WBREPONAME}}.",
+	"wikibase-error-exceeded-entity-access-limit": "Пристапени се премногу единици на {{WBREPONAME}}. Број на вчитани единици: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Премногу повикувања на „mw.wikibase.getReferencedEntityId“. {{PLURAL:$2|Допуштени}} се највеќе $2.",
 	"unconnectedpages": "Страници што не се врзани со предмети",
 	"unconnectedpages-summary": "Оваа страница без сврзан податочен предмет (во именски простори што поддржуваат сврзани предмети).",
