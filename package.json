@@ -35,7 +35,7 @@
 		"@wdio/local-runner": "^7.16.16",
 		"@wdio/mocha-framework": "^7.16.15",
 		"@wdio/spec-reporter": "7.16.13",
-		"@wikimedia/codex": "^1.20.3",
+		"@wikimedia/codex": "1.21.1",
 		"api-testing": "^1.7.0",
 		"apollo-boost": "^0.4.9",
 		"cross-fetch": "^3.1.5",
