@@ -67,7 +67,7 @@ describe( 'Simple item search', () => {
 			const item1Result = results.find( ( { id } ) => id === item1.id );
 			assert.deepEqual( item1Result, {
 				id: item1.id,
-				label: { language, value: item1Label },
+				'display-label': { language, value: item1Label },
 				description: { language, value: item1Description },
 				match: { type: 'label', language, text: item1Label }
 			} );
@@ -75,7 +75,7 @@ describe( 'Simple item search', () => {
 			const item2Result = results.find( ( { id } ) => id === itemWithoutDescription.id );
 			assert.deepEqual( item2Result, {
 				id: itemWithoutDescription.id,
-				label: { language, value: item2Label },
+				'display-label': { language, value: item2Label },
 				description: null,
 				match: { type: 'label', language, text: item2Label }
 			} );
@@ -90,15 +90,15 @@ describe( 'Simple item search', () => {
 			expect( response ).to.have.status( 200 );
 			assert.deepEqual( response.body.results, [ {
 				id: item1.id,
-				label: { language, value: item1GermanLabel },
+				'display-label': { language, value: item1GermanLabel },
 				description: { language, value: item1GermanDescription },
 				match: { type: 'label', language, text: item1GermanLabel }
 			} ] );
 		} );
 
-		it( 'finds item without a label', async () => {
+		it( 'finds item without a label by alias', async () => {
 			const language = 'en';
-			const response = await newSearchRequest( language, englishTermMatchingAllItems )
+			const response = await newSearchRequest( language, item3Alias )
 				.assertValidRequest()
 				.makeRequest();
 
@@ -110,7 +110,7 @@ describe( 'Simple item search', () => {
 			const itemResult = results.find( ( { id } ) => id === itemWithoutLabel.id );
 			assert.deepEqual( itemResult, {
 				id: itemWithoutLabel.id,
-				label: null,
+				'display-label': { language, value: item3Alias },
 				description: { language, value: item3Description },
 				match: { type: 'alias', language, text: item3Alias }
 			} );
@@ -126,7 +126,7 @@ describe( 'Simple item search', () => {
 			expect( response ).to.have.status( 200 );
 			assert.deepEqual( response.body.results, [ {
 				id: item1.id,
-				label: { language: expectedFallbackLanguage, value: item1GermanLabel },
+				'display-label': { language: expectedFallbackLanguage, value: item1GermanLabel },
 				description: { language: expectedFallbackLanguage, value: item1GermanDescription },
 				match: { type: 'label', language: expectedFallbackLanguage, text: item1GermanLabel }
 			} ] );

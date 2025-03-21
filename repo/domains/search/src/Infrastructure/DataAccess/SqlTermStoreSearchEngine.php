@@ -40,15 +40,16 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
 		return new ItemSearchResults( ...array_map(
 			function ( TermIndexEntry $entry ) use ( $languageCode ) {
+				$matchedTermAsLabel = new Label( $entry->getLanguage(), $entry->getText() );
 				// if the matching entry is a label
-				$label = $entry->getTermType() === TermTypes::TYPE_LABEL ?
+				$itemLabel = $entry->getTermType() === TermTypes::TYPE_LABEL ?
 					// then use it for the search result
-					new Label( $entry->getLanguage(), $entry->getText() ) :
+					$matchedTermAsLabel :
 					// otherwise look up the item label in search language
 					$this->termRetriever->getLabel( $entry->getEntityId(), $languageCode );
 				return new ItemSearchResult(
 					new ItemId( (string)$entry->getEntityId() ),
-					$label,
+					$itemLabel ?? $matchedTermAsLabel,
 					$this->termRetriever->getDescription( $entry->getEntityId(), $languageCode ),
 					new MatchedData( $entry->getTermType(), $entry->getLanguage(), $entry->getText() )
 				);

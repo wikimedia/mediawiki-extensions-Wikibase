@@ -41,13 +41,13 @@
 					"results": [
 						{
 							"id": "Q123",
-							"label": { "language": "en", "value": "potato" },
+							"display-label": { "language": "en", "value": "potato" },
 							"description": { "language": "en", "value": "staple food" },
 							"match": { "type": "label", "language": "en", "text": "potato" }
 						},
 						{
 							"id": "Q234",
-							"label": { "language": "en", "value": "potato" },
+							"display-label": { "language": "en", "value": "potato" },
 							"description": { "language": "en", "value": "species of plant" },
 							"match": { "type": "label", "language": "en", "text": "potato" }
 						}
@@ -65,13 +65,13 @@
 					"results": [
 						{
 							"id": "P123",
-							"label": { "language": "en", "value": "taxon name" },
+							"display-label": { "language": "en", "value": "taxon name" },
 							"description": { "language": "en", "value": "scientific name of a taxon" },
 							"match": { "type": "label", "language": "en", "text": "taxon" }
 						},
 						{
 							"id": "P234",
-							"label": { "language": "en", "value": "taxon rank" },
+							"display-label": { "language": "en", "value": "taxon rank" },
 							"description": { "language": "en", "value": "level in a taxonomic hierarchy" },
 							"match": { "type": "label", "language": "en", "text": "taxon" }
 						}
