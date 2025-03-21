@@ -18,39 +18,26 @@ use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
  */
 class SimpleItemSearchTest extends TestCase {
 
-	private SimpleItemSearchValidator $validator;
-	private ItemSearchEngine $searchEngine;
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->validator = $this->createStub( SimpleItemSearchValidator::class );
-		$this->searchEngine = $this->createStub( ItemSearchEngine::class );
-	}
-
-	public function testCanConstruct(): void {
-		$this->assertInstanceOf( SimpleItemSearch::class, $this->newUseCase() );
-	}
-
 	public function testCanExecute(): void {
 		$query = 'needle';
 		$language = 'en';
 		$expectedResults = $this->createStub( ItemSearchResults::class );
 
-		$this->searchEngine = $this->createMock( ItemSearchEngine::class );
-		$this->searchEngine->expects( $this->once() )
+		$searchEngine = $this->createMock( ItemSearchEngine::class );
+		$searchEngine->expects( $this->once() )
 			->method( 'searchItemByLabel' )
 			->with( $query, $language )
 			->willReturn( $expectedResults );
 
 		$this->assertEquals(
 			$expectedResults,
-			$this->newUseCase()
+			$this->newUseCase( $searchEngine )
 				->execute( new SimpleItemSearchRequest( $query, $language ) )
 				->getResults()
 		);
 	}
 
-	private function newUseCase(): SimpleItemSearch {
-		return new SimpleItemSearch( $this->validator, $this->searchEngine );
+	private function newUseCase( ItemSearchEngine $searchEngine ): SimpleItemSearch {
+		return new SimpleItemSearch( $this->createStub( SimpleItemSearchValidator::class ), $searchEngine );
 	}
 }

@@ -17,37 +17,26 @@ use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
  */
 class SimplePropertySearchTest extends TestCase {
 
-	private PropertySearchEngine $searchEngine;
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->searchEngine = $this->createStub( PropertySearchEngine::class );
-	}
-
-	public function testCanConstruct(): void {
-		$this->assertInstanceOf( SimplePropertySearch::class, $this->newUseCase() );
-	}
-
 	public function testCanExecute(): void {
 		$query = 'needle';
 		$language = 'en';
 		$expectedResults = $this->createStub( PropertySearchResults::class );
 
-		$this->searchEngine = $this->createMock( PropertySearchEngine::class );
-		$this->searchEngine->expects( $this->once() )
+		$searchEngine = $this->createMock( PropertySearchEngine::class );
+		$searchEngine->expects( $this->once() )
 			->method( 'searchPropertyByLabel' )
 			->with( $query, $language )
 			->willReturn( $expectedResults );
 
 		$this->assertEquals(
 			$expectedResults,
-			$this->newUseCase()
+			$this->newUseCase( $searchEngine )
 				->execute( new SimplePropertySearchRequest( $query, $language ) )
 				->getResults()
 		);
 	}
 
-	private function newUseCase(): SimplePropertySearch {
-		return new SimplePropertySearch( $this->searchEngine );
+	private function newUseCase( PropertySearchEngine $searchEngine ): SimplePropertySearch {
+		return new SimplePropertySearch( $searchEngine );
 	}
 }
