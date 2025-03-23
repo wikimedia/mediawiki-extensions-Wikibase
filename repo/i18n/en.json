@@ -425,7 +425,7 @@
 	"wikibase-api-not-supported": "The requested feature is not supported by the given entity.",
 	"wikibase-api-not-statement": "Not a statement.",
 	"wikibase-api-not-item": "Not an Item.",
-	"wikibase-api-not-recognized-datatype": "A datatype was expected, but either missing or not recognized.",
+	"wikibase-api-not-recognized-datatype": "A datatype was expected, but it is either missing or not recognized.",
 	"wikibase-api-not-recognized-siteid": "The supplied site identifier was not recognized.",
 	"wikibase-api-not-recognized": "Something was not recognized.",
 	"wikibase-api-not-recognized-array": "An array was expected, but not recognized.",
