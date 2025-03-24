@@ -562,5 +562,7 @@
 	"special-setdescription-parameterized": "أضِف وصفاً $1",
 	"special-setlabeldescriptionaliases-parameterized": "أضِف تسمية $1 ووصفه وأسماءه المُستعارة.",
 	"wikibase-federated-properties-federated-property-api-error-message": "لا يمكنك التفاعل مع الخصائص المتحدة باستخدام واجهة برمجة التطبيقات هذه.",
-	"wikibase-federated-properties-failed-request-api-error-message": "فشل الطلب بسبب فشل طلب wiki مصدر الاتحاد."
+	"wikibase-federated-properties-failed-request-api-error-message": "فشل الطلب بسبب فشل طلب wiki مصدر الاتحاد.",
+	"wikibase-scoped-search-item-scope-name": "العناصر",
+	"wikibase-scoped-search-property-scope-name": "الخصائص"
 }

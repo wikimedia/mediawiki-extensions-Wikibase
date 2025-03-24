@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Cedric31",
+			"Lhanars",
 			"Quentí"
 		]
 	},
@@ -48,5 +49,6 @@
 	"wikibase-sitelinks-sitename-columnheading": "Lenga",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexion|Connexions}} amb {{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|visualiza}} la notificacion",
-	"unresolved-property-category": "Paginas amb de proprietats pas resolgudas"
+	"unresolved-property-category": "Paginas amb de proprietats pas resolgudas",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Atencion:</strong> Non avètz obèrt cap de session. Vòstra adreça IP serà visibla publicament se fasètz quina que siá modificacion. Se <strong>vos connectatz</strong> o <strong>creatz un compte</strong>, vòstras modificacions seràn atribuidas a vòstre nom d'utilizator, amb d'autres avantatges."
 }
