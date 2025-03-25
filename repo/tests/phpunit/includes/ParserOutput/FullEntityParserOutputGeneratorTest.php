@@ -32,11 +32,13 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTestBase {
+	private string $language;
 
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->entityViewFactory = $this->mockEntityViewFactory( false );
+		$this->language = 'en';
 	}
 
 	public static function provideTestGetParserOutput() {
@@ -195,6 +197,14 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		);
 	}
 
+	public function testSetsParserOutputLanguage(): void {
+		$this->language = 'de';
+		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
+
+		$parserOutput = $this->newEntityParserOutputGenerator()->getParserOutput( $entityRevision, false );
+		$this->assertSame( 'de', $parserOutput->getLanguage()->toBcp47Code() );
+	}
+
 	private function newEntityParserOutputGenerator( $title = null, $description = null ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'ntriples' ] );
@@ -229,7 +239,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$this->newLanguageFallbackChain(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ),
+			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->language ),
 			false
 		);
 	}

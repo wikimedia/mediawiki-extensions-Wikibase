@@ -93,8 +93,9 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->configBuilder->build( $entity, $parserOutput );
 
 		$entityMetaTagsCreator = $this->entityMetaTagsCreatorFactory->newEntityMetaTags( $entity->getType(), $this->language );
-
 		$parserOutput->setExtensionData( 'wikibase-meta-tags', $entityMetaTagsCreator->getMetaTags( $entity ) );
+
+		$parserOutput->setLanguage( $this->language );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
