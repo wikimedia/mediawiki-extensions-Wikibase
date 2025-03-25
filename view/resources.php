@@ -94,6 +94,9 @@ return call_user_func( function() {
 				'wikibase/wikibase.itemlink.less',
 				'wikibase/wikibase.monolingualtext.less',
 			],
+			'skinStyles' => [
+				'vector-2022' => 'wikibase/wikibase.vector-2022.less',
+			],
 		],
 
 		// desktop-only (though some of these should be on mobile too, see T326428)
