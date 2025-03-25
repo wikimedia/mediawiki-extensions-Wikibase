@@ -11,7 +11,7 @@ use RuntimeException;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelItemSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SimpleItemSearchRouteHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -33,9 +33,9 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->setService( 'ExtensionRegistry', $extensionRegistry );
 
 		$usingCirrusBasedSearch = false;
-		$this->setService( 'WbSearch.InLabelItemSearchEngine', function() use ( &$usingCirrusBasedSearch ) {
+		$this->setService( 'WbSearch.InLabelSearchEngine', function() use ( &$usingCirrusBasedSearch ) {
 			$usingCirrusBasedSearch = true;
-			return $this->createStub( InLabelItemSearchEngine::class );
+			return $this->createStub( InLabelSearchEngine::class );
 		} );
 
 		$matchingTermsLookupFactory = $this->createMock( MatchingTermsLookupFactory::class );
@@ -59,8 +59,8 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $this->createStub( MatchingTermsLookup::class ) );
 		$this->setService( 'WikibaseRepo.MatchingTermsLookupFactory', $matchingTermsLookupFactory );
 
-		$this->setService( 'WbSearch.InLabelItemSearchEngine', function(): void {
-			$this->fail( 'WbSearch.InLabelItemSearchEngine was not expected to be called.' );
+		$this->setService( 'WbSearch.InLabelSearchEngine', function(): void {
+			$this->fail( 'WbSearch.InLabelSearchEngine was not expected to be called.' );
 		} );
 
 		$this->assertInstanceOf( SimpleItemSearchRouteHandler::class, SimpleItemSearchRouteHandler::factory() );

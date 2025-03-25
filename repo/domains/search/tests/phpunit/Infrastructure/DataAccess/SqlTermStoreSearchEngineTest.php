@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
@@ -15,6 +16,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 
@@ -36,7 +39,7 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$this->termRetriever = $this->createStub( TermRetriever::class );
 	}
 
-	public function testGivenSearchResultForLabel(): void {
+	public function testGivenSearchResultForItemLabel(): void {
 		$searchTerm = 'potato';
 		$languageCode = 'en';
 
@@ -74,6 +77,47 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
 			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
+		);
+	}
+
+	public function testGivenSearchResultForPropertyLabel(): void {
+		$searchTerm = 'instance of';
+		$languageCode = 'en';
+
+		$expectedSearchResult = new PropertySearchResult(
+			new NumericPropertyId( 'P123' ),
+			new Label( 'en', 'instance of' ),
+			new Description( 'en', 'the class of which this subject is a particular example and member' ),
+			new MatchedData( TermTypes::TYPE_LABEL, 'en', 'instance of' )
+		);
+
+		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$this->matchingTermsLookup->expects( $this->exactly( 2 ) )
+			->method( 'getMatchingTerms' )
+			->willReturnOnConsecutiveCalls(
+				[
+					new TermIndexEntry( [ // one entry with matching label will be found
+						TermIndexEntry::FIELD_TYPE => TermTypes::TYPE_LABEL,
+						TermIndexEntry::FIELD_LANGUAGE => 'en',
+						TermIndexEntry::FIELD_TEXT => 'instance of',
+						TermIndexEntry::FIELD_ENTITY => new NumericPropertyId( 'P123' ),
+					] ),
+				],
+				[], // no entry with matching alias will be found
+			);
+
+		$this->termRetriever = $this->createMock( TermRetriever::class );
+		// we will not call TermRetriever::getLabel() because the index entry is of type label already
+		$this->termRetriever->expects( $this->never() )
+			->method( 'getLabel' );
+		$this->termRetriever->expects( $this->once() )
+			->method( 'getDescription' )
+			->with( 'P123', $languageCode )
+			->willReturn( new Description( 'en', 'the class of which this subject is a particular example and member' ) );
+
+		$this->assertEquals(
+			new PropertySearchResults( $expectedSearchResult ),
+			$this->newEngine()->searchPropertyByLabel( $searchTerm, $languageCode )
 		);
 	}
 

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookup;
@@ -13,14 +13,18 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
+use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
 
 /**
- * Sql-backed {@link ItemSearchEngine}. This should only be used for development or testing purposes.
+ * Sql-backed {@link ItemSearchEngine} and {@link PropertySearchEngine}.
+ * This should only be used for development or testing purposes.
  *
  * @license GPL-2.0-or-later
  */
-class SqlTermStoreSearchEngine implements ItemSearchEngine {
+class SqlTermStoreSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 	private const RESULTS_LIMIT = 5;
 
 	private MatchingTermsLookup $matchingTermsLookup;
@@ -39,29 +43,22 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 
 	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
 		return new ItemSearchResults( ...array_map(
-			function ( TermIndexEntry $entry ) use ( $languageCode ) {
-				$matchedTermAsLabel = new Label( $entry->getLanguage(), $entry->getText() );
-				// if the matching entry is a label
-				$itemLabel = $entry->getTermType() === TermTypes::TYPE_LABEL ?
-					// then use it for the search result
-					$matchedTermAsLabel :
-					// otherwise look up the item label in search language
-					$this->termRetriever->getLabel( $entry->getEntityId(), $languageCode );
-				return new ItemSearchResult(
-					new ItemId( (string)$entry->getEntityId() ),
-					$itemLabel ?? $matchedTermAsLabel,
-					$this->termRetriever->getDescription( $entry->getEntityId(), $languageCode ),
-					new MatchedData( $entry->getTermType(), $entry->getLanguage(), $entry->getText() )
-				);
-			},
-			$this->findMatchingLabelsAndAliases( $searchTerm, $languageCode )
+			$this->convertResult( ItemSearchResult::class, $languageCode ),
+			$this->findMatchingLabelsAndAliases( Item::ENTITY_TYPE, $searchTerm, $languageCode )
+		) );
+	}
+
+	public function searchPropertyByLabel( string $searchTerm, string $languageCode ): PropertySearchResults {
+		return new PropertySearchResults( ...array_map(
+			$this->convertResult( PropertySearchResult::class, $languageCode ),
+			$this->findMatchingLabelsAndAliases( Property::ENTITY_TYPE, $searchTerm, $languageCode )
 		) );
 	}
 
 	/**
 	 * @return TermIndexEntry[]
 	 */
-	private function findMatchingLabelsAndAliases( string $searchTerm, string $languageCode ): array {
+	private function findMatchingLabelsAndAliases( string $entityType, string $searchTerm, string $languageCode ): array {
 		$searchCriteria = array_map(
 			fn( string $lang ) => new TermIndexSearchCriteria( [ 'termLanguage' => $lang, 'termText' => $searchTerm ] ),
 			$this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes()
@@ -71,16 +68,32 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine {
 			$this->matchingTermsLookup->getMatchingTerms(
 				$searchCriteria,
 				TermTypes::TYPE_LABEL,
-				Item::ENTITY_TYPE,
+				$entityType,
 				[ 'LIMIT' => self::RESULTS_LIMIT ]
 			),
 			$this->matchingTermsLookup->getMatchingTerms(
 				$searchCriteria,
 				TermTypes::TYPE_ALIAS,
-				Item::ENTITY_TYPE,
+				$entityType,
 				[ 'LIMIT' => self::RESULTS_LIMIT ]
 			)
 		);
+	}
+
+	private function convertResult( string $resultClass, string $languageCode ): callable {
+		return function ( TermIndexEntry $entry ) use ( $resultClass, $languageCode ) {
+			$matchedTermAsLabel = new Label( $entry->getLanguage(), $entry->getText() );
+			$itemLabel = $entry->getTermType() === TermTypes::TYPE_LABEL ?
+				$matchedTermAsLabel :
+				$this->termRetriever->getLabel( $entry->getEntityId(), $languageCode );
+
+			return new $resultClass(
+				$entry->getEntityId(),
+				$itemLabel ?? $matchedTermAsLabel,
+				$this->termRetriever->getDescription( $entry->getEntityId(), $languageCode ),
+				new MatchedData( $entry->getTermType(), $entry->getLanguage(), $entry->getText() )
+			);
+		};
 	}
 
 }

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Domains\Search;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use Psr\Container\ContainerInterface;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelItemSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -21,8 +21,8 @@ class WbSearch {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.UnexpectedErrorHandlerMiddleware' );
 	}
 
-	public static function getInLabelItemSearchEngine( ?ContainerInterface $services = null ): InLabelItemSearchEngine {
-		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.InLabelItemSearchEngine' );
+	public static function getInLabelSearchEngine( ?ContainerInterface $services = null ): InLabelSearchEngine {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.InLabelSearchEngine' );
 	}
 
 }
