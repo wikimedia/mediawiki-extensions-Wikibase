@@ -12,5 +12,8 @@
 	"wikibase-linkitem-linkpage": "Link'un ha gikap",
 	"wikibase-linkitem-selectlink": "Pīꞌ ba sin site iban gikap amu in kabayaan niyu link'un ha gikap ini.",
 	"wikibase-linkitem-input-site": "Bahasa:",
-	"wikibase-linkitem-input-page": "Pahina:"
+	"wikibase-linkitem-input-page": "Pahina:",
+	"wikibase-rc-hide-wikidata-hide": "Tapukun",
+	"wikibase-rc-hide-wikidata-show": "Pakitaun",
+	"wikibase-otherprojects": "Ha manga prujik dugaing"
 }

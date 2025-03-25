@@ -369,7 +369,7 @@
 	"wikibase-redirectentity-fromid": "המזהה שממנו להפנות",
 	"wikibase-redirectentity-toid": "המזהה שאליו להפנות",
 	"wikibase-redirectentity-submit": "הפניה",
-	"wikibase-redirect-origin-not-empty": "לא ניתן ליצור פהניה בישות בלתי־ריקה $1",
+	"wikibase-redirect-origin-not-empty": "לא ניתן ליצור הפניה בישות בלתי־ריקה $1",
 	"wikibase-redirect-no-such-entity": "לא היה ניתן למצוא את הישור $1",
 	"wikibase-redirect-cant-load-entity-content": "לא ניתן לגשת לתוכן, ייתכן שהגרסה נמחקה.",
 	"wikibase-redirect-target-is-incompatible": "סוגי ישויות בלתי־תואמים",
