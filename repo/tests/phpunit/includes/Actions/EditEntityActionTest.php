@@ -945,7 +945,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( isset( $params['wpEditToken'] ) && $params['wpEditToken'] === true ) {
-			$params['wpEditToken'] = self::$user->getEditToken(); //TODO: $user
+			$params['wpEditToken'] = $this->user->getEditToken(); //TODO: $user
 		}
 
 		$out = $this->callAction( $action, $page, $params, $post );
@@ -1098,7 +1098,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( !isset( $params['wpEditToken'] ) ) {
-			$params['wpEditToken'] = self::$user->getEditToken();
+			$params['wpEditToken'] = $this->user->getEditToken();
 		}
 
 		if ( !isset( $params['wpSave'] ) ) {
@@ -1177,7 +1177,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( $handle );
 
 		$params = [
-			'wpEditToken' => self::$user->getEditToken(),
+			'wpEditToken' => $this->user->getEditToken(),
 			'wpSave' => 1,
 			'undo' => $page->getLatest(),
 		];
@@ -1217,11 +1217,11 @@ class EditEntityActionTest extends ActionTestCase {
 
 		$page = $this->getTestItemPage( $handle );
 
-		$originalUser = self::$user;
+		$originalUser = $this->user;
 		$this->setUser( $this->getServiceContainer()->getUserFactory()->newAnonymous() );
 
 		$params = [
-			'wpEditToken' => self::$user->getEditToken(),
+			'wpEditToken' => $this->user->getEditToken(),
 			'wpSave' => 1,
 			'undo' => $page->getLatest(),
 		];
@@ -1247,13 +1247,13 @@ class EditEntityActionTest extends ActionTestCase {
 	}
 
 	/**
-	 * Changes self::$user and resets any associated state
+	 * Changes $this->user and resets any associated state
 	 *
 	 * @param User $user the desired user
 	 */
 	private function setUser( User $user ) {
-		if ( $user->getName() !== self::$user->getName() ) {
-			self::$user = $user;
+		if ( $user->getName() !== $this->user->getName() ) {
+			$this->user = $user;
 		}
 	}
 }
