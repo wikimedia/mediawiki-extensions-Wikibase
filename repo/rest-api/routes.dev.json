@@ -8,5 +8,10 @@
 		"path": "/wikibase/v0/search/items",
 		"method": "GET",
 		"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
+	},
+	{
+		"path": "/wikibase/v0/search/properties",
+		"method": "GET",
+		"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler::factory"
 	}
 ]
