@@ -19,14 +19,9 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
-use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\Validators\CompositeValidator;
-use Wikibase\Repo\Validators\MembershipValidator;
-use Wikibase\Repo\Validators\NotMulValidator;
-use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -49,26 +44,13 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 	public static function factory(): Handler {
 		return new self(
 			new SimpleItemSearch(
-				self::newUseCaseValidator(),
+				new SimpleItemSearchValidator( WbSearch::getLanguageCodeValidator() ),
 				self::newSearchEngine()
 			),
 			new MiddlewareHandler( [
 				WbSearch::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 			] )
-		);
-	}
-
-	private static function newUseCaseValidator(): SimpleItemSearchValidator {
-		$validators = [];
-		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new MembershipValidator( WikibaseRepo::getTermsLanguages()->getLanguages(), 'not-a-language' );
-		$validators[] = new NotMulValidator( MediaWikiServices::getInstance()->getLanguageNameUtils() );
-
-		return new SimpleItemSearchValidator(
-			new LanguageCodeValidator(
-				new CompositeValidator( $validators, true )
-			)
 		);
 	}
 

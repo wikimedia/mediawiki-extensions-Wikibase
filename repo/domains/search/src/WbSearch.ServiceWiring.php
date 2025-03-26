@@ -6,11 +6,17 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
+use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
+use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\NotMulValidator;
+use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\InLabelSearch;
 
@@ -28,6 +34,17 @@ return [
 			WikibaseRepo::getContentModelMappings( $services ),
 			CirrusDebugOptions::fromRequest( RequestContext::getMain()->getRequest() )
 		) );
+	},
+
+	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
+		$validators = [];
+		$validators[] = new TypeValidator( 'string' );
+		$validators[] = new MembershipValidator( WikibaseRepo::getTermsLanguages()->getLanguages(), 'not-a-language' );
+		$validators[] = new NotMulValidator( MediaWikiServices::getInstance()->getLanguageNameUtils() );
+
+		return new LanguageCodeValidator(
+			new CompositeValidator( $validators )
+		);
 	},
 
 	'WbSearch.SimplePropertySearch' => function( MediaWikiServices $services ): SimplePropertySearch {

@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
+use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -24,6 +25,10 @@ class WbSearch {
 
 	public static function getInLabelSearchEngine( ?ContainerInterface $services = null ): InLabelSearchEngine {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.InLabelSearchEngine' );
+	}
+
+	public static function getLanguageCodeValidator( ?ContainerInterface $services = null ): SearchLanguageValidator {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.LanguageCodeValidator' );
 	}
 
 	public static function getSimplePropertySearch( ?ContainerInterface $services = null ): SimplePropertySearch {
