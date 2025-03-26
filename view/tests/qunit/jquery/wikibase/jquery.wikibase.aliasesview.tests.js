@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createAliasesview = function ( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: new datamodel.MultiTerm( 'en', [ 'a', 'b', 'c' ] )
 		}, options || {} );
 

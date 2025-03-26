@@ -27,7 +27,7 @@
 	function createEdittoolbar( options ) {
 		return $( '<span>' )
 			.addClass( 'test_edittoolbar' )
-			.edittoolbar( $.extend( {
+			.edittoolbar( Object.assign( {
 				getHelpMessage: function () {
 					return $.Deferred().resolve().promise();
 				}

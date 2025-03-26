@@ -48,7 +48,7 @@
 	 * @return {jQuery}
 	 */
 	function createSnaklistview( value, additionalOptions ) {
-		var options = $.extend( additionalOptions, {
+		var options = Object.assign( additionalOptions || {}, {
 			value: value || undefined,
 			getListItemAdapter: function () {
 				return listItemAdapter;

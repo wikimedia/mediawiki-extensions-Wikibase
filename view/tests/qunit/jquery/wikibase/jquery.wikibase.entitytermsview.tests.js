@@ -35,7 +35,7 @@
 	 * @return {jQuery}
 	 */
 	function createEntitytermsview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: createFingerprint(),
 			userLanguages: [ 'de', 'en' ]
 		}, options || {} );

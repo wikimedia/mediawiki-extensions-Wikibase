@@ -12,7 +12,7 @@
 	 * @return {jQuery}
 	 */
 	function createSitelinkview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			entityIdPlainFormatter: 'i am an EntityIdPlainFormatter',
 			allowedSiteIds: [ 'aawiki', 'enwiki' ],
 			getSiteLinkRemover: function () {

@@ -23,7 +23,7 @@
 	 * @return {jQuery}
 	 */
 	function createBadgeselector( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			badges: {
 				Q1: 'additionalCssClass-1',
 				Q2: 'additionalCssClass-21 additionalCssClass22',

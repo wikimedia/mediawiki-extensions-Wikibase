@@ -32,7 +32,7 @@
 	 * @return {jQuery}
 	 */
 	var createSnakview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			autoStartEditing: false,
 			entityIdHtmlFormatter: {
 				format: function () {

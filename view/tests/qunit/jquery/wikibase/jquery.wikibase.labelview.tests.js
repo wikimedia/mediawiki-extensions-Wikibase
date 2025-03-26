@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createLabelview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: new datamodel.Term( 'en', 'test label' )
 		}, options || {} );
 
@@ -103,17 +103,19 @@
 		labelview.stopEditing();
 	} );
 
-	var TestItem = function ( key ) {
-		this._key = key;
-	};
-	$.extend( TestItem.prototype, {
-		equals: function ( other ) {
+	var TestItem = class {
+		constructor( key ) {
+			this._key = key;
+		}
+
+		equals( other ) {
 			return other === this;
-		},
-		getKey: function () {
+		}
+
+		getKey() {
 			return this._key;
 		}
-	} );
+	};
 
 	var createLanguageSet = function ( languages ) {
 		var items = [];

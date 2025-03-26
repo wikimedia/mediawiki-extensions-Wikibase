@@ -15,7 +15,7 @@
 	function createListview( value, options ) {
 		var $node = $( '<div>' ).addClass( 'test_listview' );
 
-		options = $.extend( {
+		options = Object.assign( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibasetest.valuewidget,
 				newItemOptionsFn: function ( val ) {

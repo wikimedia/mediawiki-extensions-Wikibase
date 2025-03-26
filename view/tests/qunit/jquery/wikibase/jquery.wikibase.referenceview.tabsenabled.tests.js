@@ -32,7 +32,7 @@
 	 * @return {jQuery}
 	 */
 	function createReferenceview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			getAdder: function () {
 				return {
 					destroy: function () {}
