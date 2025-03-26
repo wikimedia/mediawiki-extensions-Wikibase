@@ -14,44 +14,31 @@
 	 * Entity initializer.
 	 * Deserializes the entity passed to JavaScript via mw.config variable or
 	 * as entity object promise.
-	 *
-	 * @constructor
-	 *
-	 * @param {string|Thenable} arg Config variable name or entity object promise
-	 *
-	 * @throws {Error} if required parameter is not specified properly.
 	 */
-	var EntityInitializer = wb.EntityInitializer = function ( arg ) {
-		var entityPromise;
-		if ( typeof arg === 'string' ) {
-			entityPromise = getFromConfig( arg );
-		} else if ( isThenable( arg ) ) {
-			entityPromise = arg;
-		} else {
-			throw new Error(
-				'Config variable name or entity promise needs to be specified'
-			);
-		}
-
-		this._entityPromise = entityPromise;
-	};
-
-	EntityInitializer.newFromEntityLoadedHook = function () {
-		var entityPromise = $.Deferred( ( deferred ) => {
-			mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( entity ) => {
-				deferred.resolve( entity );
-			} );
-		} ).promise();
-
-		return new EntityInitializer( entityPromise );
-	};
-
-	$.extend( EntityInitializer.prototype, {
+	wb.EntityInitializer = class {
 
 		/**
-		 * @type {jQuery.Promise} Promise for serialized entity
+		 * @param {string|Thenable} arg Config variable name or entity object promise
+		 *
+		 * @throws {Error} if required parameter is not specified properly.
 		 */
-		_entityPromise: null,
+		constructor( arg ) {
+			var entityPromise;
+			if ( typeof arg === 'string' ) {
+				entityPromise = getFromConfig( arg );
+			} else if ( isThenable( arg ) ) {
+				entityPromise = arg;
+			} else {
+				throw new Error(
+					'Config variable name or entity promise needs to be specified'
+				);
+			}
+
+			/**
+			 * @type {jQuery.Promise} Promise for serialized entity
+			 */
+			this._entityPromise = entityPromise;
+		}
 
 		/**
 		 * Retrieves an entity from mw.config.
@@ -61,11 +48,11 @@
 		 *         - {wikibase.datamodel.Entity}
 		 *         No rejected parameters.
 		 */
-		getEntity: function () {
+		getEntity() {
 			var self = this;
 
 			return this._entityPromise.then( ( entity ) => self._getDeserializer().then( ( entityDeserializer ) => entityDeserializer.deserialize( entity ) ) );
-		},
+		}
 
 		/**
 		 * @return {Object} jQuery promise
@@ -73,7 +60,7 @@
 		 *         - {serialization.EntityDeserializer}
 		 *         No rejected parameters.
 		 */
-		_getDeserializer: function () {
+		_getDeserializer() {
 			var entityDeserializer = new serialization.EntityDeserializer(),
 				deferred = $.Deferred();
 
@@ -100,7 +87,17 @@
 			} );
 			return deferred.promise();
 		}
-	} );
+
+		static newFromEntityLoadedHook() {
+			var entityPromise = $.Deferred( ( deferred ) => {
+				mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( entity ) => {
+					deferred.resolve( entity );
+				} );
+			} ).promise();
+
+			return new this( entityPromise );
+		}
+	};
 
 	function isThenable( arg ) {
 		return typeof arg === 'object' && typeof arg.then === 'function';

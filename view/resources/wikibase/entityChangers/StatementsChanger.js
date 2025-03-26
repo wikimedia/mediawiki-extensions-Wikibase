@@ -18,53 +18,41 @@
 	 * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
 	 * @param {Function} [fireHook] called after a statement has been saved (wikibase.statement.saved) or deleted (wikibase.statement.deleted), with the hook name (wikibase.…), entity ID and statement ID as arguments.
 	 */
-	var SELF = MODULE.StatementsChanger = function WbEntityChangersStatementsChanger(
-		api,
-		revisionStore,
-		statementsChangerState,
-		statementSerializer,
-		statementDeserializer,
-		fireHook
-	) {
-		this._api = api;
-		this._revisionStore = revisionStore;
-		this._statementsChangerState = statementsChangerState;
-		this._statementSerializer = statementSerializer;
-		this._statementDeserializer = statementDeserializer;
-		this._fireHook = fireHook || function () {
-		};
-	};
-
-	$.extend( SELF.prototype, {
-		/**
-		 * @type {wikibase.api.RepoApi}
-		 */
-		_api: null,
-
-		/**
-		 * @type {wikibase.RevisionStore}
-		 */
-		_revisionStore: null,
-
-		/**
-		 * @type {wikibase.entityChangers.StatementsChangerState}
-		 */
-		_statementsChangerState: null,
-
-		/**
-		 * @type {wikibase.serialization.StatementSerializer}
-		 */
-		_statementSerializer: null,
-
-		/**
-		 * @type {wikibase.serialization.StatementDeserializer}
-		 */
-		_statementDeserializer: null,
-
-		/**
-		 * @type {Function}
-		 */
-		_fireHook: null,
+	MODULE.StatementsChanger = class {
+		constructor(
+			api,
+			revisionStore,
+			statementsChangerState,
+			statementSerializer,
+			statementDeserializer,
+			fireHook
+		) {
+			/**
+			 * @type {wikibase.api.RepoApi}
+			 */
+			this._api = api;
+			/**
+			 * @type {wikibase.RevisionStore}
+			 */
+			this._revisionStore = revisionStore;
+			/**
+			 * @type {wikibase.entityChangers.StatementsChangerState}
+			 */
+			this._statementsChangerState = statementsChangerState;
+			/**
+			 * @type {wikibase.serialization.StatementSerializer}
+			 */
+			this._statementSerializer = statementSerializer;
+			/**
+			 * @type {wikibase.serialization.StatementDeserializer}
+			 */
+			this._statementDeserializer = statementDeserializer;
+			/**
+			 * @type {Function}
+			 */
+			this._fireHook = fireHook || function () {
+			};
+		}
 
 		/**
 		 * @param {datamodel.Statement} statement
@@ -75,7 +63,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		remove: function ( statement ) {
+		remove( statement ) {
 			var deferred = $.Deferred(),
 				self = this,
 				guid = statement.getClaim().getGuid();
@@ -104,14 +92,14 @@
 			} );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * @param {string} propertyId
 		 * @param {string} guid
 		 * @private
 		 */
-		_updateChangerStateOnRemoval: function ( propertyId, guid ) {
+		_updateChangerStateOnRemoval( propertyId, guid ) {
 			var statementsForPropertyId, statementsForPropertyIdArray;
 
 			statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId );
@@ -132,7 +120,7 @@
 				// No more statements with this Property id, remove the whole thing.
 				this._statementsChangerState.getStatements().removeItemByKey( propertyId );
 			}
-		},
+		}
 
 		/**
 		 * @param {datamodel.Statement} statement
@@ -142,7 +130,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		save: function ( statement ) {
+		save( statement ) {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -194,7 +182,7 @@
 			} );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * @param {datamodel.Statement} statement
@@ -202,7 +190,7 @@
 		 * @param {string} guid
 		 * @private
 		 */
-		_updateChangerStateOnSetClaim: function ( statement, propertyId, guid ) {
+		_updateChangerStateOnSetClaim( statement, propertyId, guid ) {
 			var statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId ),
 				statementsForPropertyIdArray;
 
@@ -224,6 +212,6 @@
 			}
 			statementsForPropertyId.addItem( statement );
 		}
-	} );
+	};
 
 }( wikibase ) );

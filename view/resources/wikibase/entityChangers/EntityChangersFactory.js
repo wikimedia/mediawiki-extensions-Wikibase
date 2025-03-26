@@ -8,59 +8,49 @@
 	var MODULE = wb.entityChangers,
 		serialization = require( 'wikibase.serialization' );
 
-	/**
-	 * @constructor
-	 *
-	 * @param {wikibase.api.RepoApi} api
-	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
-	 * @param {Function} [fireHook] optional callback that is triggered on certain events, called with the hook name (string) as first argument and hook arguments as remaining arguments.
-	 */
-	var SELF = MODULE.EntityChangersFactory = function WbEntityChangersEntityChangersFactory(
-		api,
-		revisionStore,
-		entity,
-		fireHook
-	) {
-		this._api = api;
-		this._revisionStore = revisionStore;
-		this._entity = entity;
-		this._fireHook = fireHook;
-	};
-
-	$.extend( SELF.prototype, {
+	MODULE.EntityChangersFactory = class {
 		/**
-		 * @type {wikibase.api.RepoApi}
+		 * @param {wikibase.api.RepoApi} api
+		 * @param {wikibase.RevisionStore} revisionStore
+		 * @param {wikibase.datamodel.Entity} entity
+		 * @param {Function} [fireHook] optional callback that is triggered on certain events, called with the hook name (string) as first argument and hook arguments as remaining arguments.
 		 */
-		_api: null,
+		constructor(
+			api,
+			revisionStore,
+			entity,
+			fireHook
+		) {
+			/**
+			 * @type {wikibase.api.RepoApi}
+			 */
+			this._api = api;
+			/**
+			 * @type {wikibase.RevisionStore}
+			 */
+			this._revisionStore = revisionStore;
+			/**
+			 * @type {wikibase.datamodel.Entity}
+			 */
+			this._entity = entity;
+			/**
+			 * @type {Function}
+			 */
+			this._fireHook = fireHook;
+		}
 
-		/**
-		 * @type {wikibase.RevisionStore}
-		 */
-		_revisionStore: null,
-
-		/**
-		 * @type {wikibase.datamodel.Entity}
-		 */
-		_entity: null,
-
-		/**
-		 * @type {Function}
-		 */
-		_fireHook: null,
-
-		getRevisionStore: function () {
+		getRevisionStore() {
 			return this._revisionStore;
-		},
+		}
 
-		getEntity: function () {
+		getEntity() {
 			return this._entity;
-		},
+		}
 
 		/**
 		 * @return {wikibase.entityChangers.StatementsChanger}
 		 */
-		getStatementsChanger: function () {
+		getStatementsChanger() {
 			if ( typeof this._entity.getStatements !== 'function' ) {
 				throw new Error( 'Statements Changer requires entity with statements' );
 			}
@@ -72,21 +62,21 @@
 				new serialization.StatementDeserializer(),
 				this._fireHook
 			);
-		},
+		}
 
 		/**
 		 * @return {wikibase.entityChangers.EntityTermsChanger}
 		 */
-		getEntityTermsChanger: function () {
+		getEntityTermsChanger() {
 			return new MODULE.EntityTermsChanger( this._api, this._revisionStore, this._entity );
-		},
+		}
 
 		/**
 		 * @return {wikibase.entityChangers.SiteLinkSetsChanger}
 		 */
-		getSiteLinkSetsChanger: function () {
+		getSiteLinkSetsChanger() {
 			return new MODULE.SiteLinkSetsChanger( this._api, this._revisionStore, this._entity );
 		}
-	} );
+	};
 
 }( wikibase ) );

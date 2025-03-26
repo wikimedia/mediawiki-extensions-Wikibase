@@ -10,14 +10,14 @@
 	var monolingualTextLanguages = require( './contentLanguages.json' ).monolingualtext;
 	var termLanguages = require( './contentLanguages.json' ).term;
 
-	/**
-	 * @constructor
-	 * @private
-	 */
-	var SELF = MODULE.WikibaseContentLanguages = util.inherit(
-		'WbContentLanguages',
-		PARENT,
-		function ( contentLanguages, getName ) {
+	MODULE.WikibaseContentLanguages = class WbContentLanguages extends PARENT {
+		/**
+		 * @param {string[]|null} contentLanguages
+		 * @param {Function} getName
+		 * @private
+		 */
+		constructor( contentLanguages, getName ) {
+			super();
 			if ( !Array.isArray( contentLanguages ) ) {
 				throw new Error( 'Required parameter "contentLanguages" is not specified properly.' );
 			}
@@ -25,47 +25,33 @@
 				throw new Error( 'Required parameter "getName" is not specified properly.' );
 			}
 
+			/**
+			 * @type {string[]|null}
+			 * @private
+			 */
 			this._languageCodes = contentLanguages;
+			/**
+			 * @type {Function}
+			 * @private
+			 */
 			this._getName = getName;
 		}
-	);
-
-	SELF.getMonolingualTextLanguages = function () {
-		return new SELF( monolingualTextLanguages, wb.getLanguageNameByCode );
-	};
-
-	SELF.getTermLanguages = function () {
-		return new SELF( termLanguages, wb.getLanguageNameByCodeForTerms );
-	};
-
-	$.extend( SELF.prototype, {
-		/**
-		 * @type {string[]|null}
-		 * @private
-		 */
-		_languageCodes: null,
-
-		/**
-		 * @type {Function}
-		 * @private
-		 */
-		_getName: null,
 
 		/**
 		 * @inheritdoc
 		 */
-		getAll: function () {
+		getAll() {
 			return this._languageCodes;
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		getName: function ( code ) {
+		getName( code ) {
 			return this._getName( code );
-		},
+		}
 
-		getLanguageNameMap: function () {
+		getLanguageNameMap() {
 			var map = {},
 				self = this;
 
@@ -75,6 +61,14 @@
 
 			return map;
 		}
-	} );
+
+		static getMonolingualTextLanguages() {
+			return new this( monolingualTextLanguages, wb.getLanguageNameByCode );
+		}
+
+		static getTermLanguages() {
+			return new this( termLanguages, wb.getLanguageNameByCodeForTerms );
+		}
+	};
 
 }( wikibase ) );

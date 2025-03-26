@@ -8,34 +8,26 @@
 	var MODULE = wb.entityChangers,
 		datamodel = require( 'wikibase.datamodel' );
 
-	/**
-	 * @constructor
-	 *
-	 * @param {wikibase.api.RepoApi} api
-	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {datamodel.Entity} entity
-	 */
-	var SELF = MODULE.AliasesChanger = function WbEntityChangersAliasesChanger( api, revisionStore, entity ) {
-		this._api = api;
-		this._revisionStore = revisionStore;
-		this._entity = entity;
-	};
-
-	$.extend( SELF.prototype, {
+	MODULE.AliasesChanger = class {
 		/**
-		 * @type {datamodel.Entity}
+		 * @param {wikibase.api.RepoApi} api
+		 * @param {wikibase.RevisionStore} revisionStore
+		 * @param {datamodel.Entity} entity
 		 */
-		_entity: null,
-
-		/**
-		 * @type {wikibase.RevisionStore}
-		 */
-		_revisionStore: null,
-
-		/**
-		 * @type {wikibase.api.RepoApi}
-		 */
-		_api: null,
+		constructor( api, revisionStore, entity ) {
+			/**
+			 * @type {wikibase.api.RepoApi}
+			 */
+			this._api = api;
+			/**
+			 * @type {wikibase.RevisionStore}
+			 */
+			this._revisionStore = revisionStore;
+			/**
+			 * @type {datamodel.Entity}
+			 */
+			this._entity = entity;
+		}
 
 		/**
 		 * @param {datamodel.MultiTerm} aliases
@@ -45,7 +37,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setAliases: function ( aliases, tempUserWatcher ) {
+		setAliases( aliases, tempUserWatcher ) {
 			var deferred = $.Deferred(),
 				self = this,
 				language = aliases.getLanguageCode(),
@@ -77,23 +69,23 @@
 			} );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * @param {string} language
 		 * @return {datamodel.MultiTerm}
 		 */
-		_getInitialAliases: function ( language ) {
+		_getInitialAliases( language ) {
 			return this._entity.getFingerprint().getAliasesFor( language )
 				|| new datamodel.MultiTerm( language, [] );
-		},
+		}
 
 		/**
 		 * @param {datamodel.MultiTerm} currentAliases
 		 * @param {datamodel.MultiTerm} initialAliases
 		 * @return {string[]}
 		 */
-		_getNewAliasesTexts: function ( currentAliases, initialAliases ) {
+		_getNewAliasesTexts( currentAliases, initialAliases ) {
 			var currentTexts = currentAliases.getTexts(),
 				initialTexts = initialAliases.getTexts(),
 				newAliases = [];
@@ -105,14 +97,14 @@
 			}
 
 			return newAliases;
-		},
+		}
 
 		/**
 		 * @param {datamodel.MultiTerm} currentAliases
 		 * @param {datamodel.MultiTerm} initialAliases
 		 * @return {string[]}
 		 */
-		_getRemovedAliasesTexts: function ( currentAliases, initialAliases ) {
+		_getRemovedAliasesTexts( currentAliases, initialAliases ) {
 			var currentTexts = currentAliases.getTexts(),
 				initialTexts = initialAliases.getTexts(),
 				removedAliases = [];
@@ -125,6 +117,6 @@
 
 			return removedAliases;
 		}
-	} );
+	};
 
 }( wikibase ) );

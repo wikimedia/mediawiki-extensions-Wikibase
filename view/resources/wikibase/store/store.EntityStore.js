@@ -13,19 +13,16 @@
 	 */
 	var SELF = function WbEntityStore() {};
 
-	$.extend( SELF.prototype, {
-		/**
-		 * Returns a promise resolving to the entity, undefined or null.
-		 *
-		 * @param {string} entityId
-		 * @return {jQuery.Promise}
-		 *         Resolved parameters:
-		 *         - {wikibase.datamodel.Entity|undefined|null}
-		 *         No rejected parameters.
-		 */
-		get: util.abstractMember
-
-	} );
+	/**
+	 * Returns a promise resolving to the entity, undefined or null.
+	 *
+	 * @param {string} entityId
+	 * @return {jQuery.Promise}
+	 *         Resolved parameters:
+	 *         - {wikibase.datamodel.Entity|undefined|null}
+	 *         No rejected parameters.
+	 */
+	SELF.prototype.get = util.abstractMember;
 
 	module.exports = SELF;
 

@@ -12,38 +12,30 @@
 		return tasks.reduce( ( promise, task ) => promise.then( task ), $.Deferred().resolve().promise() );
 	}
 
-	/**
-	 * @param {wikibase.api.RepoApi} api
-	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {datamodel.Entity} entity
-	 */
-	var SELF = MODULE.EntityTermsChanger = function WbEntityChangersEntityTermsChanger( api, revisionStore, entity ) {
-		this._aliasesChanger = new MODULE.AliasesChanger( api, revisionStore, entity );
-		this._descriptionsChanger = new MODULE.DescriptionsChanger( api, revisionStore, entity );
-		this._labelsChanger = new MODULE.LabelsChanger( api, revisionStore, entity );
-		this._entity = entity;
-	};
-
-	$.extend( SELF.prototype, {
+	MODULE.EntityTermsChanger = class {
 		/**
-		 * @type {datamodel.Entity}
+		 * @param {wikibase.api.RepoApi} api
+		 * @param {wikibase.RevisionStore} revisionStore
+		 * @param {datamodel.Entity} entity
 		 */
-		_entity: null,
-
-		/**
-		 * @type {wikibase.entityChangers.AliasesChanger}
-		 */
-		_aliasesChanger: null,
-
-		/**
-		 * @type {wikibase.entityChangers.DescriptionsChanger}
-		 */
-		_descriptionsChanger: null,
-
-		/**
-		 * @type {wikibase.entityChangers.LabelsChanger}
-		 */
-		_labelsChanger: null,
+		constructor( api, revisionStore, entity ) {
+			/**
+			 * @type {wikibase.entityChangers.AliasesChanger}
+			 */
+			this._aliasesChanger = new MODULE.AliasesChanger( api, revisionStore, entity );
+			/**
+			 * @type {wikibase.entityChangers.DescriptionsChanger}
+			 */
+			this._descriptionsChanger = new MODULE.DescriptionsChanger( api, revisionStore, entity );
+			/**
+			 * @type {wikibase.entityChangers.LabelsChanger}
+			 */
+			this._labelsChanger = new MODULE.LabelsChanger( api, revisionStore, entity );
+			/**
+			 * @type {datamodel.Entity}
+			 */
+			this._entity = entity;
+		}
 
 		/**
 		 * @param {datamodel.Fingerprint} newFingerprint
@@ -55,7 +47,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		save: function ( newFingerprint, oldFingerprint ) {
+		save( newFingerprint, oldFingerprint ) {
 			var labelsChanger = this._labelsChanger,
 				descriptionsChanger = this._descriptionsChanger,
 				aliasesChanger = this._aliasesChanger,
@@ -111,7 +103,7 @@
 			// However, the back-end produces edit conflicts when issuing multiple requests at once.
 			// Remove queueing as soon as the back-end is fixed; see bug T74020.
 			return chain( changes ).then( () => new MODULE.ValueChangeResult( resultFingerprint, tempUserWatcher ) );
-		},
+		}
 
 		/**
 		 * @param {datamodel.TermMap|datamodel.MultiTermMap} newTerms
@@ -120,7 +112,7 @@
 		 * @return {Function[]}
 		 * @private
 		 */
-		_getTermsChanges: function ( newTerms, oldTerms, getChange ) {
+		_getTermsChanges( newTerms, oldTerms, getChange ) {
 			var changes = [];
 
 			newTerms.each( ( languageCode, newTerm ) => {
@@ -146,6 +138,6 @@
 
 			return changes;
 		}
-	} );
+	};
 
 }( wikibase ) );

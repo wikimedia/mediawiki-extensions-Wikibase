@@ -13,14 +13,12 @@
 	 */
 	var GuidGenerator = function GuidGenerator() {};
 
-	$.extend( GuidGenerator.prototype, {
-		/**
-		 * Generates and returns a Globally Unique IDentifier.
-		 *
-		 * @return {string}
-		 */
-		newGuid: util.abstractMember
-	} );
+	/**
+	 * Generates and returns a Globally Unique IDentifier.
+	 *
+	 * @return {string}
+	 */
+	GuidGenerator.prototype.newGuid = util.abstractMember;
 
 	/**
 	 * Generates and returns a GUID.

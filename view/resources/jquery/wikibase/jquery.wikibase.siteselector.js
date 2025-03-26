@@ -367,8 +367,6 @@
 		}
 	);
 
-	$.extend( $.wikibase.siteselector, {
-		Item: Item
-	} );
+	$.wikibase.siteselector.Item = Item;
 
 }() );
