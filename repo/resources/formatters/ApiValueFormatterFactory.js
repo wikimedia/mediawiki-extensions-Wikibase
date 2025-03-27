@@ -37,7 +37,7 @@
 		getFormatter( dataTypeId, propertyId, outputType ) {
 			var options = this._options;
 			if ( dataTypeId === 'quantity' && outputType === 'text/plain' ) {
-				options = $.extend( { applyRounding: false, applyUnit: false }, options );
+				options = Object.assign( { applyRounding: false, applyUnit: false }, options );
 			}
 			return new wb.formatters.ApiValueFormatter( this._apiCaller, options, dataTypeId, propertyId, outputType );
 		}

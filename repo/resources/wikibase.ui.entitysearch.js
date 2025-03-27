@@ -97,7 +97,7 @@
 		.entitysearch( {
 			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
 			menu: $searchMenu.data( 'ooMenu' ),
-			position: $.extend(
+			position: Object.assign(
 				{},
 				$.wikibase.entityselector.prototype.options.position,
 				{ offset: '-1 2' }
