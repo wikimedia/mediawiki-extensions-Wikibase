@@ -575,13 +575,13 @@ class WikibaseLibraryTest extends WikibaseLibraryTestCase {
 		$luaFunctionCallTracker = $this->createMock( LuaFunctionCallTracker::class );
 		$luaFunctionCallTracker->expects( $this->once() )
 			->method( 'incrementKey' )
-			->with( 'a-key.suffix' );
+			->with( 'a-key', 'wikibase' );
 
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
 			$this->newWikibaseLibrary()
 		);
 		$luaWikibaseLibrary->luaFunctionCallTracker = $luaFunctionCallTracker;
-		$luaWikibaseLibrary->incrementStatsKey( 'a-key.suffix' );
+		$luaWikibaseLibrary->incrementStatsKey( 'a-key', 'wikibase' );
 	}
 
 	/**
