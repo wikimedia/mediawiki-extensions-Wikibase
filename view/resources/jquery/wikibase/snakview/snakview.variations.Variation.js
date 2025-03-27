@@ -58,7 +58,9 @@
 	 * @event afterdraw
 	 * Triggered on the `Variation` object after drawing the `Variation`.
 	 * @param {jQuery.Event} event
+	 * TODO: Refactor this to remove the $.extend T390181
 	 */
+	// eslint-disable-next-line no-jquery/no-extend
 	$.extend( SELF.prototype, {
 		/**
 		 * A unique class for this `Variation`, applied to the `Variation` DOM's `class` attribute.
