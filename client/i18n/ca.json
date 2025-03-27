@@ -39,7 +39,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|canvi|canvis}}",
 	"wikibase-dataitem": "Element a {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifica els enllaços",
-	"wikibase-editlinkstitle": "Modifica enllaços interlingües",
+	"wikibase-editlinkstitle": "Modificau enllaços interlingües",
 	"wikibase-addlinkstitle": "Afegeix enllaços interlingües",
 	"wikibase-linkitem-addlinks": "Afegeix enllaços",
 	"wikibase-linkitem-alreadylinked": "La pàgina amb la que voleu enllaçar ja està definida en un [$1 element] del repositori central de dades que enllaça a [[$2]] en aquest lloc. Els elements només poden estar relacionats amb una pàgina per lloc. Escolliu una pàgina diferent per enllaçar-hi.",

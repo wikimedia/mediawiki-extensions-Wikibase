@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Aandeginini",
-			"Nibi-zhimaaganish"
+			"Nibi-zhimaaganish",
+			"Mashkawiziiwin"
 		]
 	},
 	"tooltip-t-wikibase": "Biiwaabiko-zagapijigan izhi-daangishin mamizhim-zhooniyaawigamig ayi-ii",
@@ -10,6 +11,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ayi'ii",
 	"wikibase-editlinks": "Aanji' biiwaabiko-zagapijigan",
 	"wikibase-editlinkstitle": "Aanji' biiwaabiko-zagapijigan bakaan inwewin",
+	"wikibase-addlinkstitle": "Asigagindaaso aanikegamaa ondaashi-inwewin",
 	"wikibase-linkitem-addlinks": "Asigagindaaso biiwaabiko-zagapijigan",
 	"wikibase-linkitem-title": "Aanikegamaa biindig mazina'igans",
 	"wikibase-linkitem-linkpage": "Aanikegamaa biindig mazina'igans",

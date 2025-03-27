@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Salifu Ramatu"
+			"Salifu Ramatu",
+			"Hasslaebetch"
 		]
 	},
+	"wikibase-linkitem-input-site": "Danfiɛ:",
+	"wikibase-linkitem-input-page": "Bue:",
+	"wikibase-rc-hide-wikidata-hide": "Fiɛ",
 	"wikibase-rc-hide-wikidata-show": "Klé"
 }
