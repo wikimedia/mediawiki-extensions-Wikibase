@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Helper for tracking accesses of Lua functions.
@@ -12,11 +12,10 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
  * @author Marius Hoch
  */
 class LuaFunctionCallTracker {
-
 	/**
-	 * @var StatsdDataFactoryInterface
+	 * @var StatsFactory
 	 */
-	private $statsdDataFactory;
+	private $statsFactory;
 
 	/**
 	 * @var string
@@ -44,7 +43,7 @@ class LuaFunctionCallTracker {
 	private $sampleRate;
 
 	/**
-	 * @param StatsdDataFactoryInterface $statsdDataFactory
+	 * @param StatsFactory $statsFactory
 	 * @param string $siteId
 	 * @param string $siteGroup
 	 * @param bool $trackLuaFunctionCallsPerSiteGroup
@@ -53,14 +52,14 @@ class LuaFunctionCallTracker {
 	 *   the fraction of counter increments that will be reported from Lua.
 	 */
 	public function __construct(
-		StatsdDataFactoryInterface $statsdDataFactory,
+		$statsFactory,
 		$siteId,
 		$siteGroup,
 		$trackLuaFunctionCallsPerSiteGroup,
 		$trackLuaFunctionCallsPerWiki,
 		$sampleRate
 	) {
-		$this->statsdDataFactory = $statsdDataFactory;
+		$this->statsFactory = $statsFactory;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
 		$this->trackLuaFunctionCallsPerSiteGroup = $trackLuaFunctionCallsPerSiteGroup;
@@ -75,31 +74,42 @@ class LuaFunctionCallTracker {
 	 * Prefix and increment the given statsd key.
 	 *
 	 * @param string $key
+	 * @param string $module
 	 */
-	public function incrementKey( $key ) {
+	public function incrementKey( $key, $module ) {
 		if ( $this->sampleRate === 0 ) {
 			return;
 		}
-		$prefixedKeys = $this->getPrefixedKeys( $key );
+
+		$prefixedKeys = $this->getPrefixedKeys( $key, $module );
 		$count = intval( 1 / $this->sampleRate );
 
-		foreach ( $prefixedKeys as $prefixedKey ) {
-			$this->statsdDataFactory->updateCount( $prefixedKey, $count );
-		}
+		$counter = $this->statsFactory->withComponent( 'WikibaseClient' )
+		->getCounter( "Scribunto_Lua_function_calls_total" )
+		->setLabel( 'module', $module )
+		->setLabel( 'function_name', $key );
+
+		$counter->setLabel( 'site', $this->trackLuaFunctionCallsPerWiki ? $this->siteId : 'not_tracked' );
+		$counter->setLabel( 'site_group', $this->trackLuaFunctionCallsPerSiteGroup ? $this->siteGroup : 'not_tracked' );
+
+		$counter->copyToStatsdAt( $prefixedKeys )
+		->incrementBy( $count );
 	}
 
 	/**
 	 * @param string $key
+	 * @param string $module
 	 * @return string[]
 	 */
-	private function getPrefixedKeys( $key ) {
+	private function getPrefixedKeys( $key, $module ) {
 		$prefixedKeys = [];
+		$statsdKey = "wikibase.client.scribunto.$module.$key.call";
 
 		if ( $this->trackLuaFunctionCallsPerWiki ) {
-			$prefixedKeys[] = "$this->siteId.$key";
+			$prefixedKeys[] = "$this->siteId.$statsdKey";
 		}
 		if ( $this->trackLuaFunctionCallsPerSiteGroup ) {
-			$prefixedKeys[] = "$this->siteGroup.$key";
+			$prefixedKeys[] = "$this->siteGroup.$statsdKey";
 		}
 
 		return $prefixedKeys;

@@ -118,7 +118,7 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 			$settings = WikibaseClient::getSettings( $mwServices );
 
 			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
-				$mwServices->getStatsdDataFactory(),
+				$mwServices->getStatsFactory(),
 				$settings->getSetting( 'siteGlobalID' ),
 				WikibaseClient::getSiteGroup( $mwServices ),
 				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
@@ -306,8 +306,8 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	/**
 	 * Increment the given stats key.
 	 */
-	public function incrementStatsKey( string $key ): void {
-		$this->getLuaFunctionCallTracker()->incrementKey( $key );
+	public function incrementStatsKey( string $key, string $module ): void {
+		$this->getLuaFunctionCallTracker()->incrementKey( $key, $module );
 	}
 
 	public function getParserOutput(): ParserOutput {

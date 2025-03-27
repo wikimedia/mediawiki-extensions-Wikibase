@@ -2,8 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
+use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker
@@ -26,21 +27,21 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 				1,
 			],
 			'per site group logging only' => [
-				[ 'fancy.wikibase.client.scribunto.doStuff.call' ],
+				[ 'fancy.wikibase.client.scribunto.wikibase.doStuff.call' ],
 				true,
 				false,
 				1,
 			],
 			'per wiki logging only' => [
-				[ 'defancywiki.wikibase.client.scribunto.doStuff.call' ],
+				[ 'defancywiki.wikibase.client.scribunto.wikibase.doStuff.call' ],
 				false,
 				true,
 				1,
 			],
 			'per wiki and per site group logging' => [
 				[
-					'defancywiki.wikibase.client.scribunto.doStuff.call',
-					'fancy.wikibase.client.scribunto.doStuff.call',
+					'defancywiki.wikibase.client.scribunto.wikibase.doStuff.call',
+					'fancy.wikibase.client.scribunto.wikibase.doStuff.call',
 				],
 				true,
 				true,
@@ -57,7 +58,9 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 		$trackLuaFunctionCallsPerWiki,
 		$trackLuaFunctionCallsSampleRate
 	) {
-		$statsdFactory = $this->createMock( StatsdDataFactoryInterface::class );
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+		$statsFactory = $statsHelper->getStatsFactory();
+		$statsdFactory = $this->createMock( IBufferingStatsdDataFactory::class );
 
 		$keyBuffer = [];
 		$statsdFactory->expects( $this->exactly( count( $expected ) ) )
@@ -67,8 +70,10 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 				$keyBuffer[] = $key;
 			} );
 
+		$statsFactory->withStatsdDataFactory( $statsdFactory );
+
 		$tracker = new LuaFunctionCallTracker(
-			$statsdFactory,
+			$statsFactory,
 			'defancywiki',
 			'fancy',
 			$trackLuaFunctionCallsPerSiteGroup,
@@ -76,7 +81,7 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 			$trackLuaFunctionCallsSampleRate
 		);
 
-		$tracker->incrementKey( 'wikibase.client.scribunto.doStuff.call' );
+		$tracker->incrementKey( 'doStuff', 'wikibase' );
 
 		$this->assertEquals( $expected, $keyBuffer );
 	}
