@@ -10,11 +10,14 @@ use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
  */
 class SimplePropertySearch {
 
+	private SimplePropertySearchValidator $validator;
 	private PropertySearchEngine $searchEngine;
 
 	public function __construct(
+		SimplePropertySearchValidator $validator,
 		PropertySearchEngine $searchEngine
 	) {
+		$this->validator = $validator;
 		$this->searchEngine = $searchEngine;
 	}
 
@@ -22,6 +25,8 @@ class SimplePropertySearch {
 	 * @throws UseCaseError
 	 */
 	public function execute( SimplePropertySearchRequest $propertyRequest ): SimplePropertySearchResponse {
+		$this->validator->validate( $propertyRequest );
+
 		$searchTerm = $propertyRequest->getQuery();
 		$language = $propertyRequest->getLanguage();
 

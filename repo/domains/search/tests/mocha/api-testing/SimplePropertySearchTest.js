@@ -132,6 +132,19 @@ describe( 'Simple property search', () => {
 	} );
 
 	describe( '400 error response', () => {
+
+		it( 'invalid language code', async () => {
+			const response = await newSearchRequest( 'not_a_language', 'search term' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+
+			assert.header( response, 'Content-Language', 'en' );
+			assert.strictEqual( response.body.code, 'invalid-query-parameter' );
+			assert.deepStrictEqual( response.body.context, { parameter: 'language' } );
+		} );
+
 		it( 'User-Agent empty', async () => {
 			const response = await newSearchRequest( 'en', 'search term' )
 				.withHeader( 'user-agent', '' )

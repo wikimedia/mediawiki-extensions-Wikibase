@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\SimpleProperty
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchValidator;
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
 
@@ -22,6 +24,7 @@ class SimplePropertySearchTest extends TestCase {
 		$language = 'en';
 		$expectedResults = $this->createStub( PropertySearchResults::class );
 
+		$validator = $this->createStub( SimplePropertySearchValidator::class );
 		$searchEngine = $this->createMock( PropertySearchEngine::class );
 		$searchEngine->expects( $this->once() )
 			->method( 'searchPropertyByLabel' )
@@ -30,13 +33,33 @@ class SimplePropertySearchTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedResults,
-			$this->newUseCase( $searchEngine )
+			$this->newUseCase( $validator, $searchEngine )
 				->execute( new SimplePropertySearchRequest( $query, $language ) )
 				->getResults()
 		);
 	}
 
-	private function newUseCase( PropertySearchEngine $searchEngine ): SimplePropertySearch {
-		return new SimplePropertySearch( $searchEngine );
+	public function testThrowsErrorOnInvalidLanguage(): void {
+		$request = $this->createStub( SimplePropertySearchRequest::class );
+		$expectedException = $this->createStub( UseCaseError::class );
+		$validator = $this->createMock( SimplePropertySearchValidator::class );
+		$validator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $request )
+			->willThrowException( $expectedException );
+
+		$searchEngine = $this->createStub( PropertySearchEngine::class );
+
+		try {
+			$this->newUseCase( $validator, $searchEngine )->execute( $request );
+
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	private function newUseCase( SimplePropertySearchValidator $validator, PropertySearchEngine $searchEngine ): SimplePropertySearch {
+		return new SimplePropertySearch( $validator, $searchEngine );
 	}
 }
