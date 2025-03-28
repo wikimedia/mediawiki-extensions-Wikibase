@@ -76,11 +76,8 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 		);
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run( string $itemId, string $siteId ): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase( $itemId, $siteId ) );
 	}
 
 	public function runUseCase( string $itemId, string $siteId ): Response {

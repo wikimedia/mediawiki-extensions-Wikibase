@@ -45,11 +45,8 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 		);
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run(): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase() );
 	}
 
 	public function runUseCase(): Response {

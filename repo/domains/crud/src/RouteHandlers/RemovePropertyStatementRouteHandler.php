@@ -82,11 +82,8 @@ class RemovePropertyStatementRouteHandler extends SimpleHandler {
 		return null;
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run( string $propertyId, string $statementId ): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase( $propertyId, $statementId ) );
 	}
 
 	public function runUseCase( string $propertyId, string $statementId ): Response {

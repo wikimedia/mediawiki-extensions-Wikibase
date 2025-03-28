@@ -64,11 +64,8 @@ class GetItemDescriptionsRouteHandler extends SimpleHandler {
 		return false;
 	}
 
-	/**
-	 * @param mixed ...$args
-	 */
-	public function run( ...$args ): Response {
-		return $this->middlewareHandler->run( $this, [ $this, 'runUseCase' ], $args );
+	public function run( string $itemId ): Response {
+		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase( $itemId ) );
 	}
 
 	public function runUseCase( string $itemId ): Response {

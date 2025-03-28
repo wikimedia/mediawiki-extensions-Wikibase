@@ -25,11 +25,11 @@ class MiddlewareHandler {
 		$this->middlewares = $middlewares;
 	}
 
-	public function run( Handler $routeHandler, callable $runRoute, array $args ): Response {
+	public function run( Handler $routeHandler, callable $runRoute ): Response {
 		return $this->callMiddlewaresRecursively(
 			$this->middlewares,
 			$routeHandler,
-			fn() => $runRoute( ...$args )
+			$runRoute
 		);
 	}
 

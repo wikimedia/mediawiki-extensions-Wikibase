@@ -28,7 +28,6 @@ class MiddlewareHandlerTest extends TestCase {
 		$runCountStart = 0;
 		$expectedResponse = new Response();
 		$expectedResponse->setHeader( ResponseHeaderCountingTestMiddleware::MIDDLEWARE_COUNT_HEADER, $runCountStart );
-		$pathParams = [ 'some', 'path', 'params' ];
 
 		$middlewareHandler = new MiddlewareHandler( [
 			new ResponseHeaderCountingTestMiddleware( $this, $runCountStart + 2 ),
@@ -38,12 +37,7 @@ class MiddlewareHandlerTest extends TestCase {
 		$response = $middlewareHandler->run(
 			$this->createStub( Handler::class ),
 			// The following argument is usually a reference to a Handler instance method. Using a function here for easier testing.
-			function ( ...$args ) use ( $pathParams, $expectedResponse ) {
-				$this->assertSame( $pathParams, $args );
-
-				return $expectedResponse;
-			},
-			$pathParams
+			fn() => $expectedResponse
 		);
 
 		$this->assertSame( $expectedResponse, $response );
