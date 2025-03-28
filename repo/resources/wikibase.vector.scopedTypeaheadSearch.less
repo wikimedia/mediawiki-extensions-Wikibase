@@ -1,8 +1,19 @@
+@import 'mediawiki.skin.variables.less';
+
 .vector-search-box {
 	.vector-typeahead-search-container {
+		.cdx-button:enabled {
+			border-color: @border-color-base;
+		}
+
+		.cdx-text-input input {
+			border-color: @border-color-base;
+			font-size: @font-size-small;
+			line-height: @line-height-small;
+			letter-spacing: -0.03em;
+		}
+
 		.vector-typeahead-search-scope-select {
-			float: left;
-			width: fit-content;
 			position: relative;
 			z-index: 1;
 			min-width: 11em;
@@ -19,13 +30,31 @@
 					min-width: auto;
 				}
 			}
+
+			.cdx-select-vue--enabled .cdx-select-vue__handle {
+				border-color: @border-color-base;
+			}
+		}
+
+		form > div.cdx-search-input__input-wrapper {
+			display: flex;
+			flex-direction: row;
 		}
 
 		.cdx-typeahead-search--show-thumbnail.cdx-typeahead-search--auto-expand-width:not( .cdx-typeahead-search--expanded ) {
 			margin-left: auto;
 		}
 
+		.cdx-typeahead-search--show-thumbnail .cdx-typeahead-search__search-footer__icon {
+			min-width: 1.25rem;
+			width: 1.25rem;
+			margin-right: 0.5rem;
+			margin-left: -2px;
+		}
+
 		.cdx-typeahead-search {
+			width: 100%;
+
 			.cdx-search-input__text-input {
 				margin-top: 1px;
 			}
