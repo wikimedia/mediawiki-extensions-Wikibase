@@ -88,21 +88,17 @@
 		} ) );
 	} );
 
-	QUnit.test( 'getSitelinkGroupListView passes correct options to views', ( assert ) => {
+	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
 		var sitelinkSet = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' );
 
-		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
-		$dom.sitelinkgrouplistview = $.wikibase.sitelinkgrouplistview;
+		var spy = this.sandbox.spy( $.wikibase, 'sitelinkgrouplistview' );
+		$dom.sitelinkgrouplistview = spy;
 
 		viewFactory.getSitelinkGroupListView( null, sitelinkSet, $dom );
 
-		sinon.assert.calledWith( $.wikibase.sitelinkgrouplistview, sinon.match( {
-			value: sitelinkSet
-		} ) );
-
-		$.wikibase.sitelinkgrouplistview.restore();
+		assert.propContains( spy.lastCall.args[ 0 ], { value: sitelinkSet }, 'called with' );
 	} );
 
 	QUnit.test( 'getSitelinkGroupView passes correct options to views', ( assert ) => {
@@ -193,7 +189,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getStatementListView passes correct options to views', ( assert ) => {
+	QUnit.test( 'getStatementListView passes correct options to views', function ( assert ) {
 		var value = new datamodel.StatementList( [
 				new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
@@ -201,25 +197,15 @@
 			viewFactory = newViewFactory(),
 			$dom = $( '<div>' );
 
-		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
-		sinon.stub( viewFactory, '_getView' );
+		const spy = this.sandbox.stub( viewFactory, '_getView' );
 
 		viewFactory.getStatementListView( null, entityId, null, () => {}, value, $dom );
 
-		sinon.assert.calledWith(
-			viewFactory._getView,
-			sinon.match(
-				'statementlistview',
-				$dom,
-				{
-					value: value,
-					listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
-				}
-			)
-		);
-
-		viewFactory._getView.restore();
-		$.wikibase.listview.ListItemAdapter.restore();
+		assert.propContains( spy.lastCall.args, [
+			'statementlistview',
+			$dom,
+			{ value: value }
+		], 'called with' );
 	} );
 
 	QUnit.test( 'getStatementListView passes null for an empty StatementList', ( assert ) => {

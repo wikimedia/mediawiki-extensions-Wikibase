@@ -1,16 +1,12 @@
 ( function ( wb ) {
 	'use strict';
 
-	var ViewFactoryFactory = require( '../../../../resources/wikibase/view/ViewFactoryFactory.js' ),
-		sandbox = sinon.sandbox.create();
+	var ViewFactoryFactory = require( '../../../../resources/wikibase/view/ViewFactoryFactory.js' );
 
 	QUnit.module( 'wikibase.view.ViewFactoryFactory', {
 		beforeEach: function () {
-			sandbox.stub( wb.view, 'ControllerViewFactory' );
-			sandbox.stub( wb.view, 'ReadModeViewFactory' );
-		},
-		afterEach: function () {
-			sandbox.restore();
+			this.sandbox.stub( wb.view, 'ControllerViewFactory' );
+			this.sandbox.stub( wb.view, 'ReadModeViewFactory' );
 		}
 	} );
 

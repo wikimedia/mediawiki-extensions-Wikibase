@@ -1,10 +1,10 @@
 module.exports = {
 	extends: [
-		'wikimedia/qunit',
+		'wikimedia/mediawiki-qunit',
 		'../../../.eslintrc.js'
 	],
-	globals: {
-		sinon: false
+	parserOptions: {
+		ecmaVersion: 2020
 	},
 	rules: {
 		'no-use-before-define': [
@@ -13,8 +13,10 @@ module.exports = {
 				functions: false
 			}
 		],
+		'prefer-arrow-callback': 'off',
 		'qunit/resolve-async': 'off',
 		'space-unary-ops': 'off',
+		'unicorn/prefer-includes': 'off',
 		'no-jquery/no-parse-html-literal': 'off'
 	}
 };
