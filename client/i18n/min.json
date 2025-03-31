@@ -5,7 +5,8 @@
 			"David Wadie Fisher-Freberg",
 			"Iwan Novirion",
 			"Muhraz",
-			"Naval Scene"
+			"Naval Scene",
+			"Zhilal Darma"
 		]
 	},
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
@@ -23,6 +24,7 @@
 	"wikibase-dataitem": "Butia di {{WBREPONAME}}",
 	"wikibase-editlinks": "Suntiang pautan",
 	"wikibase-editlinkstitle": "Suntiang pautan antarbahaso",
+	"wikibase-addlinkstitle": "Tambahkan pautan antarbahaso",
 	"wikibase-linkitem-addlinks": "Tambah pautan",
 	"wikibase-linkitem-alreadylinked": "Laman nan nio Sanak tauikkan alah tatauik ka [$1 item] pado pusek panyimpanan data nan tahubuang pado [[$2]] di situs ko. Item hanyo dapek punyo satu laman per situs nan tatauik. Silakan piliah laman lain untuak ditauikkan.",
 	"wikibase-linkitem-close": "Tutuik dan muek ulang laman",
