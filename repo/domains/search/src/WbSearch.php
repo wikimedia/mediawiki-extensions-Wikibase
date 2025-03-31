@@ -9,6 +9,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleIte
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -30,6 +31,13 @@ class WbSearch {
 
 	public static function getLanguageCodeValidator( ?ContainerInterface $services = null ): SearchLanguageValidator {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.LanguageCodeValidator' );
+	}
+
+	/**
+	 * @return InLabelSearchEngine|SqlTermStoreSearchEngine
+	 */
+	public static function getSearchEngine( ?ContainerInterface $services = null ) {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.SearchEngine' );
 	}
 
 	public static function getSimpleItemSearch( ?ContainerInterface $services = null ): SimpleItemSearch {
