@@ -45,7 +45,6 @@ module.exports = {
 		'mediawiki/class-doc': 'off',
 		'no-jquery/no-class-state': 'off',
 		'no-jquery/no-global-selector': 'off',
-		'no-jquery/no-extend': 'off',
 		'yml/no-empty-mapping-value': 'off',
 		'yml/plain-scalar': 'off',
 		'es-x/no-array-string-prototype-at': 'off',

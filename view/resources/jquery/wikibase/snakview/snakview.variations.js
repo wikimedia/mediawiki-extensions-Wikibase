@@ -48,6 +48,8 @@
 			var snakType = snakConstructor.TYPE,
 				variationName = 'WbSnakviewVariations_' + snakType; // name for constructor
 
+			// TODO: Refactor this to remove the $.extend T390181
+			// eslint-disable-next-line no-jquery/no-extend
 			var Variation = util.inherit( variationName, baseOrDefinition, $.extend(
 				{ variationBaseClass: 'wikibase-snakview-variation-' + snakType + 'snak' },
 				definition,
