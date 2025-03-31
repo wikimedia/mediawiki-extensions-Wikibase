@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
 use Exception;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
@@ -12,17 +11,12 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchResponse;
-use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
-use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -43,33 +37,12 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 
 	public static function factory(): Handler {
 		return new self(
-			new SimpleItemSearch(
-				new SimpleItemSearchValidator( WbSearch::getLanguageCodeValidator() ),
-				self::newSearchEngine()
-			),
+			WbSearch::getSimpleItemSearch(),
 			new MiddlewareHandler( [
 				WbSearch::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 			] )
 		);
-	}
-
-	private static function newSearchEngine(): ItemSearchEngine {
-		global $wgSearchType;
-
-		$mediaWikiServices = MediaWikiServices::getInstance();
-		$isWikibaseCirrusSearchEnabled = $mediaWikiServices->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
-		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch';
-		$useMediaWikiSearchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
-
-		return $useMediaWikiSearchEngine
-			? WbSearch::getInLabelSearchEngine()
-			: new SqlTermStoreSearchEngine(
-				WikibaseRepo::getMatchingTermsLookupFactory()
-					->getLookupForSource( WikibaseRepo::getLocalEntitySource() ),
-				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory(), $mediaWikiServices->getLanguageFactory() ),
-				WikibaseRepo::getLanguageFallbackChainFactory()
-			);
 	}
 
 	public function run(): Response {

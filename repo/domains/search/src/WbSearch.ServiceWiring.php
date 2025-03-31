@@ -5,6 +5,8 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchValidator;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
@@ -45,6 +47,27 @@ return [
 
 		return new LanguageCodeValidator(
 			new CompositeValidator( $validators )
+		);
+	},
+
+	'WbSearch.SimpleItemSearch' => function( MediaWikiServices $services ): SimpleItemSearch {
+		global $wgSearchType;
+
+		$isWikibaseCirrusSearchEnabled = $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
+		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch';
+
+		$searchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled
+			? WbSearch::getInLabelSearchEngine( $services )
+			: new SqlTermStoreSearchEngine(
+				WikibaseRepo::getMatchingTermsLookupFactory( $services )
+					->getLookupForSource( WikibaseRepo::getLocalEntitySource( $services ) ),
+				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ), $services->getLanguageFactory() ),
+				WikibaseRepo::getLanguageFallbackChainFactory( $services )
+			);
+
+		return new SimpleItemSearch(
+			new SimpleItemSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
+			$searchEngine
 		);
 	},
 

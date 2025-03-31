@@ -17,8 +17,8 @@ class SimpleItemSearch {
 		SimpleItemSearchValidator $validator,
 		ItemSearchEngine $searchEngine
 	) {
-		$this->searchEngine = $searchEngine;
 		$this->validator = $validator;
+		$this->searchEngine = $searchEngine;
 	}
 
 	/**
