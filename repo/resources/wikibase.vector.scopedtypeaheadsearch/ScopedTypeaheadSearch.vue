@@ -40,9 +40,9 @@
 </template>
 
 <script>
-const { defineComponent, ref, watch } = require( 'vue' );
+const { defineComponent, ref, watch, computed } = require( 'vue' );
 const { CdxSelect, CdxTypeaheadSearch } = require( '../../codex.js' );
-const scopedTypeaheadSearchConfig = require( './scopedTypeaheadSearchConfig.json' );
+const { entityTypesConfig, namespacesConfig } = require( './scopedTypeaheadSearchConfig.json' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -55,18 +55,32 @@ module.exports = exports = defineComponent( {
 		const prefix = ref( '' );
 		const selection = ref( 'item' );
 		const searchResults = ref( [] );
-		const searchFooterUrl = ref( '' );
 		const currentSearchTerm = ref( '' );
-		const searchNamespace = ref( 'ns0' );
 		const languageCode = ref( 'en' );
 
-		const menuItemData = Object.keys( scopedTypeaheadSearchConfig ).map( ( entityType ) => ( {
+		// If prefix is set, omit it from what's actually searched for
+		const valueToSearch = computed( () => currentSearchTerm.value.slice( prefix.value.length ).trim() );
+		const searchNamespace = computed( () => 'ns' + entityTypesConfig[ selection.value ].namespace );
+		const searchFooterUrl = computed( () => {
+			const params = new URLSearchParams( {
+				language: languageCode.value,
+				search: valueToSearch.value,
+				title: 'Special:Search',
+				fulltext: 1
+			} );
+			params.append( searchNamespace.value, 1 );
+
+			return `${ baseUrl }?${ params.toString() }`;
+		} );
+
+		const menuItemData = Object.keys( entityTypesConfig ).map( ( entityType ) => ( {
 			// Messages that can be used here:
 			// * wikibase-scoped-search-item-scope-name
 			// * wikibase-scoped-search-property-scope-name
 			// * ... and possibly other messages for additional hook-registered scopes
-			value: entityType, label: mw.msg( scopedTypeaheadSearchConfig[ entityType ].message )
+			value: entityType, label: mw.msg( entityTypesConfig[ entityType ].message )
 		} ) );
+		// TODO: replace this text with translatable messages (T390269)
 		const menuItems = [
 			{
 				label: 'Search entities',
@@ -74,20 +88,24 @@ module.exports = exports = defineComponent( {
 				items: menuItemData
 			}
 		];
-		const prefixToSelection = {
-			'P:': 'property',
-			'L:': 'lexeme',
-			'E:': 'entity-schema'
-		};
+
+		const prefixToSelection = {};
+		for ( const nsAlias of Object.keys( mw.config.get( 'wgNamespaceIds' ) ) ) {
+			if ( nsAlias.length === 0 ) {
+				continue;
+			}
+			const nsId = mw.config.get( 'wgNamespaceIds' )[ nsAlias ];
+			if ( nsId in namespacesConfig ) {
+				prefixToSelection[ nsAlias + ':' ] = namespacesConfig[ nsId ];
+			}
+		}
 
 		watch( prefix, ( newPrefix ) => {
-			if ( prefixToSelection[ newPrefix ] ) {
+			if ( newPrefix in prefixToSelection ) {
 				selection.value = prefixToSelection[ newPrefix ];
 			}
 		} );
 		watch( selection, ( newSelection ) => {
-			searchNamespace.value = 'ns' + scopedTypeaheadSearchConfig[ newSelection ].namespace;
-
 			// Clear prefix if it doesn't match
 			// This happens if the user changes the selection after typing a prefix.
 			// The "prefix" text should now be treated as a normal search term
@@ -101,23 +119,15 @@ module.exports = exports = defineComponent( {
 					[];
 			} );
 		} );
-		watch( [ prefix, currentSearchTerm, searchNamespace ], () => {
-			const valueToSearch = currentSearchTerm.value.slice( prefix.value.length );
-
-			searchFooterUrl.value = `${ baseUrl }?language=${ languageCode.value }&search=${ encodeURIComponent( valueToSearch ) }&title=Special%3ASearch&fulltext=1&${ searchNamespace.value }=1`;
-		} );
 
 		function fetchResults( offset ) {
-			// If a prefix is active, omit it from what we actually search for (if the length is 0, this has no effect)
-			const valueToSearch = currentSearchTerm.value.slice( prefix.value.length ).trim();
-
 			const params = {
 				action: 'wbsearchentities',
 				limit: '10',
 				language: languageCode.value,
 				uselang: languageCode.value,
 				type: selection.value,
-				search: valueToSearch
+				search: valueToSearch.value
 			};
 			if ( offset ) {
 				params.continue = offset;
@@ -151,17 +161,15 @@ module.exports = exports = defineComponent( {
 			// Unset search results and the search footer URL if there is no value.
 			if ( !value || value === '' ) {
 				searchResults.value = [];
-				searchFooterUrl.value = '';
 				prefix.value = '';
 				return;
-			} else if ( value.length === 2 ) {
-				if ( prefixToSelection[ value ] ) {
-					prefix.value = value;
+			} else if ( value.endsWith( ':' ) ) {
+				if ( value.toLowerCase() in prefixToSelection ) {
+					prefix.value = value.toLowerCase();
 					searchResults.value = [];
-					searchFooterUrl.value = '';
 					return;
 				}
-			} else if ( prefix.value && !( value.startsWith( prefix.value ) ) ) {
+			} else if ( prefix.value && !( value.toLowerCase().startsWith( prefix.value ) ) ) {
 				prefix.value = '';
 			}
 
@@ -178,7 +186,6 @@ module.exports = exports = defineComponent( {
 			} ).catch( () => {
 				// On error, reset search results and search footer URL.
 				searchResults.value = [];
-				searchFooterUrl.value = '';
 			} );
 		}
 

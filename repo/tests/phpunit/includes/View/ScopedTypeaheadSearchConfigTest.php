@@ -52,9 +52,16 @@ class ScopedTypeaheadSearchConfigTest extends MediaWikiIntegrationTestCase {
 
 		$config = $configGenerator->getConfiguration();
 		$expectedConfig = [
-			'item' => [ 'namespace' => 120, 'message' => 'wikibase-scoped-search-item-scope-name' ],
-			'property' => [ 'namespace' => 122, 'message' => 'wikibase-scoped-search-property-scope-name' ],
-			'test' => [ 'namespace' => 123, 'message' => 'test-message' ],
+			'entityTypesConfig' => [
+				'item' => [ 'namespace' => 120, 'message' => 'wikibase-scoped-search-item-scope-name' ],
+				'property' => [ 'namespace' => 122, 'message' => 'wikibase-scoped-search-property-scope-name' ],
+				'test' => [ 'namespace' => 123, 'message' => 'test-message' ],
+			],
+			'namespacesConfig' => [
+				120 => 'item',
+				122 => 'property',
+				123 => 'test',
+			],
 		];
 		$this->assertSame( $expectedConfig, $config );
 	}
@@ -84,9 +91,16 @@ class ScopedTypeaheadSearchConfigTest extends MediaWikiIntegrationTestCase {
 
 		$config = $configGenerator->getConfiguration();
 		$expectedConfig = [
-			'item' => [ 'namespace' => 120, 'message' => 'wikibase-scoped-search-item-scope-name' ],
-			'property' => [ 'namespace' => 122, 'message' => 'wikibase-scoped-search-property-scope-name' ],
-			'test' => [ 'namespace' => 123, 'message' => 'test-message' ],
+			'entityTypesConfig' => [
+				'item' => [ 'namespace' => 120, 'message' => 'wikibase-scoped-search-item-scope-name' ],
+				'property' => [ 'namespace' => 122, 'message' => 'wikibase-scoped-search-property-scope-name' ],
+				'test' => [ 'namespace' => 123, 'message' => 'test-message' ],
+			],
+			'namespacesConfig' => [
+				120 => 'item',
+				122 => 'property',
+				123 => 'test',
+			],
 		];
 		$this->assertSame( $expectedConfig, $config );
 

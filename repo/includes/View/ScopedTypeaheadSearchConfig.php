@@ -37,22 +37,25 @@ class ScopedTypeaheadSearchConfig {
 			'property' => 'wikibase-scoped-search-property-scope-name',
 		];
 		$this->hookRunner->onWikibaseRepoSearchableEntityScopesMessages( $messages );
-		$configuration = [];
+		$entityTypes = [];
+		$namespaces = [];
 		foreach ( $this->enabledEntityTypesForSearch as $entityType ) {
 			$namespaceId = $this->entityNamespaceLookup->getEntityNamespace( $entityType );
 			if ( $namespaceId === null ) {
 				continue;
 			}
-			$configuration[$entityType] = [ 'namespace' => $namespaceId, 'message' => $messages[$entityType] ];
+			$entityTypes[$entityType] = [ 'namespace' => $namespaceId, 'message' => $messages[$entityType] ];
+			$namespaces[$namespaceId] = $entityType;
 		}
 		$additionalNamespaces = [];
 		$this->hookRunner->onWikibaseRepoSearchableEntityScopes( $additionalNamespaces );
 		foreach ( $additionalNamespaces as $entityType => $namespaceId ) {
 			if ( array_key_exists( $entityType, $messages ) ) {
-				$configuration[$entityType] = [ 'namespace' => $namespaceId, 'message' => $messages[$entityType] ];
+				$entityTypes[$entityType] = [ 'namespace' => $namespaceId, 'message' => $messages[$entityType] ];
+				$namespaces[$namespaceId] = $entityType;
 			}
 		}
-		$this->configuration = $configuration;
+		$this->configuration = [ 'entityTypesConfig' => $entityTypes, 'namespacesConfig' => $namespaces ];
 		return $this->configuration;
 	}
 

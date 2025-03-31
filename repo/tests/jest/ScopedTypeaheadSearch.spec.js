@@ -11,5 +11,4 @@ describe( 'ScopedTypeaheadSearch', () => {
 		expect( typeof ScopedTypeaheadSearch ).toBe( 'object' );
 		expect( ScopedTypeaheadSearch ).toHaveProperty( 'name', 'ScopedTypeaheadSearch' );
 	} );
-
 } );
