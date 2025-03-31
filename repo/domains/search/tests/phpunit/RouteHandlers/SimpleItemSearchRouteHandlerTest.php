@@ -67,8 +67,11 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testHandlesUnexpectedErrors(): void {
-		$useCase = $this->createStub( SimpleItemSearch::class );
-		$useCase->method( 'execute' )->willThrowException( new RuntimeException() );
+		$useCase = $this->createMock( SimpleItemSearch::class );
+		$useCase->expects( $this->once() )
+			->method( 'execute' )
+			->willThrowException( new RuntimeException() );
+		$this->setService( 'WbSearch.SimpleItemSearch', $useCase );
 
 		// suppress error reporting to avoid CI failures caused by errors in the logs
 		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
