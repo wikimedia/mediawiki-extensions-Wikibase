@@ -324,46 +324,37 @@
 	/**
 	 * Default siteselector suggestion menu item.
 	 *
-	 * @constructor
 	 * @extends jQuery.ui.ooMenu.Item
-	 *
-	 * @param {string|jQuery} label
-	 * @param {string} value
-	 * @param {wikibase.Site} site
-	 *
-	 * @throws {Error} if a required parameter is not specified.
 	 */
-	var Item = function ( label, value, site ) {
+	$.wikibase.siteselector.Item = class extends $.ui.ooMenu.Item {
+
+		/**
+		 * @constructor
+		 *
+		 * @param {string|jQuery} label
+		 * @param {string} value
+		 * @param {wikibase.Site} site
+		 *
+		 * @throws {Error} if a required parameter is not specified.
+		 */
+		constructor( label, value, site ) {
 			if ( !label || !value || !site ) {
 				throw new Error( 'Required parameter(s) not specified' );
 			}
+			super( label, value, null );
 
-			this._label = label;
-			this._value = value;
-			this._site = site;
-		},
-		inherit = require( '../util.inherit.js' );
-
-	Item = inherit(
-		$.ui.ooMenu.Item,
-		Item,
-		{
 			/**
 			 * @type {wikibase.Site}
 			 */
-			_site: null,
-
-			/**
-			 * @return {wikibase.Site}
-			 */
-			getSite: function () {
-				return this._site;
-			}
+			this._site = site;
 		}
-	);
 
-	$.extend( $.wikibase.siteselector, {
-		Item: Item
-	} );
+		/**
+		 * @return {wikibase.Site}
+		 */
+		getSite() {
+			return this._site;
+		}
+	};
 
 }() );

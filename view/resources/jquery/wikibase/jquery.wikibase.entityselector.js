@@ -719,38 +719,22 @@
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	var Item = function ( label, value, entityStub ) {
-		if ( !label || !value || !entityStub ) {
-			throw new Error( 'Required parameter(s) not specified properly' );
-		}
-
-		this._label = label;
-		this._value = value;
-		this._entityStub = entityStub;
-		this._link = entityStub.url;
-	};
-
-	Item = util.inherit(
-		$.ui.ooMenu.Item,
-		Item,
-		{
+	$.wikibase.entityselector.Item = class extends $.ui.ooMenu.Item {
+		constructor( label, value, entityStub ) {
+			if ( !label || !value || !entityStub ) {
+				throw new Error( 'Required parameter(s) not specified properly' );
+			}
+			super( label, value, entityStub.url );
 			/**
 			 * @property {Object}
 			 * @protected
 			 */
-			_entityStub: null,
-
-			/**
-			 * @return {Object}
-			 */
-			getEntityStub: function () {
-				return this._entityStub;
-			}
+			this._entityStub = entityStub;
 		}
-	);
 
-	$.extend( $.wikibase.entityselector, {
-		Item: Item
-	} );
+		getEntityStub() {
+			return this._entityStub;
+		}
+	};
 
 }() );

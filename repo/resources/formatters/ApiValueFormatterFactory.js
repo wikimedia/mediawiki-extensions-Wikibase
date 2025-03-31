@@ -13,39 +13,34 @@
 	 * @param {wikibase.api.FormatValueCaller} apiCaller
 	 * @param {string} languageCode
 	 */
-	module.exports = util.inherit(
-		PARENT,
-		function ( apiCaller, languageCode ) {
-			this._apiCaller = apiCaller;
-			this._options = { lang: languageCode };
-		},
-		{
+	module.exports = class extends PARENT {
+		constructor( apiCaller, languageCode ) {
+			super();
 			/**
 			 * @type {wikibase.api.FormatValueCaller}
 			 */
-			_apiCaller: null,
-
+			this._apiCaller = apiCaller;
 			/**
 			 * @type {Object}
 			 */
-			_options: null,
-
-			/**
-			 * Returns a ValueFormatter instance for the given DataType ID or Property ID and output type.
-			 *
-			 * @param {string|null} dataTypeId
-			 * @param {string|null} propertyId
-			 * @param {string} outputType
-			 * @return {valueFormatters.ValueFormatter}
-			 */
-			getFormatter: function ( dataTypeId, propertyId, outputType ) {
-				var options = this._options;
-				if ( dataTypeId === 'quantity' && outputType === 'text/plain' ) {
-					options = $.extend( { applyRounding: false, applyUnit: false }, options );
-				}
-				return new wb.formatters.ApiValueFormatter( this._apiCaller, options, dataTypeId, propertyId, outputType );
-			}
+			this._options = { lang: languageCode };
 		}
-	);
+
+		/**
+		 * Returns a ValueFormatter instance for the given DataType ID or Property ID and output type.
+		 *
+		 * @param {string|null} dataTypeId
+		 * @param {string|null} propertyId
+		 * @param {string} outputType
+		 * @return {valueFormatters.ValueFormatter}
+		 */
+		getFormatter( dataTypeId, propertyId, outputType ) {
+			var options = this._options;
+			if ( dataTypeId === 'quantity' && outputType === 'text/plain' ) {
+				options = $.extend( { applyRounding: false, applyUnit: false }, options );
+			}
+			return new wb.formatters.ApiValueFormatter( this._apiCaller, options, dataTypeId, propertyId, outputType );
+		}
+	};
 
 }( wikibase ) );

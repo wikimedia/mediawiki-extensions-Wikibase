@@ -14,28 +14,23 @@
 	/**
 	 * Encapsulates the result of an Api Edit call. Object includes the new
 	 * value and the TempUserWatcher to track if a login is necessary
-	 *
-	 * @constructor
 	 */
-	var SELF = MODULE.ValueChangeResult = function WbValueChangeResult(
-		savedValue,
-		tempUserWatcher
-	) {
-		this._savedValue = savedValue;
-		this._tempUserWatcher = tempUserWatcher;
-	};
-
-	$.extend( SELF.prototype, {
-
-		getSavedValue: function () {
-			return this._savedValue;
-		},
-
-		getTempUserWatcher: function () {
-			return this._tempUserWatcher;
+	MODULE.ValueChangeResult = class {
+		constructor(
+			savedValue,
+			tempUserWatcher
+		) {
+			this._savedValue = savedValue;
+			this._tempUserWatcher = tempUserWatcher;
 		}
 
-	} );
+		getSavedValue() {
+			return this._savedValue;
+		}
 
-	module.exports = SELF;
+		getTempUserWatcher() {
+			return this._tempUserWatcher;
+		}
+	};
+
 }( wikibase ) );

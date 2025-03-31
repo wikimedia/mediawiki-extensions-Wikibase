@@ -13,27 +13,21 @@
 	 * @param {wikibase.RevisionStore} revisionStore
 	 * @param {datamodel.Entity} entity
 	 */
-	var SELF = MODULE.DescriptionsChanger = function WbEntityChangersDescriptionsChanger( api, revisionStore, entity ) {
-		this._api = api;
-		this._revisionStore = revisionStore;
-		this._entity = entity;
-	};
-
-	$.extend( SELF.prototype, {
-		/**
-		 * @type {datamodel.Entity}
-		 */
-		_entity: null,
-
-		/**
-		 * @type {wikibase.RevisionStore}
-		 */
-		_revisionStore: null,
-
-		/**
-		 * @type {wikibase.api.RepoApi}
-		 */
-		_api: null,
+	MODULE.DescriptionsChanger = class {
+		constructor( api, revisionStore, entity ) {
+			/**
+			 * @type {wikibase.api.RepoApi}
+			 */
+			this._api = api;
+			/**
+			 * @type {wikibase.RevisionStore}
+			 */
+			this._revisionStore = revisionStore;
+			/**
+			 * @type {datamodel.Entity}
+			 */
+			this._entity = entity;
+		}
 
 		/**
 		 * @param {datamodel.Term} description
@@ -44,7 +38,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setDescription: function ( description, tempUserWatcher ) {
+		setDescription( description, tempUserWatcher ) {
 			var self = this,
 				deferred = $.Deferred(),
 				language = description.getLanguageCode();
@@ -76,5 +70,5 @@
 
 			return deferred.promise();
 		}
-	} );
+	};
 }( wikibase ) );

@@ -417,58 +417,54 @@
 	 *
 	 * @throws {Error} if any required parameter is not specified properly.
 	 */
-	var Item = function ( label, value, link ) {
-		if ( !label ) {
-			throw new Error( 'Label needs to be specified' );
+	const Item = class {
+		constructor( label, value, link ) {
+			if ( !label ) {
+				throw new Error( 'Label needs to be specified' );
+			}
+
+			/**
+			 * @property {jQuery|string}
+			 * @protected
+			 */
+			this._label = label;
+
+			/**
+			 * @property {string}
+			 * @protected
+			 */
+			this._value = value || ( label instanceof $ ? label.text() : label );
+
+			/**
+			 * @property {string|null}
+			 * @protected
+			 */
+			this._link = link || null;
 		}
-
-		this._label = label;
-		this._value = value || ( label instanceof $ ? label.text() : label );
-		this._link = link || null;
-	};
-
-	$.extend( Item.prototype, {
-	/**
-	 * @property {jQuery|string}
-	 * @protected
-	 */
-		_label: null,
-
-		/**
-		 * @property {string}
-		 * @protected
-		 */
-		_value: null,
-
-		/**
-		 * @property {string|null}
-		 * @protected
-		 */
-		_link: null,
 
 		/**
 		 * @return {jQuery}
 		 */
-		getLabel: function () {
+		getLabel() {
 			return this._label instanceof String
 				? $( document.createTextNode( this._label ) )
 				: this._label;
-		},
+		}
 
 		/**
 		 * @return {string}
 		 */
-		getValue: function () {
+		getValue() {
 			return this._value;
-		},
+		}
 
 		/**
 		 * @return {string|null}
 		 */
-		getLink: function () {
+		getLink() {
 			return this._link;
 		}
-	} );
+	};
 
 	/**
 	 * Customizable menu item.
@@ -494,101 +490,93 @@
 	 *
 	 * @throws {Error} if any required parameter is not specified properly.
 	 */
-	var CustomItem = function ( label, visibility, action, cssClass, link ) {
+	const CustomItem = class extends Item {
+
+		constructor( label, visibility, action, cssClass, link ) {
 			if ( !label ) {
 				throw new Error( 'Label needs to be specified' );
 			}
+			super( label, null, link );
 
-			this._label = label;
+			/**
+			 * @property {Function|boolean|null}
+			 * @protected
+			 */
+			this._visibility = null;
 			this.setVisibility( visibility );
-			this.setAction( action );
-			this.setCssClass( cssClass );
-			this._link = link || null;
-		},
-		inherit = require( '../util.inherit.js' );
-
-	CustomItem = inherit(
-		Item,
-		CustomItem,
-		{
-		/**
-		 * @property {Function|boolean|null}
-		 * @protected
-		 */
-			_visibility: null,
 
 			/**
 			 * @property {Function|null}
 			 * @protected
 			 */
-			_action: null,
+			this._action = null;
+			this.setAction( action );
 
 			/**
 			 * @property {string}
 			 * @protected
 			 */
-			_cssClass: null,
-
-			/**
-			 * @inheritdoc
-			 */
-			getValue: function () {
-				return '';
-			},
-
-			/**
-			 * @param menu
-			 * @return {Function|boolean}
-			 */
-			getVisibility: function ( menu ) {
-				if ( typeof this._visibility === 'function' ) {
-					return this._visibility( menu );
-				}
-				return this._visibility !== false;
-			},
-
-			/**
-			 * @param {Function|boolean|null} [visibility]
-			 */
-			setVisibility: function ( visibility ) {
-				this._visibility = typeof visibility === 'function' || typeof visibility === 'boolean'
-					? visibility
-					: null;
-			},
-
-			/**
-			 * @return {Function|null}
-			 */
-			getAction: function () {
-				return this._action;
-			},
-
-			/**
-			 * @param {Function|null} [action]
-			 */
-			setAction: function ( action ) {
-				this._action = typeof action === 'function' ? action : null;
-			},
-
-			/**
-			 * @return {string}
-			 */
-			getCssClass: function () {
-				return this._cssClass;
-			},
-
-			/**
-			 * @param {string|null} [cssClass]
-			 */
-			setCssClass: function ( cssClass ) {
-				this._cssClass = typeof cssClass === 'string' ? cssClass : '';
-			}
+			this._cssClass = null;
+			this.setCssClass( cssClass );
 		}
-	);
 
-	$.extend( $.ui.ooMenu, {
-		Item: Item,
-		CustomItem: CustomItem
-	} );
+		/**
+		 * @inheritdoc
+		 */
+		getValue() {
+			return '';
+		}
+
+		/**
+		 * @param menu
+		 * @return {Function|boolean}
+		 */
+		getVisibility( menu ) {
+			if ( typeof this._visibility === 'function' ) {
+				return this._visibility( menu );
+			}
+			return this._visibility !== false;
+		}
+
+		/**
+		 * @param {Function|boolean|null} [visibility]
+		 */
+		setVisibility( visibility ) {
+			this._visibility = typeof visibility === 'function' || typeof visibility === 'boolean'
+				? visibility
+				: null;
+		}
+
+		/**
+		 * @return {Function|null}
+		 */
+		getAction() {
+			return this._action;
+		}
+
+		/**
+		 * @param {Function|null} [action]
+		 */
+		setAction( action ) {
+			this._action = typeof action === 'function' ? action : null;
+		}
+
+		/**
+		 * @return {string}
+		 */
+		getCssClass() {
+			return this._cssClass;
+		}
+
+		/**
+		 * @param {string|null} [cssClass]
+		 */
+		setCssClass( cssClass ) {
+			this._cssClass = typeof cssClass === 'string' ? cssClass : '';
+		}
+	};
+
+	$.ui.ooMenu.prototype.Item = Item;
+	$.ui.ooMenu.prototype.CustomItem = CustomItem;
 
 }() );

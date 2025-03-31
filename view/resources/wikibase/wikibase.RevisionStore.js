@@ -10,24 +10,22 @@
 	/**
 	 * Offers access to stored revision ids
 	 *
-	 * @constructor
-	 * @param {number} baseRev
-	 */
-	var SELF = function WbRevisionStore( baseRev ) {
-		this._revisions = {
-			baseRevision: baseRev,
-			labelRevision: baseRev,
-			descriptionRevision: baseRev,
-			aliasesRevision: baseRev,
-			sitelinksRevision: {},
-			claimRevisions: {}
-		};
-	};
-
-	/**
 	 * @class wikibase.RevisionStore
 	 */
-	$.extend( SELF.prototype, {
+	module.exports = class {
+		/**
+		 * @param {number} baseRev
+		 */
+		constructor( baseRev ) {
+			this._revisions = {
+				baseRevision: baseRev,
+				labelRevision: baseRev,
+				descriptionRevision: baseRev,
+				aliasesRevision: baseRev,
+				sitelinksRevision: {},
+				claimRevisions: {}
+			};
+		}
 
 		/**
 		 * Returns the original base revision number of the one entity this RevisionStore was
@@ -35,36 +33,36 @@
 		 *
 		 * @return {number}
 		 */
-		getBaseRevision: function () {
+		getBaseRevision() {
 			return this._revisions.baseRevision;
-		},
+		}
 
 		/**
 		 * Returns the currently used revision number for all labels.
 		 *
 		 * @return {number}
 		 */
-		getLabelRevision: function () {
+		getLabelRevision() {
 			return this._revisions.labelRevision;
-		},
+		}
 
 		/**
 		 * Returns the currently used revision number for all descriptions.
 		 *
 		 * @return {number}
 		 */
-		getDescriptionRevision: function () {
+		getDescriptionRevision() {
 			return this._revisions.descriptionRevision;
-		},
+		}
 
 		/**
 		 * Returns the currently used revision number for all aliases.
 		 *
 		 * @return {number}
 		 */
-		getAliasesRevision: function () {
+		getAliasesRevision() {
 			return this._revisions.aliasesRevision;
-		},
+		}
 
 		/**
 		 * Returns the currently used revision number for a sitelink, per global site identifier.
@@ -76,13 +74,13 @@
 		 * @param {string} siteId
 		 * @return {number}
 		 */
-		getSitelinksRevision: function ( siteId ) {
+		getSitelinksRevision( siteId ) {
 			if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, siteId ) ) {
 				return this._revisions.sitelinksRevision[ siteId ];
 			}
 
 			return this._revisions.baseRevision;
-		},
+		}
 
 		/**
 		 * Returns the currently used revision number for a statement, per statement GUID.
@@ -94,40 +92,40 @@
 		 * @param {string} statementGuid
 		 * @return {number}
 		 */
-		getClaimRevision: function ( statementGuid ) {
+		getClaimRevision( statementGuid ) {
 			if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, statementGuid ) ) {
 				return this._revisions.claimRevisions[ statementGuid ];
 			}
 
 			return this._revisions.baseRevision;
-		},
+		}
 
 		/**
 		 * Updates the currently used revision number for all labels.
 		 *
 		 * @param {number} rev
 		 */
-		setLabelRevision: function ( rev ) {
+		setLabelRevision( rev ) {
 			this._revisions.labelRevision = rev;
-		},
+		}
 
 		/**
 		 * Updates the currently used revision number for all descriptions.
 		 *
 		 * @param {number} rev
 		 */
-		setDescriptionRevision: function ( rev ) {
+		setDescriptionRevision( rev ) {
 			this._revisions.descriptionRevision = rev;
-		},
+		}
 
 		/**
 		 * Updates the currently used revision number for all aliases.
 		 *
 		 * @param {number} rev
 		 */
-		setAliasesRevision: function ( rev ) {
+		setAliasesRevision( rev ) {
 			this._revisions.aliasesRevision = rev;
-		},
+		}
 
 		/**
 		 * Updates the currently used revision number for a sitelink, per global site identifier.
@@ -135,9 +133,9 @@
 		 * @param {number} rev
 		 * @param {string} siteId
 		 */
-		setSitelinksRevision: function ( rev, siteId ) {
+		setSitelinksRevision( rev, siteId ) {
 			this._revisions.sitelinksRevision[ siteId ] = rev;
-		},
+		}
 
 		/**
 		 * Updates the currently used revision number for a statement, per statement GUID.
@@ -145,11 +143,10 @@
 		 * @param {number} rev
 		 * @param {string} statementGuid
 		 */
-		setClaimRevision: function ( rev, statementGuid ) {
+		setClaimRevision( rev, statementGuid ) {
 			this._revisions.claimRevisions[ statementGuid ] = rev;
 		}
 
-	} );
+	};
 
-	module.exports = SELF;
 }() );

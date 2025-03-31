@@ -3,37 +3,32 @@
  */
 ( function () {
 
-	/**
-	 * @param {Object} entityLoadedHook
-	 * @param {EntityStore} entityStore
-	 */
-	function PropertyDataTypeStore( entityLoadedHook, entityStore ) {
-		this._entityLoadedHook = entityLoadedHook;
-		this._entityStore = entityStore;
-		this._propertyDataTypeMapping = {};
-	}
-
-	$.extend( PropertyDataTypeStore.prototype, {
-		/**
-		 * @type {Object} map of property id to data type
-		 */
-		_propertyDataTypeMapping: {},
+	class PropertyDataTypeStore {
 
 		/**
-		 * @type {Object}
+		 * @param {Object} entityLoadedHook
+		 * @param {EntityStore} entityStore
 		 */
-		_entityLoadedHook: null,
+		constructor( entityLoadedHook, entityStore ) {
+			/**
+			 * @type {Object}
+			 */
+			this._entityLoadedHook = entityLoadedHook;
+			/**
+			 * @type {EntityStore}
+			 */
+			this._entityStore = entityStore;
+			/**
+			 * @type {Object} map of property id to data type
+			 */
+			this._propertyDataTypeMapping = {};
+		}
 
-		/**
-		 * @type {EntityStore}
-		 */
-		_entityStore: null,
-
-		setDataTypeForProperty: function ( id, dataType ) {
+		setDataTypeForProperty( id, dataType ) {
 			this._propertyDataTypeMapping[ id ] = dataType;
-		},
+		}
 
-		getDataTypeForProperty: function ( id ) {
+		getDataTypeForProperty( id ) {
 			var self = this;
 
 			if ( this._propertyDataTypeMapping[ id ] ) {
@@ -45,9 +40,9 @@
 				.always( ( dataType ) => {
 					self.setDataTypeForProperty( id, dataType );
 				} );
-		},
+		}
 
-		_getDataTypeFromExistingStatements: function ( propertyId ) {
+		_getDataTypeFromExistingStatements( propertyId ) {
 			var dataTypePromise = $.Deferred(),
 				self = this;
 
@@ -61,7 +56,7 @@
 			} );
 
 			return dataTypePromise;
-		},
+		}
 
 		/**
 		 * Recursively traverses (pieces of) entity JSON and returns a property's data type if there is a statement for
@@ -72,7 +67,7 @@
 		 *
 		 * @return {null|string}
 		 */
-		_findDataTypeInEntity: function ( node, propertyId ) {
+		_findDataTypeInEntity( node, propertyId ) {
 			if ( !node || typeof node !== 'object' ) {
 				return null;
 			}
@@ -92,14 +87,14 @@
 			}
 
 			return null;
-		},
+		}
 
-		_getDataTypeFromSnak: function ( snak ) {
+		_getDataTypeFromSnak( snak ) {
 			return snak && snak.datatype || // if it's a qualifier/reference, the data type is at the top level
 				snak.mainsnak && snak.mainsnak.datatype; // main snak
-		},
+		}
 
-		_getDataTypeFromEntityStore: function ( propertyId ) {
+		_getDataTypeFromEntityStore( propertyId ) {
 			return this._entityStore.get( propertyId ).then( ( property ) => {
 				if ( !property ) {
 					return null;
@@ -108,7 +103,7 @@
 				return property.getDataTypeId();
 			} );
 		}
-	} );
+	}
 
 	module.exports = PropertyDataTypeStore;
 

@@ -12,26 +12,22 @@
 		return tasks.reduce( ( promise, task ) => promise.then( task ), $.Deferred().resolve().promise() );
 	}
 
-	/**
-	 * @param {wikibase.api.RepoApi} api
-	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {datamodel.Entity} entity
-	 */
-	var SELF = MODULE.SiteLinkSetsChanger = function WbEntityChangersSiteLinkSetsChanger( api, revisionStore, entity ) {
-		this._siteLinksChanger = new MODULE.SiteLinksChanger( api, revisionStore, entity );
-		this._entity = entity;
-	};
-
-	$.extend( SELF.prototype, {
+	MODULE.SiteLinkSetsChanger = class {
 		/**
-		 * @type {datamodel.Entity}
+		 * @param {wikibase.api.RepoApi} api
+		 * @param {wikibase.RevisionStore} revisionStore
+		 * @param {datamodel.Entity} entity
 		 */
-		_entity: null,
-
-		/**
-		 * @type {wikibase.entityChangers.SiteLinksChanger}
-		 */
-		_siteLinksChanger: null,
+		constructor( api, revisionStore, entity ) {
+			/**
+			 * @type {wikibase.entityChangers.SiteLinksChanger}
+			 */
+			this._siteLinksChanger = new MODULE.SiteLinksChanger( api, revisionStore, entity );
+			/**
+			 * @type {datamodel.Entity}
+			 */
+			this._entity = entity;
+		}
 
 		/**
 		 * @param {datamodel.SiteLinkSet} newSiteLinkSet
@@ -42,7 +38,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		save: function ( newSiteLinkSet, oldSiteLinkSet ) {
+		save( newSiteLinkSet, oldSiteLinkSet ) {
 			function getRemovedSiteLinkIds() {
 				var currentSiteIds = newSiteLinkSet.getKeys();
 				var removedSiteLinkIds = [];
@@ -88,6 +84,6 @@
 			) );
 		}
 
-	} );
+	};
 
 }( wikibase ) );

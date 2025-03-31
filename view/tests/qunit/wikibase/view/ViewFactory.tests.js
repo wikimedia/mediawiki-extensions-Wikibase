@@ -162,21 +162,22 @@
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
 			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			stubbedInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubbedInstance ),
 			value = new datamodel.StatementGroup( 'P1' ),
 			htmlIdPrefix = 'X1-Y2';
 
 		viewFactory.getListItemAdapterForStatementGroupView( null, entityId, null, htmlIdPrefix );
 
 		sinon.assert.calledWith(
-			ListItemAdapter,
+			constructorStub,
 			sinon.match( {
 				listItemWidget: $.wikibase.statementgroupview,
 				newItemOptionsFn: sinon.match.func
 			} )
 		);
 
-		var result = ListItemAdapter.args[ 0 ][ 0 ].newItemOptionsFn( value );
+		var result = constructorStub.args[ 0 ][ 0 ].newItemOptionsFn( value );
 
 		assert.deepEqual(
 			result,
@@ -357,14 +358,15 @@
 			propertyId = 'propertyId',
 			value = null,
 			viewFactory = newViewFactory(),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			stubInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubInstance ),
 			dom = {};
 
 		sinon.stub( viewFactory, '_getView' );
 
 		viewFactory.getListItemAdapterForStatementView( null, entityId, () => {}, propertyId );
 
-		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
+		constructorStub.args[ 0 ][ 0 ].getNewItem( value, dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -384,14 +386,15 @@
 		var propertyId = 'P1',
 			value = new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			viewFactory = newViewFactory(),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			stubInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubInstance ),
 			dom = {};
 
 		sinon.stub( viewFactory, '_getView' );
 
 		viewFactory.getListItemAdapterForStatementView( null, 'Q1', () => {}, null );
 
-		ListItemAdapter.args[ 0 ][ 0 ].getNewItem( value, dom );
+		constructorStub.args[ 0 ][ 0 ].getNewItem( value, dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -410,19 +413,20 @@
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
 			removeCallback = function () {},
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			stubInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubInstance );
 
 		viewFactory.getListItemAdapterForReferenceView( null, removeCallback );
 
 		sinon.assert.calledWith(
-			ListItemAdapter,
+			constructorStub,
 			sinon.match( {
 				listItemWidget: $.wikibase.referenceview,
 				getNewItem: sinon.match.func
 			} )
 		);
 
-		ListItemAdapter.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getReferenceView passes correct options to view', ( assert ) => {
@@ -450,19 +454,20 @@
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			stubInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubInstance );
 
 		viewFactory.getListItemAdapterForSnakListView();
 
 		sinon.assert.calledWith(
-			ListItemAdapter,
+			constructorStub,
 			sinon.match( {
 				listItemWidget: $.wikibase.snaklistview,
 				getNewItem: sinon.match.func
 			} )
 		);
 
-		ListItemAdapter.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getSnakListView passes correct options to view', ( assert ) => {
@@ -487,12 +492,13 @@
 
 	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', ( assert ) => {
 		var viewFactory = newViewFactory(),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			stubInstance = sinon.createStubInstance( $.wikibase.listview.ListItemAdapter ),
+			constructorStub = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ).returns( stubInstance );
 
 		viewFactory.getListItemAdapterForSnakView();
 
 		sinon.assert.calledWith(
-			ListItemAdapter,
+			constructorStub,
 			sinon.match( {
 				listItemWidget: $.wikibase.snakview,
 				getNewItem: sinon.match.func

@@ -48,49 +48,48 @@
 	 * @throws {Error} if the widget specified in the `listItemWidget` option does not feature a
 	 *         `value` method.
 	 */
-	var SELF = $.wikibase.listview.ListItemAdapter = function WbListviewListItemAdapter( options ) {
-		if ( typeof options.listItemWidget !== 'function'
-			|| !options.listItemWidget.prototype.widgetName
-			|| !options.listItemWidget.prototype.widgetEventPrefix
-		) {
-			throw new Error( 'For a new ListItemAdapter, a jQuery Widget constructor is required' );
-		}
-		if ( typeof options.listItemWidget.prototype.value !== 'function' ) {
-			throw new Error(
-				'For a new ListItemAdapter, the list item prototype needs a "value" method'
-			);
-		}
-		if ( typeof options.listItemWidget.prototype.destroy !== 'function' ||
-			typeof options.listItemWidget.prototype.option !== 'function'
-		) {
-			mw.log.warn(
-				'For a new ListItemAdapter, the list item prototype needs "destroy" and "option" methods'
-			);
-		}
-		if ( typeof options.newItemOptionsFn !== 'function' && typeof options.getNewItem !== 'function' ) {
-			throw new Error(
-				'For a new ListItemAdapter, the "newItemOptionsFn" or the "getNewItem" option has to be passed'
-			);
-		}
-
-		if ( !options.getNewItem ) {
-			var self = this;
-			options.getNewItem = function ( value, subjectDom ) {
-				return new options.listItemWidget(
-					options.newItemOptionsFn.call( self, value === undefined ? null : value ),
-					subjectDom
+	$.wikibase.listview.ListItemAdapter = class {
+		constructor( options ) {
+			if ( typeof options.listItemWidget !== 'function'
+				|| !options.listItemWidget.prototype.widgetName
+				|| !options.listItemWidget.prototype.widgetEventPrefix
+			) {
+				throw new Error( 'For a new ListItemAdapter, a jQuery Widget constructor is required' );
+			}
+			if ( typeof options.listItemWidget.prototype.value !== 'function' ) {
+				throw new Error(
+					'For a new ListItemAdapter, the list item prototype needs a "value" method'
 				);
-			};
-		}
+			}
+			if ( typeof options.listItemWidget.prototype.destroy !== 'function' ||
+				typeof options.listItemWidget.prototype.option !== 'function'
+			) {
+				mw.log.warn(
+					'For a new ListItemAdapter, the list item prototype needs "destroy" and "option" methods'
+				);
+			}
+			if ( typeof options.newItemOptionsFn !== 'function' && typeof options.getNewItem !== 'function' ) {
+				throw new Error(
+					'For a new ListItemAdapter, the "newItemOptionsFn" or the "getNewItem" option has to be passed'
+				);
+			}
 
-		this._options = options;
-	};
-	$.extend( SELF.prototype, {
-		/**
-		 * @property {Object}
-		 * @protected
-		 */
-		_options: null,
+			if ( !options.getNewItem ) {
+				var self = this;
+				options.getNewItem = function ( value, subjectDom ) {
+					return new options.listItemWidget(
+						options.newItemOptionsFn.call( self, value === undefined ? null : value ),
+						subjectDom
+					);
+				};
+			}
+
+			/**
+			 * @property {Object}
+			 * @protected
+			 */
+			this._options = options;
+		}
 
 		/**
 		 * Returns the given string but prefixed with the list item widget's event prefix.
@@ -98,9 +97,9 @@
 		 * @param {string} [name]
 		 * @return {string}
 		 */
-		prefixedEvent: function ( name ) {
+		prefixedEvent( name ) {
 			return this._options.listItemWidget.prototype.widgetEventPrefix + ( name || '' );
-		},
+		}
 
 		/**
 		 * Returns the list item widget instance initialized on the (list item) node provided.
@@ -108,9 +107,9 @@
 		 * @param {jQuery} $node
 		 * @return {*|null}
 		 */
-		liInstance: function ( $node ) {
+		liInstance( $node ) {
 			return $node.data( this._options.listItemWidget.prototype.widgetName ) || null;
-		},
+		}
 
 		/**
 		 * Returns a new list item. If the `value` parameter is omitted or `null`, an empty list
@@ -121,13 +120,13 @@
 		 *        list item will be an empty one.
 		 * @return {jQuery.Widget}
 		 */
-		newListItem: function ( $subject, value ) {
+		newListItem( $subject, value ) {
 			var item = this._options.getNewItem( value, $subject[ 0 ] );
 			if ( !( item instanceof $.Widget ) ) {
 				throw new Error( 'The "getNewItem" option must return a jQuery.Widget' );
 			}
 			return item;
 		}
-	} );
+	};
 
 }() );

@@ -16,46 +16,40 @@
 	 * @param {string} secondSiteId
 	 * @param {string} secondPageName
 	 */
-	var PageConnector = function PageConnector(
-		repoApi,
-		firstSiteId,
-		firstPageName,
-		secondSiteId,
-		secondPageName
-	) {
-		this._repoApi = repoApi;
+	const PageConnector = class {
 
-		this._firstSiteId = firstSiteId;
-		this._firstPageName = firstPageName;
-		this._secondSiteId = secondSiteId;
-		this._secondPageName = secondPageName;
-	};
+		constructor(
+			repoApi,
+			firstSiteId,
+			firstPageName,
+			secondSiteId,
+			secondPageName
+		) {
+			/**
+			 * @type wikibase.api.RepoApi
+			 */
+			this._repoApi = repoApi;
 
-	$.extend( PageConnector.prototype, {
-		/**
-		 * @type wikibase.api.RepoApi
-		 */
-		_repoApi: null,
+			/**
+			 * @type string
+			 */
+			this._firstSiteId = firstSiteId;
 
-		/**
-		 * @type string
-		 */
-		_firstSiteId: null,
+			/**
+			 * @type string
+			 */
+			this._firstPageName = firstPageName;
 
-		/**
-		 * @type string
-		 */
-		_firstPageName: null,
+			/**
+			 * @type string
+			 */
+			this._secondSiteId = secondSiteId;
 
-		/**
-		 * @type string
-		 */
-		_secondSiteId: null,
-
-		/**
-		 * @type string
-		 */
-		_secondPageName: null,
+			/**
+			 * @type string
+			 */
+			this._secondPageName = secondPageName;
+		}
 
 		/**
 		 * Gets a list of pages that will also be linked with the first page. This may visualize
@@ -63,7 +57,7 @@
 		 *
 		 * @return {jQuery.promise}
 		 */
-		getNewlyLinkedPages: function () {
+		getNewlyLinkedPages() {
 			var self = this,
 				deferred = new $.Deferred();
 
@@ -86,7 +80,7 @@
 			} );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * Get the entity for a given page in case there is one
@@ -96,7 +90,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_getEntityForPage: function ( siteId, pageName ) {
+		_getEntityForPage( siteId, pageName ) {
 			return this._repoApi.getEntitiesByPage(
 				siteId,
 				pageName,
@@ -104,7 +98,7 @@
 				'',
 				true
 			);
-		},
+		}
 
 		/**
 		 * Get the (first) entity object from an API response.
@@ -113,13 +107,13 @@
 		 *
 		 * @return {Object|undefined} Entity as returned by the API
 		 */
-		_extractEntity: function ( apiResult ) {
+		_extractEntity( apiResult ) {
 			for ( var i in apiResult.entities ) {
 				if ( apiResult.entities[ i ].sitelinks ) {
 					return apiResult.entities[ i ];
 				}
 			}
-		},
+		}
 
 		/**
 		 * Counts the number of sites attached to a given entity.
@@ -128,7 +122,7 @@
 		 *
 		 * @return {number}
 		 */
-		_countSiteLinks: function ( entity ) {
+		_countSiteLinks( entity ) {
 			var siteLinkCount = 0,
 				i;
 
@@ -138,7 +132,7 @@
 				}
 			}
 			return siteLinkCount;
-		},
+		}
 
 		/**
 		 * Links the two articles by either creating a new item, updating an existing one or merging two
@@ -146,7 +140,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		linkPages: function () {
+		linkPages() {
 			var self = this,
 				deferred = new $.Deferred();
 
@@ -175,7 +169,7 @@
 			.fail( deferred.reject );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * Links the second page with the given entity. If page is linked to an item already, a merge is
@@ -185,7 +179,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_linkOrMergeSecondPage: function ( entity ) {
+		_linkOrMergeSecondPage( entity ) {
 			var self = this,
 				deferred = new $.Deferred();
 
@@ -212,7 +206,7 @@
 			.fail( deferred.reject );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * If the second page has an item, it links the first page with the item of the second page. If
@@ -220,7 +214,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_linkFirstPageOrCreateItem: function () {
+		_linkFirstPageOrCreateItem() {
 			var self = this,
 				deferred = new $.Deferred();
 
@@ -255,7 +249,7 @@
 			} );
 
 			return deferred.promise();
-		},
+		}
 
 		/**
 		 * Links an item with a page.
@@ -266,14 +260,14 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_setSiteLink: function ( entity, siteId, pageName ) {
+		_setSiteLink( entity, siteId, pageName ) {
 			return this._repoApi.setSitelink(
 				entity.id,
 				entity.lastrevid,
 				siteId,
 				pageName
 			);
-		},
+		}
 
 		/**
 		 * Merges two entities.
@@ -283,7 +277,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_mergeEntities: function ( firstEntity, secondEntity ) {
+		_mergeEntities( firstEntity, secondEntity ) {
 			var firstSiteLinkCount = this._countSiteLinks( firstEntity ),
 				secondSiteLinkCount = this._countSiteLinks( secondEntity ),
 				fromId,
@@ -306,7 +300,7 @@
 				// Ignore label and description conflicts, but fail on link conflicts
 				[ 'label', 'description' ]
 			);
-		},
+		}
 
 		/**
 		 * Creates an item in the repository.
@@ -318,7 +312,7 @@
 		 *
 		 * @return {jQuery.Promise}
 		 */
-		_createItem: function ( firstSiteId, firstPageName, secondSiteId, secondPageName ) {
+		_createItem( firstSiteId, firstPageName, secondSiteId, secondPageName ) {
 			// JSON data for the new entity
 			var entityData = {
 					labels: {},
@@ -351,7 +345,7 @@
 			return this._repoApi.createEntity( 'item', entityData );
 		}
 
-	} );
+	};
 
 	module.exports = wb.PageConnector = PageConnector;
 

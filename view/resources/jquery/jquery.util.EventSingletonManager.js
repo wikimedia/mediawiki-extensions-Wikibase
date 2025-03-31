@@ -9,18 +9,14 @@
 	 * Manages attaching an event handler to a target only once for a set of source objects.
 	 * Since an event is attached only once, the initial event handler (for the combination of target/
 	 * event name/event namespace) may not be overwritten later on.
-	 *
-	 * @constructor
 	 */
-	var SELF = function UtilEventSingletonManager() {
-		this._registry = [];
-	};
-
-	$.extend( SELF.prototype, {
-		/**
-		 * @type {Object[]}
-		 */
-		_registry: [],
+	class UtilEventSingletonManager {
+		constructor() {
+			/**
+			 * @type {Object[]}
+			 */
+			this._registry = [];
+		}
 
 		/**
 		 * Attaches an event handler to a target element unless it is not attached already. The event
@@ -39,7 +35,7 @@
 		 *        - {number} [debounce] Debounce delay
 		 *          Default: undefined (no debouncing)
 		 */
-		register: function ( source, target, event, handler, options ) {
+		register( source, target, event, handler, options ) {
 			var namespacedEvents = event.split( ' ' );
 
 			options = options || {};
@@ -53,7 +49,7 @@
 					this._attach( source, target, namespacedEvents[ i ], handler, options );
 				}
 			}
-		},
+		}
 
 		/**
 		 * Unregisters one or multiple events attached to a target element and registered for a specific
@@ -65,7 +61,7 @@
 		 *        Instead of white-space separated list of event names, a single namespace may be passed
 		 *        to remove all events attached to target and registered on source.
 		 */
-		unregister: function ( source, target, event ) {
+		unregister( source, target, event ) {
 			var registrations = [],
 				i;
 
@@ -90,14 +86,14 @@
 					this._detach( registrations[ i ] );
 				}
 			}
-		},
+		}
 
 		/**
 		 * @param {HTMLElement|Object} target
 		 * @param {string} event
 		 * @return {Object}
 		 */
-		_getRegistration: function ( target, event ) {
+		_getRegistration( target, event ) {
 			var eventSegments = event.split( '.' );
 
 			for ( var i = 0; i < this._registry.length; i++ ) {
@@ -108,14 +104,14 @@
 					return this._registry[ i ];
 				}
 			}
-		},
+		}
 
 		/**
 		 * @param {HTMLElement|Object} target
 		 * @param {string} namespace
 		 * @return {Object[]}
 		 */
-		_getRegistrations: function ( target, namespace ) {
+		_getRegistrations( target, namespace ) {
 			var registered = [];
 
 			for ( var i = 0; i < this._registry.length; i++ ) {
@@ -125,7 +121,7 @@
 			}
 
 			return registered;
-		},
+		}
 
 		/**
 		 * @param {*} source
@@ -134,7 +130,7 @@
 		 * @param {Function} handler
 		 * @param {Object} options
 		 */
-		_attach: function ( source, target, event, handler, options ) {
+		_attach( source, target, event, handler, options ) {
 			var self = this,
 				eventSegments = event.split( '.' ),
 				actualHandler = function ( actualEvent ) {
@@ -157,12 +153,12 @@
 				namespace: eventSegments[ 1 ],
 				handler: handler
 			} );
-		},
+		}
 
 		/**
 		 * @param {Object} registration
 		 */
-		_detach: function ( registration ) {
+		_detach( registration ) {
 			var namespaced = registration.event;
 			if ( registration.namespace ) {
 				namespaced += '.' + registration.namespace;
@@ -177,14 +173,14 @@
 					this._registry.splice( i, 1 );
 				}
 			}
-		},
+		}
 
 		/**
 		 * @param {HTMLElement|Object} target
 		 * @param {string} event
 		 * @param {jQuery.Event} actualEvent
 		 */
-		_triggerHandler: function ( target, event, actualEvent ) {
+		_triggerHandler( target, event, actualEvent ) {
 			var registration = this._getRegistration( target, event );
 
 			if ( registration ) {
@@ -193,8 +189,8 @@
 				}
 			}
 		}
-	} );
+	}
 
-	module.exports = SELF;
+	module.exports = UtilEventSingletonManager;
 
 }() );

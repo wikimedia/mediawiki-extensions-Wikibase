@@ -1,5 +1,6 @@
 ( function () {
 	'use strict';
+
 	/**
 	 * Interface to a `jQuery.wikibase.snakview` instance that allows querying the `snakview` for
 	 * information as well as updating the `snakview`. Does not provide functions to actively change
@@ -8,23 +9,21 @@
 	 * @see jQuery.wikibase.snakview
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
-	 *
-	 * @constructor
-	 *
-	 * @param {jQuery.wikibase.snakview} snakView
-	 *
-	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	var SELF = function WbSnakviewViewState( snakView ) {
-		this._view = snakView;
-	};
-	$.extend( SELF.prototype, {
+	class WbSnakviewViewState {
 		/**
-		 * The `snakview` the `ViewState` is interfacing to.
+		 * @param {jQuery.wikibase.snakview} snakView
 		 *
-		 * @property {jQuery.wikibase.snakview}
+		 * @throws {Error} if a required parameter is not specified properly.
 		 */
-		_view: null,
+		constructor( snakView ) {
+			/**
+			 * The `snakview` the `ViewState` is interfacing to.
+			 *
+			 * @property {jQuery.wikibase.snakview}
+			 */
+			this._view = snakView;
+		}
 
 		/**
 		 * Notifies the `snakview` of a status update.
@@ -33,47 +32,47 @@
 		 *
 		 * @param {string} status
 		 */
-		notify: function ( status ) {
+		notify( status ) {
 			this._view.updateStatus( status );
-		},
+		}
 
 		/**
 		 * @see jQuery.wikibase.snakview.isInEditMode
 		 *
 		 * @return {boolean}
 		 */
-		isInEditMode: function () {
+		isInEditMode() {
 			return this._view.isInEditMode();
-		},
+		}
 
 		/**
 		 * @see jQuery.wikibase.snakview.propertyId
 		 *
 		 * @return {string}
 		 */
-		propertyId: function () {
+		propertyId() {
 			return this._view.propertyId();
-		},
+		}
 
 		/**
 		 * @see jQuery.wikibase.snakview.snakType
 		 *
 		 * @return {string}
 		 */
-		snakType: function () {
+		snakType() {
 			return this._view.snakType();
-		},
+		}
 
 		/**
 		 * @see jQuery.wikibase.snakview.isDisabled
 		 *
 		 * @return {boolean}
 		 */
-		isDisabled: function () {
+		isDisabled() {
 			return this._view.option( 'disabled' );
 		}
-	} );
+	}
 
-	module.exports = SELF;
+	module.exports = WbSnakviewViewState;
 
 }() );
