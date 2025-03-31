@@ -37,7 +37,7 @@
 	 * @return {jQuery}
 	 */
 	var newEntitysearch = function ( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			source: entityStubs
 		}, options || {} );
 

@@ -741,14 +741,14 @@
 			|| $( document.documentElement ).css( 'direction' )
 			|| 'auto';
 
-			var position = $.extend( {}, this.options.position ),
+			var position = Object.assign( {}, this.options.position ),
 				$menu = this.options.menu.element;
 
 			if ( dir === 'rtl' ) {
 				position = flipPosition( position );
 			}
 
-			$menu.position( $.extend( {
+			$menu.position( Object.assign( {
 				of: this.element
 			}, position ) );
 

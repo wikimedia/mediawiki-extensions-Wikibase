@@ -6,49 +6,48 @@
 	'use strict';
 
 	/**
-	 * @constructor
-	 *
-	 * @param {jQuery.valueview.ExpertStore} expertStore
-	 * @param {wikibase.ValueFormatterFactory} formatterFactory
-	 * @param {valueParsers.ValueParserStore} parserStore
-	 * @param {string} language
-	 * @param {util.MessageProvider} messageProvider
-	 * @param {util.ContentLanguages} contentLanguages
-	 * @param {string|null} [vocabularyLookupApiUrl=null]
-	 * @param {string} commonsApiUrl
+	 * @class wikibase.ValueViewBuilder
 	 */
-	var SELF = function WbValueViewBuilder(
-		expertStore,
-		formatterFactory,
-		parserStore,
-		language,
-		messageProvider,
-		contentLanguages,
-		vocabularyLookupApiUrl,
-		commonsApiUrl
-	) {
-		this._baseOptions = {
-			expertStore: expertStore,
-			parserStore: parserStore,
-			language: language,
-			messageProvider: messageProvider,
-			contentLanguages: contentLanguages,
-			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null,
-			commonsApiUrl: commonsApiUrl
-		};
-		this._formatterFactory = formatterFactory;
-	};
-
-	$.extend( SELF.prototype, {
+	module.exports = class {
 		/**
-		 * @member {Object}
+		 * @constructor
+		 *
+		 * @param {jQuery.valueview.ExpertStore} expertStore
+		 * @param {wikibase.ValueFormatterFactory} formatterFactory
+		 * @param {valueParsers.ValueParserStore} parserStore
+		 * @param {string} language
+		 * @param {util.MessageProvider} messageProvider
+		 * @param {util.ContentLanguages} contentLanguages
+		 * @param {string|null} [vocabularyLookupApiUrl=null]
+		 * @param {string} commonsApiUrl
 		 */
-		_baseOptions: null,
-
-		/**
-		 * @member {wikibase.ValueFormatterFactory}
-		 */
-		_formatterFactory: null,
+		constructor(
+			expertStore,
+			formatterFactory,
+			parserStore,
+			language,
+			messageProvider,
+			contentLanguages,
+			vocabularyLookupApiUrl,
+			commonsApiUrl
+		) {
+			/**
+			 * @member {Object}
+			 */
+			this._baseOptions = {
+				expertStore: expertStore,
+				parserStore: parserStore,
+				language: language,
+				messageProvider: messageProvider,
+				contentLanguages: contentLanguages,
+				vocabularyLookupApiUrl: vocabularyLookupApiUrl || null,
+				commonsApiUrl: commonsApiUrl
+			};
+			/**
+			 * @member {wikibase.ValueFormatterFactory}
+			 */
+			this._formatterFactory = formatterFactory;
+		}
 
 		/**
 		 * @param {jQuery} $valueViewDom
@@ -58,7 +57,7 @@
 		 *
 		 * @return {jQuery.valueview}
 		 */
-		initValueView: function ( $valueViewDom, dataType, dataValue, propertyId ) {
+		initValueView( $valueViewDom, dataType, dataValue, propertyId ) {
 			var valueView,
 				valueViewOptions = this._getOptions( dataType, dataValue, propertyId );
 
@@ -68,7 +67,7 @@
 			valueView = $valueViewDom.data( 'valueview' );
 
 			return valueView;
-		},
+		}
 
 		/**
 		 * @param {wikibase.dataTypes.DataType|null} dataType
@@ -77,9 +76,9 @@
 		 *
 		 * @return {Object}
 		 */
-		_getOptions: function ( dataType, dataValue, propertyId ) {
+		_getOptions( dataType, dataValue, propertyId ) {
 			var dataTypeId = dataType && dataType.getId();
-			var valueViewOptions = $.extend( {}, this._baseOptions, {
+			var valueViewOptions = Object.assign( {}, this._baseOptions, {
 				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html; disposition=verbose-preview' ),
 				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/plain' ),
 				value: dataValue
@@ -100,7 +99,6 @@
 
 			return valueViewOptions;
 		}
-	} );
+	};
 
-	module.exports = SELF;
 }() );

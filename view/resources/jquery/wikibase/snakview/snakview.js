@@ -184,7 +184,7 @@
 				}
 			} else if ( key === 'locked' && typeof value === 'boolean' ) {
 				var locked = value;
-				value = $.extend( {}, $.wikibase.snakview.prototype.options.locked );
+				value = Object.assign( {}, $.wikibase.snakview.prototype.options.locked );
 				Object.keys( $.wikibase.snakview.prototype.options.locked ).forEach( ( k ) => {
 					value[ k ] = locked;
 				} );
@@ -457,7 +457,7 @@
 				value.hash = serialization.hash;
 			}
 
-			return this._variation ? $.extend( this._variation.value(), value ) : value;
+			return this._variation ? Object.assign( this._variation.value(), value ) : value;
 		},
 
 		/**
@@ -603,13 +603,13 @@
 				if ( !value.datavalue
 					&& this._cachedValues[ snakType ] && this._cachedValues[ snakType ].datavalue
 				) {
-					value.datavalue = $.extend( {}, this._cachedValues[ snakType ].datavalue );
+					value.datavalue = Object.assign( {}, this._cachedValues[ snakType ].datavalue );
 				}
 
 				// Update Variation with fields not directly managed by the snakview. If necessary
 				// within the Variation, those fields should be accessed via the Variation's
 				// ViewState object.
-				var serializationCopy = $.extend( {}, value );
+				var serializationCopy = Object.assign( {}, value );
 				delete serializationCopy.property;
 				delete serializationCopy.snaktype;
 				this._variation.value( serializationCopy );
@@ -881,6 +881,6 @@
 		}
 	} );
 
-	$.extend( $.wikibase.snakview, existingSnakview );
+	Object.assign( $.wikibase.snakview, existingSnakview );
 
 }( wikibase, dataValues ) );

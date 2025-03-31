@@ -542,15 +542,7 @@
 	 * @return {FingerprintBuilder}
 	 */
 	function createFingerprint() {
-		/**
-		 * @class FingerprintBuilder
-		 * @constructor
-		 */
-		function FingerprintBuilder() {
-			datamodel.Fingerprint.call( this );
-		}
-
-		$.extend( FingerprintBuilder.prototype, datamodel.Fingerprint.prototype );
+		const FingerprintBuilder = class extends datamodel.Fingerprint {};
 
 		FingerprintBuilder.prototype.withLabel = function withLabel( language, value ) {
 			this.setLabel( language, new Term( language, value ) );
