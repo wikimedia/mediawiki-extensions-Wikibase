@@ -592,6 +592,8 @@
 	"special-parameterized-description-separator": "{{optional}}\nThe separator used between entity types in the parameterized description.",
 	"wikibase-federated-properties-federated-property-api-error-message": "Error message shown when the user is trying to edit Federated Properties through the API.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Error Message shown when federated properties is enabled and a request to the federated source wiki failed.",
+	"wikibase-scoped-search-search-entities": "Short description of the function of the search box, in the imperative - 'Search entities'",
+	"wikibase-scoped-search-search-entities-description": "Longer description of the function of the search box - that it allows different kinds of entities to be searched (see {{msg-mw|wikibase-scoped-search-search-entities}} for the short version)",
 	"wikibase-scoped-search-item-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Items scope",
 	"wikibase-scoped-search-property-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Properties scope"
 }
