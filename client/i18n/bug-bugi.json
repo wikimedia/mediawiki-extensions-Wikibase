@@ -5,11 +5,14 @@
 		]
 	},
 	"wikibase-editlinks": "ᨄᨉᨙᨌᨙ ᨕᨔᨘᨇᨘᨂᨛ",
-	"wikibase-addlinkstitle": "ᨈᨅᨕᨗ ᨕᨔᨘᨇᨘᨂᨛ ᨕᨗᨗᨈᨙᨑᨙᨓᨗᨀᨗ",
+	"wikibase-addlinkstitle": "ᨈᨅᨕᨗ ᨕᨔᨘᨇᨘᨂᨛ ᨕᨈᨑᨅᨔ",
 	"wikibase-linkitem-addlinks": "ᨈᨅᨕᨗ ᨕᨔᨘᨇᨘᨂᨛ",
 	"wikibase-linkitem-title": "ᨕᨔᨘᨇᨘ ᨔᨗᨅᨓ ᨒᨛᨇ",
 	"wikibase-linkitem-linkpage": "ᨕᨔᨘᨇᨘ ᨔᨗᨅᨓ ᨒᨛᨇ",
 	"wikibase-linkitem-selectlink": "ᨒᨒᨚᨀᨗ ᨄᨗᨒᨙ ᨆᨀ ᨊ ᨒᨛᨇ ᨌᨙᨉᨗᨌᨙᨉᨗ ᨐᨗ ᨆᨙᨒᨚ ᨕᨗᨉᨗ ᨕᨔᨘᨇᨘ ᨀᨘ ᨒᨛᨇᨕᨙ᨞",
 	"wikibase-linkitem-input-site": "ᨅᨔ :",
-	"wikibase-linkitem-input-page": "ᨒᨛᨇ :"
+	"wikibase-linkitem-input-page": "ᨒᨛᨇ :",
+	"wikibase-rc-hide-wikidata-hide": "ᨔᨘᨅᨘ",
+	"wikibase-rc-hide-wikidata-show": "ᨈᨍᨕᨗ",
+	"wikibase-otherprojects": "ᨄᨑᨚᨐᨙ ᨒᨙᨂᨙ"
 }

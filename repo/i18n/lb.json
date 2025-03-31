@@ -168,7 +168,7 @@
 	"special-gotolinkedpage": "Op déi verlinkt Säit goen",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Op déi verlinkt Säit, no Site an Element, goen",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",
-	"wikibase-gotolinkedpage-lookup-item": "Nummer vum Element:",
+	"wikibase-gotolinkedpage-lookup-item": "Element-ID:",
 	"wikibase-gotolinkedpage-submit": "Lass",
 	"wikibase-gotolinkedpage-error-page-not-found": "Et gouf keng Säit fonnt fir déi Kombinatioun vun Objet a Site",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "D'Element-ID, déi agi gouf, ass ongülteg",
