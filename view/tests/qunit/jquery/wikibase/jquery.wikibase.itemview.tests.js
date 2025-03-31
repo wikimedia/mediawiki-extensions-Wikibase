@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createItemview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: new datamodel.Item( 'Q1' ),
 			buildEntityTermsView: function () {},
 			buildStatementGroupListView: function () {},

@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createPropertyview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: new datamodel.Property( 'P1', 'someDataType' ),
 			buildEntityTermsView: function () {},
 			buildStatementGroupListView: function () {}

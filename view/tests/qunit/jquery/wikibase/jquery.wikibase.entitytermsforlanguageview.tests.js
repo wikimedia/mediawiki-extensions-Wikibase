@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createEntitytermsforlanguageview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: {
 				language: 'en',
 				label: new datamodel.Term( 'en', 'test label' ),

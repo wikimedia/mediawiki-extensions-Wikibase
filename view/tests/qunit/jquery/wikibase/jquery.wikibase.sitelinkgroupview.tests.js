@@ -12,7 +12,7 @@
 	 * @return {jQuery}
 	 */
 	function createSitelinkgroupview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			getSiteLinkListView: function ( value, $dom ) {
 				var _value = value;
 				var widget = {

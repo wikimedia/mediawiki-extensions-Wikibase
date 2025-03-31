@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createDescriptionview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: new datamodel.Term( 'en', 'test description' )
 		}, options || {} );
 

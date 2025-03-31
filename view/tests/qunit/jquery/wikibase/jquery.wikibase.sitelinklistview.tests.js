@@ -12,7 +12,7 @@
 	 * @return {jQuery}
 	 */
 	function createSitelinklistview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			allowedSiteIds: [ 'aawiki', 'enwiki' ],
 			getListItemAdapter: function () {
 				return wb.tests.getMockListItemAdapter(

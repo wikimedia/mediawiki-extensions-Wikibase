@@ -39,7 +39,7 @@
 
 			var $subject = $( '<div>' );
 
-			$subject.TemplatedWidget( $.extend( {
+			$subject.TemplatedWidget( Object.assign( {
 				template: 'templatedWidget-test'
 			}, testSets[ i ][ 1 ] ) );
 

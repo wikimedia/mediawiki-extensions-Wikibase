@@ -26,7 +26,7 @@
 	 * @return {jQuery}
 	 */
 	var createStatementlistview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			getAdder: function () {
 				return {
 					destroy: function () {}

@@ -52,7 +52,7 @@
 
 			var $subject = $( '<div>' );
 
-			$subject.editablewidget( $.extend( {
+			$subject.editablewidget( Object.assign( {
 				template: 'templatedWidget-test'
 			}, testSets[ i ][ 1 ] ) );
 

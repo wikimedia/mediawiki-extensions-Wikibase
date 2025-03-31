@@ -89,7 +89,7 @@
 	 * @return  {jQuery} input element
 	 */
 	var newTestSiteSelector = function ( options ) {
-		options = $.extend( { source: sites }, options || {} );
+		options = Object.assign( { source: sites }, options || {} );
 
 		return $( '<input>' )
 			.addClass( 'test-siteselector' )

@@ -45,7 +45,7 @@
 	 * @return {jQuery}
 	 */
 	var newTestEntitySelector = function ( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			source: entityStubs,
 			delay: 0 // Time waster, also some tests below assume this to be < 100ms
 		}, options || {} );

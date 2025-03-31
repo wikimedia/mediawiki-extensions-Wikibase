@@ -39,7 +39,7 @@
 	 * @return {jQuery}
 	 */
 	function createEntitytermsforlanguagelistview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			value: createFingerprint(),
 			userLanguages: [ 'de', 'en' ]
 		}, options || {} );

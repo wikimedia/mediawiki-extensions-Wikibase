@@ -12,7 +12,7 @@
 	 * @return {jQuery}
 	 */
 	function createSitelinkgrouplistview( options ) {
-		options = $.extend( {
+		options = Object.assign( {
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'sitelinkgroupview',
 				() => {

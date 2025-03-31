@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	var createStatementgroupview = function ( options, $node ) {
-		options = $.extend( {
+		options = Object.assign( {
 			entityIdHtmlFormatter: {
 				format: function ( entityId ) {
 					return $.Deferred().resolve( 'Link to entity' ).promise();
