@@ -1,13 +1,7 @@
-( function ( wb, sinon ) {
+( function ( wb ) {
 	'use strict';
 
-	var sandbox = sinon.sandbox.create();
-
-	QUnit.module( 'wikibase.WikibaseContentLanguages', {
-		afterEach: function () {
-			sandbox.restore();
-		}
-	} );
+	QUnit.module( 'wikibase.WikibaseContentLanguages' );
 
 	QUnit.test( 'constructor', ( assert ) => {
 		assert.throws( () => {
@@ -19,9 +13,9 @@
 		}, 'instantiated without a getName function' );
 	} );
 
-	QUnit.test( 'getAll', ( assert ) => {
+	QUnit.test( 'getAll', function ( assert ) {
 		var expectedLanguages = [ 'ar', 'de', 'en', 'ko' ],
-			getName = sandbox.stub().throws( 'should not be called in this test' ),
+			getName = this.sandbox.stub().throws( 'should not be called in this test' ),
 			allLanguages = ( new wb.WikibaseContentLanguages( expectedLanguages, getName ) ).getAll();
 
 		expectedLanguages.forEach( ( languageCode ) => {
@@ -29,8 +23,8 @@
 		} );
 	} );
 
-	QUnit.test( 'getName', ( assert ) => {
-		var getName = sandbox.stub().withArgs( 'eo' ).returns( 'Esperanto' );
+	QUnit.test( 'getName', function ( assert ) {
+		var getName = this.sandbox.stub().withArgs( 'eo' ).returns( 'Esperanto' );
 
 		assert.strictEqual(
 			( new wb.WikibaseContentLanguages( [ 'eo' ], getName ) ).getName( 'eo' ),
@@ -38,8 +32,8 @@
 		);
 	} );
 
-	QUnit.test( 'getLanguageNameMap', ( assert ) => {
-		var getName = sandbox.stub();
+	QUnit.test( 'getLanguageNameMap', function ( assert ) {
+		var getName = this.sandbox.stub();
 		getName.withArgs( 'en' ).returns( 'English' );
 		getName.withArgs( 'eo' ).returns( 'Esperanto' );
 
@@ -66,4 +60,4 @@
 		} );
 	} );
 
-}( wikibase, sinon ) );
+}( wikibase ) );
