@@ -39,7 +39,7 @@
 	"datatypes-type-number": "ਨੰਬਰ",
 	"datatypes-type-mediawiki-title": "ਮੀਡੀਆਵਿਕੀ ਸਿਰਲੇਖ",
 	"datatypes-type-unknown": "ਅਣ-ਨਿਰਧਾਰਿਤ",
-	"datatypes-type-boolean": "ਬੁਲੀਅਨ",
+	"datatypes-type-boolean": "ਬੂਲੀਅਨ (ਸੱਚ/ਝੂਠ ਕਿਸਮ)",
 	"datatypes-type-globe-coordinate": "ਭੂਗੋਲਿਕ ਗੁਣਕ",
 	"datatypes-type-wikibase-item": "ਚੀਜ਼ਾਂ",
 	"datatypes-type-wikibase-property": "ਜਾਇਦਾਦ",
