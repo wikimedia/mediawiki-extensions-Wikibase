@@ -50,7 +50,10 @@ return [
 		);
 	},
 
-	'WbSearch.SimpleItemSearch' => function( MediaWikiServices $services ): SimpleItemSearch {
+	/**
+	 * @return InLabelSearchEngine|SqlTermStoreSearchEngine
+	 */
+	'WbSearch.SearchEngine' => function( MediaWikiServices $services ) {
 		global $wgSearchType;
 
 		$isWikibaseCirrusSearchEnabled = $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
@@ -65,30 +68,21 @@ return [
 				WikibaseRepo::getLanguageFallbackChainFactory( $services )
 			);
 
+		return $searchEngine;
+	},
+
+	'WbSearch.SimpleItemSearch' => function( MediaWikiServices $services ): SimpleItemSearch {
 		return new SimpleItemSearch(
 			new SimpleItemSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
-			$searchEngine
+			WbSearch::getSearchEngine( $services )
 		);
 	},
 
 	'WbSearch.SimplePropertySearch' => function( MediaWikiServices $services ): SimplePropertySearch {
-		global $wgSearchType;
-
-		$isWikibaseCirrusSearchEnabled = $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
-		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch';
-
-		$searchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled
-			? WbSearch::getInLabelSearchEngine( $services )
-			: new SqlTermStoreSearchEngine(
-				WikibaseRepo::getMatchingTermsLookupFactory( $services )
-					->getLookupForSource( WikibaseRepo::getLocalEntitySource( $services ) ),
-				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ), $services->getLanguageFactory() ),
-				WikibaseRepo::getLanguageFallbackChainFactory( $services )
-			);
-
 		$validator = new SimplePropertySearchValidator( WbSearch::getLanguageCodeValidator( $services ) );
 
-		return new SimplePropertySearch( $validator, $searchEngine );
+		return new SimplePropertySearch( $validator, WbSearch::getSearchEngine( $services )
+		);
 	},
 
 	'WbSearch.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
