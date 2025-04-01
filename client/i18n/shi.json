@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AguzulH",
 			"Amara-Amaziɣ",
 			"Ayour2002",
 			"Lhoussine AIT TAYFST"
@@ -10,7 +11,7 @@
 	"wikibase-comment-update": "{{WBREPONAME}} item tbuddel",
 	"wikibase-dataitem": "{{WBREPONAME}} taɣawsa",
 	"wikibase-editlinks": "Snfl isɣwan",
-	"wikibase-editlinkstitle": "Snfl ilinkn igrutlayn",
+	"wikibase-editlinkstitle": "Snfl isɣwan gr igrutlayn",
 	"wikibase-linkitem-addlinks": "Rnu isɣwan",
 	"wikibase-linkitem-title": "Zdi d tasna",
 	"wikibase-linkitem-linkpage": "Zdi d tasna",

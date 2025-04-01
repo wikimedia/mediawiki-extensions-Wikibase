@@ -474,7 +474,7 @@
 	"wikibase-save-unresolved-redirect": "Обнаружено неразрешённое перенаправление с $1 на $2 при попытке сохранить изменение.",
 	"wikibase-restoreold": "восстановить",
 	"wikibase-entity-summary-restore": "Восстановлена версия [[Special:Permalink/$3|$3]] {{GENDER:$4|участника|участницы}} [[Special:Contributions/$4|$4]] ([[User talk:$4|обсуждение]])",
-	"wikibase-entity-summary-undo": "Восстановлена версия [[Special:Diff/$3|$3]] {{GENDER:$4|участника|участницы}} [[Special:Contributions/$4|$4]] ([[User talk:$4|обсуждение]])",
+	"wikibase-entity-summary-undo": "Отмена версии [[Special:Diff/$3|$3]] {{GENDER:$4|участника|участницы}} [[Special:Contributions/$4|$4]] ([[User talk:$4|обсуждение]])",
 	"wikibase-no-direct-editing": "В пространстве имён «$1» отключено прямое редактирование",
 	"wikibase-noentity": "Такой сущности не существует. Вы можете [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах], чтобы узнать, что с ней могло случиться.",
 	"wikibase-noentity-createone": "Вы также можете [[$1|создать его]].",
