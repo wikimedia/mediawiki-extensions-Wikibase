@@ -72,6 +72,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

@@ -61,7 +61,7 @@ class EntityDataTestProvider {
 		return $mockRepository;
 	}
 
-	public static function provideHandleRequest() {
+	public static function provideHandleRequest(): array {
 		$version = preg_quote( RdfVocabulary::FORMAT_VERSION );
 		$cases = [];
 

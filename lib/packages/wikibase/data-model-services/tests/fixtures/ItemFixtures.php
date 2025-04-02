@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ItemFixtures {
 
-	public static function newItem() {
+	public static function newItem(): Item {
 		return new Item(
 			new ItemId( 'Q1' )
 		);

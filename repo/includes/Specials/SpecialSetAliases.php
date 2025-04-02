@@ -86,6 +86,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		);
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

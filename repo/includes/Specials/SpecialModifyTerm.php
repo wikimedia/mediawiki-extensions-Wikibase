@@ -94,6 +94,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$this->languageNameUtils = $languageNameUtils;
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

@@ -125,15 +125,15 @@ class NewStatement {
 		return $result;
 	}
 
-	public function withDeprecatedRank() {
+	public function withDeprecatedRank(): self {
 		return $this->withRank( Statement::RANK_DEPRECATED );
 	}
 
-	public function withNormalRank() {
+	public function withNormalRank(): self {
 		return $this->withRank( Statement::RANK_NORMAL );
 	}
 
-	public function withPreferredRank() {
+	public function withPreferredRank(): self {
 		return $this->withRank( Statement::RANK_PREFERRED );
 	}
 
@@ -246,7 +246,7 @@ class NewStatement {
 		return $result;
 	}
 
-	private function generateUuidV4() {
+	private function generateUuidV4(): string {
 		return sprintf(
 			'%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
 			mt_rand( 0, 0xffff ),

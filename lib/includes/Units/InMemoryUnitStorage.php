@@ -25,6 +25,7 @@ class InMemoryUnitStorage extends BaseUnitStorage {
 		$this->data = $data;
 	}
 
+	/** @inheritDoc */
 	protected function loadStorageData() {
 		return $this->data;
 	}

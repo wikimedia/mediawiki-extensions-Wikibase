@@ -163,6 +163,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		);
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

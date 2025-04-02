@@ -57,6 +57,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->isMobileView = $isMobileView;
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

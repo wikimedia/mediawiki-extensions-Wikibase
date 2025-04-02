@@ -149,6 +149,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		);
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}
