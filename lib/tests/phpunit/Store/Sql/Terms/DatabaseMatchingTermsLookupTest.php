@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
@@ -68,12 +69,15 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		$item2->setLabel( 'sv', 'kittens should have mittens' );
 		$item2->setLabel( 'en', 'KITTENS should have mittens' );
 
-		return [ $item0, $item1, $item2 ];
+		$item3 = new Item( new ItemId( 'Q33' ) );
+		$item3->setAliases( 'en', [ 'kittens' ] );
+
+		return [ $item0, $item1, $item2, $item3 ];
 	}
 
 	/** @see testGetMatchingTerms */
 	public static function provideGetMatchingTerms() {
-		[ $item0, $item1, $item2 ] = self::getTestItems();
+		[ $item0, $item1, $item2, $item3 ] = self::getTestItems();
 
 		yield 'EXACT MATCH not prefix, case sensitive' => [
 			'entities' => [ $item0, $item1, $item2 ],
@@ -82,7 +86,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 					'termText' => 'Mittens',
 				] ),
 			],
-			'termTypes' => null,
+			'termTypes' => TermTypes::TYPE_LABEL,
 			'entityTypes' => null,
 			'options' => [
 				'prefixSearch' => false,
@@ -90,6 +94,24 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 			],
 			'expectedTermKeys' => [
 				'Q11/label.de:Mittens',
+			],
+		];
+		yield 'EXACT MATCH not prefix, case sensitive, labels OR aliases' => [
+			'entities' => [ $item0, $item1, $item2, $item3 ],
+			'criteria' => [
+				new TermIndexSearchCriteria( [
+					'termText' => 'kittens',
+				] ),
+			],
+			'termTypes' => [ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+			'entityTypes' => null,
+			'options' => [
+				'prefixSearch' => false,
+				'caseSensitive' => true,
+			],
+			'expectedTermKeys' => [
+				'Q10/label.en:kittens',
+				'Q33/alias.en:kittens',
 			],
 		];
 		yield 'prefix, case sensitive' => [

@@ -169,9 +169,8 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$termType = $mask->getTermType();
 		}
 		if ( $termType !== null ) {
-			$queryBuilder->where( [
-				'wbtl_type_id' => TermTypeIds::TYPE_IDS[$termType],
-			] );
+			$termType = is_array( $termType ) ? $termType : [ $termType ];
+			$queryBuilder->where( [ 'wbtl_type_id' => array_map( fn ( $t ) => TermTypeIds::TYPE_IDS[$t], $termType ) ] );
 		}
 
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
