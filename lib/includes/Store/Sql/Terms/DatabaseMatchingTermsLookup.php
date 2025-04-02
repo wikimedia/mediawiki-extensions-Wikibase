@@ -178,6 +178,11 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$queryBuilder->limit( $options['LIMIT'] );
 		}
 
+		if ( isset( $options['OFFSET'] ) && $options['OFFSET'] > 0 ) {
+			// @phan-suppress-next-line PhanTypeMismatchArgument False positive
+			$queryBuilder->offset( $options['OFFSET'] );
+		}
+
 		return $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 	}
 
