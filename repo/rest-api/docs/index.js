@@ -6,7 +6,8 @@ import spec from '../src/openapi.json';
 const ui = SwaggerUI( {
 	spec,
 	dom_id: '#swagger', // eslint-disable-line camelcase
-	deepLinking: true
+	deepLinking: true,
+	showCommonExtensions: true
 } );
 
 ui.initOAuth( {
