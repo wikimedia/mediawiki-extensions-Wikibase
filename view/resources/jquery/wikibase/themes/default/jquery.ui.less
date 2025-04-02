@@ -1,0 +1,14 @@
+@import 'mediawiki.skin.variables.less';
+
+/*
+ * jQuery UI does not support dark mode;
+ * override selected colors only within wikibase.entityview to use Codex tokens.
+ * This is a hack, but probably the best option
+ * until we rewrite our UI to not use jQuery UI anymore (cf. T273600).
+ */
+
+.wikibase-entityview {
+	.ui-widget-content {
+		color: @color-base;
+	}
+}
