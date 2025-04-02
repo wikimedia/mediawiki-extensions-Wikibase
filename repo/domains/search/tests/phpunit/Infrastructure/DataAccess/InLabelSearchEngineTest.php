@@ -182,20 +182,27 @@ class InLabelSearchEngineTest extends TestCase {
 	/**
 	 * @dataProvider propertySearchResultsProvider
 	 */
-	public function testPropertySearch( array $results, PropertySearchResults $expected ): void {
+	public function testPropertySearch( array $results, PropertySearchResults $expected, int $limit = self::DEFAULT_RESULTS_LIMIT ): void {
 		$searchTerm = 'some search term';
 		$language = 'en';
 
 		$inLabelSearch = $this->createMock( InLabelSearch::class );
 		$inLabelSearch->expects( $this->once() )
 			->method( 'search' )
-			->with( $searchTerm, $language, Property::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
-			->willReturn( array_slice( $results, 0, self::DEFAULT_RESULTS_LIMIT ) );
+			->with( $searchTerm, $language, Property::ENTITY_TYPE, $limit )
+			->willReturn( array_slice( $results, 0, $limit ) );
 
-		$this->assertEquals(
-			$expected,
-			( new InLabelSearchEngine( $inLabelSearch ) )->searchPropertyByLabel( $searchTerm, $language )
-		);
+		if ( $limit == self::DEFAULT_RESULTS_LIMIT ) {
+			$this->assertEquals(
+				$expected,
+				( new InLabelSearchEngine( $inLabelSearch ) )->searchPropertyByLabel( $searchTerm, $language, $limit )
+			);
+		} else {
+			$this->assertEquals(
+				$expected,
+				( new InLabelSearchEngine( $inLabelSearch ) )->searchPropertyByLabel( $searchTerm, $language, $limit )
+			);
+		}
 	}
 
 	public static function propertySearchResultsProvider(): Generator {
@@ -277,6 +284,31 @@ class InLabelSearchEngineTest extends TestCase {
 					new MatchedData( 'label', 'en', $property['label'] )
 				), array_slice( $propertyList, 0, self::DEFAULT_RESULTS_LIMIT ) )
 			),
+		];
+
+		yield 'limits results to provided number' => [
+			array_map(
+				fn( array $property ) => new TermSearchResult(
+					new Term( 'en', $property['label'] ),
+					'label',
+					new NumericPropertyId( $property['id'] ),
+					new Term( 'en', $property['label'] ),
+					new Term( 'en', $property['description'] )
+				),
+				$propertyList
+			),
+			new PropertySearchResults(
+				...array_map(
+					fn( array $property ) => new PropertySearchResult(
+						new NumericPropertyId( $property['id'] ),
+						new Label( 'en', $property['label'] ),
+						new Description( 'en', $property['description'] ),
+						new MatchedData( 'label', 'en', $property['label'] )
+					),
+					array_slice( $propertyList, 0, 5 )
+				)
+			),
+			5, // limit to pass to search method
 		];
 	}
 
