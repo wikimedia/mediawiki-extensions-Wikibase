@@ -166,7 +166,7 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	 */
 	private function getFileMetaHtml( File $file ) {
 		return $this->language->semicolonList( [
-			$file->getDimensionsString(),
+			htmlspecialchars( $file->getDimensionsString() ),
 			htmlspecialchars( $this->language->formatSize( $file->getSize() ) ),
 		] );
 	}
