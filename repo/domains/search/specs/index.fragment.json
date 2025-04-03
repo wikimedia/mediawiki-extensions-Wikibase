@@ -17,7 +17,9 @@
 						"$ref": "./global/parameters.json#/SearchQuery",
 						"example": "potato"
 					},
-					{ "$ref": "./global/parameters.json#/SearchLanguage" }
+					{ "$ref": "./global/parameters.json#/SearchLanguage" },
+					{ "$ref": "./global/parameters.json#/Limit" },
+					{ "$ref": "./global/parameters.json#/Offset" }
 				],
 				"responses": {
 					"200": { "$ref": "./global/responses.json#/SearchItemSuccess" },
@@ -36,7 +38,9 @@
 						"$ref": "./global/parameters.json#/SearchQuery",
 						"example": "taxon"
 					},
-					{ "$ref": "./global/parameters.json#/SearchLanguage" }
+					{ "$ref": "./global/parameters.json#/SearchLanguage" },
+					{ "$ref": "./global/parameters.json#/Limit" },
+					{ "$ref": "./global/parameters.json#/Offset" }
 				],
 				"responses": {
 					"200": { "$ref": "./global/responses.json#/SearchPropertySuccess" },
