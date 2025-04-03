@@ -114,6 +114,43 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 				'Q33/alias.en:kittens',
 			],
 		];
+		yield 'EXACT MATCH not prefix, case sensitive, labels OR aliases, LIMIT 1' => [
+			'entities' => [ $item0, $item1, $item2, $item3 ],
+			'criteria' => [
+				new TermIndexSearchCriteria( [
+					'termText' => 'kittens',
+				] ),
+			],
+			'termTypes' => [ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+			'entityTypes' => null,
+			'options' => [
+				'prefixSearch' => false,
+				'caseSensitive' => true,
+				'LIMIT' => 1,
+			],
+			'expectedTermKeys' => [
+				'Q10/label.en:kittens',
+			],
+		];
+		yield 'EXACT MATCH not prefix, case sensitive, labels OR aliases, LIMIT 1, OFFSET 1' => [
+			'entities' => [ $item0, $item1, $item2, $item3 ],
+			'criteria' => [
+				new TermIndexSearchCriteria( [
+					'termText' => 'kittens',
+				] ),
+			],
+			'termTypes' => [ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+			'entityTypes' => null,
+			'options' => [
+				'prefixSearch' => false,
+				'caseSensitive' => true,
+				'LIMIT' => 1,
+				'OFFSET' => 1,
+			],
+			'expectedTermKeys' => [
+				'Q33/alias.en:kittens',
+			],
+		];
 		yield 'prefix, case sensitive' => [
 			'entities' => [ $item0, $item1, $item2 ],
 			'criteria' => [
