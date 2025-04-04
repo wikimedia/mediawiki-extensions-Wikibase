@@ -30,12 +30,16 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		$this->inLabelSearch = $inLabelSearch;
 	}
 
-	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
+	public function searchItemByLabel(
+		string $searchTerm,
+		string $languageCode,
+		int $limit = self::DEFAULT_RESULTS_LIMIT
+	): ItemSearchResults {
 		return new ItemSearchResults(
 			...array_map(
 				$this->convertResult( ItemSearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
-				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
+				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, $limit )
 			)
 		);
 	}

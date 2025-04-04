@@ -43,20 +43,27 @@ class InLabelSearchEngineTest extends TestCase {
 	/**
 	 * @dataProvider itemSearchResultsProvider
 	 */
-	public function testItemSearch( array $results, ItemSearchResults $expected ): void {
+	public function testItemSearch( array $results, ItemSearchResults $expected, int $limit = self::DEFAULT_RESULTS_LIMIT ): void {
 		$searchTerm = 'potato';
 		$language = 'en';
 
 		$inLabelSearch = $this->createMock( InLabelSearch::class );
 		$inLabelSearch->expects( $this->once() )
 			->method( 'search' )
-			->with( $searchTerm, $language, Item::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
-			->willReturn( array_slice( $results, 0, self::DEFAULT_RESULTS_LIMIT ) );
+			->with( $searchTerm, $language, Item::ENTITY_TYPE, $limit )
+			->willReturn( array_slice( $results, 0, $limit ) );
 
-		$this->assertEquals(
-			$expected,
-			( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language )
-		);
+		if ( $limit == self::DEFAULT_RESULTS_LIMIT ) {
+			$this->assertEquals(
+				$expected,
+				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language )
+			);
+		} else {
+			$this->assertEquals(
+				$expected,
+				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language, $limit )
+			);
+		}
 	}
 
 	public static function itemSearchResultsProvider(): Generator {
@@ -144,6 +151,31 @@ class InLabelSearchEngineTest extends TestCase {
 					array_slice( $potatoList, 0, self::DEFAULT_RESULTS_LIMIT )
 				)
 			),
+		];
+
+		yield 'limits results to provided number' => [
+			array_map(
+				fn( array $potato ) => new TermSearchResult(
+					new Term( 'en', $potato['label'] ),
+					'label',
+					new ItemId( $potato['id'] ),
+					new Term( 'en', $potato['label'] ),
+					new Term( 'en', $potato['description'] )
+				),
+				$potatoList
+			),
+			new ItemSearchResults(
+				...array_map(
+					fn( array $potato ) => new ItemSearchResult(
+						new ItemId( $potato['id'] ),
+						new Label( 'en', $potato['label'] ),
+						new Description( 'en', $potato['description'] ),
+						new MatchedData( 'label', 'en', $potato['label'] )
+					),
+					array_slice( $potatoList, 0, 5 )
+				)
+			),
+			5, // limit to pass to search method
 		];
 	}
 
