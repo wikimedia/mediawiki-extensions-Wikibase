@@ -2,13 +2,22 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\MultilingualTextValue;
+use DataValues\NumberValue;
+use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use DataValues\TimeValue;
+use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Deserializers\DeserializerFactory as DataModelDeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
@@ -68,16 +77,16 @@ class TestFactoryBuilder {
 
 	private static function newRealDataValueDeserializer(): DataValueDeserializer {
 		$dataValueClasses = [
-			'boolean' => 'DataValues\BooleanValue',
-			'number' => 'DataValues\NumberValue',
-			'string' => 'DataValues\StringValue',
-			'unknown' => 'DataValues\UnknownValue',
-			'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-			'monolingualtext' => 'DataValues\MonolingualTextValue',
-			'multilingualtext' => 'DataValues\MultilingualTextValue',
-			'quantity' => 'DataValues\QuantityValue',
-			'time' => 'DataValues\TimeValue',
-			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+			'boolean' => BooleanValue::class,
+			'number' => NumberValue::class,
+			'string' => StringValue::class,
+			'unknown' => UnknownValue::class,
+			'globecoordinate' => GlobeCoordinateValue::class,
+			'monolingualtext' => MonolingualTextValue::class,
+			'multilingualtext' => MultilingualTextValue::class,
+			'quantity' => QuantityValue::class,
+			'time' => TimeValue::class,
+			'wikibase-entityid' => EntityIdValue::class,
 		];
 
 		return new DataValueDeserializer( $dataValueClasses );
