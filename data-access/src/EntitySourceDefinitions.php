@@ -129,7 +129,7 @@ class EntitySourceDefinitions {
 		return $this->entityTypeToDatabaseSourceMapping;
 	}
 
-	private function buildEntityTypeToDatabaseSourceMapping() {
+	private function buildEntityTypeToDatabaseSourceMapping(): array {
 		$this->entityTypeToDatabaseSourceMapping = [];
 		foreach ( $this->sources as $source ) {
 			if ( $source->getType() === DatabaseEntitySource::TYPE ) {

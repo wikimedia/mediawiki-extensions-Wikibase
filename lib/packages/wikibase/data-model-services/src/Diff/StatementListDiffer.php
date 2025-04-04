@@ -36,7 +36,7 @@ class StatementListDiffer {
 		);
 	}
 
-	private function newDiffer() {
+	private function newDiffer(): MapDiffer {
 		return new MapDiffer( false, null, new ComparableComparer() );
 	}
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
  */
 class PropertyFixtures {
 
-	public static function newProperty() {
+	public static function newProperty(): Property {
 		return new Property(
 			new NumericPropertyId( 'P1' ),
 			null,

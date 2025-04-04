@@ -84,6 +84,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		);
 	}
 
+	/** @inheritDoc */
 	public function doesWrites() {
 		return true;
 	}

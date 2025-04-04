@@ -11,7 +11,7 @@ namespace Wikibase\Lib\Tests\Store;
  */
 class WikiTextPropertyOrderProviderTestHelper {
 
-	public static function provideGetPropertyOrder() {
+	public static function provideGetPropertyOrder(): array {
 		return [
 			'empty page' => [
 				'',

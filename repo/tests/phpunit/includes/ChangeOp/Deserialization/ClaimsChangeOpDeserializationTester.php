@@ -37,7 +37,7 @@ trait ClaimsChangeOpDeserializationTester {
 		);
 	}
 
-	public static function setStatementProvider() {
+	public static function setStatementProvider(): array {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statementSerialization = self::getStatementSerializer()->serialize( $statement );
@@ -59,7 +59,7 @@ trait ClaimsChangeOpDeserializationTester {
 		$this->assertTrue( $entity->getStatements()->getByPropertyId( $property )->isEmpty() );
 	}
 
-	public static function deleteStatementProvider() {
+	public static function deleteStatementProvider(): array {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
 		$statement->setGuid( 'test-guid' );
@@ -101,7 +101,7 @@ trait ClaimsChangeOpDeserializationTester {
 		);
 	}
 
-	public static function editStatementProvider() {
+	public static function editStatementProvider(): array {
 		$property = new NumericPropertyId( 'P7' );
 		$statement = new Statement( new PropertyValueSnak( $property, new StringValue( 'foo' ) ) );
 		$entity = self::getEntity();

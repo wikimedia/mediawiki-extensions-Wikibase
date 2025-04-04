@@ -225,7 +225,7 @@ class EntityAccessor {
 		return $serialization;
 	}
 
-	private function newClientEntitySerializer() {
+	private function newClientEntitySerializer(): ClientEntitySerializer {
 		return new ClientEntitySerializer(
 			$this->entitySerializer,
 			$this->dataTypeLookup,
@@ -239,7 +239,7 @@ class EntityAccessor {
 		);
 	}
 
-	private function newClientStatementListSerializer() {
+	private function newClientStatementListSerializer(): ClientStatementListSerializer {
 		return new ClientStatementListSerializer(
 			$this->statementSerializer,
 			$this->dataTypeLookup,

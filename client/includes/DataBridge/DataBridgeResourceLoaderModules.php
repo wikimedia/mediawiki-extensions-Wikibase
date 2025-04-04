@@ -7,6 +7,7 @@ namespace Wikibase\Client\DataBridge;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\FileModule;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
+use MediaWiki\ResourceLoader\Module;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
@@ -41,7 +42,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		] );
 	}
 
-	public static function initModule() {
+	public static function initModule(): Module {
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
 			[
@@ -59,7 +60,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		);
 	}
 
-	public static function externalModifiersModule() {
+	public static function externalModifiersModule(): Module {
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
 			[
@@ -73,7 +74,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		);
 	}
 
-	public static function configModule() {
+	public static function configModule(): Module {
 		$clientSettings = WikibaseClient::getSettings();
 		return new MediaWikiConfigModule(
 			[
@@ -87,7 +88,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 		);
 	}
 
-	public static function appModule() {
+	public static function appModule(): Module {
 		$clientSettings = WikibaseClient::getSettings();
 		return new FileModule(
 			[
