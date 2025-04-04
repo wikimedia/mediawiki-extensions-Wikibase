@@ -576,7 +576,7 @@
 		}
 	};
 
-	$.ui.ooMenu.prototype.Item = Item;
-	$.ui.ooMenu.prototype.CustomItem = CustomItem;
+	$.ui.ooMenu.Item = Item;
+	$.ui.ooMenu.CustomItem = CustomItem;
 
 }() );
