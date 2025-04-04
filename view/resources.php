@@ -115,6 +115,7 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.less',
+				'jquery/wikibase/themes/default/jquery.ui.less',
 			],
 		],
 
