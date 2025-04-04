@@ -29,6 +29,11 @@ use Wikibase\Search\Elastic\InLabelSearch;
  * @license GPL-2.0-or-later
  */
 class InLabelSearchEngineTest extends TestCase {
+
+	// The following constant should be extracted to a common location (such as a static const
+	// class or a config file) or kept in sync with the actual limit in the InLabelSearch class.
+	private const DEFAULT_RESULTS_LIMIT = 10;
+
 	public static function setUpBeforeClass(): void {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
 			self::markTestSkipped( 'CirrusSearch needs to be enabled to run this test' );
@@ -45,8 +50,8 @@ class InLabelSearchEngineTest extends TestCase {
 		$inLabelSearch = $this->createMock( InLabelSearch::class );
 		$inLabelSearch->expects( $this->once() )
 			->method( 'search' )
-			->with( $searchTerm, $language, Item::ENTITY_TYPE, 5 )
-			->willReturn( $results );
+			->with( $searchTerm, $language, Item::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
+			->willReturn( array_slice( $results, 0, self::DEFAULT_RESULTS_LIMIT ) );
 
 		$this->assertEquals(
 			$expected,
@@ -107,6 +112,39 @@ class InLabelSearchEngineTest extends TestCase {
 				)
 			),
 		];
+
+		$potatoList = array_map(
+			fn( int $i ) => [
+				'id' => "Q12$i",
+				'label' => "potato $i",
+				'description' => "root vegetable $i",
+			],
+			range( 1, self::DEFAULT_RESULTS_LIMIT + 1 )
+		);
+
+		yield 'limit defaults to ' . self::DEFAULT_RESULTS_LIMIT => [
+			array_map(
+				fn( array $potato ) => new TermSearchResult(
+					new Term( 'en', $potato['label'] ),
+					'label',
+					new ItemId( $potato['id'] ),
+					new Term( 'en', $potato['label'] ),
+					new Term( 'en', $potato['description'] )
+				),
+				$potatoList
+			),
+			new ItemSearchResults(
+				...array_map(
+					fn( array $potato ) => new ItemSearchResult(
+						new ItemId( $potato['id'] ),
+						new Label( 'en', $potato['label'] ),
+						new Description( 'en', $potato['description'] ),
+						new MatchedData( 'label', 'en', $potato['label'] )
+					),
+					array_slice( $potatoList, 0, self::DEFAULT_RESULTS_LIMIT )
+				)
+			),
+		];
 	}
 
 	/**
@@ -119,8 +157,8 @@ class InLabelSearchEngineTest extends TestCase {
 		$inLabelSearch = $this->createMock( InLabelSearch::class );
 		$inLabelSearch->expects( $this->once() )
 			->method( 'search' )
-			->with( $searchTerm, $language, Property::ENTITY_TYPE, 5 )
-			->willReturn( $results );
+			->with( $searchTerm, $language, Property::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
+			->willReturn( array_slice( $results, 0, self::DEFAULT_RESULTS_LIMIT ) );
 
 		$this->assertEquals(
 			$expected,
@@ -179,6 +217,33 @@ class InLabelSearchEngineTest extends TestCase {
 					new Description( 'en', 'property description' ),
 					new MatchedData( 'alias', 'en', 'property alias' )
 				)
+			),
+		];
+
+		$propertyList = array_map(
+			fn( int $i ) => [
+				'id' => "P12$i",
+				'label' => "property $i",
+				'description' => "property description $i",
+			],
+			range( 1, self::DEFAULT_RESULTS_LIMIT + 1 )
+		);
+
+		yield 'limit defaults to ' . self::DEFAULT_RESULTS_LIMIT => [
+			array_map( fn( array $property ) => new TermSearchResult(
+				new Term( 'en', $property['label'] ),
+				'label',
+				new NumericPropertyId( $property['id'] ),
+				new Term( 'en', $property['label'] ),
+				new Term( 'en', $property['description'] )
+			), $propertyList ),
+			new PropertySearchResults(
+				...array_map( fn( array $property ) => new PropertySearchResult(
+					new NumericPropertyId( $property['id'] ),
+					new Label( 'en', $property['label'] ),
+					new Description( 'en', $property['description'] ),
+					new MatchedData( 'label', 'en', $property['label'] )
+				), array_slice( $propertyList, 0, self::DEFAULT_RESULTS_LIMIT ) )
 			),
 		];
 	}

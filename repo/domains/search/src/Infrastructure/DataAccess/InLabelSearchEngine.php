@@ -20,7 +20,7 @@ use Wikibase\Search\Elastic\InLabelSearch;
  * @license GPL-2.0-or-later
  */
 class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
-	private const RESULTS_LIMIT = 5;
+	private const DEFAULT_RESULTS_LIMIT = 10;
 
 	private InLabelSearch $inLabelSearch; // @phan-suppress-current-line PhanUndeclaredTypeProperty
 
@@ -35,7 +35,7 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 			...array_map(
 				$this->convertResult( ItemSearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
-				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, self::RESULTS_LIMIT )
+				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
 			)
 		);
 	}
@@ -45,7 +45,7 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 			...array_map(
 				$this->convertResult( PropertySearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
-				$this->inLabelSearch->search( $searchTerm, $languageCode, Property::ENTITY_TYPE, self::RESULTS_LIMIT )
+				$this->inLabelSearch->search( $searchTerm, $languageCode, Property::ENTITY_TYPE, self::DEFAULT_RESULTS_LIMIT )
 			)
 		);
 	}
