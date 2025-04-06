@@ -8,5 +8,10 @@ use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
  * @license GPL-2.0-or-later
  */
 interface PropertySearchEngine {
-	public function searchPropertyByLabel( string $searchTerm, string $languageCode ): PropertySearchResults;
+	public function searchPropertyByLabel(
+		string $searchTerm,
+		string $languageCode,
+		int $limit,
+		int $offset
+	): PropertySearchResults;
 }
