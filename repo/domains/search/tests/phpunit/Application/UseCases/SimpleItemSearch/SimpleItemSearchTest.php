@@ -22,18 +22,20 @@ class SimpleItemSearchTest extends TestCase {
 	public function testCanExecute(): void {
 		$query = 'needle';
 		$language = 'en';
+		$limit = 10;
+		$offset = 0;
 		$expectedResults = $this->createStub( ItemSearchResults::class );
 
 		$searchEngine = $this->createMock( ItemSearchEngine::class );
 		$searchEngine->expects( $this->once() )
 			->method( 'searchItemByLabel' )
-			->with( $query, $language )
+			->with( $query, $language, $limit, $offset )
 			->willReturn( $expectedResults );
 
 		$this->assertEquals(
 			$expectedResults,
 			$this->newUseCase( $this->createStub( SimpleItemSearchValidator::class ), $searchEngine )
-				->execute( new SimpleItemSearchRequest( $query, $language ) )
+				->execute( new SimpleItemSearchRequest( $query, $language, $limit, $offset ) )
 				->getResults()
 		);
 	}

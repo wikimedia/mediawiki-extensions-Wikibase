@@ -7,12 +7,19 @@ namespace Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch;
  */
 class SimpleItemSearchRequest {
 
+	private const DEFAULT_LIMIT = 10;
+	private const DEFAULT_OFFSET = 0;
+
 	private string $query;
 	private string $language;
+	private int $limit;
+	private int $offset;
 
-	public function __construct( string $query, string $language ) {
+	public function __construct( string $query, string $language, ?int $limit, ?int $offset ) {
 		$this->query = $query;
 		$this->language = $language;
+		$this->limit = $limit ?? self::DEFAULT_LIMIT;
+		$this->offset = $offset ?? self::DEFAULT_OFFSET;
 	}
 
 	public function getQuery(): string {
@@ -21,6 +28,14 @@ class SimpleItemSearchRequest {
 
 	public function getLanguage(): string {
 		return $this->language;
+	}
+
+	public function getLimit(): int {
+		return $this->limit;
+	}
+
+	public function getOffset(): int {
+		return $this->offset;
 	}
 
 }

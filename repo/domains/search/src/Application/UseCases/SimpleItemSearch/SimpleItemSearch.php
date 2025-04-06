@@ -29,8 +29,14 @@ class SimpleItemSearch {
 
 		$searchTerm = $itemRequest->getQuery();
 		$language = $itemRequest->getLanguage();
+		$limit = $itemRequest->getLimit();
+		$offset = $itemRequest->getOffset();
 
-		return new SimpleItemSearchResponse( $this->searchEngine->searchItemByLabel( $searchTerm, $language ) );
+		return new SimpleItemSearchResponse( $this->searchEngine->searchItemByLabel(
+			$searchTerm,
+			$language,
+			$limit,
+			$offset
+		) );
 	}
-
 }

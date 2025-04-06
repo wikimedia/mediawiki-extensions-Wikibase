@@ -9,5 +9,10 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
  */
 interface ItemSearchEngine {
 
-	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults;
+	public function searchItemByLabel(
+		string $searchTerm,
+		string $languageCode,
+		int $limit,
+		int $offset
+	): ItemSearchResults;
 }
