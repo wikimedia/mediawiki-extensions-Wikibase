@@ -30,9 +30,10 @@ use Wikibase\Search\Elastic\InLabelSearch;
  */
 class InLabelSearchEngineTest extends TestCase {
 
-	// The following constant should be extracted to a common location (such as a static const
+	// The following constants should be extracted to a common location (such as a static const
 	// class or a config file) or kept in sync with the actual limit in the InLabelSearch class.
 	private const DEFAULT_RESULTS_LIMIT = 10;
+	private const DEFAULT_OFFSET = 0;
 
 	public static function setUpBeforeClass(): void {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
@@ -43,17 +44,22 @@ class InLabelSearchEngineTest extends TestCase {
 	/**
 	 * @dataProvider itemSearchResultsProvider
 	 */
-	public function testItemSearch( array $results, ItemSearchResults $expected, int $limit = self::DEFAULT_RESULTS_LIMIT ): void {
+	public function testItemSearch(
+		array $results,
+		ItemSearchResults $expected,
+		int $limit = self::DEFAULT_RESULTS_LIMIT,
+		int $offset = self::DEFAULT_OFFSET
+	): void {
 		$searchTerm = 'potato';
 		$language = 'en';
 
 		$inLabelSearch = $this->createMock( InLabelSearch::class );
 		$inLabelSearch->expects( $this->once() )
 			->method( 'search' )
-			->with( $searchTerm, $language, Item::ENTITY_TYPE, $limit )
-			->willReturn( array_slice( $results, 0, $limit ) );
+			->with( $searchTerm, $language, Item::ENTITY_TYPE, $limit, $offset )
+			->willReturn( array_slice( $results, $offset, $limit ) );
 
-		if ( $limit == self::DEFAULT_RESULTS_LIMIT ) {
+		if ( $limit == self::DEFAULT_RESULTS_LIMIT && $offset == self::DEFAULT_OFFSET ) {
 			$this->assertEquals(
 				$expected,
 				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language )
@@ -61,7 +67,7 @@ class InLabelSearchEngineTest extends TestCase {
 		} else {
 			$this->assertEquals(
 				$expected,
-				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language, $limit )
+				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language, $limit, $offset )
 			);
 		}
 	}
@@ -176,6 +182,32 @@ class InLabelSearchEngineTest extends TestCase {
 				)
 			),
 			5, // limit to pass to search method
+		];
+
+		yield 'offsets results by provided number' => [
+			array_map(
+				fn( array $potato ) => new TermSearchResult(
+					new Term( 'en', $potato['label'] ),
+					'label',
+					new ItemId( $potato['id'] ),
+					new Term( 'en', $potato['label'] ),
+					new Term( 'en', $potato['description'] )
+				),
+				$potatoList
+			),
+			new ItemSearchResults(
+				...array_map(
+					fn( array $potato ) => new ItemSearchResult(
+						new ItemId( $potato['id'] ),
+						new Label( 'en', $potato['label'] ),
+						new Description( 'en', $potato['description'] ),
+						new MatchedData( 'label', 'en', $potato['label'] )
+					),
+					array_slice( $potatoList, 5, 5 )
+				)
+			),
+			5, // limit to pass to search method
+			5, // offset to pass to search method
 		];
 	}
 
