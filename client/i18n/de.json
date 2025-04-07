@@ -142,7 +142,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Der vorherige Wert war früher korrekt, ist jetzt aber veraltet.",
 	"wikibase-client-data-bridge-references-heading": "Quellenangaben",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Du bist nicht angemeldet",
-	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Du bist nicht angemeldet. Wenn du<strong>dich anmeldest</strong> oder <strong>ein Konto erstellst</strong>, werden deine Bearbeitungen zusammen mit anderen Vorteilen deinem Benutzernamen zugeordnet.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Du bist nicht angemeldet. Wenn du <strong>dich anmeldest</strong> oder <strong>ein Konto erstellst</strong>, werden deine Bearbeitungen zusammen mit anderen Vorteilen deinem Benutzernamen zugeordnet.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Warnung:</strong> Du bist nicht angemeldet. Deine IP-Adresse wird bei Bearbeitungen öffentlich sichtbar. <strong>Melde dich an</strong> oder <strong>erstelle ein Benutzerkonto</strong>, damit Bearbeitungen deinem Benutzernamen zugeordnet werden.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Ohne Anmeldung bearbeiten",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Anmelden oder Benutzerkonto erstellen",
