@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
 use Exception;
-use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -14,9 +13,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleIte
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
-use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -33,16 +30,6 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 	public function __construct( SimpleItemSearch $useCase, MiddlewareHandler $middlewareHandler ) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
-	}
-
-	public static function factory(): Handler {
-		return new self(
-			WbSearch::getSimpleItemSearch(),
-			new MiddlewareHandler( [
-				WbSearch::getUnexpectedErrorHandlerMiddleware(),
-				new UserAgentCheckMiddleware(),
-			] )
-		);
 	}
 
 	public function run(): Response {
