@@ -80,11 +80,10 @@ module.exports = exports = defineComponent( {
 			// * ... and possibly other messages for additional hook-registered scopes
 			value: entityType, label: mw.msg( entityTypesConfig[ entityType ].message )
 		} ) );
-		// TODO: replace this text with translatable messages (T390269)
 		const menuItems = [
 			{
-				label: 'Search entities',
-				description: 'Find different types of Wikidata entries',
+				label: mw.msg( 'wikibase-scoped-search-search-entities' ),
+				description: mw.msg( 'wikibase-scoped-search-search-entities-description' ),
 				items: menuItemData
 			}
 		];

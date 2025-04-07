@@ -1016,6 +1016,8 @@ final class RepoHooks {
 				'messages' => [
 					'searchsuggest-search',
 					'vector-searchsuggest-containing',
+					'wikibase-scoped-search-search-entities',
+					'wikibase-scoped-search-search-entities-description',
 				],
 			];
 			$modules['wikibase.vector.scopedTypeaheadSearchStyles'] = $moduleTemplate + [
