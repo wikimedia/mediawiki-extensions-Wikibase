@@ -5,7 +5,8 @@
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "ਖ਼ਾਲੀ",
-	"valueview-expert-globecoordinateinput-precision": "ਸ਼ੁੱਧਤਾ (Pricision):",
+	"valueview-expert-globecoordinateinput-precision": "ਸ਼ੁੱਧਤਾ:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ਦੱਸਿਆ ਨਹੀਂ ਗਿਆ",
 	"valueview-expert-globecoordinateinput-customprecision": "ਖ਼ਾਸ ($1)",
 	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "ਇੱਕ ਚਾਪ-ਮਿੰਟ ਤੱਕ",
 	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਤੱਕ",
@@ -14,7 +15,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "ਇੱਕ ਚਾਪ-ਸੈਕਿੰਡ ਦੇ 1/1000 ਤੱਕ",
 	"valueview-expert-timevalue-calendar-gregorian": "ਗ੍ਰੈਗੋਰੀਅਨ",
 	"valueview-expert-timevalue-calendar-julian": "ਜੂਲੀਅਨ",
-	"valueview-expert-timeinput-precision": "ਸ਼ੁੱਧਤਾ (Pricision):",
+	"valueview-expert-timeinput-precision": "ਸ਼ੁੱਧਤਾ:",
 	"valueview-expert-timeinput-precision-year1g": "ਅਰਬ ਸਾਲ",
 	"valueview-expert-timeinput-precision-year100m": "ਲੱਖਾਂ ਸਾਲ",
 	"valueview-expert-timeinput-precision-year10m": "ਇੱਕ ਕਰੋੜ ਸਾਲ",
