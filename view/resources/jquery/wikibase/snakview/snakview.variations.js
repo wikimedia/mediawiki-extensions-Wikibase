@@ -17,50 +17,17 @@
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 */
-	var SELF = {
+	module.exports = {
 		/**
 		 * Registers a new `jQuery.wikibase.snakview.variations.Variation` definition to enable
 		 * using a specific `Snak` type within `jQuery.wikibase.snakview`. Acts like the
 		 * `jQuery.Widget` factory.
 		 *
-		 * @param {datamodel.Snak} snakConstructor The constructor of the `Snak` the
-		 *        `Variation` applies to.
-		 * @param {Function|string|Object} baseOrDefinition Constructor or name of the `Variation`
-		 *        the new `Variation` should be based on. The parameter may be omitted resulting in
-		 *        the it being regarded the `definition` and `base` defaulting to
-		 *        `jQuery.snakview.variations.Variation`.
-		 * @param {Object} [definition] The new `Variation`'s definition (new members and members
-		 *        overwriting the base `Variation`s members).
-		 * @return {Variation} The new `Variation`'s constructor.
+		 * @param {string} snakType The type of the snak
+		 * @param {Variation} variation The constructor / class definition for the variation
 		 */
-		variation: function ( snakConstructor, baseOrDefinition, definition ) {
-			if ( typeof snakConstructor !== 'function' || !snakConstructor.TYPE ) {
-				throw new Error( 'Snak constructor required for registering a snakview variation' );
-			}
-
-			if ( !definition ) {
-				definition = baseOrDefinition;
-				baseOrDefinition = SELF.Variation;
-			} else if ( typeof baseOrDefinition === 'string' ) {
-				baseOrDefinition = SELF.getVariation( baseOrDefinition );
-			}
-
-			var snakType = snakConstructor.TYPE,
-				variationName = 'WbSnakviewVariations_' + snakType; // name for constructor
-
-			// TODO: Refactor this to remove the $.extend T390181
-			// eslint-disable-next-line no-jquery/no-extend
-			var Variation = util.inherit( variationName, baseOrDefinition, $.extend(
-				{ variationBaseClass: 'wikibase-snakview-variation-' + snakType + 'snak' },
-				definition,
-				{ // we don't want to allow to overwrite this one via the definition
-					variationSnakConstructor: snakConstructor
-				}
-			) );
-
-			// TODO: store them in some public place as well ( have to decide on where exactly)
-			variations[ snakType ] = Variation;
-			return Variation;
+		registerVariation( snakType, variation ) {
+			variations[ snakType ] = variation;
 		},
 
 		/**
@@ -91,7 +58,5 @@
 			return variations[ snakType ] || null;
 		}
 	};
-
-	module.exports = SELF;
 
 }() );

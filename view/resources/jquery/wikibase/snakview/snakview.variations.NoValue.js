@@ -2,7 +2,7 @@
 	'use strict';
 
 	var MODULE = require( './snakview.variations.js' ),
-		PARENT = require( './snakview.variations.Variation.js' ),
+		Variation = require( './snakview.variations.Variation.js' ),
 		datamodel = require( 'wikibase.datamodel' );
 
 	/**
@@ -15,14 +15,20 @@
 	 * @extends jQuery.wikibase.snakview.variations.Variation
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
-	 *
-	 * @constructor
 	 */
-	MODULE.variation( datamodel.PropertyNoValueSnak, PARENT, {
+	class NoValue extends Variation {
+		/**
+		 * @inheritDoc
+		 */
+		setupVariation() {
+			this.variationSnakConstructor = datamodel.PropertyNoValueSnak;
+			this.variationBaseClass = 'wikibase-snakview-variation-novaluesnak';
+		}
+
 		/**
 		 * @inheritdoc
 		 */
-		draw: function () {
+		draw() {
 			// display same message in edit and non-edit mode!
 			this.$viewPort.empty().append(
 				$( '<span>' ) // this span is not in any template, see MessageSnakFormatter
@@ -31,6 +37,8 @@
 			);
 			$( this ).trigger( 'afterdraw' );
 		}
-	} );
+	}
+
+	MODULE.registerVariation( 'novalue', NoValue );
 
 }() );
