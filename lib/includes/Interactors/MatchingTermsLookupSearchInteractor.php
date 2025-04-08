@@ -8,7 +8,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\MatchingTermsLookup;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 
@@ -97,9 +96,10 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 		array $termTypes
 	): array {
 		$matchedTermIndexEntries = $this->matchingTermsLookup->getMatchingTerms(
-			$this->makeTermIndexSearchCriteria( $text, [ $languageCode ], $termTypes ),
-			null,
+			$text,
 			$entityType,
+			$languageCode,
+			$termTypes,
 			$this->getTermIndexOptions()
 		);
 
@@ -158,13 +158,10 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 		array $matchedEntityIdSerializations
 	): array {
 		$fallbackMatchedTermIndexEntries = $this->matchingTermsLookup->getMatchingTerms(
-			$this->makeTermIndexSearchCriteria(
-				$text,
-				$this->getFallbackLanguageCodes( $languageCode ),
-				$termTypes
-			),
-			null,
+			$text,
 			$entityType,
+			$this->getFallbackLanguageCodes( $languageCode ),
+			$termTypes,
 			$this->getTermIndexOptions()
 		);
 
@@ -257,27 +254,6 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 
 	private function getDescriptionDisplayTerm( EntityId $entityId ): ?Term {
 		return $this->labelDescriptionLookup->getDescription( $entityId );
-	}
-
-	/**
-	 * @param string $text
-	 * @param string[] $languageCodes
-	 * @param string[] $termTypes
-	 *
-	 * @return TermIndexSearchCriteria[]
-	 */
-	private function makeTermIndexSearchCriteria( string $text, array $languageCodes, array $termTypes ): array {
-		$terms = [];
-		foreach ( $languageCodes as $languageCode ) {
-			foreach ( $termTypes as $termType ) {
-				$terms[] = new TermIndexSearchCriteria( [
-					'termText' => $text,
-					'termLanguage' => $languageCode,
-					'termType' => $termType,
-				] );
-			}
-		}
-		return $terms;
 	}
 
 }

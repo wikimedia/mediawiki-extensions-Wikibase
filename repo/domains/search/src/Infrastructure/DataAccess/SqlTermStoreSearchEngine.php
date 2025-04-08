@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookup;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
@@ -74,15 +73,11 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine, PropertySearchEngine
 		int $limit,
 		int $offset
 	): array {
-		$searchCriteria = array_map(
-			fn( string $lang ) => new TermIndexSearchCriteria( [ 'termLanguage' => $lang, 'termText' => $searchTerm ] ),
-			$this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes()
-		);
-
 		return $this->matchingTermsLookup->getMatchingTerms(
-			$searchCriteria,
-			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+			$searchTerm,
 			$entityType,
+			$this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes(),
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
 			[ 'LIMIT' => $limit, 'OFFSET' => $offset ]
 		);
 	}

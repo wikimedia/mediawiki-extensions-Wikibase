@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Store;
 
@@ -12,31 +12,25 @@ use Wikibase\Lib\TermIndexEntry;
 interface MatchingTermsLookup {
 
 	/**
-	 * Returns the terms that match the provided conditions.
-	 *
-	 * $terms is an array of Term objects. Terms are joined by OR.
-	 * The fields of the terms are joined by AND.
-	 *
-	 * A default can be provided for termType and entityType via the corresponding
-	 * method parameters.
-	 *
-	 * @param TermIndexSearchCriteria[] $criteria
-	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
+	 * @param string $termText The text to look up the term by
+	 * @param string $entityType One of Item::ENTITY_TYPE or Property::ENTITY_TYPE
+	 * @param string|string[]|null $searchLanguage The language(s) to search in, in order of pref
+	 * @param string|string[]|null $termType The type of term(s) to search for, @see TermTypes
 	 * @param array $options
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true
 	 *        - prefixSearch: boolean, default false
 	 *        - LIMIT: int, defaults to none
-	 *        - orderByWeight: boolean, default false
+	 *        - OFFSET: int, defaults to none
 	 *
 	 * @return TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
-		array $criteria,
+		string $termText,
+		string $entityType,
+		$searchLanguage = null,
 		$termType = null,
-		$entityType = null,
 		array $options = []
-	);
+	): array;
 
 }

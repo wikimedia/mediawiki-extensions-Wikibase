@@ -164,9 +164,10 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$this->matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with(
-				$this->anything(),
-				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+				'some query',
 				Item::ENTITY_TYPE,
+				[],
+				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
 				[ 'LIMIT' => 5, 'OFFSET' => 2 ],
 			)
 			->willReturn( array_slice( $results, 2, 5 ) );
