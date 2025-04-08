@@ -150,7 +150,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "قيمة صحيحة، لكن ربما تكون تاريخية",
 	"wikibase-statementview-rank-deprecated": "ترتيب مُبطَل",
 	"wikibase-statementview-rank-tooltip-deprecated": "القيمة معروفة بأنها خاطئة لكن يشيع الاعتقاد بصحتها",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|مرجع|مراجع}}",
+	"wikibase-statementview-references-counter": "{{PLURAL:$1|لا مراجع|مرجع واحد|مرجعان| $1 مراجع|$1 مرجعًا|$1 مرجع}}",
 	"wikibase-snakview-property-input-placeholder": "خاصية",
 	"wikibase-snakview-unsupportedsnaktype": "سناك من نمط «$1». لا تُدعَم معالجة هذا النوع من السناك بعد.",
 	"wikibase-snakview-choosesnaktype": "اختر نوع القيمة.",
