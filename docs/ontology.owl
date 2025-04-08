@@ -250,6 +250,12 @@
     <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="&wikibase;directClaimNormalized">
+    <rdfs:label>directClaimNormalized</rdfs:label>
+    <rdfs:comment>Link between Wikibase Property and normalized direct claim predicate.</rdfs:comment>
+    <rdfs:domain rdf:resource="&wikibase;Property"/>
+  </owl:ObjectProperty>
+
   <owl:ObjectProperty rdf:about="&wikibase;claim">
     <rdfs:label>claim</rdfs:label>
     <rdfs:comment>Link between Wikibase Property and claim predicate.</rdfs:comment>
