@@ -88,11 +88,11 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 	 * @return TermSearchResult[]
 	 */
 	public function searchForEntities(
-		$text,
-		$languageCode,
-		$entityType,
+		string $text,
+		string $languageCode,
+		string $entityType,
 		array $termTypes
-	) {
+	): array {
 		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries(
 			$text,
 			$languageCode,
