@@ -75,6 +75,7 @@
 	"wikibase-newitem-fieldset": "Yeni müddəa yarat",
 	"wikibase-newitem-no-external-page": "\"$2\" səhifəsi \"$1\" saytında tapılmadı.",
 	"wikibase-newentity-description": "İzahı:",
+	"wikibase-setlabeldescriptionaliases-introfull": "Siz [[:$1]] elementinə $2 üçün etiket, təsvir və əlavə adlar əlavə edirsiniz. Bir neçə əlavə ad şaquli xətt (<code>|</code>) simvolu ilə ayrılmalıdır.",
 	"wikibase-api-no-external-page": "\"$1\" \"$2\" səhifəsi üçün səhifə məlumatı təqdim etməyib.",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|müzakirə]]) tərəfindən yaradılmış [[Special:Permalink/$3|$3]] versiyası bərpa edildi",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|müzakirə]]) tərəfindən edilmiş [[Special:Diff/$3|$3]] redaktəsi geri alındı",

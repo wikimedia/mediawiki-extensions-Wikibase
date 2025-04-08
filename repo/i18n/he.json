@@ -541,6 +541,8 @@
 	"special-setlabeldescriptionaliases-parameterized": "הגדרת תווית, תיאור וכינויים עבור $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "אין לך אפשרות לתקשר עם מאפיינים בפדרציה באמצעות ה־API הזה.",
 	"wikibase-federated-properties-failed-request-api-error-message": "הבקשה נכשלה בשל בקשה כושלת לוויקי המקור של הפדרציה.",
+	"wikibase-scoped-search-search-entities": "חיפוש ישויות",
+	"wikibase-scoped-search-search-entities-description": "מציאת סוגים שונים של ישויות {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "פריטים",
 	"wikibase-scoped-search-property-scope-name": "מאפיינים"
 }

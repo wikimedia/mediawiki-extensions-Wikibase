@@ -596,6 +596,8 @@
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-federated-property-api-error-message": "Vous ne pouvez pas interagir avec les propriétés fédérées en utilisant cette API.",
 	"wikibase-federated-properties-failed-request-api-error-message": "La requête a échoué en raison de l’échec d’une requête au wiki source fédéré.",
+	"wikibase-scoped-search-search-entities": "Rechercher des entités",
+	"wikibase-scoped-search-search-entities-description": "Trouver différents types d'entités {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Éléments",
 	"wikibase-scoped-search-property-scope-name": "Propriétés"
 }

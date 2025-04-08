@@ -526,6 +526,8 @@
 	"special-setlabeldescriptionaliases-parameterized": "Definir etiquetta, description e aliases de $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Tu non pote interager con proprietates federate usante iste API.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Le requesta ha fallite a causa de un requesta fallite al wiki de fonte del federation.",
+	"wikibase-scoped-search-search-entities": "Cercar entitates",
+	"wikibase-scoped-search-search-entities-description": "Trovar varie typos de entitates de {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Objectos",
 	"wikibase-scoped-search-property-scope-name": "Proprietates"
 }

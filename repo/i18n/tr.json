@@ -557,6 +557,8 @@
 	"special-setlabeldescriptionaliases-parameterized": "$1 etiketini, açıklamasını ve takma adlarını ayarlayın",
 	"wikibase-federated-properties-federated-property-api-error-message": "Bu API'yi kullanarak Birleşik Özelliklerle etkileşim kuramazsınız.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle istek başarısız oldu.",
+	"wikibase-scoped-search-search-entities": "Varlıkları ara",
+	"wikibase-scoped-search-search-entities-description": "Farklı türde {{SITENAME}} varlıklarını bulun",
 	"wikibase-scoped-search-item-scope-name": "Ögeler",
 	"wikibase-scoped-search-property-scope-name": "Özellikler"
 }

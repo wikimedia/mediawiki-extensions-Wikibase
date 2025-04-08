@@ -536,6 +536,8 @@
 	"special-setlabeldescriptionaliases-parameterized": "Establecer a etiqueta, a descrición e os pseudónimos de $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Non podes interactuar coas propiedades federadas mediante esta API.",
 	"wikibase-federated-properties-failed-request-api-error-message": "A solicitude fallou debido a unha solicitude fallida ao wiki fonte da federación.",
+	"wikibase-scoped-search-search-entities": "Procura entidades",
+	"wikibase-scoped-search-search-entities-description": "Atopa diferentes tipos de entidades de {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Elementos",
 	"wikibase-scoped-search-property-scope-name": "Propiedades"
 }

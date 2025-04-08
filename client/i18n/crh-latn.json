@@ -35,6 +35,7 @@
 	"unconnectedpages": "Elementlerge bağlanmağan saifeler",
 	"wikibase-otherprojects": "Başqa leyhalarda",
 	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile {{PLURAL:$1|alâqalandırma|alâqalandırmalar}}",
 	"notification-link-text-view-item": "Elementni {{GENDER:$1|köster}}",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmeden devam et"
 }
