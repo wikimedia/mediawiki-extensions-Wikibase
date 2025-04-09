@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Interactors;
 
@@ -18,6 +18,6 @@ interface TermSearchInteractor {
 	 *
 	 * @return TermSearchResult[]
 	 */
-	public function searchForEntities( string $text, string $languageCode, string $entityType, array $termTypes );
+	public function searchForEntities( string $text, string $languageCode, string $entityType, array $termTypes ): array;
 
 }

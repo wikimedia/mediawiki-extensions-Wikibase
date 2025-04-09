@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests\Interactors;
 
@@ -10,7 +10,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -26,7 +25,7 @@ use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
  */
 class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 
-	private function getMockTermIndex() {
+	private function getMockTermIndex(): MockMatchingTermsLookup {
 		return new MockMatchingTermsLookup(
 			[
 				/**
@@ -59,15 +58,12 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		);
 	}
 
-	/**
-	 * @param string $text
-	 * @param string $languageCode
-	 * @param string $termType
-	 * @param EntityId|ItemId|NumericPropertyId $entityId
-	 *
-	 * @return TermIndexEntry
-	 */
-	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
+	private function getTermIndexEntry(
+		string $text,
+		string $languageCode,
+		string $termType,
+		EntityId $entityId
+	): TermIndexEntry {
 		return new TermIndexEntry( [
 			'termText' => $text,
 			'termLanguage' => $languageCode,
@@ -76,12 +72,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		] );
 	}
 
-	/**
-	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
-	 *
-	 * @return PrefetchingTermLookup
-	 */
-	private function getMockPrefetchingTermLookup() {
+	/** Get a lookup that always returns a pt label and description suffixed by the entity ID */
+	private function getMockPrefetchingTermLookup(): PrefetchingTermLookup {
 		$mock = $this->createMock( PrefetchingTermLookup::class );
 		$mock->method( 'getLabels' )
 			->willReturnCallback( function( EntityId $entityId, $languageCodes ) {
@@ -105,14 +97,11 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		return $mock;
 	}
 
-	private function getExpectedDisplayTerm( EntityId $entityId, $termType ) {
+	private function getExpectedDisplayTerm( EntityId $entityId, string $termType ): TermFallback {
 		return new TermFallback( 'pt', $termType . '-pt-' . $entityId->getSerialization(), 'pt', 'pt' );
 	}
 
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	private function getMockLanguageFallbackChainFactory() {
+	private function getMockLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
 		$mockFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$mockFactory->method( 'newFromLanguageCode' )
 			->willReturnCallback( function( $langCode ) {
@@ -121,12 +110,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		return $mockFactory;
 	}
 
-	/**
-	 * @param string $langCode
-	 *
-	 * @return TermLanguageFallbackChain
-	 */
-	public function getMockLanguageFallbackChainFromLanguage( $langCode ) {
+	public function getMockLanguageFallbackChainFromLanguage( string $langCode ): TermLanguageFallbackChain {
 		$mockFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$mockFallbackChain->method( 'getFetchLanguageCodes' )
 			->willReturnCallback( function () use( $langCode ) {
@@ -149,18 +133,11 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		return $mockFallbackChain;
 	}
 
-	/**
-	 * @param bool|null $caseSensitive
-	 * @param bool|null $prefixSearch
-	 * @param int|null $limit
-	 *
-	 * @return MatchingTermsLookupSearchInteractor
-	 */
 	private function newTermSearchInteractor(
-		$caseSensitive = null,
-		$prefixSearch = null,
-		$limit = null
-	) {
+		?bool $caseSensitive = null,
+		?bool $prefixSearch = null,
+		?int $limit = null
+	): MatchingTermsLookupSearchInteractor {
 		$interactor = new MatchingTermsLookupSearchInteractor(
 			$this->getMockTermIndex(),
 			$this->getMockLanguageFallbackChainFactory(),
@@ -184,7 +161,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		return $interactor;
 	}
 
-	public static function provideSearchForEntitiesTest() {
+	public static function provideSearchForEntitiesTest(): array {
 		$allTermTypes = [
 			TermIndexEntry::TYPE_LABEL,
 			TermIndexEntry::TYPE_DESCRIPTION,
@@ -384,12 +361,12 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	 * @param array[] $expectedTermsDetails each element has a 'term', 'termtype' and a 'entityId' key
 	 */
 	public function testSearchForEntities_returnsExpectedResults(
-		$caseSensitive,
-		$prefixSearch,
-		$limit,
+		?bool $caseSensitive,
+		?bool $prefixSearch,
+		?int $limit,
 		array $params,
 		array $expectedTermsDetails
-	) {
+	): void {
 		$interactor = $this->newTermSearchInteractor( $caseSensitive, $prefixSearch, $limit );
 
 		$results = $interactor->searchForEntities( ...$params );
@@ -400,7 +377,6 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 			'Incorrect number of search results'
 		);
 
-		/** @var TermSearchResult $result */
 		foreach ( $results as $key => $result ) {
 			$expectedTermDetails = $expectedTermsDetails[$key];
 
