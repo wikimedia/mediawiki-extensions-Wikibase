@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\TermTypes;
@@ -51,18 +52,10 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		);
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->exactly( 2 ) )
+		$this->matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
-			->willReturnOnConsecutiveCalls(
-				[
-					new TermIndexEntry( [ // one entry with matching label will be found
-						TermIndexEntry::FIELD_TYPE => TermTypes::TYPE_LABEL,
-						TermIndexEntry::FIELD_LANGUAGE => 'en',
-						TermIndexEntry::FIELD_TEXT => 'potato',
-						TermIndexEntry::FIELD_ENTITY => new ItemId( 'Q123' ),
-					] ),
-				],
-				[], // no entry with matching alias will be found
+			->willReturn(
+				[ $this->newTermIndexItem( TermTypes::TYPE_LABEL, 'Q123', 'en', 'potato' ) ]
 			);
 
 		$this->termRetriever = $this->createMock( TermRetriever::class );
@@ -92,9 +85,9 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		);
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->exactly( 2 ) )
+		$this->matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
-			->willReturnOnConsecutiveCalls(
+			->willReturn(
 				[
 					new TermIndexEntry( [ // one entry with matching label will be found
 						TermIndexEntry::FIELD_TYPE => TermTypes::TYPE_LABEL,
@@ -102,8 +95,7 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 						TermIndexEntry::FIELD_TEXT => 'instance of',
 						TermIndexEntry::FIELD_ENTITY => new NumericPropertyId( 'P123' ),
 					] ),
-				],
-				[], // no entry with matching alias will be found
+				]
 			);
 
 		$this->termRetriever = $this->createMock( TermRetriever::class );
@@ -133,18 +125,10 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		);
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->exactly( 2 ) )
+		$this->matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
-			->willReturnOnConsecutiveCalls(
-				[], // no entry with matching label will be found
-				[
-					new TermIndexEntry( [ // one entry with matching alias will be found
-						TermIndexEntry::FIELD_TYPE => TermTypes::TYPE_ALIAS,
-						TermIndexEntry::FIELD_LANGUAGE => 'en',
-						TermIndexEntry::FIELD_TEXT => 'spud',
-						TermIndexEntry::FIELD_ENTITY => new ItemId( 'Q123' ),
-					] ),
-				],
+			->willReturn(
+				[ $this->newTermIndexItem( TermTypes::TYPE_ALIAS, 'Q123', 'en', 'spud' ) ]
 			);
 
 		$this->termRetriever = $this->createMock( TermRetriever::class );
@@ -163,12 +147,36 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		);
 	}
 
+	public function testResultPagination(): void {
+		$results = [];
+		foreach ( [ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ] as $type ) {
+			for ( $i = 1; $i <= 7; $i++ ) {
+				$results[] = $this->newTermIndexItem( $type, "Q{$i}" );
+			}
+		}
+
+		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$this->matchingTermsLookup->expects( $this->once() )
+			->method( 'getMatchingTerms' )
+			->with(
+				$this->anything(),
+				[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+				Item::ENTITY_TYPE,
+				[ 'LIMIT' => 5, 'OFFSET' => 2 ],
+			)
+			->willReturn( array_slice( $results, 2, 5 ) );
+
+		$searchResult = $this->newEngine()->searchItemByLabel( 'some query', 'en', 5, 2 );
+		$this->assertCount( 5, $searchResult );
+		$this->assertEquals( new ItemId( 'Q3' ), $searchResult[0]->getItemId() );
+	}
+
 	public function testGivenSearchFails_returnsNoResults(): void {
 		$searchTerm = 'potato';
 		$languageCode = 'en';
 
 		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->exactly( 2 ) )
+		$this->matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->willReturn( [] );
 
@@ -182,6 +190,15 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new ItemSearchResults(),
 			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
 		);
+	}
+
+	private function newTermIndexItem( string $type, string $id, string $language = 'en', ?string $text = null ): TermIndexEntry {
+		return new TermIndexEntry( [
+			TermIndexEntry::FIELD_TYPE => $type,
+			TermIndexEntry::FIELD_ENTITY => new ItemId( $id ),
+			TermIndexEntry::FIELD_LANGUAGE => $language,
+			TermIndexEntry::FIELD_TEXT => $text ?: 'item-result-' . bin2hex( random_bytes( 5 ) ),
+		] );
 	}
 
 	private function newEngine(): SqlTermStoreSearchEngine {

@@ -25,7 +25,6 @@ use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
  * @license GPL-2.0-or-later
  */
 class SqlTermStoreSearchEngine implements ItemSearchEngine, PropertySearchEngine {
-	private const RESULTS_LIMIT = 5;
 
 	private MatchingTermsLookup $matchingTermsLookup;
 	private TermRetriever $termRetriever;
@@ -41,42 +40,50 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine, PropertySearchEngine
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
-	public function searchItemByLabel( string $searchTerm, string $languageCode ): ItemSearchResults {
+	public function searchItemByLabel(
+		string $searchTerm,
+		string $languageCode,
+		int $limit = 10,
+		int $offset = 0
+	): ItemSearchResults {
 		return new ItemSearchResults( ...array_map(
 			$this->convertResult( ItemSearchResult::class, $languageCode ),
-			$this->findMatchingLabelsAndAliases( Item::ENTITY_TYPE, $searchTerm, $languageCode )
+			$this->findMatchingLabelsAndAliases( Item::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset )
 		) );
 	}
 
-	public function searchPropertyByLabel( string $searchTerm, string $languageCode ): PropertySearchResults {
+	public function searchPropertyByLabel(
+		string $searchTerm,
+		string $languageCode,
+		int $limit = 10,
+		int $offset = 0
+	): PropertySearchResults {
 		return new PropertySearchResults( ...array_map(
 			$this->convertResult( PropertySearchResult::class, $languageCode ),
-			$this->findMatchingLabelsAndAliases( Property::ENTITY_TYPE, $searchTerm, $languageCode )
+			$this->findMatchingLabelsAndAliases( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset )
 		) );
 	}
 
 	/**
 	 * @return TermIndexEntry[]
 	 */
-	private function findMatchingLabelsAndAliases( string $entityType, string $searchTerm, string $languageCode ): array {
+	private function findMatchingLabelsAndAliases(
+		string $entityType,
+		string $searchTerm,
+		string $languageCode,
+		int $limit,
+		int $offset
+	): array {
 		$searchCriteria = array_map(
 			fn( string $lang ) => new TermIndexSearchCriteria( [ 'termLanguage' => $lang, 'termText' => $searchTerm ] ),
 			$this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes()
 		);
 
-		return array_merge(
-			$this->matchingTermsLookup->getMatchingTerms(
-				$searchCriteria,
-				TermTypes::TYPE_LABEL,
-				$entityType,
-				[ 'LIMIT' => self::RESULTS_LIMIT ]
-			),
-			$this->matchingTermsLookup->getMatchingTerms(
-				$searchCriteria,
-				TermTypes::TYPE_ALIAS,
-				$entityType,
-				[ 'LIMIT' => self::RESULTS_LIMIT ]
-			)
+		return $this->matchingTermsLookup->getMatchingTerms(
+			$searchCriteria,
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_ALIAS ],
+			$entityType,
+			[ 'LIMIT' => $limit, 'OFFSET' => $offset ]
 		);
 	}
 
