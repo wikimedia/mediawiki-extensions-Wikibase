@@ -142,6 +142,49 @@ describe( 'Simple item search', () => {
 			const results = response.body.results;
 			assert.lengthOf( results, 0 );
 		} );
+
+		describe( 'pagination', () => {
+			let allMatchingResults;
+			const searchLanguage = 'en';
+
+			before( async () => {
+				const response = await newSearchRequest( searchLanguage, englishTermMatchingAllItems )
+					.assertValidRequest()
+					.makeRequest();
+
+				expect( response ).to.have.status( 200 );
+				allMatchingResults = response.body.results;
+			} );
+
+			Object.entries( {
+				'with limit and offset parameters': {
+					params: { limit: 2, offset: 1 },
+					expectedResults: () => [ allMatchingResults[ 1 ], allMatchingResults[ 2 ] ]
+				},
+				'with just limit parameter': {
+					params: { limit: 1 },
+					expectedResults: () => [ allMatchingResults[ 0 ] ]
+				},
+				'with just offset parameter': {
+					params: { offset: 2 },
+					expectedResults: () => [ allMatchingResults[ 2 ] ]
+				}
+			} ).forEach( ( [ title, { params, expectedResults } ] ) => {
+				it( `finds items matching the search term ${title}`, async () => {
+					const request = newSearchRequest( searchLanguage, englishTermMatchingAllItems );
+
+					Object.entries( params ).forEach( ( [ key, value ] ) => {
+						request.withQueryParam( key, value );
+					} );
+
+					const response = await request.assertValidRequest().makeRequest();
+					expect( response ).to.have.status( 200 );
+
+					const results = response.body.results;
+					assert.deepEqual( results, expectedResults() );
+				} );
+			} );
+		} );
 	} );
 
 	describe( '400 error response', () => {

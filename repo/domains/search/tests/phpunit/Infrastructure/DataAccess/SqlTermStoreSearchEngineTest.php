@@ -69,7 +69,7 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
+			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode, 10, 0 )
 		);
 	}
 
@@ -143,7 +143,12 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
+			$this->newEngine()->searchItemByLabel(
+				$searchTerm,
+				$languageCode,
+				10,
+				0
+			)
 		);
 	}
 
@@ -188,7 +193,12 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemSearchResults(),
-			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode )
+			$this->newEngine()->searchItemByLabel(
+				$searchTerm,
+				$languageCode,
+				5,
+				0
+			)
 		);
 	}
 

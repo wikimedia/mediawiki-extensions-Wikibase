@@ -23,6 +23,8 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 
 	private const SEARCH_QUERY_PARAM = 'q';
 	private const LANGUAGE_QUERY_PARAM = 'language';
+	private const LIMIT_QUERY_PARAM = 'limit';
+	private const OFFSET_QUERY_PARAM = 'offset';
 
 	private SimpleItemSearch $useCase;
 	private MiddlewareHandler $middlewareHandler;
@@ -40,7 +42,9 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		try {
 			$useCaseResponse = $this->useCase->execute( new SimpleItemSearchRequest(
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
-				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM]
+				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
+				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM],
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM]
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
@@ -111,6 +115,18 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 				self::PARAM_SOURCE => 'query',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
+				ParamValidator::PARAM_ISMULTI => false,
+			],
+			self::LIMIT_QUERY_PARAM => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_ISMULTI => false,
+			],
+			self::OFFSET_QUERY_PARAM => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_ISMULTI => false,
 			],
 		];

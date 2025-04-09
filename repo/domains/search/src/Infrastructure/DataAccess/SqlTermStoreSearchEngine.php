@@ -43,8 +43,8 @@ class SqlTermStoreSearchEngine implements ItemSearchEngine, PropertySearchEngine
 	public function searchItemByLabel(
 		string $searchTerm,
 		string $languageCode,
-		int $limit = 10,
-		int $offset = 0
+		int $limit,
+		int $offset
 	): ItemSearchResults {
 		return new ItemSearchResults( ...array_map(
 			$this->convertResult( ItemSearchResult::class, $languageCode ),
