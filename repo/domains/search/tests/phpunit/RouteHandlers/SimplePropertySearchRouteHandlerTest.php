@@ -9,6 +9,7 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SimplePropertySearchRouteHandler;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -26,12 +27,11 @@ class SimplePropertySearchRouteHandlerTest extends MediaWikiIntegrationTestCase 
 		$useCase->expects( $this->once() )
 			->method( 'execute' )
 			->willThrowException( new RuntimeException() );
-		$this->setService( 'WbSearch.SimplePropertySearch', $useCase );
 
 		// suppress error reporting to avoid CI failures caused by errors in the logs
 		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
-		$routeHandler = SimplePropertySearchRouteHandler::factory();
+		$routeHandler = new SimplePropertySearchRouteHandler( $useCase, WbSearch::getMiddlewareHandler() );
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [

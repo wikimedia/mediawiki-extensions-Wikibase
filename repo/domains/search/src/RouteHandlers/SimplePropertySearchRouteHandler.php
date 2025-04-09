@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
 use Exception;
-use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
@@ -14,9 +13,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\Simpl
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
-use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
-use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -33,16 +30,6 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 	public function __construct( SimplePropertySearch $useCase, MiddlewareHandler $middlewareHandler ) {
 		$this->useCase = $useCase;
 		$this->middlewareHandler = $middlewareHandler;
-	}
-
-	public static function factory(): Handler {
-		return new self(
-			WbSearch::getSimplePropertySearch(),
-			new MiddlewareHandler( [
-				WbSearch::getUnexpectedErrorHandlerMiddleware(),
-				new UserAgentCheckMiddleware(),
-			] )
-		);
 	}
 
 	public function run(): Response {

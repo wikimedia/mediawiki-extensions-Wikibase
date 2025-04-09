@@ -15,7 +15,9 @@ use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEng
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\WbSearch;
+use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
+use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NotMulValidator;
@@ -48,6 +50,13 @@ return [
 		return new LanguageCodeValidator(
 			new CompositeValidator( $validators )
 		);
+	},
+
+	'WbSearch.MiddlewareHandler' => function ( MediaWikiServices $services ): MiddlewareHandler {
+		return new MiddlewareHandler( [
+			WbSearch::getUnexpectedErrorHandlerMiddleware(),
+			new UserAgentCheckMiddleware(),
+		] );
 	},
 
 	/**

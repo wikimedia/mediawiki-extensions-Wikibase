@@ -9,6 +9,7 @@ use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SimpleItemSearchRouteHandler;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -26,12 +27,11 @@ class SimpleItemSearchRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$useCase->expects( $this->once() )
 			->method( 'execute' )
 			->willThrowException( new RuntimeException() );
-		$this->setService( 'WbSearch.SimpleItemSearch', $useCase );
 
 		// suppress error reporting to avoid CI failures caused by errors in the logs
 		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
-		$routeHandler = SimpleItemSearchRouteHandler::factory();
+		$routeHandler = new SimpleItemSearchRouteHandler( $useCase, WbSearch::getMiddlewareHandler() );
 		$this->initHandler(
 			$routeHandler,
 			new RequestData( [
