@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Store;
 
@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -31,10 +30,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	/**
-	 * @var TermsDomainDbFactory
-	 */
-	private $dbFactory;
+	private TermsDomainDbFactory $dbFactory;
 
 	private const MOCK_ITEM_LABELS = [
 		'Q100' => 'Hello',
@@ -74,7 +70,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function testReturnsWorkingLookup() {
+	public function testReturnsWorkingLookup(): void {
 		$factory = new MatchingTermsLookupFactory(
 			new EntityIdComposer( [
 				Item::ENTITY_TYPE => function( $uniquePartOfId ) {
@@ -92,11 +88,7 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$matchingTermsLookup = $factory->getLookupForSource( $itemSource );
 
-		$criteria = new TermIndexSearchCriteria( [
-			'termText' => self::MOCK_ITEM_LABELS['Q100'],
-		] );
-
-		$actual = $matchingTermsLookup->getMatchingTerms( [ $criteria ] );
+		$actual = $matchingTermsLookup->getMatchingTerms( self::MOCK_ITEM_LABELS['Q100'], Item::ENTITY_TYPE );
 		$results = array_map( function ( TermIndexEntry $entry ) {
 			return $entry->getEntityId()->getSerialization();
 		}, $actual );

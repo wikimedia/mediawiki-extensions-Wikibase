@@ -173,15 +173,15 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				[ 'ABCDEFGHI123', 'br', 'item', $allTermTypes ],
-				[],
+				'params' => [ 'ABCDEFGHI123', 'br', 'item', $allTermTypes ],
+				'expectedTermsDetails' => [],
 			],
 			'Q111 Foo en Label match exactly' => [
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
-				[
+				'params' => [ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -193,8 +193,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
-				[
+				'params' => [ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -211,8 +211,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 1,
-				[ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
-				[
+				'params' => [ 'Foo', 'en', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -224,8 +224,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				[ 'Foo', 'en-ca', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
-				[
+				'params' => [ 'Foo', 'en-ca', 'item', [ TermIndexEntry::TYPE_LABEL ] ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -237,8 +237,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				[ 'Foo', 'en', 'item', $allTermTypes ],
-				[
+				'params' => [ 'Foo', 'en', 'item', $allTermTypes ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -265,8 +265,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => true,
 				'prefixSearch' => false,
 				'limit' => 5000,
-				[ 'Foo', 'en', 'item', $allTermTypes ],
-				[
+				'params' => [ 'Foo', 'en', 'item', $allTermTypes ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q111' ),
 						'term' => new Term( 'en', 'Foo' ),
@@ -288,8 +288,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => false,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				[ 'Ta', 'en-ca', 'item', $allTermTypes ],
-				[
+				'params' => [ 'Ta', 'en-ca', 'item', $allTermTypes ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new ItemId( 'Q555' ),
 						'term' => new Term( 'en-ca', 'TAAA' ),
@@ -306,8 +306,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => true,
 				'prefixSearch' => true,
 				'limit' => 5000,
-				[ 'La', 'en-ca', 'property', $allTermTypes ],
-				[
+				'params' => [ 'La', 'en-ca', 'property', $allTermTypes ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new NumericPropertyId( 'P44' ),
 						'term' => new Term( 'en-ca', 'Lama' ),
@@ -334,8 +334,8 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				'caseSensitive' => true,
 				'prefixSearch' => true,
 				'limit' => 2,
-				[ 'La', 'en-ca', 'property', $allTermTypes ],
-				[
+				'params' => [ 'La', 'en-ca', 'property', $allTermTypes ],
+				'expectedTermsDetails' => [
 					[
 						'entityId' => new NumericPropertyId( 'P44' ),
 						'term' => new Term( 'en-ca', 'Lama' ),

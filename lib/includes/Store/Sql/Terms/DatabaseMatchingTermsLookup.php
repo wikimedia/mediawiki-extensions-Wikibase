@@ -11,12 +11,12 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\Util\StatsMonitoring;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LikeValue;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * MatchingTermsLookup implementation in the new term store. Mostly used for search.
@@ -44,81 +44,41 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$this->logger = $logger;
 	}
 
-	/**
-	 * @inheritDoc
-	 */
+	/** @inheritDoc */
 	public function getMatchingTerms(
-		array $criteria,
+		string $termText,
+		string $entityType,
+		$searchLanguage = null,
 		$termType = null,
-		$entityType = null,
 		array $options = []
-	) {
-		if ( !$criteria ) {
-			return [];
-		}
-
+	): array {
 		$dbr = $this->getDbr();
-
-		$results = $this->criteriaToQueryResults( $dbr, $criteria, $termType, $entityType, $options );
+		$queryBuilder = $this->buildQuery( $dbr, $termText, $entityType, $searchLanguage, $termType, $options );
+		$queryResults = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
 
 		$this->incrementForQuery( 'MatchingTermsLookup_getMatchingTerms' );
 
-		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
-			return $this->buildTermResult( $results, $options['LIMIT'] );
-		} else {
-			return $this->buildTermResult( $results );
-		}
+		return $this->buildTermResult( $queryResults );
 	}
 
 	/**
 	 * @param IReadableDatabase $dbr Used for query construction and selects
-	 * @param TermIndexSearchCriteria[] $criteria
+	 * @param string $termText
+	 * @param string $entityType
+	 * @param string|string[]|null $searchLanguage
 	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
-	 * @return IResultWrapper[]
+	 * @return SelectQueryBuilder
 	 */
-	private function criteriaToQueryResults(
+	private function buildQuery(
 		IReadableDatabase $dbr,
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
-	): array {
-		$termQueries = [];
-
-		foreach ( $criteria as $mask ) {
-			if ( $entityType === null ) {
-				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'item', $termType, $options );
-				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'property', $termType, $options );
-			} elseif ( is_array( $entityType ) ) {
-				foreach ( $entityType as $entityTypeCase ) {
-					$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, $entityTypeCase, $termType, $options );
-				}
-			} else {
-				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, $entityType, $termType, $options );
-			}
-		}
-
-		return $termQueries;
-	}
-
-	/**
-	 * @param IReadableDatabase $dbr Used for query construction and selects
-	 * @param TermIndexSearchCriteria $mask
-	 * @param string $entityType
-	 * @param string|string[]|null $termType
-	 * @param array $options
-	 * @return IResultWrapper
-	 */
-	private function getTermMatchQueries(
-		IReadableDatabase $dbr,
-		TermIndexSearchCriteria $mask,
+		string $termText,
 		string $entityType,
+		$searchLanguage = null,
 		$termType = null,
 		array $options = []
-	): IResultWrapper {
+	): SelectQueryBuilder {
 		$options = array_merge(
 			[
 				'caseSensitive' => true,
@@ -147,28 +107,29 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$queryBuilder->join( 'wbt_text_in_lang', null, 'wbtl_text_in_lang_id=wbxl_id' )
 			->join( 'wbt_text', null, 'wbxl_text_id=wbx_id' );
 
-		$language = $mask->getLanguage();
-		if ( $language !== null ) {
-			$queryBuilder->where( [ 'wbxl_language' => $language ] );
-		}
-
-		$text = $mask->getText();
-		if ( $text !== null ) {
-			if ( $options['prefixSearch'] ) {
-				$queryBuilder->where( $dbr->expr(
-					'wbx_text',
-					IExpression::LIKE,
-					new LikeValue( $text, $dbr->anyString() )
-				) );
-			} else {
-				$queryBuilder->where( [ 'wbx_text' => $text ] );
+		if ( $searchLanguage ) {
+			$queryBuilder->where( [ 'wbxl_language' => $searchLanguage ] );
+			if ( is_array( $searchLanguage ) ) {
+				$orderByExpressions = array_map(
+					fn( $lang ) => "wbxl_language={$dbr->addQuotes( $lang )}",
+					// need to reverse the order as ordering via the same column multiple times
+					array_reverse( $searchLanguage )
+				);
+				$queryBuilder->orderBy( implode( ', ', $orderByExpressions ) );
 			}
 		}
 
-		if ( $mask->getTermType() !== null ) {
-			$termType = $mask->getTermType();
+		if ( $options['prefixSearch'] ) {
+			$queryBuilder->where( $dbr->expr(
+				'wbx_text',
+				IExpression::LIKE,
+				new LikeValue( $termText, $dbr->anyString() )
+			) );
+		} else {
+			$queryBuilder->where( [ 'wbx_text' => $termText ] );
 		}
-		if ( $termType !== null ) {
+
+		if ( $termType ) {
 			$termType = is_array( $termType ) ? $termType : [ $termType ];
 			$queryBuilder->where( [ 'wbtl_type_id' => array_map( fn ( $t ) => TermTypeIds::TYPE_IDS[$t], $termType ) ] );
 		}
@@ -183,37 +144,25 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$queryBuilder->offset( $options['OFFSET'] );
 		}
 
-		return $queryBuilder->caller( __METHOD__ )->fetchResultSet();
+		return $queryBuilder;
 	}
 
 	/**
 	 * Modifies the provided terms to use the field names expected by the interface
-	 * rather then the table field names. Also ensures the values are of the correct type.
+	 * rather than the table field names. Also ensures the values are of the correct type.
 	 *
-	 * @param IResultWrapper[] $results
-	 * @param int|null $limit
 	 * @return TermIndexEntry[]
 	 */
-	private function buildTermResult( array $results, ?int $limit = null ): array {
+	private function buildTermResult( IResultWrapper $results ): array {
 		$matchingTerms = [];
-		// Union in SQL doesn't have limit, we need to enforce it here
-		$counter = 0;
-
 		foreach ( $results as $result ) {
-			foreach ( $result as $obtainedTerm ) {
-				$counter += 1;
-				$typeId = (int)$obtainedTerm->wbtl_type_id;
-				$matchingTerms[] = new TermIndexEntry( [
-					'entityId' => $this->getEntityId( $obtainedTerm ),
-					'termType' => array_flip( TermTypeIds::TYPE_IDS )[$typeId],
-					'termLanguage' => $obtainedTerm->wbxl_language,
-					'termText' => $obtainedTerm->wbx_text,
-				] );
-
-				if ( $counter === $limit ) {
-					return $matchingTerms;
-				}
-			}
+			$typeId = (int)$result->wbtl_type_id;
+			$matchingTerms[] = new TermIndexEntry( [
+				'entityId' => $this->getEntityId( $result ),
+				'termType' => array_flip( TermTypeIds::TYPE_IDS )[$typeId],
+				'termLanguage' => $result->wbxl_language,
+				'termText' => $result->wbx_text,
+			] );
 		}
 
 		return $matchingTerms;
