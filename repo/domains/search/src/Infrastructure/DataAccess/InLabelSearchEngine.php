@@ -21,6 +21,7 @@ use Wikibase\Search\Elastic\InLabelSearch;
  */
 class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 	private const DEFAULT_RESULTS_LIMIT = 10;
+	private const DEFAULT_OFFSET = 0;
 
 	private InLabelSearch $inLabelSearch; // @phan-suppress-current-line PhanUndeclaredTypeProperty
 
@@ -33,13 +34,14 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 	public function searchItemByLabel(
 		string $searchTerm,
 		string $languageCode,
-		int $limit = self::DEFAULT_RESULTS_LIMIT
+		int $limit = self::DEFAULT_RESULTS_LIMIT,
+		int $offset = self::DEFAULT_OFFSET
 	): ItemSearchResults {
 		return new ItemSearchResults(
 			...array_map(
 				$this->convertResult( ItemSearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
-				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, $limit )
+				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, $limit, $offset )
 			)
 		);
 	}
