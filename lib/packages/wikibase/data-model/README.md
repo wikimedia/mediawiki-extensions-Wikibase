@@ -1,8 +1,6 @@
 # Wikibase DataModel
 
 [![Build Status](https://github.com/wmde/WikibaseDataModel/actions/workflows/lint-and-test.yaml/badge.svg?branch=master)](https://github.com/wmde/WikibaseDataModel/actions/workflows/lint-and-test.yaml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/?branch=master)
 [![Download count](https://poser.pugx.org/wikibase/data-model/d/total.png)](https://packagist.org/packages/wikibase/data-model)
 [![License](https://poser.pugx.org/wikibase/data-model/license.svg)](https://packagist.org/packages/wikibase/data-model)
 
@@ -89,7 +87,6 @@ Daniel Kinzler and Jeroen De Dauw.
 * [Wikibase DataModel on Packagist](https://packagist.org/packages/wikibase/data-model)
 * [Wikibase DataModel on Ohloh](https://www.ohloh.net/p/wikibasedatamodel/)
 * [Wikibase DataModel on TravisCI](https://travis-ci.org/wmde/WikibaseDataModel)
-* [Wikibase DataModel on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel)
 * [Wikibase DataModel on Wikimedia's Phabricator](https://phabricator.wikimedia.org/project/view/920/)
 
 ## See also

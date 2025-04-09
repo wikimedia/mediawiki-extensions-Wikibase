@@ -1,7 +1,6 @@
 .gitattributes export-ignore
 .github/ export-ignore
 .gitignore export-ignore
-.scrutinizer.yml export-ignore
 composer.json export-ignore
 phpmd.xml export-ignore
 phpunit.xml.dist export-ignore

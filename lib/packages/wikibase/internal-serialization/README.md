@@ -3,8 +3,6 @@
 Library containing serializers and deserializers for the data access layer of [Wikibase](http://wikiba.se/) Repository.
 
 [![Build Status](https://github.com/wmde/WikibaseInternalSerialization/actions/workflows/lint-and-test.yaml/badge.svg?branch=master)](https://github.com/wmde/WikibaseInternalSerialization/actions/workflows/lint-and-test.yaml)
-[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/coverage.png?s=b65f644a99b93ed3aa1a34e45efbccad798d168c)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/badges/quality-score.png?s=1cd66e5c545917f947b4b838b7bfdeee9105843e)](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
 
 On [Packagist](https://packagist.org/packages/wikibase/internal-serialization):
 [![Latest Stable Version](https://poser.pugx.org/wikibase/internal-serialization/version.png)](https://packagist.org/packages/wikibase/internal-serialization)
@@ -114,7 +112,6 @@ Wikibase Internal Serialization has been written by
 ## Links
 
 * [Wikibase Internal Serialization on Packagist](https://packagist.org/packages/wikibase/internal-serialization)
-* [Wikibase Internal Serialization on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
 * [Wikibase Internal Serialization on OpenHub](https://www.openhub.net/p/WikibaseInternalSerialization)
 
 ## See also
