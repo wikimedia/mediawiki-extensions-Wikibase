@@ -381,6 +381,7 @@
 	"wikibase-api-no-such-sitelink": "Sivustolinkkiä sivustolle ”$1” ei löytynyt yritettäessä muokata merkkejä.",
 	"wikibase-api-not-recognized-language": "Annettua kielikoodia ”$1” ei tunnistettu.",
 	"wikibase-api-param-missing": "Vaadittava parametri ”$1” puuttuu.",
+	"wikibase-api-permissiondenied": "Sinulla ei ole tämän toiminnon suorittamiseen tarvittavia oikeuksia.",
 	"wikibase-self-conflict-patched": "Muokkauksesi paikattiin viimeisimpään versioon, kumoten joitain välissä tekemiäsi muutoksia.",
 	"wikibase-conflict-patched": "Muokkauksesi paikattiin viimeisimpään versioon.",
 	"wikibase-restoreold": "palauta",

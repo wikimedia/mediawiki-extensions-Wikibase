@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "suqusiqpaa",
-	"wikibase-add": "ilalugu"
+	"wikibase-add": "ilalugu",
+	"wikibase-label-empty": "pitaqaqtittiniq piujuq uvannut",
+	"wikibase-description-empty": "nalunaijaqsimajuqanngilaq",
+	"wikibase-sitelinks-special": "usijaujunut pauns"
 }

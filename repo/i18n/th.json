@@ -9,7 +9,8 @@
 			"Trisorn Triboon",
 			"Ekminarin",
 			"Patsagorn Y.",
-			"RidJasper"
+			"RidJasper",
+			"Prem4826"
 		]
 	},
 	"wikibase-desc": "คลังข้อมูลแบบมีโครงสร้าง",
@@ -17,7 +18,7 @@
 	"wikibase-entity-item": "รายการ",
 	"wikibase-entity-property": "คุณสมบัติ",
 	"wikibase-entity-query": "คิวรี",
-	"nstab-property": "คุณลักษณะ",
+	"nstab-property": "คุณสมบัติ",
 	"tooltip-ca-nstab-property": "ดูคุณลักษณะ",
 	"wikibase-edit": "แก้ไข",
 	"wikibase-save": "บันทึก",
