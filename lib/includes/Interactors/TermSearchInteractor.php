@@ -18,6 +18,6 @@ interface TermSearchInteractor {
 	 *
 	 * @return TermSearchResult[]
 	 */
-	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes );
+	public function searchForEntities( string $text, string $languageCode, string $entityType, array $termTypes );
 
 }
