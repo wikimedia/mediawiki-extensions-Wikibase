@@ -16,57 +16,61 @@
 	 * @extends Variation
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
-	 *
-	 * @constructor
 	 */
-	MODULE.variation( datamodel.PropertyValueSnak, Variation, {
+	class Value extends Variation {
 		/**
-		 * The `valueview` widget instance or `null` if the `Property`'s `DataType` is not
-		 * supported.
-		 *
-		 * @property {jQuery.valueview|null} [_valueView=null]
-		 * @private
+		 * @inheritDoc
 		 */
-		_valueView: null,
-
-		/**
-		 * The `DataValue` last set in `_setValue()`. This field will not be updated, it only serves
-		 * to remember the value until `draw()` is called. Afterwards, it is set to `false` until
-		 * the next call to `_setValue()`.
-		 *
-		 * @property {dataValues.DataValue|null|false} [_newDataValue=null]
-		 * @private
-		 */
-		_newDataValue: null,
+		setupVariation() {
+			/**
+			 * The `valueview` widget instance or `null` if the `Property`'s `DataType` is not
+			 * supported.
+			 *
+			 * @property {jQuery.valueview|null} [_valueView=null]
+			 * @private
+			 */
+			this._valueView = null;
+			/**
+			 * The `DataValue` last set in `_setValue()`. This field will not be updated, it only serves
+			 * to remember the value until `draw()` is called. Afterwards, it is set to `false` until
+			 * the next call to `_setValue()`.
+			 *
+			 * @property {dataValues.DataValue|null|false} [_newDataValue=null]
+			 * @private
+			 */
+			this._newDataValue = null;
+			this.variationSnakConstructor = datamodel.PropertyValueSnak;
+			this.variationBaseClass = 'wikibase-snakview-variation-valuesnak';
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function () {
+		destroy() {
 			this.$viewPort.css( 'height', 'auto' );
 			if ( this._valueView ) {
 				this._valueView.element.off( '.' + this.variationBaseClass );
 				this._valueView.destroy();
 			}
 			Variation.prototype.destroy.call( this );
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setValue: function ( value ) {
+		_setValue( value ) {
 			this._newDataValue = null;
 			if ( value.datavalue ) {
 				this._newDataValue = dv.newDataValue( value.datavalue.type, value.datavalue.value );
 			}
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 * @protected
 		 */
-		_getValue: function () {
+		_getValue() {
 			var dataValue = null;
 
 			if ( this._newDataValue !== false ) {
@@ -80,12 +84,12 @@
 			}
 
 			return !dataValue ? {} : { datavalue: dataValue };
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		draw: function () {
+		draw() {
 			var self = this,
 				newValue = this._newDataValue;
 
@@ -252,12 +256,12 @@
 			} else {
 				_render();
 			}
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		startEditing: function () {
+		startEditing() {
 			if ( !this._valueView || this._valueView.isInEditMode() ) {
 				return;
 			}
@@ -274,26 +278,26 @@
 			this._valueView.startEditing();
 			this._attachEventHandlers();
 			this.draw();
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		stopEditing: function ( dropValue ) {
+		stopEditing( dropValue ) {
 			if ( !this._valueView || !this._valueView.isInEditMode() ) {
 				return;
 			}
 			this._valueView.stopEditing( dropValue );
 			this._removeEventHandlers();
 			this.draw();
-		},
+		}
 
 		/**
 		 * Attaches event handlers to the `valueview` widget's element.
 		 *
 		 * @private
 		 */
-		_attachEventHandlers: function () {
+		_attachEventHandlers() {
 			var self = this;
 
 			this._removeEventHandlers();
@@ -305,16 +309,16 @@
 			.on( 'valueviewchange.' + this.variationBaseClass, ( event ) => {
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} );
-		},
+		}
 
 		/**
 		 * Removes event handlers from the `valueview` widget's element.
 		 *
 		 * @private
 		 */
-		_removeEventHandlers: function () {
+		_removeEventHandlers() {
 			this._valueView.element.off( '.' + this.variationBaseClass );
-		},
+		}
 
 		/**
 		 * Creates and inserts a new `jQuery.valueview` while destroying the previously used
@@ -329,7 +333,7 @@
 		 * @param {string} [propertyId]
 		 * @return {boolean} Whether a `jQuery.valueview` has actually been instantiated.
 		 */
-		_createNewValueView: function ( dataValue, dataType, propertyId ) {
+		_createNewValueView( dataValue, dataType, propertyId ) {
 			var $valueViewDom;
 
 			if ( this._valueView ) {
@@ -363,50 +367,52 @@
 			);
 
 			return true;
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		disable: function () {
+		disable() {
 			if ( this._valueView ) {
 				this._valueView.disable();
 			}
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		enable: function () {
+		enable() {
 			if ( this._valueView ) {
 				this._valueView.enable();
 			}
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		isFocusable: function () {
+		isFocusable() {
 			return true;
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		focus: function () {
+		focus() {
 			if ( this._valueView && this._viewState.isDisabled() === false ) {
 				this._valueView.focus();
 			}
-		},
+		}
 
 		/**
 		 * @inheritdoc
 		 */
-		blur: function () {
+		blur() {
 			if ( this._valueView ) {
 				this._valueView.blur();
 			}
 		}
-	} );
+	}
+
+	MODULE.registerVariation( 'value', Value );
 
 }( dataValues ) );
