@@ -21,7 +21,8 @@
 			"Vogone",
 			"Vriullop",
 			"Winston Sung",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Leptictidium"
 		]
 	},
 	"wikibase-desc": "Repositori de dades estructurades",
@@ -268,8 +269,8 @@
 	"wikibase-modifyterm-language": "Codi d'idioma:",
 	"special-mergeitems": "Fusiona dos elements",
 	"wikibase-mergeitems-intro": "Si fusioneu dos elements, totes les etiquetes, descripcions, àlies, enllaços de lloc i declaracions es mouran d'un element a l'altre.",
-	"wikibase-mergeitems-fromid": "L'ID d'on fusionar",
-	"wikibase-mergeitems-toid": "L'ID a on fusionar",
+	"wikibase-mergeitems-fromid": "L'ID des d'on fusionar",
+	"wikibase-mergeitems-toid": "L'ID on fusionar",
 	"wikibase-mergeitems-submit": "Fusiona els elements",
 	"wikibase-mergeitems-success": "$1 ha sigut fusionat amb $3 i redirigit.",
 	"wikibase-itemmerge-redirect": "Aquests elements podrien ser ja fusionats.",
