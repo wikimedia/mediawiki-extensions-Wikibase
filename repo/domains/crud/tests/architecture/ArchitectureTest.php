@@ -63,10 +63,11 @@ class ArchitectureTest {
 	 *  - other classes from their own namespace
 	 */
 	private function allowedDomainServicesDependencies(): array {
-		return array_merge( $this->allowedDomainModelDependencies(), [
+		return [
+			...$this->allowedDomainModelDependencies(),
 			...$this->allowedDataModelServices(),
 			Selector::inNamespace( self::DOMAIN_SERVICES ),
-		] );
+		];
 	}
 
 	public function testSerialization(): Rule {
@@ -83,9 +84,10 @@ class ArchitectureTest {
 	 *  - other classes from its own namespace
 	 */
 	private function allowedSerializationDependencies(): array {
-		return array_merge( $this->allowedDomainServicesDependencies(), [
+		return [
+			...$this->allowedDomainServicesDependencies(),
 			Selector::inNamespace( self::SERIALIZATION ),
-		] );
+		];
 	}
 
 	public function testValidation(): Rule {
@@ -101,9 +103,10 @@ class ArchitectureTest {
 	 *  - other classes from its own namespace
 	 */
 	private function allowedValidationDependencies(): array {
-		return array_merge( $this->allowedSerializationDependencies(), [
+		return [
+			...$this->allowedSerializationDependencies(),
 			Selector::inNamespace( self::VALIDATION ),
-		] );
+		];
 	}
 
 	public function testUseCases(): Rule {
@@ -120,10 +123,11 @@ class ArchitectureTest {
 	 *  - other classes from their own namespace
 	 */
 	private function allowedUseCasesDependencies(): array {
-		return array_merge( $this->allowedValidationDependencies(), [
+		return [
+			...$this->allowedValidationDependencies(),
 			Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ),
 			Selector::inNamespace( self::USE_CASES ),
-		] );
+		];
 	}
 
 	public function testUseCaseRequestValidation(): Rule {
@@ -140,10 +144,11 @@ class ArchitectureTest {
 	 *  - other classes from their own namespace
 	 */
 	private function allowedUseCaseRequestValidationDependencies(): array {
-		return array_merge( $this->allowedValidationDependencies(), [
+		return [
+			...$this->allowedValidationDependencies(),
 			Selector::inNamespace( self::USE_CASES ),
 			Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ),
-		] );
+		];
 	}
 
 	private function allowedDataModelServices(): array {
