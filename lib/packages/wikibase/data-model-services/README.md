@@ -1,8 +1,6 @@
 # Wikibase DataModel Services
 
 [![Build Status](https://github.com/wmde/WikibaseDataModelServices/actions/workflows/lint-and-test.yaml/badge.svg?branch=master)](https://github.com/wmde/WikibaseDataModelServices/actions/workflows/lint-and-test.yaml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices/?branch=master)
 [![Download count](https://poser.pugx.org/wikibase/data-model-services/d/total.png)](https://packagist.org/packages/wikibase/data-model-services)
 [![License](https://poser.pugx.org/wikibase/data-model-services/license.svg)](https://packagist.org/packages/wikibase/data-model-services)
 
@@ -71,8 +69,7 @@ Contributions should be made to the directories there using MediaWiki's [Gerrit 
 ## Links
 
 * [Wikibase DataModel Services on Packagist](https://packagist.org/packages/wikibase/data-model-services)
-* [Wikibase DataModel Services on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices)
- 
+
 ## See also
 
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)

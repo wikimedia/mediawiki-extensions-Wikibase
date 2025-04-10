@@ -2,7 +2,6 @@
 Introduction to Wikibase
 ====================
 [![Wikibase Secondary CI](https://github.com/wikimedia/Wikibase/actions/workflows/secondaryCI.yml/badge.svg)](https://github.com/wikimedia/Wikibase/actions/workflows/secondaryCI.yml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png)](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/)
 
 The Wikibase.git package is part of the [Wikibase software](http://wikiba.se/) and consists of
 multiple MediaWiki extensions and other components.
