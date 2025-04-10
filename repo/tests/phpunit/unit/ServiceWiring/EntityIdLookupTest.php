@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -21,8 +22,10 @@ class EntityIdLookupTest extends ServiceWiringTestCase {
 			'WikibaseRepo.EntityContentFactory',
 			$this->createMock( EntityContentFactory::class )
 		);
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
+		$this->mockService(
+			'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class )
+		);
 
 		$this->assertInstanceOf(
 			EntityIdLookup::class,

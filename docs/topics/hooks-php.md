@@ -70,14 +70,7 @@ Parameters:
   * An associative array mapping contexts ('term', 'monolingualtext', extension-specific…) to ContentLanguage objects.
 
 #### GetEntityContentModelForTitle {#GetEntityContentModelForTitle}
-Called by [EntityContentFactory] to see what is the entity content type of the Title.
-Extensions can override it so entity content type does not equal page content type.
-
-Parameters:
-* $title
-  * Title object for the page
-* &$contentType
-  * Content type for the page. Extensions can override this.
+See @ref Wikibase::Repo::Hooks::GetEntityContentModelForTitleHook.
 
 #### WikibaseRepoOnParserOutputUpdaterConstruction {#WikibaseRepoOnParserOutputUpdaterConstruction}
 Allows extensions to register extra EntityParserOutputUpdater implementations.
@@ -154,7 +147,6 @@ Parameters:
 [WikibaseRepo::getContentLanguages()]: @ref Wikibase::Repo::WikibaseRepo::getContentLanguages()
 [WikibaseRepo::getEntityNamespaceLookup()]: @ref Wikibase::Repo::WikibaseRepo::getEntityNamespaceLookup()
 [WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
-[EntityContentFactory]: @ref Wikibase::Repo::Content::EntityContentFactory
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
 [UsageAccumulator]: @ref Wikibase::Client::Usage::UsageAccumulator

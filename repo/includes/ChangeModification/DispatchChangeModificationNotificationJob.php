@@ -54,7 +54,7 @@ abstract class DispatchChangeModificationNotificationJob extends Job {
 		$this->initServices(
 			new ContentHandlerEntityIdLookup(
 				WikibaseRepo::getEntityContentFactory( $mwServices ),
-				$mwServices->getHookContainer()
+				WikibaseRepo::getHookRunner( $mwServices )
 			),
 			WikibaseRepo::getLogger( $mwServices ),
 			$mwServices->getJobQueueGroupFactory()

@@ -11,6 +11,7 @@ use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
+use Wikibase\Repo\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -70,7 +71,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->newFactory();
 		$entityIdLookup = new ContentHandlerEntityIdLookup(
 			$factory,
-			$this->getServiceContainer()->getHookContainer()
+			$this->createMock( GetEntityContentModelForTitleHook::class )
 		);
 
 		$title = Title::makeTitle( $factory->getNamespaceForType( Item::ENTITY_TYPE ), 'Q42' );
@@ -84,7 +85,7 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->newFactory();
 		$entityIdLookup = new ContentHandlerEntityIdLookup(
 			$factory,
-			$this->getServiceContainer()->getHookContainer()
+			$this->createMock( GetEntityContentModelForTitleHook::class )
 		);
 
 		/** @var Title[] $titles */
