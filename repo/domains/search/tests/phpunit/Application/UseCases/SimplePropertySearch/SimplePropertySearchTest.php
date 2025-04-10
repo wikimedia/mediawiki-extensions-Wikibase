@@ -22,6 +22,8 @@ class SimplePropertySearchTest extends TestCase {
 	public function testCanExecute(): void {
 		$query = 'needle';
 		$language = 'en';
+		$limit = 10;
+		$offset = 0;
 		$expectedResults = $this->createStub( PropertySearchResults::class );
 
 		$validator = $this->createStub( SimplePropertySearchValidator::class );
@@ -34,7 +36,7 @@ class SimplePropertySearchTest extends TestCase {
 		$this->assertEquals(
 			$expectedResults,
 			$this->newUseCase( $validator, $searchEngine )
-				->execute( new SimplePropertySearchRequest( $query, $language ) )
+				->execute( new SimplePropertySearchRequest( $query, $language, $limit, $offset ) )
 				->getResults()
 		);
 	}

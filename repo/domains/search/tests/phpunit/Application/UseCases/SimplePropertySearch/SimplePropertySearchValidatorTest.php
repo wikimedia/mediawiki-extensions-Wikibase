@@ -29,13 +29,13 @@ class SimplePropertySearchValidatorTest extends TestCase {
 	 */
 	public function testValidate_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new SimplePropertySearchRequest( 'search term', 'en' ) );
+			->validate( new SimplePropertySearchRequest( 'search term', 'en', 10, 0 ) );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new SimplePropertySearchRequest( 'search term', 'xyz' ) );
+				->validate( new SimplePropertySearchRequest( 'search term', 'xyz', 10, 0 ) );
 
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {

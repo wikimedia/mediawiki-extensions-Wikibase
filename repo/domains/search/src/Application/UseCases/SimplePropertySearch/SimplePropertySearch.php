@@ -29,8 +29,15 @@ class SimplePropertySearch {
 
 		$searchTerm = $propertyRequest->getQuery();
 		$language = $propertyRequest->getLanguage();
+		$limit = $propertyRequest->getLimit();
+		$offset = $propertyRequest->getOffset();
 
-		return new SimplePropertySearchResponse( $this->searchEngine->searchPropertyByLabel( $searchTerm, $language ) );
+		return new SimplePropertySearchResponse( $this->searchEngine->searchPropertyByLabel(
+			$searchTerm,
+			$language,
+			$limit,
+			$offset
+		) );
 	}
 
 }

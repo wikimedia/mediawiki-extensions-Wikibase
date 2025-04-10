@@ -109,7 +109,7 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new PropertySearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchPropertyByLabel( $searchTerm, $languageCode )
+			$this->newEngine()->searchPropertyByLabel( $searchTerm, $languageCode, 10, 0 )
 		);
 	}
 
