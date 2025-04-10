@@ -77,7 +77,6 @@ export default defineComponent( {
 			this.$emit( 'proceed' );
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

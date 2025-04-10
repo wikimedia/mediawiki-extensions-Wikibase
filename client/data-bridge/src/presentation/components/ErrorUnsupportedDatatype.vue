@@ -64,7 +64,6 @@ export default defineComponent( {
 			).mount( document.createElement( 'span' ) ).$el;
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

@@ -162,7 +162,6 @@ export default defineComponent( {
 			}
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 <style lang="scss">

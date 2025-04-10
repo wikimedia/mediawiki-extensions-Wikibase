@@ -9,7 +9,6 @@ import { defineComponent } from 'vue';
 
 export default defineComponent( {
 	name: 'RadioGroup',
-	compatConfig: { MODE: 3 },
 } );
 </script>
 
