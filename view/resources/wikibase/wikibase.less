@@ -651,9 +651,12 @@ div.listview-item.wikibase-referenceview-tabs.ui-tabs.ui-widget.ui-widget-conten
 		width: auto;
 	}
 
-	/* Remove default border for tabs */
+	/* Override some default styles for tab bar */
 	.ui-widget-header {
+		border-radius: 0;
 		border: 0;
+		background-color: @background-color-base;
+		background-image: none;
 	}
 
 	/* Tab link style */
