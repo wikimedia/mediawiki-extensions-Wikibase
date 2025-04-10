@@ -13,10 +13,20 @@ use PHPat\Test\PHPat;
  */
 class ArchitectureTest {
 
+	private const SEARCH_DOMAIN = 'Wikibase\Repo\Domains\Search';
 	private const DOMAIN_MODEL = 'Wikibase\Repo\Domains\Search\Domain\Model';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\Domains\Search\Domain\Services';
 	private const VALIDATION = 'Wikibase\Repo\Domains\Search\Application\Validation';
 	private const USE_CASES = 'Wikibase\Repo\Domains\Search\Application\UseCases';
+
+	/** NOTE: This test is currently overly simplistic and too strict (see T391829). */
+	public function testNoCrossDomainDependencies(): Rule {
+		return PHPat::rule()
+			->classes( Selector::inNamespace( self::SEARCH_DOMAIN ) )
+			->shouldNotDependOn()
+			->classes( Selector::inNamespace( 'Wikibase\Repo\Domains' ) )
+			->excluding( Selector::inNamespace( self::SEARCH_DOMAIN ) );
+	}
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
