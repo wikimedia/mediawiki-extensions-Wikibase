@@ -20,8 +20,6 @@ use Wikibase\Search\Elastic\InLabelSearch;
  * @license GPL-2.0-or-later
  */
 class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
-	private const DEFAULT_RESULTS_LIMIT = 10;
-	private const DEFAULT_OFFSET = 0;
 
 	private InLabelSearch $inLabelSearch; // @phan-suppress-current-line PhanUndeclaredTypeProperty
 
@@ -34,8 +32,8 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 	public function searchItemByLabel(
 		string $searchTerm,
 		string $languageCode,
-		int $limit = self::DEFAULT_RESULTS_LIMIT,
-		int $offset = self::DEFAULT_OFFSET
+		int $limit,
+		int $offset
 	): ItemSearchResults {
 		return new ItemSearchResults(
 			...array_map(
@@ -49,8 +47,8 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 	public function searchPropertyByLabel(
 		string $searchTerm,
 		string $languageCode,
-		int $limit = self::DEFAULT_RESULTS_LIMIT,
-		int $offset = self::DEFAULT_OFFSET
+		int $limit,
+		int $offset
 	): PropertySearchResults {
 		return new PropertySearchResults(
 			...array_map(
