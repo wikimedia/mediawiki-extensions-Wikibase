@@ -142,9 +142,7 @@ abstract class EntityContent extends AbstractContent {
 		$searchTextGenerator = new FingerprintSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getEntity() );
 
-		if ( !MediaWikiServices::getInstance()->getHookContainer()
-			->run( 'WikibaseTextForSearchIndex', [ $this, &$text ] )
-		) {
+		if ( !WikibaseRepo::getHookRunner()->onWikibaseTextForSearchIndex( $this, $text ) ) {
 			return '';
 		}
 

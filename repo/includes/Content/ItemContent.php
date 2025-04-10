@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Content;
 use BadMethodCallException;
 use InvalidArgumentException;
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -193,9 +193,7 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
 
-		if ( !MediaWikiServices::getInstance()->getHookContainer()
-			->run( 'WikibaseTextForSearchIndex', [ $this, &$text ] )
-		) {
+		if ( !WikibaseRepo::getHookRunner()->onWikibaseTextForSearchIndex( $this, $text ) ) {
 			return '';
 		}
 
