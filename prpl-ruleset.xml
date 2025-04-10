@@ -31,6 +31,7 @@
 				<element key="repo/rest-api/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
 				<element key="repo/domains/search/src" value="Wikibase\Repo\Domains\Search"/>
 				<element key="repo/domains/search/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Search"/>
+				<element key="repo/domains/search/tests/architecture" value="Wikibase\Repo\Tests\Domains\Search\Architecture"/>
 				<element key="repo/domains/crud/src" value="Wikibase\Repo\Domains\Crud"/>
 				<element key="repo/domains/crud/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Crud"/>
 				<element key="repo/domains/crud/tests/architecture" value="Wikibase\Repo\Tests\Domains\Crud\Architecture"/>
