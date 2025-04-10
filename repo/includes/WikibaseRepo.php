@@ -100,6 +100,7 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -317,6 +318,15 @@ class WikibaseRepo {
 	): ItemRedirectCreationInteractor {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.ItemRedirectCreationInteractor' );
+	}
+
+	/**
+	 * Get the WikibaseRepo hook runner. This should only be used in Wikibase itself.
+	 * (If other extensions need to run hooks, even Wikibase-related ones, they should create their own hook runner.)
+	 */
+	public static function getHookRunner( ?ContainerInterface $services = null ): WikibaseRepoHookRunner {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.HookRunner' );
 	}
 
 	public static function getEditFilterHookRunner( ?ContainerInterface $services = null ): EditFilterHookRunner {

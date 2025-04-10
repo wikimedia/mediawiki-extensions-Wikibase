@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\View;
 
-use MediaWiki\HookContainer\HookContainer;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 
@@ -19,11 +18,11 @@ class ScopedTypeaheadSearchConfig {
 	private ?array $configuration = null;
 
 	public function __construct(
-		HookContainer $hookContainer,
+		WikibaseRepoHookRunner $hookRunner,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		array $enabledEntityTypesForSearch
 	) {
-		$this->hookRunner = new WikibaseRepoHookRunner( $hookContainer );
+		$this->hookRunner = $hookRunner;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->enabledEntityTypesForSearch = $enabledEntityTypesForSearch;
 	}
