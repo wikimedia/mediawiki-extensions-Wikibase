@@ -17,8 +17,8 @@
 					"invalid-query-parameter": {
 						"value": {
 							"code": "invalid-query-parameter",
-							"message": "Invalid query parameter: 'language'",
-							"context": { "parameter": "language" }
+							"message": "Invalid query parameter: '{query_parameter}'",
+							"context": { "parameter": "{query_parameter}" }
 						}
 					}
 				}
