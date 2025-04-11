@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use InvalidArgumentException;
@@ -15,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
@@ -25,25 +28,11 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
  */
 class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $namespaceLookup;
-
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $titleLookup;
-
-	/**
-	 * @var EntityContentFactory
-	 */
-	private $entityContentFactory;
-
-	/**
-	 * @var HookContainer
-	 */
-	private $hookContainer;
+	private EntityNamespaceLookup $namespaceLookup;
+	private EntityTitleStoreLookup $titleLookup;
+	private EntityContentFactory $entityContentFactory;
+	private HookContainer $hookContainer;
+	private WikibaseRepoHookRunner $hookRunner;
 
 	public function __construct(
 		EntityNamespaceLookup $namespaceLookup,
@@ -55,6 +44,7 @@ class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->hookContainer = $hookContainer;
+		$this->hookRunner = new WikibaseRepoHookRunner( $hookContainer );
 	}
 
 	/**
@@ -117,9 +107,8 @@ class MediaWikiEditFilterHookRunner implements EditFilterHookRunner {
 
 		$slotRole = $this->namespaceLookup->getEntitySlotRole( $entityType );
 
-		if ( !$this->hookContainer->run(
-			'EditFilterMergedContent',
-			[ $context, $entityContent, &$filterStatus, $summary, $context->getUser(), false, $slotRole ]
+		if ( !$this->hookRunner->onEditFilterMergedContent(
+			$context, $entityContent, $filterStatus, $summary, $context->getUser(), false, $slotRole
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );

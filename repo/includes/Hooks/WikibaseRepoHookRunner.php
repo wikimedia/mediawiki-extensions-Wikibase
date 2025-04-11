@@ -4,8 +4,13 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\Content\Content;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use Wikibase\DataAccess\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
@@ -23,6 +28,7 @@ class WikibaseRepoHookRunner implements
 	GetEntityContentModelForTitleHook,
 	WikibaseChangeNotificationHook,
 	WikibaseContentModelMappingHook,
+	WikibaseEditFilterMergedContentHook,
 	WikibaseRepoDataTypesHook,
 	WikibaseRepoEntityNamespacesHook,
 	WikibaseRepoEntitySearchHelperCallbacksHook,
@@ -37,6 +43,22 @@ class WikibaseRepoHookRunner implements
 
 	public function __construct( HookContainer $container ) {
 		$this->hookContainer = $container;
+	}
+
+	/** @inheritDoc */
+	public function onEditFilterMergedContent(
+		IContextSource $context,
+		Content $content,
+		Status $status,
+		$summary,
+		User $user,
+		$minoredit,
+		string $slotRole = SlotRecord::MAIN
+	) {
+		return $this->hookContainer->run(
+			'EditFilterMergedContent',
+			[ $context, $content, &$status, $summary, $user, $minoredit, $slotRole ]
+		);
 	}
 
 	public function onGetEntityByLinkedTitleLookup( EntityByLinkedTitleLookup &$lookup ): void {
