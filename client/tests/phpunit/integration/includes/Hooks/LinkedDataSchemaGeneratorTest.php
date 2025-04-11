@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use File;
+use MediaWiki\FileRepo\File\File;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;

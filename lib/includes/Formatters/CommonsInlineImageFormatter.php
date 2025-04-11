@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Formatters;
 
 use DataValues\StringValue;
-use File;
 use InvalidArgumentException;
+use MediaWiki\FileRepo\File\File;
 use MediaWiki\Html\Html;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;

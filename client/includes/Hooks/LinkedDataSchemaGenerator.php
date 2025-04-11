@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use File;
+use MediaWiki\FileRepo\File\File;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Output\OutputPage;

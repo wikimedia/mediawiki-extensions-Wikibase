@@ -4,9 +4,9 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use File;
 use InvalidArgumentException;
 use MediaTransformOutput;
+use MediaWiki\FileRepo\File\File;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\ParserOptions;
 use MediaWikiIntegrationTestCase;
