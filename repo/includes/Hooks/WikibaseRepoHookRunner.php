@@ -9,6 +9,7 @@ use MediaWiki\Title\Title;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\ParserOutput\StatementDataUpdater;
 
 /**
  * Partial implementation of a hook runner for WikibaseRepo.
@@ -20,6 +21,7 @@ class WikibaseRepoHookRunner implements
 	GetEntityByLinkedTitleLookupHook,
 	GetEntityContentModelForTitleHook,
 	WikibaseChangeNotificationHook,
+	WikibaseRepoOnParserOutputUpdaterConstructionHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
 	WikibaseTextForSearchIndexHook
@@ -51,6 +53,17 @@ class WikibaseRepoHookRunner implements
 		$this->hookContainer->run(
 			'WikibaseChangeNotification',
 			[ $change ],
+			[ 'abortable' => false ]
+		);
+	}
+
+	public function onWikibaseRepoOnParserOutputUpdaterConstruction(
+		StatementDataUpdater $statementUpdater,
+		array &$entityUpdaters
+	): void {
+		$this->hookContainer->run(
+			'WikibaseRepoOnParserOutputUpdaterConstruction',
+			[ $statementUpdater, &$entityUpdaters ],
 			[ 'abortable' => false ]
 		);
 	}

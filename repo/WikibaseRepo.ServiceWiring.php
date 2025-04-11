@@ -920,7 +920,7 @@ return [
 			$services->getStatsdDataFactory(),
 			$services->getRepoGroup(),
 			$services->getLinkBatchFactory(),
-			$services->getHookContainer(),
+			WikibaseRepo::getHookRunner( $services ),
 			WikibaseRepo::getMobileSite( $services ),
 			$settings->getSetting( 'preferredGeoDataProperties' ),
 			$settings->getSetting( 'preferredPageImagesProperties' ),

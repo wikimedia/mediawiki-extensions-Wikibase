@@ -73,11 +73,7 @@ Parameters:
 See @ref Wikibase::Repo::Hooks::GetEntityContentModelForTitleHook.
 
 #### WikibaseRepoOnParserOutputUpdaterConstruction {#WikibaseRepoOnParserOutputUpdaterConstruction}
-Allows extensions to register extra EntityParserOutputUpdater implementations.
-
-Parameters:
-* $statementUpdater
-* &$entityUpdaters
+See @ref Wikibase::Repo::Hooks::WikibaseRepoOnParserOutputUpdaterConstructionHook.
 
 #### GetEntityByLinkedTitleLookup {#GetEntityByLinkedTitleLookup}
 See @ref Wikibase::Repo::Hooks::GetEntityByLinkedTitleLookupHook.
