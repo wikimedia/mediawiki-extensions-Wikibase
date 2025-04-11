@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Site\SiteStore;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -31,7 +31,7 @@ class LangLinkHandlerFactoryTest extends \MediaWikiUnitTestCase {
 			$this->createMock( SiteLinkLookup::class ),
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( SiteStore::class ),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseClientHookRunner::class ),
 			new NullLogger(),
 			'srwiki',
 			[ 'wikipedia' ]

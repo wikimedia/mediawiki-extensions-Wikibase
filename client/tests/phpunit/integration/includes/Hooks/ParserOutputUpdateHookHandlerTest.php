@@ -6,7 +6,6 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Content\Content;
 use MediaWiki\Content\ContentHandler;
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
@@ -23,6 +22,7 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
@@ -241,7 +241,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup( $siteLinkData ),
 			$sidebarLinkBadgeDisplay,
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseClientHookRunner::class ),
 			new NullLogger()
 		);
 	}
@@ -604,7 +604,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->getSiteLookup(),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseClientHookRunner::class ),
 			new NullLogger(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkAllowedSiteGroups' )
