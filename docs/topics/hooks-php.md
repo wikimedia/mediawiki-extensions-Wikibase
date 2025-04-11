@@ -87,10 +87,7 @@ Parameters:
 * &$entityUpdaters
 
 #### GetEntityByLinkedTitleLookup {#GetEntityByLinkedTitleLookup}
-Allows extensions to add custom EntityByLinkedTitleLookup services.
-
-Parameters:
-* &$lookup
+See @ref Wikibase::Repo::Hooks::GetEntityByLinkedTitleLookupHook.
 
 Client
 ------------------------------------------------------------

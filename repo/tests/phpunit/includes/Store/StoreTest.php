@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
-use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
 use ObjectCacheFactory;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -13,6 +12,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Repo\Hooks\GetEntityByLinkedTitleLookupHook;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
@@ -48,7 +48,7 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->createMock( IdGenerator::class ),
 			$this->createMock( WikibaseServices::class ),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( GetEntityByLinkedTitleLookupHook::class ),
 			new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',

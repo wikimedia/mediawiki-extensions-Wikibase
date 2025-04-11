@@ -22,6 +22,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikibase\Repo\Hooks\GetEntityByLinkedTitleLookupHook;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
@@ -65,7 +66,7 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->createMock( IdGenerator::class ),
 			$wikibaseServices,
-			$this->getServiceContainer()->getHookContainer(),
+			$this->createMock( GetEntityByLinkedTitleLookupHook::class ),
 			new DatabaseEntitySource( 'testsource', 'testdb', [], '', '', '', '' ),
 			new SettingsArray( [
 				'sharedCacheKeyPrefix' => 'wikibase_shared/testdb',
