@@ -13,6 +13,7 @@ use Wikibase\Lib\Changes\EntityChange;
  * @license GPL-2.0-or-later
  */
 class WikibaseClientHookRunner implements
+	WikibaseClientDataTypesHook,
 	WikibaseClientSiteLinksForItemHook,
 	WikibaseHandleChangeHook,
 	WikibaseHandleChangesHook
@@ -65,6 +66,15 @@ class WikibaseClientHookRunner implements
 				&$siteLinks,
 				$usageAccumulator,
 			],
+			[ 'abortable' => false ]
+		);
+	}
+
+	/** @inheritDoc */
+	public function onWikibaseClientDataTypes( array &$dataTypeDefinitions ): void {
+		$this->hookContainer->run(
+			'WikibaseClientDataTypes',
+			[ &$dataTypeDefinitions ],
 			[ 'abortable' => false ]
 		);
 	}

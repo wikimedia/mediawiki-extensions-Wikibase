@@ -82,16 +82,7 @@ Client
 ------------------------------------------------------------
 
 #### WikibaseClientDataTypes {#WikibaseClientDataTypes}
-Called when constructing the top-level [WikibaseClient] factory
-May be used to define additional data types
-See also the [WikibaseRepoDataTypes](#WikibaseRepoDataTypes) hook.
-
-Hook handlers may add additional definitions.
-See the [datatypes documentation] for details.
-
-Parameters:
-* &$dataTypeDefinitions
-  * The array of data type definitions, as defined by WikibaseClient.datatypes.php.
+See @ref Wikibase::Client::Hooks::WikibaseClientDataTypesHook
 
 #### WikibaseClientEntityTypes {#WikibaseClientEntityTypes}
 Called when constructing the top-level [WikibaseClient] factory

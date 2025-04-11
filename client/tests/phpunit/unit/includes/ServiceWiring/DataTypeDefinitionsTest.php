@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
@@ -27,6 +28,10 @@ class DataTypeDefinitionsTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstruction(): void {
+		$this->mockService(
+			'WikibaseClient.HookRunner',
+			$this->createMock( WikibaseClientHookRunner::class )
+		);
 		$this->assertInstanceOf(
 			DataTypeDefinitions::class,
 			$this->getService( 'WikibaseClient.DataTypeDefinitions' )
@@ -34,11 +39,15 @@ class DataTypeDefinitionsTest extends ServiceWiringTestCase {
 	}
 
 	public function testRunsHook(): void {
-		$this->configureHookContainer( [
-			'WikibaseClientDataTypes' => [ function ( array &$dataTypes ) {
+		$mockRunner = $this->createMock( WikibaseClientHookRunner::class );
+		$mockRunner->method( 'onWikibaseClientDataTypes' )
+			->willReturnCallback( function( &$dataTypes ) {
 				$dataTypes['PT:test'] = [ 'value-type' => 'string' ];
-			} ],
-		] );
+			} );
+		$this->mockService(
+			'WikibaseClient.HookRunner',
+			$mockRunner
+		);
 
 		/** @var DataTypeDefinitions $dataTypeDefinitions */
 		$dataTypeDefinitions = $this->getService( 'WikibaseClient.DataTypeDefinitions' );

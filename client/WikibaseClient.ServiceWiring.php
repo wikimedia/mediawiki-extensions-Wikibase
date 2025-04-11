@@ -258,7 +258,7 @@ return [
 			$baseDataTypes
 		);
 
-		$services->getHookContainer()->run( 'WikibaseClientDataTypes', [ &$dataTypes ] );
+		WikibaseClient::getHookRunner( $services )->onWikibaseClientDataTypes( $dataTypes );
 
 		$settings = WikibaseClient::getSettings( $services );
 
