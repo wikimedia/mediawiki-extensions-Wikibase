@@ -30,11 +30,6 @@ use Wikibase\Search\Elastic\InLabelSearch;
  */
 class InLabelSearchEngineTest extends TestCase {
 
-	// The following constants should be extracted to a common location (such as a static const
-	// class or a config file) or kept in sync with the actual limit in the InLabelSearch class.
-	private const DEFAULT_RESULTS_LIMIT = 10;
-	private const DEFAULT_OFFSET = 0;
-
 	public static function setUpBeforeClass(): void {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
 			self::markTestSkipped( 'CirrusSearch needs to be enabled to run this test' );
@@ -47,8 +42,8 @@ class InLabelSearchEngineTest extends TestCase {
 	public function testItemSearch(
 		array $results,
 		ItemSearchResults $expected,
-		int $limit = self::DEFAULT_RESULTS_LIMIT,
-		int $offset = self::DEFAULT_OFFSET
+		int $limit = 10,
+		int $offset = 0
 	): void {
 		$searchTerm = 'potato';
 		$language = 'en';
@@ -59,17 +54,10 @@ class InLabelSearchEngineTest extends TestCase {
 			->with( $searchTerm, $language, Item::ENTITY_TYPE, $limit, $offset )
 			->willReturn( array_slice( $results, $offset, $limit ) );
 
-		if ( $limit == self::DEFAULT_RESULTS_LIMIT && $offset == self::DEFAULT_OFFSET ) {
-			$this->assertEquals(
-				$expected,
-				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language )
-			);
-		} else {
 			$this->assertEquals(
 				$expected,
 				( new InLabelSearchEngine( $inLabelSearch ) )->searchItemByLabel( $searchTerm, $language, $limit, $offset )
 			);
-		}
 	}
 
 	public static function itemSearchResultsProvider(): Generator {
@@ -103,7 +91,7 @@ class InLabelSearchEngineTest extends TestCase {
 					new Label( 'en', 'sweet potato' ),
 					new Description( 'en', 'sweet root vegetable' ),
 					new MatchedData( 'label', 'en', 'sweet potato' )
-				)
+				),
 			),
 		];
 		yield 'alias as display label' => [
@@ -132,34 +120,10 @@ class InLabelSearchEngineTest extends TestCase {
 				'label' => "potato $i",
 				'description' => "root vegetable $i",
 			],
-			range( 1, self::DEFAULT_RESULTS_LIMIT + 1 )
+			range( 1, 11 )
 		);
 
-		yield 'limit defaults to ' . self::DEFAULT_RESULTS_LIMIT => [
-			array_map(
-				fn( array $potato ) => new TermSearchResult(
-					new Term( 'en', $potato['label'] ),
-					'label',
-					new ItemId( $potato['id'] ),
-					new Term( 'en', $potato['label'] ),
-					new Term( 'en', $potato['description'] )
-				),
-				$potatoList
-			),
-			new ItemSearchResults(
-				...array_map(
-					fn( array $potato ) => new ItemSearchResult(
-						new ItemId( $potato['id'] ),
-						new Label( 'en', $potato['label'] ),
-						new Description( 'en', $potato['description'] ),
-						new MatchedData( 'label', 'en', $potato['label'] )
-					),
-					array_slice( $potatoList, 0, self::DEFAULT_RESULTS_LIMIT )
-				)
-			),
-		];
-
-		yield 'limits results to provided number' => [
+		yield 'pagination result with limit' => [
 			array_map(
 				fn( array $potato ) => new TermSearchResult(
 					new Term( 'en', $potato['label'] ),
@@ -181,10 +145,11 @@ class InLabelSearchEngineTest extends TestCase {
 					array_slice( $potatoList, 0, 5 )
 				)
 			),
-			5, // limit to pass to search method
+			5,
+			0,
 		];
 
-		yield 'offsets results by provided number' => [
+		yield 'pagination result with limit and offset' => [
 			array_map(
 				fn( array $potato ) => new TermSearchResult(
 					new Term( 'en', $potato['label'] ),
@@ -206,8 +171,8 @@ class InLabelSearchEngineTest extends TestCase {
 					array_slice( $potatoList, 5, 5 )
 				)
 			),
-			5, // limit to pass to search method
-			5, // offset to pass to search method
+			5,
+			5,
 		];
 	}
 
@@ -217,8 +182,8 @@ class InLabelSearchEngineTest extends TestCase {
 	public function testPropertySearch(
 		array $results,
 		PropertySearchResults $expected,
-		int $limit = self::DEFAULT_RESULTS_LIMIT,
-		int $offset = self::DEFAULT_OFFSET
+		int $limit = 10,
+		int $offset = 0
 	): void {
 		$searchTerm = 'some search term';
 		$language = 'en';
@@ -229,17 +194,10 @@ class InLabelSearchEngineTest extends TestCase {
 			->with( $searchTerm, $language, Property::ENTITY_TYPE, $limit, $offset )
 			->willReturn( array_slice( $results, $offset, $limit ) );
 
-		if ( $limit == self::DEFAULT_RESULTS_LIMIT && $offset == self::DEFAULT_OFFSET ) {
-			$this->assertEquals(
-				$expected,
-				( new InLabelSearchEngine( $inLabelSearch ) )->searchPropertyByLabel( $searchTerm, $language, $limit )
-			);
-		} else {
 			$this->assertEquals(
 				$expected,
 				( new InLabelSearchEngine( $inLabelSearch ) )->searchPropertyByLabel( $searchTerm, $language, $limit, $offset )
 			);
-		}
 	}
 
 	public static function propertySearchResultsProvider(): Generator {
@@ -302,28 +260,10 @@ class InLabelSearchEngineTest extends TestCase {
 				'label' => "property $i",
 				'description' => "property description $i",
 			],
-			range( 1, self::DEFAULT_RESULTS_LIMIT + 1 )
+			range( 1, 11 )
 		);
 
-		yield 'limit defaults to ' . self::DEFAULT_RESULTS_LIMIT => [
-			array_map( fn( array $property ) => new TermSearchResult(
-				new Term( 'en', $property['label'] ),
-				'label',
-				new NumericPropertyId( $property['id'] ),
-				new Term( 'en', $property['label'] ),
-				new Term( 'en', $property['description'] )
-			), $propertyList ),
-			new PropertySearchResults(
-				...array_map( fn( array $property ) => new PropertySearchResult(
-					new NumericPropertyId( $property['id'] ),
-					new Label( 'en', $property['label'] ),
-					new Description( 'en', $property['description'] ),
-					new MatchedData( 'label', 'en', $property['label'] )
-				), array_slice( $propertyList, 0, self::DEFAULT_RESULTS_LIMIT ) )
-			),
-		];
-
-		yield 'limits results to provided number' => [
+		yield 'pagination result with limit' => [
 			array_map(
 				fn( array $property ) => new TermSearchResult(
 					new Term( 'en', $property['label'] ),
@@ -345,10 +285,11 @@ class InLabelSearchEngineTest extends TestCase {
 					array_slice( $propertyList, 0, 5 )
 				)
 			),
-			5, // limit to pass to search method
+			5,
+			0,
 		];
 
-		yield 'offsets results by provided number' => [
+		yield 'pagination result with offset and limit' => [
 			array_map(
 				fn( array $property ) => new TermSearchResult(
 					new Term( 'en', $property['label'] ),
@@ -370,8 +311,8 @@ class InLabelSearchEngineTest extends TestCase {
 					array_slice( $propertyList, 5, 5 )
 				)
 			),
-			5, // limit to pass to search method
-			5, // offset to pass to search method
+			5,
+			5,
 		];
 	}
 
