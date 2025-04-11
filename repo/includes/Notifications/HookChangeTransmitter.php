@@ -1,9 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Notifications;
 
-use MediaWiki\HookContainer\HookContainer;
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Repo\Hooks\WikibaseChangeNotificationHook;
 
 /**
  * Change notification channel using a MediaWiki hook container.
@@ -13,26 +15,14 @@ use Wikibase\Lib\Changes\Change;
  */
 class HookChangeTransmitter implements ChangeTransmitter {
 
-	/** @var HookContainer */
-	private $hookContainer;
+	private WikibaseChangeNotificationHook $hookRunner;
 
-	/**
-	 * @var string
-	 */
-	private $hookName;
-
-	public function __construct( HookContainer $hookContainer, string $hookName ) {
-		$this->hookContainer = $hookContainer;
-		$this->hookName = $hookName;
+	public function __construct( WikibaseChangeNotificationHook $hookRunner ) {
+		$this->hookRunner = $hookRunner;
 	}
 
-	/**
-	 * @see ChangeNotificationChannel::sendChangeNotification()
-	 *
-	 * @param Change $change
-	 */
-	public function transmitChange( Change $change ) {
-		$this->hookContainer->run( $this->hookName, [ $change ] );
+	public function transmitChange( Change $change ): void {
+		$this->hookRunner->onWikibaseChangeNotification( $change );
 	}
 
 }
