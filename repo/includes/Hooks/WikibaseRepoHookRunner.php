@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use MediaWiki\Title\Title;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Repo\Content\EntityContent;
@@ -17,6 +18,7 @@ use Wikibase\Repo\Content\EntityContent;
  */
 class WikibaseRepoHookRunner implements
 	GetEntityByLinkedTitleLookupHook,
+	GetEntityContentModelForTitleHook,
 	WikibaseChangeNotificationHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
@@ -33,6 +35,14 @@ class WikibaseRepoHookRunner implements
 		$this->hookContainer->run(
 			'GetEntityByLinkedTitleLookup',
 			[ &$lookup ],
+			[ 'abortable' => false ]
+		);
+	}
+
+	public function onGetEntityContentModelForTitle( Title $title, string &$contentModel ): void {
+		$this->hookContainer->run(
+			'GetEntityContentModelForTitle',
+			[ $title, &$contentModel ],
 			[ 'abortable' => false ]
 		);
 	}

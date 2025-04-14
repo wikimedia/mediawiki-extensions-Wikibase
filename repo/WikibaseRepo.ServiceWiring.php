@@ -822,7 +822,7 @@ return [
 	'WikibaseRepo.EntityIdLookup' => function ( MediaWikiServices $services ): EntityIdLookup {
 		return new ContentHandlerEntityIdLookup(
 			WikibaseRepo::getEntityContentFactory( $services ),
-			$services->getHookContainer()
+			WikibaseRepo::getHookRunner( $services )
 		);
 	},
 
