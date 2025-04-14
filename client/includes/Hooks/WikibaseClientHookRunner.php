@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Changes\EntityChange;
 
 /**
@@ -10,7 +12,11 @@ use Wikibase\Lib\Changes\EntityChange;
  * @author dang
  * @license GPL-2.0-or-later
  */
-class WikibaseClientHookRunner implements WikibaseHandleChangeHook, WikibaseHandleChangesHook {
+class WikibaseClientHookRunner implements
+	WikibaseClientSiteLinksForItemHook,
+	WikibaseHandleChangeHook,
+	WikibaseHandleChangesHook
+{
 
 	/** @var HookContainer */
 	private $hookContainer;
@@ -47,4 +53,19 @@ class WikibaseClientHookRunner implements WikibaseHandleChangeHook, WikibaseHand
 		);
 	}
 
+	/** @inheritDoc */
+	public function onWikibaseClientSiteLinksForItem(
+		Item $item,
+		array &$siteLinks,
+		UsageAccumulator $usageAccumulator
+	): void {
+		$this->hookContainer->run( 'WikibaseClientSiteLinksForItem',
+			[
+				$item,
+				&$siteLinks,
+				$usageAccumulator,
+			],
+			[ 'abortable' => false ]
+		);
+	}
 }

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -29,8 +28,8 @@ class SiteLinksForDisplayLookup {
 	/** @var UsageAccumulator */
 	private $usageAccumulator;
 
-	/** @var HookContainer */
-	private $hookContainer;
+	/** @var WikibaseClientSiteLinksForItemHook */
+	private $hookRunner;
 
 	/** @var LoggerInterface */
 	private $logger;
@@ -42,7 +41,7 @@ class SiteLinksForDisplayLookup {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param HookContainer $hookContainer
+	 * @param WikibaseClientSiteLinksForItemHook $hookRunner
 	 * @param LoggerInterface $logger
 	 * @param string $siteId The global site ID for the local wiki
 	 */
@@ -50,14 +49,14 @@ class SiteLinksForDisplayLookup {
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
 		UsageAccumulator $usageAccumulator,
-		HookContainer $hookContainer,
+		WikibaseClientSiteLinksForItemHook $hookRunner,
 		LoggerInterface $logger,
 		string $siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->hookContainer = $hookContainer;
+		$this->hookRunner = $hookRunner;
 		$this->logger = $logger;
 		$this->siteId = $siteId;
 	}
@@ -107,11 +106,9 @@ class SiteLinksForDisplayLookup {
 	private function getSiteLinksForItem( Item $item ): array {
 		$siteLinks = $item->getSiteLinkList()->toArray();
 
-		$this->hookContainer->run( 'WikibaseClientSiteLinksForItem', [
-			$item,
-			&$siteLinks,
-			$this->usageAccumulator,
-		] );
+		$this->hookRunner->onWikibaseClientSiteLinksForItem(
+			$item, $siteLinks, $this->usageAccumulator
+		);
 
 		return $siteLinks;
 	}

@@ -560,7 +560,7 @@ return [
 			WikibaseClient::getStore( $services )->getSiteLinkLookup(),
 			WikibaseClient::getEntityLookup( $services ),
 			$services->getSiteLookup(),
-			$services->getHookContainer(),
+			WikibaseClient::getHookRunner( $services ),
 			WikibaseClient::getLogger( $services ),
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
 			WikibaseClient::getLangLinkSiteGroups( $services )
@@ -626,7 +626,7 @@ return [
 			$services->getSiteLookup(),
 			WikibaseClient::getEntityLookup( $services ),
 			WikibaseClient::getSidebarLinkBadgeDisplay( $services ),
-			$services->getHookContainer(),
+			WikibaseClient::getHookRunner( $services ),
 			WikibaseClient::getLogger( $services )
 		);
 	},

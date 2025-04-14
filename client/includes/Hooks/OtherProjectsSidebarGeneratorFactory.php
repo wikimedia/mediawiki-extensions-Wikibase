@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Site\SiteLookup;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -42,9 +41,9 @@ class OtherProjectsSidebarGeneratorFactory {
 	private $sidebarLinkBadgeDisplay;
 
 	/**
-	 * @var HookContainer
+	 * @var WikibaseClientSiteLinksForItemHook
 	 */
-	private $hooksContainer;
+	private $hookRunner;
 
 	/**
 	 * @var LoggerInterface
@@ -57,7 +56,7 @@ class OtherProjectsSidebarGeneratorFactory {
 		SiteLookup $siteLookup,
 		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
-		HookContainer $hookContainer,
+		WikibaseClientHookRunner $hookRunner,
 		LoggerInterface $logger
 	) {
 		$this->settings = $settings;
@@ -65,7 +64,7 @@ class OtherProjectsSidebarGeneratorFactory {
 		$this->siteLookup = $siteLookup;
 		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
-		$this->hooksContainer = $hookContainer;
+		$this->hookRunner = $hookRunner;
 		$this->logger = $logger;
 	}
 
@@ -81,7 +80,7 @@ class OtherProjectsSidebarGeneratorFactory {
 				$this->siteLinkLookup,
 				$this->entityLookup,
 				$usageAccumulator,
-				$this->hooksContainer,
+				$this->hookRunner,
 				$this->logger,
 				$this->settings->getSetting( 'siteGlobalID' )
 			),

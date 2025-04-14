@@ -8,6 +8,7 @@ use MediaWiki\Site\HashSiteStore;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -35,12 +36,12 @@ class OtherProjectsSidebarGeneratorFactoryTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore() );
+		$this->mockService( 'WikibaseClient.HookRunner',
+			$this->createMock( WikibaseClientHookRunner::class ) );
 		$this->mockService( 'WikibaseClient.EntityLookup',
 			$this->createMock( EntityLookup::class ) );
 		$this->mockService( 'WikibaseClient.SidebarLinkBadgeDisplay',
 			$this->createMock( SidebarLinkBadgeDisplay::class ) );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
 		$this->mockService( 'WikibaseClient.Logger',
 			new NullLogger() );
 

@@ -8,6 +8,7 @@ use MediaWiki\Site\HashSiteStore;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\WikibaseClientHookRunner;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
@@ -40,8 +41,8 @@ class LangLinkHandlerFactoryTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore() );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
+		$this->mockService( 'WikibaseClient.HookRunner',
+			$this->createMock( WikibaseClientHookRunner::class ) );
 		$this->mockService( 'WikibaseClient.Logger',
 			new NullLogger() );
 		$this->mockService( 'WikibaseClient.Settings',

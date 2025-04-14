@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Title\Title;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
+use Wikibase\Client\Hooks\WikibaseClientSiteLinksForItemHook;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -43,7 +43,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			$siteLinkLookup,
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseClientSiteLinksForItemHook::class ),
 			new NullLogger(),
 			'srwiki'
 		);
@@ -72,7 +72,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			$siteLinkLookup,
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseClientSiteLinksForItemHook::class ),
 			new NullLogger(),
 			'srwiki'
 		);
@@ -108,26 +108,20 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 
 		$usageAccumulator = $this->createMock( UsageAccumulator::class );
 
-		$hookContainer = $this->createMock( HookContainer::class );
-		$hookContainer->expects( $this->once() )
-			->method( 'run' )
-			->with( 'WikibaseClientSiteLinksForItem', [
-				$item,
-				$links->toArray(),
-				$usageAccumulator,
-			] )
-			->willReturnCallback( function ( string $hook, array $args ) {
-				$links = &$args[1];
+		$hookRunner = $this->createMock( WikibaseClientSiteLinksForItemHook::class );
+		$hookRunner->expects( $this->once() )
+			->method( 'onWikibaseClientSiteLinksForItem' )
+			->with( $item, $links->toArray(), $usageAccumulator )
+			->willReturnCallback( function ( Item $item, array &$links, UsageAccumulator $usageAccumulator ) {
 				$links['frwikisource'] = new SiteLink( 'frwikisource', 'FooSource' );
 				$links['enwiki'] = new SiteLink( 'enwiki', 'Foo en', [ new ItemId( 'Q42' ) ] );
-				return true;
 			} );
 
 		$siteLinksForDisplayLookup = new SiteLinksForDisplayLookup(
 			$siteLinkLookup,
 			$entityLookup,
 			$this->createMock( UsageAccumulator::class ),
-			$hookContainer,
+			$hookRunner,
 			new NullLogger(),
 			'srwiki'
 		);

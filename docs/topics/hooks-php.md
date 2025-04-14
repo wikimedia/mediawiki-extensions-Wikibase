@@ -124,18 +124,7 @@ Parameters:
   * Any relevant root job parameters to be inherited by child jobs.
 
 #### WikibaseClientSiteLinksForItem {#WikibaseClientSiteLinksForItem}
-Called by [OtherProjectsSidebarGenerator] to allow altering the sitelinks used
-in language links and the other project's sidebar.
-Only called in case the page we are on is linked with an item.
-
-Parameters:
-* $item
-  * Item the page is linked with.
-* &$siteLinks
-  * Array containing the site links to display indexed by site global ID.
-* $usageAccumulator
-  * A [UsageAccumulator] to track the usages of Wikibase entities done by the hook handlers.
-
+See @ref Wikibase::Client::Hooks::WikibaseClientSiteLinksForItemHook.
 
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
@@ -145,6 +134,5 @@ Parameters:
 [WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
-[UsageAccumulator]: @ref Wikibase::Client::Usage::UsageAccumulator
 [entitytypes documentation]: @ref docs_topics_entitytypes
 [datatypes documentation]: @ref docs_topics_datatypes
