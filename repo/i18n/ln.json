@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Lydie maliki",
 			"Moyogo"
 		]
 	},
-	"wikibase-edit": "kobɔngisa"
+	"wikibase-edit": "kobɔngisa",
+	"wikibase-add": "kobakisa",
+	"wikibase-label-empty": "Etiquette moko te elimbolami",
+	"wikibase-description-empty": "Bolimbisi moko te elimbolami",
+	"wikibase-sitelinks-special": "Ba sites mosusu"
 }
