@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use Wikibase\Repo\Content\EntityContent;
 
 /**
  * Partial implementation of a hook runner for WikibaseRepo.
@@ -12,7 +13,11 @@ use MediaWiki\HookContainer\HookContainer;
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseRepoHookRunner implements WikibaseRepoSearchableEntityScopesMessagesHook, WikibaseRepoSearchableEntityScopesHook {
+class WikibaseRepoHookRunner implements
+	WikibaseRepoSearchableEntityScopesMessagesHook,
+	WikibaseRepoSearchableEntityScopesHook,
+	WikibaseTextForSearchIndexHook
+{
 
 	private HookContainer $hookContainer;
 
@@ -34,6 +39,14 @@ class WikibaseRepoHookRunner implements WikibaseRepoSearchableEntityScopesMessag
 		$this->hookContainer->run(
 			'WikibaseRepoSearchableEntityScopes',
 			[ &$searchableEntityScopes ]
+		);
+	}
+
+	/** @inheritDoc */
+	public function onWikibaseTextForSearchIndex( EntityContent $entityContent, string &$text ) {
+		return $this->hookContainer->run(
+			'WikibaseTextForSearchIndex',
+			[ $entityContent, &$text ]
 		);
 	}
 

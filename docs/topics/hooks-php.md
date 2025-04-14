@@ -38,14 +38,7 @@ Parameters:
   * the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
 
 #### WikibaseTextForSearchIndex {#WikibaseTextForSearchIndex}
-Called by [EntityContent::getTextForSearchIndex()] to allow extra text to be passed to the search engine for indexing.
-If the hook function returns false, no text at all will be passed to the search index.
-
-Parameters:
-* $entity
-  * EntityContent to be indexed
-* &$text
-  * The text to pass to the indexed (to be modified).
+See @ref Wikibase::Repo::Hooks::WikibaseTextForSearchIndexHook.
 
 #### WikibaseContentModelMapping {#WikibaseContentModelMapping}
 Called by [WikibaseRepo::getContentModelMappings()] to allow additional mappings between Entity types and content model identifiers to be defined.
@@ -169,7 +162,6 @@ Parameters:
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
-[EntityContent::getTextForSearchIndex()]: @ref Wikibase::Repo::Content::EntityContent::getTextForSearchIndex()
 [WikibaseRepo::getContentLanguages()]: @ref Wikibase::Repo::WikibaseRepo::getContentLanguages()
 [WikibaseRepo::getEntityNamespaceLookup()]: @ref Wikibase::Repo::WikibaseRepo::getEntityNamespaceLookup()
 [WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
