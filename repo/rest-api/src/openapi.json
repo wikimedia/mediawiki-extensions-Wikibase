@@ -33638,6 +33638,7 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "minimum": 0,
               "default": 0
             },
             "example": 4
@@ -33872,6 +33873,7 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "minimum": 0,
               "default": 0
             },
             "example": 4
@@ -34290,6 +34292,7 @@
         "required": false,
         "schema": {
           "type": "integer",
+          "minimum": 0,
           "default": 0
         },
         "example": 4
