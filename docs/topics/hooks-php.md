@@ -10,16 +10,7 @@ Repo
 ------------------------------------------------------------
 
 #### WikibaseRepoDataTypes {#WikibaseRepoDataTypes}
-Called when constructing the top-level [WikibaseRepo] factory
-May be used to define additional data types.
-See also the [WikibaseClientDataTypes](#WikibaseClientDataTypes) hook.
-
-Hook handlers may add additional definitions.
-See [datatypes documentation] for details.
-
-Parameters:
-* &$dataTypeDefinitions
-  * the array of data type definitions, as defined by WikibaseRepo.datatypes.php.
+See @ref Wikibase::Repo::Hooks::WikibaseRepoDataTypesHook.
 
 #### WikibaseRepoEntityTypes {#WikibaseRepoEntityTypes}
 Called when constructing the top-level [WikibaseRepo] factory
