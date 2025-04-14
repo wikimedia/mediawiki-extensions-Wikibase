@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -16,8 +15,10 @@ use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
  */
 class MobileSiteTest extends ServiceWiringTestCase {
 
-	public function testConstruction(): void {
-		$this->assertFalse( MediaWikiServices::getInstance()->getService( 'WikibaseClient.MobileSite' ) );
+	public function testConstructionNoMobileFrontend(): void {
+		$mobileSite = $this->getService( 'WikibaseClient.MobileSite' );
+
+		$this->assertFalse( $mobileSite );
 	}
 
 	public function testConstructionMobileView(): void {
