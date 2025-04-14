@@ -6,7 +6,7 @@
 		></cdx-select>
 	</div>
 	<cdx-typeahead-search
-		id="typeahead-search-wikidata"
+		id="searchform"
 		:form-action="baseUrl"
 		:search-results="searchResults"
 		:search-footer-url="searchFooterUrl"
@@ -56,6 +56,7 @@ module.exports = exports = defineComponent( {
 		const selection = ref( 'item' );
 		const searchResults = ref( [] );
 		const currentSearchTerm = ref( '' );
+		// TODO: use the selected language rather than hard-coding english here. T391700
 		const languageCode = ref( 'en' );
 
 		// If prefix is set, omit it from what's actually searched for

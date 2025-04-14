@@ -1,0 +1,28 @@
+{
+	"//": "This file only exists for the Jest tests. The real file is generated at runtime based on the ScopedTypeaheadSearchConfig class.",
+	"entityTypesConfig": {
+		"item": {
+			"namespace": 0,
+			"message": "item-message"
+		},
+		"property": {
+			"namespace": 122,
+			"message": "property-message"
+		},
+		"lexeme": {
+			"namespace": 146,
+			"message": "lexeme-message"
+		},
+		"entity-schema": {
+			"namespace": 640,
+			"message": "entity-schema-message"
+		}
+	},
+	"namespacesConfig": {
+		"0": "item",
+		"122": "property",
+		"146": "lexeme",
+		"640": "entity-schema"
+	}
+
+}
