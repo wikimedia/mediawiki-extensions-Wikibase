@@ -5,7 +5,6 @@ namespace Wikibase\Repo\ParserOutput;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
-use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Language\Language;
 use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;
@@ -19,6 +18,8 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecorator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesUiEntityParserOutputGeneratorDecorator;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
+use Wikibase\Repo\Hooks\WikibaseRepoOnParserOutputUpdaterConstructionHook;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -100,9 +101,9 @@ class EntityParserOutputGeneratorFactory {
 	private $linkBatchFactory;
 
 	/**
-	 * @var HookContainer
+	 * @var WikibaseRepoOnParserOutputUpdaterConstructionHook
 	 */
-	private $hookContainer;
+	private $hookRunner;
 	private bool $isMobileView;
 
 	/**
@@ -117,7 +118,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param StatsdDataFactoryInterface $stats
 	 * @param RepoGroup $repoGroup
 	 * @param LinkBatchFactory $linkBatchFactory
-	 * @param HookContainer $hookContainer
+	 * @param WikibaseRepoHookRunner $hookRunner
 	 * @param bool $isMobileView
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
@@ -136,7 +137,7 @@ class EntityParserOutputGeneratorFactory {
 		StatsdDataFactoryInterface $stats,
 		RepoGroup $repoGroup,
 		LinkBatchFactory $linkBatchFactory,
-		HookContainer $hookContainer,
+		WikibaseRepoOnParserOutputUpdaterConstructionHook $hookRunner,
 		bool $isMobileView,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
@@ -153,7 +154,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->stats = $stats;
 		$this->repoGroup = $repoGroup;
 		$this->linkBatchFactory = $linkBatchFactory;
-		$this->hookContainer = $hookContainer;
+		$this->hookRunner = $hookRunner;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
@@ -244,12 +245,9 @@ class EntityParserOutputGeneratorFactory {
 			),
 		];
 
-		$this->hookContainer->run(
-			'WikibaseRepoOnParserOutputUpdaterConstruction',
-			[
-				$statementUpdater,
-				&$entityUpdaters,
-			]
+		$this->hookRunner->onWikibaseRepoOnParserOutputUpdaterConstruction(
+			$statementUpdater,
+			$entityUpdaters
 		);
 
 		return $entityUpdaters;

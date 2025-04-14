@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
-use MediaWiki\HookContainer\HookContainer;
 use RepoGroup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -12,6 +11,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesUiEntityParserOutputGeneratorDecorator;
+use Wikibase\Repo\Hooks\WikibaseRepoOnParserOutputUpdaterConstructionHook;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
@@ -50,7 +50,7 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			new NullStatsdDataFactory(),
 			$this->createMock( RepoGroup::class ),
 			$this->createMock( LinkBatchFactory::class ),
-			$this->createMock( HookContainer::class ),
+			$this->createMock( WikibaseRepoOnParserOutputUpdaterConstructionHook::class ),
 			false
 		);
 	}
