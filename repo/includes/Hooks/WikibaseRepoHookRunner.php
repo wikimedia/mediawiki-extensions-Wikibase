@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
+use Wikibase\Lib\Changes\Change;
 use Wikibase\Repo\Content\EntityContent;
 
 /**
@@ -14,6 +15,7 @@ use Wikibase\Repo\Content\EntityContent;
  * @license GPL-2.0-or-later
  */
 class WikibaseRepoHookRunner implements
+	WikibaseChangeNotificationHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
 	WikibaseTextForSearchIndexHook
@@ -23,6 +25,14 @@ class WikibaseRepoHookRunner implements
 
 	public function __construct( HookContainer $container ) {
 		$this->hookContainer = $container;
+	}
+
+	public function onWikibaseChangeNotification( Change $change ): void {
+		$this->hookContainer->run(
+			'WikibaseChangeNotification',
+			[ $change ],
+			[ 'abortable' => false ]
+		);
 	}
 
 	/** @inheritDoc */

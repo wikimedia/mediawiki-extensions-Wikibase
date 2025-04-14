@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Notifications\ChangeHolder;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -21,8 +22,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class ChangeNotifierTest extends ServiceWiringTestCase {
 
 	public function testConstructionWithoutChangesTable(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
+		$this->mockService( 'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'useChangesTable' => false,
@@ -43,8 +44,8 @@ class ChangeNotifierTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstructionWithChangesTable(): void {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
+		$this->mockService( 'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'useChangesTable' => true,

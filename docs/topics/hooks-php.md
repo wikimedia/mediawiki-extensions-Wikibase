@@ -60,13 +60,7 @@ Parameters:
   * An associative array mapping Entity types to namespace ids.
 
 #### WikibaseChangeNotification {#WikibaseChangeNotification}
-Triggered from ChangeNotifier via a [HookChangeTransmitter] to notify any listeners of changes to entities.
-
-For performance reasons, does not include statement, description and alias diffs (see [T113468], [T163465]).
-
-Parameters:
-* $change
-  * The Change object representing the change.
+See @ref Wikibase::Repo::Hooks::WikibaseChangeNotificationHook.
 
 #### WikibaseContentLanguages {#WikibaseContentLanguages}
 Called by[ WikibaseRepo::getContentLanguages()], which in turn is called by some other getters, to define the content languages per context.
@@ -157,8 +151,6 @@ Parameters:
   * A [UsageAccumulator] to track the usages of Wikibase entities done by the hook handlers.
 
 
-[T113468]: https://phabricator.wikimedia.org/T113468
-[T163465]: https://phabricator.wikimedia.org/T163465
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
@@ -166,7 +158,6 @@ Parameters:
 [WikibaseRepo::getEntityNamespaceLookup()]: @ref Wikibase::Repo::WikibaseRepo::getEntityNamespaceLookup()
 [WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
 [EntityContentFactory]: @ref Wikibase::Repo::Content::EntityContentFactory
-[HookChangeTransmitter]: @ref Wikibase::Repo::Notifications::HookChangeTransmitter
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
 [UsageAccumulator]: @ref Wikibase::Client::Usage::UsageAccumulator

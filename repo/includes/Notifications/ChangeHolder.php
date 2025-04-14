@@ -23,10 +23,7 @@ class ChangeHolder implements ChangeTransmitter {
 	}
 
 	/**
-	 * @see ChangeNotificationChannel::sendChangeNotification()
 	 * Holds the change to be stored later.
-	 *
-	 * @param Change $change
 	 */
 	public function transmitChange( Change $change ) {
 		$this->changes[] = $change;

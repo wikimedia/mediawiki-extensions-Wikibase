@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Notifications;
 
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 
 /**
@@ -22,7 +23,7 @@ class HookChangeTransmitterTest extends MediaWikiIntegrationTestCase {
 
 		$called = false;
 		$this->setTemporaryHook(
-			'HookChangeTransmitterTest',
+			'WikibaseChangeNotification',
 			function ( $actualChange ) use ( $change, &$called ) {
 				self::assertEquals( $change, $actualChange );
 				$called = true;
@@ -30,8 +31,7 @@ class HookChangeTransmitterTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$transmitter = new HookChangeTransmitter(
-			$this->getServiceContainer()->getHookContainer(),
-			'HookChangeTransmitterTest'
+			new WikibaseRepoHookRunner( $this->getServiceContainer()->getHookContainer() )
 		);
 		$transmitter->transmitChange( $change );
 
