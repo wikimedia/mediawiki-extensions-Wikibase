@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput;
 
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
@@ -29,35 +31,12 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityParserOutputGeneratorFactory {
 
-	/**
-	 * @var DispatchingEntityViewFactory
-	 */
-	private $entityViewFactory;
-
-	/**
-	 * @var DispatchingEntityMetaTagsCreatorFactory
-	 */
-	private $entityMetaTagsCreatorFactory;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
-
-	/**
-	 * @var EntityDataFormatProvider
-	 */
-	private $entityDataFormatProvider;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
+	private DispatchingEntityViewFactory $entityViewFactory;
+	private DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory;
+	private EntityTitleLookup $entityTitleLookup;
+	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private EntityDataFormatProvider $entityDataFormatProvider;
+	private PropertyDataTypeLookup $propertyDataTypeLookup;
 
 	/**
 	 * @var string[]
@@ -75,35 +54,12 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $globeUris;
 
-	/**
-	 * @var EntityReferenceExtractorDelegator
-	 */
-	private $entityReferenceExtractorDelegator;
-
-	/**
-	 * @var CachingKartographerEmbeddingHandler|null
-	 */
-	private $kartographerEmbeddingHandler;
-
-	/**
-	 * @var StatsdDataFactoryInterface
-	 */
-	private $stats;
-
-	/**
-	 * @var RepoGroup
-	 */
-	private $repoGroup;
-
-	/**
-	 * @var LinkBatchFactory
-	 */
-	private $linkBatchFactory;
-
-	/**
-	 * @var WikibaseRepoOnParserOutputUpdaterConstructionHook
-	 */
-	private $hookRunner;
+	private EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator;
+	private ?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler;
+	private StatsdDataFactoryInterface $stats;
+	private RepoGroup $repoGroup;
+	private LinkBatchFactory $linkBatchFactory;
+	private WikibaseRepoOnParserOutputUpdaterConstructionHook $hookRunner;
 	private bool $isMobileView;
 
 	/**
@@ -225,10 +181,9 @@ class EntityParserOutputGeneratorFactory {
 			$statementUpdater->addUpdater( new MathDataUpdater( $propertyDataTypeMatcher ) );
 		}
 
-		// FIXME: null implementation of KartographerEmbeddingHandler would seem better than null pointer
-		// in general, and would also remove the need for the check here
 		if ( $this->kartographerEmbeddingHandler ) {
-			$statementUpdater->addUpdater( $this->newKartographerDataUpdater() );
+			$statementUpdater->addUpdater(
+				$this->newKartographerDataUpdater( $this->kartographerEmbeddingHandler ) );
 		}
 
 		$entityUpdaters = [
@@ -268,10 +223,10 @@ class EntityParserOutputGeneratorFactory {
 		);
 	}
 
-	private function newKartographerDataUpdater(): StatementDataUpdater {
-		return new GlobeCoordinateKartographerDataUpdater(
-			$this->kartographerEmbeddingHandler
-		);
+	private function newKartographerDataUpdater(
+		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler
+	): StatementDataUpdater {
+		return new GlobeCoordinateKartographerDataUpdater( $kartographerEmbeddingHandler );
 	}
 
 }
