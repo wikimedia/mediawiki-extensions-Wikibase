@@ -1900,7 +1900,7 @@ return [
 			WikibaseRepo::getEntityNamespaceLookup( $services ),
 			WikibaseRepo::getIdGenerator( $services ),
 			WikibaseRepo::getWikibaseServices( $services ),
-			$services->getHookContainer(),
+			WikibaseRepo::getHookRunner( $services ),
 			WikibaseRepo::getLocalEntitySource( $services ),
 			WikibaseRepo::getSettings( $services ),
 			WikibaseRepo::getPropertyInfoLookup( $services ),

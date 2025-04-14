@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Repo\Content\EntityContent;
 
 /**
@@ -15,6 +16,7 @@ use Wikibase\Repo\Content\EntityContent;
  * @license GPL-2.0-or-later
  */
 class WikibaseRepoHookRunner implements
+	GetEntityByLinkedTitleLookupHook,
 	WikibaseChangeNotificationHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
@@ -25,6 +27,14 @@ class WikibaseRepoHookRunner implements
 
 	public function __construct( HookContainer $container ) {
 		$this->hookContainer = $container;
+	}
+
+	public function onGetEntityByLinkedTitleLookup( EntityByLinkedTitleLookup &$lookup ): void {
+		$this->hookContainer->run(
+			'GetEntityByLinkedTitleLookup',
+			[ &$lookup ],
+			[ 'abortable' => false ]
+		);
 	}
 
 	public function onWikibaseChangeNotification( Change $change ): void {
