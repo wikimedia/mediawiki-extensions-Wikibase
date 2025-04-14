@@ -41,15 +41,7 @@ Parameters:
 See @ref Wikibase::Repo::Hooks::WikibaseTextForSearchIndexHook.
 
 #### WikibaseContentModelMapping {#WikibaseContentModelMapping}
-Called by [WikibaseRepo::getContentModelMappings()] to allow additional mappings between Entity types and content model identifiers to be defined.
-
-This hook runs during early initialization;
-its handlers must obey the [MediaWikiServicesHook rules](https://doc.wikimedia.org/mediawiki-core/master/php/interfaceMediaWiki_1_1Hook_1_1MediaWikiServicesHook.html),
-i.e. not declare any service dependencies nor access any unsafe services dynamically.
-
-Parameters:
-* &$map
-  * An associative array mapping Entity types to content model ids.
+See @ref Wikibase::Repo::Hooks::WikibaseContentModelMappingHook.
 
 #### WikibaseRepoEntityNamespaces {#WikibaseRepoEntityNamespaces}
 Called in the example settings to allow additional mappings between Entity types and namespace IDs to be defined.
