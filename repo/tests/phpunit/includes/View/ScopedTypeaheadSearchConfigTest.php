@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\View;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 
 /**
@@ -47,7 +48,9 @@ class ScopedTypeaheadSearchConfigTest extends MediaWikiIntegrationTestCase {
 			},
 		] );
 		$configGenerator = new ScopedTypeaheadSearchConfig(
-			$hookContainer, $this->entityNamespaceLookup, $this->enabledEntityTypesForSearch
+			new WikibaseRepoHookRunner( $hookContainer ),
+			$this->entityNamespaceLookup,
+			$this->enabledEntityTypesForSearch
 		);
 
 		$config = $configGenerator->getConfiguration();
@@ -84,7 +87,7 @@ class ScopedTypeaheadSearchConfigTest extends MediaWikiIntegrationTestCase {
 				return true;
 			} );
 		$configGenerator = new ScopedTypeaheadSearchConfig(
-			$hookContainer,
+			new WikibaseRepoHookRunner( $hookContainer ),
 			$this->entityNamespaceLookup,
 			$this->enabledEntityTypesForSearch
 		);

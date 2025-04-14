@@ -184,6 +184,7 @@ use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdde
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -1229,6 +1230,10 @@ return [
 		}, $searchTypeContexts );
 	},
 
+	'WikibaseRepo.HookRunner' => function ( MediaWikiServices $services ): WikibaseRepoHookRunner {
+		return new WikibaseRepoHookRunner( $services->getHookContainer() );
+	},
+
 	'WikibaseRepo.IdGenerator' => function ( MediaWikiServices $services ): IdGenerator {
 		$settings = WikibaseRepo::getSettings( $services );
 		$idGeneratorSetting = $settings->getSetting( 'idGenerator' );
@@ -1764,7 +1769,7 @@ return [
 
 	'WikibaseRepo.ScopedTypeaheadSearchConfig' => function( MediaWikiServices $services ): ScopedTypeaheadSearchConfig {
 		return new ScopedTypeaheadSearchConfig(
-			$services->getHookContainer(),
+			WikibaseRepo::getHookRunner( $services ),
 			WikibaseRepo::getLocalEntityNamespaceLookup( $services ),
 			WikibaseRepo::getEnabledEntityTypesForSearch( $services )
 		);

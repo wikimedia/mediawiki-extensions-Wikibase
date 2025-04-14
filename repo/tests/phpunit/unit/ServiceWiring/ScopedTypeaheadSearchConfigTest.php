@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 
@@ -18,8 +19,8 @@ use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 class ScopedTypeaheadSearchConfigTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' );
+		$this->mockService( 'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class ) );
 		$this->mockService( 'WikibaseRepo.LocalEntityNamespaceLookup',
 			$this->createMock( EntityNamespaceLookup::class ) );
 		$this->mockService( 'WikibaseRepo.EnabledEntityTypesForSearch', [] );
