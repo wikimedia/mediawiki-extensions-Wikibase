@@ -18,6 +18,7 @@
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
+		"selenium-test:client": "wdio client/tests/selenium/wdio.conf.js",
 		"@selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
 		"test": "npm-run-all -p test-fast:*",
 		"test-fast:grunt": "grunt test",
