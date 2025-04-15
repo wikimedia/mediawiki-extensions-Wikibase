@@ -1,10 +1,10 @@
 <?php
+
 declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -17,19 +17,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntityTypeDefinitionsTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
-		$this->mockService( 'WikibaseRepo.HookRunner',
-			$this->createMock( WikibaseRepoHookRunner::class ) );
-		$this->assertInstanceOf(
-			EntityTypeDefinitions::class,
-			$this->getService( 'WikibaseRepo.EntityTypeDefinitions' )
-		);
-	}
-
-	public function testRunsHook(): void {
-		$this->configureHookRunner( [
-			'WikibaseRepoEntityTypes' => [ function ( array &$entityTypes ) {
-				$entityTypes['test'] = [];
-			} ],
+		$this->mockService( 'WikibaseRepo.EntityTypeDefinitionsArray', [
+			'test' => [],
 		] );
 
 		/** @var EntityTypeDefinitions $entityTypeDefinitions */

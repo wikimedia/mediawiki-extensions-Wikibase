@@ -1001,16 +1001,7 @@ return [
 	},
 
 	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
-		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
-		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
-
-		$entityTypes = wfArrayPlus2d(
-			$repoEntityTypes,
-			$baseEntityTypes
-		);
-
-		WikibaseRepo::getHookRunner( $services )
-			->onWikibaseRepoEntityTypes( $entityTypes );
+		$entityTypes = WikibaseRepo::getEntityTypeDefinitionsArray( $services );
 
 		$entityTypeDefinitionsBySourceType = [ DatabaseEntitySource::TYPE => new EntityTypeDefinitions( $entityTypes ) ];
 
@@ -1110,6 +1101,17 @@ return [
 		 * and the same is true for any other Wikibase services we use;
 		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
 		 */
+		$entityTypes = WikibaseRepo::getEntityTypeDefinitionsArray( $services );
+		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.EntityTypeDefinitionsArray' => function ( MediaWikiServices $services ): array {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 *  see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
 
@@ -1121,7 +1123,7 @@ return [
 		WikibaseRepo::getHookRunner( $services )
 			->onWikibaseRepoEntityTypes( $entityTypes );
 
-		return new EntityTypeDefinitions( $entityTypes );
+		return $entityTypes;
 	},
 
 	'WikibaseRepo.EntityTypesConfigValue' => function ( MediaWikiServices $services ): array {

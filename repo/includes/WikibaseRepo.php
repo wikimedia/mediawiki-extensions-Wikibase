@@ -223,6 +223,11 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.EntityContentFactory' );
 	}
 
+	public static function getEntityTypeDefinitionsArray( ?ContainerInterface $services = null ): array {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityTypeDefinitionsArray' );
+	}
+
 	public static function getEntityTypeDefinitions( ?ContainerInterface $services = null ): EntityTypeDefinitions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.EntityTypeDefinitions' );
