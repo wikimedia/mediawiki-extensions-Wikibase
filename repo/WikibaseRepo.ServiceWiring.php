@@ -1008,11 +1008,8 @@ return [
 			$baseEntityTypes
 		);
 
-		$services->getHookContainer()->run(
-			'WikibaseRepoEntityTypes',
-			[ &$entityTypes ],
-			[ 'noServices' => true ] // to match WikibaseRepo.EntityTypeDefinitions below
-		);
+		WikibaseRepo::getHookRunner( $services )
+			->onWikibaseRepoEntityTypes( $entityTypes );
 
 		$entityTypeDefinitionsBySourceType = [ DatabaseEntitySource::TYPE => new EntityTypeDefinitions( $entityTypes ) ];
 
@@ -1120,11 +1117,8 @@ return [
 			$baseEntityTypes
 		);
 
-		$services->getHookContainer()->run(
-			'WikibaseRepoEntityTypes',
-			[ &$entityTypes ],
-			[ 'noServices' => true ] // early initialization
-		);
+		WikibaseRepo::getHookRunner( $services )
+			->onWikibaseRepoEntityTypes( $entityTypes );
 
 		return new EntityTypeDefinitions( $entityTypes );
 	},

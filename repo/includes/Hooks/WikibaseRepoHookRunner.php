@@ -23,6 +23,7 @@ class WikibaseRepoHookRunner implements
 	WikibaseChangeNotificationHook,
 	WikibaseContentModelMappingHook,
 	WikibaseRepoDataTypesHook,
+	WikibaseRepoEntityTypesHook,
 	WikibaseRepoOnParserOutputUpdaterConstructionHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
@@ -78,6 +79,21 @@ class WikibaseRepoHookRunner implements
 		$this->hookContainer->run( 'WikibaseRepoDataTypes',
 			[ &$dataTypeDefinitions ],
 			[ 'abortable' => false ]
+		);
+	}
+
+	public function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ): void {
+		/**
+		 * Warning: This hook runs as part of an early initialization service
+		 * (WikibaseRepo.EntityTypeDefinitions, see service wiring and the warning there).
+		 */
+		$this->hookContainer->run(
+			'WikibaseRepoEntityTypes',
+			[ &$entityTypeDefinitions ],
+			[
+				'abortable' => false,
+				'noServices' => true, // early initialization
+			]
 		);
 	}
 

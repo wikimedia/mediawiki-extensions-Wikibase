@@ -7,6 +7,7 @@ use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntitySourceAndTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -19,6 +20,8 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 class EntitySourceAndTypeDefinitionsTest extends ServiceWiringTestCase {
 
 	public function testConstruction(): void {
+		$this->mockService( 'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class ) );
 		$this->mockService( 'WikibaseRepo.Settings', new SettingsArray( [ 'federatedPropertiesEnabled' => false ] ) );
 		$entitySourceDefinitions = $this->createStub( EntitySourceDefinitions::class );
 		$entitySourceDefinitions->method( 'getSources' )->willReturn( [

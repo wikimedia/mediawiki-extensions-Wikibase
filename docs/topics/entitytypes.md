@@ -121,7 +121,7 @@ The entity type definitions themselves are wrapped by the [EntityTypeDefinitions
 [EntityDocumentView]: @ref Wikibase::View::EntityDocumentView
 [WikibaseLib.entitytypes.php]: @ref WikibaseLib.entitytypes.php
 [WikibaseRepo.entitytypes.php]: @ref WikibaseRepo.entitytypes.php
-[WikibaseRepoEntityTypes]: @ref WikibaseRepoEntityTypes
+[WikibaseRepoEntityTypes]: @ref Wikibase::Repo::Hooks::WikibaseRepoEntityTypesHook
 [WikibaseClientEntityTypes]: @ref WikibaseClientEntityTypes
 [EntityLinkFormatter]: @ref Wikibase::Repo::Hooks::Formatters::EntityLinkFormatter
 [EntityIdFormatter]: @ref Wikibase::DataModel::Services::EntityId::EntityIdFormatter

@@ -13,20 +13,7 @@ Repo
 See @ref Wikibase::Repo::Hooks::WikibaseRepoDataTypesHook.
 
 #### WikibaseRepoEntityTypes {#WikibaseRepoEntityTypes}
-Called when constructing the top-level [WikibaseRepo] factory
-May be used to define additional entity types.
-See also the [WikibaseClientEntityTypes](#WikibaseClientEntityTypes) hook.
-
-Hook handlers may add additional definitions.
-See [entitytypes documentation] for details.
-
-This hook runs during early initialization;
-its handlers must obey the [MediaWikiServicesHook rules](https://doc.wikimedia.org/mediawiki-core/master/php/interfaceMediaWiki_1_1Hook_1_1MediaWikiServicesHook.html),
-i.e. not declare any service dependencies nor access any unsafe services dynamically.
-
-Parameters:
-* &$entityTypeDefinitions
-  * the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
+See @ref Wikibase::Repo::Hooks::WikibaseRepoEntityTypesHook.
 
 #### WikibaseTextForSearchIndex {#WikibaseTextForSearchIndex}
 See @ref Wikibase::Repo::Hooks::WikibaseTextForSearchIndexHook.
@@ -70,7 +57,7 @@ See @ref Wikibase::Client::Hooks::WikibaseClientDataTypesHook
 #### WikibaseClientEntityTypes {#WikibaseClientEntityTypes}
 Called when constructing the top-level [WikibaseClient] factory
 May be used to define additional entity types.
-See also the [WikibaseRepoEntityTypes](#WikibaseRepoEntityTypes) hook.
+See also @ref Wikibase::Repo::Hooks::WikibaseRepoEntityTypesHook.
 
 Hook handlers may add additional definitions.
 See [entitytypes documentation] for details.
@@ -102,7 +89,6 @@ See @ref Wikibase::Client::Hooks::WikibaseClientSiteLinksForItemHook.
 
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
-[WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
 [WikibaseRepo::getContentLanguages()]: @ref Wikibase::Repo::WikibaseRepo::getContentLanguages()
 [WikibaseRepo::getEntityNamespaceLookup()]: @ref Wikibase::Repo::WikibaseRepo::getEntityNamespaceLookup()
 [WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
