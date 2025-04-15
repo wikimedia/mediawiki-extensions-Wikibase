@@ -455,11 +455,8 @@ return [
 		$map = WikibaseRepo::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::CONTENT_MODEL_ID );
 
-		$services->getHookContainer()->run(
-			'WikibaseContentModelMapping',
-			[ &$map ],
-			[ 'noServices' => true ] // early initialization
-		);
+		WikibaseRepo::getHookRunner( $services )
+			->onWikibaseContentModelMapping( $map );
 
 		return $map;
 	},
@@ -1228,6 +1225,12 @@ return [
 	},
 
 	'WikibaseRepo.HookRunner' => function ( MediaWikiServices $services ): WikibaseRepoHookRunner {
+		/**
+		 * Warning: This is an early initialization service.
+		 * We must not use any MediaWiki services here (except the HookContainer),
+		 * and the same is true for any other Wikibase services we use;
+		 * see the warning in {@link MediaWikiServicesHook::onMediaWikiServices()}.
+		 */
 		return new WikibaseRepoHookRunner( $services->getHookContainer() );
 	},
 

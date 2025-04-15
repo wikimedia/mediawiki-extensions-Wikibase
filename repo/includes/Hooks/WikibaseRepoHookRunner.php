@@ -21,6 +21,7 @@ class WikibaseRepoHookRunner implements
 	GetEntityByLinkedTitleLookupHook,
 	GetEntityContentModelForTitleHook,
 	WikibaseChangeNotificationHook,
+	WikibaseContentModelMappingHook,
 	WikibaseRepoOnParserOutputUpdaterConstructionHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
@@ -54,6 +55,21 @@ class WikibaseRepoHookRunner implements
 			'WikibaseChangeNotification',
 			[ $change ],
 			[ 'abortable' => false ]
+		);
+	}
+
+	public function onWikibaseContentModelMapping( array &$map ): void {
+		/**
+		 * Warning: This hook runs as part of an early initialization service
+		 * (WikibaseRepo.ContentModelMappings, see service wiring and the warning there).
+		 */
+		$this->hookContainer->run(
+			'WikibaseContentModelMapping',
+			[ &$map ],
+			[
+				'abortable' => false,
+				'noServices' => true, // early initialization
+			]
 		);
 	}
 

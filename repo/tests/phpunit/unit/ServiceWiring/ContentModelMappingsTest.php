@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
 /**
@@ -22,6 +23,8 @@ class ContentModelMappingsTest extends ServiceWiringTestCase {
 					EntityTypeDefinitions::CONTENT_MODEL_ID => 'test1-content-model',
 				],
 			] ) );
+		$this->mockService( 'WikibaseRepo.HookRunner',
+			$this->createMock( WikibaseRepoHookRunner::class ) );
 
 		$contentModelMappings = $this->getService( 'WikibaseRepo.ContentModelMappings' );
 
@@ -34,7 +37,7 @@ class ContentModelMappingsTest extends ServiceWiringTestCase {
 	public function testRunsHook(): void {
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',
 			new EntityTypeDefinitions( [] ) );
-		$this->configureHookContainer( [
+		$this->configureHookRunner( [
 			'WikibaseContentModelMapping' => [ function ( array &$map ) {
 				$map['test2'] = 'test2-content-model';
 			} ],
