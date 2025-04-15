@@ -420,6 +420,11 @@
 	"wikibase-api-target-is-redirect": "Джолландырыу нюзюр башха джолландырыу болмазгъа керекди.",
 	"wikibase-api-target-is-incompatible": "Башха типде барлыкъда джолландырыргъа тырмашыу.",
 	"wikibase-api-cant-redirect": "Джолландырыу болдурулалмайды (бу тип барлыкъла арасындагъы джолландырыула дагъансыз болургъа болурла).",
+	"wikibase-api-invalid-formatter-options-lang": "Эркинлик берилмеген \"опция\" берилди: \"lang\" тизгин болургъа керекди (MediaWiki тил код).",
+	"wikibase-api-invalid-formatter-options-apply-rounding": "Эркинлик берилмеген \"опция\" берилди: \"applyRounding\" буле неда тизгин болургъа керекди.",
+	"wikibase-api-invalid-formatter-options-apply-unit": "Эркинлик берилмеген \"опция\" берилди: \"applyUnit\" буле болургъа керекди.",
+	"wikibase-api-invalid-formatter-options-showcalendar": "Эркинлик берилмеген \"опция\" берилди: \"showcalendar\" буле неда \"auto\" болургъа керекди.",
+	"wikibase-api-invalid-formatter-options-unknown-option": "Дагъансыз \"опция\" берилди: Билинмеген \"$1\" опция берилди.",
 	"wikibase-self-conflict-patched": "Этген тюзетиу ахыр версиягъа къошулду эмда бу бар эсе бир къауум энчи тюзетиулеригиз джараусуз боллукъду.",
 	"wikibase-conflict-patched": "Тюзетиуюгюз, ахыр версияда джамауланды.",
 	"wikibase-save-unresolved-redirect": "Тюрлениуню сакъландырыргъа кюрешген заманда, $1 къайнакъ идентификатордан $2 нюзюр идентификаторгъа тешилмеген джангыдан джибериу тюбеди.",
@@ -522,5 +527,9 @@
 	"special-setdescription-parameterized": "$1 ачыкълауну къур",
 	"special-setlabeldescriptionaliases-parameterized": "$1 этикетни, ачыкълауну эмда псевдонимлени къур",
 	"wikibase-federated-properties-federated-property-api-error-message": "Бу API хайырланыб Федератив Энчиликле бла ишлеу къуралмазсыз.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Федерация къайнакъ викиге этилген джетишимсиз излем себеб бла излемигиз джетишимсиз болду."
+	"wikibase-federated-properties-failed-request-api-error-message": "Федерация къайнакъ викиге этилген джетишимсиз излем себеб бла излемигиз джетишимсиз болду.",
+	"wikibase-scoped-search-search-entities": "Барлыкъланы изле",
+	"wikibase-scoped-search-search-entities-description": "Тюрлю-тюрлю типли {{SITENAME}} барлыкъланы таб",
+	"wikibase-scoped-search-item-scope-name": "Элементле",
+	"wikibase-scoped-search-property-scope-name": "Энчиликле"
 }
