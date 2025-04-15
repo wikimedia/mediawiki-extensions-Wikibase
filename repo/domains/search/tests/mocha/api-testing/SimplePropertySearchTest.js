@@ -18,6 +18,13 @@ function newSearchRequest( language, searchTerm ) {
 		.withQueryParam( 'q', searchTerm );
 }
 
+function assertValidError( response, statusCode, responseBodyErrorCode, context ) {
+	expect( response ).to.have.status( statusCode );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	assert.deepStrictEqual( response.body.context, context );
+}
+
 describe( 'Simple property search', () => {
 	let property1;
 	let property2;
@@ -181,11 +188,7 @@ describe( 'Simple property search', () => {
 				.assertInvalidRequest()
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-
-			assert.header( response, 'Content-Language', 'en' );
-			assert.strictEqual( response.body.code, 'invalid-query-parameter' );
-			assert.deepStrictEqual( response.body.context, { parameter: 'language' } );
+			assertValidError( response, 400, 'invalid-query-parameter', { parameter: 'language' } );
 		} );
 
 		it( 'User-Agent empty', async () => {
@@ -196,6 +199,29 @@ describe( 'Simple property search', () => {
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'missing-user-agent' );
 		} );
-	} );
 
+		Object.entries( {
+			'invalid limit parameter - exceeds max limit 500': {
+				parameter: 'limit',
+				value: 501
+			},
+			'invalid limit parameter - negative limit': {
+				parameter: 'limit',
+				value: -1
+			},
+			'invalid offset parameter - negative offset': {
+				parameter: 'offset',
+				value: -2
+			}
+		} ).forEach( ( [ title, { parameter, value } ] ) => {
+			it( title, async () => {
+
+				const response = await newSearchRequest( 'en', 'search term' )
+					.withQueryParam( parameter, value )
+					.makeRequest();
+
+				assertValidError( response, 400, 'invalid-query-parameter', { parameter } );
+			} );
+		} );
+	} );
 } );
