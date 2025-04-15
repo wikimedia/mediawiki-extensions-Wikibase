@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\SimpleItemSearch;
 
+use Generator;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchRequest;
@@ -24,18 +25,29 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SimpleItemSearchValidatorTest extends TestCase {
 
+	private const DEFAULT_LIMIT = 10;
+	private const DEFAULT_OFFSET = 0;
+
 	/**
 	 * @doesNotPerformAssertions
 	 */
 	public function testValidate_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new SimpleItemSearchRequest( 'search term', 'en', 10, 0 ) );
+			->validate( new SimpleItemSearchRequest( 'search term', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
+		$this->newUseCaseValidator()
+			->validate( new SimpleItemSearchRequest( 'search term', 'en', null, null ) );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new SimpleItemSearchRequest( 'search term', 'xyz', 10, 0 ) );
+				->validate( new SimpleItemSearchRequest( 'search term', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
 
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
@@ -46,6 +58,43 @@ class SimpleItemSearchValidatorTest extends TestCase {
 				$e->getErrorContext()
 			);
 		}
+	}
+
+	/**
+	 * @dataProvider provideInvalidLimitAndOffset
+	 */
+	public function testGivenInvalidLimitAndOffset_throws(
+		UseCaseError $expectedError,
+		int $limit,
+		int $offset
+	): void {
+		try {
+			$this->newUseCaseValidator()
+				->validate( new SimpleItemSearchRequest( 'search term', 'en', $limit, $offset ) );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertEquals( $expectedError, $e );
+		}
+	}
+
+	public static function provideInvalidLimitAndOffset(): Generator {
+		yield 'invalid limit - negative limit' => [
+			UseCaseError::invalidQueryParameter( 'limit' ),
+			-1,
+			self::DEFAULT_OFFSET,
+		];
+
+		yield 'invalid limit - limit exceeds max (500)' => [
+			UseCaseError::invalidQueryParameter( 'limit' ),
+			501,
+			self::DEFAULT_OFFSET,
+		];
+
+		yield 'invalid offset - negative offset' => [
+			UseCaseError::invalidQueryParameter( 'offset' ),
+			self::DEFAULT_LIMIT,
+			-2,
+		];
 	}
 
 	private function newUseCaseValidator(): SimpleItemSearchValidator {

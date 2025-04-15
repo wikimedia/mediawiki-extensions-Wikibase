@@ -33800,9 +33800,9 @@
                   "invalid-query-parameter": {
                     "value": {
                       "code": "invalid-query-parameter",
-                      "message": "Invalid query parameter: 'language'",
+                      "message": "Invalid query parameter: '{query_parameter}'",
                       "context": {
-                        "parameter": "language"
+                        "parameter": "{query_parameter}"
                       }
                     }
                   }
@@ -34034,9 +34034,9 @@
                   "invalid-query-parameter": {
                     "value": {
                       "code": "invalid-query-parameter",
-                      "message": "Invalid query parameter: 'language'",
+                      "message": "Invalid query parameter: '{query_parameter}'",
                       "context": {
-                        "parameter": "language"
+                        "parameter": "{query_parameter}"
                       }
                     }
                   }
@@ -43247,9 +43247,9 @@
               "invalid-query-parameter": {
                 "value": {
                   "code": "invalid-query-parameter",
-                  "message": "Invalid query parameter: 'language'",
+                  "message": "Invalid query parameter: '{query_parameter}'",
                   "context": {
-                    "parameter": "language"
+                    "parameter": "{query_parameter}"
                   }
                 }
               }

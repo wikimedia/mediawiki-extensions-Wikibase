@@ -12,6 +12,10 @@ use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 class SimpleItemSearchValidator {
 
 	public const LANGUAGE_QUERY_PARAM = 'language';
+	public const LIMIT_QUERY_PARAM = 'limit';
+	public const OFFSET_QUERY_PARAM = 'offset';
+
+	private const MAX_LIMIT = 500;
 
 	private SearchLanguageValidator $languageValidator;
 
@@ -30,14 +34,25 @@ class SimpleItemSearchValidator {
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
 				case SearchLanguageValidator::CODE_INVALID_LANGUAGE_CODE:
-					throw new UseCaseError(
-						UseCaseError::INVALID_QUERY_PARAMETER,
-						"Invalid query parameter: '" . self::LANGUAGE_QUERY_PARAM . "'",
-						[ UseCaseError::CONTEXT_PARAMETER => self::LANGUAGE_QUERY_PARAM ]
-					);
+					throw UseCaseError::invalidQueryParameter( self::LANGUAGE_QUERY_PARAM );
 				default:
 					throw new LogicException( 'unknown validation error code ' . $validationError->getCode() );
 			}
+		}
+
+		$this->validateLimitAndOffset( $request );
+	}
+
+	private function validateLimitAndOffset( SimpleItemSearchRequest $request ): void {
+		$limit = $request->getLimit();
+		$offset = $request->getOffset();
+
+		if ( $limit < 0 || $limit > self::MAX_LIMIT ) {
+			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );
+		}
+
+		if ( $offset < 0 ) {
+			throw UseCaseError::invalidQueryParameter( self::OFFSET_QUERY_PARAM );
 		}
 	}
 }

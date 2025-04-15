@@ -46,6 +46,14 @@ class UseCaseError extends RuntimeException {
 		}
 	}
 
+	public static function invalidQueryParameter( string $parameter ): self {
+		return new self(
+			self::INVALID_QUERY_PARAMETER,
+			"Invalid query parameter: '$parameter'",
+			[ self::CONTEXT_PARAMETER => $parameter ]
+		);
+	}
+
 	public function getErrorCode(): string {
 		return $this->errorCode;
 	}
