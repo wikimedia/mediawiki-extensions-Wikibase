@@ -16,18 +16,15 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
  */
 class DataTypeDefinitionsTest extends ServiceWiringTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
+	public function testConstruction(): void {
+		$this->configureHookRunner();
 		$this->mockService(
 			'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'disabledDataTypes' => [],
 			] )
 		);
-	}
 
-	public function testConstruction(): void {
 		$this->assertInstanceOf(
 			DataTypeDefinitions::class,
 			$this->getService( 'WikibaseRepo.DataTypeDefinitions' )
@@ -35,11 +32,17 @@ class DataTypeDefinitionsTest extends ServiceWiringTestCase {
 	}
 
 	public function testRunsHook(): void {
-		$this->configureHookContainer( [
+		$this->configureHookRunner( [
 			'WikibaseRepoDataTypes' => [ function ( array &$dataTypes ) {
 				$dataTypes['PT:test'] = [ 'value-type' => 'string' ];
 			} ],
 		] );
+		$this->mockService(
+			'WikibaseRepo.Settings',
+			new SettingsArray( [
+				'disabledDataTypes' => [],
+			] )
+		);
 
 		/** @var DataTypeDefinitions $dataTypeDefinitions */
 		$dataTypeDefinitions = $this->getService( 'WikibaseRepo.DataTypeDefinitions' );

@@ -476,7 +476,8 @@ return [
 			$baseDataTypes
 		);
 
-		$services->getHookContainer()->run( 'WikibaseRepoDataTypes', [ &$dataTypes ] );
+		WikibaseRepo::getHookRunner( $services )
+			->onWikibaseRepoDataTypes( $dataTypes );
 
 		$settings = WikibaseRepo::getSettings( $services );
 
