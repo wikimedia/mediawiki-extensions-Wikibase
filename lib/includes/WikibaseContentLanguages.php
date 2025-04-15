@@ -6,6 +6,7 @@ use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MediaWikiServices;
 use OutOfRangeException;
+use Wikibase\Lib\Hooks\WikibaseLibHookRunner;
 
 /**
  * A collection of {@link ContentLanguages} objects for different contexts.
@@ -58,11 +59,8 @@ class WikibaseContentLanguages {
 		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages( $languageNameUtils );
 		$contentLanguages[self::CONTEXT_MONOLINGUAL_TEXT] = self::getDefaultMonolingualTextLanguages( $languageNameUtils );
 
-		$hookContainer->run(
-			'WikibaseContentLanguages',
-			[ &$contentLanguages ],
-			[ 'abortable' => false ]
-		);
+		( new WikibaseLibHookRunner( $hookContainer ) )
+			->onWikibaseContentLanguages( $contentLanguages );
 
 		return new self( $contentLanguages );
 	}

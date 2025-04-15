@@ -933,6 +933,7 @@
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\": "repo/domains/crud/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\Architecture\\": "repo/domains/crud/tests/architecture/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\Lib\\Tests\\Unit\\": "lib/tests/phpunit/unit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataModel\\Fixtures\\": "lib/packages/wikibase/data-model/tests/fixtures/",
 		"Tests\\Wikibase\\DataModel\\": "lib/packages/wikibase/data-model-serialization/tests/unit/",
