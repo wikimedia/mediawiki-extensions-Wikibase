@@ -1,16 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eruedin"
+			"Eruedin",
+			"Lydie maliki"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} eloko",
 	"wikibase-editlinks": "Kobimisela ekangisi",
+	"wikibase-addlinkstitle": "Bakisa ba liens interlangues",
 	"wikibase-linkitem-addlinks": "Kobakisa ekangisi",
 	"wikibase-linkitem-title": "Ekangisi na lonkásá",
 	"wikibase-linkitem-linkpage": "Ekangisi na lonkásá",
+	"wikibase-linkitem-selectlink": "Tosɛngi yo opona site moko mpe lokasa oyo olingi kotya lien na lokasa oyo.",
 	"wikibase-linkitem-input-site": "Lokótá:",
 	"wikibase-linkitem-input-page": "Lonkásá:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Kobombana",
 	"wikibase-rc-hide-wikidata-show": "Komɔ́nisa",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-otherprojects": "Na ba projets misusu"
 }
