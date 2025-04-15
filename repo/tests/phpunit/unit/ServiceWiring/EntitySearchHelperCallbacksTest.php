@@ -4,11 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use MediaWiki\HookContainer\HookContainer;
-use MediaWiki\HookContainer\StaticHookRegistry;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
-use Wikimedia\ObjectFactory\ObjectFactory;
 
 /**
  * @coversNothing
@@ -32,18 +29,13 @@ class EntitySearchHelperCallbacksTest extends ServiceWiringTestCase {
 					EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK => $callable2,
 				],
 			] ) );
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getHookContainer' )
-			->willReturn( new HookContainer(
-				new StaticHookRegistry( [
-					'WikibaseRepoEntitySearchHelperCallbacks' => [
-						'callback' => function ( &$callbacks ) use ( $callable3 ) {
-							$callbacks['type3'] = $callable3;
-						},
-					],
-				] ),
-				$this->createMock( ObjectFactory::class )
-			) );
+		$this->configureHookRunner( [
+			'WikibaseRepoEntitySearchHelperCallbacks' => [
+				function ( &$callbacks ) use ( $callable3 ) {
+					$callbacks['type3'] = $callable3;
+				},
+			],
+		] );
 
 		$this->assertSame( [
 			'type1' => $callable1,

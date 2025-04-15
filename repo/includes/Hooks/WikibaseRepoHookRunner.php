@@ -23,6 +23,7 @@ class WikibaseRepoHookRunner implements
 	WikibaseChangeNotificationHook,
 	WikibaseContentModelMappingHook,
 	WikibaseRepoDataTypesHook,
+	WikibaseRepoEntitySearchHelperCallbacksHook,
 	WikibaseRepoEntityTypesHook,
 	WikibaseRepoOnParserOutputUpdaterConstructionHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
@@ -78,6 +79,13 @@ class WikibaseRepoHookRunner implements
 	public function onWikibaseRepoDataTypes( array &$dataTypeDefinitions ): void {
 		$this->hookContainer->run( 'WikibaseRepoDataTypes',
 			[ &$dataTypeDefinitions ],
+			[ 'abortable' => false ]
+		);
+	}
+
+	public function onWikibaseRepoEntitySearchHelperCallbacks( array &$callbacks ): void {
+		$this->hookContainer->run( 'WikibaseRepoEntitySearchHelperCallbacks',
+			[ &$callbacks ],
 			[ 'abortable' => false ]
 		);
 	}
