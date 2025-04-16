@@ -6,7 +6,7 @@ Changes to the Wikibase Lua interface are subject to the [Stable Interface Polic
 
 For ease of access and convenience Wikibase Lua library provides access to aspects (labels, descriptions, statements) either directly or by loading the whole entity.
 For improved performance, when accessing only specific aspects it is recommended to access them directly (without getEntity).
-On multilingual wikis accessing labels is based on user's language rather than Wiki's language. The following table summarizes the most common functions:
+On multilingual wikis, accessing labels is based on the user's language rather than the wiki's content language. The following table summarizes the most common functions:
 
 |Aspect|mw.wikibase.FUNCTION|entity:FUNCTION|
 |------|--------------------|---------------|
@@ -81,9 +81,9 @@ mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, li
 `wikibase.getLabel()`  
 `wikibase.getLabel( id )`
 
-Takes an item ID and returns the label in the language of the local Wiki.
+Takes an item ID and returns the label in the language of the local wiki.
 
-If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getLabelWithLang`](#mw_wikibase_getLabelWithLang).
+If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getLabelWithLang`](#mw_wikibase_getLabelWithLang).
 
 An example call might look like this:
 
@@ -137,14 +137,14 @@ mw.wikibase.getDescriptionByLang( 'Q42', 'es' ) -- Returns the Spanish descripti
 `wikibase.getSitelink( itemId )`  
 `wikibase.getSitelink( itemId, globalSiteId )`
 
-Takes an item ID and returns the title of the corresponding page on the local Wiki or nil if it doesn't exist. This page title can be used to link to the given page.
+Takes an item ID and returns the title of the corresponding page on the local wiki or nil if it doesn't exist. This page title can be used to link to the given page.
 
 When `globalSiteId` is given, the page title on the specified wiki is returned, rather than the one on the local wiki.
 
 An example call might look like this:
 
 ``` {.lua}
-mw.wikibase.getSitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin"..
+mw.wikibase.getSitelink( 'Q42' ) -- Returns the given item's page title in the current wiki as a string, like "Berlin"..
 ```
 
 ### mw.wikibase.getBadges {#mw_wikibase_getBadges}
@@ -166,9 +166,9 @@ mw.wikibase.getBadges( 'Q64', 'dewiki' ) -- Returns the badges set on the site l
 `wikibase.getDescription()`  
 `wikibase.getDescription( id )`
 
-Takes an item ID and returns the description in the language of the local Wiki.
+Takes an item ID and returns the description in the language of the local wiki.
 
-If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getDescriptionWithLang`](#mw_wikibase_getDescriptionWithLang).
+If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis), furthermore language fallbacks will be applied. See also [`mw.wikibase.getDescriptionWithLang`](#mw_wikibase_getDescriptionWithLang).
 
 An example call might look like this:
 
@@ -571,7 +571,7 @@ entity:getId() -- Returns a string like "Q123"
 
 `entity:getLabel()`
 `entity:getLabel( langCode )`
-Returns the label of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getLabelWithLang`](#mw_wikibase_entity_getLabelWithLang).
+Returns the label of the entity in the language given as `langCode` or in the wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getLabelWithLang`](#mw_wikibase_entity_getLabelWithLang).
 
 An example call might look like this:
 
@@ -584,7 +584,7 @@ entity:getLabel( 'de' ) -- Returns a string like "Berlin"
 `entity:getDescription()`  
 `entity:getDescription( langCode )`
 
-Returns the description of the entity in the language given as `langCode` or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getDescriptionWithLang`](#mw_wikibase_entity_getDescriptionWithLang).
+Returns the description of the entity in the language given as `langCode` or in the wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [`mw.wikibase.entity:getDescriptionWithLang`](#mw_wikibase_entity_getDescriptionWithLang).
 
 An example call might look like this:
 
@@ -623,12 +623,12 @@ local desc, lang = entity:getDescriptionWithLang( 'de' ) -- desc contains the te
 `entity:getSitelink()`  
 `entity:getSitelink( globalSiteId )`
 
-Get the title with which the entity is linked in the current Wiki. If `globalSiteId` is given, the title the item is linked with in the given Wiki will be returned.
+Get the title with which the entity is linked in the current wiki. If `globalSiteId` is given, the title the item is linked with in the given wiki will be returned.
 
 An example call might look like this:
 
 ``` {.lua}
-entity:getSitelink() -- Returns the item's page title in the current Wiki as a string, like "Moskow"
+entity:getSitelink() -- Returns the item's page title in the current wiki as a string, like "Moskow"
 entity:getSitelink( 'ruwiki' ) -- Returns the item's page title in the Russian Wikipedia as a string, like "Москва"
 ```
 
