@@ -341,6 +341,7 @@
 		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
 		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\Lib\\Tests\\Unit\\": "lib/tests/phpunit/unit/",
 		"Wikibase\\DataModel\\Fixtures\\": "lib/packages/wikibase/data-model/tests/fixtures/",
 		"Tests\\Wikibase\\DataModel\\": "lib/packages/wikibase/data-model-serialization/tests/unit/",
 		"Wikibase\\DataModel\\Services\\Fixtures\\": "lib/packages/wikibase/data-model-services/tests/fixtures/",

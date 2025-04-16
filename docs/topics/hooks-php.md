@@ -33,11 +33,7 @@ Parameters:
 See @ref Wikibase::Repo::Hooks::WikibaseChangeNotificationHook.
 
 #### WikibaseContentLanguages {#WikibaseContentLanguages}
-Called by[ WikibaseRepo::getContentLanguages()], which in turn is called by some other getters, to define the content languages per context.
-
-Parameters:
-* &$map
-  * An associative array mapping contexts ('term', 'monolingualtext', extension-specific…) to ContentLanguage objects.
+See @ref Wikibase::Lib::Hooks::WikibaseContentLanguagesHook.
 
 #### GetEntityContentModelForTitle {#GetEntityContentModelForTitle}
 See @ref Wikibase::Repo::Hooks::GetEntityContentModelForTitleHook.
