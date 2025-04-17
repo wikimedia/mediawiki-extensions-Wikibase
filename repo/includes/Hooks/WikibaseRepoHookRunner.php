@@ -23,6 +23,7 @@ class WikibaseRepoHookRunner implements
 	WikibaseChangeNotificationHook,
 	WikibaseContentModelMappingHook,
 	WikibaseRepoDataTypesHook,
+	WikibaseRepoEntityNamespacesHook,
 	WikibaseRepoEntitySearchHelperCallbacksHook,
 	WikibaseRepoEntityTypesHook,
 	WikibaseRepoOnParserOutputUpdaterConstructionHook,
@@ -141,4 +142,12 @@ class WikibaseRepoHookRunner implements
 		);
 	}
 
+	/** @inheritDoc */
+	public function onWikibaseRepoEntityNamespaces( array &$entityNamespaces ): void {
+		$this->hookContainer->run(
+			'WikibaseRepoEntityNamespaces',
+			[ &$entityNamespaces ],
+			[ 'abortable' => false ]
+		);
+	}
 }
