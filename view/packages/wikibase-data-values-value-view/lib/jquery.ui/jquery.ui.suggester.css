@@ -8,21 +8,21 @@
 	font-size: 0.8125rem; /* results in 13px with the Vector skin */
 }
 
-.ui-suggester-list {
-	background: white;
-	border-color: #C9C9C9;
+.ui-widget.ui-suggester-list {
+	background: var( --background-color-base, #eaecf0 );
+	border-color: var( --border-color-base, #a2a9b1 );
 	min-width: 8em; /* same as .ui-listrotator-label */
 }
 
 .ui-suggester-list .ui-state-hover {
 	border: none;
-	background: #4C59A6;
-	color: white;
+	background: var( --background-color-progressive-subtle, #f1f4fd );
+	color: var( --color-progressive, #36c );
 }
 
 .ui-suggester-list .ui-state-hover a,
 .ui-suggester-list .ui-state-hover a:hover {
-	color: white;
+	color: var( --color-progressive, #36c );
 }
 
 .ui-suggester-list {
@@ -31,7 +31,7 @@
 }
 
 .ui-suggester-list a {
-	color: black;
+	color: var( --color-base, #202122 );
 	padding: 0 0.2em;
 	text-decoration: none;
 }
