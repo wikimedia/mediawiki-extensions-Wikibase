@@ -530,6 +530,8 @@
 	"special-setlabeldescriptionaliases-parameterized": "Задавање на натпис, опис и истозначници за $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Не можете да соделуват со Здружените својства користејќи го овој приложник.",
 	"wikibase-federated-properties-failed-request-api-error-message": "Барањето не успеа поради неуспешно барање до здруженото изворно вики.",
+	"wikibase-scoped-search-search-entities": "Пребарај единици",
+	"wikibase-scoped-search-search-entities-description": "Најди различни видови на единици од {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Предмети",
 	"wikibase-scoped-search-property-scope-name": "Својства"
 }
