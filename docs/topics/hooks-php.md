@@ -22,12 +22,7 @@ See @ref Wikibase::Repo::Hooks::WikibaseTextForSearchIndexHook.
 See @ref Wikibase::Repo::Hooks::WikibaseContentModelMappingHook.
 
 #### WikibaseRepoEntityNamespaces {#WikibaseRepoEntityNamespaces}
-Called in the example settings to allow additional mappings between Entity types and namespace IDs to be defined.
-Only used if no custom entity sources are defined.
-
-Parameters:
-* &$map
-  * An associative array mapping Entity types to namespace ids.
+See @ref Wikibase::Repo::Hooks::WikibaseRepoEntityNamespacesHook.
 
 #### WikibaseChangeNotification {#WikibaseChangeNotification}
 See @ref Wikibase::Repo::Hooks::WikibaseChangeNotificationHook.

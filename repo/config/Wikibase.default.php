@@ -11,6 +11,7 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 
 global $wgCdnMaxAge;
 
@@ -359,8 +360,8 @@ return [
 				'property' => WB_NS_PROPERTY,
 			];
 
-			$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
-			$hookContainer->run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
+			( new WikibaseRepoHookRunner( MediaWikiServices::getInstance()->getHookContainer() ) )
+				 ->onWikibaseRepoEntityNamespaces( $entityNamespaces );
 
 			return [
 				$settings->getSetting( 'localEntitySourceName' ) => [
