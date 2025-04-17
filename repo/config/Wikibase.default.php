@@ -9,9 +9,8 @@
  * @license GPL-2.0-or-later
  */
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
+use Wikibase\Repo\WikibaseRepo;
 
 global $wgCdnMaxAge;
 
@@ -360,7 +359,7 @@ return [
 				'property' => WB_NS_PROPERTY,
 			];
 
-			( new WikibaseRepoHookRunner( MediaWikiServices::getInstance()->getHookContainer() ) )
+			WikibaseRepo::getHookRunner()
 				 ->onWikibaseRepoEntityNamespaces( $entityNamespaces );
 
 			return [
