@@ -25,6 +25,6 @@ interface WikibaseRepoOnParserOutputUpdaterConstructionHook {
 	public function onWikibaseRepoOnParserOutputUpdaterConstruction(
 		StatementDataUpdater $statementUpdater,
 		array &$entityUpdaters
-	);
+	): void;
 
 }

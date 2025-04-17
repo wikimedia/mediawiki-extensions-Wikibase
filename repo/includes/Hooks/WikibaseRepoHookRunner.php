@@ -130,7 +130,8 @@ class WikibaseRepoHookRunner implements
 	public function onWikibaseRepoSearchableEntityScopes( array &$searchableEntityScopes ): void {
 		$this->hookContainer->run(
 			'WikibaseRepoSearchableEntityScopes',
-			[ &$searchableEntityScopes ]
+			[ &$searchableEntityScopes ],
+			[ 'abortable' => false ]
 		);
 	}
 
