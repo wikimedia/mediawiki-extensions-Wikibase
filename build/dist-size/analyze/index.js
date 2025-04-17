@@ -59,12 +59,17 @@ async function main() {
 	} );
 
 	const data = {};
-	await Promise.all( files.map(
-		async ( filePath ) => {
-			data[ filePath ] = await getHistoryForFile( client, repoOwner, repoName, filePath );
-			console.info( `Analysed ${ filePath }` );
-		},
-	) );
+	try {
+		await Promise.all( files.map(
+			async ( filePath ) => {
+				data[ filePath ] = await getHistoryForFile( client, repoOwner, repoName, filePath );
+				console.info( `Analysed ${ filePath }` );
+			},
+		) );
+	} catch ( e ) {
+		console.error( 'Analysis failed, aborting:', e );
+		return; // don’t throw, just exit successfully (T389385)
+	}
 
 	await fs.mkdir( outputDirectory );
 	await fs.mkdir( `${ outputDirectory }/lib` );
