@@ -456,7 +456,7 @@ return [
 			$baseEntityTypes
 		);
 
-		$services->getHookContainer()->run( 'WikibaseClientEntityTypes', [ &$entityTypes ] );
+		WikibaseClient::getHookRunner( $services )->onWikibaseClientEntityTypes( $entityTypes );
 
 		return new EntityTypeDefinitions( $entityTypes );
 	},

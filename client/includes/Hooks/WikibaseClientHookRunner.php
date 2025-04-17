@@ -14,6 +14,7 @@ use Wikibase\Lib\Changes\EntityChange;
  */
 class WikibaseClientHookRunner implements
 	WikibaseClientDataTypesHook,
+	WikibaseClientEntityTypesHook,
 	WikibaseClientSiteLinksForItemHook,
 	WikibaseHandleChangeHook,
 	WikibaseHandleChangesHook
@@ -77,5 +78,14 @@ class WikibaseClientHookRunner implements
 			[ &$dataTypeDefinitions ],
 			[ 'abortable' => false ]
 		);
+	}
+
+	/** @inheritDoc */
+	public function onWikibaseClientEntityTypes( array &$entityTypeDefinitions ): void {
+		 $this->hookContainer->run(
+			 'WikibaseClientEntityTypes',
+			 [ &$entityTypeDefinitions ],
+			 [ 'abortable' => false ]
+		 );
 	}
 }

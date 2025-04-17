@@ -54,16 +54,7 @@ Client
 See @ref Wikibase::Client::Hooks::WikibaseClientDataTypesHook
 
 #### WikibaseClientEntityTypes {#WikibaseClientEntityTypes}
-Called when constructing the top-level [WikibaseClient] factory
-May be used to define additional entity types.
-See also @ref Wikibase::Repo::Hooks::WikibaseRepoEntityTypesHook.
-
-Hook handlers may add additional definitions.
-See [entitytypes documentation] for details.
-
-Parameters:
-* **&$entityTypeDefinitions**
-  * The array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
+See @ref Wikibase::Client::Hooks::WikibaseClientEntityTypes
 
 #### WikibaseHandleChanges {#WikibaseHandleChanges}
 Called by [ChangeHandler::handleChange()] to allow pre-processing of changes.
