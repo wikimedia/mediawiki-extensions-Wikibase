@@ -14,8 +14,8 @@ namespace Wikibase\Repo\Hooks;
 interface WikibaseRepoEntityNamespacesHook {
 
 	/**
-	 * Called in the example settings to allow additional mappings between Entity types
-	 * and namespace IDs to be defined.
+	 * Called in the default 'entitySources' setting to allow additional mappings
+	 * between Entity types and namespace IDs to be defined.
 	 *
 	 * Only used if no custom entity sources are defined.
 	 *
