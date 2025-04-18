@@ -5,9 +5,12 @@
 			"HackerPunki"
 		]
 	},
-	"wikibase-editlinks": "Edital atijus",
-	"wikibase-linkitem-addlinks": "Añidil enlacis",
+	"wikibase-editlinks": "Dital atijus",
+	"wikibase-addlinkstitle": "Añidil atijus entrilengüísticus",
+	"wikibase-linkitem-addlinks": "Añidil atijus",
 	"wikibase-linkitem-input-site": "Luenga:",
 	"wikibase-linkitem-input-page": "Página:",
-	"wikibase-rc-hide-wikidata-show": "Muestral"
+	"wikibase-rc-hide-wikidata-hide": "Incultal",
+	"wikibase-rc-hide-wikidata-show": "Muestral",
+	"wikibase-otherprojects": "En sotrus proyeutus"
 }
