@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Unit\Usage;
 use DataValues\StringValue;
 use MediaWiki\Extension\Scribunto\ScribuntoContent;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\Parsoid\Config\SiteConfig;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -47,7 +48,10 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 	private function getPageConfig(): IPageConfig {
 		$pageConfigFactory = MediaWikiServices::getInstance()->getParsoidPageConfigFactory();
 		$pageIdentity = $this->getNonexistingTestPage(); // arbitrary
-		return $pageConfigFactory->create( $pageIdentity );
+		return $pageConfigFactory->createFromParserOptions(
+			ParserOptions::newFromAnon(),
+			$pageIdentity
+		);
 	}
 
 	private function parseText(
