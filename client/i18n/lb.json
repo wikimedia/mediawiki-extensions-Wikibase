@@ -39,6 +39,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Dir musst ageloggt sinn",
 	"wikibase-linkitem-not-loggedin": "Dir musst op dëser Wiki an am [$1 zentralen Daterepertoire] ageloggt si fir dës Funktioun ze benotzen.",
 	"wikibase-linkitem-success-link": "D'Säite goufe verlinkt. Dir fannt d'Element mat de Linken an eiser [$1 zentraler Datebank].",
+	"limitreport-entityaccesscount": "Zuel vun de geluedene Wikibase-Entitéiten",
 	"wikibase-property-notfound": "D'Eegeschaft $1 gouf net fonnt.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Verstoppen",
