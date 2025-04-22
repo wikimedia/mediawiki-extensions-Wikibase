@@ -8,9 +8,12 @@
 	"wikibase-editlinks": "Dital atijus",
 	"wikibase-addlinkstitle": "Añidil atijus entrilengüísticus",
 	"wikibase-linkitem-addlinks": "Añidil atijus",
+	"wikibase-linkitem-title": "Enganchal cona página",
+	"wikibase-linkitem-linkpage": "Enganchal cona página",
+	"wikibase-linkitem-selectlink": "Por favol, decoja un sítiu i una página que quiel enganchal a aquesta página",
 	"wikibase-linkitem-input-site": "Luenga:",
 	"wikibase-linkitem-input-page": "Página:",
 	"wikibase-rc-hide-wikidata-hide": "Incultal",
 	"wikibase-rc-hide-wikidata-show": "Muestral",
-	"wikibase-otherprojects": "En sotrus proyeutus"
+	"wikibase-otherprojects": "N'otrus proyeutus"
 }
