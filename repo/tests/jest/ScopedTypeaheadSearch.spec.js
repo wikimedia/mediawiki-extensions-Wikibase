@@ -142,7 +142,8 @@ describe( 'ScopedTypeaheadSearch', () => {
 				p: 122,
 				l: 146
 			},
-			wgScript: 'fakeBaseUrl'
+			wgScript: 'fakeBaseUrl',
+			wgUserLanguage: 'ar'
 		};
 		mw.config = {
 			get: jest.fn( ( key ) => mockConfig[ key ] )
@@ -182,7 +183,7 @@ describe( 'ScopedTypeaheadSearch', () => {
 		it( 'sets initial properties on the CdxTypeaheadSearch component', async () => {
 			expect( typeaheadComponent.props() ).toMatchObject( {
 				formAction: 'fakeBaseUrl',
-				searchFooterUrl: 'fakeBaseUrl?language=en&search=&title=Special%3ASearch&fulltext=1&ns0=1',
+				searchFooterUrl: 'fakeBaseUrl?language=ar&search=&title=Special%3ASearch&fulltext=1&ns0=1',
 				searchResults: []
 			} );
 		} );
@@ -194,6 +195,20 @@ describe( 'ScopedTypeaheadSearch', () => {
 				action: 'wbsearchentities',
 				type: 'item',
 				search: 'searchterm'
+			} ) );
+			expect( typeaheadComponent.props( 'searchFooterUrl' ) ).toMatch( /search=searchterm/ );
+			expect( typeaheadComponent.props( 'searchFooterUrl' ) ).toMatch( /language=ar/ );
+		} );
+
+		it( 'searches in the user-configured language', async () => {
+			await typeaheadComponent.vm.$emit( 'input', 'searchterm' );
+
+			expect( mockedGet ).toHaveBeenCalledWith( expect.objectContaining( {
+				action: 'wbsearchentities',
+				type: 'item',
+				search: 'searchterm',
+				language: 'ar',
+				uselang: 'ar'
 			} ) );
 			expect( typeaheadComponent.props( 'searchFooterUrl' ) ).toMatch( /search=searchterm/ );
 		} );
