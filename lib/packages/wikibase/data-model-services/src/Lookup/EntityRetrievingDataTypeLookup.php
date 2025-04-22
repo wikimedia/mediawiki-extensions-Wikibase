@@ -20,6 +20,7 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
+	private array $propertyIdsInProcess = [];
 
 	public function __construct( EntityLookup $entityLookup ) {
 		$this->entityLookup = $entityLookup;
@@ -34,6 +35,11 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @throws PropertyDataTypeLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
+		if ( array_key_exists( $propertyId->getSerialization(), $this->propertyIdsInProcess ) ) {
+			// avoid self-referencing loop for newly created properties (T374230)
+			throw new PropertyDataTypeLookupException( $propertyId, 'loop detected' );
+		}
+		$this->propertyIdsInProcess[ $propertyId->getSerialization() ] = true;
 		return $this->getProperty( $propertyId )->getDataTypeId();
 	}
 
@@ -49,6 +55,8 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 		if ( !( $property instanceof Property ) ) {
 			throw new PropertyDataTypeLookupException( $propertyId );
 		}
+
+		unset( $this->propertyIdsInProcess[ $propertyId->getSerialization() ] );
 
 		return $property;
 	}
