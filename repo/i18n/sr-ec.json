@@ -140,6 +140,7 @@
 	"wikibase-anonymouseditnotificationtempuser-message": "Пријавите се или отворите налог. Тиме ће Ваши доприноси бити приписивани корисничком имену и стећи ћете многе погодности.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Упозори ме када нисам пријављен/а.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Уреди без пријаве",
+	"wikibase-anonymouseditnotificationtempuser": "Ако се <strong>[$1 пријавите]</strong> или <strong>[$2 отворите налог]</strong>, Ваше измене ће бити приписане Вашем корисничком имену између осталога.",
 	"wikibase-move-error": "Не можете премештати странице које су у подаци именском простору, нити премештати у исти.",
 	"wikibase-validator-invalid": "Погрешна вредност",
 	"wikibase-validator-missing-field": "Недостаје обавезно поље „$1”",
