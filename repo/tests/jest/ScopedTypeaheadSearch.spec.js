@@ -225,12 +225,6 @@ describe( 'ScopedTypeaheadSearch', () => {
 				} ) );
 
 			} );
-
-			// TODO: T391841 - fix either this test or the component. When emitting the `input` event,
-			//       the scope correctly updates, but an `update:selected` event is *not* emitted.
-			it.skip( 'emits an `update:selected` event when', async () => {
-				expect( selectComponent.emitted( 'update:selected' )[ 0 ] ).toEqual( 'property' );
-			} );
 		} );
 
 		it( 'input ending in a `:` not matching a configured prefix is treated as plain input', async () => {
