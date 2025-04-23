@@ -26,31 +26,15 @@ class StatslibTimeRecordingEditFilterHookRunner implements EditFilterHookRunner 
 	private $statsFactory;
 
 	/**
-	 * @var string
-	 */
-	private $statsdTimingPrefix;
-
-	/**
-	 * @var string
-	 */
-	private $statsTimingPrefix;
-
-	/**
 	 * @param EditFilterHookRunner $hookRunner
 	 * @param StatsFactory $statsFactory
-	 * @param string $statsdTimingPrefix Resulting metric will be: $statsdTimingPrefix.saveEntity.<entitytype>
-	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EditFilterHookRunner $hookRunner,
-		StatsFactory $statsFactory,
-		string $statsdTimingPrefix,
-		string $statsTimingPrefix
+		StatsFactory $statsFactory
 	) {
 		$this->hookRunner = $hookRunner;
 		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
-		$this->statsdTimingPrefix = $statsdTimingPrefix;
-		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
 	/**
@@ -76,9 +60,9 @@ class StatslibTimeRecordingEditFilterHookRunner implements EditFilterHookRunner 
 			}
 
 			$this->statsFactory
-			->getTiming( "{$this->statsTimingPrefix}_run_duration_seconds" )
+			->getTiming( 'EditEntity_EditFilterHookRunner_run_duration_seconds' )
 			->setLabel( 'type', $entityType )
-			->copyToStatsdAt( "{$this->statsdTimingPrefix}.run.{$entityType}" )
+			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EditFilterHookRunner.run.{$entityType}" )
 			->observe( ( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000 );
 		}
 

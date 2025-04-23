@@ -26,31 +26,15 @@ class StatslibSaveTimeRecordingEntityStore implements EntityStore {
 	private $statsFactory;
 
 	/**
-	 * @var string
-	 */
-	private $statsdTimingPrefix;
-
-	/**
-	 * @var string
-	 */
-	private $statsTimingPrefix;
-
-	/**
 	 * @param EntityStore $entityStore
 	 * @param StatsFactory $statsFactory
-	 * @param string $statsdTimingPrefix Resulting metric will be: $statsdTimingPrefix.saveEntity.<entitytype>
-	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EntityStore $entityStore,
-		StatsFactory $statsFactory,
-		string $statsdTimingPrefix,
-		string $statsTimingPrefix
+		StatsFactory $statsFactory
 	) {
 		$this->entityStore = $entityStore;
 		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
-		$this->statsdTimingPrefix = $statsdTimingPrefix;
-		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
 	/**
@@ -72,9 +56,9 @@ class StatslibSaveTimeRecordingEntityStore implements EntityStore {
 		array $tags = []
 	) {
 		$timing = $this->statsFactory
-			->getTiming( "{$this->statsTimingPrefix}_saveEntity_duration_seconds" )
+			->getTiming( 'EditEntity_EntityStore_saveEntity_duration_seconds' )
 			->setLabel( 'type', $entity->getType() )
-			->copyToStatsdAt( "{$this->statsdTimingPrefix}.saveEntity.{$entity->getType()}" );
+			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EntityStore.saveEntity.{$entity->getType()}" );
 
 		$timing->start();
 		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId, $tags );

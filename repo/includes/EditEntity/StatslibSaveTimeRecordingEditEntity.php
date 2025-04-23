@@ -20,32 +20,17 @@ class StatslibSaveTimeRecordingEditEntity implements EditEntity {
 	 * @var StatsFactory
 	 */
 	private $statsFactory;
-	/**
-	 * @var string
-	 */
-	private $statsdTimingPrefix;
-
-	/**
-	 * @var string
-	 */
-	private $statsTimingPrefix;
 
 	/**
 	 * @param EditEntity $editEntity
 	 * @param StatsFactory $statsFactory
-	 * @param string $statsdTimingPrefix Resulting metric will be: $statsdTimingPrefix.saveEntity.<entitytype>
-	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EditEntity $editEntity,
-		StatsFactory $statsFactory,
-		string $statsdTimingPrefix,
-		string $statsTimingPrefix
+		StatsFactory $statsFactory
 	) {
 		$this->inner = $editEntity;
 		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
-		$this->statsdTimingPrefix = $statsdTimingPrefix;
-		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
 	/**
@@ -116,9 +101,9 @@ class StatslibSaveTimeRecordingEditEntity implements EditEntity {
 		array $tags = []
 	) {
 		$timing = $this->statsFactory
-			->getTiming( "{$this->statsTimingPrefix}_attemptSave_duration_seconds" )
+			->getTiming( 'EditEntity_attemptSave_duration_seconds' )
 			->setLabel( 'type', $newEntity->getType() )
-			->copyToStatsdAt( "{$this->statsdTimingPrefix}.attemptSave.{$newEntity->getType()}" );
+			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EditEntity.attemptSave.{$newEntity->getType()}" );
 
 		$timing->start();
 		$result = $this->inner->attemptSave( $newEntity, $summary, $flags, $token, $watch, $tags );

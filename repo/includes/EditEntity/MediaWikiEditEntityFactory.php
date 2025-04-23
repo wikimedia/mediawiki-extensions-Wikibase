@@ -124,15 +124,12 @@ class MediaWikiEditEntityFactory {
 		int $baseRevId = 0,
 		$allowMasterConnection = true
 	) {
-		$statsdTimingPrefix = "wikibase.repo.EditEntity.timing";
 		return new StatslibSaveTimeRecordingEditEntity(
 			new MediaWikiEditEntity( $this->titleLookup,
 				$this->entityRevisionLookup,
 				new StatslibSaveTimeRecordingEntityStore(
 					$this->entityStore,
-					$this->statsFactory,
-					$statsdTimingPrefix . '.EntityStore',
-					'EditEntity_EntityStore'
+					$this->statsFactory
 				),
 				$this->permissionChecker,
 				$this->entityDiffer,
@@ -141,9 +138,7 @@ class MediaWikiEditEntityFactory {
 				$context,
 				new StatslibTimeRecordingEditFilterHookRunner(
 					$this->editFilterHookRunner,
-					$this->statsFactory,
-					$statsdTimingPrefix . '.EditFilterHookRunner',
-					'EditEntity_EditFilterHookRunner'
+					$this->statsFactory
 				),
 				$this->userOptionsLookup,
 				$this->tempUserCreator,
@@ -152,9 +147,7 @@ class MediaWikiEditEntityFactory {
 				$baseRevId,
 				$allowMasterConnection
 			),
-			$this->statsFactory,
-			$statsdTimingPrefix . '.EditEntity',
-			'EditEntity'
+			$this->statsFactory
 		);
 	}
 
