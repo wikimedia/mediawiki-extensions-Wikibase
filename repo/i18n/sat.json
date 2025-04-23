@@ -3,13 +3,14 @@
 		"authors": [
 			"Albinus",
 			"Manik Soren",
-			"Ramjit Tudu"
+			"Ramjit Tudu",
+			"ᱥᱟᱹᱜᱩᱱ ᱗"
 		]
 	},
 	"wikibase-edit": "ᱥᱟᱯᱲᱟᱣ",
 	"wikibase-add": "ᱥᱮᱞᱮᱫ",
-	"wikibase-label-empty": "ᱡᱟᱸᱦᱟᱸᱱ ᱞᱮᱵᱮᱞ ᱵᱟᱹᱱᱩᱜ-ᱟ",
-	"wikibase-description-empty": "ᱡᱟᱸᱦᱟᱸᱱ ᱵᱤᱵᱚᱨᱚᱱᱤ ᱵᱟᱹᱱᱩᱜ-ᱟ",
+	"wikibase-label-empty": "ᱪᱮᱫ ᱞᱮᱵᱮᱞ ᱦᱚᱸ ᱵᱟᱹᱱᱩᱜᱼᱟ",
+	"wikibase-description-empty": "ᱪᱮᱫ ᱵᱤᱵᱚᱨᱚᱱ ᱦᱚᱸ ᱵᱟᱝ ᱥᱮᱞᱮᱫ ᱟᱠᱟᱱᱟ᱾",
 	"wikibase-sitelink-site-edit-placeholder": "ᱣᱤᱠᱤ",
 	"wikibase-sitelinks-special": "ᱮᱴᱟᱜ ᱥᱟᱭᱤᱴ ᱠᱚ",
 	"wikibase-statementview-rank-normal": "ᱥᱟᱫᱷᱟᱨᱚᱱ ᱨᱮᱸᱠ"
