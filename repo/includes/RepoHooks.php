@@ -26,12 +26,10 @@ use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Hook\TitleGetRestrictionTypesHook;
 use MediaWiki\Hook\UnitTestsListHook;
-use MediaWiki\Logging\LogEntry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
-use MediaWiki\Page\WikiPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
@@ -40,7 +38,6 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Skin\Skin;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use RuntimeException;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Item;
@@ -367,75 +364,6 @@ final class RepoHooks implements
 				$revision->getTimestamp()
 			) );
 		}
-	}
-
-	/**
-	 * Occurs after the delete article request has been processed.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
-	 *
-	 * @param WikiPage $wikiPage
-	 * @param User $user
-	 * @param string $reason
-	 * @param int $id id of the article that was deleted
-	 * @param Content|null $content
-	 * @param LogEntry $logEntry
-	 */
-	public static function onArticleDeleteComplete(
-		WikiPage $wikiPage,
-		User $user,
-		$reason,
-		$id,
-		?Content $content,
-		LogEntry $logEntry
-	) {
-		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
-
-		// Bail out if we are not looking at an entity
-		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
-			return;
-		}
-
-		/** @var EntityContent $content */
-		'@phan-var EntityContent $content';
-
-		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
-		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
-
-		$notifier = WikibaseRepo::getChangeNotifier();
-		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
-	}
-
-	/**
-	 * Handle changes for undeletions
-	 *
-	 * @param Title $title
-	 * @param bool $created
-	 * @param string $comment
-	 */
-	public static function onArticleUndelete( Title $title, $created, $comment ) {
-		$entityContentFactory = WikibaseRepo::getEntityContentFactory();
-
-		// Bail out if we are not looking at an entity
-		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
-			return;
-		}
-
-		$revisionId = $title->getLatestRevID();
-		$revisionRecord = MediaWikiServices::getInstance()
-			->getRevisionLookup()
-			->getRevisionById( $revisionId );
-		if ( !$revisionRecord ) {
-			return;
-		}
-
-		$content = $revisionRecord->getContent( SlotRecord::MAIN );
-		if ( !( $content instanceof EntityContent ) ) {
-			return;
-		}
-
-		$notifier = WikibaseRepo::getChangeNotifier();
-		$notifier->notifyOnPageUndeleted( $revisionRecord );
 	}
 
 	/**

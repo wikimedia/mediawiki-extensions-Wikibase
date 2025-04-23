@@ -1225,6 +1225,14 @@
 				"WikibaseRepo.TermsLanguages"
 			]
 		},
+		"PageDeleteHooksHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\PageDeleteHooksHandler",
+			"services": [
+				"WikibaseRepo.ChangeNotifier",
+				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.EntityStoreWatcher"
+			]
+		},
 		"PageHistoryPagerHookHandler": {
 			"class": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory",
@@ -1267,14 +1275,12 @@
 		"ApiQuery::moduleManager": "RepoHooks",
 		"ArticleDeleteComplete": [
 			"DeleteDispatcher",
-			"EntityDataPurger",
-			"\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete"
+			"EntityDataPurger"
 		],
 		"ArticleRevisionVisibilitySet": [
 			"ArticleRevisionVisibilitySet",
 			"EntityDataPurger"
 		],
-		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
 		"BeforeDisplayNoArticleText": "RepoHooks",
 		"BeforePageDisplay": "RepoHooks",
 		"ChangesListInitRows": "LabelPrefetch",
@@ -1294,6 +1300,8 @@
 		"OutputPageBeforeHTML": "OutputPageBeforeHTML",
 		"OutputPageBodyAttributes": "RepoHooks",
 		"OutputPageParserOutput": "RepoHooks",
+		"PageDeleteComplete": "PageDeleteHooksHandler",
+		"PageUndeleteComplete": "PageDeleteHooksHandler",
 		"PageHistoryLineEnding": "RepoHooks",
 		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",
 		"ParserFirstCallInit": "RepoHooks",
