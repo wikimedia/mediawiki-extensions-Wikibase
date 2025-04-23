@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use MediaWiki\User\User;
@@ -15,20 +17,9 @@ use Wikimedia\Stats\StatsFactory;
  */
 class StatslibSaveTimeRecordingEntityStore implements EntityStore {
 
-	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
+	private EntityStore $entityStore;
+	private StatsFactory $statsFactory;
 
-	/**
-	 * @var StatsFactory
-	 */
-	private $statsFactory;
-
-	/**
-	 * @param EntityStore $entityStore
-	 * @param StatsFactory $statsFactory
-	 */
 	public function __construct(
 		EntityStore $entityStore,
 		StatsFactory $statsFactory

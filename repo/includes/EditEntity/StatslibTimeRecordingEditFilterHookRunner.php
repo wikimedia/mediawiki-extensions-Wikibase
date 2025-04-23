@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use MediaWiki\Context\IContextSource;
@@ -15,20 +17,9 @@ use Wikimedia\Stats\StatsFactory;
  */
 class StatslibTimeRecordingEditFilterHookRunner implements EditFilterHookRunner {
 
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $hookRunner;
+	private EditFilterHookRunner $hookRunner;
+	private StatsFactory $statsFactory;
 
-	/**
-	 * @var StatsFactory
-	 */
-	private $statsFactory;
-
-	/**
-	 * @param EditFilterHookRunner $hookRunner
-	 * @param StatsFactory $statsFactory
-	 */
 	public function __construct(
 		EditFilterHookRunner $hookRunner,
 		StatsFactory $statsFactory

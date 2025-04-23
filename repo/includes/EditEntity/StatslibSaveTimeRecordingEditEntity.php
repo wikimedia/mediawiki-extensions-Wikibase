@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -11,20 +13,9 @@ use Wikimedia\Stats\StatsFactory;
  */
 class StatslibSaveTimeRecordingEditEntity implements EditEntity {
 
-	/**
-	 * @var EditEntity
-	 */
-	private $inner;
+	private EditEntity $inner;
+	private StatsFactory $statsFactory;
 
-	/**
-	 * @var StatsFactory
-	 */
-	private $statsFactory;
-
-	/**
-	 * @param EditEntity $editEntity
-	 * @param StatsFactory $statsFactory
-	 */
 	public function __construct(
 		EditEntity $editEntity,
 		StatsFactory $statsFactory

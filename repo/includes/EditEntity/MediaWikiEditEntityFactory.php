@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\EditEntity;
 
 use MediaWiki\Context\IContextSource;
@@ -20,63 +22,20 @@ use Wikimedia\Stats\StatsFactory;
  */
 class MediaWikiEditEntityFactory {
 
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $titleLookup;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var EntityDiffer
-	 */
-	private $entityDiffer;
-
-	/**
-	 * @var EntityPatcher
-	 */
-	private $entityPatcher;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
-
-	/**
-	 * @var StatsFactory
-	 */
-	private $statsFactory;
-
-	/**
-	 * @var UserOptionsLookup
-	 */
-	private $userOptionsLookup;
-
-	/**
-	 * @var TempUserCreator
-	 */
-	private $tempUserCreator;
-
-	/**
-	 * @var int
-	 */
-	private $maxSerializedEntitySize;
+	private EntityTitleStoreLookup $titleLookup;
+	private EntityRevisionLookup $entityRevisionLookup;
+	private EntityStore $entityStore;
+	private EntityPermissionChecker $permissionChecker;
+	private EntityDiffer $entityDiffer;
+	private EntityPatcher $entityPatcher;
+	private EditFilterHookRunner $editFilterHookRunner;
+	private StatsFactory $statsFactory;
+	private UserOptionsLookup $userOptionsLookup;
+	private TempUserCreator $tempUserCreator;
+	private int $maxSerializedEntitySize;
 
 	/** @var string[] */
-	private $localEntityTypes;
+	private array $localEntityTypes;
 
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
