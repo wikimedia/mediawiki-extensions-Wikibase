@@ -452,7 +452,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 		$comment = null;
 
-		RepoHooks::onFormat( $comment, $pre, $auto, $post, $itemTitle, $local );
+		( new RepoHooks )->onFormatAutocomments( $comment, $pre, $auto, $post, $itemTitle, $local, null );
 
 		if ( $expected === null ) {
 			$this->assertNull( $comment, 'Didn\'t find the expected null' );
