@@ -184,6 +184,7 @@
 	"wikibase-federated-properties-edit-request-failed-notice-header": "سمون نابريالی شو",
 	"special-setlabel-parameterized": "د $1 نښه ټاکل",
 	"special-setdescription-parameterized": "د $1 سپيناوی ټاکل",
+	"wikibase-scoped-search-search-entities": "ماهيتي څرنگوالو لټون",
 	"wikibase-scoped-search-item-scope-name": "توکي",
 	"wikibase-scoped-search-property-scope-name": "ځانتياوې"
 }

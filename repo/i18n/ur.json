@@ -8,6 +8,7 @@
 			"Muhammad Shuaib",
 			"Noor2020",
 			"Obaid Raza",
+			"شاه زمان پټان",
 			"عثمان خان شاہ",
 			"පසිඳු කාවින්ද"
 		]
@@ -16,7 +17,8 @@
 	"wikibase-entity": "وجود",
 	"wikibase-entity-item": "آئٹم",
 	"wikibase-entity-property": "پراپرٹی",
-	"wikibase-entity-query": "کویری",
+	"wikibase-entity-query": "پوښتنه",
+	"nstab-item": "آئٹم",
 	"wikibase-edit": "ترمیم کریں",
 	"wikibase-save": "محفوظ کریں",
 	"wikibase-publish": "شائع کریں",
