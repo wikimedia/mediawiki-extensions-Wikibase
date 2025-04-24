@@ -75,7 +75,7 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 
 			if ( $dataTypeId !== null ) {
 				$this->logger->debug(
-					'{method}: No property info found for {propertyId}, but property ID could be retrieved from fallback store!',
+					'{method}: No property info found for {propertyId}, but data type ID could be retrieved from fallback store!',
 					[
 						'method' => __METHOD__,
 						'propertyId' => $propertyId,
