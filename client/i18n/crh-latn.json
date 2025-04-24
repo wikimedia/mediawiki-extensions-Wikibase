@@ -37,6 +37,7 @@
 	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile {{PLURAL:$1|alâqalandırma|alâqalandırmalar}}",
 	"notification-header-page-connection": "<strong>$3</strong> saifesi, alâqalı malümatlarnıñ toplanğan {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 nomeralı {{WBREPONAME}} elementi}} ile {{GENDER:$2|bağlandı}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ve {{PLURAL:$4|bir başqa saife|$4 başqa saife|100=99+ başqa saife}}, alâqalı malümatlarnıñ toplanıp olacaq yeri olğan {{WBREPONAME}} elementlerine {{GENDER:$2|bağlandı}}.",
 	"notification-link-text-view-item": "Elementni {{GENDER:$1|köster}}",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Kirmeden devam et"
 }
