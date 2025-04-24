@@ -264,6 +264,9 @@
 			"BeforePageDisplay",
 			"Trivial"
 		],
+		"SpecialPageBeforeExecute": [
+			"Trivial"
+		],
 		"ContentAlterParserOutput": "ParserOutputUpdate",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPage",
 		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
@@ -372,6 +375,9 @@
 		"remoteExtPath": "Wikibase/client/resources"
 	},
 	"ResourceModules": {
+		"wikibase.summary.tracking": {
+			"scripts": "wikibase.summary.tracking.js"
+		},
 		"wikibase.client.init": {
 			"skinStyles": {
 				"modern": "wikibase.client.css",
