@@ -6,7 +6,6 @@ use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Tests\ExtensionJsonTestBase;
 use ReflectionClass;
 use ReflectionMethod;
-use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\WikibaseClient;
@@ -43,6 +42,13 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 				!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 				continue;
 			}
+			$needsEcho = in_array(
+				$hookHandlerName[0],
+				[ 'EchoGetBundleRulesHandler', 'EchoSetup' ]
+			);
+			if ( $needsEcho && !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
+				continue;
+			}
 			yield $hookHandlerName;
 		}
 	}
@@ -60,11 +66,6 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 		foreach ( $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ) {
 			yield $method->getName() => [ $method->getName() ];
 		}
-	}
-
-	public function testEchoNotificationsHandlers() {
-		EchoNotificationsHandlers::factory();
-		$this->assertTrue( true );
 	}
 
 	public function testNoLangLinkHandler(): void {

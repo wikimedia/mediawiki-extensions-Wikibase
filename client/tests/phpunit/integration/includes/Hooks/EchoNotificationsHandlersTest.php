@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Page\RedirectLookup;
@@ -210,7 +212,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			'repoSiteName'
 		);
 
-		$handlers->doLocalUserCreated( $user, $auto );
+		$handlers->onLocalUserCreated( $user, $auto );
 	}
 
 }

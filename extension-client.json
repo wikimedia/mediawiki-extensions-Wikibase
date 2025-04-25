@@ -142,6 +142,21 @@
 				"WikibaseClient.Settings"
 			]
 		},
+		"EchoGetBundleRulesHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\EchoGetBundleRulesHandler"
+		},
+		"EchoNotificationsHandlers": {
+			"class": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers",
+			"factory": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::factory",
+			"services": [
+				"RedirectLookup",
+				"UserIdentityLookup",
+				"UserOptionsManager",
+				"WikibaseClient.NamespaceChecker",
+				"WikibaseClient.RepoLinker",
+				"WikibaseClient.Settings"
+			]
+		},
 		"EchoSetup": {
 			"class": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandler::factory",
@@ -270,7 +285,7 @@
 		"ContentAlterParserOutput": "ParserOutputUpdate",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPage",
 		"CirrusSearchAddQueryFeatures": "CirrusSearchAddQueryFeatures",
-		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
+		"EchoGetBundleRules": "EchoGetBundleRulesHandler",
 		"EditPage::showStandardInputs:options": "EditAction",
 		"EnhancedChangesListModifyBlockLineData": "ChangesListLines",
 		"EnhancedChangesListModifyLineData": "ChangesListLines",
@@ -284,7 +299,7 @@
 			"LoadExtensionSchemaUpdates",
 			"SqlUsageTrackerSchemaUpdater"
 		],
-		"LocalUserCreated": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onLocalUserCreated",
+		"LocalUserCreated": "EchoNotificationsHandlers",
 		"LoginFormValidErrorMessages": "LoginFormValidErrorMessages",
 		"MagicWordwgVariableIDs": "Magic",
 		"MaintenanceShellStart": "Trivial",
@@ -320,7 +335,7 @@
 		],
 		"wgQueryPages": "Trivial",
 		"WikibaseContentLanguages": "\\Wikibase\\Client\\ClientHooks::onWikibaseContentLanguages",
-		"WikibaseHandleChange": "Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onWikibaseHandleChange"
+		"WikibaseHandleChange": "EchoNotificationsHandlers"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
