@@ -6,12 +6,12 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
+use Wikibase\DataAccess\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Content\ContentHandlerEntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
-use Wikibase\Repo\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
