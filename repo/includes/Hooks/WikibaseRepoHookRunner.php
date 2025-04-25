@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Title\Title;
+use Wikibase\DataAccess\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Repo\Content\EntityContent;

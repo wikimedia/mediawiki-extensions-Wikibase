@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Hooks;
+namespace Wikibase\DataAccess\Hooks;
 
 use MediaWiki\Title\Title;
 
@@ -16,8 +16,7 @@ use MediaWiki\Title\Title;
 interface GetEntityContentModelForTitleHook {
 
 	/**
-	 * Called by {@link \Wikibase\Repo\Content\EntityContentFactory EntityContentFactory}
-	 * to see what is the entity content model of the Title.
+	 * Called to determine what the entity content model of the Title is.
 	 * Extensions can override it so entity content model does not equal page content model.
 	 *
 	 * @param Title $title Title object for the page.

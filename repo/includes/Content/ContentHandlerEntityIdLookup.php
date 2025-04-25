@@ -6,11 +6,11 @@ namespace Wikibase\Repo\Content;
 
 use MediaWiki\Title\Title;
 use OutOfBoundsException;
+use Wikibase\DataAccess\Hooks\GetEntityContentModelForTitleHook;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Hooks\GetEntityContentModelForTitleHook;
 
 /**
  * Implementation of EntityIdLookup that uses content handler.

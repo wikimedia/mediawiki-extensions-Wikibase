@@ -56,6 +56,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\EntitySourceLookup;
+use Wikibase\DataAccess\Hooks\WikibaseDataAccessHookRunner;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
@@ -397,7 +398,7 @@ return [
 				$services->getPageProps(),
 				WikibaseClient::getEntityIdParser( $services )
 			),
-			$services->getHookContainer()
+			new WikibaseDataAccessHookRunner( $services->getHookContainer() )
 		);
 	},
 
