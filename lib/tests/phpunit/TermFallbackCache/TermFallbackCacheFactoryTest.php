@@ -8,12 +8,12 @@ use ObjectCacheFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\StatslibRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ObjectCache\CachedBagOStuff;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Lib\TermFallbackCacheFactory
@@ -30,13 +30,13 @@ class TermFallbackCacheFactoryTest extends TestCase {
 	private $mockLogger;
 
 	/**
-	 * @var IBufferingStatsdDataFactory|\PHPUnit\Framework\MockObject\MockObject
+	 * @var StatsFactory|\PHPUnit\Framework\MockObject\MockObject
 	 */
-	private $mockIBufferingStatsdDataFactory;
+	private $statsFactory;
 
 	protected function setUp(): void {
 		$this->mockLogger = $this->createMock( LoggerInterface::class );
-		$this->mockIBufferingStatsdDataFactory = $this->createMock( IBufferingStatsdDataFactory::class );
+		$this->statsFactory = $this->createMock( StatsFactory::class );
 
 		parent::setUp();
 	}
@@ -48,7 +48,7 @@ class TermFallbackCacheFactoryTest extends TestCase {
 		$mockSharedCache = $this->createMock( BagOStuff::class );
 		$mockInMemoryCache = $this->createMock( CachedBagOStuff::class );
 		$mockCache = $this->createMock( SimpleCacheWithBagOStuff::class );
-		$mockStatsdRecordingSimpleCache = $this->createMock( StatsdRecordingSimpleCache::class );
+		$mockStatslibRecordingSimpleCache = $this->createMock( StatslibRecordingSimpleCache::class );
 		$mockObjectCacheFactory = $this->createMock( ObjectCacheFactory::class );
 
 		$serviceFactory = $this->createMock( TermFallbackCacheServiceFactory::class );
@@ -72,28 +72,29 @@ class TermFallbackCacheFactoryTest extends TestCase {
 			->willReturn( $mockCache );
 
 		$serviceFactory->expects( $this->once() )
-			->method( 'newStatsdRecordingCache' )
+			->method( 'newStatslibRecordingCache' )
 			->with(
 				$mockCache,
-				$this->mockIBufferingStatsdDataFactory,
+				$this->statsFactory,
 				[
 					'miss' => 'wikibase.repo.formatterCache.miss',
 					'hit' => 'wikibase.repo.formatterCache.hit',
-				]
+				],
+				'formatterCache_total'
 			)
-			->willReturn( $mockStatsdRecordingSimpleCache );
+			->willReturn( $mockStatslibRecordingSimpleCache );
 
 		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
 			$this->mockLogger,
-			$this->mockIBufferingStatsdDataFactory,
+			$this->statsFactory,
 			$cacheSecret,
 			$serviceFactory,
 			null,
 			$mockObjectCacheFactory
 		);
 
-		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
+		$this->assertInstanceOf( StatslibRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
 	public function testTermFallbackCacheFactoryDoesNotCacheInMemoryRedundantly(): void {
@@ -102,7 +103,7 @@ class TermFallbackCacheFactoryTest extends TestCase {
 
 		$mockSharedCache = $this->createMock( CachedBagOStuff::class );
 		$mockCache = $this->createMock( SimpleCacheWithBagOStuff::class );
-		$mockStatsdRecordingSimpleCache = $this->createMock( StatsdRecordingSimpleCache::class );
+		$mockStatslibRecordingSimpleCache = $this->createMock( StatslibRecordingSimpleCache::class );
 		$mockObjectCacheFactory = $this->createMock( ObjectCacheFactory::class );
 
 		$serviceFactory = $this->createMock( TermFallbackCacheServiceFactory::class );
@@ -125,28 +126,29 @@ class TermFallbackCacheFactoryTest extends TestCase {
 			->willReturn( $mockCache );
 
 		$serviceFactory->expects( $this->once() )
-			->method( 'newStatsdRecordingCache' )
+			->method( 'newStatslibRecordingCache' )
 			->with(
 				$mockCache,
-				$this->mockIBufferingStatsdDataFactory,
+				$this->statsFactory,
 				[
 					'miss' => 'wikibase.repo.formatterCache.miss',
 					'hit' => 'wikibase.repo.formatterCache.hit',
-				]
+				],
+				'formatterCache_total'
 			)
-			->willReturn( $mockStatsdRecordingSimpleCache );
+			->willReturn( $mockStatslibRecordingSimpleCache );
 
 		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
 			$this->mockLogger,
-			$this->mockIBufferingStatsdDataFactory,
+			$this->statsFactory,
 			$cacheSecret,
 			$serviceFactory,
 			null,
 			$mockObjectCacheFactory
 		);
 
-		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
+		$this->assertInstanceOf( StatslibRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
 	/**
@@ -171,14 +173,14 @@ class TermFallbackCacheFactoryTest extends TestCase {
 		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
 			$this->mockLogger,
-			$this->mockIBufferingStatsdDataFactory,
+			$this->statsFactory,
 			$cacheSecret,
 			$serviceFactory,
 			$version,
 			$this->createMock( ObjectCacheFactory::class )
 		);
 
-		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
+		$this->assertInstanceOf( StatslibRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
 	public static function provideVersionTestData(): Iterator {

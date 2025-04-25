@@ -21,7 +21,7 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -80,8 +80,8 @@ class GetEntities extends ApiBase {
 	/** @var SiteLookup */
 	private $siteLookup;
 
-	/** @var IBufferingStatsdDataFactory */
-	private $stats;
+	/** @var StatsFactory */
+	private $statsFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -96,7 +96,7 @@ class GetEntities extends ApiBase {
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
 	 * @param SiteLookup $siteLookup
-	 * @param IBufferingStatsdDataFactory $stats
+	 * @param StatsFactory $statsFactory
 	 * @param bool $federatedPropertiesEnabled
 	 *
 	 * @see ApiBase::__construct
@@ -114,7 +114,7 @@ class GetEntities extends ApiBase {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $idParser,
 		SiteLookup $siteLookup,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
@@ -129,7 +129,7 @@ class GetEntities extends ApiBase {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
 		$this->siteLookup = $siteLookup;
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
@@ -137,7 +137,7 @@ class GetEntities extends ApiBase {
 		ApiMain $apiMain,
 		string $moduleName,
 		SiteLookup $siteLookup,
-		IBufferingStatsdDataFactory $stats,
+		StatsFactory $statsFactory,
 		ApiHelperFactory $apiHelperFactory,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -161,7 +161,7 @@ class GetEntities extends ApiBase {
 			$entityRevisionLookup,
 			$entityIdParser,
 			$siteLookup,
-			$stats,
+			$statsFactory,
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
@@ -188,7 +188,11 @@ class GetEntities extends ApiBase {
 			$this->validateAlteringEntityById( $entityId );
 		}
 
-		$this->stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
+		$getEntitiesKey = 'wikibase.repo.api.getentities.entities';
+		$metric = $this->statsFactory->getCounter( 'get_entities_total' );
+		$metric->copyToStatsdAt(
+				$getEntitiesKey,
+			)->incrementBy( count( $entityIds ) );
 
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 

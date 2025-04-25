@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ParserOutput;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use MediaWiki\Language\Language;
@@ -24,6 +23,7 @@ use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Hooks\WikibaseRepoOnParserOutputUpdaterConstructionHook;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -56,7 +56,7 @@ class EntityParserOutputGeneratorFactory {
 
 	private EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator;
 	private ?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler;
-	private StatsdDataFactoryInterface $stats;
+	private StatsFactory $statsFactory;
 	private RepoGroup $repoGroup;
 	private LinkBatchFactory $linkBatchFactory;
 	private WikibaseRepoOnParserOutputUpdaterConstructionHook $hookRunner;
@@ -71,7 +71,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
-	 * @param StatsdDataFactoryInterface $stats
+	 * @param StatsFactory $statsFactory
 	 * @param RepoGroup $repoGroup
 	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param WikibaseRepoHookRunner $hookRunner
@@ -90,7 +90,7 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler,
-		StatsdDataFactoryInterface $stats,
+		StatsFactory $statsFactory,
 		RepoGroup $repoGroup,
 		LinkBatchFactory $linkBatchFactory,
 		WikibaseRepoOnParserOutputUpdaterConstructionHook $hookRunner,
@@ -107,7 +107,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
-		$this->stats = $stats;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 		$this->repoGroup = $repoGroup;
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->hookRunner = $hookRunner;
@@ -129,10 +129,11 @@ class EntityParserOutputGeneratorFactory {
 			$this->isMobileView
 		);
 
-		$pog = new StatsdTimeRecordingEntityParserOutputGenerator(
+		$pog = new StatslibTimeRecordingEntityParserOutputGenerator(
 			$pog,
-			$this->stats,
-			'wikibase.repo.ParserOutputGenerator.timing'
+			$this->statsFactory,
+			'wikibase.repo.ParserOutputGenerator.timing',
+			'ParserOutputGenerator'
 		);
 
 		if ( WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {

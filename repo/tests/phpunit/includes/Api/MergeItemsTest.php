@@ -44,7 +44,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\Api\MergeItems
@@ -175,7 +175,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			WikibaseRepo::getEntityDiffer( $services ),
 			WikibaseRepo::getEntityPatcher( $services ),
 			WikibaseRepo::getEditFilterHookRunner( $services ),
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			$services->getUserOptionsLookup(),
 			$services->getTempUserCreator(),
 			4096,

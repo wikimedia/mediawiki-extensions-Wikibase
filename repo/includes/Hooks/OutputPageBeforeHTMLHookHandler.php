@@ -41,7 +41,7 @@ use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\ToolbarEditSectionGenerator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -52,7 +52,7 @@ use Wikimedia\Stats\IBufferingStatsdDataFactory;
 class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 	private HttpRequestFactory $httpRequestFactory;
-	private IBufferingStatsdDataFactory $statsDataFactory;
+	private StatsFactory $statsFactory;
 	private SettingsArray $repoSettings;
 	private TemplateFactory $templateFactory;
 	private EntityRevisionLookup $entityRevisionLookup;
@@ -70,7 +70,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 	public function __construct(
 		HttpRequestFactory $httpRequestFactory,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		SettingsArray $repoSettings,
 		TemplateFactory $templateFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -87,7 +87,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		?LoggerInterface $logger = null
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->statsDataFactory = $statsdDataFactory;
+		$this->statsFactory = $statsFactory;
 		$this->repoSettings = $repoSettings;
 		$this->templateFactory = $templateFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -107,7 +107,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	public static function factory(
 		Language $contentLanguage,
 		HttpRequestFactory $httpRequestFactory,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		UserOptionsLookup $userOptionsLookup,
 		EntityContentFactory $entityContentFactory,
 		EntityFactory $entityFactory,
@@ -124,7 +124,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 		return new self(
 			$httpRequestFactory,
-			$statsdDataFactory,
+			$statsFactory,
 			$settings,
 			TemplateFactory::getDefaultInstance(),
 			$entityRevisionLookup,
@@ -295,7 +295,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$this->repoSettings->getSetting( 'ssrServerUrl' ),
 				$this->repoSettings->getSetting( 'ssrServerTimeout' ),
 				$this->logger,
-				$this->statsDataFactory
+				$this->statsFactory
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),

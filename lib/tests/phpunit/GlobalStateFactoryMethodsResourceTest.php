@@ -6,14 +6,14 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use ObjectCacheFactory;
 use Psr\Log\NullLogger;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\StatslibRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Test to assert that factory methods of hook service classes (and similar services)
@@ -67,16 +67,18 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 	 * @dataProvider cacheTypeProvider
 	 */
 	public function testTermFallbackCacheFactory( $sharedCacheType ): void {
+		$statsFactory = $this->createMock( StatsFactory::class );
+
 		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
 			new NullLogger(),
-			$this->createMock( IBufferingStatsdDataFactory::class ),
+			$statsFactory,
 			'secret',
 			new TermFallbackCacheServiceFactory(),
 			null,
 			$this->createMock( ObjectCacheFactory::class )
 		);
-		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
+		$this->assertInstanceOf( StatslibRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
 	public static function cacheTypeProvider(): array {

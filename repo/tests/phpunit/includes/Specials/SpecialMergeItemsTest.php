@@ -36,7 +36,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialMergeItems
@@ -145,7 +145,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			WikibaseRepo::getEntityDiffer( $services ),
 			WikibaseRepo::getEntityPatcher( $services ),
 			$editFilterHookRunner,
-			new NullStatsdDataFactory(),
+			StatsFactory::newNull(),
 			$services->getUserOptionsLookup(),
 			$tempUserCreator,
 			4096,

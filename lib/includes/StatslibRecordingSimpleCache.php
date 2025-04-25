@@ -4,18 +4,18 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Psr\SimpleCache\CacheInterface;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Stats\StatsFactory;
 
 /**
- * Simple CacheInterface that increments a statsd metric based on the number
+ * Simple CacheInterface that increments a stats metric based on the number
  * of cache misses that occur.
  *
  *
  * @license GPL-2.0-or-later
  */
-class StatsdRecordingSimpleCache implements CacheInterface {
+class StatslibRecordingSimpleCache implements CacheInterface {
 
 	// Functions here throw \Psr\SimpleCache\InvalidArgumentException
 	// per the CacheInterface interface definition, so we need to
@@ -24,44 +24,73 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 
 	private const DEFAULT_VALUE = __CLASS__ . '-default';
 
-	/** @var CacheInterface */
+	/**
+	 * @var CacheInterface
+	 */
 	private $inner;
-	/** @var StatsdDataFactoryInterface */
-	private $stats;
-	/** @var string[] */
-	private $statsKeys;
+
+	/**
+	 * @var StatsFactory
+	 */
+	private $statsFactory;
+
+	/**
+	 * @var string[]
+	 */
+	private $statsdKeys;
+
+	/**
+	 * @var string
+	 */
+	private $statsKey;
 
 	/**
 	 * @param CacheInterface $inner
-	 * @param StatsdDataFactoryInterface $stats
-	 * @param string[] $statsKeys
+	 * @param StatsFactory $statsFactory
+	 * @param string[] $statsdKeys
+	 * @param string $statsKey
 	 */
 	public function __construct(
 		CacheInterface $inner,
-		StatsdDataFactoryInterface $stats,
-		array $statsKeys
+		StatsFactory $statsFactory,
+		array $statsdKeys,
+		string $statsKey
 	) {
 		Assert::parameter(
-			array_key_exists( 'miss', $statsKeys ),
-			'$statsKeys',
-			'$statsKeys needs to have a \'miss\' value'
+			array_key_exists( 'miss', $statsdKeys ),
+			'$statsdKeys',
+			'$statsdKeys needs to have a \'miss\' value'
 		);
 		Assert::parameter(
-			array_key_exists( 'hit', $statsKeys ),
-			'$statsKeys',
-			'$statsKeys needs to have a \'hit\' value'
+			array_key_exists( 'hit', $statsdKeys ),
+			'$statsdKeys',
+			'$statsdKeys needs to have a \'hit\' value'
+		);
+		Assert::parameter(
+			$statsKey !== '',
+			'$statsKey',
+			'$statsKey must be a non-empty string.'
 		);
 		$this->inner = $inner;
-		$this->stats = $stats;
-		$this->statsKeys = $statsKeys;
+		$this->statsFactory = $statsFactory;
+		$this->statsdKeys = $statsdKeys;
+		$this->statsKey = $statsKey;
 	}
 
 	private function recordMisses( int $count ): void {
-		$this->stats->updateCount( $this->statsKeys['miss'], $count );
+		$this->statsFactory
+			->getCounter( $this->statsKey )
+			->setLabel( 'status', 'miss' )
+			->copyToStatsdAt( $this->statsdKeys['miss'] )
+			->incrementBy( $count );
 	}
 
 	private function recordHits( int $count ): void {
-		$this->stats->updateCount( $this->statsKeys['hit'], $count );
+		$this->statsFactory
+			->getCounter( $this->statsKey )
+			->setLabel( 'status', 'hit' )
+			->copyToStatsdAt( $this->statsdKeys['hit'] )
+			->incrementBy( $count );
 	}
 
 	/**

@@ -996,7 +996,7 @@ return [
 		return new TermFallbackCacheFactory(
 			$settings->getSetting( 'sharedCacheType' ),
 			WikibaseClient::getLogger( $services ),
-			$services->getStatsdDataFactory(),
+			$services->getStatsFactory()->withComponent( 'WikibaseClient' ),
 			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' ),

@@ -33,7 +33,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
 			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory",
 			"services": [
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityIdParser",
@@ -56,7 +56,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\FormatEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
 			"services": [
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
 				"WikibaseRepo.EntityIdParser"
@@ -67,7 +67,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
 			"services": [
 				"LanguageNameUtils",
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataValueFactory",
@@ -93,7 +93,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory",
 			"services": [
 				"SiteLookup",
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.EntityRevisionLookup",
@@ -128,7 +128,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory",
 			"services": [
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.DataTypeValidatorFactory",
@@ -198,7 +198,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetAliases",
 			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory",
 			"services": [
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityFactory",
 				"WikibaseRepo.Settings"
@@ -208,7 +208,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetClaim",
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
 			"services": [
-				"StatsdDataFactory",
+				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.ChangeOpFactoryProvider",
 				"WikibaseRepo.EntityIdParser",
@@ -1211,7 +1211,7 @@
 			"services": [
 				"ContentLanguage",
 				"HttpRequestFactory",
-				"StatsdDataFactory",
+				"StatsFactory",
 				"UserOptionsLookup",
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityFactory",

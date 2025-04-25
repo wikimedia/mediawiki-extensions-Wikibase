@@ -2,39 +2,55 @@
 
 namespace Wikibase\Repo\EditEntity;
 
-use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * EntityStore that collects stats for edit save times.
  * @license GPL-2.0-or-later
  */
-class StatsdSaveTimeRecordingEntityStore implements EntityStore {
+class StatslibSaveTimeRecordingEntityStore implements EntityStore {
 
-	/** @var EntityStore */
+	/**
+	 * @var EntityStore
+	 */
 	private $entityStore;
-	/** @var StatsdDataFactoryInterface */
-	private $stats;
-	/** @var string */
-	private $timingPrefix;
+
+	/**
+	 * @var StatsFactory
+	 */
+	private $statsFactory;
+
+	/**
+	 * @var string
+	 */
+	private $statsdTimingPrefix;
+
+	/**
+	 * @var string
+	 */
+	private $statsTimingPrefix;
 
 	/**
 	 * @param EntityStore $entityStore
-	 * @param StatsdDataFactoryInterface $stats
-	 * @param string $timingPrefix Resulting metric will be: $timingPrefix.saveEntity.<entitytype>
+	 * @param StatsFactory $statsFactory
+	 * @param string $statsdTimingPrefix Resulting metric will be: $statsdTimingPrefix.saveEntity.<entitytype>
+	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EntityStore $entityStore,
-		StatsdDataFactoryInterface $stats,
-		string $timingPrefix
+		StatsFactory $statsFactory,
+		string $statsdTimingPrefix,
+		string $statsTimingPrefix
 	) {
 		$this->entityStore = $entityStore;
-		$this->stats = $stats;
-		$this->timingPrefix = $timingPrefix;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
+		$this->statsdTimingPrefix = $statsdTimingPrefix;
+		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
 	/**
@@ -55,14 +71,14 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		$baseRevId = false,
 		array $tags = []
 	) {
-		$attemptSaveSaveStart = microtime( true );
-		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId, $tags );
-		$attemptSaveSaveEnd = microtime( true );
+		$timing = $this->statsFactory
+			->getTiming( "{$this->statsTimingPrefix}_saveEntity_duration_seconds" )
+			->setLabel( 'type', $entity->getType() )
+			->copyToStatsdAt( "{$this->statsdTimingPrefix}.saveEntity.{$entity->getType()}" );
 
-		$this->stats->timing(
-			"{$this->timingPrefix}.saveEntity.{$entity->getType()}",
-			( $attemptSaveSaveEnd - $attemptSaveSaveStart ) * 1000
-		);
+		$timing->start();
+		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId, $tags );
+		$timing->stop();
 
 		return $result;
 	}

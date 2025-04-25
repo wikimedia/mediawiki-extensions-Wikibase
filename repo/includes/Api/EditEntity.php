@@ -28,7 +28,7 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikimedia\ParamValidator\ParamValidator;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -43,9 +43,9 @@ class EditEntity extends ModifyEntity {
 	public const PARAM_CLEAR = 'clear';
 
 	/**
-	 * @var IBufferingStatsdDataFactory
+	 * @var StatsFactory
 	 */
-	private $statsdDataFactory;
+	private $statsFactory;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -80,7 +80,7 @@ class EditEntity extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		EntityRevisionLookup $revisionLookup,
 		EntityIdParser $idParser,
 		array $propertyDataTypes,
@@ -91,7 +91,7 @@ class EditEntity extends ModifyEntity {
 	) {
 		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
-		$this->statsdDataFactory = $statsdDataFactory;
+		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
 		$this->revisionLookup = $revisionLookup;
 		$this->idParser = $idParser;
 		$this->propertyDataTypes = $propertyDataTypes;
@@ -104,7 +104,7 @@ class EditEntity extends ModifyEntity {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		IBufferingStatsdDataFactory $statsdDataFactory,
+		StatsFactory $statsFactory,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityIdParser $entityIdParser,
@@ -114,7 +114,7 @@ class EditEntity extends ModifyEntity {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$statsdDataFactory,
+			$statsFactory,
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
@@ -172,7 +172,7 @@ class EditEntity extends ModifyEntity {
 			if ( $preparedParameters['baserevid'] && $exists ) {
 				$latestRevisionResult = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
-					 LookupConstants::LATEST_FROM_MASTER
+					LookupConstants::LATEST_FROM_MASTER
 				);
 
 				$returnFalse = function () {
@@ -214,9 +214,11 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
-			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
+			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_clear' );
+			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.clear' )->increment();
 		} else {
-			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.no-clear' );
+			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_no_clear' );
+			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.no-clear' )->increment();
 		}
 
 		if ( !$exists ) {
@@ -225,7 +227,8 @@ class EditEntity extends ModifyEntity {
 				$entity->setDataTypeId( $data['datatype'] );
 			}
 
-			$this->statsdDataFactory->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
+			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_create' );
+			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.create' )->increment();
 		}
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {

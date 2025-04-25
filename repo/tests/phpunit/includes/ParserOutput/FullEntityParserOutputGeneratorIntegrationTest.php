@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator
- * @covers \Wikibase\Repo\ParserOutput\StatsdTimeRecordingEntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\StatslibTimeRecordingEntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database

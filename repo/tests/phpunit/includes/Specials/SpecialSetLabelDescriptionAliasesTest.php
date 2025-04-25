@@ -29,7 +29,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
-use Wikimedia\Stats\NullStatsdDataFactory;
+use Wikimedia\Stats\StatsFactory;
 use WMDE\HamcrestHtml\HtmlMatcher;
 
 /**
@@ -83,7 +83,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory(),
+				StatsFactory::newNull(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
 				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,
@@ -405,7 +405,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory(),
+				StatsFactory::newNull(),
 				$this->getServiceContainer()->getUserOptionsLookup(),
 				$this->getServiceContainer()->getTempUserCreator(),
 				PHP_INT_MAX,
