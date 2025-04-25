@@ -3,8 +3,8 @@
 namespace Wikibase\Client\RecentChanges;
 
 use MediaWiki\Language\Language;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\User\ExternalUserNames;
-use RecentChange;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

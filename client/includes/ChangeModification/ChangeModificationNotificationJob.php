@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\ChangeModification;
 
-use Job;
+use MediaWiki\JobQueue\Job;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;

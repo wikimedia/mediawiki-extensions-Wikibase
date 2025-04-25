@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use Iterator;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use SpecialPageTestBase;
@@ -259,7 +260,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	}
 
 	public function testFormatResult() {
-		$skin = $this->createMock( \Skin::class );
+		$skin = $this->createMock( Skin::class );
 		$result = new \stdClass();
 		$result->value = 1;
 

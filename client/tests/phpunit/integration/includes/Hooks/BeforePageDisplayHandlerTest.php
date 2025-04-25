@@ -6,10 +6,10 @@ use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use Skin;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\NamespaceChecker;
 

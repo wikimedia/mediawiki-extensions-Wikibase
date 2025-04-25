@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use RecentChange;
+use MediaWiki\RecentChanges\RecentChange;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**

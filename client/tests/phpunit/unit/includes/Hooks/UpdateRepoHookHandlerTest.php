@@ -4,10 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use IJobSpecification;
-use JobQueue;
-use JobQueueGroup;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueue;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -20,7 +21,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ReplicationWaiter;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Client\Hooks\UpdateRepoHookHandler

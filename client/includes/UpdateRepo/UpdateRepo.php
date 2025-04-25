@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\UpdateRepo;
 
-use IJobSpecification;
-use JobQueueGroup;
-use JobSpecification;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;

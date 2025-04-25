@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use JobQueueGroup;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;

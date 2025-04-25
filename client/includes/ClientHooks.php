@@ -4,9 +4,9 @@ namespace Wikibase\Client;
 
 use CirrusSearch\SearchConfig;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use Skin;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary;
 use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;

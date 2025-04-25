@@ -4,8 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\ChangeModification;
 
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWikiIntegrationTestCase;
-use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikimedia\Rdbms\IDatabase;

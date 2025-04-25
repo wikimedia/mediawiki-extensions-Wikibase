@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use ChangesListBooleanFilter;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\RecentChanges\ChangesListBooleanFilter;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Specials\SpecialRecentChanges;
 use MediaWiki\User\Options\UserOptionsLookup;

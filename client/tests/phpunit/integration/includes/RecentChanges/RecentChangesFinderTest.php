@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWikiIntegrationTestCase;
-use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
