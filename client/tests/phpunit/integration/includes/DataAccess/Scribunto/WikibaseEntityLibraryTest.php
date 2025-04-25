@@ -272,13 +272,13 @@ class WikibaseEntityLibraryTest extends WikibaseLibraryTestCase {
 		$luaFunctionCallTracker = $this->createMock( LuaFunctionCallTracker::class );
 		$luaFunctionCallTracker->expects( $this->once() )
 			->method( 'incrementKey' )
-			->with( 'a-key.suffix' );
+			->with( 'a-key', 'entity' );
 
 		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
 			$this->newWikibaseEntityLibrary()
 		);
 		$luaWikibaseLibrary->luaFunctionCallTracker = $luaFunctionCallTracker;
-		$luaWikibaseLibrary->incrementStatsKey( 'a-key.suffix' );
+		$luaWikibaseLibrary->incrementStatsKey( 'a-key', 'entity' );
 	}
 
 	/**

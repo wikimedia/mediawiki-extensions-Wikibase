@@ -28,7 +28,7 @@ local function incrementStatsKey( key )
 	local divisor = math.ceil( 1 / settings.trackLuaFunctionCallsSampleRate - 0.5 )
 
 	if counterWithOffset % divisor == 0 then
-		php.incrementStatsKey( key )
+		php.incrementStatsKey( key, 'entity' )
 	end
 
 	counter = counter + 1
@@ -155,7 +155,7 @@ end
 -- @param {string} termType A valid key in the entity table (either labels, descriptions or aliases)
 -- @param {string|number} langCode
 local function getTermAndLang( entity, termType, langCode )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.getTermAndLang.call' )
+	incrementStatsKey( 'getTermAndLang' )
 
 	langCode = langCode or settings.languageCode
 
@@ -225,7 +225,7 @@ end
 --
 -- @param {string|number} [globalSiteId]
 function methodtable.getSitelink( entity, globalSiteId )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.getSitelink.call' )
+	incrementStatsKey( 'getSitelink' )
 
 	checkTypeMulti( 'getSitelink', 1, globalSiteId, { 'string', 'number', 'nil' } )
 
@@ -267,7 +267,7 @@ end
 -- @param {string} propertyLabelOrId
 -- @param {string} funcName for error logging
 local function getEntityStatements( entity, propertyLabelOrId, funcName )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.getEntityStatements.call' )
+	incrementStatsKey( 'getEntityStatements' )
 
 	checkType( funcName, 1, propertyLabelOrId, 'string' )
 
@@ -320,7 +320,7 @@ end
 
 -- Get a table with all property ids attached to the entity.
 function methodtable.getProperties( entity )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.getProperties.call' )
+	incrementStatsKey( 'getProperties' )
 
 	if entity.claims == nil then
 		return {}
@@ -375,7 +375,7 @@ end
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
 function methodtable.formatPropertyValues( entity, propertyLabelOrId, acceptableRanks )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.formatPropertyValues.call' )
+	incrementStatsKey( 'formatPropertyValues' )
 
 	checkType( 'formatPropertyValues', 1, propertyLabelOrId, 'string' )
 	checkTypeMulti( 'formatPropertyValues', 2, acceptableRanks, { 'table', 'nil' } )
@@ -394,7 +394,7 @@ end
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
 function methodtable.formatStatements( entity, propertyLabelOrId, acceptableRanks )
-	incrementStatsKey( 'wikibase.client.scribunto.entity.formatStatements.call' )
+	incrementStatsKey( 'formatStatements' )
 
 	checkType( 'formatStatements', 1, propertyLabelOrId, 'string' )
 	checkTypeMulti( 'formatStatements', 2, acceptableRanks, { 'table', 'nil' } )
