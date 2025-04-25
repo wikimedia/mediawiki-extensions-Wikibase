@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use MWContentSerializationException;
+use MediaWiki\Exception\MWContentSerializationException;
 
 /**
  * @license GPL-2.0-or-later

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use JobQueueGroup;
 use LogicException;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
