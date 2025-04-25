@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
+use MediaWiki\Exception\PermissionsError;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
@@ -17,7 +18,6 @@ use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use PermissionsError;
 use PHPUnit\Framework\Error\Error;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityId;

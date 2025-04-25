@@ -4,11 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
-use Article;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Linker\Linker;
+use MediaWiki\Page\Article;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Revision\RevisionLookup;

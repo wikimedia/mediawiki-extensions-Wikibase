@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\SpecialPage\SpecialPage;
 use Psr\SimpleCache\CacheInterface;
-use RepoGroup;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

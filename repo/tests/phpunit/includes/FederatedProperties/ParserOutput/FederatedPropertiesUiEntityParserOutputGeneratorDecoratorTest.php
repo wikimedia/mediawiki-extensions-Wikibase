@@ -3,8 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
+use MediaWiki\FileRepo\RepoGroup;
 use Psr\SimpleCache\CacheInterface;
-use RepoGroup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;

@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
+use MediaWiki\Actions\ViewAction;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\SpecialPage\SpecialPage;
-use ViewAction;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

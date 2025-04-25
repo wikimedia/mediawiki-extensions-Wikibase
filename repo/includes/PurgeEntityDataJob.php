@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
 use BatchRowIterator;
-use Job;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\JobQueue\Job;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityIdParser;

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Status\Status;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use MediaWiki\Title\Title;
@@ -14,7 +15,6 @@ use Wikibase\Repo\Actions\EditEntityAction;
 use Wikibase\Repo\Actions\SubmitEntityAction;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Actions\EditEntityAction

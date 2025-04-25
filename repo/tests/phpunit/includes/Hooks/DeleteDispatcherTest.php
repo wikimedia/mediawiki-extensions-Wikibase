@@ -3,16 +3,16 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
-use IJobSpecification;
-use JobQueueGroup;
-use ManualLogEntry;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\Logging\ManualLogEntry;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\DeleteDispatcher;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Hooks\DeleteDispatcher

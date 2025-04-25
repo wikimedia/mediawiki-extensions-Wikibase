@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\Title\Title;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeVisibilityNotificationJob;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use LogEntry;
 use MediaWiki\Api\ApiEditPage;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\ApiCheckCanExecuteHook;
@@ -27,20 +26,22 @@ use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Hook\TitleGetRestrictionTypesHook;
 use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\Logging\LogEntry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Skin\Skin;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use RuntimeException;
-use Skin;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -68,7 +69,6 @@ use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
 use Wikimedia\Rdbms\IDBAccessObject;
-use WikiPage;
 
 /**
  * File defining the hook handlers for the Wikibase extension.

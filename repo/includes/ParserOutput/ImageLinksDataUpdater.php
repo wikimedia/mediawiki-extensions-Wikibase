@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\StringValue;
+use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Parser\ParserOutput;
-use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;

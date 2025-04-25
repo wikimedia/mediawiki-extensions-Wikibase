@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Content;
 
-use Article;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
 use LogicException;
@@ -12,9 +11,12 @@ use MediaWiki\Content\Renderer\ContentParseParams;
 use MediaWiki\Content\ValidationParams;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Exception\MWContentSerializationException;
 use MediaWiki\Html\Html;
 use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Article;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Parser\ParserCache;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
@@ -22,7 +24,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
-use MWContentSerializationException;
 use SearchEngine;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -41,7 +42,6 @@ use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
-use WikiPage;
 
 /**
  * Base handler class for Entity content classes.

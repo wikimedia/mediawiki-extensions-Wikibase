@@ -4,16 +4,16 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\Hooks;
 
-use IJobSpecification;
-use JobQueueGroup;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Title\Title;
 use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\EntityDataPurger;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Hooks\EntityDataPurger

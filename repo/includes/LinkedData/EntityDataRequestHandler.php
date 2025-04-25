@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\LinkedData;
 
-use HttpError;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\Exception\HttpError;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Request\WebResponse;
