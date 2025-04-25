@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use EnhancedChangesList;
 use MediaWiki\Language\Language;
+use MediaWiki\RecentChanges\EnhancedChangesList;
+use MediaWiki\RecentChanges\OldChangesList;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use OldChangesList;
-use RecentChange;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChange;

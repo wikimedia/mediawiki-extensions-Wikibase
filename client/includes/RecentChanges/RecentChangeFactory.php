@@ -4,10 +4,10 @@ namespace Wikibase\Client\RecentChanges;
 
 use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Title\Title;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\ExternalUserNames;
-use RecentChange;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;

@@ -4,13 +4,15 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use JobQueueError;
 use MediaWiki\Content\Content;
 use MediaWiki\Hook\PageMoveCompleteHook;
+use MediaWiki\JobQueue\Exceptions\JobQueueError;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -26,7 +28,6 @@ use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use WikiPage;
 
 /**
  * This class has a static interface for use with MediaWiki's hook mechanism; the static
@@ -171,7 +172,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	 * @param string $reason Reason the article was deleted
 	 * @param int $id ID of the article that was deleted
 	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
-	 * @param \ManualLogEntry $logEntry ManualLogEntry used to record the deletion
+	 * @param ManualLogEntry $logEntry ManualLogEntry used to record the deletion
 	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
 	 * @return bool|void True or no return value to continue or false to abort
 	 */

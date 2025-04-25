@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
-use RecentChange;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RevisionData;

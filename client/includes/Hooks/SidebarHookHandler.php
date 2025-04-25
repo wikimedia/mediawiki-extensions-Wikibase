@@ -9,8 +9,8 @@ use MediaWiki\Hook\SkinTemplateGetLanguageLinkHook;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
-use Skin;
 use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
 

@@ -2,14 +2,14 @@
 
 namespace Wikibase\Client\Tests\Integration\Changes;
 
-use HTMLCacheUpdateJob;
-use Job;
-use JobQueueGroup;
+use MediaWiki\JobQueue\Job;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\JobQueue\Jobs\HTMLCacheUpdateJob;
+use MediaWiki\JobQueue\Jobs\RefreshLinksJob;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
-use RefreshLinksJob;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikimedia\Stats\IBufferingStatsdDataFactory;

@@ -6,9 +6,9 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use Skin;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\SettingsArray;
 

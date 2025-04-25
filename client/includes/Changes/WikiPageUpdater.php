@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Changes;
 
-use HTMLCacheUpdateJob;
-use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\JobQueue\Jobs\HTMLCacheUpdateJob;
+use MediaWiki\JobQueue\Jobs\RefreshLinksJob;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
-use RefreshLinksJob;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikimedia\Stats\StatsFactory;
 

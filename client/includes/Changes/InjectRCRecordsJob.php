@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Changes;
 
-use CannotCreateActorException;
 use InvalidArgumentException;
-use Job;
-use JobSpecification;
+use MediaWiki\Exception\CannotCreateActorException;
+use MediaWiki\JobQueue\Job;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;

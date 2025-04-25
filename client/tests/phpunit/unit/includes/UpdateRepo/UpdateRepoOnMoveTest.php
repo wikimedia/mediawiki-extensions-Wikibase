@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Unit\UpdateRepo;
 
-use IJobSpecification;
-use JobQueueGroup;
-use JobQueueRedis;
-use JobSpecification;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueRedis;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Psr\Log\NullLogger;

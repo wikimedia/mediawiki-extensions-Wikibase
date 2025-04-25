@@ -5,13 +5,15 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use InvalidArgumentException;
-use JobQueueGroup;
 use MediaWiki\Content\Content;
 use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserCacheSaveCompleteHook;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Parser\ParserCache;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
@@ -28,7 +30,6 @@ use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageLookup;
-use WikiPage;
 
 /**
  * Hook handlers for triggering data updates.
@@ -108,7 +109,7 @@ class DataUpdateHookHandler implements
 	 * @param string $reason Reason the article was deleted
 	 * @param int $id ID of the article that was deleted
 	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
-	 * @param \ManualLogEntry $logEntry ManualLogEntry used to record the deletion
+	 * @param ManualLogEntry $logEntry ManualLogEntry used to record the deletion
 	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
 	 */
 	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id,

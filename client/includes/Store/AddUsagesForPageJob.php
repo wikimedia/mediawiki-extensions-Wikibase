@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Store;
 
-use Job;
-use JobSpecification;
+use MediaWiki\JobQueue\Job;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;

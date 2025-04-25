@@ -11,19 +11,19 @@ use MediaWiki\Hook\MaintenanceShellStartHook;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Search\Hook\SearchIndexFieldsHook;
+use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\Hook\WgQueryPagesHook;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use RecentChange;
 use SearchEngine;
 use SearchIndexField;
-use Skin;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
-use WikiPage;
 
 /**
  * Handler for “trivial” hooks:

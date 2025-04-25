@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client;
 
-use Job;
+use MediaWiki\JobQueue\Job;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Changes\ChangeHandler;
