@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
-use Article;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\SpecialPage\SpecialPage;
@@ -19,32 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */
 class ViewEntityAction extends ViewAction {
-
-	/**
-	 * Handler for the BeforeDisplayNoArticleText called by Article.
-	 * We implement this solely to replace the standard message that
-	 * is shown when an entity does not exists.
-	 *
-	 * @param Article $article
-	 * @return bool
-	 */
-	public static function onBeforeDisplayNoArticleText( Article $article ) {
-		$namespaceLookup = WikibaseRepo::getLocalEntityNamespaceLookup();
-		$contentFactory = WikibaseRepo::getEntityContentFactory();
-
-		$ns = $article->getTitle()->getNamespace();
-		$oldid = $article->getOldID();
-
-		if ( !$oldid && $namespaceLookup->isEntityNamespace( $ns ) ) {
-			$entityType = $namespaceLookup->getEntityType( $ns );
-			$handler = $contentFactory->getContentHandlerForType( $entityType );
-			$handler->showMissingEntity( $article->getTitle(), $article->getContext() );
-
-			return false;
-		}
-
-		return true;
-	}
 
 	/**
 	 * @see ViewAction::show

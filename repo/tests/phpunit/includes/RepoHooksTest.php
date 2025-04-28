@@ -155,7 +155,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$settings['termboxEnabled'] = $useNewTermbox;
 		$settings['enableEntitySearchUI'] = $enableEntitySearchUI;
 
-		RepoHooks::onBeforePageDisplay(
+		( new RepoHooks )->onBeforePageDisplay(
 			$outputPage,
 			$skin
 		);
@@ -168,7 +168,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$api = $this->createMock( ApiQuerySiteinfo::class );
 
 		$actual = [];
-		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
+		( new RepoHooks )->onAPIQuerySiteInfoGeneralInfo( $api, $actual );
 
 		foreach ( $actual['wikibase-propertytypes'] as $key => $value ) {
 			$this->assertIsString( $key );
@@ -232,7 +232,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			$this->expectException( $expectedException );
 		}
 
-		RepoHooks::onImportHandleRevisionXMLTag( $importer, [], $revisionInfo );
+		( new RepoHooks )->onImportHandleRevisionXMLTag( $importer, [], $revisionInfo );
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 
@@ -349,7 +349,7 @@ XML
 				}
 			} );
 
-		RepoHooks::onOutputPageParserOutput( $outputPage, $parserOutput );
+		( new RepoHooks )->onOutputPageParserOutput( $outputPage, $parserOutput );
 
 		$this->assertSame( TermboxView::TERMBOX_MARKUP, $outputPage->getProperty( TermboxView::TERMBOX_MARKUP ) );
 		$this->assertSame( 'wikibase-view-chunks', $outputPage->getProperty( 'wikibase-view-chunks' ) );
@@ -363,7 +363,7 @@ XML
 		$lazyOptions = [];
 		$this->setService( 'WikibaseRepo.MobileSite', true );
 
-		RepoHooks::onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
+		( new RepoHooks )->onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
 
 		$this->assertSame( [
 			'wb' => null,
@@ -431,7 +431,7 @@ XML
 		}
 
 		$ok = true;
-		$return = RepoHooks::onContentModelCanBeUsedOn( $contentModel, $linkTarget, $ok );
+		$return = ( new RepoHooks )->onContentModelCanBeUsedOn( $contentModel, $linkTarget, $ok );
 
 		$this->assertSame( $expectedOk, $ok );
 		$this->assertSame( $expectedOk, $return );
@@ -487,7 +487,7 @@ XML
 			$contentModelMappings
 		);
 
-		RepoHooks::onMediaWikiServices( $this->getServiceContainer() );
+		( new RepoHooks )->onMediaWikiServices( $this->getServiceContainer() );
 
 		$this->assertSame( [ WB_NS_ITEM => 'wikibase-item' ], $wgNamespaceContentModels );
 		$this->assertSame( array_values( $contentModelMappings ), array_keys( $wgContentHandlers ) );
@@ -505,7 +505,7 @@ XML
 
 		$canBeMoved = true;
 
-		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
+		( new RepoHooks )->onNamespaceIsMovable( $itemNamespace, $canBeMoved );
 
 		$this->assertFalse( $canBeMoved );
 	}
@@ -522,7 +522,7 @@ XML
 
 		$canBeMoved = true;
 
-		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+		( new RepoHooks )->onNamespaceIsMovable( $mainNamespace, $canBeMoved );
 
 		$this->assertFalse( $canBeMoved );
 	}
@@ -539,7 +539,7 @@ XML
 
 		$canBeMoved = true;
 
-		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+		( new RepoHooks )->onNamespaceIsMovable( $mainNamespace, $canBeMoved );
 
 		$this->assertTrue( $canBeMoved );
 	}
@@ -557,7 +557,7 @@ XML
 
 		$canBeMoved = true;
 
-		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
+		( new RepoHooks )->onNamespaceIsMovable( $itemNamespace, $canBeMoved );
 
 		$this->assertTrue( $canBeMoved );
 	}
@@ -574,7 +574,7 @@ XML
 
 		$canBeMoved = true;
 
-		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+		( new RepoHooks )->onNamespaceIsMovable( $mainNamespace, $canBeMoved );
 
 		$this->assertTrue( $canBeMoved );
 	}
@@ -609,7 +609,7 @@ XML
 	public function testOnGetPreferences() {
 		$preferences = [];
 		$user = $this->createMock( User::class );
-		RepoHooks::onGetPreferences( $user, $preferences );
+		( new RepoHooks )->onGetPreferences( $user, $preferences );
 
 		$this->assertArrayHasKey( 'wb-acknowledgedcopyrightversion', $preferences );
 		$this->assertArrayHasKey( 'wikibase-entitytermsview-showEntitytermslistview', $preferences );
@@ -756,7 +756,7 @@ XML
 		$title->method( 'getContentModel' )->willReturn( CONTENT_MODEL_WIKITEXT );
 		$skinTemplate->method( 'getRelevantTitle' )->willReturn( $title );
 
-		RepoHooks::onSkinTemplateNavigationUniversal( $skinTemplate, $links );
+		( new RepoHooks )->onSkinTemplateNavigation__Universal( $skinTemplate, $links );
 		$this->assertArrayEquals( $expectedLinks, $links );
 	}
 
@@ -777,7 +777,7 @@ XML
 		$apiMain->method( 'getUser' )
 			->willreturn( $user );
 
-		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
+		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
 
 	public function testOnApiMainOnExceptionNoop() {
@@ -796,7 +796,7 @@ XML
 		$apiMain->method( 'getUser' )
 			->willreturn( $user );
 
-		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
+		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
 
 	public function testOnApiMainOnExceptionNoopOnDisabledConfig() {
@@ -816,7 +816,7 @@ XML
 		$apiMain->method( 'getUser' )
 			->willreturn( $user );
 
-		RepoHooks::onApiMainOnException( $apiMain, new Exception( 'foo' ) );
+		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
 
 }

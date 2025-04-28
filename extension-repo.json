@@ -1243,6 +1243,9 @@
 				"WikibaseRepo.Store"
 			]
 		},
+		"RepoHooks": {
+			"class": "\\Wikibase\\Repo\\RepoHooks"
+		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
 			"services": [
@@ -1257,11 +1260,11 @@
 		}
 	},
 	"Hooks": {
-		"APIQuerySiteInfoGeneralInfo": "\\Wikibase\\Repo\\RepoHooks::onAPIQuerySiteInfoGeneralInfo",
-		"AbuseFilter-contentToString": "\\Wikibase\\Repo\\RepoHooks::onAbuseFilterContentToString",
-		"ApiCheckCanExecute": "\\Wikibase\\Repo\\RepoHooks::onApiCheckCanExecute",
-		"ApiMain::onException": "\\Wikibase\\Repo\\RepoHooks::onApiMainOnException",
-		"ApiQuery::moduleManager": "\\Wikibase\\Repo\\RepoHooks::onApiQueryModuleManager",
+		"APIQuerySiteInfoGeneralInfo": "RepoHooks",
+		"AbuseFilter-contentToString": "RepoHooks",
+		"ApiCheckCanExecute": "RepoHooks",
+		"ApiMain::onException": "RepoHooks",
+		"ApiQuery::moduleManager": "RepoHooks",
 		"ArticleDeleteComplete": [
 			"DeleteDispatcher",
 			"EntityDataPurger",
@@ -1272,48 +1275,48 @@
 			"EntityDataPurger"
 		],
 		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
-		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",
-		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
+		"BeforeDisplayNoArticleText": "RepoHooks",
+		"BeforePageDisplay": "RepoHooks",
 		"ChangesListInitRows": "LabelPrefetch",
-		"ContentModelCanBeUsedOn": "\\Wikibase\\Repo\\RepoHooks::onContentModelCanBeUsedOn",
+		"ContentModelCanBeUsedOn": "RepoHooks",
 		"DifferenceEngineViewHeader": "DifferenceEngineViewHeaderHookHandler",
 		"ExtensionTypes": "LibHooks",
-		"FormatAutocomments": "\\Wikibase\\Repo\\RepoHooks::onFormat",
-		"GetPreferences": "\\Wikibase\\Repo\\RepoHooks::onGetPreferences",
+		"FormatAutocomments": "RepoHooks",
+		"GetPreferences": "RepoHooks",
 		"HtmlPageLinkRendererEnd": "HtmlPageLinkRendererEnd",
-		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
-		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
+		"ImportHandleRevisionXMLTag": "RepoHooks",
+		"InfoAction": "RepoHooks",
 		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
-		"MaintenanceShellStart": "\\Wikibase\\Repo\\RepoHooks::onMaintenanceShellStart",
+		"MaintenanceShellStart": "RepoHooks",
 		"MakeGlobalVariablesScript": "MakeGlobalVariablesScript",
-		"MediaWikiServices": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiServices",
-		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
+		"MediaWikiServices": "RepoHooks",
+		"NamespaceIsMovable": "RepoHooks",
 		"OutputPageBeforeHTML": "OutputPageBeforeHTML",
-		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
-		"OutputPageParserOutput": "\\Wikibase\\Repo\\RepoHooks::onOutputPageParserOutput",
-		"PageHistoryLineEnding": "\\Wikibase\\Repo\\RepoHooks::onPageHistoryLineEnding",
+		"OutputPageBodyAttributes": "RepoHooks",
+		"OutputPageParserOutput": "RepoHooks",
+		"PageHistoryLineEnding": "RepoHooks",
 		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",
-		"ParserFirstCallInit": "\\Wikibase\\Repo\\RepoHooks::onParserFirstCallInit",
-		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
+		"ParserFirstCallInit": "RepoHooks",
+		"ParserOptionsRegister": "RepoHooks",
 		"RecentChange_save": "RecentChangeSave",
 		"ResourceLoaderRegisterModules": [
-			"\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
+			"RepoHooks",
 			"LibHooks",
 			"ViewHooks"
 		],
-		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
+		"RevisionFromEditComplete": "RepoHooks",
 		"ShowSearchHit": "ShowSearchHit",
 		"ShowSearchHitTitle": "ShowSearchHit",
-		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
-		"SkinTemplateNavigation::Universal": "\\Wikibase\\Repo\\RepoHooks::onSkinTemplateNavigationUniversal",
-		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
+		"SidebarBeforeOutput": "RepoHooks",
+		"SkinTemplateNavigation::Universal": "RepoHooks",
+		"TitleGetRestrictionTypes": "RepoHooks",
 		"UnitTestsList": [
-			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
+			"RepoHooks",
 			"LibHooks",
 			"ViewHooks"
 		],
-		"VectorSearchResourceLoaderConfig": "\\Wikibase\\Repo\\RepoHooks::onVectorSearchResourceLoaderConfig",
-		"WikibaseContentLanguages": "\\Wikibase\\Repo\\RepoHooks::onWikibaseContentLanguages"
+		"VectorSearchResourceLoaderConfig": "RepoHooks",
+		"WikibaseContentLanguages": "RepoHooks"
 	},
 	"RateLimits": {
 		"wikibase-idgenerator": {

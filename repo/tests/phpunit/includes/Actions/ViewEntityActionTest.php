@@ -163,7 +163,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	/**
-	 * @covers \Wikibase\Repo\Actions\ViewEntityAction::onBeforeDisplayNoArticleText
+	 * @covers \Wikibase\Repo\RepoHooks::onBeforeDisplayNoArticleText
 	 */
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
