@@ -77,6 +77,7 @@
 	"wikibase-entity-summary-wbcreate-new": "Et gouf en neien Objet ugeluecht",
 	"wikibase-entity-summary-wbcreateredirect": "Virugeleet op $4",
 	"wikibase-entity-summary-wbeditentity": "Et gouf en neien Objet ugeluecht",
+	"wikibase-entity-summary-wbeditentity-update": "Eng Entitéit geännert",
 	"wikibase-entity-summary-wbeditentity-update-languages-short": "Etikett, Beschreiwung an/oder Alias op {{#commaseparatedlist: $3}} geännert",
 	"wikibase-entity-summary-wbsetreference": "Huet eng Referenz festgeluecht",
 	"wikibase-entity-summary-wbsetreference-add": "Referenz bei d'Ausso dobäigesat",
