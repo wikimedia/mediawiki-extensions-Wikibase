@@ -40,7 +40,11 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 			throw new PropertyDataTypeLookupException( $propertyId, 'loop detected' );
 		}
 		$this->propertyIdsInProcess[ $propertyId->getSerialization() ] = true;
-		return $this->getProperty( $propertyId )->getDataTypeId();
+		try {
+			return $this->getProperty( $propertyId )->getDataTypeId();
+		} finally {
+			unset( $this->propertyIdsInProcess[ $propertyId->getSerialization() ] );
+		}
 	}
 
 	/**
@@ -55,8 +59,6 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 		if ( !( $property instanceof Property ) ) {
 			throw new PropertyDataTypeLookupException( $propertyId );
 		}
-
-		unset( $this->propertyIdsInProcess[ $propertyId->getSerialization() ] );
 
 		return $property;
 	}
