@@ -177,7 +177,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider simpleEntityParameterProvider()
+	 * @dataProvider simpleEntityParameterProvider
 	 */
 	public function testSaveEntity( EntityDocument $entity, EntityDocument $empty ) {
 		/**

@@ -36,7 +36,7 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $expected, $value ) {
 		$validator = new InterWikiLinkExistsValidator(

@@ -30,7 +30,7 @@ class StringLengthValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $minLength, $maxLength, $measure, $value, $expected, $message ) {
 		$validator = new StringLengthValidator( $minLength, $maxLength, $measure );

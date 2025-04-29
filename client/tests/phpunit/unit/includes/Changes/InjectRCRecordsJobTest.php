@@ -214,7 +214,7 @@ class InjectRCRecordsJobTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideMakeJobSpecification()
+	 * @dataProvider provideMakeJobSpecification
 	 */
 	public function testMakeJobSpecification( callable $expectedChangeFactory, array $knownChanges = [] ): void {
 		$titles = [ $this->getTitleMock( 'Foo', 21 ) ];

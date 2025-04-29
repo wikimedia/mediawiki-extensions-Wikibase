@@ -46,7 +46,7 @@ class MembershipValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $values, $normalize, $value, $expected ) {
 		$validator = new MembershipValidator( $values, 'not-allowed', $normalize );

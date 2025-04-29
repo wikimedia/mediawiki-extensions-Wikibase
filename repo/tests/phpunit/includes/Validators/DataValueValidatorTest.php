@@ -32,7 +32,7 @@ class DataValueValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $validator, $value, $expected, $exception, $message ) {
 		if ( $exception !== null ) {
