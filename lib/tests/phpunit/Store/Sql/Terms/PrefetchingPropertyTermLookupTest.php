@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\AliasGroup;

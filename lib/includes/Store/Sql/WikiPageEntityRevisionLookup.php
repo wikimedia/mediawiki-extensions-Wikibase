@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use MediaWiki\Exception\MWContentSerializationException;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
-use MWContentSerializationException;
 use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;

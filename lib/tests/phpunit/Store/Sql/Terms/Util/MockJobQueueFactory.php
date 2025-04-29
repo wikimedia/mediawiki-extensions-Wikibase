@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
-use IJobSpecification;
-use JobQueueGroup;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use PHPUnit\Framework\TestCase;

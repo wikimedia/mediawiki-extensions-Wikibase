@@ -3,7 +3,7 @@
 declare( strict_types=1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroup;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Rdbms\TermsDomainDb;

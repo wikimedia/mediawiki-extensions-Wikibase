@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use Job;
+use MediaWiki\JobQueue\Job;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageReference;

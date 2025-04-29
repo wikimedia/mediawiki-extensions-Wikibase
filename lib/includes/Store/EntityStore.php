@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Exception\PermissionsError;
 use MediaWiki\User\User;
-use PermissionsError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;

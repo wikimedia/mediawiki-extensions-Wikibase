@@ -3,8 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use JobQueueGroup;
 use LogicException;
+use MediaWiki\JobQueue\JobQueueGroup;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;

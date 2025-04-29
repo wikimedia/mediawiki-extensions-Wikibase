@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
-use MWContentSerializationException;
+use MediaWiki\Exception\MWContentSerializationException;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
