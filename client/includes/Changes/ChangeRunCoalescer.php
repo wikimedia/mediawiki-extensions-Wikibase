@@ -109,11 +109,6 @@ class ChangeRunCoalescer {
 
 		foreach ( $changes as $change ) {
 			$id = $change->getEntityId()->getSerialization();
-
-			if ( !isset( $groups[$id] ) ) {
-				$groups[$id] = [];
-			}
-
 			$groups[$id][] = $change;
 		}
 
