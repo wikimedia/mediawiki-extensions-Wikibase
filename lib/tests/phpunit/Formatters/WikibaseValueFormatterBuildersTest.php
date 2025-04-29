@@ -12,7 +12,6 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use MediaWiki\Language\Language;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
@@ -584,46 +583,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				self::newFormatterOptions( 'en' ),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^.*Label for Q5.*$/',
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideNewFormatter_LabelDescriptionLookupOption
-	 */
-	public function testNewFormatter_LabelDescriptionLookupOption(
-		$functionName,
-		FormatterOptions $options,
-		DataValue $value,
-		$expected
-	) {
-		$formatter = $this->callFactoryFunction( $functionName, SnakFormatter::FORMAT_HTML, $options );
-
-		$text = $formatter->format( $value );
-		$this->assertMatchesRegularExpression( $expected, $text );
-	}
-
-	public static function provideNewFormatter_LabelDescriptionLookupOption() {
-		$fallbackFactory = new LanguageFallbackChainFactory();
-		$lang = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de-ch' );
-		$fallbackChain = $fallbackFactory->newFromLanguage( $lang );
-
-		return [
-			'language option' => [
-				'newEntityIdFormatter',
-				new FormatterOptions( [
-					ValueFormatter::OPT_LANG => 'de',
-				] ),
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@>Name für Q5<@',
-			],
-			'fallback option' => [
-				'newEntityIdFormatter',
-				new FormatterOptions( [
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
-				] ),
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@>Name für Q5<@',
 			],
 		];
 	}

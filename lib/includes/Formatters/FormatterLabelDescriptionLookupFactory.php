@@ -30,6 +30,11 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  */
 class FormatterLabelDescriptionLookupFactory {
 
+	/**
+	 * If this option is set, its value must be an instance of {@link TermLanguageFallbackChain};
+	 * furthermore, the {@link ValueFormatter::OPT_LANG} option must then also be set
+	 * and must be consistent with the fallback chain option.
+	 */
 	public const OPT_LANGUAGE_FALLBACK_CHAIN = 'languages';
 
 	/**
