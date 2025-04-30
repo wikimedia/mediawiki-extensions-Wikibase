@@ -229,9 +229,6 @@ class MockRepository implements
 		$key = $entity->getId()->getSerialization();
 		unset( $this->redirects[$key] );
 
-		if ( !array_key_exists( $key, $this->entities ) ) {
-			$this->entities[$key] = [];
-		}
 		$this->entities[$key][$revisionId] = [ $revision, $user ];
 		ksort( $this->entities[$key] );
 
