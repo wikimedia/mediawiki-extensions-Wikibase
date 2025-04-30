@@ -461,7 +461,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
-	public static function getProduceOptions(): iterable {
+	public static function provideProduceOptions(): iterable {
 		return [
 			[
 				'Q4',
@@ -532,7 +532,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getProduceOptions
+	 * @dataProvider provideProduceOptions
 	 */
 	public function testRdfOptions( string $entityName, int $produceOption, $dataSetNames ): void {
 		$entity = $this->getEntityData( $entityName );
@@ -586,7 +586,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		$this->helper->assertNTriplesEqualsDataset( 'Q7_Q9_dedup_foreignsource_properties', $data1 . $data2 );
 	}
 
-	public static function getProps(): iterable {
+	public static function provideProps(): iterable {
 		return [
 			'simple prop' => [
 				'prop1',
@@ -636,7 +636,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getProps
+	 * @dataProvider provideProps
 	 * @param string $name Datafile name
 	 * @param array $props Property config
 	 */

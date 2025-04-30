@@ -220,7 +220,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getEntityConceptUri
+	 * @dataProvider provideEntityConceptUri
 	 */
 	public function testGetEntityConceptUri( $expected, array $settings, EntityId $entityId ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
@@ -228,7 +228,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $repoLinker->getEntityConceptUri( $entityId ) );
 	}
 
-	public static function getEntityConceptUri() {
+	public static function provideEntityConceptUri() {
 		$settings = self::getRepoSettings();
 
 		return [

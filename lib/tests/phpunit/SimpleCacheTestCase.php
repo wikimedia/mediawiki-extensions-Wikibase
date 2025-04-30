@@ -70,9 +70,9 @@ abstract class SimpleCacheTestCase extends TestCase {
 	 *
 	 * @return array
 	 */
-	public static function invalidKeys() {
+	public static function provideInvalidKeys() {
 		return array_merge(
-			self::invalidArrayKeys(),
+			self::provideInvalidArrayKeys(),
 			[
 				[ 2 ],
 			]
@@ -84,7 +84,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	 *
 	 * @return array
 	 */
-	public static function invalidArrayKeys() {
+	public static function provideInvalidArrayKeys() {
 		return [
 			[ '' ],
 			[ true ],
@@ -109,7 +109,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	/**
 	 * @return array
 	 */
-	public static function invalidTtl() {
+	public static function provideInvalidTtl() {
 		return [
 			[ '' ],
 			[ true ],
@@ -129,7 +129,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	 *
 	 * @return array
 	 */
-	public static function validKeys() {
+	public static function provideValidKeys() {
 		return [
 			[ 'AbC19_.' ],
 			[ '1234567890123456789012345678901234567890123456789012345678901234' ],
@@ -141,7 +141,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	 *
 	 * @return array
 	 */
-	public static function validData() {
+	public static function provideValidData() {
 		return [
 			[ 'AbC19_.' ],
 			[ 4711 ],
@@ -411,7 +411,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testGetInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -423,7 +423,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testGetMultipleInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -444,7 +444,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testSetInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -456,7 +456,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidArrayKeys
+	 * @dataProvider provideInvalidArrayKeys
 	 */
 	public function testSetMultipleInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -482,7 +482,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testHasInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -494,7 +494,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testDeleteInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -506,7 +506,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidKeys
+	 * @dataProvider provideInvalidKeys
 	 */
 	public function testDeleteMultipleInvalidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -527,7 +527,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidTtl
+	 * @dataProvider provideInvalidTtl
 	 */
 	public function testSetInvalidTtl( $ttl ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -539,7 +539,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidTtl
+	 * @dataProvider provideInvalidTtl
 	 */
 	public function testSetMultipleInvalidTtl( $ttl ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -647,7 +647,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider validKeys
+	 * @dataProvider provideValidKeys
 	 */
 	public function testSetValidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -659,7 +659,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider validKeys
+	 * @dataProvider provideValidKeys
 	 */
 	public function testSetMultipleValidKeys( $key ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -678,7 +678,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider validData
+	 * @dataProvider provideValidData
 	 */
 	public function testSetValidData( $data ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {
@@ -690,7 +690,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 	}
 
 	/**
-	 * @dataProvider validData
+	 * @dataProvider provideValidData
 	 */
 	public function testSetMultipleValidData( $data ) {
 		if ( isset( $this->skippedTests[__FUNCTION__] ) ) {

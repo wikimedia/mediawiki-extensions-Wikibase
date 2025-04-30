@@ -42,7 +42,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 		return $languageFallbackIndicator;
 	}
 
-	public static function formatProvider_fallback() {
+	public static function format_fallbackProvider() {
 		$deTermFallback = new TermFallback( 'de', 'Kätzchen', 'de', 'de' );
 		$deAtTerm = new TermFallback( 'de-at', 'Kätzchen', 'de', 'de' );
 		$atDeTerm = new TermFallback( 'de', 'Kätzchen', 'de-at', 'de-at' );
@@ -94,7 +94,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider formatProvider_fallback
+	 * @dataProvider format_fallbackProvider
 	 */
 	public function testFormat_fallback( $expected, TermFallback $term ) {
 		$languageFallbackIndicator = $this->getIndicator();

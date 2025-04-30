@@ -85,7 +85,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getStatementEditSection
+	 * @dataProvider getStatementEditSectionProvider
 	 */
 	public function testGetStatementEditSection( $statement ) {
 		$generator = $this->newToolbarEditSectionGenerator();
@@ -96,7 +96,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public static function getStatementEditSection() {
+	public static function getStatementEditSectionProvider() {
 		return [
 			[ new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) ) ) ],
 		];

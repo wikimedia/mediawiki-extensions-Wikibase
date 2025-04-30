@@ -81,7 +81,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider listEntitiesProvider_paging
+	 * @dataProvider provideListEntities_paging
 	 */
 	public function testListEntities_paging( $file, $type, $limit, array $expectedChunks ) {
 		$reader = $this->openIdReader( $file, $type );
@@ -93,7 +93,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public static function listEntitiesProvider_paging() {
+	public static function provideListEntities_paging() {
 		$q1 = new ItemId( 'Q1' );
 		$p2 = new NumericPropertyId( 'P2' );
 		$q3 = new ItemId( 'Q3' );

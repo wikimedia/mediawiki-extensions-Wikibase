@@ -18,7 +18,7 @@ use Wikibase\Lib\Units\UnitStorage;
 class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiTestCaseTrait;
 
-	public static function getConverterPairs() {
+	public static function provideConverterPairs() {
 		return [
 			[ 'Q1', '+16', 'http://acme.test/Q2', '+1975.2' ],
 			[ 'Q1', '-16', 'http://acme.test/Q2', '-1975.2' ],
@@ -54,7 +54,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getConverterPairs
+	 * @dataProvider provideConverterPairs
 	 */
 	public function testConvert( $fromUnit, $fromValue, $toUnit, $toValue ) {
 		$uc = $this->getConverter( $fromUnit, [ '123.45', 'Q2' ] );
@@ -93,7 +93,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 			'Wrong lower bound' );
 	}
 
-	public static function getBadConversions() {
+	public static function provideBadConversions() {
 		return [
 			[ null, true ],
 			[ [ '1', 'Q123' ], false ],
@@ -107,7 +107,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * Cases where no conversion should happen
-	 * @dataProvider getBadConversions
+	 * @dataProvider provideBadConversions
 	 * @param string[]|null $conv Conversion result data
 	 * @param bool $expectNull Should result be null?
 	 */

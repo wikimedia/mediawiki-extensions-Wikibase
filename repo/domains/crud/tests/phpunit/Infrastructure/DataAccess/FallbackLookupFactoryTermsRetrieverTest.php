@@ -26,7 +26,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\FallbackLookupFactoryTe
 class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testLabelsLookupThrowsLookupException_returnsNull( EntityId $entityId ): void {
 		$languageCode = 'en';
@@ -39,7 +39,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testGetLabel( EntityId $entityId ): void {
 		$languageCode = 'en';
@@ -78,7 +78,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testGivenNoLabelInRequestedLanguage_getLabelReturnsNull( EntityId $entityId ): void {
 		$this->assertNull(
@@ -88,7 +88,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testDescriptionLookupThrowsLookupException_returnsNull( EntityId $entityId ): void {
 		$lookup = $this->createStub( FallbackLabelDescriptionLookup::class );
@@ -99,7 +99,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testGetDescription( EntityId $entityId ): void {
 		$languageCode = 'en';
@@ -119,7 +119,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testGetDescriptionWithFallbackLanguage( EntityId $entityId ): void {
 		$languageCode = 'en';
@@ -140,7 +140,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider entityIdGenerator
+	 * @dataProvider provideEntityIdGenerator
 	 */
 	public function testGivenNoDescriptionInRequestedLanguage_getDescriptionReturnsNull( EntityId $entityId ): void {
 		$this->assertNull(
@@ -149,7 +149,7 @@ class FallbackLookupFactoryTermsRetrieverTest extends TestCase {
 		);
 	}
 
-	public static function entityIdGenerator(): Generator {
+	public static function provideEntityIdGenerator(): Generator {
 		yield 'item_id' => [ new ItemId( 'Q321' ) ];
 		yield 'property_id' => [ new NumericPropertyId( 'P123' ) ];
 	}
