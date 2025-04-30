@@ -70,7 +70,9 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 				: null,
 			new MatchedData(
 				$result->getMatchedTermType(),
-				$result->getMatchedTerm()->getLanguageCode(),
+				$result->getMatchedTerm()->getLanguageCode() === 'qid' ?
+					null :
+					$result->getMatchedTerm()->getLanguageCode(),
 				$result->getMatchedTerm()->getText()
 			)
 		);

@@ -20,9 +20,10 @@ function newSearchRequest( language, searchTerm ) {
 
 describe( 'Simple property search', () => {
 	const propertyEnLabel = utils.title( 'english-label' );
+	let property;
 
 	before( async () => {
-		await createProperty( {
+		property = await createProperty( {
 			data_type: 'string',
 			labels: { en: propertyEnLabel }
 		} );
@@ -50,6 +51,16 @@ describe( 'Simple property search', () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.lengthOf( response.body.results, 0 );
+		expect( response ).to.satisfyApiSchema;
+	} );
+
+	it( '200 - search response by ID (without language match)', async () => {
+		const response = await newSearchRequest( 'en', property.id )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 200 );
+		assert.lengthOf( response.body.results, 1 );
 		expect( response ).to.satisfyApiSchema;
 	} );
 

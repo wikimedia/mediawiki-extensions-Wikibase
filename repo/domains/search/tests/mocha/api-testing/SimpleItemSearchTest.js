@@ -139,6 +139,20 @@ describe( 'Simple item search', () => {
 			} ] );
 		} );
 
+		it( 'finds an item by Q-ID', async () => {
+			const response = await newSearchRequest( 'en', item1.id )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.deepEqual( response.body.results, [ {
+				id: item1.id,
+				'display-label': { language: 'en', value: item1Label },
+				description: { language: 'en', value: item1Description },
+				match: { type: 'entityId', text: item1.id }
+			} ] );
+		} );
+
 		it( 'finds nothing if no items match', async () => {
 			const response = await newSearchRequest( 'en', utils.uniq( 40 ) )
 				.assertValidRequest()

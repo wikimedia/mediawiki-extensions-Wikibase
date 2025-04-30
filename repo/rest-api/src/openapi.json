@@ -33715,7 +33715,6 @@
                             "additionalProperties": false,
                             "required": [
                               "type",
-                              "language",
                               "text"
                             ]
                           }
@@ -33950,7 +33949,6 @@
                             "additionalProperties": false,
                             "required": [
                               "type",
-                              "language",
                               "text"
                             ]
                           }
@@ -43164,7 +43162,6 @@
                         "additionalProperties": false,
                         "required": [
                           "type",
-                          "language",
                           "text"
                         ]
                       }
@@ -43339,7 +43336,6 @@
                         "additionalProperties": false,
                         "required": [
                           "type",
-                          "language",
                           "text"
                         ]
                       }

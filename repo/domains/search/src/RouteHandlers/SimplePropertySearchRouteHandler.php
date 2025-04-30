@@ -93,11 +93,11 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 					'language' => $result->getDescription()->getLanguageCode(),
 					'value' => $result->getDescription()->getText(),
 				] : null,
-				'match' => [
+				'match' => array_filter( [
 					'type' => $result->getMatchedData()->getType(),
 					'language' => $result->getMatchedData()->getLanguageCode(),
 					'text' => $result->getMatchedData()->getText(),
-				],
+				] ),
 			],
 			iterator_to_array( $results )
 		);

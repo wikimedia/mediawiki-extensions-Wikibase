@@ -126,6 +126,20 @@ describe( 'Simple property search', () => {
 			} ] );
 		} );
 
+		it( 'finds a property by P-ID', async () => {
+			const response = await newSearchRequest( 'en', property1.id )
+				.assertValidRequest()
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+			assert.deepEqual( response.body.results, [ {
+				id: property1.id,
+				'display-label': { language: 'en', value: property1.labels.en },
+				description: { language: 'en', value: property1.descriptions.en },
+				match: { type: 'entityId', text: property1.id }
+			} ] );
+		} );
+
 		it( 'finds nothing if no properties match', async () => {
 			const response = await newSearchRequest( 'en', utils.uniq( 40 ) )
 				.assertValidRequest()
