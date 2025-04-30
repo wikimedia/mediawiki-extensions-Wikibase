@@ -51,7 +51,7 @@ class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $field, $validator, $value, $expectedError, $expectedException, $message ) {
 		if ( $expectedException !== null ) {

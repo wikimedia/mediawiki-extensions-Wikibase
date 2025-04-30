@@ -40,7 +40,7 @@ class CompositeValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $validators, $failFast, $value, $expectedErrorCount, $message ) {
 		$validator = new CompositeValidator( $validators, $failFast );

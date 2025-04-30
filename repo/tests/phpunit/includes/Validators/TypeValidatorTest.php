@@ -33,7 +33,7 @@ class TypeValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $type, $value, $expected, $message ) {
 		$validator = new TypeValidator( $type );

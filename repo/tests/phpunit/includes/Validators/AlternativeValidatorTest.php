@@ -35,7 +35,7 @@ class AlternativeValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $validators, $value, $expectedErrorCount, $message ) {
 		$validator = new AlternativeValidator( $validators );

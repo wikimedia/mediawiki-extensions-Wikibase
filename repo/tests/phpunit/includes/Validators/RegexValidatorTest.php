@@ -28,7 +28,7 @@ class RegexValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $regex, $inverse, $value, $expected, $message ) {
 		$validator = new RegexValidator( $regex, $inverse );

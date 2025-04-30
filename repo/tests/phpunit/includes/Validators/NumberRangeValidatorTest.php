@@ -30,7 +30,7 @@ class NumberRangeValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $minLength, $maxLength, $value, $expected, $message ) {
 		$validator = new NumberRangeValidator( $minLength, $maxLength );

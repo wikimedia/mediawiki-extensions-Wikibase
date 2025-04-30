@@ -58,7 +58,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetErrorMessage()
+	 * @dataProvider provideGetErrorMessage
 	 */
 	public function testGetErrorMessage( $error, array $params ) {
 		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
@@ -82,7 +82,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetResultStatus()
+	 * @dataProvider provideGetResultStatus
 	 */
 	public function testGetResultStatus( Result $result ) {
 		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );

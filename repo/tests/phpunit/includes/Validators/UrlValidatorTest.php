@@ -55,7 +55,7 @@ class UrlValidatorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $schemes, $value, $expectedErrorCode ) {
 		$validator = new UrlValidator( $schemes );

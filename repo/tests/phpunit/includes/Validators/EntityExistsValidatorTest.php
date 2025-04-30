@@ -52,7 +52,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideValidate()
+	 * @dataProvider provideValidate
 	 */
 	public function testValidate( $value, $type ) {
 		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
