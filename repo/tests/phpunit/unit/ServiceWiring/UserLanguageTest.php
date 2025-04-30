@@ -20,8 +20,13 @@ class UserLanguageTest extends ServiceWiringTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
 		global $wgLang;
+
+		// Need to call 'getService' at least once during setup to populate $wgLang
+		// in the first place. As we remove users of  the `WikibaseRepo.UserLanguage`
+		// service, this is no longer the case by default and we need to explicitly
+		// make the call here.
+		$this->getService( 'WikibaseRepo.UserLanguage' );
 
 		$this->cachedLang = clone $wgLang;
 	}
