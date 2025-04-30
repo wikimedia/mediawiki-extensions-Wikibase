@@ -220,7 +220,9 @@ return [
 			}
 
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
-			$language = WikibaseRepo::getUserLanguage();
+			$context = new RequestContext();
+			$context->setRequest( $request );
+			$language = $context->getLanguage();
 			return new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
@@ -422,7 +424,9 @@ return [
 			}
 
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
-			$language = WikibaseRepo::getUserLanguage();
+			$context = new RequestContext();
+			$context->setRequest( $request );
+			$language = $context->getLanguage();
 			return new PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
 					[
