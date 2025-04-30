@@ -19,11 +19,10 @@ use MediaWiki\Context\RequestContext;
 
 require_once __DIR__ . '/Wikibase.example.php';
 
-// Wikibase Cirrus search should not be used in browser tests
-$wgWBCSUseCirrus = false;
-
-// CirrusSearch should not perform any updates
-$wgCirrusSearchDisableUpdate = true;
+// use WikibaseCirrusSearch if OpenSearch is available, otherwise disable it
+$hasOpenSearch = getenv( 'QUIBBLE_OPENSEARCH' ) === 'true';
+$wgWBCSUseCirrus = $hasOpenSearch;
+$wgCirrusSearchDisableUpdate = !$hasOpenSearch;
 
 // use mysql-upsert if CI is using a MySQL database to avoid deadlocks from parallel tests
 $wgWBRepoSettings['idGenerator'] = 'auto';
