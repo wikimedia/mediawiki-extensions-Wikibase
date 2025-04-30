@@ -31,7 +31,6 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
-use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -533,20 +532,10 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	private function newLanguageNameLookup( FormatterOptions $options ): LanguageNameLookup {
-		if ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
-			return $this->languageNameLookupFactory->getForLanguageCode(
-				$options->getOption( ValueFormatter::OPT_LANG )
-			);
-		} elseif ( $options->hasOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
-			/** @var TermLanguageFallbackChain $chain */
-			$chain = $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
-			'@phan-var TermLanguageFallbackChain $chain';
-			return $this->languageNameLookupFactory->getForLanguageCode(
-				$chain->getFallbackChain()[0]->getLanguageCode()
-			);
-		} else {
-			throw new InvalidArgumentException( 'FormatterOptions must have OPT_LANG or OPT_LANGUAGE_FALLBACK_CHAIN' );
-		}
+		$options->requireOption( ValueFormatter::OPT_LANG );
+		return $this->languageNameLookupFactory->getForLanguageCode(
+			$options->getOption( ValueFormatter::OPT_LANG )
+		);
 	}
 
 }
