@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Dumpers;
 use DataValues\Serializers\DataValueSerializer;
 use Exception;
 use InvalidArgumentException;
-use MWContentSerializationException;
+use MediaWiki\Exception\MWContentSerializationException;
 use Onoi\MessageReporter\MessageReporter;
 use stdClass;
 use Wikibase\DataModel\Deserializers\DeserializerFactory;

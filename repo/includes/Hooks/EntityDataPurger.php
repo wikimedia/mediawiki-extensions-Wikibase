@@ -4,12 +4,14 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Hooks;
 
-use JobQueueGroup;
-use JobSpecification;
 use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Content\Content;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
+use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\JobQueue\JobSpecification;
+use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -83,12 +85,12 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	}
 
 	/**
-	 * @param \WikiPage $wikiPage
+	 * @param WikiPage $wikiPage
 	 * @param User $user
 	 * @param string $reason
 	 * @param int $id
 	 * @param Content|null $content
-	 * @param \ManualLogEntry $logEntry
+	 * @param ManualLogEntry $logEntry
 	 * @param int $archivedRevisionCount
 	 * @return bool|void
 	 */

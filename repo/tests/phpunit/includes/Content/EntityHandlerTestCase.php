@@ -2,18 +2,19 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use Action;
-use Article;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Actions\Action;
 use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Content\ContentHandler;
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Article;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Site\Site;
@@ -38,7 +39,6 @@ use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Content\EntityHandler

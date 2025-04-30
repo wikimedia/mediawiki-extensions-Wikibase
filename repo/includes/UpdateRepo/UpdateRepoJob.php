@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use Job;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\JobQueue\Job;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\Item;

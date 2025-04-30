@@ -6,10 +6,10 @@ namespace Wikibase\Repo\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
+use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\Language;
 use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;
-use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;

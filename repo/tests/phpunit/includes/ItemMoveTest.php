@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
@@ -11,7 +12,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Tests prevention of moving pages in and out of the data NS.

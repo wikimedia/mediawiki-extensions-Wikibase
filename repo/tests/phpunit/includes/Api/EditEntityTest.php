@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Exception\ReadOnlyError;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
-use ReadOnlyError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

@@ -6,11 +6,11 @@ namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Request\FauxResponse;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Actions\ViewEntityAction

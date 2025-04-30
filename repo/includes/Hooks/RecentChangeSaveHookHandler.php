@@ -5,9 +5,9 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\CentralId\CentralIdLookupFactory;
-use RecentChange;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\ChangeStore;

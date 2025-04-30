@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
-use RepoGroup;
+use MediaWiki\FileRepo\RepoGroup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;

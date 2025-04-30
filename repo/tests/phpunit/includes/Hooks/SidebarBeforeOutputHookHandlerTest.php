@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Message\Message;
+use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
-use Skin;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;

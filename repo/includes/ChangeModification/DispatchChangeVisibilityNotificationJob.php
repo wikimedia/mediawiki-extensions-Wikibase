@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\ChangeModification;
 
-use IJobSpecification;
-use JobSpecification;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;

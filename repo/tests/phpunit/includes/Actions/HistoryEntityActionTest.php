@@ -2,12 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
-use Article;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Page\Article;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -17,7 +18,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Actions\HistoryEntityAction;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Actions\HistoryEntityAction

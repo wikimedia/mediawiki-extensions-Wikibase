@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Exception\UserBlockedError;
 use MediaWiki\Message\Message;
 use MediaWiki\SpecialPage\SpecialPage;
-use UserBlockedError;
 use Wikibase\Lib\StringNormalizer;
 
 /**

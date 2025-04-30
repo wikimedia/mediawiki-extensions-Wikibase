@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\Serializers\DataValueSerializer;
-use HttpError;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\Exception\HttpError;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;

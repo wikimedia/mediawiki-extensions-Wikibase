@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HttpError;
 use MediaWiki\Cache\HTMLCacheUpdater;
+use MediaWiki\Exception\HttpError;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\SettingsArray;

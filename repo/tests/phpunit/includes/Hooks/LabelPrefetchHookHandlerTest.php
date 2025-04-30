@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use ChangesList;
+use MediaWiki\RecentChanges\ChangesList;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use PHPUnit\Framework\TestCase;

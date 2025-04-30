@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
-use Article;
 use LogicException;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Page\Article;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionLookup;

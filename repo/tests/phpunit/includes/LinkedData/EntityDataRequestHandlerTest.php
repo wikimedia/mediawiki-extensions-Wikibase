@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
-use HttpError;
 use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Exception\HttpError;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;

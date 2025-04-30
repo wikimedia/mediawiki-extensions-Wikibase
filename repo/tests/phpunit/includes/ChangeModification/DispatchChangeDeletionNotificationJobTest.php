@@ -3,9 +3,10 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\ChangeModification;
 
-use IJobSpecification;
-use JobQueueGroup;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Title\Title;
 use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
@@ -17,7 +18,6 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
 use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Content;
 
-use Action;
-use Article;
+use MediaWiki\Actions\Action;
 use MediaWiki\Content\Content;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Page\Article;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Revision\SlotRenderingProvider;
 use MediaWiki\Title\Title;

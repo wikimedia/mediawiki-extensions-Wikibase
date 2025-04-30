@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
-use MWContentSerializationException;
+use MediaWiki\Exception\MWContentSerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;

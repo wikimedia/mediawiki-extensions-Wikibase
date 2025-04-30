@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HttpError;
+use MediaWiki\Exception\HttpError;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityTitleLookup;

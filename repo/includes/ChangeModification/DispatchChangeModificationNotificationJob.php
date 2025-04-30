@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ChangeModification;
 
-use IJobSpecification;
-use Job;
+use MediaWiki\JobQueue\IJobSpecification;
+use MediaWiki\JobQueue\Job;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;

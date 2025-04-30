@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\ChangeModification;
 
-use JobQueueGroup;
+use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;

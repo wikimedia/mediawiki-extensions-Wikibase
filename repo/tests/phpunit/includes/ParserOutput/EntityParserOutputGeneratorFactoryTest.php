@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\FileRepo\RepoGroup;
 use MediaWikiIntegrationTestCase;
-use RepoGroup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;

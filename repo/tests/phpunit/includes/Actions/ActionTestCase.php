@@ -2,12 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
-use Action;
-use Article;
 use Exception;
 use InvalidArgumentException;
+use MediaWiki\Actions\Action;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\Page\Article;
+use MediaWiki\Page\WikiPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
@@ -19,7 +20,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @license GPL-2.0-or-later
