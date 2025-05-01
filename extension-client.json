@@ -188,9 +188,12 @@
 		},
 		"LinkedDataSchemaGenerator": {
 			"class": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator",
+			"factory": "\\Wikibase\\Client\\Hooks\\LinkedDataSchemaGenerator::factory",
 			"services": [
 				"RevisionLookup",
-				"WikibaseClient.RepoLinker"
+				"WikibaseClient.EntityIdParser",
+				"WikibaseClient.RepoLinker",
+				"WikibaseClient.Settings"
 			]
 		},
 		"LoadExtensionSchemaUpdates": {
@@ -331,7 +334,7 @@
 		"SearchIndexFields": "Trivial",
 		"SearchResultProvideDescription": "DescriptionProvider",
 		"SidebarBeforeOutput": "Sidebar",
-		"SkinAfterBottomScripts": "\\Wikibase\\Client\\ClientHooks::onSkinAfterBottomScripts",
+		"SkinAfterBottomScripts": "LinkedDataSchemaGenerator",
 		"SkinAfterPortlet": "SkinAfterPortlet",
 		"SkinTemplateGetLanguageLink": "Sidebar",
 		"SpecialMovepageAfterMove": "MovePageNotice",
