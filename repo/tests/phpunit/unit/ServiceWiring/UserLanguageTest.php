@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
 use MediaWiki\Language\Language;
+use MediaWiki\StubObject\StubObject;
 use RuntimeException;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 
@@ -22,12 +23,7 @@ class UserLanguageTest extends ServiceWiringTestCase {
 		parent::setUp();
 		global $wgLang;
 
-		// Need to call 'getService' at least once during setup to populate $wgLang
-		// in the first place. As we remove users of  the `WikibaseRepo.UserLanguage`
-		// service, this is no longer the case by default and we need to explicitly
-		// make the call here.
-		$this->getService( 'WikibaseRepo.UserLanguage' );
-
+		StubObject::unstub( $wgLang );
 		$this->cachedLang = clone $wgLang;
 	}
 
