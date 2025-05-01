@@ -6,8 +6,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use Wikibase\Client\DataAccess\Scribunto\WikibaseEntityLibrary;
-use Wikibase\Client\DataAccess\Scribunto\WikibaseLibrary;
 use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -33,20 +31,6 @@ final class ClientHooks {
 	 */
 	protected static function isWikibaseEnabled( $namespace ) {
 		return WikibaseClient::getNamespaceChecker()->isWikibaseEnabled( $namespace );
-	}
-
-	/**
-	 * External library for Scribunto
-	 *
-	 * @param string $engine
-	 * @param string[] &$extraLibraries
-	 */
-	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
-		$allowDataTransclusion = WikibaseClient::getSettings()->getSetting( 'allowDataTransclusion' );
-		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
-			$extraLibraries['mw.wikibase'] = WikibaseLibrary::class;
-			$extraLibraries['mw.wikibase.entity'] = WikibaseEntityLibrary::class;
-		}
 	}
 
 	/**

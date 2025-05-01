@@ -227,6 +227,13 @@
 				"WikibaseClient.Settings"
 			]
 		},
+		"ScribuntoExternalLibraries": {
+			"class": "\\Wikibase\\Client\\Hooks\\ScribuntoExternalLibrariesHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ScribuntoExternalLibrariesHandler::factory",
+			"services": [
+				"WikibaseClient.Settings"
+			]
+		},
 		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
 			"services": [
@@ -315,7 +322,7 @@
 			"LibHooks",
 			"DataBridgeResourceLoaderModules"
 		],
-		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
+		"ScribuntoExternalLibraries": "ScribuntoExternalLibraries",
 		"SearchDataForIndex": {
 			"handler": "Trivial",
 			"deprecated": true

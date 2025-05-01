@@ -49,6 +49,10 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 			if ( $needsEcho && !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 				continue;
 			}
+			if ( $hookHandlerName[0] === 'ScribuntoExternalLibraries' &&
+				!ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
+				continue;
+			}
 			yield $hookHandlerName;
 		}
 	}
