@@ -41,7 +41,7 @@ class DateTimeValueCleanerTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public static function getDates() {
+	public static function provideDates() {
 		$greg = TimeValue::CALENDAR_GREGORIAN;
 		$jul = TimeValue::CALENDAR_JULIAN;
 		$year1m = TimeValue::PRECISION_YEAR1M;
@@ -93,7 +93,7 @@ class DateTimeValueCleanerTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public static function getDatesXSD11() {
+	public static function provideDatesXSD11() {
 		$greg = TimeValue::CALENDAR_GREGORIAN;
 		$jul = TimeValue::CALENDAR_JULIAN;
 		$year10 = TimeValue::PRECISION_YEAR10;
@@ -124,7 +124,7 @@ class DateTimeValueCleanerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getDates
+	 * @dataProvider provideDates
 	 */
 	public function testCleanDate(
 		$date,
@@ -147,7 +147,7 @@ class DateTimeValueCleanerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getDatesXSD11
+	 * @dataProvider provideDatesXSD11
 	 */
 	public function testCleanDateXSD11(
 		$date,

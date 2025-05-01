@@ -160,7 +160,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		return $context;
 	}
 
-	public static function createRedirectProvider_success(): iterable {
+	public static function createRedirect_successProvider(): iterable {
 		return [
 			'redirect empty entity' => [ new ItemId( 'Q11' ), new ItemId( 'Q12' ) ],
 			'update redirect' => [ new ItemId( 'Q22' ), new ItemId( 'Q11' ) ],
@@ -169,7 +169,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider createRedirectProvider_success
+	 * @dataProvider createRedirect_successProvider
 	 */
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
 		$interactor = $this->newInteractor( $this->once() );
@@ -191,7 +191,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		$status->getSavedTempUser();
 	}
 
-	public static function createRedirectProvider_failure(): iterable {
+	public static function createRedirect_failureProvider(): iterable {
 		return [
 			'source not found' => [
 				new ItemId( 'Q77' ),
@@ -247,7 +247,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider createRedirectProvider_failure
+	 * @dataProvider createRedirect_failureProvider
 	 */
 	public function testCreateRedirect_failure(
 		EntityId $fromId,

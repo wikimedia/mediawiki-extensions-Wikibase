@@ -210,7 +210,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		return $entityContentFactory;
 	}
 
-	public static function getPlainSearches() {
+	public static function providePlainSearches() {
 		return [
 			"simple" => [
 				'Q1',
@@ -251,7 +251,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getPlainSearches
+	 * @dataProvider providePlainSearches
 	 */
 	public function testShowSearchHitPlain(
 		string $title,

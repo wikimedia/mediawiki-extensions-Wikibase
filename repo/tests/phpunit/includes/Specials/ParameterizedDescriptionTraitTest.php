@@ -54,7 +54,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider specialPageProvider_federatedPropertiesEnabled
+	 * @dataProvider specialPage_federatedPropertiesEnabledProvider
 	 */
 	public function testParameterizedDescriptionOnSetDescriptionPage_federatedPropertiesEnabled( $pageFactory, $expected ) {
 		$page = $pageFactory( $this );
@@ -96,7 +96,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return array [ string, expectedOutput ]
 	 */
-	public static function specialPageProvider_federatedPropertiesEnabled(): iterable {
+	public static function specialPage_federatedPropertiesEnabledProvider(): iterable {
 		return [
 			'SpecialSetLabel' => [
 				fn ( self $self ) => $self->newSpecialSetLabelsPage(),

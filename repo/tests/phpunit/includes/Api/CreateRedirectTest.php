@@ -179,7 +179,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( 1, $result['success'] );
 	}
 
-	public static function setRedirectProvider_success(): iterable {
+	public static function setRedirect_successProvider(): iterable {
 		return [
 			'redirect empty entity' => [ 'Q11', 'Q12' ],
 			'update redirect' => [ 'Q22', 'Q11' ],
@@ -187,7 +187,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider setRedirectProvider_success
+	 * @dataProvider setRedirect_successProvider
 	 */
 	public function testSetRedirect_success( string $from, string $to ): void {
 		$params = [ 'from' => $from, 'to' => $to ];
@@ -196,7 +196,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$this->assertSuccess( $result );
 	}
 
-	public static function setRedirectProvider_failure(): iterable {
+	public static function setRedirect_failureProvider(): iterable {
 		return [
 			'bad source id' => [ 'xyz', 'Q12', 'invalid-entity-id' ],
 			'bad target id' => [ 'Q11', 'xyz', 'invalid-entity-id' ],
@@ -212,7 +212,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider setRedirectProvider_failure
+	 * @dataProvider setRedirect_failureProvider
 	 */
 	public function testSetRedirect_failure( string $from, string $to, string $expectedCode ): void {
 		$params = [ 'from' => $from, 'to' => $to ];

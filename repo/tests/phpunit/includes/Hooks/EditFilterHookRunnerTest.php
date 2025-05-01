@@ -76,7 +76,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStatusGood( $status );
 	}
 
-	public static function runData() {
+	public static function provideRunData() {
 		return [
 			'good existing item' => [
 				Status::newGood(),
@@ -140,7 +140,7 @@ class EditFilterHookRunnerTest extends MediaWikiIntegrationTestCase {
 	 * @param EntityDocument|EntityRedirect|null $new
 	 * @param array $expected
 	 *
-	 * @dataProvider runData
+	 * @dataProvider provideRunData
 	 */
 	public function testRun_hooksAreCalled( Status $inputStatus, $new, array $expected ) {
 		$this->clearHook( 'EditFilterMergedContent' );

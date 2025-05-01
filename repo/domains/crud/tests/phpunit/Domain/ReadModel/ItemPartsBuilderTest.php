@@ -96,7 +96,7 @@ class ItemPartsBuilderTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider nonRequiredFields
+	 * @dataProvider provideNonRequiredFields
 	 *
 	 * @param string $field
 	 * @param string $setterFunction
@@ -110,7 +110,7 @@ class ItemPartsBuilderTest extends TestCase {
 		$builder->$setterFunction( $param )->build();
 	}
 
-	public static function nonRequiredFields(): Generator {
+	public static function provideNonRequiredFields(): Generator {
 		yield 'labels' => [
 			ItemParts::FIELD_LABELS,
 			'setLabels',

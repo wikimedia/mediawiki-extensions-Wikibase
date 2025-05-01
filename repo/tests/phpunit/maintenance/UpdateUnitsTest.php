@@ -31,7 +31,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 		$this->script->silent = true;
 	}
 
-	public static function getUnitCases() {
+	public static function provideUnitCases() {
 		return [
 			'derived SI unit' => [
 				[
@@ -112,7 +112,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @dataProvider getUnitCases
+	 * @dataProvider provideUnitCases
 	 */
 	public function testConvertUnit( array $unit, ?array $expect ) {
 		$usage = [ 'Q1' => 100, 'Q2' => 50, 'Q3' => 10 ];

@@ -126,7 +126,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
-	public static function changeOpAddProviderWithIndex(): iterable {
+	public static function changeOpAddWithIndexProvider(): iterable {
 		$snak = new PropertyNoValueSnak( 1 );
 		$args = [];
 
@@ -161,7 +161,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider changeOpAddProviderWithIndex
+	 * @dataProvider changeOpAddWithIndexProvider
 	 */
 	public function testApplyAddNewReferenceWithIndex(
 		Item $item,

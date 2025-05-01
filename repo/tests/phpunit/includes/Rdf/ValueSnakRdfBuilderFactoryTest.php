@@ -27,7 +27,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	public static function getBuilderFlags() {
+	public static function provideBuilderFlags() {
 		return [
 			[ 0 ], // simple values
 			[ RdfProducer::PRODUCE_FULL_VALUES ], // complex values
@@ -35,7 +35,7 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getBuilderFlags
+	 * @dataProvider provideBuilderFlags
 	 */
 	public function testGetValueSnakRdfBuilder( $flags ) {
 		$vocab = new RdfVocabulary(

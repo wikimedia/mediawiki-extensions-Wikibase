@@ -56,7 +56,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		);
 	}
 
-	public static function getUnitsData() {
+	public static function provideUnitsData() {
 		$qConverted =
 			new QuantityValue( new DecimalValue( '+1234.5' ), 'Q2', new DecimalValue( '+1235.0' ),
 				new DecimalValue( '+1233.9' ) );
@@ -155,7 +155,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 	 * @param array $statements List of statements using values from $values
 	 * @param array|null $converted Converted value
 	 * @param string $result Expected result filename, in tests/phpunit/data/maintenance/
-	 * @dataProvider getUnitsData
+	 * @dataProvider provideUnitsData
 	 */
 	public function testBaseUnit( $values, $statements, $converted, $result ) {
 		$this->client->method( 'query' )

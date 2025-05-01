@@ -80,7 +80,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 		];
 	}
 
-	public static function formatProvider_fallback() {
+	public static function format_fallbackProvider() {
 		$deTerm = new Term( 'de', 'Kätzchen' );
 		$deTermFallback = new TermFallback( 'de', 'Kätzchen', 'de', 'de' );
 		$deAtTerm = new TermFallback( 'de-at', 'Kätzchen', 'de', 'de' );
@@ -149,7 +149,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 	}
 
 	/**
-	 * @dataProvider formatProvider_fallback
+	 * @dataProvider format_fallbackProvider
 	 */
 	public function testFormat_fallback( $expectedPattern, Term $term ) {
 		$entityId = new ItemId( 'Q42' );

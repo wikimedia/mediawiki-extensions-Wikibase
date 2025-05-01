@@ -95,7 +95,7 @@ class PropertyPartsBuilderTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider nonRequiredFields
+	 * @dataProvider provideNonRequiredFields
 	 *
 	 * @param string $field
 	 * @param string $setterFunction
@@ -109,7 +109,7 @@ class PropertyPartsBuilderTest extends TestCase {
 		$builder->$setterFunction( $param )->build();
 	}
 
-	public static function nonRequiredFields(): Generator {
+	public static function provideNonRequiredFields(): Generator {
 		yield 'data_type' => [
 			PropertyParts::FIELD_DATA_TYPE,
 			'setDataType',

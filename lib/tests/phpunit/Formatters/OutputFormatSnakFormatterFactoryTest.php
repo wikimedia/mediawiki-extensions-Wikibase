@@ -164,7 +164,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public static function getSnakFormatterProvider_notValueSnak(): iterable {
+	public static function getSnakFormatter_notValueSnakProvider(): iterable {
 		yield 'unknown value' => [
 			PropertySomeValueSnak::class,
 			'wikibase-snakview-snaktypeselector-somevalue',
@@ -176,7 +176,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/** @dataProvider getSnakFormatterProvider_notValueSnak */
+	/** @dataProvider getSnakFormatter_notValueSnakProvider */
 	public function testGetSnakFormatter_notValueSnak( string $snakClass, string $expected ) {
 		$factory = $this->newOutputFormatSnakFormatterFactory( 'string' );
 		$formatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
@@ -185,7 +185,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringContainsString( $expected, $formatter->formatSnak( $snak ) );
 	}
 
-	public static function getSnakFormatterProvider_options() {
+	public static function getSnakFormatter_optionsProvider() {
 		return [
 			'default' => [
 				[],
@@ -203,7 +203,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider getSnakFormatterProvider_options
+	 * @dataProvider getSnakFormatter_optionsProvider
 	 */
 	public function testGetSnakFormatter_options( array $options, $expectedType ) {
 		$factory = $this->newOutputFormatSnakFormatterFactory();
