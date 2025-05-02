@@ -12,7 +12,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
 use Wikimedia\Stats\StatsFactory;
 
 /**
@@ -74,23 +73,6 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 		return $title;
 	}
 
-	private function getStatsdDataFactoryMock( array $expectedStatsdCopies ): IBufferingStatsdDataFactory {
-		$statsdDataFactory = $this->createMock( IBufferingStatsdDataFactory::class );
-		$expectedStatsdArgs = [];
-		foreach ( $expectedStatsdCopies as $updateType => $delta ) {
-			// cast $delta to float, enforced by CounterMetric::incrementBy()
-			$expectedStatsdArgs[] = [ 'wikibase.client.pageupdates.' . $updateType, (float)$delta ];
-		}
-		$statsdDataFactory->method( 'updateCount' )
-			->willReturnCallback( function ( $key, $delta ) use ( &$expectedStatsdArgs ) {
-				if ( !$expectedStatsdArgs ) {
-					return;
-				}
-				$this->assertSame( array_shift( $expectedStatsdArgs ), [ $key, $delta ] );
-			} );
-		return $statsdDataFactory;
-	}
-
 	public function testPurgeWebCache() {
 		$titleFoo = $this->getTitleMock( 'Foo', 21 );
 		$titleBar = $this->getTitleMock( 'Bar', 22 );
@@ -115,10 +97,6 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
-		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
-			'WebCache.jobs' => 2, // 2 batches (batch size 2, 3 titles)
-			'WebCache.titles' => 3,
-		] ) );
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			new NullLogger(),
@@ -173,10 +151,6 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
-		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
-			'RefreshLinks.jobs' => 3, // no batching
-			'RefreshLinks.titles' => 3,
-		] ) );
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			new NullLogger(),
@@ -238,13 +212,6 @@ class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory()->withComponent( 'WikibaseClient' );
-		$statsFactory->withStatsdDataFactory( $this->getStatsdDataFactoryMock( [
-			// FIXME: Because of the hot fix for T177707 we expect only the first batch.
-			'InjectRCRecords.jobs' => 1,
-			'InjectRCRecords.titles' => 2,
-			'InjectRCRecords.discardedTitles' => 1,
-			'InjectRCRecords.incompleteChanges' => 1,
-		] ) );
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
 			new NullLogger(),

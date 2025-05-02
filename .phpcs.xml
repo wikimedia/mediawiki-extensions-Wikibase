@@ -64,6 +64,7 @@
 			<property name="lineLimit" value="140" />
 		</properties>
 		<exclude-pattern>view/resources/templates\.php</exclude-pattern>
+		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
 	<rule ref="Generic.Classes.DuplicateClassName">

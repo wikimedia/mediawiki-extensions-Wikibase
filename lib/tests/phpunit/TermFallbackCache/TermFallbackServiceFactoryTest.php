@@ -12,7 +12,6 @@ use Wikibase\Lib\StatslibRecordingSimpleCache;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ObjectCache\CachedBagOStuff;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
 use Wikimedia\Stats\StatsFactory;
 
 /**
@@ -56,10 +55,8 @@ class TermFallbackServiceFactoryTest extends TestCase {
 	public function testNewStatslibRecordingCache() {
 		$cache = $this->createMock( CacheInterface::class );
 
-		$dataFactory = $this->createMock( IBufferingStatsdDataFactory::class );
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory();
-		$statsFactory->withStatsdDataFactory( $dataFactory );
 
 		$sut = $this->createSUT();
 		$this->assertInstanceOf(

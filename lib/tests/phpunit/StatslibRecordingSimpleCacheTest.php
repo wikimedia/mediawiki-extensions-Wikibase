@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests;
 
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\StatslibRecordingSimpleCache;
-use Wikimedia\Stats\IBufferingStatsdDataFactory;
 use Wikimedia\Stats\StatsFactory;
 
 /**
@@ -21,14 +20,8 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetIncrementsMetric() {
 		// Stats expects to be incremented once
-		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory();
-		$statsFactory->withStatsdDataFactory( $dataFactory );
-
-		$dataFactory->expects( $this->once() )
-			->method( 'updateCount' )
-			->with( 'statsKey', 1 );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -46,26 +39,8 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetMultipleIncrementsMetric() {
-		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory();
-		$statsFactory->withStatsdDataFactory( $dataFactory );
-
-		$expectedArgs = [
-			[ 'statsKeyMiss', 2.0 ],
-			[ 'statsKeyHit', 1.0 ],
-		];
-
-		$dataFactory->expects( $this->atLeast( 2 ) )
-			->method( 'updateCount' )
-			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
-				if ( !$expectedArgs ) {
-					return;
-				}
-				$curExpectedArgs = array_shift( $expectedArgs );
-				$this->assertSame( $curExpectedArgs[0], $key );
-				$this->assertSame( $curExpectedArgs[1], $delta );
-			} );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -83,14 +58,8 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetDoesNotIncrementsMetric() {
-		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory();
-		$statsFactory->withStatsdDataFactory( $dataFactory );
-
-		$dataFactory->expects( $this->once() )
-			->method( 'updateCount' )
-			->with( 'statsKeyHit', 1 );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -106,26 +75,13 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetMultipleDoesNotIncrementMetrics() {
-		$dataFactory = $this->getMockForAbstractClass( IBufferingStatsdDataFactory::class );
 		$statsHelper = StatsFactory::newUnitTestingHelper();
 		$statsFactory = $statsHelper->getStatsFactory();
-		$statsFactory->withStatsdDataFactory( $dataFactory );
 
 		$expectedArgs = [
 			[ 'statsKeyMiss', 1.0 ],
 			[ 'statsKeyHit', 1.0 ],
 		];
-
-		$dataFactory->expects( $this->atLeast( 2 ) )
-			->method( 'updateCount' )
-			->willReturnCallback( function ( $key, $delta ) use ( &$expectedArgs ) {
-				if ( !$expectedArgs ) {
-					return;
-				}
-				$curExpectedArgs = array_shift( $expectedArgs );
-				$this->assertSame( $curExpectedArgs[0], $key );
-				$this->assertSame( $curExpectedArgs[1], $delta );
-			} );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
