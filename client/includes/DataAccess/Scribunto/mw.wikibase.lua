@@ -508,7 +508,14 @@ function wikibase.setupInterface( settings )
 	end
 
 	mw = mw or {}
-	mw.wikibase = wikibase
+	if mw.wikibase then
+		-- Something else (e.g. Lexeme) has already created the mw.wikibase global, don't overwrite it.
+		for k, v in pairs( wikibase ) do
+			mw.wikibase[k] = v
+		end
+	else
+		mw.wikibase = wikibase
+	end
 	package.loaded['mw.wikibase'] = wikibase
 	wikibase.setupInterface = nil
 end
