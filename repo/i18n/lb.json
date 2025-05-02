@@ -120,7 +120,7 @@
 	"wikibase-entityselector-notfound": "Et gouf näischt fonnt",
 	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt. Är [https://en.wikipedia.org/wiki/IP_address IP Adress] gëtt ëffentlech visibel gemaach wann Dir Ännerunge maacht. Wann Dir Iech <strong>[$1 aloggt]</strong> oder <strong>[$2 e Beniotzerkont uleet]</strong>, da ginn Är Ännerungen engem Benotzernumm zougeschriwwen, nieft aneren Avantagen.",
 	"wikibase-anonymouseditwarning-heading": "Dir sidd net ageloggt",
-	"wikibase-anonymouseditwarning-dismiss-persist": "Mech warne wann ech net ageloggt sinn.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Mech warnen, wann ech net ageloggt sinn.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Änneren ouni anzeloggen",
 	"wikibase-move-error": "Dir kënnt keng Säiten déi an engem Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.",
 	"wikibase-validator-invalid": "net valabele Wäert",
