@@ -1,8 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Extension\Notifications\AttributeManager;
+use MediaWiki\Extension\Notifications\Hooks\BeforeCreateEchoEventHook;
 use MediaWiki\Extension\Notifications\UserLocator;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 use Wikibase\Lib\SettingsArray;
@@ -15,8 +18,7 @@ use Wikibase\Lib\SettingsArray;
  * @author Matěj Suchánek
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EchoSetupHookHandler
-	/* TODO this should implement an interface from Echo */ {
+class EchoSetupHookHandler implements BeforeCreateEchoEventHook {
 
 	/**
 	 * @var bool
@@ -46,15 +48,6 @@ class EchoSetupHookHandler
 		);
 	}
 
-	/**
-	 * Handler for BeforeCreateEchoEvent hook
-	 * @see https://www.mediawiki.org/wiki/Extension:Echo/BeforeCreateEchoEvent
-	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide
-	 *
-	 * @param array[] &$notifications
-	 * @param array[] &$notificationCategories
-	 * @param array[] &$icons
-	 */
 	public function onBeforeCreateEchoEvent(
 		array &$notifications,
 		array &$notificationCategories,

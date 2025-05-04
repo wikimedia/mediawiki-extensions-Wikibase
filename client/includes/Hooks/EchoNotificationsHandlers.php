@@ -1,12 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
+use MediaWiki\Auth\Hook\LocalUserCreatedHook;
 use MediaWiki\Extension\Notifications\Model\Event;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\RedirectLookup;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
@@ -16,9 +18,9 @@ use MediaWiki\User\UserIdentityLookup;
 use MediaWiki\User\UserIdentityValue;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\SettingsArray;
 use Wikimedia\IPUtils;
 
 /**
@@ -27,7 +29,7 @@ use Wikimedia\IPUtils;
  * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
-class EchoNotificationsHandlers {
+class EchoNotificationsHandlers implements WikibaseHandleChangeHook, LocalUserCreatedHook {
 
 	/**
 	 * Type of notification
@@ -69,25 +71,15 @@ class EchoNotificationsHandlers {
 	 */
 	private $repoSiteName;
 
-	/**
-	 * @param RepoLinker $repoLinker
-	 * @param NamespaceChecker $namespaceChecker
-	 * @param RedirectLookup $redirectLookup
-	 * @param UserIdentityLookup $userIdentityLookup
-	 * @param UserOptionsManager $userOptionsManager
-	 * @param string $siteId
-	 * @param bool $sendEchoNotification
-	 * @param string $repoSiteName
-	 */
 	public function __construct(
 		RepoLinker $repoLinker,
 		NamespaceChecker $namespaceChecker,
 		RedirectLookup $redirectLookup,
 		UserIdentityLookup $userIdentityLookup,
 		UserOptionsManager $userOptionsManager,
-		$siteId,
-		$sendEchoNotification,
-		$repoSiteName
+		string $siteId,
+		bool $sendEchoNotification,
+		string $repoSiteName
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->namespaceChecker = $namespaceChecker;
@@ -99,37 +91,24 @@ class EchoNotificationsHandlers {
 		$this->repoSiteName = $repoSiteName;
 	}
 
-	/**
-	 * TODO: Convert this to a proper hook handler class,
-	 * register factory with services in extension JSON file
-	 */
-	public static function factory(): self {
-		$services = MediaWikiServices::getInstance();
-		$settings = WikibaseClient::getSettings( $services );
-
+	public static function factory(
+		RedirectLookup $redirectLookup,
+		UserIdentityLookup $userIdentityLookup,
+		UserOptionsManager $userOptionsManager,
+		NamespaceChecker $namespaceChecker,
+		RepoLinker $repoLinker,
+		SettingsArray $settings
+	): self {
 		return new self(
-			WikibaseClient::getRepoLinker( $services ),
-			WikibaseClient::getNamespaceChecker( $services ),
-			$services->getRedirectLookup(),
-			$services->getUserIdentityLookup(),
-			$services->getUserOptionsManager(),
+			$repoLinker,
+			$namespaceChecker,
+			$redirectLookup,
+			$userIdentityLookup,
+			$userOptionsManager,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'sendEchoNotification' ),
 			$settings->getSetting( 'repoSiteName' )
 		);
-	}
-
-	/**
-	 * Handler for EchoGetBundleRules hook
-	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide#Bundled_notifications
-	 *
-	 * @param Event $event
-	 * @param string &$bundleString
-	 */
-	public static function onEchoGetBundleRules( Event $event, &$bundleString ) {
-		if ( $event->getType() === self::NOTIFICATION_TYPE ) {
-			$bundleString = self::NOTIFICATION_TYPE;
-		}
 	}
 
 	/**
@@ -138,19 +117,11 @@ class EchoNotificationsHandlers {
 	 * @param User $user User object that was created.
 	 * @param bool $autocreated True when account was auto-created
 	 */
-	public static function onLocalUserCreated( User $user, $autocreated ) {
+	public function onLocalUserCreated( $user, $autocreated ) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			return;
 		}
-		$self = self::factory();
-		$self->doLocalUserCreated( $user, $autocreated );
-	}
 
-	/**
-	 * @param User $user
-	 * @param bool $autocreated
-	 */
-	public function doLocalUserCreated( User $user, $autocreated ) {
 		if ( $this->sendEchoNotification === true ) {
 			$this->userOptionsManager->setOption(
 				$user,
@@ -160,26 +131,14 @@ class EchoNotificationsHandlers {
 		}
 	}
 
-	/**
-	 * Handler for WikibaseHandleChange hook
-	 * @see doWikibaseHandleChange
-	 *
-	 * @param Change $change
-	 */
-	public static function onWikibaseHandleChange( Change $change ) {
+	public function onWikibaseHandleChange( Change $change, array $rootJobParams = [] ): void {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			return;
 		}
-		$self = self::factory();
-		$self->doWikibaseHandleChange( $change );
+		$this->doWikibaseHandleChange( $change );
 	}
 
-	/**
-	 * @param Change $change
-	 *
-	 * @return bool
-	 */
-	public function doWikibaseHandleChange( Change $change ) {
+	public function doWikibaseHandleChange( Change $change ): bool {
 		if ( $this->sendEchoNotification !== true ) {
 			return false;
 		}

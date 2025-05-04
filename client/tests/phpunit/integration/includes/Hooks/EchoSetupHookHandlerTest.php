@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWikiIntegrationTestCase;
@@ -17,6 +19,12 @@ use Wikibase\Client\Hooks\EchoSetupHookHandler;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
+	}
 
 	public static function beforeCreateEchoEventProvider() {
 		return [
@@ -42,8 +50,6 @@ class EchoSetupHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider beforeCreateEchoEventProvider
 	 */
 	public function testBeforeCreateEchoEvent( $register, $icon, $expectedIcon ) {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Echo' );
-
 		$notifications = [];
 		$categories = [];
 		$icons = [];
