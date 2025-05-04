@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Tests\ExtensionJsonTestBase;
 use ReflectionClass;
 use ReflectionMethod;
@@ -33,6 +34,17 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 
 		// Configure the site group so that it doesn’t need to fall back to the DB site store
 		$this->configureSiteGroup();
+	}
+
+	public function provideHookHandlerNames(): iterable {
+		$hookHandlerNames = parent::provideHookHandlerNames();
+		foreach ( $hookHandlerNames as $hookHandlerName ) {
+			if ( $hookHandlerName[0] === 'CirrusSearchAddQueryFeatures' &&
+				!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
+				continue;
+			}
+			yield $hookHandlerName;
+		}
 	}
 
 	/** @dataProvider provideWikibaseServicesMethods */

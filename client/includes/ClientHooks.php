@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client;
 
-use CirrusSearch\SearchConfig;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
@@ -160,18 +159,6 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-	}
-
-	/**
-	 * Add morelikewithwikibase keyword.
-	 * @param SearchConfig $config
-	 * @param array &$extraFeatures
-	 */
-	public static function onCirrusSearchAddQueryFeatures(
-		$config,
-		array &$extraFeatures
-	) {
-		$extraFeatures[] = new MoreLikeWikibase( $config );
 	}
 
 	/**

@@ -97,6 +97,9 @@
 				"WikibaseClient.Settings"
 			]
 		},
+		"CirrusSearchAddQueryFeatures": {
+			"class": "\\Wikibase\\Client\\Hooks\\CirrusSearchAddQueryFeaturesHookHandler"
+		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
 			"services": [
@@ -266,7 +269,7 @@
 		],
 		"ContentAlterParserOutput": "ParserOutputUpdate",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPage",
-		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
+		"CirrusSearchAddQueryFeatures": "CirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
 		"EditPage::showStandardInputs:options": "EditAction",
 		"EnhancedChangesListModifyBlockLineData": "ChangesListLines",
