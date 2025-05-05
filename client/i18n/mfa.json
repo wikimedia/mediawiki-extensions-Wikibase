@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam Takuma",
+			"Mirlim"
+		]
+	},
+	"wikibase-dataitem": "Buté {{WBREPONAME}}",
+	"wikibase-editlinks": "Suténg paókte",
+	"wikibase-addlinkstitle": "Tamboh paókte ataro bahaso",
+	"wikibase-linkitem-addlinks": "Tamboh paókte",
+	"wikibase-linkitem-title": "Ppaók nga halame",
+	"wikibase-linkitem-linkpage": "Ppaók nga halame",
+	"wikibase-linkitem-selectlink": "Mitok pilih tapok nga lame hok demo nok ppaók lame ni",
+	"wikibase-linkitem-input-site": "Bahaso:",
+	"wikibase-linkitem-input-page": "Lame:",
+	"wikibase-rc-hide-wikidata-hide": "Susuk",
+	"wikibase-rc-hide-wikidata-show": "Wi tunjók",
+	"wikibase-otherprojects": "Dale projek laéng"
+}
