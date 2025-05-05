@@ -107,7 +107,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 
 	private function mockRevisionRecord( string $commentString ) {
 		$mock = $this->createMock( RevisionRecord::class );
-		$mock->method( 'getComment' )->willreturn( (object)[ 'text' => $commentString ] );
+		$mock->method( 'getComment' )->willReturn( (object)[ 'text' => $commentString ] );
 		return $mock;
 	}
 

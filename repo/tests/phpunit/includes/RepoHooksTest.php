@@ -769,13 +769,13 @@ XML
 
 		$apiModule = $this->createMock( EditEntity::class );
 		$apiModule->method( 'isFreshIdAssigned' )
-			->willreturn( true );
+			->willReturn( true );
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
-			->willreturn( $apiModule );
+			->willReturn( $apiModule );
 		$apiMain->method( 'getUser' )
-			->willreturn( $user );
+			->willReturn( $user );
 
 		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
@@ -788,13 +788,13 @@ XML
 
 		$apiModule = $this->createMock( EditEntity::class );
 		$apiModule->method( 'isFreshIdAssigned' )
-			->willreturn( false );
+			->willReturn( false );
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
-			->willreturn( $apiModule );
+			->willReturn( $apiModule );
 		$apiMain->method( 'getUser' )
-			->willreturn( $user );
+			->willReturn( $user );
 
 		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
@@ -812,9 +812,9 @@ XML
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getModule' )
-			->willreturn( $apiModule );
+			->willReturn( $apiModule );
 		$apiMain->method( 'getUser' )
-			->willreturn( $user );
+			->willReturn( $user );
 
 		( new RepoHooks )->onApiMain__onException( $apiMain, new Exception( 'foo' ) );
 	}
