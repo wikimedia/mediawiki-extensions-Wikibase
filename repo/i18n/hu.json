@@ -59,7 +59,7 @@
 	"wikibase-entityterms-languagelistview-mul-popup-title": "Újdonság! Alapértelmezett címkék és álnevek hozzáadása az összes nyelvhez",
 	"wikibase-entityterms-languagelistview-mul-popup-content": "Az alapértelmezett értékeket lesznek használva az összes nyelvnél üres címkékkel és álnevekkel, hogy a lehető legkisebbre csökkentsék az ismétlődéseket. [$1 További információk]",
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Ne jelenjen meg újra",
-	"wikibase-label-empty": "Nincs címke meghatározva",
+	"wikibase-label-empty": "Nincs címke megadva",
 	"wikibase-label-edit-placeholder": "címke megadása",
 	"wikibase-label-edit-placeholder-language-aware": "címke megadása $1 nyelven",
 	"wikibase-label-edit-placeholder-mul": "alapértelmezett címke magadása",
