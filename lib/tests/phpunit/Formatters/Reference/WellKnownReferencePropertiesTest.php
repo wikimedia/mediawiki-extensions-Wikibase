@@ -2,9 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters\Reference;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use TestLogger;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -17,14 +15,7 @@ use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
  *
  * @license GPL-2.0-or-later
  */
-class WellKnownReferencePropertiesTest extends TestCase {
-
-	/** A logger that fails the test if anything is logged. */
-	private function neverCalledLogger(): LoggerInterface {
-		$logger = $this->getMockForAbstractClass( AbstractLogger::class );
-		$logger->expects( $this->never() )->method( 'log' );
-		return $logger;
-	}
+class WellKnownReferencePropertiesTest extends \MediaWikiIntegrationTestCase {
 
 	public function testNewFromArray_allNull() {
 		$properties = WellKnownReferenceProperties::newFromArray( [
@@ -35,7 +26,7 @@ class WellKnownReferencePropertiesTest extends TestCase {
 			'publisher' => null,
 			'publicationDate' => null,
 			'retrievedDate' => null,
-		], $this->neverCalledLogger() );
+		], $this->createNoOpMock( AbstractLogger::class ) );
 
 		$this->assertNull( $properties->referenceUrlPropertyId );
 		$this->assertNull( $properties->titlePropertyId );
@@ -63,7 +54,7 @@ class WellKnownReferencePropertiesTest extends TestCase {
 			'publisher' => $publisherPropertyId->getSerialization(),
 			'publicationDate' => $publicationDatePropertyId->getSerialization(),
 			'retrievedDate' => $retrievedDatePropertyId->getSerialization(),
-		], $this->neverCalledLogger() );
+		], $this->createNoOpMock( AbstractLogger::class ) );
 
 		$this->assertEquals( $referenceUrlPropertyId, $properties->referenceUrlPropertyId );
 		$this->assertEquals( $titlePropertyId, $properties->titlePropertyId );
