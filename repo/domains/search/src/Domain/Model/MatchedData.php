@@ -8,10 +8,10 @@ namespace Wikibase\Repo\Domains\Search\Domain\Model;
 class MatchedData {
 
 	private string $type;
-	private string $languageCode;
+	private ?string $languageCode;
 	private string $text;
 
-	public function __construct( string $type, string $languageCode, string $text ) {
+	public function __construct( string $type, ?string $languageCode, string $text ) {
 		$this->type = $type;
 		$this->languageCode = $languageCode;
 		$this->text = $text;
@@ -21,7 +21,7 @@ class MatchedData {
 		return $this->type;
 	}
 
-	public function getLanguageCode(): string {
+	public function getLanguageCode(): ?string {
 		return $this->languageCode;
 	}
 

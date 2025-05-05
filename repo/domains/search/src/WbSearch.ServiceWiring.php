@@ -73,6 +73,7 @@ return [
 			: new SqlTermStoreSearchEngine(
 				WikibaseRepo::getMatchingTermsLookupFactory( $services )
 					->getLookupForSource( WikibaseRepo::getLocalEntitySource( $services ) ),
+				WikibaseRepo::getEntityLookup( $services ),
 				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ), $services->getLanguageFactory() ),
 				WikibaseRepo::getLanguageFallbackChainFactory( $services )
 			);
