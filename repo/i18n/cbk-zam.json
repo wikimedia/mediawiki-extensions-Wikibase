@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aristorkle"
+			"Aristorkle",
+			"Noooote"
 		]
 	},
-	"wikibase-edit": "revisa",
-	"wikibase-add": "omenta",
+	"wikibase-edit": "hace edit",
+	"wikibase-add": "aumenta",
 	"wikibase-description-empty": "No hay pa detalles ya declara",
 	"wikibase-sitelinks-special": "Maga otro sitio"
 }
