@@ -457,9 +457,8 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * Creates a new PropertyInfoStore
-	 * Note: cache key used by the lookup should be the same as the cache key used
-	 * by CachedPropertyInfoLookup.
+	 * Note: cache key used by {@link CacheAwarePropertyInfoStore} should be the same as the cache key used
+	 * by {@link CachingPropertyInfoLookup}.
 	 *
 	 * @return PropertyInfoStore
 	 */
