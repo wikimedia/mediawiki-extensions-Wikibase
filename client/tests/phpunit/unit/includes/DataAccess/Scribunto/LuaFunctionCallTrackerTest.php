@@ -20,24 +20,28 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 	public static function incrementKeyProvider() {
 		return [
 			'logging disabled' => [
+				// phpcs:ignore Generic.Files.LineLength.TooLong
 				[ 'mediawiki.WikibaseClient.Scribunto_Lua_function_calls_total:1|c|#module:wikibase,function_name:doStuff,site:not_tracked,site_group:not_tracked' ],
 				false,
 				false,
 				1,
 			],
 			'per site group logging only' => [
+				// phpcs:ignore Generic.Files.LineLength.TooLong
 				[ 'mediawiki.WikibaseClient.Scribunto_Lua_function_calls_total:1|c|#module:wikibase,function_name:doStuff,site:not_tracked,site_group:fancy' ],
 				true,
 				false,
 				1,
 			],
 			'per wiki logging only' => [
+				// phpcs:ignore Generic.Files.LineLength.TooLong
 				[ 'mediawiki.WikibaseClient.Scribunto_Lua_function_calls_total:1|c|#module:wikibase,function_name:doStuff,site:defancywiki,site_group:not_tracked' ],
 				false,
 				true,
 				1,
 			],
 			'per wiki and per site group logging' => [
+				// phpcs:ignore Generic.Files.LineLength.TooLong
 				[ 'mediawiki.WikibaseClient.Scribunto_Lua_function_calls_total:10|c|#module:wikibase,function_name:doStuff,site:defancywiki,site_group:fancy' ],
 				true,
 				true,
