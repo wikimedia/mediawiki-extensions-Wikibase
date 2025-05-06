@@ -5,6 +5,7 @@
 			"Polda18"
 		]
 	},
+	"wikibase-client-desc": "Klient za razširjenje Wikibase",
 	"wikibase-dataitem": "Element Vikidanyh",
 	"wikibase-editlinks": "Praviti linky",
 	"wikibase-addlinkstitle": "Dodati medžujezyčne linky",
@@ -16,6 +17,7 @@
 	"wikibase-linkitem-input-page": "Stranica:",
 	"wikibase-rc-hide-wikidata-hide": "Skryti",
 	"wikibase-rc-hide-wikidata-show": "Pokazati",
+	"wikibase-rc-show-wikidata-pref": "Pokazati pravky v projektu {{WBREPONAME}} v poslědnjih pravkah",
 	"wikibase-rcfilters-hide-wikibase-description": "Pravky proizhodeče iz Vikidanyh",
 	"unconnectedpages": "Stranice ne povezane s elementami",
 	"unconnectedpages-summary": "Tuta stranica sodrživaje spisok stranic, ktore ne sut povezane s nijednym elementom danyh (v imennyh prostorah, ktore poddrživajut povezanje elementov).",
