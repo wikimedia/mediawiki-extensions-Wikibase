@@ -36,11 +36,11 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		int $offset
 	): ItemSearchResults {
 		return new ItemSearchResults(
-			...array_map(
+			...array_values( array_map(
 				$this->convertResult( ItemSearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
 				$this->inLabelSearch->search( $searchTerm, $languageCode, Item::ENTITY_TYPE, $limit, $offset )
-			)
+			) )
 		);
 	}
 
@@ -51,11 +51,11 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		int $offset
 	): PropertySearchResults {
 		return new PropertySearchResults(
-			...array_map(
+			...array_values( array_map(
 				$this->convertResult( PropertySearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
 				$this->inLabelSearch->search( $searchTerm, $languageCode, Property::ENTITY_TYPE, $limit, $offset )
-			)
+			) )
 		);
 	}
 
