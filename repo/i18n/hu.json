@@ -57,7 +57,7 @@
 	"wikibase-entitytermsforlanguagelistview-more": "Minden megadott nyelv",
 	"wikibase-entitytermsforlanguagelistview-less": "Kevesebb nyelv",
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Ne jelenjen meg újra",
-	"wikibase-label-empty": "Nincs címke meghatározva",
+	"wikibase-label-empty": "Nincs címke megadva",
 	"wikibase-label-edit-placeholder": "címke megadása",
 	"wikibase-label-edit-placeholder-language-aware": "címke megadása $1 nyelven",
 	"wikibase-description-empty": "Nincs leírás meghatározva",
