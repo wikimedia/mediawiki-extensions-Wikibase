@@ -9,6 +9,7 @@
 	"wikibase-error-unexpected": "Ката: $1.",
 	"wikibase-timedetails-time": "Убакыт",
 	"wikibase-timedetails-isotime": "Дата/убакыт",
+	"wikibase-timedetails-calendar": "Календарь",
 	"wikibase-globedetails-longitude": "Узундук",
 	"wikibase-globedetails-latitude": "Кеңдик",
 	"wikibase-sitelinks-wikipedia": "Википедия",

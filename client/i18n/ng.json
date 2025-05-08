@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"!!asa,njgh"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} oshinima",
+	"wikibase-editlinks": "Lundulula oya",
+	"wikibase-addlinkstitle": "Hoha oya lyinterlanguage",
+	"wikibase-linkitem-addlinks": "Hoha ooya",
+	"wikibase-linkitem-title": "oYa nepandja",
+	"wikibase-linkitem-linkpage": "oYa nepandja",
+	"wikibase-linkitem-selectlink": "Alikana hogolola osaiti nepandja ngoye hala ya kepandja eno.",
+	"wikibase-linkitem-input-site": "eLaka:",
+	"wikibase-linkitem-input-page": "ePandja:",
+	"wikibase-rc-hide-wikidata-hide": "Holama",
+	"wikibase-rc-hide-wikidata-show": "Ulika",
+	"wikibase-otherprojects": "Mooproyekakwawo"
+}
