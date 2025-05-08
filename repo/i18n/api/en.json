@@ -321,11 +321,13 @@
 	"apihelp-wbsetsitelink-example-6": "Change badges for the link to the Polish page from the item with ID <samp>$1</samp> to two badges pointing to the items with IDs \"Q2\" and \"Q149\" without providing the link title",
 	"apihelp-wbsetsitelink-example-7": "Change the link to the Polish page from the item with ID <samp>$1</samp> without changing badges",
 	"apihelp-wbsetsitelink-example-8": "Change the link to the Polish page from the item with ID <samp>$1</samp> and remove all of its badges",
-	"apihelp-wbformatentities-summary": "Formats entity IDs to HTML.",
+	"apihelp-wbformatentities-summary": "Formats entity IDs to HTML or plain text.",
 	"apihelp-wbformatentities-extended-description": "The language can be specified with the global <var>uselang</var> parameter.",
 	"apihelp-wbformatentities-param-ids": "The entity IDs to format.",
-	"apihelp-wbformatentities-example-1": "Format a single item ID.",
+	"apihelp-wbformatentities-param-generate": "The desired output format to generate.",
+	"apihelp-wbformatentities-example-1": "Format a single item ID to HTML.",
 	"apihelp-wbformatentities-example-2": "Format an item ID and a property ID.",
 	"apihelp-wbformatentities-example-3": "Format an item ID, a property ID and a lexeme ID.",
-	"apihelp-wbformatentities-example-4": "Format three item IDs in French."
+	"apihelp-wbformatentities-example-4": "Format three item IDs in French.",
+	"apihelp-wbformatentities-example-5": "Format three item IDs and a property ID to plain text."
 }

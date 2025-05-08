@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\Api\FormatEntities;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ObjectCache\HashBagOStuff;
@@ -33,16 +34,20 @@ class FormatEntitiesTest extends ApiTestCase {
 	 */
 	private const BASE_URL = 'http://a.test';
 
+	protected function setUp(): void {
+		parent::setUp();
+
+		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for properties
+		$this->setService( 'LocalServerObjectCache', new HashBagOStuff() );
+	}
+
 	private function saveEntity( EntityDocument $entity ) {
 		$store = WikibaseRepo::getEntityStore();
 
 		$store->saveEntity( $entity, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
 	}
 
-	public function testApiRequest() {
-		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for properties
-		$this->setService( 'LocalServerObjectCache', new HashBagOStuff() );
-
+	public function testApiRequest_html() {
 		$item = NewItem::withLabel( 'en', 'test item' )->build();
 		$this->saveEntity( $item );
 		$itemId = $item->getId()->getSerialization();
@@ -71,6 +76,32 @@ class FormatEntitiesTest extends ApiTestCase {
 			'<a title="%S' . $propertyId . '" href="http%s">test property</a>',
 			$results[$propertyId]
 		);
+	}
+
+	public function testApiRequest_text() {
+		$item = NewItem::withLabel( 'en', 'test item' )->build();
+		$this->saveEntity( $item );
+		$itemId = $item->getId()->getSerialization();
+		$fingerprint = new Fingerprint( new TermList( [ new Term( 'en', 'test property' ) ] ) );
+		$property = new Property( null, $fingerprint, 'string' );
+		$this->saveEntity( $property );
+		$propertyId = $property->getId()->getSerialization();
+
+		$params = [
+			'action' => 'wbformatentities',
+			'ids' => "$itemId|$propertyId",
+			'generate' => SnakFormatter::FORMAT_PLAIN,
+		];
+
+		[ $resultArray ] = $this->doApiRequest( $params );
+		$this->assertArrayHasKey( 'wbformatentities', $resultArray );
+		$results = $resultArray['wbformatentities'];
+
+		$this->assertArrayHasKey( $itemId, $results );
+		$this->assertSame( 'test item', $results[$itemId] );
+
+		$this->assertArrayHasKey( $propertyId, $results );
+		$this->assertSame( 'test property', $results[$propertyId] );
 	}
 
 	public function testApiRequest_noSuchEntity() {

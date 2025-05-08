@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
- * A factory for generating EntityIdHtmlLinkFormatters.
+ * A factory for generating EntityIdLabelFormatters.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
