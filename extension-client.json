@@ -308,7 +308,7 @@
 		],
 		"LocalUserCreated": "EchoNotificationsHandlers",
 		"LoginFormValidErrorMessages": "LoginFormValidErrorMessages",
-		"MagicWordwgVariableIDs": "Magic",
+		"GetMagicVariableIDs": "Magic",
 		"MaintenanceShellStart": "Trivial",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
 		"OutputPageParserOutput": [ "Sidebar", "LinkedDataSchemaGenerator" ],
