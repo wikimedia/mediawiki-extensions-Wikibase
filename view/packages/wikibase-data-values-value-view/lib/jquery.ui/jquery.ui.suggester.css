@@ -9,7 +9,7 @@
 }
 
 .ui-widget.ui-suggester-list {
-	background: var( --background-color-base, #eaecf0 );
+	background: var( --background-color-base, #fff );
 	border-color: var( --border-color-base, #a2a9b1 );
 	min-width: 8em; /* same as .ui-listrotator-label */
 }
