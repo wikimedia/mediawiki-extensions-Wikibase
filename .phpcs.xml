@@ -112,6 +112,7 @@
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="UTF-8" />
 	<arg name="bootstrap" value="./vendor/mediawiki/mediawiki-codesniffer/utils/bootstrap-ci.php"/>
+	<exclude-pattern type="relative">^docs/*</exclude-pattern>
 	<exclude-pattern type="relative">^\.phan/stubs/</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
 	<exclude-pattern type="relative">^lib/packages/*/*/vendor/</exclude-pattern>

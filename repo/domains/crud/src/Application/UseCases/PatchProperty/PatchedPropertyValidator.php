@@ -24,9 +24,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 
-// disable because it forces comments for switch-cases that look like fall-throughs but aren't
-// phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
-
 /**
  * @license GPL-2.0-or-later
  */

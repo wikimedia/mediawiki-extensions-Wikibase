@@ -5,7 +5,6 @@
  * This code is not actually loaded at all by Wikibase.
  *
  * @internal
- * phpcs:ignoreFile
  */
 
 /**

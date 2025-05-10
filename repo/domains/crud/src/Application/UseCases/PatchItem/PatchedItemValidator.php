@@ -30,9 +30,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item as ItemReadModel;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
 
-// disable because it forces comments for switch-cases that look like fall-throughs but aren't
-// phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
-
 /**
  * @license GPL-2.0-or-later
  */

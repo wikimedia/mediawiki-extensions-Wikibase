@@ -460,7 +460,7 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 	}
 
 	/**
-	 * @dataProvider hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider() {
+	 * @dataProvider hasWikibaseChangesEnabledWhenExternalRecentChangesDisabledProvider
 	 */
 	public function testHasWikibaseChangesEnabledWhenExternalRecentChangesDisabled( $specialPageName ) {
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
