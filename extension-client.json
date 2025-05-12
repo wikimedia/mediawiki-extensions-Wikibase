@@ -100,6 +100,12 @@
 		"CirrusSearchAddQueryFeatures": {
 			"class": "\\Wikibase\\Client\\Hooks\\CirrusSearchAddQueryFeaturesHookHandler"
 		},
+		"GetPreferences": {
+			"class": "\\Wikibase\\Client\\Hooks\\GetPreferencesHandler",
+			"services": [
+				"WikibaseClient.Settings"
+			]
+		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
 			"services": [
@@ -313,7 +319,7 @@
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "FormatAutocomments",
 		"GetDoubleUnderscoreIDs": "ParserFunctionRegistrant",
-		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
+		"GetPreferences": "GetPreferences",
 		"InfoAction": "InfoAction",
 		"LinksUpdateComplete": "DataUpdate",
 		"LoadExtensionSchemaUpdates": [

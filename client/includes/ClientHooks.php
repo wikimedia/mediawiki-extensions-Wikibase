@@ -5,7 +5,6 @@ namespace Wikibase\Client;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
@@ -80,32 +79,6 @@ final class ClientHooks {
 
 		$entityIdLookup = WikibaseClient::getEntityIdLookup();
 		return $entityIdLookup->getEntityIdForTitle( $title );
-	}
-
-	/**
-	 * Adds a preference for showing or hiding Wikidata entries in recent changes
-	 *
-	 * @param User $user
-	 * @param array[] &$prefs
-	 */
-	public static function onGetPreferences( User $user, array &$prefs ) {
-		$settings = WikibaseClient::getSettings();
-
-		if ( !$settings->getSetting( 'showExternalRecentChanges' ) ) {
-			return;
-		}
-
-		$prefs['rcshowwikidata'] = [
-			'type' => 'toggle',
-			'label-message' => 'wikibase-rc-show-wikidata-pref',
-			'section' => 'rc/advancedrc',
-		];
-
-		$prefs['wlshowwikibase'] = [
-			'type' => 'toggle',
-			'label-message' => 'wikibase-watchlist-show-changes-pref',
-			'section' => 'watchlist/advancedwatchlist',
-		];
 	}
 
 	/**
