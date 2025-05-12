@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use Wikibase\Client\WikibaseClient;
+use Wikimedia\Stats\StatsFactory;
+use Wikimedia\Stats\UnitTestingHelper;
 
 /**
  * Integration test for statsd tracking.
@@ -21,6 +23,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class WikibaseStatsTest extends WikibaseLibraryTestCase {
 
+	private UnitTestingHelper $unitTestingHelper;
 	private bool $oldTrackLuaFunctionCallsPerWiki;
 	private bool $oldTrackLuaFunctionCallsPerSiteGroup;
 	private bool $oldTrackLuaFunctionCallsSampleRate;
@@ -37,8 +40,9 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$mwServices = $this->getServiceContainer();
-		$mwServices->getStatsdDataFactory()->clearData();
+		$this->unitTestingHelper = StatsFactory::newUnitTestingHelper();
+		$this->setService( 'StatsFactory', $this->unitTestingHelper->getStatsFactory() );
+
 		$settings = WikibaseClient::getSettings();
 
 		$this->oldTrackLuaFunctionCallsPerWiki = $settings->getSetting(
@@ -58,26 +62,17 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 	}
 
 	protected function assertPostConditions(): void {
-		$mwServices = $this->getServiceContainer();
-		$settings = WikibaseClient::getSettings();
-
-		$siteId = $settings->getSetting( 'siteGlobalID' );
-		$keyPrefix = "MediaWiki.$siteId.wikibase.client.scribunto.";
-
-		$luaTrackingKeyCount = 0;
-		$stats = $mwServices->getStatsdDataFactory()->getData();
-		foreach ( $stats as $stat ) {
-			if ( strpos( $stat->getKey(), $keyPrefix ) === 0 ) {
-				$luaTrackingKeyCount++;
-			}
-		}
-
 		// testLua runs the lua code in self::$moduleName
 		if ( strpos( $this->getName(), 'testLua' ) === false ) {
-			$this->assertSame( 0, $luaTrackingKeyCount );
-		} else {
-			$this->assertSame( 5, $luaTrackingKeyCount );
+			parent::assertPostConditions();
+			return;
 		}
+
+		$settings = WikibaseClient::getSettings();
+		$siteId = $settings->getSetting( 'siteGlobalID' );
+		$this->assertSame( 5.0, $this->unitTestingHelper->sum(
+			"WikibaseClient.Scribunto_Lua_function_calls_total{site=\"$siteId\"}"
+		) );
 
 		parent::assertPostConditions();
 	}
