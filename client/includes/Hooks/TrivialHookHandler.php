@@ -18,6 +18,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Search\Hook\SearchIndexFieldsHook;
 use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\Hook\WgQueryPagesHook;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use SearchEngine;
@@ -67,6 +68,27 @@ class TrivialHookHandler implements
 		if ( $prefixedId !== null ) {
 			$outputPage->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
 		}
+	}
+
+	/**
+	 * Add tracking to the summary Item and Property links
+	 * and the changelog Item links in class mw-changeslist.
+	 * We would only be measuring it on Recentchanges and
+	 * Watchlist special pages.
+	 *
+	 * Temporary: We will remove it by Sept. 2025
+	 * Bug: T392469
+	 *
+	 * @param SpecialPage $special
+	 * @param string|null $subPage
+	 */
+	public function onSpecialPageBeforeExecute( $special, $subPage ): void {
+		if ( $special->getName() !== 'Recentchanges' && $special->getName() !== 'Watchlist' ) {
+			return;
+		}
+
+		$outputPage = $special->getOutput();
+		$outputPage->addModules( 'wikibase.summary.tracking' );
 	}
 
 	/**
