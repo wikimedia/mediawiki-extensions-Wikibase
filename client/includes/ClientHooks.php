@@ -6,10 +6,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\UnionContentLanguages;
-use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -110,22 +106,6 @@ final class ClientHooks {
 
 				return $value;
 			}
-		);
-	}
-
-	/** @param ContentLanguages[] &$contentLanguages */
-	public static function onWikibaseContentLanguages( array &$contentLanguages ): void {
-		if ( !WikibaseClient::getSettings()->getSetting( 'enableMulLanguageCode' ) ) {
-			return;
-		}
-
-		if ( $contentLanguages[WikibaseContentLanguages::CONTEXT_TERM]->hasLanguage( 'mul' ) ) {
-			return;
-		}
-
-		$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM] = new UnionContentLanguages(
-			$contentLanguages[WikibaseContentLanguages::CONTEXT_TERM],
-			new StaticContentLanguages( [ 'mul' ] )
 		);
 	}
 
