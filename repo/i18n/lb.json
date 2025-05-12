@@ -339,6 +339,7 @@
 	"wikibase-pageinfo-wb-claims": "Zuel vun Aussoen an dësem Objet",
 	"wikibase-pageinfo-wb-identifiers": "Zuel vun Aussoe mat externen Identifianten an dësem Objet",
 	"wikibase-entity-save-error-heading": "Et ass eppes schif gaangen",
+	"wikibase-entity-save-error-message": "Är Ännerung konnt net verëffentlecht ginn. Dir kënnt nach eng Kéier probéieren op de Knäppche fir ze verëffentlechen ze klicken.",
 	"wikibase-tainted-ref-popper-text": "De Wäert vun dëser Ausso gouf geännert, awer d'Referenz bleift déi selwecht. Dir kënnt dës Warnung ewechhuelen wann d'Referenz nach ëmmer korrekt ass.",
 	"wikibase-tainted-ref-popper-title": "Méiglech Diskrepanz tëscht der Referenz an dem Wäert",
 	"wikibase-tainted-ref-popper-help-link-text": "Hëllef",
