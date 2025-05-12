@@ -1,34 +1,60 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\FileRepo\File\File;
+use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
-use MediaWiki\Output\OutputPage;
-use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Title\Title;
 use PageImages\PageImages;
+use Skin;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
  */
-class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
-	/** @var RevisionLookup */
-	private $revisionLookup;
-	/** @var RepoLinker */
-	private $repoLinker;
+class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfterBottomScriptsHook {
+
+	private RevisionLookup $revisionLookup;
+	private EntityIdParser $entityIdParser;
+	private RepoLinker $repoLinker;
+
+	/** @var int[] */
+	private array $pageSchemaNamespaces;
 
 	public function __construct(
 		RevisionLookup $revisionLookup,
-		RepoLinker $repoLinker
+		EntityIdParser $entityIdParser,
+		RepoLinker $repoLinker,
+		array $pageSchemaNamespaces
 	) {
 		$this->revisionLookup = $revisionLookup;
+		$this->entityIdParser = $entityIdParser;
 		$this->repoLinker = $repoLinker;
+		$this->pageSchemaNamespaces = $pageSchemaNamespaces;
+	}
+
+	public static function factory(
+		RevisionLookup $revisionLookup,
+		EntityIdParser $entityIdParser,
+		RepoLinker $repoLinker,
+		SettingsArray $settings
+	): self {
+		return new self(
+			$revisionLookup,
+			$entityIdParser,
+			$repoLinker,
+			$settings->getSetting( 'pageSchemaNamespaces' )
+		);
 	}
 
 	/**
@@ -129,10 +155,54 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook {
 	}
 
 	/**
-	 * Add output page properties to be consumed in the LinkedDataSchemaGenerator
+	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
 	 *
-	 * @param OutputPage $outputPage
-	 * @param ParserOutput $parserOutput
+	 * @param Skin $skin
+	 * @param string &$html
+	 *
+	 * @return bool Always true.
+	 */
+	public function onSkinAfterBottomScripts( $skin, &$html ): bool {
+		$outputPage = $skin->getOutput();
+		$entityId = $this->parseEntityId( $outputPage->getProperty( 'wikibase_item' ) );
+		$title = $outputPage->getTitle();
+		if (
+			!$entityId ||
+			!$title ||
+			!in_array( $title->getNamespace(), $this->pageSchemaNamespaces ) ||
+			!$title->exists()
+		) {
+			return true;
+		}
+
+		$revisionTimestamp = $outputPage->getRevisionTimestamp();
+		$firstRevisionTimestamp = $outputPage->getProperty( 'first_revision_timestamp' );
+		$description = $outputPage->getProperty( 'wikibase_item_description' );
+		$html .= $this->createSchemaElement(
+			$title,
+			$revisionTimestamp,
+			$firstRevisionTimestamp,
+			$entityId,
+			$description
+		);
+
+		return true;
+	}
+
+	private function parseEntityId( ?string $prefixedId ): ?EntityId {
+		if ( !$prefixedId ) {
+			return null;
+		}
+
+		try {
+			return $this->entityIdParser->parse( $prefixedId );
+		} catch ( EntityIdParsingException $ex ) {
+			return null;
+		}
+	}
+
+	/**
+	 * @inheritDoc
 	 */
 	public function onOutputPageParserOutput( $outputPage, $parserOutput ): void {
 		$firstRevisionTimestamp = $parserOutput->getExtensionData( 'first_revision_timestamp' );

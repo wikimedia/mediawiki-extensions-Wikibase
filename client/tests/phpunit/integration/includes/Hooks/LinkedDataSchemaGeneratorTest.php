@@ -2,12 +2,16 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\FileRepo\File\File;
+use MediaWiki\Output\OutputPage;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\Client\RepoLinker;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikimedia\TestingAccessWrapper;
 
@@ -55,7 +59,9 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$mockRevisionLookup = $this->createMockRevisionLookup();
 		$generator = new LinkedDataSchemaGenerator(
 			$mockRevisionLookup,
-			$repoLinker
+			$this->createMock( EntityIdParser::class ),
+			$repoLinker,
+			[]
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 		$title = $this->stubTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
@@ -82,7 +88,9 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$mockRevisionLookup = $this->createMockRevisionLookup();
 		$generator = new LinkedDataSchemaGenerator(
 			$mockRevisionLookup,
-			$repoLinker
+			$this->createMock( EntityIdParser::class ),
+			$repoLinker,
+			[]
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 		$title = $this->stubTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
@@ -107,7 +115,9 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$repoLinker = $this->stubRepoLinker();
 		$generator = new LinkedDataSchemaGenerator(
 			$this->createMockRevisionLookup(),
-			$repoLinker
+			$this->createMock( EntityIdParser::class ),
+			$repoLinker,
+			[]
 		);
 		$generatorWrapper = TestingAccessWrapper::newFromObject( $generator );
 
@@ -218,6 +228,25 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
+	public function testOnOutputPageParserOutput() {
+		$parserOutput = new ParserOutput();
+		$parserOutput->setExtensionData( 'first_revision_timestamp', 'value1' );
+		$parserOutput->setExtensionData( 'wikibase_item_description', 'value2' );
+
+		$outputPage = new OutputPage( new RequestContext() );
+
+		$handler = new LinkedDataSchemaGenerator(
+			$this->createMock( RevisionLookup::class ),
+			$this->createMock( EntityIdParser::class ),
+			$this->createMock( RepoLinker::class ),
+			[]
+		);
+		$handler->onOutputPageParserOutput( $outputPage, $parserOutput );
+
+		$this->assertSame( 'value1', $outputPage->getProperty( 'first_revision_timestamp' ) );
+		$this->assertSame( 'value2', $outputPage->getProperty( 'wikibase_item_description' ) );
+	}
+
 	/**
 	 * @param string|null $url
 	 * @return File
@@ -256,9 +285,6 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		return $stub;
 	}
 
-	/**
-	 * @return RevisionLookup
-	 */
 	private function createMockRevisionLookup(): RevisionLookup {
 		$revisionRecord = $this->createMock( RevisionRecord::class );
 		$revisionRecord->method( 'getTimestamp' )

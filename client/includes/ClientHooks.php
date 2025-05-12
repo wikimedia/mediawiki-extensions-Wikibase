@@ -6,9 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use Wikibase\Client\Hooks\LinkedDataSchemaGenerator;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\StaticContentLanguages;
@@ -143,62 +141,6 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-	}
-
-	/**
-	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
-	 *
-	 * @param Skin $skin
-	 * @param string &$html
-	 *
-	 * @return bool Always true.
-	 */
-	public static function onSkinAfterBottomScripts( Skin $skin, string &$html ) {
-		$services = MediaWikiServices::getInstance();
-		$enabledNamespaces = WikibaseClient::getSettings( $services )
-			->getSetting( 'pageSchemaNamespaces' );
-
-		$generator = new LinkedDataSchemaGenerator(
-			$services->getRevisionLookup(),
-			WikibaseClient::getRepoLinker( $services ),
-		);
-
-		$outputPage = $skin->getOutput();
-		$entityId = self::parseEntityId( $outputPage->getProperty( 'wikibase_item' ) );
-		$title = $outputPage->getTitle();
-		if (
-			!$entityId ||
-			!$title ||
-			!in_array( $title->getNamespace(), $enabledNamespaces ) ||
-			!$title->exists()
-		) {
-			return true;
-		}
-
-		$revisionTimestamp = $outputPage->getRevisionTimestamp();
-		$firstRevisionTimestamp = $outputPage->getProperty( 'first_revision_timestamp' );
-		$description = $outputPage->getProperty( 'wikibase_item_description' );
-		$html .= $generator->createSchemaElement(
-			$title,
-			$revisionTimestamp,
-			$firstRevisionTimestamp,
-			$entityId,
-			$description
-		);
-
-		return true;
-	}
-
-	private static function parseEntityId( ?string $prefixedId ): ?EntityId {
-		if ( !$prefixedId ) {
-			return null;
-		}
-
-		try {
-			return WikibaseClient::getEntityIdParser()->parse( $prefixedId );
-		} catch ( EntityIdParsingException $ex ) {
-			return null;
-		}
 	}
 
 	/**
