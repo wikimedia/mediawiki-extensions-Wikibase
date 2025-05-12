@@ -20,9 +20,10 @@ function newSearchRequest( language, searchTerm ) {
 
 describe( 'Simple item search', () => {
 	const itemEnLabel = utils.title( 'english-label' );
+	let item;
 
 	before( async () => {
-		await createItem( { labels: { en: itemEnLabel } } );
+		item = await createItem( { labels: { en: itemEnLabel } } );
 
 		await wiki.runAllJobs();
 		await new Promise( ( resolve ) => {
@@ -47,6 +48,16 @@ describe( 'Simple item search', () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.lengthOf( response.body.results, 0 );
+		expect( response ).to.satisfyApiSchema;
+	} );
+
+	it( '200 - search response by ID (without language match)', async () => {
+		const response = await newSearchRequest( 'en', item.id )
+			.assertValidRequest()
+			.makeRequest();
+
+		expect( response ).to.have.status( 200 );
+		assert.lengthOf( response.body.results, 1 );
 		expect( response ).to.satisfyApiSchema;
 	} );
 
