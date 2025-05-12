@@ -17,6 +17,8 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SettingsArray;
 
@@ -72,8 +74,11 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		return new SidebarHookHandler(
+			WikibaseClient::getEntityIdLookup(),
+			new ItemIdParser(),
 			$badgeDisplay,
 			$namespaceChecker,
+			WikibaseClient::getRepoLinker()
 		);
 	}
 

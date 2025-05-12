@@ -3,9 +3,6 @@
 namespace Wikibase\Client;
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Skin\Skin;
-use MediaWiki\Title\Title;
-use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -13,69 +10,6 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL-2.0-or-later
  */
 final class ClientHooks {
-
-	/**
-	 * @see NamespaceChecker::isWikibaseEnabled
-	 *
-	 * @param int $namespace
-	 *
-	 * @return bool
-	 */
-	protected static function isWikibaseEnabled( $namespace ) {
-		return WikibaseClient::getNamespaceChecker()->isWikibaseEnabled( $namespace );
-	}
-
-	/**
-	 * Build 'Wikidata item' link for later addition to the toolbox section of the sidebar
-	 *
-	 * @param Skin $skin
-	 *
-	 * @return string[]|null Array of link elements or Null if link cannot be created.
-	 */
-	public static function buildWikidataItemLink( Skin $skin ): ?array {
-		$title = $skin->getTitle();
-		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
-		$entityId = null;
-
-		if ( $idString !== null ) {
-			$entityIdParser = WikibaseClient::getEntityIdParser();
-			$entityId = $entityIdParser->parse( $idString );
-		} elseif ( $title &&
-			$skin->getActionName() !== 'view' && $title->exists()
-		) {
-			// Try to load the item ID from Database, but only do so on non-article views,
-			// (where the article's OutputPage isn't available to us).
-			$entityId = self::getEntityIdForTitle( $title );
-		}
-
-		if ( $entityId !== null ) {
-			$repoLinker = WikibaseClient::getRepoLinker();
-
-			return [
-				// Warning: This id is misleading; the 't' refers to the link's original place in the toolbox,
-				// it now lives in the other projects section, but we must keep the 't' for compatibility with gadgets.
-				'id' => 't-wikibase',
-				'icon' => 'logoWikidata',
-				'text' => $skin->msg( 'wikibase-dataitem' )->text(),
-				'href' => $repoLinker->getEntityUrl( $entityId ),
-			];
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param Title $title
-	 * @return EntityId|null
-	 */
-	private static function getEntityIdForTitle( Title $title ): ?EntityId {
-		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
-			return null;
-		}
-
-		$entityIdLookup = WikibaseClient::getEntityIdLookup();
-		return $entityIdLookup->getEntityIdForTitle( $title );
-	}
 
 	/**
 	 * Used to propagate configuration for the linkitem feature to JavaScript.
