@@ -290,6 +290,12 @@
 		},
 		"LoginFormValidErrorMessages": {
 			"class": "Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler"
+		},
+		"WikibaseContentLanguages": {
+			"class": "Wikibase\\Client\\Hooks\\WikibaseContentLanguagesHandler",
+			"services": [
+				"WikibaseClient.Settings"
+			]
 		}
 	},
 	"Hooks": {
@@ -361,7 +367,7 @@
 			"LibHooks"
 		],
 		"wgQueryPages": "Trivial",
-		"WikibaseContentLanguages": "\\Wikibase\\Client\\ClientHooks::onWikibaseContentLanguages",
+		"WikibaseContentLanguages": "WikibaseContentLanguages",
 		"WikibaseHandleChange": "EchoNotificationsHandlers"
 	},
 	"TrackingCategories": [
