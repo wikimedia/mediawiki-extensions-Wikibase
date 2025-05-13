@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aristorkle"
+			"Aristorkle",
+			"Noooote"
 		]
 	},
-	"wikibase-linkitem-linkpage": "Conecta con el pagina",
+	"wikibase-linkitem-linkpage": "Hace link con el pagina",
 	"wikibase-linkitem-selectlink": "Escogi un sitio y un pagina que quiere tu conecta con este pagina.",
 	"wikibase-linkitem-input-site": "Lenguaje:",
 	"wikibase-linkitem-input-page": "Pagina:",
 	"wikibase-rc-hide-wikidata-hide": "Esconde",
-	"wikibase-rc-hide-wikidata-show": "Mira",
+	"wikibase-rc-hide-wikidata-show": "Dale mira",
 	"wikibase-otherprojects": "Na otro maga proyecto"
 }

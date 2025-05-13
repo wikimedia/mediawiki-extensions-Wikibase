@@ -3,7 +3,8 @@
 		"authors": [
 			"AryanSogd",
 			"Ibrahim",
-			"ToJack"
+			"ToJack",
+			"Farorud"
 		]
 	},
 	"wikibase-desc": "Мавқеи захираи маълумоти структуравӣ",
@@ -60,8 +61,8 @@
 	"wikibase-statementview-rank-normal": "Рутбаи оддӣ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|эзоҳ}}",
 	"wikibase-snakview-property-input-placeholder": "Хусусият",
-	"wikibase-snakview-variations-somevalue-label": "маънои номаълум",
-	"wikibase-snakview-variations-novalue-label": "маъно нест",
+	"wikibase-snakview-variations-somevalue-label": "қимати номаълум",
+	"wikibase-snakview-variations-novalue-label": "қимате нест",
 	"wikibase-snakview-snaktypeselector-value": "маънои дақиқ",
 	"wikibase-snakformat-propertynotfound": "Хусусият ёфт нашуд.",
 	"wikibase-entityselector-more": "бештар",

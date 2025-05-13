@@ -1,12 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"26agcp"
+			"26agcp",
+			"Abby95",
+			"Juanchuy0",
+			"Patoasado97"
 		]
 	},
+	"wikibase-editlinks": "Úutskinaj links",
+	"wikibase-addlinkstitle": "Ts'áa enlaces ichil t'aano'ob",
+	"wikibase-linkitem-addlinks": "Ts'áa enlaces",
+	"wikibase-linkitem-title": "Enlace ti' le linki abas kaambal",
+	"wikibase-linkitem-linkpage": "Enlace ti' le linki abas kaambal",
+	"wikibase-linkitem-selectlink": "Yéey le ts'ono'oto' yéetel le linki abas kaambal u k'áato' enlazar.",
 	"wikibase-linkitem-input-site": "T'aanil:",
 	"wikibase-linkitem-input-page": "Wáal:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ta'ak",
-	"wikibase-rc-hide-wikidata-show": "E'es"
+	"wikibase-rc-hide-wikidata-show": "E'es",
+	"wikibase-otherprojects": "Ti' uláak' meyajo'ob"
 }
