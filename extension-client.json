@@ -254,9 +254,11 @@
 		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
 			"services": [
+				"WikibaseClient.EntityIdLookup",
+				"WikibaseClient.EntityIdParser",
 				"WikibaseClient.LanguageLinkBadgeDisplay",
 				"WikibaseClient.NamespaceChecker",
-				"WikibaseClient.Settings"
+				"WikibaseClient.RepoLinker"
 			]
 		},
 		"SkinAfterPortlet": {
