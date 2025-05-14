@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Egiebizzy",
-			"Samatics"
+			"Samatics",
+			"Pingponging"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Chenj link-dem",
+	"wikibase-addlinkstitle": "Ad link dem to oda langwej dem",
 	"wikibase-linkitem-addlinks": "Put link-dem",
 	"wikibase-linkitem-title": "Link-am wit pej",
 	"wikibase-linkitem-linkpage": "Link-am wit pej",
