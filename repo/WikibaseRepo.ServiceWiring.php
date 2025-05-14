@@ -11,14 +11,12 @@ use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use MediaWiki\Context\RequestContext;
-use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\StubObject\StubObject;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -2096,21 +2094,6 @@ return [
 			return null;
 		}
 		return new UnitConverter( $unitStorage, WikibaseRepo::getItemVocabularyBaseUri( $services ) );
-	},
-
-	'WikibaseRepo.UserLanguage' => function ( MediaWikiServices $services ): Language {
-		global $wgLang;
-
-		// TODO: define a LanguageProvider service instead of using a global directly.
-		// NOTE: The $wgLang global may still be null when the SetupAfterCache hook is
-		// run during bootstrapping.
-
-		if ( !$wgLang ) {
-			throw new RuntimeException( 'Premature access: $wgLang is not yet initialized!' );
-		}
-
-		StubObject::unstub( $wgLang );
-		return $wgLang;
 	},
 
 	'WikibaseRepo.ValidatorErrorLocalizer' => function ( MediaWikiServices $services ): ValidatorErrorLocalizer {

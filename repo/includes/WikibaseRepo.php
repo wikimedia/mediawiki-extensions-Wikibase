@@ -5,7 +5,6 @@ namespace Wikibase\Repo;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
-use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -191,16 +190,6 @@ class WikibaseRepo {
 	}
 
 	private function __construct() {
-	}
-
-	/**
-	 * @deprecated Avoid injecting the user language into a service.
-	 * If the service depends on a language, make it part of the parameters when the service is used
-	 * (possibly indirectly, e.g. via an {@link \IContextSource}).
-	 */
-	public static function getUserLanguage( ?ContainerInterface $services = null ): Language {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseRepo.UserLanguage' );
 	}
 
 	public static function getDataTypeFactory( ?ContainerInterface $services = null ): DataTypeFactory {
