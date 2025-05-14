@@ -20,13 +20,11 @@ describeWithTestData(
 			getPropertyCreateRequest( propertyRequestInputs )
 		];
 		describeEachRouteWithReset( requestsToTest, ( newRequestBuilder ) => {
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( `${newRequestBuilder().getRouteDescription()} responds 415 for an unsupported media type`, async () => {
-				const contentType = 'multipart/form-data';
+			it( `${newRequestBuilder().getRouteDescription()} responds 415 for an unsupported media type`, async () => {
 				const response = await newRequestBuilder()
 					// The following line is here to ensure a non-empty body for DELETE requests.
 					.withJsonBodyParam( 'comment', '...' )
-					.withHeader( 'content-type', contentType )
+					.withHeader( 'content-type', 'application/x-www-form-urlencoded' )
 					.assertInvalidRequest()
 					.makeRequest();
 
