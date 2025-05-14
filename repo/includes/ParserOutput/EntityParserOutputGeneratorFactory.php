@@ -126,7 +126,8 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
-			$this->isMobileView
+			$this->isMobileView,
+			WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' )
 		);
 
 		$pog = new StatslibTimeRecordingEntityParserOutputGenerator(

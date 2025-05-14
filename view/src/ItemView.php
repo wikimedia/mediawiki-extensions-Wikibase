@@ -46,6 +46,8 @@ class ItemView extends EntityView {
 	 */
 	private $entityTermsView;
 
+	private bool $vueStatementsView;
+
 	/**
 	 * @see EntityView::__construct
 	 *
@@ -57,6 +59,7 @@ class ItemView extends EntityView {
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
+	 * @param bool $vueStatementsView
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -66,7 +69,8 @@ class ItemView extends EntityView {
 		$languageCode,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		bool $vueStatementsView
 	) {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
 
@@ -75,6 +79,7 @@ class ItemView extends EntityView {
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->textProvider = $textProvider;
 		$this->entityTermsView = $entityTermsView;
+		$this->vueStatementsView = $vueStatementsView;
 	}
 
 	/**
@@ -118,11 +123,13 @@ class ItemView extends EntityView {
 			throw new InvalidArgumentException( '$item must be a StatementListProvider' );
 		}
 
-		$html = $this->getHtmlForTerms( $item )
-			. $this->templateFactory->render( 'wikibase-toc' )
-			. $this->statementSectionsView->getHtml( $item->getStatements() );
+		$termsHtml = $this->getHtmlForTerms( $item );
+		$tocHtml = $this->templateFactory->render( 'wikibase-toc' );
+		$statementsHtml = $this->vueStatementsView ?
+			'<span id="mobile-ui-statements-view-placeholder">TODO: Add Vue Statements View</span>' :
+			$this->statementSectionsView->getHtml( $item->getStatements() );
 
-		return $html;
+		return $termsHtml . $tocHtml . $statementsHtml;
 	}
 
 	/**

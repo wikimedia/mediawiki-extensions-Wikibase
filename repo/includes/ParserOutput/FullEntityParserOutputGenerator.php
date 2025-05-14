@@ -43,6 +43,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 	private bool $isMobileView;
 
+	private bool $tmpMobileEditingUI;
+
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
@@ -61,7 +63,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
 		Language $language,
-		bool $isMobileView
+		bool $isMobileView,
+		bool $tmpMobileEditingUI
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
@@ -71,6 +74,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->dataUpdaters = $dataUpdaters;
 		$this->language = $language;
 		$this->isMobileView = $isMobileView;
+		$this->tmpMobileEditingUI = $tmpMobileEditingUI;
 	}
 
 	/**
@@ -145,6 +149,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$titleHtml = $entityView->getTitleHtml( $entity );
 		$parserOutput->setTitleText( $titleHtml );
 
+		// split parser cache by desktop/mobile (T344362, T394291)
+		$parserOutput->recordOption( 'wbMobile' );
 		$viewContent = $entityView->getContent( $entity, $entityRevision->getRevisionId() );
 		$parserOutput->setText( $viewContent->getHtml() );
 
@@ -185,6 +191,10 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			// the JavaScript that is only necessary for editing.
 			$parserOutput->addModules( [
 				'wikibase.ui.entityViewInit',
+			] );
+		} elseif ( $this->tmpMobileEditingUI ) {
+			$parserOutput->addModules( [
+				'wikibase.mobileUi.entityViewInit',
 			] );
 		}
 	}

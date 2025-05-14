@@ -40,6 +40,7 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 				'siteLinkGroups' => [],
 				'specialSiteLinkGroups' => [],
 				'badgeItems' => [],
+				'tmpMobileEditingUI' => false,
 			] ) );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			new InMemoryDataTypeLookup() );

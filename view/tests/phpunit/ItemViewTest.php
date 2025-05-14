@@ -69,6 +69,34 @@ class ItemViewTest extends EntityViewTestCase {
 		];
 	}
 
+	public static function provideTestVueStatementsView(): iterable {
+		return [
+			[
+				'viewFactory' => fn ( self $self ) => $self->newItemView(),
+				'item' => self::newEntityForStatements( [] ),
+				'vueStatementsExpected' => false,
+			],
+			[
+				'viewFactory' => fn ( self $self ) => $self->newItemView( [], true ),
+				'item' => self::newEntityForStatements( [] ),
+				'vueStatementsExpected' => true,
+			],
+		];
+	}
+
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueStatementsView( callable $viewFactory, Item $item, bool $vueStatementsExpected ) {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+
+		if ( $vueStatementsExpected ) {
+			$this->assertStringContainsString( 'mobile-ui-statements-view-placeholder', $html );
+		} else {
+			$this->assertStringNotContainsString( 'mobile-ui-statements-view-placeholder', $html );
+		}
+	}
+
 	public function testTermsViewPlaceholdersArePropagated() {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newItemView( $placeholders );
@@ -78,7 +106,7 @@ class ItemViewTest extends EntityViewTestCase {
 		$this->assertSame( $placeholders, $view->getPlaceholders() );
 	}
 
-	private function newItemView( $placeholders = [] ) {
+	private function newItemView( $placeholders = [], bool $vueStatementsView = false ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$termsView = $this->createMock( CacheableEntityTermsView::class );
@@ -92,7 +120,8 @@ class ItemViewTest extends EntityViewTestCase {
 			'en',
 			$this->createMock( SiteLinksView::class ),
 			[],
-			$this->createMock( LocalizedTextProvider::class )
+			$this->createMock( LocalizedTextProvider::class ),
+			$vueStatementsView
 		);
 	}
 

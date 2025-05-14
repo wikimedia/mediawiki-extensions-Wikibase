@@ -2162,6 +2162,9 @@ return [
 			$services->getObjectCacheFactory()->getLocalClusterInstance()
 		);
 
+		$vueStatementView = $settings->getSetting( 'tmpMobileEditingUI' ) &&
+			WikibaseRepo::getMobileSite( $services );
+
 		return new ViewFactory(
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory( $services ),
 			WikibaseRepo::getEntityIdLabelFormatterFactory( $services ),
@@ -2181,7 +2184,8 @@ return [
 			$settings->getSetting( 'badgeItems' ),
 			WikibaseRepo::getLocalizedTextProviderFactory( $services ),
 			new RepoSpecialPageLinker(),
-			$services->getLanguageFactory()
+			$services->getLanguageFactory(),
+			$vueStatementView
 		);
 	},
 

@@ -127,6 +127,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 				$entityDataFormatProvider,
 				$dataUpdaters,
 				$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language ),
+				false,
 				false
 			),
 			$this->createStub( ApiEntityLookup::class )

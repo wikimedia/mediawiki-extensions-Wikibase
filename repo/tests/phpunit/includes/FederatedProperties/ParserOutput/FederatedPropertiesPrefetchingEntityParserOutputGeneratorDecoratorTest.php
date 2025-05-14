@@ -139,6 +139,7 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $language ),
+			false,
 			false
 		);
 	}

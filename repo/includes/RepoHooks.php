@@ -949,6 +949,20 @@ final class RepoHooks implements
 			];
 		}
 
+		// temporarily register this RL module only if the feature flag is enabled,
+		// so that wikis without the feature flag don’t even pay the small cost of loading the module *definition*
+		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
+		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
+			$modules['wikibase.mobileUi.entityViewInit'] = $moduleTemplate + [
+				'packageFiles' => [
+					'resources/wikibase.mobileUi.entityViewInit.js',
+				],
+				'dependencies' => [
+					'wikibase',
+				],
+			];
+		}
+
 		$rl->register( $modules );
 	}
 

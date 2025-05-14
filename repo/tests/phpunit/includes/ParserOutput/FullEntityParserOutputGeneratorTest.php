@@ -205,7 +205,48 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		$this->assertSame( 'de', $parserOutput->getLanguage()->toBcp47Code() );
 	}
 
-	private function newEntityParserOutputGenerator( $title = null, $description = null ) {
+	public static function provideTestMobileEditingUI(): iterable {
+		return [
+			'not mobile view, flag disabled' => [
+				'isMobileView' => false,
+				'tmpMobileEditingUI' => false,
+				'expectedModules' => [ 'wikibase.ui.entityViewInit', 'wikibase.entityPage.entityLoaded' ],
+			],
+			'not mobile view, flag enabled' => [
+				'isMobileView' => false,
+				'tmpMobileEditingUI' => true,
+				'expectedModules' => [ 'wikibase.ui.entityViewInit', 'wikibase.entityPage.entityLoaded' ],
+			],
+			'mobile view, flag disabled' => [
+				'isMobileView' => true,
+				'tmpMobileEditingUI' => false,
+				'expectedModules' => [ 'wikibase.entityPage.entityLoaded' ],
+			],
+			'mobile view, flag enabled' => [
+				'isMobileView' => true,
+				'tmpMobileEditingUI' => true,
+				'expectedModules' => [ 'wikibase.entityPage.entityLoaded', 'wikibase.mobileUi.entityViewInit' ],
+			],
+		];
+	}
+
+	/** @dataProvider provideTestMobileEditingUI */
+	public function testMobileEditingUI( bool $isMobileView, bool $tmpMobileEditingUI, array $expectedModules ): void {
+		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
+		$parserOutput = $this->newEntityParserOutputGenerator( null, null, $isMobileView, $tmpMobileEditingUI )
+			->getParserOutput( $entityRevision, false );
+		$this->assertArrayEquals(
+			$expectedModules,
+			$parserOutput->getModules()
+		);
+	}
+
+	private function newEntityParserOutputGenerator(
+		$title = null,
+		$description = null,
+		bool $isMobileView = false,
+		bool $tmpMobileEditingUI = false
+	) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'ntriples' ] );
 
@@ -240,7 +281,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->language ),
-			false
+			$isMobileView,
+			$tmpMobileEditingUI
 		);
 	}
 }

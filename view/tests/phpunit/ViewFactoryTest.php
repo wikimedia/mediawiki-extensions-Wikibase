@@ -87,7 +87,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			[],
 			$this->createMock( LocalizedTextProviderFactory::class ),
 			$this->createMock( SpecialPageLinker::class ),
-			$this->createMock( LanguageFactory::class )
+			$this->createMock( LanguageFactory::class ),
+			false
 		);
 	}
 

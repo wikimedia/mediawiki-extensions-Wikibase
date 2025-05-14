@@ -113,6 +113,8 @@ class ViewFactory {
 	 */
 	private $languageFactory;
 
+	private bool $vueStatementsView;
+
 	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
@@ -131,6 +133,7 @@ class ViewFactory {
 	 * @param LocalizedTextProviderFactory $textProviderFactory
 	 * @param SpecialPageLinker $specialPageLinker
 	 * @param LanguageFactory $languageFactory
+	 * @param bool $vueStatementsView
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -151,7 +154,8 @@ class ViewFactory {
 		array $badgeItems,
 		LocalizedTextProviderFactory $textProviderFactory,
 		SpecialPageLinker $specialPageLinker,
-		LanguageFactory $languageFactory
+		LanguageFactory $languageFactory,
+		bool $vueStatementsView
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -176,6 +180,7 @@ class ViewFactory {
 		$this->textProviderFactory = $textProviderFactory;
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFactory = $languageFactory;
+		$this->vueStatementsView = $vueStatementsView;
 	}
 
 	/**
@@ -240,7 +245,8 @@ class ViewFactory {
 			$language->getCode(),
 			$siteLinksView,
 			$this->siteLinkGroups,
-			$textProvider
+			$textProvider,
+			$this->vueStatementsView
 		);
 	}
 
