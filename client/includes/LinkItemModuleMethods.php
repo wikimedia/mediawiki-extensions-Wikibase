@@ -1,15 +1,15 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client;
 
 use MediaWiki\MediaWikiServices;
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
- *
  * @license GPL-2.0-or-later
  */
-final class ClientHooks {
+class LinkItemModuleMethods {
 
 	/**
 	 * Used to propagate configuration for the linkitem feature to JavaScript.

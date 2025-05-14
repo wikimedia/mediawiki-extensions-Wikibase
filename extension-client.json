@@ -458,7 +458,7 @@
 				"wikibase.client.linkitem.init.js",
 				{
 					"name": "config.json",
-					"callback": "Wikibase\\Client\\ClientHooks::getLinkitemConfiguration"
+					"callback": "Wikibase\\Client\\LinkItemModuleMethods::getLinkitemConfiguration"
 				}
 			],
 			"messages": [
