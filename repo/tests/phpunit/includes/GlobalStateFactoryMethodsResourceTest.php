@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 
-	protected string $extensionJsonPath = __DIR__ . '/../../../../extension-repo.json';
+	protected static string $extensionJsonPath = __DIR__ . '/../../../../extension-repo.json';
 
 	protected ?string $serviceNamePrefix = 'WikibaseRepo.';
 
