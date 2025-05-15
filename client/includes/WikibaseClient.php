@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use DataValues\Deserializers\DataValueDeserializer;
-use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\Site;
 use MediaWiki\User\ExternalUserNames;
@@ -214,16 +213,6 @@ final class WikibaseClient {
 	public static function getStore( ?ContainerInterface $services = null ): ClientStore {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.Store' );
-	}
-
-	/**
-	 * @deprecated Avoid injecting the user language into a service.
-	 * If the service depends on a language, make it part of the parameters when the service is used
-	 * (possibly indirectly, e.g. via an {@link \IContextSource}).
-	 */
-	public static function getUserLanguage( ?ContainerInterface $services = null ): Language {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WikibaseClient.UserLanguage' );
 	}
 
 	public static function getSettings( ?ContainerInterface $services = null ): SettingsArray {

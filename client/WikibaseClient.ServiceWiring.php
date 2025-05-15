@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\UnknownValue;
-use MediaWiki\Language\Language;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -870,14 +869,16 @@ return [
 	},
 
 	'WikibaseClient.SidebarLinkBadgeDisplay' => function ( MediaWikiServices $services ): SidebarLinkBadgeDisplay {
+		global $wgLang; // TODO don’t use user language in a service (cf. T344050)
+		StubObject::unstub( $wgLang );
+
 		$badgeClassNames = WikibaseClient::getSettings( $services )->getSetting( 'badgeClassNames' );
 		$labelDescriptionLookupFactory = WikibaseClient::getFallbackLabelDescriptionLookupFactory( $services );
-		$lang = WikibaseClient::getUserLanguage( $services );
 
 		return new SidebarLinkBadgeDisplay(
-			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $lang ),
+			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $wgLang ),
 			is_array( $badgeClassNames ) ? $badgeClassNames : [],
-			$lang
+			$wgLang
 		);
 	},
 
@@ -1044,21 +1045,6 @@ return [
 				WikibaseClient::getEntityRevisionLookup( $services )
 			)
 		);
-	},
-
-	'WikibaseClient.UserLanguage' => function ( MediaWikiServices $services ): Language {
-		global $wgLang;
-
-		// TODO: define a LanguageProvider service instead of using a global directly.
-		// NOTE: The $wgLang global may still be null when the SetupAfterCache hook is
-		// run during bootstrapping.
-
-		if ( !$wgLang ) {
-			throw new RuntimeException( 'Premature access: $wgLang is not yet initialized!' );
-		}
-
-		StubObject::unstub( $wgLang );
-		return $wgLang;
 	},
 
 	'WikibaseClient.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
