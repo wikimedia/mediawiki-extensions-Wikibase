@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use DataValues\DataValue;
 use DataValues\DecimalValue;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
+use MediaWikiLangTestCase;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,40 +23,57 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
+class MessageParameterFormatterTest extends MediaWikiLangTestCase {
 
 	public static function formatProvider() {
 		$decimal = new DecimalValue( '+123.456' );
-		$entityId = new ItemId( 'Q123' );
 		$siteLink = new SiteLink( 'acme', 'Foo' );
 		$badSiteLink = new SiteLink( 'bad', 'Foo' );
 
 		return [
-			'string' => [ 'Hello', 'en', 'Hello' ],
-			'int' => [ 456, 'en', '456' ],
-			'float en' => [ 123.456, 'en', '123.456' ],
-			'float de' => [ 123.456, 'de', '123,456' ],
-			'DecimalValue en' => [ $decimal, 'en', 'DataValues\DecimalValue:+123.456' ],
-			'EntityId' => [ $entityId, 'en', '[[ENTITYID]]' ],
-			'SiteLink' => [ $siteLink, 'en', '[http://acme.com/Foo acme:Foo]' ],
-			'SiteLink bad' => [ $badSiteLink, 'en', '[bad:Foo]' ],
-			'list of floats' => [ [ 1.2, 0.5 ], 'en', '1.2, 0.5' ],
+			'string' => [ 'Hello', 'Hello' ],
+			'int' => [ 123456, '123,456' ],
+			'float' => [ 123456.789, '123,456.789' ],
+			'DecimalValue' => [ $decimal, 'DataValues\DecimalValue:+123.456' ],
+			'SiteLink' => [ $siteLink, '<a rel="nofollow" class="external text" href="http://acme.com/Foo">acme:Foo</a>' ],
+			'SiteLink bad' => [ $badSiteLink, '[bad:Foo]' ],
+			'list of floats' => [ [ 987654.2, 2000.5 ], '987,654.2, 2,000.5' ],
 		];
 	}
 
 	/**
 	 * @dataProvider formatProvider
 	 */
-	public function testFormat( $param, $lang, $expected ) {
+	public function testFormat( $param, $expectedHtml ) {
 		$formatter = new MessageParameterFormatter(
 			$this->getMockValueFormatter(),
 			$this->getMockIdFormatter(),
-			$this->getMockSitesTable(),
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $lang )
+			$this->getMockSitesTable()
 		);
 
-		$actual = $formatter->format( $param );
-		$this->assertEquals( $expected, $actual );
+		$formattedWikitext = $formatter->format( $param );
+		$message = wfMessage( 'parentheses' )->params( $formattedWikitext );
+		$this->assertSame( "($expectedHtml)", $message->parse() );
+	}
+
+	public static function formatWithoutParseProvider(): iterable {
+		// these types would require database access to parse,
+		// so test them at the wikitext level instead
+
+		$entityId = new ItemId( 'Q123' );
+		yield 'EntityId' => [ $entityId, '[[ENTITYID]]' ];
+	}
+
+	/** @dataProvider formatWithoutParseProvider */
+	public function testFormatWithoutParse( $param, $expectedWikitext ): void {
+		$formatter = new MessageParameterFormatter(
+			$this->getMockValueFormatter(),
+			$this->getMockIdFormatter(),
+			$this->getMockSitesTable()
+		);
+
+		$actualWikitext = $formatter->format( $param );
+		$this->assertSame( $expectedWikitext, $actualWikitext );
 	}
 
 	/**

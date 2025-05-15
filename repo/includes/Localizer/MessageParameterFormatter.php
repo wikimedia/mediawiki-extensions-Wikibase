@@ -5,15 +5,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Localizer;
 
 use DataValues\DataValue;
-use MediaWiki\Language\Language;
 use MediaWiki\Site\SiteLookup;
 use ValueFormatters\FormattingException;
-use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 
 /**
  * ValueFormatter for formatting objects that may be encountered in
@@ -27,27 +24,20 @@ class MessageParameterFormatter implements ValueFormatter {
 	private ValueFormatter $dataValueFormatter;
 	private EntityIdFormatter $entityIdFormatter;
 	private SiteLookup $sites;
-	private Language $language;
-	private NumberLocalizer $valueLocalizer;
 
 	/**
 	 * @param ValueFormatter $dataValueFormatter A formatter for turning DataValues into wikitext.
 	 * @param EntityIdFormatter $entityIdFormatter An entity id formatter returning wikitext.
 	 * @param SiteLookup $sites
-	 * @param Language $language
 	 */
 	public function __construct(
 		ValueFormatter $dataValueFormatter,
 		EntityIdFormatter $entityIdFormatter,
-		SiteLookup $sites,
-		Language $language
+		SiteLookup $sites
 	) {
 		$this->dataValueFormatter = $dataValueFormatter;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->sites = $sites;
-		$this->language = $language;
-
-		$this->valueLocalizer = new MediaWikiNumberLocalizer( $language );
 	}
 
 	/**
@@ -60,27 +50,18 @@ class MessageParameterFormatter implements ValueFormatter {
 	 */
 	public function format( $value ): string {
 		if ( is_int( $value ) || is_float( $value ) ) {
-			return $this->valueLocalizer->localizeNumber( $value );
+			return "{{formatnum:$value|LOSSLESS}}";
 		} elseif ( $value instanceof DataValue ) {
 			return $this->dataValueFormatter->format( $value );
 		} elseif ( is_object( $value ) ) {
 			return $this->formatObject( $value );
 		} elseif ( is_array( $value ) ) {
-			return $this->formatValueList( $value );
+			return '{{#commaSeparatedList:' .
+				implode( '|', array_map( fn ( $item ) => $this->format( $item ), $value ) ) .
+				'}}';
 		}
 
 		return wfEscapeWikiText( strval( $value ) );
-	}
-
-	private function formatValueList( array $values ): string {
-		$formatted = [];
-
-		foreach ( $values as $key => $value ) {
-			$formatted[$key] = $this->format( $value );
-		}
-
-		//XXX: commaList should really be in the Localizer interface.
-		return $this->language->commaList( $formatted );
 	}
 
 	/**

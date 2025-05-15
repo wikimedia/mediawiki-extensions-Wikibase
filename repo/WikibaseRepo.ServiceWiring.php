@@ -1570,8 +1570,7 @@ return [
 		return new MessageParameterFormatter(
 			$valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_WIKI, $formatterOptions ),
 			new EntityIdLinkFormatter( WikibaseRepo::getEntityTitleLookup( $services ) ),
-			$services->getSiteLookup(),
-			WikibaseRepo::getUserLanguage( $services )
+			$services->getSiteLookup()
 		);
 	},
 
